@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-27T01:37:11.978Z",
-  "contentHash": "4f8a1024691187a9a43df057814c6af26481f0ae5137908fb59e8771a57ef493",
+  "updatedAt": "2026-10-27T01:58:46.145Z",
+  "contentHash": "6d8b6d61f838ce03ca204eb672c838b7b5e62d6d5c69740e12492a0b00e6ca9d",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -135,6 +135,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Quattro veicoli: traffico bloccato tra Matran e Friburgo",
+          "url": "/articoli-friburgo/incidente-matran-friburgo/",
+          "excerpt": "Un incidente con quattro veicoli ha bloccato per oltre tre ore l'autostrada tra Matran e Friburgo.",
+          "date": "2026-10-27T01:51:04.787Z"
+        },
+        {
           "title": "Friburgo: Consiglio di Stato rigetta linea ferroviaria diretta Friburgo-Bulle",
           "url": "/articoli-friburgo/friburgo-no-linea-diretta/",
           "excerpt": "Friburgo non vuole una linea ferroviaria diretta per Bulle Il postulato è stato approvato nel maggio 2022: 87 voti contro 3 Il progetto è giudicato costoso",
@@ -153,16 +159,16 @@
           "date": "2026-10-08T21:08:07.621Z"
         },
         {
-          "title": "Abbonamenti trasporti Friburgo: zone e tariffe",
-          "url": "/articoli-svizzera/abbonamenti-trasporti-friburgo/",
-          "excerpt": "Come funzionano zone tariffarie, metà-prezzo, AG e sconti per studenti negli abbonamenti trasporti del Cantone Friburgo.",
-          "date": "2026-08-24T01:48:56.377Z"
-        },
-        {
           "title": "Abbonamenti trasporti pubblici nel Cantone di Friburgo: zone e tariffe",
           "url": "/articoli-svizzera/trasporti-pubblici-canton-friburgo-abbonamenti/",
           "excerpt": "Ecco i dettagli sugli abbonamenti dei trasporti pubblici nel Cantone di Friburgo.",
           "date": "2026-08-18T00:58:21.517Z"
+        },
+        {
+          "title": "Abbonamenti trasporti Friburgo: zone e tariffe",
+          "url": "/articoli-svizzera/abbonamenti-trasporti-friburgo/",
+          "excerpt": "Come funzionano zone tariffarie, metà-prezzo, AG e sconti per studenti negli abbonamenti trasporti del Cantone Friburgo.",
+          "date": "2026-08-24T01:48:56.377Z"
         },
         {
           "title": "Abbonamenti trasporti pubblici canton Friburgo: zone e tariffe",
@@ -175,12 +181,6 @@
           "url": "/articoli-svizzera/stadler-rail-friburgo-117-milioni/",
           "excerpt": "Stadler Rail fornirà 13 nuovi treni Flirt Evo ai Trasporti pubblici friburghesi per 117 milioni CHF. Prime consegne a dicembre 2028.",
           "date": "2026-08-21T09:43:21.760Z"
-        },
-        {
-          "title": "Sistema scolastico Canton Friburgo: iscrizione e cicli",
-          "url": "/articoli-svizzera/sistema-scolastico-canton-friburgo/",
-          "excerpt": "L'età di iscrizione, i cicli di studi e il calendario scolastico nel Cantone di Friburgo.",
-          "date": "2026-08-17T23:38:08.486Z"
         }
       ],
       "latestCantonArticles": [],
@@ -194,7 +194,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-27T01:37:11.978Z"
+      "updatedAt": "2026-10-27T01:58:46.145Z"
     },
     "en": {
       "canton": "FR",
@@ -312,6 +312,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Four vehicles: traffic blocked between Matran and Fribourg",
+          "url": "/en/fribourg-articles/matran-fribourg-crash/",
+          "excerpt": "An accident involving four vehicles blocked the highway between Matran and Fribourg for over three hours.",
+          "date": "2026-10-27T01:51:04.787Z"
+        },
+        {
           "title": "Fribourg: State Council rejects direct Fribourg-Bulle railway line",
           "url": "/en/fribourg-articles/fribourg-no-direct-line/",
           "excerpt": "Fribourg does not want a direct railway line to Bulle The postulate was approved in May 2022: 87 votes to 3 The project is considered costly and technically",
@@ -330,16 +336,16 @@
           "date": "2026-10-08T21:08:07.621Z"
         },
         {
-          "title": "Fribourg Transport Subscriptions: Zones and Rates",
-          "url": "/en/swiss-articles/public-transport-subscriptions-fribourg/",
-          "excerpt": "How fare zones, half-price, AG and student discounts work in the transport subscriptions of the Canton of Fribourg.",
-          "date": "2026-08-24T01:48:56.377Z"
-        },
-        {
           "title": "Public transport passes in the canton of Fribourg: zones and fares",
           "url": "/en/swiss-articles/fribourg-public-transport-abonements/",
           "excerpt": "Here are the details on public transport subscriptions in the Canton of Fribourg.",
           "date": "2026-08-18T00:58:21.517Z"
+        },
+        {
+          "title": "Fribourg Transport Subscriptions: Zones and Rates",
+          "url": "/en/swiss-articles/public-transport-subscriptions-fribourg/",
+          "excerpt": "How fare zones, half-price, AG and student discounts work in the transport subscriptions of the Canton of Fribourg.",
+          "date": "2026-08-24T01:48:56.377Z"
         },
         {
           "title": "Public transport tickets canton Fribourg: zones and fares",
@@ -352,12 +358,6 @@
           "url": "/en/swiss-articles/stadler-rail-fribourg-117-million/",
           "excerpt": "Stadler Rail will supply 13 new Flirt Evo trains to the Fribourg Public Transport for CHF 117 million. First deliveries in December 2028.",
           "date": "2026-08-21T09:43:21.760Z"
-        },
-        {
-          "title": "School system Canton Fribourg: enrolment and cycles",
-          "url": "/en/swiss-articles/school-system-canton-fribourg/",
-          "excerpt": "The age of enrolment, curricula and school calendar in the Canton of Fribourg.",
-          "date": "2026-08-17T23:38:08.486Z"
         }
       ],
       "latestCantonArticles": [],
@@ -371,7 +371,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-27T01:37:11.978Z"
+      "updatedAt": "2026-10-27T01:58:46.145Z"
     },
     "de": {
       "canton": "FR",
@@ -489,6 +489,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Vier Fahrzeuge: Verkehr zwischen Matran und Freiburg blockiert",
+          "url": "/de/freiburg-artikel/unfall-matran-freiburg/",
+          "excerpt": "Ein Unfall mit vier Fahrzeugen blockierte die Autobahn zwischen Matran und Freiburg für mehr als drei Stunden.",
+          "date": "2026-10-27T01:51:04.787Z"
+        },
+        {
           "title": "Freiburg: Staatsrat lehnt direkte Bahnlinie Freiburg-Bulle ab",
           "url": "/de/freiburg-artikel/friburg-keine-direktstrecke/",
           "excerpt": "Freiburg will keine direkte Bahnlinie nach Bulle Das Postulat wurde im Mai 2022 angenommen: 87 Stimmen gegen 3 Das Projekt wird als kostspielig und technisch",
@@ -507,16 +513,16 @@
           "date": "2026-10-08T21:08:07.621Z"
         },
         {
-          "title": "Fahrkarten Freiburg: Zonen und Tarife",
-          "url": "/de/schweiz-artikel/abonnementes-oeffentliche-verkehrsmittel-freiburg/",
-          "excerpt": "Wie Tarifzonen, Halbtax, GA und Studentenrabatte in den Verkehrsabos des Kantons Freiburg funktionieren.",
-          "date": "2026-08-24T01:48:56.377Z"
-        },
-        {
           "title": "Öffentliche Verkehrsmittel im Kanton Freiburg: Zonen und Tarife",
           "url": "/de/schweiz-artikel/freiburg-oeffentliche-verkehr-abos/",
           "excerpt": "Hier finden Sie die Details zu den ÖV-Abos im Kanton Freiburg.",
           "date": "2026-08-18T00:58:21.517Z"
+        },
+        {
+          "title": "Fahrkarten Freiburg: Zonen und Tarife",
+          "url": "/de/schweiz-artikel/abonnementes-oeffentliche-verkehrsmittel-freiburg/",
+          "excerpt": "Wie Tarifzonen, Halbtax, GA und Studentenrabatte in den Verkehrsabos des Kantons Freiburg funktionieren.",
+          "date": "2026-08-24T01:48:56.377Z"
         },
         {
           "title": "Öffentliche Verkehrsmittel Kanton Freiburg: Zonen und Tarife",
@@ -529,12 +535,6 @@
           "url": "/de/schweiz-artikel/stadler-rail-freiburg-117-millionen/",
           "excerpt": "Stadler Rail wird 13 neue Flirt Evo-Züge für CHF 117 Mio. an den öffentlichen Verkehr in Freiburg liefern. Erste Auslieferungen im Dezember 2028.",
           "date": "2026-08-21T09:43:21.760Z"
-        },
-        {
-          "title": "Schulsystem Kanton Freiburg: Einschreibung und Zyklen",
-          "url": "/de/schweiz-artikel/schulsystem-kanton-freiburg/",
-          "excerpt": "Das Einschreibungsalter, die Studiengänge und der Schulkalender im Kanton Freiburg.",
-          "date": "2026-08-17T23:38:08.486Z"
         }
       ],
       "latestCantonArticles": [],
@@ -548,7 +548,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-27T01:37:11.978Z"
+      "updatedAt": "2026-10-27T01:58:46.145Z"
     },
     "fr": {
       "canton": "FR",
@@ -666,6 +666,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Quatre véhicules : trafic bloqué entre Matran et Fribourg",
+          "url": "/fr/articles-fribourg/accident-matran-fribourg/",
+          "excerpt": "Un accident impliquant quatre véhicules a bloqué pendant plus de trois heures l'autoroute entre Matran et Fribourg.",
+          "date": "2026-10-27T01:51:04.787Z"
+        },
+        {
           "title": "Fribourg : le Conseil d’État rejette la ligne ferroviaire directe Fribourg-Bulle",
           "url": "/fr/articles-fribourg/fribourg-pas-de-liaison-directe/",
           "excerpt": "Fribourg ne veut pas d’une ligne ferroviaire directe vers Bulle Le postulat a été approuvé en mai 2022 : 87 voix contre 3 Le projet est jugé coûteux",
@@ -684,16 +690,16 @@
           "date": "2026-10-08T21:08:07.621Z"
         },
         {
-          "title": "Abonnements transports Fribourg : zones et tarifs",
-          "url": "/fr/articles-suisse/abonnements-transports-publics-fribourg/",
-          "excerpt": "Comment fonctionnent les zones tarifaires, demi-tarif, AG et réductions pour étudiants dans les abonnements transports du canton de Fribourg.",
-          "date": "2026-08-24T01:48:56.377Z"
-        },
-        {
           "title": "Abonnements transports publics dans le canton de Fribourg : zones et tarifs",
           "url": "/fr/articles-suisse/fribourg-transports-en-commun-abonnements/",
           "excerpt": "Voici les détails des abonnements aux transports publics dans le canton de Fribourg.",
           "date": "2026-08-18T00:58:21.517Z"
+        },
+        {
+          "title": "Abonnements transports Fribourg : zones et tarifs",
+          "url": "/fr/articles-suisse/abonnements-transports-publics-fribourg/",
+          "excerpt": "Comment fonctionnent les zones tarifaires, demi-tarif, AG et réductions pour étudiants dans les abonnements transports du canton de Fribourg.",
+          "date": "2026-08-24T01:48:56.377Z"
         },
         {
           "title": "Abonnements transports publics canton de Fribourg : zones et tarifs",
@@ -706,12 +712,6 @@
           "url": "/fr/articles-suisse/stadler-rail-fribourg-117-millions/",
           "excerpt": "Stadler Rail fournira 13 nouveaux trains Flirt Evo aux Transports publics fribourgeois pour CHF 117 millions. Premières livraisons en décembre 2028.",
           "date": "2026-08-21T09:43:21.760Z"
-        },
-        {
-          "title": "Système scolaire canton de Fribourg : inscription et cycles",
-          "url": "/fr/articles-suisse/systeme-educatif-canton-fribourg/",
-          "excerpt": "L'âge d'inscription, les cursus et le calendrier scolaire dans le canton de Fribourg.",
-          "date": "2026-08-17T23:38:08.486Z"
         }
       ],
       "latestCantonArticles": [],
@@ -725,7 +725,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-27T01:37:11.978Z"
+      "updatedAt": "2026-10-27T01:58:46.145Z"
     }
   }
 }
