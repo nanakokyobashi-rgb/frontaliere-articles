@@ -4,17 +4,17 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "mobilita",
-  "updatedAt": "2026-10-26T17:18:45.341Z",
-  "contentHash": "d84aeb8d5b71263f2b4bec5fe3a68a782b04835887c825af35659daf7b404d8c",
+  "updatedAt": "2026-10-27T06:35:07.773Z",
+  "contentHash": "2923f1a86b1ad8838e8870ccaab7eb59b6b16e201d54f14f8975be8f662613f6",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-26T13:38:17.324Z",
+      "updatedAt": "2026-10-27T00:53:25.881Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-26T11:33:49.792Z",
+      "updatedAt": "2026-10-26T21:55:18.630Z",
       "keyFacts": 0
     }
   ],
@@ -28,12 +28,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "7",
-          "note": "segnalazioni aggiornate: 26 ottobre 2026"
+          "note": "segnalazioni aggiornate: 27 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "15",
-          "note": "segnalazioni aggiornate: 26 ottobre 2026"
+          "note": "segnalazioni aggiornate: 27 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -92,7 +92,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-26T13:38:17.324Z"
+          "updatedAt": "2026-10-27T00:53:25.881Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -115,7 +115,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-26T11:33:49.792Z"
+          "updatedAt": "2026-10-26T21:55:18.630Z"
         }
       ],
       "curatedArticles": [
@@ -161,7 +161,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-27T06:35:07.773Z"
     },
     "en": {
       "canton": "SO",
@@ -172,12 +172,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "7",
-          "note": "reports as of 26 October 2026"
+          "note": "reports as of 27 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "15",
-          "note": "reports as of 26 October 2026"
+          "note": "reports as of 27 October 2026"
         }
       ],
       "dataBlocks": [
@@ -236,7 +236,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-26T13:38:17.324Z"
+          "updatedAt": "2026-10-27T00:53:25.881Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -259,7 +259,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-26T11:33:49.792Z"
+          "updatedAt": "2026-10-26T21:55:18.630Z"
         }
       ],
       "curatedArticles": [
@@ -304,7 +304,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-27T06:35:07.773Z"
     },
     "de": {
       "canton": "SO",
@@ -315,12 +315,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "7",
-          "note": "Meldungen vom 26. Oktober 2026"
+          "note": "Meldungen vom 27. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "15",
-          "note": "Meldungen vom 26. Oktober 2026"
+          "note": "Meldungen vom 27. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -379,7 +379,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-26T13:38:17.324Z"
+          "updatedAt": "2026-10-27T00:53:25.881Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -402,7 +402,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-26T11:33:49.792Z"
+          "updatedAt": "2026-10-26T21:55:18.630Z"
         }
       ],
       "curatedArticles": [
@@ -447,7 +447,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-27T06:35:07.773Z"
     },
     "fr": {
       "canton": "SO",
@@ -458,12 +458,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "7",
-          "note": "signalements au 26 octobre 2026"
+          "note": "signalements au 27 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "15",
-          "note": "signalements au 26 octobre 2026"
+          "note": "signalements au 27 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -522,7 +522,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-26T13:38:17.324Z"
+          "updatedAt": "2026-10-27T00:53:25.881Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -545,7 +545,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-26T11:33:49.792Z"
+          "updatedAt": "2026-10-26T21:55:18.630Z"
         }
       ],
       "curatedArticles": [
@@ -591,7 +591,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-27T06:35:07.773Z"
     }
   }
 }

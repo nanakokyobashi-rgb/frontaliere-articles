@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "mobilita",
-  "updatedAt": "2026-10-27T00:42:14.965Z",
-  "contentHash": "76d2cebb1bffe55f1bc51861308f66006a5d21fe7eecfca5cd8ca7922bd33d17",
+  "updatedAt": "2026-10-27T06:35:07.773Z",
+  "contentHash": "539e66b6e70260865491617e69e966d681ec7c6202f01a8f938d8d1dcf942ab0",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-26T13:38:17.324Z",
+      "updatedAt": "2026-10-27T00:53:25.881Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-26T17:41:28.137Z",
+      "updatedAt": "2026-10-26T21:55:18.630Z",
       "keyFacts": 0
     }
   ],
@@ -37,13 +37,13 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "22",
-          "note": "segnalazioni aggiornate: 26 ottobre 2026"
+          "value": "21",
+          "note": "segnalazioni aggiornate: 27 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "38",
-          "note": "segnalazioni aggiornate: 26 ottobre 2026"
+          "note": "segnalazioni aggiornate: 27 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -154,7 +154,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-26T13:38:17.324Z"
+          "updatedAt": "2026-10-27T00:53:25.881Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -192,7 +192,7 @@
               "url": "https://www.bvb.ch/de/2026/10/14/mit-der-bvb-an-die-basler-herbstmesse-2026/"
             }
           ],
-          "updatedAt": "2026-10-26T17:41:28.137Z"
+          "updatedAt": "2026-10-26T21:55:18.630Z"
         }
       ],
       "curatedArticles": [
@@ -276,7 +276,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-27T00:42:14.965Z"
+      "updatedAt": "2026-10-27T06:35:07.773Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -291,13 +291,13 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "22",
-          "note": "reports as of 26 October 2026"
+          "value": "21",
+          "note": "reports as of 27 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "38",
-          "note": "reports as of 26 October 2026"
+          "note": "reports as of 27 October 2026"
         }
       ],
       "dataBlocks": [
@@ -408,7 +408,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-26T13:38:17.324Z"
+          "updatedAt": "2026-10-27T00:53:25.881Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -446,7 +446,7 @@
               "url": "https://www.bvb.ch/de/2026/10/14/mit-der-bvb-an-die-basler-herbstmesse-2026/"
             }
           ],
-          "updatedAt": "2026-10-26T17:41:28.137Z"
+          "updatedAt": "2026-10-26T21:55:18.630Z"
         }
       ],
       "curatedArticles": [
@@ -530,7 +530,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-27T00:42:14.965Z"
+      "updatedAt": "2026-10-27T06:35:07.773Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -545,13 +545,13 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "22",
-          "note": "Meldungen vom 26. Oktober 2026"
+          "value": "21",
+          "note": "Meldungen vom 27. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "38",
-          "note": "Meldungen vom 26. Oktober 2026"
+          "note": "Meldungen vom 27. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -662,7 +662,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-26T13:38:17.324Z"
+          "updatedAt": "2026-10-27T00:53:25.881Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -700,7 +700,7 @@
               "url": "https://www.bvb.ch/de/2026/10/14/mit-der-bvb-an-die-basler-herbstmesse-2026/"
             }
           ],
-          "updatedAt": "2026-10-26T17:41:28.137Z"
+          "updatedAt": "2026-10-26T21:55:18.630Z"
         }
       ],
       "curatedArticles": [
@@ -784,7 +784,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-27T00:42:14.965Z"
+      "updatedAt": "2026-10-27T06:35:07.773Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -799,13 +799,13 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "22",
-          "note": "signalements au 26 octobre 2026"
+          "value": "21",
+          "note": "signalements au 27 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "38",
-          "note": "signalements au 26 octobre 2026"
+          "note": "signalements au 27 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -916,7 +916,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-26T13:38:17.324Z"
+          "updatedAt": "2026-10-27T00:53:25.881Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -954,7 +954,7 @@
               "url": "https://www.bvb.ch/de/2026/10/14/mit-der-bvb-an-die-basler-herbstmesse-2026/"
             }
           ],
-          "updatedAt": "2026-10-26T17:41:28.137Z"
+          "updatedAt": "2026-10-26T21:55:18.630Z"
         }
       ],
       "curatedArticles": [
@@ -1038,7 +1038,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-27T00:42:14.965Z"
+      "updatedAt": "2026-10-27T06:35:07.773Z"
     }
   }
 }
