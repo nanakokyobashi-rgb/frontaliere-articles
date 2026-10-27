@@ -826,6 +826,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-mobilit-elettrica-sciaffusa-20': {
+    title: 'Cantone Sciaffusa spinge mobilità elettrica con 9 misure',
+    description: 'Il Canton Sciaffusa amplia l\'infrastruttura di ricarica per auto elettriche con la strategia 2.0. Agevolazioni fiscali e sostegno ai locatori.',
+    keywords: 'frontalieri, ticino, svizzera, italia, cantone, sciaffusa, spinge, mobilità',
+    ogTitle: 'Mobilità elettrica Sciaffusa: 9 misure dal prossimo anno',
+    ogDescription: 'Il governo del Canton Sciaffusa spinge l\'ampliamento dell\'infrastruttura di ricarica per auto elettriche con la strategia 2.0. Dettagli su agevolazioni e sostegno ai locatori.',
+    canonicalPath: '/articoli-sciaffusa/mobilit-elettrica-sciaffusa-20/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cantone Sciaffusa spinge mobilità elettrica con 9 misure",
+      "description": "Il Canton Sciaffusa amplia l'infrastruttura di ricarica per auto elettriche con la strategia 2.0. Agevolazioni fiscali e sostegno ai locatori.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-mobilit-elettrica-sciaffusa-20.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-27T10:58:31+00:00",
+      "dateModified": "2026-10-27T10:58:31+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-sciaffusa/mobilit-elettrica-sciaffusa-20/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

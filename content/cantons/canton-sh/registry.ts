@@ -237,4 +237,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'mobilit-elettrica-sciaffusa-20',
+ category: 'novita',
+ date: '2026-10-27T10:58:31.090Z',
+ image: '/images/blog/article-mobilit-elettrica-sciaffusa-20.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

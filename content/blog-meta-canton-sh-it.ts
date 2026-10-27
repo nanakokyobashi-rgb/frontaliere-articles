@@ -66,6 +66,9 @@ const blogMetaCantonShIt: Record<string, string> = {
     'blog.article.governo-sh-previsioni-fiscali.title': 'Governo SH rinuncia a previsioni fiscali decennali',
     'blog.article.governo-sh-previsioni-fiscali.excerpt': 'Il Governo del Canton Sciaffusa non può elaborare previsioni fiscali affidabili per il periodo 2031-2035; la campagna Beforemore resta attiva fino al 15 novembre.',
     'blog.article.governo-sh-previsioni-fiscali.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.mobilit-elettrica-sciaffusa-20.title': 'Cantone Sciaffusa spinge mobilità elettrica con 9 misure',
+    'blog.article.mobilit-elettrica-sciaffusa-20.excerpt': 'La strategia 2.0 prevede nove misure attuabili dal prossimo anno, incluse agevolazioni fiscali in esame per proprietari immobiliari e sostegno ai locatori.',
+    'blog.article.mobilit-elettrica-sciaffusa-20.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonShIt;

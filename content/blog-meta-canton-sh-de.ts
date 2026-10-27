@@ -66,6 +66,9 @@ const blogMetaCantonShDe: Record<string, string> = {
     'blog.article.governo-sh-previsioni-fiscali.title': 'Regierung SH verzichtet auf zehnjährige Steuerprognosen',
     'blog.article.governo-sh-previsioni-fiscali.excerpt': 'Die Regierung des Kantons Schaffhausen kann für den Zeitraum 2031-2035 keine verlässlichen Steuerprognosen erstellen; die Kampagne Beforemore bleibt bis zum 15.',
     'blog.article.governo-sh-previsioni-fiscali.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.mobilit-elettrica-sciaffusa-20.title': 'Kanton Schaffhausen treibt Elektromobilität mit 9 Maßnahmen voran',
+    'blog.article.mobilit-elettrica-sciaffusa-20.excerpt': 'Die Strategie 2.0 sieht neun Maßnahmen vor, die ab dem kommenden Jahr umgesetzt werden können, darunter derzeit geprüfte Steuererleichterungen für Immobilieneigentümer sowie Unterstützung für Vermieter.',
+    'blog.article.mobilit-elettrica-sciaffusa-20.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonShDe;

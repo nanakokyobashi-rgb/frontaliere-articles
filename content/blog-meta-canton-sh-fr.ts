@@ -66,6 +66,9 @@ const blogMetaCantonShFr: Record<string, string> = {
     'blog.article.governo-sh-previsioni-fiscali.title': 'Le gouvernement SH renonce aux prévisions fiscales décennales',
     'blog.article.governo-sh-previsioni-fiscali.excerpt': 'Le gouvernement du canton de Schaffhouse ne peut pas établir de prévisions fiscales fiables pour la période 2031-2035 ; la campagne Beforemore reste active jusqu’au 15 novembre.',
     'blog.article.governo-sh-previsioni-fiscali.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.mobilit-elettrica-sciaffusa-20.title': 'Le canton de Schaffhouse accélère la mobilité électrique avec 9 mesures',
+    'blog.article.mobilit-elettrica-sciaffusa-20.excerpt': 'La stratégie 2.0 prévoit neuf mesures applicables dès l’année prochaine, y compris des allègements fiscaux à l’étude pour les propriétaires immobiliers et un soutien aux bailleurs.',
+    'blog.article.mobilit-elettrica-sciaffusa-20.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonShFr;

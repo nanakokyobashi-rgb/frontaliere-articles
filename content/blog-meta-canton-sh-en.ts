@@ -66,6 +66,9 @@ const blogMetaCantonShEn: Record<string, string> = {
     'blog.article.governo-sh-previsioni-fiscali.title': 'SH government abandons ten-year fiscal forecasts',
     'blog.article.governo-sh-previsioni-fiscali.excerpt': 'The Government of the Canton of Schaffhausen cannot produce reliable tax forecasts for the period 2031-2035; the Beforemore campaign remains active until November 15.',
     'blog.article.governo-sh-previsioni-fiscali.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.mobilit-elettrica-sciaffusa-20.title': 'Canton Schaffhausen promotes electric mobility with 9 measures',
+    'blog.article.mobilit-elettrica-sciaffusa-20.excerpt': 'The 2.0 strategy includes nine measures that can be implemented starting next year, including tax incentives under consideration for property owners and support for landlords.',
+    'blog.article.mobilit-elettrica-sciaffusa-20.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonShEn;
