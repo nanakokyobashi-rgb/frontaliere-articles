@@ -57,6 +57,9 @@ const blogMetaCantonAppenzelloIt: Record<string, string> = {
     'blog.article.rbh-herisau-piu-risorse.title': 'Herisau, più risorse per la RBH Hinterland',
     'blog.article.rbh-herisau-piu-risorse.excerpt': 'Il Comune di Herisau segnala casi in aumento e maggiore complessità nella gestione della RBH Hinterland; negli anni scorsi sono cresciute anche le posizioni.',
     'blog.article.rbh-herisau-piu-risorse.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.credito-pfas-appenzello.title': 'Appenzello Esterno: credito approvato per il programma PFAS',
+    'blog.article.credito-pfas-appenzello.excerpt': 'Il Parlamento di Appenzello Esterno ha approvato con 60 voti a zero e un\'astensione il credito per un programma PFAS.',
+    'blog.article.credito-pfas-appenzello.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonAppenzelloIt;

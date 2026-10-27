@@ -204,4 +204,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'credito-pfas-appenzello',
+ category: 'novita',
+ date: '2026-10-27T00:02:34.724Z',
+ image: '/images/blog/article-credito-pfas-appenzello.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['APPENZELLO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
