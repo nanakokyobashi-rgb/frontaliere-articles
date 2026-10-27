@@ -4,12 +4,12 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-26T12:31:20.302Z",
-  "contentHash": "99accb1cf6e4e5841def1b8a7962658ecc2361d9401d60b61d85a47e1930251a",
+  "updatedAt": "2026-10-27T02:04:48.993Z",
+  "contentHash": "01a18331199669624919eee809dbdea1f35fea4c66643bcce6a200599f4350ab",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-25T12:00:24.779Z",
+      "updatedAt": "2026-10-26T13:32:45.792Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-11-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-25T12:00:24.779Z"
+          "updatedAt": "2026-10-26T13:32:45.792Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Zugo rende disponibile l'agenda del Kantonsrat",
+          "url": "/articoli-zugo/zugo-agenda-kantonsrat-ottobre/",
+          "excerpt": "La fonte del Canton Zugo rende disponibile l'ordine del giorno della seduta del Kantonsrat del 29 ottobre 2026.",
+          "date": "2026-10-27T01:58:14.398Z"
+        },
         {
           "title": "Zugo: assegnate le direzioni dal 1° gennaio 2027",
           "url": "/articoli-zugo/esecutivo-zugo-mandato-2030/",
@@ -82,12 +88,6 @@
           "url": "/articoli-zugo/adeguamento-piano-direttore-zone-bianche-2026/",
           "excerpt": "Pubblicato l'adeguamento 26/1 del piano direttore cantonale: «zone bianche» per l'edilizia abitativa e strategia di stabilizzazione.",
           "date": "2026-10-22T02:39:48.543Z"
-        },
-        {
-          "title": "Zugo rende disponibile l'agenda del Consiglio cantonale",
-          "url": "/articoli-zugo/zugo-agenda-consiglio-29-ottobre/",
-          "excerpt": "L'ordine del giorno della seduta del Consiglio cantonale di Zugo del 29 ottobre 2026 è disponibile, ma il testo non elenca le trattande.",
-          "date": "2026-10-21T21:24:59.776Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-26T12:31:20.302Z"
+      "updatedAt": "2026-10-27T02:04:48.993Z"
     },
     "en": {
       "canton": "ZG",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-25T12:00:24.779Z"
+          "updatedAt": "2026-10-26T13:32:45.792Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Zug makes the Kantonsrat agenda available",
+          "url": "/en/zug-articles/zug-cantonal-council-agenda-october-2026/",
+          "excerpt": "The source from the Canton of Zug makes available the agenda for the Kantonsrat session on October 29, 2026.",
+          "date": "2026-10-27T01:58:14.398Z"
+        },
         {
           "title": "Zug: departments assigned from January 1, 2027",
           "url": "/en/zug-articles/zug-government-term-2030/",
@@ -169,12 +175,6 @@
           "url": "/en/zug-articles/zug-director-plan-adjustment-white-zones-2026/",
           "excerpt": "Published: adjustment 26/1 to the cantonal structure plan: “white zones” for residential construction and a stabilization strategy.",
           "date": "2026-10-22T02:39:48.543Z"
-        },
-        {
-          "title": "Zug makes available the agenda of the Cantonal Council",
-          "url": "/en/zug-articles/zug-cantonal-council-agenda-october-29-2026/",
-          "excerpt": "The agenda of the meeting of the Cantonal Council of Zug on 29 October 2026 is available, but the text does not list the issues.",
-          "date": "2026-10-21T21:24:59.776Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-26T12:31:20.302Z"
+      "updatedAt": "2026-10-27T02:04:48.993Z"
     },
     "de": {
       "canton": "ZG",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-25T12:00:24.779Z"
+          "updatedAt": "2026-10-26T13:32:45.792Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Zug stellt die Traktandenliste des Kantonsrats zur Verfügung",
+          "url": "/de/zug-artikel/zug-traktandenliste-kantonsrat-oktober-2026/",
+          "excerpt": "Die Quelle des Kantons Zug stellt die Traktandenliste der Sitzung des Kantonsrats vom 29.",
+          "date": "2026-10-27T01:58:14.398Z"
+        },
         {
           "title": "Zug: Zuteilung der Direktionen ab dem 1. Januar 2027",
           "url": "/de/zug-artikel/zug-regierungsrat-amtsperiode-2030/",
@@ -256,12 +262,6 @@
           "url": "/de/zug-artikel/zug-richtplan-anpassung-weisse-zonen-2026/",
           "excerpt": "Die Anpassung 26/1 des kantonalen Richtplans wurde veröffentlicht: «weiße Zonen» für den Wohnungsbau und eine Stabilisierungsstrategie.",
           "date": "2026-10-22T02:39:48.543Z"
-        },
-        {
-          "title": "Zug stellt die Tagesordnung des Kantonsrates zur Verfügung",
-          "url": "/de/zug-artikel/zug-kantonsrat-traktanden-29-oktober-2026/",
-          "excerpt": "Die Tagesordnung der Sitzung des Kantonsrates Zug vom 29.",
-          "date": "2026-10-21T21:24:59.776Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-26T12:31:20.302Z"
+      "updatedAt": "2026-10-27T02:04:48.993Z"
     },
     "fr": {
       "canton": "ZG",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-25T12:00:24.779Z"
+          "updatedAt": "2026-10-26T13:32:45.792Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Zoug met à disposition l’ordre du jour du Kantonsrat",
+          "url": "/fr/articles-zoug/zoug-ordre-du-jour-conseil-octobre-2026/",
+          "excerpt": "La source du canton de Zoug met à disposition l’ordre du jour de la séance du Kantonsrat du 29 octobre 2026.",
+          "date": "2026-10-27T01:58:14.398Z"
+        },
         {
           "title": "Zoug : attribution des départements à partir du 1er janvier 2027",
           "url": "/fr/articles-zoug/gouvernement-zoug-mandat-2030/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-zoug/zoug-plan-directeur-ajustement-zones-blanches-2026/",
           "excerpt": "L’adaptation 26/1 du plan directeur cantonal est publiée : des « zones blanches » pour la construction de logements et une stratégie de stabilisation.",
           "date": "2026-10-22T02:39:48.543Z"
-        },
-        {
-          "title": "Zoug rend disponible l'agenda du Conseil cantonal",
-          "url": "/fr/articles-zoug/zoug-conseil-cantonal-ordre-jour-29-octobre-2026/",
-          "excerpt": "L'ordre du jour de la séance du Conseil cantonal de Zoug du 29 octobre 2026 est disponible, mais le texte n'en dresse pas la liste.",
-          "date": "2026-10-21T21:24:59.776Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-26T12:31:20.302Z"
+      "updatedAt": "2026-10-27T02:04:48.993Z"
     }
   }
 }
