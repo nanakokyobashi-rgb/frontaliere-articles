@@ -75,6 +75,9 @@ const blogMetaCantonSgIt: Record<string, string> = {
     'blog.article.votazione-29-novembre-2026.title': 'Votazione 29 novembre 2026 sul fondo rete gas TBW',
     'blog.article.votazione-29-novembre-2026.excerpt': 'Il referendum riguarda il regolamento per il fondo di dismissione e smantellamento della rete gas delle TBW, con costi previsti di CHF 45,8 milioni.',
     'blog.article.votazione-29-novembre-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.wil-budget-nachtrag-2027-115.title': 'Wil approva supplemento al preventivo 2027 con moltiplicatore fiscale al 115%',
+    'blog.article.wil-budget-nachtrag-2027-115.excerpt': 'Il preventivo 2027 prevede un moltiplicatore fiscale del 115%, con minori entrate di circa CHF 3,8 milioni e un deficit stimato di circa CHF 5,78 milioni.',
+    'blog.article.wil-budget-nachtrag-2027-115.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSgIt;

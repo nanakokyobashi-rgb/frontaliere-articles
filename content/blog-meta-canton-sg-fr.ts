@@ -75,6 +75,9 @@ const blogMetaCantonSgFr: Record<string, string> = {
     'blog.article.votazione-29-novembre-2026.title': 'Votation du 29 novembre 2026 sur le fonds du réseau de gaz TBW',
     'blog.article.votazione-29-novembre-2026.excerpt': 'Le référendum concerne le règlement relatif au fonds de désaffectation et de démantèlement du réseau de gaz de TBW, dont les coûts prévus s’élèvent à CHF 45,8 millions.',
     'blog.article.votazione-29-novembre-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.wil-budget-nachtrag-2027-115.title': 'Wil approuve un supplément au budget 2027 avec un coefficient fiscal de 115%',
+    'blog.article.wil-budget-nachtrag-2027-115.excerpt': 'Le budget 2027 prévoit un coefficient fiscal de 115%, avec des recettes inférieures d’environ CHF 3,8 millions et un déficit estimé à environ CHF 5,78 millions.',
+    'blog.article.wil-budget-nachtrag-2027-115.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSgFr;

@@ -270,4 +270,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'wil-budget-nachtrag-2027-115',
+ category: 'fiscale',
+ date: '2026-10-27T18:02:08.096Z',
+ image: '/images/blog/article-wil-budget-nachtrag-2027-115.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SG'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];

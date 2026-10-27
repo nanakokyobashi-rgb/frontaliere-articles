@@ -75,6 +75,9 @@ const blogMetaCantonSgEn: Record<string, string> = {
     'blog.article.votazione-29-novembre-2026.title': 'Vote on November 29, 2026 on the TBW gas network fund',
     'blog.article.votazione-29-novembre-2026.excerpt': 'The referendum concerns the regulations for the fund for the decommissioning and dismantling of TBW\'s gas network, with expected costs of CHF 45,8 million.',
     'blog.article.votazione-29-novembre-2026.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.wil-budget-nachtrag-2027-115.title': 'Wil approves the supplement to the 2027 estimate with a tax multiplier of 115%',
+    'blog.article.wil-budget-nachtrag-2027-115.excerpt': 'The 2027 budget provides for a tax multiplier of 115%, with lower revenue of approximately CHF 3,8 million and an estimated deficit of approximately CHF 5,78 million.',
+    'blog.article.wil-budget-nachtrag-2027-115.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSgEn;
