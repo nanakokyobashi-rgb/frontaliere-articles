@@ -619,6 +619,10 @@ test('un blocco eventi carried scarta item non renderizzabili prima della normal
   assert.equal(isRenderableCarriedEventItem({ label: 'Evento valido', url: 'https://example.org/evento' }), true);
   assert.equal(isRenderableCarriedEventItem(null), false);
   assert.equal(isRenderableCarriedEventItem({ label: 'URL non valido', url: 42 }), false);
+  assert.equal(isRenderableCarriedEventItem({ label: 'Valore vuoto', value: '   ' }), false);
+  assert.equal(isRenderableCarriedEventItem({ label: 'Data impossibile', date: '2026-02-31' }), false);
+  assert.equal(isRenderableCarriedEventItem({ label: 'URL vuoto', url: '   ' }), false);
+  assert.equal(isRenderableCarriedEventItem({ label: 'Campo extra', source: 'storico' }), false);
 
   const first = buildOne('canton-ti', 'eventi');
   for (const locale of HUB_LOCALES) {
@@ -635,6 +639,28 @@ test('un blocco eventi carried scarta item non renderizzabili prima della normal
   for (const locale of HUB_LOCALES) {
     const block = carried.file.locales[locale].dataBlocks.find((item) => item.id === 'prossimi-eventi');
     assert.ok(block.items.every((item) => isRenderableCarriedEventItem(item)));
+  }
+});
+
+test('un blocco eventi carried sotto soglia viene omesso dopo il filtro storico', () => {
+  const first = buildOne('canton-ti', 'eventi');
+  for (const locale of HUB_LOCALES) {
+    const block = first.file.locales[locale].dataBlocks.find((item) => item.id === 'prossimi-eventi');
+    assert.ok(block?.items?.length >= BLOCK_THRESHOLDS.events.minRows, `${locale}: fixture eventi sotto soglia`);
+    block.items = block.items.slice(0, BLOCK_THRESHOLDS.events.minRows);
+    block.items[0] = { ...block.items[0], value: '' };
+  }
+
+  const carried = buildOne('canton-ti', 'eventi', {
+    datasets: { ...fixtureDatasets(), events: null },
+    previous: first.file,
+    nowMs: NOW + HOUR_MS,
+  });
+
+  assert.equal(carried.blocks[0].id, 'prossimi-eventi');
+  assert.equal(carried.blocks[0].status, 'omitted');
+  for (const locale of HUB_LOCALES) {
+    assert.ok(!carried.file.locales[locale].dataBlocks.some((item) => item.id === 'prossimi-eventi'));
   }
 });
 
