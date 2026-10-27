@@ -18,6 +18,7 @@ test('un dettaglio evento NW scaduto ha un fallback source-backed esplicito', ()
   assert.match(EVENTS_UTILS, /guidle\|https:\/\/www\.guidle\.com\/it\/veranstaltungen\/musik\/zuerich\/don-toliver-nitrous-octane-world-tour-leg-2_A2e1GAw/);
   assert.match(EVENTS_UTILS, /nw-agenda\|https:\/\/www\.nw\.ch\/anlaesseaktuelles\/94120/);
   assert.match(EVENTS_UTILS, /nw-agenda\|https:\/\/www\.nw\.ch\/anlaesseaktuelles\/94123/);
+  assert.match(EVENTS_UTILS, /unscopedStaleEventSourceUrl/);
   assert.match(EVENTS_UTILS, /eventSourceUrl\(rawUrl, event\)/);
   assert.match(EVENTS_UTILS, /eventReferralUrl\(rawUrl, event\)/);
 });

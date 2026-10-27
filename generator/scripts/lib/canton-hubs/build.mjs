@@ -23,7 +23,7 @@ import { CANTON_HUB_TOPIC_KEYS } from '../../../../engine/shared/cantonArticleSe
 import { CANTON_HUB_MIN_CONTENT_WORDS, countCantonHubContentWords, countCantonHubIntroWords } from '../../../../scripts/lib/canton-hub-content.mjs';
 import { BLOCK_THRESHOLDS, DAY_MS, dateMs, instantMs } from './blocks-common.mjs';
 import { shapeFuelBlock } from './blocks-fuel.mjs';
-import { shapeEventsBlock } from './blocks-events.mjs';
+import { EVENTS_BLOCK_ID, shapeEventsBlock } from './blocks-events.mjs';
 import { shapeBorderWaitBlock } from './blocks-border-wait.mjs';
 import { shapeRoadEventsBlock } from './blocks-road-events.mjs';
 import { shapeNoticesBlock } from './blocks-notices.mjs';
@@ -35,6 +35,7 @@ import { curatedEntry } from './articles.mjs';
 import { buildHubLinks } from './links.mjs';
 import { HUB_LOCALES } from './format.mjs';
 import { httpsUrlOrNull } from '../../../../engine/shared/httpsUrl.mjs';
+import { eventSourceUrl } from '../events-utils.mjs';
 import { hubFilePath, hubFilePaths } from './paths.mjs';
 
 export const HUB_SCHEMA_VERSION = 1;
@@ -245,6 +246,18 @@ function usablePrevious(previous, id) {
     : null;
 }
 
+function normalizeCarriedBlock(block, blockId) {
+  if (blockId !== EVENTS_BLOCK_ID || !Array.isArray(block?.items)) return block;
+  return {
+    ...block,
+    items: block.items.map((item) => {
+      if (!item || typeof item !== 'object' || typeof item.url !== 'string') return item;
+      const url = eventSourceUrl(item.url);
+      return url === item.url ? item : { ...item, url };
+    }),
+  };
+}
+
 /** Blocco e fatti chiave gia' pubblicati di `blockId`, per locale, o null se non recuperabili. */
 function carriedFromPrevious(previous, blockId, carryMs, nowMs) {
   const index = previous.blocks.findIndex((b) => b.id === blockId);
@@ -257,7 +270,10 @@ function carriedFromPrevious(previous, blockId, carryMs, nowMs) {
   for (const locale of HUB_LOCALES) {
     const block = previous.locales[locale].dataBlocks.find((b) => b.id === blockId);
     if (!block) return null;
-    perLocale[locale] = { block, keyFacts: previous.locales[locale].keyFacts.slice(offset, offset + (meta.keyFacts || 0)) };
+    perLocale[locale] = {
+      block: normalizeCarriedBlock(block, blockId),
+      keyFacts: previous.locales[locale].keyFacts.slice(offset, offset + (meta.keyFacts || 0)),
+    };
   }
   return { updatedAt: meta.updatedAt, carryUntilAt: meta.carryUntilAt, perLocale };
 }
