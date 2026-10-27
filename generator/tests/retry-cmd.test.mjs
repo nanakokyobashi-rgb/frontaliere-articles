@@ -141,6 +141,25 @@ test('il purge Cloudflare conserva lo status HTTP per il wrapper di retry', () =
   assert.match(src, /const \{ status, json \} = await cf\(/u);
   assert.match(src, /const httpStatus = .*`HTTP \$\{status\}`/u);
   assert.match(src, /\$\{httpStatus\} API call failed/u);
+  assert.match(
+    src,
+    /const detail = error\?\.message[\s\S]*Cannot resolve zone id/u,
+    'anche la risoluzione della zona deve lasciare visibile lo status al retry wrapper',
+  );
+  assert.match(
+    src,
+    /Cloudflare API response body could not be parsed \(\$\{httpStatus\}\)/u,
+    'anche una risposta HTML del provider deve conservare il codice HTTP per il retry',
+  );
+});
+
+test('una risposta HTML 5xx del purge Cloudflare resta ritentabile', () => {
+  const { code, calls, out } = runWith({
+    failTimes: 1,
+    failureMessage: 'Cloudflare API response body could not be parsed (HTTP 503): Unexpected token <',
+  });
+  assert.equal(code, 0, `la risposta HTML 503 doveva essere ritentata, invece:\n${out}`);
+  assert.equal(calls, 2);
 });
 
 test('un numero in un errore deterministico non abilita il retry', () => {

@@ -26,6 +26,9 @@ import {
   apiInputChangedInRange,
   CANTON_RSS_PREFIX,
   PAGE_CACHE_CONTROL,
+  ROLLBACK_VERIFY_ATTEMPTS,
+  ROLLBACK_VERIFY_RETRY_DELAY_MS,
+  ROLLBACK_VERIFY_MAX_WAIT_MS,
   UPLOAD_ORDER,
   addCantonRssFeedLink,
   aggregatePageDefects,
@@ -102,6 +105,59 @@ const HISTORICAL_CORE = Object.fromEntries(HISTORICAL_CORE_LIST.map((core) => [c
 const WITH_TI = [...HISTORICAL_CORE_LIST, TI];
 const ACTIVE_WITH_TI = { ...HISTORICAL_CORE, 'canton-ti': TI };
 const read = (rel) => readFileSync(path.join(ROOT, rel), 'utf8');
+
+test('publisher: il rollback attende la propagazione del purge mirato', () => {
+  assert.equal(ROLLBACK_VERIFY_ATTEMPTS, 8);
+  assert.equal(ROLLBACK_VERIFY_RETRY_DELAY_MS, 4_000);
+  assert.equal(ROLLBACK_VERIFY_MAX_WAIT_MS, 45_000);
+  const publisher = read('scripts/publish-section-pages.mjs');
+  assert.match(publisher, /attempts: ROLLBACK_VERIFY_ATTEMPTS/u);
+  assert.match(publisher, /delayMs: ROLLBACK_VERIFY_RETRY_DELAY_MS/u);
+  assert.match(publisher, /probeWithRollbackVerificationDeadline/u);
+  assert.match(publisher, /createRollbackVerificationContext/u);
+});
+
+test('publisher: una probe di rollback che ignora il signal non supera la deadline condivisa', async () => {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-rollback-deadline-'));
+  const page = pageEntry('canton-ti', 'articoli-ticino/index.html', 'landing');
+  const previousHtml = '<html>pagina precedente</html>';
+  let probeCalls = 0;
+  const startedAt = Date.now();
+  try {
+    const result = await publish({
+      section: 'canton-ti',
+      pages: [page],
+      cdnUploads: [],
+      cantonRssFeeds: [],
+      obsoletePages: [],
+      distDir: fixtureRoot,
+      releaseCommit: 'a'.repeat(40),
+      publishedStatusImpl: async () => 'live',
+      snapshotPagesBeforeUpload: true,
+      rollbackVerifyMaxWaitMs: 20,
+      probeImpl: async () => {
+        probeCalls++;
+        if (probeCalls === 1) return { ok: true, status: 200, body: previousHtml };
+        return new Promise(() => {});
+      },
+      runImpl: (_command, args) => {
+        if (args[0] === 'scripts/lib/upload-cdn-file.sh') {
+          return args[1].includes('.canton-page-rollback-')
+            ? { code: 0, stdout: '✅ uploaded' }
+            : { code: 1, stdout: '' };
+        }
+        if (args.includes('scripts/cf-purge-cache.mjs')) return { code: 0, stdout: '' };
+        throw new Error(`comando inatteso: ${args.join(' ')}`);
+      },
+    });
+    assert.ok(Date.now() - startedAt < 500, 'la verifica deve rispettare la deadline iniettata');
+    assert.ok(probeCalls >= 1 && probeCalls <= 2, 'la deadline deve impedire una cascata di probe oltre il rollback pendente');
+    assert.equal(result.rollbackFailures, 1);
+    assert.equal(result.failures, 2);
+  } finally {
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
 
 // ── Publisher ────────────────────────────────────────────────────────────────
 

@@ -102,6 +102,16 @@ export const API_BASE = 'https://nanakokyobashi-rgb.github.io/frontaliere-articl
 export const CANTON_RSS_PREFIX = `${EDGE_PREFIX}/_feeds`;
 /** Le pagine si riscrivono a ogni publish e il Worker le tiene 5 min: stessa classe delle sitemap. */
 export const PAGE_CACHE_CONTROL = 'public,max-age=600';
+/**
+ * Un purge mirato e' confermato dall'API prima che ogni PoP abbia propagato
+ * la cancellazione. Il CDN documenta una finestra che puo' arrivare a ~30s:
+ * il rollback deve quindi restare fail-closed, ma non trasformare una
+ * propagazione normale in un secondo failure che maschera il primo.
+ */
+export const ROLLBACK_VERIFY_ATTEMPTS = 8;
+export const ROLLBACK_VERIFY_RETRY_DELAY_MS = 4_000;
+/** Limite totale della verifica di rollback, condiviso fra tutti i target della fase. */
+export const ROLLBACK_VERIFY_MAX_WAIT_MS = 45_000;
 /** Dopo il deploy API la superficie pubblica puo' arrivare in ritardo: la delete attende, ma con un limite. */
 export const RELEASE_READY_MAX_WAIT_MS = 120_000;
 export const RELEASE_READY_RETRY_DELAY_MS = 10_000;
@@ -1001,6 +1011,51 @@ async function runWithPublishSignal(operation, signal) {
   }
 }
 
+/**
+ * Deadline condivisa per una verifica di rollback/cleanup.
+ *
+ * Il numero di tentativi da solo non e' un limite di tempo: `probe()` puo'
+ * consumare fino a 20s nella singola GET prima di pagare il delay successivo.
+ * Un controller figlio interrompe anche le probe iniettate che ignorano il
+ * signal; il parent signal resta invece riservato all'intera pubblicazione.
+ */
+function createRollbackVerificationContext(parentSignal, maxWaitMs = ROLLBACK_VERIFY_MAX_WAIT_MS) {
+  const controller = new AbortController();
+  const duration = Number.isFinite(maxWaitMs) && maxWaitMs > 0
+    ? maxWaitMs
+    : ROLLBACK_VERIFY_MAX_WAIT_MS;
+  let timedOut = false;
+  let timer;
+  const onParentAbort = () => {
+    if (!controller.signal.aborted) controller.abort(parentSignal?.reason);
+  };
+  if (parentSignal) {
+    parentSignal.addEventListener('abort', onParentAbort, { once: true });
+    if (parentSignal.aborted) onParentAbort();
+  }
+  timer = setTimeout(() => {
+    timedOut = true;
+    controller.abort(new Error(`verifica rollback oltre la deadline di ${duration}ms`));
+  }, duration);
+  return {
+    signal: controller.signal,
+    get timedOut() {
+      return timedOut;
+    },
+    dispose() {
+      clearTimeout(timer);
+      if (parentSignal) removeAbortListenerSafely(parentSignal, onParentAbort);
+    },
+  };
+}
+
+async function probeWithRollbackVerificationDeadline(probeImpl, url, options, verification) {
+  return runWithPublishSignal(
+    () => probeImpl(url, { ...options, signal: verification.signal }),
+    verification.signal,
+  );
+}
+
 /** GET con cache-buster, ritentata: una pagina appena caricata puo' metterci qualche secondo. */
 async function probe(url, { attempts = 6, delayMs = 4000, want = () => true, signal } = {}) {
   let last = 'nessuna risposta';
@@ -1702,7 +1757,16 @@ async function uploadCantonAssets({ cdnUploads, heldAssetKeys, unchangedAssetKey
 }
 
 /** Ripristina HTML, purge e verifica prima che la transazione RSS torni indietro. */
-async function rollbackCantonPages({ pages, snapshots, distDir, runImpl, probeImpl, live }) {
+async function rollbackCantonPages({
+  pages,
+  snapshots,
+  distDir,
+  runImpl,
+  probeImpl,
+  live,
+  signal,
+  rollbackVerifyMaxWaitMs = ROLLBACK_VERIFY_MAX_WAIT_MS,
+}) {
   const rollbackFiles = [];
   const targets = uniqueCantonPages(pages);
   let failures = 0;
@@ -1744,28 +1808,39 @@ async function rollbackCantonPages({ pages, snapshots, distDir, runImpl, probeIm
       }
     }
 
-    const restored = async (page, url, previous) => {
-      const result = await probeImpl(url, {
-        attempts: 3,
-        delayMs: 1000,
-        want: previous.exists ? (body) => body === previous.body : () => false,
-      });
-      const ok = previous.exists
-        ? result?.ok === true && result.body === previous.body
-        : result?.ok !== true && isNotFoundStatus(result?.status);
-      if (!ok) throw new Error(`${url} stato inatteso (${result?.status ?? 'nessuna risposta'})`);
-      return result;
-    };
-    for (const page of targets) {
-      const previous = snapshots.get(page.edgeKey);
-      try {
-        if (!previous) throw new Error('snapshot mancante');
-        await restored(page, page.cdnUrl, previous);
-        if (live) await restored(page, page.apexUrl, previous);
-      } catch (error) {
-        failures++;
-        console.error(`::error::[${LOG}] verifica rollback pagina HTML ${page.edgeKey} fallita: ${error?.message ?? String(error)}`);
+    const verification = createRollbackVerificationContext(signal, rollbackVerifyMaxWaitMs);
+    try {
+      const restored = async (page, url, previous) => {
+        const result = await probeWithRollbackVerificationDeadline(probeImpl, url, {
+          attempts: ROLLBACK_VERIFY_ATTEMPTS,
+          delayMs: ROLLBACK_VERIFY_RETRY_DELAY_MS,
+          want: previous.exists ? (body) => body === previous.body : () => false,
+        }, verification);
+        const ok = previous.exists
+          ? result?.ok === true && result.body === previous.body
+          : result?.ok !== true && isNotFoundStatus(result?.status);
+        if (!ok) throw new Error(`${url} stato inatteso (${result?.status ?? 'nessuna risposta'})`);
+        return result;
+      };
+      for (const page of targets) {
+        if (verification.signal.aborted) {
+          failures++;
+          console.error(`::error::[${LOG}] verifica rollback pagine HTML interrotta (${verification.timedOut ? `deadline ${rollbackVerifyMaxWaitMs}ms` : 'segnale esterno'})`);
+          break;
+        }
+        const previous = snapshots.get(page.edgeKey);
+        try {
+          if (!previous) throw new Error('snapshot mancante');
+          await restored(page, page.cdnUrl, previous);
+          if (live) await restored(page, page.apexUrl, previous);
+        } catch (error) {
+          failures++;
+          console.error(`::error::[${LOG}] verifica rollback pagina HTML ${page.edgeKey} fallita: ${error?.message ?? String(error)}`);
+          if (verification.signal.aborted) break;
+        }
       }
+    } finally {
+      verification.dispose();
     }
   } finally {
     for (const local of rollbackFiles) fs.rmSync(local, { force: true });
@@ -1786,7 +1861,16 @@ function normalizeCantonRssSnapshot(feed, result) {
   throw new Error(`${feed.name}: superficie CDN precedente non verificabile (${result?.status ?? 'nessuna risposta'})`);
 }
 
-async function rollbackCantonRssFeeds({ prepared, snapshots, distDir, runImpl, probeImpl, neutralize = false }) {
+async function rollbackCantonRssFeeds({
+  prepared,
+  snapshots,
+  distDir,
+  runImpl,
+  probeImpl,
+  neutralize = false,
+  signal,
+  rollbackVerifyMaxWaitMs = ROLLBACK_VERIFY_MAX_WAIT_MS,
+}) {
   const rollbackFiles = [];
   let failures = 0;
   try {
@@ -1828,26 +1912,37 @@ async function rollbackCantonRssFeeds({ prepared, snapshots, distDir, runImpl, p
       }
     }
 
-    for (const feed of prepared) {
-      const previous = snapshots.get(feed.name);
-      try {
-        const result = await probeImpl(feed.url, {
-          want: neutralize
-            ? () => false
-            : previous?.exists ? (body) => body === previous.body : () => false,
-          attempts: 3,
-          delayMs: 1000,
-        });
-        const restored = neutralize
-          ? result?.ok !== true && isNotFoundStatus(result?.status)
-          : previous?.exists
-            ? result?.ok === true
-            : result?.ok !== true && isNotFoundStatus(result?.status);
-        if (!restored) throw new Error(`stato CDN inatteso (${result?.status ?? 'nessuna risposta'})`);
-      } catch (error) {
-        failures++;
-        console.error(`::error::[${LOG}] verifica rollback feed RSS ${feed.key} fallita: ${error?.message ?? String(error)}`);
+    const verification = createRollbackVerificationContext(signal, rollbackVerifyMaxWaitMs);
+    try {
+      for (const feed of prepared) {
+        if (verification.signal.aborted) {
+          failures++;
+          console.error(`::error::[${LOG}] verifica rollback feed RSS interrotta (${verification.timedOut ? `deadline ${rollbackVerifyMaxWaitMs}ms` : 'segnale esterno'})`);
+          break;
+        }
+        const previous = snapshots.get(feed.name);
+        try {
+          const result = await probeWithRollbackVerificationDeadline(probeImpl, feed.url, {
+            want: neutralize
+              ? () => false
+              : previous?.exists ? (body) => body === previous.body : () => false,
+            attempts: ROLLBACK_VERIFY_ATTEMPTS,
+            delayMs: ROLLBACK_VERIFY_RETRY_DELAY_MS,
+          }, verification);
+          const restored = neutralize
+            ? result?.ok !== true && isNotFoundStatus(result?.status)
+            : previous?.exists
+              ? result?.ok === true
+              : result?.ok !== true && isNotFoundStatus(result?.status);
+          if (!restored) throw new Error(`stato CDN inatteso (${result?.status ?? 'nessuna risposta'})`);
+        } catch (error) {
+          failures++;
+          console.error(`::error::[${LOG}] verifica rollback feed RSS ${feed.key} fallita: ${error?.message ?? String(error)}`);
+          if (verification.signal.aborted) break;
+        }
       }
+    } finally {
+      verification.dispose();
     }
   } finally {
     for (const local of rollbackFiles) fs.rmSync(local, { force: true });
@@ -1877,6 +1972,7 @@ export async function publishCantonRssFeeds({
   sleepImpl = sleep,
   releaseReadyMaxWaitMs = RELEASE_READY_MAX_WAIT_MS,
   releaseReadyRetryDelayMs = RELEASE_READY_RETRY_DELAY_MS,
+  rollbackVerifyMaxWaitMs = ROLLBACK_VERIFY_MAX_WAIT_MS,
   assertMainFreshImpl = async () => {},
   signal,
 }) {
@@ -2019,20 +2115,31 @@ export async function publishCantonRssFeeds({
       }
     }
 
-    for (const feed of prepared) {
-      await publishSignalBoundary(signal);
-      if (removingStaleFeeds) {
-        const result = await probeImpl(feed.url, { attempts: 3, delayMs: 1000, want: () => false });
-        if (result?.ok === true || !isNotFoundStatus(result?.status)) {
-          throw new Error(`feed RSS ancora servito sul CDN: ${feed.url} (${result?.status ?? 'nessuna risposta'})`);
+    const cleanupVerification = removingStaleFeeds
+      ? createRollbackVerificationContext(signal, rollbackVerifyMaxWaitMs)
+      : null;
+    try {
+      for (const feed of prepared) {
+        await publishSignalBoundary(signal);
+        if (removingStaleFeeds) {
+          const result = await probeWithRollbackVerificationDeadline(probeImpl, feed.url, {
+            attempts: ROLLBACK_VERIFY_ATTEMPTS,
+            delayMs: ROLLBACK_VERIFY_RETRY_DELAY_MS,
+            want: () => false,
+          }, cleanupVerification);
+          if (result?.ok === true || !isNotFoundStatus(result?.status)) {
+            throw new Error(`feed RSS ancora servito sul CDN: ${feed.url} (${result?.status ?? 'nessuna risposta'})`);
+          }
+        } else {
+          const result = await probeImpl(feed.url, { want: (body) => body === feed.xml });
+          if (!result.ok) {
+            throw new Error(`feed RSS non verificato sul CDN: ${feed.url} (${result.status})`);
+          }
         }
-      } else {
-        const result = await probeImpl(feed.url, { want: (body) => body === feed.xml });
-        if (!result.ok) {
-          throw new Error(`feed RSS non verificato sul CDN: ${feed.url} (${result.status})`);
-        }
+        verified++;
       }
-      verified++;
+    } finally {
+      cleanupVerification?.dispose();
     }
     let rolledBack = false;
     return {
@@ -2044,7 +2151,16 @@ export async function publishCantonRssFeeds({
       rollback: async ({ neutralize = false } = {}) => {
         if (rolledBack) return { failures: 0 };
         rolledBack = true;
-        return rollbackCantonRssFeeds({ prepared, snapshots, distDir, runImpl, probeImpl, neutralize });
+        return rollbackCantonRssFeeds({
+          prepared,
+          snapshots,
+          distDir,
+          runImpl,
+          probeImpl,
+          neutralize,
+          signal,
+          rollbackVerifyMaxWaitMs,
+        });
       },
     };
   } catch (error) {
@@ -2056,6 +2172,8 @@ export async function publishCantonRssFeeds({
         distDir,
         runImpl,
         probeImpl,
+        signal,
+        rollbackVerifyMaxWaitMs,
       })).failures;
     }
     console.error(`::error::[${LOG}] feed RSS ${section}: ${error?.message ?? String(error)}`);
@@ -2127,6 +2245,7 @@ export async function publish({
   publishCantonRssFeedsImpl = publishCantonRssFeeds,
   releaseReadyMaxWaitMs = RELEASE_READY_MAX_WAIT_MS,
   releaseReadyRetryDelayMs = RELEASE_READY_RETRY_DELAY_MS,
+  rollbackVerifyMaxWaitMs = ROLLBACK_VERIFY_MAX_WAIT_MS,
   sleepImpl = sleep,
   snapshotPagesBeforeUpload = false,
   immutablePages = [],
@@ -2183,6 +2302,8 @@ export async function publish({
         runImpl,
         probeImpl,
         live: beforeStatus === 'live',
+        signal,
+        rollbackVerifyMaxWaitMs,
       });
       return Number.isSafeInteger(result?.failures) ? result.failures : 1;
     } catch (error) {
@@ -2347,6 +2468,7 @@ export async function publish({
       sleepImpl,
       releaseReadyMaxWaitMs,
       releaseReadyRetryDelayMs,
+      rollbackVerifyMaxWaitMs,
       assertMainFreshImpl,
       signal,
     });
@@ -2487,13 +2609,33 @@ export async function publish({
   // The current release was already served before the delete. Purge the old
   // keys only after successful delete requests, then retain the 404 verification.
   await purgePages(deleted);
-  for (const page of obsoletePages) {
-    const old = await probeImpl(page.cdnUrl, { attempts: 3, delayMs: 1000 });
-    await publishSignalBoundary(signal);
-    if (old.status !== 'HTTP 404') {
-      failures++;
-      console.log(`::error::[${LOG}] vecchia pagina ancora servita o non verificabile: ${page.cdnUrl} (${old.status})`);
+  const obsoleteVerification = createRollbackVerificationContext(signal, rollbackVerifyMaxWaitMs);
+  try {
+    for (const page of obsoletePages) {
+      if (obsoleteVerification.signal.aborted) {
+        failures++;
+        console.log(`::error::[${LOG}] verifica delle pagine obsolete interrotta (${obsoleteVerification.timedOut ? `deadline ${rollbackVerifyMaxWaitMs}ms` : 'segnale esterno'})`);
+        break;
+      }
+      try {
+        const old = await probeWithRollbackVerificationDeadline(probeImpl, page.cdnUrl, {
+          attempts: ROLLBACK_VERIFY_ATTEMPTS,
+          delayMs: ROLLBACK_VERIFY_RETRY_DELAY_MS,
+        }, obsoleteVerification);
+        await publishSignalBoundary(signal);
+        if (old.status !== 'HTTP 404') {
+          failures++;
+          console.log(`::error::[${LOG}] vecchia pagina ancora servita o non verificabile: ${page.cdnUrl} (${old.status})`);
+        }
+      } catch (error) {
+        if (!obsoleteVerification.signal.aborted) throw error;
+        failures++;
+        console.log(`::error::[${LOG}] verifica delle pagine obsolete interrotta (${obsoleteVerification.timedOut ? `deadline ${rollbackVerifyMaxWaitMs}ms` : error?.message ?? String(error)})`);
+        break;
+      }
     }
+  } finally {
+    obsoleteVerification.dispose();
   }
   await assertMainFreshImpl();
   await publishSignalBoundary(signal);
