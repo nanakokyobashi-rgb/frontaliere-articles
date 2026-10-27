@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-sz::https://www.bote.ch/nachrichten/schweizundwelt/bund-prueft-tempo-80-auf-schweizer-autobahnen-art-1728491": {
-      "section": "canton-sz",
-      "ts": 1792868843927
-    },
     "canton-sz::https://www.einsiedeln.ch/verwaltung/mitteilungen/aktuelle-mitteilungen?m=4563": {
       "section": "canton-sz",
       "ts": 1792918693208
@@ -59,6 +55,14 @@
     "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/laermblitzer-kantonsrat-bremst-forderung-der-gruenen-art-1728786": {
       "section": "canton-sz",
       "ts": 1793036115576
+    },
+    "canton-sz::https://www.marchanzeiger.ch/tnad/exklusiv-immobilien-20261026-2014-034570": {
+      "section": "canton-sz",
+      "ts": 1793070473596
+    },
+    "canton-sz::https://www.hoefner.ch/tnad/exklusiv-immobilien-20261026-2014-034570": {
+      "section": "canton-sz",
+      "ts": 1793070483962
     }
   }
 }
