@@ -57,6 +57,9 @@ const blogMetaCantonBeEn: Record<string, string> = {
     'blog.article.contributi-rotbach-saanen.title': 'Bern approves contributions for Rotbach and Saanen',
     'blog.article.contributi-rotbach-saanen.excerpt': 'The cantonal government approves approximately CHF 590\'000 for the Rotbach and CHF 720\'000 for flood protection in Saanen, in the Canton of Bern.',
     'blog.article.contributi-rotbach-saanen.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.nuove-funzioni-piano-digitale.title': 'New features in the digital plan of the city of Bern',
+    'blog.article.nuove-funzioni-piano-digitale.excerpt': 'From 26 October 2026, new content in the digital plan Official names visible under «Nomenclature» Free download from the city’s Geoportal Street names',
+    'blog.article.nuove-funzioni-piano-digitale.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonBeEn;

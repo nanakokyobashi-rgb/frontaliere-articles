@@ -57,6 +57,9 @@ const blogMetaCantonBeIt: Record<string, string> = {
     'blog.article.contributi-rotbach-saanen.title': 'Berna approva contributi per Rotbach e Saanen',
     'blog.article.contributi-rotbach-saanen.excerpt': 'Il Governo cantonale approva circa CHF 590\'000 per il Rotbach e CHF 720\'000 per la protezione dalle piene a Saanen, nel Canton Berna.',
     'blog.article.contributi-rotbach-saanen.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.nuove-funzioni-piano-digitale.title': 'Nuove funzioni nel piano digitale della città di Berna',
+    'blog.article.nuove-funzioni-piano-digitale.excerpt': 'Dal 26 ottobre 2026 nuovi contenuti nel piano digitale Nomi ufficiali visibili sotto «Nomenclatura» Download gratuito dal Geoportale della città Aggiornati nomi',
+    'blog.article.nuove-funzioni-piano-digitale.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonBeIt;

@@ -57,6 +57,9 @@ const blogMetaCantonBeDe: Record<string, string> = {
     'blog.article.contributi-rotbach-saanen.title': 'Bern genehmigt Beiträge für Rotbach und Saanen',
     'blog.article.contributi-rotbach-saanen.excerpt': 'Die Kantonsregierung genehmigt rund CHF 590\'000 für den Rotbach und CHF 720\'000 für den Hochwasserschutz in Saanen im Kanton Bern.',
     'blog.article.contributi-rotbach-saanen.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.nuove-funzioni-piano-digitale.title': 'Neue Funktionen im digitalen Plan der Stadt Bern',
+    'blog.article.nuove-funzioni-piano-digitale.excerpt': 'Ab dem 26. Oktober 2026 neue Inhalte im digitalen Plan Offizielle Namen unter «Nomenklatur» sichtbar Kostenloser Download über das Geoportal der Stadt',
+    'blog.article.nuove-funzioni-piano-digitale.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonBeDe;

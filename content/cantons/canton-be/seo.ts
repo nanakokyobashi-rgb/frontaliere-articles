@@ -699,6 +699,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-nuove-funzioni-piano-digitale': {
+    title: 'Nuove funzioni nel piano digitale della città di Berna',
+    description: 'Dal 26 ottobre 2026 nuovi contenuti nel piano digitale Nomi ufficiali visibili sotto «Nomenclatura» Download gratuito dal Geoportale della città',
+    keywords: 'frontalieri, ticino, svizzera, italia, nuove, funzioni, piano, digitale',
+    ogTitle: 'Nuove funzioni piano digitale Berna',
+    ogDescription: 'Dal 26 ottobre 2026 nuovi contenuti nel piano digitale Nomi ufficiali visibili sotto «Nomenclatura» Download gratuito dal Geoportale della città Aggiornati nomi',
+    canonicalPath: '/articoli-berna/nuove-funzioni-piano-digitale/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Nuove funzioni nel piano digitale della città di Berna",
+      "description": "Dal 26 ottobre 2026 nuovi contenuti nel piano digitale Nomi ufficiali visibili sotto «Nomenclatura» Download gratuito dal Geoportale della città",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-nuove-funzioni-piano-digitale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-27T01:42:07+00:00",
+      "dateModified": "2026-10-27T01:42:07+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-berna/nuove-funzioni-piano-digitale/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
