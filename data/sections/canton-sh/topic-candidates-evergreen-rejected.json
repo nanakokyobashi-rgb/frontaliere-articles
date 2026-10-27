@@ -27,6 +27,18 @@
     "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-09-30/ist-orange-das-neue-schwarz-wie-sich-weidmueller-im-ki": {
       "section": "canton-sh",
       "ts": 1793013895806
+    },
+    "canton-sh::https://www.schaffhausen24.ch/articles/414842-gute-noten-fuer-schweizer-radio-und-fernsehen": {
+      "section": "canton-sh",
+      "ts": 1793070873186
+    },
+    "canton-sh::https://www.schaffhausen24.ch/articles/414806-erlebnis-herbstmesse": {
+      "section": "canton-sh",
+      "ts": 1793070875760
+    },
+    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-01/gf-verkauft-luft-und-raumfahrt-sowie-industriegasturbinen": {
+      "section": "canton-sh",
+      "ts": 1793071030410
     }
   }
 }
