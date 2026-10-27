@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "fisco",
-  "updatedAt": "2026-10-26T17:57:05.656Z",
-  "contentHash": "88d6bd28781bdfe47aa9c1e85485eecad5831b521d6b1f3644e405bb3b9d690a",
+  "updatedAt": "2026-10-27T18:13:24.736Z",
+  "contentHash": "d417eef76f11a842cde27493635779f252c089656fd17ac9fe683a0841906acc",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-26T11:33:49.792Z",
+      "updatedAt": "2026-10-27T11:01:59.897Z",
       "keyFacts": 0
     }
   ],
@@ -140,10 +140,16 @@
               "url": "https://www.sg.ch/news/sgch_sport/2026/10/der-kanton-st-gallen-war-gastgeber-der-arge-alp-sport-koordinati.html"
             }
           ],
-          "updatedAt": "2026-10-26T11:33:49.792Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Wil approva supplemento al preventivo 2027 con moltiplicatore fiscale al 115%",
+          "url": "/articoli-san-gallo/wil-budget-nachtrag-2027-115/",
+          "excerpt": "Il preventivo 2027 prevede un moltiplicatore fiscale del 115%, con minori entrate di circa CHF 3,8 milioni e un deficit stimato di circa CHF 5,78 milioni.",
+          "date": "2026-10-27T18:02:08.096Z"
+        },
         {
           "title": "40 comuni del Canton San Gallo chiudono il 2025 in positivo",
           "url": "/articoli-san-gallo/positive-chiusure-2025-sg/",
@@ -185,12 +191,6 @@
           "url": "/articoli-svizzera/dichiarazione-imposte-svizzera-guida-2026-canton-san-gallo/",
           "excerpt": "Scadenze cantonali, deduzioni ammesse e procedura online per la dichiarazione fiscale 2026. Dati specifici per il canton San Gallo e confronto nazionale.",
           "date": "2026-07-21T10:48:26.222Z"
-        },
-        {
-          "title": "Comprare casa San Gallo: mutuo e imposte",
-          "url": "/articoli-svizzera/comprare-casa-san-gallo-mutuo/",
-          "excerpt": "Guida all'acquisto immobiliare in Svizzera: mutuo ipotecario, fondi propri, imposta sui trapassi e procedure step-by-step per chi compra nel Canton San Gallo.",
-          "date": "2026-09-04T05:24:58.077Z"
         }
       ],
       "latestCantonArticles": [],
@@ -220,7 +220,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-26T17:57:05.656Z"
+      "updatedAt": "2026-10-27T18:13:24.736Z"
     },
     "en": {
       "canton": "SG",
@@ -338,10 +338,16 @@
               "url": "https://www.sg.ch/news/sgch_sport/2026/10/der-kanton-st-gallen-war-gastgeber-der-arge-alp-sport-koordinati.html"
             }
           ],
-          "updatedAt": "2026-10-26T11:33:49.792Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Wil approves the supplement to the 2027 estimate with a tax multiplier of 115%",
+          "url": "/en/st-gallen-articles/wil-budget-supplement-2027-115/",
+          "excerpt": "The 2027 budget provides for a tax multiplier of 115%, with lower revenue of approximately CHF 3,8 million and an estimated deficit of approximately CHF 5,78 million.",
+          "date": "2026-10-27T18:02:08.096Z"
+        },
         {
           "title": "40 municipalities in the Canton of St. Gallen end 2025 with a surplus",
           "url": "/en/st-gallen-articles/positive-closures-2025-sg/",
@@ -383,12 +389,6 @@
           "url": "/en/swiss-articles/switzerland-tax-declaration-2026-guide-st-gallen-canton/",
           "excerpt": "Cantonal deadlines, allowable deductions and online procedure for the 2026 tax return. Specific data for the canton of St. Gallen and national comparison.",
           "date": "2026-07-21T10:48:26.222Z"
-        },
-        {
-          "title": "Buying a house in St. Gallen: mortgage and taxes",
-          "url": "/en/swiss-articles/buy-home-st-gallen-mortgage/",
-          "excerpt": "Guide to buying real estate in Switzerland: mortgage, own funds, transfer tax and step-by-step procedures for buyers in the Canton of St. Gallen.",
-          "date": "2026-09-04T05:24:58.077Z"
         }
       ],
       "latestCantonArticles": [],
@@ -418,7 +418,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-26T17:57:05.656Z"
+      "updatedAt": "2026-10-27T18:13:24.736Z"
     },
     "de": {
       "canton": "SG",
@@ -536,10 +536,16 @@
               "url": "https://www.sg.ch/news/sgch_sport/2026/10/der-kanton-st-gallen-war-gastgeber-der-arge-alp-sport-koordinati.html"
             }
           ],
-          "updatedAt": "2026-10-26T11:33:49.792Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Wil genehmigt den Nachtrag zum Budget 2027 mit einem Steuerfuss von 115%",
+          "url": "/de/st-gallen-artikel/wil-budgetnachtrag-2027-115/",
+          "excerpt": "Das Budget 2027 sieht einen Steuerfuss von 115% vor, mit Mindereinnahmen von etwa CHF 3,8 Millionen und einem geschätzten Defizit von etwa CHF 5,78 Millionen.",
+          "date": "2026-10-27T18:02:08.096Z"
+        },
         {
           "title": "40 Gemeinden des Kantons St. Gallen schliessen das Jahr 2025 positiv ab",
           "url": "/de/st-gallen-artikel/40-gemeinden-des-kantons-st-gallen-schliessen-das-jahr-2025-positiv-ab/",
@@ -581,12 +587,6 @@
           "url": "/de/schweiz-artikel/schweiz-steuererklaerung-2026-leitfaden-kanton-st-gallen/",
           "excerpt": "Kantonale Fälligkeiten, zulässige Abzüge und Online-Verfahren für die Steuererklärung 2026. Kantonsspezifische Daten und nationaler Vergleich.",
           "date": "2026-07-21T10:48:26.222Z"
-        },
-        {
-          "title": "Haus St. Gallen kaufen: Hypothek und Steuern",
-          "url": "/de/schweiz-artikel/haus-kaufen-sankt-gallen-hypothek/",
-          "excerpt": "Leitfaden zum Immobilienkauf in der Schweiz: Hypothekendarlehen, Eigenmittel, Abgeltungssteuer und Schritt-für-Schritt-Verfahren für Käufer im Kanton St. Gallen.",
-          "date": "2026-09-04T05:24:58.077Z"
         }
       ],
       "latestCantonArticles": [],
@@ -616,7 +616,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-26T17:57:05.656Z"
+      "updatedAt": "2026-10-27T18:13:24.736Z"
     },
     "fr": {
       "canton": "SG",
@@ -734,10 +734,16 @@
               "url": "https://www.sg.ch/news/sgch_sport/2026/10/der-kanton-st-gallen-war-gastgeber-der-arge-alp-sport-koordinati.html"
             }
           ],
-          "updatedAt": "2026-10-26T11:33:49.792Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Wil approuve un supplément au budget 2027 avec un coefficient fiscal de 115%",
+          "url": "/fr/articles-saint-gall/wil-suppl-budget-2027-115/",
+          "excerpt": "Le budget 2027 prévoit un coefficient fiscal de 115%, avec des recettes inférieures d’environ CHF 3,8 millions et un déficit estimé à environ CHF 5,78 millions.",
+          "date": "2026-10-27T18:02:08.096Z"
+        },
         {
           "title": "40 communes du canton de Saint-Gall clôturent l'année 2025 en positif",
           "url": "/fr/articles-saint-gall/positifs-clotures-2025-sg/",
@@ -779,12 +785,6 @@
           "url": "/fr/articles-suisse/declaration-impots-suisse-2026-guide-canton-saint-gall/",
           "excerpt": "Délais cantonaux, déductions admises et procédure en ligne pour la déclaration fiscale 2026. Données spécifiques pour le canton de Saint-Gall et comparaison nationale.",
           "date": "2026-07-21T10:48:26.222Z"
-        },
-        {
-          "title": "Acheter maison Saint-Gall : hypothèque et taxes",
-          "url": "/fr/articles-suisse/acheter-maison-saint-gall-hypotheque/",
-          "excerpt": "Guide d'achat immobilier en Suisse : hypothèque, fonds propres, taxe de passage et procédures étape par étape pour ceux qui achètent dans le canton de Saint-Gall.",
-          "date": "2026-09-04T05:24:58.077Z"
         }
       ],
       "latestCantonArticles": [],
@@ -814,7 +814,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-26T17:57:05.656Z"
+      "updatedAt": "2026-10-27T18:13:24.736Z"
     }
   }
 }

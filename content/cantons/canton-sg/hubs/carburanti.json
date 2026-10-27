@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-27T02:40:46.202Z",
-  "contentHash": "68799070c2b0da6a83d020d72b63dc4e5a3574cc86c2cd52f4b2e3d84605a1f5",
+  "updatedAt": "2026-10-27T18:13:24.736Z",
+  "contentHash": "0bc0cb6b0f909e27d85f39e437289978054e437af25e1f9d4f005ecd2dd8d7a6",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -84,6 +84,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Wil approva supplemento al preventivo 2027 con moltiplicatore fiscale al 115%",
+          "url": "/articoli-san-gallo/wil-budget-nachtrag-2027-115/",
+          "excerpt": "Il preventivo 2027 prevede un moltiplicatore fiscale del 115%, con minori entrate di circa CHF 3,8 milioni e un deficit stimato di circa CHF 5,78 milioni.",
+          "date": "2026-10-27T18:02:08.096Z"
+        },
+        {
           "title": "Votazione 29 novembre 2026 sul fondo rete gas TBW",
           "url": "/articoli-san-gallo/votazione-29-novembre-2026/",
           "excerpt": "Il referendum riguarda il regolamento per il fondo di dismissione e smantellamento della rete gas delle TBW, con costi previsti di CHF 45,8 milioni.",
@@ -106,12 +112,6 @@
           "url": "/articoli-san-gallo/unfall-a13-sevelen-2026/",
           "excerpt": "Il 25 ottobre due auto si sono tamponate sulla A13 a Sevelen Feriti un conducente di 79 anni e la passeggera di 86 Il conducente della seconda auto, 53 anni, è",
           "date": "2026-10-26T16:46:48.908Z"
-        },
-        {
-          "title": "Voto 29 novembre 2026: Stazione Wil e Allee per un interscambio sicuro",
-          "url": "/articoli-san-gallo/abstimmung-bahnhof-wil-allee/",
-          "excerpt": "Il credito lordo è di 63,662 milioni di franchi; i lavori sono previsti dal 2029 al 2033.",
-          "date": "2026-10-24T13:43:09.251Z"
         }
       ],
       "links": [
@@ -124,7 +124,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-27T02:40:46.202Z"
+      "updatedAt": "2026-10-27T18:13:24.736Z"
     },
     "en": {
       "canton": "SG",
@@ -195,6 +195,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Wil approves the supplement to the 2027 estimate with a tax multiplier of 115%",
+          "url": "/en/st-gallen-articles/wil-budget-supplement-2027-115/",
+          "excerpt": "The 2027 budget provides for a tax multiplier of 115%, with lower revenue of approximately CHF 3,8 million and an estimated deficit of approximately CHF 5,78 million.",
+          "date": "2026-10-27T18:02:08.096Z"
+        },
+        {
           "title": "Vote on November 29, 2026 on the TBW gas network fund",
           "url": "/en/st-gallen-articles/vote-november-29-2026/",
           "excerpt": "The referendum concerns the regulations for the fund for the decommissioning and dismantling of TBW's gas network, with expected costs of CHF 45,8 million.",
@@ -217,12 +223,6 @@
           "url": "/en/st-gallen-articles/accident-a13-sevelen-2026/",
           "excerpt": "On October 25, two cars rear-ended each other on the A13 at Sevelen A 79-year-old driver and an 86-year-old passenger were injured The driver of the second car",
           "date": "2026-10-26T16:46:48.908Z"
-        },
-        {
-          "title": "Vote November 29, 2026: Wil Station and Allee for a safe interchange",
-          "url": "/en/st-gallen-articles/vote-november-29-2026-wil-station-and-allee-for-a-safe-interchange/",
-          "excerpt": "The gross credit amounts to 63,662 million francs; the work is scheduled from 2029 to 2033.",
-          "date": "2026-10-24T13:43:09.251Z"
         }
       ],
       "links": [
@@ -235,7 +235,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-27T02:40:46.202Z"
+      "updatedAt": "2026-10-27T18:13:24.736Z"
     },
     "de": {
       "canton": "SG",
@@ -306,6 +306,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Wil genehmigt den Nachtrag zum Budget 2027 mit einem Steuerfuss von 115%",
+          "url": "/de/st-gallen-artikel/wil-budgetnachtrag-2027-115/",
+          "excerpt": "Das Budget 2027 sieht einen Steuerfuss von 115% vor, mit Mindereinnahmen von etwa CHF 3,8 Millionen und einem geschätzten Defizit von etwa CHF 5,78 Millionen.",
+          "date": "2026-10-27T18:02:08.096Z"
+        },
+        {
           "title": "Abstimmung vom 29. November 2026 über den Gasnetzfonds der TBW",
           "url": "/de/st-gallen-artikel/abstimmung-29-november-2026/",
           "excerpt": "Das Referendum betrifft das Reglement für den Fonds zur Stilllegung und zum Rückbau des Gasnetzes der TBW, mit vorgesehenen Kosten von CHF 45,8 Millionen.",
@@ -328,12 +334,6 @@
           "url": "/de/st-gallen-artikel/auffahrunfall-auf-der-a13-bei-sevelen-zwei-verletzte-am-25-oktober-2026/",
           "excerpt": "Am 25. Oktober fuhren auf der A13 bei Sevelen zwei Autos aufeinander auf Ein 79-jähriger Fahrer und die 86-jährige Beifahrerin wurden verletzt Der 53-jährige",
           "date": "2026-10-26T16:46:48.908Z"
-        },
-        {
-          "title": "Abstimmung 29.11.2026: Bahnhof Wil, Allee – sicherer Umstieg",
-          "url": "/de/st-gallen-artikel/abstimmung-29-11-2026-bahnhof-wil-allee-sicherer-umstieg/",
-          "excerpt": "Der Bruttokredit beträgt 63,662 Millionen Franken; die Arbeiten sind von 2029 bis 2033 vorgesehen.",
-          "date": "2026-10-24T13:43:09.251Z"
         }
       ],
       "links": [
@@ -346,7 +346,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-27T02:40:46.202Z"
+      "updatedAt": "2026-10-27T18:13:24.736Z"
     },
     "fr": {
       "canton": "SG",
@@ -417,6 +417,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Wil approuve un supplément au budget 2027 avec un coefficient fiscal de 115%",
+          "url": "/fr/articles-saint-gall/wil-suppl-budget-2027-115/",
+          "excerpt": "Le budget 2027 prévoit un coefficient fiscal de 115%, avec des recettes inférieures d’environ CHF 3,8 millions et un déficit estimé à environ CHF 5,78 millions.",
+          "date": "2026-10-27T18:02:08.096Z"
+        },
+        {
           "title": "Votation du 29 novembre 2026 sur le fonds du réseau de gaz TBW",
           "url": "/fr/articles-saint-gall/vote-29-novembre-2026/",
           "excerpt": "Le référendum concerne le règlement relatif au fonds de désaffectation et de démantèlement du réseau de gaz de TBW, dont les coûts prévus s’élèvent à CHF 45,8 millions.",
@@ -439,12 +445,6 @@
           "url": "/fr/articles-saint-gall/accident-a13-sevelen-2026/",
           "excerpt": "Le 25 octobre, deux voitures se sont percutées par l’arrière sur l’A13 à Sevelen Un conducteur de 79 ans et la passagère de 86 ans ont été blessés Le conducteur",
           "date": "2026-10-26T16:46:48.908Z"
-        },
-        {
-          "title": "Vote du 29 novembre 2026 : Gare de Wil et Allee pour une correspondance sûre",
-          "url": "/fr/articles-saint-gall/vote-du-29-novembre-2026-gare-de-wil-et-allee-pour-une-correspondance-sure/",
-          "excerpt": "Le crédit brut s’élève à 63,662 millions de francs ; les travaux sont prévus de 2029 à 2033.",
-          "date": "2026-10-24T13:43:09.251Z"
         }
       ],
       "links": [
@@ -457,7 +457,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-27T02:40:46.202Z"
+      "updatedAt": "2026-10-27T18:13:24.736Z"
     }
   }
 }
