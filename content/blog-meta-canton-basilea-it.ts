@@ -45,6 +45,9 @@ const blogMetaCantonBasileaIt: Record<string, string> = {
     'blog.article.basilea-stop-sconto-elettriche.title': 'Basilea Città elimina lo sconto sulle auto elettriche',
     'blog.article.basilea-stop-sconto-elettriche.excerpt': 'A Basilea Città, dal 2027 le auto elettriche pagheranno la tassa piena: termina lo sconto del 50% dopo il superamento della soglia del 5%.',
     'blog.article.basilea-stop-sconto-elettriche.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.bvb-rasatura-tram-episodio.title': 'BVB: rasatura in tram, intervento di pulizia documentato',
+    'blog.article.bvb-rasatura-tram-episodio.excerpt': 'La Basler Verkehrsbetriebe (BVB) ha pubblicato su Facebook una foto di due rasoi blu e capelli sul pavimento di un tram; è il primo episodio di questo tipo noto.',
+    'blog.article.bvb-rasatura-tram-episodio.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonBasileaIt;

@@ -45,6 +45,9 @@ const blogMetaCantonBasileaFr: Record<string, string> = {
     'blog.article.basilea-stop-sconto-elettriche.title': 'Bâle-Ville supprime la réduction pour les voitures électriques',
     'blog.article.basilea-stop-sconto-elettriche.excerpt': 'À Bâle-Ville, à partir de 2027, les voitures électriques paieront la taxe pleine : la réduction de 50% prend fin après le dépassement du seuil de 5%.',
     'blog.article.basilea-stop-sconto-elettriche.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.bvb-rasatura-tram-episodio.title': 'BVB : tonte dans les tramways, nettoyage documenté',
+    'blog.article.bvb-rasatura-tram-episodio.excerpt': 'La Basler Verkehrsbetriebe (BVB) a publié sur Facebook une photo de deux rasoirs bleus et de cheveux sur le sol d\'un tramway ; c\'est le premier épisode connu de ce type.',
+    'blog.article.bvb-rasatura-tram-episodio.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonBasileaFr;

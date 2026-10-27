@@ -45,6 +45,9 @@ const blogMetaCantonBasileaDe: Record<string, string> = {
     'blog.article.basilea-stop-sconto-elettriche.title': 'Basel-Stadt schafft den Rabatt auf Elektroautos ab',
     'blog.article.basilea-stop-sconto-elettriche.excerpt': 'In Basel-Stadt zahlen Elektroautos ab 2027 die volle Steuer: Der Rabatt von 50% endet, nachdem der Schwellenwert von 5% überschritten wurde.',
     'blog.article.basilea-stop-sconto-elettriche.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.bvb-rasatura-tram-episodio.title': 'BVB: Mähen in Straßenbahnen, dokumentierte Reinigung',
+    'blog.article.bvb-rasatura-tram-episodio.excerpt': 'Die Basler Verkehrsbetriebe (BVB) veröffentlichten auf Facebook ein Foto von zwei blauen Rasierern und Haaren auf dem Boden einer Straßenbahn; es ist der erste bekannte Vorfall dieser Art.',
+    'blog.article.bvb-rasatura-tram-episodio.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonBasileaDe;

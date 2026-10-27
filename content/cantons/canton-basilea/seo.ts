@@ -548,6 +548,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-bvb-rasatura-tram-episodio': {
+    title: 'BVB: rasatura in tram, intervento di pulizia documentato',
+    description: 'BVB ha pubblicato su Facebook foto di rasoi blu e capelli su un tram. Il dipendente ha provveduto alla rimozione; è il primo caso noto all\'azienda.',
+    keywords: 'frontalieri, ticino, svizzera, italia, rasatura, tram, intervento, pulizia',
+    ogTitle: 'BVB: rasatura in tram, primo episodio noto',
+    ogDescription: 'La Basler Verkehrsbetriebe (BVB) ha condiviso una foto di due rasoi blu e capelli sul pavimento di un tram. Il dipendente ha rimosso i detriti; l\'azienda ha sottolineato l\'importanza del buon senso nei mezzi pubblici.',
+    canonicalPath: '/articoli-basilea/bvb-rasatura-tram-episodio/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "BVB: rasatura in tram, intervento di pulizia documentato",
+      "description": "BVB ha pubblicato su Facebook foto di rasoi blu e capelli su un tram. Il dipendente ha provveduto alla rimozione; è il primo caso noto all'azienda.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-bvb-rasatura-tram-episodio.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-27T00:34:47+00:00",
+      "dateModified": "2026-10-27T00:34:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-basilea/bvb-rasatura-tram-episodio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

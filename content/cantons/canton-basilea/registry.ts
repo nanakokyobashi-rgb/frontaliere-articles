@@ -160,4 +160,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'bvb-rasatura-tram-episodio',
+ category: 'pratico',
+ date: '2026-10-27T00:34:47.659Z',
+ image: '/images/blog/article-bvb-rasatura-tram-episodio.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['BASILEA'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

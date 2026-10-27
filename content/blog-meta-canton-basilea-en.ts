@@ -45,6 +45,9 @@ const blogMetaCantonBasileaEn: Record<string, string> = {
     'blog.article.basilea-stop-sconto-elettriche.title': 'Basel-Stadt abolishes the discount on electric cars',
     'blog.article.basilea-stop-sconto-elettriche.excerpt': 'In Basel-Stadt, from 2027, electric cars will pay the full tax: the 50% discount ends once the 5% threshold is exceeded.',
     'blog.article.basilea-stop-sconto-elettriche.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.bvb-rasatura-tram-episodio.title': 'BVB: mowing in trams, documented cleaning',
+    'blog.article.bvb-rasatura-tram-episodio.excerpt': 'The Basler Verkehrsbetriebe (BVB) posted on Facebook a photo of two blue razors and hair on the floor of a tram; it is the first known episode of this type.',
+    'blog.article.bvb-rasatura-tram-episodio.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonBasileaEn;
