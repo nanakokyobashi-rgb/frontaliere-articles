@@ -160,6 +160,7 @@ on:
       - 'data/generated-image-registry.json'
       - 'data/editorial-image-registry.json'
       - 'data/blog-cover-cdn-sync-queue.json'
+      - 'scripts/ci/verify-publish-api-source-current.sh'
       - '.github/workflows/publish-api.yml'
   # The editorial companion contains a weekly update even when no article or
   # code push occurs. Rebuild it on a real weekly cadence so the HTTP surface
@@ -889,6 +890,19 @@ jobs:
             echo "images-manifest.json: not emitted (no hero images in this repo yet) — expected before cutover"
           fi
 
+      # The build guard protects only the checkout. Every irreversible phase
+      # gets a fresh barrier because the cover queue may advance main and a
+      # queued run can spend a long time between artifact verification and
+      # publication.
+      - name: Verify source before governed cover publish
+        if: github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          PUBLISHED_SOURCE_COMMIT: ${{ inputs.source_commit || github.sha }}
+          VERIFY_CONTEXT: governed cover publish
+        run: bash scripts/ci/verify-publish-api-source-current.sh
+
       # A site-side licence-audit replacement keeps the article URL stable but
       # changes the bytes at that URL. The corpus is a second publisher of the
       # same CDN key, so this step runs BEFORE Pages deploy and keeps a durable
@@ -901,8 +915,13 @@ jobs:
           SHA: ${{ github.sha }}
           EVENT_NAME: ${{ github.event_name }}
           REF: ${{ github.ref }}
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          PUBLISHED_SOURCE_COMMIT: ${{ inputs.source_commit || github.sha }}
+          VERIFY_CONTEXT: governed cover publish (inside step)
         run: |
           set -euo pipefail
+          bash scripts/ci/verify-publish-api-source-current.sh
           if [ "$REF" != 'refs/heads/main' ]; then
             echo "::error::cover CDN reconciliation is allowed only from refs/heads/main (got $REF)"
             exit 1
@@ -1158,6 +1177,14 @@ jobs:
           runtime_pat="${GITHUB_PAT_NANAKO:-}"
           GH_TOKEN="${runtime_pat:-$GH_TOKEN}" node scripts/ci/ticker-shadow-alert.mjs
 
+      - name: Verify source before Pages publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          PUBLISHED_SOURCE_COMMIT: ${{ inputs.source_commit || github.sha }}
+          VERIFY_CONTEXT: Pages publish
+        run: bash scripts/ci/verify-publish-api-source-current.sh
+
       - uses: actions/configure-pages@v6
 
       - uses: actions/upload-pages-artifact@v5
@@ -1185,6 +1212,15 @@ jobs:
       # Best-effort, exactly like the dispatch below: the R2 PUT is a freshness
       # optimisation over a passthrough that already works, so a missing
       # credential or a failed upload must never fail a good publish.
+      - name: Verify source before edge document publish
+        if: steps.deploy.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          PUBLISHED_SOURCE_COMMIT: ${{ inputs.source_commit || github.sha }}
+          VERIFY_CONTEXT: edge document publish
+        run: bash scripts/ci/verify-publish-api-source-current.sh
+
       - name: Push the article sitemaps and the blog index to the edge
         if: steps.deploy.outcome == 'success'
         continue-on-error: true

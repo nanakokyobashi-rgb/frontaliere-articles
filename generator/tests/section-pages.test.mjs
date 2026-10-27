@@ -3565,6 +3565,13 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(recovery, /\.stale_handoff \/\/ "false"\) != "true"/);
   assert.match(recovery, /if \[ "\$\{DRY:-false\}" = 'true' \]/);
   assert.match(recovery, /dispatch_run_snapshot=.*gh run list/);
+  assert.match(recovery, /dispatch_children_wave\(\)/);
+  assert.match(recovery, /rebuild_recovery_head\(\)/);
+  assert.match(recovery, /VERIFY_STALE_HANDOFF_TITLE/);
+  assert.match(recovery, /VERIFY_STALE_HANDOFF_HEAD/);
+  assert.match(recovery, /return 3/);
+  assert.match(recovery, /wave_replaced=true/);
+  assert.match(recovery, /max_stale_handoff_waves=3/);
   assert.match(recovery, /dispatch_baseline_ids=\(\)/);
   assert.match(recovery, /initial_run_state/);
   assert.match(recovery, /latest_run_id <= baseline_run_id/);
@@ -3645,7 +3652,11 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   );
   assert.match(wf, /actions\/upload-artifact@v7/);
   assert.match(wf, /actions\/download-artifact@v7/);
-  assert.match(wf, /map\(\{section, rendered_head, stale_handoff, stale_handoff_head, fresh\}\)/);
+  assert.match(wf, /map\(\{section, rendered_head, stale_handoff, stale_handoff_head, stale_handoff_nonce, stale_handoff_title, fresh\}\)/);
+  assert.match(wf, /STALE_HANDOFF_NONCE: \$\{\{ steps\.render\.outputs\.stale_handoff_nonce \}\}/);
+  assert.match(wf, /STALE_HANDOFF_TITLE: \$\{\{ steps\.render\.outputs\.stale_handoff_title \}\}/);
+  assert.match(render, /stale_handoff_nonce=\$stale_handoff_nonce/);
+  assert.match(render, /stale_handoff_title=\$stale_handoff_title/);
   assert.match(wf, /map\(\.rendered_head\) \| unique \| if length == 1/);
   assert.match(wf, /all\(\.\[\]; \(\.rendered_head == "" and \(\(\.stale_handoff == "true"\) or \(\.fresh == "false"\)\)\)\)/);
   assert.match(wf, /mixed_matrix: \$\{\{ steps\.collect\.outputs\.mixed_matrix \}\}/);
