@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "carburanti",
-  "updatedAt": "2026-10-26T17:18:45.341Z",
-  "contentHash": "37fec896b5728eb64bb1132df90cabbb5ab4c23a919758e990c0cf6603507f2f",
+  "updatedAt": "2026-10-27T11:16:36.775Z",
+  "contentHash": "eee013cb7570114235363ff2d05b3057c8cd53534421aeae58244dab188a61d1",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Consiglio Cantonale Soletta: sedute 3, 4 e 11 novembre 2026",
+          "url": "/articoli-soletta/sedute-parlamento-novembre-2026/",
+          "excerpt": "In agenda 58 affari, inclusi 7 affari normativi e di merito e 7 interventi parlamentari urgenti.",
+          "date": "2026-10-27T11:07:13.770Z"
+        },
+        {
           "title": "Batterie agli ioni di sodio: montaggio a Soletta",
           "url": "/articoli-soletta/batterie-sodio-soletta/",
           "excerpt": "Batterie agli ioni di sodio senza litio Software sviluppato in Svizzera, montaggio a Soletta Oltre 600 batterie vendute entro fine settembre 2026 Primo sistema",
@@ -94,12 +100,6 @@
           "url": "/articoli-soletta/polizia-soletta-comunicazione-media-droni/",
           "excerpt": "Il servizio media opera 365 giorni all'anno Il team gestisce X, Facebook e Instagram Nei grandi eventi un membro è presente sul posto Il divieto di droni vale",
           "date": "2026-10-23T03:30:32.771Z"
-        },
-        {
-          "title": "Cambio d'ora e rischio incidenti stradali nel Canton Soletta",
-          "url": "/articoli-soletta/cambio-ora-incidenti-stradali-soletta/",
-          "excerpt": "24-25 ottobre 2026: orologi indietro di un'ora Il traffico del mattino coincide con il crepuscolo Caprioli, cervi nobili e cinghiali sono attivi presto",
-          "date": "2026-10-23T00:45:27.261Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-27T11:16:36.775Z"
     },
     "en": {
       "canton": "SO",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Solothurn Cantonal Council: meetings of 3, 4 and 11 November 2026",
+          "url": "/en/solothurn-articles/parliament-sessions-november-2026/",
+          "excerpt": "On the agenda 58 affairs, including 7 regulatory and substantive affairs and 7 urgent parliamentary interventions.",
+          "date": "2026-10-27T11:07:13.770Z"
+        },
+        {
           "title": "Sodium-ion batteries: assembly in Solothurn",
           "url": "/en/solothurn-articles/sodium-batteries-solothurn/",
           "excerpt": "Lithium-free sodium-ion batteries Software developed in Switzerland, assembly in Solothurn More than 600 batteries sold by the end of September 2026 First",
@@ -193,12 +199,6 @@
           "url": "/en/solothurn-articles/solothurn-police-communication-media-drones/",
           "excerpt": "The media service operates 365 days a year The team manages X, Facebook and Instagram At major events, a team member is present on site The drone ban applies",
           "date": "2026-10-23T03:30:32.771Z"
-        },
-        {
-          "title": "Time change and risk of road accidents in the Canton of Solothurn",
-          "url": "/en/solothurn-articles/time-change-road-accidents-solothurn/",
-          "excerpt": "October 24–25, 2026: clocks go back by one hour Morning traffic coincides with twilight Roe deer, red deer and wild boar are active early Caution",
-          "date": "2026-10-23T00:45:27.261Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-27T11:16:36.775Z"
     },
     "de": {
       "canton": "SO",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Kantonsrat Solothurn: Sitzungen vom 3., 4. und 11. November 2026",
+          "url": "/de/solothurn-artikel/parlament-sitzungen-november-2026/",
+          "excerpt": "Auf der Tagesordnung stehen 58 Angelegenheiten, darunter 7 regulatorische und materielle Angelegenheiten sowie 7 dringende parlamentarische Interventionen.",
+          "date": "2026-10-27T11:07:13.770Z"
+        },
+        {
           "title": "Natrium-Ionen-Batterien: Montage in Solothurn",
           "url": "/de/solothurn-artikel/sodium-batterien-solothurn/",
           "excerpt": "Natrium-Ionen-Batterien ohne Lithium In der Schweiz entwickelte Software, Montage in Solothurn Bis Ende September 2026 über 600 verkaufte Batterien Erstes",
@@ -292,12 +298,6 @@
           "url": "/de/solothurn-artikel/polizei-solothurn-kommunikation-medien-drohnen/",
           "excerpt": "Der Mediendienst ist 365 Tage im Jahr tätig Das Team betreut X, Facebook und Instagram Bei Grossanlässen ist ein Mitglied vor Ort Das Drohnenverbot gilt",
           "date": "2026-10-23T03:30:32.771Z"
-        },
-        {
-          "title": "Zeitumstellung und Verkehrsunfallrisiko im Kanton Solothurn",
-          "url": "/de/solothurn-artikel/zeitumstellung-strassenunfaelle-solothurn/",
-          "excerpt": "24.–25. Oktober 2026: Uhren um eine Stunde zurückgestellt Der morgendliche Verkehr fällt mit der Dämmerung zusammen Rehe, Rothirsche und Wildschweine sind früh",
-          "date": "2026-10-23T00:45:27.261Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-27T11:16:36.775Z"
     },
     "fr": {
       "canton": "SO",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Conseil cantonal de Soleure : réunions des 3, 4 et 11 novembre 2026",
+          "url": "/fr/articles-soleure/sessions-parlement-novembre-2026/",
+          "excerpt": "À l'ordre du jour 58 affaires, dont 7 affaires réglementaires et substantielles et 7 interventions parlementaires urgentes.",
+          "date": "2026-10-27T11:07:13.770Z"
+        },
+        {
           "title": "Batteries aux ions sodium : assemblage à Soleure",
           "url": "/fr/articles-soleure/batteries-sodium-soleure/",
           "excerpt": "Batteries aux ions sodium sans lithium Logiciels développés en Suisse, assemblage à Soleure Plus de 600 batteries vendues d’ici fin septembre 2026 Premier",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-soleure/police-soleure-communication-medias-drones/",
           "excerpt": "Le service médias fonctionne 365 jours par an L’équipe gère X, Facebook et Instagram Lors des grands événements, un membre est présent sur place L’interdiction",
           "date": "2026-10-23T03:30:32.771Z"
-        },
-        {
-          "title": "Changement d’heure et risque d’accidents de la route dans le canton de Soleure",
-          "url": "/fr/articles-soleure/changement-heure-accidents-route-soleure/",
-          "excerpt": "24-25 octobre 2026 : horloges reculées d’une heure La circulation matinale coïncide avec le crépuscule Les chevreuils, les cerfs élaphes et les sangliers sont",
-          "date": "2026-10-23T00:45:27.261Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-27T11:16:36.775Z"
     }
   }
 }
