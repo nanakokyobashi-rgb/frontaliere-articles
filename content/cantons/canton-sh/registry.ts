@@ -226,4 +226,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'governo-sh-previsioni-fiscali',
+ category: 'fiscale',
+ date: '2026-10-27T02:57:10.663Z',
+ image: '/images/blog/article-governo-sh-previsioni-fiscali.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SH'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];

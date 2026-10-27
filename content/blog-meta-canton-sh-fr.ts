@@ -63,6 +63,9 @@ const blogMetaCantonShFr: Record<string, string> = {
     'blog.article.sciaffusa-budget-correzione.title': 'Gouvernement de Schaffhouse : budget 2027 corrigé, comptes dans le rouge',
     'blog.article.sciaffusa-budget-correzione.excerpt': 'Le Gouvernement de Schaffhouse a corrigé le budget 2027 de 2,2 millions de francs ; les comptes devraient néanmoins clôturer dans le rouge.',
     'blog.article.sciaffusa-budget-correzione.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.governo-sh-previsioni-fiscali.title': 'Le gouvernement SH renonce aux prévisions fiscales décennales',
+    'blog.article.governo-sh-previsioni-fiscali.excerpt': 'Le gouvernement du canton de Schaffhouse ne peut pas établir de prévisions fiscales fiables pour la période 2031-2035 ; la campagne Beforemore reste active jusqu’au 15 novembre.',
+    'blog.article.governo-sh-previsioni-fiscali.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonShFr;

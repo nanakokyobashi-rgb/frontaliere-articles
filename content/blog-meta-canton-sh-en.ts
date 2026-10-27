@@ -63,6 +63,9 @@ const blogMetaCantonShEn: Record<string, string> = {
     'blog.article.sciaffusa-budget-correzione.title': 'Government of Schaffhausen: 2027 budget corrected, accounts in the red',
     'blog.article.sciaffusa-budget-correzione.excerpt': 'The Government of Schaffhausen revised the 2027 budget by 2,2 million francs; the accounts should nevertheless close in the red.',
     'blog.article.sciaffusa-budget-correzione.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.governo-sh-previsioni-fiscali.title': 'SH government abandons ten-year fiscal forecasts',
+    'blog.article.governo-sh-previsioni-fiscali.excerpt': 'The Government of the Canton of Schaffhausen cannot produce reliable tax forecasts for the period 2031-2035; the Beforemore campaign remains active until November 15.',
+    'blog.article.governo-sh-previsioni-fiscali.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonShEn;

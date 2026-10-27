@@ -23,6 +23,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'sciaffusa-regole-datacenter': { it: 'sciaffusa-regole-datacenter', en: 'schaffhausen-data-centres', de: 'schaffhausen-rechenzentren-regeln', fr: 'schaffhouse-centres-donnees' },
  'coop-aumento-salari-2027': { it: 'coop-aumento-salari-2027', en: 'coop-salary-increase-2027', de: 'coop-lohnerhoehung-2027', fr: 'coop-augmentation-salaires-2027' },
  'sciaffusa-budget-correzione': { it: 'sciaffusa-budget-correzione', en: 'schaffhausen-budget-correction', de: 'schaffhausen-budget-korrektur', fr: 'schaffhouse-budget-correction' },
+ 'governo-sh-previsioni-fiscali': { it: 'governo-sh-previsioni-fiscali', en: 'sh-government-fiscal-forecasts', de: 'sh-regierung-steuerprognosen', fr: 'gouv-sh-previsions-fiscales' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

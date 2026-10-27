@@ -63,6 +63,9 @@ const blogMetaCantonShIt: Record<string, string> = {
     'blog.article.sciaffusa-budget-correzione.title': 'Governo di Sciaffusa: budget 2027 corretto, conti in rosso',
     'blog.article.sciaffusa-budget-correzione.excerpt': 'Il Governo di Sciaffusa ha corretto di 2,2 milioni di franchi il budget 2027; i conti dovrebbero comunque chiudere in rosso.',
     'blog.article.sciaffusa-budget-correzione.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.governo-sh-previsioni-fiscali.title': 'Governo SH rinuncia a previsioni fiscali decennali',
+    'blog.article.governo-sh-previsioni-fiscali.excerpt': 'Il Governo del Canton Sciaffusa non può elaborare previsioni fiscali affidabili per il periodo 2031-2035; la campagna Beforemore resta attiva fino al 15 novembre.',
+    'blog.article.governo-sh-previsioni-fiscali.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonShIt;
