@@ -4868,7 +4868,7 @@
       "path": "generator/data/crawler-cross-repo-contract.json",
       "sitePath": ".github/corpus-workflows/contract.json",
       "mode": "identical",
-      "reason": "La baseline del 2026-10-26 registra lo stesso digest SHA-256 raw sui due lati (f48ce5eaab70a96e); `identical` mantiene il contratto sotto drift-check e segnala future divergenze.",
+      "reason": "La baseline del 2026-10-27 registra lo stesso digest SHA-256 raw sui due lati (efbd294fc61539de); `identical` mantiene il contratto sotto drift-check e segnala future divergenze.",
       "baseline": {
         "site": "efbd294fc61539de",
         "corpus": "efbd294fc61539de",

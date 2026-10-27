@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-27T13:04:04.614Z",
-  "contentHash": "ec13fa5ece6d77e6f0786175fe5e0c5a309adfe9639ddce18c9c2aa4b0284d98",
+  "updatedAt": "2026-10-27T17:42:56.215Z",
+  "contentHash": "734c41acf848cf2a6687cf503abb627d445f4f44e216bea8763c5b5edd6061fb",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-26T21:55:18.630Z",
+      "updatedAt": "2026-10-27T11:01:59.897Z",
       "keyFacts": 0
     }
   ],
@@ -42,7 +42,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "32",
+          "value": "31",
           "note": "segnalazioni aggiornate: 27 ottobre 2026"
         }
       ],
@@ -192,7 +192,7 @@
               "url": "https://www.aargauverkehr.ch/aktuell/meldungen/wsb-ersatzverkehr-und-bauarbeiten-zwischen-aarau-und-schoeftland"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -264,7 +264,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-27T13:04:04.614Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     },
     "en": {
       "canton": "AG",
@@ -284,7 +284,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "32",
+          "value": "31",
           "note": "reports as of 27 October 2026"
         }
       ],
@@ -434,7 +434,7 @@
               "url": "https://www.aargauverkehr.ch/aktuell/meldungen/wsb-ersatzverkehr-und-bauarbeiten-zwischen-aarau-und-schoeftland"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -506,7 +506,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-27T13:04:04.614Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     },
     "de": {
       "canton": "AG",
@@ -526,7 +526,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "32",
+          "value": "31",
           "note": "Meldungen vom 27. Oktober 2026"
         }
       ],
@@ -676,7 +676,7 @@
               "url": "https://www.aargauverkehr.ch/aktuell/meldungen/wsb-ersatzverkehr-und-bauarbeiten-zwischen-aarau-und-schoeftland"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -748,7 +748,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-27T13:04:04.614Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     },
     "fr": {
       "canton": "AG",
@@ -768,7 +768,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "32",
+          "value": "31",
           "note": "signalements au 27 octobre 2026"
         }
       ],
@@ -918,7 +918,7 @@
               "url": "https://www.aargauverkehr.ch/aktuell/meldungen/wsb-ersatzverkehr-und-bauarbeiten-zwischen-aarau-und-schoeftland"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -990,7 +990,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-27T13:04:04.614Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     }
   }
 }

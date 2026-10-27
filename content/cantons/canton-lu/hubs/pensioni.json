@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "pensioni",
-  "updatedAt": "2026-10-26T17:18:45.341Z",
-  "contentHash": "fa8e7b097e7a0ce7f167d3558b1a6dc3eda869e1e933894e45a6a54f966e12a8",
+  "updatedAt": "2026-10-27T17:42:56.215Z",
+  "contentHash": "ada7601545aaa0d37c8f93b5e613d93cc4d58c57f2825e364d77a56d0544eaab",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-26T11:33:49.792Z",
+      "updatedAt": "2026-10-27T11:01:59.897Z",
       "keyFacts": 0
     }
   ],
@@ -136,6 +136,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Kennzahlen 3. Quartal 2026",
+              "date": "2026-10-27",
+              "url": "https://www.lupk.ch/de/aktuell/kennzahlen-3-quartal-2025-2-2-2"
+            },
+            {
               "label": "LUPK und Kleintheater Luzern unterzeichnen Mietvertrag für den Neubau am Bundesplatz",
               "date": "2026-10-26",
               "url": "https://www.lupk.ch/de/aktuell/lupk-und-kleintheater-luzern-die-lupk-freut-sich-ueber-eine-gemeinsame-zukunft-am-bundesplatz-2"
@@ -159,14 +164,9 @@
               "label": "Kennzahlen 2. Quartal 2026",
               "date": "2026-08-04",
               "url": "https://www.lupk.ch/de/aktuell/kennzahlen-3-quartal-2025-2-2"
-            },
-            {
-              "label": "CO2-Bilanz schafft Transparenz über die betrieblichen Emissionen der LUPK",
-              "date": "2026-07-09",
-              "url": "https://www.lupk.ch/de/aktuell/raphael-zellweger-wird-neuer-leiter-versicherung-der-lupk-2-3"
             }
           ],
-          "updatedAt": "2026-10-26T11:33:49.792Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -208,7 +208,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     },
     "en": {
       "canton": "LU",
@@ -317,6 +317,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Kennzahlen 3. Quartal 2026",
+              "date": "2026-10-27",
+              "url": "https://www.lupk.ch/de/aktuell/kennzahlen-3-quartal-2025-2-2-2"
+            },
+            {
               "label": "LUPK und Kleintheater Luzern unterzeichnen Mietvertrag für den Neubau am Bundesplatz",
               "date": "2026-10-26",
               "url": "https://www.lupk.ch/de/aktuell/lupk-und-kleintheater-luzern-die-lupk-freut-sich-ueber-eine-gemeinsame-zukunft-am-bundesplatz-2"
@@ -340,14 +345,9 @@
               "label": "Kennzahlen 2. Quartal 2026",
               "date": "2026-08-04",
               "url": "https://www.lupk.ch/de/aktuell/kennzahlen-3-quartal-2025-2-2"
-            },
-            {
-              "label": "CO2-Bilanz schafft Transparenz über die betrieblichen Emissionen der LUPK",
-              "date": "2026-07-09",
-              "url": "https://www.lupk.ch/de/aktuell/raphael-zellweger-wird-neuer-leiter-versicherung-der-lupk-2-3"
             }
           ],
-          "updatedAt": "2026-10-26T11:33:49.792Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -389,7 +389,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     },
     "de": {
       "canton": "LU",
@@ -498,6 +498,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Kennzahlen 3. Quartal 2026",
+              "date": "2026-10-27",
+              "url": "https://www.lupk.ch/de/aktuell/kennzahlen-3-quartal-2025-2-2-2"
+            },
+            {
               "label": "LUPK und Kleintheater Luzern unterzeichnen Mietvertrag für den Neubau am Bundesplatz",
               "date": "2026-10-26",
               "url": "https://www.lupk.ch/de/aktuell/lupk-und-kleintheater-luzern-die-lupk-freut-sich-ueber-eine-gemeinsame-zukunft-am-bundesplatz-2"
@@ -521,14 +526,9 @@
               "label": "Kennzahlen 2. Quartal 2026",
               "date": "2026-08-04",
               "url": "https://www.lupk.ch/de/aktuell/kennzahlen-3-quartal-2025-2-2"
-            },
-            {
-              "label": "CO2-Bilanz schafft Transparenz über die betrieblichen Emissionen der LUPK",
-              "date": "2026-07-09",
-              "url": "https://www.lupk.ch/de/aktuell/raphael-zellweger-wird-neuer-leiter-versicherung-der-lupk-2-3"
             }
           ],
-          "updatedAt": "2026-10-26T11:33:49.792Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -570,7 +570,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     },
     "fr": {
       "canton": "LU",
@@ -679,6 +679,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Kennzahlen 3. Quartal 2026",
+              "date": "2026-10-27",
+              "url": "https://www.lupk.ch/de/aktuell/kennzahlen-3-quartal-2025-2-2-2"
+            },
+            {
               "label": "LUPK und Kleintheater Luzern unterzeichnen Mietvertrag für den Neubau am Bundesplatz",
               "date": "2026-10-26",
               "url": "https://www.lupk.ch/de/aktuell/lupk-und-kleintheater-luzern-die-lupk-freut-sich-ueber-eine-gemeinsame-zukunft-am-bundesplatz-2"
@@ -702,14 +707,9 @@
               "label": "Kennzahlen 2. Quartal 2026",
               "date": "2026-08-04",
               "url": "https://www.lupk.ch/de/aktuell/kennzahlen-3-quartal-2025-2-2"
-            },
-            {
-              "label": "CO2-Bilanz schafft Transparenz über die betrieblichen Emissionen der LUPK",
-              "date": "2026-07-09",
-              "url": "https://www.lupk.ch/de/aktuell/raphael-zellweger-wird-neuer-leiter-versicherung-der-lupk-2-3"
             }
           ],
-          "updatedAt": "2026-10-26T11:33:49.792Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -751,7 +751,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-27T13:04:04.614Z",
-  "contentHash": "63f49e2cec6537d2c622d3d58d90c718155e96e2a10de5bb3f6e16e555989a48",
+  "updatedAt": "2026-10-27T17:42:56.215Z",
+  "contentHash": "2c32bc094826d4a5305c034e9897139db438b037fdbf393b1793b047711c487b",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-26T21:55:18.630Z",
+      "updatedAt": "2026-10-27T11:01:59.897Z",
       "keyFacts": 0
     }
   ],
@@ -168,6 +168,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Ofenbergstrasse: Nachtsperrungen vom 2. bis 6. November 2026",
+              "date": "2026-10-27",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026102701.aspx"
+            },
+            {
               "label": "Der neue Bahnhof Chur West geht in Betrieb",
               "date": "2026-10-26",
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/inbetriebnahme-bahnhof-chur-west/"
@@ -191,14 +196,9 @@
               "label": "Malojastrasse: Zeitweise Sperrungen bei Sils Baselgia wegen Felsräumungsarbeiten",
               "date": "2026-09-16",
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026091602.aspx"
-            },
-            {
-              "label": "Calancastrasse: Wiederöffnung ab Mittwochabend mit Einschränkungen",
-              "date": "2026-09-01",
-              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090103.aspx"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -290,7 +290,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-27T13:04:04.614Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     },
     "en": {
       "canton": "GR",
@@ -436,6 +436,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Ofenbergstrasse: Nachtsperrungen vom 2. bis 6. November 2026",
+              "date": "2026-10-27",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026102701.aspx"
+            },
+            {
               "label": "Der neue Bahnhof Chur West geht in Betrieb",
               "date": "2026-10-26",
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/inbetriebnahme-bahnhof-chur-west/"
@@ -459,14 +464,9 @@
               "label": "Malojastrasse: Zeitweise Sperrungen bei Sils Baselgia wegen Felsräumungsarbeiten",
               "date": "2026-09-16",
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026091602.aspx"
-            },
-            {
-              "label": "Calancastrasse: Wiederöffnung ab Mittwochabend mit Einschränkungen",
-              "date": "2026-09-01",
-              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090103.aspx"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -557,7 +557,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-27T13:04:04.614Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     },
     "de": {
       "canton": "GR",
@@ -703,6 +703,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Ofenbergstrasse: Nachtsperrungen vom 2. bis 6. November 2026",
+              "date": "2026-10-27",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026102701.aspx"
+            },
+            {
               "label": "Der neue Bahnhof Chur West geht in Betrieb",
               "date": "2026-10-26",
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/inbetriebnahme-bahnhof-chur-west/"
@@ -726,14 +731,9 @@
               "label": "Malojastrasse: Zeitweise Sperrungen bei Sils Baselgia wegen Felsräumungsarbeiten",
               "date": "2026-09-16",
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026091602.aspx"
-            },
-            {
-              "label": "Calancastrasse: Wiederöffnung ab Mittwochabend mit Einschränkungen",
-              "date": "2026-09-01",
-              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090103.aspx"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -825,7 +825,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-27T13:04:04.614Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     },
     "fr": {
       "canton": "GR",
@@ -971,6 +971,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Ofenbergstrasse: Nachtsperrungen vom 2. bis 6. November 2026",
+              "date": "2026-10-27",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026102701.aspx"
+            },
+            {
               "label": "Der neue Bahnhof Chur West geht in Betrieb",
               "date": "2026-10-26",
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/inbetriebnahme-bahnhof-chur-west/"
@@ -994,14 +999,9 @@
               "label": "Malojastrasse: Zeitweise Sperrungen bei Sils Baselgia wegen Felsräumungsarbeiten",
               "date": "2026-09-16",
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026091602.aspx"
-            },
-            {
-              "label": "Calancastrasse: Wiederöffnung ab Mittwochabend mit Einschränkungen",
-              "date": "2026-09-01",
-              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090103.aspx"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -1093,7 +1093,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-27T13:04:04.614Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "eventi",
-  "updatedAt": "2026-10-27T00:15:17.334Z",
-  "contentHash": "b5744e396e7bee3c7f5a663217c5d54c0c34eee45e80da3b6784622cfb0508d1",
+  "updatedAt": "2026-10-27T17:42:56.215Z",
+  "contentHash": "3f46f8eb7b384618e41eb5c640ed3ed3392fa9a2586ce44f9313801344aac2cc",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-26T18:30:43.613Z",
+      "updatedAt": "2026-10-27T12:41:15.477Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "78",
+          "value": "79",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,6 +32,12 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
+            {
+              "label": "«Der Fuchs – Meister der Anpassung»",
+              "detail": "St. Gallen",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/der-fuchs-meister-der-anpassung/"
+            },
             {
               "label": "GEROLD SPÄTH - Ein Gespräch zu den Künstlerbüchern",
               "detail": "Rapperswil-Jona",
@@ -85,17 +91,11 @@
               "detail": "Naturmuseum St. Gallen, St. Gallen",
               "date": "2026-10-28",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/st-gallen/abend-vortrag-begegnungen-mit-dem-fuchs_A9aWPiY"
-            },
-            {
-              "label": "FRANK RICHTER - #LOVEMYJOB",
-              "detail": "Grabenhalle",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/populaer/st-gallen/frank-richter-lovemyjob_AAwcK2f"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/san-gallo/",
-          "updatedAt": "2026-10-26T18:30:43.613Z"
+          "updatedAt": "2026-10-27T12:41:15.477Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/san-gallo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     },
     "en": {
       "canton": "SG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "78",
+          "value": "79",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,6 +137,12 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
+            {
+              "label": "«Der Fuchs – Meister der Anpassung»",
+              "detail": "St. Gallen",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/der-fuchs-meister-der-anpassung/"
+            },
             {
               "label": "GEROLD SPÄTH - Ein Gespräch zu den Künstlerbüchern",
               "detail": "Rapperswil-Jona",
@@ -190,17 +196,11 @@
               "detail": "Naturmuseum St. Gallen, St. Gallen",
               "date": "2026-10-28",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/st-gallen/abend-vortrag-begegnungen-mit-dem-fuchs_A9aWPiY"
-            },
-            {
-              "label": "FRANK RICHTER - #LOVEMYJOB",
-              "detail": "Grabenhalle",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/populaer/st-gallen/frank-richter-lovemyjob_AAwcK2f"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/st-gallen/",
-          "updatedAt": "2026-10-26T18:30:43.613Z"
+          "updatedAt": "2026-10-27T12:41:15.477Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/st-gallen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     },
     "de": {
       "canton": "SG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "78",
+          "value": "79",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,6 +242,12 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
+            {
+              "label": "«Der Fuchs – Meister der Anpassung»",
+              "detail": "St. Gallen",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/der-fuchs-meister-der-anpassung/"
+            },
             {
               "label": "GEROLD SPÄTH - Ein Gespräch zu den Künstlerbüchern",
               "detail": "Rapperswil-Jona",
@@ -295,17 +301,11 @@
               "detail": "Naturmuseum St. Gallen, St. Gallen",
               "date": "2026-10-28",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/st-gallen/abend-vortrag-begegnungen-mit-dem-fuchs_A9aWPiY"
-            },
-            {
-              "label": "FRANK RICHTER - #LOVEMYJOB",
-              "detail": "Grabenhalle",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/populaer/st-gallen/frank-richter-lovemyjob_AAwcK2f"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/st-gallen/",
-          "updatedAt": "2026-10-26T18:30:43.613Z"
+          "updatedAt": "2026-10-27T12:41:15.477Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/st-gallen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     },
     "fr": {
       "canton": "SG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "78",
+          "value": "79",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,6 +347,12 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
+            {
+              "label": "«Der Fuchs – Meister der Anpassung»",
+              "detail": "St. Gallen",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/der-fuchs-meister-der-anpassung/"
+            },
             {
               "label": "GEROLD SPÄTH - Ein Gespräch zu den Künstlerbüchern",
               "detail": "Rapperswil-Jona",
@@ -400,17 +406,11 @@
               "detail": "Naturmuseum St. Gallen, St. Gallen",
               "date": "2026-10-28",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/st-gallen/abend-vortrag-begegnungen-mit-dem-fuchs_A9aWPiY"
-            },
-            {
-              "label": "FRANK RICHTER - #LOVEMYJOB",
-              "detail": "Grabenhalle",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/populaer/st-gallen/frank-richter-lovemyjob_AAwcK2f"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/saint-gall/",
-          "updatedAt": "2026-10-26T18:30:43.613Z"
+          "updatedAt": "2026-10-27T12:41:15.477Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/saint-gall/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     }
   }
 }

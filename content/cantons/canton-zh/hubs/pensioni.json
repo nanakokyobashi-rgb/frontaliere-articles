@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "pensioni",
-  "updatedAt": "2026-10-17T00:12:19.402Z",
-  "contentHash": "0c0e0b5c29b7136c7687b3c1ef7b437ce63ccc0e9ef2a191e52bc2cdc7948f65",
+  "updatedAt": "2026-10-27T17:42:56.215Z",
+  "contentHash": "2d53d83b0383e5fbd2100cc2ca3c58306b51ed53c15d7423e5e8f7f26f0c0a34",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-16T15:35:32.859Z",
+      "updatedAt": "2026-10-27T11:01:59.897Z",
       "keyFacts": 0
     }
   ],
@@ -136,6 +136,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "EO für Zivilschutz wird digital",
+              "date": "2026-10-27",
+              "url": "https://svazurich.ch/aktuell/aktuell/news/neuerungen/eo-fuer-zivilschutz-wird-digital.html"
+            },
+            {
               "label": "Luxusmarken leben von Leidenden. Im Dialog mit Modefirmen.…",
               "date": "2026-09-24",
               "url": "https://bvk.ch/de/bvk-aktuell/detail/luxusmarken-leben-von-leidenden"
@@ -159,14 +164,9 @@
               "label": "Alle Infos für Nichterwerbstätige auf einen Blick",
               "date": "2026-08-17",
               "url": "https://svazurich.ch/aktuell/aktuell/news/kurzinfo/alle-infos-fuer-nichterwerbstaetige-auf-einen-blick.html"
-            },
-            {
-              "label": "Nachhaltigkeit Down Under",
-              "date": "2026-08-12",
-              "url": "https://bvk.ch/de/bvk-aktuell/detail/sonnige-aussichten-in-down-under"
             }
           ],
-          "updatedAt": "2026-10-16T15:35:32.859Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -238,7 +238,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     },
     "en": {
       "canton": "ZH",
@@ -347,6 +347,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "EO für Zivilschutz wird digital",
+              "date": "2026-10-27",
+              "url": "https://svazurich.ch/aktuell/aktuell/news/neuerungen/eo-fuer-zivilschutz-wird-digital.html"
+            },
+            {
               "label": "Luxusmarken leben von Leidenden. Im Dialog mit Modefirmen.…",
               "date": "2026-09-24",
               "url": "https://bvk.ch/de/bvk-aktuell/detail/luxusmarken-leben-von-leidenden"
@@ -370,14 +375,9 @@
               "label": "Alle Infos für Nichterwerbstätige auf einen Blick",
               "date": "2026-08-17",
               "url": "https://svazurich.ch/aktuell/aktuell/news/kurzinfo/alle-infos-fuer-nichterwerbstaetige-auf-einen-blick.html"
-            },
-            {
-              "label": "Nachhaltigkeit Down Under",
-              "date": "2026-08-12",
-              "url": "https://bvk.ch/de/bvk-aktuell/detail/sonnige-aussichten-in-down-under"
             }
           ],
-          "updatedAt": "2026-10-16T15:35:32.859Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -449,7 +449,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     },
     "de": {
       "canton": "ZH",
@@ -558,6 +558,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "EO für Zivilschutz wird digital",
+              "date": "2026-10-27",
+              "url": "https://svazurich.ch/aktuell/aktuell/news/neuerungen/eo-fuer-zivilschutz-wird-digital.html"
+            },
+            {
               "label": "Luxusmarken leben von Leidenden. Im Dialog mit Modefirmen.…",
               "date": "2026-09-24",
               "url": "https://bvk.ch/de/bvk-aktuell/detail/luxusmarken-leben-von-leidenden"
@@ -581,14 +586,9 @@
               "label": "Alle Infos für Nichterwerbstätige auf einen Blick",
               "date": "2026-08-17",
               "url": "https://svazurich.ch/aktuell/aktuell/news/kurzinfo/alle-infos-fuer-nichterwerbstaetige-auf-einen-blick.html"
-            },
-            {
-              "label": "Nachhaltigkeit Down Under",
-              "date": "2026-08-12",
-              "url": "https://bvk.ch/de/bvk-aktuell/detail/sonnige-aussichten-in-down-under"
             }
           ],
-          "updatedAt": "2026-10-16T15:35:32.859Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -660,7 +660,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     },
     "fr": {
       "canton": "ZH",
@@ -769,6 +769,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "EO für Zivilschutz wird digital",
+              "date": "2026-10-27",
+              "url": "https://svazurich.ch/aktuell/aktuell/news/neuerungen/eo-fuer-zivilschutz-wird-digital.html"
+            },
+            {
               "label": "Luxusmarken leben von Leidenden. Im Dialog mit Modefirmen.…",
               "date": "2026-09-24",
               "url": "https://bvk.ch/de/bvk-aktuell/detail/luxusmarken-leben-von-leidenden"
@@ -792,14 +797,9 @@
               "label": "Alle Infos für Nichterwerbstätige auf einen Blick",
               "date": "2026-08-17",
               "url": "https://svazurich.ch/aktuell/aktuell/news/kurzinfo/alle-infos-fuer-nichterwerbstaetige-auf-einen-blick.html"
-            },
-            {
-              "label": "Nachhaltigkeit Down Under",
-              "date": "2026-08-12",
-              "url": "https://bvk.ch/de/bvk-aktuell/detail/sonnige-aussichten-in-down-under"
             }
           ],
-          "updatedAt": "2026-10-16T15:35:32.859Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -871,7 +871,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-17T00:12:19.402Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     }
   }
 }

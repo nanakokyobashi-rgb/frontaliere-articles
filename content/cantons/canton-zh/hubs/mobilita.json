@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "mobilita",
-  "updatedAt": "2026-10-27T13:04:04.614Z",
-  "contentHash": "a0459bde9911ca560b4bc22ea9b446d0b8a0ee4d9da88ee22311a4c593c1b291",
+  "updatedAt": "2026-10-27T17:42:56.215Z",
+  "contentHash": "45d0a7e53a4e92db5122598c93468bfaa7904ce34de61e5f927c8abe63eee537",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-26T21:55:18.630Z",
+      "updatedAt": "2026-10-27T11:01:59.897Z",
       "keyFacts": 0
     }
   ],
@@ -168,6 +168,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "A1 / Brüttisellen: Stauumfahrer gebüsst",
+              "date": "2026-10-27",
+              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/10/261027f_a1_bruettisellen_rastplatz.html"
+            },
+            {
               "label": "Sanierung von Strassen und Leitungen auf dem Werkareal der Abwasserreinigungsanlage",
               "date": "2026-10-21T10:00:00.000Z",
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/10/sanierung-von-strassen-und-leitungen-auf-dem-werkareal-der-abwasserreinigungsanlage.html"
@@ -191,14 +196,9 @@
               "label": "Stadtrat ist befremdet über Entscheid des Regierungsrats zur Rosengartenstrasse",
               "date": "2026-10-01T09:00:00.000Z",
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/10/stadtrat-befremdet-ueber-entscheid-des-regierungsrats-zur-rosengartenstrasse.html"
-            },
-            {
-              "label": "Aufwendigere Teilinstandsetzung des WOKO-Wohnheims Tannenrauchstrasse 35",
-              "date": "2026-09-30T10:00:00.000Z",
-              "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/09/aufwendigere-teilinstandsetzung-woko-wohnheim-tannenrauchstrasse-35.html"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -282,7 +282,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-27T13:04:04.614Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     },
     "en": {
       "canton": "ZH",
@@ -428,6 +428,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "A1 / Brüttisellen: Stauumfahrer gebüsst",
+              "date": "2026-10-27",
+              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/10/261027f_a1_bruettisellen_rastplatz.html"
+            },
+            {
               "label": "Sanierung von Strassen und Leitungen auf dem Werkareal der Abwasserreinigungsanlage",
               "date": "2026-10-21T10:00:00.000Z",
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/10/sanierung-von-strassen-und-leitungen-auf-dem-werkareal-der-abwasserreinigungsanlage.html"
@@ -451,14 +456,9 @@
               "label": "Stadtrat ist befremdet über Entscheid des Regierungsrats zur Rosengartenstrasse",
               "date": "2026-10-01T09:00:00.000Z",
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/10/stadtrat-befremdet-ueber-entscheid-des-regierungsrats-zur-rosengartenstrasse.html"
-            },
-            {
-              "label": "Aufwendigere Teilinstandsetzung des WOKO-Wohnheims Tannenrauchstrasse 35",
-              "date": "2026-09-30T10:00:00.000Z",
-              "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/09/aufwendigere-teilinstandsetzung-woko-wohnheim-tannenrauchstrasse-35.html"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -542,7 +542,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-27T13:04:04.614Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     },
     "de": {
       "canton": "ZH",
@@ -688,6 +688,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "A1 / Brüttisellen: Stauumfahrer gebüsst",
+              "date": "2026-10-27",
+              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/10/261027f_a1_bruettisellen_rastplatz.html"
+            },
+            {
               "label": "Sanierung von Strassen und Leitungen auf dem Werkareal der Abwasserreinigungsanlage",
               "date": "2026-10-21T10:00:00.000Z",
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/10/sanierung-von-strassen-und-leitungen-auf-dem-werkareal-der-abwasserreinigungsanlage.html"
@@ -711,14 +716,9 @@
               "label": "Stadtrat ist befremdet über Entscheid des Regierungsrats zur Rosengartenstrasse",
               "date": "2026-10-01T09:00:00.000Z",
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/10/stadtrat-befremdet-ueber-entscheid-des-regierungsrats-zur-rosengartenstrasse.html"
-            },
-            {
-              "label": "Aufwendigere Teilinstandsetzung des WOKO-Wohnheims Tannenrauchstrasse 35",
-              "date": "2026-09-30T10:00:00.000Z",
-              "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/09/aufwendigere-teilinstandsetzung-woko-wohnheim-tannenrauchstrasse-35.html"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -802,7 +802,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-27T13:04:04.614Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     },
     "fr": {
       "canton": "ZH",
@@ -948,6 +948,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "A1 / Brüttisellen: Stauumfahrer gebüsst",
+              "date": "2026-10-27",
+              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/10/261027f_a1_bruettisellen_rastplatz.html"
+            },
+            {
               "label": "Sanierung von Strassen und Leitungen auf dem Werkareal der Abwasserreinigungsanlage",
               "date": "2026-10-21T10:00:00.000Z",
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/10/sanierung-von-strassen-und-leitungen-auf-dem-werkareal-der-abwasserreinigungsanlage.html"
@@ -971,14 +976,9 @@
               "label": "Stadtrat ist befremdet über Entscheid des Regierungsrats zur Rosengartenstrasse",
               "date": "2026-10-01T09:00:00.000Z",
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/10/stadtrat-befremdet-ueber-entscheid-des-regierungsrats-zur-rosengartenstrasse.html"
-            },
-            {
-              "label": "Aufwendigere Teilinstandsetzung des WOKO-Wohnheims Tannenrauchstrasse 35",
-              "date": "2026-09-30T10:00:00.000Z",
-              "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/09/aufwendigere-teilinstandsetzung-woko-wohnheim-tannenrauchstrasse-35.html"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -1062,7 +1062,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-27T13:04:04.614Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     }
   }
 }

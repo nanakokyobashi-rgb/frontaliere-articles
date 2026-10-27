@@ -4,12 +4,12 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "eventi",
-  "updatedAt": "2026-10-27T00:15:17.334Z",
-  "contentHash": "05347e0c1d1ae41aeb454b02e3809929d65bd14ecf740a17f3d8f64d3db12f48",
+  "updatedAt": "2026-10-27T17:42:56.215Z",
+  "contentHash": "53b0ee83695b547472788edc147aab3255285f5d64626e6d16732d26d18d95ca",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-26T18:30:43.613Z",
+      "updatedAt": "2026-10-27T12:41:15.477Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "60",
+          "value": "61",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,6 +37,12 @@
               "detail": "Médiathèque Valais, Saint-Maurice",
               "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/cafe-litteraire-5/"
+            },
+            {
+              "label": "Workshop: Chocolat Matterhorn Praline",
+              "detail": "Zermatt — in corso, ultimo giorno: 30 ottobre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-chocolat-matterhorn-praline/"
             },
             {
               "label": "Es ist dies beinahe Unsichtbare",
@@ -85,17 +91,11 @@
               "detail": "Inden — in corso, ultimo giorno: 29 ottobre 2026",
               "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/vinyard-hikes-in-autumn/"
-            },
-            {
-              "label": "Guihome",
-              "detail": "Conthey",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/guihome-1/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vallese/",
-          "updatedAt": "2026-10-26T18:30:43.613Z"
+          "updatedAt": "2026-10-27T12:41:15.477Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/vallese/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     },
     "en": {
       "canton": "VS",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "60",
+          "value": "61",
           "note": "from the site’s events calendar"
         }
       ],
@@ -142,6 +142,12 @@
               "detail": "Médiathèque Valais, Saint-Maurice",
               "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/cafe-litteraire-5/"
+            },
+            {
+              "label": "Workshop: Chocolat Matterhorn Praline",
+              "detail": "Zermatt — ongoing, last day: 30 October 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-chocolat-matterhorn-praline/"
             },
             {
               "label": "It is these days that are unavailable",
@@ -190,17 +196,11 @@
               "detail": "Inden — ongoing, last day: 29 October 2026",
               "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/vinyard-hikes-in-autumn/"
-            },
-            {
-              "label": "Guihome",
-              "detail": "Conthey",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/guihome-1/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/valais/",
-          "updatedAt": "2026-10-26T18:30:43.613Z"
+          "updatedAt": "2026-10-27T12:41:15.477Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/valais/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     },
     "de": {
       "canton": "VS",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "60",
+          "value": "61",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -247,6 +247,12 @@
               "detail": "Médiathèque Valais, Saint-Maurice",
               "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/cafe-litteraire-5/"
+            },
+            {
+              "label": "Workshop: Chocolat Matterhörnli® Praline",
+              "detail": "Zermatt — läuft, letzter Tag: 30. Oktober 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-chocolat-matterhorn-praline/"
             },
             {
               "label": "Es ist die beinahe Unsichtbare",
@@ -295,17 +301,11 @@
               "detail": "Inden — läuft, letzter Tag: 29. Oktober 2026",
               "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/vinyard-hikes-in-autumn/"
-            },
-            {
-              "label": "Guihome",
-              "detail": "Conthey",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/guihome-1/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/wallis/",
-          "updatedAt": "2026-10-26T18:30:43.613Z"
+          "updatedAt": "2026-10-27T12:41:15.477Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/wallis/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     },
     "fr": {
       "canton": "VS",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "60",
+          "value": "61",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -352,6 +352,12 @@
               "detail": "Médiathèque Valais, Saint-Maurice",
               "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/cafe-litteraire-5/"
+            },
+            {
+              "label": "Atelier : Praline Chocolat Matterhorn",
+              "detail": "Zermatt — en cours, dernier jour : 30 octobre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-chocolat-matterhorn-praline/"
             },
             {
               "label": "Es is dies beinahe Unsichtbare",
@@ -400,17 +406,11 @@
               "detail": "Inden — en cours, dernier jour : 29 octobre 2026",
               "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/vinyard-hikes-in-autumn/"
-            },
-            {
-              "label": "Guihome",
-              "detail": "Conthey",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/guihome-1/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/valais/",
-          "updatedAt": "2026-10-26T18:30:43.613Z"
+          "updatedAt": "2026-10-27T12:41:15.477Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/valais/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     }
   }
 }
