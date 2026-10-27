@@ -24,6 +24,9 @@ const blogMetaCantonSzIt: Record<string, string> = {
     'blog.article.kantonsrat-biberbrugg-chaltenboden.title': 'Kantonsrat: sì a 36 milioni tra Biberbrugg e Chaltenboden',
     'blog.article.kantonsrat-biberbrugg-chaltenboden.excerpt': 'Il Kantonsrat approva 64-28 la spesa di 36 milioni per la mobilità lenta tra Biberbrugg e Chaltenboden.',
     'blog.article.kantonsrat-biberbrugg-chaltenboden.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.pfaeffikon-apero-imprese.title': 'Pfäffikon: aperitivo per imprese, 93 ospiti alla KSA',
+    'blog.article.pfaeffikon-apero-imprese.excerpt': 'La Wirtschaftsförderung Höfe ha riunito 93 ospiti alla KSA di Pfäffikon: l\'incontro punta su scambio, cooperazione e contatti tra imprese.',
+    'blog.article.pfaeffikon-apero-imprese.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSzIt;

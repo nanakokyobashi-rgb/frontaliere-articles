@@ -275,6 +275,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-pfaeffikon-apero-imprese': {
+    title: 'Pfäffikon: aperitivo per imprese, 93 ospiti alla KSA',
+    description: 'La Wirtschaftsförderung Höfe ha riunito 93 ospiti alla KSA di Pfäffikon: l\'incontro punta su scambio, cooperazione e contatti tra imprese.',
+    keywords: 'frontalieri, ticino, svizzera, italia, pfäffikon, aperitivo, imprese, ospiti',
+    ogTitle: 'Pfäffikon: 93 ospiti all\'aperitivo per imprese',
+    ogDescription: 'La Wirtschaftsförderung Höfe ha riunito 93 ospiti alla Kantonsschule Ausserschwyz di Pfäffikon. Il Neuzuzüger-Apéro è descritto come un incontro per favorire conoscenza reciproca, scambio, cooperazione e opportunità comuni tra imprese.',
+    canonicalPath: '/articoli-svitto/pfaeffikon-apero-imprese/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Pfäffikon: aperitivo per imprese, 93 ospiti alla KSA",
+      "description": "La Wirtschaftsförderung Höfe ha riunito 93 ospiti alla KSA di Pfäffikon: l'incontro punta su scambio, cooperazione e contatti tra imprese.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-pfaeffikon-apero-imprese.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-27T01:42:11+00:00",
+      "dateModified": "2026-10-27T01:42:11+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svitto/pfaeffikon-apero-imprese/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

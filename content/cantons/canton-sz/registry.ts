@@ -83,4 +83,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'pfaeffikon-apero-imprese',
+ category: 'novita',
+ date: '2026-10-27T01:42:11.869Z',
+ image: '/images/blog/article-pfaeffikon-apero-imprese.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SZ', 'ZH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
