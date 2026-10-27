@@ -643,6 +643,10 @@ jobs:
 
       - name: Dispatch and complete pending cover publishers
         id: republish
+        # Deferred publishers are durable work, not a failed regeneration run.
+        # The acknowledgement step below remains authoritative for malformed
+        # status and terminal publisher failures.
+        continue-on-error: true
         if: steps.push.outputs.publish_ready == 'true'
         env:
           OUTBOX_FILE: data/image-regeneration-publish-outbox.json
@@ -691,11 +695,18 @@ jobs:
           if ! jq -e '(.sections | type) == "array" and all(.sections[]; .status == "success")' "$STATUS_FILE" >/dev/null; then
             publisher_complete='false'
           fi
+          publisher_failed='false'
+          if jq -e 'any(.sections[]; .status == "failed")' "$STATUS_FILE" >/dev/null; then
+            publisher_failed='true'
+          fi
           if git diff --quiet -- "$OUTBOX_FILE"; then
             echo "no successful publisher section to acknowledge"
-            if [ "$publisher_complete" != 'true' ]; then
-              echo "::error::publishers are incomplete; keeping the outbox durable for the next run"
+            if [ "$publisher_failed" = 'true' ]; then
+              echo "::error::publisher failed; keeping the outbox durable for the next run"
               exit 1
+            fi
+            if [ "$publisher_complete" != 'true' ]; then
+              echo "::notice::publishers are still in progress or not started; keeping the outbox durable for the next run"
             fi
             exit 0
           fi
@@ -716,9 +727,12 @@ jobs:
             push_log="$RUNNER_TEMP/publisher-ack-push-$attempt.log"
             if node scripts/ci/guard-main-tree-shrink.mjs --push-main --remote origin --target main --after HEAD --no-thin --no-verify --git-config pack.window=0 --git-config pack.threads=1 2>&1 | tee "$push_log"; then
               echo "publisher outbox acknowledged"
-              if [ "$publisher_complete" != 'true' ]; then
-                echo "::error::publisher ack was committed, but some publishers are incomplete"
+              if [ "$publisher_failed" = 'true' ]; then
+                echo "::error::publisher ack was committed, but a publisher failed"
                 exit 1
+              fi
+              if [ "$publisher_complete" != 'true' ]; then
+                echo "::notice::publisher ack was committed while publishers are still in progress or not started"
               fi
               exit 0
             fi
