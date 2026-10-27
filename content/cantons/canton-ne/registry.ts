@@ -193,4 +193,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'abitazioni-svizzere-rincaro-settembre',
+ category: 'novita',
+ date: '2026-10-27T12:37:22.077Z',
+ image: '/images/blog/article-abitazioni-svizzere-rincaro-settembre.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['NE'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

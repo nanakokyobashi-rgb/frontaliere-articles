@@ -54,6 +54,9 @@ const blogMetaCantonNeIt: Record<string, string> = {
     'blog.article.successo-abbonamenti-trasporti-ridotti.title': 'Successo abbonamenti trasporto pubblico a prezzo ridotto',
     'blog.article.successo-abbonamenti-trasporti-ridotti.excerpt': '66% di sconto agli under 25 dal 1° luglio 2026 Oltre 15\'000 buoni di riduzione già utilizzati Quasi 2\'300 abbonamenti annuali in più in luglio-settembre Secondo',
     'blog.article.successo-abbonamenti-trasporti-ridotti.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.abitazioni-svizzere-rincaro-settembre.title': 'Prezzi delle abitazioni in Svizzera: +1,7% nel trimestre',
+    'blog.article.abitazioni-svizzere-rincaro-settembre.excerpt': 'Nel terzo trimestre i prezzi residenziali svizzeri sono saliti dell\'1,7% sul trimestre e del 4,4% su base annua, secondo l\'OFS.',
+    'blog.article.abitazioni-svizzere-rincaro-settembre.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonNeIt;
