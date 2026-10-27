@@ -465,6 +465,93 @@ export const ALLOW_EMPTY_RC_KEYS = new Set([
 ]);
 
 /**
+ * Instagram Insights is consumed outside this repository, so the bridge is
+ * the fail-closed boundary for its optional controls.  For every control,
+ * both an absent RC parameter and a present-but-empty value mean that there
+ * is no usable configuration: neither value is exported and the consumer
+ * must keep autonomous decisions disabled.  The `emptyMeaning` field makes
+ * the safe interpretation explicit per control without parsing the
+ * non-empty serialization owned by the downstream consumer.
+ */
+const INSTAGRAM_INSIGHTS_VALUE_POLICIES = Object.freeze({
+  SOCIAL_ROBOT_INSIGHTS_SOURCE: Object.freeze({
+    absent: 'fail-closed',
+    empty: 'fail-closed',
+    emptyMeaning: 'disabled-source',
+  }),
+  INSTAGRAM_INSIGHTS_WINDOWS: Object.freeze({
+    absent: 'fail-closed',
+    empty: 'fail-closed',
+    emptyMeaning: 'no-windows',
+  }),
+  INSTAGRAM_INSIGHTS_DECISION_WINDOW_HOURS: Object.freeze({
+    absent: 'fail-closed',
+    empty: 'fail-closed',
+    emptyMeaning: 'disabled-window',
+  }),
+  INSTAGRAM_INSIGHTS_AUTONOMOUS_DECISIONS_ENABLED: Object.freeze({
+    absent: 'fail-closed',
+    empty: 'fail-closed',
+    emptyMeaning: 'disabled',
+  }),
+  INSTAGRAM_INSIGHTS_MIN_OBSERVATIONS: Object.freeze({
+    absent: 'fail-closed',
+    empty: 'fail-closed',
+    emptyMeaning: 'disabled-observation-gate',
+  }),
+  INSTAGRAM_INSIGHTS_MIN_RELATIVE_LIFT: Object.freeze({
+    absent: 'fail-closed',
+    empty: 'fail-closed',
+    emptyMeaning: 'disabled-relative-lift-gate',
+  }),
+  INSTAGRAM_INSIGHTS_MIN_ABSOLUTE_LIFT: Object.freeze({
+    absent: 'fail-closed',
+    empty: 'fail-closed',
+    emptyMeaning: 'disabled-absolute-lift-gate',
+  }),
+  INSTAGRAM_AUTONOMOUS_EXPLORATION_PERCENT: Object.freeze({
+    absent: 'fail-closed',
+    empty: 'fail-closed',
+    emptyMeaning: 'zero-exploration',
+  }),
+  INSTAGRAM_AUTONOMOUS_CREATIVE_WINNERS: Object.freeze({
+    absent: 'fail-closed',
+    empty: 'fail-closed',
+    emptyMeaning: 'empty-winner-set',
+  }),
+  INSTAGRAM_CAROUSEL_BACKGROUND_AB_ENABLED: Object.freeze({
+    absent: 'fail-closed',
+    empty: 'fail-closed',
+    emptyMeaning: 'disabled',
+  }),
+  INSTAGRAM_CAROUSEL_BACKGROUND_AB_ROLLOUT_PERCENT: Object.freeze({
+    absent: 'fail-closed',
+    empty: 'fail-closed',
+    emptyMeaning: 'zero-rollout',
+  }),
+  INSTAGRAM_CAROUSEL_BACKGROUND_AB_VARIANTS: Object.freeze({
+    absent: 'fail-closed',
+    empty: 'fail-closed',
+    emptyMeaning: 'empty-variant-set',
+  }),
+  INSTAGRAM_CAROUSEL_BACKGROUND_AB_EXPLORATION_PERCENT: Object.freeze({
+    absent: 'fail-closed',
+    empty: 'fail-closed',
+    emptyMeaning: 'zero-exploration',
+  }),
+  INSTAGRAM_CAROUSEL_BACKGROUND_AB_WINNERS: Object.freeze({
+    absent: 'fail-closed',
+    empty: 'fail-closed',
+    emptyMeaning: 'empty-winner-set',
+  }),
+});
+
+/** Return the explicit empty/absence contract for an Insights RC key. */
+export function instagramInsightsValuePolicy(rcKey) {
+  return INSTAGRAM_INSIGHTS_VALUE_POLICIES[rcKey] ?? null;
+}
+
+/**
  * RC parameters whose absence is the documented default. They remain mapped
  * so adding the parameter later needs no code change, but an unset optional
  * switch must not drown a real configuration drift in the warning list.
@@ -480,20 +567,7 @@ export const EXPECTED_ABSENT_RC_KEYS = new Set([
   'INSTAGRAM_USERNAME',
   'INSTAGRAM_BUSINESS_ACCOUNT_ID',
   'SERVER_INSTAGRAM_ACCESS_TOKEN',
-  'INSTAGRAM_CAROUSEL_BACKGROUND_AB_ENABLED',
-  'INSTAGRAM_CAROUSEL_BACKGROUND_AB_ROLLOUT_PERCENT',
-  'INSTAGRAM_CAROUSEL_BACKGROUND_AB_VARIANTS',
-  'SOCIAL_ROBOT_INSIGHTS_SOURCE',
-  'INSTAGRAM_INSIGHTS_WINDOWS',
-  'INSTAGRAM_INSIGHTS_DECISION_WINDOW_HOURS',
-  'INSTAGRAM_INSIGHTS_AUTONOMOUS_DECISIONS_ENABLED',
-  'INSTAGRAM_INSIGHTS_MIN_OBSERVATIONS',
-  'INSTAGRAM_INSIGHTS_MIN_RELATIVE_LIFT',
-  'INSTAGRAM_INSIGHTS_MIN_ABSOLUTE_LIFT',
-  'INSTAGRAM_AUTONOMOUS_EXPLORATION_PERCENT',
-  'INSTAGRAM_AUTONOMOUS_CREATIVE_WINNERS',
-  'INSTAGRAM_CAROUSEL_BACKGROUND_AB_EXPLORATION_PERCENT',
-  'INSTAGRAM_CAROUSEL_BACKGROUND_AB_WINNERS',
+  ...Object.keys(INSTAGRAM_INSIGHTS_VALUE_POLICIES),
   'TIKTOK_USERNAME',
   'SERVER_TIKTOK_CLIENT_KEY',
   'SERVER_TIKTOK_CLIENT_SECRET',
@@ -519,6 +593,11 @@ export const EXPECTED_ABSENT_RC_KEYS = new Set([
 ]);
 
 export function rcValueState(value, rcKey) {
+  const instagramPolicy = instagramInsightsValuePolicy(rcKey);
+  if (instagramPolicy) {
+    if (value === null || value === undefined) return 'expected-absent';
+    if (value === '' && instagramPolicy.empty === 'fail-closed') return 'expected-absent';
+  }
   if (value === null || value === undefined) {
     return EXPECTED_ABSENT_RC_KEYS.has(rcKey) ? 'expected-absent' : 'missing';
   }
