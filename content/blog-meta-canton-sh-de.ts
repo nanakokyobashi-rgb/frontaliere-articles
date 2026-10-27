@@ -75,6 +75,9 @@ const blogMetaCantonShDe: Record<string, string> = {
     'blog.article.pil-cantonale-2026-crescita.title': 'Kantonales BIP 2026 bei erwarteten 0,96% gegenüber 0,8% in der Schweiz',
     'blog.article.pil-cantonale-2026-crescita.excerpt': 'Für 2026 erwartetes kantonales BIP: 0,96% gegenüber 0,8% in der Schweiz Export unter Druck aufgrund von Spannungen, Energiepreisen, Zöllen und dem starken',
     'blog.article.pil-cantonale-2026-crescita.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.schaffhausen-modello-scolastico-inclusivo.title': 'Schaffhausen übernimmt integratives Schulmodell mit PGA',
+    'blog.article.schaffhausen-modello-scolastico-inclusivo.excerpt': 'Entscheid vom 22.',
+    'blog.article.schaffhausen-modello-scolastico-inclusivo.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonShDe;

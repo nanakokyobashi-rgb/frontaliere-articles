@@ -27,6 +27,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'mobilit-elettrica-sciaffusa-20': { it: 'mobilit-elettrica-sciaffusa-20', en: 'electric-mobility-schaffhausen-20', de: 'elektromobilitaet-schaffhausen-20', fr: 'mobilites-electrique-sciaffhouse-20' },
  'sp-no-legge-ospedale': { it: 'sp-no-legge-ospedale', en: 'schaffhausen-sp-hospital-law-no', de: 'sp-nein-spitalgesetz-schaffhausen', fr: 'ps-non-loi-hopital-schaffhouse' },
  'pil-cantonale-2026-crescita': { it: 'pil-cantonale-2026-crescita', en: 'cantonal-pil-2026-growth', de: 'kantonaler-pil-2026-wachstum', fr: 'pil-canton-2026-croissance' },
+ 'schaffhausen-modello-scolastico-inclusivo': { it: 'schaffhausen-modello-scolastico-inclusivo', en: 'schaffhausen-inclusive-school-model', de: 'schaffhausen-schulmodell-inklusiv', fr: 'schaffhouse-modele-scolaire-inclusif' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

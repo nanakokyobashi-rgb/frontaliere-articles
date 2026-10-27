@@ -270,4 +270,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'schaffhausen-modello-scolastico-inclusivo',
+ category: 'novita',
+ date: '2026-10-27T13:12:22.684Z',
+ image: '/images/blog/article-schaffhausen-modello-scolastico-inclusivo.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

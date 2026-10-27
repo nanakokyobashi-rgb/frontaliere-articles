@@ -943,6 +943,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-schaffhausen-modello-scolastico-inclusivo': {
+    title: 'Sciaffusa adotta modello scolastico inclusivo con PGA',
+    description: 'Sciaffusa passa a un sistema scolastico inclusivo dal 22 gennaio 2026. PGA prevede tetto annuale CHF 3M e credito una tantum CHF 270\'000.',
+    keywords: 'frontalieri, ticino, svizzera, italia, sciaffusa, adotta, modello, scolastico',
+    ogTitle: 'Sciaffusa: modello scolastico inclusivo con PGA',
+    ogDescription: 'Lo Stadtschulrat di Sciaffusa ha deciso il passaggio a un sistema scolastico inclusivo il 22 gennaio 2026. Il PGA stabilisce un tetto annuale massimo di CHF 3 milioni e un credito una tantum di CHF 270\'000.',
+    canonicalPath: '/articoli-sciaffusa/schaffhausen-modello-scolastico-inclusivo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Sciaffusa adotta modello scolastico inclusivo con PGA",
+      "description": "Sciaffusa passa a un sistema scolastico inclusivo dal 22 gennaio 2026. PGA prevede tetto annuale CHF 3M e credito una tantum CHF 270'000.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-schaffhausen-modello-scolastico-inclusivo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-27T13:12:22+00:00",
+      "dateModified": "2026-10-27T13:12:22+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-sciaffusa/schaffhausen-modello-scolastico-inclusivo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

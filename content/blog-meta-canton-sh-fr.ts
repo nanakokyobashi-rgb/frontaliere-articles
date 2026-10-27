@@ -75,6 +75,9 @@ const blogMetaCantonShFr: Record<string, string> = {
     'blog.article.pil-cantonale-2026-crescita.title': 'PIB cantonal 2026 attendu à 0,96% contre 0,8% suisse',
     'blog.article.pil-cantonale-2026-crescita.excerpt': 'PIB cantonal attendu en 2026 : 0,96%, contre 0,8% suisse Exportations sous pression en raison des tensions, de l\'énergie, des droits de douane et du franc fort',
     'blog.article.pil-cantonale-2026-crescita.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.schaffhausen-modello-scolastico-inclusivo.title': 'Schaffhouse adopte un modèle scolaire inclusif avec PGA',
+    'blog.article.schaffhausen-modello-scolastico-inclusivo.excerpt': 'Décision du 22 janvier 2026 pour le passage à l\'ISF ; PGA prévoit un plafond annuel maximum de CHF 3 millions et un crédit ponctuel de CHF 270\'000.',
+    'blog.article.schaffhausen-modello-scolastico-inclusivo.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonShFr;
