@@ -253,6 +253,7 @@ const readOutputs = (file) => Object.fromEntries(readFileSync(file, 'utf8').spli
 function runGenerate(workflow, { env, plan }) {
   return withBin((dir) => ({
     timeout: '#!/usr/bin/env bash\nwhile [[ "$1" == --* ]]; do shift; done\nshift\nexec "$@"\n',
+    sleep: '#!/usr/bin/env bash\nexit 0\n',
     node: `#!/usr/bin/env bash
 trap '' USR1 USR2
 echo "[stub] create-article"
@@ -294,10 +295,12 @@ exit 0
 /** Esegue il gate `admit` con un compare GitHub finto. */
 function runAdmit(workflow, { caller, changed }) {
   return withBin((dir) => ({
+    timeout: '#!/usr/bin/env bash\nwhile [[ "$1" == --* ]]; do shift; done\nshift\nexec "$@"\n',
 gh: `#!/usr/bin/env bash
 case "$*" in
   *compare*) cat "${dir}/changed" ;;
-  *) printf '%s\\n' '{"workflow_runs":[]}' ;;
+  *actions/runs/*) printf '%s\\n' '{"created_at":"2026-01-01T00:00:00Z"}' ;;
+  *) printf '%s\\n' '[{"workflow_runs":[],"total_count":0}]' ;;
 esac
 `,
   }), (dir, bin) => {

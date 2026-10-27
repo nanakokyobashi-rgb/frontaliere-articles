@@ -269,6 +269,65 @@ test('il producer RSS usa gli stessi span lessicali e bilanciati del floor', () 
   }
 });
 
+test('RSS legge i campi SEO dalle array JSON-LD senza confondere i template URL', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'rss-structured-array-'));
+  try {
+    fs.mkdirSync(path.join(root, 'content', 'seo'), { recursive: true });
+    const source = [
+      'export const SEO = {',
+      "  'blog-array-fields': {",
+      '    structuredData: [',
+      '      {',
+      '        "headline": "Headline da array",',
+      '        "description": "Descrizione da array",',
+      '        "datePublished": "2026-09-12T10:00:00+00:00",',
+      '        "articleSection": "Pratico",',
+      '        "image": { "url": `${BASE_URL}/images/hero.webp` },',
+      '        "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/array-fields/`,',
+      '      },',
+      '      { "@type": "FAQPage", "mainEntity": [] },',
+      '    ],',
+      '  },',
+      '};',
+      '',
+    ].join('\n');
+    fs.writeFileSync(path.join(root, 'content', 'seo', 'seo-blog.ts'), source);
+
+    const section = { ...RSS_SECTIONS[0], seoFiles: ['seo-blog.ts'] };
+    const result = buildSectionFeeds({
+      fs,
+      path,
+      rootDir: root,
+      section,
+      layout: { seoDir: 'content/seo', localesDir: 'content', slugDir: 'content' },
+      repairSerpSnippet: (text) => text,
+    });
+    const feed = result.feeds.find(([name]) => name === 'rss.xml')?.[1] ?? '';
+
+    assert.equal(result.articleCount, 1);
+    assert.match(feed, /Headline da array/);
+    assert.match(feed, /Descrizione da array/);
+
+    fs.writeFileSync(
+      path.join(root, 'content', 'seo', 'seo-blog.ts'),
+      source.replace('"headline": "Headline da array"', '"headline": `${headline}`'),
+    );
+    assert.throws(
+      () => buildSectionFeeds({
+        fs,
+        path,
+        rootDir: root,
+        section,
+        layout: { seoDir: 'content/seo', localesDir: 'content', slugDir: 'content' },
+        repairSerpSnippet: (text) => text,
+      }),
+      /refusing to publish a reduced section feed/u,
+    );
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('RSS e floor falliscono chiusi su una entry reale con graffe sbilanciate', () => {
   const source = [
     'export const SEO = {',

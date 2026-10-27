@@ -212,14 +212,67 @@ jobs:
           }
 
           IN_FLIGHT_STATUSES='["queued","in_progress","requested","waiting","pending"]'
-          ACTION_TERMINAL_STATUS='completed'
-          runs_pages_json=""
-          if ! runs_pages_json="$(gh_api_timeout --paginate --slurp \
-            "repos/$REPO/actions/workflows/$CALLER_WORKFLOW/runs?per_page=100" \
+          ALL_RUN_STATUSES='["queued","in_progress","requested","waiting","pending","completed"]'
+          runs='[]'
+          while IFS= read -r status; do
+            status_pages_json=""
+            if ! status_pages_json="$(gh_api_timeout --paginate --slurp \
+              "repos/$REPO/actions/workflows/$CALLER_WORKFLOW/runs?per_page=100&status=$status" \
+              2>/dev/null)"; then
+              fail_closed_admission
+            fi
+            if ! status_runs="$(jq -c --arg expected "$status" '
+              . as $pages
+              | if (type == "array" and length > 0)
+                  and all(.[];
+                    type == "object"
+                    and (.workflow_runs | type) == "array"
+                    and (.total_count | type) == "number"
+                    and (.total_count >= 0)
+                    and ((.total_count | floor) == .total_count)
+                    and all(.workflow_runs[];
+                      type == "object"
+                      and (.id | type) == "number"
+                      and (.id >= 1)
+                      and ((.id | floor) == .id)
+                      and (.created_at | type) == "string"
+                      and (.created_at | length) > 0
+                      and ((try (.created_at | fromdateiso8601) catch null) != null)
+                      and (.status == $expected)
+                    ))
+                  and (($pages | map(.total_count) | unique | length) == 1)
+                  and (($pages | map(.workflow_runs | length) | add) == $pages[0].total_count)
+                  and (([$pages[].workflow_runs[].id] | unique | length)
+                    == ([$pages[].workflow_runs[]] | length))
+                then
+                  [$pages[].workflow_runs[] | {id: .id, created_at: .created_at, status: .status}]
+                else
+                  error("generation run listing incomplete")
+                end
+            ' <<<"$status_pages_json")"; then
+              fail_closed_admission
+            fi
+            if ! runs="$(jq -c --argjson existing "$runs" --argjson current "$status_runs" \
+              '$existing + $current' <<<"$runs")"; then
+              fail_closed_admission
+            fi
+          done < <(jq -r '.[]' <<<"$IN_FLIGHT_STATUSES")
+          if ! inflight="$(printf '%s' "$runs" \
+            | jq -c --argjson in_flight "$IN_FLIGHT_STATUSES" '[.[] | .status as $status | select(($in_flight | index($status)) != null)]' \
             2>/dev/null)"; then
             fail_closed_admission
           fi
-          if ! runs="$(jq -c --argjson in_flight "$IN_FLIGHT_STATUSES" --arg terminal "$ACTION_TERMINAL_STATUS" '
+
+          if ! recent_since="$(date -u -d '1 hour ago' '+%Y-%m-%dT%H:%M:%SZ')"; then
+            fail_closed_admission
+          fi
+          recent_pages_json=""
+          if ! recent_pages_json="$(gh_api_timeout --paginate --slurp \
+            "repos/$REPO/actions/workflows/$CALLER_WORKFLOW/runs?per_page=100&created=%3E%3D$recent_since" \
+            2>/dev/null)"; then
+            fail_closed_admission
+          fi
+          if ! recent_runs="$(jq -c --argjson known "$ALL_RUN_STATUSES" --arg since "$recent_since" '
             . as $pages
             | if (type == "array" and length > 0)
                 and all(.[];
@@ -236,9 +289,9 @@ jobs:
                     and (.created_at | type) == "string"
                     and (.created_at | length) > 0
                     and ((try (.created_at | fromdateiso8601) catch null) != null)
+                    and (.created_at >= $since)
                     and (.status | type) == "string"
-                    and (.status as $status
-                      | (($in_flight | index($status)) != null or $status == $terminal))
+                    and (.status as $status | ($known | index($status)) != null)
                   ))
                 and (($pages | map(.total_count) | unique | length) == 1)
                 and (($pages | map(.workflow_runs | length) | add) == $pages[0].total_count)
@@ -247,14 +300,9 @@ jobs:
               then
                 [$pages[].workflow_runs[] | {id: .id, created_at: .created_at, status: .status}]
               else
-                error("generation run listing incomplete")
+                error("recent generation run listing incomplete")
               end
-          ' <<<"$runs_pages_json")"; then
-            fail_closed_admission
-          fi
-          if ! inflight="$(printf '%s' "$runs" \
-            | jq -c --argjson in_flight "$IN_FLIGHT_STATUSES" '[.[] | .status as $status | select(($in_flight | index($status)) != null)]' \
-            2>/dev/null)"; then
+          ' <<<"$recent_pages_json")"; then
             fail_closed_admission
           fi
 
@@ -263,8 +311,8 @@ jobs:
             case "$cap" in
               ''|*[!0-9]*) cap=20 ;;
             esac
-            last_hour=$(printf '%s' "$runs" \
-              | jq -er '[.[] | select((.created_at | fromdateiso8601) > (now - 3600))] | length' \
+            last_hour=$(printf '%s' "$recent_runs" \
+              | jq -er 'length' \
               2>/dev/null) || fail_closed_admission
             case "${last_hour:-}" in
               ''|*[!0-9]*) last_hour=0 ;;

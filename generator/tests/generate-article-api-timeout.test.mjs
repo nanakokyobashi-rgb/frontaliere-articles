@@ -27,8 +27,23 @@ for (const relativePath of WORKFLOWS) {
     assert.doesNotMatch(source, /^\s+gh api\b/m, 'nessuna chiamata deve bypassare il wrapper');
     assert.equal(
       (source.match(/gh_api_timeout(?:\s|\()/g) || []).length,
-      4,
-      'tre chiamate piu\u0300 la definizione devono restare protette',
+      5,
+      'quattro chiamate bounded piu\u0300 la definizione devono restare protette',
+    );
+    assert.match(
+      source,
+      /actions\/workflows\/(?:generate-article\.yml|\$CALLER_WORKFLOW)\/runs\?per_page=100&status=\$status/,
+      'le run in volo devono essere lette per status',
+    );
+    assert.match(
+      source,
+      /actions\/workflows\/(?:generate-article\.yml|\$CALLER_WORKFLOW)\/runs\?per_page=100&created=%3E%3D\$recent_since/,
+      'il tetto orario deve leggere solo la finestra recente',
+    );
+    assert.doesNotMatch(
+      source,
+      /actions\/workflows\/(?:generate-article\.yml|\$CALLER_WORKFLOW)\/runs\?per_page=100"/,
+      'il gate non deve piu\u0300 paginare tutta la cronologia',
     );
   });
 }
