@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "pensioni",
-  "updatedAt": "2026-10-26T09:46:31.791Z",
-  "contentHash": "d0c2e108b26c3b79847160385dc4e73eb9c30116d75fcfc9dd2ee1a762add2b7",
+  "updatedAt": "2026-10-27T11:12:54.296Z",
+  "contentHash": "9a76439a541286e059062ded900c07ba7994cab3bfee435cb6f3c3960c10bea3",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -129,6 +129,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Successo abbonamenti trasporto pubblico a prezzo ridotto",
+          "url": "/articoli-neuchatel/successo-abbonamenti-trasporti-ridotti/",
+          "excerpt": "66% di sconto agli under 25 dal 1° luglio 2026 Oltre 15'000 buoni di riduzione già utilizzati Quasi 2'300 abbonamenti annuali in più in luglio-settembre Secondo",
+          "date": "2026-10-27T11:03:48.170Z"
+        },
+        {
           "title": "Orologeria: soppressione di circa 100 posti a Le Locle",
           "url": "/articoli-neuchatel/tagli-orologeria-locle-lvmh/",
           "excerpt": "Zenith sopprime circa 100 posti a Le Locle su 196 dipendenti; 101 persone sono a rischio nella distribuzione internazionale.",
@@ -151,12 +157,6 @@
           "url": "/articoli-neuchatel/consiglio-stato-21-ottobre-2026/",
           "excerpt": "Il Consiglio di Stato ha risposto a due consultazioni federali Autorizzazioni per lavori pesanti nelle zone montane II e III Votazione cantonale fissata",
           "date": "2026-10-23T19:35:52.889Z"
-        },
-        {
-          "title": "Stazione di Le Locle: lavori di accessibilità per 8 milioni",
-          "url": "/articoli-neuchatel/stazione-le-locle-accessibilita/",
-          "excerpt": "Cantiere alla stazione di Le Locle: 8 milioni di franchi La banchina 1 concentra quasi il 90% del traffico passeggeri Primi treni svizzeri sulla banchina 1",
-          "date": "2026-10-22T14:27:21.584Z"
         }
       ],
       "links": [
@@ -177,7 +177,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-26T09:46:31.791Z"
+      "updatedAt": "2026-10-27T11:12:54.296Z"
     },
     "en": {
       "canton": "NE",
@@ -284,6 +284,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Success of discounted public transport passes",
+          "url": "/en/neuchatel-articles/success-reduced-transport-passes/",
+          "excerpt": "66% discount for under 25s from July 1, 2026 Over 15,000 discount vouchers already used Almost 2,300 additional annual subscriptions in July-September Second",
+          "date": "2026-10-27T11:03:48.170Z"
+        },
+        {
           "title": "Watchmaking: approximately 100 jobs eliminated in Le Locle",
           "url": "/en/neuchatel-articles/watchmaker-cuts-le-locle/",
           "excerpt": "Zenith is eliminating around 100 positions in Le Locle, out of 196 employees; 101 people are at risk in international distribution.",
@@ -306,12 +312,6 @@
           "url": "/en/neuchatel-articles/council-state-october-21-2026/",
           "excerpt": "The Council of State has responded to two federal consultations Authorizations for heavy work in mountain zones II and III Cantonal vote scheduled for Sunday",
           "date": "2026-10-23T19:35:52.889Z"
-        },
-        {
-          "title": "Le Locle station: accessibility works costing 8 million",
-          "url": "/en/neuchatel-articles/le-locle-station-accessibility/",
-          "excerpt": "Construction work at Le Locle station: 8 million francs Platform 1 accounts for almost 90% of passenger traffic First Swiss trains on platform 1 from October",
-          "date": "2026-10-22T14:27:21.584Z"
         }
       ],
       "links": [
@@ -332,7 +332,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-26T09:46:31.791Z"
+      "updatedAt": "2026-10-27T11:12:54.296Z"
     },
     "de": {
       "canton": "NE",
@@ -439,6 +439,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Erfolgreiche ermäßigte Fahrkarten für öffentliche Verkehrsmittel",
+          "url": "/de/neuenburg-artikel/erfolg-reduzierte-verkehrstickets/",
+          "excerpt": "66% Rabatt für unter 25-Jährige ab 1.",
+          "date": "2026-10-27T11:03:48.170Z"
+        },
+        {
           "title": "Uhrenbranche: Abbau von rund 100 Stellen in Le Locle",
           "url": "/de/neuenburg-artikel/stellenabbau-uhrmacher-le-locle/",
           "excerpt": "Zenith baut in Le Locle rund 100 Stellen bei insgesamt 196 Beschäftigten ab; 101 Personen im internationalen Vertrieb sind gefährdet.",
@@ -461,12 +467,6 @@
           "url": "/de/neuenburg-artikel/staatsrat-21-oktober-2026/",
           "excerpt": "Der Staatsrat hat auf zwei eidgenössische Vernehmlassungen geantwortet Bewilligungen für schwere Arbeiten in den Bergzonen II und III Kantonale Abstimmung",
           "date": "2026-10-23T19:35:52.889Z"
-        },
-        {
-          "title": "Bahnhof Le Locle: Arbeiten zur Barrierefreiheit für 8 Millionen",
-          "url": "/de/neuenburg-artikel/bahnhof-le-locle-barrierefreiheit/",
-          "excerpt": "Baustelle am Bahnhof Le Locle: 8 Millionen Franken Auf Bahnsteig 1 entfallen fast 90% des Personenverkehrs Erste Schweizer Züge auf Bahnsteig 1 ab dem 29.",
-          "date": "2026-10-22T14:27:21.584Z"
         }
       ],
       "links": [
@@ -487,7 +487,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-26T09:46:31.791Z"
+      "updatedAt": "2026-10-27T11:12:54.296Z"
     },
     "fr": {
       "canton": "NE",
@@ -594,6 +594,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Succès abonnements transports en commun à prix réduit",
+          "url": "/fr/articles-neuchatel/succes-abonnements-transports-reduits/",
+          "excerpt": "66% de réduction pour les moins de 25 ans à partir du 1er juillet 2026 Plus de 15'000 bons de réduction déjà utilisés Près de 2'300 abonnements annuels",
+          "date": "2026-10-27T11:03:48.170Z"
+        },
+        {
           "title": "Horlogerie : suppression d’environ 100 postes au Locle",
           "url": "/fr/articles-neuchatel/suppressions-emplois-le-locle/",
           "excerpt": "Zenith supprime environ 100 postes au Locle sur 196 employés ; 101 personnes sont menacées dans la distribution internationale.",
@@ -616,12 +622,6 @@
           "url": "/fr/articles-neuchatel/conseil-etat-21-octobre-2026/",
           "excerpt": "Le Conseil d'État a répondu à deux consultations fédérales Autorisations pour des travaux lourds dans les zones montagneuses II et III Votation cantonale fixée",
           "date": "2026-10-23T19:35:52.889Z"
-        },
-        {
-          "title": "Gare du Locle : travaux d'accessibilité pour 8 millions",
-          "url": "/fr/articles-neuchatel/gare-le-locle-accessibilite/",
-          "excerpt": "Chantier à la gare du Locle : 8 millions de francs Le quai 1 concentre près de 90 % du trafic voyageurs Les premiers trains suisses doivent revenir sur le quai",
-          "date": "2026-10-22T14:27:21.584Z"
         }
       ],
       "links": [
@@ -642,7 +642,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-26T09:46:31.791Z"
+      "updatedAt": "2026-10-27T11:12:54.296Z"
     }
   }
 }

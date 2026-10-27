@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-27T10:55:28.229Z",
-  "contentHash": "88a7f16130d8c15f00bdd7f1666414c6cef8db0726239df7e923b158823b9ec6",
+  "updatedAt": "2026-10-27T11:12:54.296Z",
+  "contentHash": "54375ef18fbbae382afdfc77edc849f801abf3ac33d3a686b44db5ac46fee8d6",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -152,6 +152,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Successo abbonamenti trasporto pubblico a prezzo ridotto",
+          "url": "/articoli-neuchatel/successo-abbonamenti-trasporti-ridotti/",
+          "excerpt": "66% di sconto agli under 25 dal 1° luglio 2026 Oltre 15'000 buoni di riduzione già utilizzati Quasi 2'300 abbonamenti annuali in più in luglio-settembre Secondo",
+          "date": "2026-10-27T11:03:48.170Z"
+        },
+        {
           "title": "Stazione di Le Locle: lavori di accessibilità per 8 milioni",
           "url": "/articoli-neuchatel/stazione-le-locle-accessibilita/",
           "excerpt": "Cantiere alla stazione di Le Locle: 8 milioni di franchi La banchina 1 concentra quasi il 90% del traffico passeggeri Primi treni svizzeri sulla banchina 1",
@@ -195,7 +201,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T11:12:54.296Z"
     },
     "en": {
       "canton": "NE",
@@ -325,6 +331,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Success of discounted public transport passes",
+          "url": "/en/neuchatel-articles/success-reduced-transport-passes/",
+          "excerpt": "66% discount for under 25s from July 1, 2026 Over 15,000 discount vouchers already used Almost 2,300 additional annual subscriptions in July-September Second",
+          "date": "2026-10-27T11:03:48.170Z"
+        },
+        {
           "title": "Le Locle station: accessibility works costing 8 million",
           "url": "/en/neuchatel-articles/le-locle-station-accessibility/",
           "excerpt": "Construction work at Le Locle station: 8 million francs Platform 1 accounts for almost 90% of passenger traffic First Swiss trains on platform 1 from October",
@@ -368,7 +380,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T11:12:54.296Z"
     },
     "de": {
       "canton": "NE",
@@ -498,6 +510,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Erfolgreiche ermäßigte Fahrkarten für öffentliche Verkehrsmittel",
+          "url": "/de/neuenburg-artikel/erfolg-reduzierte-verkehrstickets/",
+          "excerpt": "66% Rabatt für unter 25-Jährige ab 1.",
+          "date": "2026-10-27T11:03:48.170Z"
+        },
+        {
           "title": "Bahnhof Le Locle: Arbeiten zur Barrierefreiheit für 8 Millionen",
           "url": "/de/neuenburg-artikel/bahnhof-le-locle-barrierefreiheit/",
           "excerpt": "Baustelle am Bahnhof Le Locle: 8 Millionen Franken Auf Bahnsteig 1 entfallen fast 90% des Personenverkehrs Erste Schweizer Züge auf Bahnsteig 1 ab dem 29.",
@@ -541,7 +559,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T11:12:54.296Z"
     },
     "fr": {
       "canton": "NE",
@@ -671,6 +689,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Succès abonnements transports en commun à prix réduit",
+          "url": "/fr/articles-neuchatel/succes-abonnements-transports-reduits/",
+          "excerpt": "66% de réduction pour les moins de 25 ans à partir du 1er juillet 2026 Plus de 15'000 bons de réduction déjà utilisés Près de 2'300 abonnements annuels",
+          "date": "2026-10-27T11:03:48.170Z"
+        },
+        {
           "title": "Gare du Locle : travaux d'accessibilité pour 8 millions",
           "url": "/fr/articles-neuchatel/gare-le-locle-accessibilite/",
           "excerpt": "Chantier à la gare du Locle : 8 millions de francs Le quai 1 concentre près de 90 % du trafic voyageurs Les premiers trains suisses doivent revenir sur le quai",
@@ -714,7 +738,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T11:12:54.296Z"
     }
   }
 }
