@@ -39,10 +39,10 @@ import { parseArticleUrlSlugs } from './shared/articleReaderSource.mjs';
 import { parseStaticArticleTranslationSource, parseStaticBlogBodySource } from './shared/articleStaticSource.mjs';
 import {
   findAllSeoEntryMatches,
+  hasInterpolatedStaticProperty,
   lastStaticPropertyValue,
   readStructuredSeoDescription,
   readStructuredSeoDescriptionState,
-  staticPropertySpans,
 } from './shared/seo-entry.mjs';
 import { createImageCreditReader, mediaRssCreditXml, renderImageCreditHtml } from './shared/imageCredits.mjs';
 import { decodeStaticStringLiteral } from './shared/ts-literals.mjs';
@@ -240,16 +240,6 @@ function unescapeQuoted(value, quote) {
   return decodeStaticStringLiteral(value, quote);
 }
 
-/**
- * RSS must reject dynamic top-level fields even when a static structuredData
- * shadow would win in the shared runtime-order resolver. The spans reader is
- * deliberately top-level, keeping this corpus adaptation out of the mirrored
- * engine parser.
- */
-function hasInterpolatedTopLevelSeoProperty(block, field) {
-  return staticPropertySpans(block, field).some(({ dynamic }) => dynamic);
-}
-
 function parseSeoBlogs(fs, path, rootDir, seoDir, seoFiles) {
   const articles = new Map(); // articleId → metadata
 
@@ -281,7 +271,7 @@ function parseSeoBlogs(fs, path, rootDir, seoDir, seoFiles) {
       // the JSON-LD-shaped structuredData object. A first-match regex here
       // could publish stale metadata while the floor validated the live value.
       const dynamicField = ['headline', 'description', 'datePublished', 'dateModified', 'articleSection', 'ogDescription']
-        .find((field) => hasInterpolatedTopLevelSeoProperty(block, field));
+        .find((field) => hasInterpolatedStaticProperty(block, field));
       if (dynamicField || readStructuredSeoDescriptionState(block).dynamic) {
         throw new Error(
           `RSS: entry '${articleId}' contains an interpolated SEO field` +
