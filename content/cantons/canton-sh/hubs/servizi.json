@@ -4,8 +4,8 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "servizi",
-  "updatedAt": "2026-10-27T10:55:28.229Z",
-  "contentHash": "29b00bdee0ca6f81a73fed01e76697484d76be8e635892a7fd74797dc49f6bc5",
+  "updatedAt": "2026-10-27T12:34:51.121Z",
+  "contentHash": "32f87237b72d8ecf2b1405ecb012394c0a4da1069f87a953193634a4b143341e",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -111,6 +111,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Legge sugli ospedali: la SP di Sciaffusa dice no",
+          "url": "/articoli-sciaffusa/sp-no-legge-ospedale/",
+          "excerpt": "Il 29 novembre il Cantone di Sciaffusa voterà sulla modifica della legge sugli ospedali, contrastata dalla SP dopo il via libera parlamentare 43-0.",
+          "date": "2026-10-27T12:27:08.621Z"
+        },
+        {
           "title": "Sciaffusa: e-learning per farmacie sulla violenza domestica",
           "url": "/articoli-sciaffusa/sciaffusa-formazione-farmacie/",
           "excerpt": "Sciaffusa: moduli e-learning volontari per le farmacie, dedicati a segnali di violenza domestica, colloquio riservato e rinvio ai servizi.",
@@ -174,7 +180,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T12:34:51.121Z"
     },
     "en": {
       "canton": "SH",
@@ -263,6 +269,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Hospital Act: Schaffhausen’s SP says no",
+          "url": "/en/schaffhausen-articles/schaffhausen-sp-hospital-law-no/",
+          "excerpt": "On November 29, the Canton of Schaffhausen will vote on the amendment to the Hospitals Act, opposed by the SP after parliamentary approval 43-0.",
+          "date": "2026-10-27T12:27:08.621Z"
+        },
+        {
           "title": "Schaffhausen: e-learning for pharmacies on domestic violence",
           "url": "/en/schaffhausen-articles/schaffhausen-pharmacy-training/",
           "excerpt": "Schaffhausen: voluntary e-learning modules for pharmacies, focused on signs of domestic violence, confidential conversations, and referrals to services.",
@@ -322,7 +334,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T12:34:51.121Z"
     },
     "de": {
       "canton": "SH",
@@ -411,6 +423,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Spitalgesetz: Die SP von Schaffhausen sagt Nein",
+          "url": "/de/schaffhausen-artikel/sp-nein-spitalgesetz-schaffhausen/",
+          "excerpt": "Am 29. November stimmt der Kanton Schaffhausen über die Änderung des Spitalgesetzes ab, gegen die sich die SP nach der parlamentarischen Zustimmung mit 43-0 stellt.",
+          "date": "2026-10-27T12:27:08.621Z"
+        },
+        {
           "title": "Schaffhausen: E-Learning für Apotheken zum Thema häusliche Gewalt",
           "url": "/de/schaffhausen-artikel/schaffhausen-apotheken-schulung/",
           "excerpt": "Schaffhausen: Freiwillige E-Learning-Module für Apotheken zu Anzeichen häuslicher Gewalt, vertraulichen Gesprächen und der Weitervermittlung an Unterstützungsangebote.",
@@ -470,7 +488,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T12:34:51.121Z"
     },
     "fr": {
       "canton": "SH",
@@ -559,6 +577,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Loi sur les hôpitaux : le PS de Schaffhouse dit non",
+          "url": "/fr/articles-schaffhouse/ps-non-loi-hopital-schaffhouse/",
+          "excerpt": "Le 29 novembre, le canton de Schaffhouse votera sur la modification de la loi sur les hôpitaux, combattue par le PS après le feu vert parlementaire 43-0.",
+          "date": "2026-10-27T12:27:08.621Z"
+        },
+        {
           "title": "Schaffhouse : e-learning pour les pharmacies sur la violence domestique",
           "url": "/fr/articles-schaffhouse/schaffhouse-formation-pharmacies/",
           "excerpt": "Schaffhouse : modules d’e-learning volontaires pour les pharmacies, consacrés aux signes de violence domestique, à l’entretien confidentiel et à l’orientation vers les services.",
@@ -614,7 +638,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T12:34:51.121Z"
     }
   }
 }
