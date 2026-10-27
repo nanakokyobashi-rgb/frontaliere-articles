@@ -57,6 +57,9 @@ const blogMetaCantonLuFr: Record<string, string> = {
     'blog.article.fluhli-tassa-seconde-case.title': 'Motion sur la taxe sur les résidences secondaires approuvée à Lucerne',
     'blog.article.fluhli-tassa-seconde-case.excerpt': 'Par 70 voix contre 41, le Parlement cantonal de Lucerne a adopté la motion de Hella Schnider en faveur d’une taxe spéciale sur les résidences secondaires.',
     'blog.article.fluhli-tassa-seconde-case.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.einwohnerrat-budget-bahnhof-ost.title': 'L\'Einwohnerrat décide du budget 2027 et du crédit Bahnhof Ost',
+    'blog.article.einwohnerrat-budget-bahnhof-ost.excerpt': 'Le 17 novembre 2026, l\'Einwohnerrat d\'Ebikon se réunit Le budget 2027 prévoit un excédent de CHF 2,14 millions Le multiplicateur reste à 2,05 unités Bahnhof Ost',
+    'blog.article.einwohnerrat-budget-bahnhof-ost.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonLuFr;

@@ -57,6 +57,9 @@ const blogMetaCantonLuIt: Record<string, string> = {
     'blog.article.fluhli-tassa-seconde-case.title': 'Mozione sulla tassa per le seconde case approvata a Lucerna',
     'blog.article.fluhli-tassa-seconde-case.excerpt': 'Con 70 voti contro 41, il Parlamento cantonale di Lucerna ha accolto la mozione di Hella Schnider per una tassa speciale sulle seconde case.',
     'blog.article.fluhli-tassa-seconde-case.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.einwohnerrat-budget-bahnhof-ost.title': 'Einwohnerrat decide budget 2027 e credito Bahnhof Ost',
+    'blog.article.einwohnerrat-budget-bahnhof-ost.excerpt': 'Il 17 novembre 2026 si riunisce l\'Einwohnerrat di Ebikon Il budget 2027 prevede un avanzo di CHF 2,14 milioni Il moltiplicatore resta a 2,05 unità Bahnhof Ost',
+    'blog.article.einwohnerrat-budget-bahnhof-ost.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonLuIt;

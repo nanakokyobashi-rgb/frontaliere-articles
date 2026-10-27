@@ -204,4 +204,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'einwohnerrat-budget-bahnhof-ost',
+ category: 'fiscale',
+ date: '2026-10-27T08:22:48.687Z',
+ image: '/images/blog/article-einwohnerrat-budget-bahnhof-ost.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['LU'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];

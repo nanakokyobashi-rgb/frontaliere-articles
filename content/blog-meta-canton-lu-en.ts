@@ -57,6 +57,9 @@ const blogMetaCantonLuEn: Record<string, string> = {
     'blog.article.fluhli-tassa-seconde-case.title': 'Motion on the second-home tax approved in Lucerne',
     'blog.article.fluhli-tassa-seconde-case.excerpt': 'With 70 votes against 41, the Lucerne Cantonal Parliament approved Hella Schnider’s motion for a special tax on second homes.',
     'blog.article.fluhli-tassa-seconde-case.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.einwohnerrat-budget-bahnhof-ost.title': 'Residents’ Council decides on budget 2027 and Bahnhof Ost credit',
+    'blog.article.einwohnerrat-budget-bahnhof-ost.excerpt': 'On 17 November 2026, the Ebikon Residents\' Council meets The 2027 budget provides for a surplus of CHF 2,14 million The multiplier remains at 2,05 units Bahnhof',
+    'blog.article.einwohnerrat-budget-bahnhof-ost.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonLuEn;
