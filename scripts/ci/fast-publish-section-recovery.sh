@@ -42,20 +42,29 @@ fi
 dispatch_nonce_input="${DISPATCH_NONCE:-}"
 dispatched=0
 failed_sections=()
+dispatch_titles=()
+dispatch_sections=()
 child_replay_api_after_publish="${REPLAY_API_AFTER_PUBLISH:-false}"
+child_allow_deferred_live_release="${ALLOW_DEFERRED_LIVE_RELEASE:-false}"
+child_coordinated_recovery=false
 if [ "${MIXED_MATRIX:-false}" = 'true' ]; then
   # The coordinator waits for every section child and dispatches publish-api
   # once afterwards. Letting every child arm it would fan out identical API
-  # publishes for a mixed matrix.
+  # publishes for a mixed matrix. The explicit coordination flag also disables
+  # the bootstrap branch inside the child workflow, which otherwise could arm
+  # its own publish-api replay independently of this coordinator.
   child_replay_api_after_publish=false
+  child_allow_deferred_live_release=true
+  child_coordinated_recovery=true
 fi
 while IFS=$'\t' read -r section article_ids missing_page_paths known_missing_page_paths bootstrap remove_stale cleanup_inactive_surface; do
   [ -n "$section" ] || continue
   nonce_seed="${dispatch_nonce_input:-stale-staged-recovery}"
-  nonce_hash="$(printf '%s\0%s\0%s\0%s\0%s\0%s\0%s\0%s\0%s\0%s' \
+  nonce_hash="$(printf '%s\0%s\0%s\0%s\0%s\0%s\0%s\0%s\0%s\0%s\0%s\0%s' \
     "$nonce_seed" "$CURRENT_MAIN" "$section" "$article_ids" "$missing_page_paths" \
     "$known_missing_page_paths" "$bootstrap" "$remove_stale" "$cleanup_inactive_surface" \
-    "$child_replay_api_after_publish" | sha256sum | cut -c1-16)"
+    "$child_replay_api_after_publish" "$child_allow_deferred_live_release" \
+    "$child_coordinated_recovery" | sha256sum | cut -c1-16)"
   dispatch_nonce="stale-staged-${CURRENT_MAIN:0:12}-${section}-${nonce_hash}"
   dispatch_title="cover-publish-section / ${section} / nonce=${dispatch_nonce}"
   echo "::notice::recovery staged $section sulla HEAD corrente $CURRENT_MAIN"
@@ -70,10 +79,13 @@ while IFS=$'\t' read -r section article_ids missing_page_paths known_missing_pag
     -f source_commit="$CURRENT_MAIN" \
     -f source_main_commit="$CURRENT_MAIN" \
     -f replay_api_after_publish="$child_replay_api_after_publish" \
-    -f allow_deferred_live_release="$ALLOW_DEFERRED_LIVE_RELEASE" \
+    -f allow_deferred_live_release="$child_allow_deferred_live_release" \
+    -f coordinated_recovery="$child_coordinated_recovery" \
     -f dry_run="$DRY" \
     -f dispatch_nonce="$dispatch_nonce"; then
     dispatched=$((dispatched + 1))
+    dispatch_titles+=("$dispatch_title")
+    dispatch_sections+=("$section")
   else
     echo "::error::recovery staged non accodato per $section sulla HEAD $CURRENT_MAIN"
     failed_sections+=("$section")
@@ -89,3 +101,92 @@ if [ "$dispatched" -eq 0 ]; then
   echo "::error::matrix staged vuoto nel recovery stale"
   exit 1
 fi
+
+# The stale dispatcher intentionally returns after GitHub accepts the child
+# workflow, not after that child has uploaded its pages.  A mixed matrix must
+# therefore have an explicit barrier before the coordinator can replay the
+# API: otherwise readiness can observe the old surface and publish a manifest
+# while one or more section uploads are still in flight.
+replay_child_wait_max_s="${REPLAY_CHILD_WAIT_MAX_S:-21000}"
+replay_child_wait_interval_s="${REPLAY_CHILD_WAIT_INTERVAL_S:-15}"
+if ! [[ "$replay_child_wait_max_s" =~ ^[0-9]+$ ]] || [ "$replay_child_wait_max_s" -lt 1 ]; then
+  echo "::error::REPLAY_CHILD_WAIT_MAX_S non valido: $replay_child_wait_max_s"
+  exit 1
+fi
+if ! [[ "$replay_child_wait_interval_s" =~ ^[0-9]+$ ]] || [ "$replay_child_wait_interval_s" -lt 1 ]; then
+  echo "::error::REPLAY_CHILD_WAIT_INTERVAL_S non valido: $replay_child_wait_interval_s"
+  exit 1
+fi
+
+wait_for_dispatched_children() {
+  local deadline=$((SECONDS + replay_child_wait_max_s))
+  local runs=''
+  local all_success=false
+  local pending_sections_csv=''
+  local failed_sections_csv=''
+  while (( SECONDS < deadline )); do
+    if ! runs="$(gh run list --repo "$REPOSITORY" --workflow fast-publish-section.yml --branch main --event workflow_dispatch --limit 100 --json databaseId,displayTitle,status,conclusion)"; then
+      echo "::warning::stato dei child staged non leggibile; ritento tra ${replay_child_wait_interval_s}s"
+      sleep "$replay_child_wait_interval_s"
+      continue
+    fi
+    if ! jq -e 'type == "array"' <<<"$runs" >/dev/null 2>&1; then
+      echo "::warning::gh run list ha restituito uno stato child non valido; ritento tra ${replay_child_wait_interval_s}s"
+      sleep "$replay_child_wait_interval_s"
+      continue
+    fi
+
+    all_success=true
+    pending_sections_csv=''
+    failed_sections_csv=''
+    for dispatch_index in "${!dispatch_titles[@]}"; do
+      dispatch_title="${dispatch_titles[$dispatch_index]}"
+      section="${dispatch_sections[$dispatch_index]}"
+      matching_runs="$(jq -c --arg title "$dispatch_title" '
+        [.[] | select(
+          ((.displayTitle // "") == $title or ((.displayTitle // "") | startswith($title + " / dry=")))
+        )]
+      ' <<<"$runs")"
+      child_state="$(jq -r '
+        if length == 0 then "missing"
+        elif any(.[]; .status != "completed") then "pending"
+        elif any(.[]; .conclusion != "success") then "failed"
+        else "success"
+        end
+      ' <<<"$matching_runs")"
+      case "$child_state" in
+        success)
+          echo "::notice::child staged completato per $section"
+          ;;
+        failed)
+          all_success=false
+          failed_sections_csv+="${section}, "
+          ;;
+        missing|pending)
+          all_success=false
+          pending_sections_csv+="${section}, "
+          ;;
+        *)
+          echo "::error::stato child staged inatteso per $section: $child_state"
+          return 1
+          ;;
+      esac
+    done
+    if [ "$all_success" = true ]; then
+      echo "::notice::barriera child staged superata per $dispatched sezioni"
+      return 0
+    fi
+    if [ -n "$failed_sections_csv" ]; then
+      failed_sections_csv="${failed_sections_csv%, }"
+      echo "::error::child staged fallito per le sezioni: $failed_sections_csv"
+      return 1
+    fi
+    pending_sections_csv="${pending_sections_csv%, }"
+    echo "::notice::barriera child staged in attesa per: $pending_sections_csv; ritento tra ${replay_child_wait_interval_s}s"
+    sleep "$replay_child_wait_interval_s"
+  done
+  echo "::error::timeout della barriera child staged dopo ${replay_child_wait_max_s}s"
+  return 1
+}
+
+wait_for_dispatched_children

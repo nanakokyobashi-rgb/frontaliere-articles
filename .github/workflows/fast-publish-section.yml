@@ -200,6 +200,11 @@ on:
         required: false
         default: false
         type: boolean
+      coordinated_recovery:
+        description: 'Child coordinato da una recovery mixed: non armare replay API locale'
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: read
@@ -1050,6 +1055,7 @@ jobs:
     needs: [resolve, publish, publish_release_head]
     if: >-
       always() &&
+      inputs.coordinated_recovery != true &&
       needs.resolve.result == 'success' &&
       needs.publish.result == 'success' &&
       needs.publish_release_head.result == 'success' &&
@@ -1060,7 +1066,7 @@ jobs:
       needs.resolve.outputs.dry != 'true' &&
       github.event_name != 'workflow_run'
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 360
     steps:
       - uses: actions/checkout@v7
         with:

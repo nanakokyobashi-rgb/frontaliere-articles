@@ -3472,6 +3472,12 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /source_main_commit:/);
   assert.match(wf, /replay_api_after_publish:/);
   assert.match(wf, /allow_deferred_live_release:/);
+  assert.match(wf, /coordinated_recovery:/);
+  assert.match(
+    wf,
+    /replay-api-after-staged-release:[\s\S]*inputs\.coordinated_recovery != true/,
+    'un child di recovery coordinata non deve armare il replay API locale',
+  );
   assert.match(
     wf,
     /- name: Arm normal push staged replay[\s\S]*id: replay_mode[\s\S]*PLAN_REPLAY_API_AFTER_PUBLISH: \$\{\{ steps\.plan\.outputs\.replay_api_after_publish \}\}[\s\S]*PLAN_ALLOW_DEFERRED_LIVE_RELEASE: \$\{\{ steps\.plan\.outputs\.allow_deferred_live_release \}\}[\s\S]*if \[ "\$EVENT_NAME" = 'push' \] && \[ "\$ANY" = 'true' \] && \[ "\$DRY" != 'true' \]; then[\s\S]*replay_api_after_publish=true[\s\S]*allow_deferred_live_release=true/,
@@ -3539,6 +3545,15 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   );
   assert.match(recovery, /child_replay_api_after_publish="\$\{REPLAY_API_AFTER_PUBLISH:-false\}"/);
   assert.match(recovery, /MIXED_MATRIX.*child_replay_api_after_publish=false/s);
+  assert.match(recovery, /child_allow_deferred_live_release="\$\{ALLOW_DEFERRED_LIVE_RELEASE:-false\}"/);
+  assert.match(recovery, /child_coordinated_recovery=false/);
+  assert.match(recovery, /child_allow_deferred_live_release=true/);
+  assert.match(recovery, /child_coordinated_recovery=true/);
+  assert.match(recovery, /-f coordinated_recovery="\$child_coordinated_recovery"/);
+  assert.match(recovery, /wait_for_dispatched_children/);
+  assert.match(recovery, /REPLAY_CHILD_WAIT_MAX_S/);
+  assert.match(recovery, /gh run list --repo "\$REPOSITORY" --workflow fast-publish-section\.yml/);
+  assert.match(recovery, /\.conclusion != "success"/);
   assert.match(recovery, /nonce_hash="\$\(printf '%s\\0%s\\0%s\\0%s/);
   const replayDispatcher = read('scripts/ci/dispatch-fast-publish-replay.sh');
   assert.match(wf, /^run-name:.*inputs\.dry_run/m);
