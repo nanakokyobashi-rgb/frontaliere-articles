@@ -945,14 +945,18 @@ jobs:
         env:
           SECTION: ${{ matrix.target.section }}
           RENDERED_HEAD: ${{ steps.render.outputs.rendered_head }}
+          STALE_HANDOFF: ${{ steps.render.outputs.stale_handoff }}
+          STALE_HANDOFF_HEAD: ${{ steps.render.outputs.stale_handoff_head }}
           FRESH: ${{ steps.replay_freshness.outputs.fresh }}
         run: |
           set -euo pipefail
           jq -cn \
             --arg section "$SECTION" \
             --arg rendered_head "${RENDERED_HEAD:-}" \
+            --arg stale_handoff "${STALE_HANDOFF:-}" \
+            --arg stale_handoff_head "${STALE_HANDOFF_HEAD:-}" \
             --arg fresh "${FRESH:-}" \
-            '{section: $section, rendered_head: $rendered_head, fresh: $fresh}' \
+            '{section: $section, rendered_head: $rendered_head, stale_handoff: $stale_handoff, stale_handoff_head: $stale_handoff_head, fresh: $fresh}' \
             > "$RUNNER_TEMP/fast-publish-result.json"
 
       - name: Upload publish result
@@ -978,6 +982,7 @@ jobs:
     outputs:
       rendered_head: ${{ steps.collect.outputs.rendered_head }}
       mixed_matrix: ${{ steps.collect.outputs.mixed_matrix }}
+      stale_handoff: ${{ steps.collect.outputs.stale_handoff }}
     steps:
       - name: Download matrix publish results
         uses: actions/download-artifact@v7
@@ -993,24 +998,28 @@ jobs:
         run: |
           set -euo pipefail
           echo 'mixed_matrix=false' >> "$GITHUB_OUTPUT"
+          echo 'stale_handoff=false' >> "$GITHUB_OUTPUT"
           results_dir="$RUNNER_TEMP/fast-publish-results"
           mapfile -t result_files < <(find "$results_dir" -type f -name fast-publish-result.json -print)
           if [ "${#result_files[@]}" -eq 0 ]; then
             echo "::error::nessun risultato della matrix publish disponibile per il replay API"
             exit 1
           fi
-          actual="$(jq -s -c 'map({section, rendered_head, fresh})' "${result_files[@]}")"
+          actual="$(jq -s -c 'map({section, rendered_head, stale_handoff, stale_handoff_head, fresh})' "${result_files[@]}")"
           expected_sections="$(jq -c '[.[].section] | sort' <<<"$EXPECTED_MATRIX")"
           actual_sections="$(jq -c 'map(.section) | sort' <<<"$actual")"
           if [ "$actual_sections" != "$expected_sections" ]; then
             echo "::error::risultati publish incompleti o duplicati: attesi $expected_sections, ricevuti $actual_sections"
             exit 1
           fi
-          if jq -e 'all(.[]; (.rendered_head == "" and .fresh == "false"))' <<<"$actual" >/dev/null; then
-            echo "::notice::tutte le leg hanno rilevato un replay stantio; il recovery redispatchato proseguira' sulla HEAD corrente"
+          if jq -e 'any(.[]; .stale_handoff == "true")' <<<"$actual" >/dev/null; then
+            echo 'stale_handoff=true' >> "$GITHUB_OUTPUT"
+          fi
+          if jq -e 'all(.[]; (.rendered_head == "" and ((.stale_handoff == "true") or (.fresh == "false"))))' <<<"$actual" >/dev/null; then
+            echo "::notice::tutte le leg hanno consegnato il replay stale o rilevato un replay pinned obsoleto; nessuna HEAD non pubblicata viene dichiarata produttiva"
             exit 0
           fi
-          if jq -e 'any(.[]; ((.rendered_head // "") | test("^[a-f0-9]{40}$"))) and any(.[]; ((.fresh // "") != "true" or (.rendered_head // "") == ""))' <<<"$actual" >/dev/null; then
+          if jq -e 'any(.[]; ((.rendered_head // "") | test("^[a-f0-9]{40}$"))) and any(.[]; ((.fresh // "") != "true" or (.stale_handoff // "") == "true" or (.rendered_head // "") == ""))' <<<"$actual" >/dev/null; then
             echo "::warning::matrix mista: almeno una leg non e' fresca mentre un'altra ha prodotto una HEAD; accodo il recovery sulla HEAD corrente"
             echo 'mixed_matrix=true' >> "$GITHUB_OUTPUT"
             exit 0
@@ -1040,6 +1049,7 @@ jobs:
       needs.resolve.result == 'success' &&
       needs.publish.result == 'success' &&
       needs.publish_release_head.result == 'success' &&
+      needs.publish_release_head.outputs.stale_handoff != 'true' &&
       (needs.publish_release_head.outputs.rendered_head != '' ||
        needs.publish_release_head.outputs.mixed_matrix == 'true') &&
       (needs.publish_release_head.outputs.mixed_matrix == 'true' ||

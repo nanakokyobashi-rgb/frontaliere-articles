@@ -3436,7 +3436,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.doesNotMatch(sectionContract, /-f dry_run=false/);
   assert.equal(
     replayDispatchCount,
-    4,
+    5,
   );
   assert.equal((wf.match(/name: Checkout replay dispatcher from workflow revision/g) ?? []).length, 3);
   assert.equal((wf.match(/ref: \$\{\{ github\.sha \}\}\n\s+path: \.replay-dispatcher-source/g) ?? []).length, 3);
@@ -3447,7 +3447,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   );
   assert.equal(
     (sectionContract.match(/-f cleanup_inactive_surface="\$[A-Za-z_]+"/g) ?? []).length,
-    4,
+    5,
   );
   assert.match(wf, /CLEANUP_INACTIVE_SURFACE_INPUT: \$\{\{ inputs\.cleanup_inactive_surface \}\}/);
   assert.match(wf, /CLEANUP_INACTIVE_SURFACE: \$\{\{ matrix\.target\.cleanupInactiveSurface \|\| false \}\}/);
@@ -3455,7 +3455,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(sectionContract, /-f source_commit="\$current_main"/);
   assert.equal(
     (sectionContract.match(/-f dispatch_nonce="\$dispatch_nonce"/g) ?? []).length,
-    4,
+    5,
     'ogni redispatch stale deve conservare il nonce della run originaria o generarne un fallback per sezione',
   );
   assert.match(sectionContract, /source_commit richiede una SHA completa/);
@@ -3534,7 +3534,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /REPLAY_API_AFTER_PUBLISH: \$\{\{ needs\.resolve\.outputs\.replay_api_after_publish \}\}/);
   assert.equal(
     (sectionContract.match(/-f replay_api_after_publish="\$REPLAY_API_AFTER_PUBLISH"/g) ?? []).length,
-    3,
+    4,
     'resolve, late guard e recovery devono propagare il flag del replay API',
   );
   const replayDispatcher = read('scripts/ci/dispatch-fast-publish-replay.sh');
@@ -3609,14 +3609,14 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   );
   assert.match(wf, /actions\/upload-artifact@v7/);
   assert.match(wf, /actions\/download-artifact@v7/);
-  assert.match(wf, /map\(\{section, rendered_head, fresh\}\)/);
+  assert.match(wf, /map\(\{section, rendered_head, stale_handoff, stale_handoff_head, fresh\}\)/);
   assert.match(wf, /map\(\.rendered_head\) \| unique \| if length == 1/);
-  assert.match(wf, /all\(\.\[\]; \(\.rendered_head == "" and \.fresh == "false"\)\)/);
+  assert.match(wf, /all\(\.\[\]; \(\.rendered_head == "" and \(\(\.stale_handoff == "true"\) or \(\.fresh == "false"\)\)\)\)/);
   assert.match(wf, /mixed_matrix: \$\{\{ steps\.collect\.outputs\.mixed_matrix \}\}/);
   assert.match(wf, /echo 'mixed_matrix=false'/);
   assert.ok(
     wf.includes(
-      'any(.[]; ((.rendered_head // "") | test("^[a-f0-9]{40}$"))) and any(.[]; ((.fresh // "") != "true" or (.rendered_head // "") == ""))',
+      'any(.[]; ((.rendered_head // "") | test("^[a-f0-9]{40}$"))) and any(.[]; ((.fresh // "") != "true" or (.stale_handoff // "") == "true" or (.rendered_head // "") == ""))',
     ),
     'una leg stale accanto a una leg produttiva deve diventare mixed_matrix',
   );

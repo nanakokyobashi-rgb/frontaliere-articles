@@ -10,6 +10,10 @@ const resolver = readFileSync(
   new URL('../../scripts/ci/fast-publish-section-resolve.sh', import.meta.url),
   'utf8',
 );
+const render = readFileSync(
+  new URL('../../scripts/ci/fast-publish-section-render.sh', import.meta.url),
+  'utf8',
+);
 
 function triggerBlock(name) {
   const start = workflow.indexOf(`\n  ${name}:`);
@@ -113,4 +117,30 @@ test('fast-publish-section delega i blocchi shell grandi a script senza espressi
     assert.match(source, /^set -euo pipefail$/mu);
     assert.doesNotMatch(source, /\$\{\{/u);
   }
+});
+
+test('una gara stale consegna un replay idempotente senza dichiarare una pubblicazione', () => {
+  assert.match(render, /dispatch_stale_handoff\(\)/u);
+  assert.match(render, /REPLAY_DISPATCH_ASYNC=true[\s\\]*\\[\s\S]*dispatch-fast-publish-replay\.sh/u);
+  assert.match(render, /-f source_commit="\$current_head"/u);
+  assert.match(render, /-f source_main_commit="\$current_head"/u);
+  assert.match(render, /-f dispatch_nonce="\$dispatch_nonce"/u);
+  assert.match(render, /echo "stale_handoff=true" >> "\$GITHUB_OUTPUT"/u);
+  assert.doesNotMatch(
+    render,
+    /main e' avanzata durante tre tentativi di render del publisher[\s\S]*exit 1/u,
+    'tre avanzamenti concorrenti devono accodare il replay, non lasciare il producer rosso',
+  );
+  assert.match(workflow, /STALE_HANDOFF: \$\{\{ steps\.render\.outputs\.stale_handoff \}\}/u);
+  assert.match(workflow, /stale_handoff: \$stale_handoff/u);
+  assert.match(workflow, /stale_handoff: \$\{\{ steps\.collect\.outputs\.stale_handoff \}\}/u);
+  assert.match(workflow, /needs\.publish_release_head\.outputs\.stale_handoff != 'true'/u);
+  assert.match(
+    workflow,
+    /all\(\.\[\]; \(\.rendered_head == "" and \(\(\.stale_handoff == "true"\) or \(\.fresh == "false"\)\)\)\)/u,
+  );
+  assert.ok(
+    workflow.includes('(.stale_handoff // "") == "true"'),
+    'una matrix mista deve ricorrere al recovery, non annunciare una release parziale',
+  );
 });
