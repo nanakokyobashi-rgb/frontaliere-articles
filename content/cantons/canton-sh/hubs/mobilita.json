@@ -4,8 +4,8 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "mobilita",
-  "updatedAt": "2026-10-27T10:55:28.229Z",
-  "contentHash": "4a479282e9e9ce13d8bd09141a0fd7dfa9524988ba669ef9a07fabcaee0e1fd9",
+  "updatedAt": "2026-10-27T11:09:45.043Z",
+  "contentHash": "1b4a5e64e755fe3995de926f1c4cd126b287463f9af68ad3924d947c39cb4604",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -137,6 +137,12 @@
           "date": "2026-10-17T01:47:28.492Z"
         },
         {
+          "title": "Cantone Sciaffusa spinge mobilità elettrica con 9 misure",
+          "url": "/articoli-sciaffusa/mobilit-elettrica-sciaffusa-20/",
+          "excerpt": "La strategia 2.0 prevede nove misure attuabili dal prossimo anno, incluse agevolazioni fiscali in esame per proprietari immobiliari e sostegno ai locatori.",
+          "date": "2026-10-27T10:58:31.090Z"
+        },
+        {
           "title": "Incidente scooter a Schleitheim: donna ferita, Hohbrugg chiusa",
           "url": "/articoli-sciaffusa/schleitheim-scooter-incidente-2026/",
           "excerpt": "Domenica 18 ottobre 2026, una 61enne cade dallo scooter sulla Hohbrugg: proiezione di 12 metri nel pendio, elicottero per il trasporto in ospedale, strada chiusa oltre un'ora.",
@@ -192,7 +198,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T11:09:45.043Z"
     },
     "en": {
       "canton": "SH",
@@ -312,6 +318,12 @@
           "date": "2026-10-17T01:47:28.492Z"
         },
         {
+          "title": "Canton Schaffhausen promotes electric mobility with 9 measures",
+          "url": "/en/schaffhausen-articles/electric-mobility-schaffhausen-20/",
+          "excerpt": "The 2.0 strategy includes nine measures that can be implemented starting next year, including tax incentives under consideration for property owners and support for landlords.",
+          "date": "2026-10-27T10:58:31.090Z"
+        },
+        {
           "title": "Scooter accident in Schleitheim: woman injured, Hohbrugg closed",
           "url": "/en/schaffhausen-articles/schleitheim-scooter-accident-2026/",
           "excerpt": "Sunday, October 18, 2026, a 61-year-old woman falls from her scooter on Hohbrugg: thrown 12 meters down the slope, helicopter transport to hospital, road closed for over an hour.",
@@ -367,7 +379,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T11:09:45.043Z"
     },
     "de": {
       "canton": "SH",
@@ -487,6 +499,12 @@
           "date": "2026-10-17T01:47:28.492Z"
         },
         {
+          "title": "Kanton Schaffhausen treibt Elektromobilität mit 9 Maßnahmen voran",
+          "url": "/de/schaffhausen-artikel/elektromobilitaet-schaffhausen-20/",
+          "excerpt": "Die Strategie 2.0 sieht neun Maßnahmen vor, die ab dem kommenden Jahr umgesetzt werden können, darunter derzeit geprüfte Steuererleichterungen für Immobilieneigentümer sowie Unterstützung für Vermieter.",
+          "date": "2026-10-27T10:58:31.090Z"
+        },
+        {
           "title": "Scooterunfall in Schleitheim: Frau verletzt, Hohbrugg gesperrt",
           "url": "/de/schaffhausen-artikel/schleitheim-roller-unfall-2026/",
           "excerpt": "Am Sonntag, 18.",
@@ -542,7 +560,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T11:09:45.043Z"
     },
     "fr": {
       "canton": "SH",
@@ -662,6 +680,12 @@
           "date": "2026-10-17T01:47:28.492Z"
         },
         {
+          "title": "Le canton de Schaffhouse accélère la mobilité électrique avec 9 mesures",
+          "url": "/fr/articles-schaffhouse/mobilites-electrique-sciaffhouse-20/",
+          "excerpt": "La stratégie 2.0 prévoit neuf mesures applicables dès l’année prochaine, y compris des allègements fiscaux à l’étude pour les propriétaires immobiliers et un soutien aux bailleurs.",
+          "date": "2026-10-27T10:58:31.090Z"
+        },
+        {
           "title": "Accident de scooter à Schleitheim : une femme blessée, Hohbrugg fermée",
           "url": "/fr/articles-schaffhouse/schleitheim-accident-scooter-2026/",
           "excerpt": "Dimanche 18 octobre 2026, une femme de 61 ans chute de son scooter sur la Hohbrugg : elle est projetée à 12 mètres dans la pente, un hélicoptère est utilisé pour son transport à l’hôpital, route fermée pendant plus…",
@@ -717,7 +741,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T11:09:45.043Z"
     }
   }
 }
