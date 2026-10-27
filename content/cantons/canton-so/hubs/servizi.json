@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "servizi",
-  "updatedAt": "2026-10-27T10:55:28.229Z",
-  "contentHash": "5520c076cf8f69093791912bc737b97521b5ef135fdd63f3cf778c792e2a9b9a",
+  "updatedAt": "2026-10-27T12:29:32.061Z",
+  "contentHash": "15af7723bb1bf536ea84050d2d32bd4d12c8d43835da494f1f75a765c7ba2e05",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -169,6 +169,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Proposta riduzione premi assicurazione malattia 2027 Canton Soletta",
+          "url": "/articoli-soletta/proposta-premi-assicurazione-2027/",
+          "excerpt": "Proposta 2027 trasmessa al Parlamento cantonale Circa 221 milioni di franchi per ridurre i premi Contributo cantonale di 98 milioni Aumento di 9 milioni (+4,3%)",
+          "date": "2026-10-27T12:21:54.555Z"
+        },
+        {
           "title": "Premi cassa malati a Soletta: +6% nel 2027",
           "url": "/articoli-soletta/premi-malattia-soletta-2027/",
           "excerpt": "Nel Canton Soletta il premio medio salirà di CHF 23.50 a CHF 417.50 nel 2027, 5.50 in più della media svizzera.",
@@ -209,12 +215,6 @@
           "url": "/articoli-svizzera/permesso-l-soletta-validita-e-proroga/",
           "excerpt": "Il permesso L di breve durata nel Cantone di Soletta è valido per un massimo di 1 anno. Le condizioni di proroga e il passaggio al permesso di dimora sono descritte di seguito.",
           "date": "2026-08-18T02:26:24.720Z"
-        },
-        {
-          "title": "Permesso di domicilio C canton Soletta: requisiti e domanda",
-          "url": "/articoli-svizzera/permesso-domicilio-c-soletta/",
-          "excerpt": "Analisi dei requisiti, dei criteri di integrazione e della procedura per richiedere il permesso di domicilio C nel Cantone di Soletta.",
-          "date": "2026-08-18T02:02:28.862Z"
         }
       ],
       "latestCantonArticles": [],
@@ -244,7 +244,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T12:29:32.061Z"
     },
     "en": {
       "canton": "SO",
@@ -381,6 +381,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Proposal to reduce health insurance premiums in 2027, Canton of Solothurn",
+          "url": "/en/solothurn-articles/2027-insurance-premium-proposal/",
+          "excerpt": "2027 proposal submitted to the Cantonal Parliament Approximately 221 million francs to reduce premiums Cantonal contribution of 98 million Increase of 9 million",
+          "date": "2026-10-27T12:21:54.555Z"
+        },
+        {
           "title": "Health insurance premiums in Solothurn: +6% in 2027",
           "url": "/en/solothurn-articles/solothurn-health-premiums-2027/",
           "excerpt": "In the Canton of Solothurn, the average premium will rise by CHF 23.50 to CHF 417.50 in 2027, 5.50 more than the Swiss average.",
@@ -421,12 +427,6 @@
           "url": "/en/swiss-articles/l-permit-in-slab-duration-and-conditions/",
           "excerpt": "The short-term L permit in the Canton of Solothurn is valid for a maximum of 1 year. The conditions of extension and the transition to a residence permit are described below.",
           "date": "2026-08-18T02:26:24.720Z"
-        },
-        {
-          "title": "Residence permit C canton Solothurn: requirements and application",
-          "url": "/en/swiss-articles/c-permit-solothurn-requirements-application/",
-          "excerpt": "Analysis of the requirements, integration criteria and procedure for applying for residence permit C in the Canton of Solothurn.",
-          "date": "2026-08-18T02:02:28.862Z"
         }
       ],
       "latestCantonArticles": [],
@@ -452,7 +452,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T12:29:32.061Z"
     },
     "de": {
       "canton": "SO",
@@ -589,6 +589,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Vorschlag: Prämienverbilligung 2027 im Kanton Solothurn",
+          "url": "/de/solothurn-artikel/praemienverbilligung-2027/",
+          "excerpt": "Vorschlag 2027 dem Kantonsparlament übermittelt Rund 221 Millionen Franken zur Senkung der Prämien Kantonsbeitrag von 98 Millionen Erhöhung um 9 Millionen",
+          "date": "2026-10-27T12:21:54.555Z"
+        },
+        {
           "title": "Krankenkassenprämien in Solothurn: +6% im Jahr 2027",
           "url": "/de/solothurn-artikel/solothurn-krankenkassenpraemien-2027/",
           "excerpt": "Im Kanton Solothurn steigt die durchschnittliche Prämie im Jahr 2027 um CHF 23.50 auf CHF 417.50, 5.50 mehr als der Schweizer Durchschnitt.",
@@ -629,12 +635,6 @@
           "url": "/de/schweiz-artikel/erlaubnis-l-in-solothurn-dauer-und-bedingungen/",
           "excerpt": "Die Kurzzeitbewilligung L im Kanton Solothurn ist maximal 1 Jahr gültig. Die Bedingungen für die Verlängerung und den Übergang zur Aufenthaltsbewilligung sind nachfolgend beschrieben.",
           "date": "2026-08-18T02:26:24.720Z"
-        },
-        {
-          "title": "Niederlassungsbewilligung C Kanton Solothurn: Voraussetzungen und Antrag",
-          "url": "/de/schweiz-artikel/niederlassungsbewilligung-c-kanton-solothurn-voraussetzungen/",
-          "excerpt": "Analyse der Voraussetzungen, der Integrationskriterien und des Verfahrens zur Beantragung der Niederlassungsbewilligung C im Kanton Solothurn.",
-          "date": "2026-08-18T02:02:28.862Z"
         }
       ],
       "latestCantonArticles": [],
@@ -660,7 +660,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T12:29:32.061Z"
     },
     "fr": {
       "canton": "SO",
@@ -797,6 +797,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Proposition de réduction des primes maladie 2027 à Soleure",
+          "url": "/fr/articles-soleure/proposition-primes-2027/",
+          "excerpt": "Proposition 2027 transmise au Parlement cantonal Environ 221 millions de francs pour réduire les primes Contribution cantonale de 98 millions Augmentation de 9",
+          "date": "2026-10-27T12:21:54.555Z"
+        },
+        {
           "title": "Primes d’assurance-maladie à Soleure : +6 % en 2027",
           "url": "/fr/articles-soleure/primes-maladie-soleure-2027/",
           "excerpt": "Dans le canton de Soleure, la prime moyenne augmentera de CHF 23.50 pour atteindre CHF 417.50 en 2027, soit 5.50 de plus que la moyenne suisse.",
@@ -837,12 +843,6 @@
           "url": "/fr/articles-suisse/permis-l-a-soleure-duree-et-conditions/",
           "excerpt": "Le permis L de courte durée dans le canton de Soleure est valable pour une durée maximale d'un an. Les conditions de prolongation et de passage à l'autorisation de séjour sont décrites ci-dessous.",
           "date": "2026-08-18T02:26:24.720Z"
-        },
-        {
-          "title": "Permis de séjour C canton de Soleure : exigences et demande",
-          "url": "/fr/articles-suisse/permis-etablissement-c-canton-soleure-conditions/",
-          "excerpt": "Analyse des exigences, des critères d'intégration et de la procédure de demande du permis de séjour C dans le canton de Soleure.",
-          "date": "2026-08-18T02:02:28.862Z"
         }
       ],
       "latestCantonArticles": [],
@@ -864,7 +864,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T12:29:32.061Z"
     }
   }
 }

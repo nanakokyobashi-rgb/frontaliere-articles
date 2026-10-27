@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "carburanti",
-  "updatedAt": "2026-10-27T11:16:36.775Z",
-  "contentHash": "eee013cb7570114235363ff2d05b3057c8cd53534421aeae58244dab188a61d1",
+  "updatedAt": "2026-10-27T12:29:32.061Z",
+  "contentHash": "a9ab62033b4c84ab05eafba9f4aa617e0edf051ac01bb9b3a7ab85d386340d19",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Proposta riduzione premi assicurazione malattia 2027 Canton Soletta",
+          "url": "/articoli-soletta/proposta-premi-assicurazione-2027/",
+          "excerpt": "Proposta 2027 trasmessa al Parlamento cantonale Circa 221 milioni di franchi per ridurre i premi Contributo cantonale di 98 milioni Aumento di 9 milioni (+4,3%)",
+          "date": "2026-10-27T12:21:54.555Z"
+        },
+        {
           "title": "Consiglio Cantonale Soletta: sedute 3, 4 e 11 novembre 2026",
           "url": "/articoli-soletta/sedute-parlamento-novembre-2026/",
           "excerpt": "In agenda 58 affari, inclusi 7 affari normativi e di merito e 7 interventi parlamentari urgenti.",
@@ -94,12 +100,6 @@
           "url": "/articoli-soletta/finanzkommission-k-rzt-kredit-digitalisierung/",
           "excerpt": "La Commissione finanziaria del Consiglio cantonale di Soletta chiede di ridurre il credito d'impegno per la trasformazione digitale da CHF 21,4 a CHF 21,2 milioni.",
           "date": "2026-10-23T14:42:31.186Z"
-        },
-        {
-          "title": "Polizia Soletta: comunicazione 365 giorni e divieto droni 300 m",
-          "url": "/articoli-soletta/polizia-soletta-comunicazione-media-droni/",
-          "excerpt": "Il servizio media opera 365 giorni all'anno Il team gestisce X, Facebook e Instagram Nei grandi eventi un membro è presente sul posto Il divieto di droni vale",
-          "date": "2026-10-23T03:30:32.771Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-27T11:16:36.775Z"
+      "updatedAt": "2026-10-27T12:29:32.061Z"
     },
     "en": {
       "canton": "SO",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Proposal to reduce health insurance premiums in 2027, Canton of Solothurn",
+          "url": "/en/solothurn-articles/2027-insurance-premium-proposal/",
+          "excerpt": "2027 proposal submitted to the Cantonal Parliament Approximately 221 million francs to reduce premiums Cantonal contribution of 98 million Increase of 9 million",
+          "date": "2026-10-27T12:21:54.555Z"
+        },
+        {
           "title": "Solothurn Cantonal Council: meetings of 3, 4 and 11 November 2026",
           "url": "/en/solothurn-articles/parliament-sessions-november-2026/",
           "excerpt": "On the agenda 58 affairs, including 7 regulatory and substantive affairs and 7 urgent parliamentary interventions.",
@@ -193,12 +199,6 @@
           "url": "/en/solothurn-articles/financial-commission-cuts-digitalization-credit/",
           "excerpt": "The Finance Committee of the Cantonal Council of Solothurn is requesting that the commitment credit for digital transformation be reduced from CHF 21,4 million to CHF 21,2 million.",
           "date": "2026-10-23T14:42:31.186Z"
-        },
-        {
-          "title": "Solothurn Police: 365-day communication and 300 m drone ban",
-          "url": "/en/solothurn-articles/solothurn-police-communication-media-drones/",
-          "excerpt": "The media service operates 365 days a year The team manages X, Facebook and Instagram At major events, a team member is present on site The drone ban applies",
-          "date": "2026-10-23T03:30:32.771Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-27T11:16:36.775Z"
+      "updatedAt": "2026-10-27T12:29:32.061Z"
     },
     "de": {
       "canton": "SO",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Vorschlag: Prämienverbilligung 2027 im Kanton Solothurn",
+          "url": "/de/solothurn-artikel/praemienverbilligung-2027/",
+          "excerpt": "Vorschlag 2027 dem Kantonsparlament übermittelt Rund 221 Millionen Franken zur Senkung der Prämien Kantonsbeitrag von 98 Millionen Erhöhung um 9 Millionen",
+          "date": "2026-10-27T12:21:54.555Z"
+        },
+        {
           "title": "Kantonsrat Solothurn: Sitzungen vom 3., 4. und 11. November 2026",
           "url": "/de/solothurn-artikel/parlament-sitzungen-november-2026/",
           "excerpt": "Auf der Tagesordnung stehen 58 Angelegenheiten, darunter 7 regulatorische und materielle Angelegenheiten sowie 7 dringende parlamentarische Interventionen.",
@@ -292,12 +298,6 @@
           "url": "/de/solothurn-artikel/finanzkommission-kurzt-kredit-digitalisierung/",
           "excerpt": "Die Finanzkommission des Solothurner Kantonsrats beantragt, den Verpflichtungskredit für die digitale Transformation von CHF 21,4 auf CHF 21,2 Millionen zu kürzen.",
           "date": "2026-10-23T14:42:31.186Z"
-        },
-        {
-          "title": "Polizei Solothurn: Kommunikation 365 Tage und Drohnenverbot 300 m",
-          "url": "/de/solothurn-artikel/polizei-solothurn-kommunikation-medien-drohnen/",
-          "excerpt": "Der Mediendienst ist 365 Tage im Jahr tätig Das Team betreut X, Facebook und Instagram Bei Grossanlässen ist ein Mitglied vor Ort Das Drohnenverbot gilt",
-          "date": "2026-10-23T03:30:32.771Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-27T11:16:36.775Z"
+      "updatedAt": "2026-10-27T12:29:32.061Z"
     },
     "fr": {
       "canton": "SO",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Proposition de réduction des primes maladie 2027 à Soleure",
+          "url": "/fr/articles-soleure/proposition-primes-2027/",
+          "excerpt": "Proposition 2027 transmise au Parlement cantonal Environ 221 millions de francs pour réduire les primes Contribution cantonale de 98 millions Augmentation de 9",
+          "date": "2026-10-27T12:21:54.555Z"
+        },
+        {
           "title": "Conseil cantonal de Soleure : réunions des 3, 4 et 11 novembre 2026",
           "url": "/fr/articles-soleure/sessions-parlement-novembre-2026/",
           "excerpt": "À l'ordre du jour 58 affaires, dont 7 affaires réglementaires et substantielles et 7 interventions parlementaires urgentes.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-soleure/commission-financiere-coupe-credit-digitalisation/",
           "excerpt": "La commission des finances du Conseil cantonal de Soleure demande de réduire le crédit d’engagement pour la transformation numérique de CHF 21,4 à CHF 21,2 millions.",
           "date": "2026-10-23T14:42:31.186Z"
-        },
-        {
-          "title": "Police de Soleure : communication 365 jours et interdiction des drones à 300 m",
-          "url": "/fr/articles-soleure/police-soleure-communication-medias-drones/",
-          "excerpt": "Le service médias fonctionne 365 jours par an L’équipe gère X, Facebook et Instagram Lors des grands événements, un membre est présent sur place L’interdiction",
-          "date": "2026-10-23T03:30:32.771Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-27T11:16:36.775Z"
+      "updatedAt": "2026-10-27T12:29:32.061Z"
     }
   }
 }
