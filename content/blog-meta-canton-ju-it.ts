@@ -24,6 +24,9 @@ const blogMetaCantonJuIt: Record<string, string> = {
     'blog.article.governo-giurassiano-nomine-2027.title': 'Governo giurassiano nomina due figure per il 2027',
     'blog.article.governo-giurassiano-nomine-2027.excerpt': 'Sandrine Crevoisier guiderà il nuovo Servizio penitenziario.',
     'blog.article.governo-giurassiano-nomine-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.fiscalita-coppie-marite-voto.title': 'Imposizione dei coniugi: voto il 29 novembre',
+    'blog.article.fiscalita-coppie-marite-voto.excerpt': 'L\'8 marzo l\'imposizione individuale è passata con il 54% Il 29 novembre si vota sull\'iniziativa del Centro Il testo propone l\'imposizione comune dei coniugi',
+    'blog.article.fiscalita-coppie-marite-voto.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonJuIt;

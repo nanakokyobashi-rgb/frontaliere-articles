@@ -24,6 +24,9 @@ const blogMetaCantonJuFr: Record<string, string> = {
     'blog.article.governo-giurassiano-nomine-2027.title': 'Le gouvernement Jura nomme deux chiffres pour 2027',
     'blog.article.governo-giurassiano-nomine-2027.excerpt': 'Sandrine Crevoisier dirigera le nouveau Service pénitentiaire.',
     'blog.article.governo-giurassiano-nomine-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.fiscalita-coppie-marite-voto.title': 'Fiscalité des conjoints : votez le 29 novembre',
+    'blog.article.fiscalita-coppie-marite-voto.excerpt': 'Le 8 mars, la fiscalité individuelle a été adoptée avec 54 % Le 29 novembre, le vote aura lieu sur l\'initiative du Centre Le texte propose la taxation commune',
+    'blog.article.fiscalita-coppie-marite-voto.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonJuFr;

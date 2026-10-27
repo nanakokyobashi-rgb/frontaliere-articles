@@ -24,6 +24,9 @@ const blogMetaCantonJuDe: Record<string, string> = {
     'blog.article.governo-giurassiano-nomine-2027.title': 'Die Regierung von Jura ernennt für 2027 zweistellige Personen',
     'blog.article.governo-giurassiano-nomine-2027.excerpt': 'Sandrine Crevoisier wird den neuen Gefängnisdienst leiten.',
     'blog.article.governo-giurassiano-nomine-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.fiscalita-coppie-marite-voto.title': 'Besteuerung der Ehepartner: Abstimmung am 29. November',
+    'blog.article.fiscalita-coppie-marite-voto.excerpt': 'Am 8. März wurde die Einzelbesteuerung mit 54 % verabschiedet. Am 29. November findet die Abstimmung über die Initiative des Zentrums statt Der Text schlägt',
+    'blog.article.fiscalita-coppie-marite-voto.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonJuDe;

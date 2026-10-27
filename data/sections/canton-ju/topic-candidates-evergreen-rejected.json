@@ -4,18 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261023-volvo-cars-plonge-dans-le-rouge-et-supprime-2500-postes.html": {
-      "section": "canton-ju",
-      "ts": 1792884316356
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261023-sgs-progresse-au-troisieme-trimestre.html": {
-      "section": "canton-ju",
-      "ts": 1792884324603
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261023-holcim-avance-au-3e-trimestre-et-releve-ses-ambitions.html": {
-      "section": "canton-ju",
-      "ts": 1792884332551
-    },
     "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261026-les-salaires-effectifs-ont-augmente-de-0-5-en-2026.html": {
       "section": "canton-ju",
       "ts": 1793004492509
@@ -31,6 +19,10 @@
     "canton-ju::https://www.h-ju.ch/fr/a-propos/medias-presse/communiques-de-presse/la-sante-mentale-au-coeur-de-la-27eme-journee-scientifique-interjurassienne-de-la-sante.html": {
       "section": "canton-ju",
       "ts": 1793030581852
+    },
+    "canton-ju::https://www.lejdj.ch/articles/a-moutier-de-jeunes-ingenieurs-rencontrent-les-industriels-104965": {
+      "section": "canton-ju",
+      "ts": 1793058683721
     }
   }
 }

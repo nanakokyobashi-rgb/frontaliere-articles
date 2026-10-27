@@ -83,4 +83,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'fiscalita-coppie-marite-voto',
+ category: 'fiscale',
+ date: '2026-10-27T00:08:19.325Z',
+ image: '/images/blog/article-fiscalita-coppie-marite-voto.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['JU'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];

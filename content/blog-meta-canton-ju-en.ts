@@ -24,6 +24,9 @@ const blogMetaCantonJuEn: Record<string, string> = {
     'blog.article.governo-giurassiano-nomine-2027.title': 'Jura government appoints two figures for 2027',
     'blog.article.governo-giurassiano-nomine-2027.excerpt': 'Sandrine Crevoisier will lead the new Penitentiary Service.',
     'blog.article.governo-giurassiano-nomine-2027.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.fiscalita-coppie-marite-voto.title': 'Taxation of spouses: vote on 29 November',
+    'blog.article.fiscalita-coppie-marite-voto.excerpt': 'On 8 March, individual taxation passed with 54% On November 29, the vote will be held on the Center\'s initiative The text proposes the common taxation',
+    'blog.article.fiscalita-coppie-marite-voto.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonJuEn;
