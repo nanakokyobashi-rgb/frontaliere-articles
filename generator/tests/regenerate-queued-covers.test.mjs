@@ -1641,6 +1641,10 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
     workflow,
     /name: Dispatch pending cover publishers before generation[\s\S]*?id: pre_republish[\s\S]*?continue-on-error: true/u,
   );
+  assert.match(
+    workflow,
+    /name: Dispatch and complete pending cover publishers[\s\S]*?id: republish[\s\S]*?continue-on-error: true/u,
+  );
   assert.match(workflow, /expected_sections="\$\(jq -c '\[\.items\[\] \| \.section\] \| unique \| sort'/u);
   assert.match(workflow, /\(\.sections \| length > 0\)/u);
   assert.match(workflow, /\[\.sections\[\] \| \.section\] \| sort == \$expected_sections/u);

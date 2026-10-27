@@ -643,6 +643,10 @@ jobs:
 
       - name: Dispatch and complete pending cover publishers
         id: republish
+        # Deferred publishers are durable work, not a failed regeneration run.
+        # The acknowledgement step below remains authoritative for malformed
+        # status and terminal publisher failures.
+        continue-on-error: true
         if: steps.push.outputs.publish_ready == 'true'
         env:
           OUTBOX_FILE: data/image-regeneration-publish-outbox.json
