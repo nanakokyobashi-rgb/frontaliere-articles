@@ -287,20 +287,72 @@ jobs:
             '
           }
 
+          validate_workflow_runs_for_status() {
+            jq -c --arg expected "$1" '
+              . as $pages
+              | if (type == "array" and length > 0)
+                  and all(.[];
+                    type == "object"
+                    and (.workflow_runs | type) == "array"
+                    and (.total_count | type) == "number"
+                    and (.total_count >= 0)
+                    and ((.total_count | floor) == .total_count)
+                    and all(.workflow_runs[];
+                      type == "object"
+                      and (.id | type) == "number"
+                      and (.id >= 1)
+                      and ((.id | floor) == .id)
+                      and (.status == $expected)
+                      and (.event | type) == "string"
+                      and (.event | length) > 0
+                      and (.name | type) == "string"
+                      and (.name | length) > 0
+                      and (.display_title | type) == "string"
+                      and (.display_title | length) > 0
+                      and (.created_at | type) == "string"
+                      and (.created_at | length) > 0
+                      and ((try (.created_at | fromdateiso8601) catch null) != null)
+                    ))
+                  and (($pages | map(.total_count) | unique | length) == 1)
+                  and (($pages | map(.workflow_runs | length) | add) == $pages[0].total_count)
+                  and (([$pages[].workflow_runs[].id] | unique | length)
+                    == ([$pages[].workflow_runs[]] | length))
+                then
+                  [$pages[].workflow_runs[]
+                    | {id: .id, event: .event, name: .name,
+                       display_title: .display_title, status: .status,
+                       created_at: .created_at}]
+                else
+                  error("workflow run listing incomplete")
+                end
+            '
+          }
+
           active_runs_for_shard() {
             local section="$1"
             local shard="$2"
             local dispatch_section
-            local runs_pages_json
-            local runs_json
-            if ! runs_pages_json="$(gh_api_timeout --paginate --slurp "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?per_page=100")"; then
-              echo 999
-              return
-            fi
-            if ! runs_json="$(validate_workflow_runs <<<"$runs_pages_json")"; then
-              echo 999
-              return
-            fi
+            local runs
+            runs='[]'
+            while IFS= read -r status; do
+              local status_pages_json
+              local status_runs
+              if ! status_pages_json="$(gh_api_timeout --paginate --slurp \
+                "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?per_page=100&status=$status" \
+                2>/dev/null)"; then
+                echo 999
+                return
+              fi
+              if ! status_runs="$(validate_workflow_runs_for_status "$status" <<<"$status_pages_json")"; then
+                echo 999
+                return
+              fi
+              if ! runs="$(jq -c --argjson existing "$runs" --argjson current "$status_runs" \
+                '$existing + $current' <<<"$runs")"; then
+                echo 999
+                return
+              fi
+            done < <(jq -r '.[]' <<<"$IN_FLIGHT_STATUSES")
             while IFS=$'\t' read -r run_id run_event run_name; do
               if [ -z "$run_id" ] || [ -z "$run_event" ] || [ -z "$run_name" ]; then
                 echo 999
@@ -403,21 +455,25 @@ jobs:
                   ;;
               esac
             done < <(
-              jq -r --argjson in_flight "$IN_FLIGHT_STATUSES" '.workflow_runs[]
+              jq -r --argjson in_flight "$IN_FLIGHT_STATUSES" '.[]
                 | .status as $status
                 | select(($in_flight | index($status)) != null)
-                | [.id, .event, .display_title] | @tsv' <<<"$runs_json"
+                | [.id, .event, .display_title] | @tsv' <<<"$runs"
             )
             echo 0
           }
 
           # Tetto assoluto: quanti dispatch di fast-publish nell'ultima ora.
+          # Anche questa lettura è limitata dalla finestra temporale: non deve
+          # ripaginare la storia completa del workflow solo per contare il cap.
           deferred=false
-          hour_ago="$(date -u -d '60 minutes ago' +%Y-%m-%dT%H:%M:%SZ)"
+          recent_since="$(date -u -d '1 hour ago' '+%Y-%m-%dT%H:%M:%SZ')"
           recent=999
-          if recent_pages_json="$(gh_api_timeout --paginate --slurp "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?event=workflow_dispatch&per_page=100" 2>/dev/null)"; then
+          if recent_pages_json="$(gh_api_timeout --paginate --slurp \
+            "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?per_page=100&created=%3E%3D$recent_since&event=workflow_dispatch" \
+            2>/dev/null)"; then
             if recent_runs_json="$(validate_workflow_runs <<<"$recent_pages_json")"; then
-              recent="$(jq -r --arg t "$hour_ago" '[.workflow_runs[] | select(.event == "workflow_dispatch" and .created_at_epoch >= ($t | fromdateiso8601))] | length' <<<"$recent_runs_json" 2>/dev/null)" || recent=999
+              recent="$(jq -r --arg t "$recent_since" '[.workflow_runs[] | select(.event == "workflow_dispatch" and .created_at_epoch >= ($t | fromdateiso8601))] | length' <<<"$recent_runs_json" 2>/dev/null)" || recent=999
             fi
           fi
           if [ "$recent" -ge 6 ]; then
