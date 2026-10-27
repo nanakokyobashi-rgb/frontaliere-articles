@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "carburanti",
-  "updatedAt": "2026-10-27T12:29:32.061Z",
-  "contentHash": "a9ab62033b4c84ab05eafba9f4aa617e0edf051ac01bb9b3a7ab85d386340d19",
+  "updatedAt": "2026-10-27T12:50:21.284Z",
+  "contentHash": "4d7df0f16c1a204eacff2bd5fb5237c6c62f659b18ea6ab4517bac7f2ee1a651",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Soletta: salari aumentano dell'1,0% dal prossimo anno",
+          "url": "/articoli-soletta/soletta-aumento-salari/",
+          "excerpt": "Il Governo cantonale e le associazioni del personale hanno concordato un aumento dell'1,0% dal prossimo anno per dipendenti pubblici, scuole e ospedali.",
+          "date": "2026-10-27T12:43:48.858Z"
+        },
+        {
           "title": "Proposta riduzione premi assicurazione malattia 2027 Canton Soletta",
           "url": "/articoli-soletta/proposta-premi-assicurazione-2027/",
           "excerpt": "Proposta 2027 trasmessa al Parlamento cantonale Circa 221 milioni di franchi per ridurre i premi Contributo cantonale di 98 milioni Aumento di 9 milioni (+4,3%)",
@@ -94,12 +100,6 @@
           "url": "/articoli-soletta/cambio-ora-rischio-wildunfalli/",
           "excerpt": "La notte tra il 24 e il 25 ottobre 2026 gli orologi tornano indietro di un'ora, coincidente con l'attività di caprioli, cervi nobili e cinghiali.",
           "date": "2026-10-24T14:03:16.134Z"
-        },
-        {
-          "title": "Commissione finanziaria riduce credito per trasformazione digitale a Soletta",
-          "url": "/articoli-soletta/finanzkommission-k-rzt-kredit-digitalisierung/",
-          "excerpt": "La Commissione finanziaria del Consiglio cantonale di Soletta chiede di ridurre il credito d'impegno per la trasformazione digitale da CHF 21,4 a CHF 21,2 milioni.",
-          "date": "2026-10-23T14:42:31.186Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-27T12:29:32.061Z"
+      "updatedAt": "2026-10-27T12:50:21.284Z"
     },
     "en": {
       "canton": "SO",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Solothurn: salaries increase by 1,0% starting next year",
+          "url": "/en/solothurn-articles/solothurn-wage-increase/",
+          "excerpt": "The cantonal government and staff associations have agreed on a 1,0% increase from next year for public employees, schools and hospitals.",
+          "date": "2026-10-27T12:43:48.858Z"
+        },
+        {
           "title": "Proposal to reduce health insurance premiums in 2027, Canton of Solothurn",
           "url": "/en/solothurn-articles/2027-insurance-premium-proposal/",
           "excerpt": "2027 proposal submitted to the Cantonal Parliament Approximately 221 million francs to reduce premiums Cantonal contribution of 98 million Increase of 9 million",
@@ -193,12 +199,6 @@
           "url": "/en/solothurn-articles/time-change-wild-animal-risk-solothurn/",
           "excerpt": "On the night between October 24 and 25, 2026, the clocks go back one hour, coinciding with the activity of roe deer, red deer and wild boars.",
           "date": "2026-10-24T14:03:16.134Z"
-        },
-        {
-          "title": "Financial Committee reduces funding for digital transformation in Solothurn",
-          "url": "/en/solothurn-articles/financial-commission-cuts-digitalization-credit/",
-          "excerpt": "The Finance Committee of the Cantonal Council of Solothurn is requesting that the commitment credit for digital transformation be reduced from CHF 21,4 million to CHF 21,2 million.",
-          "date": "2026-10-23T14:42:31.186Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-27T12:29:32.061Z"
+      "updatedAt": "2026-10-27T12:50:21.284Z"
     },
     "de": {
       "canton": "SO",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Solothurn: Löhne steigen ab dem kommenden Jahr um 1,0%",
+          "url": "/de/solothurn-artikel/solothurn-lohnerhoehung/",
+          "excerpt": "Die Kantonsregierung und die Personalverbände haben für Angestellte des öffentlichen Dienstes, Schulen und Spitäler ab dem kommenden Jahr eine Erhöhung um 1,0% vereinbart.",
+          "date": "2026-10-27T12:43:48.858Z"
+        },
+        {
           "title": "Vorschlag: Prämienverbilligung 2027 im Kanton Solothurn",
           "url": "/de/solothurn-artikel/praemienverbilligung-2027/",
           "excerpt": "Vorschlag 2027 dem Kantonsparlament übermittelt Rund 221 Millionen Franken zur Senkung der Prämien Kantonsbeitrag von 98 Millionen Erhöhung um 9 Millionen",
@@ -292,12 +298,6 @@
           "url": "/de/solothurn-artikel/zeitumstellung-wildunfall-solothurn/",
           "excerpt": "In der Nacht vom 24.",
           "date": "2026-10-24T14:03:16.134Z"
-        },
-        {
-          "title": "Finanzkommission kürzt Kredit für die digitale Transformation in Solothurn",
-          "url": "/de/solothurn-artikel/finanzkommission-kurzt-kredit-digitalisierung/",
-          "excerpt": "Die Finanzkommission des Solothurner Kantonsrats beantragt, den Verpflichtungskredit für die digitale Transformation von CHF 21,4 auf CHF 21,2 Millionen zu kürzen.",
-          "date": "2026-10-23T14:42:31.186Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-27T12:29:32.061Z"
+      "updatedAt": "2026-10-27T12:50:21.284Z"
     },
     "fr": {
       "canton": "SO",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Soleure : les salaires augmentent de 1,0 % dès l’année prochaine",
+          "url": "/fr/articles-soleure/soleure-hausse-salaires/",
+          "excerpt": "Le Gouvernement cantonal et les associations du personnel ont convenu d’une augmentation de 1,0 % dès l’année prochaine pour les employés publics, les écoles et les hôpitaux.",
+          "date": "2026-10-27T12:43:48.858Z"
+        },
+        {
           "title": "Proposition de réduction des primes maladie 2027 à Soleure",
           "url": "/fr/articles-soleure/proposition-primes-2027/",
           "excerpt": "Proposition 2027 transmise au Parlement cantonal Environ 221 millions de francs pour réduire les primes Contribution cantonale de 98 millions Augmentation de 9",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-soleure/changement-heure-risque-wild-soleure/",
           "excerpt": "Dans la nuit du 24 au 25 octobre 2026, les horloges reculent d'une heure, ce qui coïncide avec l'activité des chevreuils, cerfs élaphes et sangliers.",
           "date": "2026-10-24T14:03:16.134Z"
-        },
-        {
-          "title": "La commission réduit le crédit de numérisation à Soleure",
-          "url": "/fr/articles-soleure/commission-financiere-coupe-credit-digitalisation/",
-          "excerpt": "La commission des finances du Conseil cantonal de Soleure demande de réduire le crédit d’engagement pour la transformation numérique de CHF 21,4 à CHF 21,2 millions.",
-          "date": "2026-10-23T14:42:31.186Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-27T12:29:32.061Z"
+      "updatedAt": "2026-10-27T12:50:21.284Z"
     }
   }
 }
