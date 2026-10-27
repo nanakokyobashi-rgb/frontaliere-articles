@@ -41,10 +41,9 @@ import {
   findAllSeoEntryMatches,
   hasInterpolatedStaticProperty,
   lastStaticPropertyValue,
-  readStaticObjectProperty,
   readStructuredSeoDescription,
   readStructuredSeoDescriptionState,
-  readStructuredSeoObjectBlocks,
+  readStructuredSeoObjectProperty,
 } from './shared/seo-entry.mjs';
 import { createImageCreditReader, mediaRssCreditXml, renderImageCreditHtml } from './shared/imageCredits.mjs';
 import { articleSectionEntry } from './shared/articleSectionCore.mjs';
@@ -280,22 +279,18 @@ function parseSeoBlogs(fs, path, rootDir, seoDir, seoFiles) {
       // and visible byline are built from. Carry only a named real Person or
       // editorial-profile Organization: the newsroom fallback is the channel
       // title and repeating it as <dc:creator> would say nothing.
-      const authorBlock = readStructuredSeoObjectBlocks(block)
-        .map((structuredDataObject) => readStaticObjectProperty(structuredDataObject, 'author'))
-        .filter(Boolean)
-        .at(-1);
-      const isNamedAuthor =
-        authorBlock &&
-        ((lastStaticPropertyValue(authorBlock, '@type') === 'Organization' &&
-          (lastStaticPropertyValue(authorBlock, '@id')?.endsWith('#profile')
-            || lastStaticPropertyValue(authorBlock, 'url')?.includes('/autori/')))
-          || (lastStaticPropertyValue(authorBlock, '@type') === 'Person' &&
-            (lastStaticPropertyValue(authorBlock, '@id')?.endsWith('#person')
-              || lastStaticPropertyValue(authorBlock, 'url')?.includes('/autori/'))));
-      const authorName =
-        isNamedAuthor
-          ? lastStaticPropertyValue(authorBlock, 'name') || ''
-          : '';
+      const authorBlock = readStructuredSeoObjectProperty(block, 'author');
+      const authorType = authorBlock ? lastStaticPropertyValue(authorBlock, '@type') : undefined;
+      const authorId = authorBlock ? lastStaticPropertyValue(authorBlock, '@id') : undefined;
+      const authorUrl = authorBlock ? lastStaticPropertyValue(authorBlock, 'url') : undefined;
+      const isNamedAuthor = authorType === 'Organization'
+        ? Boolean(authorId?.includes('#profile') || authorUrl?.includes('/autori/'))
+        : authorType === 'Person'
+          ? Boolean(authorId?.includes('#person') || authorUrl?.includes('/autori/'))
+          : false;
+      const authorName = isNamedAuthor
+        ? lastStaticPropertyValue(authorBlock ?? '', 'name') ?? ''
+        : '';
 
       // An item needs a REAL date: `<pubDate>` and the newest-first sort are
       // built from it, and `new Date('garbage').toUTCString()` is the literal

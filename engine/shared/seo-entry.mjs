@@ -484,6 +484,40 @@ function forEachStaticProperty(block, visit) {
   }
 }
 
+/**
+ * Return every object literal in a structuredData object or object array.
+ *
+ * The OG emitter needs the concrete object that owns an Event, not a regex
+ * match somewhere in the enclosing SEO entry. Reusing the same balanced
+ * delimiter scanner also keeps braces inside quoted Event text inert.
+ */
+function structuredDataObjectBlocks(block, valueStart, valueEnd) {
+  const quote = block[valueStart];
+  if (quote === '{') return [block.slice(valueStart, valueEnd)];
+  if (quote !== '[') return [];
+
+  const array = block.slice(valueStart, valueEnd);
+  const arrayEnd = array.length - 1;
+  const objects = [];
+  let cursor = 1;
+  while (cursor < arrayEnd) {
+    cursor = skipStaticTrivia(array, cursor, 'SEO entry', 'structuredData-array');
+    if (cursor >= arrayEnd || array[cursor] === ']') break;
+    if (array[cursor] !== '{') return [];
+
+    const close = matchingDelimiter(array, cursor);
+    if (close < 0 || close >= arrayEnd) return [];
+    objects.push(array.slice(cursor, close + 1));
+    cursor = skipStaticTrivia(array, close + 1, 'SEO entry', 'structuredData-array');
+    if (cursor < arrayEnd && array[cursor] === ',') {
+      cursor += 1;
+      continue;
+    }
+    if (cursor < arrayEnd && array[cursor] !== ']') return [];
+  }
+  return objects;
+}
+
 /** Return whether a template literal contains an unevaluated interpolation. */
 function hasTemplateInterpolation(block, valueStart, valueEnd) {
   for (let cursor = valueStart + 1; cursor < valueEnd; cursor += 1) {
@@ -680,73 +714,56 @@ export function hasInterpolatedStaticProperty(block, field, options = {}) {
   return interpolatedPropertyState(block, field, options).dynamic;
 }
 
-/** Return the final balanced object literal assigned to a property. */
+/** Return every final structuredData object, supporting object arrays. */
+export function readStructuredSeoObjectBlocks(block) {
+  let structuredData;
+  forEachStaticProperty(block, ({ key, valueStart, valueEnd }) => {
+    if (key === 'structuredData') {
+      structuredData = structuredDataObjectBlocks(block, valueStart, valueEnd);
+    }
+  });
+  return structuredData;
+}
+
+/** Return the last structuredData object, preserving the legacy API shape. */
+export function readStructuredSeoBlock(block) {
+  return readStructuredSeoObjectBlocks(block)?.at(-1);
+}
+
+/**
+ * Return the final static object assigned to a structuredData field.
+ * @returns {string | undefined}
+ */
 export function readStaticObjectProperty(block, field) {
+  /** @type {string | undefined} */
   let objectBlock;
   forEachStaticProperty(block, ({ key, valueStart, valueEnd }) => {
-    if (key === field) {
-      objectBlock = block[valueStart] === '{'
-        ? block.slice(valueStart, valueEnd)
-        : undefined;
-    }
+    if (key !== field) return;
+    // JavaScript object literals are last-write-wins. A later null, dynamic
+    // expression, or primitive must therefore clear an earlier object rather
+    // than leaking stale nested JSON-LD into the emitted page/feed.
+    objectBlock = block[valueStart] === '{'
+      ? block.slice(valueStart, valueEnd)
+      : undefined;
   });
   return objectBlock;
 }
 
-/** Return the final balanced structuredData object, if it is an object. */
-export function readStructuredSeoBlock(block) {
-  return readStaticObjectProperty(block, 'structuredData');
-}
-
-/** Return balanced object literals from the final structuredData value. */
-function readStructuredDataObjectBlocks(value) {
-  if (value[0] === '{') return [value];
-  if (value[0] !== '[') return [];
-
-  const arrayEnd = value.length - 1;
-  const objects = [];
-  let cursor = 1;
-  while (cursor < arrayEnd) {
-    cursor = skipStaticTrivia(value, cursor, 'SEO entry', 'structuredData-array');
-    if (cursor >= arrayEnd || value[cursor] === ']') break;
-    if (value[cursor] !== '{') return [];
-    const close = matchingDelimiter(value, cursor);
-    if (close < 0 || close >= arrayEnd) return [];
-    objects.push(value.slice(cursor, close + 1));
-    cursor = skipStaticTrivia(value, close + 1, 'SEO entry', 'structuredData-array');
-    if (cursor < arrayEnd && value[cursor] === ',') {
-      cursor += 1;
-      continue;
-    }
-    if (cursor < arrayEnd && value[cursor] !== ']') return [];
+/**
+ * Return the final static object assigned to a field in structuredData.
+ *
+ * JSON-LD is commonly emitted as an array containing an Article/Event object
+ * plus auxiliary objects. Resolve each object with the same balanced reader,
+ * and keep the top-level fallback for legacy SEO entries that put the field
+ * directly on the entry.
+ */
+export function readStructuredSeoObjectProperty(block, field) {
+  let objectBlock = readStaticObjectProperty(block, field);
+  for (const structuredBlock of readStructuredSeoObjectBlocks(block) ?? []) {
+    const candidate = readStaticObjectProperty(structuredBlock, field);
+    if (candidate !== undefined) objectBlock = candidate;
   }
-  return objects;
-}
-
-/** Return every balanced JSON-LD object from the final structuredData value. */
-export function readStructuredSeoObjectBlocks(block) {
-  let objectBlocks = [];
-  forEachStaticProperty(block, ({ key, valueStart, valueEnd }) => {
-    if (key !== 'structuredData') return;
-    objectBlocks = readStructuredDataObjectBlocks(block.slice(valueStart, valueEnd));
-  });
-  return objectBlocks;
-}
-
-/** Return the final Event object from object- or array-shaped structuredData. */
-export function readStructuredSeoEventBlock(block) {
-  let eventBlock;
-  forEachStaticProperty(block, ({ key, valueStart, valueEnd }) => {
-    if (key !== 'structuredData') return;
-    eventBlock = undefined;
-    const value = block.slice(valueStart, valueEnd);
-    for (const candidate of readStructuredDataObjectBlocks(value)) {
-      if (lastStaticPropertyValue(candidate, '@type') === 'Event') {
-        eventBlock = candidate;
-      }
-    }
-  });
-  return eventBlock;
+  return objectBlock;
 }
 
 /** Return the final structuredData description state, including interpolation. */
