@@ -4,18 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261023-plusieurs-cols-alpins-sont-deja-fermes.html": {
-      "section": "canton-ne",
-      "ts": 1792914841183
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261025-ernst-tanner-president-de-lindt-sprungli-exclut-toute-demission.html": {
-      "section": "canton-ne",
-      "ts": 1792914852278
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261024-a-marseille-une-boutique-breitling-victime-des-troubles-en-france.html": {
-      "section": "canton-ne",
-      "ts": 1792914862829
-    },
     "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261026-les-salaires-effectifs-ont-augmente-de-0-5-en-2026.html": {
       "section": "canton-ne",
       "ts": 1793003504979
@@ -67,6 +55,10 @@
     "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261027-hsbc-benefice-net-en-hausse-de-45-inferieur-aux-attentes.html": {
       "section": "canton-ne",
       "ts": 1793086060857
+    },
+    "canton-ne::https://www.canalalpha.ch/play/meta/lieux/canton-de-neuchatel": {
+      "section": "canton-ne",
+      "ts": 1793090176159
     }
   }
 }
