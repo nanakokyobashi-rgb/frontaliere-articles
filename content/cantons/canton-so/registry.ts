@@ -182,4 +182,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'proposta-premi-assicurazione-2027',
+ category: 'fiscale',
+ date: '2026-10-27T12:21:54.555Z',
+ image: '/images/blog/article-proposta-premi-assicurazione-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SO'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];

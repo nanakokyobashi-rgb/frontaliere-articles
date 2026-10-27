@@ -51,6 +51,9 @@ const blogMetaCantonSoEn: Record<string, string> = {
     'blog.article.sedute-parlamento-novembre-2026.title': 'Solothurn Cantonal Council: meetings of 3, 4 and 11 November 2026',
     'blog.article.sedute-parlamento-novembre-2026.excerpt': 'On the agenda 58 affairs, including 7 regulatory and substantive affairs and 7 urgent parliamentary interventions.',
     'blog.article.sedute-parlamento-novembre-2026.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.proposta-premi-assicurazione-2027.title': 'Proposal to reduce health insurance premiums in 2027, Canton of Solothurn',
+    'blog.article.proposta-premi-assicurazione-2027.excerpt': '2027 proposal submitted to the Cantonal Parliament Approximately 221 million francs to reduce premiums Cantonal contribution of 98 million Increase of 9 million',
+    'blog.article.proposta-premi-assicurazione-2027.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSoEn;

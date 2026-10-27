@@ -51,6 +51,9 @@ const blogMetaCantonSoIt: Record<string, string> = {
     'blog.article.sedute-parlamento-novembre-2026.title': 'Consiglio Cantonale Soletta: sedute 3, 4 e 11 novembre 2026',
     'blog.article.sedute-parlamento-novembre-2026.excerpt': 'In agenda 58 affari, inclusi 7 affari normativi e di merito e 7 interventi parlamentari urgenti.',
     'blog.article.sedute-parlamento-novembre-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.proposta-premi-assicurazione-2027.title': 'Proposta riduzione premi assicurazione malattia 2027 Canton Soletta',
+    'blog.article.proposta-premi-assicurazione-2027.excerpt': 'Proposta 2027 trasmessa al Parlamento cantonale Circa 221 milioni di franchi per ridurre i premi Contributo cantonale di 98 milioni Aumento di 9 milioni (+4,3%)',
+    'blog.article.proposta-premi-assicurazione-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSoIt;
