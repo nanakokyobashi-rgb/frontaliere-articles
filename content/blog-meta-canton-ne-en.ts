@@ -57,6 +57,9 @@ const blogMetaCantonNeEn: Record<string, string> = {
     'blog.article.abitazioni-svizzere-rincaro-settembre.title': 'Housing prices in Switzerland: +1,7% in the quarter',
     'blog.article.abitazioni-svizzere-rincaro-settembre.excerpt': 'In the third quarter, Swiss residential prices rose by 1.7% quarter-on-quarter and 4.4% year-on-year, according to the FSO.',
     'blog.article.abitazioni-svizzere-rincaro-settembre.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.rht-ritorno-normale-orologeria.title': 'RHT: watchmaking accepts return to normal expected in Bern',
+    'blog.article.rht-ritorno-normale-orologeria.excerpt': 'Zenith has initiated a collective dismissal in Le Locle.',
+    'blog.article.rht-ritorno-normale-orologeria.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonNeEn;

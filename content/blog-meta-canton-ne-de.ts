@@ -57,6 +57,9 @@ const blogMetaCantonNeDe: Record<string, string> = {
     'blog.article.abitazioni-svizzere-rincaro-settembre.title': 'Wohnungspreise in der Schweiz: +1,7% im Quartal',
     'blog.article.abitazioni-svizzere-rincaro-settembre.excerpt': 'Im dritten Quartal stiegen die Schweizer Wohnungspreise laut SFO im Quartal um 1,7% und im Jahresvergleich um 4,4%.',
     'blog.article.abitazioni-svizzere-rincaro-settembre.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.rht-ritorno-normale-orologeria.title': 'RHT: Uhrenbranche akzeptiert in Bern geplante Rückkehr zur Norm',
+    'blog.article.rht-ritorno-normale-orologeria.excerpt': 'Zenith hat in Le Locle eine Massenentlassung eingeleitet.',
+    'blog.article.rht-ritorno-normale-orologeria.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonNeDe;

@@ -57,6 +57,9 @@ const blogMetaCantonNeIt: Record<string, string> = {
     'blog.article.abitazioni-svizzere-rincaro-settembre.title': 'Prezzi delle abitazioni in Svizzera: +1,7% nel trimestre',
     'blog.article.abitazioni-svizzere-rincaro-settembre.excerpt': 'Nel terzo trimestre i prezzi residenziali svizzeri sono saliti dell\'1,7% sul trimestre e del 4,4% su base annua, secondo l\'OFS.',
     'blog.article.abitazioni-svizzere-rincaro-settembre.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.rht-ritorno-normale-orologeria.title': 'RHT: orologeria accetta ritorno alla normale previsto a Berna',
+    'blog.article.rht-ritorno-normale-orologeria.excerpt': 'Zenith ha avviato un licenziamento collettivo a Le Locle.',
+    'blog.article.rht-ritorno-normale-orologeria.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonNeIt;

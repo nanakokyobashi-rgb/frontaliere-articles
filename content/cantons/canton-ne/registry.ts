@@ -204,4 +204,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'rht-ritorno-normale-orologeria',
+ category: 'novita',
+ date: '2026-10-27T18:01:44.534Z',
+ image: '/images/blog/article-rht-ritorno-normale-orologeria.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['NE'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
