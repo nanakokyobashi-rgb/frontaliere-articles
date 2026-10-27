@@ -146,6 +146,8 @@ wait_for_dispatched_children() {
         [.[] | select(
           ((.displayTitle // "") == $title or ((.displayTitle // "") | startswith($title + " / dry=")))
         )]
+        | sort_by(.databaseId | tonumber)
+        | if length == 0 then [] else [.[-1]] end
       ' <<<"$runs")"
       child_state="$(jq -r '
         if length == 0 then "missing"
