@@ -3553,6 +3553,10 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(recovery, /wait_for_dispatched_children/);
   assert.match(recovery, /REPLAY_CHILD_WAIT_MAX_S/);
   assert.match(recovery, /gh run list --repo "\$REPOSITORY" --workflow fast-publish-section\.yml/);
+  assert.match(recovery, /dispatch_run_snapshot=.*gh run list/);
+  assert.match(recovery, /dispatch_baseline_ids=\(\)/);
+  assert.match(recovery, /initial_run_state/);
+  assert.match(recovery, /latest_run_id <= baseline_run_id/);
   assert.match(recovery, /sort_by\(\.databaseId \| tonumber\)[\s\S]*if length == 0 then \[\] else \[\.\[-1\]\] end/);
   assert.match(recovery, /\.conclusion != "success"/);
   assert.match(recovery, /nonce_hash="\$\(printf '%s\\0%s\\0%s\\0%s/);

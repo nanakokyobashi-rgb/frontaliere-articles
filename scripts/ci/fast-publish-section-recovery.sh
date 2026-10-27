@@ -44,6 +44,8 @@ dispatched=0
 failed_sections=()
 dispatch_titles=()
 dispatch_sections=()
+dispatch_baseline_ids=()
+dispatch_initial_states=()
 child_replay_api_after_publish="${REPLAY_API_AFTER_PUBLISH:-false}"
 child_allow_deferred_live_release="${ALLOW_DEFERRED_LIVE_RELEASE:-false}"
 child_coordinated_recovery=false
@@ -57,6 +59,18 @@ if [ "${MIXED_MATRIX:-false}" = 'true' ]; then
   child_allow_deferred_live_release=true
   child_coordinated_recovery=true
 fi
+# The stale dispatcher returns as soon as GitHub accepts a dispatch. Capture
+# the pre-dispatch run frontier so an older successful run with the same nonce
+# cannot satisfy the barrier while the new child is still invisible to the API.
+dispatch_run_snapshot=""
+if ! dispatch_run_snapshot="$(gh run list --repo "$REPOSITORY" --workflow fast-publish-section.yml --branch main --event workflow_dispatch --limit 100 --json databaseId,displayTitle,status,conclusion)"; then
+  echo "::error::impossibile leggere lo stato dei child prima del recovery staged"
+  exit 1
+fi
+if ! jq -e 'type == "array"' <<<"$dispatch_run_snapshot" >/dev/null 2>&1; then
+  echo "::error::gh run list ha restituito uno snapshot child non valido prima del recovery staged"
+  exit 1
+fi
 while IFS=$'\t' read -r section article_ids missing_page_paths known_missing_page_paths bootstrap remove_stale cleanup_inactive_surface; do
   [ -n "$section" ] || continue
   nonce_seed="${dispatch_nonce_input:-stale-staged-recovery}"
@@ -67,6 +81,22 @@ while IFS=$'\t' read -r section article_ids missing_page_paths known_missing_pag
     "$child_coordinated_recovery" | sha256sum | cut -c1-16)"
   dispatch_nonce="stale-staged-${CURRENT_MAIN:0:12}-${section}-${nonce_hash}"
   dispatch_title="cover-publish-section / ${section} / nonce=${dispatch_nonce}"
+  baseline_run_id="$(jq -r --arg title "$dispatch_title" '
+    [.[] | select(
+      ((.displayTitle // "") == $title or ((.displayTitle // "") | startswith($title + " / dry=")))
+    ) | .databaseId | tonumber] | max // 0
+  ' <<<"$dispatch_run_snapshot")"
+  initial_run_state="$(jq -r --arg title "$dispatch_title" '
+    [.[] | select(
+      ((.displayTitle // "") == $title or ((.displayTitle // "") | startswith($title + " / dry=")))
+    )]
+    | sort_by(.databaseId | tonumber)
+    | if length == 0 then "missing"
+      elif .[-1].status != "completed" then "pending"
+      elif .[-1].conclusion == "success" then "success"
+      else "failed"
+      end
+  ' <<<"$dispatch_run_snapshot")"
   echo "::notice::recovery staged $section sulla HEAD corrente $CURRENT_MAIN"
   if bash .replay-dispatcher-source/scripts/ci/dispatch-fast-publish-replay.sh "$REPOSITORY" "$dispatch_title" --ref main \
     -f section="$section" \
@@ -86,6 +116,8 @@ while IFS=$'\t' read -r section article_ids missing_page_paths known_missing_pag
     dispatched=$((dispatched + 1))
     dispatch_titles+=("$dispatch_title")
     dispatch_sections+=("$section")
+    dispatch_baseline_ids+=("$baseline_run_id")
+    dispatch_initial_states+=("$initial_run_state")
   else
     echo "::error::recovery staged non accodato per $section sulla HEAD $CURRENT_MAIN"
     failed_sections+=("$section")
@@ -142,6 +174,8 @@ wait_for_dispatched_children() {
     for dispatch_index in "${!dispatch_titles[@]}"; do
       dispatch_title="${dispatch_titles[$dispatch_index]}"
       section="${dispatch_sections[$dispatch_index]}"
+      baseline_run_id="${dispatch_baseline_ids[$dispatch_index]}"
+      initial_run_state="${dispatch_initial_states[$dispatch_index]}"
       matching_runs="$(jq -c --arg title "$dispatch_title" '
         [.[] | select(
           ((.displayTitle // "") == $title or ((.displayTitle // "") | startswith($title + " / dry=")))
@@ -149,13 +183,21 @@ wait_for_dispatched_children() {
         | sort_by(.databaseId | tonumber)
         | if length == 0 then [] else [.[-1]] end
       ' <<<"$runs")"
-      child_state="$(jq -r '
-        if length == 0 then "missing"
-        elif any(.[]; .status != "completed") then "pending"
-        elif any(.[]; .conclusion != "success") then "failed"
-        else "success"
-        end
-      ' <<<"$matching_runs")"
+      latest_run_id="$(jq -r 'if length == 0 then 0 else .[0].databaseId | tonumber end' <<<"$matching_runs")"
+      if [ "$initial_run_state" != 'success' ] && (( latest_run_id <= baseline_run_id )); then
+        # A previous pending/failed run is still the newest visible item.  The
+        # dispatcher either waits for it or has already accepted a retry; in
+        # both cases an unseen newer run must be observed before concluding.
+        child_state='pending'
+      else
+        child_state="$(jq -r '
+          if length == 0 then "missing"
+          elif any(.[]; .status != "completed") then "pending"
+          elif any(.[]; .conclusion != "success") then "failed"
+          else "success"
+          end
+        ' <<<"$matching_runs")"
+      fi
       case "$child_state" in
         success)
           echo "::notice::child staged completato per $section"
