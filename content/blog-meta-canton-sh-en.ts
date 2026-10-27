@@ -69,6 +69,9 @@ const blogMetaCantonShEn: Record<string, string> = {
     'blog.article.mobilit-elettrica-sciaffusa-20.title': 'Canton Schaffhausen promotes electric mobility with 9 measures',
     'blog.article.mobilit-elettrica-sciaffusa-20.excerpt': 'The 2.0 strategy includes nine measures that can be implemented starting next year, including tax incentives under consideration for property owners and support for landlords.',
     'blog.article.mobilit-elettrica-sciaffusa-20.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.sp-no-legge-ospedale.title': 'Hospital Act: Schaffhausen’s SP says no',
+    'blog.article.sp-no-legge-ospedale.excerpt': 'On November 29, the Canton of Schaffhausen will vote on the amendment to the Hospitals Act, opposed by the SP after parliamentary approval 43-0.',
+    'blog.article.sp-no-legge-ospedale.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonShEn;

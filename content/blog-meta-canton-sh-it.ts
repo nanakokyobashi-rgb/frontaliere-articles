@@ -69,6 +69,9 @@ const blogMetaCantonShIt: Record<string, string> = {
     'blog.article.mobilit-elettrica-sciaffusa-20.title': 'Cantone Sciaffusa spinge mobilità elettrica con 9 misure',
     'blog.article.mobilit-elettrica-sciaffusa-20.excerpt': 'La strategia 2.0 prevede nove misure attuabili dal prossimo anno, incluse agevolazioni fiscali in esame per proprietari immobiliari e sostegno ai locatori.',
     'blog.article.mobilit-elettrica-sciaffusa-20.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.sp-no-legge-ospedale.title': 'Legge sugli ospedali: la SP di Sciaffusa dice no',
+    'blog.article.sp-no-legge-ospedale.excerpt': 'Il 29 novembre il Cantone di Sciaffusa voterà sulla modifica della legge sugli ospedali, contrastata dalla SP dopo il via libera parlamentare 43-0.',
+    'blog.article.sp-no-legge-ospedale.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonShIt;

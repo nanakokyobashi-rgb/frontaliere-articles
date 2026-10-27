@@ -248,4 +248,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'sp-no-legge-ospedale',
+ category: 'novita',
+ date: '2026-10-27T12:27:08.621Z',
+ image: '/images/blog/article-sp-no-legge-ospedale.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

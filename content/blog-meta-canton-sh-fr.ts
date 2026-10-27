@@ -69,6 +69,9 @@ const blogMetaCantonShFr: Record<string, string> = {
     'blog.article.mobilit-elettrica-sciaffusa-20.title': 'Le canton de Schaffhouse accélère la mobilité électrique avec 9 mesures',
     'blog.article.mobilit-elettrica-sciaffusa-20.excerpt': 'La stratégie 2.0 prévoit neuf mesures applicables dès l’année prochaine, y compris des allègements fiscaux à l’étude pour les propriétaires immobiliers et un soutien aux bailleurs.',
     'blog.article.mobilit-elettrica-sciaffusa-20.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.sp-no-legge-ospedale.title': 'Loi sur les hôpitaux : le PS de Schaffhouse dit non',
+    'blog.article.sp-no-legge-ospedale.excerpt': 'Le 29 novembre, le canton de Schaffhouse votera sur la modification de la loi sur les hôpitaux, combattue par le PS après le feu vert parlementaire 43-0.',
+    'blog.article.sp-no-legge-ospedale.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonShFr;
