@@ -33,6 +33,9 @@ const blogMetaCantonUrDe: Record<string, string> = {
     'blog.article.felix-gisler-pensione-uri.title': 'Felix Gisler wird die Kantonsverwaltung Uri verlassen',
     'blog.article.felix-gisler-pensione-uri.excerpt': 'Nach rund 37 Jahren wird Felix Gisler die Kantonsverwaltung Uri Ende Oktober 2026 infolge ordentlicher Pensionierung verlassen.',
     'blog.article.felix-gisler-pensione-uri.imageAlt': 'Neutrale redaktionelle Szene eines Gebäudes der Urner Kantonsverwaltung',
+    'blog.article.axenstrasse-chiusa-novembre-2026.title': 'Axenstrasse nachts wegen Wartungsarbeiten im Kanton Uri gesperrt',
+    'blog.article.axenstrasse-chiusa-novembre-2026.excerpt': 'Vom 2. bis 6. November 2026 wird die Axenstrasse von 22.00 bis 05.00 gesperrt; der Verkehr wird über die Autobahn A2 umgeleitet.',
+    'blog.article.axenstrasse-chiusa-novembre-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonUrDe;

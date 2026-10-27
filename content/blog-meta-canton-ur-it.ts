@@ -33,6 +33,9 @@ const blogMetaCantonUrIt: Record<string, string> = {
     'blog.article.felix-gisler-pensione-uri.title': 'Felix Gisler lascerà l\'amministrazione cantonale di Uri',
     'blog.article.felix-gisler-pensione-uri.excerpt': 'Dopo circa 37 anni, Felix Gisler lascerà l\'amministrazione cantonale di Uri a fine ottobre 2026 per pensionamento ordinario.',
     'blog.article.felix-gisler-pensione-uri.imageAlt': 'Scena editoriale neutra di un edificio dell\'amministrazione cantonale di Uri',
+    'blog.article.axenstrasse-chiusa-novembre-2026.title': 'Axenstrasse chiusa di notte per lavori di manutenzione nel Canton Uri',
+    'blog.article.axenstrasse-chiusa-novembre-2026.excerpt': 'Dal 2 al 6 novembre 2026, l\'Axenstrasse sarà chiusa dalle 22.00 alle 05.00; il traffico viene deviato sull\'autostrada A2.',
+    'blog.article.axenstrasse-chiusa-novembre-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonUrIt;

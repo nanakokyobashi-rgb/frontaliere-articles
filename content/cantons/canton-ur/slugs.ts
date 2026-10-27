@@ -13,6 +13,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'bristenstrasse-regimi-traffico-2026': { it: 'bristenstrasse-regimi-traffico-2026', en: 'bristenstrasse-traffic-rules-2026', de: 'bristenstrasse-verkehrsregime-2026', fr: 'bristenstrasse-regimes-circulation-2026' },
  'andermatt-fisco-wyden': { it: 'andermatt-fisco-wyden', en: 'andermatt-tax-wyden-postponed', de: 'andermatt-steuern-wyden', fr: 'andermatt-impots-wyden' },
  'felix-gisler-pensione-uri': { it: 'felix-gisler-pensione-uri', en: 'felix-gisler-uri-retirement', de: 'felix-gisler-uri-pensionierung', fr: 'felix-gisler-uri-retraite' },
+ 'axenstrasse-chiusa-novembre-2026': { it: 'axenstrasse-chiusa-novembre-2026', en: 'axenstrasse-closed-november-2026', de: 'axenstrasse-geschlossen-november-2026', fr: 'axenstrasse-fermee-novembre-2026' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

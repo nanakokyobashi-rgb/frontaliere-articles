@@ -387,6 +387,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-axenstrasse-chiusa-novembre-2026': {
+    title: 'Axenstrasse chiusa di notte per lavori di manutenzione nel Canton Uri',
+    description: 'Chiusure notturne sull\'Axenstrasse dal 2 al 6 novembre 2026 (22:00-05:00). Deviazione su A2. Informazioni su tunnel e accesso.',
+    keywords: 'frontalieri, ticino, svizzera, italia, axenstrasse, chiusa, notte, lavori',
+    ogTitle: 'Axenstrasse chiusa nottetempo lavori Uri 2026',
+    ogDescription: 'Dal 2 al 6 novembre 2026, l\'Axenstrasse è chiusa ogni notte dalle 22.00 alle 05.00 per lavori di manutenzione. Il traffico è deviato sull\'autostrada A2. Controllare le chiusure dei tunnel.',
+    canonicalPath: '/articoli-uri/axenstrasse-chiusa-novembre-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Axenstrasse chiusa di notte per lavori di manutenzione nel Canton Uri",
+      "description": "Chiusure notturne sull'Axenstrasse dal 2 al 6 novembre 2026 (22:00-05:00). Deviazione su A2. Informazioni su tunnel e accesso.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-axenstrasse-chiusa-novembre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-27T10:48:04+00:00",
+      "dateModified": "2026-10-27T10:48:04+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-uri/axenstrasse-chiusa-novembre-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

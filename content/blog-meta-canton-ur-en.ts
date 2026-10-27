@@ -33,6 +33,9 @@ const blogMetaCantonUrEn: Record<string, string> = {
     'blog.article.felix-gisler-pensione-uri.title': 'Felix Gisler will leave the cantonal administration of Uri',
     'blog.article.felix-gisler-pensione-uri.excerpt': 'After approximately 37 years, Felix Gisler will leave the cantonal administration of Uri at the end of October 2026 due to regular retirement.',
     'blog.article.felix-gisler-pensione-uri.imageAlt': 'Neutral editorial scene of a Canton Uri cantonal administration building',
+    'blog.article.axenstrasse-chiusa-novembre-2026.title': 'Axenstrasse closed at night for maintenance work in the Canton of Uri',
+    'blog.article.axenstrasse-chiusa-novembre-2026.excerpt': 'From November 2 to 6, 2026, Axenstrasse will be closed from 22.00 to 05.00; traffic is diverted onto the A2 motorway.',
+    'blog.article.axenstrasse-chiusa-novembre-2026.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonUrEn;

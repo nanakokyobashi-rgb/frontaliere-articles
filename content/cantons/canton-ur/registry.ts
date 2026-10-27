@@ -116,4 +116,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'laura-bianchi',
  authorName: 'Laura Bianchi',
  },
+ {
+ id: 'axenstrasse-chiusa-novembre-2026',
+ category: 'pratico',
+ date: '2026-10-27T10:48:04.296Z',
+ image: '/images/blog/article-axenstrasse-chiusa-novembre-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['UR'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
