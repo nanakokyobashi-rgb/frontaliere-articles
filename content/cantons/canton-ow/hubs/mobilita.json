@@ -4,8 +4,8 @@
   "section": "canton-ow",
   "canton": "OW",
   "topic": "mobilita",
-  "updatedAt": "2026-10-27T13:04:04.614Z",
-  "contentHash": "561e986628f2363922cf6746e333d68ee88c2290a0efe90811b1e56ed9f61b85",
+  "updatedAt": "2026-10-27T17:42:56.215Z",
+  "contentHash": "392472f682e2dac29fc7e57fb076c2a893fc3d08b939c992a896c92f077eab37",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-26T21:55:18.630Z",
+      "updatedAt": "2026-10-27T11:01:59.897Z",
       "keyFacts": 0
     }
   ],
@@ -32,7 +32,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "3",
+          "value": "2",
           "note": "segnalazioni aggiornate: 27 ottobre 2026"
         }
       ],
@@ -115,7 +115,7 @@
               "url": "https://www.ow.ch/_rte/information/138031"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -149,7 +149,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-27T13:04:04.614Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     },
     "en": {
       "canton": "OW",
@@ -164,7 +164,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "3",
+          "value": "2",
           "note": "reports as of 27 October 2026"
         }
       ],
@@ -247,7 +247,7 @@
               "url": "https://www.ow.ch/_rte/information/138031"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -281,7 +281,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-27T13:04:04.614Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     },
     "de": {
       "canton": "OW",
@@ -296,7 +296,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "3",
+          "value": "2",
           "note": "Meldungen vom 27. Oktober 2026"
         }
       ],
@@ -379,7 +379,7 @@
               "url": "https://www.ow.ch/_rte/information/138031"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -413,7 +413,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-27T13:04:04.614Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     },
     "fr": {
       "canton": "OW",
@@ -428,7 +428,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "3",
+          "value": "2",
           "note": "signalements au 27 octobre 2026"
         }
       ],
@@ -511,7 +511,7 @@
               "url": "https://www.ow.ch/_rte/information/138031"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -545,7 +545,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-27T13:04:04.614Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     }
   }
 }

@@ -4,17 +4,17 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "eventi",
-  "updatedAt": "2026-10-27T00:15:17.334Z",
-  "contentHash": "b37d0f6a26795b60386baed168968ab78448564ca1e43b0e76093650a3d9f7f6",
+  "updatedAt": "2026-10-27T17:42:56.215Z",
+  "contentHash": "4777f3a651232f3f5872650cd173c7b962775c490afbd699c95693cbc5278197",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-26T18:30:43.613Z",
+      "updatedAt": "2026-10-27T12:41:15.477Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-26T17:41:28.137Z",
+      "updatedAt": "2026-10-27T11:01:59.897Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "42",
+          "value": "43",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -92,15 +92,15 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/sterben-gehoert-zum-leben-gut-umsorgt-bis-zuletzt/"
             },
             {
-              "label": "Halloween@the Brewery",
-              "detail": "Barfuss Brauerei, Bürglen (TG)",
+              "label": "Diamante im Stroh",
+              "detail": "Hefenhofen",
               "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloweenthe-brewery/"
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/diamante-im-stroh/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/turgovia/",
-          "updatedAt": "2026-10-26T18:30:43.613Z"
+          "updatedAt": "2026-10-27T12:41:15.477Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -123,7 +123,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-26T17:41:28.137Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -151,7 +151,7 @@
           "url": "/eventi/turgovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     },
     "en": {
       "canton": "TG",
@@ -161,7 +161,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "42",
+          "value": "43",
           "note": "from the site’s events calendar"
         }
       ],
@@ -226,15 +226,15 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/sterben-gehoert-zum-leben-gut-umsorgt-bis-zuletzt/"
             },
             {
-              "label": "Halloween@the Brewery",
-              "detail": "Barfuss Brauerei, Bürglen (TG)",
+              "label": "Diamante im Stroh",
+              "detail": "Hefenhofen",
               "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloweenthe-brewery/"
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/diamante-im-stroh/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/thurgau/",
-          "updatedAt": "2026-10-26T18:30:43.613Z"
+          "updatedAt": "2026-10-27T12:41:15.477Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -257,7 +257,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-26T17:41:28.137Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -285,7 +285,7 @@
           "url": "/en/events/thurgau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     },
     "de": {
       "canton": "TG",
@@ -295,7 +295,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "42",
+          "value": "43",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -360,15 +360,15 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/sterben-gehoert-zum-leben-gut-umsorgt-bis-zuletzt/"
             },
             {
-              "label": "Halloween@the Brewery",
-              "detail": "Barfuss Brauerei, Bürglen (TG)",
+              "label": "Diamante im Stroh",
+              "detail": "Hefenhofen",
               "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloweenthe-brewery/"
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/diamante-im-stroh/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/thurgau/",
-          "updatedAt": "2026-10-26T18:30:43.613Z"
+          "updatedAt": "2026-10-27T12:41:15.477Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -391,7 +391,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-26T17:41:28.137Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -419,7 +419,7 @@
           "url": "/de/veranstaltungen/thurgau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     },
     "fr": {
       "canton": "TG",
@@ -429,7 +429,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "42",
+          "value": "43",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -494,15 +494,15 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/sterben-gehoert-zum-leben-gut-umsorgt-bis-zuletzt/"
             },
             {
-              "label": "Halloween@the Brewery",
-              "detail": "Barfuss Brauerei, Bürglen (TG)",
+              "label": "Diamante im Stroh",
+              "detail": "Hefenhofen",
               "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloweenthe-brewery/"
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/diamante-im-stroh/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/thurgovie/",
-          "updatedAt": "2026-10-26T18:30:43.613Z"
+          "updatedAt": "2026-10-27T12:41:15.477Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -525,7 +525,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-26T17:41:28.137Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -553,7 +553,7 @@
           "url": "/fr/evenements/thurgovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     }
   }
 }

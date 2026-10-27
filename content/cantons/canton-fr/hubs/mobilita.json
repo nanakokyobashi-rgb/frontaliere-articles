@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-27T13:04:04.614Z",
-  "contentHash": "9b351747db1b71d63c2ede42a264e75412040e9214b248f7667b2428ede0575f",
+  "updatedAt": "2026-10-27T17:42:56.215Z",
+  "contentHash": "c94110706fb006c8421348a003195ee8b0d78a869b2f039db71c1bf3d388dfa5",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-26T21:55:18.630Z",
+      "updatedAt": "2026-10-27T11:01:59.897Z",
       "keyFacts": 0
     }
   ],
@@ -32,7 +32,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "11",
+          "value": "10",
           "note": "segnalazioni aggiornate: 27 ottobre 2026"
         }
       ],
@@ -130,7 +130,7 @@
               "url": "https://www.fr.ch/de/sjsd/pol/news/fahrzeug-nach-geisterfahrt-auf-der-a1-bei-domdidier-gestoppt"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -194,7 +194,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-27T13:04:04.614Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     },
     "en": {
       "canton": "FR",
@@ -209,7 +209,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "11",
+          "value": "10",
           "note": "reports as of 27 October 2026"
         }
       ],
@@ -307,7 +307,7 @@
               "url": "https://www.fr.ch/de/sjsd/pol/news/fahrzeug-nach-geisterfahrt-auf-der-a1-bei-domdidier-gestoppt"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -371,7 +371,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-27T13:04:04.614Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     },
     "de": {
       "canton": "FR",
@@ -386,7 +386,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "11",
+          "value": "10",
           "note": "Meldungen vom 27. Oktober 2026"
         }
       ],
@@ -484,7 +484,7 @@
               "url": "https://www.fr.ch/de/sjsd/pol/news/fahrzeug-nach-geisterfahrt-auf-der-a1-bei-domdidier-gestoppt"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -548,7 +548,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-27T13:04:04.614Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     },
     "fr": {
       "canton": "FR",
@@ -563,7 +563,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "11",
+          "value": "10",
           "note": "signalements au 27 octobre 2026"
         }
       ],
@@ -661,7 +661,7 @@
               "url": "https://www.fr.ch/de/sjsd/pol/news/fahrzeug-nach-geisterfahrt-auf-der-a1-bei-domdidier-gestoppt"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -725,7 +725,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-27T13:04:04.614Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     }
   }
 }

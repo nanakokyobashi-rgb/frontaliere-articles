@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "servizi",
-  "updatedAt": "2026-10-27T12:29:32.061Z",
-  "contentHash": "15af7723bb1bf536ea84050d2d32bd4d12c8d43835da494f1f75a765c7ba2e05",
+  "updatedAt": "2026-10-27T17:42:56.215Z",
+  "contentHash": "1cb69e0400c34f2799762309db9f15d043d2f889d207060b51a031bb14e8c938",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,22 +14,17 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-27T06:05:25.484Z",
+      "updatedAt": "2026-10-27T12:05:06.436Z",
       "keyFacts": 0
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-27T05:02:25.827Z",
+      "updatedAt": "2026-10-27T12:09:47.065Z",
       "keyFacts": 1
     },
     {
-      "id": "meteo",
-      "updatedAt": "2026-10-27T05:19:53.547Z",
-      "keyFacts": 0
-    },
-    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-26T21:55:18.630Z",
+      "updatedAt": "2026-10-27T11:01:59.897Z",
       "keyFacts": 0
     }
   ],
@@ -91,7 +86,7 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-10-27T06:05:25.484Z"
+          "updatedAt": "2026-10-27T12:05:06.436Z"
         },
         {
           "id": "aste-targhe",
@@ -122,27 +117,18 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-10-27T05:02:25.827Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Solothurn",
-              "value": "6 °C",
-              "detail": "oggi da 5 a 16 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-27T05:19:53.547Z"
+          "updatedAt": "2026-10-27T12:09:47.065Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Beitrag zur Prämienverbilligung in der Krankenversicherung 2027",
+              "date": "2026-10-27",
+              "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/beitrag-zur-praemienverbilligung-in-der-krankenversicherung-2027/"
+            },
             {
               "label": "Die Arbeitslosenquote sank im September auf 3,0 Prozent",
               "date": "2026-10-06",
@@ -164,7 +150,7 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-sank-im-juni-auf-30-prozent-1/"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -244,7 +230,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-27T12:29:32.061Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     },
     "en": {
       "canton": "SO",
@@ -303,7 +289,7 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-10-27T06:05:25.484Z"
+          "updatedAt": "2026-10-27T12:05:06.436Z"
         },
         {
           "id": "aste-targhe",
@@ -334,27 +320,18 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-10-27T05:02:25.827Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Solothurn",
-              "value": "6 °C",
-              "detail": "today from 5 to 16 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-27T05:19:53.547Z"
+          "updatedAt": "2026-10-27T12:09:47.065Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Beitrag zur Prämienverbilligung in der Krankenversicherung 2027",
+              "date": "2026-10-27",
+              "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/beitrag-zur-praemienverbilligung-in-der-krankenversicherung-2027/"
+            },
             {
               "label": "Die Arbeitslosenquote sank im September auf 3,0 Prozent",
               "date": "2026-10-06",
@@ -376,7 +353,7 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-sank-im-juni-auf-30-prozent-1/"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -452,7 +429,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-27T12:29:32.061Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     },
     "de": {
       "canton": "SO",
@@ -511,7 +488,7 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-10-27T06:05:25.484Z"
+          "updatedAt": "2026-10-27T12:05:06.436Z"
         },
         {
           "id": "aste-targhe",
@@ -542,27 +519,18 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-10-27T05:02:25.827Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Solothurn",
-              "value": "6 °C",
-              "detail": "heute 5 bis 16 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-27T05:19:53.547Z"
+          "updatedAt": "2026-10-27T12:09:47.065Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Beitrag zur Prämienverbilligung in der Krankenversicherung 2027",
+              "date": "2026-10-27",
+              "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/beitrag-zur-praemienverbilligung-in-der-krankenversicherung-2027/"
+            },
             {
               "label": "Die Arbeitslosenquote sank im September auf 3,0 Prozent",
               "date": "2026-10-06",
@@ -584,7 +552,7 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-sank-im-juni-auf-30-prozent-1/"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -660,7 +628,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-27T12:29:32.061Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     },
     "fr": {
       "canton": "SO",
@@ -719,7 +687,7 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-10-27T06:05:25.484Z"
+          "updatedAt": "2026-10-27T12:05:06.436Z"
         },
         {
           "id": "aste-targhe",
@@ -750,27 +718,18 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-10-27T05:02:25.827Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Solothurn",
-              "value": "6 °C",
-              "detail": "aujourd’hui de 5 à 16 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-27T05:19:53.547Z"
+          "updatedAt": "2026-10-27T12:09:47.065Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Beitrag zur Prämienverbilligung in der Krankenversicherung 2027",
+              "date": "2026-10-27",
+              "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/beitrag-zur-praemienverbilligung-in-der-krankenversicherung-2027/"
+            },
             {
               "label": "Die Arbeitslosenquote sank im September auf 3,0 Prozent",
               "date": "2026-10-06",
@@ -792,7 +751,7 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-sank-im-juni-auf-30-prozent-1/"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -864,7 +823,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-27T12:29:32.061Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     }
   }
 }

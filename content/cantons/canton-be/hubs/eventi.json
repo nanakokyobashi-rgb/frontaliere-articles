@@ -4,12 +4,12 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "eventi",
-  "updatedAt": "2026-10-27T00:15:17.334Z",
-  "contentHash": "dc0a569b9a6d63d62dced31e1bad3915bbf7b6a6198205c5738ad702c26a72ea",
+  "updatedAt": "2026-10-27T17:42:56.215Z",
+  "contentHash": "a55ebc9203b781cede42d9517cbc21ea34ce5be2d82e09b95e155dd3e1647844",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-26T18:30:43.613Z",
+      "updatedAt": "2026-10-27T12:41:15.477Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "208",
+          "value": "209",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,6 +32,12 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
+            {
+              "label": "Avo Darts Battle",
+              "detail": "Grindelwald",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/avo-darts-battle/"
+            },
             {
               "label": "Vernissage der Ausstellung «Flüsse des Lebens»",
               "detail": "Bern",
@@ -85,17 +91,11 @@
               "detail": "Bern — in corso, ultimo giorno: 5 novembre 2026",
               "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/selbstplanerkurs-pv-anlage-e-wende-2/"
-            },
-            {
-              "label": "Ein Berner namens Matter. Kennet Dir das Gschichtli scho?",
-              "detail": "Bern, Münsterplatz, Mosesbrunnen, Bern — in corso, ultimo giorno: 21 novembre 2026",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/ein-berner-namens-matter-kennet-dir-das-gschichtli-scho_A4fYS1Z"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/berna/",
-          "updatedAt": "2026-10-26T18:30:43.613Z"
+          "updatedAt": "2026-10-27T12:41:15.477Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +135,7 @@
           "url": "/eventi/berna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     },
     "en": {
       "canton": "BE",
@@ -145,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "208",
+          "value": "209",
           "note": "from the site’s events calendar"
         }
       ],
@@ -155,6 +155,12 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
+            {
+              "label": "Avo Darts Battle",
+              "detail": "Grindelwald",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/avo-darts-battle/"
+            },
             {
               "label": "Vernissage der Ausstellung «Flüsse des Lebens»",
               "detail": "Bern",
@@ -208,17 +214,11 @@
               "detail": "Bern — ongoing, last day: 5 November 2026",
               "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/selbstplanerkurs-pv-anlage-e-wende-2/"
-            },
-            {
-              "label": "Ein Berner namens Matter. Kennet Dir das Gschichtli scho?",
-              "detail": "Bern, Münsterplatz, Mosesbrunnen, Bern — ongoing, last day: 21 November 2026",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/ein-berner-namens-matter-kennet-dir-das-gschichtli-scho_A4fYS1Z"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/bern/",
-          "updatedAt": "2026-10-26T18:30:43.613Z"
+          "updatedAt": "2026-10-27T12:41:15.477Z"
         }
       ],
       "curatedArticles": [
@@ -258,7 +258,7 @@
           "url": "/en/events/bern/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     },
     "de": {
       "canton": "BE",
@@ -268,7 +268,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "208",
+          "value": "209",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -278,6 +278,12 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
+            {
+              "label": "Avo Darts Battle",
+              "detail": "Grindelwald",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/avo-darts-battle/"
+            },
             {
               "label": "Vernissage der Ausstellung «Flüsse des Lebens»",
               "detail": "Bern",
@@ -331,17 +337,11 @@
               "detail": "Bern — läuft, letzter Tag: 5. November 2026",
               "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/selbstplanerkurs-pv-anlage-e-wende-2/"
-            },
-            {
-              "label": "Ein Berner namens Matter. Kennet Dir das Gschichtli scho?",
-              "detail": "Bern, Münsterplatz, Mosesbrunnen, Bern — läuft, letzter Tag: 21. November 2026",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/ein-berner-namens-matter-kennet-dir-das-gschichtli-scho_A4fYS1Z"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/bern/",
-          "updatedAt": "2026-10-26T18:30:43.613Z"
+          "updatedAt": "2026-10-27T12:41:15.477Z"
         }
       ],
       "curatedArticles": [
@@ -381,7 +381,7 @@
           "url": "/de/veranstaltungen/bern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     },
     "fr": {
       "canton": "BE",
@@ -391,7 +391,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "208",
+          "value": "209",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -401,6 +401,12 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
+            {
+              "label": "Avo Darts Battle",
+              "detail": "Grindelwald",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/avo-darts-battle/"
+            },
             {
               "label": "Vernissage der Ausstellung «Flüsse des Lebens»",
               "detail": "Bern",
@@ -454,17 +460,11 @@
               "detail": "Bern — en cours, dernier jour : 5 novembre 2026",
               "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/selbstplanerkurs-pv-anlage-e-wende-2/"
-            },
-            {
-              "label": "Ein Berner namens Matter. Kennet Dir das Gschichtli scho?",
-              "detail": "Bern, Münsterplatz, Mosesbrunnen, Bern — en cours, dernier jour : 21 novembre 2026",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/ein-berner-namens-matter-kennet-dir-das-gschichtli-scho_A4fYS1Z"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/berne/",
-          "updatedAt": "2026-10-26T18:30:43.613Z"
+          "updatedAt": "2026-10-27T12:41:15.477Z"
         }
       ],
       "curatedArticles": [
@@ -504,7 +504,7 @@
           "url": "/fr/evenements/berne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     }
   }
 }

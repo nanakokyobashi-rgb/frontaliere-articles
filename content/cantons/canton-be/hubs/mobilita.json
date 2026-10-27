@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-27T14:42:40.896Z",
-  "contentHash": "9ba5d9cd00db99ae0415b991b62ae3f75c8f3ae359ee4fbeab37ebbde0acd9e2",
+  "updatedAt": "2026-10-27T17:42:56.215Z",
+  "contentHash": "840b0caeacfb125ccf78f9d33f2b82fc6bd9f04cd0b000af63e8b69d7cc28fee",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-26T21:55:18.630Z",
+      "updatedAt": "2026-10-27T11:01:59.897Z",
       "keyFacts": 0
     }
   ],
@@ -99,6 +99,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Massnahmen zur Verbesserung der Sicherheit in den Velostationen",
+              "date": "2026-10-27T10:00:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/massnahmen-zur-verbesserung-der-sicherheit-in-den-velostationen"
+            },
+            {
               "label": "Grundstein für neue BLS-Werkstätte gelegt",
               "date": "2026-10-21",
               "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/mm-grundsteinlegung-werkstaette-oberburg"
@@ -122,14 +127,9 @@
               "label": "Mehrfamilienhäuser an der Zelgstrasse werden saniert",
               "date": "2026-10-15T04:58:00.000Z",
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/mehrfamilienhaeuser-an-der-zelgstrasse-werden-saniert"
-            },
-            {
-              "label": "Sanierungsarbeiten an der Brunnadernstrasse",
-              "date": "2026-10-12T10:30:00.000Z",
-              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/sanierungsarbeiten-an-der-brunnadernstrasse"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -181,7 +181,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-27T14:42:40.896Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     },
     "en": {
       "canton": "BE",
@@ -263,6 +263,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Massnahmen zur Verbesserung der Sicherheit in den Velostationen",
+              "date": "2026-10-27T10:00:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/massnahmen-zur-verbesserung-der-sicherheit-in-den-velostationen"
+            },
+            {
               "label": "Grundstein für neue BLS-Werkstätte gelegt",
               "date": "2026-10-21",
               "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/mm-grundsteinlegung-werkstaette-oberburg"
@@ -286,14 +291,9 @@
               "label": "Mehrfamilienhäuser an der Zelgstrasse werden saniert",
               "date": "2026-10-15T04:58:00.000Z",
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/mehrfamilienhaeuser-an-der-zelgstrasse-werden-saniert"
-            },
-            {
-              "label": "Sanierungsarbeiten an der Brunnadernstrasse",
-              "date": "2026-10-12T10:30:00.000Z",
-              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/sanierungsarbeiten-an-der-brunnadernstrasse"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-27T14:42:40.896Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     },
     "de": {
       "canton": "BE",
@@ -427,6 +427,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Massnahmen zur Verbesserung der Sicherheit in den Velostationen",
+              "date": "2026-10-27T10:00:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/massnahmen-zur-verbesserung-der-sicherheit-in-den-velostationen"
+            },
+            {
               "label": "Grundstein für neue BLS-Werkstätte gelegt",
               "date": "2026-10-21",
               "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/mm-grundsteinlegung-werkstaette-oberburg"
@@ -450,14 +455,9 @@
               "label": "Mehrfamilienhäuser an der Zelgstrasse werden saniert",
               "date": "2026-10-15T04:58:00.000Z",
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/mehrfamilienhaeuser-an-der-zelgstrasse-werden-saniert"
-            },
-            {
-              "label": "Sanierungsarbeiten an der Brunnadernstrasse",
-              "date": "2026-10-12T10:30:00.000Z",
-              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/sanierungsarbeiten-an-der-brunnadernstrasse"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -509,7 +509,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-27T14:42:40.896Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     },
     "fr": {
       "canton": "BE",
@@ -591,6 +591,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Massnahmen zur Verbesserung der Sicherheit in den Velostationen",
+              "date": "2026-10-27T10:00:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/massnahmen-zur-verbesserung-der-sicherheit-in-den-velostationen"
+            },
+            {
               "label": "Grundstein für neue BLS-Werkstätte gelegt",
               "date": "2026-10-21",
               "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/mm-grundsteinlegung-werkstaette-oberburg"
@@ -614,14 +619,9 @@
               "label": "Mehrfamilienhäuser an der Zelgstrasse werden saniert",
               "date": "2026-10-15T04:58:00.000Z",
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/mehrfamilienhaeuser-an-der-zelgstrasse-werden-saniert"
-            },
-            {
-              "label": "Sanierungsarbeiten an der Brunnadernstrasse",
-              "date": "2026-10-12T10:30:00.000Z",
-              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/sanierungsarbeiten-an-der-brunnadernstrasse"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -673,7 +673,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-27T14:42:40.896Z"
+      "updatedAt": "2026-10-27T17:42:56.215Z"
     }
   }
 }
