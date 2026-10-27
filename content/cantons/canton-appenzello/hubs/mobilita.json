@@ -4,17 +4,17 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "mobilita",
-  "updatedAt": "2026-10-27T13:04:04.614Z",
-  "contentHash": "f121c7728551fb3b4b7e80ba7a783b01b8d7dac484ba710fe52144d10eead08e",
+  "updatedAt": "2026-10-27T19:21:58.604Z",
+  "contentHash": "8fdcd41437e5aa0aa8958a90ae2aecb84771cf19e9bf0242368aaab35986ddfe",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-27T09:24:17.388Z",
+      "updatedAt": "2026-10-27T15:37:37.261Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-26T21:55:18.630Z",
+      "updatedAt": "2026-10-27T11:01:59.897Z",
       "keyFacts": 0
     }
   ],
@@ -38,12 +38,6 @@
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
             {
-              "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
-              "value": "Traffico",
-              "date": "2026-10-27T09:24:17.388Z",
-              "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
-            },
-            {
               "label": "459 Waldstatt <-> Appenzell tra Luogo Waldstatt E Luogo Hundwil Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: circolazione a corsie alternate Aggiunta 1…",
               "value": "Cantiere",
               "detail": "fine prevista: 13 novembre 2026",
@@ -51,7 +45,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-27T09:24:17.388Z"
+          "updatedAt": "2026-10-27T15:37:37.261Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -89,7 +83,7 @@
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +111,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-27T13:04:04.614Z"
+      "updatedAt": "2026-10-27T19:21:58.604Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -138,12 +132,6 @@
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
             {
-              "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
-              "value": "Traffic",
-              "date": "2026-10-27T09:24:17.388Z",
-              "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
-            },
-            {
               "label": "459 Waldstatt <-> Appenzell tra Luogo Waldstatt E Luogo Hundwil Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: circolazione a corsie alternate Aggiunta 1…",
               "value": "Roadworks",
               "detail": "until 13 November 2026",
@@ -151,7 +139,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-27T09:24:17.388Z"
+          "updatedAt": "2026-10-27T15:37:37.261Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -189,7 +177,7 @@
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -217,7 +205,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-27T13:04:04.614Z"
+      "updatedAt": "2026-10-27T19:21:58.604Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -238,12 +226,6 @@
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
             {
-              "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
-              "value": "Verkehr",
-              "date": "2026-10-27T09:24:17.388Z",
-              "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
-            },
-            {
               "label": "459 Waldstatt <-> Appenzell zwischen Ortschaft Waldstatt und Ortschaft Hundwil Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.2 Verkehrsführung: wechselseitige Verkehrsführung Zusatz 1…",
               "value": "Baustelle",
               "detail": "bis 13. November 2026",
@@ -251,7 +233,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-27T09:24:17.388Z"
+          "updatedAt": "2026-10-27T15:37:37.261Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -289,7 +271,7 @@
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -317,7 +299,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-27T13:04:04.614Z"
+      "updatedAt": "2026-10-27T19:21:58.604Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -338,12 +320,6 @@
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
             {
-              "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
-              "value": "Trafic",
-              "date": "2026-10-27T09:24:17.388Z",
-              "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
-            },
-            {
               "label": "459 Waldstatt <-> Appenzell entre Localité Waldstatt et Localité Hundwil Situation: trafic perturbé travaux, longueur [km] 0.2 Gestion du trafic: circulation alternée à une voie Complément 1…",
               "value": "Chantier",
               "detail": "jusqu’au 13 novembre 2026",
@@ -351,7 +327,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-27T09:24:17.388Z"
+          "updatedAt": "2026-10-27T15:37:37.261Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -389,7 +365,7 @@
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -417,7 +393,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-27T13:04:04.614Z"
+      "updatedAt": "2026-10-27T19:21:58.604Z"
     }
   }
 }
