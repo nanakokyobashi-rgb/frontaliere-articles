@@ -21,6 +21,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'rolex-acquisisce-cpautomation': { it: 'rolex-acquisisce-cpautomation', en: 'rolex-acquires-cpautomation', de: 'rolex-uebernimmt-cpautomation', fr: 'rolex-acquiert-cpautomation' },
  'friburgo-no-linea-diretta': { it: 'friburgo-no-linea-diretta', en: 'fribourg-no-direct-line', de: 'friburg-keine-direktstrecke', fr: 'fribourg-pas-de-liaison-directe' },
  'elezioni-friburgo-8-novembre': { it: 'elezioni-friburgo-8-novembre', en: 'fribourg-elections-november-8', de: 'freiburg-wahlen-8-november', fr: 'elections-fribourg-8-novembre' },
+ 'incidente-matran-friburgo': { it: 'incidente-matran-friburgo', en: 'matran-fribourg-crash', de: 'unfall-matran-freiburg', fr: 'accident-matran-fribourg' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

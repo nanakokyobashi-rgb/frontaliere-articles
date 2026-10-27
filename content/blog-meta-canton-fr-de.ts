@@ -57,6 +57,9 @@ const blogMetaCantonFrDe: Record<string, string> = {
     'blog.article.elezioni-friburgo-8-novembre.title': 'Kantonale Wahlen in Freiburg: Einheitsliste für den Staatsrat am 8. November',
     'blog.article.elezioni-friburgo-8-novembre.excerpt': 'Einheitsliste für den Staatsrat 14 Kandidaturen, höchstens 7 Namen Wahlmaterial bis Donnerstag in den Briefkästen Ein Umschlag für drei Wahlen Daten → 8.',
     'blog.article.elezioni-friburgo-8-novembre.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.incidente-matran-friburgo.title': 'Vier Fahrzeuge: Verkehr zwischen Matran und Freiburg blockiert',
+    'blog.article.incidente-matran-friburgo.excerpt': 'Ein Unfall mit vier Fahrzeugen blockierte die Autobahn zwischen Matran und Freiburg für mehr als drei Stunden.',
+    'blog.article.incidente-matran-friburgo.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonFrDe;

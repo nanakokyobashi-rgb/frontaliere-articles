@@ -57,6 +57,9 @@ const blogMetaCantonFrIt: Record<string, string> = {
     'blog.article.elezioni-friburgo-8-novembre.title': 'Elezione Cantonale Friburgo: Unica lista per Consiglio di Stato l\'8 novembre',
     'blog.article.elezioni-friburgo-8-novembre.excerpt': 'Lista unica per il Consiglio di Stato 14 candidature, massimo 7 nomi Materiale nelle cassette entro giovedì Una busta per tre elezioni Data → 8 novembre',
     'blog.article.elezioni-friburgo-8-novembre.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.incidente-matran-friburgo.title': 'Quattro veicoli: traffico bloccato tra Matran e Friburgo',
+    'blog.article.incidente-matran-friburgo.excerpt': 'Un incidente con quattro veicoli ha bloccato per oltre tre ore l\'autostrada tra Matran e Friburgo.',
+    'blog.article.incidente-matran-friburgo.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonFrIt;

@@ -57,6 +57,9 @@ const blogMetaCantonFrEn: Record<string, string> = {
     'blog.article.elezioni-friburgo-8-novembre.title': 'Fribourg Cantonal Election: Single list for the Council of State on November 8',
     'blog.article.elezioni-friburgo-8-novembre.excerpt': 'Single list for the State Council 14 candidacies, maximum 7 names Materials in the mailboxes by Thursday One envelope for three elections Date → November 8',
     'blog.article.elezioni-friburgo-8-novembre.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.incidente-matran-friburgo.title': 'Four vehicles: traffic blocked between Matran and Fribourg',
+    'blog.article.incidente-matran-friburgo.excerpt': 'An accident involving four vehicles blocked the highway between Matran and Fribourg for over three hours.',
+    'blog.article.incidente-matran-friburgo.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonFrEn;

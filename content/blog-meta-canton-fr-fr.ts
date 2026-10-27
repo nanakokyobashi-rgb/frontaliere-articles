@@ -57,6 +57,9 @@ const blogMetaCantonFrFr: Record<string, string> = {
     'blog.article.elezioni-friburgo-8-novembre.title': 'Élection cantonale de Fribourg : liste unique',
     'blog.article.elezioni-friburgo-8-novembre.excerpt': 'Liste unique pour le Conseil d\'État 14 candidatures, au maximum 7 noms Matériel dans les boîtes aux lettres d\'ici jeudi Une enveloppe pour trois élections Date',
     'blog.article.elezioni-friburgo-8-novembre.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.incidente-matran-friburgo.title': 'Quatre véhicules : trafic bloqué entre Matran et Fribourg',
+    'blog.article.incidente-matran-friburgo.excerpt': 'Un accident impliquant quatre véhicules a bloqué pendant plus de trois heures l\'autoroute entre Matran et Fribourg.',
+    'blog.article.incidente-matran-friburgo.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonFrFr;
