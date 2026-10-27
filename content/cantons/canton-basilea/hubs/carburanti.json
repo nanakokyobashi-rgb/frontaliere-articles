@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "carburanti",
-  "updatedAt": "2026-10-26T23:21:47.402Z",
-  "contentHash": "96d008cb10bef4a97b9f64721d107277a1c8766d31b1a32c8d00287d57420fa7",
+  "updatedAt": "2026-10-27T00:42:14.965Z",
+  "contentHash": "a7b76b5cd08ee0754bc44cc2ae83b371a3df829ef4c053d8c47f034336a03b7e",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -84,6 +84,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "BVB: rasatura in tram, intervento di pulizia documentato",
+          "url": "/articoli-basilea/bvb-rasatura-tram-episodio/",
+          "excerpt": "La Basler Verkehrsbetriebe (BVB) ha pubblicato su Facebook una foto di due rasoi blu e capelli sul pavimento di un tram; è il primo episodio di questo tipo noto.",
+          "date": "2026-10-27T00:34:47.659Z"
+        },
+        {
           "title": "Basilea Città elimina lo sconto sulle auto elettriche",
           "url": "/articoli-basilea/basilea-stop-sconto-elettriche/",
           "excerpt": "A Basilea Città, dal 2027 le auto elettriche pagheranno la tassa piena: termina lo sconto del 50% dopo il superamento della soglia del 5%.",
@@ -106,12 +112,6 @@
           "url": "/articoli-basilea/basel-stadt-siti-online-di-nuoto/",
           "excerpt": "La riapertura dei siti e applicazioni del Canton Basilea Città è progressiva da mercoledì notte; nessun incidente rilevante per la sicurezza è stato registrato giovedì.",
           "date": "2026-10-25T05:03:13.974Z"
-        },
-        {
-          "title": "Domande edilizie solo digitali dal 1° gennaio 2027 nel Canton Basilea",
-          "url": "/articoli-basilea/domande-edilizie-solo-digitale-2027/",
-          "excerpt": "Dal 1° gennaio 2027, le domande di autorizzazione edilizia devono essere presentate solo in formato digitale, come comunicato dal Bau- und Gastgewerbeinspektorat nel settembre 2026.",
-          "date": "2026-10-23T21:50:50.738Z"
         }
       ],
       "links": [
@@ -124,7 +124,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-26T23:21:47.402Z"
+      "updatedAt": "2026-10-27T00:42:14.965Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -195,6 +195,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "BVB: mowing in trams, documented cleaning",
+          "url": "/en/basel-articles/bvb-tram-shaving-incident/",
+          "excerpt": "The Basler Verkehrsbetriebe (BVB) posted on Facebook a photo of two blue razors and hair on the floor of a tram; it is the first known episode of this type.",
+          "date": "2026-10-27T00:34:47.659Z"
+        },
+        {
           "title": "Basel-Stadt abolishes the discount on electric cars",
           "url": "/en/basel-articles/basel-electric-car-discount/",
           "excerpt": "In Basel-Stadt, from 2027, electric cars will pay the full tax: the 50% discount ends once the 5% threshold is exceeded.",
@@ -217,12 +223,6 @@
           "url": "/en/basel-articles/basel-stadt-sites-online-reactivation/",
           "excerpt": "The reopening of the Canton of Basel-Stadt's websites and applications has been gradual since Wednesday night; no significant security incident was recorded on Thursday.",
           "date": "2026-10-25T05:03:13.974Z"
-        },
-        {
-          "title": "Building permit applications digital-only from 2027: Basel",
-          "url": "/en/basel-articles/building-permits-only-digital-2027/",
-          "excerpt": "From January 1, 2027, building permit applications must be submitted only in digital format, as announced by the Bau- und Gastgewerbeinspektorat in September 2026.",
-          "date": "2026-10-23T21:50:50.738Z"
         }
       ],
       "links": [
@@ -235,7 +235,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-26T23:21:47.402Z"
+      "updatedAt": "2026-10-27T00:42:14.965Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -306,6 +306,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "BVB: Mähen in Straßenbahnen, dokumentierte Reinigung",
+          "url": "/de/basel-artikel/bvb-tram-rasurungsfall/",
+          "excerpt": "Die Basler Verkehrsbetriebe (BVB) veröffentlichten auf Facebook ein Foto von zwei blauen Rasierern und Haaren auf dem Boden einer Straßenbahn; es ist der erste bekannte Vorfall dieser Art.",
+          "date": "2026-10-27T00:34:47.659Z"
+        },
+        {
           "title": "Basel-Stadt schafft den Rabatt auf Elektroautos ab",
           "url": "/de/basel-artikel/basel-elektroauto-steuerrabatt/",
           "excerpt": "In Basel-Stadt zahlen Elektroautos ab 2027 die volle Steuer: Der Rabatt von 50% endet, nachdem der Schwellenwert von 5% überschritten wurde.",
@@ -328,12 +334,6 @@
           "url": "/de/basel-artikel/basel-stadt-siti-online-wiederaufnahme/",
           "excerpt": "Die Wiedereröffnung der Websites und Anwendungen des Kantons Basel-Stadt erfolgt seit Mittwochnacht schrittweise; am Donnerstag wurde kein erheblicher Sicherheitsvorfall registriert.",
           "date": "2026-10-25T05:03:13.974Z"
-        },
-        {
-          "title": "Baugesuche ab dem 1. Januar 2027 im Kanton Basel nur noch digital",
-          "url": "/de/basel-artikel/baugesuche-nur-digital-2027/",
-          "excerpt": "Ab dem 1. Januar 2027 müssen Baugesuche, wie das Bau- und Gastgewerbeinspektorat im September 2026 mitteilte, nur noch digital eingereicht werden.",
-          "date": "2026-10-23T21:50:50.738Z"
         }
       ],
       "links": [
@@ -346,7 +346,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-26T23:21:47.402Z"
+      "updatedAt": "2026-10-27T00:42:14.965Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -417,6 +417,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "BVB : tonte dans les tramways, nettoyage documenté",
+          "url": "/fr/articles-bale/bvb-incident-rasage-tram/",
+          "excerpt": "La Basler Verkehrsbetriebe (BVB) a publié sur Facebook une photo de deux rasoirs bleus et de cheveux sur le sol d'un tramway ; c'est le premier épisode connu de ce type.",
+          "date": "2026-10-27T00:34:47.659Z"
+        },
+        {
           "title": "Bâle-Ville supprime la réduction pour les voitures électriques",
           "url": "/fr/articles-bale/bale-rabais-voitures-electriques/",
           "excerpt": "À Bâle-Ville, à partir de 2027, les voitures électriques paieront la taxe pleine : la réduction de 50% prend fin après le dépassement du seuil de 5%.",
@@ -439,12 +445,6 @@
           "url": "/fr/articles-bale/basile-sites-en-ligne-reactivation/",
           "excerpt": "La réouverture des sites et applications du canton de Bâle-Ville est progressive depuis mercredi soir ; aucun incident de sécurité important n’a été enregistré jeudi.",
           "date": "2026-10-25T05:03:13.974Z"
-        },
-        {
-          "title": "Demandes de permis de construire numériques dès 2027 à Bâle",
-          "url": "/fr/articles-bale/demandes-permis-digital-2027/",
-          "excerpt": "À partir du 1er janvier 2027, les demandes de permis de construire doivent être soumises uniquement sous forme numérique, comme l’a annoncé le Bau- und Gastgewerbeinspektorat en septembre 2026.",
-          "date": "2026-10-23T21:50:50.738Z"
         }
       ],
       "links": [
@@ -457,7 +457,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-26T23:21:47.402Z"
+      "updatedAt": "2026-10-27T00:42:14.965Z"
     }
   }
 }
