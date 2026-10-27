@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "servizi",
-  "updatedAt": "2026-10-27T09:50:47.476Z",
-  "contentHash": "ddfaec6cfd498a0e301ef6a7a099667b349274becc6492cd209fe730b84e1ccd",
+  "updatedAt": "2026-10-27T10:55:28.229Z",
+  "contentHash": "d57e7377f958140b3bc2e4f1337f710c3f6dd137c208ca43d861d6e0e685e667",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,13 +14,18 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-27T00:56:28.252Z",
+      "updatedAt": "2026-10-27T06:05:25.484Z",
       "keyFacts": 0
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-26T22:41:01.543Z",
+      "updatedAt": "2026-10-27T05:02:25.827Z",
       "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-27T05:19:53.547Z",
+      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
@@ -111,7 +116,7 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-27T00:56:28.252Z"
+          "updatedAt": "2026-10-27T06:05:25.484Z"
         },
         {
           "id": "aste-targhe",
@@ -142,7 +147,21 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-26T22:41:01.543Z"
+          "updatedAt": "2026-10-27T05:02:25.827Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "7 °C",
+              "detail": "oggi da 6 a 17 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-27T05:19:53.547Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -260,7 +279,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-27T09:50:47.476Z"
+      "updatedAt": "2026-10-27T10:55:28.229Z"
     },
     "en": {
       "canton": "ZH",
@@ -344,7 +363,7 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-27T00:56:28.252Z"
+          "updatedAt": "2026-10-27T06:05:25.484Z"
         },
         {
           "id": "aste-targhe",
@@ -375,7 +394,21 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-26T22:41:01.543Z"
+          "updatedAt": "2026-10-27T05:02:25.827Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "7 °C",
+              "detail": "today from 6 to 17 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-27T05:19:53.547Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -489,7 +522,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-27T09:50:47.476Z"
+      "updatedAt": "2026-10-27T10:55:28.229Z"
     },
     "de": {
       "canton": "ZH",
@@ -573,7 +606,7 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-27T00:56:28.252Z"
+          "updatedAt": "2026-10-27T06:05:25.484Z"
         },
         {
           "id": "aste-targhe",
@@ -604,7 +637,21 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-26T22:41:01.543Z"
+          "updatedAt": "2026-10-27T05:02:25.827Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "7 °C",
+              "detail": "heute 6 bis 17 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-27T05:19:53.547Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -718,7 +765,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-27T09:50:47.476Z"
+      "updatedAt": "2026-10-27T10:55:28.229Z"
     },
     "fr": {
       "canton": "ZH",
@@ -802,7 +849,7 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-27T00:56:28.252Z"
+          "updatedAt": "2026-10-27T06:05:25.484Z"
         },
         {
           "id": "aste-targhe",
@@ -833,7 +880,21 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-26T22:41:01.543Z"
+          "updatedAt": "2026-10-27T05:02:25.827Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "7 °C",
+              "detail": "aujourd’hui de 6 à 17 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-27T05:19:53.547Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -943,7 +1004,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-27T09:50:47.476Z"
+      "updatedAt": "2026-10-27T10:55:28.229Z"
     }
   }
 }

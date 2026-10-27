@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "servizi",
-  "updatedAt": "2026-10-27T09:50:47.476Z",
-  "contentHash": "c6d69d830a7d77a0ae08ddd480e3e6557504cb0c05db3ab83f91ff254e1ca889",
+  "updatedAt": "2026-10-27T10:55:28.229Z",
+  "contentHash": "5520c076cf8f69093791912bc737b97521b5ef135fdd63f3cf778c792e2a9b9a",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,13 +14,18 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-27T00:56:28.252Z",
+      "updatedAt": "2026-10-27T06:05:25.484Z",
       "keyFacts": 0
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-26T22:41:01.543Z",
+      "updatedAt": "2026-10-27T05:02:25.827Z",
       "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-27T05:19:53.547Z",
+      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
@@ -86,7 +91,7 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-10-27T00:56:28.252Z"
+          "updatedAt": "2026-10-27T06:05:25.484Z"
         },
         {
           "id": "aste-targhe",
@@ -117,7 +122,21 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-10-26T22:41:01.543Z"
+          "updatedAt": "2026-10-27T05:02:25.827Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Solothurn",
+              "value": "6 °C",
+              "detail": "oggi da 5 a 16 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-27T05:19:53.547Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -225,7 +244,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-27T09:50:47.476Z"
+      "updatedAt": "2026-10-27T10:55:28.229Z"
     },
     "en": {
       "canton": "SO",
@@ -284,7 +303,7 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-10-27T00:56:28.252Z"
+          "updatedAt": "2026-10-27T06:05:25.484Z"
         },
         {
           "id": "aste-targhe",
@@ -315,7 +334,21 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-10-26T22:41:01.543Z"
+          "updatedAt": "2026-10-27T05:02:25.827Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Solothurn",
+              "value": "6 °C",
+              "detail": "today from 5 to 16 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-27T05:19:53.547Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -419,7 +452,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-27T09:50:47.476Z"
+      "updatedAt": "2026-10-27T10:55:28.229Z"
     },
     "de": {
       "canton": "SO",
@@ -478,7 +511,7 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-10-27T00:56:28.252Z"
+          "updatedAt": "2026-10-27T06:05:25.484Z"
         },
         {
           "id": "aste-targhe",
@@ -509,7 +542,21 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-10-26T22:41:01.543Z"
+          "updatedAt": "2026-10-27T05:02:25.827Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Solothurn",
+              "value": "6 °C",
+              "detail": "heute 5 bis 16 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-27T05:19:53.547Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -613,7 +660,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-27T09:50:47.476Z"
+      "updatedAt": "2026-10-27T10:55:28.229Z"
     },
     "fr": {
       "canton": "SO",
@@ -672,7 +719,7 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-10-27T00:56:28.252Z"
+          "updatedAt": "2026-10-27T06:05:25.484Z"
         },
         {
           "id": "aste-targhe",
@@ -703,7 +750,21 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-10-26T22:41:01.543Z"
+          "updatedAt": "2026-10-27T05:02:25.827Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Solothurn",
+              "value": "6 °C",
+              "detail": "aujourd’hui de 5 à 16 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-27T05:19:53.547Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -803,7 +864,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-27T09:50:47.476Z"
+      "updatedAt": "2026-10-27T10:55:28.229Z"
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "carburanti",
-  "updatedAt": "2026-10-26T01:02:08.769Z",
-  "contentHash": "2a096f89d7a8854ab34b6b62749a7c5ae62be4592d28f7682d85c70d264a3518",
+  "updatedAt": "2026-10-27T10:55:28.229Z",
+  "contentHash": "e940eb791526d63cb53cd1e38f7a70970e04614b6d245fc63ab112b68ab7e84d",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-25T12:00:24.779Z",
+      "updatedAt": "2026-10-26T13:32:45.792Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-11-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-25T12:00:24.779Z"
+          "updatedAt": "2026-10-26T13:32:45.792Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Axenstrasse chiusa di notte per lavori di manutenzione nel Canton Uri",
+          "url": "/articoli-uri/axenstrasse-chiusa-novembre-2026/",
+          "excerpt": "Dal 2 al 6 novembre 2026, l'Axenstrasse sarà chiusa dalle 22.00 alle 05.00; il traffico viene deviato sull'autostrada A2.",
+          "date": "2026-10-27T10:48:04.296Z"
+        },
         {
           "title": "Felix Gisler lascerà l'amministrazione cantonale di Uri",
           "url": "/articoli-uri/felix-gisler-pensione-uri/",
@@ -82,12 +88,6 @@
           "url": "/articoli-uri/axenstrasse-chiusa-quattro-notti/",
           "excerpt": "La Axenstrasse sarà completamente chiusa dal 2 al 6 novembre, ogni notte dalle 22 alle 5, per lavori di manutenzione.",
           "date": "2026-10-20T09:56:09.960Z"
-        },
-        {
-          "title": "Silenen: Landrat approva CHF 207.000 per muri a secco",
-          "url": "/articoli-uri/silenen-muri-secco/",
-          "excerpt": "Il Landrat approva CHF 207.000 senza voti contrari 3,6 km di muri storici nell'area di Silenen Circa il 60% presenta un rischio per la sicurezza I lavori",
-          "date": "2026-10-18T06:56:11.601Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T10:55:28.229Z"
     },
     "en": {
       "canton": "UR",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-25T12:00:24.779Z"
+          "updatedAt": "2026-10-26T13:32:45.792Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Axenstrasse closed at night for maintenance work in the Canton of Uri",
+          "url": "/en/uri-articles/axenstrasse-closed-november-2026/",
+          "excerpt": "From November 2 to 6, 2026, Axenstrasse will be closed from 22.00 to 05.00; traffic is diverted onto the A2 motorway.",
+          "date": "2026-10-27T10:48:04.296Z"
+        },
         {
           "title": "Felix Gisler will leave the cantonal administration of Uri",
           "url": "/en/uri-articles/felix-gisler-uri-retirement/",
@@ -169,12 +175,6 @@
           "url": "/en/uri-articles/axenstrasse-closed-four-nights/",
           "excerpt": "Axenstrasse will be completely closed from November 2 to 6, every night from 22 to 5, for maintenance work.",
           "date": "2026-10-20T09:56:09.960Z"
-        },
-        {
-          "title": "Silenen: Cantonal Parliament approves CHF 207.000 for dry stone walls",
-          "url": "/en/uri-articles/silenen-dry-stone-walls/",
-          "excerpt": "The Landrat approves CHF 207.000 with no votes against 3,6 km of historic walls in the Silenen area Around 60% pose a safety risk Work starts in October",
-          "date": "2026-10-18T06:56:11.601Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T10:55:28.229Z"
     },
     "de": {
       "canton": "UR",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-25T12:00:24.779Z"
+          "updatedAt": "2026-10-26T13:32:45.792Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Axenstrasse nachts wegen Wartungsarbeiten im Kanton Uri gesperrt",
+          "url": "/de/uri-artikel/axenstrasse-geschlossen-november-2026/",
+          "excerpt": "Vom 2. bis 6. November 2026 wird die Axenstrasse von 22.00 bis 05.00 gesperrt; der Verkehr wird über die Autobahn A2 umgeleitet.",
+          "date": "2026-10-27T10:48:04.296Z"
+        },
         {
           "title": "Felix Gisler wird die Kantonsverwaltung Uri verlassen",
           "url": "/de/uri-artikel/felix-gisler-uri-pensionierung/",
@@ -256,12 +262,6 @@
           "url": "/de/uri-artikel/axenstrasse-vier-naechte-gesperrt/",
           "excerpt": "Die Axenstrasse wird vom 2.",
           "date": "2026-10-20T09:56:09.960Z"
-        },
-        {
-          "title": "Silenen: Landrat genehmigt CHF 207.000 für Trockenmauern",
-          "url": "/de/uri-artikel/silenen-trockenmauern-sanierung/",
-          "excerpt": "Der Landrat genehmigt CHF 207.000 ohne Gegenstimmen 3,6 km historische Mauern im Gebiet von Silenen Rund 60% stellen ein Sicherheitsrisiko dar Die Arbeiten",
-          "date": "2026-10-18T06:56:11.601Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T10:55:28.229Z"
     },
     "fr": {
       "canton": "UR",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-25T12:00:24.779Z"
+          "updatedAt": "2026-10-26T13:32:45.792Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Axenstrasse fermée de nuit pour travaux d'entretien dans le canton d'Uri",
+          "url": "/fr/articles-uri/axenstrasse-fermee-novembre-2026/",
+          "excerpt": "Du 2 au 6 novembre 2026, l'Axenstrasse sera fermée de 22.00 à 05.00 ; le trafic est dévié sur l'autoroute A2.",
+          "date": "2026-10-27T10:48:04.296Z"
+        },
         {
           "title": "Felix Gisler quittera l’administration cantonale d’Uri",
           "url": "/fr/articles-uri/felix-gisler-uri-retraite/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-uri/axenstrasse-fermee-quatre-nuits/",
           "excerpt": "L’Axenstrasse sera complètement fermée du 2 au 6 novembre, chaque nuit de 22 à 5, pour des travaux d’entretien.",
           "date": "2026-10-20T09:56:09.960Z"
-        },
-        {
-          "title": "Silenen : le Landrat approuve CHF 207.000 pour des murs en pierre sèche",
-          "url": "/fr/articles-uri/silenen-murs-pierre-seche/",
-          "excerpt": "Le Landrat approuve CHF 207.000 sans voix contre 3,6 km de murs historiques dans la région de Silenen Environ 60% présentent un risque pour la sécurité",
-          "date": "2026-10-18T06:56:11.601Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T10:55:28.229Z"
     }
   }
 }

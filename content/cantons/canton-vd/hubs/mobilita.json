@@ -4,12 +4,12 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "mobilita",
-  "updatedAt": "2026-10-27T06:35:07.773Z",
-  "contentHash": "fc1f0c4a4fd43751061ccab1d1698e8a15f49458e23be84777577b6eddcbf0b5",
+  "updatedAt": "2026-10-27T10:55:28.229Z",
+  "contentHash": "5a0f63e008ac9fe4580d63a4df08545686df83e9c6fe94621dd782e4a05df5c3",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-25T23:59:59.000Z",
+      "updatedAt": "2026-10-26T23:59:59.000Z",
       "keyFacts": 1
     },
     {
@@ -33,7 +33,7 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Chavannes-de-Bogis-Divonne, settimana conclusa: 25 ottobre 2026"
+          "note": "Chavannes-de-Bogis-Divonne, settimana conclusa: 26 ottobre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
@@ -50,7 +50,7 @@
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 19 ottobre 2026 – 25 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 20 ottobre 2026 – 26 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Chavannes-de-Bogis-Divonne",
@@ -91,7 +91,7 @@
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-25T23:59:59.000Z"
+          "updatedAt": "2026-10-26T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -270,7 +270,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-27T06:35:07.773Z"
+      "updatedAt": "2026-10-27T10:55:28.229Z"
     },
     "en": {
       "canton": "VD",
@@ -281,7 +281,7 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Chavannes-de-Bogis-Divonne, week ending 25 October 2026"
+          "note": "Chavannes-de-Bogis-Divonne, week ending 26 October 2026"
         },
         {
           "label": "Road closures in force or imminent",
@@ -298,7 +298,7 @@
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 19 October 2026 to 25 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 20 October 2026 to 26 October 2026, fastest first.",
           "items": [
             {
               "label": "Chavannes-de-Bogis-Divonne",
@@ -339,7 +339,7 @@
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-25T23:59:59.000Z"
+          "updatedAt": "2026-10-26T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -517,7 +517,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-27T06:35:07.773Z"
+      "updatedAt": "2026-10-27T10:55:28.229Z"
     },
     "de": {
       "canton": "VD",
@@ -528,7 +528,7 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Chavannes-de-Bogis-Divonne, Woche bis 25. Oktober 2026"
+          "note": "Chavannes-de-Bogis-Divonne, Woche bis 26. Oktober 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
@@ -545,7 +545,7 @@
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 19. Oktober 2026 bis 25. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 20. Oktober 2026 bis 26. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Chavannes-de-Bogis-Divonne",
@@ -586,7 +586,7 @@
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-25T23:59:59.000Z"
+          "updatedAt": "2026-10-26T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -764,7 +764,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-27T06:35:07.773Z"
+      "updatedAt": "2026-10-27T10:55:28.229Z"
     },
     "fr": {
       "canton": "VD",
@@ -775,7 +775,7 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Chavannes-de-Bogis-Divonne, semaine jusqu’au 25 octobre 2026"
+          "note": "Chavannes-de-Bogis-Divonne, semaine jusqu’au 26 octobre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
@@ -792,7 +792,7 @@
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 19 octobre 2026 au 25 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 20 octobre 2026 au 26 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Chavannes-de-Bogis-Divonne",
@@ -833,7 +833,7 @@
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-25T23:59:59.000Z"
+          "updatedAt": "2026-10-26T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -1012,7 +1012,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-27T06:35:07.773Z"
+      "updatedAt": "2026-10-27T10:55:28.229Z"
     }
   }
 }

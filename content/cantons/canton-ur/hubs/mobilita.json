@@ -4,8 +4,8 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-27T06:35:07.773Z",
-  "contentHash": "52fd9810ae3103c8382947867e7f57b9a7b1d6aff044ab95a061cdfad085528d",
+  "updatedAt": "2026-10-27T10:55:28.229Z",
+  "contentHash": "d075ac55fe807c63fde4bae61c8004e0c613d0aa1dd84dcebf43fa26a5110989",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -134,6 +134,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Axenstrasse chiusa di notte per lavori di manutenzione nel Canton Uri",
+          "url": "/articoli-uri/axenstrasse-chiusa-novembre-2026/",
+          "excerpt": "Dal 2 al 6 novembre 2026, l'Axenstrasse sarà chiusa dalle 22.00 alle 05.00; il traffico viene deviato sull'autostrada A2.",
+          "date": "2026-10-27T10:48:04.296Z"
+        },
+        {
           "title": "Axenstrasse chiusa per quattro notti dal 2 al 6 novembre",
           "url": "/articoli-uri/axenstrasse-chiusa-quattro-notti/",
           "excerpt": "La Axenstrasse sarà completamente chiusa dal 2 al 6 novembre, ogni notte dalle 22 alle 5, per lavori di manutenzione.",
@@ -187,7 +193,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-27T06:35:07.773Z"
+      "updatedAt": "2026-10-27T10:55:28.229Z"
     },
     "en": {
       "canton": "UR",
@@ -304,6 +310,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Axenstrasse closed at night for maintenance work in the Canton of Uri",
+          "url": "/en/uri-articles/axenstrasse-closed-november-2026/",
+          "excerpt": "From November 2 to 6, 2026, Axenstrasse will be closed from 22.00 to 05.00; traffic is diverted onto the A2 motorway.",
+          "date": "2026-10-27T10:48:04.296Z"
+        },
+        {
           "title": "Axenstrasse closed for four nights from November 2 to 6",
           "url": "/en/uri-articles/axenstrasse-closed-four-nights/",
           "excerpt": "Axenstrasse will be completely closed from November 2 to 6, every night from 22 to 5, for maintenance work.",
@@ -357,7 +369,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-27T06:35:07.773Z"
+      "updatedAt": "2026-10-27T10:55:28.229Z"
     },
     "de": {
       "canton": "UR",
@@ -474,6 +486,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Axenstrasse nachts wegen Wartungsarbeiten im Kanton Uri gesperrt",
+          "url": "/de/uri-artikel/axenstrasse-geschlossen-november-2026/",
+          "excerpt": "Vom 2. bis 6. November 2026 wird die Axenstrasse von 22.00 bis 05.00 gesperrt; der Verkehr wird über die Autobahn A2 umgeleitet.",
+          "date": "2026-10-27T10:48:04.296Z"
+        },
+        {
           "title": "Axenstrasse vom 2. bis 6. November vier Nächte lang gesperrt",
           "url": "/de/uri-artikel/axenstrasse-vier-naechte-gesperrt/",
           "excerpt": "Die Axenstrasse wird vom 2.",
@@ -527,7 +545,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-27T06:35:07.773Z"
+      "updatedAt": "2026-10-27T10:55:28.229Z"
     },
     "fr": {
       "canton": "UR",
@@ -644,6 +662,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Axenstrasse fermée de nuit pour travaux d'entretien dans le canton d'Uri",
+          "url": "/fr/articles-uri/axenstrasse-fermee-novembre-2026/",
+          "excerpt": "Du 2 au 6 novembre 2026, l'Axenstrasse sera fermée de 22.00 à 05.00 ; le trafic est dévié sur l'autoroute A2.",
+          "date": "2026-10-27T10:48:04.296Z"
+        },
+        {
           "title": "Axenstrasse fermée pendant quatre nuits du 2 au 6 novembre",
           "url": "/fr/articles-uri/axenstrasse-fermee-quatre-nuits/",
           "excerpt": "L’Axenstrasse sera complètement fermée du 2 au 6 novembre, chaque nuit de 22 à 5, pour des travaux d’entretien.",
@@ -697,7 +721,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-27T06:35:07.773Z"
+      "updatedAt": "2026-10-27T10:55:28.229Z"
     }
   }
 }
