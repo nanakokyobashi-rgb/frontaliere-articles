@@ -4,13 +4,13 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-sg::https://www.sg.ch/news/sgch_kantonspolizei/2026/10/niederuzwil--verkehrsunfall--wer-hatte-gruen----zeugenaufruf.html": {
+    "canton-sg::https://www.sg.ch/news/sgch_kantonspolizei/2026/10/kanton-st-gallen--drei-verkehrsunfaelle---drei-personen-fahrunfae.html": {
       "section": "canton-sg",
-      "ts": 1792521215445
+      "ts": 1793070006134
     },
-    "canton-sg::https://www.unisg.ch/de/newsroom/warum-neue-technologien-in-manchen-regionen-schneller-fuss-fassen": {
+    "canton-sg::https://www.unisg.ch/de/newsroom/themenschwerpunkt-kuenstliche-intelligenz": {
       "section": "canton-sg",
-      "ts": 1792585394764
+      "ts": 1793070229660
     }
   }
 }
