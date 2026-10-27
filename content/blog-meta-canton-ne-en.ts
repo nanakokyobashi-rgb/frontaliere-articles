@@ -60,6 +60,9 @@ const blogMetaCantonNeEn: Record<string, string> = {
     'blog.article.rht-ritorno-normale-orologeria.title': 'RHT: watchmaking accepts return to normal expected in Bern',
     'blog.article.rht-ritorno-normale-orologeria.excerpt': 'Zenith has initiated a collective dismissal in Le Locle.',
     'blog.article.rht-ritorno-normale-orologeria.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.arco-giurassiano-frontalieri.title': 'Changes in cross-border employment in the Jura Arc',
+    'blog.article.arco-giurassiano-frontalieri.excerpt': 'An episode on the Jura Arc addresses changes in cross-border employment; the 2026 overview of the Canton of Neuchâtel distinguishes taxation and social security.',
+    'blog.article.arco-giurassiano-frontalieri.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonNeEn;

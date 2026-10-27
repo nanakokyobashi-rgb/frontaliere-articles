@@ -60,6 +60,9 @@ const blogMetaCantonAppenzelloFr: Record<string, string> = {
     'blog.article.credito-pfas-appenzello.title': 'Appenzell Rhodes-Extérieures : crédit approuvé pour le programme PFAS',
     'blog.article.credito-pfas-appenzello.excerpt': 'Le Parlement d’Appenzell Rhodes-Extérieures a approuvé par 60 voix contre zéro et une abstention le crédit pour un programme PFAS.',
     'blog.article.credito-pfas-appenzello.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.teufen-ricorso-progetto-bundt.title': 'Teufen : le recours concernant le projet Bündt est partiellement admis',
+    'blog.article.teufen-ricorso-progetto-bundt.excerpt': 'Le Tribunal cantonal d’Appenzell Rhodes-Extérieures a partiellement admis le recours des habitants : le projet routier Bündt ne peut pas être réalisé dans sa forme actuelle.',
+    'blog.article.teufen-ricorso-progetto-bundt.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonAppenzelloFr;

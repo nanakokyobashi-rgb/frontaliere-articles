@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "pensioni",
-  "updatedAt": "2026-10-27T18:18:32.937Z",
-  "contentHash": "bf02ab4f5d8c65a4a223f57b8c5f77c49e00d50080b9e2c655a10b0be6cea65d",
+  "updatedAt": "2026-10-27T19:21:58.604Z",
+  "contentHash": "d582b0922109cad9635f6a6b09c2ae8e760c2bcada68c45d158eed23a5962b89",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -129,6 +129,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Mutamenti del lavoro frontaliero nell'Arco giurassiano",
+          "url": "/articoli-neuchatel/arco-giurassiano-frontalieri/",
+          "excerpt": "Un episodio sull'Arco giurassiano affronta i mutamenti dell'occupazione frontaliera; il quadro 2026 del Cantone di Neuchâtel separa fisco e previdenza.",
+          "date": "2026-10-27T19:06:44.911Z"
+        },
+        {
           "title": "RHT: orologeria accetta ritorno alla normale previsto a Berna",
           "url": "/articoli-neuchatel/rht-ritorno-normale-orologeria/",
           "excerpt": "Zenith ha avviato un licenziamento collettivo a Le Locle.",
@@ -151,12 +157,6 @@
           "url": "/articoli-neuchatel/tagli-orologeria-locle-lvmh/",
           "excerpt": "Zenith sopprime circa 100 posti a Le Locle su 196 dipendenti; 101 persone sono a rischio nella distribuzione internazionale.",
           "date": "2026-10-26T09:27:07.480Z"
-        },
-        {
-          "title": "Mese salute mentale 2026: attività per rafforzare autostima",
-          "url": "/articoli-neuchatel/mese-salute-mentale-2026/",
-          "excerpt": "Dal 10 settembre al 10 ottobre 2026 Seconda edizione nel Canton Neuchâtel Attività gratuite e accessibili per ogni età Una ventina di organizzazioni partner",
-          "date": "2026-10-26T08:52:52.668Z"
         }
       ],
       "links": [
@@ -177,7 +177,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-27T18:18:32.937Z"
+      "updatedAt": "2026-10-27T19:21:58.604Z"
     },
     "en": {
       "canton": "NE",
@@ -284,6 +284,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Changes in cross-border employment in the Jura Arc",
+          "url": "/en/neuchatel-articles/jurassic-arc-cross-border-work/",
+          "excerpt": "An episode on the Jura Arc addresses changes in cross-border employment; the 2026 overview of the Canton of Neuchâtel distinguishes taxation and social security.",
+          "date": "2026-10-27T19:06:44.911Z"
+        },
+        {
           "title": "RHT: watchmaking accepts return to normal expected in Bern",
           "url": "/en/neuchatel-articles/rht-return-to-normal-watchmaking/",
           "excerpt": "Zenith has initiated a collective dismissal in Le Locle.",
@@ -306,12 +312,6 @@
           "url": "/en/neuchatel-articles/watchmaker-cuts-le-locle/",
           "excerpt": "Zenith is eliminating around 100 positions in Le Locle, out of 196 employees; 101 people are at risk in international distribution.",
           "date": "2026-10-26T09:27:07.480Z"
-        },
-        {
-          "title": "Mental Health Month 2026: activities to strengthen self-esteem",
-          "url": "/en/neuchatel-articles/mental-health-month-2026/",
-          "excerpt": "From September 10 to October 10, 2026 Second edition in the Canton of Neuchâtel Free and accessible activities for all ages Around twenty partner organizations",
-          "date": "2026-10-26T08:52:52.668Z"
         }
       ],
       "links": [
@@ -332,7 +332,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-27T18:18:32.937Z"
+      "updatedAt": "2026-10-27T19:21:58.604Z"
     },
     "de": {
       "canton": "NE",
@@ -439,6 +439,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Veränderungen der Grenzgängerbeschäftigung im Jurabogen",
+          "url": "/de/neuenburg-artikel/jurabogen-grenzgaenger-arbeit/",
+          "excerpt": "Eine Folge über den Jurabogen behandelt die Veränderungen der Grenzgängerbeschäftigung; der Steuerüberblick 2026 des Kantons Neuenburg trennt Steuern und Vorsorge.",
+          "date": "2026-10-27T19:06:44.911Z"
+        },
+        {
           "title": "RHT: Uhrenbranche akzeptiert in Bern geplante Rückkehr zur Norm",
           "url": "/de/neuenburg-artikel/rht-normal-rueckkehr-uhren/",
           "excerpt": "Zenith hat in Le Locle eine Massenentlassung eingeleitet.",
@@ -461,12 +467,6 @@
           "url": "/de/neuenburg-artikel/stellenabbau-uhrmacher-le-locle/",
           "excerpt": "Zenith baut in Le Locle rund 100 Stellen bei insgesamt 196 Beschäftigten ab; 101 Personen im internationalen Vertrieb sind gefährdet.",
           "date": "2026-10-26T09:27:07.480Z"
-        },
-        {
-          "title": "Monat der psychischen Gesundheit 2026: Selbstwert stärken",
-          "url": "/de/neuenburg-artikel/mens-gesundheits-2026/",
-          "excerpt": "Vom 10. September bis zum 10. Oktober 2026 Zweite Ausgabe im Kanton Neuenburg Kostenlose und zugängliche Aktivitäten für jedes Alter Rund zwanzig",
-          "date": "2026-10-26T08:52:52.668Z"
         }
       ],
       "links": [
@@ -487,7 +487,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-27T18:18:32.937Z"
+      "updatedAt": "2026-10-27T19:21:58.604Z"
     },
     "fr": {
       "canton": "NE",
@@ -594,6 +594,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Mutations du travail frontalier dans l’Arc jurassien",
+          "url": "/fr/articles-neuchatel/arc-jurassien-emploi-frontalier/",
+          "excerpt": "Un épisode consacré à l’Arc jurassien aborde les évolutions de l’emploi frontalier ; le cadre 2026 du canton de Neuchâtel sépare fiscalité et prévoyance.",
+          "date": "2026-10-27T19:06:44.911Z"
+        },
+        {
           "title": "RHT : l’horlogerie accepte le retour à la normale prévu à Berne",
           "url": "/fr/articles-neuchatel/rht-retour-normal-horlogerie/",
           "excerpt": "Zenith a engagé une procédure de licenciement collectif au Locle.",
@@ -616,12 +622,6 @@
           "url": "/fr/articles-neuchatel/suppressions-emplois-le-locle/",
           "excerpt": "Zenith supprime environ 100 postes au Locle sur 196 employés ; 101 personnes sont menacées dans la distribution internationale.",
           "date": "2026-10-26T09:27:07.480Z"
-        },
-        {
-          "title": "Mois de la santé mentale 2026 : activités pour renforcer l’estime de soi",
-          "url": "/fr/articles-neuchatel/mois-sante-mentale-2026/",
-          "excerpt": "Du 10 septembre au 10 octobre 2026 Deuxième édition dans le canton de Neuchâtel Activités gratuites et accessibles pour tous les âges Une vingtaine",
-          "date": "2026-10-26T08:52:52.668Z"
         }
       ],
       "links": [
@@ -642,7 +642,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-27T18:18:32.937Z"
+      "updatedAt": "2026-10-27T19:21:58.604Z"
     }
   }
 }

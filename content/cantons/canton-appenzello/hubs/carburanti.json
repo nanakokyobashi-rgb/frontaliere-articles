@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "carburanti",
-  "updatedAt": "2026-10-27T00:15:17.334Z",
-  "contentHash": "0a274612c521d361c8de823f9eba193d3f30ac10eef5a6bf981cf4b300d4a0b7",
+  "updatedAt": "2026-10-27T20:13:53.955Z",
+  "contentHash": "353122b3183455320f33563f498de31387c97209ae99b2bf09805e2d460ecb98",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Teufen: accolto in parte il ricorso sul progetto Bündt",
+          "url": "/articoli-appenzello/teufen-ricorso-progetto-bundt/",
+          "excerpt": "L'Obergericht dell'Appenzello Esterno ha accolto in parte il ricorso degli abitanti: il progetto stradale Bündt non può essere attuato nella forma attuale.",
+          "date": "2026-10-27T20:08:13.817Z"
+        },
+        {
           "title": "Appenzello Esterno: credito approvato per il programma PFAS",
           "url": "/articoli-appenzello/credito-pfas-appenzello/",
           "excerpt": "Il Parlamento di Appenzello Esterno ha approvato con 60 voti a zero e un'astensione il credito per un programma PFAS.",
@@ -94,12 +100,6 @@
           "url": "/articoli-appenzello/investimenti-tetto-fotovoltaico-2027/",
           "excerpt": "Nel 2027 sono pianificate spese nette di CHF 802'767; previsto il risanamento del tetto della palestra con fotovoltaico.",
           "date": "2026-10-22T22:14:01.184Z"
-        },
-        {
-          "title": "Heiden prosegue i risparmi: deficit di CHF 204'200 nel 2027",
-          "url": "/articoli-appenzello/heiden-risparmi-preventivo-2027/",
-          "excerpt": "Il preventivo 2027 di Heiden indica entrate per CHF 35,308 milioni, uscite per CHF 35,512 milioni e un deficit di CHF 204'200.",
-          "date": "2026-10-21T19:28:07.751Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-27T20:13:53.955Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Teufen: appeal concerning the Bündt project partially upheld",
+          "url": "/en/appenzell-articles/teufen-bundt-project-appeal/",
+          "excerpt": "The Obergericht of Appenzell Ausserrhoden partially upheld the residents' appeal: the Bündt road project cannot be implemented in its current form.",
+          "date": "2026-10-27T20:08:13.817Z"
+        },
+        {
           "title": "Appenzell Ausserrhoden: credit approved for the PFAS program",
           "url": "/en/appenzell-articles/appenzell-ausserrhoden-pfas-credit/",
           "excerpt": "The Parliament of Appenzell Ausserrhoden approved the funding for a PFAS program by 60 votes to zero, with one abstention.",
@@ -193,12 +199,6 @@
           "url": "/en/appenzell-articles/roof-solar-investment-2027/",
           "excerpt": "In 2027, net expenditure of CHF 802'767 is planned; renovation of the gymnasium roof with photovoltaics is planned.",
           "date": "2026-10-22T22:14:01.184Z"
-        },
-        {
-          "title": "Heiden continues its savings measures: deficit of CHF 204'200 in 2027",
-          "url": "/en/appenzell-articles/heiden-savings-budget-2027/",
-          "excerpt": "Heiden's 2027 budget projects revenues of CHF 35,308 million, expenditures of CHF 35,512 million, and a deficit of CHF 204'200.",
-          "date": "2026-10-21T19:28:07.751Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-27T20:13:53.955Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Teufen: Beschwerde gegen das Projekt Bündt teilweise gutgeheissen",
+          "url": "/de/appenzell-artikel/teufen-buendt-projekt-beschwerde/",
+          "excerpt": "Das Obergericht des Kantons Appenzell Ausserrhoden hat die Beschwerde der Anwohner teilweise gutgeheissen: Das Strassenprojekt Bündt kann in seiner aktuellen Form nicht umgesetzt werden.",
+          "date": "2026-10-27T20:08:13.817Z"
+        },
+        {
           "title": "Appenzell Ausserrhoden: Kredit für das PFAS-Programm genehmigt",
           "url": "/de/appenzell-artikel/appenzell-ausserrhoden-pfas-kredit/",
           "excerpt": "Das Parlament von Appenzell Ausserrhoden hat den Kredit für ein PFAS-Programm mit 60 zu 0 Stimmen und einer Enthaltung genehmigt.",
@@ -292,12 +298,6 @@
           "url": "/de/appenzell-artikel/dachsanierung-photovoltaik-investition-2027/",
           "excerpt": "Für 2027 sind Nettoausgaben von CHF 802'767 geplant; vorgesehen ist die Sanierung des Dachs der Sporthalle mit Photovoltaik.",
           "date": "2026-10-22T22:14:01.184Z"
-        },
-        {
-          "title": "Heiden setzt die Sparbemühungen fort: Defizit von CHF 204'200 im Jahr 2027",
-          "url": "/de/appenzell-artikel/heiden-sparbemuehungen-budget-2027/",
-          "excerpt": "Der Voranschlag 2027 von Heiden weist Einnahmen von CHF 35,308 Millionen, Ausgaben von CHF 35,512 Millionen und ein Defizit von CHF 204'200 aus.",
-          "date": "2026-10-21T19:28:07.751Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-27T20:13:53.955Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Teufen : le recours concernant le projet Bündt est partiellement admis",
+          "url": "/fr/articles-appenzell/teufen-recours-projet-buendt/",
+          "excerpt": "Le Tribunal cantonal d’Appenzell Rhodes-Extérieures a partiellement admis le recours des habitants : le projet routier Bündt ne peut pas être réalisé dans sa forme actuelle.",
+          "date": "2026-10-27T20:08:13.817Z"
+        },
+        {
           "title": "Appenzell Rhodes-Extérieures : crédit approuvé pour le programme PFAS",
           "url": "/fr/articles-appenzell/appenzell-exterieur-credit-pfas/",
           "excerpt": "Le Parlement d’Appenzell Rhodes-Extérieures a approuvé par 60 voix contre zéro et une abstention le crédit pour un programme PFAS.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-appenzell/toit-photovoltaique-investissement-2027/",
           "excerpt": "En 2027, des dépenses nettes de CHF 802'767 sont prévues ; l’assainissement du toit de la salle de sport avec une installation photovoltaïque est prévu.",
           "date": "2026-10-22T22:14:01.184Z"
-        },
-        {
-          "title": "Heiden poursuit ses efforts d’économies : déficit de CHF 204'200 en 2027",
-          "url": "/fr/articles-appenzell/heiden-economies-budget-2027/",
-          "excerpt": "Le budget 2027 de Heiden prévoit des recettes de CHF 35,308 millions, des dépenses de CHF 35,512 millions et un déficit de CHF 204'200.",
-          "date": "2026-10-21T19:28:07.751Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-27T20:13:53.955Z"
     }
   }
 }

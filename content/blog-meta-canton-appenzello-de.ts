@@ -60,6 +60,9 @@ const blogMetaCantonAppenzelloDe: Record<string, string> = {
     'blog.article.credito-pfas-appenzello.title': 'Appenzell Ausserrhoden: Kredit für das PFAS-Programm genehmigt',
     'blog.article.credito-pfas-appenzello.excerpt': 'Das Parlament von Appenzell Ausserrhoden hat den Kredit für ein PFAS-Programm mit 60 zu 0 Stimmen und einer Enthaltung genehmigt.',
     'blog.article.credito-pfas-appenzello.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.teufen-ricorso-progetto-bundt.title': 'Teufen: Beschwerde gegen das Projekt Bündt teilweise gutgeheissen',
+    'blog.article.teufen-ricorso-progetto-bundt.excerpt': 'Das Obergericht des Kantons Appenzell Ausserrhoden hat die Beschwerde der Anwohner teilweise gutgeheissen: Das Strassenprojekt Bündt kann in seiner aktuellen Form nicht umgesetzt werden.',
+    'blog.article.teufen-ricorso-progetto-bundt.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonAppenzelloDe;
