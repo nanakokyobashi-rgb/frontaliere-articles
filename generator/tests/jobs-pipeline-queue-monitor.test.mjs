@@ -23,6 +23,7 @@ test('il queue monitor usa il path reale del sorgente site nello sparse checkout
   const entries = sparseCheckoutEntries(WORKFLOW);
   assert.ok(entries.includes(OBSERVER_PATH), `sparse-checkout senza ${OBSERVER_PATH}`);
   assert.ok(entries.includes('scripts/lib'), 'sparse-checkout senza gli helper dell observer');
+  assert.ok(entries.includes('scripts/ci/lib'), 'sparse-checkout senza gli helper CI dell observer');
 
   const invocation = WORKFLOW.match(
     /^\s*run:\s+node\s+observer-source\/([^\s]+)\s*$/m,
