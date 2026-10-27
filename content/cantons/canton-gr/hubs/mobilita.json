@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-27T07:24:19.916Z",
-  "contentHash": "7549be7a4307e3acac7435a147118ccfed18e0a44fdc78ca15181f9221558d3d",
+  "updatedAt": "2026-10-27T08:34:21.193Z",
+  "contentHash": "7a2677bb2968d11dcfa6e566995db925c5d9bb5c512d789f88675086c994c854",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -209,6 +209,12 @@
           "date": "2026-10-23T12:26:06.032Z"
         },
         {
+          "title": "Val Calanca: chiusura strada per due settimane, chiede sostegno per isolamento",
+          "url": "/articoli-grigioni/val-calanca-strada-chiusa/",
+          "excerpt": "Val Calanca: strada chiusa per due settimane dopo smottamenti Censi chiede strumenti permanenti al governo retico Fondo ipotizzato dal terzo giorno",
+          "date": "2026-10-27T08:27:00.715Z"
+        },
+        {
           "title": "Interrogazione Cantiere Caraa de Guèra: chiarezza su lavori e costi",
           "url": "/articoli-grigioni/cantiere-caraa-guera-interrogazione/",
           "excerpt": "Cantiere sulla Caraa de Guèra, tra Maron e Ai Tecc Rifacimento di reti e posa di acciottolato di fiume Sette domande al Municipio su approvazioni e costi",
@@ -243,12 +249,6 @@
           "url": "/articoli-frontaliere/semafori-grigioni-traffico-parassitario/",
           "excerpt": "L'Ufficio tecnico retico ha installato cinque semafori per contrastare il traffico parassitario, con buoni risultati",
           "date": "2026-08-16T22:36:02.756Z"
-        },
-        {
-          "title": "Da S-chanf a Livigno in treno, Coira dice sì",
-          "url": "/articoli-svizzera/trenino-rossoschanf-livigno/",
-          "excerpt": "Il Canton Grigioni vuole lavorare assieme ai partner della Lombardia per realizzare un collegamento ferroviario tra Engadina e Alta Valtellina.",
-          "date": "2026-08-12T22:12:43.667Z"
         }
       ],
       "latestCantonArticles": [],
@@ -290,7 +290,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-27T07:24:19.916Z"
+      "updatedAt": "2026-10-27T08:34:21.193Z"
     },
     "en": {
       "canton": "GR",
@@ -477,6 +477,12 @@
           "date": "2026-10-23T12:26:06.032Z"
         },
         {
+          "title": "Val Calanca: road closure for two weeks, seeks support over isolation",
+          "url": "/en/graubunden-articles/val-calanca-road-closed/",
+          "excerpt": "Calanca Valley: road closed for two weeks after landslides Censi calls on the Rhaetian government for permanent tools Fund envisaged from the third day",
+          "date": "2026-10-27T08:27:00.715Z"
+        },
+        {
           "title": "Inquiry into the Caraa de Guèra construction site: clarity on works and costs",
           "url": "/en/graubunden-articles/caraa-guera-construction-inquiry/",
           "excerpt": "Construction site on Caraa de Guèra, between Maron and Ai Tecc Renovation of utility networks and laying of river cobblestones Seven questions for the Municipality about approvals and costs",
@@ -510,12 +516,6 @@
           "url": "/en/cross-border-articles/traffic-lights-against-parasitic-traffic-the-graubunden-strategy-works/",
           "excerpt": "The Rhaetian Technical Office has installed five traffic lights to combat parasitic traffic, with good results",
           "date": "2026-08-16T22:36:02.756Z"
-        },
-        {
-          "title": "From S-chanf to Livigno by train, Chur says yes",
-          "url": "/en/swiss-articles/red-train-schanf-livigno/",
-          "excerpt": "The Canton of Graubünden wants to work together with the partners of Lombardy to create a railway connection between the Engadine and Alta Valtellina.",
-          "date": "2026-08-12T22:12:43.667Z"
         }
       ],
       "latestCantonArticles": [],
@@ -557,7 +557,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-27T07:24:19.916Z"
+      "updatedAt": "2026-10-27T08:34:21.193Z"
     },
     "de": {
       "canton": "GR",
@@ -744,6 +744,12 @@
           "date": "2026-10-23T12:26:06.032Z"
         },
         {
+          "title": "Val Calanca: 2 Wochen Straßensperrung, Hilfe bei Isolation nötig",
+          "url": "/de/graubunden-artikel/val-calanca-strasse-geschlossen/",
+          "excerpt": "Val Calanca: Straße nach Erdrutschen zwei Wochen gesperrt Censi fordert dauerhafte Instrumente von der Bündner Regierung Fonds ab dem dritten Tag erwogen",
+          "date": "2026-10-27T08:27:00.715Z"
+        },
+        {
           "title": "Anfrage zur Baustelle Caraa de Guèra: Klarheit über Arbeiten und Kosten",
           "url": "/de/graubunden-artikel/cantiere-caraa-guera-interrogations/",
           "excerpt": "Baustelle an der Caraa de Guèra zwischen Maron und Ai Tecc Erneuerung von Netzen und Verlegung von Flusskieselpflaster Sieben Fragen an die Gemeindeverwaltung zu Genehmigungen und Kosten",
@@ -778,12 +784,6 @@
           "url": "/de/grenzgaenger-artikel/ampeln-gegen-parasitaren-verkehr-bundner-strategie-funktioniert/",
           "excerpt": "Das rätische technische Büro hat fünf Ampeln installiert, um dem parasitären Verkehr entgegenzuwirken, mit guten Ergebnissen",
           "date": "2026-08-16T22:36:02.756Z"
-        },
-        {
-          "title": "Von S-chanf nach Livigno mit dem Zug, Chur sagt ja",
-          "url": "/de/schweiz-artikel/rotter-zug-schanf-livigno/",
-          "excerpt": "Der Kanton Graubünden will mit Partnern aus der Lombardei zusammenarbeiten, um eine Bahnverbindung zwischen Engadin und Oberveltlin zu realisieren.",
-          "date": "2026-08-12T22:12:43.667Z"
         }
       ],
       "latestCantonArticles": [],
@@ -825,7 +825,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-27T07:24:19.916Z"
+      "updatedAt": "2026-10-27T08:34:21.193Z"
     },
     "fr": {
       "canton": "GR",
@@ -1012,6 +1012,12 @@
           "date": "2026-10-23T12:26:06.032Z"
         },
         {
+          "title": "Val Calanca : route fermée 2 semaines, demande soutien face à l'isolement",
+          "url": "/fr/articles-grisons/val-calanca-route-fermee/",
+          "excerpt": "Val Calanca : route fermée pendant deux semaines après des glissements de terrain Censi demande des instruments permanents au gouvernement rhétique Fonds envisagé dès le troisième jour",
+          "date": "2026-10-27T08:27:00.715Z"
+        },
+        {
           "title": "Question du chantier naval Caraa de Guèra : Clarté sur les travaux et les coûts",
           "url": "/fr/articles-grisons/chantier-caraa-guera-questionnement/",
           "excerpt": "Chantier sur la Caraa de Guèra, entre Maron et Ai Tecc.",
@@ -1046,12 +1052,6 @@
           "url": "/fr/articles-frontalier/semafori-contro-il-traffico-parassitario/",
           "excerpt": "Le bureau technique rhétique a installé cinq feux de circulation pour lutter contre le trafic parasitaire, avec de bons résultats",
           "date": "2026-08-16T22:36:02.756Z"
-        },
-        {
-          "title": "De S-chanf à Livigno en train, Coire dit oui",
-          "url": "/fr/articles-suisse/train-rouge-schanf-livigno/",
-          "excerpt": "Le canton des Grisons souhaite travailler avec des partenaires de Lombardie pour réaliser une liaison ferroviaire entre l'Engadine et la Haute-Valtelline.",
-          "date": "2026-08-12T22:12:43.667Z"
         }
       ],
       "latestCantonArticles": [],
@@ -1093,7 +1093,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-27T07:24:19.916Z"
+      "updatedAt": "2026-10-27T08:34:21.193Z"
     }
   }
 }
