@@ -53,10 +53,9 @@ export interface HubCardMeta {
 /**
  * Shared static-card budget for article hubs.
  *
- * Keeping this in the engine makes the site and corpus renderers agree on the
- * same page-weight contract. Forty cards leave room for the shell, hero,
- * structured data and navigation while keeping the largest localized hub
- * below the 260 KB audit ceiling.
+ * Keeping this in the engine makes the site and corpus renderers agree on a
+ * bounded grid size. The page-weight audit remains the authoritative check
+ * for the complete rendered page, including shell, hero and navigation.
  */
 export const ARTICLE_HUB_CARD_LIMIT = 40;
 
@@ -131,12 +130,11 @@ function stripHubMarkdown(value: string): string {
  * The inner HTML of `<div class="ssg-article-grid">` — cards only, no wrapper.
  *
  * The per-card styles are CSS classes rather than inline style attributes:
- * Repeated card markup is the dominant variable part of these pages, so the
- * shared 40-card budget keeps the hub below the page-weight gate (260 KB —
- * `scripts/audit-page-weight.mjs`).
+ * repeated card markup is the dominant variable part of these pages, so the
+ * shared 40-card budget bounds the variable grid portion. The complete page
+ * remains subject to `scripts/audit-page-weight.mjs`.
  * The `.ssg-*` rules live in `public/assets/seo-static.css`, already linked on
- * these pages. Measured today: 839 B per card, the frontaliere hub at 124.5 KB
- * and the svizzera hub projected at 91.9 KB.
+ * these pages.
  */
 export function renderArticleHubCards(args: RenderArticleHubCardsArgs): string {
   const { articles, locale, sectionSlug, localePrefix, resolveSlug, resolveMeta, resolveHref } = args;
@@ -145,11 +143,9 @@ export function renderArticleHubCards(args: RenderArticleHubCardsArgs): string {
   return articles.slice(0, limit).map((art, idx) => {
     const artSlug = resolveSlug(art.id) ?? art.id;
     // Trailing slash: the canonical form. Measured today, every card link on
-    // the live hub answers 301 to its own slashed twin — 40 cards x 8 hubs of
-    // internal links that all cost a redirect hop before reaching a 200, on
-    // the densest internal-link surface the site has. `resolveMeta` is
-    // unaffected: both call sites key their lookup through `seoKey()`, which
-    // normalises the slash away.
+    // the live hub answers 301 to its own slashed twin — each card therefore
+    // emits the canonical target directly. `resolveMeta` receives both the
+    // article id and path so each caller can choose its own lookup strategy.
     const artPath = localePrefix
       ? `/${localePrefix}/${sectionSlug}/${artSlug}/`
       : `/${sectionSlug}/${artSlug}/`;

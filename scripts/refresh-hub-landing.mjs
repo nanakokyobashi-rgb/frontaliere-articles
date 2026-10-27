@@ -422,7 +422,7 @@ for (const section of SECTIONS) {
       resolveHref: resolveArticleHref,
     });
     if (missing > 0) {
-      console.error(`[hub-landing] ${section.name}/${locale}: ${missing} of the top 100 have no title in either source — refusing to publish a degraded grid`);
+      console.error(`[hub-landing] ${section.name}/${locale}: ${missing} of the top 40 have no title in either source — refusing to publish a degraded grid`);
       skipped++;
       continue;
     }
