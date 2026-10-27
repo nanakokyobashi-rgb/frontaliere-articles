@@ -4,8 +4,8 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "carburanti",
-  "updatedAt": "2026-10-27T10:55:28.229Z",
-  "contentHash": "e940eb791526d63cb53cd1e38f7a70970e04614b6d245fc63ab112b68ab7e84d",
+  "updatedAt": "2026-10-27T11:45:35.314Z",
+  "contentHash": "39adf367f5d516a3f38e57f543267e6ecb9322ff114bccb1b210643a3127839a",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -60,6 +60,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Uri, traffico rilevato in 31 punti il 5 novembre 2026",
+          "url": "/articoli-uri/conteggio-traffico-uri-novembre/",
+          "excerpt": "Nel fondovalle urano, il 5 novembre 2026, 31 punti rileveranno veicoli e direzioni tra le 06:00 e le 22:00 per rivedere il modello cantonale.",
+          "date": "2026-10-27T11:34:34.578Z"
+        },
+        {
           "title": "Axenstrasse chiusa di notte per lavori di manutenzione nel Canton Uri",
           "url": "/articoli-uri/axenstrasse-chiusa-novembre-2026/",
           "excerpt": "Dal 2 al 6 novembre 2026, l'Axenstrasse sarà chiusa dalle 22.00 alle 05.00; il traffico viene deviato sull'autostrada A2.",
@@ -82,12 +88,6 @@
           "url": "/articoli-uri/bristenstrasse-regimi-traffico-2026/",
           "excerpt": "Tra Amsteg e St.",
           "date": "2026-10-23T12:29:59.834Z"
-        },
-        {
-          "title": "Axenstrasse chiusa per quattro notti dal 2 al 6 novembre",
-          "url": "/articoli-uri/axenstrasse-chiusa-quattro-notti/",
-          "excerpt": "La Axenstrasse sarà completamente chiusa dal 2 al 6 novembre, ogni notte dalle 22 alle 5, per lavori di manutenzione.",
-          "date": "2026-10-20T09:56:09.960Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T11:45:35.314Z"
     },
     "en": {
       "canton": "UR",
@@ -147,6 +147,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Uri, traffic detected at 31 points on November 5, 2026",
+          "url": "/en/uri-articles/uri-traffic-count-november/",
+          "excerpt": "In the Uranian valley floor, on November 5, 2026, 31 points will record vehicles and directions between 06:00 and 22:00 to review the cantonal model.",
+          "date": "2026-10-27T11:34:34.578Z"
+        },
+        {
           "title": "Axenstrasse closed at night for maintenance work in the Canton of Uri",
           "url": "/en/uri-articles/axenstrasse-closed-november-2026/",
           "excerpt": "From November 2 to 6, 2026, Axenstrasse will be closed from 22.00 to 05.00; traffic is diverted onto the A2 motorway.",
@@ -169,12 +175,6 @@
           "url": "/en/uri-articles/bristenstrasse-traffic-rules-2026/",
           "excerpt": "Between Amsteg and St.",
           "date": "2026-10-23T12:29:59.834Z"
-        },
-        {
-          "title": "Axenstrasse closed for four nights from November 2 to 6",
-          "url": "/en/uri-articles/axenstrasse-closed-four-nights/",
-          "excerpt": "Axenstrasse will be completely closed from November 2 to 6, every night from 22 to 5, for maintenance work.",
-          "date": "2026-10-20T09:56:09.960Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T11:45:35.314Z"
     },
     "de": {
       "canton": "UR",
@@ -234,6 +234,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Uri, Verkehr an 31 Stellen am 5. November 2026 erfasst",
+          "url": "/de/uri-artikel/verkehrszaehlung-uri-november/",
+          "excerpt": "Im Urner Talboden werden am 5.",
+          "date": "2026-10-27T11:34:34.578Z"
+        },
+        {
           "title": "Axenstrasse nachts wegen Wartungsarbeiten im Kanton Uri gesperrt",
           "url": "/de/uri-artikel/axenstrasse-geschlossen-november-2026/",
           "excerpt": "Vom 2. bis 6. November 2026 wird die Axenstrasse von 22.00 bis 05.00 gesperrt; der Verkehr wird über die Autobahn A2 umgeleitet.",
@@ -256,12 +262,6 @@
           "url": "/de/uri-artikel/bristenstrasse-verkehrsregime-2026/",
           "excerpt": "Zwischen Amsteg und St.",
           "date": "2026-10-23T12:29:59.834Z"
-        },
-        {
-          "title": "Axenstrasse vom 2. bis 6. November vier Nächte lang gesperrt",
-          "url": "/de/uri-artikel/axenstrasse-vier-naechte-gesperrt/",
-          "excerpt": "Die Axenstrasse wird vom 2.",
-          "date": "2026-10-20T09:56:09.960Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T11:45:35.314Z"
     },
     "fr": {
       "canton": "UR",
@@ -321,6 +321,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Uri, trafic relevé en 31 points le 5 novembre 2026",
+          "url": "/fr/articles-uri/comptage-trafic-uri-novembre/",
+          "excerpt": "Dans la vallée uranaise, le 5 novembre 2026, 31 points recenseront les véhicules et leur direction entre les 06:00 et les 22:00 afin de revoir le modèle cantonal.",
+          "date": "2026-10-27T11:34:34.578Z"
+        },
+        {
           "title": "Axenstrasse fermée de nuit pour travaux d'entretien dans le canton d'Uri",
           "url": "/fr/articles-uri/axenstrasse-fermee-novembre-2026/",
           "excerpt": "Du 2 au 6 novembre 2026, l'Axenstrasse sera fermée de 22.00 à 05.00 ; le trafic est dévié sur l'autoroute A2.",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-uri/bristenstrasse-regimes-circulation-2026/",
           "excerpt": "Entre Amsteg et St.",
           "date": "2026-10-23T12:29:59.834Z"
-        },
-        {
-          "title": "Axenstrasse fermée pendant quatre nuits du 2 au 6 novembre",
-          "url": "/fr/articles-uri/axenstrasse-fermee-quatre-nuits/",
-          "excerpt": "L’Axenstrasse sera complètement fermée du 2 au 6 novembre, chaque nuit de 22 à 5, pour des travaux d’entretien.",
-          "date": "2026-10-20T09:56:09.960Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T11:45:35.314Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-27T10:55:28.229Z",
-  "contentHash": "d075ac55fe807c63fde4bae61c8004e0c613d0aa1dd84dcebf43fa26a5110989",
+  "updatedAt": "2026-10-27T11:45:35.314Z",
+  "contentHash": "71c5b6a563cd31d9b128d7a2afc7eca8990d671855000bd3e9da60b8d21590a1",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -140,6 +140,12 @@
           "date": "2026-10-27T10:48:04.296Z"
         },
         {
+          "title": "Uri, traffico rilevato in 31 punti il 5 novembre 2026",
+          "url": "/articoli-uri/conteggio-traffico-uri-novembre/",
+          "excerpt": "Nel fondovalle urano, il 5 novembre 2026, 31 punti rileveranno veicoli e direzioni tra le 06:00 e le 22:00 per rivedere il modello cantonale.",
+          "date": "2026-10-27T11:34:34.578Z"
+        },
+        {
           "title": "Axenstrasse chiusa per quattro notti dal 2 al 6 novembre",
           "url": "/articoli-uri/axenstrasse-chiusa-quattro-notti/",
           "excerpt": "La Axenstrasse sarà completamente chiusa dal 2 al 6 novembre, ogni notte dalle 22 alle 5, per lavori di manutenzione.",
@@ -174,12 +180,6 @@
           "url": "/articoli-frontaliere/pendolare-inverso-altdorf-lugano-problemi/",
           "excerpt": "Carla Scheidegger viaggia ogni giorno da Kriens ad Altdorf per lavorare al MASI a Lugano. Criticità: treni ogni due ore e vagoni affollati. La sua battaglia per un trasporto sostenibile.",
           "date": "2026-04-16T10:11:40.179Z"
-        },
-        {
-          "title": "Sistema scolastico Canton Uri: iscrizione e cicli",
-          "url": "/articoli-svizzera/sistema-scolastico-canton-uri-iscrizione-e-cicli/",
-          "excerpt": "Cicli di scuola, età di iscrizione, calendario scolastico, lingue di insegnamento e passaggio alle scuole medie superiori nel Cantone di Uri.",
-          "date": "2026-08-16T02:47:26.266Z"
         }
       ],
       "latestCantonArticles": [],
@@ -193,7 +193,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T11:45:35.314Z"
     },
     "en": {
       "canton": "UR",
@@ -316,6 +316,12 @@
           "date": "2026-10-27T10:48:04.296Z"
         },
         {
+          "title": "Uri, traffic detected at 31 points on November 5, 2026",
+          "url": "/en/uri-articles/uri-traffic-count-november/",
+          "excerpt": "In the Uranian valley floor, on November 5, 2026, 31 points will record vehicles and directions between 06:00 and 22:00 to review the cantonal model.",
+          "date": "2026-10-27T11:34:34.578Z"
+        },
+        {
           "title": "Axenstrasse closed for four nights from November 2 to 6",
           "url": "/en/uri-articles/axenstrasse-closed-four-nights/",
           "excerpt": "Axenstrasse will be completely closed from November 2 to 6, every night from 22 to 5, for maintenance work.",
@@ -350,12 +356,6 @@
           "url": "/en/cross-border-articles/reverse-commuter-altdorf-lugano-delays-connections/",
           "excerpt": "Carla Scheidegger travels from Kriens to Altdorf every day to work at the MASI in Lugano. Key issues: trains every two hours and overcrowded carriages. Her fight for sustainable transport.",
           "date": "2026-04-16T10:11:40.179Z"
-        },
-        {
-          "title": "Canton Uri school system: enrolment and cycles",
-          "url": "/en/swiss-articles/school-system-canton-uri-enrollment-and-classes/",
-          "excerpt": "School cycles, age of enrolment, school calendar, languages of instruction and transition to secondary schools in the Canton of Uri.",
-          "date": "2026-08-16T02:47:26.266Z"
         }
       ],
       "latestCantonArticles": [],
@@ -369,7 +369,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T11:45:35.314Z"
     },
     "de": {
       "canton": "UR",
@@ -492,6 +492,12 @@
           "date": "2026-10-27T10:48:04.296Z"
         },
         {
+          "title": "Uri, Verkehr an 31 Stellen am 5. November 2026 erfasst",
+          "url": "/de/uri-artikel/verkehrszaehlung-uri-november/",
+          "excerpt": "Im Urner Talboden werden am 5.",
+          "date": "2026-10-27T11:34:34.578Z"
+        },
+        {
           "title": "Axenstrasse vom 2. bis 6. November vier Nächte lang gesperrt",
           "url": "/de/uri-artikel/axenstrasse-vier-naechte-gesperrt/",
           "excerpt": "Die Axenstrasse wird vom 2.",
@@ -526,12 +532,6 @@
           "url": "/de/grenzgaenger-artikel/pendler-gegenrichtung-altdorf-lugano-verspaetungen/",
           "excerpt": "Carla Scheidegger pendelt jeden Tag von Kriens nach Altdorf, um am MASI in Lugano zu arbeiten. Doch die Kritikpunkte bleiben: Züge im Zwei-Stunden-Takt und überfüllte Waggons. Ihr Einsatz für einen nachhaltigen Verkehr.",
           "date": "2026-04-16T10:11:40.179Z"
-        },
-        {
-          "title": "Schulsystem Kanton Uri: Einschreibung und Zyklen",
-          "url": "/de/schweiz-artikel/schausystem-kanton-ur-einschreibung-und-klassen/",
-          "excerpt": "Schulzyklen, Einschreibungsalter, Schulkalender, Unterrichtssprachen und Übergang in die Sekundarstufe II im Kanton Uri.",
-          "date": "2026-08-16T02:47:26.266Z"
         }
       ],
       "latestCantonArticles": [],
@@ -545,7 +545,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T11:45:35.314Z"
     },
     "fr": {
       "canton": "UR",
@@ -668,6 +668,12 @@
           "date": "2026-10-27T10:48:04.296Z"
         },
         {
+          "title": "Uri, trafic relevé en 31 points le 5 novembre 2026",
+          "url": "/fr/articles-uri/comptage-trafic-uri-novembre/",
+          "excerpt": "Dans la vallée uranaise, le 5 novembre 2026, 31 points recenseront les véhicules et leur direction entre les 06:00 et les 22:00 afin de revoir le modèle cantonal.",
+          "date": "2026-10-27T11:34:34.578Z"
+        },
+        {
           "title": "Axenstrasse fermée pendant quatre nuits du 2 au 6 novembre",
           "url": "/fr/articles-uri/axenstrasse-fermee-quatre-nuits/",
           "excerpt": "L’Axenstrasse sera complètement fermée du 2 au 6 novembre, chaque nuit de 22 à 5, pour des travaux d’entretien.",
@@ -702,12 +708,6 @@
           "url": "/fr/articles-frontalier/navetteur-inverse-altdorf-lugano-retards-connexions/",
           "excerpt": "Carla Scheidegger parcourt chaque jour le trajet entre Kriens et Altdorf pour se rendre à son travail au MASI à Lugano. Les principales difficultés : des trains espacés de deux heures et des wagons bondés. Son combat…",
           "date": "2026-04-16T10:11:40.179Z"
-        },
-        {
-          "title": "Système scolaire Canton Uri : inscription et cycles",
-          "url": "/fr/articles-suisse/systeme-scolaire-canton-ur-inscription-et-classe/",
-          "excerpt": "Cycles scolaires, âge d'inscription, calendrier scolaire, langues d'enseignement et passage au lycée dans le canton d'Uri.",
-          "date": "2026-08-16T02:47:26.266Z"
         }
       ],
       "latestCantonArticles": [],
@@ -721,7 +721,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T11:45:35.314Z"
     }
   }
 }
