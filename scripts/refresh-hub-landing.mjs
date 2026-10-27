@@ -416,18 +416,20 @@ for (const section of SECTIONS) {
       missing++;
       return null;
     };
+    const candidateLimit = Math.min(ARTICLE_HUB_CARD_LIMIT, sorted.length);
 
     let cards = renderArticleHubCards({
       articles: sorted,
       locale,
       sectionSlug: slug,
+      limit: ARTICLE_HUB_CARD_LIMIT,
       localePrefix: locale === 'it' ? '' : locale,
       resolveSlug: (id) => slugMap[id]?.[locale],
       resolveMeta,
       resolveHref: resolveArticleHref,
     });
     if (missing > 0) {
-      console.error(`[hub-landing] ${section.name}/${locale}: ${missing} of the top ${ARTICLE_HUB_CARD_LIMIT} have no title in either source — refusing to publish a degraded grid`);
+      console.error(`[hub-landing] ${section.name}/${locale}: ${missing} of ${candidateLimit} selected articles have no title in either source — refusing to publish a degraded grid`);
       skipped++;
       continue;
     }
