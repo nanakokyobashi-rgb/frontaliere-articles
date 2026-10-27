@@ -66,6 +66,9 @@ const blogMetaCantonTiEn: Record<string, string> = {
     'blog.article.frontalieri-rimborsi-lpp-svizzera.title': 'Cross-border workers, second pillar: no refunds',
     'blog.article.frontalieri-rimborsi-lpp-svizzera.excerpt': 'The source links cross-border workers to the second pillar and reports a rejection of reimbursements; the LPP 2026 reference lists the pension parameters.',
     'blog.article.frontalieri-rimborsi-lpp-svizzera.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.tassa-salute-decreto-omnibus-scenari.title': 'Cross-border workers: health tax and omnibus decree update',
+    'blog.article.tassa-salute-decreto-omnibus-scenari.excerpt': 'No worker has been called upon to pay The tax concerns the “old cross-border workers” For some cross-border workers Omnibus: 100% taxation New meeting',
+    'blog.article.tassa-salute-decreto-omnibus-scenari.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonTiEn;

@@ -66,6 +66,9 @@ const blogMetaCantonTiDe: Record<string, string> = {
     'blog.article.frontalieri-rimborsi-lpp-svizzera.title': 'Grenzgänger, zweite Säule: Nein zu Rückerstattungen',
     'blog.article.frontalieri-rimborsi-lpp-svizzera.excerpt': 'Die Quelle bringt die Grenzgänger mit der zweiten Säule in Verbindung und berichtet von einem Nein zu Rückerstattungen; die BVG-Referenz 2026 führt die Vorsorgeparameter auf.',
     'blog.article.frontalieri-rimborsi-lpp-svizzera.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.tassa-salute-decreto-omnibus-scenari.title': 'Grenzgänger: Gesundheitssteuer und Omnibus-Dekret – Aktualisierung',
+    'blog.article.tassa-salute-decreto-omnibus-scenari.excerpt': 'Kein Arbeitnehmer wurde zur Zahlung aufgefordert Die Abgabe betrifft die «alten Grenzgänger» Für einige Grenzgänger Omnibus: Besteuerung zu 100% Neues Treffen',
+    'blog.article.tassa-salute-decreto-omnibus-scenari.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonTiDe;

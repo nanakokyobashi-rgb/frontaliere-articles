@@ -237,4 +237,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'laura-bianchi',
  authorName: 'Laura Bianchi',
  },
+ {
+ id: 'tassa-salute-decreto-omnibus-scenari',
+ category: 'fiscale',
+ date: '2026-10-27T03:10:46.721Z',
+ image: '/images/blog/article-tassa-salute-decreto-omnibus-scenari.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'laura-bianchi',
+ authorName: 'Laura Bianchi',
+ },
 ];

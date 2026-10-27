@@ -66,6 +66,9 @@ const blogMetaCantonTiIt: Record<string, string> = {
     'blog.article.frontalieri-rimborsi-lpp-svizzera.title': 'Frontalieri, secondo pilastro: no ai rimborsi',
     'blog.article.frontalieri-rimborsi-lpp-svizzera.excerpt': 'La fonte collega i frontalieri al secondo pilastro e riferisce un no ai rimborsi; il riferimento LPP 2026 riporta i parametri previdenziali.',
     'blog.article.frontalieri-rimborsi-lpp-svizzera.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.tassa-salute-decreto-omnibus-scenari.title': 'Frontalieri: tassa salute e decreto omnibus aggiornamento',
+    'blog.article.tassa-salute-decreto-omnibus-scenari.excerpt': 'Nessun lavoratore è stato chiamato al pagamento La tassa riguarda i «vecchi frontalieri» Per alcuni frontalieri Omnibus: tassazione al 100% Nuovo incontro',
+    'blog.article.tassa-salute-decreto-omnibus-scenari.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonTiIt;

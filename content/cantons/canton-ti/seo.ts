@@ -816,6 +816,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tassa-salute-decreto-omnibus-scenari': {
+    title: 'Frontalieri: tassa salute e decreto omnibus aggiornamento',
+    description: 'Nessun lavoratore è stato chiamato al pagamento La tassa riguarda i «vecchi frontalieri» Per alcuni frontalieri Omnibus: tassazione al 100% Nuovo',
+    keywords: 'frontalieri, ticino, svizzera, italia, tassa, salute, decreto, omnibus',
+    ogTitle: 'Tassa salute frontalieri e Decreto Omnibus aggiornamento',
+    ogDescription: 'Nessun lavoratore è stato chiamato al pagamento La tassa riguarda i «vecchi frontalieri» Per alcuni frontalieri Omnibus: tassazione al 100% Nuovo incontro',
+    canonicalPath: '/articoli-ticino/tassa-salute-decreto-omnibus-scenari/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Frontalieri: tassa salute e decreto omnibus aggiornamento",
+      "description": "Nessun lavoratore è stato chiamato al pagamento La tassa riguarda i «vecchi frontalieri» Per alcuni frontalieri Omnibus: tassazione al 100% Nuovo",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-tassa-salute-decreto-omnibus-scenari.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-27T03:10:46+00:00",
+      "dateModified": "2026-10-27T03:10:46+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-ticino/tassa-salute-decreto-omnibus-scenari/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
