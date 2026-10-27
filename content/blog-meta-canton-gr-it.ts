@@ -45,6 +45,9 @@ const blogMetaCantonGrIt: Record<string, string> = {
     'blog.article.cantiere-caraa-guera-interrogazione.title': 'Interrogazione Cantiere Caraa de Guèra: chiarezza su lavori e costi',
     'blog.article.cantiere-caraa-guera-interrogazione.excerpt': 'Cantiere sulla Caraa de Guèra, tra Maron e Ai Tecc Rifacimento di reti e posa di acciottolato di fiume Sette domande al Municipio su approvazioni e costi',
     'blog.article.cantiere-caraa-guera-interrogazione.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.val-calanca-strada-chiusa.title': 'Val Calanca: chiusura strada per due settimane, chiede sostegno per isolamento',
+    'blog.article.val-calanca-strada-chiusa.excerpt': 'Val Calanca: strada chiusa per due settimane dopo smottamenti Censi chiede strumenti permanenti al governo retico Fondo ipotizzato dal terzo giorno',
+    'blog.article.val-calanca-strada-chiusa.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonGrIt;

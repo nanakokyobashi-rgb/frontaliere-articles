@@ -548,6 +548,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-val-calanca-strada-chiusa': {
+    title: 'Val Calanca: chiusura strada per due settimane, chiede sostegno per isolamento',
+    description: 'Val Calanca: strada chiusa per due settimane dopo smottamenti Censi chiede strumenti permanenti al governo retico Fondo ipotizzato dal terzo giorno',
+    keywords: 'frontalieri, ticino, svizzera, italia, calanca, chiusura, strada, settimane',
+    ogTitle: 'Val Calanca: chiusura strada e richiesta sostegno',
+    ogDescription: 'Val Calanca: strada chiusa per due settimane dopo smottamenti Censi chiede strumenti permanenti al governo retico Fondo ipotizzato dal terzo giorno',
+    canonicalPath: '/articoli-grigioni/val-calanca-strada-chiusa/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Val Calanca: chiusura strada per due settimane, chiede sostegno per isolamento",
+      "description": "Val Calanca: strada chiusa per due settimane dopo smottamenti Censi chiede strumenti permanenti al governo retico Fondo ipotizzato dal terzo giorno",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-val-calanca-strada-chiusa.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-27T08:27:00+00:00",
+      "dateModified": "2026-10-27T08:27:00+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-grigioni/val-calanca-strada-chiusa/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

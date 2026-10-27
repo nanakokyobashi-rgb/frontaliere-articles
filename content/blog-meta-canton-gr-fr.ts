@@ -45,6 +45,9 @@ const blogMetaCantonGrFr: Record<string, string> = {
     'blog.article.cantiere-caraa-guera-interrogazione.title': 'Question du chantier naval Caraa de Guèra : Clarté sur les travaux et les coûts',
     'blog.article.cantiere-caraa-guera-interrogazione.excerpt': 'Chantier sur la Caraa de Guèra, entre Maron et Ai Tecc.',
     'blog.article.cantiere-caraa-guera-interrogazione.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.val-calanca-strada-chiusa.title': 'Val Calanca : route fermée 2 semaines, demande soutien face à l\'isolement',
+    'blog.article.val-calanca-strada-chiusa.excerpt': 'Val Calanca : route fermée pendant deux semaines après des glissements de terrain Censi demande des instruments permanents au gouvernement rhétique Fonds envisagé dès le troisième jour',
+    'blog.article.val-calanca-strada-chiusa.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonGrFr;

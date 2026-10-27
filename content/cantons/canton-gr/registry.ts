@@ -160,4 +160,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'val-calanca-strada-chiusa',
+ category: 'pratico',
+ date: '2026-10-27T08:27:00.715Z',
+ image: '/images/blog/article-val-calanca-strada-chiusa.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['GR'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

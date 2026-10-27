@@ -45,6 +45,9 @@ const blogMetaCantonGrEn: Record<string, string> = {
     'blog.article.cantiere-caraa-guera-interrogazione.title': 'Inquiry into the Caraa de Guèra construction site: clarity on works and costs',
     'blog.article.cantiere-caraa-guera-interrogazione.excerpt': 'Construction site on Caraa de Guèra, between Maron and Ai Tecc Renovation of utility networks and laying of river cobblestones Seven questions for the Municipality about approvals and costs',
     'blog.article.cantiere-caraa-guera-interrogazione.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.val-calanca-strada-chiusa.title': 'Val Calanca: road closure for two weeks, seeks support over isolation',
+    'blog.article.val-calanca-strada-chiusa.excerpt': 'Calanca Valley: road closed for two weeks after landslides Censi calls on the Rhaetian government for permanent tools Fund envisaged from the third day',
+    'blog.article.val-calanca-strada-chiusa.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonGrEn;

@@ -45,6 +45,9 @@ const blogMetaCantonGrDe: Record<string, string> = {
     'blog.article.cantiere-caraa-guera-interrogazione.title': 'Anfrage zur Baustelle Caraa de Guèra: Klarheit über Arbeiten und Kosten',
     'blog.article.cantiere-caraa-guera-interrogazione.excerpt': 'Baustelle an der Caraa de Guèra zwischen Maron und Ai Tecc Erneuerung von Netzen und Verlegung von Flusskieselpflaster Sieben Fragen an die Gemeindeverwaltung zu Genehmigungen und Kosten',
     'blog.article.cantiere-caraa-guera-interrogazione.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.val-calanca-strada-chiusa.title': 'Val Calanca: 2 Wochen Straßensperrung, Hilfe bei Isolation nötig',
+    'blog.article.val-calanca-strada-chiusa.excerpt': 'Val Calanca: Straße nach Erdrutschen zwei Wochen gesperrt Censi fordert dauerhafte Instrumente von der Bündner Regierung Fonds ab dem dritten Tag erwogen',
+    'blog.article.val-calanca-strada-chiusa.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonGrDe;
