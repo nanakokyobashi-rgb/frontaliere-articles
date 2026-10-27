@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-27T00:21:44.857Z",
-  "contentHash": "a31794fefbc97c7c49e88aa314daea30e3ff752ed9d3e5e7558a67b6f02a46d7",
+  "updatedAt": "2026-10-27T02:40:46.202Z",
+  "contentHash": "68799070c2b0da6a83d020d72b63dc4e5a3574cc86c2cd52f4b2e3d84605a1f5",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -84,6 +84,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Votazione 29 novembre 2026 sul fondo rete gas TBW",
+          "url": "/articoli-san-gallo/votazione-29-novembre-2026/",
+          "excerpt": "Il referendum riguarda il regolamento per il fondo di dismissione e smantellamento della rete gas delle TBW, con costi previsti di CHF 45,8 milioni.",
+          "date": "2026-10-27T02:30:52.478Z"
+        },
+        {
           "title": "Controllo traffico San Gallo: 105 violazioni accertate il 24 ottobre 2026",
           "url": "/articoli-san-gallo/controllo-traffico-san-gallo-ottobre/",
           "excerpt": "105 violazioni accertate nella notte del 24 ottobre Circa 150 veicoli e occupanti controllati 70 veicoli oltre 80 km/h sulla A13 Cosa: controllo mirato",
@@ -106,12 +112,6 @@
           "url": "/articoli-san-gallo/abstimmung-bahnhof-wil-allee/",
           "excerpt": "Il credito lordo è di 63,662 milioni di franchi; i lavori sono previsti dal 2029 al 2033.",
           "date": "2026-10-24T13:43:09.251Z"
-        },
-        {
-          "title": "11,6 milioni CHF per 89 progetti del Canton San Gallo",
-          "url": "/articoli-san-gallo/lotteriefonds-89-progetti-cantone/",
-          "excerpt": "Il Governo propone al Consiglio cantonale 89 progetti tra cultura, sociale e ambiente per 11,6 milioni di CHF, con decisione prevista in sessione invernale.",
-          "date": "2026-10-24T10:01:50.012Z"
         }
       ],
       "links": [
@@ -124,7 +124,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-27T00:21:44.857Z"
+      "updatedAt": "2026-10-27T02:40:46.202Z"
     },
     "en": {
       "canton": "SG",
@@ -195,6 +195,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Vote on November 29, 2026 on the TBW gas network fund",
+          "url": "/en/st-gallen-articles/vote-november-29-2026/",
+          "excerpt": "The referendum concerns the regulations for the fund for the decommissioning and dismantling of TBW's gas network, with expected costs of CHF 45,8 million.",
+          "date": "2026-10-27T02:30:52.478Z"
+        },
+        {
           "title": "St. Gallen traffic check: 105 violations confirmed on October 24, 2026",
           "url": "/en/st-gallen-articles/st-gallen-traffic-control-october/",
           "excerpt": "105 violations recorded during the night of October 24 Approximately 150 vehicles and occupants checked 70 vehicles traveling at over 80 km/h on the A13",
@@ -217,12 +223,6 @@
           "url": "/en/st-gallen-articles/vote-november-29-2026-wil-station-and-allee-for-a-safe-interchange/",
           "excerpt": "The gross credit amounts to 63,662 million francs; the work is scheduled from 2029 to 2033.",
           "date": "2026-10-24T13:43:09.251Z"
-        },
-        {
-          "title": "11.6 million CHF for 89 projects in the Canton of St. Gallen",
-          "url": "/en/st-gallen-articles/lotteriefonds-89-projects-canton/",
-          "excerpt": "The Government is proposing 89 projects in culture, social affairs and the environment to the Cantonal Council, for 11,6 million CHF, with a decision expected during the winter session.",
-          "date": "2026-10-24T10:01:50.012Z"
         }
       ],
       "links": [
@@ -235,7 +235,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-27T00:21:44.857Z"
+      "updatedAt": "2026-10-27T02:40:46.202Z"
     },
     "de": {
       "canton": "SG",
@@ -306,6 +306,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Abstimmung vom 29. November 2026 über den Gasnetzfonds der TBW",
+          "url": "/de/st-gallen-artikel/abstimmung-29-november-2026/",
+          "excerpt": "Das Referendum betrifft das Reglement für den Fonds zur Stilllegung und zum Rückbau des Gasnetzes der TBW, mit vorgesehenen Kosten von CHF 45,8 Millionen.",
+          "date": "2026-10-27T02:30:52.478Z"
+        },
+        {
           "title": "Verkehrskontrolle St. Gallen: 105 Verstöße am 24. Oktober 2026 festgestellt",
           "url": "/de/st-gallen-artikel/verkehrskontrolle-st-gallen-oktober/",
           "excerpt": "105 Verstöße in der Nacht vom 24.",
@@ -328,12 +334,6 @@
           "url": "/de/st-gallen-artikel/abstimmung-29-11-2026-bahnhof-wil-allee-sicherer-umstieg/",
           "excerpt": "Der Bruttokredit beträgt 63,662 Millionen Franken; die Arbeiten sind von 2029 bis 2033 vorgesehen.",
           "date": "2026-10-24T13:43:09.251Z"
-        },
-        {
-          "title": "11,6 Millionen CHF für 89 Projekte des Kantons St. Gallen",
-          "url": "/de/st-gallen-artikel/lotteriefonds-89-projekte-kanton/",
-          "excerpt": "Die Regierung schlägt dem Kantonsrat 89 Projekte aus den Bereichen Kultur, Soziales und Umwelt für 11,6 Millionen CHF vor, wobei die Entscheidung für die Wintersession vorgesehen ist.",
-          "date": "2026-10-24T10:01:50.012Z"
         }
       ],
       "links": [
@@ -346,7 +346,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-27T00:21:44.857Z"
+      "updatedAt": "2026-10-27T02:40:46.202Z"
     },
     "fr": {
       "canton": "SG",
@@ -417,6 +417,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Votation du 29 novembre 2026 sur le fonds du réseau de gaz TBW",
+          "url": "/fr/articles-saint-gall/vote-29-novembre-2026/",
+          "excerpt": "Le référendum concerne le règlement relatif au fonds de désaffectation et de démantèlement du réseau de gaz de TBW, dont les coûts prévus s’élèvent à CHF 45,8 millions.",
+          "date": "2026-10-27T02:30:52.478Z"
+        },
+        {
           "title": "Contrôle du trafic à Saint-Gall : 105 infractions constatées le 24 octobre 2026",
           "url": "/fr/articles-saint-gall/controle-trafic-st-galle-octobre/",
           "excerpt": "105 infractions constatées dans la nuit du 24 octobre Environ 150 véhicules et occupants contrôlés 70 véhicules à plus de 80 km/h sur l’A13 Quoi : contrôle",
@@ -439,12 +445,6 @@
           "url": "/fr/articles-saint-gall/vote-du-29-novembre-2026-gare-de-wil-et-allee-pour-une-correspondance-sure/",
           "excerpt": "Le crédit brut s’élève à 63,662 millions de francs ; les travaux sont prévus de 2029 à 2033.",
           "date": "2026-10-24T13:43:09.251Z"
-        },
-        {
-          "title": "11,6 millions CHF pour 89 projets du canton de Saint-Gall",
-          "url": "/fr/articles-saint-gall/lotteriefonds-89-projets-canton/",
-          "excerpt": "Le Gouvernement propose au Conseil cantonal 89 projets dans les domaines de la culture, du social et de l’environnement pour un montant de 11,6 millions de CHF, avec une décision prévue lors de la session d’hiver.",
-          "date": "2026-10-24T10:01:50.012Z"
         }
       ],
       "links": [
@@ -457,7 +457,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-27T00:21:44.857Z"
+      "updatedAt": "2026-10-27T02:40:46.202Z"
     }
   }
 }
