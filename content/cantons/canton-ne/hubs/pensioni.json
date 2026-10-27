@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "pensioni",
-  "updatedAt": "2026-10-27T12:45:07.020Z",
-  "contentHash": "dc4619042bc86ddacd0680abb66049208f32fe46463df7ed5dd522b17a275cb7",
+  "updatedAt": "2026-10-27T18:18:32.937Z",
+  "contentHash": "bf02ab4f5d8c65a4a223f57b8c5f77c49e00d50080b9e2c655a10b0be6cea65d",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -129,6 +129,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "RHT: orologeria accetta ritorno alla normale previsto a Berna",
+          "url": "/articoli-neuchatel/rht-ritorno-normale-orologeria/",
+          "excerpt": "Zenith ha avviato un licenziamento collettivo a Le Locle.",
+          "date": "2026-10-27T18:01:44.534Z"
+        },
+        {
           "title": "Prezzi delle abitazioni in Svizzera: +1,7% nel trimestre",
           "url": "/articoli-neuchatel/abitazioni-svizzere-rincaro-settembre/",
           "excerpt": "Nel terzo trimestre i prezzi residenziali svizzeri sono saliti dell'1,7% sul trimestre e del 4,4% su base annua, secondo l'OFS.",
@@ -151,12 +157,6 @@
           "url": "/articoli-neuchatel/mese-salute-mentale-2026/",
           "excerpt": "Dal 10 settembre al 10 ottobre 2026 Seconda edizione nel Canton Neuchâtel Attività gratuite e accessibili per ogni età Una ventina di organizzazioni partner",
           "date": "2026-10-26T08:52:52.668Z"
-        },
-        {
-          "title": "Zenith annuncia circa cento soppressioni al Locle",
-          "url": "/articoli-neuchatel/zenith-soppressione-locle/",
-          "excerpt": "Zenith annuncia circa cento soppressioni al Locle La manifattura conta 196 collaboratori Aperta la consultazione per il licenziamento collettivo Annuncio",
-          "date": "2026-10-23T23:50:03.671Z"
         }
       ],
       "links": [
@@ -177,7 +177,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-27T12:45:07.020Z"
+      "updatedAt": "2026-10-27T18:18:32.937Z"
     },
     "en": {
       "canton": "NE",
@@ -284,6 +284,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "RHT: watchmaking accepts return to normal expected in Bern",
+          "url": "/en/neuchatel-articles/rht-return-to-normal-watchmaking/",
+          "excerpt": "Zenith has initiated a collective dismissal in Le Locle.",
+          "date": "2026-10-27T18:01:44.534Z"
+        },
+        {
           "title": "Housing prices in Switzerland: +1,7% in the quarter",
           "url": "/en/neuchatel-articles/swiss-housing-rise-september/",
           "excerpt": "In the third quarter, Swiss residential prices rose by 1.7% quarter-on-quarter and 4.4% year-on-year, according to the FSO.",
@@ -306,12 +312,6 @@
           "url": "/en/neuchatel-articles/mental-health-month-2026/",
           "excerpt": "From September 10 to October 10, 2026 Second edition in the Canton of Neuchâtel Free and accessible activities for all ages Around twenty partner organizations",
           "date": "2026-10-26T08:52:52.668Z"
-        },
-        {
-          "title": "Zenith announces around one hundred job cuts in Le Locle",
-          "url": "/en/neuchatel-articles/zenith-locle-job-cuts/",
-          "excerpt": "Zenith announces approximately one hundred job cuts at Locle The manufactory has 196 employees Consultation opened for collective dismissal Announcement",
-          "date": "2026-10-23T23:50:03.671Z"
         }
       ],
       "links": [
@@ -332,7 +332,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-27T12:45:07.020Z"
+      "updatedAt": "2026-10-27T18:18:32.937Z"
     },
     "de": {
       "canton": "NE",
@@ -439,6 +439,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "RHT: Uhrenbranche akzeptiert in Bern geplante Rückkehr zur Norm",
+          "url": "/de/neuenburg-artikel/rht-normal-rueckkehr-uhren/",
+          "excerpt": "Zenith hat in Le Locle eine Massenentlassung eingeleitet.",
+          "date": "2026-10-27T18:01:44.534Z"
+        },
+        {
           "title": "Wohnungspreise in der Schweiz: +1,7% im Quartal",
           "url": "/de/neuenburg-artikel/schweizer-wohnpreise-september/",
           "excerpt": "Im dritten Quartal stiegen die Schweizer Wohnungspreise laut SFO im Quartal um 1,7% und im Jahresvergleich um 4,4%.",
@@ -461,12 +467,6 @@
           "url": "/de/neuenburg-artikel/mens-gesundheits-2026/",
           "excerpt": "Vom 10. September bis zum 10. Oktober 2026 Zweite Ausgabe im Kanton Neuenburg Kostenlose und zugängliche Aktivitäten für jedes Alter Rund zwanzig",
           "date": "2026-10-26T08:52:52.668Z"
-        },
-        {
-          "title": "Zenith kündigt rund hundert Stellenstreichungen in Locle an",
-          "url": "/de/neuenburg-artikel/zenith-streichungen-locle/",
-          "excerpt": "Zenith kündigt rund hundert Stellenstreichungen in Locle an Die Manufaktur zählt 196 Mitarbeitende Konsultation für die Massenentlassung eröffnet Ankündigung am",
-          "date": "2026-10-23T23:50:03.671Z"
         }
       ],
       "links": [
@@ -487,7 +487,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-27T12:45:07.020Z"
+      "updatedAt": "2026-10-27T18:18:32.937Z"
     },
     "fr": {
       "canton": "NE",
@@ -594,6 +594,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "RHT : l’horlogerie accepte le retour à la normale prévu à Berne",
+          "url": "/fr/articles-neuchatel/rht-retour-normal-horlogerie/",
+          "excerpt": "Zenith a engagé une procédure de licenciement collectif au Locle.",
+          "date": "2026-10-27T18:01:44.534Z"
+        },
+        {
           "title": "Prix du logement en Suisse : +1,7% au cours du trimestre",
           "url": "/fr/articles-neuchatel/prix-logement-suisse-septembre/",
           "excerpt": "Au troisième trimestre, les prix résidentiels suisses ont augmenté de 1,7% sur le trimestre et de 4,4% sur une base annuelle, selon l'OFS.",
@@ -616,12 +622,6 @@
           "url": "/fr/articles-neuchatel/mois-sante-mentale-2026/",
           "excerpt": "Du 10 septembre au 10 octobre 2026 Deuxième édition dans le canton de Neuchâtel Activités gratuites et accessibles pour tous les âges Une vingtaine",
           "date": "2026-10-26T08:52:52.668Z"
-        },
-        {
-          "title": "Zenith annonce environ cent suppressions de postes au Locle",
-          "url": "/fr/articles-neuchatel/zenith-suppressions-locle/",
-          "excerpt": "Zenith annonce environ cent suppressions de postes au Locle La manufacture compte 196 collaborateurs Consultation ouverte en vue d'un licenciement collectif",
-          "date": "2026-10-23T23:50:03.671Z"
         }
       ],
       "links": [
@@ -642,7 +642,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-27T12:45:07.020Z"
+      "updatedAt": "2026-10-27T18:18:32.937Z"
     }
   }
 }
