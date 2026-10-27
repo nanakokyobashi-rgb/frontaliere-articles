@@ -11,6 +11,10 @@
     "canton-sg::https://www.unisg.ch/de/newsroom/themenschwerpunkt-kuenstliche-intelligenz": {
       "section": "canton-sg",
       "ts": 1793070229660
+    },
+    "canton-sg::https://www.unisg.ch/de/newsroom/aufbruchstimmung-in-serbien": {
+      "section": "canton-sg",
+      "ts": 1793130975661
     }
   }
 }
