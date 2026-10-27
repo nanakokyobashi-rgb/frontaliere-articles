@@ -693,6 +693,47 @@ export function readStructuredSeoBlock(block) {
   return structuredData;
 }
 
+/** Return balanced object literals from the final structuredData value. */
+function readStructuredDataObjectBlocks(value) {
+  if (value[0] === '{') return [value];
+  if (value[0] !== '[') return [];
+
+  const arrayEnd = value.length - 1;
+  const objects = [];
+  let cursor = 1;
+  while (cursor < arrayEnd) {
+    cursor = skipStaticTrivia(value, cursor, 'SEO entry', 'structuredData-array');
+    if (cursor >= arrayEnd || value[cursor] === ']') break;
+    if (value[cursor] !== '{') return [];
+    const close = matchingDelimiter(value, cursor);
+    if (close < 0 || close >= arrayEnd) return [];
+    objects.push(value.slice(cursor, close + 1));
+    cursor = skipStaticTrivia(value, close + 1, 'SEO entry', 'structuredData-array');
+    if (cursor < arrayEnd && value[cursor] === ',') {
+      cursor += 1;
+      continue;
+    }
+    if (cursor < arrayEnd && value[cursor] !== ']') return [];
+  }
+  return objects;
+}
+
+/** Return the final Event object from object- or array-shaped structuredData. */
+export function readStructuredSeoEventBlock(block) {
+  let eventBlock;
+  forEachStaticProperty(block, ({ key, valueStart, valueEnd }) => {
+    if (key !== 'structuredData') return;
+    eventBlock = undefined;
+    const value = block.slice(valueStart, valueEnd);
+    for (const candidate of readStructuredDataObjectBlocks(value)) {
+      if (lastStaticPropertyValue(candidate, '@type') === 'Event') {
+        eventBlock = candidate;
+      }
+    }
+  });
+  return eventBlock;
+}
+
 /** Return the final structuredData description state, including interpolation. */
 export function readStructuredSeoDescriptionState(block) {
   let state = emptyPropertyState();
