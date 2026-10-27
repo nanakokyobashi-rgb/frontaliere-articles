@@ -594,9 +594,11 @@ export const EXPECTED_ABSENT_RC_KEYS = new Set([
 
 export function rcValueState(value, rcKey) {
   const instagramPolicy = instagramInsightsValuePolicy(rcKey);
-  if (instagramPolicy) {
-    if (value === null || value === undefined) return 'expected-absent';
-    if (value === '' && instagramPolicy.empty === 'fail-closed') return 'expected-absent';
+  if (instagramPolicy?.absent === 'fail-closed' && (value === null || value === undefined)) {
+    return 'expected-absent';
+  }
+  if (instagramPolicy?.empty === 'fail-closed' && value === '') {
+    return 'expected-absent';
   }
   if (value === null || value === undefined) {
     return EXPECTED_ABSENT_RC_KEYS.has(rcKey) ? 'expected-absent' : 'missing';
