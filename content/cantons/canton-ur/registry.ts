@@ -127,4 +127,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'conteggio-traffico-uri-novembre',
+ category: 'novita',
+ date: '2026-10-27T11:34:34.578Z',
+ image: '/images/blog/article-conteggio-traffico-uri-novembre.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['UR'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

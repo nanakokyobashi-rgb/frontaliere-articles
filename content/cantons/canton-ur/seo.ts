@@ -426,6 +426,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-conteggio-traffico-uri-novembre': {
+    title: 'Uri, traffico rilevato in 31 punti il 5 novembre 2026',
+    description: 'A Uri, il 5 novembre 2026, 31 punti rileveranno veicoli e direzioni tra le 06:00 e le 22:00 per aggiornare il modello cantonale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, traffico, rilevato, punti, novembre',
+    ogTitle: 'Uri, rilevazione del traffico in 31 punti',
+    ogDescription: 'Giovedì 5 novembre, tra le 06:00 e le 22:00, un\'azienda esterna raccoglierà dati in 31 punti del fondovalle urano. Saranno rilevati numero e direzione dei veicoli, senza dati personali né intralci al traffico.',
+    canonicalPath: '/articoli-uri/conteggio-traffico-uri-novembre/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Uri, traffico rilevato in 31 punti il 5 novembre 2026",
+      "description": "A Uri, il 5 novembre 2026, 31 punti rileveranno veicoli e direzioni tra le 06:00 e le 22:00 per aggiornare il modello cantonale.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-conteggio-traffico-uri-novembre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-27T11:34:34+00:00",
+      "dateModified": "2026-10-27T11:34:34+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-uri/conteggio-traffico-uri-novembre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

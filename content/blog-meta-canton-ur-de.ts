@@ -36,6 +36,9 @@ const blogMetaCantonUrDe: Record<string, string> = {
     'blog.article.axenstrasse-chiusa-novembre-2026.title': 'Axenstrasse nachts wegen Wartungsarbeiten im Kanton Uri gesperrt',
     'blog.article.axenstrasse-chiusa-novembre-2026.excerpt': 'Vom 2. bis 6. November 2026 wird die Axenstrasse von 22.00 bis 05.00 gesperrt; der Verkehr wird über die Autobahn A2 umgeleitet.',
     'blog.article.axenstrasse-chiusa-novembre-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.conteggio-traffico-uri-novembre.title': 'Uri, Verkehr an 31 Stellen am 5. November 2026 erfasst',
+    'blog.article.conteggio-traffico-uri-novembre.excerpt': 'Im Urner Talboden werden am 5.',
+    'blog.article.conteggio-traffico-uri-novembre.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonUrDe;

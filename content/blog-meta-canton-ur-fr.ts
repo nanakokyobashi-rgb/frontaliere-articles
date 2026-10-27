@@ -36,6 +36,9 @@ const blogMetaCantonUrFr: Record<string, string> = {
     'blog.article.axenstrasse-chiusa-novembre-2026.title': 'Axenstrasse fermée de nuit pour travaux d\'entretien dans le canton d\'Uri',
     'blog.article.axenstrasse-chiusa-novembre-2026.excerpt': 'Du 2 au 6 novembre 2026, l\'Axenstrasse sera fermée de 22.00 à 05.00 ; le trafic est dévié sur l\'autoroute A2.',
     'blog.article.axenstrasse-chiusa-novembre-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.conteggio-traffico-uri-novembre.title': 'Uri, trafic relevé en 31 points le 5 novembre 2026',
+    'blog.article.conteggio-traffico-uri-novembre.excerpt': 'Dans la vallée uranaise, le 5 novembre 2026, 31 points recenseront les véhicules et leur direction entre les 06:00 et les 22:00 afin de revoir le modèle cantonal.',
+    'blog.article.conteggio-traffico-uri-novembre.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonUrFr;

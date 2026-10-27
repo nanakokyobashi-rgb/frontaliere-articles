@@ -36,6 +36,9 @@ const blogMetaCantonUrEn: Record<string, string> = {
     'blog.article.axenstrasse-chiusa-novembre-2026.title': 'Axenstrasse closed at night for maintenance work in the Canton of Uri',
     'blog.article.axenstrasse-chiusa-novembre-2026.excerpt': 'From November 2 to 6, 2026, Axenstrasse will be closed from 22.00 to 05.00; traffic is diverted onto the A2 motorway.',
     'blog.article.axenstrasse-chiusa-novembre-2026.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.conteggio-traffico-uri-novembre.title': 'Uri, traffic detected at 31 points on November 5, 2026',
+    'blog.article.conteggio-traffico-uri-novembre.excerpt': 'In the Uranian valley floor, on November 5, 2026, 31 points will record vehicles and directions between 06:00 and 22:00 to review the cantonal model.',
+    'blog.article.conteggio-traffico-uri-novembre.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonUrEn;
