@@ -314,6 +314,40 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-prezzi-abitativi-terzo-trimestre': {
+    title: 'Prezzi abitativi svizzeri: +1,7% nel terzo trimestre',
+    description: 'L\'OFS rileva in Svizzera un aumento dei prezzi residenziali: 1,7% sul trimestre e 4,4% su un anno, con case a 2,1% e appartamenti a 1,3%.',
+    keywords: 'frontalieri, ticino, svizzera, italia, prezzi, abitativi, svizzeri, terzo',
+    ogTitle: 'Case svizzere, prezzi in aumento nel terzo trimestre',
+    ogDescription: 'Tra luglio e fine settembre, la media nazionale dei prezzi residenziali in Svizzera è salita dell\'1,7% rispetto al trimestre precedente e del 4,4% su un anno. Le case individuali hanno segnato +2,1%, gli appartamenti in proprietà +1,3%.',
+    canonicalPath: '/articoli-giura/prezzi-abitativi-terzo-trimestre/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Prezzi abitativi svizzeri: +1,7% nel terzo trimestre",
+      "description": "L'OFS rileva in Svizzera un aumento dei prezzi residenziali: 1,7% sul trimestre e 4,4% su un anno, con case a 2,1% e appartamenti a 1,3%.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/article-prezzi-abitativi-terzo-trimestre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edifici residenziali svizzeri in una strada del Canton Giura"
+      },
+      "datePublished": "2026-10-27T08:39:44+00:00",
+      "dateModified": "2026-10-27T08:39:44+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-giura/prezzi-abitativi-terzo-trimestre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

@@ -27,6 +27,9 @@ const blogMetaCantonJuFr: Record<string, string> = {
     'blog.article.fiscalita-coppie-marite-voto.title': 'Fiscalité des conjoints : votez le 29 novembre',
     'blog.article.fiscalita-coppie-marite-voto.excerpt': 'Le 8 mars, la fiscalité individuelle a été adoptée avec 54 % Le 29 novembre, le vote aura lieu sur l\'initiative du Centre Le texte propose la taxation commune',
     'blog.article.fiscalita-coppie-marite-voto.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.prezzi-abitativi-terzo-trimestre.title': 'Prix des logements suisses : +1,7 % au troisième trimestre',
+    'blog.article.prezzi-abitativi-terzo-trimestre.excerpt': 'L\'OFS signale en Suisse une hausse des prix résidentiels : 1,7 % sur le trimestre et 4,4 % sur un an, avec les maisons à 2,1 % et les appartements à 1,3 %.',
+    'blog.article.prezzi-abitativi-terzo-trimestre.imageAlt': 'Immeubles résidentiels dans une rue calme du canton du Jura',
 };
 
 export default blogMetaCantonJuFr;

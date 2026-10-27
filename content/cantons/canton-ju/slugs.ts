@@ -11,6 +11,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'giura-aumento-sussidi-famiglie': { it: 'giura-aumento-sussidi-famiglie', en: 'jura-subsidy-increase-low-income', de: 'jura-subvention-erhoehung-familien', fr: 'jura-augmentation-subventions-familles' },
  'governo-giurassiano-nomine-2027': { it: 'governo-giurassiano-nomine-2027', en: 'jura-government-appointments-2027', de: 'jurakanton-nominationen-2027', fr: 'gouvernement-jurassien-nominations-2027' },
  'fiscalita-coppie-marite-voto': { it: 'fiscalita-coppie-marite-voto', en: 'marital-couple-tax-vote', de: 'ehepaare-steuer-abstimmung', fr: 'fiscalite-couples-maries-vote' },
+ 'prezzi-abitativi-terzo-trimestre': { it: 'prezzi-abitativi-terzo-trimestre', en: 'swiss-housing-prices-third-quarter', de: 'schweizer-wohnungspreise-drittes-quartal', fr: 'prix-logement-suisse-troisieme-trimestre' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

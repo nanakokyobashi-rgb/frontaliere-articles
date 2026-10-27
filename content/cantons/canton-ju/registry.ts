@@ -94,4 +94,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'prezzi-abitativi-terzo-trimestre',
+ category: 'novita',
+ date: '2026-10-27T08:39:44.312Z',
+ image: '/images/blog/article-prezzi-abitativi-terzo-trimestre.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['JU'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

@@ -27,6 +27,9 @@ const blogMetaCantonJuIt: Record<string, string> = {
     'blog.article.fiscalita-coppie-marite-voto.title': 'Imposizione dei coniugi: voto il 29 novembre',
     'blog.article.fiscalita-coppie-marite-voto.excerpt': 'L\'8 marzo l\'imposizione individuale è passata con il 54% Il 29 novembre si vota sull\'iniziativa del Centro Il testo propone l\'imposizione comune dei coniugi',
     'blog.article.fiscalita-coppie-marite-voto.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.prezzi-abitativi-terzo-trimestre.title': 'Prezzi abitativi svizzeri: +1,7% nel terzo trimestre',
+    'blog.article.prezzi-abitativi-terzo-trimestre.excerpt': 'L\'OFS segnala in Svizzera un aumento dei prezzi residenziali: 1,7% sul trimestre e 4,4% su un anno, con case a 2,1% e appartamenti a 1,3%.',
+    'blog.article.prezzi-abitativi-terzo-trimestre.imageAlt': 'Edifici residenziali svizzeri in una strada del Canton Giura',
 };
 
 export default blogMetaCantonJuIt;

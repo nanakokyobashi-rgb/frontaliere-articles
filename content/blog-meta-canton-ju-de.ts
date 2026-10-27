@@ -27,6 +27,9 @@ const blogMetaCantonJuDe: Record<string, string> = {
     'blog.article.fiscalita-coppie-marite-voto.title': 'Besteuerung der Ehepartner: Abstimmung am 29. November',
     'blog.article.fiscalita-coppie-marite-voto.excerpt': 'Am 8. März wurde die Einzelbesteuerung mit 54 % verabschiedet. Am 29. November findet die Abstimmung über die Initiative des Zentrums statt Der Text schlägt',
     'blog.article.fiscalita-coppie-marite-voto.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.prezzi-abitativi-terzo-trimestre.title': 'Schweizer Wohnimmobilienpreise: +1,7% im dritten Quartal',
+    'blog.article.prezzi-abitativi-terzo-trimestre.excerpt': 'Das BFS meldet für die Schweiz einen Anstieg der Wohnimmobilienpreise: 1,7% gegenüber dem Vorquartal und 4,4% im Jahresvergleich, bei Einfamilienhäusern um 2,1% und bei Eigentumswohnungen um 1,3%.',
+    'blog.article.prezzi-abitativi-terzo-trimestre.imageAlt': 'Wohnhäuser an einer ruhigen Strasse im Schweizer Kanton Jura',
 };
 
 export default blogMetaCantonJuDe;

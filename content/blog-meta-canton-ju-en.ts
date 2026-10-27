@@ -27,6 +27,9 @@ const blogMetaCantonJuEn: Record<string, string> = {
     'blog.article.fiscalita-coppie-marite-voto.title': 'Taxation of spouses: vote on 29 November',
     'blog.article.fiscalita-coppie-marite-voto.excerpt': 'On 8 March, individual taxation passed with 54% On November 29, the vote will be held on the Center\'s initiative The text proposes the common taxation',
     'blog.article.fiscalita-coppie-marite-voto.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.prezzi-abitativi-terzo-trimestre.title': 'Swiss housing prices: +1,7% in the third quarter',
+    'blog.article.prezzi-abitativi-terzo-trimestre.excerpt': 'The OFS reports an increase in residential property prices in Switzerland: 1.7% quarter-on-quarter and 4.4% year-on-year, with houses at 2.1% and apartments at 1.3%.',
+    'blog.article.prezzi-abitativi-terzo-trimestre.imageAlt': 'Swiss residential buildings on a quiet street in the Canton of Jura',
 };
 
 export default blogMetaCantonJuEn;

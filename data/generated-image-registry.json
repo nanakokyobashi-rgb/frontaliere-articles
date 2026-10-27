@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "assetCount": 979,
+  "assetCount": 980,
   "assets": [
     {
       "schema": 1,
@@ -40253,6 +40253,57 @@
         "is_photograph": false,
         "is_topic_relevant": true,
         "notes": "Original generic synthetic illustration of a mountainous road blocked by a landslide; no people, text, signage, logos, or identifiable event."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-prezzi-abitativi-terzo-trimestre",
+      "kind": "photo",
+      "provider": "pexels",
+      "model": "Pexels photo search",
+      "executorModel": "Pexels photo search",
+      "license": "Pexels License",
+      "licenseFamily": "pexels",
+      "licenseUrl": "https://www.pexels.com/license/",
+      "credit": "Jean-Paul Wettstein · Pexels",
+      "author": {
+        "name": "Jean-Paul Wettstein",
+        "url": "https://www.pexels.com/@jean-paul-wettstein-677916508"
+      },
+      "sourcePageUrl": "https://www.pexels.com/photo/rustic-stone-houses-in-bavona-valley-switzerland-35616977/",
+      "sourceImageUrl": "https://images.pexels.com/photos/35616977/pexels-photo-35616977.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "sourceWidth": 6064,
+      "sourceHeight": 4040,
+      "photoTitle": "Black and white view of historic stone houses in the Bavona Valley, Ticino.",
+      "copyrightNotice": "© Jean-Paul Wettstein",
+      "acquireLicensePage": "https://www.pexels.com/photo/rustic-stone-houses-in-bavona-valley-switzerland-35616977/",
+      "sha256": "ade3a932161da04f5e97867c06f81c193e63747a42ade5ae4ba72f65e11bcb04",
+      "bytes": 221132,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-10-27T08:39:35.815Z",
+      "verifiedAt": "2026-10-27T08:39:44.213Z",
+      "restrictions": [
+        "licensed-source",
+        "no-recognizable-foreground-person",
+        "no-logo-brand-or-trademark"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-prezzi-abitativi-terzo-trimestre.webp",
+      "area": "Swiss border region",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "contains_recognizable_foreground_person": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": true,
+        "is_topic_relevant": true,
+        "notes": "Photograph of a Swiss rural residential village with houses; no people, text, logos, or branding visible."
       }
     }
   ]
