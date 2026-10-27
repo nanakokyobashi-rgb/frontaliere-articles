@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-27T10:55:28.229Z",
-  "contentHash": "a14d2ec40f1f1d386a509538ac832b836d9ad75ba172ecd2098d76c476c1685a",
+  "updatedAt": "2026-10-27T13:04:04.614Z",
+  "contentHash": "63f49e2cec6537d2c622d3d58d90c718155e96e2a10de5bb3f6e16e555989a48",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-27T00:53:25.881Z",
+      "updatedAt": "2026-10-27T09:24:17.388Z",
       "keyFacts": 2
     },
     {
@@ -37,7 +37,7 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "9",
+          "value": "10",
           "note": "segnalazioni aggiornate: 27 ottobre 2026"
         },
         {
@@ -160,7 +160,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-27T00:53:25.881Z"
+          "updatedAt": "2026-10-27T09:24:17.388Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -290,7 +290,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T13:04:04.614Z"
     },
     "en": {
       "canton": "GR",
@@ -305,7 +305,7 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "9",
+          "value": "10",
           "note": "reports as of 27 October 2026"
         },
         {
@@ -428,7 +428,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-27T00:53:25.881Z"
+          "updatedAt": "2026-10-27T09:24:17.388Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -557,7 +557,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T13:04:04.614Z"
     },
     "de": {
       "canton": "GR",
@@ -572,7 +572,7 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "9",
+          "value": "10",
           "note": "Meldungen vom 27. Oktober 2026"
         },
         {
@@ -695,7 +695,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-27T00:53:25.881Z"
+          "updatedAt": "2026-10-27T09:24:17.388Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -825,7 +825,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T13:04:04.614Z"
     },
     "fr": {
       "canton": "GR",
@@ -840,7 +840,7 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "9",
+          "value": "10",
           "note": "signalements au 27 octobre 2026"
         },
         {
@@ -963,7 +963,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-27T00:53:25.881Z"
+          "updatedAt": "2026-10-27T09:24:17.388Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -1093,7 +1093,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T13:04:04.614Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "mobilita",
-  "updatedAt": "2026-10-27T10:55:28.229Z",
-  "contentHash": "7232f98a50191e07e4a9983489280ae190b5ce12bc719755931d406f9d807c23",
+  "updatedAt": "2026-10-27T13:04:04.614Z",
+  "contentHash": "a0459bde9911ca560b4bc22ea9b446d0b8a0ee4d9da88ee22311a4c593c1b291",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-27T00:53:25.881Z",
+      "updatedAt": "2026-10-27T09:24:17.388Z",
       "keyFacts": 2
     },
     {
@@ -37,7 +37,7 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "16",
+          "value": "15",
           "note": "segnalazioni aggiornate: 27 ottobre 2026"
         },
         {
@@ -153,14 +153,14 @@
               "date": "2026-10-20T07:42:00.000Z"
             },
             {
-              "label": "A52 Hinwil -> Zürich Svincolo autostradale Hinteregg Situazione: raccordo autostradale chiuso in entrata cantiere",
+              "label": "A4 Zürich -> Brunnen Svincolo autostradale Wettswil am Albis Situazione: uscita chiusa cantiere, lunghezza [km] 0.5",
               "value": "Chiusura",
-              "detail": "fine prevista: 27 ottobre 2026",
-              "date": "2026-10-20T20:56:00.000Z"
+              "detail": "fine prevista: 30 ottobre 2026",
+              "date": "2026-10-21T06:11:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-27T00:53:25.881Z"
+          "updatedAt": "2026-10-27T09:24:17.388Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -282,7 +282,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T13:04:04.614Z"
     },
     "en": {
       "canton": "ZH",
@@ -297,7 +297,7 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "16",
+          "value": "15",
           "note": "reports as of 27 October 2026"
         },
         {
@@ -413,14 +413,14 @@
               "date": "2026-10-20T07:42:00.000Z"
             },
             {
-              "label": "A52 Hinwil -> Zürich Svincolo autostradale Hinteregg Situazione: raccordo autostradale chiuso in entrata cantiere",
+              "label": "A4 Zürich -> Brunnen Svincolo autostradale Wettswil am Albis Situazione: uscita chiusa cantiere, lunghezza [km] 0.5",
               "value": "Closure",
-              "detail": "until 27 October 2026",
-              "date": "2026-10-20T20:56:00.000Z"
+              "detail": "until 30 October 2026",
+              "date": "2026-10-21T06:11:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-27T00:53:25.881Z"
+          "updatedAt": "2026-10-27T09:24:17.388Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -542,7 +542,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T13:04:04.614Z"
     },
     "de": {
       "canton": "ZH",
@@ -557,7 +557,7 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "16",
+          "value": "15",
           "note": "Meldungen vom 27. Oktober 2026"
         },
         {
@@ -673,14 +673,14 @@
               "date": "2026-10-20T07:42:00.000Z"
             },
             {
-              "label": "A52 Hinwil -> Zürich Anschluss Hinteregg Sachlage: Einfahrt gesperrt Baustelle",
+              "label": "A4 Zürich -> Brunnen Anschluss Wettswil am Albis Sachlage: Ausfahrt gesperrt Baustelle, Länge [km] 0.5",
               "value": "Sperrung",
-              "detail": "bis 27. Oktober 2026",
-              "date": "2026-10-20T20:56:00.000Z"
+              "detail": "bis 30. Oktober 2026",
+              "date": "2026-10-21T06:11:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-27T00:53:25.881Z"
+          "updatedAt": "2026-10-27T09:24:17.388Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -802,7 +802,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T13:04:04.614Z"
     },
     "fr": {
       "canton": "ZH",
@@ -817,7 +817,7 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "16",
+          "value": "15",
           "note": "signalements au 27 octobre 2026"
         },
         {
@@ -933,14 +933,14 @@
               "date": "2026-10-20T07:42:00.000Z"
             },
             {
-              "label": "A52 Hinwil -> Zurich Jonction autoroutière Hinteregg Situation: entrée fermée travaux",
+              "label": "A4 Zurich -> Brunnen Jonction autoroutière Wettswil am Albis Situation: sortie fermée travaux, longueur [km] 0.5",
               "value": "Fermeture",
-              "detail": "jusqu’au 27 octobre 2026",
-              "date": "2026-10-20T20:56:00.000Z"
+              "detail": "jusqu’au 30 octobre 2026",
+              "date": "2026-10-21T06:11:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-27T00:53:25.881Z"
+          "updatedAt": "2026-10-27T09:24:17.388Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -1062,7 +1062,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T13:04:04.614Z"
     }
   }
 }

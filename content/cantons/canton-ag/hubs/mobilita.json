@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-27T10:55:28.229Z",
-  "contentHash": "728ef6bb60f9b495ab88c63e53959177fba7a6c21dca177bb3cb56d36ed97ae2",
+  "updatedAt": "2026-10-27T13:04:04.614Z",
+  "contentHash": "ec13fa5ece6d77e6f0786175fe5e0c5a309adfe9639ddce18c9c2aa4b0284d98",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-27T00:53:25.881Z",
+      "updatedAt": "2026-10-27T09:24:17.388Z",
       "keyFacts": 2
     },
     {
@@ -42,7 +42,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "33",
+          "value": "32",
           "note": "segnalazioni aggiornate: 27 ottobre 2026"
         }
       ],
@@ -154,7 +154,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-27T00:53:25.881Z"
+          "updatedAt": "2026-10-27T09:24:17.388Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -264,7 +264,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T13:04:04.614Z"
     },
     "en": {
       "canton": "AG",
@@ -284,7 +284,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "33",
+          "value": "32",
           "note": "reports as of 27 October 2026"
         }
       ],
@@ -396,7 +396,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-27T00:53:25.881Z"
+          "updatedAt": "2026-10-27T09:24:17.388Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -506,7 +506,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T13:04:04.614Z"
     },
     "de": {
       "canton": "AG",
@@ -526,7 +526,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "33",
+          "value": "32",
           "note": "Meldungen vom 27. Oktober 2026"
         }
       ],
@@ -638,7 +638,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-27T00:53:25.881Z"
+          "updatedAt": "2026-10-27T09:24:17.388Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -748,7 +748,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T13:04:04.614Z"
     },
     "fr": {
       "canton": "AG",
@@ -768,7 +768,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "33",
+          "value": "32",
           "note": "signalements au 27 octobre 2026"
         }
       ],
@@ -880,7 +880,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-27T00:53:25.881Z"
+          "updatedAt": "2026-10-27T09:24:17.388Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -990,7 +990,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T13:04:04.614Z"
     }
   }
 }

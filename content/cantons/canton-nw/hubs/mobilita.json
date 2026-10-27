@@ -4,12 +4,12 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "mobilita",
-  "updatedAt": "2026-10-27T06:35:07.773Z",
-  "contentHash": "4b0a055784461954a49da39855dc49cda4d158df461c2cc3bcf5ddbfc0c78883",
+  "updatedAt": "2026-10-27T13:04:04.614Z",
+  "contentHash": "13e8300fce30d1d51b7191f56c9131f38b1ec92eb8fe365db3354216dccb5ea2",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-27T00:53:25.881Z",
+      "updatedAt": "2026-10-27T09:24:17.388Z",
       "keyFacts": 2
     },
     {
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "5",
+          "value": "6",
           "note": "segnalazioni aggiornate: 27 ottobre 2026"
         },
         {
@@ -73,6 +73,12 @@
               "date": "2026-10-22T05:50:00.000Z"
             },
             {
+              "label": "A8 Stans Nord -> Sarnen tra Galleria Gallerie Kirchenwald E Galleria Galleria Lopper Situazione: chiusa cantiere, lunghezza [km] 1.5 Limitazione del traffico: corsia chiusa",
+              "value": "Chiusura",
+              "detail": "fine prevista: 19 novembre 2026",
+              "date": "2026-10-27T06:26:00.000Z"
+            },
+            {
               "label": "A2 S. Gottardo -> Luzern tra Svincolo autostradale Stans Nord E Svincolo autostradale Hergiswil Sud Situazione: problemi di traffico cantiere",
               "value": "Cantiere",
               "detail": "fine prevista: 30 ottobre 2026",
@@ -83,16 +89,10 @@
               "value": "Cantiere",
               "detail": "fine prevista: 20 dicembre 2026",
               "date": "2026-10-12T18:00:00.000Z"
-            },
-            {
-              "label": "A2 Luzern -> S. Gottardo tra Svincolo autostradale Buochs E Svincolo autostradale Beckenried Situazione: problemi di traffico cantiere, lunghezza [km] 0.4 Limitazione del traffico: corsie strette…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 28 ottobre 2026",
-              "date": "2026-10-19T04:10:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-27T00:53:25.881Z"
+          "updatedAt": "2026-10-27T09:24:17.388Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -158,7 +158,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-27T06:35:07.773Z"
+      "updatedAt": "2026-10-27T13:04:04.614Z"
     },
     "en": {
       "canton": "NW",
@@ -168,7 +168,7 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "5",
+          "value": "6",
           "note": "reports as of 27 October 2026"
         },
         {
@@ -214,6 +214,12 @@
               "date": "2026-10-22T05:50:00.000Z"
             },
             {
+              "label": "A8 Stans Nord -> Sarnen tra Galleria Gallerie Kirchenwald E Galleria Galleria Lopper Situazione: chiusa cantiere, lunghezza [km] 1.5 Limitazione del traffico: corsia chiusa",
+              "value": "Closure",
+              "detail": "until 19 November 2026",
+              "date": "2026-10-27T06:26:00.000Z"
+            },
+            {
               "label": "A2 S. Gottardo -> Luzern tra Svincolo autostradale Stans Nord E Svincolo autostradale Hergiswil Sud Situazione: problemi di traffico cantiere",
               "value": "Roadworks",
               "detail": "until 30 October 2026",
@@ -224,16 +230,10 @@
               "value": "Roadworks",
               "detail": "until 20 December 2026",
               "date": "2026-10-12T18:00:00.000Z"
-            },
-            {
-              "label": "A2 Luzern -> S. Gottardo tra Svincolo autostradale Buochs E Svincolo autostradale Beckenried Situazione: problemi di traffico cantiere, lunghezza [km] 0.4 Limitazione del traffico: corsie strette…",
-              "value": "Roadworks",
-              "detail": "until 28 October 2026",
-              "date": "2026-10-19T04:10:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-27T00:53:25.881Z"
+          "updatedAt": "2026-10-27T09:24:17.388Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -299,7 +299,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-27T06:35:07.773Z"
+      "updatedAt": "2026-10-27T13:04:04.614Z"
     },
     "de": {
       "canton": "NW",
@@ -309,7 +309,7 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "5",
+          "value": "6",
           "note": "Meldungen vom 27. Oktober 2026"
         },
         {
@@ -355,6 +355,12 @@
               "date": "2026-10-22T05:50:00.000Z"
             },
             {
+              "label": "A8 Stans Nord -> Sarnen zwischen Tunnel Kirchenwald-Tunnel und Tunnel Lopper-Tunnel Sachlage: Strecke gesperrt Baustelle, Länge [km] 1.5 Verkehrsführung: Fahrstreifen gesperrt",
+              "value": "Sperrung",
+              "detail": "bis 19. November 2026",
+              "date": "2026-10-27T06:26:00.000Z"
+            },
+            {
               "label": "A2 Gotthard -> Luzern zwischen Anschluss Stans-Nord und Anschluss Hergiswil Süd Sachlage: Verkehrsbehinderung Baustelle",
               "value": "Baustelle",
               "detail": "bis 30. Oktober 2026",
@@ -365,16 +371,10 @@
               "value": "Baustelle",
               "detail": "bis 20. Dezember 2026",
               "date": "2026-10-12T18:00:00.000Z"
-            },
-            {
-              "label": "A2 Luzern -> Gotthard zwischen Anschluss Buochs und Anschluss Beckenried Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.4 Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen verengt…",
-              "value": "Baustelle",
-              "detail": "bis 28. Oktober 2026",
-              "date": "2026-10-19T04:10:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-27T00:53:25.881Z"
+          "updatedAt": "2026-10-27T09:24:17.388Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -440,7 +440,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-27T06:35:07.773Z"
+      "updatedAt": "2026-10-27T13:04:04.614Z"
     },
     "fr": {
       "canton": "NW",
@@ -450,7 +450,7 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "5",
+          "value": "6",
           "note": "signalements au 27 octobre 2026"
         },
         {
@@ -496,6 +496,12 @@
               "date": "2026-10-22T05:50:00.000Z"
             },
             {
+              "label": "A8 Stans Nord -> Sarnen entre Tunnel Tunnel de Kirchenwald et Tunnel Tunnel du Lopper Situation: fermé travaux, longueur [km] 1.5 Gestion du trafic: voie fermée",
+              "value": "Fermeture",
+              "detail": "jusqu’au 19 novembre 2026",
+              "date": "2026-10-27T06:26:00.000Z"
+            },
+            {
               "label": "A2 St-Gothard -> Lucerne entre Jonction autoroutière Stans-Nord et Jonction autoroutière Hergiswil Sud Situation: trafic perturbé travaux",
               "value": "Chantier",
               "detail": "jusqu’au 30 octobre 2026",
@@ -506,16 +512,10 @@
               "value": "Chantier",
               "detail": "jusqu’au 20 décembre 2026",
               "date": "2026-10-12T18:00:00.000Z"
-            },
-            {
-              "label": "A2 Lucerne -> St-Gothard entre Jonction autoroutière Buochs et Jonction autoroutière Beckenried Situation: trafic perturbé travaux, longueur [km] 0.4 Gestion du trafic: rétrécissement des voies sur…",
-              "value": "Chantier",
-              "detail": "jusqu’au 28 octobre 2026",
-              "date": "2026-10-19T04:10:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-27T00:53:25.881Z"
+          "updatedAt": "2026-10-27T09:24:17.388Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -581,7 +581,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-27T06:35:07.773Z"
+      "updatedAt": "2026-10-27T13:04:04.614Z"
     }
   }
 }
