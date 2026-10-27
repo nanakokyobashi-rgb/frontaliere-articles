@@ -55,6 +55,10 @@
     "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261026-anthropic-leve-le-voile-avant-son-entree-en-bourse.html": {
       "section": "canton-ne",
       "ts": 1793058656355
+    },
+    "canton-ne::https://www.ne.ch/communiques-de-presse/pour-sa-30eme-edition-le-prix-interculturel-salut-letranger-recompense-le-centre-portugais-de-neuchatel-et-madame-carmen-diaz-pumarejo": {
+      "section": "canton-ne",
+      "ts": 1793067662214
     }
   }
 }
