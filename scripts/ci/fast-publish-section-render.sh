@@ -209,53 +209,6 @@ refresh_live_plan_and_preflight() {
     node scripts/ci/check-blog-body-links.mjs
 }
 
-dispatch_stale_handoff() {
-  local current_head="${1:-}"
-  if ! [[ "$current_head" =~ ^[a-f0-9]{40}$ ]]; then
-    echo "::error::HEAD corrente non valida per il replay stale: $current_head"
-    return 1
-  fi
-  local runtime_pat="${GITHUB_PAT_NANAKO:-}"
-  if [ -z "$runtime_pat" ]; then
-    echo "::error::GITHUB_PAT_NANAKO assente: impossibile accodare il replay stale"
-    return 1
-  fi
-
-  export GH_TOKEN="$runtime_pat"
-  # Use the same nonce derivation as fast-publish-section-recovery.sh. A
-  # stale normal push and a mixed-matrix recovery therefore converge on one
-  # workflow_dispatch instead of creating two identical publishers.
-  local nonce_seed='stale-staged-recovery'
-  local nonce_hash
-  nonce_hash="$(printf '%s\0%s\0%s' "$nonce_seed" "$current_head" "$SECTION" | sha256sum | cut -c1-16)"
-  local dispatch_nonce="stale-staged-${current_head:0:12}-${SECTION}-${nonce_hash}"
-  local dispatch_title="cover-publish-section / ${SECTION} / nonce=${dispatch_nonce}"
-  local replay_before="${PUSH_BEFORE:-}"
-  local replay_after=''
-  if [ -n "$replay_before" ] && [[ ! "$replay_before" =~ ^0+$ ]]; then
-    replay_after="$current_head"
-  fi
-
-  echo "::notice::tre tentativi stale esauriti; accodo un replay idempotente per ${SECTION} sulla HEAD ${current_head}"
-  REPLAY_DISPATCH_ASYNC=true \
-    bash .replay-dispatcher-source/scripts/ci/dispatch-fast-publish-replay.sh "$REPO" "$dispatch_title" --ref main \
-      -f section="$SECTION" \
-      -f article_ids="$ARTICLE_IDS_JSON" \
-      -f missing_page_paths="$MISSING_PAGE_PATHS_JSON" \
-      -f known_missing_page_paths="$KNOWN_MISSING_PAGE_PATHS_JSON" \
-      -f bootstrap="$BOOTSTRAP" \
-      -f remove_stale_canton_rss_feeds="$REMOVE_STALE_CANTON_RSS_FEEDS" \
-      -f cleanup_inactive_surface="$CLEANUP_INACTIVE_SURFACE" \
-      -f replay_api_after_publish="$REPLAY_API_AFTER_PUBLISH" \
-      -f allow_deferred_live_release="$ALLOW_DEFERRED_LIVE_RELEASE" \
-      -f api_release_commit='' \
-      -f source_commit="$current_head" \
-      -f source_main_commit="$current_head" \
-      -f dry_run="$DRY" \
-      -f push_before="$replay_before" \
-      -f push_after="$replay_after" \
-      -f dispatch_nonce="$dispatch_nonce"
-}
 # A normal push or an unpinned dispatch from main is a live
 # publication request, including bootstrap dispatches. If main advances
 # during the render, rebase
@@ -397,9 +350,8 @@ while :; do
     echo "::error::impossibile leggere la HEAD corrente per il replay dopo tre tentativi stale"
     exit 1
   fi
-  dispatch_stale_handoff "$handoff_head"
   echo "stale_handoff=true" >> "$GITHUB_OUTPUT"
   echo "stale_handoff_head=$handoff_head" >> "$GITHUB_OUTPUT"
-  echo "::notice::handoff stale accettato: il publisher corrente proseguira' sulla HEAD $handoff_head"
+  echo "::notice::tre tentativi stale esauriti: consegno la sezione al coordinatore della matrice sulla HEAD $handoff_head"
   exit 0
 done

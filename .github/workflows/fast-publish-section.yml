@@ -1014,6 +1014,10 @@ jobs:
           fi
           if jq -e 'any(.[]; .stale_handoff == "true")' <<<"$actual" >/dev/null; then
             echo 'stale_handoff=true' >> "$GITHUB_OUTPUT"
+            # A stale leg has no productive revision. The matrix coordinator
+            # must rebuild the complete plan on current main, including the
+            # sections whose sibling happened to finish on the old checkout.
+            echo 'mixed_matrix=true' >> "$GITHUB_OUTPUT"
           fi
           if jq -e 'all(.[]; (.rendered_head == "" and ((.stale_handoff == "true") or (.fresh == "false"))))' <<<"$actual" >/dev/null; then
             echo "::notice::tutte le leg hanno consegnato il replay stale o rilevato un replay pinned obsoleto; nessuna HEAD non pubblicata viene dichiarata produttiva"
@@ -1049,7 +1053,6 @@ jobs:
       needs.resolve.result == 'success' &&
       needs.publish.result == 'success' &&
       needs.publish_release_head.result == 'success' &&
-      needs.publish_release_head.outputs.stale_handoff != 'true' &&
       (needs.publish_release_head.outputs.rendered_head != '' ||
        needs.publish_release_head.outputs.mixed_matrix == 'true') &&
       (needs.publish_release_head.outputs.mixed_matrix == 'true' ||
@@ -1218,11 +1221,13 @@ jobs:
 
       - name: Replay publish-api after staged release
         if: >-
-          steps.replay_freshness.outputs.fresh == 'true' &&
-          needs.publish_release_head.outputs.mixed_matrix != 'true'
+          (steps.replay_freshness.outputs.fresh == 'true' &&
+           needs.publish_release_head.outputs.mixed_matrix != 'true') ||
+          (steps.replay_freshness.outputs.fresh == 'false' &&
+           needs.publish_release_head.outputs.mixed_matrix == 'true')
         env:
           REPOSITORY: ${{ github.repository }}
-          SOURCE_COMMIT: ${{ needs.publish_release_head.outputs.rendered_head || inputs.source_commit || github.sha }}
+          SOURCE_COMMIT: ${{ steps.replay_freshness.outputs.current_main || needs.publish_release_head.outputs.rendered_head || inputs.source_commit || github.sha }}
         run: |
           set -euo pipefail
           if ! [[ "$SOURCE_COMMIT" =~ ^[a-f0-9]{40}$ ]] \

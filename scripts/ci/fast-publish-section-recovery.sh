@@ -42,10 +42,20 @@ fi
 dispatch_nonce_input="${DISPATCH_NONCE:-}"
 dispatched=0
 failed_sections=()
+child_replay_api_after_publish="${REPLAY_API_AFTER_PUBLISH:-false}"
+if [ "${MIXED_MATRIX:-false}" = 'true' ]; then
+  # The coordinator waits for every section child and dispatches publish-api
+  # once afterwards. Letting every child arm it would fan out identical API
+  # publishes for a mixed matrix.
+  child_replay_api_after_publish=false
+fi
 while IFS=$'\t' read -r section article_ids missing_page_paths known_missing_page_paths bootstrap remove_stale cleanup_inactive_surface; do
   [ -n "$section" ] || continue
   nonce_seed="${dispatch_nonce_input:-stale-staged-recovery}"
-  nonce_hash="$(printf '%s\0%s\0%s' "$nonce_seed" "$CURRENT_MAIN" "$section" | sha256sum | cut -c1-16)"
+  nonce_hash="$(printf '%s\0%s\0%s\0%s\0%s\0%s\0%s\0%s\0%s\0%s' \
+    "$nonce_seed" "$CURRENT_MAIN" "$section" "$article_ids" "$missing_page_paths" \
+    "$known_missing_page_paths" "$bootstrap" "$remove_stale" "$cleanup_inactive_surface" \
+    "$child_replay_api_after_publish" | sha256sum | cut -c1-16)"
   dispatch_nonce="stale-staged-${CURRENT_MAIN:0:12}-${section}-${nonce_hash}"
   dispatch_title="cover-publish-section / ${section} / nonce=${dispatch_nonce}"
   echo "::notice::recovery staged $section sulla HEAD corrente $CURRENT_MAIN"
@@ -59,7 +69,7 @@ while IFS=$'\t' read -r section article_ids missing_page_paths known_missing_pag
     -f cleanup_inactive_surface="$cleanup_inactive_surface" \
     -f source_commit="$CURRENT_MAIN" \
     -f source_main_commit="$CURRENT_MAIN" \
-    -f replay_api_after_publish="$REPLAY_API_AFTER_PUBLISH" \
+    -f replay_api_after_publish="$child_replay_api_after_publish" \
     -f allow_deferred_live_release="$ALLOW_DEFERRED_LIVE_RELEASE" \
     -f dry_run="$DRY" \
     -f dispatch_nonce="$dispatch_nonce"; then

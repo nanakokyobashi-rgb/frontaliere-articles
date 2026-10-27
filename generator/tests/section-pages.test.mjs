@@ -3436,7 +3436,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.doesNotMatch(sectionContract, /-f dry_run=false/);
   assert.equal(
     replayDispatchCount,
-    5,
+    4,
   );
   assert.equal((wf.match(/name: Checkout replay dispatcher from workflow revision/g) ?? []).length, 3);
   assert.equal((wf.match(/ref: \$\{\{ github\.sha \}\}\n\s+path: \.replay-dispatcher-source/g) ?? []).length, 3);
@@ -3447,7 +3447,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   );
   assert.equal(
     (sectionContract.match(/-f cleanup_inactive_surface="\$[A-Za-z_]+"/g) ?? []).length,
-    5,
+    4,
   );
   assert.match(wf, /CLEANUP_INACTIVE_SURFACE_INPUT: \$\{\{ inputs\.cleanup_inactive_surface \}\}/);
   assert.match(wf, /CLEANUP_INACTIVE_SURFACE: \$\{\{ matrix\.target\.cleanupInactiveSurface \|\| false \}\}/);
@@ -3455,7 +3455,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(sectionContract, /-f source_commit="\$current_main"/);
   assert.equal(
     (sectionContract.match(/-f dispatch_nonce="\$dispatch_nonce"/g) ?? []).length,
-    5,
+    4,
     'ogni redispatch stale deve conservare il nonce della run originaria o generarne un fallback per sezione',
   );
   assert.match(sectionContract, /source_commit richiede una SHA completa/);
@@ -3534,9 +3534,12 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /REPLAY_API_AFTER_PUBLISH: \$\{\{ needs\.resolve\.outputs\.replay_api_after_publish \}\}/);
   assert.equal(
     (sectionContract.match(/-f replay_api_after_publish="\$REPLAY_API_AFTER_PUBLISH"/g) ?? []).length,
-    4,
-    'resolve, late guard e recovery devono propagare il flag del replay API',
+    2,
+    'late guard e replay recovery devono propagare il flag del replay API',
   );
+  assert.match(recovery, /child_replay_api_after_publish="\$\{REPLAY_API_AFTER_PUBLISH:-false\}"/);
+  assert.match(recovery, /MIXED_MATRIX.*child_replay_api_after_publish=false/s);
+  assert.match(recovery, /nonce_hash="\$\(printf '%s\\0%s\\0%s\\0%s/);
   const replayDispatcher = read('scripts/ci/dispatch-fast-publish-replay.sh');
   assert.match(wf, /^run-name:.*inputs\.dry_run/m);
   assert.match(resolver, /replay richiesto con dry_run=false ma il publisher è disarmato/);
