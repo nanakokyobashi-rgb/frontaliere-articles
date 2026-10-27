@@ -4,8 +4,8 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "servizi",
-  "updatedAt": "2026-10-27T12:34:51.121Z",
-  "contentHash": "32f87237b72d8ecf2b1405ecb012394c0a4da1069f87a953193634a4b143341e",
+  "updatedAt": "2026-10-27T13:18:19.060Z",
+  "contentHash": "86fa1a7526d965fe9f3f0f57389e943892c8cb647a1980ffc7298908a3a7127a",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -123,6 +123,12 @@
           "date": "2026-10-08T08:29:37.131Z"
         },
         {
+          "title": "Sciaffusa adotta modello scolastico inclusivo con PGA",
+          "url": "/articoli-sciaffusa/schaffhausen-modello-scolastico-inclusivo/",
+          "excerpt": "Decisione del 22 gennaio 2026 per il passaggio all'ISF; PGA prevede un tetto annuale massimo di CHF 3 milioni e un credito una tantum di CHF 270'000.",
+          "date": "2026-10-27T13:12:22.684Z"
+        },
+        {
           "title": "Permesso dimora B Sciaffusa: requisiti e rinnovo",
           "url": "/articoli-svizzera/sciaffusa-permesso-dimora-b/",
           "excerpt": "Il permesso B è un permesso rinnovabile per risiedere e lavorare in Svizzera, gestito da SEM. Scopri come ottenerlo e rinnovarlo nel canton Sciaffusa.",
@@ -180,7 +186,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-27T12:34:51.121Z"
+      "updatedAt": "2026-10-27T13:18:19.060Z"
     },
     "en": {
       "canton": "SH",
@@ -281,6 +287,12 @@
           "date": "2026-10-08T08:29:37.131Z"
         },
         {
+          "title": "Schaffhausen adopts inclusive school model with PGA",
+          "url": "/en/schaffhausen-articles/schaffhausen-inclusive-school-model/",
+          "excerpt": "Decision of January 22, 2026 on the transition to the ISF; PGA provides for a maximum annual cap of CHF 3 million and a one-time credit of CHF 270'000.",
+          "date": "2026-10-27T13:12:22.684Z"
+        },
+        {
           "title": "Residence permit B Schaffhausen: requirements and renewal",
           "url": "/en/swiss-articles/schaffhausen-residence-permit-category-b/",
           "excerpt": "Permit B is a renewable permit to reside and work in Switzerland, managed by SEM. Find out how to get it and renew it in the canton of Schaffhausen.",
@@ -334,7 +346,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-27T12:34:51.121Z"
+      "updatedAt": "2026-10-27T13:18:19.060Z"
     },
     "de": {
       "canton": "SH",
@@ -435,6 +447,12 @@
           "date": "2026-10-08T08:29:37.131Z"
         },
         {
+          "title": "Schaffhausen übernimmt integratives Schulmodell mit PGA",
+          "url": "/de/schaffhausen-artikel/schaffhausen-schulmodell-inklusiv/",
+          "excerpt": "Entscheid vom 22.",
+          "date": "2026-10-27T13:12:22.684Z"
+        },
+        {
           "title": "Aufenthaltsbewilligung B Schaffhausen: Voraussetzungen und Verlängerung",
           "url": "/de/schweiz-artikel/schaffhausen-aufenthaltsgenehmigung-kategorie-b/",
           "excerpt": "Die Bewilligung B ist eine erneuerbare Bewilligung zum Aufenthalt und Arbeiten in der Schweiz, die von sem verwaltet wird. Erfahren Sie, wie Sie es im Kanton Schaffhausen beziehen und erneuern können.",
@@ -488,7 +506,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-27T12:34:51.121Z"
+      "updatedAt": "2026-10-27T13:18:19.060Z"
     },
     "fr": {
       "canton": "SH",
@@ -589,6 +607,12 @@
           "date": "2026-10-08T08:29:37.131Z"
         },
         {
+          "title": "Schaffhouse adopte un modèle scolaire inclusif avec PGA",
+          "url": "/fr/articles-schaffhouse/schaffhouse-modele-scolaire-inclusif/",
+          "excerpt": "Décision du 22 janvier 2026 pour le passage à l'ISF ; PGA prévoit un plafond annuel maximum de CHF 3 millions et un crédit ponctuel de CHF 270'000.",
+          "date": "2026-10-27T13:12:22.684Z"
+        },
+        {
           "title": "Permis de séjour B Schaffhouse : exigences et renouvellement",
           "url": "/fr/articles-suisse/schaffhouse-permis-de-sejour-categorie-b/",
           "excerpt": "Le permis B est un permis renouvelable pour résider et travailler en Suisse, géré par SEM. Découvrez comment l'obtenir et le renouveler dans le canton de Schaffhouse.",
@@ -638,7 +662,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-27T12:34:51.121Z"
+      "updatedAt": "2026-10-27T13:18:19.060Z"
     }
   }
 }
