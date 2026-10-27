@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-orari-tilo-re80-s90.webp",
+      "sha256": "ea1f9ed20af65cc40e1d99cc307729df5e07116514c9051f66b7722171cc9996"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-orari-tilo-re80-s90-480w.webp",
+      "sha256": "48f50587dd69444676b9e2e583797469ffec8e6e9b9af322faf5e5cf98177c12"
+    }
+  ]
 }
