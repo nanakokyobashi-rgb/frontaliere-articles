@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "fisco",
-  "updatedAt": "2026-10-21T11:39:23.427Z",
-  "contentHash": "b4d7763bed88a063efd835dbe86f15288162467fc0bef686d8fc396ba3a85a76",
+  "updatedAt": "2026-10-27T11:00:30.317Z",
+  "contentHash": "9b9abf0f7ff7e3fddd16f7c359528d0e0e36ba2ed1ab696949318af8106105f3",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -102,6 +102,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Goldküste: moglie riceve una seconda fattura fiscale",
+          "url": "/articoli-zurigo/seconda-fattura-goldkueste/",
+          "excerpt": "Sulla Goldküste, una moglie riceve una seconda fattura fiscale dopo l'ingresso del marito gravemente malato in una casa di cura.",
+          "date": "2026-10-27T10:51:21.509Z"
+        },
+        {
           "title": "Budget 2027 di Zurigo: 640 posti in più in amministrazione",
           "url": "/articoli-zurigo/organico-comunale-zurigo/",
           "excerpt": "Il bilancio 2027 della città di Zurigo prevede altri 640 posti nell'amministrazione.",
@@ -142,12 +148,6 @@
           "url": "/articoli-svizzera/cembra-vontobel-sede-baden-baar/",
           "excerpt": "Cembra sposta 660 dipendenti a Baden (15% imposte) in autunno 2027; Vontobel porta 1.500 posti a Baar (12%) entro il 2030. Zurigo al 20%.",
           "date": "2026-09-25T22:08:30.423Z"
-        },
-        {
-          "title": "Imposta autoveicoli a Zurigo: calcolo e pagamento",
-          "url": "/articoli-svizzera/imposta-auto-zurigo-pagamento/",
-          "excerpt": "Nel Cantone di Zurigo calcolo, scadenze e pagamento dell'imposta sugli autoveicoli seguono regole cantonali; verifica anche cambio veicolo e indirizzo.",
-          "date": "2026-10-04T15:14:54.836Z"
         }
       ],
       "latestCantonArticles": [],
@@ -177,7 +177,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-21T11:39:23.427Z"
+      "updatedAt": "2026-10-27T11:00:30.317Z"
     },
     "en": {
       "canton": "ZH",
@@ -262,6 +262,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Gold Coast: wife receives a second tax bill",
+          "url": "/en/zurich-articles/gold-coast-second-tax-bill/",
+          "excerpt": "On the Gold Coast, a wife receives a second tax bill after her seriously ill husband enters a nursing home.",
+          "date": "2026-10-27T10:51:21.509Z"
+        },
+        {
           "title": "Zurich's 2027 budget: 640 additional positions in administration",
           "url": "/en/zurich-articles/zurich-city-staff-budget-2027/",
           "excerpt": "The 2027 budget of the city of Zurich provides for another 640 positions in the administration.",
@@ -302,12 +308,6 @@
           "url": "/en/swiss-articles/cembra-vontobel-relocation-baden-baar/",
           "excerpt": "Cembra moves 660 employees to Baden (15% taxes) in autumn 2027; Vontobel brings 1.500 jobs to Baar (12%) by 2030. Zurich at 20%.",
           "date": "2026-09-25T22:08:30.423Z"
-        },
-        {
-          "title": "Motor vehicle tax in Zurich: calculation and payment",
-          "url": "/en/swiss-articles/zurich-vehicle-tax-calculation/",
-          "excerpt": "In the Canton of Zurich, the calculation, deadlines and payment of the motor vehicle tax follow cantonal rules; also check vehicle and address changes.",
-          "date": "2026-10-04T15:14:54.836Z"
         }
       ],
       "latestCantonArticles": [],
@@ -337,7 +337,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-21T11:39:23.427Z"
+      "updatedAt": "2026-10-27T11:00:30.317Z"
     },
     "de": {
       "canton": "ZH",
@@ -422,6 +422,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Goldküste: Ehefrau erhält eine zweite Steuerrechnung",
+          "url": "/de/zurich-artikel/goldkueste-zweite-steuerrechnung/",
+          "excerpt": "An der Goldküste erhält eine Ehefrau eine zweite Steuerrechnung nach dem Eintritt ihres schwer kranken Ehemanns in ein Pflegeheim.",
+          "date": "2026-10-27T10:51:21.509Z"
+        },
+        {
           "title": "Budget 2027 der Stadt Zürich: 640 zusätzliche Stellen in der Verwaltung",
           "url": "/de/zurich-artikel/zuerich-stadtpersonal-budget-2027/",
           "excerpt": "Das Budget 2027 der Stadt Zürich sieht 640 weitere Stellen in der Verwaltung vor.",
@@ -462,12 +468,6 @@
           "url": "/de/schweiz-artikel/cembra-vontobel-sitz-baden-baar/",
           "excerpt": "Cembra verlegt im Herbst 2027 660 Mitarbeitende nach Baden (15% Steuern); Vontobel verlegt bis 2030 1.500 Arbeitsplätze nach Baar (12%). Zürich bei 20%.",
           "date": "2026-09-25T22:08:30.423Z"
-        },
-        {
-          "title": "Motorfahrzeugsteuer in Zürich: Berechnung und Zahlung",
-          "url": "/de/schweiz-artikel/fahrzeugsteuer-zuerich-berechnung/",
-          "excerpt": "Im Kanton Zürich richten sich Berechnung, Fälligkeiten und Zahlung der Motorfahrzeugsteuer nach kantonalen Regeln; prüfen Sie auch den Fahrzeug- und Adresswechsel.",
-          "date": "2026-10-04T15:14:54.836Z"
         }
       ],
       "latestCantonArticles": [],
@@ -497,7 +497,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-21T11:39:23.427Z"
+      "updatedAt": "2026-10-27T11:00:30.317Z"
     },
     "fr": {
       "canton": "ZH",
@@ -582,6 +582,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Goldküste : l'épouse reçoit une deuxième facture fiscale",
+          "url": "/fr/articles-zurich/goldcoast-deuxieme-facture-fiscale/",
+          "excerpt": "Sur la Goldküste, une épouse reçoit une deuxième facture fiscale après l'entrée de son mari gravement malade dans un établissement de soins.",
+          "date": "2026-10-27T10:51:21.509Z"
+        },
+        {
           "title": "Budget 2027 de Zurich : 640 postes supplémentaires dans l’administration",
           "url": "/fr/articles-zurich/budget-zurich-personnel-ville-2027/",
           "excerpt": "Le budget 2027 de la ville de Zurich prévoit 640 postes supplémentaires dans l’administration.",
@@ -622,12 +628,6 @@
           "url": "/fr/articles-suisse/cembra-vontobel-siege-baden-baar/",
           "excerpt": "Cembra déplace 660 employés à Baden (15 % d'impôts) à l'automne 2027 ; Vontobel apporte 1 500 postes à Baar (12 %) d'ici 2030. Zurich à 20 %.",
           "date": "2026-09-25T22:08:30.423Z"
-        },
-        {
-          "title": "Impôt sur les véhicules automobiles à Zurich : calcul et paiement",
-          "url": "/fr/articles-suisse/impot-vehicules-zurich-calcul/",
-          "excerpt": "Dans le canton de Zurich, le calcul, les échéances et le paiement de l'impôt sur les véhicules automobiles suivent les règles cantonales ; vérifiez également le changement de véhicule et d'adresse.",
-          "date": "2026-10-04T15:14:54.836Z"
         }
       ],
       "latestCantonArticles": [],
@@ -657,7 +657,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-21T11:39:23.427Z"
+      "updatedAt": "2026-10-27T11:00:30.317Z"
     }
   }
 }
