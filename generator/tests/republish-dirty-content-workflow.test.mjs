@@ -28,9 +28,13 @@ test('il backfill aspetta solo il gruppo dello shard target', () => {
     'sette chiamate più la definizione devono restare protette',
   );
   assert.match(guard, /actions\/runs\/\$run_id\/jobs\?per_page=100/);
-  assert.match(
+  assert.match(guard, /validate_workflow_runs_for_status/);
+  assert.match(guard, /actions\/workflows\/\$WF\/runs\?per_page=100&status=\$status/);
+  assert.match(guard, /done < <\(jq -r '\.\[\]' <<<"\$IN_FLIGHT_STATUSES"\)/);
+  assert.doesNotMatch(
     guard,
-    /gh_api_timeout --paginate --slurp "repos\/\$GITHUB_REPOSITORY\/actions\/workflows\/\$WF\/runs\?per_page=100"/,
+    /actions\/workflows\/\$WF\/runs\?per_page=100"/,
+    'il guard non deve paginare la storia completa del workflow',
   );
   assert.match(validation, /workflow_runs \| length/);
   assert.match(validation, /total_count/);
@@ -39,6 +43,7 @@ test('il backfill aspetta solo il gruppo dello shard target', () => {
   assert.match(guard, /\.name == "resolve"/);
   assert.match(validation, /IN_FLIGHT_STATUSES=/);
   assert.match(validation, /validate_workflow_runs\(\)/);
+  assert.match(validation, /\.status == \$expected/);
   assert.match(validation, /validate_workflow_jobs\(\)/);
   assert.ok(guard.includes('test("^publish \\\\(shard, .+\\\\)$")'));
   assert.match(guard, /\.name == \("publish \(shard, " \+ \$shard \+ "\)"\)/);
@@ -61,6 +66,8 @@ test('il backfill aspetta solo il gruppo dello shard target', () => {
   assert.match(workflow, /--arg nonce "\$dispatch_nonce"/);
   assert.match(workflow, /contains\("nonce=" \+ \$nonce\)/);
   assert.match(workflow, /recent_pages_json=.*gh_api_timeout --paginate --slurp/);
+  assert.match(workflow, /recent_since/);
+  assert.match(workflow, /created=%3E%3D\$recent_since&event=workflow_dispatch/);
   assert.match(
     workflow,
     /if ! gh_api_timeout -X POST "repos\/\$GITHUB_REPOSITORY\/actions\/workflows\/\$WF\/dispatches"/,

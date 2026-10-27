@@ -204,9 +204,10 @@ jobs:
           # Ogni lettura dell'API tollera il transitorio degradando verso la
           # scelta PRUDENTE (occupato/tetto raggiunto → rimandare): un blip di
           # rete deve rimandare il backfill al giro dopo, non far diventare
-          # rosso il meccanismo di recupero. La lista delle run viene paginata
-          # e validata contro total_count: una pagina corta non deve mai far
-          # credere libero un gruppo che potrebbe essere ancora occupato.
+          # rosso il meccanismo di recupero. Le run in-flight vengono richieste
+          # per stato; ogni listing filtrato viene paginato e validato contro
+          # total_count: una pagina corta non deve mai far credere libero un
+          # gruppo che potrebbe essere ancora occupato.
           #
           # La concurrency del publisher è PER SHARD, non globale. Contare le
           # run del workflow senza guardare i job faceva attendere un backfill

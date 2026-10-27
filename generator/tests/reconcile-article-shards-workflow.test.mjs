@@ -53,10 +53,6 @@ test('il backfill aspetta solo il gruppo dello shard target', () => {
   assert.match(guard, /unknown\|no-active-job/);
   assert.match(
     guard,
-    /gh_api_timeout --paginate --slurp "repos\/\$GITHUB_REPOSITORY\/actions\/workflows\/\$WF\/runs\?per_page=100"/,
-  );
-  assert.match(
-    guard,
     /gh_api_timeout --paginate --slurp "repos\/\$GITHUB_REPOSITORY\/actions\/runs\/\$run_id\/jobs\?per_page=100"/,
   );
   assert.match(workflow, /workflow_runs \| length/);
@@ -68,6 +64,14 @@ test('il backfill aspetta solo il gruppo dello shard target', () => {
   assert.match(guard, /cover-publish-article\[\[:space:\]\]/);
   assert.match(guard, /dispatch_section="\$\{BASH_REMATCH\[1\]\}"/);
   assert.match(guard, /dispatch_section.*!= "auto"/);
+  assert.match(guard, /validate_workflow_runs_for_status/);
+  assert.match(guard, /actions\/workflows\/\$WF\/runs\?per_page=100&status=\$status/);
+  assert.match(guard, /done < <\(jq -r '\.\[\]' <<<"\$IN_FLIGHT_STATUSES"\)/);
+  assert.doesNotMatch(
+    guard,
+    /actions\/workflows\/\$WF\/runs\?per_page=100"/,
+    'il guard non deve paginare la storia completa del workflow',
+  );
   assert.match(
     publisherWorkflow,
     /\n  publish:\n    name: publish \(shard, \$\{\{ matrix\.target\.shard \}\}\)\n/,
@@ -83,6 +87,8 @@ test('il backfill aspetta solo il gruppo dello shard target', () => {
   assert.doesNotMatch(workflow, /active_runs\(\)/, 'il gate non deve tornare a contare il workflow globalmente');
   assert.match(workflow, /recent_pages_json=.*gh_api_timeout --paginate --slurp/);
   assert.match(workflow, /recent_runs_json=.*validate_workflow_runs/);
+  assert.match(workflow, /recent_since/);
+  assert.match(workflow, /created=%3E%3D\$recent_since&event=workflow_dispatch/);
   assert.match(workflow, /\.created_at_epoch >= \(\$t \| fromdateiso8601\)/);
 });
 
@@ -93,10 +99,18 @@ test('i gemelli del guard usano listing completi, stati completi e fail-closed',
   const republishGuard = republishWorkflow.slice(start, end);
 
   assert.match(republishWorkflow, /IN_FLIGHT_STATUSES='\["queued","in_progress","requested","waiting","pending"\]'/);
-  assert.match(republishGuard, /gh_api_timeout --paginate --slurp "repos\/\$GITHUB_REPOSITORY\/actions\/workflows\/\$WF\/runs\?per_page=100"/);
+  assert.match(republishWorkflow, /validate_workflow_runs_for_status/);
+  assert.match(republishGuard, /actions\/workflows\/\$WF\/runs\?per_page=100&status=\$status/);
+  assert.match(republishGuard, /done < <\(jq -r '\.\[\]' <<<"\$IN_FLIGHT_STATUSES"\)/);
+  assert.doesNotMatch(
+    republishGuard,
+    /actions\/workflows\/\$WF\/runs\?per_page=100"/,
+    'il guard republish non deve paginare la storia completa del workflow',
+  );
   assert.match(republishGuard, /gh_api_timeout --paginate --slurp "repos\/\$GITHUB_REPOSITORY\/actions\/runs\/\$run_id\/jobs\?per_page=100"/);
   assert.match(republishWorkflow, /total_count/);
   assert.match(republishWorkflow, /validate_workflow_runs/);
+  assert.match(republishWorkflow, /\.status == \$expected/);
   assert.match(republishWorkflow, /created_at_epoch/);
   assert.match(republishWorkflow, /validate_workflow_jobs/);
   assert.match(republishWorkflow, /\[\$pages\[\]\.workflow_runs\[\]\.id\] \| unique \| length/);

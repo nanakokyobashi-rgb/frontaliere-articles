@@ -171,8 +171,9 @@ jobs:
 
           # fast-publish has one concurrency group per Pages shard. Keep the
           # guard here in lockstep with reconcile-article-shards.yml: a
-          # complete, validated listing is required before a shard can be
-          # declared free, and an unreadable payload blocks conservatively.
+          # complete, status-filtered and validated listing is required before
+          # a shard can be declared free, and an unreadable payload blocks
+          # conservatively.
           IN_FLIGHT_STATUSES='["queued","in_progress","requested","waiting","pending"]'
           ACTION_TERMINAL_STATUS='completed'
 
