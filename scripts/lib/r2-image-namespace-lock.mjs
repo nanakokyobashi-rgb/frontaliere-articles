@@ -795,8 +795,25 @@ export function classifyReleaseDeadlineRace(outcome, { deadline } = {}) {
   if (!outcome || !Array.isArray(outcome.results)) return 'indeterminate';
   if (!Number.isFinite(deadline) || !Number.isFinite(outcome.finishedAt)) return 'indeterminate';
   if (outcome.finishedAt < deadline) return 'completed';
-  if (outcome.finishedAt > deadline) return 'timeout';
-  return 'indeterminate';
+  // Equality is not observable as "completed before the deadline": timer
+  // and promise callbacks can become ready in either order on a busy loop.
+  return 'timeout';
+}
+
+/**
+ * Classify the whole bounded release transaction, including the result of
+ * every namespace. Completion exactly at the deadline is deliberately
+ * treated as a timeout: a timer and a promise can become ready in either
+ * order when the event loop is delayed, so equality must never be accepted as
+ * proof that cleanup completed within the budget.
+ */
+export function classifyReleaseOutcome(outcome, { deadline } = {}) {
+  const deadlineRace = classifyReleaseDeadlineRace(outcome, { deadline });
+  if (deadlineRace === 'timeout' || deadlineRace === 'indeterminate') return deadlineRace;
+  const rejected = outcome.results.filter((result) => result?.status === 'rejected');
+  if (rejected.length === 0) return 'released';
+  if (rejected.some((result) => containsReleaseTimeout(result.reason))) return 'timeout';
+  return 'failed';
 }
 
 /**
@@ -832,9 +849,9 @@ export async function releaseImageNamespaceLeasesWithDeadline(
   })).then((results) => ({ timedOut: false, results, finishedAt: now() }));
   const outcome = await Promise.race([work, timeout]);
   clearTimeout(timeoutId);
-  const deadlineRace = classifyReleaseDeadlineRace(outcome, { deadline });
-  if (deadlineRace !== 'completed') {
-    return { status: 'timeout', timedOut: true, released: null, error: timeoutError, deadlineRace };
+  const releaseOutcome = classifyReleaseOutcome(outcome, { deadline });
+  if (releaseOutcome !== 'released' && releaseOutcome !== 'failed') {
+    return { status: 'timeout', timedOut: true, released: null, error: timeoutError, deadlineRace: releaseOutcome };
   }
 
   const released = [];
