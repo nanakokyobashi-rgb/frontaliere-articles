@@ -366,8 +366,14 @@ jobs:
           successor_push=false
           run_mode=dry
           api_timeout_seconds=60
+          admission_budget_seconds=240
+          admission_deadline=$((SECONDS + admission_budget_seconds))
           gh_api_timeout() {
-            timeout --kill-after=0s "${api_timeout_seconds}s" gh api "$@"
+            local remaining
+            remaining=$((admission_deadline - SECONDS))
+            [ "$remaining" -ge 1 ] || return 124
+            [ "$remaining" -le "$api_timeout_seconds" ] || remaining="$api_timeout_seconds"
+            timeout --kill-after=0s "${remaining}s" gh api "$@"
           }
           case "$EVENT_NAME" in
             schedule) run_mode=production ;;
@@ -576,60 +582,58 @@ jobs:
             fail_closed_admission
           fi
 
-          if ! recent_since="$(date -u -d '1 hour ago' '+%Y-%m-%dT%H:%M:%SZ')"; then
-            fail_closed_admission
-          fi
-          recent_pages_json=""
-          if ! recent_pages_json="$(gh_api_timeout --paginate --slurp \
-            "repos/$REPO/actions/workflows/generate-article.yml/runs?per_page=100&created=%3E%3D$recent_since" \
-            2>/dev/null)"; then
-            fail_closed_admission
-          fi
-          if ! recent_runs="$(jq -c --argjson known "$ALL_RUN_STATUSES" --arg since "$recent_since" '
-            . as $pages
-            | if (type == "array" and length > 0)
-                and all(.[];
-                  type == "object"
-                  and (.workflow_runs | type) == "array"
-                  and (.total_count | type) == "number"
-                  and (.total_count >= 0)
-                  and ((.total_count | floor) == .total_count)
-                  and all(.workflow_runs[];
-                    type == "object"
-                    and (.id | type) == "number"
-                    and (.id >= 1)
-                    and ((.id | floor) == .id)
-                    and (.created_at | type) == "string"
-                    and (.created_at | length) > 0
-                    and ((try (.created_at | fromdateiso8601) catch null) != null)
-                    and (.created_at >= $since)
-                    and (.status | type) == "string"
-                    and (.status as $status | ($known | index($status)) != null)
-                  ))
-                and (($pages | map(.total_count) | unique | length) == 1)
-                and (($pages | map(.workflow_runs | length) | add) == $pages[0].total_count)
-                and (([$pages[].workflow_runs[].id] | unique | length)
-                  == ([$pages[].workflow_runs[]] | length))
-              then
-                [$pages[].workflow_runs[] | {id: .id, created_at: .created_at, status: .status}]
-              else
-                error("recent generation run listing incomplete")
-              end
-          ' <<<"$recent_pages_json")"; then
-            fail_closed_admission
-          fi
-
           # ── IL TETTO ORARIO, l'unica guardia che un contatore non aggira ────
           #
           # `chain_depth` e `no_article_streak` viaggiano NEGLI INPUT: un anello
           # che li dimentica, o un dispatch fatto a mano con i default, riparte
           # da zero e i due cap non vedono niente. Questo tetto invece si calcola
-          # dallo stato vero — le run create nell'ultima ora, che sono già nella
-          # risposta qui sopra — quindi costa zero chiamate in più e nessuno può
-          # ripulirlo passando un input sbagliato. Vale solo per gli anelli: un
-          # umano e il cron restano fuori (il cron ha due slot, un umano si
+          # dallo stato vero — letto solo qui, nel ramo degli anelli — e nessuno
+          # può ripulirlo passando un input sbagliato. Vale solo per gli anelli:
+          # un umano e il cron restano fuori (il cron ha due slot, un umano si
           # ferma da solo).
           if [ "$is_link" = "true" ]; then
+            if ! recent_since="$(date -u -d '1 hour ago' '+%Y-%m-%dT%H:%M:%SZ')"; then
+              fail_closed_admission
+            fi
+            recent_pages_json=""
+            if ! recent_pages_json="$(gh_api_timeout --paginate --slurp \
+              "repos/$REPO/actions/workflows/generate-article.yml/runs?per_page=100&created=%3E%3D$recent_since" \
+              2>/dev/null)"; then
+              fail_closed_admission
+            fi
+            if ! recent_runs="$(jq -c --argjson known "$ALL_RUN_STATUSES" --arg since "$recent_since" '
+              . as $pages
+              | if (type == "array" and length > 0)
+                  and all(.[];
+                    type == "object"
+                    and (.workflow_runs | type) == "array"
+                    and (.total_count | type) == "number"
+                    and (.total_count >= 0)
+                    and ((.total_count | floor) == .total_count)
+                    and all(.workflow_runs[];
+                      type == "object"
+                      and (.id | type) == "number"
+                      and (.id >= 1)
+                      and ((.id | floor) == .id)
+                      and (.created_at | type) == "string"
+                      and (.created_at | length) > 0
+                      and ((try (.created_at | fromdateiso8601) catch null) != null)
+                      and (.created_at >= $since)
+                      and (.status | type) == "string"
+                      and (.status as $status | ($known | index($status)) != null)
+                    ))
+                  and (($pages | map(.total_count) | unique | length) == 1)
+                  and (($pages | map(.workflow_runs | length) | add) == $pages[0].total_count)
+                  and (([$pages[].workflow_runs[].id] | unique | length)
+                    == ([$pages[].workflow_runs[]] | length))
+                then
+                  [$pages[].workflow_runs[] | {id: .id, created_at: .created_at, status: .status}]
+                else
+                  error("recent generation run listing incomplete")
+                end
+            ' <<<"$recent_pages_json")"; then
+              fail_closed_admission
+            fi
             cap="${CHAIN_MAX_RUNS_PER_HOUR:-}"
             case "$cap" in
               ''|*[!0-9]*) cap=20 ;;

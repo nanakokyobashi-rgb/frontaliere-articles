@@ -16,8 +16,10 @@ for (const relativePath of WORKFLOWS) {
     assert.match(source, /api_timeout_seconds=60/);
     assert.match(
       source,
-      /timeout --kill-after=0s "\$\{api_timeout_seconds\}s" gh api "\$@"/,
+      /timeout --kill-after=0s "\$\{remaining\}s" gh api "\$@"/,
     );
+    assert.match(source, /admission_budget_seconds=240/);
+    assert.match(source, /remaining=\$\(\(admission_deadline - SECONDS\)\)/);
     const wrapperDefinition = source.indexOf('gh_api_timeout() {');
     const firstWrapperUse = source.indexOf('gh_api_timeout --');
     assert.ok(
@@ -39,6 +41,12 @@ for (const relativePath of WORKFLOWS) {
       source,
       /actions\/workflows\/(?:generate-article\.yml|\$CALLER_WORKFLOW)\/runs\?per_page=100&created=%3E%3D\$recent_since/,
       'il tetto orario deve leggere solo la finestra recente',
+    );
+    const linkGate = source.indexOf('if [ "$is_link" = "true" ]; then');
+    const recentWindow = source.indexOf('created=%3E%3D$recent_since');
+    assert.ok(
+      linkGate >= 0 && recentWindow > linkGate,
+      'la finestra oraria deve essere letta solo per gli anelli',
     );
     assert.doesNotMatch(
       source,
