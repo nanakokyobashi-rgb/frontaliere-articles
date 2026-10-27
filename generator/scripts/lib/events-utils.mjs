@@ -124,12 +124,38 @@ export const EVENT_SOURCES = {
 // would be worse than preserving the evidence. These three event details were
 // verified as expired (404/410) in the 2026-10-27 audit; each official source
 // homepage is the only live fallback for any rendered source link.
-const STALE_EVENT_SOURCE_URLS = new Map([
+const STALE_EVENT_SOURCE_URL_ENTRIES = [
   ['ge-agenda|https://www.geneve.ch/agenda/cafe-quartier-initiation-gout-pain-pain-artisanal-industriel-differences', 'https://www.geneve.ch/agenda'],
   ['guidle|https://www.guidle.com/it/veranstaltungen/musik/zuerich/don-toliver-nitrous-octane-world-tour-leg-2_A2e1GAw', 'https://www.guidle.com/de'],
   ['nw-agenda|https://www.nw.ch/anlaesseaktuelles/94120', 'https://www.nw.ch/'],
   ['nw-agenda|https://www.nw.ch/anlaesseaktuelles/94123', 'https://www.nw.ch/'],
-]);
+];
+
+/**
+ * Fail closed if two source records claim different fallbacks for one raw URL.
+ * A Map keyed by `source|url` cannot detect that collision because both keys
+ * remain distinct; the rendered carried item has no source key and would have
+ * to guess. Keep this check at registry load, before any lookup is possible.
+ */
+export function assertUniqueEventFallbacks(entries = STALE_EVENT_SOURCE_URL_ENTRIES) {
+  const fallbackByRawUrl = new Map();
+  for (const entry of entries) {
+    if (!Array.isArray(entry) || entry.length !== 2) throw new TypeError('invalid stale event fallback entry');
+    const [scopedKey, fallback] = entry;
+    const separator = typeof scopedKey === 'string' ? scopedKey.indexOf('|') : -1;
+    const rawUrl = separator >= 0 ? scopedKey.slice(separator + 1) : '';
+    if (!rawUrl || typeof fallback !== 'string' || !fallback) throw new TypeError('invalid stale event fallback record');
+    const previous = fallbackByRawUrl.get(rawUrl);
+    if (previous && previous !== fallback) {
+      throw new Error(`ambiguous stale event fallback for ${rawUrl}`);
+    }
+    fallbackByRawUrl.set(rawUrl, fallback);
+  }
+  return true;
+}
+
+assertUniqueEventFallbacks();
+const STALE_EVENT_SOURCE_URLS = new Map(STALE_EVENT_SOURCE_URL_ENTRIES);
 
 function unscopedStaleEventSourceUrl(rawUrl) {
   let replacement = '';

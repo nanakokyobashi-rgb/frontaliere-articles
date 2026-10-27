@@ -29,6 +29,8 @@ import {
   shouldExportRcValue,
   rcValueState,
   instagramInsightsValuePolicy,
+  instagramInsightsEnvContract,
+  writeGithubEnvBlock,
 } from '../scripts/load-rc-env.mjs';
 import { TOKEN_EXCHANGE_TIMEOUT_MS, extractOAuthErrorReason, isRetryableTokenExchangeStatus } from '../scripts/lib/google-service-account-token.mjs';
 import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from '../scripts/lib/fetch-with-ref-timeout.mjs';
@@ -194,6 +196,23 @@ test('Instagram Insights tratta vuoto e assenza come fail-closed per ogni contro
   }
 
   assert.equal(instagramInsightsValuePolicy('INSTAGRAM_USERNAME'), null);
+});
+
+test('il contratto Instagram Insights mantiene identici i nomi RC e GITHUB_ENV', () => {
+  const contract = instagramInsightsEnvContract();
+  assert.ok(Object.keys(contract).length >= 14);
+  for (const [rcKey, envKey] of Object.entries(contract)) {
+    assert.deepEqual(RC_TO_ENV[rcKey], [envKey], `${rcKey} deve essere esportata con il nome concordato`);
+  }
+});
+
+test('writeGithubEnvBlock preserva valori multi-linea senza permettere terminatori nel payload', () => {
+  const value = 'winner-one\nvariant-two\nFRONTALIERE_INSTAGRAM_INSIGHTS_WINDOWS_EOF';
+  const block = writeGithubEnvBlock('INSTAGRAM_INSIGHTS_WINDOWS', value);
+  assert.match(block, /^INSTAGRAM_INSIGHTS_WINDOWS<<FRONTALIERE_INSTAGRAM_INSIGHTS_WINDOWS_EOF_1\n/);
+  assert.ok(block.endsWith(`\n${'FRONTALIERE_INSTAGRAM_INSIGHTS_WINDOWS_EOF_1'}`));
+  assert.ok(block.includes(value));
+  assert.throws(() => writeGithubEnvBlock('BAD KEY', value), /invalid GITHUB_ENV key/);
 });
 
 test('il fallback legacy non sovrascrive il token LSA già accodato', () => {
