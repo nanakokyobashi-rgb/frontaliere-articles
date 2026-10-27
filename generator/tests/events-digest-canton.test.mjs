@@ -113,6 +113,24 @@ describe('digest per cantone sulla fixture events-dataset', () => {
     assert.doesNotMatch(article.content.it.body2, /\*\*1 gennaio\*\* —/);
   });
 
+  it('uses the live fallback for an expired source detail in the digest', () => {
+    const article = buildWeekendDigestArticle({
+      events: [{
+        id: 'nw-agenda:94120',
+        sourceKey: 'nw-agenda',
+        title: 'Alplertanz',
+        comune: 'Wolfenschiessen',
+        startDate: '2027-01-02',
+        url: 'https://www.nw.ch/anlaesseaktuelles/94120',
+        canton: 'NW',
+      }],
+      todayIso: '2027-01-01',
+    });
+
+    assert.match(article.content.it.body2, /\[Alplertanz\]\(https:\/\/www\.nw\.ch\/\)/);
+    assert.doesNotMatch(article.content.it.body2, /anlaesseaktuelles\/94120/);
+  });
+
   it('escapes Markdown delimiters in a cited event title', () => {
     const article = buildWeekendDigestArticle({
       events: [{

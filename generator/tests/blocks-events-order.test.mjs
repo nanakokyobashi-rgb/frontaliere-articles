@@ -230,6 +230,49 @@ test('eventi: tra URL equivalenti pubblica il deep link con fragment', () => {
   assert.equal(block.render('it').items.find((item) => item.url)?.url, detailUrl);
 });
 
+test('eventi: il rendering usa il fallback live per un dettaglio sorgente scaduto', () => {
+  const tomorrow = new Date(NOW + DAY_MS).toISOString().slice(0, 10);
+  const staleUrl = 'https://www.nw.ch/anlaesseaktuelles/94120';
+  const dataset = {
+    generatedAt: new Date(NOW - 60 * 60 * 1000).toISOString(),
+    events: [
+      {
+        id: 'nw-agenda:94120',
+        sourceKey: 'nw-agenda',
+        title: 'Alplertanz',
+        titleByLocale: { it: 'Alplertanz' },
+        startDate: tomorrow,
+        startTime: '10:00',
+        canton: 'NW',
+        url: staleUrl,
+      },
+      {
+        id: 'nw-agenda:control',
+        title: 'Evento di controllo',
+        titleByLocale: { it: 'Evento di controllo' },
+        startDate: tomorrow,
+        startTime: '11:00',
+        canton: 'NW',
+        url: 'https://events.example.org/control',
+      },
+      {
+        id: 'nw-agenda:control-2',
+        title: 'Secondo controllo',
+        titleByLocale: { it: 'Secondo controllo' },
+        startDate: tomorrow,
+        startTime: '12:00',
+        canton: 'NW',
+        url: 'https://events.example.org/control-2',
+      },
+    ],
+  };
+
+  const block = shapeEventsBlock(dataset, { canton: 'NW', members: ['NW'], nowMs: NOW });
+
+  assert.equal(block.render('it').items[0].url, 'https://www.nw.ch/');
+  assert.notEqual(block.render('it').items[0].url, staleUrl);
+});
+
 test('eventi: URL equivalenti con query riordinata collassano nello stesso anchor', () => {
   const tomorrow = new Date(NOW + DAY_MS).toISOString().slice(0, 10);
   const event = (label, extra = {}) => ({
