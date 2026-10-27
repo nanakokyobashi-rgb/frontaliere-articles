@@ -723,6 +723,16 @@ function readStructuredDataObjectBlocks(value) {
   return objects;
 }
 
+/** Return every balanced JSON-LD object from the final structuredData value. */
+export function readStructuredSeoObjectBlocks(block) {
+  let objectBlocks = [];
+  forEachStaticProperty(block, ({ key, valueStart, valueEnd }) => {
+    if (key !== 'structuredData') return;
+    objectBlocks = readStructuredDataObjectBlocks(block.slice(valueStart, valueEnd));
+  });
+  return objectBlocks;
+}
+
 /** Return the final Event object from object- or array-shaped structuredData. */
 export function readStructuredSeoEventBlock(block) {
   let eventBlock;

@@ -17,6 +17,7 @@ export {
   readStructuredSeoBlock,
   readStructuredSeoDescription,
   readStructuredSeoDescriptionState,
+  readStructuredSeoObjectBlocks,
   staticPropertyState,
   staticPropertyValues,
   staticPropertySpans,

@@ -282,6 +282,11 @@ test('RSS legge i campi SEO dalle array JSON-LD senza confondere i template URL'
       '        "description": "Descrizione da array",',
       '        "datePublished": "2026-09-12T10:00:00+00:00",',
       '        "articleSection": "Pratico",',
+      '        "author": {',
+      '          "@type": "Person",',
+      '          "name": "Array } Author",',
+      '          "url": "https://frontaliereticino.ch/autori/array-brace/",',
+      '        },',
       '        "image": { "url": `${BASE_URL}/images/hero.webp` },',
       '        "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/array-fields/`,',
       '      },',
@@ -307,6 +312,7 @@ test('RSS legge i campi SEO dalle array JSON-LD senza confondere i template URL'
     assert.equal(result.articleCount, 1);
     assert.match(feed, /Headline da array/);
     assert.match(feed, /Descrizione da array/);
+    assert.match(feed, /<dc:creator><!\[CDATA\[Array \} Author\]\]><\/dc:creator>/);
 
     fs.writeFileSync(
       path.join(root, 'content', 'seo', 'seo-blog.ts'),

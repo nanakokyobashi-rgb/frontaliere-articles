@@ -43,8 +43,8 @@ import {
   lastStaticPropertyValue,
   readStaticObjectProperty,
   readStructuredSeoDescription,
-  readStructuredSeoBlock,
   readStructuredSeoDescriptionState,
+  readStructuredSeoObjectBlocks,
 } from './shared/seo-entry.mjs';
 import { createImageCreditReader, mediaRssCreditXml, renderImageCreditHtml } from './shared/imageCredits.mjs';
 import { articleSectionEntry } from './shared/articleSectionCore.mjs';
@@ -280,10 +280,10 @@ function parseSeoBlogs(fs, path, rootDir, seoDir, seoFiles) {
       // and visible byline are built from. Carry only a named real Person or
       // editorial-profile Organization: the newsroom fallback is the channel
       // title and repeating it as <dc:creator> would say nothing.
-      const structuredDataBlock = readStructuredSeoBlock(block);
-      const authorBlock = structuredDataBlock
-        ? readStaticObjectProperty(structuredDataBlock, 'author')
-        : undefined;
+      const authorBlock = readStructuredSeoObjectBlocks(block)
+        .map((structuredDataObject) => readStaticObjectProperty(structuredDataObject, 'author'))
+        .filter(Boolean)
+        .at(-1);
       const isNamedAuthor =
         authorBlock &&
         ((lastStaticPropertyValue(authorBlock, '@type') === 'Organization' &&
