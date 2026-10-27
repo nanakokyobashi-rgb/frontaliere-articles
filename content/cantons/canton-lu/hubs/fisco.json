@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "fisco",
-  "updatedAt": "2026-10-26T11:35:21.204Z",
-  "contentHash": "29cd426e04dfa437f4786fc5c0ded0d22572f613df6d5c78216413992d38da79",
+  "updatedAt": "2026-10-27T08:29:57.707Z",
+  "contentHash": "316218cbd05e5b30fa5a93639df8fac11bb99e9df04e6f26434717066f261a9c",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-25T19:59:33.449Z",
+      "updatedAt": "2026-10-26T21:55:18.630Z",
       "keyFacts": 0
     }
   ],
@@ -115,7 +115,7 @@
               "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T21:55:18.630Z"
         }
       ],
       "curatedArticles": [
@@ -130,6 +130,12 @@
           "url": "/articoli-lucerna/lucerna-tassi-fiscali-zero-2027/",
           "excerpt": "Nel 2027 Lucerna mantiene allo 0,00% i tassi fiscali; la mora resta al 4,00%.",
           "date": "2026-10-21T13:53:04.510Z"
+        },
+        {
+          "title": "Einwohnerrat decide budget 2027 e credito Bahnhof Ost",
+          "url": "/articoli-lucerna/einwohnerrat-budget-bahnhof-ost/",
+          "excerpt": "Il 17 novembre 2026 si riunisce l'Einwohnerrat di Ebikon Il budget 2027 prevede un avanzo di CHF 2,14 milioni Il moltiplicatore resta a 2,05 unità Bahnhof Ost",
+          "date": "2026-10-27T08:22:48.687Z"
         },
         {
           "title": "Mozione sulla tassa per le seconde case approvata a Lucerna",
@@ -160,12 +166,6 @@
           "url": "/articoli-svizzera/imposta-successione-donazione-lucerna-guida/",
           "excerpt": "Guida completa all'imposta di successione e donazione nel Canton Lucerna. Scopri le aliquote per grado di parentela, le esenzioni e come dichiarare l'eredità.",
           "date": "2026-08-22T12:05:19.300Z"
-        },
-        {
-          "title": "Imposte cantonali canton Lucerna: aliquote e deduzioni",
-          "url": "/articoli-svizzera/imposte-cantonali-canton-lucerna-aliquote/",
-          "excerpt": "Guida alle imposte cantonali e comunali nel Cantone di Lucerna con aliquote, scaglioni, deduzioni e portale ufficiale dell'amministrazione fiscale.",
-          "date": "2026-08-14T01:47:31.544Z"
         }
       ],
       "latestCantonArticles": [],
@@ -191,7 +191,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-26T11:35:21.204Z"
+      "updatedAt": "2026-10-27T08:29:57.707Z"
     },
     "en": {
       "canton": "LU",
@@ -284,7 +284,7 @@
               "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T21:55:18.630Z"
         }
       ],
       "curatedArticles": [
@@ -299,6 +299,12 @@
           "url": "/en/lucerne-articles/lucerne-tax-interest-zero-2027/",
           "excerpt": "In 2027 Lucerne maintains tax rates at 0.00%; the default remains at 4.00%.",
           "date": "2026-10-21T13:53:04.510Z"
+        },
+        {
+          "title": "Residents’ Council decides on budget 2027 and Bahnhof Ost credit",
+          "url": "/en/lucerne-articles/residents-council-decides-on-budget-2027-and-bahnhof-ost-credit/",
+          "excerpt": "On 17 November 2026, the Ebikon Residents' Council meets The 2027 budget provides for a surplus of CHF 2,14 million The multiplier remains at 2,05 units Bahnhof",
+          "date": "2026-10-27T08:22:48.687Z"
         },
         {
           "title": "Motion on the second-home tax approved in Lucerne",
@@ -329,12 +335,6 @@
           "url": "/en/swiss-articles/succession-donation-tax-lucerne-guide/",
           "excerpt": "Complete guide to inheritance and gift tax in the Canton of Lucerne. Learn about kinship rates, exemptions, and how to declare inheritance.",
           "date": "2026-08-22T12:05:19.300Z"
-        },
-        {
-          "title": "Cantonal taxes canton Lucerne: rates and deductions",
-          "url": "/en/swiss-articles/canton-lucerne-cantonal-taxes-deductions/",
-          "excerpt": "Guide to cantonal and municipal taxes in the Canton of Lucerne with rates, brackets, deductions and official portal of the tax administration.",
-          "date": "2026-08-14T01:47:31.544Z"
         }
       ],
       "latestCantonArticles": [],
@@ -360,7 +360,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-26T11:35:21.204Z"
+      "updatedAt": "2026-10-27T08:29:57.707Z"
     },
     "de": {
       "canton": "LU",
@@ -453,7 +453,7 @@
               "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T21:55:18.630Z"
         }
       ],
       "curatedArticles": [
@@ -468,6 +468,12 @@
           "url": "/de/luzern-artikel/luzern-steuerzinsen-null-2027/",
           "excerpt": "Im Jahr 2027 behält Luzern die Steuersätze bei 0,00%; der Verzug bleibt bei 4,00%.",
           "date": "2026-10-21T13:53:04.510Z"
+        },
+        {
+          "title": "Einwohnerrat entscheidet über Budget 2027 und Kredit für Bahnhof Ost",
+          "url": "/de/luzern-artikel/einwohnerrat-entscheidet-uber-budget-2027-und-kredit-fur-bahnhof-ost/",
+          "excerpt": "Am 17. November 2026 tagt der Einwohnerrat von Ebikon Das Budget 2027 sieht einen Überschuss von CHF 2,14 Millionen vor Der Steuerfuss bleibt bei 2,05 Einheiten",
+          "date": "2026-10-27T08:22:48.687Z"
         },
         {
           "title": "Motion zur Zweitwohnungssteuer in Luzern angenommen",
@@ -498,12 +504,6 @@
           "url": "/de/schweiz-artikel/erbschaftssteuer-schenkungssteuer-luzern-leitfaden/",
           "excerpt": "Vollständiger Leitfaden zur Erbschafts- und Schenkungssteuer im Kanton Luzern. Entdecken Sie die Sätze nach Verwandtschaftsgrad, die Ausnahmen und wie Sie die Erbschaft erklären können.",
           "date": "2026-08-22T12:05:19.300Z"
-        },
-        {
-          "title": "Kantonale Steuern Kanton Luzern: Steuersätze und Abzüge",
-          "url": "/de/schweiz-artikel/kantonssteuern-kanton-luzern-abzuege/",
-          "excerpt": "Leitfaden zu den Kantons- und Gemeindesteuern im Kanton Luzern mit Steuersätzen, Staffelungen, Abzügen und dem offiziellen Portal der Steuerverwaltung.",
-          "date": "2026-08-14T01:47:31.544Z"
         }
       ],
       "latestCantonArticles": [],
@@ -529,7 +529,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-26T11:35:21.204Z"
+      "updatedAt": "2026-10-27T08:29:57.707Z"
     },
     "fr": {
       "canton": "LU",
@@ -622,7 +622,7 @@
               "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T21:55:18.630Z"
         }
       ],
       "curatedArticles": [
@@ -637,6 +637,12 @@
           "url": "/fr/articles-lucerne/lucerne-interets-fiscaux-zero-2027/",
           "excerpt": "En 2027, Lucerne maintient les taux d'imposition à 0,00 % ; les arriérés restent à 4,00 %.",
           "date": "2026-10-21T13:53:04.510Z"
+        },
+        {
+          "title": "L'Einwohnerrat décide du budget 2027 et du crédit Bahnhof Ost",
+          "url": "/fr/articles-lucerne/l-einwohnerrat-decide-du-budget-2027-et-du-credit-bahnhof-ost/",
+          "excerpt": "Le 17 novembre 2026, l'Einwohnerrat d'Ebikon se réunit Le budget 2027 prévoit un excédent de CHF 2,14 millions Le multiplicateur reste à 2,05 unités Bahnhof Ost",
+          "date": "2026-10-27T08:22:48.687Z"
         },
         {
           "title": "Motion sur la taxe sur les résidences secondaires approuvée à Lucerne",
@@ -667,12 +673,6 @@
           "url": "/fr/articles-suisse/impot-succession-donation-lucerne-guide/",
           "excerpt": "Guide complet de l'impôt sur les successions et les donations dans le canton de Lucerne. Découvrez les taux par degré de parenté, les exemptions et comment déclarer l'héritage.",
           "date": "2026-08-22T12:05:19.300Z"
-        },
-        {
-          "title": "Impôts cantonaux canton de Lucerne : taux et déductions",
-          "url": "/fr/articles-suisse/impots-cantonaux-canton-lucerne-baremes/",
-          "excerpt": "Guide des impôts cantonaux et communaux dans le canton de Lucerne avec taux, tranches, déductions et portail officiel de l'administration fiscale.",
-          "date": "2026-08-14T01:47:31.544Z"
         }
       ],
       "latestCantonArticles": [],
@@ -698,7 +698,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-26T11:35:21.204Z"
+      "updatedAt": "2026-10-27T08:29:57.707Z"
     }
   }
 }

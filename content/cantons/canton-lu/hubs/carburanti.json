@@ -4,12 +4,12 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "carburanti",
-  "updatedAt": "2026-10-26T11:35:21.204Z",
-  "contentHash": "1cc0352fb8c7efa9e64c424380581d6eab0bceb8f4a9e0a7e909fd11163777af",
+  "updatedAt": "2026-10-27T08:29:57.707Z",
+  "contentHash": "87f4048b78abafd504140f89d90755e2f284935e95d1a3d428404f748d8e3034",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-25T12:00:24.779Z",
+      "updatedAt": "2026-10-26T13:32:45.792Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-11-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-25T12:00:24.779Z"
+          "updatedAt": "2026-10-26T13:32:45.792Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Einwohnerrat decide budget 2027 e credito Bahnhof Ost",
+          "url": "/articoli-lucerna/einwohnerrat-budget-bahnhof-ost/",
+          "excerpt": "Il 17 novembre 2026 si riunisce l'Einwohnerrat di Ebikon Il budget 2027 prevede un avanzo di CHF 2,14 milioni Il moltiplicatore resta a 2,05 unità Bahnhof Ost",
+          "date": "2026-10-27T08:22:48.687Z"
+        },
         {
           "title": "Mozione sulla tassa per le seconde case approvata a Lucerna",
           "url": "/articoli-lucerna/fluhli-tassa-seconde-case/",
@@ -82,12 +88,6 @@
           "url": "/articoli-lucerna/lucerna-controlli-percorsi-scolastici/",
           "excerpt": "Dopo le vacanze autunnali, la Polizia lucernese ha registrato 480 infrazioni di velocità in un giorno: otto conducenti saranno segnalati alla Staatsanwaltschaft.",
           "date": "2026-10-22T08:28:15.641Z"
-        },
-        {
-          "title": "Lucerna: il Governo risponde all'iniziativa SP",
-          "url": "/articoli-lucerna/lucerna-governo-risposta-sp/",
-          "excerpt": "Nel 2024 solo il 15% delle abitazioni in affitto nel Canton Lucerna era a prezzi accessibili.",
-          "date": "2026-10-22T07:56:30.871Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-26T11:35:21.204Z"
+      "updatedAt": "2026-10-27T08:29:57.707Z"
     },
     "en": {
       "canton": "LU",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-25T12:00:24.779Z"
+          "updatedAt": "2026-10-26T13:32:45.792Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Residents’ Council decides on budget 2027 and Bahnhof Ost credit",
+          "url": "/en/lucerne-articles/residents-council-decides-on-budget-2027-and-bahnhof-ost-credit/",
+          "excerpt": "On 17 November 2026, the Ebikon Residents' Council meets The 2027 budget provides for a surplus of CHF 2,14 million The multiplier remains at 2,05 units Bahnhof",
+          "date": "2026-10-27T08:22:48.687Z"
+        },
         {
           "title": "Motion on the second-home tax approved in Lucerne",
           "url": "/en/lucerne-articles/fluehli-second-home-tax/",
@@ -169,12 +175,6 @@
           "url": "/en/lucerne-articles/lucerne-school-route-speed-checks/",
           "excerpt": "After the autumn holidays, Lucerne police recorded 480 speeding violations in one day: eight drivers will be reported to the public prosecutor’s office.",
           "date": "2026-10-22T08:28:15.641Z"
-        },
-        {
-          "title": "Lucerne: the Government responds to the SP initiative",
-          "url": "/en/lucerne-articles/lucerne-government-sp-response/",
-          "excerpt": "In 2024, only 15% of rental housing in the Canton of Lucerne was affordable.",
-          "date": "2026-10-22T07:56:30.871Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-26T11:35:21.204Z"
+      "updatedAt": "2026-10-27T08:29:57.707Z"
     },
     "de": {
       "canton": "LU",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-25T12:00:24.779Z"
+          "updatedAt": "2026-10-26T13:32:45.792Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Einwohnerrat entscheidet über Budget 2027 und Kredit für Bahnhof Ost",
+          "url": "/de/luzern-artikel/einwohnerrat-entscheidet-uber-budget-2027-und-kredit-fur-bahnhof-ost/",
+          "excerpt": "Am 17. November 2026 tagt der Einwohnerrat von Ebikon Das Budget 2027 sieht einen Überschuss von CHF 2,14 Millionen vor Der Steuerfuss bleibt bei 2,05 Einheiten",
+          "date": "2026-10-27T08:22:48.687Z"
+        },
         {
           "title": "Motion zur Zweitwohnungssteuer in Luzern angenommen",
           "url": "/de/luzern-artikel/fluehli-steuer-zweitwohnungen/",
@@ -256,12 +262,6 @@
           "url": "/de/luzern-artikel/luzern-geschwindigkeitskontrollen-schulwege/",
           "excerpt": "Nach den Herbstferien hat die Luzerner Polizei an einem Tag 480 Geschwindigkeitsüberschreitungen registriert: Acht Lenker werden der Staatsanwaltschaft gemeldet.",
           "date": "2026-10-22T08:28:15.641Z"
-        },
-        {
-          "title": "Luzern: Die Regierung antwortet auf die SP-Initiative",
-          "url": "/de/luzern-artikel/luzern-regierung-sp-antwort/",
-          "excerpt": "Im Jahr 2024 waren im Kanton Luzern nur 15% der Mietwohnungen bezahlbar.",
-          "date": "2026-10-22T07:56:30.871Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-26T11:35:21.204Z"
+      "updatedAt": "2026-10-27T08:29:57.707Z"
     },
     "fr": {
       "canton": "LU",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-25T12:00:24.779Z"
+          "updatedAt": "2026-10-26T13:32:45.792Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "L'Einwohnerrat décide du budget 2027 et du crédit Bahnhof Ost",
+          "url": "/fr/articles-lucerne/l-einwohnerrat-decide-du-budget-2027-et-du-credit-bahnhof-ost/",
+          "excerpt": "Le 17 novembre 2026, l'Einwohnerrat d'Ebikon se réunit Le budget 2027 prévoit un excédent de CHF 2,14 millions Le multiplicateur reste à 2,05 unités Bahnhof Ost",
+          "date": "2026-10-27T08:22:48.687Z"
+        },
         {
           "title": "Motion sur la taxe sur les résidences secondaires approuvée à Lucerne",
           "url": "/fr/articles-lucerne/fluehli-taxe-residences-secondaires/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-lucerne/lucerne-controles-vitesse-trajets-scolaires/",
           "excerpt": "Après les vacances d’automne, la police lucernoise a enregistré 480 infractions de vitesse en une journée : huit conducteurs seront signalés au Ministère public.",
           "date": "2026-10-22T08:28:15.641Z"
-        },
-        {
-          "title": "Lucerne : le gouvernement répond à l’initiative SP",
-          "url": "/fr/articles-lucerne/lucerne-gouvernement-reponse-sp/",
-          "excerpt": "En 2024, seuls 15 % des logements locatifs du canton de Lucerne étaient abordables.",
-          "date": "2026-10-22T07:56:30.871Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-26T11:35:21.204Z"
+      "updatedAt": "2026-10-27T08:29:57.707Z"
     }
   }
 }
