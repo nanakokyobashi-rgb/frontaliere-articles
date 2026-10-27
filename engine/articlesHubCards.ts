@@ -53,11 +53,14 @@ export interface HubCardMeta {
 /**
  * Shared static-card budget for article hubs.
  *
- * Keeping this in the engine makes the site and corpus renderers agree on a
- * bounded grid size. The page-weight audit remains the authoritative check
- * for the complete rendered page, including shell, hero and navigation.
+ * Keeping this in the engine makes the site and corpus renderers agree on the
+ * same page-weight contract. Sixteen cards leave room for the shell, hero,
+ * structured data and navigation while keeping the largest localized hub
+ * below the 260 KB audit ceiling. The shell is already close to that ceiling
+ * on the largest locales, so a larger card count would make the contract
+ * depend on current article text lengths rather than on a bounded payload.
  */
-export const ARTICLE_HUB_CARD_LIMIT = 40;
+export const ARTICLE_HUB_CARD_LIMIT = 16;
 
 export interface RenderArticleHubCardsArgs {
   /** Registry entries, ALREADY sorted newest-first — the order is the caller's. */
@@ -130,11 +133,12 @@ function stripHubMarkdown(value: string): string {
  * The inner HTML of `<div class="ssg-article-grid">` — cards only, no wrapper.
  *
  * The per-card styles are CSS classes rather than inline style attributes:
- * repeated card markup is the dominant variable part of these pages, so the
- * shared 40-card budget bounds the variable grid portion. The complete page
- * remains subject to `scripts/audit-page-weight.mjs`.
+ * Repeated card markup is the dominant variable part of these pages, so the
+ * shared 16-card budget keeps the hub below the page-weight gate (260 KB —
+ * `scripts/audit-page-weight.mjs`) even after the page shell is included.
  * The `.ssg-*` rules live in `public/assets/seo-static.css`, already linked on
- * these pages.
+ * these pages. The renderer test pins the card payload budget; the deploy
+ * audit remains the authority for the complete localized page.
  */
 export function renderArticleHubCards(args: RenderArticleHubCardsArgs): string {
   const { articles, locale, sectionSlug, localePrefix, resolveSlug, resolveMeta, resolveHref } = args;
@@ -142,10 +146,10 @@ export function renderArticleHubCards(args: RenderArticleHubCardsArgs): string {
 
   return articles.slice(0, limit).map((art, idx) => {
     const artSlug = resolveSlug(art.id) ?? art.id;
-    // Trailing slash: the canonical form. Measured today, every card link on
-    // the live hub answers 301 to its own slashed twin — each card therefore
-    // emits the canonical target directly. `resolveMeta` receives both the
-    // article id and path so each caller can choose its own lookup strategy.
+    // Trailing slash: the canonical form. The renderer passes both the stable
+    // article id and the final path to `resolveMeta`: callers may resolve
+    // metadata by id (as the canton renderer does) or by a normalised path (as
+    // the static-page renderer does).
     const artPath = localePrefix
       ? `/${localePrefix}/${sectionSlug}/${artSlug}/`
       : `/${sectionSlug}/${artSlug}/`;
