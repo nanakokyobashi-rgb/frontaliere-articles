@@ -138,4 +138,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'cuira-alloggi-acqua-sursaissa',
+ category: 'novita',
+ date: '2026-10-27T02:19:08.615Z',
+ image: '/images/blog/article-cuira-alloggi-acqua-sursaissa.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['GR'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

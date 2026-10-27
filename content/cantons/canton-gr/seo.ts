@@ -470,6 +470,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-cuira-alloggi-acqua-sursaissa': {
+    title: 'Cuira: voto su alloggi accessibili e controproposta',
+    description: 'A Cuira si vota il 29 novembre su alloggi accessibili e controproposta; Sursaissa Mundaun invita a risparmiare acqua in vista dell\'inverno.',
+    keywords: 'frontalieri, ticino, svizzera, italia, cuira, voto, alloggi, accessibili',
+    ogTitle: 'Cuira: voto su alloggi accessibili e controproposta',
+    ogDescription: 'Il magazine del 26 ottobre 2026 presenta due notizie locali: a Cuira un\'iniziativa lanciata nel 2024 sarà votata insieme a una controproposta; a Sursaissa Mundaun il comune invita a risparmiare acqua, anche in vista dell\'inverno.',
+    canonicalPath: '/articoli-grigioni/cuira-alloggi-acqua-sursaissa/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cuira: voto su alloggi accessibili e controproposta",
+      "description": "A Cuira si vota il 29 novembre su alloggi accessibili e controproposta; Sursaissa Mundaun invita a risparmiare acqua in vista dell'inverno.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-cuira-alloggi-acqua-sursaissa.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-27T02:19:08+00:00",
+      "dateModified": "2026-10-27T02:19:08+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-grigioni/cuira-alloggi-acqua-sursaissa/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

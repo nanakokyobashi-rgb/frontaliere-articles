@@ -39,6 +39,9 @@ const blogMetaCantonGrDe: Record<string, string> = {
     'blog.article.rhb-albula-chiusura-thusis-preda.title': 'RhB sperrt die Albula-Linie zwischen Thusis und Preda',
     'blog.article.rhb-albula-chiusura-thusis-preda.excerpt': 'Die Rhätische Bahn unterbricht den Zugverkehr auf der Albula-Linie zwischen Thusis und Preda vom 29.',
     'blog.article.rhb-albula-chiusura-thusis-preda.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.cuira-alloggi-acqua-sursaissa.title': 'Cuira: Abstimmung über bezahlbaren Wohnraum und Gegenvorschlag',
+    'blog.article.cuira-alloggi-acqua-sursaissa.excerpt': 'Die Bevölkerung von Cuira wird am 29.',
+    'blog.article.cuira-alloggi-acqua-sursaissa.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonGrDe;

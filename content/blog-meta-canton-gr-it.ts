@@ -39,6 +39,9 @@ const blogMetaCantonGrIt: Record<string, string> = {
     'blog.article.rhb-albula-chiusura-thusis-preda.title': 'RhB chiude la linea dell\'Albula tra Thusis e Preda',
     'blog.article.rhb-albula-chiusura-thusis-preda.excerpt': 'La Rhätische Bahn interrompe il traffico ferroviario sulla linea dell\'Albula tra Thusis e Preda dal 29 ottobre al 13 novembre per lavori di costruzione.',
     'blog.article.rhb-albula-chiusura-thusis-preda.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.cuira-alloggi-acqua-sursaissa.title': 'Cuira: voto su alloggi accessibili e controproposta',
+    'blog.article.cuira-alloggi-acqua-sursaissa.excerpt': 'La popolazione di Cuira voterà il 29 novembre su «abitar pajabel a Cuira» e una controproposta; a Sursaissa Mundaun si chiede di risparmiare acqua.',
+    'blog.article.cuira-alloggi-acqua-sursaissa.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonGrIt;
