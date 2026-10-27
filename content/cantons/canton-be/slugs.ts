@@ -22,6 +22,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'energy-tagli-radio-svizzera': { it: 'energy-tagli-radio-svizzera', en: 'energy-radio-cuts-switzerland', de: 'energy-radio-stellenabbau-schweiz', fr: 'energy-radio-suppressions-suisse' },
  'contributi-rotbach-saanen': { it: 'contributi-rotbach-saanen', en: 'bern-contributions-rotbach-saanen', de: 'bern-beitraege-rotbach-saanen', fr: 'berne-contributions-rotbach-saanen' },
  'nuove-funzioni-piano-digitale': { it: 'nuove-funzioni-piano-digitale', en: 'new-digital-city-plan-functions', de: 'neue-funktionen-digitaler-stadtplan', fr: 'nouvelles-fonctions-plan-digital' },
+ 'ramsei-taglio-sicurezza-strada': { it: 'ramsei-taglio-sicurezza-strada', en: 'ramsei-safety-logging-road', de: 'ramsei-sicherheitsholzerei-strasse', fr: 'ramsei-abattage-securite-route' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

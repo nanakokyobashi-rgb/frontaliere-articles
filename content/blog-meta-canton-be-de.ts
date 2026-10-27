@@ -60,6 +60,9 @@ const blogMetaCantonBeDe: Record<string, string> = {
     'blog.article.nuove-funzioni-piano-digitale.title': 'Neue Funktionen im digitalen Plan der Stadt Bern',
     'blog.article.nuove-funzioni-piano-digitale.excerpt': 'Ab dem 26. Oktober 2026 neue Inhalte im digitalen Plan Offizielle Namen unter «Nomenklatur» sichtbar Kostenloser Download über das Geoportal der Stadt',
     'blog.article.nuove-funzioni-piano-digitale.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.ramsei-taglio-sicurezza-strada.title': 'Lützelflüh: Sicherheitsholzerei, Verkehr auf einer Fahrspur',
+    'blog.article.ramsei-taglio-sicurezza-strada.excerpt': 'In Ramsei, in der Gemeinde Lützelflüh, wird die Sumiswaldstrasse in Richtung Sumiswald vom 2.',
+    'blog.article.ramsei-taglio-sicurezza-strada.imageAlt': 'Sumiswaldstrasse in Ramsei mit einspuriger Verkehrsführung bei Sicherheitsholzerei',
 };
 
 export default blogMetaCantonBeDe;

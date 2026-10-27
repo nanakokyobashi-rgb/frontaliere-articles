@@ -215,4 +215,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'ramsei-taglio-sicurezza-strada',
+ category: 'pratico',
+ date: '2026-10-27T07:13:00.993Z',
+ image: '/images/blog/article-ramsei-taglio-sicurezza-strada.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['BE'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

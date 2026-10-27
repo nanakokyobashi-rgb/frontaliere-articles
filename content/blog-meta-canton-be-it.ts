@@ -60,6 +60,9 @@ const blogMetaCantonBeIt: Record<string, string> = {
     'blog.article.nuove-funzioni-piano-digitale.title': 'Nuove funzioni nel piano digitale della città di Berna',
     'blog.article.nuove-funzioni-piano-digitale.excerpt': 'Dal 26 ottobre 2026 nuovi contenuti nel piano digitale Nomi ufficiali visibili sotto «Nomenclatura» Download gratuito dal Geoportale della città Aggiornati nomi',
     'blog.article.nuove-funzioni-piano-digitale.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.ramsei-taglio-sicurezza-strada.title': 'Lützelflüh: taglio di sicurezza, traffico su una corsia',
+    'blog.article.ramsei-taglio-sicurezza-strada.excerpt': 'A Ramsei, nel comune di Lützelflüh, la Sumiswaldstrasse verso Sumiswald sarà gestita su una corsia dal 2 al 13 novembre 2026, con semaforo.',
+    'blog.article.ramsei-taglio-sicurezza-strada.imageAlt': 'Sumiswaldstrasse a Ramsei con traffico regolato nel bosco durante il taglio di sicurezza',
 };
 
 export default blogMetaCantonBeIt;

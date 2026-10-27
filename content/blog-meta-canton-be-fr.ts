@@ -60,6 +60,9 @@ const blogMetaCantonBeFr: Record<string, string> = {
     'blog.article.nuove-funzioni-piano-digitale.title': 'Nouvelles fonctions dans le plan numérique de la ville de Berne',
     'blog.article.nuove-funzioni-piano-digitale.excerpt': 'À partir du 26 octobre 2026, nouveaux contenus dans le plan numérique Noms officiels visibles sous « Nomenclature » Téléchargement gratuit depuis le géoportail',
     'blog.article.nuove-funzioni-piano-digitale.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.ramsei-taglio-sicurezza-strada.title': 'Lützelflüh : coupe de sécurité, circulation sur une voie',
+    'blog.article.ramsei-taglio-sicurezza-strada.excerpt': 'À Ramsei, dans la commune de Lützelflüh, la Sumiswaldstrasse en direction de Sumiswald sera gérée sur une voie du 2 au 13 novembre 2026, avec des feux de signalisation.',
+    'blog.article.ramsei-taglio-sicurezza-strada.imageAlt': 'Sumiswaldstrasse à Ramsei avec circulation sur une voie pendant l\'abattage de sécurité',
 };
 
 export default blogMetaCantonBeFr;

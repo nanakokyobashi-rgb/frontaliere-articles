@@ -60,6 +60,9 @@ const blogMetaCantonBeEn: Record<string, string> = {
     'blog.article.nuove-funzioni-piano-digitale.title': 'New features in the digital plan of the city of Bern',
     'blog.article.nuove-funzioni-piano-digitale.excerpt': 'From 26 October 2026, new content in the digital plan Official names visible under «Nomenclature» Free download from the city’s Geoportal Street names',
     'blog.article.nuove-funzioni-piano-digitale.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.ramsei-taglio-sicurezza-strada.title': 'Lützelflüh: safety tree felling, traffic on one lane',
+    'blog.article.ramsei-taglio-sicurezza-strada.excerpt': 'In Ramsei, in the municipality of Lützelflüh, Sumiswaldstrasse toward Sumiswald will be operated on a single lane from November 2 to 13, 2026, with traffic lights.',
+    'blog.article.ramsei-taglio-sicurezza-strada.imageAlt': 'Sumiswaldstrasse in Ramsei with one-lane traffic during safety logging',
 };
 
 export default blogMetaCantonBeEn;

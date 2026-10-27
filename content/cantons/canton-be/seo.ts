@@ -738,6 +738,40 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-ramsei-taglio-sicurezza-strada': {
+    title: 'Lützelflüh: taglio di sicurezza, traffico su una corsia',
+    description: 'A Ramsei, nel comune di Lützelflüh, la Sumiswaldstrasse verso Sumiswald sarà gestita su una corsia dal 2 al 13 novembre 2026, con semaforo.',
+    keywords: 'frontalieri, ticino, svizzera, italia, lützelflüh, taglio, sicurezza, traffico',
+    ogTitle: 'Ramsei: traffico su una corsia dal 2 novembre',
+    ogDescription: 'Un intervento di taglio di sicurezza nel Ramseibergwald modifica la circolazione a Ramsei: la Sumiswaldstrasse verso Sumiswald sarà chiusa, con traffico su una corsia, semaforo, passaggio di 3,50 metri e velocità segnalata di 50 km/h.',
+    canonicalPath: '/articoli-berna/ramsei-taglio-sicurezza-strada/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lützelflüh: taglio di sicurezza, traffico su una corsia",
+      "description": "A Ramsei, nel comune di Lützelflüh, la Sumiswaldstrasse verso Sumiswald sarà gestita su una corsia dal 2 al 13 novembre 2026, con semaforo.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/article-ramsei-taglio-sicurezza-strada.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sumiswaldstrasse a Ramsei con traffico regolato nel bosco durante il taglio di sicurezza"
+      },
+      "datePublished": "2026-10-27T07:13:01+00:00",
+      "dateModified": "2026-10-27T07:13:01+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-berna/ramsei-taglio-sicurezza-strada/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

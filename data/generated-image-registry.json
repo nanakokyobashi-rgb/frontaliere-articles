@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "assetCount": 976,
+  "assetCount": 977,
   "assets": [
     {
       "schema": 1,
@@ -40116,6 +40116,57 @@
         "is_photograph": false,
         "is_topic_relevant": true,
         "notes": "Generic synthetic editorial scene of civic development and construction, relevant to public investment and taxation."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-ramsei-taglio-sicurezza-strada",
+      "kind": "photo",
+      "provider": "pexels",
+      "model": "Pexels photo search",
+      "executorModel": "Pexels photo search",
+      "license": "Pexels License",
+      "licenseFamily": "pexels",
+      "licenseUrl": "https://www.pexels.com/license/",
+      "credit": "René Lussi · Pexels",
+      "author": {
+        "name": "René Lussi",
+        "url": "https://www.pexels.com/@rene-lussi-952617944"
+      },
+      "sourcePageUrl": "https://www.pexels.com/photo/road-barrier-in-scenic-swiss-countryside-37557132/",
+      "sourceImageUrl": "https://images.pexels.com/photos/37557132/pexels-photo-37557132.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "sourceWidth": 7008,
+      "sourceHeight": 4672,
+      "photoTitle": "Road barrier against lush green landscape in Alpnach, Switzerland under a bright blue sky.",
+      "copyrightNotice": "© René Lussi",
+      "acquireLicensePage": "https://www.pexels.com/photo/road-barrier-in-scenic-swiss-countryside-37557132/",
+      "sha256": "9da405f99a72be613e12f1dfc8cc79b529678d09070e963229c1c27d7cbe8113",
+      "bytes": 190806,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-10-27T07:12:49.135Z",
+      "verifiedAt": "2026-10-27T07:13:00.922Z",
+      "restrictions": [
+        "licensed-source",
+        "no-recognizable-foreground-person",
+        "no-logo-brand-or-trademark"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-ramsei-taglio-sicurezza-strada.webp",
+      "area": "Swiss border region",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "contains_recognizable_foreground_person": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": true,
+        "is_topic_relevant": true,
+        "notes": "Photorealistic rural Swiss road scene with a temporary red-white safety marker; no people, logos, watermarks, or readable text."
       }
     }
   ]
