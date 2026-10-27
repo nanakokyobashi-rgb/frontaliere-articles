@@ -28,6 +28,7 @@ import {
   RC_FETCH_TIMEOUT_MS,
   shouldExportRcValue,
   rcValueState,
+  instagramInsightsValuePolicy,
 } from '../scripts/load-rc-env.mjs';
 import { TOKEN_EXCHANGE_TIMEOUT_MS, extractOAuthErrorReason, isRetryableTokenExchangeStatus } from '../scripts/lib/google-service-account-token.mjs';
 import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from '../scripts/lib/fetch-with-ref-timeout.mjs';
@@ -159,6 +160,40 @@ test('il ponte RC espone le credenziali dei canali social al runtime locale', ()
     assert.deepEqual(RC_TO_ENV[key], envKeys, `${key} deve raggiungere il runtime`);
     assert.equal(EXPECTED_ABSENT_RC_KEYS.has(key), true, `${key} deve essere assente prevista finché il canale non è configurato`);
   }
+});
+
+test('Instagram Insights tratta vuoto e assenza come fail-closed per ogni controllo', () => {
+  const emptyMeanings = {
+    SOCIAL_ROBOT_INSIGHTS_SOURCE: 'disabled-source',
+    INSTAGRAM_INSIGHTS_WINDOWS: 'no-windows',
+    INSTAGRAM_INSIGHTS_DECISION_WINDOW_HOURS: 'disabled-window',
+    INSTAGRAM_INSIGHTS_AUTONOMOUS_DECISIONS_ENABLED: 'disabled',
+    INSTAGRAM_INSIGHTS_MIN_OBSERVATIONS: 'disabled-observation-gate',
+    INSTAGRAM_INSIGHTS_MIN_RELATIVE_LIFT: 'disabled-relative-lift-gate',
+    INSTAGRAM_INSIGHTS_MIN_ABSOLUTE_LIFT: 'disabled-absolute-lift-gate',
+    INSTAGRAM_AUTONOMOUS_EXPLORATION_PERCENT: 'zero-exploration',
+    INSTAGRAM_AUTONOMOUS_CREATIVE_WINNERS: 'empty-winner-set',
+    INSTAGRAM_CAROUSEL_BACKGROUND_AB_ENABLED: 'disabled',
+    INSTAGRAM_CAROUSEL_BACKGROUND_AB_ROLLOUT_PERCENT: 'zero-rollout',
+    INSTAGRAM_CAROUSEL_BACKGROUND_AB_VARIANTS: 'empty-variant-set',
+    INSTAGRAM_CAROUSEL_BACKGROUND_AB_EXPLORATION_PERCENT: 'zero-exploration',
+    INSTAGRAM_CAROUSEL_BACKGROUND_AB_WINNERS: 'empty-winner-set',
+  };
+
+  for (const [key, emptyMeaning] of Object.entries(emptyMeanings)) {
+    assert.deepEqual(instagramInsightsValuePolicy(key), {
+      absent: 'fail-closed',
+      empty: 'fail-closed',
+      emptyMeaning,
+    }, `${key} deve dichiarare il contratto vuoto/assenza`);
+    assert.equal(rcValueState(null, key), 'expected-absent', `${key}: assente deve essere fail-closed`);
+    assert.equal(rcValueState('', key), 'expected-absent', `${key}: vuoto deve essere fail-closed`);
+    assert.equal(shouldExportRcValue(null, key), false, `${key}: assente non va esportata`);
+    assert.equal(shouldExportRcValue('', key), false, `${key}: vuoto non va esportato`);
+    assert.equal(shouldExportRcValue('0', key), true, `${key}: un valore esplicito non vuoto resta disponibile al consumer`);
+  }
+
+  assert.equal(instagramInsightsValuePolicy('INSTAGRAM_USERNAME'), null);
 });
 
 test('il fallback legacy non sovrascrive il token LSA già accodato', () => {
