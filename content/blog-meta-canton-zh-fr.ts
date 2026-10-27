@@ -63,6 +63,9 @@ const blogMetaCantonZhFr: Record<string, string> = {
     'blog.article.seconda-fattura-goldkueste.title': 'Goldküste : l\'épouse reçoit une deuxième facture fiscale',
     'blog.article.seconda-fattura-goldkueste.excerpt': 'Sur la Goldküste, une épouse reçoit une deuxième facture fiscale après l\'entrée de son mari gravement malade dans un établissement de soins.',
     'blog.article.seconda-fattura-goldkueste.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.spital-wetzikon-decisione-mercoled.title': 'Spital Wetzikon : décision cruciale ce mercredi',
+    'blog.article.spital-wetzikon-decisione-mercoled.excerpt': 'Les créanciers menacent la faillite du Spital Wetzikon en vue de la décision qualifiée de décisive de ce mercredi.',
+    'blog.article.spital-wetzikon-decisione-mercoled.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonZhFr;

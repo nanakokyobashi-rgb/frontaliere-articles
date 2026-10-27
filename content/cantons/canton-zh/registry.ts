@@ -226,4 +226,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'spital-wetzikon-decisione-mercoled',
+ category: 'novita',
+ date: '2026-10-27T12:35:50.775Z',
+ image: '/images/blog/article-spital-wetzikon-decisione-mercoled.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['ZH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
