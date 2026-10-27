@@ -22,6 +22,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'appenzello-cooperazione-strategica-2024': { it: 'appenzello-cooperazione-strategica-2024', en: 'appenzell-strategic-cooperation-2024', de: 'appenzell-strategische-zusammenarbeit', fr: 'appenzell-cooperation-strategique-2024' },
  'rbh-herisau-piu-risorse': { it: 'rbh-herisau-piu-risorse', en: 'herisau-rbh-more-resources', de: 'herisau-rbh-mehr-ressourcen', fr: 'herisau-rbh-plus-ressources' },
  'credito-pfas-appenzello': { it: 'credito-pfas-appenzello', en: 'appenzell-ausserrhoden-pfas-credit', de: 'appenzell-ausserrhoden-pfas-kredit', fr: 'appenzell-exterieur-credit-pfas' },
+ 'teufen-ricorso-progetto-bundt': { it: 'teufen-ricorso-progetto-bundt', en: 'teufen-bundt-project-appeal', de: 'teufen-buendt-projekt-beschwerde', fr: 'teufen-recours-projet-buendt' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

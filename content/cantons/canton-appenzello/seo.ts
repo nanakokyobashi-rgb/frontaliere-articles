@@ -743,6 +743,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-teufen-ricorso-progetto-bundt': {
+    title: 'Teufen: accolto in parte il ricorso sul progetto Bündt',
+    description: 'Il tribunale superiore dell\'Appenzello Esterno accoglie in parte il ricorso degli abitanti contro il progetto stradale Bündt.',
+    keywords: 'frontalieri, ticino, svizzera, italia, teufen, accolto, parte, ricorso',
+    ogTitle: 'Teufen: ricorso accolto in parte sul progetto Bündt',
+    ogDescription: 'Il progetto prevede il prolungamento della Fadenrainstrasse e il collegamento con la Bündtstrasse. Dopo il ricorso degli abitanti accolto in parte, il Comune di Teufen lo considera non attuabile nella forma attuale.',
+    canonicalPath: '/articoli-appenzello/teufen-ricorso-progetto-bundt/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Teufen: accolto in parte il ricorso sul progetto Bündt",
+      "description": "Il tribunale superiore dell'Appenzello Esterno accoglie in parte il ricorso degli abitanti contro il progetto stradale Bündt.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-teufen-ricorso-progetto-bundt.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-27T20:08:13+00:00",
+      "dateModified": "2026-10-27T20:08:13+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-appenzello/teufen-ricorso-progetto-bundt/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
