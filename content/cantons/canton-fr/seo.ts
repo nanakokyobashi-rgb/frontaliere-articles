@@ -738,6 +738,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-elezione-consiglio-prefetture-lista-unica': {
+    title: 'Elezione Consiglio di Stato e prefetture su lista unica',
+    description: 'Il materiale di voto è attualmente in distribuzione. Il nuovo sistema riguarda Consiglio di Stato e prefetture. Va spuntato il nome dei candidati',
+    keywords: 'frontalieri, ticino, svizzera, italia, elezione, consiglio, stato, prefetture',
+    ogTitle: 'Elezione Consiglio di Stato e prefetture lista unica',
+    ogDescription: 'Il materiale di voto è attualmente in distribuzione.',
+    canonicalPath: '/articoli-friburgo/elezione-consiglio-prefetture-lista-unica/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Elezione Consiglio di Stato e prefetture su lista unica",
+      "description": "Il materiale di voto è attualmente in distribuzione. Il nuovo sistema riguarda Consiglio di Stato e prefetture. Va spuntato il nome dei candidati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-elezione-consiglio-prefetture-lista-unica.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-27T02:55:55+00:00",
+      "dateModified": "2026-10-27T02:55:55+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-friburgo/elezione-consiglio-prefetture-lista-unica/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

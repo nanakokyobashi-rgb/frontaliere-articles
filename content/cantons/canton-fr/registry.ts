@@ -215,4 +215,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'elezione-consiglio-prefetture-lista-unica',
+ category: 'novita',
+ date: '2026-10-27T02:55:55.536Z',
+ image: '/images/blog/article-elezione-consiglio-prefetture-lista-unica.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['FR'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

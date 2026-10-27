@@ -60,6 +60,9 @@ const blogMetaCantonFrDe: Record<string, string> = {
     'blog.article.incidente-matran-friburgo.title': 'Vier Fahrzeuge: Verkehr zwischen Matran und Freiburg blockiert',
     'blog.article.incidente-matran-friburgo.excerpt': 'Ein Unfall mit vier Fahrzeugen blockierte die Autobahn zwischen Matran und Freiburg für mehr als drei Stunden.',
     'blog.article.incidente-matran-friburgo.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.elezione-consiglio-prefetture-lista-unica.title': 'Wahl des Staatsrats und der Präfekturen mit einer Einheitsliste',
+    'blog.article.elezione-consiglio-prefetture-lista-unica.excerpt': 'Das Wahlmaterial wird derzeit verteilt.',
+    'blog.article.elezione-consiglio-prefetture-lista-unica.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonFrDe;

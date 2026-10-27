@@ -60,6 +60,9 @@ const blogMetaCantonFrEn: Record<string, string> = {
     'blog.article.incidente-matran-friburgo.title': 'Four vehicles: traffic blocked between Matran and Fribourg',
     'blog.article.incidente-matran-friburgo.excerpt': 'An accident involving four vehicles blocked the highway between Matran and Fribourg for over three hours.',
     'blog.article.incidente-matran-friburgo.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.elezione-consiglio-prefetture-lista-unica.title': 'Election of the Council of State and prefectures on a single list',
+    'blog.article.elezione-consiglio-prefetture-lista-unica.excerpt': 'The voting material is currently being distributed.',
+    'blog.article.elezione-consiglio-prefetture-lista-unica.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonFrEn;
