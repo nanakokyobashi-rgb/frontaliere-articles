@@ -1701,6 +1701,21 @@ test('publish-api: osserva tutta la chiusura degli import del publisher, e pubbl
   assert.match(wf, /git checkout --detach "\$current_main"/);
   assert.match(wf, /PUBLISH_API_SOURCE_COMMIT=\$current_main/);
   assert.match(wf, /nessun input publish-api nel delta/);
+  assert.match(wf, /PUBLISH_SOURCE_GUARD:/);
+  assert.equal(
+    (wf.match(/bash -c "\$PUBLISH_SOURCE_GUARD"/g) || []).length,
+    4,
+    'la stessa guardia deve precedere cover, Pages, upload edge e flip edge',
+  );
+  const pagesGuard = wf.indexOf('Verify source is still current before Pages deploy');
+  const pagesDeploy = wf.indexOf('uses: actions/deploy-pages@v5');
+  const edgeGuard = wf.indexOf('Verify source is still current before edge upload');
+  const edgeUpload = wf.indexOf('Push the article sitemaps and the blog index to the edge');
+  const edgeFlipGuard = wf.indexOf('Verify source is still current before edge flip');
+  const edgeFlip = wf.indexOf('Publish the canton sections release to the edge');
+  assert.ok(pagesGuard >= 0 && pagesGuard < pagesDeploy, 'la guardia Pages deve precedere deploy-pages');
+  assert.ok(edgeGuard >= 0 && edgeGuard < edgeUpload, 'la guardia edge deve precedere upload/purge');
+  assert.ok(edgeFlipGuard >= 0 && edgeFlipGuard < edgeFlip, 'la guardia finale deve precedere il flip edge');
   assert.match(wf, /Verify source is still current before edge flip/);
   const filters = [...wf.slice(0, wf.indexOf('\n  schedule:')).matchAll(/^      - '([^']+)'$/gm)].map((m) => m[1]);
   const covered = (file) => filters.some((p) => p === file || (p.endsWith('/**') && file.startsWith(p.slice(0, -2))));

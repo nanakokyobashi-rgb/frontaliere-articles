@@ -198,6 +198,30 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    # The same fail-closed freshness guard is called immediately before each
+    # irreversible publication below. Keeping its source in one job-level
+    # value prevents one publish path from drifting away from the others.
+    env:
+      PUBLISH_SOURCE_GUARD: |
+        set -euo pipefail
+        published_source="${PUBLISH_API_SOURCE_COMMIT:-${PUBLISHED_SOURCE_COMMIT:-}}"
+        if ! [[ "$published_source" =~ ^[a-f0-9]{40}$ ]]; then
+          echo "::error::identita' della sorgente pubblicata non verificabile: $published_source"
+          exit 1
+        fi
+        if ! current_main="$(timeout --kill-after=1s 60s gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq '.object.sha')"; then
+          echo "::error::impossibile verificare la HEAD corrente di main prima della pubblicazione irreversibile"
+          exit 1
+        fi
+        if ! [[ "$current_main" =~ ^[a-f0-9]{40}$ ]]; then
+          echo "::error::HEAD corrente di main non valida prima della pubblicazione irreversibile: $current_main"
+          exit 1
+        fi
+        if [ "$current_main" != "$published_source" ]; then
+          echo "::error::publish superato prima della pubblicazione irreversibile: source=$published_source main=$current_main"
+          exit 1
+        fi
+        echo "sorgente ancora corrente prima della pubblicazione irreversibile: $published_source"
     # MISURATO 2026-08-09: la run riuscita piu' recente (31315163937) impiega 44s
     # in totale, di cui 6s per "Build data surface" e 22s per la spinta all'edge.
     # Il budget esteso copre l'attesa bounded dei bootstrap, lo staging edge e il
@@ -1087,6 +1111,7 @@ jobs:
             push_queue_commit
           fi
 
+          bash -c "$PUBLISH_SOURCE_GUARD"
           mapfile -t manifest_entries < "$manifest_file"
           if [ "${#manifest_entries[@]}" -eq 0 ]; then
             if [ "$EVENT_NAME" = 'push' ] && { [ -z "${BEFORE:-}" ] || [[ "$BEFORE" =~ ^0+$ ]]; }; then
@@ -1164,8 +1189,19 @@ jobs:
         with:
           path: dist/api
 
+      - name: Verify source is still current before Pages deploy
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash -c "$PUBLISH_SOURCE_GUARD"
+
       - id: deploy
         uses: actions/deploy-pages@v5
+
+      - name: Verify source is still current before edge upload
+        if: steps.deploy.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash -c "$PUBLISH_SOURCE_GUARD"
 
       # Push the article sitemaps straight to the edge.
       #
@@ -1277,21 +1313,7 @@ jobs:
           REPOSITORY: ${{ github.repository }}
           PUBLISHED_SOURCE_COMMIT: ${{ inputs.source_commit || github.sha }}
         run: |
-          set -euo pipefail
-          if ! current_main="$(timeout --kill-after=1s 60s gh api "repos/$REPOSITORY/git/ref/heads/main" --jq '.object.sha')"; then
-            echo "::error::impossibile verificare la HEAD corrente di main prima del flip edge"
-            exit 1
-          fi
-          published_source="${PUBLISH_API_SOURCE_COMMIT:-$PUBLISHED_SOURCE_COMMIT}"
-          if ! [[ "$current_main" =~ ^[a-f0-9]{40}$ ]] || ! [[ "$published_source" =~ ^[a-f0-9]{40}$ ]]; then
-            echo "::error::identita' della sorgente non verificabile prima del flip edge (source=$published_source main=$current_main)"
-            exit 1
-          fi
-          if [ "$current_main" != "$published_source" ]; then
-            echo "::error::publish superato durante il build: source=$published_source main=$current_main; salto il flip edge e lascio il run successivo riallineare la superficie"
-            exit 1
-          fi
-          echo "sorgente ancora corrente prima del flip edge: $published_source"
+          bash -c "$PUBLISH_SOURCE_GUARD"
 
       # La release edge delle sezioni cantonali (piano «sezioni articoli per
       # cantone», P7). Lo stato servito (live|draft|retired) ha UNA sola fonte:

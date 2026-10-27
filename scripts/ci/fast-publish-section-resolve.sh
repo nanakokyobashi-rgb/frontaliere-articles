@@ -165,8 +165,15 @@ if [ -n "$pinned_source" ]; then
       if [ -z "$nonce_seed" ]; then
         nonce_seed='stale-resolve'
       fi
-      nonce_hash="$(printf '%s\0%s\0%s\0%s' "$nonce_seed" "$current_main" "$section" "$coordinated_recovery" | sha256sum | cut -c1-16)"
-      dispatch_nonce="stale-resolve-${current_main:0:12}-${section}-${nonce_hash}"
+      if [ "$coordinated_recovery" = 'true' ] && [ -n "$dispatch_nonce" ]; then
+        # A coordinator already registered this child under its nonce. Keep
+        # that title when handing off a pinned child: the coordinator must
+        # observe the replacement run, not wait forever for the stale one.
+        echo "::notice::handoff stale coordinato per $section: riuso il nonce del coordinator"
+      else
+        nonce_hash="$(printf '%s\0%s\0%s\0%s' "$nonce_seed" "$current_main" "$section" "$coordinated_recovery" | sha256sum | cut -c1-16)"
+        dispatch_nonce="stale-resolve-${current_main:0:12}-${section}-${nonce_hash}"
+      fi
       dispatch_title="cover-publish-section / ${section} / nonce=${dispatch_nonce}"
       if bash .replay-dispatcher-source/scripts/ci/dispatch-fast-publish-replay.sh "$REPO" "$dispatch_title" --ref main \
         -f section="$section" \

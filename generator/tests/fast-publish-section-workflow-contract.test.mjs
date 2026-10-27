@@ -14,6 +14,10 @@ const render = readFileSync(
   new URL('../../scripts/ci/fast-publish-section-render.sh', import.meta.url),
   'utf8',
 );
+const recovery = readFileSync(
+  new URL('../../scripts/ci/fast-publish-section-recovery.sh', import.meta.url),
+  'utf8',
+);
 
 function triggerBlock(name) {
   const start = workflow.indexOf(`\n  ${name}:`);
@@ -144,4 +148,23 @@ test('una gara stale consegna la sezione al coordinatore senza dichiarare una pu
   );
   assert.match(workflow, /steps\.replay_freshness\.outputs\.current_main \|\| needs\.publish_release_head\.outputs\.rendered_head/u);
   assert.match(workflow, /steps\.replay_freshness\.outputs\.fresh == 'false'[\s\S]*needs\.publish_release_head\.outputs\.mixed_matrix == 'true'/u);
+});
+
+test('un handoff stale coordinato resta osservabile dalla barriera sulla nuova HEAD', () => {
+  assert.match(
+    recovery,
+    /rebuild_recovery_for_head\(\)[\s\S]*git checkout --detach "\$next_head"[\s\S]*dispatch_children/u,
+  );
+  assert.match(
+    recovery,
+    /read-main-head\.sh[\s\S]*main e' avanzata durante la barriera[\s\S]*rebuild_recovery_for_head/u,
+  );
+  assert.match(
+    recovery,
+    /stale_handoff_head[\s\S]*evidence_handoff_head[\s\S]*return 3/u,
+  );
+  assert.match(
+    resolver,
+    /coordinated_recovery.*true.*dispatch_nonce[\s\S]*riuso il nonce del coordinator/u,
+  );
 });
