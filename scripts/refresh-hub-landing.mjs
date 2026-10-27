@@ -183,7 +183,12 @@ const shardOwners = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/lib/sect
 
 // GRID_OPEN comes from the engine rather than being restated here: it is the
 // literal both emitters agree on, and a second copy is how they stop agreeing.
-const { renderArticleHubCards, ensureArticleHubCards, ARTICLE_HUB_GRID_OPEN: GRID_OPEN } =
+const {
+  renderArticleHubCards,
+  ensureArticleHubCards,
+  ARTICLE_HUB_CARD_LIMIT,
+  ARTICLE_HUB_GRID_OPEN: GRID_OPEN,
+} =
   await import('../engine/articlesHubCards.ts');
 const { rewriteBlogImageRefs, hasBlogImageLeak } = await import('../engine/blogImageCdnFinalize.ts');
 
@@ -400,8 +405,8 @@ for (const section of SECTIONS) {
     // map for those ids and renders them properly, so publishing a degraded
     // grid would replace good titles with bad ones on every article, and the
     // next full deploy would put them back: a flip-flop nobody asked for.
-    // Measured before this gate: 10 IT and 16 FR of the newest 100 had no
-    // corpus meta. Better to leave the page as it is and say so.
+    // This gate covers the same ARTICLE_HUB_CARD_LIMIT candidates that the
+    // renderer emits. Better to leave the page as it is and say so.
     let missing = 0;
     const resolveMeta = (id, artPath) => {
       const fromSeo = seoMap.get(seoKey(artPath));
@@ -422,7 +427,7 @@ for (const section of SECTIONS) {
       resolveHref: resolveArticleHref,
     });
     if (missing > 0) {
-      console.error(`[hub-landing] ${section.name}/${locale}: ${missing} of the top 40 have no title in either source — refusing to publish a degraded grid`);
+      console.error(`[hub-landing] ${section.name}/${locale}: ${missing} of the top ${ARTICLE_HUB_CARD_LIMIT} have no title in either source — refusing to publish a degraded grid`);
       skipped++;
       continue;
     }
