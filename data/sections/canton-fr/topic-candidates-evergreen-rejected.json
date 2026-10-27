@@ -15,6 +15,10 @@
     "canton-fr::https://www.freiburger-nachrichten.ch/story/300285/autobahn-a12-zwischen-matran-und-freiburgs%c3%bcd-gesperrt": {
       "section": "canton-fr",
       "ts": 1793037214793
+    },
+    "canton-fr::https://www.freiburger-nachrichten.ch/story/300285/autobahn-a12-zwischen-matran-und-freiburgs%c3%bcd-wieder-offen": {
+      "section": "canton-fr",
+      "ts": 1793058692714
     }
   }
 }
