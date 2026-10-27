@@ -4,8 +4,8 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "fisco",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "9ea6815251108b0f9551382e1f2fa5625f307f6513942861d5dcb832a66b6e76",
+  "updatedAt": "2026-10-27T03:06:42.388Z",
+  "contentHash": "ad44470894effcb09cd801c1f03f5f9142860b6edfca04bf0ca1416f88c7b123",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -102,6 +102,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Governo SH rinuncia a previsioni fiscali decennali",
+          "url": "/articoli-sciaffusa/governo-sh-previsioni-fiscali/",
+          "excerpt": "Il Governo del Canton Sciaffusa non può elaborare previsioni fiscali affidabili per il periodo 2031-2035; la campagna Beforemore resta attiva fino al 15 novembre.",
+          "date": "2026-10-27T02:57:10.663Z"
+        },
+        {
           "title": "Governo di Sciaffusa: budget 2027 corretto, conti in rosso",
           "url": "/articoli-sciaffusa/sciaffusa-budget-correzione/",
           "excerpt": "Il Governo di Sciaffusa ha corretto di 2,2 milioni di franchi il budget 2027; i conti dovrebbero comunque chiudere in rosso.",
@@ -153,7 +159,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-27T03:06:42.388Z"
     },
     "en": {
       "canton": "SH",
@@ -238,6 +244,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "SH government abandons ten-year fiscal forecasts",
+          "url": "/en/schaffhausen-articles/sh-government-fiscal-forecasts/",
+          "excerpt": "The Government of the Canton of Schaffhausen cannot produce reliable tax forecasts for the period 2031-2035; the Beforemore campaign remains active until November 15.",
+          "date": "2026-10-27T02:57:10.663Z"
+        },
+        {
           "title": "Government of Schaffhausen: 2027 budget corrected, accounts in the red",
           "url": "/en/schaffhausen-articles/schaffhausen-budget-correction/",
           "excerpt": "The Government of Schaffhausen revised the 2027 budget by 2,2 million francs; the accounts should nevertheless close in the red.",
@@ -289,7 +301,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-27T03:06:42.388Z"
     },
     "de": {
       "canton": "SH",
@@ -374,6 +386,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Regierung SH verzichtet auf zehnjährige Steuerprognosen",
+          "url": "/de/schaffhausen-artikel/sh-regierung-steuerprognosen/",
+          "excerpt": "Die Regierung des Kantons Schaffhausen kann für den Zeitraum 2031-2035 keine verlässlichen Steuerprognosen erstellen; die Kampagne Beforemore bleibt bis zum 15.",
+          "date": "2026-10-27T02:57:10.663Z"
+        },
+        {
           "title": "Regierung von Schaffhausen: Budget 2027 korrigiert, rote Zahlen",
           "url": "/de/schaffhausen-artikel/schaffhausen-budget-korrektur/",
           "excerpt": "Die Regierung von Schaffhausen hat das Budget 2027 um 2,2 Millionen Franken korrigiert; die Rechnung dürfte dennoch mit roten Zahlen abschließen.",
@@ -425,7 +443,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-27T03:06:42.388Z"
     },
     "fr": {
       "canton": "SH",
@@ -510,6 +528,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Le gouvernement SH renonce aux prévisions fiscales décennales",
+          "url": "/fr/articles-schaffhouse/gouv-sh-previsions-fiscales/",
+          "excerpt": "Le gouvernement du canton de Schaffhouse ne peut pas établir de prévisions fiscales fiables pour la période 2031-2035 ; la campagne Beforemore reste active jusqu’au 15 novembre.",
+          "date": "2026-10-27T02:57:10.663Z"
+        },
+        {
           "title": "Gouvernement de Schaffhouse : budget 2027 corrigé, comptes dans le rouge",
           "url": "/fr/articles-schaffhouse/schaffhouse-budget-correction/",
           "excerpt": "Le Gouvernement de Schaffhouse a corrigé le budget 2027 de 2,2 millions de francs ; les comptes devraient néanmoins clôturer dans le rouge.",
@@ -561,7 +585,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-27T03:06:42.388Z"
     }
   }
 }
