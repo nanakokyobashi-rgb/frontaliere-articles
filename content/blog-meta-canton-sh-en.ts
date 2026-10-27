@@ -72,6 +72,9 @@ const blogMetaCantonShEn: Record<string, string> = {
     'blog.article.sp-no-legge-ospedale.title': 'Hospital Act: Schaffhausen’s SP says no',
     'blog.article.sp-no-legge-ospedale.excerpt': 'On November 29, the Canton of Schaffhausen will vote on the amendment to the Hospitals Act, opposed by the SP after parliamentary approval 43-0.',
     'blog.article.sp-no-legge-ospedale.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.pil-cantonale-2026-crescita.title': 'Cantonal GDP for 2026 expected at 0,96% versus 0,8% in Switzerland',
+    'blog.article.pil-cantonale-2026-crescita.excerpt': 'Expected cantonal GDP in 2026: 0,96%, compared with 0,8% for Switzerland Exports under pressure from tensions, energy, tariffs and the strong franc The city',
+    'blog.article.pil-cantonale-2026-crescita.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonShEn;

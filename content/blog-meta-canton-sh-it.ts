@@ -72,6 +72,9 @@ const blogMetaCantonShIt: Record<string, string> = {
     'blog.article.sp-no-legge-ospedale.title': 'Legge sugli ospedali: la SP di Sciaffusa dice no',
     'blog.article.sp-no-legge-ospedale.excerpt': 'Il 29 novembre il Cantone di Sciaffusa voterà sulla modifica della legge sugli ospedali, contrastata dalla SP dopo il via libera parlamentare 43-0.',
     'blog.article.sp-no-legge-ospedale.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.pil-cantonale-2026-crescita.title': 'PIL cantonale 2026 atteso 0,96% contro 0,8% svizzero',
+    'blog.article.pil-cantonale-2026-crescita.excerpt': 'PIL cantonale atteso 2026: 0,96%, contro lo 0,8% svizzero Export sotto pressione per tensioni, energia, dazi e franco forte La città discute zone d\'incontro',
+    'blog.article.pil-cantonale-2026-crescita.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonShIt;

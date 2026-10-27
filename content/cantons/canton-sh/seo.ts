@@ -904,6 +904,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-pil-cantonale-2026-crescita': {
+    title: 'PIL cantonale 2026 atteso 0,96% contro 0,8% svizzero',
+    description: 'PIL cantonale atteso 2026: 0,96%, contro lo 0,8% svizzero Export sotto pressione per tensioni, energia, dazi e franco forte La città discute zone',
+    keywords: 'frontalieri, ticino, svizzera, italia, cantonale, atteso, contro, svizzero',
+    ogTitle: 'PIL Sciaffusa 2026: 0,96% vs Svizzera 0,8%',
+    ogDescription: 'PIL cantonale atteso 2026: 0,96%, contro lo 0,8% svizzero Export sotto pressione per tensioni, energia, dazi e franco forte La città discute zone d\'incontro',
+    canonicalPath: '/articoli-sciaffusa/pil-cantonale-2026-crescita/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "PIL cantonale 2026 atteso 0,96% contro 0,8% svizzero",
+      "description": "PIL cantonale atteso 2026: 0,96%, contro lo 0,8% svizzero Export sotto pressione per tensioni, energia, dazi e franco forte La città discute zone",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-pil-cantonale-2026-crescita.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-27T12:50:33+00:00",
+      "dateModified": "2026-10-27T12:50:33+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-sciaffusa/pil-cantonale-2026-crescita/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

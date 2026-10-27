@@ -72,6 +72,9 @@ const blogMetaCantonShFr: Record<string, string> = {
     'blog.article.sp-no-legge-ospedale.title': 'Loi sur les hôpitaux : le PS de Schaffhouse dit non',
     'blog.article.sp-no-legge-ospedale.excerpt': 'Le 29 novembre, le canton de Schaffhouse votera sur la modification de la loi sur les hôpitaux, combattue par le PS après le feu vert parlementaire 43-0.',
     'blog.article.sp-no-legge-ospedale.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.pil-cantonale-2026-crescita.title': 'PIB cantonal 2026 attendu à 0,96% contre 0,8% suisse',
+    'blog.article.pil-cantonale-2026-crescita.excerpt': 'PIB cantonal attendu en 2026 : 0,96%, contre 0,8% suisse Exportations sous pression en raison des tensions, de l\'énergie, des droits de douane et du franc fort',
+    'blog.article.pil-cantonale-2026-crescita.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonShFr;
