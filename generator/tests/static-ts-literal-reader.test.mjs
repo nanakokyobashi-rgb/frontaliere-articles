@@ -338,13 +338,13 @@ test('gli emitter usano il reader condiviso e non una regex raw duplicata', () =
   }
 });
 
-test('i reader SEO decodificano i separatori Unicode con il decoder condiviso', () => {
+test('i reader SEO delegano i separatori Unicode al decoder condiviso', () => {
   for (const file of ['generator/scripts/create-article.mjs', 'scripts/refresh-hub-landing.mjs', 'scripts/ci/scan-generation-health.mjs']) {
     const source = readFileSync(resolve(ROOT, file), 'utf8');
     assert.match(source, /decodeStaticStringLiteral/u, `${file}: decoder condiviso assente`);
     assert.doesNotMatch(source, /replace\(\/\\\\\(\.\)/u, `${file}: decoder a un carattere ancora presente`);
   }
   const ogSource = readFileSync(resolve(ROOT, 'engine/ogPagesPlugin.ts'), 'utf8');
-  assert.match(ogSource, /decodeTsStringEscapes/u, 'OG reader: decoder condiviso assente');
+  assert.match(ogSource, /parseStaticArticleTranslationSource/u, 'OG reader: reader AST condiviso per la decodifica assente');
   assert.doesNotMatch(ogSource, /replace\(\/\\\\\(\.\)/u, 'OG reader: decoder a un carattere ancora presente');
 });
