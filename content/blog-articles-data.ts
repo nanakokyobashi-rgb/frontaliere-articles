@@ -45821,7 +45821,7 @@ const RAW_ARTICLES = [
  id: 'frontaliere-ora-mezza-viaggio',
  category: 'pratico',
  date: '2026-10-25T01:38:53.028Z',
- image: '/images/blog/article-frontalieri-disoccupazione-criterio-lavoro.webp',
+ image: '/images/blog/article-frontaliere-ora-mezza-viaggio.webp',
  hasCalculator: true,
  articleType: 'news',
  authorSlug: 'redazione',
