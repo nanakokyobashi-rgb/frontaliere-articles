@@ -69,6 +69,15 @@ const blogMetaCantonShIt: Record<string, string> = {
     'blog.article.mobilit-elettrica-sciaffusa-20.title': 'Cantone Sciaffusa spinge mobilità elettrica con 9 misure',
     'blog.article.mobilit-elettrica-sciaffusa-20.excerpt': 'La strategia 2.0 prevede nove misure attuabili dal prossimo anno, incluse agevolazioni fiscali in esame per proprietari immobiliari e sostegno ai locatori.',
     'blog.article.mobilit-elettrica-sciaffusa-20.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.sp-no-legge-ospedale.title': 'Legge sugli ospedali: la SP di Sciaffusa dice no',
+    'blog.article.sp-no-legge-ospedale.excerpt': 'Il 29 novembre il Cantone di Sciaffusa voterà sulla modifica della legge sugli ospedali, contrastata dalla SP dopo il via libera parlamentare 43-0.',
+    'blog.article.sp-no-legge-ospedale.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.pil-cantonale-2026-crescita.title': 'PIL cantonale 2026 atteso 0,96% contro 0,8% svizzero',
+    'blog.article.pil-cantonale-2026-crescita.excerpt': 'PIL cantonale atteso 2026: 0,96%, contro lo 0,8% svizzero Export sotto pressione per tensioni, energia, dazi e franco forte La città discute zone d\'incontro',
+    'blog.article.pil-cantonale-2026-crescita.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.schaffhausen-modello-scolastico-inclusivo.title': 'Sciaffusa adotta modello scolastico inclusivo con PGA',
+    'blog.article.schaffhausen-modello-scolastico-inclusivo.excerpt': 'Decisione del 22 gennaio 2026 per il passaggio all\'ISF; PGA prevede un tetto annuale massimo di CHF 3 milioni e un credito una tantum di CHF 270\'000.',
+    'blog.article.schaffhausen-modello-scolastico-inclusivo.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonShIt;

@@ -7,6 +7,18 @@
     "canton-basilea::https://www.nau.ch/news/wirtschaft/roche-jpmorgan-erhoht-kursziel-auf-335-franken-67193522": {
       "section": "canton-basilea",
       "ts": 1793065739738
+    },
+    "canton-basilea::https://www.nau.ch/news/wirtschaft/novartis-ist-im-dritten-quartal-zuruck-auf-wachstumskurs-67193704": {
+      "section": "canton-basilea",
+      "ts": 1793104258648
+    },
+    "canton-basilea::https://www.bs.ch/medienmitteilungen/2026-basel-stadt-vergibt-musical-theater-im-baurecht-act-theater-management-ag": {
+      "section": "canton-basilea",
+      "ts": 1793104266384
+    },
+    "canton-basilea::https://www.20min.ch/story/tauben-am-bahnhof-basel-erneut-sitzen-lebende-voegel-in-den-sbb-netzen-fest-103652189": {
+      "section": "canton-basilea",
+      "ts": 1793104277299
     }
   }
 }

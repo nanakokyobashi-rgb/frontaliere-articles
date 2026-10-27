@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "carburanti",
-  "updatedAt": "2026-10-27T11:16:36.775Z",
-  "contentHash": "eee013cb7570114235363ff2d05b3057c8cd53534421aeae58244dab188a61d1",
+  "updatedAt": "2026-10-27T13:14:13.993Z",
+  "contentHash": "8e9dc5e8a5817659baf244074746a71c61f54fd732de84aabe6bad4d120d4ce7",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,24 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Aumento salariale del 1,0% per personale statale del Canton Soletta dal 2027",
+          "url": "/articoli-soletta/aumento-salari-statale-2027/",
+          "excerpt": "L'accordo tra Regierungsrat e associazioni del personale prevede un aumento dell'1,0% per personale statale, docenti e dipendenti ospedalieri a partire dal 2027.",
+          "date": "2026-10-27T13:05:27.562Z"
+        },
+        {
+          "title": "Soletta: salari aumentano dell'1,0% dal prossimo anno",
+          "url": "/articoli-soletta/soletta-aumento-salari/",
+          "excerpt": "Il Governo cantonale e le associazioni del personale hanno concordato un aumento dell'1,0% dal prossimo anno per dipendenti pubblici, scuole e ospedali.",
+          "date": "2026-10-27T12:43:48.858Z"
+        },
+        {
+          "title": "Proposta riduzione premi assicurazione malattia 2027 Canton Soletta",
+          "url": "/articoli-soletta/proposta-premi-assicurazione-2027/",
+          "excerpt": "Proposta 2027 trasmessa al Parlamento cantonale Circa 221 milioni di franchi per ridurre i premi Contributo cantonale di 98 milioni Aumento di 9 milioni (+4,3%)",
+          "date": "2026-10-27T12:21:54.555Z"
+        },
+        {
           "title": "Consiglio Cantonale Soletta: sedute 3, 4 e 11 novembre 2026",
           "url": "/articoli-soletta/sedute-parlamento-novembre-2026/",
           "excerpt": "In agenda 58 affari, inclusi 7 affari normativi e di merito e 7 interventi parlamentari urgenti.",
@@ -82,24 +100,6 @@
           "url": "/articoli-soletta/batterie-sodio-soletta/",
           "excerpt": "Batterie agli ioni di sodio senza litio Software sviluppato in Svizzera, montaggio a Soletta Oltre 600 batterie vendute entro fine settembre 2026 Primo sistema",
           "date": "2026-10-25T08:55:33.164Z"
-        },
-        {
-          "title": "Cambio d'ora aumenta rischio incidenti con fauna nel Canton Soletta",
-          "url": "/articoli-soletta/cambio-ora-rischio-wildunfalli/",
-          "excerpt": "La notte tra il 24 e il 25 ottobre 2026 gli orologi tornano indietro di un'ora, coincidente con l'attività di caprioli, cervi nobili e cinghiali.",
-          "date": "2026-10-24T14:03:16.134Z"
-        },
-        {
-          "title": "Commissione finanziaria riduce credito per trasformazione digitale a Soletta",
-          "url": "/articoli-soletta/finanzkommission-k-rzt-kredit-digitalisierung/",
-          "excerpt": "La Commissione finanziaria del Consiglio cantonale di Soletta chiede di ridurre il credito d'impegno per la trasformazione digitale da CHF 21,4 a CHF 21,2 milioni.",
-          "date": "2026-10-23T14:42:31.186Z"
-        },
-        {
-          "title": "Polizia Soletta: comunicazione 365 giorni e divieto droni 300 m",
-          "url": "/articoli-soletta/polizia-soletta-comunicazione-media-droni/",
-          "excerpt": "Il servizio media opera 365 giorni all'anno Il team gestisce X, Facebook e Instagram Nei grandi eventi un membro è presente sul posto Il divieto di droni vale",
-          "date": "2026-10-23T03:30:32.771Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-27T11:16:36.775Z"
+      "updatedAt": "2026-10-27T13:14:13.993Z"
     },
     "en": {
       "canton": "SO",
@@ -171,6 +171,24 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "1.0% salary increase for state employees in the Canton of Solothurn from 2027",
+          "url": "/en/solothurn-articles/solothurn-state-salary-increase-2027/",
+          "excerpt": "The agreement between Regierungsrat and staff associations provides for a 1.0% increase for state employees, teachers and hospital employees starting in 2027.",
+          "date": "2026-10-27T13:05:27.562Z"
+        },
+        {
+          "title": "Solothurn: salaries increase by 1,0% starting next year",
+          "url": "/en/solothurn-articles/solothurn-wage-increase/",
+          "excerpt": "The cantonal government and staff associations have agreed on a 1,0% increase from next year for public employees, schools and hospitals.",
+          "date": "2026-10-27T12:43:48.858Z"
+        },
+        {
+          "title": "Proposal to reduce health insurance premiums in 2027, Canton of Solothurn",
+          "url": "/en/solothurn-articles/2027-insurance-premium-proposal/",
+          "excerpt": "2027 proposal submitted to the Cantonal Parliament Approximately 221 million francs to reduce premiums Cantonal contribution of 98 million Increase of 9 million",
+          "date": "2026-10-27T12:21:54.555Z"
+        },
+        {
           "title": "Solothurn Cantonal Council: meetings of 3, 4 and 11 November 2026",
           "url": "/en/solothurn-articles/parliament-sessions-november-2026/",
           "excerpt": "On the agenda 58 affairs, including 7 regulatory and substantive affairs and 7 urgent parliamentary interventions.",
@@ -181,24 +199,6 @@
           "url": "/en/solothurn-articles/sodium-batteries-solothurn/",
           "excerpt": "Lithium-free sodium-ion batteries Software developed in Switzerland, assembly in Solothurn More than 600 batteries sold by the end of September 2026 First",
           "date": "2026-10-25T08:55:33.164Z"
-        },
-        {
-          "title": "Clock changes raise wildlife accident risk in Solothurn",
-          "url": "/en/solothurn-articles/time-change-wild-animal-risk-solothurn/",
-          "excerpt": "On the night between October 24 and 25, 2026, the clocks go back one hour, coinciding with the activity of roe deer, red deer and wild boars.",
-          "date": "2026-10-24T14:03:16.134Z"
-        },
-        {
-          "title": "Financial Committee reduces funding for digital transformation in Solothurn",
-          "url": "/en/solothurn-articles/financial-commission-cuts-digitalization-credit/",
-          "excerpt": "The Finance Committee of the Cantonal Council of Solothurn is requesting that the commitment credit for digital transformation be reduced from CHF 21,4 million to CHF 21,2 million.",
-          "date": "2026-10-23T14:42:31.186Z"
-        },
-        {
-          "title": "Solothurn Police: 365-day communication and 300 m drone ban",
-          "url": "/en/solothurn-articles/solothurn-police-communication-media-drones/",
-          "excerpt": "The media service operates 365 days a year The team manages X, Facebook and Instagram At major events, a team member is present on site The drone ban applies",
-          "date": "2026-10-23T03:30:32.771Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-27T11:16:36.775Z"
+      "updatedAt": "2026-10-27T13:14:13.993Z"
     },
     "de": {
       "canton": "SO",
@@ -270,6 +270,24 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Lohnerhöhung von 1,0% für das Staatspersonal des Kantons Solothurn ab 2027",
+          "url": "/de/solothurn-artikel/loehner-anstieg-staatlich-2027/",
+          "excerpt": "Die Vereinbarung zwischen dem Regierungsrat und den Personalverbänden sieht ab 2027 eine Lohnerhöhung von 1,0% für das Staatspersonal, die Lehrpersonen und die Spitalangestellten vor.",
+          "date": "2026-10-27T13:05:27.562Z"
+        },
+        {
+          "title": "Solothurn: Löhne steigen ab dem kommenden Jahr um 1,0%",
+          "url": "/de/solothurn-artikel/solothurn-lohnerhoehung/",
+          "excerpt": "Die Kantonsregierung und die Personalverbände haben für Angestellte des öffentlichen Dienstes, Schulen und Spitäler ab dem kommenden Jahr eine Erhöhung um 1,0% vereinbart.",
+          "date": "2026-10-27T12:43:48.858Z"
+        },
+        {
+          "title": "Vorschlag: Prämienverbilligung 2027 im Kanton Solothurn",
+          "url": "/de/solothurn-artikel/praemienverbilligung-2027/",
+          "excerpt": "Vorschlag 2027 dem Kantonsparlament übermittelt Rund 221 Millionen Franken zur Senkung der Prämien Kantonsbeitrag von 98 Millionen Erhöhung um 9 Millionen",
+          "date": "2026-10-27T12:21:54.555Z"
+        },
+        {
           "title": "Kantonsrat Solothurn: Sitzungen vom 3., 4. und 11. November 2026",
           "url": "/de/solothurn-artikel/parlament-sitzungen-november-2026/",
           "excerpt": "Auf der Tagesordnung stehen 58 Angelegenheiten, darunter 7 regulatorische und materielle Angelegenheiten sowie 7 dringende parlamentarische Interventionen.",
@@ -280,24 +298,6 @@
           "url": "/de/solothurn-artikel/sodium-batterien-solothurn/",
           "excerpt": "Natrium-Ionen-Batterien ohne Lithium In der Schweiz entwickelte Software, Montage in Solothurn Bis Ende September 2026 über 600 verkaufte Batterien Erstes",
           "date": "2026-10-25T08:55:33.164Z"
-        },
-        {
-          "title": "Zeitumstellung erhöht das Risiko von Wildtierunfällen im Kanton Solothurn",
-          "url": "/de/solothurn-artikel/zeitumstellung-wildunfall-solothurn/",
-          "excerpt": "In der Nacht vom 24.",
-          "date": "2026-10-24T14:03:16.134Z"
-        },
-        {
-          "title": "Finanzkommission kürzt Kredit für die digitale Transformation in Solothurn",
-          "url": "/de/solothurn-artikel/finanzkommission-kurzt-kredit-digitalisierung/",
-          "excerpt": "Die Finanzkommission des Solothurner Kantonsrats beantragt, den Verpflichtungskredit für die digitale Transformation von CHF 21,4 auf CHF 21,2 Millionen zu kürzen.",
-          "date": "2026-10-23T14:42:31.186Z"
-        },
-        {
-          "title": "Polizei Solothurn: Kommunikation 365 Tage und Drohnenverbot 300 m",
-          "url": "/de/solothurn-artikel/polizei-solothurn-kommunikation-medien-drohnen/",
-          "excerpt": "Der Mediendienst ist 365 Tage im Jahr tätig Das Team betreut X, Facebook und Instagram Bei Grossanlässen ist ein Mitglied vor Ort Das Drohnenverbot gilt",
-          "date": "2026-10-23T03:30:32.771Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-27T11:16:36.775Z"
+      "updatedAt": "2026-10-27T13:14:13.993Z"
     },
     "fr": {
       "canton": "SO",
@@ -369,6 +369,24 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Augmentation salariale: 1,0% au personnel soleurois dès 2027",
+          "url": "/fr/articles-soleure/augmentation-salaire-etat-2027/",
+          "excerpt": "L’accord entre Regierungsrat et les associations du personnel prévoit une augmentation de 1,0% pour le personnel de l’État, les enseignants et le personnel hospitalier à partir de 2027.",
+          "date": "2026-10-27T13:05:27.562Z"
+        },
+        {
+          "title": "Soleure : les salaires augmentent de 1,0 % dès l’année prochaine",
+          "url": "/fr/articles-soleure/soleure-hausse-salaires/",
+          "excerpt": "Le Gouvernement cantonal et les associations du personnel ont convenu d’une augmentation de 1,0 % dès l’année prochaine pour les employés publics, les écoles et les hôpitaux.",
+          "date": "2026-10-27T12:43:48.858Z"
+        },
+        {
+          "title": "Proposition de réduction des primes maladie 2027 à Soleure",
+          "url": "/fr/articles-soleure/proposition-primes-2027/",
+          "excerpt": "Proposition 2027 transmise au Parlement cantonal Environ 221 millions de francs pour réduire les primes Contribution cantonale de 98 millions Augmentation de 9",
+          "date": "2026-10-27T12:21:54.555Z"
+        },
+        {
           "title": "Conseil cantonal de Soleure : réunions des 3, 4 et 11 novembre 2026",
           "url": "/fr/articles-soleure/sessions-parlement-novembre-2026/",
           "excerpt": "À l'ordre du jour 58 affaires, dont 7 affaires réglementaires et substantielles et 7 interventions parlementaires urgentes.",
@@ -379,24 +397,6 @@
           "url": "/fr/articles-soleure/batteries-sodium-soleure/",
           "excerpt": "Batteries aux ions sodium sans lithium Logiciels développés en Suisse, assemblage à Soleure Plus de 600 batteries vendues d’ici fin septembre 2026 Premier",
           "date": "2026-10-25T08:55:33.164Z"
-        },
-        {
-          "title": "Changement d'heure : plus d'accidents avec la faune",
-          "url": "/fr/articles-soleure/changement-heure-risque-wild-soleure/",
-          "excerpt": "Dans la nuit du 24 au 25 octobre 2026, les horloges reculent d'une heure, ce qui coïncide avec l'activité des chevreuils, cerfs élaphes et sangliers.",
-          "date": "2026-10-24T14:03:16.134Z"
-        },
-        {
-          "title": "La commission réduit le crédit de numérisation à Soleure",
-          "url": "/fr/articles-soleure/commission-financiere-coupe-credit-digitalisation/",
-          "excerpt": "La commission des finances du Conseil cantonal de Soleure demande de réduire le crédit d’engagement pour la transformation numérique de CHF 21,4 à CHF 21,2 millions.",
-          "date": "2026-10-23T14:42:31.186Z"
-        },
-        {
-          "title": "Police de Soleure : communication 365 jours et interdiction des drones à 300 m",
-          "url": "/fr/articles-soleure/police-soleure-communication-medias-drones/",
-          "excerpt": "Le service médias fonctionne 365 jours par an L’équipe gère X, Facebook et Instagram Lors des grands événements, un membre est présent sur place L’interdiction",
-          "date": "2026-10-23T03:30:32.771Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-27T11:16:36.775Z"
+      "updatedAt": "2026-10-27T13:14:13.993Z"
     }
   }
 }

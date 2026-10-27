@@ -246,15 +246,45 @@ function usablePrevious(previous, id) {
     : null;
 }
 
+/**
+ * A carried event row must still satisfy the renderer's data-item shape.
+ * Historical caches can be hand-edited or partially written; keeping a
+ * primitive or a non-string URL would make the carry path publish malformed
+ * data instead of letting the next fresh dataset rebuild the row.
+ */
+export function isRenderableCarriedEventItem(item) {
+  if (!item || typeof item !== 'object' || Array.isArray(item)) return false;
+  try {
+    checkKeys(item, ['label', 'value', 'detail', 'date', 'url'], 'carried event item');
+    text(item.label, 'carried event item.label');
+    for (const key of ['value', 'detail']) {
+      if (item[key] !== undefined) text(item[key], `carried event item.${key}`);
+    }
+    if (item.date !== undefined) {
+      if (typeof item.date !== 'string') return false;
+      checkDate(item.date, 'carried event item.date');
+    }
+    if (item.url !== undefined) {
+      if (typeof item.url !== 'string') return false;
+      checkHref(item.url, 'carried event item.url');
+    }
+  } catch {
+    return false;
+  }
+  return true;
+}
+
 function normalizeCarriedBlock(block, blockId) {
   if (blockId !== EVENTS_BLOCK_ID || !Array.isArray(block?.items)) return block;
+  const items = block.items.filter(isRenderableCarriedEventItem).map((item) => {
+    if (typeof item.url !== 'string') return item;
+    const url = eventSourceUrl(item.url);
+    return url === item.url ? item : { ...item, url };
+  });
+  if (items.length < BLOCK_THRESHOLDS.events.minRows) return null;
   return {
     ...block,
-    items: block.items.map((item) => {
-      if (!item || typeof item !== 'object' || typeof item.url !== 'string') return item;
-      const url = eventSourceUrl(item.url);
-      return url === item.url ? item : { ...item, url };
-    }),
+    items,
   };
 }
 
@@ -270,8 +300,10 @@ function carriedFromPrevious(previous, blockId, carryMs, nowMs) {
   for (const locale of HUB_LOCALES) {
     const block = previous.locales[locale].dataBlocks.find((b) => b.id === blockId);
     if (!block) return null;
+    const normalized = normalizeCarriedBlock(block, blockId);
+    if (!normalized) return null;
     perLocale[locale] = {
-      block: normalizeCarriedBlock(block, blockId),
+      block: normalized,
       keyFacts: previous.locales[locale].keyFacts.slice(offset, offset + (meta.keyFacts || 0)),
     };
   }

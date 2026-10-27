@@ -777,6 +777,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-spital-wetzikon-decisione-mercoled': {
+    title: 'Spital Wetzikon: decisione cruciale questo mercoledì',
+    description: 'Attesa la decisione definita decisiva sullo Spital Wetzikon questo mercoledì, mentre i creditori minacciano il fallimento.',
+    keywords: 'frontalieri, ticino, svizzera, italia, spital, wetzikon, decisione, cruciale',
+    ogTitle: 'Spital Wetzikon: decisione cruciale questo mercoledì',
+    ogDescription: 'Lo Spital Wetzikon è al centro di una vicenda vicina alla fine; i creditori minacciano il fallimento in vista della decisione di questo mercoledì.',
+    canonicalPath: '/articoli-zurigo/spital-wetzikon-decisione-mercoled/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Spital Wetzikon: decisione cruciale questo mercoledì",
+      "description": "Attesa la decisione definita decisiva sullo Spital Wetzikon questo mercoledì, mentre i creditori minacciano il fallimento.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-spital-wetzikon-decisione-mercoled.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-27T12:35:50+00:00",
+      "dateModified": "2026-10-27T12:35:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-zurigo/spital-wetzikon-decisione-mercoled/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

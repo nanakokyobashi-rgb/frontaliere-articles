@@ -621,6 +621,123 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-proposta-premi-assicurazione-2027': {
+    title: 'Proposta riduzione premi assicurazione malattia 2027 Canton Soletta',
+    description: 'Proposta 2027 trasmessa al Parlamento cantonale Circa 221 milioni di franchi per ridurre i premi Contributo cantonale di 98 milioni Aumento di 9',
+    keywords: 'frontalieri, ticino, svizzera, italia, proposta, riduzione, premi, assicurazione',
+    ogTitle: 'Riduzione premi assicurazione malattia 2027 Soletta',
+    ogDescription: 'Proposta 2027 trasmessa al Parlamento cantonale Circa 221 milioni di franchi per ridurre i premi Contributo cantonale di 98 milioni Aumento di 9 milioni (+4,3%)',
+    canonicalPath: '/articoli-soletta/proposta-premi-assicurazione-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Proposta riduzione premi assicurazione malattia 2027 Canton Soletta",
+      "description": "Proposta 2027 trasmessa al Parlamento cantonale Circa 221 milioni di franchi per ridurre i premi Contributo cantonale di 98 milioni Aumento di 9",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-proposta-premi-assicurazione-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-27T12:21:54+00:00",
+      "dateModified": "2026-10-27T12:21:54+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-soletta/proposta-premi-assicurazione-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-soletta-aumento-salari': {
+    title: 'Soletta: salari aumentano dell\'1,0% dal prossimo anno',
+    description: 'Dal prossimo anno il personale statale, gli insegnanti e i dipendenti degli ospedali di Soletta riceveranno un aumento salariale dell\'1,0%.',
+    keywords: 'frontalieri, ticino, svizzera, italia, soletta, salari, aumentano, dell',
+    ogTitle: 'Soletta: aumento salari dell\'1,0% dal prossimo anno',
+    ogDescription: 'L\'accordo raggiunto dal Consiglio di Stato e dalle associazioni del personale riporta al centro inflazione, conti pubblici, previsioni SECO e confronti salariali tra Cantoni: l\'aumento vale per i dipendenti soggetti al contratto collettivo.',
+    canonicalPath: '/articoli-soletta/soletta-aumento-salari/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Soletta: salari aumentano dell'1,0% dal prossimo anno",
+      "description": "Dal prossimo anno il personale statale, gli insegnanti e i dipendenti degli ospedali di Soletta riceveranno un aumento salariale dell'1,0%.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-soletta-aumento-salari.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-27T12:43:48+00:00",
+      "dateModified": "2026-10-27T12:43:48+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-soletta/soletta-aumento-salari/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-aumento-salari-statale-2027': {
+    title: 'Aumento salariale del 1,0% per personale statale del Canton Soletta dal 2027',
+    description: 'L\'accordo tra Regierungsrat e associazioni del personale prevede un aumento dell\'1,0% per personale statale, docenti e dipendenti ospedalieri',
+    keywords: 'frontalieri, ticino, svizzera, italia, aumento, salariale, personale, statale',
+    ogTitle: 'Aumento salariale del 1,0% per personale statale del Canton Soletta dal 2027',
+    ogDescription: 'L\'accordo tra Regierungsrat e associazioni del personale prevede un aumento dell\'1,0% per personale statale, docenti e dipendenti ospedalieri a partire dal 2027.',
+    canonicalPath: '/articoli-soletta/aumento-salari-statale-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Aumento salariale del 1,0% per personale statale del Canton Soletta dal 2027",
+      "description": "L'accordo tra Regierungsrat e associazioni del personale prevede un aumento dell'1,0% per personale statale, docenti e dipendenti ospedalieri",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-aumento-salari-statale-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-27T13:05:27+00:00",
+      "dateModified": "2026-10-27T13:05:27+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-soletta/aumento-salari-statale-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

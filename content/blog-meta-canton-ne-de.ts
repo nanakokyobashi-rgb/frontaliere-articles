@@ -54,6 +54,9 @@ const blogMetaCantonNeDe: Record<string, string> = {
     'blog.article.successo-abbonamenti-trasporti-ridotti.title': 'Erfolgreiche ermäßigte Fahrkarten für öffentliche Verkehrsmittel',
     'blog.article.successo-abbonamenti-trasporti-ridotti.excerpt': '66% Rabatt für unter 25-Jährige ab 1.',
     'blog.article.successo-abbonamenti-trasporti-ridotti.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.abitazioni-svizzere-rincaro-settembre.title': 'Wohnungspreise in der Schweiz: +1,7% im Quartal',
+    'blog.article.abitazioni-svizzere-rincaro-settembre.excerpt': 'Im dritten Quartal stiegen die Schweizer Wohnungspreise laut SFO im Quartal um 1,7% und im Jahresvergleich um 4,4%.',
+    'blog.article.abitazioni-svizzere-rincaro-settembre.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonNeDe;

@@ -69,6 +69,15 @@ const blogMetaCantonShFr: Record<string, string> = {
     'blog.article.mobilit-elettrica-sciaffusa-20.title': 'Le canton de Schaffhouse accélère la mobilité électrique avec 9 mesures',
     'blog.article.mobilit-elettrica-sciaffusa-20.excerpt': 'La stratégie 2.0 prévoit neuf mesures applicables dès l’année prochaine, y compris des allègements fiscaux à l’étude pour les propriétaires immobiliers et un soutien aux bailleurs.',
     'blog.article.mobilit-elettrica-sciaffusa-20.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.sp-no-legge-ospedale.title': 'Loi sur les hôpitaux : le PS de Schaffhouse dit non',
+    'blog.article.sp-no-legge-ospedale.excerpt': 'Le 29 novembre, le canton de Schaffhouse votera sur la modification de la loi sur les hôpitaux, combattue par le PS après le feu vert parlementaire 43-0.',
+    'blog.article.sp-no-legge-ospedale.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.pil-cantonale-2026-crescita.title': 'PIB cantonal 2026 attendu à 0,96% contre 0,8% suisse',
+    'blog.article.pil-cantonale-2026-crescita.excerpt': 'PIB cantonal attendu en 2026 : 0,96%, contre 0,8% suisse Exportations sous pression en raison des tensions, de l\'énergie, des droits de douane et du franc fort',
+    'blog.article.pil-cantonale-2026-crescita.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.schaffhausen-modello-scolastico-inclusivo.title': 'Schaffhouse adopte un modèle scolaire inclusif avec PGA',
+    'blog.article.schaffhausen-modello-scolastico-inclusivo.excerpt': 'Décision du 22 janvier 2026 pour le passage à l\'ISF ; PGA prévoit un plafond annuel maximum de CHF 3 millions et un crédit ponctuel de CHF 270\'000.',
+    'blog.article.schaffhausen-modello-scolastico-inclusivo.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonShFr;

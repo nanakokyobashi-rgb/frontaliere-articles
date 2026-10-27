@@ -51,6 +51,10 @@
     "canton-sz::https://www.bote.ch/nachrichten/schweizundwelt/bund-prueft-tempo-80-auf-schweizer-autobahnen-art-1728882": {
       "section": "canton-sz",
       "ts": 1793098284697
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/emmenbruecke-strasse-beim-knoten-gersag-wird-gesperrt-art-1728744": {
+      "section": "canton-sz",
+      "ts": 1793102692999
     }
   }
 }

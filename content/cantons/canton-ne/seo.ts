@@ -655,6 +655,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-abitazioni-svizzere-rincaro-settembre': {
+    title: 'Prezzi delle abitazioni in Svizzera: +1,7% nel trimestre',
+    description: 'Nel terzo trimestre i prezzi residenziali svizzeri sono saliti dell\'1,7% sul trimestre e del 4,4% su un anno, secondo l\'OFS.',
+    keywords: 'frontalieri, ticino, svizzera, italia, prezzi, abitazioni, trimestre, terzo',
+    ogTitle: 'Abitazioni svizzere: +1,7% nel terzo trimestre',
+    ogDescription: 'OFS: case individuali a +2,1% e appartamenti in proprietà a +1,3% nel trimestre. Il totale dei prezzi residenziali cresce del 4,4% su un anno; la fonte non offre un dato cantonale separato per il territorio di Neuchâtel.',
+    canonicalPath: '/articoli-neuchatel/abitazioni-svizzere-rincaro-settembre/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Prezzi delle abitazioni in Svizzera: +1,7% nel trimestre",
+      "description": "Nel terzo trimestre i prezzi residenziali svizzeri sono saliti dell'1,7% sul trimestre e del 4,4% su un anno, secondo l'OFS.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-abitazioni-svizzere-rincaro-settembre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-27T12:37:22+00:00",
+      "dateModified": "2026-10-27T12:37:22+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-neuchatel/abitazioni-svizzere-rincaro-settembre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

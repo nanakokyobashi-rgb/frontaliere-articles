@@ -51,6 +51,15 @@ const blogMetaCantonSoIt: Record<string, string> = {
     'blog.article.sedute-parlamento-novembre-2026.title': 'Consiglio Cantonale Soletta: sedute 3, 4 e 11 novembre 2026',
     'blog.article.sedute-parlamento-novembre-2026.excerpt': 'In agenda 58 affari, inclusi 7 affari normativi e di merito e 7 interventi parlamentari urgenti.',
     'blog.article.sedute-parlamento-novembre-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.proposta-premi-assicurazione-2027.title': 'Proposta riduzione premi assicurazione malattia 2027 Canton Soletta',
+    'blog.article.proposta-premi-assicurazione-2027.excerpt': 'Proposta 2027 trasmessa al Parlamento cantonale Circa 221 milioni di franchi per ridurre i premi Contributo cantonale di 98 milioni Aumento di 9 milioni (+4,3%)',
+    'blog.article.proposta-premi-assicurazione-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.soletta-aumento-salari.title': 'Soletta: salari aumentano dell\'1,0% dal prossimo anno',
+    'blog.article.soletta-aumento-salari.excerpt': 'Il Governo cantonale e le associazioni del personale hanno concordato un aumento dell\'1,0% dal prossimo anno per dipendenti pubblici, scuole e ospedali.',
+    'blog.article.soletta-aumento-salari.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.aumento-salari-statale-2027.title': 'Aumento salariale del 1,0% per personale statale del Canton Soletta dal 2027',
+    'blog.article.aumento-salari-statale-2027.excerpt': 'L\'accordo tra Regierungsrat e associazioni del personale prevede un aumento dell\'1,0% per personale statale, docenti e dipendenti ospedalieri a partire dal 2027.',
+    'blog.article.aumento-salari-statale-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSoIt;

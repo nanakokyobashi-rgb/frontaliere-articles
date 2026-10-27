@@ -23,6 +23,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'wetzikon-binzacher-kempten-info': { it: 'wetzikon-binzacher-kempten-info', en: 'wetzikon-binzacher-kempten-briefing', de: 'wetzikon-binzacher-kempten-infoabend', fr: 'wetzikon-binzacher-kempten-reunion' },
  'zurigo-crisi-alloggi-giovani': { it: 'zurigo-crisi-alloggi-giovani', en: 'zurich-housing-crisis-youth', de: 'zuerich-wohnkrise-jugendliche', fr: 'zurich-crise-logement-jeunes' },
  'seconda-fattura-goldkueste': { it: 'seconda-fattura-goldkueste', en: 'gold-coast-second-tax-bill', de: 'goldkueste-zweite-steuerrechnung', fr: 'goldcoast-deuxieme-facture-fiscale' },
+ 'spital-wetzikon-decisione-mercoled': { it: 'spital-wetzikon-decisione-mercoled', en: 'spital-wetzikon-decision-wednesday', de: 'spital-wetzikon-entscheidung-mittwoch', fr: 'spital-wetzikon-decision-mercredi' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

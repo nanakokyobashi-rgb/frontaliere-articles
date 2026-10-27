@@ -51,6 +51,15 @@ const blogMetaCantonSoEn: Record<string, string> = {
     'blog.article.sedute-parlamento-novembre-2026.title': 'Solothurn Cantonal Council: meetings of 3, 4 and 11 November 2026',
     'blog.article.sedute-parlamento-novembre-2026.excerpt': 'On the agenda 58 affairs, including 7 regulatory and substantive affairs and 7 urgent parliamentary interventions.',
     'blog.article.sedute-parlamento-novembre-2026.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.proposta-premi-assicurazione-2027.title': 'Proposal to reduce health insurance premiums in 2027, Canton of Solothurn',
+    'blog.article.proposta-premi-assicurazione-2027.excerpt': '2027 proposal submitted to the Cantonal Parliament Approximately 221 million francs to reduce premiums Cantonal contribution of 98 million Increase of 9 million',
+    'blog.article.proposta-premi-assicurazione-2027.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.soletta-aumento-salari.title': 'Solothurn: salaries increase by 1,0% starting next year',
+    'blog.article.soletta-aumento-salari.excerpt': 'The cantonal government and staff associations have agreed on a 1,0% increase from next year for public employees, schools and hospitals.',
+    'blog.article.soletta-aumento-salari.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.aumento-salari-statale-2027.title': '1.0% salary increase for state employees in the Canton of Solothurn from 2027',
+    'blog.article.aumento-salari-statale-2027.excerpt': 'The agreement between Regierungsrat and staff associations provides for a 1.0% increase for state employees, teachers and hospital employees starting in 2027.',
+    'blog.article.aumento-salari-statale-2027.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSoEn;

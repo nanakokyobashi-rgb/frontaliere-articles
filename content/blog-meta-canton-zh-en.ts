@@ -63,6 +63,9 @@ const blogMetaCantonZhEn: Record<string, string> = {
     'blog.article.seconda-fattura-goldkueste.title': 'Gold Coast: wife receives a second tax bill',
     'blog.article.seconda-fattura-goldkueste.excerpt': 'On the Gold Coast, a wife receives a second tax bill after her seriously ill husband enters a nursing home.',
     'blog.article.seconda-fattura-goldkueste.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.spital-wetzikon-decisione-mercoled.title': 'Spital Wetzikon: crucial decision this Wednesday',
+    'blog.article.spital-wetzikon-decisione-mercoled.excerpt': 'Creditors threaten Spital Wetzikon with bankruptcy ahead of Wednesday’s decision, deemed decisive.',
+    'blog.article.spital-wetzikon-decisione-mercoled.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonZhEn;

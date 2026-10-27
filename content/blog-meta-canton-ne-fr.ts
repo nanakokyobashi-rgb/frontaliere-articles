@@ -54,6 +54,9 @@ const blogMetaCantonNeFr: Record<string, string> = {
     'blog.article.successo-abbonamenti-trasporti-ridotti.title': 'Succès abonnements transports en commun à prix réduit',
     'blog.article.successo-abbonamenti-trasporti-ridotti.excerpt': '66% de réduction pour les moins de 25 ans à partir du 1er juillet 2026 Plus de 15\'000 bons de réduction déjà utilisés Près de 2\'300 abonnements annuels',
     'blog.article.successo-abbonamenti-trasporti-ridotti.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.abitazioni-svizzere-rincaro-settembre.title': 'Prix du logement en Suisse : +1,7% au cours du trimestre',
+    'blog.article.abitazioni-svizzere-rincaro-settembre.excerpt': 'Au troisième trimestre, les prix résidentiels suisses ont augmenté de 1,7% sur le trimestre et de 4,4% sur une base annuelle, selon l\'OFS.',
+    'blog.article.abitazioni-svizzere-rincaro-settembre.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonNeFr;

@@ -51,6 +51,15 @@ const blogMetaCantonSoFr: Record<string, string> = {
     'blog.article.sedute-parlamento-novembre-2026.title': 'Conseil cantonal de Soleure : réunions des 3, 4 et 11 novembre 2026',
     'blog.article.sedute-parlamento-novembre-2026.excerpt': 'À l\'ordre du jour 58 affaires, dont 7 affaires réglementaires et substantielles et 7 interventions parlementaires urgentes.',
     'blog.article.sedute-parlamento-novembre-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.proposta-premi-assicurazione-2027.title': 'Proposition de réduction des primes maladie 2027 à Soleure',
+    'blog.article.proposta-premi-assicurazione-2027.excerpt': 'Proposition 2027 transmise au Parlement cantonal Environ 221 millions de francs pour réduire les primes Contribution cantonale de 98 millions Augmentation de 9',
+    'blog.article.proposta-premi-assicurazione-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.soletta-aumento-salari.title': 'Soleure : les salaires augmentent de 1,0 % dès l’année prochaine',
+    'blog.article.soletta-aumento-salari.excerpt': 'Le Gouvernement cantonal et les associations du personnel ont convenu d’une augmentation de 1,0 % dès l’année prochaine pour les employés publics, les écoles et les hôpitaux.',
+    'blog.article.soletta-aumento-salari.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.aumento-salari-statale-2027.title': 'Augmentation salariale: 1,0% au personnel soleurois dès 2027',
+    'blog.article.aumento-salari-statale-2027.excerpt': 'L’accord entre Regierungsrat et les associations du personnel prévoit une augmentation de 1,0% pour le personnel de l’État, les enseignants et le personnel hospitalier à partir de 2027.',
+    'blog.article.aumento-salari-statale-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSoFr;

@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-be::https://ajour.ch/story/703519/temporeduktion-auf-der-autobahn-bundesrat-bereitet-umstrittene-massnahme-vor": {
-      "section": "canton-be",
-      "ts": 1792925174435
-    },
     "canton-be::https://ajour.ch/story/703520/rduction-de-la-vitesse-sur-lautoroute-le-conseil-fdral-prpare-une-mesure-controverse": {
       "section": "canton-be",
       "ts": 1793013455648
@@ -63,6 +59,18 @@
     "canton-be::https://ajour.ch/story/703555/wendy-holdener-sechs-stunden-autofahrt-f%c3%bcr-ein-training-am-tag-vor-s%c3%b6lden-lohnt-sich-das": {
       "section": "canton-be",
       "ts": 1793069961342
+    },
+    "canton-be::https://ajour.ch/story/703994/bern-f%c3%bchrt-neue-sicherheitsmassnahmen-f%c3%bcr-velostationen-ein": {
+      "section": "canton-be",
+      "ts": 1793103860684
+    },
+    "canton-be::https://ajour.ch/story/704016/thuner-budget-2027-mit-schwarzer-null": {
+      "section": "canton-be",
+      "ts": 1793103863041
+    },
+    "canton-be::https://ajour.ch/story/703952/microsoft-a-propos-lundi-environ-60000-salaris-de-quitter-volontairement-le-groupe": {
+      "section": "canton-be",
+      "ts": 1793103865869
     }
   }
 }

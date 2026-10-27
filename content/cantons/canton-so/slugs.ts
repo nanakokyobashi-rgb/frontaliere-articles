@@ -19,6 +19,9 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'cambio-ora-rischio-wildunfalli': { it: 'cambio-ora-rischio-wildunfalli', en: 'time-change-wild-animal-risk-solothurn', de: 'zeitumstellung-wildunfall-solothurn', fr: 'changement-heure-risque-wild-soleure' },
  'batterie-sodio-soletta': { it: 'batterie-sodio-soletta', en: 'sodium-batteries-solothurn', de: 'sodium-batterien-solothurn', fr: 'batteries-sodium-soleure' },
  'sedute-parlamento-novembre-2026': { it: 'sedute-parlamento-novembre-2026', en: 'parliament-sessions-november-2026', de: 'parlament-sitzungen-november-2026', fr: 'sessions-parlement-novembre-2026' },
+ 'proposta-premi-assicurazione-2027': { it: 'proposta-premi-assicurazione-2027', en: '2027-insurance-premium-proposal', de: 'praemienverbilligung-2027', fr: 'proposition-primes-2027' },
+ 'soletta-aumento-salari': { it: 'soletta-aumento-salari', en: 'solothurn-wage-increase', de: 'solothurn-lohnerhoehung', fr: 'soleure-hausse-salaires' },
+ 'aumento-salari-statale-2027': { it: 'aumento-salari-statale-2027', en: 'solothurn-state-salary-increase-2027', de: 'loehner-anstieg-staatlich-2027', fr: 'augmentation-salaire-etat-2027' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

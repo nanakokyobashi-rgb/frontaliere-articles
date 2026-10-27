@@ -6,7 +6,8 @@
  * and exports them as environment variables.
  *
  * ─── CI mode (GitHub Actions) ────────────────────────────────────────────
- *   Writes KEY=VALUE lines to $GITHUB_ENV so every subsequent step sees them.
+ *   Writes KEY=VALUE or delimiter blocks to $GITHUB_ENV so every subsequent
+ *   step sees the exact value, including values containing newlines.
  *   Run AFTER the "Prepare Firebase credentials" step:
  *
  *     - name: Load secrets from Remote Config
@@ -29,6 +30,34 @@ import { realpathSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { ARTICLE_SOURCE_COPY_MODE_ENV } from './lib/source-copy-guard.mjs';
 import { fetchWithRefTimeout } from './lib/fetch-with-ref-timeout.mjs';
+
+/**
+ * Exact Remote Config → environment names consumed by the external Instagram
+ * Insights bridge. Keep this contract explicit: a spelling drift here leaves
+ * the downstream consumer on its fail-closed defaults without an obvious
+ * error in this repository.
+ */
+export const INSTAGRAM_INSIGHTS_ENV_CONTRACT = Object.freeze({
+  SOCIAL_ROBOT_INSIGHTS_SOURCE: 'SOCIAL_ROBOT_INSIGHTS_SOURCE',
+  INSTAGRAM_INSIGHTS_WINDOWS: 'INSTAGRAM_INSIGHTS_WINDOWS',
+  INSTAGRAM_INSIGHTS_DECISION_WINDOW_HOURS: 'INSTAGRAM_INSIGHTS_DECISION_WINDOW_HOURS',
+  INSTAGRAM_INSIGHTS_AUTONOMOUS_DECISIONS_ENABLED: 'INSTAGRAM_INSIGHTS_AUTONOMOUS_DECISIONS_ENABLED',
+  INSTAGRAM_INSIGHTS_MIN_OBSERVATIONS: 'INSTAGRAM_INSIGHTS_MIN_OBSERVATIONS',
+  INSTAGRAM_INSIGHTS_MIN_RELATIVE_LIFT: 'INSTAGRAM_INSIGHTS_MIN_RELATIVE_LIFT',
+  INSTAGRAM_INSIGHTS_MIN_ABSOLUTE_LIFT: 'INSTAGRAM_INSIGHTS_MIN_ABSOLUTE_LIFT',
+  INSTAGRAM_AUTONOMOUS_EXPLORATION_PERCENT: 'INSTAGRAM_AUTONOMOUS_EXPLORATION_PERCENT',
+  INSTAGRAM_AUTONOMOUS_CREATIVE_WINNERS: 'INSTAGRAM_AUTONOMOUS_CREATIVE_WINNERS',
+  INSTAGRAM_CAROUSEL_BACKGROUND_AB_ENABLED: 'INSTAGRAM_CAROUSEL_BACKGROUND_AB_ENABLED',
+  INSTAGRAM_CAROUSEL_BACKGROUND_AB_ROLLOUT_PERCENT: 'INSTAGRAM_CAROUSEL_BACKGROUND_AB_ROLLOUT_PERCENT',
+  INSTAGRAM_CAROUSEL_BACKGROUND_AB_VARIANTS: 'INSTAGRAM_CAROUSEL_BACKGROUND_AB_VARIANTS',
+  INSTAGRAM_CAROUSEL_BACKGROUND_AB_EXPLORATION_PERCENT: 'INSTAGRAM_CAROUSEL_BACKGROUND_AB_EXPLORATION_PERCENT',
+  INSTAGRAM_CAROUSEL_BACKGROUND_AB_WINNERS: 'INSTAGRAM_CAROUSEL_BACKGROUND_AB_WINNERS',
+});
+
+/** Return a copy of the external bridge's RC-key/environment-name contract. */
+export function instagramInsightsEnvContract() {
+  return { ...INSTAGRAM_INSIGHTS_ENV_CONTRACT };
+}
 
 // ─── RC Param → Env Var Mapping ──────────────────────────────────────────
 // Maps Remote Config parameter names to the environment variable names
@@ -249,20 +278,20 @@ export const RC_TO_ENV = {
   // The authenticated Chrome Professional Dashboard is the default Insights
   // source; Graph remains an explicit fallback. Decision parameters are
   // fail-closed until the minimum-observation and lift gates pass.
-  SOCIAL_ROBOT_INSIGHTS_SOURCE:        ['SOCIAL_ROBOT_INSIGHTS_SOURCE'],
-  INSTAGRAM_INSIGHTS_WINDOWS:           ['INSTAGRAM_INSIGHTS_WINDOWS'],
-  INSTAGRAM_INSIGHTS_DECISION_WINDOW_HOURS: ['INSTAGRAM_INSIGHTS_DECISION_WINDOW_HOURS'],
-  INSTAGRAM_INSIGHTS_AUTONOMOUS_DECISIONS_ENABLED: ['INSTAGRAM_INSIGHTS_AUTONOMOUS_DECISIONS_ENABLED'],
-  INSTAGRAM_INSIGHTS_MIN_OBSERVATIONS:  ['INSTAGRAM_INSIGHTS_MIN_OBSERVATIONS'],
-  INSTAGRAM_INSIGHTS_MIN_RELATIVE_LIFT: ['INSTAGRAM_INSIGHTS_MIN_RELATIVE_LIFT'],
-  INSTAGRAM_INSIGHTS_MIN_ABSOLUTE_LIFT: ['INSTAGRAM_INSIGHTS_MIN_ABSOLUTE_LIFT'],
-  INSTAGRAM_AUTONOMOUS_EXPLORATION_PERCENT: ['INSTAGRAM_AUTONOMOUS_EXPLORATION_PERCENT'],
-  INSTAGRAM_AUTONOMOUS_CREATIVE_WINNERS: ['INSTAGRAM_AUTONOMOUS_CREATIVE_WINNERS'],
-  INSTAGRAM_CAROUSEL_BACKGROUND_AB_ENABLED: ['INSTAGRAM_CAROUSEL_BACKGROUND_AB_ENABLED'],
-  INSTAGRAM_CAROUSEL_BACKGROUND_AB_ROLLOUT_PERCENT: ['INSTAGRAM_CAROUSEL_BACKGROUND_AB_ROLLOUT_PERCENT'],
-  INSTAGRAM_CAROUSEL_BACKGROUND_AB_VARIANTS: ['INSTAGRAM_CAROUSEL_BACKGROUND_AB_VARIANTS'],
-  INSTAGRAM_CAROUSEL_BACKGROUND_AB_EXPLORATION_PERCENT: ['INSTAGRAM_CAROUSEL_BACKGROUND_AB_EXPLORATION_PERCENT'],
-  INSTAGRAM_CAROUSEL_BACKGROUND_AB_WINNERS: ['INSTAGRAM_CAROUSEL_BACKGROUND_AB_WINNERS'],
+  SOCIAL_ROBOT_INSIGHTS_SOURCE:        [INSTAGRAM_INSIGHTS_ENV_CONTRACT.SOCIAL_ROBOT_INSIGHTS_SOURCE],
+  INSTAGRAM_INSIGHTS_WINDOWS:           [INSTAGRAM_INSIGHTS_ENV_CONTRACT.INSTAGRAM_INSIGHTS_WINDOWS],
+  INSTAGRAM_INSIGHTS_DECISION_WINDOW_HOURS: [INSTAGRAM_INSIGHTS_ENV_CONTRACT.INSTAGRAM_INSIGHTS_DECISION_WINDOW_HOURS],
+  INSTAGRAM_INSIGHTS_AUTONOMOUS_DECISIONS_ENABLED: [INSTAGRAM_INSIGHTS_ENV_CONTRACT.INSTAGRAM_INSIGHTS_AUTONOMOUS_DECISIONS_ENABLED],
+  INSTAGRAM_INSIGHTS_MIN_OBSERVATIONS:  [INSTAGRAM_INSIGHTS_ENV_CONTRACT.INSTAGRAM_INSIGHTS_MIN_OBSERVATIONS],
+  INSTAGRAM_INSIGHTS_MIN_RELATIVE_LIFT: [INSTAGRAM_INSIGHTS_ENV_CONTRACT.INSTAGRAM_INSIGHTS_MIN_RELATIVE_LIFT],
+  INSTAGRAM_INSIGHTS_MIN_ABSOLUTE_LIFT: [INSTAGRAM_INSIGHTS_ENV_CONTRACT.INSTAGRAM_INSIGHTS_MIN_ABSOLUTE_LIFT],
+  INSTAGRAM_AUTONOMOUS_EXPLORATION_PERCENT: [INSTAGRAM_INSIGHTS_ENV_CONTRACT.INSTAGRAM_AUTONOMOUS_EXPLORATION_PERCENT],
+  INSTAGRAM_AUTONOMOUS_CREATIVE_WINNERS: [INSTAGRAM_INSIGHTS_ENV_CONTRACT.INSTAGRAM_AUTONOMOUS_CREATIVE_WINNERS],
+  INSTAGRAM_CAROUSEL_BACKGROUND_AB_ENABLED: [INSTAGRAM_INSIGHTS_ENV_CONTRACT.INSTAGRAM_CAROUSEL_BACKGROUND_AB_ENABLED],
+  INSTAGRAM_CAROUSEL_BACKGROUND_AB_ROLLOUT_PERCENT: [INSTAGRAM_INSIGHTS_ENV_CONTRACT.INSTAGRAM_CAROUSEL_BACKGROUND_AB_ROLLOUT_PERCENT],
+  INSTAGRAM_CAROUSEL_BACKGROUND_AB_VARIANTS: [INSTAGRAM_INSIGHTS_ENV_CONTRACT.INSTAGRAM_CAROUSEL_BACKGROUND_AB_VARIANTS],
+  INSTAGRAM_CAROUSEL_BACKGROUND_AB_EXPLORATION_PERCENT: [INSTAGRAM_INSIGHTS_ENV_CONTRACT.INSTAGRAM_CAROUSEL_BACKGROUND_AB_EXPLORATION_PERCENT],
+  INSTAGRAM_CAROUSEL_BACKGROUND_AB_WINNERS: [INSTAGRAM_INSIGHTS_ENV_CONTRACT.INSTAGRAM_CAROUSEL_BACKGROUND_AB_WINNERS],
 
   // TikTok auto-posting (carousel — scripts/post-to-tiktok.mjs). The account
   // credentials are optional and the poster remains fail-soft until configured.
@@ -625,6 +654,29 @@ export function shouldExportRcValue(value, rcKey) {
   return rcValueState(value, rcKey) === 'export';
 }
 
+const ENV_KEY_RE = /^[A-Za-z_][A-Za-z0-9_]*$/;
+
+/**
+ * Serialize one value using GitHub's multiline environment-file protocol.
+ * Delimiter form is safe for both ordinary values and winner/variant maps;
+ * choosing a delimiter absent as a complete line prevents a value from
+ * terminating its own block.
+ */
+export function writeGithubEnvBlock(envKey, value) {
+  const key = String(envKey ?? '');
+  if (!ENV_KEY_RE.test(key)) throw new TypeError(`invalid GITHUB_ENV key: ${key}`);
+  if (typeof value !== 'string') throw new TypeError(`non-string GITHUB_ENV value for ${key}`);
+
+  const valueLines = value.split(/\r\n|\n|\r/);
+  let delimiter = `FRONTALIERE_${key}_EOF`;
+  let suffix = 0;
+  while (valueLines.includes(delimiter)) {
+    suffix += 1;
+    delimiter = `FRONTALIERE_${key}_EOF_${suffix}`;
+  }
+  return `${key}<<${delimiter}\n${value}\n${delimiter}`;
+}
+
 /**
  * Claim an environment target once per load pass. Multiple RC parameters can
  * intentionally point to the same legacy variable; the first mapping wins so
@@ -919,8 +971,9 @@ async function main() {
         if (!isTrivialSecret(value)) {
           process.stdout.write(`::add-mask::${value}\n`);
         }
-        // Use delimiter syntax for multi-line safety
-        lines.push(`${envKey}=${value}`);
+        // Delimiter syntax is required for winner/variant maps that may carry
+        // embedded newlines; using it for every value keeps one serializer.
+        lines.push(writeGithubEnvBlock(envKey, value));
       } else {
         // Shell-safe: single-quote the value, escape internal single quotes
         const escaped = value.replace(/'/g, "'\\''");

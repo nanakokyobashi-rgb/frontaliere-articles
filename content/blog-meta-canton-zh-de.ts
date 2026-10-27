@@ -63,6 +63,9 @@ const blogMetaCantonZhDe: Record<string, string> = {
     'blog.article.seconda-fattura-goldkueste.title': 'Goldküste: Ehefrau erhält eine zweite Steuerrechnung',
     'blog.article.seconda-fattura-goldkueste.excerpt': 'An der Goldküste erhält eine Ehefrau eine zweite Steuerrechnung nach dem Eintritt ihres schwer kranken Ehemanns in ein Pflegeheim.',
     'blog.article.seconda-fattura-goldkueste.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.spital-wetzikon-decisione-mercoled.title': 'Spital Wetzikon: wegweisende Entscheidung diesen Mittwoch',
+    'blog.article.spital-wetzikon-decisione-mercoled.excerpt': 'Die Gläubiger drohen dem Spital Wetzikon im Vorfeld der an diesem Mittwoch anstehenden, als entscheidend bezeichneten Entscheidung mit dem Konkurs.',
+    'blog.article.spital-wetzikon-decisione-mercoled.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonZhDe;
