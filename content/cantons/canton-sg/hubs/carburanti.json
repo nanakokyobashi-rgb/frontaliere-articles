@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-26T17:57:05.656Z",
-  "contentHash": "ae28c0a06a8a30648f8a2b318619232f6266b8017395695a0355ef2f13c1ceb6",
+  "updatedAt": "2026-10-27T00:21:44.857Z",
+  "contentHash": "a31794fefbc97c7c49e88aa314daea30e3ff752ed9d3e5e7558a67b6f02a46d7",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -84,6 +84,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Controllo traffico San Gallo: 105 violazioni accertate il 24 ottobre 2026",
+          "url": "/articoli-san-gallo/controllo-traffico-san-gallo-ottobre/",
+          "excerpt": "105 violazioni accertate nella notte del 24 ottobre Circa 150 veicoli e occupanti controllati 70 veicoli oltre 80 km/h sulla A13 Cosa: controllo mirato",
+          "date": "2026-10-27T00:06:31.670Z"
+        },
+        {
           "title": "40 comuni del Canton San Gallo chiudono il 2025 in positivo",
           "url": "/articoli-san-gallo/positive-chiusure-2025-sg/",
           "excerpt": "Su 75 comuni politici, 40 hanno chiuso il 2025 con avanzo; l'eccedenza aggregata è di circa CHF 28 milioni.",
@@ -106,12 +112,6 @@
           "url": "/articoli-san-gallo/lotteriefonds-89-progetti-cantone/",
           "excerpt": "Il Governo propone al Consiglio cantonale 89 progetti tra cultura, sociale e ambiente per 11,6 milioni di CHF, con decisione prevista in sessione invernale.",
           "date": "2026-10-24T10:01:50.012Z"
-        },
-        {
-          "title": "Kolumbanstrasse ridisegnata: più verde e fermate bus senza barriere",
-          "url": "/articoli-san-gallo/kolumbanstrasse-nuova-velostrasse/",
-          "excerpt": "Il 23 ottobre 2026 è stata completata la nuova configurazione della Kolumbanstrasse, che ora include 700 metri di itinerario ciclabile prioritario.",
-          "date": "2026-10-24T09:05:50.183Z"
         }
       ],
       "links": [
@@ -124,7 +124,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-26T17:57:05.656Z"
+      "updatedAt": "2026-10-27T00:21:44.857Z"
     },
     "en": {
       "canton": "SG",
@@ -195,6 +195,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "St. Gallen traffic check: 105 violations confirmed on October 24, 2026",
+          "url": "/en/st-gallen-articles/st-gallen-traffic-control-october/",
+          "excerpt": "105 violations recorded during the night of October 24 Approximately 150 vehicles and occupants checked 70 vehicles traveling at over 80 km/h on the A13",
+          "date": "2026-10-27T00:06:31.670Z"
+        },
+        {
           "title": "40 municipalities in the Canton of St. Gallen end 2025 with a surplus",
           "url": "/en/st-gallen-articles/positive-closures-2025-sg/",
           "excerpt": "Of 75 political municipalities, 40 closed 2025 with a surplus; the aggregate surplus is approximately CHF 28 million.",
@@ -217,12 +223,6 @@
           "url": "/en/st-gallen-articles/lotteriefonds-89-projects-canton/",
           "excerpt": "The Government is proposing 89 projects in culture, social affairs and the environment to the Cantonal Council, for 11,6 million CHF, with a decision expected during the winter session.",
           "date": "2026-10-24T10:01:50.012Z"
-        },
-        {
-          "title": "Kolumbanstrasse redesigned: greener and barrier-free bus stops",
-          "url": "/en/st-gallen-articles/kolumbanstrasse-new-velostrasse/",
-          "excerpt": "On October 23, 2026, the new configuration of Kolumbanstrasse was completed, which now includes 700 meters of priority cycling route.",
-          "date": "2026-10-24T09:05:50.183Z"
         }
       ],
       "links": [
@@ -235,7 +235,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-26T17:57:05.656Z"
+      "updatedAt": "2026-10-27T00:21:44.857Z"
     },
     "de": {
       "canton": "SG",
@@ -306,6 +306,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Verkehrskontrolle St. Gallen: 105 Verstöße am 24. Oktober 2026 festgestellt",
+          "url": "/de/st-gallen-artikel/verkehrskontrolle-st-gallen-oktober/",
+          "excerpt": "105 Verstöße in der Nacht vom 24.",
+          "date": "2026-10-27T00:06:31.670Z"
+        },
+        {
           "title": "40 Gemeinden des Kantons St. Gallen schliessen das Jahr 2025 positiv ab",
           "url": "/de/st-gallen-artikel/40-gemeinden-des-kantons-st-gallen-schliessen-das-jahr-2025-positiv-ab/",
           "excerpt": "Von 75 politischen Gemeinden schlossen 40 das Jahr 2025 mit einem Überschuss ab; der kumulierte Überschuss beträgt rund CHF 28 Millionen.",
@@ -328,12 +334,6 @@
           "url": "/de/st-gallen-artikel/lotteriefonds-89-projekte-kanton/",
           "excerpt": "Die Regierung schlägt dem Kantonsrat 89 Projekte aus den Bereichen Kultur, Soziales und Umwelt für 11,6 Millionen CHF vor, wobei die Entscheidung für die Wintersession vorgesehen ist.",
           "date": "2026-10-24T10:01:50.012Z"
-        },
-        {
-          "title": "Kolumbanstrasse neu gestaltet: mehr Grün und barrierefreie Bushaltestellen",
-          "url": "/de/st-gallen-artikel/kolumbanstrasse-neue-velostrasse/",
-          "excerpt": "Am 23. Oktober 2026 wurde die neue Gestaltung der Kolumbanstrasse fertiggestellt, die nun 700 Meter einer prioritären Veloroute umfasst.",
-          "date": "2026-10-24T09:05:50.183Z"
         }
       ],
       "links": [
@@ -346,7 +346,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-26T17:57:05.656Z"
+      "updatedAt": "2026-10-27T00:21:44.857Z"
     },
     "fr": {
       "canton": "SG",
@@ -417,6 +417,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Contrôle du trafic à Saint-Gall : 105 infractions constatées le 24 octobre 2026",
+          "url": "/fr/articles-saint-gall/controle-trafic-st-galle-octobre/",
+          "excerpt": "105 infractions constatées dans la nuit du 24 octobre Environ 150 véhicules et occupants contrôlés 70 véhicules à plus de 80 km/h sur l’A13 Quoi : contrôle",
+          "date": "2026-10-27T00:06:31.670Z"
+        },
+        {
           "title": "40 communes du canton de Saint-Gall clôturent l'année 2025 en positif",
           "url": "/fr/articles-saint-gall/positifs-clotures-2025-sg/",
           "excerpt": "Sur 75 communes politiques, 40 ont clôturé l'année 2025 avec un excédent ; l'excédent cumulé est d'environ 28 millions de CHF.",
@@ -439,12 +445,6 @@
           "url": "/fr/articles-saint-gall/lotteriefonds-89-projets-canton/",
           "excerpt": "Le Gouvernement propose au Conseil cantonal 89 projets dans les domaines de la culture, du social et de l’environnement pour un montant de 11,6 millions de CHF, avec une décision prévue lors de la session d’hiver.",
           "date": "2026-10-24T10:01:50.012Z"
-        },
-        {
-          "title": "Kolumbanstrasse réaménagée : plus de verdure et des arrêts de bus sans barrières",
-          "url": "/fr/articles-saint-gall/kolumbanstrasse-nouvelle-velostrasse/",
-          "excerpt": "Le 23 octobre 2026, la nouvelle configuration de la Kolumbanstrasse a été achevée, et elle comprend désormais 700 mètres d’itinéraire cyclable prioritaire.",
-          "date": "2026-10-24T09:05:50.183Z"
         }
       ],
       "links": [
@@ -457,7 +457,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-26T17:57:05.656Z"
+      "updatedAt": "2026-10-27T00:21:44.857Z"
     }
   }
 }

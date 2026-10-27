@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-26T23:12:35.898Z",
-  "contentHash": "8fd8ce40e3bd048a1cf19438d67b966036c202911cef74d9d764d4b1cb015420",
+  "updatedAt": "2026-10-27T00:21:44.857Z",
+  "contentHash": "e7fe704a40066dad3943da9e220f01bcc9d0d8f3ce3e652a913f5652d500cb0a",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -203,10 +203,10 @@
       ],
       "curatedArticles": [
         {
-          "title": "Incidente A13 Widnau 2026: danni e impatto sul traffico",
-          "url": "/articoli-san-gallo/incidente-a13-widnau-2026/",
-          "excerpt": "Incidente sulla A13 a Widnau il 5 ottobre 2026",
-          "date": "2026-10-07T10:36:03.789Z"
+          "title": "Controllo traffico San Gallo: 105 violazioni accertate il 24 ottobre 2026",
+          "url": "/articoli-san-gallo/controllo-traffico-san-gallo-ottobre/",
+          "excerpt": "105 violazioni accertate nella notte del 24 ottobre Circa 150 veicoli e occupanti controllati 70 veicoli oltre 80 km/h sulla A13 Cosa: controllo mirato",
+          "date": "2026-10-27T00:06:31.670Z"
         },
         {
           "title": "Tamponamento A13 a Sevelen: due feriti il 25 ottobre 2026",
@@ -225,6 +225,12 @@
           "url": "/articoli-san-gallo/kolumbanstrasse-nuova-velostrasse/",
           "excerpt": "Il 23 ottobre 2026 è stata completata la nuova configurazione della Kolumbanstrasse, che ora include 700 metri di itinerario ciclabile prioritario.",
           "date": "2026-10-24T09:05:50.183Z"
+        },
+        {
+          "title": "Incidente A13 Widnau 2026: danni e impatto sul traffico",
+          "url": "/articoli-san-gallo/incidente-a13-widnau-2026/",
+          "excerpt": "Incidente sulla A13 a Widnau il 5 ottobre 2026",
+          "date": "2026-10-07T10:36:03.789Z"
         },
         {
           "title": "Voto sul Bahnhofplatz Wil: credito di 63,66 milioni",
@@ -280,7 +286,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-26T23:12:35.898Z"
+      "updatedAt": "2026-10-27T00:21:44.857Z"
     },
     "en": {
       "canton": "SG",
@@ -461,9 +467,10 @@
       ],
       "curatedArticles": [
         {
-          "title": "A13 Widnau accident 2026: damage and impact on traffic",
-          "url": "/en/st-gallen-articles/a13-widnau-accident-2026/",
-          "date": "2026-10-07T10:36:03.789Z"
+          "title": "St. Gallen traffic check: 105 violations confirmed on October 24, 2026",
+          "url": "/en/st-gallen-articles/st-gallen-traffic-control-october/",
+          "excerpt": "105 violations recorded during the night of October 24 Approximately 150 vehicles and occupants checked 70 vehicles traveling at over 80 km/h on the A13",
+          "date": "2026-10-27T00:06:31.670Z"
         },
         {
           "title": "Rear-end collision on A13 in Sevelen: two injured on October 25, 2026",
@@ -482,6 +489,11 @@
           "url": "/en/st-gallen-articles/kolumbanstrasse-new-velostrasse/",
           "excerpt": "On October 23, 2026, the new configuration of Kolumbanstrasse was completed, which now includes 700 meters of priority cycling route.",
           "date": "2026-10-24T09:05:50.183Z"
+        },
+        {
+          "title": "A13 Widnau accident 2026: damage and impact on traffic",
+          "url": "/en/st-gallen-articles/a13-widnau-accident-2026/",
+          "date": "2026-10-07T10:36:03.789Z"
         },
         {
           "title": "Vote on Bahnhofplatz Wil: credit of 63,66 million",
@@ -537,7 +549,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-26T23:12:35.898Z"
+      "updatedAt": "2026-10-27T00:21:44.857Z"
     },
     "de": {
       "canton": "SG",
@@ -718,9 +730,10 @@
       ],
       "curatedArticles": [
         {
-          "title": "Unfall auf der A13 in Widnau 2026: Schäden und Auswirkungen auf den Verkehr",
-          "url": "/de/st-gallen-artikel/a13-widnau-unfall-2026/",
-          "date": "2026-10-07T10:36:03.789Z"
+          "title": "Verkehrskontrolle St. Gallen: 105 Verstöße am 24. Oktober 2026 festgestellt",
+          "url": "/de/st-gallen-artikel/verkehrskontrolle-st-gallen-oktober/",
+          "excerpt": "105 Verstöße in der Nacht vom 24.",
+          "date": "2026-10-27T00:06:31.670Z"
         },
         {
           "title": "Auffahrunfall auf der A13 bei Sevelen: zwei Verletzte am 25. Oktober 2026",
@@ -739,6 +752,11 @@
           "url": "/de/st-gallen-artikel/kolumbanstrasse-neue-velostrasse/",
           "excerpt": "Am 23. Oktober 2026 wurde die neue Gestaltung der Kolumbanstrasse fertiggestellt, die nun 700 Meter einer prioritären Veloroute umfasst.",
           "date": "2026-10-24T09:05:50.183Z"
+        },
+        {
+          "title": "Unfall auf der A13 in Widnau 2026: Schäden und Auswirkungen auf den Verkehr",
+          "url": "/de/st-gallen-artikel/a13-widnau-unfall-2026/",
+          "date": "2026-10-07T10:36:03.789Z"
         },
         {
           "title": "Abstimmung über den Bahnhofplatz Wil: Kredit von 63,66 Millionen",
@@ -794,7 +812,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-26T23:12:35.898Z"
+      "updatedAt": "2026-10-27T00:21:44.857Z"
     },
     "fr": {
       "canton": "SG",
@@ -975,10 +993,10 @@
       ],
       "curatedArticles": [
         {
-          "title": "Accident A13 Widnau 2026 : dommages et impact sur le trafic",
-          "url": "/fr/articles-saint-gall/accident-a13-widnau-2026/",
-          "excerpt": "Accident sur l’A13 à Widnau le 5 octobre 2026",
-          "date": "2026-10-07T10:36:03.789Z"
+          "title": "Contrôle du trafic à Saint-Gall : 105 infractions constatées le 24 octobre 2026",
+          "url": "/fr/articles-saint-gall/controle-trafic-st-galle-octobre/",
+          "excerpt": "105 infractions constatées dans la nuit du 24 octobre Environ 150 véhicules et occupants contrôlés 70 véhicules à plus de 80 km/h sur l’A13 Quoi : contrôle",
+          "date": "2026-10-27T00:06:31.670Z"
         },
         {
           "title": "Collision par l’arrière sur l’A13 à Sevelen : deux blessés le 25 octobre 2026",
@@ -997,6 +1015,12 @@
           "url": "/fr/articles-saint-gall/kolumbanstrasse-nouvelle-velostrasse/",
           "excerpt": "Le 23 octobre 2026, la nouvelle configuration de la Kolumbanstrasse a été achevée, et elle comprend désormais 700 mètres d’itinéraire cyclable prioritaire.",
           "date": "2026-10-24T09:05:50.183Z"
+        },
+        {
+          "title": "Accident A13 Widnau 2026 : dommages et impact sur le trafic",
+          "url": "/fr/articles-saint-gall/accident-a13-widnau-2026/",
+          "excerpt": "Accident sur l’A13 à Widnau le 5 octobre 2026",
+          "date": "2026-10-07T10:36:03.789Z"
         },
         {
           "title": "Vote sur le Bahnhofplatz Wil : crédit de 63,66 millions",
@@ -1052,7 +1076,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-26T23:12:35.898Z"
+      "updatedAt": "2026-10-27T00:21:44.857Z"
     }
   }
 }

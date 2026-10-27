@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "fisco",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "074b5fe76eb9933e959b1ce0569e16fb21d877c10520bdf3df2f95c399ab71b5",
+  "updatedAt": "2026-10-27T00:21:44.857Z",
+  "contentHash": "9c106e7ffd2c3059cbcc72daef39035761bba949375434f701ffb3c2b7a6527f",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -102,6 +102,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Imposizione dei coniugi: voto il 29 novembre",
+          "url": "/articoli-giura/fiscalita-coppie-marite-voto/",
+          "excerpt": "L'8 marzo l'imposizione individuale è passata con il 54% Il 29 novembre si vota sull'iniziativa del Centro Il testo propone l'imposizione comune dei coniugi",
+          "date": "2026-10-27T00:08:19.325Z"
+        },
+        {
           "title": "Giura aumenta sussidi per famiglie a basso reddito",
           "url": "/articoli-giura/giura-aumento-sussidi-famiglie/",
           "excerpt": "Il massimale del supplemento passa da 300 a 330 CHF al mese per genitore per famiglie con RDU inferiore a 18'000 CHF, decorrenza 2027.",
@@ -141,7 +147,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-27T00:21:44.857Z"
     },
     "en": {
       "canton": "JU",
@@ -226,6 +232,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Taxation of spouses: vote on 29 November",
+          "url": "/en/jura-articles/marital-couple-tax-vote/",
+          "excerpt": "On 8 March, individual taxation passed with 54% On November 29, the vote will be held on the Center's initiative The text proposes the common taxation",
+          "date": "2026-10-27T00:08:19.325Z"
+        },
+        {
           "title": "Jura increases subsidies for low-income families",
           "url": "/en/jura-articles/jura-subsidy-increase-low-income/",
           "excerpt": "The maximum supplement increases from 300 to 330 CHF per month per parent for families with RDU below 18'000 CHF, effective 2027.",
@@ -265,7 +277,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-27T00:21:44.857Z"
     },
     "de": {
       "canton": "JU",
@@ -350,6 +362,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Besteuerung der Ehepartner: Abstimmung am 29. November",
+          "url": "/de/jura-artikel/ehepaare-steuer-abstimmung/",
+          "excerpt": "Am 8. März wurde die Einzelbesteuerung mit 54 % verabschiedet. Am 29. November findet die Abstimmung über die Initiative des Zentrums statt Der Text schlägt",
+          "date": "2026-10-27T00:08:19.325Z"
+        },
+        {
           "title": "Jura erhöht die Zuschüsse für Familien mit niedrigem Einkommen",
           "url": "/de/jura-artikel/jura-subvention-erhoehung-familien/",
           "excerpt": "Der Höchstbetrag des Zuschlags steigt für Familien mit einem RDU unter 18'000 CHF ab 2027 von 300 auf 330 CHF pro Monat und Elternteil.",
@@ -389,7 +407,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-27T00:21:44.857Z"
     },
     "fr": {
       "canton": "JU",
@@ -474,6 +492,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Fiscalité des conjoints : votez le 29 novembre",
+          "url": "/fr/articles-jura/fiscalite-couples-maries-vote/",
+          "excerpt": "Le 8 mars, la fiscalité individuelle a été adoptée avec 54 % Le 29 novembre, le vote aura lieu sur l'initiative du Centre Le texte propose la taxation commune",
+          "date": "2026-10-27T00:08:19.325Z"
+        },
+        {
           "title": "Le Jura augmente les aides pour les familles à faible revenu",
           "url": "/fr/articles-jura/jura-augmentation-subventions-familles/",
           "excerpt": "Le plafond du supplément passe de 300 à 330 CHF par mois et par parent pour les familles dont le RDU est inférieur à 18'000 CHF, à compter de 2027.",
@@ -513,7 +537,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-27T00:21:44.857Z"
     }
   }
 }

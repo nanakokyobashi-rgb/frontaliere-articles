@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "carburanti",
-  "updatedAt": "2026-10-26T18:10:53.698Z",
-  "contentHash": "c11976c3b64d917d87ff4ff9029c8b28c52f0d4758047cf216bd0fbb6459492c",
+  "updatedAt": "2026-10-27T00:21:44.857Z",
+  "contentHash": "e4144a70522fcf638108a39decf7fe8267516f5357e63463de1aefbe57dd2d32",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Imposizione dei coniugi: voto il 29 novembre",
+          "url": "/articoli-giura/fiscalita-coppie-marite-voto/",
+          "excerpt": "L'8 marzo l'imposizione individuale è passata con il 54% Il 29 novembre si vota sull'iniziativa del Centro Il testo propone l'imposizione comune dei coniugi",
+          "date": "2026-10-27T00:08:19.325Z"
+        },
+        {
           "title": "Governo giurassiano nomina due figure per il 2027",
           "url": "/articoli-giura/governo-giurassiano-nomine-2027/",
           "excerpt": "Sandrine Crevoisier guiderà il nuovo Servizio penitenziario.",
@@ -94,12 +100,6 @@
           "url": "/articoli-giura/giura-formazione-postobbligatoria-2026/",
           "excerpt": "Due progetti di revisione trasmessi al Parlamento Quattro ambiti: formazione, ristoranti scolastici, lingue, ammissioni La misura n.",
           "date": "2026-10-21T12:36:10.998Z"
-        },
-        {
-          "title": "Le casse pensioni svizzere migliorano Q3 2026",
-          "url": "/articoli-giura/casse-pensioni-migliorano-terzo-trimestre/",
-          "excerpt": "L'indice WTW sale da 130,2% a 131,9% Il tasso di attualizzazione arriva all'1,65% Gli impegni pensionistici scendono del 6,5% Gli attivi dei piani calano",
-          "date": "2026-10-08T15:48:11.331Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-26T18:10:53.698Z"
+      "updatedAt": "2026-10-27T00:21:44.857Z"
     },
     "en": {
       "canton": "JU",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Taxation of spouses: vote on 29 November",
+          "url": "/en/jura-articles/marital-couple-tax-vote/",
+          "excerpt": "On 8 March, individual taxation passed with 54% On November 29, the vote will be held on the Center's initiative The text proposes the common taxation",
+          "date": "2026-10-27T00:08:19.325Z"
+        },
+        {
           "title": "Jura government appoints two figures for 2027",
           "url": "/en/jura-articles/jura-government-appointments-2027/",
           "excerpt": "Sandrine Crevoisier will lead the new Penitentiary Service.",
@@ -193,12 +199,6 @@
           "url": "/en/jura-articles/jura-post-compulsory-education-2026/",
           "excerpt": "Two revision projects submitted to Parliament Four areas: education, school restaurants, languages, admissions Measure No.",
           "date": "2026-10-21T12:36:10.998Z"
-        },
-        {
-          "title": "Swiss pension funds improve Q3 2026",
-          "url": "/en/jura-articles/swiss-pension-funds-improve-q3-2026/",
-          "excerpt": "WTW index rises from 130.2% to 131.9% The discount rate reaches 1.65% Pension commitments fall by 6.5% Plan assets fall by 0.6% Who → Willis Towers Watson (WTW)",
-          "date": "2026-10-08T15:48:11.331Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-26T18:10:53.698Z"
+      "updatedAt": "2026-10-27T00:21:44.857Z"
     },
     "de": {
       "canton": "JU",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Besteuerung der Ehepartner: Abstimmung am 29. November",
+          "url": "/de/jura-artikel/ehepaare-steuer-abstimmung/",
+          "excerpt": "Am 8. März wurde die Einzelbesteuerung mit 54 % verabschiedet. Am 29. November findet die Abstimmung über die Initiative des Zentrums statt Der Text schlägt",
+          "date": "2026-10-27T00:08:19.325Z"
+        },
+        {
           "title": "Die Regierung von Jura ernennt für 2027 zweistellige Personen",
           "url": "/de/jura-artikel/jurakanton-nominationen-2027/",
           "excerpt": "Sandrine Crevoisier wird den neuen Gefängnisdienst leiten.",
@@ -292,12 +298,6 @@
           "url": "/de/jura-artikel/jura-nachobligatorische-bildung-2026/",
           "excerpt": "Zwei Revisionsvorlagen an das Parlament übermittelt Vier Bereiche: Ausbildung, Schulrestaurants, Sprachen, Zulassungen Die Maßnahme Nr.",
           "date": "2026-10-21T12:36:10.998Z"
-        },
-        {
-          "title": "Schweizer Pensionskassen verbessern Q3 2026",
-          "url": "/de/jura-artikel/schweizer-pensionskassen-verbessern-q3-2026/",
-          "excerpt": "Der WTW-Index steigt von 130,2% auf 131,9% Der Abzinsungssatz beträgt bis zu 1,65% Pensionsverpflichtungen sinken um 6,5% Die Aktiva der Stockwerke sinken um",
-          "date": "2026-10-08T15:48:11.331Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-26T18:10:53.698Z"
+      "updatedAt": "2026-10-27T00:21:44.857Z"
     },
     "fr": {
       "canton": "JU",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Fiscalité des conjoints : votez le 29 novembre",
+          "url": "/fr/articles-jura/fiscalite-couples-maries-vote/",
+          "excerpt": "Le 8 mars, la fiscalité individuelle a été adoptée avec 54 % Le 29 novembre, le vote aura lieu sur l'initiative du Centre Le texte propose la taxation commune",
+          "date": "2026-10-27T00:08:19.325Z"
+        },
+        {
           "title": "Le gouvernement Jura nomme deux chiffres pour 2027",
           "url": "/fr/articles-jura/gouvernement-jurassien-nominations-2027/",
           "excerpt": "Sandrine Crevoisier dirigera le nouveau Service pénitentiaire.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-jura/jura-formation-postobligatoire-2026/",
           "excerpt": "Deux projets de révision transmis au Parlement Quatre domaines : formation, restaurants scolaires, langues, admissions La mesure n° 506 figure dans le Plan",
           "date": "2026-10-21T12:36:10.998Z"
-        },
-        {
-          "title": "Les caisses de pension suisses améliorent Q3 2026",
-          "url": "/fr/articles-jura/les-caisses-de-pension-suisses-ameliorent-q3-2026/",
-          "excerpt": "L'indice WTW passe de 130,2 % à 131,9 % Le taux d'actualisation atteint 1,65 % Les engagements de retraite baissent de 6,5 % Les actifs des plans baissent",
-          "date": "2026-10-08T15:48:11.331Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-26T18:10:53.698Z"
+      "updatedAt": "2026-10-27T00:21:44.857Z"
     }
   }
 }
