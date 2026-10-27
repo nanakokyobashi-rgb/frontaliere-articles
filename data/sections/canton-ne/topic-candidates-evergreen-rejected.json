@@ -59,6 +59,18 @@
     "canton-ne::https://www.canalalpha.ch/play/meta/lieux/canton-de-neuchatel": {
       "section": "canton-ne",
       "ts": 1793090176159
+    },
+    "canton-ne::https://www.canalalpha.ch/play/la-boucle/episode/43715/interview-ruwaiyda-al-hasheme-gabriel-nyange-les-nouveaux-ambassadeurs-du-canton-de-neuchatel": {
+      "section": "canton-ne",
+      "ts": 1793106164491
+    },
+    "canton-ne::https://www.estrepublicain.fr/culture-loisirs/2026/10/24/avec-le-festival-resonance-quatre-jours-pour-celebrer-la-danse": {
+      "section": "canton-ne",
+      "ts": 1793107467815
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261027-une-suisse-plus-independante-energetiquement-grace-au-nucleaire.html": {
+      "section": "canton-ne",
+      "ts": 1793107478464
     }
   }
 }
