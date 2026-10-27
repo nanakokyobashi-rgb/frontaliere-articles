@@ -57,6 +57,9 @@ const blogMetaCantonSoDe: Record<string, string> = {
     'blog.article.soletta-aumento-salari.title': 'Solothurn: Löhne steigen ab dem kommenden Jahr um 1,0%',
     'blog.article.soletta-aumento-salari.excerpt': 'Die Kantonsregierung und die Personalverbände haben für Angestellte des öffentlichen Dienstes, Schulen und Spitäler ab dem kommenden Jahr eine Erhöhung um 1,0% vereinbart.',
     'blog.article.soletta-aumento-salari.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.aumento-salari-statale-2027.title': 'Lohnerhöhung von 1,0% für das Staatspersonal des Kantons Solothurn ab 2027',
+    'blog.article.aumento-salari-statale-2027.excerpt': 'Die Vereinbarung zwischen dem Regierungsrat und den Personalverbänden sieht ab 2027 eine Lohnerhöhung von 1,0% für das Staatspersonal, die Lehrpersonen und die Spitalangestellten vor.',
+    'blog.article.aumento-salari-statale-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSoDe;

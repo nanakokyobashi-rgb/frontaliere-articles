@@ -204,4 +204,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'aumento-salari-statale-2027',
+ category: 'novita',
+ date: '2026-10-27T13:05:27.562Z',
+ image: '/images/blog/article-aumento-salari-statale-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

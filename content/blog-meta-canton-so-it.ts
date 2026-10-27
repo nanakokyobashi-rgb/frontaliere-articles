@@ -57,6 +57,9 @@ const blogMetaCantonSoIt: Record<string, string> = {
     'blog.article.soletta-aumento-salari.title': 'Soletta: salari aumentano dell\'1,0% dal prossimo anno',
     'blog.article.soletta-aumento-salari.excerpt': 'Il Governo cantonale e le associazioni del personale hanno concordato un aumento dell\'1,0% dal prossimo anno per dipendenti pubblici, scuole e ospedali.',
     'blog.article.soletta-aumento-salari.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.aumento-salari-statale-2027.title': 'Aumento salariale del 1,0% per personale statale del Canton Soletta dal 2027',
+    'blog.article.aumento-salari-statale-2027.excerpt': 'L\'accordo tra Regierungsrat e associazioni del personale prevede un aumento dell\'1,0% per personale statale, docenti e dipendenti ospedalieri a partire dal 2027.',
+    'blog.article.aumento-salari-statale-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSoIt;
