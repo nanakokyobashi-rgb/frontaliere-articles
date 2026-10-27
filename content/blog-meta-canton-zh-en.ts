@@ -60,6 +60,9 @@ const blogMetaCantonZhEn: Record<string, string> = {
     'blog.article.zurigo-crisi-alloggi-giovani.title': 'Zurich housing crisis: young female councillors call for solutions',
     'blog.article.zurigo-crisi-alloggi-giovani.excerpt': 'Five Zurich cantonal councillors are calling for housing solutions for people in training through a postulate applying throughout the canton.',
     'blog.article.zurigo-crisi-alloggi-giovani.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.seconda-fattura-goldkueste.title': 'Gold Coast: wife receives a second tax bill',
+    'blog.article.seconda-fattura-goldkueste.excerpt': 'On the Gold Coast, a wife receives a second tax bill after her seriously ill husband enters a nursing home.',
+    'blog.article.seconda-fattura-goldkueste.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonZhEn;

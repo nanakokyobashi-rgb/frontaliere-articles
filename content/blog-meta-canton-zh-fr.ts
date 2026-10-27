@@ -60,6 +60,9 @@ const blogMetaCantonZhFr: Record<string, string> = {
     'blog.article.zurigo-crisi-alloggi-giovani.title': 'Crise du logement à Zurich : de jeunes conseillères demandent des solutions',
     'blog.article.zurigo-crisi-alloggi-giovani.excerpt': 'Cinq conseillères cantonales zurichoises demandent des solutions de logement pour les personnes en formation par le biais d’un postulat étendu à tout le canton.',
     'blog.article.zurigo-crisi-alloggi-giovani.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.seconda-fattura-goldkueste.title': 'Goldküste : l\'épouse reçoit une deuxième facture fiscale',
+    'blog.article.seconda-fattura-goldkueste.excerpt': 'Sur la Goldküste, une épouse reçoit une deuxième facture fiscale après l\'entrée de son mari gravement malade dans un établissement de soins.',
+    'blog.article.seconda-fattura-goldkueste.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonZhFr;

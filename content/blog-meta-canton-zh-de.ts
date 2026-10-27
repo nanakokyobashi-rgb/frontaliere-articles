@@ -60,6 +60,9 @@ const blogMetaCantonZhDe: Record<string, string> = {
     'blog.article.zurigo-crisi-alloggi-giovani.title': 'Wohnungskrise in Zürich: Junge Kantonsrätinnen fordern Lösungen',
     'blog.article.zurigo-crisi-alloggi-giovani.excerpt': 'Fünf Zürcher Kantonsrätinnen fordern mit einem auf den ganzen Kanton ausgeweiteten Postulat Wohnlösungen für Menschen in Ausbildung.',
     'blog.article.zurigo-crisi-alloggi-giovani.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.seconda-fattura-goldkueste.title': 'Goldküste: Ehefrau erhält eine zweite Steuerrechnung',
+    'blog.article.seconda-fattura-goldkueste.excerpt': 'An der Goldküste erhält eine Ehefrau eine zweite Steuerrechnung nach dem Eintritt ihres schwer kranken Ehemanns in ein Pflegeheim.',
+    'blog.article.seconda-fattura-goldkueste.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonZhDe;

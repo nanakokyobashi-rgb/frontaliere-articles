@@ -215,4 +215,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'seconda-fattura-goldkueste',
+ category: 'fiscale',
+ date: '2026-10-27T10:51:21.509Z',
+ image: '/images/blog/article-seconda-fattura-goldkueste.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['ZH'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];
