@@ -328,6 +328,46 @@ test('RSS legge i campi SEO dalle array JSON-LD senza confondere i template URL'
   }
 });
 
+test('RSS conserva il nome autore quando contiene una graffa', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'rss-author-brace-'));
+  try {
+    fs.mkdirSync(path.join(root, 'content', 'seo'), { recursive: true });
+    const source = [
+      'export const SEO = {',
+      "  'blog-author-brace': {",
+      '    "headline": "Headline autore",',
+      '    "structuredData": {',
+      '      "@type": "NewsArticle",',
+      '      "author": {',
+      '        "@type": "Person",',
+      '        "name": "A } B",',
+      '        "url": "https://frontaliereticino.ch/autori/a-brace/",',
+      '      },',
+      '      "datePublished": "2026-09-12T10:00:00Z",',
+      '    },',
+      '    "datePublished": "2026-09-12T10:00:00Z",',
+      '  },',
+      '};',
+      '',
+    ].join('\n');
+    fs.writeFileSync(path.join(root, 'content', 'seo', 'seo-blog.ts'), source);
+
+    const result = buildSectionFeeds({
+      fs,
+      path,
+      rootDir: root,
+      section: { ...RSS_SECTIONS[0], seoFiles: ['seo-blog.ts'] },
+      layout: { seoDir: 'content/seo', localesDir: 'content', slugDir: 'content' },
+      repairSerpSnippet: (text) => text,
+    });
+    const feed = result.feeds.find(([name]) => name === 'rss.xml')?.[1] ?? '';
+
+    assert.match(feed, /<dc:creator><!\[CDATA\[A \} B\]\]><\/dc:creator>/);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('RSS e floor falliscono chiusi su una entry reale con graffe sbilanciate', () => {
   const source = [
     'export const SEO = {',

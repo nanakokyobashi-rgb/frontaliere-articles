@@ -13,6 +13,7 @@ export {
   removeSeoEntriesFromSource,
   hasInterpolatedStaticProperty,
   lastStaticPropertyValue,
+  readStaticObjectProperty,
   readStructuredSeoBlock,
   readStructuredSeoDescription,
   readStructuredSeoDescriptionState,

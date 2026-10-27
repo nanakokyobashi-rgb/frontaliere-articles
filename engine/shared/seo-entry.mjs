@@ -680,17 +680,22 @@ export function hasInterpolatedStaticProperty(block, field, options = {}) {
   return interpolatedPropertyState(block, field, options).dynamic;
 }
 
-/** Return the final balanced structuredData object, if it is an object. */
-export function readStructuredSeoBlock(block) {
-  let structuredData;
+/** Return the final balanced object literal assigned to a property. */
+export function readStaticObjectProperty(block, field) {
+  let objectBlock;
   forEachStaticProperty(block, ({ key, valueStart, valueEnd }) => {
-    if (key === 'structuredData') {
-      structuredData = block[valueStart] === '{'
+    if (key === field) {
+      objectBlock = block[valueStart] === '{'
         ? block.slice(valueStart, valueEnd)
         : undefined;
     }
   });
-  return structuredData;
+  return objectBlock;
+}
+
+/** Return the final balanced structuredData object, if it is an object. */
+export function readStructuredSeoBlock(block) {
+  return readStaticObjectProperty(block, 'structuredData');
 }
 
 /** Return balanced object literals from the final structuredData value. */
