@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "servizi",
-  "updatedAt": "2026-10-27T01:37:11.978Z",
-  "contentHash": "f32a69d6469183daa4fe6ec7da5a3a0c05c12ae3fa9cc1032133cf6c3cbddda1",
+  "updatedAt": "2026-10-27T09:50:47.476Z",
+  "contentHash": "c6d69d830a7d77a0ae08ddd480e3e6557504cb0c05db3ab83f91ff254e1ca889",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,18 +14,13 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-26T21:45:29.244Z",
+      "updatedAt": "2026-10-27T00:56:28.252Z",
       "keyFacts": 0
     },
     {
       "id": "aste-targhe",
       "updatedAt": "2026-10-26T22:41:01.543Z",
       "keyFacts": 1
-    },
-    {
-      "id": "meteo",
-      "updatedAt": "2026-10-26T21:08:31.026Z",
-      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
@@ -91,7 +86,7 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-10-26T21:45:29.244Z"
+          "updatedAt": "2026-10-27T00:56:28.252Z"
         },
         {
           "id": "aste-targhe",
@@ -123,20 +118,6 @@
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction/ui/app/init?locale=de_CH",
           "updatedAt": "2026-10-26T22:41:01.543Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Solothurn",
-              "value": "8 °C",
-              "detail": "oggi da 4 a 9 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-26T21:08:31.026Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -244,7 +225,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-27T01:37:11.978Z"
+      "updatedAt": "2026-10-27T09:50:47.476Z"
     },
     "en": {
       "canton": "SO",
@@ -303,7 +284,7 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-10-26T21:45:29.244Z"
+          "updatedAt": "2026-10-27T00:56:28.252Z"
         },
         {
           "id": "aste-targhe",
@@ -335,20 +316,6 @@
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction/ui/app/init?locale=de_CH",
           "updatedAt": "2026-10-26T22:41:01.543Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Solothurn",
-              "value": "8 °C",
-              "detail": "today from 4 to 9 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-26T21:08:31.026Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -452,7 +419,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-27T01:37:11.978Z"
+      "updatedAt": "2026-10-27T09:50:47.476Z"
     },
     "de": {
       "canton": "SO",
@@ -511,7 +478,7 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-10-26T21:45:29.244Z"
+          "updatedAt": "2026-10-27T00:56:28.252Z"
         },
         {
           "id": "aste-targhe",
@@ -543,20 +510,6 @@
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction/ui/app/init?locale=de_CH",
           "updatedAt": "2026-10-26T22:41:01.543Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Solothurn",
-              "value": "8 °C",
-              "detail": "heute 4 bis 9 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-26T21:08:31.026Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -660,7 +613,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-27T01:37:11.978Z"
+      "updatedAt": "2026-10-27T09:50:47.476Z"
     },
     "fr": {
       "canton": "SO",
@@ -719,7 +672,7 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-10-26T21:45:29.244Z"
+          "updatedAt": "2026-10-27T00:56:28.252Z"
         },
         {
           "id": "aste-targhe",
@@ -751,20 +704,6 @@
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction/ui/app/init?locale=de_CH",
           "updatedAt": "2026-10-26T22:41:01.543Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Solothurn",
-              "value": "8 °C",
-              "detail": "aujourd’hui de 4 à 9 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-26T21:08:31.026Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -864,7 +803,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-27T01:37:11.978Z"
+      "updatedAt": "2026-10-27T09:50:47.476Z"
     }
   }
 }
