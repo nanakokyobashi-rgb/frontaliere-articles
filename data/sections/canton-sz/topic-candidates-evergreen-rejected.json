@@ -47,6 +47,10 @@
     "canton-sz::https://www.einsiedeln.ch/verwaltung/mitteilungen/aktuelle-mitteilungen?m=4563": {
       "section": "canton-sz",
       "ts": 1793097586822
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/schweizundwelt/bund-prueft-tempo-80-auf-schweizer-autobahnen-art-1728882": {
+      "section": "canton-sz",
+      "ts": 1793098284697
     }
   }
 }
