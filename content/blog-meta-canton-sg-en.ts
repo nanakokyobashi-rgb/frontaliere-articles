@@ -69,6 +69,9 @@ const blogMetaCantonSgEn: Record<string, string> = {
     'blog.article.positive-chiusure-2025-sg.title': '40 municipalities in the Canton of St. Gallen end 2025 with a surplus',
     'blog.article.positive-chiusure-2025-sg.excerpt': 'Of 75 political municipalities, 40 closed 2025 with a surplus; the aggregate surplus is approximately CHF 28 million.',
     'blog.article.positive-chiusure-2025-sg.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.controllo-traffico-san-gallo-ottobre.title': 'St. Gallen traffic check: 105 violations confirmed on October 24, 2026',
+    'blog.article.controllo-traffico-san-gallo-ottobre.excerpt': '105 violations recorded during the night of October 24 Approximately 150 vehicles and occupants checked 70 vehicles traveling at over 80 km/h on the A13',
+    'blog.article.controllo-traffico-san-gallo-ottobre.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSgEn;

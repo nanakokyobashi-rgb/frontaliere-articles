@@ -25,6 +25,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'abstimmung-bahnhof-wil-allee': { it: 'abstimmung-bahnhof-wil-allee', en: 'vote-november-29-2026-wil-station-and-allee-for-a-safe-interchange', de: 'abstimmung-29-11-2026-bahnhof-wil-allee-sicherer-umstieg', fr: 'vote-du-29-novembre-2026-gare-de-wil-et-allee-pour-une-correspondance-sure' },
  'unfall-a13-sevelen-2026': { it: 'unfall-a13-sevelen-2026', en: 'accident-a13-sevelen-2026', de: 'auffahrunfall-auf-der-a13-bei-sevelen-zwei-verletzte-am-25-oktober-2026', fr: 'accident-a13-sevelen-2026' },
  'positive-chiusure-2025-sg': { it: 'positive-chiusure-2025-sg', en: 'positive-closures-2025-sg', de: '40-gemeinden-des-kantons-st-gallen-schliessen-das-jahr-2025-positiv-ab', fr: 'positifs-clotures-2025-sg' },
+ 'controllo-traffico-san-gallo-ottobre': { it: 'controllo-traffico-san-gallo-ottobre', en: 'st-gallen-traffic-control-october', de: 'verkehrskontrolle-st-gallen-oktober', fr: 'controle-trafic-st-galle-octobre' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

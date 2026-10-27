@@ -69,6 +69,9 @@ const blogMetaCantonSgFr: Record<string, string> = {
     'blog.article.positive-chiusure-2025-sg.title': '40 communes du canton de Saint-Gall clôturent l\'année 2025 en positif',
     'blog.article.positive-chiusure-2025-sg.excerpt': 'Sur 75 communes politiques, 40 ont clôturé l\'année 2025 avec un excédent ; l\'excédent cumulé est d\'environ 28 millions de CHF.',
     'blog.article.positive-chiusure-2025-sg.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.controllo-traffico-san-gallo-ottobre.title': 'Contrôle du trafic à Saint-Gall : 105 infractions constatées le 24 octobre 2026',
+    'blog.article.controllo-traffico-san-gallo-ottobre.excerpt': '105 infractions constatées dans la nuit du 24 octobre Environ 150 véhicules et occupants contrôlés 70 véhicules à plus de 80 km/h sur l’A13 Quoi : contrôle',
+    'blog.article.controllo-traffico-san-gallo-ottobre.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSgFr;

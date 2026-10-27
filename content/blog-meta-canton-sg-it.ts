@@ -69,6 +69,9 @@ const blogMetaCantonSgIt: Record<string, string> = {
     'blog.article.positive-chiusure-2025-sg.title': '40 comuni del Canton San Gallo chiudono il 2025 in positivo',
     'blog.article.positive-chiusure-2025-sg.excerpt': 'Su 75 comuni politici, 40 hanno chiuso il 2025 con avanzo; l\'eccedenza aggregata è di circa CHF 28 milioni.',
     'blog.article.positive-chiusure-2025-sg.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.controllo-traffico-san-gallo-ottobre.title': 'Controllo traffico San Gallo: 105 violazioni accertate il 24 ottobre 2026',
+    'blog.article.controllo-traffico-san-gallo-ottobre.excerpt': '105 violazioni accertate nella notte del 24 ottobre Circa 150 veicoli e occupanti controllati 70 veicoli oltre 80 km/h sulla A13 Cosa: controllo mirato',
+    'blog.article.controllo-traffico-san-gallo-ottobre.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSgIt;

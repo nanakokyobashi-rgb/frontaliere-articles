@@ -69,6 +69,9 @@ const blogMetaCantonSgDe: Record<string, string> = {
     'blog.article.positive-chiusure-2025-sg.title': '40 Gemeinden des Kantons St. Gallen schliessen das Jahr 2025 positiv ab',
     'blog.article.positive-chiusure-2025-sg.excerpt': 'Von 75 politischen Gemeinden schlossen 40 das Jahr 2025 mit einem Überschuss ab; der kumulierte Überschuss beträgt rund CHF 28 Millionen.',
     'blog.article.positive-chiusure-2025-sg.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.controllo-traffico-san-gallo-ottobre.title': 'Verkehrskontrolle St. Gallen: 105 Verstöße am 24. Oktober 2026 festgestellt',
+    'blog.article.controllo-traffico-san-gallo-ottobre.excerpt': '105 Verstöße in der Nacht vom 24.',
+    'blog.article.controllo-traffico-san-gallo-ottobre.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSgDe;

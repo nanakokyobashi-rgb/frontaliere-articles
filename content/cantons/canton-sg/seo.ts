@@ -855,6 +855,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-controllo-traffico-san-gallo-ottobre': {
+    title: 'Controllo traffico San Gallo: 105 violazioni accertate il 24 ottobre 2026',
+    description: '105 violazioni accertate nella notte del 24 ottobre Circa 150 veicoli e occupanti controllati 70 veicoli oltre 80 km/h sulla A13 Cosa: controllo',
+    keywords: 'frontalieri, ticino, svizzera, italia, controllo, traffico, gallo, violazioni',
+    ogTitle: 'Controllo traffico San Gallo 24 ottobre 2026 105 violazioni',
+    ogDescription: '105 violazioni accertate nella notte del 24 ottobre Circa 150 veicoli e occupanti controllati 70 veicoli oltre 80 km/h sulla A13 Cosa: controllo mirato',
+    canonicalPath: '/articoli-san-gallo/controllo-traffico-san-gallo-ottobre/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Controllo traffico San Gallo: 105 violazioni accertate il 24 ottobre 2026",
+      "description": "105 violazioni accertate nella notte del 24 ottobre Circa 150 veicoli e occupanti controllati 70 veicoli oltre 80 km/h sulla A13 Cosa: controllo",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-controllo-traffico-san-gallo-ottobre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-27T00:06:31+00:00",
+      "dateModified": "2026-10-27T00:06:31+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-san-gallo/controllo-traffico-san-gallo-ottobre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
