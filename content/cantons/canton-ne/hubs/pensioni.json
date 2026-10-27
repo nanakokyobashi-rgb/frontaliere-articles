@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "pensioni",
-  "updatedAt": "2026-10-27T11:12:54.296Z",
-  "contentHash": "9a76439a541286e059062ded900c07ba7994cab3bfee435cb6f3c3960c10bea3",
+  "updatedAt": "2026-10-27T12:45:07.020Z",
+  "contentHash": "dc4619042bc86ddacd0680abb66049208f32fe46463df7ed5dd522b17a275cb7",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -129,6 +129,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Prezzi delle abitazioni in Svizzera: +1,7% nel trimestre",
+          "url": "/articoli-neuchatel/abitazioni-svizzere-rincaro-settembre/",
+          "excerpt": "Nel terzo trimestre i prezzi residenziali svizzeri sono saliti dell'1,7% sul trimestre e del 4,4% su base annua, secondo l'OFS.",
+          "date": "2026-10-27T12:37:22.077Z"
+        },
+        {
           "title": "Successo abbonamenti trasporto pubblico a prezzo ridotto",
           "url": "/articoli-neuchatel/successo-abbonamenti-trasporti-ridotti/",
           "excerpt": "66% di sconto agli under 25 dal 1° luglio 2026 Oltre 15'000 buoni di riduzione già utilizzati Quasi 2'300 abbonamenti annuali in più in luglio-settembre Secondo",
@@ -151,12 +157,6 @@
           "url": "/articoli-neuchatel/zenith-soppressione-locle/",
           "excerpt": "Zenith annuncia circa cento soppressioni al Locle La manifattura conta 196 collaboratori Aperta la consultazione per il licenziamento collettivo Annuncio",
           "date": "2026-10-23T23:50:03.671Z"
-        },
-        {
-          "title": "Consiglio di Stato risponde a consultazioni federali nel 2026",
-          "url": "/articoli-neuchatel/consiglio-stato-21-ottobre-2026/",
-          "excerpt": "Il Consiglio di Stato ha risposto a due consultazioni federali Autorizzazioni per lavori pesanti nelle zone montane II e III Votazione cantonale fissata",
-          "date": "2026-10-23T19:35:52.889Z"
         }
       ],
       "links": [
@@ -177,7 +177,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-27T11:12:54.296Z"
+      "updatedAt": "2026-10-27T12:45:07.020Z"
     },
     "en": {
       "canton": "NE",
@@ -284,6 +284,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Housing prices in Switzerland: +1,7% in the quarter",
+          "url": "/en/neuchatel-articles/swiss-housing-rise-september/",
+          "excerpt": "In the third quarter, Swiss residential prices rose by 1.7% quarter-on-quarter and 4.4% year-on-year, according to the FSO.",
+          "date": "2026-10-27T12:37:22.077Z"
+        },
+        {
           "title": "Success of discounted public transport passes",
           "url": "/en/neuchatel-articles/success-reduced-transport-passes/",
           "excerpt": "66% discount for under 25s from July 1, 2026 Over 15,000 discount vouchers already used Almost 2,300 additional annual subscriptions in July-September Second",
@@ -306,12 +312,6 @@
           "url": "/en/neuchatel-articles/zenith-locle-job-cuts/",
           "excerpt": "Zenith announces approximately one hundred job cuts at Locle The manufactory has 196 employees Consultation opened for collective dismissal Announcement",
           "date": "2026-10-23T23:50:03.671Z"
-        },
-        {
-          "title": "State Council responds to federal consultations in 2026",
-          "url": "/en/neuchatel-articles/council-state-october-21-2026/",
-          "excerpt": "The Council of State has responded to two federal consultations Authorizations for heavy work in mountain zones II and III Cantonal vote scheduled for Sunday",
-          "date": "2026-10-23T19:35:52.889Z"
         }
       ],
       "links": [
@@ -332,7 +332,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-27T11:12:54.296Z"
+      "updatedAt": "2026-10-27T12:45:07.020Z"
     },
     "de": {
       "canton": "NE",
@@ -439,6 +439,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Wohnungspreise in der Schweiz: +1,7% im Quartal",
+          "url": "/de/neuenburg-artikel/schweizer-wohnpreise-september/",
+          "excerpt": "Im dritten Quartal stiegen die Schweizer Wohnungspreise laut SFO im Quartal um 1,7% und im Jahresvergleich um 4,4%.",
+          "date": "2026-10-27T12:37:22.077Z"
+        },
+        {
           "title": "Erfolgreiche ermäßigte Fahrkarten für öffentliche Verkehrsmittel",
           "url": "/de/neuenburg-artikel/erfolg-reduzierte-verkehrstickets/",
           "excerpt": "66% Rabatt für unter 25-Jährige ab 1.",
@@ -461,12 +467,6 @@
           "url": "/de/neuenburg-artikel/zenith-streichungen-locle/",
           "excerpt": "Zenith kündigt rund hundert Stellenstreichungen in Locle an Die Manufaktur zählt 196 Mitarbeitende Konsultation für die Massenentlassung eröffnet Ankündigung am",
           "date": "2026-10-23T23:50:03.671Z"
-        },
-        {
-          "title": "Staatsrat antwortet im Jahr 2026 auf eidgenössische Vernehmlassungen",
-          "url": "/de/neuenburg-artikel/staatsrat-21-oktober-2026/",
-          "excerpt": "Der Staatsrat hat auf zwei eidgenössische Vernehmlassungen geantwortet Bewilligungen für schwere Arbeiten in den Bergzonen II und III Kantonale Abstimmung",
-          "date": "2026-10-23T19:35:52.889Z"
         }
       ],
       "links": [
@@ -487,7 +487,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-27T11:12:54.296Z"
+      "updatedAt": "2026-10-27T12:45:07.020Z"
     },
     "fr": {
       "canton": "NE",
@@ -594,6 +594,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Prix du logement en Suisse : +1,7% au cours du trimestre",
+          "url": "/fr/articles-neuchatel/prix-logement-suisse-septembre/",
+          "excerpt": "Au troisième trimestre, les prix résidentiels suisses ont augmenté de 1,7% sur le trimestre et de 4,4% sur une base annuelle, selon l'OFS.",
+          "date": "2026-10-27T12:37:22.077Z"
+        },
+        {
           "title": "Succès abonnements transports en commun à prix réduit",
           "url": "/fr/articles-neuchatel/succes-abonnements-transports-reduits/",
           "excerpt": "66% de réduction pour les moins de 25 ans à partir du 1er juillet 2026 Plus de 15'000 bons de réduction déjà utilisés Près de 2'300 abonnements annuels",
@@ -616,12 +622,6 @@
           "url": "/fr/articles-neuchatel/zenith-suppressions-locle/",
           "excerpt": "Zenith annonce environ cent suppressions de postes au Locle La manufacture compte 196 collaborateurs Consultation ouverte en vue d'un licenciement collectif",
           "date": "2026-10-23T23:50:03.671Z"
-        },
-        {
-          "title": "Le Conseil d'État répond à des consultations fédérales en 2026",
-          "url": "/fr/articles-neuchatel/conseil-etat-21-octobre-2026/",
-          "excerpt": "Le Conseil d'État a répondu à deux consultations fédérales Autorisations pour des travaux lourds dans les zones montagneuses II et III Votation cantonale fixée",
-          "date": "2026-10-23T19:35:52.889Z"
         }
       ],
       "links": [
@@ -642,7 +642,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-27T11:12:54.296Z"
+      "updatedAt": "2026-10-27T12:45:07.020Z"
     }
   }
 }
