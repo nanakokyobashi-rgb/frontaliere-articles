@@ -72,6 +72,9 @@ const blogMetaCantonSgEn: Record<string, string> = {
     'blog.article.controllo-traffico-san-gallo-ottobre.title': 'St. Gallen traffic check: 105 violations confirmed on October 24, 2026',
     'blog.article.controllo-traffico-san-gallo-ottobre.excerpt': '105 violations recorded during the night of October 24 Approximately 150 vehicles and occupants checked 70 vehicles traveling at over 80 km/h on the A13',
     'blog.article.controllo-traffico-san-gallo-ottobre.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.votazione-29-novembre-2026.title': 'Vote on November 29, 2026 on the TBW gas network fund',
+    'blog.article.votazione-29-novembre-2026.excerpt': 'The referendum concerns the regulations for the fund for the decommissioning and dismantling of TBW\'s gas network, with expected costs of CHF 45,8 million.',
+    'blog.article.votazione-29-novembre-2026.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSgEn;

@@ -72,6 +72,9 @@ const blogMetaCantonSgFr: Record<string, string> = {
     'blog.article.controllo-traffico-san-gallo-ottobre.title': 'Contrôle du trafic à Saint-Gall : 105 infractions constatées le 24 octobre 2026',
     'blog.article.controllo-traffico-san-gallo-ottobre.excerpt': '105 infractions constatées dans la nuit du 24 octobre Environ 150 véhicules et occupants contrôlés 70 véhicules à plus de 80 km/h sur l’A13 Quoi : contrôle',
     'blog.article.controllo-traffico-san-gallo-ottobre.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.votazione-29-novembre-2026.title': 'Votation du 29 novembre 2026 sur le fonds du réseau de gaz TBW',
+    'blog.article.votazione-29-novembre-2026.excerpt': 'Le référendum concerne le règlement relatif au fonds de désaffectation et de démantèlement du réseau de gaz de TBW, dont les coûts prévus s’élèvent à CHF 45,8 millions.',
+    'blog.article.votazione-29-novembre-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSgFr;

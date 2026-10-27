@@ -259,4 +259,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'votazione-29-novembre-2026',
+ category: 'pratico',
+ date: '2026-10-27T02:30:52.478Z',
+ image: '/images/blog/article-votazione-29-novembre-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

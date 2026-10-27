@@ -72,6 +72,9 @@ const blogMetaCantonSgDe: Record<string, string> = {
     'blog.article.controllo-traffico-san-gallo-ottobre.title': 'Verkehrskontrolle St. Gallen: 105 Verstöße am 24. Oktober 2026 festgestellt',
     'blog.article.controllo-traffico-san-gallo-ottobre.excerpt': '105 Verstöße in der Nacht vom 24.',
     'blog.article.controllo-traffico-san-gallo-ottobre.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.votazione-29-novembre-2026.title': 'Abstimmung vom 29. November 2026 über den Gasnetzfonds der TBW',
+    'blog.article.votazione-29-novembre-2026.excerpt': 'Das Referendum betrifft das Reglement für den Fonds zur Stilllegung und zum Rückbau des Gasnetzes der TBW, mit vorgesehenen Kosten von CHF 45,8 Millionen.',
+    'blog.article.votazione-29-novembre-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSgDe;

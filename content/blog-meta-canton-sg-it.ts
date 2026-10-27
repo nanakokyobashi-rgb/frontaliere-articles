@@ -72,6 +72,9 @@ const blogMetaCantonSgIt: Record<string, string> = {
     'blog.article.controllo-traffico-san-gallo-ottobre.title': 'Controllo traffico San Gallo: 105 violazioni accertate il 24 ottobre 2026',
     'blog.article.controllo-traffico-san-gallo-ottobre.excerpt': '105 violazioni accertate nella notte del 24 ottobre Circa 150 veicoli e occupanti controllati 70 veicoli oltre 80 km/h sulla A13 Cosa: controllo mirato',
     'blog.article.controllo-traffico-san-gallo-ottobre.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.votazione-29-novembre-2026.title': 'Votazione 29 novembre 2026 sul fondo rete gas TBW',
+    'blog.article.votazione-29-novembre-2026.excerpt': 'Il referendum riguarda il regolamento per il fondo di dismissione e smantellamento della rete gas delle TBW, con costi previsti di CHF 45,8 milioni.',
+    'blog.article.votazione-29-novembre-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSgIt;

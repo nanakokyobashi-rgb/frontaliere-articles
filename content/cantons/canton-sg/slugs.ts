@@ -26,6 +26,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'unfall-a13-sevelen-2026': { it: 'unfall-a13-sevelen-2026', en: 'accident-a13-sevelen-2026', de: 'auffahrunfall-auf-der-a13-bei-sevelen-zwei-verletzte-am-25-oktober-2026', fr: 'accident-a13-sevelen-2026' },
  'positive-chiusure-2025-sg': { it: 'positive-chiusure-2025-sg', en: 'positive-closures-2025-sg', de: '40-gemeinden-des-kantons-st-gallen-schliessen-das-jahr-2025-positiv-ab', fr: 'positifs-clotures-2025-sg' },
  'controllo-traffico-san-gallo-ottobre': { it: 'controllo-traffico-san-gallo-ottobre', en: 'st-gallen-traffic-control-october', de: 'verkehrskontrolle-st-gallen-oktober', fr: 'controle-trafic-st-galle-octobre' },
+ 'votazione-29-novembre-2026': { it: 'votazione-29-novembre-2026', en: 'vote-november-29-2026', de: 'abstimmung-29-november-2026', fr: 'vote-29-novembre-2026' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
