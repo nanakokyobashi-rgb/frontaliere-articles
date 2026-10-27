@@ -36,6 +36,7 @@ import {
  readStructuredSeoBlock,
  readStructuredSeoDescription,
  readStructuredSeoDescriptionState,
+ readStructuredSeoEventBlock,
  staticPropertyValues,
 } from './shared/seo-entry.mjs';
 import {
@@ -803,7 +804,7 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  const e = pos[i].end;
  const b = seoSrc.substring(s, e);
 
- const sdBlock = readStructuredSeoBlock(b) ?? '';
+ const sdBlock = readStructuredSeoBlock(b) ?? readStructuredSeoEventBlock(b) ?? '';
  const sdType = sdBlock.match(/"@type":\s*"([^"]+)"/)?.[1] ?? '';
 
  // A dynamic assignment cannot be represented by this static renderer.
