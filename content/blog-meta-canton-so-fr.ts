@@ -54,6 +54,9 @@ const blogMetaCantonSoFr: Record<string, string> = {
     'blog.article.proposta-premi-assicurazione-2027.title': 'Proposition de réduction des primes maladie 2027 à Soleure',
     'blog.article.proposta-premi-assicurazione-2027.excerpt': 'Proposition 2027 transmise au Parlement cantonal Environ 221 millions de francs pour réduire les primes Contribution cantonale de 98 millions Augmentation de 9',
     'blog.article.proposta-premi-assicurazione-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.soletta-aumento-salari.title': 'Soleure : les salaires augmentent de 1,0 % dès l’année prochaine',
+    'blog.article.soletta-aumento-salari.excerpt': 'Le Gouvernement cantonal et les associations du personnel ont convenu d’une augmentation de 1,0 % dès l’année prochaine pour les employés publics, les écoles et les hôpitaux.',
+    'blog.article.soletta-aumento-salari.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSoFr;

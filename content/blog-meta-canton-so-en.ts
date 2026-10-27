@@ -54,6 +54,9 @@ const blogMetaCantonSoEn: Record<string, string> = {
     'blog.article.proposta-premi-assicurazione-2027.title': 'Proposal to reduce health insurance premiums in 2027, Canton of Solothurn',
     'blog.article.proposta-premi-assicurazione-2027.excerpt': '2027 proposal submitted to the Cantonal Parliament Approximately 221 million francs to reduce premiums Cantonal contribution of 98 million Increase of 9 million',
     'blog.article.proposta-premi-assicurazione-2027.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.soletta-aumento-salari.title': 'Solothurn: salaries increase by 1,0% starting next year',
+    'blog.article.soletta-aumento-salari.excerpt': 'The cantonal government and staff associations have agreed on a 1,0% increase from next year for public employees, schools and hospitals.',
+    'blog.article.soletta-aumento-salari.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSoEn;

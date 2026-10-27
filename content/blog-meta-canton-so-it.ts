@@ -54,6 +54,9 @@ const blogMetaCantonSoIt: Record<string, string> = {
     'blog.article.proposta-premi-assicurazione-2027.title': 'Proposta riduzione premi assicurazione malattia 2027 Canton Soletta',
     'blog.article.proposta-premi-assicurazione-2027.excerpt': 'Proposta 2027 trasmessa al Parlamento cantonale Circa 221 milioni di franchi per ridurre i premi Contributo cantonale di 98 milioni Aumento di 9 milioni (+4,3%)',
     'blog.article.proposta-premi-assicurazione-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.soletta-aumento-salari.title': 'Soletta: salari aumentano dell\'1,0% dal prossimo anno',
+    'blog.article.soletta-aumento-salari.excerpt': 'Il Governo cantonale e le associazioni del personale hanno concordato un aumento dell\'1,0% dal prossimo anno per dipendenti pubblici, scuole e ospedali.',
+    'blog.article.soletta-aumento-salari.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSoIt;

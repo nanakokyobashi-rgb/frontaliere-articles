@@ -54,6 +54,9 @@ const blogMetaCantonSoDe: Record<string, string> = {
     'blog.article.proposta-premi-assicurazione-2027.title': 'Vorschlag: Prämienverbilligung 2027 im Kanton Solothurn',
     'blog.article.proposta-premi-assicurazione-2027.excerpt': 'Vorschlag 2027 dem Kantonsparlament übermittelt Rund 221 Millionen Franken zur Senkung der Prämien Kantonsbeitrag von 98 Millionen Erhöhung um 9 Millionen',
     'blog.article.proposta-premi-assicurazione-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.soletta-aumento-salari.title': 'Solothurn: Löhne steigen ab dem kommenden Jahr um 1,0%',
+    'blog.article.soletta-aumento-salari.excerpt': 'Die Kantonsregierung und die Personalverbände haben für Angestellte des öffentlichen Dienstes, Schulen und Spitäler ab dem kommenden Jahr eine Erhöhung um 1,0% vereinbart.',
+    'blog.article.soletta-aumento-salari.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSoDe;

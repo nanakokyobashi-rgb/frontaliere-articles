@@ -193,4 +193,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'soletta-aumento-salari',
+ category: 'novita',
+ date: '2026-10-27T12:43:48.858Z',
+ image: '/images/blog/article-soletta-aumento-salari.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
