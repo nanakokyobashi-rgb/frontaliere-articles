@@ -45749,7 +45749,7 @@ const RAW_ARTICLES = [
  id: 'bellinzona-nuova-strada-ciclabile',
  category: 'novita',
  date: '2026-10-22T00:55:34.728Z',
- image: '/images/blog/article-fully-strada-ciclabile.webp',
+ image: '/images/blog/article-bellinzona-nuova-strada-ciclabile.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['TI'],

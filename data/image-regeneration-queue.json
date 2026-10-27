@@ -62,45 +62,34 @@
       "lastFailureAt": "2026-10-27T00:29:31.254Z"
     },
     {
-      "articleId": "bellinzona-nuova-strada-ciclabile",
-      "title": "Bellinzona inaugura la prima strada ciclabile",
-      "fallbackImage": "/images/blog/article-fully-strada-ciclabile.webp",
-      "reason": "All image providers failed for article-bellinzona-nuova-strada-ciclabile: openai-codex (vision gate rejected image: Synthetic editorial illustration relevant to Bellinzona cycling infrastructure, but it contains a prominent foreground cycli",
-      "status": "queued",
-      "failureCount": 1,
-      "requestedAt": "2026-10-22T00:55:35.804Z",
-      "lastFailureAt": "2026-10-26T17:37:48.636Z"
-    },
-    {
       "articleId": "sanitari-italiani-fuga-svizzera",
       "title": "Operatori sanitari frontalieri: Como boccheggia",
       "fallbackImage": "/images/blog/article-confusione-tassa-salute-frontalieri.webp",
-      "reason": "All image providers failed for article-sanitari-italiani-fuga-svizzera: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to healthcare commuting, but the central foreground person is recognizable from beh",
-      "status": "queued",
-      "failureCount": 1,
+      "reason": "All image providers failed for article-sanitari-italiani-fuga-svizzera: openai-codex (vision gate rejected image: Generic synthetic-looking editorial scene of a healthcare worker boarding a train; the foreground person is recognizable from ",
+      "status": "failed",
+      "failureCount": 2,
       "requestedAt": "2026-10-23T15:23:52.650Z",
-      "lastFailureAt": "2026-10-26T17:39:32.696Z"
+      "lastFailureAt": "2026-10-27T01:24:28.868Z"
     },
     {
       "articleId": "cisl-ricerca-lavoratori-ritiene",
       "title": "55,6% lavoratori frontalieri ritiene stipendio inferiore a residente svizzero",
       "fallbackImage": "/images/blog/article-ricerca-cisl-frontalieri-2026.webp",
-      "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (Codex broker rejected the request: Codex CLI timed out after 119924ms)",
-      "status": "queued",
-      "failureCount": 1,
+      "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to cross-border commuting; no readable text or logos, but a recognizable foreground",
+      "status": "failed",
+      "failureCount": 2,
       "requestedAt": "2026-10-24T19:06:53.846Z",
-      "lastFailureAt": "2026-10-26T17:41:33.023Z"
+      "lastFailureAt": "2026-10-27T01:25:41.767Z"
     },
     {
       "articleId": "frontaliere-ora-mezza-viaggio",
       "title": "31,7% frontalieri supera un'ora e mezza di viaggio al giorno",
       "fallbackImage": "/images/blog/article-frontalieri-disoccupazione-criterio-lavoro.webp",
-      "reason": "All image providers failed for article-frontaliere-ora-mezza-viaggio: openai-codex (vision gate rejected image: Generic synthetic commuter-train scene relevant to Ticino and cross-border commuting, but visible platform signage fails the no-",
-      "status": "queued",
-      "failureCount": 1,
+      "reason": "All image providers failed for article-frontaliere-ora-mezza-viaggio: openai-codex (vision gate rejected image: Synthetic photorealistic editorial illustration relevant to alpine rail commuting, but it includes a recognizable foreground per",
+      "status": "failed",
+      "failureCount": 2,
       "requestedAt": "2026-10-25T01:38:54.254Z",
-      "lastFailureAt": "2026-10-26T17:43:51.162Z",
-      "retryHint": "no-text"
+      "lastFailureAt": "2026-10-27T01:26:49.872Z"
     }
   ]
 }
