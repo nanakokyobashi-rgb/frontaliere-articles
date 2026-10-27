@@ -59,6 +59,14 @@
     "canton-ne::https://www.ne.ch/communiques-de-presse/pour-sa-30eme-edition-le-prix-interculturel-salut-letranger-recompense-le-centre-portugais-de-neuchatel-et-madame-carmen-diaz-pumarejo": {
       "section": "canton-ne",
       "ts": 1793067662214
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261027-novartis-affecte-au-troisieme-trimestre-par-un-echec-clinique.html": {
+      "section": "canton-ne",
+      "ts": 1793086053410
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261027-hsbc-benefice-net-en-hausse-de-45-inferieur-aux-attentes.html": {
+      "section": "canton-ne",
+      "ts": 1793086060857
     }
   }
 }
