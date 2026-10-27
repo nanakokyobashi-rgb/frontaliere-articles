@@ -1665,8 +1665,14 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
   assert.match(workflow, /if: \$\{\{ always\(\) && steps\.push\.outputs\.publish_ready == 'true'/);
   assert.match(workflow, /git add -A -- "\$OUTBOX_FILE"/);
   assert.match(workflow, /if: steps\.drain\.outcome == 'success'/);
-  assert.match(workflow, /publisher_complete='true'/);
-  assert.match(workflow, /publishers are incomplete/);
+  const finalAck = workflow.slice(acknowledge);
+  assert.match(finalAck, /publisher_complete='true'/);
+  assert.match(finalAck, /publisher_failed='false'/);
+  assert.match(finalAck, /any\(\.sections\[\]; \.status == "failed"\)/);
+  assert.match(finalAck, /if \[ "\$publisher_failed" = 'true' \]/);
+  assert.match(finalAck, /publishers are still in progress or not started; keeping the outbox durable/);
+  assert.match(finalAck, /publisher ack was committed while publishers are still in progress or not started/);
+  assert.doesNotMatch(finalAck, /if \[ "\$publisher_complete" != 'true' \]; then\s+echo "::error:/);
   assert.doesNotMatch(workflow, /git rm -f "\$OUTBOX_FILE"/);
   assert.match(workflow, /registry_base=\"\$RUNNER_TEMP\/generated-image-registry-base\.json\"/);
   assert.match(workflow, /merge-generated-image-registry\.mjs[\s\S]*data\/generated-image-registry\.json \"\$registry_base\" \"\$registry_snapshot\"/);
