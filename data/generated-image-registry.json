@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "assetCount": 968,
+  "assetCount": 969,
   "assets": [
     {
       "schema": 1,
@@ -39772,6 +39772,49 @@
         "is_photograph": false,
         "is_topic_relevant": true,
         "notes": "Generic synthetic motorway scene with four vehicles; no readable text, logos, people, or identifiable event."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-zugo-agenda-kantonsrat-ottobre",
+      "kind": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2.5",
+      "executorModel": "gpt-5.6-luna",
+      "promptVersion": "frontaliereticino.generated-image-policy.v1",
+      "promptHash": "01562c5f03f2ec4c15e4698a85c686a33dc4b45235785179a67ee1dfb8457ea3",
+      "license": "generated-provider",
+      "licenseUrl": "https://openai.com/policies/terms-of-use/",
+      "credit": "frontaliereticino.ch",
+      "sha256": "49528381269dacda68fe7c2771a4a873440b34ae99fe4b5615d969d891c6aeb6",
+      "bytes": 48232,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-10-27T01:58:01.624Z",
+      "verifiedAt": "2026-10-27T01:58:14.334Z",
+      "restrictions": [
+        "illustrative-only",
+        "no-real-recognizable-foreground-person",
+        "no-public-figure-face",
+        "no-logo-brand-or-text",
+        "no-specific-real-event-photojournalism"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-zugo-agenda-kantonsrat-ottobre.webp",
+      "area": "Swiss border region",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "contains_recognizable_foreground_person": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": false,
+        "is_topic_relevant": true,
+        "notes": "Generic synthetic editorial illustration of a printed agenda; no readable text, logos, people, or specific event."
       }
     }
   ]

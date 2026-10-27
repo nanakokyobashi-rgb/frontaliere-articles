@@ -51,6 +51,9 @@ const blogMetaCantonZgEn: Record<string, string> = {
     'blog.article.esecutivo-zugo-mandato-2030.title': 'Zug: departments assigned from January 1, 2027',
     'blog.article.esecutivo-zugo-mandato-2030.excerpt': 'The Government Council of Zug has defined the portfolios and deputy arrangements for the 2027-2030 period, confirming the portfolios of the incumbent members.',
     'blog.article.esecutivo-zugo-mandato-2030.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.zugo-agenda-kantonsrat-ottobre.title': 'Zug makes the Kantonsrat agenda available',
+    'blog.article.zugo-agenda-kantonsrat-ottobre.excerpt': 'The source from the Canton of Zug makes available the agenda for the Kantonsrat session on October 29, 2026.',
+    'blog.article.zugo-agenda-kantonsrat-ottobre.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonZgEn;

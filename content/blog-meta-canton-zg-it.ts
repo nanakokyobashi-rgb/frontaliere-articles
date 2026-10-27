@@ -51,6 +51,9 @@ const blogMetaCantonZgIt: Record<string, string> = {
     'blog.article.esecutivo-zugo-mandato-2030.title': 'Zugo: assegnate le direzioni dal 1° gennaio 2027',
     'blog.article.esecutivo-zugo-mandato-2030.excerpt': 'Il Regierungsrat di Zugo ha definito direzioni e supplenze per il periodo 2027-2030, confermando le direzioni dei membri già in carica.',
     'blog.article.esecutivo-zugo-mandato-2030.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.zugo-agenda-kantonsrat-ottobre.title': 'Zugo rende disponibile l\'agenda del Kantonsrat',
+    'blog.article.zugo-agenda-kantonsrat-ottobre.excerpt': 'La fonte del Canton Zugo rende disponibile l\'ordine del giorno della seduta del Kantonsrat del 29 ottobre 2026.',
+    'blog.article.zugo-agenda-kantonsrat-ottobre.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonZgIt;

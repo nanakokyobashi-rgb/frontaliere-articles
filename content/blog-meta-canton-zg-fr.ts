@@ -51,6 +51,9 @@ const blogMetaCantonZgFr: Record<string, string> = {
     'blog.article.esecutivo-zugo-mandato-2030.title': 'Zoug : attribution des départements à partir du 1er janvier 2027',
     'blog.article.esecutivo-zugo-mandato-2030.excerpt': 'Le Conseil d\'État de Zoug a défini les départements et les suppléances pour la période 2027-2030, confirmant les départements des membres déjà en fonction.',
     'blog.article.esecutivo-zugo-mandato-2030.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.zugo-agenda-kantonsrat-ottobre.title': 'Zoug met à disposition l’ordre du jour du Kantonsrat',
+    'blog.article.zugo-agenda-kantonsrat-ottobre.excerpt': 'La source du canton de Zoug met à disposition l’ordre du jour de la séance du Kantonsrat du 29 octobre 2026.',
+    'blog.article.zugo-agenda-kantonsrat-ottobre.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonZgFr;

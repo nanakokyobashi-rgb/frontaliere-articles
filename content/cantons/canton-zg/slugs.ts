@@ -19,6 +19,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'revisione-pbg-zugo-2026': { it: 'revisione-pbg-zugo-2026', en: 'zug-pbg-revision-2026', de: 'zug-pbg-revision-2026', fr: 'revision-pbg-zoug-2026' },
  'zugo-multa-mancata-dichiarazione-fiscale': { it: 'zugo-multa-mancata-dichiarazione-fiscale', en: 'zug-tax-fine-missing-return', de: 'zug-steuerstrafe-fehlende-erklarung', fr: 'zoug-amende-declaration-fiscale-manquante' },
  'esecutivo-zugo-mandato-2030': { it: 'esecutivo-zugo-mandato-2030', en: 'zug-government-term-2030', de: 'zug-regierungsrat-amtsperiode-2030', fr: 'gouvernement-zoug-mandat-2030' },
+ 'zugo-agenda-kantonsrat-ottobre': { it: 'zugo-agenda-kantonsrat-ottobre', en: 'zug-cantonal-council-agenda-october-2026', de: 'zug-traktandenliste-kantonsrat-oktober-2026', fr: 'zoug-ordre-du-jour-conseil-octobre-2026' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

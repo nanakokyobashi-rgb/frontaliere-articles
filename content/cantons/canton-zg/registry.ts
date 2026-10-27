@@ -182,4 +182,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'zugo-agenda-kantonsrat-ottobre',
+ category: 'novita',
+ date: '2026-10-27T01:58:14.398Z',
+ image: '/images/blog/article-zugo-agenda-kantonsrat-ottobre.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['ZG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

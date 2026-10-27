@@ -51,6 +51,9 @@ const blogMetaCantonZgDe: Record<string, string> = {
     'blog.article.esecutivo-zugo-mandato-2030.title': 'Zug: Zuteilung der Direktionen ab dem 1. Januar 2027',
     'blog.article.esecutivo-zugo-mandato-2030.excerpt': 'Der Regierungsrat von Zug hat die Direktionen und Stellvertretungen für die Amtsperiode 2027-2030 festgelegt und die Direktionen der bereits amtierenden Mitglieder bestätigt.',
     'blog.article.esecutivo-zugo-mandato-2030.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.zugo-agenda-kantonsrat-ottobre.title': 'Zug stellt die Traktandenliste des Kantonsrats zur Verfügung',
+    'blog.article.zugo-agenda-kantonsrat-ottobre.excerpt': 'Die Quelle des Kantons Zug stellt die Traktandenliste der Sitzung des Kantonsrats vom 29.',
+    'blog.article.zugo-agenda-kantonsrat-ottobre.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonZgDe;
