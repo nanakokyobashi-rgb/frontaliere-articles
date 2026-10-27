@@ -24,6 +24,7 @@ import {
   UNRESOLVED_CANTON_KEY,
   UNRESOLVED_CANTON_LABEL,
   hasUsableContentText,
+  eventSourceUrl,
 } from './events-utils.mjs';
 import {
   digestEventMarker,
@@ -157,7 +158,7 @@ function eventDateInWindow(ev, window) {
 /** Cite the actual agenda record, not only the derived canton landing page. */
 function eventTitleWithSource(title, ev) {
   const text = String(title || '').trim();
-  const url = String(ev?.url || '');
+  const url = String(eventSourceUrl(ev?.url, ev) || '');
   // A source URL is untrusted dataset input. Reject whitespace/control
   // characters before parsing so URL normalization cannot silently turn a
   // malformed Markdown destination into a different destination.

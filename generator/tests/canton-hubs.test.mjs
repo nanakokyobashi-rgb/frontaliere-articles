@@ -593,6 +593,28 @@ test('un fetch fallito non toglie un blocco ancora valido: si conserva quello pu
   assert.equal(buildOne('canton-ti', 'carburanti', { datasets: stale, previous: first.file }).blocks[0].status, 'omitted');
 });
 
+test('un blocco eventi carried normalizza i link scaduti prima della pubblicazione', () => {
+  const first = buildOne('canton-ti', 'eventi');
+  const staleUrl = 'https://www.nw.ch/anlaesseaktuelles/94120';
+  for (const locale of HUB_LOCALES) {
+    const block = first.file.locales[locale].dataBlocks.find((item) => item.id === 'prossimi-eventi');
+    assert.ok(block?.items?.length, `${locale}: blocco eventi presente nella fixture`);
+    block.items[0].url = staleUrl;
+  }
+
+  const carried = buildOne('canton-ti', 'eventi', {
+    datasets: { ...fixtureDatasets(), events: null },
+    previous: first.file,
+    nowMs: NOW + HOUR_MS,
+  });
+
+  assert.equal(carried.blocks[0].status, 'carried');
+  for (const locale of HUB_LOCALES) {
+    const block = carried.file.locales[locale].dataBlocks.find((item) => item.id === 'prossimi-eventi');
+    assert.equal(block.items[0].url, 'https://www.nw.ch/');
+  }
+});
+
 // ─────────────────────────────────────────────────────────────────────────────
 // 3. Stabilita'
 // ─────────────────────────────────────────────────────────────────────────────

@@ -121,18 +121,36 @@ export const EVENT_SOURCES = {
 
 // A source event can outlive the official agenda detail page. Keep the
 // replacement source-backed and explicit: silently guessing a different URL
-// would be worse than preserving the evidence. The Nidwalden event 94123 was
-// verified as expired (404) on 2026-10-26; its official canton homepage is the
-// only live fallback for any rendered source link.
+// would be worse than preserving the evidence. These three event details were
+// verified as expired (404/410) in the 2026-10-27 audit; each official source
+// homepage is the only live fallback for any rendered source link.
 const STALE_EVENT_SOURCE_URLS = new Map([
+  ['ge-agenda|https://www.geneve.ch/agenda/cafe-quartier-initiation-gout-pain-pain-artisanal-industriel-differences', 'https://www.geneve.ch/agenda'],
+  ['guidle|https://www.guidle.com/it/veranstaltungen/musik/zuerich/don-toliver-nitrous-octane-world-tour-leg-2_A2e1GAw', 'https://www.guidle.com/de'],
+  ['nw-agenda|https://www.nw.ch/anlaesseaktuelles/94120', 'https://www.nw.ch/'],
   ['nw-agenda|https://www.nw.ch/anlaesseaktuelles/94123', 'https://www.nw.ch/'],
 ]);
+
+function unscopedStaleEventSourceUrl(rawUrl) {
+  let replacement = '';
+  for (const [key, candidate] of STALE_EVENT_SOURCE_URLS) {
+    if (key.slice(key.indexOf('|') + 1) !== rawUrl) continue;
+    if (replacement && replacement !== candidate) return '';
+    replacement = candidate;
+  }
+  return replacement;
+}
 
 /** Return a live, source-backed URL for rendered event links. */
 export function eventSourceUrl(rawUrl, event) {
   if (!rawUrl || typeof rawUrl !== 'string') return rawUrl;
-  const key = `${String(event?.sourceKey || '').trim()}|${rawUrl.trim()}`;
-  return STALE_EVENT_SOURCE_URLS.get(key) || rawUrl;
+  const normalizedUrl = rawUrl.trim();
+  const sourceKey = String(event?.sourceKey || '').trim();
+  if (sourceKey) return STALE_EVENT_SOURCE_URLS.get(`${sourceKey}|${normalizedUrl}`) || rawUrl;
+  // Carried hub blocks contain the rendered item URL but not sourceKey. Only
+  // use a raw-URL fallback when it is unique in the registry; ambiguity must
+  // preserve the original URL rather than guess a different source.
+  return unscopedStaleEventSourceUrl(normalizedUrl) || rawUrl;
 }
 
 // ── Localized URL path config (single source of truth, §6) ───

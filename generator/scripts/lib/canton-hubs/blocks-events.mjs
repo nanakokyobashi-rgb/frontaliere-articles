@@ -4,7 +4,7 @@
  * `refresh-events-dataset.mjs`). Il dataset porta il cantone BFS di ogni
  * evento: qui si filtra per i membri del gruppo URL, senza ricrawlare (D11).
  */
-import { eventsBasePathForCanton } from '../events-utils.mjs';
+import { eventSourceUrl, eventsBasePathForCanton } from '../events-utils.mjs';
 import { clip, fmtDay, fmtNumber, httpsUrlOrNull, isoDayOf } from './format.mjs';
 import { BLOCK_THRESHOLDS, DAY_MS, freshnessProblem, inGroup, isObj, isRealDay, omitted } from './blocks-common.mjs';
 import { foldForMatch, sourceUrlCanonicalKey } from '../canton-section-profile.mjs';
@@ -297,7 +297,7 @@ export function shapeEventsBlock(dataset, { canton, members, nowMs }) {
         description: t.description,
         items: rows.map((e) => {
           const place = [e.venue, e.comune].map((v) => (typeof v === 'string' ? v.trim() : '')).filter(Boolean);
-          const url = safeEventUrl(e.url);
+          const url = safeEventUrl(eventSourceUrl(e.url, e));
           const where = place.length ? clip([...new Set(place)].join(', '), 100) : '';
           const ongoing = e.startDate < today ? t.ongoing(fmtDay(e.lastDay, locale)) : '';
           const detail = [where, ongoing].filter(Boolean).join(' — ');
