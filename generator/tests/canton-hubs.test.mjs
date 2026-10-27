@@ -33,7 +33,7 @@ import { shapeFuelBlock } from '../scripts/lib/canton-hubs/blocks-fuel.mjs';
 import { shapeRoadEventsBlock } from '../scripts/lib/canton-hubs/blocks-road-events.mjs';
 import { shapeEventsBlock } from '../scripts/lib/canton-hubs/blocks-events.mjs';
 import { shapeWeatherBlock } from '../scripts/lib/canton-hubs/blocks-services.mjs';
-import { HUB_MIN_CONTENT_WORDS, TOPIC_BLOCKS, buildHubFile, hubContentHash, hubFilePaths, validateHubInput } from '../scripts/lib/canton-hubs/build.mjs';
+import { HUB_MIN_CONTENT_WORDS, TOPIC_BLOCKS, buildHubFile, hubContentHash, hubFilePaths, isRenderableCarriedEventItem, validateHubInput } from '../scripts/lib/canton-hubs/build.mjs';
 import { buildHubIntro, cantonPlace, foreignToponymsInCopy } from '../scripts/lib/canton-hubs/copy.mjs';
 import { loadTopicEngine } from '../scripts/lib/canton-hubs/engine-loader.mjs';
 import { HUB_LOCALES, fmtDay, fmtNumber, fmtPct, httpsUrlOrNull, isoDayOf, joinList } from '../scripts/lib/canton-hubs/format.mjs';
@@ -612,6 +612,29 @@ test('un blocco eventi carried normalizza i link scaduti prima della pubblicazio
   for (const locale of HUB_LOCALES) {
     const block = carried.file.locales[locale].dataBlocks.find((item) => item.id === 'prossimi-eventi');
     assert.equal(block.items[0].url, 'https://www.nw.ch/');
+  }
+});
+
+test('un blocco eventi carried scarta item non renderizzabili prima della normalizzazione', () => {
+  assert.equal(isRenderableCarriedEventItem({ label: 'Evento valido', url: 'https://example.org/evento' }), true);
+  assert.equal(isRenderableCarriedEventItem(null), false);
+  assert.equal(isRenderableCarriedEventItem({ label: 'URL non valido', url: 42 }), false);
+
+  const first = buildOne('canton-ti', 'eventi');
+  for (const locale of HUB_LOCALES) {
+    const block = first.file.locales[locale].dataBlocks.find((item) => item.id === 'prossimi-eventi');
+    block.items.push(null, { label: 'URL non valido', url: 42 });
+  }
+
+  const carried = buildOne('canton-ti', 'eventi', {
+    datasets: { ...fixtureDatasets(), events: null },
+    previous: first.file,
+    nowMs: NOW + HOUR_MS,
+  });
+
+  for (const locale of HUB_LOCALES) {
+    const block = carried.file.locales[locale].dataBlocks.find((item) => item.id === 'prossimi-eventi');
+    assert.ok(block.items.every((item) => isRenderableCarriedEventItem(item)));
   }
 });
 

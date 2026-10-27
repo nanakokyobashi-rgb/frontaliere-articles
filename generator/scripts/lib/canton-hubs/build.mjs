@@ -246,12 +246,27 @@ function usablePrevious(previous, id) {
     : null;
 }
 
+/**
+ * A carried event row must still satisfy the renderer's data-item shape.
+ * Historical caches can be hand-edited or partially written; keeping a
+ * primitive or a non-string URL would make the carry path publish malformed
+ * data instead of letting the next fresh dataset rebuild the row.
+ */
+export function isRenderableCarriedEventItem(item) {
+  if (!item || typeof item !== 'object' || Array.isArray(item)) return false;
+  if (typeof item.label !== 'string' || !item.label.trim()) return false;
+  for (const key of ['value', 'detail', 'date', 'url']) {
+    if (item[key] !== undefined && typeof item[key] !== 'string') return false;
+  }
+  return true;
+}
+
 function normalizeCarriedBlock(block, blockId) {
   if (blockId !== EVENTS_BLOCK_ID || !Array.isArray(block?.items)) return block;
   return {
     ...block,
-    items: block.items.map((item) => {
-      if (!item || typeof item !== 'object' || typeof item.url !== 'string') return item;
+    items: block.items.filter(isRenderableCarriedEventItem).map((item) => {
+      if (typeof item.url !== 'string') return item;
       const url = eventSourceUrl(item.url);
       return url === item.url ? item : { ...item, url };
     }),
