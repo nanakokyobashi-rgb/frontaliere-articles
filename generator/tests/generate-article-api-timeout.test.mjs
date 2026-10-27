@@ -16,8 +16,10 @@ for (const relativePath of WORKFLOWS) {
     assert.match(source, /api_timeout_seconds=60/);
     assert.match(
       source,
-      /timeout --kill-after=0s "\$\{api_timeout_seconds\}s" gh api "\$@"/,
+      /timeout --kill-after=0s "\$\{remaining\}s" gh api "\$@"/,
     );
+    assert.match(source, /admission_budget_seconds=240/);
+    assert.match(source, /remaining=\$\(\(admission_deadline - SECONDS\)\)/);
     const wrapperDefinition = source.indexOf('gh_api_timeout() {');
     const firstWrapperUse = source.indexOf('gh_api_timeout --');
     assert.ok(
@@ -27,8 +29,29 @@ for (const relativePath of WORKFLOWS) {
     assert.doesNotMatch(source, /^\s+gh api\b/m, 'nessuna chiamata deve bypassare il wrapper');
     assert.equal(
       (source.match(/gh_api_timeout(?:\s|\()/g) || []).length,
-      4,
-      'tre chiamate piu\u0300 la definizione devono restare protette',
+      5,
+      'quattro chiamate bounded piu\u0300 la definizione devono restare protette',
+    );
+    assert.match(
+      source,
+      /actions\/workflows\/(?:generate-article\.yml|\$CALLER_WORKFLOW)\/runs\?per_page=100&status=\$status/,
+      'le run in volo devono essere lette per status',
+    );
+    assert.match(
+      source,
+      /actions\/workflows\/(?:generate-article\.yml|\$CALLER_WORKFLOW)\/runs\?per_page=100&created=%3E%3D\$recent_since/,
+      'il tetto orario deve leggere solo la finestra recente',
+    );
+    const linkGate = source.indexOf('if [ "$is_link" = "true" ]; then');
+    const recentWindow = source.indexOf('created=%3E%3D$recent_since');
+    assert.ok(
+      linkGate >= 0 && recentWindow > linkGate,
+      'la finestra oraria deve essere letta solo per gli anelli',
+    );
+    assert.doesNotMatch(
+      source,
+      /actions\/workflows\/(?:generate-article\.yml|\$CALLER_WORKFLOW)\/runs\?per_page=100"/,
+      'il gate non deve piu\u0300 paginare tutta la cronologia',
     );
   });
 }

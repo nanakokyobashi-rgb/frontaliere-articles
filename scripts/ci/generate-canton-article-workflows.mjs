@@ -192,8 +192,14 @@ export const CORE_REPLACEMENTS = [
   {
     id: 'admit: le run in volo sono quelle del chiamante',
     count: 1,
-    find: '"repos/$REPO/actions/workflows/generate-article.yml/runs?per_page=100"',
-    replace: '"repos/$REPO/actions/workflows/$CALLER_WORKFLOW/runs?per_page=100"',
+    find: '"repos/$REPO/actions/workflows/generate-article.yml/runs?per_page=100&status=$status"',
+    replace: '"repos/$REPO/actions/workflows/$CALLER_WORKFLOW/runs?per_page=100&status=$status"',
+  },
+  {
+    id: 'admit: il tetto orario legge la finestra del chiamante',
+    count: 1,
+    find: '"repos/$REPO/actions/workflows/generate-article.yml/runs?per_page=100&created=%3E%3D$recent_since"',
+    replace: '"repos/$REPO/actions/workflows/$CALLER_WORKFLOW/runs?per_page=100&created=%3E%3D$recent_since"',
   },
   {
     id: 'generate: dipende anche dal gate di sezione',
