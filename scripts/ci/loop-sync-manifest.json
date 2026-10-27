@@ -895,9 +895,9 @@
       "mode": "identical",
       "reason": "RICONCILIATO 2026-09-28 (issue #1110, trasporto concatenato da Site #10266 e follow-up #10273/#10277): lo scanner torna byte-identico al sito. Il watermark usa soltanto run `schedule` riuscite e distingue il primo avvio leggibile da una history illeggibile, che fallisce chiusa. Il lookback derivato ha un ceiling effettivo di 12 ore; l'orizzonte `created` realtime di 3 giorni e' fail-closed senza opt-in esplicito, mentre l'override retention-complete a 35 giorni conserva le run create oltre 3 giorni ma aggiornate nel cutoff. Split e paginazione evitano il limite di 1.000 risultati per search.",
       "baseline": {
-        "site": "04d704edc431c84d",
-        "corpus": "04d704edc431c84d",
-        "alignedAt": "2026-10-21"
+        "site": "6e4d10fd1aaee487",
+        "corpus": "6e4d10fd1aaee487",
+        "alignedAt": "2026-10-27"
       }
     },
     {
@@ -3986,9 +3986,9 @@
       "sitePath": "build-plugins/batchWrite.ts",
       "mode": "identical",
       "baseline": {
-        "site": "a213d0f1664a5f40",
-        "corpus": "a213d0f1664a5f40",
-        "alignedAt": "2026-10-26"
+        "site": "4729d0396ed5b7c2",
+        "corpus": "4729d0396ed5b7c2",
+        "alignedAt": "2026-10-27"
       }
     },
     {
