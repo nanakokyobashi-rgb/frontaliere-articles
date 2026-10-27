@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-10-27T01:37:11.978Z",
-  "contentHash": "b98f3ca93798c31cd94ab011f11499cdbfaa25b0fdce2a0df734491877828b10",
+  "updatedAt": "2026-10-27T03:15:48.569Z",
+  "contentHash": "855d5adbe452418c3ad2748291213ff708e69874ae3fec8c796883f26cfa5b2d",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -218,6 +218,12 @@
           "date": "2026-10-16T03:10:47.550Z"
         },
         {
+          "title": "Frontalieri: tassa salute e decreto omnibus aggiornamento",
+          "url": "/articoli-ticino/tassa-salute-decreto-omnibus-scenari/",
+          "excerpt": "Nessun lavoratore è stato chiamato al pagamento La tassa riguarda i «vecchi frontalieri» Per alcuni frontalieri Omnibus: tassazione al 100% Nuovo incontro",
+          "date": "2026-10-27T03:10:46.721Z"
+        },
+        {
           "title": "Decreto tassa salute frontalieri pubblicato: via libera regioni",
           "url": "/articoli-ticino/decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni/",
           "excerpt": "Decreto pubblicato in Gazzetta Ufficiale a ridosso delle festività",
@@ -252,12 +258,6 @@
           "url": "/articoli-frontaliere/tassa-salute-ristorni-17-settembre/",
           "excerpt": "Il 17 settembre si discute di tassa sulla salute, doppia imposizione e statuto; il Ticino minaccia di bloccare i ristorni, mettendo a rischio 120 milioni di franchi per i Comuni di frontiera.",
           "date": "2026-10-12T19:46:56.997Z"
-        },
-        {
-          "title": "Tassa salute frontalieri Ticino: via a settembre?",
-          "url": "/articoli-frontaliere/tassa-salute-frontalieri-ticino-settembre/",
-          "excerpt": "Nuova tassa sanitaria per frontalieri: avvio previsto entro settembre, ma mancano decreti attuativi e pagamenti non ancora riscossi.",
-          "date": "2026-10-04T18:17:43.880Z"
         }
       ],
       "latestCantonArticles": [],
@@ -295,7 +295,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-10-27T01:37:11.978Z"
+      "updatedAt": "2026-10-27T03:15:48.569Z"
     },
     "en": {
       "canton": "TI",
@@ -481,6 +481,12 @@
           "date": "2026-10-16T03:10:47.550Z"
         },
         {
+          "title": "Cross-border workers: health tax and omnibus decree update",
+          "url": "/en/ticino-articles/health-tax-omnibus-scenarios/",
+          "excerpt": "No worker has been called upon to pay The tax concerns the “old cross-border workers” For some cross-border workers Omnibus: 100% taxation New meeting",
+          "date": "2026-10-27T03:10:46.721Z"
+        },
+        {
           "title": "Healthcare tax decree for cross-border workers approved",
           "url": "/en/ticino-articles/healthcare-tax-decree-for-cross-border-workers-approved/",
           "date": "2026-10-08T11:44:40.237Z"
@@ -514,12 +520,6 @@
           "url": "/en/cross-border-articles/health-tax-and-rebates-roundtable-on-september-17-in-bern/",
           "excerpt": "On September 17, the health tax, double taxation and statute will be discussed; Ticino threatens to block the tax rebates, putting 120 million francs for border municipalities at risk.",
           "date": "2026-10-12T19:46:56.997Z"
-        },
-        {
-          "title": "Ticino health tax for cross-border workers: starting in September?",
-          "url": "/en/cross-border-articles/health-tax-cross-border-workers-ticino-september/",
-          "excerpt": "New healthcare tax for cross-border workers: launch expected by September, but implementing decrees are missing and payments have not yet been collected.",
-          "date": "2026-10-04T18:17:43.880Z"
         }
       ],
       "latestCantonArticles": [],
@@ -553,7 +553,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-10-27T01:37:11.978Z"
+      "updatedAt": "2026-10-27T03:15:48.569Z"
     },
     "de": {
       "canton": "TI",
@@ -739,6 +739,12 @@
           "date": "2026-10-16T03:10:47.550Z"
         },
         {
+          "title": "Grenzgänger: Gesundheitssteuer und Omnibus-Dekret – Aktualisierung",
+          "url": "/de/tessin-artikel/krankenversicherungssteuer-omnibus-szenarien/",
+          "excerpt": "Kein Arbeitnehmer wurde zur Zahlung aufgefordert Die Abgabe betrifft die «alten Grenzgänger» Für einige Grenzgänger Omnibus: Besteuerung zu 100% Neues Treffen",
+          "date": "2026-10-27T03:10:46.721Z"
+        },
+        {
           "title": "Gesundheitsabgabe für Grenzgänger: Dekret publiziert",
           "url": "/de/tessin-artikel/gesundheitsabgabe-fur-grenzganger-dekret-publiziert/",
           "date": "2026-10-08T11:44:40.237Z"
@@ -772,12 +778,6 @@
           "url": "/de/grenzgaenger-artikel/gesundheitssteuer-ruckerstattungen-termin-in-bern/",
           "excerpt": "Am 17. September wird über die Gesundheitssteuer, die Doppelbesteuerung und den Status diskutiert; das Tessin droht, die Steuerrückvergütungen zu blockieren, und gefährdet damit 120 Millionen Franken für die…",
           "date": "2026-10-12T19:46:56.997Z"
-        },
-        {
-          "title": "Gesundheitsabgabe für Grenzgänger im Tessin: Start im September?",
-          "url": "/de/grenzgaenger-artikel/gesundheitssteuer-grenzgaenger-tessin-september/",
-          "excerpt": "Neue Gesundheitsabgabe für Grenzgänger: Einführung bis September geplant, doch es fehlen noch die Ausführungsverordnungen, und Zahlungen wurden noch nicht eingezogen.",
-          "date": "2026-10-04T18:17:43.880Z"
         }
       ],
       "latestCantonArticles": [],
@@ -811,7 +811,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-10-27T01:37:11.978Z"
+      "updatedAt": "2026-10-27T03:15:48.569Z"
     },
     "fr": {
       "canton": "TI",
@@ -997,6 +997,12 @@
           "date": "2026-10-16T03:10:47.550Z"
         },
         {
+          "title": "Frontaliers : taxe santé et décret omnibus, mise à jour",
+          "url": "/fr/articles-tessin/taxe-sante-omnibus-scenarii/",
+          "excerpt": "Aucun travailleur n'a été appelé à payer La taxe concerne les « anciens frontaliers » Pour certains frontaliers Omnibus : imposition à 100% Nouvelle rencontre",
+          "date": "2026-10-27T03:10:46.721Z"
+        },
+        {
           "title": "Décret sur la taxe santé des frontaliers publié : feu vert des régions",
           "url": "/fr/articles-tessin/decret-sur-la-taxe-sante-des-frontaliers-publie-feu-vert-des-regions/",
           "excerpt": "Décret publié au Journal officiel à l'approche des fêtes",
@@ -1031,12 +1037,6 @@
           "url": "/fr/articles-frontalier/taxe-sante-et-retrocessions-reunion-du-17-septembre-a-berne/",
           "excerpt": "Le 17 septembre, il sera question de taxe sur la santé, de double imposition et de statut ; le Tessin menace de bloquer les rétrocessions, mettant en péril 120 millions de francs pour les communes frontalières.",
           "date": "2026-10-12T19:46:56.997Z"
-        },
-        {
-          "title": "Taxe santé des frontaliers au Tessin : lancement en septembre ?",
-          "url": "/fr/articles-frontalier/taxe-sante-travailleurs-frontaliers-tessin-septembre/",
-          "excerpt": "Nouvelle taxe sanitaire pour les frontaliers : entrée en vigueur prévue d’ici septembre, mais les décrets d’application font encore défaut et les paiements n’ont pas encore été recouvrés.",
-          "date": "2026-10-04T18:17:43.880Z"
         }
       ],
       "latestCantonArticles": [],
@@ -1066,7 +1066,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-10-27T01:37:11.978Z"
+      "updatedAt": "2026-10-27T03:15:48.569Z"
     }
   }
 }

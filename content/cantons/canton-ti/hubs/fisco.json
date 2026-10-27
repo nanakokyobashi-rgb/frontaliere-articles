@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "fisco",
-  "updatedAt": "2026-10-18T01:20:09.452Z",
-  "contentHash": "f760e4aac6187c65bd64f7e0438d3a26c1487d9c3735bc4540c4d1bdb634a989",
+  "updatedAt": "2026-10-27T03:15:48.569Z",
+  "contentHash": "9130c62ce46e4180cc5283d297a0a3b9d02f47c96a42a3104d91e747187ed626",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -114,6 +114,12 @@
           "date": "2026-10-08T12:15:50.666Z"
         },
         {
+          "title": "Frontalieri: tassa salute e decreto omnibus aggiornamento",
+          "url": "/articoli-ticino/tassa-salute-decreto-omnibus-scenari/",
+          "excerpt": "Nessun lavoratore è stato chiamato al pagamento La tassa riguarda i «vecchi frontalieri» Per alcuni frontalieri Omnibus: tassazione al 100% Nuovo incontro",
+          "date": "2026-10-27T03:10:46.721Z"
+        },
+        {
           "title": "Frontalieri: tassa salute e decreto omnibus al 100%",
           "url": "/articoli-ticino/frontalieri-tassa-salute-omnibus-giugno-2026/",
           "excerpt": "Nessun lavoratore è stato chiamato a pagare la tassa sulla salute Il contributo previsto va dal 3% al 6% del reddito netto Dal gennaio 2026 i lavoratori",
@@ -142,12 +148,6 @@
           "url": "/articoli-svizzera/incentivo-fiscale-acquisto-locale/",
           "excerpt": "Il Centro propone un credito d'imposta fino al 25% per chi destina fino al 5% dello stipendio o reddito annuo a commercianti ticinesi aderenti.",
           "date": "2026-09-25T14:19:43.225Z"
-        },
-        {
-          "title": "Rimborso imposta LPP bloccato per i frontalieri",
-          "url": "/articoli-frontaliere/rimborso-imposta-lpp-2024/",
-          "excerpt": "Dal 2024 il Canton Ticino non rimborsa più l'imposta alla fonte del 7% sul capitale LPP, costringendo i frontalieri a pagare anche l'imposta sostitutiva italiana del 5%.",
-          "date": "2026-09-23T10:40:11.448Z"
         }
       ],
       "latestCantonArticles": [],
@@ -177,7 +177,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-18T01:20:09.452Z"
+      "updatedAt": "2026-10-27T03:15:48.569Z"
     },
     "en": {
       "canton": "TI",
@@ -273,6 +273,12 @@
           "date": "2026-10-08T12:15:50.666Z"
         },
         {
+          "title": "Cross-border workers: health tax and omnibus decree update",
+          "url": "/en/ticino-articles/health-tax-omnibus-scenarios/",
+          "excerpt": "No worker has been called upon to pay The tax concerns the “old cross-border workers” For some cross-border workers Omnibus: 100% taxation New meeting",
+          "date": "2026-10-27T03:10:46.721Z"
+        },
+        {
           "title": "Cross-border workers: health tax and omnibus decree at 100%",
           "url": "/en/ticino-articles/commuters-health-tax-omnibus-june-2026/",
           "excerpt": "No worker has been asked to pay the health tax The expected contribution ranges from 3% to 6% of net income From January 2026, workers",
@@ -300,12 +306,6 @@
           "url": "/en/swiss-articles/tax-incentive-local-shopping-ticino/",
           "excerpt": "The Centre offers a tax credit of up to 25% for those who allocate up to 5% of their annual salary or income to participating Ticino merchants.",
           "date": "2026-09-25T14:19:43.225Z"
-        },
-        {
-          "title": "LPP tax refund blocked for border workers",
-          "url": "/en/cross-border-articles/lpp-tax-refund-2024/",
-          "excerpt": "From 2024, the Canton of Ticino no longer reimburses the 7% tax at source on LPP capital, forcing border workers to also pay the 5% Italian substitute tax.",
-          "date": "2026-09-23T10:40:11.448Z"
         }
       ],
       "latestCantonArticles": [],
@@ -335,7 +335,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-18T01:20:09.452Z"
+      "updatedAt": "2026-10-27T03:15:48.569Z"
     },
     "de": {
       "canton": "TI",
@@ -431,6 +431,12 @@
           "date": "2026-10-08T12:15:50.666Z"
         },
         {
+          "title": "Grenzgänger: Gesundheitssteuer und Omnibus-Dekret – Aktualisierung",
+          "url": "/de/tessin-artikel/krankenversicherungssteuer-omnibus-szenarien/",
+          "excerpt": "Kein Arbeitnehmer wurde zur Zahlung aufgefordert Die Abgabe betrifft die «alten Grenzgänger» Für einige Grenzgänger Omnibus: Besteuerung zu 100% Neues Treffen",
+          "date": "2026-10-27T03:10:46.721Z"
+        },
+        {
           "title": "Grenzgänger: Gesundheitssteuer und Omnibus-Dekret zu 100%",
           "url": "/de/tessin-artikel/grenzganger-gesundheit-steuer-omnibus-juni-2026/",
           "excerpt": "Kein Arbeitnehmer wurde zur Zahlung der Gesundheitssteuer aufgefordert Der vorgesehene Beitrag reicht von 3% bis 6% des Nettoeinkommens Ab Januar 2026 die Arbeitnehmer",
@@ -458,12 +464,6 @@
           "url": "/de/schweiz-artikel/steuerbonus-lokale-einkaeufe-tessin/",
           "excerpt": "Das Zentrum bietet eine Steuergutschrift von bis zu 25% für Personen an, die bis zu 5% ihres Gehalts oder Jahreseinkommens teilnehmenden Tessiner Händlern zukommen lassen.",
           "date": "2026-09-25T14:19:43.225Z"
-        },
-        {
-          "title": "BVG-Steuerrückerstattung für Grenzgänger gesperrt",
-          "url": "/de/grenzgaenger-artikel/lpp-steuererstattung-2024/",
-          "excerpt": "Seit 2024 erstattet der Kanton Tessin die Quellensteuer von 7% auf das BVG-Kapital nicht mehr UND zwingt die Grenzgänger, auch die italienische Ersatzsteuer von 5% zu zahlen.",
-          "date": "2026-09-23T10:40:11.448Z"
         }
       ],
       "latestCantonArticles": [],
@@ -493,7 +493,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-18T01:20:09.452Z"
+      "updatedAt": "2026-10-27T03:15:48.569Z"
     },
     "fr": {
       "canton": "TI",
@@ -590,6 +590,12 @@
           "date": "2026-10-08T12:15:50.666Z"
         },
         {
+          "title": "Frontaliers : taxe santé et décret omnibus, mise à jour",
+          "url": "/fr/articles-tessin/taxe-sante-omnibus-scenarii/",
+          "excerpt": "Aucun travailleur n'a été appelé à payer La taxe concerne les « anciens frontaliers » Pour certains frontaliers Omnibus : imposition à 100% Nouvelle rencontre",
+          "date": "2026-10-27T03:10:46.721Z"
+        },
+        {
           "title": "Frontaliers : taxe santé et décret omnibus à 100%",
           "url": "/fr/articles-tessin/frontaliers-taxe-sante-omnibus-juin-2026/",
           "excerpt": "Aucun travailleur n’a été appelé à payer la taxe sur la santé La contribution prévue va de 3% à 6% du revenu net À partir de janvier 2026 les travailleurs",
@@ -618,12 +624,6 @@
           "url": "/fr/articles-suisse/incentive-fiscal-achats-locaux-tessin/",
           "excerpt": "Le Centre propose un crédit d'impôt jusqu'à 25 % pour ceux qui destinent jusqu'à 5 % du salaire ou du revenu annuel aux commerçants tessinois adhérents.",
           "date": "2026-09-25T14:19:43.225Z"
-        },
-        {
-          "title": "Remboursement de la taxe LPP bloquée pour les frontaliers",
-          "url": "/fr/articles-frontalier/remboursement-taxe-lpp-2024/",
-          "excerpt": "Depuis 2024, le canton du Tessin ne rembourse plus l'impôt à la source de 7 % sur le capital LPP, obligeant les frontaliers à payer également l'impôt de remplacement italien de 5 %.",
-          "date": "2026-09-23T10:40:11.448Z"
         }
       ],
       "latestCantonArticles": [],
@@ -653,7 +653,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-18T01:20:09.452Z"
+      "updatedAt": "2026-10-27T03:15:48.569Z"
     }
   }
 }
