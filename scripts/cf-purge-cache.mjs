@@ -319,7 +319,8 @@ async function cf(method, path, body) {
     if (timedOut || isTimeoutError(err)) throw timeoutError(phase);
     if (phase === 'response body') {
       const detail = String(err?.message || 'invalid JSON response');
-      throw new Error(`Cloudflare API response body could not be parsed: ${detail}`, { cause: err });
+      const httpStatus = Number.isInteger(response?.status) ? `HTTP ${response.status}` : 'HTTP status sconosciuto';
+      throw new Error(`Cloudflare API response body could not be parsed (${httpStatus}): ${detail}`, { cause: err });
     }
     throw err;
   } finally {

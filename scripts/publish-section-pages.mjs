@@ -102,6 +102,14 @@ export const API_BASE = 'https://nanakokyobashi-rgb.github.io/frontaliere-articl
 export const CANTON_RSS_PREFIX = `${EDGE_PREFIX}/_feeds`;
 /** Le pagine si riscrivono a ogni publish e il Worker le tiene 5 min: stessa classe delle sitemap. */
 export const PAGE_CACHE_CONTROL = 'public,max-age=600';
+/**
+ * Un purge mirato e' confermato dall'API prima che ogni PoP abbia propagato
+ * la cancellazione. Il CDN documenta una finestra che puo' arrivare a ~30s:
+ * il rollback deve quindi restare fail-closed, ma non trasformare una
+ * propagazione normale in un secondo failure che maschera il primo.
+ */
+export const ROLLBACK_VERIFY_ATTEMPTS = 8;
+export const ROLLBACK_VERIFY_RETRY_DELAY_MS = 4_000;
 /** Dopo il deploy API la superficie pubblica puo' arrivare in ritardo: la delete attende, ma con un limite. */
 export const RELEASE_READY_MAX_WAIT_MS = 120_000;
 export const RELEASE_READY_RETRY_DELAY_MS = 10_000;
@@ -1746,8 +1754,8 @@ async function rollbackCantonPages({ pages, snapshots, distDir, runImpl, probeIm
 
     const restored = async (page, url, previous) => {
       const result = await probeImpl(url, {
-        attempts: 3,
-        delayMs: 1000,
+        attempts: ROLLBACK_VERIFY_ATTEMPTS,
+        delayMs: ROLLBACK_VERIFY_RETRY_DELAY_MS,
         want: previous.exists ? (body) => body === previous.body : () => false,
       });
       const ok = previous.exists
@@ -1835,8 +1843,8 @@ async function rollbackCantonRssFeeds({ prepared, snapshots, distDir, runImpl, p
           want: neutralize
             ? () => false
             : previous?.exists ? (body) => body === previous.body : () => false,
-          attempts: 3,
-          delayMs: 1000,
+          attempts: ROLLBACK_VERIFY_ATTEMPTS,
+          delayMs: ROLLBACK_VERIFY_RETRY_DELAY_MS,
         });
         const restored = neutralize
           ? result?.ok !== true && isNotFoundStatus(result?.status)
@@ -2022,7 +2030,11 @@ export async function publishCantonRssFeeds({
     for (const feed of prepared) {
       await publishSignalBoundary(signal);
       if (removingStaleFeeds) {
-        const result = await probeImpl(feed.url, { attempts: 3, delayMs: 1000, want: () => false });
+        const result = await probeImpl(feed.url, {
+          attempts: ROLLBACK_VERIFY_ATTEMPTS,
+          delayMs: ROLLBACK_VERIFY_RETRY_DELAY_MS,
+          want: () => false,
+        });
         if (result?.ok === true || !isNotFoundStatus(result?.status)) {
           throw new Error(`feed RSS ancora servito sul CDN: ${feed.url} (${result?.status ?? 'nessuna risposta'})`);
         }
@@ -2488,7 +2500,10 @@ export async function publish({
   // keys only after successful delete requests, then retain the 404 verification.
   await purgePages(deleted);
   for (const page of obsoletePages) {
-    const old = await probeImpl(page.cdnUrl, { attempts: 3, delayMs: 1000 });
+    const old = await probeImpl(page.cdnUrl, {
+      attempts: ROLLBACK_VERIFY_ATTEMPTS,
+      delayMs: ROLLBACK_VERIFY_RETRY_DELAY_MS,
+    });
     await publishSignalBoundary(signal);
     if (old.status !== 'HTTP 404') {
       failures++;

@@ -26,6 +26,8 @@ import {
   apiInputChangedInRange,
   CANTON_RSS_PREFIX,
   PAGE_CACHE_CONTROL,
+  ROLLBACK_VERIFY_ATTEMPTS,
+  ROLLBACK_VERIFY_RETRY_DELAY_MS,
   UPLOAD_ORDER,
   addCantonRssFeedLink,
   aggregatePageDefects,
@@ -102,6 +104,14 @@ const HISTORICAL_CORE = Object.fromEntries(HISTORICAL_CORE_LIST.map((core) => [c
 const WITH_TI = [...HISTORICAL_CORE_LIST, TI];
 const ACTIVE_WITH_TI = { ...HISTORICAL_CORE, 'canton-ti': TI };
 const read = (rel) => readFileSync(path.join(ROOT, rel), 'utf8');
+
+test('publisher: il rollback attende la propagazione del purge mirato', () => {
+  assert.equal(ROLLBACK_VERIFY_ATTEMPTS, 8);
+  assert.equal(ROLLBACK_VERIFY_RETRY_DELAY_MS, 4_000);
+  const publisher = read('scripts/publish-section-pages.mjs');
+  assert.match(publisher, /attempts: ROLLBACK_VERIFY_ATTEMPTS/u);
+  assert.match(publisher, /delayMs: ROLLBACK_VERIFY_RETRY_DELAY_MS/u);
+});
 
 // ── Publisher ────────────────────────────────────────────────────────────────
 
