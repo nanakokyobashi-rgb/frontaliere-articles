@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "servizi",
-  "updatedAt": "2026-10-27T01:37:11.978Z",
-  "contentHash": "76ad2bea8c3cf402e9b01176413c5d64fc3855bcce93032184496e8c746297fd",
+  "updatedAt": "2026-10-27T07:24:19.916Z",
+  "contentHash": "304bce13d0ba7d7029a671e8201519e8527f905b7970b6cb0c60f52c1c981387",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-26T21:45:29.244Z",
+      "updatedAt": "2026-10-27T00:56:28.252Z",
       "keyFacts": 0
     },
     {
@@ -76,11 +76,6 @@
             {
               "label": "Centre Coop",
               "detail": "Moutier, Moutier",
-              "date": "2026-10-26T17:30:00.000Z"
-            },
-            {
-              "label": "Centre Coop",
-              "detail": "Moutier, Moutier",
               "date": "2026-10-27T17:30:00.000Z"
             },
             {
@@ -92,11 +87,16 @@
               "label": "Centre Coop",
               "detail": "Moutier, Moutier",
               "date": "2026-10-29T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-10-30T17:30:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-10-26T21:45:29.244Z"
+          "updatedAt": "2026-10-27T00:56:28.252Z"
         },
         {
           "id": "meteo",
@@ -183,7 +183,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-27T01:37:11.978Z"
+      "updatedAt": "2026-10-27T07:24:19.916Z"
     },
     "en": {
       "canton": "JU",
@@ -232,11 +232,6 @@
             {
               "label": "Centre Coop",
               "detail": "Moutier, Moutier",
-              "date": "2026-10-26T17:30:00.000Z"
-            },
-            {
-              "label": "Centre Coop",
-              "detail": "Moutier, Moutier",
               "date": "2026-10-27T17:30:00.000Z"
             },
             {
@@ -248,11 +243,16 @@
               "label": "Centre Coop",
               "detail": "Moutier, Moutier",
               "date": "2026-10-29T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-10-30T17:30:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-10-26T21:45:29.244Z"
+          "updatedAt": "2026-10-27T00:56:28.252Z"
         },
         {
           "id": "meteo",
@@ -335,7 +335,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-27T01:37:11.978Z"
+      "updatedAt": "2026-10-27T07:24:19.916Z"
     },
     "de": {
       "canton": "JU",
@@ -384,11 +384,6 @@
             {
               "label": "Centre Coop",
               "detail": "Moutier, Moutier",
-              "date": "2026-10-26T17:30:00.000Z"
-            },
-            {
-              "label": "Centre Coop",
-              "detail": "Moutier, Moutier",
               "date": "2026-10-27T17:30:00.000Z"
             },
             {
@@ -400,11 +395,16 @@
               "label": "Centre Coop",
               "detail": "Moutier, Moutier",
               "date": "2026-10-29T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-10-30T17:30:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-10-26T21:45:29.244Z"
+          "updatedAt": "2026-10-27T00:56:28.252Z"
         },
         {
           "id": "meteo",
@@ -487,7 +487,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-27T01:37:11.978Z"
+      "updatedAt": "2026-10-27T07:24:19.916Z"
     },
     "fr": {
       "canton": "JU",
@@ -536,11 +536,6 @@
             {
               "label": "Centre Coop",
               "detail": "Moutier, Moutier",
-              "date": "2026-10-26T17:30:00.000Z"
-            },
-            {
-              "label": "Centre Coop",
-              "detail": "Moutier, Moutier",
               "date": "2026-10-27T17:30:00.000Z"
             },
             {
@@ -552,11 +547,16 @@
               "label": "Centre Coop",
               "detail": "Moutier, Moutier",
               "date": "2026-10-29T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-10-30T17:30:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-10-26T21:45:29.244Z"
+          "updatedAt": "2026-10-27T00:56:28.252Z"
         },
         {
           "id": "meteo",
@@ -635,7 +635,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-27T01:37:11.978Z"
+      "updatedAt": "2026-10-27T07:24:19.916Z"
     }
   }
 }

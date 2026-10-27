@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-27T06:35:07.773Z",
-  "contentHash": "e2eb0d64829f053fb33a579b5bf9c797523ce42f0d47945c0465b948d41841af",
+  "updatedAt": "2026-10-27T07:24:19.916Z",
+  "contentHash": "7549be7a4307e3acac7435a147118ccfed18e0a44fdc78ca15181f9221558d3d",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -209,6 +209,12 @@
           "date": "2026-10-23T12:26:06.032Z"
         },
         {
+          "title": "Interrogazione Cantiere Caraa de Guèra: chiarezza su lavori e costi",
+          "url": "/articoli-grigioni/cantiere-caraa-guera-interrogazione/",
+          "excerpt": "Cantiere sulla Caraa de Guèra, tra Maron e Ai Tecc Rifacimento di reti e posa di acciottolato di fiume Sette domande al Municipio su approvazioni e costi",
+          "date": "2026-10-27T07:03:29.459Z"
+        },
+        {
           "title": "A13: code tra Rothenbrunnen e Reichenau per vacanze zurighesi",
           "url": "/articoli-grigioni/a13-code-grigioni-vacanze-zurighesi/",
           "excerpt": "Il traffico sulla A13 si è accumulato ogni giorno del fine settimana tra Rothenbrunnen e Reichenau, con il tunnel Isla-Bella identificato come collo di bottiglia, in riferimento alla fine delle vacanze zurighesi.",
@@ -243,12 +249,6 @@
           "url": "/articoli-svizzera/trenino-rossoschanf-livigno/",
           "excerpt": "Il Canton Grigioni vuole lavorare assieme ai partner della Lombardia per realizzare un collegamento ferroviario tra Engadina e Alta Valtellina.",
           "date": "2026-08-12T22:12:43.667Z"
-        },
-        {
-          "title": "Castasegna: la vecchia dogana in vendita preoccupa Bregaglia",
-          "url": "/articoli-frontaliere/castasegna-vecchia-dogana-in-vendita/",
-          "excerpt": "La Confederazione ha messo in vendita la vecchia dogana di Castasegna. Il Comune di Bregaglia si attiva con Coira per evitare la perdita della presenza federale.",
-          "date": "2026-08-09T00:40:13.497Z"
         }
       ],
       "latestCantonArticles": [],
@@ -290,7 +290,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-27T06:35:07.773Z"
+      "updatedAt": "2026-10-27T07:24:19.916Z"
     },
     "en": {
       "canton": "GR",
@@ -477,6 +477,12 @@
           "date": "2026-10-23T12:26:06.032Z"
         },
         {
+          "title": "Inquiry into the Caraa de Guèra construction site: clarity on works and costs",
+          "url": "/en/graubunden-articles/caraa-guera-construction-inquiry/",
+          "excerpt": "Construction site on Caraa de Guèra, between Maron and Ai Tecc Renovation of utility networks and laying of river cobblestones Seven questions for the Municipality about approvals and costs",
+          "date": "2026-10-27T07:03:29.459Z"
+        },
+        {
           "title": "A13: queues between Rothenbrunnen and Reichenau due to Zurich holiday traffic",
           "url": "/en/graubunden-articles/a13-traffic-graubuenden-zurich-holidays/",
           "excerpt": "Traffic on the A13 built up every day of the weekend between Rothenbrunnen and Reichenau, with the Isla-Bella tunnel identified as a bottleneck, in connection with the end of the Zurich holidays.",
@@ -510,12 +516,6 @@
           "url": "/en/swiss-articles/red-train-schanf-livigno/",
           "excerpt": "The Canton of Graubünden wants to work together with the partners of Lombardy to create a railway connection between the Engadine and Alta Valtellina.",
           "date": "2026-08-12T22:12:43.667Z"
-        },
-        {
-          "title": "Castasegna: the old customs house for sale worries Bregaglia",
-          "url": "/en/cross-border-articles/castasegna-old-customs-house-for-sale/",
-          "excerpt": "The Confederation has put the old Castasegna customs house up for sale. The Municipality of Bregaglia activates with Chur to avoid the loss of federal presence.",
-          "date": "2026-08-09T00:40:13.497Z"
         }
       ],
       "latestCantonArticles": [],
@@ -557,7 +557,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-27T06:35:07.773Z"
+      "updatedAt": "2026-10-27T07:24:19.916Z"
     },
     "de": {
       "canton": "GR",
@@ -744,6 +744,12 @@
           "date": "2026-10-23T12:26:06.032Z"
         },
         {
+          "title": "Anfrage zur Baustelle Caraa de Guèra: Klarheit über Arbeiten und Kosten",
+          "url": "/de/graubunden-artikel/cantiere-caraa-guera-interrogations/",
+          "excerpt": "Baustelle an der Caraa de Guèra zwischen Maron und Ai Tecc Erneuerung von Netzen und Verlegung von Flusskieselpflaster Sieben Fragen an die Gemeindeverwaltung zu Genehmigungen und Kosten",
+          "date": "2026-10-27T07:03:29.459Z"
+        },
+        {
           "title": "A13: Staus zwischen Rothenbrunnen und Reichenau wegen Zürcher Ferien",
           "url": "/de/graubunden-artikel/a13-stau-graubuenden-zuercher-ferien/",
           "excerpt": "Der Verkehr auf der A13 staute sich an jedem Tag des Wochenendes zwischen Rothenbrunnen und Reichenau, wobei der Tunnel Isla-Bella als Engpass identifiziert wurde, im Hinblick auf das Ende der Zürcher Ferien.",
@@ -778,12 +784,6 @@
           "url": "/de/schweiz-artikel/rotter-zug-schanf-livigno/",
           "excerpt": "Der Kanton Graubünden will mit Partnern aus der Lombardei zusammenarbeiten, um eine Bahnverbindung zwischen Engadin und Oberveltlin zu realisieren.",
           "date": "2026-08-12T22:12:43.667Z"
-        },
-        {
-          "title": "Castasegna: Der alte Zoll zum Verkauf beunruhigt Bergell",
-          "url": "/de/grenzgaenger-artikel/castasegna-alter-zollposten-zu-verkaufen/",
-          "excerpt": "Der Bund hat den alten Zoll von Castasegna zum Verkauf angeboten. Die Gemeinde Bergell setzt sich mit Chur dafür ein, den Verlust der eidgenössischen Präsenz zu vermeiden.",
-          "date": "2026-08-09T00:40:13.497Z"
         }
       ],
       "latestCantonArticles": [],
@@ -825,7 +825,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-27T06:35:07.773Z"
+      "updatedAt": "2026-10-27T07:24:19.916Z"
     },
     "fr": {
       "canton": "GR",
@@ -1012,6 +1012,12 @@
           "date": "2026-10-23T12:26:06.032Z"
         },
         {
+          "title": "Question du chantier naval Caraa de Guèra : Clarté sur les travaux et les coûts",
+          "url": "/fr/articles-grisons/chantier-caraa-guera-questionnement/",
+          "excerpt": "Chantier sur la Caraa de Guèra, entre Maron et Ai Tecc.",
+          "date": "2026-10-27T07:03:29.459Z"
+        },
+        {
           "title": "A13 : queues entre Rothenbrunnen et Reichenau pour les vacances zurichoises",
           "url": "/fr/articles-grisons/a13-bouchons-grisons-vacances-zurichoises/",
           "excerpt": "Le trafic sur l'A13 s'est accumulé tous les jours du week-end entre Rothenbrunnen et Reichenau, avec le tunnel Isla-Bella identifié comme un goulot d'étranglement, en référence à la fin des vacances zurichoises.",
@@ -1046,12 +1052,6 @@
           "url": "/fr/articles-suisse/train-rouge-schanf-livigno/",
           "excerpt": "Le canton des Grisons souhaite travailler avec des partenaires de Lombardie pour réaliser une liaison ferroviaire entre l'Engadine et la Haute-Valtelline.",
           "date": "2026-08-12T22:12:43.667Z"
-        },
-        {
-          "title": "Châtaigne : l'ancienne douane en vente inquiète Bregaglia",
-          "url": "/fr/articles-frontalier/castasegna-ancienne-douane-a-vendre/",
-          "excerpt": "La Confédération a mis en vente l'ancienne douane de Castasegna. La commune de Bregaglia s'active avec Coire pour éviter la perte de la présence fédérale.",
-          "date": "2026-08-09T00:40:13.497Z"
         }
       ],
       "latestCantonArticles": [],
@@ -1093,7 +1093,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-27T06:35:07.773Z"
+      "updatedAt": "2026-10-27T07:24:19.916Z"
     }
   }
 }

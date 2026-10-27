@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-10-27T03:15:48.569Z",
-  "contentHash": "855d5adbe452418c3ad2748291213ff708e69874ae3fec8c796883f26cfa5b2d",
+  "updatedAt": "2026-10-27T07:24:19.916Z",
+  "contentHash": "0353ecb636465d23b8e83f6fd4c289df3b45d04ab47cdd6224d19e9db999e9bc",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-26T21:44:40.617Z",
+      "updatedAt": "2026-10-27T00:55:39.749Z",
       "keyFacts": 0
     },
     {
@@ -84,11 +84,6 @@
               "date": "2026-10-23T16:00:00.000Z"
             },
             {
-              "label": "Internazionale Dr. Merloni",
-              "detail": "Chiasso, Mendrisiotto",
-              "date": "2026-10-24T06:00:00.000Z"
-            },
-            {
               "label": "Farmacia Coop Vitality Viganello",
               "detail": "Viganello, Luganese",
               "date": "2026-10-24T06:00:00.000Z"
@@ -107,11 +102,16 @@
               "label": "Boscolo",
               "detail": "Airolo, Biasca e Valli",
               "date": "2026-10-30T17:00:00.000Z"
+            },
+            {
+              "label": "Pedrazzetti",
+              "detail": "Giubiasco, Bellinzonese",
+              "date": "2026-10-30T17:30:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-26T21:44:40.617Z"
+          "updatedAt": "2026-10-27T00:55:39.749Z"
         },
         {
           "id": "aste-targhe",
@@ -295,7 +295,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-10-27T03:15:48.569Z"
+      "updatedAt": "2026-10-27T07:24:19.916Z"
     },
     "en": {
       "canton": "TI",
@@ -347,11 +347,6 @@
               "date": "2026-10-23T16:00:00.000Z"
             },
             {
-              "label": "Internazionale Dr. Merloni",
-              "detail": "Chiasso, Mendrisiotto",
-              "date": "2026-10-24T06:00:00.000Z"
-            },
-            {
               "label": "Farmacia Coop Vitality Viganello",
               "detail": "Viganello, Luganese",
               "date": "2026-10-24T06:00:00.000Z"
@@ -370,11 +365,16 @@
               "label": "Boscolo",
               "detail": "Airolo, Biasca e Valli",
               "date": "2026-10-30T17:00:00.000Z"
+            },
+            {
+              "label": "Pedrazzetti",
+              "detail": "Giubiasco, Bellinzonese",
+              "date": "2026-10-30T17:30:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-26T21:44:40.617Z"
+          "updatedAt": "2026-10-27T00:55:39.749Z"
         },
         {
           "id": "aste-targhe",
@@ -553,7 +553,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-10-27T03:15:48.569Z"
+      "updatedAt": "2026-10-27T07:24:19.916Z"
     },
     "de": {
       "canton": "TI",
@@ -605,11 +605,6 @@
               "date": "2026-10-23T16:00:00.000Z"
             },
             {
-              "label": "Internazionale Dr. Merloni",
-              "detail": "Chiasso, Mendrisiotto",
-              "date": "2026-10-24T06:00:00.000Z"
-            },
-            {
               "label": "Farmacia Coop Vitality Viganello",
               "detail": "Viganello, Luganese",
               "date": "2026-10-24T06:00:00.000Z"
@@ -628,11 +623,16 @@
               "label": "Boscolo",
               "detail": "Airolo, Biasca e Valli",
               "date": "2026-10-30T17:00:00.000Z"
+            },
+            {
+              "label": "Pedrazzetti",
+              "detail": "Giubiasco, Bellinzonese",
+              "date": "2026-10-30T17:30:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-26T21:44:40.617Z"
+          "updatedAt": "2026-10-27T00:55:39.749Z"
         },
         {
           "id": "aste-targhe",
@@ -811,7 +811,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-10-27T03:15:48.569Z"
+      "updatedAt": "2026-10-27T07:24:19.916Z"
     },
     "fr": {
       "canton": "TI",
@@ -863,11 +863,6 @@
               "date": "2026-10-23T16:00:00.000Z"
             },
             {
-              "label": "Internazionale Dr. Merloni",
-              "detail": "Chiasso, Mendrisiotto",
-              "date": "2026-10-24T06:00:00.000Z"
-            },
-            {
               "label": "Farmacia Coop Vitality Viganello",
               "detail": "Viganello, Luganese",
               "date": "2026-10-24T06:00:00.000Z"
@@ -886,11 +881,16 @@
               "label": "Boscolo",
               "detail": "Airolo, Biasca e Valli",
               "date": "2026-10-30T17:00:00.000Z"
+            },
+            {
+              "label": "Pedrazzetti",
+              "detail": "Giubiasco, Bellinzonese",
+              "date": "2026-10-30T17:30:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-26T21:44:40.617Z"
+          "updatedAt": "2026-10-27T00:55:39.749Z"
         },
         {
           "id": "aste-targhe",
@@ -1066,7 +1066,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-10-27T03:15:48.569Z"
+      "updatedAt": "2026-10-27T07:24:19.916Z"
     }
   }
 }
