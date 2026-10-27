@@ -4,8 +4,8 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-27T02:04:48.993Z",
-  "contentHash": "01a18331199669624919eee809dbdea1f35fea4c66643bcce6a200599f4350ab",
+  "updatedAt": "2026-10-27T07:28:07.698Z",
+  "contentHash": "3ec232434f8e343b3dbc2af12f2b6166e180ec13926b44b7fe2526fde42498e0",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -60,6 +60,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Risch investe 231 milioni e riduce le imposte",
+          "url": "/articoli-zugo/risch-231-milioni-tasse/",
+          "excerpt": "Il titolo di Zentralplus segnala 231 milioni di investimenti per Risch e una riduzione delle imposte.",
+          "date": "2026-10-27T07:07:01.285Z"
+        },
+        {
           "title": "Zugo rende disponibile l'agenda del Kantonsrat",
           "url": "/articoli-zugo/zugo-agenda-kantonsrat-ottobre/",
           "excerpt": "La fonte del Canton Zugo rende disponibile l'ordine del giorno della seduta del Kantonsrat del 29 ottobre 2026.",
@@ -82,12 +88,6 @@
           "url": "/articoli-zugo/revisione-pbg-zugo-2026/",
           "excerpt": "Il Canton Zugo avvia la consultazione sulla revisione del PBG: nuove regole per alloggi a prezzo contenuto, zone bianche e semplificazioni procedurali.",
           "date": "2026-10-22T03:09:05.531Z"
-        },
-        {
-          "title": "Adeguamento piano direttore 26/1: «zone bianche» per l'edilizia a Zugo",
-          "url": "/articoli-zugo/adeguamento-piano-direttore-zone-bianche-2026/",
-          "excerpt": "Pubblicato l'adeguamento 26/1 del piano direttore cantonale: «zone bianche» per l'edilizia abitativa e strategia di stabilizzazione.",
-          "date": "2026-10-22T02:39:48.543Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-27T02:04:48.993Z"
+      "updatedAt": "2026-10-27T07:28:07.698Z"
     },
     "en": {
       "canton": "ZG",
@@ -147,6 +147,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Risch invests 231 million and reduces taxes",
+          "url": "/en/zug-articles/risch-231-million-tax-cut/",
+          "excerpt": "The Zentralplus headline reports 231 million in investments for Risch and a reduction in taxes.",
+          "date": "2026-10-27T07:07:01.285Z"
+        },
+        {
           "title": "Zug makes the Kantonsrat agenda available",
           "url": "/en/zug-articles/zug-cantonal-council-agenda-october-2026/",
           "excerpt": "The source from the Canton of Zug makes available the agenda for the Kantonsrat session on October 29, 2026.",
@@ -169,12 +175,6 @@
           "url": "/en/zug-articles/zug-pbg-revision-2026/",
           "excerpt": "The Canton of Zug launches consultation on the revision of the PBG: new rules for affordable housing, white zones and procedural simplifications.",
           "date": "2026-10-22T03:09:05.531Z"
-        },
-        {
-          "title": "Amendment to structure plan 26/1: “white zones” for construction in Zug",
-          "url": "/en/zug-articles/zug-director-plan-adjustment-white-zones-2026/",
-          "excerpt": "Published: adjustment 26/1 to the cantonal structure plan: “white zones” for residential construction and a stabilization strategy.",
-          "date": "2026-10-22T02:39:48.543Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-27T02:04:48.993Z"
+      "updatedAt": "2026-10-27T07:28:07.698Z"
     },
     "de": {
       "canton": "ZG",
@@ -234,6 +234,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Risch investiert 231 Millionen und senkt die Steuern",
+          "url": "/de/zug-artikel/risch-231-millionen-steuern/",
+          "excerpt": "Die Überschrift von Zentralplus weist auf Investitionen in Höhe von 231 Millionen für Risch und eine Senkung der Steuern hin.",
+          "date": "2026-10-27T07:07:01.285Z"
+        },
+        {
           "title": "Zug stellt die Traktandenliste des Kantonsrats zur Verfügung",
           "url": "/de/zug-artikel/zug-traktandenliste-kantonsrat-oktober-2026/",
           "excerpt": "Die Quelle des Kantons Zug stellt die Traktandenliste der Sitzung des Kantonsrats vom 29.",
@@ -256,12 +262,6 @@
           "url": "/de/zug-artikel/zug-pbg-revision-2026/",
           "excerpt": "Der Kanton Zug eröffnet die Vernehmlassung zur Revision des PBG: neue Regeln für preisgünstigen Wohnraum, weisse Zonen und Verfahrensvereinfachungen.",
           "date": "2026-10-22T03:09:05.531Z"
-        },
-        {
-          "title": "Anpassung des Richtplans 26/1: «weiße Zonen» für das Bauen in Zug",
-          "url": "/de/zug-artikel/zug-richtplan-anpassung-weisse-zonen-2026/",
-          "excerpt": "Die Anpassung 26/1 des kantonalen Richtplans wurde veröffentlicht: «weiße Zonen» für den Wohnungsbau und eine Stabilisierungsstrategie.",
-          "date": "2026-10-22T02:39:48.543Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-27T02:04:48.993Z"
+      "updatedAt": "2026-10-27T07:28:07.698Z"
     },
     "fr": {
       "canton": "ZG",
@@ -321,6 +321,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Risch investit 231 millions et réduit les impôts",
+          "url": "/fr/articles-zoug/risch-231-millions-impots/",
+          "excerpt": "Le titre de Zentralplus signale 231 millions d’investissements pour Risch et une réduction des impôts.",
+          "date": "2026-10-27T07:07:01.285Z"
+        },
+        {
           "title": "Zoug met à disposition l’ordre du jour du Kantonsrat",
           "url": "/fr/articles-zoug/zoug-ordre-du-jour-conseil-octobre-2026/",
           "excerpt": "La source du canton de Zoug met à disposition l’ordre du jour de la séance du Kantonsrat du 29 octobre 2026.",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-zoug/revision-pbg-zoug-2026/",
           "excerpt": "Le canton de Zoug lance la consultation sur la révision du PBG : nouvelles règles pour les logements à prix modéré, les zones blanches et les simplifications procédurales.",
           "date": "2026-10-22T03:09:05.531Z"
-        },
-        {
-          "title": "«Zones blanches» pour construire à Zoug Plan 26/1 adapté",
-          "url": "/fr/articles-zoug/zoug-plan-directeur-ajustement-zones-blanches-2026/",
-          "excerpt": "L’adaptation 26/1 du plan directeur cantonal est publiée : des « zones blanches » pour la construction de logements et une stratégie de stabilisation.",
-          "date": "2026-10-22T02:39:48.543Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-27T02:04:48.993Z"
+      "updatedAt": "2026-10-27T07:28:07.698Z"
     }
   }
 }

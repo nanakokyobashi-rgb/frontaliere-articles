@@ -4,8 +4,8 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "fisco",
-  "updatedAt": "2026-10-22T11:37:38.369Z",
-  "contentHash": "98b5226e3fa5b2711a5764cc047f4f09b62eb34b115b70cd3851e1db2c7a3c55",
+  "updatedAt": "2026-10-27T07:28:07.698Z",
+  "contentHash": "7a7000b077a7771797803b397b5da7d8dfcdaba429348b40a71521032e85cea9",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -108,6 +108,12 @@
           "date": "2026-10-22T11:31:01.636Z"
         },
         {
+          "title": "Risch investe 231 milioni e riduce le imposte",
+          "url": "/articoli-zugo/risch-231-milioni-tasse/",
+          "excerpt": "Il titolo di Zentralplus segnala 231 milioni di investimenti per Risch e una riduzione delle imposte.",
+          "date": "2026-10-27T07:07:01.285Z"
+        },
+        {
           "title": "Zugo prevede avanzo 15,6 milioni nel 2027 con tasso al 52%",
           "url": "/articoli-zugo/zugo-bilancio-2027-avanzzo-15-6-milioni-tasso-52/",
           "excerpt": "Il preventivo 2027 indica un avanzo di CHF 15,6 milioni, entrate CHF 446,6 milioni e uscite CHF 431,1 milioni, con tasso fiscale richiesto al 52%.",
@@ -142,12 +148,6 @@
           "url": "/articoli-frontaliere/lucerna-paradiso-fiscale-frontalieri/",
           "excerpt": "Lucerna riduce l'imposta sugli utili al 11,66%, superando Zugo. Impatto sui frontalieri e confronto con l'UE.",
           "date": "2026-05-07T09:05:42.794Z"
-        },
-        {
-          "title": "Comprare casa a Zugo: mutuo e fiscalità",
-          "url": "/articoli-svizzera/comprare-casa-canton-zugo-mutuo/",
-          "excerpt": "Guida completa per acquistare una casa nel Cantone di Zugo: fondi propri richiesti, mutuo ipotecario, imposta sui trapassi e spese notarili della Svizzera.",
-          "date": "2026-08-23T16:37:54.053Z"
         }
       ],
       "latestCantonArticles": [],
@@ -173,7 +173,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-22T11:37:38.369Z"
+      "updatedAt": "2026-10-27T07:28:07.698Z"
     },
     "en": {
       "canton": "ZG",
@@ -264,6 +264,12 @@
           "date": "2026-10-22T11:31:01.636Z"
         },
         {
+          "title": "Risch invests 231 million and reduces taxes",
+          "url": "/en/zug-articles/risch-231-million-tax-cut/",
+          "excerpt": "The Zentralplus headline reports 231 million in investments for Risch and a reduction in taxes.",
+          "date": "2026-10-27T07:07:01.285Z"
+        },
+        {
           "title": "Zug forecasts a surplus of 15,6 million in 2027 with the tax rate at 52%",
           "url": "/en/zug-articles/zug-forecasts-a-surplus-of-15-6-million-in-2027-with-the-tax-rate-at-52/",
           "excerpt": "The 2027 budget indicates a surplus of CHF 15,6 million, revenue of CHF 446,6 million and expenditure of CHF 431,1 million, with the requested tax rate at 52%.",
@@ -298,12 +304,6 @@
           "url": "/en/cross-border-articles/lucerne-new-swiss-tax-haven/",
           "excerpt": "Lucerne reduces corporate tax to 11.66%, surpassing Zug. Impact on cross-border workers and comparison with the EU.",
           "date": "2026-05-07T09:05:42.794Z"
-        },
-        {
-          "title": "Buying a house in Zug: mortgage and taxation",
-          "url": "/en/swiss-articles/buy-house-canton-zug-mortgage/",
-          "excerpt": "Complete guide to buying a house in the Canton of Zug: own funds required, mortgage loan, transfer tax and notary fees in Switzerland.",
-          "date": "2026-08-23T16:37:54.053Z"
         }
       ],
       "latestCantonArticles": [],
@@ -329,7 +329,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-22T11:37:38.369Z"
+      "updatedAt": "2026-10-27T07:28:07.698Z"
     },
     "de": {
       "canton": "ZG",
@@ -420,6 +420,12 @@
           "date": "2026-10-22T11:31:01.636Z"
         },
         {
+          "title": "Risch investiert 231 Millionen und senkt die Steuern",
+          "url": "/de/zug-artikel/risch-231-millionen-steuern/",
+          "excerpt": "Die Überschrift von Zentralplus weist auf Investitionen in Höhe von 231 Millionen für Risch und eine Senkung der Steuern hin.",
+          "date": "2026-10-27T07:07:01.285Z"
+        },
+        {
           "title": "Zug erwartet 2027 bei einem Steuerfuss von 52% einen Überschuss von 15,6 Millionen",
           "url": "/de/zug-artikel/zug-erwartet-2027-bei-einem-steuerfuss-von-52-einen-uberschuss-von-15-6/",
           "excerpt": "Der Voranschlag 2027 weist einen Überschuss von CHF 15,6 Millionen, Einnahmen von CHF 446,6 Millionen und Ausgaben von CHF 431,1 Millionen aus, bei einem beantragten Steuerfuss von 52%.",
@@ -454,12 +460,6 @@
           "url": "/de/grenzgaenger-artikel/luzern-neuer-steuerparadies-schweiz/",
           "excerpt": "Luzern senkt die Gewinnsteuer auf 11,66%, überholt Zug. Auswirkungen auf Grenzgänger und Vergleich mit der EU.",
           "date": "2026-05-07T09:05:42.794Z"
-        },
-        {
-          "title": "Haus kaufen in Zug: Hypothek und Steuern",
-          "url": "/de/schweiz-artikel/haus-kauf-kanton-zug-hypothek/",
-          "excerpt": "Vollständiger Leitfaden zum Hauskauf im Kanton Zug: benötigte Eigenmittel, Hypothekendarlehen, Ablösesumme und Notarkosten der Schweiz.",
-          "date": "2026-08-23T16:37:54.053Z"
         }
       ],
       "latestCantonArticles": [],
@@ -485,7 +485,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-22T11:37:38.369Z"
+      "updatedAt": "2026-10-27T07:28:07.698Z"
     },
     "fr": {
       "canton": "ZG",
@@ -576,6 +576,12 @@
           "date": "2026-10-22T11:31:01.636Z"
         },
         {
+          "title": "Risch investit 231 millions et réduit les impôts",
+          "url": "/fr/articles-zoug/risch-231-millions-impots/",
+          "excerpt": "Le titre de Zentralplus signale 231 millions d’investissements pour Risch et une réduction des impôts.",
+          "date": "2026-10-27T07:07:01.285Z"
+        },
+        {
           "title": "Zoug prévoit un excédent de 15,6 millions en 2027 avec un taux à 52 %",
           "url": "/fr/articles-zoug/zoug-prevoit-un-excedent-de-15-6-millions-en-2027-avec-un-taux-a-52/",
           "excerpt": "Le budget 2027 prévoit un excédent de CHF 15,6 millions, des recettes de CHF 446,6 millions et des dépenses de CHF 431,1 millions, avec un taux fiscal requis de 52 %.",
@@ -610,12 +616,6 @@
           "url": "/fr/articles-frontalier/lucerne-nouveau-paradis-fiscal-suisse/",
           "excerpt": "Lucerne réduit l'impôt sur les bénéfices à 11,66%, dépassant Zoug. Impact sur les frontaliers et comparaison avec l'UE.",
           "date": "2026-05-07T09:05:42.794Z"
-        },
-        {
-          "title": "Acheter une maison à Zoug : hypothèque et fiscalité",
-          "url": "/fr/articles-suisse/acheter-maison-canton-zoug-hypotheque/",
-          "excerpt": "Guide complet pour l'achat d'une maison dans le canton de Zoug : fonds propres requis, hypothèque, taxe de passage et frais de notaire de la Suisse.",
-          "date": "2026-08-23T16:37:54.053Z"
         }
       ],
       "latestCantonArticles": [],
@@ -641,7 +641,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-22T11:37:38.369Z"
+      "updatedAt": "2026-10-27T07:28:07.698Z"
     }
   }
 }

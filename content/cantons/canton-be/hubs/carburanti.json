@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "carburanti",
-  "updatedAt": "2026-10-27T01:56:36.060Z",
-  "contentHash": "dd650823e29c06fea36daff9e2d43b4eae27208300702962cfb17ad311692ba0",
+  "updatedAt": "2026-10-27T07:28:07.698Z",
+  "contentHash": "13adef5b0ca4a96660c8f3e9480c2f22e271fef22c43e21237b545bfeec269b1",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -60,6 +60,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Lützelflüh: taglio di sicurezza, traffico su una corsia",
+          "url": "/articoli-berna/ramsei-taglio-sicurezza-strada/",
+          "excerpt": "A Ramsei, nel comune di Lützelflüh, la Sumiswaldstrasse verso Sumiswald sarà gestita su una corsia dal 2 al 13 novembre 2026, con semaforo.",
+          "date": "2026-10-27T07:13:00.993Z"
+        },
+        {
           "title": "Nuove funzioni nel piano digitale della città di Berna",
           "url": "/articoli-berna/nuove-funzioni-piano-digitale/",
           "excerpt": "Dal 26 ottobre 2026 nuovi contenuti nel piano digitale Nomi ufficiali visibili sotto «Nomenclatura» Download gratuito dal Geoportale della città Aggiornati nomi",
@@ -82,12 +88,6 @@
           "url": "/articoli-berna/primo-adeguamento-lpp-superstiti-e-invalidita-2-1-1-1-2/",
           "excerpt": "Aumento 2,1% per rendite dal 2023, 1% per prima rivalutazione 2026, 1,2% per ultima modifica 2025.",
           "date": "2026-10-22T12:06:19.622Z"
-        },
-        {
-          "title": "Consiglio federale: Kurzarbeit verso il regime ordinario",
-          "url": "/articoli-berna/kurzarbeit-regole-ordinarie/",
-          "excerpt": "Il Consiglio federale prospetta un ritorno graduale: Kurzarbeit da 24 a 12 mesi e Karenzzeit da 1 giorno a un massimo di tre giorni.",
-          "date": "2026-10-21T15:33:53.249Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-27T01:56:36.060Z"
+      "updatedAt": "2026-10-27T07:28:07.698Z"
     },
     "en": {
       "canton": "BE",
@@ -147,6 +147,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Lützelflüh: safety tree felling, traffic on one lane",
+          "url": "/en/bern-articles/ramsei-safety-logging-road/",
+          "excerpt": "In Ramsei, in the municipality of Lützelflüh, Sumiswaldstrasse toward Sumiswald will be operated on a single lane from November 2 to 13, 2026, with traffic lights.",
+          "date": "2026-10-27T07:13:00.993Z"
+        },
+        {
           "title": "New features in the digital plan of the city of Bern",
           "url": "/en/bern-articles/new-digital-city-plan-functions/",
           "excerpt": "From 26 October 2026, new content in the digital plan Official names visible under «Nomenclature» Free download from the city’s Geoportal Street names",
@@ -169,12 +175,6 @@
           "url": "/en/bern-articles/first-lpp-adjustment-for-survivors-and-disability-2-1-1-1-2/",
           "excerpt": "Increase 2,1% for annuities from 2023, 1% for first revaluation 2026, 1,2% for latest modification 2025.",
           "date": "2026-10-22T12:06:19.622Z"
-        },
-        {
-          "title": "Federal Council: short-time work towards the ordinary regime",
-          "url": "/en/bern-articles/short-time-work-normal-rules/",
-          "excerpt": "The Federal Council envisages a gradual return: short-time work from 24 to 12 months and the waiting period from 1 day to a maximum of three days.",
-          "date": "2026-10-21T15:33:53.249Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-27T01:56:36.060Z"
+      "updatedAt": "2026-10-27T07:28:07.698Z"
     },
     "de": {
       "canton": "BE",
@@ -234,6 +234,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Lützelflüh: Sicherheitsholzerei, Verkehr auf einer Fahrspur",
+          "url": "/de/bern-artikel/ramsei-sicherheitsholzerei-strasse/",
+          "excerpt": "In Ramsei, in der Gemeinde Lützelflüh, wird die Sumiswaldstrasse in Richtung Sumiswald vom 2.",
+          "date": "2026-10-27T07:13:00.993Z"
+        },
+        {
           "title": "Neue Funktionen im digitalen Plan der Stadt Bern",
           "url": "/de/bern-artikel/neue-funktionen-digitaler-stadtplan/",
           "excerpt": "Ab dem 26. Oktober 2026 neue Inhalte im digitalen Plan Offizielle Namen unter «Nomenklatur» sichtbar Kostenloser Download über das Geoportal der Stadt",
@@ -256,12 +262,6 @@
           "url": "/de/bern-artikel/erste-anpassung-der-bvg-hinterlassenen-und-invalidenrenten-2-1-1-1-2/",
           "excerpt": "Erhöhung um 2,1% für Renten ab 2023, 1% für die erste Anpassung 2026, 1,2% für die letzte Änderung 2025.",
           "date": "2026-10-22T12:06:19.622Z"
-        },
-        {
-          "title": "Bundesrat: Kurzarbeit auf dem Weg zur ordentlichen Regelung",
-          "url": "/de/bern-artikel/kurzarbeit-ordentliche-regeln/",
-          "excerpt": "Der Bundesrat stellt eine schrittweise Rückkehr in Aussicht: Kurzarbeit von 24 auf 12 Monate und Karenzzeit von 1 Tag auf höchstens drei Tage.",
-          "date": "2026-10-21T15:33:53.249Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-27T01:56:36.060Z"
+      "updatedAt": "2026-10-27T07:28:07.698Z"
     },
     "fr": {
       "canton": "BE",
@@ -321,6 +321,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Lützelflüh : coupe de sécurité, circulation sur une voie",
+          "url": "/fr/articles-berne/ramsei-abattage-securite-route/",
+          "excerpt": "À Ramsei, dans la commune de Lützelflüh, la Sumiswaldstrasse en direction de Sumiswald sera gérée sur une voie du 2 au 13 novembre 2026, avec des feux de signalisation.",
+          "date": "2026-10-27T07:13:00.993Z"
+        },
+        {
           "title": "Nouvelles fonctions dans le plan numérique de la ville de Berne",
           "url": "/fr/articles-berne/nouvelles-fonctions-plan-digital/",
           "excerpt": "À partir du 26 octobre 2026, nouveaux contenus dans le plan numérique Noms officiels visibles sous « Nomenclature » Téléchargement gratuit depuis le géoportail",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-berne/premiere-adaptation-lpp-pour-survivants-et-invalidite-2-1-1-1-2/",
           "excerpt": "Augmentation de 2,1 % pour les rentes à partir de 2023, de 1 % pour la première revalorisation en 2026, de 1,2 % pour la dernière modification en 2025.",
           "date": "2026-10-22T12:06:19.622Z"
-        },
-        {
-          "title": "Conseil fédéral : le chômage partiel vers le régime ordinaire",
-          "url": "/fr/articles-berne/chomage-partiel-regles-ordinaires/",
-          "excerpt": "Le Conseil fédéral envisage un retour progressif : le chômage partiel de 24 à 12 mois et le délai d’attente de 1 jour à un maximum de trois jours.",
-          "date": "2026-10-21T15:33:53.249Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-27T01:56:36.060Z"
+      "updatedAt": "2026-10-27T07:28:07.698Z"
     }
   }
 }

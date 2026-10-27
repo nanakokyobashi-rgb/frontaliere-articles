@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-27T06:35:07.773Z",
-  "contentHash": "2c87b05aaa61baaf3e540e5095ba4542112fd0d2a9a209e1c7108166285d0478",
+  "updatedAt": "2026-10-27T07:28:07.698Z",
+  "contentHash": "2560b94b0bd34dc985ad1122e07f7ff80f7c0462dea209bd88c1a1bd7de0af08",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -134,6 +134,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Lützelflüh: taglio di sicurezza, traffico su una corsia",
+          "url": "/articoli-berna/ramsei-taglio-sicurezza-strada/",
+          "excerpt": "A Ramsei, nel comune di Lützelflüh, la Sumiswaldstrasse verso Sumiswald sarà gestita su una corsia dal 2 al 13 novembre 2026, con semaforo.",
+          "date": "2026-10-27T07:13:00.993Z"
+        },
+        {
           "title": "Ipsach: cede una gru, chiuse ferrovia e strada",
           "url": "/articoli-berna/ipsach-gru-linea-strada/",
           "excerpt": "Una gru da lavoro è caduta su edificio, ferrovia e strada.",
@@ -175,7 +181,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-27T06:35:07.773Z"
+      "updatedAt": "2026-10-27T07:28:07.698Z"
     },
     "en": {
       "canton": "BE",
@@ -292,6 +298,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Lützelflüh: safety tree felling, traffic on one lane",
+          "url": "/en/bern-articles/ramsei-safety-logging-road/",
+          "excerpt": "In Ramsei, in the municipality of Lützelflüh, Sumiswaldstrasse toward Sumiswald will be operated on a single lane from November 2 to 13, 2026, with traffic lights.",
+          "date": "2026-10-27T07:13:00.993Z"
+        },
+        {
           "title": "Ipsach: crane collapses, railway and road closed",
           "url": "/en/bern-articles/ipsach-crane-railway-road/",
           "excerpt": "A work crane fell onto a building, railway, and road.",
@@ -333,7 +345,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-27T06:35:07.773Z"
+      "updatedAt": "2026-10-27T07:28:07.698Z"
     },
     "de": {
       "canton": "BE",
@@ -450,6 +462,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Lützelflüh: Sicherheitsholzerei, Verkehr auf einer Fahrspur",
+          "url": "/de/bern-artikel/ramsei-sicherheitsholzerei-strasse/",
+          "excerpt": "In Ramsei, in der Gemeinde Lützelflüh, wird die Sumiswaldstrasse in Richtung Sumiswald vom 2.",
+          "date": "2026-10-27T07:13:00.993Z"
+        },
+        {
           "title": "Ipsach: Kran stürzt um, Bahnstrecke und Strasse gesperrt",
           "url": "/de/bern-artikel/ipsach-arbeitskran-bahnstrasse/",
           "excerpt": "Ein Arbeitskran ist auf ein Gebäude, die Bahnstrecke und die Strasse gestürzt.",
@@ -491,7 +509,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-27T06:35:07.773Z"
+      "updatedAt": "2026-10-27T07:28:07.698Z"
     },
     "fr": {
       "canton": "BE",
@@ -608,6 +626,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Lützelflüh : coupe de sécurité, circulation sur une voie",
+          "url": "/fr/articles-berne/ramsei-abattage-securite-route/",
+          "excerpt": "À Ramsei, dans la commune de Lützelflüh, la Sumiswaldstrasse en direction de Sumiswald sera gérée sur une voie du 2 au 13 novembre 2026, avec des feux de signalisation.",
+          "date": "2026-10-27T07:13:00.993Z"
+        },
+        {
           "title": "Ipsach : une grue s'effondre, chemin de fer et route fermés",
           "url": "/fr/articles-berne/ipsach-grue-voie-route/",
           "excerpt": "Une grue de chantier est tombée sur un bâtiment, la voie ferrée et la route.",
@@ -649,7 +673,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-27T06:35:07.773Z"
+      "updatedAt": "2026-10-27T07:28:07.698Z"
     }
   }
 }
