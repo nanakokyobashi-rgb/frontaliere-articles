@@ -25,6 +25,7 @@ import { composeArticleMetaDescription } from './shared/articleMetaDescription';
 import { ARTICLE_SECTION_DESCRIPTORS, SITE_RENDERED_ARTICLE_SECTION_DESCRIPTORS, extractBlogEntryPositions, blogKeyToArticleId, type OgSection as OgSectionDescriptor } from './shared/articleSectionDescriptors';
 import { ARTICLE_ROBOTS_INDEX_ENHANCED } from './shared/robotsDirective';
 import { hasArticleBodyPromptPlaceholder } from './shared/articleBodyQuality';
+import { ARTICLE_NOINDEX_TARGET_MARKER } from './shared/articleNoindexTargetMarker.mjs';
 import { readImageIntrinsicSize } from './shared/imageIntrinsicSize';
 import { parseStaticArticleTranslationSource, parseStaticBlogBodySource } from './shared/articleStaticSource.mjs';
 export { parseStaticBlogBodySource };
@@ -807,10 +808,10 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
 
  // A dynamic assignment cannot be represented by this static renderer.
  // Skip the entry explicitly instead of letting a previous static duplicate
- // leak into OG metadata or canonical URLs. Event JSON-LD is parsed separately
- // below, so guard every field that parser consumes there as well. `image`/`url`
- // are deliberately not in this list: their BASE_URL templates are intentional
- // and resolved by the emitter.
+ // leak into OG metadata or canonical URLs.
+ // Event JSON-LD is parsed separately below, so guard every field that parser
+ // consumes there as well. `image`/`url` are deliberately not in this list:
+ // their BASE_URL templates are intentional and resolved by the emitter.
  const eventFields = sdType === 'Event'
   ? ['name', 'startDate', 'endDate', 'eventStatus', 'eventAttendanceMode', 'location', 'organizer', 'offers', 'performer']
   : [];
@@ -823,7 +824,8 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
 
  // Resolve every static property with the same balanced last-write-wins
  // reader as RSS. A first-match regex here would let stale title/description
- // values diverge from the feed and from the corpus floor.
+ // values diverge from the feed and from the corpus floor when a refresh
+ // leaves duplicate SEO keys in one entry.
  const matchStr = (key: string): string => flattenOgText(lastStaticPropertyValue(b, key));
  const title = matchStr('title');
  const desc = matchStr('description') || flattenOgText(readStructuredSeoDescription(b)) || '';
@@ -833,10 +835,7 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  const canonicalCandidates = staticPropertyValues(b, 'canonicalPath');
  const canonicalCandidate = canonicalCandidates[canonicalCandidates.length - 1];
  const cp = canonicalCandidate?.quote === "'" ? canonicalCandidate.value : '';
- const imRaw = decodeTsStringEscapes(
-  b.match(/\/images\/[^'"`\s,}]+/)?.[0] ?? DEFAULT_IMG,
-  { newlineAs: ' ' },
- );
+ const imRaw = b.match(/\/images\/[^'"`\s,}]+/)?.[0] ?? DEFAULT_IMG;
  const im = resolveImagePath(imRaw, articleId);
  // Measured here, next to the resolution that produced the path, so the
  // size and the URL can never be computed from two different candidates.
@@ -845,13 +844,13 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  // date. Older entries may omit that literal even though the article registry
  // has one; use the registry as the fallback, and keep `''` when both sources
  // say the publication date is unknown.
- const datePub = matchStr('datePublished')
+ const datePub = lastStaticPropertyValue(b, 'datePublished')
  || articlePublishedAtById[articleId]
  || '';
  // dateModified: prefer updatedAt from blog-articles-data.ts, then sitemap <lastmod>,
  // then the SEO metadata literal (if any). BUILD_DATE_ISO in seo-blog.ts is a variable
  // reference that the regex can't capture, so we need these external sources.
- const seoDateMod = matchStr('dateModified');
+ const seoDateMod = lastStaticPropertyValue(b, 'dateModified') ?? '';
  const articleSlug = cp.replace(SECTION.canonicalPrefix, '').replace(/\/$/, '');
  // Issue #3368 item 1: a shadowed article's own slug was dropped from its
  // section's sitemap (SECTION.sitemap — sitemap-blog-ch.xml for svizzera,
@@ -864,8 +863,8 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  || (winnerSlug ? sitemapLastmodBySlug[winnerSlug] : '')
  || seoDateMod;
 
- // Author identity is read from the same final structuredData block.
- const sdAuthorHasId = /"author":\s*\{\s*"@id"/.test(sdBlock);
+ // Extract source structuredData author format
+ const sdAuthorHasId = /"author":\s*\{\s*"@id"/.test(b);
 
  if (cp.startsWith(SECTION.canonicalPrefix)) {
  const authorSlug = articleAuthorSlugById[articleId] || '';
@@ -1925,7 +1924,7 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  <meta property="og:locale" content="${LOC_TAG[locale] ?? 'it_CH'}">
  <meta property="og:site_name" content="Frontaliere Ticino">
  ${twitterCardMeta}
- <meta name="robots" content="${articleBodyHasPromptPlaceholder ? 'noindex,follow' : ARTICLE_ROBOTS_INDEX_ENHANCED}">${SECTION.kind === 'canton' ? `\n ${CORPUS_ROUTE_OWNER_META_TAG}` : ''}
+ <meta name="robots" content="${articleBodyHasPromptPlaceholder ? 'noindex,follow' : ARTICLE_ROBOTS_INDEX_ENHANCED}">${articleBodyHasPromptPlaceholder ? `\n ${ARTICLE_NOINDEX_TARGET_MARKER}` : ''}${SECTION.kind === 'canton' ? `\n ${CORPUS_ROUTE_OWNER_META_TAG}` : ''}
  <meta property="fb:app_id" content="891036063797338">
  ${publishedDate ? `<meta property="article:published_time" content="${esc(publishedDate)}">` : ''}
  ${modifiedDate ? `<meta property="article:modified_time" content="${esc(modifiedDate)}">` : ''}

@@ -565,6 +565,10 @@ function interpolatedPropertyState(block, field, options = {}) {
           : emptyPropertyState();
     }
   });
+  // Top-level metadata and its JSON-LD twin are separate producer fields:
+  // either effective scope must be safe. Within each scope the loop retains
+  // only the last assignment, while a dynamic value in either scope fails
+  // closed instead of being hidden by a static shadow in the other scope.
   return {
     assigned: lastTopLevelValue.assigned || lastStructuredDataValue.assigned,
     dynamic: lastTopLevelValue.dynamic || lastStructuredDataValue.dynamic,
