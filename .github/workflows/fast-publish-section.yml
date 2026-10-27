@@ -200,6 +200,11 @@ on:
         required: false
         default: false
         type: boolean
+      coordinated_recovery:
+        description: 'Child coordinato da una recovery mixed: non armare replay API locale'
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: read
@@ -456,6 +461,7 @@ jobs:
           CLEANUP_INACTIVE_SURFACE_INPUT: ${{ inputs.cleanup_inactive_surface }}
           REPLAY_API_INPUT: ${{ inputs.replay_api_after_publish }}
           ALLOW_DEFERRED_LIVE_RELEASE_INPUT: ${{ inputs.allow_deferred_live_release }}
+          COORDINATED_RECOVERY_INPUT: ${{ inputs.coordinated_recovery }}
           EVENT_NAME: ${{ github.event_name }}
           COVER_DRAIN_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
           WORKFLOW_RUN_COVER_DRAIN_COMMIT_MESSAGE: ${{ github.event.workflow_run.head_commit.message }}
@@ -717,6 +723,7 @@ jobs:
           ALLOW_DEFERRED_LIVE_RELEASE: ${{ needs.resolve.outputs.allow_deferred_live_release }}
           DRY: ${{ needs.resolve.outputs.dry }}
           REPLAY_API_AFTER_PUBLISH: ${{ inputs.replay_api_after_publish }}
+          COORDINATED_RECOVERY: ${{ inputs.coordinated_recovery }}
           STALE_HEAD: ${{ github.event.workflow_run.head_sha }}
           CURRENT_MAIN: ${{ steps.replay_freshness.outputs.current_main }}
           ORIGINAL_PUSH_BEFORE: ${{ needs.resolve.outputs.push_before }}
@@ -788,7 +795,8 @@ jobs:
             -f dry_run="$DRY" \
             -f push_before="$replay_before" \
             -f push_after="$replay_after" \
-            -f dispatch_nonce="$dispatch_nonce"
+            -f dispatch_nonce="$dispatch_nonce" \
+            -f coordinated_recovery="$COORDINATED_RECOVERY"
 
       - name: Fetch fallback corpus revision for manifest migration
         if: steps.replay_freshness.outputs.fresh == 'true'
@@ -912,6 +920,7 @@ jobs:
           API_RELEASE_COMMIT: ${{ inputs.api_release_commit }}
           ALLOW_DEFERRED_LIVE_RELEASE: ${{ needs.resolve.outputs.allow_deferred_live_release }}
           REPLAY_API_AFTER_PUBLISH: ${{ needs.resolve.outputs.replay_api_after_publish }}
+          COORDINATED_RECOVERY: ${{ inputs.coordinated_recovery }}
           SOURCE_COMMIT: ${{ inputs.source_commit }}
           SOURCE_MAIN_COMMIT: ${{ inputs.source_main_commit }}
           DISPATCH_NONCE: ${{ inputs.dispatch_nonce }}
@@ -945,14 +954,18 @@ jobs:
         env:
           SECTION: ${{ matrix.target.section }}
           RENDERED_HEAD: ${{ steps.render.outputs.rendered_head }}
+          STALE_HANDOFF: ${{ steps.render.outputs.stale_handoff }}
+          STALE_HANDOFF_HEAD: ${{ steps.render.outputs.stale_handoff_head }}
           FRESH: ${{ steps.replay_freshness.outputs.fresh }}
         run: |
           set -euo pipefail
           jq -cn \
             --arg section "$SECTION" \
             --arg rendered_head "${RENDERED_HEAD:-}" \
+            --arg stale_handoff "${STALE_HANDOFF:-}" \
+            --arg stale_handoff_head "${STALE_HANDOFF_HEAD:-}" \
             --arg fresh "${FRESH:-}" \
-            '{section: $section, rendered_head: $rendered_head, fresh: $fresh}' \
+            '{section: $section, rendered_head: $rendered_head, stale_handoff: $stale_handoff, stale_handoff_head: $stale_handoff_head, fresh: $fresh}' \
             > "$RUNNER_TEMP/fast-publish-result.json"
 
       - name: Upload publish result
@@ -978,6 +991,7 @@ jobs:
     outputs:
       rendered_head: ${{ steps.collect.outputs.rendered_head }}
       mixed_matrix: ${{ steps.collect.outputs.mixed_matrix }}
+      stale_handoff: ${{ steps.collect.outputs.stale_handoff }}
     steps:
       - name: Download matrix publish results
         uses: actions/download-artifact@v7
@@ -993,24 +1007,32 @@ jobs:
         run: |
           set -euo pipefail
           echo 'mixed_matrix=false' >> "$GITHUB_OUTPUT"
+          echo 'stale_handoff=false' >> "$GITHUB_OUTPUT"
           results_dir="$RUNNER_TEMP/fast-publish-results"
           mapfile -t result_files < <(find "$results_dir" -type f -name fast-publish-result.json -print)
           if [ "${#result_files[@]}" -eq 0 ]; then
             echo "::error::nessun risultato della matrix publish disponibile per il replay API"
             exit 1
           fi
-          actual="$(jq -s -c 'map({section, rendered_head, fresh})' "${result_files[@]}")"
+          actual="$(jq -s -c 'map({section, rendered_head, stale_handoff, stale_handoff_head, fresh})' "${result_files[@]}")"
           expected_sections="$(jq -c '[.[].section] | sort' <<<"$EXPECTED_MATRIX")"
           actual_sections="$(jq -c 'map(.section) | sort' <<<"$actual")"
           if [ "$actual_sections" != "$expected_sections" ]; then
             echo "::error::risultati publish incompleti o duplicati: attesi $expected_sections, ricevuti $actual_sections"
             exit 1
           fi
-          if jq -e 'all(.[]; (.rendered_head == "" and .fresh == "false"))' <<<"$actual" >/dev/null; then
-            echo "::notice::tutte le leg hanno rilevato un replay stantio; il recovery redispatchato proseguira' sulla HEAD corrente"
+          if jq -e 'any(.[]; .stale_handoff == "true")' <<<"$actual" >/dev/null; then
+            echo 'stale_handoff=true' >> "$GITHUB_OUTPUT"
+            # A stale leg has no productive revision. The matrix coordinator
+            # must rebuild the complete plan on current main, including the
+            # sections whose sibling happened to finish on the old checkout.
+            echo 'mixed_matrix=true' >> "$GITHUB_OUTPUT"
+          fi
+          if jq -e 'all(.[]; (.rendered_head == "" and ((.stale_handoff == "true") or (.fresh == "false"))))' <<<"$actual" >/dev/null; then
+            echo "::notice::tutte le leg hanno consegnato il replay stale o rilevato un replay pinned obsoleto; nessuna HEAD non pubblicata viene dichiarata produttiva"
             exit 0
           fi
-          if jq -e 'any(.[]; ((.rendered_head // "") | test("^[a-f0-9]{40}$"))) and any(.[]; ((.fresh // "") != "true" or (.rendered_head // "") == ""))' <<<"$actual" >/dev/null; then
+          if jq -e 'any(.[]; ((.rendered_head // "") | test("^[a-f0-9]{40}$"))) and any(.[]; ((.fresh // "") != "true" or (.stale_handoff // "") == "true" or (.rendered_head // "") == ""))' <<<"$actual" >/dev/null; then
             echo "::warning::matrix mista: almeno una leg non e' fresca mentre un'altra ha prodotto una HEAD; accodo il recovery sulla HEAD corrente"
             echo 'mixed_matrix=true' >> "$GITHUB_OUTPUT"
             exit 0
@@ -1037,6 +1059,7 @@ jobs:
     needs: [resolve, publish, publish_release_head]
     if: >-
       always() &&
+      inputs.coordinated_recovery != true &&
       needs.resolve.result == 'success' &&
       needs.publish.result == 'success' &&
       needs.publish_release_head.result == 'success' &&
@@ -1047,7 +1070,7 @@ jobs:
       needs.resolve.outputs.dry != 'true' &&
       github.event_name != 'workflow_run'
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 360
     steps:
       - uses: actions/checkout@v7
         with:
@@ -1208,11 +1231,13 @@ jobs:
 
       - name: Replay publish-api after staged release
         if: >-
-          steps.replay_freshness.outputs.fresh == 'true' &&
-          needs.publish_release_head.outputs.mixed_matrix != 'true'
+          (steps.replay_freshness.outputs.fresh == 'true' &&
+           needs.publish_release_head.outputs.mixed_matrix != 'true') ||
+          (steps.replay_freshness.outputs.fresh == 'false' &&
+           needs.publish_release_head.outputs.mixed_matrix == 'true')
         env:
           REPOSITORY: ${{ github.repository }}
-          SOURCE_COMMIT: ${{ needs.publish_release_head.outputs.rendered_head || inputs.source_commit || github.sha }}
+          SOURCE_COMMIT: ${{ steps.replay_freshness.outputs.current_main || needs.publish_release_head.outputs.rendered_head || inputs.source_commit || github.sha }}
         run: |
           set -euo pipefail
           if ! [[ "$SOURCE_COMMIT" =~ ^[a-f0-9]{40}$ ]] \

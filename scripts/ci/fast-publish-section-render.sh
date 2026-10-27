@@ -9,6 +9,7 @@ known_missing_page_paths_file="$RUNNER_TEMP/fast-section-known-missing-page-path
 printf '%s' "$ARTICLE_IDS_JSON" > "$article_ids_file"
 printf '%s' "$MISSING_PAGE_PATHS_JSON" > "$missing_page_paths_file"
 printf '%s' "$KNOWN_MISSING_PAGE_PATHS_JSON" > "$known_missing_page_paths_file"
+coordinated_recovery="${COORDINATED_RECOVERY:-false}"
 if [ -n "${SOURCE_COMMIT:-}" ]; then
   if [ -z "${SOURCE_MAIN_COMMIT:-}" ] || ! [[ "$SOURCE_MAIN_COMMIT" =~ ^[a-f0-9]{40}$ ]]; then
     echo "::error::source_main_commit e' obbligatorio e richiede una SHA completa quando source_commit e' valorizzato"
@@ -54,7 +55,7 @@ if [ -n "$pinned_replay_main" ]; then
       dispatch_nonce="stale-late-${GITHUB_RUN_ID}-${SECTION}"
     fi
     nonce_seed="$dispatch_nonce"
-    nonce_hash="$(printf '%s\0%s\0%s' "$nonce_seed" "$current_main" "$SECTION" | sha256sum | cut -c1-16)"
+    nonce_hash="$(printf '%s\0%s\0%s\0%s' "$nonce_seed" "$current_main" "$SECTION" "$coordinated_recovery" | sha256sum | cut -c1-16)"
     dispatch_nonce="stale-late-${current_main:0:12}-${SECTION}-${nonce_hash}"
     if [ "$EVENT_NAME" = 'workflow_run' ]; then
       echo "::notice::replay workflow_run redispatchato prima degli upload: main e' avanzato da $pinned_replay_main a $current_main"
@@ -108,7 +109,8 @@ if [ -n "$pinned_replay_main" ]; then
       -f dry_run="$DRY" \
       -f push_before="$replay_before" \
       -f push_after="$replay_after" \
-      -f dispatch_nonce="$dispatch_nonce"
+      -f dispatch_nonce="$dispatch_nonce" \
+      -f coordinated_recovery="$coordinated_recovery"
     exit 0
   fi
 fi
@@ -208,6 +210,7 @@ refresh_live_plan_and_preflight() {
   PREFLIGHT_SCAN_MODE=full \
     node scripts/ci/check-blog-body-links.mjs
 }
+
 # A normal push or an unpinned dispatch from main is a live
 # publication request, including bootstrap dispatches. If main advances
 # during the render, rebase
@@ -345,6 +348,12 @@ while :; do
     fi
     echo "::notice::main avanzata durante il render ($EXPECTED_MAIN_HEAD → $current_main); riallineo il checkout"
   done
-  echo "::error::main e' avanzata durante tre tentativi di render del publisher"
-  exit 1
+  if ! handoff_head="$(bash scripts/ci/read-main-head.sh)"; then
+    echo "::error::impossibile leggere la HEAD corrente per il replay dopo tre tentativi stale"
+    exit 1
+  fi
+  echo "stale_handoff=true" >> "$GITHUB_OUTPUT"
+  echo "stale_handoff_head=$handoff_head" >> "$GITHUB_OUTPUT"
+  echo "::notice::tre tentativi stale esauriti: consegno la sezione al coordinatore della matrice sulla HEAD $handoff_head"
+  exit 0
 done

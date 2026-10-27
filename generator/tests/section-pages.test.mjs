@@ -3451,6 +3451,11 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   );
   assert.match(wf, /CLEANUP_INACTIVE_SURFACE_INPUT: \$\{\{ inputs\.cleanup_inactive_surface \}\}/);
   assert.match(wf, /CLEANUP_INACTIVE_SURFACE: \$\{\{ matrix\.target\.cleanupInactiveSurface \|\| false \}\}/);
+  assert.match(wf, /COORDINATED_RECOVERY_INPUT: \$\{\{ inputs\.coordinated_recovery \}\}/);
+  assert.match(wf, /COORDINATED_RECOVERY: \$\{\{ inputs\.coordinated_recovery \}\}/);
+  assert.match(resolver, /-f coordinated_recovery="\$coordinated_recovery"/);
+  assert.match(render, /-f coordinated_recovery="\$coordinated_recovery"/);
+  assert.match(wf, /-f coordinated_recovery="\$COORDINATED_RECOVERY"/);
   assert.match(wf, /-f source_commit="\$CURRENT_MAIN"/);
   assert.match(sectionContract, /-f source_commit="\$current_main"/);
   assert.equal(
@@ -3472,6 +3477,12 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /source_main_commit:/);
   assert.match(wf, /replay_api_after_publish:/);
   assert.match(wf, /allow_deferred_live_release:/);
+  assert.match(wf, /coordinated_recovery:/);
+  assert.match(
+    wf,
+    /replay-api-after-staged-release:[\s\S]*inputs\.coordinated_recovery != true/,
+    'un child di recovery coordinata non deve armare il replay API locale',
+  );
   assert.match(
     wf,
     /- name: Arm normal push staged replay[\s\S]*id: replay_mode[\s\S]*PLAN_REPLAY_API_AFTER_PUBLISH: \$\{\{ steps\.plan\.outputs\.replay_api_after_publish \}\}[\s\S]*PLAN_ALLOW_DEFERRED_LIVE_RELEASE: \$\{\{ steps\.plan\.outputs\.allow_deferred_live_release \}\}[\s\S]*if \[ "\$EVENT_NAME" = 'push' \] && \[ "\$ANY" = 'true' \] && \[ "\$DRY" != 'true' \]; then[\s\S]*replay_api_after_publish=true[\s\S]*allow_deferred_live_release=true/,
@@ -3534,9 +3545,34 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /REPLAY_API_AFTER_PUBLISH: \$\{\{ needs\.resolve\.outputs\.replay_api_after_publish \}\}/);
   assert.equal(
     (sectionContract.match(/-f replay_api_after_publish="\$REPLAY_API_AFTER_PUBLISH"/g) ?? []).length,
-    3,
-    'resolve, late guard e recovery devono propagare il flag del replay API',
+    2,
+    'late guard e replay recovery devono propagare il flag del replay API',
   );
+  assert.match(recovery, /child_replay_api_after_publish="\$\{REPLAY_API_AFTER_PUBLISH:-false\}"/);
+  assert.match(recovery, /MIXED_MATRIX.*child_replay_api_after_publish=false/s);
+  assert.match(recovery, /child_allow_deferred_live_release="\$\{ALLOW_DEFERRED_LIVE_RELEASE:-false\}"/);
+  assert.match(recovery, /child_coordinated_recovery=false/);
+  assert.match(recovery, /child_allow_deferred_live_release=true/);
+  assert.match(recovery, /child_coordinated_recovery=true/);
+  assert.match(recovery, /-f coordinated_recovery="\$child_coordinated_recovery"/);
+  assert.match(recovery, /wait_for_dispatched_children/);
+  assert.match(recovery, /REPLAY_CHILD_WAIT_MAX_S/);
+  assert.match(recovery, /REPLAY_COORDINATOR_TIMEOUT_S/);
+  assert.match(recovery, /REPLAY_COORDINATOR_RESERVE_S/);
+  assert.match(recovery, /gh run list --repo "\$REPOSITORY" --workflow fast-publish-section\.yml/);
+  assert.match(recovery, /gh run download "\$run_id" --repo "\$REPOSITORY" --name "fast-publish-result-\$section"/);
+  assert.match(recovery, /\.rendered_head == \$expected_head/);
+  assert.match(recovery, /\.stale_handoff \/\/ "false"\) != "true"/);
+  assert.match(recovery, /if \[ "\$\{DRY:-false\}" = 'true' \]/);
+  assert.match(recovery, /dispatch_run_snapshot=.*gh run list/);
+  assert.match(recovery, /dispatch_baseline_ids=\(\)/);
+  assert.match(recovery, /initial_run_state/);
+  assert.match(recovery, /latest_run_id <= baseline_run_id/);
+  assert.match(recovery, /git checkout --detach "\$CURRENT_MAIN"/);
+  assert.match(recovery, /baseline_state/);
+  assert.match(recovery, /sort_by\(\.databaseId \| tonumber\)[\s\S]*if length == 0 then \[\] else \[\.\[-1\]\] end/);
+  assert.match(recovery, /\.conclusion != "success"/);
+  assert.match(recovery, /nonce_hash="\$\(printf '%s\\0%s\\0%s\\0%s/);
   const replayDispatcher = read('scripts/ci/dispatch-fast-publish-replay.sh');
   assert.match(wf, /^run-name:.*inputs\.dry_run/m);
   assert.match(resolver, /replay richiesto con dry_run=false ma il publisher è disarmato/);
@@ -3609,14 +3645,14 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   );
   assert.match(wf, /actions\/upload-artifact@v7/);
   assert.match(wf, /actions\/download-artifact@v7/);
-  assert.match(wf, /map\(\{section, rendered_head, fresh\}\)/);
+  assert.match(wf, /map\(\{section, rendered_head, stale_handoff, stale_handoff_head, fresh\}\)/);
   assert.match(wf, /map\(\.rendered_head\) \| unique \| if length == 1/);
-  assert.match(wf, /all\(\.\[\]; \(\.rendered_head == "" and \.fresh == "false"\)\)/);
+  assert.match(wf, /all\(\.\[\]; \(\.rendered_head == "" and \(\(\.stale_handoff == "true"\) or \(\.fresh == "false"\)\)\)\)/);
   assert.match(wf, /mixed_matrix: \$\{\{ steps\.collect\.outputs\.mixed_matrix \}\}/);
   assert.match(wf, /echo 'mixed_matrix=false'/);
   assert.ok(
     wf.includes(
-      'any(.[]; ((.rendered_head // "") | test("^[a-f0-9]{40}$"))) and any(.[]; ((.fresh // "") != "true" or (.rendered_head // "") == ""))',
+      'any(.[]; ((.rendered_head // "") | test("^[a-f0-9]{40}$"))) and any(.[]; ((.fresh // "") != "true" or (.stale_handoff // "") == "true" or (.rendered_head // "") == ""))',
     ),
     'una leg stale accanto a una leg produttiva deve diventare mixed_matrix',
   );
@@ -3635,7 +3671,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   const lateGuardNonceStart = render.lastIndexOf('dispatch_nonce="${DISPATCH_NONCE:-}"');
   const lateGuardTitleStart = render.indexOf('dispatch_title="cover-publish-section / ${SECTION} / nonce=${dispatch_nonce}"', lateGuardNonceStart);
   const lateGuardNonce = render.slice(lateGuardNonceStart, lateGuardTitleStart);
-  assert.match(lateGuardNonce, /nonce_hash="\$\(printf '%s\\0%s\\0%s' "\$nonce_seed" "\$current_main" "\$SECTION" \| sha256sum \| cut -c1-16\)"/);
+  assert.match(lateGuardNonce, /nonce_hash="\$\(printf '%s\\0%s\\0%s\\0%s' "\$nonce_seed" "\$current_main" "\$SECTION" "\$coordinated_recovery" \| sha256sum \| cut -c1-16\)"/);
   assert.match(lateGuardNonce, /dispatch_nonce="stale-late-\$\{current_main:0:12\}-\$\{SECTION\}-\$\{nonce_hash\}"/);
   assert.match(wf, /id: push_range[\s\S]*resolve-workflow-run-push-range\.mjs/);
   assert.doesNotMatch(wf, /commits\/\$WORKFLOW_RUN_HEAD_SHA\/events/);
