@@ -73,6 +73,7 @@ import { familySectionPages } from '../../scripts/lib/build-sitemap.mjs';
 import { createR2Request } from '../../scripts/lib/r2-section-lock.mjs';
 import {
   acquireImageNamespaceLeases,
+  classifyReleaseOutcome,
   releaseImageNamespaceLeasesWithDeadline as releaseImageLeasesWithDeadline,
   IMAGE_LEASE_RELEASE_TIMEOUT_MS,
 } from '../../scripts/lib/r2-image-namespace-lock.mjs';
@@ -173,6 +174,53 @@ test('image lease: il cleanup bounded tenta ogni namespace entro lo stesso budge
   );
   assert.equal(result.status, 'timeout');
   assert.deepEqual(started.sort(), ['blog', 'places']);
+});
+
+test('image lease: una conclusione esattamente alla deadline resta un timeout', async () => {
+  let reads = 0;
+  const result = await releaseImageLeasesWithDeadline(
+    [{ namespace: 'blog' }],
+    {
+      timeoutMs: 1_000,
+      now: () => [100, 100, 1_100][Math.min(reads++, 2)],
+      releaseImpl: async () => [],
+    },
+  );
+  assert.equal(result.status, 'timeout');
+  assert.equal(result.deadlineRace, 'timeout');
+});
+
+test('image lease: classifyReleaseOutcome distingue rilascio, errore e timeout', () => {
+  assert.equal(
+    classifyReleaseOutcome(
+      { timedOut: false, results: [{ status: 'fulfilled', value: [] }], finishedAt: 99 },
+      { deadline: 100 },
+    ),
+    'released',
+  );
+  assert.equal(
+    classifyReleaseOutcome(
+      { timedOut: false, results: [{ status: 'rejected', reason: new Error('R2 down') }], finishedAt: 99 },
+      { deadline: 100 },
+    ),
+    'failed',
+  );
+  const timeout = new Error('deadline');
+  timeout.code = 'IMAGE_LEASE_RELEASE_TIMEOUT';
+  assert.equal(
+    classifyReleaseOutcome(
+      { timedOut: false, results: [{ status: 'rejected', reason: timeout }], finishedAt: 99 },
+      { deadline: 100 },
+    ),
+    'timeout',
+  );
+  assert.equal(
+    classifyReleaseOutcome(
+      { timedOut: false, results: [], finishedAt: 100 },
+      { deadline: 100 },
+    ),
+    'timeout',
+  );
 });
 
 test('publisher: il trasporto R2 propaga la deadline e cancella il body arrivato tardi', async () => {
