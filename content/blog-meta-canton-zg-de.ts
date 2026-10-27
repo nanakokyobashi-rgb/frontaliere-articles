@@ -54,6 +54,9 @@ const blogMetaCantonZgDe: Record<string, string> = {
     'blog.article.zugo-agenda-kantonsrat-ottobre.title': 'Zug stellt die Traktandenliste des Kantonsrats zur Verfügung',
     'blog.article.zugo-agenda-kantonsrat-ottobre.excerpt': 'Die Quelle des Kantons Zug stellt die Traktandenliste der Sitzung des Kantonsrats vom 29.',
     'blog.article.zugo-agenda-kantonsrat-ottobre.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.risch-231-milioni-tasse.title': 'Risch investiert 231 Millionen und senkt die Steuern',
+    'blog.article.risch-231-milioni-tasse.excerpt': 'Die Überschrift von Zentralplus weist auf Investitionen in Höhe von 231 Millionen für Risch und eine Senkung der Steuern hin.',
+    'blog.article.risch-231-milioni-tasse.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonZgDe;

@@ -54,6 +54,9 @@ const blogMetaCantonZgIt: Record<string, string> = {
     'blog.article.zugo-agenda-kantonsrat-ottobre.title': 'Zugo rende disponibile l\'agenda del Kantonsrat',
     'blog.article.zugo-agenda-kantonsrat-ottobre.excerpt': 'La fonte del Canton Zugo rende disponibile l\'ordine del giorno della seduta del Kantonsrat del 29 ottobre 2026.',
     'blog.article.zugo-agenda-kantonsrat-ottobre.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.risch-231-milioni-tasse.title': 'Risch investe 231 milioni e riduce le imposte',
+    'blog.article.risch-231-milioni-tasse.excerpt': 'Il titolo di Zentralplus segnala 231 milioni di investimenti per Risch e una riduzione delle imposte.',
+    'blog.article.risch-231-milioni-tasse.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonZgIt;

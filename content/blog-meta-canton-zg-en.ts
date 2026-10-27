@@ -54,6 +54,9 @@ const blogMetaCantonZgEn: Record<string, string> = {
     'blog.article.zugo-agenda-kantonsrat-ottobre.title': 'Zug makes the Kantonsrat agenda available',
     'blog.article.zugo-agenda-kantonsrat-ottobre.excerpt': 'The source from the Canton of Zug makes available the agenda for the Kantonsrat session on October 29, 2026.',
     'blog.article.zugo-agenda-kantonsrat-ottobre.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.risch-231-milioni-tasse.title': 'Risch invests 231 million and reduces taxes',
+    'blog.article.risch-231-milioni-tasse.excerpt': 'The Zentralplus headline reports 231 million in investments for Risch and a reduction in taxes.',
+    'blog.article.risch-231-milioni-tasse.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonZgEn;

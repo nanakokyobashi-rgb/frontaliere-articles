@@ -660,6 +660,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-risch-231-milioni-tasse': {
+    title: 'Risch investe 231 milioni e riduce le imposte | Frontaliere Ticino',
+    description: 'Il titolo di Zentralplus segnala 231 milioni di investimenti per Risch e una riduzione delle imposte; i dettagli restano limitati.',
+    keywords: 'frontalieri, ticino, svizzera, italia, risch, investe, milioni, riduce',
+    ogTitle: 'Risch investe 231 milioni e riduce le imposte',
+    ogDescription: 'Il titolo di Zentralplus riunisce due elementi: 231 milioni destinati agli investimenti e imposte più basse per Risch. Senza importo del taglio, periodo e livello fiscale, il dato non consente di calcolare l\'effetto sui singoli contribuenti.',
+    canonicalPath: '/articoli-zugo/risch-231-milioni-tasse/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Risch investe 231 milioni e riduce le imposte",
+      "description": "Il titolo di Zentralplus segnala 231 milioni di investimenti per Risch e una riduzione delle imposte; i dettagli restano limitati.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-risch-231-milioni-tasse.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-27T07:07:01+00:00",
+      "dateModified": "2026-10-27T07:07:01+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-zugo/risch-231-milioni-tasse/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

@@ -193,4 +193,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'risch-231-milioni-tasse',
+ category: 'fiscale',
+ date: '2026-10-27T07:07:01.285Z',
+ image: '/images/blog/article-risch-231-milioni-tasse.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['ZG'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];

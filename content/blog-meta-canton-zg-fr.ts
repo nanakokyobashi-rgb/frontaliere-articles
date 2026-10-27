@@ -54,6 +54,9 @@ const blogMetaCantonZgFr: Record<string, string> = {
     'blog.article.zugo-agenda-kantonsrat-ottobre.title': 'Zoug met à disposition l’ordre du jour du Kantonsrat',
     'blog.article.zugo-agenda-kantonsrat-ottobre.excerpt': 'La source du canton de Zoug met à disposition l’ordre du jour de la séance du Kantonsrat du 29 octobre 2026.',
     'blog.article.zugo-agenda-kantonsrat-ottobre.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.risch-231-milioni-tasse.title': 'Risch investit 231 millions et réduit les impôts',
+    'blog.article.risch-231-milioni-tasse.excerpt': 'Le titre de Zentralplus signale 231 millions d’investissements pour Risch et une réduction des impôts.',
+    'blog.article.risch-231-milioni-tasse.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonZgFr;
