@@ -4,17 +4,17 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-26T10:46:37.997Z",
-  "contentHash": "4479cd95721c7146d94a241a67d2c8853a30b60d56068fe1b8c4028a74f130eb",
+  "updatedAt": "2026-10-27T00:15:17.334Z",
+  "contentHash": "7a8426fe438760ebff41ffea3dd23f8c148d006149a6300e96553893016d718c",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-26T05:21:20.958Z",
+      "updatedAt": "2026-10-26T13:38:17.324Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-25T19:59:33.449Z",
+      "updatedAt": "2026-10-26T17:41:28.137Z",
       "keyFacts": 0
     }
   ],
@@ -86,7 +86,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-26T05:21:20.958Z"
+          "updatedAt": "2026-10-26T13:38:17.324Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -107,14 +107,9 @@
               "label": "Gemeinsam gegen Food Waste",
               "date": "2026-09-20",
               "url": "https://zg.ch/de/news/2026/September/Gemeinsam-gegen-Food-Waste"
-            },
-            {
-              "label": "ZVB schlägt ein neues Kapitel auf: Spatenstich zum Bauprojekt Areal An der Aa",
-              "date": "2026-06-29",
-              "url": "https://www.zvb.ch/unternehmen/zvb-news/detail/zvb-schlaegt-ein-neues-kapitel-auf-spatenstich-zum-bauprojekt-areal-an-der-aa/"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -178,7 +173,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-26T10:46:37.997Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "en": {
       "canton": "ZG",
@@ -247,7 +242,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-26T05:21:20.958Z"
+          "updatedAt": "2026-10-26T13:38:17.324Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -268,14 +263,9 @@
               "label": "Gemeinsam gegen Food Waste",
               "date": "2026-09-20",
               "url": "https://zg.ch/de/news/2026/September/Gemeinsam-gegen-Food-Waste"
-            },
-            {
-              "label": "ZVB schlägt ein neues Kapitel auf: Spatenstich zum Bauprojekt Areal An der Aa",
-              "date": "2026-06-29",
-              "url": "https://www.zvb.ch/unternehmen/zvb-news/detail/zvb-schlaegt-ein-neues-kapitel-auf-spatenstich-zum-bauprojekt-areal-an-der-aa/"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -339,7 +329,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-26T10:46:37.997Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "de": {
       "canton": "ZG",
@@ -408,7 +398,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-26T05:21:20.958Z"
+          "updatedAt": "2026-10-26T13:38:17.324Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -429,14 +419,9 @@
               "label": "Gemeinsam gegen Food Waste",
               "date": "2026-09-20",
               "url": "https://zg.ch/de/news/2026/September/Gemeinsam-gegen-Food-Waste"
-            },
-            {
-              "label": "ZVB schlägt ein neues Kapitel auf: Spatenstich zum Bauprojekt Areal An der Aa",
-              "date": "2026-06-29",
-              "url": "https://www.zvb.ch/unternehmen/zvb-news/detail/zvb-schlaegt-ein-neues-kapitel-auf-spatenstich-zum-bauprojekt-areal-an-der-aa/"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -500,7 +485,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-26T10:46:37.997Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "fr": {
       "canton": "ZG",
@@ -569,7 +554,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-26T05:21:20.958Z"
+          "updatedAt": "2026-10-26T13:38:17.324Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -590,14 +575,9 @@
               "label": "Gemeinsam gegen Food Waste",
               "date": "2026-09-20",
               "url": "https://zg.ch/de/news/2026/September/Gemeinsam-gegen-Food-Waste"
-            },
-            {
-              "label": "ZVB schlägt ein neues Kapitel auf: Spatenstich zum Bauprojekt Areal An der Aa",
-              "date": "2026-06-29",
-              "url": "https://www.zvb.ch/unternehmen/zvb-news/detail/zvb-schlaegt-ein-neues-kapitel-auf-spatenstich-zum-bauprojekt-areal-an-der-aa/"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -661,7 +641,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-26T10:46:37.997Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     }
   }
 }

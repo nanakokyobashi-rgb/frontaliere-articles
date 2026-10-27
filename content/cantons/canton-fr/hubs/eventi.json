@@ -4,12 +4,12 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "eventi",
-  "updatedAt": "2026-10-26T01:02:08.769Z",
-  "contentHash": "969705588fea1493a51c195c76c7e727d413130fa7b3f6c5032aa904136cd3fc",
+  "updatedAt": "2026-10-27T00:15:17.334Z",
+  "contentHash": "f361e1715c1fb9c0c71821fc2571e61809dad6fc9d56a912dc449e454268ce63",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-25T02:23:31.213Z",
+      "updatedAt": "2026-10-26T18:30:43.613Z",
       "keyFacts": 1
     }
   ],
@@ -33,24 +33,6 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Séance d'information pour l'école de Police - 26.10.2026 (en allemand)",
-              "detail": "Granges-Paccot",
-              "date": "2026-10-26",
-              "url": "https://www.fr.ch/dsjs/pol/evenements/seance-dinformation-pour-lecole-de-police-26102026-en-allemand"
-            },
-            {
-              "label": "Regards affinés",
-              "detail": "L'Atelier, Fribourg — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
-            },
-            {
-              "label": "Halloween à Moléson",
-              "detail": "Office du Tourisme de Moléson, Gruyères — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
-            },
-            {
               "label": "Montée du masculinisme dans la Gen Z : un défi pour l'égalité",
               "detail": "Fribourg",
               "date": "2026-10-27",
@@ -61,6 +43,18 @@
               "detail": "Granges-Paccot",
               "date": "2026-10-27",
               "url": "https://www.fr.ch/dsjs/pol/evenements/seance-dinformation-pour-lecole-de-police-27102026"
+            },
+            {
+              "label": "Regards affinés",
+              "detail": "L'Atelier, Fribourg — in corso, ultimo giorno: 31 ottobre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
+            },
+            {
+              "label": "Halloween à Moléson",
+              "detail": "Office du Tourisme de Moléson, Gruyères — in corso, ultimo giorno: 1 novembre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
             },
             {
               "label": "Foutue bergerie – Pierre Guillois / Cie le Fils du Grand réseau",
@@ -91,11 +85,17 @@
               "detail": "Fribourg",
               "date": "2026-10-28",
               "url": "https://www.fr.ch/mhnf/evenements/kiwi-club-apprentis-taxidermistes"
+            },
+            {
+              "label": "Histoires naturelles du mercredi",
+              "detail": "Fribourg",
+              "date": "2026-10-28",
+              "url": "https://www.fr.ch/mhnf/evenements/histoires-naturelles-du-mercredi-0"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/friburgo/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/friburgo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "en": {
       "canton": "FR",
@@ -138,24 +138,6 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Séance d'information pour l'école de Police - 26.10.2026 (en allemand)",
-              "detail": "Granges-Paccot",
-              "date": "2026-10-26",
-              "url": "https://www.fr.ch/dsjs/pol/evenements/seance-dinformation-pour-lecole-de-police-26102026-en-allemand"
-            },
-            {
-              "label": "Regards affinés",
-              "detail": "L'Atelier, Fribourg — ongoing, last day: 31 October 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
-            },
-            {
-              "label": "Halloween à Moléson",
-              "detail": "Office du Tourisme de Moléson, Gruyères — ongoing, last day: 1 November 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
-            },
-            {
               "label": "Montée du masculinisme dans la Gen Z : un défi pour l'égalité",
               "detail": "Fribourg",
               "date": "2026-10-27",
@@ -166,6 +148,18 @@
               "detail": "Granges-Paccot",
               "date": "2026-10-27",
               "url": "https://www.fr.ch/dsjs/pol/evenements/seance-dinformation-pour-lecole-de-police-27102026"
+            },
+            {
+              "label": "Regards affinés",
+              "detail": "L'Atelier, Fribourg — ongoing, last day: 31 October 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
+            },
+            {
+              "label": "Halloween à Moléson",
+              "detail": "Office du Tourisme de Moléson, Gruyères — ongoing, last day: 1 November 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
             },
             {
               "label": "Foutue bergerie – Pierre Guillois / Cie le Fils du Grand réseau",
@@ -196,11 +190,17 @@
               "detail": "Fribourg",
               "date": "2026-10-28",
               "url": "https://www.fr.ch/mhnf/evenements/kiwi-club-apprentis-taxidermistes"
+            },
+            {
+              "label": "Histoires naturelles du mercredi",
+              "detail": "Fribourg",
+              "date": "2026-10-28",
+              "url": "https://www.fr.ch/mhnf/evenements/histoires-naturelles-du-mercredi-0"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/fribourg/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/fribourg/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "de": {
       "canton": "FR",
@@ -243,24 +243,6 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Séance d'information pour l'école de Police - 26.10.2026 (en allemand)",
-              "detail": "Granges-Paccot",
-              "date": "2026-10-26",
-              "url": "https://www.fr.ch/dsjs/pol/evenements/seance-dinformation-pour-lecole-de-police-26102026-en-allemand"
-            },
-            {
-              "label": "Regards affinés",
-              "detail": "L'Atelier, Fribourg — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
-            },
-            {
-              "label": "Halloween à Moléson",
-              "detail": "Office du Tourisme de Moléson, Gruyères — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
-            },
-            {
               "label": "Montée du masculinisme dans la Gen Z : un défi pour l'égalité",
               "detail": "Fribourg",
               "date": "2026-10-27",
@@ -271,6 +253,18 @@
               "detail": "Granges-Paccot",
               "date": "2026-10-27",
               "url": "https://www.fr.ch/dsjs/pol/evenements/seance-dinformation-pour-lecole-de-police-27102026"
+            },
+            {
+              "label": "Regards affinés",
+              "detail": "L'Atelier, Fribourg — läuft, letzter Tag: 31. Oktober 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
+            },
+            {
+              "label": "Halloween à Moléson",
+              "detail": "Office du Tourisme de Moléson, Gruyères — läuft, letzter Tag: 1. November 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
             },
             {
               "label": "Foutue bergerie – Pierre Guillois / Cie le Fils du Grand réseau",
@@ -301,11 +295,17 @@
               "detail": "Fribourg",
               "date": "2026-10-28",
               "url": "https://www.fr.ch/mhnf/evenements/kiwi-club-apprentis-taxidermistes"
+            },
+            {
+              "label": "Histoires naturelles du mercredi",
+              "detail": "Fribourg",
+              "date": "2026-10-28",
+              "url": "https://www.fr.ch/mhnf/evenements/histoires-naturelles-du-mercredi-0"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/freiburg/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/freiburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "fr": {
       "canton": "FR",
@@ -348,24 +348,6 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Séance d'information pour l'école de Police - 26.10.2026 (en allemand)",
-              "detail": "Granges-Paccot",
-              "date": "2026-10-26",
-              "url": "https://www.fr.ch/dsjs/pol/evenements/seance-dinformation-pour-lecole-de-police-26102026-en-allemand"
-            },
-            {
-              "label": "Regards affinés",
-              "detail": "L'Atelier, Fribourg — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
-            },
-            {
-              "label": "Halloween à Moléson",
-              "detail": "Office du Tourisme de Moléson, Gruyères — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
-            },
-            {
               "label": "Montée du masculinisme dans la Gen Z : un défi pour l'égalité",
               "detail": "Fribourg",
               "date": "2026-10-27",
@@ -376,6 +358,18 @@
               "detail": "Granges-Paccot",
               "date": "2026-10-27",
               "url": "https://www.fr.ch/dsjs/pol/evenements/seance-dinformation-pour-lecole-de-police-27102026"
+            },
+            {
+              "label": "Regards affinés",
+              "detail": "L'Atelier, Fribourg — en cours, dernier jour : 31 octobre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
+            },
+            {
+              "label": "Halloween à Moléson",
+              "detail": "Office du Tourisme de Moléson, Gruyères — en cours, dernier jour : 1er novembre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
             },
             {
               "label": "Foutue bergerie – Pierre Guillois / Cie le Fils du Grand réseau",
@@ -406,11 +400,17 @@
               "detail": "Fribourg",
               "date": "2026-10-28",
               "url": "https://www.fr.ch/mhnf/evenements/kiwi-club-apprentis-taxidermistes"
+            },
+            {
+              "label": "Histoires naturelles du mercredi",
+              "detail": "Fribourg",
+              "date": "2026-10-28",
+              "url": "https://www.fr.ch/mhnf/evenements/histoires-naturelles-du-mercredi-0"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/fribourg/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/fribourg/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     }
   }
 }

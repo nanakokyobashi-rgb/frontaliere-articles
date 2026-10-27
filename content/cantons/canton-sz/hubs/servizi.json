@@ -4,8 +4,8 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "servizi",
-  "updatedAt": "2026-10-26T23:12:35.898Z",
-  "contentHash": "eec2f703d18ab6fd327adee04df0f411100ed77f823d8af57bc4efecad31e2f5",
+  "updatedAt": "2026-10-27T00:15:17.334Z",
+  "contentHash": "ade379f9cdc118145409c0f22fb127d44ae56c61519eb2d62b73381c04dcf9ad",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -127,11 +127,6 @@
               "label": "Stärkung des Adipositaszentrums mit neuer Leitung",
               "date": "2026-07-02",
               "url": "https://spital-lachen.ch/ueber-uns/aktuelles/staerkung-des-adipositaszentrums-mit-neuer-leitung/"
-            },
-            {
-              "label": "7. Parlamentarischer Abend der AMEOS Gruppe",
-              "date": "2026-06-29",
-              "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/7-parlamentarischer-abend-der-ameos-gruppe-1/"
             }
           ],
           "updatedAt": "2026-10-26T17:41:28.137Z"
@@ -214,7 +209,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-26T23:12:35.898Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "en": {
       "canton": "SZ",
@@ -314,11 +309,6 @@
               "label": "Stärkung des Adipositaszentrums mit neuer Leitung",
               "date": "2026-07-02",
               "url": "https://spital-lachen.ch/ueber-uns/aktuelles/staerkung-des-adipositaszentrums-mit-neuer-leitung/"
-            },
-            {
-              "label": "7. Parlamentarischer Abend der AMEOS Gruppe",
-              "date": "2026-06-29",
-              "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/7-parlamentarischer-abend-der-ameos-gruppe-1/"
             }
           ],
           "updatedAt": "2026-10-26T17:41:28.137Z"
@@ -397,7 +387,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-26T23:12:35.898Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "de": {
       "canton": "SZ",
@@ -497,11 +487,6 @@
               "label": "Stärkung des Adipositaszentrums mit neuer Leitung",
               "date": "2026-07-02",
               "url": "https://spital-lachen.ch/ueber-uns/aktuelles/staerkung-des-adipositaszentrums-mit-neuer-leitung/"
-            },
-            {
-              "label": "7. Parlamentarischer Abend der AMEOS Gruppe",
-              "date": "2026-06-29",
-              "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/7-parlamentarischer-abend-der-ameos-gruppe-1/"
             }
           ],
           "updatedAt": "2026-10-26T17:41:28.137Z"
@@ -580,7 +565,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-26T23:12:35.898Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "fr": {
       "canton": "SZ",
@@ -680,11 +665,6 @@
               "label": "Stärkung des Adipositaszentrums mit neuer Leitung",
               "date": "2026-07-02",
               "url": "https://spital-lachen.ch/ueber-uns/aktuelles/staerkung-des-adipositaszentrums-mit-neuer-leitung/"
-            },
-            {
-              "label": "7. Parlamentarischer Abend der AMEOS Gruppe",
-              "date": "2026-06-29",
-              "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/7-parlamentarischer-abend-der-ameos-gruppe-1/"
             }
           ],
           "updatedAt": "2026-10-26T17:41:28.137Z"
@@ -759,7 +739,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-26T23:12:35.898Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     }
   }
 }

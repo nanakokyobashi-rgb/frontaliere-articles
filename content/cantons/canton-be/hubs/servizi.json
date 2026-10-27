@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "servizi",
-  "updatedAt": "2026-10-26T23:12:35.898Z",
-  "contentHash": "4eac63e2895c3ed1091bf9fa1a61e6d865dda39bc1097927003e8dc1cb912f32",
+  "updatedAt": "2026-10-27T00:15:17.334Z",
+  "contentHash": "570f67f4189320e53082a7cacfcea10418fedd782d70a08be6293539ff0dc83c",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -158,16 +158,16 @@
           "date": "2026-10-06T01:17:07.729Z"
         },
         {
-          "title": "Scuola qualità a Berna: il voto è fissato al 2026",
-          "url": "/articoli-svizzera/votazione-scuola-qualita-berna-2026/",
-          "excerpt": "L'iniziativa per inserire un mandato costituzionale sulla scuola sarà sottoposta agli elettori il 27 settembre 2026.",
-          "date": "2026-09-14T10:07:20.143Z"
-        },
-        {
           "title": "A scuola solo 4 giorni, l'esperimento (per ora) convince",
           "url": "/articoli-svizzera/scuola-4-giorni-belp/",
           "excerpt": "Da tre settimane, a Belp, nel Canton Berna, è in corso un nuovo progetto pilota con 4 giorni di scuola e 6 settimane di vacanza.",
           "date": "2026-09-04T21:47:50.000Z"
+        },
+        {
+          "title": "Scuola qualità a Berna: il voto è fissato al 2026",
+          "url": "/articoli-svizzera/votazione-scuola-qualita-berna-2026/",
+          "excerpt": "L'iniziativa per inserire un mandato costituzionale sulla scuola sarà sottoposta agli elettori il 27 settembre 2026.",
+          "date": "2026-09-14T10:07:20.143Z"
         },
         {
           "title": "Permesso B Berna: requisiti e rinnovo",
@@ -209,7 +209,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-26T23:12:35.898Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "en": {
       "canton": "BE",
@@ -340,16 +340,16 @@
           "date": "2026-10-06T01:17:07.729Z"
         },
         {
-          "title": "Quality school in Bern: the grade is set for 2026",
-          "url": "/en/swiss-articles/bern-school-quality-vote-2026/",
-          "excerpt": "The initiative to insert a constitutional mandate on the school will be submitted to the voters on September 27, 2026.",
-          "date": "2026-09-14T10:07:20.143Z"
-        },
-        {
           "title": "At school only 4 days, the experiment (for now) convinces",
           "url": "/en/swiss-articles/school-4-days-belp/",
           "excerpt": "For three weeks, in Belp, in the Canton of Bern, a new pilot project has been underway with 4 days of school and 6 weeks of vacation.",
           "date": "2026-09-04T21:47:50.000Z"
+        },
+        {
+          "title": "Quality school in Bern: the grade is set for 2026",
+          "url": "/en/swiss-articles/bern-school-quality-vote-2026/",
+          "excerpt": "The initiative to insert a constitutional mandate on the school will be submitted to the voters on September 27, 2026.",
+          "date": "2026-09-14T10:07:20.143Z"
         },
         {
           "title": "Permit B Bern: requirements and renewal",
@@ -387,7 +387,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-26T23:12:35.898Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "de": {
       "canton": "BE",
@@ -518,16 +518,16 @@
           "date": "2026-10-06T01:17:07.729Z"
         },
         {
-          "title": "Qualitätsschule in Bern: Die Note ist auf 2026 festgelegt",
-          "url": "/de/schweiz-artikel/berner-schulqualita-volksabstimmung-2026/",
-          "excerpt": "Die Initiative zur Aufnahme eines Verfassungsauftrags an der Schule wird am 27. September 2026 den Wählern vorgelegt.",
-          "date": "2026-09-14T10:07:20.143Z"
-        },
-        {
           "title": "In der Schule nur 4 Tage, überzeugt das Experiment (vorerst)",
           "url": "/de/schweiz-artikel/schule-4-tage-belp/",
           "excerpt": "Seit drei Wochen läuft in Belp im Kanton Bern ein neues Pilotprojekt mit 4 Schultagen und 6 Wochen Ferien.",
           "date": "2026-09-04T21:47:50.000Z"
+        },
+        {
+          "title": "Qualitätsschule in Bern: Die Note ist auf 2026 festgelegt",
+          "url": "/de/schweiz-artikel/berner-schulqualita-volksabstimmung-2026/",
+          "excerpt": "Die Initiative zur Aufnahme eines Verfassungsauftrags an der Schule wird am 27. September 2026 den Wählern vorgelegt.",
+          "date": "2026-09-14T10:07:20.143Z"
         },
         {
           "title": "Ausweis B Bern: Voraussetzungen und Erneuerung",
@@ -565,7 +565,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-26T23:12:35.898Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "fr": {
       "canton": "BE",
@@ -696,16 +696,16 @@
           "date": "2026-10-06T01:17:07.729Z"
         },
         {
-          "title": "Ecole qualité à Berne : le vote est fixé à 2026",
-          "url": "/fr/articles-suisse/vote-qualite-ecole-berne-2026/",
-          "excerpt": "L'initiative d'insérer un mandat constitutionnel sur l'école sera soumise aux électeurs le 27 septembre 2026.",
-          "date": "2026-09-14T10:07:20.143Z"
-        },
-        {
           "title": "À l'école seulement 4 jours, l'expérience (pour l'instant) convainc",
           "url": "/fr/articles-suisse/ecole-4-jours-belp/",
           "excerpt": "Depuis trois semaines, à Belp, dans le canton de Berne, un nouveau projet pilote est en cours avec 4 jours d'école et 6 semaines de vacances.",
           "date": "2026-09-04T21:47:50.000Z"
+        },
+        {
+          "title": "Ecole qualité à Berne : le vote est fixé à 2026",
+          "url": "/fr/articles-suisse/vote-qualite-ecole-berne-2026/",
+          "excerpt": "L'initiative d'insérer un mandat constitutionnel sur l'école sera soumise aux électeurs le 27 septembre 2026.",
+          "date": "2026-09-14T10:07:20.143Z"
         },
         {
           "title": "Permis B Berne : exigences et renouvellement",
@@ -739,7 +739,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-26T23:12:35.898Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     }
   }
 }

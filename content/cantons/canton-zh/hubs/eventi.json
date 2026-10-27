@@ -4,12 +4,12 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-10-26T01:02:08.769Z",
-  "contentHash": "8500cc5f6c5522cfdef02481ec25c6eaa0f4ff89e07e4fe2fef9d2162177dc7d",
+  "updatedAt": "2026-10-27T00:15:17.334Z",
+  "contentHash": "ca6d38878cb2622b125767c6969022932ca7b78f6be3e02daebe5bc1279d5ed8",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-25T02:23:31.213Z",
+      "updatedAt": "2026-10-26T18:30:43.613Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "341",
+          "value": "345",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Lesezirkel",
-              "detail": "Rüti ZH, Rüti (ZH)",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesezirkel/"
+              "label": "RetailTech Innovation 2026",
+              "detail": "Google EURF",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/retailtech-innovation-2026_Adgnk2u"
             },
             {
-              "label": "DON TOLIVER: NITROUS - OCTANE WORLD TOUR LEG 2",
-              "detail": "Hallenstadion Zürich, Zürich",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/don-toliver-nitrous-octane-world-tour-leg-2_A2e1GAw"
+              "label": "RetailTech Innovation 2026",
+              "detail": "Google EURF, Zürich",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/retailtech-innovation-2026/"
             },
             {
-              "label": "Monday Blues \"Highlanders Jazzband\"",
-              "detail": "Kino Orion, Dübendorf",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/duebendorf/monday-blues-highlander-jazzband_ANEJrvr"
+              "label": "Kurs ZEV / vZEV / LEG",
+              "detail": "Dietikon",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-zev-vzev-leg/"
             },
             {
-              "label": "Prinz Pi Abschiedstour 2026",
-              "detail": "Komplex457",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/populaer/zuerich/prinz-pi-abschiedstour-2026_AQf8R3T"
+              "label": "Course: Laser Micromachining",
+              "detail": "Dübendorf",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/course-laser-micromachining/"
             },
             {
-              "label": "Zsá Zsá - GIRL WHATEVER TOUR",
-              "detail": "Jugendkulturhaus Dynamo",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/zuerich/zs-zs-girl-whatever-tour_AUBUK7N"
+              "label": "Gymnastik für Seniorinnen/Senioren / Organisiert vom Frauenverein",
+              "detail": "Neue Reformierte Kirche, Urdorf",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gymnastik-fuer-seniorinnensenioren-organisiert-vom-frauenverein-24/"
             },
             {
-              "label": "Kürbis schnitzen",
-              "detail": "Freizeitanlage Chrüzacher, Dietikon — in corso, ultimo giorno: 28 ottobre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kuerbis-schnitzen/"
+              "label": "GenerationSummit 2026",
+              "detail": "Papiersaal",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/generationsummit-2026_Ajd8YTV"
             },
             {
-              "label": "Old-Time Jam",
-              "detail": "Galotti — in corso, ultimo giorno: 22 novembre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/old-time-jam_ASX6iBe"
+              "label": "Wie heizen wir in Zukunft sicher und komfortabel?",
+              "detail": "Energiezentrale Volketswil, Volketswil",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/volketswil/wie-heizen-wir-in-zukunft-sicher-und-komfortabel_ArDr2sR"
             },
             {
-              "label": "Jubiläumskonzert 25 Jahre Gospel Singers Wollishofen",
-              "detail": "Reformierte Kirche Auf der Egg, Egg — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/jubilaeumskonzert-25-jahre-gospel-singers-wollishofen_A6wbUid"
+              "label": "Elektrifizierung LKW-Flotte und Firmenbesichtigung",
+              "detail": "Brauch Transport AG, Fehraltorf",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/fehraltorf/elektrifizierung-lkw-flotte-und-firmenbesichtigung_AS1jsXd"
             },
             {
-              "label": "Le Philosophe Concerts unplugged",
-              "detail": "Bar Le Philosophe — in corso, ultimo giorno: 21 novembre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/events/music/zuerich/le-philosophe-concerts-unplugged_AkMnGaq"
+              "label": "Vortrag - Motivation & Talententwicklung: Wie Kinder Stärken entfalten",
+              "detail": "Allmend Träff, Uitikon",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/uitikon-waldegg/vortrag-motivation-und-talententwicklung-wie-kinder-staerken-entfalten_AvuacHA"
             },
             {
-              "label": "\"Bisch sicher?\"",
-              "detail": "Oetwil am See — in corso, ultimo giorno: 7 novembre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bisch-sicher/"
+              "label": "Abgesagt: Darren Kiely",
+              "detail": "Zurich, Zürich",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/abgesagt-darren-kiely/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zurigo/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "en": {
       "canton": "ZH",
@@ -133,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "341",
+          "value": "345",
           "note": "from the site’s events calendar"
         }
       ],
@@ -144,69 +144,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Lesezirkel",
-              "detail": "Rüti ZH, Rüti (ZH)",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesezirkel/"
+              "label": "RetailTech Innovation 2026",
+              "detail": "Google EURF",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/retailtech-innovation-2026_Adgnk2u"
             },
             {
-              "label": "DON TOLIVER: NITROUS - OCTANE WORLD TOUR LEG 2",
-              "detail": "Hallenstadion Zürich, Zürich",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/don-toliver-nitrous-octane-world-tour-leg-2_A2e1GAw"
+              "label": "RetailTech Innovation 2026",
+              "detail": "Google EURF, Zürich",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/retailtech-innovation-2026/"
             },
             {
-              "label": "Monday Blues \"Highlanders Jazzband\"",
-              "detail": "Kino Orion, Dübendorf",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/duebendorf/monday-blues-highlander-jazzband_ANEJrvr"
+              "label": "Kurs ZEV / vZEV / LEG",
+              "detail": "Dietikon",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-zev-vzev-leg/"
             },
             {
-              "label": "Prinz Pi Abschiedstour 2026",
-              "detail": "Komplex457",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/populaer/zuerich/prinz-pi-abschiedstour-2026_AQf8R3T"
+              "label": "Course: Laser Micromachining",
+              "detail": "Dübendorf",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/course-laser-micromachining/"
             },
             {
-              "label": "Zsá Zsá - GIRL WHATEVER TOUR",
-              "detail": "Jugendkulturhaus Dynamo",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/zuerich/zs-zs-girl-whatever-tour_AUBUK7N"
+              "label": "Gymnastik für Seniorinnen/Senioren / Organisiert vom Frauenverein",
+              "detail": "Neue Reformierte Kirche, Urdorf",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gymnastik-fuer-seniorinnensenioren-organisiert-vom-frauenverein-24/"
             },
             {
-              "label": "Kürbis schnitzen",
-              "detail": "Freizeitanlage Chrüzacher, Dietikon — ongoing, last day: 28 October 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kuerbis-schnitzen/"
+              "label": "GenerationSummit 2026",
+              "detail": "Papiersaal",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/generationsummit-2026_Ajd8YTV"
             },
             {
-              "label": "Old-Time Jam",
-              "detail": "Galotti — ongoing, last day: 22 November 2026",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/old-time-jam_ASX6iBe"
+              "label": "Wie heizen wir in Zukunft sicher und komfortabel?",
+              "detail": "Energiezentrale Volketswil, Volketswil",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/volketswil/wie-heizen-wir-in-zukunft-sicher-und-komfortabel_ArDr2sR"
             },
             {
-              "label": "Jubiläumskonzert 25 Jahre Gospel Singers Wollishofen",
-              "detail": "Reformierte Kirche Auf der Egg, Egg — ongoing, last day: 31 October 2026",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/jubilaeumskonzert-25-jahre-gospel-singers-wollishofen_A6wbUid"
+              "label": "Elektrifizierung LKW-Flotte und Firmenbesichtigung",
+              "detail": "Brauch Transport AG, Fehraltorf",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/fehraltorf/elektrifizierung-lkw-flotte-und-firmenbesichtigung_AS1jsXd"
             },
             {
-              "label": "Le Philosophe: Unplugged Concerts",
-              "detail": "Bar Le Philosophe — ongoing, last day: 21 November 2026",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/events/music/zuerich/le-philosophe-concerts-unplugged_AkMnGaq"
+              "label": "Vortrag - Motivation & Talententwicklung: Wie Kinder Stärken entfalten",
+              "detail": "Allmend Träff, Uitikon",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/uitikon-waldegg/vortrag-motivation-und-talententwicklung-wie-kinder-staerken-entfalten_AvuacHA"
             },
             {
-              "label": "\"Bisch sicher?\"",
-              "detail": "Oetwil am See — ongoing, last day: 7 November 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bisch-sicher/"
+              "label": "Abgesagt: Darren Kiely",
+              "detail": "Zurich, Zürich",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/abgesagt-darren-kiely/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zurich/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "de": {
       "canton": "ZH",
@@ -244,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "341",
+          "value": "345",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -255,69 +255,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Lesezirkel",
-              "detail": "Rüti ZH, Rüti (ZH)",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesezirkel/"
+              "label": "RetailTech Innovation 2026",
+              "detail": "Google EURF",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/retailtech-innovation-2026_Adgnk2u"
             },
             {
-              "label": "DON TOLIVER: NITROUS - OCTANE WORLD TOUR LEG 2",
-              "detail": "Hallenstadion Zürich, Zürich",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/don-toliver-nitrous-octane-world-tour-leg-2_A2e1GAw"
+              "label": "RetailTech Innovation 2026",
+              "detail": "Google EURF, Zürich",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/retailtech-innovation-2026/"
             },
             {
-              "label": "Monday Blues \"Highlanders Jazzband\"",
-              "detail": "Kino Orion, Dübendorf",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/duebendorf/monday-blues-highlander-jazzband_ANEJrvr"
+              "label": "Kurs ZEV / vZEV / LEG",
+              "detail": "Dietikon",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-zev-vzev-leg/"
             },
             {
-              "label": "Prinz Pi Abschiedstour 2026",
-              "detail": "Komplex457",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/populaer/zuerich/prinz-pi-abschiedstour-2026_AQf8R3T"
+              "label": "Course: Laser Micromachining",
+              "detail": "Dübendorf",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/course-laser-micromachining/"
             },
             {
-              "label": "Zsá Zsá - GIRL WHATEVER TOUR",
-              "detail": "Jugendkulturhaus Dynamo",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/zuerich/zs-zs-girl-whatever-tour_AUBUK7N"
+              "label": "Gymnastik für Seniorinnen/Senioren / Organisiert vom Frauenverein",
+              "detail": "Neue Reformierte Kirche, Urdorf",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gymnastik-fuer-seniorinnensenioren-organisiert-vom-frauenverein-24/"
             },
             {
-              "label": "Kürbis schnitzen",
-              "detail": "Freizeitanlage Chrüzacher, Dietikon — läuft, letzter Tag: 28. Oktober 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kuerbis-schnitzen/"
+              "label": "GenerationSummit 2026",
+              "detail": "Papiersaal",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/generationsummit-2026_Ajd8YTV"
             },
             {
-              "label": "Old-Time Jam",
-              "detail": "Galotti — läuft, letzter Tag: 22. November 2026",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/old-time-jam_ASX6iBe"
+              "label": "Wie heizen wir in Zukunft sicher und komfortabel?",
+              "detail": "Energiezentrale Volketswil, Volketswil",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/volketswil/wie-heizen-wir-in-zukunft-sicher-und-komfortabel_ArDr2sR"
             },
             {
-              "label": "Jubiläumskonzert 25 Jahre Gospel Singers Wollishofen",
-              "detail": "Reformierte Kirche Auf der Egg, Egg — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/jubilaeumskonzert-25-jahre-gospel-singers-wollishofen_A6wbUid"
+              "label": "Elektrifizierung LKW-Flotte und Firmenbesichtigung",
+              "detail": "Brauch Transport AG, Fehraltorf",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/fehraltorf/elektrifizierung-lkw-flotte-und-firmenbesichtigung_AS1jsXd"
             },
             {
-              "label": "Le Philosophe Concerts unplugged",
-              "detail": "Bar Le Philosophe — läuft, letzter Tag: 21. November 2026",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/events/music/zuerich/le-philosophe-concerts-unplugged_AkMnGaq"
+              "label": "Vortrag - Motivation & Talententwicklung: Wie Kinder Stärken entfalten",
+              "detail": "Allmend Träff, Uitikon",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/uitikon-waldegg/vortrag-motivation-und-talententwicklung-wie-kinder-staerken-entfalten_AvuacHA"
             },
             {
-              "label": "\"Bisch sicher?\"",
-              "detail": "Oetwil am See — läuft, letzter Tag: 7. November 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bisch-sicher/"
+              "label": "Abgesagt: Darren Kiely",
+              "detail": "Zurich, Zürich",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/abgesagt-darren-kiely/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zurich/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "fr": {
       "canton": "ZH",
@@ -355,7 +355,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "341",
+          "value": "345",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -366,69 +366,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Lesezirkel",
-              "detail": "Rüti ZH, Rüti (ZH)",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesezirkel/"
+              "label": "RetailTech Innovation 2026",
+              "detail": "Google EURF",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/retailtech-innovation-2026_Adgnk2u"
             },
             {
-              "label": "DON TOLIVER: NITROUS - OCTANE WORLD TOUR LEG 2",
-              "detail": "Hallenstadion Zürich, Zürich",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/don-toliver-nitrous-octane-world-tour-leg-2_A2e1GAw"
+              "label": "RetailTech Innovation 2026",
+              "detail": "Google EURF, Zürich",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/retailtech-innovation-2026/"
             },
             {
-              "label": "Monday Blues \"Highlanders Jazzband\"",
-              "detail": "Kino Orion, Dübendorf",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/duebendorf/monday-blues-highlander-jazzband_ANEJrvr"
+              "label": "Kurs ZEV / vZEV / LEG",
+              "detail": "Dietikon",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-zev-vzev-leg/"
             },
             {
-              "label": "Prinz Pi Abschiedstour 2026",
-              "detail": "Komplex457",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/populaer/zuerich/prinz-pi-abschiedstour-2026_AQf8R3T"
+              "label": "Course: Laser Micromachining",
+              "detail": "Dübendorf",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/course-laser-micromachining/"
             },
             {
-              "label": "Zsá Zsá - GIRL WHATEVER TOUR",
-              "detail": "Jugendkulturhaus Dynamo",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/zuerich/zs-zs-girl-whatever-tour_AUBUK7N"
+              "label": "Gymnastik für Seniorinnen/Senioren / Organisiert vom Frauenverein",
+              "detail": "Neue Reformierte Kirche, Urdorf",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gymnastik-fuer-seniorinnensenioren-organisiert-vom-frauenverein-24/"
             },
             {
-              "label": "Kürbis schnitzen",
-              "detail": "Freizeitanlage Chrüzacher, Dietikon — en cours, dernier jour : 28 octobre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kuerbis-schnitzen/"
+              "label": "GenerationSummit 2026",
+              "detail": "Papiersaal",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/generationsummit-2026_Ajd8YTV"
             },
             {
-              "label": "Old-Time Jam",
-              "detail": "Galotti — en cours, dernier jour : 22 novembre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/old-time-jam_ASX6iBe"
+              "label": "Wie heizen wir in Zukunft sicher und komfortabel?",
+              "detail": "Energiezentrale Volketswil, Volketswil",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/volketswil/wie-heizen-wir-in-zukunft-sicher-und-komfortabel_ArDr2sR"
             },
             {
-              "label": "Jubiläumskonzert 25 Jahre Gospel Singers Wollishofen",
-              "detail": "Reformierte Kirche Auf der Egg, Egg — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/jubilaeumskonzert-25-jahre-gospel-singers-wollishofen_A6wbUid"
+              "label": "Elektrifizierung LKW-Flotte und Firmenbesichtigung",
+              "detail": "Brauch Transport AG, Fehraltorf",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/fehraltorf/elektrifizierung-lkw-flotte-und-firmenbesichtigung_AS1jsXd"
             },
             {
-              "label": "Le Philosophe : concerts acoustiques",
-              "detail": "Bar Le Philosophe — en cours, dernier jour : 21 novembre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/events/music/zuerich/le-philosophe-concerts-unplugged_AkMnGaq"
+              "label": "Vortrag - Motivation & Talententwicklung: Wie Kinder Stärken entfalten",
+              "detail": "Allmend Träff, Uitikon",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/uitikon-waldegg/vortrag-motivation-und-talententwicklung-wie-kinder-staerken-entfalten_AvuacHA"
             },
             {
-              "label": "\"Bisch sicher?\"",
-              "detail": "Oetwil am See — en cours, dernier jour : 7 novembre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bisch-sicher/"
+              "label": "Abgesagt: Darren Kiely",
+              "detail": "Zurich, Zürich",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/abgesagt-darren-kiely/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zurich/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     }
   }
 }

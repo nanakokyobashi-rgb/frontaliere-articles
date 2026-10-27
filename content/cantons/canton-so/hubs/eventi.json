@@ -4,12 +4,12 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "eventi",
-  "updatedAt": "2026-10-26T01:02:08.769Z",
-  "contentHash": "50495c4825f0b15929266480f99f5aaa0ebd2bcf1392f2e4ad5f4159e7d48860",
+  "updatedAt": "2026-10-27T00:15:17.334Z",
+  "contentHash": "342b60fba645413ab294a5d38da94f30b29e2329bf4acf22bc16a84af4c07018",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-25T02:23:31.213Z",
+      "updatedAt": "2026-10-26T18:30:43.613Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "59",
+          "value": "60",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Il Centro Italiano è ospite dell'Hotel Roten Ochsen di Soletta.",
-              "detail": "Hotel Roter Ochsen",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/centro-italiano-as-guest-at-the-hotel-roten-ochsen-solothurn/"
-            },
-            {
-              "label": "Vollmond Klang-Schreib- und Räucher-Meditation mit Patricia Pineiro",
-              "detail": "Body & Mind Center, Solothurn",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vollmond-klang-schreib-und-raeucher-meditation-mit-patricia-pineiro/"
-            },
-            {
-              "label": "Vortrag «Bahnen und Strom – Wie die SBB elektrifiziert wurde»",
+              "label": "Offenes Atelier «Gemeinsam im Museum statt allein zu Hause»",
               "detail": "Haus der Museen, Olten",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/olten/vortrag-bahnen-und-strom-wie-die-sbb-elektrifiziert-wurde_AS3hddW"
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/olten/offenes-atelier-gemeinsam-im-museum-statt-allein-zu-hause_ANC4v57"
             },
             {
-              "label": "Spielgruppe Rägeboge Hauptversammlung",
-              "detail": "Biezwil",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spielgruppe-raegeboge-hauptversammlung/"
+              "label": "Heretoir",
+              "detail": "Kulturfabrik Kofmehl",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/solothurn/heretoir_AmhxvRh"
+            },
+            {
+              "label": "Buchvernissage und Gespräch mit Franco Supino",
+              "detail": "Bücher Lüthy, Solothurn",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/buchvernissage-und-gespraech-mit-franco-supino/"
+            },
+            {
+              "label": "Il Centro Italiano è ospite dell'Hotel Roten Ochsen di Soletta.",
+              "detail": "Hotel Roter Ochsen — in corso, ultimo giorno: 16 novembre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/centro-italiano-as-guest-at-the-hotel-roten-ochsen-solothurn/"
             },
             {
               "label": "Kulturreise: 6 Tage im Herzen der Toskana mit Nicola",
               "detail": "Volkshochschule Solothurn, Solothurn — in corso, ultimo giorno: 29 ottobre 2026",
-              "date": "2026-10-26",
+              "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/kulturreise-6-tage-im-herzen-der-toskana-mit-nicola/"
             },
             {
               "label": "Oktoberfest",
               "detail": "Rythalle Soledurn, Solothurn — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-26",
+              "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktoberfest-9/"
             },
             {
               "label": "Computer Grundlagen",
               "detail": "Volkshochschule Solothurn, Solothurn — in corso, ultimo giorno: 10 novembre 2026",
-              "date": "2026-10-26",
+              "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/computer-grundlagen-2/"
             },
             {
               "label": "DLG Theater 2026 \"Tschingge- Ein Stück Schweiz\"",
               "detail": "Hauslimattschulhaus, Balsthal — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-26",
+              "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dlg-theater-2026-tschingge-ein-stueck-schweiz/"
             },
             {
               "label": "Herbstaromen à la carte",
               "detail": "Genussfabrik Solothurn, Solothurn — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-26",
+              "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliche-a-la-carte-spezialitaeten/"
             },
             {
-              "label": "Offenes Atelier «Gemeinsam im Museum statt allein zu Hause»",
-              "detail": "Haus der Museen, Olten",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/olten/offenes-atelier-gemeinsam-im-museum-statt-allein-zu-hause_ANC4v57"
+              "label": "Betonworkshop",
+              "detail": "Solothurn",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/betonworkshop/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/soletta/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/soletta/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "en": {
       "canton": "SO",
@@ -133,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "59",
+          "value": "60",
           "note": "from the site’s events calendar"
         }
       ],
@@ -144,69 +144,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Centro Italiano as guest at the Hotel Roten Ochsen, Solothurn",
-              "detail": "Hotel Roter Ochsen",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/centro-italiano-as-guest-at-the-hotel-roten-ochsen-solothurn/"
-            },
-            {
-              "label": "Vollmond Klang-Schreib- und Räucher-Meditation mit Patricia Pineiro",
-              "detail": "Body & Mind Center, Solothurn",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vollmond-klang-schreib-und-raeucher-meditation-mit-patricia-pineiro/"
-            },
-            {
-              "label": "Vortrag \" Bahnen und Strom-die",
+              "label": "Offenes Atelier «Gemeinsam im Museum statt allein zu Hause»",
               "detail": "Haus der Museen, Olten",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/olten/vortrag-bahnen-und-strom-wie-die-sbb-elektrifiziert-wurde_AS3hddW"
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/olten/offenes-atelier-gemeinsam-im-museum-statt-allein-zu-hause_ANC4v57"
             },
             {
-              "label": "Spielgruppe Rägeboge Hauptversammlung",
-              "detail": "Biezwil",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spielgruppe-raegeboge-hauptversammlung/"
+              "label": "Heretoir",
+              "detail": "Kulturfabrik Kofmehl",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/solothurn/heretoir_AmhxvRh"
+            },
+            {
+              "label": "Buchvernissage und Gespräch mit Franco Supino",
+              "detail": "Bücher Lüthy, Solothurn",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/buchvernissage-und-gespraech-mit-franco-supino/"
+            },
+            {
+              "label": "Centro Italiano as guest at the Hotel Roten Ochsen, Solothurn",
+              "detail": "Hotel Roter Ochsen — ongoing, last day: 16 November 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/centro-italiano-as-guest-at-the-hotel-roten-ochsen-solothurn/"
             },
             {
               "label": "Kulturreise: 6 Tage im Herzen der Toskana mit Nicola",
               "detail": "Volkshochschule Solothurn, Solothurn — ongoing, last day: 29 October 2026",
-              "date": "2026-10-26",
+              "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/kulturreise-6-tage-im-herzen-der-toskana-mit-nicola/"
             },
             {
               "label": "Oktoberfest",
               "detail": "Rythalle Soledurn, Solothurn — ongoing, last day: 31 October 2026",
-              "date": "2026-10-26",
+              "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktoberfest-9/"
             },
             {
               "label": "Computer Grundlagen",
               "detail": "Volkshochschule Solothurn, Solothurn — ongoing, last day: 10 November 2026",
-              "date": "2026-10-26",
+              "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/computer-grundlagen-2/"
             },
             {
               "label": "DLG Theater 2026 \"Tschingge- Ein Stück Schweiz\"",
               "detail": "Hauslimattschulhaus, Balsthal — ongoing, last day: 31 October 2026",
-              "date": "2026-10-26",
+              "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dlg-theater-2026-tschingge-ein-stueck-schweiz/"
             },
             {
               "label": "Herbstaromen à la carte",
               "detail": "Genussfabrik Solothurn, Solothurn — ongoing, last day: 31 October 2026",
-              "date": "2026-10-26",
+              "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliche-a-la-carte-spezialitaeten/"
             },
             {
-              "label": "Offenes Atelier «Gemeinsam im Museum statt allein zu Hause»",
-              "detail": "Haus der Museen, Olten",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/olten/offenes-atelier-gemeinsam-im-museum-statt-allein-zu-hause_ANC4v57"
+              "label": "Betonworkshop",
+              "detail": "Solothurn",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/betonworkshop/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/solothurn/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/solothurn/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "de": {
       "canton": "SO",
@@ -244,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "59",
+          "value": "60",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -255,69 +255,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Centro Italiano zu Gast im Hotel Roten Ochsen, Solothurn",
-              "detail": "Hotel Roter Ochsen",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/centro-italiano-as-guest-at-the-hotel-roten-ochsen-solothurn/"
-            },
-            {
-              "label": "Vollmond Klang-Schreib- und Räucher-Meditation mit Patricia Pineiro",
-              "detail": "Body & Mind Center, Solothurn",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vollmond-klang-schreib-und-raeucher-meditation-mit-patricia-pineiro/"
-            },
-            {
-              "label": "Vortrag \" Bahn und Strom-die SBB elektrifiziert die SBB»",
+              "label": "Offenes Atelier «Gemeinsam im Museum statt allein zu Hause»",
               "detail": "Haus der Museen, Olten",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/olten/vortrag-bahnen-und-strom-wie-die-sbb-elektrifiziert-wurde_AS3hddW"
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/olten/offenes-atelier-gemeinsam-im-museum-statt-allein-zu-hause_ANC4v57"
             },
             {
-              "label": "Spielgruppe Rägeboge Hauptversammlung",
-              "detail": "Biezwil",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spielgruppe-raegeboge-hauptversammlung/"
+              "label": "Heretoir",
+              "detail": "Kulturfabrik Kofmehl",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/solothurn/heretoir_AmhxvRh"
+            },
+            {
+              "label": "Buchvernissage und Gespräch mit Franco Supino",
+              "detail": "Bücher Lüthy, Solothurn",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/buchvernissage-und-gespraech-mit-franco-supino/"
+            },
+            {
+              "label": "Centro Italiano zu Gast im Hotel Roten Ochsen, Solothurn",
+              "detail": "Hotel Roter Ochsen — läuft, letzter Tag: 16. November 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/centro-italiano-as-guest-at-the-hotel-roten-ochsen-solothurn/"
             },
             {
               "label": "Kulturreise: 6 Tage im Herzen der Toskana mit Nicola",
               "detail": "Volkshochschule Solothurn, Solothurn — läuft, letzter Tag: 29. Oktober 2026",
-              "date": "2026-10-26",
+              "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/kulturreise-6-tage-im-herzen-der-toskana-mit-nicola/"
             },
             {
               "label": "Oktoberfest",
               "detail": "Rythalle Soledurn, Solothurn — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-26",
+              "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktoberfest-9/"
             },
             {
               "label": "Computer Grundlagen",
               "detail": "Volkshochschule Solothurn, Solothurn — läuft, letzter Tag: 10. November 2026",
-              "date": "2026-10-26",
+              "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/computer-grundlagen-2/"
             },
             {
               "label": "DLG Theater 2026 \"Tschingge- Ein Stück Schweiz\"",
               "detail": "Hauslimattschulhaus, Balsthal — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-26",
+              "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dlg-theater-2026-tschingge-ein-stueck-schweiz/"
             },
             {
               "label": "Herbstaromen à la carte",
               "detail": "Genussfabrik Solothurn, Solothurn — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-26",
+              "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliche-a-la-carte-spezialitaeten/"
             },
             {
-              "label": "Offenes Atelier «Gemeinsam im Museum statt allein zu Hause»",
-              "detail": "Haus der Museen, Olten",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/olten/offenes-atelier-gemeinsam-im-museum-statt-allein-zu-hause_ANC4v57"
+              "label": "Betonworkshop",
+              "detail": "Solothurn",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/betonworkshop/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/solothurn/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/solothurn/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "fr": {
       "canton": "SO",
@@ -355,7 +355,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "59",
+          "value": "60",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -366,69 +366,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Le Centro Italiano invité à l'hôtel Roten Ochsen, Soleure",
-              "detail": "Hotel Roter Ochsen",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/centro-italiano-as-guest-at-the-hotel-roten-ochsen-solothurn/"
-            },
-            {
-              "label": "Vollmond Klang-Schreib- und Räucher-Meditation mit Patricia Pineiro",
-              "detail": "Body & Mind Center, Solothurn",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vollmond-klang-schreib-und-raeucher-meditation-mit-patricia-pineiro/"
-            },
-            {
-              "label": "Vortrag « Bahnen und Strom – Wie die SBB elektrifiziert wurde »",
+              "label": "Offenes Atelier «Gemeinsam im Museum statt allein zu Hause»",
               "detail": "Haus der Museen, Olten",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/olten/vortrag-bahnen-und-strom-wie-die-sbb-elektrifiziert-wurde_AS3hddW"
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/olten/offenes-atelier-gemeinsam-im-museum-statt-allein-zu-hause_ANC4v57"
             },
             {
-              "label": "Spielgruppe Rägeboge Hauptversammlung",
-              "detail": "Biezwil",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spielgruppe-raegeboge-hauptversammlung/"
+              "label": "Heretoir",
+              "detail": "Kulturfabrik Kofmehl",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/solothurn/heretoir_AmhxvRh"
+            },
+            {
+              "label": "Buchvernissage und Gespräch mit Franco Supino",
+              "detail": "Bücher Lüthy, Solothurn",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/buchvernissage-und-gespraech-mit-franco-supino/"
+            },
+            {
+              "label": "Le Centro Italiano invité à l'hôtel Roten Ochsen, Soleure",
+              "detail": "Hotel Roter Ochsen — en cours, dernier jour : 16 novembre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/centro-italiano-as-guest-at-the-hotel-roten-ochsen-solothurn/"
             },
             {
               "label": "Kulturreise: 6 Tage im Herzen der Toskana mit Nicola",
               "detail": "Volkshochschule Solothurn, Solothurn — en cours, dernier jour : 29 octobre 2026",
-              "date": "2026-10-26",
+              "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/kulturreise-6-tage-im-herzen-der-toskana-mit-nicola/"
             },
             {
               "label": "Oktoberfest",
               "detail": "Rythalle Soledurn, Solothurn — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-26",
+              "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktoberfest-9/"
             },
             {
               "label": "Computer Grundlagen",
               "detail": "Volkshochschule Solothurn, Solothurn — en cours, dernier jour : 10 novembre 2026",
-              "date": "2026-10-26",
+              "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/computer-grundlagen-2/"
             },
             {
               "label": "DLG Theater 2026 \"Tschingge- Ein Stück Schweiz\"",
               "detail": "Hauslimattschulhaus, Balsthal — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-26",
+              "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dlg-theater-2026-tschingge-ein-stueck-schweiz/"
             },
             {
               "label": "Herbstaromen à la carte",
               "detail": "Genussfabrik Solothurn, Solothurn — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-26",
+              "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliche-a-la-carte-spezialitaeten/"
             },
             {
-              "label": "Offenes Atelier «Gemeinsam im Museum statt allein zu Hause»",
-              "detail": "Haus der Museen, Olten",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/olten/offenes-atelier-gemeinsam-im-museum-statt-allein-zu-hause_ANC4v57"
+              "label": "Betonworkshop",
+              "detail": "Solothurn",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/betonworkshop/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/soleure/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/soleure/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     }
   }
 }

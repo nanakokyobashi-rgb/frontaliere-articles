@@ -4,17 +4,17 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "eventi",
-  "updatedAt": "2026-10-26T01:02:08.769Z",
-  "contentHash": "1d1957de2526df6fb671c2bf2c93b2f634cf76ca2fbc90be980b3e86b9b9a123",
+  "updatedAt": "2026-10-27T00:15:17.334Z",
+  "contentHash": "b37d0f6a26795b60386baed168968ab78448564ca1e43b0e76093650a3d9f7f6",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-25T02:23:31.213Z",
+      "updatedAt": "2026-10-26T18:30:43.613Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-25T19:59:33.449Z",
+      "updatedAt": "2026-10-26T17:41:28.137Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "45",
+          "value": "42",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,30 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Julia Weber",
-              "detail": "Weinfelden",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/julia-weber/"
-            },
-            {
-              "label": "Line Dance",
-              "detail": "Evang.-ref. Kirchgemeindehaus, Weinfelden",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/weinfelden/line-dance_AH6cMXy"
-            },
-            {
-              "label": "Vollmondbar: Namaré",
-              "detail": "Phönix Theater, Steckborn",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/steckborn/vollmondbar-namare_A7NuZKj"
-            },
-            {
-              "label": "Ziegentrekking",
-              "detail": "geissgada, Hohentannen — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
-            },
             {
               "label": "Philosophie im Löchlgaischt",
               "detail": "Eschenz",
@@ -72,6 +48,12 @@
               "detail": "Röm.-kath. Kirche St. Stefan, Kreuzlingen",
               "date": "2026-10-27",
               "url": "https://www.guidle.com/it/veranstaltungen/klassisch/kreuzlingen/konzert-der-regensburger-domspatzen_AmmCC2n"
+            },
+            {
+              "label": "Ziegentrekking",
+              "detail": "geissgada, Hohentannen — in corso, ultimo giorno: 31 ottobre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
             },
             {
               "label": "Häslitreff",
@@ -96,11 +78,29 @@
               "detail": "8272 Ermatingen, Ermatingen",
               "date": "2026-10-29",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/metzgete-auf-dem-schiff-in-ermatingen-traditionell-maritim/"
+            },
+            {
+              "label": "Fledermäuse unterm Museumsdach",
+              "detail": "Kreuzlingen",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fledermaeuse-unterm-museumsdach/"
+            },
+            {
+              "label": "Sterben gehört zum Leben - Gut umsorgt bis zuletzt",
+              "detail": "Weinfelden",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sterben-gehoert-zum-leben-gut-umsorgt-bis-zuletzt/"
+            },
+            {
+              "label": "Halloween@the Brewery",
+              "detail": "Barfuss Brauerei, Bürglen (TG)",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloweenthe-brewery/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/turgovia/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -123,7 +123,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -151,7 +151,7 @@
           "url": "/eventi/turgovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "en": {
       "canton": "TG",
@@ -161,7 +161,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "45",
+          "value": "42",
           "note": "from the site’s events calendar"
         }
       ],
@@ -171,30 +171,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Julia Weber",
-              "detail": "Weinfelden",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/julia-weber/"
-            },
-            {
-              "label": "Line Dance",
-              "detail": "Evang.-ref. Kirchgemeindehaus, Weinfelden",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/weinfelden/line-dance_AH6cMXy"
-            },
-            {
-              "label": "Vollmondbar: Namaré",
-              "detail": "Phönix Theater, Steckborn",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/steckborn/vollmondbar-namare_A7NuZKj"
-            },
-            {
-              "label": "Ziegentrekking",
-              "detail": "geissgada, Hohentannen — ongoing, last day: 31 October 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
-            },
             {
               "label": "Philosophie im Löchlgaischt",
               "detail": "Eschenz",
@@ -206,6 +182,12 @@
               "detail": "Röm.-kath. Kirche St. Stefan, Kreuzlingen",
               "date": "2026-10-27",
               "url": "https://www.guidle.com/it/veranstaltungen/klassisch/kreuzlingen/konzert-der-regensburger-domspatzen_AmmCC2n"
+            },
+            {
+              "label": "Ziegentrekking",
+              "detail": "geissgada, Hohentannen — ongoing, last day: 31 October 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
             },
             {
               "label": "Häslitreff",
@@ -230,11 +212,29 @@
               "detail": "8272 Ermatingen, Ermatingen",
               "date": "2026-10-29",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/metzgete-auf-dem-schiff-in-ermatingen-traditionell-maritim/"
+            },
+            {
+              "label": "Fledermäuse unterm Museumsdach",
+              "detail": "Kreuzlingen",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fledermaeuse-unterm-museumsdach/"
+            },
+            {
+              "label": "Sterben gehört zum Leben - Gut umsorgt bis zuletzt",
+              "detail": "Weinfelden",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sterben-gehoert-zum-leben-gut-umsorgt-bis-zuletzt/"
+            },
+            {
+              "label": "Halloween@the Brewery",
+              "detail": "Barfuss Brauerei, Bürglen (TG)",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloweenthe-brewery/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/thurgau/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -257,7 +257,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -285,7 +285,7 @@
           "url": "/en/events/thurgau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "de": {
       "canton": "TG",
@@ -295,7 +295,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "45",
+          "value": "42",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -305,30 +305,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Julia Weber",
-              "detail": "Weinfelden",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/julia-weber/"
-            },
-            {
-              "label": "Line Dance",
-              "detail": "Evang.-ref. Kirchgemeindehaus, Weinfelden",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/weinfelden/line-dance_AH6cMXy"
-            },
-            {
-              "label": "Vollmondbar: Namaré",
-              "detail": "Phönix Theater, Steckborn",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/steckborn/vollmondbar-namare_A7NuZKj"
-            },
-            {
-              "label": "Ziegentrekking",
-              "detail": "geissgada, Hohentannen — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
-            },
             {
               "label": "Philosophie im Löchlgaischt",
               "detail": "Eschenz",
@@ -340,6 +316,12 @@
               "detail": "Röm.-kath. Kirche St. Stefan, Kreuzlingen",
               "date": "2026-10-27",
               "url": "https://www.guidle.com/it/veranstaltungen/klassisch/kreuzlingen/konzert-der-regensburger-domspatzen_AmmCC2n"
+            },
+            {
+              "label": "Ziegentrekking",
+              "detail": "geissgada, Hohentannen — läuft, letzter Tag: 31. Oktober 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
             },
             {
               "label": "Häslitreff",
@@ -364,11 +346,29 @@
               "detail": "8272 Ermatingen, Ermatingen",
               "date": "2026-10-29",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/metzgete-auf-dem-schiff-in-ermatingen-traditionell-maritim/"
+            },
+            {
+              "label": "Fledermäuse unterm Museumsdach",
+              "detail": "Kreuzlingen",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fledermaeuse-unterm-museumsdach/"
+            },
+            {
+              "label": "Sterben gehört zum Leben - Gut umsorgt bis zuletzt",
+              "detail": "Weinfelden",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sterben-gehoert-zum-leben-gut-umsorgt-bis-zuletzt/"
+            },
+            {
+              "label": "Halloween@the Brewery",
+              "detail": "Barfuss Brauerei, Bürglen (TG)",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloweenthe-brewery/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/thurgau/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -391,7 +391,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -419,7 +419,7 @@
           "url": "/de/veranstaltungen/thurgau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "fr": {
       "canton": "TG",
@@ -429,7 +429,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "45",
+          "value": "42",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -439,30 +439,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Julia Weber",
-              "detail": "Weinfelden",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/julia-weber/"
-            },
-            {
-              "label": "Line Dance",
-              "detail": "Evang.-ref. Kirchgemeindehaus, Weinfelden",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/weinfelden/line-dance_AH6cMXy"
-            },
-            {
-              "label": "Vollmondbar: Namaré",
-              "detail": "Phönix Theater, Steckborn",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/steckborn/vollmondbar-namare_A7NuZKj"
-            },
-            {
-              "label": "Ziegentrekking",
-              "detail": "geissgada, Hohentannen — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
-            },
             {
               "label": "Philosophie im Löchlgaischt",
               "detail": "Eschenz",
@@ -474,6 +450,12 @@
               "detail": "Röm.-kath. Kirche St. Stefan, Kreuzlingen",
               "date": "2026-10-27",
               "url": "https://www.guidle.com/it/veranstaltungen/klassisch/kreuzlingen/konzert-der-regensburger-domspatzen_AmmCC2n"
+            },
+            {
+              "label": "Ziegentrekking",
+              "detail": "geissgada, Hohentannen — en cours, dernier jour : 31 octobre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
             },
             {
               "label": "Häslitreff",
@@ -498,11 +480,29 @@
               "detail": "8272 Ermatingen, Ermatingen",
               "date": "2026-10-29",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/metzgete-auf-dem-schiff-in-ermatingen-traditionell-maritim/"
+            },
+            {
+              "label": "Fledermäuse unterm Museumsdach",
+              "detail": "Kreuzlingen",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fledermaeuse-unterm-museumsdach/"
+            },
+            {
+              "label": "Sterben gehört zum Leben - Gut umsorgt bis zuletzt",
+              "detail": "Weinfelden",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sterben-gehoert-zum-leben-gut-umsorgt-bis-zuletzt/"
+            },
+            {
+              "label": "Halloween@the Brewery",
+              "detail": "Barfuss Brauerei, Bürglen (TG)",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloweenthe-brewery/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/thurgovie/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -525,7 +525,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -553,7 +553,7 @@
           "url": "/fr/evenements/thurgovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "eventi",
-  "updatedAt": "2026-10-26T01:02:08.769Z",
-  "contentHash": "66c26d4f06d1f93130ca056c0c4c2dd83cea0854b80604aa4d8e2a01e79404d5",
+  "updatedAt": "2026-10-27T00:15:17.334Z",
+  "contentHash": "6d60d2f931088cbff02d38bcf9afe6866cfd3685b9b281b68c46d97487af64c4",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-25T02:23:31.213Z",
+      "updatedAt": "2026-10-26T18:30:43.613Z",
       "keyFacts": 1
     }
   ],
@@ -33,18 +33,6 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
-              "detail": "Universitätsbibliothek (UB)",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
-            },
-            {
-              "label": "Tanznachmittag mit Joel Waldvogel",
-              "detail": "Alterszentrum Am Bachgraben, Allschwil",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/allschwil/tanznachmittag-mit-joel-waldvogel_A597Ywr"
-            },
-            {
               "label": "Patrick Joray Quartet",
               "detail": "the bird's eye jazz club",
               "date": "2026-10-27",
@@ -75,6 +63,12 @@
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sylphe-pure-piaf/"
             },
             {
+              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
+              "detail": "Universitätsbibliothek (UB) — in corso, ultimo giorno: 5 novembre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
+            },
+            {
               "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX LIKE A PRO",
               "detail": "Basilea, Basel",
               "date": "2026-10-28",
@@ -91,11 +85,17 @@
               "detail": "Riehen",
               "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/jassen-fuer-anfaenger/"
+            },
+            {
+              "label": "A Night's Game",
+              "detail": "Tanzhaus Basel - Silo 2 - Black Box, Basel",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/a-nights-game_AN1xZRt"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/basilea/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/basilea/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -137,18 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
-              "detail": "Universitätsbibliothek (UB)",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
-            },
-            {
-              "label": "Tanznachmittag mit Joel Waldvogel",
-              "detail": "Alterszentrum Am Bachgraben, Allschwil",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/allschwil/tanznachmittag-mit-joel-waldvogel_A597Ywr"
-            },
             {
               "label": "Patrick Joray Quartet",
               "detail": "the bird's eye jazz club",
@@ -180,6 +168,12 @@
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sylphe-pure-piaf/"
             },
             {
+              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
+              "detail": "Universitätsbibliothek (UB) — ongoing, last day: 5 November 2026",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
+            },
+            {
               "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
               "detail": "Basilea, Basel",
               "date": "2026-10-28",
@@ -196,11 +190,17 @@
               "detail": "Riehen",
               "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/jassen-fuer-anfaenger/"
+            },
+            {
+              "label": "A Night's Game",
+              "detail": "Tanzhaus Basel - Silo 2 - Black Box, Basel",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/a-nights-game_AN1xZRt"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/basel/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/basel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -242,18 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
-              "detail": "Universitätsbibliothek (UB)",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
-            },
-            {
-              "label": "Tanznachmittag mit Joel Waldvogel",
-              "detail": "Alterszentrum Am Bachgraben, Allschwil",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/allschwil/tanznachmittag-mit-joel-waldvogel_A597Ywr"
-            },
             {
               "label": "Patrick Joray Quartet",
               "detail": "the bird's eye jazz club",
@@ -285,6 +273,12 @@
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sylphe-pure-piaf/"
             },
             {
+              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
+              "detail": "Universitätsbibliothek (UB) — läuft, letzter Tag: 5. November 2026",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
+            },
+            {
               "label": "B1 Rooftop Bistro – COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
               "detail": "Basilea, Basel",
               "date": "2026-10-28",
@@ -301,11 +295,17 @@
               "detail": "Riehen",
               "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/jassen-fuer-anfaenger/"
+            },
+            {
+              "label": "A Night's Game",
+              "detail": "Tanzhaus Basel - Silo 2 - Black Box, Basel",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/a-nights-game_AN1xZRt"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/basel/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/basel/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -347,18 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
-              "detail": "Universitätsbibliothek (UB)",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
-            },
-            {
-              "label": "Tanznachmittag mit Joel Waldvogel",
-              "detail": "Alterszentrum Am Bachgraben, Allschwil",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/allschwil/tanznachmittag-mit-joel-waldvogel_A597Ywr"
-            },
             {
               "label": "Patrick Joray Quartet",
               "detail": "the bird's eye jazz club",
@@ -390,6 +378,12 @@
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sylphe-pure-piaf/"
             },
             {
+              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
+              "detail": "Universitätsbibliothek (UB) — en cours, dernier jour : 5 novembre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
+            },
+            {
               "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
               "detail": "Basilea, Basel",
               "date": "2026-10-28",
@@ -406,11 +400,17 @@
               "detail": "Riehen",
               "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/jassen-fuer-anfaenger/"
+            },
+            {
+              "label": "A Night's Game",
+              "detail": "Tanzhaus Basel - Silo 2 - Black Box, Basel",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/a-nights-game_AN1xZRt"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/bale/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/bale/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     }
   }
 }

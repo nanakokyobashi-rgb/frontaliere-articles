@@ -4,12 +4,12 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "eventi",
-  "updatedAt": "2026-10-26T17:18:45.341Z",
-  "contentHash": "3854875ad9cd8a86d7e4085b3ae0b6482b10991858f68834fc24e2b5a817bdc1",
+  "updatedAt": "2026-10-27T00:15:17.334Z",
+  "contentHash": "6c87f800f3a3798264807eb5cde28f9e3c80171dc3ca42e110021f13290139eb",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-26T13:47:55.879Z",
+      "updatedAt": "2026-10-26T18:30:43.613Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "59",
+          "value": "56",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,36 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Älplertanz",
-              "detail": "Restaurant Happy Day, Wolfenschiessen, Wolfenschiessen",
-              "date": "2026-10-26",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94120"
-            },
-            {
-              "label": "Frauengemeinschaft - Adventsgesteck basteln",
-              "detail": "Rütimattli, Ennetmoos, Ennetmoos",
-              "date": "2026-10-26",
-              "url": "https://www.nw.ch/anlaesseaktuelles/90580"
-            },
-            {
-              "label": "Frauenspaziergang FMG Ennetbürgen",
-              "detail": "Ennetbürgen, Ennetbürgen, Ennetbürgen",
-              "date": "2026-10-26",
-              "url": "https://www.nw.ch/anlaesseaktuelles/89153"
-            },
-            {
-              "label": "De Otto gwünnt im Lotto",
-              "detail": "Gemeindesaal Stansstad, Stansstad — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
-            },
-            {
-              "label": "Lasertraining Rütlischiessen",
-              "detail": "MZA Steini, Dallenwil, Dallenwil — in corso, ultimo giorno: 27 ottobre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.nw.ch/anlaesseaktuelles/93010"
-            },
             {
               "label": "1. ORS - 3. ORS: Verschiebedatum Herbstwanderung",
               "detail": "Emmetten",
@@ -87,15 +57,45 @@
               "url": "https://www.nw.ch/anlaesseaktuelles/94288"
             },
             {
+              "label": "De Otto gwünnt im Lotto",
+              "detail": "Gemeindesaal Stansstad, Stansstad — in corso, ultimo giorno: 14 novembre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
+            },
+            {
+              "label": "Lasertraining Rütlischiessen",
+              "detail": "MZA Steini, Dallenwil, Dallenwil — in corso, ultimo giorno: 27 ottobre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.nw.ch/anlaesseaktuelles/93010"
+            },
+            {
               "label": "Meditation",
               "detail": "kath. Pfarrkirche, Buochs, Buochs",
               "date": "2026-10-28",
               "url": "https://www.nw.ch/anlaesseaktuelles/92005"
+            },
+            {
+              "label": "begegnen und bewegen",
+              "detail": "Treffpunkt vor Muttergotteskapelle, Stans, Stans",
+              "date": "2026-10-28",
+              "url": "https://www.nw.ch/anlaesseaktuelles/89776"
+            },
+            {
+              "label": "Öffentliche Führung - NO TIME TO LOSE",
+              "detail": "Nidwaldner Museum Salzmagazin, Stans, Stans",
+              "date": "2026-10-28",
+              "url": "https://www.nw.ch/anlaesseaktuelles/90319"
+            },
+            {
+              "label": "KiGa: Waldtag",
+              "detail": "Emmetten",
+              "date": "2026-10-29",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94144"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/nidvaldo/",
-          "updatedAt": "2026-10-26T13:47:55.879Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/nidvaldo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "en": {
       "canton": "NW",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "59",
+          "value": "56",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,36 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Älplertanz",
-              "detail": "Restaurant Happy Day, Wolfenschiessen, Wolfenschiessen",
-              "date": "2026-10-26",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94120"
-            },
-            {
-              "label": "Frauengemeinschaft - Adventsgesteck basteln",
-              "detail": "Rütimattli, Ennetmoos, Ennetmoos",
-              "date": "2026-10-26",
-              "url": "https://www.nw.ch/anlaesseaktuelles/90580"
-            },
-            {
-              "label": "Frauenspaziergang FMG Ennetbürgen",
-              "detail": "Ennetbürgen, Ennetbürgen, Ennetbürgen",
-              "date": "2026-10-26",
-              "url": "https://www.nw.ch/anlaesseaktuelles/89153"
-            },
-            {
-              "label": "De Otto gwünnt im Lotto",
-              "detail": "Gemeindesaal Stansstad, Stansstad — ongoing, last day: 14 November 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
-            },
-            {
-              "label": "Lasertraining Rütlischiessen",
-              "detail": "MZA Steini, Dallenwil, Dallenwil — ongoing, last day: 27 October 2026",
-              "date": "2026-10-26",
-              "url": "https://www.nw.ch/anlaesseaktuelles/93010"
-            },
             {
               "label": "1. ORS - 3. ORS: Verschiebedatum Herbstwanderung",
               "detail": "Emmetten",
@@ -192,15 +162,45 @@
               "url": "https://www.nw.ch/anlaesseaktuelles/94288"
             },
             {
+              "label": "De Otto gwünnt im Lotto",
+              "detail": "Gemeindesaal Stansstad, Stansstad — ongoing, last day: 14 November 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
+            },
+            {
+              "label": "Lasertraining Rütlischiessen",
+              "detail": "MZA Steini, Dallenwil, Dallenwil — ongoing, last day: 27 October 2026",
+              "date": "2026-10-27",
+              "url": "https://www.nw.ch/anlaesseaktuelles/93010"
+            },
+            {
               "label": "Meditation",
               "detail": "kath. Pfarrkirche, Buochs, Buochs",
               "date": "2026-10-28",
               "url": "https://www.nw.ch/anlaesseaktuelles/92005"
+            },
+            {
+              "label": "begegnen und bewegen",
+              "detail": "Treffpunkt vor Muttergotteskapelle, Stans, Stans",
+              "date": "2026-10-28",
+              "url": "https://www.nw.ch/anlaesseaktuelles/89776"
+            },
+            {
+              "label": "Öffentliche Führung - NO TIME TO LOSE",
+              "detail": "Nidwaldner Museum Salzmagazin, Stans, Stans",
+              "date": "2026-10-28",
+              "url": "https://www.nw.ch/anlaesseaktuelles/90319"
+            },
+            {
+              "label": "KiGa: Waldtag",
+              "detail": "Emmetten",
+              "date": "2026-10-29",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94144"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/nidwalden/",
-          "updatedAt": "2026-10-26T13:47:55.879Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/nidwalden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "de": {
       "canton": "NW",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "59",
+          "value": "56",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,36 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Älplertanz",
-              "detail": "Restaurant Happy Day, Wolfenschiessen, Wolfenschiessen",
-              "date": "2026-10-26",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94120"
-            },
-            {
-              "label": "Frauengemeinschaft - Adventsgesteck basteln",
-              "detail": "Rütimattli, Ennetmoos, Ennetmoos",
-              "date": "2026-10-26",
-              "url": "https://www.nw.ch/anlaesseaktuelles/90580"
-            },
-            {
-              "label": "Frauenspaziergang FMG Ennetbürgen",
-              "detail": "Ennetbürgen, Ennetbürgen, Ennetbürgen",
-              "date": "2026-10-26",
-              "url": "https://www.nw.ch/anlaesseaktuelles/89153"
-            },
-            {
-              "label": "De Otto gwünnt im Lotto",
-              "detail": "Gemeindesaal Stansstad, Stansstad — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
-            },
-            {
-              "label": "Lasertraining Rütlischiessen",
-              "detail": "MZA Steini, Dallenwil, Dallenwil — läuft, letzter Tag: 27. Oktober 2026",
-              "date": "2026-10-26",
-              "url": "https://www.nw.ch/anlaesseaktuelles/93010"
-            },
             {
               "label": "1. ORS - 3. ORS: Verschiebedatum Herbstwanderung",
               "detail": "Emmetten",
@@ -297,15 +267,45 @@
               "url": "https://www.nw.ch/anlaesseaktuelles/94288"
             },
             {
+              "label": "De Otto gwünnt im Lotto",
+              "detail": "Gemeindesaal Stansstad, Stansstad — läuft, letzter Tag: 14. November 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
+            },
+            {
+              "label": "Lasertraining Rütlischiessen",
+              "detail": "MZA Steini, Dallenwil, Dallenwil — läuft, letzter Tag: 27. Oktober 2026",
+              "date": "2026-10-27",
+              "url": "https://www.nw.ch/anlaesseaktuelles/93010"
+            },
+            {
               "label": "Meditation",
               "detail": "kath. Pfarrkirche, Buochs, Buochs",
               "date": "2026-10-28",
               "url": "https://www.nw.ch/anlaesseaktuelles/92005"
+            },
+            {
+              "label": "begegnen und bewegen",
+              "detail": "Treffpunkt vor Muttergotteskapelle, Stans, Stans",
+              "date": "2026-10-28",
+              "url": "https://www.nw.ch/anlaesseaktuelles/89776"
+            },
+            {
+              "label": "Öffentliche Führung - NO TIME TO LOSE",
+              "detail": "Nidwaldner Museum Salzmagazin, Stans, Stans",
+              "date": "2026-10-28",
+              "url": "https://www.nw.ch/anlaesseaktuelles/90319"
+            },
+            {
+              "label": "KiGa: Waldtag",
+              "detail": "Emmetten",
+              "date": "2026-10-29",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94144"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/nidwalden/",
-          "updatedAt": "2026-10-26T13:47:55.879Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/nidwalden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "fr": {
       "canton": "NW",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "59",
+          "value": "56",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,36 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Älplertanz",
-              "detail": "Restaurant Happy Day, Wolfenschiessen, Wolfenschiessen",
-              "date": "2026-10-26",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94120"
-            },
-            {
-              "label": "Frauengemeinschaft - Adventsgesteck basteln",
-              "detail": "Rütimattli, Ennetmoos, Ennetmoos",
-              "date": "2026-10-26",
-              "url": "https://www.nw.ch/anlaesseaktuelles/90580"
-            },
-            {
-              "label": "Frauenspaziergang FMG Ennetbürgen",
-              "detail": "Ennetbürgen, Ennetbürgen, Ennetbürgen",
-              "date": "2026-10-26",
-              "url": "https://www.nw.ch/anlaesseaktuelles/89153"
-            },
-            {
-              "label": "De Otto gwünnt im Lotto",
-              "detail": "Gemeindesaal Stansstad, Stansstad — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
-            },
-            {
-              "label": "Lasertraining Rütlischiessen",
-              "detail": "MZA Steini, Dallenwil, Dallenwil — en cours, dernier jour : 27 octobre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.nw.ch/anlaesseaktuelles/93010"
-            },
             {
               "label": "1. ORS - 3. ORS: Verschiebedatum Herbstwanderung",
               "detail": "Emmetten",
@@ -402,15 +372,45 @@
               "url": "https://www.nw.ch/anlaesseaktuelles/94288"
             },
             {
+              "label": "De Otto gwünnt im Lotto",
+              "detail": "Gemeindesaal Stansstad, Stansstad — en cours, dernier jour : 14 novembre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
+            },
+            {
+              "label": "Lasertraining Rütlischiessen",
+              "detail": "MZA Steini, Dallenwil, Dallenwil — en cours, dernier jour : 27 octobre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.nw.ch/anlaesseaktuelles/93010"
+            },
+            {
               "label": "Meditation",
               "detail": "kath. Pfarrkirche, Buochs, Buochs",
               "date": "2026-10-28",
               "url": "https://www.nw.ch/anlaesseaktuelles/92005"
+            },
+            {
+              "label": "begegnen und bewegen",
+              "detail": "Treffpunkt vor Muttergotteskapelle, Stans, Stans",
+              "date": "2026-10-28",
+              "url": "https://www.nw.ch/anlaesseaktuelles/89776"
+            },
+            {
+              "label": "Öffentliche Führung - NO TIME TO LOSE",
+              "detail": "Nidwaldner Museum Salzmagazin, Stans, Stans",
+              "date": "2026-10-28",
+              "url": "https://www.nw.ch/anlaesseaktuelles/90319"
+            },
+            {
+              "label": "KiGa: Waldtag",
+              "detail": "Emmetten",
+              "date": "2026-10-29",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94144"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/nidwald/",
-          "updatedAt": "2026-10-26T13:47:55.879Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/nidwald/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     }
   }
 }

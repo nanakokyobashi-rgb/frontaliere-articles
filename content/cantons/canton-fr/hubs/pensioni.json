@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "pensioni",
-  "updatedAt": "2026-10-26T01:02:08.769Z",
-  "contentHash": "1e1c99a4fd9b29c70455a2b2f0b973a64d1345a36632a06ee7ef4c257177ef02",
+  "updatedAt": "2026-10-27T00:15:17.334Z",
+  "contentHash": "ca8298c0ce1a0228dd43763d58afdcabae4beca920d165b1215187b396b105af",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-25T19:59:33.449Z",
+      "updatedAt": "2026-10-26T17:41:28.137Z",
       "keyFacts": 0
     }
   ],
@@ -149,14 +149,9 @@
               "label": "Foire aux questions du SPS",
               "date": "2026-07-14T10:32:58.000Z",
               "url": "https://www.fr.ch/dsas/sps/foire-aux-questions-du-sps"
-            },
-            {
-              "label": "Publication du rapport de durabilité 2025",
-              "date": "2026-06-29",
-              "url": "https://www.cpef.ch/actualites/publication-du-rapport-de-durabilite-2025"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -192,7 +187,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "en": {
       "canton": "FR",
@@ -314,14 +309,9 @@
               "label": "Foire aux questions du SPS",
               "date": "2026-07-14T10:32:58.000Z",
               "url": "https://www.fr.ch/dsas/sps/foire-aux-questions-du-sps"
-            },
-            {
-              "label": "Publication du rapport de durabilité 2025",
-              "date": "2026-06-29",
-              "url": "https://www.cpef.ch/actualites/publication-du-rapport-de-durabilite-2025"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -357,7 +347,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "de": {
       "canton": "FR",
@@ -479,14 +469,9 @@
               "label": "Foire aux questions du SPS",
               "date": "2026-07-14T10:32:58.000Z",
               "url": "https://www.fr.ch/dsas/sps/foire-aux-questions-du-sps"
-            },
-            {
-              "label": "Publication du rapport de durabilité 2025",
-              "date": "2026-06-29",
-              "url": "https://www.cpef.ch/actualites/publication-du-rapport-de-durabilite-2025"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -522,7 +507,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "fr": {
       "canton": "FR",
@@ -644,14 +629,9 @@
               "label": "Foire aux questions du SPS",
               "date": "2026-07-14T10:32:58.000Z",
               "url": "https://www.fr.ch/dsas/sps/foire-aux-questions-du-sps"
-            },
-            {
-              "label": "Publication du rapport de durabilité 2025",
-              "date": "2026-06-29",
-              "url": "https://www.cpef.ch/actualites/publication-du-rapport-de-durabilite-2025"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -687,7 +667,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "eventi",
-  "updatedAt": "2026-10-26T01:02:08.769Z",
-  "contentHash": "4bbbab07dca66e510273d65fe5f699665c0f1468b092fef5876064bb86c1e5b2",
+  "updatedAt": "2026-10-27T00:15:17.334Z",
+  "contentHash": "31da4d728d4207eaea172725a7f55fda61dc89db351d56ad619805034b034c09",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-25T02:23:31.213Z",
+      "updatedAt": "2026-10-26T18:30:43.613Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "21",
+          "value": "19",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,28 +33,16 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Balboa Schnupperkurs",
-              "detail": "Ennenda, Glarus — in corso, ultimo giorno: 11 novembre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
-            },
-            {
-              "label": "Häkeln für Kinder in der Bibliothek Grosstal Hätzingen",
-              "detail": "Luchsingen-Hätzingen — in corso, ultimo giorno: 26 ottobre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/haekeln-fuer-kinder-in-der-bibliothek-grosstal-haetzingen/"
-            },
-            {
-              "label": "Stricken in der Bibliothek Grosstal Hätzingen",
-              "detail": "Bibliothek Grosstal Hätzingen — in corso, ultimo giorno: 26 ottobre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stricken-in-der-bibliothek-grosstal-haetzingen/"
-            },
-            {
               "label": "Mittendrin - Perimenopause",
               "detail": "Glarus",
               "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/mittendrin-perimenopause/"
+            },
+            {
+              "label": "Balboa Schnupperkurs",
+              "detail": "Ennenda, Glarus — in corso, ultimo giorno: 11 novembre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
             },
             {
               "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
@@ -91,11 +79,23 @@
               "detail": "Ennenda, Glarus",
               "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/rise-up-singen-beten-impuls-kinderparty/"
+            },
+            {
+              "label": "Dance Night Glarnerland",
+              "detail": "Fabriktheater Schwanden",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schwanden-gl/dance-night-glarnerland_AT2H1mr"
+            },
+            {
+              "label": "Soulmarket",
+              "detail": "Glarus",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/soulmarket-2/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/glarona/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/glarona/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "en": {
       "canton": "GL",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "21",
+          "value": "19",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,28 +138,16 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Balboa Schnupperkurs",
-              "detail": "Ennenda, Glarus — ongoing, last day: 11 November 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
-            },
-            {
-              "label": "Häkeln für Kinder in der Bibliothek Grosstal Hätzingen",
-              "detail": "Luchsingen-Hätzingen — ongoing, last day: 26 October 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/haekeln-fuer-kinder-in-der-bibliothek-grosstal-haetzingen/"
-            },
-            {
-              "label": "Stricken in der Bibliothek Grosstal Hätzingen",
-              "detail": "Bibliothek Grosstal Hätzingen — ongoing, last day: 26 October 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stricken-in-der-bibliothek-grosstal-haetzingen/"
-            },
-            {
               "label": "Mittendrin - Perimenopause",
               "detail": "Glarus",
               "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/mittendrin-perimenopause/"
+            },
+            {
+              "label": "Balboa Schnupperkurs",
+              "detail": "Ennenda, Glarus — ongoing, last day: 11 November 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
             },
             {
               "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
@@ -196,11 +184,23 @@
               "detail": "Ennenda, Glarus",
               "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/rise-up-singen-beten-impuls-kinderparty/"
+            },
+            {
+              "label": "Dance Night Glarnerland",
+              "detail": "Fabriktheater Schwanden",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schwanden-gl/dance-night-glarnerland_AT2H1mr"
+            },
+            {
+              "label": "Soulmarket",
+              "detail": "Glarus",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/soulmarket-2/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/glarus/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/glarus/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "de": {
       "canton": "GL",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "21",
+          "value": "19",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,28 +243,16 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Balboa Schnupperkurs",
-              "detail": "Ennenda, Glarus — läuft, letzter Tag: 11. November 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
-            },
-            {
-              "label": "Häkeln für Kinder in der Bibliothek Grosstal Hätzingen",
-              "detail": "Luchsingen-Hätzingen — läuft, letzter Tag: 26. Oktober 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/haekeln-fuer-kinder-in-der-bibliothek-grosstal-haetzingen/"
-            },
-            {
-              "label": "Stricken in der Bibliothek Grosstal Hätzingen",
-              "detail": "Bibliothek Grosstal Hätzingen — läuft, letzter Tag: 26. Oktober 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stricken-in-der-bibliothek-grosstal-haetzingen/"
-            },
-            {
               "label": "Mittendrin - Perimenopause",
               "detail": "Glarus",
               "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/mittendrin-perimenopause/"
+            },
+            {
+              "label": "Balboa Schnupperkurs",
+              "detail": "Ennenda, Glarus — läuft, letzter Tag: 11. November 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
             },
             {
               "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
@@ -301,11 +289,23 @@
               "detail": "Ennenda, Glarus",
               "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/rise-up-singen-beten-impuls-kinderparty/"
+            },
+            {
+              "label": "Dance Night Glarnerland",
+              "detail": "Fabriktheater Schwanden",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schwanden-gl/dance-night-glarnerland_AT2H1mr"
+            },
+            {
+              "label": "Soulmarket",
+              "detail": "Glarus",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/soulmarket-2/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/glarus/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/glarus/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "fr": {
       "canton": "GL",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "21",
+          "value": "19",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,28 +348,16 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Schnupperkurs de Balboa",
-              "detail": "Ennenda, Glarus — en cours, dernier jour : 11 novembre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
-            },
-            {
-              "label": "Häkeln für Kinder in der Bibliothek Grosstal Hätzingen",
-              "detail": "Luchsingen-Hätzingen — en cours, dernier jour : 26 octobre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/haekeln-fuer-kinder-in-der-bibliothek-grosstal-haetzingen/"
-            },
-            {
-              "label": "Stricken in der Bibliothek Grosstal Hätzingen",
-              "detail": "Bibliothek Grosstal Hätzingen — en cours, dernier jour : 26 octobre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stricken-in-der-bibliothek-grosstal-haetzingen/"
-            },
-            {
               "label": "Mittendrin - Perimenopause",
               "detail": "Glarus",
               "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/mittendrin-perimenopause/"
+            },
+            {
+              "label": "Schnupperkurs de Balboa",
+              "detail": "Ennenda, Glarus — en cours, dernier jour : 11 novembre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
             },
             {
               "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
@@ -406,11 +394,23 @@
               "detail": "Ennenda, Glarus",
               "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/rise-up-singen-beten-impuls-kinderparty/"
+            },
+            {
+              "label": "Dance Night Glarnerland",
+              "detail": "Fabriktheater Schwanden",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schwanden-gl/dance-night-glarnerland_AT2H1mr"
+            },
+            {
+              "label": "Soulmarket",
+              "detail": "Glarus",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/soulmarket-2/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/glaris/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/glaris/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     }
   }
 }

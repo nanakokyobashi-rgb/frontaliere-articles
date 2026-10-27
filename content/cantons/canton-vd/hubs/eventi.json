@@ -4,17 +4,17 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "eventi",
-  "updatedAt": "2026-10-26T01:02:08.769Z",
-  "contentHash": "6d5225f41b1dd0208b1c8b8dde0f50a56337d9c2403cd03784526ea79888ec4a",
+  "updatedAt": "2026-10-27T00:15:17.334Z",
+  "contentHash": "291b8cc54b5208d3bab8e4f15b9db4c3a7e7db0e2c47b917b1d4f9d8ae1d87ea",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-25T02:23:31.213Z",
+      "updatedAt": "2026-10-26T18:30:43.613Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-25T19:59:33.449Z",
+      "updatedAt": "2026-10-26T17:41:28.137Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "103",
+          "value": "101",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,54 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Emotions and Immunity",
-              "detail": "Vevey",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/emotions-and-immunity/"
-            },
-            {
-              "label": "St. Martin's Day Sale",
-              "detail": "Bibliothèque médiathèque municipale de Vevey, Vevey",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/st-martins-day-sale/"
-            },
-            {
-              "label": "Fermentation Course for Professional and Amateur Cooks",
-              "detail": "Les Jardins de Chivrageon, Aubonne",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/formation-fermentation-pour-cuisiniers-professionnels-et-passionnes/"
-            },
-            {
-              "label": "Kombucha, Kefir, and Homemade Soda Workshop",
-              "detail": "Aubonne — in corso, ultimo giorno: 9 novembre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kombucha-kefir-and-homemade-soda-workshop/"
-            },
-            {
-              "label": "Reflections",
-              "detail": "Vevey — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
-            },
-            {
-              "label": "Tokyo-Ga",
-              "detail": "Cinémathèque suisse, Lausanne — in corso, ultimo giorno: 30 ottobre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/tokyo-ga/"
-            },
-            {
-              "label": "Before Midnight",
-              "detail": "Cinémathèque suisse, Lausanne — in corso, ultimo giorno: 29 ottobre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/before-midnight/"
-            },
-            {
-              "label": "ABSTRACTS FROM REALITY",
-              "detail": "Galerie du Magasin du Monde, Vevey — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/auszuege-aus-der-wirklichkeit/"
-            },
             {
               "label": "ECAL Bachelor : Programme de films de diplôme",
               "detail": "Lausanne",
@@ -96,11 +48,59 @@
               "detail": "Lausanne",
               "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/ecal-master-programme-de-films-de-diplome/"
+            },
+            {
+              "label": "St. Martin's Day Sale",
+              "detail": "Bibliothèque médiathèque municipale de Vevey, Vevey — in corso, ultimo giorno: 2 novembre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/st-martins-day-sale/"
+            },
+            {
+              "label": "Kombucha, Kefir, and Homemade Soda Workshop",
+              "detail": "Aubonne — in corso, ultimo giorno: 9 novembre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kombucha-kefir-and-homemade-soda-workshop/"
+            },
+            {
+              "label": "Reflections",
+              "detail": "Vevey — in corso, ultimo giorno: 15 novembre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
+            },
+            {
+              "label": "Tokyo-Ga",
+              "detail": "Cinémathèque suisse, Lausanne — in corso, ultimo giorno: 30 ottobre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/tokyo-ga/"
+            },
+            {
+              "label": "Before Midnight",
+              "detail": "Cinémathèque suisse, Lausanne — in corso, ultimo giorno: 29 ottobre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/before-midnight/"
+            },
+            {
+              "label": "ABSTRACTS FROM REALITY",
+              "detail": "Galerie du Magasin du Monde, Vevey — in corso, ultimo giorno: 31 ottobre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/auszuege-aus-der-wirklichkeit/"
+            },
+            {
+              "label": "Nectar Woode + Chelan",
+              "detail": "Jumeaux Jazz Club",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/events/music/lausanne/nectar-woode-chelan_Afwm6Ev"
+            },
+            {
+              "label": "Pixel Academy - Cooperative games",
+              "detail": "Vevey",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pixel-academy-cooperative-games/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vaud/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -118,7 +118,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -140,7 +140,7 @@
           "url": "/eventi/vaud/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "en": {
       "canton": "VD",
@@ -150,7 +150,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "103",
+          "value": "101",
           "note": "from the site’s events calendar"
         }
       ],
@@ -160,54 +160,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Emotions and Immunity",
-              "detail": "Vevey",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/emotions-and-immunity/"
-            },
-            {
-              "label": "St. Martin's Day Sale",
-              "detail": "Bibliothèque médiathèque municipale de Vevey, Vevey",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/st-martins-day-sale/"
-            },
-            {
-              "label": "Fermentation Course for Professional and Amateur Cooks",
-              "detail": "Les Jardins de Chivrageon, Aubonne",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/formation-fermentation-pour-cuisiniers-professionnels-et-passionnes/"
-            },
-            {
-              "label": "Kombucha, Kefir, and Homemade Soda Workshop",
-              "detail": "Aubonne — ongoing, last day: 9 November 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kombucha-kefir-and-homemade-soda-workshop/"
-            },
-            {
-              "label": "Reflections",
-              "detail": "Vevey — ongoing, last day: 15 November 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
-            },
-            {
-              "label": "Tokyo-Ga",
-              "detail": "Cinémathèque suisse, Lausanne — ongoing, last day: 30 October 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/tokyo-ga/"
-            },
-            {
-              "label": "Before Midnight",
-              "detail": "Cinémathèque suisse, Lausanne — ongoing, last day: 29 October 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/before-midnight/"
-            },
-            {
-              "label": "ABSTRACTS FROM REALITY",
-              "detail": "Galerie du Magasin du Monde, Vevey — ongoing, last day: 31 October 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/auszuege-aus-der-wirklichkeit/"
-            },
             {
               "label": "ECAL Bachelor : Programme de films de diplôme",
               "detail": "Lausanne",
@@ -219,11 +171,59 @@
               "detail": "Lausanne",
               "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/ecal-master-programme-de-films-de-diplome/"
+            },
+            {
+              "label": "St. Martin's Day Sale",
+              "detail": "Bibliothèque médiathèque municipale de Vevey, Vevey — ongoing, last day: 2 November 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/st-martins-day-sale/"
+            },
+            {
+              "label": "Kombucha, Kefir, and Homemade Soda Workshop",
+              "detail": "Aubonne — ongoing, last day: 9 November 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kombucha-kefir-and-homemade-soda-workshop/"
+            },
+            {
+              "label": "Reflections",
+              "detail": "Vevey — ongoing, last day: 15 November 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
+            },
+            {
+              "label": "Tokyo-Ga",
+              "detail": "Cinémathèque suisse, Lausanne — ongoing, last day: 30 October 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/tokyo-ga/"
+            },
+            {
+              "label": "Before Midnight",
+              "detail": "Cinémathèque suisse, Lausanne — ongoing, last day: 29 October 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/before-midnight/"
+            },
+            {
+              "label": "ABSTRACTS FROM REALITY",
+              "detail": "Galerie du Magasin du Monde, Vevey — ongoing, last day: 31 October 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/auszuege-aus-der-wirklichkeit/"
+            },
+            {
+              "label": "Nectar Woode + Chelan",
+              "detail": "Jumeaux Jazz Club",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/events/music/lausanne/nectar-woode-chelan_Afwm6Ev"
+            },
+            {
+              "label": "Pixel Academy - Cooperative games",
+              "detail": "Vevey",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pixel-academy-cooperative-games/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/vaud/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -241,7 +241,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -263,7 +263,7 @@
           "url": "/en/events/vaud/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "de": {
       "canton": "VD",
@@ -273,7 +273,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "103",
+          "value": "101",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -283,54 +283,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Emotionen und Immunität",
-              "detail": "Vevey",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/emotions-and-immunity/"
-            },
-            {
-              "label": "Verkauf am Martinstag",
-              "detail": "Bibliothèque médiathèque municipale de Vevey, Vevey",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/st-martins-day-sale/"
-            },
-            {
-              "label": "Formation Fermentation pour cuisiniers professionnels et passionnés",
-              "detail": "Les Jardins de Chivrageon, Aubonne",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/formation-fermentation-pour-cuisiniers-professionnels-et-passionnes/"
-            },
-            {
-              "label": "Workshop zu Kombucha, Kefir und hausgemachten Limonaden",
-              "detail": "Aubonne — läuft, letzter Tag: 9. November 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kombucha-kefir-and-homemade-soda-workshop/"
-            },
-            {
-              "label": "Reflexionen",
-              "detail": "Vevey — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
-            },
-            {
-              "label": "Tokyo-Ga",
-              "detail": "Cinémathèque suisse, Lausanne — läuft, letzter Tag: 30. Oktober 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/tokyo-ga/"
-            },
-            {
-              "label": "Before Midnight",
-              "detail": "Cinémathèque suisse, Lausanne — läuft, letzter Tag: 29. Oktober 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/before-midnight/"
-            },
-            {
-              "label": "AUSZÜGE AUS DER WIRKLICHKEIT",
-              "detail": "Galerie du Magasin du Monde, Vevey — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/auszuege-aus-der-wirklichkeit/"
-            },
             {
               "label": "ECAL Bachelor : Programme de films de diplôme",
               "detail": "Lausanne",
@@ -342,11 +294,59 @@
               "detail": "Lausanne",
               "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/ecal-master-programme-de-films-de-diplome/"
+            },
+            {
+              "label": "Verkauf am Martinstag",
+              "detail": "Bibliothèque médiathèque municipale de Vevey, Vevey — läuft, letzter Tag: 2. November 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/st-martins-day-sale/"
+            },
+            {
+              "label": "Workshop zu Kombucha, Kefir und hausgemachten Limonaden",
+              "detail": "Aubonne — läuft, letzter Tag: 9. November 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kombucha-kefir-and-homemade-soda-workshop/"
+            },
+            {
+              "label": "Reflexionen",
+              "detail": "Vevey — läuft, letzter Tag: 15. November 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
+            },
+            {
+              "label": "Tokyo-Ga",
+              "detail": "Cinémathèque suisse, Lausanne — läuft, letzter Tag: 30. Oktober 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/tokyo-ga/"
+            },
+            {
+              "label": "Before Midnight",
+              "detail": "Cinémathèque suisse, Lausanne — läuft, letzter Tag: 29. Oktober 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/before-midnight/"
+            },
+            {
+              "label": "AUSZÜGE AUS DER WIRKLICHKEIT",
+              "detail": "Galerie du Magasin du Monde, Vevey — läuft, letzter Tag: 31. Oktober 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/auszuege-aus-der-wirklichkeit/"
+            },
+            {
+              "label": "Nectar Woode + Chelan",
+              "detail": "Jumeaux Jazz Club",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/events/music/lausanne/nectar-woode-chelan_Afwm6Ev"
+            },
+            {
+              "label": "Pixel Academy - Kooperative Spiele",
+              "detail": "Vevey",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pixel-academy-cooperative-games/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/waadt/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -364,7 +364,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -386,7 +386,7 @@
           "url": "/de/veranstaltungen/waadt/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "fr": {
       "canton": "VD",
@@ -396,7 +396,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "103",
+          "value": "101",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -406,54 +406,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Émotions et immunité",
-              "detail": "Vevey",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/emotions-and-immunity/"
-            },
-            {
-              "label": "Vente de la St-Martin",
-              "detail": "Bibliothèque médiathèque municipale de Vevey, Vevey",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/st-martins-day-sale/"
-            },
-            {
-              "label": "Formation Fermentation pour cuisiniers professionnels et passionnés",
-              "detail": "Les Jardins de Chivrageon, Aubonne",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/formation-fermentation-pour-cuisiniers-professionnels-et-passionnes/"
-            },
-            {
-              "label": "Atelier Kombucha, kéfir et sodas sauvages",
-              "detail": "Aubonne — en cours, dernier jour : 9 novembre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kombucha-kefir-and-homemade-soda-workshop/"
-            },
-            {
-              "label": "Reflets",
-              "detail": "Vevey — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
-            },
-            {
-              "label": "Tokyo-Ga",
-              "detail": "Cinémathèque suisse, Lausanne — en cours, dernier jour : 30 octobre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/tokyo-ga/"
-            },
-            {
-              "label": "Before Midnight",
-              "detail": "Cinémathèque suisse, Lausanne — en cours, dernier jour : 29 octobre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/before-midnight/"
-            },
-            {
-              "label": "Abstraits du Réel",
-              "detail": "Galerie du Magasin du Monde, Vevey — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/auszuege-aus-der-wirklichkeit/"
-            },
             {
               "label": "ECAL Bachelor : Programme de films de diplôme",
               "detail": "Lausanne",
@@ -465,11 +417,59 @@
               "detail": "Lausanne",
               "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/ecal-master-programme-de-films-de-diplome/"
+            },
+            {
+              "label": "Vente de la St-Martin",
+              "detail": "Bibliothèque médiathèque municipale de Vevey, Vevey — en cours, dernier jour : 2 novembre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/st-martins-day-sale/"
+            },
+            {
+              "label": "Atelier Kombucha, kéfir et sodas sauvages",
+              "detail": "Aubonne — en cours, dernier jour : 9 novembre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kombucha-kefir-and-homemade-soda-workshop/"
+            },
+            {
+              "label": "Reflets",
+              "detail": "Vevey — en cours, dernier jour : 15 novembre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
+            },
+            {
+              "label": "Tokyo-Ga",
+              "detail": "Cinémathèque suisse, Lausanne — en cours, dernier jour : 30 octobre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/tokyo-ga/"
+            },
+            {
+              "label": "Before Midnight",
+              "detail": "Cinémathèque suisse, Lausanne — en cours, dernier jour : 29 octobre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/before-midnight/"
+            },
+            {
+              "label": "Abstraits du Réel",
+              "detail": "Galerie du Magasin du Monde, Vevey — en cours, dernier jour : 31 octobre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/auszuege-aus-der-wirklichkeit/"
+            },
+            {
+              "label": "Nectar Woode + Chelan",
+              "detail": "Jumeaux Jazz Club",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/events/music/lausanne/nectar-woode-chelan_Afwm6Ev"
+            },
+            {
+              "label": "Pixel Academy - Jeux coopératifs",
+              "detail": "Vevey",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pixel-academy-cooperative-games/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/vaud/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -487,7 +487,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -509,7 +509,7 @@
           "url": "/fr/evenements/vaud/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     }
   }
 }

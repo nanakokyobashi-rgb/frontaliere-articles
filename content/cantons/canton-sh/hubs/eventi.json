@@ -4,17 +4,17 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "eventi",
-  "updatedAt": "2026-10-26T01:02:08.769Z",
-  "contentHash": "cb08c09c4aca75b4d51f96644eab9d441406293f50d19a39a8958f6f9bc34f0c",
+  "updatedAt": "2026-10-27T00:15:17.334Z",
+  "contentHash": "7aa290d16b0909be4d77efd5ddeda968fe665247b949818e20c50903f98feb31",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-25T02:23:31.213Z",
+      "updatedAt": "2026-10-26T18:30:43.613Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-25T19:59:33.449Z",
+      "updatedAt": "2026-10-26T17:41:28.137Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "27",
+          "value": "26",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,12 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Riscoprire Sciaffusa - Un viaggio archeologico e storico nel tempo",
-              "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen — in corso, ultimo giorno: 26 ottobre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/rediscover-schaffhausen-an-archaeological-and-historical-journey-through-time/"
-            },
             {
               "label": "Vortragsabend: Garten der Zukunft",
               "detail": "Pavillon im Park",
@@ -96,11 +90,17 @@
               "detail": "Stadttheater Schaffhausen, Schaffhausen",
               "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/viel-laerm-um-nichts/"
+            },
+            {
+              "label": "DUO ESPI – Saxophon und Piano – ein magisches Gebräu",
+              "detail": "Kunstschür, Stein am Rhein",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/evenements/musique/stein-am-rhein/duo-espi-saxophone-et-piano-un-melange-magique_A8eP3fU"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/sciaffusa/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -133,7 +133,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -155,7 +155,7 @@
           "url": "/eventi/sciaffusa/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "en": {
       "canton": "SH",
@@ -165,7 +165,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "27",
+          "value": "26",
           "note": "from the site’s events calendar"
         }
       ],
@@ -175,12 +175,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Rediscover Schaffhausen - An archaeological-historical journey through time",
-              "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen — ongoing, last day: 26 October 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/rediscover-schaffhausen-an-archaeological-and-historical-journey-through-time/"
-            },
             {
               "label": "Vortragsabend: Garten der Zukunft",
               "detail": "Pavillon im Park",
@@ -234,11 +228,17 @@
               "detail": "Stadttheater Schaffhausen, Schaffhausen",
               "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/viel-laerm-um-nichts/"
+            },
+            {
+              "label": "DUO ESPI – Saxophone and Piano – a magical blend",
+              "detail": "Kunstschür, Stein am Rhein",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/evenements/musique/stein-am-rhein/duo-espi-saxophone-et-piano-un-melange-magique_A8eP3fU"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schaffhausen/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -271,7 +271,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -293,7 +293,7 @@
           "url": "/en/events/schaffhausen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "de": {
       "canton": "SH",
@@ -303,7 +303,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "27",
+          "value": "26",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -313,12 +313,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Schaffhausen neu entdecken ̶ Eine archäologisch-historische Zeitreise",
-              "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen — läuft, letzter Tag: 26. Oktober 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/rediscover-schaffhausen-an-archaeological-and-historical-journey-through-time/"
-            },
             {
               "label": "Vortragsabend: Garten der Zukunft",
               "detail": "Pavillon im Park",
@@ -372,11 +366,17 @@
               "detail": "Stadttheater Schaffhausen, Schaffhausen",
               "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/viel-laerm-um-nichts/"
+            },
+            {
+              "label": "DUO ESPI – Saxophon und Piano – ein magisches Gebräu",
+              "detail": "Kunstschür, Stein am Rhein",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/evenements/musique/stein-am-rhein/duo-espi-saxophone-et-piano-un-melange-magique_A8eP3fU"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schaffhausen/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -409,7 +409,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -431,7 +431,7 @@
           "url": "/de/veranstaltungen/schaffhausen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "fr": {
       "canton": "SH",
@@ -441,7 +441,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "27",
+          "value": "26",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -451,12 +451,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Redécouvrir Schaffhouse ̶ Un voyage dans le temps archéologique et historique",
-              "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen — en cours, dernier jour : 26 octobre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/rediscover-schaffhausen-an-archaeological-and-historical-journey-through-time/"
-            },
             {
               "label": "Vortragsabend: Garten der Zukunft",
               "detail": "Pavillon im Park",
@@ -510,11 +504,17 @@
               "detail": "Stadttheater Schaffhausen, Schaffhausen",
               "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/viel-laerm-um-nichts/"
+            },
+            {
+              "label": "DUO ESPI – saxophone et piano – un mélange magique",
+              "detail": "Kunstschür, Stein am Rhein",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/evenements/musique/stein-am-rhein/duo-espi-saxophone-et-piano-un-melange-magique_A8eP3fU"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schaffhouse/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -547,7 +547,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -569,7 +569,7 @@
           "url": "/fr/evenements/schaffhouse/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     }
   }
 }

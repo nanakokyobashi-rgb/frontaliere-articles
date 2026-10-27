@@ -4,12 +4,12 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "eventi",
-  "updatedAt": "2026-10-26T01:02:08.769Z",
-  "contentHash": "65b8e0b5c3955558bd9a3f1b91746d374c4fd6c92b02735859185cabf2b9bd0c",
+  "updatedAt": "2026-10-27T00:15:17.334Z",
+  "contentHash": "dc0a569b9a6d63d62dced31e1bad3915bbf7b6a6198205c5738ad702c26a72ea",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-25T02:23:31.213Z",
+      "updatedAt": "2026-10-26T18:30:43.613Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "214",
+          "value": "208",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "4th Mixed Doubles Curling Tournament",
-              "detail": "Sportzentrum Curlinghalle, Saanen",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/4-mixed-doubles-curlingturnier/"
+              "label": "Vernissage der Ausstellung «Flüsse des Lebens»",
+              "detail": "Bern",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vernissage-der-ausstellung-fluesse-des-lebens/"
             },
             {
-              "label": "Bachibouzouk",
-              "detail": "BIOTOP",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bachibouzouk-1/"
+              "label": "Kunstkurs Blaue Stunde",
+              "detail": "Creaviva im Zentrum Paul Klee, Bern",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kunstkurs-blaue-stunde-2/"
             },
             {
-              "label": "«Fly my soul» - 1050 Jahre Faszination Chorgesang Konzert mit den Regensburger Domspatzen",
-              "detail": "Dreifaltigkeitskirche Bern, Bern",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/fly-my-soul-1050-jahre-faszination-chorgesang-konzert-mit-den-regensburger-domspatzen_A9E2Rmk"
+              "label": "SOPHIE ALLOWAY QUARTET",
+              "detail": "Marians Jazzroom",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/sophie-alloway-quartet_AZdbi75"
             },
             {
-              "label": "Die Frauen der Helden",
-              "detail": "Alpines Museum der Schweiz, Bern",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/die-frauen-der-helden/"
+              "label": "Caroline Bungeroth & Gäste",
+              "detail": "Kleintheater Alte Oele, Thun",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/thun/caroline-bungeroth-und-gaeste_ALBsRFY"
             },
             {
-              "label": "Mondayblues",
-              "detail": "Mahogany Hall Bern, Bern",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/mondayblues_A5ynMH8"
+              "label": "Prinz Pi Abschiedstour 2026",
+              "detail": "Bierhübeli",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/populaer/bern/prinz-pi-abschiedstour-2026_Au8wrhe"
             },
             {
-              "label": "Lundi Lesungen Oktober",
-              "detail": "Biel, Biel/Bienne",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lundi-lesungen-oktober/"
-            },
-            {
-              "label": "Il Civetto - ALBUM TOUR 2026",
+              "label": "Tito & Tarantula - Best of Tour 2026",
               "detail": "Mühle Hunziken, Rubigen",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/il-civetto-album-tour-2026_Ax97Fef"
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/tito-und-tarantula-best-of-tour-2026_AR4ACjK"
+            },
+            {
+              "label": "4th Mixed Doubles Curling Tournament",
+              "detail": "Sportzentrum Curlinghalle, Saanen — in corso, ultimo giorno: 29 ottobre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/4-mixed-doubles-curlingturnier/"
             },
             {
               "label": "Giornate svizzere del corno naturale",
               "detail": "Beatenberg — in corso, ultimo giorno: 29 ottobre 2026",
-              "date": "2026-10-26",
+              "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/giornate-svizzere-del-corno-naturale/"
             },
             {
               "label": "Selbstplanerkurs PV-Anlage e-wende",
               "detail": "Bern — in corso, ultimo giorno: 5 novembre 2026",
-              "date": "2026-10-26",
+              "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/selbstplanerkurs-pv-anlage-e-wende-2/"
             },
             {
               "label": "Ein Berner namens Matter. Kennet Dir das Gschichtli scho?",
               "detail": "Bern, Münsterplatz, Mosesbrunnen, Bern — in corso, ultimo giorno: 21 novembre 2026",
-              "date": "2026-10-26",
+              "date": "2026-10-27",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/ein-berner-namens-matter-kennet-dir-das-gschichtli-scho_A4fYS1Z"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/berna/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +135,7 @@
           "url": "/eventi/berna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "en": {
       "canton": "BE",
@@ -145,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "214",
+          "value": "208",
           "note": "from the site’s events calendar"
         }
       ],
@@ -156,69 +156,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "4th Mixed Doubles Curling Tournament",
-              "detail": "Sportzentrum Curlinghalle, Saanen",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/4-mixed-doubles-curlingturnier/"
+              "label": "Vernissage der Ausstellung «Flüsse des Lebens»",
+              "detail": "Bern",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vernissage-der-ausstellung-fluesse-des-lebens/"
             },
             {
-              "label": "Bachibouzouk",
-              "detail": "BIOTOP",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bachibouzouk-1/"
+              "label": "Kunstkurs Blaue Stunde",
+              "detail": "Creaviva im Zentrum Paul Klee, Bern",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kunstkurs-blaue-stunde-2/"
             },
             {
-              "label": "«Fly my soul» - 1050 Jahre Faszination Chorgesang Konzert mit den Regensburger Domspatzen",
-              "detail": "Dreifaltigkeitskirche Bern, Bern",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/fly-my-soul-1050-jahre-faszination-chorgesang-konzert-mit-den-regensburger-domspatzen_A9E2Rmk"
+              "label": "SOPHIE ALLOWAY QUARTET",
+              "detail": "Marians Jazzroom",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/sophie-alloway-quartet_AZdbi75"
             },
             {
-              "label": "Die Frauen der Helden",
-              "detail": "Alpines Museum der Schweiz, Bern",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/die-frauen-der-helden/"
+              "label": "Caroline Bungeroth & Gäste",
+              "detail": "Kleintheater Alte Oele, Thun",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/thun/caroline-bungeroth-und-gaeste_ALBsRFY"
             },
             {
-              "label": "Mondayblues",
-              "detail": "Mahogany Hall Bern, Bern",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/mondayblues_A5ynMH8"
+              "label": "Prinz Pi Abschiedstour 2026",
+              "detail": "Bierhübeli",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/populaer/bern/prinz-pi-abschiedstour-2026_Au8wrhe"
             },
             {
-              "label": "Lundi Lesungen Oktober",
-              "detail": "Biel, Biel/Bienne",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lundi-lesungen-oktober/"
-            },
-            {
-              "label": "Il Civetto - ALBUM TOUR 2026",
+              "label": "Tito & Tarantula - Best of Tour 2026",
               "detail": "Mühle Hunziken, Rubigen",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/il-civetto-album-tour-2026_Ax97Fef"
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/tito-und-tarantula-best-of-tour-2026_AR4ACjK"
+            },
+            {
+              "label": "4th Mixed Doubles Curling Tournament",
+              "detail": "Sportzentrum Curlinghalle, Saanen — ongoing, last day: 29 October 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/4-mixed-doubles-curlingturnier/"
             },
             {
               "label": "Swiss Natural Horn Days",
               "detail": "Beatenberg — ongoing, last day: 29 October 2026",
-              "date": "2026-10-26",
+              "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/giornate-svizzere-del-corno-naturale/"
             },
             {
               "label": "Selbstplanerkurs PV-Anlage e-wende",
               "detail": "Bern — ongoing, last day: 5 November 2026",
-              "date": "2026-10-26",
+              "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/selbstplanerkurs-pv-anlage-e-wende-2/"
             },
             {
               "label": "Ein Berner namens Matter. Kennet Dir das Gschichtli scho?",
               "detail": "Bern, Münsterplatz, Mosesbrunnen, Bern — ongoing, last day: 21 November 2026",
-              "date": "2026-10-26",
+              "date": "2026-10-27",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/ein-berner-namens-matter-kennet-dir-das-gschichtli-scho_A4fYS1Z"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/bern/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         }
       ],
       "curatedArticles": [
@@ -258,7 +258,7 @@
           "url": "/en/events/bern/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "de": {
       "canton": "BE",
@@ -268,7 +268,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "214",
+          "value": "208",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -279,69 +279,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "4. Mixed Doubles Curlingturnier",
-              "detail": "Sportzentrum Curlinghalle, Saanen",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/4-mixed-doubles-curlingturnier/"
+              "label": "Vernissage der Ausstellung «Flüsse des Lebens»",
+              "detail": "Bern",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vernissage-der-ausstellung-fluesse-des-lebens/"
             },
             {
-              "label": "Bachibouzouk",
-              "detail": "BIOTOP",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bachibouzouk-1/"
+              "label": "Kunstkurs Blaue Stunde",
+              "detail": "Creaviva im Zentrum Paul Klee, Bern",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kunstkurs-blaue-stunde-2/"
             },
             {
-              "label": "«Fly my soul» - 1050 Jahre Faszination Chorgesang Konzert mit den Regensburger Domspatzen",
-              "detail": "Dreifaltigkeitskirche Bern, Bern",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/fly-my-soul-1050-jahre-faszination-chorgesang-konzert-mit-den-regensburger-domspatzen_A9E2Rmk"
+              "label": "SOPHIE ALLOWAY QUARTET",
+              "detail": "Marians Jazzroom",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/sophie-alloway-quartet_AZdbi75"
             },
             {
-              "label": "Die Frauen der Helden",
-              "detail": "Alpines Museum der Schweiz, Bern",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/die-frauen-der-helden/"
+              "label": "Caroline Bungeroth & Gäste",
+              "detail": "Kleintheater Alte Oele, Thun",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/thun/caroline-bungeroth-und-gaeste_ALBsRFY"
             },
             {
-              "label": "Mondayblues",
-              "detail": "Mahogany Hall Bern, Bern",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/mondayblues_A5ynMH8"
+              "label": "Prinz Pi Abschiedstour 2026",
+              "detail": "Bierhübeli",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/populaer/bern/prinz-pi-abschiedstour-2026_Au8wrhe"
             },
             {
-              "label": "Lundi Lesungen Oktober",
-              "detail": "Biel, Biel/Bienne",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lundi-lesungen-oktober/"
-            },
-            {
-              "label": "Il Civetto - ALBUM TOUR 2026",
+              "label": "Tito & Tarantula - Best of Tour 2026",
               "detail": "Mühle Hunziken, Rubigen",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/il-civetto-album-tour-2026_Ax97Fef"
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/tito-und-tarantula-best-of-tour-2026_AR4ACjK"
+            },
+            {
+              "label": "4. Mixed Doubles Curlingturnier",
+              "detail": "Sportzentrum Curlinghalle, Saanen — läuft, letzter Tag: 29. Oktober 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/4-mixed-doubles-curlingturnier/"
             },
             {
               "label": "Schweizer Naturhorntage",
               "detail": "Beatenberg — läuft, letzter Tag: 29. Oktober 2026",
-              "date": "2026-10-26",
+              "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/giornate-svizzere-del-corno-naturale/"
             },
             {
               "label": "Selbstplanerkurs PV-Anlage e-wende",
               "detail": "Bern — läuft, letzter Tag: 5. November 2026",
-              "date": "2026-10-26",
+              "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/selbstplanerkurs-pv-anlage-e-wende-2/"
             },
             {
               "label": "Ein Berner namens Matter. Kennet Dir das Gschichtli scho?",
               "detail": "Bern, Münsterplatz, Mosesbrunnen, Bern — läuft, letzter Tag: 21. November 2026",
-              "date": "2026-10-26",
+              "date": "2026-10-27",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/ein-berner-namens-matter-kennet-dir-das-gschichtli-scho_A4fYS1Z"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/bern/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         }
       ],
       "curatedArticles": [
@@ -381,7 +381,7 @@
           "url": "/de/veranstaltungen/bern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "fr": {
       "canton": "BE",
@@ -391,7 +391,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "214",
+          "value": "208",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -402,69 +402,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "4e Tournoi de curling en double mixte",
-              "detail": "Sportzentrum Curlinghalle, Saanen",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/4-mixed-doubles-curlingturnier/"
+              "label": "Vernissage der Ausstellung «Flüsse des Lebens»",
+              "detail": "Bern",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vernissage-der-ausstellung-fluesse-des-lebens/"
             },
             {
-              "label": "Bachibouzouk",
-              "detail": "BIOTOP",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bachibouzouk-1/"
+              "label": "Kunstkurs Blaue Stunde",
+              "detail": "Creaviva im Zentrum Paul Klee, Bern",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kunstkurs-blaue-stunde-2/"
             },
             {
-              "label": "«Fly my soul» - 1050 Jahre Faszination Chorgesang Konzert mit den Regensburger Domspatzen",
-              "detail": "Dreifaltigkeitskirche Bern, Bern",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/fly-my-soul-1050-jahre-faszination-chorgesang-konzert-mit-den-regensburger-domspatzen_A9E2Rmk"
+              "label": "SOPHIE ALLOWAY QUARTET",
+              "detail": "Marians Jazzroom",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/sophie-alloway-quartet_AZdbi75"
             },
             {
-              "label": "Die Frauen der Helden",
-              "detail": "Alpines Museum der Schweiz, Bern",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/die-frauen-der-helden/"
+              "label": "Caroline Bungeroth & Gäste",
+              "detail": "Kleintheater Alte Oele, Thun",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/thun/caroline-bungeroth-und-gaeste_ALBsRFY"
             },
             {
-              "label": "Mondayblues",
-              "detail": "Mahogany Hall Bern, Bern",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/mondayblues_A5ynMH8"
+              "label": "Prinz Pi Abschiedstour 2026",
+              "detail": "Bierhübeli",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/populaer/bern/prinz-pi-abschiedstour-2026_Au8wrhe"
             },
             {
-              "label": "Lundi Lectures Octobre",
-              "detail": "Biel, Biel/Bienne",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lundi-lesungen-oktober/"
-            },
-            {
-              "label": "Il Civetto - ALBUM TOUR 2026",
+              "label": "Tito & Tarantula - Best of Tour 2026",
               "detail": "Mühle Hunziken, Rubigen",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/il-civetto-album-tour-2026_Ax97Fef"
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/tito-und-tarantula-best-of-tour-2026_AR4ACjK"
+            },
+            {
+              "label": "4e Tournoi de curling en double mixte",
+              "detail": "Sportzentrum Curlinghalle, Saanen — en cours, dernier jour : 29 octobre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/4-mixed-doubles-curlingturnier/"
             },
             {
               "label": "Journées suisses du cor naturel",
               "detail": "Beatenberg — en cours, dernier jour : 29 octobre 2026",
-              "date": "2026-10-26",
+              "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/giornate-svizzere-del-corno-naturale/"
             },
             {
               "label": "Selbstplanerkurs PV-Anlage e-wende",
               "detail": "Bern — en cours, dernier jour : 5 novembre 2026",
-              "date": "2026-10-26",
+              "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/selbstplanerkurs-pv-anlage-e-wende-2/"
             },
             {
               "label": "Ein Berner namens Matter. Kennet Dir das Gschichtli scho?",
               "detail": "Bern, Münsterplatz, Mosesbrunnen, Bern — en cours, dernier jour : 21 novembre 2026",
-              "date": "2026-10-26",
+              "date": "2026-10-27",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/ein-berner-namens-matter-kennet-dir-das-gschichtli-scho_A4fYS1Z"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/berne/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         }
       ],
       "curatedArticles": [
@@ -504,7 +504,7 @@
           "url": "/fr/evenements/berne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     }
   }
 }

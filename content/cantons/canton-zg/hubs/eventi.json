@@ -4,12 +4,12 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "eventi",
-  "updatedAt": "2026-10-26T01:02:08.769Z",
-  "contentHash": "bc51871d25e40160b54771d1e8348b63a4eadd0435c96b1e26f6d5a7a3e6b48f",
+  "updatedAt": "2026-10-27T00:15:17.334Z",
+  "contentHash": "342578a0f3d489a1da30c540c6126545f57806755c861290a0e5c68bc611174a",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-25T02:23:31.213Z",
+      "updatedAt": "2026-10-26T18:30:43.613Z",
       "keyFacts": 1
     }
   ],
@@ -33,46 +33,28 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Sauna della luna piena Oberwil",
-              "detail": "Zugo, Zug",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sauna-della-luna-piena-oberwil/"
-            },
-            {
-              "label": "Atem-Workshop für inneren Frieden",
+              "label": "Cybermobbing",
               "detail": "Bibliothek Zug, Zug",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/atem-workshop-fuer-inneren-frieden_AUSR9Yp"
-            },
-            {
-              "label": "Öffentliche Vortragsveranstaltung von diabeteszug",
-              "detail": "Baar",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-vortragsveranstaltung-von-diabeteszug/"
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/cybermobbing_AystL5n"
             },
             {
               "label": "Zuger Messe 2026",
               "detail": "Stierenmarktareal, Zug — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-10-26",
+              "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/fr-ch/experiences/events/zuger-messe-2026/"
             },
             {
               "label": "Gemeinsam sprechen und lernen",
               "detail": "Zug — in corso, ultimo giorno: 10 novembre 2026",
-              "date": "2026-10-26",
+              "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
             },
             {
               "label": "Metzgete Hütten Zug",
               "detail": "aigu Restaurant & Bar, Zug — in corso, ultimo giorno: 29 ottobre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/metzgete-huetten-zug/"
-            },
-            {
-              "label": "Cybermobbing",
-              "detail": "Bibliothek Zug, Zug",
               "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/cybermobbing_AystL5n"
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/metzgete-huetten-zug/"
             },
             {
               "label": "16. Selo-Fachtagung: Neue Blickwinkel auf psychische Erkrankungen und Burnout",
@@ -91,11 +73,29 @@
               "detail": "Bibliothek Zug, Zug",
               "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spielabend-fuer-erwachsene-2/"
+            },
+            {
+              "label": "Multi-Kulti-Foodtour",
+              "detail": "Bahnhof SBB, Zug",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/multi-kulti-foodtour/"
+            },
+            {
+              "label": "Galgen, Rad und Scheiterhaufen. Die Taschenlampenführung für Erwachsene",
+              "detail": "Museum Burg Zug, Zug",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
+            },
+            {
+              "label": "Zuger Märchenspaziergang: Halloween - die wahre(n) Geschichte(n)",
+              "detail": "Zug",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zuger-maerchenspaziergang-halloween-die-wahren-geschichten/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zugo/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/zugo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "en": {
       "canton": "ZG",
@@ -138,46 +138,28 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Full moon sauna Oberwil",
-              "detail": "Zugo, Zug",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sauna-della-luna-piena-oberwil/"
-            },
-            {
-              "label": "Atem-Workshop für inneren Frieden",
+              "label": "Cybermobbing",
               "detail": "Bibliothek Zug, Zug",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/atem-workshop-fuer-inneren-frieden_AUSR9Yp"
-            },
-            {
-              "label": "Öffentliche Vortragsveranstaltung von diabeteszug",
-              "detail": "Baar",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-vortragsveranstaltung-von-diabeteszug/"
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/cybermobbing_AystL5n"
             },
             {
               "label": "Zuger Messe 2026",
               "detail": "Stierenmarktareal, Zug — ongoing, last day: 1 November 2026",
-              "date": "2026-10-26",
+              "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/fr-ch/experiences/events/zuger-messe-2026/"
             },
             {
               "label": "Gemeinsam sprechen und lernen",
               "detail": "Zug — ongoing, last day: 10 November 2026",
-              "date": "2026-10-26",
+              "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
             },
             {
               "label": "Metzgete Hütten Zug",
               "detail": "aigu Restaurant & Bar, Zug — ongoing, last day: 29 October 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/metzgete-huetten-zug/"
-            },
-            {
-              "label": "Cybermobbing",
-              "detail": "Bibliothek Zug, Zug",
               "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/cybermobbing_AystL5n"
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/metzgete-huetten-zug/"
             },
             {
               "label": "16. Selo-Fachtagung: Neue Blickwinkel auf psychische Erkrankungen und Burnout",
@@ -196,11 +178,29 @@
               "detail": "Bibliothek Zug, Zug",
               "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spielabend-fuer-erwachsene-2/"
+            },
+            {
+              "label": "Multi-Kulti-Foodtour",
+              "detail": "Bahnhof SBB, Zug",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/multi-kulti-foodtour/"
+            },
+            {
+              "label": "Gallows, Wheel, and Pyre: A Flashlight Tour for Adults",
+              "detail": "Museum Burg Zug, Zug",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
+            },
+            {
+              "label": "Zuger Märchenspaziergang: Halloween - die wahre(n) Geschichte(n)",
+              "detail": "Zug",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zuger-maerchenspaziergang-halloween-die-wahren-geschichten/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zug/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/zug/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "de": {
       "canton": "ZG",
@@ -243,46 +243,28 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Vollmond-Sauna Oberwil",
-              "detail": "Zugo, Zug",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sauna-della-luna-piena-oberwil/"
-            },
-            {
-              "label": "Atem-Workshop für inneren Frieden",
+              "label": "Cybermobbing",
               "detail": "Bibliothek Zug, Zug",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/atem-workshop-fuer-inneren-frieden_AUSR9Yp"
-            },
-            {
-              "label": "Öffentliche Vortragsveranstaltung von diabeteszug",
-              "detail": "Baar",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-vortragsveranstaltung-von-diabeteszug/"
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/cybermobbing_AystL5n"
             },
             {
               "label": "Zuger Messe 2026",
               "detail": "Stierenmarktareal, Zug — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-10-26",
+              "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/fr-ch/experiences/events/zuger-messe-2026/"
             },
             {
               "label": "Gemeinsam sprechen und lernen",
               "detail": "Zug — läuft, letzter Tag: 10. November 2026",
-              "date": "2026-10-26",
+              "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
             },
             {
               "label": "Metzgete Hütten Zug",
               "detail": "aigu Restaurant & Bar, Zug — läuft, letzter Tag: 29. Oktober 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/metzgete-huetten-zug/"
-            },
-            {
-              "label": "Cybermobbing",
-              "detail": "Bibliothek Zug, Zug",
               "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/cybermobbing_AystL5n"
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/metzgete-huetten-zug/"
             },
             {
               "label": "16. Selo-Fachtagung: Neue Blickwinkel auf psychische Erkrankungen und Burnout",
@@ -301,11 +283,29 @@
               "detail": "Bibliothek Zug, Zug",
               "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spielabend-fuer-erwachsene-2/"
+            },
+            {
+              "label": "Multi-Kulti-Foodtour",
+              "detail": "Bahnhof SBB, Zug",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/multi-kulti-foodtour/"
+            },
+            {
+              "label": "Galgen, Rad und Scheiterhaufen. Die Taschenlampenf Acrymmhrung f acrymmr er Acrymmachsene",
+              "detail": "Museum Burg Zug, Zug",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
+            },
+            {
+              "label": "Zuger Märchenspaziergang: Halloween - die wahre(n) Geschichte(n)",
+              "detail": "Zug",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zuger-maerchenspaziergang-halloween-die-wahren-geschichten/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zug/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/zug/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "fr": {
       "canton": "ZG",
@@ -348,46 +348,28 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Sauna à la pleine lune d'Oberwil",
-              "detail": "Zugo, Zug",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sauna-della-luna-piena-oberwil/"
-            },
-            {
-              "label": "Atem-Workshop für inneren Frieden",
+              "label": "Cybermobbing",
               "detail": "Bibliothek Zug, Zug",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/atem-workshop-fuer-inneren-frieden_AUSR9Yp"
-            },
-            {
-              "label": "Öffentliche Vortragsveranstaltung von diabeteszug",
-              "detail": "Baar",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-vortragsveranstaltung-von-diabeteszug/"
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/cybermobbing_AystL5n"
             },
             {
               "label": "Zuger Messe 2026",
               "detail": "Stierenmarktareal, Zug — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-10-26",
+              "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/fr-ch/experiences/events/zuger-messe-2026/"
             },
             {
               "label": "Gemeinsam sprechen und lernen",
               "detail": "Zug — en cours, dernier jour : 10 novembre 2026",
-              "date": "2026-10-26",
+              "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
             },
             {
               "label": "Cabanes de boucherie à Zoug",
               "detail": "aigu Restaurant & Bar, Zug — en cours, dernier jour : 29 octobre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/metzgete-huetten-zug/"
-            },
-            {
-              "label": "Cybermobbing",
-              "detail": "Bibliothek Zug, Zug",
               "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/cybermobbing_AystL5n"
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/metzgete-huetten-zug/"
             },
             {
               "label": "16. Selo-Fachtagung: Neue Blickwinkel auf psychische Erkrankungen und Burnout",
@@ -406,11 +388,29 @@
               "detail": "Bibliothek Zug, Zug",
               "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spielabend-fuer-erwachsene-2/"
+            },
+            {
+              "label": "Multi-Kulti-Foodtour",
+              "detail": "Bahnhof SBB, Zug",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/multi-kulti-foodtour/"
+            },
+            {
+              "label": "La potence, la roue et le bûcher. La visite guidée à la lampe de poche pour adultes",
+              "detail": "Museum Burg Zug, Zug",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
+            },
+            {
+              "label": "Zuger Märchenspaziergang: Halloween - die wahre(n) Geschichte(n)",
+              "detail": "Zug",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zuger-maerchenspaziergang-halloween-die-wahren-geschichten/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zoug/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/zoug/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     }
   }
 }

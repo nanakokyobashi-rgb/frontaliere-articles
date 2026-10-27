@@ -4,17 +4,17 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "eventi",
-  "updatedAt": "2026-10-26T01:02:08.769Z",
-  "contentHash": "ba75e810a4ecc648952b034b1428cf1af7eeaccf8143aa8a52672d31a2ec00b8",
+  "updatedAt": "2026-10-27T00:15:17.334Z",
+  "contentHash": "696eeb5d33aa4de688eaf007bacf84a69c52d4260833ac9c69035b88d1a8ab43",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-25T02:23:31.213Z",
+      "updatedAt": "2026-10-26T18:30:43.613Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-25T19:59:33.449Z",
+      "updatedAt": "2026-10-26T17:41:28.137Z",
       "keyFacts": 0
     }
   ],
@@ -37,24 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Monday is danceday",
-              "detail": "La Maison du Concert, Neuchâtel",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/monday-is-danceday/"
-            },
-            {
-              "label": "INCANTATIONS",
-              "detail": "La Chaux-de-Fonds — in corso, ultimo giorno: 28 ottobre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/incantations/"
-            },
-            {
-              "label": "Atelier de gravure pour tous",
-              "detail": "Musée d'art et d'histoire, Neuchâtel — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
-            },
             {
               "label": "Rendre visible l'invisible : archéologie de l'esclavage colonial",
               "detail": "LATENIUM (Parc et Musée d'archéologie de Neuchâtel), Neuchâtel",
@@ -80,6 +62,18 @@
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/michel-leeb-ma-vie-en-rire/"
             },
             {
+              "label": "INCANTATIONS",
+              "detail": "La Chaux-de-Fonds — in corso, ultimo giorno: 28 ottobre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/incantations/"
+            },
+            {
+              "label": "Atelier de gravure pour tous",
+              "detail": "Musée d'art et d'histoire, Neuchâtel — in corso, ultimo giorno: 1 novembre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
+            },
+            {
               "label": "Atelier Halloween : des masques et des courges",
               "detail": "A bijou at the gateway to the Val-de-Ruz - Valangin, Val-de-Ruz",
               "date": "2026-10-28",
@@ -96,11 +90,17 @@
               "detail": "Neuchâtel",
               "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/chocolart-atelier-pour-enfant/"
+            },
+            {
+              "label": "12th biennal of watchmaker's heritage day",
+              "detail": "Tourisme neuchâtelois - Montagnes, La Chaux-de-Fonds",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/11e-biennale-du-patrimoine-horloger/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/neuchatel/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -128,7 +128,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -150,7 +150,7 @@
           "url": "/eventi/neuchatel/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "en": {
       "canton": "NE",
@@ -170,24 +170,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Monday is danceday",
-              "detail": "La Maison du Concert, Neuchâtel",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/monday-is-danceday/"
-            },
-            {
-              "label": "INCANTATIONS",
-              "detail": "La Chaux-de-Fonds — ongoing, last day: 28 October 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/incantations/"
-            },
-            {
-              "label": "Atelier de gravure pour tous",
-              "detail": "Musée d'art et d'histoire, Neuchâtel — ongoing, last day: 1 November 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
-            },
             {
               "label": "Making the Invisible Visible: Archeology of Colonial Slavery",
               "detail": "LATENIUM (Parc et Musée d'archéologie de Neuchâtel), Neuchâtel",
@@ -213,6 +195,18 @@
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/michel-leeb-ma-vie-en-rire/"
             },
             {
+              "label": "INCANTATIONS",
+              "detail": "La Chaux-de-Fonds — ongoing, last day: 28 October 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/incantations/"
+            },
+            {
+              "label": "Atelier de gravure pour tous",
+              "detail": "Musée d'art et d'histoire, Neuchâtel — ongoing, last day: 1 November 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
+            },
+            {
               "label": "Atelier Halloween : des masques et des courges",
               "detail": "A bijou at the gateway to the Val-de-Ruz - Valangin, Val-de-Ruz",
               "date": "2026-10-28",
@@ -229,11 +223,17 @@
               "detail": "Neuchâtel",
               "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/chocolart-atelier-pour-enfant/"
+            },
+            {
+              "label": "12th biennal of watchmaker's heritage day",
+              "detail": "Tourisme neuchâtelois - Montagnes, La Chaux-de-Fonds",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/11e-biennale-du-patrimoine-horloger/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/neuchatel/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -261,7 +261,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -283,7 +283,7 @@
           "url": "/en/events/neuchatel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "de": {
       "canton": "NE",
@@ -303,24 +303,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Monday is danceday",
-              "detail": "La Maison du Concert, Neuchâtel",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/monday-is-danceday/"
-            },
-            {
-              "label": "INCANTATIONS",
-              "detail": "La Chaux-de-Fonds — läuft, letzter Tag: 28. Oktober 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/incantations/"
-            },
-            {
-              "label": "Atelier de gravure pour tous",
-              "detail": "Musée d'art et d'histoire, Neuchâtel — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
-            },
             {
               "label": "Rendre visible l 'invisible : archéologie de l' esclavage colonial",
               "detail": "LATENIUM (Parc et Musée d'archéologie de Neuchâtel), Neuchâtel",
@@ -346,6 +328,18 @@
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/michel-leeb-ma-vie-en-rire/"
             },
             {
+              "label": "INCANTATIONS",
+              "detail": "La Chaux-de-Fonds — läuft, letzter Tag: 28. Oktober 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/incantations/"
+            },
+            {
+              "label": "Atelier de gravure pour tous",
+              "detail": "Musée d'art et d'histoire, Neuchâtel — läuft, letzter Tag: 1. November 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
+            },
+            {
               "label": "Atelier Halloween : des masques et des courges",
               "detail": "A bijou at the gateway to the Val-de-Ruz - Valangin, Val-de-Ruz",
               "date": "2026-10-28",
@@ -362,11 +356,17 @@
               "detail": "Neuchâtel",
               "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/chocolart-atelier-pour-enfant/"
+            },
+            {
+              "label": "12. Biennale des Uhrmacher-Patrimoniums",
+              "detail": "Tourisme neuchâtelois - Montagnes, La Chaux-de-Fonds",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/11e-biennale-du-patrimoine-horloger/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/neuenburg/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -394,7 +394,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -416,7 +416,7 @@
           "url": "/de/veranstaltungen/neuenburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "fr": {
       "canton": "NE",
@@ -436,24 +436,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Monday is danceday",
-              "detail": "La Maison du Concert, Neuchâtel",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/monday-is-danceday/"
-            },
-            {
-              "label": "INCANTATIONS",
-              "detail": "La Chaux-de-Fonds — en cours, dernier jour : 28 octobre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/incantations/"
-            },
-            {
-              "label": "Atelier de gravure pour tous",
-              "detail": "Musée d'art et d'histoire, Neuchâtel — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
-            },
             {
               "label": "Renderre visible l'invisible: archéologie de l'esclavage colonial",
               "detail": "LATENIUM (Parc et Musée d'archéologie de Neuchâtel), Neuchâtel",
@@ -479,6 +461,18 @@
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/michel-leeb-ma-vie-en-rire/"
             },
             {
+              "label": "INCANTATIONS",
+              "detail": "La Chaux-de-Fonds — en cours, dernier jour : 28 octobre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/incantations/"
+            },
+            {
+              "label": "Atelier de gravure pour tous",
+              "detail": "Musée d'art et d'histoire, Neuchâtel — en cours, dernier jour : 1er novembre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
+            },
+            {
               "label": "Atelier Halloween : des masques et des courges",
               "detail": "A bijou at the gateway to the Val-de-Ruz - Valangin, Val-de-Ruz",
               "date": "2026-10-28",
@@ -495,11 +489,17 @@
               "detail": "Neuchâtel",
               "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/chocolart-atelier-pour-enfant/"
+            },
+            {
+              "label": "12e biennale du patrimoine horloger",
+              "detail": "Tourisme neuchâtelois - Montagnes, La Chaux-de-Fonds",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/11e-biennale-du-patrimoine-horloger/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/neuchatel/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -527,7 +527,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -549,7 +549,7 @@
           "url": "/fr/evenements/neuchatel/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     }
   }
 }

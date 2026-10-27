@@ -4,12 +4,12 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "eventi",
-  "updatedAt": "2026-10-26T01:02:08.769Z",
-  "contentHash": "2a829f25700e809a7b81604fa843d11f929b66a1823512ed422f3bdada4711d4",
+  "updatedAt": "2026-10-27T00:15:17.334Z",
+  "contentHash": "a8d2312e780ab2c60c3b84f0609a235db9791a6a442ad98f569b609f42b9fa25",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-25T02:23:31.213Z",
+      "updatedAt": "2026-10-26T18:30:43.613Z",
       "keyFacts": 1
     }
   ],
@@ -33,12 +33,6 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Sauna della luna piena Einsiedeln",
-              "detail": "Cantone di Einsiedeln, Einsiedeln",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sauna-della-luna-piena-einsiedeln/"
-            },
-            {
               "label": "Serata Italiana - Tavolata & Livemusik",
               "detail": "Marina Lachen, Lachen",
               "date": "2026-10-29",
@@ -91,11 +85,17 @@
               "detail": "Kirchenkeller der Pfarrkirche Rothenthurm, Rothenthurm",
               "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/20-kreativhandwerkermarkt/"
+            },
+            {
+              "label": "Hölloch Expedition Glitter Gate",
+              "detail": "Muotathal",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hoelloch-expedition-glitter-gate-1/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/svitto/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/svitto/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "en": {
       "canton": "SZ",
@@ -137,12 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Full moon sauna Einsiedeln",
-              "detail": "Cantone di Einsiedeln, Einsiedeln",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sauna-della-luna-piena-einsiedeln/"
-            },
             {
               "label": "Serata Italiana -Tavolata & Live Music",
               "detail": "Marina Lachen, Lachen",
@@ -196,11 +190,17 @@
               "detail": "Kirchenkeller der Pfarrkirche Rothenthurm, Rothenthurm",
               "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/20-kreativhandwerkermarkt/"
+            },
+            {
+              "label": "Hölloch Expedition Glitter Gate",
+              "detail": "Muotathal",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hoelloch-expedition-glitter-gate-1/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schwyz/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/schwyz/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "de": {
       "canton": "SZ",
@@ -242,12 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Vollmond-Sauna Einsiedeln",
-              "detail": "Cantone di Einsiedeln, Einsiedeln",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sauna-della-luna-piena-einsiedeln/"
-            },
             {
               "label": "Serata Italiana - Tavolata & Livemusik",
               "detail": "Marina Lachen, Lachen",
@@ -301,11 +295,17 @@
               "detail": "Kirchenkeller der Pfarrkirche Rothenthurm, Rothenthurm",
               "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/20-kreativhandwerkermarkt/"
+            },
+            {
+              "label": "Hölloch Tages-Expedition Glitzertor",
+              "detail": "Muotathal",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hoelloch-expedition-glitter-gate-1/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schwyz/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/schwyz/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "fr": {
       "canton": "SZ",
@@ -347,12 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Sauna de la pleine lune à Einsiedeln",
-              "detail": "Cantone di Einsiedeln, Einsiedeln",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sauna-della-luna-piena-einsiedeln/"
-            },
             {
               "label": "Serata Italiana - Tavolata & Musique",
               "detail": "Marina Lachen, Lachen",
@@ -406,11 +400,17 @@
               "detail": "Kirchenkeller der Pfarrkirche Rothenthurm, Rothenthurm",
               "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/20-kreativhandwerkermarkt/"
+            },
+            {
+              "label": "Hölloch Expedition Glitter Gate",
+              "detail": "Muotathal",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hoelloch-expedition-glitter-gate-1/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schwytz/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/schwytz/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     }
   }
 }

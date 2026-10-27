@@ -4,17 +4,17 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "eventi",
-  "updatedAt": "2026-10-26T22:07:17.679Z",
-  "contentHash": "e09c46ca9648266492bd359d749a0ec497723017eb7157b189608f9e8aa143b3",
+  "updatedAt": "2026-10-27T00:15:17.334Z",
+  "contentHash": "cec79ac1809ccb18df89ed88dd67ef75d9af4a0f29e038aefb44aeb74c077019",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-26T13:47:55.879Z",
+      "updatedAt": "2026-10-26T18:30:43.613Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-26T11:33:49.792Z",
+      "updatedAt": "2026-10-26T17:41:28.137Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "62",
+          "value": "58",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,45 +38,16 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Bewegung und Begegnung - Feldenkrais",
-              "date": "2026-10-26",
-              "url": "https://www.stadtluzern.ch/sitzung/7648408"
-            },
-            {
-              "label": "Sauna della luna piena a Lucerna",
-              "detail": "Lucerna, Luzern",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sauna-della-luna-piena-a-lucerna/"
-            },
-            {
-              "label": "Sauna della luna piena a Sursee",
-              "detail": "Sursee",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sauna-della-luna-piena-a-sursee/"
-            },
-            {
-              "label": "Energie Apéro Luzern: Regenerative Baumaterialien – eine Wiederentdeckung",
-              "detail": "Luzern",
-              "date": "2026-10-26",
-              "url": "https://www.stadtluzern.ch/sitzung/7253945"
-            },
-            {
-              "label": "360° Mitsingen",
-              "detail": "Bourbaki Panorama — in corso, ultimo giorno: 12 novembre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
-            },
-            {
-              "label": "Pilzkontrolle",
-              "detail": "Museum Luzern, Luzern — in corso, ultimo giorno: 26 ottobre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/pilzkontrolle_AkPC7Ym"
-            },
-            {
               "label": "Winter Qi Gong Inseli",
               "detail": "Ebikon",
               "date": "2026-10-27",
               "url": "https://www.stadtluzern.ch/sitzung/7694110"
+            },
+            {
+              "label": "360° Mitsingen",
+              "detail": "Bourbaki Panorama — in corso, ultimo giorno: 12 novembre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
             },
             {
               "label": "Konzert für Familien «Gänseblüemli im Rosengarten»",
@@ -95,11 +66,41 @@
               "detail": "Museum Sammlung Rosengart Luzern, Luzern",
               "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
+            },
+            {
+              "label": "Panflötenkonzert mit Duo PanTastico",
+              "detail": "Evang.-ref. Kirche Hochdorf, Hochdorf",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/hochdorf/panfloetenkonzert-mit-duo-pantastico_Adw4Ae6"
+            },
+            {
+              "label": "Moules et Frites",
+              "detail": "CAMPUS SURSEE, Oberkirch",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/moules-et-frites/"
+            },
+            {
+              "label": "Kunstausstellung Visarte",
+              "detail": "Luzern",
+              "date": "2026-10-30",
+              "url": "https://www.stadtluzern.ch/sitzung/7587574"
+            },
+            {
+              "label": "WeekendKrimi di Peter Denlo Floraalpina Vitznau",
+              "detail": "Vitznau",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/weekendkrimi-di-peter-denlo-floraalpina-vitznau/"
+            },
+            {
+              "label": "Kaltbach Herbstmarkt – Genuss aus der Höhle: regional, echt und herbstlich fein",
+              "detail": "Emmi Kaltbach, Mauensee",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kaltbach-herbstmarkt-genuss-aus-der-hoehle-regional-echt-und-herbstlich-fein/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/lucerna/",
-          "updatedAt": "2026-10-26T13:47:55.879Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -137,7 +138,7 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/7463710"
             }
           ],
-          "updatedAt": "2026-10-26T11:33:49.792Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -171,7 +172,7 @@
           "url": "/eventi/lucerna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T22:07:17.679Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "en": {
       "canton": "LU",
@@ -181,7 +182,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "62",
+          "value": "58",
           "note": "from the site’s events calendar"
         }
       ],
@@ -192,45 +193,16 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Bewegung und Begegnung - Feldenkrais",
-              "date": "2026-10-26",
-              "url": "https://www.stadtluzern.ch/sitzung/7648408"
-            },
-            {
-              "label": "Full Moon Sauna Lucerne",
-              "detail": "Lucerna, Luzern",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sauna-della-luna-piena-a-lucerna/"
-            },
-            {
-              "label": "Full Moon Sauna in Sursee",
-              "detail": "Sursee",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sauna-della-luna-piena-a-sursee/"
-            },
-            {
-              "label": "Energie Apéro Luzern: Regenerative Baumaterialien – eine Wiederentdeckung",
-              "detail": "Luzern",
-              "date": "2026-10-26",
-              "url": "https://www.stadtluzern.ch/sitzung/7253945"
-            },
-            {
-              "label": "360° Mitsingen",
-              "detail": "Bourbaki Panorama — ongoing, last day: 12 November 2026",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
-            },
-            {
-              "label": "Pilzkontrolle",
-              "detail": "Museum Luzern, Luzern — ongoing, last day: 26 October 2026",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/pilzkontrolle_AkPC7Ym"
-            },
-            {
               "label": "Winter Qi Gong Inseli",
               "detail": "Ebikon",
               "date": "2026-10-27",
               "url": "https://www.stadtluzern.ch/sitzung/7694110"
+            },
+            {
+              "label": "360° Mitsingen",
+              "detail": "Bourbaki Panorama — ongoing, last day: 12 November 2026",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
             },
             {
               "label": "Konzert für Familien «Gänseblüemli im Rosengarten»",
@@ -249,11 +221,41 @@
               "detail": "Museum Sammlung Rosengart Luzern, Luzern",
               "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
+            },
+            {
+              "label": "Panflötenkonzert mit Duo PanTastico",
+              "detail": "Evang.-ref. Kirche Hochdorf, Hochdorf",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/hochdorf/panfloetenkonzert-mit-duo-pantastico_Adw4Ae6"
+            },
+            {
+              "label": "Moules et Frites",
+              "detail": "CAMPUS SURSEE, Oberkirch",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/moules-et-frites/"
+            },
+            {
+              "label": "Kunstausstellung Visarte",
+              "detail": "Luzern",
+              "date": "2026-10-30",
+              "url": "https://www.stadtluzern.ch/sitzung/7587574"
+            },
+            {
+              "label": "WeekendKrimi by Peter Denlo Floraalpina Vitznau",
+              "detail": "Vitznau",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/weekendkrimi-di-peter-denlo-floraalpina-vitznau/"
+            },
+            {
+              "label": "Kaltbach Herbstmarkt – Genuss aus der Höhle: regional, echt und herbstlich fein",
+              "detail": "Emmi Kaltbach, Mauensee",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kaltbach-herbstmarkt-genuss-aus-der-hoehle-regional-echt-und-herbstlich-fein/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/lucerne/",
-          "updatedAt": "2026-10-26T13:47:55.879Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -291,7 +293,7 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/7463710"
             }
           ],
-          "updatedAt": "2026-10-26T11:33:49.792Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -325,7 +327,7 @@
           "url": "/en/events/lucerne/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T22:07:17.679Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "de": {
       "canton": "LU",
@@ -335,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "62",
+          "value": "58",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -346,45 +348,16 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Bewegung und Begegnung - Feldenkrais",
-              "date": "2026-10-26",
-              "url": "https://www.stadtluzern.ch/sitzung/7648408"
-            },
-            {
-              "label": "Vollmond-Sauna Luzern",
-              "detail": "Lucerna, Luzern",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sauna-della-luna-piena-a-lucerna/"
-            },
-            {
-              "label": "Vollmond-Sauna Sursee",
-              "detail": "Sursee",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sauna-della-luna-piena-a-sursee/"
-            },
-            {
-              "label": "Energie Apéro Luzern: Regenerative Baumaterialien – eine Wiederentdeckung",
-              "detail": "Luzern",
-              "date": "2026-10-26",
-              "url": "https://www.stadtluzern.ch/sitzung/7253945"
-            },
-            {
-              "label": "360° Mitsingen",
-              "detail": "Bourbaki Panorama — läuft, letzter Tag: 12. November 2026",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
-            },
-            {
-              "label": "Pilzkontrolle",
-              "detail": "Museum Luzern, Luzern — läuft, letzter Tag: 26. Oktober 2026",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/pilzkontrolle_AkPC7Ym"
-            },
-            {
               "label": "Winter Qi Gong Inseli",
               "detail": "Ebikon",
               "date": "2026-10-27",
               "url": "https://www.stadtluzern.ch/sitzung/7694110"
+            },
+            {
+              "label": "360° Mitsingen",
+              "detail": "Bourbaki Panorama — läuft, letzter Tag: 12. November 2026",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
             },
             {
               "label": "Konzert für Familien «Gänseblüemli im Rosengarten»",
@@ -403,11 +376,41 @@
               "detail": "Museum Sammlung Rosengart Luzern, Luzern",
               "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
+            },
+            {
+              "label": "Panflötenkonzert mit Duo PanTastico",
+              "detail": "Evang.-ref. Kirche Hochdorf, Hochdorf",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/hochdorf/panfloetenkonzert-mit-duo-pantastico_Adw4Ae6"
+            },
+            {
+              "label": "Moules et Frites",
+              "detail": "CAMPUS SURSEE, Oberkirch",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/moules-et-frites/"
+            },
+            {
+              "label": "Kunstausstellung Visarte",
+              "detail": "Luzern",
+              "date": "2026-10-30",
+              "url": "https://www.stadtluzern.ch/sitzung/7587574"
+            },
+            {
+              "label": "WeekendKrimi by Peter Denlo Floraalpina Vitznau",
+              "detail": "Vitznau",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/weekendkrimi-di-peter-denlo-floraalpina-vitznau/"
+            },
+            {
+              "label": "Kaltbach Herbstmarkt – Genuss aus der Höhle: regional, echt und herbstlich fein",
+              "detail": "Emmi Kaltbach, Mauensee",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kaltbach-herbstmarkt-genuss-aus-der-hoehle-regional-echt-und-herbstlich-fein/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/luzern/",
-          "updatedAt": "2026-10-26T13:47:55.879Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -445,7 +448,7 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/7463710"
             }
           ],
-          "updatedAt": "2026-10-26T11:33:49.792Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -479,7 +482,7 @@
           "url": "/de/veranstaltungen/luzern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-26T22:07:17.679Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "fr": {
       "canton": "LU",
@@ -489,7 +492,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "62",
+          "value": "58",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -500,45 +503,16 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Bewegung und Begegnung - Feldenkrais",
-              "date": "2026-10-26",
-              "url": "https://www.stadtluzern.ch/sitzung/7648408"
-            },
-            {
-              "label": "Sauna « Pleine Lune » de Lucerne",
-              "detail": "Lucerna, Luzern",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sauna-della-luna-piena-a-lucerna/"
-            },
-            {
-              "label": "Sauna « Pleine Lune » à Sursee",
-              "detail": "Sursee",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sauna-della-luna-piena-a-sursee/"
-            },
-            {
-              "label": "Energie Apéro Luzern: Regenerative Baumaterialien – eine Wiederentdeckung",
-              "detail": "Luzern",
-              "date": "2026-10-26",
-              "url": "https://www.stadtluzern.ch/sitzung/7253945"
-            },
-            {
-              "label": "360° Mitsingen",
-              "detail": "Bourbaki Panorama — en cours, dernier jour : 12 novembre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
-            },
-            {
-              "label": "Pilzkontrolle",
-              "detail": "Museum Luzern, Luzern — en cours, dernier jour : 26 octobre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/pilzkontrolle_AkPC7Ym"
-            },
-            {
               "label": "Winter Qi Gong Inseli",
               "detail": "Ebikon",
               "date": "2026-10-27",
               "url": "https://www.stadtluzern.ch/sitzung/7694110"
+            },
+            {
+              "label": "360° Mitsingen",
+              "detail": "Bourbaki Panorama — en cours, dernier jour : 12 novembre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
             },
             {
               "label": "Konzert für Familien «Gänseblüemli im Rosengarten»",
@@ -557,11 +531,41 @@
               "detail": "Museum Sammlung Rosengart Luzern, Luzern",
               "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
+            },
+            {
+              "label": "Panflötenkonzert mit Duo PanTastico",
+              "detail": "Evang.-ref. Kirche Hochdorf, Hochdorf",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/hochdorf/panfloetenkonzert-mit-duo-pantastico_Adw4Ae6"
+            },
+            {
+              "label": "Moules et Frites",
+              "detail": "CAMPUS SURSEE, Oberkirch",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/moules-et-frites/"
+            },
+            {
+              "label": "Kunstausstellung Visarte",
+              "detail": "Luzern",
+              "date": "2026-10-30",
+              "url": "https://www.stadtluzern.ch/sitzung/7587574"
+            },
+            {
+              "label": "Week-endPolicier par Peter Denlo Floraalpina Vitznau",
+              "detail": "Vitznau",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/weekendkrimi-di-peter-denlo-floraalpina-vitznau/"
+            },
+            {
+              "label": "Kaltbach Herbstmarkt – Genuss aus der Höhle: regional, echt und herbstlich fein",
+              "detail": "Emmi Kaltbach, Mauensee",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kaltbach-herbstmarkt-genuss-aus-der-hoehle-regional-echt-und-herbstlich-fein/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/lucerne/",
-          "updatedAt": "2026-10-26T13:47:55.879Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -599,7 +603,7 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/7463710"
             }
           ],
-          "updatedAt": "2026-10-26T11:33:49.792Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -633,7 +637,7 @@
           "url": "/fr/evenements/lucerne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-26T22:07:17.679Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     }
   }
 }

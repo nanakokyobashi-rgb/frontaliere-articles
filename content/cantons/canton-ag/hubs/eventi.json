@@ -4,12 +4,12 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "eventi",
-  "updatedAt": "2026-10-26T01:02:08.769Z",
-  "contentHash": "e518bf0f841abb0b9ebe6781f47d8a637d3faffb0f9236bcb48f3fae0daf343e",
+  "updatedAt": "2026-10-27T00:15:17.334Z",
+  "contentHash": "a0192584b93af748d9e78cdb26c54541befbeb8ac4dfe48f3605e7126ec381a4",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-25T02:23:31.213Z",
+      "updatedAt": "2026-10-26T18:30:43.613Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "109",
+          "value": "111",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,30 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Unitrio feat. Matthieu Michel",
-              "detail": "Stadtbistro Isebähnli, Baden",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/unitrio-feat-matthieu-michel_A4CpbXY"
-            },
-            {
-              "label": "Die Habsburger – 800 Jahre europäische Geschichte",
-              "detail": "Laufenburg — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
-            },
-            {
-              "label": "Oktoberfest Baden 2026",
-              "detail": "Brown Boveri Platz, Baden — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
-            },
-            {
-              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
-              "detail": "Untersiggenthal — in corso, ultimo giorno: 30 ottobre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
-            },
             {
               "label": "Tanzen für Junggebliebene mit Live Musik",
               "detail": "AUREA, Rheinfelden",
@@ -67,6 +43,24 @@
               "detail": "Kantonsschule Baden, Baden",
               "date": "2026-10-27",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/baden/energie-aperos-aargau-20262027_AZQvJXD"
+            },
+            {
+              "label": "Die Habsburger – 800 Jahre europäische Geschichte",
+              "detail": "Laufenburg — in corso, ultimo giorno: 1 novembre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
+            },
+            {
+              "label": "Oktoberfest Baden 2026",
+              "detail": "Brown Boveri Platz, Baden — in corso, ultimo giorno: 31 ottobre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
+            },
+            {
+              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
+              "detail": "Untersiggenthal — in corso, ultimo giorno: 30 ottobre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
             },
             {
               "label": "Flitzende Roboterbälle",
@@ -91,11 +85,17 @@
               "detail": "Brugg AG, Brugg",
               "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/stretta-concerts-sound-of-klezmer-1/"
+            },
+            {
+              "label": "Comedy im KIFF: Lisa Christ – «Ideal»",
+              "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/aarau/comedy-im-kiff-lisa-christ-ideal_AHMN7rq"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/argovia/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/argovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "en": {
       "canton": "AG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "109",
+          "value": "111",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,30 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Unitrio feat. Matthieu Michel",
-              "detail": "Stadtbistro Isebähnli, Baden",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/unitrio-feat-matthieu-michel_A4CpbXY"
-            },
-            {
-              "label": "Die Habsburger – 800 Jahre europäische Geschichte",
-              "detail": "Laufenburg — ongoing, last day: 1 November 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
-            },
-            {
-              "label": "Oktoberfest Baden 2026",
-              "detail": "Brown Boveri Platz, Baden — ongoing, last day: 31 October 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
-            },
-            {
-              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
-              "detail": "Untersiggenthal — ongoing, last day: 30 October 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
-            },
             {
               "label": "Tanzen für Junggebliebene mit Live Musik",
               "detail": "AUREA, Rheinfelden",
@@ -172,6 +148,24 @@
               "detail": "Kantonsschule Baden, Baden",
               "date": "2026-10-27",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/baden/energie-aperos-aargau-20262027_AZQvJXD"
+            },
+            {
+              "label": "Die Habsburger – 800 Jahre europäische Geschichte",
+              "detail": "Laufenburg — ongoing, last day: 1 November 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
+            },
+            {
+              "label": "Oktoberfest Baden 2026",
+              "detail": "Brown Boveri Platz, Baden — ongoing, last day: 31 October 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
+            },
+            {
+              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
+              "detail": "Untersiggenthal — ongoing, last day: 30 October 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
             },
             {
               "label": "Flitzende Roboterbälle",
@@ -196,11 +190,17 @@
               "detail": "Brugg AG, Brugg",
               "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/stretta-concerts-sound-of-klezmer-1/"
+            },
+            {
+              "label": "Comedy im KIFF: Lisa Christ – «Ideal»",
+              "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/aarau/comedy-im-kiff-lisa-christ-ideal_AHMN7rq"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/aargau/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/aargau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "de": {
       "canton": "AG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "109",
+          "value": "111",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,30 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Unitrio feat. Matthieu Michel",
-              "detail": "Stadtbistro Isebähnli, Baden",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/unitrio-feat-matthieu-michel_A4CpbXY"
-            },
-            {
-              "label": "Die Habsburger – 800 Jahre europäische Geschichte",
-              "detail": "Laufenburg — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
-            },
-            {
-              "label": "Oktoberfest Baden 2026",
-              "detail": "Brown Boveri Platz, Baden — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
-            },
-            {
-              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
-              "detail": "Untersiggenthal — läuft, letzter Tag: 30. Oktober 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
-            },
             {
               "label": "Tanzen für Junggebliebene mit Live Musik",
               "detail": "AUREA, Rheinfelden",
@@ -277,6 +253,24 @@
               "detail": "Kantonsschule Baden, Baden",
               "date": "2026-10-27",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/baden/energie-aperos-aargau-20262027_AZQvJXD"
+            },
+            {
+              "label": "Die Habsburger – 800 Jahre europäische Geschichte",
+              "detail": "Laufenburg — läuft, letzter Tag: 1. November 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
+            },
+            {
+              "label": "Oktoberfest Baden 2026",
+              "detail": "Brown Boveri Platz, Baden — läuft, letzter Tag: 31. Oktober 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
+            },
+            {
+              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
+              "detail": "Untersiggenthal — läuft, letzter Tag: 30. Oktober 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
             },
             {
               "label": "Flitzende Roboterbälle",
@@ -301,11 +295,17 @@
               "detail": "Brugg AG, Brugg",
               "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/stretta-concerts-sound-of-klezmer-1/"
+            },
+            {
+              "label": "Comedy im KIFF: Lisa Christ – «Ideal»",
+              "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/aarau/comedy-im-kiff-lisa-christ-ideal_AHMN7rq"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/aargau/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/aargau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "fr": {
       "canton": "AG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "109",
+          "value": "111",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,30 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Unitrio feat. Matthieu Michel",
-              "detail": "Stadtbistro Isebähnli, Baden",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/unitrio-feat-matthieu-michel_A4CpbXY"
-            },
-            {
-              "label": "Die Habsburger – 800 Jahre europäische Geschichte",
-              "detail": "Laufenburg — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
-            },
-            {
-              "label": "Oktoberfest Baden 2026",
-              "detail": "Brown Boveri Platz, Baden — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
-            },
-            {
-              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
-              "detail": "Untersiggenthal — en cours, dernier jour : 30 octobre 2026",
-              "date": "2026-10-26",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
-            },
             {
               "label": "Tanzen für Junggebliebene mit Live Musik",
               "detail": "AUREA, Rheinfelden",
@@ -382,6 +358,24 @@
               "detail": "Kantonsschule Baden, Baden",
               "date": "2026-10-27",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/baden/energie-aperos-aargau-20262027_AZQvJXD"
+            },
+            {
+              "label": "Die Habsburger – 800 Jahre europäische Geschichte",
+              "detail": "Laufenburg — en cours, dernier jour : 1er novembre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
+            },
+            {
+              "label": "Oktoberfest Baden 2026",
+              "detail": "Brown Boveri Platz, Baden — en cours, dernier jour : 31 octobre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
+            },
+            {
+              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
+              "detail": "Untersiggenthal — en cours, dernier jour : 30 octobre 2026",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
             },
             {
               "label": "Flitzende Roboterbälle",
@@ -406,11 +400,17 @@
               "detail": "Brugg AG, Brugg",
               "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/stretta-concerts-sound-of-klezmer-1/"
+            },
+            {
+              "label": "Comedy im KIFF: Lisa Christ – «Ideal»",
+              "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/aarau/comedy-im-kiff-lisa-christ-ideal_AHMN7rq"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/argovie/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T18:30:43.613Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/argovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     }
   }
 }

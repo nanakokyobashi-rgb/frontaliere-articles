@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "carburanti",
-  "updatedAt": "2026-10-26T17:18:45.341Z",
-  "contentHash": "c604b9bd104e932de110b7fdc4fc022a5e50bcae0bb6f6e2c1eddf1c658ce4ff",
+  "updatedAt": "2026-10-27T00:15:17.334Z",
+  "contentHash": "0a274612c521d361c8de823f9eba193d3f30ac10eef5a6bf981cf4b300d4a0b7",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Appenzello Esterno: credito approvato per il programma PFAS",
+          "url": "/articoli-appenzello/credito-pfas-appenzello/",
+          "excerpt": "Il Parlamento di Appenzello Esterno ha approvato con 60 voti a zero e un'astensione il credito per un programma PFAS.",
+          "date": "2026-10-27T00:02:34.724Z"
+        },
+        {
           "title": "Herisau, più risorse per la RBH Hinterland",
           "url": "/articoli-appenzello/rbh-herisau-piu-risorse/",
           "excerpt": "Il Comune di Herisau segnala casi in aumento e maggiore complessità nella gestione della RBH Hinterland; negli anni scorsi sono cresciute anche le posizioni.",
@@ -94,12 +100,6 @@
           "url": "/articoli-appenzello/heiden-risparmi-preventivo-2027/",
           "excerpt": "Il preventivo 2027 di Heiden indica entrate per CHF 35,308 milioni, uscite per CHF 35,512 milioni e un deficit di CHF 204'200.",
           "date": "2026-10-21T19:28:07.751Z"
-        },
-        {
-          "title": "Hundwil vuole ridurre le imposte nel preventivo 2027",
-          "url": "/articoli-appenzello/hundwil-imposte-preventivo/",
-          "excerpt": "Hundwil prevede nel 2027 un avanzo di CHF 111'200, con entrate per CHF 6'421'000 e spese per CHF 6'309'800, insieme alla riduzione delle imposte.",
-          "date": "2026-10-21T19:06:08.539Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Appenzell Ausserrhoden: credit approved for the PFAS program",
+          "url": "/en/appenzell-articles/appenzell-ausserrhoden-pfas-credit/",
+          "excerpt": "The Parliament of Appenzell Ausserrhoden approved the funding for a PFAS program by 60 votes to zero, with one abstention.",
+          "date": "2026-10-27T00:02:34.724Z"
+        },
+        {
           "title": "Herisau, more resources for RBH Hinterland",
           "url": "/en/appenzell-articles/herisau-rbh-more-resources/",
           "excerpt": "The Municipality of Herisau reports an increase in cases and greater complexity in managing RBH Hinterland; positions have also increased in recent years.",
@@ -193,12 +199,6 @@
           "url": "/en/appenzell-articles/heiden-savings-budget-2027/",
           "excerpt": "Heiden's 2027 budget projects revenues of CHF 35,308 million, expenditures of CHF 35,512 million, and a deficit of CHF 204'200.",
           "date": "2026-10-21T19:28:07.751Z"
-        },
-        {
-          "title": "Hundwil wants to reduce taxes in the 2027 budget",
-          "url": "/en/appenzell-articles/hundwil-tax-budget/",
-          "excerpt": "Hundwil expects a surplus of CHF 111'200 in 2027, with revenue of CHF 6'421'000 and expenses of CHF 6'309'800, along with a reduction in taxes.",
-          "date": "2026-10-21T19:06:08.539Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Appenzell Ausserrhoden: Kredit für das PFAS-Programm genehmigt",
+          "url": "/de/appenzell-artikel/appenzell-ausserrhoden-pfas-kredit/",
+          "excerpt": "Das Parlament von Appenzell Ausserrhoden hat den Kredit für ein PFAS-Programm mit 60 zu 0 Stimmen und einer Enthaltung genehmigt.",
+          "date": "2026-10-27T00:02:34.724Z"
+        },
+        {
           "title": "Herisau, mehr Ressourcen für die RBH Hinterland",
           "url": "/de/appenzell-artikel/herisau-rbh-mehr-ressourcen/",
           "excerpt": "Die Gemeinde Herisau weist auf zunehmende Fallzahlen und eine grössere Komplexität bei der Bearbeitung der RBH Hinterland hin; in den vergangenen Jahren ist auch die Zahl der Stellen gestiegen.",
@@ -292,12 +298,6 @@
           "url": "/de/appenzell-artikel/heiden-sparbemuehungen-budget-2027/",
           "excerpt": "Der Voranschlag 2027 von Heiden weist Einnahmen von CHF 35,308 Millionen, Ausgaben von CHF 35,512 Millionen und ein Defizit von CHF 204'200 aus.",
           "date": "2026-10-21T19:28:07.751Z"
-        },
-        {
-          "title": "Hundwil will die Steuern im Voranschlag 2027 senken",
-          "url": "/de/appenzell-artikel/hundwil-steuern-budget/",
-          "excerpt": "Für 2027 rechnet Hundwil mit einem Überschuss von CHF 111'200, Einnahmen von CHF 6'421'000 und Ausgaben von CHF 6'309'800 sowie einer Senkung der Steuern.",
-          "date": "2026-10-21T19:06:08.539Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Appenzell Rhodes-Extérieures : crédit approuvé pour le programme PFAS",
+          "url": "/fr/articles-appenzell/appenzell-exterieur-credit-pfas/",
+          "excerpt": "Le Parlement d’Appenzell Rhodes-Extérieures a approuvé par 60 voix contre zéro et une abstention le crédit pour un programme PFAS.",
+          "date": "2026-10-27T00:02:34.724Z"
+        },
+        {
           "title": "Herisau, davantage de ressources pour la RBH Hinterland",
           "url": "/fr/articles-appenzell/herisau-rbh-plus-ressources/",
           "excerpt": "La commune de Herisau signale une hausse des cas et une plus grande complexité dans la gestion de la RBH Hinterland ; ces dernières années, les postes ont également augmenté.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-appenzell/heiden-economies-budget-2027/",
           "excerpt": "Le budget 2027 de Heiden prévoit des recettes de CHF 35,308 millions, des dépenses de CHF 35,512 millions et un déficit de CHF 204'200.",
           "date": "2026-10-21T19:28:07.751Z"
-        },
-        {
-          "title": "Hundwil veut réduire les impôts dans le budget 2027",
-          "url": "/fr/articles-appenzell/hundwil-impots-budget/",
-          "excerpt": "Hundwil prévoit en 2027 un excédent de CHF 111'200, avec des recettes de CHF 6'421'000 et des dépenses de CHF 6'309'800, ainsi qu'une réduction des impôts.",
-          "date": "2026-10-21T19:06:08.539Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-27T00:15:17.334Z"
     }
   }
 }
