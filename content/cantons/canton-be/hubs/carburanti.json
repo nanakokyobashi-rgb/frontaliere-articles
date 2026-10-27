@@ -4,12 +4,12 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "carburanti",
-  "updatedAt": "2026-10-23T02:23:53.372Z",
-  "contentHash": "28874b2ffab25362802853129c8dc8baa0f875f6cb9de7163e2dbab94b63cce4",
+  "updatedAt": "2026-10-27T01:56:36.060Z",
+  "contentHash": "dd650823e29c06fea36daff9e2d43b4eae27208300702962cfb17ad311692ba0",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-22T12:21:38.892Z",
+      "updatedAt": "2026-10-26T13:32:45.792Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-11-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-26T13:32:45.792Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Nuove funzioni nel piano digitale della città di Berna",
+          "url": "/articoli-berna/nuove-funzioni-piano-digitale/",
+          "excerpt": "Dal 26 ottobre 2026 nuovi contenuti nel piano digitale Nomi ufficiali visibili sotto «Nomenclatura» Download gratuito dal Geoportale della città Aggiornati nomi",
+          "date": "2026-10-27T01:42:07.785Z"
+        },
         {
           "title": "Berna approva contributi per Rotbach e Saanen",
           "url": "/articoli-berna/contributi-rotbach-saanen/",
@@ -82,12 +88,6 @@
           "url": "/articoli-berna/kurzarbeit-regole-ordinarie/",
           "excerpt": "Il Consiglio federale prospetta un ritorno graduale: Kurzarbeit da 24 a 12 mesi e Karenzzeit da 1 giorno a un massimo di tre giorni.",
           "date": "2026-10-21T15:33:53.249Z"
-        },
-        {
-          "title": "Stato della pagina dell'amministrazione bernese",
-          "url": "/articoli-berna/berna-stato-pagina-non-disponibile/",
-          "excerpt": "Il contenuto della pagina indicata non risulta disponibile.",
-          "date": "2026-10-21T02:11:38.957Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-23T02:23:53.372Z"
+      "updatedAt": "2026-10-27T01:56:36.060Z"
     },
     "en": {
       "canton": "BE",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-26T13:32:45.792Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "New features in the digital plan of the city of Bern",
+          "url": "/en/bern-articles/new-digital-city-plan-functions/",
+          "excerpt": "From 26 October 2026, new content in the digital plan Official names visible under «Nomenclature» Free download from the city’s Geoportal Street names",
+          "date": "2026-10-27T01:42:07.785Z"
+        },
         {
           "title": "Bern approves contributions for Rotbach and Saanen",
           "url": "/en/bern-articles/bern-contributions-rotbach-saanen/",
@@ -169,12 +175,6 @@
           "url": "/en/bern-articles/short-time-work-normal-rules/",
           "excerpt": "The Federal Council envisages a gradual return: short-time work from 24 to 12 months and the waiting period from 1 day to a maximum of three days.",
           "date": "2026-10-21T15:33:53.249Z"
-        },
-        {
-          "title": "Status of the Bernese administration page",
-          "url": "/en/bern-articles/bern-page-status-unavailable/",
-          "excerpt": "The content of the indicated page is not available.",
-          "date": "2026-10-21T02:11:38.957Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-23T02:23:53.372Z"
+      "updatedAt": "2026-10-27T01:56:36.060Z"
     },
     "de": {
       "canton": "BE",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-26T13:32:45.792Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Neue Funktionen im digitalen Plan der Stadt Bern",
+          "url": "/de/bern-artikel/neue-funktionen-digitaler-stadtplan/",
+          "excerpt": "Ab dem 26. Oktober 2026 neue Inhalte im digitalen Plan Offizielle Namen unter «Nomenklatur» sichtbar Kostenloser Download über das Geoportal der Stadt",
+          "date": "2026-10-27T01:42:07.785Z"
+        },
         {
           "title": "Bern genehmigt Beiträge für Rotbach und Saanen",
           "url": "/de/bern-artikel/bern-beitraege-rotbach-saanen/",
@@ -256,12 +262,6 @@
           "url": "/de/bern-artikel/kurzarbeit-ordentliche-regeln/",
           "excerpt": "Der Bundesrat stellt eine schrittweise Rückkehr in Aussicht: Kurzarbeit von 24 auf 12 Monate und Karenzzeit von 1 Tag auf höchstens drei Tage.",
           "date": "2026-10-21T15:33:53.249Z"
-        },
-        {
-          "title": "Status der Seite der Berner Verwaltung",
-          "url": "/de/bern-artikel/bern-seitenstatus-nicht-verfuegbar/",
-          "excerpt": "Der Inhalt der angegebenen Seite ist nicht verfügbar.",
-          "date": "2026-10-21T02:11:38.957Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-23T02:23:53.372Z"
+      "updatedAt": "2026-10-27T01:56:36.060Z"
     },
     "fr": {
       "canton": "BE",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-26T13:32:45.792Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Nouvelles fonctions dans le plan numérique de la ville de Berne",
+          "url": "/fr/articles-berne/nouvelles-fonctions-plan-digital/",
+          "excerpt": "À partir du 26 octobre 2026, nouveaux contenus dans le plan numérique Noms officiels visibles sous « Nomenclature » Téléchargement gratuit depuis le géoportail",
+          "date": "2026-10-27T01:42:07.785Z"
+        },
         {
           "title": "Berne approuve des contributions pour Rotbach et Saanen",
           "url": "/fr/articles-berne/berne-contributions-rotbach-saanen/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-berne/chomage-partiel-regles-ordinaires/",
           "excerpt": "Le Conseil fédéral envisage un retour progressif : le chômage partiel de 24 à 12 mois et le délai d’attente de 1 jour à un maximum de trois jours.",
           "date": "2026-10-21T15:33:53.249Z"
-        },
-        {
-          "title": "État de la page de l'administration bernoise",
-          "url": "/fr/articles-berne/berne-statut-page-indisponible/",
-          "excerpt": "Le contenu de la page indiquée n'est pas disponible.",
-          "date": "2026-10-21T02:11:38.957Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-23T02:23:53.372Z"
+      "updatedAt": "2026-10-27T01:56:36.060Z"
     }
   }
 }
