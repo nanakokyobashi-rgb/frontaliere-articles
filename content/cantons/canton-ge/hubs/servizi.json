@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "servizi",
-  "updatedAt": "2026-10-26T23:12:35.898Z",
-  "contentHash": "516acda9eea2c2985cc0c96c574e8c6a992858f5b71e0bb1e4d52325ca18ca45",
+  "updatedAt": "2026-10-27T01:37:11.978Z",
+  "contentHash": "fdcbcd36f788e50daff645ba1d4e623290cebdc63d50e471b90237d735846b13",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-26T17:13:54.202Z",
+      "updatedAt": "2026-10-26T21:45:28.121Z",
       "keyFacts": 0
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-26T15:21:46.969Z",
+      "updatedAt": "2026-10-26T21:08:31.026Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-26T17:41:28.137Z",
+      "updatedAt": "2026-10-26T21:55:18.630Z",
       "keyFacts": 0
     }
   ],
@@ -96,7 +96,7 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-26T17:13:54.202Z"
+          "updatedAt": "2026-10-26T21:45:28.121Z"
         },
         {
           "id": "meteo",
@@ -105,12 +105,12 @@
           "items": [
             {
               "label": "Genève",
-              "value": "11 °C",
-              "detail": "oggi da 5 a 12 °C"
+              "value": "8 °C",
+              "detail": "oggi da 5 a 10 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-26T15:21:46.969Z"
+          "updatedAt": "2026-10-26T21:08:31.026Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -148,7 +148,7 @@
               "url": "https://www.ge.ch/node/45258"
             }
           ],
-          "updatedAt": "2026-10-26T17:41:28.137Z"
+          "updatedAt": "2026-10-26T21:55:18.630Z"
         }
       ],
       "curatedArticles": [
@@ -228,7 +228,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-26T23:12:35.898Z"
+      "updatedAt": "2026-10-27T01:37:11.978Z"
     },
     "en": {
       "canton": "GE",
@@ -297,7 +297,7 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-26T17:13:54.202Z"
+          "updatedAt": "2026-10-26T21:45:28.121Z"
         },
         {
           "id": "meteo",
@@ -306,12 +306,12 @@
           "items": [
             {
               "label": "Genève",
-              "value": "11 °C",
-              "detail": "today from 5 to 12 °C"
+              "value": "8 °C",
+              "detail": "today from 5 to 10 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-26T15:21:46.969Z"
+          "updatedAt": "2026-10-26T21:08:31.026Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -349,7 +349,7 @@
               "url": "https://www.ge.ch/node/45258"
             }
           ],
-          "updatedAt": "2026-10-26T17:41:28.137Z"
+          "updatedAt": "2026-10-26T21:55:18.630Z"
         }
       ],
       "curatedArticles": [
@@ -424,7 +424,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-26T23:12:35.898Z"
+      "updatedAt": "2026-10-27T01:37:11.978Z"
     },
     "de": {
       "canton": "GE",
@@ -493,7 +493,7 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-26T17:13:54.202Z"
+          "updatedAt": "2026-10-26T21:45:28.121Z"
         },
         {
           "id": "meteo",
@@ -502,12 +502,12 @@
           "items": [
             {
               "label": "Genève",
-              "value": "11 °C",
-              "detail": "heute 5 bis 12 °C"
+              "value": "8 °C",
+              "detail": "heute 5 bis 10 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-26T15:21:46.969Z"
+          "updatedAt": "2026-10-26T21:08:31.026Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -545,7 +545,7 @@
               "url": "https://www.ge.ch/node/45258"
             }
           ],
-          "updatedAt": "2026-10-26T17:41:28.137Z"
+          "updatedAt": "2026-10-26T21:55:18.630Z"
         }
       ],
       "curatedArticles": [
@@ -620,7 +620,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-26T23:12:35.898Z"
+      "updatedAt": "2026-10-27T01:37:11.978Z"
     },
     "fr": {
       "canton": "GE",
@@ -689,7 +689,7 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-26T17:13:54.202Z"
+          "updatedAt": "2026-10-26T21:45:28.121Z"
         },
         {
           "id": "meteo",
@@ -698,12 +698,12 @@
           "items": [
             {
               "label": "Genève",
-              "value": "11 °C",
-              "detail": "aujourd’hui de 5 à 12 °C"
+              "value": "8 °C",
+              "detail": "aujourd’hui de 5 à 10 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-26T15:21:46.969Z"
+          "updatedAt": "2026-10-26T21:08:31.026Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -741,7 +741,7 @@
               "url": "https://www.ge.ch/node/45258"
             }
           ],
-          "updatedAt": "2026-10-26T17:41:28.137Z"
+          "updatedAt": "2026-10-26T21:55:18.630Z"
         }
       ],
       "curatedArticles": [
@@ -813,7 +813,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-26T23:12:35.898Z"
+      "updatedAt": "2026-10-27T01:37:11.978Z"
     }
   }
 }

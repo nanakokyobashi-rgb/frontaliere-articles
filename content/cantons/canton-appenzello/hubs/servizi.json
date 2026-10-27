@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "servizi",
-  "updatedAt": "2026-10-26T23:12:35.898Z",
-  "contentHash": "75d53b7163a073a915cf7dbc4962f4cc64be48944d2a06dce49afeb98fd0fc0b",
+  "updatedAt": "2026-10-27T01:37:11.978Z",
+  "contentHash": "b2d9c8e6144a2b6e62138e18b59bf5e0010add67b65fe954922c07cd4ab26014",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-26T12:59:08.913Z",
+      "updatedAt": "2026-10-26T22:41:01.543Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-26T15:21:46.969Z",
+      "updatedAt": "2026-10-26T21:08:31.026Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-26T17:41:28.137Z",
+      "updatedAt": "2026-10-26T21:55:18.630Z",
       "keyFacts": 0
     }
   ],
@@ -97,7 +97,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder#liste-freie-kontrollschilder",
-          "updatedAt": "2026-10-26T12:59:08.913Z"
+          "updatedAt": "2026-10-26T22:41:01.543Z"
         },
         {
           "id": "meteo",
@@ -111,12 +111,12 @@
             },
             {
               "label": "Herisau",
-              "value": "9 °C",
-              "detail": "oggi da 6 a 10 °C"
+              "value": "8 °C",
+              "detail": "oggi da 7 a 9 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-26T15:21:46.969Z"
+          "updatedAt": "2026-10-26T21:08:31.026Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -149,7 +149,7 @@
               "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/bruno-streule-wird-neuer-leiter-des-amts-fuer-gesundheit/"
             }
           ],
-          "updatedAt": "2026-10-26T17:41:28.137Z"
+          "updatedAt": "2026-10-26T21:55:18.630Z"
         }
       ],
       "curatedArticles": [
@@ -237,7 +237,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-26T23:12:35.898Z"
+      "updatedAt": "2026-10-27T01:37:11.978Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -307,7 +307,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder#liste-freie-kontrollschilder",
-          "updatedAt": "2026-10-26T12:59:08.913Z"
+          "updatedAt": "2026-10-26T22:41:01.543Z"
         },
         {
           "id": "meteo",
@@ -321,12 +321,12 @@
             },
             {
               "label": "Herisau",
-              "value": "9 °C",
-              "detail": "today from 6 to 10 °C"
+              "value": "8 °C",
+              "detail": "today from 7 to 9 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-26T15:21:46.969Z"
+          "updatedAt": "2026-10-26T21:08:31.026Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -359,7 +359,7 @@
               "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/bruno-streule-wird-neuer-leiter-des-amts-fuer-gesundheit/"
             }
           ],
-          "updatedAt": "2026-10-26T17:41:28.137Z"
+          "updatedAt": "2026-10-26T21:55:18.630Z"
         }
       ],
       "curatedArticles": [
@@ -439,7 +439,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-26T23:12:35.898Z"
+      "updatedAt": "2026-10-27T01:37:11.978Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -509,7 +509,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder#liste-freie-kontrollschilder",
-          "updatedAt": "2026-10-26T12:59:08.913Z"
+          "updatedAt": "2026-10-26T22:41:01.543Z"
         },
         {
           "id": "meteo",
@@ -523,12 +523,12 @@
             },
             {
               "label": "Herisau",
-              "value": "9 °C",
-              "detail": "heute 6 bis 10 °C"
+              "value": "8 °C",
+              "detail": "heute 7 bis 9 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-26T15:21:46.969Z"
+          "updatedAt": "2026-10-26T21:08:31.026Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -561,7 +561,7 @@
               "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/bruno-streule-wird-neuer-leiter-des-amts-fuer-gesundheit/"
             }
           ],
-          "updatedAt": "2026-10-26T17:41:28.137Z"
+          "updatedAt": "2026-10-26T21:55:18.630Z"
         }
       ],
       "curatedArticles": [
@@ -641,7 +641,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-26T23:12:35.898Z"
+      "updatedAt": "2026-10-27T01:37:11.978Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -711,7 +711,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder#liste-freie-kontrollschilder",
-          "updatedAt": "2026-10-26T12:59:08.913Z"
+          "updatedAt": "2026-10-26T22:41:01.543Z"
         },
         {
           "id": "meteo",
@@ -725,12 +725,12 @@
             },
             {
               "label": "Herisau",
-              "value": "9 °C",
-              "detail": "aujourd’hui de 6 à 10 °C"
+              "value": "8 °C",
+              "detail": "aujourd’hui de 7 à 9 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-26T15:21:46.969Z"
+          "updatedAt": "2026-10-26T21:08:31.026Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -763,7 +763,7 @@
               "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/bruno-streule-wird-neuer-leiter-des-amts-fuer-gesundheit/"
             }
           ],
-          "updatedAt": "2026-10-26T17:41:28.137Z"
+          "updatedAt": "2026-10-26T21:55:18.630Z"
         }
       ],
       "curatedArticles": [
@@ -835,7 +835,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-26T23:12:35.898Z"
+      "updatedAt": "2026-10-27T01:37:11.978Z"
     }
   }
 }

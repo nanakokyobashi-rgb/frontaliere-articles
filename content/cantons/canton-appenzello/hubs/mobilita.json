@@ -4,17 +4,17 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "mobilita",
-  "updatedAt": "2026-10-26T17:18:45.341Z",
-  "contentHash": "8e6ff8dabc91ade7e41befe659623ff473d82ad533f4b03e610bf1bd5b7d3ac2",
+  "updatedAt": "2026-10-27T01:37:11.978Z",
+  "contentHash": "ee6b5f3e03ef98546e03dc5ac54e8739f597115e43d8027813e67c25145a0465",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-26T13:38:17.324Z",
+      "updatedAt": "2026-10-26T20:50:08.586Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-26T11:33:49.792Z",
+      "updatedAt": "2026-10-26T21:55:18.630Z",
       "keyFacts": 0
     }
   ],
@@ -40,7 +40,7 @@
             {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Traffico",
-              "date": "2026-10-26T13:38:17.324Z",
+              "date": "2026-10-26T20:50:08.586Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
@@ -51,7 +51,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-26T13:38:17.324Z"
+          "updatedAt": "2026-10-26T20:50:08.586Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -89,7 +89,7 @@
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
-          "updatedAt": "2026-10-26T11:33:49.792Z"
+          "updatedAt": "2026-10-26T21:55:18.630Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-27T01:37:11.978Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -140,7 +140,7 @@
             {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Traffic",
-              "date": "2026-10-26T13:38:17.324Z",
+              "date": "2026-10-26T20:50:08.586Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
@@ -151,7 +151,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-26T13:38:17.324Z"
+          "updatedAt": "2026-10-26T20:50:08.586Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -189,7 +189,7 @@
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
-          "updatedAt": "2026-10-26T11:33:49.792Z"
+          "updatedAt": "2026-10-26T21:55:18.630Z"
         }
       ],
       "curatedArticles": [
@@ -217,7 +217,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-27T01:37:11.978Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -240,7 +240,7 @@
             {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Verkehr",
-              "date": "2026-10-26T13:38:17.324Z",
+              "date": "2026-10-26T20:50:08.586Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
@@ -251,7 +251,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-26T13:38:17.324Z"
+          "updatedAt": "2026-10-26T20:50:08.586Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -289,7 +289,7 @@
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
-          "updatedAt": "2026-10-26T11:33:49.792Z"
+          "updatedAt": "2026-10-26T21:55:18.630Z"
         }
       ],
       "curatedArticles": [
@@ -317,7 +317,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-27T01:37:11.978Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -340,7 +340,7 @@
             {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Trafic",
-              "date": "2026-10-26T13:38:17.324Z",
+              "date": "2026-10-26T20:50:08.586Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
@@ -351,7 +351,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-26T13:38:17.324Z"
+          "updatedAt": "2026-10-26T20:50:08.586Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -389,7 +389,7 @@
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
-          "updatedAt": "2026-10-26T11:33:49.792Z"
+          "updatedAt": "2026-10-26T21:55:18.630Z"
         }
       ],
       "curatedArticles": [
@@ -417,7 +417,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-27T01:37:11.978Z"
     }
   }
 }

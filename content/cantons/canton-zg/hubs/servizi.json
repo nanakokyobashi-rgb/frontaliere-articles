@@ -4,8 +4,8 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "servizi",
-  "updatedAt": "2026-10-26T23:12:35.898Z",
-  "contentHash": "efc9386a12c79020b9b71a83c2eb9d4bda39a66c895bec22f6b26799d9c05e0b",
+  "updatedAt": "2026-10-27T01:37:11.978Z",
+  "contentHash": "d53d71b639ed6cc423d399d1061c04453b615881a95b98339059ef8038557c64",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-26T15:21:46.969Z",
+      "updatedAt": "2026-10-26T21:08:31.026Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-26T17:41:28.137Z",
+      "updatedAt": "2026-10-26T21:55:18.630Z",
       "keyFacts": 0
     }
   ],
@@ -60,12 +60,12 @@
           "items": [
             {
               "label": "Zug",
-              "value": "11 °C",
-              "detail": "oggi da 7 a 11 °C"
+              "value": "9 °C",
+              "detail": "oggi da 7 a 9 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-26T15:21:46.969Z"
+          "updatedAt": "2026-10-26T21:08:31.026Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -103,7 +103,7 @@
               "url": "https://zg.ch/de/news/2026/July/sonn-und-feiertagsverkaeufe-2027"
             }
           ],
-          "updatedAt": "2026-10-26T17:41:28.137Z"
+          "updatedAt": "2026-10-26T21:55:18.630Z"
         }
       ],
       "curatedArticles": [
@@ -183,7 +183,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-26T23:12:35.898Z"
+      "updatedAt": "2026-10-27T01:37:11.978Z"
     },
     "en": {
       "canton": "ZG",
@@ -221,12 +221,12 @@
           "items": [
             {
               "label": "Zug",
-              "value": "11 °C",
-              "detail": "today from 7 to 11 °C"
+              "value": "9 °C",
+              "detail": "today from 7 to 9 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-26T15:21:46.969Z"
+          "updatedAt": "2026-10-26T21:08:31.026Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -264,7 +264,7 @@
               "url": "https://zg.ch/de/news/2026/July/sonn-und-feiertagsverkaeufe-2027"
             }
           ],
-          "updatedAt": "2026-10-26T17:41:28.137Z"
+          "updatedAt": "2026-10-26T21:55:18.630Z"
         }
       ],
       "curatedArticles": [
@@ -340,7 +340,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-26T23:12:35.898Z"
+      "updatedAt": "2026-10-27T01:37:11.978Z"
     },
     "de": {
       "canton": "ZG",
@@ -378,12 +378,12 @@
           "items": [
             {
               "label": "Zug",
-              "value": "11 °C",
-              "detail": "heute 7 bis 11 °C"
+              "value": "9 °C",
+              "detail": "heute 7 bis 9 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-26T15:21:46.969Z"
+          "updatedAt": "2026-10-26T21:08:31.026Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -421,7 +421,7 @@
               "url": "https://zg.ch/de/news/2026/July/sonn-und-feiertagsverkaeufe-2027"
             }
           ],
-          "updatedAt": "2026-10-26T17:41:28.137Z"
+          "updatedAt": "2026-10-26T21:55:18.630Z"
         }
       ],
       "curatedArticles": [
@@ -497,7 +497,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-26T23:12:35.898Z"
+      "updatedAt": "2026-10-27T01:37:11.978Z"
     },
     "fr": {
       "canton": "ZG",
@@ -535,12 +535,12 @@
           "items": [
             {
               "label": "Zug",
-              "value": "11 °C",
-              "detail": "aujourd’hui de 7 à 11 °C"
+              "value": "9 °C",
+              "detail": "aujourd’hui de 7 à 9 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-26T15:21:46.969Z"
+          "updatedAt": "2026-10-26T21:08:31.026Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -578,7 +578,7 @@
               "url": "https://zg.ch/de/news/2026/July/sonn-und-feiertagsverkaeufe-2027"
             }
           ],
-          "updatedAt": "2026-10-26T17:41:28.137Z"
+          "updatedAt": "2026-10-26T21:55:18.630Z"
         }
       ],
       "curatedArticles": [
@@ -650,7 +650,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-26T23:12:35.898Z"
+      "updatedAt": "2026-10-27T01:37:11.978Z"
     }
   }
 }
