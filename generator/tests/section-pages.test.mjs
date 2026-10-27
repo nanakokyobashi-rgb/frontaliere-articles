@@ -3455,6 +3455,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /COORDINATED_RECOVERY: \$\{\{ inputs\.coordinated_recovery \}\}/);
   assert.match(resolver, /-f coordinated_recovery="\$coordinated_recovery"/);
   assert.match(render, /-f coordinated_recovery="\$coordinated_recovery"/);
+  assert.match(wf, /-f coordinated_recovery="\$COORDINATED_RECOVERY"/);
   assert.match(wf, /-f source_commit="\$CURRENT_MAIN"/);
   assert.match(sectionContract, /-f source_commit="\$current_main"/);
   assert.equal(
@@ -3567,6 +3568,8 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(recovery, /dispatch_baseline_ids=\(\)/);
   assert.match(recovery, /initial_run_state/);
   assert.match(recovery, /latest_run_id <= baseline_run_id/);
+  assert.match(recovery, /git checkout --detach "\$CURRENT_MAIN"/);
+  assert.match(recovery, /baseline_state/);
   assert.match(recovery, /sort_by\(\.databaseId \| tonumber\)[\s\S]*if length == 0 then \[\] else \[\.\[-1\]\] end/);
   assert.match(recovery, /\.conclusion != "success"/);
   assert.match(recovery, /nonce_hash="\$\(printf '%s\\0%s\\0%s\\0%s/);

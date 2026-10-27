@@ -13,6 +13,17 @@ fi
 export GH_TOKEN="$runtime_pat"
 target_matrix="$TARGET_MATRIX"
 if [ "${MIXED_MATRIX:-false}" = 'true' ]; then
+  if [ "$(git rev-parse --is-shallow-repository)" = 'true' ]; then
+    git fetch --no-tags --unshallow origin main
+  else
+    git fetch --no-tags origin main
+  fi
+  fetched_current_main="$(git rev-parse refs/remotes/origin/main)"
+  if [ "$fetched_current_main" != "$CURRENT_MAIN" ]; then
+    echo "::error::main e' avanzata durante la preparazione del piano mixed-matrix ($CURRENT_MAIN -> $fetched_current_main); annullo il recovery"
+    exit 1
+  fi
+  git checkout --detach "$CURRENT_MAIN"
   plan_before="${ORIGINAL_PUSH_BEFORE:-}"
   if [ -z "$plan_before" ] || [[ "$plan_before" =~ ^0+$ ]]; then
     # A manual workflow_dispatch carries an explicit section/article scope but
@@ -24,21 +35,10 @@ if [ "${MIXED_MATRIX:-false}" = 'true' ]; then
     # Una matrice mista non può riusare il piano risolto prima che main
     # avanzasse: ricostruisci il piano dalla revisione corrente e dalla base
     # della push originaria prima di redispatchare.
-    if [ "$(git rev-parse --is-shallow-repository)" = 'true' ]; then
-      git fetch --no-tags --unshallow origin main
-    else
-      git fetch --no-tags origin main
-    fi
-    fetched_current_main="$(git rev-parse refs/remotes/origin/main)"
-    if [ "$fetched_current_main" != "$CURRENT_MAIN" ]; then
-      echo "::error::main e' avanzata durante la preparazione del piano mixed-matrix ($CURRENT_MAIN -> $fetched_current_main); annullo il recovery"
-      exit 1
-    fi
     if ! [[ "$plan_before" =~ ^[a-f0-9]{40}$ ]]; then
       echo "::error::base della push non valida per il piano mixed-matrix: $plan_before"
       exit 1
     fi
-    git checkout --detach "$CURRENT_MAIN"
     target_matrix="$(git diff --name-status "$plan_before" "$CURRENT_MAIN" \
       | PUSH_BEFORE="$plan_before" node scripts/ci/fast-publish-section.mjs r2-plan \
       | jq -c 'map(. + {bootstrap: (.bootstrap // false)})')"
@@ -223,11 +223,24 @@ wait_for_dispatched_children() {
         | if length == 0 then [] else [.[-1]] end
       ' <<<"$runs")"
       latest_run_id="$(jq -r 'if length == 0 then 0 else .[0].databaseId | tonumber end' <<<"$matching_runs")"
-      if [ "$initial_run_state" != 'success' ] && (( latest_run_id <= baseline_run_id )); then
+      if (( latest_run_id <= baseline_run_id )) && [ "$initial_run_state" != 'success' ]; then
         # A previous pending/failed run is still the newest visible item.  The
         # dispatcher either waits for it or has already accepted a retry; in
         # both cases an unseen newer run must be observed before concluding.
-        child_state='pending'
+        baseline_state="$(jq -r '
+          if length == 0 then "missing"
+          elif .[0].status != "completed" then "pending"
+          elif .[0].conclusion == "success" then "success"
+          else "failed"
+          end
+        ' <<<"$matching_runs")"
+        if [ "$initial_run_state" = 'pending' ] && [ "$baseline_state" = 'success' ]; then
+          # The dispatcher legitimately reused the pending run; its success
+          # is the accepted child, even though no newer run was created.
+          child_state='success'
+        else
+          child_state='pending'
+        fi
       else
         child_state="$(jq -r '
           if length == 0 then "missing"
