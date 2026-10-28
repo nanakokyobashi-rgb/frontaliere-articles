@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-ristorni-malnate-meno-500mila.webp",
+      "sha256": "6c2c1e2c9c704b97ceef8d7ab347651c308b17efec25f8af760aa67f1559497b"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-ristorni-malnate-meno-500mila-480w.webp",
+      "sha256": "0abebc7fc8f963bb8916a3fbd043afe6707a0f5e5d4feaf121da2ffdd0095d37"
+    }
+  ]
 }
