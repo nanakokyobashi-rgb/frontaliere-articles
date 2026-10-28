@@ -30,8 +30,41 @@ ensure_recovery_history() {
   fi
 }
 
+validate_recovery_base_ancestry() {
+  local recovery_base="${ORIGINAL_PUSH_BEFORE:-}"
+  local ancestry_status=0
+  if [ -z "$recovery_base" ] || [[ "$recovery_base" =~ ^0+$ ]]; then
+    # A bounded workflow_dispatch may intentionally carry an explicit matrix
+    # without a push range. There is no ancestry claim to validate in that path.
+    return 0
+  fi
+  if ! [[ "$recovery_base" =~ ^[a-f0-9]{40}$ ]]; then
+    echo "::error::base della push non valida per la verifica di ancestry: $recovery_base"
+    return 1
+  fi
+  git merge-base --is-ancestor "$recovery_base" "$CURRENT_MAIN" || ancestry_status=$?
+  case "$ancestry_status" in
+    0)
+      return 0
+      ;;
+    1)
+      echo "::error::base della push non antenata di CURRENT_MAIN: force-push o storia non lineare; annullo il recovery"
+      return 1
+      ;;
+    *)
+      echo "::error::impossibile verificare l'ancestry della base della push (git merge-base status $ancestry_status)"
+      return 1
+      ;;
+  esac
+}
+
 if [ "${MIXED_MATRIX:-false}" = 'true' ]; then
-  ensure_recovery_history
+  if ! ensure_recovery_history; then
+    exit 1
+  fi
+  if ! validate_recovery_base_ancestry; then
+    exit 1
+  fi
   fetched_current_main="$(git rev-parse refs/remotes/origin/main)"
   if [ "$fetched_current_main" != "$CURRENT_MAIN" ]; then
     echo "::error::main e' avanzata durante la preparazione del piano mixed-matrix ($CURRENT_MAIN -> $fetched_current_main); annullo il recovery"
@@ -234,15 +267,20 @@ rebuild_recovery_head() {
     echo "::error::HEAD handoff non valida: $next_head"
     return 1
   fi
-  ensure_recovery_history
+  CURRENT_MAIN="$next_head"
+  export CURRENT_MAIN
+  if ! ensure_recovery_history; then
+    return 1
+  fi
+  if ! validate_recovery_base_ancestry; then
+    return 1
+  fi
   fetched_current_main="$(git rev-parse refs/remotes/origin/main)"
   if [ "$fetched_current_main" != "$next_head" ]; then
     echo "::error::main e' avanzata durante il rebuild del recovery ($next_head -> $fetched_current_main)"
     return 1
   fi
   git checkout --detach "$next_head"
-  CURRENT_MAIN="$next_head"
-  export CURRENT_MAIN
   plan_before="${ORIGINAL_PUSH_BEFORE:-}"
   if [ -n "$plan_before" ] && [[ ! "$plan_before" =~ ^0+$ ]]; then
     if ! [[ "$plan_before" =~ ^[a-f0-9]{40}$ ]]; then
