@@ -1708,7 +1708,10 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
     );
   }
   assert.match(pushBaseGuard, /git cat-file -e "\$\{PUSH_BEFORE\}\^\{commit\}"/u);
-  assert.match(pushBaseGuard, /git fetch --no-tags --depth=1 origin "\$PUSH_BEFORE"/u);
+  assert.match(pushBaseGuard, /git rev-parse --is-shallow-repository/u);
+  assert.match(pushBaseGuard, /git fetch --no-tags --unshallow origin main/u);
+  assert.match(pushBaseGuard, /HISTORY_FETCH_ATTEMPTS/u);
+  assert.match(pushBaseGuard, /git fetch --no-tags origin "\$PUSH_BEFORE"/u);
 
   const articlePublisher = fs.readFileSync(new URL('../../.github/workflows/fast-publish-article.yml', import.meta.url), 'utf8');
   assert.match(articlePublisher, /publisher omitted requested article IDs/u);
