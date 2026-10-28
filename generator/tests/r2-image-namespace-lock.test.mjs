@@ -3,10 +3,14 @@ import assert from 'node:assert/strict';
 
 import {
   acquireImageNamespaceLock,
+  classifyReleaseOutcome,
   isImageNamespaceLockPayload,
   parseLeaseTimestamp,
   releaseImageNamespaceLock,
+  releaseImageNamespaceLeasesWithDeadline,
   releaseImageNamespaceLeases,
+  releaseResultValueValid,
+  releaseTimeoutReasonCode,
   serializeImageLeaseContext,
   verifyImageNamespaceLease,
 } from '../../scripts/lib/r2-image-namespace-lock.mjs';
@@ -16,6 +20,39 @@ test('lease timestamp parsing accepts only decimal safe integers', () => {
   for (const raw of ['0', '-1', '1e3', '0x3e8', '1.5', '9007199254740992', undefined]) {
     assert.equal(parseLeaseTimestamp(raw), null, raw);
   }
+});
+
+test('bounded release rejects unknown settled statuses and values', async () => {
+  assert.equal(
+    classifyReleaseOutcome(
+      { timedOut: false, results: [{ status: 'unknown', value: [] }], finishedAt: 99 },
+      { deadline: 100 },
+    ),
+    'failed',
+  );
+  assert.equal(releaseResultValueValid([]), true);
+  assert.equal(releaseResultValueValid(true), true);
+  assert.equal(releaseResultValueValid({}), false);
+
+  const result = await releaseImageNamespaceLeasesWithDeadline(
+    [{ namespace: 'blog' }],
+    { timeoutMs: 1_000, releaseImpl: () => ({ unexpected: true }) },
+  );
+  assert.equal(result.status, 'failed');
+  assert.equal(result.invalidReleaseResultCount, 1);
+});
+
+test('bounded release preserves timeout classification for primitive reasons', () => {
+  assert.equal(releaseTimeoutReasonCode('timeout'), 'IMAGE_LEASE_RELEASE_TIMEOUT');
+  assert.equal(releaseTimeoutReasonCode('R2_REQUEST_TIMEOUT'), 'R2_REQUEST_TIMEOUT');
+  assert.equal(releaseTimeoutReasonCode('ordinary failure'), null);
+  assert.equal(
+    classifyReleaseOutcome(
+      { timedOut: false, results: [{ status: 'rejected', reason: 'deadline exceeded' }], finishedAt: 99 },
+      { deadline: 100 },
+    ),
+    'timeout',
+  );
 });
 
 test('lease payloads reject unsafe releasedAt values even when still live', () => {

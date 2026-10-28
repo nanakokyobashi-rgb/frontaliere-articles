@@ -771,23 +771,60 @@ export async function releaseImageNamespaceLeases(leases, options = {}) {
   return released;
 }
 
-function containsReleaseTimeout(error, seen = new Set()) {
+const RELEASE_TIMEOUT_CODES = new Set(['R2_REQUEST_TIMEOUT', 'IMAGE_LEASE_RELEASE_TIMEOUT']);
+
+/**
+ * Normalize timeout reasons before classifying a bounded lease release.
+ * Release overrides are testable extension points, so a rejected primitive
+ * reason must not be silently downgraded to an ordinary release failure.
+ */
+export function releaseTimeoutReasonCode(reason, seen = new Set()) {
+  if (typeof reason === 'string') {
+    const normalized = reason.trim().toUpperCase();
+    if (RELEASE_TIMEOUT_CODES.has(normalized)) return normalized;
+    if (/TIMEOUT|TIMED OUT|DEADLINE EXCEEDED/u.test(normalized)) {
+      return 'IMAGE_LEASE_RELEASE_TIMEOUT';
+    }
+    return null;
+  }
   if (
-    error === null
-    || (typeof error !== 'object' && typeof error !== 'function')
-    || seen.has(error)
+    reason === null
+    || (typeof reason !== 'object' && typeof reason !== 'function')
+    || seen.has(reason)
   ) {
-    return false;
+    return null;
   }
-  seen.add(error);
-  if (error.code === 'R2_REQUEST_TIMEOUT' || error.code === 'IMAGE_LEASE_RELEASE_TIMEOUT') {
-    return true;
+  seen.add(reason);
+  if (typeof reason.code === 'string') {
+    const code = reason.code.trim().toUpperCase();
+    if (RELEASE_TIMEOUT_CODES.has(code)) return code;
   }
-  if (error instanceof AggregateError
-    && [...error.errors].some((nested) => containsReleaseTimeout(nested, seen))) {
-    return true;
+  if (reason.name === 'TimeoutError') return 'R2_REQUEST_TIMEOUT';
+  if (reason instanceof AggregateError) {
+    for (const nested of reason.errors) {
+      const code = releaseTimeoutReasonCode(nested, seen);
+      if (code) return code;
+    }
   }
-  return containsReleaseTimeout(error.cause, seen);
+  return releaseTimeoutReasonCode(reason.cause, seen);
+}
+
+function containsReleaseTimeout(error) {
+  return releaseTimeoutReasonCode(error) !== null;
+}
+
+/** Values accepted from a release implementation and reducible to namespaces. */
+export function releaseResultValueValid(value) {
+  return Array.isArray(value) || value === true;
+}
+
+function countInvalidReleaseResults(results) {
+  if (!Array.isArray(results)) return 0;
+  return results.reduce((count, result) => {
+    if (!result || (result.status !== 'fulfilled' && result.status !== 'rejected')) return count + 1;
+    if (result.status === 'fulfilled' && !releaseResultValueValid(result.value)) return count + 1;
+    return count;
+  }, 0);
 }
 
 export function classifyReleaseDeadlineRace(outcome, { deadline } = {}) {
@@ -810,6 +847,7 @@ export function classifyReleaseDeadlineRace(outcome, { deadline } = {}) {
 export function classifyReleaseOutcome(outcome, { deadline } = {}) {
   const deadlineRace = classifyReleaseDeadlineRace(outcome, { deadline });
   if (deadlineRace === 'timeout' || deadlineRace === 'indeterminate') return deadlineRace;
+  if (countInvalidReleaseResults(outcome.results) > 0) return 'failed';
   const rejected = outcome.results.filter((result) => result?.status === 'rejected');
   if (rejected.length === 0) return 'released';
   if (rejected.some((result) => containsReleaseTimeout(result.reason))) return 'timeout';
@@ -831,7 +869,9 @@ export async function releaseImageNamespaceLeasesWithDeadline(
 ) {
   if (!Array.isArray(leases)) throw new Error('[r2-image-namespace-lock] leases must be an array');
   positiveDuration(timeoutMs, 'image lease release timeout');
-  if (leases.length === 0) return { status: 'released', timedOut: false, released: [] };
+  if (leases.length === 0) {
+    return { status: 'released', timedOut: false, released: [], invalidReleaseResultCount: 0 };
+  }
 
   const now = options.now ?? Date.now;
   const deadline = safeTimestamp(now() + timeoutMs, 'release deadline');
@@ -849,33 +889,53 @@ export async function releaseImageNamespaceLeasesWithDeadline(
   })).then((results) => ({ timedOut: false, results, finishedAt: now() }));
   const outcome = await Promise.race([work, timeout]);
   clearTimeout(timeoutId);
+  const invalidReleaseResultCount = countInvalidReleaseResults(outcome.results);
   const releaseOutcome = classifyReleaseOutcome(outcome, { deadline });
   if (releaseOutcome !== 'released' && releaseOutcome !== 'failed') {
-    return { status: 'timeout', timedOut: true, released: null, error: timeoutError, deadlineRace: releaseOutcome };
+    return {
+      status: 'timeout',
+      timedOut: true,
+      released: null,
+      error: timeoutError,
+      deadlineRace: releaseOutcome,
+      invalidReleaseResultCount,
+    };
   }
 
   const released = [];
   const errors = [];
   for (const [index, result] of outcome.results.entries()) {
+    if (!result || (result.status !== 'fulfilled' && result.status !== 'rejected')) {
+      errors.push(new Error(`[r2-image-namespace-lock] invalid settled release result at index ${index}`));
+      continue;
+    }
     if (result.status === 'rejected') {
       errors.push(result.reason);
       continue;
     }
-    if (Array.isArray(result.value)) released.push(...result.value);
+    if (!releaseResultValueValid(result.value)) {
+      errors.push(new Error(`[r2-image-namespace-lock] invalid release result value at index ${index}`));
+    } else if (Array.isArray(result.value)) released.push(...result.value);
     else if (result.value === true) released.push(groups[index][0]?.namespace);
   }
   if (errors.length > 0) {
     if (errors.some((error) => containsReleaseTimeout(error))) {
-      return { status: 'timeout', timedOut: true, released: null, error: timeoutError };
+      return { status: 'timeout', timedOut: true, released: null, error: timeoutError, invalidReleaseResultCount };
     }
     return {
       status: 'failed',
       timedOut: false,
       released,
       error: new AggregateError(errors, errors.map((error) => error?.message ?? String(error)).join('; '), { cause: errors[0] }),
+      invalidReleaseResultCount,
     };
   }
-  return { status: 'released', timedOut: false, released: released.filter(Boolean) };
+  return {
+    status: 'released',
+    timedOut: false,
+    released: released.filter(Boolean),
+    invalidReleaseResultCount,
+  };
 }
 
 export function releaseNotOwnedIsFatal({ fenceMissingCandidate = false, ignoreNotOwned = false } = {}) {
