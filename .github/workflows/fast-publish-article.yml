@@ -576,11 +576,15 @@ jobs:
       matrix:
         target: ${{ fromJSON(needs.resolve.outputs.matrix) }}
     # Never cancel: a cancelled run can leave some locales pushed and others not.
+    # `queue: max` is required because one shard can produce several bounded
+    # batches; without it GitHub keeps only one pending job per concurrency
+    # group and would silently replace the intermediate batches.
     # Per shard, not global: the shard is the unit that a half-finished publish
     # can leave inconsistent, and it comes from the section core (`shardKey`).
     concurrency:
       group: fast-publish-article-${{ matrix.target.shard }}
       cancel-in-progress: false
+      queue: max
     # One hard budget is shared by the pre-purge observation and the recovery
     # gate. A repo variable may shorten the first observation, but can never
     # extend the budget that the recovery path is guaranteed to receive.

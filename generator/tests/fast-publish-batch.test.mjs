@@ -82,6 +82,13 @@ test('i target della matrix vengono spezzati prima dell export come env', () => 
   assert.match(resolveStep, /append_matrix_target "\$batch_target"/u);
 });
 
+test('tutti i batch dello stesso shard restano in coda', () => {
+  assert.match(
+    workflow,
+    /group: fast-publish-article-\$\{\{ matrix\.target\.shard \}\}[\s\S]*cancel-in-progress: false\s+queue: max/u,
+  );
+});
+
 test('le superfici articolo oltre il body producono solo gli ID realmente cambiati', () => {
   const registry = new Map([
     ['frontaliere', new Set(['alpha', 'beta'])],
