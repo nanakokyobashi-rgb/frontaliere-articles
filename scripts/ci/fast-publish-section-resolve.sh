@@ -127,12 +127,11 @@ if [ -n "$pinned_source" ]; then
     replay_before="${PUSH_BEFORE:-}"
     replay_after=''
     replay_matrix='[]'
-    if ! git fetch --no-tags --depth=1 origin \
-      "refs/heads/main:refs/remotes/origin/fast-publish-current-main"; then
-      echo "::error::impossibile scaricare la HEAD corrente di main per il piano stale"
+    if ! PUSH_BEFORE='' FETCH_MAIN=true bash scripts/ci/fetch-push-base-if-missing.sh; then
+      echo "::error::impossibile aggiornare main tramite il guard bounded per il piano stale"
       exit 1
     fi
-    fetched_current_main="$(git rev-parse refs/remotes/origin/fast-publish-current-main)"
+    fetched_current_main="$(git rev-parse refs/remotes/origin/main)"
     if [ "$fetched_current_main" != "$current_main" ]; then
       echo "::error::main e' avanzata durante la preparazione del piano stale ($current_main -> $fetched_current_main)"
       exit 1

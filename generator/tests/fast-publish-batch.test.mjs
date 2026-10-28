@@ -1,9 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import '../../host/cantonSectionsBootstrap.mjs';
-import { readFileSync } from 'node:fs';
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { dirname, resolve } from 'node:path';
+import { dirname, join, resolve } from 'node:path';
+import { tmpdir } from 'node:os';
 import { ARTICLE_SECTION_CORE_LIST } from '../../engine/shared/articleSectionCore.mjs';
 import { articlePublishPlan, bodyPublishPlan, bodyRegex } from '../../scripts/ci/fast-publish-section.mjs';
 
@@ -14,6 +16,11 @@ const publisher = readFileSync(resolve(here, '../../scripts/publish-article-fast
 const pipeline = readFileSync(resolve(here, '../../scripts/lib/article-render-pipeline.mjs'), 'utf8');
 const observer = readFileSync(resolve(here, '../../scripts/ci/article-publication-observer.mjs'), 'utf8');
 const pushBaseGuard = readFileSync(resolve(here, '../../scripts/ci/fetch-push-base-if-missing.sh'), 'utf8');
+const pushBaseGuardPath = resolve(here, '../../scripts/ci/fetch-push-base-if-missing.sh');
+
+function git(cwd, ...args) {
+  return execFileSync('git', args, { cwd, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim();
+}
 
 function stepText(name) {
   const matches = [...workflow.matchAll(/^ {6}- name: (.+)$/gm)];
@@ -288,8 +295,85 @@ test('uno slug winner cambiato risveglia i dipendenti shadowed e valida la chiav
 test('il resolver article non rifà il fetch del parent già presente nel checkout', () => {
   const resolveFetchStep = stepText('Fetch push base (resolve)');
   assert.match(resolveFetchStep, /bash scripts\/ci\/fetch-push-base-if-missing\.sh/);
+  assert.match(pushBaseGuard, /git rev-parse --is-shallow-repository/);
+  assert.match(pushBaseGuard, /bounded_git_fetch --no-tags --unshallow origin "\$origin_main_refspec"/);
+  assert.match(pushBaseGuard, /origin_main_refspec='main:refs\/remotes\/origin\/main'/);
+  assert.match(pushBaseGuard, /HISTORY_FETCH_ATTEMPTS/);
+  assert.match(pushBaseGuard, /HISTORY_FETCH_DELAY_S/);
+  assert.match(pushBaseGuard, /history_fetch_delay_cap_s=30/);
+  assert.match(pushBaseGuard, /HISTORY_FETCH_TIMEOUT_S/);
+  assert.match(pushBaseGuard, /history_fetch_timeout_cap_s=300/);
+  assert.match(pushBaseGuard, /timeout --signal=TERM --kill-after=5s "\$\{history_fetch_timeout_s\}s" git fetch/);
+  assert.match(pushBaseGuard, /FETCH_MAIN/);
+  assert.match(pushBaseGuard, /fetched_main_head=.*git rev-parse FETCH_HEAD/);
   assert.match(pushBaseGuard, /git cat-file -e "\$\{PUSH_BEFORE\}\^\{commit\}"/);
-  assert.match(pushBaseGuard, /git fetch --no-tags --depth=1 origin "\$PUSH_BEFORE"/);
+  assert.match(pushBaseGuard, /fetch_ref_with_retries "push base \$PUSH_BEFORE" --no-tags origin "\$PUSH_BEFORE"/);
+  assert.match(pushBaseGuard, /push base non presente dopo il fetch/);
+});
+
+test('il guard del push base ripristina la storia completa prima del preflight', () => {
+  const root = mkdtempSync(join(tmpdir(), 'frontaliere-history-'));
+  const origin = join(root, 'origin.git');
+  const source = join(root, 'source');
+  const shallow = join(root, 'shallow');
+  try {
+    git(root, 'init', '--bare', '--initial-branch=main', origin);
+    git(root, 'init', '--initial-branch=main', source);
+    git(source, 'config', 'user.email', 'test@example.invalid');
+    git(source, 'config', 'user.name', 'test');
+    writeFileSync(join(source, 'history.txt'), 'base\n');
+    git(source, 'add', 'history.txt');
+    git(source, 'commit', '-m', 'base');
+    const base = git(source, 'rev-parse', 'HEAD');
+    writeFileSync(join(source, 'history.txt'), 'head\n');
+    git(source, 'commit', '-am', 'head');
+    git(source, 'remote', 'add', 'origin', origin);
+    git(source, 'push', 'origin', 'main');
+    git(root, 'clone', '--depth', '1', `file://${origin}`, shallow);
+    assert.equal(git(shallow, 'rev-parse', '--is-shallow-repository'), 'true');
+
+    execFileSync('bash', [pushBaseGuardPath], {
+      cwd: shallow,
+      env: {
+        ...process.env,
+        PUSH_BEFORE: base,
+        FETCH_MAIN: 'true',
+        HISTORY_FETCH_ATTEMPTS: '3',
+        HISTORY_FETCH_DELAY_S: '0',
+        HISTORY_FETCH_TIMEOUT_S: '30',
+      },
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
+
+    assert.equal(git(shallow, 'rev-parse', '--is-shallow-repository'), 'false');
+    assert.equal(git(shallow, 'cat-file', '-e', `${base}^{commit}`), '');
+    assert.equal(git(shallow, 'rev-parse', 'refs/remotes/origin/main'), git(shallow, 'rev-parse', 'HEAD'));
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('il guard rifiuta budget di rete non bounded', () => {
+  const repoRoot = resolve(here, '../..');
+  assert.throws(
+    () => execFileSync('bash', [pushBaseGuardPath], {
+      cwd: repoRoot,
+      env: { ...process.env, HISTORY_FETCH_DELAY_S: '31' },
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'pipe'],
+    }),
+    (error) => error?.status === 1,
+  );
+  assert.throws(
+    () => execFileSync('bash', [pushBaseGuardPath], {
+      cwd: repoRoot,
+      env: { ...process.env, HISTORY_FETCH_TIMEOUT_S: '301' },
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'pipe'],
+    }),
+    (error) => error?.status === 1,
+  );
 });
 
 test('il dry gate usa il piano delle superfici e il publisher porta i redirect di slug', () => {
