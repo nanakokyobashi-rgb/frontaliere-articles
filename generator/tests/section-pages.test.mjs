@@ -3565,6 +3565,11 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(recovery, /initial_run_state/);
   assert.match(recovery, /ensure_recovery_history\(\)/);
   assert.match(recovery, /PUSH_BEFORE="\$recovery_base" FETCH_MAIN=true/);
+  assert.match(recovery, /validate_recovery_base_ancestry\(\)/);
+  assert.match(recovery, /git merge-base --is-ancestor "\$recovery_base" "\$CURRENT_MAIN"/);
+  assert.match(recovery, /base della push non antenata di CURRENT_MAIN/);
+  assert.match(recovery, /force-push o storia non lineare/);
+  assert.match(recovery, /\[ -z "\$recovery_base" \] \|\| \[\[ "\$recovery_base" =~ \^0\+\$ \]\]/);
   assert.doesNotMatch(recovery, /git fetch --no-tags --(?:unshallow )?origin main/);
   assert.match(render, /PUSH_BEFORE="\$\{PUSH_BEFORE:-\}" FETCH_MAIN=true/);
   assert.doesNotMatch(render, /git fetch --no-tags --(?:unshallow )?origin main/);
