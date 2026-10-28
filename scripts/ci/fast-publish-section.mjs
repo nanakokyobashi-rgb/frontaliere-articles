@@ -139,12 +139,30 @@ function changedRecordIds(previous, next) {
 }
 
 const REGISTRY_SOURCE_KEY = '\u0000registry-source';
+const ENTRY_CONTEXT_MARKER = '\u0000entry-context\u0000';
+
+function cursorAfterEntrySeparator(source, end) {
+  let cursor = end;
+  while (/\s/u.test(source[cursor] ?? '')) cursor += 1;
+  return source[cursor] === ',' ? cursor + 1 : end;
+}
+
+function canonicalEntryContext(chunks) {
+  return chunks.join('')
+    // Only normalize separators between extracted records. Do not normalize
+    // whitespace in the remaining source: it can be meaningful inside a
+    // string literal or a transform outside the keyed records.
+    .replace(new RegExp(`${ENTRY_CONTEXT_MARKER}(?:\\s*${ENTRY_CONTEXT_MARKER})+`, 'gu'), ENTRY_CONTEXT_MARKER);
+}
 
 /**
  * Return top-level object spans without treating braces in a literal or
  * comment as syntax. Registry entries are the only object spans with a
  * plain `id` field; other top-level objects remain in the file context so a
- * transform added outside an entry invalidates the complete registry.
+ * transform added outside an entry invalidates the complete registry. Article
+ * entries are represented by one collapsed marker: adding or removing a
+ * record must be handled by its keyed record diff, not by widening the plan to
+ * every article in the registry.
  */
 function registryObjectSpans(source) {
   const spans = [];
@@ -190,11 +208,15 @@ function registrySourceContext(source) {
   const chunks = [];
   for (const span of registryObjectSpans(source)) {
     if (!articleRegistryObjectFields(span.body).has('id')) continue;
-    chunks.push(source.slice(cursor, span.start), '{}');
-    cursor = span.end;
+    chunks.push(source.slice(cursor, span.start), ENTRY_CONTEXT_MARKER);
+    // A generated registry stores records as comma-separated array members.
+    // Drop that member separator while retaining the surrounding source; the
+    // marker-run normalization makes the context independent of how many
+    // records occupy the run.
+    cursor = cursorAfterEntrySeparator(source, span.end);
   }
   chunks.push(source.slice(cursor));
-  return chunks.join('');
+  return canonicalEntryContext(chunks);
 }
 
 function registryRecords(source) {
@@ -223,7 +245,13 @@ const STATIC_MODULE_EXTENSIONS = Object.freeze(['', '.ts', '.tsx', '.js', '.mjs'
 
 function staticModuleSpecifiers(source) {
   if (source === null) return [];
-  return [...source.matchAll(STATIC_MODULE_SPECIFIER_RE)].map((match) => match[1]);
+  // `import type`/`export type` is erased by TypeScript and cannot change the
+  // runtime registry transform. Treating it as a dependency makes the shared
+  // Article type import in `swiss-articles-data.ts` wake every Swiss article
+  // when the frontaliere registry changes.
+  return [...source.matchAll(STATIC_MODULE_SPECIFIER_RE)]
+    .filter((match) => !/^\s*(?:import|export)\s+type\b/u.test(match[0]))
+    .map((match) => match[1]);
 }
 
 function registryImportMatches(rel, registryFile, source) {
@@ -252,11 +280,11 @@ function seoRecords(source, rel) {
   let cursor = 0;
   const context = [];
   for (const match of matches) {
-    context.push(source.slice(cursor, match.lineStart), '{}');
-    cursor = match.closeIdx + 1;
+    context.push(source.slice(cursor, match.lineStart), ENTRY_CONTEXT_MARKER);
+    cursor = cursorAfterEntrySeparator(source, match.closeIdx + 1);
   }
   context.push(source.slice(cursor));
-  records.set('\u0000seo-source', context.join(''));
+  records.set('\u0000seo-source', canonicalEntryContext(context));
   for (const match of matches) {
     mapRecord(records, match.id, source.slice(match.index, match.closeIdx + 1));
   }

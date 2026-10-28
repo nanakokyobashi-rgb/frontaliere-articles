@@ -412,12 +412,29 @@ jobs:
             exit 0
           fi
           matrix="$(jq -c 'to_entries | map({section: .key, ids: .value})' <<<"$groups")"
+          # GitHub exports matrix fields as environment variables before the
+          # render step. Keep each JSON value below Linux MAX_ARG_STRLEN
+          # (128 KiB); a shared registry dependency can legitimately select
+          # the whole corpus, so one section target must become bounded jobs.
+          publish_batch_size=256
           matrix_with_shards='[]'
           while IFS= read -r target; do
             target_section="$(printf '%s' "$target" | jq -r '.section')"
             target_shard="$(node scripts/ci/fast-publish-section.mjs shard-of "$target_section")"
             target="$(printf '%s' "$target" | jq -c --arg shard "$target_shard" '. + {shard: $shard}')"
-            append_matrix_target "$target"
+            while IFS= read -r batch_target; do
+              append_matrix_target "$batch_target"
+            done < <(
+              printf '%s' "$target" |
+                jq -c --arg shard "$target_shard" --arg batch_size "$publish_batch_size" '
+                  . as $target
+                  | ($batch_size | tonumber) as $size
+                  | range(0; ($target.ids | length); $size) as $offset
+                  | $target
+                  | .ids = $target.ids[$offset:($offset + $size)]
+                  | .shard = $shard
+                '
+            )
           done < <(printf '%s' "$matrix" | jq -c '.[]')
           {
             echo "skip=false"

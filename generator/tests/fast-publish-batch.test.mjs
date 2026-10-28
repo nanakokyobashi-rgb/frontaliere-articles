@@ -69,6 +69,19 @@ test('i JSON di batch non passano a jq come argomenti di dimensione illimitata',
   assert.doesNotMatch(resolveStep, /--argjson\s+(?:ids|target)\s+"/u);
 });
 
+test('i target della matrix vengono spezzati prima dell export come env', () => {
+  const resolveStep = stepText('Resolve mode, article ids and section');
+
+  // `ARTICLE_IDS_JSON` is exported by GitHub before the render shell starts;
+  // keeping the bound in the resolver prevents MAX_ARG_STRLEN from rejecting
+  // a valid whole-registry publication before the script can run.
+  assert.match(resolveStep, /publish_batch_size=/u);
+  assert.match(resolveStep, /while IFS= read -r batch_target/u);
+  assert.match(resolveStep, /range\(0; \(\$target\.ids \| length\); \$size\)/u);
+  assert.match(resolveStep, /\.ids = \$target\.ids\[\$offset:\(\$offset \+ \$size\)\]/u);
+  assert.match(resolveStep, /append_matrix_target "\$batch_target"/u);
+});
+
 test('le superfici articolo oltre il body producono solo gli ID realmente cambiati', () => {
   const registry = new Map([
     ['frontaliere', new Set(['alpha', 'beta'])],
@@ -103,6 +116,55 @@ test('le superfici articolo oltre il body producono solo gli ID realmente cambia
     bootstrap: false,
   }]);
 
+});
+
+test('un nuovo record del registry risveglia solo il record aggiunto', () => {
+  const registered = new Set(['alpha', 'beta', 'gamma']);
+  const previousRegistry = "export const ARTICLES = [{ id: 'alpha', image: '/images/blog/alpha.webp' }, { id: 'beta', image: '/images/blog/beta.webp' }];\n";
+  const currentRegistry = "export const ARTICLES = [{ id: 'alpha', image: '/images/blog/alpha.webp' }, { id: 'beta', image: '/images/blog/beta.webp' }, { id: 'gamma', image: '/images/blog/gamma.webp' }];\n";
+  const previous = new Map([['content/blog-articles-data.ts', previousRegistry]]);
+  const current = new Map([['content/blog-articles-data.ts', currentRegistry]]);
+  const plan = articlePublishPlan(['content/blog-articles-data.ts'], ARTICLE_SECTION_CORE_LIST, {
+    served: 'shard',
+    articleIdsForSection: () => registered,
+    readPreviousSource: (rel) => previous.get(rel) ?? null,
+    readCurrentSource: (rel) => current.get(rel) ?? null,
+  });
+
+  assert.deepEqual(plan, [{
+    section: 'frontaliere',
+    ids: ['gamma'],
+    bootstrap: false,
+  }]);
+});
+
+test('una nuova entry SEO risveglia solo il record aggiunto', () => {
+  const registered = new Set(['alpha', 'beta', 'gamma']);
+  const previousSeo = `const SEO = {
+  'blog-alpha': { title: 'same alpha' },
+  'blog-beta': { title: 'same beta' },
+};
+`;
+  const currentSeo = `const SEO = {
+  'blog-alpha': { title: 'same alpha' },
+  'blog-beta': { title: 'same beta' },
+  'blog-gamma': { title: 'new gamma' },
+};
+`;
+  const previous = new Map([['content/seo/seo-blog-5.ts', previousSeo]]);
+  const current = new Map([['content/seo/seo-blog-5.ts', currentSeo]]);
+  const plan = articlePublishPlan(['content/seo/seo-blog-5.ts'], ARTICLE_SECTION_CORE_LIST, {
+    served: 'shard',
+    articleIdsForSection: () => registered,
+    readPreviousSource: (rel) => previous.get(rel) ?? null,
+    readCurrentSource: (rel) => current.get(rel) ?? null,
+  });
+
+  assert.deepEqual(plan, [{
+    section: 'frontaliere',
+    ids: ['gamma'],
+    bootstrap: false,
+  }]);
 });
 
 test('una dipendenza importata dal registry invalida tutti gli articoli registrati', () => {
@@ -148,6 +210,24 @@ export const ARTICLES = RAW_ARTICLES.map((article) => ({ ...article, image: cdnB
     ids: ['alpha', 'beta'],
     bootstrap: false,
   }]);
+
+  const frontRegistry = "export const ARTICLES = [{ id: 'alpha' }, { id: 'beta' }];\n";
+  const typeOnlySwissRegistry = `import type { Article } from './blog-articles-data';
+export const SWISS_ARTICLES = [{ id: 'alpha' }, { id: 'beta' }];
+`;
+  const typeOnlyPrevious = new Map([
+    ['content/blog-articles-data.ts', frontRegistry],
+    ['content/swiss-articles-data.ts', typeOnlySwissRegistry],
+  ]);
+  const typeOnlyCurrent = new Map(typeOnlyPrevious);
+  const typeOnlyPlan = articlePublishPlan(['content/blog-articles-data.ts'], ARTICLE_SECTION_CORE_LIST, {
+    served: 'shard',
+    articleIdsForSection: () => registered,
+    readPreviousSource: (rel) => typeOnlyPrevious.get(rel) ?? null,
+    readCurrentSource: (rel) => typeOnlyCurrent.get(rel) ?? null,
+  });
+
+  assert.deepEqual(typeOnlyPlan, [], 'un import type non è una dipendenza runtime del registry');
 });
 
 test('un cambiamento fuori dalle entry SEO invalida gli articoli registrati', () => {
