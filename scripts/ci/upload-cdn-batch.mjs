@@ -171,22 +171,25 @@ function createChildRunner(activeChildren) {
 
 function installSignalHandlers(activeChildren) {
   let requestedExitCode = 0;
-  const handlers = new Map([
+  const signals = new Map([
     ['SIGHUP', 129],
     ['SIGINT', 130],
     ['SIGTERM', 143],
   ]);
-  for (const [signal, code] of handlers) {
-    process.on(signal, () => {
+  const handlers = new Map();
+  for (const [signal, code] of signals) {
+    const handler = () => {
       if (requestedExitCode === 0) requestedExitCode = code;
       for (const child of activeChildren) terminateChild(child, signal);
-    });
+    };
+    handlers.set(signal, handler);
+    process.on(signal, handler);
   }
   return {
     shouldStop: () => requestedExitCode !== 0,
     requestedExitCode: () => requestedExitCode,
     remove: () => {
-      for (const signal of handlers.keys()) process.removeAllListeners(signal);
+      for (const [signal, handler] of handlers) process.removeListener(signal, handler);
     },
   };
 }
