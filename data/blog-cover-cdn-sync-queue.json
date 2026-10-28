@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-mutazioni-lavoro-frontaliero-jura.webp",
-      "sha256": "3438f8db0cef11c2e4de9b715dba8d5729294fa0c57a5f93c1cf39e502deb11f"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-mutazioni-lavoro-frontaliero-jura-480w.webp",
-      "sha256": "10f9bb3b090a69d815a7fd8f48eab567f0f2e2dd086184f26e18f0812f42a8d9"
-    }
-  ]
+  "items": []
 }
