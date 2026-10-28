@@ -45645,7 +45645,7 @@ const RAW_ARTICLES = [
  id: 'ville-ponti-frontalieri-confronto',
  category: 'novita',
  date: '2026-10-20T21:30:48.699Z',
- image: '/images/blog/article-canton-san-gallo-stabile-ricerca-lavoro-cala-disoccupazione.webp',
+ image: '/images/blog/article-ville-ponti-frontalieri-confronto.webp',
  hasCalculator: true,
  articleType: 'news',
  authorSlug: 'redazione',
