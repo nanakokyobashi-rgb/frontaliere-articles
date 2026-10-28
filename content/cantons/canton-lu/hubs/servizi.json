@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "servizi",
-  "updatedAt": "2026-10-28T10:03:35.525Z",
-  "contentHash": "791226b44f02b991c3b68d197953c0b4d35f4a26e8485132462fd2b653d16183",
+  "updatedAt": "2026-10-28T17:02:29.143Z",
+  "contentHash": "21d81bd91d3a5602dbff6af8d282140f3ddb63340755215182766d566b6d851d",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-27T21:31:39.250Z",
+      "updatedAt": "2026-10-28T11:41:09.250Z",
       "keyFacts": 0
     }
   ],
@@ -83,6 +83,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Luzerner Psychiatrie AG eröffnet Tagesklinik psychiatrische Arbeitsrehabilitation",
+              "date": "2026-10-08",
+              "url": "https://www.lups.ch/2026/10/28/luzerner-psychiatrie-ag-eroeffnet-tagesklinik-psychiatrische-arbeitsrehabilitation/"
+            },
+            {
               "label": "Wir reden weiter: Aktionstag Psychische Gesundheit am 10. Oktober 2026",
               "date": "2026-08-26",
               "url": "https://www.lups.ch/2026/10/08/wir-reden-weiter-aktionstag-psychische-gesundheit-am-10-oktober-2026/"
@@ -106,14 +111,9 @@
               "label": "Abschluss der Standorttour in St. Urban: Einblicke in Apotheke und Stationäre Dienste",
               "date": "2026-07-13",
               "url": "https://www.lups.ch/2026/07/20/abschluss-der-standorttour-in-st-urban-einblicke-in-apotheke-und-stationaere-dienste/"
-            },
-            {
-              "label": "Chefarzt der Stationären Dienste verlässt die Luzerner Psychiatrie",
-              "date": "2026-07-02",
-              "url": "https://www.lups.ch/2026/07/02/chefarzt-der-stationaeren-dienste-verlaesst-die-luzerner-psychiatrie/"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-10-28T11:41:09.250Z"
         }
       ],
       "curatedArticles": [
@@ -193,7 +193,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-28T10:03:35.525Z"
+      "updatedAt": "2026-10-28T17:02:29.143Z"
     },
     "en": {
       "canton": "LU",
@@ -254,6 +254,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Luzerner Psychiatrie AG eröffnet Tagesklinik psychiatrische Arbeitsrehabilitation",
+              "date": "2026-10-08",
+              "url": "https://www.lups.ch/2026/10/28/luzerner-psychiatrie-ag-eroeffnet-tagesklinik-psychiatrische-arbeitsrehabilitation/"
+            },
+            {
               "label": "Wir reden weiter: Aktionstag Psychische Gesundheit am 10. Oktober 2026",
               "date": "2026-08-26",
               "url": "https://www.lups.ch/2026/10/08/wir-reden-weiter-aktionstag-psychische-gesundheit-am-10-oktober-2026/"
@@ -277,14 +282,9 @@
               "label": "Abschluss der Standorttour in St. Urban: Einblicke in Apotheke und Stationäre Dienste",
               "date": "2026-07-13",
               "url": "https://www.lups.ch/2026/07/20/abschluss-der-standorttour-in-st-urban-einblicke-in-apotheke-und-stationaere-dienste/"
-            },
-            {
-              "label": "Chefarzt der Stationären Dienste verlässt die Luzerner Psychiatrie",
-              "date": "2026-07-02",
-              "url": "https://www.lups.ch/2026/07/02/chefarzt-der-stationaeren-dienste-verlaesst-die-luzerner-psychiatrie/"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-10-28T11:41:09.250Z"
         }
       ],
       "curatedArticles": [
@@ -359,7 +359,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-28T10:03:35.525Z"
+      "updatedAt": "2026-10-28T17:02:29.143Z"
     },
     "de": {
       "canton": "LU",
@@ -420,6 +420,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Luzerner Psychiatrie AG eröffnet Tagesklinik psychiatrische Arbeitsrehabilitation",
+              "date": "2026-10-08",
+              "url": "https://www.lups.ch/2026/10/28/luzerner-psychiatrie-ag-eroeffnet-tagesklinik-psychiatrische-arbeitsrehabilitation/"
+            },
+            {
               "label": "Wir reden weiter: Aktionstag Psychische Gesundheit am 10. Oktober 2026",
               "date": "2026-08-26",
               "url": "https://www.lups.ch/2026/10/08/wir-reden-weiter-aktionstag-psychische-gesundheit-am-10-oktober-2026/"
@@ -443,14 +448,9 @@
               "label": "Abschluss der Standorttour in St. Urban: Einblicke in Apotheke und Stationäre Dienste",
               "date": "2026-07-13",
               "url": "https://www.lups.ch/2026/07/20/abschluss-der-standorttour-in-st-urban-einblicke-in-apotheke-und-stationaere-dienste/"
-            },
-            {
-              "label": "Chefarzt der Stationären Dienste verlässt die Luzerner Psychiatrie",
-              "date": "2026-07-02",
-              "url": "https://www.lups.ch/2026/07/02/chefarzt-der-stationaeren-dienste-verlaesst-die-luzerner-psychiatrie/"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-10-28T11:41:09.250Z"
         }
       ],
       "curatedArticles": [
@@ -525,7 +525,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-28T10:03:35.525Z"
+      "updatedAt": "2026-10-28T17:02:29.143Z"
     },
     "fr": {
       "canton": "LU",
@@ -586,6 +586,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Luzerner Psychiatrie AG eröffnet Tagesklinik psychiatrische Arbeitsrehabilitation",
+              "date": "2026-10-08",
+              "url": "https://www.lups.ch/2026/10/28/luzerner-psychiatrie-ag-eroeffnet-tagesklinik-psychiatrische-arbeitsrehabilitation/"
+            },
+            {
               "label": "Wir reden weiter: Aktionstag Psychische Gesundheit am 10. Oktober 2026",
               "date": "2026-08-26",
               "url": "https://www.lups.ch/2026/10/08/wir-reden-weiter-aktionstag-psychische-gesundheit-am-10-oktober-2026/"
@@ -609,14 +614,9 @@
               "label": "Abschluss der Standorttour in St. Urban: Einblicke in Apotheke und Stationäre Dienste",
               "date": "2026-07-13",
               "url": "https://www.lups.ch/2026/07/20/abschluss-der-standorttour-in-st-urban-einblicke-in-apotheke-und-stationaere-dienste/"
-            },
-            {
-              "label": "Chefarzt der Stationären Dienste verlässt die Luzerner Psychiatrie",
-              "date": "2026-07-02",
-              "url": "https://www.lups.ch/2026/07/02/chefarzt-der-stationaeren-dienste-verlaesst-die-luzerner-psychiatrie/"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-10-28T11:41:09.250Z"
         }
       ],
       "curatedArticles": [
@@ -688,7 +688,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-28T10:03:35.525Z"
+      "updatedAt": "2026-10-28T17:02:29.143Z"
     }
   }
 }

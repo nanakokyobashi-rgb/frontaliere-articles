@@ -4,17 +4,17 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-28T09:13:19.877Z",
-  "contentHash": "9192e143d4aa2b290a9b6e32f2be20030abb2ee8cb0a7f13e99186f48d48a394",
+  "updatedAt": "2026-10-28T17:02:29.143Z",
+  "contentHash": "98cbca9ede5ae502d22427cf301dc447c79035666fff58f3ed83b0dc8b3b4d45",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-28T00:48:17.406Z",
+      "updatedAt": "2026-10-28T13:37:22.501Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-27T21:31:39.250Z",
+      "updatedAt": "2026-10-28T11:41:09.250Z",
       "keyFacts": 0
     }
   ],
@@ -66,6 +66,11 @@
               "date": "2026-09-22T09:19:00.000Z"
             },
             {
+              "label": "A2 Luzern -> S. Gottardo tra Svincolo autostradale Wassen E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 2.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 20",
+              "value": "Traffico",
+              "date": "2026-10-28T12:50:00.000Z"
+            },
+            {
               "label": "H2 Airolo <-> Göschenen tra Luogo Andermatt E Luogo Hospental Situazione: problemi di traffico cantiere, lunghezza [km] 0.5 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 4.0…",
               "value": "Cantiere",
               "detail": "fine prevista: 31 dicembre 2026",
@@ -82,16 +87,10 @@
               "value": "Cantiere",
               "detail": "fine prevista: 12 novembre 2026",
               "date": "2026-09-22T09:24:00.000Z"
-            },
-            {
-              "label": "H2 Göschenen <-> Flüelen Svincolo autostradale Göschenen Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Limitazione del traffico: circolazione a corsie alternate Aggiunta 1: limite…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 4 dicembre 2026",
-              "date": "2026-10-06T11:16:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-28T00:48:17.406Z"
+          "updatedAt": "2026-10-28T13:37:22.501Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -129,7 +128,7 @@
               "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-10-28T11:41:09.250Z"
         }
       ],
       "curatedArticles": [
@@ -193,7 +192,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-28T09:13:19.877Z"
+      "updatedAt": "2026-10-28T17:02:29.143Z"
     },
     "en": {
       "canton": "UR",
@@ -242,6 +241,11 @@
               "date": "2026-09-22T09:19:00.000Z"
             },
             {
+              "label": "A2 Luzern -> S. Gottardo tra Svincolo autostradale Wassen E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 2.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 20",
+              "value": "Traffic",
+              "date": "2026-10-28T12:50:00.000Z"
+            },
+            {
               "label": "H2 Airolo <-> Göschenen tra Luogo Andermatt E Luogo Hospental Situazione: problemi di traffico cantiere, lunghezza [km] 0.5 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 4.0…",
               "value": "Roadworks",
               "detail": "until 31 December 2026",
@@ -258,16 +262,10 @@
               "value": "Roadworks",
               "detail": "until 12 November 2026",
               "date": "2026-09-22T09:24:00.000Z"
-            },
-            {
-              "label": "H2 Göschenen <-> Flüelen Svincolo autostradale Göschenen Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Limitazione del traffico: circolazione a corsie alternate Aggiunta 1: limite…",
-              "value": "Roadworks",
-              "detail": "until 4 December 2026",
-              "date": "2026-10-06T11:16:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-28T00:48:17.406Z"
+          "updatedAt": "2026-10-28T13:37:22.501Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -305,7 +303,7 @@
               "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-10-28T11:41:09.250Z"
         }
       ],
       "curatedArticles": [
@@ -369,7 +367,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-28T09:13:19.877Z"
+      "updatedAt": "2026-10-28T17:02:29.143Z"
     },
     "de": {
       "canton": "UR",
@@ -418,6 +416,11 @@
               "date": "2026-09-22T09:19:00.000Z"
             },
             {
+              "label": "A2 Luzern -> Gotthard zwischen Anschluss Wassen und Anschluss Göschenen Sachlage: Stau Länge [km] 2.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 20",
+              "value": "Verkehr",
+              "date": "2026-10-28T12:50:00.000Z"
+            },
+            {
               "label": "H2 Airolo <-> Göschenen zwischen Ortschaft Andermatt und Ortschaft Hospental Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.5 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m]…",
               "value": "Baustelle",
               "detail": "bis 31. Dezember 2026",
@@ -434,16 +437,10 @@
               "value": "Baustelle",
               "detail": "bis 12. November 2026",
               "date": "2026-09-22T09:24:00.000Z"
-            },
-            {
-              "label": "H2 Göschenen <-> Flüelen Anschluss Göschenen Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.3 Verkehrsführung: wechselseitige Verkehrsführung Zusatz 1: vorübergehende Begrenzung der Breite…",
-              "value": "Baustelle",
-              "detail": "bis 4. Dezember 2026",
-              "date": "2026-10-06T11:16:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-28T00:48:17.406Z"
+          "updatedAt": "2026-10-28T13:37:22.501Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -481,7 +478,7 @@
               "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-10-28T11:41:09.250Z"
         }
       ],
       "curatedArticles": [
@@ -545,7 +542,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-28T09:13:19.877Z"
+      "updatedAt": "2026-10-28T17:02:29.143Z"
     },
     "fr": {
       "canton": "UR",
@@ -594,6 +591,11 @@
               "date": "2026-09-22T09:19:00.000Z"
             },
             {
+              "label": "A2 Lucerne -> St-Gothard entre Jonction autoroutière Wassen et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 2.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 20",
+              "value": "Trafic",
+              "date": "2026-10-28T12:50:00.000Z"
+            },
+            {
               "label": "H2 Airolo <-> Göschenen entre Localité Andermatt et Localité Hospental Situation: trafic perturbé travaux, longueur [km] 0.5 Complément 1: limitation temporaire de largeur largeur de la voie [m] 4.0…",
               "value": "Chantier",
               "detail": "jusqu’au 31 décembre 2026",
@@ -610,16 +612,10 @@
               "value": "Chantier",
               "detail": "jusqu’au 12 novembre 2026",
               "date": "2026-09-22T09:24:00.000Z"
-            },
-            {
-              "label": "H2 Göschenen <-> Flüelen Jonction autoroutière Göschenen Situation: trafic perturbé travaux, longueur [km] 0.3 Gestion du trafic: circulation alternée à une voie Complément 1: limitation temporaire…",
-              "value": "Chantier",
-              "detail": "jusqu’au 4 décembre 2026",
-              "date": "2026-10-06T11:16:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-28T00:48:17.406Z"
+          "updatedAt": "2026-10-28T13:37:22.501Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -657,7 +653,7 @@
               "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-10-28T11:41:09.250Z"
         }
       ],
       "curatedArticles": [
@@ -721,7 +717,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-28T09:13:19.877Z"
+      "updatedAt": "2026-10-28T17:02:29.143Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "pensioni",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "07ee0d2f6ef6de6f1671e0c306c5a7893bdbce60e9b08110079ec54061eaf436",
+  "updatedAt": "2026-10-28T17:02:29.143Z",
+  "contentHash": "eeef703dde8771a81225965f0735175aee4a8e22a33f055230176b051f486817",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T15:45:54.463Z",
+      "updatedAt": "2026-10-28T11:41:09.250Z",
       "keyFacts": 0
     }
   ],
@@ -158,12 +158,17 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Pensionskassengesetz: Punktuelle Anpassungen an bewährtem Gesetz",
+              "date": "2026-10-28",
+              "url": "https://www.bs.ch/medienmitteilungen/2026-pensionskassengesetz-punktuelle-anpassungen-bewaehrtem-gesetz"
+            },
+            {
               "label": "Aspekte Ausgabe Juli 2026",
               "date": "2026-07-30",
               "url": "https://www.pkbs.ch/de/news/news-detail/aspekte-ausgabe-juli-2026/"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-28T11:41:09.250Z"
         }
       ],
       "curatedArticles": [
@@ -223,7 +228,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-28T17:02:29.143Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -354,12 +359,17 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Pensionskassengesetz: Punktuelle Anpassungen an bewährtem Gesetz",
+              "date": "2026-10-28",
+              "url": "https://www.bs.ch/medienmitteilungen/2026-pensionskassengesetz-punktuelle-anpassungen-bewaehrtem-gesetz"
+            },
+            {
               "label": "Aspekte Ausgabe Juli 2026",
               "date": "2026-07-30",
               "url": "https://www.pkbs.ch/de/news/news-detail/aspekte-ausgabe-juli-2026/"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-28T11:41:09.250Z"
         }
       ],
       "curatedArticles": [
@@ -419,7 +429,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-28T17:02:29.143Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -550,12 +560,17 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Pensionskassengesetz: Punktuelle Anpassungen an bewährtem Gesetz",
+              "date": "2026-10-28",
+              "url": "https://www.bs.ch/medienmitteilungen/2026-pensionskassengesetz-punktuelle-anpassungen-bewaehrtem-gesetz"
+            },
+            {
               "label": "Aspekte Ausgabe Juli 2026",
               "date": "2026-07-30",
               "url": "https://www.pkbs.ch/de/news/news-detail/aspekte-ausgabe-juli-2026/"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-28T11:41:09.250Z"
         }
       ],
       "curatedArticles": [
@@ -615,7 +630,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-28T17:02:29.143Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -746,12 +761,17 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Pensionskassengesetz: Punktuelle Anpassungen an bewährtem Gesetz",
+              "date": "2026-10-28",
+              "url": "https://www.bs.ch/medienmitteilungen/2026-pensionskassengesetz-punktuelle-anpassungen-bewaehrtem-gesetz"
+            },
+            {
               "label": "Aspekte Ausgabe Juli 2026",
               "date": "2026-07-30",
               "url": "https://www.pkbs.ch/de/news/news-detail/aspekte-ausgabe-juli-2026/"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-28T11:41:09.250Z"
         }
       ],
       "curatedArticles": [
@@ -811,7 +831,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-28T17:02:29.143Z"
     }
   }
 }

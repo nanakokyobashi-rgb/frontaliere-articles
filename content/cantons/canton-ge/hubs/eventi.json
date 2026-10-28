@@ -4,17 +4,17 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "eventi",
-  "updatedAt": "2026-10-28T01:14:28.455Z",
-  "contentHash": "72b48a69ffa3a82f63ab42c08f89dbb23d29b6f0d2ed4d23d44885092625c30e",
+  "updatedAt": "2026-10-28T17:02:29.143Z",
+  "contentHash": "0c141d20860ce778507f58ddb451e42f8ec299b6f03555ce6fa1f32efd26a266",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-27T19:25:52.214Z",
+      "updatedAt": "2026-10-28T13:47:49.369Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-27T21:31:39.250Z",
+      "updatedAt": "2026-10-28T11:41:09.250Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "341",
+          "value": "365",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -68,39 +68,39 @@
               "url": "https://www.geneve.ch/agenda/atelier-creez-creation-halloween-chocolat-3"
             },
             {
+              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "detail": "Genève",
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+            },
+            {
+              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
+              "detail": "Genève",
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
+            },
+            {
+              "label": "Balades Théâtralisées - De la haute-ville aux bas-fonds",
+              "detail": "Genève",
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/balades-theatralisees-haute-ville-fonds"
+            },
+            {
+              "label": "Cafés genevois: la vie même",
+              "detail": "Genève",
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/cafes-genevois-vie"
+            },
+            {
               "label": "CHRÜSIMÜSI",
               "detail": "Genève",
               "date": "2026-10-28",
               "url": "https://www.geneve.ch/agenda/chrusimusi"
-            },
-            {
-              "label": "Cité Seniors fête ses 20 ans | Le Jardin Botanique de Genève, son histoire, sa mission et ses défis - Conférence et…",
-              "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-jardin-botanique-geneve-histoire-mission-defis-conference-balade"
-            },
-            {
-              "label": "Cité Seniors fête ses 20 ans | Le Jardin Botanique de Genève, son histoire, sa mission et ses défis - Conférence et…",
-              "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-jardin-botanique-geneve-histoire-mission-defis-conference-balade-0"
-            },
-            {
-              "label": "Complet - L’herbier des feuilles",
-              "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/herbier-feuilles"
-            },
-            {
-              "label": "DIRTY THREE",
-              "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/dirty-three"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ginevra/",
-          "updatedAt": "2026-10-27T19:25:52.214Z"
+          "updatedAt": "2026-10-28T13:47:49.369Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -118,7 +118,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-10-28T11:41:09.250Z"
         }
       ],
       "curatedArticles": [
@@ -140,7 +140,7 @@
           "url": "/eventi/ginevra/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-28T01:14:28.455Z"
+      "updatedAt": "2026-10-28T17:02:29.143Z"
     },
     "en": {
       "canton": "GE",
@@ -150,7 +150,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "341",
+          "value": "365",
           "note": "from the site’s events calendar"
         }
       ],
@@ -191,39 +191,39 @@
               "url": "https://www.geneve.ch/agenda/atelier-creez-creation-halloween-chocolat-3"
             },
             {
+              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "detail": "Genève",
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+            },
+            {
+              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
+              "detail": "Genève",
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
+            },
+            {
+              "label": "Balades Théâtralisées - De la haute-ville aux bas-fonds",
+              "detail": "Genève",
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/balades-theatralisees-haute-ville-fonds"
+            },
+            {
+              "label": "Cafés genevois: la vie même",
+              "detail": "Genève",
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/cafes-genevois-vie"
+            },
+            {
               "label": "CHRÜSIMÜSI",
               "detail": "Genève",
               "date": "2026-10-28",
               "url": "https://www.geneve.ch/agenda/chrusimusi"
-            },
-            {
-              "label": "Cité Seniors fête ses 20 ans | Le Jardin Botanique de Genève, son histoire, sa mission et ses défis - Conférence et…",
-              "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-jardin-botanique-geneve-histoire-mission-defis-conference-balade"
-            },
-            {
-              "label": "Cité Seniors fête ses 20 ans | Le Jardin Botanique de Genève, son histoire, sa mission et ses défis - Conférence et…",
-              "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-jardin-botanique-geneve-histoire-mission-defis-conference-balade-0"
-            },
-            {
-              "label": "Complet - L’herbier des feuilles",
-              "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/herbier-feuilles"
-            },
-            {
-              "label": "DIRTY THREE",
-              "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/dirty-three"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/geneva/",
-          "updatedAt": "2026-10-27T19:25:52.214Z"
+          "updatedAt": "2026-10-28T13:47:49.369Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -241,7 +241,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-10-28T11:41:09.250Z"
         }
       ],
       "curatedArticles": [
@@ -263,7 +263,7 @@
           "url": "/en/events/geneva/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-28T01:14:28.455Z"
+      "updatedAt": "2026-10-28T17:02:29.143Z"
     },
     "de": {
       "canton": "GE",
@@ -273,7 +273,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "341",
+          "value": "365",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -314,39 +314,39 @@
               "url": "https://www.geneve.ch/agenda/atelier-creez-creation-halloween-chocolat-3"
             },
             {
+              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "detail": "Genève",
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+            },
+            {
+              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
+              "detail": "Genève",
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
+            },
+            {
+              "label": "Balades Théâtralisées - De la haute-ville aux bas-fonds",
+              "detail": "Genève",
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/balades-theatralisees-haute-ville-fonds"
+            },
+            {
+              "label": "Cafés genevois: la vie même",
+              "detail": "Genève",
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/cafes-genevois-vie"
+            },
+            {
               "label": "CHRÜSIMÜSI",
               "detail": "Genève",
               "date": "2026-10-28",
               "url": "https://www.geneve.ch/agenda/chrusimusi"
-            },
-            {
-              "label": "Cité Seniors fête ses 20 ans | Le Jardin Botanique de Genève, son histoire, sa mission et ses défis - Conférence et…",
-              "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-jardin-botanique-geneve-histoire-mission-defis-conference-balade"
-            },
-            {
-              "label": "Cité Seniors fête ses 20 ans | Le Jardin Botanique de Genève, son histoire, sa mission et ses défis - Conférence et…",
-              "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-jardin-botanique-geneve-histoire-mission-defis-conference-balade-0"
-            },
-            {
-              "label": "Complet - L’herbier des feuilles",
-              "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/herbier-feuilles"
-            },
-            {
-              "label": "DIRTY THREE",
-              "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/dirty-three"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/genf/",
-          "updatedAt": "2026-10-27T19:25:52.214Z"
+          "updatedAt": "2026-10-28T13:47:49.369Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -364,7 +364,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-10-28T11:41:09.250Z"
         }
       ],
       "curatedArticles": [
@@ -386,7 +386,7 @@
           "url": "/de/veranstaltungen/genf/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-28T01:14:28.455Z"
+      "updatedAt": "2026-10-28T17:02:29.143Z"
     },
     "fr": {
       "canton": "GE",
@@ -396,7 +396,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "341",
+          "value": "365",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -437,39 +437,39 @@
               "url": "https://www.geneve.ch/agenda/atelier-creez-creation-halloween-chocolat-3"
             },
             {
+              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "detail": "Genève",
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+            },
+            {
+              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
+              "detail": "Genève",
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
+            },
+            {
+              "label": "Balades Théâtralisées - De la haute-ville aux bas-fonds",
+              "detail": "Genève",
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/balades-theatralisees-haute-ville-fonds"
+            },
+            {
+              "label": "Cafés genevois: la vie même",
+              "detail": "Genève",
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/cafes-genevois-vie"
+            },
+            {
               "label": "CHRÜSIMÜSI",
               "detail": "Genève",
               "date": "2026-10-28",
               "url": "https://www.geneve.ch/agenda/chrusimusi"
-            },
-            {
-              "label": "Cité Seniors fête ses 20 ans | Le Jardin Botanique de Genève, son histoire, sa mission et ses défis - Conférence et…",
-              "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-jardin-botanique-geneve-histoire-mission-defis-conference-balade"
-            },
-            {
-              "label": "Cité Seniors fête ses 20 ans | Le Jardin Botanique de Genève, son histoire, sa mission et ses défis - Conférence et…",
-              "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-jardin-botanique-geneve-histoire-mission-defis-conference-balade-0"
-            },
-            {
-              "label": "Complet - L’herbier des feuilles",
-              "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/herbier-feuilles"
-            },
-            {
-              "label": "DIRTY THREE",
-              "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/dirty-three"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/geneve/",
-          "updatedAt": "2026-10-27T19:25:52.214Z"
+          "updatedAt": "2026-10-28T13:47:49.369Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -487,7 +487,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-10-28T11:41:09.250Z"
         }
       ],
       "curatedArticles": [
@@ -509,7 +509,7 @@
           "url": "/fr/evenements/geneve/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-28T01:14:28.455Z"
+      "updatedAt": "2026-10-28T17:02:29.143Z"
     }
   }
 }

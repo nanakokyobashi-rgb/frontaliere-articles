@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "fisco",
-  "updatedAt": "2026-10-22T22:21:57.960Z",
-  "contentHash": "5599dd33efc699556f274c45518c77fd073b62dc36d209d81fa50cddf32e0c94",
+  "updatedAt": "2026-10-28T17:02:29.143Z",
+  "contentHash": "f10d30f076f31d7c52a6bf0aa3439fddae865b1042fa2caba6a2adaeee8a56fb",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -16,6 +16,11 @@
       "id": "imposta-alla-fonte",
       "updatedAt": "2026-10-05T07:54:42.677Z",
       "keyFacts": 1
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-28T11:41:09.250Z",
+      "keyFacts": 0
     }
   ],
   "locales": {
@@ -138,6 +143,19 @@
           "sourceName": "Autorità fiscale cantonale",
           "sourceUrl": "https://www.ai.ch/themen/steuern/steuerarten/quellensteuer",
           "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Steigende Gesundheitskosten und weniger Steuereinnahmen belasten Voranschlag",
+              "date": "2026-10-28",
+              "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/steigende-gesundheitskosten-und-weniger-steuereinnahmen-belasten-voranschlag/"
+            }
+          ],
+          "updatedAt": "2026-10-28T11:41:09.250Z"
         }
       ],
       "curatedArticles": [
@@ -213,7 +231,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-28T17:02:29.143Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -334,6 +352,19 @@
           "sourceName": "Cantonal tax authority",
           "sourceUrl": "https://www.ai.ch/themen/steuern/steuerarten/quellensteuer",
           "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Steigende Gesundheitskosten und weniger Steuereinnahmen belasten Voranschlag",
+              "date": "2026-10-28",
+              "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/steigende-gesundheitskosten-und-weniger-steuereinnahmen-belasten-voranschlag/"
+            }
+          ],
+          "updatedAt": "2026-10-28T11:41:09.250Z"
         }
       ],
       "curatedArticles": [
@@ -409,7 +440,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-28T17:02:29.143Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -530,6 +561,19 @@
           "sourceName": "Kantonale Steuerbehörde",
           "sourceUrl": "https://www.ai.ch/themen/steuern/steuerarten/quellensteuer",
           "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Steigende Gesundheitskosten und weniger Steuereinnahmen belasten Voranschlag",
+              "date": "2026-10-28",
+              "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/steigende-gesundheitskosten-und-weniger-steuereinnahmen-belasten-voranschlag/"
+            }
+          ],
+          "updatedAt": "2026-10-28T11:41:09.250Z"
         }
       ],
       "curatedArticles": [
@@ -605,7 +649,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-28T17:02:29.143Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -726,6 +770,19 @@
           "sourceName": "Autorité fiscale cantonale",
           "sourceUrl": "https://www.ai.ch/themen/steuern/steuerarten/quellensteuer",
           "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Steigende Gesundheitskosten und weniger Steuereinnahmen belasten Voranschlag",
+              "date": "2026-10-28",
+              "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/steigende-gesundheitskosten-und-weniger-steuereinnahmen-belasten-voranschlag/"
+            }
+          ],
+          "updatedAt": "2026-10-28T11:41:09.250Z"
         }
       ],
       "curatedArticles": [
@@ -801,7 +858,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-28T17:02:29.143Z"
     }
   }
 }
