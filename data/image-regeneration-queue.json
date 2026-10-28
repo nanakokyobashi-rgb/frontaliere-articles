@@ -50,6 +50,17 @@
       "failureCount": 6,
       "requestedAt": "2026-10-24T19:06:53.846Z",
       "lastFailureAt": "2026-10-28T09:11:18.115Z"
+    },
+    {
+      "articleId": "malnate-ristorni-500-mila-meno",
+      "title": "Malnate: ristorni frontalieri in meno di quasi 500 mila euro",
+      "fallbackImage": "/images/blog/article-frontalieri-vendemmia-tasse-ristorni-settembre.webp",
+      "reason": "All image providers failed for article-malnate-ristorni-500-mila-meno: openai-codex (vision gate rejected image: Generic synthetic border-crossing scene relevant to Ticino and cros",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-28T11:59:46.600Z",
+      "lastFailureAt": "2026-10-28T11:59:46.600Z",
+      "retryHint": "no-text"
     }
   ]
 }

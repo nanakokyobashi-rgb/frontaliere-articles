@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1951004/decreto-confine-firmato-comuni-giorgetti": {
-    "articleId": "giorgetti-firma-decreto-contributi-comuni-confine",
-    "ts": "2026-09-18T01:50:29.705Z",
-    "keyForm": 2
-  },
   "https://www.laregione.ch/cantone/luganese/1950907/passa-il-valico-di-gandria-con-due-pappagalli-di-una-specie-protetta": {
     "articleId": "sequestro-pappagalli-gandria",
     "ts": "2026-09-18T02:08:17.111Z",
@@ -2497,6 +2492,11 @@
   "https://www.laregione.ch/cantone/mendrisiotto/1959133/chiasso-28-persone-senza-lavoro-per-la-chiusura-di-via-motta": {
     "articleId": "chiasso-via-motta-lavoro",
     "ts": "2026-10-28T02:02:17.390Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/ristorni-dei-frontalieri-malnate-si-trova-con-500-mila-euro-in-meno-la-sindaca-cannito-servono-certezze/2720635": {
+    "articleId": "malnate-ristorni-500-mila-meno",
+    "ts": "2026-10-28T11:59:46.602Z",
     "keyForm": 2
   }
 }
