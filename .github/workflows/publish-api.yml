@@ -160,6 +160,7 @@ on:
       - 'data/generated-image-registry.json'
       - 'data/editorial-image-registry.json'
       - 'data/blog-cover-cdn-sync-queue.json'
+      - 'scripts/ci/verify-publish-api-source-current.sh'
       - '.github/workflows/publish-api.yml'
   # The editorial companion contains a weekly update even when no article or
   # code push occurs. Rebuild it on a real weekly cadence so the HTTP surface
@@ -297,30 +298,63 @@ jobs:
       - name: Setup isolated article source runtime
         uses: ./.article-source-runtime/.github/actions/setup-article-source-runtime
 
-      # A bounded replay starts from the exact corpus revision that uploaded the
-      # HTML. If main advances after dispatch, the source remains usable only
-      # when it is an ancestor and the intervening commits do not change an
-      # input watched by publish-api. In that case the current main checkout is
-      # the equivalent release and avoids stranding the publisher queue; a
-      # concurrent API input remains fail-closed for its own push-triggered run.
-      - name: Verify bounded replay source is still main
-        if: inputs.source_commit != ''
+      # Every trigger is serialized, but a queued run can still start from the
+      # ref that was current when it was dispatched. A stale publisher must
+      # never overwrite a newer API surface. Non-API advances can be rebased to
+      # current main; an API advance remains fail-closed so the push-triggered
+      # run for that revision owns the release.
+      - name: Verify publish source is current main
         env:
           GH_TOKEN: ${{ github.token }}
           REPOSITORY: ${{ github.repository }}
           SOURCE_COMMIT: ${{ inputs.source_commit }}
         run: |
           set -euo pipefail
-          if ! [[ "$SOURCE_COMMIT" =~ ^[a-f0-9]{40}$ ]]; then
-            echo "::error::source_commit non e' una SHA completa"
-            exit 1
-          fi
           if ! current_main="$(timeout --kill-after=1s 60s gh api "repos/$REPOSITORY/git/ref/heads/main" --jq '.object.sha')"; then
-            echo "::error::impossibile verificare la HEAD corrente di main per il replay bounded"
+            echo "::error::impossibile verificare la HEAD corrente di main prima della pubblicazione"
             exit 1
           fi
           if ! [[ "$current_main" =~ ^[a-f0-9]{40}$ ]]; then
             echo "::error::HEAD corrente di main non e' una SHA completa: $current_main"
+            exit 1
+          fi
+          checked_out="$(git rev-parse HEAD)"
+
+          if [ -z "$SOURCE_COMMIT" ]; then
+            if [ "$checked_out" = "$current_main" ]; then
+              echo "sorgente publish confermata sulla HEAD corrente di main $current_main"
+              echo "PUBLISH_API_SOURCE_COMMIT=$current_main" >> "$GITHUB_ENV"
+              exit 0
+            fi
+            if ! git fetch --no-tags origin main; then
+              echo "::error::impossibile scaricare la HEAD corrente di main per riallineare il publish"
+              exit 1
+            fi
+            if ! git merge-base --is-ancestor "$checked_out" "$current_main"; then
+              echo "::error::publish non riconciliabile: checkout=$checked_out non e' antenato di main=$current_main"
+              exit 1
+            fi
+            api_input_changed="$(
+              SOURCE_COMMIT="$checked_out" CURRENT_MAIN="$current_main" node --input-type=module -e '
+                import { apiInputChangedInRange } from "./scripts/publish-section-pages.mjs";
+                process.stdout.write(String(apiInputChangedInRange({
+                  before: process.env.SOURCE_COMMIT,
+                  after: process.env.CURRENT_MAIN,
+                })));
+              '
+            )"
+            if [ "$api_input_changed" = 'true' ]; then
+              echo "::error::publish stantio: main=$current_main contiene input API piu' recenti del checkout=$checked_out; attendo il run della nuova push"
+              exit 1
+            fi
+            git checkout --detach "$current_main"
+            echo "PUBLISH_API_SOURCE_COMMIT=$current_main" >> "$GITHUB_ENV"
+            echo "::notice::publish riallineato dal checkout $checked_out alla HEAD corrente $current_main: nessun input API nel delta"
+            exit 0
+          fi
+
+          if ! [[ "$SOURCE_COMMIT" =~ ^[a-f0-9]{40}$ ]]; then
+            echo "::error::source_commit non e' una SHA completa"
             exit 1
           fi
           if [ "$current_main" = "$SOURCE_COMMIT" ]; then
@@ -856,6 +890,19 @@ jobs:
             echo "images-manifest.json: not emitted (no hero images in this repo yet) — expected before cutover"
           fi
 
+      # The build guard protects only the checkout. Every irreversible phase
+      # gets a fresh barrier because the cover queue may advance main and a
+      # queued run can spend a long time between artifact verification and
+      # publication.
+      - name: Verify source before governed cover publish
+        if: github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          PUBLISHED_SOURCE_COMMIT: ${{ inputs.source_commit || github.sha }}
+          VERIFY_CONTEXT: governed cover publish
+        run: bash scripts/ci/verify-publish-api-source-current.sh
+
       # A site-side licence-audit replacement keeps the article URL stable but
       # changes the bytes at that URL. The corpus is a second publisher of the
       # same CDN key, so this step runs BEFORE Pages deploy and keeps a durable
@@ -868,8 +915,13 @@ jobs:
           SHA: ${{ github.sha }}
           EVENT_NAME: ${{ github.event_name }}
           REF: ${{ github.ref }}
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          PUBLISHED_SOURCE_COMMIT: ${{ inputs.source_commit || github.sha }}
+          VERIFY_CONTEXT: governed cover publish (inside step)
         run: |
           set -euo pipefail
+          bash scripts/ci/verify-publish-api-source-current.sh
           if [ "$REF" != 'refs/heads/main' ]; then
             echo "::error::cover CDN reconciliation is allowed only from refs/heads/main (got $REF)"
             exit 1
@@ -986,6 +1038,41 @@ jobs:
             # the header below is the only identity git can send.
             for attempt in 1 2 3; do
               if node scripts/ci/guard-main-tree-shrink.mjs --push-main --remote origin --target main --after HEAD --git-config "http.extraheader=AUTHORIZATION: basic $auth_header" 2>&1 | tee "$push_log"; then
+                queue_commit_paths="$(git diff-tree --no-commit-id --name-only -r HEAD)"
+                if [ "$queue_commit_paths" != "$queue_file" ]; then
+                  echo "::error::cover queue commit changed paths outside $queue_file; source freshness cannot be advanced safely"
+                  return 1
+                fi
+                local queued_head api_input_changed source_commit
+                source_commit="${PUBLISH_API_SOURCE_COMMIT:-}"
+                queued_head="$(git rev-parse HEAD)"
+                if ! [[ "$source_commit" =~ ^[a-f0-9]{40}$ ]] || ! [[ "$queued_head" =~ ^[a-f0-9]{40}$ ]]; then
+                  echo "::error::cover queue push produced an unverifiable source transition: source=$source_commit queued=$queued_head"
+                  return 1
+                fi
+                # The queue commit is [skip ci], but a rebase may also have
+                # incorporated commits that arrived on main while the queue
+                # was being pushed. Reclassify the whole transition before
+                # allowing later publish phases to adopt its new HEAD.
+                if ! api_input_changed="$(
+                  SOURCE_COMMIT="$source_commit" CURRENT_MAIN="$queued_head" node --input-type=module -e '
+                    import { apiInputChangedInRange } from "./scripts/publish-section-pages.mjs";
+                    process.stdout.write(String(apiInputChangedInRange({
+                      before: process.env.SOURCE_COMMIT,
+                      after: process.env.CURRENT_MAIN,
+                    })));
+                  '
+                )"; then
+                  echo '::error::impossibile classificare il commit della cover queue prima di aggiornare la sorgente publish'
+                  return 1
+                fi
+                if [ "$api_input_changed" = 'true' ]; then
+                  echo "::error::cover queue push ha incorporato input API tra $source_commit e $queued_head; il run della nuova push deve possedere la pubblicazione"
+                  return 1
+                fi
+                echo "PUBLISH_API_SOURCE_COMMIT=$queued_head" >> "$GITHUB_ENV"
+                export PUBLISH_API_SOURCE_COMMIT="$queued_head"
+                echo "::notice::cover queue push classificato come solo bookkeeping; sorgente publish aggiornata a $queued_head"
                 return 0
               fi
               if grep -q 'MAIN_TREE_GUARD_FATAL:' "$push_log"; then
@@ -1054,6 +1141,7 @@ jobs:
             push_queue_commit
           fi
 
+          bash scripts/ci/verify-publish-api-source-current.sh
           mapfile -t manifest_entries < "$manifest_file"
           if [ "${#manifest_entries[@]}" -eq 0 ]; then
             if [ "$EVENT_NAME" = 'push' ] && { [ -z "${BEFORE:-}" ] || [[ "$BEFORE" =~ ^0+$ ]]; }; then
@@ -1125,14 +1213,39 @@ jobs:
           runtime_pat="${GITHUB_PAT_NANAKO:-}"
           GH_TOKEN="${runtime_pat:-$GH_TOKEN}" node scripts/ci/ticker-shadow-alert.mjs
 
+      - name: Verify source before Pages publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          PUBLISHED_SOURCE_COMMIT: ${{ inputs.source_commit || github.sha }}
+          VERIFY_CONTEXT: Pages publish
+        run: bash scripts/ci/verify-publish-api-source-current.sh
+
       - uses: actions/configure-pages@v6
 
       - uses: actions/upload-pages-artifact@v5
         with:
           path: dist/api
 
+      - name: Verify source is still current before Pages deploy
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          PUBLISHED_SOURCE_COMMIT: ${{ inputs.source_commit || github.sha }}
+          VERIFY_CONTEXT: Pages deploy
+        run: bash scripts/ci/verify-publish-api-source-current.sh
+
       - id: deploy
         uses: actions/deploy-pages@v5
+
+      - name: Verify source is still current before edge upload
+        if: steps.deploy.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          PUBLISHED_SOURCE_COMMIT: ${{ inputs.source_commit || github.sha }}
+          VERIFY_CONTEXT: edge upload
+        run: bash scripts/ci/verify-publish-api-source-current.sh
 
       # Push the article sitemaps straight to the edge.
       #
@@ -1152,6 +1265,15 @@ jobs:
       # Best-effort, exactly like the dispatch below: the R2 PUT is a freshness
       # optimisation over a passthrough that already works, so a missing
       # credential or a failed upload must never fail a good publish.
+      - name: Verify source before edge document publish
+        if: steps.deploy.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          PUBLISHED_SOURCE_COMMIT: ${{ inputs.source_commit || github.sha }}
+          VERIFY_CONTEXT: edge document publish
+        run: bash scripts/ci/verify-publish-api-source-current.sh
+
       - name: Push the article sitemaps and the blog index to the edge
         if: steps.deploy.outcome == 'success'
         continue-on-error: true
@@ -1236,6 +1358,16 @@ jobs:
             printf '%s\n' "${urls[@]}" > "$purge_list"
             bash scripts/ci/retry-cmd.sh node scripts/cf-purge-cache.mjs "--files-from=$purge_list"
           fi
+
+      - name: Verify source is still current before edge flip
+        if: steps.deploy.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          PUBLISHED_SOURCE_COMMIT: ${{ inputs.source_commit || github.sha }}
+          VERIFY_CONTEXT: edge flip
+        run: |
+          bash scripts/ci/verify-publish-api-source-current.sh
 
       # La release edge delle sezioni cantonali (piano «sezioni articoli per
       # cantone», P7). Lo stato servito (live|draft|retired) ha UNA sola fonte:

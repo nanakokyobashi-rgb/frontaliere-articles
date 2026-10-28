@@ -14,6 +14,10 @@ const render = readFileSync(
   new URL('../../scripts/ci/fast-publish-section-render.sh', import.meta.url),
   'utf8',
 );
+const recovery = readFileSync(
+  new URL('../../scripts/ci/fast-publish-section-recovery.sh', import.meta.url),
+  'utf8',
+);
 
 function triggerBlock(name) {
   const start = workflow.indexOf(`\n  ${name}:`);
@@ -120,10 +124,12 @@ test('fast-publish-section delega i blocchi shell grandi a script senza espressi
 });
 
 test('una gara stale consegna la sezione al coordinatore senza dichiarare una pubblicazione', () => {
-  assert.doesNotMatch(render, /dispatch_stale_handoff\(\)/u);
+  assert.match(render, /dispatch_stale_replay\(\)/u);
   assert.match(render, /echo "stale_handoff=true" >> "\$GITHUB_OUTPUT"/u);
   assert.match(render, /echo "stale_handoff_head=\$handoff_head" >> "\$GITHUB_OUTPUT"/u);
-  assert.match(render, /coordinatore della matrice/u);
+  assert.match(render, /echo "stale_handoff_nonce=\$stale_handoff_nonce" >> "\$GITHUB_OUTPUT"/u);
+  assert.match(render, /echo "stale_handoff_title=\$stale_handoff_title" >> "\$GITHUB_OUTPUT"/u);
+  assert.match(render, /coordinatore sulla HEAD/u);
   assert.doesNotMatch(
     render,
     /main e' avanzata durante tre tentativi di render del publisher[\s\S]*exit 1/u,
@@ -142,6 +148,28 @@ test('una gara stale consegna la sezione al coordinatore senza dichiarare una pu
     workflow.includes('(.stale_handoff // "") == "true"'),
     'una matrix mista deve ricorrere al recovery, non annunciare una release parziale',
   );
-  assert.match(workflow, /steps\.replay_freshness\.outputs\.current_main \|\| needs\.publish_release_head\.outputs\.rendered_head/u);
+  assert.match(workflow, /steps\.stale\.outputs\.recovery_head \|\| steps\.replay_freshness\.outputs\.current_main \|\| needs\.publish_release_head\.outputs\.rendered_head/u);
   assert.match(workflow, /steps\.replay_freshness\.outputs\.fresh == 'false'[\s\S]*needs\.publish_release_head\.outputs\.mixed_matrix == 'true'/u);
+});
+
+test('un resolve stale produce la matrice sulla nuova HEAD e lascia il recovery come rete di sicurezza', () => {
+  assert.match(
+    recovery,
+    /rebuild_recovery_head\(\)[\s\S]*git checkout --detach "\$next_head"[\s\S]*dispatch_children_wave/u,
+  );
+  assert.match(
+    recovery,
+    /VERIFY_STALE_HANDOFF_HEAD[\s\S]*rebuild_recovery_head[\s\S]*dispatch_children_wave/u,
+  );
+  assert.match(
+    recovery,
+    /VERIFY_STALE_HANDOFF_TITLE[\s\S]*VERIFY_STALE_HANDOFF_NONCE[\s\S]*return 3/u,
+  );
+  assert.match(recovery, /wave_replaced=true/u);
+  assert.match(recovery, /max_stale_handoff_waves=3/u);
+  assert.match(recovery, /printf 'recovery_head=%s\\n' "\$CURRENT_MAIN" >> "\$GITHUB_OUTPUT"/u);
+  assert.match(resolver, /git checkout --detach "\$current_main"/u);
+  assert.match(resolver, /echo "source_commit=\$current_main"/u);
+  assert.match(resolver, /echo "matrix=\$replay_matrix"/u);
+  assert.doesNotMatch(resolver, /riuso il nonce del coordinator/u);
 });

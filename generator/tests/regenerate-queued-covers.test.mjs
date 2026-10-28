@@ -1729,8 +1729,13 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
   const sectionContract = `${sectionPublisher}\n${sectionResolver}\n${sectionRender}\n${sectionRecovery}`;
   assert.equal(
     sectionPublisher.match(/ref: \$\{\{ github\.event\.workflow_run\.head_sha \|\| inputs\.source_commit \|\| \(github\.event_name == 'workflow_dispatch' && inputs\.bootstrap != true && github\.ref\) \|\| github\.sha \}\}/gu)?.length,
-    2,
-    'i due checkout principali del publisher sezione devono distinguere dispatch live e replay pinnato',
+    1,
+    'il checkout resolve deve distinguere dispatch live e replay pinnato',
+  );
+  assert.match(
+    sectionPublisher,
+    /ref: \$\{\{ needs\.resolve\.outputs\.source_commit \|\| github\.event\.workflow_run\.head_sha \|\| inputs\.source_commit \|\| \(github\.event_name == 'workflow_dispatch' && inputs\.bootstrap != true && github\.ref\) \|\| github\.sha \}\}/u,
+    'il publish deve usare la sorgente ricalcolata dal resolve stale',
   );
   assert.match(sectionContract, /normal_dispatch='false'/u);
   assert.match(sectionPublisher, /REF: \$\{\{ github\.ref \}\}/u);

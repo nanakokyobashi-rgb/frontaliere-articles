@@ -11,6 +11,7 @@ const WORKFLOWS = [
   '.github/workflows/orphan-push-warn.yml',
   '.github/workflows/auto-merge-engine-lockstep.yml',
   '.github/workflows/publish-api.yml',
+  'scripts/ci/verify-publish-api-source-current.sh',
 ];
 
 test('le letture GitHub dei workflow CI hanno un limite di 60 secondi', () => {
@@ -18,8 +19,8 @@ test('le letture GitHub dei workflow CI hanno un limite di 60 secondi', () => {
   const source = sources.join('\n');
   assert.equal(
     (source.match(/timeout --kill-after=1s 60s gh api/g) || []).length,
-    21,
-    'tutte le ventuno chiamate gh api del gruppo devono essere bounded',
+    22,
+    'tutte le ventidue chiamate gh api del gruppo devono essere bounded',
   );
   assert.doesNotMatch(
     source,

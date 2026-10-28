@@ -279,6 +279,16 @@
       }
     },
     {
+      "path": "scripts/ci/verify-publish-api-source-current.sh",
+      "mode": "corpus-only",
+      "reason": "Guard fail-closed condiviso dalle fasi irreversibili del publisher API: verifica che il commit dell'artifact e la HEAD corrente di main siano ancora la stessa sorgente prima di pubblicare o fare flip edge. Il sito non possiede il publisher corpus-side né questo helper, quindi il path resta corpus-only per costruzione.",
+      "baseline": {
+        "site": null,
+        "corpus": "0fac65ab7eb7dde2",
+        "alignedAt": "2026-10-28"
+      }
+    },
+    {
       "path": "scripts/ci/read-main-head.sh",
       "mode": "corpus-only",
       "reason": "Lettura fail-closed della punta remota di main via git ls-remote, senza consumare il bucket REST condiviso dai workflow, usata dai guard di freschezza dei publisher di sezione e del loro reconciler. Il sito non possiede questi publisher corpus-side, quindi il helper resta corpus-only per costruzione.",

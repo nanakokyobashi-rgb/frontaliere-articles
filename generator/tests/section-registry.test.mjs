@@ -1688,17 +1688,58 @@ test('load-rc-env: kill-switch mappato, assente per default, marker scritto solo
 
 test('publish-api: osserva tutta la chiusura degli import del publisher, e pubblica la release edge DOPO il deploy Pages, per ultima', () => {
   const wf = readFileSync(path.join(ROOT, '.github/workflows/publish-api.yml'), 'utf8');
+  const freshnessHelper = readFileSync(path.join(ROOT, 'scripts/ci/verify-publish-api-source-current.sh'), 'utf8');
+  const edgePublisher = readFileSync(path.join(ROOT, 'scripts/publish-section-edge.mjs'), 'utf8');
   assert.match(wf, /source_commit:\n\s+description: .*replay bootstrap bounded/);
   assert.match(wf, /ref: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
-  assert.match(wf, /Verify bounded replay source is still main/);
+  assert.match(wf, /Verify publish source is current main/);
   assert.match(wf, /gh api "repos\/\$REPOSITORY\/git\/ref\/heads\/main"/);
   assert.match(wf, /SOURCE_COMMIT: \$\{\{ inputs\.source_commit \}\}/);
+  assert.match(wf, /if \[ -z "\$SOURCE_COMMIT" \]/);
+  assert.match(wf, /publish stantio: main=\$current_main contiene input API/);
   assert.match(wf, /git fetch --no-tags origin main/);
   assert.match(wf, /git merge-base --is-ancestor "\$SOURCE_COMMIT" "\$current_main"/);
   assert.match(wf, /apiInputChangedInRange/);
   assert.match(wf, /git checkout --detach "\$current_main"/);
   assert.match(wf, /PUBLISH_API_SOURCE_COMMIT=\$current_main/);
   assert.match(wf, /nessun input publish-api nel delta/);
+  assert.equal(
+    (wf.match(/bash scripts\/ci\/verify-publish-api-source-current\.sh/g) || []).length,
+    8,
+    'la stessa guardia deve precedere ogni fase irreversibile e il controllo finale',
+  );
+  const pagesGuard = wf.indexOf('Verify source is still current before Pages deploy');
+  const pagesDeploy = wf.indexOf('uses: actions/deploy-pages@v5');
+  const edgeGuard = wf.indexOf('Verify source is still current before edge upload');
+  const edgeUpload = wf.indexOf('Push the article sitemaps and the blog index to the edge');
+  const edgeFlipGuard = wf.indexOf('Verify source is still current before edge flip');
+  const edgeFlip = wf.indexOf('Publish the canton sections release to the edge');
+  assert.ok(pagesGuard >= 0 && pagesGuard < pagesDeploy, 'la guardia Pages deve precedere deploy-pages');
+  assert.ok(edgeGuard >= 0 && edgeGuard < edgeUpload, 'la guardia edge deve precedere upload/purge');
+  assert.ok(edgeFlipGuard >= 0 && edgeFlipGuard < edgeFlip, 'la guardia finale deve precedere il flip edge');
+  assert.match(wf, /Verify source is still current before edge flip/);
+  assert.match(freshnessHelper, /timeout --kill-after=1s 60s gh api/);
+  assert.match(freshnessHelper, /PUBLISH_API_SOURCE_COMMIT/);
+  const queuePush = wf.slice(wf.indexOf('push_queue_commit()'), wf.indexOf('queue_changed=false'));
+  assert.match(queuePush, /apiInputChangedInRange/);
+  assert.match(queuePush, /PUBLISH_API_SOURCE_COMMIT=\$queued_head/);
+  assert.match(edgePublisher, /verifySourceCurrent = null/);
+  assert.match(edgePublisher, /await verifySourceCurrent\(\)/);
+  assert.ok(
+    edgePublisher.indexOf('await verifySourceCurrent()') < edgePublisher.indexOf('flipped = io.upload(pointerFile'),
+    'il guard interno deve precedere immediatamente il PUT del puntatore',
+  );
+  assert.match(wf, /Verify source before governed cover publish/);
+  assert.match(wf, /Verify source before Pages publish/);
+  assert.match(wf, /Verify source before edge document publish/);
+  assert.match(wf, /bash scripts\/ci\/verify-publish-api-source-current\.sh/);
+  const coverGuard = wf.indexOf('      - name: Verify source before governed cover publish\n');
+  const coverPublish = wf.indexOf('      - name: Publish governed blog cover bytes before Pages deploy\n');
+  const pagesPhaseGuard = wf.indexOf('      - name: Verify source before Pages publish\n');
+  const configurePages = wf.indexOf('      - uses: actions/configure-pages@v6\n');
+  const edgeDocumentGuard = wf.indexOf('      - name: Verify source before edge document publish\n');
+  const edgeDocumentUpload = wf.indexOf('      - name: Push the article sitemaps and the blog index to the edge\n');
+  assert.ok(coverGuard < coverPublish && coverPublish < pagesPhaseGuard && pagesPhaseGuard < configurePages && configurePages < edgeDocumentGuard && edgeDocumentGuard < edgeDocumentUpload, 'ogni fase irreversibile deve avere una barriera di freschezza prima del publish');
   const filters = [...wf.slice(0, wf.indexOf('\n  schedule:')).matchAll(/^      - '([^']+)'$/gm)].map((m) => m[1]);
   const covered = (file) => filters.some((p) => p === file || (p.endsWith('/**') && file.startsWith(p.slice(0, -2))));
   for (const p of [
@@ -1711,6 +1752,7 @@ test('publish-api: osserva tutta la chiusura degli import del publisher, e pubbl
     'scripts/lib/r2-image-namespace-lock.mjs',
     'scripts/lib/r2-section-lock.mjs',
     'scripts/lib/is-invoked-directly.mjs',
+    'scripts/ci/verify-publish-api-source-current.sh',
     'generator/scripts/load-rc-env.mjs',
   ]) {
     assert.ok(filters.includes(p), p);

@@ -95,7 +95,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
-import { spawn, spawnSync } from 'node:child_process';
+import { execFileSync, spawn, spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from '../generator/scripts/lib/fetch-with-ref-timeout.mjs';
 
@@ -103,6 +103,7 @@ import { CORPUS_ROUTE_OWNER_META_TAG } from '../engine/shared/corpusRouteOwner.m
 import { familySectionPages } from './lib/build-sitemap.mjs';
 import {
   parseSectionBootstrapLock,
+  readBootstrapLockOwnerRun,
   sectionBootstrapLockKey,
 } from './lib/section-bootstrap-lock.mjs';
 import {
@@ -129,6 +130,37 @@ export const RELEASE_CACHE_CONTROL = 'public,max-age=31536000,immutable';
  */
 export const STAGING_VERIFY_ATTEMPTS = 6;
 export const STAGING_VERIFY_RETRY_MS = 4000;
+const FULL_GIT_SHA_RE = /^[a-f0-9]{40}$/;
+
+/** Read the live main ref without spending the shared GitHub REST quota. */
+export function publishedMainHead() {
+  const current = execFileSync(
+    'bash',
+    [path.join(ROOT, 'scripts/ci/read-main-head.sh')],
+    { encoding: 'utf8' },
+  ).trim();
+  if (!FULL_GIT_SHA_RE.test(current)) throw new Error('revisione corrente di main non valida');
+  return current;
+}
+
+/**
+ * The workflow checks freshness before entering this module, but staging and
+ * bootstrap can wait for a long time. The final pointer PUT needs its own
+ * source-of-truth check, immediately before the only mutable edge write.
+ */
+export async function assertExpectedMainHead(expected, readMainHead = publishedMainHead) {
+  if (!FULL_GIT_SHA_RE.test(String(expected ?? ''))) {
+    throw new Error('PUBLISH_API_SOURCE_COMMIT non contiene una SHA completa');
+  }
+  const current = await readMainHead();
+  if (!FULL_GIT_SHA_RE.test(String(current ?? ''))) {
+    throw new Error('revisione corrente di main non valida');
+  }
+  if (current !== expected) {
+    throw new Error(`main e' avanzato durante lo staging edge (${expected} → ${current}); flip interrotto`);
+  }
+  return current;
+}
 
 const sha256 = (data) => createHash('sha256').update(data).digest('hex');
 const isPlainObject = (value) => value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -366,6 +398,15 @@ function runAsync(cmd, args) {
   });
 }
 
+export function classifyBootstrapLockAcquireResult(result) {
+  if (result?.code === 2) return 'busy';
+  if (
+    result?.code === 0
+    && /bootstrap lock (?:acquisito atomicamente|gia' acquisito)/u.test(result.stdout ?? '')
+  ) return 'acquired';
+  return 'error';
+}
+
 /** Le operazioni vere su R2 e Cloudflare; i test ne passano di finte. */
 export const realIo = {
   upload: (local, key, cacheControl) => run('bash', ['scripts/lib/upload-cdn-file.sh', local, key, cacheControl]).stdout.includes('✅ uploaded'),
@@ -375,8 +416,7 @@ export const realIo = {
       'scripts/ci/section-bootstrap-lock.mjs', 'acquire',
       '--section', section, '--commit', commit, '--role', 'edge-publisher',
     ]);
-    if (result.code === 2) return 'busy';
-    return result.code === 0 && result.stdout.includes('bootstrap lock acquisito atomicamente') ? 'acquired' : 'error';
+    return classifyBootstrapLockAcquireResult(result);
   },
   releaseBootstrapLock: async (section) => {
     const result = await runAsync('node', [
@@ -389,6 +429,7 @@ export const realIo = {
     purgeChunks(urls).every(
       (chunk) => run('bash', ['scripts/ci/retry-cmd.sh', 'node', 'scripts/cf-purge-cache.mjs', `--files=${chunk.join(',')}`]).code === 0,
     ),
+  readBootstrapLockOwnerRun: (owner) => readBootstrapLockOwnerRun(owner, { env: process.env }),
   /** GET sul CDN con cache-buster: `{ status, body }`, o `{ status: 0 }` se la rete non risponde. */
   fetchBytes: async (url) => {
     for (let attempt = 1; attempt <= 3; attempt++) {
@@ -477,7 +518,15 @@ export const BOOTSTRAP_RELEASE_ATTEMPTS = 3;
 export async function waitForBootstrapLocks(
   sections,
   io,
-  { waitMs = BOOTSTRAP_WAIT_MS, retryMs = BOOTSTRAP_RETRY_MS, sleep, now = Date.now, deadline: deadlineAt } = {},
+  {
+    waitMs = BOOTSTRAP_WAIT_MS,
+    retryMs = BOOTSTRAP_RETRY_MS,
+    sleep,
+    now = Date.now,
+    deadline: deadlineAt,
+    commit,
+    log = () => {},
+  } = {},
 ) {
   const pause = sleep ?? ((ms) => new Promise((resolve) => setTimeout(resolve, ms)));
   const ids = [...new Set((sections ?? []).filter((section) => typeof section === 'string' && section))];
@@ -498,7 +547,42 @@ export async function waitForBootstrapLocks(
         continue;
       }
       const state = parseSectionBootstrapLock(responseBytes(got), { section, now: now() });
-      if (state.state === 'active') pending.push(`${section} (${state.doc.owner})`);
+      if (state.state === 'active') {
+        // Un runner puo' terminare prima di riuscire a scrivere il tombstone
+        // (timeout CDN, processo ucciso, teardown del runner). Il TTL lungo
+        // protegge dalla collisione, ma non deve trasformare un owner gia'
+        // terminato in un blocco cieco del publisher. L'acquire condizionale
+        // del CLI fa il takeover solo dopo avere verificato l'attempt GitHub;
+        // un owner attivo o non verificabile resta invece fail-closed.
+        if (
+          commit
+          && typeof io?.readBootstrapLockOwnerRun === 'function'
+          && typeof io?.acquireBootstrapLock === 'function'
+        ) {
+          let ownerRun;
+          try {
+            ownerRun = await io.readBootstrapLockOwnerRun(state.doc.owner);
+          } catch (error) {
+            ownerRun = { state: 'unknown', reason: error?.message ?? String(error) };
+          }
+          if (ownerRun?.state === 'terminal') {
+            let takeover;
+            try {
+              takeover = await io.acquireBootstrapLock(section, commit);
+            } catch (error) {
+              takeover = 'error';
+              log(`::warning::[section-edge] takeover del bootstrap lock di ${section} non verificato: ${error?.message ?? error}`);
+            }
+            if (takeover === 'acquired') {
+              log(`::notice::[section-edge] recuperato bootstrap lock di ${section}: owner ${state.doc.owner} terminato (${ownerRun.conclusion || 'completed'})`);
+              continue;
+            }
+            pending.push(`${section} (${state.doc.owner}; takeover non confermato: ${takeover ?? 'nessun risultato'})`);
+            continue;
+          }
+        }
+        pending.push(`${section} (${state.doc.owner})`);
+      }
       else if (state.state === 'unknown') pending.push(`${section} (${state.reason})`);
     }
     if (pending.length === 0 || now() + retryMs > deadline) return pending;
@@ -713,6 +797,7 @@ export async function publishRelease(
     bootstrapReleaseAttempts = BOOTSTRAP_RELEASE_ATTEMPTS,
     stagingVerifyAttempts = STAGING_VERIFY_ATTEMPTS,
     stagingVerifyRetryMs = STAGING_VERIFY_RETRY_MS,
+    verifySourceCurrent = null,
     sleep,
   },
 ) {
@@ -841,6 +926,8 @@ export async function publishRelease(
     retryMs: bootstrapRetryMs,
     sleep,
     deadline: bootstrapDeadline,
+    commit: release.commit,
+    log,
   });
   if (lockedBeforeBootstrap.length) {
     return stopBeforeFlip('bootstrap-lock', `bootstrap live ancora in corso (${lockedBeforeBootstrap.join(', ')})`);
@@ -903,6 +990,13 @@ export async function publishRelease(
   try {
     const pointerFile = path.join(pointerDir, 'registry.json');
     fs.writeFileSync(pointerFile, JSON.stringify(pointer));
+    if (typeof verifySourceCurrent === 'function') {
+      try {
+        await verifySourceCurrent();
+      } catch (error) {
+        return await stopBeforeFlip('freshness', error?.message ?? String(error));
+      }
+    }
     flipped = io.upload(pointerFile, EDGE_SECTION_REGISTRY_FILE, REGISTRY_CACHE_CONTROL);
   } finally {
     fs.rmSync(pointerDir, { recursive: true, force: true });
@@ -966,7 +1060,21 @@ export async function main(argv = process.argv.slice(2), { env = process.env, io
     log(JSON.stringify({ commit: release.commit, base: release.base, live: release.live, files: release.files.map((f) => f.key), pointer: release.pointer }, null, 2));
     return 0;
   }
-  return (await publishRelease(release, { io, env, log, tmpDir: env.RUNNER_TEMP || os.tmpdir() })).code;
+  const expectedSourceCommit = env.PUBLISH_API_SOURCE_COMMIT || env.PUBLISHED_SOURCE_COMMIT || '';
+  const verifySourceCurrent = expectedSourceCommit
+    ? () => assertExpectedMainHead(expectedSourceCommit)
+    : env.CI === 'true'
+      ? async () => {
+        throw new Error('PUBLISH_API_SOURCE_COMMIT assente in CI: impossibile verificare la sorgente prima del flip');
+      }
+      : null;
+  return (await publishRelease(release, {
+    io,
+    env,
+    log,
+    tmpDir: env.RUNNER_TEMP || os.tmpdir(),
+    verifySourceCurrent,
+  })).code;
 }
 
 const invokedDirectly = (() => {

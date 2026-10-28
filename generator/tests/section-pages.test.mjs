@@ -3366,9 +3366,10 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(resolver, /if \[ "\$EVENT_NAME" = 'push' \] \|\| \{ \[ "\$EVENT_NAME" = 'workflow_run' \] && \[ "\$WORKFLOW_RUN_EVENT" = 'push' \]; \}; then/);
   assert.equal(
     (wf.match(/ref: \$\{\{ github\.event\.workflow_run\.head_sha \|\| inputs\.source_commit \|\| \(github\.event_name == 'workflow_dispatch' && inputs\.bootstrap != true && github\.ref\) \|\| github\.sha \}\}/g) ?? []).length,
-    2,
-    'resolve e publish devono distinguere dispatch live, bootstrap e source_commit del replay',
+    1,
+    'il resolve conserva il ref originario; il publish puo\' invece ricevere la HEAD ricalcolata',
   );
+  assert.match(wf, /ref: \$\{\{ needs\.resolve\.outputs\.source_commit \|\| github\.event\.workflow_run\.head_sha \|\| inputs\.source_commit/);
   assert.match(wf, /id: replay_freshness[\s\S]*bash scripts\/ci\/read-main-head\.sh/);
   assert.doesNotMatch(wf, /gh api "repos\/\$(?:REPO|REPOSITORY)\/git\/ref\/heads\/main"/);
   assert.match(resolver, /bash scripts\/ci\/read-main-head\.sh/);
@@ -3389,36 +3390,23 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
     staleResolveStart,
     resolver.indexOf('\nbefore="${PUSH_BEFORE:-}"', staleResolveStart),
   );
-  assert.match(staleResolve, /FIREBASE_SERVICE_ACCOUNT_JSON assente/);
-  assert.match(staleResolve, /bash \.replay-dispatcher-source\/scripts\/ci\/dispatch-fast-publish-replay\.sh "\$REPO" "\$dispatch_title" --ref main/);
-  assert.match(staleResolve, /-f source_commit="\$current_main"/);
-  assert.match(staleResolve, /-f dispatch_nonce="\$dispatch_nonce"/);
-  assert.match(staleResolve, /max_parallel_dispatches=16/);
-  assert.match(staleResolve, /REPLAY_RUN_LIST_CACHE_FILE="\$replay_run_list_cache"/);
-  assert.match(staleResolve, /export REPLAY_RUN_LIST_CACHE_FILE/);
-  assert.match(
-    staleResolve,
-    /Controlled harness evidence \(16 workers, empty run list, two[\s\S]*352 `gh run list` calls without the[\s\S]*snapshot, 2 with it\./,
-    'il cablaggio conserva la misura before/after del costo di lettura dello snapshot',
-  );
-  assert.match(staleResolve, /\(\s*if dispatch_stale_replay[\s\S]*\) &/);
-  assert.match(staleResolve, /wait_for_dispatch_wave/);
-  assert.match(staleResolve, /failed_sections\+\=\("\$\{dispatch_sections\[dispatch_index\]\}"\)/);
-  assert.match(staleResolve, /-f push_after="\$replay_after"/);
-  assert.match(staleResolve, /-f cleanup_inactive_surface="\$cleanup_inactive_surface"/);
+  assert.doesNotMatch(staleResolve, /FIREBASE_SERVICE_ACCOUNT_JSON assente/);
+  assert.doesNotMatch(staleResolve, /dispatch-fast-publish-replay\.sh/);
+  assert.doesNotMatch(staleResolve, /echo 'matrix=\[\]'/);
   assert.match(staleResolve, /replay_after="\$current_main"/);
-  assert.doesNotMatch(staleResolve, /replay_after="\$\{DISPATCH_PUSH_AFTER:-\}"/);
   assert.match(staleResolve, /git fetch --no-tags --depth=1 origin[\s\S]*refs\/heads\/main:refs\/remotes\/origin\/fast-publish-current-main/);
   assert.match(staleResolve, /git archive --format=tar "\$current_main"[\s\S]*generator\/data\/canton-sections\.json[\s\S]*scripts\/lib/);
   assert.match(staleResolve, /tar -x -C "\$current_main_source"/);
   assert.match(staleResolve, /replay_matrix="\$\(reconcile_edge_matrix "\$pinned_source" "\$current_main" "\$current_main_source"\)"/);
-  assert.ok(
-    staleResolve.indexOf('bash .replay-dispatcher-source/scripts/ci/dispatch-fast-publish-replay.sh') < staleResolve.indexOf("echo 'matrix=[]'"),
-    'il resolve deve redispatchare un replay stale prima di produrre una matrix vuota',
-  );
+  assert.match(staleResolve, /git checkout --detach "\$current_main"/);
+  assert.match(staleResolve, /echo "source_commit=\$current_main"/);
+  assert.match(staleResolve, /echo 'api_release_commit='/);
+  assert.match(staleResolve, /echo "matrix=\$replay_matrix"/);
+  assert.match(staleResolve, /fast-publish-result artifact/);
   assert.match(wf, /- name: Guard pinned replay freshness/);
   assert.match(wf, /PINNED_SOURCE_COMMIT: \$\{\{ inputs\.source_commit \}\}/);
   assert.match(wf, /PINNED_SOURCE_MAIN: \$\{\{ inputs\.source_main_commit \}\}/);
+  assert.match(wf, /RESOLVED_SOURCE_COMMIT: \$\{\{ needs\.resolve\.outputs\.source_commit \}\}/);
   assert.match(wf, /EVENT_NAME[\s\S]*workflow_dispatch[\s\S]*PINNED_SOURCE_COMMIT/);
   assert.match(wf, /if: steps\.replay_freshness\.outputs\.fresh == 'true'/);
   assert.match(wf, /Dispatch bounded replay with current corpus checkout/);
@@ -3434,10 +3422,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
     'tutti i redispatch propagano il dry-run calcolato',
   );
   assert.doesNotMatch(sectionContract, /-f dry_run=false/);
-  assert.equal(
-    replayDispatchCount,
-    4,
-  );
+  assert.equal(replayDispatchCount, 3, 'il resolver stale non crea un child senza artifact');
   assert.equal((wf.match(/name: Checkout replay dispatcher from workflow revision/g) ?? []).length, 3);
   assert.equal((wf.match(/ref: \$\{\{ github\.sha \}\}\n\s+path: \.replay-dispatcher-source/g) ?? []).length, 3);
   assert.match(
@@ -3447,21 +3432,21 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   );
   assert.equal(
     (sectionContract.match(/-f cleanup_inactive_surface="\$[A-Za-z_]+"/g) ?? []).length,
-    4,
+    3,
   );
   assert.match(wf, /CLEANUP_INACTIVE_SURFACE_INPUT: \$\{\{ inputs\.cleanup_inactive_surface \}\}/);
   assert.match(wf, /CLEANUP_INACTIVE_SURFACE: \$\{\{ matrix\.target\.cleanupInactiveSurface \|\| false \}\}/);
   assert.match(wf, /COORDINATED_RECOVERY_INPUT: \$\{\{ inputs\.coordinated_recovery \}\}/);
   assert.match(wf, /COORDINATED_RECOVERY: \$\{\{ inputs\.coordinated_recovery \}\}/);
-  assert.match(resolver, /-f coordinated_recovery="\$coordinated_recovery"/);
+  assert.doesNotMatch(staleResolve, /-f coordinated_recovery=/);
   assert.match(render, /-f coordinated_recovery="\$coordinated_recovery"/);
   assert.match(wf, /-f coordinated_recovery="\$COORDINATED_RECOVERY"/);
   assert.match(wf, /-f source_commit="\$CURRENT_MAIN"/);
   assert.match(sectionContract, /-f source_commit="\$current_main"/);
   assert.equal(
     (sectionContract.match(/-f dispatch_nonce="\$dispatch_nonce"/g) ?? []).length,
-    4,
-    'ogni redispatch stale deve conservare il nonce della run originaria o generarne un fallback per sezione',
+    3,
+    'i redispatch residui conservano il nonce della run originaria o generano un fallback per sezione',
   );
   assert.match(sectionContract, /source_commit richiede una SHA completa/);
   assert.match(sectionContract, /source_main_commit e' obbligatorio e richiede una SHA completa quando source_commit e' valorizzato/);
@@ -3522,7 +3507,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(render, /args\+=\(--known-missing-pages-file "\$known_missing_page_paths_file"\)/);
   assert.doesNotMatch(render, /args\+=\(--ids "\$\(printf '%s' "\$ARTICLE_IDS_JSON"/);
   assert.match(wf, /ALLOW_DEFERRED_LIVE_RELEASE: \$\{\{ needs\.resolve\.outputs\.allow_deferred_live_release \}\}/);
-  assert.match(wf, /EXPECTED_MAIN_HEAD: \$\{\{ github\.event\.workflow_run\.head_sha \|\| inputs\.source_main_commit \|\| github\.event\.after \|\| github\.sha \}\}/);
+  assert.match(wf, /EXPECTED_MAIN_HEAD: \$\{\{ needs\.resolve\.outputs\.source_commit \|\| github\.event\.workflow_run\.head_sha \|\| inputs\.source_main_commit \|\| github\.event\.after \|\| github\.sha \}\}/);
   assert.match(wf, /-f source_main_commit="\$CURRENT_MAIN"/);
   assert.match(sectionContract, /-f source_main_commit="\$current_main"/);
   assert.match(wf, /replay_before="\$\{ORIGINAL_PUSH_BEFORE:-\$STALE_HEAD\}"/);
@@ -3565,6 +3550,13 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(recovery, /\.stale_handoff \/\/ "false"\) != "true"/);
   assert.match(recovery, /if \[ "\$\{DRY:-false\}" = 'true' \]/);
   assert.match(recovery, /dispatch_run_snapshot=.*gh run list/);
+  assert.match(recovery, /dispatch_children_wave\(\)/);
+  assert.match(recovery, /rebuild_recovery_head\(\)/);
+  assert.match(recovery, /VERIFY_STALE_HANDOFF_TITLE/);
+  assert.match(recovery, /VERIFY_STALE_HANDOFF_HEAD/);
+  assert.match(recovery, /return 3/);
+  assert.match(recovery, /wave_replaced=true/);
+  assert.match(recovery, /max_stale_handoff_waves=3/);
   assert.match(recovery, /dispatch_baseline_ids=\(\)/);
   assert.match(recovery, /initial_run_state/);
   assert.match(recovery, /latest_run_id <= baseline_run_id/);
@@ -3627,7 +3619,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /replay bounded stantio: ricalcolo la release API sulla HEAD/);
   assert.match(wf, /git rev-parse --is-shallow-repository/);
   assert.match(wf, /remove_stale_canton_rss_feeds/);
-  assert.match(wf, /API_RELEASE_COMMIT: \$\{\{ inputs\.api_release_commit \}\}/);
+  assert.match(wf, /API_RELEASE_COMMIT: \$\{\{ needs\.resolve\.outputs\.api_release_commit \}\}/);
   assert.match(wf, /GITHUB_PAT_NANAKO assente/);
   assert.match(wf, /Verify staged release revision is still main/);
   // Il replay staged deve usare la revisione realmente renderizzata dalla
@@ -3645,7 +3637,11 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   );
   assert.match(wf, /actions\/upload-artifact@v7/);
   assert.match(wf, /actions\/download-artifact@v7/);
-  assert.match(wf, /map\(\{section, rendered_head, stale_handoff, stale_handoff_head, fresh\}\)/);
+  assert.match(wf, /map\(\{section, rendered_head, stale_handoff, stale_handoff_head, stale_handoff_nonce, stale_handoff_title, fresh\}\)/);
+  assert.match(wf, /STALE_HANDOFF_NONCE: \$\{\{ steps\.render\.outputs\.stale_handoff_nonce \}\}/);
+  assert.match(wf, /STALE_HANDOFF_TITLE: \$\{\{ steps\.render\.outputs\.stale_handoff_title \}\}/);
+  assert.match(render, /stale_handoff_nonce=\$stale_handoff_nonce/);
+  assert.match(render, /stale_handoff_title=\$stale_handoff_title/);
   assert.match(wf, /map\(\.rendered_head\) \| unique \| if length == 1/);
   assert.match(wf, /all\(\.\[\]; \(\.rendered_head == "" and \(\(\.stale_handoff == "true"\) or \(\.fresh == "false"\)\)\)\)/);
   assert.match(wf, /mixed_matrix: \$\{\{ steps\.collect\.outputs\.mixed_matrix \}\}/);
@@ -3678,7 +3674,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   const pushRangeResolver = read('scripts/ci/resolve-workflow-run-push-range.mjs');
   assert.match(pushRangeResolver, /actions\/workflows\/publish-api\.yml\/runs/);
   assert.match(pushRangeResolver, /candidate\?\.type === 'PushEvent'[\s\S]*payload\?\.ref === ref[\s\S]*eventHead === headSha/);
-  assert.match(wf, /push_before: \$\{\{ steps\.push_range\.outputs\.before \}\}/);
+  assert.match(wf, /push_before: \$\{\{ steps\.plan\.outputs\.before \}\}/);
   assert.match(wf, /timeout-minutes: 10/);
   assert.match(wf, /filter: blob:none/);
   assert.match(

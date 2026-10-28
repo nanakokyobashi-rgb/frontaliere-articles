@@ -231,8 +231,10 @@ jobs:
       bootstrap: ${{ steps.plan.outputs.bootstrap }}
       replay_api_after_publish: ${{ steps.replay_mode.outputs.replay_api_after_publish }}
       allow_deferred_live_release: ${{ steps.replay_mode.outputs.allow_deferred_live_release }}
-      push_before: ${{ steps.push_range.outputs.before }}
-      push_after: ${{ steps.push_range.outputs.after }}
+      push_before: ${{ steps.plan.outputs.before }}
+      push_after: ${{ steps.plan.outputs.after }}
+      source_commit: ${{ steps.plan.outputs.source_commit }}
+      api_release_commit: ${{ steps.plan.outputs.api_release_commit }}
       preflight_head: ${{ steps.preflight_head.outputs.head }}
     steps:
       - name: Checkout (resolve)
@@ -461,6 +463,7 @@ jobs:
           CLEANUP_INACTIVE_SURFACE_INPUT: ${{ inputs.cleanup_inactive_surface }}
           REPLAY_API_INPUT: ${{ inputs.replay_api_after_publish }}
           ALLOW_DEFERRED_LIVE_RELEASE_INPUT: ${{ inputs.allow_deferred_live_release }}
+          API_RELEASE_COMMIT_INPUT: ${{ inputs.api_release_commit }}
           COORDINATED_RECOVERY_INPUT: ${{ inputs.coordinated_recovery }}
           EVENT_NAME: ${{ github.event_name }}
           COVER_DRAIN_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
@@ -535,8 +538,8 @@ jobs:
       - name: Preflight — i link Markdown devono avere una destinazione canonica
         if: steps.plan.outputs.any == 'true'
         env:
-          BEFORE: ${{ steps.push_range.outputs.before }}
-          AFTER: ${{ steps.push_range.outputs.after }}
+          BEFORE: ${{ steps.plan.outputs.before }}
+          AFTER: ${{ steps.plan.outputs.after }}
           EVENT_NAME: ${{ github.event_name }}
           PREFLIGHT_EVENT_NAME: ${{ github.event_name }}
           PREFLIGHT_PUSH_BASE_REVISION: ${{ steps.push_range.outputs.before }}
@@ -568,21 +571,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
         with:
-          # Keep normal non-bootstrap cover-drain dispatches on the live ref;
-          # workflow_run, bounded replay, and bootstrap may pin an older
-          # source commit.
-          ref: ${{ github.event.workflow_run.head_sha || inputs.source_commit || (github.event_name == 'workflow_dispatch' && inputs.bootstrap != true && github.ref) || github.sha }}
-          # resolvePublishedReleaseCommit() verifica la release API con
-          # merge-base: una release precedente puo' essere fuori dai due
-          # commit che actions/checkout scarica di default.
+          ref: ${{ needs.resolve.outputs.source_commit || github.event.workflow_run.head_sha || inputs.source_commit || (github.event_name == 'workflow_dispatch' && inputs.bootstrap != true && github.ref) || github.sha }}
           fetch-depth: 0
           persist-credentials: false
 
       - name: Checkout replay dispatcher from workflow revision
         uses: actions/checkout@v7
         with:
-          # workflow_run checks out the older publish source at the workspace
-          # root; github.sha points to the default-branch workflow revision.
           ref: ${{ github.sha }}
           path: .replay-dispatcher-source
           fetch-depth: 1
@@ -651,13 +646,16 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
           EVENT_NAME: ${{ github.event_name }}
+          RESOLVED_SOURCE_COMMIT: ${{ needs.resolve.outputs.source_commit }}
           WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
           PINNED_SOURCE_COMMIT: ${{ inputs.source_commit }}
           PINNED_SOURCE_MAIN: ${{ inputs.source_main_commit }}
         run: |
           set -euo pipefail
           pinned_source=''
-          if [ "$EVENT_NAME" = 'workflow_run' ]; then
+          if [ -n "${RESOLVED_SOURCE_COMMIT:-}" ]; then
+            pinned_source="$RESOLVED_SOURCE_COMMIT"
+          elif [ "$EVENT_NAME" = 'workflow_run' ]; then
             pinned_source="${WORKFLOW_RUN_HEAD_SHA:-}"
           elif [ "$EVENT_NAME" = 'workflow_dispatch' ] && [ -n "${PINNED_SOURCE_COMMIT:-}" ]; then
             pinned_source="${PINNED_SOURCE_MAIN:-$PINNED_SOURCE_COMMIT}"
@@ -804,7 +802,7 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
           PUSH_BEFORE: ${{ needs.resolve.outputs.push_before }}
           PUSH_AFTER: ${{ needs.resolve.outputs.push_after }}
-          WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          WORKFLOW_RUN_HEAD_SHA: ${{ needs.resolve.outputs.source_commit || github.event.workflow_run.head_sha }}
         run: |
           set -euo pipefail
           if [ "$EVENT_NAME" = 'workflow_run' ]; then
@@ -917,16 +915,16 @@ jobs:
           PREFLIGHT_HEAD: ${{ needs.resolve.outputs.preflight_head }}
           REMOVE_STALE_CANTON_RSS_FEEDS: ${{ matrix.target.removeStaleCantonRssFeeds || false }}
           CLEANUP_INACTIVE_SURFACE: ${{ matrix.target.cleanupInactiveSurface || false }}
-          API_RELEASE_COMMIT: ${{ inputs.api_release_commit }}
+          API_RELEASE_COMMIT: ${{ needs.resolve.outputs.api_release_commit }}
           ALLOW_DEFERRED_LIVE_RELEASE: ${{ needs.resolve.outputs.allow_deferred_live_release }}
           REPLAY_API_AFTER_PUBLISH: ${{ needs.resolve.outputs.replay_api_after_publish }}
           COORDINATED_RECOVERY: ${{ inputs.coordinated_recovery }}
-          SOURCE_COMMIT: ${{ inputs.source_commit }}
-          SOURCE_MAIN_COMMIT: ${{ inputs.source_main_commit }}
+          SOURCE_COMMIT: ${{ needs.resolve.outputs.source_commit || inputs.source_commit }}
+          SOURCE_MAIN_COMMIT: ${{ needs.resolve.outputs.source_commit || inputs.source_main_commit }}
           DISPATCH_NONCE: ${{ inputs.dispatch_nonce }}
           REF: ${{ github.ref }}
-          WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
-          EXPECTED_MAIN_HEAD: ${{ github.event.workflow_run.head_sha || inputs.source_main_commit || github.event.after || github.sha }}
+          WORKFLOW_RUN_HEAD_SHA: ${{ needs.resolve.outputs.source_commit || github.event.workflow_run.head_sha }}
+          EXPECTED_MAIN_HEAD: ${{ needs.resolve.outputs.source_commit || github.event.workflow_run.head_sha || inputs.source_main_commit || github.event.after || github.sha }}
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
         run: bash scripts/ci/fast-publish-section-render.sh
@@ -956,6 +954,8 @@ jobs:
           RENDERED_HEAD: ${{ steps.render.outputs.rendered_head }}
           STALE_HANDOFF: ${{ steps.render.outputs.stale_handoff }}
           STALE_HANDOFF_HEAD: ${{ steps.render.outputs.stale_handoff_head }}
+          STALE_HANDOFF_NONCE: ${{ steps.render.outputs.stale_handoff_nonce }}
+          STALE_HANDOFF_TITLE: ${{ steps.render.outputs.stale_handoff_title }}
           FRESH: ${{ steps.replay_freshness.outputs.fresh }}
         run: |
           set -euo pipefail
@@ -964,8 +964,10 @@ jobs:
             --arg rendered_head "${RENDERED_HEAD:-}" \
             --arg stale_handoff "${STALE_HANDOFF:-}" \
             --arg stale_handoff_head "${STALE_HANDOFF_HEAD:-}" \
+            --arg stale_handoff_nonce "${STALE_HANDOFF_NONCE:-}" \
+            --arg stale_handoff_title "${STALE_HANDOFF_TITLE:-}" \
             --arg fresh "${FRESH:-}" \
-            '{section: $section, rendered_head: $rendered_head, stale_handoff: $stale_handoff, stale_handoff_head: $stale_handoff_head, fresh: $fresh}' \
+            '{section: $section, rendered_head: $rendered_head, stale_handoff: $stale_handoff, stale_handoff_head: $stale_handoff_head, stale_handoff_nonce: $stale_handoff_nonce, stale_handoff_title: $stale_handoff_title, fresh: $fresh}' \
             > "$RUNNER_TEMP/fast-publish-result.json"
 
       - name: Upload publish result
@@ -1014,7 +1016,7 @@ jobs:
             echo "::error::nessun risultato della matrix publish disponibile per il replay API"
             exit 1
           fi
-          actual="$(jq -s -c 'map({section, rendered_head, stale_handoff, stale_handoff_head, fresh})' "${result_files[@]}")"
+          actual="$(jq -s -c 'map({section, rendered_head, stale_handoff, stale_handoff_head, stale_handoff_nonce, stale_handoff_title, fresh})' "${result_files[@]}")"
           expected_sections="$(jq -c '[.[].section] | sort' <<<"$EXPECTED_MATRIX")"
           actual_sections="$(jq -c 'map(.section) | sort' <<<"$actual")"
           if [ "$actual_sections" != "$expected_sections" ]; then
@@ -1214,6 +1216,7 @@ jobs:
         run: node generator/scripts/load-rc-env.mjs
 
       - name: Redispatch staged backfill on current main after stale replay or mixed matrix
+        id: stale
         if: >-
           steps.replay_freshness.outputs.fresh == 'false' ||
           needs.publish_release_head.outputs.mixed_matrix == 'true'
@@ -1237,7 +1240,7 @@ jobs:
            needs.publish_release_head.outputs.mixed_matrix == 'true')
         env:
           REPOSITORY: ${{ github.repository }}
-          SOURCE_COMMIT: ${{ steps.replay_freshness.outputs.current_main || needs.publish_release_head.outputs.rendered_head || inputs.source_commit || github.sha }}
+          SOURCE_COMMIT: ${{ steps.stale.outputs.recovery_head || steps.replay_freshness.outputs.current_main || needs.publish_release_head.outputs.rendered_head || inputs.source_commit || github.sha }}
         run: |
           set -euo pipefail
           if ! [[ "$SOURCE_COMMIT" =~ ^[a-f0-9]{40}$ ]] \
