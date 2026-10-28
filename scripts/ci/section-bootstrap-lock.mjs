@@ -80,6 +80,13 @@ function writeTempDocument(doc) {
   return { dir, file };
 }
 
+function lockReadFailure(existing, action) {
+  const marker = existing.transient ? 'SECTION_BOOTSTRAP_LOCK_TRANSIENT: ' : '';
+  const error = new Error(`${marker}bootstrap lock ${existing.reason || 'non verificabile'} durante ${action}`);
+  if (existing.transient) error.code = 'SECTION_BOOTSTRAP_LOCK_TRANSIENT';
+  return error;
+}
+
 async function acquireOnce({ section, commit, role }) {
   const owner = bootstrapLockOwner();
   const existing = await readSectionBootstrapLock(section, { cdnBase: CDN_BASE });
@@ -101,7 +108,7 @@ async function acquireOnce({ section, commit, role }) {
     takeoverEtag = existing.etag;
     console.log(`::notice::[section-bootstrap-lock] recupero lock di ${section}: owner ${existing.doc.owner} ha terminato (${ownerRun.conclusion || 'completed'})`);
   }
-  if (existing.state === 'unknown') throw new Error(`bootstrap lock non verificabile: ${existing.reason}`);
+  if (existing.state === 'unknown') throw lockReadFailure(existing, 'acquire');
   const resolvedCommit = currentCommit(commit);
   const doc = makeSectionBootstrapLock({ section, commit: resolvedCommit, owner, role });
   const temp = writeTempDocument(doc);
@@ -140,7 +147,8 @@ async function acquire({ section, commit, role, waitMs, retryMs }) {
       await acquireOnce({ section, commit, role });
       return;
     } catch (error) {
-      if (!(error instanceof LockBusyError)) throw error;
+      const retryable = error instanceof LockBusyError || error?.code === 'SECTION_BOOTSTRAP_LOCK_TRANSIENT';
+      if (!retryable) throw error;
       const remaining = deadline - Date.now();
       if (remaining < retryMs) {
         throw new LockBusyError(`${error.message}; attesa bootstrap scaduta dopo ${Math.round(waitMs / 60_000)} minuti`);
@@ -159,7 +167,7 @@ async function release({ section }) {
   const owner = bootstrapLockOwner();
   const existing = await readSectionBootstrapLock(section, { cdnBase: CDN_BASE });
   if (existing.state === 'absent') throw new Error(`bootstrap lock assente durante il release: ${section}`);
-  if (existing.state === 'unknown') throw new Error(`bootstrap lock non verificabile durante il release: ${existing.reason}`);
+  if (existing.state === 'unknown') throw lockReadFailure(existing, 'release');
   if (existing.doc.owner !== owner) {
     throw new LockBusyError(`bootstrap lock di ${section} appartiene a ${existing.doc.owner}: ownership persa`);
   }

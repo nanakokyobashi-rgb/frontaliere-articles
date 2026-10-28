@@ -43,7 +43,7 @@ function errorChain(error) {
   return chain;
 }
 
-function isTransientFetchError(error, message) {
+export function isTransientFetchError(error, message) {
   const chain = errorChain(error);
   if (chain.some((item) => item.name === 'AbortError')) return true;
   if (chain.some((item) => {

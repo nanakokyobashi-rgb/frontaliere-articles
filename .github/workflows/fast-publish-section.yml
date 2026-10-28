@@ -935,7 +935,7 @@ jobs:
         if: always() && steps.replay_freshness.outputs.fresh == 'true' && needs.resolve.outputs.dry != 'true' && ((matrix.target.bootstrap == true && steps.acquire_bootstrap.outcome == 'success') || steps.render.outputs.dynamic_bootstrap_lock == 'true')
         env:
           SECTION: ${{ matrix.target.section }}
-        run: node scripts/ci/section-bootstrap-lock.mjs release --section "$SECTION"
+        run: bash scripts/ci/retry-cmd.sh node scripts/ci/section-bootstrap-lock.mjs release --section "$SECTION"
 
       - name: Summary
         if: always()

@@ -10,11 +10,14 @@
  */
 
 import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from '../../generator/scripts/lib/fetch-with-ref-timeout.mjs';
+import { isTransientFetchError } from './declared-image-fetch.mjs';
 
 export const PAGE_MANIFEST_SCHEMA = 1;
 export const PAGE_MANIFEST_PREFIX = 'edge/sections/_page-manifests';
 export const PAGE_MANIFEST_KINDS = Object.freeze(['article', 'archive', 'hub', 'landing']);
 export const PAGE_MANIFEST_LOCALES = Object.freeze(['it', 'en', 'de', 'fr']);
+export const PAGE_MANIFEST_FETCH_ATTEMPTS = 3;
+export const PAGE_MANIFEST_FETCH_RETRY_DELAY_MS = 1_000;
 
 const CANONICAL_PATH_RE = /^\/[a-z0-9]+(?:-[a-z0-9]+)*(?:\/[a-z0-9]+(?:-[a-z0-9]+)*)*\/$/;
 const REL_PATH_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*(?:\/[a-z0-9]+(?:-[a-z0-9]+)*)*\/index\.html$/;
@@ -170,24 +173,49 @@ export async function fetchPageManifest(
     fetchImpl = fetch,
     section,
     remainingBudget = () => Number.POSITIVE_INFINITY,
+    attempts = PAGE_MANIFEST_FETCH_ATTEMPTS,
+    retryDelayMs = PAGE_MANIFEST_FETCH_RETRY_DELAY_MS,
+    sleepImpl = (ms) => new Promise((resolve) => setTimeout(resolve, ms)),
   } = {},
 ) {
-  try {
-    const response = await fetchWithRefTimeout(`${url}${url.includes('?') ? '&' : '?'}_spm=${Date.now()}`, {
-      headers: { 'user-agent': 'frontaliere-section-pages/1 (+https://frontaliereticino.ch)' },
-    }, boundedManifestFetchTimeout(20_000, remainingBudget), fetchImpl);
-    if (response.status === 404) {
-      releaseFetchWithRefTimeout(response);
-      return { state: 'absent' };
+  const maxAttempts = Number.isInteger(attempts) && attempts > 0
+    ? Math.min(attempts, PAGE_MANIFEST_FETCH_ATTEMPTS)
+    : PAGE_MANIFEST_FETCH_ATTEMPTS;
+  const delay = Number.isFinite(retryDelayMs) && retryDelayMs > 0 ? retryDelayMs : 0;
+  let lastTransient = null;
+  for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+    try {
+      const response = await fetchWithRefTimeout(`${url}${url.includes('?') ? '&' : '?'}_spm=${Date.now()}.${attempt}`, {
+        headers: { 'user-agent': 'frontaliere-section-pages/1 (+https://frontaliereticino.ch)' },
+      }, boundedManifestFetchTimeout(20_000, remainingBudget), fetchImpl);
+      if (response.status === 404) {
+        releaseFetchWithRefTimeout(response);
+        return { state: 'absent' };
+      }
+      if (response.status !== 200 && !response.ok) {
+        const reason = `HTTP ${response.status}`;
+        const transient = isTransientFetchError(null, reason);
+        releaseFetchWithRefTimeout(response);
+        if (transient) lastTransient = { state: 'unknown', reason, transient: true };
+        else return { state: 'unknown', reason };
+      } else {
+        const doc = await response.json();
+        const errors = pageManifestErrors(doc, { section });
+        return errors.length === 0
+          ? { state: 'ok', doc }
+          : { state: 'unknown', reason: errors.join('; ') };
+      }
+    } catch (error) {
+      const reason = error?.message ?? String(error);
+      const transient = isTransientFetchError(error, reason);
+      if (!transient) return { state: 'unknown', reason };
+      lastTransient = { state: 'unknown', reason, transient: true };
     }
-    if (response.status !== 200 && !response.ok) {
-      releaseFetchWithRefTimeout(response);
-      return { state: 'unknown', reason: `HTTP ${response.status}` };
-    }
-    const doc = await response.json();
-    const errors = pageManifestErrors(doc, { section });
-    return errors.length === 0 ? { state: 'ok', doc } : { state: 'unknown', reason: errors.join('; ') };
-  } catch (error) {
-    return { state: 'unknown', reason: error?.message ?? String(error) };
+    if (attempt >= maxAttempts) break;
+    const remaining = remainingBudget();
+    if (Number.isFinite(remaining) && remaining <= 0) break;
+    const waitMs = Number.isFinite(remaining) ? Math.min(delay, remaining) : delay;
+    if (waitMs > 0) await sleepImpl(waitMs);
   }
+  return lastTransient ?? { state: 'unknown', reason: 'manifest edge non verificabile' };
 }
