@@ -67,6 +67,10 @@ test('il backfill aspetta solo il gruppo dello shard target', () => {
   assert.match(guard, /validate_workflow_runs_for_status/);
   assert.match(guard, /actions\/workflows\/\$WF\/runs\?per_page=100&status=\$status/);
   assert.match(guard, /done < <\(jq -r '\.\[\]' <<<"\$IN_FLIGHT_STATUSES"\)/);
+  assert.match(workflow, /runStatusIsCurrent\(\) \{/);
+  assert.match(workflow, /repos\/\$GITHUB_REPOSITORY\/actions\/runs\/\$run_id/);
+  assert.match(guard, /runStatusIsCurrent "\$run_id" "\$run_status"/);
+  assert.match(guard, /\[\.id, \.event, \.display_title, \.status\] \| @tsv/);
   assert.doesNotMatch(
     guard,
     /actions\/workflows\/\$WF\/runs\?per_page=100"/,
@@ -102,6 +106,10 @@ test('i gemelli del guard usano listing completi, stati completi e fail-closed',
   assert.match(republishWorkflow, /validate_workflow_runs_for_status/);
   assert.match(republishGuard, /actions\/workflows\/\$WF\/runs\?per_page=100&status=\$status/);
   assert.match(republishGuard, /done < <\(jq -r '\.\[\]' <<<"\$IN_FLIGHT_STATUSES"\)/);
+  assert.match(republishWorkflow, /runStatusIsCurrent\(\) \{/);
+  assert.match(republishWorkflow, /repos\/\$GITHUB_REPOSITORY\/actions\/runs\/\$run_id/);
+  assert.match(republishGuard, /runStatusIsCurrent "\$run_id" "\$run_status"/);
+  assert.match(republishGuard, /\[\.id, \.event, \.display_title, \.status\] \| @tsv/);
   assert.doesNotMatch(
     republishGuard,
     /actions\/workflows\/\$WF\/runs\?per_page=100"/,

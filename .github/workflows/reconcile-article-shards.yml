@@ -329,6 +329,20 @@ jobs:
             '
           }
 
+          runStatusIsCurrent() {
+            local run_id="$1"
+            local expected_status="$2"
+            local run_json
+            if ! run_json="$(gh_api_timeout "repos/$GITHUB_REPOSITORY/actions/runs/$run_id" 2>/dev/null)"; then
+              return 1
+            fi
+            jq -e --arg expected "$expected_status" '
+              type == "object"
+              and (.status | type) == "string"
+              and .status == $expected
+            ' <<<"$run_json" >/dev/null
+          }
+
           active_runs_for_shard() {
             local section="$1"
             local shard="$2"
@@ -354,8 +368,8 @@ jobs:
                 return
               fi
             done < <(jq -r '.[]' <<<"$IN_FLIGHT_STATUSES")
-            while IFS=$'\t' read -r run_id run_event run_name; do
-              if [ -z "$run_id" ] || [ -z "$run_event" ] || [ -z "$run_name" ]; then
+            while IFS=$'\t' read -r run_id run_event run_name run_status; do
+              if [ -z "$run_id" ] || [ -z "$run_event" ] || [ -z "$run_name" ] || [ -z "$run_status" ]; then
                 echo 999
                 return
               fi
@@ -449,6 +463,10 @@ jobs:
                   return
                   ;;
                 free)
+                  if ! runStatusIsCurrent "$run_id" "$run_status"; then
+                    echo 999
+                    return
+                  fi
                   ;;
                 *)
                   echo 999
@@ -459,7 +477,7 @@ jobs:
               jq -r --argjson in_flight "$IN_FLIGHT_STATUSES" '.[]
                 | .status as $status
                 | select(($in_flight | index($status)) != null)
-                | [.id, .event, .display_title] | @tsv' <<<"$runs"
+                | [.id, .event, .display_title, .status] | @tsv' <<<"$runs"
             )
             echo 0
           }
