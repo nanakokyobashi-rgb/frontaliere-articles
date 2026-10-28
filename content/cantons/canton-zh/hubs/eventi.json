@@ -4,12 +4,12 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-10-27T00:15:17.334Z",
-  "contentHash": "ca6d38878cb2622b125767c6969022932ca7b78f6be3e02daebe5bc1279d5ed8",
+  "updatedAt": "2026-10-28T01:14:28.455Z",
+  "contentHash": "27e7ccdb8354f5aedad62cdc7ce2d2ee33ab371e133062eb514363af5dc851a1",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-26T18:30:43.613Z",
+      "updatedAt": "2026-10-27T19:25:52.214Z",
       "keyFacts": 1
     }
   ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "RetailTech Innovation 2026",
-              "detail": "Google EURF",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/retailtech-innovation-2026_Adgnk2u"
+              "label": "Herbsttage mit Kürbisschnitzen",
+              "detail": "Naturstation Silberweide, Mönchaltorf",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbsttage-mit-kuerbisschnitzen/"
             },
             {
-              "label": "RetailTech Innovation 2026",
-              "detail": "Google EURF, Zürich",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/retailtech-innovation-2026/"
+              "label": "Buchstart",
+              "detail": "Gemeindebibliothek, Urdorf",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/buchstart-17/"
             },
             {
-              "label": "Kurs ZEV / vZEV / LEG",
-              "detail": "Dietikon",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-zev-vzev-leg/"
+              "label": "Feuerwehr-Nachmittag",
+              "detail": "Bibliothek Effretikon",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/feuerwehr-nachmittag/"
             },
             {
-              "label": "Course: Laser Micromachining",
+              "label": "Halloween-Guetzli verzieren – kreativ & schaurig fein",
+              "detail": "Dürnten",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/halloweenguetzli-verzieren-kreativ-schaurig-fein/"
+            },
+            {
+              "label": "Solar Energy for Everyone, Everywhere",
               "detail": "Dübendorf",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/course-laser-micromachining/"
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/solarenergie-fuer-alle-ueberall/"
             },
             {
-              "label": "Gymnastik für Seniorinnen/Senioren / Organisiert vom Frauenverein",
-              "detail": "Neue Reformierte Kirche, Urdorf",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gymnastik-fuer-seniorinnensenioren-organisiert-vom-frauenverein-24/"
+              "label": "Ladeinfrastruktur für E-LKW und E-Baumaschinen im Alltag",
+              "detail": "Schneider Umweltservice AG, Volketswil",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/volketswil/ladeinfrastruktur-fuer-e-lkw-und-e-baumaschinen-im-alltag_A3wrKg7"
             },
             {
-              "label": "GenerationSummit 2026",
-              "detail": "Papiersaal",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/generationsummit-2026_Ajd8YTV"
+              "label": "Informationsveranstaltung «starte!»: Wie modernisiere ich mein Gebäude richtig?",
+              "detail": "Stadthaussaal Effretikon, Illnau-Effretikon",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/informationsveranstaltung-starte-wie-modernisiere-ich-mein-gebaeude-richtig/"
             },
             {
-              "label": "Wie heizen wir in Zukunft sicher und komfortabel?",
-              "detail": "Energiezentrale Volketswil, Volketswil",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/volketswil/wie-heizen-wir-in-zukunft-sicher-und-komfortabel_ArDr2sR"
+              "label": "Sexarbeitsfeindlichkeit",
+              "detail": "Schweizerisches Nationalmuseum / Landesmuseum Zürich, Zürich",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sexarbeitsfeindlichkeit/"
             },
             {
-              "label": "Elektrifizierung LKW-Flotte und Firmenbesichtigung",
-              "detail": "Brauch Transport AG, Fehraltorf",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/fehraltorf/elektrifizierung-lkw-flotte-und-firmenbesichtigung_AS1jsXd"
+              "label": "Café philosophique",
+              "detail": "Kloten",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-philosophique/"
             },
             {
-              "label": "Vortrag - Motivation & Talententwicklung: Wie Kinder Stärken entfalten",
-              "detail": "Allmend Träff, Uitikon",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/uitikon-waldegg/vortrag-motivation-und-talententwicklung-wie-kinder-staerken-entfalten_AvuacHA"
-            },
-            {
-              "label": "Abgesagt: Darren Kiely",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/abgesagt-darren-kiely/"
+              "label": "Wildäpfel",
+              "detail": "Lavaterhaus, Zürich",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wildaepfel/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zurigo/",
-          "updatedAt": "2026-10-26T18:30:43.613Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "en": {
       "canton": "ZH",
@@ -144,69 +144,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "RetailTech Innovation 2026",
-              "detail": "Google EURF",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/retailtech-innovation-2026_Adgnk2u"
+              "label": "Herbsttage mit Kürbisschnitzen",
+              "detail": "Naturstation Silberweide, Mönchaltorf",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbsttage-mit-kuerbisschnitzen/"
             },
             {
-              "label": "RetailTech Innovation 2026",
-              "detail": "Google EURF, Zürich",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/retailtech-innovation-2026/"
+              "label": "Buchstart",
+              "detail": "Gemeindebibliothek, Urdorf",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/buchstart-17/"
             },
             {
-              "label": "Kurs ZEV / vZEV / LEG",
-              "detail": "Dietikon",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-zev-vzev-leg/"
+              "label": "Feuerwehr-Nachmittag",
+              "detail": "Bibliothek Effretikon",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/feuerwehr-nachmittag/"
             },
             {
-              "label": "Course: Laser Micromachining",
+              "label": "Halloween-Guetzli verzieren – kreativ & schaurig fein",
+              "detail": "Dürnten",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/halloweenguetzli-verzieren-kreativ-schaurig-fein/"
+            },
+            {
+              "label": "Solar Energy for Everyone, Everywhere",
               "detail": "Dübendorf",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/course-laser-micromachining/"
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/solarenergie-fuer-alle-ueberall/"
             },
             {
-              "label": "Gymnastik für Seniorinnen/Senioren / Organisiert vom Frauenverein",
-              "detail": "Neue Reformierte Kirche, Urdorf",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gymnastik-fuer-seniorinnensenioren-organisiert-vom-frauenverein-24/"
+              "label": "Ladeinfrastruktur für E-LKW und E-Baumaschinen im Alltag",
+              "detail": "Schneider Umweltservice AG, Volketswil",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/volketswil/ladeinfrastruktur-fuer-e-lkw-und-e-baumaschinen-im-alltag_A3wrKg7"
             },
             {
-              "label": "GenerationSummit 2026",
-              "detail": "Papiersaal",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/generationsummit-2026_Ajd8YTV"
+              "label": "Informationsveranstaltung \"Starte!\": Wie moderniere ich mein Gebäude richtig?",
+              "detail": "Stadthaussaal Effretikon, Illnau-Effretikon",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/informationsveranstaltung-starte-wie-modernisiere-ich-mein-gebaeude-richtig/"
             },
             {
-              "label": "Wie heizen wir in Zukunft sicher und komfortabel?",
-              "detail": "Energiezentrale Volketswil, Volketswil",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/volketswil/wie-heizen-wir-in-zukunft-sicher-und-komfortabel_ArDr2sR"
+              "label": "Sexarbeitsfeindlichkeit",
+              "detail": "Schweizerisches Nationalmuseum / Landesmuseum Zürich, Zürich",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sexarbeitsfeindlichkeit/"
             },
             {
-              "label": "Elektrifizierung LKW-Flotte und Firmenbesichtigung",
-              "detail": "Brauch Transport AG, Fehraltorf",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/fehraltorf/elektrifizierung-lkw-flotte-und-firmenbesichtigung_AS1jsXd"
+              "label": "Café philosophique",
+              "detail": "Kloten",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-philosophique/"
             },
             {
-              "label": "Vortrag - Motivation & Talententwicklung: Wie Kinder Stärken entfalten",
-              "detail": "Allmend Träff, Uitikon",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/uitikon-waldegg/vortrag-motivation-und-talententwicklung-wie-kinder-staerken-entfalten_AvuacHA"
-            },
-            {
-              "label": "Abgesagt: Darren Kiely",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/abgesagt-darren-kiely/"
+              "label": "Wildäpfel",
+              "detail": "Lavaterhaus, Zürich",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wildaepfel/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zurich/",
-          "updatedAt": "2026-10-26T18:30:43.613Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "de": {
       "canton": "ZH",
@@ -255,69 +255,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "RetailTech Innovation 2026",
-              "detail": "Google EURF",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/retailtech-innovation-2026_Adgnk2u"
+              "label": "Herbsttage mit Kürbisschnitzen",
+              "detail": "Naturstation Silberweide, Mönchaltorf",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbsttage-mit-kuerbisschnitzen/"
             },
             {
-              "label": "RetailTech Innovation 2026",
-              "detail": "Google EURF, Zürich",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/retailtech-innovation-2026/"
+              "label": "Buchstart",
+              "detail": "Gemeindebibliothek, Urdorf",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/buchstart-17/"
             },
             {
-              "label": "Kurs ZEV / vZEV / LEG",
-              "detail": "Dietikon",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-zev-vzev-leg/"
+              "label": "Feuerwehr-Nachmittag",
+              "detail": "Bibliothek Effretikon",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/feuerwehr-nachmittag/"
             },
             {
-              "label": "Course: Laser Micromachining",
+              "label": "Halloween-Guetzli verzieren – kreativ & schaurig fein",
+              "detail": "Dürnten",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/halloweenguetzli-verzieren-kreativ-schaurig-fein/"
+            },
+            {
+              "label": "Solar Energy for Everyone, Everywhere",
               "detail": "Dübendorf",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/course-laser-micromachining/"
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/solarenergie-fuer-alle-ueberall/"
             },
             {
-              "label": "Gymnastik für Seniorinnen/Senioren / Organisiert vom Frauenverein",
-              "detail": "Neue Reformierte Kirche, Urdorf",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gymnastik-fuer-seniorinnensenioren-organisiert-vom-frauenverein-24/"
+              "label": "Ladeinfrastruktur für E-LKW und E-Baumaschinen im Alltag",
+              "detail": "Schneider Umweltservice AG, Volketswil",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/volketswil/ladeinfrastruktur-fuer-e-lkw-und-e-baumaschinen-im-alltag_A3wrKg7"
             },
             {
-              "label": "GenerationSummit 2026",
-              "detail": "Papiersaal",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/generationsummit-2026_Ajd8YTV"
+              "label": "Informationsveranstaltung «Start!\": Modernisiere ich mein geb richtig?",
+              "detail": "Stadthaussaal Effretikon, Illnau-Effretikon",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/informationsveranstaltung-starte-wie-modernisiere-ich-mein-gebaeude-richtig/"
             },
             {
-              "label": "Wie heizen wir in Zukunft sicher und komfortabel?",
-              "detail": "Energiezentrale Volketswil, Volketswil",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/volketswil/wie-heizen-wir-in-zukunft-sicher-und-komfortabel_ArDr2sR"
+              "label": "Sexarbeitsfeindlichkeit",
+              "detail": "Schweizerisches Nationalmuseum / Landesmuseum Zürich, Zürich",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sexarbeitsfeindlichkeit/"
             },
             {
-              "label": "Elektrifizierung LKW-Flotte und Firmenbesichtigung",
-              "detail": "Brauch Transport AG, Fehraltorf",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/fehraltorf/elektrifizierung-lkw-flotte-und-firmenbesichtigung_AS1jsXd"
+              "label": "Café philosophique",
+              "detail": "Kloten",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-philosophique/"
             },
             {
-              "label": "Vortrag - Motivation & Talententwicklung: Wie Kinder Stärken entfalten",
-              "detail": "Allmend Träff, Uitikon",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/uitikon-waldegg/vortrag-motivation-und-talententwicklung-wie-kinder-staerken-entfalten_AvuacHA"
-            },
-            {
-              "label": "Abgesagt: Darren Kiely",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/abgesagt-darren-kiely/"
+              "label": "Wildäpfel",
+              "detail": "Lavaterhaus, Zürich",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wildaepfel/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zurich/",
-          "updatedAt": "2026-10-26T18:30:43.613Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "fr": {
       "canton": "ZH",
@@ -366,69 +366,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "RetailTech Innovation 2026",
-              "detail": "Google EURF",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/retailtech-innovation-2026_Adgnk2u"
+              "label": "Herbsttage mit Kürbisschnitzen",
+              "detail": "Naturstation Silberweide, Mönchaltorf",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbsttage-mit-kuerbisschnitzen/"
             },
             {
-              "label": "RetailTech Innovation 2026",
-              "detail": "Google EURF, Zürich",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/retailtech-innovation-2026/"
+              "label": "Buchstart",
+              "detail": "Gemeindebibliothek, Urdorf",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/buchstart-17/"
             },
             {
-              "label": "Kurs ZEV / vZEV / LEG",
-              "detail": "Dietikon",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-zev-vzev-leg/"
+              "label": "Feuerwehr-Nachmittag",
+              "detail": "Bibliothek Effretikon",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/feuerwehr-nachmittag/"
             },
             {
-              "label": "Course: Laser Micromachining",
+              "label": "Halloween-Guetzli verzieren – kreativ & schaurig fein",
+              "detail": "Dürnten",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/halloweenguetzli-verzieren-kreativ-schaurig-fein/"
+            },
+            {
+              "label": "Solar Energy for Everyone, Everywhere",
               "detail": "Dübendorf",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/course-laser-micromachining/"
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/solarenergie-fuer-alle-ueberall/"
             },
             {
-              "label": "Gymnastik für Seniorinnen/Senioren / Organisiert vom Frauenverein",
-              "detail": "Neue Reformierte Kirche, Urdorf",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gymnastik-fuer-seniorinnensenioren-organisiert-vom-frauenverein-24/"
+              "label": "Ladeinfrastruktur für E-LKW und E-Baumaschinen im Alltag",
+              "detail": "Schneider Umweltservice AG, Volketswil",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/volketswil/ladeinfrastruktur-fuer-e-lkw-und-e-baumaschinen-im-alltag_A3wrKg7"
             },
             {
-              "label": "GenerationSummit 2026",
-              "detail": "Papiersaal",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/generationsummit-2026_Ajd8YTV"
+              "label": "Informationsveranstaltung « starte ! » : Wie modernisiere ich mein Gebäude richtig ?",
+              "detail": "Stadthaussaal Effretikon, Illnau-Effretikon",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/informationsveranstaltung-starte-wie-modernisiere-ich-mein-gebaeude-richtig/"
             },
             {
-              "label": "Wie heizen wir in Zukunft sicher und komfortabel?",
-              "detail": "Energiezentrale Volketswil, Volketswil",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/volketswil/wie-heizen-wir-in-zukunft-sicher-und-komfortabel_ArDr2sR"
+              "label": "Sexarbeitsfeindlichkeit",
+              "detail": "Schweizerisches Nationalmuseum / Landesmuseum Zürich, Zürich",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sexarbeitsfeindlichkeit/"
             },
             {
-              "label": "Elektrifizierung LKW-Flotte und Firmenbesichtigung",
-              "detail": "Brauch Transport AG, Fehraltorf",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/fehraltorf/elektrifizierung-lkw-flotte-und-firmenbesichtigung_AS1jsXd"
+              "label": "Café philosophique",
+              "detail": "Kloten",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-philosophique/"
             },
             {
-              "label": "Vortrag - Motivation & Talententwicklung: Wie Kinder Stärken entfalten",
-              "detail": "Allmend Träff, Uitikon",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/uitikon-waldegg/vortrag-motivation-und-talententwicklung-wie-kinder-staerken-entfalten_AvuacHA"
-            },
-            {
-              "label": "Abgesagt: Darren Kiely",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/abgesagt-darren-kiely/"
+              "label": "Wildäpfel",
+              "detail": "Lavaterhaus, Zürich",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wildaepfel/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zurich/",
-          "updatedAt": "2026-10-26T18:30:43.613Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     }
   }
 }

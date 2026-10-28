@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "mobilita",
-  "updatedAt": "2026-10-27T19:21:58.604Z",
-  "contentHash": "170afecbe53b29fd0ee99be63faeb67724906b2612dac3f47e2f3a4453491d8a",
+  "updatedAt": "2026-10-28T01:14:28.455Z",
+  "contentHash": "5b98189292fa8e315f6be1690db85916b673a267b4e93d66b61ae7c2d486dac9",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-27T15:37:37.261Z",
+      "updatedAt": "2026-10-27T20:19:05.756Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-27T11:01:59.897Z",
+      "updatedAt": "2026-10-27T21:31:39.250Z",
       "keyFacts": 0
     }
   ],
@@ -37,7 +37,7 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "22",
+          "value": "25",
           "note": "segnalazioni aggiornate: 27 ottobre 2026"
         },
         {
@@ -142,13 +142,23 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-27T15:37:37.261Z"
+          "updatedAt": "2026-10-27T20:19:05.756Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Statale 337 della Valle Vigezzo, lavori sull'asfalto: chiusura tra Re e Ribellasca dal 29 ottobre",
+              "date": "2026-10-27T17:05:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/27/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/statale-337-della-valle-vigezzo-lavori-sullasfalto-chiusura-tra-re-e-ribellasca-dal-29-ottobre.html"
+            },
+            {
+              "label": "Cento anni fa il primo trasporto auto sui treni navetta al Lötschberg",
+              "date": "2026-10-27T14:50:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/27/leggi-notizia/argomenti/confine/articolo/cento-anni-fa-il-primo-trasporto-auto-sui-treni-navetta-al-loetschberg.html"
+            },
             {
               "label": "Autostrada A26, i cantieri attivi questa settimana",
               "date": "2026-10-26T14:07:00.000Z",
@@ -168,19 +178,9 @@
               "label": "Statale 337 della Valle Vigezzo, lavori sull'asfalto: chiusura tra Re e Ribellasca dal 27 ottobre",
               "date": "2026-10-23T15:46:00.000Z",
               "url": "https://www.ossolanews.it/2026/10/23/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/statale-337-della-valle-vigezzo-lavori-sullasfalto-chiusura-tra-re-e-ribellasca-dal-27-ottobre.html"
-            },
-            {
-              "label": "Statale 337, previste quattro giornate di chiusura tra Isella e la dogana svizzera",
-              "date": "2026-10-21T17:25:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/21/leggi-notizia/argomenti/attualita-26/articolo/statale-337-previste-quattro-giornate-di-chiusura-tra-isella-e-la-dogana-svizzera.html"
-            },
-            {
-              "label": "Lamentele per la regolamentazione del semaforo del Villaggio",
-              "date": "2026-10-21T08:00:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/21/leggi-notizia/argomenti/ornavasso/articolo/lamentele-per-la-regolamentazione-del-semaforo-del-villaggio.html"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -250,7 +250,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-27T19:21:58.604Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "en": {
       "canton": "VS",
@@ -265,7 +265,7 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "22",
+          "value": "25",
           "note": "reports as of 27 October 2026"
         },
         {
@@ -370,13 +370,23 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-27T15:37:37.261Z"
+          "updatedAt": "2026-10-27T20:19:05.756Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Statale 337 della Valle Vigezzo, lavori sull'asfalto: chiusura tra Re e Ribellasca dal 29 ottobre",
+              "date": "2026-10-27T17:05:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/27/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/statale-337-della-valle-vigezzo-lavori-sullasfalto-chiusura-tra-re-e-ribellasca-dal-29-ottobre.html"
+            },
+            {
+              "label": "Cento anni fa il primo trasporto auto sui treni navetta al Lötschberg",
+              "date": "2026-10-27T14:50:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/27/leggi-notizia/argomenti/confine/articolo/cento-anni-fa-il-primo-trasporto-auto-sui-treni-navetta-al-loetschberg.html"
+            },
             {
               "label": "Autostrada A26, i cantieri attivi questa settimana",
               "date": "2026-10-26T14:07:00.000Z",
@@ -396,19 +406,9 @@
               "label": "Statale 337 della Valle Vigezzo, lavori sull'asfalto: chiusura tra Re e Ribellasca dal 27 ottobre",
               "date": "2026-10-23T15:46:00.000Z",
               "url": "https://www.ossolanews.it/2026/10/23/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/statale-337-della-valle-vigezzo-lavori-sullasfalto-chiusura-tra-re-e-ribellasca-dal-27-ottobre.html"
-            },
-            {
-              "label": "Statale 337, previste quattro giornate di chiusura tra Isella e la dogana svizzera",
-              "date": "2026-10-21T17:25:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/21/leggi-notizia/argomenti/attualita-26/articolo/statale-337-previste-quattro-giornate-di-chiusura-tra-isella-e-la-dogana-svizzera.html"
-            },
-            {
-              "label": "Lamentele per la regolamentazione del semaforo del Villaggio",
-              "date": "2026-10-21T08:00:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/21/leggi-notizia/argomenti/ornavasso/articolo/lamentele-per-la-regolamentazione-del-semaforo-del-villaggio.html"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -478,7 +478,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-27T19:21:58.604Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "de": {
       "canton": "VS",
@@ -493,7 +493,7 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "22",
+          "value": "25",
           "note": "Meldungen vom 27. Oktober 2026"
         },
         {
@@ -598,13 +598,23 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-27T15:37:37.261Z"
+          "updatedAt": "2026-10-27T20:19:05.756Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Statale 337 della Valle Vigezzo, lavori sull'asfalto: chiusura tra Re e Ribellasca dal 29 ottobre",
+              "date": "2026-10-27T17:05:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/27/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/statale-337-della-valle-vigezzo-lavori-sullasfalto-chiusura-tra-re-e-ribellasca-dal-29-ottobre.html"
+            },
+            {
+              "label": "Cento anni fa il primo trasporto auto sui treni navetta al Lötschberg",
+              "date": "2026-10-27T14:50:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/27/leggi-notizia/argomenti/confine/articolo/cento-anni-fa-il-primo-trasporto-auto-sui-treni-navetta-al-loetschberg.html"
+            },
             {
               "label": "Autostrada A26, i cantieri attivi questa settimana",
               "date": "2026-10-26T14:07:00.000Z",
@@ -624,19 +634,9 @@
               "label": "Statale 337 della Valle Vigezzo, lavori sull'asfalto: chiusura tra Re e Ribellasca dal 27 ottobre",
               "date": "2026-10-23T15:46:00.000Z",
               "url": "https://www.ossolanews.it/2026/10/23/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/statale-337-della-valle-vigezzo-lavori-sullasfalto-chiusura-tra-re-e-ribellasca-dal-27-ottobre.html"
-            },
-            {
-              "label": "Statale 337, previste quattro giornate di chiusura tra Isella e la dogana svizzera",
-              "date": "2026-10-21T17:25:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/21/leggi-notizia/argomenti/attualita-26/articolo/statale-337-previste-quattro-giornate-di-chiusura-tra-isella-e-la-dogana-svizzera.html"
-            },
-            {
-              "label": "Lamentele per la regolamentazione del semaforo del Villaggio",
-              "date": "2026-10-21T08:00:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/21/leggi-notizia/argomenti/ornavasso/articolo/lamentele-per-la-regolamentazione-del-semaforo-del-villaggio.html"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -706,7 +706,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-27T19:21:58.604Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "fr": {
       "canton": "VS",
@@ -721,7 +721,7 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "22",
+          "value": "25",
           "note": "signalements au 27 octobre 2026"
         },
         {
@@ -826,13 +826,23 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-27T15:37:37.261Z"
+          "updatedAt": "2026-10-27T20:19:05.756Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Statale 337 della Valle Vigezzo, lavori sull'asfalto: chiusura tra Re e Ribellasca dal 29 ottobre",
+              "date": "2026-10-27T17:05:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/27/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/statale-337-della-valle-vigezzo-lavori-sullasfalto-chiusura-tra-re-e-ribellasca-dal-29-ottobre.html"
+            },
+            {
+              "label": "Cento anni fa il primo trasporto auto sui treni navetta al Lötschberg",
+              "date": "2026-10-27T14:50:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/27/leggi-notizia/argomenti/confine/articolo/cento-anni-fa-il-primo-trasporto-auto-sui-treni-navetta-al-loetschberg.html"
+            },
             {
               "label": "Autostrada A26, i cantieri attivi questa settimana",
               "date": "2026-10-26T14:07:00.000Z",
@@ -852,19 +862,9 @@
               "label": "Statale 337 della Valle Vigezzo, lavori sull'asfalto: chiusura tra Re e Ribellasca dal 27 ottobre",
               "date": "2026-10-23T15:46:00.000Z",
               "url": "https://www.ossolanews.it/2026/10/23/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/statale-337-della-valle-vigezzo-lavori-sullasfalto-chiusura-tra-re-e-ribellasca-dal-27-ottobre.html"
-            },
-            {
-              "label": "Statale 337, previste quattro giornate di chiusura tra Isella e la dogana svizzera",
-              "date": "2026-10-21T17:25:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/21/leggi-notizia/argomenti/attualita-26/articolo/statale-337-previste-quattro-giornate-di-chiusura-tra-isella-e-la-dogana-svizzera.html"
-            },
-            {
-              "label": "Lamentele per la regolamentazione del semaforo del Villaggio",
-              "date": "2026-10-21T08:00:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/21/leggi-notizia/argomenti/ornavasso/articolo/lamentele-per-la-regolamentazione-del-semaforo-del-villaggio.html"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -934,7 +934,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-27T19:21:58.604Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     }
   }
 }

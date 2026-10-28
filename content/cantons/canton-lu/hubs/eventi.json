@@ -4,17 +4,17 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "eventi",
-  "updatedAt": "2026-10-27T17:42:56.215Z",
-  "contentHash": "516594ac9cd24235603284b770bf21b38f12988cd0f9b3a58dceeb84176c9c57",
+  "updatedAt": "2026-10-28T01:14:28.455Z",
+  "contentHash": "be4b04f63c8ed7302be1d942a39dbc58c8dda6a2836f7635bd7576db623ca541",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-27T12:41:15.477Z",
+      "updatedAt": "2026-10-27T19:25:52.214Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-27T11:01:59.897Z",
+      "updatedAt": "2026-10-27T21:31:39.250Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "60",
+          "value": "59",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,18 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Winter Qi Gong Inseli",
-              "detail": "Ebikon",
-              "date": "2026-10-27",
-              "url": "https://www.stadtluzern.ch/sitzung/7694110"
-            },
-            {
-              "label": "360° Mitsingen",
-              "detail": "Bourbaki Panorama — in corso, ultimo giorno: 12 novembre 2026",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
-            },
             {
               "label": "Konzert für Familien «Gänseblüemli im Rosengarten»",
               "detail": "Weggis",
@@ -74,6 +62,12 @@
               "url": "https://www.guidle.com/it/veranstaltungen/musik/hochdorf/panfloetenkonzert-mit-duo-pantastico_Adw4Ae6"
             },
             {
+              "label": "360° Mitsingen",
+              "detail": "Bourbaki Panorama — in corso, ultimo giorno: 12 novembre 2026",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
+            },
+            {
               "label": "Moules et Frites",
               "detail": "CAMPUS SURSEE, Oberkirch",
               "date": "2026-10-29",
@@ -96,17 +90,28 @@
               "detail": "Emmi Kaltbach, Mauensee",
               "date": "2026-10-30",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kaltbach-herbstmarkt-genuss-aus-der-hoehle-regional-echt-und-herbstlich-fein/"
+            },
+            {
+              "label": "Winter Qi Gong Waldfriedhof Staffeln",
+              "detail": "Sursee",
+              "date": "2026-10-30",
+              "url": "https://www.stadtluzern.ch/sitzung/7694299"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/lucerna/",
-          "updatedAt": "2026-10-27T12:41:15.477Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "«Trop chaud» - Klimaseniorinnen - Film im Rahmen der «Lebensreise»",
+              "date": "2026-10-27T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7629670"
+            },
             {
               "label": "Winter Qi Gong Inseli",
               "date": "2026-10-26T23:00:00.000Z",
@@ -131,14 +136,9 @@
               "label": "Flechten und Moose in Luzern",
               "date": "2026-10-23T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7626904"
-            },
-            {
-              "label": "Salonkonzert",
-              "date": "2026-10-22T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7463710"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -172,7 +172,7 @@
           "url": "/eventi/lucerna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-27T17:42:56.215Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "en": {
       "canton": "LU",
@@ -182,7 +182,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "60",
+          "value": "59",
           "note": "from the site’s events calendar"
         }
       ],
@@ -192,18 +192,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Winter Qi Gong Inseli",
-              "detail": "Ebikon",
-              "date": "2026-10-27",
-              "url": "https://www.stadtluzern.ch/sitzung/7694110"
-            },
-            {
-              "label": "360° Mitsingen",
-              "detail": "Bourbaki Panorama — ongoing, last day: 12 November 2026",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
-            },
             {
               "label": "Konzert für Familien «Gänseblüemli im Rosengarten»",
               "detail": "Weggis",
@@ -229,6 +217,12 @@
               "url": "https://www.guidle.com/it/veranstaltungen/musik/hochdorf/panfloetenkonzert-mit-duo-pantastico_Adw4Ae6"
             },
             {
+              "label": "360° Mitsingen",
+              "detail": "Bourbaki Panorama — ongoing, last day: 12 November 2026",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
+            },
+            {
               "label": "Moules et Frites",
               "detail": "CAMPUS SURSEE, Oberkirch",
               "date": "2026-10-29",
@@ -251,17 +245,28 @@
               "detail": "Emmi Kaltbach, Mauensee",
               "date": "2026-10-30",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kaltbach-herbstmarkt-genuss-aus-der-hoehle-regional-echt-und-herbstlich-fein/"
+            },
+            {
+              "label": "Winter Qi Gong Waldfriedhof Staffeln",
+              "detail": "Sursee",
+              "date": "2026-10-30",
+              "url": "https://www.stadtluzern.ch/sitzung/7694299"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/lucerne/",
-          "updatedAt": "2026-10-27T12:41:15.477Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "«Trop chaud» - Klimaseniorinnen - Film im Rahmen der «Lebensreise»",
+              "date": "2026-10-27T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7629670"
+            },
             {
               "label": "Winter Qi Gong Inseli",
               "date": "2026-10-26T23:00:00.000Z",
@@ -286,14 +291,9 @@
               "label": "Flechten und Moose in Luzern",
               "date": "2026-10-23T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7626904"
-            },
-            {
-              "label": "Salonkonzert",
-              "date": "2026-10-22T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7463710"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/en/events/lucerne/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-27T17:42:56.215Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "de": {
       "canton": "LU",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "60",
+          "value": "59",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -347,18 +347,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Winter Qi Gong Inseli",
-              "detail": "Ebikon",
-              "date": "2026-10-27",
-              "url": "https://www.stadtluzern.ch/sitzung/7694110"
-            },
-            {
-              "label": "360° Mitsingen",
-              "detail": "Bourbaki Panorama — läuft, letzter Tag: 12. November 2026",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
-            },
             {
               "label": "Konzert für Familien «Gänseblüemli im Rosengarten»",
               "detail": "Weggis",
@@ -384,6 +372,12 @@
               "url": "https://www.guidle.com/it/veranstaltungen/musik/hochdorf/panfloetenkonzert-mit-duo-pantastico_Adw4Ae6"
             },
             {
+              "label": "360° Mitsingen",
+              "detail": "Bourbaki Panorama — läuft, letzter Tag: 12. November 2026",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
+            },
+            {
               "label": "Moules et Frites",
               "detail": "CAMPUS SURSEE, Oberkirch",
               "date": "2026-10-29",
@@ -406,17 +400,28 @@
               "detail": "Emmi Kaltbach, Mauensee",
               "date": "2026-10-30",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kaltbach-herbstmarkt-genuss-aus-der-hoehle-regional-echt-und-herbstlich-fein/"
+            },
+            {
+              "label": "Winter Qi Gong Waldfriedhof Staffeln",
+              "detail": "Sursee",
+              "date": "2026-10-30",
+              "url": "https://www.stadtluzern.ch/sitzung/7694299"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/luzern/",
-          "updatedAt": "2026-10-27T12:41:15.477Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "«Trop chaud» - Klimaseniorinnen - Film im Rahmen der «Lebensreise»",
+              "date": "2026-10-27T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7629670"
+            },
             {
               "label": "Winter Qi Gong Inseli",
               "date": "2026-10-26T23:00:00.000Z",
@@ -441,14 +446,9 @@
               "label": "Flechten und Moose in Luzern",
               "date": "2026-10-23T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7626904"
-            },
-            {
-              "label": "Salonkonzert",
-              "date": "2026-10-22T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7463710"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -482,7 +482,7 @@
           "url": "/de/veranstaltungen/luzern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-27T17:42:56.215Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "fr": {
       "canton": "LU",
@@ -492,7 +492,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "60",
+          "value": "59",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -502,18 +502,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Winter Qi Gong Inseli",
-              "detail": "Ebikon",
-              "date": "2026-10-27",
-              "url": "https://www.stadtluzern.ch/sitzung/7694110"
-            },
-            {
-              "label": "360° Mitsingen",
-              "detail": "Bourbaki Panorama — en cours, dernier jour : 12 novembre 2026",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
-            },
             {
               "label": "Konzert für Familien «Gänseblüemli im Rosengarten»",
               "detail": "Weggis",
@@ -539,6 +527,12 @@
               "url": "https://www.guidle.com/it/veranstaltungen/musik/hochdorf/panfloetenkonzert-mit-duo-pantastico_Adw4Ae6"
             },
             {
+              "label": "360° Mitsingen",
+              "detail": "Bourbaki Panorama — en cours, dernier jour : 12 novembre 2026",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
+            },
+            {
               "label": "Moules et Frites",
               "detail": "CAMPUS SURSEE, Oberkirch",
               "date": "2026-10-29",
@@ -561,17 +555,28 @@
               "detail": "Emmi Kaltbach, Mauensee",
               "date": "2026-10-30",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kaltbach-herbstmarkt-genuss-aus-der-hoehle-regional-echt-und-herbstlich-fein/"
+            },
+            {
+              "label": "Winter Qi Gong Waldfriedhof Staffeln",
+              "detail": "Sursee",
+              "date": "2026-10-30",
+              "url": "https://www.stadtluzern.ch/sitzung/7694299"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/lucerne/",
-          "updatedAt": "2026-10-27T12:41:15.477Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "«Trop chaud» - Klimaseniorinnen - Film im Rahmen der «Lebensreise»",
+              "date": "2026-10-27T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7629670"
+            },
             {
               "label": "Winter Qi Gong Inseli",
               "date": "2026-10-26T23:00:00.000Z",
@@ -596,14 +601,9 @@
               "label": "Flechten und Moose in Luzern",
               "date": "2026-10-23T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7626904"
-            },
-            {
-              "label": "Salonkonzert",
-              "date": "2026-10-22T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7463710"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -637,7 +637,7 @@
           "url": "/fr/evenements/lucerne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-27T17:42:56.215Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     }
   }
 }

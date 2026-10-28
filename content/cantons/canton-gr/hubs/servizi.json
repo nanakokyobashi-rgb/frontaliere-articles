@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "servizi",
-  "updatedAt": "2026-10-27T19:21:58.604Z",
-  "contentHash": "d8cf6145839fdcf740646be0b5d7f344c5590db815661e7994288b98a88ee006",
+  "updatedAt": "2026-10-28T01:14:28.455Z",
+  "contentHash": "9b5a4aef98a62f3ac476e07ee900bf68a4044f05e0f9a8972e26073032364efe",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-27T12:09:47.065Z",
+      "updatedAt": "2026-10-27T22:14:15.576Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-27T14:44:58.685Z",
+      "updatedAt": "2026-10-27T20:54:13.381Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-27T11:01:59.897Z",
+      "updatedAt": "2026-10-27T21:31:39.250Z",
       "keyFacts": 0
     }
   ],
@@ -102,7 +102,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://eauktion.gr.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-10-27T12:09:47.065Z"
+          "updatedAt": "2026-10-27T22:14:15.576Z"
         },
         {
           "id": "meteo",
@@ -111,12 +111,12 @@
           "items": [
             {
               "label": "Chur",
-              "value": "20 °C",
-              "detail": "oggi da 10 a 20 °C"
+              "value": "11 °C",
+              "detail": "oggi da 10 a 16 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-27T14:44:58.685Z"
+          "updatedAt": "2026-10-27T20:54:13.381Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -154,7 +154,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090701.aspx"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-27T19:21:58.604Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "en": {
       "canton": "GR",
@@ -309,7 +309,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://eauktion.gr.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-10-27T12:09:47.065Z"
+          "updatedAt": "2026-10-27T22:14:15.576Z"
         },
         {
           "id": "meteo",
@@ -318,12 +318,12 @@
           "items": [
             {
               "label": "Chur",
-              "value": "20 °C",
-              "detail": "today from 10 to 20 °C"
+              "value": "11 °C",
+              "detail": "today from 10 to 16 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-27T14:44:58.685Z"
+          "updatedAt": "2026-10-27T20:54:13.381Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -361,7 +361,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090701.aspx"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -437,7 +437,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-27T19:21:58.604Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "de": {
       "canton": "GR",
@@ -512,7 +512,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://eauktion.gr.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-10-27T12:09:47.065Z"
+          "updatedAt": "2026-10-27T22:14:15.576Z"
         },
         {
           "id": "meteo",
@@ -521,12 +521,12 @@
           "items": [
             {
               "label": "Chur",
-              "value": "20 °C",
-              "detail": "heute 10 bis 20 °C"
+              "value": "11 °C",
+              "detail": "heute 10 bis 16 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-27T14:44:58.685Z"
+          "updatedAt": "2026-10-27T20:54:13.381Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -564,7 +564,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090701.aspx"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -640,7 +640,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-27T19:21:58.604Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "fr": {
       "canton": "GR",
@@ -715,7 +715,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://eauktion.gr.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-10-27T12:09:47.065Z"
+          "updatedAt": "2026-10-27T22:14:15.576Z"
         },
         {
           "id": "meteo",
@@ -724,12 +724,12 @@
           "items": [
             {
               "label": "Chur",
-              "value": "20 °C",
-              "detail": "aujourd’hui de 10 à 20 °C"
+              "value": "11 °C",
+              "detail": "aujourd’hui de 10 à 16 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-27T14:44:58.685Z"
+          "updatedAt": "2026-10-27T20:54:13.381Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -767,7 +767,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090701.aspx"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -839,7 +839,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-27T19:21:58.604Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "servizi",
-  "updatedAt": "2026-10-27T19:21:58.604Z",
-  "contentHash": "3bf4c97a9bc1c3c7a6b3b867d94510d2bf3543e53013de77b1472bbe34b0084d",
+  "updatedAt": "2026-10-28T01:14:28.455Z",
+  "contentHash": "1f7660eba3e1e70857586f4b081d175b3c4c94cecd7f6d579f57bf07281f7201",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-27T14:44:58.685Z",
+      "updatedAt": "2026-10-27T20:54:13.381Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-27T11:01:59.897Z",
+      "updatedAt": "2026-10-27T21:31:39.250Z",
       "keyFacts": 0
     }
   ],
@@ -65,12 +65,12 @@
           "items": [
             {
               "label": "Lausanne",
-              "value": "16 °C",
-              "detail": "oggi da 10 a 16 °C"
+              "value": "14 °C",
+              "detail": "oggi da 10 a 15 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-27T14:44:58.685Z"
+          "updatedAt": "2026-10-27T20:54:13.381Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -108,7 +108,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26534-remise-des-cles-du-campus-sante"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -188,7 +188,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-27T19:21:58.604Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "en": {
       "canton": "VD",
@@ -231,12 +231,12 @@
           "items": [
             {
               "label": "Lausanne",
-              "value": "16 °C",
-              "detail": "today from 10 to 16 °C"
+              "value": "14 °C",
+              "detail": "today from 10 to 15 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-27T14:44:58.685Z"
+          "updatedAt": "2026-10-27T20:54:13.381Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -274,7 +274,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26534-remise-des-cles-du-campus-sante"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -350,7 +350,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-27T19:21:58.604Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "de": {
       "canton": "VD",
@@ -393,12 +393,12 @@
           "items": [
             {
               "label": "Lausanne",
-              "value": "16 °C",
-              "detail": "heute 10 bis 16 °C"
+              "value": "14 °C",
+              "detail": "heute 10 bis 15 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-27T14:44:58.685Z"
+          "updatedAt": "2026-10-27T20:54:13.381Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -436,7 +436,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26534-remise-des-cles-du-campus-sante"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -512,7 +512,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-27T19:21:58.604Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "fr": {
       "canton": "VD",
@@ -555,12 +555,12 @@
           "items": [
             {
               "label": "Lausanne",
-              "value": "16 °C",
-              "detail": "aujourd’hui de 10 à 16 °C"
+              "value": "14 °C",
+              "detail": "aujourd’hui de 10 à 15 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-27T14:44:58.685Z"
+          "updatedAt": "2026-10-27T20:54:13.381Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -598,7 +598,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26534-remise-des-cles-du-campus-sante"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -670,7 +670,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-27T19:21:58.604Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     }
   }
 }

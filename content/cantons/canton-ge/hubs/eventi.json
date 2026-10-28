@@ -4,17 +4,17 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "eventi",
-  "updatedAt": "2026-10-27T17:42:56.215Z",
-  "contentHash": "9aa161fc2209a7ea66d3adf814a1fe7e011f6bc04fd1bd56b33e87a1db979548",
+  "updatedAt": "2026-10-28T01:14:28.455Z",
+  "contentHash": "72b48a69ffa3a82f63ab42c08f89dbb23d29b6f0d2ed4d23d44885092625c30e",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-27T12:41:15.477Z",
+      "updatedAt": "2026-10-27T19:25:52.214Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-27T11:01:59.897Z",
+      "updatedAt": "2026-10-27T21:31:39.250Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "352",
+          "value": "341",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Action Lumières - Vernier",
-              "detail": "Vernier",
-              "date": "2026-10-27",
-              "url": "https://www.geneve.ch/agenda/action-lumieres-vernier"
+              "label": "«Quelque chose a changé» Une exposition de l'artiste Lola Jay",
+              "detail": "Genève",
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/quelque-chose-change-exposition-artiste-lola"
+            },
+            {
+              "label": "Alerte rouge !",
+              "detail": "Genève",
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/alerte-rouge"
+            },
+            {
+              "label": "Atelier chocolat pour les enfants - Chocolate monster",
+              "detail": "Genève",
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/atelier-chocolat-enfants-chocolate-monster-2"
+            },
+            {
+              "label": "Atelier cosmétique pour enfant: fabrication Gel douche Halloween",
+              "detail": "Genève",
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/atelier-cosmetique-enfant-fabrication-douche-halloween"
             },
             {
               "label": "Atelier Créez votre création d'Halloween en chocolat",
               "detail": "Genève",
-              "date": "2026-10-27",
-              "url": "https://www.geneve.ch/agenda/atelier-creez-creation-halloween-chocolat-2"
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/atelier-creez-creation-halloween-chocolat-3"
             },
             {
-              "label": "Atelier Découverte - L'École du Chocolat",
+              "label": "CHRÜSIMÜSI",
               "detail": "Genève",
-              "date": "2026-10-27",
-              "url": "https://www.geneve.ch/agenda/atelier-decouverte-ecole-chocolat-1"
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/chrusimusi"
             },
             {
-              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "label": "Cité Seniors fête ses 20 ans | Le Jardin Botanique de Genève, son histoire, sa mission et ses défis - Conférence et…",
               "detail": "Genève",
-              "date": "2026-10-27",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-jardin-botanique-geneve-histoire-mission-defis-conference-balade"
             },
             {
-              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
+              "label": "Cité Seniors fête ses 20 ans | Le Jardin Botanique de Genève, son histoire, sa mission et ses défis - Conférence et…",
               "detail": "Genève",
-              "date": "2026-10-27",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-jardin-botanique-geneve-histoire-mission-defis-conference-balade-0"
             },
             {
-              "label": "Balades Théâtralisées - De la haute-ville aux bas-fonds",
+              "label": "Complet - L’herbier des feuilles",
               "detail": "Genève",
-              "date": "2026-10-27",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-haute-ville-fonds"
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/herbier-feuilles"
             },
             {
-              "label": "BILL FRISELL fête 75 ans ! BILL FRISELL TRIO feat. Luke Bergman & Tim Angulo",
+              "label": "DIRTY THREE",
               "detail": "Genève",
-              "date": "2026-10-27",
-              "url": "https://www.geneve.ch/agenda/bill-frisell-fete-75-bill-frisell-trio-feat-luke-bergman-angulo"
-            },
-            {
-              "label": "BILL FRISELL TRIO feat. Luke Bergman & Tim Angulo",
-              "detail": "Genève",
-              "date": "2026-10-27",
-              "url": "https://www.geneve.ch/agenda/bill-frisell-trio-feat-luke-bergman-angulo"
-            },
-            {
-              "label": "Cafés genevois: la vie même",
-              "detail": "Genève",
-              "date": "2026-10-27",
-              "url": "https://www.geneve.ch/agenda/cafes-genevois-vie"
-            },
-            {
-              "label": "Cité Seniors fête ses 20 ans | Genève insoumise, sur les pas des luttes féministes et queer",
-              "detail": "Genève",
-              "date": "2026-10-27",
-              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-geneve-insoumise-luttes-feministes-queer"
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/dirty-three"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ginevra/",
-          "updatedAt": "2026-10-27T12:41:15.477Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -118,7 +118,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -140,7 +140,7 @@
           "url": "/eventi/ginevra/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-27T17:42:56.215Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "en": {
       "canton": "GE",
@@ -150,7 +150,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "352",
+          "value": "341",
           "note": "from the site’s events calendar"
         }
       ],
@@ -161,69 +161,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Action Lumières - Vernier",
-              "detail": "Vernier",
-              "date": "2026-10-27",
-              "url": "https://www.geneve.ch/agenda/action-lumieres-vernier"
+              "label": "«Quelque chose a changé» Une exposition de l'artiste Lola Jay",
+              "detail": "Genève",
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/quelque-chose-change-exposition-artiste-lola"
+            },
+            {
+              "label": "Alerte rouge !",
+              "detail": "Genève",
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/alerte-rouge"
+            },
+            {
+              "label": "Atelier chocolat pour les enfants - Chocolate monster",
+              "detail": "Genève",
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/atelier-chocolat-enfants-chocolate-monster-2"
+            },
+            {
+              "label": "Atelier cosmétique pour enfant: fabrication Gel douche Halloween",
+              "detail": "Genève",
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/atelier-cosmetique-enfant-fabrication-douche-halloween"
             },
             {
               "label": "Atelier Créez votre création d'Halloween en chocolat",
               "detail": "Genève",
-              "date": "2026-10-27",
-              "url": "https://www.geneve.ch/agenda/atelier-creez-creation-halloween-chocolat-2"
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/atelier-creez-creation-halloween-chocolat-3"
             },
             {
-              "label": "Atelier Découverte - L'École du Chocolat",
+              "label": "CHRÜSIMÜSI",
               "detail": "Genève",
-              "date": "2026-10-27",
-              "url": "https://www.geneve.ch/agenda/atelier-decouverte-ecole-chocolat-1"
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/chrusimusi"
             },
             {
-              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "label": "Cité Seniors fête ses 20 ans | Le Jardin Botanique de Genève, son histoire, sa mission et ses défis - Conférence et…",
               "detail": "Genève",
-              "date": "2026-10-27",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-jardin-botanique-geneve-histoire-mission-defis-conference-balade"
             },
             {
-              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
+              "label": "Cité Seniors fête ses 20 ans | Le Jardin Botanique de Genève, son histoire, sa mission et ses défis - Conférence et…",
               "detail": "Genève",
-              "date": "2026-10-27",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-jardin-botanique-geneve-histoire-mission-defis-conference-balade-0"
             },
             {
-              "label": "Balades Théâtralisées - De la haute-ville aux bas-fonds",
+              "label": "Complet - L’herbier des feuilles",
               "detail": "Genève",
-              "date": "2026-10-27",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-haute-ville-fonds"
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/herbier-feuilles"
             },
             {
-              "label": "BILL FRISELL fête 75 ans ! BILL FRISELL TRIO feat. Luke Bergman & Tim Angulo",
+              "label": "DIRTY THREE",
               "detail": "Genève",
-              "date": "2026-10-27",
-              "url": "https://www.geneve.ch/agenda/bill-frisell-fete-75-bill-frisell-trio-feat-luke-bergman-angulo"
-            },
-            {
-              "label": "BILL FRISELL TRIO feat. Luke Bergman & Tim Angulo",
-              "detail": "Genève",
-              "date": "2026-10-27",
-              "url": "https://www.geneve.ch/agenda/bill-frisell-trio-feat-luke-bergman-angulo"
-            },
-            {
-              "label": "Cafés genevois: la vie même",
-              "detail": "Genève",
-              "date": "2026-10-27",
-              "url": "https://www.geneve.ch/agenda/cafes-genevois-vie"
-            },
-            {
-              "label": "Cité Seniors fête ses 20 ans | Genève insoumise, sur les pas des luttes féministes et queer",
-              "detail": "Genève",
-              "date": "2026-10-27",
-              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-geneve-insoumise-luttes-feministes-queer"
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/dirty-three"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/geneva/",
-          "updatedAt": "2026-10-27T12:41:15.477Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -241,7 +241,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -263,7 +263,7 @@
           "url": "/en/events/geneva/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-27T17:42:56.215Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "de": {
       "canton": "GE",
@@ -273,7 +273,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "352",
+          "value": "341",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -284,69 +284,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Action Lumières - Vernier",
-              "detail": "Vernier",
-              "date": "2026-10-27",
-              "url": "https://www.geneve.ch/agenda/action-lumieres-vernier"
+              "label": "«Quelque chose a changé» Une exposition de l'artiste Lola Jay",
+              "detail": "Genève",
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/quelque-chose-change-exposition-artiste-lola"
+            },
+            {
+              "label": "Alerte rouge !",
+              "detail": "Genève",
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/alerte-rouge"
+            },
+            {
+              "label": "Atelier chocolat pour les enfants - Chocolate monster",
+              "detail": "Genève",
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/atelier-chocolat-enfants-chocolate-monster-2"
+            },
+            {
+              "label": "Atelier cosmétique pour enfant: fabrication Gel douche Halloween",
+              "detail": "Genève",
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/atelier-cosmetique-enfant-fabrication-douche-halloween"
             },
             {
               "label": "Atelier Créez votre création d'Halloween en chocolat",
               "detail": "Genève",
-              "date": "2026-10-27",
-              "url": "https://www.geneve.ch/agenda/atelier-creez-creation-halloween-chocolat-2"
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/atelier-creez-creation-halloween-chocolat-3"
             },
             {
-              "label": "Atelier Découverte - L'École du Chocolat",
+              "label": "CHRÜSIMÜSI",
               "detail": "Genève",
-              "date": "2026-10-27",
-              "url": "https://www.geneve.ch/agenda/atelier-decouverte-ecole-chocolat-1"
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/chrusimusi"
             },
             {
-              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "label": "Cité Seniors fête ses 20 ans | Le Jardin Botanique de Genève, son histoire, sa mission et ses défis - Conférence et…",
               "detail": "Genève",
-              "date": "2026-10-27",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-jardin-botanique-geneve-histoire-mission-defis-conference-balade"
             },
             {
-              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
+              "label": "Cité Seniors fête ses 20 ans | Le Jardin Botanique de Genève, son histoire, sa mission et ses défis - Conférence et…",
               "detail": "Genève",
-              "date": "2026-10-27",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-jardin-botanique-geneve-histoire-mission-defis-conference-balade-0"
             },
             {
-              "label": "Balades Théâtralisées - De la haute-ville aux bas-fonds",
+              "label": "Complet - L’herbier des feuilles",
               "detail": "Genève",
-              "date": "2026-10-27",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-haute-ville-fonds"
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/herbier-feuilles"
             },
             {
-              "label": "BILL FRISELL fête 75 ans ! BILL FRISELL TRIO feat. Luke Bergman & Tim Angulo",
+              "label": "DIRTY THREE",
               "detail": "Genève",
-              "date": "2026-10-27",
-              "url": "https://www.geneve.ch/agenda/bill-frisell-fete-75-bill-frisell-trio-feat-luke-bergman-angulo"
-            },
-            {
-              "label": "BILL FRISELL TRIO feat. Luke Bergman & Tim Angulo",
-              "detail": "Genève",
-              "date": "2026-10-27",
-              "url": "https://www.geneve.ch/agenda/bill-frisell-trio-feat-luke-bergman-angulo"
-            },
-            {
-              "label": "Cafés genevois: la vie même",
-              "detail": "Genève",
-              "date": "2026-10-27",
-              "url": "https://www.geneve.ch/agenda/cafes-genevois-vie"
-            },
-            {
-              "label": "Cité Seniors fête ses 20 ans | Genève insoumise, sur les pas des luttes féministes et queer",
-              "detail": "Genève",
-              "date": "2026-10-27",
-              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-geneve-insoumise-luttes-feministes-queer"
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/dirty-three"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/genf/",
-          "updatedAt": "2026-10-27T12:41:15.477Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -364,7 +364,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -386,7 +386,7 @@
           "url": "/de/veranstaltungen/genf/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-27T17:42:56.215Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "fr": {
       "canton": "GE",
@@ -396,7 +396,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "352",
+          "value": "341",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -407,69 +407,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Action Lumières - Vernier",
-              "detail": "Vernier",
-              "date": "2026-10-27",
-              "url": "https://www.geneve.ch/agenda/action-lumieres-vernier"
+              "label": "«Quelque chose a changé» Une exposition de l'artiste Lola Jay",
+              "detail": "Genève",
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/quelque-chose-change-exposition-artiste-lola"
+            },
+            {
+              "label": "Alerte rouge !",
+              "detail": "Genève",
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/alerte-rouge"
+            },
+            {
+              "label": "Atelier chocolat pour les enfants - Chocolate monster",
+              "detail": "Genève",
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/atelier-chocolat-enfants-chocolate-monster-2"
+            },
+            {
+              "label": "Atelier cosmétique pour enfant: fabrication Gel douche Halloween",
+              "detail": "Genève",
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/atelier-cosmetique-enfant-fabrication-douche-halloween"
             },
             {
               "label": "Atelier Créez votre création d'Halloween en chocolat",
               "detail": "Genève",
-              "date": "2026-10-27",
-              "url": "https://www.geneve.ch/agenda/atelier-creez-creation-halloween-chocolat-2"
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/atelier-creez-creation-halloween-chocolat-3"
             },
             {
-              "label": "Atelier Découverte - L'École du Chocolat",
+              "label": "CHRÜSIMÜSI",
               "detail": "Genève",
-              "date": "2026-10-27",
-              "url": "https://www.geneve.ch/agenda/atelier-decouverte-ecole-chocolat-1"
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/chrusimusi"
             },
             {
-              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "label": "Cité Seniors fête ses 20 ans | Le Jardin Botanique de Genève, son histoire, sa mission et ses défis - Conférence et…",
               "detail": "Genève",
-              "date": "2026-10-27",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-jardin-botanique-geneve-histoire-mission-defis-conference-balade"
             },
             {
-              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
+              "label": "Cité Seniors fête ses 20 ans | Le Jardin Botanique de Genève, son histoire, sa mission et ses défis - Conférence et…",
               "detail": "Genève",
-              "date": "2026-10-27",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-jardin-botanique-geneve-histoire-mission-defis-conference-balade-0"
             },
             {
-              "label": "Balades Théâtralisées - De la haute-ville aux bas-fonds",
+              "label": "Complet - L’herbier des feuilles",
               "detail": "Genève",
-              "date": "2026-10-27",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-haute-ville-fonds"
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/herbier-feuilles"
             },
             {
-              "label": "BILL FRISELL fête 75 ans ! BILL FRISELL TRIO feat. Luke Bergman & Tim Angulo",
+              "label": "DIRTY THREE",
               "detail": "Genève",
-              "date": "2026-10-27",
-              "url": "https://www.geneve.ch/agenda/bill-frisell-fete-75-bill-frisell-trio-feat-luke-bergman-angulo"
-            },
-            {
-              "label": "BILL FRISELL TRIO feat. Luke Bergman & Tim Angulo",
-              "detail": "Genève",
-              "date": "2026-10-27",
-              "url": "https://www.geneve.ch/agenda/bill-frisell-trio-feat-luke-bergman-angulo"
-            },
-            {
-              "label": "Cafés genevois: la vie même",
-              "detail": "Genève",
-              "date": "2026-10-27",
-              "url": "https://www.geneve.ch/agenda/cafes-genevois-vie"
-            },
-            {
-              "label": "Cité Seniors fête ses 20 ans | Genève insoumise, sur les pas des luttes féministes et queer",
-              "detail": "Genève",
-              "date": "2026-10-27",
-              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-geneve-insoumise-luttes-feministes-queer"
+              "date": "2026-10-28",
+              "url": "https://www.geneve.ch/agenda/dirty-three"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/geneve/",
-          "updatedAt": "2026-10-27T12:41:15.477Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -487,7 +487,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -509,7 +509,7 @@
           "url": "/fr/evenements/geneve/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-27T17:42:56.215Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     }
   }
 }

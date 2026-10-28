@@ -4,12 +4,12 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "eventi",
-  "updatedAt": "2026-10-27T00:15:17.334Z",
-  "contentHash": "31da4d728d4207eaea172725a7f55fda61dc89db351d56ad619805034b034c09",
+  "updatedAt": "2026-10-28T01:14:28.455Z",
+  "contentHash": "497d7b5722c108428342963823be9aa67cd2aa30510b245552b943bd41bb4f9a",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-26T18:30:43.613Z",
+      "updatedAt": "2026-10-27T19:25:52.214Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "19",
+          "value": "18",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,15 +33,9 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Mittendrin - Perimenopause",
-              "detail": "Glarus",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mittendrin-perimenopause/"
-            },
-            {
               "label": "Balboa Schnupperkurs",
               "detail": "Ennenda, Glarus — in corso, ultimo giorno: 11 novembre 2026",
-              "date": "2026-10-27",
+              "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
             },
             {
@@ -91,11 +85,17 @@
               "detail": "Glarus",
               "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/soulmarket-2/"
+            },
+            {
+              "label": "Walt's Blues Box Quartett",
+              "detail": "Wortreich Buchhandlung & Antiquariat",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/glarus/walts-blues-box-quartett_Awhd7nQ"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/glarona/",
-          "updatedAt": "2026-10-26T18:30:43.613Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/glarona/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "en": {
       "canton": "GL",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "19",
+          "value": "18",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,15 +138,9 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Mittendrin - Perimenopause",
-              "detail": "Glarus",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mittendrin-perimenopause/"
-            },
-            {
               "label": "Balboa Schnupperkurs",
               "detail": "Ennenda, Glarus — ongoing, last day: 11 November 2026",
-              "date": "2026-10-27",
+              "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
             },
             {
@@ -196,11 +190,17 @@
               "detail": "Glarus",
               "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/soulmarket-2/"
+            },
+            {
+              "label": "Walt's Blues Box Quartett",
+              "detail": "Wortreich Buchhandlung & Antiquariat",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/glarus/walts-blues-box-quartett_Awhd7nQ"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/glarus/",
-          "updatedAt": "2026-10-26T18:30:43.613Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/glarus/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "de": {
       "canton": "GL",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "19",
+          "value": "18",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,15 +243,9 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Mittendrin - Perimenopause",
-              "detail": "Glarus",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mittendrin-perimenopause/"
-            },
-            {
               "label": "Balboa Schnupperkurs",
               "detail": "Ennenda, Glarus — läuft, letzter Tag: 11. November 2026",
-              "date": "2026-10-27",
+              "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
             },
             {
@@ -301,11 +295,17 @@
               "detail": "Glarus",
               "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/soulmarket-2/"
+            },
+            {
+              "label": "Walt's Blues Box Quartett",
+              "detail": "Wortreich Buchhandlung & Antiquariat",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/glarus/walts-blues-box-quartett_Awhd7nQ"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/glarus/",
-          "updatedAt": "2026-10-26T18:30:43.613Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/glarus/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "fr": {
       "canton": "GL",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "19",
+          "value": "18",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,15 +348,9 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Mittendrin - Perimenopause",
-              "detail": "Glarus",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mittendrin-perimenopause/"
-            },
-            {
               "label": "Schnupperkurs de Balboa",
               "detail": "Ennenda, Glarus — en cours, dernier jour : 11 novembre 2026",
-              "date": "2026-10-27",
+              "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
             },
             {
@@ -406,11 +400,17 @@
               "detail": "Glarus",
               "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/soulmarket-2/"
+            },
+            {
+              "label": "Walt's Blues Box Quartett",
+              "detail": "Wortreich Buchhandlung & Antiquariat",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/glarus/walts-blues-box-quartett_Awhd7nQ"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/glaris/",
-          "updatedAt": "2026-10-26T18:30:43.613Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/glaris/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     }
   }
 }

@@ -4,17 +4,17 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "mobilita",
-  "updatedAt": "2026-10-27T19:21:58.604Z",
-  "contentHash": "5f3c4c9f02c36933dba890f0088a9c70281d04413b9f452da86e4b535db5e8d0",
+  "updatedAt": "2026-10-28T01:14:28.455Z",
+  "contentHash": "67704562fafdd4e797733cddb72b8f35c70a04fc5e6f62344d60c13853216b51",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-27T15:37:37.261Z",
+      "updatedAt": "2026-10-27T20:19:05.756Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-27T11:01:59.897Z",
+      "updatedAt": "2026-10-27T21:31:39.250Z",
       "keyFacts": 0
     }
   ],
@@ -47,11 +47,6 @@
               "value": "Chiusura",
               "detail": "fine prevista: 5 novembre 2026",
               "date": "2026-10-13T05:24:00.000Z"
-            },
-            {
-              "label": "H4 Luzern <-> Zürich tra Svincolo autostradale Walterswil E Luogo Sihlbrugg Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-10-27T14:25:00.000Z"
             },
             {
               "label": "H10 Berna <-> Lucerna tra Luogo Wiggen E Luogo Kröschenbrunnen Situazione: problemi di traffico Causa: lavori di costruzione Limitazione del traffico: circolazione a corsie alternate",
@@ -88,10 +83,16 @@
               "value": "Cantiere",
               "detail": "fine prevista: 13 novembre 2026",
               "date": "2026-02-02T07:35:00.000Z"
+            },
+            {
+              "label": "A2 Lucerna -> Basilea tra Galleria Galleria Schweizerhalle E Raccordo autostradale Raccordo di Hagnau Situazione: problemi di traffico cantiere, lunghezza [km] 1.55 Limitazione del traffico: nuova…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 16 novembre 2026",
+              "date": "2026-02-19T07:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-27T15:37:37.261Z"
+          "updatedAt": "2026-10-27T20:19:05.756Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -114,7 +115,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -160,7 +161,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-27T19:21:58.604Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "en": {
       "canton": "LU",
@@ -190,11 +191,6 @@
               "value": "Closure",
               "detail": "until 5 November 2026",
               "date": "2026-10-13T05:24:00.000Z"
-            },
-            {
-              "label": "H4 Luzern <-> Zürich tra Svincolo autostradale Walterswil E Luogo Sihlbrugg Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-10-27T14:25:00.000Z"
             },
             {
               "label": "H10 Berna <-> Lucerna tra Luogo Wiggen E Luogo Kröschenbrunnen Situazione: problemi di traffico Causa: lavori di costruzione Limitazione del traffico: circolazione a corsie alternate",
@@ -231,10 +227,16 @@
               "value": "Roadworks",
               "detail": "until 13 November 2026",
               "date": "2026-02-02T07:35:00.000Z"
+            },
+            {
+              "label": "A2 Lucerna -> Basilea tra Galleria Galleria Schweizerhalle E Raccordo autostradale Raccordo di Hagnau Situazione: problemi di traffico cantiere, lunghezza [km] 1.55 Limitazione del traffico: nuova…",
+              "value": "Roadworks",
+              "detail": "until 16 November 2026",
+              "date": "2026-02-19T07:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-27T15:37:37.261Z"
+          "updatedAt": "2026-10-27T20:19:05.756Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -257,7 +259,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -301,7 +303,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-27T19:21:58.604Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "de": {
       "canton": "LU",
@@ -331,11 +333,6 @@
               "value": "Sperrung",
               "detail": "bis 5. November 2026",
               "date": "2026-10-13T05:24:00.000Z"
-            },
-            {
-              "label": "H4 Luzern <-> Zürich zwischen Anschluss Walterswil und Ortschaft Sihlbrugg Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-10-27T14:25:00.000Z"
             },
             {
               "label": "H10 Bern <-> Luzern zwischen Ortschaft Wiggen und Ortschaft Kröschenbrunnen Sachlage: Verkehrsbehinderung Ursache: Bauarbeiten Verkehrsführung: wechselseitige Verkehrsführung",
@@ -372,10 +369,16 @@
               "value": "Baustelle",
               "detail": "bis 13. November 2026",
               "date": "2026-02-02T07:35:00.000Z"
+            },
+            {
+              "label": "A2 Luzern -> Basel zwischen Tunnel Schweizerhalle-Tunnel und Autobahndreieck Verzweigung Hagnau Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 1.55 Verkehrsführung: veränderte Verkehrsführung",
+              "value": "Baustelle",
+              "detail": "bis 16. November 2026",
+              "date": "2026-02-19T07:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-27T15:37:37.261Z"
+          "updatedAt": "2026-10-27T20:19:05.756Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -398,7 +401,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -442,7 +445,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-27T19:21:58.604Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "fr": {
       "canton": "LU",
@@ -472,11 +475,6 @@
               "value": "Fermeture",
               "detail": "jusqu’au 5 novembre 2026",
               "date": "2026-10-13T05:24:00.000Z"
-            },
-            {
-              "label": "H4 Lucerne <-> Zurich entre Jonction autoroutière Walterswil et Localité Sihlbrugg Situation: trafic en accordéon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-10-27T14:25:00.000Z"
             },
             {
               "label": "H10 Berne <-> Lucerne entre Localité Wiggen et Localité Kröschenbrunnen Situation: trafic perturbé Raison: travaux de construction Gestion du trafic: circulation alternée à une voie",
@@ -513,10 +511,16 @@
               "value": "Chantier",
               "detail": "jusqu’au 13 novembre 2026",
               "date": "2026-02-02T07:35:00.000Z"
+            },
+            {
+              "label": "A2 Lucerne -> Bâle entre Tunnel Tunnel Schweizerhalle et Echangeur Echangeur de Hagnau Situation: trafic perturbé travaux, longueur [km] 1.55 Gestion du trafic: nouveau plan de circulation",
+              "value": "Chantier",
+              "detail": "jusqu’au 16 novembre 2026",
+              "date": "2026-02-19T07:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-27T15:37:37.261Z"
+          "updatedAt": "2026-10-27T20:19:05.756Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -539,7 +543,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -585,7 +589,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-27T19:21:58.604Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     }
   }
 }

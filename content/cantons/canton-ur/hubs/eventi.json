@@ -4,12 +4,12 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "eventi",
-  "updatedAt": "2026-10-27T00:15:17.334Z",
-  "contentHash": "b6f30640165749f374b81ff86cc0485400843196f2d80b604b9a17c85bb1c1e2",
+  "updatedAt": "2026-10-28T01:14:28.455Z",
+  "contentHash": "6cf0735b2447d2d0aec1e16b875561105e52dd54095b3c7fb14b4063b71fb9de",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-26T18:30:43.613Z",
+      "updatedAt": "2026-10-27T19:25:52.214Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "19",
+          "value": "18",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,12 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "TriffAltdorf Mittagstreff: Bistro&Lounge Baggenstos",
-              "detail": "Bistro & Lounge Baggenstos",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/triffaltdorf-mittagstreff-bistrolounge-baggenstos/"
-            },
             {
               "label": "Manu Delago & Max ZT",
               "detail": "Altdorf",
@@ -91,11 +85,17 @@
               "detail": "Seelisberg",
               "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tiro-del-ruetli-a-300-m/"
+            },
+            {
+              "label": "Aquarellmalen und Mischtechniken - verschiedene Maltechniken",
+              "detail": "Altdorf",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aquarellmalen-und-mischtechniken-verschiedene-maltechniken/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/uri/",
-          "updatedAt": "2026-10-26T18:30:43.613Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/uri/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "en": {
       "canton": "UR",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "19",
+          "value": "18",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,12 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "TriffAltdorf Mittagstreff: Bistro&Lounge Baggenstos",
-              "detail": "Bistro & Lounge Baggenstos",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/triffaltdorf-mittagstreff-bistrolounge-baggenstos/"
-            },
             {
               "label": "Manu Delago & Max ZT",
               "detail": "Altdorf",
@@ -196,11 +190,17 @@
               "detail": "Seelisberg",
               "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tiro-del-ruetli-a-300-m/"
+            },
+            {
+              "label": "Aquarellmalen und Mischtechniken - verschiedene Maltechniken",
+              "detail": "Altdorf",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aquarellmalen-und-mischtechniken-verschiedene-maltechniken/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/uri/",
-          "updatedAt": "2026-10-26T18:30:43.613Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/uri/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "de": {
       "canton": "UR",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "19",
+          "value": "18",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,12 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "TriffAltdorf Mittagstreff: Bistro&Lounge Baggenstos",
-              "detail": "Bistro & Lounge Baggenstos",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/triffaltdorf-mittagstreff-bistrolounge-baggenstos/"
-            },
             {
               "label": "Manu Delago & Max ZT",
               "detail": "Altdorf",
@@ -301,11 +295,17 @@
               "detail": "Seelisberg",
               "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tiro-del-ruetli-a-300-m/"
+            },
+            {
+              "label": "Aquarellmalen und Mischtechniken - verschiedene Maltechniken",
+              "detail": "Altdorf",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aquarellmalen-und-mischtechniken-verschiedene-maltechniken/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/uri/",
-          "updatedAt": "2026-10-26T18:30:43.613Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/uri/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "fr": {
       "canton": "UR",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "19",
+          "value": "18",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,12 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "TriffAltdorf Mittagstreff: Bistro&Lounge Baggenstos",
-              "detail": "Bistro & Lounge Baggenstos",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/triffaltdorf-mittagstreff-bistrolounge-baggenstos/"
-            },
             {
               "label": "Manu Delago & Max ZT",
               "detail": "Altdorf",
@@ -406,11 +400,17 @@
               "detail": "Seelisberg",
               "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tiro-del-ruetli-a-300-m/"
+            },
+            {
+              "label": "Aquarellmalen und Mischtechniken - verschiedene Maltechniken",
+              "detail": "Altdorf",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aquarellmalen-und-mischtechniken-verschiedene-maltechniken/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/uri/",
-          "updatedAt": "2026-10-26T18:30:43.613Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/uri/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     }
   }
 }

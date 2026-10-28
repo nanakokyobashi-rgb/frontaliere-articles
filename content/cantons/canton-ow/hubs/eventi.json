@@ -4,12 +4,12 @@
   "section": "canton-ow",
   "canton": "OW",
   "topic": "eventi",
-  "updatedAt": "2026-10-26T01:02:08.769Z",
-  "contentHash": "922d10d4c424ca168539610ad42a037930d21d51fbaf680bade709f0c845dedc",
+  "updatedAt": "2026-10-28T01:14:28.455Z",
+  "contentHash": "bd2b774ab9c484e19b2ad10653c1564779c1893a43ea41b45706da4321528d2a",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-25T02:23:31.213Z",
+      "updatedAt": "2026-10-27T19:25:52.214Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "27",
+          "value": "30",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -94,7 +94,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/obvaldo/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         }
       ],
       "curatedArticles": [
@@ -116,7 +116,7 @@
           "url": "/eventi/obvaldo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "en": {
       "canton": "OW",
@@ -126,7 +126,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "27",
+          "value": "30",
           "note": "from the site’s events calendar"
         }
       ],
@@ -198,7 +198,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/obwalden/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         }
       ],
       "curatedArticles": [
@@ -220,7 +220,7 @@
           "url": "/en/events/obwalden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "de": {
       "canton": "OW",
@@ -230,7 +230,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "27",
+          "value": "30",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -302,7 +302,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/obwalden/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         }
       ],
       "curatedArticles": [
@@ -324,7 +324,7 @@
           "url": "/de/veranstaltungen/obwalden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "fr": {
       "canton": "OW",
@@ -334,7 +334,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "27",
+          "value": "30",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -406,7 +406,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/obwald/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         }
       ],
       "curatedArticles": [
@@ -428,7 +428,7 @@
           "url": "/fr/evenements/obwald/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     }
   }
 }

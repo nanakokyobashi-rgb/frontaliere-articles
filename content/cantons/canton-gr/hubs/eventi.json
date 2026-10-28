@@ -4,12 +4,12 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "eventi",
-  "updatedAt": "2026-10-27T00:15:17.334Z",
-  "contentHash": "fdda24335d84d5498436080e4dbb5beae69b5b8de846c3c8a1a05a1e7f888045",
+  "updatedAt": "2026-10-28T01:14:28.455Z",
+  "contentHash": "ce52175c078a9cfa68ab261fdb137316528188b970ff6315ad2cd3e33333c9d9",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-26T18:30:43.613Z",
+      "updatedAt": "2026-10-27T19:25:52.214Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "75",
+          "value": "77",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,54 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Workshop: Come far svernare le piante mediterranee",
-              "detail": "Urech Garten, Chur",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/workshop-overwintering-mediterranean-plants/"
-            },
-            {
-              "label": "Tematizzare la Valle Riflessioni sulle forme di vita in Valposchiavo",
-              "detail": "Casa Torre, Poschiavo — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
-            },
-            {
-              "label": "Calanda Oktoberfest",
-              "detail": "AREON Eventhalle, Chur — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/calanda-oktoberfest/"
-            },
-            {
-              "label": "Waldbaden Alpin",
-              "detail": "Scuol — in corso, ultimo giorno: 6 novembre 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
-            },
-            {
-              "label": "Caffè Rumantsch ad Ardez",
-              "detail": "Ardez, Scuol — in corso, ultimo giorno: 11 novembre 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
-            },
-            {
-              "label": "Workshop:Ätherische Öle & natürliche Alltagsprodukte erleben",
-              "detail": "Val Surses Savognin Bivio, Surses — in corso, ultimo giorno: 28 ottobre 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshopaetherische-oele-natuerliche-alltagsprodukte-erleben/"
-            },
-            {
-              "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
-              "detail": "Ardez, Scuol — in corso, ultimo giorno: 7 novembre 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
-            },
-            {
-              "label": "Gianter in cumpagnia - Mittagstisch",
-              "detail": "Pfarrhaussaal, S-chanf — in corso, ultimo giorno: 28 ottobre 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gianter-in-cumpagnia-mittagstisch/"
-            },
             {
               "label": "Founders-Night 2026",
               "detail": "ibW Höhere Fachschule Südostschweiz, Chur",
@@ -91,11 +43,59 @@
               "detail": "Sinnhof",
               "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/2026-singkreis-sinnhof/"
+            },
+            {
+              "label": "Between craft and art: Sgraffito in the Engadine",
+              "detail": "Lyceum Alpinum Zuoz, Zuoz",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/between-craft-and-art-sgraffito-in-the-engadine/"
+            },
+            {
+              "label": "Das Markusevangelium mit Eric Wehrlin",
+              "detail": "Davos",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/das-markusevangelium/"
+            },
+            {
+              "label": "Theologie in der Gemeinde",
+              "detail": "Evangelisches Kirchgemeindehaus, Flims",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theologie-in-der-gemeinde/"
+            },
+            {
+              "label": "Tematizzare la Valle Riflessioni sulle forme di vita in Valposchiavo",
+              "detail": "Casa Torre, Poschiavo — in corso, ultimo giorno: 14 novembre 2026",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
+            },
+            {
+              "label": "Calanda Oktoberfest",
+              "detail": "AREON Eventhalle, Chur — in corso, ultimo giorno: 31 ottobre 2026",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/calanda-oktoberfest/"
+            },
+            {
+              "label": "Waldbaden Alpin",
+              "detail": "Scuol — in corso, ultimo giorno: 6 novembre 2026",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
+            },
+            {
+              "label": "Caffè Rumantsch ad Ardez",
+              "detail": "Ardez, Scuol — in corso, ultimo giorno: 11 novembre 2026",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
+            },
+            {
+              "label": "Workshop:Ätherische Öle & natürliche Alltagsprodukte erleben",
+              "detail": "Val Surses Savognin Bivio, Surses — in corso, ultimo giorno: 28 ottobre 2026",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshopaetherische-oele-natuerliche-alltagsprodukte-erleben/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/grigioni/",
-          "updatedAt": "2026-10-26T18:30:43.613Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         }
       ],
       "curatedArticles": [
@@ -147,7 +147,7 @@
           "url": "/eventi/grigioni/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "en": {
       "canton": "GR",
@@ -157,7 +157,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "75",
+          "value": "77",
           "note": "from the site’s events calendar"
         }
       ],
@@ -167,54 +167,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Workshop: Overwintering Mediterranean Plants",
-              "detail": "Urech Garten, Chur",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/workshop-overwintering-mediterranean-plants/"
-            },
-            {
-              "label": "Tematizzare la Valle. Riflessioni sulle forme di vita in Valposchiavo",
-              "detail": "Casa Torre, Poschiavo — ongoing, last day: 14 November 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
-            },
-            {
-              "label": "Calanda Oktoberfest",
-              "detail": "AREON Eventhalle, Chur — ongoing, last day: 31 October 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/calanda-oktoberfest/"
-            },
-            {
-              "label": "Forest Bathing Alpin",
-              "detail": "Scuol — ongoing, last day: 6 November 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
-            },
-            {
-              "label": "Café Rumantsch ad Ardez",
-              "detail": "Ardez, Scuol — ongoing, last day: 11 November 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
-            },
-            {
-              "label": "Workshop:Ätherische Öle & natürliche Alltagsprodukte erleben",
-              "detail": "Val Surses Savognin Bivio, Surses — ongoing, last day: 28 October 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshopaetherische-oele-natuerliche-alltagsprodukte-erleben/"
-            },
-            {
-              "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
-              "detail": "Ardez, Scuol — ongoing, last day: 7 November 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
-            },
-            {
-              "label": "Gianter in cumpagnia - Mittagstisch",
-              "detail": "Pfarrhaussaal, S-chanf — ongoing, last day: 28 October 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gianter-in-cumpagnia-mittagstisch/"
-            },
             {
               "label": "Founders-Night 2026",
               "detail": "ibW Höhere Fachschule Südostschweiz, Chur",
@@ -226,11 +178,59 @@
               "detail": "Sinnhof",
               "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/2026-singkreis-sinnhof/"
+            },
+            {
+              "label": "Between craft and art: Sgraffito in the Engadine",
+              "detail": "Lyceum Alpinum Zuoz, Zuoz",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/between-craft-and-art-sgraffito-in-the-engadine/"
+            },
+            {
+              "label": "Das Markusevangelium mit Eric Wehrlin",
+              "detail": "Davos",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/das-markusevangelium/"
+            },
+            {
+              "label": "Theologie in der Gemeinde",
+              "detail": "Evangelisches Kirchgemeindehaus, Flims",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theologie-in-der-gemeinde/"
+            },
+            {
+              "label": "Tematizzare la Valle. Riflessioni sulle forme di vita in Valposchiavo",
+              "detail": "Casa Torre, Poschiavo — ongoing, last day: 14 November 2026",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
+            },
+            {
+              "label": "Calanda Oktoberfest",
+              "detail": "AREON Eventhalle, Chur — ongoing, last day: 31 October 2026",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/calanda-oktoberfest/"
+            },
+            {
+              "label": "Forest Bathing Alpin",
+              "detail": "Scuol — ongoing, last day: 6 November 2026",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
+            },
+            {
+              "label": "Café Rumantsch ad Ardez",
+              "detail": "Ardez, Scuol — ongoing, last day: 11 November 2026",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
+            },
+            {
+              "label": "Workshop:Ätherische Öle & natürliche Alltagsprodukte erleben",
+              "detail": "Val Surses Savognin Bivio, Surses — ongoing, last day: 28 October 2026",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshopaetherische-oele-natuerliche-alltagsprodukte-erleben/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/graubunden/",
-          "updatedAt": "2026-10-26T18:30:43.613Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         }
       ],
       "curatedArticles": [
@@ -282,7 +282,7 @@
           "url": "/en/events/graubunden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "de": {
       "canton": "GR",
@@ -292,7 +292,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "75",
+          "value": "77",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -302,54 +302,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Workshop Südländische Pflanzen überwintern",
-              "detail": "Urech Garten, Chur",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/workshop-overwintering-mediterranean-plants/"
-            },
-            {
-              "label": "Tematizzare la Valle. Riflessioni sulle forme di vita in Valposchiavo",
-              "detail": "Casa Torre, Poschiavo — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
-            },
-            {
-              "label": "Calanda Oktoberfest",
-              "detail": "AREON Eventhalle, Chur — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/calanda-oktoberfest/"
-            },
-            {
-              "label": "Waldbaden Alpin",
-              "detail": "Scuol — läuft, letzter Tag: 6. November 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
-            },
-            {
-              "label": "Cafè Rumantsch ad Ardez",
-              "detail": "Ardez, Scuol — läuft, letzter Tag: 11. November 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
-            },
-            {
-              "label": "Workshop:Ätherische Öle & natürliche Alltagsprodukte erleben",
-              "detail": "Val Surses Savognin Bivio, Surses — läuft, letzter Tag: 28. Oktober 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshopaetherische-oele-natuerliche-alltagsprodukte-erleben/"
-            },
-            {
-              "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
-              "detail": "Ardez, Scuol — läuft, letzter Tag: 7. November 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
-            },
-            {
-              "label": "Gianter in cumpagnia - Mittagstisch",
-              "detail": "Pfarrhaussaal, S-chanf — läuft, letzter Tag: 28. Oktober 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gianter-in-cumpagnia-mittagstisch/"
-            },
             {
               "label": "Founders-Night 2026",
               "detail": "ibW Höhere Fachschule Südostschweiz, Chur",
@@ -361,11 +313,59 @@
               "detail": "Sinnhof",
               "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/2026-singkreis-sinnhof/"
+            },
+            {
+              "label": "Zwischen Handwerk und Kunst: Sgraffito im Engadin",
+              "detail": "Lyceum Alpinum Zuoz, Zuoz",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/between-craft-and-art-sgraffito-in-the-engadine/"
+            },
+            {
+              "label": "Das Markusevangelium mit Eric Wehrlin",
+              "detail": "Davos",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/das-markusevangelium/"
+            },
+            {
+              "label": "Theologie in der Gemeinde",
+              "detail": "Evangelisches Kirchgemeindehaus, Flims",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theologie-in-der-gemeinde/"
+            },
+            {
+              "label": "Tematizzare la Valle. Riflessioni sulle forme di vita in Valposchiavo",
+              "detail": "Casa Torre, Poschiavo — läuft, letzter Tag: 14. November 2026",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
+            },
+            {
+              "label": "Calanda Oktoberfest",
+              "detail": "AREON Eventhalle, Chur — läuft, letzter Tag: 31. Oktober 2026",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/calanda-oktoberfest/"
+            },
+            {
+              "label": "Waldbaden Alpin",
+              "detail": "Scuol — läuft, letzter Tag: 6. November 2026",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
+            },
+            {
+              "label": "Cafè Rumantsch ad Ardez",
+              "detail": "Ardez, Scuol — läuft, letzter Tag: 11. November 2026",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
+            },
+            {
+              "label": "Workshop:Ätherische Öle & natürliche Alltagsprodukte erleben",
+              "detail": "Val Surses Savognin Bivio, Surses — läuft, letzter Tag: 28. Oktober 2026",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshopaetherische-oele-natuerliche-alltagsprodukte-erleben/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/graubunden/",
-          "updatedAt": "2026-10-26T18:30:43.613Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         }
       ],
       "curatedArticles": [
@@ -417,7 +417,7 @@
           "url": "/de/veranstaltungen/graubunden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "fr": {
       "canton": "GR",
@@ -427,7 +427,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "75",
+          "value": "77",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -437,54 +437,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Workshop: Overwintering Mediterranean Plants",
-              "detail": "Urech Garten, Chur",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/workshop-overwintering-mediterranean-plants/"
-            },
-            {
-              "label": "Tematizzare la Valle. Riflessioni sulle forme di vita in Valposchiavo",
-              "detail": "Casa Torre, Poschiavo — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
-            },
-            {
-              "label": "Calanda Oktoberfest",
-              "detail": "AREON Eventhalle, Chur — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/calanda-oktoberfest/"
-            },
-            {
-              "label": "Waldbaden Alpin",
-              "detail": "Scuol — en cours, dernier jour : 6 novembre 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
-            },
-            {
-              "label": "Café Rumantsch ad Ardez",
-              "detail": "Ardez, Scuol — en cours, dernier jour : 11 novembre 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
-            },
-            {
-              "label": "Workshop:Ätherische Öle & natürliche Alltagsprodukte erleben",
-              "detail": "Val Surses Savognin Bivio, Surses — en cours, dernier jour : 28 octobre 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshopaetherische-oele-natuerliche-alltagsprodukte-erleben/"
-            },
-            {
-              "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
-              "detail": "Ardez, Scuol — en cours, dernier jour : 7 novembre 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
-            },
-            {
-              "label": "Gianter in cumpagnia - Mittagstisch",
-              "detail": "Pfarrhaussaal, S-chanf — en cours, dernier jour : 28 octobre 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gianter-in-cumpagnia-mittagstisch/"
-            },
             {
               "label": "Founders-Night 2026",
               "detail": "ibW Höhere Fachschule Südostschweiz, Chur",
@@ -496,11 +448,59 @@
               "detail": "Sinnhof",
               "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/2026-singkreis-sinnhof/"
+            },
+            {
+              "label": "Between craft and art: Sgraffito in the Engadine",
+              "detail": "Lyceum Alpinum Zuoz, Zuoz",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/between-craft-and-art-sgraffito-in-the-engadine/"
+            },
+            {
+              "label": "Das Markusevangelium mit Eric Wehrlin",
+              "detail": "Davos",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/das-markusevangelium/"
+            },
+            {
+              "label": "Theologie in der Gemeinde",
+              "detail": "Evangelisches Kirchgemeindehaus, Flims",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theologie-in-der-gemeinde/"
+            },
+            {
+              "label": "Tematizzare la Valle. Riflessioni sulle forme di vita in Valposchiavo",
+              "detail": "Casa Torre, Poschiavo — en cours, dernier jour : 14 novembre 2026",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
+            },
+            {
+              "label": "Calanda Oktoberfest",
+              "detail": "AREON Eventhalle, Chur — en cours, dernier jour : 31 octobre 2026",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/calanda-oktoberfest/"
+            },
+            {
+              "label": "Waldbaden Alpin",
+              "detail": "Scuol — en cours, dernier jour : 6 novembre 2026",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
+            },
+            {
+              "label": "Café Rumantsch ad Ardez",
+              "detail": "Ardez, Scuol — en cours, dernier jour : 11 novembre 2026",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
+            },
+            {
+              "label": "Workshop:Ätherische Öle & natürliche Alltagsprodukte erleben",
+              "detail": "Val Surses Savognin Bivio, Surses — en cours, dernier jour : 28 octobre 2026",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshopaetherische-oele-natuerliche-alltagsprodukte-erleben/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/grisons/",
-          "updatedAt": "2026-10-26T18:30:43.613Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         }
       ],
       "curatedArticles": [
@@ -552,7 +552,7 @@
           "url": "/fr/evenements/grisons/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "pensioni",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "d124214539f30ed1322cf2383b25f96342144ad930562e0623a7c84cc0078de6",
+  "updatedAt": "2026-10-28T01:14:28.455Z",
+  "contentHash": "bbc41d5df3c5b718e5fe940450034429119d1b5c8e8197b02d24c198c4353962",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-24T19:51:00.050Z",
+      "updatedAt": "2026-10-27T21:31:39.250Z",
       "keyFacts": 0
     }
   ],
@@ -136,6 +136,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Journée des proches aidants",
+              "date": "2026-10-23",
+              "url": "https://www.ecasjura.ch/fr/Actualites/Journee-des-proches-aidants-1.html"
+            },
+            {
               "label": "Primes et réduction de primes jurassiennes 2027 dans l’assurance-maladie",
               "date": "2026-10-05",
               "url": "https://www.ecasjura.ch/fr/Actualites/Primes-et-reduction-de-primes-jurassiennes-2027-dans-l-assurance-maladie.html"
@@ -146,7 +151,7 @@
               "url": "https://www.ecasjura.ch/fr/Actualites/La-rente-minimale-AVS-AI-augmentera-de-20-francs.html"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -182,7 +187,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "en": {
       "canton": "JU",
@@ -291,6 +296,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Journée des proches aidants",
+              "date": "2026-10-23",
+              "url": "https://www.ecasjura.ch/fr/Actualites/Journee-des-proches-aidants-1.html"
+            },
+            {
               "label": "Primes et réduction de primes jurassiennes 2027 dans l’assurance-maladie",
               "date": "2026-10-05",
               "url": "https://www.ecasjura.ch/fr/Actualites/Primes-et-reduction-de-primes-jurassiennes-2027-dans-l-assurance-maladie.html"
@@ -301,7 +311,7 @@
               "url": "https://www.ecasjura.ch/fr/Actualites/La-rente-minimale-AVS-AI-augmentera-de-20-francs.html"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -337,7 +347,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "de": {
       "canton": "JU",
@@ -446,6 +456,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Journée des proches aidants",
+              "date": "2026-10-23",
+              "url": "https://www.ecasjura.ch/fr/Actualites/Journee-des-proches-aidants-1.html"
+            },
+            {
               "label": "Primes et réduction de primes jurassiennes 2027 dans l’assurance-maladie",
               "date": "2026-10-05",
               "url": "https://www.ecasjura.ch/fr/Actualites/Primes-et-reduction-de-primes-jurassiennes-2027-dans-l-assurance-maladie.html"
@@ -456,7 +471,7 @@
               "url": "https://www.ecasjura.ch/fr/Actualites/La-rente-minimale-AVS-AI-augmentera-de-20-francs.html"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -492,7 +507,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "fr": {
       "canton": "JU",
@@ -601,6 +616,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Journée des proches aidants",
+              "date": "2026-10-23",
+              "url": "https://www.ecasjura.ch/fr/Actualites/Journee-des-proches-aidants-1.html"
+            },
+            {
               "label": "Primes et réduction de primes jurassiennes 2027 dans l’assurance-maladie",
               "date": "2026-10-05",
               "url": "https://www.ecasjura.ch/fr/Actualites/Primes-et-reduction-de-primes-jurassiennes-2027-dans-l-assurance-maladie.html"
@@ -611,7 +631,7 @@
               "url": "https://www.ecasjura.ch/fr/Actualites/La-rente-minimale-AVS-AI-augmentera-de-20-francs.html"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -647,7 +667,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     }
   }
 }

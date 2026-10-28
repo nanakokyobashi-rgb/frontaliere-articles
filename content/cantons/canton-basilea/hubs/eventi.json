@@ -4,12 +4,12 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "eventi",
-  "updatedAt": "2026-10-27T00:15:17.334Z",
-  "contentHash": "6d60d2f931088cbff02d38bcf9afe6866cfd3685b9b281b68c46d97487af64c4",
+  "updatedAt": "2026-10-28T01:14:28.455Z",
+  "contentHash": "5708fbe57078fa96811fbe52d4186657a1f37337bd5b64b1097ba8b7ed9ef2b2",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-26T18:30:43.613Z",
+      "updatedAt": "2026-10-27T19:25:52.214Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "93",
+          "value": "90",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,42 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Patrick Joray Quartet",
-              "detail": "the bird's eye jazz club",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/patrick-joray-quartet_A3p6Fni"
-            },
-            {
-              "label": "Literatur und Medizin: «Trocken» von Daniel Wagner",
-              "detail": "Universitätsbibliothek Medizin, Basel",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/literatur-und-medizin-trocken-von-daniel-wagner/"
-            },
-            {
-              "label": "Baloise Session: ERYKAH BADU | MAX HERRE & JOY DENALANE",
-              "detail": "Messe Basel, Basel",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/baloise-session-erykah-badu-max-herre-und-joy-denalane_Ax6QJcP"
-            },
-            {
-              "label": "Sylphe - Pure Piaf",
-              "detail": "Theater Fauteuil - Tabourettli",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/sylphe-pure-piaf_A7q9uqi"
-            },
-            {
-              "label": "Sylphe - Pure Piaf",
-              "detail": "Theater Fauteuil, Basel",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sylphe-pure-piaf/"
-            },
-            {
-              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
-              "detail": "Universitätsbibliothek (UB) — in corso, ultimo giorno: 5 novembre 2026",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
-            },
             {
               "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX LIKE A PRO",
               "detail": "Basilea, Basel",
@@ -91,11 +55,47 @@
               "detail": "Tanzhaus Basel - Silo 2 - Black Box, Basel",
               "date": "2026-10-28",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/a-nights-game_AN1xZRt"
+            },
+            {
+              "label": "Kruger Brothers & Kaleidoscope String Quartet",
+              "detail": "Gelterkinden",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kruger-brothers-kaleidoscope-string-quartet/"
+            },
+            {
+              "label": "Milan Milanski - Schwugo",
+              "detail": "Theater Fauteuil, Basel",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/milan-milanski-schwugo-3/"
+            },
+            {
+              "label": "Witz vom Olli - FSK18 - Hart aber herzlich",
+              "detail": "Basel",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/witz-vom-olli-fsk18-hart-aber-herzlich/"
+            },
+            {
+              "label": "Patrick Joray Quartet",
+              "detail": "the bird's eye jazz club — in corso, ultimo giorno: 28 ottobre 2026",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/patrick-joray-quartet_A3p6Fni"
+            },
+            {
+              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
+              "detail": "Universitätsbibliothek (UB) — in corso, ultimo giorno: 5 novembre 2026",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
+            },
+            {
+              "label": "Basel Jazz Orchestra plays George Gruntz",
+              "detail": "the bird's eye jazz club, Basel",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/basel-jazz-orchestra_AEVbtJQ"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/basilea/",
-          "updatedAt": "2026-10-26T18:30:43.613Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/basilea/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "93",
+          "value": "90",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,42 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Patrick Joray Quartet",
-              "detail": "the bird's eye jazz club",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/patrick-joray-quartet_A3p6Fni"
-            },
-            {
-              "label": "Literatur und Medizin: «Trocken» von Daniel Wagner",
-              "detail": "Universitätsbibliothek Medizin, Basel",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/literatur-und-medizin-trocken-von-daniel-wagner/"
-            },
-            {
-              "label": "Baloise Session: ERYKAH BADU | MAX HERRE & JOY DENALANE",
-              "detail": "Messe Basel, Basel",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/baloise-session-erykah-badu-max-herre-und-joy-denalane_Ax6QJcP"
-            },
-            {
-              "label": "Sylphe - Pure Piaf",
-              "detail": "Theater Fauteuil - Tabourettli",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/sylphe-pure-piaf_A7q9uqi"
-            },
-            {
-              "label": "Sylphe - Pure Piaf",
-              "detail": "Theater Fauteuil, Basel",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sylphe-pure-piaf/"
-            },
-            {
-              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
-              "detail": "Universitätsbibliothek (UB) — ongoing, last day: 5 November 2026",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
-            },
             {
               "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
               "detail": "Basilea, Basel",
@@ -196,11 +160,47 @@
               "detail": "Tanzhaus Basel - Silo 2 - Black Box, Basel",
               "date": "2026-10-28",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/a-nights-game_AN1xZRt"
+            },
+            {
+              "label": "Kruger Brothers & Kaleidoscope String Quartet",
+              "detail": "Gelterkinden",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kruger-brothers-kaleidoscope-string-quartet/"
+            },
+            {
+              "label": "Milan Milanski - Schwugo",
+              "detail": "Theater Fauteuil, Basel",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/milan-milanski-schwugo-3/"
+            },
+            {
+              "label": "Witz vom Olli - FSK18 - Hart aber herzlich",
+              "detail": "Basel",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/witz-vom-olli-fsk18-hart-aber-herzlich/"
+            },
+            {
+              "label": "Patrick Joray Quartet",
+              "detail": "the bird's eye jazz club — ongoing, last day: 28 October 2026",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/patrick-joray-quartet_A3p6Fni"
+            },
+            {
+              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
+              "detail": "Universitätsbibliothek (UB) — ongoing, last day: 5 November 2026",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
+            },
+            {
+              "label": "Basel Jazz Orchestra plays George Gruntz",
+              "detail": "the bird's eye jazz club, Basel",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/basel-jazz-orchestra_AEVbtJQ"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/basel/",
-          "updatedAt": "2026-10-26T18:30:43.613Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/basel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "93",
+          "value": "90",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,42 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Patrick Joray Quartet",
-              "detail": "the bird's eye jazz club",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/patrick-joray-quartet_A3p6Fni"
-            },
-            {
-              "label": "Literatur und Medizin: «Trocken» von Daniel Wagner",
-              "detail": "Universitätsbibliothek Medizin, Basel",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/literatur-und-medizin-trocken-von-daniel-wagner/"
-            },
-            {
-              "label": "Baloise Session: ERYKAH BADU | MAX HERRE & JOY DENALANE",
-              "detail": "Messe Basel, Basel",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/baloise-session-erykah-badu-max-herre-und-joy-denalane_Ax6QJcP"
-            },
-            {
-              "label": "Sylphe - Pure Piaf",
-              "detail": "Theater Fauteuil - Tabourettli",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/sylphe-pure-piaf_A7q9uqi"
-            },
-            {
-              "label": "Sylphe - Pure Piaf",
-              "detail": "Theater Fauteuil, Basel",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sylphe-pure-piaf/"
-            },
-            {
-              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
-              "detail": "Universitätsbibliothek (UB) — läuft, letzter Tag: 5. November 2026",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
-            },
             {
               "label": "B1 Rooftop Bistro – COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
               "detail": "Basilea, Basel",
@@ -301,11 +265,47 @@
               "detail": "Tanzhaus Basel - Silo 2 - Black Box, Basel",
               "date": "2026-10-28",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/a-nights-game_AN1xZRt"
+            },
+            {
+              "label": "Kruger Brothers & Kaleidoscope String Quartet",
+              "detail": "Gelterkinden",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kruger-brothers-kaleidoscope-string-quartet/"
+            },
+            {
+              "label": "Milan Milanski - Schwugo",
+              "detail": "Theater Fauteuil, Basel",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/milan-milanski-schwugo-3/"
+            },
+            {
+              "label": "Witz vom Olli - FSK18 - Hart aber herzlich",
+              "detail": "Basel",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/witz-vom-olli-fsk18-hart-aber-herzlich/"
+            },
+            {
+              "label": "Patrick Joray Quartet",
+              "detail": "the bird's eye jazz club — läuft, letzter Tag: 28. Oktober 2026",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/patrick-joray-quartet_A3p6Fni"
+            },
+            {
+              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
+              "detail": "Universitätsbibliothek (UB) — läuft, letzter Tag: 5. November 2026",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
+            },
+            {
+              "label": "Basel Jazz Orchestra plays George Gruntz",
+              "detail": "the bird's eye jazz club, Basel",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/basel-jazz-orchestra_AEVbtJQ"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/basel/",
-          "updatedAt": "2026-10-26T18:30:43.613Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/basel/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "93",
+          "value": "90",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,42 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Patrick Joray Quartet",
-              "detail": "the bird's eye jazz club",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/patrick-joray-quartet_A3p6Fni"
-            },
-            {
-              "label": "Literatur und Medizin: «Trocken» von Daniel Wagner",
-              "detail": "Universitätsbibliothek Medizin, Basel",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/literatur-und-medizin-trocken-von-daniel-wagner/"
-            },
-            {
-              "label": "Baloise Session: ERYKAH BADU | MAX HERRE & JOY DENALANE",
-              "detail": "Messe Basel, Basel",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/baloise-session-erykah-badu-max-herre-und-joy-denalane_Ax6QJcP"
-            },
-            {
-              "label": "Sylphe - Pure Piaf",
-              "detail": "Theater Fauteuil - Tabourettli",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/sylphe-pure-piaf_A7q9uqi"
-            },
-            {
-              "label": "Sylphe - Pure Piaf",
-              "detail": "Theater Fauteuil, Basel",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sylphe-pure-piaf/"
-            },
-            {
-              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
-              "detail": "Universitätsbibliothek (UB) — en cours, dernier jour : 5 novembre 2026",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
-            },
             {
               "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
               "detail": "Basilea, Basel",
@@ -406,11 +370,47 @@
               "detail": "Tanzhaus Basel - Silo 2 - Black Box, Basel",
               "date": "2026-10-28",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/a-nights-game_AN1xZRt"
+            },
+            {
+              "label": "Kruger Brothers & Kaleidoscope String Quartet",
+              "detail": "Gelterkinden",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kruger-brothers-kaleidoscope-string-quartet/"
+            },
+            {
+              "label": "Milan Milanski - Schwugo",
+              "detail": "Theater Fauteuil, Basel",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/milan-milanski-schwugo-3/"
+            },
+            {
+              "label": "Witz vom Olli - FSK18 - Hart aber herzlich",
+              "detail": "Basel",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/witz-vom-olli-fsk18-hart-aber-herzlich/"
+            },
+            {
+              "label": "Patrick Joray Quartet",
+              "detail": "the bird's eye jazz club — en cours, dernier jour : 28 octobre 2026",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/patrick-joray-quartet_A3p6Fni"
+            },
+            {
+              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
+              "detail": "Universitätsbibliothek (UB) — en cours, dernier jour : 5 novembre 2026",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
+            },
+            {
+              "label": "Basel Jazz Orchestra plays George Gruntz",
+              "detail": "the bird's eye jazz club, Basel",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/basel-jazz-orchestra_AEVbtJQ"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/bale/",
-          "updatedAt": "2026-10-26T18:30:43.613Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/bale/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     }
   }
 }

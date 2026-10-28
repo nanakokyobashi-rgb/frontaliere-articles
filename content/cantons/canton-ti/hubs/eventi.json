@@ -4,12 +4,12 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "eventi",
-  "updatedAt": "2026-10-27T17:42:56.215Z",
-  "contentHash": "0442bfc470e0a5de8db6b48f5d5cbbb1faf82822bdbad13c6b88fcab02bf5e72",
+  "updatedAt": "2026-10-28T01:14:28.455Z",
+  "contentHash": "970c75c0e6c9da41e0c4d65477a614a42eb9b1dc88bc23b8201b72f250929385",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-27T12:41:15.477Z",
+      "updatedAt": "2026-10-27T19:25:52.214Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "145",
+          "value": "140",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Corpi in prestito",
-              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
-              "date": "2026-10-27",
-              "url": "https://www.tio.ch/agenda/day/20261027/58243"
+              "label": "Cinema in tasca: Ciao Betty",
+              "detail": "Cinema Iride, Lugano",
+              "date": "2026-10-28",
+              "url": "https://www.tio.ch/agenda/day/20261028/64477"
             },
             {
-              "label": "Fede e guerra - Mostra fotografica",
-              "detail": "Centro pastorale S. Giuseppe, Lugano",
-              "date": "2026-10-27",
-              "url": "https://www.tio.ch/agenda/day/20261027/64618"
+              "label": "Fuori di Zucca, il villaggio delle zucche",
+              "detail": "Fuori di Zucca, Savosa",
+              "date": "2026-10-28",
+              "url": "https://www.tio.ch/agenda/day/20261028/64302"
             },
             {
-              "label": "Fra Roberto tra le mura",
-              "detail": "Sasso Corbaro, Bellinzona",
-              "date": "2026-10-27",
-              "url": "https://www.tio.ch/agenda/day/20261027/61525"
+              "label": "Pierrette Bloch. Il gesto di scrivere",
+              "detail": "Museo Villa dei Cedri, Bellinzona",
+              "date": "2026-10-28",
+              "url": "https://www.tio.ch/agenda/day/20261028/64342"
             },
             {
-              "label": "Gyotaku - Tracce di pesci",
-              "detail": "Museo della pesca, Caslano",
-              "date": "2026-10-27",
-              "url": "https://www.tio.ch/agenda/day/20261027/61721"
-            },
-            {
-              "label": "Impressioni - Mostra di pittura di Sisko Naerhi",
-              "detail": "Residenza Rivabella, Magliaso",
-              "date": "2026-10-27",
-              "url": "https://www.tio.ch/agenda/day/20261027/64414"
-            },
-            {
-              "label": "Ivo Soldini - Progetto Castel Grande",
-              "detail": "Castel Grande, Bellinzona",
-              "date": "2026-10-27",
-              "url": "https://www.tio.ch/agenda/day/20261027/62822"
-            },
-            {
-              "label": "Jannis Kounellis: Io sono un pittore",
-              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
-              "date": "2026-10-27",
-              "url": "https://www.tio.ch/agenda/day/20261027/63037"
-            },
-            {
-              "label": "Pat&Mat in inverno",
+              "label": "Lampo il cane viaggiatore",
               "detail": "Cinema GranRex, Locarno",
-              "date": "2026-10-27",
-              "url": "https://www.tio.ch/agenda/day/20261027/64401"
+              "date": "2026-10-28",
+              "url": "https://www.tio.ch/agenda/day/20261028/64403"
             },
             {
-              "label": "PoPoetic",
-              "detail": "Centro ricreativo Il Pettirosso, Savosa",
-              "date": "2026-10-27",
-              "url": "https://www.tio.ch/agenda/day/20261027/63593"
+              "label": "Baby atelier - Piripù Bibi",
+              "detail": "Museo in erba, Lugano",
+              "date": "2026-10-28",
+              "url": "https://www.tio.ch/agenda/day/20261028/64451"
             },
             {
-              "label": "Videokunst.ch × PalaCinema",
-              "detail": "PalaCinema, Locarno",
-              "date": "2026-10-27",
-              "url": "https://www.tio.ch/agenda/day/20261027/63679"
+              "label": "Ceramiche dell'antico Perù. Dal Pacifico alle Ande",
+              "detail": "Palazzo comunale, Riva San Vitale",
+              "date": "2026-10-28",
+              "url": "https://www.tio.ch/agenda/day/20261028/64065"
+            },
+            {
+              "label": "Porte aperte alla Fonoteca nazionale",
+              "detail": "Fonoteca nazionale svizzera, Lugano",
+              "date": "2026-10-28",
+              "url": "https://www.tio.ch/agenda/day/20261028/64631"
+            },
+            {
+              "label": "Gordon & Paddy e il mistero delle nocciole",
+              "detail": "Cinema GranRex, Locarno",
+              "date": "2026-10-28",
+              "url": "https://www.tio.ch/agenda/day/20261028/64404"
+            },
+            {
+              "label": "Mettici il cuore",
+              "detail": "Teatro Foce, Lugano",
+              "date": "2026-10-28",
+              "url": "https://www.tio.ch/agenda/day/20261028/63712"
+            },
+            {
+              "label": "Cybersecurity per le imprese del Ticino",
+              "detail": "Ristorante Seven, Lugano",
+              "date": "2026-10-28",
+              "url": "https://www.tio.ch/agenda/day/20261028/64557"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ticino/",
-          "updatedAt": "2026-10-27T12:41:15.477Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         }
       ],
       "curatedArticles": [
@@ -163,7 +163,7 @@
           "url": "/articoli-frontaliere/eventi-weekend-ticino/"
         }
       ],
-      "updatedAt": "2026-10-27T17:42:56.215Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "en": {
       "canton": "TI",
@@ -173,7 +173,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "145",
+          "value": "140",
           "note": "from the site’s events calendar"
         }
       ],
@@ -184,69 +184,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Borrowed bodies",
-              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
-              "date": "2026-10-27",
-              "url": "https://www.tio.ch/agenda/day/20261027/58243"
+              "label": "Cinema in your pocket: Hi Betty",
+              "detail": "Cinema Iride, Lugano",
+              "date": "2026-10-28",
+              "url": "https://www.tio.ch/agenda/day/20261028/64477"
             },
             {
-              "label": "Faith and War - Photo Exhibit",
-              "detail": "Centro pastorale S. Giuseppe, Lugano",
-              "date": "2026-10-27",
-              "url": "https://www.tio.ch/agenda/day/20261027/64618"
+              "label": "Outside of Zucca, the village of pumpkins",
+              "detail": "Fuori di Zucca, Savosa",
+              "date": "2026-10-28",
+              "url": "https://www.tio.ch/agenda/day/20261028/64302"
             },
             {
-              "label": "Fra Roberto fra le mura",
-              "detail": "Sasso Corbaro, Bellinzona",
-              "date": "2026-10-27",
-              "url": "https://www.tio.ch/agenda/day/20261027/61525"
+              "label": "Pierrette Bloch. The gesture of writing",
+              "detail": "Museo Villa dei Cedri, Bellinzona",
+              "date": "2026-10-28",
+              "url": "https://www.tio.ch/agenda/day/20261028/64342"
             },
             {
-              "label": "Gyotaku - Fish Trails",
-              "detail": "Museo della pesca, Caslano",
-              "date": "2026-10-27",
-              "url": "https://www.tio.ch/agenda/day/20261027/61721"
-            },
-            {
-              "label": "Impressions - Painting exhibition by Sisko Naerhi",
-              "detail": "Residenza Rivabella, Magliaso",
-              "date": "2026-10-27",
-              "url": "https://www.tio.ch/agenda/day/20261027/64414"
-            },
-            {
-              "label": "Ivo Soldini - Castel Grande Project",
-              "detail": "Castel Grande, Bellinzona",
-              "date": "2026-10-27",
-              "url": "https://www.tio.ch/agenda/day/20261027/62822"
-            },
-            {
-              "label": "Jannis Kounellis: I am a painter",
-              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
-              "date": "2026-10-27",
-              "url": "https://www.tio.ch/agenda/day/20261027/63037"
-            },
-            {
-              "label": "Pat&Mat in winter",
+              "label": "Lightning the travelling dog",
               "detail": "Cinema GranRex, Locarno",
-              "date": "2026-10-27",
-              "url": "https://www.tio.ch/agenda/day/20261027/64401"
+              "date": "2026-10-28",
+              "url": "https://www.tio.ch/agenda/day/20261028/64403"
             },
             {
-              "label": "PoPoetic",
-              "detail": "Centro ricreativo Il Pettirosso, Savosa",
-              "date": "2026-10-27",
-              "url": "https://www.tio.ch/agenda/day/20261027/63593"
+              "label": "Bab atelier atelier-Piripu Bibi",
+              "detail": "Museo in erba, Lugano",
+              "date": "2026-10-28",
+              "url": "https://www.tio.ch/agenda/day/20261028/64451"
             },
             {
-              "label": "Videokunst.ch PalaCinema",
-              "detail": "PalaCinema, Locarno",
-              "date": "2026-10-27",
-              "url": "https://www.tio.ch/agenda/day/20261027/63679"
+              "label": "Ceramics of ancient Peru. From the Pacific to the Andes",
+              "detail": "Palazzo comunale, Riva San Vitale",
+              "date": "2026-10-28",
+              "url": "https://www.tio.ch/agenda/day/20261028/64065"
+            },
+            {
+              "label": "Doors open to the National Sound Library",
+              "detail": "Fonoteca nazionale svizzera, Lugano",
+              "date": "2026-10-28",
+              "url": "https://www.tio.ch/agenda/day/20261028/64631"
+            },
+            {
+              "label": "Gordon & Paddy and the mystery of hazelnuts",
+              "detail": "Cinema GranRex, Locarno",
+              "date": "2026-10-28",
+              "url": "https://www.tio.ch/agenda/day/20261028/64404"
+            },
+            {
+              "label": "Put your heart into it",
+              "detail": "Teatro Foce, Lugano",
+              "date": "2026-10-28",
+              "url": "https://www.tio.ch/agenda/day/20261028/63712"
+            },
+            {
+              "label": "Cybersecurity for Ticino businesses",
+              "detail": "Ristorante Seven, Lugano",
+              "date": "2026-10-28",
+              "url": "https://www.tio.ch/agenda/day/20261028/64557"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/ticino/",
-          "updatedAt": "2026-10-27T12:41:15.477Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         }
       ],
       "curatedArticles": [
@@ -314,7 +314,7 @@
           "url": "/en/cross-border-articles/weekend-events-ticino/"
         }
       ],
-      "updatedAt": "2026-10-27T17:42:56.215Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "de": {
       "canton": "TI",
@@ -324,7 +324,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "145",
+          "value": "140",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -335,69 +335,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Leihkörper",
-              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
-              "date": "2026-10-27",
-              "url": "https://www.tio.ch/agenda/day/20261027/58243"
+              "label": "Kino in der Tasche: Hallo Betty",
+              "detail": "Cinema Iride, Lugano",
+              "date": "2026-10-28",
+              "url": "https://www.tio.ch/agenda/day/20261028/64477"
             },
             {
-              "label": "Glaube und Krieg - Fotoausstellung",
-              "detail": "Centro pastorale S. Giuseppe, Lugano",
-              "date": "2026-10-27",
-              "url": "https://www.tio.ch/agenda/day/20261027/64618"
+              "label": "Außerhalb von Zucca, dem Dorf der Kürbisse",
+              "detail": "Fuori di Zucca, Savosa",
+              "date": "2026-10-28",
+              "url": "https://www.tio.ch/agenda/day/20261028/64302"
             },
             {
-              "label": "Fra Roberto zwischen den Mauern",
-              "detail": "Sasso Corbaro, Bellinzona",
-              "date": "2026-10-27",
-              "url": "https://www.tio.ch/agenda/day/20261027/61525"
+              "label": "Pierrette Bloch. Die Geste des Schreibens",
+              "detail": "Museo Villa dei Cedri, Bellinzona",
+              "date": "2026-10-28",
+              "url": "https://www.tio.ch/agenda/day/20261028/64342"
             },
             {
-              "label": "Gyotaku - Spuren von Fischen",
-              "detail": "Museo della pesca, Caslano",
-              "date": "2026-10-27",
-              "url": "https://www.tio.ch/agenda/day/20261027/61721"
-            },
-            {
-              "label": "Impressionen - Gemäldeausstellung von Sisko Naerhi",
-              "detail": "Residenza Rivabella, Magliaso",
-              "date": "2026-10-27",
-              "url": "https://www.tio.ch/agenda/day/20261027/64414"
-            },
-            {
-              "label": "Ivo Soldini - Projekt Castel Grande",
-              "detail": "Castel Grande, Bellinzona",
-              "date": "2026-10-27",
-              "url": "https://www.tio.ch/agenda/day/20261027/62822"
-            },
-            {
-              "label": "Jannis Kounellis: Ich bin Maler",
-              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
-              "date": "2026-10-27",
-              "url": "https://www.tio.ch/agenda/day/20261027/63037"
-            },
-            {
-              "label": "Pat&Mat im Winter",
+              "label": "Blitz der reisende Hund",
               "detail": "Cinema GranRex, Locarno",
-              "date": "2026-10-27",
-              "url": "https://www.tio.ch/agenda/day/20261027/64401"
+              "date": "2026-10-28",
+              "url": "https://www.tio.ch/agenda/day/20261028/64403"
             },
             {
-              "label": "PoPoetisch",
-              "detail": "Centro ricreativo Il Pettirosso, Savosa",
-              "date": "2026-10-27",
-              "url": "https://www.tio.ch/agenda/day/20261027/63593"
+              "label": "Babyatelier - Piripù Bibi",
+              "detail": "Museo in erba, Lugano",
+              "date": "2026-10-28",
+              "url": "https://www.tio.ch/agenda/day/20261028/64451"
             },
             {
-              "label": "Videokunst.ch ⑤ PalaCinema",
-              "detail": "PalaCinema, Locarno",
-              "date": "2026-10-27",
-              "url": "https://www.tio.ch/agenda/day/20261027/63679"
+              "label": "Keramik aus dem alten Peru. Vom Pazifik bis in die Anden",
+              "detail": "Palazzo comunale, Riva San Vitale",
+              "date": "2026-10-28",
+              "url": "https://www.tio.ch/agenda/day/20261028/64065"
+            },
+            {
+              "label": "Offene Türen zur Nationalphonothek",
+              "detail": "Fonoteca nazionale svizzera, Lugano",
+              "date": "2026-10-28",
+              "url": "https://www.tio.ch/agenda/day/20261028/64631"
+            },
+            {
+              "label": "Gordon & Paddy und das Geheimnis der Haselnüsse",
+              "detail": "Cinema GranRex, Locarno",
+              "date": "2026-10-28",
+              "url": "https://www.tio.ch/agenda/day/20261028/64404"
+            },
+            {
+              "label": "Setz dein Herz auf uns",
+              "detail": "Teatro Foce, Lugano",
+              "date": "2026-10-28",
+              "url": "https://www.tio.ch/agenda/day/20261028/63712"
+            },
+            {
+              "label": "Cybersecurity für Unternehmen im Tessin",
+              "detail": "Ristorante Seven, Lugano",
+              "date": "2026-10-28",
+              "url": "https://www.tio.ch/agenda/day/20261028/64557"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/tessin/",
-          "updatedAt": "2026-10-27T12:41:15.477Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         }
       ],
       "curatedArticles": [
@@ -465,7 +465,7 @@
           "url": "/de/grenzgaenger-artikel/wochenend-veranstaltungen-tessin/"
         }
       ],
-      "updatedAt": "2026-10-27T17:42:56.215Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "fr": {
       "canton": "TI",
@@ -475,7 +475,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "145",
+          "value": "140",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -486,69 +486,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Corps prêtés",
-              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
-              "date": "2026-10-27",
-              "url": "https://www.tio.ch/agenda/day/20261027/58243"
+              "label": "Cinéma dans la poche : Bonjour Betty",
+              "detail": "Cinema Iride, Lugano",
+              "date": "2026-10-28",
+              "url": "https://www.tio.ch/agenda/day/20261028/64477"
             },
             {
-              "label": "Foi et guerre - Exposition photographique",
-              "detail": "Centro pastorale S. Giuseppe, Lugano",
-              "date": "2026-10-27",
-              "url": "https://www.tio.ch/agenda/day/20261027/64618"
+              "label": "En dehors de Zucca, le village des citrouilles",
+              "detail": "Fuori di Zucca, Savosa",
+              "date": "2026-10-28",
+              "url": "https://www.tio.ch/agenda/day/20261028/64302"
             },
             {
-              "label": "Frère Roberto entre les murs",
-              "detail": "Sasso Corbaro, Bellinzona",
-              "date": "2026-10-27",
-              "url": "https://www.tio.ch/agenda/day/20261027/61525"
+              "label": "Pierrette Bloch. Le geste d'écrire",
+              "detail": "Museo Villa dei Cedri, Bellinzona",
+              "date": "2026-10-28",
+              "url": "https://www.tio.ch/agenda/day/20261028/64342"
             },
             {
-              "label": "Gyotaku - Traces de poissons",
-              "detail": "Museo della pesca, Caslano",
-              "date": "2026-10-27",
-              "url": "https://www.tio.ch/agenda/day/20261027/61721"
-            },
-            {
-              "label": "Impressions - Exposition de peinture de Sisko Naerhi",
-              "detail": "Residenza Rivabella, Magliaso",
-              "date": "2026-10-27",
-              "url": "https://www.tio.ch/agenda/day/20261027/64414"
-            },
-            {
-              "label": "Ivo Soldini - Projet Castel Grande",
-              "detail": "Castel Grande, Bellinzona",
-              "date": "2026-10-27",
-              "url": "https://www.tio.ch/agenda/day/20261027/62822"
-            },
-            {
-              "label": "Jannis Kounellis : Je suis un peintre",
-              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
-              "date": "2026-10-27",
-              "url": "https://www.tio.ch/agenda/day/20261027/63037"
-            },
-            {
-              "label": "Pat&Mat en hiver",
+              "label": "Clignote le chien voyageur",
               "detail": "Cinema GranRex, Locarno",
-              "date": "2026-10-27",
-              "url": "https://www.tio.ch/agenda/day/20261027/64401"
+              "date": "2026-10-28",
+              "url": "https://www.tio.ch/agenda/day/20261028/64403"
             },
             {
-              "label": "PoPoétique",
-              "detail": "Centro ricreativo Il Pettirosso, Savosa",
-              "date": "2026-10-27",
-              "url": "https://www.tio.ch/agenda/day/20261027/63593"
+              "label": "Atelier bébé - Piripù Bibi",
+              "detail": "Museo in erba, Lugano",
+              "date": "2026-10-28",
+              "url": "https://www.tio.ch/agenda/day/20261028/64451"
             },
             {
-              "label": "Videokunst.ch Palais Cinema",
-              "detail": "PalaCinema, Locarno",
-              "date": "2026-10-27",
-              "url": "https://www.tio.ch/agenda/day/20261027/63679"
+              "label": "Céramiques de l'ancien Pérou. Du Pacifique aux Andes",
+              "detail": "Palazzo comunale, Riva San Vitale",
+              "date": "2026-10-28",
+              "url": "https://www.tio.ch/agenda/day/20261028/64065"
+            },
+            {
+              "label": "Portes ouvertes à la Phonothèque nationale",
+              "detail": "Fonoteca nazionale svizzera, Lugano",
+              "date": "2026-10-28",
+              "url": "https://www.tio.ch/agenda/day/20261028/64631"
+            },
+            {
+              "label": "Gordon & Paddy et le mystère des noisettes",
+              "detail": "Cinema GranRex, Locarno",
+              "date": "2026-10-28",
+              "url": "https://www.tio.ch/agenda/day/20261028/64404"
+            },
+            {
+              "label": "Mets-y un peu de cœur !",
+              "detail": "Teatro Foce, Lugano",
+              "date": "2026-10-28",
+              "url": "https://www.tio.ch/agenda/day/20261028/63712"
+            },
+            {
+              "label": "Cybersécurité pour les entreprises du Tessin",
+              "detail": "Ristorante Seven, Lugano",
+              "date": "2026-10-28",
+              "url": "https://www.tio.ch/agenda/day/20261028/64557"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/tessin/",
-          "updatedAt": "2026-10-27T12:41:15.477Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         }
       ],
       "curatedArticles": [
@@ -616,7 +616,7 @@
           "url": "/fr/articles-frontalier/evenements-week-end-tessin/"
         }
       ],
-      "updatedAt": "2026-10-27T17:42:56.215Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     }
   }
 }

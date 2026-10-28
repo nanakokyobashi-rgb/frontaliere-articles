@@ -4,12 +4,12 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "eventi",
-  "updatedAt": "2026-10-27T17:42:56.215Z",
-  "contentHash": "a55ebc9203b781cede42d9517cbc21ea34ce5be2d82e09b95e155dd3e1647844",
+  "updatedAt": "2026-10-28T01:14:28.455Z",
+  "contentHash": "6682c591e8dd8c5b3352eb2fe2ecf4e46cad6bc51dee9c870f4d3f1932d7176f",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-27T12:41:15.477Z",
+      "updatedAt": "2026-10-27T19:25:52.214Z",
       "keyFacts": 1
     }
   ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Avo Darts Battle",
-              "detail": "Grindelwald",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/avo-darts-battle/"
+              "label": "CréAgoûter sauvage d’automne en duo parent-enfant",
+              "detail": "La Neuveville",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/creagouter-sauvage-dautomne-en-duo-parent-enfant/"
             },
             {
-              "label": "Vernissage der Ausstellung «Flüsse des Lebens»",
-              "detail": "Bern",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vernissage-der-ausstellung-fluesse-des-lebens/"
+              "label": "Herbstliches „CréAgoûter“ im Eltern-Kind-Duo",
+              "detail": "Les ateliers secrets de la sorcière, La Neuveville",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliches-creagouter-im-eltern-kind-duo/"
             },
             {
-              "label": "Kunstkurs Blaue Stunde",
-              "detail": "Creaviva im Zentrum Paul Klee, Bern",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kunstkurs-blaue-stunde-2/"
+              "label": "Kleider-Basar",
+              "detail": "Habkern",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kleider-basar/"
+            },
+            {
+              "label": "BreastLove - Know Your Boobs @ Langenthal",
+              "detail": "Langenthal",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/breastlove-know-your-boobs-langenthal/"
+            },
+            {
+              "label": "Conferenza: Imparare con i bambini in modo sereno ed efficiente",
+              "detail": "Unterseen",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/conferenza-imparare-con-i-bambini-in-modo-sereno-ed-efficiente/"
+            },
+            {
+              "label": "Concerto del Quartetto Belena",
+              "detail": "Zentrum Artos, Interlaken",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/interlaken/konzert-quartetto-belena_AmiYMk3"
+            },
+            {
+              "label": "StandUp Comedy: Simon Stäblein - Absolute Frechheit",
+              "detail": "Eventfabrik Bern, Bern",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/standup-comedy-simon-staeblein-absolute-frechheit/"
+            },
+            {
+              "label": "Steiner & Madlaina",
+              "detail": "Mühle Hunziken, Rubigen",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/steiner-und-madlaina_AaVXr8G"
+            },
+            {
+              "label": "Theatergruppe Staubbach 2026",
+              "detail": "Ringgenberg, Ringgenberg (BE)",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/theatergruppe-staubbach-2026/"
             },
             {
               "label": "SOPHIE ALLOWAY QUARTET",
-              "detail": "Marians Jazzroom",
-              "date": "2026-10-27",
+              "detail": "Marians Jazzroom — in corso, ultimo giorno: 31 ottobre 2026",
+              "date": "2026-10-28",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/sophie-alloway-quartet_AZdbi75"
-            },
-            {
-              "label": "Caroline Bungeroth & Gäste",
-              "detail": "Kleintheater Alte Oele, Thun",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/thun/caroline-bungeroth-und-gaeste_ALBsRFY"
-            },
-            {
-              "label": "Prinz Pi Abschiedstour 2026",
-              "detail": "Bierhübeli",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/populaer/bern/prinz-pi-abschiedstour-2026_Au8wrhe"
-            },
-            {
-              "label": "Tito & Tarantula - Best of Tour 2026",
-              "detail": "Mühle Hunziken, Rubigen",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/tito-und-tarantula-best-of-tour-2026_AR4ACjK"
-            },
-            {
-              "label": "4th Mixed Doubles Curling Tournament",
-              "detail": "Sportzentrum Curlinghalle, Saanen — in corso, ultimo giorno: 29 ottobre 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/4-mixed-doubles-curlingturnier/"
-            },
-            {
-              "label": "Giornate svizzere del corno naturale",
-              "detail": "Beatenberg — in corso, ultimo giorno: 29 ottobre 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/giornate-svizzere-del-corno-naturale/"
-            },
-            {
-              "label": "Selbstplanerkurs PV-Anlage e-wende",
-              "detail": "Bern — in corso, ultimo giorno: 5 novembre 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/selbstplanerkurs-pv-anlage-e-wende-2/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/berna/",
-          "updatedAt": "2026-10-27T12:41:15.477Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +135,7 @@
           "url": "/eventi/berna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-27T17:42:56.215Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "en": {
       "canton": "BE",
@@ -156,69 +156,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Avo Darts Battle",
-              "detail": "Grindelwald",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/avo-darts-battle/"
+              "label": "CréAgoûter sauvage d’automne en duo parent-enfant",
+              "detail": "La Neuveville",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/creagouter-sauvage-dautomne-en-duo-parent-enfant/"
             },
             {
-              "label": "Vernissage der Ausstellung «Flüsse des Lebens»",
-              "detail": "Bern",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vernissage-der-ausstellung-fluesse-des-lebens/"
+              "label": "Herbstliches „CréAgoûter“ im Eltern-Kind-Duo",
+              "detail": "Les ateliers secrets de la sorcière, La Neuveville",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliches-creagouter-im-eltern-kind-duo/"
             },
             {
-              "label": "Kunstkurs Blaue Stunde",
-              "detail": "Creaviva im Zentrum Paul Klee, Bern",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kunstkurs-blaue-stunde-2/"
+              "label": "Kleider-Basar",
+              "detail": "Habkern",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kleider-basar/"
+            },
+            {
+              "label": "BreastLove - Know Your Boobs @ Langenthal",
+              "detail": "Langenthal",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/breastlove-know-your-boobs-langenthal/"
+            },
+            {
+              "label": "Presentation: Learning Calmly and Efficiently with Children",
+              "detail": "Unterseen",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/conferenza-imparare-con-i-bambini-in-modo-sereno-ed-efficiente/"
+            },
+            {
+              "label": "Quartetto Belena Concert",
+              "detail": "Zentrum Artos, Interlaken",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/interlaken/konzert-quartetto-belena_AmiYMk3"
+            },
+            {
+              "label": "StandUp Comedy: Simon Stäblein - Absolute Frechheit",
+              "detail": "Eventfabrik Bern, Bern",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/standup-comedy-simon-staeblein-absolute-frechheit/"
+            },
+            {
+              "label": "Steiner & Madlaina",
+              "detail": "Mühle Hunziken, Rubigen",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/steiner-und-madlaina_AaVXr8G"
+            },
+            {
+              "label": "Theatergruppe Staubbach 2026",
+              "detail": "Ringgenberg, Ringgenberg (BE)",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/theatergruppe-staubbach-2026/"
             },
             {
               "label": "SOPHIE ALLOWAY QUARTET",
-              "detail": "Marians Jazzroom",
-              "date": "2026-10-27",
+              "detail": "Marians Jazzroom — ongoing, last day: 31 October 2026",
+              "date": "2026-10-28",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/sophie-alloway-quartet_AZdbi75"
-            },
-            {
-              "label": "Caroline Bungeroth & Gäste",
-              "detail": "Kleintheater Alte Oele, Thun",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/thun/caroline-bungeroth-und-gaeste_ALBsRFY"
-            },
-            {
-              "label": "Prinz Pi Abschiedstour 2026",
-              "detail": "Bierhübeli",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/populaer/bern/prinz-pi-abschiedstour-2026_Au8wrhe"
-            },
-            {
-              "label": "Tito & Tarantula - Best of Tour 2026",
-              "detail": "Mühle Hunziken, Rubigen",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/tito-und-tarantula-best-of-tour-2026_AR4ACjK"
-            },
-            {
-              "label": "4th Mixed Doubles Curling Tournament",
-              "detail": "Sportzentrum Curlinghalle, Saanen — ongoing, last day: 29 October 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/4-mixed-doubles-curlingturnier/"
-            },
-            {
-              "label": "Swiss Natural Horn Days",
-              "detail": "Beatenberg — ongoing, last day: 29 October 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/giornate-svizzere-del-corno-naturale/"
-            },
-            {
-              "label": "Selbstplanerkurs PV-Anlage e-wende",
-              "detail": "Bern — ongoing, last day: 5 November 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/selbstplanerkurs-pv-anlage-e-wende-2/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/bern/",
-          "updatedAt": "2026-10-27T12:41:15.477Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         }
       ],
       "curatedArticles": [
@@ -258,7 +258,7 @@
           "url": "/en/events/bern/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-27T17:42:56.215Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "de": {
       "canton": "BE",
@@ -279,69 +279,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Avo Darts Battle",
-              "detail": "Grindelwald",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/avo-darts-battle/"
+              "label": "CréAgoûter sauvage d’automne en duo parent-enfant",
+              "detail": "La Neuveville",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/creagouter-sauvage-dautomne-en-duo-parent-enfant/"
             },
             {
-              "label": "Vernissage der Ausstellung «Flüsse des Lebens»",
-              "detail": "Bern",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vernissage-der-ausstellung-fluesse-des-lebens/"
+              "label": "Herbstliches „CréAgoûter“ im Eltern-Kind-Duo",
+              "detail": "Les ateliers secrets de la sorcière, La Neuveville",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliches-creagouter-im-eltern-kind-duo/"
             },
             {
-              "label": "Kunstkurs Blaue Stunde",
-              "detail": "Creaviva im Zentrum Paul Klee, Bern",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kunstkurs-blaue-stunde-2/"
+              "label": "Kleider-Basar",
+              "detail": "Habkern",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kleider-basar/"
+            },
+            {
+              "label": "BreastLove - Know Your Boobs @ Langenthal",
+              "detail": "Langenthal",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/breastlove-know-your-boobs-langenthal/"
+            },
+            {
+              "label": "Vortrag: Mit Kindern gelassen und effizient lernen",
+              "detail": "Unterseen",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/conferenza-imparare-con-i-bambini-in-modo-sereno-ed-efficiente/"
+            },
+            {
+              "label": "Konzert Quartetto Belena",
+              "detail": "Zentrum Artos, Interlaken",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/interlaken/konzert-quartetto-belena_AmiYMk3"
+            },
+            {
+              "label": "StandUp Comedy: Simon Stäblein - Absolute Frechheit",
+              "detail": "Eventfabrik Bern, Bern",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/standup-comedy-simon-staeblein-absolute-frechheit/"
+            },
+            {
+              "label": "Steiner & Madlaina",
+              "detail": "Mühle Hunziken, Rubigen",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/steiner-und-madlaina_AaVXr8G"
+            },
+            {
+              "label": "Theatergruppe Staubbach 2026",
+              "detail": "Ringgenberg, Ringgenberg (BE)",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/theatergruppe-staubbach-2026/"
             },
             {
               "label": "SOPHIE ALLOWAY QUARTET",
-              "detail": "Marians Jazzroom",
-              "date": "2026-10-27",
+              "detail": "Marians Jazzroom — läuft, letzter Tag: 31. Oktober 2026",
+              "date": "2026-10-28",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/sophie-alloway-quartet_AZdbi75"
-            },
-            {
-              "label": "Caroline Bungeroth & Gäste",
-              "detail": "Kleintheater Alte Oele, Thun",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/thun/caroline-bungeroth-und-gaeste_ALBsRFY"
-            },
-            {
-              "label": "Prinz Pi Abschiedstour 2026",
-              "detail": "Bierhübeli",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/populaer/bern/prinz-pi-abschiedstour-2026_Au8wrhe"
-            },
-            {
-              "label": "Tito & Tarantula - Best of Tour 2026",
-              "detail": "Mühle Hunziken, Rubigen",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/tito-und-tarantula-best-of-tour-2026_AR4ACjK"
-            },
-            {
-              "label": "4. Mixed Doubles Curlingturnier",
-              "detail": "Sportzentrum Curlinghalle, Saanen — läuft, letzter Tag: 29. Oktober 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/4-mixed-doubles-curlingturnier/"
-            },
-            {
-              "label": "Schweizer Naturhorntage",
-              "detail": "Beatenberg — läuft, letzter Tag: 29. Oktober 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/giornate-svizzere-del-corno-naturale/"
-            },
-            {
-              "label": "Selbstplanerkurs PV-Anlage e-wende",
-              "detail": "Bern — läuft, letzter Tag: 5. November 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/selbstplanerkurs-pv-anlage-e-wende-2/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/bern/",
-          "updatedAt": "2026-10-27T12:41:15.477Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         }
       ],
       "curatedArticles": [
@@ -381,7 +381,7 @@
           "url": "/de/veranstaltungen/bern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-27T17:42:56.215Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "fr": {
       "canton": "BE",
@@ -402,69 +402,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Avo Darts Battle",
-              "detail": "Grindelwald",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/avo-darts-battle/"
+              "label": "CréAgoûter sauvage d’automne en duo parent-enfant",
+              "detail": "La Neuveville",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/creagouter-sauvage-dautomne-en-duo-parent-enfant/"
             },
             {
-              "label": "Vernissage der Ausstellung «Flüsse des Lebens»",
-              "detail": "Bern",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vernissage-der-ausstellung-fluesse-des-lebens/"
+              "label": "CréAgoûter sauvage d’automne en duo parent-enfant",
+              "detail": "Les ateliers secrets de la sorcière, La Neuveville",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliches-creagouter-im-eltern-kind-duo/"
             },
             {
-              "label": "Kunstkurs Blaue Stunde",
-              "detail": "Creaviva im Zentrum Paul Klee, Bern",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kunstkurs-blaue-stunde-2/"
+              "label": "Kleider-Basar",
+              "detail": "Habkern",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kleider-basar/"
+            },
+            {
+              "label": "BreastLove - Know Your Boobs @ Langenthal",
+              "detail": "Langenthal",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/breastlove-know-your-boobs-langenthal/"
+            },
+            {
+              "label": "Conférence : Apprendre sereinement et efficacement avec les enfants",
+              "detail": "Unterseen",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/conferenza-imparare-con-i-bambini-in-modo-sereno-ed-efficiente/"
+            },
+            {
+              "label": "Concert du Quartetto Belena",
+              "detail": "Zentrum Artos, Interlaken",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/interlaken/konzert-quartetto-belena_AmiYMk3"
+            },
+            {
+              "label": "StandUp Comedy: Simon Stäblein - Absolute Frechheit",
+              "detail": "Eventfabrik Bern, Bern",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/standup-comedy-simon-staeblein-absolute-frechheit/"
+            },
+            {
+              "label": "Steiner & Madlaina",
+              "detail": "Mühle Hunziken, Rubigen",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/steiner-und-madlaina_AaVXr8G"
+            },
+            {
+              "label": "Theatergruppe Staubbach 2026",
+              "detail": "Ringgenberg, Ringgenberg (BE)",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/theatergruppe-staubbach-2026/"
             },
             {
               "label": "SOPHIE ALLOWAY QUARTET",
-              "detail": "Marians Jazzroom",
-              "date": "2026-10-27",
+              "detail": "Marians Jazzroom — en cours, dernier jour : 31 octobre 2026",
+              "date": "2026-10-28",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/sophie-alloway-quartet_AZdbi75"
-            },
-            {
-              "label": "Caroline Bungeroth & Gäste",
-              "detail": "Kleintheater Alte Oele, Thun",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/thun/caroline-bungeroth-und-gaeste_ALBsRFY"
-            },
-            {
-              "label": "Prinz Pi Abschiedstour 2026",
-              "detail": "Bierhübeli",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/populaer/bern/prinz-pi-abschiedstour-2026_Au8wrhe"
-            },
-            {
-              "label": "Tito & Tarantula - Best of Tour 2026",
-              "detail": "Mühle Hunziken, Rubigen",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/tito-und-tarantula-best-of-tour-2026_AR4ACjK"
-            },
-            {
-              "label": "4e Tournoi de curling en double mixte",
-              "detail": "Sportzentrum Curlinghalle, Saanen — en cours, dernier jour : 29 octobre 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/4-mixed-doubles-curlingturnier/"
-            },
-            {
-              "label": "Journées suisses du cor naturel",
-              "detail": "Beatenberg — en cours, dernier jour : 29 octobre 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/giornate-svizzere-del-corno-naturale/"
-            },
-            {
-              "label": "Selbstplanerkurs PV-Anlage e-wende",
-              "detail": "Bern — en cours, dernier jour : 5 novembre 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/selbstplanerkurs-pv-anlage-e-wende-2/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/berne/",
-          "updatedAt": "2026-10-27T12:41:15.477Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         }
       ],
       "curatedArticles": [
@@ -504,7 +504,7 @@
           "url": "/fr/evenements/berne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-27T17:42:56.215Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     }
   }
 }

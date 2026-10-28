@@ -4,17 +4,17 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-27T17:42:56.215Z",
-  "contentHash": "c94110706fb006c8421348a003195ee8b0d78a869b2f039db71c1bf3d388dfa5",
+  "updatedAt": "2026-10-28T01:14:28.455Z",
+  "contentHash": "6d5ea820f83a08b58132b629ada007726c2fdda81e2ccd3e99c9bc2a9cda88a7",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-27T09:24:17.388Z",
+      "updatedAt": "2026-10-27T20:19:05.756Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-27T11:01:59.897Z",
+      "updatedAt": "2026-10-27T21:31:39.250Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "19",
+          "value": "21",
           "note": "segnalazioni aggiornate: 27 ottobre 2026"
         },
         {
@@ -92,7 +92,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-27T09:24:17.388Z"
+          "updatedAt": "2026-10-27T20:19:05.756Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -130,7 +130,7 @@
               "url": "https://www.fr.ch/de/sjsd/pol/news/fahrzeug-nach-geisterfahrt-auf-der-a1-bei-domdidier-gestoppt"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -194,7 +194,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-27T17:42:56.215Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "en": {
       "canton": "FR",
@@ -204,7 +204,7 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "19",
+          "value": "21",
           "note": "reports as of 27 October 2026"
         },
         {
@@ -269,7 +269,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-27T09:24:17.388Z"
+          "updatedAt": "2026-10-27T20:19:05.756Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -307,7 +307,7 @@
               "url": "https://www.fr.ch/de/sjsd/pol/news/fahrzeug-nach-geisterfahrt-auf-der-a1-bei-domdidier-gestoppt"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -371,7 +371,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-27T17:42:56.215Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "de": {
       "canton": "FR",
@@ -381,7 +381,7 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "19",
+          "value": "21",
           "note": "Meldungen vom 27. Oktober 2026"
         },
         {
@@ -446,7 +446,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-27T09:24:17.388Z"
+          "updatedAt": "2026-10-27T20:19:05.756Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -484,7 +484,7 @@
               "url": "https://www.fr.ch/de/sjsd/pol/news/fahrzeug-nach-geisterfahrt-auf-der-a1-bei-domdidier-gestoppt"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -548,7 +548,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-27T17:42:56.215Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "fr": {
       "canton": "FR",
@@ -558,7 +558,7 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "19",
+          "value": "21",
           "note": "signalements au 27 octobre 2026"
         },
         {
@@ -623,7 +623,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-27T09:24:17.388Z"
+          "updatedAt": "2026-10-27T20:19:05.756Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -661,7 +661,7 @@
               "url": "https://www.fr.ch/de/sjsd/pol/news/fahrzeug-nach-geisterfahrt-auf-der-a1-bei-domdidier-gestoppt"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -725,7 +725,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-27T17:42:56.215Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     }
   }
 }

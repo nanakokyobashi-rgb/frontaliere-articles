@@ -4,12 +4,12 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "eventi",
-  "updatedAt": "2026-10-27T17:42:56.215Z",
-  "contentHash": "53b0ee83695b547472788edc147aab3255285f5d64626e6d16732d26d18d95ca",
+  "updatedAt": "2026-10-28T01:14:28.455Z",
+  "contentHash": "1f22753894a1694a53a7b058c404dc7c1532bc1fe0bbb19f31021921f4ff779c",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-27T12:41:15.477Z",
+      "updatedAt": "2026-10-27T19:25:52.214Z",
       "keyFacts": 1
     }
   ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Café littéraire",
-              "detail": "Médiathèque Valais, Saint-Maurice",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/cafe-litteraire-5/"
+              "label": "Guihome",
+              "detail": "Conthey",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/guihome-1/"
+            },
+            {
+              "label": "ET N’OUBLIEZ PAS LA PIÈCE !",
+              "detail": "Savièse",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/et-noubliez-pas-la-piece/"
+            },
+            {
+              "label": "L'expérience théâtrale",
+              "detail": "Théâtre du Martolet, Saint-Maurice",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/lexperience-theatrale/"
             },
             {
               "label": "Workshop: Chocolat Matterhorn Praline",
               "detail": "Zermatt — in corso, ultimo giorno: 30 ottobre 2026",
-              "date": "2026-10-27",
+              "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-chocolat-matterhorn-praline/"
             },
             {
               "label": "Es ist dies beinahe Unsichtbare",
               "detail": "Visp — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-10-27",
+              "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/es-ist-dies-beinahe-unsichtbare/"
             },
             {
               "label": "Theater: Aufführungen in Bellwald",
               "detail": "Mehrzweckhalle Bellwald, Bellwald — in corso, ultimo giorno: 8 novembre 2026",
-              "date": "2026-10-27",
+              "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
             },
             {
               "label": "Adelia Clavien & Stéphanie Pothier, “Sens”",
               "detail": "Riddes — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-27",
+              "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/adelia-clavien-stephanie-pothier-sens/"
             },
             {
               "label": "Geek – Mostra sulle console di gioco",
               "detail": "Galerie St. Laurent, Leukerbad — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-27",
+              "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/geekspielkonsolen-ausstellung/"
             },
             {
               "label": "Oeno events",
               "detail": "Vercorin, Chalais — in corso, ultimo giorno: 30 ottobre 2026",
-              "date": "2026-10-27",
+              "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeno-events/"
             },
             {
               "label": "Clowns & Acrobates",
               "detail": "Espace Culturel El Encuentro, Sion — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-27",
+              "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/clowns-akrobaten/"
-            },
-            {
-              "label": "Mostra di Mathieu Bonvin",
-              "detail": "Sierre — in corso, ultimo giorno: 29 ottobre 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-di-mathieu-bonvin/"
-            },
-            {
-              "label": "Vinyard hikes in autumn",
-              "detail": "Inden — in corso, ultimo giorno: 29 ottobre 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vinyard-hikes-in-autumn/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vallese/",
-          "updatedAt": "2026-10-27T12:41:15.477Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/vallese/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-27T17:42:56.215Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "en": {
       "canton": "VS",
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Café littéraire",
-              "detail": "Médiathèque Valais, Saint-Maurice",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/cafe-litteraire-5/"
+              "label": "Guihome",
+              "detail": "Conthey",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/guihome-1/"
+            },
+            {
+              "label": "ET N’OUBLIEZ PAS LA PIÈCE !",
+              "detail": "Savièse",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/et-noubliez-pas-la-piece/"
+            },
+            {
+              "label": "L'expérience théâtrale",
+              "detail": "Théâtre du Martolet, Saint-Maurice",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/lexperience-theatrale/"
             },
             {
               "label": "Workshop: Chocolat Matterhorn Praline",
               "detail": "Zermatt — ongoing, last day: 30 October 2026",
-              "date": "2026-10-27",
+              "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-chocolat-matterhorn-praline/"
             },
             {
               "label": "It is these days that are unavailable",
               "detail": "Visp — ongoing, last day: 1 November 2026",
-              "date": "2026-10-27",
+              "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/es-ist-dies-beinahe-unsichtbare/"
             },
             {
               "label": "Theater: Aufführungen in Bellwald",
               "detail": "Mehrzweckhalle Bellwald, Bellwald — ongoing, last day: 8 November 2026",
-              "date": "2026-10-27",
+              "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
             },
             {
               "label": "Adelia Clavien & Stéphanie Pothier, “Sens”",
               "detail": "Riddes — ongoing, last day: 31 October 2026",
-              "date": "2026-10-27",
+              "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/adelia-clavien-stephanie-pothier-sens/"
             },
             {
               "label": "Geek—Video Game Consoles Exhibition",
               "detail": "Galerie St. Laurent, Leukerbad — ongoing, last day: 31 October 2026",
-              "date": "2026-10-27",
+              "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/geekspielkonsolen-ausstellung/"
             },
             {
               "label": "Oeno events",
               "detail": "Vercorin, Chalais — ongoing, last day: 30 October 2026",
-              "date": "2026-10-27",
+              "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeno-events/"
             },
             {
               "label": "Clowns & Acrobates",
               "detail": "Espace Culturel El Encuentro, Sion — ongoing, last day: 31 October 2026",
-              "date": "2026-10-27",
+              "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/clowns-akrobaten/"
-            },
-            {
-              "label": "Exhibition by Mathieu Bonvin",
-              "detail": "Sierre — ongoing, last day: 29 October 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-di-mathieu-bonvin/"
-            },
-            {
-              "label": "Vinyard hikes in autumn",
-              "detail": "Inden — ongoing, last day: 29 October 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vinyard-hikes-in-autumn/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/valais/",
-          "updatedAt": "2026-10-27T12:41:15.477Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/valais/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-27T17:42:56.215Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "de": {
       "canton": "VS",
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Café littéraire",
-              "detail": "Médiathèque Valais, Saint-Maurice",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/cafe-litteraire-5/"
+              "label": "Guihome",
+              "detail": "Conthey",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/guihome-1/"
+            },
+            {
+              "label": "ET N’OUBLIEZ PAS LA PIÈCE !",
+              "detail": "Savièse",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/et-noubliez-pas-la-piece/"
+            },
+            {
+              "label": "L'expérience théâtrale",
+              "detail": "Théâtre du Martolet, Saint-Maurice",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/lexperience-theatrale/"
             },
             {
               "label": "Workshop: Chocolat Matterhörnli® Praline",
               "detail": "Zermatt — läuft, letzter Tag: 30. Oktober 2026",
-              "date": "2026-10-27",
+              "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-chocolat-matterhorn-praline/"
             },
             {
               "label": "Es ist die beinahe Unsichtbare",
               "detail": "Visp — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-10-27",
+              "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/es-ist-dies-beinahe-unsichtbare/"
             },
             {
               "label": "Theater: Aufführungen in Bellwald",
               "detail": "Mehrzweckhalle Bellwald, Bellwald — läuft, letzter Tag: 8. November 2026",
-              "date": "2026-10-27",
+              "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
             },
             {
               "label": "Adelia Clavien & Stéphanie Pothier „Sens“",
               "detail": "Riddes — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-27",
+              "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/adelia-clavien-stephanie-pothier-sens/"
             },
             {
               "label": "Geek – Spielkonsolen Ausstellung",
               "detail": "Galerie St. Laurent, Leukerbad — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-27",
+              "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/geekspielkonsolen-ausstellung/"
             },
             {
               "label": "Veranstaltungen von Oeno",
               "detail": "Vercorin, Chalais — läuft, letzter Tag: 30. Oktober 2026",
-              "date": "2026-10-27",
+              "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeno-events/"
             },
             {
               "label": "Clowns & Akrobaten",
               "detail": "Espace Culturel El Encuentro, Sion — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-27",
+              "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/clowns-akrobaten/"
-            },
-            {
-              "label": "Ausstellung von Mathieu Bonvin",
-              "detail": "Sierre — läuft, letzter Tag: 29. Oktober 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-di-mathieu-bonvin/"
-            },
-            {
-              "label": "Rebwanderungen im Herbst",
-              "detail": "Inden — läuft, letzter Tag: 29. Oktober 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vinyard-hikes-in-autumn/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/wallis/",
-          "updatedAt": "2026-10-27T12:41:15.477Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/wallis/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-27T17:42:56.215Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "fr": {
       "canton": "VS",
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Café littéraire",
-              "detail": "Médiathèque Valais, Saint-Maurice",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/cafe-litteraire-5/"
+              "label": "Guihome",
+              "detail": "Conthey",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/guihome-1/"
+            },
+            {
+              "label": "ET N’OUBLIEZ PAS LA PIÈCE !",
+              "detail": "Savièse",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/et-noubliez-pas-la-piece/"
+            },
+            {
+              "label": "L'expérience théâtrale",
+              "detail": "Théâtre du Martolet, Saint-Maurice",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/lexperience-theatrale/"
             },
             {
               "label": "Atelier : Praline Chocolat Matterhorn",
               "detail": "Zermatt — en cours, dernier jour : 30 octobre 2026",
-              "date": "2026-10-27",
+              "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-chocolat-matterhorn-praline/"
             },
             {
               "label": "Es is dies beinahe Unsichtbare",
               "detail": "Visp — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-10-27",
+              "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/es-ist-dies-beinahe-unsichtbare/"
             },
             {
               "label": "Théâtre : représentations à Bellwald",
               "detail": "Mehrzweckhalle Bellwald, Bellwald — en cours, dernier jour : 8 novembre 2026",
-              "date": "2026-10-27",
+              "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
             },
             {
               "label": "Adelia Clavien & Stéphanie Pothier « Sens »",
               "detail": "Riddes — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-27",
+              "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/adelia-clavien-stephanie-pothier-sens/"
             },
             {
               "label": "Exposition « Geek – Consoles de jeux »",
               "detail": "Galerie St. Laurent, Leukerbad — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-27",
+              "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/geekspielkonsolen-ausstellung/"
             },
             {
               "label": "Événements à l'Oeno",
               "detail": "Vercorin, Chalais — en cours, dernier jour : 30 octobre 2026",
-              "date": "2026-10-27",
+              "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeno-events/"
             },
             {
               "label": "Clowns & Acrobates",
               "detail": "Espace Culturel El Encuentro, Sion — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-27",
+              "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/clowns-akrobaten/"
-            },
-            {
-              "label": "Exposition de Mathieu Bonvin",
-              "detail": "Sierre — en cours, dernier jour : 29 octobre 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-di-mathieu-bonvin/"
-            },
-            {
-              "label": "Randonnés en automne",
-              "detail": "Inden — en cours, dernier jour : 29 octobre 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vinyard-hikes-in-autumn/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/valais/",
-          "updatedAt": "2026-10-27T12:41:15.477Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/valais/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-27T17:42:56.215Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     }
   }
 }

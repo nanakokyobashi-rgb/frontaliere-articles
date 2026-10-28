@@ -4,17 +4,17 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "eventi",
-  "updatedAt": "2026-10-27T17:42:56.215Z",
-  "contentHash": "4777f3a651232f3f5872650cd173c7b962775c490afbd699c95693cbc5278197",
+  "updatedAt": "2026-10-28T01:14:28.455Z",
+  "contentHash": "ce6858b5a8f42111e5a36b522d75f47cfb80babc4aeb51143c282c7c7ccde511",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-27T12:41:15.477Z",
+      "updatedAt": "2026-10-27T19:25:52.214Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-27T11:01:59.897Z",
+      "updatedAt": "2026-10-27T21:31:39.250Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "43",
+          "value": "44",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,24 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Philosophie im Löchlgaischt",
-              "detail": "Eschenz",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
-            },
-            {
-              "label": "Konzert der Regensburger Domspatzen | einKlang - Geistvolle Chormusik",
-              "detail": "Röm.-kath. Kirche St. Stefan, Kreuzlingen",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/kreuzlingen/konzert-der-regensburger-domspatzen_AmmCC2n"
-            },
-            {
-              "label": "Ziegentrekking",
-              "detail": "geissgada, Hohentannen — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
-            },
             {
               "label": "Häslitreff",
               "detail": "Evang.-ref. Kirchgemeindehaus, Weinfelden",
@@ -72,6 +54,18 @@
               "detail": "Weinfelden",
               "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/max-kueng/"
+            },
+            {
+              "label": "Philosophie im Löchlgaischt",
+              "detail": "Eschenz — in corso, ultimo giorno: 24 novembre 2026",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
+            },
+            {
+              "label": "Ziegentrekking",
+              "detail": "geissgada, Hohentannen — in corso, ultimo giorno: 31 ottobre 2026",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
             },
             {
               "label": "Metzgete auf dem Schiff in Ermatingen - Traditionell & maritim!",
@@ -96,11 +90,17 @@
               "detail": "Hefenhofen",
               "date": "2026-10-30",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/diamante-im-stroh/"
+            },
+            {
+              "label": "Halloween@the Brewery",
+              "detail": "Barfuss Brauerei, Bürglen (TG)",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloweenthe-brewery/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/turgovia/",
-          "updatedAt": "2026-10-27T12:41:15.477Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -123,7 +123,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -151,7 +151,7 @@
           "url": "/eventi/turgovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-27T17:42:56.215Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "en": {
       "canton": "TG",
@@ -161,7 +161,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "43",
+          "value": "44",
           "note": "from the site’s events calendar"
         }
       ],
@@ -171,24 +171,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Philosophie im Löchlgaischt",
-              "detail": "Eschenz",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
-            },
-            {
-              "label": "Konzert der Regensburger Domspatzen | einKlang - Geistvolle Chormusik",
-              "detail": "Röm.-kath. Kirche St. Stefan, Kreuzlingen",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/kreuzlingen/konzert-der-regensburger-domspatzen_AmmCC2n"
-            },
-            {
-              "label": "Ziegentrekking",
-              "detail": "geissgada, Hohentannen — ongoing, last day: 31 October 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
-            },
             {
               "label": "Häslitreff",
               "detail": "Evang.-ref. Kirchgemeindehaus, Weinfelden",
@@ -206,6 +188,18 @@
               "detail": "Weinfelden",
               "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/max-kueng/"
+            },
+            {
+              "label": "Philosophie im Löchlgaischt",
+              "detail": "Eschenz — ongoing, last day: 24 November 2026",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
+            },
+            {
+              "label": "Ziegentrekking",
+              "detail": "geissgada, Hohentannen — ongoing, last day: 31 October 2026",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
             },
             {
               "label": "Metzgete auf dem Schiff in Ermatingen - Traditionell & maritim!",
@@ -230,11 +224,17 @@
               "detail": "Hefenhofen",
               "date": "2026-10-30",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/diamante-im-stroh/"
+            },
+            {
+              "label": "Halloween@the Brewery",
+              "detail": "Barfuss Brauerei, Bürglen (TG)",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloweenthe-brewery/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/thurgau/",
-          "updatedAt": "2026-10-27T12:41:15.477Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -257,7 +257,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -285,7 +285,7 @@
           "url": "/en/events/thurgau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-27T17:42:56.215Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "de": {
       "canton": "TG",
@@ -295,7 +295,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "43",
+          "value": "44",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -305,24 +305,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Philosophie im Löchlgaischt",
-              "detail": "Eschenz",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
-            },
-            {
-              "label": "Konzert der Regensburger Domspatzen | einKlang - Geistvolle Chormusik",
-              "detail": "Röm.-kath. Kirche St. Stefan, Kreuzlingen",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/kreuzlingen/konzert-der-regensburger-domspatzen_AmmCC2n"
-            },
-            {
-              "label": "Ziegentrekking",
-              "detail": "geissgada, Hohentannen — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
-            },
             {
               "label": "Häslitreff",
               "detail": "Evang.-ref. Kirchgemeindehaus, Weinfelden",
@@ -340,6 +322,18 @@
               "detail": "Weinfelden",
               "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/max-kueng/"
+            },
+            {
+              "label": "Philosophie im Löchlgaischt",
+              "detail": "Eschenz — läuft, letzter Tag: 24. November 2026",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
+            },
+            {
+              "label": "Ziegentrekking",
+              "detail": "geissgada, Hohentannen — läuft, letzter Tag: 31. Oktober 2026",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
             },
             {
               "label": "Metzgete auf dem Schiff in Ermatingen - Traditionell & maritim!",
@@ -364,11 +358,17 @@
               "detail": "Hefenhofen",
               "date": "2026-10-30",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/diamante-im-stroh/"
+            },
+            {
+              "label": "Halloween@the Brewery",
+              "detail": "Barfuss Brauerei, Bürglen (TG)",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloweenthe-brewery/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/thurgau/",
-          "updatedAt": "2026-10-27T12:41:15.477Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -391,7 +391,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -419,7 +419,7 @@
           "url": "/de/veranstaltungen/thurgau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-27T17:42:56.215Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "fr": {
       "canton": "TG",
@@ -429,7 +429,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "43",
+          "value": "44",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -439,24 +439,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Philosophie im Löchlgaischt",
-              "detail": "Eschenz",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
-            },
-            {
-              "label": "Konzert der Regensburger Domspatzen | einKlang - Geistvolle Chormusik",
-              "detail": "Röm.-kath. Kirche St. Stefan, Kreuzlingen",
-              "date": "2026-10-27",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/kreuzlingen/konzert-der-regensburger-domspatzen_AmmCC2n"
-            },
-            {
-              "label": "Ziegentrekking",
-              "detail": "geissgada, Hohentannen — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-27",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
-            },
             {
               "label": "Häslitreff",
               "detail": "Evang.-ref. Kirchgemeindehaus, Weinfelden",
@@ -474,6 +456,18 @@
               "detail": "Weinfelden",
               "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/max-kueng/"
+            },
+            {
+              "label": "Philosophie im Löchlgaischt",
+              "detail": "Eschenz — en cours, dernier jour : 24 novembre 2026",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
+            },
+            {
+              "label": "Ziegentrekking",
+              "detail": "geissgada, Hohentannen — en cours, dernier jour : 31 octobre 2026",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
             },
             {
               "label": "Metzgete auf dem Schiff in Ermatingen - Traditionell & maritim!",
@@ -498,11 +492,17 @@
               "detail": "Hefenhofen",
               "date": "2026-10-30",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/diamante-im-stroh/"
+            },
+            {
+              "label": "Halloween@the Brewery",
+              "detail": "Barfuss Brauerei, Bürglen (TG)",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloweenthe-brewery/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/thurgovie/",
-          "updatedAt": "2026-10-27T12:41:15.477Z"
+          "updatedAt": "2026-10-27T19:25:52.214Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -525,7 +525,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -553,7 +553,7 @@
           "url": "/fr/evenements/thurgovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-27T17:42:56.215Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "servizi",
-  "updatedAt": "2026-10-27T19:21:58.604Z",
-  "contentHash": "c1c99a2ba291e22d6d82f3794c96b39a4615269f88f9d09de1ba8fff66832a3d",
+  "updatedAt": "2026-10-28T01:14:28.455Z",
+  "contentHash": "92ca8a421e22b7bffdc71bf8e6262eddb75041330e87ed4cdb4e0d1bbdea871b",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-27T12:05:05.276Z",
+      "updatedAt": "2026-10-27T21:55:01.729Z",
       "keyFacts": 0
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-27T14:44:58.685Z",
+      "updatedAt": "2026-10-27T20:54:13.381Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-27T11:01:59.897Z",
+      "updatedAt": "2026-10-27T21:31:39.250Z",
       "keyFacts": 0
     }
   ],
@@ -66,11 +66,6 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-26T23:00:00.000Z"
-            },
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
               "date": "2026-10-27T23:00:00.000Z"
             },
             {
@@ -92,11 +87,16 @@
               "label": "Pharmacie du Museum",
               "detail": "Genève, Genève",
               "date": "2026-10-31T07:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-10-31T23:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-27T12:05:05.276Z"
+          "updatedAt": "2026-10-27T21:55:01.729Z"
         },
         {
           "id": "meteo",
@@ -105,18 +105,33 @@
           "items": [
             {
               "label": "Genève",
-              "value": "17 °C",
-              "detail": "oggi da 8 a 17 °C"
+              "value": "10 °C",
+              "detail": "oggi da 8 a 14 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-27T14:44:58.685Z"
+          "updatedAt": "2026-10-27T20:54:13.381Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Formulaires pour les demandes de subsides 2027",
+              "date": "2026-10-27",
+              "url": "https://www.ge.ch/node/45339"
+            },
+            {
+              "label": "Promotion de la santé et prévention dans les structures d'accueil de la petite enfance",
+              "date": "2026-10-27",
+              "url": "https://www.ge.ch/node/15188"
+            },
+            {
+              "label": "Primes d'assurance-maladie 2027",
+              "date": "2026-10-27",
+              "url": "https://www.ge.ch/node/45340"
+            },
             {
               "label": "Une personne atteinte d’Ebola prise en charge aux HUG",
               "date": "2026-10-26",
@@ -131,24 +146,9 @@
               "label": "Centre de santé intercommunal : 1 000 déclarations de médecin traitant",
               "date": "2026-10-22",
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/centre-de-sante-intercommunal-1-000-declarations-de-medecin-traitant"
-            },
-            {
-              "label": "Prestations en cas d’incapacité passagère, totale ou partielle de travail (PCM)",
-              "date": "2026-10-21",
-              "url": "https://www.ge.ch/node/30769"
-            },
-            {
-              "label": "Décompte de caisse",
-              "date": "2026-10-20",
-              "url": "https://www.ge.ch/node/283"
-            },
-            {
-              "label": "Demande de subside 2027 - Formulaire 2 - Personnes imposées à la source",
-              "date": "2026-10-16",
-              "url": "https://www.ge.ch/node/45258"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -228,7 +228,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-27T19:21:58.604Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "en": {
       "canton": "GE",
@@ -267,11 +267,6 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-26T23:00:00.000Z"
-            },
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
               "date": "2026-10-27T23:00:00.000Z"
             },
             {
@@ -293,11 +288,16 @@
               "label": "Pharmacie du Museum",
               "detail": "Genève, Genève",
               "date": "2026-10-31T07:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-10-31T23:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-27T12:05:05.276Z"
+          "updatedAt": "2026-10-27T21:55:01.729Z"
         },
         {
           "id": "meteo",
@@ -306,18 +306,33 @@
           "items": [
             {
               "label": "Genève",
-              "value": "17 °C",
-              "detail": "today from 8 to 17 °C"
+              "value": "10 °C",
+              "detail": "today from 8 to 14 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-27T14:44:58.685Z"
+          "updatedAt": "2026-10-27T20:54:13.381Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Formulaires pour les demandes de subsides 2027",
+              "date": "2026-10-27",
+              "url": "https://www.ge.ch/node/45339"
+            },
+            {
+              "label": "Promotion de la santé et prévention dans les structures d'accueil de la petite enfance",
+              "date": "2026-10-27",
+              "url": "https://www.ge.ch/node/15188"
+            },
+            {
+              "label": "Primes d'assurance-maladie 2027",
+              "date": "2026-10-27",
+              "url": "https://www.ge.ch/node/45340"
+            },
             {
               "label": "Une personne atteinte d’Ebola prise en charge aux HUG",
               "date": "2026-10-26",
@@ -332,24 +347,9 @@
               "label": "Centre de santé intercommunal : 1 000 déclarations de médecin traitant",
               "date": "2026-10-22",
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/centre-de-sante-intercommunal-1-000-declarations-de-medecin-traitant"
-            },
-            {
-              "label": "Prestations en cas d’incapacité passagère, totale ou partielle de travail (PCM)",
-              "date": "2026-10-21",
-              "url": "https://www.ge.ch/node/30769"
-            },
-            {
-              "label": "Décompte de caisse",
-              "date": "2026-10-20",
-              "url": "https://www.ge.ch/node/283"
-            },
-            {
-              "label": "Demande de subside 2027 - Formulaire 2 - Personnes imposées à la source",
-              "date": "2026-10-16",
-              "url": "https://www.ge.ch/node/45258"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -424,7 +424,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-27T19:21:58.604Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "de": {
       "canton": "GE",
@@ -463,11 +463,6 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-26T23:00:00.000Z"
-            },
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
               "date": "2026-10-27T23:00:00.000Z"
             },
             {
@@ -489,11 +484,16 @@
               "label": "Pharmacie du Museum",
               "detail": "Genève, Genève",
               "date": "2026-10-31T07:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-10-31T23:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-27T12:05:05.276Z"
+          "updatedAt": "2026-10-27T21:55:01.729Z"
         },
         {
           "id": "meteo",
@@ -502,18 +502,33 @@
           "items": [
             {
               "label": "Genève",
-              "value": "17 °C",
-              "detail": "heute 8 bis 17 °C"
+              "value": "10 °C",
+              "detail": "heute 8 bis 14 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-27T14:44:58.685Z"
+          "updatedAt": "2026-10-27T20:54:13.381Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Formulaires pour les demandes de subsides 2027",
+              "date": "2026-10-27",
+              "url": "https://www.ge.ch/node/45339"
+            },
+            {
+              "label": "Promotion de la santé et prévention dans les structures d'accueil de la petite enfance",
+              "date": "2026-10-27",
+              "url": "https://www.ge.ch/node/15188"
+            },
+            {
+              "label": "Primes d'assurance-maladie 2027",
+              "date": "2026-10-27",
+              "url": "https://www.ge.ch/node/45340"
+            },
             {
               "label": "Une personne atteinte d’Ebola prise en charge aux HUG",
               "date": "2026-10-26",
@@ -528,24 +543,9 @@
               "label": "Centre de santé intercommunal : 1 000 déclarations de médecin traitant",
               "date": "2026-10-22",
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/centre-de-sante-intercommunal-1-000-declarations-de-medecin-traitant"
-            },
-            {
-              "label": "Prestations en cas d’incapacité passagère, totale ou partielle de travail (PCM)",
-              "date": "2026-10-21",
-              "url": "https://www.ge.ch/node/30769"
-            },
-            {
-              "label": "Décompte de caisse",
-              "date": "2026-10-20",
-              "url": "https://www.ge.ch/node/283"
-            },
-            {
-              "label": "Demande de subside 2027 - Formulaire 2 - Personnes imposées à la source",
-              "date": "2026-10-16",
-              "url": "https://www.ge.ch/node/45258"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -620,7 +620,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-27T19:21:58.604Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     },
     "fr": {
       "canton": "GE",
@@ -659,11 +659,6 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-26T23:00:00.000Z"
-            },
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
               "date": "2026-10-27T23:00:00.000Z"
             },
             {
@@ -685,11 +680,16 @@
               "label": "Pharmacie du Museum",
               "detail": "Genève, Genève",
               "date": "2026-10-31T07:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-10-31T23:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-27T12:05:05.276Z"
+          "updatedAt": "2026-10-27T21:55:01.729Z"
         },
         {
           "id": "meteo",
@@ -698,18 +698,33 @@
           "items": [
             {
               "label": "Genève",
-              "value": "17 °C",
-              "detail": "aujourd’hui de 8 à 17 °C"
+              "value": "10 °C",
+              "detail": "aujourd’hui de 8 à 14 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-27T14:44:58.685Z"
+          "updatedAt": "2026-10-27T20:54:13.381Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Formulaires pour les demandes de subsides 2027",
+              "date": "2026-10-27",
+              "url": "https://www.ge.ch/node/45339"
+            },
+            {
+              "label": "Promotion de la santé et prévention dans les structures d'accueil de la petite enfance",
+              "date": "2026-10-27",
+              "url": "https://www.ge.ch/node/15188"
+            },
+            {
+              "label": "Primes d'assurance-maladie 2027",
+              "date": "2026-10-27",
+              "url": "https://www.ge.ch/node/45340"
+            },
             {
               "label": "Une personne atteinte d’Ebola prise en charge aux HUG",
               "date": "2026-10-26",
@@ -724,24 +739,9 @@
               "label": "Centre de santé intercommunal : 1 000 déclarations de médecin traitant",
               "date": "2026-10-22",
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/centre-de-sante-intercommunal-1-000-declarations-de-medecin-traitant"
-            },
-            {
-              "label": "Prestations en cas d’incapacité passagère, totale ou partielle de travail (PCM)",
-              "date": "2026-10-21",
-              "url": "https://www.ge.ch/node/30769"
-            },
-            {
-              "label": "Décompte de caisse",
-              "date": "2026-10-20",
-              "url": "https://www.ge.ch/node/283"
-            },
-            {
-              "label": "Demande de subside 2027 - Formulaire 2 - Personnes imposées à la source",
-              "date": "2026-10-16",
-              "url": "https://www.ge.ch/node/45258"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -813,7 +813,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-27T19:21:58.604Z"
+      "updatedAt": "2026-10-28T01:14:28.455Z"
     }
   }
 }
