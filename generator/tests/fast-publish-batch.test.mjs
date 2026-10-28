@@ -79,6 +79,7 @@ test('il piano completo passa da artifact e la matrix porta solo il routing', ()
   assert.match(resolveStep, /fast-publish-article-plan\.json/u);
   assert.match(resolveStep, /append_matrix_target "\$\(printf '%s' "\$target_with_shard" \| jq -c 'del\(\.ids\)'\)"/u);
   assert.match(workflow, /name: Upload resolved article plan[\s\S]*fast-publish-article-plan-\$\{\{ github\.run_id \}\}/u);
+  assert.match(workflow, /name: Upload resolved article plan[\s\S]*overwrite: true/u);
   assert.match(workflow, /name: Download resolved article plan[\s\S]*fast-publish-article-plan-\$\{\{ github\.run_id \}\}/u);
   assert.match(workflow, /map\(select\(\.section == \$section\)\)[\s\S]*\.\[0\]\.ids/u);
   assert.doesNotMatch(workflow, /ARTICLE_IDS_JSON: \$\{\{ toJSON\(matrix\.target\.ids\) \}\}/u);

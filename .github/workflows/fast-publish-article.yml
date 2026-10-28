@@ -448,6 +448,7 @@ jobs:
           name: fast-publish-article-plan-${{ github.run_id }}
           path: ${{ runner.temp }}/fast-publish-article-plan.json
           if-no-files-found: error
+          overwrite: true
           retention-days: 1
 
       - name: Setup isolated article source runtime
