@@ -41,10 +41,7 @@ on:
       # pagine necessarie al bootstrap; il replay workflow_run, dopo il
       # completamento di publish-api, verifica feed RSS e landing sul live.
       - 'sections/registry.json'
-      # A declared image may arrive after the article body. The resolver maps
-      # this path through the registry to the owning canton article(s).
-      # A queued-cover drain is the explicit-outbox exception; its push is
-      # filtered by the shared commit marker before this workflow publishes.
+      # Declared images and queued-cover writes are filtered below.
       - 'public/images/**'
       - 'generator/scripts/lib/canton-hubs/paths.mjs'
       - 'generator/scripts/lib/corpus-paths.mjs'
@@ -79,6 +76,7 @@ on:
       - 'scripts/cf-purge-cache.mjs'
       - 'scripts/offload-generated-images-cdn.mjs'
       - 'scripts/lib/article-render-pipeline.mjs'
+      - 'scripts/lib/declared-image-fetch.mjs'
       - 'scripts/lib/cf-analytics.mjs'
       - 'scripts/lib/canton-hub-data.mjs'
       - 'scripts/lib/canton-hub-content.mjs'

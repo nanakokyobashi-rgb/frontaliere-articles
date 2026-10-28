@@ -3221,6 +3221,7 @@ test('piano R2: sezioni cantonali toccate da un commit, con gli id dei corpi cam
     'generator/scripts/lib/corpus-paths.mjs',
     'scripts/ci/fast-publish-section.mjs',
     'scripts/lib/article-render-pipeline.mjs',
+    'scripts/lib/declared-image-fetch.mjs',
     'scripts/lib/cf-analytics.mjs',
     'scripts/lib/canton-hub-data.mjs',
     'scripts/lib/cf-purge-variants.mjs',
@@ -3838,6 +3839,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
     'scripts/cf-purge-cache.mjs',
     'scripts/offload-generated-images-cdn.mjs',
     'scripts/lib/article-render-pipeline.mjs',
+    'scripts/lib/declared-image-fetch.mjs',
     'scripts/lib/cf-analytics.mjs',
     'scripts/lib/canton-hub-data.mjs',
     'scripts/lib/cf-purge-variants.mjs',
@@ -3862,6 +3864,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.ok(wf.includes("      - 'engine/**'\n"));
   assert.ok(wf.includes("      - 'host/**'\n"));
   assert.ok(read('.github/workflows/fast-publish-article.yml').includes("      - 'scripts/lib/article-render-pipeline.mjs'\n"));
+  assert.ok(read('.github/workflows/fast-publish-article.yml').includes("      - 'scripts/lib/declared-image-fetch.mjs'\n"));
   assert.ok(read('.github/workflows/fast-publish-article.yml').includes("      - 'scripts/offload-generated-images-cdn.mjs'\n"));
   for (const p of [
     'generator/scripts/lib/corpus-paths.mjs',

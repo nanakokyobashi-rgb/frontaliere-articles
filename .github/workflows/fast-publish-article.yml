@@ -105,6 +105,7 @@ on:
       - 'engine/**'
       - 'host/**'
       - 'scripts/lib/article-render-pipeline.mjs'
+      - 'scripts/lib/declared-image-fetch.mjs'
       - 'scripts/lib/cf-analytics.mjs'
       - 'scripts/lib/cf-purge-variants.mjs'
       - 'scripts/lib/cdn-asset-existence.mjs'
