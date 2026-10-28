@@ -578,18 +578,14 @@ jobs:
     timeout-minutes: 180
     strategy:
       fail-fast: false
-      # The resolver deliberately creates one matrix item per bounded batch.
-      # Keep the matrix itself as the queue: GitHub's concurrency group only
-      # retains one pending job, so using it alone would silently replace every
-      # batch between the running job and the one pending job. A single
-      # strategy slot preserves every batch and serializes all shard writes.
-      max-parallel: 1
+      # The resolver creates one complete matrix item per section/shard. The
+      # article IDs stay in the plan artifact, so no batch jobs need to queue
+      # or compete for the same shard concurrency group.
       matrix:
         target: ${{ fromJSON(needs.resolve.outputs.matrix) }}
     # Never cancel: a cancelled run can leave some locales pushed and others not.
-    # The matrix queue above serializes the bounded batches. Keep the
-    # per-shard group as a cross-run guard: a second workflow run must not
-    # write the same shard while this run is publishing it.
+    # Keep the per-shard group as a cross-run guard: a second workflow run must
+    # not write the same shard while this run is publishing it.
     concurrency:
       group: fast-publish-article-${{ matrix.target.shard }}
       cancel-in-progress: false

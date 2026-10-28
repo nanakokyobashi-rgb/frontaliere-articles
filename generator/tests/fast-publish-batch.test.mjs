@@ -84,13 +84,14 @@ test('il piano completo passa da artifact e la matrix porta solo il routing', ()
   assert.doesNotMatch(workflow, /ARTICLE_IDS_JSON: \$\{\{ toJSON\(matrix\.target\.ids\) \}\}/u);
 });
 
-test('la matrix resta una coda reale senza batch concorrenti per shard', () => {
+test('la matrix ha un solo job completo per sezione/shard', () => {
   assert.match(
     workflow,
-    /strategy:\s+fail-fast: false\s+#[^\n]*\n(?:\s+#.*\n)*\s+max-parallel: 1\s+matrix:[\s\S]*?target: \$\{\{ fromJSON\(needs\.resolve\.outputs\.matrix\) \}\}/u,
+    /strategy:\s+fail-fast: false\s+#[^\n]*\n(?:\s+#.*\n)*\s+matrix:[\s\S]*?target: \$\{\{ fromJSON\(needs\.resolve\.outputs\.matrix\) \}\}/u,
   );
   assert.match(workflow, /del\(\.ids\)/u);
   assert.doesNotMatch(workflow, /queue: max/u);
+  assert.doesNotMatch(workflow, /max-parallel:/u);
 });
 
 test('le superfici articolo oltre il body producono solo gli ID realmente cambiati', () => {
