@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "carburanti",
-  "updatedAt": "2026-10-27T08:47:04.172Z",
-  "contentHash": "c0cef43b75f4d92ac63070ec1d991b87d73e12b8506b3c740f628462b0ebe63f",
+  "updatedAt": "2026-10-28T11:40:30.046Z",
+  "contentHash": "19c181194098ef9a32dbb37cc6dd8b85740bdb7a9a1449ac31d61fb8a8748de9",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Arco giurassiano: mutazioni del lavoro frontaliero",
+          "url": "/articoli-giura/mutazioni-lavoro-frontaliero-jura/",
+          "excerpt": "La puntata 43718 di «Le sens de l'éco» mette a tema le mutazioni dell'impiego frontaliero nell'Arco giurassiano; il materiale fornito non riporta altri dettagli.",
+          "date": "2026-10-28T11:22:42.284Z"
+        },
+        {
           "title": "Prezzi abitativi svizzeri: +1,7% nel terzo trimestre",
           "url": "/articoli-giura/prezzi-abitativi-terzo-trimestre/",
           "excerpt": "L'OFS segnala in Svizzera un aumento dei prezzi residenziali: 1,7% sul trimestre e 4,4% su un anno, con case a 2,1% e appartamenti a 1,3%.",
@@ -94,12 +100,6 @@
           "url": "/articoli-giura/giura-aumento-sussidi-famiglie/",
           "excerpt": "Il massimale del supplemento passa da 300 a 330 CHF al mese per genitore per famiglie con RDU inferiore a 18'000 CHF, decorrenza 2027.",
           "date": "2026-10-24T18:24:32.255Z"
-        },
-        {
-          "title": "Ritardo cantiere Stockmar: rientro alunni a gennaio 2028",
-          "url": "/articoli-giura/stockmar-ritardo-cantiere-2027/",
-          "excerpt": "Il rientro degli alunni è previsto a gennaio 2028 Il cantiere accumula quattro mesi di ritardo I lavori saranno conclusi nel dicembre 2027 Il budget globale",
-          "date": "2026-10-22T00:17:44.643Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-27T08:47:04.172Z"
+      "updatedAt": "2026-10-28T11:40:30.046Z"
     },
     "en": {
       "canton": "JU",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Jura Arc: transformations in cross-border employment",
+          "url": "/en/jura-articles/jurassian-arc-cross-border-work/",
+          "excerpt": "Episode 43718 of «Le sens de l'éco» focuses on changes in cross-border employment in the Jura Arc; the material provided contains no other details.",
+          "date": "2026-10-28T11:22:42.284Z"
+        },
+        {
           "title": "Swiss housing prices: +1,7% in the third quarter",
           "url": "/en/jura-articles/swiss-housing-prices-third-quarter/",
           "excerpt": "The OFS reports an increase in residential property prices in Switzerland: 1.7% quarter-on-quarter and 4.4% year-on-year, with houses at 2.1% and apartments at 1.3%.",
@@ -193,12 +199,6 @@
           "url": "/en/jura-articles/jura-subsidy-increase-low-income/",
           "excerpt": "The maximum supplement increases from 300 to 330 CHF per month per parent for families with RDU below 18'000 CHF, effective 2027.",
           "date": "2026-10-24T18:24:32.255Z"
-        },
-        {
-          "title": "Stockmar site delay: return of students in January 2028",
-          "url": "/en/jura-articles/stockmar-construction-delay-2027/",
-          "excerpt": "Students are expected to return in January 2028 The construction site is four months late The works will be completed in December 2027 Global budget remains CHF",
-          "date": "2026-10-22T00:17:44.643Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-27T08:47:04.172Z"
+      "updatedAt": "2026-10-28T11:40:30.046Z"
     },
     "de": {
       "canton": "JU",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Jurabogen: Veränderungen der Grenzgängerbeschäftigung",
+          "url": "/de/jura-artikel/jurabogen-grenzgaenger-arbeit/",
+          "excerpt": "Die Folge 43718 von «Le sens de l'éco» thematisiert die Veränderungen der Grenzgängerbeschäftigung im Jurabogen; das bereitgestellte Material enthält keine weiteren Details.",
+          "date": "2026-10-28T11:22:42.284Z"
+        },
+        {
           "title": "Schweizer Wohnimmobilienpreise: +1,7% im dritten Quartal",
           "url": "/de/jura-artikel/schweizer-wohnungspreise-drittes-quartal/",
           "excerpt": "Das BFS meldet für die Schweiz einen Anstieg der Wohnimmobilienpreise: 1,7% gegenüber dem Vorquartal und 4,4% im Jahresvergleich, bei Einfamilienhäusern um 2,1% und bei Eigentumswohnungen um 1,3%.",
@@ -292,12 +298,6 @@
           "url": "/de/jura-artikel/jura-subvention-erhoehung-familien/",
           "excerpt": "Der Höchstbetrag des Zuschlags steigt für Familien mit einem RDU unter 18'000 CHF ab 2027 von 300 auf 330 CHF pro Monat und Elternteil.",
           "date": "2026-10-24T18:24:32.255Z"
-        },
-        {
-          "title": "Baustellenverzögerung Stockmar: Rückkehr der Schüler im Januar 2028",
-          "url": "/de/jura-artikel/stockmar-bauverzoegerung-2027/",
-          "excerpt": "Die Rückkehr der Schüler ist für Januar 2028 geplant Baustelle hat vier Monate Verspätung Die Arbeiten werden im Dezember 2027 abgeschlossen Das Gesamtbudget",
-          "date": "2026-10-22T00:17:44.643Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-27T08:47:04.172Z"
+      "updatedAt": "2026-10-28T11:40:30.046Z"
     },
     "fr": {
       "canton": "JU",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Arc jurassien : mutations du travail frontalier",
+          "url": "/fr/articles-jura/arc-jurassien-emploi-frontalier/",
+          "excerpt": "L'épisode 43718 de «Le sens de l'éco» porte sur les mutations de l'emploi frontalier dans l'Arc jurassien ; le matériel fourni ne rapporte pas d'autres détails.",
+          "date": "2026-10-28T11:22:42.284Z"
+        },
+        {
           "title": "Prix des logements suisses : +1,7 % au troisième trimestre",
           "url": "/fr/articles-jura/prix-logement-suisse-troisieme-trimestre/",
           "excerpt": "L'OFS signale en Suisse une hausse des prix résidentiels : 1,7 % sur le trimestre et 4,4 % sur un an, avec les maisons à 2,1 % et les appartements à 1,3 %.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-jura/jura-augmentation-subventions-familles/",
           "excerpt": "Le plafond du supplément passe de 300 à 330 CHF par mois et par parent pour les familles dont le RDU est inférieur à 18'000 CHF, à compter de 2027.",
           "date": "2026-10-24T18:24:32.255Z"
-        },
-        {
-          "title": "Retard chantier Stockmar : rentrée des élèves en janvier 2028",
-          "url": "/fr/articles-jura/stockmar-retard-chantier-2027/",
-          "excerpt": "Le retour des élèves est prévu en janvier 2028 Le chantier accumule quatre mois de retard Les travaux seront achevés en décembre 2027 Le budget global reste",
-          "date": "2026-10-22T00:17:44.643Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-27T08:47:04.172Z"
+      "updatedAt": "2026-10-28T11:40:30.046Z"
     }
   }
 }
