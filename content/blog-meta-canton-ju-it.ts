@@ -30,6 +30,9 @@ const blogMetaCantonJuIt: Record<string, string> = {
     'blog.article.prezzi-abitativi-terzo-trimestre.title': 'Prezzi abitativi svizzeri: +1,7% nel terzo trimestre',
     'blog.article.prezzi-abitativi-terzo-trimestre.excerpt': 'L\'OFS segnala in Svizzera un aumento dei prezzi residenziali: 1,7% sul trimestre e 4,4% su un anno, con case a 2,1% e appartamenti a 1,3%.',
     'blog.article.prezzi-abitativi-terzo-trimestre.imageAlt': 'Edifici residenziali svizzeri in una strada del Canton Giura',
+    'blog.article.mutazioni-lavoro-frontaliero-jura.title': 'Arco giurassiano: mutazioni del lavoro frontaliero',
+    'blog.article.mutazioni-lavoro-frontaliero-jura.excerpt': 'La puntata 43718 di «Le sens de l\'éco» mette a tema le mutazioni dell\'impiego frontaliero nell\'Arco giurassiano; il materiale fornito non riporta altri dettagli.',
+    'blog.article.mutazioni-lavoro-frontaliero-jura.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonJuIt;

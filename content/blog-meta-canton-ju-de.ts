@@ -30,6 +30,9 @@ const blogMetaCantonJuDe: Record<string, string> = {
     'blog.article.prezzi-abitativi-terzo-trimestre.title': 'Schweizer Wohnimmobilienpreise: +1,7% im dritten Quartal',
     'blog.article.prezzi-abitativi-terzo-trimestre.excerpt': 'Das BFS meldet für die Schweiz einen Anstieg der Wohnimmobilienpreise: 1,7% gegenüber dem Vorquartal und 4,4% im Jahresvergleich, bei Einfamilienhäusern um 2,1% und bei Eigentumswohnungen um 1,3%.',
     'blog.article.prezzi-abitativi-terzo-trimestre.imageAlt': 'Wohnhäuser an einer ruhigen Strasse im Schweizer Kanton Jura',
+    'blog.article.mutazioni-lavoro-frontaliero-jura.title': 'Jurabogen: Veränderungen der Grenzgängerbeschäftigung',
+    'blog.article.mutazioni-lavoro-frontaliero-jura.excerpt': 'Die Folge 43718 von «Le sens de l\'éco» thematisiert die Veränderungen der Grenzgängerbeschäftigung im Jurabogen; das bereitgestellte Material enthält keine weiteren Details.',
+    'blog.article.mutazioni-lavoro-frontaliero-jura.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonJuDe;

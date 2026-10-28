@@ -105,4 +105,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'mutazioni-lavoro-frontaliero-jura',
+ category: 'novita',
+ date: '2026-10-28T11:22:42.284Z',
+ image: '/images/blog/article-mutazioni-lavoro-frontaliero-jura.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['JU'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

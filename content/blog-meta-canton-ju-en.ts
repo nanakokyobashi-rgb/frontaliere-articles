@@ -30,6 +30,9 @@ const blogMetaCantonJuEn: Record<string, string> = {
     'blog.article.prezzi-abitativi-terzo-trimestre.title': 'Swiss housing prices: +1,7% in the third quarter',
     'blog.article.prezzi-abitativi-terzo-trimestre.excerpt': 'The OFS reports an increase in residential property prices in Switzerland: 1.7% quarter-on-quarter and 4.4% year-on-year, with houses at 2.1% and apartments at 1.3%.',
     'blog.article.prezzi-abitativi-terzo-trimestre.imageAlt': 'Swiss residential buildings on a quiet street in the Canton of Jura',
+    'blog.article.mutazioni-lavoro-frontaliero-jura.title': 'Jura Arc: transformations in cross-border employment',
+    'blog.article.mutazioni-lavoro-frontaliero-jura.excerpt': 'Episode 43718 of «Le sens de l\'éco» focuses on changes in cross-border employment in the Jura Arc; the material provided contains no other details.',
+    'blog.article.mutazioni-lavoro-frontaliero-jura.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonJuEn;
