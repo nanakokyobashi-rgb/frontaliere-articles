@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/fxagmnhpiaxh": {
-    "articleId": "rapporto-schengen-dublino-2026",
-    "ts": "2026-09-21T00:24:46.226Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/wmt65fflcyzy": {
     "articleId": "consiglio-federale-modifica-isos",
     "ts": "2026-09-21T00:34:16.256Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4194828": {
     "articleId": "sei-misure-cure-sanitarie",
     "ts": "2026-10-28T02:51:01.235Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/6eq-cbh2kkcn": {
+    "articleId": "tavola-rotonda-sei-misure",
+    "ts": "2026-10-28T09:49:01.638Z",
     "keyForm": 2
   }
 }
