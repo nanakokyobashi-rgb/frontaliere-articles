@@ -25,32 +25,21 @@
       "articleId": "sanitari-italiani-fuga-svizzera",
       "title": "Operatori sanitari frontalieri: Como boccheggia",
       "fallbackImage": "/images/blog/article-confusione-tassa-salute-frontalieri.webp",
-      "reason": "All image providers failed for article-sanitari-italiani-fuga-svizzera: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to cross-border train commuting, but it includes a recognizable foreground person v",
-      "status": "queued",
-      "failureCount": 6,
+      "reason": "All image providers failed for article-sanitari-italiani-fuga-svizzera: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to cross-border healthcare commuting, but it includes a recognizable foreground per",
+      "status": "failed",
+      "failureCount": 7,
       "requestedAt": "2026-10-23T15:23:52.650Z",
-      "lastFailureAt": "2026-10-28T09:10:19.144Z"
+      "lastFailureAt": "2026-10-28T19:12:57.783Z"
     },
     {
       "articleId": "cisl-ricerca-lavoratori-ritiene",
       "title": "55,6% lavoratori frontalieri ritiene stipendio inferiore a residente svizzero",
       "fallbackImage": "/images/blog/article-ricerca-cisl-frontalieri-2026.webp",
-      "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (vision gate rejected image: Generic synthetic commuter scene relevant to Ticino/transfrontier commuting, but a recognizable foreground person is visible f",
-      "status": "queued",
-      "failureCount": 6,
+      "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (vision gate rejected image: Generic synthetic editorial illustration with no text, logos, or visible face, but it contains a recognizable foreground commu",
+      "status": "failed",
+      "failureCount": 7,
       "requestedAt": "2026-10-24T19:06:53.846Z",
-      "lastFailureAt": "2026-10-28T09:11:18.115Z"
-    },
-    {
-      "articleId": "malnate-ristorni-500-mila-meno",
-      "title": "Malnate: ristorni frontalieri in meno di quasi 500 mila euro",
-      "fallbackImage": "/images/blog/article-frontalieri-vendemmia-tasse-ristorni-settembre.webp",
-      "reason": "All image providers failed for article-malnate-ristorni-500-mila-meno: openai-codex (vision gate rejected image: Generic synthetic border-crossing scene relevant to Ticino and cros",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-28T11:59:46.600Z",
-      "lastFailureAt": "2026-10-28T11:59:46.600Z",
-      "retryHint": "no-text"
+      "lastFailureAt": "2026-10-28T19:14:16.130Z"
     }
   ]
 }
