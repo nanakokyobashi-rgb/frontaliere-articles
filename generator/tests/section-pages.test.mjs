@@ -3396,7 +3396,9 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.doesNotMatch(staleResolve, /dispatch-fast-publish-replay\.sh/);
   assert.doesNotMatch(staleResolve, /echo 'matrix=\[\]'/);
   assert.match(staleResolve, /replay_after="\$current_main"/);
-  assert.match(staleResolve, /git fetch --no-tags --depth=1 origin[\s\S]*refs\/heads\/main:refs\/remotes\/origin\/fast-publish-current-main/);
+  assert.match(staleResolve, /PUSH_BEFORE='' FETCH_MAIN=true bash scripts\/ci\/fetch-push-base-if-missing\.sh/);
+  assert.match(staleResolve, /refs\/remotes\/origin\/main/);
+  assert.doesNotMatch(staleResolve, /git fetch --no-tags --depth=1 origin/);
   assert.match(staleResolve, /git archive --format=tar "\$current_main"[\s\S]*generator\/data\/canton-sections\.json[\s\S]*scripts\/lib/);
   assert.match(staleResolve, /tar -x -C "\$current_main_source"/);
   assert.match(staleResolve, /replay_matrix="\$\(reconcile_edge_matrix "\$pinned_source" "\$current_main" "\$current_main_source"\)"/);
@@ -3745,7 +3747,10 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(resolveCheckout, /fetch-depth: 0/, 'il resolve deve conservare la storia per il preflight high-water');
   assert.doesNotMatch(resolveCheckout, /fetch-depth: 2/, 'il preflight non puo\' usare un checkout shallow');
   const liveRetryLoop = render;
-  const liveCheckout = liveRetryLoop.indexOf('git checkout --detach FETCH_HEAD');
+  const liveCheckout = liveRetryLoop.indexOf('git checkout --detach "$current_main"');
+  assert.match(liveRetryLoop, /PUSH_BEFORE='' FETCH_MAIN=true bash scripts\/ci\/fetch-push-base-if-missing\.sh/);
+  assert.match(liveRetryLoop, /refs\/remotes\/origin\/main/);
+  assert.doesNotMatch(liveRetryLoop, /git fetch --no-tags origin main/);
   assert.equal(
     liveRetryLoop.includes('git checkout --detach origin/main'),
     false,
@@ -3780,7 +3785,9 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   const replayDispatchStep = stagedReplay.slice(
     stagedReplay.indexOf('- name: Replay publish-api after staged release'),
   );
-  assert.match(replayDispatchStep, /git fetch --no-tags --depth=1 origin main/);
+  assert.match(replayDispatchStep, /PUSH_BEFORE='' FETCH_MAIN=true bash scripts\/ci\/fetch-push-base-if-missing\.sh/);
+  assert.match(replayDispatchStep, /refs\/remotes\/origin\/main/);
+  assert.doesNotMatch(replayDispatchStep, /git fetch --no-tags --depth=1 origin main/);
   const mainRevisionGuard = replayDispatchStep.indexOf('if [ "$current_main" != "$SOURCE_COMMIT" ]');
   const globalReadiness = replayDispatchStep.indexOf('node scripts/reconcile-section-pages.mjs --out "$readiness" --cap 1');
   const missingPagesGuard = replayDispatchStep.indexOf(".counts.missingPages");

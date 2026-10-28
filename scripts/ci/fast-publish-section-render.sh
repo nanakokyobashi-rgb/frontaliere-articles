@@ -308,12 +308,12 @@ fi
 
 while :; do
   for publish_attempt in 1 2 3; do
-    git fetch --no-tags origin main
-    # `git fetch origin main` aggiorna sempre FETCH_HEAD, ma non
-    # necessariamente il ref remoto locale in un checkout Actions.
-    # Il retry deve quindi usare esattamente il commit appena letto,
-    # altrimenti tre tentativi ripetono la stessa vecchia revisione.
-    git checkout --detach FETCH_HEAD
+    if ! PUSH_BEFORE='' FETCH_MAIN=true bash scripts/ci/fetch-push-base-if-missing.sh; then
+      echo "::error::impossibile aggiornare main tramite il guard bounded prima del render"
+      exit 1
+    fi
+    current_main="$(git rev-parse refs/remotes/origin/main)"
+    git checkout --detach "$current_main"
     export EXPECTED_MAIN_HEAD="$(git rev-parse HEAD)"
     export PUSH_AFTER="$EXPECTED_MAIN_HEAD"
     if [ -z "${PUSH_BEFORE:-}" ] || [[ "$PUSH_BEFORE" =~ ^0+$ ]]; then

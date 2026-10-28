@@ -1754,8 +1754,9 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
     'il retry live del publisher sezione include push e dispatch dalla main, anche bootstrap',
   );
   assert.match(sectionRender, /for publish_attempt in 1 2 3/u);
-  assert.match(sectionRender, /git fetch --no-tags origin main/u);
-  assert.match(sectionRender, /git checkout --detach FETCH_HEAD/u);
+  assert.match(sectionRender, /PUSH_BEFORE='' FETCH_MAIN=true bash scripts\/ci\/fetch-push-base-if-missing\.sh/u);
+  assert.match(sectionRender, /git checkout --detach "\$current_main"/u);
+  assert.doesNotMatch(sectionRender, /git fetch --no-tags origin main/u);
   assert.match(sectionRender, /export PUSH_AFTER="\$EXPECTED_MAIN_HEAD"/u);
   assert.match(
     sectionRender,
