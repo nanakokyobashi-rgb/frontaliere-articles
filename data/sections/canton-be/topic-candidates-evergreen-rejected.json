@@ -4,18 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-be::https://www.nau.ch/news/wirtschaft/effektivlohne-steigen-2026-im-schnitt-um-05-prozent-67193453": {
-      "section": "canton-be",
-      "ts": 1793021802412
-    },
-    "canton-be::https://ajour.ch/story/703624/pas-de-liaison-ferroviaire-directe-entre-fribourg-et-bulle": {
-      "section": "canton-be",
-      "ts": 1793039709822
-    },
-    "canton-be::https://ajour.ch/story/703589/cre-lhomme-de-tes-rves-pourquoi-un-panier-fait-actuellement-fureur-sur-internet": {
-      "section": "canton-be",
-      "ts": 1793040351810
-    },
     "canton-be::https://www.nau.ch/news/wirtschaft/armasuisse-vergibt-60-millionen-auftrag-ohne-ausschreibung-an-sbb-67193635": {
       "section": "canton-be",
       "ts": 1793055734524
@@ -119,6 +107,10 @@
     "canton-be::https://ajour.ch/story/703827/le-conseil-des-affaires-francophones-de-bienne-fte-ses-20-ans": {
       "section": "canton-be",
       "ts": 1793187218409
+    },
+    "canton-be::https://www.nau.ch/politik/bundeshaus/bundesrat-verabschiedet-strategie-gegen-hitze-und-trockenheit-67194450": {
+      "section": "canton-be",
+      "ts": 1793213632199
     }
   }
 }
