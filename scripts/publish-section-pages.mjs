@@ -2954,6 +2954,7 @@ export async function main(
     ids,
     requestedIds: [...new Set(ids)],
     renderedIds,
+    missingArticleIds,
     counts: Object.fromEntries(UPLOAD_ORDER.map((kind) => [kind, pages.filter((page) => page.kind === kind).length])),
     countsByLocale,
     hubsMissing: hubs.missing,

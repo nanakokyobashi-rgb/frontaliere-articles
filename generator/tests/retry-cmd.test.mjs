@@ -128,6 +128,14 @@ test('un HTTP 503 resta ritentabile', () => {
   assert.equal(calls, 2);
 });
 
+test('i marker del publish immagini classificano il fallimento come transitorio', () => {
+  for (const failureMessage of ['IMAGE_FETCH_TRANSIENT: timeout 20s', 'IMAGE_POSTCONDITION_TRANSIENT: probe inconclusive']) {
+    const { code, calls, out } = runWith({ failTimes: 1, failureMessage });
+    assert.equal(code, 0, `${failureMessage} doveva essere ritentato, invece:\n${out}`);
+    assert.equal(calls, 2);
+  }
+});
+
 test('gli status HTTP numerici e la forma status code restano ritentabili', () => {
   for (const failureMessage of ['429 Too Many Requests', '500 Internal Server Error', 'status code: 500']) {
     const { code, calls, out } = runWith({ failTimes: 1, failureMessage });

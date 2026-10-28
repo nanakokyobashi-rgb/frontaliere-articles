@@ -194,6 +194,14 @@ export async function renderSectionArticlePipeline({ rootDir, distDir, section, 
       `[${logPrefix}] image postcondition excluded ${imagePostcondition.excludedArticles.length} article(s) / ` +
         `${imagePostcondition.excludedPages} page(s): ${imagePostcondition.firstExcludedArticleIds.join(', ')}`,
     );
+    const transientProbeArticles = imagePostcondition.excludedArticles.filter((article) =>
+      article.online?.some((page) => page.state === 'unknown'));
+    if (transientProbeArticles.length > 0) {
+      console.error(
+        `[${logPrefix}] IMAGE_POSTCONDITION_TRANSIENT: online image probe was inconclusive for ` +
+          `${transientProbeArticles.map((article) => article.articleId).join(', ')}`,
+      );
+    }
   }
   if (imagePostcondition.releasedArticles.length > 0) {
     console.error(
@@ -465,7 +473,16 @@ function imageDownloadPath(reference) {
   return rel ? `/${rel}` : null;
 }
 
-export async function prepareImageView({ rootDir, distDir, ids, declaredImages, logPrefix, fetchImpl = globalThis.fetch, logger = console }) {
+export async function prepareImageView({
+  rootDir,
+  distDir,
+  ids,
+  declaredImages,
+  logPrefix,
+  fetchImpl = globalThis.fetch,
+  sleepImpl = (delayMs) => new Promise((resolve) => setTimeout(resolve, delayMs)),
+  logger = console,
+}) {
   const viewDir = path.join(distDir, 'images');
   const downloadDir = fs.mkdtempSync(path.join(os.tmpdir(), 'frontaliere-declared-images-'));
   const downloadedImageKeys = [];
@@ -487,16 +504,22 @@ export async function prepareImageView({ rootDir, distDir, ids, declaredImages, 
       const item = missing[cursor++];
       const destination = path.join(downloadDir, item.rel);
       try {
-        await fetchDeclaredImage({ imagePath: imageDownloadPath(item.rel), destination, logPrefix, fetchImpl });
+        await fetchDeclaredImage({ imagePath: imageDownloadPath(item.rel), destination, logPrefix, fetchImpl, sleepImpl });
         const target = path.join(viewDir, item.rel.replace(/^images[\\/]/, ''));
         fs.mkdirSync(path.dirname(target), { recursive: true });
         fs.copyFileSync(destination, target);
         downloadedImageKeys.push(item.rel);
         logger.log(`[${logPrefix}] downloaded declared image from CDN: ${item.rel}`);
       } catch (error) {
-        const failure = { articleId: item.articleId, image: item.rel, reason: error?.message || String(error) };
+        const failure = {
+          articleId: item.articleId,
+          image: item.rel,
+          reason: error?.message || String(error),
+          transient: error?.code === 'IMAGE_FETCH_TRANSIENT',
+        };
         failures.push(failure);
-        logger.error(`[${logPrefix}] declared image unavailable (${item.articleId}, ${item.rel}): ${failure.reason}`);
+        const marker = failure.transient ? 'IMAGE_FETCH_TRANSIENT: ' : '';
+        logger.error(`[${logPrefix}] ${marker}declared image unavailable (${item.articleId}, ${item.rel}): ${failure.reason}`);
       }
     }
   };

@@ -70,6 +70,7 @@ const SHARED_R2_REFRESH_PATHS = new Set([
   'scripts/ci/fast-publish-section.mjs',
   'scripts/cf-purge-cache.mjs',
   'scripts/lib/article-render-pipeline.mjs',
+  'scripts/lib/declared-image-fetch.mjs',
   'scripts/lib/cf-analytics.mjs',
   'scripts/lib/canton-hub-data.mjs',
   'scripts/lib/canton-hub-content.mjs',

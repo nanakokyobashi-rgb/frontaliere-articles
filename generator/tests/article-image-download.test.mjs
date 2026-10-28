@@ -34,6 +34,7 @@ test('il fetch CDN richiede manual redirect e content-type image', async () => {
       fetchDeclaredImage({
         imagePath: '/images/places/redirect.webp',
         destination: path.join(root, 'redirect.webp'),
+        sleepImpl: async () => {},
         fetchImpl: async (_url, options) => {
           assert.equal(options.redirect, 'manual');
           return response({ status: 302, type: 'text/html' });
@@ -45,10 +46,68 @@ test('il fetch CDN richiede manual redirect e content-type image', async () => {
       fetchDeclaredImage({
         imagePath: '/images/places/html.webp',
         destination: path.join(root, 'html.webp'),
+        sleepImpl: async () => {},
         fetchImpl: async () => response({ type: 'text/html' }),
       }),
       /content-type non immagine/,
     );
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('il fetch CDN ritenta con backoff bounded e materializza al primo successo', async () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'article-image-download-retry-'));
+  let calls = 0;
+  const delays = [];
+  try {
+    const result = await fetchDeclaredImage({
+      imagePath: '/images/places/retry.webp',
+      destination: path.join(root, 'retry.webp'),
+      attempts: 4,
+      sleepImpl: async (delayMs) => delays.push(delayMs),
+      fetchImpl: async () => {
+        calls += 1;
+        if (calls < 3) throw Object.assign(new Error('fetch failed'), { code: 'ETIMEDOUT' });
+        return response();
+      },
+    });
+    assert.equal(result.bytes, Buffer.byteLength('image'));
+    assert.equal(calls, 3);
+    assert.deepEqual(delays, [500, 1000]);
+    assert.equal(fs.readFileSync(path.join(root, 'retry.webp'), 'utf8'), 'image');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('il fetch CDN riconosce i codici Undici annidati in cause/errors', async () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'article-image-download-undici-'));
+  let calls = 0;
+  try {
+    const result = await fetchDeclaredImage({
+      imagePath: '/images/places/undici.webp',
+      destination: path.join(root, 'undici.webp'),
+      attempts: 3,
+      sleepImpl: async () => {},
+      fetchImpl: async () => {
+        calls += 1;
+        if (calls === 1) {
+          const error = new TypeError('terminated');
+          error.cause = Object.assign(new Error('socket closed'), { code: 'UND_ERR_SOCKET' });
+          throw error;
+        }
+        if (calls === 2) {
+          throw new AggregateError([
+            Object.assign(new Error('body timeout'), { code: 'UND_ERR_BODY_TIMEOUT' }),
+          ], 'request failed');
+        }
+        return response();
+      },
+    });
+    assert.equal(result.bytes, Buffer.byteLength('image'));
+    assert.equal(calls, 3);
+    assert.equal(fs.readFileSync(path.join(root, 'undici.webp'), 'utf8'), 'image');
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
@@ -227,6 +286,7 @@ test('il renderer scarica al massimo quattro immagini dichiarate in parallelo', 
         log: (message) => logs.push(message),
         error: (message) => logs.push(message),
       },
+      sleepImpl: async () => {},
       fetchImpl: async () => {
         active += 1;
         maxActive = Math.max(maxActive, active);
@@ -243,6 +303,32 @@ test('il renderer scarica al massimo quattro immagini dichiarate in parallelo', 
     for (const id of ids) assert.equal(fs.existsSync(path.join(result.viewDir, 'places', `${id}.webp`)), true);
     fs.rmSync(result.viewDir, { recursive: true, force: true });
     fs.rmSync(result.downloadDir, { recursive: true, force: true });
+  } finally {
+    fs.rmSync(rootDir, { recursive: true, force: true });
+    fs.rmSync(distDir, { recursive: true, force: true });
+  }
+});
+
+test('un fallimento transitorio del CDN resta osservabile per il retry del publisher', async () => {
+  const rootDir = fs.mkdtempSync(path.join(os.tmpdir(), 'article-image-view-transient-'));
+  const distDir = fs.mkdtempSync(path.join(os.tmpdir(), 'article-image-view-transient-dist-'));
+  const logs = [];
+  try {
+    const result = await prepareImageView({
+      rootDir,
+      distDir,
+      ids: ['article-timeout'],
+      declaredImages: { 'article-timeout': '/images/places/timeout.webp' },
+      logPrefix: 'test',
+      sleepImpl: async () => {},
+      logger: { log: (message) => logs.push(message), error: (message) => logs.push(message) },
+      fetchImpl: async () => {
+        throw Object.assign(new Error('fetch failed'), { code: 'ETIMEDOUT' });
+      },
+    });
+    assert.equal(result.failures.length, 1);
+    assert.equal(result.failures[0].transient, true);
+    assert.ok(logs.some((message) => message.includes('IMAGE_FETCH_TRANSIENT')));
   } finally {
     fs.rmSync(rootDir, { recursive: true, force: true });
     fs.rmSync(distDir, { recursive: true, force: true });
