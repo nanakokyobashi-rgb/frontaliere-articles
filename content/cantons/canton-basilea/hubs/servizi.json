@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "servizi",
-  "updatedAt": "2026-10-28T17:02:29.143Z",
-  "contentHash": "7e11f0e5ff1dc4d34d58b4dcddd0d9b592e3b64484e61bc471fbb8b691740cb5",
+  "updatedAt": "2026-10-28T18:02:21.438Z",
+  "contentHash": "6d04a8ddcf098ce3d5ad0bd07858dacdbba57408666ca19b7839951b3008a7e3",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -21,11 +21,6 @@
       "id": "aste-targhe",
       "updatedAt": "2026-10-28T12:51:45.580Z",
       "keyFacts": 1
-    },
-    {
-      "id": "meteo",
-      "updatedAt": "2026-10-28T06:00:54.357Z",
-      "keyFacts": 0
     }
   ],
   "locales": {
@@ -143,25 +138,6 @@
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
           "updatedAt": "2026-10-28T12:51:45.580Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Basel",
-              "value": "11 °C",
-              "detail": "oggi da 7 a 14 °C"
-            },
-            {
-              "label": "Liestal",
-              "value": "11 °C",
-              "detail": "oggi da 7 a 13 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-28T06:00:54.357Z"
         }
       ],
       "curatedArticles": [
@@ -249,7 +225,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-28T18:02:21.438Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -365,25 +341,6 @@
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
           "updatedAt": "2026-10-28T12:51:45.580Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Basel",
-              "value": "11 °C",
-              "detail": "today from 7 to 14 °C"
-            },
-            {
-              "label": "Liestal",
-              "value": "11 °C",
-              "detail": "today from 7 to 13 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-28T06:00:54.357Z"
         }
       ],
       "curatedArticles": [
@@ -463,7 +420,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-28T18:02:21.438Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -579,25 +536,6 @@
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
           "updatedAt": "2026-10-28T12:51:45.580Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Basel",
-              "value": "11 °C",
-              "detail": "heute 7 bis 14 °C"
-            },
-            {
-              "label": "Liestal",
-              "value": "11 °C",
-              "detail": "heute 7 bis 13 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-28T06:00:54.357Z"
         }
       ],
       "curatedArticles": [
@@ -677,7 +615,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-28T18:02:21.438Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -793,25 +731,6 @@
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
           "updatedAt": "2026-10-28T12:51:45.580Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Basel",
-              "value": "11 °C",
-              "detail": "aujourd’hui de 7 à 14 °C"
-            },
-            {
-              "label": "Liestal",
-              "value": "11 °C",
-              "detail": "aujourd’hui de 7 à 13 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-28T06:00:54.357Z"
         }
       ],
       "curatedArticles": [
@@ -883,7 +802,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-28T18:02:21.438Z"
     }
   }
 }

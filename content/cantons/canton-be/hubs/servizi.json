@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "servizi",
-  "updatedAt": "2026-10-28T10:03:35.525Z",
-  "contentHash": "92706d933cd456315a6f17f518151a68be24287ab829405723a608d32b6b7315",
+  "updatedAt": "2026-10-28T18:02:21.438Z",
+  "contentHash": "450b55ba2f400b6019e56ee8820e0c1c9ec7f07a2e503fb5bc284ca02da5d191",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,12 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-28T05:39:58.469Z",
+      "updatedAt": "2026-10-28T12:51:45.580Z",
       "keyFacts": 1
     },
     {
-      "id": "meteo",
-      "updatedAt": "2026-10-28T06:00:54.357Z",
-      "keyFacts": 0
-    },
-    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-27T21:31:39.250Z",
+      "updatedAt": "2026-10-28T11:41:09.250Z",
       "keyFacts": 0
     }
   ],
@@ -102,21 +97,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://auktion-be.ch/de/",
-          "updatedAt": "2026-10-28T05:39:58.469Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Bern",
-              "value": "9 °C",
-              "detail": "oggi da 7 a 11 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-28T06:00:54.357Z"
+          "updatedAt": "2026-10-28T12:51:45.580Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -129,7 +110,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/gesundheit-am-arbeitsplatz-zeitdruck-groesste-herausforderung"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-10-28T11:41:09.250Z"
         }
       ],
       "curatedArticles": [
@@ -209,7 +190,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-28T10:03:35.525Z"
+      "updatedAt": "2026-10-28T18:02:21.438Z"
     },
     "en": {
       "canton": "BE",
@@ -284,21 +265,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://auktion-be.ch/de/",
-          "updatedAt": "2026-10-28T05:39:58.469Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Bern",
-              "value": "9 °C",
-              "detail": "today from 7 to 11 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-28T06:00:54.357Z"
+          "updatedAt": "2026-10-28T12:51:45.580Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -311,7 +278,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/gesundheit-am-arbeitsplatz-zeitdruck-groesste-herausforderung"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-10-28T11:41:09.250Z"
         }
       ],
       "curatedArticles": [
@@ -387,7 +354,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-28T10:03:35.525Z"
+      "updatedAt": "2026-10-28T18:02:21.438Z"
     },
     "de": {
       "canton": "BE",
@@ -462,21 +429,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://auktion-be.ch/de/",
-          "updatedAt": "2026-10-28T05:39:58.469Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Bern",
-              "value": "9 °C",
-              "detail": "heute 7 bis 11 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-28T06:00:54.357Z"
+          "updatedAt": "2026-10-28T12:51:45.580Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -489,7 +442,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/gesundheit-am-arbeitsplatz-zeitdruck-groesste-herausforderung"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-10-28T11:41:09.250Z"
         }
       ],
       "curatedArticles": [
@@ -565,7 +518,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-28T10:03:35.525Z"
+      "updatedAt": "2026-10-28T18:02:21.438Z"
     },
     "fr": {
       "canton": "BE",
@@ -640,21 +593,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://auktion-be.ch/de/",
-          "updatedAt": "2026-10-28T05:39:58.469Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Bern",
-              "value": "9 °C",
-              "detail": "aujourd’hui de 7 à 11 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-28T06:00:54.357Z"
+          "updatedAt": "2026-10-28T12:51:45.580Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -667,7 +606,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/gesundheit-am-arbeitsplatz-zeitdruck-groesste-herausforderung"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-10-28T11:41:09.250Z"
         }
       ],
       "curatedArticles": [
@@ -739,7 +678,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-28T10:03:35.525Z"
+      "updatedAt": "2026-10-28T18:02:21.438Z"
     }
   }
 }

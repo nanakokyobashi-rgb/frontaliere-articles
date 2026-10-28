@@ -4,8 +4,8 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "carburanti",
-  "updatedAt": "2026-10-27T11:45:35.314Z",
-  "contentHash": "39adf367f5d516a3f38e57f543267e6ecb9322ff114bccb1b210643a3127839a",
+  "updatedAt": "2026-10-28T18:02:21.438Z",
+  "contentHash": "5a81d540fed6b5d440bc368b5960e20af4bb3a66ebf0a5d923b2cffb318845af",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -60,6 +60,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Susten e Furka chiusi, San Gottardo percorribile di giorno",
+          "url": "/articoli-uri/susten-furka-chiusura-invernale/",
+          "excerpt": "Dal mercoledì 28 ottobre i passi della Furka e del Susten sono chiusi per l'inverno; il passo del San Gottardo resta percorribile di giorno.",
+          "date": "2026-10-28T17:45:24.471Z"
+        },
+        {
           "title": "Uri, traffico rilevato in 31 punti il 5 novembre 2026",
           "url": "/articoli-uri/conteggio-traffico-uri-novembre/",
           "excerpt": "Nel fondovalle urano, il 5 novembre 2026, 31 punti rileveranno veicoli e direzioni tra le 06:00 e le 22:00 per rivedere il modello cantonale.",
@@ -82,12 +88,6 @@
           "url": "/articoli-uri/andermatt-fisco-wyden/",
           "excerpt": "Andermatt riduce il moltiplicatore fiscale di 5 punti, al 94%; il consiglio comunale rinvia per ora il contestato progetto Wyden.",
           "date": "2026-10-23T15:40:41.343Z"
-        },
-        {
-          "title": "Bristenstrasse: chiusure e orari fino a novembre 2026",
-          "url": "/articoli-uri/bristenstrasse-regimi-traffico-2026/",
-          "excerpt": "Tra Amsteg e St.",
-          "date": "2026-10-23T12:29:59.834Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-27T11:45:35.314Z"
+      "updatedAt": "2026-10-28T18:02:21.438Z"
     },
     "en": {
       "canton": "UR",
@@ -147,6 +147,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Susten and Furka closed, Gotthard passable during the day",
+          "url": "/en/uri-articles/susten-furka-winter-closure/",
+          "excerpt": "As of Wednesday, October 28, the Furka and Susten passes are closed for the winter; the San Gottardo Pass remains passable during the day.",
+          "date": "2026-10-28T17:45:24.471Z"
+        },
+        {
           "title": "Uri, traffic detected at 31 points on November 5, 2026",
           "url": "/en/uri-articles/uri-traffic-count-november/",
           "excerpt": "In the Uranian valley floor, on November 5, 2026, 31 points will record vehicles and directions between 06:00 and 22:00 to review the cantonal model.",
@@ -169,12 +175,6 @@
           "url": "/en/uri-articles/andermatt-tax-wyden-postponed/",
           "excerpt": "Andermatt reduces the tax multiplier by 5 points, to 94%; the municipal council postpones the controversial Wyden project for now.",
           "date": "2026-10-23T15:40:41.343Z"
-        },
-        {
-          "title": "Bristenstrasse: closures and schedules through November 2026",
-          "url": "/en/uri-articles/bristenstrasse-traffic-rules-2026/",
-          "excerpt": "Between Amsteg and St.",
-          "date": "2026-10-23T12:29:59.834Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-27T11:45:35.314Z"
+      "updatedAt": "2026-10-28T18:02:21.438Z"
     },
     "de": {
       "canton": "UR",
@@ -234,6 +234,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Susten und Furka gesperrt, Gotthard tagsüber befahrbar",
+          "url": "/de/uri-artikel/susten-furka-wintersperre/",
+          "excerpt": "Ab Mittwoch, dem 28.",
+          "date": "2026-10-28T17:45:24.471Z"
+        },
+        {
           "title": "Uri, Verkehr an 31 Stellen am 5. November 2026 erfasst",
           "url": "/de/uri-artikel/verkehrszaehlung-uri-november/",
           "excerpt": "Im Urner Talboden werden am 5.",
@@ -256,12 +262,6 @@
           "url": "/de/uri-artikel/andermatt-steuern-wyden/",
           "excerpt": "Andermatt senkt den Steuerfuss um 5 Punkte auf 94 Prozent; der Gemeinderat verschiebt das umstrittene Projekt Wyden vorerst.",
           "date": "2026-10-23T15:40:41.343Z"
-        },
-        {
-          "title": "Bristenstrasse: Sperrungen und Zeitfenster bis November 2026",
-          "url": "/de/uri-artikel/bristenstrasse-verkehrsregime-2026/",
-          "excerpt": "Zwischen Amsteg und St.",
-          "date": "2026-10-23T12:29:59.834Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-27T11:45:35.314Z"
+      "updatedAt": "2026-10-28T18:02:21.438Z"
     },
     "fr": {
       "canton": "UR",
@@ -321,6 +321,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Susten et Furka fermés, Saint-Gothard praticable de jour",
+          "url": "/fr/articles-uri/fermeture-hivernale-susten-furka/",
+          "excerpt": "À partir du mercredi 28 octobre, les cols de la Furka et du Susten sont fermés pour l'hiver ; le col du Saint-Gothard reste praticable de jour.",
+          "date": "2026-10-28T17:45:24.471Z"
+        },
+        {
           "title": "Uri, trafic relevé en 31 points le 5 novembre 2026",
           "url": "/fr/articles-uri/comptage-trafic-uri-novembre/",
           "excerpt": "Dans la vallée uranaise, le 5 novembre 2026, 31 points recenseront les véhicules et leur direction entre les 06:00 et les 22:00 afin de revoir le modèle cantonal.",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-uri/andermatt-impots-wyden/",
           "excerpt": "Andermatt réduit le multiplicateur fiscal de 5 points, à 94 % ; le conseil communal reporte pour l’instant le projet Wyden controversé.",
           "date": "2026-10-23T15:40:41.343Z"
-        },
-        {
-          "title": "Bristenstrasse : fermetures et horaires jusqu’en novembre 2026",
-          "url": "/fr/articles-uri/bristenstrasse-regimes-circulation-2026/",
-          "excerpt": "Entre Amsteg et St.",
-          "date": "2026-10-23T12:29:59.834Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-27T11:45:35.314Z"
+      "updatedAt": "2026-10-28T18:02:21.438Z"
     }
   }
 }

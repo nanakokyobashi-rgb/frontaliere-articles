@@ -4,18 +4,13 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "servizi",
-  "updatedAt": "2026-10-28T17:02:29.143Z",
-  "contentHash": "21d81bd91d3a5602dbff6af8d282140f3ddb63340755215182766d566b6d851d",
+  "updatedAt": "2026-10-28T18:02:21.438Z",
+  "contentHash": "276794d036d2e58eab5cf64e55b501f50230e677a8cb7f4b7e8a81fb22715856",
   "blocks": [
     {
       "id": "premi-cassa-malati",
       "updatedAt": "2026-10-25T09:11:35.438Z",
       "keyFacts": 1
-    },
-    {
-      "id": "meteo",
-      "updatedAt": "2026-10-28T06:00:54.357Z",
-      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
@@ -62,20 +57,6 @@
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-25T09:11:35.438Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Luzern",
-              "value": "10 °C",
-              "detail": "oggi da 8 a 12 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-28T06:00:54.357Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -193,7 +174,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-28T18:02:21.438Z"
     },
     "en": {
       "canton": "LU",
@@ -233,20 +214,6 @@
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-25T09:11:35.438Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Luzern",
-              "value": "10 °C",
-              "detail": "today from 8 to 12 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-28T06:00:54.357Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -359,7 +326,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-28T18:02:21.438Z"
     },
     "de": {
       "canton": "LU",
@@ -399,20 +366,6 @@
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-25T09:11:35.438Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Luzern",
-              "value": "10 °C",
-              "detail": "heute 8 bis 12 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-28T06:00:54.357Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -525,7 +478,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-28T18:02:21.438Z"
     },
     "fr": {
       "canton": "LU",
@@ -565,20 +518,6 @@
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-25T09:11:35.438Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Luzern",
-              "value": "10 °C",
-              "detail": "aujourd’hui de 8 à 12 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-28T06:00:54.357Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -688,7 +627,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-28T18:02:21.438Z"
     }
   }
 }

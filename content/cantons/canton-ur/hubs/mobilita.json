@@ -4,8 +4,8 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-28T17:02:29.143Z",
-  "contentHash": "98cbca9ede5ae502d22427cf301dc447c79035666fff58f3ed83b0dc8b3b4d45",
+  "updatedAt": "2026-10-28T18:02:21.438Z",
+  "contentHash": "15048665bfd8856169fcc36797372bb6d39abcd34f4c69a2980b00369b2ee354",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -145,6 +145,12 @@
           "date": "2026-10-27T11:34:34.578Z"
         },
         {
+          "title": "Susten e Furka chiusi, San Gottardo percorribile di giorno",
+          "url": "/articoli-uri/susten-furka-chiusura-invernale/",
+          "excerpt": "Dal mercoledì 28 ottobre i passi della Furka e del Susten sono chiusi per l'inverno; il passo del San Gottardo resta percorribile di giorno.",
+          "date": "2026-10-28T17:45:24.471Z"
+        },
+        {
           "title": "Axenstrasse chiusa per quattro notti dal 2 al 6 novembre",
           "url": "/articoli-uri/axenstrasse-chiusa-quattro-notti/",
           "excerpt": "La Axenstrasse sarà completamente chiusa dal 2 al 6 novembre, ogni notte dalle 22 alle 5, per lavori di manutenzione.",
@@ -173,12 +179,6 @@
           "url": "/articoli-svizzera/abbonamenti-trasporti-canton-uri/",
           "excerpt": "Conoscere le zone e le tariffe degli abbonamenti trasporti pubblici nel Cantone di Uri",
           "date": "2026-08-16T10:15:45.029Z"
-        },
-        {
-          "title": "Pendolare inverso: da Altdorf a Lugano ogni giorno. Ma i treni non bastano",
-          "url": "/articoli-frontaliere/pendolare-inverso-altdorf-lugano-problemi/",
-          "excerpt": "Carla Scheidegger viaggia ogni giorno da Kriens ad Altdorf per lavorare al MASI a Lugano. Criticità: treni ogni due ore e vagoni affollati. La sua battaglia per un trasporto sostenibile.",
-          "date": "2026-04-16T10:11:40.179Z"
         }
       ],
       "latestCantonArticles": [],
@@ -192,7 +192,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-28T18:02:21.438Z"
     },
     "en": {
       "canton": "UR",
@@ -320,6 +320,12 @@
           "date": "2026-10-27T11:34:34.578Z"
         },
         {
+          "title": "Susten and Furka closed, Gotthard passable during the day",
+          "url": "/en/uri-articles/susten-furka-winter-closure/",
+          "excerpt": "As of Wednesday, October 28, the Furka and Susten passes are closed for the winter; the San Gottardo Pass remains passable during the day.",
+          "date": "2026-10-28T17:45:24.471Z"
+        },
+        {
           "title": "Axenstrasse closed for four nights from November 2 to 6",
           "url": "/en/uri-articles/axenstrasse-closed-four-nights/",
           "excerpt": "Axenstrasse will be completely closed from November 2 to 6, every night from 22 to 5, for maintenance work.",
@@ -348,12 +354,6 @@
           "url": "/en/swiss-articles/transport-passes-uri-canton/",
           "excerpt": "Know the areas and rates of public transport subscriptions in the Canton of Uri",
           "date": "2026-08-16T10:15:45.029Z"
-        },
-        {
-          "title": "Reverse commuting: from Altdorf to Lugano every day. But the trains aren't enough",
-          "url": "/en/cross-border-articles/reverse-commuter-altdorf-lugano-delays-connections/",
-          "excerpt": "Carla Scheidegger travels from Kriens to Altdorf every day to work at the MASI in Lugano. Key issues: trains every two hours and overcrowded carriages. Her fight for sustainable transport.",
-          "date": "2026-04-16T10:11:40.179Z"
         }
       ],
       "latestCantonArticles": [],
@@ -367,7 +367,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-28T18:02:21.438Z"
     },
     "de": {
       "canton": "UR",
@@ -495,6 +495,12 @@
           "date": "2026-10-27T11:34:34.578Z"
         },
         {
+          "title": "Susten und Furka gesperrt, Gotthard tagsüber befahrbar",
+          "url": "/de/uri-artikel/susten-furka-wintersperre/",
+          "excerpt": "Ab Mittwoch, dem 28.",
+          "date": "2026-10-28T17:45:24.471Z"
+        },
+        {
           "title": "Axenstrasse vom 2. bis 6. November vier Nächte lang gesperrt",
           "url": "/de/uri-artikel/axenstrasse-vier-naechte-gesperrt/",
           "excerpt": "Die Axenstrasse wird vom 2.",
@@ -523,12 +529,6 @@
           "url": "/de/schweiz-artikel/offentliche-verkehrskarten-uri-kanton/",
           "excerpt": "Kenntnis der Zonen und Tarife der ÖV-Abos im Kanton Uri",
           "date": "2026-08-16T10:15:45.029Z"
-        },
-        {
-          "title": "Pendeln in die andere Richtung: Jeden Tag von Altdorf nach Lugano. Doch die Züge reichen nicht",
-          "url": "/de/grenzgaenger-artikel/pendler-gegenrichtung-altdorf-lugano-verspaetungen/",
-          "excerpt": "Carla Scheidegger pendelt jeden Tag von Kriens nach Altdorf, um am MASI in Lugano zu arbeiten. Doch die Kritikpunkte bleiben: Züge im Zwei-Stunden-Takt und überfüllte Waggons. Ihr Einsatz für einen nachhaltigen Verkehr.",
-          "date": "2026-04-16T10:11:40.179Z"
         }
       ],
       "latestCantonArticles": [],
@@ -542,7 +542,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-28T18:02:21.438Z"
     },
     "fr": {
       "canton": "UR",
@@ -670,6 +670,12 @@
           "date": "2026-10-27T11:34:34.578Z"
         },
         {
+          "title": "Susten et Furka fermés, Saint-Gothard praticable de jour",
+          "url": "/fr/articles-uri/fermeture-hivernale-susten-furka/",
+          "excerpt": "À partir du mercredi 28 octobre, les cols de la Furka et du Susten sont fermés pour l'hiver ; le col du Saint-Gothard reste praticable de jour.",
+          "date": "2026-10-28T17:45:24.471Z"
+        },
+        {
           "title": "Axenstrasse fermée pendant quatre nuits du 2 au 6 novembre",
           "url": "/fr/articles-uri/axenstrasse-fermee-quatre-nuits/",
           "excerpt": "L’Axenstrasse sera complètement fermée du 2 au 6 novembre, chaque nuit de 22 à 5, pour des travaux d’entretien.",
@@ -698,12 +704,6 @@
           "url": "/fr/articles-suisse/cartes-de-transport-uri-canton/",
           "excerpt": "Connaître les zones et les tarifs des abonnements aux transports publics dans le canton d'Uri",
           "date": "2026-08-16T10:15:45.029Z"
-        },
-        {
-          "title": "Pendulaire inversé : de Altdorf à Lugano chaque jour. Mais les trains ne suffisent pas",
-          "url": "/fr/articles-frontalier/navetteur-inverse-altdorf-lugano-retards-connexions/",
-          "excerpt": "Carla Scheidegger parcourt chaque jour le trajet entre Kriens et Altdorf pour se rendre à son travail au MASI à Lugano. Les principales difficultés : des trains espacés de deux heures et des wagons bondés. Son combat…",
-          "date": "2026-04-16T10:11:40.179Z"
         }
       ],
       "latestCantonArticles": [],
@@ -717,7 +717,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-28T18:02:21.438Z"
     }
   }
 }

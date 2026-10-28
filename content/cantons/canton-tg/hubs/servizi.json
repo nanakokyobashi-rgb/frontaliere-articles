@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "servizi",
-  "updatedAt": "2026-10-28T17:02:29.143Z",
-  "contentHash": "a3d7fb2ccbf5610beae5dab6d5bd92add91dcf1e5636eb956a3020952bc737c4",
+  "updatedAt": "2026-10-28T18:02:21.438Z",
+  "contentHash": "33dbcf1a70a7c6181ea14f1441632eeed265580c18eae2a329ba4fcf31c44dee",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -16,11 +16,6 @@
       "id": "aste-targhe",
       "updatedAt": "2026-10-28T12:51:45.580Z",
       "keyFacts": 1
-    },
-    {
-      "id": "meteo",
-      "updatedAt": "2026-10-28T06:00:54.357Z",
-      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
@@ -43,7 +38,7 @@
         },
         {
           "label": "Aste di targhe in corso",
-          "value": "64",
+          "value": "58",
           "note": "offerta mediana 600 CHF"
         }
       ],
@@ -69,13 +64,6 @@
           "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
           "items": [
             {
-              "label": "TG13441",
-              "value": "1310 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-10-28T18:00:00.000Z",
-              "url": "https://auktion.tg.ch/de/auction/109838"
-            },
-            {
               "label": "TG450000",
               "value": "1220 CHF",
               "detail": "offerta attuale",
@@ -88,25 +76,18 @@
               "detail": "offerta attuale",
               "date": "2026-11-04T18:00:00.000Z",
               "url": "https://auktion.tg.ch/de/auction/109871"
+            },
+            {
+              "label": "TG455555",
+              "value": "1020 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-04T18:00:00.000Z",
+              "url": "https://auktion.tg.ch/de/auction/109874"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://auktion.tg.ch/de/",
           "updatedAt": "2026-10-28T12:51:45.580Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Frauenfeld",
-              "value": "9 °C",
-              "detail": "oggi da 6 a 11 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-28T06:00:54.357Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -224,7 +205,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-28T18:02:21.438Z"
     },
     "en": {
       "canton": "TG",
@@ -240,7 +221,7 @@
         },
         {
           "label": "Plate auctions running",
-          "value": "64",
+          "value": "58",
           "note": "typical bid 600 CHF"
         }
       ],
@@ -266,13 +247,6 @@
           "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
           "items": [
             {
-              "label": "TG13441",
-              "value": "1,310 CHF",
-              "detail": "current bid",
-              "date": "2026-10-28T18:00:00.000Z",
-              "url": "https://auktion.tg.ch/de/auction/109838"
-            },
-            {
               "label": "TG450000",
               "value": "1,220 CHF",
               "detail": "current bid",
@@ -285,25 +259,18 @@
               "detail": "current bid",
               "date": "2026-11-04T18:00:00.000Z",
               "url": "https://auktion.tg.ch/de/auction/109871"
+            },
+            {
+              "label": "TG455555",
+              "value": "1,020 CHF",
+              "detail": "current bid",
+              "date": "2026-11-04T18:00:00.000Z",
+              "url": "https://auktion.tg.ch/de/auction/109874"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://auktion.tg.ch/de/",
           "updatedAt": "2026-10-28T12:51:45.580Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Frauenfeld",
-              "value": "9 °C",
-              "detail": "today from 6 to 11 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-28T06:00:54.357Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -417,7 +384,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-28T18:02:21.438Z"
     },
     "de": {
       "canton": "TG",
@@ -433,7 +400,7 @@
         },
         {
           "label": "Laufende Kontrollschild-Auktionen",
-          "value": "64",
+          "value": "58",
           "note": "mittleres Gebot 600 CHF"
         }
       ],
@@ -459,13 +426,6 @@
           "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
           "items": [
             {
-              "label": "TG13441",
-              "value": "1’310 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-10-28T18:00:00.000Z",
-              "url": "https://auktion.tg.ch/de/auction/109838"
-            },
-            {
               "label": "TG450000",
               "value": "1’220 CHF",
               "detail": "aktuelles Gebot",
@@ -478,25 +438,18 @@
               "detail": "aktuelles Gebot",
               "date": "2026-11-04T18:00:00.000Z",
               "url": "https://auktion.tg.ch/de/auction/109871"
+            },
+            {
+              "label": "TG455555",
+              "value": "1’020 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-04T18:00:00.000Z",
+              "url": "https://auktion.tg.ch/de/auction/109874"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://auktion.tg.ch/de/",
           "updatedAt": "2026-10-28T12:51:45.580Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Frauenfeld",
-              "value": "9 °C",
-              "detail": "heute 6 bis 11 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-28T06:00:54.357Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -610,7 +563,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-28T18:02:21.438Z"
     },
     "fr": {
       "canton": "TG",
@@ -626,7 +579,7 @@
         },
         {
           "label": "Enchères de plaques en cours",
-          "value": "64",
+          "value": "58",
           "note": "offre centrale 600 CHF"
         }
       ],
@@ -652,13 +605,6 @@
           "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
           "items": [
             {
-              "label": "TG13441",
-              "value": "1 310 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-10-28T18:00:00.000Z",
-              "url": "https://auktion.tg.ch/de/auction/109838"
-            },
-            {
               "label": "TG450000",
               "value": "1 220 CHF",
               "detail": "offre actuelle",
@@ -671,25 +617,18 @@
               "detail": "offre actuelle",
               "date": "2026-11-04T18:00:00.000Z",
               "url": "https://auktion.tg.ch/de/auction/109871"
+            },
+            {
+              "label": "TG455555",
+              "value": "1 020 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-04T18:00:00.000Z",
+              "url": "https://auktion.tg.ch/de/auction/109874"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://auktion.tg.ch/de/",
           "updatedAt": "2026-10-28T12:51:45.580Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Frauenfeld",
-              "value": "9 °C",
-              "detail": "aujourd’hui de 6 à 11 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-28T06:00:54.357Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -799,7 +738,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-28T18:02:21.438Z"
     }
   }
 }
