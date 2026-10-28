@@ -3786,7 +3786,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   const replayDispatchStep = stagedReplay.slice(
     stagedReplay.indexOf('- name: Replay publish-api after staged release'),
   );
-  assert.match(replayDispatchStep, /PUSH_BEFORE='' FETCH_MAIN=true bash scripts\/ci\/fetch-push-base-if-missing\.sh/);
+  assert.match(replayDispatchStep, /REQUIRE_FULL_HISTORY=false PUSH_BEFORE='' FETCH_MAIN=true bash scripts\/ci\/fetch-push-base-if-missing\.sh/);
   assert.match(replayDispatchStep, /refs\/remotes\/origin\/main/);
   assert.doesNotMatch(replayDispatchStep, /git fetch --no-tags --depth=1 origin main/);
   const mainRevisionGuard = replayDispatchStep.indexOf('if [ "$current_main" != "$SOURCE_COMMIT" ]');
