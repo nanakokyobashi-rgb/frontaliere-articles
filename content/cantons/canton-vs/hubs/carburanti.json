@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "carburanti",
-  "updatedAt": "2026-10-26T17:57:05.656Z",
-  "contentHash": "07ec7bfaad54defa618386aa72c26055c19fc6965ca53effd954337f3cc2d543",
+  "updatedAt": "2026-10-28T15:36:08.664Z",
+  "contentHash": "e3addfca15f8cae1f7ec58a3f282749f0d96b7ece0f95aabc7cd76e1aa461251",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Bains d'Ovronnaz: sursis concordatario fino al 31 marzo 2027",
+          "url": "/articoli-vallese/bains-ovronnaz-nuovo-sursis/",
+          "excerpt": "Il tribunale di Martigny prolunga il sursis fino al 31 marzo 2027 I dipendenti conservano il posto per tutta la stagione invernale Le presenze aumentano",
+          "date": "2026-10-28T15:29:18.560Z"
+        },
+        {
           "title": "Destra e economia vallesana contro salario minimo a CHF 22",
           "url": "/articoli-vallese/salario-minimo-valese-voto/",
           "excerpt": "La destra e l'economia vallesana dicono no a CHF 22 l'ora.",
@@ -94,12 +100,6 @@
           "url": "/articoli-vallese/eventi-weekend-vallese/",
           "excerpt": "Eventi in Vallese ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
           "date": "2026-10-17T11:33:34.787Z"
-        },
-        {
-          "title": "Salario minimo in Vallese: voto il 29 novembre sui CHF 22",
-          "url": "/articoli-vallese/valais-salario-minimo-2026/",
-          "excerpt": "15'000 salariati a tempo pieno non vivono del salario Il voto sul salario minimo è fissato al 29 novembre La proposta prevede CHF 22 lordi l'ora Il Parlamento",
-          "date": "2026-10-17T01:13:51.089Z"
         }
       ],
       "links": [
@@ -128,7 +128,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-26T17:57:05.656Z"
+      "updatedAt": "2026-10-28T15:36:08.664Z"
     },
     "en": {
       "canton": "VS",
@@ -187,6 +187,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Bains d'Ovronnaz: composition moratorium until March 31, 2027",
+          "url": "/en/valais-articles/bains-ovronnaz-new-sursis/",
+          "excerpt": "The Martigny court extends the moratorium until March 31, 2027 Employees retain their jobs throughout the winter season Visitor numbers increase by 20-30%",
+          "date": "2026-10-28T15:29:18.560Z"
+        },
+        {
           "title": "Valais right and business oppose a minimum wage of CHF 22",
           "url": "/en/valais-articles/valais-minimum-wage-vote/",
           "excerpt": "The right wing and the Valais economy say no to CHF 22 an hour.",
@@ -209,12 +215,6 @@
           "url": "/en/valais-articles/weekend-events-valais/",
           "excerpt": "Events in Valais every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
           "date": "2026-10-17T11:33:34.787Z"
-        },
-        {
-          "title": "Minimum wage in Valais: vote on November 29 on CHF 22",
-          "url": "/en/valais-articles/valais-minimum-wage-2026/",
-          "excerpt": "15'000 full-time employees cannot make a living from their wages The vote on the minimum wage is set for November 29 The proposal provides for a gross hourly",
-          "date": "2026-10-17T01:13:51.089Z"
         }
       ],
       "links": [
@@ -243,7 +243,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-26T17:57:05.656Z"
+      "updatedAt": "2026-10-28T15:36:08.664Z"
     },
     "de": {
       "canton": "VS",
@@ -302,6 +302,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Bains d'Ovronnaz: Nachlassstundung bis zum 31. März 2027",
+          "url": "/de/wallis-artikel/bains-ovronnaz-neuer-sursis/",
+          "excerpt": "Das Gericht von Martigny verlängert die Nachlassstundung bis zum 31.",
+          "date": "2026-10-28T15:29:18.560Z"
+        },
+        {
           "title": "Rechte und Walliser Wirtschaft gegen einen Mindestlohn von CHF 22",
           "url": "/de/wallis-artikel/wallis-mindestlohn-abstimmung/",
           "excerpt": "Die Rechte und die Walliser Wirtschaft sagen Nein zu CHF 22 pro Stunde.",
@@ -324,12 +330,6 @@
           "url": "/de/wallis-artikel/wochenend-veranstaltungen-wallis/",
           "excerpt": "Veranstaltungen im Wallis an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
           "date": "2026-10-17T11:33:34.787Z"
-        },
-        {
-          "title": "Mindestlohn im Wallis: Abstimmung am 29. November über CHF 22",
-          "url": "/de/wallis-artikel/wallis-mindestlohn-2026/",
-          "excerpt": "15'000 Vollzeitbeschäftigte leben nicht vom Lohn Die Abstimmung über den Mindestlohn ist auf den 29.",
-          "date": "2026-10-17T01:13:51.089Z"
         }
       ],
       "links": [
@@ -354,7 +354,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-26T17:57:05.656Z"
+      "updatedAt": "2026-10-28T15:36:08.664Z"
     },
     "fr": {
       "canton": "VS",
@@ -413,6 +413,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Bains d'Ovronnaz : sursis concordataire jusqu'au 31 mars 2027",
+          "url": "/fr/articles-valais/bains-ovronnaz-nouveau-sursis/",
+          "excerpt": "Le tribunal de Martigny prolonge le sursis jusqu'au 31 mars 2027 Les employés conservent leur emploi pendant toute la saison hivernale La fréquentation augmente",
+          "date": "2026-10-28T15:29:18.560Z"
+        },
+        {
           "title": "La droite et l’économie valaisanne contre un salaire minimum de CHF 22",
           "url": "/fr/articles-valais/salaire-minimum-valais-vote/",
           "excerpt": "La droite et l’économie valaisanne disent non à CHF 22 de l’heure.",
@@ -435,12 +441,6 @@
           "url": "/fr/articles-valais/evenements-week-end-valais/",
           "excerpt": "Événements en Valais chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
           "date": "2026-10-17T11:33:34.787Z"
-        },
-        {
-          "title": "Salaire minimum en Valais : vote le 29 novembre sur les CHF 22",
-          "url": "/fr/articles-valais/valais-salaire-minimum-2026/",
-          "excerpt": "15'000 salariés à temps plein ne vivent pas de leur salaire Le vote sur le salaire minimum est fixé au 29 novembre La proposition prévoit CHF 22 bruts",
-          "date": "2026-10-17T01:13:51.089Z"
         }
       ],
       "links": [
@@ -469,7 +469,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-26T17:57:05.656Z"
+      "updatedAt": "2026-10-28T15:36:08.664Z"
     }
   }
 }
