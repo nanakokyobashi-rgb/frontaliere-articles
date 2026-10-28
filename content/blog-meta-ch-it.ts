@@ -8648,6 +8648,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.norme-flessibilita-start-up.title': 'Consiglio federale concede flessibilità alle start-up per l\'orario di lavoro',
     'blog.article.norme-flessibilita-start-up.excerpt': 'Nuove norme speciali adottate il 28 ottobre 2026 Entrata in vigore fissata al 1° dicembre 2026 Deroghe mirate per alcuni dipendenti di start-up La revisione',
     'blog.article.norme-flessibilita-start-up.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.sem-rinnovo-simic-paralisi.title': 'La SEM rischia la paralisi per il rinnovo di SIMIC',
+    'blog.article.sem-rinnovo-simic-paralisi.excerpt': 'La SEM rischia la paralisi senza risorse aggiuntive SIMIC: da circa 66 a 193 milioni stimati nel 2024 Il nuovo sistema non sarà operativo prima del 2032',
+    'blog.article.sem-rinnovo-simic-paralisi.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaChIt;

@@ -28900,6 +28900,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'sem-rinnovo-simic-paralisi',
+    category: 'novita',
+    date: '2026-10-28T22:15:39.004Z',
+    image: '/images/blog/article-sem-rinnovo-simic-paralisi.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

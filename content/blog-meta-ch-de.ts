@@ -8648,6 +8648,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.norme-flessibilita-start-up.title': 'Bundesrat gewährt Start-ups Flexibilität bei der Arbeitszeit',
     'blog.article.norme-flessibilita-start-up.excerpt': 'Neue Sonderbestimmungen am 28.',
     'blog.article.norme-flessibilita-start-up.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.sem-rinnovo-simic-paralisi.title': 'Die SEM droht wegen der Erneuerung von SIMIC zum Stillstand zu kommen',
+    'blog.article.sem-rinnovo-simic-paralisi.excerpt': 'Die SEM droht ohne zusätzliche Ressourcen zum Stillstand zu kommen SIMIC: im Jahr 2024 von etwa 66 auf 193 Millionen geschätzt Das neue System wird nicht vor 2032 betriebsbereit sein',
+    'blog.article.sem-rinnovo-simic-paralisi.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaChDe;
