@@ -3004,6 +3004,16 @@ test('il chunk SEO cantonale sta dove l\'engine lo legge (descrittore articolo e
   assert.match(read('scripts/lib/engine-corpus-view.mjs'), /engineSeoChunkName/);
 });
 
+test('reconcile: il limite landing resta quello del renderer engine', () => {
+  const engine = read('engine/cantonSectionPages.ts');
+  const reconciler = read('scripts/reconcile-section-pages.mjs');
+  const engineLimit = /export const CANTON_LANDING_CARD_LIMIT = (\d+);/u.exec(engine);
+  const reconcilerLimit = /export const CANTON_LANDING_CARD_LIMIT = (\d+);/u.exec(reconciler);
+  assert.ok(engineLimit, 'CANTON_LANDING_CARD_LIMIT non trovato nel renderer engine');
+  assert.ok(reconcilerLimit, 'CANTON_LANDING_CARD_LIMIT non trovato nel reconciler');
+  assert.equal(Number(reconcilerLimit[1]), Number(engineLimit[1]), 'reconciler e renderer divergenti');
+});
+
 // ── Dati degli hub ───────────────────────────────────────────────────────────
 
 function hubRoot(files) {

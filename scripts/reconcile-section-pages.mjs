@@ -51,10 +51,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { ARTICLE_SECTION_CORE_ALL } from '../engine/shared/articleSectionCore.mjs';
-import {
-  CANTON_ARCHIVE_ALL_SLUG,
-  CANTON_LANDING_CARD_LIMIT,
-} from '../engine/shared/cantonSectionCopy.mjs';
+import { CANTON_ARCHIVE_ALL_SLUG } from '../engine/shared/cantonSectionCopy.mjs';
 import { fetchPageManifest, pageManifestUrl } from './lib/section-page-manifest.mjs';
 import { assertHubLocaleSlug, assertHubTopicEntries } from './lib/assert-hub-locale-slug.mjs';
 import { sitemapPaths } from './publish-section-edge.mjs';
@@ -68,6 +65,11 @@ import {
 export const API_BASE_DEFAULT = 'https://nanakokyobashi-rgb.github.io/frontaliere-articles';
 export const CDN_BASE = 'https://cdn.frontaliereticino.ch';
 const LOCALES = ['it', 'en', 'de', 'fr'];
+// `renderCantonSectionLanding` owns this TypeScript-side contract. The
+// reconciler runs under plain Node and cannot import that source directly;
+// keep this adapted boundary explicit and pin it to the renderer in the
+// generator suite rather than importing a mirror-only `.mjs` export.
+export const CANTON_LANDING_CARD_LIMIT = 24;
 const UA = 'frontaliere-corpus-reconcile/1 (+https://frontaliereticino.ch)';
 export const RECONCILE_FETCH_ATTEMPTS = 3;
 export const RECONCILE_FETCH_RETRY_DELAY_MS = 1000;
