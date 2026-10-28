@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-tutele-frontaliero-uscita-ticino.webp",
-      "sha256": "a1c34d00a22db9b569f31fde7c085dd371bb31147034cb2171573fa5d7e4004c"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-tutele-frontaliero-uscita-ticino-480w.webp",
-      "sha256": "d71af47de7fc9d939b9301eba2bf5a15401175bca1e067140c8c42046392edbd"
-    }
-  ]
+  "items": []
 }
