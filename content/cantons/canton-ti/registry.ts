@@ -248,4 +248,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'laura-bianchi',
  authorName: 'Laura Bianchi',
  },
+ {
+ id: 'sistema-ferroviario-accordo-ue',
+ category: 'pratico',
+ date: '2026-10-28T01:31:55.792Z',
+ image: '/images/blog/article-sistema-ferroviario-accordo-ue.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

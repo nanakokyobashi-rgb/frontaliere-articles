@@ -855,6 +855,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-sistema-ferroviario-accordo-ue': {
+    title: 'Accordo UE: apertura del mercato ferroviario a rischio',
+    description: 'L\'accordo UE coinvolgerà anche i trasporti Oggi gli operatori esteri collaborano con le FFS Un\'apertura del mercato del 20% potrebbe mettere a rischio',
+    keywords: 'frontalieri, ticino, svizzera, italia, accordo, apertura, mercato, ferroviario',
+    ogTitle: 'Accordo UE: rischio orario cadenzato ferroviario',
+    ogDescription: 'L\'accordo UE coinvolgerà anche i trasporti Oggi gli operatori esteri collaborano con le FFS Un\'apertura del mercato del 20% potrebbe mettere a rischio l\'orario',
+    canonicalPath: '/articoli-ticino/sistema-ferroviario-accordo-ue/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Accordo UE: apertura del mercato ferroviario a rischio",
+      "description": "L'accordo UE coinvolgerà anche i trasporti Oggi gli operatori esteri collaborano con le FFS Un'apertura del mercato del 20% potrebbe mettere a rischio",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-sistema-ferroviario-accordo-ue.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-28T01:31:55+00:00",
+      "dateModified": "2026-10-28T01:31:55+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-ticino/sistema-ferroviario-accordo-ue/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

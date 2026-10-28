@@ -69,6 +69,9 @@ const blogMetaCantonTiEn: Record<string, string> = {
     'blog.article.tassa-salute-decreto-omnibus-scenari.title': 'Cross-border workers: health tax and omnibus decree update',
     'blog.article.tassa-salute-decreto-omnibus-scenari.excerpt': 'No worker has been called upon to pay The tax concerns the “old cross-border workers” For some cross-border workers Omnibus: 100% taxation New meeting',
     'blog.article.tassa-salute-decreto-omnibus-scenari.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.sistema-ferroviario-accordo-ue.title': 'EU agreement: opening the railway market at risk',
+    'blog.article.sistema-ferroviario-accordo-ue.excerpt': 'The EU agreement will also affect transport Today, foreign operators collaborate with FFS A 20% opening of the market could put the timetable at risk',
+    'blog.article.sistema-ferroviario-accordo-ue.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonTiEn;

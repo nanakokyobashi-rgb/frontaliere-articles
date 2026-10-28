@@ -69,6 +69,9 @@ const blogMetaCantonTiFr: Record<string, string> = {
     'blog.article.tassa-salute-decreto-omnibus-scenari.title': 'Frontaliers : taxe santé et décret omnibus, mise à jour',
     'blog.article.tassa-salute-decreto-omnibus-scenari.excerpt': 'Aucun travailleur n\'a été appelé à payer La taxe concerne les « anciens frontaliers » Pour certains frontaliers Omnibus : imposition à 100% Nouvelle rencontre',
     'blog.article.tassa-salute-decreto-omnibus-scenari.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.sistema-ferroviario-accordo-ue.title': 'Accord UE : l’ouverture du marché ferroviaire menacée',
+    'blog.article.sistema-ferroviario-accordo-ue.excerpt': 'L\'accord UE concernera également les transports Aujourd\'hui, les opérateurs étrangers collaborent avec les FFS Une ouverture du marché de 20% pourrait mettre en danger l\'horaire cadencé',
+    'blog.article.sistema-ferroviario-accordo-ue.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonTiFr;

@@ -69,6 +69,9 @@ const blogMetaCantonTiDe: Record<string, string> = {
     'blog.article.tassa-salute-decreto-omnibus-scenari.title': 'Grenzgänger: Gesundheitssteuer und Omnibus-Dekret – Aktualisierung',
     'blog.article.tassa-salute-decreto-omnibus-scenari.excerpt': 'Kein Arbeitnehmer wurde zur Zahlung aufgefordert Die Abgabe betrifft die «alten Grenzgänger» Für einige Grenzgänger Omnibus: Besteuerung zu 100% Neues Treffen',
     'blog.article.tassa-salute-decreto-omnibus-scenari.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.sistema-ferroviario-accordo-ue.title': 'EU-Abkommen: Öffnung des Eisenbahnmarktes in Gefahr',
+    'blog.article.sistema-ferroviario-accordo-ue.excerpt': 'Das EU-Abkommen wird auch den Verkehr betreffen Heute arbeiten ausländische Betreiber mit den FFS zusammen Eine Öffnung des Marktes um 20% könnte den Fahrplan gefährden',
+    'blog.article.sistema-ferroviario-accordo-ue.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonTiDe;
