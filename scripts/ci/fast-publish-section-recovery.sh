@@ -59,8 +59,12 @@ validate_recovery_base_ancestry() {
 }
 
 if [ "${MIXED_MATRIX:-false}" = 'true' ]; then
-  ensure_recovery_history
-  validate_recovery_base_ancestry
+  if ! ensure_recovery_history; then
+    exit 1
+  fi
+  if ! validate_recovery_base_ancestry; then
+    exit 1
+  fi
   fetched_current_main="$(git rev-parse refs/remotes/origin/main)"
   if [ "$fetched_current_main" != "$CURRENT_MAIN" ]; then
     echo "::error::main e' avanzata durante la preparazione del piano mixed-matrix ($CURRENT_MAIN -> $fetched_current_main); annullo il recovery"
@@ -265,8 +269,12 @@ rebuild_recovery_head() {
   fi
   CURRENT_MAIN="$next_head"
   export CURRENT_MAIN
-  ensure_recovery_history
-  validate_recovery_base_ancestry
+  if ! ensure_recovery_history; then
+    return 1
+  fi
+  if ! validate_recovery_base_ancestry; then
+    return 1
+  fi
   fetched_current_main="$(git rev-parse refs/remotes/origin/main)"
   if [ "$fetched_current_main" != "$next_head" ]; then
     echo "::error::main e' avanzata durante il rebuild del recovery ($next_head -> $fetched_current_main)"

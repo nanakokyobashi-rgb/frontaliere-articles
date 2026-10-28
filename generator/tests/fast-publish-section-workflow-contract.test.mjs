@@ -173,3 +173,23 @@ test('un resolve stale produce la matrice sulla nuova HEAD e lascia il recovery 
   assert.match(resolver, /echo "matrix=\$replay_matrix"/u);
   assert.doesNotMatch(resolver, /riuso il nonce del coordinator/u);
 });
+
+test('il recovery verifica l ancestry della base prima di ricostruire la matrice', () => {
+  assert.match(recovery, /validate_recovery_base_ancestry\(\)/u);
+  assert.match(recovery, /git merge-base --is-ancestor "\$recovery_base" "\$CURRENT_MAIN"/u);
+  assert.match(recovery, /base della push non antenata di CURRENT_MAIN: force-push o storia non lineare/u);
+  assert.match(recovery, /\[ -z "\$recovery_base" \] \|\| \[\[ "\$recovery_base" =~ \^0\+\$ \]\]/u);
+
+  const mixedPlan = recovery.indexOf('target_matrix="$(git diff --name-status "$plan_before" "$CURRENT_MAIN"');
+  const rebuildPlan = recovery.lastIndexOf('target_matrix="$(git diff --name-status "$plan_before" "$CURRENT_MAIN"');
+  assert.ok(mixedPlan >= 0, 'manca il piano mixed iniziale');
+  assert.ok(rebuildPlan > mixedPlan, 'manca il piano del rebuild handoff');
+  assert.ok(
+    recovery.lastIndexOf('if ! validate_recovery_base_ancestry; then', mixedPlan) >= 0,
+    'il mixed recovery deve validare la base prima del r2-plan',
+  );
+  assert.ok(
+    recovery.lastIndexOf('if ! validate_recovery_base_ancestry; then', rebuildPlan) >= 0,
+    'il rebuild recovery deve validare la base prima del r2-plan',
+  );
+});
