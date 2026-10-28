@@ -8636,6 +8636,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.pesca-zurigo-servizi-regolati.title': 'Permesso di pesca Cantone Zurigo: verifica requisiti e competenza',
     'blog.article.pesca-zurigo-servizi-regolati.excerpt': 'La pesca è un servizio regolato a livello cantonale; requisiti, scadenze e importi vanno verificati ufficialmente sulla fonte cantonale.',
     'blog.article.pesca-zurigo-servizi-regolati.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.sei-misure-cure-sanitarie.title': 'Costi sanitari: sei nuove misure adottate a Berna',
+    'blog.article.sei-misure-cure-sanitarie.excerpt': 'Sei misure adottate lunedì a Berna Cure a domicilio e pronto soccorso tra gli ambiti Le misure si aggiungono alle 12 del 2025 Impatto economico ancora',
+    'blog.article.sei-misure-cure-sanitarie.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaChIt;

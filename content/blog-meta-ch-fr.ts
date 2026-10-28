@@ -8636,6 +8636,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.pesca-zurigo-servizi-regolati.title': 'Permis de pêche à Zurich : exigences et compétences',
     'blog.article.pesca-zurigo-servizi-regolati.excerpt': 'La pêche est un service réglementé au niveau cantonal ; les exigences, les délais et les montants doivent être vérifiés officiellement auprès de la source cantonale.',
     'blog.article.pesca-zurigo-servizi-regolati.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.sei-misure-cure-sanitarie.title': 'Coûts de santé : six nouvelles mesures adoptées à Berne',
+    'blog.article.sei-misure-cure-sanitarie.excerpt': 'Six mesures adoptées lundi à Berne Soins à domicile et urgences parmi les domaines Les mesures s\'ajoutent aux 12 de 2025 Impact économique encore',
+    'blog.article.sei-misure-cure-sanitarie.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaChFr;
