@@ -24,8 +24,8 @@ test('il backfill aspetta solo il gruppo dello shard target', () => {
   assert.doesNotMatch(workflow, /^\s+gh api\b/m, 'nessuna chiamata deve bypassare il wrapper');
   assert.equal(
     (workflow.match(/gh_api_timeout(?:\s|\()/g) || []).length,
-    8,
-    'sette chiamate più la definizione devono restare protette',
+    9,
+    'otto chiamate più la definizione devono restare protette',
   );
   assert.match(guard, /actions\/runs\/\$run_id\/jobs\?per_page=100/);
   assert.match(guard, /validate_workflow_runs_for_status/);
