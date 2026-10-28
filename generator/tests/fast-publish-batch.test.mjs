@@ -69,6 +69,32 @@ test('i JSON di batch non passano a jq come argomenti di dimensione illimitata',
   assert.doesNotMatch(resolveStep, /--argjson\s+(?:ids|target)\s+"/u);
 });
 
+test('il piano completo passa da artifact e la matrix porta solo il routing', () => {
+  const resolveStep = stepText('Resolve mode, article ids and section');
+
+  // A corpus-sized plan must never be exported as a matrix field or an env
+  // value. The resolver uploads IDs as a file and the publish matrix carries
+  // only section/shard routing metadata, so one job owns the complete shard.
+  assert.match(resolveStep, /publish_plan_with_shards=/u);
+  assert.match(resolveStep, /fast-publish-article-plan\.json/u);
+  assert.match(resolveStep, /append_matrix_target "\$\(printf '%s' "\$target_with_shard" \| jq -c 'del\(\.ids\)'\)"/u);
+  assert.match(workflow, /name: Upload resolved article plan[\s\S]*fast-publish-article-plan-\$\{\{ github\.run_id \}\}/u);
+  assert.match(workflow, /name: Upload resolved article plan[\s\S]*overwrite: true/u);
+  assert.match(workflow, /name: Download resolved article plan[\s\S]*fast-publish-article-plan-\$\{\{ github\.run_id \}\}/u);
+  assert.match(workflow, /map\(select\(\.section == \$section\)\)[\s\S]*\.\[0\]\.ids/u);
+  assert.doesNotMatch(workflow, /ARTICLE_IDS_JSON: \$\{\{ toJSON\(matrix\.target\.ids\) \}\}/u);
+});
+
+test('la matrix ha un solo job completo per sezione/shard', () => {
+  assert.match(
+    workflow,
+    /strategy:\s+fail-fast: false\s+#[^\n]*\n(?:\s+#.*\n)*\s+matrix:[\s\S]*?target: \$\{\{ fromJSON\(needs\.resolve\.outputs\.matrix\) \}\}/u,
+  );
+  assert.match(workflow, /del\(\.ids\)/u);
+  assert.doesNotMatch(workflow, /queue: max/u);
+  assert.doesNotMatch(workflow, /max-parallel:/u);
+});
+
 test('le superfici articolo oltre il body producono solo gli ID realmente cambiati', () => {
   const registry = new Map([
     ['frontaliere', new Set(['alpha', 'beta'])],
@@ -103,6 +129,55 @@ test('le superfici articolo oltre il body producono solo gli ID realmente cambia
     bootstrap: false,
   }]);
 
+});
+
+test('un nuovo record del registry risveglia solo il record aggiunto', () => {
+  const registered = new Set(['alpha', 'beta', 'gamma']);
+  const previousRegistry = "export const ARTICLES = [{ id: 'alpha', image: '/images/blog/alpha.webp' }, { id: 'beta', image: '/images/blog/beta.webp' }];\n";
+  const currentRegistry = "export const ARTICLES = [{ id: 'alpha', image: '/images/blog/alpha.webp' }, { id: 'beta', image: '/images/blog/beta.webp' }, { id: 'gamma', image: '/images/blog/gamma.webp' }];\n";
+  const previous = new Map([['content/blog-articles-data.ts', previousRegistry]]);
+  const current = new Map([['content/blog-articles-data.ts', currentRegistry]]);
+  const plan = articlePublishPlan(['content/blog-articles-data.ts'], ARTICLE_SECTION_CORE_LIST, {
+    served: 'shard',
+    articleIdsForSection: () => registered,
+    readPreviousSource: (rel) => previous.get(rel) ?? null,
+    readCurrentSource: (rel) => current.get(rel) ?? null,
+  });
+
+  assert.deepEqual(plan, [{
+    section: 'frontaliere',
+    ids: ['gamma'],
+    bootstrap: false,
+  }]);
+});
+
+test('una nuova entry SEO risveglia solo il record aggiunto', () => {
+  const registered = new Set(['alpha', 'beta', 'gamma']);
+  const previousSeo = `const SEO = {
+  'blog-alpha': { title: 'same alpha' },
+  'blog-beta': { title: 'same beta' },
+};
+`;
+  const currentSeo = `const SEO = {
+  'blog-alpha': { title: 'same alpha' },
+  'blog-beta': { title: 'same beta' },
+  'blog-gamma': { title: 'new gamma' },
+};
+`;
+  const previous = new Map([['content/seo/seo-blog-5.ts', previousSeo]]);
+  const current = new Map([['content/seo/seo-blog-5.ts', currentSeo]]);
+  const plan = articlePublishPlan(['content/seo/seo-blog-5.ts'], ARTICLE_SECTION_CORE_LIST, {
+    served: 'shard',
+    articleIdsForSection: () => registered,
+    readPreviousSource: (rel) => previous.get(rel) ?? null,
+    readCurrentSource: (rel) => current.get(rel) ?? null,
+  });
+
+  assert.deepEqual(plan, [{
+    section: 'frontaliere',
+    ids: ['gamma'],
+    bootstrap: false,
+  }]);
 });
 
 test('una dipendenza importata dal registry invalida tutti gli articoli registrati', () => {
@@ -148,6 +223,24 @@ export const ARTICLES = RAW_ARTICLES.map((article) => ({ ...article, image: cdnB
     ids: ['alpha', 'beta'],
     bootstrap: false,
   }]);
+
+  const frontRegistry = "export const ARTICLES = [{ id: 'alpha' }, { id: 'beta' }];\n";
+  const typeOnlySwissRegistry = `import type { Article } from './blog-articles-data';
+export const SWISS_ARTICLES = [{ id: 'alpha' }, { id: 'beta' }];
+`;
+  const typeOnlyPrevious = new Map([
+    ['content/blog-articles-data.ts', frontRegistry],
+    ['content/swiss-articles-data.ts', typeOnlySwissRegistry],
+  ]);
+  const typeOnlyCurrent = new Map(typeOnlyPrevious);
+  const typeOnlyPlan = articlePublishPlan(['content/blog-articles-data.ts'], ARTICLE_SECTION_CORE_LIST, {
+    served: 'shard',
+    articleIdsForSection: () => registered,
+    readPreviousSource: (rel) => typeOnlyPrevious.get(rel) ?? null,
+    readCurrentSource: (rel) => typeOnlyCurrent.get(rel) ?? null,
+  });
+
+  assert.deepEqual(typeOnlyPlan, [], 'un import type non è una dipendenza runtime del registry');
 });
 
 test('un cambiamento fuori dalle entry SEO invalida gli articoli registrati', () => {
@@ -466,7 +559,7 @@ test('body e immagini multi-sezione diventano target matrix separati', () => {
   assert.doesNotMatch(imagePlan, /one commit changes both article sections/);
   assert.match(workflow, /matrix:\s*\n\s+target: \$\{\{ fromJSON\(needs\.resolve\.outputs\.matrix\) \}\}/);
   assert.match(workflow, /group: fast-publish-article-\$\{\{ matrix\.target\.shard \}\}/);
-  assert.match(workflow, /ARTICLE_IDS_JSON: \$\{\{ toJSON\(matrix\.target\.ids\) \}\}/);
+  assert.match(workflow, /fast-publish-article-plan-\$\{\{ github\.run_id \}\}/);
   assert.match(workflow, /--released-articles-file "\$RUNNER_TEMP\/fast-summary\.json"/);
 });
 
@@ -490,7 +583,8 @@ test('il dispatch accetta una lista JSON e il workflow la passa al renderer batc
   assert.match(workflow, /article_ids:\s*\n\s+description: 'JSON array of article ids/);
   assert.match(workflow, /ARTICLE_IDS_INPUT: \$\{\{ inputs\.article_ids \}\}/);
   assert.match(workflow, /article_ids_file="\$RUNNER_TEMP\/fast-article-ids\.json"/);
-  assert.match(workflow, /printf '%s' "\$ARTICLE_IDS_JSON" > "\$article_ids_file"/);
+  assert.match(workflow, /jq -ce --arg section "\$\{\{ matrix\.target\.section \}\}"/);
+  assert.match(workflow, /fast-publish-plan\/fast-publish-article-plan\.json/);
   assert.match(workflow, /--ids-file "\$article_ids_file"/);
   assert.doesNotMatch(workflow, /--ids "\$ARTICLE_IDS_JSON"/);
   assert.match(publisher, /--ids-file/);
