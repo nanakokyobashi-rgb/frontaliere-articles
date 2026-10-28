@@ -23,6 +23,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'elezioni-friburgo-8-novembre': { it: 'elezioni-friburgo-8-novembre', en: 'fribourg-elections-november-8', de: 'freiburg-wahlen-8-november', fr: 'elections-fribourg-8-novembre' },
  'incidente-matran-friburgo': { it: 'incidente-matran-friburgo', en: 'matran-fribourg-crash', de: 'unfall-matran-freiburg', fr: 'accident-matran-fribourg' },
  'elezione-consiglio-prefetture-lista-unica': { it: 'elezione-consiglio-prefetture-lista-unica', en: 'election-state-council-prefectures-single-list', de: 'wahl-staatsrat-prefekturen-einzelliste', fr: 'election-conseil-etat-prefectures-liste-unique' },
+ 'tpf-bus-elettrici-friburgo': { it: 'tpf-bus-elettrici-friburgo', en: 'fribourg-24-new-electric-buses', de: 'freiburg-24-neue-elektrobusse', fr: 'fribourg-24-nouveaux-bus-electriques' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

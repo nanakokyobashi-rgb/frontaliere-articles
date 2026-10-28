@@ -63,6 +63,9 @@ const blogMetaCantonFrFr: Record<string, string> = {
     'blog.article.elezione-consiglio-prefetture-lista-unica.title': 'Élection du Conseil d’État et des préfectures sur une liste unique',
     'blog.article.elezione-consiglio-prefetture-lista-unica.excerpt': 'Le matériel de vote est actuellement distribué.',
     'blog.article.elezione-consiglio-prefetture-lista-unica.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.tpf-bus-elettrici-friburgo.title': 'Fribourg prépare 24 nouveaux bus électriques pour décembre',
+    'blog.article.tpf-bus-elettrici-friburgo.excerpt': '24 nouveaux bus électriques pour les TPF Investissement : 20 millions de francs Six bus de 12 mètres, 18 articulés de 18 En service à partir du changement',
+    'blog.article.tpf-bus-elettrici-friburgo.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonFrFr;
