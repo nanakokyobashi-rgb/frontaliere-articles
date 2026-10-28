@@ -3951,6 +3951,12 @@ const SITEMAP_TI = `<urlset>${sectionSitemapPaths.map((p) => `<url><loc>${sitema
   .map(([loc, alternates]) => `<url><loc>${sitemapUrl(loc)}</loc>${alternates.map((p) => `<xhtml:link href="${sitemapUrl(p)}"/>`).join('')}</url>`)
   .join('')}</urlset>`;
 
+const landingHtmlByLocale = Object.fromEntries(Object.keys(CATALOG_TI.paths).map((locale) => {
+  const articleIds = Object.keys(SLUGS_TI);
+  const links = articleIds.map((id) => `<a href="${CATALOG_TI.paths[locale]}${SLUGS_TI[id]?.[locale] ?? id}/">articolo</a>`).join('');
+  return [locale, `<html><body><script type="application/ld+json">{"numberOfItems":${articleIds.length}}</script>${links}</body></html>`];
+}));
+
 test('reconcile: pagine attese = tutti gli URL annunciati da loc e alternate della sitemap', () => {
   const pages = expectedSectionPages(CATALOG_TI, SLUGS_TI, SITEMAP_TI);
   // landing + 6 hub + due page-N dell'archivio per 4 locali, 4 + 3 pagine articolo.
@@ -4101,6 +4107,9 @@ function fakeFetch({ commit = 'abc1234', sectionsCommit = commit, candidateCommi
         : { ok: false, status: 404 };
     }
     if (clean.endsWith('/sitemap-articles-canton-ti.xml')) return { ok: true, status: 200, text: async () => SITEMAP_TI };
+    for (const [locale, prefix] of Object.entries(CATALOG_TI.paths)) {
+      if (clean === cdnUrlFor(prefix)) return { ok: true, status: 200, text: async () => landingHtmlByLocale[locale] };
+    }
     const name = clean.split('/').pop();
     return { ok: true, status: 200, json: async () => docs[name], text: async () => '' };
   };
@@ -4222,6 +4231,8 @@ test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta',
   assert.match(wf, /dispatch_nonce="reconcile-\$\{GITHUB_RUN_ID\}-\$\{section\}"/);
   assert.match(wf, /gh run list --repo "\$REPOSITORY" --workflow fast-publish-section\.yml/);
   assert.match(wf, /steps\.detect\.outputs\.leftover == '0'/);
+  assert.match(wf, /steps\.detect\.outputs\.landing_content_stale == '0'/);
+  assert.match(wf, /\.counts\.landingContentStale \/\/ 0/);
   const globalReplay = wf.slice(wf.indexOf('- name: Replay API after all staged backfills'));
   const postBackfillProbe = globalReplay.indexOf('reconcile-sections-after-backfill.json');
   const postBackfillMissingGuard = globalReplay.indexOf('.counts.missingPages // 0');

@@ -22,6 +22,8 @@
  *   presente  HEAD sulla chiave che il Worker legge, per le pagine annunciate
  *             e per le pagine articolo candidate come orfane dal manifest,
  *             `https://cdn.frontaliereticino.ch/edge/sections/<path>/index.html`
+ *             e contenuto delle quattro landing confrontato con gli articoli
+ *             annunciati dall'API (un HTML 200 da solo non basta)
  *
  * Il registro R2 puo' essere ancora sul commit precedente: e' precisamente il
  * caso di recovery in cui publish-api ha gia' pubblicato Pages ma ha rifiutato
@@ -49,7 +51,10 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { ARTICLE_SECTION_CORE_ALL } from '../engine/shared/articleSectionCore.mjs';
-import { CANTON_ARCHIVE_ALL_SLUG } from '../engine/shared/cantonSectionCopy.mjs';
+import {
+  CANTON_ARCHIVE_ALL_SLUG,
+  CANTON_LANDING_CARD_LIMIT,
+} from '../engine/shared/cantonSectionCopy.mjs';
 import { fetchPageManifest, pageManifestUrl } from './lib/section-page-manifest.mjs';
 import { assertHubLocaleSlug, assertHubTopicEntries } from './lib/assert-hub-locale-slug.mjs';
 import { sitemapPaths } from './publish-section-edge.mjs';
@@ -502,6 +507,142 @@ function sitemapFailureDetail(url, error) {
   return reason.startsWith(`${url}:`) ? reason : `${url}: ${reason}`;
 }
 
+function landingHrefPath(rawHref) {
+  const href = String(rawHref ?? '')
+    .trim()
+    .replace(/&amp;/giu, '&')
+    .replace(/&#x2f;|&#47;/giu, '/');
+  const pathname = new URL(href, 'https://frontaliereticino.ch').pathname;
+  return pathname.split('/').map((segment) => {
+    try {
+      return decodeURIComponent(segment);
+    } catch {
+      return segment;
+    }
+  }).join('/');
+}
+
+function jsonLdNumberOfItems(html) {
+  let fallback = null;
+  const scripts = String(html ?? '').matchAll(
+    /<script\b[^>]*\btype\s*=\s*["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/giu,
+  );
+  for (const match of scripts) {
+    let parsed;
+    try {
+      parsed = JSON.parse(match[1].trim().replace(/^\uFEFF/u, ''));
+    } catch {
+      continue;
+    }
+    const queue = Array.isArray(parsed) ? [...parsed] : [parsed];
+    while (queue.length) {
+      const value = queue.pop();
+      if (!value || typeof value !== 'object') continue;
+      const type = value['@type'];
+      const isItemList = type === 'ItemList' || (Array.isArray(type) && type.includes('ItemList'));
+      const count = value.numberOfItems;
+      if (Number.isSafeInteger(count) && count >= 0) {
+        if (isItemList) return count;
+        if (fallback === null) fallback = count;
+      }
+      for (const child of Object.values(value)) {
+        if (child && typeof child === 'object') queue.push(child);
+      }
+    }
+  }
+  return fallback;
+}
+
+/**
+ * Confronta gli articoli annunciati con i link realmente presenti nella
+ * landing pubblicata. Il manifest edge prova che esiste un file HTML, non che
+ * quel file sia stato rigenerato dopo l'ultimo aggiornamento dell'indice API.
+ *
+ * @param {{ paths: Record<string, string> }} entry
+ * @param {Array<{ id: string, date?: string }>} rows
+ * @param {Record<string, Record<string, string>>} slugs
+ * @param {string} locale
+ * @param {string} html
+ * @param {number} [limit]
+ */
+export function landingArticleCoverage({
+  entry,
+  rows,
+  slugs,
+  locale,
+  html,
+  limit = CANTON_LANDING_CARD_LIMIT,
+}) {
+  const prefix = entry?.paths?.[locale];
+  if (typeof prefix !== 'string' || !prefix.endsWith('/')) {
+    throw new Error(`prefisso landing non valido per ${locale}`);
+  }
+  if (!Number.isSafeInteger(limit) || limit < 1) {
+    throw new Error(`limite landing non valido: ${limit}`);
+  }
+  const orderedRows = (rows ?? [])
+    .map((row, index) => ({ row, index }))
+    .sort((a, b) => {
+      const dateA = String(a.row?.date ?? '');
+      const dateB = String(b.row?.date ?? '');
+      if (dateA && dateB && dateA !== dateB) return dateB.localeCompare(dateA);
+      if (dateA && !dateB) return -1;
+      if (!dateA && dateB) return 1;
+      return a.index - b.index;
+    })
+    .map(({ row }) => row);
+  const articleRows = [];
+  for (const row of orderedRows) {
+    const id = String(row?.id ?? '');
+    // `renderCantonSectionLanding` falls back to the article id when a
+    // localized slug is absent; use the same path so a valid fallback card
+    // does not look stale to the reconciler.
+    const slug = slugs?.[id]?.[locale] ?? id;
+    if (id && typeof slug === 'string' && slug) articleRows.push({ id, path: `${prefix}${slug}/` });
+  }
+  const articleByPath = new Map(articleRows.map(({ id, path: articlePath }) => [articlePath, id]));
+  const expectedArticleByPath = new Map(articleRows
+    .slice(0, limit)
+    .map(({ id, path: articlePath }) => [articlePath, id]));
+  const found = new Set();
+  const extraIds = new Set();
+  const extraPaths = new Set();
+  for (const match of String(html ?? '').matchAll(/\bhref\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/giu)) {
+    try {
+      const pathname = landingHrefPath(match[1] ?? match[2] ?? match[3]);
+      const id = articleByPath.get(pathname);
+      if (!id) continue;
+      if (expectedArticleByPath.has(pathname)) found.add(id);
+      else {
+        extraIds.add(id);
+        extraPaths.add(pathname);
+      }
+    } catch {
+      // Un href non URL non può dimostrare la presenza di un articolo.
+    }
+  }
+  const expectedIds = [...expectedArticleByPath.values()];
+  const missingIds = expectedIds.filter((id) => !found.has(id));
+  const declaredCount = jsonLdNumberOfItems(html);
+  const problems = [];
+  if (missingIds.length > 0) problems.push(`missing-articles:${missingIds.join(',')}`);
+  if (extraIds.size > 0) problems.push(`extra-articles:${[...extraIds].join(',')}`);
+  if (declaredCount === null) {
+    problems.push(`numberOfItems:missing/${expectedIds.length}`);
+  } else if (declaredCount !== expectedIds.length) {
+    problems.push(`numberOfItems:${declaredCount}/${expectedIds.length}`);
+  }
+  return {
+    expectedCount: expectedIds.length,
+    foundCount: found.size,
+    declaredCount,
+    missingIds,
+    extraIds: [...extraIds],
+    extraPaths: [...extraPaths],
+    problems,
+  };
+}
+
 function skippedSurface({ code, reason, apiCommit = null, edgeCommit = null, pendingEdgeFlip = null, url = null, status = null }) {
   return {
     skipped: reason,
@@ -731,11 +872,53 @@ export async function reconcile({
       sections.push(unknownSitemapPlan(entry.id, detail));
       continue;
     }
-    const states = await mapLimit(expected, 8, (page) => headState(cdnUrlFor(page.path), fetchImpl, fetchOptions));
     const activeRows = rows.filter((row) => row.section === entry.id);
+    const sectionSlugs = slugs.cantons?.[entry.id] ?? {};
+    const landingChecks = [];
+    for (const locale of LOCALES) {
+      const landingPath = entry.paths[locale];
+      const landingUrl = cdnUrlFor(landingPath);
+      try {
+        const html = await getText(landingUrl, fetchImpl, fetchOptions);
+        const coverage = landingArticleCoverage({
+          entry,
+          rows: activeRows,
+          slugs: sectionSlugs,
+          locale,
+          html,
+        });
+        landingChecks.push({ locale, path: landingPath, state: coverage.problems.length ? 'invalid' : 'ok', ...coverage });
+      } catch (error) {
+        landingChecks.push({
+          locale,
+          path: landingPath,
+          state: 'unknown',
+          reason: sitemapFailureDetail(landingUrl, error),
+          expectedCount: Math.min(activeRows.length, CANTON_LANDING_CARD_LIMIT),
+          foundCount: null,
+          declaredCount: null,
+          missingIds: [],
+          extraIds: [],
+          extraPaths: [],
+          problems: [],
+        });
+      }
+    }
+    const pagesWithLandingState = expected.map((page) => {
+      const check = landingChecks.find((candidate) => candidate.path === page.path && candidate.state === 'invalid');
+      return check && page.kind === 'section' ? { ...page, state: 'missing' } : page;
+    });
+    for (const check of landingChecks.filter((candidate) => candidate.state === 'invalid')) {
+      if (!pagesWithLandingState.some((page) => page.kind === 'section' && page.path === check.path)) {
+        pagesWithLandingState.push({ kind: 'section', locale: check.locale, path: check.path, state: 'missing' });
+      }
+    }
+    const states = await mapLimit(pagesWithLandingState, 8, (page) => (
+      page.state === 'missing' ? 'missing' : headState(cdnUrlFor(page.path), fetchImpl, fetchOptions)
+    ));
     const activeIds = activeRows.length
       ? new Set(activeRows.map((row) => row.id))
-      : new Set(Object.keys(slugs.cantons?.[entry.id] ?? {}));
+      : new Set(Object.keys(sectionSlugs));
     const pageManifest = await fetchPageManifest(pageManifestUrl(entry.id, CDN_BASE), {
       fetchImpl,
       section: entry.id,
@@ -747,9 +930,25 @@ export async function reconcile({
       const orphanStates = await mapLimit(candidates, 8, (page) => headState(cdnUrlFor(page.path), fetchImpl, fetchOptions));
       orphanPages = candidates.map((page, i) => ({ ...page, state: orphanStates[i] }));
     }
-    const plan = planSectionBackfill(entry.id, expected.map((page, i) => ({ ...page, state: states[i] })), dateById, cap, orphanPages);
+    const plan = planSectionBackfill(entry.id, pagesWithLandingState.map((page, i) => ({ ...page, state: states[i] })), dateById, cap, orphanPages);
     plan.pageManifest = pageManifest.state;
     if (pageManifest.reason) plan.pageManifestReason = pageManifest.reason;
+    plan.landingContent = landingChecks.map(({ locale, path: landingPath, state, expectedCount, foundCount, declaredCount, missingIds, extraIds, extraPaths, problems, reason }) => ({
+      locale,
+      path: landingPath,
+      state,
+      expectedCount,
+      foundCount,
+      declaredCount,
+      missingIds,
+      extraIds,
+      extraPaths,
+      problems,
+      ...(reason ? { reason } : {}),
+    }));
+    for (const check of landingChecks.filter((candidate) => candidate.state === 'unknown')) {
+      plan.unknown.push(check.reason);
+    }
     sections.push(plan);
   }
   return { skipped: null, apiCommit: manifest.commit, edgeCommit: edgeRegistry.commit, pendingEdgeFlip, sections };
@@ -777,6 +976,7 @@ export async function main(argv = process.argv.slice(2)) {
   report.counts = {
     sections: report.sections.length,
     dispatch: report.sections.filter((s) => s.dispatch).length,
+    landingContentStale: report.sections.reduce((n, s) => n + (s.landingContent?.filter((landing) => landing.state === 'invalid').length ?? 0), 0),
     missing: report.sections.reduce((n, s) => n + s.missingIds.length, 0),
     missingPages: report.sections.reduce((n, s) => n + (s.expectedMissingPagePaths?.length ?? 0), 0),
     leftover: report.sections.reduce((n, s) => n + s.leftover.length, 0),
@@ -789,7 +989,7 @@ export async function main(argv = process.argv.slice(2)) {
   if (report.skipped) console.log(`[reconcile-sections] rimandato: ${report.skipped}`);
   console.log(
     `[reconcile-sections] corpus @${String(report.apiCommit).slice(0, 8)} — sezioni live ${report.counts.sections}, ` +
-      `da ripubblicare ${report.counts.dispatch}, pagine mancanti ${report.counts.missingPages}, articoli mancanti ${report.counts.missing} (oltre il cap ${report.counts.leftover}), ` +
+      `da ripubblicare ${report.counts.dispatch}, landing non sincronizzate ${report.counts.landingContentStale}, pagine mancanti ${report.counts.missingPages}, articoli mancanti ${report.counts.missing} (oltre il cap ${report.counts.leftover}), ` +
       `orfane ${report.counts.orphaned}, manifest non verificabili ${report.counts.manifestUnknown}, ` +
       `non verificabili ${report.counts.unknown}`,
   );
