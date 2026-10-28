@@ -152,6 +152,27 @@ test('una gara stale consegna la sezione al coordinatore senza dichiarare una pu
   assert.match(workflow, /steps\.replay_freshness\.outputs\.fresh == 'false'[\s\S]*needs\.publish_release_head\.outputs\.mixed_matrix == 'true'/u);
 });
 
+test('il replay stale installa il parser prima di risolvere la release API', () => {
+  const publish = workflow.slice(workflow.indexOf('\n  publish:'));
+  const runtime = publish.indexOf('- name: Setup isolated article source runtime');
+  const staleDispatch = publish.indexOf('- name: Dispatch bounded replay with current corpus checkout');
+
+  assert.ok(runtime >= 0, 'il publish deve inizializzare il runtime TypeScript');
+  assert.ok(staleDispatch > runtime, 'il runtime deve precedere il dispatch stale');
+  assert.match(
+    publish.slice(runtime, staleDispatch),
+    /if: steps\.replay_freshness\.outcome == 'success'/u,
+  );
+  assert.match(
+    publish.slice(runtime, staleDispatch),
+    /uses: \.\/\.replay-dispatcher-source\/\.github\/actions\/setup-article-source-runtime/u,
+  );
+  assert.match(
+    publish.slice(staleDispatch),
+    /import \{ resolveStaleReplayApiReleaseCommit \} from "\.\/scripts\/publish-section-pages\.mjs"/u,
+  );
+});
+
 test('un resolve stale produce la matrice sulla nuova HEAD e lascia il recovery come rete di sicurezza', () => {
   assert.match(
     recovery,

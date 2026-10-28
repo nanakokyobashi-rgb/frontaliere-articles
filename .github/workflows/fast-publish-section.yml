@@ -662,6 +662,22 @@ jobs:
           fi
           echo 'fresh=true' >> "$GITHUB_OUTPUT"
 
+      - name: Set up Node
+        if: steps.replay_freshness.outcome == 'success'
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      # The stale branch resolves the previous API release before it dispatches
+      # the bounded replay. That resolver imports the static article-source AST
+      # reader, so it needs the same pinned compiler as the fresh render path.
+      # Keep this setup before both branches: a stale replay must not fail just
+      # because its normal dependency install is intentionally skipped.
+      - name: Setup isolated article source runtime
+        if: steps.replay_freshness.outcome == 'success'
+        uses: ./.replay-dispatcher-source/.github/actions/setup-article-source-runtime
+
       # Un replay stantio usa il workflow corrente su main e la sua HEAD come
       # sorgente del corpus. Per una run API osservata conserva P come release
       # solo se P copre tutti gli input raggiungibili dalla HEAD corrente;
@@ -793,17 +809,6 @@ jobs:
             fi
           fi
           bash scripts/ci/fetch-push-base-if-missing.sh
-
-      - name: Set up Node
-        if: steps.replay_freshness.outputs.fresh == 'true'
-        uses: actions/setup-node@v7
-        with:
-          node-version: '22'
-          cache: 'npm'
-
-      - name: Setup isolated article source runtime
-        if: steps.replay_freshness.outputs.fresh == 'true'
-        uses: ./.replay-dispatcher-source/.github/actions/setup-article-source-runtime
 
       - name: Install dependencies
         if: steps.replay_freshness.outputs.fresh == 'true'

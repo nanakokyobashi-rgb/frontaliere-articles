@@ -164,7 +164,10 @@ test('article-source runtime is isolated, pinned, retried, and limited to parser
   assert.ok(publishApiPushPaths.includes("'scripts/lib/npm-ci-retry.sh'"), 'changing the action retry helper must rerun publish-api');
 
   assert.match(getJobBlock(read('.github/workflows/fast-publish-article.yml'), 'publish'), /Setup isolated article source runtime\n        if: needs\.resolve\.outputs\.skip != 'true'/);
-  assert.match(getJobBlock(read('.github/workflows/fast-publish-section.yml'), 'publish'), /Setup isolated article source runtime\n        if: steps\.replay_freshness\.outputs\.fresh == 'true'/);
+  assert.match(
+    getJobBlock(read('.github/workflows/fast-publish-section.yml'), 'publish'),
+    /Setup isolated article source runtime\n        if: steps\.replay_freshness\.outcome == 'success'/,
+  );
 
   const batchFaqWorkflow = read('.github/workflows/batch-faq-articles.yml');
   const batchFaqPushPaths = batchFaqWorkflow.slice(batchFaqWorkflow.indexOf('on:'), batchFaqWorkflow.indexOf('permissions:'));
