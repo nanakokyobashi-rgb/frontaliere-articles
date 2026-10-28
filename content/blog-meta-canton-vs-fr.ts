@@ -39,6 +39,9 @@ const blogMetaCantonVsFr: Record<string, string> = {
     'blog.article.salario-minimo-valese-voto.title': 'La droite et l’économie valaisanne contre un salaire minimum de CHF 22',
     'blog.article.salario-minimo-valese-voto.excerpt': 'La droite et l’économie valaisanne disent non à CHF 22 de l’heure.',
     'blog.article.salario-minimo-valese-voto.imageAlt': 'Contexte de travail en Valais lié au débat sur le salaire minimum.',
+    'blog.article.bains-ovronnaz-nuovo-sursis.title': 'Bains d\'Ovronnaz : sursis concordataire jusqu\'au 31 mars 2027',
+    'blog.article.bains-ovronnaz-nuovo-sursis.excerpt': 'Le tribunal de Martigny prolonge le sursis jusqu\'au 31 mars 2027 Les employés conservent leur emploi pendant toute la saison hivernale La fréquentation augmente',
+    'blog.article.bains-ovronnaz-nuovo-sursis.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonVsFr;

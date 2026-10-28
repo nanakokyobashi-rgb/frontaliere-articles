@@ -460,6 +460,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-bains-ovronnaz-nuovo-sursis': {
+    title: 'Bains d\'Ovronnaz: sursis concordatario fino al 31 marzo 2027',
+    description: 'Il tribunale di Martigny prolunga il sursis fino al 31 marzo 2027 I dipendenti conservano il posto per tutta la stagione invernale Le presenze',
+    keywords: 'frontalieri, ticino, svizzera, italia, bains, ovronnaz, sursis, concordatario',
+    ogTitle: 'Bains d\'Ovronnaz: sursis fino a marzo 2027',
+    ogDescription: 'Il tribunale di Martigny prolunga il sursis fino al 31 marzo 2027 I dipendenti conservano il posto per tutta la stagione invernale Le presenze aumentano',
+    canonicalPath: '/articoli-vallese/bains-ovronnaz-nuovo-sursis/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bains d'Ovronnaz: sursis concordatario fino al 31 marzo 2027",
+      "description": "Il tribunale di Martigny prolunga il sursis fino al 31 marzo 2027 I dipendenti conservano il posto per tutta la stagione invernale Le presenze",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-bains-ovronnaz-nuovo-sursis.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-28T15:29:18+00:00",
+      "dateModified": "2026-10-28T15:29:18+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-vallese/bains-ovronnaz-nuovo-sursis/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

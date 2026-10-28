@@ -39,6 +39,9 @@ const blogMetaCantonVsDe: Record<string, string> = {
     'blog.article.salario-minimo-valese-voto.title': 'Rechte und Walliser Wirtschaft gegen einen Mindestlohn von CHF 22',
     'blog.article.salario-minimo-valese-voto.excerpt': 'Die Rechte und die Walliser Wirtschaft sagen Nein zu CHF 22 pro Stunde.',
     'blog.article.salario-minimo-valese-voto.imageAlt': 'Arbeitskontext im Wallis bezüglich der Mindestlohndebatte.',
+    'blog.article.bains-ovronnaz-nuovo-sursis.title': 'Bains d\'Ovronnaz: Nachlassstundung bis zum 31. März 2027',
+    'blog.article.bains-ovronnaz-nuovo-sursis.excerpt': 'Das Gericht von Martigny verlängert die Nachlassstundung bis zum 31.',
+    'blog.article.bains-ovronnaz-nuovo-sursis.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonVsDe;

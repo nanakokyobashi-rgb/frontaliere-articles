@@ -138,4 +138,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'bains-ovronnaz-nuovo-sursis',
+ category: 'novita',
+ date: '2026-10-28T15:29:18.560Z',
+ image: '/images/blog/article-bains-ovronnaz-nuovo-sursis.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['VS'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

@@ -39,6 +39,9 @@ const blogMetaCantonVsEn: Record<string, string> = {
     'blog.article.salario-minimo-valese-voto.title': 'Valais right and business oppose a minimum wage of CHF 22',
     'blog.article.salario-minimo-valese-voto.excerpt': 'The right wing and the Valais economy say no to CHF 22 an hour.',
     'blog.article.salario-minimo-valese-voto.imageAlt': 'Valais working context related to the minimum wage debate.',
+    'blog.article.bains-ovronnaz-nuovo-sursis.title': 'Bains d\'Ovronnaz: composition moratorium until March 31, 2027',
+    'blog.article.bains-ovronnaz-nuovo-sursis.excerpt': 'The Martigny court extends the moratorium until March 31, 2027 Employees retain their jobs throughout the winter season Visitor numbers increase by 20-30%',
+    'blog.article.bains-ovronnaz-nuovo-sursis.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonVsEn;
