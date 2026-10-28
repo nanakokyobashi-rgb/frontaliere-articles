@@ -28880,6 +28880,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'allarme-popolazione-165-milioni',
+    category: 'novita',
+    date: '2026-10-28T16:52:57.192Z',
+    image: '/images/blog/article-allarme-popolazione-165-milioni.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

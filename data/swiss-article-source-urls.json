@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/wmt65fflcyzy": {
-    "articleId": "consiglio-federale-modifica-isos",
-    "ts": "2026-09-21T00:34:16.256Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1951416/citta-perdita-estate-miliardi-produzione-perdite-causato-due": {
     "articleId": "estate-2026-perdita-produttivita",
     "ts": "2026-09-21T04:48:45.986Z",
@@ -2497,6 +2492,11 @@
   "https://www.admin.ch/it/newnsb/6eq-cbh2kkcn": {
     "articleId": "tavola-rotonda-sei-misure",
     "ts": "2026-10-28T09:49:01.638Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1959566/federale-sirene-allarme-popolazione-sistema": {
+    "articleId": "allarme-popolazione-165-milioni",
+    "ts": "2026-10-28T16:52:58.405Z",
     "keyForm": 2
   }
 }
