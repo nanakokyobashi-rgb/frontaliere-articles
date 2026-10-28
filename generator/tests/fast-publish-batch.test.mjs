@@ -69,24 +69,28 @@ test('i JSON di batch non passano a jq come argomenti di dimensione illimitata',
   assert.doesNotMatch(resolveStep, /--argjson\s+(?:ids|target)\s+"/u);
 });
 
-test('i target della matrix vengono spezzati prima dell export come env', () => {
+test('il piano completo passa da artifact e la matrix porta solo il routing', () => {
   const resolveStep = stepText('Resolve mode, article ids and section');
 
-  // `ARTICLE_IDS_JSON` is exported by GitHub before the render shell starts;
-  // keeping the bound in the resolver prevents MAX_ARG_STRLEN from rejecting
-  // a valid whole-registry publication before the script can run.
-  assert.match(resolveStep, /publish_batch_size=/u);
-  assert.match(resolveStep, /while IFS= read -r batch_target/u);
-  assert.match(resolveStep, /range\(0; \(\$target\.ids \| length\); \$size\)/u);
-  assert.match(resolveStep, /\.ids = \$target\.ids\[\$offset:\(\$offset \+ \$size\)\]/u);
-  assert.match(resolveStep, /append_matrix_target "\$batch_target"/u);
+  // A corpus-sized plan must never be exported as a matrix field or an env
+  // value. The resolver uploads IDs as a file and the publish matrix carries
+  // only section/shard routing metadata, so one job owns the complete shard.
+  assert.match(resolveStep, /publish_plan_with_shards=/u);
+  assert.match(resolveStep, /fast-publish-article-plan\.json/u);
+  assert.match(resolveStep, /append_matrix_target "\$\(printf '%s' "\$target_with_shard" \| jq -c 'del\(\.ids\)'\)"/u);
+  assert.match(workflow, /name: Upload resolved article plan[\s\S]*fast-publish-article-plan-\$\{\{ github\.run_id \}\}/u);
+  assert.match(workflow, /name: Download resolved article plan[\s\S]*fast-publish-article-plan-\$\{\{ github\.run_id \}\}/u);
+  assert.match(workflow, /map\(select\(\.section == \$section\)\)[\s\S]*\.\[0\]\.ids/u);
+  assert.doesNotMatch(workflow, /ARTICLE_IDS_JSON: \$\{\{ toJSON\(matrix\.target\.ids\) \}\}/u);
 });
 
-test('tutti i batch restano nella coda della strategy', () => {
+test('la matrix resta una coda reale senza batch concorrenti per shard', () => {
   assert.match(
     workflow,
-    /strategy:\s+fail-fast: false\s+#[^\n]*\n(?:\s+#.*\n)*\s+max-parallel: 1\s+matrix:/u,
+    /strategy:\s+fail-fast: false\s+#[^\n]*\n(?:\s+#.*\n)*\s+max-parallel: 1\s+matrix:[\s\S]*?target: \$\{\{ fromJSON\(needs\.resolve\.outputs\.matrix\) \}\}/u,
   );
+  assert.match(workflow, /del\(\.ids\)/u);
+  assert.doesNotMatch(workflow, /queue: max/u);
 });
 
 test('le superfici articolo oltre il body producono solo gli ID realmente cambiati', () => {
@@ -553,7 +557,7 @@ test('body e immagini multi-sezione diventano target matrix separati', () => {
   assert.doesNotMatch(imagePlan, /one commit changes both article sections/);
   assert.match(workflow, /matrix:\s*\n\s+target: \$\{\{ fromJSON\(needs\.resolve\.outputs\.matrix\) \}\}/);
   assert.match(workflow, /group: fast-publish-article-\$\{\{ matrix\.target\.shard \}\}/);
-  assert.match(workflow, /ARTICLE_IDS_JSON: \$\{\{ toJSON\(matrix\.target\.ids\) \}\}/);
+  assert.match(workflow, /fast-publish-article-plan-\$\{\{ github\.run_id \}\}/);
   assert.match(workflow, /--released-articles-file "\$RUNNER_TEMP\/fast-summary\.json"/);
 });
 
@@ -577,7 +581,8 @@ test('il dispatch accetta una lista JSON e il workflow la passa al renderer batc
   assert.match(workflow, /article_ids:\s*\n\s+description: 'JSON array of article ids/);
   assert.match(workflow, /ARTICLE_IDS_INPUT: \$\{\{ inputs\.article_ids \}\}/);
   assert.match(workflow, /article_ids_file="\$RUNNER_TEMP\/fast-article-ids\.json"/);
-  assert.match(workflow, /printf '%s' "\$ARTICLE_IDS_JSON" > "\$article_ids_file"/);
+  assert.match(workflow, /jq -ce --arg section "\$\{\{ matrix\.target\.section \}\}"/);
+  assert.match(workflow, /fast-publish-plan\/fast-publish-article-plan\.json/);
   assert.match(workflow, /--ids-file "\$article_ids_file"/);
   assert.doesNotMatch(workflow, /--ids "\$ARTICLE_IDS_JSON"/);
   assert.match(publisher, /--ids-file/);
