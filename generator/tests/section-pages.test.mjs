@@ -3568,7 +3568,8 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.doesNotMatch(recovery, /git fetch --no-tags --(?:unshallow )?origin main/);
   assert.match(render, /PUSH_BEFORE="\$\{PUSH_BEFORE:-\}" FETCH_MAIN=true/);
   assert.doesNotMatch(render, /git fetch --no-tags --(?:unshallow )?origin main/);
-  assert.match(wf, /history_guard_source=.*fetch-push-base-if-missing\.sh/);
+  assert.match(wf, /test -f \.replay-dispatcher-source\/scripts\/ci\/fetch-push-base-if-missing\.sh/);
+  assert.match(wf, /ln -sfn "\$PWD\/\.replay-dispatcher-source\/scripts\/ci\/fetch-push-base-if-missing\.sh" scripts\/ci\/fetch-push-base-if-missing\.sh/);
   assert.match(wf, /FETCH_MAIN=true[\s\\]*bash scripts\/ci\/fetch-push-base-if-missing\.sh/);
   assert.match(historyGuard, /HISTORY_FETCH_DELAY_S/);
   assert.match(historyGuard, /history_fetch_delay_cap_s=30/);

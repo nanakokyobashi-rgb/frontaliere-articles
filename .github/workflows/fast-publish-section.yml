@@ -1,34 +1,9 @@
 name: fast-publish-section
 run-name: cover-publish-section / ${{ inputs.section || 'auto' }} / nonce=${{ inputs.dispatch_nonce || 'none' }} / dry=${{ inputs.dry_run }}
 
-# Pubblica su R2 le pagine delle sezioni articoli CANTONALI (piano «sezioni
-# articoli per cantone», D3/D8; P7b). E' il gemello di fast-publish-article.yml
-# per le sezioni che non hanno uno shard Pages: il Worker del sito le serve da
-# `edge/sections/<path>/index.html` quando il registro pubblicato da
-# publish-api.yml le dichiara `live`.
-#
-# Cosa fa scattare un publish: un push che tocca i contenuti di una sezione
-# cantonale ATTIVA nel core — un corpo (gli articoli cambiati vengono resi),
-# oppure registro, mappa slug, meta, chunk SEO o i dati di un hub (si rendono
-# landing, archivio e hub). Quali sezioni e quali id lo decide
-# `scripts/ci/fast-publish-section.mjs r2-plan`, dal core: con la lista attiva
-# di oggi (nessun cantone) la matrice e' vuota e il job `publish` non parte.
-#
-# CONCURRENCY PER SEZIONE (D8), non globale: `fast-publish-<sezione>`, senza
-# cancellazione. Un gruppo unico con 24 generatori terrebbe una sola run in
-# attesa e scarterebbe le altre (misurato su generate-article: 16 su 60), e gli
-# articoli persi finirebbero tutti sulla riconciliazione. Due sezioni diverse
-# scrivono chiavi R2 disgiunte, quindi possono andare in parallelo.
-#
-# NIENTE NOINDEX: una pagina resa con un `noindex`, senza il meta di proprieta'
-# della route o con asset same-origin e' un rifiuto di
-# scripts/publish-section-pages.mjs, prima di qualunque upload.
-#
-# BOOTSTRAP: `workflow_dispatch` con `bootstrap: true` rende TUTTI gli articoli
-# della sezione, piu' landing, archivio e hub — e' il passo che carica le
-# pagine su R2 mentre la sezione e' ancora `draft`, PRIMA del flip a `live` in
-# sections/registry.json. Il verify in quel caso legge le chiavi sul CDN (la
-# sezione non e' ancora servita all'apex).
+# Pubblica le pagine delle sezioni cantonali su R2; il piano del core seleziona
+# le sezioni attive e il registro le rende servibili. Bootstrap carica l'intera
+# superficie prima del flip draft/live; la concorrenza resta per sezione.
 
 on:
   push:
@@ -289,8 +264,6 @@ jobs:
           resolver_target='scripts/ci/fast-publish-section-resolve.sh'
           main_head_source='.replay-dispatcher-source/scripts/ci/read-main-head.sh'
           main_head_target='scripts/ci/read-main-head.sh'
-          history_guard_source='.replay-dispatcher-source/scripts/ci/fetch-push-base-if-missing.sh'
-          history_guard_target='scripts/ci/fetch-push-base-if-missing.sh'
           edge_candidate_source='.replay-dispatcher-source/scripts/ci/fast-publish-section-edge-candidate.sh'
           edge_candidate_target='scripts/ci/fast-publish-section-edge-candidate.sh'
           preflight_source='.replay-dispatcher-source/scripts/ci/fast-publish-section-preflight.sh'
@@ -301,10 +274,6 @@ jobs:
           fi
           if [ ! -f "$main_head_source" ]; then
             echo "::error::helper della punta di main non presente nel checkout della revisione del workflow"
-            exit 1
-          fi
-          if [ ! -f "$history_guard_source" ]; then
-            echo "::error::guard della storia Git non presente nel checkout della revisione del workflow"
             exit 1
           fi
           if [ ! -f "$edge_candidate_source" ]; then
@@ -320,7 +289,8 @@ jobs:
           # resolver deve pero' sempre provenire dalla revisione che contiene
           # il workflow; le sorgenti e i dati restano quelli del run pinnato.
           install -m 0755 "$resolver_source" "$resolver_target"
-          install -m 0755 "$history_guard_source" "$history_guard_target"
+          test -f .replay-dispatcher-source/scripts/ci/fetch-push-base-if-missing.sh
+          ln -sfn "$PWD/.replay-dispatcher-source/scripts/ci/fetch-push-base-if-missing.sh" scripts/ci/fetch-push-base-if-missing.sh
           if [ -f "$main_head_source" ]; then
             install -m 0755 "$main_head_source" "$main_head_target"
           elif [ -f "$main_head_target" ]; then
@@ -605,20 +575,15 @@ jobs:
           set -euo pipefail
           source='.replay-dispatcher-source/scripts/ci/read-main-head.sh'
           target='scripts/ci/read-main-head.sh'
-          history_guard_source='.replay-dispatcher-source/scripts/ci/fetch-push-base-if-missing.sh'
-          history_guard_target='scripts/ci/fetch-push-base-if-missing.sh'
           render_source='.replay-dispatcher-source/scripts/ci/fast-publish-section-render.sh'
           render_target='scripts/ci/fast-publish-section-render.sh'
           if [ ! -f "$render_source" ]; then
             echo "::error::helper di render non presente nel checkout della revisione del workflow"
             exit 1
           fi
-          if [ ! -f "$history_guard_source" ]; then
-            echo "::error::guard della storia Git non presente nel checkout della revisione del workflow"
-            exit 1
-          fi
           install -m 0755 "$render_source" "$render_target"
-          install -m 0755 "$history_guard_source" "$history_guard_target"
+          test -f .replay-dispatcher-source/scripts/ci/fetch-push-base-if-missing.sh
+          ln -sfn "$PWD/.replay-dispatcher-source/scripts/ci/fetch-push-base-if-missing.sh" scripts/ci/fetch-push-base-if-missing.sh
           if [ -f "$source" ]; then
             install -m 0755 "$source" "$target"
           elif [ -f "$target" ]; then
@@ -1119,20 +1084,15 @@ jobs:
           set -euo pipefail
           source='.replay-dispatcher-source/scripts/ci/read-main-head.sh'
           target='scripts/ci/read-main-head.sh'
-          history_guard_source='.replay-dispatcher-source/scripts/ci/fetch-push-base-if-missing.sh'
-          history_guard_target='scripts/ci/fetch-push-base-if-missing.sh'
           recovery_source='.replay-dispatcher-source/scripts/ci/fast-publish-section-recovery.sh'
           recovery_target='scripts/ci/fast-publish-section-recovery.sh'
           if [ ! -f "$recovery_source" ]; then
             echo "::error::helper di recovery non presente nel checkout della revisione del workflow"
             exit 1
           fi
-          if [ ! -f "$history_guard_source" ]; then
-            echo "::error::guard della storia Git non presente nel checkout della revisione del workflow"
-            exit 1
-          fi
           install -m 0755 "$recovery_source" "$recovery_target"
-          install -m 0755 "$history_guard_source" "$history_guard_target"
+          test -f .replay-dispatcher-source/scripts/ci/fetch-push-base-if-missing.sh
+          ln -sfn "$PWD/.replay-dispatcher-source/scripts/ci/fetch-push-base-if-missing.sh" scripts/ci/fetch-push-base-if-missing.sh
           if [ -f "$source" ]; then
             install -m 0755 "$source" "$target"
           elif [ -f "$target" ]; then
