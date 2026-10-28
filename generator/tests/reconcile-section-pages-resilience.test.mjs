@@ -8,6 +8,7 @@ import {
   reconcile,
   remainingBudgetMs,
   RECONCILE_FETCH_MAX_RETRY_AFTER_MS,
+  landingArticleCoverage,
 } from '../../scripts/reconcile-section-pages.mjs';
 
 const API_BASE = 'https://api.test';
@@ -127,12 +128,18 @@ test('headState: attende Retry-After di HEAD 405 anche nel secondo tentativo', a
   assert.deepEqual(sleeps, [7_000]);
 });
 
-function fakeFetch({ sitemap = '503', sitemapXml } = {}) {
+function fakeFetch({
+  sitemap = '503',
+  sitemapXml,
+  cantonArticles = [],
+  cantonSlugs = {},
+  landingHtml = '<script type="application/ld+json">{"numberOfItems":0}</script>',
+} = {}) {
   const docs = {
     'manifest.json': { commit: 'abc1234' },
     'sections.json': { commit: 'abc1234', sections: [CATALOG] },
-    'slugs.json': { commit: 'abc1234', cantons: { 'canton-ti': {} } },
-    'canton-articles.json': [],
+    'slugs.json': { commit: 'abc1234', cantons: { 'canton-ti': cantonSlugs } },
+    'canton-articles.json': cantonArticles,
   };
   const edgeRegistry = { schema: 1, commit: 'abc1234', sections: { 'canton-ti': { status: 'live' } } };
 
@@ -148,10 +155,69 @@ function fakeFetch({ sitemap = '503', sitemapXml } = {}) {
       if (sitemap instanceof Error) throw sitemap;
       return { ok: false, status: Number(sitemap), text: async () => '' };
     }
+    if (Object.values(CATALOG.paths).some((sectionPath) => clean.endsWith(`/edge/sections${sectionPath}index.html`))) {
+      return { ok: true, status: 200, text: async () => landingHtml };
+    }
     const name = clean.split('/').pop();
     return { ok: true, status: 200, json: async () => docs[name] };
   };
 }
+
+test('landingArticleCoverage: riconosce gli articoli mancanti anche se il file HTML esiste', () => {
+  const rows = [{ id: 'article-one' }, { id: 'article-two' }];
+  const slugs = {
+    'article-one': { it: 'article-one' },
+    'article-two': { it: 'article-two' },
+  };
+  const coverage = landingArticleCoverage({
+    entry: CATALOG,
+    rows,
+    slugs,
+    locale: 'it',
+    html: '<script type="application/ld+json">{"numberOfItems":1}</script>' +
+      '<a href="https://frontaliereticino.ch/articoli-ticino/article-one/">uno</a>',
+  });
+
+  assert.deepEqual(coverage.missingIds, ['article-two']);
+  assert.equal(coverage.expectedCount, 2);
+  assert.equal(coverage.foundCount, 1);
+  assert.equal(coverage.declaredCount, 1);
+  assert.deepEqual(coverage.problems, ['missing-articles:article-two', 'numberOfItems:1/2']);
+});
+
+test('reconcile: una landing stale dispatcha il refresh della sezione anche con dettagli presenti', async () => {
+  const rows = [{ id: 'article-one', section: 'canton-ti', date: '2026-10-28T10:00:00Z' }];
+  const slugs = { 'article-one': { it: 'article-one', en: 'article-one-en', de: 'article-one-de', fr: 'article-one-fr' } };
+  const sitemapXml = [
+    '<urlset>',
+    '  <url><loc>https://frontaliereticino.ch/articoli-ticino/</loc></url>',
+    '  <url><loc>https://frontaliereticino.ch/articoli-ticino/article-one/</loc></url>',
+    '</urlset>',
+  ].join('');
+  const report = await reconcile({
+    fetchImpl: fakeFetch({
+      sitemapXml,
+      cantonArticles: rows,
+      cantonSlugs: slugs,
+      landingHtml: '<script type="application/ld+json">{"numberOfItems":0}</script>',
+    }),
+    retryDelayMs: 0,
+    sleepImpl: async () => {},
+  });
+
+  const section = report.sections[0];
+  assert.equal(section.dispatch, true);
+  assert.deepEqual(section.selected, []);
+  assert.deepEqual(section.sectionMissing, [
+    '/articoli-ticino/',
+    '/en/ticino-articles/',
+    '/de/tessin-artikel/',
+    '/fr/articles-tessin/',
+  ]);
+  assert.deepEqual(section.missingPagePaths, section.sectionMissing);
+  assert.equal(section.landingContent[0].state, 'invalid');
+  assert.deepEqual(section.landingContent[0].missingIds, ['article-one']);
+});
 
 test('reconcile: una sitemap HTTP non verificabile non fallisce il run e non dispatcha', async () => {
   const report = await reconcile({ apiBase: API_BASE, fetchImpl: fakeFetch({ sitemap: '503' }) });

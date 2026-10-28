@@ -22,6 +22,8 @@
  *   presente  HEAD sulla chiave che il Worker legge, per le pagine annunciate
  *             e per le pagine articolo candidate come orfane dal manifest,
  *             `https://cdn.frontaliereticino.ch/edge/sections/<path>/index.html`
+ *             e contenuto delle quattro landing confrontato con gli articoli
+ *             annunciati dall'API (un HTML 200 da solo non basta)
  *
  * Il registro R2 puo' essere ancora sul commit precedente: e' precisamente il
  * caso di recovery in cui publish-api ha gia' pubblicato Pages ma ha rifiutato
@@ -502,6 +504,56 @@ function sitemapFailureDetail(url, error) {
   return reason.startsWith(`${url}:`) ? reason : `${url}: ${reason}`;
 }
 
+/**
+ * Confronta gli articoli annunciati con i link realmente presenti nella
+ * landing pubblicata. Il manifest edge prova che esiste un file HTML, non che
+ * quel file sia stato rigenerato dopo l'ultimo aggiornamento dell'indice API.
+ *
+ * @param {{ paths: Record<string, string> }} entry
+ * @param {Array<{ id: string }>} rows
+ * @param {Record<string, Record<string, string>>} slugs
+ * @param {string} locale
+ * @param {string} html
+ */
+export function landingArticleCoverage({ entry, rows, slugs, locale, html }) {
+  const prefix = entry?.paths?.[locale];
+  if (typeof prefix !== 'string' || !prefix.endsWith('/')) {
+    throw new Error(`prefisso landing non valido per ${locale}`);
+  }
+  const articleByPath = new Map();
+  for (const row of rows ?? []) {
+    const id = String(row?.id ?? '');
+    const slug = slugs?.[id]?.[locale];
+    if (id && typeof slug === 'string' && slug) articleByPath.set(`${prefix}${slug}/`, id);
+  }
+  const found = new Set();
+  for (const match of String(html ?? '').matchAll(/href\s*=\s*["']([^"']+)["']/giu)) {
+    try {
+      const pathname = new URL(match[1], 'https://frontaliereticino.ch').pathname;
+      const id = articleByPath.get(pathname);
+      if (id) found.add(id);
+    } catch {
+      // Un href non URL non può dimostrare la presenza di un articolo.
+    }
+  }
+  const expectedIds = [...articleByPath.values()];
+  const missingIds = expectedIds.filter((id) => !found.has(id));
+  const numberOfItemsMatch = String(html ?? '').match(/"numberOfItems"\s*:\s*(\d+)/u);
+  const declaredCount = numberOfItemsMatch ? Number(numberOfItemsMatch[1]) : null;
+  const problems = [];
+  if (missingIds.length > 0) problems.push(`missing-articles:${missingIds.join(',')}`);
+  if (declaredCount !== null && declaredCount !== expectedIds.length) {
+    problems.push(`numberOfItems:${declaredCount}/${expectedIds.length}`);
+  }
+  return {
+    expectedCount: expectedIds.length,
+    foundCount: found.size,
+    declaredCount,
+    missingIds,
+    problems,
+  };
+}
+
 function skippedSurface({ code, reason, apiCommit = null, edgeCommit = null, pendingEdgeFlip = null, url = null, status = null }) {
   return {
     skipped: reason,
@@ -731,11 +783,51 @@ export async function reconcile({
       sections.push(unknownSitemapPlan(entry.id, detail));
       continue;
     }
-    const states = await mapLimit(expected, 8, (page) => headState(cdnUrlFor(page.path), fetchImpl, fetchOptions));
     const activeRows = rows.filter((row) => row.section === entry.id);
+    const sectionSlugs = slugs.cantons?.[entry.id] ?? {};
+    const landingChecks = [];
+    for (const locale of LOCALES) {
+      const landingPath = entry.paths[locale];
+      const landingUrl = cdnUrlFor(landingPath);
+      try {
+        const html = await getText(landingUrl, fetchImpl, fetchOptions);
+        const coverage = landingArticleCoverage({
+          entry,
+          rows: activeRows,
+          slugs: sectionSlugs,
+          locale,
+          html,
+        });
+        landingChecks.push({ locale, path: landingPath, state: coverage.problems.length ? 'invalid' : 'ok', ...coverage });
+      } catch (error) {
+        landingChecks.push({
+          locale,
+          path: landingPath,
+          state: 'unknown',
+          reason: sitemapFailureDetail(landingUrl, error),
+          expectedCount: activeRows.length,
+          foundCount: null,
+          declaredCount: null,
+          missingIds: [],
+          problems: [],
+        });
+      }
+    }
+    const pagesWithLandingState = expected.map((page) => {
+      const check = landingChecks.find((candidate) => candidate.path === page.path && candidate.state === 'invalid');
+      return check && page.kind === 'section' ? { ...page, state: 'missing' } : page;
+    });
+    for (const check of landingChecks.filter((candidate) => candidate.state === 'invalid')) {
+      if (!pagesWithLandingState.some((page) => page.kind === 'section' && page.path === check.path)) {
+        pagesWithLandingState.push({ kind: 'section', locale: check.locale, path: check.path, state: 'missing' });
+      }
+    }
+    const states = await mapLimit(pagesWithLandingState, 8, (page) => (
+      page.state === 'missing' ? 'missing' : headState(cdnUrlFor(page.path), fetchImpl, fetchOptions)
+    ));
     const activeIds = activeRows.length
       ? new Set(activeRows.map((row) => row.id))
-      : new Set(Object.keys(slugs.cantons?.[entry.id] ?? {}));
+      : new Set(Object.keys(sectionSlugs));
     const pageManifest = await fetchPageManifest(pageManifestUrl(entry.id, CDN_BASE), {
       fetchImpl,
       section: entry.id,
@@ -747,9 +839,23 @@ export async function reconcile({
       const orphanStates = await mapLimit(candidates, 8, (page) => headState(cdnUrlFor(page.path), fetchImpl, fetchOptions));
       orphanPages = candidates.map((page, i) => ({ ...page, state: orphanStates[i] }));
     }
-    const plan = planSectionBackfill(entry.id, expected.map((page, i) => ({ ...page, state: states[i] })), dateById, cap, orphanPages);
+    const plan = planSectionBackfill(entry.id, pagesWithLandingState.map((page, i) => ({ ...page, state: states[i] })), dateById, cap, orphanPages);
     plan.pageManifest = pageManifest.state;
     if (pageManifest.reason) plan.pageManifestReason = pageManifest.reason;
+    plan.landingContent = landingChecks.map(({ locale, path: landingPath, state, expectedCount, foundCount, declaredCount, missingIds, problems, reason }) => ({
+      locale,
+      path: landingPath,
+      state,
+      expectedCount,
+      foundCount,
+      declaredCount,
+      missingIds,
+      problems,
+      ...(reason ? { reason } : {}),
+    }));
+    for (const check of landingChecks.filter((candidate) => candidate.state === 'unknown')) {
+      plan.unknown.push(check.reason);
+    }
     sections.push(plan);
   }
   return { skipped: null, apiCommit: manifest.commit, edgeCommit: edgeRegistry.commit, pendingEdgeFlip, sections };
@@ -777,6 +883,7 @@ export async function main(argv = process.argv.slice(2)) {
   report.counts = {
     sections: report.sections.length,
     dispatch: report.sections.filter((s) => s.dispatch).length,
+    landingContentStale: report.sections.reduce((n, s) => n + (s.landingContent?.filter((landing) => landing.state === 'invalid').length ?? 0), 0),
     missing: report.sections.reduce((n, s) => n + s.missingIds.length, 0),
     missingPages: report.sections.reduce((n, s) => n + (s.expectedMissingPagePaths?.length ?? 0), 0),
     leftover: report.sections.reduce((n, s) => n + s.leftover.length, 0),
@@ -789,7 +896,7 @@ export async function main(argv = process.argv.slice(2)) {
   if (report.skipped) console.log(`[reconcile-sections] rimandato: ${report.skipped}`);
   console.log(
     `[reconcile-sections] corpus @${String(report.apiCommit).slice(0, 8)} — sezioni live ${report.counts.sections}, ` +
-      `da ripubblicare ${report.counts.dispatch}, pagine mancanti ${report.counts.missingPages}, articoli mancanti ${report.counts.missing} (oltre il cap ${report.counts.leftover}), ` +
+      `da ripubblicare ${report.counts.dispatch}, landing non sincronizzate ${report.counts.landingContentStale}, pagine mancanti ${report.counts.missingPages}, articoli mancanti ${report.counts.missing} (oltre il cap ${report.counts.leftover}), ` +
       `orfane ${report.counts.orphaned}, manifest non verificabili ${report.counts.manifestUnknown}, ` +
       `non verificabili ${report.counts.unknown}`,
   );
