@@ -4,17 +4,17 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "mobilita",
-  "updatedAt": "2026-10-27T17:42:56.215Z",
-  "contentHash": "aa40e2e0adacab1ba7f3e4b9736d214937f8f233e088fb6bdc74f70ed17ac7ff",
+  "updatedAt": "2026-10-28T09:13:19.877Z",
+  "contentHash": "118ec8c0db1bf78618b245b9c93a7e9747e64086263a022d590ef99c19a49814",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-27T09:24:17.388Z",
+      "updatedAt": "2026-10-28T00:48:17.406Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-27T11:01:59.897Z",
+      "updatedAt": "2026-10-27T21:31:39.250Z",
       "keyFacts": 0
     }
   ],
@@ -27,13 +27,13 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "6",
-          "note": "segnalazioni aggiornate: 27 ottobre 2026"
+          "value": "5",
+          "note": "segnalazioni aggiornate: 28 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "5",
-          "note": "segnalazioni aggiornate: 27 ottobre 2026"
+          "note": "segnalazioni aggiornate: 28 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -61,12 +61,6 @@
               "date": "2026-10-14T07:53:00.000Z"
             },
             {
-              "label": "A2 S. Gottardo -> Luzern Svincolo autostradale Hergiswil Sud Situazione: raccordo autostradale chiuso in entrata cantiere",
-              "value": "Chiusura",
-              "detail": "fine prevista: 28 ottobre 2026",
-              "date": "2026-10-14T07:54:00.000Z"
-            },
-            {
               "label": "A2 S. Gottardo -> Luzern Svincolo autostradale Stans Süd Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 0.3",
               "value": "Chiusura",
               "detail": "fine prevista: 9 novembre 2026",
@@ -89,10 +83,16 @@
               "value": "Cantiere",
               "detail": "fine prevista: 20 dicembre 2026",
               "date": "2026-10-12T18:00:00.000Z"
+            },
+            {
+              "label": "A2 Luzern -> S. Gottardo tra Svincolo autostradale Buochs E Svincolo autostradale Beckenried Situazione: problemi di traffico cantiere, lunghezza [km] 0.4 Limitazione del traffico: corsie strette…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 28 ottobre 2026",
+              "date": "2026-10-19T04:10:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-27T09:24:17.388Z"
+          "updatedAt": "2026-10-28T00:48:17.406Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -130,7 +130,7 @@
               "url": "https://www.buochs.ch/_rte/information/3007873"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -158,7 +158,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-27T17:42:56.215Z"
+      "updatedAt": "2026-10-28T09:13:19.877Z"
     },
     "en": {
       "canton": "NW",
@@ -168,13 +168,13 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "6",
-          "note": "reports as of 27 October 2026"
+          "value": "5",
+          "note": "reports as of 28 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "5",
-          "note": "reports as of 27 October 2026"
+          "note": "reports as of 28 October 2026"
         }
       ],
       "dataBlocks": [
@@ -202,12 +202,6 @@
               "date": "2026-10-14T07:53:00.000Z"
             },
             {
-              "label": "A2 S. Gottardo -> Luzern Svincolo autostradale Hergiswil Sud Situazione: raccordo autostradale chiuso in entrata cantiere",
-              "value": "Closure",
-              "detail": "until 28 October 2026",
-              "date": "2026-10-14T07:54:00.000Z"
-            },
-            {
               "label": "A2 S. Gottardo -> Luzern Svincolo autostradale Stans Süd Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 0.3",
               "value": "Closure",
               "detail": "until 9 November 2026",
@@ -230,10 +224,16 @@
               "value": "Roadworks",
               "detail": "until 20 December 2026",
               "date": "2026-10-12T18:00:00.000Z"
+            },
+            {
+              "label": "A2 Luzern -> S. Gottardo tra Svincolo autostradale Buochs E Svincolo autostradale Beckenried Situazione: problemi di traffico cantiere, lunghezza [km] 0.4 Limitazione del traffico: corsie strette…",
+              "value": "Roadworks",
+              "detail": "until 28 October 2026",
+              "date": "2026-10-19T04:10:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-27T09:24:17.388Z"
+          "updatedAt": "2026-10-28T00:48:17.406Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -271,7 +271,7 @@
               "url": "https://www.buochs.ch/_rte/information/3007873"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -299,7 +299,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-27T17:42:56.215Z"
+      "updatedAt": "2026-10-28T09:13:19.877Z"
     },
     "de": {
       "canton": "NW",
@@ -309,13 +309,13 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "6",
-          "note": "Meldungen vom 27. Oktober 2026"
+          "value": "5",
+          "note": "Meldungen vom 28. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "5",
-          "note": "Meldungen vom 27. Oktober 2026"
+          "note": "Meldungen vom 28. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -343,12 +343,6 @@
               "date": "2026-10-14T07:53:00.000Z"
             },
             {
-              "label": "A2 Gotthard -> Luzern Anschluss Hergiswil Süd Sachlage: Einfahrt gesperrt Baustelle",
-              "value": "Sperrung",
-              "detail": "bis 28. Oktober 2026",
-              "date": "2026-10-14T07:54:00.000Z"
-            },
-            {
               "label": "A2 Gotthard -> Luzern Anschluss Stans-Süd Sachlage: Einfahrt gesperrt Baustelle, Länge [km] 0.3",
               "value": "Sperrung",
               "detail": "bis 9. November 2026",
@@ -371,10 +365,16 @@
               "value": "Baustelle",
               "detail": "bis 20. Dezember 2026",
               "date": "2026-10-12T18:00:00.000Z"
+            },
+            {
+              "label": "A2 Luzern -> Gotthard zwischen Anschluss Buochs und Anschluss Beckenried Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.4 Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen verengt…",
+              "value": "Baustelle",
+              "detail": "bis 28. Oktober 2026",
+              "date": "2026-10-19T04:10:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-27T09:24:17.388Z"
+          "updatedAt": "2026-10-28T00:48:17.406Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -412,7 +412,7 @@
               "url": "https://www.buochs.ch/_rte/information/3007873"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -440,7 +440,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-27T17:42:56.215Z"
+      "updatedAt": "2026-10-28T09:13:19.877Z"
     },
     "fr": {
       "canton": "NW",
@@ -450,13 +450,13 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "6",
-          "note": "signalements au 27 octobre 2026"
+          "value": "5",
+          "note": "signalements au 28 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "5",
-          "note": "signalements au 27 octobre 2026"
+          "note": "signalements au 28 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -484,12 +484,6 @@
               "date": "2026-10-14T07:53:00.000Z"
             },
             {
-              "label": "A2 St-Gothard -> Lucerne Jonction autoroutière Hergiswil Sud Situation: entrée fermée travaux",
-              "value": "Fermeture",
-              "detail": "jusqu’au 28 octobre 2026",
-              "date": "2026-10-14T07:54:00.000Z"
-            },
-            {
               "label": "A2 St-Gothard -> Lucerne Jonction autoroutière Stans-Sud Situation: entrée fermée travaux, longueur [km] 0.3",
               "value": "Fermeture",
               "detail": "jusqu’au 9 novembre 2026",
@@ -512,10 +506,16 @@
               "value": "Chantier",
               "detail": "jusqu’au 20 décembre 2026",
               "date": "2026-10-12T18:00:00.000Z"
+            },
+            {
+              "label": "A2 Lucerne -> St-Gothard entre Jonction autoroutière Buochs et Jonction autoroutière Beckenried Situation: trafic perturbé travaux, longueur [km] 0.4 Gestion du trafic: rétrécissement des voies sur…",
+              "value": "Chantier",
+              "detail": "jusqu’au 28 octobre 2026",
+              "date": "2026-10-19T04:10:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-27T09:24:17.388Z"
+          "updatedAt": "2026-10-28T00:48:17.406Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -553,7 +553,7 @@
               "url": "https://www.buochs.ch/_rte/information/3007873"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -581,7 +581,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-27T17:42:56.215Z"
+      "updatedAt": "2026-10-28T09:13:19.877Z"
     }
   }
 }

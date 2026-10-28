@@ -4,17 +4,17 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "mobilita",
-  "updatedAt": "2026-10-27T19:21:58.604Z",
-  "contentHash": "8fdcd41437e5aa0aa8958a90ae2aecb84771cf19e9bf0242368aaab35986ddfe",
+  "updatedAt": "2026-10-28T09:13:19.877Z",
+  "contentHash": "34f995d1941d01d3013668ce1cac79fe06d1052d856c8d098b5e0c9d9653c0e9",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-27T15:37:37.261Z",
+      "updatedAt": "2026-10-28T00:48:17.406Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-27T11:01:59.897Z",
+      "updatedAt": "2026-10-27T21:31:39.250Z",
       "keyFacts": 0
     }
   ],
@@ -28,7 +28,7 @@
         {
           "label": "Cantieri attivi o imminenti",
           "value": "1",
-          "note": "segnalazioni aggiornate: 27 ottobre 2026"
+          "note": "segnalazioni aggiornate: 28 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -45,7 +45,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-27T15:37:37.261Z"
+          "updatedAt": "2026-10-28T00:48:17.406Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -83,7 +83,7 @@
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -111,7 +111,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-27T19:21:58.604Z"
+      "updatedAt": "2026-10-28T09:13:19.877Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -122,7 +122,7 @@
         {
           "label": "Roadworks active or imminent",
           "value": "1",
-          "note": "reports as of 27 October 2026"
+          "note": "reports as of 28 October 2026"
         }
       ],
       "dataBlocks": [
@@ -139,7 +139,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-27T15:37:37.261Z"
+          "updatedAt": "2026-10-28T00:48:17.406Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -177,7 +177,7 @@
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -205,7 +205,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-27T19:21:58.604Z"
+      "updatedAt": "2026-10-28T09:13:19.877Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -216,7 +216,7 @@
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "1",
-          "note": "Meldungen vom 27. Oktober 2026"
+          "note": "Meldungen vom 28. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -233,7 +233,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-27T15:37:37.261Z"
+          "updatedAt": "2026-10-28T00:48:17.406Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -271,7 +271,7 @@
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -299,7 +299,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-27T19:21:58.604Z"
+      "updatedAt": "2026-10-28T09:13:19.877Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -310,7 +310,7 @@
         {
           "label": "Chantiers actifs ou imminents",
           "value": "1",
-          "note": "signalements au 27 octobre 2026"
+          "note": "signalements au 28 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -327,7 +327,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-27T15:37:37.261Z"
+          "updatedAt": "2026-10-28T00:48:17.406Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -365,7 +365,7 @@
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
-          "updatedAt": "2026-10-27T11:01:59.897Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -393,7 +393,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-27T19:21:58.604Z"
+      "updatedAt": "2026-10-28T09:13:19.877Z"
     }
   }
 }

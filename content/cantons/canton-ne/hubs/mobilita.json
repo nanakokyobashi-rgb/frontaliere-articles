@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-27T11:12:54.296Z",
-  "contentHash": "54375ef18fbbae382afdfc77edc849f801abf3ac33d3a686b44db5ac46fee8d6",
+  "updatedAt": "2026-10-28T09:13:19.877Z",
+  "contentHash": "56677a7cee9eb53843f5330e132063f667c63076614d0cb4a43bfbb54ec64211",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-27T00:53:25.881Z",
+      "updatedAt": "2026-10-28T00:48:17.406Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-26T21:55:18.630Z",
+      "updatedAt": "2026-10-27T21:31:39.250Z",
       "keyFacts": 0
     }
   ],
@@ -37,13 +37,13 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "8",
-          "note": "segnalazioni aggiornate: 27 ottobre 2026"
+          "value": "7",
+          "note": "segnalazioni aggiornate: 28 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "5",
-          "note": "segnalazioni aggiornate: 27 ottobre 2026"
+          "note": "segnalazioni aggiornate: 28 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -87,12 +87,6 @@
               "date": "2026-03-10T15:08:00.000Z"
             },
             {
-              "label": "A5 Yverdon <-> Bienne tra Svincolo autostradale Neuchâtel-Serrières E Svincolo autostradale Neuchâtel-Maladière Situazione: chiusa cantiere",
-              "value": "Chiusura",
-              "detail": "fine prevista: 28 ottobre 2026",
-              "date": "2026-03-10T15:09:00.000Z"
-            },
-            {
               "label": "A20 Diramazione Neuchâtel-Vauseyon -> La Chaux-de-Fonds tra Svincolo autostradale Neuchâtel-Vauseyon E Svincolo autostradale Boudevilliers Situazione: chiusa cantiere, lunghezza [km] 4.4 Limitazione…",
               "value": "Chiusura",
               "detail": "fine prevista: 31 ottobre 2026",
@@ -126,10 +120,16 @@
               "value": "Chiusura",
               "detail": "fine prevista: 20 novembre 2026",
               "date": "2026-10-26T14:40:00.000Z"
+            },
+            {
+              "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
+              "value": "Traffico",
+              "date": "2026-10-28T00:48:17.406Z",
+              "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-27T00:53:25.881Z"
+          "updatedAt": "2026-10-28T00:48:17.406Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -147,7 +147,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -201,7 +201,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-27T11:12:54.296Z"
+      "updatedAt": "2026-10-28T09:13:19.877Z"
     },
     "en": {
       "canton": "NE",
@@ -216,13 +216,13 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "8",
-          "note": "reports as of 27 October 2026"
+          "value": "7",
+          "note": "reports as of 28 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "5",
-          "note": "reports as of 27 October 2026"
+          "note": "reports as of 28 October 2026"
         }
       ],
       "dataBlocks": [
@@ -266,12 +266,6 @@
               "date": "2026-03-10T15:08:00.000Z"
             },
             {
-              "label": "A5 Yverdon <-> Bienne tra Svincolo autostradale Neuchâtel-Serrières E Svincolo autostradale Neuchâtel-Maladière Situazione: chiusa cantiere",
-              "value": "Closure",
-              "detail": "until 28 October 2026",
-              "date": "2026-03-10T15:09:00.000Z"
-            },
-            {
               "label": "A20 Diramazione Neuchâtel-Vauseyon -> La Chaux-de-Fonds tra Svincolo autostradale Neuchâtel-Vauseyon E Svincolo autostradale Boudevilliers Situazione: chiusa cantiere, lunghezza [km] 4.4 Limitazione…",
               "value": "Closure",
               "detail": "until 31 October 2026",
@@ -305,10 +299,16 @@
               "value": "Closure",
               "detail": "until 20 November 2026",
               "date": "2026-10-26T14:40:00.000Z"
+            },
+            {
+              "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
+              "value": "Traffic",
+              "date": "2026-10-28T00:48:17.406Z",
+              "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-27T00:53:25.881Z"
+          "updatedAt": "2026-10-28T00:48:17.406Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -326,7 +326,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -380,7 +380,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-27T11:12:54.296Z"
+      "updatedAt": "2026-10-28T09:13:19.877Z"
     },
     "de": {
       "canton": "NE",
@@ -395,13 +395,13 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "8",
-          "note": "Meldungen vom 27. Oktober 2026"
+          "value": "7",
+          "note": "Meldungen vom 28. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "5",
-          "note": "Meldungen vom 27. Oktober 2026"
+          "note": "Meldungen vom 28. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -445,12 +445,6 @@
               "date": "2026-03-10T15:08:00.000Z"
             },
             {
-              "label": "A5 Yverdon <-> Biel zwischen Anschluss Neuenburg-Serrières und Anschluss Neuenburg-Maladiére Sachlage: Strecke gesperrt Baustelle",
-              "value": "Sperrung",
-              "detail": "bis 28. Oktober 2026",
-              "date": "2026-03-10T15:09:00.000Z"
-            },
-            {
               "label": "A20 Verzweigung Neuenburg-Vauseyon -> La Chaux-de-Fonds zwischen Anschluss Neuenburg-Vauseyon und Anschluss Boudevilliers Sachlage: Strecke gesperrt Baustelle, Länge [km] 4.4 Verkehrsführung…",
               "value": "Sperrung",
               "detail": "bis 31. Oktober 2026",
@@ -484,10 +478,16 @@
               "value": "Sperrung",
               "detail": "bis 20. November 2026",
               "date": "2026-10-26T14:40:00.000Z"
+            },
+            {
+              "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
+              "value": "Verkehr",
+              "date": "2026-10-28T00:48:17.406Z",
+              "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-27T00:53:25.881Z"
+          "updatedAt": "2026-10-28T00:48:17.406Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -505,7 +505,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -559,7 +559,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-27T11:12:54.296Z"
+      "updatedAt": "2026-10-28T09:13:19.877Z"
     },
     "fr": {
       "canton": "NE",
@@ -574,13 +574,13 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "8",
-          "note": "signalements au 27 octobre 2026"
+          "value": "7",
+          "note": "signalements au 28 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "5",
-          "note": "signalements au 27 octobre 2026"
+          "note": "signalements au 28 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -624,12 +624,6 @@
               "date": "2026-03-10T15:08:00.000Z"
             },
             {
-              "label": "A5 Yverdon <-> Bienne entre Jonction autoroutière Neuchâtel-Serrières et Jonction autoroutière Neuchâtel-Maladière Situation: fermé travaux",
-              "value": "Fermeture",
-              "detail": "jusqu’au 28 octobre 2026",
-              "date": "2026-03-10T15:09:00.000Z"
-            },
-            {
               "label": "A20 Echangeur de Neuchâtel-Vauseyon -> La Chaux-de-Fonds entre Jonction autoroutière Neuchâtel-Vauseyon et Jonction autoroutière Boudevilliers Situation: fermé travaux, longueur [km] 4.4 Gestion du…",
               "value": "Fermeture",
               "detail": "jusqu’au 31 octobre 2026",
@@ -663,10 +657,16 @@
               "value": "Fermeture",
               "detail": "jusqu’au 20 novembre 2026",
               "date": "2026-10-26T14:40:00.000Z"
+            },
+            {
+              "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
+              "value": "Trafic",
+              "date": "2026-10-28T00:48:17.406Z",
+              "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-27T00:53:25.881Z"
+          "updatedAt": "2026-10-28T00:48:17.406Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -684,7 +684,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T21:31:39.250Z"
         }
       ],
       "curatedArticles": [
@@ -738,7 +738,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-27T11:12:54.296Z"
+      "updatedAt": "2026-10-28T09:13:19.877Z"
     }
   }
 }
