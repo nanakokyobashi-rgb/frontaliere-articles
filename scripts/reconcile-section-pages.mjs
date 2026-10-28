@@ -551,7 +551,10 @@ export function landingArticleCoverage({
     .map(({ row }) => row);
   for (const row of orderedRows) {
     const id = String(row?.id ?? '');
-    const slug = slugs?.[id]?.[locale];
+    // `renderCantonSectionLanding` falls back to the article id when a
+    // localized slug is absent; use the same path so a valid fallback card
+    // does not look stale to the reconciler.
+    const slug = slugs?.[id]?.[locale] ?? id;
     if (id && typeof slug === 'string' && slug) articleByPath.set(`${prefix}${slug}/`, id);
   }
   const found = new Set();

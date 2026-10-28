@@ -3952,8 +3952,8 @@ const SITEMAP_TI = `<urlset>${sectionSitemapPaths.map((p) => `<url><loc>${sitema
   .join('')}</urlset>`;
 
 const landingHtmlByLocale = Object.fromEntries(Object.keys(CATALOG_TI.paths).map((locale) => {
-  const articleIds = Object.keys(SLUGS_TI).filter((id) => SLUGS_TI[id]?.[locale]);
-  const links = articleIds.map((id) => `<a href="${CATALOG_TI.paths[locale]}${SLUGS_TI[id][locale]}/">articolo</a>`).join('');
+  const articleIds = Object.keys(SLUGS_TI);
+  const links = articleIds.map((id) => `<a href="${CATALOG_TI.paths[locale]}${SLUGS_TI[id]?.[locale] ?? id}/">articolo</a>`).join('');
   return [locale, `<html><body><script type="application/ld+json">{"numberOfItems":${articleIds.length}}</script>${links}</body></html>`];
 }));
 

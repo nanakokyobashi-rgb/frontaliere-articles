@@ -208,6 +208,20 @@ test('landingArticleCoverage: usa le 24 card piu recenti, non tutte le righe API
   assert.deepEqual(coverage.problems, []);
 });
 
+test('landingArticleCoverage: usa l id quando manca lo slug della locale', () => {
+  const coverage = landingArticleCoverage({
+    entry: CATALOG,
+    rows: [{ id: 'article-one', date: '2026-10-28T00:00:00Z' }],
+    slugs: {},
+    locale: 'it',
+    html: '<script type="application/ld+json">{"numberOfItems":1}</script>' +
+      '<a href="/articoli-ticino/article-one/">articolo</a>',
+  });
+
+  assert.equal(coverage.foundCount, 1);
+  assert.deepEqual(coverage.problems, []);
+});
+
 test('landingArticleCoverage: un numero dichiarato mancante rende la landing non verificata', () => {
   const coverage = landingArticleCoverage({
     entry: CATALOG,
