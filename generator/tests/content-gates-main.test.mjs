@@ -66,6 +66,49 @@ const WF = active(read(WF_REL));
 const TESTS_WF = active(read('.github/workflows/tests.yml'));
 
 describe('content-gates-main: il workflow', () => {
+  test('il checkout conserva la storia ma evita blob e alberi pesanti estranei', () => {
+    const checkoutStart = WF.indexOf('uses: actions/checkout@v7');
+    const checkoutEnd = WF.indexOf('\n\n      - uses: actions/setup-node@', checkoutStart);
+    assert.ok(checkoutStart >= 0, 'il checkout del gate non è stato trovato');
+    assert.ok(checkoutEnd > checkoutStart, 'il blocco checkout non è delimitato');
+    const checkout = WF.slice(checkoutStart, checkoutEnd);
+
+    assert.match(checkout, /fetch-depth:\s*0/, 'il floor storico richiede il grafo completo');
+    assert.match(checkout, /filter:\s*blob:none/, 'i blob delle revisioni storiche non servono al gate');
+    assert.match(checkout, /sparse-checkout:\s*\|[\s\S]*\/content\//);
+    const required = [
+      '/.github/actions/setup-article-source-runtime/action.yml',
+      '/.github/workflows/content-gates-main.yml',
+      '/.github/workflows/fast-publish-article.yml',
+      '/.github/workflows/fast-publish-section.yml',
+      '/.github/workflows/generate-article.yml',
+      '/.github/workflows/publish-api.yml',
+      '/.github/workflows/refresh-canton-hubs.yml',
+      '/.github/workflows/tests.yml',
+      '/data/article-source-urls.json',
+      '/data/article-type-cutover.json',
+      '/data/blog-articles-data.ts',
+      '/data/evergreen-verifications.json',
+      '/data/retired-articles.json',
+      '/data/swiss-article-source-urls.json',
+      '/engine/',
+      '/generator/',
+      '/host/',
+      '/public/images/blog/article-cantello-teatro-dialettale-ottobre-2026.webp',
+      '/public/images/blog/article-contributi-formazione-berna-requisiti.webp',
+      '/public/images/blog/article-festival-racconto-varese-ottobre.webp',
+      '/public/images/blog/article-mcdonalds-pulizia-malnate-2026.webp',
+      '/public/images/blog/bollettino-frontaliere-2026-10-18.webp',
+      '/scripts/',
+    ];
+    for (const path of required) {
+      assert.ok(checkout.includes(path), `percorso richiesto non materializzato: ${path}`);
+    }
+    assert.doesNotMatch(checkout, /^\s+\/(?:data|public)\/$/mu,
+      'il checkout del content gate non deve materializzare intere directory pesanti');
+    assert.match(checkout, /sparse-checkout-cone-mode:\s*false/);
+  });
+
   test('esiste ed è cablato su push a main limitato a content/**', () => {
     assert.ok(fs.existsSync(path.join(ROOT, WF_REL)), `${WF_REL} non esiste`);
     const onBlock = sliceBetween(WF, '\non:', '\npermissions:');
