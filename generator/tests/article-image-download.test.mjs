@@ -81,6 +81,38 @@ test('il fetch CDN ritenta con backoff bounded e materializza al primo successo'
   }
 });
 
+test('il fetch CDN riconosce i codici Undici annidati in cause/errors', async () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'article-image-download-undici-'));
+  let calls = 0;
+  try {
+    const result = await fetchDeclaredImage({
+      imagePath: '/images/places/undici.webp',
+      destination: path.join(root, 'undici.webp'),
+      attempts: 3,
+      sleepImpl: async () => {},
+      fetchImpl: async () => {
+        calls += 1;
+        if (calls === 1) {
+          const error = new TypeError('terminated');
+          error.cause = Object.assign(new Error('socket closed'), { code: 'UND_ERR_SOCKET' });
+          throw error;
+        }
+        if (calls === 2) {
+          throw new AggregateError([
+            Object.assign(new Error('body timeout'), { code: 'UND_ERR_BODY_TIMEOUT' }),
+          ], 'request failed');
+        }
+        return response();
+      },
+    });
+    assert.equal(result.bytes, Buffer.byteLength('image'));
+    assert.equal(calls, 3);
+    assert.equal(fs.readFileSync(path.join(root, 'undici.webp'), 'utf8'), 'image');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('le sole immagini scaricate vengono riscritte sul CDN senza duplicare URL CDN', () => {
   const html = [
     '<meta property="og:image" content="https://frontaliereticino.ch/images/places/recovered.webp">',

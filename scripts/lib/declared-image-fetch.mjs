@@ -5,8 +5,21 @@ export const CDN_BASE = 'https://cdn.frontaliereticino.ch';
 export const MAX_DECLARED_IMAGE_BYTES = 5 * 1024 * 1024;
 export const IMAGE_FETCH_TIMEOUT_MS = 20_000;
 export const IMAGE_FETCH_ATTEMPTS = 4;
+export const MAX_IMAGE_FETCH_ATTEMPTS = 4;
 export const IMAGE_FETCH_RETRY_DELAY_MS = 500;
 export const IMAGE_FETCH_MAX_RETRY_DELAY_MS = 4_000;
+
+const TRANSIENT_ERROR_CODES = new Set([
+  'ETIMEDOUT',
+  'ECONNRESET',
+  'EAI_AGAIN',
+  'ENETUNREACH',
+  'EHOSTUNREACH',
+  'ECONNREFUSED',
+  'ECONNABORTED',
+  'EPIPE',
+]);
+const TRANSIENT_UNDICI_ERROR_CODE_RE = /^UND_ERR_(?:SOCKET|BODY_TIMEOUT|HEADERS_TIMEOUT|CONNECT_TIMEOUT|CONNECT|RESET|CLOSED|ABORTED|DESTROYED)$/u;
 
 function retryDelayMs(attempt) {
   return Math.min(
@@ -15,10 +28,30 @@ function retryDelayMs(attempt) {
   );
 }
 
+function errorChain(error) {
+  const pending = [error];
+  const seen = new Set();
+  const chain = [];
+  while (pending.length > 0) {
+    const current = pending.shift();
+    if (!current || (typeof current !== 'object' && typeof current !== 'function') || seen.has(current)) continue;
+    seen.add(current);
+    chain.push(current);
+    if (current.cause) pending.push(current.cause);
+    if (Array.isArray(current.errors)) pending.push(...current.errors);
+  }
+  return chain;
+}
+
 function isTransientFetchError(error, message) {
-  if (error?.name === 'AbortError') return true;
-  if (/^(ETIMEDOUT|ECONNRESET|EAI_AGAIN|ENETUNREACH|EHOSTUNREACH|ECONNREFUSED|ECONNABORTED|EPIPE)$/u.test(String(error?.code || ''))) return true;
-  if (/fetch failed|socket hang up|timed out|timeout/iu.test(String(message))) return true;
+  const chain = errorChain(error);
+  if (chain.some((item) => item.name === 'AbortError')) return true;
+  if (chain.some((item) => {
+    const code = String(item.code || '');
+    return TRANSIENT_ERROR_CODES.has(code) || TRANSIENT_UNDICI_ERROR_CODE_RE.test(code);
+  })) return true;
+  const chainMessage = [message, ...chain.map((item) => item.message)].filter(Boolean).join('\n');
+  if (/fetch failed|socket hang up|terminated|timed out|timeout/iu.test(chainMessage)) return true;
   const status = /^HTTP\s+(\d+)$/u.exec(String(message))?.[1];
   return status === '408' || status === '429' || (status && Number(status) >= 500);
 }
@@ -43,7 +76,9 @@ export async function fetchDeclaredImage({
   if (typeof fetchImpl !== 'function') throw new Error('fetch non disponibile');
 
   const effectiveTimeoutMs = Number.isFinite(timeoutMs) && timeoutMs > 0 ? timeoutMs : IMAGE_FETCH_TIMEOUT_MS;
-  const effectiveAttempts = Number.isInteger(attempts) && attempts > 0 ? attempts : IMAGE_FETCH_ATTEMPTS;
+  const effectiveAttempts = Number.isInteger(attempts) && attempts > 0
+    ? Math.min(attempts, MAX_IMAGE_FETCH_ATTEMPTS)
+    : IMAGE_FETCH_ATTEMPTS;
   if (typeof sleepImpl !== 'function') throw new Error('sleep non disponibile');
 
   let lastError = 'nessuna risposta';
