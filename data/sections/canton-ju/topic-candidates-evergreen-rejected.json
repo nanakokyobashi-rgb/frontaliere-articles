@@ -4,18 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261026-les-salaires-effectifs-ont-augmente-de-0-5-en-2026.html": {
-      "section": "canton-ju",
-      "ts": 1793004492509
-    },
-    "canton-ju::https://www.lejdj.ch/articles/un-demi-siecle-de-bons-soins-sous-un-meme-toit-104921": {
-      "section": "canton-ju",
-      "ts": 1793005387280
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261025-ernst-tanner-president-de-lindt-sprungli-exclut-toute-demission.html": {
-      "section": "canton-ju",
-      "ts": 1793010521689
-    },
     "canton-ju::https://www.h-ju.ch/fr/a-propos/medias-presse/communiques-de-presse/la-sante-mentale-au-coeur-de-la-27eme-journee-scientifique-interjurassienne-de-la-sante.html": {
       "section": "canton-ju",
       "ts": 1793030581852
@@ -43,6 +31,22 @@
     "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261027-automobile-mercedes-benz-abaisse-ses-previsions-pour-2026.html": {
       "section": "canton-ju",
       "ts": 1793102332533
+    },
+    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261028-le-commerce-de-detail-en-territoire-positif-sur-neuf-mois.html": {
+      "section": "canton-ju",
+      "ts": 1793188912796
+    },
+    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261028-straumann-progresse-au-troisieme-trimestre-1.html": {
+      "section": "canton-ju",
+      "ts": 1793188924934
+    },
+    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261028-une-commission-veut-completer-les-mesures-contre-les-loups.html": {
+      "section": "canton-ju",
+      "ts": 1793188936940
+    },
+    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261028-ubs-signe-un-solide-3e-trimestre.html": {
+      "section": "canton-ju",
+      "ts": 1793188946436
     }
   }
 }
