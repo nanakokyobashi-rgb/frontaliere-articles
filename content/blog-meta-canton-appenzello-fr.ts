@@ -66,6 +66,9 @@ const blogMetaCantonAppenzelloFr: Record<string, string> = {
     'blog.article.appenzello-deficit-budget.title': 'Appenzell Rhodes-Extérieures se dirige vers un déficit de 11,5 millions',
     'blog.article.appenzello-deficit-budget.excerpt': 'Le communiqué du 28 octobre sur le budget 2027 d\'Appenzell Rhodes-Extérieures indique un déficit de 11,5 millions ; une éventuelle hausse des impôts reste incertaine.',
     'blog.article.appenzello-deficit-budget.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.costi-sanita-meno-entrate.title': 'Les coûts de santé et la baisse des recettes pèsent sur le budget',
+    'blog.article.costi-sanita-meno-entrate.excerpt': 'Le budget 2027 prévoit une perte globale de 12,4 millions de CHF, en raison de la hausse des coûts de santé et de la baisse des recettes fiscales.',
+    'blog.article.costi-sanita-meno-entrate.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonAppenzelloFr;

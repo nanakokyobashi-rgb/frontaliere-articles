@@ -66,6 +66,9 @@ const blogMetaCantonAppenzelloEn: Record<string, string> = {
     'blog.article.appenzello-deficit-budget.title': 'Appenzell Ausserrhoden heading toward a deficit of 11,5 million',
     'blog.article.appenzello-deficit-budget.excerpt': 'The October 28 statement on Appenzell Ausserrhoden\'s 2027 budget indicates a deficit of 11,5 million; any tax increase remains uncertain.',
     'blog.article.appenzello-deficit-budget.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.costi-sanita-meno-entrate.title': 'Healthcare costs and lower revenues weigh on the budget',
+    'blog.article.costi-sanita-meno-entrate.excerpt': 'The 2027 budget projects a total loss of 12,4 million CHF due to rising healthcare costs and lower tax revenues.',
+    'blog.article.costi-sanita-meno-entrate.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonAppenzelloEn;

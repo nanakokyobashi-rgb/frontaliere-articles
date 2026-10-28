@@ -821,6 +821,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-costi-sanita-meno-entrate': {
+    title: 'Costi sanitari e minori entrate pesano sul preventivo',
+    description: 'Il preventivo 2027 del Cantone mostra una perdita complessiva di 12,4 milioni di CHF a causa di maggiori costi sanitari e minori entrate fiscali.',
+    keywords: 'frontalieri, ticino, svizzera, italia, costi, sanitari, minori, entrate',
+    ogTitle: 'Preventivo 2027: perdita 12,4 milioni CHF',
+    ogDescription: 'Il preventivo 2027 del Cantone registra una perdita complessiva di 12,4 milioni di CHF, influenzata da costi sanitari crescenti e minori entrate fiscali previste per il 2026.',
+    canonicalPath: '/articoli-appenzello/costi-sanita-meno-entrate/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Costi sanitari e minori entrate pesano sul preventivo",
+      "description": "Il preventivo 2027 del Cantone mostra una perdita complessiva di 12,4 milioni di CHF a causa di maggiori costi sanitari e minori entrate fiscali.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-costi-sanita-meno-entrate.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-28T19:28:05+00:00",
+      "dateModified": "2026-10-28T19:28:05+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-appenzello/costi-sanita-meno-entrate/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

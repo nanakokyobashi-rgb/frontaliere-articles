@@ -24,6 +24,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'credito-pfas-appenzello': { it: 'credito-pfas-appenzello', en: 'appenzell-ausserrhoden-pfas-credit', de: 'appenzell-ausserrhoden-pfas-kredit', fr: 'appenzell-exterieur-credit-pfas' },
  'teufen-ricorso-progetto-bundt': { it: 'teufen-ricorso-progetto-bundt', en: 'teufen-bundt-project-appeal', de: 'teufen-buendt-projekt-beschwerde', fr: 'teufen-recours-projet-buendt' },
  'appenzello-deficit-budget': { it: 'appenzello-deficit-budget', en: 'appenzell-budget-deficit', de: 'appenzell-budget-defizit', fr: 'deficit-budget-appenzell' },
+ 'costi-sanita-meno-entrate': { it: 'costi-sanita-meno-entrate', en: 'health-costs-less-revenue', de: 'kosten-sanita-weniger-einnahmen', fr: 'couts-sante-moins-revenus' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

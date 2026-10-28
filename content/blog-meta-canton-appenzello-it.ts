@@ -66,6 +66,9 @@ const blogMetaCantonAppenzelloIt: Record<string, string> = {
     'blog.article.appenzello-deficit-budget.title': 'Appenzello Esterno verso un deficit di 11,5 milioni',
     'blog.article.appenzello-deficit-budget.excerpt': 'Il comunicato del 28 ottobre sul budget 2027 dell\'Appenzello Esterno indica un deficit di 11,5 milioni; l\'eventuale aumento delle imposte resta incerto.',
     'blog.article.appenzello-deficit-budget.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.costi-sanita-meno-entrate.title': 'Costi sanitari e minori entrate pesano sul preventivo',
+    'blog.article.costi-sanita-meno-entrate.excerpt': 'Il preventivo 2027 prevede una perdita complessiva di 12,4 milioni di CHF, a causa di costi sanitari crescenti e minori entrate fiscali.',
+    'blog.article.costi-sanita-meno-entrate.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonAppenzelloIt;

@@ -66,6 +66,9 @@ const blogMetaCantonAppenzelloDe: Record<string, string> = {
     'blog.article.appenzello-deficit-budget.title': 'Appenzell Ausserrhoden steuert auf ein Defizit von 11,5 Millionen zu',
     'blog.article.appenzello-deficit-budget.excerpt': 'Die Mitteilung vom 28.',
     'blog.article.appenzello-deficit-budget.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.costi-sanita-meno-entrate.title': 'Gesundheitskosten und geringere Einnahmen belasten den Voranschlag',
+    'blog.article.costi-sanita-meno-entrate.excerpt': 'Der Voranschlag 2027 sieht aufgrund steigender Gesundheitskosten und geringerer Steuereinnahmen einen Gesamtverlust von 12,4 Millionen CHF vor.',
+    'blog.article.costi-sanita-meno-entrate.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonAppenzelloDe;

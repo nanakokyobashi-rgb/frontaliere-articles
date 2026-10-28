@@ -237,4 +237,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'costi-sanita-meno-entrate',
+ category: 'fiscale',
+ date: '2026-10-28T19:28:05.243Z',
+ image: '/images/blog/article-costi-sanita-meno-entrate.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['APPENZELLO'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];
