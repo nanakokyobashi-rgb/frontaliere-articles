@@ -4,8 +4,8 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-28T01:37:16.020Z",
-  "contentHash": "4fc3f33fe0790865ea872de47ebf1381bfa3ce520380e385f4ad6dc0bbf04f1c",
+  "updatedAt": "2026-10-28T11:44:10.713Z",
+  "contentHash": "166652b58a1167fa4b35bf6d6b613d6ee2e103f29f7a5927432994aa29da6f04",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -60,6 +60,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Cham: moltiplicatore fiscale al 53% nel 2027",
+          "url": "/articoli-zugo/cham-moltiplicatore-fiscale-2027/",
+          "excerpt": "Il Comune di Cham vuole ridurre dal 54% al 53% il moltiplicatore fiscale nel 2027, con un deficit previsto di circa CHF 568'000.",
+          "date": "2026-10-28T11:33:27.848Z"
+        },
+        {
           "title": "Robatech rileva Balti AG a Baar: niente tagli previsti",
           "url": "/articoli-zugo/balti-zug-robatech-acquisizione/",
           "excerpt": "Robatech ha rilevato Balti AG a fine settembre Balti AG ha sede a Baar, nel Canton Zugo Non sono previsti tagli o ristrutturazioni Acquirente: Robatech AG",
@@ -82,12 +88,6 @@
           "url": "/articoli-zugo/esecutivo-zugo-mandato-2030/",
           "excerpt": "Il Regierungsrat di Zugo ha definito direzioni e supplenze per il periodo 2027-2030, confermando le direzioni dei membri già in carica.",
           "date": "2026-10-26T12:22:22.628Z"
-        },
-        {
-          "title": "Zugo: multa di CHF 900 per mancata dichiarazione fiscale",
-          "url": "/articoli-zugo/zugo-multa-mancata-dichiarazione-fiscale/",
-          "excerpt": "Tribunale di Zugo: multa di CHF 900 Cancellata l'imposta effettiva di CHF 41.15 Restano CHF 105 di spese per ritardo La dichiarazione 2023 non è stata",
-          "date": "2026-10-22T11:31:01.636Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-28T01:37:16.020Z"
+      "updatedAt": "2026-10-28T11:44:10.713Z"
     },
     "en": {
       "canton": "ZG",
@@ -147,6 +147,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Cham: fiscal multiplier at 53% in 2027",
+          "url": "/en/zug-articles/cham-tax-rate-2027/",
+          "excerpt": "The Municipality of Cham wants to reduce the tax multiplier from 54% to 53% in 2027, with an expected deficit of approximately CHF 568'000.",
+          "date": "2026-10-28T11:33:27.848Z"
+        },
+        {
           "title": "Robatech acquires Balti AG in Baar: no cuts expected",
           "url": "/en/zug-articles/robatech-takes-over-balti-baar/",
           "excerpt": "Robatech acquired Balti AG at the end of September Balti AG is based in Baar, in the Canton of Zug No cuts or restructuring are planned Buyer: Robatech AG",
@@ -169,12 +175,6 @@
           "url": "/en/zug-articles/zug-government-term-2030/",
           "excerpt": "The Government Council of Zug has defined the portfolios and deputy arrangements for the 2027-2030 period, confirming the portfolios of the incumbent members.",
           "date": "2026-10-26T12:22:22.628Z"
-        },
-        {
-          "title": "Zug: CHF 900 fine for failure to file a tax return",
-          "url": "/en/zug-articles/zug-tax-fine-missing-return/",
-          "excerpt": "Zug Court: CHF 900 fine Actual tax of CHF 41.15 cancelled CHF 105 in late fees remain The 2023 tax return was not filed Authority → Administrative Court of Zug",
-          "date": "2026-10-22T11:31:01.636Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-28T01:37:16.020Z"
+      "updatedAt": "2026-10-28T11:44:10.713Z"
     },
     "de": {
       "canton": "ZG",
@@ -234,6 +234,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Cham: Steuerfuss von 53% im Jahr 2027",
+          "url": "/de/zug-artikel/cham-steuerfuss-2027/",
+          "excerpt": "Die Gemeinde Cham will den Steuerfuss im Jahr 2027 von 54% auf 53% senken, bei einem erwarteten Defizit von rund CHF 568'000.",
+          "date": "2026-10-28T11:33:27.848Z"
+        },
+        {
           "title": "Robatech übernimmt Balti AG in Baar: keine Stellenkürzungen vorgesehen",
           "url": "/de/zug-artikel/robatech-uebernimmt-balti-baar/",
           "excerpt": "Robatech hat Balti AG Ende September übernommen Balti AG hat ihren Sitz in Baar, Kanton Zug Es sind keine Kürzungen oder Umstrukturierungen geplant Käufer",
@@ -256,12 +262,6 @@
           "url": "/de/zug-artikel/zug-regierungsrat-amtsperiode-2030/",
           "excerpt": "Der Regierungsrat von Zug hat die Direktionen und Stellvertretungen für die Amtsperiode 2027-2030 festgelegt und die Direktionen der bereits amtierenden Mitglieder bestätigt.",
           "date": "2026-10-26T12:22:22.628Z"
-        },
-        {
-          "title": "Zug: Busse von CHF 900 wegen Nichtabgabe der Steuererklärung",
-          "url": "/de/zug-artikel/zug-steuerstrafe-fehlende-erklarung/",
-          "excerpt": "Gericht Zug: Busse von 900 CHF Effektive Steuer von 41,15 CHF gestrichen 105 CHF Verzugskosten bleiben bestehen Die Steuererklärung 2023 wurde nicht eingereicht",
-          "date": "2026-10-22T11:31:01.636Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-28T01:37:16.020Z"
+      "updatedAt": "2026-10-28T11:44:10.713Z"
     },
     "fr": {
       "canton": "ZG",
@@ -321,6 +321,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Cham : coefficient fiscal à 53 % en 2027",
+          "url": "/fr/articles-zoug/cham-taux-fiscal-2027/",
+          "excerpt": "La commune de Cham souhaite réduire le coefficient fiscal de 54 % à 53 % en 2027, avec un déficit prévu d'environ CHF 568'000.",
+          "date": "2026-10-28T11:33:27.848Z"
+        },
+        {
           "title": "Robatech acquiert Balti AG à Baar : aucune suppression de postes prévue",
           "url": "/fr/articles-zoug/robatech-reprend-balti-baar/",
           "excerpt": "Robatech a repris Balti AG fin septembre Balti AG est basée à Baar, dans le canton de Zoug Aucun licenciement ou réorganisation n'est prévu Acquéreur : Robatech",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-zoug/gouvernement-zoug-mandat-2030/",
           "excerpt": "Le Conseil d'État de Zoug a défini les départements et les suppléances pour la période 2027-2030, confirmant les départements des membres déjà en fonction.",
           "date": "2026-10-26T12:22:22.628Z"
-        },
-        {
-          "title": "Zoug : amende de CHF 900 pour non-déclaration fiscale",
-          "url": "/fr/articles-zoug/zoug-amende-declaration-fiscale-manquante/",
-          "excerpt": "Tribunal de Zoug : amende de 900 CHF Impôt effectif de 41,15 CHF annulé Frais de retard de 105 CHF restant La déclaration 2023 n'a pas été déposée Autorité →",
-          "date": "2026-10-22T11:31:01.636Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-28T01:37:16.020Z"
+      "updatedAt": "2026-10-28T11:44:10.713Z"
     }
   }
 }

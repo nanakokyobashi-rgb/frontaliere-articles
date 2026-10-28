@@ -4,8 +4,8 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "fisco",
-  "updatedAt": "2026-10-27T07:28:07.698Z",
-  "contentHash": "7a7000b077a7771797803b397b5da7d8dfcdaba429348b40a71521032e85cea9",
+  "updatedAt": "2026-10-28T11:44:10.713Z",
+  "contentHash": "4de9b66a5c15a84f23a66e74d6b605871145e8d948e2b51b997c57867b78cfe4",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -102,6 +102,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Cham: moltiplicatore fiscale al 53% nel 2027",
+          "url": "/articoli-zugo/cham-moltiplicatore-fiscale-2027/",
+          "excerpt": "Il Comune di Cham vuole ridurre dal 54% al 53% il moltiplicatore fiscale nel 2027, con un deficit previsto di circa CHF 568'000.",
+          "date": "2026-10-28T11:33:27.848Z"
+        },
+        {
           "title": "Zugo: multa di CHF 900 per mancata dichiarazione fiscale",
           "url": "/articoli-zugo/zugo-multa-mancata-dichiarazione-fiscale/",
           "excerpt": "Tribunale di Zugo: multa di CHF 900 Cancellata l'imposta effettiva di CHF 41.15 Restano CHF 105 di spese per ritardo La dichiarazione 2023 non è stata",
@@ -142,12 +148,6 @@
           "url": "/articoli-svizzera/imposta-di-succesione-e-donazione-canton-zugo-aliquote/",
           "excerpt": "Nel Cantone di Zugo, l'imposta di successione e donazione è regolata da una legge specifica che stabilisce aliquote differenti in base al grado di parentela e alle esenzioni per coniuge e discendenti.",
           "date": "2026-08-17T17:45:01.928Z"
-        },
-        {
-          "title": "Lucerna supera Zugo: nuovo paradiso fiscale per le imprese",
-          "url": "/articoli-frontaliere/lucerna-paradiso-fiscale-frontalieri/",
-          "excerpt": "Lucerna riduce l'imposta sugli utili al 11,66%, superando Zugo. Impatto sui frontalieri e confronto con l'UE.",
-          "date": "2026-05-07T09:05:42.794Z"
         }
       ],
       "latestCantonArticles": [],
@@ -173,7 +173,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-27T07:28:07.698Z"
+      "updatedAt": "2026-10-28T11:44:10.713Z"
     },
     "en": {
       "canton": "ZG",
@@ -258,6 +258,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Cham: fiscal multiplier at 53% in 2027",
+          "url": "/en/zug-articles/cham-tax-rate-2027/",
+          "excerpt": "The Municipality of Cham wants to reduce the tax multiplier from 54% to 53% in 2027, with an expected deficit of approximately CHF 568'000.",
+          "date": "2026-10-28T11:33:27.848Z"
+        },
+        {
           "title": "Zug: CHF 900 fine for failure to file a tax return",
           "url": "/en/zug-articles/zug-tax-fine-missing-return/",
           "excerpt": "Zug Court: CHF 900 fine Actual tax of CHF 41.15 cancelled CHF 105 in late fees remain The 2023 tax return was not filed Authority → Administrative Court of Zug",
@@ -298,12 +304,6 @@
           "url": "/en/swiss-articles/inheritance-and-donation-tax-zug-cantonal-rates/",
           "excerpt": "In the Canton of Zug, inheritance and gift tax is regulated by a specific law that establishes different rates based on the degree of kinship and exemptions for spouse and descendants.",
           "date": "2026-08-17T17:45:01.928Z"
-        },
-        {
-          "title": "Lucerne overtakes Zug: new tax haven for businesses",
-          "url": "/en/cross-border-articles/lucerne-new-swiss-tax-haven/",
-          "excerpt": "Lucerne reduces corporate tax to 11.66%, surpassing Zug. Impact on cross-border workers and comparison with the EU.",
-          "date": "2026-05-07T09:05:42.794Z"
         }
       ],
       "latestCantonArticles": [],
@@ -329,7 +329,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-27T07:28:07.698Z"
+      "updatedAt": "2026-10-28T11:44:10.713Z"
     },
     "de": {
       "canton": "ZG",
@@ -414,6 +414,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Cham: Steuerfuss von 53% im Jahr 2027",
+          "url": "/de/zug-artikel/cham-steuerfuss-2027/",
+          "excerpt": "Die Gemeinde Cham will den Steuerfuss im Jahr 2027 von 54% auf 53% senken, bei einem erwarteten Defizit von rund CHF 568'000.",
+          "date": "2026-10-28T11:33:27.848Z"
+        },
+        {
           "title": "Zug: Busse von CHF 900 wegen Nichtabgabe der Steuererklärung",
           "url": "/de/zug-artikel/zug-steuerstrafe-fehlende-erklarung/",
           "excerpt": "Gericht Zug: Busse von 900 CHF Effektive Steuer von 41,15 CHF gestrichen 105 CHF Verzugskosten bleiben bestehen Die Steuererklärung 2023 wurde nicht eingereicht",
@@ -454,12 +460,6 @@
           "url": "/de/schweiz-artikel/erbschafts-und-schenkungssteuer-kanton-zug-kantonal-satze/",
           "excerpt": "Im Kanton Zug wird die Erbschafts- und Schenkungssteuer durch ein spezifisches Gesetz geregelt, das je nach Verwandtschaftsgrad unterschiedliche Sätze und Befreiungen für Ehegatten und Nachkommen festlegt.",
           "date": "2026-08-17T17:45:01.928Z"
-        },
-        {
-          "title": "Luzern überholt Zug: Neuer Steuerparadies für Unternehmen",
-          "url": "/de/grenzgaenger-artikel/luzern-neuer-steuerparadies-schweiz/",
-          "excerpt": "Luzern senkt die Gewinnsteuer auf 11,66%, überholt Zug. Auswirkungen auf Grenzgänger und Vergleich mit der EU.",
-          "date": "2026-05-07T09:05:42.794Z"
         }
       ],
       "latestCantonArticles": [],
@@ -485,7 +485,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-27T07:28:07.698Z"
+      "updatedAt": "2026-10-28T11:44:10.713Z"
     },
     "fr": {
       "canton": "ZG",
@@ -570,6 +570,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Cham : coefficient fiscal à 53 % en 2027",
+          "url": "/fr/articles-zoug/cham-taux-fiscal-2027/",
+          "excerpt": "La commune de Cham souhaite réduire le coefficient fiscal de 54 % à 53 % en 2027, avec un déficit prévu d'environ CHF 568'000.",
+          "date": "2026-10-28T11:33:27.848Z"
+        },
+        {
           "title": "Zoug : amende de CHF 900 pour non-déclaration fiscale",
           "url": "/fr/articles-zoug/zoug-amende-declaration-fiscale-manquante/",
           "excerpt": "Tribunal de Zoug : amende de 900 CHF Impôt effectif de 41,15 CHF annulé Frais de retard de 105 CHF restant La déclaration 2023 n'a pas été déposée Autorité →",
@@ -610,12 +616,6 @@
           "url": "/fr/articles-suisse/impot-de-succession-et-de-dons-canton-de-zoug-taux-cantonaux/",
           "excerpt": "Dans le canton de Zoug, l'impôt sur les successions et les donations est régi par une loi spécifique qui fixe des taux différents en fonction du degré de parenté et des exemptions pour le conjoint et les descendants.",
           "date": "2026-08-17T17:45:01.928Z"
-        },
-        {
-          "title": "Lucerne dépasse Zoug: nouveau paradis fiscal pour les entreprises",
-          "url": "/fr/articles-frontalier/lucerne-nouveau-paradis-fiscal-suisse/",
-          "excerpt": "Lucerne réduit l'impôt sur les bénéfices à 11,66%, dépassant Zoug. Impact sur les frontaliers et comparaison avec l'UE.",
-          "date": "2026-05-07T09:05:42.794Z"
         }
       ],
       "latestCantonArticles": [],
@@ -641,7 +641,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-27T07:28:07.698Z"
+      "updatedAt": "2026-10-28T11:44:10.713Z"
     }
   }
 }

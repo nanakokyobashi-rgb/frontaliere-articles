@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-26T23:12:35.898Z",
-  "contentHash": "20d97c466431f39722e11700aa8a8ff1e05ab8358f04710182ec837f4a1019ea",
+  "updatedAt": "2026-10-28T11:44:10.713Z",
+  "contentHash": "22b8d8309c5135fefc3e5712f3ae0763d031cb3fa0fe2b0ae80c2947f3a86f74",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Fislisbach: acqua potabile scarsa, Baden continua a fornire",
+          "url": "/articoli-argovia/fislisbach-acqua-potabile/",
+          "excerpt": "A metà ottobre 2026 il prelievo settimanale era sceso a 7'136 m³, il 60,4% in meno rispetto ai 18'035 m³ di fine luglio.",
+          "date": "2026-10-28T11:31:41.205Z"
+        },
+        {
           "title": "Restrizioni traffico Rüeblimärt Aarau mercoledì 4 novembre 2026",
           "url": "/articoli-argovia/ristrizioni-rueeblimart-aarau/",
           "excerpt": "Il Rüeblimärt attira circa 35.000 visitatori; Graben, Schlossplatz e Laurenzentorgasse saranno chiusi al traffico.",
@@ -94,12 +100,6 @@
           "url": "/articoli-argovia/fislisbach-steuerfuss-109/",
           "excerpt": "Il Gemeinderat di Fislisbach chiede l'approvazione del budget 2027 con Steuerfuss invariato al 109%, nonostante un disavanzo di CHF 357'310.",
           "date": "2026-10-23T21:49:48.808Z"
-        },
-        {
-          "title": "SBB chiudono a Döttingen: ultimo centro viaggi del distretto",
-          "url": "/articoli-argovia/sbb-chiude-reisezentrum-doettingen/",
-          "excerpt": "Le SBB chiudono a Döttingen l'ultimo Reisezentrum del distretto.",
-          "date": "2026-10-22T23:32:53.543Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-26T23:12:35.898Z"
+      "updatedAt": "2026-10-28T11:44:10.713Z"
     },
     "en": {
       "canton": "AG",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Fislisbach: drinking water scarce, Baden continues to supply it",
+          "url": "/en/aargau-articles/fislisbach-drinking-water/",
+          "excerpt": "By mid-October 2026, weekly withdrawal had fallen to 7'136 m³, 60,4% less than the 18'035 m³ at the end of July.",
+          "date": "2026-10-28T11:31:41.205Z"
+        },
+        {
           "title": "Traffic restrictions Rüeblimärt Aarau Wednesday, November 4, 2026",
           "url": "/en/aargau-articles/aarau-rueeblimart-restrictions/",
           "excerpt": "Rüeblimärt attracts approximately 35.000 visitors; Graben, Schlossplatz and Laurenzentorgasse will be closed to traffic.",
@@ -193,12 +199,6 @@
           "url": "/en/aargau-articles/tax-rate-of-109-proposed-in-fislisbach-for-the-2027-budget/",
           "excerpt": "The Fislisbach municipal council is requesting approval of the 2027 budget with the tax rate unchanged at 109%, despite a deficit of CHF 357'310.",
           "date": "2026-10-23T21:49:48.808Z"
-        },
-        {
-          "title": "SBB close in Döttingen: the district’s last travel center",
-          "url": "/en/aargau-articles/sbb-closes-doettingen-travel-centre/",
-          "excerpt": "SBB are closing the district’s last travel centre in Döttingen.",
-          "date": "2026-10-22T23:32:53.543Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-26T23:12:35.898Z"
+      "updatedAt": "2026-10-28T11:44:10.713Z"
     },
     "de": {
       "canton": "AG",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Fislisbach: Trinkwasser knapp, Baden liefert weiterhin",
+          "url": "/de/aargau-artikel/fislisbach-trinkwasser/",
+          "excerpt": "Mitte Oktober 2026 war die wöchentliche Entnahme auf 7'136 m³ gesunken, 60,4% weniger als die 18'035 m³ von Ende Juli.",
+          "date": "2026-10-28T11:31:41.205Z"
+        },
+        {
           "title": "Verkehrsbeschränkungen Rüeblimärt Aarau am Mittwoch, 4. November 2026",
           "url": "/de/aargau-artikel/aarau-rueeblimart-einschrankungen/",
           "excerpt": "Der Rüeblimärt zieht etwa 35.000 Besucher an; Graben, Schlossplatz und Laurenzentorgasse werden für den Verkehr gesperrt.",
@@ -292,12 +298,6 @@
           "url": "/de/aargau-artikel/fur-fislisbach-wird-fur-das-budget-2027-ein-steuerfuss-von-109-vorgeschlagen/",
           "excerpt": "Der Gemeinderat von Fislisbach beantragt die Genehmigung des Budgets 2027 mit unverändertem Steuerfuss von 109%, trotz eines Defizits von CHF 357'310.",
           "date": "2026-10-23T21:49:48.808Z"
-        },
-        {
-          "title": "SBB schließen in Döttingen: letztes Reisezentrum des Bezirks",
-          "url": "/de/aargau-artikel/sbb-schliesst-reisezentrum-doettingen/",
-          "excerpt": "Die SBB schließen in Döttingen das letzte Reisezentrum des Bezirks.",
-          "date": "2026-10-22T23:32:53.543Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-26T23:12:35.898Z"
+      "updatedAt": "2026-10-28T11:44:10.713Z"
     },
     "fr": {
       "canton": "AG",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Fislisbach : l’eau potable se fait rare, Baden continue de fournir",
+          "url": "/fr/articles-argovie/fislisbach-eau-potable/",
+          "excerpt": "À la mi-octobre 2026, le prélèvement hebdomadaire était tombé à 7'136 m³, soit 60,4% de moins que les 18'035 m³ de fin juillet.",
+          "date": "2026-10-28T11:31:41.205Z"
+        },
+        {
           "title": "Restrictions de circulation du Rüeblimärt à Aarau le mercredi 4 novembre 2026",
           "url": "/fr/articles-argovie/restrictions-rueeblimart-aarau/",
           "excerpt": "Le Rüeblimärt attire environ 35.000 visiteurs ; Graben, Schlossplatz et Laurenzentorgasse seront fermés à la circulation.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-argovie/taux-d-imposition-a-109-propose-a-fislisbach-pour-le-budget-2027/",
           "excerpt": "Le conseil communal de Fislisbach demande l'approbation du budget 2027 avec un taux d'imposition inchangé à 109%, malgré un déficit de CHF 357'310.",
           "date": "2026-10-23T21:49:48.808Z"
-        },
-        {
-          "title": "Les SBB ferment à Döttingen : dernier centre de voyages du district",
-          "url": "/fr/articles-argovie/sbb-ferme-centre-voyage-doettingen/",
-          "excerpt": "Les SBB ferment à Döttingen le dernier centre de voyages du district.",
-          "date": "2026-10-22T23:32:53.543Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-26T23:12:35.898Z"
+      "updatedAt": "2026-10-28T11:44:10.713Z"
     }
   }
 }
