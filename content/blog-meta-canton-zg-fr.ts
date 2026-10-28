@@ -60,6 +60,9 @@ const blogMetaCantonZgFr: Record<string, string> = {
     'blog.article.balti-zug-robatech-acquisizione.title': 'Robatech acquiert Balti AG à Baar : aucune suppression de postes prévue',
     'blog.article.balti-zug-robatech-acquisizione.excerpt': 'Robatech a repris Balti AG fin septembre Balti AG est basée à Baar, dans le canton de Zoug Aucun licenciement ou réorganisation n\'est prévu Acquéreur : Robatech',
     'blog.article.balti-zug-robatech-acquisizione.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.cham-moltiplicatore-fiscale-2027.title': 'Cham : coefficient fiscal à 53 % en 2027',
+    'blog.article.cham-moltiplicatore-fiscale-2027.excerpt': 'La commune de Cham souhaite réduire le coefficient fiscal de 54 % à 53 % en 2027, avec un déficit prévu d\'environ CHF 568\'000.',
+    'blog.article.cham-moltiplicatore-fiscale-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonZgFr;

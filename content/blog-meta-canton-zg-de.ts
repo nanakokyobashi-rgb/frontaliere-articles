@@ -60,6 +60,9 @@ const blogMetaCantonZgDe: Record<string, string> = {
     'blog.article.balti-zug-robatech-acquisizione.title': 'Robatech übernimmt Balti AG in Baar: keine Stellenkürzungen vorgesehen',
     'blog.article.balti-zug-robatech-acquisizione.excerpt': 'Robatech hat Balti AG Ende September übernommen Balti AG hat ihren Sitz in Baar, Kanton Zug Es sind keine Kürzungen oder Umstrukturierungen geplant Käufer',
     'blog.article.balti-zug-robatech-acquisizione.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.cham-moltiplicatore-fiscale-2027.title': 'Cham: Steuerfuss von 53% im Jahr 2027',
+    'blog.article.cham-moltiplicatore-fiscale-2027.excerpt': 'Die Gemeinde Cham will den Steuerfuss im Jahr 2027 von 54% auf 53% senken, bei einem erwarteten Defizit von rund CHF 568\'000.',
+    'blog.article.cham-moltiplicatore-fiscale-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonZgDe;

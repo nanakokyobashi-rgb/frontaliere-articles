@@ -738,6 +738,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-cham-moltiplicatore-fiscale-2027': {
+    title: 'Cham: moltiplicatore fiscale al 53% nel 2027 | Frontaliere Ticino',
+    description: 'Il Comune di Cham vuole ridurre dal 54% al 53% il moltiplicatore fiscale nel 2027, con un deficit previsto di circa CHF 568\'000.',
+    keywords: 'frontalieri, ticino, svizzera, italia, cham, moltiplicatore, fiscale, comune',
+    ogTitle: 'Cham: moltiplicatore fiscale al 53% nel 2027',
+    ogDescription: 'Cham prepara il budget 2027 con CHF 119,6 milioni di ricavi e CHF 120,2 milioni di spese. Il piano di investimenti 2027-2031 ammonta a CHF 177,9 milioni e destina CHF 105 milioni agli edifici scolastici.',
+    canonicalPath: '/articoli-zugo/cham-moltiplicatore-fiscale-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cham: moltiplicatore fiscale al 53% nel 2027",
+      "description": "Il Comune di Cham vuole ridurre dal 54% al 53% il moltiplicatore fiscale nel 2027, con un deficit previsto di circa CHF 568'000.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-cham-moltiplicatore-fiscale-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-28T11:33:27+00:00",
+      "dateModified": "2026-10-28T11:33:27+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-zugo/cham-moltiplicatore-fiscale-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
