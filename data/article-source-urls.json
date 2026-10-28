@@ -1,9 +1,4 @@
 {
-  "https://www.laregione.ch/cantone/luganese/1950907/passa-il-valico-di-gandria-con-due-pappagalli-di-una-specie-protetta": {
-    "articleId": "sequestro-pappagalli-gandria",
-    "ts": "2026-09-18T02:08:17.111Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/info/economia/crescita-svizzera-al-rialzo-grazie-alle-esportazioni--4090330.html": {
     "articleId": "crescita-economia-svizzera-seco-2026",
     "ts": "2026-09-18T02:18:07.861Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenews.it/2026/10/ristorni-dei-frontalieri-malnate-si-trova-con-500-mila-euro-in-meno-la-sindaca-cannito-servono-certezze/2720635": {
     "articleId": "malnate-ristorni-500-mila-meno",
     "ts": "2026-10-28T11:59:46.602Z",
+    "keyForm": 2
+  },
+  "https://www.ocst.ch/articoli/17-news-frontalieri": {
+    "articleId": "mozione-ticino-ristorni-salute",
+    "ts": "2026-10-28T12:47:08.814Z",
     "keyForm": 2
   }
 }

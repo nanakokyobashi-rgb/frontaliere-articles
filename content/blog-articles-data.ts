@@ -45880,6 +45880,17 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'mozione-ticino-ristorni-salute',
+ category: 'fiscale',
+ date: '2026-10-28T12:47:07.552Z',
+ image: '/images/blog/article-mozione-ticino-ristorni-salute.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
