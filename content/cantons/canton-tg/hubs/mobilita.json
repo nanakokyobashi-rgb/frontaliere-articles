@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-28T10:03:35.525Z",
-  "contentHash": "71d9d116ebfd4cbee30734bf52256c2eac1065875c2d48ae35cb6adcd43d7fca",
+  "updatedAt": "2026-10-28T17:02:29.143Z",
+  "contentHash": "17ac1521fe912cc04a4046f2145a88abf9e3b9ea6a181a7af02b4ae0023ef17e",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-28T06:23:27.523Z",
+      "updatedAt": "2026-10-28T13:37:22.501Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-27T21:31:39.250Z",
+      "updatedAt": "2026-10-28T11:41:09.250Z",
       "keyFacts": 0
     }
   ],
@@ -82,11 +82,6 @@
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
             {
-              "label": "A23 Widenhorn -> Diramazione Meggenhus tra Svincolo autostradale Arbon West E Svincolo autostradale Arbon Süd Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-10-28T05:54:00.000Z"
-            },
-            {
               "label": "A7 Kreuzlingen -> Winterthur tra Svincolo autostradale Kreuzlingen Nord E Svincolo autostradale Kreuzlingen Süd Situazione: problemi di traffico cantiere, lunghezza [km] 1.8 Limitazione del…",
               "value": "Cantiere",
               "detail": "fine prevista: 30 ottobre 2026",
@@ -106,7 +101,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-28T06:23:27.523Z"
+          "updatedAt": "2026-10-28T13:37:22.501Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -144,7 +139,7 @@
               "url": "https://www.tg.ch/news.html/485/news/80333"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-10-28T11:41:09.250Z"
         }
       ],
       "curatedArticles": [
@@ -204,7 +199,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-28T10:03:35.525Z"
+      "updatedAt": "2026-10-28T17:02:29.143Z"
     },
     "en": {
       "canton": "TG",
@@ -264,11 +259,6 @@
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
             {
-              "label": "A23 Widenhorn -> Diramazione Meggenhus tra Svincolo autostradale Arbon West E Svincolo autostradale Arbon Süd Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-10-28T05:54:00.000Z"
-            },
-            {
               "label": "A7 Kreuzlingen -> Winterthur tra Svincolo autostradale Kreuzlingen Nord E Svincolo autostradale Kreuzlingen Süd Situazione: problemi di traffico cantiere, lunghezza [km] 1.8 Limitazione del…",
               "value": "Roadworks",
               "detail": "until 30 October 2026",
@@ -288,7 +278,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-28T06:23:27.523Z"
+          "updatedAt": "2026-10-28T13:37:22.501Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -326,7 +316,7 @@
               "url": "https://www.tg.ch/news.html/485/news/80333"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-10-28T11:41:09.250Z"
         }
       ],
       "curatedArticles": [
@@ -386,7 +376,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-28T10:03:35.525Z"
+      "updatedAt": "2026-10-28T17:02:29.143Z"
     },
     "de": {
       "canton": "TG",
@@ -446,11 +436,6 @@
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
             {
-              "label": "A23 Widenhorn -> Verzweigung Meggenhus zwischen Anschluss Arbon-West und Anschluss Arbon-Süd Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-10-28T05:54:00.000Z"
-            },
-            {
               "label": "A7 Kreuzlingen -> Winterthur zwischen Anschluss Kreuzlingen-Nord und Anschluss Kreuzlingen-Süd Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 1.8 Verkehrsführung: Fahrbahnverengung auf einen…",
               "value": "Baustelle",
               "detail": "bis 30. Oktober 2026",
@@ -470,7 +455,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-28T06:23:27.523Z"
+          "updatedAt": "2026-10-28T13:37:22.501Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -508,7 +493,7 @@
               "url": "https://www.tg.ch/news.html/485/news/80333"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-10-28T11:41:09.250Z"
         }
       ],
       "curatedArticles": [
@@ -568,7 +553,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-28T10:03:35.525Z"
+      "updatedAt": "2026-10-28T17:02:29.143Z"
     },
     "fr": {
       "canton": "TG",
@@ -628,11 +613,6 @@
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
             {
-              "label": "A23 Widenhorn -> Echangeur de Meggenhus entre Jonction autoroutière Arbon-Ouest et Jonction autoroutière Arbon-Sud Situation: trafic en accordéon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-10-28T05:54:00.000Z"
-            },
-            {
               "label": "A7 Kreuzlingen -> Winterthur entre Jonction autoroutière Kreuzlingen-Nord et Jonction autoroutière Kreuzlingen-Sud Situation: trafic perturbé travaux, longueur [km] 1.8 Gestion du trafic…",
               "value": "Chantier",
               "detail": "jusqu’au 30 octobre 2026",
@@ -652,7 +632,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-28T06:23:27.523Z"
+          "updatedAt": "2026-10-28T13:37:22.501Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -690,7 +670,7 @@
               "url": "https://www.tg.ch/news.html/485/news/80333"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-10-28T11:41:09.250Z"
         }
       ],
       "curatedArticles": [
@@ -750,7 +730,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-28T10:03:35.525Z"
+      "updatedAt": "2026-10-28T17:02:29.143Z"
     }
   }
 }

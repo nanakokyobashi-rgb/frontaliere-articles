@@ -311,7 +311,7 @@
     {
       "path": "scripts/ci/fetch-push-base-if-missing.sh",
       "mode": "corpus-only",
-      "reason": "Guard condiviso dei fast publisher del corpus: rileva i checkout shallow, ripristina la storia completa con retry, timeout e budget bounded, aggiorna opzionalmente la punta di origin/main e verifica `github.event.before` quando serve, cosi' planner e recovery possono calcolare il delta senza fetch duplicati o bloccanti. Esiste solo qui perche' i fast publisher e il loro checkout appartengono al corpus; il sito non possiede un publisher equivalente.",
+      "reason": "Guard condiviso dei fast publisher del corpus: rileva i checkout shallow, ripristina la storia completa quando serve con retry, timeout e budget bounded, oppure aggiorna solo la punta di origin/main nei replay che non calcolano delta storici; verifica `github.event.before` quando serve, cosi' planner e recovery possono calcolare il delta senza fetch duplicati o bloccanti. Esiste solo qui perche' i fast publisher e il loro checkout appartengono al corpus; il sito non possiede un publisher equivalente.",
       "baseline": {
         "site": null,
         "corpus": "46bababe9a6ac465",
@@ -326,6 +326,16 @@
         "site": null,
         "corpus": "d3504a694b79c58e",
         "alignedAt": "2026-10-19"
+      }
+    },
+    {
+      "path": "scripts/ci/upload-cdn-batch.mjs",
+      "mode": "corpus-only",
+      "reason": "Uploader batch bounded del fast-publish-article: raggruppa gli asset CDN per namespace immagine, mantiene un lease condiviso e limita i worker concorrenti prima di delegare il PUT al helper per singolo file. Il sito non possiede il publisher CDN corpus-side né questo entry point, quindi il path resta corpus-only per costruzione.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-28"
       }
     },
     {

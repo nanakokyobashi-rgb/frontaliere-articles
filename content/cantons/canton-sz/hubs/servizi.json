@@ -4,12 +4,17 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "servizi",
-  "updatedAt": "2026-10-28T10:03:35.525Z",
-  "contentHash": "5ba725efc7c57e8cee93f80fff848caf75a3c739b019a0edccaf314d7488d1c7",
+  "updatedAt": "2026-10-28T17:02:29.143Z",
+  "contentHash": "70526a8f40080bffa2e7d4397b6c0c10f7241b69f27337c21ef729c43b002849",
   "blocks": [
     {
       "id": "premi-cassa-malati",
       "updatedAt": "2026-10-25T09:11:35.438Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "aste-targhe",
+      "updatedAt": "2026-10-28T12:51:45.580Z",
       "keyFacts": 1
     },
     {
@@ -19,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-27T21:31:39.250Z",
+      "updatedAt": "2026-10-28T11:41:09.250Z",
       "keyFacts": 0
     }
   ],
@@ -35,6 +40,11 @@
           "value": "521,20 CHF",
           "note": "regione di premio 0, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "11",
+          "note": "offerta mediana 200 CHF"
         }
       ],
       "dataBlocks": [
@@ -52,6 +62,37 @@
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-25T09:11:35.438Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "SZ4278",
+              "value": "2000 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-10T21:00:00.000Z",
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1604"
+            },
+            {
+              "label": "SZ6810",
+              "value": "1500 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-10T21:00:00.000Z",
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1605"
+            },
+            {
+              "label": "SZ15145",
+              "value": "310 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-10T21:00:00.000Z",
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1610"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
+          "updatedAt": "2026-10-28T12:51:45.580Z"
         },
         {
           "id": "meteo",
@@ -88,7 +129,7 @@
               "url": "https://spital-lachen.ch/ueber-uns/aktuelles/staerkung-des-adipositaszentrums-mit-neuer-leitung/"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-10-28T11:41:09.250Z"
         }
       ],
       "curatedArticles": [
@@ -168,7 +209,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-28T10:03:35.525Z"
+      "updatedAt": "2026-10-28T17:02:29.143Z"
     },
     "en": {
       "canton": "SZ",
@@ -181,6 +222,11 @@
           "value": "521.20 CHF",
           "note": "premium region 0, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "11",
+          "note": "typical bid 200 CHF"
         }
       ],
       "dataBlocks": [
@@ -198,6 +244,37 @@
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-25T09:11:35.438Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "SZ4278",
+              "value": "2,000 CHF",
+              "detail": "current bid",
+              "date": "2026-11-10T21:00:00.000Z",
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1604"
+            },
+            {
+              "label": "SZ6810",
+              "value": "1,500 CHF",
+              "detail": "current bid",
+              "date": "2026-11-10T21:00:00.000Z",
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1605"
+            },
+            {
+              "label": "SZ15145",
+              "value": "310 CHF",
+              "detail": "current bid",
+              "date": "2026-11-10T21:00:00.000Z",
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1610"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
+          "updatedAt": "2026-10-28T12:51:45.580Z"
         },
         {
           "id": "meteo",
@@ -234,7 +311,7 @@
               "url": "https://spital-lachen.ch/ueber-uns/aktuelles/staerkung-des-adipositaszentrums-mit-neuer-leitung/"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-10-28T11:41:09.250Z"
         }
       ],
       "curatedArticles": [
@@ -310,7 +387,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-28T10:03:35.525Z"
+      "updatedAt": "2026-10-28T17:02:29.143Z"
     },
     "de": {
       "canton": "SZ",
@@ -323,6 +400,11 @@
           "value": "521.20 CHF",
           "note": "Prämienregion 0, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "11",
+          "note": "mittleres Gebot 200 CHF"
         }
       ],
       "dataBlocks": [
@@ -340,6 +422,37 @@
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-25T09:11:35.438Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "SZ4278",
+              "value": "2’000 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-10T21:00:00.000Z",
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1604"
+            },
+            {
+              "label": "SZ6810",
+              "value": "1’500 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-10T21:00:00.000Z",
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1605"
+            },
+            {
+              "label": "SZ15145",
+              "value": "310 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-10T21:00:00.000Z",
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1610"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
+          "updatedAt": "2026-10-28T12:51:45.580Z"
         },
         {
           "id": "meteo",
@@ -376,7 +489,7 @@
               "url": "https://spital-lachen.ch/ueber-uns/aktuelles/staerkung-des-adipositaszentrums-mit-neuer-leitung/"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-10-28T11:41:09.250Z"
         }
       ],
       "curatedArticles": [
@@ -452,7 +565,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-28T10:03:35.525Z"
+      "updatedAt": "2026-10-28T17:02:29.143Z"
     },
     "fr": {
       "canton": "SZ",
@@ -465,6 +578,11 @@
           "value": "521,20 CHF",
           "note": "région de primes 0, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "11",
+          "note": "offre centrale 200 CHF"
         }
       ],
       "dataBlocks": [
@@ -482,6 +600,37 @@
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-25T09:11:35.438Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "SZ4278",
+              "value": "2 000 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-10T21:00:00.000Z",
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1604"
+            },
+            {
+              "label": "SZ6810",
+              "value": "1 500 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-10T21:00:00.000Z",
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1605"
+            },
+            {
+              "label": "SZ15145",
+              "value": "310 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-10T21:00:00.000Z",
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1610"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
+          "updatedAt": "2026-10-28T12:51:45.580Z"
         },
         {
           "id": "meteo",
@@ -518,7 +667,7 @@
               "url": "https://spital-lachen.ch/ueber-uns/aktuelles/staerkung-des-adipositaszentrums-mit-neuer-leitung/"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-10-28T11:41:09.250Z"
         }
       ],
       "curatedArticles": [
@@ -590,7 +739,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-28T10:03:35.525Z"
+      "updatedAt": "2026-10-28T17:02:29.143Z"
     }
   }
 }

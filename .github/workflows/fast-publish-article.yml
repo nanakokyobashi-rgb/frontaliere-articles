@@ -113,6 +113,7 @@ on:
       - 'scripts/lib/parse-positive-num.mjs'
       - 'scripts/lib/sanitize-control-chars.mjs'
       - 'scripts/lib/upload-cdn-file.sh'
+      - 'scripts/ci/upload-cdn-batch.mjs'
       - 'scripts/lib/r2-image-lease-process.sh'
       - 'scripts/lib/r2-image-namespace-lock.mjs'
       - 'scripts/lib/r2-section-lock.mjs'
@@ -1059,10 +1060,11 @@ jobs:
             | {pages: .}
           ' "$pushed_hub_paths" > "$pushed_hub_summary"
 
-          while IFS=$'\t' read -r local key; do
-            [ -n "$local" ] || continue
-            bash scripts/lib/upload-cdn-file.sh "$local" "$key"
-          done < <(jq -r '.cdnUploads[] | "\(.local)\t\(.key)"' "$summary")
+          # A shared renderer change can legitimately produce thousands of
+          # image entries. Keep one verified image-namespace lease per batch
+          # and upload with a bounded worker pool; the single-file helper still
+          # owns each PUT's timeout, retry and best-effort failure contract.
+          node scripts/ci/upload-cdn-batch.mjs "$summary"
 
           # Il push delle landing dell'hub non è più qui: è stato assorbito nel push unico
           # in cima a questo step.

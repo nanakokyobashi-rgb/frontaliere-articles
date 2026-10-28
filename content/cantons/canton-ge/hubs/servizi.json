@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "servizi",
-  "updatedAt": "2026-10-28T10:03:35.525Z",
-  "contentHash": "c9496988cc0f8316e1ac946d0892a49a7bb827268c6bbc40ff095d5b537be0fe",
+  "updatedAt": "2026-10-28T17:02:29.143Z",
+  "contentHash": "2cfb51aef253447b9cb46e8f0d3020eca9d1fe1f65061cbff04d12cb5bcf2ad3",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-28T06:52:07.529Z",
+      "updatedAt": "2026-10-28T10:44:19.007Z",
       "keyFacts": 0
     },
     {
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-27T21:31:39.250Z",
+      "updatedAt": "2026-10-28T11:41:09.250Z",
       "keyFacts": 0
     }
   ],
@@ -96,7 +96,7 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-28T06:52:07.529Z"
+          "updatedAt": "2026-10-28T10:44:19.007Z"
         },
         {
           "id": "meteo",
@@ -133,6 +133,11 @@
               "url": "https://www.ge.ch/node/45340"
             },
             {
+              "label": "Barèmes et catégories 2027 pour les subsides d'assurance-maladie",
+              "date": "2026-10-26",
+              "url": "https://www.ge.ch/node/45327"
+            },
+            {
               "label": "Une personne atteinte d’Ebola prise en charge aux HUG",
               "date": "2026-10-26",
               "url": "https://www.hug.ch/actualite/personne-atteinte-ebola-prise-charge-aux-hug"
@@ -141,14 +146,9 @@
               "label": "Les HUG, 1er hôpital de Suisse dans le classement Best Smart Hospitals 2027 de Newsweek",
               "date": "2026-10-23",
               "url": "https://www.hug.ch/actualite/hug-1er-hopital-suisse-dans-classement-best-smart-hospitals-2027-newsweek"
-            },
-            {
-              "label": "Centre de santé intercommunal : 1 000 déclarations de médecin traitant",
-              "date": "2026-10-22",
-              "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/centre-de-sante-intercommunal-1-000-declarations-de-medecin-traitant"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-10-28T11:41:09.250Z"
         }
       ],
       "curatedArticles": [
@@ -228,7 +228,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-28T10:03:35.525Z"
+      "updatedAt": "2026-10-28T17:02:29.143Z"
     },
     "en": {
       "canton": "GE",
@@ -297,7 +297,7 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-28T06:52:07.529Z"
+          "updatedAt": "2026-10-28T10:44:19.007Z"
         },
         {
           "id": "meteo",
@@ -334,6 +334,11 @@
               "url": "https://www.ge.ch/node/45340"
             },
             {
+              "label": "Barèmes et catégories 2027 pour les subsides d'assurance-maladie",
+              "date": "2026-10-26",
+              "url": "https://www.ge.ch/node/45327"
+            },
+            {
               "label": "Une personne atteinte d’Ebola prise en charge aux HUG",
               "date": "2026-10-26",
               "url": "https://www.hug.ch/actualite/personne-atteinte-ebola-prise-charge-aux-hug"
@@ -342,14 +347,9 @@
               "label": "Les HUG, 1er hôpital de Suisse dans le classement Best Smart Hospitals 2027 de Newsweek",
               "date": "2026-10-23",
               "url": "https://www.hug.ch/actualite/hug-1er-hopital-suisse-dans-classement-best-smart-hospitals-2027-newsweek"
-            },
-            {
-              "label": "Centre de santé intercommunal : 1 000 déclarations de médecin traitant",
-              "date": "2026-10-22",
-              "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/centre-de-sante-intercommunal-1-000-declarations-de-medecin-traitant"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-10-28T11:41:09.250Z"
         }
       ],
       "curatedArticles": [
@@ -424,7 +424,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-28T10:03:35.525Z"
+      "updatedAt": "2026-10-28T17:02:29.143Z"
     },
     "de": {
       "canton": "GE",
@@ -493,7 +493,7 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-28T06:52:07.529Z"
+          "updatedAt": "2026-10-28T10:44:19.007Z"
         },
         {
           "id": "meteo",
@@ -530,6 +530,11 @@
               "url": "https://www.ge.ch/node/45340"
             },
             {
+              "label": "Barèmes et catégories 2027 pour les subsides d'assurance-maladie",
+              "date": "2026-10-26",
+              "url": "https://www.ge.ch/node/45327"
+            },
+            {
               "label": "Une personne atteinte d’Ebola prise en charge aux HUG",
               "date": "2026-10-26",
               "url": "https://www.hug.ch/actualite/personne-atteinte-ebola-prise-charge-aux-hug"
@@ -538,14 +543,9 @@
               "label": "Les HUG, 1er hôpital de Suisse dans le classement Best Smart Hospitals 2027 de Newsweek",
               "date": "2026-10-23",
               "url": "https://www.hug.ch/actualite/hug-1er-hopital-suisse-dans-classement-best-smart-hospitals-2027-newsweek"
-            },
-            {
-              "label": "Centre de santé intercommunal : 1 000 déclarations de médecin traitant",
-              "date": "2026-10-22",
-              "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/centre-de-sante-intercommunal-1-000-declarations-de-medecin-traitant"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-10-28T11:41:09.250Z"
         }
       ],
       "curatedArticles": [
@@ -620,7 +620,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-28T10:03:35.525Z"
+      "updatedAt": "2026-10-28T17:02:29.143Z"
     },
     "fr": {
       "canton": "GE",
@@ -689,7 +689,7 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-28T06:52:07.529Z"
+          "updatedAt": "2026-10-28T10:44:19.007Z"
         },
         {
           "id": "meteo",
@@ -726,6 +726,11 @@
               "url": "https://www.ge.ch/node/45340"
             },
             {
+              "label": "Barèmes et catégories 2027 pour les subsides d'assurance-maladie",
+              "date": "2026-10-26",
+              "url": "https://www.ge.ch/node/45327"
+            },
+            {
               "label": "Une personne atteinte d’Ebola prise en charge aux HUG",
               "date": "2026-10-26",
               "url": "https://www.hug.ch/actualite/personne-atteinte-ebola-prise-charge-aux-hug"
@@ -734,14 +739,9 @@
               "label": "Les HUG, 1er hôpital de Suisse dans le classement Best Smart Hospitals 2027 de Newsweek",
               "date": "2026-10-23",
               "url": "https://www.hug.ch/actualite/hug-1er-hopital-suisse-dans-classement-best-smart-hospitals-2027-newsweek"
-            },
-            {
-              "label": "Centre de santé intercommunal : 1 000 déclarations de médecin traitant",
-              "date": "2026-10-22",
-              "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/centre-de-sante-intercommunal-1-000-declarations-de-medecin-traitant"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-10-28T11:41:09.250Z"
         }
       ],
       "curatedArticles": [
@@ -813,7 +813,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-28T10:03:35.525Z"
+      "updatedAt": "2026-10-28T17:02:29.143Z"
     }
   }
 }

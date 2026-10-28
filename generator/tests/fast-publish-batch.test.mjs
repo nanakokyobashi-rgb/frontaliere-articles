@@ -385,6 +385,7 @@ test('il resolver article non rifà il fetch del parent già presente nel checko
   assert.match(pushBaseGuard, /history_fetch_timeout_cap_s=300/);
   assert.match(pushBaseGuard, /timeout --signal=TERM --kill-after=5s "\$\{history_fetch_timeout_s\}s" git fetch/);
   assert.match(pushBaseGuard, /FETCH_MAIN/);
+  assert.match(pushBaseGuard, /REQUIRE_FULL_HISTORY/);
   assert.match(pushBaseGuard, /fetched_main_head=.*git rev-parse FETCH_HEAD/);
   assert.match(pushBaseGuard, /git cat-file -e "\$\{PUSH_BEFORE\}\^\{commit\}"/);
   assert.match(pushBaseGuard, /fetch_ref_with_retries "push base \$PUSH_BEFORE" --no-tags origin "\$PUSH_BEFORE"/);
@@ -429,6 +430,48 @@ test('il guard del push base ripristina la storia completa prima del preflight',
     assert.equal(git(shallow, 'rev-parse', '--is-shallow-repository'), 'false');
     assert.equal(git(shallow, 'cat-file', '-e', `${base}^{commit}`), '');
     assert.equal(git(shallow, 'rev-parse', 'refs/remotes/origin/main'), git(shallow, 'rev-parse', 'HEAD'));
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('il replay staged puo aggiornare solo origin/main da un checkout shallow', () => {
+  const root = mkdtempSync(join(tmpdir(), 'frontaliere-shallow-ref-'));
+  const origin = join(root, 'origin.git');
+  const source = join(root, 'source');
+  const shallow = join(root, 'shallow');
+  try {
+    git(root, 'init', '--bare', '--initial-branch=main', origin);
+    git(root, 'init', '--initial-branch=main', source);
+    git(source, 'config', 'user.email', 'test@example.invalid');
+    git(source, 'config', 'user.name', 'test');
+    writeFileSync(join(source, 'history.txt'), 'base\n');
+    git(source, 'add', 'history.txt');
+    git(source, 'commit', '-m', 'base');
+    writeFileSync(join(source, 'history.txt'), 'head\n');
+    git(source, 'commit', '-am', 'head');
+    const head = git(source, 'rev-parse', 'HEAD');
+    git(source, 'remote', 'add', 'origin', origin);
+    git(source, 'push', 'origin', 'main');
+    git(root, 'clone', '--depth', '1', `file://${origin}`, shallow);
+    assert.equal(git(shallow, 'rev-parse', '--is-shallow-repository'), 'true');
+
+    execFileSync('bash', [pushBaseGuardPath], {
+      cwd: shallow,
+      env: {
+        ...process.env,
+        REQUIRE_FULL_HISTORY: 'false',
+        FETCH_MAIN: 'true',
+        HISTORY_FETCH_ATTEMPTS: '1',
+        HISTORY_FETCH_DELAY_S: '0',
+        HISTORY_FETCH_TIMEOUT_S: '30',
+      },
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
+
+    assert.equal(git(shallow, 'rev-parse', '--is-shallow-repository'), 'true');
+    assert.equal(git(shallow, 'rev-parse', 'refs/remotes/origin/main'), head);
   } finally {
     rmSync(root, { recursive: true, force: true });
   }
