@@ -161,7 +161,7 @@ test('il replay stale installa il parser prima di risolvere la release API', () 
   assert.ok(staleDispatch > runtime, 'il runtime deve precedere il dispatch stale');
   assert.match(
     publish.slice(runtime, staleDispatch),
-    /if: steps\.replay_freshness\.outcome == 'success'/u,
+    /if: steps\.replay_freshness\.outputs\.fresh == 'true' \|\| github\.event\.workflow_run\.head_sha != ''/u,
   );
   assert.match(
     publish.slice(runtime, staleDispatch),
