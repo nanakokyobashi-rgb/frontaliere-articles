@@ -4,17 +4,17 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-28T15:15:44.439Z",
-  "contentHash": "f582418aaa98a6be5ebe497df5f3186ac9e1261e1b6d3c6cca84d592e72f35c6",
+  "updatedAt": "2026-10-28T18:07:44.486Z",
+  "contentHash": "700979c55d39db78225b35afba683e617dcad01b66a4c37c5f894892acef37ec",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-28T06:23:27.523Z",
+      "updatedAt": "2026-10-28T13:37:22.501Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-27T21:31:39.250Z",
+      "updatedAt": "2026-10-28T11:41:09.250Z",
       "keyFacts": 0
     }
   ],
@@ -92,7 +92,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-28T06:23:27.523Z"
+          "updatedAt": "2026-10-28T13:37:22.501Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -130,7 +130,7 @@
               "url": "https://www.fr.ch/de/sjsd/pol/news/fahrzeug-nach-geisterfahrt-auf-der-a1-bei-domdidier-gestoppt"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-10-28T11:41:09.250Z"
         }
       ],
       "curatedArticles": [
@@ -145,6 +145,12 @@
           "url": "/articoli-friburgo/friburgo-no-linea-diretta/",
           "excerpt": "Friburgo non vuole una linea ferroviaria diretta per Bulle Il postulato è stato approvato nel maggio 2022: 87 voti contro 3 Il progetto è giudicato costoso",
           "date": "2026-10-26T15:03:53.947Z"
+        },
+        {
+          "title": "Friburgo prepara 24 nuovi bus elettrici per dicembre",
+          "url": "/articoli-friburgo/tpf-bus-elettrici-friburgo/",
+          "excerpt": "24 nuovi bus elettrici per i TPF Investimento: 20 milioni di franchi Sei bus da 12 metri, 18 articolati da 18 In servizio dal cambio d'orario di dicembre",
+          "date": "2026-10-28T17:54:37.229Z"
         },
         {
           "title": "Friburgo: approvato il nuovo piano della rete ciclabile",
@@ -175,12 +181,6 @@
           "url": "/articoli-svizzera/abbonamenti-friburgo-zone-tariffe/",
           "excerpt": "Zone tariffarie progressive, abbonamenti annuali e mensili, sconti per studenti: guida completa ai trasporti pubblici friburghesi e nazionali.",
           "date": "2026-08-24T02:28:56.399Z"
-        },
-        {
-          "title": "Friburgo: 117 milioni per 13 nuovi treni Flirt",
-          "url": "/articoli-svizzera/stadler-rail-friburgo-117-milioni/",
-          "excerpt": "Stadler Rail fornirà 13 nuovi treni Flirt Evo ai Trasporti pubblici friburghesi per 117 milioni CHF. Prime consegne a dicembre 2028.",
-          "date": "2026-08-21T09:43:21.760Z"
         }
       ],
       "latestCantonArticles": [],
@@ -194,7 +194,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-28T15:15:44.439Z"
+      "updatedAt": "2026-10-28T18:07:44.486Z"
     },
     "en": {
       "canton": "FR",
@@ -269,7 +269,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-28T06:23:27.523Z"
+          "updatedAt": "2026-10-28T13:37:22.501Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -307,7 +307,7 @@
               "url": "https://www.fr.ch/de/sjsd/pol/news/fahrzeug-nach-geisterfahrt-auf-der-a1-bei-domdidier-gestoppt"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-10-28T11:41:09.250Z"
         }
       ],
       "curatedArticles": [
@@ -322,6 +322,12 @@
           "url": "/en/fribourg-articles/fribourg-no-direct-line/",
           "excerpt": "Fribourg does not want a direct railway line to Bulle The postulate was approved in May 2022: 87 votes to 3 The project is considered costly and technically",
           "date": "2026-10-26T15:03:53.947Z"
+        },
+        {
+          "title": "Fribourg prepares 24 new electric buses for December",
+          "url": "/en/fribourg-articles/fribourg-24-new-electric-buses/",
+          "excerpt": "24 new electric buses for TPF Investment: 20 million francs Six 12-metre buses, 18 articulated buses measuring 18 metres In service from the December timetable",
+          "date": "2026-10-28T17:54:37.229Z"
         },
         {
           "title": "Fribourg: new cycle network plan approved",
@@ -352,12 +358,6 @@
           "url": "/en/swiss-articles/fribourg-public-transport-subscriptions-zones/",
           "excerpt": "Progressive fare zones, annual and monthly subscriptions, discounts for students: a complete guide to public transport in Fribourg and the country.",
           "date": "2026-08-24T02:28:56.399Z"
-        },
-        {
-          "title": "Fribourg: 117 million for 13 new Flirt trains",
-          "url": "/en/swiss-articles/stadler-rail-fribourg-117-million/",
-          "excerpt": "Stadler Rail will supply 13 new Flirt Evo trains to the Fribourg Public Transport for CHF 117 million. First deliveries in December 2028.",
-          "date": "2026-08-21T09:43:21.760Z"
         }
       ],
       "latestCantonArticles": [],
@@ -371,7 +371,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-28T15:15:44.439Z"
+      "updatedAt": "2026-10-28T18:07:44.486Z"
     },
     "de": {
       "canton": "FR",
@@ -446,7 +446,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-28T06:23:27.523Z"
+          "updatedAt": "2026-10-28T13:37:22.501Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -484,7 +484,7 @@
               "url": "https://www.fr.ch/de/sjsd/pol/news/fahrzeug-nach-geisterfahrt-auf-der-a1-bei-domdidier-gestoppt"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-10-28T11:41:09.250Z"
         }
       ],
       "curatedArticles": [
@@ -499,6 +499,12 @@
           "url": "/de/freiburg-artikel/friburg-keine-direktstrecke/",
           "excerpt": "Freiburg will keine direkte Bahnlinie nach Bulle Das Postulat wurde im Mai 2022 angenommen: 87 Stimmen gegen 3 Das Projekt wird als kostspielig und technisch",
           "date": "2026-10-26T15:03:53.947Z"
+        },
+        {
+          "title": "Freiburg bereitet 24 neue Elektrobusse für Dezember vor",
+          "url": "/de/freiburg-artikel/freiburg-24-neue-elektrobusse/",
+          "excerpt": "24 neue Elektrobusse für die TPF Investition: 20 Millionen Franken Sechs Busse mit einer Länge von 12 Metern, 18 Gelenkbusse mit einer Länge von 18 Metern Ab",
+          "date": "2026-10-28T17:54:37.229Z"
         },
         {
           "title": "Freiburg: Neuer Radnetzplan genehmigt",
@@ -529,12 +535,6 @@
           "url": "/de/schweiz-artikel/freiburg-fahrkarten-abo-zonen-tarife/",
           "excerpt": "Progressive Tarifzonen, Jahres- und Monatsabonnements, Studentenrabatte: Kompletter Leitfaden für den öffentlichen Verkehr in Freiburg und im Inland.",
           "date": "2026-08-24T02:28:56.399Z"
-        },
-        {
-          "title": "Freiburg: 117 Millionen für 13 neue FLIRT-Züge",
-          "url": "/de/schweiz-artikel/stadler-rail-freiburg-117-millionen/",
-          "excerpt": "Stadler Rail wird 13 neue Flirt Evo-Züge für CHF 117 Mio. an den öffentlichen Verkehr in Freiburg liefern. Erste Auslieferungen im Dezember 2028.",
-          "date": "2026-08-21T09:43:21.760Z"
         }
       ],
       "latestCantonArticles": [],
@@ -548,7 +548,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-28T15:15:44.439Z"
+      "updatedAt": "2026-10-28T18:07:44.486Z"
     },
     "fr": {
       "canton": "FR",
@@ -623,7 +623,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-28T06:23:27.523Z"
+          "updatedAt": "2026-10-28T13:37:22.501Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -661,7 +661,7 @@
               "url": "https://www.fr.ch/de/sjsd/pol/news/fahrzeug-nach-geisterfahrt-auf-der-a1-bei-domdidier-gestoppt"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-10-28T11:41:09.250Z"
         }
       ],
       "curatedArticles": [
@@ -676,6 +676,12 @@
           "url": "/fr/articles-fribourg/fribourg-pas-de-liaison-directe/",
           "excerpt": "Fribourg ne veut pas d’une ligne ferroviaire directe vers Bulle Le postulat a été approuvé en mai 2022 : 87 voix contre 3 Le projet est jugé coûteux",
           "date": "2026-10-26T15:03:53.947Z"
+        },
+        {
+          "title": "Fribourg prépare 24 nouveaux bus électriques pour décembre",
+          "url": "/fr/articles-fribourg/fribourg-24-nouveaux-bus-electriques/",
+          "excerpt": "24 nouveaux bus électriques pour les TPF Investissement : 20 millions de francs Six bus de 12 mètres, 18 articulés de 18 En service à partir du changement",
+          "date": "2026-10-28T17:54:37.229Z"
         },
         {
           "title": "Fribourg : le nouveau plan du réseau cyclable approuvé",
@@ -706,12 +712,6 @@
           "url": "/fr/articles-suisse/fribourg-abonnements-transports-zones-tarifs/",
           "excerpt": "Zones tarifaires progressives, abonnements annuels et mensuels, réductions pour étudiants : guide complet des transports publics fribourgeois et nationaux.",
           "date": "2026-08-24T02:28:56.399Z"
-        },
-        {
-          "title": "Fribourg : 117 millions pour 13 nouveaux trains Flirt",
-          "url": "/fr/articles-suisse/stadler-rail-fribourg-117-millions/",
-          "excerpt": "Stadler Rail fournira 13 nouveaux trains Flirt Evo aux Transports publics fribourgeois pour CHF 117 millions. Premières livraisons en décembre 2028.",
-          "date": "2026-08-21T09:43:21.760Z"
         }
       ],
       "latestCantonArticles": [],
@@ -725,7 +725,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-28T15:15:44.439Z"
+      "updatedAt": "2026-10-28T18:07:44.486Z"
     }
   }
 }

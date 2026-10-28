@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "pensioni",
-  "updatedAt": "2026-10-27T19:21:58.604Z",
-  "contentHash": "d582b0922109cad9635f6a6b09c2ae8e760c2bcada68c45d158eed23a5962b89",
+  "updatedAt": "2026-10-28T18:07:44.486Z",
+  "contentHash": "a34854407bef81357d0ce58f17e7dd05ee3aad13ca9de103a78b9707473ee2b1",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -129,6 +129,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Economia neuchâteloise: dinamica ma volatile",
+          "url": "/articoli-neuchatel/economia-neuchateloise-incertezza/",
+          "excerpt": "PIL romando stimato: 198 miliardi di franchi nel 2025 Crescita 2025: 2,2% contro 1,8% in Svizzera Proiezioni: 1,9% nel 2026 e 1,5% l'anno prossimo Neuchâtel",
+          "date": "2026-10-28T17:45:20.321Z"
+        },
+        {
           "title": "Mutamenti del lavoro frontaliero nell'Arco giurassiano",
           "url": "/articoli-neuchatel/arco-giurassiano-frontalieri/",
           "excerpt": "Un episodio sull'Arco giurassiano affronta i mutamenti dell'occupazione frontaliera; il quadro 2026 del Cantone di Neuchâtel separa fisco e previdenza.",
@@ -151,12 +157,6 @@
           "url": "/articoli-neuchatel/successo-abbonamenti-trasporti-ridotti/",
           "excerpt": "66% di sconto agli under 25 dal 1° luglio 2026 Oltre 15'000 buoni di riduzione già utilizzati Quasi 2'300 abbonamenti annuali in più in luglio-settembre Secondo",
           "date": "2026-10-27T11:03:48.170Z"
-        },
-        {
-          "title": "Orologeria: soppressione di circa 100 posti a Le Locle",
-          "url": "/articoli-neuchatel/tagli-orologeria-locle-lvmh/",
-          "excerpt": "Zenith sopprime circa 100 posti a Le Locle su 196 dipendenti; 101 persone sono a rischio nella distribuzione internazionale.",
-          "date": "2026-10-26T09:27:07.480Z"
         }
       ],
       "links": [
@@ -177,7 +177,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-27T19:21:58.604Z"
+      "updatedAt": "2026-10-28T18:07:44.486Z"
     },
     "en": {
       "canton": "NE",
@@ -284,6 +284,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Neuchâtel economy: dynamic but volatile",
+          "url": "/en/neuchatel-articles/neuchatel-economy-uncertainty/",
+          "excerpt": "Estimated Romanian GDP: 198 billion francs in 2025 Growth 2025: 2.2% versus 1.8% in Switzerland Projections: 1.9% in 2026 and 1.5% next year Neuchâtel: dynamic",
+          "date": "2026-10-28T17:45:20.321Z"
+        },
+        {
           "title": "Changes in cross-border employment in the Jura Arc",
           "url": "/en/neuchatel-articles/jurassic-arc-cross-border-work/",
           "excerpt": "An episode on the Jura Arc addresses changes in cross-border employment; the 2026 overview of the Canton of Neuchâtel distinguishes taxation and social security.",
@@ -306,12 +312,6 @@
           "url": "/en/neuchatel-articles/success-reduced-transport-passes/",
           "excerpt": "66% discount for under 25s from July 1, 2026 Over 15,000 discount vouchers already used Almost 2,300 additional annual subscriptions in July-September Second",
           "date": "2026-10-27T11:03:48.170Z"
-        },
-        {
-          "title": "Watchmaking: approximately 100 jobs eliminated in Le Locle",
-          "url": "/en/neuchatel-articles/watchmaker-cuts-le-locle/",
-          "excerpt": "Zenith is eliminating around 100 positions in Le Locle, out of 196 employees; 101 people are at risk in international distribution.",
-          "date": "2026-10-26T09:27:07.480Z"
         }
       ],
       "links": [
@@ -332,7 +332,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-27T19:21:58.604Z"
+      "updatedAt": "2026-10-28T18:07:44.486Z"
     },
     "de": {
       "canton": "NE",
@@ -439,6 +439,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Neuenburger Wirtschaft: dynamisch, aber volatil",
+          "url": "/de/neuenburg-artikel/neuenburg-wirtschaft-unsicherheit/",
+          "excerpt": "BIP der Westschweiz geschätzt: 198 Milliarden Franken im Jahr 2025 Wachstum 2025: 2,2% gegenüber 1,8% in der Schweiz Prognosen: 1,9% im Jahr 2026 und 1,5%",
+          "date": "2026-10-28T17:45:20.321Z"
+        },
+        {
           "title": "Veränderungen der Grenzgängerbeschäftigung im Jurabogen",
           "url": "/de/neuenburg-artikel/jurabogen-grenzgaenger-arbeit/",
           "excerpt": "Eine Folge über den Jurabogen behandelt die Veränderungen der Grenzgängerbeschäftigung; der Steuerüberblick 2026 des Kantons Neuenburg trennt Steuern und Vorsorge.",
@@ -461,12 +467,6 @@
           "url": "/de/neuenburg-artikel/erfolg-reduzierte-verkehrstickets/",
           "excerpt": "66% Rabatt für unter 25-Jährige ab 1.",
           "date": "2026-10-27T11:03:48.170Z"
-        },
-        {
-          "title": "Uhrenbranche: Abbau von rund 100 Stellen in Le Locle",
-          "url": "/de/neuenburg-artikel/stellenabbau-uhrmacher-le-locle/",
-          "excerpt": "Zenith baut in Le Locle rund 100 Stellen bei insgesamt 196 Beschäftigten ab; 101 Personen im internationalen Vertrieb sind gefährdet.",
-          "date": "2026-10-26T09:27:07.480Z"
         }
       ],
       "links": [
@@ -487,7 +487,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-27T19:21:58.604Z"
+      "updatedAt": "2026-10-28T18:07:44.486Z"
     },
     "fr": {
       "canton": "NE",
@@ -594,6 +594,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Économie neuchâteloise : dynamique mais volatile",
+          "url": "/fr/articles-neuchatel/economie-neuchatel-incertitude/",
+          "excerpt": "PIB romand estimé : 198 milliards de francs en 2025 Croissance 2025: 2,2% contre 1,8% en Suisse Projections : 1,9% en 2026 et 1,5% l'an prochain Neuchâtel",
+          "date": "2026-10-28T17:45:20.321Z"
+        },
+        {
           "title": "Mutations du travail frontalier dans l’Arc jurassien",
           "url": "/fr/articles-neuchatel/arc-jurassien-emploi-frontalier/",
           "excerpt": "Un épisode consacré à l’Arc jurassien aborde les évolutions de l’emploi frontalier ; le cadre 2026 du canton de Neuchâtel sépare fiscalité et prévoyance.",
@@ -616,12 +622,6 @@
           "url": "/fr/articles-neuchatel/succes-abonnements-transports-reduits/",
           "excerpt": "66% de réduction pour les moins de 25 ans à partir du 1er juillet 2026 Plus de 15'000 bons de réduction déjà utilisés Près de 2'300 abonnements annuels",
           "date": "2026-10-27T11:03:48.170Z"
-        },
-        {
-          "title": "Horlogerie : suppression d’environ 100 postes au Locle",
-          "url": "/fr/articles-neuchatel/suppressions-emplois-le-locle/",
-          "excerpt": "Zenith supprime environ 100 postes au Locle sur 196 employés ; 101 personnes sont menacées dans la distribution internationale.",
-          "date": "2026-10-26T09:27:07.480Z"
         }
       ],
       "links": [
@@ -642,7 +642,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-27T19:21:58.604Z"
+      "updatedAt": "2026-10-28T18:07:44.486Z"
     }
   }
 }
