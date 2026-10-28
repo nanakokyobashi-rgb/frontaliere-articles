@@ -298,6 +298,10 @@ test('il resolver article non rifà il fetch del parent già presente nel checko
   assert.match(pushBaseGuard, /git rev-parse --is-shallow-repository/);
   assert.match(pushBaseGuard, /git fetch --no-tags --unshallow origin main/);
   assert.match(pushBaseGuard, /HISTORY_FETCH_ATTEMPTS/);
+  assert.match(pushBaseGuard, /HISTORY_FETCH_DELAY_S supera il cap di 60/);
+  assert.match(pushBaseGuard, /HISTORY_FETCH_TIMEOUT_S/);
+  assert.match(pushBaseGuard, /run_fetch_with_timeout/);
+  assert.match(pushBaseGuard, /FETCH_MAIN/);
   assert.match(pushBaseGuard, /git cat-file -e "\$\{PUSH_BEFORE\}\^\{commit\}"/);
   assert.match(pushBaseGuard, /git fetch --no-tags origin "\$PUSH_BEFORE"/);
   assert.match(pushBaseGuard, /push base non presente dopo il fetch/);

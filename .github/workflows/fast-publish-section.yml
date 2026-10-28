@@ -750,10 +750,9 @@ jobs:
               echo "::error::head API stantia non valida per il recovery workflow_run"
               exit 1
             fi
-            if [ "$(git rev-parse --is-shallow-repository)" = 'true' ]; then
-              git fetch --no-tags --unshallow origin main
-            else
-              git fetch --no-tags origin main
+            if ! FETCH_MAIN=true bash scripts/ci/fetch-push-base-if-missing.sh; then
+              echo "::error::impossibile aggiornare main tramite il guard bounded prima del recovery API"
+              exit 1
             fi
             api_release_commit="$(
               CURRENT_MAIN="$CURRENT_MAIN" STALE_API_RELEASE="$STALE_HEAD" node --input-type=module -e '
@@ -1251,7 +1250,10 @@ jobs:
           max_readiness_attempts=3
           while (( readiness_attempts < max_readiness_attempts )); do
             readiness_attempts=$((readiness_attempts + 1))
-            git fetch --no-tags --depth=1 origin main
+            if ! FETCH_MAIN=true bash scripts/ci/fetch-push-base-if-missing.sh; then
+              echo "::error::impossibile aggiornare main tramite il guard bounded prima del replay API"
+              exit 1
+            fi
             current_main="$(git rev-parse FETCH_HEAD)"
             if [ "$current_main" != "$SOURCE_COMMIT" ]; then
               echo "::error::main e' avanzata durante il backfill ($SOURCE_COMMIT -> $current_main); replay API non accodato"

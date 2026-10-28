@@ -117,10 +117,9 @@ if [ -n "$pinned_replay_main" ]; then
   if [ "$current_main" != "$pinned_replay_main" ]; then
     api_release_commit=''
     if [ "$EVENT_NAME" = 'workflow_run' ]; then
-      if [ "$(git rev-parse --is-shallow-repository)" = 'true' ]; then
-        git fetch --no-tags --unshallow origin main
-      else
-        git fetch --no-tags origin main
+      if ! FETCH_MAIN=true bash scripts/ci/fetch-push-base-if-missing.sh; then
+        echo "::error::impossibile aggiornare main tramite il guard bounded prima del render API"
+        exit 1
       fi
       api_release_commit="$(
         CURRENT_MAIN="$current_main" STALE_API_RELEASE="$pinned_replay_main" node --input-type=module -e '

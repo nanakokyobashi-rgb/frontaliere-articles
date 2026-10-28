@@ -13,12 +13,11 @@ fi
 export GH_TOKEN="$runtime_pat"
 target_matrix="$TARGET_MATRIX"
 if [ "${MIXED_MATRIX:-false}" = 'true' ]; then
-  if [ "$(git rev-parse --is-shallow-repository)" = 'true' ]; then
-    git fetch --no-tags --unshallow origin main
-  else
-    git fetch --no-tags origin main
+  if ! FETCH_MAIN=true bash scripts/ci/fetch-push-base-if-missing.sh; then
+    echo "::error::impossibile aggiornare main tramite il guard bounded per il piano mixed-matrix"
+    exit 1
   fi
-  fetched_current_main="$(git rev-parse refs/remotes/origin/main)"
+  fetched_current_main="$(git rev-parse FETCH_HEAD)"
   if [ "$fetched_current_main" != "$CURRENT_MAIN" ]; then
     echo "::error::main e' avanzata durante la preparazione del piano mixed-matrix ($CURRENT_MAIN -> $fetched_current_main); annullo il recovery"
     exit 1
@@ -220,12 +219,11 @@ rebuild_recovery_head() {
     echo "::error::HEAD handoff non valida: $next_head"
     return 1
   fi
-  if [ "$(git rev-parse --is-shallow-repository)" = 'true' ]; then
-    git fetch --no-tags --unshallow origin main
-  else
-    git fetch --no-tags origin main
+  if ! FETCH_MAIN=true bash scripts/ci/fetch-push-base-if-missing.sh; then
+    echo "::error::impossibile aggiornare main tramite il guard bounded prima del rebuild del recovery"
+    return 1
   fi
-  fetched_current_main="$(git rev-parse refs/remotes/origin/main)"
+  fetched_current_main="$(git rev-parse FETCH_HEAD)"
   if [ "$fetched_current_main" != "$next_head" ]; then
     echo "::error::main e' avanzata durante il rebuild del recovery ($next_head -> $fetched_current_main)"
     return 1
