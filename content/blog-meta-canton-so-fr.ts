@@ -60,6 +60,9 @@ const blogMetaCantonSoFr: Record<string, string> = {
     'blog.article.aumento-salari-statale-2027.title': 'Augmentation salariale: 1,0% au personnel soleurois dès 2027',
     'blog.article.aumento-salari-statale-2027.excerpt': 'L’accord entre Regierungsrat et les associations du personnel prévoit une augmentation de 1,0% pour le personnel de l’État, les enseignants et le personnel hospitalier à partir de 2027.',
     'blog.article.aumento-salari-statale-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.solothurn-sussidi-premi-2027.title': '221 millions pour réduire les primes d’assurance à Soleure',
+    'blog.article.solothurn-sussidi-premi-2027.excerpt': 'En 2027, environ CHF 221 millions sont prévus pour l’IPV La dotation augmente de CHF 9 millions, soit 4,3 % Environ CHF 123 millions proviennent',
+    'blog.article.solothurn-sussidi-premi-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSoFr;

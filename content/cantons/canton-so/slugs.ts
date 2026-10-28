@@ -22,6 +22,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'proposta-premi-assicurazione-2027': { it: 'proposta-premi-assicurazione-2027', en: '2027-insurance-premium-proposal', de: 'praemienverbilligung-2027', fr: 'proposition-primes-2027' },
  'soletta-aumento-salari': { it: 'soletta-aumento-salari', en: 'solothurn-wage-increase', de: 'solothurn-lohnerhoehung', fr: 'soleure-hausse-salaires' },
  'aumento-salari-statale-2027': { it: 'aumento-salari-statale-2027', en: 'solothurn-state-salary-increase-2027', de: 'loehner-anstieg-staatlich-2027', fr: 'augmentation-salaire-etat-2027' },
+ 'solothurn-sussidi-premi-2027': { it: 'solothurn-sussidi-premi-2027', en: 'solothurn-premium-subsidies-2027', de: 'solothurn-pramiezuschusse-2027', fr: 'soleure-subventions-primes-2027' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

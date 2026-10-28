@@ -60,6 +60,9 @@ const blogMetaCantonSoEn: Record<string, string> = {
     'blog.article.aumento-salari-statale-2027.title': '1.0% salary increase for state employees in the Canton of Solothurn from 2027',
     'blog.article.aumento-salari-statale-2027.excerpt': 'The agreement between Regierungsrat and staff associations provides for a 1.0% increase for state employees, teachers and hospital employees starting in 2027.',
     'blog.article.aumento-salari-statale-2027.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.solothurn-sussidi-premi-2027.title': '221 million francs for lower insurance premiums in the Canton of Solothurn',
+    'blog.article.solothurn-sussidi-premi-2027.excerpt': 'In 2027, around CHF 221 million is planned for IPV The allocation increases by CHF 9 million, equal to 4,3% Around CHF 123 million comes from the Confederation',
+    'blog.article.solothurn-sussidi-premi-2027.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSoEn;

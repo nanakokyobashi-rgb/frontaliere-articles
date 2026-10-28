@@ -60,6 +60,9 @@ const blogMetaCantonSoDe: Record<string, string> = {
     'blog.article.aumento-salari-statale-2027.title': 'Lohnerhöhung von 1,0% für das Staatspersonal des Kantons Solothurn ab 2027',
     'blog.article.aumento-salari-statale-2027.excerpt': 'Die Vereinbarung zwischen dem Regierungsrat und den Personalverbänden sieht ab 2027 eine Lohnerhöhung von 1,0% für das Staatspersonal, die Lehrpersonen und die Spitalangestellten vor.',
     'blog.article.aumento-salari-statale-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.solothurn-sussidi-premi-2027.title': '221 Millionen Franken für niedrigere Versicherungsprämien im Kanton Solothurn',
+    'blog.article.solothurn-sussidi-premi-2027.excerpt': 'Für 2027 sind rund CHF 221 Millionen für die IPV vorgesehen Die Dotierung steigt um CHF 9 Millionen, was 4,3% entspricht Rund CHF 123 Millionen kommen vom Bund',
+    'blog.article.solothurn-sussidi-premi-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSoDe;

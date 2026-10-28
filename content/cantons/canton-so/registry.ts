@@ -215,4 +215,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'solothurn-sussidi-premi-2027',
+ category: 'fiscale',
+ date: '2026-10-28T11:42:42.148Z',
+ image: '/images/blog/article-solothurn-sussidi-premi-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SO'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];
