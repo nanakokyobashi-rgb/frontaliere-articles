@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "mobilita",
-  "updatedAt": "2026-10-28T10:03:35.525Z",
-  "contentHash": "81e0482dfb44b7281100dca07c6f3b720dc07012e5f4152d78191b28392b9958",
+  "updatedAt": "2026-10-28T16:06:07.669Z",
+  "contentHash": "e4c48b0043ca855e08659e81a02f4cd5a79d6b94eb92978328683519a4c2b7b7",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -37,7 +37,7 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "4",
+          "value": "3",
           "note": "segnalazioni aggiornate: 28 ottobre 2026"
         },
         {
@@ -117,12 +117,6 @@
               "date": "2026-09-21T14:56:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> S. Gottardo tra Svincolo autostradale Faido E Svincolo autostradale Quinto Situazione: problemi di traffico cantiere, lunghezza [km] 0.1 Limitazione del traffico: corsia d'emergenza…",
-              "value": "Chiusura",
-              "detail": "fine prevista: 28 ottobre 2026",
-              "date": "2026-10-15T16:15:00.000Z"
-            },
-            {
               "label": "Gordola <-> Sonogno tra Luogo Gordola E Luogo Berzona Situazione: chiusa Causa: lavori di manutenzione",
               "value": "Chiusura",
               "detail": "fine prevista: 31 ottobre 2026",
@@ -153,6 +147,12 @@
               "label": "406 Cadenazzo -> Riazzino tra Luogo Cadenazzo E Svincolo autostradale Aeroporto di Locarno Situazione: traffico fortemente rallentato Causa: traffico congestionato",
               "value": "Traffico",
               "date": "2026-10-28T06:21:00.000Z"
+            },
+            {
+              "label": "A2 Chiasso <-> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 5.2",
+              "value": "Cantiere",
+              "detail": "fine prevista: 29 dicembre 2028",
+              "date": "2021-06-25T03:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
@@ -290,7 +290,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-28T10:03:35.525Z"
+      "updatedAt": "2026-10-28T16:06:07.669Z"
     },
     "en": {
       "canton": "TI",
@@ -305,7 +305,7 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "4",
+          "value": "3",
           "note": "reports as of 28 October 2026"
         },
         {
@@ -385,12 +385,6 @@
               "date": "2026-09-21T14:56:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> S. Gottardo tra Svincolo autostradale Faido E Svincolo autostradale Quinto Situazione: problemi di traffico cantiere, lunghezza [km] 0.1 Limitazione del traffico: corsia d'emergenza…",
-              "value": "Closure",
-              "detail": "until 28 October 2026",
-              "date": "2026-10-15T16:15:00.000Z"
-            },
-            {
               "label": "Gordola <-> Sonogno tra Luogo Gordola E Luogo Berzona Situazione: chiusa Causa: lavori di manutenzione",
               "value": "Closure",
               "detail": "until 31 October 2026",
@@ -421,6 +415,12 @@
               "label": "406 Cadenazzo -> Riazzino tra Luogo Cadenazzo E Svincolo autostradale Aeroporto di Locarno Situazione: traffico fortemente rallentato Causa: traffico congestionato",
               "value": "Traffic",
               "date": "2026-10-28T06:21:00.000Z"
+            },
+            {
+              "label": "A2 Chiasso <-> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 5.2",
+              "value": "Roadworks",
+              "detail": "until 29 December 2028",
+              "date": "2021-06-25T03:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
@@ -557,7 +557,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-28T10:03:35.525Z"
+      "updatedAt": "2026-10-28T16:06:07.669Z"
     },
     "de": {
       "canton": "TI",
@@ -572,7 +572,7 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "4",
+          "value": "3",
           "note": "Meldungen vom 28. Oktober 2026"
         },
         {
@@ -652,12 +652,6 @@
               "date": "2026-09-21T14:56:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> Gotthard zwischen Anschluss Faido und Anschluss Quinto Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.1 Verkehrsführung: Pannenstreifen gesperrt Zusatz 1: vorübergehende…",
-              "value": "Sperrung",
-              "detail": "bis 28. Oktober 2026",
-              "date": "2026-10-15T16:15:00.000Z"
-            },
-            {
               "label": "Gordola <-> Sonogno zwischen Ortschaft Gordola und Ortschaft Berzona Sachlage: Strecke gesperrt Ursache: Unterhaltsarbeiten",
               "value": "Sperrung",
               "detail": "bis 31. Oktober 2026",
@@ -688,6 +682,12 @@
               "label": "406 Cadenazzo -> Riazzino zwischen Ortschaft Cadenazzo und Anschluss Flughafen Locarno Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
               "value": "Verkehr",
               "date": "2026-10-28T06:21:00.000Z"
+            },
+            {
+              "label": "A2 Chiasso <-> Gotthard Tunnel Gotthard-Tunnel Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.3 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 5.2",
+              "value": "Baustelle",
+              "detail": "bis 29. Dezember 2028",
+              "date": "2021-06-25T03:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
@@ -824,7 +824,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-28T10:03:35.525Z"
+      "updatedAt": "2026-10-28T16:06:07.669Z"
     },
     "fr": {
       "canton": "TI",
@@ -839,7 +839,7 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "4",
+          "value": "3",
           "note": "signalements au 28 octobre 2026"
         },
         {
@@ -919,12 +919,6 @@
               "date": "2026-09-21T14:56:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> St-Gothard entre Jonction autoroutière Faido et Jonction autoroutière Quinto Situation: trafic perturbé travaux, longueur [km] 0.1 Gestion du trafic: bande d'arrêt d'urgence fermée…",
-              "value": "Fermeture",
-              "detail": "jusqu’au 28 octobre 2026",
-              "date": "2026-10-15T16:15:00.000Z"
-            },
-            {
               "label": "Gordola <-> Sonogno entre Localité Gordola et Localité Berzona Situation: fermé Raison: travaux de maintenance",
               "value": "Fermeture",
               "detail": "jusqu’au 31 octobre 2026",
@@ -955,6 +949,12 @@
               "label": "406 Cadenazzo -> Riazzino entre Localité Cadenazzo et Jonction autoroutière Aeroprt de Locarno Situation: trafic en accordéon Raison: surcharge de trafic",
               "value": "Trafic",
               "date": "2026-10-28T06:21:00.000Z"
+            },
+            {
+              "label": "A2 Chiasso <-> St-Gothard Tunnel Tunnel du St-Gothard Situation: trafic perturbé travaux, longueur [km] 0.3 Complément 1: limitation temporaire de largeur largeur de la voie [m] 5.2",
+              "value": "Chantier",
+              "detail": "jusqu’au 29 décembre 2028",
+              "date": "2021-06-25T03:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
@@ -1092,7 +1092,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-28T10:03:35.525Z"
+      "updatedAt": "2026-10-28T16:06:07.669Z"
     }
   }
 }
