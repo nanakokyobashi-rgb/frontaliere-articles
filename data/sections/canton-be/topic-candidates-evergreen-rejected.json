@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-be::https://ajour.ch/story/703520/rduction-de-la-vitesse-sur-lautoroute-le-conseil-fdral-prpare-une-mesure-controverse": {
-      "section": "canton-be",
-      "ts": 1793013455648
-    },
     "canton-be::https://www.nau.ch/news/wirtschaft/effektivlohne-steigen-2026-im-schnitt-um-05-prozent-67193453": {
       "section": "canton-be",
       "ts": 1793021802412
@@ -119,6 +115,10 @@
     "canton-be::https://ajour.ch/story/703830/regeln-f%c3%bcr-waffenexport-werden-gelockert%c2%a0-aber-nicht-f%c3%bcr-die-ukraine-die-wichtigsten-antworten": {
       "section": "canton-be",
       "ts": 1793165929153
+    },
+    "canton-be::https://ajour.ch/story/703827/le-conseil-des-affaires-francophones-de-bienne-fte-ses-20-ans": {
+      "section": "canton-be",
+      "ts": 1793187218409
     }
   }
 }
