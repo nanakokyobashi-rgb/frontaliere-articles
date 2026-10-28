@@ -1148,7 +1148,7 @@ test('senza FREE_TRANSLATE_CODEX_TIER la posizione resta quella di default, senz
 
 // ── Scadenza del processo (run 36309380063 e 36305591991) ─────────────────
 // create-article ucciso dal `timeout` del workflow a 657 s con l'articolo IT
-// pronto e le traduzioni Codex ancora in corso: il budget del tier (300 s
+// pronto e le traduzioni Codex ancora in corso: il budget del tier (900 s
 // cumulati) non conosceva l'orologio del processo.
 
 test('clamp della deadline: minimo fra tetto della chiamata, budget del tier e scadenza del processo', () => {
@@ -1184,6 +1184,23 @@ test('le recovery condividono il budget Codex di chiamate e tempo', () => {
   } finally {
     delete process.env.FREE_TRANSLATE_CODEX_MAX_CALLS;
     delete process.env.FREE_TRANSLATE_CODEX_MAX_MS;
+    setCodexTranslateCallForTests(null);
+  }
+});
+
+test('il budget Codex predefinito resta di 15 minuti per i chiamanti generali', () => {
+  delete process.env.FREE_TRANSLATE_CODEX_MAX_MS;
+  setCodexTranslateCallForTests(null);
+  try {
+    const first = beginCodexTranslationCall({ now: 1_000, processDeadlineMs: null });
+    assert.ok(first);
+    // Dopo 290 s restano 10 s se il default fosse stato ridotto a 5 minuti,
+    // quindi il secondo ingresso verrebbe rifiutato sotto il minimo sicuro.
+    first.finish(291_000);
+    const second = beginCodexTranslationCall({ now: 291_000, processDeadlineMs: null });
+    assert.ok(second, 'il default deve lasciare margine oltre i 5 minuti');
+    second.finish(291_000);
+  } finally {
     setCodexTranslateCallForTests(null);
   }
 });

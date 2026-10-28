@@ -1980,7 +1980,7 @@ function codexTranslateCallTimeoutMs() {
 // Perche' serve: il budget del tier (FREE_TRANSLATE_CODEX_MAX_MS, 15 minuti)
 // conta il tempo con richieste in volo dall'inizio delle traduzioni, non e'
 // ancorato all'orologio del processo. create-article parte con le traduzioni dopo generazione e gate,
-// quindi sulle run 36309380063 e 36305591991 i 300 s di Codex sono partiti a
+// quindi sulle run 36309380063 e 36305591991 i 900 s di Codex sono partiti a
 // processo gia' inoltrato e il `timeout` del workflow (cap 657 s) lo ha ucciso
 // con l'articolo IT pronto: `hard-killed after 657s on section frontaliere`.
 let _codexProcessDeadlineMs = null;
