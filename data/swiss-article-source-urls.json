@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1951416/citta-perdita-estate-miliardi-produzione-perdite-causato-due": {
-    "articleId": "estate-2026-perdita-produttivita",
-    "ts": "2026-09-21T04:48:45.986Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1951509/tassi-svizzera-anni-rialzo-bassissimi": {
     "articleId": "rialzo-tassi-ipotecari-svizzera",
     "ts": "2026-09-21T11:01:35.252Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/attualita/1959566/federale-sirene-allarme-popolazione-sistema": {
     "articleId": "allarme-popolazione-165-milioni",
     "ts": "2026-10-28T16:52:58.405Z",
+    "keyForm": 2
+  },
+  "https://www.seco.admin.ch/it/newnsb/iud3ocfmtvqe": {
+    "articleId": "norme-flessibilita-start-up",
+    "ts": "2026-10-28T18:52:29.659Z",
     "keyForm": 2
   }
 }

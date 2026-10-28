@@ -109270,6 +109270,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-norme-flessibilita-start-up': {
+    title: 'Consiglio federale concede flessibilità alle start-up per l\'orario di lavoro',
+    description: 'Nuove norme speciali adottate il 28 ottobre 2026 Entrata in vigore fissata al 1° dicembre 2026 Deroghe mirate per alcuni dipendenti di start-up',
+    keywords: 'frontalieri, ticino, svizzera, italia, consiglio, federale, concede, flessibilità',
+    ogTitle: 'Flessibilità oraria start-up: norme 2026',
+    ogDescription: 'Nuove norme speciali adottate il 28 ottobre 2026 Entrata in vigore fissata al 1° dicembre 2026 Deroghe mirate per alcuni dipendenti di start-up La revisione',
+    canonicalPath: '/articoli-svizzera/norme-flessibilita-start-up/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Consiglio federale concede flessibilità alle start-up per l'orario di lavoro",
+      "description": "Nuove norme speciali adottate il 28 ottobre 2026 Entrata in vigore fissata al 1° dicembre 2026 Deroghe mirate per alcuni dipendenti di start-up",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-norme-flessibilita-start-up.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-28T18:52:28+00:00",
+      "dateModified": "2026-10-28T18:52:28+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/norme-flessibilita-start-up/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
