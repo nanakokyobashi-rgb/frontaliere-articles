@@ -4,21 +4,13 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-fr::https://www.freiburger-nachrichten.ch/story/299598/galterntal-gesperrt": {
-      "section": "canton-fr",
-      "ts": 1792911551843
-    },
-    "canton-fr::https://www.freiburger-nachrichten.ch/story/299268/wildunf%c3%a4lle-im-herbst-wo-es-besonders-h%c3%a4ufig-kracht-und-was-man-dagegen-tun-kann": {
-      "section": "canton-fr",
-      "ts": 1793029808951
-    },
-    "canton-fr::https://www.freiburger-nachrichten.ch/story/300285/autobahn-a12-zwischen-matran-und-freiburgs%c3%bcd-gesperrt": {
-      "section": "canton-fr",
-      "ts": 1793037214793
-    },
     "canton-fr::https://www.freiburger-nachrichten.ch/story/300285/autobahn-a12-zwischen-matran-und-freiburgs%c3%bcd-wieder-offen": {
       "section": "canton-fr",
       "ts": 1793058692714
+    },
+    "canton-fr::https://www.freiburger-nachrichten.ch/story/300432/tempo-80-auf-der-autobahn-so-viele-millionen-liter-sprit-kann-die-schweiz-einsparen": {
+      "section": "canton-fr",
+      "ts": 1793214250672
     }
   }
 }
