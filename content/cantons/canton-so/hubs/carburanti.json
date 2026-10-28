@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "carburanti",
-  "updatedAt": "2026-10-27T13:14:13.993Z",
-  "contentHash": "8e9dc5e8a5817659baf244074746a71c61f54fd732de84aabe6bad4d120d4ce7",
+  "updatedAt": "2026-10-28T11:49:36.683Z",
+  "contentHash": "aa3c611dd98cb6839ce66674282b89a40e72797ede1ab06cb99dac213ddf0260",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "221 milioni di franchi per premi assicurativi più bassi nel Canton Soletta",
+          "url": "/articoli-soletta/solothurn-sussidi-premi-2027/",
+          "excerpt": "Nel 2027 previsti circa CHF 221 milioni per l'IPV La dotazione cresce di CHF 9 milioni, pari al 4,3% Circa CHF 123 milioni arrivano dalla Confederazione",
+          "date": "2026-10-28T11:42:42.148Z"
+        },
+        {
           "title": "Aumento salariale del 1,0% per personale statale del Canton Soletta dal 2027",
           "url": "/articoli-soletta/aumento-salari-statale-2027/",
           "excerpt": "L'accordo tra Regierungsrat e associazioni del personale prevede un aumento dell'1,0% per personale statale, docenti e dipendenti ospedalieri a partire dal 2027.",
@@ -94,12 +100,6 @@
           "url": "/articoli-soletta/sedute-parlamento-novembre-2026/",
           "excerpt": "In agenda 58 affari, inclusi 7 affari normativi e di merito e 7 interventi parlamentari urgenti.",
           "date": "2026-10-27T11:07:13.770Z"
-        },
-        {
-          "title": "Batterie agli ioni di sodio: montaggio a Soletta",
-          "url": "/articoli-soletta/batterie-sodio-soletta/",
-          "excerpt": "Batterie agli ioni di sodio senza litio Software sviluppato in Svizzera, montaggio a Soletta Oltre 600 batterie vendute entro fine settembre 2026 Primo sistema",
-          "date": "2026-10-25T08:55:33.164Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-27T13:14:13.993Z"
+      "updatedAt": "2026-10-28T11:49:36.683Z"
     },
     "en": {
       "canton": "SO",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "221 million francs for lower insurance premiums in the Canton of Solothurn",
+          "url": "/en/solothurn-articles/solothurn-premium-subsidies-2027/",
+          "excerpt": "In 2027, around CHF 221 million is planned for IPV The allocation increases by CHF 9 million, equal to 4,3% Around CHF 123 million comes from the Confederation",
+          "date": "2026-10-28T11:42:42.148Z"
+        },
+        {
           "title": "1.0% salary increase for state employees in the Canton of Solothurn from 2027",
           "url": "/en/solothurn-articles/solothurn-state-salary-increase-2027/",
           "excerpt": "The agreement between Regierungsrat and staff associations provides for a 1.0% increase for state employees, teachers and hospital employees starting in 2027.",
@@ -193,12 +199,6 @@
           "url": "/en/solothurn-articles/parliament-sessions-november-2026/",
           "excerpt": "On the agenda 58 affairs, including 7 regulatory and substantive affairs and 7 urgent parliamentary interventions.",
           "date": "2026-10-27T11:07:13.770Z"
-        },
-        {
-          "title": "Sodium-ion batteries: assembly in Solothurn",
-          "url": "/en/solothurn-articles/sodium-batteries-solothurn/",
-          "excerpt": "Lithium-free sodium-ion batteries Software developed in Switzerland, assembly in Solothurn More than 600 batteries sold by the end of September 2026 First",
-          "date": "2026-10-25T08:55:33.164Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-27T13:14:13.993Z"
+      "updatedAt": "2026-10-28T11:49:36.683Z"
     },
     "de": {
       "canton": "SO",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "221 Millionen Franken für niedrigere Versicherungsprämien im Kanton Solothurn",
+          "url": "/de/solothurn-artikel/solothurn-pramiezuschusse-2027/",
+          "excerpt": "Für 2027 sind rund CHF 221 Millionen für die IPV vorgesehen Die Dotierung steigt um CHF 9 Millionen, was 4,3% entspricht Rund CHF 123 Millionen kommen vom Bund",
+          "date": "2026-10-28T11:42:42.148Z"
+        },
+        {
           "title": "Lohnerhöhung von 1,0% für das Staatspersonal des Kantons Solothurn ab 2027",
           "url": "/de/solothurn-artikel/loehner-anstieg-staatlich-2027/",
           "excerpt": "Die Vereinbarung zwischen dem Regierungsrat und den Personalverbänden sieht ab 2027 eine Lohnerhöhung von 1,0% für das Staatspersonal, die Lehrpersonen und die Spitalangestellten vor.",
@@ -292,12 +298,6 @@
           "url": "/de/solothurn-artikel/parlament-sitzungen-november-2026/",
           "excerpt": "Auf der Tagesordnung stehen 58 Angelegenheiten, darunter 7 regulatorische und materielle Angelegenheiten sowie 7 dringende parlamentarische Interventionen.",
           "date": "2026-10-27T11:07:13.770Z"
-        },
-        {
-          "title": "Natrium-Ionen-Batterien: Montage in Solothurn",
-          "url": "/de/solothurn-artikel/sodium-batterien-solothurn/",
-          "excerpt": "Natrium-Ionen-Batterien ohne Lithium In der Schweiz entwickelte Software, Montage in Solothurn Bis Ende September 2026 über 600 verkaufte Batterien Erstes",
-          "date": "2026-10-25T08:55:33.164Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-27T13:14:13.993Z"
+      "updatedAt": "2026-10-28T11:49:36.683Z"
     },
     "fr": {
       "canton": "SO",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "221 millions pour réduire les primes d’assurance à Soleure",
+          "url": "/fr/articles-soleure/soleure-subventions-primes-2027/",
+          "excerpt": "En 2027, environ CHF 221 millions sont prévus pour l’IPV La dotation augmente de CHF 9 millions, soit 4,3 % Environ CHF 123 millions proviennent",
+          "date": "2026-10-28T11:42:42.148Z"
+        },
+        {
           "title": "Augmentation salariale: 1,0% au personnel soleurois dès 2027",
           "url": "/fr/articles-soleure/augmentation-salaire-etat-2027/",
           "excerpt": "L’accord entre Regierungsrat et les associations du personnel prévoit une augmentation de 1,0% pour le personnel de l’État, les enseignants et le personnel hospitalier à partir de 2027.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-soleure/sessions-parlement-novembre-2026/",
           "excerpt": "À l'ordre du jour 58 affaires, dont 7 affaires réglementaires et substantielles et 7 interventions parlementaires urgentes.",
           "date": "2026-10-27T11:07:13.770Z"
-        },
-        {
-          "title": "Batteries aux ions sodium : assemblage à Soleure",
-          "url": "/fr/articles-soleure/batteries-sodium-soleure/",
-          "excerpt": "Batteries aux ions sodium sans lithium Logiciels développés en Suisse, assemblage à Soleure Plus de 600 batteries vendues d’ici fin septembre 2026 Premier",
-          "date": "2026-10-25T08:55:33.164Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-27T13:14:13.993Z"
+      "updatedAt": "2026-10-28T11:49:36.683Z"
     }
   }
 }
