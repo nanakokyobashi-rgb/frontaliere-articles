@@ -39,6 +39,9 @@ const blogMetaCantonUrIt: Record<string, string> = {
     'blog.article.conteggio-traffico-uri-novembre.title': 'Uri, traffico rilevato in 31 punti il 5 novembre 2026',
     'blog.article.conteggio-traffico-uri-novembre.excerpt': 'Nel fondovalle urano, il 5 novembre 2026, 31 punti rileveranno veicoli e direzioni tra le 06:00 e le 22:00 per rivedere il modello cantonale.',
     'blog.article.conteggio-traffico-uri-novembre.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.susten-furka-chiusura-invernale.title': 'Susten e Furka chiusi, San Gottardo percorribile di giorno',
+    'blog.article.susten-furka-chiusura-invernale.excerpt': 'Dal mercoledì 28 ottobre i passi della Furka e del Susten sono chiusi per l\'inverno; il passo del San Gottardo resta percorribile di giorno.',
+    'blog.article.susten-furka-chiusura-invernale.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonUrIt;

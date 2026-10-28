@@ -39,6 +39,9 @@ const blogMetaCantonUrFr: Record<string, string> = {
     'blog.article.conteggio-traffico-uri-novembre.title': 'Uri, trafic relevé en 31 points le 5 novembre 2026',
     'blog.article.conteggio-traffico-uri-novembre.excerpt': 'Dans la vallée uranaise, le 5 novembre 2026, 31 points recenseront les véhicules et leur direction entre les 06:00 et les 22:00 afin de revoir le modèle cantonal.',
     'blog.article.conteggio-traffico-uri-novembre.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.susten-furka-chiusura-invernale.title': 'Susten et Furka fermés, Saint-Gothard praticable de jour',
+    'blog.article.susten-furka-chiusura-invernale.excerpt': 'À partir du mercredi 28 octobre, les cols de la Furka et du Susten sont fermés pour l\'hiver ; le col du Saint-Gothard reste praticable de jour.',
+    'blog.article.susten-furka-chiusura-invernale.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonUrFr;

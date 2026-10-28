@@ -465,6 +465,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-susten-furka-chiusura-invernale': {
+    title: 'Susten e Furka chiusi, San Gottardo percorribile di giorno',
+    description: 'Dal mercoledì 28 ottobre Furka e Susten sono chiusi per l\'inverno. Il Gotthard resta percorribile di giorno, ma solo per ora.',
+    keywords: 'frontalieri, ticino, svizzera, italia, susten, furka, chiusi, gottardo',
+    ogTitle: 'Susten e Furka chiusi: San Gottardo aperto di giorno',
+    ogDescription: 'Il lead pubblico dell\'Urner Wochenblatt segnala la chiusura invernale dei passi della Furka e del Susten dal mercoledì 28 ottobre. Nello stesso aggiornamento, il passo del Gotthard resta percorribile durante il giorno, per ora.',
+    canonicalPath: '/articoli-uri/susten-furka-chiusura-invernale/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Susten e Furka chiusi, San Gottardo percorribile di giorno",
+      "description": "Dal mercoledì 28 ottobre Furka e Susten sono chiusi per l'inverno. Il Gotthard resta percorribile di giorno, ma solo per ora.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-susten-furka-chiusura-invernale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-28T17:45:24+00:00",
+      "dateModified": "2026-10-28T17:45:24+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-uri/susten-furka-chiusura-invernale/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

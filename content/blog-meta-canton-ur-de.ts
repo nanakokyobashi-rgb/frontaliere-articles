@@ -39,6 +39,9 @@ const blogMetaCantonUrDe: Record<string, string> = {
     'blog.article.conteggio-traffico-uri-novembre.title': 'Uri, Verkehr an 31 Stellen am 5. November 2026 erfasst',
     'blog.article.conteggio-traffico-uri-novembre.excerpt': 'Im Urner Talboden werden am 5.',
     'blog.article.conteggio-traffico-uri-novembre.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.susten-furka-chiusura-invernale.title': 'Susten und Furka gesperrt, Gotthard tagsüber befahrbar',
+    'blog.article.susten-furka-chiusura-invernale.excerpt': 'Ab Mittwoch, dem 28.',
+    'blog.article.susten-furka-chiusura-invernale.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonUrDe;

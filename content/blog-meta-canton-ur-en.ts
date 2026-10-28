@@ -39,6 +39,9 @@ const blogMetaCantonUrEn: Record<string, string> = {
     'blog.article.conteggio-traffico-uri-novembre.title': 'Uri, traffic detected at 31 points on November 5, 2026',
     'blog.article.conteggio-traffico-uri-novembre.excerpt': 'In the Uranian valley floor, on November 5, 2026, 31 points will record vehicles and directions between 06:00 and 22:00 to review the cantonal model.',
     'blog.article.conteggio-traffico-uri-novembre.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.susten-furka-chiusura-invernale.title': 'Susten and Furka closed, Gotthard passable during the day',
+    'blog.article.susten-furka-chiusura-invernale.excerpt': 'As of Wednesday, October 28, the Furka and Susten passes are closed for the winter; the San Gottardo Pass remains passable during the day.',
+    'blog.article.susten-furka-chiusura-invernale.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonUrEn;

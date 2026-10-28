@@ -15,6 +15,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'felix-gisler-pensione-uri': { it: 'felix-gisler-pensione-uri', en: 'felix-gisler-uri-retirement', de: 'felix-gisler-uri-pensionierung', fr: 'felix-gisler-uri-retraite' },
  'axenstrasse-chiusa-novembre-2026': { it: 'axenstrasse-chiusa-novembre-2026', en: 'axenstrasse-closed-november-2026', de: 'axenstrasse-geschlossen-november-2026', fr: 'axenstrasse-fermee-novembre-2026' },
  'conteggio-traffico-uri-novembre': { it: 'conteggio-traffico-uri-novembre', en: 'uri-traffic-count-november', de: 'verkehrszaehlung-uri-november', fr: 'comptage-trafic-uri-novembre' },
+ 'susten-furka-chiusura-invernale': { it: 'susten-furka-chiusura-invernale', en: 'susten-furka-winter-closure', de: 'susten-furka-wintersperre', fr: 'fermeture-hivernale-susten-furka' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
