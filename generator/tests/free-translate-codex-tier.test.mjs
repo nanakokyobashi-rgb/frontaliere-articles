@@ -351,6 +351,34 @@ test('un testo che contiene davvero BEGIN_TEXT o END_TEXT resta intero', async (
   assert.equal(calls.length, 1);
 });
 
+test('Codex conserva l indentazione Markdown annidata dei campi strutturati', async () => {
+  const source = [
+    '## Aufgaben',
+    '- Prima riga',
+    '  - Annidata',
+    '- Seconda riga',
+    '  - Dettaglio',
+    '- Terza riga',
+    '  - Ulteriore dettaglio',
+    '- Quarta riga',
+    '  - Ultimo dettaglio',
+    '- Quinta riga',
+    '- Sesta riga',
+    '- Settima riga',
+    '- Ottava riga',
+  ].join('\n');
+  const expected = source.replace('Prima riga', 'First line').replace('Annidata', 'Nested');
+  const calls = stubCodex((messages) => {
+    const user = messages.find((message) => message.role === 'user').content;
+    const framed = /^BEGIN_TEXT_[A-Z0-9]{8}\n([\s\S]*)\nEND_TEXT_[A-Z0-9]{8}$/.exec(user);
+    assert.equal(framed?.[1], source, 'la sorgente deve arrivare a Codex con la struttura intatta');
+    return expected;
+  });
+
+  assert.equal(await it(source), expected);
+  assert.equal(calls.length, 1);
+});
+
 test('un eco della sorgente e\' rifiutato e contato, la cascata prosegue', async () => {
   const before = codexCounters();
   const calls = stubCodex(IT);
@@ -825,6 +853,22 @@ test('FREE_TRANSLATE_CODEX_BATCH_MAX_TEXTS=1 con una corsia torna una richiesta 
   }
 });
 
+test('il batch opt-in raccoglie il primo burst prima di riempire le corsie', async () => {
+  process.env.FREE_TRANSLATE_CODEX_BATCH_MAX_TEXTS = '3';
+  try {
+    await withLanes(3, async () => {
+      const calls = stubCodex(codexAnswer());
+      const texts = numbered(3);
+      const { value } = await captureLog(() => Promise.all(texts.map((text) => it(text))));
+      assert.deepEqual(value, texts.map(translationOf));
+      assert.equal(calls.length, 1);
+      assert.equal(batchItems(calls[0].messages).length, 3);
+    });
+  } finally {
+    delete process.env.FREE_TRANSLATE_CODEX_BATCH_MAX_TEXTS;
+  }
+});
+
 test('con le corsie occupate i testi in coda partono insieme, con lo schema a id e le regole del testo singolo', async () => {
   await withLanes(1, async () => {
     const calls = stubCodex(codexAnswer());
@@ -1104,7 +1148,7 @@ test('senza FREE_TRANSLATE_CODEX_TIER la posizione resta quella di default, senz
 
 // ── Scadenza del processo (run 36309380063 e 36305591991) ─────────────────
 // create-article ucciso dal `timeout` del workflow a 657 s con l'articolo IT
-// pronto e le traduzioni Codex ancora in corso: il budget del tier (300 s
+// pronto e le traduzioni Codex ancora in corso: il budget del tier (900 s
 // cumulati) non conosceva l'orologio del processo.
 
 test('clamp della deadline: minimo fra tetto della chiamata, budget del tier e scadenza del processo', () => {
@@ -1140,6 +1184,23 @@ test('le recovery condividono il budget Codex di chiamate e tempo', () => {
   } finally {
     delete process.env.FREE_TRANSLATE_CODEX_MAX_CALLS;
     delete process.env.FREE_TRANSLATE_CODEX_MAX_MS;
+    setCodexTranslateCallForTests(null);
+  }
+});
+
+test('il budget Codex predefinito resta di 15 minuti per i chiamanti generali', () => {
+  delete process.env.FREE_TRANSLATE_CODEX_MAX_MS;
+  setCodexTranslateCallForTests(null);
+  try {
+    const first = beginCodexTranslationCall({ now: 1_000, processDeadlineMs: null });
+    assert.ok(first);
+    // Dopo 290 s restano 10 s se il default fosse stato ridotto a 5 minuti,
+    // quindi il secondo ingresso verrebbe rifiutato sotto il minimo sicuro.
+    first.finish(291_000);
+    const second = beginCodexTranslationCall({ now: 291_000, processDeadlineMs: null });
+    assert.ok(second, 'il default deve lasciare margine oltre i 5 minuti');
+    second.finish(291_000);
+  } finally {
     setCodexTranslateCallForTests(null);
   }
 });
