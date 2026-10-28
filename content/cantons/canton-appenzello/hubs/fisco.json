@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "fisco",
-  "updatedAt": "2026-10-28T18:22:11.875Z",
-  "contentHash": "096b8e98e8260485e2d64f15c2edb9fd9e502180cd3b916488b1841ae2b2b5bc",
+  "updatedAt": "2026-10-28T19:36:02.653Z",
+  "contentHash": "95bd3e19c2cd21225781d84aabb2da9ee99a9e09664f809e86efe21329ff4039",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -166,6 +166,12 @@
           "date": "2026-10-21T19:06:08.539Z"
         },
         {
+          "title": "Costi sanitari e minori entrate pesano sul preventivo",
+          "url": "/articoli-appenzello/costi-sanita-meno-entrate/",
+          "excerpt": "Il preventivo 2027 prevede una perdita complessiva di 12,4 milioni di CHF, a causa di costi sanitari crescenti e minori entrate fiscali.",
+          "date": "2026-10-28T19:28:05.243Z"
+        },
+        {
           "title": "Appenzello Esterno verso un deficit di 11,5 milioni",
           "url": "/articoli-appenzello/appenzello-deficit-budget/",
           "excerpt": "Il comunicato del 28 ottobre sul budget 2027 dell'Appenzello Esterno indica un deficit di 11,5 milioni; l'eventuale aumento delle imposte resta incerto.",
@@ -200,12 +206,6 @@
           "url": "/articoli-appenzello/investimenti-tetto-fotovoltaico-2027/",
           "excerpt": "Nel 2027 sono pianificate spese nette di CHF 802'767; previsto il risanamento del tetto della palestra con fotovoltaico.",
           "date": "2026-10-22T22:14:01.184Z"
-        },
-        {
-          "title": "Heiden aumenta la tassa base sui rifiuti",
-          "url": "/articoli-appenzello/heiden-tassa-base-rifiuti/",
-          "excerpt": "A Heiden la tassa base sui rifiuti passa da 24 a 31,20 franchi l'anno per nucleo familiare e impresa.",
-          "date": "2026-10-08T18:18:38.682Z"
         }
       ],
       "latestCantonArticles": [],
@@ -231,7 +231,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-28T18:22:11.875Z"
+      "updatedAt": "2026-10-28T19:36:02.653Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -375,6 +375,12 @@
           "date": "2026-10-21T19:06:08.539Z"
         },
         {
+          "title": "Healthcare costs and lower revenues weigh on the budget",
+          "url": "/en/appenzell-articles/health-costs-less-revenue/",
+          "excerpt": "The 2027 budget projects a total loss of 12,4 million CHF due to rising healthcare costs and lower tax revenues.",
+          "date": "2026-10-28T19:28:05.243Z"
+        },
+        {
           "title": "Appenzell Ausserrhoden heading toward a deficit of 11,5 million",
           "url": "/en/appenzell-articles/appenzell-budget-deficit/",
           "excerpt": "The October 28 statement on Appenzell Ausserrhoden's 2027 budget indicates a deficit of 11,5 million; any tax increase remains uncertain.",
@@ -409,12 +415,6 @@
           "url": "/en/appenzell-articles/roof-solar-investment-2027/",
           "excerpt": "In 2027, net expenditure of CHF 802'767 is planned; renovation of the gymnasium roof with photovoltaics is planned.",
           "date": "2026-10-22T22:14:01.184Z"
-        },
-        {
-          "title": "Heiden increases the basic waste fee",
-          "url": "/en/appenzell-articles/heiden-base-waste-fee/",
-          "excerpt": "In Heiden, the basic waste fee is increasing from 24 to 31,20 francs per year per household and business.",
-          "date": "2026-10-08T18:18:38.682Z"
         }
       ],
       "latestCantonArticles": [],
@@ -440,7 +440,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-28T18:22:11.875Z"
+      "updatedAt": "2026-10-28T19:36:02.653Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -584,6 +584,12 @@
           "date": "2026-10-21T19:06:08.539Z"
         },
         {
+          "title": "Gesundheitskosten und geringere Einnahmen belasten den Voranschlag",
+          "url": "/de/appenzell-artikel/kosten-sanita-weniger-einnahmen/",
+          "excerpt": "Der Voranschlag 2027 sieht aufgrund steigender Gesundheitskosten und geringerer Steuereinnahmen einen Gesamtverlust von 12,4 Millionen CHF vor.",
+          "date": "2026-10-28T19:28:05.243Z"
+        },
+        {
           "title": "Appenzell Ausserrhoden steuert auf ein Defizit von 11,5 Millionen zu",
           "url": "/de/appenzell-artikel/appenzell-budget-defizit/",
           "excerpt": "Die Mitteilung vom 28.",
@@ -618,12 +624,6 @@
           "url": "/de/appenzell-artikel/dachsanierung-photovoltaik-investition-2027/",
           "excerpt": "Für 2027 sind Nettoausgaben von CHF 802'767 geplant; vorgesehen ist die Sanierung des Dachs der Sporthalle mit Photovoltaik.",
           "date": "2026-10-22T22:14:01.184Z"
-        },
-        {
-          "title": "Heiden erhöht die Kehrichtgrundgebühr",
-          "url": "/de/appenzell-artikel/heiden-kehrichtgrundgebuehr/",
-          "excerpt": "In Heiden steigt die Kehrichtgrundgebühr von 24 auf 31,20 Franken pro Jahr für jeden Haushalt und jedes Unternehmen.",
-          "date": "2026-10-08T18:18:38.682Z"
         }
       ],
       "latestCantonArticles": [],
@@ -649,7 +649,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-28T18:22:11.875Z"
+      "updatedAt": "2026-10-28T19:36:02.653Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -793,6 +793,12 @@
           "date": "2026-10-21T19:06:08.539Z"
         },
         {
+          "title": "Les coûts de santé et la baisse des recettes pèsent sur le budget",
+          "url": "/fr/articles-appenzell/couts-sante-moins-revenus/",
+          "excerpt": "Le budget 2027 prévoit une perte globale de 12,4 millions de CHF, en raison de la hausse des coûts de santé et de la baisse des recettes fiscales.",
+          "date": "2026-10-28T19:28:05.243Z"
+        },
+        {
           "title": "Appenzell Rhodes-Extérieures se dirige vers un déficit de 11,5 millions",
           "url": "/fr/articles-appenzell/deficit-budget-appenzell/",
           "excerpt": "Le communiqué du 28 octobre sur le budget 2027 d'Appenzell Rhodes-Extérieures indique un déficit de 11,5 millions ; une éventuelle hausse des impôts reste incertaine.",
@@ -827,12 +833,6 @@
           "url": "/fr/articles-appenzell/toit-photovoltaique-investissement-2027/",
           "excerpt": "En 2027, des dépenses nettes de CHF 802'767 sont prévues ; l’assainissement du toit de la salle de sport avec une installation photovoltaïque est prévu.",
           "date": "2026-10-22T22:14:01.184Z"
-        },
-        {
-          "title": "Heiden augmente la taxe de base sur les déchets",
-          "url": "/fr/articles-appenzell/heiden-taxe-base-dechets/",
-          "excerpt": "À Heiden, la taxe de base sur les déchets passe de 24 à 31,20 francs par an pour chaque ménage et entreprise.",
-          "date": "2026-10-08T18:18:38.682Z"
         }
       ],
       "latestCantonArticles": [],
@@ -858,7 +858,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-28T18:22:11.875Z"
+      "updatedAt": "2026-10-28T19:36:02.653Z"
     }
   }
 }

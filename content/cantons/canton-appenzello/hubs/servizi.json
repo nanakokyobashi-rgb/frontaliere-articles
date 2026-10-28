@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "servizi",
-  "updatedAt": "2026-10-28T18:02:21.438Z",
-  "contentHash": "6c48a50232425d4e76729bea5489a822545c6bc730ae5b152ba60732f47e2de5",
+  "updatedAt": "2026-10-28T19:36:02.653Z",
+  "contentHash": "6fb0f8418421eec35226edce49e20316c14cafe1193b6adf03eb6c0edfb7e291",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -130,6 +130,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Costi sanitari e minori entrate pesano sul preventivo",
+          "url": "/articoli-appenzello/costi-sanita-meno-entrate/",
+          "excerpt": "Il preventivo 2027 prevede una perdita complessiva di 12,4 milioni di CHF, a causa di costi sanitari crescenti e minori entrate fiscali.",
+          "date": "2026-10-28T19:28:05.243Z"
+        },
+        {
           "title": "Heiden aumenta la tassa base sui rifiuti",
           "url": "/articoli-appenzello/heiden-tassa-base-rifiuti/",
           "excerpt": "A Heiden la tassa base sui rifiuti passa da 24 a 31,20 franchi l'anno per nucleo familiare e impresa.",
@@ -170,12 +176,6 @@
           "url": "/articoli-svizzera/permesso-l-cantone-appenzello-validita/",
           "excerpt": "Permesso L breve durata in Appenzello Esterno: durata 12 mesi, criteri di rinnovo, passaggio a permesso B, vincoli legati al datore di lavoro. Guida pratica.",
           "date": "2026-08-21T01:01:59.189Z"
-        },
-        {
-          "title": "Asilo nido e custodia bambini nel Canton Appenzello Interno: costi e tariffe",
-          "url": "/articoli-svizzera/asilo-nido-custodia-bambini-canton-appenzello-interno/",
-          "excerpt": "Scopri le opzioni di custodia per bambini nel Canton Appenzello Interno, inclusi asili nido, famiglie diurne e doposcuola, con tariffe calcolate sul reddito e sussidi cantonali disponibili.",
-          "date": "2026-09-07T10:09:56.666Z"
         }
       ],
       "latestCantonArticles": [],
@@ -213,7 +213,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-28T18:02:21.438Z"
+      "updatedAt": "2026-10-28T19:36:02.653Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -321,6 +321,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Healthcare costs and lower revenues weigh on the budget",
+          "url": "/en/appenzell-articles/health-costs-less-revenue/",
+          "excerpt": "The 2027 budget projects a total loss of 12,4 million CHF due to rising healthcare costs and lower tax revenues.",
+          "date": "2026-10-28T19:28:05.243Z"
+        },
+        {
           "title": "Heiden increases the basic waste fee",
           "url": "/en/appenzell-articles/heiden-base-waste-fee/",
           "excerpt": "In Heiden, the basic waste fee is increasing from 24 to 31,20 francs per year per household and business.",
@@ -361,12 +367,6 @@
           "url": "/en/swiss-articles/permit-l-short-term-appenzell-ausserrhoden-validity/",
           "excerpt": "Permit L short duration in External Appenzell: duration 12 months, renewal criteria, transition to permit B, constraints related to the employer. Practical guide.",
           "date": "2026-08-21T01:01:59.189Z"
-        },
-        {
-          "title": "Nursery and childcare in the Inner Appenzell Canton: costs and fees",
-          "url": "/en/swiss-articles/daycare-childcare-canton-appenzell-innerrhoden/",
-          "excerpt": "Discover childcare options in the Inner Appenzell Canton, including nurseries, day families and after-school, with income-based fees and cantonal subsidies available.",
-          "date": "2026-09-07T10:09:56.666Z"
         }
       ],
       "latestCantonArticles": [],
@@ -396,7 +396,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-28T18:02:21.438Z"
+      "updatedAt": "2026-10-28T19:36:02.653Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -504,6 +504,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Gesundheitskosten und geringere Einnahmen belasten den Voranschlag",
+          "url": "/de/appenzell-artikel/kosten-sanita-weniger-einnahmen/",
+          "excerpt": "Der Voranschlag 2027 sieht aufgrund steigender Gesundheitskosten und geringerer Steuereinnahmen einen Gesamtverlust von 12,4 Millionen CHF vor.",
+          "date": "2026-10-28T19:28:05.243Z"
+        },
+        {
           "title": "Heiden erhöht die Kehrichtgrundgebühr",
           "url": "/de/appenzell-artikel/heiden-kehrichtgrundgebuehr/",
           "excerpt": "In Heiden steigt die Kehrichtgrundgebühr von 24 auf 31,20 Franken pro Jahr für jeden Haushalt und jedes Unternehmen.",
@@ -544,12 +550,6 @@
           "url": "/de/schweiz-artikel/kurzaufenthalt-appenzell-ausserrhoden-gultigkeit/",
           "excerpt": "Kurzzeitbewilligung in Appenzell Ausserrhoden: Dauer 12 Monate, Verlängerungskriterien, Umstellung auf Bewilligung B, arbeitgeberbezogene Bindungen. Praxisleitfaden.",
           "date": "2026-08-21T01:01:59.189Z"
-        },
-        {
-          "title": "Kinderbetreuung Appenzell: Kosten & Tarife",
-          "url": "/de/schweiz-artikel/kindertagesstatte-kinderbetreuung-kanton-appenzell-innerrhoden/",
-          "excerpt": "Entdecken Sie die Kinderbetreuungsmöglichkeiten im Kanton Appenzell Innerrhoden, inklusive Kindergärten, Tages- und Nachschulfamilien, mit einkommensabhängigen Tarifen und kantonalen Zuschüssen.",
-          "date": "2026-09-07T10:09:56.666Z"
         }
       ],
       "latestCantonArticles": [],
@@ -579,7 +579,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-28T18:02:21.438Z"
+      "updatedAt": "2026-10-28T19:36:02.653Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -687,6 +687,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Les coûts de santé et la baisse des recettes pèsent sur le budget",
+          "url": "/fr/articles-appenzell/couts-sante-moins-revenus/",
+          "excerpt": "Le budget 2027 prévoit une perte globale de 12,4 millions de CHF, en raison de la hausse des coûts de santé et de la baisse des recettes fiscales.",
+          "date": "2026-10-28T19:28:05.243Z"
+        },
+        {
           "title": "Heiden augmente la taxe de base sur les déchets",
           "url": "/fr/articles-appenzell/heiden-taxe-base-dechets/",
           "excerpt": "À Heiden, la taxe de base sur les déchets passe de 24 à 31,20 francs par an pour chaque ménage et entreprise.",
@@ -727,12 +733,6 @@
           "url": "/fr/articles-suisse/permis-l-appenzell-rhodes-exterieures-validite/",
           "excerpt": "Permis L courte durée en Appenzell Extérieur : durée 12 mois, critères de renouvellement, passage au permis B, contraintes liées à l'employeur. Guide pratique.",
           "date": "2026-08-21T01:01:59.189Z"
-        },
-        {
-          "title": "Garderie et garde d'enfants dans le canton d'Appenzell : coûts et tarifs",
-          "url": "/fr/articles-suisse/garde-d-enfants-canton-appenzell-rhodes-interieures/",
-          "excerpt": "Découvrez les options de garde d'enfants dans le canton d'Appenzell Interne, y compris les crèches, les familles de jour et après l'école, avec des tarifs calculés sur le revenu et des subventions cantonales disponibles.",
-          "date": "2026-09-07T10:09:56.666Z"
         }
       ],
       "latestCantonArticles": [],
@@ -754,7 +754,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-28T18:02:21.438Z"
+      "updatedAt": "2026-10-28T19:36:02.653Z"
     }
   }
 }
