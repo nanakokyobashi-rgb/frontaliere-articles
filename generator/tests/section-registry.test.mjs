@@ -1689,6 +1689,7 @@ test('load-rc-env: kill-switch mappato, assente per default, marker scritto solo
 test('publish-api: osserva tutta la chiusura degli import del publisher, e pubblica la release edge DOPO il deploy Pages, per ultima', () => {
   const wf = readFileSync(path.join(ROOT, '.github/workflows/publish-api.yml'), 'utf8');
   const freshnessHelper = readFileSync(path.join(ROOT, 'scripts/ci/verify-publish-api-source-current.sh'), 'utf8');
+  const edgePublisher = readFileSync(path.join(ROOT, 'scripts/publish-section-edge.mjs'), 'utf8');
   assert.match(wf, /source_commit:\n\s+description: .*replay bootstrap bounded/);
   assert.match(wf, /ref: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
   assert.match(wf, /Verify publish source is current main/);
@@ -1719,6 +1720,15 @@ test('publish-api: osserva tutta la chiusura degli import del publisher, e pubbl
   assert.match(wf, /Verify source is still current before edge flip/);
   assert.match(freshnessHelper, /timeout --kill-after=1s 60s gh api/);
   assert.match(freshnessHelper, /PUBLISH_API_SOURCE_COMMIT/);
+  const queuePush = wf.slice(wf.indexOf('push_queue_commit()'), wf.indexOf('queue_changed=false'));
+  assert.match(queuePush, /apiInputChangedInRange/);
+  assert.match(queuePush, /PUBLISH_API_SOURCE_COMMIT=\$queued_head/);
+  assert.match(edgePublisher, /verifySourceCurrent = null/);
+  assert.match(edgePublisher, /await verifySourceCurrent\(\)/);
+  assert.ok(
+    edgePublisher.indexOf('await verifySourceCurrent()') < edgePublisher.indexOf('flipped = io.upload(pointerFile'),
+    'il guard interno deve precedere immediatamente il PUT del puntatore',
+  );
   assert.match(wf, /Verify source before governed cover publish/);
   assert.match(wf, /Verify source before Pages publish/);
   assert.match(wf, /Verify source before edge document publish/);

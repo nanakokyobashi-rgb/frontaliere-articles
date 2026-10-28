@@ -1043,17 +1043,36 @@ jobs:
                   echo "::error::cover queue commit changed paths outside $queue_file; source freshness cannot be advanced safely"
                   return 1
                 fi
-                queue_source="$(git rev-parse HEAD)"
-                if ! [[ "$queue_source" =~ ^[a-f0-9]{40}$ ]]; then
-                  echo '::error::cover queue commit produced an invalid source revision'
+                local queued_head api_input_changed source_commit
+                source_commit="${PUBLISH_API_SOURCE_COMMIT:-}"
+                queued_head="$(git rev-parse HEAD)"
+                if ! [[ "$source_commit" =~ ^[a-f0-9]{40}$ ]] || ! [[ "$queued_head" =~ ^[a-f0-9]{40}$ ]]; then
+                  echo "::error::cover queue push produced an unverifiable source transition: source=$source_commit queued=$queued_head"
                   return 1
                 fi
-                # The queue commit is bookkeeping only. Make the proof explicit
-                # for this step and for every later step in the job; the next
-                # freshness guard still compares it with the live main ref.
-                export PUBLISH_API_SOURCE_COMMIT="$queue_source"
-                echo "PUBLISH_API_SOURCE_COMMIT=$queue_source" >> "$GITHUB_ENV"
-                echo "cover queue bookkeeping commit accepted as new publish source: $queue_source"
+                # The queue commit is [skip ci], but a rebase may also have
+                # incorporated commits that arrived on main while the queue
+                # was being pushed. Reclassify the whole transition before
+                # allowing later publish phases to adopt its new HEAD.
+                if ! api_input_changed="$(
+                  SOURCE_COMMIT="$source_commit" CURRENT_MAIN="$queued_head" node --input-type=module -e '
+                    import { apiInputChangedInRange } from "./scripts/publish-section-pages.mjs";
+                    process.stdout.write(String(apiInputChangedInRange({
+                      before: process.env.SOURCE_COMMIT,
+                      after: process.env.CURRENT_MAIN,
+                    })));
+                  '
+                )"; then
+                  echo '::error::impossibile classificare il commit della cover queue prima di aggiornare la sorgente publish'
+                  return 1
+                fi
+                if [ "$api_input_changed" = 'true' ]; then
+                  echo "::error::cover queue push ha incorporato input API tra $source_commit e $queued_head; il run della nuova push deve possedere la pubblicazione"
+                  return 1
+                fi
+                echo "PUBLISH_API_SOURCE_COMMIT=$queued_head" >> "$GITHUB_ENV"
+                export PUBLISH_API_SOURCE_COMMIT="$queued_head"
+                echo "::notice::cover queue push classificato come solo bookkeeping; sorgente publish aggiornata a $queued_head"
                 return 0
               fi
               if grep -q 'MAIN_TREE_GUARD_FATAL:' "$push_log"; then
