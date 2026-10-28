@@ -251,6 +251,23 @@ test('il guard edge classifica la HEAD appena acquisita dopo il controllo inizia
   assert.equal(classifiedHead, fetched);
 });
 
+test('il guard edge rifiuta una snapshot fetchata piu vecchia di quella autorevole', async () => {
+  const source = 'a'.repeat(40);
+  const authoritative = 'b'.repeat(40);
+  const fetched = 'c'.repeat(40);
+  await assert.rejects(
+    () => assertExpectedMainHead(
+      source,
+      async () => authoritative,
+      {
+        isAncestor: () => ({ ancestor: false, current: fetched }),
+        apiInputChanged: () => false,
+      },
+    ),
+    /storia non riconciliabile/u,
+  );
+});
+
 test('le letture di release e bootstrap restano fail-closed con un 200 senza body', async () => {
   assert.deepEqual(
     await readPreviousRelease({ fetchBytes: async () => ({ status: 200 }) }),

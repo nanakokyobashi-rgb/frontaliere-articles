@@ -162,8 +162,22 @@ function fetchedMainHead() {
   return current;
 }
 
-function gitIsAncestor(ancestor) {
+function gitIsAncestor(ancestor, observedDescendant) {
   const fetched = fetchedMainHead();
+  try {
+    execFileSync('git', ['-C', ROOT, 'merge-base', '--is-ancestor', observedDescendant, fetched], {
+      stdio: 'ignore',
+    });
+  } catch (error) {
+    if (error?.status === 1) {
+      throw new Error(
+        "snapshot di main scaricata piu' vecchia o non riconciliabile (autorevole "
+          + observedDescendant + " → fetch " + fetched + ")",
+        { cause: error },
+      );
+    }
+    throw error;
+  }
   try {
     execFileSync('git', ['-C', ROOT, 'merge-base', '--is-ancestor', ancestor, fetched], {
       stdio: 'ignore',
@@ -200,8 +214,9 @@ export async function assertExpectedMainHead(
     try {
       ancestryResult = await isAncestor(expected, current);
     } catch (error) {
+      const detail = error?.message ? ': ' + error.message : '';
       throw new Error(
-        "main e' avanzato durante lo staging edge (" + expected + " → " + current + "); storia non riconciliabile",
+        "main e' avanzato durante lo staging edge (" + expected + " → " + current + "); storia non riconciliabile" + detail,
         { cause: error },
       );
     }

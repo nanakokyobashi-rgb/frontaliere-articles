@@ -11,7 +11,12 @@ const HELPER = resolve(ROOT, 'scripts/ci/verify-publish-api-source-current.sh');
 const SOURCE = 'a'.repeat(40);
 const CURRENT = 'b'.repeat(40);
 
-function runHelper({ apiInputChanged = false, ancestor = true, fetchedMain = CURRENT } = {}) {
+function runHelper({
+  apiInputChanged = false,
+  ancestor = true,
+  fetchedMain = CURRENT,
+  fetchedAtLeastAuthoritative = true,
+} = {}) {
   const dir = mkdtempSync(resolve(tmpdir(), 'verify-publish-api-source-'));
   const envFile = resolve(dir, 'github-env');
   const fakeBin = resolve(dir, 'bin');
@@ -31,7 +36,7 @@ function runHelper({ apiInputChanged = false, ancestor = true, fetchedMain = CUR
     );
     writeExecutable(
       'git',
-      '#!/bin/sh\ncase "$1" in\n  fetch) exit 0 ;;\n  rev-parse) printf "%s\\n" "$FAKE_FETCHED_MAIN" ;;\n  merge-base) [ "$FAKE_ANCESTOR" = "true" ] && exit 0 || exit 1 ;;\n  *) exit 0 ;;\nesac\n',
+      '#!/bin/sh\ncase "$1" in\n  fetch) exit 0 ;;\n  rev-parse) printf "%s\\n" "$FAKE_FETCHED_MAIN" ;;\n  merge-base) if [ "$3" = "$FAKE_AUTHORITATIVE_MAIN" ]; then [ "$FAKE_FETCHED_AT_LEAST" = "true" ] && exit 0 || exit 1; else [ "$FAKE_ANCESTOR" = "true" ] && exit 0 || exit 1; fi ;;\n  *) exit 0 ;;\nesac\n',
     );
     const env = {
       ...process.env,
@@ -44,6 +49,8 @@ function runHelper({ apiInputChanged = false, ancestor = true, fetchedMain = CUR
       FAKE_API_INPUT: String(apiInputChanged),
       FAKE_ANCESTOR: String(ancestor),
       FAKE_FETCHED_MAIN: fetchedMain,
+      FAKE_AUTHORITATIVE_MAIN: CURRENT,
+      FAKE_FETCHED_AT_LEAST: String(fetchedAtLeastAuthoritative),
     };
     try {
       const stdout = execFileSync('bash', [HELPER], {
@@ -78,6 +85,14 @@ test('freshness helper classifica la snapshot di main restituita dal fetch', () 
   assert.equal(result.status, 0);
   assert.match(result.output, new RegExp('main=' + fetchedMain));
   assert.match(result.output, /solo con bookkeeping/u);
+});
+
+test('freshness helper rifiuta un fetch piu vecchio della HEAD autorevole', () => {
+  const result = runHelper({ fetchedMain: SOURCE, fetchedAtLeastAuthoritative: false });
+  assert.equal(result.status, 1);
+  assert.match(result.output, /piu' vecchia o non riconciliabile/u);
+  assert.match(result.output, new RegExp('autorevole=' + CURRENT));
+  assert.match(result.output, new RegExp('fetch=' + SOURCE));
 });
 
 test('freshness helper resta fail-closed quando main contiene input API nuovi', () => {

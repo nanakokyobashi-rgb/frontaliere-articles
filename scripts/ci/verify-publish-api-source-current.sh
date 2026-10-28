@@ -24,6 +24,7 @@ if ! [[ "$current_main" =~ ^[a-f0-9]{40}$ ]] || ! [[ "$published_source" =~ ^[a-
   exit 1
 fi
 if [ "$current_main" != "$published_source" ]; then
+  authoritative_main="$current_main"
   if ! git fetch --no-tags origin main; then
     echo "::error::impossibile scaricare main per classificare l'avanzamento prima di $context"
     exit 1
@@ -34,6 +35,10 @@ if [ "$current_main" != "$published_source" ]; then
   fi
   if ! [[ "$current_main" =~ ^[a-f0-9]{40}$ ]]; then
     echo "::error::snapshot di main appena scaricata non valida prima di $context: $current_main"
+    exit 1
+  fi
+  if ! git merge-base --is-ancestor "$authoritative_main" "$current_main"; then
+    echo "::error::snapshot di main scaricata piu' vecchia o non riconciliabile prima di $context: autorevole=$authoritative_main fetch=$current_main"
     exit 1
   fi
   if ! git merge-base --is-ancestor "$published_source" "$current_main"; then
