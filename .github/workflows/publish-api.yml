@@ -1106,7 +1106,7 @@ jobs:
             push_queue_commit
           fi
 
-          bash -c "$PUBLISH_SOURCE_GUARD"
+          bash scripts/ci/verify-publish-api-source-current.sh
           mapfile -t manifest_entries < "$manifest_file"
           if [ "${#manifest_entries[@]}" -eq 0 ]; then
             if [ "$EVENT_NAME" = 'push' ] && { [ -z "${BEFORE:-}" ] || [[ "$BEFORE" =~ ^0+$ ]]; }; then

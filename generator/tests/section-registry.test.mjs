@@ -1704,7 +1704,7 @@ test('publish-api: osserva tutta la chiusura degli import del publisher, e pubbl
   assert.match(wf, /nessun input publish-api nel delta/);
   assert.equal(
     (wf.match(/bash scripts\/ci\/verify-publish-api-source-current\.sh/g) || []).length,
-    7,
+    8,
     'la stessa guardia deve precedere ogni fase irreversibile e il controllo finale',
   );
   const pagesGuard = wf.indexOf('Verify source is still current before Pages deploy');
