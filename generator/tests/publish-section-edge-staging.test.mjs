@@ -7,6 +7,7 @@ import { join } from 'node:path';
 
 import {
   CDN,
+  assertExpectedMainHead,
   hasExpectedStagingBody,
   hasResponseBody,
   missingBootstrapPages,
@@ -143,6 +144,58 @@ test('publishRelease resta fail-closed quando un adapter CDN restituisce 200 sen
   assert.deepEqual(result, { code: 1, phase: 'staging', flipped: false });
   assert.deepEqual(removed, [key]);
   assert.equal(requests.length, 2);
+});
+
+test('publishRelease verifica la HEAD subito prima del flip edge', async () => {
+  const commit = 'c'.repeat(40);
+  const release = {
+    commit,
+    base: releaseBase(commit),
+    registry: { schema: 1, commit, sections: { 'canton-ti': { status: 'retired' } } },
+    live: [],
+    files: [],
+    pointer: {
+      schema: 1,
+      commit,
+      sections: { 'canton-ti': { status: 'retired' } },
+      release: { commit, base: releaseBase(commit), files: {}, previous: null },
+    },
+  };
+  const uploads = [];
+  const freshnessChecks = [];
+  const result = await publishRelease(release, {
+    env: {
+      R2_ACCESS_KEY_ID: 'test',
+      R2_SECRET_ACCESS_KEY: 'test',
+      R2_S3_ENDPOINT: 'test',
+      R2_BUCKET: 'test',
+      CF_API_TOKEN: 'test',
+    },
+    io: {
+      fetchBytes: async () => ({ status: 404 }),
+      upload: (_local, key) => {
+        uploads.push(key);
+        return true;
+      },
+      remove: () => true,
+      acquireBootstrapLock: async () => 'acquired',
+      releaseBootstrapLock: async () => true,
+      purge: () => true,
+    },
+    verifySourceCurrent: async () => {
+      freshnessChecks.push('before-flip');
+      throw new Error('main avanzata durante il test');
+    },
+    log: () => {},
+  });
+
+  assert.deepEqual(result, { code: 1, phase: 'freshness', flipped: false });
+  assert.deepEqual(freshnessChecks, ['before-flip']);
+  assert.deepEqual(uploads, [], 'il puntatore non viene scritto dopo una freshness failure');
+  await assert.rejects(
+    () => assertExpectedMainHead(commit, async () => 'd'.repeat(40)),
+    /main e' avanzato durante lo staging edge/,
+  );
 });
 
 test('le letture di release e bootstrap restano fail-closed con un 200 senza body', async () => {

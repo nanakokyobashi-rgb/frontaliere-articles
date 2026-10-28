@@ -152,7 +152,7 @@ test('una gara stale consegna la sezione al coordinatore senza dichiarare una pu
   assert.match(workflow, /steps\.replay_freshness\.outputs\.fresh == 'false'[\s\S]*needs\.publish_release_head\.outputs\.mixed_matrix == 'true'/u);
 });
 
-test('un handoff stale coordinato resta osservabile dalla barriera sulla nuova HEAD', () => {
+test('un resolve stale produce la matrice sulla nuova HEAD e lascia il recovery come rete di sicurezza', () => {
   assert.match(
     recovery,
     /rebuild_recovery_head\(\)[\s\S]*git checkout --detach "\$next_head"[\s\S]*dispatch_children_wave/u,
@@ -167,8 +167,8 @@ test('un handoff stale coordinato resta osservabile dalla barriera sulla nuova H
   );
   assert.match(recovery, /wave_replaced=true/u);
   assert.match(recovery, /max_stale_handoff_waves=3/u);
-  assert.match(
-    resolver,
-    /coordinated_recovery.*true.*dispatch_nonce[\s\S]*riuso il nonce del coordinator/u,
-  );
+  assert.match(resolver, /git checkout --detach "\$current_main"/u);
+  assert.match(resolver, /echo "source_commit=\$current_main"/u);
+  assert.match(resolver, /echo "matrix=\$replay_matrix"/u);
+  assert.doesNotMatch(resolver, /riuso il nonce del coordinator/u);
 });

@@ -1038,6 +1038,22 @@ jobs:
             # the header below is the only identity git can send.
             for attempt in 1 2 3; do
               if node scripts/ci/guard-main-tree-shrink.mjs --push-main --remote origin --target main --after HEAD --git-config "http.extraheader=AUTHORIZATION: basic $auth_header" 2>&1 | tee "$push_log"; then
+                queue_commit_paths="$(git diff-tree --no-commit-id --name-only -r HEAD)"
+                if [ "$queue_commit_paths" != "$queue_file" ]; then
+                  echo "::error::cover queue commit changed paths outside $queue_file; source freshness cannot be advanced safely"
+                  return 1
+                fi
+                queue_source="$(git rev-parse HEAD)"
+                if ! [[ "$queue_source" =~ ^[a-f0-9]{40}$ ]]; then
+                  echo '::error::cover queue commit produced an invalid source revision'
+                  return 1
+                fi
+                # The queue commit is bookkeeping only. Make the proof explicit
+                # for this step and for every later step in the job; the next
+                # freshness guard still compares it with the live main ref.
+                export PUBLISH_API_SOURCE_COMMIT="$queue_source"
+                echo "PUBLISH_API_SOURCE_COMMIT=$queue_source" >> "$GITHUB_ENV"
+                echo "cover queue bookkeeping commit accepted as new publish source: $queue_source"
                 return 0
               fi
               if grep -q 'MAIN_TREE_GUARD_FATAL:' "$push_log"; then

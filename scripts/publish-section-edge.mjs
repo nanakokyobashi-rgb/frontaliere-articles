@@ -95,7 +95,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
-import { spawn, spawnSync } from 'node:child_process';
+import { execFileSync, spawn, spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from '../generator/scripts/lib/fetch-with-ref-timeout.mjs';
 
@@ -130,6 +130,37 @@ export const RELEASE_CACHE_CONTROL = 'public,max-age=31536000,immutable';
  */
 export const STAGING_VERIFY_ATTEMPTS = 6;
 export const STAGING_VERIFY_RETRY_MS = 4000;
+const FULL_GIT_SHA_RE = /^[a-f0-9]{40}$/;
+
+/** Read the live main ref without spending the shared GitHub REST quota. */
+export function publishedMainHead() {
+  const current = execFileSync(
+    'bash',
+    [path.join(ROOT, 'scripts/ci/read-main-head.sh')],
+    { encoding: 'utf8' },
+  ).trim();
+  if (!FULL_GIT_SHA_RE.test(current)) throw new Error('revisione corrente di main non valida');
+  return current;
+}
+
+/**
+ * The workflow checks freshness before entering this module, but staging and
+ * bootstrap can wait for a long time. The final pointer PUT needs its own
+ * source-of-truth check, immediately before the only mutable edge write.
+ */
+export async function assertExpectedMainHead(expected, readMainHead = publishedMainHead) {
+  if (!FULL_GIT_SHA_RE.test(String(expected ?? ''))) {
+    throw new Error('PUBLISH_API_SOURCE_COMMIT non contiene una SHA completa');
+  }
+  const current = await readMainHead();
+  if (!FULL_GIT_SHA_RE.test(String(current ?? ''))) {
+    throw new Error('revisione corrente di main non valida');
+  }
+  if (current !== expected) {
+    throw new Error(`main e' avanzato durante lo staging edge (${expected} → ${current}); flip interrotto`);
+  }
+  return current;
+}
 
 const sha256 = (data) => createHash('sha256').update(data).digest('hex');
 const isPlainObject = (value) => value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -758,6 +789,7 @@ export async function publishRelease(
     bootstrapReleaseAttempts = BOOTSTRAP_RELEASE_ATTEMPTS,
     stagingVerifyAttempts = STAGING_VERIFY_ATTEMPTS,
     stagingVerifyRetryMs = STAGING_VERIFY_RETRY_MS,
+    verifySourceCurrent = null,
     sleep,
   },
 ) {
@@ -950,6 +982,13 @@ export async function publishRelease(
   try {
     const pointerFile = path.join(pointerDir, 'registry.json');
     fs.writeFileSync(pointerFile, JSON.stringify(pointer));
+    if (typeof verifySourceCurrent === 'function') {
+      try {
+        await verifySourceCurrent();
+      } catch (error) {
+        return await stopBeforeFlip('freshness', error?.message ?? String(error));
+      }
+    }
     flipped = io.upload(pointerFile, EDGE_SECTION_REGISTRY_FILE, REGISTRY_CACHE_CONTROL);
   } finally {
     fs.rmSync(pointerDir, { recursive: true, force: true });
@@ -1013,7 +1052,21 @@ export async function main(argv = process.argv.slice(2), { env = process.env, io
     log(JSON.stringify({ commit: release.commit, base: release.base, live: release.live, files: release.files.map((f) => f.key), pointer: release.pointer }, null, 2));
     return 0;
   }
-  return (await publishRelease(release, { io, env, log, tmpDir: env.RUNNER_TEMP || os.tmpdir() })).code;
+  const expectedSourceCommit = env.PUBLISH_API_SOURCE_COMMIT || env.PUBLISHED_SOURCE_COMMIT || '';
+  const verifySourceCurrent = expectedSourceCommit
+    ? () => assertExpectedMainHead(expectedSourceCommit)
+    : env.CI === 'true'
+      ? async () => {
+        throw new Error('PUBLISH_API_SOURCE_COMMIT assente in CI: impossibile verificare la sorgente prima del flip');
+      }
+      : null;
+  return (await publishRelease(release, {
+    io,
+    env,
+    log,
+    tmpDir: env.RUNNER_TEMP || os.tmpdir(),
+    verifySourceCurrent,
+  })).code;
 }
 
 const invokedDirectly = (() => {
