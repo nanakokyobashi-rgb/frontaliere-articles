@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "servizi",
-  "updatedAt": "2026-10-28T18:02:21.438Z",
-  "contentHash": "b6cfee8e9e4f59418b81ad291abb77fe97faa545260840a598ae18099c888001",
+  "updatedAt": "2026-10-28T22:28:15.944Z",
+  "contentHash": "d36826be4e7bfc0794bd4cdd8a1c134bffe21cbb62c9b7dae6e4dee8bff50992",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,12 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-28T10:44:20.138Z",
+      "updatedAt": "2026-10-28T13:55:48.732Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-28T15:15:36.348Z",
       "keyFacts": 0
     },
     {
@@ -76,7 +81,21 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-10-28T10:44:20.138Z"
+          "updatedAt": "2026-10-28T13:55:48.732Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Solothurn",
+              "value": "11 °C",
+              "detail": "oggi da 6 a 12 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-28T15:15:36.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -189,7 +208,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-28T18:02:21.438Z"
+      "updatedAt": "2026-10-28T22:28:15.944Z"
     },
     "en": {
       "canton": "SO",
@@ -243,7 +262,21 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-10-28T10:44:20.138Z"
+          "updatedAt": "2026-10-28T13:55:48.732Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Solothurn",
+              "value": "11 °C",
+              "detail": "today from 6 to 12 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-28T15:15:36.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -352,7 +385,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-28T18:02:21.438Z"
+      "updatedAt": "2026-10-28T22:28:15.944Z"
     },
     "de": {
       "canton": "SO",
@@ -406,7 +439,21 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-10-28T10:44:20.138Z"
+          "updatedAt": "2026-10-28T13:55:48.732Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Solothurn",
+              "value": "11 °C",
+              "detail": "heute 6 bis 12 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-28T15:15:36.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -515,7 +562,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-28T18:02:21.438Z"
+      "updatedAt": "2026-10-28T22:28:15.944Z"
     },
     "fr": {
       "canton": "SO",
@@ -569,7 +616,21 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-10-28T10:44:20.138Z"
+          "updatedAt": "2026-10-28T13:55:48.732Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Solothurn",
+              "value": "11 °C",
+              "detail": "aujourd’hui de 6 à 12 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-28T15:15:36.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -674,7 +735,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-28T18:02:21.438Z"
+      "updatedAt": "2026-10-28T22:28:15.944Z"
     }
   }
 }
