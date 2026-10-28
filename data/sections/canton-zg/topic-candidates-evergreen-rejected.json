@@ -7,6 +7,10 @@
     "canton-zg::https://www.zugerwoche.ch/zuger-news/detail/schulwege": {
       "section": "canton-zg",
       "ts": 1793150441515
+    },
+    "canton-zg::https://www.zug4you.ch/en/news/news-articles/a/russian-businessman-with-chf-44-million-in-debts": {
+      "section": "canton-zg",
+      "ts": 1793153183178
     }
   }
 }
