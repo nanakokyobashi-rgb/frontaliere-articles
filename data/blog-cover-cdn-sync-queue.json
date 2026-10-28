@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-tavola-rotonda-sei-misure.webp",
+      "sha256": "b5c183b5b1687d288af6e8ce1b051c6ee96469521cc48e1b478a262f1442e63c"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-tavola-rotonda-sei-misure-480w.webp",
+      "sha256": "c8acbaaf5d3b307a90a81be6484f7da25c44cdb9661ab5184e93c33b282f92a5"
+    }
+  ]
 }
