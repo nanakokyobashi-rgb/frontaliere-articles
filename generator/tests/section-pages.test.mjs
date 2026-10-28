@@ -3356,6 +3356,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   const resolver = read('scripts/ci/fast-publish-section-resolve.sh');
   const render = read('scripts/ci/fast-publish-section-render.sh');
   const recovery = read('scripts/ci/fast-publish-section-recovery.sh');
+  const historyGuard = read('scripts/ci/fetch-push-base-if-missing.sh');
   const sectionContract = `${wf}\n${resolver}\n${render}\n${recovery}`;
   const edgeCandidate = read('scripts/ci/fast-publish-section-edge-candidate.sh');
   const publisher = read('scripts/publish-section-pages.mjs');
@@ -3560,6 +3561,18 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(recovery, /max_stale_handoff_waves=3/);
   assert.match(recovery, /dispatch_baseline_ids=\(\)/);
   assert.match(recovery, /initial_run_state/);
+  assert.match(recovery, /ensure_recovery_history\(\)/);
+  assert.match(recovery, /PUSH_BEFORE="\$recovery_base" FETCH_MAIN=true/);
+  assert.doesNotMatch(recovery, /git fetch --no-tags --(?:unshallow )?origin main/);
+  assert.match(render, /PUSH_BEFORE="\$\{PUSH_BEFORE:-\}" FETCH_MAIN=true/);
+  assert.doesNotMatch(render, /git fetch --no-tags --(?:unshallow )?origin main/);
+  assert.match(wf, /history_guard_source=.*fetch-push-base-if-missing\.sh/);
+  assert.match(wf, /FETCH_MAIN=true[\s\\]*bash scripts\/ci\/fetch-push-base-if-missing\.sh/);
+  assert.match(historyGuard, /HISTORY_FETCH_DELAY_S/);
+  assert.match(historyGuard, /history_fetch_delay_cap_s=30/);
+  assert.match(historyGuard, /HISTORY_FETCH_TIMEOUT_S/);
+  assert.match(historyGuard, /history_fetch_timeout_cap_s=300/);
+  assert.match(historyGuard, /bounded_git_fetch/);
   assert.match(recovery, /latest_run_id <= baseline_run_id/);
   assert.match(recovery, /git checkout --detach "\$CURRENT_MAIN"/);
   assert.match(recovery, /baseline_state/);
@@ -3618,7 +3631,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(sectionPublisher, /assertKnownCantonSection/);
   assert.match(sectionPublisher, /manifest pagine edge assente o non verificabile; nessuna pagina viene cancellata/);
   assert.match(wf, /replay bounded stantio: ricalcolo la release API sulla HEAD/);
-  assert.match(wf, /git rev-parse --is-shallow-repository/);
+  assert.match(wf, /PUSH_BEFORE="\$\{ORIGINAL_PUSH_BEFORE:-\}" FETCH_MAIN=true[\s\\]*bash scripts\/ci\/fetch-push-base-if-missing\.sh/);
   assert.match(wf, /remove_stale_canton_rss_feeds/);
   assert.match(wf, /API_RELEASE_COMMIT: \$\{\{ needs\.resolve\.outputs\.api_release_commit \}\}/);
   assert.match(wf, /GITHUB_PAT_NANAKO assente/);

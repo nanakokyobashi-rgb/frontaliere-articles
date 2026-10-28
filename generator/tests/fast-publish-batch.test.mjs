@@ -296,14 +296,16 @@ test('il resolver article non rifà il fetch del parent già presente nel checko
   const resolveFetchStep = stepText('Fetch push base (resolve)');
   assert.match(resolveFetchStep, /bash scripts\/ci\/fetch-push-base-if-missing\.sh/);
   assert.match(pushBaseGuard, /git rev-parse --is-shallow-repository/);
-  assert.match(pushBaseGuard, /git fetch --no-tags --unshallow origin main/);
+  assert.match(pushBaseGuard, /bounded_git_fetch --no-tags --unshallow origin main/);
   assert.match(pushBaseGuard, /HISTORY_FETCH_ATTEMPTS/);
-  assert.match(pushBaseGuard, /HISTORY_FETCH_DELAY_S supera il cap di 60/);
+  assert.match(pushBaseGuard, /HISTORY_FETCH_DELAY_S/);
+  assert.match(pushBaseGuard, /history_fetch_delay_cap_s=30/);
   assert.match(pushBaseGuard, /HISTORY_FETCH_TIMEOUT_S/);
-  assert.match(pushBaseGuard, /run_fetch_with_timeout/);
+  assert.match(pushBaseGuard, /history_fetch_timeout_cap_s=300/);
+  assert.match(pushBaseGuard, /timeout --signal=TERM --kill-after=5s "\$\{history_fetch_timeout_s\}s" git fetch/);
   assert.match(pushBaseGuard, /FETCH_MAIN/);
   assert.match(pushBaseGuard, /git cat-file -e "\$\{PUSH_BEFORE\}\^\{commit\}"/);
-  assert.match(pushBaseGuard, /git fetch --no-tags origin "\$PUSH_BEFORE"/);
+  assert.match(pushBaseGuard, /fetch_ref_with_retries "push base \$PUSH_BEFORE" --no-tags origin "\$PUSH_BEFORE"/);
   assert.match(pushBaseGuard, /push base non presente dopo il fetch/);
 });
 
@@ -333,8 +335,10 @@ test('il guard del push base ripristina la storia completa prima del preflight',
       env: {
         ...process.env,
         PUSH_BEFORE: base,
+        FETCH_MAIN: 'true',
         HISTORY_FETCH_ATTEMPTS: '3',
         HISTORY_FETCH_DELAY_S: '0',
+        HISTORY_FETCH_TIMEOUT_S: '30',
       },
       encoding: 'utf8',
       stdio: ['ignore', 'pipe', 'pipe'],
@@ -342,9 +346,32 @@ test('il guard del push base ripristina la storia completa prima del preflight',
 
     assert.equal(git(shallow, 'rev-parse', '--is-shallow-repository'), 'false');
     assert.equal(git(shallow, 'cat-file', '-e', `${base}^{commit}`), '');
+    assert.equal(git(shallow, 'rev-parse', 'refs/remotes/origin/main'), git(shallow, 'rev-parse', 'HEAD'));
   } finally {
     rmSync(root, { recursive: true, force: true });
   }
+});
+
+test('il guard rifiuta budget di rete non bounded', () => {
+  const repoRoot = resolve(here, '../..');
+  assert.throws(
+    () => execFileSync('bash', [pushBaseGuardPath], {
+      cwd: repoRoot,
+      env: { ...process.env, HISTORY_FETCH_DELAY_S: '31' },
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'pipe'],
+    }),
+    (error) => error?.status === 1,
+  );
+  assert.throws(
+    () => execFileSync('bash', [pushBaseGuardPath], {
+      cwd: repoRoot,
+      env: { ...process.env, HISTORY_FETCH_TIMEOUT_S: '301' },
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'pipe'],
+    }),
+    (error) => error?.status === 1,
+  );
 });
 
 test('il dry gate usa il piano delle superfici e il publisher porta i redirect di slug', () => {

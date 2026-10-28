@@ -1709,13 +1709,12 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
   }
   assert.match(pushBaseGuard, /git cat-file -e "\$\{PUSH_BEFORE\}\^\{commit\}"/u);
   assert.match(pushBaseGuard, /git rev-parse --is-shallow-repository/u);
-  assert.match(pushBaseGuard, /git fetch --no-tags --unshallow origin main/u);
+  assert.match(pushBaseGuard, /bounded_git_fetch --no-tags --unshallow origin main/u);
   assert.match(pushBaseGuard, /HISTORY_FETCH_ATTEMPTS/u);
-  assert.match(pushBaseGuard, /HISTORY_FETCH_DELAY_S supera il cap di 60/u);
+  assert.match(pushBaseGuard, /HISTORY_FETCH_DELAY_S/u);
   assert.match(pushBaseGuard, /HISTORY_FETCH_TIMEOUT_S/u);
-  assert.match(pushBaseGuard, /run_fetch_with_timeout/u);
   assert.match(pushBaseGuard, /FETCH_MAIN/u);
-  assert.match(pushBaseGuard, /git fetch --no-tags origin "\$PUSH_BEFORE"/u);
+  assert.match(pushBaseGuard, /fetch_ref_with_retries "push base \$PUSH_BEFORE" --no-tags origin "\$PUSH_BEFORE"/u);
 
   const articlePublisher = fs.readFileSync(new URL('../../.github/workflows/fast-publish-article.yml', import.meta.url), 'utf8');
   assert.match(articlePublisher, /publisher omitted requested article IDs/u);
@@ -1734,10 +1733,6 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
   const sectionRender = fs.readFileSync(new URL('../../scripts/ci/fast-publish-section-render.sh', import.meta.url), 'utf8');
   const sectionRecovery = fs.readFileSync(new URL('../../scripts/ci/fast-publish-section-recovery.sh', import.meta.url), 'utf8');
   const sectionContract = `${sectionPublisher}\n${sectionResolver}\n${sectionRender}\n${sectionRecovery}`;
-  assert.match(sectionPublisher, /FETCH_MAIN=true bash scripts\/ci\/fetch-push-base-if-missing\.sh/u);
-  assert.match(sectionRender, /FETCH_MAIN=true bash scripts\/ci\/fetch-push-base-if-missing\.sh/u);
-  assert.match(sectionRecovery, /FETCH_MAIN=true bash scripts\/ci\/fetch-push-base-if-missing\.sh/u);
-  assert.doesNotMatch(sectionRecovery, /git fetch --no-tags --unshallow origin main/u);
   assert.equal(
     sectionPublisher.match(/ref: \$\{\{ github\.event\.workflow_run\.head_sha \|\| inputs\.source_commit \|\| \(github\.event_name == 'workflow_dispatch' && inputs\.bootstrap != true && github\.ref\) \|\| github\.sha \}\}/gu)?.length,
     1,

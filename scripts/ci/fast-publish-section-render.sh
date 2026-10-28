@@ -117,8 +117,11 @@ if [ -n "$pinned_replay_main" ]; then
   if [ "$current_main" != "$pinned_replay_main" ]; then
     api_release_commit=''
     if [ "$EVENT_NAME" = 'workflow_run' ]; then
-      if ! FETCH_MAIN=true bash scripts/ci/fetch-push-base-if-missing.sh; then
-        echo "::error::impossibile aggiornare main tramite il guard bounded prima del render API"
+      PUSH_BEFORE="${PUSH_BEFORE:-}" FETCH_MAIN=true \
+        bash scripts/ci/fetch-push-base-if-missing.sh
+      fetched_current_main="$(git rev-parse refs/remotes/origin/main)"
+      if [ "$fetched_current_main" != "$current_main" ]; then
+        echo "::error::main e' avanzata durante il recupero della release API stantia ($current_main -> $fetched_current_main)"
         exit 1
       fi
       api_release_commit="$(

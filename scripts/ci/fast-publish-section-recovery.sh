@@ -12,12 +12,27 @@ if ! [[ "$CURRENT_MAIN" =~ ^[a-f0-9]{40}$ ]]; then
 fi
 export GH_TOKEN="$runtime_pat"
 target_matrix="$TARGET_MATRIX"
-if [ "${MIXED_MATRIX:-false}" = 'true' ]; then
-  if ! FETCH_MAIN=true bash scripts/ci/fetch-push-base-if-missing.sh; then
-    echo "::error::impossibile aggiornare main tramite il guard bounded per il piano mixed-matrix"
-    exit 1
+
+ensure_recovery_history() {
+  local recovery_base="${ORIGINAL_PUSH_BEFORE:-}"
+  if [ -n "$recovery_base" ] && ! [[ "$recovery_base" =~ ^[a-f0-9]{40}$ ]]; then
+    echo "::error::base della push non valida prima del recovery storico: $recovery_base"
+    return 1
   fi
-  fetched_current_main="$(git rev-parse FETCH_HEAD)"
+  if [ ! -f scripts/ci/fetch-push-base-if-missing.sh ]; then
+    echo "::error::guard condiviso della storia Git non presente nel recovery"
+    return 1
+  fi
+  if ! PUSH_BEFORE="$recovery_base" FETCH_MAIN=true \
+    bash scripts/ci/fetch-push-base-if-missing.sh; then
+    echo "::error::storia Git non verificabile prima del recovery staged"
+    return 1
+  fi
+}
+
+if [ "${MIXED_MATRIX:-false}" = 'true' ]; then
+  ensure_recovery_history
+  fetched_current_main="$(git rev-parse refs/remotes/origin/main)"
   if [ "$fetched_current_main" != "$CURRENT_MAIN" ]; then
     echo "::error::main e' avanzata durante la preparazione del piano mixed-matrix ($CURRENT_MAIN -> $fetched_current_main); annullo il recovery"
     exit 1
@@ -219,11 +234,8 @@ rebuild_recovery_head() {
     echo "::error::HEAD handoff non valida: $next_head"
     return 1
   fi
-  if ! FETCH_MAIN=true bash scripts/ci/fetch-push-base-if-missing.sh; then
-    echo "::error::impossibile aggiornare main tramite il guard bounded prima del rebuild del recovery"
-    return 1
-  fi
-  fetched_current_main="$(git rev-parse FETCH_HEAD)"
+  ensure_recovery_history
+  fetched_current_main="$(git rev-parse refs/remotes/origin/main)"
   if [ "$fetched_current_main" != "$next_head" ]; then
     echo "::error::main e' avanzata durante il rebuild del recovery ($next_head -> $fetched_current_main)"
     return 1

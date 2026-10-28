@@ -275,6 +275,7 @@ jobs:
             scripts/lib/npm-ci-retry.sh
             scripts/ci/dispatch-fast-publish-replay.sh
             scripts/ci/read-main-head.sh
+            scripts/ci/fetch-push-base-if-missing.sh
             scripts/ci/fast-publish-section-resolve.sh
             scripts/ci/fast-publish-section-edge-candidate.sh
             scripts/ci/fast-publish-section-preflight.sh
@@ -288,6 +289,8 @@ jobs:
           resolver_target='scripts/ci/fast-publish-section-resolve.sh'
           main_head_source='.replay-dispatcher-source/scripts/ci/read-main-head.sh'
           main_head_target='scripts/ci/read-main-head.sh'
+          history_guard_source='.replay-dispatcher-source/scripts/ci/fetch-push-base-if-missing.sh'
+          history_guard_target='scripts/ci/fetch-push-base-if-missing.sh'
           edge_candidate_source='.replay-dispatcher-source/scripts/ci/fast-publish-section-edge-candidate.sh'
           edge_candidate_target='scripts/ci/fast-publish-section-edge-candidate.sh'
           preflight_source='.replay-dispatcher-source/scripts/ci/fast-publish-section-preflight.sh'
@@ -298,6 +301,10 @@ jobs:
           fi
           if [ ! -f "$main_head_source" ]; then
             echo "::error::helper della punta di main non presente nel checkout della revisione del workflow"
+            exit 1
+          fi
+          if [ ! -f "$history_guard_source" ]; then
+            echo "::error::guard della storia Git non presente nel checkout della revisione del workflow"
             exit 1
           fi
           if [ ! -f "$edge_candidate_source" ]; then
@@ -313,6 +320,7 @@ jobs:
           # resolver deve pero' sempre provenire dalla revisione che contiene
           # il workflow; le sorgenti e i dati restano quelli del run pinnato.
           install -m 0755 "$resolver_source" "$resolver_target"
+          install -m 0755 "$history_guard_source" "$history_guard_target"
           if [ -f "$main_head_source" ]; then
             install -m 0755 "$main_head_source" "$main_head_target"
           elif [ -f "$main_head_target" ]; then
@@ -587,6 +595,7 @@ jobs:
             scripts/lib/npm-ci-retry.sh
             scripts/ci/dispatch-fast-publish-replay.sh
             scripts/ci/read-main-head.sh
+            scripts/ci/fetch-push-base-if-missing.sh
             scripts/ci/fast-publish-section-render.sh
           sparse-checkout-cone-mode: false
           persist-credentials: false
@@ -596,13 +605,20 @@ jobs:
           set -euo pipefail
           source='.replay-dispatcher-source/scripts/ci/read-main-head.sh'
           target='scripts/ci/read-main-head.sh'
+          history_guard_source='.replay-dispatcher-source/scripts/ci/fetch-push-base-if-missing.sh'
+          history_guard_target='scripts/ci/fetch-push-base-if-missing.sh'
           render_source='.replay-dispatcher-source/scripts/ci/fast-publish-section-render.sh'
           render_target='scripts/ci/fast-publish-section-render.sh'
           if [ ! -f "$render_source" ]; then
             echo "::error::helper di render non presente nel checkout della revisione del workflow"
             exit 1
           fi
+          if [ ! -f "$history_guard_source" ]; then
+            echo "::error::guard della storia Git non presente nel checkout della revisione del workflow"
+            exit 1
+          fi
           install -m 0755 "$render_source" "$render_target"
+          install -m 0755 "$history_guard_source" "$history_guard_target"
           if [ -f "$source" ]; then
             install -m 0755 "$source" "$target"
           elif [ -f "$target" ]; then
@@ -750,8 +766,11 @@ jobs:
               echo "::error::head API stantia non valida per il recovery workflow_run"
               exit 1
             fi
-            if ! FETCH_MAIN=true bash scripts/ci/fetch-push-base-if-missing.sh; then
-              echo "::error::impossibile aggiornare main tramite il guard bounded prima del recovery API"
+            PUSH_BEFORE="${ORIGINAL_PUSH_BEFORE:-}" FETCH_MAIN=true \
+              bash scripts/ci/fetch-push-base-if-missing.sh
+            fetched_current_main="$(git rev-parse refs/remotes/origin/main)"
+            if [ "$fetched_current_main" != "$CURRENT_MAIN" ]; then
+              echo "::error::main e' avanzata durante il recupero della release API stantia ($CURRENT_MAIN -> $fetched_current_main)"
               exit 1
             fi
             api_release_commit="$(
@@ -1090,6 +1109,7 @@ jobs:
           sparse-checkout: |
             scripts/ci/dispatch-fast-publish-replay.sh
             scripts/ci/read-main-head.sh
+            scripts/ci/fetch-push-base-if-missing.sh
             scripts/ci/fast-publish-section-recovery.sh
           sparse-checkout-cone-mode: false
           persist-credentials: false
@@ -1099,13 +1119,20 @@ jobs:
           set -euo pipefail
           source='.replay-dispatcher-source/scripts/ci/read-main-head.sh'
           target='scripts/ci/read-main-head.sh'
+          history_guard_source='.replay-dispatcher-source/scripts/ci/fetch-push-base-if-missing.sh'
+          history_guard_target='scripts/ci/fetch-push-base-if-missing.sh'
           recovery_source='.replay-dispatcher-source/scripts/ci/fast-publish-section-recovery.sh'
           recovery_target='scripts/ci/fast-publish-section-recovery.sh'
           if [ ! -f "$recovery_source" ]; then
             echo "::error::helper di recovery non presente nel checkout della revisione del workflow"
             exit 1
           fi
+          if [ ! -f "$history_guard_source" ]; then
+            echo "::error::guard della storia Git non presente nel checkout della revisione del workflow"
+            exit 1
+          fi
           install -m 0755 "$recovery_source" "$recovery_target"
+          install -m 0755 "$history_guard_source" "$history_guard_target"
           if [ -f "$source" ]; then
             install -m 0755 "$source" "$target"
           elif [ -f "$target" ]; then
@@ -1250,10 +1277,7 @@ jobs:
           max_readiness_attempts=3
           while (( readiness_attempts < max_readiness_attempts )); do
             readiness_attempts=$((readiness_attempts + 1))
-            if ! FETCH_MAIN=true bash scripts/ci/fetch-push-base-if-missing.sh; then
-              echo "::error::impossibile aggiornare main tramite il guard bounded prima del replay API"
-              exit 1
-            fi
+            git fetch --no-tags --depth=1 origin main
             current_main="$(git rev-parse FETCH_HEAD)"
             if [ "$current_main" != "$SOURCE_COMMIT" ]; then
               echo "::error::main e' avanzata durante il backfill ($SOURCE_COMMIT -> $current_main); replay API non accodato"
