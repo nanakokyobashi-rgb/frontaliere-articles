@@ -2360,7 +2360,7 @@
       "reason": "Classificatore condiviso dell'intervallo tra il commit dell'artifact e main: legge i path del trigger publish-api e distingue bookkeeping da input API prima dei gate irreversibili. Il workflow shell, il publisher edge e i replay del corpus lo usano; il sito consuma solo il JSON pubblicato via HTTP e non ha un gemello operativo di questo modulo.",
       "baseline": {
         "site": null,
-        "corpus": "f44fbd11de3cbeb7",
+      "corpus": "9f6382986f2db737",
         "alignedAt": "2026-10-28"
       }
     },
