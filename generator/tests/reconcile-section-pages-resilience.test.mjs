@@ -208,6 +208,26 @@ test('landingArticleCoverage: usa le 24 card piu recenti, non tutte le righe API
   assert.deepEqual(coverage.problems, []);
 });
 
+test('landingArticleCoverage: rifiuta una card nota oltre il limite della landing', () => {
+  const rows = Array.from({ length: 25 }, (_, index) => ({
+    id: `article-${index}`,
+    date: `2026-10-${String(25 - index).padStart(2, '0')}T00:00:00Z`,
+  }));
+  const slugs = Object.fromEntries(rows.map((row) => [row.id, { it: row.id }]));
+  const links = rows.map((row) => `<a href="/articoli-ticino/${row.id}/">articolo</a>`).join('');
+
+  const coverage = landingArticleCoverage({
+    entry: CATALOG,
+    rows,
+    slugs,
+    locale: 'it',
+    html: `<script type="application/ld+json">{"numberOfItems":24}</script>${links}`,
+  });
+
+  assert.deepEqual(coverage.extraIds, ['article-24']);
+  assert.deepEqual(coverage.problems, ['extra-articles:article-24']);
+});
+
 test('landingArticleCoverage: usa l id quando manca lo slug della locale', () => {
   const coverage = landingArticleCoverage({
     entry: CATALOG,

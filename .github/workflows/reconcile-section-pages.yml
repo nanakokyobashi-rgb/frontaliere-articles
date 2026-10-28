@@ -95,6 +95,7 @@ jobs:
           echo "leftover=$(jq -r '.counts.leftover // 0' "$RUNNER_TEMP/reconcile-sections.json")" >> "$GITHUB_OUTPUT"
           echo "unknown=$(jq -r '.counts.unknown // 0' "$RUNNER_TEMP/reconcile-sections.json")" >> "$GITHUB_OUTPUT"
           echo "manifest_unknown=$(jq -r '.counts.manifestUnknown // 0' "$RUNNER_TEMP/reconcile-sections.json")" >> "$GITHUB_OUTPUT"
+          echo "landing_content_stale=$(jq -r '.counts.landingContentStale // 0' "$RUNNER_TEMP/reconcile-sections.json")" >> "$GITHUB_OUTPUT"
           echo 'head_guard=true' >> "$GITHUB_OUTPUT"
 
       # Niente catena stretta: se l'innesco era a sua volta un dispatch (un
@@ -278,6 +279,7 @@ jobs:
           steps.detect.outputs.pending_edge_flip == 'true' &&
           steps.detect.outputs.skip == 'false' &&
           steps.detect.outputs.leftover == '0' &&
+          steps.detect.outputs.landing_content_stale == '0' &&
           steps.detect.outputs.unknown == '0' &&
           steps.detect.outputs.manifest_unknown == '0' &&
           steps.detect.outputs.head_guard == 'true' &&
@@ -311,6 +313,7 @@ jobs:
           node scripts/reconcile-section-pages.mjs --out "$verified" --cap "${CAP_INPUT:-3}"
           if [ "$(jq -r 'if .skip then "true" else "false" end' "$verified")" = 'true' ] \
             || [ "$(jq -r '.counts.missingPages // 0' "$verified")" != '0' ] \
+            || [ "$(jq -r '.counts.landingContentStale // 0' "$verified")" != '0' ] \
             || [ "$(jq -r '.counts.unknown // 0' "$verified")" != '0' ] \
             || [ "$(jq -r '.counts.manifestUnknown // 0' "$verified")" != '0' ]; then
             echo "::notice::replay API rimandato: la verifica post-backfill non dimostra una superficie completa"

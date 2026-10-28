@@ -4231,6 +4231,8 @@ test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta',
   assert.match(wf, /dispatch_nonce="reconcile-\$\{GITHUB_RUN_ID\}-\$\{section\}"/);
   assert.match(wf, /gh run list --repo "\$REPOSITORY" --workflow fast-publish-section\.yml/);
   assert.match(wf, /steps\.detect\.outputs\.leftover == '0'/);
+  assert.match(wf, /steps\.detect\.outputs\.landing_content_stale == '0'/);
+  assert.match(wf, /\.counts\.landingContentStale \/\/ 0/);
   const globalReplay = wf.slice(wf.indexOf('- name: Replay API after all staged backfills'));
   const postBackfillProbe = globalReplay.indexOf('reconcile-sections-after-backfill.json');
   const postBackfillMissingGuard = globalReplay.indexOf('.counts.missingPages // 0');

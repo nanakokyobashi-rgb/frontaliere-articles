@@ -47,6 +47,7 @@ import { ARTICLE_ROBOTS_INDEX_ENHANCED } from './shared/robotsDirective';
 import { CORPUS_ROUTE_OWNER_META_TAG } from './shared/corpusRouteOwner.mjs';
 import {
   CANTON_SECTION_LOCALES,
+  CANTON_LANDING_CARD_LIMIT,
   cantonArchiveCopy,
   cantonDisplayName,
   cantonLatestNewsHeading,
@@ -393,8 +394,9 @@ export interface CantonSectionLandingInput {
   readonly limit?: number;
 }
 
-/** Default number of article cards on a landing. */
-export const CANTON_LANDING_CARD_LIMIT = 24;
+/** Default number of article cards on a landing (shared with reconcile). */
+// Re-export the contract so existing renderer consumers keep their import.
+export { CANTON_LANDING_CARD_LIMIT };
 
 /**
  * The landing of a canton section in one locale: H1 «Articoli <cantone>»,

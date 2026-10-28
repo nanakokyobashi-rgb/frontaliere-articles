@@ -51,7 +51,10 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { ARTICLE_SECTION_CORE_ALL } from '../engine/shared/articleSectionCore.mjs';
-import { CANTON_ARCHIVE_ALL_SLUG } from '../engine/shared/cantonSectionCopy.mjs';
+import {
+  CANTON_ARCHIVE_ALL_SLUG,
+  CANTON_LANDING_CARD_LIMIT,
+} from '../engine/shared/cantonSectionCopy.mjs';
 import { fetchPageManifest, pageManifestUrl } from './lib/section-page-manifest.mjs';
 import { assertHubLocaleSlug, assertHubTopicEntries } from './lib/assert-hub-locale-slug.mjs';
 import { sitemapPaths } from './publish-section-edge.mjs';
@@ -65,11 +68,6 @@ import {
 export const API_BASE_DEFAULT = 'https://nanakokyobashi-rgb.github.io/frontaliere-articles';
 export const CDN_BASE = 'https://cdn.frontaliereticino.ch';
 const LOCALES = ['it', 'en', 'de', 'fr'];
-// `renderCantonSectionLanding` renders the newest 24 cards and sends the
-// remainder to the archive. Keep the reconcile contract aligned with that
-// public renderer: comparing all API rows would mark healthy long sections
-// stale as soon as they exceed the card limit.
-export const CANTON_LANDING_CARD_LIMIT = 24;
 const UA = 'frontaliere-corpus-reconcile/1 (+https://frontaliereticino.ch)';
 export const RECONCILE_FETCH_ATTEMPTS = 3;
 export const RECONCILE_FETCH_RETRY_DELAY_MS = 1000;
@@ -509,6 +507,52 @@ function sitemapFailureDetail(url, error) {
   return reason.startsWith(`${url}:`) ? reason : `${url}: ${reason}`;
 }
 
+function landingHrefPath(rawHref) {
+  const href = String(rawHref ?? '')
+    .trim()
+    .replace(/&amp;/giu, '&')
+    .replace(/&#x2f;|&#47;/giu, '/');
+  const pathname = new URL(href, 'https://frontaliereticino.ch').pathname;
+  return pathname.split('/').map((segment) => {
+    try {
+      return decodeURIComponent(segment);
+    } catch {
+      return segment;
+    }
+  }).join('/');
+}
+
+function jsonLdNumberOfItems(html) {
+  let fallback = null;
+  const scripts = String(html ?? '').matchAll(
+    /<script\b[^>]*\btype\s*=\s*["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/giu,
+  );
+  for (const match of scripts) {
+    let parsed;
+    try {
+      parsed = JSON.parse(match[1].trim().replace(/^\uFEFF/u, ''));
+    } catch {
+      continue;
+    }
+    const queue = Array.isArray(parsed) ? [...parsed] : [parsed];
+    while (queue.length) {
+      const value = queue.pop();
+      if (!value || typeof value !== 'object') continue;
+      const type = value['@type'];
+      const isItemList = type === 'ItemList' || (Array.isArray(type) && type.includes('ItemList'));
+      const count = value.numberOfItems;
+      if (Number.isSafeInteger(count) && count >= 0) {
+        if (isItemList) return count;
+        if (fallback === null) fallback = count;
+      }
+      for (const child of Object.values(value)) {
+        if (child && typeof child === 'object') queue.push(child);
+      }
+    }
+  }
+  return fallback;
+}
+
 /**
  * Confronta gli articoli annunciati con i link realmente presenti nella
  * landing pubblicata. Il manifest edge prova che esiste un file HTML, non che
@@ -536,7 +580,6 @@ export function landingArticleCoverage({
   if (!Number.isSafeInteger(limit) || limit < 1) {
     throw new Error(`limite landing non valido: ${limit}`);
   }
-  const articleByPath = new Map();
   const orderedRows = (rows ?? [])
     .map((row, index) => ({ row, index }))
     .sort((a, b) => {
@@ -547,32 +590,43 @@ export function landingArticleCoverage({
       if (!dateA && dateB) return 1;
       return a.index - b.index;
     })
-    .slice(0, limit)
     .map(({ row }) => row);
+  const articleRows = [];
   for (const row of orderedRows) {
     const id = String(row?.id ?? '');
     // `renderCantonSectionLanding` falls back to the article id when a
     // localized slug is absent; use the same path so a valid fallback card
     // does not look stale to the reconciler.
     const slug = slugs?.[id]?.[locale] ?? id;
-    if (id && typeof slug === 'string' && slug) articleByPath.set(`${prefix}${slug}/`, id);
+    if (id && typeof slug === 'string' && slug) articleRows.push({ id, path: `${prefix}${slug}/` });
   }
+  const articleByPath = new Map(articleRows.map(({ id, path: articlePath }) => [articlePath, id]));
+  const expectedArticleByPath = new Map(articleRows
+    .slice(0, limit)
+    .map(({ id, path: articlePath }) => [articlePath, id]));
   const found = new Set();
-  for (const match of String(html ?? '').matchAll(/href\s*=\s*["']([^"']+)["']/giu)) {
+  const extraIds = new Set();
+  const extraPaths = new Set();
+  for (const match of String(html ?? '').matchAll(/\bhref\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/giu)) {
     try {
-      const pathname = new URL(match[1], 'https://frontaliereticino.ch').pathname;
+      const pathname = landingHrefPath(match[1] ?? match[2] ?? match[3]);
       const id = articleByPath.get(pathname);
-      if (id) found.add(id);
+      if (!id) continue;
+      if (expectedArticleByPath.has(pathname)) found.add(id);
+      else {
+        extraIds.add(id);
+        extraPaths.add(pathname);
+      }
     } catch {
       // Un href non URL non può dimostrare la presenza di un articolo.
     }
   }
-  const expectedIds = [...articleByPath.values()];
+  const expectedIds = [...expectedArticleByPath.values()];
   const missingIds = expectedIds.filter((id) => !found.has(id));
-  const numberOfItemsMatch = String(html ?? '').match(/"numberOfItems"\s*:\s*(\d+)/u);
-  const declaredCount = numberOfItemsMatch ? Number(numberOfItemsMatch[1]) : null;
+  const declaredCount = jsonLdNumberOfItems(html);
   const problems = [];
   if (missingIds.length > 0) problems.push(`missing-articles:${missingIds.join(',')}`);
+  if (extraIds.size > 0) problems.push(`extra-articles:${[...extraIds].join(',')}`);
   if (declaredCount === null) {
     problems.push(`numberOfItems:missing/${expectedIds.length}`);
   } else if (declaredCount !== expectedIds.length) {
@@ -583,6 +637,8 @@ export function landingArticleCoverage({
     foundCount: found.size,
     declaredCount,
     missingIds,
+    extraIds: [...extraIds],
+    extraPaths: [...extraPaths],
     problems,
   };
 }
@@ -838,10 +894,12 @@ export async function reconcile({
           path: landingPath,
           state: 'unknown',
           reason: sitemapFailureDetail(landingUrl, error),
-          expectedCount: activeRows.length,
+          expectedCount: Math.min(activeRows.length, CANTON_LANDING_CARD_LIMIT),
           foundCount: null,
           declaredCount: null,
           missingIds: [],
+          extraIds: [],
+          extraPaths: [],
           problems: [],
         });
       }
@@ -875,7 +933,7 @@ export async function reconcile({
     const plan = planSectionBackfill(entry.id, pagesWithLandingState.map((page, i) => ({ ...page, state: states[i] })), dateById, cap, orphanPages);
     plan.pageManifest = pageManifest.state;
     if (pageManifest.reason) plan.pageManifestReason = pageManifest.reason;
-    plan.landingContent = landingChecks.map(({ locale, path: landingPath, state, expectedCount, foundCount, declaredCount, missingIds, problems, reason }) => ({
+    plan.landingContent = landingChecks.map(({ locale, path: landingPath, state, expectedCount, foundCount, declaredCount, missingIds, extraIds, extraPaths, problems, reason }) => ({
       locale,
       path: landingPath,
       state,
@@ -883,6 +941,8 @@ export async function reconcile({
       foundCount,
       declaredCount,
       missingIds,
+      extraIds,
+      extraPaths,
       problems,
       ...(reason ? { reason } : {}),
     }));
