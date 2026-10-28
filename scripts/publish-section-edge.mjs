@@ -111,6 +111,7 @@ import {
   SECTION_SITEMAP_INDEX_FILE,
   validateEdgeSectionRegistry,
 } from './lib/section-registry.mjs';
+import { apiInputChangedInRange } from './lib/publish-api-input-range.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const APEX = 'https://frontaliereticino.ch';
@@ -143,12 +144,38 @@ export function publishedMainHead() {
   return current;
 }
 
+function gitIsAncestor(ancestor, descendant) {
+  // The shell guard normally fetched this ref already. Refresh once here as
+  // well: a commit can land in the small window between that guard and the
+  // pointer PUT, and the final check must classify that commit from history.
+  execFileSync('git', ['-C', ROOT, 'fetch', '--no-tags', 'origin', 'main'], {
+    stdio: 'ignore',
+    timeout: 60_000,
+  });
+  try {
+    execFileSync('git', ['-C', ROOT, 'merge-base', '--is-ancestor', ancestor, descendant], {
+      stdio: 'ignore',
+    });
+    return true;
+  } catch (error) {
+    if (error?.status === 1) return false;
+    throw error;
+  }
+}
+
 /**
  * The workflow checks freshness before entering this module, but staging and
  * bootstrap can wait for a long time. The final pointer PUT needs its own
- * source-of-truth check, immediately before the only mutable edge write.
+ * source-of-truth check, immediately before the only mutable edge write. A
+ * later main commit is safe to adopt only when it contains no publish-api
+ * input; the artifact commit remains the expected value because it is the
+ * commit recorded in manifest.json and consumed by downstream publishers.
  */
-export async function assertExpectedMainHead(expected, readMainHead = publishedMainHead) {
+export async function assertExpectedMainHead(
+  expected,
+  readMainHead = publishedMainHead,
+  { isAncestor = gitIsAncestor, apiInputChanged = apiInputChangedInRange } = {},
+) {
   if (!FULL_GIT_SHA_RE.test(String(expected ?? ''))) {
     throw new Error('PUBLISH_API_SOURCE_COMMIT non contiene una SHA completa');
   }
@@ -157,7 +184,34 @@ export async function assertExpectedMainHead(expected, readMainHead = publishedM
     throw new Error('revisione corrente di main non valida');
   }
   if (current !== expected) {
-    throw new Error(`main e' avanzato durante lo staging edge (${expected} → ${current}); flip interrotto`);
+    let ancestor;
+    try {
+      ancestor = await isAncestor(expected, current);
+    } catch (error) {
+      throw new Error(
+        "main e' avanzato durante lo staging edge (" + expected + " → " + current + "); storia non riconciliabile",
+        { cause: error },
+      );
+    }
+    if (!ancestor) {
+      throw new Error(
+        "main e' avanzato durante lo staging edge (" + expected + " → " + current + "); storia non riconciliabile",
+      );
+    }
+    let apiInputChangedInDelta;
+    try {
+      apiInputChangedInDelta = await apiInputChanged(expected, current);
+    } catch (error) {
+      throw new Error(
+        "main e' avanzato durante lo staging edge (" + expected + " → " + current + "); input API non classificabili",
+        { cause: error },
+      );
+    }
+    if (apiInputChangedInDelta) {
+      throw new Error(
+        "main e' avanzato durante lo staging edge (" + expected + " → " + current + ") e contiene input API nuovi; flip interrotto",
+      );
+    }
   }
   return current;
 }

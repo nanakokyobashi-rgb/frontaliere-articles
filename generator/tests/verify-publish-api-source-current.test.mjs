@@ -60,11 +60,12 @@ function runHelper({ apiInputChanged = false, ancestor = true }) {
   }
 }
 
-test('freshness helper riallinea un avanzamento non-API e aggiorna GITHUB_ENV', () => {
+test('freshness helper autorizza un avanzamento non-API senza mutare il commit dell artifact', () => {
   const result = runHelper({ apiInputChanged: false });
   assert.equal(result.status, 0);
-  assert.match(result.output, /nessun input publish-api nel delta/u);
-  assert.match(result.output, new RegExp('PUBLISH_API_SOURCE_COMMIT=' + CURRENT));
+  assert.match(result.output, /solo con bookkeeping/u);
+  assert.match(result.output, new RegExp('source=' + SOURCE));
+  assert.doesNotMatch(result.output, new RegExp('PUBLISH_API_SOURCE_COMMIT=' + CURRENT));
 });
 
 test('freshness helper resta fail-closed quando main contiene input API nuovi', () => {

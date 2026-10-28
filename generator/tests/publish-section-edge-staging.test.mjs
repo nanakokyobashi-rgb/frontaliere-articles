@@ -207,8 +207,25 @@ test('publishRelease verifica la HEAD subito prima del flip edge', async () => {
   assert.deepEqual(freshnessChecks, ['before-flip']);
   assert.deepEqual(uploads, [], 'il puntatore non viene scritto dopo una freshness failure');
   await assert.rejects(
-    () => assertExpectedMainHead(commit, async () => 'd'.repeat(40)),
+    () => assertExpectedMainHead(
+      commit,
+      async () => 'd'.repeat(40),
+      { isAncestor: () => true, apiInputChanged: () => true },
+    ),
     /main e' avanzato durante lo staging edge/,
+  );
+});
+
+test('il guard edge consente un avanzamento di main solo bookkeeping e conserva il commit dell artifact', async () => {
+  const source = 'a'.repeat(40);
+  const current = 'b'.repeat(40);
+  assert.equal(
+    await assertExpectedMainHead(
+      source,
+      async () => current,
+      { isAncestor: () => true, apiInputChanged: () => false },
+    ),
+    current,
   );
 });
 

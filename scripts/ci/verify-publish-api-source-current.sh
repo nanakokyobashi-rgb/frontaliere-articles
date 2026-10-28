@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 # Fail closed unless the artifact that is about to be published still belongs
 # to the current main revision. A later main commit is safe to adopt only when
-# the workflow's declared API inputs did not change; the helper advances the
-# source marker for that bookkeeping-only case. Keep this check in one bounded
-# helper so every irreversible publisher phase uses the same freshness contract.
+# the workflow's declared API inputs did not change; the artifact source marker
+# remains immutable because it is also the commit recorded in manifest.json and
+# sent to downstream consumers. Keep this check in one bounded helper so every
+# irreversible publisher phase uses the same freshness contract.
 set -euo pipefail
 
 context="${VERIFY_CONTEXT:-publish-api phase}"
@@ -33,7 +34,7 @@ if [ "$current_main" != "$published_source" ]; then
   fi
   if ! api_input_changed="$(
     SOURCE_COMMIT="$published_source" CURRENT_MAIN="$current_main" node --input-type=module -e '
-      import { apiInputChangedInRange } from "./scripts/publish-section-pages.mjs";
+      import { apiInputChangedInRange } from "./scripts/lib/publish-api-input-range.mjs";
       process.stdout.write(String(apiInputChangedInRange({
         before: process.env.SOURCE_COMMIT,
         after: process.env.CURRENT_MAIN,
@@ -47,11 +48,7 @@ if [ "$current_main" != "$published_source" ]; then
     echo "::error::publish stantio prima di $context: main=$current_main contiene input API piu' recenti di source=$published_source; il run della nuova push deve pubblicare quella release"
     exit 1
   fi
-  if [ -n "${GITHUB_ENV:-}" ]; then
-    printf 'PUBLISH_API_SOURCE_COMMIT=%s\n' "$current_main" >> "$GITHUB_ENV"
-  fi
-  export PUBLISH_API_SOURCE_COMMIT="$current_main"
-  echo "::notice::publish riallineato prima di $context da $published_source a $current_main: nessun input publish-api nel delta"
+  echo "::notice::publish autorizzato prima di $context: main=$current_main e' avanzato da source=$published_source solo con bookkeeping; il commit dell'artifact resta $published_source"
   exit 0
 fi
 echo "sorgente ancora corrente prima di $context: $published_source"

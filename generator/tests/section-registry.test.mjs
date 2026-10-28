@@ -1722,14 +1722,14 @@ test('publish-api: osserva tutta la chiusura degli import del publisher, e pubbl
   assert.match(freshnessHelper, /git fetch --no-tags origin main/);
   assert.match(freshnessHelper, /git merge-base --is-ancestor "\$published_source" "\$current_main"/);
   assert.match(freshnessHelper, /apiInputChangedInRange/);
-  assert.match(freshnessHelper, /GITHUB_ENV/);
-  assert.match(freshnessHelper, /nessun input publish-api nel delta/);
+  assert.match(freshnessHelper, /il commit dell'artifact resta/);
   assert.match(freshnessHelper, /PUBLISH_API_SOURCE_COMMIT/);
   const queuePush = wf.slice(wf.indexOf('push_queue_commit()'), wf.indexOf('queue_changed=false'));
   assert.match(queuePush, /apiInputChangedInRange/);
   assert.match(queuePush, /PUBLISH_API_SOURCE_COMMIT=\$queued_head/);
   assert.match(edgePublisher, /verifySourceCurrent = null/);
   assert.match(edgePublisher, /await verifySourceCurrent\(\)/);
+  assert.match(edgePublisher, /apiInputChangedInRange/);
   assert.ok(
     edgePublisher.indexOf('await verifySourceCurrent()') < edgePublisher.indexOf('flipped = io.upload(pointerFile'),
     'il guard interno deve precedere immediatamente il PUT del puntatore',
