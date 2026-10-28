@@ -8636,6 +8636,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.pesca-zurigo-servizi-regolati.title': 'Zurich Canton fishing permit: check requirements and jurisdiction',
     'blog.article.pesca-zurigo-servizi-regolati.excerpt': 'Fishing is a service regulated at the cantonal level; requirements, deadlines and amounts must be officially verified with the cantonal source.',
     'blog.article.pesca-zurigo-servizi-regolati.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.sei-misure-cure-sanitarie.title': 'Healthcare costs: six new measures adopted in Bern',
+    'blog.article.sei-misure-cure-sanitarie.excerpt': 'Six measures adopted Monday in Bern Home care and emergency care among the areas The measures are added to the 12 from 2025 Economic impact still',
+    'blog.article.sei-misure-cure-sanitarie.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaChEn;

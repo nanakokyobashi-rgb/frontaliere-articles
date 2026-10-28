@@ -8636,6 +8636,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.pesca-zurigo-servizi-regolati.title': 'Fischereibewilligung Zürich: Voraussetzungen prüfen',
     'blog.article.pesca-zurigo-servizi-regolati.excerpt': 'Die Fischerei ist eine auf kantonaler Ebene geregelte Dienstleistung; Voraussetzungen, Fristen und Beträge sind offiziell anhand der kantonalen Quelle zu überprüfen.',
     'blog.article.pesca-zurigo-servizi-regolati.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.sei-misure-cure-sanitarie.title': 'Gesundheitskosten: sechs neue Maßnahmen in Bern beschlossen',
+    'blog.article.sei-misure-cure-sanitarie.excerpt': 'Sechs am Montag in Bern beschlossene Maßnahmen Häusliche Pflege und Notfallversorgung unter den Bereichen Die Maßnahmen kommen zu den 12 aus dem Jahr 2025 hinzu Wirtschaftliche Auswirkungen noch',
+    'blog.article.sei-misure-cure-sanitarie.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaChDe;

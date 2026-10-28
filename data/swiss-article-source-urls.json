@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1951385/franchi-arrotondamento-cassa-lidl-paga": {
-    "articleId": "lidl-abolisce-arrotondamento-cassa",
-    "ts": "2026-09-21T00:16:39.908Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/fxagmnhpiaxh": {
     "articleId": "rapporto-schengen-dublino-2026",
     "ts": "2026-09-21T00:24:46.226Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/rubriche/ospite/1958944/inflazione-prezzi-indice-premi-nazionale-puo-famiglia-abitazione-rincaro-svizzera": {
     "articleId": "inflazione-premi-rincaro-svizzera",
     "ts": "2026-10-25T14:06:50.666Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4194828": {
+    "articleId": "sei-misure-cure-sanitarie",
+    "ts": "2026-10-28T02:51:01.235Z",
     "keyForm": 2
   }
 }
