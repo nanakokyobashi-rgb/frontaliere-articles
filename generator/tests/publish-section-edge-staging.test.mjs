@@ -8,6 +8,7 @@ import { join } from 'node:path';
 import {
   CDN,
   assertExpectedMainHead,
+  classifyBootstrapLockAcquireResult,
   hasExpectedStagingBody,
   hasResponseBody,
   missingBootstrapPages,
@@ -25,6 +26,19 @@ const file = {
   bytes: bytes.length,
   sha256: createHash('sha256').update(bytes).digest('hex'),
 };
+
+test('un lock recuperato dal publisher resta posseduto quando il comando e\' idempotente', () => {
+  assert.equal(
+    classifyBootstrapLockAcquireResult({ code: 0, stdout: "bootstrap lock gia' acquisito: canton-ti" }),
+    'acquired',
+  );
+  assert.equal(
+    classifyBootstrapLockAcquireResult({ code: 0, stdout: 'bootstrap lock acquisito atomicamente: canton-ti' }),
+    'acquired',
+  );
+  assert.equal(classifyBootstrapLockAcquireResult({ code: 2, stdout: 'lock perso in gara' }), 'busy');
+  assert.equal(classifyBootstrapLockAcquireResult({ code: 0, stdout: 'output inatteso' }), 'error');
+});
 
 test('la verifica staging rifiuta un 200 senza body senza lanciare', () => {
   assert.equal(hasResponseBody({ status: 200 }), false);

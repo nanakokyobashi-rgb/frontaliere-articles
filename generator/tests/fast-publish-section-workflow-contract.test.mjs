@@ -148,7 +148,7 @@ test('una gara stale consegna la sezione al coordinatore senza dichiarare una pu
     workflow.includes('(.stale_handoff // "") == "true"'),
     'una matrix mista deve ricorrere al recovery, non annunciare una release parziale',
   );
-  assert.match(workflow, /steps\.replay_freshness\.outputs\.current_main \|\| needs\.publish_release_head\.outputs\.rendered_head/u);
+  assert.match(workflow, /steps\.stale\.outputs\.recovery_head \|\| steps\.replay_freshness\.outputs\.current_main \|\| needs\.publish_release_head\.outputs\.rendered_head/u);
   assert.match(workflow, /steps\.replay_freshness\.outputs\.fresh == 'false'[\s\S]*needs\.publish_release_head\.outputs\.mixed_matrix == 'true'/u);
 });
 
@@ -167,6 +167,7 @@ test('un resolve stale produce la matrice sulla nuova HEAD e lascia il recovery 
   );
   assert.match(recovery, /wave_replaced=true/u);
   assert.match(recovery, /max_stale_handoff_waves=3/u);
+  assert.match(recovery, /printf 'recovery_head=%s\\n' "\$CURRENT_MAIN" >> "\$GITHUB_OUTPUT"/u);
   assert.match(resolver, /git checkout --detach "\$current_main"/u);
   assert.match(resolver, /echo "source_commit=\$current_main"/u);
   assert.match(resolver, /echo "matrix=\$replay_matrix"/u);

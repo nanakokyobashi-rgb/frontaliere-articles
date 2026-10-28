@@ -1216,6 +1216,7 @@ jobs:
         run: node generator/scripts/load-rc-env.mjs
 
       - name: Redispatch staged backfill on current main after stale replay or mixed matrix
+        id: stale
         if: >-
           steps.replay_freshness.outputs.fresh == 'false' ||
           needs.publish_release_head.outputs.mixed_matrix == 'true'
@@ -1239,7 +1240,7 @@ jobs:
            needs.publish_release_head.outputs.mixed_matrix == 'true')
         env:
           REPOSITORY: ${{ github.repository }}
-          SOURCE_COMMIT: ${{ steps.replay_freshness.outputs.current_main || needs.publish_release_head.outputs.rendered_head || inputs.source_commit || github.sha }}
+          SOURCE_COMMIT: ${{ steps.stale.outputs.recovery_head || steps.replay_freshness.outputs.current_main || needs.publish_release_head.outputs.rendered_head || inputs.source_commit || github.sha }}
         run: |
           set -euo pipefail
           if ! [[ "$SOURCE_COMMIT" =~ ^[a-f0-9]{40}$ ]] \

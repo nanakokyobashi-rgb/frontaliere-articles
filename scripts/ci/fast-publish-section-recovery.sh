@@ -488,3 +488,6 @@ verify_child_publish_evidence() {
 }
 
 wait_for_dispatched_children
+if [ -n "${GITHUB_OUTPUT:-}" ]; then
+  printf 'recovery_head=%s\n' "$CURRENT_MAIN" >> "$GITHUB_OUTPUT"
+fi

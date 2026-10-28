@@ -398,6 +398,15 @@ function runAsync(cmd, args) {
   });
 }
 
+export function classifyBootstrapLockAcquireResult(result) {
+  if (result?.code === 2) return 'busy';
+  if (
+    result?.code === 0
+    && /bootstrap lock (?:acquisito atomicamente|gia' acquisito)/u.test(result.stdout ?? '')
+  ) return 'acquired';
+  return 'error';
+}
+
 /** Le operazioni vere su R2 e Cloudflare; i test ne passano di finte. */
 export const realIo = {
   upload: (local, key, cacheControl) => run('bash', ['scripts/lib/upload-cdn-file.sh', local, key, cacheControl]).stdout.includes('✅ uploaded'),
@@ -407,8 +416,7 @@ export const realIo = {
       'scripts/ci/section-bootstrap-lock.mjs', 'acquire',
       '--section', section, '--commit', commit, '--role', 'edge-publisher',
     ]);
-    if (result.code === 2) return 'busy';
-    return result.code === 0 && result.stdout.includes('bootstrap lock acquisito atomicamente') ? 'acquired' : 'error';
+    return classifyBootstrapLockAcquireResult(result);
   },
   releaseBootstrapLock: async (section) => {
     const result = await runAsync('node', [
