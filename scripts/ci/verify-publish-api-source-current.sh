@@ -28,6 +28,14 @@ if [ "$current_main" != "$published_source" ]; then
     echo "::error::impossibile scaricare main per classificare l'avanzamento prima di $context"
     exit 1
   fi
+  if ! current_main="$(git rev-parse FETCH_HEAD)"; then
+    echo "::error::impossibile leggere la snapshot di main appena scaricata prima di $context"
+    exit 1
+  fi
+  if ! [[ "$current_main" =~ ^[a-f0-9]{40}$ ]]; then
+    echo "::error::snapshot di main appena scaricata non valida prima di $context: $current_main"
+    exit 1
+  fi
   if ! git merge-base --is-ancestor "$published_source" "$current_main"; then
     echo "::error::avanzamento non riconciliabile prima di $context: source=$published_source main=$current_main"
     exit 1

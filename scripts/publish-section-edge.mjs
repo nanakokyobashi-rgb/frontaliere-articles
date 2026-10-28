@@ -144,21 +144,33 @@ export function publishedMainHead() {
   return current;
 }
 
-function gitIsAncestor(ancestor, descendant) {
+function fetchedMainHead() {
   // The shell guard normally fetched this ref already. Refresh once here as
   // well: a commit can land in the small window between that guard and the
-  // pointer PUT, and the final check must classify that commit from history.
+  // pointer PUT. FETCH_HEAD is the exact snapshot returned by this fetch; do
+  // not keep classifying the SHA read before the fetch.
   execFileSync('git', ['-C', ROOT, 'fetch', '--no-tags', 'origin', 'main'], {
     stdio: 'ignore',
     timeout: 60_000,
   });
+  const current = execFileSync('git', ['-C', ROOT, 'rev-parse', 'FETCH_HEAD'], {
+    encoding: 'utf8',
+  }).trim();
+  if (!FULL_GIT_SHA_RE.test(current)) {
+    throw new Error('snapshot di main appena scaricata non valida');
+  }
+  return current;
+}
+
+function gitIsAncestor(ancestor) {
+  const fetched = fetchedMainHead();
   try {
-    execFileSync('git', ['-C', ROOT, 'merge-base', '--is-ancestor', ancestor, descendant], {
+    execFileSync('git', ['-C', ROOT, 'merge-base', '--is-ancestor', ancestor, fetched], {
       stdio: 'ignore',
     });
-    return true;
+    return { ancestor: true, current: fetched };
   } catch (error) {
-    if (error?.status === 1) return false;
+    if (error?.status === 1) return { ancestor: false, current: fetched };
     throw error;
   }
 }
@@ -184,34 +196,46 @@ export async function assertExpectedMainHead(
     throw new Error('revisione corrente di main non valida');
   }
   if (current !== expected) {
-    let ancestor;
+    let ancestryResult;
     try {
-      ancestor = await isAncestor(expected, current);
+      ancestryResult = await isAncestor(expected, current);
     } catch (error) {
       throw new Error(
         "main e' avanzato durante lo staging edge (" + expected + " → " + current + "); storia non riconciliabile",
         { cause: error },
       );
     }
+    const refreshedCurrent = ancestryResult && typeof ancestryResult === 'object'
+      ? ancestryResult.current
+      : current;
+    const ancestor = ancestryResult && typeof ancestryResult === 'object'
+      ? ancestryResult.ancestor
+      : ancestryResult;
+    if (!FULL_GIT_SHA_RE.test(String(refreshedCurrent ?? ''))) {
+      throw new Error(
+        "main e' avanzato durante lo staging edge (" + expected + "); snapshot appena acquisita non verificabile",
+      );
+    }
     if (!ancestor) {
       throw new Error(
-        "main e' avanzato durante lo staging edge (" + expected + " → " + current + "); storia non riconciliabile",
+        "main e' avanzato durante lo staging edge (" + expected + " → " + refreshedCurrent + "); storia non riconciliabile",
       );
     }
     let apiInputChangedInDelta;
     try {
-      apiInputChangedInDelta = await apiInputChanged(expected, current);
+      apiInputChangedInDelta = await apiInputChanged(expected, refreshedCurrent);
     } catch (error) {
       throw new Error(
-        "main e' avanzato durante lo staging edge (" + expected + " → " + current + "); input API non classificabili",
+        "main e' avanzato durante lo staging edge (" + expected + " → " + refreshedCurrent + "); input API non classificabili",
         { cause: error },
       );
     }
     if (apiInputChangedInDelta) {
       throw new Error(
-        "main e' avanzato durante lo staging edge (" + expected + " → " + current + ") e contiene input API nuovi; flip interrotto",
+        "main e' avanzato durante lo staging edge (" + expected + " → " + refreshedCurrent + ") e contiene input API nuovi; flip interrotto",
       );
     }
+    return refreshedCurrent;
   }
   return current;
 }

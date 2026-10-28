@@ -229,6 +229,28 @@ test('il guard edge consente un avanzamento di main solo bookkeeping e conserva 
   );
 });
 
+test('il guard edge classifica la HEAD appena acquisita dopo il controllo iniziale', async () => {
+  const source = 'a'.repeat(40);
+  const initiallyRead = 'b'.repeat(40);
+  const fetched = 'c'.repeat(40);
+  let classifiedHead = null;
+  await assert.rejects(
+    () => assertExpectedMainHead(
+      source,
+      async () => initiallyRead,
+      {
+        isAncestor: () => ({ ancestor: true, current: fetched }),
+        apiInputChanged: (_before, after) => {
+          classifiedHead = after;
+          return true;
+        },
+      },
+    ),
+    new RegExp('→ ' + fetched + '.*input API nuovi'),
+  );
+  assert.equal(classifiedHead, fetched);
+});
+
 test('le letture di release e bootstrap restano fail-closed con un 200 senza body', async () => {
   assert.deepEqual(
     await readPreviousRelease({ fetchBytes: async () => ({ status: 200 }) }),

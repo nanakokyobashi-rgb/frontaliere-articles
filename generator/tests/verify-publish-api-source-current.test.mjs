@@ -11,7 +11,7 @@ const HELPER = resolve(ROOT, 'scripts/ci/verify-publish-api-source-current.sh');
 const SOURCE = 'a'.repeat(40);
 const CURRENT = 'b'.repeat(40);
 
-function runHelper({ apiInputChanged = false, ancestor = true }) {
+function runHelper({ apiInputChanged = false, ancestor = true, fetchedMain = CURRENT } = {}) {
   const dir = mkdtempSync(resolve(tmpdir(), 'verify-publish-api-source-'));
   const envFile = resolve(dir, 'github-env');
   const fakeBin = resolve(dir, 'bin');
@@ -25,10 +25,13 @@ function runHelper({ apiInputChanged = false, ancestor = true }) {
     writeFileSync(envFile, '');
     writeExecutable('gh', '#!/bin/sh\nprintf "%s\n" "' + CURRENT + '"\n');
     writeExecutable('timeout', '#!/bin/sh\nshift 2\nexec "$@"\n');
-    writeExecutable('node', '#!/bin/sh\nprintf "%s\n" "$FAKE_API_INPUT"\n');
+    writeExecutable(
+      'node',
+      '#!/bin/sh\nif [ "${CURRENT_MAIN:-}" != "$FAKE_FETCHED_MAIN" ]; then printf "true\n"; else printf "%s\n" "$FAKE_API_INPUT"; fi\n',
+    );
     writeExecutable(
       'git',
-      '#!/bin/sh\ncase "$1" in\n  fetch) exit 0 ;;\n  merge-base) [ "$FAKE_ANCESTOR" = "true" ] && exit 0 || exit 1 ;;\n  *) exit 0 ;;\nesac\n',
+      '#!/bin/sh\ncase "$1" in\n  fetch) exit 0 ;;\n  rev-parse) printf "%s\\n" "$FAKE_FETCHED_MAIN" ;;\n  merge-base) [ "$FAKE_ANCESTOR" = "true" ] && exit 0 || exit 1 ;;\n  *) exit 0 ;;\nesac\n',
     );
     const env = {
       ...process.env,
@@ -40,6 +43,7 @@ function runHelper({ apiInputChanged = false, ancestor = true }) {
       VERIFY_CONTEXT: 'test',
       FAKE_API_INPUT: String(apiInputChanged),
       FAKE_ANCESTOR: String(ancestor),
+      FAKE_FETCHED_MAIN: fetchedMain,
     };
     try {
       const stdout = execFileSync('bash', [HELPER], {
@@ -66,6 +70,14 @@ test('freshness helper autorizza un avanzamento non-API senza mutare il commit d
   assert.match(result.output, /solo con bookkeeping/u);
   assert.match(result.output, new RegExp('source=' + SOURCE));
   assert.doesNotMatch(result.output, new RegExp('PUBLISH_API_SOURCE_COMMIT=' + CURRENT));
+});
+
+test('freshness helper classifica la snapshot di main restituita dal fetch', () => {
+  const fetchedMain = 'c'.repeat(40);
+  const result = runHelper({ apiInputChanged: false, fetchedMain });
+  assert.equal(result.status, 0);
+  assert.match(result.output, new RegExp('main=' + fetchedMain));
+  assert.match(result.output, /solo con bookkeeping/u);
 });
 
 test('freshness helper resta fail-closed quando main contiene input API nuovi', () => {
