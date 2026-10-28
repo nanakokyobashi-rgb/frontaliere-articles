@@ -38,6 +38,7 @@ if [ "$history_fetch_timeout_s" -gt "$history_fetch_timeout_cap_s" ]; then
 fi
 
 fetch_main="${FETCH_MAIN:-false}"
+origin_main_refspec='main:refs/remotes/origin/main'
 case "$fetch_main" in
   true|false) ;;
   *)
@@ -88,7 +89,7 @@ if [ "$shallow_state" = 'true' ]; then
   # guess it. Unshallow once, with bounded retries, before any caller can run
   # the history-dependent planner or gate.
   for ((attempt = 1; attempt <= history_fetch_attempts; attempt += 1)); do
-    if bounded_git_fetch --no-tags --unshallow origin main; then
+    if bounded_git_fetch --no-tags --unshallow origin "$origin_main_refspec"; then
       shallow_state="$(git rev-parse --is-shallow-repository 2>/dev/null || true)"
       if [ "$shallow_state" != 'true' ]; then
         main_ref_fetched=true
@@ -110,12 +111,13 @@ if [ "$shallow_state" = 'true' ]; then
 fi
 
 if [ "$fetch_main" = 'true' ]; then
-  if [ "$main_ref_fetched" != 'true' ] && ! fetch_ref_with_retries 'refs/remotes/origin/main' --no-tags origin main; then
+  if [ "$main_ref_fetched" != 'true' ] && ! fetch_ref_with_retries 'refs/remotes/origin/main' --no-tags origin "$origin_main_refspec"; then
     exit 1
   fi
   fetched_main="$(git rev-parse refs/remotes/origin/main 2>/dev/null || true)"
-  if ! [[ "$fetched_main" =~ ^[a-f0-9]{40}$ ]]; then
-    echo "::error::refs/remotes/origin/main non verificabile dopo il fetch: $fetched_main"
+  fetched_main_head="$(git rev-parse FETCH_HEAD 2>/dev/null || true)"
+  if ! [[ "$fetched_main" =~ ^[a-f0-9]{40}$ ]] || [ "$fetched_main" != "$fetched_main_head" ]; then
+    echo "::error::refs/remotes/origin/main non coincide con FETCH_HEAD dopo il fetch: remote=$fetched_main fetch_head=$fetched_main_head"
     exit 1
   fi
   echo "::notice::punta origin/main aggiornata e verificata: $fetched_main"

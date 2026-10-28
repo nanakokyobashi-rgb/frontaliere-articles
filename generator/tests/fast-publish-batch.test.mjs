@@ -296,7 +296,8 @@ test('il resolver article non rifà il fetch del parent già presente nel checko
   const resolveFetchStep = stepText('Fetch push base (resolve)');
   assert.match(resolveFetchStep, /bash scripts\/ci\/fetch-push-base-if-missing\.sh/);
   assert.match(pushBaseGuard, /git rev-parse --is-shallow-repository/);
-  assert.match(pushBaseGuard, /bounded_git_fetch --no-tags --unshallow origin main/);
+  assert.match(pushBaseGuard, /bounded_git_fetch --no-tags --unshallow origin "\$origin_main_refspec"/);
+  assert.match(pushBaseGuard, /origin_main_refspec='main:refs\/remotes\/origin\/main'/);
   assert.match(pushBaseGuard, /HISTORY_FETCH_ATTEMPTS/);
   assert.match(pushBaseGuard, /HISTORY_FETCH_DELAY_S/);
   assert.match(pushBaseGuard, /history_fetch_delay_cap_s=30/);
@@ -304,6 +305,7 @@ test('il resolver article non rifà il fetch del parent già presente nel checko
   assert.match(pushBaseGuard, /history_fetch_timeout_cap_s=300/);
   assert.match(pushBaseGuard, /timeout --signal=TERM --kill-after=5s "\$\{history_fetch_timeout_s\}s" git fetch/);
   assert.match(pushBaseGuard, /FETCH_MAIN/);
+  assert.match(pushBaseGuard, /fetched_main_head=.*git rev-parse FETCH_HEAD/);
   assert.match(pushBaseGuard, /git cat-file -e "\$\{PUSH_BEFORE\}\^\{commit\}"/);
   assert.match(pushBaseGuard, /fetch_ref_with_retries "push base \$PUSH_BEFORE" --no-tags origin "\$PUSH_BEFORE"/);
   assert.match(pushBaseGuard, /push base non presente dopo il fetch/);
