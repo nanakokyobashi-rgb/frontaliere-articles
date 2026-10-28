@@ -27365,7 +27365,7 @@ const RAW_SWISS_ARTICLES: Article[] = [
     id: 'offerte-formazione-federale',
     category: 'pratico',
     date: '2026-10-13T23:44:57.971Z',
-    image: '/images/places/lugano-view.webp',
+    image: '/images/blog/article-offerte-formazione-federale.webp',
     hasCalculator: true,
     articleType: 'news',
     authorSlug: 'redazione',

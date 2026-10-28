@@ -8200,7 +8200,7 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.bcg-consiglio-mueller.imageAlt': 'Renewal of the Bank Council at Graubünden Cantonal Bank',
     'blog.article.offerte-formazione-federale.title': 'Federal Administration: jobs, internships and training',
     'blog.article.offerte-formazione-federale.excerpt': 'The Federal Administration offers meaningful work Recent graduates have a wide range of internships 50 training programs are available',
-    'blog.article.offerte-formazione-federale.imageAlt': 'Castelgrande in Bellinzona, Swiss setting for federal employment',
+    'blog.article.offerte-formazione-federale.imageAlt': 'Illustrative image relevant to the article topic',
     'blog.article.divario-reddito-giovani-svizzera.title': 'Wage gap among young people in Switzerland: income gap narrows',
     'blog.article.divario-reddito-giovani-svizzera.excerpt': 'Among those born in 1995, the income gap is 14% Among those born in 1965, the gap was 55% In 2025, 54% of young women have a tertiary qualification',
     'blog.article.divario-reddito-giovani-svizzera.imageAlt': 'View of Lugano with young professionals',

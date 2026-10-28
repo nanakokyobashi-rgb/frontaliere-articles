@@ -2,21 +2,11 @@
   "schema": 1,
   "items": [
     {
-      "articleId": "offerte-formazione-federale",
-      "title": "Amministrazione federale: lavoro, praticantati e formazione",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-offerte-formazione-federale: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to work and training in Switzerland, but it contains a recognizable foreground person v",
-      "status": "failed",
-      "failureCount": 20,
-      "requestedAt": "2026-10-13T23:44:58.192Z",
-      "lastFailureAt": "2026-10-27T17:24:48.838Z"
-    },
-    {
       "articleId": "arianna-di-claudio-roma",
       "title": "Arianna di claudio alla festa del cinema di roma",
       "fallbackImage": "/images/places/lugano-view.webp",
       "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (vision gate rejected image: Generic synthetic editorial scene with a train commute and red-carpet arrival; the prominent foreground person is recognizable from be",
-      "status": "failed",
+      "status": "queued",
       "failureCount": 7,
       "requestedAt": "2026-10-18T07:27:16.643Z",
       "lastFailureAt": "2026-10-27T17:28:01.398Z"
@@ -26,7 +16,7 @@
       "title": "Frontaliere licenziato nel 2026: diritti oltre 20 km",
       "fallbackImage": "/images/blog/article-lamal-guida-2026-canton-argovia.webp",
       "reason": "All image providers failed for article-tutele-frontaliero-uscita-ticino: openai-codex (vision gate rejected image: Generic synthetic commuter scene relevant to Ticino cross-border travel, but the foreground person is recognizable from behin",
-      "status": "failed",
+      "status": "queued",
       "failureCount": 5,
       "requestedAt": "2026-10-18T16:43:36.224Z",
       "lastFailureAt": "2026-10-27T17:29:14.032Z"
@@ -36,7 +26,7 @@
       "title": "Di più Le giovani svizzere guadagnano meno nonostante siano più istruite",
       "fallbackImage": "/images/blog/article-divario-reddito-giovani-svizzera.webp",
       "reason": "All image providers failed for article-giovani-donne-stipendi-svizzera: openai-codex (vision gate rejected image: Generic synthetic library scene relevant to an educated young woman, with no readable text, logos, or specific real event; how",
-      "status": "failed",
+      "status": "queued",
       "failureCount": 5,
       "requestedAt": "2026-10-19T03:17:12.439Z",
       "lastFailureAt": "2026-10-27T17:30:56.180Z"
@@ -46,7 +36,7 @@
       "title": "Frontalieri, alle Ville Ponti il confronto sul lavoro",
       "fallbackImage": "/images/blog/article-canton-san-gallo-stabile-ricerca-lavoro-cala-disoccupazione.webp",
       "reason": "All image providers failed for article-ville-ponti-frontalieri-confronto: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to cross-border commuting, but it includes a recognizable foreground person viewe",
-      "status": "failed",
+      "status": "queued",
       "failureCount": 5,
       "requestedAt": "2026-10-20T21:30:49.827Z",
       "lastFailureAt": "2026-10-27T17:32:15.138Z"
@@ -56,7 +46,7 @@
       "title": "Operatori sanitari frontalieri: Como boccheggia",
       "fallbackImage": "/images/blog/article-confusione-tassa-salute-frontalieri.webp",
       "reason": "All image providers failed for article-sanitari-italiani-fuga-svizzera: openai-codex (vision gate rejected image: Synthetic photorealistic editorial illustration of a healthcare worker commuting by train in a lake-and-mountain setting. No v",
-      "status": "failed",
+      "status": "queued",
       "failureCount": 4,
       "requestedAt": "2026-10-23T15:23:52.650Z",
       "lastFailureAt": "2026-10-27T17:33:15.727Z"
@@ -66,7 +56,7 @@
       "title": "55,6% lavoratori frontalieri ritiene stipendio inferiore a residente svizzero",
       "fallbackImage": "/images/blog/article-ricerca-cisl-frontalieri-2026.webp",
       "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (vision gate rejected image: Synthetic generic commuter scene with a recognizable foreground person viewed from behind.); gemini (Gemini image request fail",
-      "status": "failed",
+      "status": "queued",
       "failureCount": 4,
       "requestedAt": "2026-10-24T19:06:53.846Z",
       "lastFailureAt": "2026-10-27T17:34:19.485Z"
