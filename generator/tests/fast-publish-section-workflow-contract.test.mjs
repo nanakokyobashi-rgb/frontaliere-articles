@@ -124,10 +124,12 @@ test('fast-publish-section delega i blocchi shell grandi a script senza espressi
 });
 
 test('una gara stale consegna la sezione al coordinatore senza dichiarare una pubblicazione', () => {
-  assert.doesNotMatch(render, /dispatch_stale_handoff\(\)/u);
+  assert.match(render, /dispatch_stale_replay\(\)/u);
   assert.match(render, /echo "stale_handoff=true" >> "\$GITHUB_OUTPUT"/u);
   assert.match(render, /echo "stale_handoff_head=\$handoff_head" >> "\$GITHUB_OUTPUT"/u);
-  assert.match(render, /coordinatore della matrice/u);
+  assert.match(render, /echo "stale_handoff_nonce=\$stale_handoff_nonce" >> "\$GITHUB_OUTPUT"/u);
+  assert.match(render, /echo "stale_handoff_title=\$stale_handoff_title" >> "\$GITHUB_OUTPUT"/u);
+  assert.match(render, /coordinatore sulla HEAD/u);
   assert.doesNotMatch(
     render,
     /main e' avanzata durante tre tentativi di render del publisher[\s\S]*exit 1/u,
@@ -153,16 +155,18 @@ test('una gara stale consegna la sezione al coordinatore senza dichiarare una pu
 test('un handoff stale coordinato resta osservabile dalla barriera sulla nuova HEAD', () => {
   assert.match(
     recovery,
-    /rebuild_recovery_for_head\(\)[\s\S]*git checkout --detach "\$next_head"[\s\S]*dispatch_children/u,
+    /rebuild_recovery_head\(\)[\s\S]*git checkout --detach "\$next_head"[\s\S]*dispatch_children_wave/u,
   );
   assert.match(
     recovery,
-    /read-main-head\.sh[\s\S]*main e' avanzata durante la barriera[\s\S]*rebuild_recovery_for_head/u,
+    /VERIFY_STALE_HANDOFF_HEAD[\s\S]*rebuild_recovery_head[\s\S]*dispatch_children_wave/u,
   );
   assert.match(
     recovery,
-    /stale_handoff_head[\s\S]*evidence_handoff_head[\s\S]*return 3/u,
+    /VERIFY_STALE_HANDOFF_TITLE[\s\S]*VERIFY_STALE_HANDOFF_NONCE[\s\S]*return 3/u,
   );
+  assert.match(recovery, /wave_replaced=true/u);
+  assert.match(recovery, /max_stale_handoff_waves=3/u);
   assert.match(
     resolver,
     /coordinated_recovery.*true.*dispatch_nonce[\s\S]*riuso il nonce del coordinator/u,

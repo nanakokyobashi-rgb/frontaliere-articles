@@ -160,6 +160,7 @@ on:
       - 'data/generated-image-registry.json'
       - 'data/editorial-image-registry.json'
       - 'data/blog-cover-cdn-sync-queue.json'
+      - 'scripts/ci/verify-publish-api-source-current.sh'
       - '.github/workflows/publish-api.yml'
   # The editorial companion contains a weekly update even when no article or
   # code push occurs. Rebuild it on a real weekly cadence so the HTTP surface
@@ -198,30 +199,6 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    # The same fail-closed freshness guard is called immediately before each
-    # irreversible publication below. Keeping its source in one job-level
-    # value prevents one publish path from drifting away from the others.
-    env:
-      PUBLISH_SOURCE_GUARD: |
-        set -euo pipefail
-        published_source="${PUBLISH_API_SOURCE_COMMIT:-${PUBLISHED_SOURCE_COMMIT:-}}"
-        if ! [[ "$published_source" =~ ^[a-f0-9]{40}$ ]]; then
-          echo "::error::identita' della sorgente pubblicata non verificabile: $published_source"
-          exit 1
-        fi
-        if ! current_main="$(timeout --kill-after=1s 60s gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq '.object.sha')"; then
-          echo "::error::impossibile verificare la HEAD corrente di main prima della pubblicazione irreversibile"
-          exit 1
-        fi
-        if ! [[ "$current_main" =~ ^[a-f0-9]{40}$ ]]; then
-          echo "::error::HEAD corrente di main non valida prima della pubblicazione irreversibile: $current_main"
-          exit 1
-        fi
-        if [ "$current_main" != "$published_source" ]; then
-          echo "::error::publish superato prima della pubblicazione irreversibile: source=$published_source main=$current_main"
-          exit 1
-        fi
-        echo "sorgente ancora corrente prima della pubblicazione irreversibile: $published_source"
     # MISURATO 2026-08-09: la run riuscita piu' recente (31315163937) impiega 44s
     # in totale, di cui 6s per "Build data surface" e 22s per la spinta all'edge.
     # Il budget esteso copre l'attesa bounded dei bootstrap, lo staging edge e il
@@ -913,6 +890,19 @@ jobs:
             echo "images-manifest.json: not emitted (no hero images in this repo yet) — expected before cutover"
           fi
 
+      # The build guard protects only the checkout. Every irreversible phase
+      # gets a fresh barrier because the cover queue may advance main and a
+      # queued run can spend a long time between artifact verification and
+      # publication.
+      - name: Verify source before governed cover publish
+        if: github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          PUBLISHED_SOURCE_COMMIT: ${{ inputs.source_commit || github.sha }}
+          VERIFY_CONTEXT: governed cover publish
+        run: bash scripts/ci/verify-publish-api-source-current.sh
+
       # A site-side licence-audit replacement keeps the article URL stable but
       # changes the bytes at that URL. The corpus is a second publisher of the
       # same CDN key, so this step runs BEFORE Pages deploy and keeps a durable
@@ -925,8 +915,13 @@ jobs:
           SHA: ${{ github.sha }}
           EVENT_NAME: ${{ github.event_name }}
           REF: ${{ github.ref }}
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          PUBLISHED_SOURCE_COMMIT: ${{ inputs.source_commit || github.sha }}
+          VERIFY_CONTEXT: governed cover publish (inside step)
         run: |
           set -euo pipefail
+          bash scripts/ci/verify-publish-api-source-current.sh
           if [ "$REF" != 'refs/heads/main' ]; then
             echo "::error::cover CDN reconciliation is allowed only from refs/heads/main (got $REF)"
             exit 1
@@ -1183,6 +1178,14 @@ jobs:
           runtime_pat="${GITHUB_PAT_NANAKO:-}"
           GH_TOKEN="${runtime_pat:-$GH_TOKEN}" node scripts/ci/ticker-shadow-alert.mjs
 
+      - name: Verify source before Pages publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          PUBLISHED_SOURCE_COMMIT: ${{ inputs.source_commit || github.sha }}
+          VERIFY_CONTEXT: Pages publish
+        run: bash scripts/ci/verify-publish-api-source-current.sh
+
       - uses: actions/configure-pages@v6
 
       - uses: actions/upload-pages-artifact@v5
@@ -1192,7 +1195,10 @@ jobs:
       - name: Verify source is still current before Pages deploy
         env:
           GH_TOKEN: ${{ github.token }}
-        run: bash -c "$PUBLISH_SOURCE_GUARD"
+          REPOSITORY: ${{ github.repository }}
+          PUBLISHED_SOURCE_COMMIT: ${{ inputs.source_commit || github.sha }}
+          VERIFY_CONTEXT: Pages deploy
+        run: bash scripts/ci/verify-publish-api-source-current.sh
 
       - id: deploy
         uses: actions/deploy-pages@v5
@@ -1201,7 +1207,10 @@ jobs:
         if: steps.deploy.outcome == 'success'
         env:
           GH_TOKEN: ${{ github.token }}
-        run: bash -c "$PUBLISH_SOURCE_GUARD"
+          REPOSITORY: ${{ github.repository }}
+          PUBLISHED_SOURCE_COMMIT: ${{ inputs.source_commit || github.sha }}
+          VERIFY_CONTEXT: edge upload
+        run: bash scripts/ci/verify-publish-api-source-current.sh
 
       # Push the article sitemaps straight to the edge.
       #
@@ -1221,6 +1230,15 @@ jobs:
       # Best-effort, exactly like the dispatch below: the R2 PUT is a freshness
       # optimisation over a passthrough that already works, so a missing
       # credential or a failed upload must never fail a good publish.
+      - name: Verify source before edge document publish
+        if: steps.deploy.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          PUBLISHED_SOURCE_COMMIT: ${{ inputs.source_commit || github.sha }}
+          VERIFY_CONTEXT: edge document publish
+        run: bash scripts/ci/verify-publish-api-source-current.sh
+
       - name: Push the article sitemaps and the blog index to the edge
         if: steps.deploy.outcome == 'success'
         continue-on-error: true
@@ -1312,8 +1330,9 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           REPOSITORY: ${{ github.repository }}
           PUBLISHED_SOURCE_COMMIT: ${{ inputs.source_commit || github.sha }}
+          VERIFY_CONTEXT: edge flip
         run: |
-          bash -c "$PUBLISH_SOURCE_GUARD"
+          bash scripts/ci/verify-publish-api-source-current.sh
 
       # La release edge delle sezioni cantonali (piano «sezioni articoli per
       # cantone», P7). Lo stato servito (live|draft|retired) ha UNA sola fonte:

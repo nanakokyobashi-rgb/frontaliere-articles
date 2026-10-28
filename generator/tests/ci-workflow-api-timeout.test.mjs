@@ -11,6 +11,7 @@ const WORKFLOWS = [
   '.github/workflows/orphan-push-warn.yml',
   '.github/workflows/auto-merge-engine-lockstep.yml',
   '.github/workflows/publish-api.yml',
+  'scripts/ci/verify-publish-api-source-current.sh',
 ];
 
 test('le letture GitHub dei workflow CI hanno un limite di 60 secondi', () => {

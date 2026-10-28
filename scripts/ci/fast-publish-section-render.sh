@@ -34,6 +34,77 @@ if [ "$EVENT_NAME" = 'workflow_run' ]; then
 elif [ "$EVENT_NAME" = 'workflow_dispatch' ] && [ -n "${SOURCE_COMMIT:-}" ]; then
   pinned_replay_main="$SOURCE_MAIN_COMMIT"
 fi
+
+# A pinned child must not silently hand its parent an artifact from an older
+# revision. Redispatch the exact section on the newly observed main and expose
+# the title/head in the job output so a matrix coordinator can follow that run.
+stale_handoff_nonce=''
+stale_handoff_title=''
+dispatch_stale_replay() {
+  local stale_source="$1"
+  local current_main="$2"
+  local api_release_commit="${3:-}"
+  local runtime_pat="${GITHUB_PAT_NANAKO:-}"
+  local nonce_seed=''
+  local nonce_hash=''
+  local dispatch_nonce=''
+  local dispatch_title=''
+  local replay_before=''
+  local replay_after=''
+
+  if [ -z "$runtime_pat" ]; then
+    echo "::error::GITHUB_PAT_NANAKO assente: impossibile redispatchare il replay stantio prima degli upload"
+    return 1
+  fi
+  if ! [[ "$current_main" =~ ^[a-f0-9]{40}$ ]]; then
+    echo "::error::HEAD del replay stale non valida: $current_main"
+    return 1
+  fi
+  export GH_TOKEN="$runtime_pat"
+  dispatch_nonce="${DISPATCH_NONCE:-}"
+  if [ -z "$dispatch_nonce" ]; then
+    dispatch_nonce="stale-late-${GITHUB_RUN_ID}-${SECTION}"
+  fi
+  nonce_seed="$dispatch_nonce"
+  nonce_hash="$(printf '%s\0%s\0%s\0%s' "$nonce_seed" "$current_main" "$SECTION" "$coordinated_recovery" | sha256sum | cut -c1-16)"
+  dispatch_nonce="stale-late-${current_main:0:12}-${SECTION}-${nonce_hash}"
+  if [ "$EVENT_NAME" = 'workflow_run' ]; then
+    echo "::notice::replay workflow_run redispatchato prima degli upload: main e' avanzato da $stale_source a $current_main"
+  else
+    echo "::notice::replay bounded redispatchato prima degli upload: main e' avanzato da $stale_source a $current_main"
+  fi
+  replay_before="${PUSH_BEFORE:-$stale_source}"
+  replay_after=''
+  if [ -n "$replay_before" ]; then
+    # The replay source is current_main; do not retain the old range head or
+    # release selection as its new checkout is already the high-water mark.
+    replay_after="$current_main"
+  fi
+  dispatch_title="cover-publish-section / ${SECTION} / nonce=${dispatch_nonce}"
+  if ! bash .replay-dispatcher-source/scripts/ci/dispatch-fast-publish-replay.sh "$REPO" "$dispatch_title" --ref main \
+    -f section="$SECTION" \
+    -f article_ids="$ARTICLE_IDS_JSON" \
+    -f missing_page_paths="$MISSING_PAGE_PATHS_JSON" \
+    -f known_missing_page_paths="$KNOWN_MISSING_PAGE_PATHS_JSON" \
+    -f bootstrap="$BOOTSTRAP" \
+    -f remove_stale_canton_rss_feeds="$REMOVE_STALE_CANTON_RSS_FEEDS" \
+    -f cleanup_inactive_surface="$CLEANUP_INACTIVE_SURFACE" \
+    -f replay_api_after_publish="$REPLAY_API_AFTER_PUBLISH" \
+    -f allow_deferred_live_release="$ALLOW_DEFERRED_LIVE_RELEASE" \
+    -f api_release_commit="$api_release_commit" \
+    -f source_commit="$current_main" \
+    -f source_main_commit="$current_main" \
+    -f dry_run="$DRY" \
+    -f push_before="$replay_before" \
+    -f push_after="$replay_after" \
+    -f dispatch_nonce="$dispatch_nonce" \
+    -f coordinated_recovery="$coordinated_recovery"; then
+    return 1
+  fi
+  stale_handoff_nonce="$dispatch_nonce"
+  stale_handoff_title="$dispatch_title"
+}
+
 if [ -n "$pinned_replay_main" ]; then
   if ! current_main="$(bash scripts/ci/read-main-head.sh)"; then
     echo "::error::impossibile verificare la revisione corrente di main prima degli upload"
@@ -44,31 +115,6 @@ if [ -n "$pinned_replay_main" ]; then
     exit 1
   fi
   if [ "$current_main" != "$pinned_replay_main" ]; then
-    runtime_pat="${GITHUB_PAT_NANAKO:-}"
-    if [ -z "$runtime_pat" ]; then
-      echo "::error::GITHUB_PAT_NANAKO assente: impossibile redispatchare il replay stantio prima degli upload"
-      exit 1
-    fi
-    export GH_TOKEN="$runtime_pat"
-    dispatch_nonce="${DISPATCH_NONCE:-}"
-    if [ -z "$dispatch_nonce" ]; then
-      dispatch_nonce="stale-late-${GITHUB_RUN_ID}-${SECTION}"
-    fi
-    nonce_seed="$dispatch_nonce"
-    nonce_hash="$(printf '%s\0%s\0%s\0%s' "$nonce_seed" "$current_main" "$SECTION" "$coordinated_recovery" | sha256sum | cut -c1-16)"
-    dispatch_nonce="stale-late-${current_main:0:12}-${SECTION}-${nonce_hash}"
-    if [ "$EVENT_NAME" = 'workflow_run' ]; then
-      echo "::notice::replay workflow_run redispatchato prima degli upload: main e' avanzato da $pinned_replay_main a $current_main"
-    else
-      echo "::notice::replay bounded redispatchato prima degli upload: main e' avanzato da $pinned_replay_main a $current_main"
-    fi
-    replay_before="${PUSH_BEFORE:-$pinned_replay_main}"
-    replay_after=''
-    if [ -n "$replay_before" ]; then
-      # The replay source is current_main; do not retain the old
-      # range head or release selection.
-      replay_after="$current_main"
-    fi
     api_release_commit=''
     if [ "$EVENT_NAME" = 'workflow_run' ]; then
       if [ "$(git rev-parse --is-shallow-repository)" = 'true' ]; then
@@ -92,25 +138,13 @@ if [ -n "$pinned_replay_main" ]; then
         echo "::notice::replay workflow_run: release API attesa $api_release_commit"
       fi
     fi
-    dispatch_title="cover-publish-section / ${SECTION} / nonce=${dispatch_nonce}"
-    bash .replay-dispatcher-source/scripts/ci/dispatch-fast-publish-replay.sh "$REPO" "$dispatch_title" --ref main \
-      -f section="$SECTION" \
-      -f article_ids="$ARTICLE_IDS_JSON" \
-      -f missing_page_paths="$MISSING_PAGE_PATHS_JSON" \
-      -f known_missing_page_paths="$KNOWN_MISSING_PAGE_PATHS_JSON" \
-      -f bootstrap="$BOOTSTRAP" \
-      -f remove_stale_canton_rss_feeds="$REMOVE_STALE_CANTON_RSS_FEEDS" \
-      -f cleanup_inactive_surface="$CLEANUP_INACTIVE_SURFACE" \
-      -f replay_api_after_publish="$REPLAY_API_AFTER_PUBLISH" \
-      -f allow_deferred_live_release="$ALLOW_DEFERRED_LIVE_RELEASE" \
-      -f api_release_commit="$api_release_commit" \
-      -f source_commit="$current_main" \
-      -f source_main_commit="$current_main" \
-      -f dry_run="$DRY" \
-      -f push_before="$replay_before" \
-      -f push_after="$replay_after" \
-      -f dispatch_nonce="$dispatch_nonce" \
-      -f coordinated_recovery="$coordinated_recovery"
+    if ! dispatch_stale_replay "$pinned_replay_main" "$current_main" "$api_release_commit"; then
+      exit 1
+    fi
+    echo 'stale_handoff=true' >> "$GITHUB_OUTPUT"
+    echo "stale_handoff_head=$current_main" >> "$GITHUB_OUTPUT"
+    echo "stale_handoff_nonce=$stale_handoff_nonce" >> "$GITHUB_OUTPUT"
+    echo "stale_handoff_title=$stale_handoff_title" >> "$GITHUB_OUTPUT"
     exit 0
   fi
 fi
@@ -352,8 +386,14 @@ while :; do
     echo "::error::impossibile leggere la HEAD corrente per il replay dopo tre tentativi stale"
     exit 1
   fi
+  if ! dispatch_stale_replay "${EXPECTED_MAIN_HEAD:-$validated_head}" "$handoff_head" ''; then
+    echo "::error::impossibile consegnare la sezione al coordinatore sulla HEAD $handoff_head"
+    exit 1
+  fi
   echo "stale_handoff=true" >> "$GITHUB_OUTPUT"
   echo "stale_handoff_head=$handoff_head" >> "$GITHUB_OUTPUT"
-  echo "::notice::tre tentativi stale esauriti: consegno la sezione al coordinatore della matrice sulla HEAD $handoff_head"
+  echo "stale_handoff_nonce=$stale_handoff_nonce" >> "$GITHUB_OUTPUT"
+  echo "stale_handoff_title=$stale_handoff_title" >> "$GITHUB_OUTPUT"
+  echo "::notice::tre tentativi stale esauriti: consegno la sezione al coordinatore sulla HEAD $handoff_head tramite $stale_handoff_title"
   exit 0
 done
