@@ -63,6 +63,9 @@ const blogMetaCantonAppenzelloEn: Record<string, string> = {
     'blog.article.teufen-ricorso-progetto-bundt.title': 'Teufen: appeal concerning the Bündt project partially upheld',
     'blog.article.teufen-ricorso-progetto-bundt.excerpt': 'The Obergericht of Appenzell Ausserrhoden partially upheld the residents\' appeal: the Bündt road project cannot be implemented in its current form.',
     'blog.article.teufen-ricorso-progetto-bundt.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.appenzello-deficit-budget.title': 'Appenzell Ausserrhoden heading toward a deficit of 11,5 million',
+    'blog.article.appenzello-deficit-budget.excerpt': 'The October 28 statement on Appenzell Ausserrhoden\'s 2027 budget indicates a deficit of 11,5 million; any tax increase remains uncertain.',
+    'blog.article.appenzello-deficit-budget.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonAppenzelloEn;

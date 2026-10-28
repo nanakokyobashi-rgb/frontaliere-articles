@@ -63,6 +63,9 @@ const blogMetaCantonAppenzelloDe: Record<string, string> = {
     'blog.article.teufen-ricorso-progetto-bundt.title': 'Teufen: Beschwerde gegen das Projekt Bündt teilweise gutgeheissen',
     'blog.article.teufen-ricorso-progetto-bundt.excerpt': 'Das Obergericht des Kantons Appenzell Ausserrhoden hat die Beschwerde der Anwohner teilweise gutgeheissen: Das Strassenprojekt Bündt kann in seiner aktuellen Form nicht umgesetzt werden.',
     'blog.article.teufen-ricorso-progetto-bundt.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.appenzello-deficit-budget.title': 'Appenzell Ausserrhoden steuert auf ein Defizit von 11,5 Millionen zu',
+    'blog.article.appenzello-deficit-budget.excerpt': 'Die Mitteilung vom 28.',
+    'blog.article.appenzello-deficit-budget.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonAppenzelloDe;

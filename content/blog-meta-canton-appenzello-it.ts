@@ -63,6 +63,9 @@ const blogMetaCantonAppenzelloIt: Record<string, string> = {
     'blog.article.teufen-ricorso-progetto-bundt.title': 'Teufen: accolto in parte il ricorso sul progetto Bündt',
     'blog.article.teufen-ricorso-progetto-bundt.excerpt': 'L\'Obergericht dell\'Appenzello Esterno ha accolto in parte il ricorso degli abitanti: il progetto stradale Bündt non può essere attuato nella forma attuale.',
     'blog.article.teufen-ricorso-progetto-bundt.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.appenzello-deficit-budget.title': 'Appenzello Esterno verso un deficit di 11,5 milioni',
+    'blog.article.appenzello-deficit-budget.excerpt': 'Il comunicato del 28 ottobre sul budget 2027 dell\'Appenzello Esterno indica un deficit di 11,5 milioni; l\'eventuale aumento delle imposte resta incerto.',
+    'blog.article.appenzello-deficit-budget.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonAppenzelloIt;

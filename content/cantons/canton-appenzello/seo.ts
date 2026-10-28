@@ -782,6 +782,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-appenzello-deficit-budget': {
+    title: 'Appenzello Esterno verso un deficit di 11,5 milioni',
+    description: 'Il budget 2027 dell\'Appenzello Esterno indica un deficit di 11,5 milioni; avviato un incarico, resta incerto un aumento delle imposte.',
+    keywords: 'frontalieri, ticino, svizzera, italia, appenzello, esterno, verso, deficit',
+    ogTitle: 'Budget 2027: deficit nell\'Appenzello Esterno',
+    ogDescription: 'Nel comunicato del 28 ottobre sul budget 2027, il governo dell\'Appenzello Esterno segnala un deficit di 11,5 milioni e l\'avvio di un incarico per ulteriori misure. L\'eventuale aumento delle imposte resta da chiarire.',
+    canonicalPath: '/articoli-appenzello/appenzello-deficit-budget/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Appenzello Esterno verso un deficit di 11,5 milioni",
+      "description": "Il budget 2027 dell'Appenzello Esterno indica un deficit di 11,5 milioni; avviato un incarico, resta incerto un aumento delle imposte.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-appenzello-deficit-budget.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-28T18:13:37+00:00",
+      "dateModified": "2026-10-28T18:13:37+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-appenzello/appenzello-deficit-budget/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

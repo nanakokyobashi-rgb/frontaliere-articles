@@ -63,6 +63,9 @@ const blogMetaCantonAppenzelloFr: Record<string, string> = {
     'blog.article.teufen-ricorso-progetto-bundt.title': 'Teufen : le recours concernant le projet Bündt est partiellement admis',
     'blog.article.teufen-ricorso-progetto-bundt.excerpt': 'Le Tribunal cantonal d’Appenzell Rhodes-Extérieures a partiellement admis le recours des habitants : le projet routier Bündt ne peut pas être réalisé dans sa forme actuelle.',
     'blog.article.teufen-ricorso-progetto-bundt.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.appenzello-deficit-budget.title': 'Appenzell Rhodes-Extérieures se dirige vers un déficit de 11,5 millions',
+    'blog.article.appenzello-deficit-budget.excerpt': 'Le communiqué du 28 octobre sur le budget 2027 d\'Appenzell Rhodes-Extérieures indique un déficit de 11,5 millions ; une éventuelle hausse des impôts reste incertaine.',
+    'blog.article.appenzello-deficit-budget.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonAppenzelloFr;
