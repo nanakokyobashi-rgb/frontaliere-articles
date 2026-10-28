@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "carburanti",
-  "updatedAt": "2026-10-27T20:13:53.955Z",
-  "contentHash": "353122b3183455320f33563f498de31387c97209ae99b2bf09805e2d460ecb98",
+  "updatedAt": "2026-10-28T18:22:11.875Z",
+  "contentHash": "d1af9aa2e81661dc9263eafb46bd888ff61402d2ca1812df5f1041934212d5d4",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Appenzello Esterno verso un deficit di 11,5 milioni",
+          "url": "/articoli-appenzello/appenzello-deficit-budget/",
+          "excerpt": "Il comunicato del 28 ottobre sul budget 2027 dell'Appenzello Esterno indica un deficit di 11,5 milioni; l'eventuale aumento delle imposte resta incerto.",
+          "date": "2026-10-28T18:13:37.671Z"
+        },
+        {
           "title": "Teufen: accolto in parte il ricorso sul progetto Bündt",
           "url": "/articoli-appenzello/teufen-ricorso-progetto-bundt/",
           "excerpt": "L'Obergericht dell'Appenzello Esterno ha accolto in parte il ricorso degli abitanti: il progetto stradale Bündt non può essere attuato nella forma attuale.",
@@ -94,12 +100,6 @@
           "url": "/articoli-appenzello/appenzello-cooperazione-strategica-2024/",
           "excerpt": "I governi dei due Appenzello, San Gallo e Turgovia proseguono la collaborazione decisa nel 2024.",
           "date": "2026-10-23T02:03:33.169Z"
-        },
-        {
-          "title": "Spese nette 2027: CHF 802'767; eccedenza quasi CHF 580'000",
-          "url": "/articoli-appenzello/investimenti-tetto-fotovoltaico-2027/",
-          "excerpt": "Nel 2027 sono pianificate spese nette di CHF 802'767; previsto il risanamento del tetto della palestra con fotovoltaico.",
-          "date": "2026-10-22T22:14:01.184Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-27T20:13:53.955Z"
+      "updatedAt": "2026-10-28T18:22:11.875Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Appenzell Ausserrhoden heading toward a deficit of 11,5 million",
+          "url": "/en/appenzell-articles/appenzell-budget-deficit/",
+          "excerpt": "The October 28 statement on Appenzell Ausserrhoden's 2027 budget indicates a deficit of 11,5 million; any tax increase remains uncertain.",
+          "date": "2026-10-28T18:13:37.671Z"
+        },
+        {
           "title": "Teufen: appeal concerning the Bündt project partially upheld",
           "url": "/en/appenzell-articles/teufen-bundt-project-appeal/",
           "excerpt": "The Obergericht of Appenzell Ausserrhoden partially upheld the residents' appeal: the Bündt road project cannot be implemented in its current form.",
@@ -193,12 +199,6 @@
           "url": "/en/appenzell-articles/appenzell-strategic-cooperation-2024/",
           "excerpt": "The governments of the two Appenzells, St.",
           "date": "2026-10-23T02:03:33.169Z"
-        },
-        {
-          "title": "Net expenditures 2027: CHF 802'767; surplus of almost CHF 580'000",
-          "url": "/en/appenzell-articles/roof-solar-investment-2027/",
-          "excerpt": "In 2027, net expenditure of CHF 802'767 is planned; renovation of the gymnasium roof with photovoltaics is planned.",
-          "date": "2026-10-22T22:14:01.184Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-27T20:13:53.955Z"
+      "updatedAt": "2026-10-28T18:22:11.875Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Appenzell Ausserrhoden steuert auf ein Defizit von 11,5 Millionen zu",
+          "url": "/de/appenzell-artikel/appenzell-budget-defizit/",
+          "excerpt": "Die Mitteilung vom 28.",
+          "date": "2026-10-28T18:13:37.671Z"
+        },
+        {
           "title": "Teufen: Beschwerde gegen das Projekt Bündt teilweise gutgeheissen",
           "url": "/de/appenzell-artikel/teufen-buendt-projekt-beschwerde/",
           "excerpt": "Das Obergericht des Kantons Appenzell Ausserrhoden hat die Beschwerde der Anwohner teilweise gutgeheissen: Das Strassenprojekt Bündt kann in seiner aktuellen Form nicht umgesetzt werden.",
@@ -292,12 +298,6 @@
           "url": "/de/appenzell-artikel/appenzell-strategische-zusammenarbeit/",
           "excerpt": "Die Regierungen der beiden Appenzell sowie der Kantone St.",
           "date": "2026-10-23T02:03:33.169Z"
-        },
-        {
-          "title": "Nettoausgaben 2027: CHF 802'767; Ausgabenüberschuss von fast CHF 580'000",
-          "url": "/de/appenzell-artikel/dachsanierung-photovoltaik-investition-2027/",
-          "excerpt": "Für 2027 sind Nettoausgaben von CHF 802'767 geplant; vorgesehen ist die Sanierung des Dachs der Sporthalle mit Photovoltaik.",
-          "date": "2026-10-22T22:14:01.184Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-27T20:13:53.955Z"
+      "updatedAt": "2026-10-28T18:22:11.875Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Appenzell Rhodes-Extérieures se dirige vers un déficit de 11,5 millions",
+          "url": "/fr/articles-appenzell/deficit-budget-appenzell/",
+          "excerpt": "Le communiqué du 28 octobre sur le budget 2027 d'Appenzell Rhodes-Extérieures indique un déficit de 11,5 millions ; une éventuelle hausse des impôts reste incertaine.",
+          "date": "2026-10-28T18:13:37.671Z"
+        },
+        {
           "title": "Teufen : le recours concernant le projet Bündt est partiellement admis",
           "url": "/fr/articles-appenzell/teufen-recours-projet-buendt/",
           "excerpt": "Le Tribunal cantonal d’Appenzell Rhodes-Extérieures a partiellement admis le recours des habitants : le projet routier Bündt ne peut pas être réalisé dans sa forme actuelle.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-appenzell/appenzell-cooperation-strategique-2024/",
           "excerpt": "Les gouvernements des deux Appenzell, de Saint-Gall et de Thurgovie poursuivent la collaboration décidée en 2024.",
           "date": "2026-10-23T02:03:33.169Z"
-        },
-        {
-          "title": "Dépenses nettes 2027 : CHF 802'767 ; excédent de dépenses de près de CHF 580'000",
-          "url": "/fr/articles-appenzell/toit-photovoltaique-investissement-2027/",
-          "excerpt": "En 2027, des dépenses nettes de CHF 802'767 sont prévues ; l’assainissement du toit de la salle de sport avec une installation photovoltaïque est prévu.",
-          "date": "2026-10-22T22:14:01.184Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-27T20:13:53.955Z"
+      "updatedAt": "2026-10-28T18:22:11.875Z"
     }
   }
 }

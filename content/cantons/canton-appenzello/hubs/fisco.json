@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "fisco",
-  "updatedAt": "2026-10-28T17:02:29.143Z",
-  "contentHash": "f10d30f076f31d7c52a6bf0aa3439fddae865b1042fa2caba6a2adaeee8a56fb",
+  "updatedAt": "2026-10-28T18:22:11.875Z",
+  "contentHash": "096b8e98e8260485e2d64f15c2edb9fd9e502180cd3b916488b1841ae2b2b5bc",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -166,6 +166,12 @@
           "date": "2026-10-21T19:06:08.539Z"
         },
         {
+          "title": "Appenzello Esterno verso un deficit di 11,5 milioni",
+          "url": "/articoli-appenzello/appenzello-deficit-budget/",
+          "excerpt": "Il comunicato del 28 ottobre sul budget 2027 dell'Appenzello Esterno indica un deficit di 11,5 milioni; l'eventuale aumento delle imposte resta incerto.",
+          "date": "2026-10-28T18:13:37.671Z"
+        },
+        {
           "title": "Teufen: preventivo 2027 per ridurre il deficit operativo",
           "url": "/articoli-appenzello/teufen-budget-deficit-2027/",
           "excerpt": "Il Comune di Teufen prevede per il 2027 entrate fiscali di 38,9 milioni di franchi, in aumento del 2,2% rispetto al preventivo precedente.",
@@ -200,12 +206,6 @@
           "url": "/articoli-appenzello/heiden-tassa-base-rifiuti/",
           "excerpt": "A Heiden la tassa base sui rifiuti passa da 24 a 31,20 franchi l'anno per nucleo familiare e impresa.",
           "date": "2026-10-08T18:18:38.682Z"
-        },
-        {
-          "title": "Imposta successione Appenzello Interno: aliquote ed esenzioni",
-          "url": "/articoli-svizzera/imposta-successione-appenzello-interno-aliquote/",
-          "excerpt": "Guida alla tassazione successoria in Appenzello Interno: come funzionano aliquote per grado di parentela, esenzioni coniuge e figli, procedura dichiarazione.",
-          "date": "2026-09-09T04:27:23.212Z"
         }
       ],
       "latestCantonArticles": [],
@@ -231,7 +231,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-28T18:22:11.875Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -375,6 +375,12 @@
           "date": "2026-10-21T19:06:08.539Z"
         },
         {
+          "title": "Appenzell Ausserrhoden heading toward a deficit of 11,5 million",
+          "url": "/en/appenzell-articles/appenzell-budget-deficit/",
+          "excerpt": "The October 28 statement on Appenzell Ausserrhoden's 2027 budget indicates a deficit of 11,5 million; any tax increase remains uncertain.",
+          "date": "2026-10-28T18:13:37.671Z"
+        },
+        {
           "title": "Teufen: 2027 budget proposal to reduce the operating deficit",
           "url": "/en/appenzell-articles/teufen-2027-budget-deficit/",
           "excerpt": "The Municipality of Teufen expects tax revenues of 38,9 million francs in 2027, an increase of 2,2% compared with the previous budget.",
@@ -409,12 +415,6 @@
           "url": "/en/appenzell-articles/heiden-base-waste-fee/",
           "excerpt": "In Heiden, the basic waste fee is increasing from 24 to 31,20 francs per year per household and business.",
           "date": "2026-10-08T18:18:38.682Z"
-        },
-        {
-          "title": "Inner Appenzell succession tax: rates and exemptions",
-          "url": "/en/swiss-articles/inheritance-tax-appenzell-innerrhoden-rates/",
-          "excerpt": "Guide to inheritance taxation in Inner Appenzell: how rates work by degree of kinship, spouse and children exemptions, declaration procedure.",
-          "date": "2026-09-09T04:27:23.212Z"
         }
       ],
       "latestCantonArticles": [],
@@ -440,7 +440,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-28T18:22:11.875Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -584,6 +584,12 @@
           "date": "2026-10-21T19:06:08.539Z"
         },
         {
+          "title": "Appenzell Ausserrhoden steuert auf ein Defizit von 11,5 Millionen zu",
+          "url": "/de/appenzell-artikel/appenzell-budget-defizit/",
+          "excerpt": "Die Mitteilung vom 28.",
+          "date": "2026-10-28T18:13:37.671Z"
+        },
+        {
           "title": "Teufen: Budget 2027 zur Verringerung des operativen Defizits",
           "url": "/de/appenzell-artikel/teufen-voranschlag-defizit-2027/",
           "excerpt": "Die Gemeinde Teufen erwartet für 2027 Steuereinnahmen von 38,9 Millionen Franken, was einem Anstieg von 2,2% gegenüber dem vorherigen Budget entspricht.",
@@ -618,12 +624,6 @@
           "url": "/de/appenzell-artikel/heiden-kehrichtgrundgebuehr/",
           "excerpt": "In Heiden steigt die Kehrichtgrundgebühr von 24 auf 31,20 Franken pro Jahr für jeden Haushalt und jedes Unternehmen.",
           "date": "2026-10-08T18:18:38.682Z"
-        },
-        {
-          "title": "Erbschaftssteuer Appenzell Innerrhoden: Steuersätze und Befreiungen",
-          "url": "/de/schweiz-artikel/erbschaftsteuer-appenzell-innerrhoden-saetze/",
-          "excerpt": "Leitfaden zur Erbschaftsbesteuerung in Appenzell Innerrhoden: Wie funktionieren Verwandtschaftssätze, Ehepartner- und Kinderbefreiungen, Erklärungsverfahren?",
-          "date": "2026-09-09T04:27:23.212Z"
         }
       ],
       "latestCantonArticles": [],
@@ -649,7 +649,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-28T18:22:11.875Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -793,6 +793,12 @@
           "date": "2026-10-21T19:06:08.539Z"
         },
         {
+          "title": "Appenzell Rhodes-Extérieures se dirige vers un déficit de 11,5 millions",
+          "url": "/fr/articles-appenzell/deficit-budget-appenzell/",
+          "excerpt": "Le communiqué du 28 octobre sur le budget 2027 d'Appenzell Rhodes-Extérieures indique un déficit de 11,5 millions ; une éventuelle hausse des impôts reste incertaine.",
+          "date": "2026-10-28T18:13:37.671Z"
+        },
+        {
           "title": "Teufen : budget 2027 pour réduire le déficit opérationnel",
           "url": "/fr/articles-appenzell/teufen-budget-2027-pour-reduire-le-deficit-operationnel/",
           "excerpt": "La commune de Teufen prévoit pour 2027 des recettes fiscales de 38,9 millions de francs, en hausse de 2,2% par rapport au budget précédent.",
@@ -827,12 +833,6 @@
           "url": "/fr/articles-appenzell/heiden-taxe-base-dechets/",
           "excerpt": "À Heiden, la taxe de base sur les déchets passe de 24 à 31,20 francs par an pour chaque ménage et entreprise.",
           "date": "2026-10-08T18:18:38.682Z"
-        },
-        {
-          "title": "Impôt succession Appenzell Interne : taux et exonérations",
-          "url": "/fr/articles-suisse/impot-succession-appenzell-rhodes-interieures-taux/",
-          "excerpt": "Guide de la fiscalité successorale à Appenzell Interne : comment fonctionnent les taux par degré de parenté, les exemptions du conjoint et des enfants, la procédure de déclaration.",
-          "date": "2026-09-09T04:27:23.212Z"
         }
       ],
       "latestCantonArticles": [],
@@ -858,7 +858,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-28T18:22:11.875Z"
     }
   }
 }
