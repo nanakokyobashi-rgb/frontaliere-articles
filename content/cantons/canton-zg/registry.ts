@@ -204,4 +204,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'balti-zug-robatech-acquisizione',
+ category: 'novita',
+ date: '2026-10-28T01:30:31.021Z',
+ image: '/images/blog/article-balti-zug-robatech-acquisizione.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['ZG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

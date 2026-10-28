@@ -4,13 +4,9 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-zg::https://www.zugerwoche.ch/zuger-news/detail/kantonsschueler-verwandeln-ideen-in-unternehmen": {
+    "canton-zg::https://www.zugerwoche.ch/zuger-news/detail/schulwege": {
       "section": "canton-zg",
-      "ts": 1792522282488
-    },
-    "canton-zg::https://zg.ch/de/news/2026/september/tigermueckeimkantonzugnachgewiesen": {
-      "section": "canton-zg",
-      "ts": 1792665587552
+      "ts": 1793150441515
     }
   }
 }

@@ -57,6 +57,9 @@ const blogMetaCantonZgDe: Record<string, string> = {
     'blog.article.risch-231-milioni-tasse.title': 'Risch investiert 231 Millionen und senkt die Steuern',
     'blog.article.risch-231-milioni-tasse.excerpt': 'Die Überschrift von Zentralplus weist auf Investitionen in Höhe von 231 Millionen für Risch und eine Senkung der Steuern hin.',
     'blog.article.risch-231-milioni-tasse.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.balti-zug-robatech-acquisizione.title': 'Robatech übernimmt Balti AG in Baar: keine Stellenkürzungen vorgesehen',
+    'blog.article.balti-zug-robatech-acquisizione.excerpt': 'Robatech hat Balti AG Ende September übernommen Balti AG hat ihren Sitz in Baar, Kanton Zug Es sind keine Kürzungen oder Umstrukturierungen geplant Käufer',
+    'blog.article.balti-zug-robatech-acquisizione.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonZgDe;

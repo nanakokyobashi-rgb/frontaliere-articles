@@ -57,6 +57,9 @@ const blogMetaCantonZgFr: Record<string, string> = {
     'blog.article.risch-231-milioni-tasse.title': 'Risch investit 231 millions et réduit les impôts',
     'blog.article.risch-231-milioni-tasse.excerpt': 'Le titre de Zentralplus signale 231 millions d’investissements pour Risch et une réduction des impôts.',
     'blog.article.risch-231-milioni-tasse.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.balti-zug-robatech-acquisizione.title': 'Robatech acquiert Balti AG à Baar : aucune suppression de postes prévue',
+    'blog.article.balti-zug-robatech-acquisizione.excerpt': 'Robatech a repris Balti AG fin septembre Balti AG est basée à Baar, dans le canton de Zoug Aucun licenciement ou réorganisation n\'est prévu Acquéreur : Robatech',
+    'blog.article.balti-zug-robatech-acquisizione.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonZgFr;

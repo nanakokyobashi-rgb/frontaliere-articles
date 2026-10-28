@@ -57,6 +57,9 @@ const blogMetaCantonZgEn: Record<string, string> = {
     'blog.article.risch-231-milioni-tasse.title': 'Risch invests 231 million and reduces taxes',
     'blog.article.risch-231-milioni-tasse.excerpt': 'The Zentralplus headline reports 231 million in investments for Risch and a reduction in taxes.',
     'blog.article.risch-231-milioni-tasse.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.balti-zug-robatech-acquisizione.title': 'Robatech acquires Balti AG in Baar: no cuts expected',
+    'blog.article.balti-zug-robatech-acquisizione.excerpt': 'Robatech acquired Balti AG at the end of September Balti AG is based in Baar, in the Canton of Zug No cuts or restructuring are planned Buyer: Robatech AG',
+    'blog.article.balti-zug-robatech-acquisizione.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonZgEn;

@@ -21,6 +21,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'esecutivo-zugo-mandato-2030': { it: 'esecutivo-zugo-mandato-2030', en: 'zug-government-term-2030', de: 'zug-regierungsrat-amtsperiode-2030', fr: 'gouvernement-zoug-mandat-2030' },
  'zugo-agenda-kantonsrat-ottobre': { it: 'zugo-agenda-kantonsrat-ottobre', en: 'zug-cantonal-council-agenda-october-2026', de: 'zug-traktandenliste-kantonsrat-oktober-2026', fr: 'zoug-ordre-du-jour-conseil-octobre-2026' },
  'risch-231-milioni-tasse': { it: 'risch-231-milioni-tasse', en: 'risch-231-million-tax-cut', de: 'risch-231-millionen-steuern', fr: 'risch-231-millions-impots' },
+ 'balti-zug-robatech-acquisizione': { it: 'balti-zug-robatech-acquisizione', en: 'robatech-takes-over-balti-baar', de: 'robatech-uebernimmt-balti-baar', fr: 'robatech-reprend-balti-baar' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
