@@ -4,17 +4,17 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-28T09:13:19.877Z",
-  "contentHash": "ebb8729704835673e9c97e45723a3f5e73f6fec0dc13e586036b3d2f8de032e1",
+  "updatedAt": "2026-10-28T10:03:35.525Z",
+  "contentHash": "71d9d116ebfd4cbee30734bf52256c2eac1065875c2d48ae35cb6adcd43d7fca",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-26T23:59:59.000Z",
+      "updatedAt": "2026-10-27T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-28T00:48:17.406Z",
+      "updatedAt": "2026-10-28T06:23:27.523Z",
       "keyFacts": 1
     },
     {
@@ -33,7 +33,7 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Diessenhofen – Gailingen am Hochrhein, settimana conclusa: 26 ottobre 2026"
+          "note": "Diessenhofen – Gailingen am Hochrhein, settimana conclusa: 27 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
@@ -45,7 +45,7 @@
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 20 ottobre 2026 – 26 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 21 ottobre 2026 – 27 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Diessenhofen – Gailingen am Hochrhein",
@@ -74,13 +74,18 @@
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-26T23:59:59.000Z"
+          "updatedAt": "2026-10-27T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
           "title": "Chiusure, cantieri e disagi",
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
+            {
+              "label": "A23 Widenhorn -> Diramazione Meggenhus tra Svincolo autostradale Arbon West E Svincolo autostradale Arbon Süd Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "value": "Traffico",
+              "date": "2026-10-28T05:54:00.000Z"
+            },
             {
               "label": "A7 Kreuzlingen -> Winterthur tra Svincolo autostradale Kreuzlingen Nord E Svincolo autostradale Kreuzlingen Süd Situazione: problemi di traffico cantiere, lunghezza [km] 1.8 Limitazione del…",
               "value": "Cantiere",
@@ -101,7 +106,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-28T00:48:17.406Z"
+          "updatedAt": "2026-10-28T06:23:27.523Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -199,7 +204,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-28T09:13:19.877Z"
+      "updatedAt": "2026-10-28T10:03:35.525Z"
     },
     "en": {
       "canton": "TG",
@@ -210,7 +215,7 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Diessenhofen – Gailingen am Hochrhein, week ending 26 October 2026"
+          "note": "Diessenhofen – Gailingen am Hochrhein, week ending 27 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
@@ -222,7 +227,7 @@
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 20 October 2026 to 26 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 21 October 2026 to 27 October 2026, fastest first.",
           "items": [
             {
               "label": "Diessenhofen – Gailingen am Hochrhein",
@@ -251,13 +256,18 @@
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-26T23:59:59.000Z"
+          "updatedAt": "2026-10-27T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
           "title": "Closures, roadworks and disruptions",
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
+            {
+              "label": "A23 Widenhorn -> Diramazione Meggenhus tra Svincolo autostradale Arbon West E Svincolo autostradale Arbon Süd Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "value": "Traffic",
+              "date": "2026-10-28T05:54:00.000Z"
+            },
             {
               "label": "A7 Kreuzlingen -> Winterthur tra Svincolo autostradale Kreuzlingen Nord E Svincolo autostradale Kreuzlingen Süd Situazione: problemi di traffico cantiere, lunghezza [km] 1.8 Limitazione del…",
               "value": "Roadworks",
@@ -278,7 +288,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-28T00:48:17.406Z"
+          "updatedAt": "2026-10-28T06:23:27.523Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -376,7 +386,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-28T09:13:19.877Z"
+      "updatedAt": "2026-10-28T10:03:35.525Z"
     },
     "de": {
       "canton": "TG",
@@ -387,7 +397,7 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Diessenhofen – Gailingen am Hochrhein, Woche bis 26. Oktober 2026"
+          "note": "Diessenhofen – Gailingen am Hochrhein, Woche bis 27. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
@@ -399,7 +409,7 @@
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 20. Oktober 2026 bis 26. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 21. Oktober 2026 bis 27. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Diessenhofen – Gailingen am Hochrhein",
@@ -428,13 +438,18 @@
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-26T23:59:59.000Z"
+          "updatedAt": "2026-10-27T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
           "title": "Sperrungen, Baustellen und Störungen",
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
+            {
+              "label": "A23 Widenhorn -> Verzweigung Meggenhus zwischen Anschluss Arbon-West und Anschluss Arbon-Süd Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
+              "value": "Verkehr",
+              "date": "2026-10-28T05:54:00.000Z"
+            },
             {
               "label": "A7 Kreuzlingen -> Winterthur zwischen Anschluss Kreuzlingen-Nord und Anschluss Kreuzlingen-Süd Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 1.8 Verkehrsführung: Fahrbahnverengung auf einen…",
               "value": "Baustelle",
@@ -455,7 +470,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-28T00:48:17.406Z"
+          "updatedAt": "2026-10-28T06:23:27.523Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -553,7 +568,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-28T09:13:19.877Z"
+      "updatedAt": "2026-10-28T10:03:35.525Z"
     },
     "fr": {
       "canton": "TG",
@@ -564,7 +579,7 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Diessenhofen – Gailingen am Hochrhein, semaine jusqu’au 26 octobre 2026"
+          "note": "Diessenhofen – Gailingen am Hochrhein, semaine jusqu’au 27 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
@@ -576,7 +591,7 @@
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 20 octobre 2026 au 26 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 21 octobre 2026 au 27 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Diessenhofen – Gailingen am Hochrhein",
@@ -605,13 +620,18 @@
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-26T23:59:59.000Z"
+          "updatedAt": "2026-10-27T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
           "title": "Fermetures, chantiers et perturbations",
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
+            {
+              "label": "A23 Widenhorn -> Echangeur de Meggenhus entre Jonction autoroutière Arbon-Ouest et Jonction autoroutière Arbon-Sud Situation: trafic en accordéon Raison: surcharge de trafic",
+              "value": "Trafic",
+              "date": "2026-10-28T05:54:00.000Z"
+            },
             {
               "label": "A7 Kreuzlingen -> Winterthur entre Jonction autoroutière Kreuzlingen-Nord et Jonction autoroutière Kreuzlingen-Sud Situation: trafic perturbé travaux, longueur [km] 1.8 Gestion du trafic…",
               "value": "Chantier",
@@ -632,7 +652,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-28T00:48:17.406Z"
+          "updatedAt": "2026-10-28T06:23:27.523Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -730,7 +750,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-28T09:13:19.877Z"
+      "updatedAt": "2026-10-28T10:03:35.525Z"
     }
   }
 }
