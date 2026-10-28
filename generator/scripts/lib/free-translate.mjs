@@ -33,6 +33,7 @@ import { stripTranslationSentinels, translationSentinelRegExp } from './translat
 import { translateWithLocalOpusMt, localOpusMtEnabled } from './local-opus-mt.mjs';
 import { getKeyFactsHeading, getTldrHeading } from './ai-search-template.mjs';
 import { detectAiMetaResponse } from './ai-meta-response.mjs';
+import { detectLanguageWithConfidence } from './detect-language.mjs';
 import { repairLlmJson } from './llm-json-repair.mjs';
 import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from './fetch-with-ref-timeout.mjs';
 export { fetchWithRefTimeout } from './fetch-with-ref-timeout.mjs';
@@ -1944,7 +1945,6 @@ const CODEX_TRANSLATE_BATCH_MAX_TEXTS_DEFAULT = 5;
 const CODEX_TRANSLATE_BATCH_MAX_TEXTS_LIMIT = 50;
 const CODEX_TRANSLATE_BATCH_MAX_CHARS_DEFAULT = 3000;
 const CODEX_TRANSLATE_BATCH_MAX_CHARS_LIMIT = 50_000;
-const CODEX_TRANSLATE_BATCH_COLLECTION_MS = 25;
 // Sotto questo residuo una chiamata non ha il tempo di finire: stesso minimo
 // che ai-models.mjs applica alla lane (CODEX_CLI_MIN_TIMEOUT_MS).
 const CODEX_TRANSLATE_MIN_CALL_MS = 15_000;
@@ -1954,6 +1954,12 @@ const CODEX_TRANSLATE_MIN_CALL_MS = 15_000;
 const CODEX_TRANSLATE_CALL_TIMEOUT_MS_DEFAULT = 180_000;
 const CODEX_TRANSLATE_CALL_TIMEOUT_MS_MAX = 600_000;
 const CODEX_TRANSLATE_FAILURE_LIMIT = 3;
+// Deve restare allineato con l'opt-in passato alla lane in questo modulo e nei
+// chiamanti delle recovery. Il ledger conta la chiamata iniziale qui, poi ogni
+// retry fisico attraverso `onCodexTransportRetry` in ai-models.mjs. Un producer
+// che esegue piu' chiamate fisiche dentro la stessa lane usa `admitCall`, che
+// riserva le iniziali successive sullo stesso ledger.
+export const CODEX_TRANSLATE_TRANSPORT_RETRIES = 2;
 
 function codexTranslateCallTimeoutMs() {
   const raw = String(process.env.FREE_TRANSLATE_CODEX_CALL_TIMEOUT_MS || '').trim();
@@ -2070,13 +2076,9 @@ let _codexBusySince = 0;
 let _codexInFlight = 0;
 /** @type {Array<{clean: string, sourceLang: string, targetLang: string, outcome: any, resolve: (value: string) => void, reject: (error: unknown) => void}>} */
 let _codexPending = [];
-let _codexPumpTimer = null;
+/** @type {Array<{run: (args: {deadlineMs: number, admission: object, admitCall: () => object | null, reserveTransportRetry: (callDeadlineMs?: number | null) => boolean}) => Promise<any>, fallback: (() => any) | null, processDeadlineMs: number | null | undefined, resolve: (value: any) => void, reject: (error: unknown) => void}>} */
+let _codexLanePending = [];
 let _codexConsecutiveFailures = 0;
-// The same source title can arrive under different source labels and from
-// different jobs. Count one normalized text/target pair once during the
-// current failure streak: repeated echoes are not independent evidence that
-// the model is broken.
-let _codexConsecutiveFailureKeys = new Set();
 let _codexStopReason = '';
 let _codexEngagedLogged = false;
 /** @type {Promise<any> | null} */
@@ -2128,26 +2130,13 @@ export function _codexQuotaStopReason(err) {
   return 'quota esaurita (quota/rate-limit)';
 }
 
-function _codexFailureKey(text, targetLang) {
-  return JSON.stringify([
-    normalizeBlock(text).toLowerCase(),
-    String(targetLang || '').trim().toLowerCase(),
-  ]);
-}
-
 function _resetCodexFailureStreak() {
   _codexConsecutiveFailures = 0;
-  _codexConsecutiveFailureKeys.clear();
 }
 
 // One failed REQUEST is one failure, whatever the number of texts it carried:
-// a single group that times out must not stop the tier on its own. A request
-// whose texts were all already seen in the current streak adds nothing.
-function _noteCodexFailure(texts, targetLang) {
-  const keys = [...texts].map((text) => _codexFailureKey(text, targetLang));
-  const fresh = keys.filter((key) => !_codexConsecutiveFailureKeys.has(key));
-  if (fresh.length === 0) return;
-  for (const key of fresh) _codexConsecutiveFailureKeys.add(key);
+// a single group that times out must not stop the tier on its own.
+function _noteCodexFailure() {
   _codexConsecutiveFailures += 1;
   if (_codexConsecutiveFailures >= CODEX_TRANSLATE_FAILURE_LIMIT) {
     _stopCodex(`${_codexConsecutiveFailures} fallimenti consecutivi`);
@@ -2345,16 +2334,115 @@ function _codexSpentNow() {
   return _codexSpentMs + (_codexBusySince ? Date.now() - _codexBusySince : 0);
 }
 
-function _scheduleCodexPump() {
-  if (!_codexBatchingExplicitlyEnabled() || _codexInFlight > 0) {
-    _pumpCodex();
-    return;
+function _beginTrackedCodexCall(now = Date.now()) {
+  if (_codexInFlight === 0) _codexBusySince = now;
+  _codexInFlight += 1;
+}
+
+function _finishTrackedCodexCall(at = Date.now()) {
+  if (_codexInFlight <= 0) return;
+  _codexInFlight -= 1;
+  if (_codexInFlight === 0) {
+    _codexSpentMs += Math.max(0, at - _codexBusySince);
+    _codexBusySince = 0;
   }
-  if (_codexPumpTimer !== null) return;
-  _codexPumpTimer = setTimeout(() => {
-    _codexPumpTimer = null;
+}
+
+/**
+ * Ammette una chiamata Codex che appartiene alla traduzione dell'articolo.
+ * Anche le recovery fuori dalla coda free-MT devono consumare lo stesso
+ * budget: altrimenti i retry JSON riaprirebbero una seconda quota proprio
+ * dopo l'esaurimento della corsia principale.
+ *
+ * Restituisce la deadline della chiamata e una chiusura idempotente che misura
+ * il tempo occupato; `null` significa che la chiamata non va avviata.
+ */
+function _admitCodexTranslationCall({
+  now = Date.now(),
+  processDeadlineMs = _codexProcessDeadlineMs,
+  trackInFlight = true,
+} = {}) {
+  if (_codexStopReason || !_codexSocketPresent()) return null;
+  const maxCalls = _codexBudget('FREE_TRANSLATE_CODEX_MAX_CALLS', CODEX_TRANSLATE_MAX_CALLS_DEFAULT);
+  const maxMs = _codexBudget('FREE_TRANSLATE_CODEX_MAX_MS', CODEX_TRANSLATE_MAX_MS_DEFAULT);
+  if (_codexCalls >= maxCalls) {
+    _stopCodex(`budget di ${maxCalls} chiamate esaurito (FREE_TRANSLATE_CODEX_MAX_CALLS)`);
+    return null;
+  }
+  const remainingMs = maxMs - _codexSpentNow();
+  if (remainingMs < CODEX_TRANSLATE_MIN_CALL_MS) {
+    _stopCodex(`budget di ${Math.round(maxMs / 1000)}s esaurito (FREE_TRANSLATE_CODEX_MAX_MS)`);
+    return null;
+  }
+  const deadlineMs = codexCallDeadlineMs({ now, budgetRemainingMs: remainingMs, processDeadlineMs });
+  if (deadlineMs === null) {
+    _stopCodex('scadenza del processo troppo vicina per una nuova chiamata');
+    return null;
+  }
+  _codexCalls += 1;
+  if (trackInFlight) _beginTrackedCodexCall(now);
+  let finished = false;
+  return {
+    deadlineMs,
+    finish(at = Date.now()) {
+      if (finished) return;
+      finished = true;
+      if (trackInFlight) _finishTrackedCodexCall(at);
+    },
+  };
+}
+
+export function beginCodexTranslationCall(options = {}) {
+  const { trackInFlight = true, ...admissionOptions } = options;
+  return _admitCodexTranslationCall({ ...admissionOptions, trackInFlight });
+}
+
+/**
+ * Riserva un solo retry fisico, senza aprire una seconda corsia temporale.
+ * `callDeadlineMs` e' la deadline gia' concessa alla chiamata che ha fallito:
+ * un retry non puo' allungarla solo perche' il processo ha ancora margine.
+ */
+function _reserveCodexTransportRetry(processDeadlineMs = _codexProcessDeadlineMs, callDeadlineMs = null) {
+  const admission = _admitCodexTranslationCall({
+    processDeadlineMs: callDeadlineMs ?? processDeadlineMs,
+    trackInFlight: false,
+  });
+  if (!admission) return false;
+  admission.finish();
+  return true;
+}
+
+/**
+ * Esegue una chiamata Codex in una corsia condivisa con il batching della
+ * cascata. Le recovery che passano da `callLLM` non possono usare
+ * `_codexPending` (il loro prompt non e' un testo traducibile a id), ma non
+ * devono nemmeno aggirare `FREE_TRANSLATE_CODEX_LANES`.
+ */
+export function withCodexTranslationLane({
+  run,
+  fallback = null,
+  processDeadlineMs = _codexProcessDeadlineMs,
+} = {}) {
+  if (typeof run !== 'function') throw new TypeError('withCodexTranslationLane: `run` è richiesto');
+  const useFallback = () => (typeof fallback === 'function' ? fallback() : null);
+  if (_codexStopReason || !_codexSocketPresent()) {
+    try {
+      return Promise.resolve(useFallback());
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  }
+  return new Promise((resolve, reject) => {
+    _codexLanePending.push({ run, fallback, processDeadlineMs, resolve, reject });
     _pumpCodex();
-  }, CODEX_TRANSLATE_BATCH_COLLECTION_MS);
+  });
+}
+
+function _scheduleCodexPump() {
+  // The corpus callers historically rely on the first request starting
+  // immediately; queued texts are grouped as soon as the lane becomes free.
+  // Keep the scheduler synchronous even when a batch ceiling is configured.
+  _pumpCodex();
 }
 
 /**
@@ -2363,18 +2451,57 @@ function _scheduleCodexPump() {
  * cresce, e il prossimo posto libero la svuota a gruppi.
  */
 function _pumpCodex() {
-  while (_codexPending.length > 0 && _codexInFlight < _codexLanes()) {
-    const group = _takeCodexGroup();
-    if (_codexInFlight === 0) _codexBusySince = Date.now();
-    _codexInFlight += 1;
-    _runCodexGroup(group).finally(() => {
-      _codexInFlight -= 1;
-      if (_codexInFlight === 0) {
-        _codexSpentMs += Date.now() - _codexBusySince;
-        _codexBusySince = 0;
-      }
-      _pumpCodex();
-    });
+  while ((_codexPending.length > 0 || _codexLanePending.length > 0)
+    && _codexInFlight < _codexLanes()) {
+    if (_codexPending.length > 0) {
+      const group = _takeCodexGroup();
+      _beginTrackedCodexCall();
+      _runCodexGroup(group).finally(() => {
+        _finishTrackedCodexCall();
+        _pumpCodex();
+      });
+      continue;
+    }
+
+    const request = _codexLanePending.shift();
+    _beginTrackedCodexCall();
+    Promise.resolve()
+      .then(async () => {
+        const admission = beginCodexTranslationCall({
+          processDeadlineMs: request.processDeadlineMs,
+          trackInFlight: false,
+        });
+        if (!admission) return typeof request.fallback === 'function' ? request.fallback() : null;
+        let firstCall = true;
+        const admitCall = () => {
+          if (firstCall) {
+            firstCall = false;
+            return admission;
+          }
+          return beginCodexTranslationCall({
+            processDeadlineMs: request.processDeadlineMs,
+            trackInFlight: false,
+          });
+        };
+        try {
+          return await request.run({
+            deadlineMs: admission.deadlineMs,
+            admission,
+            admitCall,
+            reserveTransportRetry: (callDeadlineMs) => _reserveCodexTransportRetry(request.processDeadlineMs, callDeadlineMs),
+          });
+        } finally {
+          // `trackInFlight:false` leaves the shared lane measurement to the
+          // worker above, but the admission still owns an idempotent finish
+          // contract and must be closed at the same boundary.
+          admission.finish();
+        }
+      })
+      .then(request.resolve, request.reject)
+      .finally(() => {
+        _finishTrackedCodexCall();
+        _pumpCodex();
+      });
   }
 }
 
@@ -2488,7 +2615,14 @@ async function _translateGroupWithCodex(group) {
     prefer: [model],
     // AI_MODELS_FORCE_CHAIN non deve trasformare questo tier in un'altra cascata.
     bypassForceChain: true,
+    retryCodexTransport: true,
+    codexTransportRetries: CODEX_TRANSLATE_TRANSPORT_RETRIES,
+    codexTransportBackoffMs: 1_000,
     deadlineMs: callDeadlineMs,
+    // The first attempt is admitted above. ai-models.mjs calls this hook only
+    // immediately before a physical transport retry, so every broker attempt
+    // consumes the same shared ledger without reserving retries that never run.
+    onCodexTransportRetry: (retryDeadlineMs) => _reserveCodexTransportRetry(_codexProcessDeadlineMs, retryDeadlineMs),
   };
   let byText;
   try {
@@ -2616,16 +2750,24 @@ async function _codexTranslateBatch(call, opts, texts, sourceLang, targetLang) {
     ...opts,
     jsonMode: true,
     jsonSchema: { name: 'translations', schema: CODEX_TRANSLATE_BATCH_SCHEMA },
+    // The Codex CLI broker must preserve fenced/repairable output here. This
+    // function owns repairLlmJson plus per-item validation; rejecting the raw
+    // string one layer below would make that recovery path unreachable.
+    deferJsonValidation: true,
   });
   const byText = new Map();
   let parsed = raw;
   if (typeof raw === 'string') {
-    try { parsed = JSON.parse(raw); } catch { return byText; }
+    // Structured-output mode is the first guard, not the only one: the broker
+    // can still carry a fenced answer or a response with a stray quote. Reuse
+    // the same bounded repair used by create-article, then validate every item
+    // fail-closed. A malformed item must not make the whole batch look valid.
+    try { parsed = JSON.parse(repairLlmJson(raw)); } catch { return byText; }
   }
   const items = Array.isArray(parsed?.items) ? parsed.items : [];
   for (const entry of items) {
-    const id = Number(entry?.id);
-    if (!Number.isInteger(id) || id < 1 || id > texts.length || typeof entry?.text !== 'string') continue;
+    const id = entry?.id;
+    if (!Number.isSafeInteger(id) || id < 1 || id > texts.length || typeof entry?.text !== 'string') continue;
     const source = texts[id - 1];
     if (byText.has(source)) continue;
     const out = _stripCodeFence(entry.text, source);
@@ -2640,10 +2782,7 @@ async function _codexTranslateBatch(call, opts, texts, sourceLang, targetLang) {
  * `null` ripristina `callLLM`.
  */
 export function setCodexTranslateCallForTests(fn) {
-  if (_codexPumpTimer !== null) {
-    clearTimeout(_codexPumpTimer);
-    _codexPumpTimer = null;
-  }
+  _codexLanePending = [];
   _codexCallForTests = typeof fn === 'function' ? fn : null;
   _codexCalls = 0;
   _codexTexts = 0;
