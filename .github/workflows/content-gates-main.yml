@@ -82,6 +82,7 @@ jobs:
             /content/
             /data/article-source-urls.json
             /data/article-type-cutover.json
+            /data/blog-articles-data.ts
             /data/evergreen-verifications.json
             /data/retired-articles.json
             /data/swiss-article-source-urls.json
