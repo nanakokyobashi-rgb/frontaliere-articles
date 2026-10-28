@@ -45901,6 +45901,16 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'gaggiolo-articoli-lusso-non-dichiarati',
+ category: 'fiscale',
+ date: '2026-10-28T15:59:32.918Z',
+ image: '/images/blog/article-gaggiolo-articoli-lusso-non-dichiarati.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
