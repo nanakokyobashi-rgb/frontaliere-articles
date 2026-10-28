@@ -329,6 +329,16 @@
       }
     },
     {
+      "path": "scripts/ci/upload-cdn-batch.mjs",
+      "mode": "corpus-only",
+      "reason": "Uploader batch bounded del fast-publish-article: raggruppa gli asset CDN per namespace immagine, mantiene un lease condiviso e limita i worker concorrenti prima di delegare il PUT al helper per singolo file. Il sito non possiede il publisher CDN corpus-side né questo entry point, quindi il path resta corpus-only per costruzione.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-28"
+      }
+    },
+    {
       "path": "scripts/ci/section-bootstrap-lock.mjs",
       "mode": "corpus-only",
       "reason": "Acquisisce e rilascia il lock R2 breve che coordina il bootstrap HTML di una sezione live con il flip del registry API/edge; il sito consuma soltanto la release risultante e non possiede il publisher o il suo workflow.",
