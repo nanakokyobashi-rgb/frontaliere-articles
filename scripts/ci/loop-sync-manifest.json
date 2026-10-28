@@ -311,7 +311,7 @@
     {
       "path": "scripts/ci/fetch-push-base-if-missing.sh",
       "mode": "corpus-only",
-      "reason": "Guard condiviso dei fast publisher del corpus: rileva i checkout shallow, ripristina la storia completa con retry, timeout e budget bounded, aggiorna opzionalmente la punta di origin/main e verifica `github.event.before` quando serve, cosi' planner e recovery possono calcolare il delta senza fetch duplicati o bloccanti. Esiste solo qui perche' i fast publisher e il loro checkout appartengono al corpus; il sito non possiede un publisher equivalente.",
+      "reason": "Guard condiviso dei fast publisher del corpus: rileva i checkout shallow, ripristina la storia completa quando serve con retry, timeout e budget bounded, oppure aggiorna solo la punta di origin/main nei replay che non calcolano delta storici; verifica `github.event.before` quando serve, cosi' planner e recovery possono calcolare il delta senza fetch duplicati o bloccanti. Esiste solo qui perche' i fast publisher e il loro checkout appartengono al corpus; il sito non possiede un publisher equivalente.",
       "baseline": {
         "site": null,
         "corpus": "46bababe9a6ac465",

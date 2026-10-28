@@ -1237,7 +1237,7 @@ jobs:
           max_readiness_attempts=3
           while (( readiness_attempts < max_readiness_attempts )); do
             readiness_attempts=$((readiness_attempts + 1))
-            if ! PUSH_BEFORE='' FETCH_MAIN=true bash scripts/ci/fetch-push-base-if-missing.sh; then
+            if ! REQUIRE_FULL_HISTORY=false PUSH_BEFORE='' FETCH_MAIN=true bash scripts/ci/fetch-push-base-if-missing.sh; then
               echo "::error::impossibile aggiornare main tramite il guard bounded prima del replay API"
               exit 1
             fi

@@ -47,6 +47,15 @@ case "$fetch_main" in
     ;;
 esac
 
+require_full_history="${REQUIRE_FULL_HISTORY:-true}"
+case "$require_full_history" in
+  true|false) ;;
+  *)
+    echo "::error::REQUIRE_FULL_HISTORY deve essere true o false: $require_full_history"
+    exit 1
+    ;;
+esac
+
 if ! command -v timeout >/dev/null 2>&1 && ! command -v perl >/dev/null 2>&1; then
   echo "::error::nessun runner per il timeout bounded dei fetch Git (servono timeout o perl)"
   exit 1
@@ -81,7 +90,7 @@ fetch_ref_with_retries() {
 
 shallow_state="$(git rev-parse --is-shallow-repository 2>/dev/null || true)"
 main_ref_fetched=false
-if [ "$shallow_state" = 'true' ]; then
+if [ "$shallow_state" = 'true' ] && [ "$require_full_history" = 'true' ]; then
   # actions/checkout is configured with fetch-depth: 0, but a queued replay
   # can still arrive with a shallow worktree (for example after a checkout
   # fallback or a runner-side fetch interruption). The preflight derives a
@@ -108,6 +117,11 @@ if [ "$shallow_state" = 'true' ]; then
     echo "::error::checkout Git ancora shallow dopo $history_fetch_attempts tentativi: high-water precedente non verificabile"
     exit 1
   fi
+elif [ "$shallow_state" = 'true' ]; then
+  # Some release handoffs only need the exact remote main ref. Requiring the
+  # entire corpus history in that path turns a small bounded fetch into an
+  # unbounded transfer and can strand the staged release before the API replay.
+  echo '::notice::checkout Git shallow mantenuto: il chiamante richiede solo la punta remota, non la storia completa'
 fi
 
 if [ "$fetch_main" = 'true' ]; then
