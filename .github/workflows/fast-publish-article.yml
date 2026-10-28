@@ -619,6 +619,11 @@ jobs:
         if: github.event_name == 'push'
         env:
           PUSH_BEFORE: ${{ github.event.before }}
+          # The publish checkout only needs the exact pre-push commit for
+          # redirect generation. Resolve already performs the full-history
+          # high-water check; unshallowing this per-shard checkout again can
+          # consume the publish budget before rendering starts (#3115).
+          REQUIRE_FULL_HISTORY: 'false'
         run: bash scripts/ci/fetch-push-base-if-missing.sh
 
       - name: Download resolved article plan
