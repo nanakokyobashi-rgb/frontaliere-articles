@@ -662,6 +662,18 @@ jobs:
           fi
           echo 'fresh=true' >> "$GITHUB_OUTPUT"
 
+      - name: Set up Node
+        if: steps.replay_freshness.outputs.fresh == 'true' || github.event.workflow_run.head_sha != ''
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      # workflow_run stale resolves an API release; bounded stale does not.
+      - name: Setup isolated article source runtime
+        if: steps.replay_freshness.outputs.fresh == 'true' || github.event.workflow_run.head_sha != ''
+        uses: ./.replay-dispatcher-source/.github/actions/setup-article-source-runtime
+
       # Un replay stantio usa il workflow corrente su main e la sua HEAD come
       # sorgente del corpus. Per una run API osservata conserva P come release
       # solo se P copre tutti gli input raggiungibili dalla HEAD corrente;
@@ -793,17 +805,6 @@ jobs:
             fi
           fi
           bash scripts/ci/fetch-push-base-if-missing.sh
-
-      - name: Set up Node
-        if: steps.replay_freshness.outputs.fresh == 'true'
-        uses: actions/setup-node@v7
-        with:
-          node-version: '22'
-          cache: 'npm'
-
-      - name: Setup isolated article source runtime
-        if: steps.replay_freshness.outputs.fresh == 'true'
-        uses: ./.replay-dispatcher-source/.github/actions/setup-article-source-runtime
 
       - name: Install dependencies
         if: steps.replay_freshness.outputs.fresh == 'true'
