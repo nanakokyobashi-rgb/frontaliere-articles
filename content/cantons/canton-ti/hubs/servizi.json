@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-10-28T10:03:35.525Z",
-  "contentHash": "71376bb38f297eadb70036b1520025946ada68e188ad4a9cb3ab34064dd0b753",
+  "updatedAt": "2026-10-28T12:54:21.681Z",
+  "contentHash": "cc786fe6f79201aba4a7662f1a06455a219d503023e5d110635affa76f343098",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -254,10 +254,10 @@
           "date": "2026-10-14T08:06:11.860Z"
         },
         {
-          "title": "Tassa salute e ristorni: tavolo del 17 settembre a Berna",
-          "url": "/articoli-frontaliere/tassa-salute-ristorni-17-settembre/",
-          "excerpt": "Il 17 settembre si discute di tassa sulla salute, doppia imposizione e statuto; il Ticino minaccia di bloccare i ristorni, mettendo a rischio 120 milioni di franchi per i Comuni di frontiera.",
-          "date": "2026-10-12T19:46:56.997Z"
+          "title": "Mozione in Ticino contro la tassa sulla salute",
+          "url": "/articoli-frontaliere/mozione-ticino-ristorni-salute/",
+          "excerpt": "Mozione interpartitica presentata in Gran Consiglio La misura italiana è contestata sull'articolo 9 Il Ticino minaccia il blocco dei ristorni Oggetto",
+          "date": "2026-10-28T12:47:07.552Z"
         }
       ],
       "latestCantonArticles": [],
@@ -295,7 +295,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-10-28T10:03:35.525Z"
+      "updatedAt": "2026-10-28T12:54:21.681Z"
     },
     "en": {
       "canton": "TI",
@@ -516,10 +516,10 @@
           "date": "2026-10-14T08:06:11.860Z"
         },
         {
-          "title": "Health tax and rebates: roundtable on September 17 in Bern",
-          "url": "/en/cross-border-articles/health-tax-and-rebates-roundtable-on-september-17-in-bern/",
-          "excerpt": "On September 17, the health tax, double taxation and statute will be discussed; Ticino threatens to block the tax rebates, putting 120 million francs for border municipalities at risk.",
-          "date": "2026-10-12T19:46:56.997Z"
+          "title": "Motion in Ticino against the health tax",
+          "url": "/en/cross-border-articles/ticino-motion-health-tax/",
+          "excerpt": "Interparty motion submitted to the Grand Council The Italian measure is challenged over Article 9 Ticino threatens to block the tax revenue transfers Subject",
+          "date": "2026-10-28T12:47:07.552Z"
         }
       ],
       "latestCantonArticles": [],
@@ -553,7 +553,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-10-28T10:03:35.525Z"
+      "updatedAt": "2026-10-28T12:54:21.681Z"
     },
     "de": {
       "canton": "TI",
@@ -774,10 +774,10 @@
           "date": "2026-10-14T08:06:11.860Z"
         },
         {
-          "title": "Gesundheitssteuer & Rückerstattungen: Termin in Bern",
-          "url": "/de/grenzgaenger-artikel/gesundheitssteuer-ruckerstattungen-termin-in-bern/",
-          "excerpt": "Am 17. September wird über die Gesundheitssteuer, die Doppelbesteuerung und den Status diskutiert; das Tessin droht, die Steuerrückvergütungen zu blockieren, und gefährdet damit 120 Millionen Franken für die…",
-          "date": "2026-10-12T19:46:56.997Z"
+          "title": "Motion im Tessin gegen die Gesundheitssteuer",
+          "url": "/de/grenzgaenger-artikel/tessin-motion-gesundheitsabgabe/",
+          "excerpt": "Interparteiliche Motion im Grossen Rat eingereicht Die italienische Massnahme wird im Hinblick auf Artikel 9 beanstandet Das Tessin droht mit der Blockierung der Rückvergütungen Gegenstand",
+          "date": "2026-10-28T12:47:07.552Z"
         }
       ],
       "latestCantonArticles": [],
@@ -811,7 +811,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-10-28T10:03:35.525Z"
+      "updatedAt": "2026-10-28T12:54:21.681Z"
     },
     "fr": {
       "canton": "TI",
@@ -1033,10 +1033,10 @@
           "date": "2026-10-14T08:06:11.860Z"
         },
         {
-          "title": "Taxe santé et rétrocessions : réunion du 17 septembre à Berne",
-          "url": "/fr/articles-frontalier/taxe-sante-et-retrocessions-reunion-du-17-septembre-a-berne/",
-          "excerpt": "Le 17 septembre, il sera question de taxe sur la santé, de double imposition et de statut ; le Tessin menace de bloquer les rétrocessions, mettant en péril 120 millions de francs pour les communes frontalières.",
-          "date": "2026-10-12T19:46:56.997Z"
+          "title": "Motion au Tessin contre la taxe sur la santé",
+          "url": "/fr/articles-frontalier/tessin-motion-taxe-sante/",
+          "excerpt": "Motion interpartite déposée au Grand Conseil La mesure italienne est contestée sur l'article 9 Le Tessin menace le blocage des restaurants Objet",
+          "date": "2026-10-28T12:47:07.552Z"
         }
       ],
       "latestCantonArticles": [],
@@ -1066,7 +1066,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-10-28T10:03:35.525Z"
+      "updatedAt": "2026-10-28T12:54:21.681Z"
     }
   }
 }
