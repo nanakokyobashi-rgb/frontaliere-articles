@@ -65,11 +65,23 @@ import {
 export const API_BASE_DEFAULT = 'https://nanakokyobashi-rgb.github.io/frontaliere-articles';
 export const CDN_BASE = 'https://cdn.frontaliereticino.ch';
 const LOCALES = ['it', 'en', 'de', 'fr'];
-// `renderCantonSectionLanding` owns this TypeScript-side contract. The
-// reconciler runs under plain Node and cannot import that source directly;
-// keep this adapted boundary explicit and pin it to the renderer in the
-// generator suite rather than importing a mirror-only `.mjs` export.
-export const CANTON_LANDING_CARD_LIMIT = 24;
+// The renderer owns this contract in TypeScript. The reconciler runs under
+// plain Node, so generate its adapter from the mirrored source instead of
+// maintaining a second numeric owner that can drift on the next lockstep.
+const ENGINE_CANTON_SECTION_PAGES = path.resolve(
+  path.dirname(fileURLToPath(import.meta.url)),
+  '../engine/cantonSectionPages.ts',
+);
+const engineCantonSectionPages = fs.readFileSync(ENGINE_CANTON_SECTION_PAGES, 'utf8');
+const engineLandingCardLimit = /^export const CANTON_LANDING_CARD_LIMIT = (\d+);$/mu.exec(engineCantonSectionPages);
+if (!engineLandingCardLimit) {
+  throw new Error(`[reconcile-section-pages] CANTON_LANDING_CARD_LIMIT non trovato in ${ENGINE_CANTON_SECTION_PAGES}`);
+}
+const parsedLandingCardLimit = Number(engineLandingCardLimit[1]);
+if (!Number.isSafeInteger(parsedLandingCardLimit) || parsedLandingCardLimit < 1) {
+  throw new Error(`[reconcile-section-pages] CANTON_LANDING_CARD_LIMIT non valido: ${engineLandingCardLimit[1]}`);
+}
+export const CANTON_LANDING_CARD_LIMIT = parsedLandingCardLimit;
 const UA = 'frontaliere-corpus-reconcile/1 (+https://frontaliereticino.ch)';
 export const RECONCILE_FETCH_ATTEMPTS = 3;
 export const RECONCILE_FETCH_RETRY_DELAY_MS = 1000;

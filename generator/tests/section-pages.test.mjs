@@ -92,7 +92,7 @@ import { cantonHubCoverage, cantonHubDataFile, cantonHubTopics, readCantonHubDat
 import { declaredRegistryErrors, SECTION_REGISTRY_FILE } from '../../scripts/lib/section-registry.mjs';
 import { sourceRegistryIds } from '../../scripts/lib/corpus-floors.mjs';
 import { bodyRegex, fetchEdgeSectionRegistry, liveR2ReconciliationPlan, liveRegistryTransitionSections, r2ApiPushPlan, r2PublishPlan } from '../../scripts/ci/fast-publish-section.mjs';
-import { cdnUrlFor, expectedSectionPages, headState, orphanedArticleCandidates, planSectionBackfill, reconcile } from '../../scripts/reconcile-section-pages.mjs';
+import { CANTON_LANDING_CARD_LIMIT, cdnUrlFor, expectedSectionPages, headState, orphanedArticleCandidates, planSectionBackfill, reconcile } from '../../scripts/reconcile-section-pages.mjs';
 import { heroCdnUploads } from '../../scripts/lib/article-render-pipeline.mjs';
 import { cantonSectionPaths } from '../scripts/lib/canton-section-profile.mjs';
 import { corpusPath } from '../scripts/lib/corpus-paths.mjs';
@@ -3008,10 +3008,10 @@ test('reconcile: il limite landing resta quello del renderer engine', () => {
   const engine = read('engine/cantonSectionPages.ts');
   const reconciler = read('scripts/reconcile-section-pages.mjs');
   const engineLimit = /export const CANTON_LANDING_CARD_LIMIT = (\d+);/u.exec(engine);
-  const reconcilerLimit = /export const CANTON_LANDING_CARD_LIMIT = (\d+);/u.exec(reconciler);
   assert.ok(engineLimit, 'CANTON_LANDING_CARD_LIMIT non trovato nel renderer engine');
-  assert.ok(reconcilerLimit, 'CANTON_LANDING_CARD_LIMIT non trovato nel reconciler');
-  assert.equal(Number(reconcilerLimit[1]), Number(engineLimit[1]), 'reconciler e renderer divergenti');
+  assert.equal(CANTON_LANDING_CARD_LIMIT, Number(engineLimit[1]), 'reconciler e renderer divergenti');
+  assert.match(reconciler, /cantonSectionPages\.ts/u, 'il reconciler deve derivare il cap dal renderer');
+  assert.doesNotMatch(reconciler, /export const CANTON_LANDING_CARD_LIMIT = \d+;/u, 'il reconciler non deve duplicare il cap');
 });
 
 // ── Dati degli hub ───────────────────────────────────────────────────────────
