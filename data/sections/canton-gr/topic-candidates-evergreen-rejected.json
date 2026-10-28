@@ -4,17 +4,9 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-gr::https://primalavaltellina.it/attualita/frontalieri-cambiano-i-bisogni-oltre-il-salario-tempo-e-benessere": {
+    "canton-gr::https://www.laregione.ch/cantone/grigioni/1958085/museo-eventi-moesano-visita-guidata": {
       "section": "canton-gr",
-      "ts": 1792722917206
-    },
-    "canton-gr::https://www.ilgiorno.it/sondrio/cronaca/frontalieri-scontenti-nelle-buste-paga-a94e21cf": {
-      "section": "canton-gr",
-      "ts": 1792861405991
-    },
-    "canton-gr::https://ilmoesano.ch/notizie/politica/13a-avs-con-una-mano-si-da-con-laltra-si-toglie": {
-      "section": "canton-gr",
-      "ts": 1792862909251
+      "ts": 1793199702565
     }
   }
 }
