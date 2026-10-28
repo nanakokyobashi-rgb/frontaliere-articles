@@ -10,8 +10,10 @@
  *
  * This batch runner acquires one lease per image namespace, passes that
  * verified context to bounded concurrent workers, and releases it only after
- * every worker has stopped. Non-image keys and a namespace whose lease cannot
- * be acquired retain the single-file uploader's existing fallback semantics.
+ * every worker has stopped. Non-image keys retain the single-file uploader's
+ * existing path; if an image namespace cannot be leased once, its whole batch
+ * is skipped best-effort rather than repeating the same 15-minute acquisition
+ * timeout for every asset.
  * The uploader still owns the per-object timeout, retry, content type and
  * best-effort failure policy; this file only supplies the batch boundary.
  */
@@ -246,6 +248,7 @@ async function main() {
   const runChild = createChildRunner(activeChildren);
   const signals = installSignalHandlers(activeChildren);
   const contexts = new Map();
+  const unavailableNamespaces = new Set();
   let failures = 0;
 
   try {
@@ -262,9 +265,14 @@ async function main() {
       try {
         const context = await acquireNamespaceLease(namespace, runChild, signals.shouldStop);
         if (context) contexts.set(namespace, context);
+        else if (!signals.shouldStop()) unavailableNamespaces.add(namespace);
       } catch (error) {
-        process.stderr.write(`::warning::[cdn-upload] shared ${namespace} lease setup failed; falling back to per-file leases: ${error?.message ?? error}\n`);
+        process.stderr.write(`::warning::[cdn-upload] shared ${namespace} lease setup failed; skipping that image batch: ${error?.message ?? error}\n`);
+        unavailableNamespaces.add(namespace);
       }
+    }
+    for (const namespace of unavailableNamespaces) {
+      process.stderr.write(`::notice::[cdn-upload] skipping ${namespace} image batch: namespace lease unavailable\n`);
     }
 
     const results = await runUploadPool(
@@ -272,6 +280,7 @@ async function main() {
       concurrency,
       async ({ local, key }) => {
         const namespace = imageNamespaceForKey(key);
+        if (namespace && unavailableNamespaces.has(namespace)) return { code: 0, skipped: true };
         const env = { ...process.env };
         const context = contexts.get(namespace);
         if (context) env[IMAGE_LEASE_CONTEXT_ENV] = context;
