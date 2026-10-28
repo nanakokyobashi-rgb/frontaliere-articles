@@ -4,26 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vd::https://www.ledauphine.com/economie/2026/10/24/en-misant-sur-la-force-du-collectif-emmanuel-a-allege-sa-facture-d-energie": {
-      "section": "canton-vd",
-      "ts": 1792931645576
-    },
-    "canton-vd::https://www.ledauphine.com/economie/2026/10/24/tourisme-un-ete-dynamique-et-une-saison-d-hiver-qui-s-annonce-deja-encourageante": {
-      "section": "canton-vd",
-      "ts": 1792931647961
-    },
-    "canton-vd::https://www.ledauphine.com/education/2026/10/25/le-chantier-de-l-ecole-de-cornieres-sera-acheve-en-septembre-2027": {
-      "section": "canton-vd",
-      "ts": 1792931654771
-    },
-    "canton-vd::https://www.ledauphine.com/environnement/2026/10/25/les-francais-manifestent-les-suisses-devraient-voter-sur-des-bons-de-mobilite": {
-      "section": "canton-vd",
-      "ts": 1792941620871
-    },
-    "canton-vd::https://www.lenordvaudois.ch/flash-sport/hockey-sur-glace-suspension-de-daniel-carr-bienne-fait-recours-1519033": {
-      "section": "canton-vd",
-      "ts": 1792941736913
-    },
     "canton-vd::https://www.guidedufrontalier.com/actualites/pret-immobilier-chf-tournant-juridique": {
       "section": "canton-vd",
       "ts": 1793013792291
@@ -95,6 +75,14 @@
     "canton-vd::https://www.ledauphine.com/faits-divers-justice/2026/10/27/autoroute-a412-la-justice-ne-suspend-pas-le-chantier-mais": {
       "section": "canton-vd",
       "ts": 1793097791312
+    },
+    "canton-vd::https://www.ledauphine.com/societe/2026/10/27/mobilite-l-enquete-lancee-par-l-agglo-se-poursuit": {
+      "section": "canton-vd",
+      "ts": 1793150519884
+    },
+    "canton-vd::https://www.ledauphine.com/societe/2026/10/27/table-ronde-dans-les-locaux-de-pays-de-gex-entreprises": {
+      "section": "canton-vd",
+      "ts": 1793150532518
     }
   }
 }
