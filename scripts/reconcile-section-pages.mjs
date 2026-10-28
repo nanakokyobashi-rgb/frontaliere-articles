@@ -65,6 +65,11 @@ import {
 export const API_BASE_DEFAULT = 'https://nanakokyobashi-rgb.github.io/frontaliere-articles';
 export const CDN_BASE = 'https://cdn.frontaliereticino.ch';
 const LOCALES = ['it', 'en', 'de', 'fr'];
+// `renderCantonSectionLanding` renders the newest 24 cards and sends the
+// remainder to the archive. Keep the reconcile contract aligned with that
+// public renderer: comparing all API rows would mark healthy long sections
+// stale as soon as they exceed the card limit.
+export const CANTON_LANDING_CARD_LIMIT = 24;
 const UA = 'frontaliere-corpus-reconcile/1 (+https://frontaliereticino.ch)';
 export const RECONCILE_FETCH_ATTEMPTS = 3;
 export const RECONCILE_FETCH_RETRY_DELAY_MS = 1000;
@@ -510,18 +515,41 @@ function sitemapFailureDetail(url, error) {
  * quel file sia stato rigenerato dopo l'ultimo aggiornamento dell'indice API.
  *
  * @param {{ paths: Record<string, string> }} entry
- * @param {Array<{ id: string }>} rows
+ * @param {Array<{ id: string, date?: string }>} rows
  * @param {Record<string, Record<string, string>>} slugs
  * @param {string} locale
  * @param {string} html
+ * @param {number} [limit]
  */
-export function landingArticleCoverage({ entry, rows, slugs, locale, html }) {
+export function landingArticleCoverage({
+  entry,
+  rows,
+  slugs,
+  locale,
+  html,
+  limit = CANTON_LANDING_CARD_LIMIT,
+}) {
   const prefix = entry?.paths?.[locale];
   if (typeof prefix !== 'string' || !prefix.endsWith('/')) {
     throw new Error(`prefisso landing non valido per ${locale}`);
   }
+  if (!Number.isSafeInteger(limit) || limit < 1) {
+    throw new Error(`limite landing non valido: ${limit}`);
+  }
   const articleByPath = new Map();
-  for (const row of rows ?? []) {
+  const orderedRows = (rows ?? [])
+    .map((row, index) => ({ row, index }))
+    .sort((a, b) => {
+      const dateA = String(a.row?.date ?? '');
+      const dateB = String(b.row?.date ?? '');
+      if (dateA && dateB && dateA !== dateB) return dateB.localeCompare(dateA);
+      if (dateA && !dateB) return -1;
+      if (!dateA && dateB) return 1;
+      return a.index - b.index;
+    })
+    .slice(0, limit)
+    .map(({ row }) => row);
+  for (const row of orderedRows) {
     const id = String(row?.id ?? '');
     const slug = slugs?.[id]?.[locale];
     if (id && typeof slug === 'string' && slug) articleByPath.set(`${prefix}${slug}/`, id);
@@ -542,7 +570,9 @@ export function landingArticleCoverage({ entry, rows, slugs, locale, html }) {
   const declaredCount = numberOfItemsMatch ? Number(numberOfItemsMatch[1]) : null;
   const problems = [];
   if (missingIds.length > 0) problems.push(`missing-articles:${missingIds.join(',')}`);
-  if (declaredCount !== null && declaredCount !== expectedIds.length) {
+  if (declaredCount === null) {
+    problems.push(`numberOfItems:missing/${expectedIds.length}`);
+  } else if (declaredCount !== expectedIds.length) {
     problems.push(`numberOfItems:${declaredCount}/${expectedIds.length}`);
   }
   return {

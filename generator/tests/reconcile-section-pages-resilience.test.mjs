@@ -185,6 +185,42 @@ test('landingArticleCoverage: riconosce gli articoli mancanti anche se il file H
   assert.deepEqual(coverage.problems, ['missing-articles:article-two', 'numberOfItems:1/2']);
 });
 
+test('landingArticleCoverage: usa le 24 card piu recenti, non tutte le righe API', () => {
+  const rows = Array.from({ length: 25 }, (_, index) => ({
+    id: `article-${index}`,
+    date: `2026-10-${String(25 - index).padStart(2, '0')}T00:00:00Z`,
+  }));
+  const slugs = Object.fromEntries(rows.map((row) => [row.id, { it: row.id }]));
+  const html = '<script type="application/ld+json">{"numberOfItems":24}</script>' +
+    rows.slice(0, 24).map((row) => `<a href="/articoli-ticino/${row.id}/">articolo</a>`).join('');
+
+  const coverage = landingArticleCoverage({
+    entry: CATALOG,
+    rows,
+    slugs,
+    locale: 'it',
+    html,
+  });
+
+  assert.equal(coverage.expectedCount, 24);
+  assert.equal(coverage.foundCount, 24);
+  assert.equal(coverage.declaredCount, 24);
+  assert.deepEqual(coverage.problems, []);
+});
+
+test('landingArticleCoverage: un numero dichiarato mancante rende la landing non verificata', () => {
+  const coverage = landingArticleCoverage({
+    entry: CATALOG,
+    rows: [{ id: 'article-one', date: '2026-10-28T00:00:00Z' }],
+    slugs: { 'article-one': { it: 'article-one' } },
+    locale: 'it',
+    html: '<a href="/articoli-ticino/article-one/">articolo</a>',
+  });
+
+  assert.equal(coverage.foundCount, 1);
+  assert.deepEqual(coverage.problems, ['numberOfItems:missing/1']);
+});
+
 test('reconcile: una landing stale dispatcha il refresh della sezione anche con dettagli presenti', async () => {
   const rows = [{ id: 'article-one', section: 'canton-ti', date: '2026-10-28T10:00:00Z' }];
   const slugs = { 'article-one': { it: 'article-one', en: 'article-one-en', de: 'article-one-de', fr: 'article-one-fr' } };
