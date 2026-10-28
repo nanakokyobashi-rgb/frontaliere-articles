@@ -1945,6 +1945,7 @@ const CODEX_TRANSLATE_BATCH_MAX_TEXTS_DEFAULT = 5;
 const CODEX_TRANSLATE_BATCH_MAX_TEXTS_LIMIT = 50;
 const CODEX_TRANSLATE_BATCH_MAX_CHARS_DEFAULT = 3000;
 const CODEX_TRANSLATE_BATCH_MAX_CHARS_LIMIT = 50_000;
+const CODEX_TRANSLATE_BATCH_COLLECTION_MS = 25;
 // Sotto questo residuo una chiamata non ha il tempo di finire: stesso minimo
 // che ai-models.mjs applica alla lane (CODEX_CLI_MIN_TIMEOUT_MS).
 const CODEX_TRANSLATE_MIN_CALL_MS = 15_000;
@@ -2076,6 +2077,7 @@ let _codexBusySince = 0;
 let _codexInFlight = 0;
 /** @type {Array<{clean: string, sourceLang: string, targetLang: string, outcome: any, resolve: (value: string) => void, reject: (error: unknown) => void}>} */
 let _codexPending = [];
+let _codexPumpTimer = null;
 /** @type {Array<{run: (args: {deadlineMs: number, admission: object, admitCall: () => object | null, reserveTransportRetry: (callDeadlineMs?: number | null) => boolean}) => Promise<any>, fallback: (() => any) | null, processDeadlineMs: number | null | undefined, resolve: (value: any) => void, reject: (error: unknown) => void}>} */
 let _codexLanePending = [];
 let _codexConsecutiveFailures = 0;
@@ -2323,10 +2325,10 @@ function _codexBatchMaxChars() {
 /**
  * Il batching oltre la partizione naturale della coda e' una opt-in dei
  * workflow che hanno misurato la necessita' di accorpare testi: basta
- * esplicitare il tetto di righe oppure il budget di caratteri. L'avvio resta
- * sincrono; la variabile abilita solo il raggruppamento dei testi gia' arrivati
- * nella coda mentre una corsia e' occupata, senza una finestra temporale
- * implicita.
+ * esplicitare il tetto di righe oppure il budget di caratteri. Con piu' corsie
+ * l'opt-in apre una finestra breve di raccolta per il primo burst; con una sola
+ * corsia l'avvio resta immediato e i testi successivi vengono raggruppati
+ * mentre la prima chiamata e' occupata.
  */
 function _codexBatchingExplicitlyEnabled() {
   const rawTexts = String(process.env.FREE_TRANSLATE_CODEX_BATCH_MAX_TEXTS || '').trim();
@@ -2444,9 +2446,20 @@ export function withCodexTranslationLane({
 }
 
 function _scheduleCodexPump() {
-  // La prima richiesta parte subito; i testi che arrivano mentre una corsia e'
-  // occupata vengono raggruppati da _takeCodexGroup secondo i tetti espliciti.
-  _pumpCodex();
+  const collectBurst = _codexBatchingExplicitlyEnabled()
+    && _codexLanes() > 1
+    && _codexInFlight === 0;
+  if (!collectBurst) {
+    // Senza l'opt-in (o con una sola corsia) la prima richiesta parte subito;
+    // i testi successivi vengono raggruppati da _takeCodexGroup.
+    _pumpCodex();
+    return;
+  }
+  if (_codexPumpTimer !== null) return;
+  _codexPumpTimer = setTimeout(() => {
+    _codexPumpTimer = null;
+    _pumpCodex();
+  }, CODEX_TRANSLATE_BATCH_COLLECTION_MS);
 }
 
 /**
@@ -2522,12 +2535,11 @@ function _takeCodexGroup() {
   const first = _codexPending.shift();
   const group = [first];
   let chars = first.clean.length;
-  // With an explicit batch setting, a short queue of at most one text per lane
-  // can still be grouped when it is already present while a lane is occupied:
+  // With an explicit batch setting, a short burst of at most one text per lane
+  // is collected by _scheduleCodexPump before this partition runs:
   // `ceil(2 / 3)` or `ceil(3 / 3)` would otherwise keep every text singleton.
-  // This is queue partitioning, not a delayed collection window. For a longer
-  // queue retain the measured queue/lane partition so one full batch does not
-  // starve the other lanes.
+  // For a longer queue retain the measured queue/lane partition so one full
+  // batch does not starve the other lanes.
   const maxTexts = pendingCount <= _codexLanes() && _codexBatchingExplicitlyEnabled()
     ? Math.min(_codexBatchMaxTexts(), pendingCount)
     : Math.min(_codexBatchMaxTexts(), Math.max(share, 1));
@@ -2787,6 +2799,10 @@ async function _codexTranslateBatch(call, opts, texts, sourceLang, targetLang) {
  * `null` ripristina `callLLM`.
  */
 export function setCodexTranslateCallForTests(fn) {
+  if (_codexPumpTimer !== null) {
+    clearTimeout(_codexPumpTimer);
+    _codexPumpTimer = null;
+  }
   _codexLanePending = [];
   _codexCallForTests = typeof fn === 'function' ? fn : null;
   _codexCalls = 0;
