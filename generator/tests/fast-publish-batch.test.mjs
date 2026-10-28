@@ -82,10 +82,10 @@ test('i target della matrix vengono spezzati prima dell export come env', () => 
   assert.match(resolveStep, /append_matrix_target "\$batch_target"/u);
 });
 
-test('tutti i batch dello stesso shard restano in coda', () => {
+test('tutti i batch restano nella coda della strategy', () => {
   assert.match(
     workflow,
-    /group: fast-publish-article-\$\{\{ matrix\.target\.shard \}\}[\s\S]*cancel-in-progress: false\s+queue: max/u,
+    /strategy:\s+fail-fast: false\s+#[^\n]*\n(?:\s+#.*\n)*\s+max-parallel: 1\s+matrix:/u,
   );
 });
 

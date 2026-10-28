@@ -573,18 +573,21 @@ jobs:
     timeout-minutes: 180
     strategy:
       fail-fast: false
+      # The resolver deliberately creates one matrix item per bounded batch.
+      # Keep the matrix itself as the queue: GitHub's concurrency group only
+      # retains one pending job, so using it alone would silently replace every
+      # batch between the running job and the one pending job. A single
+      # strategy slot preserves every batch and serializes all shard writes.
+      max-parallel: 1
       matrix:
         target: ${{ fromJSON(needs.resolve.outputs.matrix) }}
     # Never cancel: a cancelled run can leave some locales pushed and others not.
-    # `queue: max` is required because one shard can produce several bounded
-    # batches; without it GitHub keeps only one pending job per concurrency
-    # group and would silently replace the intermediate batches.
-    # Per shard, not global: the shard is the unit that a half-finished publish
-    # can leave inconsistent, and it comes from the section core (`shardKey`).
+    # The matrix queue above serializes the bounded batches. Keep the
+    # per-shard group as a cross-run guard: a second workflow run must not
+    # write the same shard while this run is publishing it.
     concurrency:
       group: fast-publish-article-${{ matrix.target.shard }}
       cancel-in-progress: false
-      queue: max
     # One hard budget is shared by the pre-purge observation and the recovery
     # gate. A repo variable may shorten the first observation, but can never
     # extend the budget that the recovery path is guaranteed to receive.
