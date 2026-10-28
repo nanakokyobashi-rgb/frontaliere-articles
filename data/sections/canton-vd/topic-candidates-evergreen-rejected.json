@@ -4,14 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vd::https://www.guidedufrontalier.com/actualites/pret-immobilier-chf-tournant-juridique": {
-      "section": "canton-vd",
-      "ts": 1793013792291
-    },
-    "canton-vd::https://www.guidedufrontalier.com/actualites/declaration-dris-tou-couple-frontalier": {
-      "section": "canton-vd",
-      "ts": 1793013802760
-    },
     "canton-vd::https://www.guidedufrontalier.com/actualites/contribution-differentielle-hauts-revenus-frontaliers": {
       "section": "canton-vd",
       "ts": 1793014244188
@@ -95,6 +87,14 @@
     "canton-vd::https://latele.ch/emissions/info-vaud/info-vaud-s-2026-e-162?s=5": {
       "section": "canton-vd",
       "ts": 1793155403262
+    },
+    "canton-vd::https://www.guidedufrontalier.com/actualites/pret-immobilier-chf-tournant-juridique": {
+      "section": "canton-vd",
+      "ts": 1793187013760
+    },
+    "canton-vd::https://www.guidedufrontalier.com/actualites/declaration-dris-tou-couple-frontalier": {
+      "section": "canton-vd",
+      "ts": 1793187020562
     }
   }
 }
