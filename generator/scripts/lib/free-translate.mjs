@@ -2201,7 +2201,7 @@ function _unfenceCodexAnswer(raw, source) {
 
 /** Una voce di un gruppo: senza marcatori (il prompt di gruppo non ne usa), ma la stessa cornice tolta. */
 function _stripCodeFence(raw, source) {
-  return normalizeBlock(_unfenceCodexAnswer(raw, source));
+  return normalizeProviderBlock(_unfenceCodexAnswer(raw, source));
 }
 
 function _cleanCodexTranslation(raw, source, marker) {
@@ -2210,7 +2210,7 @@ function _cleanCodexTranslation(raw, source, marker) {
   const close = `END_TEXT_${marker}`;
   if (out.startsWith(open)) out = out.slice(open.length).replace(/^[ \t]*\n?/, '');
   if (out.endsWith(close)) out = out.slice(0, -close.length).replace(/\n?[ \t]*$/, '');
-  return normalizeBlock(out);
+  return normalizeProviderBlock(out);
 }
 
 const CODEX_INVARIANT_LABEL_RE = /^(?:sede|sede di lavoro|luogo|location|standort|lieu|nome|name|azienda|company|società|employer|datore di lavoro|codice|code|sigla|acronimo|brand|marchio)\s*:/iu;
@@ -2287,6 +2287,9 @@ function _logCodexNonTranslation(item, reason) {
 }
 
 async function translateWithCodex(text, sourceLang, targetLang, outcome = null, position = 'primary') {
+  // The Codex lane is also the structural recovery path. Preserve nested
+  // Markdown indentation when the source is queued; flattening it here makes
+  // `hasSameLineStructure` lose its `indent:*` signature on larger fields.
   const clean = normalizeProviderBlock(text);
   if (!clean || sourceLang === targetLang) return '';
   // La cascata chiama il tier in entrambe le posizioni: risponde solo quella

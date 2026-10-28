@@ -351,6 +351,34 @@ test('un testo che contiene davvero BEGIN_TEXT o END_TEXT resta intero', async (
   assert.equal(calls.length, 1);
 });
 
+test('Codex conserva l indentazione Markdown annidata dei campi strutturati', async () => {
+  const source = [
+    '## Aufgaben',
+    '- Prima riga',
+    '  - Annidata',
+    '- Seconda riga',
+    '  - Dettaglio',
+    '- Terza riga',
+    '  - Ulteriore dettaglio',
+    '- Quarta riga',
+    '  - Ultimo dettaglio',
+    '- Quinta riga',
+    '- Sesta riga',
+    '- Settima riga',
+    '- Ottava riga',
+  ].join('\n');
+  const expected = source.replace('Prima riga', 'First line').replace('Annidata', 'Nested');
+  const calls = stubCodex((messages) => {
+    const user = messages.find((message) => message.role === 'user').content;
+    const framed = /^BEGIN_TEXT_[A-Z0-9]{8}\n([\s\S]*)\nEND_TEXT_[A-Z0-9]{8}$/.exec(user);
+    assert.equal(framed?.[1], source, 'la sorgente deve arrivare a Codex con la struttura intatta');
+    return expected;
+  });
+
+  assert.equal(await it(source), expected);
+  assert.equal(calls.length, 1);
+});
+
 test('un eco della sorgente e\' rifiutato e contato, la cascata prosegue', async () => {
   const before = codexCounters();
   const calls = stubCodex(IT);
