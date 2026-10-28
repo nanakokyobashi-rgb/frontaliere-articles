@@ -65,6 +65,16 @@ jobs:
           # corpus-floors.mjs compares the live registry with the previous
           # revision before the content gate publishes its verdict.
           fetch-depth: 0
+          # Keep the complete commit graph for the explicit push base, but do
+          # not download blobs from unrelated historical trees. The gate only
+          # needs the current corpus and its executable readers.
+          filter: blob:none
+          sparse-checkout: |
+            /.github/actions/setup-article-source-runtime/action.yml
+            /content/
+            /generator/
+            /scripts/
+          sparse-checkout-cone-mode: false
 
       - uses: actions/setup-node@v7
         with:

@@ -66,6 +66,25 @@ const WF = active(read(WF_REL));
 const TESTS_WF = active(read('.github/workflows/tests.yml'));
 
 describe('content-gates-main: il workflow', () => {
+  test('il checkout conserva la storia ma evita blob e alberi pesanti estranei', () => {
+    const checkoutStart = WF.indexOf('uses: actions/checkout@v7');
+    const checkoutEnd = WF.indexOf('\n\n      - uses: actions/setup-node@', checkoutStart);
+    assert.ok(checkoutStart >= 0, 'il checkout del gate non è stato trovato');
+    assert.ok(checkoutEnd > checkoutStart, 'il blocco checkout non è delimitato');
+    const checkout = WF.slice(checkoutStart, checkoutEnd);
+
+    assert.match(checkout, /fetch-depth:\s*0/, 'il floor storico richiede il grafo completo');
+    assert.match(checkout, /filter:\s*blob:none/, 'i blob delle revisioni storiche non servono al gate');
+    assert.match(checkout, /sparse-checkout:\s*\|[\s\S]*\/content\//);
+    assert.match(checkout, /\/\.github\/actions\/setup-article-source-runtime\/action\.yml/);
+    for (const required of ['/generator/', '/scripts/']) {
+      assert.match(checkout, new RegExp(required.replaceAll('/', '\\/')));
+    }
+    assert.doesNotMatch(checkout, /^\s+\/(?:data|public)\//mu,
+      'il checkout del content gate non deve materializzare dataset o asset pesanti');
+    assert.match(checkout, /sparse-checkout-cone-mode:\s*false/);
+  });
+
   test('esiste ed è cablato su push a main limitato a content/**', () => {
     assert.ok(fs.existsSync(path.join(ROOT, WF_REL)), `${WF_REL} non esiste`);
     const onBlock = sliceBetween(WF, '\non:', '\npermissions:');
