@@ -571,21 +571,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
         with:
-          # A stale resolve replans on current main and exports that source;
-          # the publish matrix must consume the same revision or it can emit
-          # no artifact for the coordinator's expected section.
           ref: ${{ needs.resolve.outputs.source_commit || github.event.workflow_run.head_sha || inputs.source_commit || (github.event_name == 'workflow_dispatch' && inputs.bootstrap != true && github.ref) || github.sha }}
-          # resolvePublishedReleaseCommit() verifica la release API con
-          # merge-base: una release precedente puo' essere fuori dai due
-          # commit che actions/checkout scarica di default.
           fetch-depth: 0
           persist-credentials: false
 
       - name: Checkout replay dispatcher from workflow revision
         uses: actions/checkout@v7
         with:
-          # workflow_run checks out the older publish source at the workspace
-          # root; github.sha points to the default-branch workflow revision.
           ref: ${{ github.sha }}
           path: .replay-dispatcher-source
           fetch-depth: 1
