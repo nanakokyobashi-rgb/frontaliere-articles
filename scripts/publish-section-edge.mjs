@@ -111,6 +111,7 @@ import {
   SECTION_SITEMAP_INDEX_FILE,
   validateEdgeSectionRegistry,
 } from './lib/section-registry.mjs';
+import { apiInputChangedInRange } from './lib/publish-api-input-range.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const APEX = 'https://frontaliereticino.ch';
@@ -143,12 +144,64 @@ export function publishedMainHead() {
   return current;
 }
 
+function fetchedMainHead() {
+  // The shell guard normally fetched this ref already. Refresh once here as
+  // well: a commit can land in the small window between that guard and the
+  // pointer PUT. FETCH_HEAD is the exact snapshot returned by this fetch; do
+  // not keep classifying the SHA read before the fetch.
+  execFileSync('git', ['-C', ROOT, 'fetch', '--no-tags', 'origin', 'main'], {
+    stdio: 'ignore',
+    timeout: 60_000,
+  });
+  const current = execFileSync('git', ['-C', ROOT, 'rev-parse', 'FETCH_HEAD'], {
+    encoding: 'utf8',
+  }).trim();
+  if (!FULL_GIT_SHA_RE.test(current)) {
+    throw new Error('snapshot di main appena scaricata non valida');
+  }
+  return current;
+}
+
+function gitIsAncestor(ancestor, observedDescendant) {
+  const fetched = fetchedMainHead();
+  try {
+    execFileSync('git', ['-C', ROOT, 'merge-base', '--is-ancestor', observedDescendant, fetched], {
+      stdio: 'ignore',
+    });
+  } catch (error) {
+    if (error?.status === 1) {
+      throw new Error(
+        "snapshot di main scaricata piu' vecchia o non riconciliabile (autorevole "
+          + observedDescendant + " → fetch " + fetched + ")",
+        { cause: error },
+      );
+    }
+    throw error;
+  }
+  try {
+    execFileSync('git', ['-C', ROOT, 'merge-base', '--is-ancestor', ancestor, fetched], {
+      stdio: 'ignore',
+    });
+    return { ancestor: true, current: fetched };
+  } catch (error) {
+    if (error?.status === 1) return { ancestor: false, current: fetched };
+    throw error;
+  }
+}
+
 /**
  * The workflow checks freshness before entering this module, but staging and
  * bootstrap can wait for a long time. The final pointer PUT needs its own
- * source-of-truth check, immediately before the only mutable edge write.
+ * source-of-truth check, immediately before the only mutable edge write. A
+ * later main commit is safe to adopt only when it contains no publish-api
+ * input; the artifact commit remains the expected value because it is the
+ * commit recorded in manifest.json and consumed by downstream publishers.
  */
-export async function assertExpectedMainHead(expected, readMainHead = publishedMainHead) {
+export async function assertExpectedMainHead(
+  expected,
+  readMainHead = publishedMainHead,
+  { isAncestor = gitIsAncestor, apiInputChanged = apiInputChangedInRange } = {},
+) {
   if (!FULL_GIT_SHA_RE.test(String(expected ?? ''))) {
     throw new Error('PUBLISH_API_SOURCE_COMMIT non contiene una SHA completa');
   }
@@ -157,7 +210,47 @@ export async function assertExpectedMainHead(expected, readMainHead = publishedM
     throw new Error('revisione corrente di main non valida');
   }
   if (current !== expected) {
-    throw new Error(`main e' avanzato durante lo staging edge (${expected} → ${current}); flip interrotto`);
+    let ancestryResult;
+    try {
+      ancestryResult = await isAncestor(expected, current);
+    } catch (error) {
+      const detail = error?.message ? ': ' + error.message : '';
+      throw new Error(
+        "main e' avanzato durante lo staging edge (" + expected + " → " + current + "); storia non riconciliabile" + detail,
+        { cause: error },
+      );
+    }
+    const refreshedCurrent = ancestryResult && typeof ancestryResult === 'object'
+      ? ancestryResult.current
+      : current;
+    const ancestor = ancestryResult && typeof ancestryResult === 'object'
+      ? ancestryResult.ancestor
+      : ancestryResult;
+    if (!FULL_GIT_SHA_RE.test(String(refreshedCurrent ?? ''))) {
+      throw new Error(
+        "main e' avanzato durante lo staging edge (" + expected + "); snapshot appena acquisita non verificabile",
+      );
+    }
+    if (!ancestor) {
+      throw new Error(
+        "main e' avanzato durante lo staging edge (" + expected + " → " + refreshedCurrent + "); storia non riconciliabile",
+      );
+    }
+    let apiInputChangedInDelta;
+    try {
+      apiInputChangedInDelta = await apiInputChanged(expected, refreshedCurrent);
+    } catch (error) {
+      throw new Error(
+        "main e' avanzato durante lo staging edge (" + expected + " → " + refreshedCurrent + "); input API non classificabili",
+        { cause: error },
+      );
+    }
+    if (apiInputChangedInDelta) {
+      throw new Error(
+        "main e' avanzato durante lo staging edge (" + expected + " → " + refreshedCurrent + ") e contiene input API nuovi; flip interrotto",
+      );
+    }
+    return refreshedCurrent;
   }
   return current;
 }

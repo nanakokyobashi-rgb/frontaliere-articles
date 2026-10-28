@@ -161,6 +161,7 @@ on:
       - 'data/editorial-image-registry.json'
       - 'data/blog-cover-cdn-sync-queue.json'
       - 'scripts/ci/verify-publish-api-source-current.sh'
+      - 'scripts/lib/publish-api-input-range.mjs'
       - '.github/workflows/publish-api.yml'
   # The editorial companion contains a weekly update even when no article or
   # code push occurs. Rebuild it on a real weekly cadence so the HTTP surface

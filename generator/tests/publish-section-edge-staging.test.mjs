@@ -207,8 +207,64 @@ test('publishRelease verifica la HEAD subito prima del flip edge', async () => {
   assert.deepEqual(freshnessChecks, ['before-flip']);
   assert.deepEqual(uploads, [], 'il puntatore non viene scritto dopo una freshness failure');
   await assert.rejects(
-    () => assertExpectedMainHead(commit, async () => 'd'.repeat(40)),
+    () => assertExpectedMainHead(
+      commit,
+      async () => 'd'.repeat(40),
+      { isAncestor: () => true, apiInputChanged: () => true },
+    ),
     /main e' avanzato durante lo staging edge/,
+  );
+});
+
+test('il guard edge consente un avanzamento di main solo bookkeeping e conserva il commit dell artifact', async () => {
+  const source = 'a'.repeat(40);
+  const current = 'b'.repeat(40);
+  assert.equal(
+    await assertExpectedMainHead(
+      source,
+      async () => current,
+      { isAncestor: () => true, apiInputChanged: () => false },
+    ),
+    current,
+  );
+});
+
+test('il guard edge classifica la HEAD appena acquisita dopo il controllo iniziale', async () => {
+  const source = 'a'.repeat(40);
+  const initiallyRead = 'b'.repeat(40);
+  const fetched = 'c'.repeat(40);
+  let classifiedHead = null;
+  await assert.rejects(
+    () => assertExpectedMainHead(
+      source,
+      async () => initiallyRead,
+      {
+        isAncestor: () => ({ ancestor: true, current: fetched }),
+        apiInputChanged: (_before, after) => {
+          classifiedHead = after;
+          return true;
+        },
+      },
+    ),
+    new RegExp('→ ' + fetched + '.*input API nuovi'),
+  );
+  assert.equal(classifiedHead, fetched);
+});
+
+test('il guard edge rifiuta una snapshot fetchata piu vecchia di quella autorevole', async () => {
+  const source = 'a'.repeat(40);
+  const authoritative = 'b'.repeat(40);
+  const fetched = 'c'.repeat(40);
+  await assert.rejects(
+    () => assertExpectedMainHead(
+      source,
+      async () => authoritative,
+      {
+        isAncestor: () => ({ ancestor: false, current: fetched }),
+        apiInputChanged: () => false,
+      },
+    ),
+    /storia non riconciliabile/u,
   );
 });
 
