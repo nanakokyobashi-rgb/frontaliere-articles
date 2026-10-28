@@ -4,18 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/luzern-plant-besseren-schutz-vor-belaestigung-am-arbeitsplatz-art-1728543": {
-      "section": "canton-sz",
-      "ts": 1792937334925
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/horw-fdp-fordert-auflagen-fuer-campus-baubewilligung-art-1728529": {
-      "section": "canton-sz",
-      "ts": 1792937342834
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/der-aelteste-praktikant-der-schweiz-geht-zum-zweiten-mal-in-pension-art-1728542": {
-      "section": "canton-sz",
-      "ts": 1792937349829
-    },
     "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/luzerner-bahnhofstrasse-sorgt-im-kantonsrat-fuer-kritik-art-1728675": {
       "section": "canton-sz",
       "ts": 1793011221056
@@ -55,6 +43,18 @@
     "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/emmenbruecke-strasse-beim-knoten-gersag-wird-gesperrt-art-1728744": {
       "section": "canton-sz",
       "ts": 1793102692999
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/risch-will-steuerfuss-trotz-hoher-investitionen-senken-art-1728895": {
+      "section": "canton-sz",
+      "ts": 1793150336175
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/schweizundwelt/13-ahv-rente-finanzierung-spaltet-linkes-und-rechtes-lager-art-1728976": {
+      "section": "canton-sz",
+      "ts": 1793150661503
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/zaku-2027-gewinn-von-763000-franken-budgetiert-art-1728959": {
+      "section": "canton-sz",
+      "ts": 1793150668638
     }
   }
 }
