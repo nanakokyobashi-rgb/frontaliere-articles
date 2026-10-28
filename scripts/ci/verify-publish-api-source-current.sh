@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 # Fail closed unless the artifact that is about to be published still belongs
-# to the current main revision. Keep this check in one bounded helper so every
-# irreversible publisher phase uses the same freshness contract.
+# to the current main revision. A later main commit is safe to adopt only when
+# the workflow's declared API inputs did not change; the helper advances the
+# source marker for that bookkeeping-only case. Keep this check in one bounded
+# helper so every irreversible publisher phase uses the same freshness contract.
 set -euo pipefail
 
 context="${VERIFY_CONTEXT:-publish-api phase}"
-repository="${REPOSITORY:-}"
+repository="${REPOSITORY:-${GITHUB_REPOSITORY:-}}"
 published_source="${PUBLISH_API_SOURCE_COMMIT:-${PUBLISHED_SOURCE_COMMIT:-}}"
 
 if [ -z "$repository" ]; then
@@ -21,7 +23,35 @@ if ! [[ "$current_main" =~ ^[a-f0-9]{40}$ ]] || ! [[ "$published_source" =~ ^[a-
   exit 1
 fi
 if [ "$current_main" != "$published_source" ]; then
-  echo "::error::publish superato prima di $context: source=$published_source main=$current_main; il run successivo deve riallineare la superficie"
-  exit 1
+  if ! git fetch --no-tags origin main; then
+    echo "::error::impossibile scaricare main per classificare l'avanzamento prima di $context"
+    exit 1
+  fi
+  if ! git merge-base --is-ancestor "$published_source" "$current_main"; then
+    echo "::error::avanzamento non riconciliabile prima di $context: source=$published_source main=$current_main"
+    exit 1
+  fi
+  if ! api_input_changed="$(
+    SOURCE_COMMIT="$published_source" CURRENT_MAIN="$current_main" node --input-type=module -e '
+      import { apiInputChangedInRange } from "./scripts/publish-section-pages.mjs";
+      process.stdout.write(String(apiInputChangedInRange({
+        before: process.env.SOURCE_COMMIT,
+        after: process.env.CURRENT_MAIN,
+      })));
+    '
+  )"; then
+    echo "::error::impossibile classificare l'avanzamento prima di $context"
+    exit 1
+  fi
+  if [ "$api_input_changed" = 'true' ]; then
+    echo "::error::publish stantio prima di $context: main=$current_main contiene input API piu' recenti di source=$published_source; il run della nuova push deve pubblicare quella release"
+    exit 1
+  fi
+  if [ -n "${GITHUB_ENV:-}" ]; then
+    printf 'PUBLISH_API_SOURCE_COMMIT=%s\n' "$current_main" >> "$GITHUB_ENV"
+  fi
+  export PUBLISH_API_SOURCE_COMMIT="$current_main"
+  echo "::notice::publish riallineato prima di $context da $published_source a $current_main: nessun input publish-api nel delta"
+  exit 0
 fi
 echo "sorgente ancora corrente prima di $context: $published_source"

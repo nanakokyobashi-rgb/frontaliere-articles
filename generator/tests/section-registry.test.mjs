@@ -1719,6 +1719,11 @@ test('publish-api: osserva tutta la chiusura degli import del publisher, e pubbl
   assert.ok(edgeFlipGuard >= 0 && edgeFlipGuard < edgeFlip, 'la guardia finale deve precedere il flip edge');
   assert.match(wf, /Verify source is still current before edge flip/);
   assert.match(freshnessHelper, /timeout --kill-after=1s 60s gh api/);
+  assert.match(freshnessHelper, /git fetch --no-tags origin main/);
+  assert.match(freshnessHelper, /git merge-base --is-ancestor "\$published_source" "\$current_main"/);
+  assert.match(freshnessHelper, /apiInputChangedInRange/);
+  assert.match(freshnessHelper, /GITHUB_ENV/);
+  assert.match(freshnessHelper, /nessun input publish-api nel delta/);
   assert.match(freshnessHelper, /PUBLISH_API_SOURCE_COMMIT/);
   const queuePush = wf.slice(wf.indexOf('push_queue_commit()'), wf.indexOf('queue_changed=false'));
   assert.match(queuePush, /apiInputChangedInRange/);
