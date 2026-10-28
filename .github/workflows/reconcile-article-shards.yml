@@ -218,6 +218,9 @@ jobs:
           # con lo shard target. Gli stati sono una sorgente unica per il
           # filtro delle run e dei job: uno stato Actions non riconosciuto è
           # un payload non interpretabile e quindi resta fail-closed.
+          # I cinque listing filtrati non sono uno snapshot atomico: prima di
+          # fidarsi di un risultato libero, runStatusIsCurrent rilegge ogni
+          # candidato e trasforma ogni transizione in un blocco conservativo.
           IN_FLIGHT_STATUSES='["queued","in_progress","requested","waiting","pending"]'
           ACTION_TERMINAL_STATUS='completed'
 
