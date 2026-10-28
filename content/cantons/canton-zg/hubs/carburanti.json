@@ -4,8 +4,8 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-27T07:28:07.698Z",
-  "contentHash": "3ec232434f8e343b3dbc2af12f2b6166e180ec13926b44b7fe2526fde42498e0",
+  "updatedAt": "2026-10-28T01:37:16.020Z",
+  "contentHash": "4fc3f33fe0790865ea872de47ebf1381bfa3ce520380e385f4ad6dc0bbf04f1c",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -60,6 +60,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Robatech rileva Balti AG a Baar: niente tagli previsti",
+          "url": "/articoli-zugo/balti-zug-robatech-acquisizione/",
+          "excerpt": "Robatech ha rilevato Balti AG a fine settembre Balti AG ha sede a Baar, nel Canton Zugo Non sono previsti tagli o ristrutturazioni Acquirente: Robatech AG",
+          "date": "2026-10-28T01:30:31.021Z"
+        },
+        {
           "title": "Risch investe 231 milioni e riduce le imposte",
           "url": "/articoli-zugo/risch-231-milioni-tasse/",
           "excerpt": "Il titolo di Zentralplus segnala 231 milioni di investimenti per Risch e una riduzione delle imposte.",
@@ -82,12 +88,6 @@
           "url": "/articoli-zugo/zugo-multa-mancata-dichiarazione-fiscale/",
           "excerpt": "Tribunale di Zugo: multa di CHF 900 Cancellata l'imposta effettiva di CHF 41.15 Restano CHF 105 di spese per ritardo La dichiarazione 2023 non è stata",
           "date": "2026-10-22T11:31:01.636Z"
-        },
-        {
-          "title": "Zugo: revisione della legge edilizia dal 17 settembre 2026",
-          "url": "/articoli-zugo/revisione-pbg-zugo-2026/",
-          "excerpt": "Il Canton Zugo avvia la consultazione sulla revisione del PBG: nuove regole per alloggi a prezzo contenuto, zone bianche e semplificazioni procedurali.",
-          "date": "2026-10-22T03:09:05.531Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-27T07:28:07.698Z"
+      "updatedAt": "2026-10-28T01:37:16.020Z"
     },
     "en": {
       "canton": "ZG",
@@ -147,6 +147,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Robatech acquires Balti AG in Baar: no cuts expected",
+          "url": "/en/zug-articles/robatech-takes-over-balti-baar/",
+          "excerpt": "Robatech acquired Balti AG at the end of September Balti AG is based in Baar, in the Canton of Zug No cuts or restructuring are planned Buyer: Robatech AG",
+          "date": "2026-10-28T01:30:31.021Z"
+        },
+        {
           "title": "Risch invests 231 million and reduces taxes",
           "url": "/en/zug-articles/risch-231-million-tax-cut/",
           "excerpt": "The Zentralplus headline reports 231 million in investments for Risch and a reduction in taxes.",
@@ -169,12 +175,6 @@
           "url": "/en/zug-articles/zug-tax-fine-missing-return/",
           "excerpt": "Zug Court: CHF 900 fine Actual tax of CHF 41.15 cancelled CHF 105 in late fees remain The 2023 tax return was not filed Authority → Administrative Court of Zug",
           "date": "2026-10-22T11:31:01.636Z"
-        },
-        {
-          "title": "Zug: revision of the building law from September 17, 2026",
-          "url": "/en/zug-articles/zug-pbg-revision-2026/",
-          "excerpt": "The Canton of Zug launches consultation on the revision of the PBG: new rules for affordable housing, white zones and procedural simplifications.",
-          "date": "2026-10-22T03:09:05.531Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-27T07:28:07.698Z"
+      "updatedAt": "2026-10-28T01:37:16.020Z"
     },
     "de": {
       "canton": "ZG",
@@ -234,6 +234,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Robatech übernimmt Balti AG in Baar: keine Stellenkürzungen vorgesehen",
+          "url": "/de/zug-artikel/robatech-uebernimmt-balti-baar/",
+          "excerpt": "Robatech hat Balti AG Ende September übernommen Balti AG hat ihren Sitz in Baar, Kanton Zug Es sind keine Kürzungen oder Umstrukturierungen geplant Käufer",
+          "date": "2026-10-28T01:30:31.021Z"
+        },
+        {
           "title": "Risch investiert 231 Millionen und senkt die Steuern",
           "url": "/de/zug-artikel/risch-231-millionen-steuern/",
           "excerpt": "Die Überschrift von Zentralplus weist auf Investitionen in Höhe von 231 Millionen für Risch und eine Senkung der Steuern hin.",
@@ -256,12 +262,6 @@
           "url": "/de/zug-artikel/zug-steuerstrafe-fehlende-erklarung/",
           "excerpt": "Gericht Zug: Busse von 900 CHF Effektive Steuer von 41,15 CHF gestrichen 105 CHF Verzugskosten bleiben bestehen Die Steuererklärung 2023 wurde nicht eingereicht",
           "date": "2026-10-22T11:31:01.636Z"
-        },
-        {
-          "title": "Zug: Revision des Baugesetzes ab dem 17. September 2026",
-          "url": "/de/zug-artikel/zug-pbg-revision-2026/",
-          "excerpt": "Der Kanton Zug eröffnet die Vernehmlassung zur Revision des PBG: neue Regeln für preisgünstigen Wohnraum, weisse Zonen und Verfahrensvereinfachungen.",
-          "date": "2026-10-22T03:09:05.531Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-27T07:28:07.698Z"
+      "updatedAt": "2026-10-28T01:37:16.020Z"
     },
     "fr": {
       "canton": "ZG",
@@ -321,6 +321,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Robatech acquiert Balti AG à Baar : aucune suppression de postes prévue",
+          "url": "/fr/articles-zoug/robatech-reprend-balti-baar/",
+          "excerpt": "Robatech a repris Balti AG fin septembre Balti AG est basée à Baar, dans le canton de Zoug Aucun licenciement ou réorganisation n'est prévu Acquéreur : Robatech",
+          "date": "2026-10-28T01:30:31.021Z"
+        },
+        {
           "title": "Risch investit 231 millions et réduit les impôts",
           "url": "/fr/articles-zoug/risch-231-millions-impots/",
           "excerpt": "Le titre de Zentralplus signale 231 millions d’investissements pour Risch et une réduction des impôts.",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-zoug/zoug-amende-declaration-fiscale-manquante/",
           "excerpt": "Tribunal de Zoug : amende de 900 CHF Impôt effectif de 41,15 CHF annulé Frais de retard de 105 CHF restant La déclaration 2023 n'a pas été déposée Autorité →",
           "date": "2026-10-22T11:31:01.636Z"
-        },
-        {
-          "title": "Zoug : révision de la loi sur la construction à partir du 17 septembre 2026",
-          "url": "/fr/articles-zoug/revision-pbg-zoug-2026/",
-          "excerpt": "Le canton de Zoug lance la consultation sur la révision du PBG : nouvelles règles pour les logements à prix modéré, les zones blanches et les simplifications procédurales.",
-          "date": "2026-10-22T03:09:05.531Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-27T07:28:07.698Z"
+      "updatedAt": "2026-10-28T01:37:16.020Z"
     }
   }
 }
