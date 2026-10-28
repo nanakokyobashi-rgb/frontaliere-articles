@@ -45891,6 +45891,16 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'ristorni-malnate-meno-500mila',
+ category: 'fiscale',
+ date: '2026-10-28T15:40:26.747Z',
+ image: '/images/blog/article-ristorni-malnate-meno-500mila.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
