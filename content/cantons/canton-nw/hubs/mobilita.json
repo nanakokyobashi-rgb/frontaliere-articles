@@ -4,12 +4,12 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "mobilita",
-  "updatedAt": "2026-10-28T09:13:19.877Z",
-  "contentHash": "118ec8c0db1bf78618b245b9c93a7e9747e64086263a022d590ef99c19a49814",
+  "updatedAt": "2026-10-28T15:15:44.439Z",
+  "contentHash": "1182ea081e9583383cb800af1c838e8a92f1a90c4fb3133bdcb92ecf21dd0cdc",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-28T00:48:17.406Z",
+      "updatedAt": "2026-10-28T06:23:27.523Z",
       "keyFacts": 2
     },
     {
@@ -32,7 +32,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "5",
+          "value": "4",
           "note": "segnalazioni aggiornate: 28 ottobre 2026"
         }
       ],
@@ -85,14 +85,14 @@
               "date": "2026-10-12T18:00:00.000Z"
             },
             {
-              "label": "A2 Luzern -> S. Gottardo tra Svincolo autostradale Buochs E Svincolo autostradale Beckenried Situazione: problemi di traffico cantiere, lunghezza [km] 0.4 Limitazione del traffico: corsie strette…",
+              "label": "A2 S. Gottardo -> Luzern tra Svincolo autostradale Stans Süd E Svincolo autostradale Stans Nord Situazione: problemi di traffico cantiere, lunghezza [km] 1.2 Limitazione del traffico: corsie strette…",
               "value": "Cantiere",
-              "detail": "fine prevista: 28 ottobre 2026",
-              "date": "2026-10-19T04:10:00.000Z"
+              "detail": "fine prevista: 9 novembre 2026",
+              "date": "2026-10-20T20:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-28T00:48:17.406Z"
+          "updatedAt": "2026-10-28T06:23:27.523Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -158,7 +158,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-28T09:13:19.877Z"
+      "updatedAt": "2026-10-28T15:15:44.439Z"
     },
     "en": {
       "canton": "NW",
@@ -173,7 +173,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "5",
+          "value": "4",
           "note": "reports as of 28 October 2026"
         }
       ],
@@ -226,14 +226,14 @@
               "date": "2026-10-12T18:00:00.000Z"
             },
             {
-              "label": "A2 Luzern -> S. Gottardo tra Svincolo autostradale Buochs E Svincolo autostradale Beckenried Situazione: problemi di traffico cantiere, lunghezza [km] 0.4 Limitazione del traffico: corsie strette…",
+              "label": "A2 S. Gottardo -> Luzern tra Svincolo autostradale Stans Süd E Svincolo autostradale Stans Nord Situazione: problemi di traffico cantiere, lunghezza [km] 1.2 Limitazione del traffico: corsie strette…",
               "value": "Roadworks",
-              "detail": "until 28 October 2026",
-              "date": "2026-10-19T04:10:00.000Z"
+              "detail": "until 9 November 2026",
+              "date": "2026-10-20T20:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-28T00:48:17.406Z"
+          "updatedAt": "2026-10-28T06:23:27.523Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -299,7 +299,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-28T09:13:19.877Z"
+      "updatedAt": "2026-10-28T15:15:44.439Z"
     },
     "de": {
       "canton": "NW",
@@ -314,7 +314,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "5",
+          "value": "4",
           "note": "Meldungen vom 28. Oktober 2026"
         }
       ],
@@ -367,14 +367,14 @@
               "date": "2026-10-12T18:00:00.000Z"
             },
             {
-              "label": "A2 Luzern -> Gotthard zwischen Anschluss Buochs und Anschluss Beckenried Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.4 Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen verengt…",
+              "label": "A2 Gotthard -> Luzern zwischen Anschluss Stans-Süd und Anschluss Stans-Nord Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 1.2 Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen verengt…",
               "value": "Baustelle",
-              "detail": "bis 28. Oktober 2026",
-              "date": "2026-10-19T04:10:00.000Z"
+              "detail": "bis 9. November 2026",
+              "date": "2026-10-20T20:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-28T00:48:17.406Z"
+          "updatedAt": "2026-10-28T06:23:27.523Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -440,7 +440,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-28T09:13:19.877Z"
+      "updatedAt": "2026-10-28T15:15:44.439Z"
     },
     "fr": {
       "canton": "NW",
@@ -455,7 +455,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "5",
+          "value": "4",
           "note": "signalements au 28 octobre 2026"
         }
       ],
@@ -508,14 +508,14 @@
               "date": "2026-10-12T18:00:00.000Z"
             },
             {
-              "label": "A2 Lucerne -> St-Gothard entre Jonction autoroutière Buochs et Jonction autoroutière Beckenried Situation: trafic perturbé travaux, longueur [km] 0.4 Gestion du trafic: rétrécissement des voies sur…",
+              "label": "A2 St-Gothard -> Lucerne entre Jonction autoroutière Stans-Sud et Jonction autoroutière Stans-Nord Situation: trafic perturbé travaux, longueur [km] 1.2 Gestion du trafic: rétrécissement des voies…",
               "value": "Chantier",
-              "detail": "jusqu’au 28 octobre 2026",
-              "date": "2026-10-19T04:10:00.000Z"
+              "detail": "jusqu’au 9 novembre 2026",
+              "date": "2026-10-20T20:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-28T00:48:17.406Z"
+          "updatedAt": "2026-10-28T06:23:27.523Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -581,7 +581,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-28T09:13:19.877Z"
+      "updatedAt": "2026-10-28T15:15:44.439Z"
     }
   }
 }
