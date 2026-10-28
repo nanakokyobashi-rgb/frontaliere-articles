@@ -23,8 +23,6 @@ import { CANTON_DISPLAY_NAMES } from './cantonDisplayNames.mjs';
 
 /** Locales of every canton section page, in hreflang order. */
 export const CANTON_SECTION_LOCALES = ['it', 'en', 'de', 'fr'];
-/** The number of newest article cards rendered on a canton landing. */
-export const CANTON_LANDING_CARD_LIMIT = 24;
 
 /**
  * Per-locale trailing "all" slug of the archive. Same values as
