@@ -772,6 +772,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-economia-neuchateloise-incertezza': {
+    title: 'Economia neuchâteloise: dinamica ma volatile | Frontaliere Ticino',
+    description: 'PIL romando stimato: 198 miliardi di franchi nel 2025 Crescita 2025: 2,2% contro 1,8% in Svizzera Proiezioni: 1,9% nel 2026 e 1,5% l\'anno prossimo',
+    keywords: 'frontalieri, ticino, svizzera, italia, economia, neuch, teloise, dinamica',
+    ogTitle: 'PIL romando 198 miliardi franchi 2025',
+    ogDescription: 'PIL romando stimato: 198 miliardi di franchi nel 2025 Crescita 2025: 2,2% contro 1,8% in Svizzera Proiezioni: 1,9% nel 2026 e 1,5% l\'anno prossimo Neuchâtel',
+    canonicalPath: '/articoli-neuchatel/economia-neuchateloise-incertezza/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Economia neuchâteloise: dinamica ma volatile",
+      "description": "PIL romando stimato: 198 miliardi di franchi nel 2025 Crescita 2025: 2,2% contro 1,8% in Svizzera Proiezioni: 1,9% nel 2026 e 1,5% l'anno prossimo",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-economia-neuchateloise-incertezza.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-28T17:45:20+00:00",
+      "dateModified": "2026-10-28T17:45:20+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-neuchatel/economia-neuchateloise-incertezza/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

@@ -23,6 +23,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'abitazioni-svizzere-rincaro-settembre': { it: 'abitazioni-svizzere-rincaro-settembre', en: 'swiss-housing-rise-september', de: 'schweizer-wohnpreise-september', fr: 'prix-logement-suisse-septembre' },
  'rht-ritorno-normale-orologeria': { it: 'rht-ritorno-normale-orologeria', en: 'rht-return-to-normal-watchmaking', de: 'rht-normal-rueckkehr-uhren', fr: 'rht-retour-normal-horlogerie' },
  'arco-giurassiano-frontalieri': { it: 'arco-giurassiano-frontalieri', en: 'jurassic-arc-cross-border-work', de: 'jurabogen-grenzgaenger-arbeit', fr: 'arc-jurassien-emploi-frontalier' },
+ 'economia-neuchateloise-incertezza': { it: 'economia-neuchateloise-incertezza', en: 'neuchatel-economy-uncertainty', de: 'neuenburg-wirtschaft-unsicherheit', fr: 'economie-neuchatel-incertitude' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

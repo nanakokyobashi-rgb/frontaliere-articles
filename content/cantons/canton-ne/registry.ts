@@ -226,4 +226,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'economia-neuchateloise-incertezza',
+ category: 'novita',
+ date: '2026-10-28T17:45:20.321Z',
+ image: '/images/blog/article-economia-neuchateloise-incertezza.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['NE'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

@@ -63,6 +63,9 @@ const blogMetaCantonNeIt: Record<string, string> = {
     'blog.article.arco-giurassiano-frontalieri.title': 'Mutamenti del lavoro frontaliero nell\'Arco giurassiano',
     'blog.article.arco-giurassiano-frontalieri.excerpt': 'Un episodio sull\'Arco giurassiano affronta i mutamenti dell\'occupazione frontaliera; il quadro 2026 del Cantone di Neuchâtel separa fisco e previdenza.',
     'blog.article.arco-giurassiano-frontalieri.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.economia-neuchateloise-incertezza.title': 'Economia neuchâteloise: dinamica ma volatile',
+    'blog.article.economia-neuchateloise-incertezza.excerpt': 'PIL romando stimato: 198 miliardi di franchi nel 2025 Crescita 2025: 2,2% contro 1,8% in Svizzera Proiezioni: 1,9% nel 2026 e 1,5% l\'anno prossimo Neuchâtel',
+    'blog.article.economia-neuchateloise-incertezza.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonNeIt;

@@ -63,6 +63,9 @@ const blogMetaCantonNeEn: Record<string, string> = {
     'blog.article.arco-giurassiano-frontalieri.title': 'Changes in cross-border employment in the Jura Arc',
     'blog.article.arco-giurassiano-frontalieri.excerpt': 'An episode on the Jura Arc addresses changes in cross-border employment; the 2026 overview of the Canton of Neuchâtel distinguishes taxation and social security.',
     'blog.article.arco-giurassiano-frontalieri.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.economia-neuchateloise-incertezza.title': 'Neuchâtel economy: dynamic but volatile',
+    'blog.article.economia-neuchateloise-incertezza.excerpt': 'Estimated Romanian GDP: 198 billion francs in 2025 Growth 2025: 2.2% versus 1.8% in Switzerland Projections: 1.9% in 2026 and 1.5% next year Neuchâtel: dynamic',
+    'blog.article.economia-neuchateloise-incertezza.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonNeEn;

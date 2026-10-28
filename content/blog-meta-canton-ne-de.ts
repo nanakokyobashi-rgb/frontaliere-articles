@@ -63,6 +63,9 @@ const blogMetaCantonNeDe: Record<string, string> = {
     'blog.article.arco-giurassiano-frontalieri.title': 'Veränderungen der Grenzgängerbeschäftigung im Jurabogen',
     'blog.article.arco-giurassiano-frontalieri.excerpt': 'Eine Folge über den Jurabogen behandelt die Veränderungen der Grenzgängerbeschäftigung; der Steuerüberblick 2026 des Kantons Neuenburg trennt Steuern und Vorsorge.',
     'blog.article.arco-giurassiano-frontalieri.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.economia-neuchateloise-incertezza.title': 'Neuenburger Wirtschaft: dynamisch, aber volatil',
+    'blog.article.economia-neuchateloise-incertezza.excerpt': 'BIP der Westschweiz geschätzt: 198 Milliarden Franken im Jahr 2025 Wachstum 2025: 2,2% gegenüber 1,8% in der Schweiz Prognosen: 1,9% im Jahr 2026 und 1,5%',
+    'blog.article.economia-neuchateloise-incertezza.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonNeDe;
