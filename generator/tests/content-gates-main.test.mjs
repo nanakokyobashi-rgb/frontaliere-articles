@@ -78,6 +78,13 @@ describe('content-gates-main: il workflow', () => {
     assert.match(checkout, /sparse-checkout:\s*\|[\s\S]*\/content\//);
     const required = [
       '/.github/actions/setup-article-source-runtime/action.yml',
+      '/.github/workflows/content-gates-main.yml',
+      '/.github/workflows/fast-publish-article.yml',
+      '/.github/workflows/fast-publish-section.yml',
+      '/.github/workflows/generate-article.yml',
+      '/.github/workflows/publish-api.yml',
+      '/.github/workflows/refresh-canton-hubs.yml',
+      '/.github/workflows/tests.yml',
       '/data/article-source-urls.json',
       '/data/article-type-cutover.json',
       '/data/evergreen-verifications.json',

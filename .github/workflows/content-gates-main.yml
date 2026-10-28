@@ -72,6 +72,13 @@ jobs:
           filter: blob:none
           sparse-checkout: |
             /.github/actions/setup-article-source-runtime/action.yml
+            /.github/workflows/content-gates-main.yml
+            /.github/workflows/fast-publish-article.yml
+            /.github/workflows/fast-publish-section.yml
+            /.github/workflows/generate-article.yml
+            /.github/workflows/publish-api.yml
+            /.github/workflows/refresh-canton-hubs.yml
+            /.github/workflows/tests.yml
             /content/
             /data/article-source-urls.json
             /data/article-type-cutover.json
