@@ -69,6 +69,9 @@ const blogMetaCantonAgIt: Record<string, string> = {
     'blog.article.ristrizioni-rueeblimart-aarau.title': 'Restrizioni traffico Rüeblimärt Aarau mercoledì 4 novembre 2026',
     'blog.article.ristrizioni-rueeblimart-aarau.excerpt': 'Il Rüeblimärt attira circa 35.000 visitatori; Graben, Schlossplatz e Laurenzentorgasse saranno chiusi al traffico.',
     'blog.article.ristrizioni-rueeblimart-aarau.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.fislisbach-acqua-potabile.title': 'Fislisbach: acqua potabile scarsa, Baden continua a fornire',
+    'blog.article.fislisbach-acqua-potabile.excerpt': 'A metà ottobre 2026 il prelievo settimanale era sceso a 7\'136 m³, il 60,4% in meno rispetto ai 18\'035 m³ di fine luglio.',
+    'blog.article.fislisbach-acqua-potabile.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonAgIt;

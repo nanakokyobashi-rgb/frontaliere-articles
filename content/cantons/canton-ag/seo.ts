@@ -855,6 +855,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-fislisbach-acqua-potabile': {
+    title: 'Fislisbach: acqua potabile scarsa, Baden continua a fornire',
+    description: 'A metà ottobre 2026 Fislisbach prelevava 7\'136 m³ a settimana, il 60,4% in meno del picco di fine luglio. Le forniture di Baden restano necessarie.',
+    keywords: 'frontalieri, ticino, svizzera, italia, fislisbach, acqua, potabile, scarsa',
+    ogTitle: 'Acqua potabile ancora scarsa a Fislisbach',
+    ogDescription: 'Piogge recenti hanno dato una prima tregua a Fislisbach, ma le consegne di Regionalwerke Baden AG restano necessarie. A metà ottobre il prelievo era 7\'136 m³ settimanali, il 60,4% sotto il picco di fine luglio.',
+    canonicalPath: '/articoli-argovia/fislisbach-acqua-potabile/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Fislisbach: acqua potabile scarsa, Baden continua a fornire",
+      "description": "A metà ottobre 2026 Fislisbach prelevava 7'136 m³ a settimana, il 60,4% in meno del picco di fine luglio. Le forniture di Baden restano necessarie.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-fislisbach-acqua-potabile.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-28T11:31:41+00:00",
+      "dateModified": "2026-10-28T11:31:41+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-argovia/fislisbach-acqua-potabile/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

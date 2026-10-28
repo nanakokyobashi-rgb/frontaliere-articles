@@ -248,4 +248,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'fislisbach-acqua-potabile',
+ category: 'pratico',
+ date: '2026-10-28T11:31:41.205Z',
+ image: '/images/blog/article-fislisbach-acqua-potabile.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['AG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
