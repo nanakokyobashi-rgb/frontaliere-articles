@@ -5,8 +5,11 @@ import { readFileSync } from 'node:fs';
 import {
   clearBootstrapLockOwnerStatusCache,
   classifyBootstrapLockOwnerRun,
+  makeSectionBootstrapLock,
   parseBootstrapLockOwner,
   readBootstrapLockOwnerRun,
+  readSectionBootstrapLock,
+  SECTION_BOOTSTRAP_LOCK_READ_ATTEMPTS,
 } from '../../scripts/lib/section-bootstrap-lock.mjs';
 
 const CLI = readFileSync(new URL('../../scripts/ci/section-bootstrap-lock.mjs', import.meta.url), 'utf8');
@@ -83,6 +86,65 @@ test('bootstrap lock: owner non verificabile resta fail-closed', async () => {
     'nanakokyobashi-rgb/frontaliere-articles:40367509462:1',
     { env: {} },
   ), { state: 'unknown', reason: 'token GitHub assente' });
+});
+
+test('bootstrap lock: ritenta i timeout edge transienti e conserva ETag e documento', async () => {
+  const lock = makeSectionBootstrapLock({
+    section: 'canton-ti',
+    commit: 'a'.repeat(40),
+    owner: 'nanakokyobashi-rgb/frontaliere-articles:40367509462:1',
+    now: Date.parse('2026-10-28T06:00:00Z'),
+    ttlMs: 60_000,
+  });
+  let calls = 0;
+  const result = await readSectionBootstrapLock('canton-ti', {
+    now: Date.parse('2026-10-28T06:00:30Z'),
+    retryDelayMs: 0,
+    fetchImpl: async () => {
+      calls += 1;
+      if (calls < 3) throw new DOMException('The operation timed out', 'TimeoutError');
+      return new Response(JSON.stringify(lock), {
+        status: 200,
+        headers: { etag: 'W/"edge-etag"' },
+      });
+    },
+  });
+
+  assert.equal(result.state, 'active');
+  assert.equal(result.doc.owner, lock.owner);
+  assert.equal(result.etag, '"edge-etag"');
+  assert.equal(calls, 3);
+});
+
+test('bootstrap lock: il cap impedisce retry infiniti e marca l unknown come transient', async () => {
+  let calls = 0;
+  const result = await readSectionBootstrapLock('canton-ti', {
+    attempts: 99,
+    retryDelayMs: 0,
+    fetchImpl: async () => {
+      calls += 1;
+      throw new DOMException('The operation timed out', 'TimeoutError');
+    },
+  });
+
+  assert.equal(result.state, 'unknown');
+  assert.equal(result.transient, true);
+  assert.equal(calls, SECTION_BOOTSTRAP_LOCK_READ_ATTEMPTS);
+});
+
+test('bootstrap lock: un documento non valido resta deterministico e non ritentabile', async () => {
+  let calls = 0;
+  const result = await readSectionBootstrapLock('canton-ti', {
+    retryDelayMs: 0,
+    fetchImpl: async () => {
+      calls += 1;
+      return new Response(JSON.stringify({ schema: 999 }), { status: 200 });
+    },
+  });
+
+  assert.equal(result.state, 'unknown');
+  assert.equal(result.transient, undefined);
+  assert.equal(calls, 1);
 });
 
 test('bootstrap lock: un attempt terminato viene sostituito atomically con If-Match e i publisher ricevono il token di lettura', () => {

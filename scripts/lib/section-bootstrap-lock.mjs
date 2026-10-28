@@ -10,6 +10,7 @@
  */
 
 import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from '../../generator/scripts/lib/fetch-with-ref-timeout.mjs';
+import { isTransientFetchError } from './declared-image-fetch.mjs';
 
 export const SECTION_BOOTSTRAP_LOCK_PREFIX = 'edge/sections/_bootstrap-locks';
 export const SECTION_BOOTSTRAP_LOCK_SCHEMA = 1;
@@ -24,6 +25,8 @@ export const SECTION_BOOTSTRAP_LOCK_TTL_MS = 375 * 60 * 1000;
 export const SECTION_EDGE_PUBLISHER_LOCK_TTL_MS = 195 * 60 * 1000;
 export const SECTION_BOOTSTRAP_LOCK_CACHE_CONTROL = 'public,max-age=5';
 export const SECTION_BOOTSTRAP_OWNER_STATUS_CACHE_MS = 60 * 1000;
+export const SECTION_BOOTSTRAP_LOCK_READ_ATTEMPTS = 3;
+export const SECTION_BOOTSTRAP_LOCK_RETRY_DELAY_MS = 1_000;
 const SECTION_RE = /^canton-[a-z]+$/;
 const SHA_RE = /^[a-f0-9]{7,64}$/;
 const OWNER_RE = /^([^:]+\/[^:]+):(\d+):(\d+)$/;
@@ -204,25 +207,49 @@ export function parseSectionBootstrapLock(value, { section, now = Date.now() } =
 /** Lettura pubblica del marker; 404 = nessun lock, errore di rete = unknown. */
 export async function readSectionBootstrapLock(
   section,
-  { cdnBase = 'https://cdn.frontaliereticino.ch', fetchImpl = fetch, now = Date.now() } = {},
+  {
+    cdnBase = 'https://cdn.frontaliereticino.ch',
+    fetchImpl = fetch,
+    now = Date.now(),
+    attempts = SECTION_BOOTSTRAP_LOCK_READ_ATTEMPTS,
+    retryDelayMs = SECTION_BOOTSTRAP_LOCK_RETRY_DELAY_MS,
+    sleepImpl = (ms) => new Promise((resolve) => setTimeout(resolve, ms)),
+  } = {},
 ) {
   const url = `${sectionBootstrapLockUrl(section, cdnBase)}?_sbl=${Date.now()}`;
-  try {
-    const response = await fetchWithRefTimeout(url, {
-      headers: { 'user-agent': 'frontaliere-section-bootstrap-lock/1 (+https://frontaliereticino.ch)' },
-    }, 15_000, fetchImpl);
-    if (response.status === 404) {
-      releaseFetchWithRefTimeout(response);
-      return { state: 'absent' };
+  const maxAttempts = Number.isInteger(attempts) && attempts > 0
+    ? Math.min(attempts, SECTION_BOOTSTRAP_LOCK_READ_ATTEMPTS)
+    : SECTION_BOOTSTRAP_LOCK_READ_ATTEMPTS;
+  const delay = Number.isFinite(retryDelayMs) && retryDelayMs > 0 ? retryDelayMs : 0;
+  let lastTransient = null;
+  for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+    try {
+      const response = await fetchWithRefTimeout(`${url}.${attempt}`, {
+        headers: { 'user-agent': 'frontaliere-section-bootstrap-lock/1 (+https://frontaliereticino.ch)' },
+      }, 15_000, fetchImpl);
+      if (response.status === 404) {
+        releaseFetchWithRefTimeout(response);
+        return { state: 'absent' };
+      }
+      if (!response.ok) {
+        const reason = `HTTP ${response.status}`;
+        const transient = isTransientFetchError(null, reason);
+        releaseFetchWithRefTimeout(response);
+        if (transient) lastTransient = { state: 'unknown', reason, transient: true };
+        else return { state: 'unknown', reason };
+      } else {
+        const etag = normalizeS3MatchEtag(response.headers.get('etag'));
+        const body = await response.text();
+        return { ...parseSectionBootstrapLock(body, { section, now }), etag: etag || null };
+      }
+    } catch (error) {
+      const reason = error?.message ?? String(error);
+      const transient = isTransientFetchError(error, reason);
+      if (!transient) return { state: 'unknown', reason };
+      lastTransient = { state: 'unknown', reason, transient: true };
     }
-    if (!response.ok) {
-      releaseFetchWithRefTimeout(response);
-      return { state: 'unknown', reason: `HTTP ${response.status}` };
-    }
-    const etag = normalizeS3MatchEtag(response.headers.get('etag'));
-    const body = await response.text();
-    return { ...parseSectionBootstrapLock(body, { section, now }), etag: etag || null };
-  } catch (error) {
-    return { state: 'unknown', reason: error?.message ?? String(error) };
+    if (attempt >= maxAttempts) break;
+    if (delay > 0) await sleepImpl(delay);
   }
+  return lastTransient ?? { state: 'unknown', reason: 'bootstrap lock non verificabile' };
 }

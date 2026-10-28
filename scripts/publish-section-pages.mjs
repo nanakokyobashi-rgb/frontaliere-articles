@@ -2892,6 +2892,12 @@ export async function main(
     defects.push('registro edge illeggibile o non valido: stato effettivo della sezione non dimostrato');
   }
   if (publishing && publishedManifest.state === 'unknown') {
+    if (publishedManifest.transient === true) {
+      console.error(
+        `::error::[${LOG}] SECTION_PAGE_MANIFEST_TRANSIENT: manifest edge ${section} ` +
+        `non verificabile (${publishedManifest.reason ?? 'errore transitorio'})`,
+      );
+    }
     defects.push(
       `manifest edge ${section} non verificabile (${publishedManifest.reason ?? 'errore sconosciuto'}): ` +
       'pubblicazione bloccata per non calcolare cancellazioni dal parent del push',

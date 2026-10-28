@@ -136,6 +136,27 @@ test('i marker del publish immagini classificano il fallimento come transitorio'
   }
 });
 
+test('i marker delle letture edge classificano il fallimento come transitorio', () => {
+  for (const failureMessage of [
+    'SECTION_PAGE_MANIFEST_TRANSIENT: manifest edge non verificabile',
+    'SECTION_BOOTSTRAP_LOCK_TRANSIENT: bootstrap lock timeout',
+  ]) {
+    const { code, calls, out } = runWith({ failTimes: 1, failureMessage });
+    assert.equal(code, 0, `${failureMessage} doveva essere ritentato, invece:\n${out}`);
+    assert.equal(calls, 2);
+  }
+});
+
+test('un timeout non marcato non rende retryabile un errore deterministico', () => {
+  const { code, calls, out } = runWith({
+    failTimes: 99,
+    failureMessage: 'validation timed out because the input is invalid',
+  });
+  assert.notEqual(code, 0);
+  assert.equal(calls, 1);
+  assert.match(out, /non transitorio/);
+});
+
 test('gli status HTTP numerici e la forma status code restano ritentabili', () => {
   for (const failureMessage of ['429 Too Many Requests', '500 Internal Server Error', 'status code: 500']) {
     const { code, calls, out } = runWith({ failTimes: 1, failureMessage });
