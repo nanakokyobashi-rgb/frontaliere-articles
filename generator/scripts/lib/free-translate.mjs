@@ -2287,7 +2287,7 @@ function _logCodexNonTranslation(item, reason) {
 }
 
 async function translateWithCodex(text, sourceLang, targetLang, outcome = null, position = 'primary') {
-  const clean = normalizeBlock(text);
+  const clean = normalizeProviderBlock(text);
   if (!clean || sourceLang === targetLang) return '';
   // La cascata chiama il tier in entrambe le posizioni: risponde solo quella
   // scelta per il processo.
@@ -2318,10 +2318,12 @@ function _codexBatchMaxChars() {
 }
 
 /**
- * Il batching ritardato e' una opt-in dei workflow che hanno misurato la
- * necessita' di accorpare testi: basta esplicitare il tetto di righe oppure il
- * budget di caratteri. Senza una variabile esplicita il percorso generale
- * conserva l'avvio immediato delle richieste singleton.
+ * Il batching oltre la partizione naturale della coda e' una opt-in dei
+ * workflow che hanno misurato la necessita' di accorpare testi: basta
+ * esplicitare il tetto di righe oppure il budget di caratteri. L'avvio resta
+ * sincrono; la variabile abilita solo il raggruppamento dei testi gia' arrivati
+ * nella coda mentre una corsia e' occupata, senza una finestra temporale
+ * implicita.
  */
 function _codexBatchingExplicitlyEnabled() {
   const rawTexts = String(process.env.FREE_TRANSLATE_CODEX_BATCH_MAX_TEXTS || '').trim();
@@ -2439,9 +2441,8 @@ export function withCodexTranslationLane({
 }
 
 function _scheduleCodexPump() {
-  // The corpus callers historically rely on the first request starting
-  // immediately; queued texts are grouped as soon as the lane becomes free.
-  // Keep the scheduler synchronous even when a batch ceiling is configured.
+  // La prima richiesta parte subito; i testi che arrivano mentre una corsia e'
+  // occupata vengono raggruppati da _takeCodexGroup secondo i tetti espliciti.
   _pumpCodex();
 }
 
@@ -2518,11 +2519,12 @@ function _takeCodexGroup() {
   const first = _codexPending.shift();
   const group = [first];
   let chars = first.clean.length;
-  // With an explicit batch setting, a short burst of at most one text per
-  // lane is precisely the case the collection window is meant to rescue:
+  // With an explicit batch setting, a short queue of at most one text per lane
+  // can still be grouped when it is already present while a lane is occupied:
   // `ceil(2 / 3)` or `ceil(3 / 3)` would otherwise keep every text singleton.
-  // For a longer queue retain the measured queue/lane partition so one full
-  // batch does not starve the other lanes.
+  // This is queue partitioning, not a delayed collection window. For a longer
+  // queue retain the measured queue/lane partition so one full batch does not
+  // starve the other lanes.
   const maxTexts = pendingCount <= _codexLanes() && _codexBatchingExplicitlyEnabled()
     ? Math.min(_codexBatchMaxTexts(), pendingCount)
     : Math.min(_codexBatchMaxTexts(), Math.max(share, 1));
