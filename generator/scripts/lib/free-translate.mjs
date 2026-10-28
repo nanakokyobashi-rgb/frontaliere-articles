@@ -1885,7 +1885,7 @@ async function translateWithAzure(text, sourceLang, targetLang, outcome = null) 
 //   - FREE_TRANSLATE_CODEX_MAX_CALLS: richieste a Codex (default 40; 0 spegne
 //     il tier). Una richiesta puo' tradurre piu' testi, vedi sotto.
 //   - FREE_TRANSLATE_CODEX_MAX_MS: tempo di orologio in cui il processo ha
-//     almeno una richiesta Codex in volo (default 5 minuti). create-article ha
+//     almeno una richiesta Codex in volo (default 15 minuti). create-article ha
 //     un hard kill a 40 minuti: un budget solo a richieste potrebbe costargli
 //     l'articolo. Si conta l'orologio, non la somma delle durate: due
 //     richieste parallele di 10 s costano 10 s. Ogni controllo legge il tempo
@@ -1934,7 +1934,7 @@ async function translateWithAzure(text, sourceLang, targetLang, outcome = null) 
 // (scripts/measure-codex-translate-tier.mjs): 30 campi di articolo 232 → 113 s
 // e 184k → 62k token di input; 8 testi FAQ 61 → 30 s e 49k → 31k.
 const CODEX_TRANSLATE_MAX_CALLS_DEFAULT = 40;
-const CODEX_TRANSLATE_MAX_MS_DEFAULT = 5 * 60 * 1000;
+const CODEX_TRANSLATE_MAX_MS_DEFAULT = 15 * 60 * 1000;
 const CODEX_TRANSLATE_LANES_DEFAULT = 2;
 const CODEX_TRANSLATE_LANES_MAX = 3;
 const CODEX_TRANSLATE_BATCH_MAX_TEXTS_DEFAULT = 5;
@@ -1977,7 +1977,7 @@ function codexTranslateCallTimeoutMs() {
 // caso di translate-pending e degli altri chiamanti senza un `timeout`
 // esterno, per i quali il comportamento resta quello di prima.
 //
-// Perche' serve: il budget del tier (FREE_TRANSLATE_CODEX_MAX_MS, 5 minuti)
+// Perche' serve: il budget del tier (FREE_TRANSLATE_CODEX_MAX_MS, 15 minuti)
 // conta il tempo con richieste in volo dall'inizio delle traduzioni, non e'
 // ancorato all'orologio del processo. create-article parte con le traduzioni dopo generazione e gate,
 // quindi sulle run 36309380063 e 36305591991 i 300 s di Codex sono partiti a
