@@ -76,12 +76,28 @@ describe('content-gates-main: il workflow', () => {
     assert.match(checkout, /fetch-depth:\s*0/, 'il floor storico richiede il grafo completo');
     assert.match(checkout, /filter:\s*blob:none/, 'i blob delle revisioni storiche non servono al gate');
     assert.match(checkout, /sparse-checkout:\s*\|[\s\S]*\/content\//);
-    assert.match(checkout, /\/\.github\/actions\/setup-article-source-runtime\/action\.yml/);
-    for (const required of ['/generator/', '/scripts/']) {
-      assert.match(checkout, new RegExp(required.replaceAll('/', '\\/')));
+    const required = [
+      '/.github/actions/setup-article-source-runtime/action.yml',
+      '/data/article-source-urls.json',
+      '/data/article-type-cutover.json',
+      '/data/evergreen-verifications.json',
+      '/data/retired-articles.json',
+      '/data/swiss-article-source-urls.json',
+      '/engine/',
+      '/generator/',
+      '/host/',
+      '/public/images/blog/article-cantello-teatro-dialettale-ottobre-2026.webp',
+      '/public/images/blog/article-contributi-formazione-berna-requisiti.webp',
+      '/public/images/blog/article-festival-racconto-varese-ottobre.webp',
+      '/public/images/blog/article-mcdonalds-pulizia-malnate-2026.webp',
+      '/public/images/blog/bollettino-frontaliere-2026-10-18.webp',
+      '/scripts/',
+    ];
+    for (const path of required) {
+      assert.ok(checkout.includes(path), `percorso richiesto non materializzato: ${path}`);
     }
-    assert.doesNotMatch(checkout, /^\s+\/(?:data|public)\//mu,
-      'il checkout del content gate non deve materializzare dataset o asset pesanti');
+    assert.doesNotMatch(checkout, /^\s+\/(?:data|public)\/$/mu,
+      'il checkout del content gate non deve materializzare intere directory pesanti');
     assert.match(checkout, /sparse-checkout-cone-mode:\s*false/);
   });
 

@@ -66,13 +66,26 @@ jobs:
           # revision before the content gate publishes its verdict.
           fetch-depth: 0
           # Keep the complete commit graph for the explicit push base, but do
-          # not download blobs from unrelated historical trees. The gate only
-          # needs the current corpus and its executable readers.
+          # not download blobs from unrelated historical trees. The gate
+          # needs the current corpus, its executable readers, and only the
+          # small ledgers/assets named by its source-backed contracts.
           filter: blob:none
           sparse-checkout: |
             /.github/actions/setup-article-source-runtime/action.yml
             /content/
+            /data/article-source-urls.json
+            /data/article-type-cutover.json
+            /data/evergreen-verifications.json
+            /data/retired-articles.json
+            /data/swiss-article-source-urls.json
+            /engine/
             /generator/
+            /host/
+            /public/images/blog/article-cantello-teatro-dialettale-ottobre-2026.webp
+            /public/images/blog/article-contributi-formazione-berna-requisiti.webp
+            /public/images/blog/article-festival-racconto-varese-ottobre.webp
+            /public/images/blog/article-mcdonalds-pulizia-malnate-2026.webp
+            /public/images/blog/bollettino-frontaliere-2026-10-18.webp
             /scripts/
           sparse-checkout-cone-mode: false
 
