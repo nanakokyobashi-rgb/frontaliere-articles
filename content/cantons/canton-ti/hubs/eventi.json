@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "eventi",
-  "updatedAt": "2026-10-28T01:14:28.455Z",
-  "contentHash": "970c75c0e6c9da41e0c4d65477a614a42eb9b1dc88bc23b8201b72f250929385",
+  "updatedAt": "2026-10-28T01:42:08.311Z",
+  "contentHash": "ccc18b03a6785bd773600cf22bab42def660cee0b930f657a4423b4686b044bc",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -100,6 +100,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Accordo UE: apertura del mercato ferroviario a rischio",
+          "url": "/articoli-ticino/sistema-ferroviario-accordo-ue/",
+          "excerpt": "L'accordo UE coinvolgerà anche i trasporti Oggi gli operatori esteri collaborano con le FFS Un'apertura del mercato del 20% potrebbe mettere a rischio l'orario",
+          "date": "2026-10-28T01:31:55.792Z"
+        },
+        {
           "title": "Museo storico a Palazzo Civico: mozione interpartitica a Lugano",
           "url": "/articoli-frontaliere/museo-storico-palazzo-civico-lugano/",
           "excerpt": "Dieci consiglieri comunali chiedono di valutare un museo storico al secondo piano di Palazzo Civico, che si libererà nel 2028 col trasloco a Cornaredo.",
@@ -140,12 +146,6 @@
           "url": "/articoli-frontaliere/teatro-locarno-fondi-pubblici/",
           "excerpt": "Oltre cento soci all’assemblea di giovedì sera Deficit di circa 55'000 franchi nella stagione 2025/26 Il disavanzo è stato coperto con il patrimonio sociale",
           "date": "2026-10-09T23:43:17.647Z"
-        },
-        {
-          "title": "Locarno Film Festival: la cultura come legame",
-          "url": "/articoli-frontaliere/locarno-film-festival-resistenza-legami/",
-          "excerpt": "Il Locarno Film Festival inaugura con 'Les Yeux Verts', esplorando temi di trauma e resilienza attraverso il cinema in Piazza Grande.",
-          "date": "2026-08-05T04:40:05.340Z"
         }
       ],
       "latestCantonArticles": [],
@@ -163,7 +163,7 @@
           "url": "/articoli-frontaliere/eventi-weekend-ticino/"
         }
       ],
-      "updatedAt": "2026-10-28T01:14:28.455Z"
+      "updatedAt": "2026-10-28T01:42:08.311Z"
     },
     "en": {
       "canton": "TI",
@@ -251,6 +251,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "EU agreement: opening the railway market at risk",
+          "url": "/en/ticino-articles/railway-system-eu-agreement/",
+          "excerpt": "The EU agreement will also affect transport Today, foreign operators collaborate with FFS A 20% opening of the market could put the timetable at risk",
+          "date": "2026-10-28T01:31:55.792Z"
+        },
+        {
           "title": "Historical Museum at Palazzo Civico: cross-party motion in Lugano",
           "url": "/en/cross-border-articles/historical-museum-palazzo-civico-lugano/",
           "excerpt": "Ten city councillors ask to evaluate a historical museum on the second floor of Palazzo Civico, which will be liberated in 2028 with the move to Cornaredo.",
@@ -291,12 +297,6 @@
           "url": "/en/cross-border-articles/locarno-theatre-public-funding/",
           "excerpt": "More than one hundred members at Thursday evening's assembly A deficit of approximately 55'000 francs in the 2025/26 season The shortfall was covered with the association's assets",
           "date": "2026-10-09T23:43:17.647Z"
-        },
-        {
-          "title": "Locarno Film Festival: culture as a link",
-          "url": "/en/cross-border-articles/locarno-film-festival-bonds-resistance/",
-          "excerpt": "The Locarno Film Festival opens with 'Les Yeux Verts', exploring themes of trauma and resilience through cinema in Piazza Grande.",
-          "date": "2026-08-05T04:40:05.340Z"
         }
       ],
       "latestCantonArticles": [],
@@ -314,7 +314,7 @@
           "url": "/en/cross-border-articles/weekend-events-ticino/"
         }
       ],
-      "updatedAt": "2026-10-28T01:14:28.455Z"
+      "updatedAt": "2026-10-28T01:42:08.311Z"
     },
     "de": {
       "canton": "TI",
@@ -402,6 +402,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "EU-Abkommen: Öffnung des Eisenbahnmarktes in Gefahr",
+          "url": "/de/tessin-artikel/schienennetz-eu-abkommen/",
+          "excerpt": "Das EU-Abkommen wird auch den Verkehr betreffen Heute arbeiten ausländische Betreiber mit den FFS zusammen Eine Öffnung des Marktes um 20% könnte den Fahrplan gefährden",
+          "date": "2026-10-28T01:31:55.792Z"
+        },
+        {
           "title": "Historisches Museum im Palazzo Civico: parteiübergreifender Antrag in Lugano",
           "url": "/de/grenzgaenger-artikel/historisches-museum-palazzo-civico-lugano/",
           "excerpt": "Zehn Gemeinderäte fordern die Bewertung eines historischen Museums im zweiten Stock des Palazzo Civico, das 2028 mit dem Umzug nach Cornaredo freigegeben wird.",
@@ -442,12 +448,6 @@
           "url": "/de/grenzgaenger-artikel/theater-locarno-oeffentliche-gelder/",
           "excerpt": "Über hundert Mitglieder an der Versammlung am Donnerstagabend Defizit von rund 55'000 Franken in der Saison 2025/26 Das Defizit wurde mit dem Vereinsvermögen gedeckt",
           "date": "2026-10-09T23:43:17.647Z"
-        },
-        {
-          "title": "Locarno Film Festival: Kultur als Verbindung",
-          "url": "/de/grenzgaenger-artikel/locarno-film-festival-bande-widerstand/",
-          "excerpt": "Das Locarno Film Festival eröffnet mit \"Les Yeux Verts\" und erforscht Themen wie Trauma und Resilienz durch das Kino auf der Piazza Grande.",
-          "date": "2026-08-05T04:40:05.340Z"
         }
       ],
       "latestCantonArticles": [],
@@ -465,7 +465,7 @@
           "url": "/de/grenzgaenger-artikel/wochenend-veranstaltungen-tessin/"
         }
       ],
-      "updatedAt": "2026-10-28T01:14:28.455Z"
+      "updatedAt": "2026-10-28T01:42:08.311Z"
     },
     "fr": {
       "canton": "TI",
@@ -553,6 +553,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Accord UE : l’ouverture du marché ferroviaire menacée",
+          "url": "/fr/articles-tessin/systeme-ferroviaire-accord-ue/",
+          "excerpt": "L'accord UE concernera également les transports Aujourd'hui, les opérateurs étrangers collaborent avec les FFS Une ouverture du marché de 20% pourrait mettre en danger l'horaire cadencé",
+          "date": "2026-10-28T01:31:55.792Z"
+        },
+        {
           "title": "Musée historique au Palazzo Civico : motion interpartisane à Lugano",
           "url": "/fr/articles-frontalier/musee-historique-palazzo-civico-lugano/",
           "excerpt": "Dix conseillers municipaux demandent d’envisager un musée historique au deuxième étage du Palazzo Civico, qui sera libéré en 2028 avec le déménagement à Cornaredo.",
@@ -593,12 +599,6 @@
           "url": "/fr/articles-frontalier/theatre-locarno-fonds-publics/",
           "excerpt": "Plus de cent associés à l'assemblée du jeudi soir Déficit d'environ 55'000 francs pour la saison 2025/26 Le déficit a été couvert par le patrimoine social",
           "date": "2026-10-09T23:43:17.647Z"
-        },
-        {
-          "title": "Festival du film de Locarno : la culture comme lien",
-          "url": "/fr/articles-frontalier/locarno-film-festival-liens-resistance/",
-          "excerpt": "Le Locarno Film Festival ouvre avec « Les Yeux Verts », explorant les thèmes du traumatisme et de la résilience à travers le cinéma sur la Piazza Grande.",
-          "date": "2026-08-05T04:40:05.340Z"
         }
       ],
       "latestCantonArticles": [],
@@ -616,7 +616,7 @@
           "url": "/fr/articles-frontalier/evenements-week-end-tessin/"
         }
       ],
-      "updatedAt": "2026-10-28T01:14:28.455Z"
+      "updatedAt": "2026-10-28T01:42:08.311Z"
     }
   }
 }
