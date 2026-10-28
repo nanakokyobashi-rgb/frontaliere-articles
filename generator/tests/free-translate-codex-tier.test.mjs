@@ -853,6 +853,22 @@ test('FREE_TRANSLATE_CODEX_BATCH_MAX_TEXTS=1 con una corsia torna una richiesta 
   }
 });
 
+test('il batch opt-in raccoglie il primo burst prima di riempire le corsie', async () => {
+  process.env.FREE_TRANSLATE_CODEX_BATCH_MAX_TEXTS = '3';
+  try {
+    await withLanes(3, async () => {
+      const calls = stubCodex(codexAnswer());
+      const texts = numbered(3);
+      const { value } = await captureLog(() => Promise.all(texts.map((text) => it(text))));
+      assert.deepEqual(value, texts.map(translationOf));
+      assert.equal(calls.length, 1);
+      assert.equal(batchItems(calls[0].messages).length, 3);
+    });
+  } finally {
+    delete process.env.FREE_TRANSLATE_CODEX_BATCH_MAX_TEXTS;
+  }
+});
+
 test('con le corsie occupate i testi in coda partono insieme, con lo schema a id e le regole del testo singolo', async () => {
   await withLanes(1, async () => {
     const calls = stubCodex(codexAnswer());
