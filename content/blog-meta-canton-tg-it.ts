@@ -60,6 +60,9 @@ const blogMetaCantonTgIt: Record<string, string> = {
     'blog.article.imprenditori-cantone-turgovia-sostegno.title': 'Imprenditori nel Canton Turgovia: condizioni quadro attrattive',
     'blog.article.imprenditori-cantone-turgovia-sostegno.excerpt': 'Il cantone offre supporto a imprenditrici e imprenditori per condizioni quadro attrattive, coprendo immobile, permessi e contatti amministrativi.',
     'blog.article.imprenditori-cantone-turgovia-sostegno.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.frauenfeld-revisione-regolamento-salariale.title': 'Frauenfeld: pubblicata la revisione parziale del regolamento salariale',
+    'blog.article.frauenfeld-revisione-regolamento-salariale.excerpt': 'La citta di Frauenfeld presenta una pubblicazione referendaria dedicata alla revisione parziale del regolamento salariale, corredata da un allegato PDF di 88 KB.',
+    'blog.article.frauenfeld-revisione-regolamento-salariale.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonTgIt;

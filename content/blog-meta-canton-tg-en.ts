@@ -60,6 +60,9 @@ const blogMetaCantonTgEn: Record<string, string> = {
     'blog.article.imprenditori-cantone-turgovia-sostegno.title': 'Entrepreneurs in the Canton of Thurgau: attractive framework conditions',
     'blog.article.imprenditori-cantone-turgovia-sostegno.excerpt': 'The canton supports entrepreneurs in creating attractive framework conditions, covering real estate, permits, and administrative contacts.',
     'blog.article.imprenditori-cantone-turgovia-sostegno.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.frauenfeld-revisione-regolamento-salariale.title': 'Frauenfeld: partial revision of the salary regulations published',
+    'blog.article.frauenfeld-revisione-regolamento-salariale.excerpt': 'The city of Frauenfeld presents a referendum publication dedicated to the partial revision of the salary regulations, accompanied by an 88 KB PDF attachment.',
+    'blog.article.frauenfeld-revisione-regolamento-salariale.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonTgEn;

@@ -215,4 +215,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'frauenfeld-revisione-regolamento-salariale',
+ category: 'novita',
+ date: '2026-10-29T23:14:34.048Z',
+ image: '/images/blog/article-frauenfeld-revisione-regolamento-salariale.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

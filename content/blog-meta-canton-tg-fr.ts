@@ -60,6 +60,9 @@ const blogMetaCantonTgFr: Record<string, string> = {
     'blog.article.imprenditori-cantone-turgovia-sostegno.title': 'Entrepreneurs Thurgovie : conditions-cadres attractives',
     'blog.article.imprenditori-cantone-turgovia-sostegno.excerpt': 'Le canton soutient les entrepreneuses et les entrepreneurs en leur offrant des conditions-cadres attrayantes, notamment en matière de biens immobiliers, d’autorisations et de contacts administratifs.',
     'blog.article.imprenditori-cantone-turgovia-sostegno.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.frauenfeld-revisione-regolamento-salariale.title': 'Frauenfeld : publication de la révision partielle du règlement salarial',
+    'blog.article.frauenfeld-revisione-regolamento-salariale.excerpt': 'La ville de Frauenfeld présente une publication référendaire consacrée à la révision partielle du règlement salarial, accompagnée d\'une pièce jointe PDF de 88 KB.',
+    'blog.article.frauenfeld-revisione-regolamento-salariale.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonTgFr;
