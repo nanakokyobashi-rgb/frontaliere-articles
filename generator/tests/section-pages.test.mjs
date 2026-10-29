@@ -4284,6 +4284,7 @@ test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta',
   assert.match(cohortVerifier, /gh run download "\$run_id" --repo "\$repository"/);
   assert.match(cohortVerifier, /for attempt in 1 2 3; do[\s\S]*download_ok=true[\s\S]*sleep "\$delay"/);
   assert.match(cohortVerifier, /gh workflow run reconcile-section-pages\.yml[\s\S]*retry_pending=true/);
+  assert.match(cohortVerifier, /reopen_reconcile\(\)[\s\S]*\[ "\$mode" = 'event' \] \|\| return 0[\s\S]*REOPEN_RECONCILE/);
   assert.match(cohortVerifier, /child_head_sha.*expected_source/);
   assert.match(cohortVerifier, /\.dispatch_nonce == \$nonce/);
   assert.match(cohortVerifier, /\.dispatch_cohort == \$cohort/);
