@@ -163,12 +163,14 @@ for attempt in 1 2; do
     pending_run_id="$(earliest_pending_run_id "$existing_runs")"
     pending_after_id=$((pending_run_id - 1))
     echo "::notice::replay ancora in corso; verifico l'esito prima di inviare un altro dispatch: $display_title"
+    pending_read_ok=false
     for ((poll = 1; poll <= pending_poll_limit; poll += 1)); do
       sleep "$pending_poll_delay_seconds"
-      existing_runs="$(list_matching_runs)" || {
+      if ! existing_runs="$(list_matching_runs)"; then
         echo "::warning::esito del replay in corso temporaneamente non leggibile (verifica $poll/$pending_poll_limit)"
         continue
-      }
+      fi
+      pending_read_ok=true
       state="$(query_state "$existing_runs" "$pending_after_id")"
       if [ "$state" = 'accepted' ]; then
         echo "::notice::replay visibile e completato con successo: $display_title"
@@ -186,8 +188,21 @@ for attempt in 1 2; do
         echo "::error::esito della run legacy non verificabile; non invio un dispatch duplicato: $display_title"
         exit 1
       fi
+      if [ "$state" = 'missing' ]; then
+        echo "::error::run replay pendente non più osservabile; non invio un dispatch duplicato: $display_title"
+        exit 1
+      fi
     done
-    if [ "$state" != 'failed' ]; then
+    if [ "$state" = 'failed' ]; then
+      : # il replay è terminato male: il ciclo esterno prepara un solo retry.
+    elif [ "$pending_read_ok" != true ] || [ "$state" != 'pending' ]; then
+      # `pending` è delegabile solo se l'ultima lettura della finestra ha
+      # osservato davvero la run ancora in corso. Un errore di lettura lascia
+      # lo stato precedente in memoria, ma non costituisce una prova di
+      # ownership; nemmeno una run scomparsa (`missing`) è delegabile.
+      echo "::error::stato finale del replay pendente non verificato; non invio un dispatch duplicato: $display_title"
+      exit 1
+    else
       # The equivalent replay still owns this surface. A second dispatch would
       # race it and can publish a mixed section; its own result/observer will
       # report a later failure if it does not complete. Returning success here
