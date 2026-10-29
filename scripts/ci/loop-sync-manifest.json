@@ -4061,7 +4061,7 @@
         "site": "face6073971efba4",
         "corpus": "ff9327d8bcbdd180",
         "alignedAt": "2026-10-29",
-        "forcedAt": "2026-10-29T13:50:00.000Z"
+        "forcedAt": "2026-10-29T13:57:28.865Z"
       },
       "scalarFingerprint": {
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
@@ -4284,9 +4284,9 @@
       "mode": "identical",
       "reason": "Impronta SHA-256 dei 22 campi scalari di SiteShellContract, prodotta e verificata da `host/tests/shell-contract-fingerprint.test.mjs`. Il gemello del sito vive in `tests/articles-shell-contract-fingerprint.json` con lo stesso contenuto; i due artefatti restano `identical` e la baseline ne sorveglia il drift. E' il gate runtime che impedisce di spedire l'engine senza la sua meta' `host/`.",
       "baseline": {
-        "site": "30dd9261c9666d9c",
-        "corpus": "30dd9261c9666d9c",
-        "alignedAt": "2026-10-22"
+        "site": "f720f87cf4855d6c",
+        "corpus": "f720f87cf4855d6c",
+        "alignedAt": "2026-10-29"
       }
     },
     {
