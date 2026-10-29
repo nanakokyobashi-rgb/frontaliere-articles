@@ -308,6 +308,7 @@ jobs:
           steps.arm.outputs.allow == 'true' &&
           steps.detect.outputs.pending_edge_flip == 'true' &&
           steps.detect.outputs.skip == 'false' &&
+          steps.detect.outputs.dispatch == '0' &&
           steps.detect.outputs.leftover == '0' &&
           steps.detect.outputs.landing_content_stale == '0' &&
           steps.detect.outputs.unknown == '0' &&
