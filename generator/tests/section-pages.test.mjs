@@ -3554,8 +3554,9 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(recovery, /child_allow_deferred_live_release=true/);
   assert.match(recovery, /-f coordinated_recovery="\$child_coordinated_recovery"/);
   assert.match(recovery, /PRESERVE_EXPLICIT_SCOPE/);
-  assert.match(recovery, /merge_recovery_matrices/);
   assert.match(recovery, /MIXED_MATRIX:-false.*!= 'true'/s);
+  assert.match(recovery, /target_matrix="\$delta_matrix"/);
+  assert.match(recovery, /any\(\$scope\[\]; \.section == \$entry\.section\)\) \| \$entry/);
   assert.match(recovery, /git diff --name-status "\$plan_before" "\$CURRENT_MAIN"[\s\S]*fast-publish-section\.mjs r2-plan/);
   assert.doesNotMatch(recovery, /wait_for_dispatched_children/);
   assert.doesNotMatch(recovery, /REPLAY_CHILD_WAIT_MAX_S/);
@@ -3596,8 +3597,8 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(replayDispatcher, /stat -c %Y/);
   assert.match(replayDispatcher, /cache_fresh=true/);
   assert.match(replayDispatcher, /startswith\(\$title \+ " \/ dry="\)/);
-  assert.match(replayDispatcher, /endswith\(" \/ dry=false"\)/);
-  assert.match(replayDispatcher, /endswith\(" \/ dry=true"\)/);
+  assert.match(replayDispatcher, /test\(" \/ dry=false\(\?: \/ c=\[\^\/\]\+\)\?\$"\)/);
+  assert.match(replayDispatcher, /test\(" \/ dry=true\(\?: \/ c=\[\^\/\]\+\)\?\$"\)/);
   assert.match(replayDispatcher, /\.status != "completed"\) then "pending"/);
   assert.match(replayDispatcher, /\.status == "completed" and \.conclusion == "success"\) then "accepted"/);
   assert.match(replayDispatcher, /any\(\$legacy_runs\[\]; \.status == "completed"\) then "ambiguous"/);
@@ -4271,10 +4272,14 @@ test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta',
   assert.match(read('scripts/reconcile-section-pages.mjs'), /pages-registry-absent/);
   assert.match(wf, /WORKFLOW_RUN_EVENT: \$\{\{ github\.event\.workflow_run\.event \}\}/);
   assert.match(wf, /WORKFLOW_RUN_DISPLAY_TITLE: \$\{\{ github\.event\.workflow_run\.display_title \}\}/);
-  assert.match(wf, /reconcile-\*\|stale-staged-\*/);
+  assert.match(wf, /WORKFLOW_RUN_DISPLAY_TITLE" =~ \^cover-publish-section/);
+  assert.match(wf, /child_cohort="\$\{BASH_REMATCH\[2\]\}"/);
+  assert.match(wf, /trusted_child=true/);
   const cohortVerifier = read('scripts/ci/verify-fast-publish-section-cohort.sh');
-  assert.match(cohortVerifier, /gh run list[\s\S]*fast-publish-section\.yml/);
+  assert.match(cohortVerifier, /gh api -X GET --paginate --slurp[\s\S]*actions\/workflows\/fast-publish-section\.yml\/runs/);
+  assert.match(cohortVerifier, /map\(\.workflow_runs\) \| add \| map\(/);
   assert.match(cohortVerifier, /gh run download "\$run_id" --repo "\$repository"/);
+  assert.match(cohortVerifier, /for attempt in 1 2 3; do[\s\S]*download_ok=true[\s\S]*sleep "\$delay"/);
   assert.match(cohortVerifier, /child_head_sha.*expected_source/);
   assert.match(cohortVerifier, /\.dispatch_nonce == \$nonce/);
   assert.match(cohortVerifier, /\.dispatch_cohort == \$cohort/);

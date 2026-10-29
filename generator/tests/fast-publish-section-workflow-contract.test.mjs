@@ -22,6 +22,10 @@ const resultRecorder = readFileSync(
   new URL('../../scripts/ci/record-fast-publish-result.sh', import.meta.url),
   'utf8',
 );
+const replayDispatcher = readFileSync(
+  new URL('../../scripts/ci/dispatch-fast-publish-replay.sh', import.meta.url),
+  'utf8',
+);
 
 function triggerBlock(name) {
   const start = workflow.indexOf(`\n  ${name}:`);
@@ -87,6 +91,12 @@ test('fast-publish-section artifactizza nonce e revisione del child', () => {
   assert.match(resultRecorder, /source_main_commit: \$source_main_commit/u);
   assert.match(resultRecorder, /dispatch_nonce: \$dispatch_nonce/u);
   assert.match(resultRecorder, /dispatch_cohort: \$dispatch_cohort/u);
+});
+
+test('il dispatcher riconosce il run-name con coorte dopo dry-run', () => {
+  assert.match(workflow, /run-name:.*dry=\$\{\{ inputs\.dry_run \}\} \/ c=/u);
+  assert.match(replayDispatcher, /test\(" \/ dry=false\(\?: \/ c=\[\^\/\]\+\)\?\$"\)/u);
+  assert.match(replayDispatcher, /test\(" \/ dry=true\(\?: \/ c=\[\^\/\]\+\)\?\$"\)/u);
 });
 
 test('il replay checkout mantiene tutti gli helper nel profilo sparse', () => {

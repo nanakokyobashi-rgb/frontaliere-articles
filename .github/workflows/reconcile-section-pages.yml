@@ -126,14 +126,20 @@ jobs:
             allow=false; echo "dispatch disabilitato: dry_run manuale"
           elif [ "$EVENT_NAME" = "workflow_run" ]; then
             if [ "$WORKFLOW_RUN_EVENT" = "workflow_dispatch" ]; then
-              child_nonce="${WORKFLOW_RUN_DISPLAY_TITLE#*nonce=}"
-              child_nonce="${child_nonce%% / dry=*}"
-              child_cohort="${WORKFLOW_RUN_DISPLAY_TITLE#* / c=}"
-              case "$child_nonce" in
-                reconcile-*|stale-staged-*|stale-late-*)
+              if [[ "$WORKFLOW_RUN_DISPLAY_TITLE" =~ ^cover-publish-section[[:space:]]/[[:space:]][^/]+[[:space:]]/[[:space:]]nonce=([^[:space:]]+)[[:space:]]/[[:space:]]dry=false[[:space:]]/[[:space:]]c=([^[:space:]]+)$ ]]; then
+                child_nonce="${BASH_REMATCH[1]}"
+                child_cohort="${BASH_REMATCH[2]}"
+                if [[ "$child_nonce" =~ ^reconcile-[0-9]+-[^[:space:]]+$ ]] \
+                  && [[ "$child_cohort" =~ ^reconcile-[0-9]+-n[1-9][0-9]*$ ]]; then
                   trusted_child=true
-                  ;;
-              esac
+                elif [[ "$child_nonce" =~ ^stale-staged-[a-f0-9]{12}-[^[:space:]]+-[a-f0-9]{16}$ ]] \
+                  && [[ "$child_cohort" =~ ^stale-staged-[0-9]+-n[1-9][0-9]*$ ]]; then
+                  trusted_child=true
+                elif [[ "$child_nonce" =~ ^stale-late-[a-f0-9]{12}-[^[:space:]]+-[a-f0-9]{16}$ ]] \
+                  && [[ "$child_cohort" =~ ^stale-late-[0-9]+-n[1-9][0-9]*$ ]]; then
+                  trusted_child=true
+                fi
+              fi
             fi
             if [ "$WORKFLOW_RUN_CONCLUSION" = "success" ] && [ "$trusted_child" = 'true' ]; then
               event_replay=true

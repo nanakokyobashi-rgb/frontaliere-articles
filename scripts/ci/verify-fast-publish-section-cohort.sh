@@ -49,13 +49,10 @@ if [ "$mode" = 'event' ]; then
 fi
 
 runs_json=""
-if ! runs_json="$(gh run list \
-  --repo "$repository" \
-  --workflow fast-publish-section.yml \
-  --branch main \
-  --event workflow_dispatch \
-  --limit 1000 \
-  --json databaseId,displayTitle,status,conclusion,headSha,createdAt)"; then
+if ! runs_json="$(gh api -X GET --paginate --slurp \
+  "repos/$repository/actions/workflows/fast-publish-section.yml/runs" \
+  -F branch=main -F event=workflow_dispatch -F per_page=100 \
+  --jq 'map(.workflow_runs) | add | map({databaseId: .id, displayTitle: .display_title, status, conclusion, headSha: .head_sha, createdAt: .created_at})')"; then
   not_ready 'elenco delle run fast-publish non leggibile'
 fi
 if ! jq -e '
@@ -168,8 +165,21 @@ mkdir -p "$artifact_root"
 while IFS=$'\t' read -r run_id nonce section; do
   [ -n "$run_id" ] || not_ready "run senza id nella coorte $cohort"
   run_dir="$artifact_root/$run_id"
-  mkdir -p "$run_dir"
-  if ! gh run download "$run_id" --repo "$repository" --pattern 'fast-publish-result-*' --dir "$run_dir"; then
+  download_ok=false
+  for attempt in 1 2 3; do
+    rm -rf -- "$run_dir"
+    mkdir -p "$run_dir"
+    if gh run download "$run_id" --repo "$repository" --pattern 'fast-publish-result-*' --dir "$run_dir"; then
+      download_ok=true
+      break
+    fi
+    if [ "$attempt" -lt 3 ]; then
+      delay=$((attempt * 5))
+      echo "::notice::artifact child $run_id non ancora disponibile; nuovo tentativo tra ${delay}s"
+      sleep "$delay"
+    fi
+  done
+  if [ "$download_ok" != 'true' ]; then
     not_ready "artifact del child $run_id non scaricabile"
   fi
   mapfile -t result_files < <(find "$run_dir" -type f -name fast-publish-result.json -print)
