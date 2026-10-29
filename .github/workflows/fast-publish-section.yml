@@ -733,12 +733,10 @@ jobs:
             dispatch_nonce="stale-publish-${GITHUB_RUN_ID}-${SECTION}"
           fi
           dispatch_cohort="${DISPATCH_COHORT:-stale-publish-${GITHUB_RUN_ID}-n1}"
-          child_replay_api_after_publish="$REPLAY_API_AFTER_PUBLISH"
-          child_coordinated_recovery="$COORDINATED_RECOVERY"
-          if [ "$COORDINATED_RECOVERY" = 'true' ]; then
-            child_replay_api_after_publish=false
-            child_coordinated_recovery=true
-          fi
+          # Ogni stale-late handoff entra nella barriera event-driven: il
+          # reconcile resta l'unico proprietario del replay API.
+          child_replay_api_after_publish=false
+          child_coordinated_recovery=true
           dispatch_title="cover-publish-section / ${SECTION} / nonce=${dispatch_nonce}"
           replay_before="${ORIGINAL_PUSH_BEFORE:-$STALE_HEAD}"
           replay_after=''

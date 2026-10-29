@@ -173,7 +173,10 @@ test('una gara stale consegna la sezione al coordinatore senza dichiarare una pu
   assert.match(workflow, /steps\.replay_freshness\.outputs\.fresh == 'false'[\s\S]*needs\.publish_release_head\.outputs\.mixed_matrix == 'true'/u);
   assert.match(render, /-f dispatch_cohort="\$dispatch_cohort"/u);
   assert.match(render, /child_replay_api_after_publish=false/u);
+  assert.match(render, /child_coordinated_recovery=true/u);
   assert.match(render, /-f coordinated_recovery="\$child_coordinated_recovery"/u);
+  assert.match(workflow, /child_replay_api_after_publish=false/u);
+  assert.match(workflow, /child_coordinated_recovery=true/u);
 });
 
 test('il replay stale installa il parser prima di risolvere la release API', () => {

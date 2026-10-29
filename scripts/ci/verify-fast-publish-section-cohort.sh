@@ -90,12 +90,16 @@ if [ "$mode" = 'event' ]; then
          run: ($run + {nonce: $parts.nonce, section: $parts.section})}
     ] as $parsed
     | ($parsed | map(select(.cohort == $cohort))) as $same
+    | ($same
+       | sort_by([.run.section, .run.nonce, .run.createdAt, .run.databaseId])
+       | group_by([.run.section, .run.nonce])
+       | map(last)) as $deduplicated
     | if (any($same[]; (.run.databaseId | tostring) == $id
               and .run.nonce == $nonce))
-         and ($same | length > 0)
+         and ($deduplicated | length > 0)
       then {cohort: $cohort,
-            expectedSize: (($same | map(.expectedSize) | unique | if length == 1 then .[0] else 0 end)),
-            runs: ($same | map(.run))}
+            expectedSize: (($deduplicated | map(.expectedSize) | unique | if length == 1 then .[0] else 0 end)),
+            runs: ($deduplicated | map(.run))}
       else empty
       end
   ' <<< "$runs_json")"
@@ -120,7 +124,12 @@ else
     | map({
         cohort: .[0].cohort,
         expectedSize: (map(.expectedSize) | unique | if length == 1 then .[0] else 0 end),
-        runs: map(.run),
+        runs: (
+          sort_by([.run.section, .run.nonce, .run.createdAt, .run.databaseId])
+          | group_by([.run.section, .run.nonce])
+          | map(last)
+          | map(.run)
+        ),
         latest: (map(.run.createdAt) | max)
       })
     | sort_by(.latest)

@@ -4280,6 +4280,8 @@ test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta',
   assert.match(cohortVerifier, /\.dispatch_cohort == \$cohort/);
   assert.match(cohortVerifier, /\.rendered_head == \$source/);
   assert.match(cohortVerifier, /\.coordinated_recovery == "true"/);
+  assert.match(cohortVerifier, /group_by\(\[\.run\.section, \.run\.nonce\]\)/);
+  assert.match(cohortVerifier, /map\(last\)/);
   assert.match(cohortVerifier, /try \(\$parts\.cohort \| capture/);
   assert.match(cohortVerifier, /all\(\.runs\[\];[\s\S]*ascii_downcase[\s\S]*"success"/);
   assert.match(wf, /steps\.child_artifact\.outputs\.verified == 'true'/);

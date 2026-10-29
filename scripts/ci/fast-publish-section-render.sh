@@ -72,12 +72,11 @@ dispatch_stale_replay() {
   nonce_hash="$(printf '%s\0%s\0%s\0%s' "$nonce_seed" "$current_main" "$SECTION" "$coordinated_recovery" | sha256sum | cut -c1-16)"
   dispatch_nonce="stale-late-${current_main:0:12}-${SECTION}-${nonce_hash}"
   dispatch_cohort="stale-late-${GITHUB_RUN_ID}-n1"
-  child_replay_api_after_publish="${REPLAY_API_AFTER_PUBLISH:-false}"
-  child_coordinated_recovery="$coordinated_recovery"
-  if [ "$coordinated_recovery" = 'true' ]; then
-    child_replay_api_after_publish=false
-    child_coordinated_recovery=true
-  fi
+  # Ogni stale-late handoff entra nella barriera event-driven: il reconcile
+  # deve essere l'unico proprietario del replay API, anche se l'handoff nasce
+  # da un workflow_run API non gia' marcato come recovery coordinata.
+  child_replay_api_after_publish=false
+  child_coordinated_recovery=true
   if [ "$EVENT_NAME" = 'workflow_run' ]; then
     echo "::notice::replay workflow_run redispatchato prima degli upload: main e' avanzato da $stale_source a $current_main"
   else
