@@ -176,6 +176,12 @@ if [ "$verified_current_main" != "$CURRENT_MAIN" ]; then
   exit 1
 fi
 dispatch_nonce_input="${DISPATCH_NONCE:-}"
+dispatch_cohort_size="$(jq 'length' <<<"$target_matrix")"
+if ! [[ "$dispatch_cohort_size" =~ ^[1-9][0-9]*$ ]]; then
+  echo "::error::dimensione coorte staged non valida: $dispatch_cohort_size"
+  exit 1
+fi
+dispatch_cohort="stale-staged-${GITHUB_RUN_ID}-n${dispatch_cohort_size}"
 child_replay_api_after_publish="${REPLAY_API_AFTER_PUBLISH:-false}"
 child_allow_deferred_live_release="${ALLOW_DEFERRED_LIVE_RELEASE:-false}"
 child_coordinated_recovery=false
@@ -228,6 +234,7 @@ dispatch_children_wave() {
       -f replay_api_after_publish="$child_replay_api_after_publish" \
       -f allow_deferred_live_release="$child_allow_deferred_live_release" \
       -f coordinated_recovery="$child_coordinated_recovery" \
+      -f dispatch_cohort="$dispatch_cohort" \
       -f dry_run="$DRY" \
       -f dispatch_nonce="$dispatch_nonce"; then
       dispatched=$((dispatched + 1))
@@ -256,6 +263,8 @@ dispatch_children_wave
 # queued section publishers to starve the very children being awaited.
 if [ -n "${GITHUB_OUTPUT:-}" ]; then
   printf 'recovery_head=%s\n' "$CURRENT_MAIN" >> "$GITHUB_OUTPUT"
+  printf 'recovery_cohort=%s\n' "$dispatch_cohort" >> "$GITHUB_OUTPUT"
+  printf 'recovery_cohort_size=%s\n' "$dispatch_cohort_size" >> "$GITHUB_OUTPUT"
 fi
 echo "::notice::recovery staged accodato sulla HEAD $CURRENT_MAIN; la readiness verra' verificata dal reconcile event-driven"
 exit 0

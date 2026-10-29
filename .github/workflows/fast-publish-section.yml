@@ -1,5 +1,5 @@
 name: fast-publish-section
-run-name: cover-publish-section / ${{ inputs.section || 'auto' }} / nonce=${{ inputs.dispatch_nonce || 'none' }} / dry=${{ inputs.dry_run }}
+run-name: cover-publish-section / ${{ inputs.section || 'auto' }} / nonce=${{ inputs.dispatch_nonce || 'none' }} / dry=${{ inputs.dry_run }} / c=${{ inputs.dispatch_cohort || 'none' }}
 
 # Pubblica le pagine delle sezioni cantonali su R2; il piano del core seleziona
 # le sezioni attive e il registro le rende servibili. Bootstrap carica l'intera
@@ -129,6 +129,8 @@ on:
         required: false
         default: ''
         type: string
+      dispatch_cohort:
+        required: false
       push_before:
         description: 'Base SHA della provenienza push esplicita (solo replay bounded)'
         required: false
@@ -719,6 +721,7 @@ jobs:
           CURRENT_MAIN: ${{ steps.replay_freshness.outputs.current_main }}
           ORIGINAL_PUSH_BEFORE: ${{ needs.resolve.outputs.push_before }}
           DISPATCH_NONCE: ${{ inputs.dispatch_nonce }}
+          DISPATCH_COHORT: ${{ inputs.dispatch_cohort }}
         run: |
           set -euo pipefail
           runtime_pat="${GITHUB_PAT_NANAKO:-}"
@@ -731,6 +734,7 @@ jobs:
           if [ -z "$dispatch_nonce" ]; then
             dispatch_nonce="stale-publish-${GITHUB_RUN_ID}-${SECTION}"
           fi
+          dispatch_cohort="${DISPATCH_COHORT:-stale-publish-${GITHUB_RUN_ID}-n1}"
           dispatch_title="cover-publish-section / ${SECTION} / nonce=${dispatch_nonce}"
           replay_before="${ORIGINAL_PUSH_BEFORE:-$STALE_HEAD}"
           replay_after=''
@@ -789,6 +793,7 @@ jobs:
             -f push_before="$replay_before" \
             -f push_after="$replay_after" \
             -f dispatch_nonce="$dispatch_nonce" \
+            -f dispatch_cohort="$dispatch_cohort" \
             -f coordinated_recovery="$COORDINATED_RECOVERY"
 
       - name: Fetch fallback corpus revision for manifest migration
@@ -906,6 +911,7 @@ jobs:
           SOURCE_COMMIT: ${{ needs.resolve.outputs.source_commit || inputs.source_commit }}
           SOURCE_MAIN_COMMIT: ${{ needs.resolve.outputs.source_commit || inputs.source_main_commit }}
           DISPATCH_NONCE: ${{ inputs.dispatch_nonce }}
+          DISPATCH_COHORT: ${{ inputs.dispatch_cohort }}
           REF: ${{ github.ref }}
           WORKFLOW_RUN_HEAD_SHA: ${{ needs.resolve.outputs.source_commit || github.event.workflow_run.head_sha }}
           EXPECTED_MAIN_HEAD: ${{ needs.resolve.outputs.source_commit || github.event.workflow_run.head_sha || inputs.source_main_commit || github.event.after || github.sha }}
@@ -942,6 +948,7 @@ jobs:
           STALE_HANDOFF_TITLE: ${{ steps.render.outputs.stale_handoff_title }}
           FRESH: ${{ steps.replay_freshness.outputs.fresh }}
           DISPATCH_NONCE: ${{ inputs.dispatch_nonce }}
+          DISPATCH_COHORT: ${{ inputs.dispatch_cohort }}
           COORDINATED_RECOVERY: ${{ inputs.coordinated_recovery }}
           SOURCE_COMMIT: ${{ needs.resolve.outputs.source_commit || inputs.source_commit }}
           SOURCE_MAIN_COMMIT: ${{ needs.resolve.outputs.source_commit || inputs.source_main_commit }}

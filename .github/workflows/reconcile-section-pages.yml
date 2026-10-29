@@ -121,12 +121,14 @@ jobs:
           schedule_retry=false
           trusted_child=false
           child_nonce=''
+          child_cohort=''
           if [ "$EVENT_NAME" = "workflow_dispatch" ] && [ "${{ inputs.dry_run }}" != "false" ]; then
             allow=false; echo "dispatch disabilitato: dry_run manuale"
           elif [ "$EVENT_NAME" = "workflow_run" ]; then
             if [ "$WORKFLOW_RUN_EVENT" = "workflow_dispatch" ]; then
               child_nonce="${WORKFLOW_RUN_DISPLAY_TITLE#*nonce=}"
               child_nonce="${child_nonce%% / dry=*}"
+              child_cohort="${WORKFLOW_RUN_DISPLAY_TITLE#* / c=}"
               case "$child_nonce" in
                 reconcile-*|stale-staged-*|stale-late-*)
                   trusted_child=true
@@ -149,6 +151,7 @@ jobs:
             echo "schedule_retry=$schedule_retry"
             echo "trusted_child=$trusted_child"
             echo "child_nonce=$child_nonce"
+            echo "child_cohort=$child_cohort"
           } >> "$GITHUB_OUTPUT"
 
       # Un evento workflow_run con il solo titolo non dimostra che il child
@@ -156,68 +159,20 @@ jobs:
       # terminare verde subito dopo aver accettato un dispatch. Il child deve
       # quindi lasciare un artifact fresco, con nonce e source commit coerenti;
       # in caso contrario il replay globale resta chiuso.
-      - name: Verify event-driven child artifact
+      - name: Verify complete event-driven child cohort
         id: child_artifact
-        if: steps.mode.outputs.event_replay == 'true'
+        if: steps.mode.outputs.event_replay == 'true' || steps.mode.outputs.schedule_retry == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
           REPOSITORY: ${{ github.repository }}
           WORKFLOW_RUN_ID: ${{ github.event.workflow_run.id }}
           WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
           CHILD_NONCE: ${{ steps.mode.outputs.child_nonce }}
+          CHILD_COHORT: ${{ steps.mode.outputs.child_cohort }}
           EXPECTED_SOURCE_COMMIT: ${{ steps.detect.outputs.source_commit }}
+          MODE: ${{ steps.mode.outputs.schedule_retry == 'true' && 'schedule' || 'event' }}
         run: |
-          set -euo pipefail
-          if ! [[ "$WORKFLOW_RUN_ID" =~ ^[0-9]+$ ]]; then
-            echo "::error::workflow_run id non valido per la verifica del child"
-            exit 1
-          fi
-          if ! [[ "$EXPECTED_SOURCE_COMMIT" =~ ^[a-f0-9]{40}$ ]]; then
-            echo "::error::source commit non valido per la verifica del child"
-            exit 1
-          fi
-          if [ "$WORKFLOW_RUN_HEAD_SHA" != "$EXPECTED_SOURCE_COMMIT" ]; then
-            echo "::error::child workflow_run sulla HEAD $WORKFLOW_RUN_HEAD_SHA, attesa $EXPECTED_SOURCE_COMMIT"
-            exit 1
-          fi
-          current_main="$(bash scripts/ci/read-main-head.sh)"
-          if [ "$current_main" != "$EXPECTED_SOURCE_COMMIT" ]; then
-            echo "::notice::main e' avanzata dopo il child ($EXPECTED_SOURCE_COMMIT -> $current_main); replay API rimandato"
-            exit 1
-          fi
-          case "$CHILD_NONCE" in
-            reconcile-*|stale-staged-*|stale-late-*) ;;
-            *)
-              echo "::error::nonce child non riconosciuto: $CHILD_NONCE"
-              exit 1
-              ;;
-          esac
-          artifact_dir="$RUNNER_TEMP/reconcile-child-artifact"
-          mkdir -p "$artifact_dir"
-          if ! gh run download "$WORKFLOW_RUN_ID" --repo "$REPOSITORY" --dir "$artifact_dir"; then
-            echo "::error::artifact del child $WORKFLOW_RUN_ID non scaricabile: replay API bloccato"
-            exit 1
-          fi
-          mapfile -t result_files < <(find "$artifact_dir" -type f -name fast-publish-result.json -print)
-          if [ "${#result_files[@]}" -ne 1 ]; then
-            echo "::error::artifact fast-publish-result non univoco per il child $WORKFLOW_RUN_ID"
-            exit 1
-          fi
-          result_file="${result_files[0]}"
-          jq -e \
-            --arg nonce "$CHILD_NONCE" \
-            --arg source "$EXPECTED_SOURCE_COMMIT" \
-            'type == "object"
-             and .dispatch_nonce == $nonce
-             and .source_commit == $source
-             and .source_main_commit == $source
-             and .rendered_head == $source
-             and .fresh == "true"
-             and (.stale_handoff // "false") == "false"
-             and (.coordinated_recovery == "true" or .coordinated_recovery == "false")' \
-            "$result_file" >/dev/null
-          echo 'verified=true' >> "$GITHUB_OUTPUT"
-          echo "::notice::artifact child verificato: nonce=$CHILD_NONCE, HEAD=$EXPECTED_SOURCE_COMMIT"
+          bash scripts/ci/verify-fast-publish-section-cohort.sh
 
       # Il backfill e' un publisher a tutti gli effetti: eredita gli stessi
       # interruttori del fast-publish, anche quando il reconcile nasce da
@@ -274,6 +229,12 @@ jobs:
             exit 1
           fi
           export GH_TOKEN="$runtime_pat"
+          dispatch_cohort_size="$(jq '[.sections[] | select(.dispatch)] | length' "$RUNNER_TEMP/reconcile-sections.json")"
+          if ! [[ "$dispatch_cohort_size" =~ ^[1-9][0-9]*$ ]]; then
+            echo "::error::dimensione coorte reconcile non valida: $dispatch_cohort_size"
+            exit 1
+          fi
+          dispatch_cohort="reconcile-${GITHUB_RUN_ID}-n${dispatch_cohort_size}"
           fail=0
           while IFS=$'\t' read -r section ids missing_page_paths known_missing_page_paths; do
             [ -n "$section" ] || continue
@@ -287,6 +248,7 @@ jobs:
               -f 'bootstrap=false'
               -f 'dry_run=false'
               -f "dispatch_nonce=$dispatch_nonce"
+              -f "dispatch_cohort=$dispatch_cohort"
             )
             if [ "$PENDING_EDGE_FLIP" = 'true' ]; then
               args+=(
@@ -310,7 +272,7 @@ jobs:
       - name: Replay API after event-driven backfill readiness
         if: >-
           (steps.mode.outputs.event_replay == 'true' || steps.mode.outputs.schedule_retry == 'true') &&
-          (steps.child_artifact.outputs.verified == 'true' || steps.mode.outputs.schedule_retry == 'true') &&
+          steps.child_artifact.outputs.verified == 'true' &&
           steps.arm.outputs.allow == 'true' &&
           steps.detect.outputs.pending_edge_flip == 'true' &&
           steps.detect.outputs.skip == 'false' &&

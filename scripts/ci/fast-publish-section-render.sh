@@ -48,6 +48,7 @@ dispatch_stale_replay() {
   local nonce_seed=''
   local nonce_hash=''
   local dispatch_nonce=''
+  local dispatch_cohort=''
   local dispatch_title=''
   local replay_before=''
   local replay_after=''
@@ -68,6 +69,7 @@ dispatch_stale_replay() {
   nonce_seed="$dispatch_nonce"
   nonce_hash="$(printf '%s\0%s\0%s\0%s' "$nonce_seed" "$current_main" "$SECTION" "$coordinated_recovery" | sha256sum | cut -c1-16)"
   dispatch_nonce="stale-late-${current_main:0:12}-${SECTION}-${nonce_hash}"
+  dispatch_cohort="stale-late-${GITHUB_RUN_ID}-n1"
   if [ "$EVENT_NAME" = 'workflow_run' ]; then
     echo "::notice::replay workflow_run redispatchato prima degli upload: main e' avanzato da $stale_source a $current_main"
   else
@@ -98,6 +100,7 @@ dispatch_stale_replay() {
     -f push_before="$replay_before" \
     -f push_after="$replay_after" \
     -f dispatch_nonce="$dispatch_nonce" \
+    -f dispatch_cohort="$dispatch_cohort" \
     -f coordinated_recovery="$coordinated_recovery"; then
     return 1
   fi

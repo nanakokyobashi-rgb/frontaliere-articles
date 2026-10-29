@@ -56,6 +56,7 @@ test('fast-publish-section mantiene il contratto dispatch esplicito', () => {
   assert.match(dispatch, /bootstrap:/u);
   assert.match(dispatch, /push_before:/u);
   assert.match(dispatch, /push_after:/u);
+  assert.match(dispatch, /dispatch_cohort:/u);
 });
 
 test('fast-publish-section ricontrolla main subito prima del replay API', () => {
@@ -75,11 +76,13 @@ test('fast-publish-section ricontrolla main subito prima del replay API', () => 
 test('fast-publish-section artifactizza nonce e revisione del child', () => {
   const record = workflow.slice(workflow.indexOf('- name: Record publish result'));
   assert.match(record, /DISPATCH_NONCE: \$\{\{ inputs\.dispatch_nonce \}\}/u);
+  assert.match(record, /DISPATCH_COHORT: \$\{\{ inputs\.dispatch_cohort \}\}/u);
   assert.match(record, /COORDINATED_RECOVERY: \$\{\{ inputs\.coordinated_recovery \}\}/u);
   assert.match(record, /SOURCE_COMMIT: \$\{\{ needs\.resolve\.outputs\.source_commit \|\| inputs\.source_commit \}\}/u);
   assert.match(workflow, /scripts\/ci\/record-fast-publish-result\.sh/u);
   assert.match(resultRecorder, /source_main_commit: \$source_main_commit/u);
   assert.match(resultRecorder, /dispatch_nonce: \$dispatch_nonce/u);
+  assert.match(resultRecorder, /dispatch_cohort: \$dispatch_cohort/u);
 });
 
 test('il replay checkout mantiene tutti gli helper nel profilo sparse', () => {
@@ -164,6 +167,7 @@ test('una gara stale consegna la sezione al coordinatore senza dichiarare una pu
   );
   assert.match(workflow, /steps\.stale\.outputs\.recovery_head \|\| steps\.replay_freshness\.outputs\.current_main \|\| needs\.publish_release_head\.outputs\.rendered_head/u);
   assert.match(workflow, /steps\.replay_freshness\.outputs\.fresh == 'false'[\s\S]*needs\.publish_release_head\.outputs\.mixed_matrix == 'true'/u);
+  assert.match(render, /-f dispatch_cohort="\$dispatch_cohort"/u);
 });
 
 test('il replay stale installa il parser prima di risolvere la release API', () => {
@@ -196,6 +200,9 @@ test('un recovery stale dispatcha i child e lascia il barrier al reconcile event
   assert.doesNotMatch(recovery, /gh run list --repo "\$REPOSITORY" --workflow fast-publish-section\.yml/u);
   assert.match(recovery, /readiness verra' verificata dal reconcile event-driven/u);
   assert.match(recovery, /printf 'recovery_head=%s\\n' "\$CURRENT_MAIN" >> "\$GITHUB_OUTPUT"/u);
+  assert.match(recovery, /dispatch_cohort_size="\$\(jq 'length'/u);
+  assert.match(recovery, /-f dispatch_cohort="\$dispatch_cohort"/u);
+  assert.match(recovery, /dispatch_cohort="stale-staged-\$\{GITHUB_RUN_ID\}-n\$\{dispatch_cohort_size\}"/u);
   assert.match(resolver, /git checkout --detach "\$current_main"/u);
   assert.match(resolver, /echo "source_commit=\$current_main"/u);
   assert.match(resolver, /echo "matrix=\$replay_matrix"/u);

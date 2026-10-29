@@ -4223,6 +4223,7 @@ test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta',
   assert.match(wf, /args=\([\s\S]*-f "section=\$section"[\s\S]*-f "article_ids=\$ids"[\s\S]*'bootstrap=false'[\s\S]*'dry_run=false'/);
   assert.match(wf, /-f "missing_page_paths=\$missing_page_paths"/);
   assert.match(wf, /-f "known_missing_page_paths=\$known_missing_page_paths"/);
+  assert.match(wf, /-f "dispatch_cohort=\$dispatch_cohort"/);
   assert.match(wf, /-f 'allow_deferred_live_release=true'/);
   assert.doesNotMatch(wf, /-f 'replay_api_after_publish=true'/);
   assert.match(wf, /-f "api_release_commit=\$API_RELEASE_COMMIT"/);
@@ -4231,7 +4232,7 @@ test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta',
   assert.match(wf, /Replay API after event-driven backfill readiness/);
   assert.match(wf, /event_replay=true/);
   assert.match(wf, /dispatch_nonce="reconcile-\$\{GITHUB_RUN_ID\}-\$\{section\}"/);
-  assert.doesNotMatch(wf, /gh run list --repo "\$REPOSITORY" --workflow fast-publish-section\.yml/);
+  assert.match(wf, /scripts\/ci\/verify-fast-publish-section-cohort\.sh/);
   assert.match(wf, /steps\.detect\.outputs\.leftover == '0'/);
   assert.match(wf, /steps\.detect\.outputs\.dispatch == '0'/);
   assert.match(wf, /steps\.detect\.outputs\.landing_content_stale == '0'/);
@@ -4261,7 +4262,7 @@ test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta',
   assert.match(wf, /gh workflow run publish-api\.yml --repo "\$REPOSITORY" --ref main -f source_commit="\$SOURCE_COMMIT"/);
   assert.match(wf, /pending_edge_flip=\$\(jq -r '\.pendingEdgeFlip \/\/ false'/);
   assert.match(wf, /skip=\$\(jq -r 'if \.skip then \\"true\\" else \\"false\\" end'/);
-  assert.match(wf, /\(steps\.mode\.outputs\.event_replay == 'true' \|\| steps\.mode\.outputs\.schedule_retry == 'true'\)[\s\S]*\(steps\.child_artifact\.outputs\.verified == 'true' \|\| steps\.mode\.outputs\.schedule_retry == 'true'\)[\s\S]*steps\.detect\.outputs\.pending_edge_flip == 'true'[\s\S]*steps\.detect\.outputs\.skip == 'false'[\s\S]*steps\.detect\.outputs\.dispatch == '0'[\s\S]*steps\.detect\.outputs\.leftover == '0'/);
+  assert.match(wf, /\(steps\.mode\.outputs\.event_replay == 'true' \|\| steps\.mode\.outputs\.schedule_retry == 'true'\)[\s\S]*steps\.child_artifact\.outputs\.verified == 'true'[\s\S]*steps\.detect\.outputs\.pending_edge_flip == 'true'[\s\S]*steps\.detect\.outputs\.skip == 'false'[\s\S]*steps\.detect\.outputs\.dispatch == '0'[\s\S]*steps\.detect\.outputs\.leftover == '0'/);
   assert.doesNotMatch(wf, /steps\.wait_backfills\.outcome/);
   assert.doesNotMatch(wf, /contains\("nonce=reconcile-"\)/);
   assert.match(wf, /Load producer token from Remote Config/);
@@ -4270,10 +4271,15 @@ test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta',
   assert.match(wf, /WORKFLOW_RUN_EVENT: \$\{\{ github\.event\.workflow_run\.event \}\}/);
   assert.match(wf, /WORKFLOW_RUN_DISPLAY_TITLE: \$\{\{ github\.event\.workflow_run\.display_title \}\}/);
   assert.match(wf, /reconcile-\*\|stale-staged-\*/);
-  assert.match(wf, /stale-late-\*/);
-  assert.match(wf, /gh run download "\$WORKFLOW_RUN_ID" --repo "\$REPOSITORY"/);
-  assert.match(wf, /\.dispatch_nonce == \$nonce/);
-  assert.match(wf, /\.rendered_head == \$source/);
+  const cohortVerifier = read('scripts/ci/verify-fast-publish-section-cohort.sh');
+  assert.match(cohortVerifier, /gh run list[\s\S]*fast-publish-section\.yml/);
+  assert.match(cohortVerifier, /gh run download "\$run_id" --repo "\$repository"/);
+  assert.match(cohortVerifier, /child_head_sha.*expected_source/);
+  assert.match(cohortVerifier, /\.dispatch_nonce == \$nonce/);
+  assert.match(cohortVerifier, /\.dispatch_cohort == \$cohort/);
+  assert.match(cohortVerifier, /\.rendered_head == \$source/);
+  assert.match(cohortVerifier, /try \(\$parts\.cohort \| capture/);
+  assert.match(cohortVerifier, /all\(\.runs\[\];[\s\S]*ascii_downcase[\s\S]*"success"/);
   assert.match(wf, /steps\.child_artifact\.outputs\.verified == 'true'/);
   assert.match(wf, /actions: write/);
   for (const reconcileWorkflow of [wf, articleWf]) {
