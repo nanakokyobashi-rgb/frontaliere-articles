@@ -7,15 +7,20 @@
  */
 export function sanitizeTelemetryProperties(properties) {
  const sensitive = /^(?:ac|at|authToken|ne|newsletter_email|email|newsletter_autologin|subscriber_key|token|access_token|id_token|refresh_token|oobCode)$/i;
- /** @param {string} value @param {number} [depth] @returns {string} */
- const cleanUrl = (value, depth = 0) => {
-  if (depth > 3) return value.split(/[?#]/, 1)[0];
-  if (!value.includes('?') && !value.includes('#')) return value;
+ /** @param {string} value @returns {string} */
+ const cleanUrl = (value) => {
+  // URL constructors discard leading C0 controls and whitespace. Keep this
+  // normalized view for parsing, but preserve the caller's bytes when no
+  // sensitive component is found.
+  const input = value.replace(/^[\u0000-\u0020]+|[\u0000-\u0020]+$/g, '');
+  const normalized = input.replace(/^(https?):\/*(?!\/)/i, '$1://');
+  const absolute = /^https?:\/\//i.test(normalized);
+  const protocolRelative = normalized.startsWith('//');
+  const queryOnly = normalized.startsWith('?');
+  const hashOnly = normalized.startsWith('#');
+  const relativePath = normalized.split(/[?#]/, 1)[0];
   try {
-   const absolute = /^https?:\/\//i.test(value);
-   const queryOnly = value.startsWith('?');
-   const hashOnly = value.startsWith('#');
-   const url = new URL(value, 'https://telemetry.invalid/');
+   const url = new URL(normalized, 'https://telemetry.invalid/');
    let changed = Boolean(url.username || url.password);
    /** @param {URLSearchParams} params */
    const cleanParams = (params) => {
@@ -24,7 +29,7 @@ export function sanitizeTelemetryProperties(properties) {
      if (sensitive.test(key)) { params.delete(key); updated = true; }
      else {
       const values = params.getAll(key);
-      const cleaned = values.map((entry) => /^(?:https?:\/\/|\/|\?|#)/i.test(entry) ? cleanUrl(entry, depth + 1) : entry);
+      const cleaned = values.map((entry) => /^(?:[a-z][a-z\d+.-]*:|\/|\?|#|\.{1,2}\/)/i.test(entry.trimStart()) ? cleanUrl(entry) : entry);
       if (cleaned.some((entry, index) => entry !== values[index])) {
        updated = true;
        params.delete(key);
@@ -36,7 +41,7 @@ export function sanitizeTelemetryProperties(properties) {
    };
    changed = cleanParams(url.searchParams) || changed;
    if (url.hash.includes('?')) {
-    const cleanedHash = '#' + cleanUrl(url.hash.slice(1), depth + 1);
+    const cleanedHash = '#' + cleanUrl(url.hash.slice(1));
     if (cleanedHash !== url.hash) { url.hash = cleanedHash; changed = true; }
    } else if (url.hash.includes('=')) {
     const hash = new URLSearchParams(url.hash.slice(1));
@@ -46,15 +51,21 @@ export function sanitizeTelemetryProperties(properties) {
    url.username = '';
    url.password = '';
    if (!changed) return value;
-   return absolute ? url.toString() : hashOnly ? url.hash : queryOnly ? url.search + url.hash : url.pathname + url.search + url.hash;
+   if (absolute) return url.toString();
+   if (protocolRelative) return `//${url.host}${url.pathname}${url.search}${url.hash}`;
+   if (hashOnly) return url.hash;
+   if (queryOnly) return url.search + url.hash;
+   // Relative path spelling (including ./ and ../) is meaningful to callers;
+   // URL.pathname is rooted and would silently change it.
+   return relativePath + url.search + url.hash;
   } catch {
-   // A malformed URL cannot provide useful attribution. Do not forward its query.
-   return value.split(/[?#]/, 1)[0];
+   // A malformed URL may hide userinfo in an unparsable authority. Fail closed.
+   return '';
   }
  };
  /** @param {any} value @param {string} key @returns {any} */
  const clean = (value, key) => {
-  if (typeof value === 'string' && (/^(?:https?:\/\/|\/|\?|#)/i.test(value) || /(?:url|path|location|referrer)$/i.test(key))) return cleanUrl(value);
+  if (typeof value === 'string' && (/^(?:[a-z][a-z\d+.-]*:|\/|\?|#|\.{1,2}\/)/i.test(value.trim()) || /(?:url|path|location|referrer)$/i.test(key))) return cleanUrl(value);
   if (Array.isArray(value)) return value.map((entry) => clean(entry, key));
   if (value && Object.prototype.toString.call(value) === '[object Object]') return Object.fromEntries(Object.entries(value).map(([name, entry]) => [name, clean(entry, name)]));
   return value;
