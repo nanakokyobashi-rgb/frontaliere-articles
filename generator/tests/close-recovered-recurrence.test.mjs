@@ -33,6 +33,7 @@ import {
   CHRONIC_LABELS,
   DEFAULT_CHRONIC_RECURRENCES,
   DEFAULT_RECURRENCE_WINDOW_HOURS,
+  DEFAULT_BRANCH_RECOVERY_GREEN_STREAK,
   RECOVERY_REQUIRED_JOBS,
   hasRequiredRecoveryJobs,
   dropUnprovenRecoveryRuns,
@@ -41,6 +42,8 @@ import {
   hasTimeoutAnnotation,
   hasNoTimeoutEvidenceFromJobs,
   dropPhantomCancellations,
+  decideFailureIssueClose,
+  assessBranchRecovery,
 } from '../../scripts/ci/close-recovered-failure-issues.mjs';
 import { lostArticleTitle } from '../../scripts/ci/scan-failed-runs.mjs';
 
@@ -66,7 +69,7 @@ function cadence({ count, everyMin, failAt = [] }) {
 
 // ── Il caso che ha aperto la scheda ───────────────────────────────────────────
 
-test('storico con fallimenti ricorrenti + ultima run verde → la issue NON si chiude', () => {
+test('diagnostico con fallimenti ricorrenti + ultima run verde → segnala ricorrenza', () => {
   // La forma misurata su #249: il wedge colpisce ogni poche run, poi 3 verdi.
   const runs = history([
     [5, true], [12, true], [20, true],
@@ -97,7 +100,7 @@ test('un solo fallimento nella finestra, seguito da 3 verdi → si chiude', () =
   assert.equal(decideRecurrenceHold(runs, opts).hold, false);
 });
 
-test('un solo fallimento ma appena UNA run verde dopo → si tiene aperta', () => {
+test('diagnostico con un solo fallimento e UNA verde → segnala streak insufficiente', () => {
   // Due delle 36 chiusure di #249 sono avvenute con l'ultima run completata
   // rossa (corsa fra il listing e la run in corso): la streak copre quel caso.
   const runs = history([[5, true], [70, false], [90, true], [400, true]]);
@@ -106,7 +109,7 @@ test('un solo fallimento ma appena UNA run verde dopo → si tiene aperta', () =
   assert.equal(d.streak, 1);
 });
 
-test('19 verdi consecutive NON bastano se nella finestra il guasto è ricorso', () => {
+test('diagnostico: 19 verdi NON cancellano una ricorrenza nella finestra', () => {
   // Misurato: al momento di una delle auto-chiusure di #249 la streak era 19, e
   // il giorno dopo il wedge ha bruciato altre 12 run. La streak da sola non
   // discrimina niente — la misura che discrimina è il conteggio in finestra.
@@ -164,6 +167,23 @@ test('senza storico (crawler step) il gate è un no-op: comportamento invariato'
 const recurrenceComment = (hoursAgo) => ({
   body: `${RECURRENCE_MARKER} **Reopened** — ricorrenza`,
   createdAt: new Date(NOW - hoursAgo * 3600e3).toISOString(),
+});
+
+test('il closer chiude dopo un solo verde anche con diagnostica cronica o ricorrente', () => {
+  const issue = { createdAt: new Date(NOW - 60 * 60000).toISOString(), labels: [] };
+  const comments = Array.from({ length: 45 }, (_, i) => recurrenceComment(i * 3));
+  const verdict = decideFailureIssueClose({
+    issue,
+    history: history([[5, true], [35, false]]),
+    comments,
+    now: NOW,
+    options: { recurrence: opts },
+  });
+
+  assert.equal(verdict.action, 'close');
+  assert.equal(verdict.chronic.hold, true, 'la ricorrenza cronica resta diagnostica');
+  assert.equal(verdict.recurrence.hold, true, 'la ricorrenza recente resta diagnostica');
+  assert.match(verdict.reason, /one successful run/);
 });
 
 test('sotto soglia le ricorrenze non fanno escalation', () => {
@@ -305,6 +325,17 @@ test('una verde wrapper non provata fuori finestra non completa la streak di rec
   assert.equal(decision.greenStreak, 2);
   assert.equal(decision.recovered, false);
   assert.deepEqual(seen, [100005, 100060]);
+});
+
+test('il percorso branch/PR richiede un solo verde qualificante', () => {
+  const decision = assessBranchRecovery(
+    history([[5, true], [600, false]]),
+    { issue: { createdAt: new Date(NOW - 60 * 60000).toISOString() }, now: NOW },
+  );
+
+  assert.equal(DEFAULT_BRANCH_RECOVERY_GREEN_STREAK, 1);
+  assert.equal(decision.greenStreak, 1);
+  assert.equal(decision.recovered, true);
 });
 
 // ── Il marcatore di ricorrenza non si muove ─────────────────────────────────

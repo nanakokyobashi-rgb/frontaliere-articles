@@ -33,15 +33,13 @@ import { realpathSync } from 'node:fs';
  *      close THAT issue by number via resolveGithubIssueByNumber() (re-reads it first:
  *      already closed or retitled since the decision → no write; posts the same
  *      "✅ Auto-resolved — green again" comment as the inline `--resolve`; reopens
- *      automatically if the same failure recurs) — UNLESS one of the three HOLDS below applies, evaluated in
- *      this order: CHRONIC ESCALATION (the failure has recurred N times → label and never
- *      auto-close again), RECURRENCE GATE (the failure is still recurring in the recent
- *      window → hold and comment the count), STRUCTURAL HOLD (the last FIX_OUTCOME verdict
- *      says the written fix was never applied).
+ *      automatically if the same failure recurs). One qualifying green is sufficient;
+ *      chronic, recurrence and structural signals are retained as diagnostics and
+ *      never become a second close threshold.
  *   4. If `main` has no qualifying run but the workflow evidence says it is a branch/PR
- *      workflow, read all branches and require the stricter proof: three consecutive
- *      post-issue greens and no red in the recurrence window. A PR that is still red in
- *      that window therefore holds the issue; it cannot be held forever by an old red.
+ *      workflow, read the scoped population and require one post-issue green with no
+ *      red in the recurrence window. A PR that is still red in that window therefore
+ *      stays open; it cannot be held forever by an old red.
  *      Otherwise distinguish workflow missing, empty window, and unreadable `gh` history;
  *      each leaves the issue open and posts one idempotent explanation.
  *   5. Exception for the workflows in VERDICT_STEPS (a monitor that ends red ON PURPOSE
@@ -51,12 +49,14 @@ import { realpathSync } from 'node:fs';
  *      issue opened is a real failure, a `CI Failure:` thread on that workflow describes
  *      no fault and is closed `not planned` (action `close-not-planned`).
  *
- * ── STRUCTURAL HOLD (#5454): a green run is a statement about the SYMPTOM ──────────────
+ * ── STRUCTURAL DIAGNOSTIC (#5454): a green run is a statement about the SYMPTOM ─────────
  *
  * Steps 1-3 close on the symptom. For a transient failure (a network `ETIMEDOUT`, a
  * provider 429) that is exactly right: the condition is gone and the issue is noise.
- * For a STRUCTURAL defect it is a loss, because the diagnosis written into the issue's
- * comments goes with it — and the defect returns the moment its condition recurs.
+ * For a STRUCTURAL defect the diagnosis is copied into the close comment, while the
+ * first verified green still closes the issue. If the defect returns, the stable-title
+ * reporter reopens the same thread and adds the new evidence; no chronic issue is
+ * allowed to become an unbounded open queue item.
  *
  * MEASURED, both repos:
  *   - corpus #76 / #77, closed 2026-08-09T08:25:1{4,7}Z with "✅ Auto-resolved — the
@@ -93,37 +93,20 @@ import { realpathSync } from 'node:fs';
  *     transient causes included — holding on it would pin open the exact class this
  *     reconciler exists to close.
  *
- * THE OPPOSITE RISK — a hold that never releases turns the queue into a graveyard, and
- * scan-failed-runs.mjs opens one issue per failing workflow. Four bounded valves:
- *   1. The hold RELEASES ITSELF. Only the LAST marker counts, so when the fix finally
- *      lands the next verdict (`pr-created`, `already-fixed`) makes the issue closeable
- *      and this reconciler closes it on the following pass. No human bookkeeping.
- *   2. Holding SHRINKS the queue for a recurring defect instead of growing it.
- *      createGithubIssue() dedups against OPEN issues by title prefix and comments on
- *      the match rather than minting a duplicate — so one held issue absorbs every
- *      recurrence. The `PR auto-rebase` defect above would have been 1 issue, not 8.
- *      Replayed over the last 250 closed issues here: of the 33 that this reconciler
- *      auto-closed, 26 still close and 7 would be held — and those 7 collapse to 4
- *      distinct titles, i.e. 4 open issues in steady state.
- *   3. A TTL (HOLD_MAX_DAYS, default 14). A blocked verdict that is still the last word
- *      after 14 days, with the check green, is a stale diagnosis, not a live fix: the
- *      issue closes anyway, with a comment saying so. 14 is above every observed
- *      lifetime of a `blocked-workflows-scope` issue in this repo (31 issues ever, max
- *      8.7 days, second-longest 3.9) — so it is a ceiling, not a schedule.
- *   4. Comments unreadable → hold, but only until the TTL measured from the issue's own
- *      createdAt. A permanently broken comment read degrades to "closes 14 days late",
- *      never to "never closes".
+ * The former chronic/recurrence/structural holds were the source of immortal issue
+ * threads: a green run could never close them, even when the owner had explicitly
+ * chosen “one OK”. The same pure functions still calculate their evidence for logs and
+ * close comments. A chronic marker may therefore be de-escalated on close, but it is
+ * not a permission to keep the issue open.
  *
- * The hold posts ONE comment (idempotent via HOLD_MARKER) and leaves the issue open. It
- * never reopens and never closes something it did not decide to close: the structural
- * hold's blast radius stays "close or don't close".
+ * The diagnostic helpers may still describe a hold and provide an idempotent note for
+ * callers that need the evidence, but the recovery decision closes after one verified
+ * green. Tracking pins and unreadable run history remain explicit keep-open paths.
  *
- * IT DOES LABEL, though — since the chronic-recurrence gate (#249). The blast radius is
- * NOT "never edits" any more, and pretending otherwise is how the next reader gets
- * surprised: `applyChronicLabels()` runs `gh issue edit --add-label priority:urgent
- * --add-label automation-deferred --remove-label priority:high|medium|low` when a failure
- * recurs past threshold, and `clearChronicLabels()` takes them back off when it stops.
- * Both are best-effort: a failing `gh` never changes the close/don't-close verdict.
+ * Existing chronic labels are still removed when the diagnostic has rientrato, so an
+ * old escalation cannot keep a recovered issue out of the normal queues. Applying a
+ * new chronic label is no longer a close gate: the recovery action is always decided by
+ * the verified run, while a tracking pin or unreadable run history remains explicit.
  *
  * ALGORITHM for `Crawler Failure:` issues — DIFFERENT since the crawler-workflow
  * consolidation (2026-07, see scripts/generate-crawler-group-workflows.mjs): 581
@@ -304,10 +287,11 @@ export function alreadyHeld(comments) {
 }
 
 /**
- * Decide whether a recovered issue must be HELD OPEN instead of closed.
+ * Diagnose whether a recovered issue carries structural evidence.
  *
- * Called only once the check is already green and the green run post-dates the issue —
- * i.e. exactly at the moment the old code would have closed.
+ * Called only once the check is already green and the green run post-dates the issue.
+ * The result is diagnostic context; the recovery policy itself closes after one
+ * qualifying green. Unreadable comments remain visible as an unknown diagnostic.
  *
  * @param {Array|null} comments  the issue's comments, or `null` when unreadable
  * @param {{ issueCreatedAt?: string, now?: number, maxDays?: number }} [opts]
@@ -399,6 +383,15 @@ export function structuralHoldNote({ code, workflow, runUrl, maxDays = DEFAULT_H
   ].join('\n');
 }
 
+/** Diagnostic context retained on a one-green close when structural evidence exists. */
+export function structuralObservationNote({ code, workflow, runUrl } = {}) {
+  return [
+    `🧭 **Sintomo rientrato: chiusa dopo un solo verde.** L'ultimo run${workflow ? ` di \`${workflow}\`` : ''} è verde${runUrl ? ` (${runUrl})` : ''}.`,
+    '',
+    `Il thread conserva il verdetto strutturale \`${code}\` come contesto diagnostico, ma la policy di chiusura richiede un solo recupero verificato: se il guasto ricompare, il reporter riapre questa stessa issue con la nuova evidenza.`,
+  ].join('\n');
+}
+
 /** The note posted just before a TTL-released close, so the close is never silent. */
 export function ttlReleaseNote({ code, maxDays = DEFAULT_HOLD_MAX_DAYS, ageDays } = {}) {
   const age = typeof ageDays === 'number' ? `${ageDays.toFixed(1)} giorni` : `oltre ${maxDays} giorni`;
@@ -484,8 +477,10 @@ export const RECOVERY_REQUIRED_JOBS = Object.freeze({
 });
 /** Fallimenti tollerati nella finestra: 1 è quello che ha aperto la issue. */
 export const DEFAULT_MAX_RECURRENCES = 1;
-/** Run verdi consecutive richieste quando nella finestra c'è stato un fallimento. */
+/** Run verdi consecutive richieste dal solo diagnostico di ricorrenza. */
 export const DEFAULT_MIN_GREEN_STREAK = 3;
+/** Una sola run verde qualificante chiude anche il percorso branch/PR. */
+export const DEFAULT_BRANCH_RECOVERY_GREEN_STREAK = 1;
 /** Valvola per i workflow ad alta cadenza: sotto questo tasso il flake non pinna. */
 export const DEFAULT_MAX_FAILURE_RATE = 0.02;
 
@@ -504,7 +499,8 @@ function recurrenceOptions() {
 }
 
 /**
- * Decide whether a recovered issue must be HELD OPEN because the failure RECURS.
+ * Diagnose whether a recovered issue has a recent recurrence. `hold` is diagnostic;
+ * `decideFailureIssueClose()` still closes after one verified green.
  *
  * Pure: takes the run history it is given, never calls `gh`. `runs` is the workflow's
  * COMPLETED runs that actually ran, newest-first, as `recentCompletedRuns()` returns
@@ -1176,9 +1172,9 @@ function runMatchesFailureScope(run, scope = {}) {
 }
 
 /**
- * Apply the stricter proof used when a workflow has no meaningful `main` run.
- * A PR/branch workflow is recovered only on three consecutive greens after the
- * issue opened, with no red in the same recurrence window. A red PR remains a
+ * Apply the scoped proof used when a workflow has no meaningful `main` run.
+ * A PR/branch workflow is recovered on one qualifying green after the issue
+ * opened, with no red in the same recurrence window. A red PR remains a
  * hold while it is fresh; once it ages out of that window it cannot pin the issue
  * forever. The optional branch/event scope comes from the latest failure evidence.
  */
@@ -1188,7 +1184,7 @@ export function assessBranchRecovery(history, {
   failureCreatedAt,
   now = Date.now(),
   windowHours = DEFAULT_RECURRENCE_WINDOW_HOURS,
-  minGreenStreak = DEFAULT_MIN_GREEN_STREAK,
+  minGreenStreak = DEFAULT_BRANCH_RECOVERY_GREEN_STREAK,
 } = {}) {
   const selected = (Array.isArray(history) ? history : [])
     .filter((run) => run?.status === 'completed')
@@ -1243,7 +1239,7 @@ export function historyUnavailableNote({ workflow, kind, branch } = {}) {
   const needed = kind === 'workflow-missing'
     ? 'Serve ripristinare il workflow o registrare una nuova issue sul nome corretto; senza una prova di verde non chiudo questa issue.'
     : kind === 'no-run-window'
-      ? 'Serve una run completata nel perimetro corretto; per workflow solo branch/PR servono inoltre tre verdi consecutive post-issue e nessun rosso nella finestra di ricorrenza.'
+      ? 'Serve una run completata nel perimetro corretto; per workflow solo branch/PR basta un verde post-issue nel perimetro corretto e nessun rosso nella finestra di ricorrenza.'
       : kind === 'branch-no-run-after-failure'
         ? 'Il branch cancellato non è una prova di recovery: senza run successive lascio la issue aperta; una nuova esecuzione o una verifica manuale dovrà fornire la prova.'
       : 'Serve una passata successiva con la storia leggibile; fino ad allora lascio la issue aperta per non confondere un errore API con un recupero.';
@@ -1281,7 +1277,7 @@ export function branchRecoveryNote({ workflow, evidence, repo = REPO } = {}) {
   return [
     `🔎 **Recovery provata fuori da \`main\`** per \`${workflow || 'workflow'}\`.`,
     '',
-    `Il workflow non ha una run qualificante su \`main\`; la chiusura usa il criterio più severo: almeno ${d.greenStreak ?? DEFAULT_MIN_GREEN_STREAK} verdi consecutive, tutte iniziate dopo l'apertura della issue, e nessun rosso nella finestra di ricorrenza di ${d.windowHours ?? DEFAULT_RECURRENCE_WINDOW_HOURS}h. Perimetro: ${scopeText}.`,
+    `Il workflow non ha una run qualificante su \`main\`; la chiusura usa una run verde nel perimetro corretto, iniziata dopo l'apertura della issue, e nessun rosso nella finestra di ricorrenza di ${d.windowHours ?? DEFAULT_RECURRENCE_WINDOW_HOURS}h. Verdi osservati: ${d.greenStreak ?? 0}. Perimetro: ${scopeText}.`,
     `Run verdi usate come prova: ${runs || 'non leggibili'}${repo ? ` (repo ${repo})` : ''}.`,
     '',
     '<!-- CLOSE_RECOVERED: branch-recovery-proof -->',
@@ -2370,13 +2366,9 @@ function clearChronicLabels(issueNumber, labels) {
 // ricomporlo, e lo ricomponeva in prosa senza scartare le run `skipped`. Due oracoli che
 // divergono. Adesso l'oracolo è uno, è esportato, e `main()` fa solo letture e scritture.
 
-/** I verdetti possibili di `decideFailureIssueClose`. */
+/** I verdetti possibili di `decideFailureIssueClose` nel percorso attivo. */
 export const CLOSE_ACTIONS = Object.freeze([
   'close',
-  'chronic-hold',
-  'chronic-escalate',
-  'structural-hold',
-  'recurrence-hold',
   'keep',
   'close-not-planned',
 ]);
@@ -2417,13 +2409,14 @@ export function classifyDecidingRun({ issue, run } = {}) {
 
 /**
  * LA decisione del closer per una issue di fallimento. Pura: nessuna chiamata `gh`,
- * nessuna scrittura. Riusa i quattro gate già esportati, nello stesso ordine di sempre:
- * cronica (con precedenza su tutto, TTL dello structural hold compreso) → de-escalation
- * → ricorrenza misurata → structural hold.
+ * nessuna scrittura. Una sola run verde, successiva all'apertura della issue, è la
+ * condizione sufficiente per chiudere. Riusa comunque i gate cronico, ricorrenza e
+ * structural come osservazioni, così la chiusura conserva il contesto e può togliere
+ * label cronici rientrati senza trasformare una issue guarita in un thread immortale.
  *
  * `comments` va passato solo quando `classifyDecidingRun` dà `recovered`; negli altri
- * rami non viene letto. `null` nel ramo `recovered` significa «commenti illeggibili»,
- * e i gate lo trattano come tale (hold limitato dal TTL), non come «nessun commento».
+ * rami non viene letto. `null` nel ramo `recovered` significa «commenti illeggibili»:
+ * viene conservato nelle osservazioni, ma non blocca la chiusura dopo il verde valido.
  *
  * Oltre ai campi del verdetto restituisce le decisioni dei singoli gate, che servono a
  * `main()` per i commenti e i log: `chronic`, `deescalation`, `recurrence`, `structural`.
@@ -2470,55 +2463,25 @@ export function decideFailureIssueClose({ issue, run, history, comments, labels,
     return { action: 'keep', reason: branch, runId, run: deciding };
   }
 
-  // Gate 1 — CRONICA. Ha la precedenza su tutto, TTL dello structural hold compreso:
-  // una issue riaperta N volte non deve essere rilasciata da una scadenza pensata per
-  // una diagnosi ferma, e non deve nemmeno approfittare di una finestra recente
-  // tranquilla per ricominciare il ciclo.
+  // Il verde è sufficiente. Calcoliamo comunque tutte le osservazioni nello stesso
+  // passaggio, così la chiusura non perde il contesto diagnostico e l'eventuale
+  // de-escalation dei label rimane idempotente.
   const chronic = decideChronicEscalation(comments, { ...options?.chronic, now });
-  if (chronic.hold) {
-    return {
-      action: chronic.escalate ? 'chronic-escalate' : 'chronic-hold',
-      reason: chronic.reason,
-      runId,
-      run: deciding,
-      chronic,
-    };
-  }
-
-  // Il conteggio è rientrato: se l'escalation c'era, i label cronici se ne vanno
-  // adesso. Non è un verdetto: la issue prosegue verso gli altri gate.
   const deescalation = decideChronicDeescalation({
     comments,
     labels: labels ?? issue?.labels,
     decision: chronic,
   });
-
-  // Gate 2 — RICORRENZA MISURATA. Una run verde su un guasto intermittente non
-  // significa niente: si chiude solo se la finestra recente è pulita.
   const recurrence = decideRecurrenceHold(usableHistory, { ...options?.recurrence, now });
-  if (recurrence.hold) {
-    return {
-      action: 'recurrence-hold', reason: recurrence.reason, runId, run: deciding,
-      chronic, deescalation, recurrence,
-    };
-  }
-
-  // Gate 3 — STRUCTURAL HOLD (#5454).
   const structural = decideStructuralHold(comments, {
     issueCreatedAt: issue?.createdAt,
     maxDays: options?.holdMaxDays,
     now,
   });
-  if (structural.hold) {
-    return {
-      action: 'structural-hold', reason: structural.reason, runId, run: deciding,
-      chronic, deescalation, recurrence, structural,
-    };
-  }
 
   return {
     action: 'close',
-    reason: `recovered (run ${runId} success @ ${deciding.createdAt}); ${recurrence.reason}; ${structural.reason}`,
+    reason: `recovered by one successful run (${runId} @ ${deciding.createdAt}); chronic=${chronic.reason}; recurrence=${recurrence.reason}; structural=${structural.reason}`,
     runId,
     run: deciding,
     chronic,
@@ -2533,8 +2496,8 @@ export function decideFailureIssueClose({ issue, run, history, comments, labels,
  *
  * Contratto per chi legge il file: il campo da confrontare è `action`. `reason` è un
  * codice stabile solo per `keep` (`run-not-resolvable`, `green-predates-issue`,
- * `still-red`) e per `close-not-planned` (`verdict-only-thread`); per gli hold e per
- * `close` è testo per umani, con numeri che cambiano.
+ * `still-red`) e per `close-not-planned` (`verdict-only-thread`); per `close` è testo
+ * per umani, con numeri diagnostici che cambiano.
  */
 export function verdictRecord(issue, verdict, repo = REPO) {
   return {
@@ -2638,12 +2601,10 @@ function main() {
   const issues = listFailureIssues();
   const maxDays = holdMaxDays();
   const rec = recurrenceOptions();
-  console.log(`[close-recovered] ${issues.length} open Workflow/Crawler/CI Failure issue(s)${DRY_RUN ? ' (dry-run)' : ''}, structural-hold TTL ${maxDays}d, recurrence gate: max ${rec.maxRecurrences} fallimenti in ${rec.windowHours}h / ${rec.minGreenStreak} verdi consecutivi / valvola ${(rec.maxFailureRate * 100).toFixed(1)}%`);
+  console.log(`[close-recovered] ${issues.length} open Workflow/Crawler/CI Failure issue(s)${DRY_RUN ? ' (dry-run)' : ''}, one-success close; diagnostics: ${rec.maxRecurrences} fallimenti in ${rec.windowHours}h / ${rec.minGreenStreak} verdi consecutivi / valvola ${(rec.maxFailureRate * 100).toFixed(1)}%, structural TTL ${maxDays}d`);
   let closed = 0;
   let kept = 0;
   let skipped = 0;
-  let held = 0;
-  let chronic = 0;
   let deescalated = 0;
   const historyCounts = {
     workflowMissing: 0,
@@ -2755,7 +2716,7 @@ function main() {
               failureCreatedAt: branchOptions.historyStartAt,
               now: Date.now(),
               windowHours: rec.windowHours,
-              minGreenStreak: rec.minGreenStreak,
+              minGreenStreak: DEFAULT_BRANCH_RECOVERY_GREEN_STREAK,
             });
             branchEvidence.windowHours = rec.windowHours;
             if (branchEvidence.recovered) {
@@ -2801,7 +2762,7 @@ function main() {
                   failureCreatedAt: branchOptions.historyStartAt,
                   now: Date.now(),
                   windowHours: rec.windowHours,
-                  minGreenStreak: rec.minGreenStreak,
+                  minGreenStreak: DEFAULT_BRANCH_RECOVERY_GREEN_STREAK,
                 });
                 branchEvidence.windowHours = rec.windowHours;
                 branchProofInsufficient = true;
@@ -2970,24 +2931,9 @@ function main() {
     const runRepo = run.repository || REPO;
     const runUrl = runRepo ? `https://github.com/${runRepo}/actions/runs/${run.databaseId}` : undefined;
 
-    if (verdict.action === 'chronic-escalate' || verdict.action === 'chronic-hold') {
-      const chronicDecision = verdict.chronic;
-      if (DRY_RUN) {
-        console.log(`  #${it.number} WOULD ESCALATE+HOLD — ${chronicDecision.reason}`);
-      } else if (verdict.action === 'chronic-escalate') {
-        applyChronicLabels(it.number);
-        commentOnGithubIssue(it.number, chronicEscalationNote({ workflow: it.workflow, decision: chronicDecision }));
-        console.log(`  #${it.number} CHRONIC (escalated: ${CHRONIC_LABELS.join('+')}) — ${chronicDecision.reason}`);
-      } else {
-        console.log(`  #${it.number} CHRONIC (already escalated) — ${chronicDecision.reason}`);
-      }
-      chronic++;
-      continue;
-    }
-
     // `automation-deferred` è un'esclusione dalle code del drainer, quindi lasciarlo
     // appeso renderebbe l'escalation irreversibile anche dopo la riapertura.
-    const { deescalation, recurrence } = verdict;
+    const { deescalation, recurrence, structural: decision } = verdict;
     if (deescalation.clear) {
       if (DRY_RUN) {
         console.log(`  #${it.number} WOULD DE-ESCALATE — ${deescalation.reason}`);
@@ -2996,36 +2942,6 @@ function main() {
         console.log(`  #${it.number} de-escalated — ${deescalation.reason}`);
       }
       deescalated++;
-    }
-
-    if (verdict.action === 'recurrence-hold') {
-      if (DRY_RUN) {
-        console.log(`  #${it.number} WOULD HOLD (recurrence) — ${recurrence.reason}`);
-      } else if (alreadyRecurrenceHeld(comments)) {
-        console.log(`  #${it.number} HELD (recurrence, already notified) — ${recurrence.reason}`);
-      } else {
-        commentOnGithubIssue(it.number, recurrenceHoldNote({ workflow: it.workflow, runUrl, decision: recurrence }));
-        console.log(`  #${it.number} HELD (recurrence) — ${recurrence.reason}`);
-      }
-      held++;
-      continue;
-    }
-
-    const decision = verdict.structural;
-    if (verdict.action === 'structural-hold') {
-      if (DRY_RUN) {
-        console.log(`  #${it.number} WOULD HOLD — ${decision.reason}`);
-      } else if (decision.notified) {
-        console.log(`  #${it.number} HELD (already notified) — ${decision.reason}`);
-      } else {
-        commentOnGithubIssue(
-          it.number,
-          structuralHoldNote({ code: decision.code, workflow: it.workflow, runUrl, maxDays }),
-        );
-        console.log(`  #${it.number} HELD — ${decision.reason}`);
-      }
-      held++;
-      continue;
     }
 
     if (DRY_RUN) {
@@ -3047,7 +2963,11 @@ function main() {
         }));
       }
       if (decision.code && STRUCTURAL_OUTCOMES.includes(decision.code)) {
-        prefaces.push(ttlReleaseNote({ code: decision.code, maxDays, ageDays: decision.ageDays }));
+        if (decision.hold) {
+          prefaces.push(structuralObservationNote({ code: decision.code, workflow: it.workflow, runUrl }));
+        } else if (typeof decision.ageDays === 'number' && decision.ageDays > maxDays) {
+          prefaces.push(ttlReleaseNote({ code: decision.code, maxDays, ageDays: decision.ageDays }));
+        }
       }
       const preface = prefaces.length > 0 ? prefaces.join('\n\n') : undefined;
       // Query recovery with the unwrapped workflow, but re-read and close only the exact
@@ -3073,7 +2993,7 @@ function main() {
   }
 
   console.log(`[close-recovered] history: workflow-missing=${historyCounts.workflowMissing} no-run-window=${historyCounts.noRunWindow} history-unreadable=${historyCounts.historyUnreadable} branch-proof-insufficient=${historyCounts.branchProofInsufficient} branch-no-run-after-failure=${historyCounts.branchNoRunAfterFailure}`);
-  console.log(`[close-recovered] done: closed=${closed} held=${held} chronic=${chronic} de-escalated=${deescalated} kept=${kept} skipped=${skipped}`);
+  console.log(`[close-recovered] done: closed=${closed} de-escalated=${deescalated} kept=${kept} skipped=${skipped}`);
   appendHistorySummary(historyCounts, historyDetails);
 
   if (verdictsOut) {
