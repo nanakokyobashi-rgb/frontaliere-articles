@@ -63,6 +63,9 @@ const blogMetaCantonSoIt: Record<string, string> = {
     'blog.article.solothurn-sussidi-premi-2027.title': '221 milioni di franchi per premi assicurativi più bassi nel Canton Soletta',
     'blog.article.solothurn-sussidi-premi-2027.excerpt': 'Nel 2027 previsti circa CHF 221 milioni per l\'IPV La dotazione cresce di CHF 9 milioni, pari al 4,3% Circa CHF 123 milioni arrivano dalla Confederazione',
     'blog.article.solothurn-sussidi-premi-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.soletta-ratsleitung-puk-ospedali.title': 'Soletta: la Ratsleitung contro la PUK sugli ospedali',
+    'blog.article.soletta-ratsleitung-puk-ospedali.excerpt': 'La Ratsleitung di Soletta considera non utile una PUK sugli ospedali; il Consiglio cantonale voterà l\'11 novembre.',
+    'blog.article.soletta-ratsleitung-puk-ospedali.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSoIt;

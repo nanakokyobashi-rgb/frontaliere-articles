@@ -226,4 +226,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'soletta-ratsleitung-puk-ospedali',
+ category: 'novita',
+ date: '2026-10-29T10:41:25.882Z',
+ image: '/images/blog/article-soletta-ratsleitung-puk-ospedali.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

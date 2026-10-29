@@ -777,6 +777,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-soletta-ratsleitung-puk-ospedali': {
+    title: 'Soletta: la Ratsleitung contro la PUK sugli ospedali',
+    description: 'La Ratsleitung di Soletta si oppone alla PUK sulla soH. Il Consiglio cantonale deciderà l\'11 novembre; la GPK segue il caso da oltre due anni.',
+    keywords: 'frontalieri, ticino, svizzera, italia, soletta, ratsleitung, contro, sugli',
+    ogTitle: 'Soletta, la Ratsleitung si oppone alla PUK',
+    ogDescription: 'La direzione del Consiglio cantonale di Soletta non vede un valore aggiunto nella commissione d\'inchiesta proposta dalla SVP. La GPK segue già il dossier da oltre due anni, mentre gli accertamenti di una PUK potrebbero durare 12-18 mesi.',
+    canonicalPath: '/articoli-soletta/soletta-ratsleitung-puk-ospedali/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Soletta: la Ratsleitung contro la PUK sugli ospedali",
+      "description": "La Ratsleitung di Soletta si oppone alla PUK sulla soH. Il Consiglio cantonale deciderà l'11 novembre; la GPK segue il caso da oltre due anni.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-soletta-ratsleitung-puk-ospedali.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-29T10:41:25+00:00",
+      "dateModified": "2026-10-29T10:41:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-soletta/soletta-ratsleitung-puk-ospedali/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
