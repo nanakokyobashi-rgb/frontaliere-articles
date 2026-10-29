@@ -4,13 +4,9 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ow::https://www.ow.ch/_rte/information/139099": {
+    "canton-ow::https://www.ow.ch/_rte/information/139186": {
       "section": "canton-ow",
-      "ts": 1792714339263
-    },
-    "canton-ow::https://www.ow.ch/_rte/information/139075": {
-      "section": "canton-ow",
-      "ts": 1792745075713
+      "ts": 1793265330373
     }
   }
 }
