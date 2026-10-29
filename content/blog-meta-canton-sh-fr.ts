@@ -78,6 +78,9 @@ const blogMetaCantonShFr: Record<string, string> = {
     'blog.article.schaffhausen-modello-scolastico-inclusivo.title': 'Schaffhouse adopte un modèle scolaire inclusif avec PGA',
     'blog.article.schaffhausen-modello-scolastico-inclusivo.excerpt': 'Décision du 22 janvier 2026 pour le passage à l\'ISF ; PGA prévoit un plafond annuel maximum de CHF 3 millions et un crédit ponctuel de CHF 270\'000.',
     'blog.article.schaffhausen-modello-scolastico-inclusivo.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.competenze-finanziarie-sciaffusa.title': 'Schaffhouse actualise les compétences financières à partir de 2027',
+    'blog.article.competenze-finanziarie-sciaffusa.excerpt': 'À partir du 1er janvier 2027, le Gouvernement pourra autoriser des dépenses ponctuelles jusqu’à CHF 200\'000 ; le Parlement cantonal jusqu’à CHF 1,5 million.',
+    'blog.article.competenze-finanziarie-sciaffusa.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonShFr;

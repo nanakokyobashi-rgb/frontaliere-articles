@@ -28,6 +28,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'sp-no-legge-ospedale': { it: 'sp-no-legge-ospedale', en: 'schaffhausen-sp-hospital-law-no', de: 'sp-nein-spitalgesetz-schaffhausen', fr: 'ps-non-loi-hopital-schaffhouse' },
  'pil-cantonale-2026-crescita': { it: 'pil-cantonale-2026-crescita', en: 'cantonal-pil-2026-growth', de: 'kantonaler-pil-2026-wachstum', fr: 'pil-canton-2026-croissance' },
  'schaffhausen-modello-scolastico-inclusivo': { it: 'schaffhausen-modello-scolastico-inclusivo', en: 'schaffhausen-inclusive-school-model', de: 'schaffhausen-schulmodell-inklusiv', fr: 'schaffhouse-modele-scolaire-inclusif' },
+ 'competenze-finanziarie-sciaffusa': { it: 'competenze-finanziarie-sciaffusa', en: 'schaffhausen-financial-powers-2027', de: 'schaffhausen-finanzkompetenzen-2027', fr: 'schaffhouse-competences-financieres-2027' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

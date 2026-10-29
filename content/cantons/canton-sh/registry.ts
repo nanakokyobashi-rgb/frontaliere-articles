@@ -281,4 +281,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'competenze-finanziarie-sciaffusa',
+ category: 'novita',
+ date: '2026-10-29T22:48:05.136Z',
+ image: '/images/blog/article-competenze-finanziarie-sciaffusa.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

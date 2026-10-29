@@ -982,6 +982,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-competenze-finanziarie-sciaffusa': {
+    title: 'Sciaffusa aggiorna le competenze finanziarie dal 2027',
+    description: 'Dal 1° gennaio 2027 Sciaffusa aggiorna le competenze di spesa di Governo e Parlamento e dà priorità al referendum finanziario.',
+    keywords: 'frontalieri, ticino, svizzera, italia, sciaffusa, aggiorna, competenze, finanziarie',
+    ogTitle: 'Sciaffusa: soglie di spesa cambiano dal 2027',
+    ogDescription: 'Il 14 giugno 2026 la revisione è stata approvata con 22\'420 sì e 11\'168 no. Dal 2027 il Governo avrà una soglia di CHF 200\'000 e il Parlamento di CHF 1,5 milioni per le spese una tantum; il referendum finanziario prevarrà su quello legislativo.',
+    canonicalPath: '/articoli-sciaffusa/competenze-finanziarie-sciaffusa/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Sciaffusa aggiorna le competenze finanziarie dal 2027",
+      "description": "Dal 1° gennaio 2027 Sciaffusa aggiorna le competenze di spesa di Governo e Parlamento e dà priorità al referendum finanziario.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-competenze-finanziarie-sciaffusa.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-29T22:48:05+00:00",
+      "dateModified": "2026-10-29T22:48:05+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-sciaffusa/competenze-finanziarie-sciaffusa/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

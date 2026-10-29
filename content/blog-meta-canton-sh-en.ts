@@ -78,6 +78,9 @@ const blogMetaCantonShEn: Record<string, string> = {
     'blog.article.schaffhausen-modello-scolastico-inclusivo.title': 'Schaffhausen adopts inclusive school model with PGA',
     'blog.article.schaffhausen-modello-scolastico-inclusivo.excerpt': 'Decision of January 22, 2026 on the transition to the ISF; PGA provides for a maximum annual cap of CHF 3 million and a one-time credit of CHF 270\'000.',
     'blog.article.schaffhausen-modello-scolastico-inclusivo.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.competenze-finanziarie-sciaffusa.title': 'Schaffhausen updates financial skills from 2027',
+    'blog.article.competenze-finanziarie-sciaffusa.excerpt': 'From January 1, 2027, the Government may authorize one-time expenditures of up to CHF 200\'000; the cantonal Parliament up to CHF 1,5 million.',
+    'blog.article.competenze-finanziarie-sciaffusa.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonShEn;

@@ -78,6 +78,9 @@ const blogMetaCantonShIt: Record<string, string> = {
     'blog.article.schaffhausen-modello-scolastico-inclusivo.title': 'Sciaffusa adotta modello scolastico inclusivo con PGA',
     'blog.article.schaffhausen-modello-scolastico-inclusivo.excerpt': 'Decisione del 22 gennaio 2026 per il passaggio all\'ISF; PGA prevede un tetto annuale massimo di CHF 3 milioni e un credito una tantum di CHF 270\'000.',
     'blog.article.schaffhausen-modello-scolastico-inclusivo.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.competenze-finanziarie-sciaffusa.title': 'Sciaffusa aggiorna le competenze finanziarie dal 2027',
+    'blog.article.competenze-finanziarie-sciaffusa.excerpt': 'Dal 1° gennaio 2027 il Governo potrà autorizzare spese una tantum fino a CHF 200\'000; il Parlamento cantonale fino a CHF 1,5 milioni.',
+    'blog.article.competenze-finanziarie-sciaffusa.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonShIt;

@@ -78,6 +78,9 @@ const blogMetaCantonShDe: Record<string, string> = {
     'blog.article.schaffhausen-modello-scolastico-inclusivo.title': 'Schaffhausen übernimmt integratives Schulmodell mit PGA',
     'blog.article.schaffhausen-modello-scolastico-inclusivo.excerpt': 'Entscheid vom 22.',
     'blog.article.schaffhausen-modello-scolastico-inclusivo.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.competenze-finanziarie-sciaffusa.title': 'Schaffhausen passt die Finanzkompetenzen ab 2027 an',
+    'blog.article.competenze-finanziarie-sciaffusa.excerpt': 'Ab dem 1. Januar 2027 kann die Regierung einmalige Ausgaben bis zu CHF 200\'000 bewilligen; das Kantonsparlament bis zu CHF 1,5 Millionen.',
+    'blog.article.competenze-finanziarie-sciaffusa.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonShDe;
