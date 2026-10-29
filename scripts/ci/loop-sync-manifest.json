@@ -4708,9 +4708,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-03.yml",
       "mode": "identical",
       "baseline": {
-        "site": "42507dbe1f6763ed",
-        "corpus": "42507dbe1f6763ed",
-        "alignedAt": "2026-10-23"
+        "site": "c5ab7a2b18ff5d34",
+        "corpus": "c5ab7a2b18ff5d34",
+        "alignedAt": "2026-10-29"
       }
     },
     {
@@ -4718,9 +4718,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-04.yml",
       "mode": "identical",
       "baseline": {
-        "site": "5e013232c7993951",
-        "corpus": "5e013232c7993951",
-        "alignedAt": "2026-10-23"
+        "site": "997104db1c51aa84",
+        "corpus": "997104db1c51aa84",
+        "alignedAt": "2026-10-29"
       }
     },
     {
@@ -4888,9 +4888,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-21.yml",
       "mode": "identical",
       "baseline": {
-        "site": "3c8f3ae0d63cd9eb",
-        "corpus": "3c8f3ae0d63cd9eb",
-        "alignedAt": "2026-10-23"
+        "site": "9aa4f7d4922fd2ec",
+        "corpus": "9aa4f7d4922fd2ec",
+        "alignedAt": "2026-10-29"
       }
     },
     {
@@ -4898,9 +4898,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-22.yml",
       "mode": "identical",
       "baseline": {
-        "site": "785ed9e910eb9321",
-        "corpus": "785ed9e910eb9321",
-        "alignedAt": "2026-10-23"
+        "site": "01a227a7e6580a09",
+        "corpus": "01a227a7e6580a09",
+        "alignedAt": "2026-10-29"
       }
     },
     {
@@ -4908,9 +4908,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-23.yml",
       "mode": "identical",
       "baseline": {
-        "site": "e38c5afab4ccf62a",
-        "corpus": "e38c5afab4ccf62a",
-        "alignedAt": "2026-10-23"
+        "site": "29fa093dca5539e4",
+        "corpus": "29fa093dca5539e4",
+        "alignedAt": "2026-10-29"
       }
     },
     {
@@ -4929,8 +4929,8 @@
       "mode": "identical",
       "reason": "La baseline del 2026-10-29 registra lo stesso digest SHA-256 raw sui due lati (0d27c51342ba2766); `identical` mantiene il contratto sotto drift-check e segnala future divergenze.",
       "baseline": {
-        "site": "0d27c51342ba2766",
-        "corpus": "0d27c51342ba2766",
+        "site": "4d25abafa3e7af65",
+        "corpus": "4d25abafa3e7af65",
         "alignedAt": "2026-10-29"
       }
     },
