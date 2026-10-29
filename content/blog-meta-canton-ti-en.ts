@@ -75,6 +75,9 @@ const blogMetaCantonTiEn: Record<string, string> = {
     'blog.article.attrattivita-economica-zurigo-ticino.title': 'Economic attractiveness: the debate in Zurich also concerns Ticino',
     'blog.article.attrattivita-economica-zurigo-ticino.excerpt': 'Vontobel plans a campus in Baar in 2030 Cembra will move its headquarters from Zurich-Altstetten to Baden in 2027 655 companies have moved their headquarters from Zurich to Zug',
     'blog.article.attrattivita-economica-zurigo-ticino.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.frontalieri-riforma-disoccupazione-ue.title': 'Cross-border commuters and unemployment: EU changes the rules',
+    'blog.article.frontalieri-riforma-disoccupazione-ue.excerpt': 'Brussels approves unemployment reform The criterion shifts from residence to employment status For Switzerland, the horizon is around 2029 Bern',
+    'blog.article.frontalieri-riforma-disoccupazione-ue.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonTiEn;

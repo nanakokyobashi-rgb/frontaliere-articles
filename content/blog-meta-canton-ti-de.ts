@@ -75,6 +75,9 @@ const blogMetaCantonTiDe: Record<string, string> = {
     'blog.article.attrattivita-economica-zurigo-ticino.title': 'Wirtschaftliche Attraktivität: Die Zürcher Debatte betrifft auch das Tessin',
     'blog.article.attrattivita-economica-zurigo-ticino.excerpt': 'Vontobel plant im Jahr 2030 einen Campus in Baar Cembra wird im Jahr 2027 den Sitz von Zürich-Altstetten nach Baden verlegen 655 Unternehmen haben ihren Sitz von Zürich nach Zug verlegt',
     'blog.article.attrattivita-economica-zurigo-ticino.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.frontalieri-riforma-disoccupazione-ue.title': 'Grenzüberschreitende Pendler und Arbeitslosigkeit: Die EU ändert die Regeln',
+    'blog.article.frontalieri-riforma-disoccupazione-ue.excerpt': 'Brüssel genehmigt Arbeitslosenreform.',
+    'blog.article.frontalieri-riforma-disoccupazione-ue.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonTiDe;

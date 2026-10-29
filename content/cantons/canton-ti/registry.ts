@@ -270,4 +270,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'frontalieri-riforma-disoccupazione-ue',
+ category: 'novita',
+ date: '2026-10-29T21:47:51.269Z',
+ image: '/images/blog/article-frontalieri-riforma-disoccupazione-ue.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

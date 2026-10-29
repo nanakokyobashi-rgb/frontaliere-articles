@@ -75,6 +75,9 @@ const blogMetaCantonTiIt: Record<string, string> = {
     'blog.article.attrattivita-economica-zurigo-ticino.title': 'Attrattività economica: il dibattito zurighese interpella anche il Ticino',
     'blog.article.attrattivita-economica-zurigo-ticino.excerpt': 'Vontobel prevede un campus a Baar nel 2030 Cembra sposterà la sede da Zurigo-Altstetten a Baden nel 2027 655 imprese hanno trasferito la sede da Zurigo a Zugo',
     'blog.article.attrattivita-economica-zurigo-ticino.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.frontalieri-riforma-disoccupazione-ue.title': 'Frontalieri e disoccupazione: l\'UE cambia le regole',
+    'blog.article.frontalieri-riforma-disoccupazione-ue.excerpt': 'Bruxelles approva la riforma della disoccupazione Il criterio passa dalla residenza allo Stato di lavoro Per la Svizzera l\'orizzonte è attorno al 2029 Berna',
+    'blog.article.frontalieri-riforma-disoccupazione-ue.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonTiIt;

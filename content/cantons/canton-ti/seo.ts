@@ -933,6 +933,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-frontalieri-riforma-disoccupazione-ue': {
+    title: 'Frontalieri e disoccupazione: l\'UE cambia le regole',
+    description: 'Bruxelles approva la riforma della disoccupazione Il criterio passa dalla residenza allo Stato di lavoro Per la Svizzera l\'orizzonte è attorno al 2029',
+    keywords: 'frontalieri, ticino, svizzera, italia, disoccupazione, cambia, regole, bruxelles',
+    ogTitle: 'Frontalieri: riforma disoccupazione UE cambia regole',
+    ogDescription: 'Bruxelles approva la riforma della disoccupazione Il criterio passa dalla residenza allo Stato di lavoro Per la Svizzera l\'orizzonte è attorno al 2029 Berna',
+    canonicalPath: '/articoli-ticino/frontalieri-riforma-disoccupazione-ue/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Frontalieri e disoccupazione: l'UE cambia le regole",
+      "description": "Bruxelles approva la riforma della disoccupazione Il criterio passa dalla residenza allo Stato di lavoro Per la Svizzera l'orizzonte è attorno al 2029",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-frontalieri-riforma-disoccupazione-ue.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-29T21:47:51+00:00",
+      "dateModified": "2026-10-29T21:47:51+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-ticino/frontalieri-riforma-disoccupazione-ue/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
