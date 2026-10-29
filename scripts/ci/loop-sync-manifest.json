@@ -4086,18 +4086,18 @@
       "path": "host/constants.ts",
       "sitePath": "build-plugins/constants.ts",
       "mode": "adapted",
-      "reason": "Costanti del sito lette dall'engine via SiteShellContract, estratte per chiusura: adapted per costruzione, non byte-identiche al sorgente completo. scalarFingerprint confronta i 22 scalari authoritative, mentre i test runtime verificano i comportamenti del contratto. Il digest 08b97443… incorpora il gate GA4 del sito, il budget SERP a 150 caratteri, la canonicalizzazione Organization.sameAs, l'aggiunta del profilo Facebook canonico, il riferimento content-addressed a gtag-init e le due regole contestuali trasportate per Chiasso e concorsi pubblici; la specializzazione editoriale resta in additionalType e il runtime Firebase conserva il match sulla chiave esatta, senza segreti nei fingerprint.",
+      "reason": "Costanti del sito lette dall'engine via SiteShellContract, estratte per chiusura: adapted per costruzione, non byte-identiche al sorgente completo. scalarFingerprint confronta i 22 scalari authoritative, mentre i test runtime verificano i comportamenti del contratto. Il digest 84faca67… rimuove anche userinfo e credenziali dalle rappresentazioni URL della telemetria e incorpora il gate GA4 del sito, il budget SERP a 150 caratteri, la canonicalizzazione Organization.sameAs, l'aggiunta del profilo Facebook canonico, il riferimento content-addressed a gtag-init e le due regole contestuali trasportate per Chiasso e concorsi pubblici; la specializzazione editoriale resta in additionalType e il runtime Firebase conserva il match sulla chiave esatta, senza segreti nei fingerprint.",
       "baseline": {
-        "site": "2721e6c566c129a1",
-        "corpus": "d887d0a813be9844",
-        "alignedAt": "2026-10-25",
-        "forcedAt": "2026-10-25T11:16:42.000Z"
+        "site": "e8e197f21d0e2f7c",
+        "corpus": "78655205fa7b6d2b",
+        "alignedAt": "2026-10-29",
+        "forcedAt": "2026-10-29T13:57:28.865Z"
       },
       "scalarFingerprint": {
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
         "corpusPath": "host/shell-contract-fingerprint.json",
         "scalarFields": 22,
-        "sha256": "08b97443ab5e85ab6ea85945a19348134a77615e488eaf3afd25d00979d7fd26"
+        "sha256": "84faca672ac1db32b87df677cde235d6174dbfd573af47cd18145492ae004316"
       }
     },
     {
@@ -4314,9 +4314,9 @@
       "mode": "identical",
       "reason": "Impronta SHA-256 dei 22 campi scalari di SiteShellContract, prodotta e verificata da `host/tests/shell-contract-fingerprint.test.mjs`. Il gemello del sito vive in `tests/articles-shell-contract-fingerprint.json` con lo stesso contenuto; i due artefatti restano `identical` e la baseline ne sorveglia il drift. E' il gate runtime che impedisce di spedire l'engine senza la sua meta' `host/`.",
       "baseline": {
-        "site": "30dd9261c9666d9c",
-        "corpus": "30dd9261c9666d9c",
-        "alignedAt": "2026-10-22"
+        "site": "c524c355ef909aca",
+        "corpus": "c524c355ef909aca",
+        "alignedAt": "2026-10-29"
       }
     },
     {
@@ -6707,6 +6707,27 @@
         "site": "0e0aa91be02c1c2b",
         "corpus": "0e0aa91be02c1c2b",
         "alignedAt": "2026-10-23"
+      }
+    },
+    {
+      "path": "host/analyticsUrlPrivacy.js",
+      "sitePath": "services/analyticsUrlPrivacy.js",
+      "mode": "identical",
+      "reason": "Canonical pure URL sanitizer is embedded into static GTAG on both sides; implicit dependency of host/constants.ts must remain byte-identical.",
+      "baseline": {
+        "site": "a17be37ed9f385f4",
+        "corpus": "a17be37ed9f385f4",
+        "alignedAt": "2026-10-29"
+      }
+    },
+    {
+      "path": "host/tests/analytics-url-privacy.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Node regression coverage for standalone transported telemetry helper and canonical inline code; the site covers emitted GTAG/PostHog behavior via Vitest.",
+      "baseline": {
+        "site": null,
+        "corpus": "2990239620ccb1ef",
+        "alignedAt": "2026-10-29"
       }
     }
   ]
