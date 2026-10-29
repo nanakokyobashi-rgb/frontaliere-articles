@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-cff-cargo-rinuncia-legno-alle.webp",
-      "sha256": "111f4d4c839ef379731137f30ae66e0c8e9035628c73aa5c653c1fe5c48c45f2"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-cff-cargo-rinuncia-legno-alle-480w.webp",
-      "sha256": "a37c0d3bcc7e02912545efb075dd289a0f84cf4daffc051e93960af19dd7bb18"
-    }
-  ]
+  "items": []
 }
