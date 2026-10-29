@@ -7,7 +7,7 @@
  * second format-sensitive regex at its call site.
  */
 
-const CANTON_LANDING_CARD_LIMIT_EXPORT_RE = /^[ \t]*export\s+const\s+CANTON_LANDING_CARD_LIMIT\s*(?::\s*number)?\s*=\s*(?<value>0|[1-9]\d*)(?:\s+as\s+const)?[ \t]*(?<semicolon>;)?[ \t]*(?:\/\/[^\r\n]*)?(?:\r?\n|$)/mu;
+const CANTON_LANDING_CARD_LIMIT_EXPORT_RE = /^[ \t]*export\s+const\s+CANTON_LANDING_CARD_LIMIT\s*(?::\s*number)?\s*=\s*(?<value>0|[1-9]\d*)(?:\s+as\s+const)?[ \t]*(?<semicolon>;)?[ \t]*(?:\/\/[^\r\n]*)?(?:\r?\n|$)/gmu;
 
 function maskRange(source, start, end) {
   return source.slice(start, end).replace(/[^\r\n]/g, ' ');
@@ -233,13 +233,38 @@ export function parseCantonLandingCardLimitExport(source) {
     throw new Error('CANTON_LANDING_CARD_LIMIT export non valido: sorgente non testuale');
   }
   const normalizedSource = normalizeSource(source);
-  const match = CANTON_LANDING_CARD_LIMIT_EXPORT_RE.exec(lexicalView(normalizedSource, { maskLiterals: true }));
-  if (!match || hasUnexpectedTrailingCode(normalizedSource, match)) {
+  const maskedSource = lexicalView(normalizedSource, { maskLiterals: true });
+  const matches = [...maskedSource.matchAll(CANTON_LANDING_CARD_LIMIT_EXPORT_RE)];
+  if (matches.length === 0) {
+    throw new Error('CANTON_LANDING_CARD_LIMIT export non trovato o non valido');
+  }
+  if (matches.length > 1) {
+    throw new Error('CANTON_LANDING_CARD_LIMIT export duplicato: dichiarazione non univoca');
+  }
+  const [match] = matches;
+  if (hasUnexpectedTrailingCode(normalizedSource, match)) {
     throw new Error('CANTON_LANDING_CARD_LIMIT export non trovato o non valido');
   }
   const value = Number(match.groups.value);
   if (!Number.isSafeInteger(value) || value < 1) {
     throw new Error(`CANTON_LANDING_CARD_LIMIT export non valido: ${match.groups.value}`);
+  }
+  return value;
+}
+
+/**
+ * Resolve the effective landing-card limit for a caller that may override the
+ * renderer default. The reconciler and its fallback use this same guard so a
+ * malformed override cannot silently become a different coverage contract.
+ *
+ * @param {unknown} limit explicit caller override, or undefined
+ * @param {number} fallback renderer-owned default
+ * @returns {number}
+ */
+export function resolveCantonLandingCardLimit(limit, fallback) {
+  const value = limit === undefined ? fallback : limit;
+  if (!Number.isSafeInteger(value) || value < 1) {
+    throw new Error(`limite landing non valido: ${value}`);
   }
   return value;
 }

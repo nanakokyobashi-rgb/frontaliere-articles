@@ -9,7 +9,12 @@ import {
   remainingBudgetMs,
   RECONCILE_FETCH_MAX_RETRY_AFTER_MS,
   landingArticleCoverage,
+  countRenderableCantonLandingRows,
 } from '../../scripts/reconcile-section-pages.mjs';
+import {
+  parseCantonLandingCardLimitExport,
+  resolveCantonLandingCardLimit,
+} from '../../scripts/lib/canton-landing-card-limit.mjs';
 
 const API_BASE = 'https://api.test';
 const CATALOG = {
@@ -45,6 +50,19 @@ test('remainingBudgetMs: il budget condiviso non diventa negativo', () => {
 test('remainingBudgetMs: tronca in modo conservativo clock frazionari', () => {
   assert.equal(remainingBudgetMs(1_000.9, () => 750.4), 250);
   assert.equal(remainingBudgetMs(1_000.1, () => 1_000.2), 0);
+});
+
+test('il parser del cap rifiuta dichiarazioni duplicate e l override condivide la guardia', () => {
+  assert.equal(parseCantonLandingCardLimitExport('export const CANTON_LANDING_CARD_LIMIT = 24;\n'), 24);
+  assert.throws(
+    () => parseCantonLandingCardLimitExport(
+      'export const CANTON_LANDING_CARD_LIMIT = 24;\nexport const CANTON_LANDING_CARD_LIMIT = 25;\n',
+    ),
+    /duplicato/u,
+  );
+  assert.equal(resolveCantonLandingCardLimit(12, 24), 12);
+  assert.equal(resolveCantonLandingCardLimit(undefined, 24), 24);
+  assert.throws(() => resolveCantonLandingCardLimit(0, 24), /limite landing non valido/u);
 });
 
 test('reconcile: rifiuta un budget frazionario', async () => {
@@ -240,6 +258,41 @@ test('landingArticleCoverage: usa l id quando manca lo slug della locale', () =>
 
   assert.equal(coverage.foundCount, 1);
   assert.deepEqual(coverage.problems, []);
+});
+
+test('countRenderableCantonLandingRows: il fallback conta solo le righe renderizzabili', () => {
+  assert.equal(countRenderableCantonLandingRows({
+    rows: [{ id: 'missing-slug' }, { id: 'empty-slug' }, { id: 'valid' }, {}],
+    slugs: {
+      'missing-slug': { it: '' },
+      'empty-slug': { it: null },
+      valid: { it: 'valid' },
+    },
+    locale: 'it',
+    limit: 24,
+  }), 2);
+});
+
+test('landingArticleCoverage: un override esplicito allinea expected count e card extra', () => {
+  const rows = [
+    { id: 'newest', date: '2026-10-29T00:00:00Z' },
+    { id: 'older', date: '2026-10-28T00:00:00Z' },
+  ];
+  const slugs = Object.fromEntries(rows.map((row) => [row.id, { it: row.id }]));
+  const coverage = landingArticleCoverage({
+    entry: CATALOG,
+    rows,
+    slugs,
+    locale: 'it',
+    limit: 1,
+    html: '<script type="application/ld+json">{"numberOfItems":1}</script>'
+      + '<a href="/articoli-ticino/newest/">nuovo</a>'
+      + '<a href="/articoli-ticino/older/">vecchio</a>',
+  });
+
+  assert.equal(coverage.expectedCount, 1);
+  assert.deepEqual(coverage.extraIds, ['older']);
+  assert.deepEqual(coverage.problems, ['extra-articles:older']);
 });
 
 test('landingArticleCoverage: un numero dichiarato mancante rende la landing non verificata', () => {
