@@ -66,6 +66,9 @@ const blogMetaCantonSoFr: Record<string, string> = {
     'blog.article.soletta-ratsleitung-puk-ospedali.title': 'Soleure : la direction du Conseil contre la PUK sur les hôpitaux',
     'blog.article.soletta-ratsleitung-puk-ospedali.excerpt': 'La direction du Conseil de Soleure considère qu’une PUK sur les hôpitaux n’est pas utile ; le Conseil cantonal votera le 11 novembre.',
     'blog.article.soletta-ratsleitung-puk-ospedali.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.soletta-stipendi-pubblici-2027.title': 'Salaires publics à Soleure : +1,0% dès 2027',
+    'blog.article.soletta-stipendi-pubblici-2027.excerpt': 'À Soleure, le personnel de l\'État, les enseignants et les employés des hôpitaux recevront 1,0% de plus à partir de 2027 après l\'accord sur l\'inflation.',
+    'blog.article.soletta-stipendi-pubblici-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSoFr;
