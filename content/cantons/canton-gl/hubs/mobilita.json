@@ -4,12 +4,12 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "mobilita",
-  "updatedAt": "2026-10-29T07:40:41.678Z",
-  "contentHash": "7cb411ff5508b4c3f22741dab17f29af32b11b34b450048bc98bcb18b387accc",
+  "updatedAt": "2026-10-29T22:43:52.010Z",
+  "contentHash": "0e82df0f2eb72e17ac118a8fd8edda17fd8e84dd353ffa48624939fb1a62b3e3",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-29T01:18:28.468Z",
+      "updatedAt": "2026-10-29T18:42:38.256Z",
       "keyFacts": 2
     }
   ],
@@ -44,6 +44,11 @@
               "date": "2026-10-26T15:45:00.000Z"
             },
             {
+              "label": "Revocato: H17 Uznach -> Glarus tra Luogo Näfels E Luogo Netstal Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffico",
+              "date": "2026-10-29T14:49:00.000Z"
+            },
+            {
               "label": "A3 Chur -> Zürich tra Raccordo autostradale Diramazione Niederurnen E Svincolo autostradale Bilten Situazione: problemi di traffico cantiere, lunghezza [km] 3.1 Limitazione del traffico: corsie…",
               "value": "Cantiere",
               "detail": "fine prevista: 6 novembre 2026",
@@ -51,10 +56,16 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-29T01:18:28.468Z"
+          "updatedAt": "2026-10-29T18:42:38.256Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Il Canton Glarona vuole rinnovare strade e ponti nel 2027",
+          "url": "/articoli-glarona/cantieri-strade-glarona-2027/",
+          "excerpt": "Nel 2027 il Kirchweg di Glarona diventerà un cantiere; a Rüti sarà sostituito un ponte di 80 anni.",
+          "date": "2026-10-29T22:36:35.347Z"
+        },
         {
           "title": "Klöntalerstrasse: limitazione staldengarten–bützi",
           "url": "/articoli-glarona/klontalstrasse-staldengarten-butzi/",
@@ -103,7 +114,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-29T22:43:52.010Z"
     },
     "en": {
       "canton": "GL",
@@ -135,6 +146,11 @@
               "date": "2026-10-26T15:45:00.000Z"
             },
             {
+              "label": "Revocato: H17 Uznach -> Glarus tra Luogo Näfels E Luogo Netstal Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffic",
+              "date": "2026-10-29T14:49:00.000Z"
+            },
+            {
               "label": "A3 Chur -> Zürich tra Raccordo autostradale Diramazione Niederurnen E Svincolo autostradale Bilten Situazione: problemi di traffico cantiere, lunghezza [km] 3.1 Limitazione del traffico: corsie…",
               "value": "Roadworks",
               "detail": "until 6 November 2026",
@@ -142,10 +158,16 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-29T01:18:28.468Z"
+          "updatedAt": "2026-10-29T18:42:38.256Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "The Canton of Glarus wants to renovate roads and bridges in 2027",
+          "url": "/en/glarus-articles/glarus-roads-bridges-2027/",
+          "excerpt": "In 2027, the Kirchweg in Glarus will become a construction site; an 80-year-old bridge will be replaced in Rüti.",
+          "date": "2026-10-29T22:36:35.347Z"
+        },
         {
           "title": "Klöntalerstrasse: restriction staldengarten–bützi",
           "url": "/en/glarus-articles/klontalstrasse-traffic-restriction/",
@@ -194,7 +216,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-29T22:43:52.010Z"
     },
     "de": {
       "canton": "GL",
@@ -226,6 +248,11 @@
               "date": "2026-10-26T15:45:00.000Z"
             },
             {
+              "label": "Aufgehoben: H17 Uznach -> Glarus zwischen Ortschaft Näfels und Ortschaft Netstal Sachlage: Stau Ursache: Verkehrsüberlastung",
+              "value": "Verkehr",
+              "date": "2026-10-29T14:49:00.000Z"
+            },
+            {
               "label": "A3 Chur -> Zürich zwischen Autobahndreieck Verzweigung Niederurnen und Anschluss Bilten Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 3.1 Verkehrsführung: Fahrbahnverengung auf einen…",
               "value": "Baustelle",
               "detail": "bis 6. November 2026",
@@ -233,10 +260,16 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-29T01:18:28.468Z"
+          "updatedAt": "2026-10-29T18:42:38.256Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Der Kanton Glarus will im Jahr 2027 Straßen und Brücken erneuern",
+          "url": "/de/glarus-artikel/glarner-strassen-bruecken-2027/",
+          "excerpt": "Im Jahr 2027 wird der Kirchweg in Glarus zu einer Baustelle; in Rüti wird eine 80 Jahre alte Brücke ersetzt.",
+          "date": "2026-10-29T22:36:35.347Z"
+        },
         {
           "title": "Klöntalerstrasse: Verkehrsbeschränkung Staldengarten–Bützi",
           "url": "/de/glarus-artikel/verkehrseinschraenkung-kloentalerstrasse/",
@@ -285,7 +318,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-29T22:43:52.010Z"
     },
     "fr": {
       "canton": "GL",
@@ -317,6 +350,11 @@
               "date": "2026-10-26T15:45:00.000Z"
             },
             {
+              "label": "Révoqué: H17 Uznach -> Glaris entre Localité Näfels et Localité Netstal Situation: bouchon Raison: surcharge de trafic",
+              "value": "Trafic",
+              "date": "2026-10-29T14:49:00.000Z"
+            },
+            {
               "label": "A3 Coire -> Zurich entre Echangeur Echangeur de Niederurnen et Jonction autoroutière Bilten Situation: trafic perturbé travaux, longueur [km] 3.1 Gestion du trafic: rétrécissement des voies sur une…",
               "value": "Chantier",
               "detail": "jusqu’au 6 novembre 2026",
@@ -324,10 +362,16 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-29T01:18:28.468Z"
+          "updatedAt": "2026-10-29T18:42:38.256Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Le canton de Glaris veut rénover des routes et des ponts en 2027",
+          "url": "/fr/articles-glaris/routes-ponts-glaris-2027/",
+          "excerpt": "En 2027, le Kirchweg de Glaris deviendra un chantier ; à Rüti, un pont vieux de 80 ans sera remplacé.",
+          "date": "2026-10-29T22:36:35.347Z"
+        },
         {
           "title": "Klöntalerstrasse : restriction Staldengarten–Bützi",
           "url": "/fr/articles-glaris/restriction-trafic-kloentalerstrasse/",
@@ -376,7 +420,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-29T22:43:52.010Z"
     }
   }
 }

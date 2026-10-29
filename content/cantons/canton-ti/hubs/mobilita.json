@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "mobilita",
-  "updatedAt": "2026-10-29T15:32:04.680Z",
-  "contentHash": "415e1cadf5cf34e3618280c1cb97aa6a42e8699c23f406781bbaa640c003e3b1",
+  "updatedAt": "2026-10-29T22:43:52.010Z",
+  "contentHash": "3b4afe67546dc72bf768d809fa058aaa180b4d74e07871a47ea6690319eb98d9",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-29T10:29:04.010Z",
+      "updatedAt": "2026-10-29T18:42:38.256Z",
       "keyFacts": 2
     },
     {
@@ -37,12 +37,12 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "3",
+          "value": "5",
           "note": "segnalazioni aggiornate: 29 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "28",
+          "value": "29",
           "note": "segnalazioni aggiornate: 29 ottobre 2026"
         }
       ],
@@ -123,14 +123,25 @@
               "date": "2026-10-16T07:31:00.000Z"
             },
             {
-              "label": "Revocato: H2 Airolo <-> Göschenen tra Luogo Motto Bartola E Passo Passo del S. Gottardo Situazione: tunnel chiuso Causa: veicolo in fiamme",
+              "label": "Tremola, Airolo in tutte le direzioni Situazione: chiusa Causa: chiusura invernale",
               "value": "Chiusura",
-              "date": "2026-10-29T09:02:00.000Z"
+              "date": "2026-10-29T11:08:00.000Z"
             },
             {
-              "label": "406 Riazzino -> Cadenazzo tra Svincolo autostradale Aeroporto di Locarno E Luogo Cadenazzo Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "label": "Bretella autostradale Lugano-Centro Lugano Centro -> Diramazione Lugano Nord tra Svincolo autostradale Lugano Nord E Raccordo autostradale Diramazione Lugano Nord Situazione: chiusa cantiere",
+              "value": "Chiusura",
+              "detail": "fine prevista: 3 novembre 2026",
+              "date": "2026-10-29T14:27:00.000Z"
+            },
+            {
+              "label": "Revocato: 398 Ponte Tresa <-> Lamone Luogo Bioggio Situazione: chiusa Causa: incidente",
+              "value": "Chiusura",
+              "date": "2026-10-29T17:59:00.000Z"
+            },
+            {
+              "label": "Revocato: A2 S. Gottardo -> Chiasso tra Raccordo autostradale Diramazione Lugano Nord E Svincolo autostradale Melide/Bissone Situazione: colonna Causa: traffico congestionato Aggiunta 1: ritardi No…",
               "value": "Traffico",
-              "date": "2026-10-29T10:09:00.000Z"
+              "date": "2026-10-29T15:28:00.000Z"
             },
             {
               "label": "A2 Chiasso <-> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 5.2",
@@ -143,22 +154,10 @@
               "value": "Cantiere",
               "detail": "fine prevista: 29 dicembre 2028",
               "date": "2022-04-20T03:00:00.000Z"
-            },
-            {
-              "label": "A2 S. Gottardo -> Chiasso tra Parcheggio Area di dosaggio Airolo E Svincolo autostradale Airolo Situazione: problemi di traffico cantiere, lunghezza [km] 0.1 Causa: lavori stradali sulla banchina",
-              "value": "Cantiere",
-              "detail": "fine prevista: 28 giugno 2028",
-              "date": "2024-11-14T15:24:00.000Z"
-            },
-            {
-              "label": "A2 Chiasso <-> S. Gottardo Parcheggio Chiasso-Dogana commerciale Situazione: problemi di traffico cantiere, lunghezza [km] 0.1",
-              "value": "Cantiere",
-              "detail": "fine prevista: 24 marzo 2027",
-              "date": "2025-04-01T03:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-29T10:29:04.010Z"
+          "updatedAt": "2026-10-29T18:42:38.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -292,7 +291,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-29T15:32:04.680Z"
+      "updatedAt": "2026-10-29T22:43:52.010Z"
     },
     "en": {
       "canton": "TI",
@@ -307,12 +306,12 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "3",
+          "value": "5",
           "note": "reports as of 29 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "28",
+          "value": "29",
           "note": "reports as of 29 October 2026"
         }
       ],
@@ -393,14 +392,25 @@
               "date": "2026-10-16T07:31:00.000Z"
             },
             {
-              "label": "Revocato: H2 Airolo <-> Göschenen tra Luogo Motto Bartola E Passo Passo del S. Gottardo Situazione: tunnel chiuso Causa: veicolo in fiamme",
+              "label": "Tremola, Airolo in tutte le direzioni Situazione: chiusa Causa: chiusura invernale",
               "value": "Closure",
-              "date": "2026-10-29T09:02:00.000Z"
+              "date": "2026-10-29T11:08:00.000Z"
             },
             {
-              "label": "406 Riazzino -> Cadenazzo tra Svincolo autostradale Aeroporto di Locarno E Luogo Cadenazzo Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "label": "Bretella autostradale Lugano-Centro Lugano Centro -> Diramazione Lugano Nord tra Svincolo autostradale Lugano Nord E Raccordo autostradale Diramazione Lugano Nord Situazione: chiusa cantiere",
+              "value": "Closure",
+              "detail": "until 3 November 2026",
+              "date": "2026-10-29T14:27:00.000Z"
+            },
+            {
+              "label": "Revocato: 398 Ponte Tresa <-> Lamone Luogo Bioggio Situazione: chiusa Causa: incidente",
+              "value": "Closure",
+              "date": "2026-10-29T17:59:00.000Z"
+            },
+            {
+              "label": "Revocato: A2 S. Gottardo -> Chiasso tra Raccordo autostradale Diramazione Lugano Nord E Svincolo autostradale Melide/Bissone Situazione: colonna Causa: traffico congestionato Aggiunta 1: ritardi No…",
               "value": "Traffic",
-              "date": "2026-10-29T10:09:00.000Z"
+              "date": "2026-10-29T15:28:00.000Z"
             },
             {
               "label": "A2 Chiasso <-> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 5.2",
@@ -413,22 +423,10 @@
               "value": "Roadworks",
               "detail": "until 29 December 2028",
               "date": "2022-04-20T03:00:00.000Z"
-            },
-            {
-              "label": "A2 S. Gottardo -> Chiasso tra Parcheggio Area di dosaggio Airolo E Svincolo autostradale Airolo Situazione: problemi di traffico cantiere, lunghezza [km] 0.1 Causa: lavori stradali sulla banchina",
-              "value": "Roadworks",
-              "detail": "until 28 June 2028",
-              "date": "2024-11-14T15:24:00.000Z"
-            },
-            {
-              "label": "A2 Chiasso <-> S. Gottardo Parcheggio Chiasso-Dogana commerciale Situazione: problemi di traffico cantiere, lunghezza [km] 0.1",
-              "value": "Roadworks",
-              "detail": "until 24 March 2027",
-              "date": "2025-04-01T03:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-29T10:29:04.010Z"
+          "updatedAt": "2026-10-29T18:42:38.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -561,7 +559,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-29T15:32:04.680Z"
+      "updatedAt": "2026-10-29T22:43:52.010Z"
     },
     "de": {
       "canton": "TI",
@@ -576,12 +574,12 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "3",
+          "value": "5",
           "note": "Meldungen vom 29. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "28",
+          "value": "29",
           "note": "Meldungen vom 29. Oktober 2026"
         }
       ],
@@ -662,14 +660,25 @@
               "date": "2026-10-16T07:31:00.000Z"
             },
             {
-              "label": "Aufgehoben: H2 Airolo <-> Göschenen zwischen Ortschaft Motto Bartola und Pass Gotthard-Pass Sachlage: Tunnel gesperrt Ursache: Fahrzeugbrand",
+              "label": "Tremola, Airolo in beide Richtungen Sachlage: Strecke gesperrt Ursache: Wintersperre",
               "value": "Sperrung",
-              "date": "2026-10-29T09:02:00.000Z"
+              "date": "2026-10-29T11:08:00.000Z"
             },
             {
-              "label": "406 Riazzino -> Cadenazzo zwischen Anschluss Flughafen Locarno und Ortschaft Cadenazzo Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
+              "label": "Bretella autostradale Lugano-Centro Lugano-Zentrum -> Verzweigung Lugano-Nord zwischen Anschluss Lugano-Nord und Autobahndreieck Verzweigung Lugano-Nord Sachlage: Strecke gesperrt Baustelle",
+              "value": "Sperrung",
+              "detail": "bis 3. November 2026",
+              "date": "2026-10-29T14:27:00.000Z"
+            },
+            {
+              "label": "Aufgehoben: 398 Ponte Tresa <-> Lamone Ortschaft Bioggio Sachlage: Strecke gesperrt Ursache: Unfall",
+              "value": "Sperrung",
+              "date": "2026-10-29T17:59:00.000Z"
+            },
+            {
+              "label": "Aufgehoben: A2 Gotthard -> Chiasso zwischen Autobahndreieck Verzweigung Lugano-Nord und Anschluss Melide/Bissone Sachlage: Stau Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 10",
               "value": "Verkehr",
-              "date": "2026-10-29T10:09:00.000Z"
+              "date": "2026-10-29T15:28:00.000Z"
             },
             {
               "label": "A2 Chiasso <-> Gotthard Tunnel Gotthard-Tunnel Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.3 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 5.2",
@@ -682,22 +691,10 @@
               "value": "Baustelle",
               "detail": "bis 29. Dezember 2028",
               "date": "2022-04-20T03:00:00.000Z"
-            },
-            {
-              "label": "A2 Gotthard -> Chiasso zwischen Parkplatz Dosierstelle Airolo und Anschluss Airolo Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.1 Ursache: Arbeiten am Pannenstreifen",
-              "value": "Baustelle",
-              "detail": "bis 28. Juni 2028",
-              "date": "2024-11-14T15:24:00.000Z"
-            },
-            {
-              "label": "A2 Chiasso <-> Gotthard Parkplatz Chiasso-Warenzoll Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.1",
-              "value": "Baustelle",
-              "detail": "bis 24. März 2027",
-              "date": "2025-04-01T03:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-29T10:29:04.010Z"
+          "updatedAt": "2026-10-29T18:42:38.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -830,7 +827,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-29T15:32:04.680Z"
+      "updatedAt": "2026-10-29T22:43:52.010Z"
     },
     "fr": {
       "canton": "TI",
@@ -845,12 +842,12 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "3",
+          "value": "5",
           "note": "signalements au 29 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "28",
+          "value": "29",
           "note": "signalements au 29 octobre 2026"
         }
       ],
@@ -931,14 +928,25 @@
               "date": "2026-10-16T07:31:00.000Z"
             },
             {
-              "label": "Révoqué: H2 Airolo <-> Göschenen entre Localité Motto Bartola et Col Col du St-Gothard Situation: tunnel fermé Raison: véhicule en feu",
+              "label": "Tremola, Airolo dans les deux sens Situation: fermé Raison: fermeture hivernale",
               "value": "Fermeture",
-              "date": "2026-10-29T09:02:00.000Z"
+              "date": "2026-10-29T11:08:00.000Z"
             },
             {
-              "label": "406 Riazzino -> Cadenazzo entre Jonction autoroutière Aeroprt de Locarno et Localité Cadenazzo Situation: trafic en accordéon Raison: surcharge de trafic",
+              "label": "Bretella autostradale Lugano-Centro Lugano-Centre -> Echangeur de Lugano-Nord entre Jonction autoroutière Lugano-Nord et Echangeur Echangeur de Lugano-Nord Situation: fermé travaux",
+              "value": "Fermeture",
+              "detail": "jusqu’au 3 novembre 2026",
+              "date": "2026-10-29T14:27:00.000Z"
+            },
+            {
+              "label": "Révoqué: 398 Ponte Tresa <-> Lamone Localité Bioggio Situation: fermé Raison: accident",
+              "value": "Fermeture",
+              "date": "2026-10-29T17:59:00.000Z"
+            },
+            {
+              "label": "Révoqué: A2 St-Gothard -> Chiasso entre Echangeur Echangeur de Lugano-Nord et Jonction autoroutière Melide/Bissone Situation: bouchon Raison: surcharge de trafic Complément 1: retards Nbre. [min] 10",
               "value": "Trafic",
-              "date": "2026-10-29T10:09:00.000Z"
+              "date": "2026-10-29T15:28:00.000Z"
             },
             {
               "label": "A2 Chiasso <-> St-Gothard Tunnel Tunnel du St-Gothard Situation: trafic perturbé travaux, longueur [km] 0.3 Complément 1: limitation temporaire de largeur largeur de la voie [m] 5.2",
@@ -951,22 +959,10 @@
               "value": "Chantier",
               "detail": "jusqu’au 29 décembre 2028",
               "date": "2022-04-20T03:00:00.000Z"
-            },
-            {
-              "label": "A2 St-Gothard -> Chiasso entre Parking Aire de dosage Airolo et Jonction autoroutière Airolo Situation: trafic perturbé travaux, longueur [km] 0.1 Raison: travaux sur la bande d'arrêt d'urgence",
-              "value": "Chantier",
-              "detail": "jusqu’au 28 juin 2028",
-              "date": "2024-11-14T15:24:00.000Z"
-            },
-            {
-              "label": "A2 Chiasso <-> St-Gothard Parking Chiasso-Douane commercial Situation: trafic perturbé travaux, longueur [km] 0.1",
-              "value": "Chantier",
-              "detail": "jusqu’au 24 mars 2027",
-              "date": "2025-04-01T03:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-29T10:29:04.010Z"
+          "updatedAt": "2026-10-29T18:42:38.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -1100,7 +1096,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-29T15:32:04.680Z"
+      "updatedAt": "2026-10-29T22:43:52.010Z"
     }
   }
 }

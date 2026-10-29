@@ -4,12 +4,12 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "carburanti",
-  "updatedAt": "2026-10-29T07:40:41.678Z",
-  "contentHash": "f0d729c6c40b91973007c482757dbe378c7094edb05ebd51bbf7ff4938cd7eba",
+  "updatedAt": "2026-10-29T22:43:52.010Z",
+  "contentHash": "1e84ceddc85cda78607e6763a4e20a7b2a097a288927a0ab473002c98c8e5312",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-26T13:32:45.792Z",
+      "updatedAt": "2026-10-29T13:43:32.294Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-11-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-26T13:32:45.792Z"
+          "updatedAt": "2026-10-29T13:43:32.294Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Il Canton Glarona vuole rinnovare strade e ponti nel 2027",
+          "url": "/articoli-glarona/cantieri-strade-glarona-2027/",
+          "excerpt": "Nel 2027 il Kirchweg di Glarona diventerà un cantiere; a Rüti sarà sostituito un ponte di 80 anni.",
+          "date": "2026-10-29T22:36:35.347Z"
+        },
         {
           "title": "Glarona aderisce al programma pilota Perspecta",
           "url": "/articoli-glarona/glarona-adesione-programma-perspecta/",
@@ -82,12 +88,6 @@
           "url": "/articoli-glarona/glarona-mercato-immobiliare-2026/",
           "excerpt": "La domanda immobiliare resta alta nel Canton Glarona L'offerta limitata sostiene l'aumento dei prezzi Condomini +4,4% tra il 2° trimestre 2025 e il 2° 2026",
           "date": "2026-10-21T01:34:50.414Z"
-        },
-        {
-          "title": "Klöntalerstrasse: chiusura temporanea Staldengarten–Bützi",
-          "url": "/articoli-glarona/kloentalerstrasse-cantiere-2026/",
-          "excerpt": "Sono previsti lavori sulla Klöntalerstrasse dal 21 ottobre al 4 dicembre 2026: attese brevi, chiusura per l'asfalto e deviazione via Sackberg.",
-          "date": "2026-10-19T12:11:05.452Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-29T22:43:52.010Z"
     },
     "en": {
       "canton": "GL",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-26T13:32:45.792Z"
+          "updatedAt": "2026-10-29T13:43:32.294Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "The Canton of Glarus wants to renovate roads and bridges in 2027",
+          "url": "/en/glarus-articles/glarus-roads-bridges-2027/",
+          "excerpt": "In 2027, the Kirchweg in Glarus will become a construction site; an 80-year-old bridge will be replaced in Rüti.",
+          "date": "2026-10-29T22:36:35.347Z"
+        },
         {
           "title": "Glarus joins the Perspecta pilot program",
           "url": "/en/glarus-articles/glarus-joins-perspecta-program/",
@@ -169,12 +175,6 @@
           "url": "/en/glarus-articles/glarus-real-estate-market-2026/",
           "excerpt": "Housing demand remains high in the Canton of Glarus Limited supply supports rising prices Condominiums +4,4% between the 2nd quarter of 2025 and the 2nd quarter",
           "date": "2026-10-21T01:34:50.414Z"
-        },
-        {
-          "title": "Klöntalerstrasse: temporary closure of Staldengarten–Bützi",
-          "url": "/en/glarus-articles/kloentalerstrasse-roadworks-2026/",
-          "excerpt": "Construction work is planned on Klöntalerstrasse from October 21 to December 4, 2026: brief waits, closure for asphalting, and a detour via Sackberg.",
-          "date": "2026-10-19T12:11:05.452Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-29T22:43:52.010Z"
     },
     "de": {
       "canton": "GL",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-26T13:32:45.792Z"
+          "updatedAt": "2026-10-29T13:43:32.294Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Der Kanton Glarus will im Jahr 2027 Straßen und Brücken erneuern",
+          "url": "/de/glarus-artikel/glarner-strassen-bruecken-2027/",
+          "excerpt": "Im Jahr 2027 wird der Kirchweg in Glarus zu einer Baustelle; in Rüti wird eine 80 Jahre alte Brücke ersetzt.",
+          "date": "2026-10-29T22:36:35.347Z"
+        },
         {
           "title": "Glarus nimmt am Perspecta-Pilotprogramm teil",
           "url": "/de/glarus-artikel/glarus-nimmt-an-perspecta-teil/",
@@ -256,12 +262,6 @@
           "url": "/de/glarus-artikel/glarner-immobilienmarkt-2026/",
           "excerpt": "Die Nachfrage nach Immobilien bleibt im Kanton Glarus hoch Das begrenzte Angebot stützt den Preisanstieg Eigentumswohnungen +4,4% zwischen dem 2.",
           "date": "2026-10-21T01:34:50.414Z"
-        },
-        {
-          "title": "Klöntalerstrasse: vorübergehende Sperrung Staldengarten–Bützi",
-          "url": "/de/glarus-artikel/kloentalerstrasse-bauarbeiten-2026/",
-          "excerpt": "An der Klöntalerstrasse sind vom 21.",
-          "date": "2026-10-19T12:11:05.452Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-29T22:43:52.010Z"
     },
     "fr": {
       "canton": "GL",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-26T13:32:45.792Z"
+          "updatedAt": "2026-10-29T13:43:32.294Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Le canton de Glaris veut rénover des routes et des ponts en 2027",
+          "url": "/fr/articles-glaris/routes-ponts-glaris-2027/",
+          "excerpt": "En 2027, le Kirchweg de Glaris deviendra un chantier ; à Rüti, un pont vieux de 80 ans sera remplacé.",
+          "date": "2026-10-29T22:36:35.347Z"
+        },
         {
           "title": "Glaris adhère au programme pilote Perspecta",
           "url": "/fr/articles-glaris/glaris-adhere-au-programme-perspecta/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-glaris/marche-immobilier-glaris-2026/",
           "excerpt": "La demande immobilière reste élevée dans le canton de Glaris L'offre limitée soutient la hausse des prix Appartements en copropriété +4,4% entre le 2e trimestre",
           "date": "2026-10-21T01:34:50.414Z"
-        },
-        {
-          "title": "Klöntalerstrasse : fermeture temporaire Staldengarten–Bützi",
-          "url": "/fr/articles-glaris/kloentalerstrasse-travaux-2026/",
-          "excerpt": "Des travaux sont prévus sur la Klöntalerstrasse du 21 octobre au 4 décembre 2026 : courtes attentes, fermeture pour l’asphaltage et déviation via Sackberg.",
-          "date": "2026-10-19T12:11:05.452Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-29T22:43:52.010Z"
     }
   }
 }

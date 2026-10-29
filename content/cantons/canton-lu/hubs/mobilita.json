@@ -4,12 +4,12 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "mobilita",
-  "updatedAt": "2026-10-29T15:32:04.680Z",
-  "contentHash": "76583fddb0b45fb76372dc8f0c48cd09b6f83fe46791c72a70a160dcabbef0dd",
+  "updatedAt": "2026-10-29T22:43:52.010Z",
+  "contentHash": "61a00b06d0c3fb5c747842890c690804e9dcc455c692c7f569451bdcffcfc52e",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-29T10:29:04.010Z",
+      "updatedAt": "2026-10-29T18:42:38.256Z",
       "keyFacts": 2
     },
     {
@@ -61,9 +61,9 @@
               "date": "2026-11-12T05:30:00.000Z"
             },
             {
-              "label": "Revocato: A2 Luzern -> Basel tra Galleria Galleria Schweizerhalle E Raccordo autostradale Diramazione Hagnau Situazione: pericolo Causa: oggetto sulla strada",
+              "label": "Revocato: A14 Zug -> Luzern tra Svincolo autostradale Buchrain E Raccordo autostradale Diramazione Rotsee Situazione: traffico fortemente rallentato Causa: traffico congestionato",
               "value": "Traffico",
-              "date": "2026-10-29T09:29:00.000Z"
+              "date": "2026-10-29T15:00:00.000Z"
             },
             {
               "label": "H10 Berna <-> Lucerna tra Luogo Wiggen E Luogo Kröschenbrunnen Situazione: problemi di traffico Causa: lavori di costruzione Limitazione del traffico: circolazione a corsie alternate",
@@ -91,7 +91,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-29T10:29:04.010Z"
+          "updatedAt": "2026-10-29T18:42:38.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -160,7 +160,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-29T15:32:04.680Z"
+      "updatedAt": "2026-10-29T22:43:52.010Z"
     },
     "en": {
       "canton": "LU",
@@ -204,9 +204,9 @@
               "date": "2026-11-12T05:30:00.000Z"
             },
             {
-              "label": "Revocato: A2 Luzern -> Basel tra Galleria Galleria Schweizerhalle E Raccordo autostradale Diramazione Hagnau Situazione: pericolo Causa: oggetto sulla strada",
+              "label": "Revocato: A14 Zug -> Luzern tra Svincolo autostradale Buchrain E Raccordo autostradale Diramazione Rotsee Situazione: traffico fortemente rallentato Causa: traffico congestionato",
               "value": "Traffic",
-              "date": "2026-10-29T09:29:00.000Z"
+              "date": "2026-10-29T15:00:00.000Z"
             },
             {
               "label": "H10 Berna <-> Lucerna tra Luogo Wiggen E Luogo Kröschenbrunnen Situazione: problemi di traffico Causa: lavori di costruzione Limitazione del traffico: circolazione a corsie alternate",
@@ -234,7 +234,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-29T10:29:04.010Z"
+          "updatedAt": "2026-10-29T18:42:38.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -301,7 +301,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-29T15:32:04.680Z"
+      "updatedAt": "2026-10-29T22:43:52.010Z"
     },
     "de": {
       "canton": "LU",
@@ -345,9 +345,9 @@
               "date": "2026-11-12T05:30:00.000Z"
             },
             {
-              "label": "Aufgehoben: A2 Luzern -> Basel zwischen Tunnel Schweizerhalle-Tunnel und Autobahndreieck Verzweigung Hagnau Sachlage: Gefahr Ursache: Gegenstände auf der Fahrbahn",
+              "label": "Aufgehoben: A14 Zug -> Luzern zwischen Anschluss Buchrain und Autobahndreieck Verzweigung Rotsee Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
               "value": "Verkehr",
-              "date": "2026-10-29T09:29:00.000Z"
+              "date": "2026-10-29T15:00:00.000Z"
             },
             {
               "label": "H10 Bern <-> Luzern zwischen Ortschaft Wiggen und Ortschaft Kröschenbrunnen Sachlage: Verkehrsbehinderung Ursache: Bauarbeiten Verkehrsführung: wechselseitige Verkehrsführung",
@@ -375,7 +375,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-29T10:29:04.010Z"
+          "updatedAt": "2026-10-29T18:42:38.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -442,7 +442,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-29T15:32:04.680Z"
+      "updatedAt": "2026-10-29T22:43:52.010Z"
     },
     "fr": {
       "canton": "LU",
@@ -486,9 +486,9 @@
               "date": "2026-11-12T05:30:00.000Z"
             },
             {
-              "label": "Révoqué: A2 Lucerne -> Bâle entre Tunnel Tunnel Schweizerhalle et Echangeur Echangeur de Hagnau Situation: danger Raison: objets sur la chaussée",
+              "label": "Révoqué: A14 Zoug -> Lucerne entre Jonction autoroutière Buchrain et Echangeur Echangeur du Rotsee Situation: trafic en accordéon Raison: surcharge de trafic",
               "value": "Trafic",
-              "date": "2026-10-29T09:29:00.000Z"
+              "date": "2026-10-29T15:00:00.000Z"
             },
             {
               "label": "H10 Berne <-> Lucerne entre Localité Wiggen et Localité Kröschenbrunnen Situation: trafic perturbé Raison: travaux de construction Gestion du trafic: circulation alternée à une voie",
@@ -516,7 +516,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-29T10:29:04.010Z"
+          "updatedAt": "2026-10-29T18:42:38.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -585,7 +585,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-29T15:32:04.680Z"
+      "updatedAt": "2026-10-29T22:43:52.010Z"
     }
   }
 }

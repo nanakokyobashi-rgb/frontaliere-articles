@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-29T15:32:04.680Z",
-  "contentHash": "b39500c61521643ffe6f869832b8f95d708f298b3a623a062dea9d30dc3b1b91",
+  "updatedAt": "2026-10-29T22:43:52.010Z",
+  "contentHash": "901ae70a829c0ba98c069226cfdc0c568aa38088180446bc5c72ff435069f7a4",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-29T10:29:04.010Z",
+      "updatedAt": "2026-10-29T18:42:38.256Z",
       "keyFacts": 2
     },
     {
@@ -124,12 +124,12 @@
             {
               "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
               "value": "Traffico",
-              "date": "2026-10-29T10:29:04.010Z",
+              "date": "2026-10-29T18:42:38.256Z",
               "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-29T10:29:04.010Z"
+          "updatedAt": "2026-10-29T18:42:38.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -206,7 +206,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-29T15:32:04.680Z"
+      "updatedAt": "2026-10-29T22:43:52.010Z"
     },
     "en": {
       "canton": "NE",
@@ -308,12 +308,12 @@
             {
               "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
               "value": "Traffic",
-              "date": "2026-10-29T10:29:04.010Z",
+              "date": "2026-10-29T18:42:38.256Z",
               "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-29T10:29:04.010Z"
+          "updatedAt": "2026-10-29T18:42:38.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -390,7 +390,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-29T15:32:04.680Z"
+      "updatedAt": "2026-10-29T22:43:52.010Z"
     },
     "de": {
       "canton": "NE",
@@ -492,12 +492,12 @@
             {
               "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
               "value": "Verkehr",
-              "date": "2026-10-29T10:29:04.010Z",
+              "date": "2026-10-29T18:42:38.256Z",
               "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-29T10:29:04.010Z"
+          "updatedAt": "2026-10-29T18:42:38.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -574,7 +574,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-29T15:32:04.680Z"
+      "updatedAt": "2026-10-29T22:43:52.010Z"
     },
     "fr": {
       "canton": "NE",
@@ -676,12 +676,12 @@
             {
               "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
               "value": "Trafic",
-              "date": "2026-10-29T10:29:04.010Z",
+              "date": "2026-10-29T18:42:38.256Z",
               "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-29T10:29:04.010Z"
+          "updatedAt": "2026-10-29T18:42:38.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -758,7 +758,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-29T15:32:04.680Z"
+      "updatedAt": "2026-10-29T22:43:52.010Z"
     }
   }
 }

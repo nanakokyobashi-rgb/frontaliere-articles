@@ -4,12 +4,12 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "mobilita",
-  "updatedAt": "2026-10-29T15:32:04.680Z",
-  "contentHash": "9a93448ed50b1e459cb2adbcfc418f439b4270c0005b7d94167a8cbd2aab05e6",
+  "updatedAt": "2026-10-29T22:43:52.010Z",
+  "contentHash": "aa34ec40f71b1a43550f802288fec5d4f2db004037c85c66df220e7e3dc63f0f",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-29T10:29:04.010Z",
+      "updatedAt": "2026-10-29T18:42:38.256Z",
       "keyFacts": 2
     },
     {
@@ -85,13 +85,14 @@
               "date": "2026-10-22T06:00:00.000Z"
             },
             {
-              "label": "Revocato: A5 Solothurn -> Bienne tra Raccordo autostradale Diramazione Brüggmoos E Incrocio Bernstrasse Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-10-29T05:55:00.000Z"
+              "label": "Balsthal <-> Laufen tra Luogo Oberbeinwil E Passo Passwang Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette",
+              "value": "Cantiere",
+              "detail": "fine prevista: 31 dicembre 2028",
+              "date": "2024-12-30T04:49:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-29T10:29:04.010Z"
+          "updatedAt": "2026-10-29T18:42:38.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -160,7 +161,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-29T15:32:04.680Z"
+      "updatedAt": "2026-10-29T22:43:52.010Z"
     },
     "en": {
       "canton": "SO",
@@ -228,13 +229,14 @@
               "date": "2026-10-22T06:00:00.000Z"
             },
             {
-              "label": "Revocato: A5 Solothurn -> Bienne tra Raccordo autostradale Diramazione Brüggmoos E Incrocio Bernstrasse Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-10-29T05:55:00.000Z"
+              "label": "Balsthal <-> Laufen tra Luogo Oberbeinwil E Passo Passwang Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette",
+              "value": "Roadworks",
+              "detail": "until 31 December 2028",
+              "date": "2024-12-30T04:49:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-29T10:29:04.010Z"
+          "updatedAt": "2026-10-29T18:42:38.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -302,7 +304,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-29T15:32:04.680Z"
+      "updatedAt": "2026-10-29T22:43:52.010Z"
     },
     "de": {
       "canton": "SO",
@@ -370,13 +372,14 @@
               "date": "2026-10-22T06:00:00.000Z"
             },
             {
-              "label": "Aufgehoben: A5 Solothurn -> Biel zwischen Autobahndreieck Verzweigung Brüggmoos und Kreuzung Bernstrasse Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-10-29T05:55:00.000Z"
+              "label": "Balsthal <-> Laufen zwischen Ortschaft Oberbeinwil und Pass Passwang Sachlage: Verkehrsbehinderung Baustelle Verkehrsführung: Fahrbahnverengung",
+              "value": "Baustelle",
+              "detail": "bis 31. Dezember 2028",
+              "date": "2024-12-30T04:49:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-29T10:29:04.010Z"
+          "updatedAt": "2026-10-29T18:42:38.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -444,7 +447,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-29T15:32:04.680Z"
+      "updatedAt": "2026-10-29T22:43:52.010Z"
     },
     "fr": {
       "canton": "SO",
@@ -512,13 +515,14 @@
               "date": "2026-10-22T06:00:00.000Z"
             },
             {
-              "label": "Révoqué: A5 Soleure -> Bienne entre Echangeur Echangeur de Brüggmoos et Carrefour Bernstrasse Situation: trafic en accordéon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-10-29T05:55:00.000Z"
+              "label": "Balsthal <-> Laufon entre Localité Oberbeinwil et Col Passwang Situation: trafic perturbé travaux Gestion du trafic: rétrécissement des voies",
+              "value": "Chantier",
+              "detail": "jusqu’au 31 décembre 2028",
+              "date": "2024-12-30T04:49:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-29T10:29:04.010Z"
+          "updatedAt": "2026-10-29T18:42:38.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -587,7 +591,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-29T15:32:04.680Z"
+      "updatedAt": "2026-10-29T22:43:52.010Z"
     }
   }
 }
