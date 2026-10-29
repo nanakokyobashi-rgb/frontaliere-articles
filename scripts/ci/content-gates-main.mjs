@@ -563,17 +563,21 @@ export function parseTapFailures(tap) {
  *
  * Deliberatamente niente parsing del YAML TAP: i messaggi sono prosa libera e
  * cambiano da gate a gate. Si cercano i path sotto `content/`, che sono l'unica
- * forma comune a tutti.
+ * forma comune a tutti. Il reporter del child può però scrivere l'assertion
+ * message nello `stderr` senza indentazione TAP: quel canale arriva separato
+ * dal chiamante e va associato alla run solo se il TAP contiene un `not ok`.
  *
  * @param {string} output
+ * @param {{stderr?: string}} [streams]
  * @returns {string[]}
  */
-export function extractOffenders(output) {
+export function extractOffenders(output, { stderr = '' } = {}) {
   const found = new Map();
   const re = /content\/[A-Za-z0-9_@./-]*[A-Za-z0-9_](?:\.ts|\.json)/g;
+  const tap = String(output);
   let pendingFailureIndent = null;
   let diagnosticIndent = null;
-  for (const line of String(output).split('\n')) {
+  for (const line of tap.split('\n')) {
     const failure = line.match(/^(\s*)not ok \d+ - /);
     if (failure) {
       pendingFailureIndent = failure[1].length;
@@ -619,6 +623,15 @@ export function extractOffenders(output) {
         pendingFailureIndent = null;
       }
     }
+  }
+
+  // Node's TAP reporter keeps the test record on stdout but can leave the
+  // assertion message on stderr as an unindented line. It is not safe to scan
+  // that channel on its own: a warning from a successful run must not become
+  // an offender. A failed TAP record is the evidence that binds the two
+  // streams to the same child invocation.
+  if (/^\s*not ok \d+ - /m.test(tap)) {
+    for (const m of String(stderr).matchAll(re)) found.set(m[0], (found.get(m[0]) || 0) + 1);
   }
   return [...found.keys()].sort();
 }
@@ -713,7 +726,7 @@ export async function main({
     summary.child = { status: res.status ?? null, signal: res.signal || null, error: res.error?.message || null };
     summary.tap = parseTapSummary(res.stdout || '');
     summary.failures = parseTapFailures(output);
-    summary.offenders = extractOffenders(output);
+    summary.offenders = extractOffenders(output, { stderr: res.stderr || '' });
     const passed = res.status === 0 && !res.error && !res.signal && summary.tap.complete
       && summary.tap.fail === 0 && summary.tap.cancelled === 0
       && summary.failures.tests.length === 0 && summary.failures.files.length === 0;
