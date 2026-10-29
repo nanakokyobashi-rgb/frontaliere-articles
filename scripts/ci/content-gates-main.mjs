@@ -563,17 +563,75 @@ export function parseTapFailures(tap) {
  *
  * Deliberatamente niente parsing del YAML TAP: i messaggi sono prosa libera e
  * cambiano da gate a gate. Si cercano i path sotto `content/`, che sono l'unica
- * forma comune a tutti.
+ * forma comune a tutti. Il reporter del child può però scrivere l'assertion
+ * message nello `stderr` senza indentazione TAP: quel canale arriva separato
+ * dal chiamante e va associato alla run solo se il TAP contiene un `not ok`.
  *
  * @param {string} output
+ * @param {{stderr?: string}} [streams]
  * @returns {string[]}
  */
-export function extractOffenders(output) {
+export function extractOffenders(output, { stderr = '' } = {}) {
   const found = new Map();
   const re = /content\/[A-Za-z0-9_@./-]*[A-Za-z0-9_](?:\.ts|\.json)/g;
-  for (const m of String(output).matchAll(re)) {
-    const p = m[0];
-    found.set(p, (found.get(p) || 0) + 1);
+  const tap = String(output);
+  let pendingFailureIndent = null;
+  let diagnosticIndent = null;
+  for (const line of tap.split('\n')) {
+    const failure = line.match(/^(\s*)not ok \d+ - /);
+    if (failure) {
+      pendingFailureIndent = failure[1].length;
+      diagnosticIndent = null;
+      continue;
+    }
+
+    if (diagnosticIndent !== null) {
+      const end = line.match(/^(\s*)\.\.\.\s*$/);
+      if (end && end[1].length === diagnosticIndent) {
+        diagnosticIndent = null;
+        continue;
+      }
+      for (const m of line.matchAll(re)) {
+        const p = m[0];
+        found.set(p, (found.get(p) || 0) + 1);
+      }
+      continue;
+    }
+
+    if (pendingFailureIndent !== null) {
+      const start = line.match(/^(\s*)---\s*$/);
+      if (start && start[1].length > pendingFailureIndent) {
+        diagnosticIndent = start[1].length;
+        pendingFailureIndent = null;
+        continue;
+      }
+      // Some Node versions emit a nested failure's `error:` line without a
+      // YAML diagnostic fence. It is still part of the failed assertion, so
+      // retain paths from indented continuation lines while a failure is
+      // pending. A later TAP record clears the pending failure below, which
+      // keeps warnings from passing tests out of the offender list.
+      if (line.match(/^\s+/)?.[0].length > pendingFailureIndent) {
+        for (const m of line.matchAll(re)) {
+          const p = m[0];
+          found.set(p, (found.get(p) || 0) + 1);
+        }
+      }
+      // A failure without a YAML diagnostic is complete as soon as the next
+      // TAP record starts. Do not let a later passing test's diagnostic block
+      // inherit the failed status.
+      if (/^\s*(?:not )?ok \d+ - |^\s*# Subtest:/.test(line)) {
+        pendingFailureIndent = null;
+      }
+    }
+  }
+
+  // Node's TAP reporter keeps the test record on stdout but can leave the
+  // assertion message on stderr as an unindented line. It is not safe to scan
+  // that channel on its own: a warning from a successful run must not become
+  // an offender. A failed TAP record is the evidence that binds the two
+  // streams to the same child invocation.
+  if (/^\s*not ok \d+ - /m.test(tap)) {
+    for (const m of String(stderr).matchAll(re)) found.set(m[0], (found.get(m[0]) || 0) + 1);
   }
   return [...found.keys()].sort();
 }
@@ -668,7 +726,7 @@ export async function main({
     summary.child = { status: res.status ?? null, signal: res.signal || null, error: res.error?.message || null };
     summary.tap = parseTapSummary(res.stdout || '');
     summary.failures = parseTapFailures(output);
-    summary.offenders = extractOffenders(output);
+    summary.offenders = extractOffenders(output, { stderr: res.stderr || '' });
     const passed = res.status === 0 && !res.error && !res.signal && summary.tap.complete
       && summary.tap.fail === 0 && summary.tap.cancelled === 0
       && summary.failures.tests.length === 0 && summary.failures.files.length === 0;
