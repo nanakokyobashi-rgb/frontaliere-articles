@@ -42,12 +42,12 @@ for(const relative of ['./route','../route',' ./route'])test('encoded nested rel
  const result=sanitizeTelemetryProperties({page_location:'https://redirect.test/?next='+encodeURIComponent(relative+'?ac=secret&utm_source=email')}).page_location;
  assert.equal(new URL(result).searchParams.get('next'),relative.trim()+'?utm_source=email');
 });
-test('nested userinfo remains scrubbed beyond the previous recursion depth',()=>{
+test('nested userinfo is removed at the canonical recursion budget',()=>{
  let nested='https://user:password@destination.test/path?ac=secret&utm_source=inner';
  for(let i=0;i<4;i++)nested='https://redirect.test/?url='+encodeURIComponent(nested)+'&utm_source=email';
  let cleaned=sanitizeTelemetryProperties({page_location:nested}).page_location;
  for(let i=0;i<4;i++){const parsed=new URL(cleaned);assert.equal(parsed.searchParams.get('utm_source'),'email');cleaned=parsed.searchParams.get('url');}
- const end=new URL(cleaned);assert.equal(end.username,'');assert.equal(end.password,'');assert.equal(end.searchParams.get('ac'),null);assert.equal(end.searchParams.get('utm_source'),'inner');assert.equal(end.pathname,'/path');
+ const end=new URL(cleaned);assert.equal(end.username,'');assert.equal(end.password,'');assert.equal(end.search,'');assert.equal(end.pathname,'/path');
 });
 test('ordinary campaign path stays byte-identical',()=>{
  const value='/path?utm_campaign=a%20b&action=continue#details';assert.equal(sanitizeTelemetryProperties({page_path:value}).page_path,value);
