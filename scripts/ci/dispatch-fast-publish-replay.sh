@@ -166,6 +166,7 @@ for attempt in 1 2; do
     pending_read_ok=false
     for ((poll = 1; poll <= pending_poll_limit; poll += 1)); do
       sleep "$pending_poll_delay_seconds"
+      pending_read_ok=false
       if ! existing_runs="$(list_matching_runs)"; then
         echo "::warning::esito del replay in corso temporaneamente non leggibile (verifica $poll/$pending_poll_limit)"
         continue

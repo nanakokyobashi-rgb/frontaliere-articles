@@ -117,7 +117,7 @@ case "$1 $2" in
     n="$(cat "$GH_TEST_COUNT" 2>/dev/null || printf '0')"
     n=$((n + 1))
     printf '%s\\n' "$n" > "$GH_TEST_COUNT"
-    if [ "$n" -eq 1 ]; then
+    if [ "$n" -eq 1 ] || [ "$n" -eq 2 ]; then
       printf '%s\\n' '[{"databaseId":124,"displayTitle":"cover-publish-section / canton-be / nonce=read-error","status":"in_progress","conclusion":""}]'
     else
       exit 42
@@ -150,7 +150,7 @@ esac
           PATH: `${bin}:${process.env.PATH}`,
           GH_TEST_LOG: log,
           GH_TEST_COUNT: count,
-          REPLAY_PENDING_POLL_LIMIT: '1',
+          REPLAY_PENDING_POLL_LIMIT: '2',
           REPLAY_PENDING_POLL_DELAY_SECONDS: '0',
         },
         encoding: 'utf8',
@@ -163,6 +163,7 @@ esac
   assert.match(`${error.stdout || ''}\n${error.stderr || ''}`, /stato finale del replay pendente non verificato/);
 
   const calls = readFileSync(log, 'utf8').trim().split('\n');
+  assert.equal(calls.filter((call) => call.startsWith('run list')).length, 3);
   assert.equal(calls.filter((call) => call.startsWith('workflow run')).length, 0);
 });
 
