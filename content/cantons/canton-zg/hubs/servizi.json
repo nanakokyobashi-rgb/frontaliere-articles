@@ -4,8 +4,8 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "servizi",
-  "updatedAt": "2026-10-29T21:57:02.700Z",
-  "contentHash": "7ea97bca7da2c6cad9bb1fbd42b20c7aca106e8d429b4d148a7cc1d7886d902c",
+  "updatedAt": "2026-10-29T23:11:37.816Z",
+  "contentHash": "181eee674a1fe4ac65608219bd2eb8ed60c0af6bb68584c9855f95b816e20da1",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -73,6 +73,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Tag der betreuenden Angehörigen: Sagen Sie mit uns Danke!",
+              "date": "2026-10-30",
+              "url": "https://zg.ch/de/news/2026/October/Tag-der-betreuenden-Angehoerigen"
+            },
+            {
               "label": "Christos Pouskoulas wird Kantonsarzt und Leiter des Amts für Gesundheit des Kantons Zug",
               "date": "2026-10-01",
               "url": "https://zg.ch/de/news/2026/March/christos-pouskoulas-wird-kantonsarzt-und-leiter-des-amts-fuer-gesundheit-des-kantons-zug"
@@ -96,11 +101,6 @@
               "label": "Medical Partnership mit dem EVZ: neue Ärzte-Teams",
               "date": "2026-08-25",
               "url": "https://www.zgks.ch/ueber-uns/news-detail/detail/medical-partnership-mit-dem-evz-neue-aerzte-teams"
-            },
-            {
-              "label": "Sonn- und Feiertagsverkäufe im Kanton Zug im Jahr 2026",
-              "date": "2026-08-15",
-              "url": "https://zg.ch/de/news/2026/July/sonn-und-feiertagsverkaeufe-2027"
             }
           ],
           "updatedAt": "2026-10-29T11:47:10.249Z"
@@ -183,7 +183,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-29T21:57:02.700Z"
+      "updatedAt": "2026-10-29T23:11:37.816Z"
     },
     "en": {
       "canton": "ZG",
@@ -234,6 +234,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Tag der betreuenden Angehörigen: Sagen Sie mit uns Danke!",
+              "date": "2026-10-30",
+              "url": "https://zg.ch/de/news/2026/October/Tag-der-betreuenden-Angehoerigen"
+            },
+            {
               "label": "Christos Pouskoulas wird Kantonsarzt und Leiter des Amts für Gesundheit des Kantons Zug",
               "date": "2026-10-01",
               "url": "https://zg.ch/de/news/2026/March/christos-pouskoulas-wird-kantonsarzt-und-leiter-des-amts-fuer-gesundheit-des-kantons-zug"
@@ -257,11 +262,6 @@
               "label": "Medical Partnership mit dem EVZ: neue Ärzte-Teams",
               "date": "2026-08-25",
               "url": "https://www.zgks.ch/ueber-uns/news-detail/detail/medical-partnership-mit-dem-evz-neue-aerzte-teams"
-            },
-            {
-              "label": "Sonn- und Feiertagsverkäufe im Kanton Zug im Jahr 2026",
-              "date": "2026-08-15",
-              "url": "https://zg.ch/de/news/2026/July/sonn-und-feiertagsverkaeufe-2027"
             }
           ],
           "updatedAt": "2026-10-29T11:47:10.249Z"
@@ -340,7 +340,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-29T21:57:02.700Z"
+      "updatedAt": "2026-10-29T23:11:37.816Z"
     },
     "de": {
       "canton": "ZG",
@@ -391,6 +391,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Tag der betreuenden Angehörigen: Sagen Sie mit uns Danke!",
+              "date": "2026-10-30",
+              "url": "https://zg.ch/de/news/2026/October/Tag-der-betreuenden-Angehoerigen"
+            },
+            {
               "label": "Christos Pouskoulas wird Kantonsarzt und Leiter des Amts für Gesundheit des Kantons Zug",
               "date": "2026-10-01",
               "url": "https://zg.ch/de/news/2026/March/christos-pouskoulas-wird-kantonsarzt-und-leiter-des-amts-fuer-gesundheit-des-kantons-zug"
@@ -414,11 +419,6 @@
               "label": "Medical Partnership mit dem EVZ: neue Ärzte-Teams",
               "date": "2026-08-25",
               "url": "https://www.zgks.ch/ueber-uns/news-detail/detail/medical-partnership-mit-dem-evz-neue-aerzte-teams"
-            },
-            {
-              "label": "Sonn- und Feiertagsverkäufe im Kanton Zug im Jahr 2026",
-              "date": "2026-08-15",
-              "url": "https://zg.ch/de/news/2026/July/sonn-und-feiertagsverkaeufe-2027"
             }
           ],
           "updatedAt": "2026-10-29T11:47:10.249Z"
@@ -497,7 +497,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-29T21:57:02.700Z"
+      "updatedAt": "2026-10-29T23:11:37.816Z"
     },
     "fr": {
       "canton": "ZG",
@@ -548,6 +548,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Tag der betreuenden Angehörigen: Sagen Sie mit uns Danke!",
+              "date": "2026-10-30",
+              "url": "https://zg.ch/de/news/2026/October/Tag-der-betreuenden-Angehoerigen"
+            },
+            {
               "label": "Christos Pouskoulas wird Kantonsarzt und Leiter des Amts für Gesundheit des Kantons Zug",
               "date": "2026-10-01",
               "url": "https://zg.ch/de/news/2026/March/christos-pouskoulas-wird-kantonsarzt-und-leiter-des-amts-fuer-gesundheit-des-kantons-zug"
@@ -571,11 +576,6 @@
               "label": "Medical Partnership mit dem EVZ: neue Ärzte-Teams",
               "date": "2026-08-25",
               "url": "https://www.zgks.ch/ueber-uns/news-detail/detail/medical-partnership-mit-dem-evz-neue-aerzte-teams"
-            },
-            {
-              "label": "Sonn- und Feiertagsverkäufe im Kanton Zug im Jahr 2026",
-              "date": "2026-08-15",
-              "url": "https://zg.ch/de/news/2026/July/sonn-und-feiertagsverkaeufe-2027"
             }
           ],
           "updatedAt": "2026-10-29T11:47:10.249Z"
@@ -650,7 +650,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-29T21:57:02.700Z"
+      "updatedAt": "2026-10-29T23:11:37.816Z"
     }
   }
 }
