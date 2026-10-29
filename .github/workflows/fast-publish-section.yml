@@ -1037,8 +1037,9 @@ jobs:
   # its HTML. After a successful staged section publish, every non-dry push
   # arms the API replay so an earlier fail-closed readiness check cannot strand
   # the registry on the previous release. API-triggered replays are excluded
-  # to prevent a workflow_run loop; genuine render errors still block replay,
-  # while mixed matrix HEADs are handed to the bounded recovery dispatch below.
+  # to prevent a workflow_run loop; genuine render errors still block replay.
+  # Mixed matrix HEADs are handed to the recovery dispatch below, and their
+  # child completions drive the API replay through reconcile-section-pages.
   replay-api-after-staged-release:
     needs: [resolve, publish, publish_release_head]
     if: >-
@@ -1220,9 +1221,7 @@ jobs:
       - name: Replay publish-api after staged release
         if: >-
           (steps.replay_freshness.outputs.fresh == 'true' &&
-           needs.publish_release_head.outputs.mixed_matrix != 'true') ||
-          (steps.replay_freshness.outputs.fresh == 'false' &&
-           needs.publish_release_head.outputs.mixed_matrix == 'true')
+           needs.publish_release_head.outputs.mixed_matrix != 'true')
         env:
           REPOSITORY: ${{ github.repository }}
           SOURCE_COMMIT: ${{ steps.stale.outputs.recovery_head || steps.replay_freshness.outputs.current_main || needs.publish_release_head.outputs.rendered_head || inputs.source_commit || github.sha }}

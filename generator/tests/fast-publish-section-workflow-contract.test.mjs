@@ -173,21 +173,14 @@ test('il replay stale installa il parser prima di risolvere la release API', () 
   );
 });
 
-test('un resolve stale produce la matrice sulla nuova HEAD e lascia il recovery come rete di sicurezza', () => {
-  assert.match(
-    recovery,
-    /rebuild_recovery_head\(\)[\s\S]*git checkout --detach "\$next_head"[\s\S]*dispatch_children_wave/u,
-  );
-  assert.match(
-    recovery,
-    /VERIFY_STALE_HANDOFF_HEAD[\s\S]*rebuild_recovery_head[\s\S]*dispatch_children_wave/u,
-  );
-  assert.match(
-    recovery,
-    /VERIFY_STALE_HANDOFF_TITLE[\s\S]*VERIFY_STALE_HANDOFF_NONCE[\s\S]*return 3/u,
-  );
-  assert.match(recovery, /wave_replaced=true/u);
-  assert.match(recovery, /max_stale_handoff_waves=3/u);
+test('un recovery stale dispatcha i child e lascia il barrier al reconcile event-driven', () => {
+  assert.match(recovery, /dispatch_children_wave[\s\S]*The recovery is a dispatcher, not a coordinator/u);
+  assert.doesNotMatch(recovery, /wait_for_dispatched_children/u);
+  assert.doesNotMatch(recovery, /rebuild_recovery_head/u);
+  assert.doesNotMatch(recovery, /VERIFY_STALE_HANDOFF_HEAD/u);
+  assert.doesNotMatch(recovery, /REPLAY_CHILD_WAIT_MAX_S/u);
+  assert.doesNotMatch(recovery, /gh run list --repo "\$REPOSITORY" --workflow fast-publish-section\.yml/u);
+  assert.match(recovery, /readiness verra' verificata dal reconcile event-driven/u);
   assert.match(recovery, /printf 'recovery_head=%s\\n' "\$CURRENT_MAIN" >> "\$GITHUB_OUTPUT"/u);
   assert.match(resolver, /git checkout --detach "\$current_main"/u);
   assert.match(resolver, /echo "source_commit=\$current_main"/u);
@@ -204,13 +197,9 @@ test('il recovery verifica l ancestry della base prima di ricostruire la matrice
   const mixedPlan = recovery.indexOf('target_matrix="$(git diff --name-status "$plan_before" "$CURRENT_MAIN"');
   const rebuildPlan = recovery.lastIndexOf('target_matrix="$(git diff --name-status "$plan_before" "$CURRENT_MAIN"');
   assert.ok(mixedPlan >= 0, 'manca il piano mixed iniziale');
-  assert.ok(rebuildPlan > mixedPlan, 'manca il piano del rebuild handoff');
+  assert.equal(rebuildPlan, mixedPlan, 'il recovery non deve ricostruire wave mentre aspetta child');
   assert.ok(
     recovery.lastIndexOf('if ! validate_recovery_base_ancestry; then', mixedPlan) >= 0,
     'il mixed recovery deve validare la base prima del r2-plan',
-  );
-  assert.ok(
-    recovery.lastIndexOf('if ! validate_recovery_base_ancestry; then', rebuildPlan) >= 0,
-    'il rebuild recovery deve validare la base prima del r2-plan',
   );
 });
