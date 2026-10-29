@@ -113,10 +113,12 @@ jobs:
           WORKFLOW_RUN_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
           WORKFLOW_RUN_EVENT: ${{ github.event.workflow_run.event }}
           WORKFLOW_RUN_DISPLAY_TITLE: ${{ github.event.workflow_run.display_title }}
+          PENDING_EDGE_FLIP: ${{ steps.detect.outputs.pending_edge_flip }}
         run: |
           set -euo pipefail
           allow=true
           event_replay=false
+          schedule_retry=false
           trusted_child=false
           child_nonce=''
           if [ "$EVENT_NAME" = "workflow_dispatch" ] && [ "${{ inputs.dry_run }}" != "false" ]; then
@@ -137,10 +139,14 @@ jobs:
             if [ "$trusted_child" = 'true' ]; then
               allow=false; echo "dispatch disabilitato: il child ha gia' eseguito il backfill; controllo event-driven"
             fi
+          elif [ "$EVENT_NAME" = "schedule" ] && [ "$PENDING_EDGE_FLIP" = 'true' ]; then
+            schedule_retry=true
+            echo "replay retry abilitato dal cron: flip API pendente"
           fi
           {
             echo "allow=$allow"
             echo "event_replay=$event_replay"
+            echo "schedule_retry=$schedule_retry"
             echo "trusted_child=$trusted_child"
             echo "child_nonce=$child_nonce"
           } >> "$GITHUB_OUTPUT"
@@ -303,8 +309,8 @@ jobs:
       # dispatchato i child e' gia' terminato, quindi non occupa runner.
       - name: Replay API after event-driven backfill readiness
         if: >-
-          steps.mode.outputs.event_replay == 'true' &&
-          steps.child_artifact.outputs.verified == 'true' &&
+          (steps.mode.outputs.event_replay == 'true' || steps.mode.outputs.schedule_retry == 'true') &&
+          (steps.child_artifact.outputs.verified == 'true' || steps.mode.outputs.schedule_retry == 'true') &&
           steps.arm.outputs.allow == 'true' &&
           steps.detect.outputs.pending_edge_flip == 'true' &&
           steps.detect.outputs.skip == 'false' &&

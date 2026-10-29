@@ -4235,6 +4235,8 @@ test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta',
   assert.match(wf, /steps\.detect\.outputs\.leftover == '0'/);
   assert.match(wf, /steps\.detect\.outputs\.dispatch == '0'/);
   assert.match(wf, /steps\.detect\.outputs\.landing_content_stale == '0'/);
+  assert.match(wf, /PENDING_EDGE_FLIP: \$\{\{ steps\.detect\.outputs\.pending_edge_flip \}\}/);
+  assert.match(wf, /schedule_retry=true/);
   assert.match(wf, /\.counts\.landingContentStale \/\/ 0/);
   const globalReplay = wf.slice(wf.indexOf('- name: Replay API after event-driven backfill readiness'));
   const postBackfillProbe = globalReplay.indexOf('reconcile-sections-after-backfill.json');
@@ -4259,7 +4261,7 @@ test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta',
   assert.match(wf, /gh workflow run publish-api\.yml --repo "\$REPOSITORY" --ref main -f source_commit="\$SOURCE_COMMIT"/);
   assert.match(wf, /pending_edge_flip=\$\(jq -r '\.pendingEdgeFlip \/\/ false'/);
   assert.match(wf, /skip=\$\(jq -r 'if \.skip then \\"true\\" else \\"false\\" end'/);
-  assert.match(wf, /steps\.mode\.outputs\.event_replay == 'true'[\s\S]*steps\.detect\.outputs\.pending_edge_flip == 'true'[\s\S]*steps\.detect\.outputs\.skip == 'false'[\s\S]*steps\.detect\.outputs\.leftover == '0'/);
+  assert.match(wf, /\(steps\.mode\.outputs\.event_replay == 'true' \|\| steps\.mode\.outputs\.schedule_retry == 'true'\)[\s\S]*\(steps\.child_artifact\.outputs\.verified == 'true' \|\| steps\.mode\.outputs\.schedule_retry == 'true'\)[\s\S]*steps\.detect\.outputs\.pending_edge_flip == 'true'[\s\S]*steps\.detect\.outputs\.skip == 'false'[\s\S]*steps\.detect\.outputs\.dispatch == '0'[\s\S]*steps\.detect\.outputs\.leftover == '0'/);
   assert.doesNotMatch(wf, /steps\.wait_backfills\.outcome/);
   assert.doesNotMatch(wf, /contains\("nonce=reconcile-"\)/);
   assert.match(wf, /Load producer token from Remote Config/);
