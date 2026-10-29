@@ -116,4 +116,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'glarona-adesione-programma-perspecta',
+ category: 'novita',
+ date: '2026-10-29T07:33:02.883Z',
+ image: '/images/blog/article-glarona-adesione-programma-perspecta.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['GL'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

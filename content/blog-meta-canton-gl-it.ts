@@ -33,6 +33,9 @@ const blogMetaCantonGlIt: Record<string, string> = {
     'blog.article.braunwald-progetto-80-milioni.title': 'Braunwald: al via un progetto, 80 milioni per 266 abitanti',
     'blog.article.braunwald-progetto-80-milioni.excerpt': 'La fonte indica 80 milioni di franchi per 266 abitanti a Braunwald e annuncia l\'avvio di un grande progetto contro i pericoli naturali.',
     'blog.article.braunwald-progetto-80-milioni.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.glarona-adesione-programma-perspecta.title': 'Glarona aderisce al programma pilota Perspecta',
+    'blog.article.glarona-adesione-programma-perspecta.excerpt': 'Il Governo di Glarona partecipa a Perspecta da ottobre 2026 a fine 2031 per favorire l\'integrazione professionale tramite consulenze individuali BSLB.',
+    'blog.article.glarona-adesione-programma-perspecta.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonGlIt;
