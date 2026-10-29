@@ -600,6 +600,75 @@ test('publisher: un flip pendente resta staged anche mentre il registro edge è 
   }
 });
 
+test('publisher: una pagina riapparsa tra reconcile e publish viene rinfrescata senza bloccare la sezione', async () => {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-reappeared-'));
+  const outDir = path.join(fixtureRoot, 'dist');
+  const page = { ...pageEntry('canton-ti', 'articoli-ticino/reappeared/index.html', 'article'), id: 'reappeared' };
+  const publishedDoc = pageManifestFromPages({ section: 'canton-ti', commit: 'published', pages: [page] });
+  let publishOptions = null;
+  const realConsoleLog = console.log;
+  const realConsoleError = console.error;
+  const previousAllow = process.env.ALLOW_DEFERRED_LIVE_RELEASE;
+  try {
+    process.env.ALLOW_DEFERRED_LIVE_RELEASE = 'true';
+    console.log = () => {};
+    console.error = () => {};
+    const code = await main(
+      ['--section', 'canton-ti', '--ids', '["reappeared"]', '--missing-pages', '["/articoli-ticino/reappeared/"]', '--out', outDir, '--summary', path.join(fixtureRoot, 'summary.json'), '--publish'],
+      {
+        parseArgsImpl: (argv) => parseArgs(argv, { active: ACTIVE_WITH_TI }),
+        fetchPageManifestImpl: async () => ({ state: 'ok', doc: publishedDoc }),
+        publishedStatusImpl: async () => 'draft',
+        publishedApiReleaseCommitImpl: async () => execFileSync('git', ['-C', ROOT, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
+        publishedReleaseReadyImpl: async () => ({ ok: false, reason: 'edge in transizione' }),
+        currentMainHeadImpl: () => execFileSync('git', ['-C', ROOT, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
+        createRenderRootImpl: () => mkdtempSync(path.join(fixtureRoot, 'render-')),
+        renderSectionArticlePipelineImpl: async () => {
+          const local = path.join(outDir, page.rel);
+          mkdirSync(path.dirname(local), { recursive: true });
+          writeFileSync(
+            local,
+            `<!doctype html><html><head><link rel="canonical" href="${page.apexUrl}">${CORPUS_ROUTE_OWNER_META_TAG}</head><body>${'pagina rinfrescata '.repeat(30)}</body></html>`,
+            'utf8',
+          );
+          return {
+            entries: [{ articleId: page.id, paths: { it: page.rel } }],
+            hubResult: { pathsByLocale: { it: [], en: [], de: [], fr: [] } },
+            downloadedImageKeys: [],
+            imageFetchFailures: [],
+            imagePostcondition: {},
+            aggregatePagesAllowed: false,
+          };
+        },
+        articleReleaseSnapshotImpl: () => [],
+        probeImpl: async (url) => {
+          assert.equal(url, page.cdnUrl);
+          return { ok: true, status: 200, body: '<html>gia presente</html>' };
+        },
+        sleepImpl: async () => {},
+        publishImpl: async (options) => {
+          publishOptions = options;
+          return { failures: 0, uploaded: options.pages.length, deleted: 0, status: 'draft' };
+        },
+        publishPageManifestImpl: () => true,
+      },
+    );
+    assert.equal(code, 0);
+    assert.ok(publishOptions, 'la pagina riapparsa deve restare nel publish staged');
+    assert.deepEqual(publishOptions.pages.map((candidate) => candidate.canonicalPath), [page.canonicalPath]);
+    assert.deepEqual(publishOptions.immutablePages, []);
+    const summary = JSON.parse(readFileSync(path.join(fixtureRoot, 'summary.json'), 'utf8'));
+    assert.deepEqual(summary.confirmedMissingPagePaths, [page.canonicalPath]);
+    assert.deepEqual(summary.defects, []);
+  } finally {
+    if (previousAllow === undefined) delete process.env.ALLOW_DEFERRED_LIVE_RELEASE;
+    else process.env.ALLOW_DEFERRED_LIVE_RELEASE = previousAllow;
+    console.log = realConsoleLog;
+    console.error = realConsoleError;
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
 test('publisher: una release già pronta percorre il publish completo anche con il differimento armato', async () => {
   const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-ready-release-'));
   const head = 'a'.repeat(40);
