@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/politica/1951859/epidemie-legge-revisione-svizzera-imprese": {
-    "articleId": "revisione-legge-epidemie-svizzera",
-    "ts": "2026-09-23T00:40:58.724Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/rq9rumbcaofx": {
     "articleId": "dff-progressione-freddo-imposte-2027",
     "ts": "2026-09-23T01:17:40.104Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4200996": {
     "articleId": "farmaci-riserve-finanziamento",
     "ts": "2026-10-29T09:02:52.158Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1959781/svizzera-cambiamenti-rischi-strumenti-clima": {
+    "articleId": "svizzera-rischi-climatici-strumenti",
+    "ts": "2026-10-29T22:36:56.417Z",
     "keyForm": 2
   }
 }
