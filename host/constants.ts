@@ -2,8 +2,9 @@
  * Site constants the article engine reads through SiteShellContract.
  *
  * Transported BY FUNCTION CLOSURE from the main repo's
- * `build-plugins/constants.ts` (about 1,200 lines on 2026-09-26): only the 20
- * declarations the contract reaches, two of them local copies of
+ * `build-plugins/constants.ts` (about 1,200 lines on 2026-09-26): only the
+ * declarations the contract reaches (including the canonical telemetry helper),
+ * two of them local copies of
  * `scripts/lib/jobBoardSections.mjs` values. The whole file also imports
  * botPatterns, posthog-error-filter, resilientImport, adSlotHtml,
  * redirectStubMarker and jobBoardSections, none of which the article path
