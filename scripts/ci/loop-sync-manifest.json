@@ -2429,7 +2429,7 @@
       "reason": "Adapter plain-Node del limite delle card della landing cantonale: estrae dal sorgente TypeScript mirrorato dell'engine (`engine/cantonSectionPages.ts`) l'export `CANTON_LANDING_CARD_LIMIT`, cosi' `scripts/reconcile-section-pages.mjs` non duplica una costante e rifiuta forme non valide. Il reconcile e la pubblicazione delle sezioni sono responsabilita' del corpus; il sito consuma le pagine via HTTP e non esegue questo parser.",
       "baseline": {
         "site": null,
-        "corpus": "66c47ec1de565072",
+        "corpus": null,
         "alignedAt": "2026-10-29"
       }
     },
