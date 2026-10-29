@@ -63,6 +63,9 @@ const blogMetaCantonBeDe: Record<string, string> = {
     'blog.article.ramsei-taglio-sicurezza-strada.title': 'Lützelflüh: Sicherheitsholzerei, Verkehr auf einer Fahrspur',
     'blog.article.ramsei-taglio-sicurezza-strada.excerpt': 'In Ramsei, in der Gemeinde Lützelflüh, wird die Sumiswaldstrasse in Richtung Sumiswald vom 2.',
     'blog.article.ramsei-taglio-sicurezza-strada.imageAlt': 'Sumiswaldstrasse in Ramsei mit einspuriger Verkehrsführung bei Sicherheitsholzerei',
+    'blog.article.credito-volksschule-breitfeld.title': '33,3 Millionen Franken für die Erweiterung der Volksschule Breitfeld',
+    'blog.article.credito-volksschule-breitfeld.excerpt': 'Der Baukredit von CHF 33,3 Millionen sieht vor, die Kapazität von 10 auf 18 Klassen zu erhöhen.',
+    'blog.article.credito-volksschule-breitfeld.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonBeDe;
