@@ -351,7 +351,7 @@ test('il pin del manifest blocca il PARENT-REARM prima della lettura delle figli
   assert.ok(start >= 0 && end > start, 'blocco PARENT-CLOSE non trovato');
   const block = DRAINER.slice(start, end);
   const reopened = block.indexOf('if (reopenedAfterDecomposition(comments))');
-  const pin = block.indexOf('const rearmPinnedPath = manifestPinFor(p.number);', reopened);
+  const pin = block.indexOf('const rearmPin = manifestPinFor(p.number);', reopened);
   const childRead = block.indexOf('readParentRearmChildStates(kids)', reopened);
   const marker = block.indexOf('parentRearmCommentBody({', reopened);
   assert.ok(reopened >= 0, 'guardia di riapertura assente');

@@ -26,7 +26,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { manifestPinnedIssues, pinnedBy, PINNING_MODES } from '../../scripts/ci/manifest-pinned-issues.mjs';
+import { manifestPinLookup, manifestPinnedIssues, pinnedBy, PINNING_MODES } from '../../scripts/ci/manifest-pinned-issues.mjs';
 import { handoffDecision } from '../../scripts/ci/handoff-to-site.mjs';
 import { decideReconcileAction } from '../../scripts/ci/reconcile-followups.mjs';
 
@@ -83,6 +83,8 @@ test('senza repo, o su manifest illeggibile, non si pinna niente (direzione sicu
   fs.writeFileSync(tmp, '{ non json');
   assert.equal(manifestPinnedIssues(tmp).size, 0, 'manifest illeggibile → nessun pin, cioe\' il comportamento di prima');
   assert.equal(manifestPinnedIssues(path.join(tmp, 'assente.json')).size, 0);
+  assert.equal(manifestPinLookup(986, THIS_REPO, tmp).ok, false, 'il closer deve distinguere il manifest illeggibile da un miss');
+  assert.equal(manifestPinLookup(986, THIS_REPO, MANIFEST_PATH).ok, true);
 });
 
 test('il lookup dei pin normalizza il case del repository', () => {
@@ -157,7 +159,7 @@ test('i workflow dei due closer espongono il kill-switch senza modificare il gem
     assert.ok(start >= 0, `${file}: step ${name} assente`);
     const next = src.indexOf('\n      - name: ', start + 1);
     const step = src.slice(start, next < 0 ? src.length : next);
-    assert.match(step, /FOLLOWUP_NO_AUTOCLOSE:\s*['"]1['"]/,
+    assert.match(step, /FOLLOWUP_NO_AUTOCLOSE:\s*(?:['"]1['"]|\$\{\{[\s\S]*?inputs\.no_autoclose[\s\S]*?['"]1['"])/,
       `${file}: il closer non riceve FOLLOWUP_NO_AUTOCLOSE=1`);
   }
 });
@@ -224,7 +226,7 @@ test('ogni closer corpus-owned consulta la sorgente dei pin', () => {
       `${c.rel} (mode: ${c.mode}) chiude issue e NON consulta \`manifest-pinned-issues.mjs\`: ` +
         'puo\' chiudere il `trackingIssue` di una voce `corpus-only-pending`.',
     );
-    assert.match(c.src, /pinnedBy\(/, `${c.rel} importa i pin ma non li interroga.`);
+    assert.match(c.src, /(?:pinnedBy|manifestPinLookup)\(/, `${c.rel} importa i pin ma non li interroga.`);
   }
 });
 

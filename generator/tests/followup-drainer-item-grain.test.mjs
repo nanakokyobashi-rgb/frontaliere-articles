@@ -483,7 +483,7 @@ test('VERDICT-EXIT instrada il daily prima della decisione terminale issue-wide'
   const end = DRAINER.indexOf('// --- TOO-LARGE ESCALATION', start);
   const stage = DRAINER.slice(start, end);
   assert.ok(start >= 0 && end > start, 'stadi VERDICT-EXIT non trovati');
-  assert.match(stage, /latestFixOutcomeCommentFromComments\(comments\)/);
+  assert.match(stage, /latestFixRunOutcomeEntryFromComments\(comments\)/);
   assert.match(stage, /const composeTransition = \(snapshot\) => dailyBucketOutcomeTransition\(/);
   assert.match(stage, /let transition = composeTransition\(liveIssue\)/);
   assert.match(stage, /dailyOverlapRetryHold\(comments, readOverlapBlocker\)/);
