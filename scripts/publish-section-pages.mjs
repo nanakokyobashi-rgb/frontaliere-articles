@@ -1319,6 +1319,10 @@ function isNotFoundStatus(status) {
   return status === 404 || status === 'HTTP 404';
 }
 
+function isPresentStatus(status) {
+  return status === 200 || status === 'HTTP 200';
+}
+
 export async function confirmCantonPageMissingWithSignal(
   url,
   { probeImpl = probe, sleepImpl = sleep, attempts = 3, delayMs = 1000, signal } = {},
@@ -2857,6 +2861,20 @@ export async function main(
           signal: confirmationAbortController.signal,
         });
         if (!confirmation.confirmed) {
+          // Reconcile and publish are separate HTTP observations. If another
+          // publisher repaired the key between them, a 200 is a successful
+          // convergence signal: keep the rendered page in the staged upload
+          // set instead of failing the whole section on a stale 404 snapshot.
+          if (requestedMissingPagePaths.has(pagePath) && confirmation.statuses.some(isPresentStatus)) {
+            console.log(`::notice::[${LOG}] pagina dichiarata mancante ora presente: refresh idempotente ${pagePath}`);
+            confirmedMissingPagePaths.add(pagePath);
+            if (knownMissingPagePaths.has(pagePath)) confirmedKnownMissingPagePaths.add(pagePath);
+            continue;
+          }
+          if (confirmation.statuses.some(isPresentStatus)) {
+            console.log(`::notice::[${LOG}] pagina dichiarata mancante gia' ripristinata: mantengo la copia live ${pagePath}`);
+            continue;
+          }
           defects.push(`pagina dichiarata mancante ora presente o non verificabile: ${pagePath} (${confirmation.statuses.join(' → ')})`);
           continue;
         }
