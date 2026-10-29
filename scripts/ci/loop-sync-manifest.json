@@ -4058,7 +4058,7 @@
       "mode": "adapted",
       "reason": "Costanti del sito lette dall'engine via SiteShellContract, estratte per chiusura: adapted per costruzione, non byte-identiche al sorgente completo. scalarFingerprint confronta i 22 scalari authoritative, mentre i test runtime verificano i comportamenti del contratto. Il digest 4055da86… aggiunge la rimozione delle credenziali URL alla telemetria e incorpora il gate GA4 del sito, il budget SERP a 150 caratteri, la canonicalizzazione Organization.sameAs, l'aggiunta del profilo Facebook canonico, il riferimento content-addressed a gtag-init e le due regole contestuali trasportate per Chiasso e concorsi pubblici; la specializzazione editoriale resta in additionalType e il runtime Firebase conserva il match sulla chiave esatta, senza segreti nei fingerprint.",
       "baseline": {
-        "site": "face6073971efba4",
+        "site": "cfbbabe09ef93cbf",
         "corpus": "ff9327d8bcbdd180",
         "alignedAt": "2026-10-29",
         "forcedAt": "2026-10-29T13:57:28.865Z"
