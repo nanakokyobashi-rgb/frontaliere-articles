@@ -2424,6 +2424,16 @@
       }
     },
     {
+      "path": "scripts/lib/canton-landing-card-limit.mjs",
+      "mode": "corpus-only",
+      "reason": "Adapter plain-Node del limite delle card della landing cantonale: estrae dal sorgente TypeScript mirrorato dell'engine (`engine/cantonSectionPages.ts`) l'export `CANTON_LANDING_CARD_LIMIT`, cosi' `scripts/reconcile-section-pages.mjs` non duplica una costante e rifiuta forme non valide. Il reconcile e la pubblicazione delle sezioni sono responsabilita' del corpus; il sito consuma le pagine via HTTP e non esegue questo parser.",
+      "baseline": {
+        "site": null,
+        "corpus": "66c47ec1de565072",
+        "alignedAt": "2026-10-29"
+      }
+    },
+    {
       "path": "scripts/lib/assert-hub-locale-slug.mjs",
       "mode": "corpus-only",
       "reason": "Guardia fail-closed degli slug localizzati degli hub riservati, condivisa da build-sitemap, auto-live-canton-sections e publish-section-pages prima di interpolare una route. Il sito consuma le pagine e gli slug via HTTP e non esegue questo helper del publisher del corpus, quindi non esiste un gemello operativo da trasportare.",
