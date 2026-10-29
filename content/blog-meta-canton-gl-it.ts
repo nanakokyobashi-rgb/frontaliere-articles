@@ -36,6 +36,9 @@ const blogMetaCantonGlIt: Record<string, string> = {
     'blog.article.glarona-adesione-programma-perspecta.title': 'Glarona aderisce al programma pilota Perspecta',
     'blog.article.glarona-adesione-programma-perspecta.excerpt': 'Il Governo di Glarona partecipa a Perspecta da ottobre 2026 a fine 2031 per favorire l\'integrazione professionale tramite consulenze individuali BSLB.',
     'blog.article.glarona-adesione-programma-perspecta.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.cantieri-strade-glarona-2027.title': 'Il Canton Glarona vuole rinnovare strade e ponti nel 2027',
+    'blog.article.cantieri-strade-glarona-2027.excerpt': 'Nel 2027 il Kirchweg di Glarona diventerà un cantiere; a Rüti sarà sostituito un ponte di 80 anni.',
+    'blog.article.cantieri-strade-glarona-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonGlIt;

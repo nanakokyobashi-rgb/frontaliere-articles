@@ -127,4 +127,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'cantieri-strade-glarona-2027',
+ category: 'pratico',
+ date: '2026-10-29T22:36:35.347Z',
+ image: '/images/blog/article-cantieri-strade-glarona-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['GL'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

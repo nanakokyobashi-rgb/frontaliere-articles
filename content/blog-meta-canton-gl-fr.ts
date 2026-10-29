@@ -36,6 +36,9 @@ const blogMetaCantonGlFr: Record<string, string> = {
     'blog.article.glarona-adesione-programma-perspecta.title': 'Glaris adhère au programme pilote Perspecta',
     'blog.article.glarona-adesione-programma-perspecta.excerpt': 'Le Gouvernement de Glaris participe à Perspecta d\'octobre 2026 à fin 2031 pour favoriser l\'intégration professionnelle par le biais de consultations individuelles BSLB.',
     'blog.article.glarona-adesione-programma-perspecta.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.cantieri-strade-glarona-2027.title': 'Le canton de Glaris veut rénover des routes et des ponts en 2027',
+    'blog.article.cantieri-strade-glarona-2027.excerpt': 'En 2027, le Kirchweg de Glaris deviendra un chantier ; à Rüti, un pont vieux de 80 ans sera remplacé.',
+    'blog.article.cantieri-strade-glarona-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonGlFr;

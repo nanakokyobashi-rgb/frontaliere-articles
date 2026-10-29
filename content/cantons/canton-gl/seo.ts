@@ -431,6 +431,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-cantieri-strade-glarona-2027': {
+    title: 'Il Canton Glarona vuole rinnovare strade e ponti nel 2027',
+    description: 'Strade e ponti da rinnovare nel Canton Glarona nel 2027: il Kirchweg diventa un cantiere e a Rüti sarà sostituito un ponte di 80 anni.',
+    keywords: 'frontalieri, ticino, svizzera, italia, canton, glarona, vuole, rinnovare',
+    ogTitle: 'Glarona: strade e ponti da rinnovare nel 2027',
+    ogDescription: 'Il radar della Südostschweiz indica gli interventi che il Cantone Glarona vuole rinnovare nel 2027. Il quadro va da Elm a Weesen; tra i punti citati figurano il Kirchweg di Glarona e un ponte ottantenne da sostituire a Rüti.',
+    canonicalPath: '/articoli-glarona/cantieri-strade-glarona-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Il Canton Glarona vuole rinnovare strade e ponti nel 2027",
+      "description": "Strade e ponti da rinnovare nel Canton Glarona nel 2027: il Kirchweg diventa un cantiere e a Rüti sarà sostituito un ponte di 80 anni.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-cantieri-strade-glarona-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-29T22:36:35+00:00",
+      "dateModified": "2026-10-29T22:36:35+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-glarona/cantieri-strade-glarona-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

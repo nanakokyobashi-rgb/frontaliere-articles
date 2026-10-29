@@ -36,6 +36,9 @@ const blogMetaCantonGlDe: Record<string, string> = {
     'blog.article.glarona-adesione-programma-perspecta.title': 'Glarus nimmt am Perspecta-Pilotprogramm teil',
     'blog.article.glarona-adesione-programma-perspecta.excerpt': 'Die Regierung Glarus nimmt von Oktober 2026 bis Ende 2031 an Perspecta teil, um die berufliche Integration durch individuelle BSLB-Beratung zu fördern.',
     'blog.article.glarona-adesione-programma-perspecta.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.cantieri-strade-glarona-2027.title': 'Der Kanton Glarus will im Jahr 2027 Straßen und Brücken erneuern',
+    'blog.article.cantieri-strade-glarona-2027.excerpt': 'Im Jahr 2027 wird der Kirchweg in Glarus zu einer Baustelle; in Rüti wird eine 80 Jahre alte Brücke ersetzt.',
+    'blog.article.cantieri-strade-glarona-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonGlDe;
