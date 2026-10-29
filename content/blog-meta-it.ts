@@ -13628,6 +13628,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.arcisate-ticino-scelta-frontaliere.title': 'Vivere a Arcisate e lavorare in Ticino da frontaliere',
     'blog.article.arcisate-ticino-scelta-frontaliere.excerpt': 'Accordo Frontalieri in vigore dal 1° gennaio 2024 Vecchi frontalieri: esenzione €7\'500 fino al 2033 Nuovi frontalieri: franchigia €10\'000 Canton Ticino: 78\'561',
     'blog.article.arcisate-ticino-scelta-frontaliere.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.vivere-brunate-lavorare-ticino.title': 'Vivere a Brunate e lavorare in Ticino da frontaliere',
+    'blog.article.vivere-brunate-lavorare-ticino.excerpt': 'Guida fiscale e contributiva per chi vive a Brunate e lavora in Ticino, tra nuovo Accordo Frontalieri, imposta alla fonte, esenzioni e voci di busta paga.',
+    'blog.article.vivere-brunate-lavorare-ticino.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaIt;

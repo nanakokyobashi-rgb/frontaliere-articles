@@ -13626,6 +13626,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.arcisate-ticino-scelta-frontaliere.title': 'In Arcisate leben und als Grenzgänger im Tessin arbeiten',
     'blog.article.arcisate-ticino-scelta-frontaliere.excerpt': 'Grenzgängerabkommen in Kraft seit dem 1.',
     'blog.article.arcisate-ticino-scelta-frontaliere.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.vivere-brunate-lavorare-ticino.title': 'In Brunate leben und als Grenzgänger im Tessin arbeiten',
+    'blog.article.vivere-brunate-lavorare-ticino.excerpt': 'Steuer- und Beitragsleitfaden für Personen, die in Brunate leben und im Tessin arbeiten, mit Blick auf das neue Grenzgängerabkommen, die Quellensteuer, Befreiungen und Lohnabrechnungsposten.',
+    'blog.article.vivere-brunate-lavorare-ticino.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaDe;

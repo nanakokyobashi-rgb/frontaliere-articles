@@ -45922,6 +45922,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'vivere-brunate-lavorare-ticino',
+ category: 'fiscale',
+ date: '2026-10-29T23:04:24.829Z',
+ image: '/images/blog/article-vivere-brunate-lavorare-ticino.webp',
+ hasCalculator: true,
+ articleType: 'evergreen',
+ canton: ['TI'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

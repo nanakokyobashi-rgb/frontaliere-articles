@@ -13629,6 +13629,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.arcisate-ticino-scelta-frontaliere.title': 'Vivre à Arcisate et travailler au Tessin en tant que frontalier',
     'blog.article.arcisate-ticino-scelta-frontaliere.excerpt': 'Accord sur les frontaliers en vigueur depuis le 1er janvier 2024 Anciens frontaliers : exonération €7\'500 jusqu\'en 2033 Nouveaux frontaliers : franchise €10\'000 Canton du Tessin : 78\'561',
     'blog.article.arcisate-ticino-scelta-frontaliere.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.vivere-brunate-lavorare-ticino.title': 'Vivre à Brunate et travailler au Tessin en tant que frontalier',
+    'blog.article.vivere-brunate-lavorare-ticino.excerpt': 'Guide fiscal et des cotisations sociales pour les personnes qui vivent à Brunate et travaillent au Tessin, entre le nouvel Accord Frontalieri, l’impôt à la source, les exonérations et les rubriques du bulletin de salaire.',
+    'blog.article.vivere-brunate-lavorare-ticino.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaFr;

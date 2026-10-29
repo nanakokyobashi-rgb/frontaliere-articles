@@ -13627,6 +13627,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.arcisate-ticino-scelta-frontaliere.title': 'Living in Arcisate and working in Ticino as a cross-border commuter',
     'blog.article.arcisate-ticino-scelta-frontaliere.excerpt': 'Cross-border Agreement in force from January 1, 2024 Old cross-border workers: €7\'500 exemption until 2033 New cross-border workers: €10\'000 tax-free allowance Canton Ticino: 78\'561',
     'blog.article.arcisate-ticino-scelta-frontaliere.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.vivere-brunate-lavorare-ticino.title': 'Living in Brunate and working in Ticino as a cross-border commuter',
+    'blog.article.vivere-brunate-lavorare-ticino.excerpt': 'Tax and social security guide for those who live in Brunate and work in Ticino, covering the new Cross-Border Agreement, withholding tax, exemptions, and payslip items.',
+    'blog.article.vivere-brunate-lavorare-ticino.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaEn;
