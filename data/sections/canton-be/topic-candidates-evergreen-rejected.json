@@ -4,46 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-be::https://www.nau.ch/news/wirtschaft/armasuisse-vergibt-60-millionen-auftrag-ohne-ausschreibung-an-sbb-67193635": {
-      "section": "canton-be",
-      "ts": 1793055734524
-    },
-    "canton-be::https://www.nau.ch/news/schweiz/eingriffe-am-system-sollen-die-gesundheitskosten-dampfen-67193621": {
-      "section": "canton-be",
-      "ts": 1793056186709
-    },
-    "canton-be::https://www.nau.ch/blog/paid_post/digitaler-nachlass-in-der-schweiz-was-sie-unbedingt-regeln-sollten-67170397": {
-      "section": "canton-be",
-      "ts": 1793056302887
-    },
-    "canton-be::https://www.nau.ch/sport/eishockey/sc-bern-marc-marchon-fur-drei-spiele-gesperrt-67193559": {
-      "section": "canton-be",
-      "ts": 1793056310860
-    },
-    "canton-be::https://ajour.ch/story/703583/taubenlochschlucht-wird-unter-der-woche-gesperrt": {
-      "section": "canton-be",
-      "ts": 1793068693409
-    },
-    "canton-be::https://ajour.ch/story/703558/faschist-raus-studenten-vertreiben-israels-rechtsaussenminister-vom-campus": {
-      "section": "canton-be",
-      "ts": 1793068695348
-    },
-    "canton-be::https://ajour.ch/story/703588/flechte-dir-deinen-traummann-warum-das-internet-gerade-einen-korbmann-heiss-begehrt": {
-      "section": "canton-be",
-      "ts": 1793068697706
-    },
-    "canton-be::https://ajour.ch/story/703537/das-parlament-darf-sich-von-der-svp-nicht-erpressen-lassen": {
-      "section": "canton-be",
-      "ts": 1793069957345
-    },
-    "canton-be::https://ajour.ch/story/703543/lohnt-es-sich-den-neuen-tatort-aus-franken-zu-schauen-wir-haben-ihn-schon-gesehen": {
-      "section": "canton-be",
-      "ts": 1793069959643
-    },
-    "canton-be::https://ajour.ch/story/703555/wendy-holdener-sechs-stunden-autofahrt-f%c3%bcr-ein-training-am-tag-vor-s%c3%b6lden-lohnt-sich-das": {
-      "section": "canton-be",
-      "ts": 1793069961342
-    },
     "canton-be::https://ajour.ch/story/703994/bern-f%c3%bchrt-neue-sicherheitsmassnahmen-f%c3%bcr-velostationen-ein": {
       "section": "canton-be",
       "ts": 1793103860684
@@ -111,6 +71,38 @@
     "canton-be::https://www.nau.ch/politik/bundeshaus/bundesrat-verabschiedet-strategie-gegen-hitze-und-trockenheit-67194450": {
       "section": "canton-be",
       "ts": 1793213632199
+    },
+    "canton-be::https://ajour.ch/story/704319/die-sbbapp-wird-noch-viel-praktischer-das-sind-die-wichtigsten-neuerungen": {
+      "section": "canton-be",
+      "ts": 1793261541328
+    },
+    "canton-be::https://ajour.ch/story/703951/le-secteur-de-la-sant-propose-six-mesures-pour-matriser-les-cots": {
+      "section": "canton-be",
+      "ts": 1793261543034
+    },
+    "canton-be::https://www.api.news.apps.be.ch/api/atom/news/09ba0824-2cc5-4854-8fb0-7ff6ea83a871": {
+      "section": "canton-be",
+      "ts": 1793261552454
+    },
+    "canton-be::https://www.nau.ch/blog/paid_post/digitaler-nachlass-in-der-schweiz-was-sie-unbedingt-regeln-sollten-67170397": {
+      "section": "canton-be",
+      "ts": 1793261560553
+    },
+    "canton-be::https://www.nau.ch/news/schweiz/geldnot-halfte-der-schweizer-konnte-nur-drei-monate-ohne-lohn-leben-67195049": {
+      "section": "canton-be",
+      "ts": 1793262114940
+    },
+    "canton-be::https://ajour.ch/story/703352/weniger-einsparungen-bei-der-kultur-und-keine-steuererh%c3%b6hung-trotz-defizit": {
+      "section": "canton-be",
+      "ts": 1793264574405
+    },
+    "canton-be::https://ajour.ch/story/704041/cyberangriff-pensionskassen-informieren-unterschiedlich": {
+      "section": "canton-be",
+      "ts": 1793264579201
+    },
+    "canton-be::https://ajour.ch/story/704000/volksschule-mut-zur-kurskorrektur": {
+      "section": "canton-be",
+      "ts": 1793264584145
     }
   }
 }

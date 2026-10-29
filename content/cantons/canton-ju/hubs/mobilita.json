@@ -4,22 +4,22 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "mobilita",
-  "updatedAt": "2026-10-28T17:02:29.143Z",
-  "contentHash": "c4723ea3bcd856629ca9234bb2c45845929e0d5057d19a932789178d06552e13",
+  "updatedAt": "2026-10-29T08:53:42.745Z",
+  "contentHash": "f6dfd90ca4ada436695c5cd01e03fdcc695bf061b7a589e492609c01eca49b75",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-27T23:59:59.000Z",
+      "updatedAt": "2026-10-28T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-28T13:37:22.501Z",
-      "keyFacts": 1
+      "updatedAt": "2026-10-29T01:18:28.468Z",
+      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-28T11:41:09.250Z",
+      "updatedAt": "2026-10-28T21:56:57.371Z",
       "keyFacts": 0
     }
   ],
@@ -33,19 +33,14 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Boncourt-Delle (A16), settimana conclusa: 27 ottobre 2026"
-        },
-        {
-          "label": "Chiusure stradali in corso o imminenti",
-          "value": "1",
-          "note": "segnalazioni aggiornate: 28 ottobre 2026"
+          "note": "Boncourt-Delle (A16), settimana conclusa: 28 ottobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 21 ottobre 2026 – 27 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 22 ottobre 2026 – 28 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Boncourt-Delle (A16)",
@@ -68,19 +63,13 @@
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-27T23:59:59.000Z"
+          "updatedAt": "2026-10-28T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
           "title": "Chiusure, cantieri e disagi",
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
-            {
-              "label": "A16 Delémont <-> Boncourt tra Svincolo autostradale Porrentruy Ouest E Svincolo autostradale Porrentruy Est Situazione: chiusa cantiere, lunghezza [km] 3.9",
-              "value": "Chiusura",
-              "detail": "fine prevista: 29 ottobre 2026",
-              "date": "2026-10-26T20:00:00.000Z"
-            },
             {
               "label": "A16 Bienne <-> Boncourt tra Svincolo autostradale Bure E Raccordo autostradale Diramazione Bözingenfeld Situazione: problemi di traffico Causa: convoglio militare",
               "value": "Traffico",
@@ -89,7 +78,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-28T13:37:22.501Z"
+          "updatedAt": "2026-10-29T01:18:28.468Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -107,10 +96,16 @@
               "url": "https://www.les-cj.ch/InfoTrafic/Tramelan-Place-du-Marche-Arret-de-bus-non-desservi-du-05-au-09-octobre-2026"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "CFF Cargo ferma il trasporto del legno ad Alle da dicembre",
+          "url": "/articoli-giura/cff-cargo-rinuncia-legno-alle/",
+          "excerpt": "Da dicembre CFF Cargo sopprime il servizio per i carri singoli Il legno dall'Ajoie passerà alla strada La piattaforma di Alle costò CHF 14 milioni nel 2021",
+          "date": "2026-10-29T08:45:30.807Z"
+        },
         {
           "title": "Ritardo cantiere Stockmar: rientro alunni a gennaio 2028",
           "url": "/articoli-giura/stockmar-ritardo-cantiere-2027/",
@@ -149,7 +144,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-29T08:53:42.745Z"
     },
     "en": {
       "canton": "JU",
@@ -160,19 +155,14 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Boncourt-Delle (A16), week ending 27 October 2026"
-        },
-        {
-          "label": "Road closures in force or imminent",
-          "value": "1",
-          "note": "reports as of 28 October 2026"
+          "note": "Boncourt-Delle (A16), week ending 28 October 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 21 October 2026 to 27 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 22 October 2026 to 28 October 2026, fastest first.",
           "items": [
             {
               "label": "Boncourt-Delle (A16)",
@@ -195,19 +185,13 @@
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-27T23:59:59.000Z"
+          "updatedAt": "2026-10-28T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
           "title": "Closures, roadworks and disruptions",
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
-            {
-              "label": "A16 Delémont <-> Boncourt tra Svincolo autostradale Porrentruy Ouest E Svincolo autostradale Porrentruy Est Situazione: chiusa cantiere, lunghezza [km] 3.9",
-              "value": "Closure",
-              "detail": "until 29 October 2026",
-              "date": "2026-10-26T20:00:00.000Z"
-            },
             {
               "label": "A16 Bienne <-> Boncourt tra Svincolo autostradale Bure E Raccordo autostradale Diramazione Bözingenfeld Situazione: problemi di traffico Causa: convoglio militare",
               "value": "Traffic",
@@ -216,7 +200,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-28T13:37:22.501Z"
+          "updatedAt": "2026-10-29T01:18:28.468Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -234,10 +218,16 @@
               "url": "https://www.les-cj.ch/InfoTrafic/Tramelan-Place-du-Marche-Arret-de-bus-non-desservi-du-05-au-09-octobre-2026"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "CFF Cargo stops the transport of wood in Alle from December",
+          "url": "/en/jura-articles/cff-cargo-renounces-wood-transport-alle/",
+          "excerpt": "CFF Cargo discontinues service for single wagons from December Wood from Ajoie will pass to the road Alle's platform cost CHF 14 million in 2021 The transport",
+          "date": "2026-10-29T08:45:30.807Z"
+        },
         {
           "title": "Stockmar site delay: return of students in January 2028",
           "url": "/en/jura-articles/stockmar-construction-delay-2027/",
@@ -276,7 +266,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-29T08:53:42.745Z"
     },
     "de": {
       "canton": "JU",
@@ -287,19 +277,14 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Boncourt-Delle (A16), Woche bis 27. Oktober 2026"
-        },
-        {
-          "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "1",
-          "note": "Meldungen vom 28. Oktober 2026"
+          "note": "Boncourt-Delle (A16), Woche bis 28. Oktober 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 21. Oktober 2026 bis 27. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 22. Oktober 2026 bis 28. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Boncourt-Delle (A16)",
@@ -322,19 +307,13 @@
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-27T23:59:59.000Z"
+          "updatedAt": "2026-10-28T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
           "title": "Sperrungen, Baustellen und Störungen",
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
-            {
-              "label": "A16 Delsberg <-> Boncourt zwischen Anschluss Porrentruy-West und Anschluss Porrentruy-Ost Sachlage: Strecke gesperrt Baustelle, Länge [km] 3.9",
-              "value": "Sperrung",
-              "detail": "bis 29. Oktober 2026",
-              "date": "2026-10-26T20:00:00.000Z"
-            },
             {
               "label": "A16 Biel <-> Boncourt zwischen Anschluss Bure und Autobahndreieck Verzweigung Bözingenfeld Sachlage: Verkehrsbehinderung Ursache: Militärkolonnen",
               "value": "Verkehr",
@@ -343,7 +322,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-28T13:37:22.501Z"
+          "updatedAt": "2026-10-29T01:18:28.468Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -361,10 +340,16 @@
               "url": "https://www.les-cj.ch/InfoTrafic/Tramelan-Place-du-Marche-Arret-de-bus-non-desservi-du-05-au-09-octobre-2026"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "CFF Cargo stellt ab Dezember den Holztransport in Alle ein",
+          "url": "/de/jura-artikel/sbb-cargo-verzichtet-auf-holztransport-alle/",
+          "excerpt": "CFF Cargo stellt ab Dezember den Betrieb für Einzelwagen ein Wald von Ajoie wird zur Straße übergehen Die Plattform von Alle kostete 2021 14 Millionen CHF",
+          "date": "2026-10-29T08:45:30.807Z"
+        },
         {
           "title": "Baustellenverzögerung Stockmar: Rückkehr der Schüler im Januar 2028",
           "url": "/de/jura-artikel/stockmar-bauverzoegerung-2027/",
@@ -403,7 +388,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-29T08:53:42.745Z"
     },
     "fr": {
       "canton": "JU",
@@ -414,19 +399,14 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Boncourt-Delle (A16), semaine jusqu’au 27 octobre 2026"
-        },
-        {
-          "label": "Fermetures de routes en cours ou imminentes",
-          "value": "1",
-          "note": "signalements au 28 octobre 2026"
+          "note": "Boncourt-Delle (A16), semaine jusqu’au 28 octobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 21 octobre 2026 au 27 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 22 octobre 2026 au 28 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Boncourt-Delle (A16)",
@@ -449,19 +429,13 @@
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-27T23:59:59.000Z"
+          "updatedAt": "2026-10-28T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
           "title": "Fermetures, chantiers et perturbations",
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
-            {
-              "label": "A16 Delémont <-> Boncourt entre Jonction autoroutière Porrentruy-Ouest et Jonction autoroutière Porrentruy-Est Situation: fermé travaux, longueur [km] 3.9",
-              "value": "Fermeture",
-              "detail": "jusqu’au 29 octobre 2026",
-              "date": "2026-10-26T20:00:00.000Z"
-            },
             {
               "label": "A16 Bienne <-> Boncourt entre Jonction autoroutière Bure et Echangeur Echangeur de Champs de Boujean Situation: trafic perturbé Raison: convoi militaire",
               "value": "Trafic",
@@ -470,7 +444,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-28T13:37:22.501Z"
+          "updatedAt": "2026-10-29T01:18:28.468Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -488,10 +462,16 @@
               "url": "https://www.les-cj.ch/InfoTrafic/Tramelan-Place-du-Marche-Arret-de-bus-non-desservi-du-05-au-09-octobre-2026"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "CFF Cargo arrête le transport de bois à Alle à partir de décembre",
+          "url": "/fr/articles-jura/cff-cargo-renonce-transport-bois-alle/",
+          "excerpt": "CFF Cargo cesse le service pour les wagons individuels à partir de décembre Le bois d'Ajoie passera à la route La plateforme d'Alle a coûté 14 millions de CHF",
+          "date": "2026-10-29T08:45:30.807Z"
+        },
         {
           "title": "Retard chantier Stockmar : rentrée des élèves en janvier 2028",
           "url": "/fr/articles-jura/stockmar-retard-chantier-2027/",
@@ -530,7 +510,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-29T08:53:42.745Z"
     }
   }
 }

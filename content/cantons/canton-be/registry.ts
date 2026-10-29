@@ -226,4 +226,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'credito-volksschule-breitfeld',
+ category: 'novita',
+ date: '2026-10-29T08:31:57.808Z',
+ image: '/images/blog/article-credito-volksschule-breitfeld.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['BE'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

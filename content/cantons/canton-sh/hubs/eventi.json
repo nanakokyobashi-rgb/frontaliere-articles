@@ -4,17 +4,17 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "eventi",
-  "updatedAt": "2026-10-27T00:15:17.334Z",
-  "contentHash": "7aa290d16b0909be4d77efd5ddeda968fe665247b949818e20c50903f98feb31",
+  "updatedAt": "2026-10-29T07:40:41.678Z",
+  "contentHash": "19d028d466765fb7d069814de4997fc4ce667dd9b8a6fcbc19691c4b85581baf",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-26T18:30:43.613Z",
+      "updatedAt": "2026-10-28T19:25:39.771Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-26T17:41:28.137Z",
+      "updatedAt": "2026-10-28T21:56:57.371Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "26",
+          "value": "23",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,24 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Vortragsabend: Garten der Zukunft",
-              "detail": "Pavillon im Park",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/schaffhausen/vortragsabend-garten-der-zukunft_ANcHcfn"
-            },
-            {
-              "label": "Vortragsabend: Garten der Zukunft",
-              "detail": "Pavillon im Park, Schaffhausen",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vortragsabend-garten-der-zukunft/"
-            },
-            {
-              "label": "Pippo Pollina: «LA VITA È BELLA COSÌ COM’È»",
-              "detail": "Stadttheater Schaffhausen, Schaffhausen",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/pippo-pollina-la-vita-e-bella-cosi-come-2/"
-            },
             {
               "label": "speis&trank stories with Annina Keller: Rösti, sugar cane and love",
               "detail": "Haberhaus Bühne, Schaffhausen",
@@ -96,11 +78,29 @@
               "detail": "Kunstschür, Stein am Rhein",
               "date": "2026-10-31",
               "url": "https://www.guidle.com/it/evenements/musique/stein-am-rhein/duo-espi-saxophone-et-piano-un-melange-magique_A8eP3fU"
+            },
+            {
+              "label": "Die Zwillinge – «Voll auf die 2»",
+              "detail": "Ticketino, Neuhausen am Rheinfall",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/die-zwillinge-voll-auf-die-2-2/"
+            },
+            {
+              "label": "Latin Project SchärerBommer",
+              "detail": "Cafe Sabato im Weingut Stoll",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/osterfingen/latin-project-schaererbommer_A4YvxPg"
+            },
+            {
+              "label": "Auf den Spuren einer vergessenen Kultur: das Landjudentum am Hochrhein",
+              "detail": "Bahnhof SBB Schaffhausen, Schaffhausen",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/auf-den-spuren-einer-vergessenen-kultur-das-landjudentum-am-hochrhein/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/sciaffusa/",
-          "updatedAt": "2026-10-26T18:30:43.613Z"
+          "updatedAt": "2026-10-28T19:25:39.771Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -133,7 +133,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-26T17:41:28.137Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -155,7 +155,7 @@
           "url": "/eventi/sciaffusa/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "en": {
       "canton": "SH",
@@ -165,7 +165,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "26",
+          "value": "23",
           "note": "from the site’s events calendar"
         }
       ],
@@ -175,24 +175,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Vortragsabend: Garten der Zukunft",
-              "detail": "Pavillon im Park",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/schaffhausen/vortragsabend-garten-der-zukunft_ANcHcfn"
-            },
-            {
-              "label": "Vortragsabend: Garten der Zukunft",
-              "detail": "Pavillon im Park, Schaffhausen",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vortragsabend-garten-der-zukunft/"
-            },
-            {
-              "label": "Pippo Pollina: «LA VITA È BELLA COSÌ COM’È»",
-              "detail": "Stadttheater Schaffhausen, Schaffhausen",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/pippo-pollina-la-vita-e-bella-cosi-come-2/"
-            },
             {
               "label": "speis&trank stories with Annina Keller: Rösti, sugar cane and love",
               "detail": "Haberhaus Bühne, Schaffhausen",
@@ -234,11 +216,29 @@
               "detail": "Kunstschür, Stein am Rhein",
               "date": "2026-10-31",
               "url": "https://www.guidle.com/it/evenements/musique/stein-am-rhein/duo-espi-saxophone-et-piano-un-melange-magique_A8eP3fU"
+            },
+            {
+              "label": "Die Zwillinge – «Voll auf die 2»",
+              "detail": "Ticketino, Neuhausen am Rheinfall",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/die-zwillinge-voll-auf-die-2-2/"
+            },
+            {
+              "label": "Latin Project SchärerBommer",
+              "detail": "Cafe Sabato im Weingut Stoll",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/osterfingen/latin-project-schaererbommer_A4YvxPg"
+            },
+            {
+              "label": "Auf den Spuren einer vergessenen Kultur: das Landjudentum am Hochrhein",
+              "detail": "Bahnhof SBB Schaffhausen, Schaffhausen",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/auf-den-spuren-einer-vergessenen-kultur-das-landjudentum-am-hochrhein/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schaffhausen/",
-          "updatedAt": "2026-10-26T18:30:43.613Z"
+          "updatedAt": "2026-10-28T19:25:39.771Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -271,7 +271,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-26T17:41:28.137Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -293,7 +293,7 @@
           "url": "/en/events/schaffhausen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "de": {
       "canton": "SH",
@@ -303,7 +303,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "26",
+          "value": "23",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -313,24 +313,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Vortragsabend: Garten der Zukunft",
-              "detail": "Pavillon im Park",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/schaffhausen/vortragsabend-garten-der-zukunft_ANcHcfn"
-            },
-            {
-              "label": "Vortragsabend: Garten der Zukunft",
-              "detail": "Pavillon im Park, Schaffhausen",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vortragsabend-garten-der-zukunft/"
-            },
-            {
-              "label": "Pippo Pollina: «LA VITA È BELLA COSÌ COM’È»",
-              "detail": "Stadttheater Schaffhausen, Schaffhausen",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/pippo-pollina-la-vita-e-bella-cosi-come-2/"
-            },
             {
               "label": "speis&trank geschichten mit Annina Keller: Rösti, Zuckerrohr und Liebe",
               "detail": "Haberhaus Bühne, Schaffhausen",
@@ -372,11 +354,29 @@
               "detail": "Kunstschür, Stein am Rhein",
               "date": "2026-10-31",
               "url": "https://www.guidle.com/it/evenements/musique/stein-am-rhein/duo-espi-saxophone-et-piano-un-melange-magique_A8eP3fU"
+            },
+            {
+              "label": "Die Zwillinge – «Voll auf die 2»",
+              "detail": "Ticketino, Neuhausen am Rheinfall",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/die-zwillinge-voll-auf-die-2-2/"
+            },
+            {
+              "label": "Latin Project SchärerBommer",
+              "detail": "Cafe Sabato im Weingut Stoll",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/osterfingen/latin-project-schaererbommer_A4YvxPg"
+            },
+            {
+              "label": "Auf den Spuren einer vergessenen Kultur: das Landjudentum am Hochrhein",
+              "detail": "Bahnhof SBB Schaffhausen, Schaffhausen",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/auf-den-spuren-einer-vergessenen-kultur-das-landjudentum-am-hochrhein/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schaffhausen/",
-          "updatedAt": "2026-10-26T18:30:43.613Z"
+          "updatedAt": "2026-10-28T19:25:39.771Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -409,7 +409,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-26T17:41:28.137Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -431,7 +431,7 @@
           "url": "/de/veranstaltungen/schaffhausen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "fr": {
       "canton": "SH",
@@ -441,7 +441,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "26",
+          "value": "23",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -451,24 +451,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Vortragsabend: Garten der Zukunft",
-              "detail": "Pavillon im Park",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/schaffhausen/vortragsabend-garten-der-zukunft_ANcHcfn"
-            },
-            {
-              "label": "Vortragsabend: Garten der Zukunft",
-              "detail": "Pavillon im Park, Schaffhausen",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vortragsabend-garten-der-zukunft/"
-            },
-            {
-              "label": "Pippo Pollina: «LA VITA È BELLA COSÌ COM’È»",
-              "detail": "Stadttheater Schaffhausen, Schaffhausen",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/pippo-pollina-la-vita-e-bella-cosi-come-2/"
-            },
             {
               "label": "speis&trank stichten mit Annina Keller : Rösti, canne à sucre et amour",
               "detail": "Haberhaus Bühne, Schaffhausen",
@@ -510,11 +492,29 @@
               "detail": "Kunstschür, Stein am Rhein",
               "date": "2026-10-31",
               "url": "https://www.guidle.com/it/evenements/musique/stein-am-rhein/duo-espi-saxophone-et-piano-un-melange-magique_A8eP3fU"
+            },
+            {
+              "label": "Die Zwillinge – «Voll auf die 2»",
+              "detail": "Ticketino, Neuhausen am Rheinfall",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/die-zwillinge-voll-auf-die-2-2/"
+            },
+            {
+              "label": "Latin Project SchärerBommer",
+              "detail": "Cafe Sabato im Weingut Stoll",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/osterfingen/latin-project-schaererbommer_A4YvxPg"
+            },
+            {
+              "label": "Auf den Spuren einer vergessenen Kultur: das Landjudentum am Hochrhein",
+              "detail": "Bahnhof SBB Schaffhausen, Schaffhausen",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/auf-den-spuren-einer-vergessenen-kultur-das-landjudentum-am-hochrhein/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schaffhouse/",
-          "updatedAt": "2026-10-26T18:30:43.613Z"
+          "updatedAt": "2026-10-28T19:25:39.771Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -547,7 +547,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-26T17:41:28.137Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -569,7 +569,7 @@
           "url": "/fr/evenements/schaffhouse/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     }
   }
 }

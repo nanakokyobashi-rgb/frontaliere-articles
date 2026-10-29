@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "servizi",
-  "updatedAt": "2026-10-28T22:28:15.944Z",
-  "contentHash": "b058a54a17a2000f88fcee7eb76bf7c8d15565b72b86546592883232710fe6ae",
+  "updatedAt": "2026-10-29T08:53:42.745Z",
+  "contentHash": "895692e07380c507cf29d0bd948be6a32c2d837cc7abca7f91274637cca0d08f",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-28T12:51:45.580Z",
+      "updatedAt": "2026-10-29T05:46:49.040Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-28T15:15:36.348Z",
+      "updatedAt": "2026-10-29T06:03:12.578Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-28T11:41:09.250Z",
+      "updatedAt": "2026-10-28T21:56:57.371Z",
       "keyFacts": 0
     }
   ],
@@ -88,16 +88,16 @@
               "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=948&locale=fr_CH"
             },
             {
-              "label": "VS601111",
+              "label": "VS517000",
               "value": "200 CHF",
               "detail": "offerta attuale",
               "date": "2026-11-16T14:00:00.000Z",
-              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=951&locale=fr_CH"
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=950&locale=fr_CH"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://ecari.vs.ch/ecari-auction/ui/app/init?locale=fr_CH",
-          "updatedAt": "2026-10-28T12:51:45.580Z"
+          "updatedAt": "2026-10-29T05:46:49.040Z"
         },
         {
           "id": "meteo",
@@ -106,18 +106,23 @@
           "items": [
             {
               "label": "Sion",
-              "value": "15 °C",
-              "detail": "oggi da 9 a 16 °C"
+              "value": "8 °C",
+              "detail": "oggi da 7 a 17 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-28T15:15:36.348Z"
+          "updatedAt": "2026-10-29T06:03:12.578Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Séverine Charbonnet-Lusson obtient le mérite soignant 2026",
+              "date": "2026-10-28",
+              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/28/severine-charbonnet-lusson-obtient-le-merite-soignant-2026"
+            },
             {
               "label": "Reconnaître et traiter un AVC",
               "date": "2026-10-26",
@@ -142,14 +147,9 @@
               "label": "Haut-Valais: Caroline Berchtold-Hutter nommée directrice des soins & MTT",
               "date": "2026-10-02",
               "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/2/haut-valais-caroline-berchtold-hutter-nommee-directrice-des-soins-mtt"
-            },
-            {
-              "label": "Primes d’assurance-maladie 2027 - Une nouvelle hausse difficilement justifiable",
-              "date": "2026-09-29",
-              "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51178036"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -229,7 +229,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-28T22:28:15.944Z"
+      "updatedAt": "2026-10-29T08:53:42.745Z"
     },
     "en": {
       "canton": "VS",
@@ -290,16 +290,16 @@
               "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=948&locale=fr_CH"
             },
             {
-              "label": "VS601111",
+              "label": "VS517000",
               "value": "200 CHF",
               "detail": "current bid",
               "date": "2026-11-16T14:00:00.000Z",
-              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=951&locale=fr_CH"
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=950&locale=fr_CH"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://ecari.vs.ch/ecari-auction/ui/app/init?locale=fr_CH",
-          "updatedAt": "2026-10-28T12:51:45.580Z"
+          "updatedAt": "2026-10-29T05:46:49.040Z"
         },
         {
           "id": "meteo",
@@ -308,18 +308,23 @@
           "items": [
             {
               "label": "Sion",
-              "value": "15 °C",
-              "detail": "today from 9 to 16 °C"
+              "value": "8 °C",
+              "detail": "today from 7 to 17 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-28T15:15:36.348Z"
+          "updatedAt": "2026-10-29T06:03:12.578Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Séverine Charbonnet-Lusson obtient le mérite soignant 2026",
+              "date": "2026-10-28",
+              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/28/severine-charbonnet-lusson-obtient-le-merite-soignant-2026"
+            },
             {
               "label": "Reconnaître et traiter un AVC",
               "date": "2026-10-26",
@@ -344,14 +349,9 @@
               "label": "Haut-Valais: Caroline Berchtold-Hutter nommée directrice des soins & MTT",
               "date": "2026-10-02",
               "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/2/haut-valais-caroline-berchtold-hutter-nommee-directrice-des-soins-mtt"
-            },
-            {
-              "label": "Primes d’assurance-maladie 2027 - Une nouvelle hausse difficilement justifiable",
-              "date": "2026-09-29",
-              "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51178036"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -427,7 +427,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-28T22:28:15.944Z"
+      "updatedAt": "2026-10-29T08:53:42.745Z"
     },
     "de": {
       "canton": "VS",
@@ -488,16 +488,16 @@
               "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=948&locale=fr_CH"
             },
             {
-              "label": "VS601111",
+              "label": "VS517000",
               "value": "200 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-11-16T14:00:00.000Z",
-              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=951&locale=fr_CH"
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=950&locale=fr_CH"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://ecari.vs.ch/ecari-auction/ui/app/init?locale=fr_CH",
-          "updatedAt": "2026-10-28T12:51:45.580Z"
+          "updatedAt": "2026-10-29T05:46:49.040Z"
         },
         {
           "id": "meteo",
@@ -506,18 +506,23 @@
           "items": [
             {
               "label": "Sion",
-              "value": "15 °C",
-              "detail": "heute 9 bis 16 °C"
+              "value": "8 °C",
+              "detail": "heute 7 bis 17 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-28T15:15:36.348Z"
+          "updatedAt": "2026-10-29T06:03:12.578Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Séverine Charbonnet-Lusson obtient le mérite soignant 2026",
+              "date": "2026-10-28",
+              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/28/severine-charbonnet-lusson-obtient-le-merite-soignant-2026"
+            },
             {
               "label": "Reconnaître et traiter un AVC",
               "date": "2026-10-26",
@@ -542,14 +547,9 @@
               "label": "Haut-Valais: Caroline Berchtold-Hutter nommée directrice des soins & MTT",
               "date": "2026-10-02",
               "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/2/haut-valais-caroline-berchtold-hutter-nommee-directrice-des-soins-mtt"
-            },
-            {
-              "label": "Primes d’assurance-maladie 2027 - Une nouvelle hausse difficilement justifiable",
-              "date": "2026-09-29",
-              "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51178036"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -625,7 +625,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-28T22:28:15.944Z"
+      "updatedAt": "2026-10-29T08:53:42.745Z"
     },
     "fr": {
       "canton": "VS",
@@ -686,16 +686,16 @@
               "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=948&locale=fr_CH"
             },
             {
-              "label": "VS601111",
+              "label": "VS517000",
               "value": "200 CHF",
               "detail": "offre actuelle",
               "date": "2026-11-16T14:00:00.000Z",
-              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=951&locale=fr_CH"
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=950&locale=fr_CH"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://ecari.vs.ch/ecari-auction/ui/app/init?locale=fr_CH",
-          "updatedAt": "2026-10-28T12:51:45.580Z"
+          "updatedAt": "2026-10-29T05:46:49.040Z"
         },
         {
           "id": "meteo",
@@ -704,18 +704,23 @@
           "items": [
             {
               "label": "Sion",
-              "value": "15 °C",
-              "detail": "aujourd’hui de 9 à 16 °C"
+              "value": "8 °C",
+              "detail": "aujourd’hui de 7 à 17 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-28T15:15:36.348Z"
+          "updatedAt": "2026-10-29T06:03:12.578Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Séverine Charbonnet-Lusson obtient le mérite soignant 2026",
+              "date": "2026-10-28",
+              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/28/severine-charbonnet-lusson-obtient-le-merite-soignant-2026"
+            },
             {
               "label": "Reconnaître et traiter un AVC",
               "date": "2026-10-26",
@@ -740,14 +745,9 @@
               "label": "Haut-Valais: Caroline Berchtold-Hutter nommée directrice des soins & MTT",
               "date": "2026-10-02",
               "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/2/haut-valais-caroline-berchtold-hutter-nommee-directrice-des-soins-mtt"
-            },
-            {
-              "label": "Primes d’assurance-maladie 2027 - Une nouvelle hausse difficilement justifiable",
-              "date": "2026-09-29",
-              "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51178036"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -819,7 +819,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-28T22:28:15.944Z"
+      "updatedAt": "2026-10-29T08:53:42.745Z"
     }
   }
 }

@@ -4,22 +4,22 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-28T10:03:35.525Z",
-  "contentHash": "7608ad878bc4780e8d785cd3ea94d794f55b40b624170b9dacf28aba6f5f255e",
+  "updatedAt": "2026-10-29T08:53:42.745Z",
+  "contentHash": "2db879202592a6ceb258e708de6429868e55d8f8c143d0649d18810730202cc4",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-27T23:59:59.000Z",
+      "updatedAt": "2026-10-28T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-28T06:23:27.523Z",
+      "updatedAt": "2026-10-29T01:18:28.468Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-27T21:31:39.250Z",
+      "updatedAt": "2026-10-28T21:56:57.371Z",
       "keyFacts": 0
     }
   ],
@@ -33,24 +33,24 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Anières, settimana conclusa: 27 ottobre 2026"
+          "note": "Anières, settimana conclusa: 28 ottobre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "12",
-          "note": "segnalazioni aggiornate: 28 ottobre 2026"
+          "value": "9",
+          "note": "segnalazioni aggiornate: 29 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "4",
-          "note": "segnalazioni aggiornate: 28 ottobre 2026"
+          "note": "segnalazioni aggiornate: 29 ottobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 21 ottobre 2026 – 27 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 22 ottobre 2026 – 28 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Anières",
@@ -90,44 +90,26 @@
             },
             {
               "label": "Meyrin / CERN",
-              "value": "0,3 min",
+              "value": "0,5 min",
               "detail": "48 rilevazioni",
               "url": "/traffico-dogane/meyrin-cern/oggi/"
             },
             {
               "label": "Perly (Perly-Certoux)",
-              "value": "1 min",
+              "value": "1,5 min",
               "detail": "48 rilevazioni",
               "url": "/traffico-dogane/perly/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-27T23:59:59.000Z"
+          "updatedAt": "2026-10-28T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
           "title": "Chiusure, cantieri e disagi",
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
-            {
-              "label": "A1 Genève -> Lausanne Svincolo autostradale Genève Aéroport Situazione: raccordo autostradale chiuso in entrata cantiere",
-              "value": "Chiusura",
-              "detail": "fine prevista: 29 ottobre 2026",
-              "date": "2026-09-24T08:06:00.000Z"
-            },
-            {
-              "label": "A1 Genève -> Lausanne tra Svincolo autostradale Genève Aéroport E Svincolo autostradale Versoix Situazione: chiusa cantiere, lunghezza [km] 2.8",
-              "value": "Chiusura",
-              "detail": "fine prevista: 29 ottobre 2026",
-              "date": "2026-09-24T08:12:00.000Z"
-            },
-            {
-              "label": "A1 Lausanne -> Genève tra Svincolo autostradale Grand-Saconnex E Svincolo autostradale Genève Aéroport Situazione: chiusa cantiere, lunghezza [km] 0.4 Limitazione del traffico: corsia chiusa…",
-              "value": "Chiusura",
-              "detail": "fine prevista: 29 ottobre 2026",
-              "date": "2026-09-24T08:13:00.000Z"
-            },
             {
               "label": "A1 Genève <-> Lausanne Galleria Galleria Chèvres Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 0.4",
               "value": "Chiusura",
@@ -157,10 +139,28 @@
               "value": "Chiusura",
               "detail": "fine prevista: 6 novembre 2026",
               "date": "2026-10-12T07:02:00.000Z"
+            },
+            {
+              "label": "A1 Lausanne -> Genève Svincolo autostradale Genève Aéroport Situazione: raccordo autostradale chiuso in entrata cantiere",
+              "value": "Chiusura",
+              "detail": "fine prevista: 3 novembre 2026",
+              "date": "2026-10-21T20:00:00.000Z"
+            },
+            {
+              "label": "A1 Lausanne -> Genève tra Svincolo autostradale Bernex E Svincolo autostradale Perly Nord Situazione: chiusa cantiere, lunghezza [km] 2.12",
+              "value": "Chiusura",
+              "detail": "fine prevista: 3 novembre 2026",
+              "date": "2026-11-02T21:15:00.000Z"
+            },
+            {
+              "label": "A1 Genève -> Lausanne Svincolo autostradale Perly Sud Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 3.2",
+              "value": "Chiusura",
+              "detail": "fine prevista: 4 novembre 2026",
+              "date": "2026-11-03T21:15:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-28T06:23:27.523Z"
+          "updatedAt": "2026-10-29T01:18:28.468Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -198,7 +198,7 @@
               "url": "https://www.ge.ch/node/38844"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -258,7 +258,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-28T10:03:35.525Z"
+      "updatedAt": "2026-10-29T08:53:42.745Z"
     },
     "en": {
       "canton": "GE",
@@ -269,24 +269,24 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Anières, week ending 27 October 2026"
+          "note": "Anières, week ending 28 October 2026"
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "12",
-          "note": "reports as of 28 October 2026"
+          "value": "9",
+          "note": "reports as of 29 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "4",
-          "note": "reports as of 28 October 2026"
+          "note": "reports as of 29 October 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 21 October 2026 to 27 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 22 October 2026 to 28 October 2026, fastest first.",
           "items": [
             {
               "label": "Anières",
@@ -326,44 +326,26 @@
             },
             {
               "label": "Meyrin / CERN",
-              "value": "0.3 min",
+              "value": "0.5 min",
               "detail": "48 readings",
               "url": "/en/border-wait/meyrin-cern/today/"
             },
             {
               "label": "Perly (Perly-Certoux)",
-              "value": "1 min",
+              "value": "1.5 min",
               "detail": "48 readings",
               "url": "/en/border-wait/perly/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-27T23:59:59.000Z"
+          "updatedAt": "2026-10-28T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
           "title": "Closures, roadworks and disruptions",
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
-            {
-              "label": "A1 Genève -> Lausanne Svincolo autostradale Genève Aéroport Situazione: raccordo autostradale chiuso in entrata cantiere",
-              "value": "Closure",
-              "detail": "until 29 October 2026",
-              "date": "2026-09-24T08:06:00.000Z"
-            },
-            {
-              "label": "A1 Genève -> Lausanne tra Svincolo autostradale Genève Aéroport E Svincolo autostradale Versoix Situazione: chiusa cantiere, lunghezza [km] 2.8",
-              "value": "Closure",
-              "detail": "until 29 October 2026",
-              "date": "2026-09-24T08:12:00.000Z"
-            },
-            {
-              "label": "A1 Lausanne -> Genève tra Svincolo autostradale Grand-Saconnex E Svincolo autostradale Genève Aéroport Situazione: chiusa cantiere, lunghezza [km] 0.4 Limitazione del traffico: corsia chiusa…",
-              "value": "Closure",
-              "detail": "until 29 October 2026",
-              "date": "2026-09-24T08:13:00.000Z"
-            },
             {
               "label": "A1 Genève <-> Lausanne Galleria Galleria Chèvres Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 0.4",
               "value": "Closure",
@@ -393,10 +375,28 @@
               "value": "Closure",
               "detail": "until 6 November 2026",
               "date": "2026-10-12T07:02:00.000Z"
+            },
+            {
+              "label": "A1 Lausanne -> Genève Svincolo autostradale Genève Aéroport Situazione: raccordo autostradale chiuso in entrata cantiere",
+              "value": "Closure",
+              "detail": "until 3 November 2026",
+              "date": "2026-10-21T20:00:00.000Z"
+            },
+            {
+              "label": "A1 Lausanne -> Genève tra Svincolo autostradale Bernex E Svincolo autostradale Perly Nord Situazione: chiusa cantiere, lunghezza [km] 2.12",
+              "value": "Closure",
+              "detail": "until 3 November 2026",
+              "date": "2026-11-02T21:15:00.000Z"
+            },
+            {
+              "label": "A1 Genève -> Lausanne Svincolo autostradale Perly Sud Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 3.2",
+              "value": "Closure",
+              "detail": "until 4 November 2026",
+              "date": "2026-11-03T21:15:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-28T06:23:27.523Z"
+          "updatedAt": "2026-10-29T01:18:28.468Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -434,7 +434,7 @@
               "url": "https://www.ge.ch/node/38844"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -494,7 +494,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-28T10:03:35.525Z"
+      "updatedAt": "2026-10-29T08:53:42.745Z"
     },
     "de": {
       "canton": "GE",
@@ -505,24 +505,24 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Anières, Woche bis 27. Oktober 2026"
+          "note": "Anières, Woche bis 28. Oktober 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "12",
-          "note": "Meldungen vom 28. Oktober 2026"
+          "value": "9",
+          "note": "Meldungen vom 29. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "4",
-          "note": "Meldungen vom 28. Oktober 2026"
+          "note": "Meldungen vom 29. Oktober 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 21. Oktober 2026 bis 27. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 22. Oktober 2026 bis 28. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Anières",
@@ -562,44 +562,26 @@
             },
             {
               "label": "Meyrin / CERN",
-              "value": "0.3 Min.",
+              "value": "0.5 Min.",
               "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/meyrin-cern/heute/"
             },
             {
               "label": "Perly (Perly-Certoux)",
-              "value": "1 Min.",
+              "value": "1.5 Min.",
               "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/perly/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-27T23:59:59.000Z"
+          "updatedAt": "2026-10-28T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
           "title": "Sperrungen, Baustellen und Störungen",
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
-            {
-              "label": "A1 Genf -> Lausanne Anschluss Flughafen Genf Sachlage: Einfahrt gesperrt Baustelle",
-              "value": "Sperrung",
-              "detail": "bis 29. Oktober 2026",
-              "date": "2026-09-24T08:06:00.000Z"
-            },
-            {
-              "label": "A1 Genf -> Lausanne zwischen Anschluss Flughafen Genf und Anschluss Versoix Sachlage: Strecke gesperrt Baustelle, Länge [km] 2.8",
-              "value": "Sperrung",
-              "detail": "bis 29. Oktober 2026",
-              "date": "2026-09-24T08:12:00.000Z"
-            },
-            {
-              "label": "A1 Lausanne -> Genf zwischen Anschluss Grand-Saconnex und Anschluss Flughafen Genf Sachlage: Strecke gesperrt Baustelle, Länge [km] 0.4 Verkehrsführung: Fahrstreifen gesperrt Zusatz 1…",
-              "value": "Sperrung",
-              "detail": "bis 29. Oktober 2026",
-              "date": "2026-09-24T08:13:00.000Z"
-            },
             {
               "label": "A1 Genf <-> Lausanne Tunnel Chèvres-Tunnel Sachlage: Einfahrt gesperrt Baustelle, Länge [km] 0.4",
               "value": "Sperrung",
@@ -629,10 +611,28 @@
               "value": "Sperrung",
               "detail": "bis 6. November 2026",
               "date": "2026-10-12T07:02:00.000Z"
+            },
+            {
+              "label": "A1 Lausanne -> Genf Anschluss Flughafen Genf Sachlage: Einfahrt gesperrt Baustelle",
+              "value": "Sperrung",
+              "detail": "bis 3. November 2026",
+              "date": "2026-10-21T20:00:00.000Z"
+            },
+            {
+              "label": "A1 Lausanne -> Genf zwischen Anschluss Bernex und Anschluss Perly Nord Sachlage: Strecke gesperrt Baustelle, Länge [km] 2.12",
+              "value": "Sperrung",
+              "detail": "bis 3. November 2026",
+              "date": "2026-11-02T21:15:00.000Z"
+            },
+            {
+              "label": "A1 Genf -> Lausanne Anschluss Perly Süd Sachlage: Einfahrt gesperrt Baustelle, Länge [km] 3.2",
+              "value": "Sperrung",
+              "detail": "bis 4. November 2026",
+              "date": "2026-11-03T21:15:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-28T06:23:27.523Z"
+          "updatedAt": "2026-10-29T01:18:28.468Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -670,7 +670,7 @@
               "url": "https://www.ge.ch/node/38844"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -730,7 +730,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-28T10:03:35.525Z"
+      "updatedAt": "2026-10-29T08:53:42.745Z"
     },
     "fr": {
       "canton": "GE",
@@ -741,24 +741,24 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Anières, semaine jusqu’au 27 octobre 2026"
+          "note": "Anières, semaine jusqu’au 28 octobre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "12",
-          "note": "signalements au 28 octobre 2026"
+          "value": "9",
+          "note": "signalements au 29 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "4",
-          "note": "signalements au 28 octobre 2026"
+          "note": "signalements au 29 octobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 21 octobre 2026 au 27 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 22 octobre 2026 au 28 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Anières",
@@ -798,44 +798,26 @@
             },
             {
               "label": "Meyrin / CERN",
-              "value": "0,3 min",
+              "value": "0,5 min",
               "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/meyrin-cern/aujourd-hui/"
             },
             {
               "label": "Perly (Perly-Certoux)",
-              "value": "1 min",
+              "value": "1,5 min",
               "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/perly/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-27T23:59:59.000Z"
+          "updatedAt": "2026-10-28T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
           "title": "Fermetures, chantiers et perturbations",
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
-            {
-              "label": "A1 Genève -> Lausanne Jonction autoroutière Aéroport de Genève Situation: entrée fermée travaux",
-              "value": "Fermeture",
-              "detail": "jusqu’au 29 octobre 2026",
-              "date": "2026-09-24T08:06:00.000Z"
-            },
-            {
-              "label": "A1 Genève -> Lausanne entre Jonction autoroutière Aéroport de Genève et Jonction autoroutière Versoix Situation: fermé travaux, longueur [km] 2.8",
-              "value": "Fermeture",
-              "detail": "jusqu’au 29 octobre 2026",
-              "date": "2026-09-24T08:12:00.000Z"
-            },
-            {
-              "label": "A1 Lausanne -> Genève entre Jonction autoroutière Grand-Saconnex et Jonction autoroutière Aéroport de Genève Situation: fermé travaux, longueur [km] 0.4 Gestion du trafic: voie fermée Complément 1…",
-              "value": "Fermeture",
-              "detail": "jusqu’au 29 octobre 2026",
-              "date": "2026-09-24T08:13:00.000Z"
-            },
             {
               "label": "A1 Genève <-> Lausanne Tunnel Tunnel de Chèvres Situation: entrée fermée travaux, longueur [km] 0.4",
               "value": "Fermeture",
@@ -865,10 +847,28 @@
               "value": "Fermeture",
               "detail": "jusqu’au 6 novembre 2026",
               "date": "2026-10-12T07:02:00.000Z"
+            },
+            {
+              "label": "A1 Lausanne -> Genève Jonction autoroutière Aéroport de Genève Situation: entrée fermée travaux",
+              "value": "Fermeture",
+              "detail": "jusqu’au 3 novembre 2026",
+              "date": "2026-10-21T20:00:00.000Z"
+            },
+            {
+              "label": "A1 Lausanne -> Genève entre Jonction autoroutière Bernex et Jonction autoroutière Perly Nord Situation: fermé travaux, longueur [km] 2.12",
+              "value": "Fermeture",
+              "detail": "jusqu’au 3 novembre 2026",
+              "date": "2026-11-02T21:15:00.000Z"
+            },
+            {
+              "label": "A1 Genève -> Lausanne Jonction autoroutière Perly Sud Situation: entrée fermée travaux, longueur [km] 3.2",
+              "value": "Fermeture",
+              "detail": "jusqu’au 4 novembre 2026",
+              "date": "2026-11-03T21:15:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-28T06:23:27.523Z"
+          "updatedAt": "2026-10-29T01:18:28.468Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -906,7 +906,7 @@
               "url": "https://www.ge.ch/node/38844"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -966,7 +966,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-28T10:03:35.525Z"
+      "updatedAt": "2026-10-29T08:53:42.745Z"
     }
   }
 }

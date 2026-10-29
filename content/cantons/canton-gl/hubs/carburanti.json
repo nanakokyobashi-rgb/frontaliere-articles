@@ -4,12 +4,12 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "carburanti",
-  "updatedAt": "2026-10-22T02:32:07.612Z",
-  "contentHash": "10b933029eeb96776b55f525c274ec4e7d45982ef68541cd51b0d70e517f2c3d",
+  "updatedAt": "2026-10-29T07:40:41.678Z",
+  "contentHash": "f0d729c6c40b91973007c482757dbe378c7094edb05ebd51bbf7ff4938cd7eba",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-21T12:19:56.872Z",
+      "updatedAt": "2026-10-26T13:32:45.792Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-11-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-21T12:19:56.872Z"
+          "updatedAt": "2026-10-26T13:32:45.792Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Glarona aderisce al programma pilota Perspecta",
+          "url": "/articoli-glarona/glarona-adesione-programma-perspecta/",
+          "excerpt": "Il Governo di Glarona partecipa a Perspecta da ottobre 2026 a fine 2031 per favorire l'integrazione professionale tramite consulenze individuali BSLB.",
+          "date": "2026-10-29T07:33:02.883Z"
+        },
         {
           "title": "Braunwald: al via un progetto, 80 milioni per 266 abitanti",
           "url": "/articoli-glarona/braunwald-progetto-80-milioni/",
@@ -82,12 +88,6 @@
           "url": "/articoli-glarona/kloentalerstrasse-cantiere-2026/",
           "excerpt": "Sono previsti lavori sulla Klöntalerstrasse dal 21 ottobre al 4 dicembre 2026: attese brevi, chiusura per l'asfalto e deviazione via Sackberg.",
           "date": "2026-10-19T12:11:05.452Z"
-        },
-        {
-          "title": "Mühlehorn: Alte Kerenzerstrasse chiusa dal 19 ottobre",
-          "url": "/articoli-glarona/muehlehorn-strada-chiusa-ottobre/",
-          "excerpt": "Mühlehorn: chiusura totale di Alte Kerenzerstrasse tra Hanenchilchli e Rüteggli fino al 23 ottobre 2026, ore 17.00.",
-          "date": "2026-10-18T03:25:08.301Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-22T02:32:07.612Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "en": {
       "canton": "GL",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-21T12:19:56.872Z"
+          "updatedAt": "2026-10-26T13:32:45.792Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Glarus joins the Perspecta pilot program",
+          "url": "/en/glarus-articles/glarus-joins-perspecta-program/",
+          "excerpt": "The Government of Glarus participates in Perspecta from October 2026 to the end of 2031 to promote professional integration through individual BSLB consultations.",
+          "date": "2026-10-29T07:33:02.883Z"
+        },
         {
           "title": "Braunwald: a project gets underway, 80 million for 266 inhabitants",
           "url": "/en/glarus-articles/braunwald-project-80-million/",
@@ -169,12 +175,6 @@
           "url": "/en/glarus-articles/kloentalerstrasse-roadworks-2026/",
           "excerpt": "Construction work is planned on Klöntalerstrasse from October 21 to December 4, 2026: brief waits, closure for asphalting, and a detour via Sackberg.",
           "date": "2026-10-19T12:11:05.452Z"
-        },
-        {
-          "title": "Mühlehorn: Alte Kerenzerstrasse closed from October 19",
-          "url": "/en/glarus-articles/muehlehorn-road-closure-october/",
-          "excerpt": "Mühlehorn: full closure of Alte Kerenzerstrasse between Hanenchilchli and Rüteggli until October 23, 2026, at 5:00 p.m.",
-          "date": "2026-10-18T03:25:08.301Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-22T02:32:07.612Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "de": {
       "canton": "GL",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-21T12:19:56.872Z"
+          "updatedAt": "2026-10-26T13:32:45.792Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Glarus nimmt am Perspecta-Pilotprogramm teil",
+          "url": "/de/glarus-artikel/glarus-nimmt-an-perspecta-teil/",
+          "excerpt": "Die Regierung Glarus nimmt von Oktober 2026 bis Ende 2031 an Perspecta teil, um die berufliche Integration durch individuelle BSLB-Beratung zu fördern.",
+          "date": "2026-10-29T07:33:02.883Z"
+        },
         {
           "title": "Braunwald: Start eines Projekts, 80 Millionen für 266 Einwohner",
           "url": "/de/glarus-artikel/braunwald-projekt-80-millionen/",
@@ -256,12 +262,6 @@
           "url": "/de/glarus-artikel/kloentalerstrasse-bauarbeiten-2026/",
           "excerpt": "An der Klöntalerstrasse sind vom 21.",
           "date": "2026-10-19T12:11:05.452Z"
-        },
-        {
-          "title": "Mühlehorn: Alte Kerenzerstrasse ab dem 19. Oktober gesperrt",
-          "url": "/de/glarus-artikel/muehlehorn-strassensperrung-oktober/",
-          "excerpt": "Mühlehorn: Vollsperrung der Strasse Alte Kerenzerstrasse zwischen Hanenchilchli und Rüteggli bis zum 23.",
-          "date": "2026-10-18T03:25:08.301Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-22T02:32:07.612Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "fr": {
       "canton": "GL",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-21T12:19:56.872Z"
+          "updatedAt": "2026-10-26T13:32:45.792Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Glaris adhère au programme pilote Perspecta",
+          "url": "/fr/articles-glaris/glaris-adhere-au-programme-perspecta/",
+          "excerpt": "Le Gouvernement de Glaris participe à Perspecta d'octobre 2026 à fin 2031 pour favoriser l'intégration professionnelle par le biais de consultations individuelles BSLB.",
+          "date": "2026-10-29T07:33:02.883Z"
+        },
         {
           "title": "Braunwald : un projet démarre, 80 millions pour 266 habitants",
           "url": "/fr/articles-glaris/braunwald-projet-80-millions/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-glaris/kloentalerstrasse-travaux-2026/",
           "excerpt": "Des travaux sont prévus sur la Klöntalerstrasse du 21 octobre au 4 décembre 2026 : courtes attentes, fermeture pour l’asphaltage et déviation via Sackberg.",
           "date": "2026-10-19T12:11:05.452Z"
-        },
-        {
-          "title": "Mühlehorn : Alte Kerenzerstrasse fermée à partir du 19 octobre",
-          "url": "/fr/articles-glaris/muehlehorn-route-fermee-octobre/",
-          "excerpt": "Mühlehorn : fermeture totale de Alte Kerenzerstrasse entre Hanenchilchli et Rüteggli jusqu’au 23 octobre 2026, à 17.00.",
-          "date": "2026-10-18T03:25:08.301Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-22T02:32:07.612Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     }
   }
 }

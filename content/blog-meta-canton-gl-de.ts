@@ -33,6 +33,9 @@ const blogMetaCantonGlDe: Record<string, string> = {
     'blog.article.braunwald-progetto-80-milioni.title': 'Braunwald: Start eines Projekts, 80 Millionen für 266 Einwohner',
     'blog.article.braunwald-progetto-80-milioni.excerpt': 'Die Quelle nennt 80 Millionen Franken für 266 Einwohner in Braunwald und kündigt den Beginn eines großen Projekts gegen Naturgefahren an.',
     'blog.article.braunwald-progetto-80-milioni.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.glarona-adesione-programma-perspecta.title': 'Glarus nimmt am Perspecta-Pilotprogramm teil',
+    'blog.article.glarona-adesione-programma-perspecta.excerpt': 'Die Regierung Glarus nimmt von Oktober 2026 bis Ende 2031 an Perspecta teil, um die berufliche Integration durch individuelle BSLB-Beratung zu fördern.',
+    'blog.article.glarona-adesione-programma-perspecta.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonGlDe;

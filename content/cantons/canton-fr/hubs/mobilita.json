@@ -4,17 +4,17 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-28T18:07:44.486Z",
-  "contentHash": "700979c55d39db78225b35afba683e617dcad01b66a4c37c5f894892acef37ec",
+  "updatedAt": "2026-10-29T07:40:41.678Z",
+  "contentHash": "51979243041a8c56a8cc6c03ed6d1b50a32419baaadf4f0926411b505bc1baec",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-28T13:37:22.501Z",
+      "updatedAt": "2026-10-29T01:18:28.468Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-28T11:41:09.250Z",
+      "updatedAt": "2026-10-28T21:56:57.371Z",
       "keyFacts": 0
     }
   ],
@@ -28,12 +28,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "21",
-          "note": "segnalazioni aggiornate: 28 ottobre 2026"
+          "note": "segnalazioni aggiornate: 29 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "7",
-          "note": "segnalazioni aggiornate: 28 ottobre 2026"
+          "value": "8",
+          "note": "segnalazioni aggiornate: 29 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -79,26 +79,36 @@
               "date": "2026-09-24T06:39:00.000Z"
             },
             {
-              "label": "A1 Lausanne <-> Morat tra Svincolo autostradale Yverdon Sud E Svincolo autostradale Estavayer-le-Lac Situazione: chiusa cantiere, lunghezza [km] 0.1",
-              "value": "Chiusura",
-              "detail": "fine prevista: 29 ottobre 2026",
-              "date": "2026-09-28T05:30:00.000Z"
-            },
-            {
               "label": "Ettiwil, St. Ursen in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
               "value": "Chiusura",
               "detail": "fine prevista: 13 novembre 2026",
               "date": "2026-10-07T07:05:00.000Z"
+            },
+            {
+              "label": "Dorfstrasse, Gurmels in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
+              "value": "Chiusura",
+              "detail": "fine prevista: 30 novembre 2026",
+              "date": "2026-10-08T10:45:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-28T13:37:22.501Z"
+          "updatedAt": "2026-10-29T01:18:28.468Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Mise en œuvre de la stratégie cantonale de développement durable 2021-2031 : état d’avancement 2025",
+              "date": "2026-10-28T13:30:52.000Z",
+              "url": "https://www.fr.ch/dime/actualites/mise-en-oeuvre-de-la-strategie-cantonale-de-developpement-durable-2021-2031-etat-davancement-2025"
+            },
+            {
+              "label": "- Inscriptions et horaires de fin d'année -",
+              "date": "2026-10-27T15:41:53.000Z",
+              "url": "https://www.fr.ch/deef/src/actualites/inscriptions-et-horaires-de-fin-dannee-2"
+            },
             {
               "label": "Villars-sur-Glâne : début des travaux d’amélioration du marquage et de la signalisation du giratoire de Belle-Croix",
               "date": "2026-10-22T14:05:19.000Z",
@@ -118,19 +128,9 @@
               "label": "Restriction de circulation - Route de Champriond - du 12 octobre au 27 novembre 2026",
               "date": "2026-10-05T13:37:46.000Z",
               "url": "https://www.ville-fribourg.ch/actualites/restriction-de-circulation-route-de-champriond-du-12-octobre-au-27-novembre-2026"
-            },
-            {
-              "label": "Plan du réseau cantonal des voies cyclables - Vélo au quotidien",
-              "date": "2026-10-05T11:50:45.000Z",
-              "url": "https://www.fr.ch/mobilite-et-transport/mobilite-douce/plan-du-reseau-cantonal-des-voies-cyclables-velo-au-quotidien"
-            },
-            {
-              "label": "Fahrzeug nach Geisterfahrt auf der A1 bei Domdidier gestoppt",
-              "date": "2026-10-04T10:28:53.000Z",
-              "url": "https://www.fr.ch/de/sjsd/pol/news/fahrzeug-nach-geisterfahrt-auf-der-a1-bei-domdidier-gestoppt"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -194,7 +194,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-28T18:07:44.486Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "en": {
       "canton": "FR",
@@ -205,12 +205,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "21",
-          "note": "reports as of 28 October 2026"
+          "note": "reports as of 29 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "7",
-          "note": "reports as of 28 October 2026"
+          "value": "8",
+          "note": "reports as of 29 October 2026"
         }
       ],
       "dataBlocks": [
@@ -256,26 +256,36 @@
               "date": "2026-09-24T06:39:00.000Z"
             },
             {
-              "label": "A1 Lausanne <-> Morat tra Svincolo autostradale Yverdon Sud E Svincolo autostradale Estavayer-le-Lac Situazione: chiusa cantiere, lunghezza [km] 0.1",
-              "value": "Closure",
-              "detail": "until 29 October 2026",
-              "date": "2026-09-28T05:30:00.000Z"
-            },
-            {
               "label": "Ettiwil, St. Ursen in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
               "value": "Closure",
               "detail": "until 13 November 2026",
               "date": "2026-10-07T07:05:00.000Z"
+            },
+            {
+              "label": "Dorfstrasse, Gurmels in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
+              "value": "Closure",
+              "detail": "until 30 November 2026",
+              "date": "2026-10-08T10:45:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-28T13:37:22.501Z"
+          "updatedAt": "2026-10-29T01:18:28.468Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Mise en œuvre de la stratégie cantonale de développement durable 2021-2031 : état d’avancement 2025",
+              "date": "2026-10-28T13:30:52.000Z",
+              "url": "https://www.fr.ch/dime/actualites/mise-en-oeuvre-de-la-strategie-cantonale-de-developpement-durable-2021-2031-etat-davancement-2025"
+            },
+            {
+              "label": "- Inscriptions et horaires de fin d'année -",
+              "date": "2026-10-27T15:41:53.000Z",
+              "url": "https://www.fr.ch/deef/src/actualites/inscriptions-et-horaires-de-fin-dannee-2"
+            },
             {
               "label": "Villars-sur-Glâne : début des travaux d’amélioration du marquage et de la signalisation du giratoire de Belle-Croix",
               "date": "2026-10-22T14:05:19.000Z",
@@ -295,19 +305,9 @@
               "label": "Restriction de circulation - Route de Champriond - du 12 octobre au 27 novembre 2026",
               "date": "2026-10-05T13:37:46.000Z",
               "url": "https://www.ville-fribourg.ch/actualites/restriction-de-circulation-route-de-champriond-du-12-octobre-au-27-novembre-2026"
-            },
-            {
-              "label": "Plan du réseau cantonal des voies cyclables - Vélo au quotidien",
-              "date": "2026-10-05T11:50:45.000Z",
-              "url": "https://www.fr.ch/mobilite-et-transport/mobilite-douce/plan-du-reseau-cantonal-des-voies-cyclables-velo-au-quotidien"
-            },
-            {
-              "label": "Fahrzeug nach Geisterfahrt auf der A1 bei Domdidier gestoppt",
-              "date": "2026-10-04T10:28:53.000Z",
-              "url": "https://www.fr.ch/de/sjsd/pol/news/fahrzeug-nach-geisterfahrt-auf-der-a1-bei-domdidier-gestoppt"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -371,7 +371,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-28T18:07:44.486Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "de": {
       "canton": "FR",
@@ -382,12 +382,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "21",
-          "note": "Meldungen vom 28. Oktober 2026"
+          "note": "Meldungen vom 29. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "7",
-          "note": "Meldungen vom 28. Oktober 2026"
+          "value": "8",
+          "note": "Meldungen vom 29. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -433,26 +433,36 @@
               "date": "2026-09-24T06:39:00.000Z"
             },
             {
-              "label": "A1 Lausanne <-> Murten zwischen Anschluss Yverdon-Süd und Anschluss Estavayer-le-Lac Sachlage: Strecke gesperrt Baustelle, Länge [km] 0.1",
-              "value": "Sperrung",
-              "detail": "bis 29. Oktober 2026",
-              "date": "2026-09-28T05:30:00.000Z"
-            },
-            {
               "label": "Ettiwil, St. Ursen in beide Richtungen Sachlage: gesperrt für Durchgangsverkehr Ursache: Bauarbeiten",
               "value": "Sperrung",
               "detail": "bis 13. November 2026",
               "date": "2026-10-07T07:05:00.000Z"
+            },
+            {
+              "label": "Dorfstrasse, Gurmels in beide Richtungen Sachlage: gesperrt für Durchgangsverkehr Ursache: Bauarbeiten",
+              "value": "Sperrung",
+              "detail": "bis 30. November 2026",
+              "date": "2026-10-08T10:45:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-28T13:37:22.501Z"
+          "updatedAt": "2026-10-29T01:18:28.468Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Mise en œuvre de la stratégie cantonale de développement durable 2021-2031 : état d’avancement 2025",
+              "date": "2026-10-28T13:30:52.000Z",
+              "url": "https://www.fr.ch/dime/actualites/mise-en-oeuvre-de-la-strategie-cantonale-de-developpement-durable-2021-2031-etat-davancement-2025"
+            },
+            {
+              "label": "- Inscriptions et horaires de fin d'année -",
+              "date": "2026-10-27T15:41:53.000Z",
+              "url": "https://www.fr.ch/deef/src/actualites/inscriptions-et-horaires-de-fin-dannee-2"
+            },
             {
               "label": "Villars-sur-Glâne : début des travaux d’amélioration du marquage et de la signalisation du giratoire de Belle-Croix",
               "date": "2026-10-22T14:05:19.000Z",
@@ -472,19 +482,9 @@
               "label": "Restriction de circulation - Route de Champriond - du 12 octobre au 27 novembre 2026",
               "date": "2026-10-05T13:37:46.000Z",
               "url": "https://www.ville-fribourg.ch/actualites/restriction-de-circulation-route-de-champriond-du-12-octobre-au-27-novembre-2026"
-            },
-            {
-              "label": "Plan du réseau cantonal des voies cyclables - Vélo au quotidien",
-              "date": "2026-10-05T11:50:45.000Z",
-              "url": "https://www.fr.ch/mobilite-et-transport/mobilite-douce/plan-du-reseau-cantonal-des-voies-cyclables-velo-au-quotidien"
-            },
-            {
-              "label": "Fahrzeug nach Geisterfahrt auf der A1 bei Domdidier gestoppt",
-              "date": "2026-10-04T10:28:53.000Z",
-              "url": "https://www.fr.ch/de/sjsd/pol/news/fahrzeug-nach-geisterfahrt-auf-der-a1-bei-domdidier-gestoppt"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -548,7 +548,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-28T18:07:44.486Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "fr": {
       "canton": "FR",
@@ -559,12 +559,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "21",
-          "note": "signalements au 28 octobre 2026"
+          "note": "signalements au 29 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "7",
-          "note": "signalements au 28 octobre 2026"
+          "value": "8",
+          "note": "signalements au 29 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -610,26 +610,36 @@
               "date": "2026-09-24T06:39:00.000Z"
             },
             {
-              "label": "A1 Lausanne <-> Morat entre Jonction autoroutière Yverdon-Sud et Jonction autoroutière Estavayer-le-Lac Situation: fermé travaux, longueur [km] 0.1",
-              "value": "Fermeture",
-              "detail": "jusqu’au 29 octobre 2026",
-              "date": "2026-09-28T05:30:00.000Z"
-            },
-            {
               "label": "Ettiwil, St. Ursen dans les deux sens Situation: circulation de transit interdite Raison: travaux de construction",
               "value": "Fermeture",
               "detail": "jusqu’au 13 novembre 2026",
               "date": "2026-10-07T07:05:00.000Z"
+            },
+            {
+              "label": "Dorfstrasse, Gurmels dans les deux sens Situation: circulation de transit interdite Raison: travaux de construction",
+              "value": "Fermeture",
+              "detail": "jusqu’au 30 novembre 2026",
+              "date": "2026-10-08T10:45:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-28T13:37:22.501Z"
+          "updatedAt": "2026-10-29T01:18:28.468Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Mise en œuvre de la stratégie cantonale de développement durable 2021-2031 : état d’avancement 2025",
+              "date": "2026-10-28T13:30:52.000Z",
+              "url": "https://www.fr.ch/dime/actualites/mise-en-oeuvre-de-la-strategie-cantonale-de-developpement-durable-2021-2031-etat-davancement-2025"
+            },
+            {
+              "label": "- Inscriptions et horaires de fin d'année -",
+              "date": "2026-10-27T15:41:53.000Z",
+              "url": "https://www.fr.ch/deef/src/actualites/inscriptions-et-horaires-de-fin-dannee-2"
+            },
             {
               "label": "Villars-sur-Glâne : début des travaux d’amélioration du marquage et de la signalisation du giratoire de Belle-Croix",
               "date": "2026-10-22T14:05:19.000Z",
@@ -649,19 +659,9 @@
               "label": "Restriction de circulation - Route de Champriond - du 12 octobre au 27 novembre 2026",
               "date": "2026-10-05T13:37:46.000Z",
               "url": "https://www.ville-fribourg.ch/actualites/restriction-de-circulation-route-de-champriond-du-12-octobre-au-27-novembre-2026"
-            },
-            {
-              "label": "Plan du réseau cantonal des voies cyclables - Vélo au quotidien",
-              "date": "2026-10-05T11:50:45.000Z",
-              "url": "https://www.fr.ch/mobilite-et-transport/mobilite-douce/plan-du-reseau-cantonal-des-voies-cyclables-velo-au-quotidien"
-            },
-            {
-              "label": "Fahrzeug nach Geisterfahrt auf der A1 bei Domdidier gestoppt",
-              "date": "2026-10-04T10:28:53.000Z",
-              "url": "https://www.fr.ch/de/sjsd/pol/news/fahrzeug-nach-geisterfahrt-auf-der-a1-bei-domdidier-gestoppt"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -725,7 +725,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-28T18:07:44.486Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     }
   }
 }

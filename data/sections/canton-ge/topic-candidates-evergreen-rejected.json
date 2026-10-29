@@ -4,21 +4,13 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ge::https://statistique.ge.ch/rss/affiche_article.asp?url=https://statistique.ge.ch/tel/publications/2026/analyses/communications/an-cs-2026-79.pdf": {
+    "canton-ge::https://lecourrier.ch/2026/10/28/sante-les-communes-payent-les-pots-casses": {
       "section": "canton-ge",
-      "ts": 1792878701489
+      "ts": 1793264902869
     },
-    "canton-ge::https://statistique.ge.ch/rss/affiche_article.asp?url=https://statistique.ge.ch/actualites/welcome.asp?actu=6062": {
+    "canton-ge::https://statistique.ge.ch/rss/affiche_article.asp?url=https://statistique.ge.ch/actualites/welcome.asp?actu=6065": {
       "section": "canton-ge",
-      "ts": 1792878805137
-    },
-    "canton-ge::https://www.heidi.news/articles/annemasse-c-est-vegas-baby": {
-      "section": "canton-ge",
-      "ts": 1793016846164
-    },
-    "canton-ge::https://lecourrier.ch/2026/10/26/le-tessin-depend-toujours-plus-du-personnel-medical-italien": {
-      "section": "canton-ge",
-      "ts": 1793026023766
+      "ts": 1793265098387
     }
   }
 }

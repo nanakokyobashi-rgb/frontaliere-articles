@@ -33,6 +33,9 @@ const blogMetaCantonGlEn: Record<string, string> = {
     'blog.article.braunwald-progetto-80-milioni.title': 'Braunwald: a project gets underway, 80 million for 266 inhabitants',
     'blog.article.braunwald-progetto-80-milioni.excerpt': 'The source indicates 80 million francs for 266 residents in Braunwald and announces the launch of a major project against natural hazards.',
     'blog.article.braunwald-progetto-80-milioni.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.glarona-adesione-programma-perspecta.title': 'Glarus joins the Perspecta pilot program',
+    'blog.article.glarona-adesione-programma-perspecta.excerpt': 'The Government of Glarus participates in Perspecta from October 2026 to the end of 2031 to promote professional integration through individual BSLB consultations.',
+    'blog.article.glarona-adesione-programma-perspecta.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonGlEn;

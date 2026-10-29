@@ -259,4 +259,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'attrattivita-economica-zurigo-ticino',
+ category: 'novita',
+ date: '2026-10-29T08:24:27.655Z',
+ image: '/images/blog/article-attrattivita-economica-zurigo-ticino.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI', 'ZH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

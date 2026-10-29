@@ -4,17 +4,17 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "eventi",
-  "updatedAt": "2026-10-28T17:02:29.143Z",
-  "contentHash": "ca04b5fe59b2f2d18118619f3831a1b2fce660def43a1d343741d72cd63fd3f6",
+  "updatedAt": "2026-10-29T07:40:41.678Z",
+  "contentHash": "f3fc11011c5d62886a95d53d2cad7cbc2dfd2c101dd63775bda6ac0ac47576bf",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-28T13:47:49.369Z",
+      "updatedAt": "2026-10-28T19:25:39.771Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-28T11:41:09.250Z",
+      "updatedAt": "2026-10-28T21:56:57.371Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "103",
+          "value": "106",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Nectar Woode + Chelan",
+              "label": "Joe Armon-Jones + Miss C-Line",
               "detail": "Jumeaux Jazz Club",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/events/music/lausanne/nectar-woode-chelan_Afwm6Ev"
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/events/music/lausanne/joe-armon-jones-miss-c-line_A4cfqyY"
             },
             {
-              "label": "Pixel Academy - Cooperative games",
-              "detail": "Vevey",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pixel-academy-cooperative-games/"
+              "label": "STANISLAS (FR) + SUPPORT",
+              "detail": "Losanna, Lausanne",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/stanislas-fr-support/"
+            },
+            {
+              "label": "Halloween at the former Payerne abattoirs",
+              "detail": "Les Anciens abattoirs, Payerne",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-at-the-former-payerne-abattoirs/"
+            },
+            {
+              "label": "LINH",
+              "detail": "Salle Métropole, Lausanne",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/linh/"
+            },
+            {
+              "label": "Atelier de mosaïque",
+              "detail": "Renens",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-mosaique/"
+            },
+            {
+              "label": "ISAIAH COLLIER PLAYS COLTRANE",
+              "detail": "Lausanne",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/isaiah-collier-plays-coltrane/"
+            },
+            {
+              "label": "NATE SMITH / JOHN BEASLEY & HEMU JAZZ ORCHESTRA",
+              "detail": "Casino de Montbenon",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/nate-smith-john-beasley-und-hemu-jazz-orchestra_AywPAj8"
+            },
+            {
+              "label": "Miss C-Line + Joe Armon-Jones",
+              "detail": "Jumeaux Jazz Club",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/miss-c-line-joe-armon-jones_AdMrQiF"
             },
             {
               "label": "Leading with Compassion - Leadership Immersion",
-              "detail": "Caux, Montreux",
-              "date": "2026-10-28",
+              "detail": "Caux, Montreux — in corso, ultimo giorno: 30 ottobre 2026",
+              "date": "2026-10-29",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/leading-with-compassion-leadership-immersion/"
             },
             {
               "label": "The Navigator",
-              "detail": "Le Reflet – Théâtre de Vevey, Vevey",
-              "date": "2026-10-28",
+              "detail": "Le Reflet – Théâtre de Vevey, Vevey — in corso, ultimo giorno: 29 ottobre 2026",
+              "date": "2026-10-29",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/the-navigator/"
-            },
-            {
-              "label": "What a circus! Games and shows among the Romans",
-              "detail": "Pully",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/what-a-circus-games-and-shows-among-the-romans/"
-            },
-            {
-              "label": "Emma Smith / ELINA DUNI & ROB LUFT",
-              "detail": "Casino de Montbenon",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/stella-cole-elina-duni-und-rob-luft_AKkh5aJ"
-            },
-            {
-              "label": "St. Martin's Day Sale",
-              "detail": "Bibliothèque médiathèque municipale de Vevey, Vevey — in corso, ultimo giorno: 2 novembre 2026",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/st-martins-day-sale/"
-            },
-            {
-              "label": "Kombucha, Kefir, and Homemade Soda Workshop",
-              "detail": "Aubonne — in corso, ultimo giorno: 9 novembre 2026",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kombucha-kefir-and-homemade-soda-workshop/"
-            },
-            {
-              "label": "Reflections",
-              "detail": "Vevey — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
-            },
-            {
-              "label": "Tokyo-Ga",
-              "detail": "Cinémathèque suisse, Lausanne — in corso, ultimo giorno: 30 ottobre 2026",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/tokyo-ga/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vaud/",
-          "updatedAt": "2026-10-28T13:47:49.369Z"
+          "updatedAt": "2026-10-28T19:25:39.771Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -118,7 +118,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -140,7 +140,7 @@
           "url": "/eventi/vaud/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "en": {
       "canton": "VD",
@@ -150,7 +150,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "103",
+          "value": "106",
           "note": "from the site’s events calendar"
         }
       ],
@@ -161,69 +161,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Nectar Woode + Chelan",
+              "label": "Joe Armon-Jones + Miss C-Line",
               "detail": "Jumeaux Jazz Club",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/events/music/lausanne/nectar-woode-chelan_Afwm6Ev"
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/events/music/lausanne/joe-armon-jones-miss-c-line_A4cfqyY"
             },
             {
-              "label": "Pixel Academy - Cooperative games",
-              "detail": "Vevey",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pixel-academy-cooperative-games/"
+              "label": "STANISLAS (FR) + SUPPORT",
+              "detail": "Losanna, Lausanne",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/stanislas-fr-support/"
+            },
+            {
+              "label": "Halloween at the former Payerne abattoirs",
+              "detail": "Les Anciens abattoirs, Payerne",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-at-the-former-payerne-abattoirs/"
+            },
+            {
+              "label": "LINH",
+              "detail": "Salle Métropole, Lausanne",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/linh/"
+            },
+            {
+              "label": "Atelier de mosaïque",
+              "detail": "Renens",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-mosaique/"
+            },
+            {
+              "label": "ISAIAH COLLIER PLAYS COLTRANE",
+              "detail": "Lausanne",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/isaiah-collier-plays-coltrane/"
+            },
+            {
+              "label": "NATE SMITH / H",
+              "detail": "Casino de Montbenon",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/nate-smith-john-beasley-und-hemu-jazz-orchestra_AywPAj8"
+            },
+            {
+              "label": "Miss C-Line + Joe Armon-Jones",
+              "detail": "Jumeaux Jazz Club",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/miss-c-line-joe-armon-jones_AdMrQiF"
             },
             {
               "label": "Leading with Compassion - Leadership Immersion",
-              "detail": "Caux, Montreux",
-              "date": "2026-10-28",
+              "detail": "Caux, Montreux — ongoing, last day: 30 October 2026",
+              "date": "2026-10-29",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/leading-with-compassion-leadership-immersion/"
             },
             {
               "label": "The Navigator",
-              "detail": "Le Reflet – Théâtre de Vevey, Vevey",
-              "date": "2026-10-28",
+              "detail": "Le Reflet – Théâtre de Vevey, Vevey — ongoing, last day: 29 October 2026",
+              "date": "2026-10-29",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/the-navigator/"
-            },
-            {
-              "label": "What a circus! Games and shows among the Romans",
-              "detail": "Pully",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/what-a-circus-games-and-shows-among-the-romans/"
-            },
-            {
-              "label": "Emma Smith / ELINA DUNI & ROB LUFT",
-              "detail": "Casino de Montbenon",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/stella-cole-elina-duni-und-rob-luft_AKkh5aJ"
-            },
-            {
-              "label": "St. Martin's Day Sale",
-              "detail": "Bibliothèque médiathèque municipale de Vevey, Vevey — ongoing, last day: 2 November 2026",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/st-martins-day-sale/"
-            },
-            {
-              "label": "Kombucha, Kefir, and Homemade Soda Workshop",
-              "detail": "Aubonne — ongoing, last day: 9 November 2026",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kombucha-kefir-and-homemade-soda-workshop/"
-            },
-            {
-              "label": "Reflections",
-              "detail": "Vevey — ongoing, last day: 15 November 2026",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
-            },
-            {
-              "label": "Tokyo-Ga",
-              "detail": "Cinémathèque suisse, Lausanne — ongoing, last day: 30 October 2026",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/tokyo-ga/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/vaud/",
-          "updatedAt": "2026-10-28T13:47:49.369Z"
+          "updatedAt": "2026-10-28T19:25:39.771Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -241,7 +241,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -263,7 +263,7 @@
           "url": "/en/events/vaud/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "de": {
       "canton": "VD",
@@ -273,7 +273,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "103",
+          "value": "106",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -284,69 +284,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Nectar Woode + Chelan",
+              "label": "Joe Armon-Jones + Miss C-Line",
               "detail": "Jumeaux Jazz Club",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/events/music/lausanne/nectar-woode-chelan_Afwm6Ev"
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/events/music/lausanne/joe-armon-jones-miss-c-line_A4cfqyY"
             },
             {
-              "label": "Pixel Academy - Kooperative Spiele",
-              "detail": "Vevey",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pixel-academy-cooperative-games/"
+              "label": "STANISLAS (FR) + SUPPORT",
+              "detail": "Losanna, Lausanne",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/stanislas-fr-support/"
+            },
+            {
+              "label": "Halloween in den alten Schlachthöfen von Payerne",
+              "detail": "Les Anciens abattoirs, Payerne",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-at-the-former-payerne-abattoirs/"
+            },
+            {
+              "label": "LINH",
+              "detail": "Salle Métropole, Lausanne",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/linh/"
+            },
+            {
+              "label": "Atelier de mosaïque",
+              "detail": "Renens",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-mosaique/"
+            },
+            {
+              "label": "ISAIAH COLLIER PLAYS COLTRANE",
+              "detail": "Lausanne",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/isaiah-collier-plays-coltrane/"
+            },
+            {
+              "label": "NATE SMITH / JOHN BEASLEY & HEMU JAZZORCHESTER",
+              "detail": "Casino de Montbenon",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/nate-smith-john-beasley-und-hemu-jazz-orchestra_AywPAj8"
+            },
+            {
+              "label": "Miss C-Line + Joe Armon-Jones",
+              "detail": "Jumeaux Jazz Club",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/miss-c-line-joe-armon-jones_AdMrQiF"
             },
             {
               "label": "Führen mit Menschlichkeit – Immersion Leadership",
-              "detail": "Caux, Montreux",
-              "date": "2026-10-28",
+              "detail": "Caux, Montreux — läuft, letzter Tag: 30. Oktober 2026",
+              "date": "2026-10-29",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/leading-with-compassion-leadership-immersion/"
             },
             {
               "label": "The Navigator",
-              "detail": "Le Reflet – Théâtre de Vevey, Vevey",
-              "date": "2026-10-28",
+              "detail": "Le Reflet – Théâtre de Vevey, Vevey — läuft, letzter Tag: 29. Oktober 2026",
+              "date": "2026-10-29",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/the-navigator/"
-            },
-            {
-              "label": "Was für ein Zirkus! Spiele und Aufführungen bei den Römern",
-              "detail": "Pully",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/what-a-circus-games-and-shows-among-the-romans/"
-            },
-            {
-              "label": "Emma Smith / ELINA DUNI & ROB LUFT",
-              "detail": "Casino de Montbenon",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/stella-cole-elina-duni-und-rob-luft_AKkh5aJ"
-            },
-            {
-              "label": "Verkauf am Martinstag",
-              "detail": "Bibliothèque médiathèque municipale de Vevey, Vevey — läuft, letzter Tag: 2. November 2026",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/st-martins-day-sale/"
-            },
-            {
-              "label": "Workshop zu Kombucha, Kefir und hausgemachten Limonaden",
-              "detail": "Aubonne — läuft, letzter Tag: 9. November 2026",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kombucha-kefir-and-homemade-soda-workshop/"
-            },
-            {
-              "label": "Reflexionen",
-              "detail": "Vevey — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
-            },
-            {
-              "label": "Tokyo-Ga",
-              "detail": "Cinémathèque suisse, Lausanne — läuft, letzter Tag: 30. Oktober 2026",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/tokyo-ga/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/waadt/",
-          "updatedAt": "2026-10-28T13:47:49.369Z"
+          "updatedAt": "2026-10-28T19:25:39.771Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -364,7 +364,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -386,7 +386,7 @@
           "url": "/de/veranstaltungen/waadt/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "fr": {
       "canton": "VD",
@@ -396,7 +396,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "103",
+          "value": "106",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -407,69 +407,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Nectar Woode + Chelan",
+              "label": "Joe Armon-Jones + Miss C-Line",
               "detail": "Jumeaux Jazz Club",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/events/music/lausanne/nectar-woode-chelan_Afwm6Ev"
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/events/music/lausanne/joe-armon-jones-miss-c-line_A4cfqyY"
             },
             {
-              "label": "Pixel Academy - Jeux coopératifs",
-              "detail": "Vevey",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pixel-academy-cooperative-games/"
+              "label": "STANISLAS (FR) + SUPPORT",
+              "detail": "Losanna, Lausanne",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/stanislas-fr-support/"
+            },
+            {
+              "label": "Halloween aux anciens Abattoirs de Payerne",
+              "detail": "Les Anciens abattoirs, Payerne",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-at-the-former-payerne-abattoirs/"
+            },
+            {
+              "label": "LINH",
+              "detail": "Salle Métropole, Lausanne",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/linh/"
+            },
+            {
+              "label": "Atelier de mosaïque",
+              "detail": "Renens",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-mosaique/"
+            },
+            {
+              "label": "ISAIAH COLLIER PLAYS COLTRANE",
+              "detail": "Lausanne",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/isaiah-collier-plays-coltrane/"
+            },
+            {
+              "label": "NATE SMITH / JOHN BEASLEY & HEMU JAZZ ORCHESTRE",
+              "detail": "Casino de Montbenon",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/nate-smith-john-beasley-und-hemu-jazz-orchestra_AywPAj8"
+            },
+            {
+              "label": "Miss C-Line + Joe Armon-Jones",
+              "detail": "Jumeaux Jazz Club",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/miss-c-line-joe-armon-jones_AdMrQiF"
             },
             {
               "label": "Diriger avec Humanité - Immersion Leadership",
-              "detail": "Caux, Montreux",
-              "date": "2026-10-28",
+              "detail": "Caux, Montreux — en cours, dernier jour : 30 octobre 2026",
+              "date": "2026-10-29",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/leading-with-compassion-leadership-immersion/"
             },
             {
               "label": "The Navigator",
-              "detail": "Le Reflet – Théâtre de Vevey, Vevey",
-              "date": "2026-10-28",
+              "detail": "Le Reflet – Théâtre de Vevey, Vevey — en cours, dernier jour : 29 octobre 2026",
+              "date": "2026-10-29",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/the-navigator/"
-            },
-            {
-              "label": "Quel cirque ! Jeux et spectacles chez les Romains",
-              "detail": "Pully",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/what-a-circus-games-and-shows-among-the-romans/"
-            },
-            {
-              "label": "Emma Smith / ELINA DUNI ET ROB LUFT",
-              "detail": "Casino de Montbenon",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/stella-cole-elina-duni-und-rob-luft_AKkh5aJ"
-            },
-            {
-              "label": "Vente de la St-Martin",
-              "detail": "Bibliothèque médiathèque municipale de Vevey, Vevey — en cours, dernier jour : 2 novembre 2026",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/st-martins-day-sale/"
-            },
-            {
-              "label": "Atelier Kombucha, kéfir et sodas sauvages",
-              "detail": "Aubonne — en cours, dernier jour : 9 novembre 2026",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kombucha-kefir-and-homemade-soda-workshop/"
-            },
-            {
-              "label": "Reflets",
-              "detail": "Vevey — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
-            },
-            {
-              "label": "Tokyo-Ga",
-              "detail": "Cinémathèque suisse, Lausanne — en cours, dernier jour : 30 octobre 2026",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/tokyo-ga/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/vaud/",
-          "updatedAt": "2026-10-28T13:47:49.369Z"
+          "updatedAt": "2026-10-28T19:25:39.771Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -487,7 +487,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -509,7 +509,7 @@
           "url": "/fr/evenements/vaud/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     }
   }
 }

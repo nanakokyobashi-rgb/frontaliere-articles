@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "carburanti",
-  "updatedAt": "2026-10-27T07:28:07.698Z",
-  "contentHash": "13adef5b0ca4a96660c8f3e9480c2f22e271fef22c43e21237b545bfeec269b1",
+  "updatedAt": "2026-10-29T08:37:38.060Z",
+  "contentHash": "0b792574bab72791cb01e8f7502ead7a164a23009486010fad6627b5c349b60f",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -60,6 +60,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "33,3 milioni di franchi per l'ampliamento della Volksschule Breitfeld",
+          "url": "/articoli-berna/credito-volksschule-breitfeld/",
+          "excerpt": "Il credito edilizio di CHF 33,3 milioni prevede di aumentare la capacità da 10 a 18 classi.",
+          "date": "2026-10-29T08:31:57.808Z"
+        },
+        {
           "title": "Lützelflüh: taglio di sicurezza, traffico su una corsia",
           "url": "/articoli-berna/ramsei-taglio-sicurezza-strada/",
           "excerpt": "A Ramsei, nel comune di Lützelflüh, la Sumiswaldstrasse verso Sumiswald sarà gestita su una corsia dal 2 al 13 novembre 2026, con semaforo.",
@@ -82,12 +88,6 @@
           "url": "/articoli-berna/energy-tagli-radio-svizzera/",
           "excerpt": "Energy annuncia fino a 15 tagli: il numero sarà deciso dopo la consultazione, mentre i ricavi pubblicitari restano sotto pressione.",
           "date": "2026-10-22T12:35:58.385Z"
-        },
-        {
-          "title": "Primo adeguamento LPP superstiti e invalidità: 2,1%, 1%, 1,2%",
-          "url": "/articoli-berna/primo-adeguamento-lpp-superstiti-e-invalidita-2-1-1-1-2/",
-          "excerpt": "Aumento 2,1% per rendite dal 2023, 1% per prima rivalutazione 2026, 1,2% per ultima modifica 2025.",
-          "date": "2026-10-22T12:06:19.622Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-27T07:28:07.698Z"
+      "updatedAt": "2026-10-29T08:37:38.060Z"
     },
     "en": {
       "canton": "BE",
@@ -147,6 +147,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "33,3 million francs for the expansion of Volksschule Breitfeld",
+          "url": "/en/bern-articles/breitfeld-volksschule-credit/",
+          "excerpt": "The CHF 33,3 million construction credit is intended to increase capacity from 10 to 18 classes.",
+          "date": "2026-10-29T08:31:57.808Z"
+        },
+        {
           "title": "Lützelflüh: safety tree felling, traffic on one lane",
           "url": "/en/bern-articles/ramsei-safety-logging-road/",
           "excerpt": "In Ramsei, in the municipality of Lützelflüh, Sumiswaldstrasse toward Sumiswald will be operated on a single lane from November 2 to 13, 2026, with traffic lights.",
@@ -169,12 +175,6 @@
           "url": "/en/bern-articles/energy-radio-cuts-switzerland/",
           "excerpt": "Energy announces up to 15 cuts: the number will be decided after the consultation, while advertising revenues remain under pressure.",
           "date": "2026-10-22T12:35:58.385Z"
-        },
-        {
-          "title": "First LPP adjustment for survivors and disability: 2.1%, 1%, 1.2%",
-          "url": "/en/bern-articles/first-lpp-adjustment-for-survivors-and-disability-2-1-1-1-2/",
-          "excerpt": "Increase 2,1% for annuities from 2023, 1% for first revaluation 2026, 1,2% for latest modification 2025.",
-          "date": "2026-10-22T12:06:19.622Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-27T07:28:07.698Z"
+      "updatedAt": "2026-10-29T08:37:38.060Z"
     },
     "de": {
       "canton": "BE",
@@ -234,6 +234,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "33,3 Millionen Franken für die Erweiterung der Volksschule Breitfeld",
+          "url": "/de/bern-artikel/volksschule-breitfeld-kredit/",
+          "excerpt": "Der Baukredit von CHF 33,3 Millionen sieht vor, die Kapazität von 10 auf 18 Klassen zu erhöhen.",
+          "date": "2026-10-29T08:31:57.808Z"
+        },
+        {
           "title": "Lützelflüh: Sicherheitsholzerei, Verkehr auf einer Fahrspur",
           "url": "/de/bern-artikel/ramsei-sicherheitsholzerei-strasse/",
           "excerpt": "In Ramsei, in der Gemeinde Lützelflüh, wird die Sumiswaldstrasse in Richtung Sumiswald vom 2.",
@@ -256,12 +262,6 @@
           "url": "/de/bern-artikel/energy-radio-stellenabbau-schweiz/",
           "excerpt": "Energy kündigt bis zu 15 Stellenstreichungen an: Die Zahl wird nach der Konsultation festgelegt, während die Werbeeinnahmen unter Druck bleiben.",
           "date": "2026-10-22T12:35:58.385Z"
-        },
-        {
-          "title": "Erste Anpassung der BVG-Hinterlassenen- und Invalidenrenten: 2,1%, 1%, 1,2%",
-          "url": "/de/bern-artikel/erste-anpassung-der-bvg-hinterlassenen-und-invalidenrenten-2-1-1-1-2/",
-          "excerpt": "Erhöhung um 2,1% für Renten ab 2023, 1% für die erste Anpassung 2026, 1,2% für die letzte Änderung 2025.",
-          "date": "2026-10-22T12:06:19.622Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-27T07:28:07.698Z"
+      "updatedAt": "2026-10-29T08:37:38.060Z"
     },
     "fr": {
       "canton": "BE",
@@ -321,6 +321,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "33,3 millions de francs pour l'agrandissement de la Volksschule Breitfeld",
+          "url": "/fr/articles-berne/credit-volksschule-breitfeld/",
+          "excerpt": "Le crédit de construction de CHF 33,3 millions prévoit d'augmenter la capacité de 10 à 18 classes.",
+          "date": "2026-10-29T08:31:57.808Z"
+        },
+        {
           "title": "Lützelflüh : coupe de sécurité, circulation sur une voie",
           "url": "/fr/articles-berne/ramsei-abattage-securite-route/",
           "excerpt": "À Ramsei, dans la commune de Lützelflüh, la Sumiswaldstrasse en direction de Sumiswald sera gérée sur une voie du 2 au 13 novembre 2026, avec des feux de signalisation.",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-berne/energy-radio-suppressions-suisse/",
           "excerpt": "Energy annonce jusqu’à 15 suppressions de postes : le nombre sera décidé après la consultation, tandis que les recettes publicitaires restent sous pression.",
           "date": "2026-10-22T12:35:58.385Z"
-        },
-        {
-          "title": "Première adaptation LPP pour survivants et invalidité : 2,1 %, 1 %, 1,2 %",
-          "url": "/fr/articles-berne/premiere-adaptation-lpp-pour-survivants-et-invalidite-2-1-1-1-2/",
-          "excerpt": "Augmentation de 2,1 % pour les rentes à partir de 2023, de 1 % pour la première revalorisation en 2026, de 1,2 % pour la dernière modification en 2025.",
-          "date": "2026-10-22T12:06:19.622Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-27T07:28:07.698Z"
+      "updatedAt": "2026-10-29T08:37:38.060Z"
     }
   }
 }

@@ -33,6 +33,9 @@ const blogMetaCantonJuFr: Record<string, string> = {
     'blog.article.mutazioni-lavoro-frontaliero-jura.title': 'Arc jurassien : mutations du travail frontalier',
     'blog.article.mutazioni-lavoro-frontaliero-jura.excerpt': 'L\'épisode 43718 de «Le sens de l\'éco» porte sur les mutations de l\'emploi frontalier dans l\'Arc jurassien ; le matériel fourni ne rapporte pas d\'autres détails.',
     'blog.article.mutazioni-lavoro-frontaliero-jura.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.cff-cargo-rinuncia-legno-alle.title': 'CFF Cargo arrête le transport de bois à Alle à partir de décembre',
+    'blog.article.cff-cargo-rinuncia-legno-alle.excerpt': 'CFF Cargo cesse le service pour les wagons individuels à partir de décembre Le bois d\'Ajoie passera à la route La plateforme d\'Alle a coûté 14 millions de CHF',
+    'blog.article.cff-cargo-rinuncia-legno-alle.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonJuFr;

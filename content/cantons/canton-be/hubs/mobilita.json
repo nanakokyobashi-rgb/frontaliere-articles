@@ -4,17 +4,17 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-28T17:02:29.143Z",
-  "contentHash": "6d7cf5e4a987d37280aff5e84c8dece67e804c5ab37c81a7bed4efd80723d355",
+  "updatedAt": "2026-10-29T07:40:41.678Z",
+  "contentHash": "2c45c02b648930819b839c506e0c77ca683e70a0207c2dd10f5b7814cab25b39",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-28T13:37:22.501Z",
+      "updatedAt": "2026-10-29T01:18:28.468Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-28T11:41:09.250Z",
+      "updatedAt": "2026-10-28T21:56:57.371Z",
       "keyFacts": 0
     }
   ],
@@ -28,12 +28,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "20",
-          "note": "segnalazioni aggiornate: 28 ottobre 2026"
+          "note": "segnalazioni aggiornate: 29 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "98",
-          "note": "segnalazioni aggiornate: 28 ottobre 2026"
+          "note": "segnalazioni aggiornate: 29 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -91,7 +91,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-28T13:37:22.501Z"
+          "updatedAt": "2026-10-29T01:18:28.468Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -129,7 +129,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/mehrfamilienhaeuser-an-der-zelgstrasse-werden-saniert"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -181,7 +181,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "en": {
       "canton": "BE",
@@ -192,12 +192,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "20",
-          "note": "reports as of 28 October 2026"
+          "note": "reports as of 29 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "98",
-          "note": "reports as of 28 October 2026"
+          "note": "reports as of 29 October 2026"
         }
       ],
       "dataBlocks": [
@@ -255,7 +255,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-28T13:37:22.501Z"
+          "updatedAt": "2026-10-29T01:18:28.468Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -293,7 +293,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/mehrfamilienhaeuser-an-der-zelgstrasse-werden-saniert"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "de": {
       "canton": "BE",
@@ -356,12 +356,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "20",
-          "note": "Meldungen vom 28. Oktober 2026"
+          "note": "Meldungen vom 29. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "98",
-          "note": "Meldungen vom 28. Oktober 2026"
+          "note": "Meldungen vom 29. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -419,7 +419,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-28T13:37:22.501Z"
+          "updatedAt": "2026-10-29T01:18:28.468Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -457,7 +457,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/mehrfamilienhaeuser-an-der-zelgstrasse-werden-saniert"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -509,7 +509,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "fr": {
       "canton": "BE",
@@ -520,12 +520,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "20",
-          "note": "signalements au 28 octobre 2026"
+          "note": "signalements au 29 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "98",
-          "note": "signalements au 28 octobre 2026"
+          "note": "signalements au 29 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -583,7 +583,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-28T13:37:22.501Z"
+          "updatedAt": "2026-10-29T01:18:28.468Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -621,7 +621,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/mehrfamilienhaeuser-an-der-zelgstrasse-werden-saniert"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -673,7 +673,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     }
   }
 }

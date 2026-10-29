@@ -63,6 +63,9 @@ const blogMetaCantonBeFr: Record<string, string> = {
     'blog.article.ramsei-taglio-sicurezza-strada.title': 'Lützelflüh : coupe de sécurité, circulation sur une voie',
     'blog.article.ramsei-taglio-sicurezza-strada.excerpt': 'À Ramsei, dans la commune de Lützelflüh, la Sumiswaldstrasse en direction de Sumiswald sera gérée sur une voie du 2 au 13 novembre 2026, avec des feux de signalisation.',
     'blog.article.ramsei-taglio-sicurezza-strada.imageAlt': 'Sumiswaldstrasse à Ramsei avec circulation sur une voie pendant l\'abattage de sécurité',
+    'blog.article.credito-volksschule-breitfeld.title': '33,3 millions de francs pour l\'agrandissement de la Volksschule Breitfeld',
+    'blog.article.credito-volksschule-breitfeld.excerpt': 'Le crédit de construction de CHF 33,3 millions prévoit d\'augmenter la capacité de 10 à 18 classes.',
+    'blog.article.credito-volksschule-breitfeld.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonBeFr;

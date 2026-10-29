@@ -33,6 +33,9 @@ const blogMetaCantonJuDe: Record<string, string> = {
     'blog.article.mutazioni-lavoro-frontaliero-jura.title': 'Jurabogen: Veränderungen der Grenzgängerbeschäftigung',
     'blog.article.mutazioni-lavoro-frontaliero-jura.excerpt': 'Die Folge 43718 von «Le sens de l\'éco» thematisiert die Veränderungen der Grenzgängerbeschäftigung im Jurabogen; das bereitgestellte Material enthält keine weiteren Details.',
     'blog.article.mutazioni-lavoro-frontaliero-jura.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.cff-cargo-rinuncia-legno-alle.title': 'CFF Cargo stellt ab Dezember den Holztransport in Alle ein',
+    'blog.article.cff-cargo-rinuncia-legno-alle.excerpt': 'CFF Cargo stellt ab Dezember den Betrieb für Einzelwagen ein Wald von Ajoie wird zur Straße übergehen Die Plattform von Alle kostete 2021 14 Millionen CHF',
+    'blog.article.cff-cargo-rinuncia-legno-alle.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonJuDe;

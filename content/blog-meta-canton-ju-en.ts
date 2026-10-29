@@ -33,6 +33,9 @@ const blogMetaCantonJuEn: Record<string, string> = {
     'blog.article.mutazioni-lavoro-frontaliero-jura.title': 'Jura Arc: transformations in cross-border employment',
     'blog.article.mutazioni-lavoro-frontaliero-jura.excerpt': 'Episode 43718 of «Le sens de l\'éco» focuses on changes in cross-border employment in the Jura Arc; the material provided contains no other details.',
     'blog.article.mutazioni-lavoro-frontaliero-jura.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.cff-cargo-rinuncia-legno-alle.title': 'CFF Cargo stops the transport of wood in Alle from December',
+    'blog.article.cff-cargo-rinuncia-legno-alle.excerpt': 'CFF Cargo discontinues service for single wagons from December Wood from Ajoie will pass to the road Alle\'s platform cost CHF 14 million in 2021 The transport',
+    'blog.article.cff-cargo-rinuncia-legno-alle.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonJuEn;

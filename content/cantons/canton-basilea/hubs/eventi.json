@@ -4,12 +4,12 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "eventi",
-  "updatedAt": "2026-10-28T01:14:28.455Z",
-  "contentHash": "5708fbe57078fa96811fbe52d4186657a1f37337bd5b64b1097ba8b7ed9ef2b2",
+  "updatedAt": "2026-10-29T07:40:41.678Z",
+  "contentHash": "f39bdb99d2249d0d04279a18b4c0fd0a8c6e533160392017998cd12b6ecf3105",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-27T19:25:52.214Z",
+      "updatedAt": "2026-10-28T19:25:39.771Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "90",
+          "value": "89",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX LIKE A PRO",
-              "detail": "Basilea, Basel",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
-            },
-            {
-              "label": "ONLINE: Künstliche Intelligenz im Berufsalltag – einfach erklärt",
-              "detail": "Universitätsbibliothek (UB)",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/online-kuenstliche-intelligenz-im-berufsalltag-einfach-erklaert_AQ2sEcF"
-            },
-            {
-              "label": "Jassen für Anfänger",
-              "detail": "Riehen",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jassen-fuer-anfaenger/"
-            },
-            {
-              "label": "A Night's Game",
-              "detail": "Tanzhaus Basel - Silo 2 - Black Box, Basel",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/a-nights-game_AN1xZRt"
-            },
-            {
-              "label": "Kruger Brothers & Kaleidoscope String Quartet",
-              "detail": "Gelterkinden",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kruger-brothers-kaleidoscope-string-quartet/"
-            },
-            {
-              "label": "Milan Milanski - Schwugo",
-              "detail": "Theater Fauteuil, Basel",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/milan-milanski-schwugo-3/"
-            },
-            {
-              "label": "Witz vom Olli - FSK18 - Hart aber herzlich",
-              "detail": "Basel",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/witz-vom-olli-fsk18-hart-aber-herzlich/"
-            },
-            {
-              "label": "Patrick Joray Quartet",
-              "detail": "the bird's eye jazz club — in corso, ultimo giorno: 28 ottobre 2026",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/patrick-joray-quartet_A3p6Fni"
-            },
-            {
-              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
-              "detail": "Universitätsbibliothek (UB) — in corso, ultimo giorno: 5 novembre 2026",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
-            },
-            {
               "label": "Basel Jazz Orchestra plays George Gruntz",
               "detail": "the bird's eye jazz club, Basel",
               "date": "2026-10-29",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/basel-jazz-orchestra_AEVbtJQ"
+            },
+            {
+              "label": "Gin Workshop: eigenen Gin entwickeln in der Brennerei",
+              "detail": "Basel",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gin-workshop-eigenen-gin-entwickeln-in-der-brennerei/"
+            },
+            {
+              "label": "mini.musik",
+              "detail": "Theater Basel, Basel",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/basel/minimusik_ArwC5MD"
+            },
+            {
+              "label": "Irish Folk Festival",
+              "detail": "Stadtcasino Basel, Basel",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/basel/irish-folk-festival_ANYkapT"
+            },
+            {
+              "label": "Rhine Classics: Encounter I",
+              "detail": "Basel",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ensemble-rhein-klassik/"
+            },
+            {
+              "label": "Cantuccini - Neues Programm",
+              "detail": "Theater Fauteuil - Tabourettli",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/cantuccini-neues-programm_AE4hULr"
+            },
+            {
+              "label": "Grietas/A Hot Chick in the Oven",
+              "detail": "Tanzhaus Basel - Magazin 1 - Studio Bühne, Basel",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/grietasa-hot-chick-in-the-oven_A2vegu2"
+            },
+            {
+              "label": "StandUp Comedy: Simon Stäblein - Absolute Frechheit",
+              "detail": "Häbse-Theater Basel, Basel",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/standup-comedy-simon-staeblein-absolute-frechheit-1/"
+            },
+            {
+              "label": "Starbugs Comedy - Showtime!",
+              "detail": "Basel",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/starbugs-comedy-showtime-1/"
+            },
+            {
+              "label": "Daniela Dill: «Trotzdäm»",
+              "detail": "Der Teufelhof Basel, Basel",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/daniela-dill-trotzdaem/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/basilea/",
-          "updatedAt": "2026-10-27T19:25:52.214Z"
+          "updatedAt": "2026-10-28T19:25:39.771Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/basilea/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-28T01:14:28.455Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "90",
+          "value": "89",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
-              "detail": "Basilea, Basel",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
-            },
-            {
-              "label": "ONLINE: Künstliche Intelligenz im Berufsalltag – einfach erklärt",
-              "detail": "Universitätsbibliothek (UB)",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/online-kuenstliche-intelligenz-im-berufsalltag-einfach-erklaert_AQ2sEcF"
-            },
-            {
-              "label": "Jassen für Anfänger",
-              "detail": "Riehen",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jassen-fuer-anfaenger/"
-            },
-            {
-              "label": "A Night's Game",
-              "detail": "Tanzhaus Basel - Silo 2 - Black Box, Basel",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/a-nights-game_AN1xZRt"
-            },
-            {
-              "label": "Kruger Brothers & Kaleidoscope String Quartet",
-              "detail": "Gelterkinden",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kruger-brothers-kaleidoscope-string-quartet/"
-            },
-            {
-              "label": "Milan Milanski - Schwugo",
-              "detail": "Theater Fauteuil, Basel",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/milan-milanski-schwugo-3/"
-            },
-            {
-              "label": "Witz vom Olli - FSK18 - Hart aber herzlich",
-              "detail": "Basel",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/witz-vom-olli-fsk18-hart-aber-herzlich/"
-            },
-            {
-              "label": "Patrick Joray Quartet",
-              "detail": "the bird's eye jazz club — ongoing, last day: 28 October 2026",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/patrick-joray-quartet_A3p6Fni"
-            },
-            {
-              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
-              "detail": "Universitätsbibliothek (UB) — ongoing, last day: 5 November 2026",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
-            },
-            {
               "label": "Basel Jazz Orchestra plays George Gruntz",
               "detail": "the bird's eye jazz club, Basel",
               "date": "2026-10-29",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/basel-jazz-orchestra_AEVbtJQ"
+            },
+            {
+              "label": "Gin Workshop: eigenen Gin entwickeln in der Brennerei",
+              "detail": "Basel",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gin-workshop-eigenen-gin-entwickeln-in-der-brennerei/"
+            },
+            {
+              "label": "mini.musik",
+              "detail": "Theater Basel, Basel",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/basel/minimusik_ArwC5MD"
+            },
+            {
+              "label": "Irish Folk Festival",
+              "detail": "Stadtcasino Basel, Basel",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/basel/irish-folk-festival_ANYkapT"
+            },
+            {
+              "label": "Rhine Classics: Encounter I",
+              "detail": "Basel",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ensemble-rhein-klassik/"
+            },
+            {
+              "label": "Cantuccini - Neues Programm",
+              "detail": "Theater Fauteuil - Tabourettli",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/cantuccini-neues-programm_AE4hULr"
+            },
+            {
+              "label": "Grietas/A Hot Chick in the Oven",
+              "detail": "Tanzhaus Basel - Magazin 1 - Studio Bühne, Basel",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/grietasa-hot-chick-in-the-oven_A2vegu2"
+            },
+            {
+              "label": "StandUp Comedy",
+              "detail": "Häbse-Theater Basel, Basel",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/standup-comedy-simon-staeblein-absolute-frechheit-1/"
+            },
+            {
+              "label": "Starbugs Comedy - Showtime!",
+              "detail": "Basel",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/starbugs-comedy-showtime-1/"
+            },
+            {
+              "label": "Daniela Dill: «Trotzdäm»",
+              "detail": "Der Teufelhof Basel, Basel",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/daniela-dill-trotzdaem/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/basel/",
-          "updatedAt": "2026-10-27T19:25:52.214Z"
+          "updatedAt": "2026-10-28T19:25:39.771Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/basel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-28T01:14:28.455Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "90",
+          "value": "89",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "B1 Rooftop Bistro – COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
-              "detail": "Basilea, Basel",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
-            },
-            {
-              "label": "ONLINE: Künstliche Intelligenz im Berufsalltag – einfach erklärt",
-              "detail": "Universitätsbibliothek (UB)",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/online-kuenstliche-intelligenz-im-berufsalltag-einfach-erklaert_AQ2sEcF"
-            },
-            {
-              "label": "Jassen für Anfänger",
-              "detail": "Riehen",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jassen-fuer-anfaenger/"
-            },
-            {
-              "label": "A Night's Game",
-              "detail": "Tanzhaus Basel - Silo 2 - Black Box, Basel",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/a-nights-game_AN1xZRt"
-            },
-            {
-              "label": "Kruger Brothers & Kaleidoscope String Quartet",
-              "detail": "Gelterkinden",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kruger-brothers-kaleidoscope-string-quartet/"
-            },
-            {
-              "label": "Milan Milanski - Schwugo",
-              "detail": "Theater Fauteuil, Basel",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/milan-milanski-schwugo-3/"
-            },
-            {
-              "label": "Witz vom Olli - FSK18 - Hart aber herzlich",
-              "detail": "Basel",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/witz-vom-olli-fsk18-hart-aber-herzlich/"
-            },
-            {
-              "label": "Patrick Joray Quartet",
-              "detail": "the bird's eye jazz club — läuft, letzter Tag: 28. Oktober 2026",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/patrick-joray-quartet_A3p6Fni"
-            },
-            {
-              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
-              "detail": "Universitätsbibliothek (UB) — läuft, letzter Tag: 5. November 2026",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
-            },
-            {
               "label": "Basel Jazz Orchestra plays George Gruntz",
               "detail": "the bird's eye jazz club, Basel",
               "date": "2026-10-29",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/basel-jazz-orchestra_AEVbtJQ"
+            },
+            {
+              "label": "Gin Workshop: eigenen Gin entwickeln in der Brennerei",
+              "detail": "Basel",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gin-workshop-eigenen-gin-entwickeln-in-der-brennerei/"
+            },
+            {
+              "label": "mini.musik",
+              "detail": "Theater Basel, Basel",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/basel/minimusik_ArwC5MD"
+            },
+            {
+              "label": "Irish Folk Festival",
+              "detail": "Stadtcasino Basel, Basel",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/basel/irish-folk-festival_ANYkapT"
+            },
+            {
+              "label": "Rhein Klassik: Begegnung I",
+              "detail": "Basel",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ensemble-rhein-klassik/"
+            },
+            {
+              "label": "Cantuccini - Neues Programm",
+              "detail": "Theater Fauteuil - Tabourettli",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/cantuccini-neues-programm_AE4hULr"
+            },
+            {
+              "label": "Grietas/A Hot Chick in the Oven",
+              "detail": "Tanzhaus Basel - Magazin 1 - Studio Bühne, Basel",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/grietasa-hot-chick-in-the-oven_A2vegu2"
+            },
+            {
+              "label": "Stand-up-Comedy: Simon Stäblein – Absolute Frechheit",
+              "detail": "Häbse-Theater Basel, Basel",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/standup-comedy-simon-staeblein-absolute-frechheit-1/"
+            },
+            {
+              "label": "Starbugs Comedy - Showtime!",
+              "detail": "Basel",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/starbugs-comedy-showtime-1/"
+            },
+            {
+              "label": "Daniela Dill: «Trotzdäm»",
+              "detail": "Der Teufelhof Basel, Basel",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/daniela-dill-trotzdaem/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/basel/",
-          "updatedAt": "2026-10-27T19:25:52.214Z"
+          "updatedAt": "2026-10-28T19:25:39.771Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/basel/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-28T01:14:28.455Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "90",
+          "value": "89",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
-              "detail": "Basilea, Basel",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
-            },
-            {
-              "label": "ONLINE: Künstliche Intelligenz im Berufsalltag – einfach erklärt",
-              "detail": "Universitätsbibliothek (UB)",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/online-kuenstliche-intelligenz-im-berufsalltag-einfach-erklaert_AQ2sEcF"
-            },
-            {
-              "label": "Jassen für Anfänger",
-              "detail": "Riehen",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jassen-fuer-anfaenger/"
-            },
-            {
-              "label": "A Night's Game",
-              "detail": "Tanzhaus Basel - Silo 2 - Black Box, Basel",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/a-nights-game_AN1xZRt"
-            },
-            {
-              "label": "Kruger Brothers & Kaleidoscope String Quartet",
-              "detail": "Gelterkinden",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kruger-brothers-kaleidoscope-string-quartet/"
-            },
-            {
-              "label": "Milan Milanski - Schwugo",
-              "detail": "Theater Fauteuil, Basel",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/milan-milanski-schwugo-3/"
-            },
-            {
-              "label": "Witz vom Olli - FSK18 - Hart aber herzlich",
-              "detail": "Basel",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/witz-vom-olli-fsk18-hart-aber-herzlich/"
-            },
-            {
-              "label": "Patrick Joray Quartet",
-              "detail": "the bird's eye jazz club — en cours, dernier jour : 28 octobre 2026",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/patrick-joray-quartet_A3p6Fni"
-            },
-            {
-              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
-              "detail": "Universitätsbibliothek (UB) — en cours, dernier jour : 5 novembre 2026",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
-            },
-            {
               "label": "Basel Jazz Orchestra plays George Gruntz",
               "detail": "the bird's eye jazz club, Basel",
               "date": "2026-10-29",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/basel-jazz-orchestra_AEVbtJQ"
+            },
+            {
+              "label": "Gin Workshop: eigenen Gin entwickeln in der Brennerei",
+              "detail": "Basel",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gin-workshop-eigenen-gin-entwickeln-in-der-brennerei/"
+            },
+            {
+              "label": "mini.musik",
+              "detail": "Theater Basel, Basel",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/basel/minimusik_ArwC5MD"
+            },
+            {
+              "label": "Irish Folk Festival",
+              "detail": "Stadtcasino Basel, Basel",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/basel/irish-folk-festival_ANYkapT"
+            },
+            {
+              "label": "Rhein Klassik : Rencontre I",
+              "detail": "Basel",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ensemble-rhein-klassik/"
+            },
+            {
+              "label": "Cantuccini - Neues Programm",
+              "detail": "Theater Fauteuil - Tabourettli",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/cantuccini-neues-programm_AE4hULr"
+            },
+            {
+              "label": "Grietas/A Hot Chick in the Oven",
+              "detail": "Tanzhaus Basel - Magazin 1 - Studio Bühne, Basel",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/grietasa-hot-chick-in-the-oven_A2vegu2"
+            },
+            {
+              "label": "StandUp Comedy : Simon Stäblein - Absolute Frechheit",
+              "detail": "Häbse-Theater Basel, Basel",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/standup-comedy-simon-staeblein-absolute-frechheit-1/"
+            },
+            {
+              "label": "Starbugs Comedy - Showtime!",
+              "detail": "Basel",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/starbugs-comedy-showtime-1/"
+            },
+            {
+              "label": "Daniela Dill: «Trotzdäm»",
+              "detail": "Der Teufelhof Basel, Basel",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/daniela-dill-trotzdaem/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/bale/",
-          "updatedAt": "2026-10-27T19:25:52.214Z"
+          "updatedAt": "2026-10-28T19:25:39.771Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/bale/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-28T01:14:28.455Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     }
   }
 }

@@ -4016,9 +4016,9 @@
       "sitePath": "build-plugins/batchWrite.ts",
       "mode": "identical",
       "baseline": {
-        "site": "4729d0396ed5b7c2",
-        "corpus": "4729d0396ed5b7c2",
-        "alignedAt": "2026-10-27"
+        "site": "675c0caf88234a82",
+        "corpus": "675c0caf88234a82",
+        "alignedAt": "2026-10-29"
       }
     },
     {

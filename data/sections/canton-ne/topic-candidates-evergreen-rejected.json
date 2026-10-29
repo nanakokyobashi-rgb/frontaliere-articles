@@ -4,62 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261026-les-salaires-effectifs-ont-augmente-de-0-5-en-2026.html": {
-      "section": "canton-ne",
-      "ts": 1793003504979
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261026-migros-veut-fusionner-ses-dix-cooperatives.html": {
-      "section": "canton-ne",
-      "ts": 1793009222391
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261026-la-desinformation-inquiete-plus-de-la-moitie-des-suisses.html": {
-      "section": "canton-ne",
-      "ts": 1793009231988
-    },
-    "canton-ne::https://www.rts.ch/audio-podcast/2012/emission/le-journal-horaire-25000140.html": {
-      "section": "canton-ne",
-      "ts": 1793010136141
-    },
-    "canton-ne::https://www.rts.ch/play/tv/emission/couleurs-locales?id=470618": {
-      "section": "canton-ne",
-      "ts": 1793010226268
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261026-train-aspirateur-en-action-dans-le-tunnel-de-base-du-gothard.html": {
-      "section": "canton-ne",
-      "ts": 1793012812211
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261026-sergio-ermotti-auditionne-au-parlement-sur-la-lex-ubs.html": {
-      "section": "canton-ne",
-      "ts": 1793012931512
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261026-microsoft-propose-des-departs-volontaires-a-environ-60-000-salaries.html": {
-      "section": "canton-ne",
-      "ts": 1793036203697
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261026-sps-releve-ses-objectifs-2026.html": {
-      "section": "canton-ne",
-      "ts": 1793058648296
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261026-anthropic-leve-le-voile-avant-son-entree-en-bourse.html": {
-      "section": "canton-ne",
-      "ts": 1793058656355
-    },
-    "canton-ne::https://www.ne.ch/communiques-de-presse/pour-sa-30eme-edition-le-prix-interculturel-salut-letranger-recompense-le-centre-portugais-de-neuchatel-et-madame-carmen-diaz-pumarejo": {
-      "section": "canton-ne",
-      "ts": 1793067662214
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261027-novartis-affecte-au-troisieme-trimestre-par-un-echec-clinique.html": {
-      "section": "canton-ne",
-      "ts": 1793086053410
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261027-hsbc-benefice-net-en-hausse-de-45-inferieur-aux-attentes.html": {
-      "section": "canton-ne",
-      "ts": 1793086060857
-    },
-    "canton-ne::https://www.canalalpha.ch/play/meta/lieux/canton-de-neuchatel": {
-      "section": "canton-ne",
-      "ts": 1793090176159
-    },
     "canton-ne::https://www.canalalpha.ch/play/la-boucle/episode/43715/interview-ruwaiyda-al-hasheme-gabriel-nyange-les-nouveaux-ambassadeurs-du-canton-de-neuchatel": {
       "section": "canton-ne",
       "ts": 1793106164491
@@ -71,6 +15,10 @@
     "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261027-une-suisse-plus-independante-energetiquement-grace-au-nucleaire.html": {
       "section": "canton-ne",
       "ts": 1793107478464
+    },
+    "canton-ne::https://www.ne.ch/communiques-de-presse/pour-sa-30eme-edition-le-prix-interculturel-salut-letranger-recompense-le-centre-portugais-de-neuchatel-et-madame-carmen-diaz-pumarejo": {
+      "section": "canton-ne",
+      "ts": 1793263057734
     }
   }
 }
