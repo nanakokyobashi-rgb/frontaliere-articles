@@ -42,7 +42,7 @@
  * manca solo una pagina di sezione, con `ids: []` (rinfresco di landing,
  * archivio e hub).
  *
- * Uso: node scripts/reconcile-section-pages.mjs --out <report.json> [--cap N] [--budget-ms N]
+ * Uso: node scripts/reconcile-section-pages.mjs --out <report.json> [--cap N] [--landing-limit N] [--budget-ms N]
  * Solo builtin Node: gira senza npm ci.
  */
 import '../host/cantonSectionsBootstrap.mjs';
@@ -52,7 +52,10 @@ import { fileURLToPath } from 'node:url';
 
 import { ARTICLE_SECTION_CORE_ALL } from '../engine/shared/articleSectionCore.mjs';
 import { CANTON_ARCHIVE_ALL_SLUG } from '../engine/shared/cantonSectionCopy.mjs';
-import { parseCantonLandingCardLimitExport } from './lib/canton-landing-card-limit.mjs';
+import {
+  parseCantonLandingCardLimitExport,
+  resolveCantonLandingCardLimit,
+} from './lib/canton-landing-card-limit.mjs';
 import { fetchPageManifest, pageManifestUrl } from './lib/section-page-manifest.mjs';
 import { assertHubLocaleSlug, assertHubTopicEntries } from './lib/assert-hub-locale-slug.mjs';
 import { sitemapPaths } from './publish-section-edge.mjs';
@@ -89,6 +92,40 @@ export const RECONCILE_FETCH_ATTEMPTS = 3;
 export const RECONCILE_FETCH_RETRY_DELAY_MS = 1000;
 export const RECONCILE_FETCH_MAX_RETRY_AFTER_MS = 300_000;
 export const RECONCILE_FETCH_MAX_DURATION_MS = 180_000;
+
+function renderableCantonLandingRows(rows, slugs, locale) {
+  const orderedRows = (rows ?? [])
+    .map((row, index) => ({ row, index }))
+    .sort((a, b) => {
+      const dateA = String(a.row?.date ?? '');
+      const dateB = String(b.row?.date ?? '');
+      if (dateA && dateB && dateA !== dateB) return dateB.localeCompare(dateA);
+      if (dateA && !dateB) return -1;
+      if (!dateA && dateB) return 1;
+      return a.index - b.index;
+    })
+    .map(({ row }) => row);
+  const articleRows = [];
+  for (const row of orderedRows) {
+    const id = String(row?.id ?? '');
+    // `renderCantonSectionLanding` falls back to the article id when a
+    // localized slug is absent; use the same path so a valid fallback card
+    // does not look stale to the reconciler.
+    const slug = slugs?.[id]?.[locale] ?? id;
+    if (id && typeof slug === 'string' && slug) articleRows.push({ id, path: `${slug}/` });
+  }
+  return articleRows;
+}
+
+/**
+ * Count the same rows that `landingArticleCoverage` can render. Keeping this
+ * predicate shared prevents an unverifiable landing from reporting a larger
+ * expected count than the normal HTML coverage path.
+ */
+export function countRenderableCantonLandingRows({ rows, slugs, locale, limit = CANTON_LANDING_CARD_LIMIT }) {
+  const effectiveLimit = resolveCantonLandingCardLimit(limit, CANTON_LANDING_CARD_LIMIT);
+  return Math.min(renderableCantonLandingRows(rows, slugs, locale).length, effectiveLimit);
+}
 
 export class ReconcileBudgetExceededError extends Error {
   constructor() {
@@ -593,32 +630,12 @@ export function landingArticleCoverage({
   if (typeof prefix !== 'string' || !prefix.endsWith('/')) {
     throw new Error(`prefisso landing non valido per ${locale}`);
   }
-  if (!Number.isSafeInteger(limit) || limit < 1) {
-    throw new Error(`limite landing non valido: ${limit}`);
-  }
-  const orderedRows = (rows ?? [])
-    .map((row, index) => ({ row, index }))
-    .sort((a, b) => {
-      const dateA = String(a.row?.date ?? '');
-      const dateB = String(b.row?.date ?? '');
-      if (dateA && dateB && dateA !== dateB) return dateB.localeCompare(dateA);
-      if (dateA && !dateB) return -1;
-      if (!dateA && dateB) return 1;
-      return a.index - b.index;
-    })
-    .map(({ row }) => row);
-  const articleRows = [];
-  for (const row of orderedRows) {
-    const id = String(row?.id ?? '');
-    // `renderCantonSectionLanding` falls back to the article id when a
-    // localized slug is absent; use the same path so a valid fallback card
-    // does not look stale to the reconciler.
-    const slug = slugs?.[id]?.[locale] ?? id;
-    if (id && typeof slug === 'string' && slug) articleRows.push({ id, path: `${prefix}${slug}/` });
-  }
+  const effectiveLimit = resolveCantonLandingCardLimit(limit, CANTON_LANDING_CARD_LIMIT);
+  const articleRows = renderableCantonLandingRows(rows, slugs, locale)
+    .map(({ id, path }) => ({ id, path: `${prefix}${path}` }));
   const articleByPath = new Map(articleRows.map(({ id, path: articlePath }) => [articlePath, id]));
   const expectedArticleByPath = new Map(articleRows
-    .slice(0, limit)
+    .slice(0, effectiveLimit)
     .map(({ id, path: articlePath }) => [articlePath, id]));
   const found = new Set();
   const extraIds = new Set();
@@ -781,6 +798,7 @@ async function mapLimit(items, limit, fn) {
 export async function reconcile({
   apiBase = API_BASE_DEFAULT,
   cap = 3,
+  landingCardLimit = CANTON_LANDING_CARD_LIMIT,
   fetchImpl = fetch,
   retryDelayMs = RECONCILE_FETCH_RETRY_DELAY_MS,
   sleepImpl = defaultSleep,
@@ -791,6 +809,10 @@ export async function reconcile({
   if (!Number.isSafeInteger(duration) || duration <= 0) {
     throw new Error('budgetMs deve essere una durata positiva intera finita');
   }
+  const effectiveLandingCardLimit = resolveCantonLandingCardLimit(
+    landingCardLimit,
+    CANTON_LANDING_CARD_LIMIT,
+  );
   const startedAt = now();
   const deadline = startedAt + duration;
   if (!Number.isFinite(startedAt) || !Number.isFinite(deadline)) {
@@ -902,6 +924,7 @@ export async function reconcile({
           slugs: sectionSlugs,
           locale,
           html,
+          limit: effectiveLandingCardLimit,
         });
         landingChecks.push({ locale, path: landingPath, state: coverage.problems.length ? 'invalid' : 'ok', ...coverage });
       } catch (error) {
@@ -910,7 +933,12 @@ export async function reconcile({
           path: landingPath,
           state: 'unknown',
           reason: sitemapFailureDetail(landingUrl, error),
-          expectedCount: Math.min(activeRows.length, CANTON_LANDING_CARD_LIMIT),
+          expectedCount: countRenderableCantonLandingRows({
+            rows: activeRows,
+            slugs: sectionSlugs,
+            locale,
+            limit: effectiveLandingCardLimit,
+          }),
           foundCount: null,
           declaredCount: null,
           missingIds: [],
@@ -973,12 +1001,12 @@ export async function reconcile({
 export async function main(argv = process.argv.slice(2)) {
   const args = {};
   for (let i = 0; i < argv.length; i++) {
-    if (argv[i] === '--out' || argv[i] === '--cap' || argv[i] === '--budget-ms') {
+    if (argv[i] === '--out' || argv[i] === '--cap' || argv[i] === '--landing-limit' || argv[i] === '--budget-ms') {
       const value = argv[i + 1];
       if (value === undefined || value.startsWith('--')) throw new Error(`${argv[i]} richiede un valore`);
       args[argv[i].slice(2)] = value;
       i++;
-    } else throw new Error(`argomento sconosciuto: ${argv[i]} (uso: --out <report.json> [--cap N] [--budget-ms N])`);
+    } else throw new Error(`argomento sconosciuto: ${argv[i]} (uso: --out <report.json> [--cap N] [--landing-limit N] [--budget-ms N])`);
   }
   if (!args.out) throw new Error('manca --out <report.json>');
   const cap = Number(args.cap ?? process.env.RECONCILE_SECTION_CAP ?? 3);
@@ -987,8 +1015,13 @@ export async function main(argv = process.argv.slice(2)) {
       ?? process.env.RECONCILE_SECTION_BUDGET_MS
       ?? RECONCILE_FETCH_MAX_DURATION_MS,
   );
+  const landingCardLimit = Number(
+    args['landing-limit']
+      ?? process.env.RECONCILE_SECTION_LANDING_LIMIT
+      ?? CANTON_LANDING_CARD_LIMIT,
+  );
   const apiBase = (process.env.RECONCILE_API_BASE || API_BASE_DEFAULT).replace(/\/+$/, '');
-  const report = await reconcile({ apiBase, cap, budgetMs });
+  const report = await reconcile({ apiBase, cap, landingCardLimit, budgetMs });
   report.counts = {
     sections: report.sections.length,
     dispatch: report.sections.filter((s) => s.dispatch).length,

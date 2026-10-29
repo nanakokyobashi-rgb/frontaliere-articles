@@ -43,7 +43,7 @@ for (const key of [
   'GOOGLE_APPLICATION_CREDENTIALS', 'MT_LOCAL_OPUSMT', 'ENABLE_CODEX_ARTICLE_FALLBACK',
   'AI_MODELS_PREFER', 'AI_MODELS_FORCE_CHAIN',
   'FREE_TRANSLATE_CODEX_MAX_CALLS', 'FREE_TRANSLATE_CODEX_MAX_MS', 'FREE_TRANSLATE_CODEX_LANES',
-  'FREE_TRANSLATE_CODEX_BATCH_MAX_TEXTS',
+  'FREE_TRANSLATE_CODEX_BATCH_MAX_TEXTS', 'FREE_TRANSLATE_CODEX_BATCH_MAX_CHARS',
 ]) delete process.env[key];
 process.env.DEEPL_API_KEY = 'deepl-finta';
 process.env.AZURE_TRANSLATOR_KEY = 'azure-finta';
@@ -61,6 +61,9 @@ const {
   codexCallDeadlineMs,
   beginCodexTranslationCall,
   withCodexTranslationLane,
+  codexBatchCharBudgetEnabled,
+  flushCodexCollectionTimer,
+  isAmbiguousCodexEcho,
   fetchWithRefTimeout,
 } = await import('../scripts/lib/free-translate.mjs');
 const { AI_MODELS } = await import('../scripts/lib/ai-models.mjs');
@@ -572,6 +575,22 @@ test('le recovery non batch condividono le corsie Codex con il scheduler', async
   }
 });
 
+test('budget caratteri zero disabilita il batching senza ridurlo a un carattere', () => {
+  process.env.FREE_TRANSLATE_CODEX_BATCH_MAX_CHARS = '0';
+  try {
+    assert.equal(codexBatchCharBudgetEnabled(), false);
+    process.env.FREE_TRANSLATE_CODEX_BATCH_MAX_CHARS = '1';
+    assert.equal(codexBatchCharBudgetEnabled(), true);
+  } finally {
+    delete process.env.FREE_TRANSLATE_CODEX_BATCH_MAX_CHARS;
+  }
+});
+
+test('flushCodexCollectionTimer è idempotente quando non c è una finestra armata', () => {
+  assert.equal(flushCodexCollectionTimer(), false);
+  assert.equal(flushCodexCollectionTimer(), false);
+});
+
 test('una recovery multi-step addebita ogni chiamata iniziale alla lane condivisa', async () => {
   process.env.FREE_TRANSLATE_CODEX_MAX_CALLS = '2';
   setCodexTranslateCallForTests(null);
@@ -938,6 +957,21 @@ test('una richiesta di gruppo fallita e\' un errore per ogni suo testo e un fall
     assert.equal(codexCounters().errors - before.errors, 3);
     assert.equal(lines.filter((l) => l.includes('fallimenti consecutivi')).length, 0);
   });
+});
+
+test('un eco breve o misto non consuma lo streak Codex', async () => {
+  assert.equal(isAmbiguousCodexEcho('Senior .NET Developer', 'Senior .NET Developer', 'it', 'en'), true);
+  assert.equal(isAmbiguousCodexEcho(IT, IT, 'it', 'en'), false);
+  const calls = stubCodex('Senior .NET Developer');
+  const { lines } = await captureLog(async () => Promise.all(Array.from({ length: 4 }, () => freeTranslate({
+    text: 'Senior .NET Developer',
+    sourceLang: 'it',
+    targetLang: 'en',
+    fieldType: 'title',
+  }))));
+  assert.equal(calls.length, 4);
+  assert.ok(lines.filter((line) => line.includes('reason=echo-ambiguous')).length >= 4);
+  assert.equal(lines.filter((line) => line.includes('3 fallimenti consecutivi')).length, 0);
 });
 
 test('tre fallimenti consecutivi fermano il tier, contati come errori del tier', async () => {

@@ -2283,6 +2283,23 @@ function _codexEchoProvesSourceLanguage(source, sourceLang, targetLang) {
   return detected.lang === sourceBase && detected.confidence >= 0.5;
 }
 
+/**
+ * Short titles and mixed-language labels do not provide enough signal for the
+ * detector to prove that an identical answer is source-language content. They
+ * still fall through to the next provider, but must not consume the Codex
+ * failure streak that protects the lane from a genuinely broken model.
+ */
+export function isAmbiguousCodexEcho(source, output, sourceLang, targetLang) {
+  if (!isSourcePassthrough(source, output)) return false;
+  const sourceBase = String(sourceLang || '').split('-')[0].toLowerCase();
+  const targetBase = String(targetLang || '').split('-')[0].toLowerCase();
+  if (!sourceBase || sourceBase === targetBase) return false;
+  const wordCount = (String(source).match(TRANSLATABLE_WORD_RE) || []).length;
+  if (wordCount < MIN_SUBSTANTIVE_PASSTHROUGH_WORDS) return true;
+  const detected = detectLanguageWithConfidence(source, targetLang);
+  return detected.confidence < 0.15 && String(source).length < 120;
+}
+
 function _logCodexNonTranslation(item, reason) {
   const prefix = item.clean.replace(/\s+/gu, ' ').trim().slice(0, 40);
   console.log(`   ⚠️  [codex] non-tradotto len=${item.clean.length} pair=${item.sourceLang}->${item.targetLang} reason=${reason} prefix=${JSON.stringify(prefix)}`);
@@ -2317,9 +2334,24 @@ function _codexBatchMaxTexts() {
   return Math.min(Math.max(texts, 1), CODEX_TRANSLATE_BATCH_MAX_TEXTS_LIMIT);
 }
 
+/**
+ * A zero character budget is an explicit disable, not a one-character batch
+ * after the generic non-negative clamp. A text-count override may still opt
+ * into batching; in that case zero means "use the default character ceiling"
+ * rather than silently creating one-character requests.
+ */
+export function codexBatchCharBudgetEnabled() {
+  const raw = String(process.env.FREE_TRANSLATE_CODEX_BATCH_MAX_CHARS || '').trim();
+  return /^\d+$/u.test(raw) && Number(raw) > 0;
+}
+
 function _codexBatchMaxChars() {
   const chars = _codexBudget('FREE_TRANSLATE_CODEX_BATCH_MAX_CHARS', CODEX_TRANSLATE_BATCH_MAX_CHARS_DEFAULT);
-  return Math.min(Math.max(chars, 1), CODEX_TRANSLATE_BATCH_MAX_CHARS_LIMIT);
+  const raw = String(process.env.FREE_TRANSLATE_CODEX_BATCH_MAX_CHARS || '').trim();
+  const effective = /^\d+$/u.test(raw) && Number(raw) === 0
+    ? CODEX_TRANSLATE_BATCH_MAX_CHARS_DEFAULT
+    : chars;
+  return Math.min(Math.max(effective, 1), CODEX_TRANSLATE_BATCH_MAX_CHARS_LIMIT);
 }
 
 /**
@@ -2332,8 +2364,7 @@ function _codexBatchMaxChars() {
  */
 function _codexBatchingExplicitlyEnabled() {
   const rawTexts = String(process.env.FREE_TRANSLATE_CODEX_BATCH_MAX_TEXTS || '').trim();
-  const rawChars = String(process.env.FREE_TRANSLATE_CODEX_BATCH_MAX_CHARS || '').trim();
-  return (/^\d+$/.test(rawTexts) && Number(rawTexts) > 1) || /^\d+$/.test(rawChars);
+  return (/^\d+$/u.test(rawTexts) && Number(rawTexts) > 1) || codexBatchCharBudgetEnabled();
 }
 
 /** Tempo di orologio speso finora con almeno una richiesta in volo. */
@@ -2405,6 +2436,18 @@ export function beginCodexTranslationCall(options = {}) {
 }
 
 /**
+ * Consume the short collection window before a non-batch recovery enters the
+ * shared lane. This prevents a legacy request from waiting behind a timer that
+ * was armed for a burst which is no longer the only work waiting.
+ */
+export function flushCodexCollectionTimer() {
+  if (_codexPumpTimer === null) return false;
+  clearTimeout(_codexPumpTimer);
+  _codexPumpTimer = null;
+  return true;
+}
+
+/**
  * Riserva un solo retry fisico, senza aprire una seconda corsia temporale.
  * `callDeadlineMs` e' la deadline gia' concessa alla chiamata che ha fallito:
  * un retry non puo' allungarla solo perche' il processo ha ancora margine.
@@ -2440,6 +2483,7 @@ export function withCodexTranslationLane({
     }
   }
   return new Promise((resolve, reject) => {
+    flushCodexCollectionTimer();
     _codexLanePending.push({ run, fallback, processDeadlineMs, resolve, reject });
     _pumpCodex();
   });
@@ -2673,6 +2717,7 @@ async function _translateGroupWithCodex(group) {
   // lo streak e non spegne il tier che puo' ancora tradurre altri testi.
   const realFailures = new Set();
   const invariantEchoes = new Set();
+  const ambiguousEchoes = new Set();
   const translated = new Set();
   for (const source of unique) {
     const out = byText.get(source) || '';
@@ -2697,12 +2742,14 @@ async function _translateGroupWithCodex(group) {
     if (isSourcePassthrough(source, out)) {
       const invariantReason = _codexInvariantEchoReason(source, out, item.sourceLang, item.targetLang, item.outcome);
       const provenSourceEcho = _codexEchoProvesSourceLanguage(source, item.sourceLang, item.targetLang);
+      const ambiguousEcho = isAmbiguousCodexEcho(source, out, item.sourceLang, item.targetLang);
       const echoReason = invariantReason
         ? `invariant-${invariantReason}`
-        : provenSourceEcho ? 'echo-source' : 'echo-unproven';
+        : provenSourceEcho ? 'echo-source' : ambiguousEcho ? 'echo-ambiguous' : 'echo-unproven';
       _logCodexNonTranslation(item, echoReason);
       if (invariantReason) invariantEchoes.add(source);
       else if (provenSourceEcho) realFailures.add(source);
+      else if (ambiguousEcho) ambiguousEchoes.add(source);
       continue;
     }
     translated.add(source);
@@ -2723,7 +2770,7 @@ async function _translateGroupWithCodex(group) {
   if (realFailures.size > 0) _codexFailedRequests += 1;
   if (translated.size > 0) _resetCodexFailureStreak();
   else if (realFailures.size > 0) _noteCodexFailure(realFailures, targetLang);
-  else if (invariantEchoes.size > 0) _resetCodexFailureStreak();
+  else if (invariantEchoes.size > 0 || ambiguousEchoes.size > 0) _resetCodexFailureStreak();
   return results;
 }
 
