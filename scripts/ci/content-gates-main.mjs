@@ -601,6 +601,17 @@ export function extractOffenders(output) {
         pendingFailureIndent = null;
         continue;
       }
+      // Some Node versions emit a nested failure's `error:` line without a
+      // YAML diagnostic fence. It is still part of the failed assertion, so
+      // retain paths from indented continuation lines while a failure is
+      // pending. A later TAP record clears the pending failure below, which
+      // keeps warnings from passing tests out of the offender list.
+      if (line.match(/^\s+/)?.[0].length > pendingFailureIndent) {
+        for (const m of line.matchAll(re)) {
+          const p = m[0];
+          found.set(p, (found.get(p) || 0) + 1);
+        }
+      }
       // A failure without a YAML diagnostic is complete as soon as the next
       // TAP record starts. Do not let a later passing test's diagnostic block
       // inherit the failed status.
