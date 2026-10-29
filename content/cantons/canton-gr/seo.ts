@@ -626,6 +626,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-bus-sostitutivi-grigioni': {
+    title: 'Bus sostitutivi RhB tra Thusis e Preda per un cantiere',
+    description: 'La fonte segnala bus sostitutivi tra Thusis e Preda a causa di un cantiere RhB; il Verkehrsticker segue lo stato delle vie di traffico grigionesi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, sostitutivi, thusis, preda, cantiere',
+    ogTitle: 'Cantiere RhB, bus sostitutivi tra Thusis e Preda',
+    ogDescription: 'La fonte segnala bus sostitutivi tra Thusis e Preda a causa di un cantiere della RhB. Il Verkehrsticker segue le condizioni delle vie di traffico grigionesi e cita ingorghi, frane e altri eventi speciali.',
+    canonicalPath: '/articoli-grigioni/bus-sostitutivi-grigioni/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bus sostitutivi RhB tra Thusis e Preda per un cantiere",
+      "description": "La fonte segnala bus sostitutivi tra Thusis e Preda a causa di un cantiere RhB; il Verkehrsticker segue lo stato delle vie di traffico grigionesi.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-bus-sostitutivi-grigioni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-29T15:42:15+00:00",
+      "dateModified": "2026-10-29T15:42:15+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-grigioni/bus-sostitutivi-grigioni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
