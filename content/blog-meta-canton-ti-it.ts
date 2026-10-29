@@ -72,6 +72,9 @@ const blogMetaCantonTiIt: Record<string, string> = {
     'blog.article.sistema-ferroviario-accordo-ue.title': 'Accordo UE: apertura del mercato ferroviario a rischio',
     'blog.article.sistema-ferroviario-accordo-ue.excerpt': 'L\'accordo UE coinvolgerà anche i trasporti Oggi gli operatori esteri collaborano con le FFS Un\'apertura del mercato del 20% potrebbe mettere a rischio l\'orario',
     'blog.article.sistema-ferroviario-accordo-ue.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.attrattivita-economica-zurigo-ticino.title': 'Attrattività economica: il dibattito zurighese interpella anche il Ticino',
+    'blog.article.attrattivita-economica-zurigo-ticino.excerpt': 'Vontobel prevede un campus a Baar nel 2030 Cembra sposterà la sede da Zurigo-Altstetten a Baden nel 2027 655 imprese hanno trasferito la sede da Zurigo a Zugo',
+    'blog.article.attrattivita-economica-zurigo-ticino.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonTiIt;

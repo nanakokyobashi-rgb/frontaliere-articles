@@ -72,6 +72,9 @@ const blogMetaCantonTiDe: Record<string, string> = {
     'blog.article.sistema-ferroviario-accordo-ue.title': 'EU-Abkommen: Öffnung des Eisenbahnmarktes in Gefahr',
     'blog.article.sistema-ferroviario-accordo-ue.excerpt': 'Das EU-Abkommen wird auch den Verkehr betreffen Heute arbeiten ausländische Betreiber mit den FFS zusammen Eine Öffnung des Marktes um 20% könnte den Fahrplan gefährden',
     'blog.article.sistema-ferroviario-accordo-ue.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.attrattivita-economica-zurigo-ticino.title': 'Wirtschaftliche Attraktivität: Die Zürcher Debatte betrifft auch das Tessin',
+    'blog.article.attrattivita-economica-zurigo-ticino.excerpt': 'Vontobel plant im Jahr 2030 einen Campus in Baar Cembra wird im Jahr 2027 den Sitz von Zürich-Altstetten nach Baden verlegen 655 Unternehmen haben ihren Sitz von Zürich nach Zug verlegt',
+    'blog.article.attrattivita-economica-zurigo-ticino.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonTiDe;

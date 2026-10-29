@@ -72,6 +72,9 @@ const blogMetaCantonTiEn: Record<string, string> = {
     'blog.article.sistema-ferroviario-accordo-ue.title': 'EU agreement: opening the railway market at risk',
     'blog.article.sistema-ferroviario-accordo-ue.excerpt': 'The EU agreement will also affect transport Today, foreign operators collaborate with FFS A 20% opening of the market could put the timetable at risk',
     'blog.article.sistema-ferroviario-accordo-ue.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.attrattivita-economica-zurigo-ticino.title': 'Economic attractiveness: the debate in Zurich also concerns Ticino',
+    'blog.article.attrattivita-economica-zurigo-ticino.excerpt': 'Vontobel plans a campus in Baar in 2030 Cembra will move its headquarters from Zurich-Altstetten to Baden in 2027 655 companies have moved their headquarters from Zurich to Zug',
+    'blog.article.attrattivita-economica-zurigo-ticino.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonTiEn;
