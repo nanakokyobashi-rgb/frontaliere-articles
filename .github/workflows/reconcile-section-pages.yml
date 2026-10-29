@@ -101,28 +101,117 @@ jobs:
             echo 'head_guard=true'
           } >> "$GITHUB_OUTPUT"
 
-      # Niente catena stretta: se l'innesco era a sua volta un dispatch (un
-      # backfill di questo workflow, o un bootstrap manuale) si rileva e basta;
-      # il completamento del child riapre il controllo event-driven. E' la
-      # stessa regola di reconcile-article-shards.yml.
+      # Niente catena stretta: solo i child con un nonce emesso da questo
+      # workflow o dalla recovery coordinata possono riaprire il controllo
+      # event-driven. Il run coordinatore che ha accettato i dispatch resta un
+      # normale producer event e non puo' armare il replay globale prima dei
+      # child. E' la stessa regola di reconcile-article-shards.yml.
       - name: Resolve backfill mode
         id: mode
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          WORKFLOW_RUN_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+          WORKFLOW_RUN_EVENT: ${{ github.event.workflow_run.event }}
+          WORKFLOW_RUN_DISPLAY_TITLE: ${{ github.event.workflow_run.display_title }}
         run: |
           set -euo pipefail
           allow=true
           event_replay=false
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.dry_run }}" != "false" ]; then
+          trusted_child=false
+          child_nonce=''
+          if [ "$EVENT_NAME" = "workflow_dispatch" ] && [ "${{ inputs.dry_run }}" != "false" ]; then
             allow=false; echo "dispatch disabilitato: dry_run manuale"
-          elif [ "${{ github.event_name }}" = "workflow_run" ]; then
-            if [ "${{ github.event.workflow_run.conclusion }}" = "success" ]; then
+          elif [ "$EVENT_NAME" = "workflow_run" ]; then
+            if [ "$WORKFLOW_RUN_EVENT" = "workflow_dispatch" ]; then
+              child_nonce="${WORKFLOW_RUN_DISPLAY_TITLE#*nonce=}"
+              child_nonce="${child_nonce%% / dry=*}"
+              case "$child_nonce" in
+                reconcile-*|stale-staged-*)
+                  trusted_child=true
+                  ;;
+              esac
+            fi
+            if [ "$WORKFLOW_RUN_CONCLUSION" = "success" ] && [ "$trusted_child" = 'true' ]; then
               event_replay=true
             fi
-            if [ "${{ github.event.workflow_run.event }}" = "workflow_dispatch" ]; then
+            if [ "$trusted_child" = 'true' ]; then
               allow=false; echo "dispatch disabilitato: il child ha gia' eseguito il backfill; controllo event-driven"
             fi
           fi
-          echo "allow=$allow" >> "$GITHUB_OUTPUT"
-          echo "event_replay=$event_replay" >> "$GITHUB_OUTPUT"
+          {
+            echo "allow=$allow"
+            echo "event_replay=$event_replay"
+            echo "trusted_child=$trusted_child"
+            echo "child_nonce=$child_nonce"
+          } >> "$GITHUB_OUTPUT"
+
+      # Un evento workflow_run con il solo titolo non dimostra che il child
+      # abbia pubblicato la revisione osservata: il coordinatore del child puo'
+      # terminare verde subito dopo aver accettato un dispatch. Il child deve
+      # quindi lasciare un artifact fresco, con nonce e source commit coerenti;
+      # in caso contrario il replay globale resta chiuso.
+      - name: Verify event-driven child artifact
+        id: child_artifact
+        if: steps.mode.outputs.event_replay == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          WORKFLOW_RUN_ID: ${{ github.event.workflow_run.id }}
+          WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          CHILD_NONCE: ${{ steps.mode.outputs.child_nonce }}
+          EXPECTED_SOURCE_COMMIT: ${{ steps.detect.outputs.source_commit }}
+        run: |
+          set -euo pipefail
+          if ! [[ "$WORKFLOW_RUN_ID" =~ ^[0-9]+$ ]]; then
+            echo "::error::workflow_run id non valido per la verifica del child"
+            exit 1
+          fi
+          if ! [[ "$EXPECTED_SOURCE_COMMIT" =~ ^[a-f0-9]{40}$ ]]; then
+            echo "::error::source commit non valido per la verifica del child"
+            exit 1
+          fi
+          if [ "$WORKFLOW_RUN_HEAD_SHA" != "$EXPECTED_SOURCE_COMMIT" ]; then
+            echo "::error::child workflow_run sulla HEAD $WORKFLOW_RUN_HEAD_SHA, attesa $EXPECTED_SOURCE_COMMIT"
+            exit 1
+          fi
+          current_main="$(bash scripts/ci/read-main-head.sh)"
+          if [ "$current_main" != "$EXPECTED_SOURCE_COMMIT" ]; then
+            echo "::notice::main e' avanzata dopo il child ($EXPECTED_SOURCE_COMMIT -> $current_main); replay API rimandato"
+            exit 1
+          fi
+          case "$CHILD_NONCE" in
+            reconcile-*|stale-staged-*) ;;
+            *)
+              echo "::error::nonce child non riconosciuto: $CHILD_NONCE"
+              exit 1
+              ;;
+          esac
+          artifact_dir="$RUNNER_TEMP/reconcile-child-artifact"
+          mkdir -p "$artifact_dir"
+          if ! gh run download "$WORKFLOW_RUN_ID" --repo "$REPOSITORY" --dir "$artifact_dir"; then
+            echo "::error::artifact del child $WORKFLOW_RUN_ID non scaricabile: replay API bloccato"
+            exit 1
+          fi
+          mapfile -t result_files < <(find "$artifact_dir" -type f -name fast-publish-result.json -print)
+          if [ "${#result_files[@]}" -ne 1 ]; then
+            echo "::error::artifact fast-publish-result non univoco per il child $WORKFLOW_RUN_ID"
+            exit 1
+          fi
+          result_file="${result_files[0]}"
+          jq -e \
+            --arg nonce "$CHILD_NONCE" \
+            --arg source "$EXPECTED_SOURCE_COMMIT" \
+            'type == "object"
+             and .dispatch_nonce == $nonce
+             and .source_commit == $source
+             and .source_main_commit == $source
+             and .rendered_head == $source
+             and .fresh == "true"
+             and (.stale_handoff // "false") == "false"
+             and (.coordinated_recovery == "true" or .coordinated_recovery == "false")' \
+            "$result_file" >/dev/null
+          echo 'verified=true' >> "$GITHUB_OUTPUT"
+          echo "::notice::artifact child verificato: nonce=$CHILD_NONCE, HEAD=$EXPECTED_SOURCE_COMMIT"
 
       # Il backfill e' un publisher a tutti gli effetti: eredita gli stessi
       # interruttori del fast-publish, anche quando il reconcile nasce da
@@ -215,6 +304,7 @@ jobs:
       - name: Replay API after event-driven backfill readiness
         if: >-
           steps.mode.outputs.event_replay == 'true' &&
+          steps.child_artifact.outputs.verified == 'true' &&
           steps.arm.outputs.allow == 'true' &&
           steps.detect.outputs.pending_edge_flip == 'true' &&
           steps.detect.outputs.skip == 'false' &&

@@ -3554,6 +3554,10 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(recovery, /child_allow_deferred_live_release=true/);
   assert.match(recovery, /child_coordinated_recovery=true/);
   assert.match(recovery, /-f coordinated_recovery="\$child_coordinated_recovery"/);
+  assert.match(recovery, /PRESERVE_EXPLICIT_SCOPE/);
+  assert.match(recovery, /merge_recovery_matrices/);
+  assert.match(recovery, /MIXED_MATRIX:-false.*!= 'true'/s);
+  assert.match(recovery, /git diff --name-status "\$plan_before" "\$CURRENT_MAIN"[\s\S]*fast-publish-section\.mjs r2-plan/);
   assert.doesNotMatch(recovery, /wait_for_dispatched_children/);
   assert.doesNotMatch(recovery, /REPLAY_CHILD_WAIT_MAX_S/);
   assert.doesNotMatch(recovery, /REPLAY_COORDINATOR_TIMEOUT_S/);
@@ -4260,7 +4264,13 @@ test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta',
   assert.match(wf, /Load producer token from Remote Config/);
   assert.match(wf, /runtime_pat="\$\{GITHUB_PAT_NANAKO:-\}"[\s\S]*export GH_TOKEN="\$runtime_pat"/);
   assert.match(read('scripts/reconcile-section-pages.mjs'), /pages-registry-absent/);
-  assert.match(wf, /github\.event\.workflow_run\.event \}\}" = "workflow_dispatch"/);
+  assert.match(wf, /WORKFLOW_RUN_EVENT: \$\{\{ github\.event\.workflow_run\.event \}\}/);
+  assert.match(wf, /WORKFLOW_RUN_DISPLAY_TITLE: \$\{\{ github\.event\.workflow_run\.display_title \}\}/);
+  assert.match(wf, /reconcile-\*\|stale-staged-\*/);
+  assert.match(wf, /gh run download "\$WORKFLOW_RUN_ID" --repo "\$REPOSITORY"/);
+  assert.match(wf, /\.dispatch_nonce == \$nonce/);
+  assert.match(wf, /\.rendered_head == \$source/);
+  assert.match(wf, /steps\.child_artifact\.outputs\.verified == 'true'/);
   assert.match(wf, /actions: write/);
   for (const reconcileWorkflow of [wf, articleWf]) {
     assert.match(reconcileWorkflow, /id: arm/);

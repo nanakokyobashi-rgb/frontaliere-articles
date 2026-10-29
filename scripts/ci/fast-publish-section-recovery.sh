@@ -12,6 +12,7 @@ if ! [[ "$CURRENT_MAIN" =~ ^[a-f0-9]{40}$ ]]; then
 fi
 export GH_TOKEN="$runtime_pat"
 target_matrix="$TARGET_MATRIX"
+preserve_explicit_scope="${PRESERVE_EXPLICIT_SCOPE:-false}"
 
 ensure_recovery_history() {
   local recovery_base="${ORIGINAL_PUSH_BEFORE:-}"
@@ -58,7 +59,73 @@ validate_recovery_base_ancestry() {
   esac
 }
 
-if [ "${MIXED_MATRIX:-false}" = 'true' ]; then
+merge_recovery_matrices() {
+  local existing="$1"
+  local delta="$2"
+  jq -cn --argjson existing "$existing" --argjson delta "$delta" '
+    def truthy($value): ($value // false) == true;
+    def merge_entry($left; $right):
+      {
+        section: $left.section,
+        bootstrap: (truthy($left.bootstrap) or truthy($right.bootstrap)),
+        ids: (
+          if truthy($left.bootstrap) or truthy($right.bootstrap)
+          then []
+          else (($left.ids // []) + ($right.ids // []) | unique | sort)
+          end
+        ),
+        missingPagePaths: (($left.missingPagePaths // []) + ($right.missingPagePaths // []) | unique | sort),
+        knownMissingPagePaths: (($left.knownMissingPagePaths // []) + ($right.knownMissingPagePaths // []) | unique | sort)
+      }
+      + (if truthy($left.removeStaleCantonRssFeeds) or truthy($right.removeStaleCantonRssFeeds)
+         then {removeStaleCantonRssFeeds: true} else {} end)
+      + (if truthy($left.cleanupInactiveSurface) or truthy($right.cleanupInactiveSurface)
+         then {cleanupInactiveSurface: true} else {} end);
+    reduce ($existing + $delta)[] as $entry ({};
+      .[$entry.section] = merge_entry((.[$entry.section] // {section: $entry.section}); $entry)
+    )
+    | to_entries
+    | sort_by(.key)
+    | map(.value)
+  '
+}
+
+if [ "${MIXED_MATRIX:-false}" != 'true' ] && [ "$preserve_explicit_scope" != 'true' ]; then
+  # La detection puo' avere calcolato la matrice sulla HEAD A e il job di
+  # recovery puo' osservare la HEAD B. In quel caso la matrice ricevuta non
+  # contiene gli articoli, le sezioni o i path introdotti da A -> B: ricostruisci
+  # il delta sulla HEAD che verra' passata ai child e uniscilo al piano gia'
+  # osservato. Lo scope esplicito di un workflow_dispatch manuale e' l'unica
+  # eccezione: il proprietario ha chiesto precisamente quella sezione.
+  if ! ensure_recovery_history; then
+    exit 1
+  fi
+  if ! validate_recovery_base_ancestry; then
+    exit 1
+  fi
+  fetched_current_main="$(git rev-parse refs/remotes/origin/main)"
+  if [ "$fetched_current_main" != "$CURRENT_MAIN" ]; then
+    echo "::error::main e' avanzata durante la ricostruzione del piano stale ($CURRENT_MAIN -> $fetched_current_main); annullo il recovery"
+    exit 1
+  fi
+  git checkout --detach "$CURRENT_MAIN"
+  plan_before="${ORIGINAL_PUSH_BEFORE:-}"
+  if [ -z "$plan_before" ] || [[ "$plan_before" =~ ^0+$ ]]; then
+    if ! plan_before="$(git rev-parse "${CURRENT_MAIN}^" 2>/dev/null)"; then
+      echo "::error::base precedente non disponibile per ricostruire il piano stale sulla HEAD $CURRENT_MAIN"
+      exit 1
+    fi
+  fi
+  if ! [[ "$plan_before" =~ ^[a-f0-9]{40}$ ]]; then
+    echo "::error::base precedente non valida per ricostruire il piano stale: $plan_before"
+    exit 1
+  fi
+  delta_matrix="$(git diff --name-status "$plan_before" "$CURRENT_MAIN" \
+    | PUSH_BEFORE="$plan_before" node scripts/ci/fast-publish-section.mjs r2-plan \
+    | jq -c 'map(. + {bootstrap: (.bootstrap // false)})')"
+  target_matrix="$(merge_recovery_matrices "$target_matrix" "$delta_matrix")"
+  echo "::notice::piano stale ricostruito sulla HEAD $CURRENT_MAIN dalla base $plan_before"
+elif [ "${MIXED_MATRIX:-false}" = 'true' ]; then
   if ! ensure_recovery_history; then
     exit 1
   fi

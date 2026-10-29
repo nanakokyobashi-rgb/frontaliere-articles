@@ -68,6 +68,15 @@ test('fast-publish-section ricontrolla main subito prima del replay API', () => 
   assert.match(dispatchStep, /if verifyMainHeadAtDispatch; then/u);
 });
 
+test('fast-publish-section artifactizza nonce e revisione del child', () => {
+  const record = workflow.slice(workflow.indexOf('- name: Record publish result'));
+  assert.match(record, /DISPATCH_NONCE: \$\{\{ inputs\.dispatch_nonce \}\}/u);
+  assert.match(record, /COORDINATED_RECOVERY: \$\{\{ inputs\.coordinated_recovery \}\}/u);
+  assert.match(record, /SOURCE_COMMIT: \$\{\{ needs\.resolve\.outputs\.source_commit \|\| inputs\.source_commit \}\}/u);
+  assert.match(record, /source_main_commit: \$source_main_commit/u);
+  assert.match(record, /dispatch_nonce: \$dispatch_nonce/u);
+});
+
 test('il replay checkout mantiene tutti gli helper nel profilo sparse', () => {
   const replay = workflow.slice(workflow.indexOf('\n  replay-api-after-staged-release:'));
   const checkout = replay.slice(
