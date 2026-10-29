@@ -15,31 +15,32 @@
       "articleId": "giovani-donne-stipendi-svizzera",
       "title": "Di più Le giovani svizzere guadagnano meno nonostante siano più istruite",
       "fallbackImage": "/images/blog/article-divario-reddito-giovani-svizzera.webp",
-      "reason": "All image providers failed for article-giovani-donne-stipendi-svizzera: openai-codex (vision gate rejected image: Generic synthetic editorial scene with no text or logos, but a recognizable foreground person is visible.); gemini (Gemini ima",
+      "reason": "All image providers failed for article-giovani-donne-stipendi-svizzera: openai-codex (vision gate rejected image: Generic synthetic editorial scene with a foreground woman seen from behind; no text, logos, visible face, or specific real eve",
       "status": "failed",
-      "failureCount": 8,
+      "failureCount": 9,
       "requestedAt": "2026-10-19T03:17:12.439Z",
-      "lastFailureAt": "2026-10-28T18:31:12.112Z"
+      "lastFailureAt": "2026-10-29T04:02:44.378Z"
     },
     {
       "articleId": "sanitari-italiani-fuga-svizzera",
       "title": "Operatori sanitari frontalieri: Como boccheggia",
       "fallbackImage": "/images/blog/article-confusione-tassa-salute-frontalieri.webp",
-      "reason": "All image providers failed for article-sanitari-italiani-fuga-svizzera: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to cross-border healthcare commuting, but it includes a recognizable foreground per",
+      "reason": "All image providers failed for article-sanitari-italiani-fuga-svizzera: openai-codex (vision gate rejected image: Generic synthetic transit illustration with a clearly visible foreground commuter from behind; no text, logo, or identifiable ",
       "status": "failed",
-      "failureCount": 7,
+      "failureCount": 8,
       "requestedAt": "2026-10-23T15:23:52.650Z",
-      "lastFailureAt": "2026-10-28T19:12:57.783Z"
+      "lastFailureAt": "2026-10-29T04:04:25.920Z"
     },
     {
       "articleId": "cisl-ricerca-lavoratori-ritiene",
       "title": "55,6% lavoratori frontalieri ritiene stipendio inferiore a residente svizzero",
       "fallbackImage": "/images/blog/article-ricerca-cisl-frontalieri-2026.webp",
-      "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (vision gate rejected image: Generic synthetic editorial illustration with no text, logos, or visible face, but it contains a recognizable foreground commu",
+      "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (vision gate rejected image: Generic synthetic commuter-train scene, but visible station signage fails the no-text/signage publication gate.); gemini (Gemi",
       "status": "failed",
-      "failureCount": 7,
+      "failureCount": 8,
       "requestedAt": "2026-10-24T19:06:53.846Z",
-      "lastFailureAt": "2026-10-28T19:14:16.130Z"
+      "lastFailureAt": "2026-10-29T04:05:39.975Z",
+      "retryHint": "no-text"
     }
   ]
 }
