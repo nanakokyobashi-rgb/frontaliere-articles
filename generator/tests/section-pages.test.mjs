@@ -3018,6 +3018,7 @@ test('reconcile: il limite landing resta quello del renderer engine', () => {
 test('reconcile: il parser del cap accetta le forme TS equivalenti e rifiuta valori invalidi', () => {
   const variants = [
     'export const CANTON_LANDING_CARD_LIMIT = 24;',
+    'const ratio = total / count;\nexport const CANTON_LANDING_CARD_LIMIT = 24;',
     'export const\n  CANTON_LANDING_CARD_LIMIT: number\n  = 24;',
     'export const CANTON_LANDING_CARD_LIMIT = 24 as const;',
     'export const\n  CANTON_LANDING_CARD_LIMIT\n  : number\n  =\n  24\n  as const;',

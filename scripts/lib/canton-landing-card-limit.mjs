@@ -170,6 +170,10 @@ function lexicalView(source, { maskLiterals }) {
   let last = 0;
   let canStartRegex = true;
   for (let index = 0; index < source.length;) {
+    if (/\s/u.test(source[index])) {
+      index += 1;
+      continue;
+    }
     let end;
     const isLineComment = source[index] === '/' && source[index + 1] === '/';
     const isBlockComment = source[index] === '/' && source[index + 1] === '*';
