@@ -83,12 +83,17 @@ jobs:
             /data/article-source-urls.json
             /data/article-type-cutover.json
             /data/blog-articles-data.ts
+            /data/blog-images-used.json
+            /data/blog-images-used-site-legacy.json
+            /data/editorial-image-registry.json
             /data/evergreen-verifications.json
+            /data/generated-image-registry.json
             /data/retired-articles.json
             /data/swiss-article-source-urls.json
             /engine/
             /generator/
             /host/
+            /package.json
             /public/images/blog/article-cantello-teatro-dialettale-ottobre-2026.webp
             /public/images/blog/article-contributi-formazione-berna-requisiti.webp
             /public/images/blog/article-festival-racconto-varese-ottobre.webp

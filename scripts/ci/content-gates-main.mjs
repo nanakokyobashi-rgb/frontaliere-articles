@@ -571,9 +571,43 @@ export function parseTapFailures(tap) {
 export function extractOffenders(output) {
   const found = new Map();
   const re = /content\/[A-Za-z0-9_@./-]*[A-Za-z0-9_](?:\.ts|\.json)/g;
-  for (const m of String(output).matchAll(re)) {
-    const p = m[0];
-    found.set(p, (found.get(p) || 0) + 1);
+  let pendingFailureIndent = null;
+  let diagnosticIndent = null;
+  for (const line of String(output).split('\n')) {
+    const failure = line.match(/^(\s*)not ok \d+ - /);
+    if (failure) {
+      pendingFailureIndent = failure[1].length;
+      diagnosticIndent = null;
+      continue;
+    }
+
+    if (diagnosticIndent !== null) {
+      const end = line.match(/^(\s*)\.\.\.\s*$/);
+      if (end && end[1].length === diagnosticIndent) {
+        diagnosticIndent = null;
+        continue;
+      }
+      for (const m of line.matchAll(re)) {
+        const p = m[0];
+        found.set(p, (found.get(p) || 0) + 1);
+      }
+      continue;
+    }
+
+    if (pendingFailureIndent !== null) {
+      const start = line.match(/^(\s*)---\s*$/);
+      if (start && start[1].length > pendingFailureIndent) {
+        diagnosticIndent = start[1].length;
+        pendingFailureIndent = null;
+        continue;
+      }
+      // A failure without a YAML diagnostic is complete as soon as the next
+      // TAP record starts. Do not let a later passing test's diagnostic block
+      // inherit the failed status.
+      if (/^\s*(?:not )?ok \d+ - |^\s*# Subtest:/.test(line)) {
+        pendingFailureIndent = null;
+      }
+    }
   }
   return [...found.keys()].sort();
 }
