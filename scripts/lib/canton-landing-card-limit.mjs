@@ -7,19 +7,24 @@
  * second format-sensitive regex at its call site.
  */
 
-const CANTON_LANDING_CARD_LIMIT_EXPORT_RE = /^[ \t]*export\s+const\s+CANTON_LANDING_CARD_LIMIT\s*(?::\s*number)?\s*=\s*(?<value>0|[1-9]\d*)(?:\s+as\s+const)?[ \t]*;?[ \t]*(?:\/\/[^\r\n]*)?(?:\r?\n|$)/mu;
-const CANTON_LANDING_CARD_LIMIT_CONTINUATION_RE = /^[ \t]*(?!\/\/)(?:\+\+?|--?|[*/%?&|^~!.,()[\]{}]|=>|===?|!==?|<=|>=|<<<?|>>>|\?\?|&&|\|\||\?\.|(?:as|satisfies|in|instanceof)\b)/u;
+const CANTON_LANDING_CARD_LIMIT_EXPORT_RE = /^[ \t]*export\s+const\s+CANTON_LANDING_CARD_LIMIT\s*(?::\s*number)?\s*=\s*(?<value>0|[1-9]\d*)(?:\s+as\s+const)?[ \t]*(?<semicolon>;)?[ \t]*(?:\/\/[^\r\n]*)?(?:\r?\n|$)/mu;
 
-function hasExpressionContinuation(source, match) {
-  return CANTON_LANDING_CARD_LIMIT_CONTINUATION_RE.test(source.slice(match.index + match[0].length));
+function hasUnexpectedTrailingCode(source, match) {
+  if (match.groups.semicolon) return false;
+  const remainder = source
+    .slice(match.index + match[0].length)
+    .replace(/^[ \t]*\/\/[^\r\n]*(?:\r?\n|$)/gmu, '');
+  return /\S/u.test(remainder);
 }
 
 /**
  * Parse the renderer's `CANTON_LANDING_CARD_LIMIT` export.
  *
  * The declaration may be formatted across lines, carry a `number` annotation,
- * or use `as const`. Anything else is rejected so a future renderer change
- * cannot silently leave the reconciler with a stale or guessed limit.
+ * or use `as const`. A semicolonless declaration is accepted only when it is
+ * the final non-comment code in the source; anything else is rejected so a
+ * future renderer change cannot silently leave the reconciler with a stale or
+ * guessed limit.
  *
  * @param {string} source TypeScript source containing the renderer export
  * @returns {number}
@@ -29,7 +34,7 @@ export function parseCantonLandingCardLimitExport(source) {
     throw new Error('CANTON_LANDING_CARD_LIMIT export non valido: sorgente non testuale');
   }
   const match = CANTON_LANDING_CARD_LIMIT_EXPORT_RE.exec(source);
-  if (!match || hasExpressionContinuation(source, match)) {
+  if (!match || hasUnexpectedTrailingCode(source, match)) {
     throw new Error('CANTON_LANDING_CARD_LIMIT export non trovato o non valido');
   }
   const value = Number(match.groups.value);
