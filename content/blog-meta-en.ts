@@ -13624,6 +13624,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.gaggiolo-articoli-lusso-non-dichiarati.title': 'At Gaggiolo, undeclared luxury goods worth over 23.000 euro',
     'blog.article.gaggiolo-articoli-lusso-non-dichiarati.excerpt': 'A driver entering Italy at Gaggiolo declared that she had nothing to declare, but a high-end handbag and scarf worth over 23.000 euro were found in the trunk.',
     'blog.article.gaggiolo-articoli-lusso-non-dichiarati.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.arcisate-ticino-scelta-frontaliere.title': 'Living in Arcisate and working in Ticino as a cross-border commuter',
+    'blog.article.arcisate-ticino-scelta-frontaliere.excerpt': 'Cross-border Agreement in force from January 1, 2024 Old cross-border workers: €7\'500 exemption until 2033 New cross-border workers: €10\'000 tax-free allowance Canton Ticino: 78\'561',
+    'blog.article.arcisate-ticino-scelta-frontaliere.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaEn;

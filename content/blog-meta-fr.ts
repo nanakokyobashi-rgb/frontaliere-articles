@@ -13626,6 +13626,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.gaggiolo-articoli-lusso-non-dichiarati.title': 'Gaggiolo : articles de luxe non déclarés > 23 000 euros',
     'blog.article.gaggiolo-articoli-lusso-non-dichiarati.excerpt': 'Une conductrice entrant en Italie à Gaggiolo a déclaré n\'avoir rien à signaler, mais un sac et un foulard haut de gamme d\'une valeur de plus de 23.000 euros ont été trouvés dans le coffre.',
     'blog.article.gaggiolo-articoli-lusso-non-dichiarati.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.arcisate-ticino-scelta-frontaliere.title': 'Vivre à Arcisate et travailler au Tessin en tant que frontalier',
+    'blog.article.arcisate-ticino-scelta-frontaliere.excerpt': 'Accord sur les frontaliers en vigueur depuis le 1er janvier 2024 Anciens frontaliers : exonération €7\'500 jusqu\'en 2033 Nouveaux frontaliers : franchise €10\'000 Canton du Tessin : 78\'561',
+    'blog.article.arcisate-ticino-scelta-frontaliere.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaFr;

@@ -13623,6 +13623,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.gaggiolo-articoli-lusso-non-dichiarati.title': 'In Gaggiolo nicht deklarierte Luxusartikel im Wert von über 23.000 Euro',
     'blog.article.gaggiolo-articoli-lusso-non-dichiarati.excerpt': 'Eine Fahrerin, die in Gaggiolo nach Italien einreiste, erklärte, nichts anzumelden zu haben, doch im Kofferraum wurden eine hochwertige Tasche und ein hochwertiger Schal im Wert von über 23.000 Euro gefunden.',
     'blog.article.gaggiolo-articoli-lusso-non-dichiarati.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.arcisate-ticino-scelta-frontaliere.title': 'In Arcisate leben und als Grenzgänger im Tessin arbeiten',
+    'blog.article.arcisate-ticino-scelta-frontaliere.excerpt': 'Grenzgängerabkommen in Kraft seit dem 1.',
+    'blog.article.arcisate-ticino-scelta-frontaliere.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaDe;
