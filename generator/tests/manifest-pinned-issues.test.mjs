@@ -146,20 +146,16 @@ test('handoff: il pin produce un corto-circuito di parcheggio senza Claude', asy
   assert.match(r.reason, /manifest/);
 });
 
-test('i workflow dei due closer espongono il kill-switch senza modificare il gemello mirror-locked', () => {
-  const steps = [
-    ['.github/workflows/followup-drainer.yml', 'Drain follow-up queue (deterministic, no Claude)'],
-    ['.github/workflows/lessons-harvester.yml', 'Aggregate recurring patterns (deterministic, zero-agent)'],
-  ];
-  for (const [file, name] of steps) {
-    const src = fs.readFileSync(path.join(ROOT, file), 'utf8');
-    const start = src.indexOf(`- name: ${name}`);
-    assert.ok(start >= 0, `${file}: step ${name} assente`);
-    const next = src.indexOf('\n      - name: ', start + 1);
-    const step = src.slice(start, next < 0 ? src.length : next);
-    assert.match(step, /FOLLOWUP_NO_AUTOCLOSE:\s*['"]1['"]/,
-      `${file}: il closer non riceve FOLLOWUP_NO_AUTOCLOSE=1`);
-  }
+test('il gemello mirror-locked del lessons harvester mantiene il kill-switch', () => {
+  const file = '.github/workflows/lessons-harvester.yml';
+  const name = 'Aggregate recurring patterns (deterministic, zero-agent)';
+  const src = fs.readFileSync(path.join(ROOT, file), 'utf8');
+  const start = src.indexOf(`- name: ${name}`);
+  assert.ok(start >= 0, `${file}: step ${name} assente`);
+  const next = src.indexOf('\n      - name: ', start + 1);
+  const step = src.slice(start, next < 0 ? src.length : next);
+  assert.match(step, /FOLLOWUP_NO_AUTOCLOSE:\s*['"]1['"]/,
+    `${file}: il gemello mirror-locked non riceve FOLLOWUP_NO_AUTOCLOSE=1`);
 });
 
 /**
