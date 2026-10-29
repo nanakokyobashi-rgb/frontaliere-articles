@@ -48,6 +48,7 @@ on:
       - 'scripts/ci/fast-publish-section-preflight.sh'
       - 'scripts/ci/fast-publish-section-render.sh'
       - 'scripts/ci/fast-publish-section-recovery.sh'
+      - 'scripts/ci/record-fast-publish-result.sh'
       - 'scripts/cf-purge-cache.mjs'
       - 'scripts/offload-generated-images-cdn.mjs'
       - 'scripts/lib/article-render-pipeline.mjs'
@@ -567,6 +568,7 @@ jobs:
             scripts/ci/read-main-head.sh
             scripts/ci/fetch-push-base-if-missing.sh
             scripts/ci/fast-publish-section-render.sh
+            scripts/ci/record-fast-publish-result.sh
           sparse-checkout-cone-mode: false
           persist-credentials: false
 
@@ -943,22 +945,7 @@ jobs:
           COORDINATED_RECOVERY: ${{ inputs.coordinated_recovery }}
           SOURCE_COMMIT: ${{ needs.resolve.outputs.source_commit || inputs.source_commit }}
           SOURCE_MAIN_COMMIT: ${{ needs.resolve.outputs.source_commit || inputs.source_main_commit }}
-        run: |
-          set -euo pipefail
-          jq -cn \
-            --arg section "$SECTION" \
-            --arg rendered_head "${RENDERED_HEAD:-}" \
-            --arg stale_handoff "${STALE_HANDOFF:-}" \
-            --arg stale_handoff_head "${STALE_HANDOFF_HEAD:-}" \
-            --arg stale_handoff_nonce "${STALE_HANDOFF_NONCE:-}" \
-            --arg stale_handoff_title "${STALE_HANDOFF_TITLE:-}" \
-            --arg fresh "${FRESH:-}" \
-            --arg dispatch_nonce "${DISPATCH_NONCE:-}" \
-            --arg coordinated_recovery "${COORDINATED_RECOVERY:-false}" \
-            --arg source_commit "${SOURCE_COMMIT:-}" \
-            --arg source_main_commit "${SOURCE_MAIN_COMMIT:-}" \
-            '{section: $section, rendered_head: $rendered_head, stale_handoff: $stale_handoff, stale_handoff_head: $stale_handoff_head, stale_handoff_nonce: $stale_handoff_nonce, stale_handoff_title: $stale_handoff_title, fresh: $fresh, dispatch_nonce: $dispatch_nonce, coordinated_recovery: $coordinated_recovery, source_commit: $source_commit, source_main_commit: $source_main_commit}' \
-            > "$RUNNER_TEMP/fast-publish-result.json"
+        run: bash .replay-dispatcher-source/scripts/ci/record-fast-publish-result.sh
 
       - name: Upload publish result
         if: always()

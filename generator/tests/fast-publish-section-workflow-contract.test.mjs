@@ -18,6 +18,10 @@ const recovery = readFileSync(
   new URL('../../scripts/ci/fast-publish-section-recovery.sh', import.meta.url),
   'utf8',
 );
+const resultRecorder = readFileSync(
+  new URL('../../scripts/ci/record-fast-publish-result.sh', import.meta.url),
+  'utf8',
+);
 
 function triggerBlock(name) {
   const start = workflow.indexOf(`\n  ${name}:`);
@@ -73,8 +77,9 @@ test('fast-publish-section artifactizza nonce e revisione del child', () => {
   assert.match(record, /DISPATCH_NONCE: \$\{\{ inputs\.dispatch_nonce \}\}/u);
   assert.match(record, /COORDINATED_RECOVERY: \$\{\{ inputs\.coordinated_recovery \}\}/u);
   assert.match(record, /SOURCE_COMMIT: \$\{\{ needs\.resolve\.outputs\.source_commit \|\| inputs\.source_commit \}\}/u);
-  assert.match(record, /source_main_commit: \$source_main_commit/u);
-  assert.match(record, /dispatch_nonce: \$dispatch_nonce/u);
+  assert.match(workflow, /scripts\/ci\/record-fast-publish-result\.sh/u);
+  assert.match(resultRecorder, /source_main_commit: \$source_main_commit/u);
+  assert.match(resultRecorder, /dispatch_nonce: \$dispatch_nonce/u);
 });
 
 test('il replay checkout mantiene tutti gli helper nel profilo sparse', () => {
@@ -145,7 +150,7 @@ test('una gara stale consegna la sezione al coordinatore senza dichiarare una pu
     'tre avanzamenti concorrenti devono accodare il replay, non lasciare il producer rosso',
   );
   assert.match(workflow, /STALE_HANDOFF: \$\{\{ steps\.render\.outputs\.stale_handoff \}\}/u);
-  assert.match(workflow, /stale_handoff: \$stale_handoff/u);
+  assert.match(resultRecorder, /stale_handoff: \$stale_handoff/u);
   assert.match(workflow, /stale_handoff: \$\{\{ steps\.collect\.outputs\.stale_handoff \}\}/u);
   assert.match(workflow, /echo 'mixed_matrix=true' >> "\$GITHUB_OUTPUT"/u);
   assert.doesNotMatch(workflow, /needs\.publish_release_head\.outputs\.stale_handoff != 'true'/u);
