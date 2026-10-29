@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "servizi",
-  "updatedAt": "2026-10-29T15:32:04.680Z",
-  "contentHash": "c5eb113bbb988e1e465be39442ca0485f9310d482990a2e103edbabf7dbe4dc6",
+  "updatedAt": "2026-10-29T21:57:02.700Z",
+  "contentHash": "87351004f06078f9d73c41e84c61de01f17705ae6198038f2fdfed79fc788079",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -19,7 +19,7 @@
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-29T06:03:12.578Z",
+      "updatedAt": "2026-10-29T15:24:02.220Z",
       "keyFacts": 0
     },
     {
@@ -105,12 +105,12 @@
           "items": [
             {
               "label": "Genève",
-              "value": "8 °C",
-              "detail": "oggi da 8 a 12 °C"
+              "value": "11 °C",
+              "detail": "oggi da 8 a 11 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-29T06:03:12.578Z"
+          "updatedAt": "2026-10-29T15:24:02.220Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -228,7 +228,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-29T15:32:04.680Z"
+      "updatedAt": "2026-10-29T21:57:02.700Z"
     },
     "en": {
       "canton": "GE",
@@ -306,12 +306,12 @@
           "items": [
             {
               "label": "Genève",
-              "value": "8 °C",
-              "detail": "today from 8 to 12 °C"
+              "value": "11 °C",
+              "detail": "today from 8 to 11 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-29T06:03:12.578Z"
+          "updatedAt": "2026-10-29T15:24:02.220Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -424,7 +424,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-29T15:32:04.680Z"
+      "updatedAt": "2026-10-29T21:57:02.700Z"
     },
     "de": {
       "canton": "GE",
@@ -502,12 +502,12 @@
           "items": [
             {
               "label": "Genève",
-              "value": "8 °C",
-              "detail": "heute 8 bis 12 °C"
+              "value": "11 °C",
+              "detail": "heute 8 bis 11 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-29T06:03:12.578Z"
+          "updatedAt": "2026-10-29T15:24:02.220Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -620,7 +620,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-29T15:32:04.680Z"
+      "updatedAt": "2026-10-29T21:57:02.700Z"
     },
     "fr": {
       "canton": "GE",
@@ -698,12 +698,12 @@
           "items": [
             {
               "label": "Genève",
-              "value": "8 °C",
-              "detail": "aujourd’hui de 8 à 12 °C"
+              "value": "11 °C",
+              "detail": "aujourd’hui de 8 à 11 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-29T06:03:12.578Z"
+          "updatedAt": "2026-10-29T15:24:02.220Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -813,7 +813,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-29T15:32:04.680Z"
+      "updatedAt": "2026-10-29T21:57:02.700Z"
     }
   }
 }

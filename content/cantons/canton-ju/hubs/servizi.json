@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "servizi",
-  "updatedAt": "2026-10-29T08:53:42.745Z",
-  "contentHash": "b5fb2a076447ad58fabf4c8623d47facf015175e81c40614ecb009a8cb9a16ff",
+  "updatedAt": "2026-10-29T21:57:02.700Z",
+  "contentHash": "f7f6892d115508d56c177dbdbad128d30f805ccf3f568469f1d9c7de6066a99a",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-29T02:43:58.384Z",
+      "updatedAt": "2026-10-29T11:01:05.952Z",
       "keyFacts": 0
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-29T06:03:12.578Z",
+      "updatedAt": "2026-10-29T15:24:02.220Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-28T21:56:57.371Z",
+      "updatedAt": "2026-10-29T11:47:10.249Z",
       "keyFacts": 0
     }
   ],
@@ -96,7 +96,7 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-10-29T02:43:58.384Z"
+          "updatedAt": "2026-10-29T11:01:05.952Z"
         },
         {
           "id": "meteo",
@@ -105,12 +105,12 @@
           "items": [
             {
               "label": "Delémont",
-              "value": "5 °C",
-              "detail": "oggi da 5 a 12 °C"
+              "value": "11 °C",
+              "detail": "oggi da 5 a 11 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-29T06:03:12.578Z"
+          "updatedAt": "2026-10-29T15:24:02.220Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -133,7 +133,7 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -183,7 +183,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-29T08:53:42.745Z"
+      "updatedAt": "2026-10-29T21:57:02.700Z"
     },
     "en": {
       "canton": "JU",
@@ -252,7 +252,7 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-10-29T02:43:58.384Z"
+          "updatedAt": "2026-10-29T11:01:05.952Z"
         },
         {
           "id": "meteo",
@@ -261,12 +261,12 @@
           "items": [
             {
               "label": "Delémont",
-              "value": "5 °C",
-              "detail": "today from 5 to 12 °C"
+              "value": "11 °C",
+              "detail": "today from 5 to 11 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-29T06:03:12.578Z"
+          "updatedAt": "2026-10-29T15:24:02.220Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -289,7 +289,7 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -335,7 +335,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-29T08:53:42.745Z"
+      "updatedAt": "2026-10-29T21:57:02.700Z"
     },
     "de": {
       "canton": "JU",
@@ -404,7 +404,7 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-10-29T02:43:58.384Z"
+          "updatedAt": "2026-10-29T11:01:05.952Z"
         },
         {
           "id": "meteo",
@@ -413,12 +413,12 @@
           "items": [
             {
               "label": "Delémont",
-              "value": "5 °C",
-              "detail": "heute 5 bis 12 °C"
+              "value": "11 °C",
+              "detail": "heute 5 bis 11 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-29T06:03:12.578Z"
+          "updatedAt": "2026-10-29T15:24:02.220Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -441,7 +441,7 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -487,7 +487,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-29T08:53:42.745Z"
+      "updatedAt": "2026-10-29T21:57:02.700Z"
     },
     "fr": {
       "canton": "JU",
@@ -556,7 +556,7 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-10-29T02:43:58.384Z"
+          "updatedAt": "2026-10-29T11:01:05.952Z"
         },
         {
           "id": "meteo",
@@ -565,12 +565,12 @@
           "items": [
             {
               "label": "Delémont",
-              "value": "5 °C",
-              "detail": "aujourd’hui de 5 à 12 °C"
+              "value": "11 °C",
+              "detail": "aujourd’hui de 5 à 11 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-29T06:03:12.578Z"
+          "updatedAt": "2026-10-29T15:24:02.220Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -593,7 +593,7 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -635,7 +635,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-29T08:53:42.745Z"
+      "updatedAt": "2026-10-29T21:57:02.700Z"
     }
   }
 }

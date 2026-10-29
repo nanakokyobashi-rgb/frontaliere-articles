@@ -4,12 +4,12 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "eventi",
-  "updatedAt": "2026-10-29T07:40:41.678Z",
-  "contentHash": "e5454d7a6464ec192b6807ae3bf7fee9c342011ac9f2c95190388c1acdeab261",
+  "updatedAt": "2026-10-29T21:57:02.700Z",
+  "contentHash": "77ac857712af92d02e75f270216e91e89ef0dddd183d38769f0aaa942b3b276b",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-28T19:25:39.771Z",
+      "updatedAt": "2026-10-29T15:31:36.718Z",
       "keyFacts": 1
     }
   ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
+              "label": "Corpi in prestito",
+              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
+              "date": "2026-10-29",
+              "url": "https://www.tio.ch/agenda/day/20261029/58243"
+            },
+            {
+              "label": "Fede e guerra - Mostra fotografica",
+              "detail": "Centro pastorale S. Giuseppe, Lugano",
+              "date": "2026-10-29",
+              "url": "https://www.tio.ch/agenda/day/20261029/64618"
+            },
+            {
+              "label": "Fra Roberto tra le mura",
+              "detail": "Sasso Corbaro, Bellinzona",
+              "date": "2026-10-29",
+              "url": "https://www.tio.ch/agenda/day/20261029/61525"
+            },
+            {
+              "label": "Fuori di Zucca, il villaggio delle zucche",
+              "detail": "Fuori di Zucca, Savosa",
+              "date": "2026-10-29",
+              "url": "https://www.tio.ch/agenda/day/20261029/64302"
+            },
+            {
               "label": "Gyotaku - Tracce di pesci",
               "detail": "Museo della pesca, Caslano",
               "date": "2026-10-29",
               "url": "https://www.tio.ch/agenda/day/20261029/61721"
             },
             {
-              "label": "Bambi - Una vita nei boschi",
-              "detail": "Cinema GranRex, Locarno",
+              "label": "Impressioni - Mostra di pittura di Sisko Naerhi",
+              "detail": "Residenza Rivabella, Magliaso",
               "date": "2026-10-29",
-              "url": "https://www.tio.ch/agenda/day/20261029/64406"
+              "url": "https://www.tio.ch/agenda/day/20261029/64414"
             },
             {
-              "label": "Park Eun Sun - Mario Botta",
-              "detail": "Fondazione Gabriele e Anna Braglia, Lugano",
+              "label": "Ivo Soldini - Progetto Castel Grande",
+              "detail": "Castel Grande, Bellinzona",
               "date": "2026-10-29",
-              "url": "https://www.tio.ch/agenda/day/20261029/63350"
+              "url": "https://www.tio.ch/agenda/day/20261029/62822"
             },
             {
-              "label": "Scarico della Grà",
-              "detail": "6677 Moghegno",
+              "label": "Jannis Kounellis: Io sono un pittore",
+              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
               "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/the-unloading-of-the-gra/"
+              "url": "https://www.tio.ch/agenda/day/20261029/63037"
             },
             {
-              "label": "Cibo e salute",
-              "detail": "Lega cancro Ticino, Bellinzona",
+              "label": "Pierrette Bloch. Il gesto di scrivere",
+              "detail": "Museo Villa dei Cedri, Bellinzona",
               "date": "2026-10-29",
-              "url": "https://www.tio.ch/agenda/day/20261029/64445"
+              "url": "https://www.tio.ch/agenda/day/20261029/64342"
             },
             {
-              "label": "Filanda express",
-              "detail": "LaFilanda, Mendrisio",
+              "label": "PoPoetic",
+              "detail": "Centro ricreativo Il Pettirosso, Savosa",
               "date": "2026-10-29",
-              "url": "https://www.tio.ch/agenda/day/20261029/64673"
-            },
-            {
-              "label": "Fuckup Nights Lugano Vol. 27",
-              "detail": "Foce, Lugano",
-              "date": "2026-10-29",
-              "url": "https://www.tio.ch/agenda/day/20261029/64689"
-            },
-            {
-              "label": "La peste in Leventina",
-              "detail": "Museo di Leventina, Giornico",
-              "date": "2026-10-29",
-              "url": "https://www.tio.ch/agenda/day/20261029/64751"
-            },
-            {
-              "label": "Piero Gobetti, editore di letteratura",
-              "detail": "Biblioteca cantonale, Lugano",
-              "date": "2026-10-29",
-              "url": "https://www.tio.ch/agenda/day/20261029/64221"
-            },
-            {
-              "label": "Sull’arte cinetica e programmata italiana",
-              "detail": "Biblioteca cantonale, Locarno",
-              "date": "2026-10-29",
-              "url": "https://www.tio.ch/agenda/day/20261029/64058"
+              "url": "https://www.tio.ch/agenda/day/20261029/63593"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ticino/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T15:31:36.718Z"
         }
       ],
       "curatedArticles": [
@@ -163,7 +163,7 @@
           "url": "/articoli-frontaliere/eventi-weekend-ticino/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-29T21:57:02.700Z"
     },
     "en": {
       "canton": "TI",
@@ -184,69 +184,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
+              "label": "Borrowed bodies",
+              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
+              "date": "2026-10-29",
+              "url": "https://www.tio.ch/agenda/day/20261029/58243"
+            },
+            {
+              "label": "Faith and War - Photo Exhibit",
+              "detail": "Centro pastorale S. Giuseppe, Lugano",
+              "date": "2026-10-29",
+              "url": "https://www.tio.ch/agenda/day/20261029/64618"
+            },
+            {
+              "label": "Fra Roberto fra le mura",
+              "detail": "Sasso Corbaro, Bellinzona",
+              "date": "2026-10-29",
+              "url": "https://www.tio.ch/agenda/day/20261029/61525"
+            },
+            {
+              "label": "Outside of Zucca, the village of pumpkins",
+              "detail": "Fuori di Zucca, Savosa",
+              "date": "2026-10-29",
+              "url": "https://www.tio.ch/agenda/day/20261029/64302"
+            },
+            {
               "label": "Gyotaku - Fish Trails",
               "detail": "Museo della pesca, Caslano",
               "date": "2026-10-29",
               "url": "https://www.tio.ch/agenda/day/20261029/61721"
             },
             {
-              "label": "Bambi - A Life in the Woods",
-              "detail": "Cinema GranRex, Locarno",
+              "label": "Impressions - Painting exhibition by Sisko Naerhi",
+              "detail": "Residenza Rivabella, Magliaso",
               "date": "2026-10-29",
-              "url": "https://www.tio.ch/agenda/day/20261029/64406"
+              "url": "https://www.tio.ch/agenda/day/20261029/64414"
             },
             {
-              "label": "Park Eun Sun-Mario Botta",
-              "detail": "Fondazione Gabriele e Anna Braglia, Lugano",
+              "label": "Ivo Soldini - Castel Grande Project",
+              "detail": "Castel Grande, Bellinzona",
               "date": "2026-10-29",
-              "url": "https://www.tio.ch/agenda/day/20261029/63350"
+              "url": "https://www.tio.ch/agenda/day/20261029/62822"
             },
             {
-              "label": "The unloading of the Grà",
-              "detail": "6677 Moghegno",
+              "label": "Jannis Kounellis: I am a painter",
+              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
               "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/the-unloading-of-the-gra/"
+              "url": "https://www.tio.ch/agenda/day/20261029/63037"
             },
             {
-              "label": "Food and Health",
-              "detail": "Lega cancro Ticino, Bellinzona",
+              "label": "Pierrette Bloch. The gesture of writing",
+              "detail": "Museo Villa dei Cedri, Bellinzona",
               "date": "2026-10-29",
-              "url": "https://www.tio.ch/agenda/day/20261029/64445"
+              "url": "https://www.tio.ch/agenda/day/20261029/64342"
             },
             {
-              "label": "Express spinning",
-              "detail": "LaFilanda, Mendrisio",
+              "label": "PoPoetic",
+              "detail": "Centro ricreativo Il Pettirosso, Savosa",
               "date": "2026-10-29",
-              "url": "https://www.tio.ch/agenda/day/20261029/64673"
-            },
-            {
-              "label": "Fuckup Nights Lugano Vol. 27",
-              "detail": "Foce, Lugano",
-              "date": "2026-10-29",
-              "url": "https://www.tio.ch/agenda/day/20261029/64689"
-            },
-            {
-              "label": "The plague in Leventina",
-              "detail": "Museo di Leventina, Giornico",
-              "date": "2026-10-29",
-              "url": "https://www.tio.ch/agenda/day/20261029/64751"
-            },
-            {
-              "label": "Piero Gobetti, Literature Editor",
-              "detail": "Biblioteca cantonale, Lugano",
-              "date": "2026-10-29",
-              "url": "https://www.tio.ch/agenda/day/20261029/64221"
-            },
-            {
-              "label": "On Italian kinetic and programmed art",
-              "detail": "Biblioteca cantonale, Locarno",
-              "date": "2026-10-29",
-              "url": "https://www.tio.ch/agenda/day/20261029/64058"
+              "url": "https://www.tio.ch/agenda/day/20261029/63593"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/ticino/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T15:31:36.718Z"
         }
       ],
       "curatedArticles": [
@@ -314,7 +314,7 @@
           "url": "/en/cross-border-articles/weekend-events-ticino/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-29T21:57:02.700Z"
     },
     "de": {
       "canton": "TI",
@@ -335,69 +335,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
+              "label": "Leihkörper",
+              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
+              "date": "2026-10-29",
+              "url": "https://www.tio.ch/agenda/day/20261029/58243"
+            },
+            {
+              "label": "Glaube und Krieg - Fotoausstellung",
+              "detail": "Centro pastorale S. Giuseppe, Lugano",
+              "date": "2026-10-29",
+              "url": "https://www.tio.ch/agenda/day/20261029/64618"
+            },
+            {
+              "label": "Fra Roberto zwischen den Mauern",
+              "detail": "Sasso Corbaro, Bellinzona",
+              "date": "2026-10-29",
+              "url": "https://www.tio.ch/agenda/day/20261029/61525"
+            },
+            {
+              "label": "Außerhalb von Zucca, dem Dorf der Kürbisse",
+              "detail": "Fuori di Zucca, Savosa",
+              "date": "2026-10-29",
+              "url": "https://www.tio.ch/agenda/day/20261029/64302"
+            },
+            {
               "label": "Gyotaku - Spuren von Fischen",
               "detail": "Museo della pesca, Caslano",
               "date": "2026-10-29",
               "url": "https://www.tio.ch/agenda/day/20261029/61721"
             },
             {
-              "label": "Bambi - Ein Leben im Wald",
-              "detail": "Cinema GranRex, Locarno",
+              "label": "Impressionen - Gemäldeausstellung von Sisko Naerhi",
+              "detail": "Residenza Rivabella, Magliaso",
               "date": "2026-10-29",
-              "url": "https://www.tio.ch/agenda/day/20261029/64406"
+              "url": "https://www.tio.ch/agenda/day/20261029/64414"
             },
             {
-              "label": "Park Eun Sun – Mario Botta",
-              "detail": "Fondazione Gabriele e Anna Braglia, Lugano",
+              "label": "Ivo Soldini - Projekt Castel Grande",
+              "detail": "Castel Grande, Bellinzona",
               "date": "2026-10-29",
-              "url": "https://www.tio.ch/agenda/day/20261029/63350"
+              "url": "https://www.tio.ch/agenda/day/20261029/62822"
             },
             {
-              "label": "Entladung der Grà",
-              "detail": "6677 Moghegno",
+              "label": "Jannis Kounellis: Ich bin Maler",
+              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
               "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/the-unloading-of-the-gra/"
+              "url": "https://www.tio.ch/agenda/day/20261029/63037"
             },
             {
-              "label": "Essen und Gesundheit",
-              "detail": "Lega cancro Ticino, Bellinzona",
+              "label": "Pierrette Bloch. Die Geste des Schreibens",
+              "detail": "Museo Villa dei Cedri, Bellinzona",
               "date": "2026-10-29",
-              "url": "https://www.tio.ch/agenda/day/20261029/64445"
+              "url": "https://www.tio.ch/agenda/day/20261029/64342"
             },
             {
-              "label": "Expressspinnerei",
-              "detail": "LaFilanda, Mendrisio",
+              "label": "PoPoetisch",
+              "detail": "Centro ricreativo Il Pettirosso, Savosa",
               "date": "2026-10-29",
-              "url": "https://www.tio.ch/agenda/day/20261029/64673"
-            },
-            {
-              "label": "Fuckup Nights Lugano Bd. 27",
-              "detail": "Foce, Lugano",
-              "date": "2026-10-29",
-              "url": "https://www.tio.ch/agenda/day/20261029/64689"
-            },
-            {
-              "label": "Die Pest in der Leventina",
-              "detail": "Museo di Leventina, Giornico",
-              "date": "2026-10-29",
-              "url": "https://www.tio.ch/agenda/day/20261029/64751"
-            },
-            {
-              "label": "Piero Gobetti, Literaturverlag",
-              "detail": "Biblioteca cantonale, Lugano",
-              "date": "2026-10-29",
-              "url": "https://www.tio.ch/agenda/day/20261029/64221"
-            },
-            {
-              "label": "Über italienische kinetische und programmierte Kunst",
-              "detail": "Biblioteca cantonale, Locarno",
-              "date": "2026-10-29",
-              "url": "https://www.tio.ch/agenda/day/20261029/64058"
+              "url": "https://www.tio.ch/agenda/day/20261029/63593"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/tessin/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T15:31:36.718Z"
         }
       ],
       "curatedArticles": [
@@ -465,7 +465,7 @@
           "url": "/de/grenzgaenger-artikel/wochenend-veranstaltungen-tessin/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-29T21:57:02.700Z"
     },
     "fr": {
       "canton": "TI",
@@ -486,69 +486,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
+              "label": "Corps prêtés",
+              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
+              "date": "2026-10-29",
+              "url": "https://www.tio.ch/agenda/day/20261029/58243"
+            },
+            {
+              "label": "Foi et guerre - Exposition photographique",
+              "detail": "Centro pastorale S. Giuseppe, Lugano",
+              "date": "2026-10-29",
+              "url": "https://www.tio.ch/agenda/day/20261029/64618"
+            },
+            {
+              "label": "Frère Roberto entre les murs",
+              "detail": "Sasso Corbaro, Bellinzona",
+              "date": "2026-10-29",
+              "url": "https://www.tio.ch/agenda/day/20261029/61525"
+            },
+            {
+              "label": "En dehors de Zucca, le village des citrouilles",
+              "detail": "Fuori di Zucca, Savosa",
+              "date": "2026-10-29",
+              "url": "https://www.tio.ch/agenda/day/20261029/64302"
+            },
+            {
               "label": "Gyotaku - Traces de poissons",
               "detail": "Museo della pesca, Caslano",
               "date": "2026-10-29",
               "url": "https://www.tio.ch/agenda/day/20261029/61721"
             },
             {
-              "label": "Bambi - Une vie dans les bois",
-              "detail": "Cinema GranRex, Locarno",
+              "label": "Impressions - Exposition de peinture de Sisko Naerhi",
+              "detail": "Residenza Rivabella, Magliaso",
               "date": "2026-10-29",
-              "url": "https://www.tio.ch/agenda/day/20261029/64406"
+              "url": "https://www.tio.ch/agenda/day/20261029/64414"
             },
             {
-              "label": "Park Eun Sun-Mario Botta",
-              "detail": "Fondazione Gabriele e Anna Braglia, Lugano",
+              "label": "Ivo Soldini - Projet Castel Grande",
+              "detail": "Castel Grande, Bellinzona",
               "date": "2026-10-29",
-              "url": "https://www.tio.ch/agenda/day/20261029/63350"
+              "url": "https://www.tio.ch/agenda/day/20261029/62822"
             },
             {
-              "label": "Déchargement de la Grà",
-              "detail": "6677 Moghegno",
+              "label": "Jannis Kounellis : Je suis un peintre",
+              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
               "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/the-unloading-of-the-gra/"
+              "url": "https://www.tio.ch/agenda/day/20261029/63037"
             },
             {
-              "label": "Nourriture et santé",
-              "detail": "Lega cancro Ticino, Bellinzona",
+              "label": "Pierrette Bloch. Le geste d'écrire",
+              "detail": "Museo Villa dei Cedri, Bellinzona",
               "date": "2026-10-29",
-              "url": "https://www.tio.ch/agenda/day/20261029/64445"
+              "url": "https://www.tio.ch/agenda/day/20261029/64342"
             },
             {
-              "label": "Ligne express",
-              "detail": "LaFilanda, Mendrisio",
+              "label": "PoPoétique",
+              "detail": "Centro ricreativo Il Pettirosso, Savosa",
               "date": "2026-10-29",
-              "url": "https://www.tio.ch/agenda/day/20261029/64673"
-            },
-            {
-              "label": "Ratés Nights Lugano Vol. 27",
-              "detail": "Foce, Lugano",
-              "date": "2026-10-29",
-              "url": "https://www.tio.ch/agenda/day/20261029/64689"
-            },
-            {
-              "label": "La peste en Léventine",
-              "detail": "Museo di Leventina, Giornico",
-              "date": "2026-10-29",
-              "url": "https://www.tio.ch/agenda/day/20261029/64751"
-            },
-            {
-              "label": "Piero Gobetti, éditeur de littérature",
-              "detail": "Biblioteca cantonale, Lugano",
-              "date": "2026-10-29",
-              "url": "https://www.tio.ch/agenda/day/20261029/64221"
-            },
-            {
-              "label": "Sur l'art cinétique et programmé italien",
-              "detail": "Biblioteca cantonale, Locarno",
-              "date": "2026-10-29",
-              "url": "https://www.tio.ch/agenda/day/20261029/64058"
+              "url": "https://www.tio.ch/agenda/day/20261029/63593"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/tessin/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T15:31:36.718Z"
         }
       ],
       "curatedArticles": [
@@ -616,7 +616,7 @@
           "url": "/fr/articles-frontalier/evenements-week-end-tessin/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-29T21:57:02.700Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "servizi",
-  "updatedAt": "2026-10-29T08:53:42.745Z",
-  "contentHash": "c522f2a3e73cacc149f6e188fdfd02e93e25becd8364307389853c464155de0e",
+  "updatedAt": "2026-10-29T21:57:02.700Z",
+  "contentHash": "49db596d9714bc98a8b5e4fb7f08e98f5884306cca1036d1eeb7c456891a43d8",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-29T05:46:49.040Z",
+      "updatedAt": "2026-10-29T12:59:31.667Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-29T06:03:12.578Z",
+      "updatedAt": "2026-10-29T15:24:02.220Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-28T21:56:57.371Z",
+      "updatedAt": "2026-10-29T11:47:10.249Z",
       "keyFacts": 0
     }
   ],
@@ -93,16 +93,16 @@
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6680"
             },
             {
-              "label": "SG31393",
-              "value": "520 CHF",
+              "label": "SG70764",
+              "value": "600 CHF",
               "detail": "offerta attuale",
               "date": "2026-11-04T18:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6681"
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6686"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-29T05:46:49.040Z"
+          "updatedAt": "2026-10-29T12:59:31.667Z"
         },
         {
           "id": "meteo",
@@ -111,12 +111,12 @@
           "items": [
             {
               "label": "St. Gallen",
-              "value": "5 °C",
-              "detail": "oggi da 4 a 10 °C"
+              "value": "9 °C",
+              "detail": "oggi da 3 a 9 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-29T06:03:12.578Z"
+          "updatedAt": "2026-10-29T15:24:02.220Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -154,7 +154,7 @@
               "url": "https://www.h-och.ch/ueber-uns/news/hoch-health-ostschweiz-eroeffnet-in-der-stadt-st-gallen-eine-augenarztpraxis-2026-10-14/"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-29T08:53:42.745Z"
+      "updatedAt": "2026-10-29T21:57:02.700Z"
     },
     "en": {
       "canton": "SG",
@@ -300,16 +300,16 @@
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6680"
             },
             {
-              "label": "SG31393",
-              "value": "520 CHF",
+              "label": "SG70764",
+              "value": "600 CHF",
               "detail": "current bid",
               "date": "2026-11-04T18:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6681"
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6686"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-29T05:46:49.040Z"
+          "updatedAt": "2026-10-29T12:59:31.667Z"
         },
         {
           "id": "meteo",
@@ -318,12 +318,12 @@
           "items": [
             {
               "label": "St. Gallen",
-              "value": "5 °C",
-              "detail": "today from 4 to 10 °C"
+              "value": "9 °C",
+              "detail": "today from 3 to 9 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-29T06:03:12.578Z"
+          "updatedAt": "2026-10-29T15:24:02.220Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -361,7 +361,7 @@
               "url": "https://www.h-och.ch/ueber-uns/news/hoch-health-ostschweiz-eroeffnet-in-der-stadt-st-gallen-eine-augenarztpraxis-2026-10-14/"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -437,7 +437,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-29T08:53:42.745Z"
+      "updatedAt": "2026-10-29T21:57:02.700Z"
     },
     "de": {
       "canton": "SG",
@@ -503,16 +503,16 @@
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6680"
             },
             {
-              "label": "SG31393",
-              "value": "520 CHF",
+              "label": "SG70764",
+              "value": "600 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-11-04T18:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6681"
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6686"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-29T05:46:49.040Z"
+          "updatedAt": "2026-10-29T12:59:31.667Z"
         },
         {
           "id": "meteo",
@@ -521,12 +521,12 @@
           "items": [
             {
               "label": "St. Gallen",
-              "value": "5 °C",
-              "detail": "heute 4 bis 10 °C"
+              "value": "9 °C",
+              "detail": "heute 3 bis 9 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-29T06:03:12.578Z"
+          "updatedAt": "2026-10-29T15:24:02.220Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -564,7 +564,7 @@
               "url": "https://www.h-och.ch/ueber-uns/news/hoch-health-ostschweiz-eroeffnet-in-der-stadt-st-gallen-eine-augenarztpraxis-2026-10-14/"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -640,7 +640,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-29T08:53:42.745Z"
+      "updatedAt": "2026-10-29T21:57:02.700Z"
     },
     "fr": {
       "canton": "SG",
@@ -706,16 +706,16 @@
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6680"
             },
             {
-              "label": "SG31393",
-              "value": "520 CHF",
+              "label": "SG70764",
+              "value": "600 CHF",
               "detail": "offre actuelle",
               "date": "2026-11-04T18:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6681"
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6686"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-29T05:46:49.040Z"
+          "updatedAt": "2026-10-29T12:59:31.667Z"
         },
         {
           "id": "meteo",
@@ -724,12 +724,12 @@
           "items": [
             {
               "label": "St. Gallen",
-              "value": "5 °C",
-              "detail": "aujourd’hui de 4 à 10 °C"
+              "value": "9 °C",
+              "detail": "aujourd’hui de 3 à 9 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-29T06:03:12.578Z"
+          "updatedAt": "2026-10-29T15:24:02.220Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -767,7 +767,7 @@
               "url": "https://www.h-och.ch/ueber-uns/news/hoch-health-ostschweiz-eroeffnet-in-der-stadt-st-gallen-eine-augenarztpraxis-2026-10-14/"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -839,7 +839,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-29T08:53:42.745Z"
+      "updatedAt": "2026-10-29T21:57:02.700Z"
     }
   }
 }
