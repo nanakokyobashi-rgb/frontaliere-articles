@@ -3031,6 +3031,10 @@ test('reconcile: il parser del cap accetta le forme TS equivalenti e rifiuta val
     () => parseCantonLandingCardLimitExport('export const CANTON_LANDING_CARD_LIMIT = 24 as string;'),
     /non trovato o non valido/u,
   );
+  assert.throws(
+    () => parseCantonLandingCardLimitExport('export const CANTON_LANDING_CARD_LIMIT = 24\n  + 1;'),
+    /non trovato o non valido/u,
+  );
 });
 
 // ── Dati degli hub ───────────────────────────────────────────────────────────

@@ -7,7 +7,12 @@
  * second format-sensitive regex at its call site.
  */
 
-const CANTON_LANDING_CARD_LIMIT_EXPORT_RE = /^[ \t]*export\s+const\s+CANTON_LANDING_CARD_LIMIT\s*(?::\s*number)?\s*=\s*(?<value>0|[1-9]\d*)(?:\s+as\s+const)?\s*;?(?=\s*(?:\/\/[^\r\n]*)?(?:\r?\n|$))/mu;
+const CANTON_LANDING_CARD_LIMIT_EXPORT_RE = /^[ \t]*export\s+const\s+CANTON_LANDING_CARD_LIMIT\s*(?::\s*number)?\s*=\s*(?<value>0|[1-9]\d*)(?:\s+as\s+const)?[ \t]*;?[ \t]*(?:\/\/[^\r\n]*)?(?:\r?\n|$)/mu;
+const CANTON_LANDING_CARD_LIMIT_CONTINUATION_RE = /^[ \t]*(?!\/\/)(?:\+\+?|--?|[*/%?&|^~!.,()[\]{}]|=>|===?|!==?|<=|>=|<<<?|>>>|\?\?|&&|\|\||\?\.|(?:as|satisfies|in|instanceof)\b)/u;
+
+function hasExpressionContinuation(source, match) {
+  return CANTON_LANDING_CARD_LIMIT_CONTINUATION_RE.test(source.slice(match.index + match[0].length));
+}
 
 /**
  * Parse the renderer's `CANTON_LANDING_CARD_LIMIT` export.
@@ -24,7 +29,7 @@ export function parseCantonLandingCardLimitExport(source) {
     throw new Error('CANTON_LANDING_CARD_LIMIT export non valido: sorgente non testuale');
   }
   const match = CANTON_LANDING_CARD_LIMIT_EXPORT_RE.exec(source);
-  if (!match) {
+  if (!match || hasExpressionContinuation(source, match)) {
     throw new Error('CANTON_LANDING_CARD_LIMIT export non trovato o non valido');
   }
   const value = Number(match.groups.value);
