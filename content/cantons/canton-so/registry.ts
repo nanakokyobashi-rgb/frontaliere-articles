@@ -237,4 +237,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'soletta-stipendi-pubblici-2027',
+ category: 'novita',
+ date: '2026-10-29T11:38:26.035Z',
+ image: '/images/blog/article-soletta-stipendi-pubblici-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

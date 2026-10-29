@@ -66,6 +66,9 @@ const blogMetaCantonSoDe: Record<string, string> = {
     'blog.article.soletta-ratsleitung-puk-ospedali.title': 'Solothurn: Die Ratsleitung gegen die PUK zu den Spitälern',
     'blog.article.soletta-ratsleitung-puk-ospedali.excerpt': 'Die Ratsleitung von Solothurn hält eine PUK zu den Spitälern nicht für sinnvoll; der Kantonsrat wird am 11.',
     'blog.article.soletta-ratsleitung-puk-ospedali.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.soletta-stipendi-pubblici-2027.title': 'Löhne im öffentlichen Dienst in Solothurn: +1,0% ab 2027',
+    'blog.article.soletta-stipendi-pubblici-2027.excerpt': 'In Solothurn erhalten das Staatspersonal, die Lehrpersonen und die Spitalangestellten ab 2027 nach der Einigung über die Inflation 1,0% mehr.',
+    'blog.article.soletta-stipendi-pubblici-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSoDe;

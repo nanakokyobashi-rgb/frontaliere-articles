@@ -66,6 +66,9 @@ const blogMetaCantonSoIt: Record<string, string> = {
     'blog.article.soletta-ratsleitung-puk-ospedali.title': 'Soletta: la Ratsleitung contro la PUK sugli ospedali',
     'blog.article.soletta-ratsleitung-puk-ospedali.excerpt': 'La Ratsleitung di Soletta considera non utile una PUK sugli ospedali; il Consiglio cantonale voterà l\'11 novembre.',
     'blog.article.soletta-ratsleitung-puk-ospedali.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.soletta-stipendi-pubblici-2027.title': 'Stipendi pubblici a Soletta: +1,0% dal 2027',
+    'blog.article.soletta-stipendi-pubblici-2027.excerpt': 'A Soletta il personale statale, gli insegnanti e i dipendenti degli ospedali riceveranno l\'1,0% in più dal 2027 dopo l\'accordo sull\'inflazione.',
+    'blog.article.soletta-stipendi-pubblici-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSoIt;

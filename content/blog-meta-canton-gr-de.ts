@@ -51,6 +51,9 @@ const blogMetaCantonGrDe: Record<string, string> = {
     'blog.article.brigels-sette-milioni-impianti.title': 'Brigels genehmigt 7 Mio. CHF zur Sanierung der Anlagen',
     'blog.article.brigels-sette-milioni-impianti.excerpt': 'Brigels bewilligt 7 Mio.',
     'blog.article.brigels-sette-milioni-impianti.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.bus-sostitutivi-grigioni.title': 'Ersatzbusse zwischen Thusis und Preda wegen einer Baustelle der RhB',
+    'blog.article.bus-sostitutivi-grigioni.excerpt': 'Die Quelle weist auf Ersatzbusse zwischen Thusis und Preda aufgrund einer Baustelle der RhB hin; der Verkehrsticker verfolgt den Zustand der Verkehrswege in Graubünden.',
+    'blog.article.bus-sostitutivi-grigioni.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonGrDe;

@@ -182,4 +182,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'bus-sostitutivi-grigioni',
+ category: 'pratico',
+ date: '2026-10-29T15:42:15.733Z',
+ image: '/images/blog/article-bus-sostitutivi-grigioni.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['GR'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

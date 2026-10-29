@@ -4,12 +4,12 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "carburanti",
-  "updatedAt": "2026-10-28T11:49:36.683Z",
-  "contentHash": "aa3c611dd98cb6839ce66674282b89a40e72797ede1ab06cb99dac213ddf0260",
+  "updatedAt": "2026-10-29T15:32:04.680Z",
+  "contentHash": "338c611ec7144b0696648d18887ea9ca1962b88ab151437638be15027e06a94d",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-26T13:32:45.792Z",
+      "updatedAt": "2026-10-29T09:40:08.133Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-11-02T00:00:00.000Z"
     }
@@ -54,23 +54,35 @@
             },
             {
               "label": "Benzina 95 — Francia",
-              "value": "2,257 EUR/l",
-              "detail": "media regionale: minimo 1,990 EUR/l, 67 stazioni rilevate",
-              "date": "2026-10-26T12:46:36.000Z"
+              "value": "2,238 EUR/l",
+              "detail": "media regionale: minimo 1,990 EUR/l, 72 stazioni rilevate",
+              "date": "2026-10-29T09:12:13.000Z"
             },
             {
               "label": "Diesel — Francia",
-              "value": "2,468 EUR/l",
-              "detail": "media regionale: minimo 2,250 EUR/l, 70 stazioni rilevate",
-              "date": "2026-10-26T12:46:36.000Z"
+              "value": "2,470 EUR/l",
+              "detail": "media regionale: minimo 2,222 EUR/l, 78 stazioni rilevate",
+              "date": "2026-10-29T09:12:13.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-10-26T13:32:45.792Z"
+          "updatedAt": "2026-10-29T09:40:08.133Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Stipendi pubblici a Soletta: +1,0% dal 2027",
+          "url": "/articoli-soletta/soletta-stipendi-pubblici-2027/",
+          "excerpt": "A Soletta il personale statale, gli insegnanti e i dipendenti degli ospedali riceveranno l'1,0% in più dal 2027 dopo l'accordo sull'inflazione.",
+          "date": "2026-10-29T11:38:26.035Z"
+        },
+        {
+          "title": "Soletta: la Ratsleitung contro la PUK sugli ospedali",
+          "url": "/articoli-soletta/soletta-ratsleitung-puk-ospedali/",
+          "excerpt": "La Ratsleitung di Soletta considera non utile una PUK sugli ospedali; il Consiglio cantonale voterà l'11 novembre.",
+          "date": "2026-10-29T10:41:25.882Z"
+        },
         {
           "title": "221 milioni di franchi per premi assicurativi più bassi nel Canton Soletta",
           "url": "/articoli-soletta/solothurn-sussidi-premi-2027/",
@@ -88,18 +100,6 @@
           "url": "/articoli-soletta/soletta-aumento-salari/",
           "excerpt": "Il Governo cantonale e le associazioni del personale hanno concordato un aumento dell'1,0% dal prossimo anno per dipendenti pubblici, scuole e ospedali.",
           "date": "2026-10-27T12:43:48.858Z"
-        },
-        {
-          "title": "Proposta riduzione premi assicurazione malattia 2027 Canton Soletta",
-          "url": "/articoli-soletta/proposta-premi-assicurazione-2027/",
-          "excerpt": "Proposta 2027 trasmessa al Parlamento cantonale Circa 221 milioni di franchi per ridurre i premi Contributo cantonale di 98 milioni Aumento di 9 milioni (+4,3%)",
-          "date": "2026-10-27T12:21:54.555Z"
-        },
-        {
-          "title": "Consiglio Cantonale Soletta: sedute 3, 4 e 11 novembre 2026",
-          "url": "/articoli-soletta/sedute-parlamento-novembre-2026/",
-          "excerpt": "In agenda 58 affari, inclusi 7 affari normativi e di merito e 7 interventi parlamentari urgenti.",
-          "date": "2026-10-27T11:07:13.770Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-28T11:49:36.683Z"
+      "updatedAt": "2026-10-29T15:32:04.680Z"
     },
     "en": {
       "canton": "SO",
@@ -153,23 +153,35 @@
             },
             {
               "label": "Petrol 95 — France",
-              "value": "2.257 EUR/l",
-              "detail": "regional average: lowest 1.990 EUR/l, 67 stations surveyed",
-              "date": "2026-10-26T12:46:36.000Z"
+              "value": "2.238 EUR/l",
+              "detail": "regional average: lowest 1.990 EUR/l, 72 stations surveyed",
+              "date": "2026-10-29T09:12:13.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2.468 EUR/l",
-              "detail": "regional average: lowest 2.250 EUR/l, 70 stations surveyed",
-              "date": "2026-10-26T12:46:36.000Z"
+              "value": "2.470 EUR/l",
+              "detail": "regional average: lowest 2.222 EUR/l, 78 stations surveyed",
+              "date": "2026-10-29T09:12:13.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-10-26T13:32:45.792Z"
+          "updatedAt": "2026-10-29T09:40:08.133Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Public-sector salaries in Solothurn: +1,0% from 2027",
+          "url": "/en/solothurn-articles/solothurn-public-wages-2027/",
+          "excerpt": "In Solothurn, state employees, teachers and hospital employees will receive 1,0% more from 2027 following the inflation agreement.",
+          "date": "2026-10-29T11:38:26.035Z"
+        },
+        {
+          "title": "Solothurn: Council leadership opposes the hospital PUK",
+          "url": "/en/solothurn-articles/solothurn-hospital-puk-opposed/",
+          "excerpt": "Solothurn’s council leadership considers a PUK on the hospitals unnecessary; the cantonal council will vote on 11 November.",
+          "date": "2026-10-29T10:41:25.882Z"
+        },
         {
           "title": "221 million francs for lower insurance premiums in the Canton of Solothurn",
           "url": "/en/solothurn-articles/solothurn-premium-subsidies-2027/",
@@ -187,18 +199,6 @@
           "url": "/en/solothurn-articles/solothurn-wage-increase/",
           "excerpt": "The cantonal government and staff associations have agreed on a 1,0% increase from next year for public employees, schools and hospitals.",
           "date": "2026-10-27T12:43:48.858Z"
-        },
-        {
-          "title": "Proposal to reduce health insurance premiums in 2027, Canton of Solothurn",
-          "url": "/en/solothurn-articles/2027-insurance-premium-proposal/",
-          "excerpt": "2027 proposal submitted to the Cantonal Parliament Approximately 221 million francs to reduce premiums Cantonal contribution of 98 million Increase of 9 million",
-          "date": "2026-10-27T12:21:54.555Z"
-        },
-        {
-          "title": "Solothurn Cantonal Council: meetings of 3, 4 and 11 November 2026",
-          "url": "/en/solothurn-articles/parliament-sessions-november-2026/",
-          "excerpt": "On the agenda 58 affairs, including 7 regulatory and substantive affairs and 7 urgent parliamentary interventions.",
-          "date": "2026-10-27T11:07:13.770Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-28T11:49:36.683Z"
+      "updatedAt": "2026-10-29T15:32:04.680Z"
     },
     "de": {
       "canton": "SO",
@@ -252,23 +252,35 @@
             },
             {
               "label": "Benzin 95 — Frankreich",
-              "value": "2.257 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 1.990 EUR/l, 67 erfasste Tankstellen",
-              "date": "2026-10-26T12:46:36.000Z"
+              "value": "2.238 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.990 EUR/l, 72 erfasste Tankstellen",
+              "date": "2026-10-29T09:12:13.000Z"
             },
             {
               "label": "Diesel — Frankreich",
-              "value": "2.468 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.250 EUR/l, 70 erfasste Tankstellen",
-              "date": "2026-10-26T12:46:36.000Z"
+              "value": "2.470 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.222 EUR/l, 78 erfasste Tankstellen",
+              "date": "2026-10-29T09:12:13.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-10-26T13:32:45.792Z"
+          "updatedAt": "2026-10-29T09:40:08.133Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Löhne im öffentlichen Dienst in Solothurn: +1,0% ab 2027",
+          "url": "/de/solothurn-artikel/solothurn-staatsloehne-2027/",
+          "excerpt": "In Solothurn erhalten das Staatspersonal, die Lehrpersonen und die Spitalangestellten ab 2027 nach der Einigung über die Inflation 1,0% mehr.",
+          "date": "2026-10-29T11:38:26.035Z"
+        },
+        {
+          "title": "Solothurn: Die Ratsleitung gegen die PUK zu den Spitälern",
+          "url": "/de/solothurn-artikel/solothurn-spitaeler-puk-abgelehnt/",
+          "excerpt": "Die Ratsleitung von Solothurn hält eine PUK zu den Spitälern nicht für sinnvoll; der Kantonsrat wird am 11.",
+          "date": "2026-10-29T10:41:25.882Z"
+        },
         {
           "title": "221 Millionen Franken für niedrigere Versicherungsprämien im Kanton Solothurn",
           "url": "/de/solothurn-artikel/solothurn-pramiezuschusse-2027/",
@@ -286,18 +298,6 @@
           "url": "/de/solothurn-artikel/solothurn-lohnerhoehung/",
           "excerpt": "Die Kantonsregierung und die Personalverbände haben für Angestellte des öffentlichen Dienstes, Schulen und Spitäler ab dem kommenden Jahr eine Erhöhung um 1,0% vereinbart.",
           "date": "2026-10-27T12:43:48.858Z"
-        },
-        {
-          "title": "Vorschlag: Prämienverbilligung 2027 im Kanton Solothurn",
-          "url": "/de/solothurn-artikel/praemienverbilligung-2027/",
-          "excerpt": "Vorschlag 2027 dem Kantonsparlament übermittelt Rund 221 Millionen Franken zur Senkung der Prämien Kantonsbeitrag von 98 Millionen Erhöhung um 9 Millionen",
-          "date": "2026-10-27T12:21:54.555Z"
-        },
-        {
-          "title": "Kantonsrat Solothurn: Sitzungen vom 3., 4. und 11. November 2026",
-          "url": "/de/solothurn-artikel/parlament-sitzungen-november-2026/",
-          "excerpt": "Auf der Tagesordnung stehen 58 Angelegenheiten, darunter 7 regulatorische und materielle Angelegenheiten sowie 7 dringende parlamentarische Interventionen.",
-          "date": "2026-10-27T11:07:13.770Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-28T11:49:36.683Z"
+      "updatedAt": "2026-10-29T15:32:04.680Z"
     },
     "fr": {
       "canton": "SO",
@@ -351,23 +351,35 @@
             },
             {
               "label": "Essence 95 — France",
-              "value": "2,257 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 1,990 EUR/l, 67 stations relevées",
-              "date": "2026-10-26T12:46:36.000Z"
+              "value": "2,238 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,990 EUR/l, 72 stations relevées",
+              "date": "2026-10-29T09:12:13.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2,468 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,250 EUR/l, 70 stations relevées",
-              "date": "2026-10-26T12:46:36.000Z"
+              "value": "2,470 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,222 EUR/l, 78 stations relevées",
+              "date": "2026-10-29T09:12:13.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-10-26T13:32:45.792Z"
+          "updatedAt": "2026-10-29T09:40:08.133Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Salaires publics à Soleure : +1,0% dès 2027",
+          "url": "/fr/articles-soleure/salaires-publics-soleure-2027/",
+          "excerpt": "À Soleure, le personnel de l'État, les enseignants et les employés des hôpitaux recevront 1,0% de plus à partir de 2027 après l'accord sur l'inflation.",
+          "date": "2026-10-29T11:38:26.035Z"
+        },
+        {
+          "title": "Soleure : la direction du Conseil contre la PUK sur les hôpitaux",
+          "url": "/fr/articles-soleure/soleure-puk-hopitaux-refusee/",
+          "excerpt": "La direction du Conseil de Soleure considère qu’une PUK sur les hôpitaux n’est pas utile ; le Conseil cantonal votera le 11 novembre.",
+          "date": "2026-10-29T10:41:25.882Z"
+        },
         {
           "title": "221 millions pour réduire les primes d’assurance à Soleure",
           "url": "/fr/articles-soleure/soleure-subventions-primes-2027/",
@@ -385,18 +397,6 @@
           "url": "/fr/articles-soleure/soleure-hausse-salaires/",
           "excerpt": "Le Gouvernement cantonal et les associations du personnel ont convenu d’une augmentation de 1,0 % dès l’année prochaine pour les employés publics, les écoles et les hôpitaux.",
           "date": "2026-10-27T12:43:48.858Z"
-        },
-        {
-          "title": "Proposition de réduction des primes maladie 2027 à Soleure",
-          "url": "/fr/articles-soleure/proposition-primes-2027/",
-          "excerpt": "Proposition 2027 transmise au Parlement cantonal Environ 221 millions de francs pour réduire les primes Contribution cantonale de 98 millions Augmentation de 9",
-          "date": "2026-10-27T12:21:54.555Z"
-        },
-        {
-          "title": "Conseil cantonal de Soleure : réunions des 3, 4 et 11 novembre 2026",
-          "url": "/fr/articles-soleure/sessions-parlement-novembre-2026/",
-          "excerpt": "À l'ordre du jour 58 affaires, dont 7 affaires réglementaires et substantielles et 7 interventions parlementaires urgentes.",
-          "date": "2026-10-27T11:07:13.770Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-28T11:49:36.683Z"
+      "updatedAt": "2026-10-29T15:32:04.680Z"
     }
   }
 }

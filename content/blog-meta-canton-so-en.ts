@@ -66,6 +66,9 @@ const blogMetaCantonSoEn: Record<string, string> = {
     'blog.article.soletta-ratsleitung-puk-ospedali.title': 'Solothurn: Council leadership opposes the hospital PUK',
     'blog.article.soletta-ratsleitung-puk-ospedali.excerpt': 'Solothurn’s council leadership considers a PUK on the hospitals unnecessary; the cantonal council will vote on 11 November.',
     'blog.article.soletta-ratsleitung-puk-ospedali.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.soletta-stipendi-pubblici-2027.title': 'Public-sector salaries in Solothurn: +1,0% from 2027',
+    'blog.article.soletta-stipendi-pubblici-2027.excerpt': 'In Solothurn, state employees, teachers and hospital employees will receive 1,0% more from 2027 following the inflation agreement.',
+    'blog.article.soletta-stipendi-pubblici-2027.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSoEn;

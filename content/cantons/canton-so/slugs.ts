@@ -24,6 +24,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'aumento-salari-statale-2027': { it: 'aumento-salari-statale-2027', en: 'solothurn-state-salary-increase-2027', de: 'loehner-anstieg-staatlich-2027', fr: 'augmentation-salaire-etat-2027' },
  'solothurn-sussidi-premi-2027': { it: 'solothurn-sussidi-premi-2027', en: 'solothurn-premium-subsidies-2027', de: 'solothurn-pramiezuschusse-2027', fr: 'soleure-subventions-primes-2027' },
  'soletta-ratsleitung-puk-ospedali': { it: 'soletta-ratsleitung-puk-ospedali', en: 'solothurn-hospital-puk-opposed', de: 'solothurn-spitaeler-puk-abgelehnt', fr: 'soleure-puk-hopitaux-refusee' },
+ 'soletta-stipendi-pubblici-2027': { it: 'soletta-stipendi-pubblici-2027', en: 'solothurn-public-wages-2027', de: 'solothurn-staatsloehne-2027', fr: 'salaires-publics-soleure-2027' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

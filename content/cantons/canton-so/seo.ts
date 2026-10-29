@@ -816,6 +816,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-soletta-stipendi-pubblici-2027': {
+    title: 'Stipendi pubblici a Soletta: +1,0% dal 2027 | Frontaliere Ticino',
+    description: 'A Soletta il personale statale, gli insegnanti e i dipendenti degli ospedali riceveranno l\'1,0% in più dal 2027 dopo l\'accordo sull\'inflazione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, stipendi, pubblici, soletta, personale',
+    ogTitle: 'Stipendi pubblici a Soletta: +1,0% dal 2027',
+    ogDescription: 'Il Governo cantonale e le associazioni del personale di Soletta hanno concordato l\'1,0% in più dal 2027 per Stato, scuole cantonali e pubbliche, Solothurner Spitäler AG e istituti cantonali. Decisivi inflazione, conti e mercato del lavoro.',
+    canonicalPath: '/articoli-soletta/soletta-stipendi-pubblici-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Stipendi pubblici a Soletta: +1,0% dal 2027",
+      "description": "A Soletta il personale statale, gli insegnanti e i dipendenti degli ospedali riceveranno l'1,0% in più dal 2027 dopo l'accordo sull'inflazione.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-soletta-stipendi-pubblici-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-29T11:38:26+00:00",
+      "dateModified": "2026-10-29T11:38:26+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-soletta/soletta-stipendi-pubblici-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

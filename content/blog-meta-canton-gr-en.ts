@@ -51,6 +51,9 @@ const blogMetaCantonGrEn: Record<string, string> = {
     'blog.article.brigels-sette-milioni-impianti.title': 'Brigels approves CHF 7 million to rehabilitate the plants',
     'blog.article.brigels-sette-milioni-impianti.excerpt': 'Brigels approves CHF 7 million for the rehabilitation of ski lifts.',
     'blog.article.brigels-sette-milioni-impianti.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.bus-sostitutivi-grigioni.title': 'RhB replacement buses between Thusis and Preda due to construction work',
+    'blog.article.bus-sostitutivi-grigioni.excerpt': 'The source reports replacement buses between Thusis and Preda due to RhB construction work; the Verkehrsticker tracks the status of Graubünden’s traffic routes.',
+    'blog.article.bus-sostitutivi-grigioni.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonGrEn;

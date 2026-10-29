@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "servizi",
-  "updatedAt": "2026-10-29T08:53:42.745Z",
-  "contentHash": "659e191cfe58719c966b685e3d6c01db59e2c7ccc4e2f7e150d377a1ab95954e",
+  "updatedAt": "2026-10-29T10:50:58.955Z",
+  "contentHash": "11aa3be39a02fccea768e9d775c214821edcdb542a8db65c9015b95e02b97013",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -180,6 +180,12 @@
           "date": "2026-10-27T12:21:54.555Z"
         },
         {
+          "title": "Soletta: la Ratsleitung contro la PUK sugli ospedali",
+          "url": "/articoli-soletta/soletta-ratsleitung-puk-ospedali/",
+          "excerpt": "La Ratsleitung di Soletta considera non utile una PUK sugli ospedali; il Consiglio cantonale voterà l'11 novembre.",
+          "date": "2026-10-29T10:41:25.882Z"
+        },
+        {
           "title": "Premi cassa malati a Soletta: +6% nel 2027",
           "url": "/articoli-soletta/premi-malattia-soletta-2027/",
           "excerpt": "Nel Canton Soletta il premio medio salirà di CHF 23.50 a CHF 417.50 nel 2027, 5.50 in più della media svizzera.",
@@ -214,12 +220,6 @@
           "url": "/articoli-svizzera/permesso-di-dimora-b-canton-soletta/",
           "excerpt": "I requisiti per ottenere un permesso di dimora B nel Canton Soletta sono specificati nella legge cantonale.",
           "date": "2026-08-18T01:22:42.942Z"
-        },
-        {
-          "title": "Permesso L in Soletta: durata e condizioni",
-          "url": "/articoli-svizzera/permesso-l-soletta-validita-e-proroga/",
-          "excerpt": "Il permesso L di breve durata nel Cantone di Soletta è valido per un massimo di 1 anno. Le condizioni di proroga e il passaggio al permesso di dimora sono descritte di seguito.",
-          "date": "2026-08-18T02:26:24.720Z"
         }
       ],
       "latestCantonArticles": [],
@@ -249,7 +249,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-29T08:53:42.745Z"
+      "updatedAt": "2026-10-29T10:50:58.955Z"
     },
     "en": {
       "canton": "SO",
@@ -397,6 +397,12 @@
           "date": "2026-10-27T12:21:54.555Z"
         },
         {
+          "title": "Solothurn: Council leadership opposes the hospital PUK",
+          "url": "/en/solothurn-articles/solothurn-hospital-puk-opposed/",
+          "excerpt": "Solothurn’s council leadership considers a PUK on the hospitals unnecessary; the cantonal council will vote on 11 November.",
+          "date": "2026-10-29T10:41:25.882Z"
+        },
+        {
           "title": "Health insurance premiums in Solothurn: +6% in 2027",
           "url": "/en/solothurn-articles/solothurn-health-premiums-2027/",
           "excerpt": "In the Canton of Solothurn, the average premium will rise by CHF 23.50 to CHF 417.50 in 2027, 5.50 more than the Swiss average.",
@@ -431,12 +437,6 @@
           "url": "/en/swiss-articles/residence-permit-b-in-soleta-requirements-and-procedure/",
           "excerpt": "The requirements for obtaining a B residence permit in the Canton of Solothurn are specified in the cantonal law.",
           "date": "2026-08-18T01:22:42.942Z"
-        },
-        {
-          "title": "L Permit in Slab: duration and conditions",
-          "url": "/en/swiss-articles/l-permit-in-slab-duration-and-conditions/",
-          "excerpt": "The short-term L permit in the Canton of Solothurn is valid for a maximum of 1 year. The conditions of extension and the transition to a residence permit are described below.",
-          "date": "2026-08-18T02:26:24.720Z"
         }
       ],
       "latestCantonArticles": [],
@@ -462,7 +462,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-29T08:53:42.745Z"
+      "updatedAt": "2026-10-29T10:50:58.955Z"
     },
     "de": {
       "canton": "SO",
@@ -610,6 +610,12 @@
           "date": "2026-10-27T12:21:54.555Z"
         },
         {
+          "title": "Solothurn: Die Ratsleitung gegen die PUK zu den Spitälern",
+          "url": "/de/solothurn-artikel/solothurn-spitaeler-puk-abgelehnt/",
+          "excerpt": "Die Ratsleitung von Solothurn hält eine PUK zu den Spitälern nicht für sinnvoll; der Kantonsrat wird am 11.",
+          "date": "2026-10-29T10:41:25.882Z"
+        },
+        {
           "title": "Krankenkassenprämien in Solothurn: +6% im Jahr 2027",
           "url": "/de/solothurn-artikel/solothurn-krankenkassenpraemien-2027/",
           "excerpt": "Im Kanton Solothurn steigt die durchschnittliche Prämie im Jahr 2027 um CHF 23.50 auf CHF 417.50, 5.50 mehr als der Schweizer Durchschnitt.",
@@ -644,12 +650,6 @@
           "url": "/de/schweiz-artikel/permesso-di-dimora-b-kanton-solothurn/",
           "excerpt": "Die Voraussetzungen für eine Aufenthaltsbewilligung B im Kanton Solothurn sind im kantonalen Gesetz festgelegt.",
           "date": "2026-08-18T01:22:42.942Z"
-        },
-        {
-          "title": "Erlaubnis L in Solothurn: Dauer und Bedingungen",
-          "url": "/de/schweiz-artikel/erlaubnis-l-in-solothurn-dauer-und-bedingungen/",
-          "excerpt": "Die Kurzzeitbewilligung L im Kanton Solothurn ist maximal 1 Jahr gültig. Die Bedingungen für die Verlängerung und den Übergang zur Aufenthaltsbewilligung sind nachfolgend beschrieben.",
-          "date": "2026-08-18T02:26:24.720Z"
         }
       ],
       "latestCantonArticles": [],
@@ -675,7 +675,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-29T08:53:42.745Z"
+      "updatedAt": "2026-10-29T10:50:58.955Z"
     },
     "fr": {
       "canton": "SO",
@@ -823,6 +823,12 @@
           "date": "2026-10-27T12:21:54.555Z"
         },
         {
+          "title": "Soleure : la direction du Conseil contre la PUK sur les hôpitaux",
+          "url": "/fr/articles-soleure/soleure-puk-hopitaux-refusee/",
+          "excerpt": "La direction du Conseil de Soleure considère qu’une PUK sur les hôpitaux n’est pas utile ; le Conseil cantonal votera le 11 novembre.",
+          "date": "2026-10-29T10:41:25.882Z"
+        },
+        {
           "title": "Primes d’assurance-maladie à Soleure : +6 % en 2027",
           "url": "/fr/articles-soleure/primes-maladie-soleure-2027/",
           "excerpt": "Dans le canton de Soleure, la prime moyenne augmentera de CHF 23.50 pour atteindre CHF 417.50 en 2027, soit 5.50 de plus que la moyenne suisse.",
@@ -857,12 +863,6 @@
           "url": "/fr/articles-suisse/permesso-di-dimora-b-canton-de-soleure/",
           "excerpt": "Les conditions d'obtention d'un permis de séjour B dans le canton de Soleure sont précisées dans la loi cantonale.",
           "date": "2026-08-18T01:22:42.942Z"
-        },
-        {
-          "title": "Permis L à Soleure : durée et conditions",
-          "url": "/fr/articles-suisse/permis-l-a-soleure-duree-et-conditions/",
-          "excerpt": "Le permis L de courte durée dans le canton de Soleure est valable pour une durée maximale d'un an. Les conditions de prolongation et de passage à l'autorisation de séjour sont décrites ci-dessous.",
-          "date": "2026-08-18T02:26:24.720Z"
         }
       ],
       "latestCantonArticles": [],
@@ -884,7 +884,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-29T08:53:42.745Z"
+      "updatedAt": "2026-10-29T10:50:58.955Z"
     }
   }
 }
