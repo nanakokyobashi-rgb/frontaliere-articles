@@ -4,17 +4,17 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-29T07:40:41.678Z",
-  "contentHash": "7631269332048a5ea55c09cf9050782b4add655dc4fd1e578a70cde3fd304993",
+  "updatedAt": "2026-10-29T15:32:04.680Z",
+  "contentHash": "a63cc53d38470af53bad6a491da28208c02456c27508dc3900f354071436838b",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-29T01:18:28.468Z",
+      "updatedAt": "2026-10-29T10:29:04.010Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-28T21:56:57.371Z",
+      "updatedAt": "2026-10-29T11:47:10.249Z",
       "keyFacts": 0
     }
   ],
@@ -73,20 +73,20 @@
               "date": "2026-10-21T11:45:00.000Z"
             },
             {
-              "label": "A4 Brunnen <-> Zürich tra Svincolo autostradale Cham E Svincolo autostradale Rotkreuz Situazione: problemi di traffico cantiere, lunghezza [km] 1.3",
-              "value": "Cantiere",
-              "detail": "fine prevista: 29 ottobre 2026",
-              "date": "2026-10-22T07:40:00.000Z"
-            },
-            {
               "label": "A14 Diramazione Blegi <-> Walterswil tra Svincolo autostradale Baar E Svincolo autostradale Walterswil Situazione: problemi di traffico cantiere, lunghezza [km] 1.7 Limitazione del traffico: nuova…",
               "value": "Cantiere",
               "detail": "fine prevista: 30 ottobre 2026",
               "date": "2026-10-27T05:32:00.000Z"
+            },
+            {
+              "label": "A14 Walterswil -> Diramazione Blegi Svincolo autostradale Baar Situazione: problemi di traffico cantiere, lunghezza [km] 0.1, nel raccordo Limitazione del traffico: nuova viabilità Aggiunta 1…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 30 ottobre 2026",
+              "date": "2026-10-29T07:30:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-29T01:18:28.468Z"
+          "updatedAt": "2026-10-29T10:29:04.010Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -109,7 +109,7 @@
               "url": "https://zg.ch/de/news/2026/September/Gemeinsam-gegen-Food-Waste"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -173,7 +173,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-29T15:32:04.680Z"
     },
     "en": {
       "canton": "ZG",
@@ -229,20 +229,20 @@
               "date": "2026-10-21T11:45:00.000Z"
             },
             {
-              "label": "A4 Brunnen <-> Zürich tra Svincolo autostradale Cham E Svincolo autostradale Rotkreuz Situazione: problemi di traffico cantiere, lunghezza [km] 1.3",
-              "value": "Roadworks",
-              "detail": "until 29 October 2026",
-              "date": "2026-10-22T07:40:00.000Z"
-            },
-            {
               "label": "A14 Diramazione Blegi <-> Walterswil tra Svincolo autostradale Baar E Svincolo autostradale Walterswil Situazione: problemi di traffico cantiere, lunghezza [km] 1.7 Limitazione del traffico: nuova…",
               "value": "Roadworks",
               "detail": "until 30 October 2026",
               "date": "2026-10-27T05:32:00.000Z"
+            },
+            {
+              "label": "A14 Walterswil -> Diramazione Blegi Svincolo autostradale Baar Situazione: problemi di traffico cantiere, lunghezza [km] 0.1, nel raccordo Limitazione del traffico: nuova viabilità Aggiunta 1…",
+              "value": "Roadworks",
+              "detail": "until 30 October 2026",
+              "date": "2026-10-29T07:30:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-29T01:18:28.468Z"
+          "updatedAt": "2026-10-29T10:29:04.010Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -265,7 +265,7 @@
               "url": "https://zg.ch/de/news/2026/September/Gemeinsam-gegen-Food-Waste"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -329,7 +329,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-29T15:32:04.680Z"
     },
     "de": {
       "canton": "ZG",
@@ -385,20 +385,20 @@
               "date": "2026-10-21T11:45:00.000Z"
             },
             {
-              "label": "A4 Brunnen <-> Zürich zwischen Anschluss Cham und Anschluss Rotkreuz Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 1.3",
-              "value": "Baustelle",
-              "detail": "bis 29. Oktober 2026",
-              "date": "2026-10-22T07:40:00.000Z"
-            },
-            {
               "label": "A14 Verzweigung Blegi <-> Walterswil zwischen Anschluss Baar und Anschluss Walterswil Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 1.7 Verkehrsführung: veränderte Verkehrsführung Zusatz 1…",
               "value": "Baustelle",
               "detail": "bis 30. Oktober 2026",
               "date": "2026-10-27T05:32:00.000Z"
+            },
+            {
+              "label": "A14 Walterswil -> Verzweigung Blegi Anschluss Baar Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.1, im Anschluss Verkehrsführung: veränderte Verkehrsführung Zusatz 1: vorübergehende…",
+              "value": "Baustelle",
+              "detail": "bis 30. Oktober 2026",
+              "date": "2026-10-29T07:30:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-29T01:18:28.468Z"
+          "updatedAt": "2026-10-29T10:29:04.010Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -421,7 +421,7 @@
               "url": "https://zg.ch/de/news/2026/September/Gemeinsam-gegen-Food-Waste"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -485,7 +485,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-29T15:32:04.680Z"
     },
     "fr": {
       "canton": "ZG",
@@ -541,20 +541,20 @@
               "date": "2026-10-21T11:45:00.000Z"
             },
             {
-              "label": "A4 Brunnen <-> Zurich entre Jonction autoroutière Cham et Jonction autoroutière Rotkreuz Situation: trafic perturbé travaux, longueur [km] 1.3",
-              "value": "Chantier",
-              "detail": "jusqu’au 29 octobre 2026",
-              "date": "2026-10-22T07:40:00.000Z"
-            },
-            {
               "label": "A14 Echangeur de Blegi <-> Walterswil entre Jonction autoroutière Baar et Jonction autoroutière Walterswil Situation: trafic perturbé travaux, longueur [km] 1.7 Gestion du trafic: nouveau plan de…",
               "value": "Chantier",
               "detail": "jusqu’au 30 octobre 2026",
               "date": "2026-10-27T05:32:00.000Z"
+            },
+            {
+              "label": "A14 Walterswil -> Echangeur de Blegi Jonction autoroutière Baar Situation: trafic perturbé travaux, longueur [km] 0.1, dans la jonction Gestion du trafic: nouveau plan de circulation Complément 1…",
+              "value": "Chantier",
+              "detail": "jusqu’au 30 octobre 2026",
+              "date": "2026-10-29T07:30:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-29T01:18:28.468Z"
+          "updatedAt": "2026-10-29T10:29:04.010Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -577,7 +577,7 @@
               "url": "https://zg.ch/de/news/2026/September/Gemeinsam-gegen-Food-Waste"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -641,7 +641,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-29T15:32:04.680Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-29T08:53:42.745Z",
-  "contentHash": "854790a9f181f69fca4f7d125be8da4fed52ae256d1537d003e0d0bfd34da7f2",
+  "updatedAt": "2026-10-29T15:32:04.680Z",
+  "contentHash": "55f7071fc94d08f95b14e390537de47b2f3ec2e86952e308a1cb3b3146e8f4b4",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-29T01:18:28.468Z",
+      "updatedAt": "2026-10-29T10:29:04.010Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-28T21:56:57.371Z",
+      "updatedAt": "2026-10-29T11:47:10.249Z",
       "keyFacts": 0
     }
   ],
@@ -160,13 +160,18 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-29T01:18:28.468Z"
+          "updatedAt": "2026-10-29T10:29:04.010Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Herbstaktion: Velo-Reinigung in der Velostation",
+              "date": "2026-10-29",
+              "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/10/herbstaktion--velo-reinigung-in-der-velostation.html"
+            },
             {
               "label": "Velovorzugsroute entlang der Bahn - öffentliche Mitwirkung startet im November",
               "date": "2026-10-26",
@@ -191,14 +196,9 @@
               "label": "St.Gallen: Falschfahrer auf A1 angehalten",
               "date": "2026-10-13",
               "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/st-gallen--falschfahrer-auf-a1-angehalten.html"
-            },
-            {
-              "label": "Sonnental: Auto in Strassenlaterne geprallt",
-              "date": "2026-10-12",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/sonnental--auto-in-strassenlaterne-geprallt.html"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -286,7 +286,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-29T08:53:42.745Z"
+      "updatedAt": "2026-10-29T15:32:04.680Z"
     },
     "en": {
       "canton": "SG",
@@ -424,13 +424,18 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-29T01:18:28.468Z"
+          "updatedAt": "2026-10-29T10:29:04.010Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Herbstaktion: Velo-Reinigung in der Velostation",
+              "date": "2026-10-29",
+              "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/10/herbstaktion--velo-reinigung-in-der-velostation.html"
+            },
             {
               "label": "Velovorzugsroute entlang der Bahn - öffentliche Mitwirkung startet im November",
               "date": "2026-10-26",
@@ -455,14 +460,9 @@
               "label": "St.Gallen: Falschfahrer auf A1 angehalten",
               "date": "2026-10-13",
               "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/st-gallen--falschfahrer-auf-a1-angehalten.html"
-            },
-            {
-              "label": "Sonnental: Auto in Strassenlaterne geprallt",
-              "date": "2026-10-12",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/sonnental--auto-in-strassenlaterne-geprallt.html"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -549,7 +549,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-29T08:53:42.745Z"
+      "updatedAt": "2026-10-29T15:32:04.680Z"
     },
     "de": {
       "canton": "SG",
@@ -687,13 +687,18 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-29T01:18:28.468Z"
+          "updatedAt": "2026-10-29T10:29:04.010Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Herbstaktion: Velo-Reinigung in der Velostation",
+              "date": "2026-10-29",
+              "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/10/herbstaktion--velo-reinigung-in-der-velostation.html"
+            },
             {
               "label": "Velovorzugsroute entlang der Bahn - öffentliche Mitwirkung startet im November",
               "date": "2026-10-26",
@@ -718,14 +723,9 @@
               "label": "St.Gallen: Falschfahrer auf A1 angehalten",
               "date": "2026-10-13",
               "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/st-gallen--falschfahrer-auf-a1-angehalten.html"
-            },
-            {
-              "label": "Sonnental: Auto in Strassenlaterne geprallt",
-              "date": "2026-10-12",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/sonnental--auto-in-strassenlaterne-geprallt.html"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -812,7 +812,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-29T08:53:42.745Z"
+      "updatedAt": "2026-10-29T15:32:04.680Z"
     },
     "fr": {
       "canton": "SG",
@@ -950,13 +950,18 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-29T01:18:28.468Z"
+          "updatedAt": "2026-10-29T10:29:04.010Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Herbstaktion: Velo-Reinigung in der Velostation",
+              "date": "2026-10-29",
+              "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/10/herbstaktion--velo-reinigung-in-der-velostation.html"
+            },
             {
               "label": "Velovorzugsroute entlang der Bahn - öffentliche Mitwirkung startet im November",
               "date": "2026-10-26",
@@ -981,14 +986,9 @@
               "label": "St.Gallen: Falschfahrer auf A1 angehalten",
               "date": "2026-10-13",
               "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/st-gallen--falschfahrer-auf-a1-angehalten.html"
-            },
-            {
-              "label": "Sonnental: Auto in Strassenlaterne geprallt",
-              "date": "2026-10-12",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/sonnental--auto-in-strassenlaterne-geprallt.html"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -1076,7 +1076,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-29T08:53:42.745Z"
+      "updatedAt": "2026-10-29T15:32:04.680Z"
     }
   }
 }

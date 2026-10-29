@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "servizi",
-  "updatedAt": "2026-10-29T08:53:42.745Z",
-  "contentHash": "0f81191212b25ba7b40fe392d173e5118d52286e97ad633fdafd4196adfdaf40",
+  "updatedAt": "2026-10-29T15:32:04.680Z",
+  "contentHash": "03676d2e83943b2e4e1aad41f4b046719709cbc38d22ca16b41e4d991b297ac1",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-29T02:43:58.384Z",
+      "updatedAt": "2026-10-29T11:01:05.952Z",
       "keyFacts": 0
     },
     {
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-28T21:56:57.371Z",
+      "updatedAt": "2026-10-29T11:47:10.249Z",
       "keyFacts": 0
     }
   ],
@@ -106,7 +106,7 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-29T02:43:58.384Z"
+          "updatedAt": "2026-10-29T11:01:05.952Z"
         },
         {
           "id": "meteo",
@@ -127,6 +127,11 @@
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Ein Schlaganfall kennt kein Alter",
+              "date": "2026-10-29T10:21:38.000Z",
+              "url": "https://www.usz.ch/ein-schlaganfall-kennt-kein-alter/"
+            },
             {
               "label": "Brustkrebs und Kinderwunsch: Fruchtbarkeit erhalten, ohne die Therapie zu verzögern",
               "date": "2026-10-28T12:51:51.000Z",
@@ -151,14 +156,9 @@
               "label": "2’000. Geburt des Jahres 2026 an der Klinik für Geburtshilfe",
               "date": "2026-10-23T05:21:46.000Z",
               "url": "https://www.usz.ch/2000-geburt-des-jahres-2026-an-der-klinik-fuer-geburtshilfe/"
-            },
-            {
-              "label": "Administrativuntersuchung in der Klinik für Urologie abgeschlossen",
-              "date": "2026-10-22T12:40:30.000Z",
-              "url": "https://www.usz.ch/administrativuntersuchung-in-der-klinik-fuer-urologie-abgeschlossen/"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -238,7 +238,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-29T08:53:42.745Z"
+      "updatedAt": "2026-10-29T15:32:04.680Z"
     },
     "en": {
       "canton": "ZH",
@@ -317,7 +317,7 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-29T02:43:58.384Z"
+          "updatedAt": "2026-10-29T11:01:05.952Z"
         },
         {
           "id": "meteo",
@@ -338,6 +338,11 @@
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Ein Schlaganfall kennt kein Alter",
+              "date": "2026-10-29T10:21:38.000Z",
+              "url": "https://www.usz.ch/ein-schlaganfall-kennt-kein-alter/"
+            },
             {
               "label": "Brustkrebs und Kinderwunsch: Fruchtbarkeit erhalten, ohne die Therapie zu verzögern",
               "date": "2026-10-28T12:51:51.000Z",
@@ -362,14 +367,9 @@
               "label": "2’000. Geburt des Jahres 2026 an der Klinik für Geburtshilfe",
               "date": "2026-10-23T05:21:46.000Z",
               "url": "https://www.usz.ch/2000-geburt-des-jahres-2026-an-der-klinik-fuer-geburtshilfe/"
-            },
-            {
-              "label": "Administrativuntersuchung in der Klinik für Urologie abgeschlossen",
-              "date": "2026-10-22T12:40:30.000Z",
-              "url": "https://www.usz.ch/administrativuntersuchung-in-der-klinik-fuer-urologie-abgeschlossen/"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -445,7 +445,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-29T08:53:42.745Z"
+      "updatedAt": "2026-10-29T15:32:04.680Z"
     },
     "de": {
       "canton": "ZH",
@@ -524,7 +524,7 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-29T02:43:58.384Z"
+          "updatedAt": "2026-10-29T11:01:05.952Z"
         },
         {
           "id": "meteo",
@@ -545,6 +545,11 @@
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Ein Schlaganfall kennt kein Alter",
+              "date": "2026-10-29T10:21:38.000Z",
+              "url": "https://www.usz.ch/ein-schlaganfall-kennt-kein-alter/"
+            },
             {
               "label": "Brustkrebs und Kinderwunsch: Fruchtbarkeit erhalten, ohne die Therapie zu verzögern",
               "date": "2026-10-28T12:51:51.000Z",
@@ -569,14 +574,9 @@
               "label": "2’000. Geburt des Jahres 2026 an der Klinik für Geburtshilfe",
               "date": "2026-10-23T05:21:46.000Z",
               "url": "https://www.usz.ch/2000-geburt-des-jahres-2026-an-der-klinik-fuer-geburtshilfe/"
-            },
-            {
-              "label": "Administrativuntersuchung in der Klinik für Urologie abgeschlossen",
-              "date": "2026-10-22T12:40:30.000Z",
-              "url": "https://www.usz.ch/administrativuntersuchung-in-der-klinik-fuer-urologie-abgeschlossen/"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -652,7 +652,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-29T08:53:42.745Z"
+      "updatedAt": "2026-10-29T15:32:04.680Z"
     },
     "fr": {
       "canton": "ZH",
@@ -731,7 +731,7 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-29T02:43:58.384Z"
+          "updatedAt": "2026-10-29T11:01:05.952Z"
         },
         {
           "id": "meteo",
@@ -752,6 +752,11 @@
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Ein Schlaganfall kennt kein Alter",
+              "date": "2026-10-29T10:21:38.000Z",
+              "url": "https://www.usz.ch/ein-schlaganfall-kennt-kein-alter/"
+            },
             {
               "label": "Brustkrebs und Kinderwunsch: Fruchtbarkeit erhalten, ohne die Therapie zu verzögern",
               "date": "2026-10-28T12:51:51.000Z",
@@ -776,14 +781,9 @@
               "label": "2’000. Geburt des Jahres 2026 an der Klinik für Geburtshilfe",
               "date": "2026-10-23T05:21:46.000Z",
               "url": "https://www.usz.ch/2000-geburt-des-jahres-2026-an-der-klinik-fuer-geburtshilfe/"
-            },
-            {
-              "label": "Administrativuntersuchung in der Klinik für Urologie abgeschlossen",
-              "date": "2026-10-22T12:40:30.000Z",
-              "url": "https://www.usz.ch/administrativuntersuchung-in-der-klinik-fuer-urologie-abgeschlossen/"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -855,7 +855,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-29T08:53:42.745Z"
+      "updatedAt": "2026-10-29T15:32:04.680Z"
     }
   }
 }

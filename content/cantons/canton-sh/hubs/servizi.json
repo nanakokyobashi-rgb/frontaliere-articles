@@ -4,8 +4,8 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "servizi",
-  "updatedAt": "2026-10-29T08:53:42.745Z",
-  "contentHash": "64da146a7fb763b7badbbfcc1b305ae5aba84cde6b67621868a3f23cd9467945",
+  "updatedAt": "2026-10-29T15:32:04.680Z",
+  "contentHash": "b6946cc7af3bfd86ba00c9fd4bb93e31949d78e23af7622788d9f2b94c1a1c7c",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -20,6 +20,11 @@
     {
       "id": "meteo",
       "updatedAt": "2026-10-29T06:03:12.578Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-29T11:47:10.249Z",
       "keyFacts": 0
     }
   ],
@@ -107,6 +112,19 @@
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
           "updatedAt": "2026-10-29T06:03:12.578Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Neues Neurozentrum am Hegau-Bodensee-Klinikum Singen",
+              "date": "2026-10-29T11:39:00.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/neuzentrum+klinikum+singen"
+            }
+          ],
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -186,7 +204,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-29T08:53:42.745Z"
+      "updatedAt": "2026-10-29T15:32:04.680Z"
     },
     "en": {
       "canton": "SH",
@@ -271,6 +289,19 @@
           ],
           "sourceName": "Frontaliere Ticino weather",
           "updatedAt": "2026-10-29T06:03:12.578Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Neues Neurozentrum am Hegau-Bodensee-Klinikum Singen",
+              "date": "2026-10-29T11:39:00.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/neuzentrum+klinikum+singen"
+            }
+          ],
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -346,7 +377,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-29T08:53:42.745Z"
+      "updatedAt": "2026-10-29T15:32:04.680Z"
     },
     "de": {
       "canton": "SH",
@@ -431,6 +462,19 @@
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
           "updatedAt": "2026-10-29T06:03:12.578Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Neues Neurozentrum am Hegau-Bodensee-Klinikum Singen",
+              "date": "2026-10-29T11:39:00.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/neuzentrum+klinikum+singen"
+            }
+          ],
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -506,7 +550,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-29T08:53:42.745Z"
+      "updatedAt": "2026-10-29T15:32:04.680Z"
     },
     "fr": {
       "canton": "SH",
@@ -591,6 +635,19 @@
           ],
           "sourceName": "Météo de Frontaliere Ticino",
           "updatedAt": "2026-10-29T06:03:12.578Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Neues Neurozentrum am Hegau-Bodensee-Klinikum Singen",
+              "date": "2026-10-29T11:39:00.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/neuzentrum+klinikum+singen"
+            }
+          ],
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -662,7 +719,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-29T08:53:42.745Z"
+      "updatedAt": "2026-10-29T15:32:04.680Z"
     }
   }
 }

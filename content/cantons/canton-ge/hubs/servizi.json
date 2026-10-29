@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "servizi",
-  "updatedAt": "2026-10-29T08:53:42.745Z",
-  "contentHash": "d67dd8234e33c8c8bfa2b75f4a658fb9d5de56dbdbeda78f3536bd1cf0f92c44",
+  "updatedAt": "2026-10-29T15:32:04.680Z",
+  "contentHash": "c5eb113bbb988e1e465be39442ca0485f9310d482990a2e103edbabf7dbe4dc6",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-29T02:43:57.029Z",
+      "updatedAt": "2026-10-29T11:01:04.771Z",
       "keyFacts": 0
     },
     {
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-28T21:56:57.371Z",
+      "updatedAt": "2026-10-29T11:47:10.249Z",
       "keyFacts": 0
     }
   ],
@@ -96,7 +96,7 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-29T02:43:57.029Z"
+          "updatedAt": "2026-10-29T11:01:04.771Z"
         },
         {
           "id": "meteo",
@@ -118,6 +118,16 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Appel à projets - Santé mentale des jeunes",
+              "date": "2026-10-29",
+              "url": "https://www.ge.ch/node/45359"
+            },
+            {
+              "label": "OCIRT-Formation 200-26 - Stockage des produits chimiques dans les entreprises",
+              "date": "2026-10-29",
+              "url": "https://www.ge.ch/node/44023"
+            },
+            {
               "label": "Formulaires pour les demandes de subsides 2027",
               "date": "2026-10-27",
               "url": "https://www.ge.ch/node/45339"
@@ -136,19 +146,9 @@
               "label": "Barèmes et catégories 2027 pour les subsides d'assurance-maladie",
               "date": "2026-10-26",
               "url": "https://www.ge.ch/node/45327"
-            },
-            {
-              "label": "Une personne atteinte d’Ebola prise en charge aux HUG",
-              "date": "2026-10-26",
-              "url": "https://www.hug.ch/actualite/personne-atteinte-ebola-prise-charge-aux-hug"
-            },
-            {
-              "label": "Les HUG, 1er hôpital de Suisse dans le classement Best Smart Hospitals 2027 de Newsweek",
-              "date": "2026-10-23",
-              "url": "https://www.hug.ch/actualite/hug-1er-hopital-suisse-dans-classement-best-smart-hospitals-2027-newsweek"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -228,7 +228,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-29T08:53:42.745Z"
+      "updatedAt": "2026-10-29T15:32:04.680Z"
     },
     "en": {
       "canton": "GE",
@@ -297,7 +297,7 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-29T02:43:57.029Z"
+          "updatedAt": "2026-10-29T11:01:04.771Z"
         },
         {
           "id": "meteo",
@@ -319,6 +319,16 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Appel à projets - Santé mentale des jeunes",
+              "date": "2026-10-29",
+              "url": "https://www.ge.ch/node/45359"
+            },
+            {
+              "label": "OCIRT-Formation 200-26 - Stockage des produits chimiques dans les entreprises",
+              "date": "2026-10-29",
+              "url": "https://www.ge.ch/node/44023"
+            },
+            {
               "label": "Formulaires pour les demandes de subsides 2027",
               "date": "2026-10-27",
               "url": "https://www.ge.ch/node/45339"
@@ -337,19 +347,9 @@
               "label": "Barèmes et catégories 2027 pour les subsides d'assurance-maladie",
               "date": "2026-10-26",
               "url": "https://www.ge.ch/node/45327"
-            },
-            {
-              "label": "Une personne atteinte d’Ebola prise en charge aux HUG",
-              "date": "2026-10-26",
-              "url": "https://www.hug.ch/actualite/personne-atteinte-ebola-prise-charge-aux-hug"
-            },
-            {
-              "label": "Les HUG, 1er hôpital de Suisse dans le classement Best Smart Hospitals 2027 de Newsweek",
-              "date": "2026-10-23",
-              "url": "https://www.hug.ch/actualite/hug-1er-hopital-suisse-dans-classement-best-smart-hospitals-2027-newsweek"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -424,7 +424,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-29T08:53:42.745Z"
+      "updatedAt": "2026-10-29T15:32:04.680Z"
     },
     "de": {
       "canton": "GE",
@@ -493,7 +493,7 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-29T02:43:57.029Z"
+          "updatedAt": "2026-10-29T11:01:04.771Z"
         },
         {
           "id": "meteo",
@@ -515,6 +515,16 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Appel à projets - Santé mentale des jeunes",
+              "date": "2026-10-29",
+              "url": "https://www.ge.ch/node/45359"
+            },
+            {
+              "label": "OCIRT-Formation 200-26 - Stockage des produits chimiques dans les entreprises",
+              "date": "2026-10-29",
+              "url": "https://www.ge.ch/node/44023"
+            },
+            {
               "label": "Formulaires pour les demandes de subsides 2027",
               "date": "2026-10-27",
               "url": "https://www.ge.ch/node/45339"
@@ -533,19 +543,9 @@
               "label": "Barèmes et catégories 2027 pour les subsides d'assurance-maladie",
               "date": "2026-10-26",
               "url": "https://www.ge.ch/node/45327"
-            },
-            {
-              "label": "Une personne atteinte d’Ebola prise en charge aux HUG",
-              "date": "2026-10-26",
-              "url": "https://www.hug.ch/actualite/personne-atteinte-ebola-prise-charge-aux-hug"
-            },
-            {
-              "label": "Les HUG, 1er hôpital de Suisse dans le classement Best Smart Hospitals 2027 de Newsweek",
-              "date": "2026-10-23",
-              "url": "https://www.hug.ch/actualite/hug-1er-hopital-suisse-dans-classement-best-smart-hospitals-2027-newsweek"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -620,7 +620,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-29T08:53:42.745Z"
+      "updatedAt": "2026-10-29T15:32:04.680Z"
     },
     "fr": {
       "canton": "GE",
@@ -689,7 +689,7 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-29T02:43:57.029Z"
+          "updatedAt": "2026-10-29T11:01:04.771Z"
         },
         {
           "id": "meteo",
@@ -711,6 +711,16 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Appel à projets - Santé mentale des jeunes",
+              "date": "2026-10-29",
+              "url": "https://www.ge.ch/node/45359"
+            },
+            {
+              "label": "OCIRT-Formation 200-26 - Stockage des produits chimiques dans les entreprises",
+              "date": "2026-10-29",
+              "url": "https://www.ge.ch/node/44023"
+            },
+            {
               "label": "Formulaires pour les demandes de subsides 2027",
               "date": "2026-10-27",
               "url": "https://www.ge.ch/node/45339"
@@ -729,19 +739,9 @@
               "label": "Barèmes et catégories 2027 pour les subsides d'assurance-maladie",
               "date": "2026-10-26",
               "url": "https://www.ge.ch/node/45327"
-            },
-            {
-              "label": "Une personne atteinte d’Ebola prise en charge aux HUG",
-              "date": "2026-10-26",
-              "url": "https://www.hug.ch/actualite/personne-atteinte-ebola-prise-charge-aux-hug"
-            },
-            {
-              "label": "Les HUG, 1er hôpital de Suisse dans le classement Best Smart Hospitals 2027 de Newsweek",
-              "date": "2026-10-23",
-              "url": "https://www.hug.ch/actualite/hug-1er-hopital-suisse-dans-classement-best-smart-hospitals-2027-newsweek"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -813,7 +813,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-29T08:53:42.745Z"
+      "updatedAt": "2026-10-29T15:32:04.680Z"
     }
   }
 }
