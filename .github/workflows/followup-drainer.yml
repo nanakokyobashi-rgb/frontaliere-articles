@@ -219,9 +219,11 @@ jobs:
           # issue-fix usa Codex come provider primario e Claude solo come
           # fallback: un beacon Claude non deve congelare la coda del drainer.
           FOLLOWUP_CODEX_FALLBACK_MODE: '1'
-          # Non chiudere dal percorso verdict-exit durante l'osservabilità del
-          # corpus: il gemello harvest è mirror-locked e non può leggere pin qui.
-          FOLLOWUP_NO_AUTOCLOSE: '1'
+          # `already-fixed` è un verdetto terminale solo dopo una prova del
+          # fixer: il default deve chiudere l'issue verificata e liberare la
+          # coda. Il codice conserva `FOLLOWUP_NO_AUTOCLOSE=1` come override
+          # d'emergenza per un run isolato, ma non lo imponiamo al cron: il
+          # kill switch permanente lasciava aperti i falsi residui già risolti.
         run: |
           runtime_pat="${GITHUB_PAT_NANAKO:-}"
           if [ -z "$runtime_pat" ]; then
