@@ -67,4 +67,10 @@ const fragmentCases=[
  ['https://outer.test/#next=https://user:password@inner.test/path?ac=secret&utm_source=email','https://outer.test/#utm_source=email&next='+encodeURIComponent('https://inner.test/path')],
 ];for(const[input,expected]of fragmentCases)test('fragment '+input,()=>assert.equal(sanitizeTelemetryProperties({page_location:input}).page_location,expected));
 for(const relative of ['login?email=secret&utm_source=email','login#ne=secret&utm_source=email'])test('bare relative '+relative,()=>{const input='https://outer.test/?next='+encodeURIComponent(relative)+'&utm_medium=payment_reminder';const out=new URL(sanitizeTelemetryProperties({page_location:input}).page_location);assert.equal(out.searchParams.get('next'),relative.replace(/(?:email|ne)=secret&/,''));assert.equal(out.searchParams.get('utm_medium'),'payment_reminder');});
-for(const hash of ['#ordinary-route','#caf%C3%A9','#topic=a%20b','#invalid%escape'])test('ordinary hash '+hash,()=>{const input='https://outer.test/?utm_campaign=a%26b'+hash;assert.equal(sanitizeTelemetryProperties({page_location:input}).page_location,input)});
+for(const hash of ['#ordinary-route','#caf%C3%A9','#topic=a%20b'])test('ordinary hash '+hash,()=>{const input='https://outer.test/?utm_campaign=a%26b'+hash;assert.equal(sanitizeTelemetryProperties({page_location:input}).page_location,input)});
+
+// Undecodable fragments are omitted from telemetry.
+const malformedFragments=['https://user:password@inner.test/path%ZZ?ac=secret&ne=person',encodeURIComponent('https://user:password@inner.test/path?ac=secret&ne=person')+'%ZZ',encodeURIComponent('https://user:password@inner.test/path')+'%ZZ&ac=secret&ne=person','route?ac=secret&ne=person&value=%ZZ','invalid%escape','%E0%A4%A'];
+for(const fragment of malformedFragments)test('malformed fragment omitted '+fragment,()=>{
+ const prefix='https://outer.test/?application_concierge_service_id=service-test&utm_source=email&utm_campaign=a%26b';const input=prefix+'#'+fragment;const data={page_location:input,page_referrer:input};assert.deepEqual(sanitizeTelemetryProperties(data),{page_location:prefix,page_referrer:prefix});assert.equal(data.page_location,input);
+});

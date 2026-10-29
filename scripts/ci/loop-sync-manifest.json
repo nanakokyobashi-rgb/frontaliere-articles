@@ -4086,7 +4086,7 @@
       "path": "host/constants.ts",
       "sitePath": "build-plugins/constants.ts",
       "mode": "adapted",
-      "reason": "Costanti del sito lette dall'engine via SiteShellContract, estratte per chiusura: adapted per costruzione, non byte-identiche al sorgente completo. scalarFingerprint confronta i 22 scalari authoritative, mentre i test runtime verificano i comportamenti del contratto. Il digest 84faca67… rimuove anche userinfo e credenziali dalle rappresentazioni URL della telemetria e incorpora il gate GA4 del sito, il budget SERP a 150 caratteri, la canonicalizzazione Organization.sameAs, l'aggiunta del profilo Facebook canonico, il riferimento content-addressed a gtag-init e le due regole contestuali trasportate per Chiasso e concorsi pubblici; la specializzazione editoriale resta in additionalType e il runtime Firebase conserva il match sulla chiave esatta, senza segreti nei fingerprint.",
+      "reason": "Costanti del sito lette dall'engine via SiteShellContract, estratte per chiusura: adapted per costruzione, non byte-identiche al sorgente completo. scalarFingerprint confronta i 22 scalari authoritative, mentre i test runtime verificano i comportamenti del contratto. Il digest 1c528967… rimuove anche userinfo e credenziali dalle rappresentazioni URL della telemetria e incorpora il gate GA4 del sito, il budget SERP a 150 caratteri, la canonicalizzazione Organization.sameAs, l'aggiunta del profilo Facebook canonico, il riferimento content-addressed a gtag-init e le due regole contestuali trasportate per Chiasso e concorsi pubblici; la specializzazione editoriale resta in additionalType e il runtime Firebase conserva il match sulla chiave esatta, senza segreti nei fingerprint.",
       "baseline": {
         "site": "e8e197f21d0e2f7c",
         "corpus": "78655205fa7b6d2b",
@@ -4097,7 +4097,7 @@
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
         "corpusPath": "host/shell-contract-fingerprint.json",
         "scalarFields": 22,
-        "sha256": "84faca672ac1db32b87df677cde235d6174dbfd573af47cd18145492ae004316"
+        "sha256": "1c528967cc8157293082221595133c506c81fa6ea74beb25db23ab2d73ad4d03"
       }
     },
     {
@@ -4314,8 +4314,8 @@
       "mode": "identical",
       "reason": "Impronta SHA-256 dei 22 campi scalari di SiteShellContract, prodotta e verificata da `host/tests/shell-contract-fingerprint.test.mjs`. Il gemello del sito vive in `tests/articles-shell-contract-fingerprint.json` con lo stesso contenuto; i due artefatti restano `identical` e la baseline ne sorveglia il drift. E' il gate runtime che impedisce di spedire l'engine senza la sua meta' `host/`.",
       "baseline": {
-        "site": "c524c355ef909aca",
-        "corpus": "c524c355ef909aca",
+        "site": "9b5e864321013c0b",
+        "corpus": "9b5e864321013c0b",
         "alignedAt": "2026-10-29"
       }
     },
@@ -6715,8 +6715,8 @@
       "mode": "identical",
       "reason": "Canonical pure URL sanitizer is embedded into static GTAG on both sides; implicit dependency of host/constants.ts must remain byte-identical.",
       "baseline": {
-        "site": "a17be37ed9f385f4",
-        "corpus": "a17be37ed9f385f4",
+        "site": "451139be2898dc0a",
+        "corpus": "451139be2898dc0a",
         "alignedAt": "2026-10-29"
       }
     },
@@ -6726,7 +6726,7 @@
       "reason": "Node regression coverage for standalone transported telemetry helper and canonical inline code; the site covers emitted GTAG/PostHog behavior via Vitest.",
       "baseline": {
         "site": null,
-        "corpus": "2990239620ccb1ef",
+        "corpus": "3d8e161c2ca65b55",
         "alignedAt": "2026-10-29"
       }
     }
