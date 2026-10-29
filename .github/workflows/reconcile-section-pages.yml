@@ -38,6 +38,11 @@ on:
         description: 'Articoli massimi per sezione in questo run'
         required: false
         default: '3'
+      retry_pending:
+        description: 'Riapri una barriera coorte transitoria'
+        required: false
+        default: false
+        type: boolean
 
 concurrency:
   group: reconcile-section-pages
@@ -114,6 +119,7 @@ jobs:
           WORKFLOW_RUN_EVENT: ${{ github.event.workflow_run.event }}
           WORKFLOW_RUN_DISPLAY_TITLE: ${{ github.event.workflow_run.display_title }}
           PENDING_EDGE_FLIP: ${{ steps.detect.outputs.pending_edge_flip }}
+          RETRY_PENDING: ${{ inputs.retry_pending }}
         run: |
           set -euo pipefail
           allow=true
@@ -147,9 +153,10 @@ jobs:
             if [ "$trusted_child" = 'true' ]; then
               allow=false; echo "dispatch disabilitato: il child ha gia' eseguito il backfill; controllo event-driven"
             fi
-          elif [ "$EVENT_NAME" = "schedule" ] && [ "$PENDING_EDGE_FLIP" = 'true' ]; then
+          elif [ "$PENDING_EDGE_FLIP" = 'true' ] \
+            && { [ "$EVENT_NAME" = "schedule" ] || [ "$RETRY_PENDING" = 'true' ]; }; then
             schedule_retry=true
-            echo "replay retry abilitato dal cron: flip API pendente"
+            echo "replay retry esplicito: flip API pendente"
           fi
           {
             echo "allow=$allow"

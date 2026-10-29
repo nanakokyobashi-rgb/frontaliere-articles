@@ -4240,6 +4240,9 @@ test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta',
   assert.match(wf, /steps\.detect\.outputs\.landing_content_stale == '0'/);
   assert.match(wf, /PENDING_EDGE_FLIP: \$\{\{ steps\.detect\.outputs\.pending_edge_flip \}\}/);
   assert.match(wf, /schedule_retry=true/);
+  assert.match(wf, /retry_pending:/);
+  assert.match(wf, /RETRY_PENDING: \$\{\{ inputs\.retry_pending \}\}/);
+  assert.match(wf, /PENDING_EDGE_FLIP.*RETRY_PENDING/s);
   assert.match(wf, /\.counts\.landingContentStale \/\/ 0/);
   const globalReplay = wf.slice(wf.indexOf('- name: Replay API after event-driven backfill readiness'));
   const postBackfillProbe = globalReplay.indexOf('reconcile-sections-after-backfill.json');
@@ -4280,6 +4283,7 @@ test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta',
   assert.match(cohortVerifier, /map\(\.workflow_runs\) \| add \| map\(/);
   assert.match(cohortVerifier, /gh run download "\$run_id" --repo "\$repository"/);
   assert.match(cohortVerifier, /for attempt in 1 2 3; do[\s\S]*download_ok=true[\s\S]*sleep "\$delay"/);
+  assert.match(cohortVerifier, /gh workflow run reconcile-section-pages\.yml[\s\S]*retry_pending=true/);
   assert.match(cohortVerifier, /child_head_sha.*expected_source/);
   assert.match(cohortVerifier, /\.dispatch_nonce == \$nonce/);
   assert.match(cohortVerifier, /\.dispatch_cohort == \$cohort/);

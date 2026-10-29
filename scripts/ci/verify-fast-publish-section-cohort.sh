@@ -25,6 +25,17 @@ not_ready() {
   exit 0
 }
 
+reopen_reconcile() {
+  [ "$mode" = 'event' ] || return 0
+  [ "${REOPEN_RECONCILE:-true}" = 'true' ] || return 0
+  if gh workflow run reconcile-section-pages.yml --repo "$repository" --ref main \
+    -f dry_run=false -f cap=24 -f retry_pending=true; then
+    echo "::notice::reconcile riaperto per una verifica transitoria della coorte"
+  else
+    echo "::warning::riapertura reconcile non accettata; il cron rivalutera' la coorte"
+  fi
+}
+
 if [ -z "$repository" ]; then
   not_ready 'repository assente'
 fi
@@ -180,10 +191,12 @@ while IFS=$'\t' read -r run_id nonce section; do
     fi
   done
   if [ "$download_ok" != 'true' ]; then
+    reopen_reconcile
     not_ready "artifact del child $run_id non scaricabile"
   fi
   mapfile -t result_files < <(find "$run_dir" -type f -name fast-publish-result.json -print)
   if [ "${#result_files[@]}" -ne 1 ]; then
+    reopen_reconcile
     not_ready "artifact fast-publish-result non univoco per il child $run_id"
   fi
   if ! jq -e \
