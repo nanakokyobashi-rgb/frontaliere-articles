@@ -3044,6 +3044,26 @@ test('reconcile: il parser del cap accetta le forme TS equivalenti e rifiuta val
   }
 });
 
+test('reconcile: il parser ignora dichiarazioni nei commenti e nei literal e normalizza il BOM', () => {
+  const source = [
+    '\uFEFF/* export const CANTON_LANDING_CARD_LIMIT = 7; */',
+    '`export const CANTON_LANDING_CARD_LIMIT = 8;`;',
+    '"export const CANTON_LANDING_CARD_LIMIT = 9;"',
+    'export const CANTON_LANDING_CARD_LIMIT = 24;',
+  ].join('\n');
+  assert.equal(parseCantonLandingCardLimitExport(source), 24);
+  assert.equal(parseCantonLandingCardLimitExport('\uFEFFexport const CANTON_LANDING_CARD_LIMIT = 24;'), 24);
+});
+
+test('reconcile: il parser accetta commenti a blocco dopo una dichiarazione semicolonless', () => {
+  assert.equal(parseCantonLandingCardLimitExport('export const CANTON_LANDING_CARD_LIMIT = 24 /* solo un commento */'), 24);
+  assert.equal(parseCantonLandingCardLimitExport('export const CANTON_LANDING_CARD_LIMIT = 24 /* commento\n   multilinea */'), 24);
+  assert.throws(
+    () => parseCantonLandingCardLimitExport('export const CANTON_LANDING_CARD_LIMIT = 24 /* commento */\nconst next = 1;'),
+    /non trovato o non valido/u,
+  );
+});
+
 // ── Dati degli hub ───────────────────────────────────────────────────────────
 
 function hubRoot(files) {
