@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/politica/1951882/assicurati-dati-avs-scambio-standardizzato": {
-    "articleId": "avs-ai-accesso-digitale-dati",
-    "ts": "2026-09-23T00:27:40.014Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/politica/1951859/epidemie-legge-revisione-svizzera-imprese": {
     "articleId": "revisione-legge-epidemie-svizzera",
     "ts": "2026-09-23T00:40:58.724Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4194579": {
     "articleId": "sem-rinnovo-simic-paralisi",
     "ts": "2026-10-28T22:15:40.264Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4200996": {
+    "articleId": "farmaci-riserve-finanziamento",
+    "ts": "2026-10-29T09:02:52.158Z",
     "keyForm": 2
   }
 }

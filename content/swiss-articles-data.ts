@@ -28910,6 +28910,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'farmaci-riserve-finanziamento',
+    category: 'novita',
+    date: '2026-10-29T09:02:50.918Z',
+    image: '/images/blog/article-farmaci-riserve-finanziamento.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
