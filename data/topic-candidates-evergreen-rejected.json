@@ -2868,6 +2868,66 @@
       "firstSeenAt": "2026-10-29T08:44:52.760Z",
       "lastValidatedAt": "2026-10-29T08:44:52.760Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere educatore ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-29T09:31:26.810Z",
+      "lastValidatedAt": "2026-10-29T09:31:26.810Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere autista ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-29T09:31:26.831Z",
+      "lastValidatedAt": "2026-10-29T09:31:26.831Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere muratore ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-29T09:39:40.106Z",
+      "lastValidatedAt": "2026-10-29T09:39:40.106Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere cuoco ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-29T09:42:29.271Z",
+      "lastValidatedAt": "2026-10-29T09:42:29.271Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere cameriere ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-29T09:42:29.353Z",
+      "lastValidatedAt": "2026-10-29T09:42:29.353Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
