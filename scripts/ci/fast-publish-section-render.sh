@@ -71,7 +71,7 @@ dispatch_stale_replay() {
   nonce_seed="$dispatch_nonce"
   nonce_hash="$(printf '%s\0%s\0%s\0%s' "$nonce_seed" "$current_main" "$SECTION" "$coordinated_recovery" | sha256sum | cut -c1-16)"
   dispatch_nonce="stale-late-${current_main:0:12}-${SECTION}-${nonce_hash}"
-  dispatch_cohort="stale-late-${GITHUB_RUN_ID}-n1"
+  dispatch_cohort="stale-late-${GITHUB_RUN_ID}-${SECTION}-n1"
   # Ogni stale-late handoff entra nella barriera event-driven: il reconcile
   # deve essere l'unico proprietario del replay API, anche se l'handoff nasce
   # da un workflow_run API non gia' marcato come recovery coordinata.

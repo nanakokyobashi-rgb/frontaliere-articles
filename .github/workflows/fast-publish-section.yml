@@ -730,9 +730,10 @@ jobs:
           export GH_TOKEN="$runtime_pat"
           dispatch_nonce="${DISPATCH_NONCE:-}"
           if [ -z "$dispatch_nonce" ]; then
-            dispatch_nonce="stale-publish-${GITHUB_RUN_ID}-${SECTION}"
+            nonce_hash="$(printf '%s\0%s\0%s' "$GITHUB_RUN_ID" "$CURRENT_MAIN" "$SECTION" | sha256sum | cut -c1-16)"
+            dispatch_nonce="stale-late-${CURRENT_MAIN:0:12}-${SECTION}-${nonce_hash}"
           fi
-          dispatch_cohort="${DISPATCH_COHORT:-stale-publish-${GITHUB_RUN_ID}-n1}"
+          dispatch_cohort="${DISPATCH_COHORT:-stale-late-${GITHUB_RUN_ID}-${SECTION}-n1}"
           # Ogni stale-late handoff entra nella barriera event-driven: il
           # reconcile resta l'unico proprietario del replay API.
           child_replay_api_after_publish=false

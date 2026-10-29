@@ -3692,6 +3692,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   const lateGuardNonce = render.slice(lateGuardNonceStart, lateGuardTitleStart);
   assert.match(lateGuardNonce, /nonce_hash="\$\(printf '%s\\0%s\\0%s\\0%s' "\$nonce_seed" "\$current_main" "\$SECTION" "\$coordinated_recovery" \| sha256sum \| cut -c1-16\)"/);
   assert.match(lateGuardNonce, /dispatch_nonce="stale-late-\$\{current_main:0:12\}-\$\{SECTION\}-\$\{nonce_hash\}"/);
+  assert.match(lateGuardNonce, /dispatch_cohort="stale-late-\$\{GITHUB_RUN_ID\}-\$\{SECTION\}-n1"/);
   assert.match(wf, /id: push_range[\s\S]*resolve-workflow-run-push-range\.mjs/);
   assert.doesNotMatch(wf, /commits\/\$WORKFLOW_RUN_HEAD_SHA\/events/);
   const pushRangeResolver = read('scripts/ci/resolve-workflow-run-push-range.mjs');
@@ -4224,6 +4225,7 @@ test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta',
   assert.match(wf, /-f "missing_page_paths=\$missing_page_paths"/);
   assert.match(wf, /-f "known_missing_page_paths=\$known_missing_page_paths"/);
   assert.match(wf, /-f "dispatch_cohort=\$dispatch_cohort"/);
+  assert.match(wf, /-f 'coordinated_recovery=true'[\s\S]*-f "source_commit=\$SOURCE_COMMIT"[\s\S]*-f "source_main_commit=\$SOURCE_COMMIT"[\s\S]*-f "dispatch_nonce=/);
   assert.match(wf, /-f 'replay_api_after_publish=false'/);
   assert.match(wf, /-f 'coordinated_recovery=true'/);
   assert.match(wf, /-f 'allow_deferred_live_release=true'/);
@@ -4279,8 +4281,8 @@ test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta',
   assert.match(wf, /child_cohort="\$\{BASH_REMATCH\[2\]\}"/);
   assert.match(wf, /trusted_child=true/);
   const cohortVerifier = read('scripts/ci/verify-fast-publish-section-cohort.sh');
-  assert.match(cohortVerifier, /gh api -X GET --paginate --slurp[\s\S]*actions\/workflows\/fast-publish-section\.yml\/runs/);
-  assert.match(cohortVerifier, /map\(\.workflow_runs\) \| add \| map\(/);
+  assert.match(cohortVerifier, /gh api -X GET --paginate[\s\S]*actions\/workflows\/fast-publish-section\.yml\/runs[\s\S]*jq -s \./);
+  assert.match(cohortVerifier, /\.workflow_runs\[\] \| \{databaseId:/);
   assert.match(cohortVerifier, /gh run download "\$run_id" --repo "\$repository"/);
   assert.match(cohortVerifier, /for attempt in 1 2 3; do[\s\S]*download_ok=true[\s\S]*sleep "\$delay"/);
   assert.match(cohortVerifier, /gh workflow run reconcile-section-pages\.yml[\s\S]*retry_pending=true/);
@@ -4291,6 +4293,7 @@ test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta',
   assert.match(cohortVerifier, /\.rendered_head == \$source/);
   assert.match(cohortVerifier, /\.coordinated_recovery == "true"/);
   assert.match(cohortVerifier, /group_by\(\[\.run\.section, \.run\.nonce\]\)/);
+  assert.match(cohortVerifier, /stale-late-\[0-9\]\+-\[\^\/\]\+-n1/);
   assert.match(cohortVerifier, /map\(last\)/);
   assert.match(cohortVerifier, /try \(\$parts\.cohort \| capture/);
   assert.match(cohortVerifier, /all\(\.runs\[\];[\s\S]*ascii_downcase[\s\S]*"success"/);

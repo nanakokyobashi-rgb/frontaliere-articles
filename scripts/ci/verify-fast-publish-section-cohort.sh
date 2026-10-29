@@ -60,10 +60,11 @@ if [ "$mode" = 'event' ]; then
 fi
 
 runs_json=""
-if ! runs_json="$(gh api -X GET --paginate --slurp \
+if ! runs_json="$(gh api -X GET --paginate \
   "repos/$repository/actions/workflows/fast-publish-section.yml/runs" \
   -F branch=main -F event=workflow_dispatch -F per_page=100 \
-  --jq 'map(.workflow_runs) | add | map({databaseId: .id, displayTitle: .display_title, status, conclusion, headSha: .head_sha, createdAt: .created_at})')"; then
+  --jq '.workflow_runs[] | {databaseId: .id, displayTitle: .display_title, status, conclusion, headSha: .head_sha, createdAt: .created_at}' \
+  | jq -s .)"; then
   not_ready 'elenco delle run fast-publish non leggibile'
 fi
 if ! jq -e '
@@ -91,10 +92,10 @@ if [ "$mode" = 'event' ]; then
       | select($run.headSha == $source)
       | (try ($run.displayTitle | capture(" / (?<section>[^/]+) / nonce=(?<nonce>[^ ]+) / dry=(?<dry>[^ ]+) / (?:c|cohort)=(?<cohort>[^ ]+)$")) catch null) as $parts
       | select($parts != null)
-      | (try ($parts.cohort | capture("^(?<kind>reconcile|stale-staged|stale-late)-[0-9]+-n(?<size>[1-9][0-9]*)$")) catch null) as $cohort_parts
+      | (try ($parts.cohort | capture("^(?<kind>reconcile|stale-staged)-[0-9]+-n(?<size>[1-9][0-9]*)$|^(?<late>stale-late)-[0-9]+-[^/]+-n(?<late_size>1)$")) catch null) as $cohort_parts
       | select($cohort_parts != null)
       | {cohort: $parts.cohort,
-         expectedSize: ($cohort_parts.size | tonumber),
+         expectedSize: (($cohort_parts.size // $cohort_parts.late_size) | tonumber),
          run: ($run + {nonce: $parts.nonce, section: $parts.section})}
     ] as $parsed
     | ($parsed | map(select(.cohort == $cohort))) as $same
@@ -123,9 +124,9 @@ else
       | select($run.headSha == $source)
       | (try ($run.displayTitle | capture($re)) catch null) as $parts
       | select($parts != null
-          and ($parts.cohort | test("^(reconcile|stale-staged|stale-late)-[0-9]+-n[1-9][0-9]*$")))
+          and ($parts.cohort | test("^(reconcile|stale-staged)-[0-9]+-n[1-9][0-9]*$|^stale-late-[0-9]+-[^/]+-n1$")))
       | {cohort: $parts.cohort,
-         expectedSize: (($parts.cohort | capture("^(reconcile|stale-staged|stale-late)-[0-9]+-n(?<size>[1-9][0-9]*)$").size) | tonumber),
+         expectedSize: (if ($parts.cohort | startswith("stale-late-")) then 1 else (($parts.cohort | capture("^(reconcile|stale-staged)-[0-9]+-n(?<size>[1-9][0-9]*)$").size) | tonumber) end),
          run: ($run + {nonce: $parts.nonce, section: $parts.section})}
     ]
     | group_by(.cohort)

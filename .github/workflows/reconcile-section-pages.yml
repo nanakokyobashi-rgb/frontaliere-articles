@@ -142,7 +142,7 @@ jobs:
                   && [[ "$child_cohort" =~ ^stale-staged-[0-9]+-n[1-9][0-9]*$ ]]; then
                   trusted_child=true
                 elif [[ "$child_nonce" =~ ^stale-late-[a-f0-9]{12}-[^[:space:]]+-[a-f0-9]{16}$ ]] \
-                  && [[ "$child_cohort" =~ ^stale-late-[0-9]+-n[1-9][0-9]*$ ]]; then
+                  && [[ "$child_cohort" =~ ^stale-late-[0-9]+-[^[:space:]]+-n1$ ]]; then
                   trusted_child=true
                 fi
               fi
@@ -262,6 +262,8 @@ jobs:
               -f 'dry_run=false'
               -f 'replay_api_after_publish=false'
               -f 'coordinated_recovery=true'
+              -f "source_commit=$SOURCE_COMMIT"
+              -f "source_main_commit=$SOURCE_COMMIT"
               -f "dispatch_nonce=$dispatch_nonce"
               -f "dispatch_cohort=$dispatch_cohort"
             )
@@ -269,8 +271,6 @@ jobs:
               args+=(
                 -f 'allow_deferred_live_release=true'
                 -f "api_release_commit=$API_RELEASE_COMMIT"
-                -f "source_commit=$SOURCE_COMMIT"
-                -f "source_main_commit=$SOURCE_COMMIT"
               )
             fi
             if ! gh workflow run fast-publish-section.yml --repo "$GITHUB_REPOSITORY" --ref main "${args[@]}"; then
