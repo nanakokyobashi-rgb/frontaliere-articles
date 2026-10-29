@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-29T21:57:02.700Z",
-  "contentHash": "3ede7edb5e8a4a3b8ceb3efe2d47c1d366741f5d62a74cfecedd407df209f4a7",
+  "updatedAt": "2026-10-29T23:22:37.414Z",
+  "contentHash": "c6c12403fa6c60ce363b115b43a528993a646b1ee4e88c138daf12c6a8ad7ecb",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Frauenfeld: pubblicata la revisione parziale del regolamento salariale",
+          "url": "/articoli-turgovia/frauenfeld-revisione-regolamento-salariale/",
+          "excerpt": "La citta di Frauenfeld presenta una pubblicazione referendaria dedicata alla revisione parziale del regolamento salariale, corredata da un allegato PDF di 88 KB.",
+          "date": "2026-10-29T23:14:34.048Z"
+        },
+        {
           "title": "Imprenditori nel Canton Turgovia: condizioni quadro attrattive",
           "url": "/articoli-turgovia/imprenditori-cantone-turgovia-sostegno/",
           "excerpt": "Il cantone offre supporto a imprenditrici e imprenditori per condizioni quadro attrattive, coprendo immobile, permessi e contatti amministrativi.",
@@ -94,12 +100,6 @@
           "url": "/articoli-turgovia/pbv-rpg2-turgovia-2026/",
           "excerpt": "Il Governo ha approvato la PBV revisionata RPG2 riguarda le costruzioni fuori dalle zone edificabili L'obiettivo è limitare la crescita a un massimo del 2%",
           "date": "2026-10-23T01:44:38.536Z"
-        },
-        {
-          "title": "Turgovia: servizi di ricerca personale e tutela lari",
-          "url": "/articoli-turgovia/turgovia-servizi-datori-lavoro/",
-          "excerpt": "Il Canton Turgovia mette a disposizione dei datori di lavoro le sedi RAV di Amriswil, Frauenfeld e Kreuzlingen e il portale arbeit.swiss per vacancy vacancy",
-          "date": "2026-10-19T15:27:38.407Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-29T21:57:02.700Z"
+      "updatedAt": "2026-10-29T23:22:37.414Z"
     },
     "en": {
       "canton": "TG",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Frauenfeld: partial revision of the salary regulations published",
+          "url": "/en/thurgau-articles/frauenfeld-salary-regulations-revision/",
+          "excerpt": "The city of Frauenfeld presents a referendum publication dedicated to the partial revision of the salary regulations, accompanied by an 88 KB PDF attachment.",
+          "date": "2026-10-29T23:14:34.048Z"
+        },
+        {
           "title": "Entrepreneurs in the Canton of Thurgau: attractive framework conditions",
           "url": "/en/thurgau-articles/thurgau-entrepreneurs-canton-support/",
           "excerpt": "The canton supports entrepreneurs in creating attractive framework conditions, covering real estate, permits, and administrative contacts.",
@@ -193,12 +199,6 @@
           "url": "/en/thurgau-articles/pbv-rpg2-thurgau-2026/",
           "excerpt": "The Government approved the revised PBV RPG2 concerns construction outside building zones The objective is to limit growth to a maximum of 2% The PBV brings",
           "date": "2026-10-23T01:44:38.536Z"
-        },
-        {
-          "title": "Thurgau: personnel search and lari protection services",
-          "url": "/en/thurgau-articles/thurgau-services-employers/",
-          "excerpt": "The Canton of Thurgau makes the RAV offices in Amriswil, Frauenfeld and Kreuzlingen and the arbeit.swiss portal available to employers for vacancy vacancy",
-          "date": "2026-10-19T15:27:38.407Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-29T21:57:02.700Z"
+      "updatedAt": "2026-10-29T23:22:37.414Z"
     },
     "de": {
       "canton": "TG",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Frauenfeld: Teilrevision des Lohnreglements veröffentlicht",
+          "url": "/de/thurgau-artikel/frauenfeld-lohnreglement-teilrevision/",
+          "excerpt": "Die Stadt Frauenfeld präsentiert eine Referendumspublikation zur Teilrevision des Lohnreglements, versehen mit einem PDF-Anhang von 88 KB.",
+          "date": "2026-10-29T23:14:34.048Z"
+        },
+        {
           "title": "Unternehmerinnen und Unternehmer im Kanton Thurgau: attraktive Rahmenbedingungen",
           "url": "/de/thurgau-artikel/unternehmer-kanton-thurgau-unterstuetzung/",
           "excerpt": "Der Kanton unterstützt Unternehmerinnen und Unternehmer bei der Schaffung attraktiver Rahmenbedingungen in den Bereichen Immobilien, Bewilligungen und Kontakte zur Verwaltung.",
@@ -292,12 +298,6 @@
           "url": "/de/thurgau-artikel/pbv-rpg2-thurgau-2026/",
           "excerpt": "Die Regierung hat die revidierte PBV genehmigt RPG2 betrifft Bauten ausserhalb der Bauzonen Ziel ist, das Wachstum auf maximal 2 % zu begrenzen Die PBV fasst",
           "date": "2026-10-23T01:44:38.536Z"
-        },
-        {
-          "title": "Thurgau: Dienstleistungen für die Personalsuche und Schutz lari",
-          "url": "/de/thurgau-artikel/thurgau-dienstleistungen-arbeitgeber/",
-          "excerpt": "Der Kanton Thurgau stellt Arbeitgebern die RAV-Standorte in Amriswil, Frauenfeld und Kreuzlingen sowie das Portal arbeit.swiss für offene Stellen offene Stellen zur Verfügung",
-          "date": "2026-10-19T15:27:38.407Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-29T21:57:02.700Z"
+      "updatedAt": "2026-10-29T23:22:37.414Z"
     },
     "fr": {
       "canton": "TG",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Frauenfeld : publication de la révision partielle du règlement salarial",
+          "url": "/fr/articles-thurgovie/frauenfeld-revision-reglement-salaires/",
+          "excerpt": "La ville de Frauenfeld présente une publication référendaire consacrée à la révision partielle du règlement salarial, accompagnée d'une pièce jointe PDF de 88 KB.",
+          "date": "2026-10-29T23:14:34.048Z"
+        },
+        {
           "title": "Entrepreneurs Thurgovie : conditions-cadres attractives",
           "url": "/fr/articles-thurgovie/entrepreneurs-canton-thurgovie-soutien/",
           "excerpt": "Le canton soutient les entrepreneuses et les entrepreneurs en leur offrant des conditions-cadres attrayantes, notamment en matière de biens immobiliers, d’autorisations et de contacts administratifs.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-thurgovie/pbv-rpg2-thurgovie-2026/",
           "excerpt": "Le Gouvernement a approuvé la PBV révisée RPG2 concerne les constructions hors des zones à bâtir L’objectif est de limiter la croissance à un maximum de 2%",
           "date": "2026-10-23T01:44:38.536Z"
-        },
-        {
-          "title": "Thurgovie : services de recherche de personnel et protection lari",
-          "url": "/fr/articles-thurgovie/thurgovie-services-employeurs/",
-          "excerpt": "Le canton de Thurgovie met à la disposition des employeurs les sites RAV d’Amriswil, Frauenfeld et Kreuzlingen ainsi que le portail arbeit.swiss pour les postes vacants postes vacants",
-          "date": "2026-10-19T15:27:38.407Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-29T21:57:02.700Z"
+      "updatedAt": "2026-10-29T23:22:37.414Z"
     }
   }
 }
