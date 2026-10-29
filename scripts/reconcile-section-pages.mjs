@@ -52,6 +52,7 @@ import { fileURLToPath } from 'node:url';
 
 import { ARTICLE_SECTION_CORE_ALL } from '../engine/shared/articleSectionCore.mjs';
 import { CANTON_ARCHIVE_ALL_SLUG } from '../engine/shared/cantonSectionCopy.mjs';
+import { parseCantonLandingCardLimitExport } from './lib/canton-landing-card-limit.mjs';
 import { fetchPageManifest, pageManifestUrl } from './lib/section-page-manifest.mjs';
 import { assertHubLocaleSlug, assertHubTopicEntries } from './lib/assert-hub-locale-slug.mjs';
 import { sitemapPaths } from './publish-section-edge.mjs';
@@ -73,13 +74,14 @@ const ENGINE_CANTON_SECTION_PAGES = path.resolve(
   '../engine/cantonSectionPages.ts',
 );
 const engineCantonSectionPages = fs.readFileSync(ENGINE_CANTON_SECTION_PAGES, 'utf8');
-const engineLandingCardLimit = /^export const CANTON_LANDING_CARD_LIMIT = (\d+);$/mu.exec(engineCantonSectionPages);
-if (!engineLandingCardLimit) {
-  throw new Error(`[reconcile-section-pages] CANTON_LANDING_CARD_LIMIT non trovato in ${ENGINE_CANTON_SECTION_PAGES}`);
-}
-const parsedLandingCardLimit = Number(engineLandingCardLimit[1]);
-if (!Number.isSafeInteger(parsedLandingCardLimit) || parsedLandingCardLimit < 1) {
-  throw new Error(`[reconcile-section-pages] CANTON_LANDING_CARD_LIMIT non valido: ${engineLandingCardLimit[1]}`);
+let parsedLandingCardLimit;
+try {
+  parsedLandingCardLimit = parseCantonLandingCardLimitExport(engineCantonSectionPages);
+} catch (error) {
+  throw new Error(
+    `[reconcile-section-pages] ${error instanceof Error ? error.message : String(error)} in ${ENGINE_CANTON_SECTION_PAGES}`,
+    { cause: error },
+  );
 }
 export const CANTON_LANDING_CARD_LIMIT = parsedLandingCardLimit;
 const UA = 'frontaliere-corpus-reconcile/1 (+https://frontaliereticino.ch)';

@@ -89,6 +89,7 @@ import {
   pageManifestUrl,
 } from '../../scripts/lib/section-page-manifest.mjs';
 import { cantonHubCoverage, cantonHubDataFile, cantonHubTopics, readCantonHubData } from '../../scripts/lib/canton-hub-data.mjs';
+import { parseCantonLandingCardLimitExport } from '../../scripts/lib/canton-landing-card-limit.mjs';
 import { declaredRegistryErrors, SECTION_REGISTRY_FILE } from '../../scripts/lib/section-registry.mjs';
 import { sourceRegistryIds } from '../../scripts/lib/corpus-floors.mjs';
 import { bodyRegex, fetchEdgeSectionRegistry, liveR2ReconciliationPlan, liveRegistryTransitionSections, r2ApiPushPlan, r2PublishPlan } from '../../scripts/ci/fast-publish-section.mjs';
@@ -3007,11 +3008,29 @@ test('il chunk SEO cantonale sta dove l\'engine lo legge (descrittore articolo e
 test('reconcile: il limite landing resta quello del renderer engine', () => {
   const engine = read('engine/cantonSectionPages.ts');
   const reconciler = read('scripts/reconcile-section-pages.mjs');
-  const engineLimit = /export const CANTON_LANDING_CARD_LIMIT = (\d+);/u.exec(engine);
-  assert.ok(engineLimit, 'CANTON_LANDING_CARD_LIMIT non trovato nel renderer engine');
-  assert.equal(CANTON_LANDING_CARD_LIMIT, Number(engineLimit[1]), 'reconciler e renderer divergenti');
+  const engineLimit = parseCantonLandingCardLimitExport(engine);
+  assert.equal(CANTON_LANDING_CARD_LIMIT, engineLimit, 'reconciler e renderer divergenti');
   assert.match(reconciler, /cantonSectionPages\.ts/u, 'il reconciler deve derivare il cap dal renderer');
+  assert.match(reconciler, /parseCantonLandingCardLimitExport/u, 'il reconciler deve usare l\'adapter plain-Node condiviso');
   assert.doesNotMatch(reconciler, /export const CANTON_LANDING_CARD_LIMIT = \d+;/u, 'il reconciler non deve duplicare il cap');
+});
+
+test('reconcile: il parser del cap accetta le forme TS equivalenti e rifiuta valori invalidi', () => {
+  const variants = [
+    'export const CANTON_LANDING_CARD_LIMIT = 24;',
+    'export const\n  CANTON_LANDING_CARD_LIMIT: number\n  = 24;',
+    'export const CANTON_LANDING_CARD_LIMIT = 24 as const;',
+    'export const\n  CANTON_LANDING_CARD_LIMIT\n  : number\n  =\n  24\n  as const;',
+  ];
+  for (const source of variants) assert.equal(parseCantonLandingCardLimitExport(source), 24, source);
+  assert.throws(
+    () => parseCantonLandingCardLimitExport('export const CANTON_LANDING_CARD_LIMIT = 0;'),
+    /non valido/u,
+  );
+  assert.throws(
+    () => parseCantonLandingCardLimitExport('export const CANTON_LANDING_CARD_LIMIT = 24 as string;'),
+    /non trovato o non valido/u,
+  );
 });
 
 // ── Dati degli hub ───────────────────────────────────────────────────────────
