@@ -63,6 +63,9 @@ const blogMetaCantonSoDe: Record<string, string> = {
     'blog.article.solothurn-sussidi-premi-2027.title': '221 Millionen Franken für niedrigere Versicherungsprämien im Kanton Solothurn',
     'blog.article.solothurn-sussidi-premi-2027.excerpt': 'Für 2027 sind rund CHF 221 Millionen für die IPV vorgesehen Die Dotierung steigt um CHF 9 Millionen, was 4,3% entspricht Rund CHF 123 Millionen kommen vom Bund',
     'blog.article.solothurn-sussidi-premi-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.soletta-ratsleitung-puk-ospedali.title': 'Solothurn: Die Ratsleitung gegen die PUK zu den Spitälern',
+    'blog.article.soletta-ratsleitung-puk-ospedali.excerpt': 'Die Ratsleitung von Solothurn hält eine PUK zu den Spitälern nicht für sinnvoll; der Kantonsrat wird am 11.',
+    'blog.article.soletta-ratsleitung-puk-ospedali.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSoDe;

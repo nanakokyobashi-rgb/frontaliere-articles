@@ -63,6 +63,9 @@ const blogMetaCantonSoEn: Record<string, string> = {
     'blog.article.solothurn-sussidi-premi-2027.title': '221 million francs for lower insurance premiums in the Canton of Solothurn',
     'blog.article.solothurn-sussidi-premi-2027.excerpt': 'In 2027, around CHF 221 million is planned for IPV The allocation increases by CHF 9 million, equal to 4,3% Around CHF 123 million comes from the Confederation',
     'blog.article.solothurn-sussidi-premi-2027.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.soletta-ratsleitung-puk-ospedali.title': 'Solothurn: Council leadership opposes the hospital PUK',
+    'blog.article.soletta-ratsleitung-puk-ospedali.excerpt': 'Solothurn’s council leadership considers a PUK on the hospitals unnecessary; the cantonal council will vote on 11 November.',
+    'blog.article.soletta-ratsleitung-puk-ospedali.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSoEn;

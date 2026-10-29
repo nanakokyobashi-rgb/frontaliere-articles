@@ -63,6 +63,9 @@ const blogMetaCantonSoFr: Record<string, string> = {
     'blog.article.solothurn-sussidi-premi-2027.title': '221 millions pour réduire les primes d’assurance à Soleure',
     'blog.article.solothurn-sussidi-premi-2027.excerpt': 'En 2027, environ CHF 221 millions sont prévus pour l’IPV La dotation augmente de CHF 9 millions, soit 4,3 % Environ CHF 123 millions proviennent',
     'blog.article.solothurn-sussidi-premi-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.soletta-ratsleitung-puk-ospedali.title': 'Soleure : la direction du Conseil contre la PUK sur les hôpitaux',
+    'blog.article.soletta-ratsleitung-puk-ospedali.excerpt': 'La direction du Conseil de Soleure considère qu’une PUK sur les hôpitaux n’est pas utile ; le Conseil cantonal votera le 11 novembre.',
+    'blog.article.soletta-ratsleitung-puk-ospedali.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSoFr;
