@@ -182,16 +182,16 @@ if ! [[ "$dispatch_cohort_size" =~ ^[1-9][0-9]*$ ]]; then
   exit 1
 fi
 dispatch_cohort="stale-staged-${GITHUB_RUN_ID}-n${dispatch_cohort_size}"
-child_replay_api_after_publish="${REPLAY_API_AFTER_PUBLISH:-false}"
+# Ogni child di questa coorte e' coordinato dal reconcile event-driven: il
+# replay API locale resta spento anche quando il parent lo aveva ereditato.
+child_replay_api_after_publish=false
 child_allow_deferred_live_release="${ALLOW_DEFERRED_LIVE_RELEASE:-false}"
-child_coordinated_recovery=false
+child_coordinated_recovery=true
 if [ "${MIXED_MATRIX:-false}" = 'true' ]; then
   # Mixed recovery children must not arm publish-api individually. Their
   # successful workflow_run events reopen reconcile-section-pages, which owns
   # the single readiness check and API replay for the complete surface.
-  child_replay_api_after_publish=false
   child_allow_deferred_live_release=true
-  child_coordinated_recovery=true
 fi
 
 dispatch_children_wave() {

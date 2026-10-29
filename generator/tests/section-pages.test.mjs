@@ -3453,8 +3453,8 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /COORDINATED_RECOVERY_INPUT: \$\{\{ inputs\.coordinated_recovery \}\}/);
   assert.match(wf, /COORDINATED_RECOVERY: \$\{\{ inputs\.coordinated_recovery \}\}/);
   assert.doesNotMatch(staleResolve, /-f coordinated_recovery=/);
-  assert.match(render, /-f coordinated_recovery="\$coordinated_recovery"/);
-  assert.match(wf, /-f coordinated_recovery="\$COORDINATED_RECOVERY"/);
+  assert.match(render, /-f coordinated_recovery="\$child_coordinated_recovery"/);
+  assert.match(wf, /-f coordinated_recovery="\$child_coordinated_recovery"/);
   assert.match(wf, /-f source_commit="\$CURRENT_MAIN"/);
   assert.match(sectionContract, /-f source_commit="\$current_main"/);
   assert.equal(
@@ -3540,19 +3540,18 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /Prepare Firebase credentials for stale replay recovery\n\s+if: steps\.replay_freshness\.outputs\.fresh == 'false'/);
   assert.match(wf, /Load dispatch token for stale replay recovery\n\s+if: steps\.replay_freshness\.outputs\.fresh == 'false'/);
   assert.match(wf, /REPLAY_API_AFTER_PUBLISH: \$\{\{ inputs\.replay_api_after_publish \}\}/);
-  assert.match(wf, /-f replay_api_after_publish="\$REPLAY_API_AFTER_PUBLISH"/);
+  assert.match(wf, /-f replay_api_after_publish="\$child_replay_api_after_publish"/);
   assert.match(wf, /REPLAY_API_AFTER_PUBLISH: \$\{\{ needs\.resolve\.outputs\.replay_api_after_publish \}\}/);
   assert.equal(
-    (sectionContract.match(/-f replay_api_after_publish="\$REPLAY_API_AFTER_PUBLISH"/g) ?? []).length,
-    2,
-    'late guard e replay recovery devono propagare il flag del replay API',
+    (sectionContract.match(/-f replay_api_after_publish="\$child_replay_api_after_publish"/g) ?? []).length,
+    3,
+    'late guard e replay recovery devono spegnere il replay API locale nelle coorti coordinate',
   );
-  assert.match(recovery, /child_replay_api_after_publish="\$\{REPLAY_API_AFTER_PUBLISH:-false\}"/);
-  assert.match(recovery, /MIXED_MATRIX.*child_replay_api_after_publish=false/s);
+  assert.match(recovery, /child_replay_api_after_publish=false/);
+  assert.doesNotMatch(recovery, /child_replay_api_after_publish="\$\{REPLAY_API_AFTER_PUBLISH:-false\}"/);
   assert.match(recovery, /child_allow_deferred_live_release="\$\{ALLOW_DEFERRED_LIVE_RELEASE:-false\}"/);
-  assert.match(recovery, /child_coordinated_recovery=false/);
-  assert.match(recovery, /child_allow_deferred_live_release=true/);
   assert.match(recovery, /child_coordinated_recovery=true/);
+  assert.match(recovery, /child_allow_deferred_live_release=true/);
   assert.match(recovery, /-f coordinated_recovery="\$child_coordinated_recovery"/);
   assert.match(recovery, /PRESERVE_EXPLICIT_SCOPE/);
   assert.match(recovery, /merge_recovery_matrices/);
@@ -4224,6 +4223,8 @@ test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta',
   assert.match(wf, /-f "missing_page_paths=\$missing_page_paths"/);
   assert.match(wf, /-f "known_missing_page_paths=\$known_missing_page_paths"/);
   assert.match(wf, /-f "dispatch_cohort=\$dispatch_cohort"/);
+  assert.match(wf, /-f 'replay_api_after_publish=false'/);
+  assert.match(wf, /-f 'coordinated_recovery=true'/);
   assert.match(wf, /-f 'allow_deferred_live_release=true'/);
   assert.doesNotMatch(wf, /-f 'replay_api_after_publish=true'/);
   assert.match(wf, /-f "api_release_commit=\$API_RELEASE_COMMIT"/);
@@ -4278,6 +4279,7 @@ test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta',
   assert.match(cohortVerifier, /\.dispatch_nonce == \$nonce/);
   assert.match(cohortVerifier, /\.dispatch_cohort == \$cohort/);
   assert.match(cohortVerifier, /\.rendered_head == \$source/);
+  assert.match(cohortVerifier, /\.coordinated_recovery == "true"/);
   assert.match(cohortVerifier, /try \(\$parts\.cohort \| capture/);
   assert.match(cohortVerifier, /all\(\.runs\[\];[\s\S]*ascii_downcase[\s\S]*"success"/);
   assert.match(wf, /steps\.child_artifact\.outputs\.verified == 'true'/);

@@ -181,7 +181,7 @@ while IFS=$'\t' read -r run_id nonce section; do
      and .rendered_head == $source
      and .fresh == "true"
      and (.stale_handoff // "false") == "false"
-     and (.coordinated_recovery == "true" or .coordinated_recovery == "false")' \
+     and .coordinated_recovery == "true"' \
     "${result_files[0]}" >/dev/null; then
     not_ready "artifact child $run_id non coerente con $cohort/$nonce"
   fi

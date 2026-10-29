@@ -57,6 +57,10 @@ test('fast-publish-section mantiene il contratto dispatch esplicito', () => {
   assert.match(dispatch, /push_before:/u);
   assert.match(dispatch, /push_after:/u);
   assert.match(dispatch, /dispatch_cohort:/u);
+  assert.match(dispatch, /dispatch_cohort:\n\s+description:/u);
+  assert.match(dispatch, /dispatch_cohort:[\s\S]*?required: false/u);
+  assert.match(dispatch, /dispatch_cohort:[\s\S]*?default: ''/u);
+  assert.match(dispatch, /dispatch_cohort:[\s\S]*?type: string/u);
 });
 
 test('fast-publish-section ricontrolla main subito prima del replay API', () => {
@@ -168,6 +172,8 @@ test('una gara stale consegna la sezione al coordinatore senza dichiarare una pu
   assert.match(workflow, /steps\.stale\.outputs\.recovery_head \|\| steps\.replay_freshness\.outputs\.current_main \|\| needs\.publish_release_head\.outputs\.rendered_head/u);
   assert.match(workflow, /steps\.replay_freshness\.outputs\.fresh == 'false'[\s\S]*needs\.publish_release_head\.outputs\.mixed_matrix == 'true'/u);
   assert.match(render, /-f dispatch_cohort="\$dispatch_cohort"/u);
+  assert.match(render, /child_replay_api_after_publish=false/u);
+  assert.match(render, /-f coordinated_recovery="\$child_coordinated_recovery"/u);
 });
 
 test('il replay stale installa il parser prima di risolvere la release API', () => {
@@ -203,6 +209,8 @@ test('un recovery stale dispatcha i child e lascia il barrier al reconcile event
   assert.match(recovery, /dispatch_cohort_size="\$\(jq 'length'/u);
   assert.match(recovery, /-f dispatch_cohort="\$dispatch_cohort"/u);
   assert.match(recovery, /dispatch_cohort="stale-staged-\$\{GITHUB_RUN_ID\}-n\$\{dispatch_cohort_size\}"/u);
+  assert.match(recovery, /child_replay_api_after_publish=false/u);
+  assert.match(recovery, /child_coordinated_recovery=true/u);
   assert.match(resolver, /git checkout --detach "\$current_main"/u);
   assert.match(resolver, /echo "source_commit=\$current_main"/u);
   assert.match(resolver, /echo "matrix=\$replay_matrix"/u);

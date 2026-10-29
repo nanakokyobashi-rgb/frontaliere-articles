@@ -83,13 +83,8 @@ on:
       - 'scripts/lib/parse-positive-num.mjs'
       - 'generator/scripts/load-rc-env.mjs'
       - 'generator/scripts/lib/fetch-with-ref-timeout.mjs'
-  # `sections/registry.json` and the edge API registry are published by
-  # publish-api.yml. Its push-triggered run can finish after this workflow's
-  # first pass; scheduled/manual runs can also change the effective API
-  # surface without a new Git diff. API push completions refresh the
-  # non-article surfaces of every live canton (RSS can change through API-only
-  # inputs), preserve article scope from the originating diff, and merge
-  # cleanup for sections no longer live.
+  # API publication can complete after this pass; workflow_run refreshes live
+  # canton non-article surfaces and cleanup.
   workflow_run:
     workflows: ['Publish article data API']
     types: [completed]
@@ -130,7 +125,10 @@ on:
         default: ''
         type: string
       dispatch_cohort:
+        description: 'coorte'
         required: false
+        default: ''
+        type: string
       push_before:
         description: 'Base SHA della provenienza push esplicita (solo replay bounded)'
         required: false
@@ -735,6 +733,12 @@ jobs:
             dispatch_nonce="stale-publish-${GITHUB_RUN_ID}-${SECTION}"
           fi
           dispatch_cohort="${DISPATCH_COHORT:-stale-publish-${GITHUB_RUN_ID}-n1}"
+          child_replay_api_after_publish="$REPLAY_API_AFTER_PUBLISH"
+          child_coordinated_recovery="$COORDINATED_RECOVERY"
+          if [ "$COORDINATED_RECOVERY" = 'true' ]; then
+            child_replay_api_after_publish=false
+            child_coordinated_recovery=true
+          fi
           dispatch_title="cover-publish-section / ${SECTION} / nonce=${dispatch_nonce}"
           replay_before="${ORIGINAL_PUSH_BEFORE:-$STALE_HEAD}"
           replay_after=''
@@ -784,7 +788,7 @@ jobs:
             -f bootstrap="$BOOTSTRAP" \
             -f remove_stale_canton_rss_feeds="$REMOVE_STALE_CANTON_RSS_FEEDS" \
             -f cleanup_inactive_surface="$CLEANUP_INACTIVE_SURFACE" \
-            -f replay_api_after_publish="$REPLAY_API_AFTER_PUBLISH" \
+            -f replay_api_after_publish="$child_replay_api_after_publish" \
             -f allow_deferred_live_release="$ALLOW_DEFERRED_LIVE_RELEASE" \
             -f api_release_commit="$api_release_commit" \
             -f source_commit="$CURRENT_MAIN" \
@@ -794,7 +798,7 @@ jobs:
             -f push_after="$replay_after" \
             -f dispatch_nonce="$dispatch_nonce" \
             -f dispatch_cohort="$dispatch_cohort" \
-            -f coordinated_recovery="$COORDINATED_RECOVERY"
+            -f coordinated_recovery="$child_coordinated_recovery"
 
       - name: Fetch fallback corpus revision for manifest migration
         if: steps.replay_freshness.outputs.fresh == 'true'

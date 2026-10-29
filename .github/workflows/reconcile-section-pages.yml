@@ -247,6 +247,8 @@ jobs:
               -f "known_missing_page_paths=$known_missing_page_paths"
               -f 'bootstrap=false'
               -f 'dry_run=false'
+              -f 'replay_api_after_publish=false'
+              -f 'coordinated_recovery=true'
               -f "dispatch_nonce=$dispatch_nonce"
               -f "dispatch_cohort=$dispatch_cohort"
             )
