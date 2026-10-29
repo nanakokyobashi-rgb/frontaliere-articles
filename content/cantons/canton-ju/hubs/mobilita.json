@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "mobilita",
-  "updatedAt": "2026-10-28T17:02:29.143Z",
-  "contentHash": "c4723ea3bcd856629ca9234bb2c45845929e0d5057d19a932789178d06552e13",
+  "updatedAt": "2026-10-29T07:40:41.678Z",
+  "contentHash": "bc65da2be9f828e6316b3f88d05b136190334448965601850976f86f44e88dab",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-28T13:37:22.501Z",
-      "keyFacts": 1
+      "updatedAt": "2026-10-29T01:18:28.468Z",
+      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-28T11:41:09.250Z",
+      "updatedAt": "2026-10-28T21:56:57.371Z",
       "keyFacts": 0
     }
   ],
@@ -34,11 +34,6 @@
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
           "note": "Boncourt-Delle (A16), settimana conclusa: 27 ottobre 2026"
-        },
-        {
-          "label": "Chiusure stradali in corso o imminenti",
-          "value": "1",
-          "note": "segnalazioni aggiornate: 28 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -76,12 +71,6 @@
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
             {
-              "label": "A16 Delémont <-> Boncourt tra Svincolo autostradale Porrentruy Ouest E Svincolo autostradale Porrentruy Est Situazione: chiusa cantiere, lunghezza [km] 3.9",
-              "value": "Chiusura",
-              "detail": "fine prevista: 29 ottobre 2026",
-              "date": "2026-10-26T20:00:00.000Z"
-            },
-            {
               "label": "A16 Bienne <-> Boncourt tra Svincolo autostradale Bure E Raccordo autostradale Diramazione Bözingenfeld Situazione: problemi di traffico Causa: convoglio militare",
               "value": "Traffico",
               "detail": "fine prevista: 17 novembre 2026",
@@ -89,7 +78,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-28T13:37:22.501Z"
+          "updatedAt": "2026-10-29T01:18:28.468Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -107,7 +96,7 @@
               "url": "https://www.les-cj.ch/InfoTrafic/Tramelan-Place-du-Marche-Arret-de-bus-non-desservi-du-05-au-09-octobre-2026"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -149,7 +138,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "en": {
       "canton": "JU",
@@ -161,11 +150,6 @@
           "label": "Fastest crossing of the week",
           "value": "0 min",
           "note": "Boncourt-Delle (A16), week ending 27 October 2026"
-        },
-        {
-          "label": "Road closures in force or imminent",
-          "value": "1",
-          "note": "reports as of 28 October 2026"
         }
       ],
       "dataBlocks": [
@@ -203,12 +187,6 @@
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
             {
-              "label": "A16 Delémont <-> Boncourt tra Svincolo autostradale Porrentruy Ouest E Svincolo autostradale Porrentruy Est Situazione: chiusa cantiere, lunghezza [km] 3.9",
-              "value": "Closure",
-              "detail": "until 29 October 2026",
-              "date": "2026-10-26T20:00:00.000Z"
-            },
-            {
               "label": "A16 Bienne <-> Boncourt tra Svincolo autostradale Bure E Raccordo autostradale Diramazione Bözingenfeld Situazione: problemi di traffico Causa: convoglio militare",
               "value": "Traffic",
               "detail": "until 17 November 2026",
@@ -216,7 +194,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-28T13:37:22.501Z"
+          "updatedAt": "2026-10-29T01:18:28.468Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -234,7 +212,7 @@
               "url": "https://www.les-cj.ch/InfoTrafic/Tramelan-Place-du-Marche-Arret-de-bus-non-desservi-du-05-au-09-octobre-2026"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -276,7 +254,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "de": {
       "canton": "JU",
@@ -288,11 +266,6 @@
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
           "note": "Boncourt-Delle (A16), Woche bis 27. Oktober 2026"
-        },
-        {
-          "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "1",
-          "note": "Meldungen vom 28. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -330,12 +303,6 @@
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
             {
-              "label": "A16 Delsberg <-> Boncourt zwischen Anschluss Porrentruy-West und Anschluss Porrentruy-Ost Sachlage: Strecke gesperrt Baustelle, Länge [km] 3.9",
-              "value": "Sperrung",
-              "detail": "bis 29. Oktober 2026",
-              "date": "2026-10-26T20:00:00.000Z"
-            },
-            {
               "label": "A16 Biel <-> Boncourt zwischen Anschluss Bure und Autobahndreieck Verzweigung Bözingenfeld Sachlage: Verkehrsbehinderung Ursache: Militärkolonnen",
               "value": "Verkehr",
               "detail": "bis 17. November 2026",
@@ -343,7 +310,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-28T13:37:22.501Z"
+          "updatedAt": "2026-10-29T01:18:28.468Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -361,7 +328,7 @@
               "url": "https://www.les-cj.ch/InfoTrafic/Tramelan-Place-du-Marche-Arret-de-bus-non-desservi-du-05-au-09-octobre-2026"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -403,7 +370,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "fr": {
       "canton": "JU",
@@ -415,11 +382,6 @@
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
           "note": "Boncourt-Delle (A16), semaine jusqu’au 27 octobre 2026"
-        },
-        {
-          "label": "Fermetures de routes en cours ou imminentes",
-          "value": "1",
-          "note": "signalements au 28 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -457,12 +419,6 @@
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
             {
-              "label": "A16 Delémont <-> Boncourt entre Jonction autoroutière Porrentruy-Ouest et Jonction autoroutière Porrentruy-Est Situation: fermé travaux, longueur [km] 3.9",
-              "value": "Fermeture",
-              "detail": "jusqu’au 29 octobre 2026",
-              "date": "2026-10-26T20:00:00.000Z"
-            },
-            {
               "label": "A16 Bienne <-> Boncourt entre Jonction autoroutière Bure et Echangeur Echangeur de Champs de Boujean Situation: trafic perturbé Raison: convoi militaire",
               "value": "Trafic",
               "detail": "jusqu’au 17 novembre 2026",
@@ -470,7 +426,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-28T13:37:22.501Z"
+          "updatedAt": "2026-10-29T01:18:28.468Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -488,7 +444,7 @@
               "url": "https://www.les-cj.ch/InfoTrafic/Tramelan-Place-du-Marche-Arret-de-bus-non-desservi-du-05-au-09-octobre-2026"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -530,7 +486,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     }
   }
 }

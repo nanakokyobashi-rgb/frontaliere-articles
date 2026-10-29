@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "servizi",
-  "updatedAt": "2026-10-28T22:28:15.944Z",
-  "contentHash": "94f8624e7d31d9e89429aeb1694fe3acd880def5124d8f2b3c51a1e8254a3793",
+  "updatedAt": "2026-10-29T07:40:41.678Z",
+  "contentHash": "48297d7df9b5b1f65c1f10cd59a118c6b63346d53c9dcacdd434e0ae0950eae1",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-28T13:55:48.732Z",
+      "updatedAt": "2026-10-28T23:30:37.265Z",
       "keyFacts": 0
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-28T15:15:36.348Z",
+      "updatedAt": "2026-10-28T21:13:47.459Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-28T11:41:09.250Z",
+      "updatedAt": "2026-10-28T21:56:57.371Z",
       "keyFacts": 0
     }
   ],
@@ -76,11 +76,6 @@
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-10-27T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
               "date": "2026-10-28T23:00:00.000Z"
             },
             {
@@ -102,11 +97,16 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-11-01T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-02T23:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-28T13:55:48.732Z"
+          "updatedAt": "2026-10-28T23:30:37.265Z"
         },
         {
           "id": "meteo",
@@ -115,18 +115,23 @@
           "items": [
             {
               "label": "Zürich",
-              "value": "11 °C",
-              "detail": "oggi da 7 a 12 °C"
+              "value": "8 °C",
+              "detail": "oggi da 7 a 9 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-28T15:15:36.348Z"
+          "updatedAt": "2026-10-28T21:13:47.459Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Brustkrebs und Kinderwunsch: Fruchtbarkeit erhalten, ohne die Therapie zu verzögern",
+              "date": "2026-10-28T12:51:51.000Z",
+              "url": "https://www.usz.ch/brustkrebs-und-kinderwunsch-fruchtbarkeit-erhalten-ohne-die-therapie-zu-verzoegern/"
+            },
             {
               "label": "USZ lanciert den DAISY Award für aussergewöhnliche Pflegefachpersonen und Hebammen",
               "date": "2026-10-28T09:02:16.000Z",
@@ -151,14 +156,9 @@
               "label": "Administrativuntersuchung in der Klinik für Urologie abgeschlossen",
               "date": "2026-10-22T12:40:30.000Z",
               "url": "https://www.usz.ch/administrativuntersuchung-in-der-klinik-fuer-urologie-abgeschlossen/"
-            },
-            {
-              "label": "Unabhängige Administrativuntersuchung in der Klinik für Urologie abgeschlossen",
-              "date": "2026-10-21T17:00:23.000Z",
-              "url": "https://www.usz.ch/unabhaengige-administrativuntersuchung-in-der-klinik-fuer-urologie-abgeschlossen/"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -238,7 +238,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-28T22:28:15.944Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "en": {
       "canton": "ZH",
@@ -287,11 +287,6 @@
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-10-27T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
               "date": "2026-10-28T23:00:00.000Z"
             },
             {
@@ -313,11 +308,16 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-11-01T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-02T23:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-28T13:55:48.732Z"
+          "updatedAt": "2026-10-28T23:30:37.265Z"
         },
         {
           "id": "meteo",
@@ -326,18 +326,23 @@
           "items": [
             {
               "label": "Zürich",
-              "value": "11 °C",
-              "detail": "today from 7 to 12 °C"
+              "value": "8 °C",
+              "detail": "today from 7 to 9 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-28T15:15:36.348Z"
+          "updatedAt": "2026-10-28T21:13:47.459Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Brustkrebs und Kinderwunsch: Fruchtbarkeit erhalten, ohne die Therapie zu verzögern",
+              "date": "2026-10-28T12:51:51.000Z",
+              "url": "https://www.usz.ch/brustkrebs-und-kinderwunsch-fruchtbarkeit-erhalten-ohne-die-therapie-zu-verzoegern/"
+            },
             {
               "label": "USZ lanciert den DAISY Award für aussergewöhnliche Pflegefachpersonen und Hebammen",
               "date": "2026-10-28T09:02:16.000Z",
@@ -362,14 +367,9 @@
               "label": "Administrativuntersuchung in der Klinik für Urologie abgeschlossen",
               "date": "2026-10-22T12:40:30.000Z",
               "url": "https://www.usz.ch/administrativuntersuchung-in-der-klinik-fuer-urologie-abgeschlossen/"
-            },
-            {
-              "label": "Unabhängige Administrativuntersuchung in der Klinik für Urologie abgeschlossen",
-              "date": "2026-10-21T17:00:23.000Z",
-              "url": "https://www.usz.ch/unabhaengige-administrativuntersuchung-in-der-klinik-fuer-urologie-abgeschlossen/"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -445,7 +445,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-28T22:28:15.944Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "de": {
       "canton": "ZH",
@@ -494,11 +494,6 @@
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-10-27T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
               "date": "2026-10-28T23:00:00.000Z"
             },
             {
@@ -520,11 +515,16 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-11-01T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-02T23:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-28T13:55:48.732Z"
+          "updatedAt": "2026-10-28T23:30:37.265Z"
         },
         {
           "id": "meteo",
@@ -533,18 +533,23 @@
           "items": [
             {
               "label": "Zürich",
-              "value": "11 °C",
-              "detail": "heute 7 bis 12 °C"
+              "value": "8 °C",
+              "detail": "heute 7 bis 9 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-28T15:15:36.348Z"
+          "updatedAt": "2026-10-28T21:13:47.459Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Brustkrebs und Kinderwunsch: Fruchtbarkeit erhalten, ohne die Therapie zu verzögern",
+              "date": "2026-10-28T12:51:51.000Z",
+              "url": "https://www.usz.ch/brustkrebs-und-kinderwunsch-fruchtbarkeit-erhalten-ohne-die-therapie-zu-verzoegern/"
+            },
             {
               "label": "USZ lanciert den DAISY Award für aussergewöhnliche Pflegefachpersonen und Hebammen",
               "date": "2026-10-28T09:02:16.000Z",
@@ -569,14 +574,9 @@
               "label": "Administrativuntersuchung in der Klinik für Urologie abgeschlossen",
               "date": "2026-10-22T12:40:30.000Z",
               "url": "https://www.usz.ch/administrativuntersuchung-in-der-klinik-fuer-urologie-abgeschlossen/"
-            },
-            {
-              "label": "Unabhängige Administrativuntersuchung in der Klinik für Urologie abgeschlossen",
-              "date": "2026-10-21T17:00:23.000Z",
-              "url": "https://www.usz.ch/unabhaengige-administrativuntersuchung-in-der-klinik-fuer-urologie-abgeschlossen/"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -652,7 +652,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-28T22:28:15.944Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "fr": {
       "canton": "ZH",
@@ -701,11 +701,6 @@
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-10-27T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
               "date": "2026-10-28T23:00:00.000Z"
             },
             {
@@ -727,11 +722,16 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-11-01T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-02T23:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-28T13:55:48.732Z"
+          "updatedAt": "2026-10-28T23:30:37.265Z"
         },
         {
           "id": "meteo",
@@ -740,18 +740,23 @@
           "items": [
             {
               "label": "Zürich",
-              "value": "11 °C",
-              "detail": "aujourd’hui de 7 à 12 °C"
+              "value": "8 °C",
+              "detail": "aujourd’hui de 7 à 9 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-28T15:15:36.348Z"
+          "updatedAt": "2026-10-28T21:13:47.459Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Brustkrebs und Kinderwunsch: Fruchtbarkeit erhalten, ohne die Therapie zu verzögern",
+              "date": "2026-10-28T12:51:51.000Z",
+              "url": "https://www.usz.ch/brustkrebs-und-kinderwunsch-fruchtbarkeit-erhalten-ohne-die-therapie-zu-verzoegern/"
+            },
             {
               "label": "USZ lanciert den DAISY Award für aussergewöhnliche Pflegefachpersonen und Hebammen",
               "date": "2026-10-28T09:02:16.000Z",
@@ -776,14 +781,9 @@
               "label": "Administrativuntersuchung in der Klinik für Urologie abgeschlossen",
               "date": "2026-10-22T12:40:30.000Z",
               "url": "https://www.usz.ch/administrativuntersuchung-in-der-klinik-fuer-urologie-abgeschlossen/"
-            },
-            {
-              "label": "Unabhängige Administrativuntersuchung in der Klinik für Urologie abgeschlossen",
-              "date": "2026-10-21T17:00:23.000Z",
-              "url": "https://www.usz.ch/unabhaengige-administrativuntersuchung-in-der-klinik-fuer-urologie-abgeschlossen/"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -855,7 +855,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-28T22:28:15.944Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     }
   }
 }

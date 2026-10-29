@@ -4,17 +4,17 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "eventi",
-  "updatedAt": "2026-10-28T17:02:29.143Z",
-  "contentHash": "0c141d20860ce778507f58ddb451e42f8ec299b6f03555ce6fa1f32efd26a266",
+  "updatedAt": "2026-10-29T07:40:41.678Z",
+  "contentHash": "df54413443b946d4e9fde13b3fa829ed609f7de9bc620a120dbb717b2150dca4",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-28T13:47:49.369Z",
+      "updatedAt": "2026-10-28T19:25:39.771Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-28T11:41:09.250Z",
+      "updatedAt": "2026-10-28T21:56:57.371Z",
       "keyFacts": 0
     }
   ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "«Quelque chose a changé» Une exposition de l'artiste Lola Jay",
+              "label": "\"Café avec la police municipale\" Acacias : échanger autour d’un café, au cœur des quartiers",
               "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/quelque-chose-change-exposition-artiste-lola"
+              "date": "2026-10-29",
+              "url": "https://www.geneve.ch/agenda/cafe-police-municipale-acacias-echanger-autour-cafe-coeur-quartiers"
             },
             {
-              "label": "Alerte rouge !",
+              "label": "\"Invincible Eté\" - projection-débat",
               "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/alerte-rouge"
+              "date": "2026-10-29",
+              "url": "https://www.geneve.ch/agenda/invincible-ete-projection-debat"
             },
             {
-              "label": "Atelier chocolat pour les enfants - Chocolate monster",
+              "label": "A la découverte du monde des personnes sourdes",
               "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/atelier-chocolat-enfants-chocolate-monster-2"
+              "date": "2026-10-29",
+              "url": "https://www.geneve.ch/agenda/decouverte-monde-sourdes"
             },
             {
-              "label": "Atelier cosmétique pour enfant: fabrication Gel douche Halloween",
+              "label": "Action Lumières - Carouge",
               "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/atelier-cosmetique-enfant-fabrication-douche-halloween"
+              "date": "2026-10-29",
+              "url": "https://www.geneve.ch/agenda/action-lumieres-carouge"
             },
             {
-              "label": "Atelier Créez votre création d'Halloween en chocolat",
+              "label": "Affichage public #6: Singularité",
               "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/atelier-creez-creation-halloween-chocolat-3"
+              "date": "2026-10-29",
+              "url": "https://www.geneve.ch/agenda/affichage-public-6-singularite"
             },
             {
-              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "label": "Afterwork Chocolat Halloween",
               "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+              "date": "2026-10-29",
+              "url": "https://www.geneve.ch/agenda/afterwork-chocolat-halloween"
             },
             {
-              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
+              "label": "Cité Seniors fête ses 20 ans | Regards croisés sur l'évolution des espaces publics - Des Bergues à la Jonction…",
               "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
+              "date": "2026-10-29",
+              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-regards-croises-evolution-espaces-publics-bergues-jonction-decouvertes-eau"
             },
             {
-              "label": "Balades Théâtralisées - De la haute-ville aux bas-fonds",
+              "label": "Complet - Les études décoloniales ignorent l'histoire et se trompent de cible : rencontre avec Jean-Pierre Olivier de…",
               "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-haute-ville-fonds"
+              "date": "2026-10-29",
+              "url": "https://www.geneve.ch/agenda/etudes-decoloniales-ignorent-histoire-trompent-cible-rencontre-jean-pierre-olivier-sardan"
             },
             {
-              "label": "Cafés genevois: la vie même",
+              "label": "Corps et littérature avec Marianne Gokalp & Marion Muller-Colard",
               "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/cafes-genevois-vie"
+              "date": "2026-10-29",
+              "url": "https://www.geneve.ch/agenda/corps-litterature-marianne-gokalp-marion-muller-colard"
             },
             {
-              "label": "CHRÜSIMÜSI",
+              "label": "Cours de Tango Argentin - Niveau débutant",
               "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/chrusimusi"
+              "date": "2026-10-29",
+              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-niveau-debutant-6"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ginevra/",
-          "updatedAt": "2026-10-28T13:47:49.369Z"
+          "updatedAt": "2026-10-28T19:25:39.771Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -118,7 +118,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -140,7 +140,7 @@
           "url": "/eventi/ginevra/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "en": {
       "canton": "GE",
@@ -161,69 +161,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "«Quelque chose a changé» Une exposition de l'artiste Lola Jay",
+              "label": "\"Café avec la police municipale\" Acacias : échanger autour d’un café, au cœur des quartiers",
               "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/quelque-chose-change-exposition-artiste-lola"
+              "date": "2026-10-29",
+              "url": "https://www.geneve.ch/agenda/cafe-police-municipale-acacias-echanger-autour-cafe-coeur-quartiers"
             },
             {
-              "label": "Alerte rouge !",
+              "label": "\"Invincible Eté\" - projection-débat",
               "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/alerte-rouge"
+              "date": "2026-10-29",
+              "url": "https://www.geneve.ch/agenda/invincible-ete-projection-debat"
             },
             {
-              "label": "Atelier chocolat pour les enfants - Chocolate monster",
+              "label": "A la découverte du monde des personnes sourdes",
               "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/atelier-chocolat-enfants-chocolate-monster-2"
+              "date": "2026-10-29",
+              "url": "https://www.geneve.ch/agenda/decouverte-monde-sourdes"
             },
             {
-              "label": "Atelier cosmétique pour enfant: fabrication Gel douche Halloween",
+              "label": "Action Lumières - Carouge",
               "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/atelier-cosmetique-enfant-fabrication-douche-halloween"
+              "date": "2026-10-29",
+              "url": "https://www.geneve.ch/agenda/action-lumieres-carouge"
             },
             {
-              "label": "Atelier Créez votre création d'Halloween en chocolat",
+              "label": "Affichage public #6: Singularité",
               "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/atelier-creez-creation-halloween-chocolat-3"
+              "date": "2026-10-29",
+              "url": "https://www.geneve.ch/agenda/affichage-public-6-singularite"
             },
             {
-              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "label": "Afterwork Chocolat Halloween",
               "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+              "date": "2026-10-29",
+              "url": "https://www.geneve.ch/agenda/afterwork-chocolat-halloween"
             },
             {
-              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
+              "label": "Cité Seniors fête ses 20 ans | Regards croisés sur l'évolution des espaces publics - Des Bergues à la Jonction…",
               "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
+              "date": "2026-10-29",
+              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-regards-croises-evolution-espaces-publics-bergues-jonction-decouvertes-eau"
             },
             {
-              "label": "Balades Théâtralisées - De la haute-ville aux bas-fonds",
+              "label": "Complet - Les études décoloniales ignorent l'histoire et se trompent de cible : rencontre avec Jean-Pierre Olivier de…",
               "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-haute-ville-fonds"
+              "date": "2026-10-29",
+              "url": "https://www.geneve.ch/agenda/etudes-decoloniales-ignorent-histoire-trompent-cible-rencontre-jean-pierre-olivier-sardan"
             },
             {
-              "label": "Cafés genevois: la vie même",
+              "label": "Corps et littérature avec Marianne Gokalp & Marion Muller-Colard",
               "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/cafes-genevois-vie"
+              "date": "2026-10-29",
+              "url": "https://www.geneve.ch/agenda/corps-litterature-marianne-gokalp-marion-muller-colard"
             },
             {
-              "label": "CHRÜSIMÜSI",
+              "label": "Cours de Tango Argentin - Niveau débutant",
               "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/chrusimusi"
+              "date": "2026-10-29",
+              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-niveau-debutant-6"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/geneva/",
-          "updatedAt": "2026-10-28T13:47:49.369Z"
+          "updatedAt": "2026-10-28T19:25:39.771Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -241,7 +241,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -263,7 +263,7 @@
           "url": "/en/events/geneva/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "de": {
       "canton": "GE",
@@ -284,69 +284,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "«Quelque chose a changé» Une exposition de l'artiste Lola Jay",
+              "label": "\"Café avec la police municipale\" Acacias : échanger autour d’un café, au cœur des quartiers",
               "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/quelque-chose-change-exposition-artiste-lola"
+              "date": "2026-10-29",
+              "url": "https://www.geneve.ch/agenda/cafe-police-municipale-acacias-echanger-autour-cafe-coeur-quartiers"
             },
             {
-              "label": "Alerte rouge !",
+              "label": "\"Invincible Eté\" - projection-débat",
               "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/alerte-rouge"
+              "date": "2026-10-29",
+              "url": "https://www.geneve.ch/agenda/invincible-ete-projection-debat"
             },
             {
-              "label": "Atelier chocolat pour les enfants - Chocolate monster",
+              "label": "A la découverte du monde des personnes sourdes",
               "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/atelier-chocolat-enfants-chocolate-monster-2"
+              "date": "2026-10-29",
+              "url": "https://www.geneve.ch/agenda/decouverte-monde-sourdes"
             },
             {
-              "label": "Atelier cosmétique pour enfant: fabrication Gel douche Halloween",
+              "label": "Action Lumières - Carouge",
               "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/atelier-cosmetique-enfant-fabrication-douche-halloween"
+              "date": "2026-10-29",
+              "url": "https://www.geneve.ch/agenda/action-lumieres-carouge"
             },
             {
-              "label": "Atelier Créez votre création d'Halloween en chocolat",
+              "label": "Affichage public #6: Singularité",
               "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/atelier-creez-creation-halloween-chocolat-3"
+              "date": "2026-10-29",
+              "url": "https://www.geneve.ch/agenda/affichage-public-6-singularite"
             },
             {
-              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "label": "Afterwork Chocolat Halloween",
               "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+              "date": "2026-10-29",
+              "url": "https://www.geneve.ch/agenda/afterwork-chocolat-halloween"
             },
             {
-              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
+              "label": "Cité Seniors fête ses 20 ans | Regards croisés sur l'évolution des espaces publics - Des Bergues à la Jonction…",
               "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
+              "date": "2026-10-29",
+              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-regards-croises-evolution-espaces-publics-bergues-jonction-decouvertes-eau"
             },
             {
-              "label": "Balades Théâtralisées - De la haute-ville aux bas-fonds",
+              "label": "Complet - Les études décoloniales ignorent l'histoire et se trompent de cible : rencontre avec Jean-Pierre Olivier de…",
               "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-haute-ville-fonds"
+              "date": "2026-10-29",
+              "url": "https://www.geneve.ch/agenda/etudes-decoloniales-ignorent-histoire-trompent-cible-rencontre-jean-pierre-olivier-sardan"
             },
             {
-              "label": "Cafés genevois: la vie même",
+              "label": "Corps et littérature avec Marianne Gokalp & Marion Muller-Colard",
               "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/cafes-genevois-vie"
+              "date": "2026-10-29",
+              "url": "https://www.geneve.ch/agenda/corps-litterature-marianne-gokalp-marion-muller-colard"
             },
             {
-              "label": "CHRÜSIMÜSI",
+              "label": "Cours de Tango Argentin - Niveau débutant",
               "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/chrusimusi"
+              "date": "2026-10-29",
+              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-niveau-debutant-6"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/genf/",
-          "updatedAt": "2026-10-28T13:47:49.369Z"
+          "updatedAt": "2026-10-28T19:25:39.771Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -364,7 +364,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -386,7 +386,7 @@
           "url": "/de/veranstaltungen/genf/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "fr": {
       "canton": "GE",
@@ -407,69 +407,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "«Quelque chose a changé» Une exposition de l'artiste Lola Jay",
+              "label": "\"Café avec la police municipale\" Acacias : échanger autour d’un café, au cœur des quartiers",
               "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/quelque-chose-change-exposition-artiste-lola"
+              "date": "2026-10-29",
+              "url": "https://www.geneve.ch/agenda/cafe-police-municipale-acacias-echanger-autour-cafe-coeur-quartiers"
             },
             {
-              "label": "Alerte rouge !",
+              "label": "\"Invincible Eté\" - projection-débat",
               "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/alerte-rouge"
+              "date": "2026-10-29",
+              "url": "https://www.geneve.ch/agenda/invincible-ete-projection-debat"
             },
             {
-              "label": "Atelier chocolat pour les enfants - Chocolate monster",
+              "label": "A la découverte du monde des personnes sourdes",
               "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/atelier-chocolat-enfants-chocolate-monster-2"
+              "date": "2026-10-29",
+              "url": "https://www.geneve.ch/agenda/decouverte-monde-sourdes"
             },
             {
-              "label": "Atelier cosmétique pour enfant: fabrication Gel douche Halloween",
+              "label": "Action Lumières - Carouge",
               "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/atelier-cosmetique-enfant-fabrication-douche-halloween"
+              "date": "2026-10-29",
+              "url": "https://www.geneve.ch/agenda/action-lumieres-carouge"
             },
             {
-              "label": "Atelier Créez votre création d'Halloween en chocolat",
+              "label": "Affichage public #6: Singularité",
               "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/atelier-creez-creation-halloween-chocolat-3"
+              "date": "2026-10-29",
+              "url": "https://www.geneve.ch/agenda/affichage-public-6-singularite"
             },
             {
-              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "label": "Afterwork Chocolat Halloween",
               "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+              "date": "2026-10-29",
+              "url": "https://www.geneve.ch/agenda/afterwork-chocolat-halloween"
             },
             {
-              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
+              "label": "Cité Seniors fête ses 20 ans | Regards croisés sur l'évolution des espaces publics - Des Bergues à la Jonction…",
               "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
+              "date": "2026-10-29",
+              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-regards-croises-evolution-espaces-publics-bergues-jonction-decouvertes-eau"
             },
             {
-              "label": "Balades Théâtralisées - De la haute-ville aux bas-fonds",
+              "label": "Complet - Les études décoloniales ignorent l'histoire et se trompent de cible : rencontre avec Jean-Pierre Olivier de…",
               "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-haute-ville-fonds"
+              "date": "2026-10-29",
+              "url": "https://www.geneve.ch/agenda/etudes-decoloniales-ignorent-histoire-trompent-cible-rencontre-jean-pierre-olivier-sardan"
             },
             {
-              "label": "Cafés genevois: la vie même",
+              "label": "Corps et littérature avec Marianne Gokalp & Marion Muller-Colard",
               "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/cafes-genevois-vie"
+              "date": "2026-10-29",
+              "url": "https://www.geneve.ch/agenda/corps-litterature-marianne-gokalp-marion-muller-colard"
             },
             {
-              "label": "CHRÜSIMÜSI",
+              "label": "Cours de Tango Argentin - Niveau débutant",
               "detail": "Genève",
-              "date": "2026-10-28",
-              "url": "https://www.geneve.ch/agenda/chrusimusi"
+              "date": "2026-10-29",
+              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-niveau-debutant-6"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/geneve/",
-          "updatedAt": "2026-10-28T13:47:49.369Z"
+          "updatedAt": "2026-10-28T19:25:39.771Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -487,7 +487,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -509,7 +509,7 @@
           "url": "/fr/evenements/geneve/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "eventi",
-  "updatedAt": "2026-10-28T17:02:29.143Z",
-  "contentHash": "e2459ee91e09d71b904d7b40099d061148a66cefdef7a4141343290a89dbab45",
+  "updatedAt": "2026-10-29T07:40:41.678Z",
+  "contentHash": "0b2202de5db7711d1dce33c7c5e94d2c2b670b815f7d4f65ebbe58665d8582f2",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-28T13:47:49.369Z",
+      "updatedAt": "2026-10-28T19:25:39.771Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "52",
+          "value": "49",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,54 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Foutue bergerie – Pierre Guillois / Cie le Fils du Grand réseau",
-              "detail": "Villars-sur-Glâne",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/foutue-bergerie-pierre-guillois-cie-le-fils-du-grand-reseau/"
-            },
-            {
-              "label": "L’heure du conte",
-              "detail": "Châtel-St-Denis, Châtel-Saint-Denis",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lheure-du-conte/"
-            },
-            {
-              "label": "Primes d’assurance-maladie 2027 : comment économiser ?",
-              "detail": "Fribourg",
-              "date": "2026-10-28",
-              "url": "https://www.fr.ch/dsas/sasoc/fpt/evenements/primes-dassurance-maladie-2027-comment-economiser-0"
-            },
-            {
-              "label": "COMPLET | Kiwi Club – Apprentis taxidermistes",
-              "detail": "Fribourg",
-              "date": "2026-10-28",
-              "url": "https://www.fr.ch/mhnf/evenements/complet-kiwi-club-apprentis-taxidermistes"
-            },
-            {
-              "label": "Kiwi Club – Apprentis taxidermistes",
-              "detail": "Fribourg",
-              "date": "2026-10-28",
-              "url": "https://www.fr.ch/mhnf/evenements/kiwi-club-apprentis-taxidermistes"
-            },
-            {
-              "label": "Histoires naturelles du mercredi",
-              "detail": "Fribourg",
-              "date": "2026-10-28",
-              "url": "https://www.fr.ch/mhnf/evenements/histoires-naturelles-du-mercredi-0"
-            },
-            {
-              "label": "Regards affinés",
-              "detail": "L'Atelier, Fribourg — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
-            },
-            {
-              "label": "Halloween à Moléson",
-              "detail": "Office du Tourisme de Moléson, Gruyères — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
-            },
             {
               "label": "jO Mettraux : concert-vernissage",
               "detail": "Fribourg",
@@ -91,11 +43,59 @@
               "detail": "Fribourg",
               "date": "2026-10-29",
               "url": "https://www.fr.ch/dime/developpement-durable/evenements/journee-cantonale-du-developpement-durable"
+            },
+            {
+              "label": "Le sort des bibliothèques dans le contexte de la Réforme et des guerres en Europe du Nord ...",
+              "detail": "Fribourg",
+              "date": "2026-10-29",
+              "url": "https://www.fr.ch/bcu/evenements/le-sort-des-bibliotheques-dans-le-contexte-de-la-reforme-et-des-guerres-en-europe-du-nord"
+            },
+            {
+              "label": "Circus Knie",
+              "detail": "Fribourg",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/circus-knie-2026-17/"
+            },
+            {
+              "label": "Foutue bergerie – Pierre Guillois / Cie le Fils du Grand réseau",
+              "detail": "Villars-sur-Glâne — in corso, ultimo giorno: 29 ottobre 2026",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/foutue-bergerie-pierre-guillois-cie-le-fils-du-grand-reseau/"
+            },
+            {
+              "label": "Regards affinés",
+              "detail": "L'Atelier, Fribourg — in corso, ultimo giorno: 31 ottobre 2026",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
+            },
+            {
+              "label": "Halloween à Moléson",
+              "detail": "Office du Tourisme de Moléson, Gruyères — in corso, ultimo giorno: 1 novembre 2026",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
+            },
+            {
+              "label": "Leonard Cohen: dix ans plus tard, toujours vivant",
+              "detail": "Bibliothèque cantonale et universitaire (BCU)",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/evenements/musique/fribourg/leonard-cohen-dix-ans-plus-tard-toujours-vivant_ABXgE3J"
+            },
+            {
+              "label": "Journée intercantonale des proches aidants",
+              "detail": "Grolley",
+              "date": "2026-10-30",
+              "url": "https://www.fr.ch/dsas/evenements/journee-intercantonale-des-proches-aidants-1"
+            },
+            {
+              "label": "Leonard Cohen : dix ans plus tard, toujours vivant",
+              "detail": "Fribourg",
+              "date": "2026-10-30",
+              "url": "https://www.fr.ch/bcu/evenements/leonard-cohen-dix-ans-plus-tard-toujours-vivant"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/friburgo/",
-          "updatedAt": "2026-10-28T13:47:49.369Z"
+          "updatedAt": "2026-10-28T19:25:39.771Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/friburgo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "en": {
       "canton": "FR",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "52",
+          "value": "49",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,54 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Foutue bergerie – Pierre Guillois / Cie le Fils du Grand réseau",
-              "detail": "Villars-sur-Glâne",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/foutue-bergerie-pierre-guillois-cie-le-fils-du-grand-reseau/"
-            },
-            {
-              "label": "L’heure du conte",
-              "detail": "Châtel-St-Denis, Châtel-Saint-Denis",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lheure-du-conte/"
-            },
-            {
-              "label": "Primes d’assurance-maladie 2027 : comment économiser ?",
-              "detail": "Fribourg",
-              "date": "2026-10-28",
-              "url": "https://www.fr.ch/dsas/sasoc/fpt/evenements/primes-dassurance-maladie-2027-comment-economiser-0"
-            },
-            {
-              "label": "COMPLET | Kiwi Club – Apprentis taxidermistes",
-              "detail": "Fribourg",
-              "date": "2026-10-28",
-              "url": "https://www.fr.ch/mhnf/evenements/complet-kiwi-club-apprentis-taxidermistes"
-            },
-            {
-              "label": "Kiwi Club – Apprentis taxidermistes",
-              "detail": "Fribourg",
-              "date": "2026-10-28",
-              "url": "https://www.fr.ch/mhnf/evenements/kiwi-club-apprentis-taxidermistes"
-            },
-            {
-              "label": "Histoires naturelles du mercredi",
-              "detail": "Fribourg",
-              "date": "2026-10-28",
-              "url": "https://www.fr.ch/mhnf/evenements/histoires-naturelles-du-mercredi-0"
-            },
-            {
-              "label": "Regards affinés",
-              "detail": "L'Atelier, Fribourg — ongoing, last day: 31 October 2026",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
-            },
-            {
-              "label": "Halloween à Moléson",
-              "detail": "Office du Tourisme de Moléson, Gruyères — ongoing, last day: 1 November 2026",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
-            },
             {
               "label": "jO Mettraux : concert-vernissage",
               "detail": "Fribourg",
@@ -196,11 +148,59 @@
               "detail": "Fribourg",
               "date": "2026-10-29",
               "url": "https://www.fr.ch/dime/developpement-durable/evenements/journee-cantonale-du-developpement-durable"
+            },
+            {
+              "label": "Le sort des bibliothèques dans le contexte de la Réforme et des guerres en Europe du Nord ...",
+              "detail": "Fribourg",
+              "date": "2026-10-29",
+              "url": "https://www.fr.ch/bcu/evenements/le-sort-des-bibliotheques-dans-le-contexte-de-la-reforme-et-des-guerres-en-europe-du-nord"
+            },
+            {
+              "label": "Circus Knie",
+              "detail": "Fribourg",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/circus-knie-2026-17/"
+            },
+            {
+              "label": "Foutue bergerie – Pierre Guillois / Cie le Fils du Grand réseau",
+              "detail": "Villars-sur-Glâne — ongoing, last day: 29 October 2026",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/foutue-bergerie-pierre-guillois-cie-le-fils-du-grand-reseau/"
+            },
+            {
+              "label": "Regards affinés",
+              "detail": "L'Atelier, Fribourg — ongoing, last day: 31 October 2026",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
+            },
+            {
+              "label": "Halloween à Moléson",
+              "detail": "Office du Tourisme de Moléson, Gruyères — ongoing, last day: 1 November 2026",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
+            },
+            {
+              "label": "Leonard Cohen: dix ans plus tard, toujours vivant",
+              "detail": "Bibliothèque cantonale et universitaire (BCU)",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/evenements/musique/fribourg/leonard-cohen-dix-ans-plus-tard-toujours-vivant_ABXgE3J"
+            },
+            {
+              "label": "Journée intercantonale des proches aidants",
+              "detail": "Grolley",
+              "date": "2026-10-30",
+              "url": "https://www.fr.ch/dsas/evenements/journee-intercantonale-des-proches-aidants-1"
+            },
+            {
+              "label": "Leonard Cohen : dix ans plus tard, toujours vivant",
+              "detail": "Fribourg",
+              "date": "2026-10-30",
+              "url": "https://www.fr.ch/bcu/evenements/leonard-cohen-dix-ans-plus-tard-toujours-vivant"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/fribourg/",
-          "updatedAt": "2026-10-28T13:47:49.369Z"
+          "updatedAt": "2026-10-28T19:25:39.771Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/fribourg/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "de": {
       "canton": "FR",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "52",
+          "value": "49",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,54 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Foutue bergerie – Pierre Guillois / Cie le Fils du Grand réseau",
-              "detail": "Villars-sur-Glâne",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/foutue-bergerie-pierre-guillois-cie-le-fils-du-grand-reseau/"
-            },
-            {
-              "label": "L’heure du conte",
-              "detail": "Châtel-St-Denis, Châtel-Saint-Denis",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lheure-du-conte/"
-            },
-            {
-              "label": "Primes d’assurance-maladie 2027 : comment économiser ?",
-              "detail": "Fribourg",
-              "date": "2026-10-28",
-              "url": "https://www.fr.ch/dsas/sasoc/fpt/evenements/primes-dassurance-maladie-2027-comment-economiser-0"
-            },
-            {
-              "label": "COMPLET | Kiwi Club – Apprentis taxidermistes",
-              "detail": "Fribourg",
-              "date": "2026-10-28",
-              "url": "https://www.fr.ch/mhnf/evenements/complet-kiwi-club-apprentis-taxidermistes"
-            },
-            {
-              "label": "Kiwi Club – Apprentis taxidermistes",
-              "detail": "Fribourg",
-              "date": "2026-10-28",
-              "url": "https://www.fr.ch/mhnf/evenements/kiwi-club-apprentis-taxidermistes"
-            },
-            {
-              "label": "Histoires naturelles du mercredi",
-              "detail": "Fribourg",
-              "date": "2026-10-28",
-              "url": "https://www.fr.ch/mhnf/evenements/histoires-naturelles-du-mercredi-0"
-            },
-            {
-              "label": "Regards affinés",
-              "detail": "L'Atelier, Fribourg — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
-            },
-            {
-              "label": "Halloween à Moléson",
-              "detail": "Office du Tourisme de Moléson, Gruyères — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
-            },
             {
               "label": "jO Mettraux : concert-vernissage",
               "detail": "Fribourg",
@@ -301,11 +253,59 @@
               "detail": "Fribourg",
               "date": "2026-10-29",
               "url": "https://www.fr.ch/dime/developpement-durable/evenements/journee-cantonale-du-developpement-durable"
+            },
+            {
+              "label": "Le sort des bibliothèques dans le contexte de la Réforme et des guerres en Europe du Nord ...",
+              "detail": "Fribourg",
+              "date": "2026-10-29",
+              "url": "https://www.fr.ch/bcu/evenements/le-sort-des-bibliotheques-dans-le-contexte-de-la-reforme-et-des-guerres-en-europe-du-nord"
+            },
+            {
+              "label": "Circus Knie",
+              "detail": "Fribourg",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/circus-knie-2026-17/"
+            },
+            {
+              "label": "Foutue bergerie – Pierre Guillois / Cie le Fils du Grand réseau",
+              "detail": "Villars-sur-Glâne — läuft, letzter Tag: 29. Oktober 2026",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/foutue-bergerie-pierre-guillois-cie-le-fils-du-grand-reseau/"
+            },
+            {
+              "label": "Regards affinés",
+              "detail": "L'Atelier, Fribourg — läuft, letzter Tag: 31. Oktober 2026",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
+            },
+            {
+              "label": "Halloween à Moléson",
+              "detail": "Office du Tourisme de Moléson, Gruyères — läuft, letzter Tag: 1. November 2026",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
+            },
+            {
+              "label": "Leonard Cohen: dix ans plus tard, toujours vivant",
+              "detail": "Bibliothèque cantonale et universitaire (BCU)",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/evenements/musique/fribourg/leonard-cohen-dix-ans-plus-tard-toujours-vivant_ABXgE3J"
+            },
+            {
+              "label": "Journée intercantonale des proches aidants",
+              "detail": "Grolley",
+              "date": "2026-10-30",
+              "url": "https://www.fr.ch/dsas/evenements/journee-intercantonale-des-proches-aidants-1"
+            },
+            {
+              "label": "Leonard Cohen : dix ans plus tard, toujours vivant",
+              "detail": "Fribourg",
+              "date": "2026-10-30",
+              "url": "https://www.fr.ch/bcu/evenements/leonard-cohen-dix-ans-plus-tard-toujours-vivant"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/freiburg/",
-          "updatedAt": "2026-10-28T13:47:49.369Z"
+          "updatedAt": "2026-10-28T19:25:39.771Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/freiburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "fr": {
       "canton": "FR",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "52",
+          "value": "49",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,54 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Foutue bergerie – Pierre Guillois / Cie le Fils du Grand réseau",
-              "detail": "Villars-sur-Glâne",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/foutue-bergerie-pierre-guillois-cie-le-fils-du-grand-reseau/"
-            },
-            {
-              "label": "L’heure du conte",
-              "detail": "Châtel-St-Denis, Châtel-Saint-Denis",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lheure-du-conte/"
-            },
-            {
-              "label": "Primes d’assurance-maladie 2027 : comment économiser ?",
-              "detail": "Fribourg",
-              "date": "2026-10-28",
-              "url": "https://www.fr.ch/dsas/sasoc/fpt/evenements/primes-dassurance-maladie-2027-comment-economiser-0"
-            },
-            {
-              "label": "COMPLET | Kiwi Club – Apprentis taxidermistes",
-              "detail": "Fribourg",
-              "date": "2026-10-28",
-              "url": "https://www.fr.ch/mhnf/evenements/complet-kiwi-club-apprentis-taxidermistes"
-            },
-            {
-              "label": "Kiwi Club – Apprentis taxidermistes",
-              "detail": "Fribourg",
-              "date": "2026-10-28",
-              "url": "https://www.fr.ch/mhnf/evenements/kiwi-club-apprentis-taxidermistes"
-            },
-            {
-              "label": "Histoires naturelles du mercredi",
-              "detail": "Fribourg",
-              "date": "2026-10-28",
-              "url": "https://www.fr.ch/mhnf/evenements/histoires-naturelles-du-mercredi-0"
-            },
-            {
-              "label": "Regards affinés",
-              "detail": "L'Atelier, Fribourg — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
-            },
-            {
-              "label": "Halloween à Moléson",
-              "detail": "Office du Tourisme de Moléson, Gruyères — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
-            },
             {
               "label": "jO Mettraux : concert-vernissage",
               "detail": "Fribourg",
@@ -406,11 +358,59 @@
               "detail": "Fribourg",
               "date": "2026-10-29",
               "url": "https://www.fr.ch/dime/developpement-durable/evenements/journee-cantonale-du-developpement-durable"
+            },
+            {
+              "label": "Le sort des bibliothèques dans le contexte de la Réforme et des guerres en Europe du Nord ...",
+              "detail": "Fribourg",
+              "date": "2026-10-29",
+              "url": "https://www.fr.ch/bcu/evenements/le-sort-des-bibliotheques-dans-le-contexte-de-la-reforme-et-des-guerres-en-europe-du-nord"
+            },
+            {
+              "label": "Circus Knie",
+              "detail": "Fribourg",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/circus-knie-2026-17/"
+            },
+            {
+              "label": "Foutue bergerie – Pierre Guillois / Cie le Fils du Grand réseau",
+              "detail": "Villars-sur-Glâne — en cours, dernier jour : 29 octobre 2026",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/foutue-bergerie-pierre-guillois-cie-le-fils-du-grand-reseau/"
+            },
+            {
+              "label": "Regards affinés",
+              "detail": "L'Atelier, Fribourg — en cours, dernier jour : 31 octobre 2026",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
+            },
+            {
+              "label": "Halloween à Moléson",
+              "detail": "Office du Tourisme de Moléson, Gruyères — en cours, dernier jour : 1er novembre 2026",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
+            },
+            {
+              "label": "Leonard Cohen: dix ans plus tard, toujours vivant",
+              "detail": "Bibliothèque cantonale et universitaire (BCU)",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/evenements/musique/fribourg/leonard-cohen-dix-ans-plus-tard-toujours-vivant_ABXgE3J"
+            },
+            {
+              "label": "Journée intercantonale des proches aidants",
+              "detail": "Grolley",
+              "date": "2026-10-30",
+              "url": "https://www.fr.ch/dsas/evenements/journee-intercantonale-des-proches-aidants-1"
+            },
+            {
+              "label": "Leonard Cohen : dix ans plus tard, toujours vivant",
+              "detail": "Fribourg",
+              "date": "2026-10-30",
+              "url": "https://www.fr.ch/bcu/evenements/leonard-cohen-dix-ans-plus-tard-toujours-vivant"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/fribourg/",
-          "updatedAt": "2026-10-28T13:47:49.369Z"
+          "updatedAt": "2026-10-28T19:25:39.771Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/fribourg/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     }
   }
 }

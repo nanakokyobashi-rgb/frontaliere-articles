@@ -4,12 +4,12 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "eventi",
-  "updatedAt": "2026-10-28T01:14:28.455Z",
-  "contentHash": "335fcf52c666cd02cb182fb5eeefb0fa27166e7cc6a84baaa510f4eb968c5cd8",
+  "updatedAt": "2026-10-29T07:40:41.678Z",
+  "contentHash": "169b15696daa8fe0e3125d2c4363c11e1dbce0c6243d71c26e30dbad74aa8816",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-27T19:25:52.214Z",
+      "updatedAt": "2026-10-28T19:25:39.771Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "77",
+          "value": "73",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "mariegottlieb – Singer-Songwriterin",
-              "detail": "DenkBar",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/st-gallen/mariegottlieb-singer-songwriterin_A6tx8LE"
+              "label": "Erzählcafé: «Geboren in…»",
+              "detail": "Kulturmuseum, St. Gallen",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/erzaehlcafe-geboren-in/"
             },
             {
-              "label": "Wenn die Schulter zwickt: Ursachen, Lösungen und Prävention",
-              "detail": "Bad Ragaz",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wenn-die-schulter-zwickt-ursachen-loesungen-und-praevention/"
+              "label": "Verleihung Anerkennungspreis 2026",
+              "detail": "Alte Fabrik Rapperswil, Rapperswil-Jona",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/verleihung-anerkennungspreis-2026/"
             },
             {
-              "label": "Abend-Vortrag «Begegnungen mit dem Fuchs»",
-              "detail": "Naturmuseum St. Gallen, St. Gallen",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/st-gallen/abend-vortrag-begegnungen-mit-dem-fuchs_A9aWPiY"
+              "label": "Gabirano - 2m10",
+              "detail": "Tonhalle Wil",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gabirano-2m10-2/"
             },
             {
-              "label": "FRANK RICHTER - #LOVEMYJOB",
-              "detail": "Grabenhalle",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/populaer/st-gallen/frank-richter-lovemyjob_AAwcK2f"
+              "label": "TRIO JANETT - Waldhaus-Variationen",
+              "detail": "*ALTEFABRIK",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rapperswil-sg/trio-janett-waldhaus-variationen_AYduZ4D"
             },
             {
-              "label": "FRANK RICHTER - #LOVEMYJOB",
-              "detail": "Grabenhalle, St. Gallen",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/frank-richter-lovemyjob-1/"
-            },
-            {
-              "label": "Gery",
-              "detail": "Restaurant Werk 1",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/gossau-sg/gery_A7qNd47"
+              "label": "TRIO JANETT - Waldhaus-Variationen",
+              "detail": "Rapperswil-Jona",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/trio-janett-waldhaus-variationen/"
             },
             {
               "label": "GEROLD SPÄTH - Künstlerbücher",
               "detail": "Alte Fabrik Rapperswil, Rapperswil-Jona — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-10-28",
+              "date": "2026-10-29",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gerold-spaeth-kuenstlerbuecher/"
             },
             {
               "label": "Claudia Valer, Werkschau",
               "detail": "Pflegeheim Heiligkreuz, St. Gallen — in corso, ultimo giorno: 8 novembre 2026",
-              "date": "2026-10-28",
+              "date": "2026-10-29",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/claudia-valer-werkschau/"
             },
             {
               "label": "Kurs: Homöopathische Notfallapotheke",
               "detail": "St. Gallen — in corso, ultimo giorno: 29 ottobre 2026",
-              "date": "2026-10-28",
+              "date": "2026-10-29",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-homoeopathische-notfallapotheke/"
             },
             {
               "label": "Fokusmodul – Meisner-Workout",
               "detail": "Switzerland Innovation Park Ost — in corso, ultimo giorno: 12 novembre 2026",
-              "date": "2026-10-28",
+              "date": "2026-10-29",
               "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
+            },
+            {
+              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
+              "detail": "Verein Klangwald, Kirchberg (SG) — in corso, ultimo giorno: 2 novembre 2026",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/san-gallo/",
-          "updatedAt": "2026-10-27T19:25:52.214Z"
+          "updatedAt": "2026-10-28T19:25:39.771Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/san-gallo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-28T01:14:28.455Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "en": {
       "canton": "SG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "77",
+          "value": "73",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "mariegottlieb – Singer-Songwriterin",
-              "detail": "DenkBar",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/st-gallen/mariegottlieb-singer-songwriterin_A6tx8LE"
+              "label": "Erzählcafé: «Geboren in…»",
+              "detail": "Kulturmuseum, St. Gallen",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/erzaehlcafe-geboren-in/"
             },
             {
-              "label": "Wenn die Schulter zwickt: Ursachen, Lösungen und Prävention",
-              "detail": "Bad Ragaz",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wenn-die-schulter-zwickt-ursachen-loesungen-und-praevention/"
+              "label": "Verleihung Anerkennungspreis 2026",
+              "detail": "Alte Fabrik Rapperswil, Rapperswil-Jona",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/verleihung-anerkennungspreis-2026/"
             },
             {
-              "label": "Abend-Vortrag «Begegnungen mit dem Fuchs»",
-              "detail": "Naturmuseum St. Gallen, St. Gallen",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/st-gallen/abend-vortrag-begegnungen-mit-dem-fuchs_A9aWPiY"
+              "label": "Gabirano - 2m10",
+              "detail": "Tonhalle Wil",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gabirano-2m10-2/"
             },
             {
-              "label": "FRANK RICHTER - #LOVEMYJOB",
-              "detail": "Grabenhalle",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/populaer/st-gallen/frank-richter-lovemyjob_AAwcK2f"
+              "label": "TRIO JANETT - Waldhaus-Variationen",
+              "detail": "*ALTEFABRIK",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rapperswil-sg/trio-janett-waldhaus-variationen_AYduZ4D"
             },
             {
-              "label": "FRANK RICHTER - # LOVEMYJ",
-              "detail": "Grabenhalle, St. Gallen",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/frank-richter-lovemyjob-1/"
-            },
-            {
-              "label": "Gery",
-              "detail": "Restaurant Werk 1",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/gossau-sg/gery_A7qNd47"
+              "label": "TRIO JANETT - Waldhaus-Variationen",
+              "detail": "Rapperswil-Jona",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/trio-janett-waldhaus-variationen/"
             },
             {
               "label": "GEROLD SPÄTH - Künstlerbücher",
               "detail": "Alte Fabrik Rapperswil, Rapperswil-Jona — ongoing, last day: 1 November 2026",
-              "date": "2026-10-28",
+              "date": "2026-10-29",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gerold-spaeth-kuenstlerbuecher/"
             },
             {
               "label": "Claudia Valer, Werkschau",
               "detail": "Pflegeheim Heiligkreuz, St. Gallen — ongoing, last day: 8 November 2026",
-              "date": "2026-10-28",
+              "date": "2026-10-29",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/claudia-valer-werkschau/"
             },
             {
               "label": "Kurs: Homöopathische Notfallapotheke",
               "detail": "St. Gallen — ongoing, last day: 29 October 2026",
-              "date": "2026-10-28",
+              "date": "2026-10-29",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-homoeopathische-notfallapotheke/"
             },
             {
               "label": "Fokusmodul-Meisner -ork",
               "detail": "Switzerland Innovation Park Ost — ongoing, last day: 12 November 2026",
-              "date": "2026-10-28",
+              "date": "2026-10-29",
               "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
+            },
+            {
+              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
+              "detail": "Verein Klangwald, Kirchberg (SG) — ongoing, last day: 2 November 2026",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/st-gallen/",
-          "updatedAt": "2026-10-27T19:25:52.214Z"
+          "updatedAt": "2026-10-28T19:25:39.771Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/st-gallen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-28T01:14:28.455Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "de": {
       "canton": "SG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "77",
+          "value": "73",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "mariegottlieb – Singer-Songwriterin",
-              "detail": "DenkBar",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/st-gallen/mariegottlieb-singer-songwriterin_A6tx8LE"
+              "label": "Erzählcafé: «Geboren in…»",
+              "detail": "Kulturmuseum, St. Gallen",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/erzaehlcafe-geboren-in/"
             },
             {
-              "label": "Wenn die Schulter zwickt: Ursachen, Lösungen und Prävention",
-              "detail": "Bad Ragaz",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wenn-die-schulter-zwickt-ursachen-loesungen-und-praevention/"
+              "label": "Verleihung Anerkennungspreis 2026",
+              "detail": "Alte Fabrik Rapperswil, Rapperswil-Jona",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/verleihung-anerkennungspreis-2026/"
             },
             {
-              "label": "Abend-Vortrag «Begegnungen mit dem Fuchs»",
-              "detail": "Naturmuseum St. Gallen, St. Gallen",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/st-gallen/abend-vortrag-begegnungen-mit-dem-fuchs_A9aWPiY"
+              "label": "Gabirano - 2m10",
+              "detail": "Tonhalle Wil",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gabirano-2m10-2/"
             },
             {
-              "label": "FRANK RICHTER - #LOVEMYJOB",
-              "detail": "Grabenhalle",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/populaer/st-gallen/frank-richter-lovemyjob_AAwcK2f"
+              "label": "TRIO JANETT - Waldhaus-Variationen",
+              "detail": "*ALTEFABRIK",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rapperswil-sg/trio-janett-waldhaus-variationen_AYduZ4D"
             },
             {
-              "label": "FRANK RICHTER- # LOVEM ⑤OB",
-              "detail": "Grabenhalle, St. Gallen",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/frank-richter-lovemyjob-1/"
-            },
-            {
-              "label": "Gery",
-              "detail": "Restaurant Werk 1",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/gossau-sg/gery_A7qNd47"
+              "label": "TRIO JANETT - Waldhaus-Variationen",
+              "detail": "Rapperswil-Jona",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/trio-janett-waldhaus-variationen/"
             },
             {
               "label": "GEROLD SPÄTH - Künstlerbücher",
               "detail": "Alte Fabrik Rapperswil, Rapperswil-Jona — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-10-28",
+              "date": "2026-10-29",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gerold-spaeth-kuenstlerbuecher/"
             },
             {
               "label": "Claudia Valer, Werkschau",
               "detail": "Pflegeheim Heiligkreuz, St. Gallen — läuft, letzter Tag: 8. November 2026",
-              "date": "2026-10-28",
+              "date": "2026-10-29",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/claudia-valer-werkschau/"
             },
             {
               "label": "Kurs: Homöopathische Notfallapotheke",
               "detail": "St. Gallen — läuft, letzter Tag: 29. Oktober 2026",
-              "date": "2026-10-28",
+              "date": "2026-10-29",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-homoeopathische-notfallapotheke/"
             },
             {
               "label": "Fokusmodul-Meisner-Grafforkout",
               "detail": "Switzerland Innovation Park Ost — läuft, letzter Tag: 12. November 2026",
-              "date": "2026-10-28",
+              "date": "2026-10-29",
               "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
+            },
+            {
+              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
+              "detail": "Verein Klangwald, Kirchberg (SG) — läuft, letzter Tag: 2. November 2026",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/st-gallen/",
-          "updatedAt": "2026-10-27T19:25:52.214Z"
+          "updatedAt": "2026-10-28T19:25:39.771Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/st-gallen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-28T01:14:28.455Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "fr": {
       "canton": "SG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "77",
+          "value": "73",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "mariegottlieb – Singer-Songwriterin",
-              "detail": "DenkBar",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/st-gallen/mariegottlieb-singer-songwriterin_A6tx8LE"
+              "label": "Erzählcafé: «Geboren in…»",
+              "detail": "Kulturmuseum, St. Gallen",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/erzaehlcafe-geboren-in/"
             },
             {
-              "label": "Wenn die Schulter zwickt: Ursachen, Lösungen und Prävention",
-              "detail": "Bad Ragaz",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wenn-die-schulter-zwickt-ursachen-loesungen-und-praevention/"
+              "label": "Verleihung Anerkennungspreis 2026",
+              "detail": "Alte Fabrik Rapperswil, Rapperswil-Jona",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/verleihung-anerkennungspreis-2026/"
             },
             {
-              "label": "Abend-Vortrag «Begegnungen mit dem Fuchs»",
-              "detail": "Naturmuseum St. Gallen, St. Gallen",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/st-gallen/abend-vortrag-begegnungen-mit-dem-fuchs_A9aWPiY"
+              "label": "Gabirano - 2m10",
+              "detail": "Tonhalle Wil",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gabirano-2m10-2/"
             },
             {
-              "label": "FRANK RICHTER - #LOVEMYJOB",
-              "detail": "Grabenhalle",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/populaer/st-gallen/frank-richter-lovemyjob_AAwcK2f"
+              "label": "TRIO JANETT - Waldhaus-Variationen",
+              "detail": "*ALTEFABRIK",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rapperswil-sg/trio-janett-waldhaus-variationen_AYduZ4D"
             },
             {
-              "label": "FRANK RICHTER - L'AMOUR c'EST MOI",
-              "detail": "Grabenhalle, St. Gallen",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/frank-richter-lovemyjob-1/"
-            },
-            {
-              "label": "Gery",
-              "detail": "Restaurant Werk 1",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/gossau-sg/gery_A7qNd47"
+              "label": "TRIO JANETT - Waldhaus-Variationen",
+              "detail": "Rapperswil-Jona",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/trio-janett-waldhaus-variationen/"
             },
             {
               "label": "GEROLD SPÄTH - Künstlerbücher",
               "detail": "Alte Fabrik Rapperswil, Rapperswil-Jona — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-10-28",
+              "date": "2026-10-29",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gerold-spaeth-kuenstlerbuecher/"
             },
             {
               "label": "Claudia Valer, Werkschau",
               "detail": "Pflegeheim Heiligkreuz, St. Gallen — en cours, dernier jour : 8 novembre 2026",
-              "date": "2026-10-28",
+              "date": "2026-10-29",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/claudia-valer-werkschau/"
             },
             {
               "label": "Kurs: Homöopathische Notfallapotheke",
               "detail": "St. Gallen — en cours, dernier jour : 29 octobre 2026",
-              "date": "2026-10-28",
+              "date": "2026-10-29",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-homoeopathische-notfallapotheke/"
             },
             {
               "label": "Module d'alimentation-Meisner-ork",
               "detail": "Switzerland Innovation Park Ost — en cours, dernier jour : 12 novembre 2026",
-              "date": "2026-10-28",
+              "date": "2026-10-29",
               "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
+            },
+            {
+              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
+              "detail": "Verein Klangwald, Kirchberg (SG) — en cours, dernier jour : 2 novembre 2026",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/saint-gall/",
-          "updatedAt": "2026-10-27T19:25:52.214Z"
+          "updatedAt": "2026-10-28T19:25:39.771Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/saint-gall/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-28T01:14:28.455Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     }
   }
 }

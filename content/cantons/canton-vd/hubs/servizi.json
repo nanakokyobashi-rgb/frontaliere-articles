@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "servizi",
-  "updatedAt": "2026-10-28T22:28:15.944Z",
-  "contentHash": "8d7c1db1a241906448b5f17a8c92ef0687f6008e7c87450858a099a3b2d3800f",
+  "updatedAt": "2026-10-29T07:40:41.678Z",
+  "contentHash": "1f31587a9a006e88fdeb8be818e227f71a6e6c240cc096be1ec0f9e2b5de44e6",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-28T15:15:36.348Z",
+      "updatedAt": "2026-10-28T21:13:47.459Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-28T11:41:09.250Z",
+      "updatedAt": "2026-10-28T21:56:57.371Z",
       "keyFacts": 0
     }
   ],
@@ -65,18 +65,23 @@
           "items": [
             {
               "label": "Lausanne",
-              "value": "12 °C",
-              "detail": "oggi da 9 a 13 °C"
+              "value": "10 °C",
+              "detail": "oggi da 9 a 12 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-28T15:15:36.348Z"
+          "updatedAt": "2026-10-28T21:13:47.459Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Le Canton de Vaud recommande la vaccination contre la grippe, le Covid-19 et le VRS aux personnes à risque",
+              "date": "2026-10-28T17:02:30.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26734-le-canton-de-vaud-recommande-la-vaccination-contre-la-grippe-le-covid-19-et-le-vrs-aux-personnes-a-risque"
+            },
             {
               "label": "Trente ans de politique d’intégration dans le canton de Vaud",
               "date": "2026-10-05T15:03:42.000Z",
@@ -101,14 +106,9 @@
               "label": "Ouverture du Campus Santé : le Canton de Vaud concrétise l’un de ses projets les plus stratégiques pour l’avenir",
               "date": "2026-08-20T13:16:18.000Z",
               "url": "https://www.vd.ch/actualites/actualite/news/26535-default-9c3c25a081"
-            },
-            {
-              "label": "Remise des clés du Campus Santé",
-              "date": "2026-08-20T12:51:31.000Z",
-              "url": "https://www.vd.ch/actualites/actualite/news/26534-remise-des-cles-du-campus-sante"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -188,7 +188,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-28T22:28:15.944Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "en": {
       "canton": "VD",
@@ -231,18 +231,23 @@
           "items": [
             {
               "label": "Lausanne",
-              "value": "12 °C",
-              "detail": "today from 9 to 13 °C"
+              "value": "10 °C",
+              "detail": "today from 9 to 12 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-28T15:15:36.348Z"
+          "updatedAt": "2026-10-28T21:13:47.459Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Le Canton de Vaud recommande la vaccination contre la grippe, le Covid-19 et le VRS aux personnes à risque",
+              "date": "2026-10-28T17:02:30.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26734-le-canton-de-vaud-recommande-la-vaccination-contre-la-grippe-le-covid-19-et-le-vrs-aux-personnes-a-risque"
+            },
             {
               "label": "Trente ans de politique d’intégration dans le canton de Vaud",
               "date": "2026-10-05T15:03:42.000Z",
@@ -267,14 +272,9 @@
               "label": "Ouverture du Campus Santé : le Canton de Vaud concrétise l’un de ses projets les plus stratégiques pour l’avenir",
               "date": "2026-08-20T13:16:18.000Z",
               "url": "https://www.vd.ch/actualites/actualite/news/26535-default-9c3c25a081"
-            },
-            {
-              "label": "Remise des clés du Campus Santé",
-              "date": "2026-08-20T12:51:31.000Z",
-              "url": "https://www.vd.ch/actualites/actualite/news/26534-remise-des-cles-du-campus-sante"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -350,7 +350,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-28T22:28:15.944Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "de": {
       "canton": "VD",
@@ -393,18 +393,23 @@
           "items": [
             {
               "label": "Lausanne",
-              "value": "12 °C",
-              "detail": "heute 9 bis 13 °C"
+              "value": "10 °C",
+              "detail": "heute 9 bis 12 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-28T15:15:36.348Z"
+          "updatedAt": "2026-10-28T21:13:47.459Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Le Canton de Vaud recommande la vaccination contre la grippe, le Covid-19 et le VRS aux personnes à risque",
+              "date": "2026-10-28T17:02:30.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26734-le-canton-de-vaud-recommande-la-vaccination-contre-la-grippe-le-covid-19-et-le-vrs-aux-personnes-a-risque"
+            },
             {
               "label": "Trente ans de politique d’intégration dans le canton de Vaud",
               "date": "2026-10-05T15:03:42.000Z",
@@ -429,14 +434,9 @@
               "label": "Ouverture du Campus Santé : le Canton de Vaud concrétise l’un de ses projets les plus stratégiques pour l’avenir",
               "date": "2026-08-20T13:16:18.000Z",
               "url": "https://www.vd.ch/actualites/actualite/news/26535-default-9c3c25a081"
-            },
-            {
-              "label": "Remise des clés du Campus Santé",
-              "date": "2026-08-20T12:51:31.000Z",
-              "url": "https://www.vd.ch/actualites/actualite/news/26534-remise-des-cles-du-campus-sante"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -512,7 +512,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-28T22:28:15.944Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "fr": {
       "canton": "VD",
@@ -555,18 +555,23 @@
           "items": [
             {
               "label": "Lausanne",
-              "value": "12 °C",
-              "detail": "aujourd’hui de 9 à 13 °C"
+              "value": "10 °C",
+              "detail": "aujourd’hui de 9 à 12 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-28T15:15:36.348Z"
+          "updatedAt": "2026-10-28T21:13:47.459Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Le Canton de Vaud recommande la vaccination contre la grippe, le Covid-19 et le VRS aux personnes à risque",
+              "date": "2026-10-28T17:02:30.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26734-le-canton-de-vaud-recommande-la-vaccination-contre-la-grippe-le-covid-19-et-le-vrs-aux-personnes-a-risque"
+            },
             {
               "label": "Trente ans de politique d’intégration dans le canton de Vaud",
               "date": "2026-10-05T15:03:42.000Z",
@@ -591,14 +596,9 @@
               "label": "Ouverture du Campus Santé : le Canton de Vaud concrétise l’un de ses projets les plus stratégiques pour l’avenir",
               "date": "2026-08-20T13:16:18.000Z",
               "url": "https://www.vd.ch/actualites/actualite/news/26535-default-9c3c25a081"
-            },
-            {
-              "label": "Remise des clés du Campus Santé",
-              "date": "2026-08-20T12:51:31.000Z",
-              "url": "https://www.vd.ch/actualites/actualite/news/26534-remise-des-cles-du-campus-sante"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -670,7 +670,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-28T22:28:15.944Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     }
   }
 }

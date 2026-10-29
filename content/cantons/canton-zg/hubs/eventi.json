@@ -4,12 +4,12 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "eventi",
-  "updatedAt": "2026-10-28T01:14:28.455Z",
-  "contentHash": "8ed5c6837199a5a69fd4e375d04ddb396c81bf2c9b23c5ba6cf3310e1408a5ab",
+  "updatedAt": "2026-10-29T07:40:41.678Z",
+  "contentHash": "20ac6afdde9a23a1546a6c755ed5eaae7304c8e24715ba4cb4b23b72fcb2aca0",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-27T19:25:52.214Z",
+      "updatedAt": "2026-10-28T19:25:39.771Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "27",
+          "value": "24",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,42 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "16. Selo-Fachtagung: Neue Blickwinkel auf psychische Erkrankungen und Burnout",
-              "detail": "Burgbachsaal, Zug",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/16-selofachtagung-neue-blickwinkel-auf-psychische-erkrankungen-und-burnout/"
-            },
-            {
-              "label": "Info Events & Open Days 2026-27",
-              "detail": "Garden Park Zug, Zug",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/events/knowledge/zug/info-events-und-open-days-2026-27_AdvwKk2"
-            },
-            {
-              "label": "Spielabend für Erwachsene",
-              "detail": "Bibliothek Zug, Zug",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spielabend-fuer-erwachsene-2/"
-            },
-            {
-              "label": "Zuger Messe 2026",
-              "detail": "Stierenmarktareal, Zug — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/fr-ch/experiences/events/zuger-messe-2026/"
-            },
-            {
-              "label": "Gemeinsam sprechen und lernen",
-              "detail": "Zug — in corso, ultimo giorno: 10 novembre 2026",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
-            },
-            {
-              "label": "Metzgete Hütten Zug",
-              "detail": "aigu Restaurant & Bar, Zug — in corso, ultimo giorno: 29 ottobre 2026",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/metzgete-huetten-zug/"
-            },
             {
               "label": "Multi-Kulti-Foodtour",
               "detail": "Bahnhof SBB, Zug",
@@ -81,6 +45,24 @@
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
             },
             {
+              "label": "Zuger Messe 2026",
+              "detail": "Stierenmarktareal, Zug — in corso, ultimo giorno: 1 novembre 2026",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/fr-ch/experiences/events/zuger-messe-2026/"
+            },
+            {
+              "label": "Gemeinsam sprechen und lernen",
+              "detail": "Zug — in corso, ultimo giorno: 10 novembre 2026",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
+            },
+            {
+              "label": "Metzgete Hütten Zug",
+              "detail": "aigu Restaurant & Bar, Zug — in corso, ultimo giorno: 29 ottobre 2026",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/metzgete-huetten-zug/"
+            },
+            {
               "label": "Zuger Märchenspaziergang: Halloween - die wahre(n) Geschichte(n)",
               "detail": "Zug",
               "date": "2026-10-30",
@@ -91,11 +73,29 @@
               "detail": "Chollerhalle",
               "date": "2026-10-30",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/ruego-und-friends-plattentaufe-y_ABtHdwh"
+            },
+            {
+              "label": "RUEGO & FRIENDS – PLATTENTAUFE «Y»",
+              "detail": "Zug",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ruego-friends-plattentaufe-y/"
+            },
+            {
+              "label": "ZuKi-Halloween",
+              "detail": "Cham",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zuki-halloween/"
+            },
+            {
+              "label": "Manuel Stahlberger - ES GEHT",
+              "detail": "Theater im Burgbachkeller",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/manuel-stahlberger-es-geht_A7Hw3u3"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zugo/",
-          "updatedAt": "2026-10-27T19:25:52.214Z"
+          "updatedAt": "2026-10-28T19:25:39.771Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/zugo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-28T01:14:28.455Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "en": {
       "canton": "ZG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "27",
+          "value": "24",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,42 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "16. Selo-Fachtagung: Neue Blickwinkel auf psychische Erkrankungen und Burnout",
-              "detail": "Burgbachsaal, Zug",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/16-selofachtagung-neue-blickwinkel-auf-psychische-erkrankungen-und-burnout/"
-            },
-            {
-              "label": "Info Events & Open Days 2026-27",
-              "detail": "Garden Park Zug, Zug",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/events/knowledge/zug/info-events-und-open-days-2026-27_AdvwKk2"
-            },
-            {
-              "label": "Spielabend für Erwachsene",
-              "detail": "Bibliothek Zug, Zug",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spielabend-fuer-erwachsene-2/"
-            },
-            {
-              "label": "Zuger Messe 2026",
-              "detail": "Stierenmarktareal, Zug — ongoing, last day: 1 November 2026",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/fr-ch/experiences/events/zuger-messe-2026/"
-            },
-            {
-              "label": "Gemeinsam sprechen und lernen",
-              "detail": "Zug — ongoing, last day: 10 November 2026",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
-            },
-            {
-              "label": "Metzgete Hütten Zug",
-              "detail": "aigu Restaurant & Bar, Zug — ongoing, last day: 29 October 2026",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/metzgete-huetten-zug/"
-            },
             {
               "label": "Multi-Kulti-Foodtour",
               "detail": "Bahnhof SBB, Zug",
@@ -186,6 +150,24 @@
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
             },
             {
+              "label": "Zuger Messe 2026",
+              "detail": "Stierenmarktareal, Zug — ongoing, last day: 1 November 2026",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/fr-ch/experiences/events/zuger-messe-2026/"
+            },
+            {
+              "label": "Gemeinsam sprechen und lernen",
+              "detail": "Zug — ongoing, last day: 10 November 2026",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
+            },
+            {
+              "label": "Metzgete Hütten Zug",
+              "detail": "aigu Restaurant & Bar, Zug — ongoing, last day: 29 October 2026",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/metzgete-huetten-zug/"
+            },
+            {
               "label": "Zuger Märchenspaziergang: Halloween - die wahre(n) Geschichte(n)",
               "detail": "Zug",
               "date": "2026-10-30",
@@ -196,11 +178,29 @@
               "detail": "Chollerhalle",
               "date": "2026-10-30",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/ruego-und-friends-plattentaufe-y_ABtHdwh"
+            },
+            {
+              "label": "RUEGO & FRIENDS – PLATTENTAUFE «Y»",
+              "detail": "Zug",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ruego-friends-plattentaufe-y/"
+            },
+            {
+              "label": "ZuKi-Halloween",
+              "detail": "Cham",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zuki-halloween/"
+            },
+            {
+              "label": "Manuel Stahlberger - ES GEHT",
+              "detail": "Theater im Burgbachkeller",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/manuel-stahlberger-es-geht_A7Hw3u3"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zug/",
-          "updatedAt": "2026-10-27T19:25:52.214Z"
+          "updatedAt": "2026-10-28T19:25:39.771Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/zug/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-28T01:14:28.455Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "de": {
       "canton": "ZG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "27",
+          "value": "24",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,42 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "16. Selo-Fachtagung: Neue Blickwinkel auf psychische Erkrankungen und Burnout",
-              "detail": "Burgbachsaal, Zug",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/16-selofachtagung-neue-blickwinkel-auf-psychische-erkrankungen-und-burnout/"
-            },
-            {
-              "label": "Info Events & Open Days 2026-27",
-              "detail": "Garden Park Zug, Zug",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/events/knowledge/zug/info-events-und-open-days-2026-27_AdvwKk2"
-            },
-            {
-              "label": "Spielabend für Erwachsene",
-              "detail": "Bibliothek Zug, Zug",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spielabend-fuer-erwachsene-2/"
-            },
-            {
-              "label": "Zuger Messe 2026",
-              "detail": "Stierenmarktareal, Zug — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/fr-ch/experiences/events/zuger-messe-2026/"
-            },
-            {
-              "label": "Gemeinsam sprechen und lernen",
-              "detail": "Zug — läuft, letzter Tag: 10. November 2026",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
-            },
-            {
-              "label": "Metzgete Hütten Zug",
-              "detail": "aigu Restaurant & Bar, Zug — läuft, letzter Tag: 29. Oktober 2026",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/metzgete-huetten-zug/"
-            },
             {
               "label": "Multi-Kulti-Foodtour",
               "detail": "Bahnhof SBB, Zug",
@@ -291,6 +255,24 @@
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
             },
             {
+              "label": "Zuger Messe 2026",
+              "detail": "Stierenmarktareal, Zug — läuft, letzter Tag: 1. November 2026",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/fr-ch/experiences/events/zuger-messe-2026/"
+            },
+            {
+              "label": "Gemeinsam sprechen und lernen",
+              "detail": "Zug — läuft, letzter Tag: 10. November 2026",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
+            },
+            {
+              "label": "Metzgete Hütten Zug",
+              "detail": "aigu Restaurant & Bar, Zug — läuft, letzter Tag: 29. Oktober 2026",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/metzgete-huetten-zug/"
+            },
+            {
               "label": "Zuger Märchenspaziergang: Halloween - die wahre(n) Geschichte(n)",
               "detail": "Zug",
               "date": "2026-10-30",
@@ -301,11 +283,29 @@
               "detail": "Chollerhalle",
               "date": "2026-10-30",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/ruego-und-friends-plattentaufe-y_ABtHdwh"
+            },
+            {
+              "label": "RUEGO & FRIENDS – PLATTENTAUFE «Y»",
+              "detail": "Zug",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ruego-friends-plattentaufe-y/"
+            },
+            {
+              "label": "ZuKi-Halloween",
+              "detail": "Cham",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zuki-halloween/"
+            },
+            {
+              "label": "Manuel Stahlberger - ES GEHT",
+              "detail": "Theater im Burgbachkeller",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/manuel-stahlberger-es-geht_A7Hw3u3"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zug/",
-          "updatedAt": "2026-10-27T19:25:52.214Z"
+          "updatedAt": "2026-10-28T19:25:39.771Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/zug/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-28T01:14:28.455Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "fr": {
       "canton": "ZG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "27",
+          "value": "24",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,42 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "16. Selo-Fachtagung: Neue Blickwinkel auf psychische Erkrankungen und Burnout",
-              "detail": "Burgbachsaal, Zug",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/16-selofachtagung-neue-blickwinkel-auf-psychische-erkrankungen-und-burnout/"
-            },
-            {
-              "label": "Info Events & Open Days 2026-27",
-              "detail": "Garden Park Zug, Zug",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/events/knowledge/zug/info-events-und-open-days-2026-27_AdvwKk2"
-            },
-            {
-              "label": "Spielabend für Erwachsene",
-              "detail": "Bibliothek Zug, Zug",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spielabend-fuer-erwachsene-2/"
-            },
-            {
-              "label": "Zuger Messe 2026",
-              "detail": "Stierenmarktareal, Zug — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/fr-ch/experiences/events/zuger-messe-2026/"
-            },
-            {
-              "label": "Gemeinsam sprechen und lernen",
-              "detail": "Zug — en cours, dernier jour : 10 novembre 2026",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
-            },
-            {
-              "label": "Cabanes de boucherie à Zoug",
-              "detail": "aigu Restaurant & Bar, Zug — en cours, dernier jour : 29 octobre 2026",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/metzgete-huetten-zug/"
-            },
             {
               "label": "Multi-Kulti-Foodtour",
               "detail": "Bahnhof SBB, Zug",
@@ -396,6 +360,24 @@
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
             },
             {
+              "label": "Zuger Messe 2026",
+              "detail": "Stierenmarktareal, Zug — en cours, dernier jour : 1er novembre 2026",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/fr-ch/experiences/events/zuger-messe-2026/"
+            },
+            {
+              "label": "Gemeinsam sprechen und lernen",
+              "detail": "Zug — en cours, dernier jour : 10 novembre 2026",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
+            },
+            {
+              "label": "Cabanes de boucherie à Zoug",
+              "detail": "aigu Restaurant & Bar, Zug — en cours, dernier jour : 29 octobre 2026",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/metzgete-huetten-zug/"
+            },
+            {
               "label": "Zuger Märchenspaziergang: Halloween - die wahre(n) Geschichte(n)",
               "detail": "Zug",
               "date": "2026-10-30",
@@ -406,11 +388,29 @@
               "detail": "Chollerhalle",
               "date": "2026-10-30",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/ruego-und-friends-plattentaufe-y_ABtHdwh"
+            },
+            {
+              "label": "RUEGO & FRIENDS – PLATTENTAUFE «Y»",
+              "detail": "Zug",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ruego-friends-plattentaufe-y/"
+            },
+            {
+              "label": "ZuKi-Halloween",
+              "detail": "Cham",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zuki-halloween/"
+            },
+            {
+              "label": "Manuel Stahlberger - ES GEHT",
+              "detail": "Theater im Burgbachkeller",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/manuel-stahlberger-es-geht_A7Hw3u3"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zoug/",
-          "updatedAt": "2026-10-27T19:25:52.214Z"
+          "updatedAt": "2026-10-28T19:25:39.771Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/zoug/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-28T01:14:28.455Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     }
   }
 }

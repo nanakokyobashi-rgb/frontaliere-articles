@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "pensioni",
-  "updatedAt": "2026-10-27T00:15:17.334Z",
-  "contentHash": "ca8298c0ce1a0228dd43763d58afdcabae4beca920d165b1215187b396b105af",
+  "updatedAt": "2026-10-29T07:40:41.678Z",
+  "contentHash": "0ccac9cb68d0a44247ee03a8922c67d8ff5551dbf054b6feb3d2ee468aef35c3",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-26T17:41:28.137Z",
+      "updatedAt": "2026-10-28T21:56:57.371Z",
       "keyFacts": 0
     }
   ],
@@ -141,6 +141,11 @@
               "url": "https://www.fr.ch/sante/invalidite-et-handicap/journees-daction-pour-les-droits-des-personnes-handicapees-2027"
             },
             {
+              "label": "Essentiel+ 2025",
+              "date": "2026-08-05",
+              "url": "https://www.ecasfr.ch/fr/Actualites/Essentiel-2025.html"
+            },
+            {
               "label": "EMS : ajustement du prix de pension et répartition des surcoûts des journées d’attente",
               "date": "2026-07-20T08:43:01.000Z",
               "url": "https://www.fr.ch/dsas/actualites/ems-ajustement-du-prix-de-pension-et-repartition-des-surcouts-des-journees-dattente"
@@ -151,7 +156,7 @@
               "url": "https://www.fr.ch/dsas/sps/foire-aux-questions-du-sps"
             }
           ],
-          "updatedAt": "2026-10-26T17:41:28.137Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -187,7 +192,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "en": {
       "canton": "FR",
@@ -301,6 +306,11 @@
               "url": "https://www.fr.ch/sante/invalidite-et-handicap/journees-daction-pour-les-droits-des-personnes-handicapees-2027"
             },
             {
+              "label": "Essentiel+ 2025",
+              "date": "2026-08-05",
+              "url": "https://www.ecasfr.ch/fr/Actualites/Essentiel-2025.html"
+            },
+            {
               "label": "EMS : ajustement du prix de pension et répartition des surcoûts des journées d’attente",
               "date": "2026-07-20T08:43:01.000Z",
               "url": "https://www.fr.ch/dsas/actualites/ems-ajustement-du-prix-de-pension-et-repartition-des-surcouts-des-journees-dattente"
@@ -311,7 +321,7 @@
               "url": "https://www.fr.ch/dsas/sps/foire-aux-questions-du-sps"
             }
           ],
-          "updatedAt": "2026-10-26T17:41:28.137Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -347,7 +357,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "de": {
       "canton": "FR",
@@ -461,6 +471,11 @@
               "url": "https://www.fr.ch/sante/invalidite-et-handicap/journees-daction-pour-les-droits-des-personnes-handicapees-2027"
             },
             {
+              "label": "Essentiel+ 2025",
+              "date": "2026-08-05",
+              "url": "https://www.ecasfr.ch/fr/Actualites/Essentiel-2025.html"
+            },
+            {
               "label": "EMS : ajustement du prix de pension et répartition des surcoûts des journées d’attente",
               "date": "2026-07-20T08:43:01.000Z",
               "url": "https://www.fr.ch/dsas/actualites/ems-ajustement-du-prix-de-pension-et-repartition-des-surcouts-des-journees-dattente"
@@ -471,7 +486,7 @@
               "url": "https://www.fr.ch/dsas/sps/foire-aux-questions-du-sps"
             }
           ],
-          "updatedAt": "2026-10-26T17:41:28.137Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -507,7 +522,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "fr": {
       "canton": "FR",
@@ -621,6 +636,11 @@
               "url": "https://www.fr.ch/sante/invalidite-et-handicap/journees-daction-pour-les-droits-des-personnes-handicapees-2027"
             },
             {
+              "label": "Essentiel+ 2025",
+              "date": "2026-08-05",
+              "url": "https://www.ecasfr.ch/fr/Actualites/Essentiel-2025.html"
+            },
+            {
               "label": "EMS : ajustement du prix de pension et répartition des surcoûts des journées d’attente",
               "date": "2026-07-20T08:43:01.000Z",
               "url": "https://www.fr.ch/dsas/actualites/ems-ajustement-du-prix-de-pension-et-repartition-des-surcouts-des-journees-dattente"
@@ -631,7 +651,7 @@
               "url": "https://www.fr.ch/dsas/sps/foire-aux-questions-du-sps"
             }
           ],
-          "updatedAt": "2026-10-26T17:41:28.137Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -667,7 +687,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-27T00:15:17.334Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     }
   }
 }

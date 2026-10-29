@@ -4,8 +4,8 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "servizi",
-  "updatedAt": "2026-10-28T22:28:15.944Z",
-  "contentHash": "1e236ec8beb87095b0b444e8679cb2a0e6d5f33fa671d65e3e5436a1b7aca785",
+  "updatedAt": "2026-10-29T07:40:41.678Z",
+  "contentHash": "b65dc8bc2e1a6e771dd46394b8b650f591ff0f1aa53a384cf0af3438348ade46",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-28T15:15:36.348Z",
+      "updatedAt": "2026-10-28T21:13:47.459Z",
       "keyFacts": 0
     }
   ],
@@ -60,12 +60,12 @@
           "items": [
             {
               "label": "Schaffhausen",
-              "value": "12 °C",
-              "detail": "oggi da 6 a 12 °C"
+              "value": "6 °C",
+              "detail": "oggi da 6 a 9 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-28T15:15:36.348Z"
+          "updatedAt": "2026-10-28T21:13:47.459Z"
         }
       ],
       "curatedArticles": [
@@ -145,7 +145,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-28T22:28:15.944Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "en": {
       "canton": "SH",
@@ -188,12 +188,12 @@
           "items": [
             {
               "label": "Schaffhausen",
-              "value": "12 °C",
-              "detail": "today from 6 to 12 °C"
+              "value": "6 °C",
+              "detail": "today from 6 to 9 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-28T15:15:36.348Z"
+          "updatedAt": "2026-10-28T21:13:47.459Z"
         }
       ],
       "curatedArticles": [
@@ -269,7 +269,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-28T22:28:15.944Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "de": {
       "canton": "SH",
@@ -312,12 +312,12 @@
           "items": [
             {
               "label": "Schaffhausen",
-              "value": "12 °C",
-              "detail": "heute 6 bis 12 °C"
+              "value": "6 °C",
+              "detail": "heute 6 bis 9 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-28T15:15:36.348Z"
+          "updatedAt": "2026-10-28T21:13:47.459Z"
         }
       ],
       "curatedArticles": [
@@ -393,7 +393,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-28T22:28:15.944Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "fr": {
       "canton": "SH",
@@ -436,12 +436,12 @@
           "items": [
             {
               "label": "Schaffhausen",
-              "value": "12 °C",
-              "detail": "aujourd’hui de 6 à 12 °C"
+              "value": "6 °C",
+              "detail": "aujourd’hui de 6 à 9 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-28T15:15:36.348Z"
+          "updatedAt": "2026-10-28T21:13:47.459Z"
         }
       ],
       "curatedArticles": [
@@ -513,7 +513,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-28T22:28:15.944Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     }
   }
 }

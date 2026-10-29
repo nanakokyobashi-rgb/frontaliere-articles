@@ -4,12 +4,12 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-10-28T17:02:29.143Z",
-  "contentHash": "78e4704bb009c66e34ea3edb097dc56c85dd87599dc855ead8fb85e8ee3617d3",
+  "updatedAt": "2026-10-29T07:40:41.678Z",
+  "contentHash": "6b0d9097f8052d2d246454615c6e8abf8a0aeacff93d2714b9a29057ff56ba95",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-28T13:47:49.369Z",
+      "updatedAt": "2026-10-28T19:25:39.771Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "346",
+          "value": "347",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Herbsttage mit Kürbisschnitzen",
-              "detail": "Naturstation Silberweide, Mönchaltorf",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbsttage-mit-kuerbisschnitzen/"
+              "label": "RECOLLECTION – CASPER FAASSEN",
+              "detail": "Bildhalle Zürich, Zürich",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/recollection-casper-faassen_AymMLHv"
             },
             {
-              "label": "Buchstart",
-              "detail": "Gemeindebibliothek, Urdorf",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/buchstart-17/"
+              "label": "En route: «Partizipation stärken durch Co-Creation»",
+              "detail": "Zurich, Zürich",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/en-route-partizipation-staerken-durch-co-creation/"
             },
             {
-              "label": "Feuerwehr-Nachmittag",
-              "detail": "Bibliothek Effretikon",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/feuerwehr-nachmittag/"
+              "label": "World-building through sounds and Creative Audio Description",
+              "detail": "Zurich, Zürich",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/world-building-through-sounds-and-creative-audio-description/"
             },
             {
-              "label": "Halloween-Guetzli verzieren – kreativ & schaurig fein",
-              "detail": "Dürnten",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/halloweenguetzli-verzieren-kreativ-schaurig-fein/"
+              "label": "Wasser-Gymnastik 60+ / Organisiert vom Frauenverein",
+              "detail": "Urdorf",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wassergymnastik-60-organisiert-vom-frauenverein-23/"
             },
             {
-              "label": "Solar Energy for Everyone, Everywhere",
-              "detail": "Dübendorf",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/solarenergie-fuer-alle-ueberall/"
+              "label": "ARTdeSUISSE Zurigo, edizione autunnale 2026, Galleria Trittli-Gasse",
+              "detail": "Galerie Trittli-Gasse, Zürich",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/artdesuisse-zuerich-herbstausgabe-2026-galerie-trittligasse/"
             },
             {
-              "label": "Ladeinfrastruktur für E-LKW und E-Baumaschinen im Alltag",
-              "detail": "Schneider Umweltservice AG, Volketswil",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/volketswil/ladeinfrastruktur-fuer-e-lkw-und-e-baumaschinen-im-alltag_A3wrKg7"
+              "label": "Einladung zum Wild Abend",
+              "detail": "Schlieren",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einladung-zum-wild-abend/"
             },
             {
-              "label": "Informationsveranstaltung «starte!»: Wie modernisiere ich mein Gebäude richtig?",
-              "detail": "Stadthaussaal Effretikon, Illnau-Effretikon",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/informationsveranstaltung-starte-wie-modernisiere-ich-mein-gebaeude-richtig/"
+              "label": "Führungen",
+              "detail": "Winterthur",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fuehrungen/"
             },
             {
-              "label": "Sexarbeitsfeindlichkeit",
-              "detail": "Schweizerisches Nationalmuseum / Landesmuseum Zürich, Zürich",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sexarbeitsfeindlichkeit/"
+              "label": "Schulprojekt: Mittendrin",
+              "detail": "Zurich, Zürich",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schulprojekt-mittendrin/"
             },
             {
-              "label": "Café philosophique",
-              "detail": "Kloten",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-philosophique/"
+              "label": "Workshop Kerzen verzieren",
+              "detail": "Uster",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-kerzen-verzieren/"
             },
             {
-              "label": "Wildäpfel",
-              "detail": "Lavaterhaus, Zürich",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wildaepfel/"
+              "label": "Choir Workshop: Earworms for the Rich to Fall in Love With Getting Poor",
+              "detail": "Migros Museum für Gegenwartskunst",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/choir-workshop-earworms-for-the-rich-to-fall-in-love-with-getting-poor_ARCSqak"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zurigo/",
-          "updatedAt": "2026-10-28T13:47:49.369Z"
+          "updatedAt": "2026-10-28T19:25:39.771Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "en": {
       "canton": "ZH",
@@ -133,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "346",
+          "value": "347",
           "note": "from the site’s events calendar"
         }
       ],
@@ -144,69 +144,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Herbsttage mit Kürbisschnitzen",
-              "detail": "Naturstation Silberweide, Mönchaltorf",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbsttage-mit-kuerbisschnitzen/"
+              "label": "RECOLLECTION – CASPER FAASSEN",
+              "detail": "Bildhalle Zürich, Zürich",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/recollection-casper-faassen_AymMLHv"
             },
             {
-              "label": "Buchstart",
-              "detail": "Gemeindebibliothek, Urdorf",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/buchstart-17/"
+              "label": "En route: «Partizipation stärken durch Co-Creation»",
+              "detail": "Zurich, Zürich",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/en-route-partizipation-staerken-durch-co-creation/"
             },
             {
-              "label": "Feuerwehr-Nachmittag",
-              "detail": "Bibliothek Effretikon",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/feuerwehr-nachmittag/"
+              "label": "World-building through sounds and Creative Audio Description",
+              "detail": "Zurich, Zürich",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/world-building-through-sounds-and-creative-audio-description/"
             },
             {
-              "label": "Halloween-Guetzli verzieren – kreativ & schaurig fein",
-              "detail": "Dürnten",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/halloweenguetzli-verzieren-kreativ-schaurig-fein/"
+              "label": "Wasser-Gymnastik 60+ / Organisiert vom Frauenverein",
+              "detail": "Urdorf",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wassergymnastik-60-organisiert-vom-frauenverein-23/"
             },
             {
-              "label": "Solar Energy for Everyone, Everywhere",
-              "detail": "Dübendorf",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/solarenergie-fuer-alle-ueberall/"
+              "label": "ARTdeSUISSE Zurich, Fall 2026 Edition, Galerie Trittli-Gasse",
+              "detail": "Galerie Trittli-Gasse, Zürich",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/artdesuisse-zuerich-herbstausgabe-2026-galerie-trittligasse/"
             },
             {
-              "label": "Ladeinfrastruktur für E-LKW und E-Baumaschinen im Alltag",
-              "detail": "Schneider Umweltservice AG, Volketswil",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/volketswil/ladeinfrastruktur-fuer-e-lkw-und-e-baumaschinen-im-alltag_A3wrKg7"
+              "label": "Einladung zum Wild Abend",
+              "detail": "Schlieren",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einladung-zum-wild-abend/"
             },
             {
-              "label": "Informationsveranstaltung \"Starte!\": Wie moderniere ich mein Gebäude richtig?",
-              "detail": "Stadthaussaal Effretikon, Illnau-Effretikon",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/informationsveranstaltung-starte-wie-modernisiere-ich-mein-gebaeude-richtig/"
+              "label": "Führungen",
+              "detail": "Winterthur",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fuehrungen/"
             },
             {
-              "label": "Sexarbeitsfeindlichkeit",
-              "detail": "Schweizerisches Nationalmuseum / Landesmuseum Zürich, Zürich",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sexarbeitsfeindlichkeit/"
+              "label": "Schulprojekt: Mittendrin",
+              "detail": "Zurich, Zürich",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schulprojekt-mittendrin/"
             },
             {
-              "label": "Café philosophique",
-              "detail": "Kloten",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-philosophique/"
+              "label": "Workshop Kerzen verzieren",
+              "detail": "Uster",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-kerzen-verzieren/"
             },
             {
-              "label": "Wildäpfel",
-              "detail": "Lavaterhaus, Zürich",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wildaepfel/"
+              "label": "Choir Workshop: Earworms for the Rich to Fall in Love With Getting Poor",
+              "detail": "Migros Museum für Gegenwartskunst",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/choir-workshop-earworms-for-the-rich-to-fall-in-love-with-getting-poor_ARCSqak"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zurich/",
-          "updatedAt": "2026-10-28T13:47:49.369Z"
+          "updatedAt": "2026-10-28T19:25:39.771Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "de": {
       "canton": "ZH",
@@ -244,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "346",
+          "value": "347",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -255,69 +255,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Herbsttage mit Kürbisschnitzen",
-              "detail": "Naturstation Silberweide, Mönchaltorf",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbsttage-mit-kuerbisschnitzen/"
+              "label": "RECOLLECTION – CASPER FAASSEN",
+              "detail": "Bildhalle Zürich, Zürich",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/recollection-casper-faassen_AymMLHv"
             },
             {
-              "label": "Buchstart",
-              "detail": "Gemeindebibliothek, Urdorf",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/buchstart-17/"
+              "label": "En route: «Partizipation stärken durch Co-Creation»",
+              "detail": "Zurich, Zürich",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/en-route-partizipation-staerken-durch-co-creation/"
             },
             {
-              "label": "Feuerwehr-Nachmittag",
-              "detail": "Bibliothek Effretikon",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/feuerwehr-nachmittag/"
+              "label": "World-building through sounds and Creative Audio Description",
+              "detail": "Zurich, Zürich",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/world-building-through-sounds-and-creative-audio-description/"
             },
             {
-              "label": "Halloween-Guetzli verzieren – kreativ & schaurig fein",
-              "detail": "Dürnten",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/halloweenguetzli-verzieren-kreativ-schaurig-fein/"
+              "label": "Wasser-Gymnastik 60+ / Organisiert vom Frauenverein",
+              "detail": "Urdorf",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wassergymnastik-60-organisiert-vom-frauenverein-23/"
             },
             {
-              "label": "Solar Energy for Everyone, Everywhere",
-              "detail": "Dübendorf",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/solarenergie-fuer-alle-ueberall/"
+              "label": "ARTdeSUISSE Zürich, Herbstausgabe 2026, Galerie Trittli-Gasse",
+              "detail": "Galerie Trittli-Gasse, Zürich",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/artdesuisse-zuerich-herbstausgabe-2026-galerie-trittligasse/"
             },
             {
-              "label": "Ladeinfrastruktur für E-LKW und E-Baumaschinen im Alltag",
-              "detail": "Schneider Umweltservice AG, Volketswil",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/volketswil/ladeinfrastruktur-fuer-e-lkw-und-e-baumaschinen-im-alltag_A3wrKg7"
+              "label": "Einladung zum Wild Abend",
+              "detail": "Schlieren",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einladung-zum-wild-abend/"
             },
             {
-              "label": "Informationsveranstaltung «Start!\": Modernisiere ich mein geb richtig?",
-              "detail": "Stadthaussaal Effretikon, Illnau-Effretikon",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/informationsveranstaltung-starte-wie-modernisiere-ich-mein-gebaeude-richtig/"
+              "label": "Führungen",
+              "detail": "Winterthur",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fuehrungen/"
             },
             {
-              "label": "Sexarbeitsfeindlichkeit",
-              "detail": "Schweizerisches Nationalmuseum / Landesmuseum Zürich, Zürich",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sexarbeitsfeindlichkeit/"
+              "label": "Schulprojekt: Mittendrin",
+              "detail": "Zurich, Zürich",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schulprojekt-mittendrin/"
             },
             {
-              "label": "Café philosophique",
-              "detail": "Kloten",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-philosophique/"
+              "label": "Workshop Kerzen verzieren",
+              "detail": "Uster",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-kerzen-verzieren/"
             },
             {
-              "label": "Wildäpfel",
-              "detail": "Lavaterhaus, Zürich",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wildaepfel/"
+              "label": "Choir Workshop: Earworms for the Rich to Fall in Love With Getting Poor",
+              "detail": "Migros Museum für Gegenwartskunst",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/choir-workshop-earworms-for-the-rich-to-fall-in-love-with-getting-poor_ARCSqak"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zurich/",
-          "updatedAt": "2026-10-28T13:47:49.369Z"
+          "updatedAt": "2026-10-28T19:25:39.771Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "fr": {
       "canton": "ZH",
@@ -355,7 +355,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "346",
+          "value": "347",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -366,69 +366,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Herbsttage mit Kürbisschnitzen",
-              "detail": "Naturstation Silberweide, Mönchaltorf",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbsttage-mit-kuerbisschnitzen/"
+              "label": "RECOLLECTION – CASPER FAASSEN",
+              "detail": "Bildhalle Zürich, Zürich",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/recollection-casper-faassen_AymMLHv"
             },
             {
-              "label": "Buchstart",
-              "detail": "Gemeindebibliothek, Urdorf",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/buchstart-17/"
+              "label": "En route: «Partizipation stärken durch Co-Creation»",
+              "detail": "Zurich, Zürich",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/en-route-partizipation-staerken-durch-co-creation/"
             },
             {
-              "label": "Feuerwehr-Nachmittag",
-              "detail": "Bibliothek Effretikon",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/feuerwehr-nachmittag/"
+              "label": "World-building through sounds and Creative Audio Description",
+              "detail": "Zurich, Zürich",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/world-building-through-sounds-and-creative-audio-description/"
             },
             {
-              "label": "Halloween-Guetzli verzieren – kreativ & schaurig fein",
-              "detail": "Dürnten",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/halloweenguetzli-verzieren-kreativ-schaurig-fein/"
+              "label": "Wasser-Gymnastik 60+ / Organisiert vom Frauenverein",
+              "detail": "Urdorf",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wassergymnastik-60-organisiert-vom-frauenverein-23/"
             },
             {
-              "label": "Solar Energy for Everyone, Everywhere",
-              "detail": "Dübendorf",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/solarenergie-fuer-alle-ueberall/"
+              "label": "ARTdeSUISSE Zurich, édition d'automne 2026, Galerie Trittli-Gasse",
+              "detail": "Galerie Trittli-Gasse, Zürich",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/artdesuisse-zuerich-herbstausgabe-2026-galerie-trittligasse/"
             },
             {
-              "label": "Ladeinfrastruktur für E-LKW und E-Baumaschinen im Alltag",
-              "detail": "Schneider Umweltservice AG, Volketswil",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/volketswil/ladeinfrastruktur-fuer-e-lkw-und-e-baumaschinen-im-alltag_A3wrKg7"
+              "label": "Einladung zum Wild Abend",
+              "detail": "Schlieren",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einladung-zum-wild-abend/"
             },
             {
-              "label": "Informationsveranstaltung « starte ! » : Wie modernisiere ich mein Gebäude richtig ?",
-              "detail": "Stadthaussaal Effretikon, Illnau-Effretikon",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/informationsveranstaltung-starte-wie-modernisiere-ich-mein-gebaeude-richtig/"
+              "label": "Führungen",
+              "detail": "Winterthur",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fuehrungen/"
             },
             {
-              "label": "Sexarbeitsfeindlichkeit",
-              "detail": "Schweizerisches Nationalmuseum / Landesmuseum Zürich, Zürich",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sexarbeitsfeindlichkeit/"
+              "label": "Schulprojekt: Mittendrin",
+              "detail": "Zurich, Zürich",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schulprojekt-mittendrin/"
             },
             {
-              "label": "Café philosophique",
-              "detail": "Kloten",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-philosophique/"
+              "label": "Workshop Kerzen verzieren",
+              "detail": "Uster",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-kerzen-verzieren/"
             },
             {
-              "label": "Wildäpfel",
-              "detail": "Lavaterhaus, Zürich",
-              "date": "2026-10-28",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wildaepfel/"
+              "label": "Choir Workshop: Earworms for the Rich to Fall in Love With Getting Poor",
+              "detail": "Migros Museum für Gegenwartskunst",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/choir-workshop-earworms-for-the-rich-to-fall-in-love-with-getting-poor_ARCSqak"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zurich/",
-          "updatedAt": "2026-10-28T13:47:49.369Z"
+          "updatedAt": "2026-10-28T19:25:39.771Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     }
   }
 }

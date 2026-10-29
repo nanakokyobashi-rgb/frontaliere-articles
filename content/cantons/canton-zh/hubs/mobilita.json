@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "mobilita",
-  "updatedAt": "2026-10-28T11:40:30.046Z",
-  "contentHash": "9987d9d1f940f0edfd82a2a6971d35af52d72ff3af46fec8e14fdc4687ca30b2",
+  "updatedAt": "2026-10-29T07:40:41.678Z",
+  "contentHash": "33689a56315e54ef4a0e9b917c9873335b56e4dbbfbf41e204cb6649c53209c9",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-28T06:23:27.523Z",
+      "updatedAt": "2026-10-29T01:18:28.468Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-27T21:31:39.250Z",
+      "updatedAt": "2026-10-28T21:56:57.371Z",
       "keyFacts": 0
     }
   ],
@@ -37,13 +37,13 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "16",
-          "note": "segnalazioni aggiornate: 28 ottobre 2026"
+          "value": "15",
+          "note": "segnalazioni aggiornate: 29 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "20",
-          "note": "segnalazioni aggiornate: 28 ottobre 2026"
+          "value": "17",
+          "note": "segnalazioni aggiornate: 29 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -117,12 +117,6 @@
               "date": "2026-09-08T13:26:00.000Z"
             },
             {
-              "label": "A51 Zürich -> Aeroporto Svincolo autostradale Werft Situazione: entrato-uscito chiusa cantiere",
-              "value": "Chiusura",
-              "detail": "fine prevista: 29 ottobre 2026",
-              "date": "2026-09-28T19:00:00.000Z"
-            },
-            {
               "label": "A51 Zürich -> Aeroporto tra Svincolo autostradale Glattbrugg E Svincolo autostradale Aeroporto Situazione: chiusa cantiere",
               "value": "Chiusura",
               "detail": "fine prevista: 6 novembre 2026",
@@ -157,10 +151,16 @@
               "value": "Chiusura",
               "detail": "fine prevista: 30 ottobre 2026",
               "date": "2026-10-21T06:11:00.000Z"
+            },
+            {
+              "label": "A51 Zürich <-> Aeroporto tra Svincolo autostradale Opfikon E Svincolo autostradale Glattbrugg Situazione: chiusa cantiere, lunghezza [km] 1.0 Limitazione del traffico: corsia chiusa Aggiunta 1…",
+              "value": "Chiusura",
+              "detail": "fine prevista: 16 novembre 2026",
+              "date": "2026-10-21T14:13:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-28T06:23:27.523Z"
+          "updatedAt": "2026-10-29T01:18:28.468Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -198,7 +198,7 @@
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/10/stadtrat-befremdet-ueber-entscheid-des-regierungsrats-zur-rosengartenstrasse.html"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -282,7 +282,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-28T11:40:30.046Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "en": {
       "canton": "ZH",
@@ -297,13 +297,13 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "16",
-          "note": "reports as of 28 October 2026"
+          "value": "15",
+          "note": "reports as of 29 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "20",
-          "note": "reports as of 28 October 2026"
+          "value": "17",
+          "note": "reports as of 29 October 2026"
         }
       ],
       "dataBlocks": [
@@ -377,12 +377,6 @@
               "date": "2026-09-08T13:26:00.000Z"
             },
             {
-              "label": "A51 Zürich -> Aeroporto Svincolo autostradale Werft Situazione: entrato-uscito chiusa cantiere",
-              "value": "Closure",
-              "detail": "until 29 October 2026",
-              "date": "2026-09-28T19:00:00.000Z"
-            },
-            {
               "label": "A51 Zürich -> Aeroporto tra Svincolo autostradale Glattbrugg E Svincolo autostradale Aeroporto Situazione: chiusa cantiere",
               "value": "Closure",
               "detail": "until 6 November 2026",
@@ -417,10 +411,16 @@
               "value": "Closure",
               "detail": "until 30 October 2026",
               "date": "2026-10-21T06:11:00.000Z"
+            },
+            {
+              "label": "A51 Zürich <-> Aeroporto tra Svincolo autostradale Opfikon E Svincolo autostradale Glattbrugg Situazione: chiusa cantiere, lunghezza [km] 1.0 Limitazione del traffico: corsia chiusa Aggiunta 1…",
+              "value": "Closure",
+              "detail": "until 16 November 2026",
+              "date": "2026-10-21T14:13:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-28T06:23:27.523Z"
+          "updatedAt": "2026-10-29T01:18:28.468Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -458,7 +458,7 @@
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/10/stadtrat-befremdet-ueber-entscheid-des-regierungsrats-zur-rosengartenstrasse.html"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -542,7 +542,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-28T11:40:30.046Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "de": {
       "canton": "ZH",
@@ -557,13 +557,13 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "16",
-          "note": "Meldungen vom 28. Oktober 2026"
+          "value": "15",
+          "note": "Meldungen vom 29. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "20",
-          "note": "Meldungen vom 28. Oktober 2026"
+          "value": "17",
+          "note": "Meldungen vom 29. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -637,12 +637,6 @@
               "date": "2026-09-08T13:26:00.000Z"
             },
             {
-              "label": "A51 Zürich -> Flughafen Anschluss Werft Sachlage: Ein- und Ausfahrt gesperrt Baustelle",
-              "value": "Sperrung",
-              "detail": "bis 29. Oktober 2026",
-              "date": "2026-09-28T19:00:00.000Z"
-            },
-            {
               "label": "A51 Zürich -> Flughafen zwischen Anschluss Glattbrugg und Anschluss Flughafen Sachlage: Strecke gesperrt Baustelle",
               "value": "Sperrung",
               "detail": "bis 6. November 2026",
@@ -677,10 +671,16 @@
               "value": "Sperrung",
               "detail": "bis 30. Oktober 2026",
               "date": "2026-10-21T06:11:00.000Z"
+            },
+            {
+              "label": "A51 Zürich <-> Flughafen zwischen Anschluss Opfikon und Anschluss Glattbrugg Sachlage: Strecke gesperrt Baustelle, Länge [km] 1.0 Verkehrsführung: Fahrstreifen gesperrt Zusatz 1: vorübergehende…",
+              "value": "Sperrung",
+              "detail": "bis 16. November 2026",
+              "date": "2026-10-21T14:13:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-28T06:23:27.523Z"
+          "updatedAt": "2026-10-29T01:18:28.468Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -718,7 +718,7 @@
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/10/stadtrat-befremdet-ueber-entscheid-des-regierungsrats-zur-rosengartenstrasse.html"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -802,7 +802,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-28T11:40:30.046Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "fr": {
       "canton": "ZH",
@@ -817,13 +817,13 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "16",
-          "note": "signalements au 28 octobre 2026"
+          "value": "15",
+          "note": "signalements au 29 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "20",
-          "note": "signalements au 28 octobre 2026"
+          "value": "17",
+          "note": "signalements au 29 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -897,12 +897,6 @@
               "date": "2026-09-08T13:26:00.000Z"
             },
             {
-              "label": "A51 Zurich -> Aéroport Jonction autoroutière Werft Situation: Entrée et sortie verrouillées travaux",
-              "value": "Fermeture",
-              "detail": "jusqu’au 29 octobre 2026",
-              "date": "2026-09-28T19:00:00.000Z"
-            },
-            {
               "label": "A51 Zurich -> Aéroport entre Jonction autoroutière Glattbrugg et Jonction autoroutière Aéroport Situation: fermé travaux",
               "value": "Fermeture",
               "detail": "jusqu’au 6 novembre 2026",
@@ -937,10 +931,16 @@
               "value": "Fermeture",
               "detail": "jusqu’au 30 octobre 2026",
               "date": "2026-10-21T06:11:00.000Z"
+            },
+            {
+              "label": "A51 Zurich <-> Aéroport entre Jonction autoroutière Opfikon et Jonction autoroutière Glattbrugg Situation: fermé travaux, longueur [km] 1.0 Gestion du trafic: voie fermée Complément 1: limitation…",
+              "value": "Fermeture",
+              "detail": "jusqu’au 16 novembre 2026",
+              "date": "2026-10-21T14:13:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-28T06:23:27.523Z"
+          "updatedAt": "2026-10-29T01:18:28.468Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -978,7 +978,7 @@
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/10/stadtrat-befremdet-ueber-entscheid-des-regierungsrats-zur-rosengartenstrasse.html"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -1062,7 +1062,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-28T11:40:30.046Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     }
   }
 }

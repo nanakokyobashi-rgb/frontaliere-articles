@@ -4,8 +4,8 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "servizi",
-  "updatedAt": "2026-10-28T22:28:15.944Z",
-  "contentHash": "e0e8e46a0c34b795013bbfe256fb5ea8caab384a032f9ab1af9554a0255151d3",
+  "updatedAt": "2026-10-29T07:40:41.678Z",
+  "contentHash": "2bc4bf464d397e795cb931917127d17c1d00d3bd8f094f552981ab2e72ff4218",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-28T12:51:45.580Z",
+      "updatedAt": "2026-10-28T22:34:51.153Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-28T15:15:36.348Z",
+      "updatedAt": "2026-10-28T21:13:47.459Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-28T11:41:09.250Z",
+      "updatedAt": "2026-10-28T21:56:57.371Z",
       "keyFacts": 0
     }
   ],
@@ -77,7 +77,7 @@
             },
             {
               "label": "SZ6810",
-              "value": "1500 CHF",
+              "value": "1700 CHF",
               "detail": "offerta attuale",
               "date": "2026-11-10T21:00:00.000Z",
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1605"
@@ -92,7 +92,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-28T12:51:45.580Z"
+          "updatedAt": "2026-10-28T22:34:51.153Z"
         },
         {
           "id": "meteo",
@@ -101,18 +101,23 @@
           "items": [
             {
               "label": "Schwyz",
-              "value": "11 °C",
+              "value": "10 °C",
               "detail": "oggi da 9 a 11 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-28T15:15:36.348Z"
+          "updatedAt": "2026-10-28T21:13:47.459Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Wechsel in der operativen Führung",
+              "date": "2026-10-28",
+              "url": "https://spital-lachen.ch/ueber-uns/aktuelles/wechsel-in-der-operativen-fuehrung/"
+            },
             {
               "label": "Depression stärker ins öffentliche Bewusstsein rücken",
               "date": "2026-10-07",
@@ -129,7 +134,7 @@
               "url": "https://spital-lachen.ch/ueber-uns/aktuelles/staerkung-des-adipositaszentrums-mit-neuer-leitung/"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -209,7 +214,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-28T22:28:15.944Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "en": {
       "canton": "SZ",
@@ -259,7 +264,7 @@
             },
             {
               "label": "SZ6810",
-              "value": "1,500 CHF",
+              "value": "1,700 CHF",
               "detail": "current bid",
               "date": "2026-11-10T21:00:00.000Z",
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1605"
@@ -274,7 +279,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-28T12:51:45.580Z"
+          "updatedAt": "2026-10-28T22:34:51.153Z"
         },
         {
           "id": "meteo",
@@ -283,18 +288,23 @@
           "items": [
             {
               "label": "Schwyz",
-              "value": "11 °C",
+              "value": "10 °C",
               "detail": "today from 9 to 11 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-28T15:15:36.348Z"
+          "updatedAt": "2026-10-28T21:13:47.459Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Wechsel in der operativen Führung",
+              "date": "2026-10-28",
+              "url": "https://spital-lachen.ch/ueber-uns/aktuelles/wechsel-in-der-operativen-fuehrung/"
+            },
             {
               "label": "Depression stärker ins öffentliche Bewusstsein rücken",
               "date": "2026-10-07",
@@ -311,7 +321,7 @@
               "url": "https://spital-lachen.ch/ueber-uns/aktuelles/staerkung-des-adipositaszentrums-mit-neuer-leitung/"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -387,7 +397,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-28T22:28:15.944Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "de": {
       "canton": "SZ",
@@ -437,7 +447,7 @@
             },
             {
               "label": "SZ6810",
-              "value": "1’500 CHF",
+              "value": "1’700 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-11-10T21:00:00.000Z",
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1605"
@@ -452,7 +462,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-28T12:51:45.580Z"
+          "updatedAt": "2026-10-28T22:34:51.153Z"
         },
         {
           "id": "meteo",
@@ -461,18 +471,23 @@
           "items": [
             {
               "label": "Schwyz",
-              "value": "11 °C",
+              "value": "10 °C",
               "detail": "heute 9 bis 11 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-28T15:15:36.348Z"
+          "updatedAt": "2026-10-28T21:13:47.459Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Wechsel in der operativen Führung",
+              "date": "2026-10-28",
+              "url": "https://spital-lachen.ch/ueber-uns/aktuelles/wechsel-in-der-operativen-fuehrung/"
+            },
             {
               "label": "Depression stärker ins öffentliche Bewusstsein rücken",
               "date": "2026-10-07",
@@ -489,7 +504,7 @@
               "url": "https://spital-lachen.ch/ueber-uns/aktuelles/staerkung-des-adipositaszentrums-mit-neuer-leitung/"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -565,7 +580,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-28T22:28:15.944Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "fr": {
       "canton": "SZ",
@@ -615,7 +630,7 @@
             },
             {
               "label": "SZ6810",
-              "value": "1 500 CHF",
+              "value": "1 700 CHF",
               "detail": "offre actuelle",
               "date": "2026-11-10T21:00:00.000Z",
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1605"
@@ -630,7 +645,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-28T12:51:45.580Z"
+          "updatedAt": "2026-10-28T22:34:51.153Z"
         },
         {
           "id": "meteo",
@@ -639,18 +654,23 @@
           "items": [
             {
               "label": "Schwyz",
-              "value": "11 °C",
+              "value": "10 °C",
               "detail": "aujourd’hui de 9 à 11 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-28T15:15:36.348Z"
+          "updatedAt": "2026-10-28T21:13:47.459Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Wechsel in der operativen Führung",
+              "date": "2026-10-28",
+              "url": "https://spital-lachen.ch/ueber-uns/aktuelles/wechsel-in-der-operativen-fuehrung/"
+            },
             {
               "label": "Depression stärker ins öffentliche Bewusstsein rücken",
               "date": "2026-10-07",
@@ -667,7 +687,7 @@
               "url": "https://spital-lachen.ch/ueber-uns/aktuelles/staerkung-des-adipositaszentrums-mit-neuer-leitung/"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -739,7 +759,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-28T22:28:15.944Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     }
   }
 }

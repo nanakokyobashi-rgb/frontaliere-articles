@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "mobilita",
-  "updatedAt": "2026-10-28T17:02:29.143Z",
-  "contentHash": "17a2731da5a2ff9e3ee850c810afdc89fbe60fdc58a28c321ee4d207cdae7154",
+  "updatedAt": "2026-10-29T07:40:41.678Z",
+  "contentHash": "c15d828c8d507429419016bfc6d3c9a2aa62205f4be1d924c7deceee0b91a640",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-28T13:37:22.501Z",
+      "updatedAt": "2026-10-29T01:18:28.468Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-28T11:41:09.250Z",
+      "updatedAt": "2026-10-28T21:56:57.371Z",
       "keyFacts": 0
     }
   ],
@@ -37,13 +37,13 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "24",
-          "note": "segnalazioni aggiornate: 28 ottobre 2026"
+          "value": "25",
+          "note": "segnalazioni aggiornate: 29 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "20",
-          "note": "segnalazioni aggiornate: 28 ottobre 2026"
+          "value": "19",
+          "note": "segnalazioni aggiornate: 29 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -141,13 +141,18 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-28T13:37:22.501Z"
+          "updatedAt": "2026-10-29T01:18:28.468Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Domodossola, a Nosere cambia la viabilità per i lavori alla nuova rotonda",
+              "date": "2026-10-28T18:10:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/28/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/domodossola-cambia-la-viabilita-in-regione-nosere-per-i-lavori-alla-nuova-rotonda.html"
+            },
             {
               "label": "Autostrada A26, chiusure notturne tra Gravellona, Baveno e Arona",
               "date": "2026-10-28T08:50:00.000Z",
@@ -172,14 +177,9 @@
               "label": "Autovelox in Piemonte, ecco dove saranno i controlli dal 26 ottobre al 1° novembre",
               "date": "2026-10-26T09:43:46.000Z",
               "url": "https://www.ossolanews.it/2026/10/26/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/autovelox-in-piemonte-ecco-dove-saranno-i-controlli-dal-26-ottobre-al-1-novembre.html"
-            },
-            {
-              "label": "Statale 337, previste quattro giornate di chiusura tra Isella e la dogana svizzera",
-              "date": "2026-10-25T16:00:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/25/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/statale-337-previste-quattro-giornate-di-chiusura-tra-isella-e-la-dogana-svizzera-1.html"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -249,7 +249,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "en": {
       "canton": "VS",
@@ -264,13 +264,13 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "24",
-          "note": "reports as of 28 October 2026"
+          "value": "25",
+          "note": "reports as of 29 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "20",
-          "note": "reports as of 28 October 2026"
+          "value": "19",
+          "note": "reports as of 29 October 2026"
         }
       ],
       "dataBlocks": [
@@ -368,13 +368,18 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-28T13:37:22.501Z"
+          "updatedAt": "2026-10-29T01:18:28.468Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Domodossola, a Nosere cambia la viabilità per i lavori alla nuova rotonda",
+              "date": "2026-10-28T18:10:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/28/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/domodossola-cambia-la-viabilita-in-regione-nosere-per-i-lavori-alla-nuova-rotonda.html"
+            },
             {
               "label": "Autostrada A26, chiusure notturne tra Gravellona, Baveno e Arona",
               "date": "2026-10-28T08:50:00.000Z",
@@ -399,14 +404,9 @@
               "label": "Autovelox in Piemonte, ecco dove saranno i controlli dal 26 ottobre al 1° novembre",
               "date": "2026-10-26T09:43:46.000Z",
               "url": "https://www.ossolanews.it/2026/10/26/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/autovelox-in-piemonte-ecco-dove-saranno-i-controlli-dal-26-ottobre-al-1-novembre.html"
-            },
-            {
-              "label": "Statale 337, previste quattro giornate di chiusura tra Isella e la dogana svizzera",
-              "date": "2026-10-25T16:00:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/25/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/statale-337-previste-quattro-giornate-di-chiusura-tra-isella-e-la-dogana-svizzera-1.html"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -476,7 +476,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "de": {
       "canton": "VS",
@@ -491,13 +491,13 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "24",
-          "note": "Meldungen vom 28. Oktober 2026"
+          "value": "25",
+          "note": "Meldungen vom 29. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "20",
-          "note": "Meldungen vom 28. Oktober 2026"
+          "value": "19",
+          "note": "Meldungen vom 29. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -595,13 +595,18 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-28T13:37:22.501Z"
+          "updatedAt": "2026-10-29T01:18:28.468Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Domodossola, a Nosere cambia la viabilità per i lavori alla nuova rotonda",
+              "date": "2026-10-28T18:10:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/28/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/domodossola-cambia-la-viabilita-in-regione-nosere-per-i-lavori-alla-nuova-rotonda.html"
+            },
             {
               "label": "Autostrada A26, chiusure notturne tra Gravellona, Baveno e Arona",
               "date": "2026-10-28T08:50:00.000Z",
@@ -626,14 +631,9 @@
               "label": "Autovelox in Piemonte, ecco dove saranno i controlli dal 26 ottobre al 1° novembre",
               "date": "2026-10-26T09:43:46.000Z",
               "url": "https://www.ossolanews.it/2026/10/26/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/autovelox-in-piemonte-ecco-dove-saranno-i-controlli-dal-26-ottobre-al-1-novembre.html"
-            },
-            {
-              "label": "Statale 337, previste quattro giornate di chiusura tra Isella e la dogana svizzera",
-              "date": "2026-10-25T16:00:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/25/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/statale-337-previste-quattro-giornate-di-chiusura-tra-isella-e-la-dogana-svizzera-1.html"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -703,7 +703,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "fr": {
       "canton": "VS",
@@ -718,13 +718,13 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "24",
-          "note": "signalements au 28 octobre 2026"
+          "value": "25",
+          "note": "signalements au 29 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "20",
-          "note": "signalements au 28 octobre 2026"
+          "value": "19",
+          "note": "signalements au 29 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -822,13 +822,18 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-28T13:37:22.501Z"
+          "updatedAt": "2026-10-29T01:18:28.468Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Domodossola, a Nosere cambia la viabilità per i lavori alla nuova rotonda",
+              "date": "2026-10-28T18:10:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/28/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/domodossola-cambia-la-viabilita-in-regione-nosere-per-i-lavori-alla-nuova-rotonda.html"
+            },
             {
               "label": "Autostrada A26, chiusure notturne tra Gravellona, Baveno e Arona",
               "date": "2026-10-28T08:50:00.000Z",
@@ -853,14 +858,9 @@
               "label": "Autovelox in Piemonte, ecco dove saranno i controlli dal 26 ottobre al 1° novembre",
               "date": "2026-10-26T09:43:46.000Z",
               "url": "https://www.ossolanews.it/2026/10/26/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/autovelox-in-piemonte-ecco-dove-saranno-i-controlli-dal-26-ottobre-al-1-novembre.html"
-            },
-            {
-              "label": "Statale 337, previste quattro giornate di chiusura tra Isella e la dogana svizzera",
-              "date": "2026-10-25T16:00:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/25/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/statale-337-previste-quattro-giornate-di-chiusura-tra-isella-e-la-dogana-svizzera-1.html"
             }
           ],
-          "updatedAt": "2026-10-28T11:41:09.250Z"
+          "updatedAt": "2026-10-28T21:56:57.371Z"
         }
       ],
       "curatedArticles": [
@@ -930,7 +930,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-28T17:02:29.143Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     }
   }
 }

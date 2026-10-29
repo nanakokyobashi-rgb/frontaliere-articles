@@ -4,8 +4,8 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "servizi",
-  "updatedAt": "2026-10-28T22:28:15.944Z",
-  "contentHash": "80b0ae5295d178017f08f6811e80841880b3ccf7beca48d7ef57f3a8b3da8cf8",
+  "updatedAt": "2026-10-29T07:40:41.678Z",
+  "contentHash": "8d618d2958a041050e242a533e613036090c72cf6192a3f77e18b58fcdbf241a",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-28T15:15:36.348Z",
+      "updatedAt": "2026-10-28T21:13:47.459Z",
       "keyFacts": 0
     }
   ],
@@ -55,12 +55,12 @@
           "items": [
             {
               "label": "Glarus",
-              "value": "11 °C",
+              "value": "9 °C",
               "detail": "oggi da 9 a 12 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-28T15:15:36.348Z"
+          "updatedAt": "2026-10-28T21:13:47.459Z"
         }
       ],
       "curatedArticles": [
@@ -101,16 +101,16 @@
           "date": "2026-08-17T02:02:39.630Z"
         },
         {
-          "title": "Permesso C Glarona: requisiti, procedure e domanda",
-          "url": "/articoli-svizzera/permesso-c-glarona-come-richiederlo/",
-          "excerpt": "Residenza permanente in Cantone Glarona: guida ai requisiti del permesso C, conoscenze linguistiche, integrazione e procedura di domanda presso le autorità cantonali.",
-          "date": "2026-09-04T15:52:04.016Z"
+          "title": "Permesso di domicilio C nel Cantone di Glarona: requisiti e domanda",
+          "url": "/articoli-svizzera/permesso-domicilio-c-canton-glarona-requisiti-e-domanda/",
+          "excerpt": "Cosa serve per ottenere un permesso di domicilio C nel Cantone di Glarona?",
+          "date": "2026-08-17T03:18:43.556Z"
         },
         {
-          "title": "Permesso C Glarona: requisiti e come fare domanda",
-          "url": "/articoli-svizzera/domanda-permesso-c-glarona-guida/",
-          "excerpt": "Guida completa al permesso di domicilio C nel canton Glarona: anni di residenza richiesti, integrazione, procedure di domanda e passaggio verso la naturalizzazione.",
-          "date": "2026-09-04T15:11:21.894Z"
+          "title": "Permesso L di breve durata nel Canton Glarona: validità e proroga",
+          "url": "/articoli-svizzera/permesso-l-canton-glarona/",
+          "excerpt": "Il permesso L di breve durata nel Canton Glarona è un documento importante per i lavoratori frontalieri.",
+          "date": "2026-08-17T02:10:15.573Z"
         }
       ],
       "latestCantonArticles": [],
@@ -140,7 +140,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-28T22:28:15.944Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "en": {
       "canton": "GL",
@@ -178,12 +178,12 @@
           "items": [
             {
               "label": "Glarus",
-              "value": "11 °C",
+              "value": "9 °C",
               "detail": "today from 9 to 12 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-28T15:15:36.348Z"
+          "updatedAt": "2026-10-28T21:13:47.459Z"
         }
       ],
       "curatedArticles": [
@@ -224,16 +224,16 @@
           "date": "2026-08-17T02:02:39.630Z"
         },
         {
-          "title": "Glarus C Permit: Requirements, Procedures and Application",
-          "url": "/en/swiss-articles/residence-permit-c-glarus-how-to-apply/",
-          "excerpt": "Permanent residence in Canton Glarus: guide to C permit requirements, language skills, integration and application procedure with cantonal authorities.",
-          "date": "2026-09-04T15:52:04.016Z"
+          "title": "Residence permit C in the Canton of Glarus: requirements and application",
+          "url": "/en/swiss-articles/c-permit-canton-glarus-requirements-and-application/",
+          "excerpt": "What does it take to obtain a residence permit C in the Canton of Glarus?",
+          "date": "2026-08-17T03:18:43.556Z"
         },
         {
-          "title": "Glarus C Permit: Requirements and How to Apply",
-          "url": "/en/swiss-articles/residence-permit-c-glarus-application-guide/",
-          "excerpt": "Complete guide to residence permit C in the canton of Glarus: years of residence required, integration, application procedures and transition to naturalization.",
-          "date": "2026-09-04T15:11:21.894Z"
+          "title": "Short-term permit L in the canton of Glarus: validity and extension",
+          "url": "/en/swiss-articles/permit-l-canton-glarus/",
+          "excerpt": "The short-term L permit in the Glarus Canton is an important document for frontier workers.",
+          "date": "2026-08-17T02:10:15.573Z"
         }
       ],
       "latestCantonArticles": [],
@@ -259,7 +259,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-28T22:28:15.944Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "de": {
       "canton": "GL",
@@ -297,12 +297,12 @@
           "items": [
             {
               "label": "Glarus",
-              "value": "11 °C",
+              "value": "9 °C",
               "detail": "heute 9 bis 12 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-28T15:15:36.348Z"
+          "updatedAt": "2026-10-28T21:13:47.459Z"
         }
       ],
       "curatedArticles": [
@@ -343,16 +343,16 @@
           "date": "2026-08-17T02:02:39.630Z"
         },
         {
-          "title": "Genehmigung C Glarus: Anforderungen, Verfahren und Antrag",
-          "url": "/de/schweiz-artikel/aufenthaltserlaubnis-c-glarus-beantragen/",
-          "excerpt": "Ständiger Wohnsitz im Kanton Glarus: Leitfaden zu den Anforderungen der C-Bewilligung, Sprachkenntnisse, Integration und Antragsverfahren bei den kantonalen Behörden.",
-          "date": "2026-09-04T15:52:04.016Z"
+          "title": "Niederlassungsbewilligung C im Kanton Glarus: Voraussetzungen und Antrag",
+          "url": "/de/schweiz-artikel/c-bewilligung-kanton-glarus-anforderungen-und-antragstellung/",
+          "excerpt": "Was braucht man, um eine Niederlassungsbewilligung C im Kanton Glarus zu erhalten?",
+          "date": "2026-08-17T03:18:43.556Z"
         },
         {
-          "title": "Führerschein C Glarus: Voraussetzungen und Beantragung",
-          "url": "/de/schweiz-artikel/aufenthaltsbewilligung-c-glarus-antrag-leitfaden/",
-          "excerpt": "Vollständiger Leitfaden zur Niederlassungsbewilligung C im Kanton Glarus: erforderliche Aufenthaltsjahre, Integration, Antragsverfahren und Übergang zur Einbürgerung.",
-          "date": "2026-09-04T15:11:21.894Z"
+          "title": "Kurzaufenthaltsbewilligung L im Kanton Glarus: Gültigkeit und Verlängerung",
+          "url": "/de/schweiz-artikel/aufenthaltstitel-l-kanton-glarus/",
+          "excerpt": "Die Kurzzeitbewilligung L im Kanton Glarus ist ein wichtiges Dokument für Grenzgänger.",
+          "date": "2026-08-17T02:10:15.573Z"
         }
       ],
       "latestCantonArticles": [],
@@ -378,7 +378,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-28T22:28:15.944Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     },
     "fr": {
       "canton": "GL",
@@ -416,12 +416,12 @@
           "items": [
             {
               "label": "Glarus",
-              "value": "11 °C",
+              "value": "9 °C",
               "detail": "aujourd’hui de 9 à 12 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-28T15:15:36.348Z"
+          "updatedAt": "2026-10-28T21:13:47.459Z"
         }
       ],
       "curatedArticles": [
@@ -462,16 +462,16 @@
           "date": "2026-08-17T02:02:39.630Z"
         },
         {
-          "title": "Permis C Glaris : exigences, procédures et demande",
-          "url": "/fr/articles-suisse/permis-residence-c-glaris-demander/",
-          "excerpt": "Résidence permanente dans le canton de Glaris : guide des exigences du permis C, des connaissances linguistiques, de l'intégration et de la procédure de demande auprès des autorités cantonales.",
-          "date": "2026-09-04T15:52:04.016Z"
+          "title": "Permis de séjour C dans le canton de Glaris : exigences et demande",
+          "url": "/fr/articles-suisse/permis-de-domicile-c-canton-de-glaris-exigences-et-demande/",
+          "excerpt": "Que faut-il pour obtenir un permis de séjour C dans le canton de Glaris ?",
+          "date": "2026-08-17T03:18:43.556Z"
         },
         {
-          "title": "Permis C Glaris : exigences et comment postuler",
-          "url": "/fr/articles-suisse/permis-residence-c-glaris-demande-guide/",
-          "excerpt": "Guide complet du permis de séjour C dans le canton de Glaris : années de résidence requises, intégration, procédures de demande et passage vers la naturalisation.",
-          "date": "2026-09-04T15:11:21.894Z"
+          "title": "Permis L de courte durée dans le canton de Glaris : validité et prolongation",
+          "url": "/fr/articles-suisse/permis-l-canton-de-glaris/",
+          "excerpt": "Le permis L de courte durée dans le canton de Glaris est un document important pour les travailleurs frontaliers.",
+          "date": "2026-08-17T02:10:15.573Z"
         }
       ],
       "latestCantonArticles": [],
@@ -493,7 +493,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-28T22:28:15.944Z"
+      "updatedAt": "2026-10-29T07:40:41.678Z"
     }
   }
 }
