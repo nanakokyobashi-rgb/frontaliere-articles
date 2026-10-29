@@ -894,6 +894,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-saphir-idrogeno-verde-axpo': {
+    title: 'MS Saphir: passaggio previsto all\'idrogeno verde nel 2027',
+    description: 'SGV prevede la riconversione della MS Saphir: motori elettrici, cella a combustibile e idrogeno verde per le corse nel bacino di Lucerna dal 26 marzo',
+    keywords: 'frontalieri, ticino, svizzera, italia, saphir, passaggio, previsto, idrogeno',
+    ogTitle: 'MS Saphir passa all\'idrogeno verde dal 2027',
+    ogDescription: 'La MS Saphir, progettata per 300 persone, dovrebbe sostituire i vecchi generatori diesel con motori elettrici, cella a combustibile e serbatoio di idrogeno. Il rientro nel bacino di Lucerna è previsto per il 26 marzo 2027.',
+    canonicalPath: '/articoli-argovia/saphir-idrogeno-verde-axpo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "MS Saphir: passaggio previsto all'idrogeno verde nel 2027",
+      "description": "SGV prevede la riconversione della MS Saphir: motori elettrici, cella a combustibile e idrogeno verde per le corse nel bacino di Lucerna dal 26 marzo",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-saphir-idrogeno-verde-axpo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-29T17:53:51+00:00",
+      "dateModified": "2026-10-29T17:53:51+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-argovia/saphir-idrogeno-verde-axpo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

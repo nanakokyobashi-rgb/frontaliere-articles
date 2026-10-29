@@ -72,6 +72,9 @@ const blogMetaCantonAgEn: Record<string, string> = {
     'blog.article.fislisbach-acqua-potabile.title': 'Fislisbach: drinking water scarce, Baden continues to supply it',
     'blog.article.fislisbach-acqua-potabile.excerpt': 'By mid-October 2026, weekly withdrawal had fallen to 7\'136 m³, 60,4% less than the 18\'035 m³ at the end of July.',
     'blog.article.fislisbach-acqua-potabile.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.saphir-idrogeno-verde-axpo.title': 'MS Saphir: planned switch to green hydrogen in 2027',
+    'blog.article.saphir-idrogeno-verde-axpo.excerpt': 'SGV is having the MS Saphir converted by Shiptec AG: its return to service in the Lake Lucerne basin is scheduled for March 26, 2027.',
+    'blog.article.saphir-idrogeno-verde-axpo.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonAgEn;

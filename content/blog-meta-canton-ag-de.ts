@@ -72,6 +72,9 @@ const blogMetaCantonAgDe: Record<string, string> = {
     'blog.article.fislisbach-acqua-potabile.title': 'Fislisbach: Trinkwasser knapp, Baden liefert weiterhin',
     'blog.article.fislisbach-acqua-potabile.excerpt': 'Mitte Oktober 2026 war die wöchentliche Entnahme auf 7\'136 m³ gesunken, 60,4% weniger als die 18\'035 m³ von Ende Juli.',
     'blog.article.fislisbach-acqua-potabile.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.saphir-idrogeno-verde-axpo.title': 'MS Saphir: geplanter Umstieg auf grünen Wasserstoff im Jahr 2027',
+    'blog.article.saphir-idrogeno-verde-axpo.excerpt': 'Die SGV lässt die MS Saphir von Shiptec AG umrüsten: Die Wiederaufnahme des Fahrbetriebs im Luzerner Seebecken ist für den 26.',
+    'blog.article.saphir-idrogeno-verde-axpo.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonAgDe;

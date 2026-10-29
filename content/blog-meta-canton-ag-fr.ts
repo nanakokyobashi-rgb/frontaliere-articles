@@ -72,6 +72,9 @@ const blogMetaCantonAgFr: Record<string, string> = {
     'blog.article.fislisbach-acqua-potabile.title': 'Fislisbach : l’eau potable se fait rare, Baden continue de fournir',
     'blog.article.fislisbach-acqua-potabile.excerpt': 'À la mi-octobre 2026, le prélèvement hebdomadaire était tombé à 7\'136 m³, soit 60,4% de moins que les 18\'035 m³ de fin juillet.',
     'blog.article.fislisbach-acqua-potabile.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.saphir-idrogeno-verde-axpo.title': 'MS Saphir : passage prévu à l’hydrogène vert en 2027',
+    'blog.article.saphir-idrogeno-verde-axpo.excerpt': 'La SGV fait reconvertir la MS Saphir par Shiptec AG : le retour en service sur le bassin de Lucerne est prévu pour le 26 mars 2027.',
+    'blog.article.saphir-idrogeno-verde-axpo.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonAgFr;

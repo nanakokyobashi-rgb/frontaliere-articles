@@ -259,4 +259,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'saphir-idrogeno-verde-axpo',
+ category: 'novita',
+ date: '2026-10-29T17:53:51.044Z',
+ image: '/images/blog/article-saphir-idrogeno-verde-axpo.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['AG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
