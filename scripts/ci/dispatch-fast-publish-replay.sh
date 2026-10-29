@@ -114,13 +114,13 @@ query_state() {
   local after_id="${2:-}"
   jq -r --arg after "$after_id" --arg title "$display_title" '
     [.[] | select($after == "" or ((.databaseId | tonumber) > ($after | tonumber)))] as $after_runs
-    | [$after_runs[] | select((.displayTitle // "") | endswith(" / dry=false"))] as $publishing_runs
+    | [$after_runs[] | select((.displayTitle // "") | test(" / dry=false(?: / c=[^/]+)?$"))] as $publishing_runs
     | [$after_runs[] | select((.displayTitle // "") == $title)] as $legacy_runs
     | if any($publishing_runs[]; .status != "completed") or any($legacy_runs[]; .status != "completed") then "pending"
       elif any($publishing_runs[]; .status == "completed" and .conclusion == "success") then "accepted"
       elif any($legacy_runs[]; .status == "completed") then "ambiguous"
       elif any($publishing_runs[]; .status == "completed" and .conclusion != "success") then "failed"
-      elif any($after_runs[]; (.displayTitle // "") | endswith(" / dry=true")) then "dry"
+      elif any($after_runs[]; (.displayTitle // "") | test(" / dry=true(?: / c=[^/]+)?$")) then "dry"
       elif ($after_runs | length) == 0 then "missing"
       else "ambiguous"
       end
@@ -132,7 +132,7 @@ latest_run_id() {
 }
 
 earliest_pending_run_id() {
-  jq -r --arg title "$display_title" '[.[] | select(((.displayTitle // "") == $title or ((.displayTitle // "") | endswith(" / dry=false"))) and .status != "completed") | .databaseId | tonumber] | min // 0' <<< "$1"
+  jq -r --arg title "$display_title" '[.[] | select(((.displayTitle // "") == $title or ((.displayTitle // "") | test(" / dry=false(?: / c=[^/]+)?$"))) and .status != "completed") | .databaseId | tonumber] | min // 0' <<< "$1"
 }
 
 for attempt in 1 2; do

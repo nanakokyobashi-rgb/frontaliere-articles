@@ -14,9 +14,10 @@ name: reconcile-section-pages
 # release verificata rende quella chiave osservabile nel giro seguente. Qui si
 # chiudono entrambi i buchi, con un CAP PER SEZIONE (D8) cosi' che un cantone
 # con molti buchi non consumi il giro degli altri. Quando l'edge flip e'
-# pendente, le run di backfill sono staged senza replay individuale: il replay
-# API globale parte solo dopo la barriera di tutte le run e quando non restano
-# leftover oltre il cap.
+# pendente, le run di backfill sono staged senza replay individuale. Il
+# reconcile ritorna subito; la conclusione di ogni child riapre il controllo
+# event-driven e l'ultimo giro che dimostra la superficie completa accoda il
+# replay API globale. Nessun runner resta occupato ad aspettare altri runner.
 #
 # Finche' nessuna sezione e' live il rilevamento e' un no-op (zero sezioni).
 
@@ -37,6 +38,11 @@ on:
         description: 'Articoli massimi per sezione in questo run'
         required: false
         default: '3'
+      retry_pending:
+        description: 'Riapri una barriera coorte transitoria'
+        required: false
+        default: false
+        type: boolean
 
 concurrency:
   group: reconcile-section-pages
@@ -87,32 +93,99 @@ jobs:
             } >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          echo "dispatch=$(jq -r '.counts.dispatch // 0' "$RUNNER_TEMP/reconcile-sections.json")" >> "$GITHUB_OUTPUT"
-          echo "pending_edge_flip=$(jq -r '.pendingEdgeFlip // false' "$RUNNER_TEMP/reconcile-sections.json")" >> "$GITHUB_OUTPUT"
-          echo "api_release_commit=$(jq -r '.apiCommit // empty' "$RUNNER_TEMP/reconcile-sections.json")" >> "$GITHUB_OUTPUT"
-          echo "source_commit=$source_commit" >> "$GITHUB_OUTPUT"
-          echo "skip=$(jq -r 'if .skip then \"true\" else \"false\" end' "$RUNNER_TEMP/reconcile-sections.json")" >> "$GITHUB_OUTPUT"
-          echo "leftover=$(jq -r '.counts.leftover // 0' "$RUNNER_TEMP/reconcile-sections.json")" >> "$GITHUB_OUTPUT"
-          echo "unknown=$(jq -r '.counts.unknown // 0' "$RUNNER_TEMP/reconcile-sections.json")" >> "$GITHUB_OUTPUT"
-          echo "manifest_unknown=$(jq -r '.counts.manifestUnknown // 0' "$RUNNER_TEMP/reconcile-sections.json")" >> "$GITHUB_OUTPUT"
-          echo "landing_content_stale=$(jq -r '.counts.landingContentStale // 0' "$RUNNER_TEMP/reconcile-sections.json")" >> "$GITHUB_OUTPUT"
-          echo 'head_guard=true' >> "$GITHUB_OUTPUT"
+          {
+            echo "dispatch=$(jq -r '.counts.dispatch // 0' "$RUNNER_TEMP/reconcile-sections.json")"
+            echo "pending_edge_flip=$(jq -r '.pendingEdgeFlip // false' "$RUNNER_TEMP/reconcile-sections.json")"
+            echo "api_release_commit=$(jq -r '.apiCommit // empty' "$RUNNER_TEMP/reconcile-sections.json")"
+            echo "source_commit=$source_commit"
+            echo "skip=$(jq -r 'if .skip then \"true\" else \"false\" end' "$RUNNER_TEMP/reconcile-sections.json")"
+            echo "leftover=$(jq -r '.counts.leftover // 0' "$RUNNER_TEMP/reconcile-sections.json")"
+            echo "unknown=$(jq -r '.counts.unknown // 0' "$RUNNER_TEMP/reconcile-sections.json")"
+            echo "manifest_unknown=$(jq -r '.counts.manifestUnknown // 0' "$RUNNER_TEMP/reconcile-sections.json")"
+            echo "landing_content_stale=$(jq -r '.counts.landingContentStale // 0' "$RUNNER_TEMP/reconcile-sections.json")"
+            echo 'head_guard=true'
+          } >> "$GITHUB_OUTPUT"
 
-      # Niente catena stretta: se l'innesco era a sua volta un dispatch (un
-      # backfill di questo workflow, o un bootstrap manuale) si rileva e basta,
-      # e il prossimo giro lo fa il cron. E' la stessa regola di
-      # reconcile-article-shards.yml.
+      # Niente catena stretta: solo i child con un nonce emesso da questo
+      # workflow o dalla recovery coordinata possono riaprire il controllo
+      # event-driven. Il run coordinatore che ha accettato i dispatch resta un
+      # normale producer event e non puo' armare il replay globale prima dei
+      # child. E' la stessa regola di reconcile-article-shards.yml.
       - name: Resolve backfill mode
         id: mode
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          WORKFLOW_RUN_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+          WORKFLOW_RUN_EVENT: ${{ github.event.workflow_run.event }}
+          WORKFLOW_RUN_DISPLAY_TITLE: ${{ github.event.workflow_run.display_title }}
+          PENDING_EDGE_FLIP: ${{ steps.detect.outputs.pending_edge_flip }}
+          RETRY_PENDING: ${{ inputs.retry_pending }}
         run: |
           set -euo pipefail
           allow=true
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.dry_run }}" != "false" ]; then
+          event_replay=false
+          schedule_retry=false
+          trusted_child=false
+          child_nonce=''
+          child_cohort=''
+          if [ "$EVENT_NAME" = "workflow_dispatch" ] && [ "${{ inputs.dry_run }}" != "false" ]; then
             allow=false; echo "dispatch disabilitato: dry_run manuale"
-          elif [ "${{ github.event_name }}" = "workflow_run" ] && [ "${{ github.event.workflow_run.event }}" = "workflow_dispatch" ]; then
-            allow=false; echo "dispatch disabilitato: l'innesco era esso stesso un dispatch, ci pensa il cron"
+          elif [ "$EVENT_NAME" = "workflow_run" ]; then
+            if [ "$WORKFLOW_RUN_EVENT" = "workflow_dispatch" ]; then
+              if [[ "$WORKFLOW_RUN_DISPLAY_TITLE" =~ ^cover-publish-section[[:space:]]/[[:space:]][^/]+[[:space:]]/[[:space:]]nonce=([^[:space:]]+)[[:space:]]/[[:space:]]dry=false[[:space:]]/[[:space:]]c=([^[:space:]]+)$ ]]; then
+                child_nonce="${BASH_REMATCH[1]}"
+                child_cohort="${BASH_REMATCH[2]}"
+                if [[ "$child_nonce" =~ ^reconcile-[0-9]+-[^[:space:]]+$ ]] \
+                  && [[ "$child_cohort" =~ ^reconcile-[0-9]+-n[1-9][0-9]*$ ]]; then
+                  trusted_child=true
+                elif [[ "$child_nonce" =~ ^stale-staged-[a-f0-9]{12}-[^[:space:]]+-[a-f0-9]{16}$ ]] \
+                  && [[ "$child_cohort" =~ ^stale-staged-[0-9]+-n[1-9][0-9]*$ ]]; then
+                  trusted_child=true
+                elif [[ "$child_nonce" =~ ^stale-late-[a-f0-9]{12}-[^[:space:]]+-[a-f0-9]{16}$ ]] \
+                  && [[ "$child_cohort" =~ ^stale-late-[0-9]+-[^[:space:]]+-n1$ ]]; then
+                  trusted_child=true
+                fi
+              fi
+            fi
+            if [ "$WORKFLOW_RUN_CONCLUSION" = "success" ] && [ "$trusted_child" = 'true' ]; then
+              event_replay=true
+            fi
+            if [ "$trusted_child" = 'true' ]; then
+              allow=false; echo "dispatch disabilitato: il child ha gia' eseguito il backfill; controllo event-driven"
+            fi
+          elif [ "$PENDING_EDGE_FLIP" = 'true' ] \
+            && { [ "$EVENT_NAME" = "schedule" ] || [ "$RETRY_PENDING" = 'true' ]; }; then
+            schedule_retry=true
+            echo "replay retry esplicito: flip API pendente"
           fi
-          echo "allow=$allow" >> "$GITHUB_OUTPUT"
+          {
+            echo "allow=$allow"
+            echo "event_replay=$event_replay"
+            echo "schedule_retry=$schedule_retry"
+            echo "trusted_child=$trusted_child"
+            echo "child_nonce=$child_nonce"
+            echo "child_cohort=$child_cohort"
+          } >> "$GITHUB_OUTPUT"
+
+      # Un evento workflow_run con il solo titolo non dimostra che il child
+      # abbia pubblicato la revisione osservata: il coordinatore del child puo'
+      # terminare verde subito dopo aver accettato un dispatch. Il child deve
+      # quindi lasciare un artifact fresco, con nonce e source commit coerenti;
+      # in caso contrario il replay globale resta chiuso.
+      - name: Verify complete event-driven child cohort
+        id: child_artifact
+        if: steps.mode.outputs.event_replay == 'true' || steps.mode.outputs.schedule_retry == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          WORKFLOW_RUN_ID: ${{ github.event.workflow_run.id }}
+          WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          CHILD_NONCE: ${{ steps.mode.outputs.child_nonce }}
+          CHILD_COHORT: ${{ steps.mode.outputs.child_cohort }}
+          EXPECTED_SOURCE_COMMIT: ${{ steps.detect.outputs.source_commit }}
+          MODE: ${{ steps.mode.outputs.schedule_retry == 'true' && 'schedule' || 'event' }}
+        run: |
+          bash scripts/ci/verify-fast-publish-section-cohort.sh
 
       # Il backfill e' un publisher a tutti gli effetti: eredita gli stessi
       # interruttori del fast-publish, anche quando il reconcile nasce da
@@ -132,7 +205,7 @@ jobs:
 
       - name: Prepare Firebase credentials for producer dispatch
         if: >-
-          steps.mode.outputs.allow == 'true' &&
+          (steps.mode.outputs.allow == 'true' || steps.mode.outputs.event_replay == 'true') &&
           steps.arm.outputs.allow == 'true' &&
           steps.detect.outputs.head_guard == 'true' &&
           (steps.detect.outputs.dispatch != '0' || steps.detect.outputs.pending_edge_flip == 'true')
@@ -149,7 +222,7 @@ jobs:
 
       - name: Load producer token from Remote Config
         if: >-
-          steps.mode.outputs.allow == 'true' &&
+          (steps.mode.outputs.allow == 'true' || steps.mode.outputs.event_replay == 'true') &&
           steps.arm.outputs.allow == 'true' &&
           steps.detect.outputs.head_guard == 'true' &&
           (steps.detect.outputs.dispatch != '0' || steps.detect.outputs.pending_edge_flip == 'true')
@@ -169,8 +242,12 @@ jobs:
             exit 1
           fi
           export GH_TOKEN="$runtime_pat"
-          nonce_file="$RUNNER_TEMP/reconcile-backfill-nonces.tsv"
-          : > "$nonce_file"
+          dispatch_cohort_size="$(jq '[.sections[] | select(.dispatch)] | length' "$RUNNER_TEMP/reconcile-sections.json")"
+          if ! [[ "$dispatch_cohort_size" =~ ^[1-9][0-9]*$ ]]; then
+            echo "::error::dimensione coorte reconcile non valida: $dispatch_cohort_size"
+            exit 1
+          fi
+          dispatch_cohort="reconcile-${GITHUB_RUN_ID}-n${dispatch_cohort_size}"
           fail=0
           while IFS=$'\t' read -r section ids missing_page_paths known_missing_page_paths; do
             [ -n "$section" ] || continue
@@ -183,107 +260,43 @@ jobs:
               -f "known_missing_page_paths=$known_missing_page_paths"
               -f 'bootstrap=false'
               -f 'dry_run=false'
+              -f 'replay_api_after_publish=false'
+              -f 'coordinated_recovery=true'
+              -f "source_commit=$SOURCE_COMMIT"
+              -f "source_main_commit=$SOURCE_COMMIT"
               -f "dispatch_nonce=$dispatch_nonce"
+              -f "dispatch_cohort=$dispatch_cohort"
             )
             if [ "$PENDING_EDGE_FLIP" = 'true' ]; then
               args+=(
                 -f 'allow_deferred_live_release=true'
                 -f "api_release_commit=$API_RELEASE_COMMIT"
-                -f "source_commit=$SOURCE_COMMIT"
-                -f "source_main_commit=$SOURCE_COMMIT"
               )
             fi
             if ! gh workflow run fast-publish-section.yml --repo "$GITHUB_REPOSITORY" --ref main "${args[@]}"; then
               echo "::warning::dispatch fallito per $section — riprovera' il prossimo giro"
               fail=1
-            else
-              printf '%s\t%s\n' "$section" "$dispatch_nonce" >> "$nonce_file"
             fi
           done < <(jq -r '.sections[] | select(.dispatch) | [.section, (.selected | tojson), (.missingPagePaths | tojson), (.knownMissingPagePaths | tojson)] | @tsv' "$RUNNER_TEMP/reconcile-sections.json")
           [ "$fail" = "0" ] || exit 1
 
-      - name: Wait for all staged backfills before the API replay
-        id: wait_backfills
+      # Il workflow_run di un child fast-publish e' il barrier event: questo
+      # passo risonda la superficie e accoda il replay solo quando tutti i
+      # child hanno realmente lasciato R2 pronto. Il run di detection che ha
+      # dispatchato i child e' gia' terminato, quindi non occupa runner.
+      - name: Replay API after event-driven backfill readiness
         if: >-
-          steps.mode.outputs.allow == 'true' &&
-          steps.arm.outputs.allow == 'true' &&
-          steps.detect.outputs.head_guard == 'true' &&
-          steps.detect.outputs.skip == 'false' &&
-          steps.detect.outputs.pending_edge_flip == 'true' &&
-          steps.detect.outputs.leftover == '0' &&
-          steps.detect.outputs.unknown == '0' &&
-          steps.detect.outputs.manifest_unknown == '0'
-        env:
-          REPOSITORY: ${{ github.repository }}
-        run: |
-          set -euo pipefail
-          runtime_pat="${GITHUB_PAT_NANAKO:-}"
-          if [ -z "$runtime_pat" ]; then
-            echo "::error::GITHUB_PAT_NANAKO non caricato: impossibile attendere il completamento dei backfill"
-            exit 1
-          fi
-          export GH_TOKEN="$runtime_pat"
-          nonce_file="$RUNNER_TEMP/reconcile-backfill-nonces.tsv"
-          deadline=$(( $(date +%s) + 21000 ))
-          while true; do
-            if ! runs="$(gh run list --repo "$REPOSITORY" --workflow fast-publish-section.yml --event workflow_dispatch --branch main --limit 1000 --json databaseId,status,conclusion,displayTitle)"; then
-              echo "::error::impossibile leggere lo stato delle run fast-publish-section"
-              exit 1
-            fi
-            pending=0
-            if [ -s "$nonce_file" ]; then
-              while IFS=$'\t' read -r section dispatch_nonce; do
-                [ -n "$dispatch_nonce" ] || continue
-                run="$(jq -c --arg nonce "$dispatch_nonce" '[.[] | select((.displayTitle // "") | contains("nonce=" + $nonce))] | sort_by(.databaseId) | last // empty' <<<"$runs")"
-                if [ -z "$run" ]; then
-                  pending=1
-                  echo "::notice::backfill $section non ancora comparso nelle run GitHub"
-                  continue
-                fi
-                status="$(jq -r '.status // empty' <<<"$run")"
-                conclusion="$(jq -r '.conclusion // empty' <<<"$run")"
-                case "$status:$conclusion" in
-                  completed:success)
-                    echo "::notice::backfill $section completato ($(jq -r '.databaseId' <<<"$run"))"
-                    ;;
-                  completed:*)
-                    echo "::error::backfill $section terminato con esito ${conclusion:-sconosciuto}"
-                    exit 1
-                    ;;
-                  *)
-                    pending=1
-                    echo "::notice::backfill $section ancora $status"
-                    ;;
-                esac
-              done < "$nonce_file"
-            fi
-            active_reconcile="$(jq '[.[] | select((.displayTitle // "") | contains("nonce=reconcile-")) | select(.status != "completed")] | length' <<<"$runs")"
-            if [ "$active_reconcile" -gt 0 ]; then
-              pending=1
-              echo "::notice::$active_reconcile backfill reconcile ancora attivo"
-            fi
-            if [ "$pending" = "0" ]; then
-              break
-            fi
-            if [ "$(date +%s)" -ge "$deadline" ]; then
-              echo "::error::timeout della barriera globale dei backfill"
-              exit 1
-            fi
-            sleep 20
-          done
-
-      - name: Replay API after all staged backfills
-        if: >-
-          steps.mode.outputs.allow == 'true' &&
+          (steps.mode.outputs.event_replay == 'true' || steps.mode.outputs.schedule_retry == 'true') &&
+          steps.child_artifact.outputs.verified == 'true' &&
           steps.arm.outputs.allow == 'true' &&
           steps.detect.outputs.pending_edge_flip == 'true' &&
           steps.detect.outputs.skip == 'false' &&
+          steps.detect.outputs.dispatch == '0' &&
           steps.detect.outputs.leftover == '0' &&
           steps.detect.outputs.landing_content_stale == '0' &&
           steps.detect.outputs.unknown == '0' &&
           steps.detect.outputs.manifest_unknown == '0' &&
-          steps.detect.outputs.head_guard == 'true' &&
-          steps.wait_backfills.outcome == 'success'
+          steps.detect.outputs.head_guard == 'true'
         env:
           REPOSITORY: ${{ github.repository }}
           SOURCE_COMMIT: ${{ steps.detect.outputs.source_commit }}

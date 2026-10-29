@@ -18,6 +18,14 @@ const recovery = readFileSync(
   new URL('../../scripts/ci/fast-publish-section-recovery.sh', import.meta.url),
   'utf8',
 );
+const resultRecorder = readFileSync(
+  new URL('../../scripts/ci/record-fast-publish-result.sh', import.meta.url),
+  'utf8',
+);
+const replayDispatcher = readFileSync(
+  new URL('../../scripts/ci/dispatch-fast-publish-replay.sh', import.meta.url),
+  'utf8',
+);
 
 function triggerBlock(name) {
   const start = workflow.indexOf(`\n  ${name}:`);
@@ -52,6 +60,11 @@ test('fast-publish-section mantiene il contratto dispatch esplicito', () => {
   assert.match(dispatch, /bootstrap:/u);
   assert.match(dispatch, /push_before:/u);
   assert.match(dispatch, /push_after:/u);
+  assert.match(dispatch, /dispatch_cohort:/u);
+  assert.match(dispatch, /dispatch_cohort:\n\s+description:/u);
+  assert.match(dispatch, /dispatch_cohort:[\s\S]*?required: false/u);
+  assert.match(dispatch, /dispatch_cohort:[\s\S]*?default: ''/u);
+  assert.match(dispatch, /dispatch_cohort:[\s\S]*?type: string/u);
 });
 
 test('fast-publish-section ricontrolla main subito prima del replay API', () => {
@@ -66,6 +79,24 @@ test('fast-publish-section ricontrolla main subito prima del replay API', () => 
   assert.match(dispatchStep, /\[ "\$current_main" != "\$SOURCE_COMMIT" \]/u);
   assert.match(dispatchStep, /replay API interrotto/u);
   assert.match(dispatchStep, /if verifyMainHeadAtDispatch; then/u);
+});
+
+test('fast-publish-section artifactizza nonce e revisione del child', () => {
+  const record = workflow.slice(workflow.indexOf('- name: Record publish result'));
+  assert.match(record, /DISPATCH_NONCE: \$\{\{ inputs\.dispatch_nonce \}\}/u);
+  assert.match(record, /DISPATCH_COHORT: \$\{\{ inputs\.dispatch_cohort \}\}/u);
+  assert.match(record, /COORDINATED_RECOVERY: \$\{\{ inputs\.coordinated_recovery \}\}/u);
+  assert.match(record, /SOURCE_COMMIT: \$\{\{ needs\.resolve\.outputs\.source_commit \|\| inputs\.source_commit \}\}/u);
+  assert.match(workflow, /scripts\/ci\/record-fast-publish-result\.sh/u);
+  assert.match(resultRecorder, /source_main_commit: \$source_main_commit/u);
+  assert.match(resultRecorder, /dispatch_nonce: \$dispatch_nonce/u);
+  assert.match(resultRecorder, /dispatch_cohort: \$dispatch_cohort/u);
+});
+
+test('il dispatcher riconosce il run-name con coorte dopo dry-run', () => {
+  assert.match(workflow, /run-name:.*dry=\$\{\{ inputs\.dry_run \}\} \/ c=/u);
+  assert.match(replayDispatcher, /test\(" \/ dry=false\(\?: \/ c=\[\^\/\]\+\)\?\$"\)/u);
+  assert.match(replayDispatcher, /test\(" \/ dry=true\(\?: \/ c=\[\^\/\]\+\)\?\$"\)/u);
 });
 
 test('il replay checkout mantiene tutti gli helper nel profilo sparse', () => {
@@ -136,7 +167,7 @@ test('una gara stale consegna la sezione al coordinatore senza dichiarare una pu
     'tre avanzamenti concorrenti devono accodare il replay, non lasciare il producer rosso',
   );
   assert.match(workflow, /STALE_HANDOFF: \$\{\{ steps\.render\.outputs\.stale_handoff \}\}/u);
-  assert.match(workflow, /stale_handoff: \$stale_handoff/u);
+  assert.match(resultRecorder, /stale_handoff: \$stale_handoff/u);
   assert.match(workflow, /stale_handoff: \$\{\{ steps\.collect\.outputs\.stale_handoff \}\}/u);
   assert.match(workflow, /echo 'mixed_matrix=true' >> "\$GITHUB_OUTPUT"/u);
   assert.doesNotMatch(workflow, /needs\.publish_release_head\.outputs\.stale_handoff != 'true'/u);
@@ -150,6 +181,12 @@ test('una gara stale consegna la sezione al coordinatore senza dichiarare una pu
   );
   assert.match(workflow, /steps\.stale\.outputs\.recovery_head \|\| steps\.replay_freshness\.outputs\.current_main \|\| needs\.publish_release_head\.outputs\.rendered_head/u);
   assert.match(workflow, /steps\.replay_freshness\.outputs\.fresh == 'false'[\s\S]*needs\.publish_release_head\.outputs\.mixed_matrix == 'true'/u);
+  assert.match(render, /-f dispatch_cohort="\$dispatch_cohort"/u);
+  assert.match(render, /child_replay_api_after_publish=false/u);
+  assert.match(render, /child_coordinated_recovery=true/u);
+  assert.match(render, /-f coordinated_recovery="\$child_coordinated_recovery"/u);
+  assert.match(workflow, /child_replay_api_after_publish=false/u);
+  assert.match(workflow, /child_coordinated_recovery=true/u);
 });
 
 test('il replay stale installa il parser prima di risolvere la release API', () => {
@@ -173,22 +210,20 @@ test('il replay stale installa il parser prima di risolvere la release API', () 
   );
 });
 
-test('un resolve stale produce la matrice sulla nuova HEAD e lascia il recovery come rete di sicurezza', () => {
-  assert.match(
-    recovery,
-    /rebuild_recovery_head\(\)[\s\S]*git checkout --detach "\$next_head"[\s\S]*dispatch_children_wave/u,
-  );
-  assert.match(
-    recovery,
-    /VERIFY_STALE_HANDOFF_HEAD[\s\S]*rebuild_recovery_head[\s\S]*dispatch_children_wave/u,
-  );
-  assert.match(
-    recovery,
-    /VERIFY_STALE_HANDOFF_TITLE[\s\S]*VERIFY_STALE_HANDOFF_NONCE[\s\S]*return 3/u,
-  );
-  assert.match(recovery, /wave_replaced=true/u);
-  assert.match(recovery, /max_stale_handoff_waves=3/u);
+test('un recovery stale dispatcha i child e lascia il barrier al reconcile event-driven', () => {
+  assert.match(recovery, /dispatch_children_wave[\s\S]*The recovery is a dispatcher, not a coordinator/u);
+  assert.doesNotMatch(recovery, /wait_for_dispatched_children/u);
+  assert.doesNotMatch(recovery, /rebuild_recovery_head/u);
+  assert.doesNotMatch(recovery, /VERIFY_STALE_HANDOFF_HEAD/u);
+  assert.doesNotMatch(recovery, /REPLAY_CHILD_WAIT_MAX_S/u);
+  assert.doesNotMatch(recovery, /gh run list --repo "\$REPOSITORY" --workflow fast-publish-section\.yml/u);
+  assert.match(recovery, /readiness verra' verificata dal reconcile event-driven/u);
   assert.match(recovery, /printf 'recovery_head=%s\\n' "\$CURRENT_MAIN" >> "\$GITHUB_OUTPUT"/u);
+  assert.match(recovery, /dispatch_cohort_size="\$\(jq 'length'/u);
+  assert.match(recovery, /-f dispatch_cohort="\$dispatch_cohort"/u);
+  assert.match(recovery, /dispatch_cohort="stale-staged-\$\{GITHUB_RUN_ID\}-n\$\{dispatch_cohort_size\}"/u);
+  assert.match(recovery, /child_replay_api_after_publish=false/u);
+  assert.match(recovery, /child_coordinated_recovery=true/u);
   assert.match(resolver, /git checkout --detach "\$current_main"/u);
   assert.match(resolver, /echo "source_commit=\$current_main"/u);
   assert.match(resolver, /echo "matrix=\$replay_matrix"/u);
@@ -204,13 +239,9 @@ test('il recovery verifica l ancestry della base prima di ricostruire la matrice
   const mixedPlan = recovery.indexOf('target_matrix="$(git diff --name-status "$plan_before" "$CURRENT_MAIN"');
   const rebuildPlan = recovery.lastIndexOf('target_matrix="$(git diff --name-status "$plan_before" "$CURRENT_MAIN"');
   assert.ok(mixedPlan >= 0, 'manca il piano mixed iniziale');
-  assert.ok(rebuildPlan > mixedPlan, 'manca il piano del rebuild handoff');
+  assert.equal(rebuildPlan, mixedPlan, 'il recovery non deve ricostruire wave mentre aspetta child');
   assert.ok(
     recovery.lastIndexOf('if ! validate_recovery_base_ancestry; then', mixedPlan) >= 0,
     'il mixed recovery deve validare la base prima del r2-plan',
-  );
-  assert.ok(
-    recovery.lastIndexOf('if ! validate_recovery_base_ancestry; then', rebuildPlan) >= 0,
-    'il rebuild recovery deve validare la base prima del r2-plan',
   );
 });

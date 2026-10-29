@@ -269,6 +269,26 @@
       }
     },
     {
+      "path": "scripts/ci/record-fast-publish-result.sh",
+      "mode": "corpus-only",
+      "reason": "Serializzatore del risultato del fast-publish-section usato dal reconcile event-driven per verificare nonce, sorgente, freshness e coordinamento del child workflow. Il sito non possiede il publisher corpus-side né questo artefatto, quindi il path resta corpus-only per costruzione.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-29"
+      }
+    },
+    {
+      "path": "scripts/ci/verify-fast-publish-section-cohort.sh",
+      "mode": "corpus-only",
+      "reason": "Barriera fail-closed del reconcile event-driven: correla nonce e coorte dei child, richiede conclusione success e artifact fresco coerente per ogni sezione prima del replay publish-api. Il sito non possiede il publisher corpus-side né questo helper, quindi il path resta corpus-only per costruzione.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-29"
+      }
+    },
+    {
       "path": "scripts/ci/fast-publish-section-render.sh",
       "mode": "corpus-only",
       "reason": "Render e verifica live del fast-publish-section estratti dal workflow per restare sotto il limite del parser GitHub Actions: esegue i tentativi bounded, ricontrolla la freshness di main e coordina bootstrap e release. Il sito non possiede il publisher corpus-side né questo helper, quindi il path resta corpus-only per costruzione.",

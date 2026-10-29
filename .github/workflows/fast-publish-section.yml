@@ -1,5 +1,5 @@
 name: fast-publish-section
-run-name: cover-publish-section / ${{ inputs.section || 'auto' }} / nonce=${{ inputs.dispatch_nonce || 'none' }} / dry=${{ inputs.dry_run }}
+run-name: cover-publish-section / ${{ inputs.section || 'auto' }} / nonce=${{ inputs.dispatch_nonce || 'none' }} / dry=${{ inputs.dry_run }} / c=${{ inputs.dispatch_cohort || 'none' }}
 
 # Pubblica le pagine delle sezioni cantonali su R2; il piano del core seleziona
 # le sezioni attive e il registro le rende servibili. Bootstrap carica l'intera
@@ -48,6 +48,7 @@ on:
       - 'scripts/ci/fast-publish-section-preflight.sh'
       - 'scripts/ci/fast-publish-section-render.sh'
       - 'scripts/ci/fast-publish-section-recovery.sh'
+      - 'scripts/ci/record-fast-publish-result.sh'
       - 'scripts/cf-purge-cache.mjs'
       - 'scripts/offload-generated-images-cdn.mjs'
       - 'scripts/lib/article-render-pipeline.mjs'
@@ -82,13 +83,8 @@ on:
       - 'scripts/lib/parse-positive-num.mjs'
       - 'generator/scripts/load-rc-env.mjs'
       - 'generator/scripts/lib/fetch-with-ref-timeout.mjs'
-  # `sections/registry.json` and the edge API registry are published by
-  # publish-api.yml. Its push-triggered run can finish after this workflow's
-  # first pass; scheduled/manual runs can also change the effective API
-  # surface without a new Git diff. API push completions refresh the
-  # non-article surfaces of every live canton (RSS can change through API-only
-  # inputs), preserve article scope from the originating diff, and merge
-  # cleanup for sections no longer live.
+  # API publication can complete after this pass; workflow_run refreshes live
+  # canton non-article surfaces and cleanup.
   workflow_run:
     workflows: ['Publish article data API']
     types: [completed]
@@ -125,6 +121,11 @@ on:
         type: boolean
       dispatch_nonce:
         description: 'Nonce opaco usato dal drain per correlare questa run'
+        required: false
+        default: ''
+        type: string
+      dispatch_cohort:
+        description: 'coorte'
         required: false
         default: ''
         type: string
@@ -567,6 +568,7 @@ jobs:
             scripts/ci/read-main-head.sh
             scripts/ci/fetch-push-base-if-missing.sh
             scripts/ci/fast-publish-section-render.sh
+            scripts/ci/record-fast-publish-result.sh
           sparse-checkout-cone-mode: false
           persist-credentials: false
 
@@ -717,6 +719,7 @@ jobs:
           CURRENT_MAIN: ${{ steps.replay_freshness.outputs.current_main }}
           ORIGINAL_PUSH_BEFORE: ${{ needs.resolve.outputs.push_before }}
           DISPATCH_NONCE: ${{ inputs.dispatch_nonce }}
+          DISPATCH_COHORT: ${{ inputs.dispatch_cohort }}
         run: |
           set -euo pipefail
           runtime_pat="${GITHUB_PAT_NANAKO:-}"
@@ -727,8 +730,12 @@ jobs:
           export GH_TOKEN="$runtime_pat"
           dispatch_nonce="${DISPATCH_NONCE:-}"
           if [ -z "$dispatch_nonce" ]; then
-            dispatch_nonce="stale-publish-${GITHUB_RUN_ID}-${SECTION}"
+            nonce_hash="$(printf '%s\0%s\0%s' "$GITHUB_RUN_ID" "$CURRENT_MAIN" "$SECTION" | sha256sum | cut -c1-16)"
+            dispatch_nonce="stale-late-${CURRENT_MAIN:0:12}-${SECTION}-${nonce_hash}"
           fi
+          dispatch_cohort="${DISPATCH_COHORT:-stale-late-${GITHUB_RUN_ID}-${SECTION}-n1}"
+          child_replay_api_after_publish=false
+          child_coordinated_recovery=true
           dispatch_title="cover-publish-section / ${SECTION} / nonce=${dispatch_nonce}"
           replay_before="${ORIGINAL_PUSH_BEFORE:-$STALE_HEAD}"
           replay_after=''
@@ -778,7 +785,7 @@ jobs:
             -f bootstrap="$BOOTSTRAP" \
             -f remove_stale_canton_rss_feeds="$REMOVE_STALE_CANTON_RSS_FEEDS" \
             -f cleanup_inactive_surface="$CLEANUP_INACTIVE_SURFACE" \
-            -f replay_api_after_publish="$REPLAY_API_AFTER_PUBLISH" \
+            -f replay_api_after_publish="$child_replay_api_after_publish" \
             -f allow_deferred_live_release="$ALLOW_DEFERRED_LIVE_RELEASE" \
             -f api_release_commit="$api_release_commit" \
             -f source_commit="$CURRENT_MAIN" \
@@ -787,7 +794,8 @@ jobs:
             -f push_before="$replay_before" \
             -f push_after="$replay_after" \
             -f dispatch_nonce="$dispatch_nonce" \
-            -f coordinated_recovery="$COORDINATED_RECOVERY"
+            -f dispatch_cohort="$dispatch_cohort" \
+            -f coordinated_recovery="$child_coordinated_recovery"
 
       - name: Fetch fallback corpus revision for manifest migration
         if: steps.replay_freshness.outputs.fresh == 'true'
@@ -904,6 +912,7 @@ jobs:
           SOURCE_COMMIT: ${{ needs.resolve.outputs.source_commit || inputs.source_commit }}
           SOURCE_MAIN_COMMIT: ${{ needs.resolve.outputs.source_commit || inputs.source_main_commit }}
           DISPATCH_NONCE: ${{ inputs.dispatch_nonce }}
+          DISPATCH_COHORT: ${{ inputs.dispatch_cohort }}
           REF: ${{ github.ref }}
           WORKFLOW_RUN_HEAD_SHA: ${{ needs.resolve.outputs.source_commit || github.event.workflow_run.head_sha }}
           EXPECTED_MAIN_HEAD: ${{ needs.resolve.outputs.source_commit || github.event.workflow_run.head_sha || inputs.source_main_commit || github.event.after || github.sha }}
@@ -939,18 +948,12 @@ jobs:
           STALE_HANDOFF_NONCE: ${{ steps.render.outputs.stale_handoff_nonce }}
           STALE_HANDOFF_TITLE: ${{ steps.render.outputs.stale_handoff_title }}
           FRESH: ${{ steps.replay_freshness.outputs.fresh }}
-        run: |
-          set -euo pipefail
-          jq -cn \
-            --arg section "$SECTION" \
-            --arg rendered_head "${RENDERED_HEAD:-}" \
-            --arg stale_handoff "${STALE_HANDOFF:-}" \
-            --arg stale_handoff_head "${STALE_HANDOFF_HEAD:-}" \
-            --arg stale_handoff_nonce "${STALE_HANDOFF_NONCE:-}" \
-            --arg stale_handoff_title "${STALE_HANDOFF_TITLE:-}" \
-            --arg fresh "${FRESH:-}" \
-            '{section: $section, rendered_head: $rendered_head, stale_handoff: $stale_handoff, stale_handoff_head: $stale_handoff_head, stale_handoff_nonce: $stale_handoff_nonce, stale_handoff_title: $stale_handoff_title, fresh: $fresh}' \
-            > "$RUNNER_TEMP/fast-publish-result.json"
+          DISPATCH_NONCE: ${{ inputs.dispatch_nonce }}
+          DISPATCH_COHORT: ${{ inputs.dispatch_cohort }}
+          COORDINATED_RECOVERY: ${{ inputs.coordinated_recovery }}
+          SOURCE_COMMIT: ${{ needs.resolve.outputs.source_commit || inputs.source_commit }}
+          SOURCE_MAIN_COMMIT: ${{ needs.resolve.outputs.source_commit || inputs.source_main_commit }}
+        run: bash .replay-dispatcher-source/scripts/ci/record-fast-publish-result.sh
 
       - name: Upload publish result
         if: always()
@@ -1037,8 +1040,9 @@ jobs:
   # its HTML. After a successful staged section publish, every non-dry push
   # arms the API replay so an earlier fail-closed readiness check cannot strand
   # the registry on the previous release. API-triggered replays are excluded
-  # to prevent a workflow_run loop; genuine render errors still block replay,
-  # while mixed matrix HEADs are handed to the bounded recovery dispatch below.
+  # to prevent a workflow_run loop; genuine render errors still block replay.
+  # Mixed matrix HEADs are handed to the recovery dispatch below, and their
+  # child completions drive the API replay through reconcile-section-pages.
   replay-api-after-staged-release:
     needs: [resolve, publish, publish_release_head]
     if: >-
@@ -1211,6 +1215,7 @@ jobs:
           ORIGINAL_PUSH_BEFORE: ${{ needs.resolve.outputs.push_before }}
           CURRENT_MAIN: ${{ steps.replay_freshness.outputs.current_main }}
           MIXED_MATRIX: ${{ needs.publish_release_head.outputs.mixed_matrix }}
+          PRESERVE_EXPLICIT_SCOPE: ${{ github.event_name == 'workflow_dispatch' && inputs.section != '' }}
           DRY: ${{ needs.resolve.outputs.dry }}
           REPLAY_API_AFTER_PUBLISH: ${{ needs.resolve.outputs.replay_api_after_publish }}
           ALLOW_DEFERRED_LIVE_RELEASE: ${{ needs.resolve.outputs.allow_deferred_live_release }}
@@ -1220,9 +1225,7 @@ jobs:
       - name: Replay publish-api after staged release
         if: >-
           (steps.replay_freshness.outputs.fresh == 'true' &&
-           needs.publish_release_head.outputs.mixed_matrix != 'true') ||
-          (steps.replay_freshness.outputs.fresh == 'false' &&
-           needs.publish_release_head.outputs.mixed_matrix == 'true')
+           needs.publish_release_head.outputs.mixed_matrix != 'true')
         env:
           REPOSITORY: ${{ github.repository }}
           SOURCE_COMMIT: ${{ steps.stale.outputs.recovery_head || steps.replay_freshness.outputs.current_main || needs.publish_release_head.outputs.rendered_head || inputs.source_commit || github.sha }}
