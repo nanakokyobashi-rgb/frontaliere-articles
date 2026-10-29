@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "carburanti",
-  "updatedAt": "2026-10-29T10:50:58.955Z",
-  "contentHash": "104fadc0140f4c5beeb3ac9a92397e4629c77a41676feed8dfbb79c58a8711e4",
+  "updatedAt": "2026-10-29T11:45:43.901Z",
+  "contentHash": "84d41c70d8873fcfaaf24e33d4354a025c2a4917c2438e65b45e2e3c242a2adf",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Stipendi pubblici a Soletta: +1,0% dal 2027",
+          "url": "/articoli-soletta/soletta-stipendi-pubblici-2027/",
+          "excerpt": "A Soletta il personale statale, gli insegnanti e i dipendenti degli ospedali riceveranno l'1,0% in più dal 2027 dopo l'accordo sull'inflazione.",
+          "date": "2026-10-29T11:38:26.035Z"
+        },
+        {
           "title": "Soletta: la Ratsleitung contro la PUK sugli ospedali",
           "url": "/articoli-soletta/soletta-ratsleitung-puk-ospedali/",
           "excerpt": "La Ratsleitung di Soletta considera non utile una PUK sugli ospedali; il Consiglio cantonale voterà l'11 novembre.",
@@ -94,12 +100,6 @@
           "url": "/articoli-soletta/soletta-aumento-salari/",
           "excerpt": "Il Governo cantonale e le associazioni del personale hanno concordato un aumento dell'1,0% dal prossimo anno per dipendenti pubblici, scuole e ospedali.",
           "date": "2026-10-27T12:43:48.858Z"
-        },
-        {
-          "title": "Proposta riduzione premi assicurazione malattia 2027 Canton Soletta",
-          "url": "/articoli-soletta/proposta-premi-assicurazione-2027/",
-          "excerpt": "Proposta 2027 trasmessa al Parlamento cantonale Circa 221 milioni di franchi per ridurre i premi Contributo cantonale di 98 milioni Aumento di 9 milioni (+4,3%)",
-          "date": "2026-10-27T12:21:54.555Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-29T10:50:58.955Z"
+      "updatedAt": "2026-10-29T11:45:43.901Z"
     },
     "en": {
       "canton": "SO",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Public-sector salaries in Solothurn: +1,0% from 2027",
+          "url": "/en/solothurn-articles/solothurn-public-wages-2027/",
+          "excerpt": "In Solothurn, state employees, teachers and hospital employees will receive 1,0% more from 2027 following the inflation agreement.",
+          "date": "2026-10-29T11:38:26.035Z"
+        },
+        {
           "title": "Solothurn: Council leadership opposes the hospital PUK",
           "url": "/en/solothurn-articles/solothurn-hospital-puk-opposed/",
           "excerpt": "Solothurn’s council leadership considers a PUK on the hospitals unnecessary; the cantonal council will vote on 11 November.",
@@ -193,12 +199,6 @@
           "url": "/en/solothurn-articles/solothurn-wage-increase/",
           "excerpt": "The cantonal government and staff associations have agreed on a 1,0% increase from next year for public employees, schools and hospitals.",
           "date": "2026-10-27T12:43:48.858Z"
-        },
-        {
-          "title": "Proposal to reduce health insurance premiums in 2027, Canton of Solothurn",
-          "url": "/en/solothurn-articles/2027-insurance-premium-proposal/",
-          "excerpt": "2027 proposal submitted to the Cantonal Parliament Approximately 221 million francs to reduce premiums Cantonal contribution of 98 million Increase of 9 million",
-          "date": "2026-10-27T12:21:54.555Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-29T10:50:58.955Z"
+      "updatedAt": "2026-10-29T11:45:43.901Z"
     },
     "de": {
       "canton": "SO",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Löhne im öffentlichen Dienst in Solothurn: +1,0% ab 2027",
+          "url": "/de/solothurn-artikel/solothurn-staatsloehne-2027/",
+          "excerpt": "In Solothurn erhalten das Staatspersonal, die Lehrpersonen und die Spitalangestellten ab 2027 nach der Einigung über die Inflation 1,0% mehr.",
+          "date": "2026-10-29T11:38:26.035Z"
+        },
+        {
           "title": "Solothurn: Die Ratsleitung gegen die PUK zu den Spitälern",
           "url": "/de/solothurn-artikel/solothurn-spitaeler-puk-abgelehnt/",
           "excerpt": "Die Ratsleitung von Solothurn hält eine PUK zu den Spitälern nicht für sinnvoll; der Kantonsrat wird am 11.",
@@ -292,12 +298,6 @@
           "url": "/de/solothurn-artikel/solothurn-lohnerhoehung/",
           "excerpt": "Die Kantonsregierung und die Personalverbände haben für Angestellte des öffentlichen Dienstes, Schulen und Spitäler ab dem kommenden Jahr eine Erhöhung um 1,0% vereinbart.",
           "date": "2026-10-27T12:43:48.858Z"
-        },
-        {
-          "title": "Vorschlag: Prämienverbilligung 2027 im Kanton Solothurn",
-          "url": "/de/solothurn-artikel/praemienverbilligung-2027/",
-          "excerpt": "Vorschlag 2027 dem Kantonsparlament übermittelt Rund 221 Millionen Franken zur Senkung der Prämien Kantonsbeitrag von 98 Millionen Erhöhung um 9 Millionen",
-          "date": "2026-10-27T12:21:54.555Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-29T10:50:58.955Z"
+      "updatedAt": "2026-10-29T11:45:43.901Z"
     },
     "fr": {
       "canton": "SO",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Salaires publics à Soleure : +1,0% dès 2027",
+          "url": "/fr/articles-soleure/salaires-publics-soleure-2027/",
+          "excerpt": "À Soleure, le personnel de l'État, les enseignants et les employés des hôpitaux recevront 1,0% de plus à partir de 2027 après l'accord sur l'inflation.",
+          "date": "2026-10-29T11:38:26.035Z"
+        },
+        {
           "title": "Soleure : la direction du Conseil contre la PUK sur les hôpitaux",
           "url": "/fr/articles-soleure/soleure-puk-hopitaux-refusee/",
           "excerpt": "La direction du Conseil de Soleure considère qu’une PUK sur les hôpitaux n’est pas utile ; le Conseil cantonal votera le 11 novembre.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-soleure/soleure-hausse-salaires/",
           "excerpt": "Le Gouvernement cantonal et les associations du personnel ont convenu d’une augmentation de 1,0 % dès l’année prochaine pour les employés publics, les écoles et les hôpitaux.",
           "date": "2026-10-27T12:43:48.858Z"
-        },
-        {
-          "title": "Proposition de réduction des primes maladie 2027 à Soleure",
-          "url": "/fr/articles-soleure/proposition-primes-2027/",
-          "excerpt": "Proposition 2027 transmise au Parlement cantonal Environ 221 millions de francs pour réduire les primes Contribution cantonale de 98 millions Augmentation de 9",
-          "date": "2026-10-27T12:21:54.555Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-29T10:50:58.955Z"
+      "updatedAt": "2026-10-29T11:45:43.901Z"
     }
   }
 }
