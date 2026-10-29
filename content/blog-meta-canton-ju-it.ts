@@ -33,6 +33,9 @@ const blogMetaCantonJuIt: Record<string, string> = {
     'blog.article.mutazioni-lavoro-frontaliero-jura.title': 'Arco giurassiano: mutazioni del lavoro frontaliero',
     'blog.article.mutazioni-lavoro-frontaliero-jura.excerpt': 'La puntata 43718 di «Le sens de l\'éco» mette a tema le mutazioni dell\'impiego frontaliero nell\'Arco giurassiano; il materiale fornito non riporta altri dettagli.',
     'blog.article.mutazioni-lavoro-frontaliero-jura.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.cff-cargo-rinuncia-legno-alle.title': 'CFF Cargo ferma il trasporto del legno ad Alle da dicembre',
+    'blog.article.cff-cargo-rinuncia-legno-alle.excerpt': 'Da dicembre CFF Cargo sopprime il servizio per i carri singoli Il legno dall\'Ajoie passerà alla strada La piattaforma di Alle costò CHF 14 milioni nel 2021',
+    'blog.article.cff-cargo-rinuncia-legno-alle.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonJuIt;

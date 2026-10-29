@@ -387,6 +387,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-cff-cargo-rinuncia-legno-alle': {
+    title: 'CFF Cargo ferma il trasporto del legno ad Alle da dicembre',
+    description: 'Da dicembre CFF Cargo sopprime il servizio per i carri singoli Il legno dall\'Ajoie passerà alla strada La piattaforma di Alle costò CHF 14 milioni',
+    keywords: 'frontalieri, ticino, svizzera, italia, cargo, ferma, trasporto, legno',
+    ogTitle: 'CFF Cargo ferma il trasporto del legno ad Alle da dicembre',
+    ogDescription: 'Da dicembre CFF Cargo sopprime il servizio per i carri singoli Il legno dall\'Ajoie passerà alla strada La piattaforma di Alle costò CHF 14 milioni nel 2021',
+    canonicalPath: '/articoli-giura/cff-cargo-rinuncia-legno-alle/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "CFF Cargo ferma il trasporto del legno ad Alle da dicembre",
+      "description": "Da dicembre CFF Cargo sopprime il servizio per i carri singoli Il legno dall'Ajoie passerà alla strada La piattaforma di Alle costò CHF 14 milioni",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-cff-cargo-rinuncia-legno-alle.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-29T08:45:30+00:00",
+      "dateModified": "2026-10-29T08:45:30+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-giura/cff-cargo-rinuncia-legno-alle/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

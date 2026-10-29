@@ -116,4 +116,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'cff-cargo-rinuncia-legno-alle',
+ category: 'novita',
+ date: '2026-10-29T08:45:30.807Z',
+ image: '/images/blog/article-cff-cargo-rinuncia-legno-alle.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['JU'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
