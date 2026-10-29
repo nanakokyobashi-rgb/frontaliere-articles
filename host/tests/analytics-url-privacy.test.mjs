@@ -56,3 +56,15 @@ for(const reference of ['https:user:password@example.test/path','https:/user:pas
  const out=sanitizeTelemetryProperties({page_location:'https://redirect.test/?redirect='+encodeURIComponent(reference+'?ac=secret&utm_source=email')}).page_location;
  const nested=new URL(new URL(out).searchParams.get('redirect'));assert.equal(nested.username,'');assert.equal(nested.password,'');assert.equal(nested.hostname,'example.test');assert.equal(nested.search,'?utm_source=email');
 });
+
+// Fragment and bare-reference regressions.
+const fragmentCases=[
+ ['https://outer.test/#https://user:password@inner.test/path','https://outer.test/#https://inner.test/path'],
+ ['https://outer.test/#'+encodeURIComponent('https://user:password@inner.test/path?utm_campaign=a%26b'),'https://outer.test/#'+encodeURIComponent('https://inner.test/path?utm_campaign=a%26b')],
+ ['https://outer.test/#next='+encodeURIComponent('https://user:password@inner.test/path'),'https://outer.test/#next='+encodeURIComponent('https://inner.test/path')],
+ ['https://outer.test/#route?ac=secret&utm_source=email','https://outer.test/#route?utm_source=email'],
+ ['https://outer.test/#'+encodeURIComponent('route?email=secret&utm_source=email'),'https://outer.test/#'+encodeURIComponent('route?utm_source=email')],
+ ['https://outer.test/#next=https://user:password@inner.test/path?ac=secret&utm_source=email','https://outer.test/#utm_source=email&next='+encodeURIComponent('https://inner.test/path')],
+];for(const[input,expected]of fragmentCases)test('fragment '+input,()=>assert.equal(sanitizeTelemetryProperties({page_location:input}).page_location,expected));
+for(const relative of ['login?email=secret&utm_source=email','login#ne=secret&utm_source=email'])test('bare relative '+relative,()=>{const input='https://outer.test/?next='+encodeURIComponent(relative)+'&utm_medium=payment_reminder';const out=new URL(sanitizeTelemetryProperties({page_location:input}).page_location);assert.equal(out.searchParams.get('next'),relative.replace(/(?:email|ne)=secret&/,''));assert.equal(out.searchParams.get('utm_medium'),'payment_reminder');});
+for(const hash of ['#ordinary-route','#caf%C3%A9','#topic=a%20b','#invalid%escape'])test('ordinary hash '+hash,()=>{const input='https://outer.test/?utm_campaign=a%26b'+hash;assert.equal(sanitizeTelemetryProperties({page_location:input}).page_location,input)});
