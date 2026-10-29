@@ -75,17 +75,30 @@ function normalizeRepo(repo) {
  * closer che gira qui non deve rifiutarsi di chiudere la propria #986 solo
  * perche' il numero coincide con una issue pinnata di la'.
  *
- * Manifest illeggibile o malformato → mappa vuota, cioe' nessun pin: il
- * fallimento sicuro e' il comportamento di prima. Un pin fantasma bloccherebbe
- * per sempre una chiusura legittima, e sarebbe invisibile.
+ * Manifest illeggibile o malformato → `manifestPinnedIssues()` mantiene la
+ * compatibilita' storica restituendo una mappa vuota. I closer che devono
+ * decidere una mutazione usano invece `manifestPinLookup()`, che conserva la
+ * distinzione fra «nessun pin» e «sorgente non leggibile» e puo' sospendere la
+ * chiusura senza affidarsi a una mappa vuota.
  */
 export function manifestPinnedIssues(manifestPath = MANIFEST_PATH) {
+  return loadManifestPins(manifestPath).pins;
+}
+
+/**
+ * Legge la sorgente dei pin mantenendo l'esito del caricamento. La mappa vuota
+ * non basta per i closer: su un errore di I/O o JSON non si puo' concludere che
+ * una issue non sia pinnata.
+ *
+ * @returns {{ok: boolean, pins: Map<string, string>, error?: Error}}
+ */
+function loadManifestPins(manifestPath = MANIFEST_PATH) {
   const out = new Map();
   let man;
   try {
     man = JSON.parse(readFileSync(manifestPath, 'utf8'));
-  } catch {
-    return out;
+  } catch (error) {
+    return { ok: false, pins: out, error };
   }
   for (const f of man?.files || []) {
     if (!PINNING_MODES.has(f?.mode)) continue;
@@ -93,7 +106,7 @@ export function manifestPinnedIssues(manifestPath = MANIFEST_PATH) {
     if (!m) continue;
     out.set(`${normalizeRepo(m[1])}#${Number(m[2])}`, f.path);
   }
-  return out;
+  return { ok: true, pins: out };
 }
 
 /**
@@ -121,4 +134,18 @@ export function pinnedBy(issueNumber, repo, pinned = manifestPinnedIssues()) {
     console.log(`manifest pin lookup: nessun pin per ${key}; ${pinned.size} voce/i corpus-only-pending caricate`);
   }
   return entry;
+}
+
+/**
+ * Lookup per i closer che devono distinguere «nessun pin» da manifest
+ * illeggibile. `ok: true, path: null` significa che la sorgente e' stata
+ * caricata e non contiene un pin per la issue; `ok: false` sospende la
+ * mutazione chiamante.
+ *
+ * @returns {{ok: boolean, path: string|null, error?: Error}}
+ */
+export function manifestPinLookup(issueNumber, repo, manifestPath = MANIFEST_PATH) {
+  const loaded = loadManifestPins(manifestPath);
+  if (!loaded.ok) return { ok: false, path: null, error: loaded.error };
+  return { ok: true, path: pinnedBy(issueNumber, repo, loaded.pins) };
 }

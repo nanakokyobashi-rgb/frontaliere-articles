@@ -77,7 +77,7 @@ import {
   reopenedAfterDecomposition,
 } from './lib/parent-close-recurrence.mjs';
 import { parsePositiveNum } from '../lib/parse-positive-num.mjs';
-import { pinnedBy } from './manifest-pinned-issues.mjs';
+import { manifestPinLookup } from './manifest-pinned-issues.mjs';
 import { conflictHandoffOriginPr } from './check-issue-already-resolved.mjs';
 import { isRepositoryOwnedPrHead, prHeadIdentity } from './lib/pr-head-identity.mjs';
 import {
@@ -504,7 +504,7 @@ export function quotaPromotionDecision(resetsAt, {
 }
 
 function manifestPinFor(issueNumber) {
-  return pinnedBy(issueNumber, REPO);
+  return manifestPinLookup(issueNumber, REPO);
 }
 
 // Il corpus ha un classificatore adattato che precede i pin del sito. Manteniamo
@@ -4740,9 +4740,13 @@ export function runDrain() {
         console.log(`AGE-OUT skip #${iss.number}: checkpoint WIP live (${liveWip.branch} ahead=${liveWip.aheadBy}) → resta aperta/da recuperare.`);
         continue;
       }
-      const pinnedPath = manifestPinFor(iss.number);
-      if (pinnedPath) {
-        console.log(`📌 age-out: #${iss.number} tenuta aperta dal manifest (${pinnedPath}).`);
+      const manifestPin = manifestPinFor(iss.number);
+      if (!manifestPin.ok) {
+        console.log(`::warning::age-out skip #${iss.number}: manifest pin non leggibile → nessuna chiusura al buio.`);
+        continue;
+      }
+      if (manifestPin.path) {
+        console.log(`📌 age-out: #${iss.number} tenuta aperta dal manifest (${manifestPin.path}).`);
         continue;
       }
       // Coppia non atomica (comment → close): senza budget il job può morire fra
@@ -4880,10 +4884,15 @@ export function runDrain() {
       // delle view di stato delle figlie la decisione pura verifica marker,
       // idempotenza e tetto, quindi un padre non riaperto non paga letture.
       if (reopenedAfterDecomposition(comments)) {
-        const rearmPinnedPath = manifestPinFor(p.number);
-        if (rearmPinnedPath) {
+        const rearmPin = manifestPinFor(p.number);
+        if (!rearmPin.ok) {
+          parentRearmResults.push({ number: p.number, outcome: 'skipped', reason: 'manifest-unreadable' });
+          console.log(`::warning::PARENT-REARM-SKIP #${p.number}: manifest pin non leggibile → nessuna mutazione al buio.`);
+          continue;
+        }
+        if (rearmPin.path) {
           parentRearmResults.push({ number: p.number, outcome: 'skipped', reason: 'manifest-pin' });
-          console.log(`📌 PARENT-REARM-SKIP #${p.number} (tenuta aperta dal manifest: ${rearmPinnedPath})`);
+          console.log(`📌 PARENT-REARM-SKIP #${p.number} (tenuta aperta dal manifest: ${rearmPin.path})`);
           continue;
         }
         const rearmOptions = {
@@ -4959,9 +4968,13 @@ export function runDrain() {
         } catch { allClosed = false; break; } // stato illeggibile → non chiudere
       }
       if (!allClosed) continue;
-      const pinnedPath = manifestPinFor(p.number);
-      if (pinnedPath) {
-        console.log(`📌 parent-close: #${p.number} tenuta aperta dal manifest (${pinnedPath}).`);
+      const manifestPin = manifestPinFor(p.number);
+      if (!manifestPin.ok) {
+        console.log(`::warning::parent-close skip #${p.number}: manifest pin non leggibile → nessuna chiusura al buio.`);
+        continue;
+      }
+      if (manifestPin.path) {
+        console.log(`📌 parent-close: #${p.number} tenuta aperta dal manifest (${manifestPin.path}).`);
         continue;
       }
       if (DRY) { console.log(`[dry] parent-close #${p.number} (figlie ${kids.join(', ')} tutte chiuse)`); continue; }
@@ -5061,8 +5074,18 @@ export function runDrain() {
       // entrambe in `null` (`issueComments(...) || []`).
       const comments = issueComments(iss.number);
       if (comments === null) continue; // glitch gh → nessuna decisione, si rivaluta al tick dopo
-      const outcomeEntry = latestFixOutcomeCommentFromComments(comments);
-      const outcome = outcomeEntry.outcome;
+      const outcomeEntry = latestFixRunOutcomeEntryFromComments(comments);
+      const promotion = outcomeEntry.outcome !== null
+        ? fixPromotion(iss.number)
+        : { at: null, byDrainer: false };
+      // Un marker storico non autorizza una chiusura dopo una nuova
+      // promozione: il verdetto vale solo se appartiene all'ultimo ciclo
+      // `agent:fix` osservato nella timeline.
+      const outcome = outcomeForCurrentPromotion({
+        outcome: outcomeEntry.outcome,
+        outcomeAt: outcomeEntry.at,
+        promotedAt: promotion.at,
+      });
 
       // UNPARK-NO-VERDICT: una parked che non ha MAI avuto un verdetto non ha
       // mai avuto un tentativo.
@@ -5298,16 +5321,22 @@ export function runDrain() {
       }
 
       const d = verdictExitDecision(outcome, {
-        hasPR: hasFixPR(iss.number),
+        // La chiusura verificata deve restare bloccata anche quando la lettura
+        // della lista PR fallisce: un errore API non equivale a «nessuna PR».
+        hasPR: hasFixPR(iss.number, { failClosed: true }),
         noAutoclose: VERDICT_EXIT_NO_AUTOCLOSE,
       });
       if (d.action === 'none') continue;
       attempted++;
 
       if (d.action === 'close') {
-        const pinnedPath = manifestPinFor(iss.number);
-        if (pinnedPath) {
-          console.log(`📌 verdict-exit: #${iss.number} tenuta aperta dal manifest (${pinnedPath}).`);
+        const manifestPin = manifestPinFor(iss.number);
+        if (!manifestPin.ok) {
+          console.log(`::warning::verdict-exit skip #${iss.number}: manifest pin non leggibile → nessuna chiusura al buio.`);
+          continue;
+        }
+        if (manifestPin.path) {
+          console.log(`📌 verdict-exit: #${iss.number} tenuta aperta dal manifest (${manifestPin.path}).`);
           continue;
         }
         const note = `✅ **Auto-chiusa dal followup-drainer (zero-Claude)**: l'ultimo giro del fixer ha emesso \`FIX_OUTCOME: already-fixed\`, cioè è andato a guardare il codice e il difetto non c'era più. Il verdetto è più forte del token-match con cui \`reconcile-followups.mjs\` già auto-chiude, quindi non serve una seconda run per confermarlo.\n\n**Riapri** se il difetto ricorre — il monitor che ha aperto questa issue lo fa da sé. Per disattivare questa chiusura: \`FOLLOWUP_NO_AUTOCLOSE=1\`.`;
