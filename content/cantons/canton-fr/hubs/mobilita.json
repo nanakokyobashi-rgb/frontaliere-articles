@@ -4,17 +4,17 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-29T07:40:41.678Z",
-  "contentHash": "51979243041a8c56a8cc6c03ed6d1b50a32419baaadf4f0926411b505bc1baec",
+  "updatedAt": "2026-10-29T18:01:02.933Z",
+  "contentHash": "c52a473437ebd7d233ae5f300effcfd9eeaebb2c4d01135e32b66e0e7529d519",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-29T01:18:28.468Z",
+      "updatedAt": "2026-10-29T10:29:04.010Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-28T21:56:57.371Z",
+      "updatedAt": "2026-10-29T11:47:10.249Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "21",
+          "value": "20",
           "note": "segnalazioni aggiornate: 29 ottobre 2026"
         },
         {
@@ -92,7 +92,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-29T01:18:28.468Z"
+          "updatedAt": "2026-10-29T10:29:04.010Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -130,7 +130,7 @@
               "url": "https://www.ville-fribourg.ch/actualites/restriction-de-circulation-route-de-champriond-du-12-octobre-au-27-novembre-2026"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -194,7 +194,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-29T18:01:02.933Z"
     },
     "en": {
       "canton": "FR",
@@ -204,7 +204,7 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "21",
+          "value": "20",
           "note": "reports as of 29 October 2026"
         },
         {
@@ -269,7 +269,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-29T01:18:28.468Z"
+          "updatedAt": "2026-10-29T10:29:04.010Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -307,7 +307,7 @@
               "url": "https://www.ville-fribourg.ch/actualites/restriction-de-circulation-route-de-champriond-du-12-octobre-au-27-novembre-2026"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -371,7 +371,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-29T18:01:02.933Z"
     },
     "de": {
       "canton": "FR",
@@ -381,7 +381,7 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "21",
+          "value": "20",
           "note": "Meldungen vom 29. Oktober 2026"
         },
         {
@@ -446,7 +446,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-29T01:18:28.468Z"
+          "updatedAt": "2026-10-29T10:29:04.010Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -484,7 +484,7 @@
               "url": "https://www.ville-fribourg.ch/actualites/restriction-de-circulation-route-de-champriond-du-12-octobre-au-27-novembre-2026"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -548,7 +548,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-29T18:01:02.933Z"
     },
     "fr": {
       "canton": "FR",
@@ -558,7 +558,7 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "21",
+          "value": "20",
           "note": "signalements au 29 octobre 2026"
         },
         {
@@ -623,7 +623,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-29T01:18:28.468Z"
+          "updatedAt": "2026-10-29T10:29:04.010Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -661,7 +661,7 @@
               "url": "https://www.ville-fribourg.ch/actualites/restriction-de-circulation-route-de-champriond-du-12-octobre-au-27-novembre-2026"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -725,7 +725,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-29T18:01:02.933Z"
     }
   }
 }

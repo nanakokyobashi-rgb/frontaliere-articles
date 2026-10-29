@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-29T15:32:04.680Z",
-  "contentHash": "dac8c5ca8b87b19b1ad4b80dd1b2ae54c01f24027438822cf94d462fc9c47bc4",
+  "updatedAt": "2026-10-29T18:01:02.933Z",
+  "contentHash": "d4cafe4483dfbb506ee48d8c125228a2a9ce3346f54cd309b27d94f711497cf5",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "MS Saphir: passaggio previsto all'idrogeno verde nel 2027",
+          "url": "/articoli-argovia/saphir-idrogeno-verde-axpo/",
+          "excerpt": "La SGV fa riconvertire la MS Saphir da Shiptec AG: il ritorno alle corse nel bacino di Lucerna è previsto per il 26 marzo 2027.",
+          "date": "2026-10-29T17:53:51.044Z"
+        },
+        {
           "title": "Fislisbach: acqua potabile scarsa, Baden continua a fornire",
           "url": "/articoli-argovia/fislisbach-acqua-potabile/",
           "excerpt": "A metà ottobre 2026 il prelievo settimanale era sceso a 7'136 m³, il 60,4% in meno rispetto ai 18'035 m³ di fine luglio.",
@@ -94,12 +100,6 @@
           "url": "/articoli-argovia/mobilita-aargovia-sistema-unico/",
           "excerpt": "Cinque esperti hanno presentato la revisione di mobilitätAargau, puntando a frequenze bus ogni 30 minuti e ferrovia ogni 15 minuti da 2027.",
           "date": "2026-10-24T11:27:50.606Z"
-        },
-        {
-          "title": "Steuerfuss a 109% proposto a Fislisbach per il budget 2027",
-          "url": "/articoli-argovia/fislisbach-steuerfuss-109/",
-          "excerpt": "Il Gemeinderat di Fislisbach chiede l'approvazione del budget 2027 con Steuerfuss invariato al 109%, nonostante un disavanzo di CHF 357'310.",
-          "date": "2026-10-23T21:49:48.808Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-29T15:32:04.680Z"
+      "updatedAt": "2026-10-29T18:01:02.933Z"
     },
     "en": {
       "canton": "AG",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "MS Saphir: planned switch to green hydrogen in 2027",
+          "url": "/en/aargau-articles/saphir-green-hydrogen-axpo/",
+          "excerpt": "SGV is having the MS Saphir converted by Shiptec AG: its return to service in the Lake Lucerne basin is scheduled for March 26, 2027.",
+          "date": "2026-10-29T17:53:51.044Z"
+        },
+        {
           "title": "Fislisbach: drinking water scarce, Baden continues to supply it",
           "url": "/en/aargau-articles/fislisbach-drinking-water/",
           "excerpt": "By mid-October 2026, weekly withdrawal had fallen to 7'136 m³, 60,4% less than the 18'035 m³ at the end of July.",
@@ -193,12 +199,6 @@
           "url": "/en/aargau-articles/aargau-mobility-unified-system/",
           "excerpt": "Five experts presented the revision of mobilitätAargau, aiming for bus services every 30 minutes and rail services every 15 minutes starting in 2027.",
           "date": "2026-10-24T11:27:50.606Z"
-        },
-        {
-          "title": "Tax rate of 109% proposed in Fislisbach for the 2027 budget",
-          "url": "/en/aargau-articles/tax-rate-of-109-proposed-in-fislisbach-for-the-2027-budget/",
-          "excerpt": "The Fislisbach municipal council is requesting approval of the 2027 budget with the tax rate unchanged at 109%, despite a deficit of CHF 357'310.",
-          "date": "2026-10-23T21:49:48.808Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-29T15:32:04.680Z"
+      "updatedAt": "2026-10-29T18:01:02.933Z"
     },
     "de": {
       "canton": "AG",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "MS Saphir: geplanter Umstieg auf grünen Wasserstoff im Jahr 2027",
+          "url": "/de/aargau-artikel/saphir-gruener-wasserstoff-axpo/",
+          "excerpt": "Die SGV lässt die MS Saphir von Shiptec AG umrüsten: Die Wiederaufnahme des Fahrbetriebs im Luzerner Seebecken ist für den 26.",
+          "date": "2026-10-29T17:53:51.044Z"
+        },
+        {
           "title": "Fislisbach: Trinkwasser knapp, Baden liefert weiterhin",
           "url": "/de/aargau-artikel/fislisbach-trinkwasser/",
           "excerpt": "Mitte Oktober 2026 war die wöchentliche Entnahme auf 7'136 m³ gesunken, 60,4% weniger als die 18'035 m³ von Ende Juli.",
@@ -292,12 +298,6 @@
           "url": "/de/aargau-artikel/mobilitaet-aargau-einheitliches-system/",
           "excerpt": "Fünf Experten haben die Überarbeitung von mobilitätAargau vorgestellt und dabei Busverbindungen alle 30 Minuten sowie Bahnverbindungen alle 15 Minuten ab 2027 angestrebt.",
           "date": "2026-10-24T11:27:50.606Z"
-        },
-        {
-          "title": "Für Fislisbach wird für das Budget 2027 ein Steuerfuss von 109% vorgeschlagen",
-          "url": "/de/aargau-artikel/fur-fislisbach-wird-fur-das-budget-2027-ein-steuerfuss-von-109-vorgeschlagen/",
-          "excerpt": "Der Gemeinderat von Fislisbach beantragt die Genehmigung des Budgets 2027 mit unverändertem Steuerfuss von 109%, trotz eines Defizits von CHF 357'310.",
-          "date": "2026-10-23T21:49:48.808Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-29T15:32:04.680Z"
+      "updatedAt": "2026-10-29T18:01:02.933Z"
     },
     "fr": {
       "canton": "AG",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "MS Saphir : passage prévu à l’hydrogène vert en 2027",
+          "url": "/fr/articles-argovie/saphir-hydrogene-vert-axpo/",
+          "excerpt": "La SGV fait reconvertir la MS Saphir par Shiptec AG : le retour en service sur le bassin de Lucerne est prévu pour le 26 mars 2027.",
+          "date": "2026-10-29T17:53:51.044Z"
+        },
+        {
           "title": "Fislisbach : l’eau potable se fait rare, Baden continue de fournir",
           "url": "/fr/articles-argovie/fislisbach-eau-potable/",
           "excerpt": "À la mi-octobre 2026, le prélèvement hebdomadaire était tombé à 7'136 m³, soit 60,4% de moins que les 18'035 m³ de fin juillet.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-argovie/mobilite-argovie-systeme-unique/",
           "excerpt": "Cinq experts ont présenté la révision de mobilitätAargau, visant une fréquence des bus toutes les 30 minutes et du rail toutes les 15 minutes à partir de 2027.",
           "date": "2026-10-24T11:27:50.606Z"
-        },
-        {
-          "title": "Taux d'imposition à 109% proposé à Fislisbach pour le budget 2027",
-          "url": "/fr/articles-argovie/taux-d-imposition-a-109-propose-a-fislisbach-pour-le-budget-2027/",
-          "excerpt": "Le conseil communal de Fislisbach demande l'approbation du budget 2027 avec un taux d'imposition inchangé à 109%, malgré un déficit de CHF 357'310.",
-          "date": "2026-10-23T21:49:48.808Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-29T15:32:04.680Z"
+      "updatedAt": "2026-10-29T18:01:02.933Z"
     }
   }
 }
