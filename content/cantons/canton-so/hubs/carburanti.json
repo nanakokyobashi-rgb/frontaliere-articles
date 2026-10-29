@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "carburanti",
-  "updatedAt": "2026-10-28T11:49:36.683Z",
-  "contentHash": "aa3c611dd98cb6839ce66674282b89a40e72797ede1ab06cb99dac213ddf0260",
+  "updatedAt": "2026-10-29T10:50:58.955Z",
+  "contentHash": "104fadc0140f4c5beeb3ac9a92397e4629c77a41676feed8dfbb79c58a8711e4",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Soletta: la Ratsleitung contro la PUK sugli ospedali",
+          "url": "/articoli-soletta/soletta-ratsleitung-puk-ospedali/",
+          "excerpt": "La Ratsleitung di Soletta considera non utile una PUK sugli ospedali; il Consiglio cantonale voterà l'11 novembre.",
+          "date": "2026-10-29T10:41:25.882Z"
+        },
+        {
           "title": "221 milioni di franchi per premi assicurativi più bassi nel Canton Soletta",
           "url": "/articoli-soletta/solothurn-sussidi-premi-2027/",
           "excerpt": "Nel 2027 previsti circa CHF 221 milioni per l'IPV La dotazione cresce di CHF 9 milioni, pari al 4,3% Circa CHF 123 milioni arrivano dalla Confederazione",
@@ -94,12 +100,6 @@
           "url": "/articoli-soletta/proposta-premi-assicurazione-2027/",
           "excerpt": "Proposta 2027 trasmessa al Parlamento cantonale Circa 221 milioni di franchi per ridurre i premi Contributo cantonale di 98 milioni Aumento di 9 milioni (+4,3%)",
           "date": "2026-10-27T12:21:54.555Z"
-        },
-        {
-          "title": "Consiglio Cantonale Soletta: sedute 3, 4 e 11 novembre 2026",
-          "url": "/articoli-soletta/sedute-parlamento-novembre-2026/",
-          "excerpt": "In agenda 58 affari, inclusi 7 affari normativi e di merito e 7 interventi parlamentari urgenti.",
-          "date": "2026-10-27T11:07:13.770Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-28T11:49:36.683Z"
+      "updatedAt": "2026-10-29T10:50:58.955Z"
     },
     "en": {
       "canton": "SO",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Solothurn: Council leadership opposes the hospital PUK",
+          "url": "/en/solothurn-articles/solothurn-hospital-puk-opposed/",
+          "excerpt": "Solothurn’s council leadership considers a PUK on the hospitals unnecessary; the cantonal council will vote on 11 November.",
+          "date": "2026-10-29T10:41:25.882Z"
+        },
+        {
           "title": "221 million francs for lower insurance premiums in the Canton of Solothurn",
           "url": "/en/solothurn-articles/solothurn-premium-subsidies-2027/",
           "excerpt": "In 2027, around CHF 221 million is planned for IPV The allocation increases by CHF 9 million, equal to 4,3% Around CHF 123 million comes from the Confederation",
@@ -193,12 +199,6 @@
           "url": "/en/solothurn-articles/2027-insurance-premium-proposal/",
           "excerpt": "2027 proposal submitted to the Cantonal Parliament Approximately 221 million francs to reduce premiums Cantonal contribution of 98 million Increase of 9 million",
           "date": "2026-10-27T12:21:54.555Z"
-        },
-        {
-          "title": "Solothurn Cantonal Council: meetings of 3, 4 and 11 November 2026",
-          "url": "/en/solothurn-articles/parliament-sessions-november-2026/",
-          "excerpt": "On the agenda 58 affairs, including 7 regulatory and substantive affairs and 7 urgent parliamentary interventions.",
-          "date": "2026-10-27T11:07:13.770Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-28T11:49:36.683Z"
+      "updatedAt": "2026-10-29T10:50:58.955Z"
     },
     "de": {
       "canton": "SO",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Solothurn: Die Ratsleitung gegen die PUK zu den Spitälern",
+          "url": "/de/solothurn-artikel/solothurn-spitaeler-puk-abgelehnt/",
+          "excerpt": "Die Ratsleitung von Solothurn hält eine PUK zu den Spitälern nicht für sinnvoll; der Kantonsrat wird am 11.",
+          "date": "2026-10-29T10:41:25.882Z"
+        },
+        {
           "title": "221 Millionen Franken für niedrigere Versicherungsprämien im Kanton Solothurn",
           "url": "/de/solothurn-artikel/solothurn-pramiezuschusse-2027/",
           "excerpt": "Für 2027 sind rund CHF 221 Millionen für die IPV vorgesehen Die Dotierung steigt um CHF 9 Millionen, was 4,3% entspricht Rund CHF 123 Millionen kommen vom Bund",
@@ -292,12 +298,6 @@
           "url": "/de/solothurn-artikel/praemienverbilligung-2027/",
           "excerpt": "Vorschlag 2027 dem Kantonsparlament übermittelt Rund 221 Millionen Franken zur Senkung der Prämien Kantonsbeitrag von 98 Millionen Erhöhung um 9 Millionen",
           "date": "2026-10-27T12:21:54.555Z"
-        },
-        {
-          "title": "Kantonsrat Solothurn: Sitzungen vom 3., 4. und 11. November 2026",
-          "url": "/de/solothurn-artikel/parlament-sitzungen-november-2026/",
-          "excerpt": "Auf der Tagesordnung stehen 58 Angelegenheiten, darunter 7 regulatorische und materielle Angelegenheiten sowie 7 dringende parlamentarische Interventionen.",
-          "date": "2026-10-27T11:07:13.770Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-28T11:49:36.683Z"
+      "updatedAt": "2026-10-29T10:50:58.955Z"
     },
     "fr": {
       "canton": "SO",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Soleure : la direction du Conseil contre la PUK sur les hôpitaux",
+          "url": "/fr/articles-soleure/soleure-puk-hopitaux-refusee/",
+          "excerpt": "La direction du Conseil de Soleure considère qu’une PUK sur les hôpitaux n’est pas utile ; le Conseil cantonal votera le 11 novembre.",
+          "date": "2026-10-29T10:41:25.882Z"
+        },
+        {
           "title": "221 millions pour réduire les primes d’assurance à Soleure",
           "url": "/fr/articles-soleure/soleure-subventions-primes-2027/",
           "excerpt": "En 2027, environ CHF 221 millions sont prévus pour l’IPV La dotation augmente de CHF 9 millions, soit 4,3 % Environ CHF 123 millions proviennent",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-soleure/proposition-primes-2027/",
           "excerpt": "Proposition 2027 transmise au Parlement cantonal Environ 221 millions de francs pour réduire les primes Contribution cantonale de 98 millions Augmentation de 9",
           "date": "2026-10-27T12:21:54.555Z"
-        },
-        {
-          "title": "Conseil cantonal de Soleure : réunions des 3, 4 et 11 novembre 2026",
-          "url": "/fr/articles-soleure/sessions-parlement-novembre-2026/",
-          "excerpt": "À l'ordre du jour 58 affaires, dont 7 affaires réglementaires et substantielles et 7 interventions parlementaires urgentes.",
-          "date": "2026-10-27T11:07:13.770Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-28T11:49:36.683Z"
+      "updatedAt": "2026-10-29T10:50:58.955Z"
     }
   }
 }
