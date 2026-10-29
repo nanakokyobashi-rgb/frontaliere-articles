@@ -4267,6 +4267,7 @@ test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta',
   assert.match(wf, /WORKFLOW_RUN_EVENT: \$\{\{ github\.event\.workflow_run\.event \}\}/);
   assert.match(wf, /WORKFLOW_RUN_DISPLAY_TITLE: \$\{\{ github\.event\.workflow_run\.display_title \}\}/);
   assert.match(wf, /reconcile-\*\|stale-staged-\*/);
+  assert.match(wf, /stale-late-\*/);
   assert.match(wf, /gh run download "\$WORKFLOW_RUN_ID" --repo "\$REPOSITORY"/);
   assert.match(wf, /\.dispatch_nonce == \$nonce/);
   assert.match(wf, /\.rendered_head == \$source/);

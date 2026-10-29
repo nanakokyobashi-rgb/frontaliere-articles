@@ -126,7 +126,7 @@ jobs:
               child_nonce="${WORKFLOW_RUN_DISPLAY_TITLE#*nonce=}"
               child_nonce="${child_nonce%% / dry=*}"
               case "$child_nonce" in
-                reconcile-*|stale-staged-*)
+                reconcile-*|stale-staged-*|stale-late-*)
                   trusted_child=true
                   ;;
               esac
@@ -180,7 +180,7 @@ jobs:
             exit 1
           fi
           case "$CHILD_NONCE" in
-            reconcile-*|stale-staged-*) ;;
+            reconcile-*|stale-staged-*|stale-late-*) ;;
             *)
               echo "::error::nonce child non riconosciuto: $CHILD_NONCE"
               exit 1
