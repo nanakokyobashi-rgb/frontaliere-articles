@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "note": "SHA-256 of the SCALAR half of SiteShellContract. Both repositories assert this fingerprint. Re-recorded 2026-10-25 after transporting the site's current contextual-link rules for Chiasso wait times and public competitions; the GA4-only square-screen gate and content-addressed GTAG_INIT_URL remain byte-equal to the site.",
+  "note": "SHA-256 of SiteShellContract scalars. Re-recorded for canonical telemetry URL credential stripping; GTAG source helper and snippet must stay byte-equal across site and corpus.",
   "scalarFields": 22,
-  "sha256": "08b97443ab5e85ab6ea85945a19348134a77615e488eaf3afd25d00979d7fd26"
+  "sha256": "4055da867b24166e16af7411c2aaf1e5b67adfb82616644d06871f0fc96eac9d"
 }
