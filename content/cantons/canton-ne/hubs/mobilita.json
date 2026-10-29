@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-29T08:53:42.745Z",
-  "contentHash": "af99fcf5e7075174da6b7fe3e9e51036c1b8ce6c15fd8a124774b07d25a51692",
+  "updatedAt": "2026-10-29T15:32:04.680Z",
+  "contentHash": "b39500c61521643ffe6f869832b8f95d708f298b3a623a062dea9d30dc3b1b91",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-29T01:18:28.468Z",
+      "updatedAt": "2026-10-29T10:29:04.010Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-28T21:56:57.371Z",
+      "updatedAt": "2026-10-29T11:47:10.249Z",
       "keyFacts": 0
     }
   ],
@@ -124,18 +124,23 @@
             {
               "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
               "value": "Traffico",
-              "date": "2026-10-29T01:18:28.468Z",
+              "date": "2026-10-29T10:29:04.010Z",
               "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-29T01:18:28.468Z"
+          "updatedAt": "2026-10-29T10:29:04.010Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Les projets fédéraux en matière de mobilité progressent dans les Montagnes neuchâteloises",
+              "date": "2026-10-28T16:23:45.000Z",
+              "url": "https://www.ne.ch/communiques-de-presse/les-projets-federaux-en-matiere-de-mobilite-progressent-dans-les-montagnes-neuchateloises"
+            },
             {
               "label": "Le Canton de Neuchâtel, en collaboration avec la Ville de La Chaux-de-Fonds, lance l'appel d'offres pour l'extension du pôle de développement économique du Crêt-du-Locle",
               "date": "2026-10-02T06:50:33.000Z",
@@ -147,7 +152,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -201,7 +206,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-29T08:53:42.745Z"
+      "updatedAt": "2026-10-29T15:32:04.680Z"
     },
     "en": {
       "canton": "NE",
@@ -303,18 +308,23 @@
             {
               "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
               "value": "Traffic",
-              "date": "2026-10-29T01:18:28.468Z",
+              "date": "2026-10-29T10:29:04.010Z",
               "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-29T01:18:28.468Z"
+          "updatedAt": "2026-10-29T10:29:04.010Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Les projets fédéraux en matière de mobilité progressent dans les Montagnes neuchâteloises",
+              "date": "2026-10-28T16:23:45.000Z",
+              "url": "https://www.ne.ch/communiques-de-presse/les-projets-federaux-en-matiere-de-mobilite-progressent-dans-les-montagnes-neuchateloises"
+            },
             {
               "label": "Le Canton de Neuchâtel, en collaboration avec la Ville de La Chaux-de-Fonds, lance l'appel d'offres pour l'extension du pôle de développement économique du Crêt-du-Locle",
               "date": "2026-10-02T06:50:33.000Z",
@@ -326,7 +336,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -380,7 +390,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-29T08:53:42.745Z"
+      "updatedAt": "2026-10-29T15:32:04.680Z"
     },
     "de": {
       "canton": "NE",
@@ -482,18 +492,23 @@
             {
               "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
               "value": "Verkehr",
-              "date": "2026-10-29T01:18:28.468Z",
+              "date": "2026-10-29T10:29:04.010Z",
               "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-29T01:18:28.468Z"
+          "updatedAt": "2026-10-29T10:29:04.010Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Les projets fédéraux en matière de mobilité progressent dans les Montagnes neuchâteloises",
+              "date": "2026-10-28T16:23:45.000Z",
+              "url": "https://www.ne.ch/communiques-de-presse/les-projets-federaux-en-matiere-de-mobilite-progressent-dans-les-montagnes-neuchateloises"
+            },
             {
               "label": "Le Canton de Neuchâtel, en collaboration avec la Ville de La Chaux-de-Fonds, lance l'appel d'offres pour l'extension du pôle de développement économique du Crêt-du-Locle",
               "date": "2026-10-02T06:50:33.000Z",
@@ -505,7 +520,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -559,7 +574,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-29T08:53:42.745Z"
+      "updatedAt": "2026-10-29T15:32:04.680Z"
     },
     "fr": {
       "canton": "NE",
@@ -661,18 +676,23 @@
             {
               "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
               "value": "Trafic",
-              "date": "2026-10-29T01:18:28.468Z",
+              "date": "2026-10-29T10:29:04.010Z",
               "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-29T01:18:28.468Z"
+          "updatedAt": "2026-10-29T10:29:04.010Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Les projets fédéraux en matière de mobilité progressent dans les Montagnes neuchâteloises",
+              "date": "2026-10-28T16:23:45.000Z",
+              "url": "https://www.ne.ch/communiques-de-presse/les-projets-federaux-en-matiere-de-mobilite-progressent-dans-les-montagnes-neuchateloises"
+            },
             {
               "label": "Le Canton de Neuchâtel, en collaboration avec la Ville de La Chaux-de-Fonds, lance l'appel d'offres pour l'extension du pôle de développement économique du Crêt-du-Locle",
               "date": "2026-10-02T06:50:33.000Z",
@@ -684,7 +704,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -738,7 +758,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-29T08:53:42.745Z"
+      "updatedAt": "2026-10-29T15:32:04.680Z"
     }
   }
 }

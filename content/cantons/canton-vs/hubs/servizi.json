@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "servizi",
-  "updatedAt": "2026-10-29T08:53:42.745Z",
-  "contentHash": "895692e07380c507cf29d0bd948be6a32c2d837cc7abca7f91274637cca0d08f",
+  "updatedAt": "2026-10-29T15:32:04.680Z",
+  "contentHash": "f5b539fab192f5e6ee7bcc8b85d31485c973294d9b1c80cb641118a3c582926a",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-28T21:56:57.371Z",
+      "updatedAt": "2026-10-29T11:47:10.249Z",
       "keyFacts": 0
     }
   ],
@@ -119,6 +119,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Quelques foulées pour nos « prémas » : un événement ouvert à toutes et tous le dimanche 15 novembre 2026",
+              "date": "2026-10-29",
+              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/29/quelques-foulees-pour-nos-premas-un-evenement-ouvert-a-toutes-et-tous-le-dimanche-15-novembre-2026"
+            },
+            {
               "label": "Séverine Charbonnet-Lusson obtient le mérite soignant 2026",
               "date": "2026-10-28",
               "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/28/severine-charbonnet-lusson-obtient-le-merite-soignant-2026"
@@ -142,14 +147,9 @@
               "label": "Invitation à la journée des proches aidants le 30 octobre à Sion",
               "date": "2026-10-12",
               "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/12/journee-des-proches-aidants-du-vendredi-30-octobre-2026-a-lhopital-de-sion"
-            },
-            {
-              "label": "Haut-Valais: Caroline Berchtold-Hutter nommée directrice des soins & MTT",
-              "date": "2026-10-02",
-              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/2/haut-valais-caroline-berchtold-hutter-nommee-directrice-des-soins-mtt"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -229,7 +229,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-29T08:53:42.745Z"
+      "updatedAt": "2026-10-29T15:32:04.680Z"
     },
     "en": {
       "canton": "VS",
@@ -321,6 +321,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Quelques foulées pour nos « prémas » : un événement ouvert à toutes et tous le dimanche 15 novembre 2026",
+              "date": "2026-10-29",
+              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/29/quelques-foulees-pour-nos-premas-un-evenement-ouvert-a-toutes-et-tous-le-dimanche-15-novembre-2026"
+            },
+            {
               "label": "Séverine Charbonnet-Lusson obtient le mérite soignant 2026",
               "date": "2026-10-28",
               "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/28/severine-charbonnet-lusson-obtient-le-merite-soignant-2026"
@@ -344,14 +349,9 @@
               "label": "Invitation à la journée des proches aidants le 30 octobre à Sion",
               "date": "2026-10-12",
               "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/12/journee-des-proches-aidants-du-vendredi-30-octobre-2026-a-lhopital-de-sion"
-            },
-            {
-              "label": "Haut-Valais: Caroline Berchtold-Hutter nommée directrice des soins & MTT",
-              "date": "2026-10-02",
-              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/2/haut-valais-caroline-berchtold-hutter-nommee-directrice-des-soins-mtt"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -427,7 +427,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-29T08:53:42.745Z"
+      "updatedAt": "2026-10-29T15:32:04.680Z"
     },
     "de": {
       "canton": "VS",
@@ -519,6 +519,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Quelques foulées pour nos « prémas » : un événement ouvert à toutes et tous le dimanche 15 novembre 2026",
+              "date": "2026-10-29",
+              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/29/quelques-foulees-pour-nos-premas-un-evenement-ouvert-a-toutes-et-tous-le-dimanche-15-novembre-2026"
+            },
+            {
               "label": "Séverine Charbonnet-Lusson obtient le mérite soignant 2026",
               "date": "2026-10-28",
               "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/28/severine-charbonnet-lusson-obtient-le-merite-soignant-2026"
@@ -542,14 +547,9 @@
               "label": "Invitation à la journée des proches aidants le 30 octobre à Sion",
               "date": "2026-10-12",
               "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/12/journee-des-proches-aidants-du-vendredi-30-octobre-2026-a-lhopital-de-sion"
-            },
-            {
-              "label": "Haut-Valais: Caroline Berchtold-Hutter nommée directrice des soins & MTT",
-              "date": "2026-10-02",
-              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/2/haut-valais-caroline-berchtold-hutter-nommee-directrice-des-soins-mtt"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -625,7 +625,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-29T08:53:42.745Z"
+      "updatedAt": "2026-10-29T15:32:04.680Z"
     },
     "fr": {
       "canton": "VS",
@@ -717,6 +717,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Quelques foulées pour nos « prémas » : un événement ouvert à toutes et tous le dimanche 15 novembre 2026",
+              "date": "2026-10-29",
+              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/29/quelques-foulees-pour-nos-premas-un-evenement-ouvert-a-toutes-et-tous-le-dimanche-15-novembre-2026"
+            },
+            {
               "label": "Séverine Charbonnet-Lusson obtient le mérite soignant 2026",
               "date": "2026-10-28",
               "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/28/severine-charbonnet-lusson-obtient-le-merite-soignant-2026"
@@ -740,14 +745,9 @@
               "label": "Invitation à la journée des proches aidants le 30 octobre à Sion",
               "date": "2026-10-12",
               "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/12/journee-des-proches-aidants-du-vendredi-30-octobre-2026-a-lhopital-de-sion"
-            },
-            {
-              "label": "Haut-Valais: Caroline Berchtold-Hutter nommée directrice des soins & MTT",
-              "date": "2026-10-02",
-              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/2/haut-valais-caroline-berchtold-hutter-nommee-directrice-des-soins-mtt"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -819,7 +819,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-29T08:53:42.745Z"
+      "updatedAt": "2026-10-29T15:32:04.680Z"
     }
   }
 }

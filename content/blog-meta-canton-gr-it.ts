@@ -51,6 +51,9 @@ const blogMetaCantonGrIt: Record<string, string> = {
     'blog.article.brigels-sette-milioni-impianti.title': 'Brigels approva 7 milioni di CHF per risanare gli impianti',
     'blog.article.brigels-sette-milioni-impianti.excerpt': 'Brigels approva 7 milioni di CHF per il risanamento degli impianti di risalita.',
     'blog.article.brigels-sette-milioni-impianti.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.bus-sostitutivi-grigioni.title': 'Bus sostitutivi RhB tra Thusis e Preda per un cantiere',
+    'blog.article.bus-sostitutivi-grigioni.excerpt': 'La fonte segnala bus sostitutivi tra Thusis e Preda a causa di un cantiere RhB; il Verkehrsticker segue lo stato delle vie di traffico grigionesi.',
+    'blog.article.bus-sostitutivi-grigioni.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonGrIt;

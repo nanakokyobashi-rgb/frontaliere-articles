@@ -4,13 +4,18 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "eventi",
-  "updatedAt": "2026-10-29T07:40:41.678Z",
-  "contentHash": "0b2202de5db7711d1dce33c7c5e94d2c2b670b815f7d4f65ebbe58665d8582f2",
+  "updatedAt": "2026-10-29T15:32:04.680Z",
+  "contentHash": "4e1c0655cd63d4203196e9b9668b50be9bda31c9fe7ad293df745b2e137fa55f",
   "blocks": [
     {
       "id": "prossimi-eventi",
       "updatedAt": "2026-10-28T19:25:39.771Z",
       "keyFacts": 1
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-29T11:47:10.249Z",
+      "keyFacts": 0
     }
   ],
   "locales": {
@@ -96,6 +101,19 @@
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/friburgo/",
           "updatedAt": "2026-10-28T19:25:39.771Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Öffentlicher Informationsanlass zum Projekt einer Wildtierpassage in Saussivue",
+              "date": "2026-10-29T08:28:22.000Z",
+              "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
+            }
+          ],
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +135,7 @@
           "url": "/eventi/friburgo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-29T15:32:04.680Z"
     },
     "en": {
       "canton": "FR",
@@ -201,6 +219,19 @@
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/fribourg/",
           "updatedAt": "2026-10-28T19:25:39.771Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Öffentlicher Informationsanlass zum Projekt einer Wildtierpassage in Saussivue",
+              "date": "2026-10-29T08:28:22.000Z",
+              "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
+            }
+          ],
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +253,7 @@
           "url": "/en/events/fribourg/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-29T15:32:04.680Z"
     },
     "de": {
       "canton": "FR",
@@ -306,6 +337,19 @@
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/freiburg/",
           "updatedAt": "2026-10-28T19:25:39.771Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Öffentlicher Informationsanlass zum Projekt einer Wildtierpassage in Saussivue",
+              "date": "2026-10-29T08:28:22.000Z",
+              "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
+            }
+          ],
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +371,7 @@
           "url": "/de/veranstaltungen/freiburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-29T15:32:04.680Z"
     },
     "fr": {
       "canton": "FR",
@@ -411,6 +455,19 @@
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/fribourg/",
           "updatedAt": "2026-10-28T19:25:39.771Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Öffentlicher Informationsanlass zum Projekt einer Wildtierpassage in Saussivue",
+              "date": "2026-10-29T08:28:22.000Z",
+              "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
+            }
+          ],
+          "updatedAt": "2026-10-29T11:47:10.249Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +489,7 @@
           "url": "/fr/evenements/fribourg/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-29T15:32:04.680Z"
     }
   }
 }
