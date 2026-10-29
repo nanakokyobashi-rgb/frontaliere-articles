@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "carburanti",
-  "updatedAt": "2026-10-28T11:40:30.046Z",
-  "contentHash": "19c181194098ef9a32dbb37cc6dd8b85740bdb7a9a1449ac31d61fb8a8748de9",
+  "updatedAt": "2026-10-29T08:53:42.745Z",
+  "contentHash": "a0f70b3d3d333956c5de0cbb8fe61ad9b4710ed10be3a0905cc971c490ce4310",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "CFF Cargo ferma il trasporto del legno ad Alle da dicembre",
+          "url": "/articoli-giura/cff-cargo-rinuncia-legno-alle/",
+          "excerpt": "Da dicembre CFF Cargo sopprime il servizio per i carri singoli Il legno dall'Ajoie passerà alla strada La piattaforma di Alle costò CHF 14 milioni nel 2021",
+          "date": "2026-10-29T08:45:30.807Z"
+        },
+        {
           "title": "Arco giurassiano: mutazioni del lavoro frontaliero",
           "url": "/articoli-giura/mutazioni-lavoro-frontaliero-jura/",
           "excerpt": "La puntata 43718 di «Le sens de l'éco» mette a tema le mutazioni dell'impiego frontaliero nell'Arco giurassiano; il materiale fornito non riporta altri dettagli.",
@@ -94,12 +100,6 @@
           "url": "/articoli-giura/governo-giurassiano-nomine-2027/",
           "excerpt": "Sandrine Crevoisier guiderà il nuovo Servizio penitenziario.",
           "date": "2026-10-26T18:04:54.331Z"
-        },
-        {
-          "title": "Giura aumenta sussidi per famiglie a basso reddito",
-          "url": "/articoli-giura/giura-aumento-sussidi-famiglie/",
-          "excerpt": "Il massimale del supplemento passa da 300 a 330 CHF al mese per genitore per famiglie con RDU inferiore a 18'000 CHF, decorrenza 2027.",
-          "date": "2026-10-24T18:24:32.255Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-28T11:40:30.046Z"
+      "updatedAt": "2026-10-29T08:53:42.745Z"
     },
     "en": {
       "canton": "JU",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "CFF Cargo stops the transport of wood in Alle from December",
+          "url": "/en/jura-articles/cff-cargo-renounces-wood-transport-alle/",
+          "excerpt": "CFF Cargo discontinues service for single wagons from December Wood from Ajoie will pass to the road Alle's platform cost CHF 14 million in 2021 The transport",
+          "date": "2026-10-29T08:45:30.807Z"
+        },
+        {
           "title": "Jura Arc: transformations in cross-border employment",
           "url": "/en/jura-articles/jurassian-arc-cross-border-work/",
           "excerpt": "Episode 43718 of «Le sens de l'éco» focuses on changes in cross-border employment in the Jura Arc; the material provided contains no other details.",
@@ -193,12 +199,6 @@
           "url": "/en/jura-articles/jura-government-appointments-2027/",
           "excerpt": "Sandrine Crevoisier will lead the new Penitentiary Service.",
           "date": "2026-10-26T18:04:54.331Z"
-        },
-        {
-          "title": "Jura increases subsidies for low-income families",
-          "url": "/en/jura-articles/jura-subsidy-increase-low-income/",
-          "excerpt": "The maximum supplement increases from 300 to 330 CHF per month per parent for families with RDU below 18'000 CHF, effective 2027.",
-          "date": "2026-10-24T18:24:32.255Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-28T11:40:30.046Z"
+      "updatedAt": "2026-10-29T08:53:42.745Z"
     },
     "de": {
       "canton": "JU",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "CFF Cargo stellt ab Dezember den Holztransport in Alle ein",
+          "url": "/de/jura-artikel/sbb-cargo-verzichtet-auf-holztransport-alle/",
+          "excerpt": "CFF Cargo stellt ab Dezember den Betrieb für Einzelwagen ein Wald von Ajoie wird zur Straße übergehen Die Plattform von Alle kostete 2021 14 Millionen CHF",
+          "date": "2026-10-29T08:45:30.807Z"
+        },
+        {
           "title": "Jurabogen: Veränderungen der Grenzgängerbeschäftigung",
           "url": "/de/jura-artikel/jurabogen-grenzgaenger-arbeit/",
           "excerpt": "Die Folge 43718 von «Le sens de l'éco» thematisiert die Veränderungen der Grenzgängerbeschäftigung im Jurabogen; das bereitgestellte Material enthält keine weiteren Details.",
@@ -292,12 +298,6 @@
           "url": "/de/jura-artikel/jurakanton-nominationen-2027/",
           "excerpt": "Sandrine Crevoisier wird den neuen Gefängnisdienst leiten.",
           "date": "2026-10-26T18:04:54.331Z"
-        },
-        {
-          "title": "Jura erhöht die Zuschüsse für Familien mit niedrigem Einkommen",
-          "url": "/de/jura-artikel/jura-subvention-erhoehung-familien/",
-          "excerpt": "Der Höchstbetrag des Zuschlags steigt für Familien mit einem RDU unter 18'000 CHF ab 2027 von 300 auf 330 CHF pro Monat und Elternteil.",
-          "date": "2026-10-24T18:24:32.255Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-28T11:40:30.046Z"
+      "updatedAt": "2026-10-29T08:53:42.745Z"
     },
     "fr": {
       "canton": "JU",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "CFF Cargo arrête le transport de bois à Alle à partir de décembre",
+          "url": "/fr/articles-jura/cff-cargo-renonce-transport-bois-alle/",
+          "excerpt": "CFF Cargo cesse le service pour les wagons individuels à partir de décembre Le bois d'Ajoie passera à la route La plateforme d'Alle a coûté 14 millions de CHF",
+          "date": "2026-10-29T08:45:30.807Z"
+        },
+        {
           "title": "Arc jurassien : mutations du travail frontalier",
           "url": "/fr/articles-jura/arc-jurassien-emploi-frontalier/",
           "excerpt": "L'épisode 43718 de «Le sens de l'éco» porte sur les mutations de l'emploi frontalier dans l'Arc jurassien ; le matériel fourni ne rapporte pas d'autres détails.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-jura/gouvernement-jurassien-nominations-2027/",
           "excerpt": "Sandrine Crevoisier dirigera le nouveau Service pénitentiaire.",
           "date": "2026-10-26T18:04:54.331Z"
-        },
-        {
-          "title": "Le Jura augmente les aides pour les familles à faible revenu",
-          "url": "/fr/articles-jura/jura-augmentation-subventions-familles/",
-          "excerpt": "Le plafond du supplément passe de 300 à 330 CHF par mois et par parent pour les familles dont le RDU est inférieur à 18'000 CHF, à compter de 2027.",
-          "date": "2026-10-24T18:24:32.255Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-28T11:40:30.046Z"
+      "updatedAt": "2026-10-29T08:53:42.745Z"
     }
   }
 }

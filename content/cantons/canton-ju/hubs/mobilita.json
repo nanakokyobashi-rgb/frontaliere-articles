@@ -4,12 +4,12 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "mobilita",
-  "updatedAt": "2026-10-29T07:40:41.678Z",
-  "contentHash": "bc65da2be9f828e6316b3f88d05b136190334448965601850976f86f44e88dab",
+  "updatedAt": "2026-10-29T08:53:42.745Z",
+  "contentHash": "f6dfd90ca4ada436695c5cd01e03fdcc695bf061b7a589e492609c01eca49b75",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-27T23:59:59.000Z",
+      "updatedAt": "2026-10-28T23:59:59.000Z",
       "keyFacts": 1
     },
     {
@@ -33,14 +33,14 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Boncourt-Delle (A16), settimana conclusa: 27 ottobre 2026"
+          "note": "Boncourt-Delle (A16), settimana conclusa: 28 ottobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 21 ottobre 2026 – 27 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 22 ottobre 2026 – 28 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Boncourt-Delle (A16)",
@@ -63,7 +63,7 @@
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-27T23:59:59.000Z"
+          "updatedAt": "2026-10-28T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -100,6 +100,12 @@
         }
       ],
       "curatedArticles": [
+        {
+          "title": "CFF Cargo ferma il trasporto del legno ad Alle da dicembre",
+          "url": "/articoli-giura/cff-cargo-rinuncia-legno-alle/",
+          "excerpt": "Da dicembre CFF Cargo sopprime il servizio per i carri singoli Il legno dall'Ajoie passerà alla strada La piattaforma di Alle costò CHF 14 milioni nel 2021",
+          "date": "2026-10-29T08:45:30.807Z"
+        },
         {
           "title": "Ritardo cantiere Stockmar: rientro alunni a gennaio 2028",
           "url": "/articoli-giura/stockmar-ritardo-cantiere-2027/",
@@ -138,7 +144,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-29T08:53:42.745Z"
     },
     "en": {
       "canton": "JU",
@@ -149,14 +155,14 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Boncourt-Delle (A16), week ending 27 October 2026"
+          "note": "Boncourt-Delle (A16), week ending 28 October 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 21 October 2026 to 27 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 22 October 2026 to 28 October 2026, fastest first.",
           "items": [
             {
               "label": "Boncourt-Delle (A16)",
@@ -179,7 +185,7 @@
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-27T23:59:59.000Z"
+          "updatedAt": "2026-10-28T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -216,6 +222,12 @@
         }
       ],
       "curatedArticles": [
+        {
+          "title": "CFF Cargo stops the transport of wood in Alle from December",
+          "url": "/en/jura-articles/cff-cargo-renounces-wood-transport-alle/",
+          "excerpt": "CFF Cargo discontinues service for single wagons from December Wood from Ajoie will pass to the road Alle's platform cost CHF 14 million in 2021 The transport",
+          "date": "2026-10-29T08:45:30.807Z"
+        },
         {
           "title": "Stockmar site delay: return of students in January 2028",
           "url": "/en/jura-articles/stockmar-construction-delay-2027/",
@@ -254,7 +266,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-29T08:53:42.745Z"
     },
     "de": {
       "canton": "JU",
@@ -265,14 +277,14 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Boncourt-Delle (A16), Woche bis 27. Oktober 2026"
+          "note": "Boncourt-Delle (A16), Woche bis 28. Oktober 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 21. Oktober 2026 bis 27. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 22. Oktober 2026 bis 28. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Boncourt-Delle (A16)",
@@ -295,7 +307,7 @@
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-27T23:59:59.000Z"
+          "updatedAt": "2026-10-28T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -332,6 +344,12 @@
         }
       ],
       "curatedArticles": [
+        {
+          "title": "CFF Cargo stellt ab Dezember den Holztransport in Alle ein",
+          "url": "/de/jura-artikel/sbb-cargo-verzichtet-auf-holztransport-alle/",
+          "excerpt": "CFF Cargo stellt ab Dezember den Betrieb für Einzelwagen ein Wald von Ajoie wird zur Straße übergehen Die Plattform von Alle kostete 2021 14 Millionen CHF",
+          "date": "2026-10-29T08:45:30.807Z"
+        },
         {
           "title": "Baustellenverzögerung Stockmar: Rückkehr der Schüler im Januar 2028",
           "url": "/de/jura-artikel/stockmar-bauverzoegerung-2027/",
@@ -370,7 +388,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-29T08:53:42.745Z"
     },
     "fr": {
       "canton": "JU",
@@ -381,14 +399,14 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Boncourt-Delle (A16), semaine jusqu’au 27 octobre 2026"
+          "note": "Boncourt-Delle (A16), semaine jusqu’au 28 octobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 21 octobre 2026 au 27 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 22 octobre 2026 au 28 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Boncourt-Delle (A16)",
@@ -411,7 +429,7 @@
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-27T23:59:59.000Z"
+          "updatedAt": "2026-10-28T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -448,6 +466,12 @@
         }
       ],
       "curatedArticles": [
+        {
+          "title": "CFF Cargo arrête le transport de bois à Alle à partir de décembre",
+          "url": "/fr/articles-jura/cff-cargo-renonce-transport-bois-alle/",
+          "excerpt": "CFF Cargo cesse le service pour les wagons individuels à partir de décembre Le bois d'Ajoie passera à la route La plateforme d'Alle a coûté 14 millions de CHF",
+          "date": "2026-10-29T08:45:30.807Z"
+        },
         {
           "title": "Retard chantier Stockmar : rentrée des élèves en janvier 2028",
           "url": "/fr/articles-jura/stockmar-retard-chantier-2027/",
@@ -486,7 +510,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-29T08:53:42.745Z"
     }
   }
 }

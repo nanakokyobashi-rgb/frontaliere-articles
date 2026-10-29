@@ -4,12 +4,12 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "mobilita",
-  "updatedAt": "2026-10-29T07:40:41.678Z",
-  "contentHash": "6a04713ac90d56c12dfedaa03608a541f72b50447e4ee2e22c848d44d0c09a46",
+  "updatedAt": "2026-10-29T08:53:42.745Z",
+  "contentHash": "6a0e132a2e25c6d39bcd84af64d2520aab53ceecf2c33468cca68249ca62274f",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-27T23:59:59.000Z",
+      "updatedAt": "2026-10-28T23:59:59.000Z",
       "keyFacts": 1
     },
     {
@@ -33,7 +33,7 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Biegno-Indemini, settimana conclusa: 27 ottobre 2026"
+          "note": "Biegno-Indemini, settimana conclusa: 28 ottobre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
@@ -50,7 +50,7 @@
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 21 ottobre 2026 – 27 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 22 ottobre 2026 – 28 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Biegno-Indemini",
@@ -71,39 +71,39 @@
               "url": "/traffico-dogane/camedo/oggi/"
             },
             {
+              "label": "Campione d'Italia-Bissone",
+              "value": "0 min",
+              "detail": "48 rilevazioni",
+              "url": "/traffico-dogane/campione-d-italia-bissone/oggi/"
+            },
+            {
+              "label": "Chiasso-Brogeda",
+              "value": "0 min",
+              "detail": "48 rilevazioni",
+              "url": "/traffico-dogane/chiasso-brogeda/oggi/"
+            },
+            {
+              "label": "Chiasso Centro (Ponte Chiasso)",
+              "value": "0 min",
+              "detail": "48 rilevazioni",
+              "url": "/traffico-dogane/chiasso-centro/oggi/"
+            },
+            {
+              "label": "Chiasso-Strada",
+              "value": "0 min",
+              "detail": "48 rilevazioni",
+              "url": "/traffico-dogane/chiasso-strada/oggi/"
+            },
+            {
               "label": "Clivio-Ligornetto",
               "value": "0 min",
               "detail": "48 rilevazioni",
               "url": "/traffico-dogane/clivio-ligornetto/oggi/"
-            },
-            {
-              "label": "Cremenaga-Ponte Cremenaga",
-              "value": "0 min",
-              "detail": "48 rilevazioni",
-              "url": "/traffico-dogane/cremenaga-ponte-cremenaga/oggi/"
-            },
-            {
-              "label": "Crociale dei Mulini",
-              "value": "0 min",
-              "detail": "48 rilevazioni",
-              "url": "/traffico-dogane/crociale-dei-mulini/oggi/"
-            },
-            {
-              "label": "Drezzo-Pedrinate",
-              "value": "0 min",
-              "detail": "48 rilevazioni",
-              "url": "/traffico-dogane/drezzo-pedrinate/oggi/"
-            },
-            {
-              "label": "Dumenza-Cassinone",
-              "value": "0 min",
-              "detail": "48 rilevazioni",
-              "url": "/traffico-dogane/dumenza-cassinone/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-27T23:59:59.000Z"
+          "updatedAt": "2026-10-28T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -294,7 +294,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-29T08:53:42.745Z"
     },
     "en": {
       "canton": "TI",
@@ -305,7 +305,7 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Biegno-Indemini, week ending 27 October 2026"
+          "note": "Biegno-Indemini, week ending 28 October 2026"
         },
         {
           "label": "Road closures in force or imminent",
@@ -322,7 +322,7 @@
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 21 October 2026 to 27 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 22 October 2026 to 28 October 2026, fastest first.",
           "items": [
             {
               "label": "Biegno-Indemini",
@@ -343,39 +343,39 @@
               "url": "/en/border-wait/camedo/today/"
             },
             {
+              "label": "Campione d'Italia-Bissone",
+              "value": "0 min",
+              "detail": "48 readings",
+              "url": "/en/border-wait/campione-d-italia-bissone/today/"
+            },
+            {
+              "label": "Chiasso-Brogeda",
+              "value": "0 min",
+              "detail": "48 readings",
+              "url": "/en/border-wait/chiasso-brogeda/today/"
+            },
+            {
+              "label": "Chiasso Centro (Ponte Chiasso)",
+              "value": "0 min",
+              "detail": "48 readings",
+              "url": "/en/border-wait/chiasso-centro/today/"
+            },
+            {
+              "label": "Chiasso-Strada",
+              "value": "0 min",
+              "detail": "48 readings",
+              "url": "/en/border-wait/chiasso-strada/today/"
+            },
+            {
               "label": "Clivio-Ligornetto",
               "value": "0 min",
               "detail": "48 readings",
               "url": "/en/border-wait/clivio-ligornetto/today/"
-            },
-            {
-              "label": "Cremenaga-Ponte Cremenaga",
-              "value": "0 min",
-              "detail": "48 readings",
-              "url": "/en/border-wait/cremenaga-ponte-cremenaga/today/"
-            },
-            {
-              "label": "Crociale dei Mulini",
-              "value": "0 min",
-              "detail": "48 readings",
-              "url": "/en/border-wait/crociale-dei-mulini/today/"
-            },
-            {
-              "label": "Drezzo-Pedrinate",
-              "value": "0 min",
-              "detail": "48 readings",
-              "url": "/en/border-wait/drezzo-pedrinate/today/"
-            },
-            {
-              "label": "Dumenza-Cassinone",
-              "value": "0 min",
-              "detail": "48 readings",
-              "url": "/en/border-wait/dumenza-cassinone/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-27T23:59:59.000Z"
+          "updatedAt": "2026-10-28T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -565,7 +565,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-29T08:53:42.745Z"
     },
     "de": {
       "canton": "TI",
@@ -576,7 +576,7 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Biegno-Indemini, Woche bis 27. Oktober 2026"
+          "note": "Biegno-Indemini, Woche bis 28. Oktober 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
@@ -593,7 +593,7 @@
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 21. Oktober 2026 bis 27. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 22. Oktober 2026 bis 28. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Biegno-Indemini",
@@ -614,39 +614,39 @@
               "url": "/de/wartezeit-grenze/camedo/heute/"
             },
             {
+              "label": "Campione d'Italia-Bissone",
+              "value": "0 Min.",
+              "detail": "48 Messungen",
+              "url": "/de/wartezeit-grenze/campione-d-italia-bissone/heute/"
+            },
+            {
+              "label": "Chiasso-Brogeda",
+              "value": "0 Min.",
+              "detail": "48 Messungen",
+              "url": "/de/wartezeit-grenze/chiasso-brogeda/heute/"
+            },
+            {
+              "label": "Chiasso Centro (Ponte Chiasso)",
+              "value": "0 Min.",
+              "detail": "48 Messungen",
+              "url": "/de/wartezeit-grenze/chiasso-centro/heute/"
+            },
+            {
+              "label": "Chiasso-Strada",
+              "value": "0 Min.",
+              "detail": "48 Messungen",
+              "url": "/de/wartezeit-grenze/chiasso-strada/heute/"
+            },
+            {
               "label": "Clivio-Ligornetto",
               "value": "0 Min.",
               "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/clivio-ligornetto/heute/"
-            },
-            {
-              "label": "Cremenaga-Ponte Cremenaga",
-              "value": "0 Min.",
-              "detail": "48 Messungen",
-              "url": "/de/wartezeit-grenze/cremenaga-ponte-cremenaga/heute/"
-            },
-            {
-              "label": "Crociale dei Mulini",
-              "value": "0 Min.",
-              "detail": "48 Messungen",
-              "url": "/de/wartezeit-grenze/crociale-dei-mulini/heute/"
-            },
-            {
-              "label": "Drezzo-Pedrinate",
-              "value": "0 Min.",
-              "detail": "48 Messungen",
-              "url": "/de/wartezeit-grenze/drezzo-pedrinate/heute/"
-            },
-            {
-              "label": "Dumenza-Cassinone",
-              "value": "0 Min.",
-              "detail": "48 Messungen",
-              "url": "/de/wartezeit-grenze/dumenza-cassinone/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-27T23:59:59.000Z"
+          "updatedAt": "2026-10-28T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -836,7 +836,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-29T08:53:42.745Z"
     },
     "fr": {
       "canton": "TI",
@@ -847,7 +847,7 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Biegno-Indemini, semaine jusqu’au 27 octobre 2026"
+          "note": "Biegno-Indemini, semaine jusqu’au 28 octobre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
@@ -864,7 +864,7 @@
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 21 octobre 2026 au 27 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 22 octobre 2026 au 28 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Biegno-Indemini",
@@ -885,39 +885,39 @@
               "url": "/fr/temps-attente-douane/camedo/aujourd-hui/"
             },
             {
+              "label": "Campione d'Italia-Bissone",
+              "value": "0 min",
+              "detail": "48 relevés",
+              "url": "/fr/temps-attente-douane/campione-d-italia-bissone/aujourd-hui/"
+            },
+            {
+              "label": "Chiasso-Brogeda",
+              "value": "0 min",
+              "detail": "48 relevés",
+              "url": "/fr/temps-attente-douane/chiasso-brogeda/aujourd-hui/"
+            },
+            {
+              "label": "Chiasso Centro (Ponte Chiasso)",
+              "value": "0 min",
+              "detail": "48 relevés",
+              "url": "/fr/temps-attente-douane/chiasso-centro/aujourd-hui/"
+            },
+            {
+              "label": "Chiasso-Strada",
+              "value": "0 min",
+              "detail": "48 relevés",
+              "url": "/fr/temps-attente-douane/chiasso-strada/aujourd-hui/"
+            },
+            {
               "label": "Clivio-Ligornetto",
               "value": "0 min",
               "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/clivio-ligornetto/aujourd-hui/"
-            },
-            {
-              "label": "Cremenaga-Ponte Cremenaga",
-              "value": "0 min",
-              "detail": "48 relevés",
-              "url": "/fr/temps-attente-douane/cremenaga-ponte-cremenaga/aujourd-hui/"
-            },
-            {
-              "label": "Crociale dei Mulini",
-              "value": "0 min",
-              "detail": "48 relevés",
-              "url": "/fr/temps-attente-douane/crociale-dei-mulini/aujourd-hui/"
-            },
-            {
-              "label": "Drezzo-Pedrinate",
-              "value": "0 min",
-              "detail": "48 relevés",
-              "url": "/fr/temps-attente-douane/drezzo-pedrinate/aujourd-hui/"
-            },
-            {
-              "label": "Dumenza-Cassinone",
-              "value": "0 min",
-              "detail": "48 relevés",
-              "url": "/fr/temps-attente-douane/dumenza-cassinone/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-27T23:59:59.000Z"
+          "updatedAt": "2026-10-28T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -1108,7 +1108,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-29T08:53:42.745Z"
     }
   }
 }

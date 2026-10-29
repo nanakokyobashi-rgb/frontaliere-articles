@@ -4,12 +4,12 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "mobilita",
-  "updatedAt": "2026-10-29T07:40:41.678Z",
-  "contentHash": "33689a56315e54ef4a0e9b917c9873335b56e4dbbfbf41e204cb6649c53209c9",
+  "updatedAt": "2026-10-29T08:53:42.745Z",
+  "contentHash": "ee35ee00d09adf9a3ceddaec99a7562c9725377d1135d78780508c901b7be71e",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-27T23:59:59.000Z",
+      "updatedAt": "2026-10-28T23:59:59.000Z",
       "keyFacts": 1
     },
     {
@@ -33,7 +33,7 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Dettighofen – Rafz, settimana conclusa: 27 ottobre 2026"
+          "note": "Dettighofen – Rafz, settimana conclusa: 28 ottobre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
@@ -50,7 +50,7 @@
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 21 ottobre 2026 – 27 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 22 ottobre 2026 – 28 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Dettighofen – Rafz",
@@ -103,7 +103,7 @@
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-27T23:59:59.000Z"
+          "updatedAt": "2026-10-28T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -282,7 +282,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-29T08:53:42.745Z"
     },
     "en": {
       "canton": "ZH",
@@ -293,7 +293,7 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Dettighofen – Rafz, week ending 27 October 2026"
+          "note": "Dettighofen – Rafz, week ending 28 October 2026"
         },
         {
           "label": "Road closures in force or imminent",
@@ -310,7 +310,7 @@
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 21 October 2026 to 27 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 22 October 2026 to 28 October 2026, fastest first.",
           "items": [
             {
               "label": "Dettighofen – Rafz",
@@ -363,7 +363,7 @@
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-27T23:59:59.000Z"
+          "updatedAt": "2026-10-28T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -542,7 +542,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-29T08:53:42.745Z"
     },
     "de": {
       "canton": "ZH",
@@ -553,7 +553,7 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Dettighofen – Rafz, Woche bis 27. Oktober 2026"
+          "note": "Dettighofen – Rafz, Woche bis 28. Oktober 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
@@ -570,7 +570,7 @@
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 21. Oktober 2026 bis 27. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 22. Oktober 2026 bis 28. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Dettighofen – Rafz",
@@ -623,7 +623,7 @@
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-27T23:59:59.000Z"
+          "updatedAt": "2026-10-28T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -802,7 +802,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-29T08:53:42.745Z"
     },
     "fr": {
       "canton": "ZH",
@@ -813,7 +813,7 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Dettighofen – Rafz, semaine jusqu’au 27 octobre 2026"
+          "note": "Dettighofen – Rafz, semaine jusqu’au 28 octobre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
@@ -830,7 +830,7 @@
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 21 octobre 2026 au 27 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 22 octobre 2026 au 28 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Dettighofen – Rafz",
@@ -883,7 +883,7 @@
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-27T23:59:59.000Z"
+          "updatedAt": "2026-10-28T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -1062,7 +1062,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-29T08:53:42.745Z"
     }
   }
 }

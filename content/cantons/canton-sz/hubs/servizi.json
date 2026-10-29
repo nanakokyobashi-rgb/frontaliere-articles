@@ -4,8 +4,8 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "servizi",
-  "updatedAt": "2026-10-29T07:40:41.678Z",
-  "contentHash": "2bc4bf464d397e795cb931917127d17c1d00d3bd8f094f552981ab2e72ff4218",
+  "updatedAt": "2026-10-29T08:53:42.745Z",
+  "contentHash": "bc1dcfcac8963de42c1e6084bb3739c7e5ccbd19ed40a0ca2806ced1cc01e15d",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-28T22:34:51.153Z",
+      "updatedAt": "2026-10-29T05:46:49.040Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-28T21:13:47.459Z",
+      "updatedAt": "2026-10-29T06:03:12.578Z",
       "keyFacts": 0
     },
     {
@@ -44,7 +44,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "11",
-          "note": "offerta mediana 200 CHF"
+          "note": "offerta mediana 250 CHF"
         }
       ],
       "dataBlocks": [
@@ -70,21 +70,21 @@
           "items": [
             {
               "label": "SZ4278",
-              "value": "2000 CHF",
+              "value": "2100 CHF",
               "detail": "offerta attuale",
               "date": "2026-11-10T21:00:00.000Z",
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1604"
             },
             {
               "label": "SZ6810",
-              "value": "1700 CHF",
+              "value": "2000 CHF",
               "detail": "offerta attuale",
               "date": "2026-11-10T21:00:00.000Z",
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1605"
             },
             {
               "label": "SZ15145",
-              "value": "310 CHF",
+              "value": "600 CHF",
               "detail": "offerta attuale",
               "date": "2026-11-10T21:00:00.000Z",
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1610"
@@ -92,7 +92,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-28T22:34:51.153Z"
+          "updatedAt": "2026-10-29T05:46:49.040Z"
         },
         {
           "id": "meteo",
@@ -101,12 +101,12 @@
           "items": [
             {
               "label": "Schwyz",
-              "value": "10 °C",
-              "detail": "oggi da 9 a 11 °C"
+              "value": "7 °C",
+              "detail": "oggi da 6 a 11 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-28T21:13:47.459Z"
+          "updatedAt": "2026-10-29T06:03:12.578Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -214,7 +214,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-29T08:53:42.745Z"
     },
     "en": {
       "canton": "SZ",
@@ -231,7 +231,7 @@
         {
           "label": "Plate auctions running",
           "value": "11",
-          "note": "typical bid 200 CHF"
+          "note": "typical bid 250 CHF"
         }
       ],
       "dataBlocks": [
@@ -257,21 +257,21 @@
           "items": [
             {
               "label": "SZ4278",
-              "value": "2,000 CHF",
+              "value": "2,100 CHF",
               "detail": "current bid",
               "date": "2026-11-10T21:00:00.000Z",
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1604"
             },
             {
               "label": "SZ6810",
-              "value": "1,700 CHF",
+              "value": "2,000 CHF",
               "detail": "current bid",
               "date": "2026-11-10T21:00:00.000Z",
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1605"
             },
             {
               "label": "SZ15145",
-              "value": "310 CHF",
+              "value": "600 CHF",
               "detail": "current bid",
               "date": "2026-11-10T21:00:00.000Z",
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1610"
@@ -279,7 +279,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-28T22:34:51.153Z"
+          "updatedAt": "2026-10-29T05:46:49.040Z"
         },
         {
           "id": "meteo",
@@ -288,12 +288,12 @@
           "items": [
             {
               "label": "Schwyz",
-              "value": "10 °C",
-              "detail": "today from 9 to 11 °C"
+              "value": "7 °C",
+              "detail": "today from 6 to 11 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-28T21:13:47.459Z"
+          "updatedAt": "2026-10-29T06:03:12.578Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -397,7 +397,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-29T08:53:42.745Z"
     },
     "de": {
       "canton": "SZ",
@@ -414,7 +414,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "11",
-          "note": "mittleres Gebot 200 CHF"
+          "note": "mittleres Gebot 250 CHF"
         }
       ],
       "dataBlocks": [
@@ -440,21 +440,21 @@
           "items": [
             {
               "label": "SZ4278",
-              "value": "2’000 CHF",
+              "value": "2’100 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-11-10T21:00:00.000Z",
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1604"
             },
             {
               "label": "SZ6810",
-              "value": "1’700 CHF",
+              "value": "2’000 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-11-10T21:00:00.000Z",
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1605"
             },
             {
               "label": "SZ15145",
-              "value": "310 CHF",
+              "value": "600 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-11-10T21:00:00.000Z",
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1610"
@@ -462,7 +462,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-28T22:34:51.153Z"
+          "updatedAt": "2026-10-29T05:46:49.040Z"
         },
         {
           "id": "meteo",
@@ -471,12 +471,12 @@
           "items": [
             {
               "label": "Schwyz",
-              "value": "10 °C",
-              "detail": "heute 9 bis 11 °C"
+              "value": "7 °C",
+              "detail": "heute 6 bis 11 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-28T21:13:47.459Z"
+          "updatedAt": "2026-10-29T06:03:12.578Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -580,7 +580,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-29T08:53:42.745Z"
     },
     "fr": {
       "canton": "SZ",
@@ -597,7 +597,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "11",
-          "note": "offre centrale 200 CHF"
+          "note": "offre centrale 250 CHF"
         }
       ],
       "dataBlocks": [
@@ -623,21 +623,21 @@
           "items": [
             {
               "label": "SZ4278",
-              "value": "2 000 CHF",
+              "value": "2 100 CHF",
               "detail": "offre actuelle",
               "date": "2026-11-10T21:00:00.000Z",
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1604"
             },
             {
               "label": "SZ6810",
-              "value": "1 700 CHF",
+              "value": "2 000 CHF",
               "detail": "offre actuelle",
               "date": "2026-11-10T21:00:00.000Z",
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1605"
             },
             {
               "label": "SZ15145",
-              "value": "310 CHF",
+              "value": "600 CHF",
               "detail": "offre actuelle",
               "date": "2026-11-10T21:00:00.000Z",
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1610"
@@ -645,7 +645,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-28T22:34:51.153Z"
+          "updatedAt": "2026-10-29T05:46:49.040Z"
         },
         {
           "id": "meteo",
@@ -654,12 +654,12 @@
           "items": [
             {
               "label": "Schwyz",
-              "value": "10 °C",
-              "detail": "aujourd’hui de 9 à 11 °C"
+              "value": "7 °C",
+              "detail": "aujourd’hui de 6 à 11 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-28T21:13:47.459Z"
+          "updatedAt": "2026-10-29T06:03:12.578Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -759,7 +759,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-29T08:53:42.745Z"
     }
   }
 }
