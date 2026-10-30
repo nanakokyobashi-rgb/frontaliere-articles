@@ -15,6 +15,9 @@ const blogMetaCantonNwFr: Record<string, string> = {
     'blog.article.eventi-weekend-nidvaldo.title': 'Événements du week-end à Nidwald : que faire samedi & dimanche',
     'blog.article.eventi-weekend-nidvaldo.excerpt': 'Événements à Nidwald chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.',
     'blog.article.eventi-weekend-nidvaldo.imageAlt': 'Événements du week-end à Nidwald',
+    'blog.article.hergiswil-fattura-fiscale-online.title': 'Hergiswil : demande en ligne de la facture fiscale provisoire',
+    'blog.article.hergiswil-fattura-fiscale-online.excerpt': 'À Hergiswil, les factures fiscales provisoires peuvent être demandées en ligne : le formulaire permet de transmettre des modifications qui seront ensuite prises en compte dans la facture.',
+    'blog.article.hergiswil-fattura-fiscale-online.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonNwFr;

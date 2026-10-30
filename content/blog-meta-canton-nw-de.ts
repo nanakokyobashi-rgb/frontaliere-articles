@@ -15,6 +15,9 @@ const blogMetaCantonNwDe: Record<string, string> = {
     'blog.article.eventi-weekend-nidvaldo.title': 'Veranstaltungen am Wochenende in Nidwalden: was tun Sa & So',
     'blog.article.eventi-weekend-nidvaldo.excerpt': 'Veranstaltungen in Nidwalden an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.',
     'blog.article.eventi-weekend-nidvaldo.imageAlt': 'Veranstaltungen am Wochenende in Nidwalden',
+    'blog.article.hergiswil-fattura-fiscale-online.title': 'Hergiswil: Online-Anforderung der provisorischen Steuerrechnung',
+    'blog.article.hergiswil-fattura-fiscale-online.excerpt': 'In Hergiswil können provisorische Steuerrechnungen online angefordert werden: Über das Formular können Änderungen übermittelt werden, die anschließend in der Rechnung berücksichtigt werden.',
+    'blog.article.hergiswil-fattura-fiscale-online.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonNwDe;

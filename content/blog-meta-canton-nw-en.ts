@@ -15,6 +15,9 @@ const blogMetaCantonNwEn: Record<string, string> = {
     'blog.article.eventi-weekend-nidvaldo.title': 'Weekend events in Nidwalden: what to do Saturday & Sunday',
     'blog.article.eventi-weekend-nidvaldo.excerpt': 'Events in Nidwalden every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.',
     'blog.article.eventi-weekend-nidvaldo.imageAlt': 'Weekend events in Nidwalden',
+    'blog.article.hergiswil-fattura-fiscale-online.title': 'Hergiswil: online request for the provisional tax bill',
+    'blog.article.hergiswil-fattura-fiscale-online.excerpt': 'In Hergiswil, provisional tax bills can be requested online: the form allows you to submit changes that will then be incorporated into the bill.',
+    'blog.article.hergiswil-fattura-fiscale-online.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonNwEn;
