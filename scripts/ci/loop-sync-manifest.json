@@ -4364,8 +4364,8 @@
       "reason": "Test node:test (sotto tsx, come gli altri di host/tests/) della garanzia sugli asset della shell: ogni riferimento con nome derivato dal contenuto nel contratto deve essere un file di cui host/ porta i byte, lo script d'ingresso passa quei file alla libreria, e ogni job che rende pagine con la shell esegue il passo prima del primo emettitore. Il sito copre la libreria con tests/cdn-shell-assets.test.ts (Vitest); questo harness legge host/ e i workflow di questo repo.",
       "baseline": {
         "site": null,
-        "corpus": "f4f541e9c860dedb",
-        "alignedAt": "2026-10-30"
+        "corpus": "425ec7dcdf3cad2d",
+        "alignedAt": "2026-10-31"
       }
     },
     {
