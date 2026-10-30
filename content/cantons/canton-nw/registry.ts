@@ -50,4 +50,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'hergiswil-fattura-fiscale-online',
+ category: 'fiscale',
+ date: '2026-10-30T19:39:12.910Z',
+ image: '/images/blog/article-hergiswil-fattura-fiscale-online.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['NW'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];

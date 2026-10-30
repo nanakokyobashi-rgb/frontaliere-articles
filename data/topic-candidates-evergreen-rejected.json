@@ -12081,10 +12081,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://comozero.it/attualita/premio-ai-frontalieri-denuncia-pesantissima-25-milioni-di-tasse-incassati-ma-ai-lavoratori-ancora-zero-euro": {
-      "section": "frontaliere",
-      "ts": 1793200895989
-    },
     "frontaliere::https://www.ticinonews.ch/economia/lastminutecom-il-fatturato-scende-ma-gli-utili-aumentano-445572": {
       "section": "frontaliere",
       "ts": 1793274584530
@@ -12104,6 +12100,18 @@
     "frontaliere::https://www.laregione.ch/cantone/bellinzonese/1959617/a-castione-verso-nuove-realta-lavorative-che-generano-impieghi": {
       "section": "frontaliere",
       "ts": 1793346268586
+    },
+    "frontaliere::https://www.laregione.ch/cantone/luganese/1959907/dai-piani-alle-ruspe-posata-la-prima-pietra-del-tram-treno": {
+      "section": "frontaliere",
+      "ts": 1793374105622
+    },
+    "frontaliere::https://www.rsi.ch/s/4203495": {
+      "section": "frontaliere",
+      "ts": 1793374305996
+    },
+    "frontaliere::https://comozero.it/attualita/tram-treno-luganese-posa-prima-pietra-manno-lavori": {
+      "section": "frontaliere",
+      "ts": 1793387909024
     }
   }
 }

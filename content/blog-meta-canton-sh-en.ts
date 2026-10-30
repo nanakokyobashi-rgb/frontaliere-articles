@@ -81,6 +81,9 @@ const blogMetaCantonShEn: Record<string, string> = {
     'blog.article.competenze-finanziarie-sciaffusa.title': 'Schaffhausen updates financial skills from 2027',
     'blog.article.competenze-finanziarie-sciaffusa.excerpt': 'From January 1, 2027, the Government may authorize one-time expenditures of up to CHF 200\'000; the cantonal Parliament up to CHF 1,5 million.',
     'blog.article.competenze-finanziarie-sciaffusa.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.schaffhausen-pharma-medtech-circolar.title': 'Competence center for pharma and medtech in Schaffhausen',
+    'blog.article.schaffhausen-pharma-medtech-circolar.excerpt': 'The be circular project in Neuhausen am Rheinfall aims to promote circularity in pharma and medtech, supported by the canton with a maximum of CHF 630\'000 over three years.',
+    'blog.article.schaffhausen-pharma-medtech-circolar.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonShEn;

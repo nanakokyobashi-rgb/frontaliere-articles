@@ -66,6 +66,9 @@ const blogMetaCantonFrEn: Record<string, string> = {
     'blog.article.tpf-bus-elettrici-friburgo.title': 'Fribourg prepares 24 new electric buses for December',
     'blog.article.tpf-bus-elettrici-friburgo.excerpt': '24 new electric buses for TPF Investment: 20 million francs Six 12-metre buses, 18 articulated buses measuring 18 metres In service from the December timetable',
     'blog.article.tpf-bus-elettrici-friburgo.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.tpf-nuovi-bus-elettrici-friburgo.title': '24 new TPF electric buses for urban and regional routes',
+    'blog.article.tpf-nuovi-bus-elettrici-friburgo.excerpt': 'The phased introduction of 24 new TPF electric buses will begin with next December’s timetable change on urban and regional routes.',
+    'blog.article.tpf-nuovi-bus-elettrici-friburgo.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonFrEn;

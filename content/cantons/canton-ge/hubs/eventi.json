@@ -4,17 +4,17 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "eventi",
-  "updatedAt": "2026-10-30T06:23:49.454Z",
-  "contentHash": "9ec82120ddbc3d4f0e4e8d907497d4b94b88e053eede0c510ebae59bde788fca",
+  "updatedAt": "2026-10-30T19:31:58.244Z",
+  "contentHash": "1f5e35e9d8b11ec1fc92cbad224654a33eb9f2cd16ba567f143fc63ae6ce992e",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-29T21:23:37.654Z",
+      "updatedAt": "2026-10-30T13:23:17.161Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-29T22:02:50.125Z",
+      "updatedAt": "2026-10-30T11:41:14.746Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "394",
+          "value": "401",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,16 +38,52 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
+              "label": "«Quelque chose a changé» Une exposition de l'artiste Lola Jay",
+              "detail": "Genève",
+              "date": "2026-10-30",
+              "url": "https://www.geneve.ch/agenda/quelque-chose-change-exposition-artiste-lola"
+            },
+            {
               "label": "32e Festival International du Film de Genève (GIFF)",
               "detail": "Genève",
               "date": "2026-10-30",
               "url": "https://www.geneve.ch/agenda/festival-international-film-geneve-giff"
             },
             {
+              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "detail": "Genève",
+              "date": "2026-10-30",
+              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+            },
+            {
               "label": "Au cœur de l’héritage de Marguerite Duras : Découvrez le film \"La Douleur\" et rencontrez Jean Marc Turine",
               "detail": "Genève",
               "date": "2026-10-30",
               "url": "https://www.geneve.ch/agenda/coeur-heritage-marguerite-duras-decouvrez-film-douleur-rencontrez-jean-marc-turine"
+            },
+            {
+              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
+              "detail": "Genève",
+              "date": "2026-10-30",
+              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
+            },
+            {
+              "label": "Balades Théâtralisées - De la haute-ville aux bas-fonds",
+              "detail": "Genève",
+              "date": "2026-10-30",
+              "url": "https://www.geneve.ch/agenda/balades-theatralisees-haute-ville-fonds"
+            },
+            {
+              "label": "Cafés genevois: la vie même",
+              "detail": "Genève",
+              "date": "2026-10-30",
+              "url": "https://www.geneve.ch/agenda/cafes-genevois-vie"
+            },
+            {
+              "label": "CHRÜSIMÜSI",
+              "detail": "Genève",
+              "date": "2026-10-30",
+              "url": "https://www.geneve.ch/agenda/chrusimusi"
             },
             {
               "label": "Ciné club",
@@ -60,47 +96,11 @@
               "detail": "Genève",
               "date": "2026-10-30",
               "url": "https://www.geneve.ch/agenda/concert-pouce-quatuor-cordes-bibliotheque-cite"
-            },
-            {
-              "label": "Dark Matter Night",
-              "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/dark-matter-night"
-            },
-            {
-              "label": "DJ TALOCO · HIP HOP - GRIM - DANCEHALL - AMAPIANO",
-              "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/taloco-grim-dancehall-amapiano"
-            },
-            {
-              "label": "GIFF | PROJECTION | CALIFORNIA AVENUE",
-              "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/giff-projection-california-avenue"
-            },
-            {
-              "label": "GIFF | PROJECTION | LE JOURNAL D'UNE FEMME DE CHAMBRE",
-              "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/giff-projection-journal-femme-chambre"
-            },
-            {
-              "label": "GIFF | PROJECTION | MANY PEOPLE NEED TO DIE",
-              "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/giff-projection-many-people-need"
-            },
-            {
-              "label": "GIFF | PROJECTION | OPENING NIGHT: TANGLES",
-              "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/giff-projection-opening-night-tangles"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ginevra/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -118,7 +118,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -140,7 +140,7 @@
           "url": "/eventi/ginevra/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     },
     "en": {
       "canton": "GE",
@@ -150,7 +150,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "394",
+          "value": "401",
           "note": "from the site’s events calendar"
         }
       ],
@@ -161,16 +161,52 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
+              "label": "«Quelque chose a changé» Une exposition de l'artiste Lola Jay",
+              "detail": "Genève",
+              "date": "2026-10-30",
+              "url": "https://www.geneve.ch/agenda/quelque-chose-change-exposition-artiste-lola"
+            },
+            {
               "label": "32e Festival International du Film de Genève (GIFF)",
               "detail": "Genève",
               "date": "2026-10-30",
               "url": "https://www.geneve.ch/agenda/festival-international-film-geneve-giff"
             },
             {
+              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "detail": "Genève",
+              "date": "2026-10-30",
+              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+            },
+            {
               "label": "Au cœur de l’héritage de Marguerite Duras : Découvrez le film \"La Douleur\" et rencontrez Jean Marc Turine",
               "detail": "Genève",
               "date": "2026-10-30",
               "url": "https://www.geneve.ch/agenda/coeur-heritage-marguerite-duras-decouvrez-film-douleur-rencontrez-jean-marc-turine"
+            },
+            {
+              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
+              "detail": "Genève",
+              "date": "2026-10-30",
+              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
+            },
+            {
+              "label": "Balades Théâtralisées - De la haute-ville aux bas-fonds",
+              "detail": "Genève",
+              "date": "2026-10-30",
+              "url": "https://www.geneve.ch/agenda/balades-theatralisees-haute-ville-fonds"
+            },
+            {
+              "label": "Cafés genevois: la vie même",
+              "detail": "Genève",
+              "date": "2026-10-30",
+              "url": "https://www.geneve.ch/agenda/cafes-genevois-vie"
+            },
+            {
+              "label": "CHRÜSIMÜSI",
+              "detail": "Genève",
+              "date": "2026-10-30",
+              "url": "https://www.geneve.ch/agenda/chrusimusi"
             },
             {
               "label": "Ciné club",
@@ -183,47 +219,11 @@
               "detail": "Genève",
               "date": "2026-10-30",
               "url": "https://www.geneve.ch/agenda/concert-pouce-quatuor-cordes-bibliotheque-cite"
-            },
-            {
-              "label": "Dark Matter Night",
-              "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/dark-matter-night"
-            },
-            {
-              "label": "DJ TALOCO · HIP HOP - GRIM - DANCEHALL - AMAPIANO",
-              "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/taloco-grim-dancehall-amapiano"
-            },
-            {
-              "label": "GIFF | PROJECTION | CALIFORNIA AVENUE",
-              "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/giff-projection-california-avenue"
-            },
-            {
-              "label": "GIFF | PROJECTION | LE JOURNAL D'UNE FEMME DE CHAMBRE",
-              "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/giff-projection-journal-femme-chambre"
-            },
-            {
-              "label": "GIFF | PROJECTION | MANY PEOPLE NEED TO DIE",
-              "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/giff-projection-many-people-need"
-            },
-            {
-              "label": "GIFF | PROJECTION | OPENING NIGHT: TANGLES",
-              "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/giff-projection-opening-night-tangles"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/geneva/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -241,7 +241,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -263,7 +263,7 @@
           "url": "/en/events/geneva/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     },
     "de": {
       "canton": "GE",
@@ -273,7 +273,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "394",
+          "value": "401",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -284,16 +284,52 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
+              "label": "«Quelque chose a changé» Une exposition de l'artiste Lola Jay",
+              "detail": "Genève",
+              "date": "2026-10-30",
+              "url": "https://www.geneve.ch/agenda/quelque-chose-change-exposition-artiste-lola"
+            },
+            {
               "label": "32e Festival International du Film de Genève (GIFF)",
               "detail": "Genève",
               "date": "2026-10-30",
               "url": "https://www.geneve.ch/agenda/festival-international-film-geneve-giff"
             },
             {
+              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "detail": "Genève",
+              "date": "2026-10-30",
+              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+            },
+            {
               "label": "Au cœur de l’héritage de Marguerite Duras : Découvrez le film \"La Douleur\" et rencontrez Jean Marc Turine",
               "detail": "Genève",
               "date": "2026-10-30",
               "url": "https://www.geneve.ch/agenda/coeur-heritage-marguerite-duras-decouvrez-film-douleur-rencontrez-jean-marc-turine"
+            },
+            {
+              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
+              "detail": "Genève",
+              "date": "2026-10-30",
+              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
+            },
+            {
+              "label": "Balades Théâtralisées - De la haute-ville aux bas-fonds",
+              "detail": "Genève",
+              "date": "2026-10-30",
+              "url": "https://www.geneve.ch/agenda/balades-theatralisees-haute-ville-fonds"
+            },
+            {
+              "label": "Cafés genevois: la vie même",
+              "detail": "Genève",
+              "date": "2026-10-30",
+              "url": "https://www.geneve.ch/agenda/cafes-genevois-vie"
+            },
+            {
+              "label": "CHRÜSIMÜSI",
+              "detail": "Genève",
+              "date": "2026-10-30",
+              "url": "https://www.geneve.ch/agenda/chrusimusi"
             },
             {
               "label": "Ciné club",
@@ -306,47 +342,11 @@
               "detail": "Genève",
               "date": "2026-10-30",
               "url": "https://www.geneve.ch/agenda/concert-pouce-quatuor-cordes-bibliotheque-cite"
-            },
-            {
-              "label": "Dark Matter Night",
-              "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/dark-matter-night"
-            },
-            {
-              "label": "DJ TALOCO · HIP HOP - GRIM - DANCEHALL - AMAPIANO",
-              "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/taloco-grim-dancehall-amapiano"
-            },
-            {
-              "label": "GIFF | PROJECTION | CALIFORNIA AVENUE",
-              "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/giff-projection-california-avenue"
-            },
-            {
-              "label": "GIFF | PROJECTION | LE JOURNAL D'UNE FEMME DE CHAMBRE",
-              "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/giff-projection-journal-femme-chambre"
-            },
-            {
-              "label": "GIFF | PROJECTION | MANY PEOPLE NEED TO DIE",
-              "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/giff-projection-many-people-need"
-            },
-            {
-              "label": "GIFF | PROJECTION | OPENING NIGHT: TANGLES",
-              "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/giff-projection-opening-night-tangles"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/genf/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -364,7 +364,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -386,7 +386,7 @@
           "url": "/de/veranstaltungen/genf/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     },
     "fr": {
       "canton": "GE",
@@ -396,7 +396,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "394",
+          "value": "401",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -407,16 +407,52 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
+              "label": "«Quelque chose a changé» Une exposition de l'artiste Lola Jay",
+              "detail": "Genève",
+              "date": "2026-10-30",
+              "url": "https://www.geneve.ch/agenda/quelque-chose-change-exposition-artiste-lola"
+            },
+            {
               "label": "32e Festival International du Film de Genève (GIFF)",
               "detail": "Genève",
               "date": "2026-10-30",
               "url": "https://www.geneve.ch/agenda/festival-international-film-geneve-giff"
             },
             {
+              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "detail": "Genève",
+              "date": "2026-10-30",
+              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+            },
+            {
               "label": "Au cœur de l’héritage de Marguerite Duras : Découvrez le film \"La Douleur\" et rencontrez Jean Marc Turine",
               "detail": "Genève",
               "date": "2026-10-30",
               "url": "https://www.geneve.ch/agenda/coeur-heritage-marguerite-duras-decouvrez-film-douleur-rencontrez-jean-marc-turine"
+            },
+            {
+              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
+              "detail": "Genève",
+              "date": "2026-10-30",
+              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
+            },
+            {
+              "label": "Balades Théâtralisées - De la haute-ville aux bas-fonds",
+              "detail": "Genève",
+              "date": "2026-10-30",
+              "url": "https://www.geneve.ch/agenda/balades-theatralisees-haute-ville-fonds"
+            },
+            {
+              "label": "Cafés genevois: la vie même",
+              "detail": "Genève",
+              "date": "2026-10-30",
+              "url": "https://www.geneve.ch/agenda/cafes-genevois-vie"
+            },
+            {
+              "label": "CHRÜSIMÜSI",
+              "detail": "Genève",
+              "date": "2026-10-30",
+              "url": "https://www.geneve.ch/agenda/chrusimusi"
             },
             {
               "label": "Ciné club",
@@ -429,47 +465,11 @@
               "detail": "Genève",
               "date": "2026-10-30",
               "url": "https://www.geneve.ch/agenda/concert-pouce-quatuor-cordes-bibliotheque-cite"
-            },
-            {
-              "label": "Dark Matter Night",
-              "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/dark-matter-night"
-            },
-            {
-              "label": "DJ TALOCO · HIP HOP - GRIM - DANCEHALL - AMAPIANO",
-              "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/taloco-grim-dancehall-amapiano"
-            },
-            {
-              "label": "GIFF | PROJECTION | CALIFORNIA AVENUE",
-              "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/giff-projection-california-avenue"
-            },
-            {
-              "label": "GIFF | PROJECTION | LE JOURNAL D'UNE FEMME DE CHAMBRE",
-              "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/giff-projection-journal-femme-chambre"
-            },
-            {
-              "label": "GIFF | PROJECTION | MANY PEOPLE NEED TO DIE",
-              "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/giff-projection-many-people-need"
-            },
-            {
-              "label": "GIFF | PROJECTION | OPENING NIGHT: TANGLES",
-              "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/giff-projection-opening-night-tangles"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/geneve/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -487,7 +487,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -509,7 +509,7 @@
           "url": "/fr/evenements/geneve/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     }
   }
 }

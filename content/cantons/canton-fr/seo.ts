@@ -816,6 +816,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tpf-nuovi-bus-elettrici-friburgo': {
+    title: '24 nuovi autobus elettrici TPF per linee urbane e regionali',
+    description: 'TPF introduce 24 nuovi autobus elettrici per linee urbane e regionali nel Canton Friburgo a partire dal cambio d\'orario di dicembre prossimo.',
+    keywords: 'frontalieri, ticino, svizzera, italia, nuovi, autobus, elettrici, linee',
+    ogTitle: '24 nuovi bus elettrici TPF Friburgo da dicembre',
+    ogDescription: 'I Transports publics fribourgeois (TPF) introdurranno 24 nuovi autobus elettrici per linee urbane e regionali a partire dal cambio d\'orario di dicembre prossimo nel Canton Friburgo.',
+    canonicalPath: '/articoli-friburgo/tpf-nuovi-bus-elettrici-friburgo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "24 nuovi autobus elettrici TPF per linee urbane e regionali",
+      "description": "TPF introduce 24 nuovi autobus elettrici per linee urbane e regionali nel Canton Friburgo a partire dal cambio d'orario di dicembre prossimo.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-tpf-nuovi-bus-elettrici-friburgo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-30T18:03:17+00:00",
+      "dateModified": "2026-10-30T18:03:17+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-friburgo/tpf-nuovi-bus-elettrici-friburgo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

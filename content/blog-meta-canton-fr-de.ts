@@ -66,6 +66,9 @@ const blogMetaCantonFrDe: Record<string, string> = {
     'blog.article.tpf-bus-elettrici-friburgo.title': 'Freiburg bereitet 24 neue Elektrobusse für Dezember vor',
     'blog.article.tpf-bus-elettrici-friburgo.excerpt': '24 neue Elektrobusse für die TPF Investition: 20 Millionen Franken Sechs Busse mit einer Länge von 12 Metern, 18 Gelenkbusse mit einer Länge von 18 Metern Ab',
     'blog.article.tpf-bus-elettrici-friburgo.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.tpf-nuovi-bus-elettrici-friburgo.title': '24 neue TPF-Elektrobusse für städtische und regionale Linien',
+    'blog.article.tpf-nuovi-bus-elettrici-friburgo.excerpt': 'Die schrittweise Einführung von 24 neuen TPF-Elektrobussen wird mit dem Fahrplanwechsel im kommenden Dezember auf den städtischen und regionalen Linien beginnen.',
+    'blog.article.tpf-nuovi-bus-elettrici-friburgo.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonFrDe;

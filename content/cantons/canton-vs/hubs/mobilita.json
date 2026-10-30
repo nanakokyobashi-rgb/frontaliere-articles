@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "mobilita",
-  "updatedAt": "2026-10-30T15:34:43.777Z",
-  "contentHash": "4a0f32163ac777ac4cd31281f232b563da39ad74322c7121ee5590db1357e72d",
+  "updatedAt": "2026-10-30T19:31:58.244Z",
+  "contentHash": "dc7b40453d5e3fb281cb7e0b47d3f7e5b270662232cf1ecf74ff1a1bea3b8142",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-30T06:32:11.488Z",
+      "updatedAt": "2026-10-30T13:39:45.803Z",
       "keyFacts": 2
     },
     {
@@ -37,12 +37,12 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "20",
+          "value": "16",
           "note": "segnalazioni aggiornate: 30 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "17",
+          "value": "16",
           "note": "segnalazioni aggiornate: 30 ottobre 2026"
         }
       ],
@@ -93,12 +93,6 @@
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
             {
-              "label": "Route de la Lienne <-> Route Du Simplon Incrocio Route Du Simplon Situazione: chiusa Causa: lavori di manutenzione",
-              "value": "Chiusura",
-              "detail": "fine prevista: 30 ottobre 2026",
-              "date": "2026-03-16T06:00:00.000Z"
-            },
-            {
               "label": "Monthey <-> Champéry tra Luogo Troistorrents E Luogo Champéry Situazione: chiusa Causa: lavori di manutenzione",
               "value": "Chiusura",
               "detail": "fine prevista: 20 novembre 2026",
@@ -137,10 +131,16 @@
               "label": "Ausserbinn, Ernen in tutte le direzioni Situazione: chiusa Causa: chiusura invernale",
               "value": "Chiusura",
               "date": "2026-10-21T05:22:00.000Z"
+            },
+            {
+              "label": "Grengiols in tutte le direzioni Situazione: chiusa Causa: lavori di manutenzione",
+              "value": "Chiusura",
+              "detail": "fine prevista: 3 novembre 2026",
+              "date": "2026-10-21T15:02:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-30T06:32:11.488Z"
+          "updatedAt": "2026-10-30T13:39:45.803Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -248,7 +248,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-30T15:34:43.777Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     },
     "en": {
       "canton": "VS",
@@ -263,12 +263,12 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "20",
+          "value": "16",
           "note": "reports as of 30 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "17",
+          "value": "16",
           "note": "reports as of 30 October 2026"
         }
       ],
@@ -319,12 +319,6 @@
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
             {
-              "label": "Route de la Lienne <-> Route Du Simplon Incrocio Route Du Simplon Situazione: chiusa Causa: lavori di manutenzione",
-              "value": "Closure",
-              "detail": "until 30 October 2026",
-              "date": "2026-03-16T06:00:00.000Z"
-            },
-            {
               "label": "Monthey <-> Champéry tra Luogo Troistorrents E Luogo Champéry Situazione: chiusa Causa: lavori di manutenzione",
               "value": "Closure",
               "detail": "until 20 November 2026",
@@ -363,10 +357,16 @@
               "label": "Ausserbinn, Ernen in tutte le direzioni Situazione: chiusa Causa: chiusura invernale",
               "value": "Closure",
               "date": "2026-10-21T05:22:00.000Z"
+            },
+            {
+              "label": "Grengiols in tutte le direzioni Situazione: chiusa Causa: lavori di manutenzione",
+              "value": "Closure",
+              "detail": "until 3 November 2026",
+              "date": "2026-10-21T15:02:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-30T06:32:11.488Z"
+          "updatedAt": "2026-10-30T13:39:45.803Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -474,7 +474,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-30T15:34:43.777Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     },
     "de": {
       "canton": "VS",
@@ -489,12 +489,12 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "20",
+          "value": "16",
           "note": "Meldungen vom 30. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "17",
+          "value": "16",
           "note": "Meldungen vom 30. Oktober 2026"
         }
       ],
@@ -545,12 +545,6 @@
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
             {
-              "label": "Route de la Lienne <-> Route Du Simplon Kreuzung Route Du Simplon Sachlage: Strecke gesperrt Ursache: Unterhaltsarbeiten",
-              "value": "Sperrung",
-              "detail": "bis 30. Oktober 2026",
-              "date": "2026-03-16T06:00:00.000Z"
-            },
-            {
               "label": "Monthey <-> Champéry zwischen Ortschaft Troistorrents und Ortschaft Champéry Sachlage: Strecke gesperrt Ursache: Unterhaltsarbeiten",
               "value": "Sperrung",
               "detail": "bis 20. November 2026",
@@ -589,10 +583,16 @@
               "label": "Ausserbinn, Ernen in beide Richtungen Sachlage: Strecke gesperrt Ursache: Wintersperre",
               "value": "Sperrung",
               "date": "2026-10-21T05:22:00.000Z"
+            },
+            {
+              "label": "Grengiols in beide Richtungen Sachlage: Strecke gesperrt Ursache: Unterhaltsarbeiten",
+              "value": "Sperrung",
+              "detail": "bis 3. November 2026",
+              "date": "2026-10-21T15:02:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-30T06:32:11.488Z"
+          "updatedAt": "2026-10-30T13:39:45.803Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -700,7 +700,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-30T15:34:43.777Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     },
     "fr": {
       "canton": "VS",
@@ -715,12 +715,12 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "20",
+          "value": "16",
           "note": "signalements au 30 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "17",
+          "value": "16",
           "note": "signalements au 30 octobre 2026"
         }
       ],
@@ -771,12 +771,6 @@
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
             {
-              "label": "Route de la Lienne <-> Route Du Simplon Carrefour Route Du Simplon Situation: fermé Raison: travaux de maintenance",
-              "value": "Fermeture",
-              "detail": "jusqu’au 30 octobre 2026",
-              "date": "2026-03-16T06:00:00.000Z"
-            },
-            {
               "label": "Monthey <-> Champéry entre Localité Troistorrents et Localité Champéry Situation: fermé Raison: travaux de maintenance",
               "value": "Fermeture",
               "detail": "jusqu’au 20 novembre 2026",
@@ -815,10 +809,16 @@
               "label": "Ausserbinn, Ernen dans les deux sens Situation: fermé Raison: fermeture hivernale",
               "value": "Fermeture",
               "date": "2026-10-21T05:22:00.000Z"
+            },
+            {
+              "label": "Grengiols dans les deux sens Situation: fermé Raison: travaux de maintenance",
+              "value": "Fermeture",
+              "detail": "jusqu’au 3 novembre 2026",
+              "date": "2026-10-21T15:02:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-30T06:32:11.488Z"
+          "updatedAt": "2026-10-30T13:39:45.803Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -926,7 +926,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-30T15:34:43.777Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     }
   }
 }

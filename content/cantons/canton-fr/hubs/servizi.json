@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "servizi",
-  "updatedAt": "2026-10-30T15:09:51.722Z",
-  "contentHash": "07a9825209875149ecc9d48a21dccba7c4441a37040ceba9aa60b36ef75f9b38",
+  "updatedAt": "2026-10-30T19:31:58.244Z",
+  "contentHash": "9904378ffe6563c7e9870b2e54ea54227485ed04b83c8f02c89f2e2d0c2c3c77",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-30T05:51:01.110Z",
+      "updatedAt": "2026-10-30T12:52:32.857Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-30T06:04:12.241Z",
+      "updatedAt": "2026-10-30T15:13:06.562Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-29T22:02:50.125Z",
+      "updatedAt": "2026-10-30T11:41:14.746Z",
       "keyFacts": 0
     }
   ],
@@ -96,8 +96,8 @@
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
-          "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
-          "updatedAt": "2026-10-30T05:51:01.110Z"
+          "sourceUrl": "https://appls.ocn.ch/ecari-auction?locale=fr_ch",
+          "updatedAt": "2026-10-30T12:52:32.857Z"
         },
         {
           "id": "meteo",
@@ -106,12 +106,12 @@
           "items": [
             {
               "label": "Fribourg",
-              "value": "5 °C",
-              "detail": "oggi da 5 a 10 °C"
+              "value": "9 °C",
+              "detail": "oggi da 4 a 9 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-30T06:04:12.241Z"
+          "updatedAt": "2026-10-30T15:13:06.562Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -149,7 +149,7 @@
               "url": "https://www.fr.ch/de/gsd/news/bezahlbare-praemien-indirekter-gegenvorschlag-des-staatsrats-zur-kantonalen-initiative-wird-dem-grossrat-uebergeben"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -229,7 +229,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     },
     "en": {
       "canton": "FR",
@@ -298,8 +298,8 @@
             }
           ],
           "sourceName": "Cantonal road traffic office",
-          "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
-          "updatedAt": "2026-10-30T05:51:01.110Z"
+          "sourceUrl": "https://appls.ocn.ch/ecari-auction?locale=fr_ch",
+          "updatedAt": "2026-10-30T12:52:32.857Z"
         },
         {
           "id": "meteo",
@@ -308,12 +308,12 @@
           "items": [
             {
               "label": "Fribourg",
-              "value": "5 °C",
-              "detail": "today from 5 to 10 °C"
+              "value": "9 °C",
+              "detail": "today from 4 to 9 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-30T06:04:12.241Z"
+          "updatedAt": "2026-10-30T15:13:06.562Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -351,7 +351,7 @@
               "url": "https://www.fr.ch/de/gsd/news/bezahlbare-praemien-indirekter-gegenvorschlag-des-staatsrats-zur-kantonalen-initiative-wird-dem-grossrat-uebergeben"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -427,7 +427,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     },
     "de": {
       "canton": "FR",
@@ -496,8 +496,8 @@
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
-          "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
-          "updatedAt": "2026-10-30T05:51:01.110Z"
+          "sourceUrl": "https://appls.ocn.ch/ecari-auction?locale=fr_ch",
+          "updatedAt": "2026-10-30T12:52:32.857Z"
         },
         {
           "id": "meteo",
@@ -506,12 +506,12 @@
           "items": [
             {
               "label": "Fribourg",
-              "value": "5 °C",
-              "detail": "heute 5 bis 10 °C"
+              "value": "9 °C",
+              "detail": "heute 4 bis 9 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-30T06:04:12.241Z"
+          "updatedAt": "2026-10-30T15:13:06.562Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -549,7 +549,7 @@
               "url": "https://www.fr.ch/de/gsd/news/bezahlbare-praemien-indirekter-gegenvorschlag-des-staatsrats-zur-kantonalen-initiative-wird-dem-grossrat-uebergeben"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -625,7 +625,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     },
     "fr": {
       "canton": "FR",
@@ -694,8 +694,8 @@
             }
           ],
           "sourceName": "Office cantonal de la circulation",
-          "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
-          "updatedAt": "2026-10-30T05:51:01.110Z"
+          "sourceUrl": "https://appls.ocn.ch/ecari-auction?locale=fr_ch",
+          "updatedAt": "2026-10-30T12:52:32.857Z"
         },
         {
           "id": "meteo",
@@ -704,12 +704,12 @@
           "items": [
             {
               "label": "Fribourg",
-              "value": "5 °C",
-              "detail": "aujourd’hui de 5 à 10 °C"
+              "value": "9 °C",
+              "detail": "aujourd’hui de 4 à 9 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-30T06:04:12.241Z"
+          "updatedAt": "2026-10-30T15:13:06.562Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -747,7 +747,7 @@
               "url": "https://www.fr.ch/de/gsd/news/bezahlbare-praemien-indirekter-gegenvorschlag-des-staatsrats-zur-kantonalen-initiative-wird-dem-grossrat-uebergeben"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -819,7 +819,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     }
   }
 }

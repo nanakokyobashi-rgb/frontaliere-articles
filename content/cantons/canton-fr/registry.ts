@@ -237,4 +237,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'tpf-nuovi-bus-elettrici-friburgo',
+ category: 'novita',
+ date: '2026-10-30T18:03:17.846Z',
+ image: '/images/blog/article-tpf-nuovi-bus-elettrici-friburgo.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['FR'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

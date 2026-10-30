@@ -4,12 +4,12 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "mobilita",
-  "updatedAt": "2026-10-30T15:34:43.777Z",
-  "contentHash": "490becaf49a2553ca771398f8e56f3d7b94ea1131415351da8bc1aee0a7238b1",
+  "updatedAt": "2026-10-30T19:31:58.244Z",
+  "contentHash": "8451927fb0c3117177584f64491c20793a249190b33c7485c126fee02228ad9e",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-30T06:32:11.488Z",
+      "updatedAt": "2026-10-30T13:39:45.803Z",
       "keyFacts": 2
     },
     {
@@ -32,7 +32,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "2",
+          "value": "3",
           "note": "segnalazioni aggiornate: 30 ottobre 2026"
         }
       ],
@@ -71,10 +71,16 @@
               "value": "Cantiere",
               "detail": "fine prevista: 9 novembre 2026",
               "date": "2026-10-20T20:00:00.000Z"
+            },
+            {
+              "label": "A2 Luzern -> S. Gottardo tra Svincolo autostradale Stansstad E Svincolo autostradale Stans Süd Situazione: problemi di traffico cantiere, lunghezza [km] 1.5 Limitazione del traffico: nuova viabilità…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 6 novembre 2026",
+              "date": "2026-10-30T09:13:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-30T06:32:11.488Z"
+          "updatedAt": "2026-10-30T13:39:45.803Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -140,7 +146,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-30T15:34:43.777Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     },
     "en": {
       "canton": "NW",
@@ -155,7 +161,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "2",
+          "value": "3",
           "note": "reports as of 30 October 2026"
         }
       ],
@@ -194,10 +200,16 @@
               "value": "Roadworks",
               "detail": "until 9 November 2026",
               "date": "2026-10-20T20:00:00.000Z"
+            },
+            {
+              "label": "A2 Luzern -> S. Gottardo tra Svincolo autostradale Stansstad E Svincolo autostradale Stans Süd Situazione: problemi di traffico cantiere, lunghezza [km] 1.5 Limitazione del traffico: nuova viabilità…",
+              "value": "Roadworks",
+              "detail": "until 6 November 2026",
+              "date": "2026-10-30T09:13:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-30T06:32:11.488Z"
+          "updatedAt": "2026-10-30T13:39:45.803Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -263,7 +275,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-30T15:34:43.777Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     },
     "de": {
       "canton": "NW",
@@ -278,7 +290,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "2",
+          "value": "3",
           "note": "Meldungen vom 30. Oktober 2026"
         }
       ],
@@ -317,10 +329,16 @@
               "value": "Baustelle",
               "detail": "bis 9. November 2026",
               "date": "2026-10-20T20:00:00.000Z"
+            },
+            {
+              "label": "A2 Luzern -> Gotthard zwischen Anschluss Stansstad und Anschluss Stans-Süd Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 1.5 Verkehrsführung: veränderte Verkehrsführung Zusatz 1…",
+              "value": "Baustelle",
+              "detail": "bis 6. November 2026",
+              "date": "2026-10-30T09:13:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-30T06:32:11.488Z"
+          "updatedAt": "2026-10-30T13:39:45.803Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -386,7 +404,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-30T15:34:43.777Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     },
     "fr": {
       "canton": "NW",
@@ -401,7 +419,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "2",
+          "value": "3",
           "note": "signalements au 30 octobre 2026"
         }
       ],
@@ -440,10 +458,16 @@
               "value": "Chantier",
               "detail": "jusqu’au 9 novembre 2026",
               "date": "2026-10-20T20:00:00.000Z"
+            },
+            {
+              "label": "A2 Lucerne -> St-Gothard entre Jonction autoroutière Stansstad et Jonction autoroutière Stans-Sud Situation: trafic perturbé travaux, longueur [km] 1.5 Gestion du trafic: nouveau plan de circulation…",
+              "value": "Chantier",
+              "detail": "jusqu’au 6 novembre 2026",
+              "date": "2026-10-30T09:13:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-30T06:32:11.488Z"
+          "updatedAt": "2026-10-30T13:39:45.803Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -509,7 +533,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-30T15:34:43.777Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     }
   }
 }

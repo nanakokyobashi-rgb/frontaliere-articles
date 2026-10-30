@@ -4,8 +4,8 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "fisco",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "5c48ba8b2988d498ede0bb26723428c0ab65a55ed0b1d036d62480f0da6539fd",
+  "updatedAt": "2026-10-30T19:44:57.077Z",
+  "contentHash": "1a634ddb105d3798b2d686688ae30b2b7f37c6f23a486694318967897bab1ef2",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T15:45:54.463Z",
+      "updatedAt": "2026-10-30T11:41:14.746Z",
       "keyFacts": 0
     }
   ],
@@ -119,10 +119,16 @@
               "url": "https://www.steuern-nw.ch/steuergesetzrevision-2029-abschaffung-des-eigenmietwerts/"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Hergiswil: richiesta online della fattura fiscale provvisoria",
+          "url": "/articoli-nidvaldo/hergiswil-fattura-fiscale-online/",
+          "excerpt": "A Hergiswil le fatture fiscali provvisorie possono essere richieste online: il modulo consente di trasmettere modifiche che saranno poi recepite nella fattura.",
+          "date": "2026-10-30T19:39:12.910Z"
+        },
         {
           "title": "Comprare casa in Nidvaldo: prezzi, mutuo e fiscalità",
           "url": "/articoli-svizzera/nidvaldo-comprare-casa-costi-fiscali/",
@@ -165,7 +171,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-30T19:44:57.077Z"
     },
     "en": {
       "canton": "NW",
@@ -262,10 +268,16 @@
               "url": "https://www.steuern-nw.ch/steuergesetzrevision-2029-abschaffung-des-eigenmietwerts/"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Hergiswil: online request for the provisional tax bill",
+          "url": "/en/nidwalden-articles/hergiswil-provisional-tax-bill/",
+          "excerpt": "In Hergiswil, provisional tax bills can be requested online: the form allows you to submit changes that will then be incorporated into the bill.",
+          "date": "2026-10-30T19:39:12.910Z"
+        },
         {
           "title": "Buying a house in Nidwalden: prices, mortgage and taxation",
           "url": "/en/swiss-articles/nidwalden-buying-house-costs-taxes/",
@@ -308,7 +320,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-30T19:44:57.077Z"
     },
     "de": {
       "canton": "NW",
@@ -405,10 +417,16 @@
               "url": "https://www.steuern-nw.ch/steuergesetzrevision-2029-abschaffung-des-eigenmietwerts/"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Hergiswil: Online-Anforderung der provisorischen Steuerrechnung",
+          "url": "/de/nidwalden-artikel/hergiswil-provisorische-steuerrechnung/",
+          "excerpt": "In Hergiswil können provisorische Steuerrechnungen online angefordert werden: Über das Formular können Änderungen übermittelt werden, die anschließend in der Rechnung berücksichtigt werden.",
+          "date": "2026-10-30T19:39:12.910Z"
+        },
         {
           "title": "Haus kaufen in Nidwalden: Preise, Hypothek und Steuern",
           "url": "/de/schweiz-artikel/nidwalden-haus-kaufen-kosten-steuern/",
@@ -451,7 +469,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-30T19:44:57.077Z"
     },
     "fr": {
       "canton": "NW",
@@ -548,10 +566,16 @@
               "url": "https://www.steuern-nw.ch/steuergesetzrevision-2029-abschaffung-des-eigenmietwerts/"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Hergiswil : demande en ligne de la facture fiscale provisoire",
+          "url": "/fr/articles-nidwald/hergiswil-facture-fiscale-provisoire/",
+          "excerpt": "À Hergiswil, les factures fiscales provisoires peuvent être demandées en ligne : le formulaire permet de transmettre des modifications qui seront ensuite prises en compte dans la facture.",
+          "date": "2026-10-30T19:39:12.910Z"
+        },
         {
           "title": "Acheter une maison à Nidwald : prix, hypothèque et fiscalité",
           "url": "/fr/articles-suisse/nidwald-acheter-maison-couts-fiscalite/",
@@ -594,7 +618,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-30T19:44:57.077Z"
     }
   }
 }
