@@ -4,12 +4,12 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "carburanti",
-  "updatedAt": "2026-10-17T11:38:04.345Z",
-  "contentHash": "6d30d8ac1a2b2500b5b9ee65137421665aa435ddc112060dc57abe4bd1a5ffff",
+  "updatedAt": "2026-10-30T19:44:57.077Z",
+  "contentHash": "c0543e0f0abbcdd0f1898018daa3d8dc096ac3776f4737cbe39e8bb69c3ddd62",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-16T11:53:35.759Z",
+      "updatedAt": "2026-10-30T13:38:40.478Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-11-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-16T11:53:35.759Z"
+          "updatedAt": "2026-10-30T13:38:40.478Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Hergiswil: richiesta online della fattura fiscale provvisoria",
+          "url": "/articoli-nidvaldo/hergiswil-fattura-fiscale-online/",
+          "excerpt": "A Hergiswil le fatture fiscali provvisorie possono essere richieste online: il modulo consente di trasmettere modifiche che saranno poi recepite nella fattura.",
+          "date": "2026-10-30T19:39:12.910Z"
+        },
         {
           "title": "Eventi del weekend nel Canton Nidvaldo: cosa fare sabato e domenica",
           "url": "/articoli-nidvaldo/eventi-weekend-nidvaldo/",
@@ -94,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-30T19:44:57.077Z"
     },
     "en": {
       "canton": "NW",
@@ -135,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-16T11:53:35.759Z"
+          "updatedAt": "2026-10-30T13:38:40.478Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Hergiswil: online request for the provisional tax bill",
+          "url": "/en/nidwalden-articles/hergiswil-provisional-tax-bill/",
+          "excerpt": "In Hergiswil, provisional tax bills can be requested online: the form allows you to submit changes that will then be incorporated into the bill.",
+          "date": "2026-10-30T19:39:12.910Z"
+        },
         {
           "title": "Weekend events in Nidwalden: what to do Saturday & Sunday",
           "url": "/en/nidwalden-articles/weekend-events-nidwalden/",
@@ -175,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-30T19:44:57.077Z"
     },
     "de": {
       "canton": "NW",
@@ -216,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-16T11:53:35.759Z"
+          "updatedAt": "2026-10-30T13:38:40.478Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Hergiswil: Online-Anforderung der provisorischen Steuerrechnung",
+          "url": "/de/nidwalden-artikel/hergiswil-provisorische-steuerrechnung/",
+          "excerpt": "In Hergiswil können provisorische Steuerrechnungen online angefordert werden: Über das Formular können Änderungen übermittelt werden, die anschließend in der Rechnung berücksichtigt werden.",
+          "date": "2026-10-30T19:39:12.910Z"
+        },
         {
           "title": "Veranstaltungen am Wochenende in Nidwalden: was tun Sa & So",
           "url": "/de/nidwalden-artikel/wochenend-veranstaltungen-nidwalden/",
@@ -256,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-30T19:44:57.077Z"
     },
     "fr": {
       "canton": "NW",
@@ -297,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-16T11:53:35.759Z"
+          "updatedAt": "2026-10-30T13:38:40.478Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Hergiswil : demande en ligne de la facture fiscale provisoire",
+          "url": "/fr/articles-nidwald/hergiswil-facture-fiscale-provisoire/",
+          "excerpt": "À Hergiswil, les factures fiscales provisoires peuvent être demandées en ligne : le formulaire permet de transmettre des modifications qui seront ensuite prises en compte dans la facture.",
+          "date": "2026-10-30T19:39:12.910Z"
+        },
         {
           "title": "Événements du week-end à Nidwald : que faire samedi & dimanche",
           "url": "/fr/articles-nidwald/evenements-week-end-nidwald/",
@@ -337,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-30T19:44:57.077Z"
     }
   }
 }
