@@ -13632,6 +13632,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.sindacati-aumenti-infermieri-ticino.title': 'Psychiatrische Pflege: Gewerkschaften fordern Lohnerhöhungen bis 8\'941 Fr',
     'blog.article.sindacati-aumenti-infermieri-ticino.excerpt': 'Am 10. November findet in Mendrisio die Mitgliederversammlung statt. Geforderte jährliche Lohnerhöhungen: von 5\'159 auf 8\'941 Franken. Neueinstufung: Klassen 4→5 und 5→6. OCST und VPOD fordern',
     'blog.article.sindacati-aumenti-infermieri-ticino.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.giornico-consiglio-stato-fermata.title': 'Staatsrat lehnt Wiedereröffnung der FFS-Haltestelle in Giornico ab',
+    'blog.article.giornico-consiglio-stato-fermata.excerpt': 'Der Staatsrat lehnt die Wiedereröffnung in Giornico ab Die Linie 120 bedient Paese, Fraggio und Scuola Media Die TILO-Anschlüsse erfolgen in Biasca über die S10 Niemand',
+    'blog.article.giornico-consiglio-stato-fermata.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaDe;

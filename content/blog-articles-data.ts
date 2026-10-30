@@ -45944,6 +45944,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'giornico-consiglio-stato-fermata',
+ category: 'novita',
+ date: '2026-10-30T21:52:11.914Z',
+ image: '/images/blog/article-giornico-consiglio-stato-fermata.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
