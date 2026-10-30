@@ -4,8 +4,8 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "carburanti",
-  "updatedAt": "2026-10-30T19:31:58.244Z",
-  "contentHash": "44392a95a898677dd6103464f1ee14959a78685c52580b3c2679af89c2aa560c",
+  "updatedAt": "2026-10-30T21:16:53.833Z",
+  "contentHash": "fae9f301070979a5ae79da22e98d5ac1e1e4163926054f13916694737f282365",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -71,6 +71,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Benzina cara: Sciaffusa vuole più ricariche elettriche",
+          "url": "/articoli-sciaffusa/sciaffusa-ricarica-elettrica/",
+          "excerpt": "Prezzi della benzina elevati e obiettivo del Cantone: più stazioni di ricarica per auto elettriche, come quelle già installate a St.",
+          "date": "2026-10-30T21:05:24.930Z"
+        },
+        {
           "title": "Sciaffusa: proposta su elettricità, acqua e data center",
           "url": "/articoli-sciaffusa/sciaffusa-regole-datacenter/",
           "excerpt": "La commissione del Consiglio cantonale propone prelievi su elettricità e acqua; il Governo sostiene la modifica.",
@@ -88,7 +94,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-30T21:16:53.833Z"
     },
     "en": {
       "canton": "SH",
@@ -146,6 +152,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Expensive petrol: Schaffhausen wants more electric charging stations",
+          "url": "/en/schaffhausen-articles/schaffhausen-electric-charging/",
+          "excerpt": "High petrol prices and the canton’s goal: more charging stations for electric cars, like those already installed in St.",
+          "date": "2026-10-30T21:05:24.930Z"
+        },
+        {
           "title": "Schaffhausen: electricity, water and data centre proposal",
           "url": "/en/schaffhausen-articles/schaffhausen-data-centres/",
           "excerpt": "The cantonal council commission proposes levies on electricity and water; the government supports the change.",
@@ -163,7 +175,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-30T21:16:53.833Z"
     },
     "de": {
       "canton": "SH",
@@ -221,6 +233,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Teures Benzin: Schaffhausen will mehr Lademöglichkeiten",
+          "url": "/de/schaffhausen-artikel/schaffhausen-ladestationen-e-autos/",
+          "excerpt": "Hohe Benzinpreise und Ziel des Kantons: mehr Ladestationen für Elektroautos, wie die bereits in St.",
+          "date": "2026-10-30T21:05:24.930Z"
+        },
+        {
           "title": "Schaffhausen: Vorschlag zu Strom, Wasser und Rechenzentren",
           "url": "/de/schaffhausen-artikel/schaffhausen-rechenzentren-regeln/",
           "excerpt": "Die Kommission des Kantonsrates schlägt Abgaben auf Strom und Wasser vor; die Regierung unterstützt die Änderung.",
@@ -238,7 +256,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-30T21:16:53.833Z"
     },
     "fr": {
       "canton": "SH",
@@ -296,6 +314,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Essence chère : Schaffhouse veut davantage de bornes de recharge électrique",
+          "url": "/fr/articles-schaffhouse/schaffhouse-bornes-recharge-electrique/",
+          "excerpt": "Prix de l’essence élevés et objectif du canton : davantage de stations de recharge pour voitures électriques, comme celles déjà installées à St.",
+          "date": "2026-10-30T21:05:24.930Z"
+        },
+        {
           "title": "Schaffhouse : proposition sur l'électricité, l'eau et les centres de données",
           "url": "/fr/articles-schaffhouse/schaffhouse-centres-donnees/",
           "excerpt": "La commission du Conseil cantonal propose des prélèvements sur l'électricité et l'eau ; le Gouvernement soutient la modification.",
@@ -313,7 +337,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-30T21:16:53.833Z"
     }
   }
 }
