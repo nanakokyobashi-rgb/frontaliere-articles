@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "eventi",
-  "updatedAt": "2026-10-30T19:31:58.244Z",
-  "contentHash": "84cb30b04910a841af1e414be443baa2e4f68b77833dbd7fe6864f26acd25392",
+  "updatedAt": "2026-10-30T22:08:31.539Z",
+  "contentHash": "90a5337a62551c5032147852e04f191078b08164623bbe594f12037b1640322e",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -108,6 +108,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Schweizer Wohntage: Luzern",
+              "date": "2026-10-30T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7723786"
+            },
+            {
               "label": "Kunstausstellung Visarte",
               "date": "2026-10-29T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7587574"
@@ -131,11 +136,6 @@
               "label": "Winter Qi Gong Inseli",
               "date": "2026-10-26T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694110"
-            },
-            {
-              "label": "Energie Apéro Luzern: Regenerative Baumaterialien – eine Wiederentdeckung",
-              "date": "2026-10-25T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7253945"
             }
           ],
           "updatedAt": "2026-10-30T11:41:14.746Z"
@@ -172,7 +172,7 @@
           "url": "/eventi/lucerna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-30T22:08:31.539Z"
     },
     "en": {
       "canton": "LU",
@@ -263,6 +263,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Schweizer Wohntage: Luzern",
+              "date": "2026-10-30T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7723786"
+            },
+            {
               "label": "Kunstausstellung Visarte",
               "date": "2026-10-29T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7587574"
@@ -286,11 +291,6 @@
               "label": "Winter Qi Gong Inseli",
               "date": "2026-10-26T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694110"
-            },
-            {
-              "label": "Energie Apéro Luzern: Regenerative Baumaterialien – eine Wiederentdeckung",
-              "date": "2026-10-25T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7253945"
             }
           ],
           "updatedAt": "2026-10-30T11:41:14.746Z"
@@ -327,7 +327,7 @@
           "url": "/en/events/lucerne/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-30T22:08:31.539Z"
     },
     "de": {
       "canton": "LU",
@@ -418,6 +418,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Schweizer Wohntage: Luzern",
+              "date": "2026-10-30T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7723786"
+            },
+            {
               "label": "Kunstausstellung Visarte",
               "date": "2026-10-29T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7587574"
@@ -441,11 +446,6 @@
               "label": "Winter Qi Gong Inseli",
               "date": "2026-10-26T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694110"
-            },
-            {
-              "label": "Energie Apéro Luzern: Regenerative Baumaterialien – eine Wiederentdeckung",
-              "date": "2026-10-25T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7253945"
             }
           ],
           "updatedAt": "2026-10-30T11:41:14.746Z"
@@ -482,7 +482,7 @@
           "url": "/de/veranstaltungen/luzern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-30T22:08:31.539Z"
     },
     "fr": {
       "canton": "LU",
@@ -573,6 +573,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Schweizer Wohntage: Luzern",
+              "date": "2026-10-30T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7723786"
+            },
+            {
               "label": "Kunstausstellung Visarte",
               "date": "2026-10-29T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7587574"
@@ -596,11 +601,6 @@
               "label": "Winter Qi Gong Inseli",
               "date": "2026-10-26T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694110"
-            },
-            {
-              "label": "Energie Apéro Luzern: Regenerative Baumaterialien – eine Wiederentdeckung",
-              "date": "2026-10-25T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7253945"
             }
           ],
           "updatedAt": "2026-10-30T11:41:14.746Z"
@@ -637,7 +637,7 @@
           "url": "/fr/evenements/lucerne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-30T22:08:31.539Z"
     }
   }
 }
