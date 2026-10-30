@@ -72,6 +72,9 @@ const blogMetaCantonBeEn: Record<string, string> = {
     'blog.article.aumento-soglie-reddito-2027.title': 'Increase in income thresholds for premium reductions starting in 2027',
     'blog.article.aumento-soglie-reddito-2027.excerpt': 'From January 1, 2027, income thresholds increase; approximately 19.000 people become eligible, with an expected share of 25,35%.',
     'blog.article.aumento-soglie-reddito-2027.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.sportello-virtuale-polizia-berna.title': 'Bern cantonal police expands its virtual service desk',
+    'blog.article.sportello-virtuale-polizia-berna.excerpt': 'From 2 November 2026, the Bern Cantonal Police will offer simple services via video call throughout the canton, also in German.',
+    'blog.article.sportello-virtuale-polizia-berna.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonBeEn;

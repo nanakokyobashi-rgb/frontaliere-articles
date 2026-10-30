@@ -889,6 +889,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-sportello-virtuale-polizia-berna': {
+    title: 'Polizia cantonale di Berna estende lo sportello virtuale',
+    description: 'Dal 2 novembre 2026 la Polizia cantonale di Berna offre in tutto il Cantone semplici servizi via videochiamata, anche in tedesco.',
+    keywords: 'frontalieri, ticino, svizzera, italia, polizia, cantonale, berna, estende',
+    ogTitle: 'Polizia cantonale di Berna estende lo sportello virtuale',
+    ogDescription: 'Dopo la fase pilota francofona, lo sportello virtuale della Polizia cantonale di Berna si estende anche al tedesco. Su Suisse ePolice si fissano appuntamenti per documenti d\'identità persi o rubati e denunce semplici, con almeno 24 ore di anticipo.',
+    canonicalPath: '/articoli-berna/sportello-virtuale-polizia-berna/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Polizia cantonale di Berna estende lo sportello virtuale",
+      "description": "Dal 2 novembre 2026 la Polizia cantonale di Berna offre in tutto il Cantone semplici servizi via videochiamata, anche in tedesco.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-sportello-virtuale-polizia-berna.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-30T21:27:08+00:00",
+      "dateModified": "2026-10-30T21:27:08+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-berna/sportello-virtuale-polizia-berna/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

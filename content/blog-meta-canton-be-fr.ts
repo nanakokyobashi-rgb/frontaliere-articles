@@ -72,6 +72,9 @@ const blogMetaCantonBeFr: Record<string, string> = {
     'blog.article.aumento-soglie-reddito-2027.title': 'Augmentation des seuils de revenu pour la réduction des primes à partir de 2027',
     'blog.article.aumento-soglie-reddito-2027.excerpt': 'À partir du 1er janvier 2027, les seuils de revenu augmentent ; environ 19.000 personnes deviennent ayants droit, avec un taux prévu de 25,35%.',
     'blog.article.aumento-soglie-reddito-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.sportello-virtuale-polizia-berna.title': 'La police cantonale de Berne étend son guichet virtuel',
+    'blog.article.sportello-virtuale-polizia-berna.excerpt': 'À partir du 2 novembre 2026, la police cantonale de Berne propose dans tout le canton des services simples par visioconférence, également en allemand.',
+    'blog.article.sportello-virtuale-polizia-berna.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonBeFr;

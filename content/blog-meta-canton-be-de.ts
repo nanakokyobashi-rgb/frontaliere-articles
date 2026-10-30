@@ -72,6 +72,9 @@ const blogMetaCantonBeDe: Record<string, string> = {
     'blog.article.aumento-soglie-reddito-2027.title': 'Anhebung der Einkommensgrenzen für die Prämienverbilligung ab 2027',
     'blog.article.aumento-soglie-reddito-2027.excerpt': 'Ab dem 1. Januar 2027 steigen die Einkommensgrenzen; rund 19.000 Personen werden anspruchsberechtigt, mit einem voraussichtlichen Anteil von 25,35%.',
     'blog.article.aumento-soglie-reddito-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.sportello-virtuale-polizia-berna.title': 'Kantonspolizei Bern erweitert den virtuellen Schalter',
+    'blog.article.sportello-virtuale-polizia-berna.excerpt': 'Ab dem 2. November 2026 bietet die Kantonspolizei Bern im gesamten Kanton einfache Dienstleistungen per Videoanruf an, auch auf Deutsch.',
+    'blog.article.sportello-virtuale-polizia-berna.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonBeDe;
