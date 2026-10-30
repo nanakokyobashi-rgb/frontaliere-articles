@@ -153,6 +153,13 @@ function advanceNormalToken(source, start, context) {
     context.afterMemberAccess = false;
     return { end: start + 2 };
   }
+  if (source.startsWith('...', start)) {
+    context.canStartRegex = true;
+    context.pendingControlHeader = null;
+    context.lastClosedControlHeader = false;
+    context.afterMemberAccess = false;
+    return { end: start + 3 };
+  }
   if (char === '(') {
     context.parenthesisContexts.push(Boolean(context.pendingControlHeader));
     context.pendingControlHeader = null;
