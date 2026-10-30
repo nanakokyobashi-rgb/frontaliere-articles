@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-cassa-pensione-snl-sev-attacca.webp",
-      "sha256": "e3a32e28161373313bca7614ac95856166018462040df8de0f92f707c95aacbb"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-cassa-pensione-snl-sev-attacca-480w.webp",
-      "sha256": "62b8949cca74a40da98c215f4db26a212702a6b937eab4a0821036b4c4daf05d"
-    }
-  ]
+  "items": []
 }
