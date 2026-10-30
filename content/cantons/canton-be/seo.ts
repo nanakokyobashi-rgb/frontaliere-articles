@@ -811,6 +811,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-riduzione-premi-malattia-2027': {
+    title: 'Berna: più sussidi ai premi delle casse malati dal 2027',
+    description: 'La fonte del Canton Berna annuncia più sussidi per la riduzione dei premi delle casse malati dal 2027, senza indicare importi o percentuali.',
+    keywords: 'frontalieri, ticino, svizzera, italia, berna, sussidi, premi, casse',
+    ogTitle: 'Berna: più sussidi ai premi dal 2027',
+    ogDescription: 'Il titolo della notizia segnala una maggiore Prämienverbilligung dal 2027. Il materiale disponibile conferma il settore e l\'anno di decorrenza, ma non riporta importi, percentuali, destinatari o modalità di accesso.',
+    canonicalPath: '/articoli-berna/riduzione-premi-malattia-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Berna: più sussidi ai premi delle casse malati dal 2027",
+      "description": "La fonte del Canton Berna annuncia più sussidi per la riduzione dei premi delle casse malati dal 2027, senza indicare importi o percentuali.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-riduzione-premi-malattia-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-30T20:01:40+00:00",
+      "dateModified": "2026-10-30T20:01:40+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-berna/riduzione-premi-malattia-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

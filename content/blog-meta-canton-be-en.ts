@@ -66,6 +66,9 @@ const blogMetaCantonBeEn: Record<string, string> = {
     'blog.article.credito-volksschule-breitfeld.title': '33,3 million francs for the expansion of Volksschule Breitfeld',
     'blog.article.credito-volksschule-breitfeld.excerpt': 'The CHF 33,3 million construction credit is intended to increase capacity from 10 to 18 classes.',
     'blog.article.credito-volksschule-breitfeld.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.riduzione-premi-malattia-2027.title': 'Bern: more subsidies for health insurance premiums from 2027',
+    'blog.article.riduzione-premi-malattia-2027.excerpt': 'The Canton of Bern announces more subsidies to reduce health insurance premiums from 2027, without specifying amounts or percentages.',
+    'blog.article.riduzione-premi-malattia-2027.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonBeEn;

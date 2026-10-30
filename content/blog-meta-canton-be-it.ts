@@ -66,6 +66,9 @@ const blogMetaCantonBeIt: Record<string, string> = {
     'blog.article.credito-volksschule-breitfeld.title': '33,3 milioni di franchi per l\'ampliamento della Volksschule Breitfeld',
     'blog.article.credito-volksschule-breitfeld.excerpt': 'Il credito edilizio di CHF 33,3 milioni prevede di aumentare la capacità da 10 a 18 classi.',
     'blog.article.credito-volksschule-breitfeld.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.riduzione-premi-malattia-2027.title': 'Berna: più sussidi ai premi delle casse malati dal 2027',
+    'blog.article.riduzione-premi-malattia-2027.excerpt': 'Il Canton Berna annuncia più sussidi per la riduzione dei premi delle casse malati dal 2027, senza indicare importi o percentuali.',
+    'blog.article.riduzione-premi-malattia-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonBeIt;

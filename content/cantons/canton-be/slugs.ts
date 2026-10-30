@@ -24,6 +24,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'nuove-funzioni-piano-digitale': { it: 'nuove-funzioni-piano-digitale', en: 'new-digital-city-plan-functions', de: 'neue-funktionen-digitaler-stadtplan', fr: 'nouvelles-fonctions-plan-digital' },
  'ramsei-taglio-sicurezza-strada': { it: 'ramsei-taglio-sicurezza-strada', en: 'ramsei-safety-logging-road', de: 'ramsei-sicherheitsholzerei-strasse', fr: 'ramsei-abattage-securite-route' },
  'credito-volksschule-breitfeld': { it: 'credito-volksschule-breitfeld', en: 'breitfeld-volksschule-credit', de: 'volksschule-breitfeld-kredit', fr: 'credit-volksschule-breitfeld' },
+ 'riduzione-premi-malattia-2027': { it: 'riduzione-premi-malattia-2027', en: 'health-premium-subsidies-2027', de: 'praemienverbilligung-krankenkassen-2027', fr: 'aides-primes-maladie-2027' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

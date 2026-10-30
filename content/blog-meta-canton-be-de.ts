@@ -66,6 +66,9 @@ const blogMetaCantonBeDe: Record<string, string> = {
     'blog.article.credito-volksschule-breitfeld.title': '33,3 Millionen Franken für die Erweiterung der Volksschule Breitfeld',
     'blog.article.credito-volksschule-breitfeld.excerpt': 'Der Baukredit von CHF 33,3 Millionen sieht vor, die Kapazität von 10 auf 18 Klassen zu erhöhen.',
     'blog.article.credito-volksschule-breitfeld.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.riduzione-premi-malattia-2027.title': 'Bern: Mehr Prämienverbilligung für Krankenkassenprämien ab 2027',
+    'blog.article.riduzione-premi-malattia-2027.excerpt': 'Der Kanton Bern kündigt ab 2027 mehr Prämienverbilligung für Krankenkassenprämien an, ohne Beträge oder Prozentsätze zu nennen.',
+    'blog.article.riduzione-premi-malattia-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonBeDe;
