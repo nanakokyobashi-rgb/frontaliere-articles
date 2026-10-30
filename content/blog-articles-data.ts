@@ -45955,6 +45955,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'cassa-pensione-snl-sev-attacca',
+ category: 'pensione',
+ date: '2026-10-30T22:23:25.055Z',
+ image: '/images/blog/article-cassa-pensione-snl-sev-attacca.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'laura-bianchi',
+ authorName: 'Laura Bianchi',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

@@ -13636,6 +13636,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.giornico-consiglio-stato-fermata.title': 'Council of State rejects reopening of FFS stop in Giornico',
     'blog.article.giornico-consiglio-stato-fermata.excerpt': 'The Council of State rejects reopening in Giornico The 120 route serves Paese, Fraggio and Scuola Media TILO connections switch from the S10 at Biasca Nobody',
     'blog.article.giornico-consiglio-stato-fermata.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.cassa-pensione-snl-sev-attacca.title': 'SNL pension fund: SEV disputes interpretation of results',
+    'blog.article.cassa-pensione-snl-sev-attacca.excerpt': 'UBS will manage the assets of the SNL pension fund ATIOZ imposed a new procedure after a conflict of interest The coverage ratio was 104,1% at the end',
+    'blog.article.cassa-pensione-snl-sev-attacca.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaEn;

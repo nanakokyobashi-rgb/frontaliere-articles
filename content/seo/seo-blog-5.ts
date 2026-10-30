@@ -113757,6 +113757,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-cassa-pensione-snl-sev-attacca': {
+    title: 'Cassa pensione SNL: SEV contesta lettura risultati',
+    description: 'UBS gestirà il patrimonio della Cassa pensione SNL ATIOZ impose una nuova procedura dopo un conflitto d\'interessi Il grado di copertura era del 104,1%',
+    keywords: 'frontalieri, ticino, svizzera, italia, cassa, pensione, contesta, lettura',
+    ogTitle: 'Cassa pensione SNL: SEV attacca mistificazione realtà',
+    ogDescription: 'UBS gestirà il patrimonio della Cassa pensione SNL ATIOZ impose una nuova procedura dopo un conflitto d\'interessi Il grado di copertura era del 104,1% a fine',
+    canonicalPath: '/articoli-frontaliere/cassa-pensione-snl-sev-attacca/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cassa pensione SNL: SEV contesta lettura risultati",
+      "description": "UBS gestirà il patrimonio della Cassa pensione SNL ATIOZ impose una nuova procedura dopo un conflitto d'interessi Il grado di copertura era del 104,1%",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-cassa-pensione-snl-sev-attacca.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-30T22:23:25+00:00",
+      "dateModified": "2026-10-30T22:23:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/cassa-pensione-snl-sev-attacca/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

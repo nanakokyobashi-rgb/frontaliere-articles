@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4093273": {
-    "articleId": "governo-no-iniziativa-frontiere",
-    "ts": "2026-09-18T15:22:42.176Z",
-    "keyForm": 2
-  },
   "https://comozero.it/attualita/ingorghi-costi-per-oltre-2-miliardi-crollo-dei-frontalieri-lo-studio-svizzero-sul-confine-che-fa-tremare-i-polsi": {
     "articleId": "studio-svizzero-confine-frontalieri",
     "ts": "2026-09-19T01:47:36.106Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/ticino/politica/1960171/linea-giornico-consiglio-fermata-fermate-riapertura-stato-ffs-stazione-apertura": {
     "articleId": "giornico-consiglio-stato-fermata",
     "ts": "2026-10-30T21:52:12.918Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1960056/cassa-pensione-snl-il-sev-attacca-una-mistificazione-della-realta": {
+    "articleId": "cassa-pensione-snl-sev-attacca",
+    "ts": "2026-10-30T22:23:26.273Z",
     "keyForm": 2
   }
 }

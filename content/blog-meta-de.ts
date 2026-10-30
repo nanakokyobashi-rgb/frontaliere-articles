@@ -13635,6 +13635,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.giornico-consiglio-stato-fermata.title': 'Staatsrat lehnt Wiedereröffnung der FFS-Haltestelle in Giornico ab',
     'blog.article.giornico-consiglio-stato-fermata.excerpt': 'Der Staatsrat lehnt die Wiedereröffnung in Giornico ab Die Linie 120 bedient Paese, Fraggio und Scuola Media Die TILO-Anschlüsse erfolgen in Biasca über die S10 Niemand',
     'blog.article.giornico-consiglio-stato-fermata.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.cassa-pensione-snl-sev-attacca.title': 'Pensionskasse SNL: SEV stellt die Interpretation der Ergebnisse infrage',
+    'blog.article.cassa-pensione-snl-sev-attacca.excerpt': 'UBS wird das Vermögen der Pensionskasse SNL verwalten ATIOZ setzte nach einem Interessenkonflikt ein neues Verfahren durch Der Deckungsgrad lag Ende',
+    'blog.article.cassa-pensione-snl-sev-attacca.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaDe;
