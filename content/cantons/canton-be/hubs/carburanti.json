@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "carburanti",
-  "updatedAt": "2026-10-30T21:11:42.274Z",
-  "contentHash": "ab03cca5a91ee590ec811e51a2f9e3ddb7c3e14fa64d657c91c8ce9b7de499c4",
+  "updatedAt": "2026-10-30T21:41:46.032Z",
+  "contentHash": "d63c9ed370254bdb08ad118b3295653350777f000bb147cd19e0243ea812b0c7",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -60,6 +60,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Polizia cantonale di Berna estende lo sportello virtuale",
+          "url": "/articoli-berna/sportello-virtuale-polizia-berna/",
+          "excerpt": "Dal 2 novembre 2026 la Polizia cantonale di Berna offre in tutto il Cantone semplici servizi via videochiamata, anche in tedesco.",
+          "date": "2026-10-30T21:27:08.006Z"
+        },
+        {
           "title": "Aumento soglie reddito per riduzione premi a partire dal 2027",
           "url": "/articoli-berna/aumento-soglie-reddito-2027/",
           "excerpt": "Dal 1° gennaio 2027 salgono le soglie di reddito; circa 19.000 persone diventano aventi diritto, con una quota prevista del 25,35%.",
@@ -82,12 +88,6 @@
           "url": "/articoli-berna/ramsei-taglio-sicurezza-strada/",
           "excerpt": "A Ramsei, nel comune di Lützelflüh, la Sumiswaldstrasse verso Sumiswald sarà gestita su una corsia dal 2 al 13 novembre 2026, con semaforo.",
           "date": "2026-10-27T07:13:00.993Z"
-        },
-        {
-          "title": "Nuove funzioni nel piano digitale della città di Berna",
-          "url": "/articoli-berna/nuove-funzioni-piano-digitale/",
-          "excerpt": "Dal 26 ottobre 2026 nuovi contenuti nel piano digitale Nomi ufficiali visibili sotto «Nomenclatura» Download gratuito dal Geoportale della città Aggiornati nomi",
-          "date": "2026-10-27T01:42:07.785Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-30T21:11:42.274Z"
+      "updatedAt": "2026-10-30T21:41:46.032Z"
     },
     "en": {
       "canton": "BE",
@@ -147,6 +147,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Bern cantonal police expands its virtual service desk",
+          "url": "/en/bern-articles/bern-virtual-police-counter/",
+          "excerpt": "From 2 November 2026, the Bern Cantonal Police will offer simple services via video call throughout the canton, also in German.",
+          "date": "2026-10-30T21:27:08.006Z"
+        },
+        {
           "title": "Increase in income thresholds for premium reductions starting in 2027",
           "url": "/en/bern-articles/income-threshold-increase-2027/",
           "excerpt": "From January 1, 2027, income thresholds increase; approximately 19.000 people become eligible, with an expected share of 25,35%.",
@@ -169,12 +175,6 @@
           "url": "/en/bern-articles/ramsei-safety-logging-road/",
           "excerpt": "In Ramsei, in the municipality of Lützelflüh, Sumiswaldstrasse toward Sumiswald will be operated on a single lane from November 2 to 13, 2026, with traffic lights.",
           "date": "2026-10-27T07:13:00.993Z"
-        },
-        {
-          "title": "New features in the digital plan of the city of Bern",
-          "url": "/en/bern-articles/new-digital-city-plan-functions/",
-          "excerpt": "From 26 October 2026, new content in the digital plan Official names visible under «Nomenclature» Free download from the city’s Geoportal Street names",
-          "date": "2026-10-27T01:42:07.785Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-30T21:11:42.274Z"
+      "updatedAt": "2026-10-30T21:41:46.032Z"
     },
     "de": {
       "canton": "BE",
@@ -234,6 +234,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Kantonspolizei Bern erweitert den virtuellen Schalter",
+          "url": "/de/bern-artikel/virtueller-polizeischalter-bern/",
+          "excerpt": "Ab dem 2. November 2026 bietet die Kantonspolizei Bern im gesamten Kanton einfache Dienstleistungen per Videoanruf an, auch auf Deutsch.",
+          "date": "2026-10-30T21:27:08.006Z"
+        },
+        {
           "title": "Anhebung der Einkommensgrenzen für die Prämienverbilligung ab 2027",
           "url": "/de/bern-artikel/einkommensschwellen-erhoehung-2027/",
           "excerpt": "Ab dem 1. Januar 2027 steigen die Einkommensgrenzen; rund 19.000 Personen werden anspruchsberechtigt, mit einem voraussichtlichen Anteil von 25,35%.",
@@ -256,12 +262,6 @@
           "url": "/de/bern-artikel/ramsei-sicherheitsholzerei-strasse/",
           "excerpt": "In Ramsei, in der Gemeinde Lützelflüh, wird die Sumiswaldstrasse in Richtung Sumiswald vom 2.",
           "date": "2026-10-27T07:13:00.993Z"
-        },
-        {
-          "title": "Neue Funktionen im digitalen Plan der Stadt Bern",
-          "url": "/de/bern-artikel/neue-funktionen-digitaler-stadtplan/",
-          "excerpt": "Ab dem 26. Oktober 2026 neue Inhalte im digitalen Plan Offizielle Namen unter «Nomenklatur» sichtbar Kostenloser Download über das Geoportal der Stadt",
-          "date": "2026-10-27T01:42:07.785Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-30T21:11:42.274Z"
+      "updatedAt": "2026-10-30T21:41:46.032Z"
     },
     "fr": {
       "canton": "BE",
@@ -321,6 +321,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "La police cantonale de Berne étend son guichet virtuel",
+          "url": "/fr/articles-berne/guichet-police-virtuel-berne/",
+          "excerpt": "À partir du 2 novembre 2026, la police cantonale de Berne propose dans tout le canton des services simples par visioconférence, également en allemand.",
+          "date": "2026-10-30T21:27:08.006Z"
+        },
+        {
           "title": "Augmentation des seuils de revenu pour la réduction des primes à partir de 2027",
           "url": "/fr/articles-berne/augmentation-seuils-revenu-2027/",
           "excerpt": "À partir du 1er janvier 2027, les seuils de revenu augmentent ; environ 19.000 personnes deviennent ayants droit, avec un taux prévu de 25,35%.",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-berne/ramsei-abattage-securite-route/",
           "excerpt": "À Ramsei, dans la commune de Lützelflüh, la Sumiswaldstrasse en direction de Sumiswald sera gérée sur une voie du 2 au 13 novembre 2026, avec des feux de signalisation.",
           "date": "2026-10-27T07:13:00.993Z"
-        },
-        {
-          "title": "Nouvelles fonctions dans le plan numérique de la ville de Berne",
-          "url": "/fr/articles-berne/nouvelles-fonctions-plan-digital/",
-          "excerpt": "À partir du 26 octobre 2026, nouveaux contenus dans le plan numérique Noms officiels visibles sous « Nomenclature » Téléchargement gratuit depuis le géoportail",
-          "date": "2026-10-27T01:42:07.785Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-30T21:11:42.274Z"
+      "updatedAt": "2026-10-30T21:41:46.032Z"
     }
   }
 }
