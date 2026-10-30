@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "carburanti",
-  "updatedAt": "2026-10-30T20:09:42.471Z",
-  "contentHash": "d1d432576e9bc12b1472f1170d65f40c2036326e04849701047be880d540ce58",
+  "updatedAt": "2026-10-30T21:11:42.274Z",
+  "contentHash": "ab03cca5a91ee590ec811e51a2f9e3ddb7c3e14fa64d657c91c8ce9b7de499c4",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -60,6 +60,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Aumento soglie reddito per riduzione premi a partire dal 2027",
+          "url": "/articoli-berna/aumento-soglie-reddito-2027/",
+          "excerpt": "Dal 1° gennaio 2027 salgono le soglie di reddito; circa 19.000 persone diventano aventi diritto, con una quota prevista del 25,35%.",
+          "date": "2026-10-30T21:03:54.671Z"
+        },
+        {
           "title": "Berna: più sussidi ai premi delle casse malati dal 2027",
           "url": "/articoli-berna/riduzione-premi-malattia-2027/",
           "excerpt": "Il Canton Berna annuncia più sussidi per la riduzione dei premi delle casse malati dal 2027, senza indicare importi o percentuali.",
@@ -82,12 +88,6 @@
           "url": "/articoli-berna/nuove-funzioni-piano-digitale/",
           "excerpt": "Dal 26 ottobre 2026 nuovi contenuti nel piano digitale Nomi ufficiali visibili sotto «Nomenclatura» Download gratuito dal Geoportale della città Aggiornati nomi",
           "date": "2026-10-27T01:42:07.785Z"
-        },
-        {
-          "title": "Berna approva contributi per Rotbach e Saanen",
-          "url": "/articoli-berna/contributi-rotbach-saanen/",
-          "excerpt": "Il Governo cantonale approva circa CHF 590'000 per il Rotbach e CHF 720'000 per la protezione dalle piene a Saanen, nel Canton Berna.",
-          "date": "2026-10-23T02:11:10.079Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-30T20:09:42.471Z"
+      "updatedAt": "2026-10-30T21:11:42.274Z"
     },
     "en": {
       "canton": "BE",
@@ -147,6 +147,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Increase in income thresholds for premium reductions starting in 2027",
+          "url": "/en/bern-articles/income-threshold-increase-2027/",
+          "excerpt": "From January 1, 2027, income thresholds increase; approximately 19.000 people become eligible, with an expected share of 25,35%.",
+          "date": "2026-10-30T21:03:54.671Z"
+        },
+        {
           "title": "Bern: more subsidies for health insurance premiums from 2027",
           "url": "/en/bern-articles/health-premium-subsidies-2027/",
           "excerpt": "The Canton of Bern announces more subsidies to reduce health insurance premiums from 2027, without specifying amounts or percentages.",
@@ -169,12 +175,6 @@
           "url": "/en/bern-articles/new-digital-city-plan-functions/",
           "excerpt": "From 26 October 2026, new content in the digital plan Official names visible under «Nomenclature» Free download from the city’s Geoportal Street names",
           "date": "2026-10-27T01:42:07.785Z"
-        },
-        {
-          "title": "Bern approves contributions for Rotbach and Saanen",
-          "url": "/en/bern-articles/bern-contributions-rotbach-saanen/",
-          "excerpt": "The cantonal government approves approximately CHF 590'000 for the Rotbach and CHF 720'000 for flood protection in Saanen, in the Canton of Bern.",
-          "date": "2026-10-23T02:11:10.079Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-30T20:09:42.471Z"
+      "updatedAt": "2026-10-30T21:11:42.274Z"
     },
     "de": {
       "canton": "BE",
@@ -234,6 +234,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Anhebung der Einkommensgrenzen für die Prämienverbilligung ab 2027",
+          "url": "/de/bern-artikel/einkommensschwellen-erhoehung-2027/",
+          "excerpt": "Ab dem 1. Januar 2027 steigen die Einkommensgrenzen; rund 19.000 Personen werden anspruchsberechtigt, mit einem voraussichtlichen Anteil von 25,35%.",
+          "date": "2026-10-30T21:03:54.671Z"
+        },
+        {
           "title": "Bern: Mehr Prämienverbilligung für Krankenkassenprämien ab 2027",
           "url": "/de/bern-artikel/praemienverbilligung-krankenkassen-2027/",
           "excerpt": "Der Kanton Bern kündigt ab 2027 mehr Prämienverbilligung für Krankenkassenprämien an, ohne Beträge oder Prozentsätze zu nennen.",
@@ -256,12 +262,6 @@
           "url": "/de/bern-artikel/neue-funktionen-digitaler-stadtplan/",
           "excerpt": "Ab dem 26. Oktober 2026 neue Inhalte im digitalen Plan Offizielle Namen unter «Nomenklatur» sichtbar Kostenloser Download über das Geoportal der Stadt",
           "date": "2026-10-27T01:42:07.785Z"
-        },
-        {
-          "title": "Bern genehmigt Beiträge für Rotbach und Saanen",
-          "url": "/de/bern-artikel/bern-beitraege-rotbach-saanen/",
-          "excerpt": "Die Kantonsregierung genehmigt rund CHF 590'000 für den Rotbach und CHF 720'000 für den Hochwasserschutz in Saanen im Kanton Bern.",
-          "date": "2026-10-23T02:11:10.079Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-30T20:09:42.471Z"
+      "updatedAt": "2026-10-30T21:11:42.274Z"
     },
     "fr": {
       "canton": "BE",
@@ -321,6 +321,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Augmentation des seuils de revenu pour la réduction des primes à partir de 2027",
+          "url": "/fr/articles-berne/augmentation-seuils-revenu-2027/",
+          "excerpt": "À partir du 1er janvier 2027, les seuils de revenu augmentent ; environ 19.000 personnes deviennent ayants droit, avec un taux prévu de 25,35%.",
+          "date": "2026-10-30T21:03:54.671Z"
+        },
+        {
           "title": "Berne : plus de subsides aux primes-maladie dès 2027",
           "url": "/fr/articles-berne/aides-primes-maladie-2027/",
           "excerpt": "Le canton de Berne annonce davantage de subsides pour la réduction des primes des caisses-maladie à partir de 2027, sans indiquer de montants ni de pourcentages.",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-berne/nouvelles-fonctions-plan-digital/",
           "excerpt": "À partir du 26 octobre 2026, nouveaux contenus dans le plan numérique Noms officiels visibles sous « Nomenclature » Téléchargement gratuit depuis le géoportail",
           "date": "2026-10-27T01:42:07.785Z"
-        },
-        {
-          "title": "Berne approuve des contributions pour Rotbach et Saanen",
-          "url": "/fr/articles-berne/berne-contributions-rotbach-saanen/",
-          "excerpt": "Le gouvernement cantonal approuve environ CHF 590'000 pour le Rotbach et CHF 720'000 pour la protection contre les crues à Saanen, dans le canton de Berne.",
-          "date": "2026-10-23T02:11:10.079Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-30T20:09:42.471Z"
+      "updatedAt": "2026-10-30T21:11:42.274Z"
     }
   }
 }

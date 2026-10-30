@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "fisco",
-  "updatedAt": "2026-10-23T02:23:53.372Z",
-  "contentHash": "4020efef8b867da82f61838ea1639801f4353bc79407426506492da9685b2e98",
+  "updatedAt": "2026-10-30T21:11:42.274Z",
+  "contentHash": "48961707632721560f51c953c5f9e7e44df8026eff975d0c6f9abd2a048103be",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -102,6 +102,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Aumento soglie reddito per riduzione premi a partire dal 2027",
+          "url": "/articoli-berna/aumento-soglie-reddito-2027/",
+          "excerpt": "Dal 1° gennaio 2027 salgono le soglie di reddito; circa 19.000 persone diventano aventi diritto, con una quota prevista del 25,35%.",
+          "date": "2026-10-30T21:03:54.671Z"
+        },
+        {
           "title": "Amministrazione fiscale Berna: chiusura dal 23 ottobre al 1 novembre 2026",
           "url": "/articoli-berna/amministrazione-fiscale-berna-chiusura-2026/",
           "excerpt": "L'Amministrazione fiscale del Canton Berna sospende i servizi dal 23 ottobre alle 16 fino al 1 novembre 2026 per rinnovo tecnologico.",
@@ -142,12 +148,6 @@
           "url": "/articoli-svizzera/veicoli-berna-calcolo-pratico/",
           "excerpt": "Nel Cantone di Berna criteri, scadenze, importi e ufficio per l'imposta sugli autoveicoli dipendono dalle regole cantonali.",
           "date": "2026-10-05T04:37:57.318Z"
-        },
-        {
-          "title": "Tasse universitarie Berna: guida iscrizione",
-          "url": "/articoli-svizzera/tasse-universitarie-berna-guida/",
-          "excerpt": "Come verificare requisiti, scadenze e importi per le tasse universitarie nel Cantone di Berna: guida pratica per categorie e istituzioni.",
-          "date": "2026-10-15T00:26:22.514Z"
         }
       ],
       "latestCantonArticles": [],
@@ -173,7 +173,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-23T02:23:53.372Z"
+      "updatedAt": "2026-10-30T21:11:42.274Z"
     },
     "en": {
       "canton": "BE",
@@ -258,6 +258,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Increase in income thresholds for premium reductions starting in 2027",
+          "url": "/en/bern-articles/income-threshold-increase-2027/",
+          "excerpt": "From January 1, 2027, income thresholds increase; approximately 19.000 people become eligible, with an expected share of 25,35%.",
+          "date": "2026-10-30T21:03:54.671Z"
+        },
+        {
           "title": "Bern tax administration: closure from October 23 to November 1, 2026",
           "url": "/en/bern-articles/bern-tax-administration-closure-2026/",
           "excerpt": "The tax administration of the Canton of Bern will suspend services from 4 p.m.",
@@ -298,12 +304,6 @@
           "url": "/en/swiss-articles/bern-vehicle-tax-calculation-payment/",
           "excerpt": "In the Canton of Bern, the criteria, deadlines, amounts and office responsible for motor vehicle tax depend on cantonal rules.",
           "date": "2026-10-05T04:37:57.318Z"
-        },
-        {
-          "title": "Tuition fees Bern: enrolment guide",
-          "url": "/en/swiss-articles/university-fees-bern-guide/",
-          "excerpt": "How to check requirements, deadlines and amounts for tuition fees in the Canton of Bern: practical guide by categories and institutions.",
-          "date": "2026-10-15T00:26:22.514Z"
         }
       ],
       "latestCantonArticles": [],
@@ -329,7 +329,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-23T02:23:53.372Z"
+      "updatedAt": "2026-10-30T21:11:42.274Z"
     },
     "de": {
       "canton": "BE",
@@ -414,6 +414,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Anhebung der Einkommensgrenzen für die Prämienverbilligung ab 2027",
+          "url": "/de/bern-artikel/einkommensschwellen-erhoehung-2027/",
+          "excerpt": "Ab dem 1. Januar 2027 steigen die Einkommensgrenzen; rund 19.000 Personen werden anspruchsberechtigt, mit einem voraussichtlichen Anteil von 25,35%.",
+          "date": "2026-10-30T21:03:54.671Z"
+        },
+        {
           "title": "Steuerverwaltung Bern: Schließung vom 23. Oktober bis zum 1. November 2026",
           "url": "/de/bern-artikel/steuerverwaltung-bern-schliessung-2026/",
           "excerpt": "Die Steuerverwaltung des Kantons Bern setzt die Dienstleistungen vom 23.",
@@ -454,12 +460,6 @@
           "url": "/de/schweiz-artikel/bern-autosteuer-berechnung-zahlung/",
           "excerpt": "Im Kanton Bern richten sich Kriterien, Fristen, Beträge und die Kfz-Steuerstelle nach den kantonalen Regelungen.",
           "date": "2026-10-05T04:37:57.318Z"
-        },
-        {
-          "title": "Studiengebühren Bern: Einschreibungsleitfaden",
-          "url": "/de/schweiz-artikel/studiengebuehren-bern-guide/",
-          "excerpt": "Wie man Anforderungen, Fristen und Beträge für Studiengebühren im Kanton Bern überprüft: praktischer Leitfaden nach Kategorien und Institutionen.",
-          "date": "2026-10-15T00:26:22.514Z"
         }
       ],
       "latestCantonArticles": [],
@@ -485,7 +485,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-23T02:23:53.372Z"
+      "updatedAt": "2026-10-30T21:11:42.274Z"
     },
     "fr": {
       "canton": "BE",
@@ -570,6 +570,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Augmentation des seuils de revenu pour la réduction des primes à partir de 2027",
+          "url": "/fr/articles-berne/augmentation-seuils-revenu-2027/",
+          "excerpt": "À partir du 1er janvier 2027, les seuils de revenu augmentent ; environ 19.000 personnes deviennent ayants droit, avec un taux prévu de 25,35%.",
+          "date": "2026-10-30T21:03:54.671Z"
+        },
+        {
           "title": "Administration fiscale de Berne : fermeture du 23 octobre au 1er novembre 2026",
           "url": "/fr/articles-berne/administration-fiscale-berne-fermeture-2026/",
           "excerpt": "L'Administration fiscale du canton de Berne suspend ses services du 23 octobre à 16 h au 1er novembre 2026 pour une mise à niveau technologique.",
@@ -610,12 +616,6 @@
           "url": "/fr/articles-suisse/berne-impot-vehicules-calcul-paiement/",
           "excerpt": "Dans le canton de Berne, les critères, les délais, les montants et le bureau compétent pour l'impôt sur les véhicules automobiles dépendent des règles cantonales.",
           "date": "2026-10-05T04:37:57.318Z"
-        },
-        {
-          "title": "Frais de scolarité à Berne : guide d'inscription",
-          "url": "/fr/articles-suisse/frais-scolarite-berne-guide/",
-          "excerpt": "Comment vérifier les exigences, les délais et les montants des frais de scolarité dans le canton de Berne : guide pratique par catégories et institutions.",
-          "date": "2026-10-15T00:26:22.514Z"
         }
       ],
       "latestCantonArticles": [],
@@ -641,7 +641,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-23T02:23:53.372Z"
+      "updatedAt": "2026-10-30T21:11:42.274Z"
     }
   }
 }

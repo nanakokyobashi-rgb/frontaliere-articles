@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "servizi",
-  "updatedAt": "2026-10-30T20:09:42.471Z",
-  "contentHash": "4663959cd0e2f384fa28dc831404245b8eb3ae9536293c539a29717177f716b4",
+  "updatedAt": "2026-10-30T21:11:42.274Z",
+  "contentHash": "602f89a4b49248a82931d8eb29e8fb3705086bd1841d4ca3fbdd98c0d61a38ce",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -140,6 +140,12 @@
           "date": "2026-10-30T20:01:40.296Z"
         },
         {
+          "title": "Aumento soglie reddito per riduzione premi a partire dal 2027",
+          "url": "/articoli-berna/aumento-soglie-reddito-2027/",
+          "excerpt": "Dal 1° gennaio 2027 salgono le soglie di reddito; circa 19.000 persone diventano aventi diritto, con una quota prevista del 25,35%.",
+          "date": "2026-10-30T21:03:54.671Z"
+        },
+        {
           "title": "Permesso di pesca nel Cantone di Berna: requisiti e stagioni",
           "url": "/articoli-svizzera/permesso-pesca-canton-berna-guida/",
           "excerpt": "Scopri come gestire la pratica per il permesso di pesca nel Cantone di Berna: licenze, corsi, acque autorizzate e autorità competenti.",
@@ -174,12 +180,6 @@
           "url": "/articoli-svizzera/votazione-scuola-qualita-berna-2026/",
           "excerpt": "L'iniziativa per inserire un mandato costituzionale sulla scuola sarà sottoposta agli elettori il 27 settembre 2026.",
           "date": "2026-09-14T10:07:20.143Z"
-        },
-        {
-          "title": "Permesso B Berna: requisiti e rinnovo",
-          "url": "/articoli-svizzera/permesso-b-berna-requisiti-rinnovo/",
-          "excerpt": "Permesso dimora B Cantone Berna: requisiti, documentazione, durata e procedura di rinnovo. Guida completa e step-by-step da autorità SEM.",
-          "date": "2026-08-21T20:18:13.610Z"
         }
       ],
       "latestCantonArticles": [],
@@ -209,7 +209,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-30T20:09:42.471Z"
+      "updatedAt": "2026-10-30T21:11:42.274Z"
     },
     "en": {
       "canton": "BE",
@@ -322,6 +322,12 @@
           "date": "2026-10-30T20:01:40.296Z"
         },
         {
+          "title": "Increase in income thresholds for premium reductions starting in 2027",
+          "url": "/en/bern-articles/income-threshold-increase-2027/",
+          "excerpt": "From January 1, 2027, income thresholds increase; approximately 19.000 people become eligible, with an expected share of 25,35%.",
+          "date": "2026-10-30T21:03:54.671Z"
+        },
+        {
           "title": "Fishing permit in the Canton of Bern: requirements and seasons",
           "url": "/en/swiss-articles/fishing-permit-canton-bern-guide/",
           "excerpt": "Find out how to apply for a fishing permit in the Canton of Bern: licenses, courses, authorized waters, and competent authorities.",
@@ -356,12 +362,6 @@
           "url": "/en/swiss-articles/bern-school-quality-vote-2026/",
           "excerpt": "The initiative to insert a constitutional mandate on the school will be submitted to the voters on September 27, 2026.",
           "date": "2026-09-14T10:07:20.143Z"
-        },
-        {
-          "title": "Permit B Bern: requirements and renewal",
-          "url": "/en/swiss-articles/permit-b-bern-requirements-renewal/",
-          "excerpt": "Residence permit B Canton Bern: requirements, documentation, duration and renewal procedure. Complete and step-by-step guidance from SEM authority.",
-          "date": "2026-08-21T20:18:13.610Z"
         }
       ],
       "latestCantonArticles": [],
@@ -387,7 +387,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-30T20:09:42.471Z"
+      "updatedAt": "2026-10-30T21:11:42.274Z"
     },
     "de": {
       "canton": "BE",
@@ -500,6 +500,12 @@
           "date": "2026-10-30T20:01:40.296Z"
         },
         {
+          "title": "Anhebung der Einkommensgrenzen für die Prämienverbilligung ab 2027",
+          "url": "/de/bern-artikel/einkommensschwellen-erhoehung-2027/",
+          "excerpt": "Ab dem 1. Januar 2027 steigen die Einkommensgrenzen; rund 19.000 Personen werden anspruchsberechtigt, mit einem voraussichtlichen Anteil von 25,35%.",
+          "date": "2026-10-30T21:03:54.671Z"
+        },
+        {
           "title": "Fischereibewilligung im Kanton Bern: Voraussetzungen und Saisons",
           "url": "/de/schweiz-artikel/angelpatent-kanton-bern-anleitung/",
           "excerpt": "Erfahren Sie, wie Sie das Verfahren für die Fischereibewilligung im Kanton Bern abwickeln: Bewilligungen, Kurse, zugelassene Gewässer und zuständige Behörden.",
@@ -534,12 +540,6 @@
           "url": "/de/schweiz-artikel/berner-schulqualita-volksabstimmung-2026/",
           "excerpt": "Die Initiative zur Aufnahme eines Verfassungsauftrags an der Schule wird am 27. September 2026 den Wählern vorgelegt.",
           "date": "2026-09-14T10:07:20.143Z"
-        },
-        {
-          "title": "Ausweis B Bern: Voraussetzungen und Erneuerung",
-          "url": "/de/schweiz-artikel/aufenthaltsbewilligung-b-bern-voraussetzungen-verlaengerung/",
-          "excerpt": "Aufenthaltsbewilligung B Kanton Bern: Voraussetzungen, Unterlagen, Dauer und Erneuerungsverfahren. Komplette Anleitung und Schritt-für-Schritt-Anleitung durch die SEM-Behörde.",
-          "date": "2026-08-21T20:18:13.610Z"
         }
       ],
       "latestCantonArticles": [],
@@ -565,7 +565,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-30T20:09:42.471Z"
+      "updatedAt": "2026-10-30T21:11:42.274Z"
     },
     "fr": {
       "canton": "BE",
@@ -678,6 +678,12 @@
           "date": "2026-10-30T20:01:40.296Z"
         },
         {
+          "title": "Augmentation des seuils de revenu pour la réduction des primes à partir de 2027",
+          "url": "/fr/articles-berne/augmentation-seuils-revenu-2027/",
+          "excerpt": "À partir du 1er janvier 2027, les seuils de revenu augmentent ; environ 19.000 personnes deviennent ayants droit, avec un taux prévu de 25,35%.",
+          "date": "2026-10-30T21:03:54.671Z"
+        },
+        {
           "title": "Permis de pêche dans le canton de Berne : exigences et saisons",
           "url": "/fr/articles-suisse/permis-peche-canton-berne-guide/",
           "excerpt": "Découvrez comment gérer votre dossier de permis de pêche dans le canton de Berne : licences, cours, eaux autorisées et autorités compétentes.",
@@ -712,12 +718,6 @@
           "url": "/fr/articles-suisse/vote-qualite-ecole-berne-2026/",
           "excerpt": "L'initiative d'insérer un mandat constitutionnel sur l'école sera soumise aux électeurs le 27 septembre 2026.",
           "date": "2026-09-14T10:07:20.143Z"
-        },
-        {
-          "title": "Permis B Berne : exigences et renouvellement",
-          "url": "/fr/articles-suisse/permis-b-berne-conditions-renouvellement/",
-          "excerpt": "Permis de séjour B canton de Berne : exigences, documentation, durée et procédure de renouvellement. Guide complet et étape par étape par l'autorité SEM.",
-          "date": "2026-08-21T20:18:13.610Z"
         }
       ],
       "latestCantonArticles": [],
@@ -739,7 +739,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-30T20:09:42.471Z"
+      "updatedAt": "2026-10-30T21:11:42.274Z"
     }
   }
 }
