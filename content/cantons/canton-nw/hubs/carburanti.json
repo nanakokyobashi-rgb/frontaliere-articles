@@ -4,8 +4,8 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "carburanti",
-  "updatedAt": "2026-10-30T19:44:57.077Z",
-  "contentHash": "c0543e0f0abbcdd0f1898018daa3d8dc096ac3776f4737cbe39e8bb69c3ddd62",
+  "updatedAt": "2026-10-30T20:19:55.220Z",
+  "contentHash": "b5a4dc83a4c1f9464e2ec4ac18dbc2f8e441da0ace0d35c5a2d877a4d2f9db8a",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -60,6 +60,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Ponte sullo Scheidgraben chiuso a Ennetbürgen",
+          "url": "/articoli-nidvaldo/chiusura-ponte-scheidgraben/",
+          "excerpt": "Il ponte tra Alpenstrasse e Seefeld sarà chiuso per lavori di risanamento dal 3 novembre 2026 alle 16.30 al 6 novembre alle 08.00.",
+          "date": "2026-10-30T20:11:37.696Z"
+        },
+        {
           "title": "Hergiswil: richiesta online della fattura fiscale provvisoria",
           "url": "/articoli-nidvaldo/hergiswil-fattura-fiscale-online/",
           "excerpt": "A Hergiswil le fatture fiscali provvisorie possono essere richieste online: il modulo consente di trasmettere modifiche che saranno poi recepite nella fattura.",
@@ -82,12 +88,6 @@
           "url": "/articoli-nidvaldo/postauto-orario-nidvaldo-2026/",
           "excerpt": "Dal 13 dicembre 2026 cambia l'orario PostAuto: la comunicazione segnala modifiche all'offerta nei Cantoni Obvaldo e Nidvaldo.",
           "date": "2026-10-10T17:33:10.930Z"
-        },
-        {
-          "title": "Lopper: illuminazione sul percorso tra Stansstad e Hergiswil",
-          "url": "/articoli-nidvaldo/lopper-luce-pedoni-bici/",
-          "excerpt": "Circa 1,2 km del percorso pedonale e ciclabile sul Lopper, tra Stansstad e Hergiswil, saranno illuminati. Lavori da ottobre, accensione a fine novembre 2026.",
-          "date": "2026-10-07T18:27:16.494Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-30T19:44:57.077Z"
+      "updatedAt": "2026-10-30T20:19:55.220Z"
     },
     "en": {
       "canton": "NW",
@@ -147,6 +147,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Bridge over the Scheidgraben closed in Ennetbürgen",
+          "url": "/en/nidwalden-articles/scheidgraben-bridge-closure/",
+          "excerpt": "The bridge between Alpenstrasse and Seefeld will be closed for renovation work from November 3, 2026, at 16.30 until November 6 at 08.00.",
+          "date": "2026-10-30T20:11:37.696Z"
+        },
+        {
           "title": "Hergiswil: online request for the provisional tax bill",
           "url": "/en/nidwalden-articles/hergiswil-provisional-tax-bill/",
           "excerpt": "In Hergiswil, provisional tax bills can be requested online: the form allows you to submit changes that will then be incorporated into the bill.",
@@ -169,12 +175,6 @@
           "url": "/en/nidwalden-articles/postauto-timetable-change-nidwalden-2026/",
           "excerpt": "Starting December 13, 2026, the PostAuto timetable will change: the communication announces changes to the service offering in the cantons of Obwalden and Nidwalden.",
           "date": "2026-10-10T17:33:10.930Z"
-        },
-        {
-          "title": "Lopper: lighting along the route between Stansstad and Hergiswil",
-          "url": "/en/nidwalden-articles/lopper-path-lighting/",
-          "excerpt": "Approximately 1,2 km of the pedestrian and cycle path on the Lopper, between Stansstad and Hergiswil, will be illuminated. Work starts in October, with the lights switched on in late November 2026.",
-          "date": "2026-10-07T18:27:16.494Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-30T19:44:57.077Z"
+      "updatedAt": "2026-10-30T20:19:55.220Z"
     },
     "de": {
       "canton": "NW",
@@ -234,6 +234,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Brücke über den Scheidgraben in Ennetbürgen gesperrt",
+          "url": "/de/nidwalden-artikel/sperrung-scheidgraben-bruecke/",
+          "excerpt": "Die Brücke zwischen Alpenstrasse und Seefeld wird wegen Sanierungsarbeiten vom 3.",
+          "date": "2026-10-30T20:11:37.696Z"
+        },
+        {
           "title": "Hergiswil: Online-Anforderung der provisorischen Steuerrechnung",
           "url": "/de/nidwalden-artikel/hergiswil-provisorische-steuerrechnung/",
           "excerpt": "In Hergiswil können provisorische Steuerrechnungen online angefordert werden: Über das Formular können Änderungen übermittelt werden, die anschließend in der Rechnung berücksichtigt werden.",
@@ -256,12 +262,6 @@
           "url": "/de/nidwalden-artikel/postauto-fahrplanwechsel-nidwalden-2026/",
           "excerpt": "Ab dem 13. Dezember 2026 ändert sich der Fahrplan von PostAuto: Die Mitteilung weist auf Änderungen des Angebots in den Kantonen Obwalden und Nidwalden hin.",
           "date": "2026-10-10T17:33:10.930Z"
-        },
-        {
-          "title": "Lopper: Beleuchtung der Strecke zwischen Stansstad und Hergiswil",
-          "url": "/de/nidwalden-artikel/lopper-wegbeleuchtung/",
-          "excerpt": "Rund 1,2 km des Fuß- und Radwegs auf dem Lopper zwischen Stansstad und Hergiswil werden beleuchtet. Arbeiten ab Oktober, Einschaltung Ende November 2026.",
-          "date": "2026-10-07T18:27:16.494Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-30T19:44:57.077Z"
+      "updatedAt": "2026-10-30T20:19:55.220Z"
     },
     "fr": {
       "canton": "NW",
@@ -321,6 +321,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Pont sur le Scheidgraben fermé à Ennetbürgen",
+          "url": "/fr/articles-nidwald/fermeture-pont-scheidgraben/",
+          "excerpt": "Le pont entre Alpenstrasse et Seefeld sera fermé pour des travaux d’assainissement du 3 novembre 2026 à 16.30 au 6 novembre à 08.00.",
+          "date": "2026-10-30T20:11:37.696Z"
+        },
+        {
           "title": "Hergiswil : demande en ligne de la facture fiscale provisoire",
           "url": "/fr/articles-nidwald/hergiswil-facture-fiscale-provisoire/",
           "excerpt": "À Hergiswil, les factures fiscales provisoires peuvent être demandées en ligne : le formulaire permet de transmettre des modifications qui seront ensuite prises en compte dans la facture.",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-nidwald/changement-horaire-postauto-nidwald-2026/",
           "excerpt": "À partir du 13 décembre 2026, l’horaire de PostAuto change : la communication signale des modifications de l’offre dans les cantons d’Obwald et de Nidwald.",
           "date": "2026-10-10T17:33:10.930Z"
-        },
-        {
-          "title": "Lopper : éclairage du parcours entre Stansstad et Hergiswil",
-          "url": "/fr/articles-nidwald/eclairage-piste-lopper/",
-          "excerpt": "Environ 1,2 km du parcours piétonnier et cyclable sur le Lopper, entre Stansstad et Hergiswil, seront éclairés. Travaux à partir d’octobre, mise en service fin novembre 2026.",
-          "date": "2026-10-07T18:27:16.494Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-30T19:44:57.077Z"
+      "updatedAt": "2026-10-30T20:19:55.220Z"
     }
   }
 }

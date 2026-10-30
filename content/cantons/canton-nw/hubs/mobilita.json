@@ -4,8 +4,8 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "mobilita",
-  "updatedAt": "2026-10-30T19:31:58.244Z",
-  "contentHash": "8451927fb0c3117177584f64491c20793a249190b33c7485c126fee02228ad9e",
+  "updatedAt": "2026-10-30T20:19:55.220Z",
+  "contentHash": "c80b5d290d3da40bd5f4678626a1b782baefa94e5960b2bd96dfdaab3f351554",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -123,6 +123,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Ponte sullo Scheidgraben chiuso a Ennetbürgen",
+          "url": "/articoli-nidvaldo/chiusura-ponte-scheidgraben/",
+          "excerpt": "Il ponte tra Alpenstrasse e Seefeld sarà chiuso per lavori di risanamento dal 3 novembre 2026 alle 16.30 al 6 novembre alle 08.00.",
+          "date": "2026-10-30T20:11:37.696Z"
+        },
+        {
           "title": "Trasporti pubblici a Nidvaldo: zone, tariffe e abbonamenti",
           "url": "/articoli-svizzera/nidvaldo-trasporti-pubblici/",
           "excerpt": "Guida completa ai trasporti pubblici nel Cantone di Nidvaldo, alle comunità tariffarie, alle zone, agli abbonamenti e alle combinazioni con i titoli di viaggio federali.",
@@ -146,7 +152,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-30T20:19:55.220Z"
     },
     "en": {
       "canton": "NW",
@@ -252,6 +258,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Bridge over the Scheidgraben closed in Ennetbürgen",
+          "url": "/en/nidwalden-articles/scheidgraben-bridge-closure/",
+          "excerpt": "The bridge between Alpenstrasse and Seefeld will be closed for renovation work from November 3, 2026, at 16.30 until November 6 at 08.00.",
+          "date": "2026-10-30T20:11:37.696Z"
+        },
+        {
           "title": "Public transport in Nidwalden: zones, fares and subscriptions",
           "url": "/en/swiss-articles/nidwalden-public-transport-passes-zones/",
           "excerpt": "Comprehensive guide to public transport in the Canton of Nidwalden, fare communities, zones, season tickets and combinations with federal travel documents.",
@@ -275,7 +287,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-30T20:19:55.220Z"
     },
     "de": {
       "canton": "NW",
@@ -381,6 +393,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Brücke über den Scheidgraben in Ennetbürgen gesperrt",
+          "url": "/de/nidwalden-artikel/sperrung-scheidgraben-bruecke/",
+          "excerpt": "Die Brücke zwischen Alpenstrasse und Seefeld wird wegen Sanierungsarbeiten vom 3.",
+          "date": "2026-10-30T20:11:37.696Z"
+        },
+        {
           "title": "Öffentliche Verkehrsmittel in Nidwalden: Zonen, Tarife und Abonnements",
           "url": "/de/schweiz-artikel/nidwalden-oev-abos-zonen/",
           "excerpt": "Umfassender Leitfaden zum öffentlichen Verkehr im Kanton Nidwalden, zu Tarifgemeinschaften, Zonen, Abos und Kombinationen mit eidgenössischen Fahrausweisen.",
@@ -404,7 +422,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-30T20:19:55.220Z"
     },
     "fr": {
       "canton": "NW",
@@ -510,6 +528,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Pont sur le Scheidgraben fermé à Ennetbürgen",
+          "url": "/fr/articles-nidwald/fermeture-pont-scheidgraben/",
+          "excerpt": "Le pont entre Alpenstrasse et Seefeld sera fermé pour des travaux d’assainissement du 3 novembre 2026 à 16.30 au 6 novembre à 08.00.",
+          "date": "2026-10-30T20:11:37.696Z"
+        },
+        {
           "title": "Transports publics à Nidwald : zones, tarifs et abonnements",
           "url": "/fr/articles-suisse/nidwald-transports-publics-abonnements-zones/",
           "excerpt": "Guide complet des transports publics dans le canton de Nidwald, des communautés tarifaires, des zones, des abonnements et des combinaisons avec les titres de voyage fédéraux.",
@@ -533,7 +557,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-30T20:19:55.220Z"
     }
   }
 }
