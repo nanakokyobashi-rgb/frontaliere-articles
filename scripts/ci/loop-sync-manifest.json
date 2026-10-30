@@ -1520,8 +1520,8 @@
       "reason": "Fratello di loop-scripts-closure.test.mjs per i riferimenti che NON sono import. Nato dal caso #45: alert-pat-down.mjs e' arrivato qui identical dichiarando che gh-pat-expiry-monitor.yml e' «l'unico punto di chiusura» del suo alert, con quel workflow assente — una issue priority:urgent che niente poteva chiudere, con le voci not-ported a 0 e la CI verde. Stessa forma del SiteShellContract: un contratto senza forma di import non e' coperto dai guard che seguono gli import. Ogni citazione non risolta va DICHIARATA con un kind chiuso e una ragione scritta, perche' l'intento non si indovina dalla prosa (la citazione contrastiva «e' X, non Y» nomina Y proprio per negarlo) — e' lo stesso errore che false-positive-declaration.mjs documenta. Il valore non e' classificare le 29 di oggi ma rendere impossibile aggiungere la 30esima in silenzio.",
       "baseline": {
         "site": null,
-        "corpus": "a0ac6f742fdcc87d",
-        "alignedAt": "2026-10-07"
+        "corpus": "fe34f7c5d724a0b9",
+        "alignedAt": "2026-10-30"
       }
     },
     {
@@ -6747,6 +6747,17 @@
       "baseline": {
         "site": "fcd4633162c12bc3",
         "corpus": "fcd4633162c12bc3",
+        "alignedAt": "2026-10-30"
+      }
+    },
+    {
+      "path": "host/third-party-shell-assets.json",
+      "sitePath": "scripts/ci/export-third-party-shell-assets.ts",
+      "mode": "adapted",
+      "reason": "Byte-exact public asset snapshot derived from the source exporter; hostShellFiles consumes these bytes without a cross-repository import. The shared identical producer fingerprint and both SiteShellContract scalar fingerprints invalidate changes in constants, canonical helpers or raw static controllers before publication. Regenerate through the source exporter, update both fingerprint projections, then verify all names and SHA-256 values.",
+      "baseline": {
+        "site": "c111ef0a65549380",
+        "corpus": "557354198b4c22ab",
         "alignedAt": "2026-10-30"
       }
     }
