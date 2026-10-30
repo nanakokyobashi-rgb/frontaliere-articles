@@ -49,6 +49,15 @@ const REGEX_PREFIX_KEYWORDS = new Set([
   'yield',
 ]);
 
+const CONTROL_HEADER_KEYWORDS = new Set([
+  'catch',
+  'for',
+  'if',
+  'switch',
+  'while',
+  'with',
+]);
+
 function isIdentifierStart(char) {
   if (char === undefined) return false;
   return char === '_' || char === '$' || (char >= 'A' && char <= 'Z') || (char >= 'a' && char <= 'z') || char.charCodeAt(0) >= 0x80;
@@ -92,22 +101,97 @@ function skipRegexLiteral(source, start) {
   return source.length;
 }
 
-function advanceNormalToken(source, start) {
+function createLexicalContext() {
+  return {
+    canStartRegex: true,
+    pendingControlHeader: null,
+    parenthesisContexts: [],
+    lastClosedControlHeader: false,
+    afterMemberAccess: false,
+  };
+}
+
+function isRegexLiteralContext(context) {
+  return context.canStartRegex || context.lastClosedControlHeader;
+}
+
+function consumeLiteral(context) {
+  context.canStartRegex = false;
+  context.pendingControlHeader = null;
+  context.lastClosedControlHeader = false;
+  context.afterMemberAccess = false;
+}
+
+function advanceNormalToken(source, start, context) {
   const char = source[start];
   if (isIdentifierStart(char)) {
     const end = skipIdentifier(source, start);
-    return { end, canStartRegex: REGEX_PREFIX_KEYWORDS.has(source.slice(start, end)) };
+    const word = source.slice(start, end);
+    if (context.pendingControlHeader === 'for' && word === 'await') {
+      context.pendingControlHeader = 'for';
+    } else {
+      context.pendingControlHeader = !context.afterMemberAccess && CONTROL_HEADER_KEYWORDS.has(word)
+        ? word
+        : null;
+    }
+    context.canStartRegex = !context.afterMemberAccess && REGEX_PREFIX_KEYWORDS.has(word);
+    context.lastClosedControlHeader = false;
+    context.afterMemberAccess = false;
+    return { end };
   }
-  if (char >= '0' && char <= '9') return { end: skipNumber(source, start), canStartRegex: false };
+  if (char >= '0' && char <= '9') {
+    context.canStartRegex = false;
+    context.pendingControlHeader = null;
+    context.lastClosedControlHeader = false;
+    context.afterMemberAccess = false;
+    return { end: skipNumber(source, start) };
+  }
   if ((char === '+' && source[start + 1] === '+') || (char === '-' && source[start + 1] === '-')) {
-    return { end: start + 2, canStartRegex: false };
+    context.canStartRegex = false;
+    context.pendingControlHeader = null;
+    context.lastClosedControlHeader = false;
+    context.afterMemberAccess = false;
+    return { end: start + 2 };
   }
-  return { end: start + 1, canStartRegex: char !== ')' && char !== ']' && char !== '}' && char !== '.' };
+  if (source.startsWith('...', start)) {
+    context.canStartRegex = true;
+    context.pendingControlHeader = null;
+    context.lastClosedControlHeader = false;
+    context.afterMemberAccess = false;
+    return { end: start + 3 };
+  }
+  if (char === '(') {
+    context.parenthesisContexts.push(Boolean(context.pendingControlHeader));
+    context.pendingControlHeader = null;
+    context.canStartRegex = true;
+    context.lastClosedControlHeader = false;
+    context.afterMemberAccess = false;
+    return { end: start + 1 };
+  }
+  if (char === ')') {
+    context.lastClosedControlHeader = context.parenthesisContexts.pop() === true;
+    context.pendingControlHeader = null;
+    context.canStartRegex = false;
+    context.afterMemberAccess = false;
+    return { end: start + 1 };
+  }
+  if (char === '?' && source[start + 1] === '.') {
+    context.pendingControlHeader = null;
+    context.lastClosedControlHeader = false;
+    context.canStartRegex = true;
+    context.afterMemberAccess = true;
+    return { end: start + 2 };
+  }
+  context.pendingControlHeader = null;
+  context.lastClosedControlHeader = false;
+  context.afterMemberAccess = char === '.';
+  context.canStartRegex = char !== ']' && char !== '}' && char !== '.';
+  return { end: start + 1 };
 }
 
 function skipTemplateExpression(source, start) {
   let depth = 1;
-  let canStartRegex = true;
+  const context = createLexicalContext();
   for (let index = start; index < source.length;) {
     if (source[index] === '/' && source[index + 1] === '/') {
       index += 2;
@@ -121,15 +205,17 @@ function skipTemplateExpression(source, start) {
     }
     if (source[index] === '\'' || source[index] === '"') {
       index = skipQuotedLiteral(source, index, source[index]);
+      consumeLiteral(context);
       continue;
     }
     if (source[index] === '`') {
       index = skipTemplateLiteral(source, index);
+      consumeLiteral(context);
       continue;
     }
-    if (source[index] === '/' && canStartRegex) {
+    if (source[index] === '/' && isRegexLiteralContext(context)) {
       index = skipRegexLiteral(source, index);
-      canStartRegex = false;
+      consumeLiteral(context);
       continue;
     }
     if (/\s/u.test(source[index])) {
@@ -142,9 +228,8 @@ function skipTemplateExpression(source, start) {
       depth -= 1;
       if (depth === 0) return index + 1;
     }
-    const token = advanceNormalToken(source, index);
+    const token = advanceNormalToken(source, index, context);
     index = token.end;
-    canStartRegex = token.canStartRegex;
   }
   return source.length;
 }
@@ -168,7 +253,7 @@ function skipTemplateLiteral(source, start) {
 function lexicalView(source, { maskLiterals }) {
   const chunks = [];
   let last = 0;
-  let canStartRegex = true;
+  const context = createLexicalContext();
   for (let index = 0; index < source.length;) {
     if (/\s/u.test(source[index])) {
       index += 1;
@@ -177,7 +262,7 @@ function lexicalView(source, { maskLiterals }) {
     let end;
     const isLineComment = source[index] === '/' && source[index + 1] === '/';
     const isBlockComment = source[index] === '/' && source[index + 1] === '*';
-    const isRegex = source[index] === '/' && !isLineComment && !isBlockComment && canStartRegex;
+    const isRegex = source[index] === '/' && !isLineComment && !isBlockComment && isRegexLiteralContext(context);
     if (isLineComment) {
       end = index + 2;
       while (end < source.length && source[end] !== '\r' && source[end] !== '\n') end += 1;
@@ -191,16 +276,15 @@ function lexicalView(source, { maskLiterals }) {
     } else if (source[index] === '`') {
       end = skipTemplateLiteral(source, index);
     } else {
-      const token = advanceNormalToken(source, index);
+      const token = advanceNormalToken(source, index, context);
       index = token.end;
-      canStartRegex = token.canStartRegex;
       continue;
     }
     chunks.push(source.slice(last, index));
     chunks.push((maskLiterals || isLineComment || isBlockComment || isRegex) ? maskRange(source, index, end) : source.slice(index, end));
     index = end;
     last = end;
-    if (!isLineComment && !isBlockComment) canStartRegex = false;
+    if (!isLineComment && !isBlockComment) consumeLiteral(context);
   }
   chunks.push(source.slice(last));
   return chunks.join('');
