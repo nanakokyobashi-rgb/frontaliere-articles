@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-giornico-consiglio-stato-fermata.webp",
+      "sha256": "8391a8d89d28e2aec29068620b187d3703738680fd2719eed9fc22730c1ec3c2"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-giornico-consiglio-stato-fermata-480w.webp",
+      "sha256": "ea81208bec63517aa9893e79afd32a51cba6e05ac09c32e027a9e87409c54e6f"
+    }
+  ]
 }
