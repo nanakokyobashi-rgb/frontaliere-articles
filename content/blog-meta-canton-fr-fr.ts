@@ -66,6 +66,9 @@ const blogMetaCantonFrFr: Record<string, string> = {
     'blog.article.tpf-bus-elettrici-friburgo.title': 'Fribourg prépare 24 nouveaux bus électriques pour décembre',
     'blog.article.tpf-bus-elettrici-friburgo.excerpt': '24 nouveaux bus électriques pour les TPF Investissement : 20 millions de francs Six bus de 12 mètres, 18 articulés de 18 En service à partir du changement',
     'blog.article.tpf-bus-elettrici-friburgo.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.tpf-nuovi-bus-elettrici-friburgo.title': '24 nouveaux autobus électriques TPF pour les lignes urbaines et régionales',
+    'blog.article.tpf-nuovi-bus-elettrici-friburgo.excerpt': 'La mise en service progressive de 24 nouveaux autobus électriques TPF commencera lors du changement d\'horaire de décembre prochain sur les lignes urbaines et régionales.',
+    'blog.article.tpf-nuovi-bus-elettrici-friburgo.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonFrFr;
