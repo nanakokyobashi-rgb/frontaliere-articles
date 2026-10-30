@@ -40,6 +40,16 @@
       "failureCount": 13,
       "requestedAt": "2026-10-24T19:06:53.846Z",
       "lastFailureAt": "2026-10-30T16:36:40.096Z"
+    },
+    {
+      "articleId": "sindacati-aumenti-infermieri-ticino",
+      "title": "Infermieri sociopsichiatrici: sindacati chiedono aumenti fino a 8'941 franchi",
+      "fallbackImage": "/images/blog/article-ocst-storia-frontalieri-ticino.webp",
+      "reason": "All image providers failed for article-sindacati-aumenti-infermieri-ticino: openai-codex (vision gate rejected image: Synthetic photorealistic editorial illustration; a recognizabl",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-30T20:19:38.286Z",
+      "lastFailureAt": "2026-10-30T20:19:38.286Z"
     }
   ]
 }

@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4086184": {
-    "articleId": "assenteismo-psichico-ticino-51",
-    "ts": "2026-09-18T03:45:59.431Z",
-    "keyForm": 2
-  },
   "https://comozero.it/attualita/italia-svizzera-soldi-ai-comuni-di-frontiera-firmato-il-decreto-a-chi-spettano-le-risorse": {
     "articleId": "fondi-comuni-frontiera-decreto",
     "ts": "2026-09-18T11:45:45.594Z",
@@ -2497,6 +2492,11 @@
   "https://www.ticinonews.ch/ticino/a-gaggiolo-con-articoli-di-lusso-non-dichiarati-per-oltre-23000-euro-445489": {
     "articleId": "gaggiolo-articoli-lusso-non-dichiarati",
     "ts": "2026-10-28T15:59:34.128Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1960094/sindacati-adeguamento-infermieri-franchi-chiedono-aumenti": {
+    "articleId": "sindacati-aumenti-infermieri-ticino",
+    "ts": "2026-10-30T20:19:38.288Z",
     "keyForm": 2
   }
 }
