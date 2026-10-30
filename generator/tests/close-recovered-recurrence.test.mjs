@@ -44,6 +44,7 @@ import {
   dropPhantomCancellations,
   decideFailureIssueClose,
   assessBranchRecovery,
+  resolveRecoveredIssue,
 } from '../../scripts/ci/close-recovered-failure-issues.mjs';
 import { lostArticleTitle } from '../../scripts/ci/scan-failed-runs.mjs';
 
@@ -336,6 +337,30 @@ test('il percorso branch/PR richiede un solo verde qualificante', () => {
   assert.equal(DEFAULT_BRANCH_RECOVERY_GREEN_STREAK, 1);
   assert.equal(decision.greenStreak, 1);
   assert.equal(decision.recovered, true);
+});
+
+test('un close non verificato resta retryable senza interrompere il batch', () => {
+  const expected = new Error('post-condition not closed');
+  expected.persisted = false;
+
+  const result = resolveRecoveredIssue(
+    2390,
+    { expectedTitle: 'Workflow Failure: fast-publish-article' },
+    () => { throw expected; },
+  );
+
+  assert.deepEqual(result, {
+    number: 2390,
+    persisted: false,
+    skipped: 'close-unconfirmed',
+    message: 'post-condition not closed',
+  });
+
+  assert.throws(
+    () => resolveRecoveredIssue(2390, {}, () => { throw new Error('programmer error'); }),
+    /programmer error/,
+    'errori inattesi non devono essere assorbiti dalla boundary per-item',
+  );
 });
 
 // ── Il marcatore di ricorrenza non si muove ─────────────────────────────────
