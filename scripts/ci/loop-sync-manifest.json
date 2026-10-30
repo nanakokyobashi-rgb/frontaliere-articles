@@ -4086,17 +4086,17 @@
       "path": "host/constants.ts",
       "sitePath": "build-plugins/constants.ts",
       "mode": "adapted",
-      "reason": "Costanti del sito lette dall'engine via SiteShellContract, estratte per chiusura: adapted per costruzione, non byte-identiche al sorgente completo. scalarFingerprint confronta i 22 scalari authoritative, mentre i test runtime verificano i comportamenti del contratto. Il digest f1de8394… trasporta anche i riferimenti Ads/Partnerize content-addressed e il cattura strutturale conservativa inline prima di React e producer differiti con ripristino solo a contesto/DOM puliti; estende il riconoscimento ai crawler Google-InspectionTool e GoogleOther, rimuove anche userinfo e credenziali dalle rappresentazioni URL della telemetria e incorpora il gate GA4 del sito, il budget SERP a 150 caratteri, la canonicalizzazione Organization.sameAs, l'aggiunta del profilo Facebook canonico, il riferimento content-addressed a gtag-init e le due regole contestuali trasportate per Chiasso e concorsi pubblici; la specializzazione editoriale resta in additionalType e il runtime Firebase conserva il match sulla chiave esatta, senza segreti nei fingerprint.",
+      "reason": "Costanti del sito lette dall'engine via SiteShellContract, estratte per chiusura: adapted per costruzione, non byte-identiche al sorgente completo. scalarFingerprint confronta i 22 scalari authoritative, mentre i test runtime verificano i comportamenti del contratto. Il digest 45ad8953… trasporta anche i riferimenti Ads/Partnerize content-addressed e il cattura strutturale conservativa inline prima di React e producer differiti con ripristino solo a contesto/DOM puliti; estende il riconoscimento ai crawler Google-InspectionTool e GoogleOther, rimuove anche userinfo e credenziali dalle rappresentazioni URL della telemetria e incorpora il gate GA4 del sito, il budget SERP a 150 caratteri, la canonicalizzazione Organization.sameAs, l'aggiunta del profilo Facebook canonico, il riferimento content-addressed a gtag-init e le due regole contestuali trasportate per Chiasso e concorsi pubblici; la specializzazione editoriale resta in additionalType e il runtime Firebase conserva il match sulla chiave esatta, senza segreti nei fingerprint.",
       "baseline": {
-        "site": "4531aaece46419b9",
-        "corpus": "f2c00e1a2da70d13",
+        "site": "c9f803f4645a9ab0",
+        "corpus": "e5427bc6007a7796",
         "alignedAt": "2026-10-30"
       },
       "scalarFingerprint": {
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
         "corpusPath": "host/shell-contract-fingerprint.json",
         "scalarFields": 22,
-        "sha256": "f1de8394e013dba599fa4d51197d9e83169d85c065dcd48ab1985d5ce619b00e"
+        "sha256": "45ad895333496b146aad4f48a83cbc27e913563d9d19de8cc9f302063dc4b9d9"
       }
     },
     {
@@ -4313,8 +4313,8 @@
       "mode": "identical",
       "reason": "Impronta SHA-256 dei 22 campi scalari di SiteShellContract, prodotta e verificata da `host/tests/shell-contract-fingerprint.test.mjs`. Il gemello del sito vive in `tests/articles-shell-contract-fingerprint.json` con lo stesso contenuto; i due artefatti restano `identical` e la baseline ne sorveglia il drift. E' il gate runtime che impedisce di spedire l'engine senza la sua meta' `host/`.",
       "baseline": {
-        "site": "9ef61715c2a68d01",
-        "corpus": "9ef61715c2a68d01",
+        "site": "656ba1e5ec9be3b6",
+        "corpus": "656ba1e5ec9be3b6",
         "alignedAt": "2026-10-30"
       }
     },
@@ -6714,9 +6714,9 @@
       "mode": "identical",
       "reason": "Canonical pure URL sanitizer is embedded into static GTAG on both sides; implicit dependency of host/constants.ts must remain byte-identical.",
       "baseline": {
-        "site": "451139be2898dc0a",
-        "corpus": "451139be2898dc0a",
-        "alignedAt": "2026-10-29"
+        "site": "822a2f65ee5dbe2c",
+        "corpus": "822a2f65ee5dbe2c",
+        "alignedAt": "2026-10-30"
       }
     },
     {
@@ -6745,8 +6745,8 @@
       "mode": "identical",
       "reason": "Derived Ads/Partnerize producer and canonical-helper SHA fingerprints bind the transported byte snapshots to the source. Source tests regenerate the projection, host tests verify snapshot hashes and the complete SiteShellContract before publishing.",
       "baseline": {
-        "site": "5a31e95e63849904",
-        "corpus": "5a31e95e63849904",
+        "site": "3236ca052887bc75",
+        "corpus": "3236ca052887bc75",
         "alignedAt": "2026-10-30"
       }
     },
@@ -6757,7 +6757,7 @@
       "reason": "Byte-exact public assets and canonical inline guard snapshot derived from the source exporter; hostShellFiles consumes these bytes without a cross-repository import. The shared identical producer fingerprint and both SiteShellContract scalar fingerprints invalidate changes in constants, canonical helpers or raw static controllers before publication. Regenerate through the source exporter, update both fingerprint projections, then verify all names and SHA-256 values.",
       "baseline": {
         "site": "b18653746619d369",
-        "corpus": "02e8441ae57b9920",
+        "corpus": "457b6f1deb072294",
         "alignedAt": "2026-10-30"
       }
     }
