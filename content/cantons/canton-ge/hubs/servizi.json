@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "servizi",
-  "updatedAt": "2026-10-30T06:23:49.454Z",
-  "contentHash": "dd3e67060d4d6ce2ee8435d6e4a1e65021413ef8a04d036b47f63a0740d16d63",
+  "updatedAt": "2026-10-30T15:09:51.722Z",
+  "contentHash": "ad9657e8150edc5fc842d6281df5c4b6d4d97f749c17aad20816e216e94e879b",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-29T20:58:53.494Z",
+      "updatedAt": "2026-10-30T06:34:59.462Z",
       "keyFacts": 0
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-29T21:17:01.193Z",
+      "updatedAt": "2026-10-30T06:04:12.241Z",
       "keyFacts": 0
     },
     {
@@ -96,7 +96,7 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-29T20:58:53.494Z"
+          "updatedAt": "2026-10-30T06:34:59.462Z"
         },
         {
           "id": "meteo",
@@ -105,12 +105,12 @@
           "items": [
             {
               "label": "Genève",
-              "value": "9 °C",
-              "detail": "oggi da 8 a 10 °C"
+              "value": "8 °C",
+              "detail": "oggi da 8 a 12 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-29T21:17:01.193Z"
+          "updatedAt": "2026-10-30T06:04:12.241Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -228,7 +228,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-30T15:09:51.722Z"
     },
     "en": {
       "canton": "GE",
@@ -297,7 +297,7 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-29T20:58:53.494Z"
+          "updatedAt": "2026-10-30T06:34:59.462Z"
         },
         {
           "id": "meteo",
@@ -306,12 +306,12 @@
           "items": [
             {
               "label": "Genève",
-              "value": "9 °C",
-              "detail": "today from 8 to 10 °C"
+              "value": "8 °C",
+              "detail": "today from 8 to 12 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-29T21:17:01.193Z"
+          "updatedAt": "2026-10-30T06:04:12.241Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -424,7 +424,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-30T15:09:51.722Z"
     },
     "de": {
       "canton": "GE",
@@ -493,7 +493,7 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-29T20:58:53.494Z"
+          "updatedAt": "2026-10-30T06:34:59.462Z"
         },
         {
           "id": "meteo",
@@ -502,12 +502,12 @@
           "items": [
             {
               "label": "Genève",
-              "value": "9 °C",
-              "detail": "heute 8 bis 10 °C"
+              "value": "8 °C",
+              "detail": "heute 8 bis 12 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-29T21:17:01.193Z"
+          "updatedAt": "2026-10-30T06:04:12.241Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -620,7 +620,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-30T15:09:51.722Z"
     },
     "fr": {
       "canton": "GE",
@@ -689,7 +689,7 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-29T20:58:53.494Z"
+          "updatedAt": "2026-10-30T06:34:59.462Z"
         },
         {
           "id": "meteo",
@@ -698,12 +698,12 @@
           "items": [
             {
               "label": "Genève",
-              "value": "9 °C",
-              "detail": "aujourd’hui de 8 à 10 °C"
+              "value": "8 °C",
+              "detail": "aujourd’hui de 8 à 12 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-29T21:17:01.193Z"
+          "updatedAt": "2026-10-30T06:04:12.241Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -813,7 +813,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-30T15:09:51.722Z"
     }
   }
 }

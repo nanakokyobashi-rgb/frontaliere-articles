@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "servizi",
-  "updatedAt": "2026-10-30T06:23:49.454Z",
-  "contentHash": "110c5ae10cd9e835ffcb9ea9b1cece2efa556e49c4c7b54cb38a06834e87c3b6",
+  "updatedAt": "2026-10-30T15:09:51.722Z",
+  "contentHash": "873ea19b92dadf5e22eca8c5d16fe03c59d876e5f1dfc628081818d985b4f699",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-29T12:59:31.667Z",
+      "updatedAt": "2026-10-30T05:51:01.110Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-29T21:17:01.193Z",
+      "updatedAt": "2026-10-30T06:04:12.241Z",
       "keyFacts": 0
     },
     {
@@ -75,7 +75,7 @@
           "items": [
             {
               "label": "VS406",
-              "value": "4600 CHF",
+              "value": "4700 CHF",
               "detail": "offerta attuale",
               "date": "2026-11-16T14:00:00.000Z",
               "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=947&locale=fr_CH"
@@ -97,7 +97,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://ecari.vs.ch/ecari-auction/ui/app/init?locale=fr_CH",
-          "updatedAt": "2026-10-29T12:59:31.667Z"
+          "updatedAt": "2026-10-30T05:51:01.110Z"
         },
         {
           "id": "meteo",
@@ -106,12 +106,12 @@
           "items": [
             {
               "label": "Sion",
-              "value": "9 °C",
-              "detail": "oggi da 8 a 12 °C"
+              "value": "7 °C",
+              "detail": "oggi da 6 a 16 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-29T21:17:01.193Z"
+          "updatedAt": "2026-10-30T06:04:12.241Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -229,7 +229,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-30T15:09:51.722Z"
     },
     "en": {
       "canton": "VS",
@@ -277,7 +277,7 @@
           "items": [
             {
               "label": "VS406",
-              "value": "4,600 CHF",
+              "value": "4,700 CHF",
               "detail": "current bid",
               "date": "2026-11-16T14:00:00.000Z",
               "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=947&locale=fr_CH"
@@ -299,7 +299,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://ecari.vs.ch/ecari-auction/ui/app/init?locale=fr_CH",
-          "updatedAt": "2026-10-29T12:59:31.667Z"
+          "updatedAt": "2026-10-30T05:51:01.110Z"
         },
         {
           "id": "meteo",
@@ -308,12 +308,12 @@
           "items": [
             {
               "label": "Sion",
-              "value": "9 °C",
-              "detail": "today from 8 to 12 °C"
+              "value": "7 °C",
+              "detail": "today from 6 to 16 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-29T21:17:01.193Z"
+          "updatedAt": "2026-10-30T06:04:12.241Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -427,7 +427,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-30T15:09:51.722Z"
     },
     "de": {
       "canton": "VS",
@@ -475,7 +475,7 @@
           "items": [
             {
               "label": "VS406",
-              "value": "4’600 CHF",
+              "value": "4’700 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-11-16T14:00:00.000Z",
               "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=947&locale=fr_CH"
@@ -497,7 +497,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://ecari.vs.ch/ecari-auction/ui/app/init?locale=fr_CH",
-          "updatedAt": "2026-10-29T12:59:31.667Z"
+          "updatedAt": "2026-10-30T05:51:01.110Z"
         },
         {
           "id": "meteo",
@@ -506,12 +506,12 @@
           "items": [
             {
               "label": "Sion",
-              "value": "9 °C",
-              "detail": "heute 8 bis 12 °C"
+              "value": "7 °C",
+              "detail": "heute 6 bis 16 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-29T21:17:01.193Z"
+          "updatedAt": "2026-10-30T06:04:12.241Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -625,7 +625,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-30T15:09:51.722Z"
     },
     "fr": {
       "canton": "VS",
@@ -673,7 +673,7 @@
           "items": [
             {
               "label": "VS406",
-              "value": "4 600 CHF",
+              "value": "4 700 CHF",
               "detail": "offre actuelle",
               "date": "2026-11-16T14:00:00.000Z",
               "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=947&locale=fr_CH"
@@ -695,7 +695,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://ecari.vs.ch/ecari-auction/ui/app/init?locale=fr_CH",
-          "updatedAt": "2026-10-29T12:59:31.667Z"
+          "updatedAt": "2026-10-30T05:51:01.110Z"
         },
         {
           "id": "meteo",
@@ -704,12 +704,12 @@
           "items": [
             {
               "label": "Sion",
-              "value": "9 °C",
-              "detail": "aujourd’hui de 8 à 12 °C"
+              "value": "7 °C",
+              "detail": "aujourd’hui de 6 à 16 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-29T21:17:01.193Z"
+          "updatedAt": "2026-10-30T06:04:12.241Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -819,7 +819,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-30T15:09:51.722Z"
     }
   }
 }

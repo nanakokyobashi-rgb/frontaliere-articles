@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "servizi",
-  "updatedAt": "2026-10-30T06:23:49.454Z",
-  "contentHash": "9b19c3d30efb8c2d1240bfd5e79a1bbd94ebb8a8a9337d513f2b36280d0dd486",
+  "updatedAt": "2026-10-30T15:09:51.722Z",
+  "contentHash": "afef681142213356d06f224561dd5841669d6091e4374d056b6b0e94eb744c80",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-29T21:17:01.193Z",
+      "updatedAt": "2026-10-30T06:04:12.241Z",
       "keyFacts": 0
     },
     {
@@ -70,12 +70,12 @@
           "items": [
             {
               "label": "Luzern",
-              "value": "8 °C",
-              "detail": "oggi da 7 a 9 °C"
+              "value": "7 °C",
+              "detail": "oggi da 6 a 11 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-29T21:17:01.193Z"
+          "updatedAt": "2026-10-30T06:04:12.241Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -193,7 +193,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-30T15:09:51.722Z"
     },
     "en": {
       "canton": "LU",
@@ -241,12 +241,12 @@
           "items": [
             {
               "label": "Luzern",
-              "value": "8 °C",
-              "detail": "today from 7 to 9 °C"
+              "value": "7 °C",
+              "detail": "today from 6 to 11 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-29T21:17:01.193Z"
+          "updatedAt": "2026-10-30T06:04:12.241Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -359,7 +359,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-30T15:09:51.722Z"
     },
     "de": {
       "canton": "LU",
@@ -407,12 +407,12 @@
           "items": [
             {
               "label": "Luzern",
-              "value": "8 °C",
-              "detail": "heute 7 bis 9 °C"
+              "value": "7 °C",
+              "detail": "heute 6 bis 11 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-29T21:17:01.193Z"
+          "updatedAt": "2026-10-30T06:04:12.241Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -525,7 +525,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-30T15:09:51.722Z"
     },
     "fr": {
       "canton": "LU",
@@ -573,12 +573,12 @@
           "items": [
             {
               "label": "Luzern",
-              "value": "8 °C",
-              "detail": "aujourd’hui de 7 à 9 °C"
+              "value": "7 °C",
+              "detail": "aujourd’hui de 6 à 11 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-29T21:17:01.193Z"
+          "updatedAt": "2026-10-30T06:04:12.241Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -688,7 +688,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-30T15:09:51.722Z"
     }
   }
 }

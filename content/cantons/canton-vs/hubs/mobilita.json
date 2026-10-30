@@ -4,17 +4,17 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "mobilita",
-  "updatedAt": "2026-10-30T06:23:49.454Z",
-  "contentHash": "4f8ed4ab3a58ec717aab2a882926e89699438a1522a32e9c7fee5d08b2dc1e13",
+  "updatedAt": "2026-10-30T15:09:51.722Z",
+  "contentHash": "62a4fea2b85f9440305c176e36d6f39cd34c6de4914c321da056cb8197ac553d",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-28T23:59:59.000Z",
+      "updatedAt": "2026-10-29T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-29T18:42:38.256Z",
+      "updatedAt": "2026-10-30T06:32:11.488Z",
       "keyFacts": 2
     },
     {
@@ -33,24 +33,24 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Le Châtelard-Vallorcine, settimana conclusa: 28 ottobre 2026"
+          "note": "Le Châtelard-Vallorcine, settimana conclusa: 29 ottobre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "24",
-          "note": "segnalazioni aggiornate: 29 ottobre 2026"
+          "value": "22",
+          "note": "segnalazioni aggiornate: 30 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "18",
-          "note": "segnalazioni aggiornate: 29 ottobre 2026"
+          "value": "17",
+          "note": "segnalazioni aggiornate: 30 ottobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 22 ottobre 2026 – 28 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 23 ottobre 2026 – 29 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Le Châtelard-Vallorcine",
@@ -85,7 +85,7 @@
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-28T23:59:59.000Z"
+          "updatedAt": "2026-10-29T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -114,7 +114,7 @@
               "label": "A21 Diramazione Gran San Bernardo <-> Martigny-Croix tra Svincolo autostradale Martigny-Croix E Svincolo autostradale Martigny-Expo Situazione: chiusa cantiere",
               "value": "Chiusura",
               "detail": "fine prevista: 6 novembre 2026",
-              "date": "2026-09-10T03:58:00.000Z"
+              "date": "2026-09-10T03:59:00.000Z"
             },
             {
               "label": "A21 Diramazione Gran San Bernardo <-> Martigny-Croix tra Svincolo autostradale Martigny-Expo E Svincolo autostradale Martigny-Croix Situazione: chiusa cantiere",
@@ -129,19 +129,19 @@
               "date": "2026-09-28T06:00:00.000Z"
             },
             {
-              "label": "Vétroz, route du rhone, Vétroz in tutte le direzioni Situazione: chiusa Causa: oggetto sulla strada",
-              "value": "Chiusura",
-              "date": "2026-10-16T02:59:00.000Z"
-            },
-            {
               "label": "Turtmann -> Gruben tra Luogo Oberems E Luogo Gruben Situazione: chiusa Causa: lavori di manutenzione",
               "value": "Chiusura",
               "detail": "fine prevista: 30 ottobre 2026",
               "date": "2026-10-19T06:00:00.000Z"
+            },
+            {
+              "label": "Sion <-> Sanetschpass Passo Col du Sanetsch Situazione: chiusa",
+              "value": "Chiusura",
+              "date": "2026-10-20T13:09:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-29T18:42:38.256Z"
+          "updatedAt": "2026-10-30T06:32:11.488Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -249,7 +249,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-30T15:09:51.722Z"
     },
     "en": {
       "canton": "VS",
@@ -260,24 +260,24 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Le Châtelard-Vallorcine, week ending 28 October 2026"
+          "note": "Le Châtelard-Vallorcine, week ending 29 October 2026"
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "24",
-          "note": "reports as of 29 October 2026"
+          "value": "22",
+          "note": "reports as of 30 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "18",
-          "note": "reports as of 29 October 2026"
+          "value": "17",
+          "note": "reports as of 30 October 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 22 October 2026 to 28 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 23 October 2026 to 29 October 2026, fastest first.",
           "items": [
             {
               "label": "Le Châtelard-Vallorcine",
@@ -312,7 +312,7 @@
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-28T23:59:59.000Z"
+          "updatedAt": "2026-10-29T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -341,7 +341,7 @@
               "label": "A21 Diramazione Gran San Bernardo <-> Martigny-Croix tra Svincolo autostradale Martigny-Croix E Svincolo autostradale Martigny-Expo Situazione: chiusa cantiere",
               "value": "Closure",
               "detail": "until 6 November 2026",
-              "date": "2026-09-10T03:58:00.000Z"
+              "date": "2026-09-10T03:59:00.000Z"
             },
             {
               "label": "A21 Diramazione Gran San Bernardo <-> Martigny-Croix tra Svincolo autostradale Martigny-Expo E Svincolo autostradale Martigny-Croix Situazione: chiusa cantiere",
@@ -356,19 +356,19 @@
               "date": "2026-09-28T06:00:00.000Z"
             },
             {
-              "label": "Vétroz, route du rhone, Vétroz in tutte le direzioni Situazione: chiusa Causa: oggetto sulla strada",
-              "value": "Closure",
-              "date": "2026-10-16T02:59:00.000Z"
-            },
-            {
               "label": "Turtmann -> Gruben tra Luogo Oberems E Luogo Gruben Situazione: chiusa Causa: lavori di manutenzione",
               "value": "Closure",
               "detail": "until 30 October 2026",
               "date": "2026-10-19T06:00:00.000Z"
+            },
+            {
+              "label": "Sion <-> Sanetschpass Passo Col du Sanetsch Situazione: chiusa",
+              "value": "Closure",
+              "date": "2026-10-20T13:09:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-29T18:42:38.256Z"
+          "updatedAt": "2026-10-30T06:32:11.488Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -476,7 +476,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-30T15:09:51.722Z"
     },
     "de": {
       "canton": "VS",
@@ -487,24 +487,24 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Le Châtelard-Vallorcine, Woche bis 28. Oktober 2026"
+          "note": "Le Châtelard-Vallorcine, Woche bis 29. Oktober 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "24",
-          "note": "Meldungen vom 29. Oktober 2026"
+          "value": "22",
+          "note": "Meldungen vom 30. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "18",
-          "note": "Meldungen vom 29. Oktober 2026"
+          "value": "17",
+          "note": "Meldungen vom 30. Oktober 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 22. Oktober 2026 bis 28. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 23. Oktober 2026 bis 29. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Le Châtelard-Vallorcine",
@@ -539,7 +539,7 @@
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-28T23:59:59.000Z"
+          "updatedAt": "2026-10-29T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -568,7 +568,7 @@
               "label": "A21 Verzweigung Gd-St-Bernard <-> Martigny-Croix zwischen Anschluss Martigny-Croix und Anschluss Martigny-Expo Sachlage: Strecke gesperrt Baustelle",
               "value": "Sperrung",
               "detail": "bis 6. November 2026",
-              "date": "2026-09-10T03:58:00.000Z"
+              "date": "2026-09-10T03:59:00.000Z"
             },
             {
               "label": "A21 Verzweigung Gd-St-Bernard <-> Martigny-Croix zwischen Anschluss Martigny-Expo und Anschluss Martigny-Croix Sachlage: Strecke gesperrt Baustelle",
@@ -583,19 +583,19 @@
               "date": "2026-09-28T06:00:00.000Z"
             },
             {
-              "label": "Vétroz, route du rhone, Vétroz in beide Richtungen Sachlage: Strecke gesperrt Ursache: Gegenstände auf der Fahrbahn",
-              "value": "Sperrung",
-              "date": "2026-10-16T02:59:00.000Z"
-            },
-            {
               "label": "Turtmann -> Gruben zwischen Ortschaft Oberems und Ortschaft Gruben Sachlage: Strecke gesperrt Ursache: Unterhaltsarbeiten",
               "value": "Sperrung",
               "detail": "bis 30. Oktober 2026",
               "date": "2026-10-19T06:00:00.000Z"
+            },
+            {
+              "label": "Sion <-> Sanetschpass Pass Col du Sanetsch Sachlage: Strecke gesperrt",
+              "value": "Sperrung",
+              "date": "2026-10-20T13:09:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-29T18:42:38.256Z"
+          "updatedAt": "2026-10-30T06:32:11.488Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -703,7 +703,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-30T15:09:51.722Z"
     },
     "fr": {
       "canton": "VS",
@@ -714,24 +714,24 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Le Châtelard-Vallorcine, semaine jusqu’au 28 octobre 2026"
+          "note": "Le Châtelard-Vallorcine, semaine jusqu’au 29 octobre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "24",
-          "note": "signalements au 29 octobre 2026"
+          "value": "22",
+          "note": "signalements au 30 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "18",
-          "note": "signalements au 29 octobre 2026"
+          "value": "17",
+          "note": "signalements au 30 octobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 22 octobre 2026 au 28 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 23 octobre 2026 au 29 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Le Châtelard-Vallorcine",
@@ -766,7 +766,7 @@
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-28T23:59:59.000Z"
+          "updatedAt": "2026-10-29T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -795,7 +795,7 @@
               "label": "A21 Echangeur Gd-St-Bernard <-> Martigny-Croix entre Jonction autoroutière Martigny-Croix et Jonction autoroutière Martigny-Expo Situation: fermé travaux",
               "value": "Fermeture",
               "detail": "jusqu’au 6 novembre 2026",
-              "date": "2026-09-10T03:58:00.000Z"
+              "date": "2026-09-10T03:59:00.000Z"
             },
             {
               "label": "A21 Echangeur Gd-St-Bernard <-> Martigny-Croix entre Jonction autoroutière Martigny-Expo et Jonction autoroutière Martigny-Croix Situation: fermé travaux",
@@ -810,19 +810,19 @@
               "date": "2026-09-28T06:00:00.000Z"
             },
             {
-              "label": "Vétroz, route du rhone, Vétroz dans les deux sens Situation: fermé Raison: objets sur la chaussée",
-              "value": "Fermeture",
-              "date": "2026-10-16T02:59:00.000Z"
-            },
-            {
               "label": "Tourtemagne -> Gruben entre Localité Oberems et Localité Gruben Situation: fermé Raison: travaux de maintenance",
               "value": "Fermeture",
               "detail": "jusqu’au 30 octobre 2026",
               "date": "2026-10-19T06:00:00.000Z"
+            },
+            {
+              "label": "Sion <-> Sanetschpass Col Col du Sanetsch Situation: fermé",
+              "value": "Fermeture",
+              "date": "2026-10-20T13:09:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-29T18:42:38.256Z"
+          "updatedAt": "2026-10-30T06:32:11.488Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -930,7 +930,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-30T15:09:51.722Z"
     }
   }
 }

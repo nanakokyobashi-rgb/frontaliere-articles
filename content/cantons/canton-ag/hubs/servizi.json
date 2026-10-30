@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "servizi",
-  "updatedAt": "2026-10-30T06:23:49.454Z",
-  "contentHash": "3ade3d45a6ddb38044e8c298560eb23be769f560482e664abd802697b5347e28",
+  "updatedAt": "2026-10-30T15:09:51.722Z",
+  "contentHash": "7da6d4f2af9204f9219f816cf7a16638b45706009ec34b5d98f8b50de840c22e",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-29T12:59:31.667Z",
+      "updatedAt": "2026-10-30T05:51:01.110Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-29T21:17:01.193Z",
+      "updatedAt": "2026-10-30T06:04:12.241Z",
       "keyFacts": 0
     },
     {
@@ -44,7 +44,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "18",
-          "note": "offerta mediana 420 CHF"
+          "note": "offerta mediana 660 CHF"
         }
       ],
       "dataBlocks": [
@@ -84,7 +84,7 @@
             },
             {
               "label": "AG8843",
-              "value": "2000 CHF",
+              "value": "2400 CHF",
               "detail": "offerta attuale",
               "date": "2026-11-11T20:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58809"
@@ -92,7 +92,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion-ag.ch/de/",
-          "updatedAt": "2026-10-29T12:59:31.667Z"
+          "updatedAt": "2026-10-30T05:51:01.110Z"
         },
         {
           "id": "meteo",
@@ -101,12 +101,12 @@
           "items": [
             {
               "label": "Aarau",
-              "value": "7 °C",
-              "detail": "oggi da 5 a 9 °C"
+              "value": "6 °C",
+              "detail": "oggi da 5 a 11 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-29T21:17:01.193Z"
+          "updatedAt": "2026-10-30T06:04:12.241Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -224,7 +224,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-30T15:09:51.722Z"
     },
     "en": {
       "canton": "AG",
@@ -241,7 +241,7 @@
         {
           "label": "Plate auctions running",
           "value": "18",
-          "note": "typical bid 420 CHF"
+          "note": "typical bid 660 CHF"
         }
       ],
       "dataBlocks": [
@@ -281,7 +281,7 @@
             },
             {
               "label": "AG8843",
-              "value": "2,000 CHF",
+              "value": "2,400 CHF",
               "detail": "current bid",
               "date": "2026-11-11T20:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58809"
@@ -289,7 +289,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion-ag.ch/de/",
-          "updatedAt": "2026-10-29T12:59:31.667Z"
+          "updatedAt": "2026-10-30T05:51:01.110Z"
         },
         {
           "id": "meteo",
@@ -298,12 +298,12 @@
           "items": [
             {
               "label": "Aarau",
-              "value": "7 °C",
-              "detail": "today from 5 to 9 °C"
+              "value": "6 °C",
+              "detail": "today from 5 to 11 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-29T21:17:01.193Z"
+          "updatedAt": "2026-10-30T06:04:12.241Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -417,7 +417,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-30T15:09:51.722Z"
     },
     "de": {
       "canton": "AG",
@@ -434,7 +434,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "18",
-          "note": "mittleres Gebot 420 CHF"
+          "note": "mittleres Gebot 660 CHF"
         }
       ],
       "dataBlocks": [
@@ -474,7 +474,7 @@
             },
             {
               "label": "AG8843",
-              "value": "2’000 CHF",
+              "value": "2’400 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-11-11T20:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58809"
@@ -482,7 +482,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion-ag.ch/de/",
-          "updatedAt": "2026-10-29T12:59:31.667Z"
+          "updatedAt": "2026-10-30T05:51:01.110Z"
         },
         {
           "id": "meteo",
@@ -491,12 +491,12 @@
           "items": [
             {
               "label": "Aarau",
-              "value": "7 °C",
-              "detail": "heute 5 bis 9 °C"
+              "value": "6 °C",
+              "detail": "heute 5 bis 11 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-29T21:17:01.193Z"
+          "updatedAt": "2026-10-30T06:04:12.241Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -610,7 +610,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-30T15:09:51.722Z"
     },
     "fr": {
       "canton": "AG",
@@ -627,7 +627,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "18",
-          "note": "offre centrale 420 CHF"
+          "note": "offre centrale 660 CHF"
         }
       ],
       "dataBlocks": [
@@ -667,7 +667,7 @@
             },
             {
               "label": "AG8843",
-              "value": "2 000 CHF",
+              "value": "2 400 CHF",
               "detail": "offre actuelle",
               "date": "2026-11-11T20:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58809"
@@ -675,7 +675,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion-ag.ch/de/",
-          "updatedAt": "2026-10-29T12:59:31.667Z"
+          "updatedAt": "2026-10-30T05:51:01.110Z"
         },
         {
           "id": "meteo",
@@ -684,12 +684,12 @@
           "items": [
             {
               "label": "Aarau",
-              "value": "7 °C",
-              "detail": "aujourd’hui de 5 à 9 °C"
+              "value": "6 °C",
+              "detail": "aujourd’hui de 5 à 11 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-29T21:17:01.193Z"
+          "updatedAt": "2026-10-30T06:04:12.241Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -799,7 +799,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-30T15:09:51.722Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-10-30T06:23:49.454Z",
-  "contentHash": "7b7cb301ac3700e97bf529951165d60481b80661fddf446a4864f62ec4681384",
+  "updatedAt": "2026-10-30T15:09:51.722Z",
+  "contentHash": "a65b90691de397dc76990ece158b4491643453f13399445d21ac507cd540e8a1",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -13,18 +13,13 @@
       "keyFacts": 1
     },
     {
-      "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-29T20:58:06.256Z",
-      "keyFacts": 0
-    },
-    {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-29T12:59:31.667Z",
+      "updatedAt": "2026-10-30T05:51:01.110Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-29T21:17:01.193Z",
+      "updatedAt": "2026-10-30T06:04:12.241Z",
       "keyFacts": 0
     },
     {
@@ -74,46 +69,6 @@
           "updatedAt": "2026-10-25T09:11:35.438Z"
         },
         {
-          "id": "farmacie-di-turno",
-          "title": "Farmacie di turno",
-          "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
-          "items": [
-            {
-              "label": "Amavita Biasca",
-              "detail": "Biasca, Biasca e Valli",
-              "date": "2026-10-23T16:00:00.000Z"
-            },
-            {
-              "label": "Farmacia Coop Vitality Viganello",
-              "detail": "Viganello, Luganese",
-              "date": "2026-10-24T06:00:00.000Z"
-            },
-            {
-              "label": "Stazione",
-              "detail": "Bellinzona, Bellinzonese",
-              "date": "2026-10-26T17:30:00.000Z"
-            },
-            {
-              "label": "Giardino",
-              "detail": "Coldrerio, Mendrisiotto",
-              "date": "2026-10-27T07:00:00.000Z"
-            },
-            {
-              "label": "Boscolo",
-              "detail": "Airolo, Biasca e Valli",
-              "date": "2026-10-30T17:00:00.000Z"
-            },
-            {
-              "label": "Pedrazzetti",
-              "detail": "Giubiasco, Bellinzonese",
-              "date": "2026-10-30T17:30:00.000Z"
-            }
-          ],
-          "sourceName": "Servizio ufficiale dei turni farmacia",
-          "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-29T20:58:06.256Z"
-        },
-        {
           "id": "aste-targhe",
           "title": "Aste delle targhe",
           "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
@@ -135,7 +90,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-29T12:59:31.667Z"
+          "updatedAt": "2026-10-30T05:51:01.110Z"
         },
         {
           "id": "meteo",
@@ -144,32 +99,32 @@
           "items": [
             {
               "label": "Bellinzona",
-              "value": "11 °C",
-              "detail": "oggi da 10 a 14 °C"
+              "value": "9 °C",
+              "detail": "oggi da 7 a 16 °C"
             },
             {
               "label": "Chiasso",
               "value": "9 °C",
-              "detail": "oggi da 9 a 15 °C"
+              "detail": "oggi da 9 a 16 °C"
             },
             {
               "label": "Locarno",
-              "value": "11 °C",
-              "detail": "oggi da 11 a 15 °C"
+              "value": "10 °C",
+              "detail": "oggi da 10 a 17 °C"
             },
             {
               "label": "Lugano",
-              "value": "12 °C",
-              "detail": "oggi da 10 a 15 °C"
+              "value": "9 °C",
+              "detail": "oggi da 9 a 16 °C"
             },
             {
               "label": "Mendrisio",
-              "value": "8 °C",
-              "detail": "oggi da 8 a 14 °C"
+              "value": "7 °C",
+              "detail": "oggi da 8 a 15 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-29T21:17:01.193Z"
+          "updatedAt": "2026-10-30T06:04:12.241Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -295,7 +250,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-30T15:09:51.722Z"
     },
     "en": {
       "canton": "TI",
@@ -337,46 +292,6 @@
           "updatedAt": "2026-10-25T09:11:35.438Z"
         },
         {
-          "id": "farmacie-di-turno",
-          "title": "On-duty pharmacies",
-          "description": "Upcoming duty shifts published by the canton’s official service.",
-          "items": [
-            {
-              "label": "Amavita Biasca",
-              "detail": "Biasca, Biasca e Valli",
-              "date": "2026-10-23T16:00:00.000Z"
-            },
-            {
-              "label": "Farmacia Coop Vitality Viganello",
-              "detail": "Viganello, Luganese",
-              "date": "2026-10-24T06:00:00.000Z"
-            },
-            {
-              "label": "Stazione",
-              "detail": "Bellinzona, Bellinzonese",
-              "date": "2026-10-26T17:30:00.000Z"
-            },
-            {
-              "label": "Giardino",
-              "detail": "Coldrerio, Mendrisiotto",
-              "date": "2026-10-27T07:00:00.000Z"
-            },
-            {
-              "label": "Boscolo",
-              "detail": "Airolo, Biasca e Valli",
-              "date": "2026-10-30T17:00:00.000Z"
-            },
-            {
-              "label": "Pedrazzetti",
-              "detail": "Giubiasco, Bellinzonese",
-              "date": "2026-10-30T17:30:00.000Z"
-            }
-          ],
-          "sourceName": "Official pharmacy duty service",
-          "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-29T20:58:06.256Z"
-        },
-        {
           "id": "aste-targhe",
           "title": "Number plate auctions",
           "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
@@ -398,7 +313,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-29T12:59:31.667Z"
+          "updatedAt": "2026-10-30T05:51:01.110Z"
         },
         {
           "id": "meteo",
@@ -407,32 +322,32 @@
           "items": [
             {
               "label": "Bellinzona",
-              "value": "11 °C",
-              "detail": "today from 10 to 14 °C"
+              "value": "9 °C",
+              "detail": "today from 7 to 16 °C"
             },
             {
               "label": "Chiasso",
               "value": "9 °C",
-              "detail": "today from 9 to 15 °C"
+              "detail": "today from 9 to 16 °C"
             },
             {
               "label": "Locarno",
-              "value": "11 °C",
-              "detail": "today from 11 to 15 °C"
+              "value": "10 °C",
+              "detail": "today from 10 to 17 °C"
             },
             {
               "label": "Lugano",
-              "value": "12 °C",
-              "detail": "today from 10 to 15 °C"
+              "value": "9 °C",
+              "detail": "today from 9 to 16 °C"
             },
             {
               "label": "Mendrisio",
-              "value": "8 °C",
-              "detail": "today from 8 to 14 °C"
+              "value": "7 °C",
+              "detail": "today from 8 to 15 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-29T21:17:01.193Z"
+          "updatedAt": "2026-10-30T06:04:12.241Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -553,7 +468,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-30T15:09:51.722Z"
     },
     "de": {
       "canton": "TI",
@@ -595,46 +510,6 @@
           "updatedAt": "2026-10-25T09:11:35.438Z"
         },
         {
-          "id": "farmacie-di-turno",
-          "title": "Notfallapotheken",
-          "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
-          "items": [
-            {
-              "label": "Amavita Biasca",
-              "detail": "Biasca, Biasca e Valli",
-              "date": "2026-10-23T16:00:00.000Z"
-            },
-            {
-              "label": "Farmacia Coop Vitality Viganello",
-              "detail": "Viganello, Luganese",
-              "date": "2026-10-24T06:00:00.000Z"
-            },
-            {
-              "label": "Stazione",
-              "detail": "Bellinzona, Bellinzonese",
-              "date": "2026-10-26T17:30:00.000Z"
-            },
-            {
-              "label": "Giardino",
-              "detail": "Coldrerio, Mendrisiotto",
-              "date": "2026-10-27T07:00:00.000Z"
-            },
-            {
-              "label": "Boscolo",
-              "detail": "Airolo, Biasca e Valli",
-              "date": "2026-10-30T17:00:00.000Z"
-            },
-            {
-              "label": "Pedrazzetti",
-              "detail": "Giubiasco, Bellinzonese",
-              "date": "2026-10-30T17:30:00.000Z"
-            }
-          ],
-          "sourceName": "Offizieller Apotheken-Notfalldienst",
-          "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-29T20:58:06.256Z"
-        },
-        {
           "id": "aste-targhe",
           "title": "Kontrollschild-Auktionen",
           "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
@@ -656,7 +531,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-29T12:59:31.667Z"
+          "updatedAt": "2026-10-30T05:51:01.110Z"
         },
         {
           "id": "meteo",
@@ -665,32 +540,32 @@
           "items": [
             {
               "label": "Bellinzona",
-              "value": "11 °C",
-              "detail": "heute 10 bis 14 °C"
+              "value": "9 °C",
+              "detail": "heute 7 bis 16 °C"
             },
             {
               "label": "Chiasso",
               "value": "9 °C",
-              "detail": "heute 9 bis 15 °C"
+              "detail": "heute 9 bis 16 °C"
             },
             {
               "label": "Locarno",
-              "value": "11 °C",
-              "detail": "heute 11 bis 15 °C"
+              "value": "10 °C",
+              "detail": "heute 10 bis 17 °C"
             },
             {
               "label": "Lugano",
-              "value": "12 °C",
-              "detail": "heute 10 bis 15 °C"
+              "value": "9 °C",
+              "detail": "heute 9 bis 16 °C"
             },
             {
               "label": "Mendrisio",
-              "value": "8 °C",
-              "detail": "heute 8 bis 14 °C"
+              "value": "7 °C",
+              "detail": "heute 8 bis 15 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-29T21:17:01.193Z"
+          "updatedAt": "2026-10-30T06:04:12.241Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -811,7 +686,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-30T15:09:51.722Z"
     },
     "fr": {
       "canton": "TI",
@@ -853,46 +728,6 @@
           "updatedAt": "2026-10-25T09:11:35.438Z"
         },
         {
-          "id": "farmacie-di-turno",
-          "title": "Pharmacies de garde",
-          "description": "Prochaines gardes publiées par le service officiel du canton.",
-          "items": [
-            {
-              "label": "Amavita Biasca",
-              "detail": "Biasca, Biasca e Valli",
-              "date": "2026-10-23T16:00:00.000Z"
-            },
-            {
-              "label": "Farmacia Coop Vitality Viganello",
-              "detail": "Viganello, Luganese",
-              "date": "2026-10-24T06:00:00.000Z"
-            },
-            {
-              "label": "Stazione",
-              "detail": "Bellinzona, Bellinzonese",
-              "date": "2026-10-26T17:30:00.000Z"
-            },
-            {
-              "label": "Giardino",
-              "detail": "Coldrerio, Mendrisiotto",
-              "date": "2026-10-27T07:00:00.000Z"
-            },
-            {
-              "label": "Boscolo",
-              "detail": "Airolo, Biasca e Valli",
-              "date": "2026-10-30T17:00:00.000Z"
-            },
-            {
-              "label": "Pedrazzetti",
-              "detail": "Giubiasco, Bellinzonese",
-              "date": "2026-10-30T17:30:00.000Z"
-            }
-          ],
-          "sourceName": "Service officiel des pharmacies de garde",
-          "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-29T20:58:06.256Z"
-        },
-        {
           "id": "aste-targhe",
           "title": "Enchères de plaques",
           "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
@@ -914,7 +749,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-29T12:59:31.667Z"
+          "updatedAt": "2026-10-30T05:51:01.110Z"
         },
         {
           "id": "meteo",
@@ -923,32 +758,32 @@
           "items": [
             {
               "label": "Bellinzona",
-              "value": "11 °C",
-              "detail": "aujourd’hui de 10 à 14 °C"
+              "value": "9 °C",
+              "detail": "aujourd’hui de 7 à 16 °C"
             },
             {
               "label": "Chiasso",
               "value": "9 °C",
-              "detail": "aujourd’hui de 9 à 15 °C"
+              "detail": "aujourd’hui de 9 à 16 °C"
             },
             {
               "label": "Locarno",
-              "value": "11 °C",
-              "detail": "aujourd’hui de 11 à 15 °C"
+              "value": "10 °C",
+              "detail": "aujourd’hui de 10 à 17 °C"
             },
             {
               "label": "Lugano",
-              "value": "12 °C",
-              "detail": "aujourd’hui de 10 à 15 °C"
+              "value": "9 °C",
+              "detail": "aujourd’hui de 9 à 16 °C"
             },
             {
               "label": "Mendrisio",
-              "value": "8 °C",
-              "detail": "aujourd’hui de 8 à 14 °C"
+              "value": "7 °C",
+              "detail": "aujourd’hui de 8 à 15 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-29T21:17:01.193Z"
+          "updatedAt": "2026-10-30T06:04:12.241Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -1066,7 +901,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-30T15:09:51.722Z"
     }
   }
 }

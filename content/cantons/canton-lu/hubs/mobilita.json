@@ -4,12 +4,12 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "mobilita",
-  "updatedAt": "2026-10-30T06:23:49.454Z",
-  "contentHash": "b3e48265bc99b3284ea3b77883f0dcded0e2717c5a5900c37d5e3f97092bfeb5",
+  "updatedAt": "2026-10-30T15:09:51.722Z",
+  "contentHash": "f7e3e1f888bafd3026693bd5dc655723d2597defa6ae1ef7fb1341dc3762b70c",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-29T18:42:38.256Z",
+      "updatedAt": "2026-10-30T06:32:11.488Z",
       "keyFacts": 2
     },
     {
@@ -28,12 +28,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "3",
-          "note": "segnalazioni aggiornate: 29 ottobre 2026"
+          "note": "segnalazioni aggiornate: 30 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "27",
-          "note": "segnalazioni aggiornate: 29 ottobre 2026"
+          "note": "segnalazioni aggiornate: 30 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -61,9 +61,9 @@
               "date": "2026-11-12T05:30:00.000Z"
             },
             {
-              "label": "Revocato: A14 Zug -> Luzern tra Svincolo autostradale Buchrain E Raccordo autostradale Diramazione Rotsee Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "label": "A14 Luzern -> Zug tra Raccordo autostradale Diramazione Rotsee E Galleria Galleria Rathausen Situazione: traffico fortemente rallentato Causa: traffico congestionato",
               "value": "Traffico",
-              "date": "2026-10-29T15:00:00.000Z"
+              "date": "2026-10-30T05:34:00.000Z"
             },
             {
               "label": "H10 Berna <-> Lucerna tra Luogo Wiggen E Luogo Kröschenbrunnen Situazione: problemi di traffico Causa: lavori di costruzione Limitazione del traffico: circolazione a corsie alternate",
@@ -91,7 +91,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-29T18:42:38.256Z"
+          "updatedAt": "2026-10-30T06:32:11.488Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -160,7 +160,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-30T15:09:51.722Z"
     },
     "en": {
       "canton": "LU",
@@ -171,12 +171,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "3",
-          "note": "reports as of 29 October 2026"
+          "note": "reports as of 30 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "27",
-          "note": "reports as of 29 October 2026"
+          "note": "reports as of 30 October 2026"
         }
       ],
       "dataBlocks": [
@@ -204,9 +204,9 @@
               "date": "2026-11-12T05:30:00.000Z"
             },
             {
-              "label": "Revocato: A14 Zug -> Luzern tra Svincolo autostradale Buchrain E Raccordo autostradale Diramazione Rotsee Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "label": "A14 Luzern -> Zug tra Raccordo autostradale Diramazione Rotsee E Galleria Galleria Rathausen Situazione: traffico fortemente rallentato Causa: traffico congestionato",
               "value": "Traffic",
-              "date": "2026-10-29T15:00:00.000Z"
+              "date": "2026-10-30T05:34:00.000Z"
             },
             {
               "label": "H10 Berna <-> Lucerna tra Luogo Wiggen E Luogo Kröschenbrunnen Situazione: problemi di traffico Causa: lavori di costruzione Limitazione del traffico: circolazione a corsie alternate",
@@ -234,7 +234,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-29T18:42:38.256Z"
+          "updatedAt": "2026-10-30T06:32:11.488Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -301,7 +301,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-30T15:09:51.722Z"
     },
     "de": {
       "canton": "LU",
@@ -312,12 +312,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "3",
-          "note": "Meldungen vom 29. Oktober 2026"
+          "note": "Meldungen vom 30. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "27",
-          "note": "Meldungen vom 29. Oktober 2026"
+          "note": "Meldungen vom 30. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -345,9 +345,9 @@
               "date": "2026-11-12T05:30:00.000Z"
             },
             {
-              "label": "Aufgehoben: A14 Zug -> Luzern zwischen Anschluss Buchrain und Autobahndreieck Verzweigung Rotsee Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
+              "label": "A14 Luzern -> Zug zwischen Autobahndreieck Verzweigung Rotsee und Tunnel Rathausen-Tunnel Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
               "value": "Verkehr",
-              "date": "2026-10-29T15:00:00.000Z"
+              "date": "2026-10-30T05:34:00.000Z"
             },
             {
               "label": "H10 Bern <-> Luzern zwischen Ortschaft Wiggen und Ortschaft Kröschenbrunnen Sachlage: Verkehrsbehinderung Ursache: Bauarbeiten Verkehrsführung: wechselseitige Verkehrsführung",
@@ -375,7 +375,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-29T18:42:38.256Z"
+          "updatedAt": "2026-10-30T06:32:11.488Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -442,7 +442,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-30T15:09:51.722Z"
     },
     "fr": {
       "canton": "LU",
@@ -453,12 +453,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "3",
-          "note": "signalements au 29 octobre 2026"
+          "note": "signalements au 30 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "27",
-          "note": "signalements au 29 octobre 2026"
+          "note": "signalements au 30 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -486,9 +486,9 @@
               "date": "2026-11-12T05:30:00.000Z"
             },
             {
-              "label": "Révoqué: A14 Zoug -> Lucerne entre Jonction autoroutière Buchrain et Echangeur Echangeur du Rotsee Situation: trafic en accordéon Raison: surcharge de trafic",
+              "label": "A14 Lucerne -> Zoug entre Echangeur Echangeur du Rotsee et Tunnel Tunnel de Rathausen Situation: trafic en accordéon Raison: surcharge de trafic",
               "value": "Trafic",
-              "date": "2026-10-29T15:00:00.000Z"
+              "date": "2026-10-30T05:34:00.000Z"
             },
             {
               "label": "H10 Berne <-> Lucerne entre Localité Wiggen et Localité Kröschenbrunnen Situation: trafic perturbé Raison: travaux de construction Gestion du trafic: circulation alternée à une voie",
@@ -516,7 +516,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-29T18:42:38.256Z"
+          "updatedAt": "2026-10-30T06:32:11.488Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -585,7 +585,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-30T15:09:51.722Z"
     }
   }
 }
