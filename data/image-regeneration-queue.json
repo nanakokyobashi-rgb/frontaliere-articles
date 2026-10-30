@@ -15,32 +15,31 @@
       "articleId": "giovani-donne-stipendi-svizzera",
       "title": "Di più Le giovani svizzere guadagnano meno nonostante siano più istruite",
       "fallbackImage": "/images/blog/article-divario-reddito-giovani-svizzera.webp",
-      "reason": "All image providers failed for article-giovani-donne-stipendi-svizzera: openai-codex (Codex broker rejected the request: Codex CLI timed out after 119924ms)",
+      "reason": "All image providers failed for article-giovani-donne-stipendi-svizzera: openai-codex (vision gate rejected image: Generic synthetic editorial scene with a clearly visible foreground person; no text, logo, or recognizable face.); gemini (Gem",
       "status": "failed",
-      "failureCount": 13,
+      "failureCount": 14,
       "requestedAt": "2026-10-19T03:17:12.439Z",
-      "lastFailureAt": "2026-10-30T10:05:09.673Z"
+      "lastFailureAt": "2026-10-30T16:34:07.082Z"
     },
     {
       "articleId": "sanitari-italiani-fuga-svizzera",
       "title": "Operatori sanitari frontalieri: Como boccheggia",
       "fallbackImage": "/images/blog/article-confusione-tassa-salute-frontalieri.webp",
-      "reason": "All image providers failed for article-sanitari-italiani-fuga-svizzera: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to healthcare commuting in Ticino, but it includes a recognizable foreground person",
+      "reason": "All image providers failed for article-sanitari-italiani-fuga-svizzera: openai-codex (vision gate rejected image: Generic synthetic editorial illustration relevant to cross-border rail commuting, but a recognizable foreground person is visi",
       "status": "failed",
-      "failureCount": 12,
+      "failureCount": 13,
       "requestedAt": "2026-10-23T15:23:52.650Z",
-      "lastFailureAt": "2026-10-30T10:06:49.631Z"
+      "lastFailureAt": "2026-10-30T16:35:33.472Z"
     },
     {
       "articleId": "cisl-ricerca-lavoratori-ritiene",
       "title": "55,6% lavoratori frontalieri ritiene stipendio inferiore a residente svizzero",
       "fallbackImage": "/images/blog/article-ricerca-cisl-frontalieri-2026.webp",
-      "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (vision gate rejected image: Generic synthetic commuter-train scene relevant to Ticino and cross-border commuting, but visible station signage prevents app",
+      "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to Ticino rail commuting, but it includes a recognizable foreground woman and a vis",
       "status": "failed",
-      "failureCount": 12,
+      "failureCount": 13,
       "requestedAt": "2026-10-24T19:06:53.846Z",
-      "lastFailureAt": "2026-10-30T10:08:22.773Z",
-      "retryHint": "no-text"
+      "lastFailureAt": "2026-10-30T16:36:40.096Z"
     }
   ]
 }
