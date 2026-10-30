@@ -155,7 +155,13 @@ export const GTAG_SNIPPET = `<script async crossorigin="anonymous" src="https://
  * pipeline che gia' rebasa `gtag-init.js`, quindi il file arriva dal deploy
  * del sito senza che questo repo debba emetterlo.
  */
-export const PARTNERIZE_TAG_SNIPPET = `<script src="/assets/partnerize-tag-a89366fbc3ed.js"></script>`;
+// The generated snapshot also carries the canonical inline guard. It captures
+// the initial context before React, without a parser-blocking CDN request.
+const initialDocumentGuard = JSON.parse(readFileSync(new NodeURL('./third-party-shell-assets.json', import.meta.url), 'utf8')).initialDocumentGuard;
+if (typeof initialDocumentGuard?.content !== 'string' || !initialDocumentGuard.content || createHash('sha256').update(initialDocumentGuard.content).digest('hex') !== initialDocumentGuard.sha256) {
+ throw new Error('Transported initial privacy guard hash mismatch');
+}
+export const PARTNERIZE_TAG_SNIPPET = `<script>${initialDocumentGuard.content}</script><script defer src="/assets/partnerize-tag-10a75a7935d1.js"></script>`;
 
 /**
  * Google AdSense loader snippet. Included in every statically-generated page
@@ -184,7 +190,7 @@ export const PARTNERIZE_TAG_SNIPPET = `<script src="/assets/partnerize-tag-a8936
  */
 export const ADSENSE_CLIENT_ID = 'ca-pub-8628054934855353';
 
-export const ADSENSE_LOADER_FILENAME = 'adsense-loader-1df3e54a27e5.js';
+export const ADSENSE_LOADER_FILENAME = 'adsense-loader-a97d2b05773e.js';
 
 export const ADSENSE_LAZY_LOADER = `<script defer src="/assets/${ADSENSE_LOADER_FILENAME}"></script>`;
 

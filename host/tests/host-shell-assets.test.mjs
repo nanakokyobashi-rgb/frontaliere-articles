@@ -320,7 +320,8 @@ test('ogni job che rende pagine carica i secret di Remote Config prima del passo
 test('Ads/Partnerize snapshots match the shared source fingerprint and reject signed startup', () => {
   const snapshot = JSON.parse(read('host/third-party-shell-assets.json'));
   const fingerprint = JSON.parse(read('host/third-party-shell-assets-fingerprint.json'));
-  assert.deepEqual({ ...snapshot, assets: snapshot.assets.map(({ content: _content, ...asset }) => asset) }, fingerprint);
+  assert.deepEqual({ ...snapshot, initialDocumentGuard: { sha256: snapshot.initialDocumentGuard.sha256 }, assets: snapshot.assets.map(({ content: _content, ...asset }) => asset) }, fingerprint);
+  assert.equal(createHash('sha256').update(snapshot.initialDocumentGuard.content).digest('hex'), snapshot.initialDocumentGuard.sha256);
   assert.equal(snapshot.source.sanitizerSha256, createHash('sha256').update(read('host/analyticsUrlPrivacy.js')).digest('hex'));
   for (const { content } of snapshot.assets) {
     const window = { location: { href: 'https://frontaliereticino.ch/?ac=synthetic-code&ne=candidate%40example.test&utm_source=email' } };
