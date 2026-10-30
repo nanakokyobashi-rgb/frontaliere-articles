@@ -4,17 +4,9 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-sg::https://www.sg.ch/news/sgch_kantonspolizei/2026/10/kanton-st-gallen--drei-verkehrsunfaelle---drei-personen-fahrunfae.html": {
+    "canton-sg::https://www.stgallen24.ch/articles/415929-axenstrasse-veloshuttle-faehrt-ab-november-nach-winterfahrplan": {
       "section": "canton-sg",
-      "ts": 1793070006134
-    },
-    "canton-sg::https://www.unisg.ch/de/newsroom/themenschwerpunkt-kuenstliche-intelligenz": {
-      "section": "canton-sg",
-      "ts": 1793070229660
-    },
-    "canton-sg::https://www.unisg.ch/de/newsroom/aufbruchstimmung-in-serbien": {
-      "section": "canton-sg",
-      "ts": 1793130975661
+      "ts": 1793356396588
     }
   }
 }
