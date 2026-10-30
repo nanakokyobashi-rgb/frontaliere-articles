@@ -5,11 +5,11 @@
       "articleId": "arianna-di-claudio-roma",
       "title": "Arianna di claudio alla festa del cinema di roma",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (vision gate rejected image: Generic synthetic train-platform scene with a recognizable foreground person seen from behind; it does not clearly match the stated Ro",
+      "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (vision gate rejected image: Generic synthetic train-station scene with a prominent foreground commuter; no readable text or logos, but it does not clearly match t",
       "status": "failed",
-      "failureCount": 16,
+      "failureCount": 17,
       "requestedAt": "2026-10-18T07:27:16.643Z",
-      "lastFailureAt": "2026-10-30T13:44:07.195Z"
+      "lastFailureAt": "2026-10-30T19:52:16.316Z"
     },
     {
       "articleId": "giovani-donne-stipendi-svizzera",
