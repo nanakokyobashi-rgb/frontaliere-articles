@@ -134,7 +134,7 @@ function advanceNormalToken(source, start, context) {
         ? word
         : null;
     }
-    context.canStartRegex = REGEX_PREFIX_KEYWORDS.has(word);
+    context.canStartRegex = !context.afterMemberAccess && REGEX_PREFIX_KEYWORDS.has(word);
     context.lastClosedControlHeader = false;
     context.afterMemberAccess = false;
     return { end };
