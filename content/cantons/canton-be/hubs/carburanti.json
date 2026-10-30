@@ -4,12 +4,12 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "carburanti",
-  "updatedAt": "2026-10-29T08:37:38.060Z",
-  "contentHash": "0b792574bab72791cb01e8f7502ead7a164a23009486010fad6627b5c349b60f",
+  "updatedAt": "2026-10-30T20:09:42.471Z",
+  "contentHash": "d1d432576e9bc12b1472f1170d65f40c2036326e04849701047be880d540ce58",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-26T13:32:45.792Z",
+      "updatedAt": "2026-10-30T13:38:40.478Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-11-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-26T13:32:45.792Z"
+          "updatedAt": "2026-10-30T13:38:40.478Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Berna: più sussidi ai premi delle casse malati dal 2027",
+          "url": "/articoli-berna/riduzione-premi-malattia-2027/",
+          "excerpt": "Il Canton Berna annuncia più sussidi per la riduzione dei premi delle casse malati dal 2027, senza indicare importi o percentuali.",
+          "date": "2026-10-30T20:01:40.296Z"
+        },
         {
           "title": "33,3 milioni di franchi per l'ampliamento della Volksschule Breitfeld",
           "url": "/articoli-berna/credito-volksschule-breitfeld/",
@@ -82,12 +88,6 @@
           "url": "/articoli-berna/contributi-rotbach-saanen/",
           "excerpt": "Il Governo cantonale approva circa CHF 590'000 per il Rotbach e CHF 720'000 per la protezione dalle piene a Saanen, nel Canton Berna.",
           "date": "2026-10-23T02:11:10.079Z"
-        },
-        {
-          "title": "Gruppo radiofonico: annunciati fino a 15 tagli in Svizzera",
-          "url": "/articoli-berna/energy-tagli-radio-svizzera/",
-          "excerpt": "Energy annuncia fino a 15 tagli: il numero sarà deciso dopo la consultazione, mentre i ricavi pubblicitari restano sotto pressione.",
-          "date": "2026-10-22T12:35:58.385Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-29T08:37:38.060Z"
+      "updatedAt": "2026-10-30T20:09:42.471Z"
     },
     "en": {
       "canton": "BE",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-26T13:32:45.792Z"
+          "updatedAt": "2026-10-30T13:38:40.478Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Bern: more subsidies for health insurance premiums from 2027",
+          "url": "/en/bern-articles/health-premium-subsidies-2027/",
+          "excerpt": "The Canton of Bern announces more subsidies to reduce health insurance premiums from 2027, without specifying amounts or percentages.",
+          "date": "2026-10-30T20:01:40.296Z"
+        },
         {
           "title": "33,3 million francs for the expansion of Volksschule Breitfeld",
           "url": "/en/bern-articles/breitfeld-volksschule-credit/",
@@ -169,12 +175,6 @@
           "url": "/en/bern-articles/bern-contributions-rotbach-saanen/",
           "excerpt": "The cantonal government approves approximately CHF 590'000 for the Rotbach and CHF 720'000 for flood protection in Saanen, in the Canton of Bern.",
           "date": "2026-10-23T02:11:10.079Z"
-        },
-        {
-          "title": "Radio group: up to 15 cuts announced in Switzerland",
-          "url": "/en/bern-articles/energy-radio-cuts-switzerland/",
-          "excerpt": "Energy announces up to 15 cuts: the number will be decided after the consultation, while advertising revenues remain under pressure.",
-          "date": "2026-10-22T12:35:58.385Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-29T08:37:38.060Z"
+      "updatedAt": "2026-10-30T20:09:42.471Z"
     },
     "de": {
       "canton": "BE",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-26T13:32:45.792Z"
+          "updatedAt": "2026-10-30T13:38:40.478Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Bern: Mehr Prämienverbilligung für Krankenkassenprämien ab 2027",
+          "url": "/de/bern-artikel/praemienverbilligung-krankenkassen-2027/",
+          "excerpt": "Der Kanton Bern kündigt ab 2027 mehr Prämienverbilligung für Krankenkassenprämien an, ohne Beträge oder Prozentsätze zu nennen.",
+          "date": "2026-10-30T20:01:40.296Z"
+        },
         {
           "title": "33,3 Millionen Franken für die Erweiterung der Volksschule Breitfeld",
           "url": "/de/bern-artikel/volksschule-breitfeld-kredit/",
@@ -256,12 +262,6 @@
           "url": "/de/bern-artikel/bern-beitraege-rotbach-saanen/",
           "excerpt": "Die Kantonsregierung genehmigt rund CHF 590'000 für den Rotbach und CHF 720'000 für den Hochwasserschutz in Saanen im Kanton Bern.",
           "date": "2026-10-23T02:11:10.079Z"
-        },
-        {
-          "title": "Radiogruppe: Bis zu 15 Stellen in der Schweiz angekündigt",
-          "url": "/de/bern-artikel/energy-radio-stellenabbau-schweiz/",
-          "excerpt": "Energy kündigt bis zu 15 Stellenstreichungen an: Die Zahl wird nach der Konsultation festgelegt, während die Werbeeinnahmen unter Druck bleiben.",
-          "date": "2026-10-22T12:35:58.385Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-29T08:37:38.060Z"
+      "updatedAt": "2026-10-30T20:09:42.471Z"
     },
     "fr": {
       "canton": "BE",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-26T13:32:45.792Z"
+          "updatedAt": "2026-10-30T13:38:40.478Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Berne : plus de subsides aux primes-maladie dès 2027",
+          "url": "/fr/articles-berne/aides-primes-maladie-2027/",
+          "excerpt": "Le canton de Berne annonce davantage de subsides pour la réduction des primes des caisses-maladie à partir de 2027, sans indiquer de montants ni de pourcentages.",
+          "date": "2026-10-30T20:01:40.296Z"
+        },
         {
           "title": "33,3 millions de francs pour l'agrandissement de la Volksschule Breitfeld",
           "url": "/fr/articles-berne/credit-volksschule-breitfeld/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-berne/berne-contributions-rotbach-saanen/",
           "excerpt": "Le gouvernement cantonal approuve environ CHF 590'000 pour le Rotbach et CHF 720'000 pour la protection contre les crues à Saanen, dans le canton de Berne.",
           "date": "2026-10-23T02:11:10.079Z"
-        },
-        {
-          "title": "Groupe radiophonique : jusqu’à 15 suppressions de postes annoncées en Suisse",
-          "url": "/fr/articles-berne/energy-radio-suppressions-suisse/",
-          "excerpt": "Energy annonce jusqu’à 15 suppressions de postes : le nombre sera décidé après la consultation, tandis que les recettes publicitaires restent sous pression.",
-          "date": "2026-10-22T12:35:58.385Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-29T08:37:38.060Z"
+      "updatedAt": "2026-10-30T20:09:42.471Z"
     }
   }
 }

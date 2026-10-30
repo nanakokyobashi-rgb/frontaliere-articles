@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "servizi",
-  "updatedAt": "2026-10-30T19:31:58.244Z",
-  "contentHash": "110c82e676ba1685e82cb3d911b544282dff8b7ede0446b97ed6508f368623b0",
+  "updatedAt": "2026-10-30T20:09:42.471Z",
+  "contentHash": "4663959cd0e2f384fa28dc831404245b8eb3ae9536293c539a29717177f716b4",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -134,6 +134,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Berna: più sussidi ai premi delle casse malati dal 2027",
+          "url": "/articoli-berna/riduzione-premi-malattia-2027/",
+          "excerpt": "Il Canton Berna annuncia più sussidi per la riduzione dei premi delle casse malati dal 2027, senza indicare importi o percentuali.",
+          "date": "2026-10-30T20:01:40.296Z"
+        },
+        {
           "title": "Permesso di pesca nel Cantone di Berna: requisiti e stagioni",
           "url": "/articoli-svizzera/permesso-pesca-canton-berna-guida/",
           "excerpt": "Scopri come gestire la pratica per il permesso di pesca nel Cantone di Berna: licenze, corsi, acque autorizzate e autorità competenti.",
@@ -174,12 +180,6 @@
           "url": "/articoli-svizzera/permesso-b-berna-requisiti-rinnovo/",
           "excerpt": "Permesso dimora B Cantone Berna: requisiti, documentazione, durata e procedura di rinnovo. Guida completa e step-by-step da autorità SEM.",
           "date": "2026-08-21T20:18:13.610Z"
-        },
-        {
-          "title": "Premi cassa malati Cantone Berna e riduzione premi",
-          "url": "/articoli-svizzera/premi-cassa-malati-cantone-bern-riduzione/",
-          "excerpt": "Ecco i fatti chiave per i premi dell'assicurazione malattia obbligatoria nel Cantone di Berna.",
-          "date": "2026-08-12T09:20:30.193Z"
         }
       ],
       "latestCantonArticles": [],
@@ -209,7 +209,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-30T20:09:42.471Z"
     },
     "en": {
       "canton": "BE",
@@ -316,6 +316,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Bern: more subsidies for health insurance premiums from 2027",
+          "url": "/en/bern-articles/health-premium-subsidies-2027/",
+          "excerpt": "The Canton of Bern announces more subsidies to reduce health insurance premiums from 2027, without specifying amounts or percentages.",
+          "date": "2026-10-30T20:01:40.296Z"
+        },
+        {
           "title": "Fishing permit in the Canton of Bern: requirements and seasons",
           "url": "/en/swiss-articles/fishing-permit-canton-bern-guide/",
           "excerpt": "Find out how to apply for a fishing permit in the Canton of Bern: licenses, courses, authorized waters, and competent authorities.",
@@ -356,12 +362,6 @@
           "url": "/en/swiss-articles/permit-b-bern-requirements-renewal/",
           "excerpt": "Residence permit B Canton Bern: requirements, documentation, duration and renewal procedure. Complete and step-by-step guidance from SEM authority.",
           "date": "2026-08-21T20:18:13.610Z"
-        },
-        {
-          "title": "Health insurance premiums Canton Bern and premium reductions",
-          "url": "/en/swiss-articles/health-insurance-premiums-cantonal-bern-reduction/",
-          "excerpt": "Here are the key facts for compulsory health insurance premiums in the Canton of Bern.",
-          "date": "2026-08-12T09:20:30.193Z"
         }
       ],
       "latestCantonArticles": [],
@@ -387,7 +387,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-30T20:09:42.471Z"
     },
     "de": {
       "canton": "BE",
@@ -494,6 +494,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Bern: Mehr Prämienverbilligung für Krankenkassenprämien ab 2027",
+          "url": "/de/bern-artikel/praemienverbilligung-krankenkassen-2027/",
+          "excerpt": "Der Kanton Bern kündigt ab 2027 mehr Prämienverbilligung für Krankenkassenprämien an, ohne Beträge oder Prozentsätze zu nennen.",
+          "date": "2026-10-30T20:01:40.296Z"
+        },
+        {
           "title": "Fischereibewilligung im Kanton Bern: Voraussetzungen und Saisons",
           "url": "/de/schweiz-artikel/angelpatent-kanton-bern-anleitung/",
           "excerpt": "Erfahren Sie, wie Sie das Verfahren für die Fischereibewilligung im Kanton Bern abwickeln: Bewilligungen, Kurse, zugelassene Gewässer und zuständige Behörden.",
@@ -534,12 +540,6 @@
           "url": "/de/schweiz-artikel/aufenthaltsbewilligung-b-bern-voraussetzungen-verlaengerung/",
           "excerpt": "Aufenthaltsbewilligung B Kanton Bern: Voraussetzungen, Unterlagen, Dauer und Erneuerungsverfahren. Komplette Anleitung und Schritt-für-Schritt-Anleitung durch die SEM-Behörde.",
           "date": "2026-08-21T20:18:13.610Z"
-        },
-        {
-          "title": "Krankenkassenprämien Kanton Bern und Prämienverbilligung",
-          "url": "/de/schweiz-artikel/kostenvoranschlag-kv-bern-kanton/",
-          "excerpt": "Hier finden Sie die wichtigsten Fakten zu den Prämien der obligatorischen Krankenversicherung im Kanton Bern.",
-          "date": "2026-08-12T09:20:30.193Z"
         }
       ],
       "latestCantonArticles": [],
@@ -565,7 +565,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-30T20:09:42.471Z"
     },
     "fr": {
       "canton": "BE",
@@ -672,6 +672,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Berne : plus de subsides aux primes-maladie dès 2027",
+          "url": "/fr/articles-berne/aides-primes-maladie-2027/",
+          "excerpt": "Le canton de Berne annonce davantage de subsides pour la réduction des primes des caisses-maladie à partir de 2027, sans indiquer de montants ni de pourcentages.",
+          "date": "2026-10-30T20:01:40.296Z"
+        },
+        {
           "title": "Permis de pêche dans le canton de Berne : exigences et saisons",
           "url": "/fr/articles-suisse/permis-peche-canton-berne-guide/",
           "excerpt": "Découvrez comment gérer votre dossier de permis de pêche dans le canton de Berne : licences, cours, eaux autorisées et autorités compétentes.",
@@ -712,12 +718,6 @@
           "url": "/fr/articles-suisse/permis-b-berne-conditions-renouvellement/",
           "excerpt": "Permis de séjour B canton de Berne : exigences, documentation, durée et procédure de renouvellement. Guide complet et étape par étape par l'autorité SEM.",
           "date": "2026-08-21T20:18:13.610Z"
-        },
-        {
-          "title": "Primes caisse-maladie canton de Berne et réduction des primes",
-          "url": "/fr/articles-suisse/primes-assurance-maladie-canton-de-bourbourg/",
-          "excerpt": "Voici les faits clés pour les primes de l'assurance maladie obligatoire dans le canton de Berne.",
-          "date": "2026-08-12T09:20:30.193Z"
         }
       ],
       "latestCantonArticles": [],
@@ -739,7 +739,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-30T20:09:42.471Z"
     }
   }
 }
