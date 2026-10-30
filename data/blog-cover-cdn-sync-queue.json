@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-schaffhausen-pharma-medtech-circolar.webp",
-      "sha256": "b3bbad62f1c338d42173ac2a4c6d9744e62e7a7265661b22eb1a77a8efa3d080"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-schaffhausen-pharma-medtech-circolar-480w.webp",
-      "sha256": "3130ce03e528ed5184df99d16c3c3b3823759c9614ef33f385ab22c4eb5d1980"
-    }
-  ]
+  "items": []
 }
