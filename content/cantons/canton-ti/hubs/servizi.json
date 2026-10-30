@@ -4,13 +4,18 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-10-30T15:09:51.722Z",
-  "contentHash": "a65b90691de397dc76990ece158b4491643453f13399445d21ac507cd540e8a1",
+  "updatedAt": "2026-10-30T15:34:43.777Z",
+  "contentHash": "e4b3cdc736da6e4a9a06ad222281bc665cab2683c96cd67ff3d733f49895e812",
   "blocks": [
     {
       "id": "premi-cassa-malati",
       "updatedAt": "2026-10-25T09:11:35.438Z",
       "keyFacts": 1
+    },
+    {
+      "id": "farmacie-di-turno",
+      "updatedAt": "2026-10-30T11:00:19.924Z",
+      "keyFacts": 0
     },
     {
       "id": "aste-targhe",
@@ -24,7 +29,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-29T22:02:50.125Z",
+      "updatedAt": "2026-10-30T11:41:14.746Z",
       "keyFacts": 0
     }
   ],
@@ -67,6 +72,46 @@
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-25T09:11:35.438Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "Farmacie di turno",
+          "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
+          "items": [
+            {
+              "label": "Amavita Biasca",
+              "detail": "Biasca, Biasca e Valli",
+              "date": "2026-10-23T16:00:00.000Z"
+            },
+            {
+              "label": "Farmacia Coop Vitality Viganello",
+              "detail": "Viganello, Luganese",
+              "date": "2026-10-24T06:00:00.000Z"
+            },
+            {
+              "label": "Stazione",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-10-26T17:30:00.000Z"
+            },
+            {
+              "label": "Giardino",
+              "detail": "Coldrerio, Mendrisiotto",
+              "date": "2026-10-27T07:00:00.000Z"
+            },
+            {
+              "label": "Boscolo",
+              "detail": "Airolo, Biasca e Valli",
+              "date": "2026-10-30T17:00:00.000Z"
+            },
+            {
+              "label": "Pedrazzetti",
+              "detail": "Giubiasco, Bellinzonese",
+              "date": "2026-10-30T17:30:00.000Z"
+            }
+          ],
+          "sourceName": "Servizio ufficiale dei turni farmacia",
+          "sourceUrl": "https://www.ofct.ch/farmacieturno/",
+          "updatedAt": "2026-10-30T11:00:19.924Z"
         },
         {
           "id": "aste-targhe",
@@ -162,7 +207,7 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/congresso-infertilita.html"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -250,7 +295,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     },
     "en": {
       "canton": "TI",
@@ -290,6 +335,46 @@
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-25T09:11:35.438Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "On-duty pharmacies",
+          "description": "Upcoming duty shifts published by the canton’s official service.",
+          "items": [
+            {
+              "label": "Amavita Biasca",
+              "detail": "Biasca, Biasca e Valli",
+              "date": "2026-10-23T16:00:00.000Z"
+            },
+            {
+              "label": "Farmacia Coop Vitality Viganello",
+              "detail": "Viganello, Luganese",
+              "date": "2026-10-24T06:00:00.000Z"
+            },
+            {
+              "label": "Stazione",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-10-26T17:30:00.000Z"
+            },
+            {
+              "label": "Giardino",
+              "detail": "Coldrerio, Mendrisiotto",
+              "date": "2026-10-27T07:00:00.000Z"
+            },
+            {
+              "label": "Boscolo",
+              "detail": "Airolo, Biasca e Valli",
+              "date": "2026-10-30T17:00:00.000Z"
+            },
+            {
+              "label": "Pedrazzetti",
+              "detail": "Giubiasco, Bellinzonese",
+              "date": "2026-10-30T17:30:00.000Z"
+            }
+          ],
+          "sourceName": "Official pharmacy duty service",
+          "sourceUrl": "https://www.ofct.ch/farmacieturno/",
+          "updatedAt": "2026-10-30T11:00:19.924Z"
         },
         {
           "id": "aste-targhe",
@@ -385,7 +470,7 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/congresso-infertilita.html"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -468,7 +553,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     },
     "de": {
       "canton": "TI",
@@ -508,6 +593,46 @@
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-25T09:11:35.438Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "Notfallapotheken",
+          "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
+          "items": [
+            {
+              "label": "Amavita Biasca",
+              "detail": "Biasca, Biasca e Valli",
+              "date": "2026-10-23T16:00:00.000Z"
+            },
+            {
+              "label": "Farmacia Coop Vitality Viganello",
+              "detail": "Viganello, Luganese",
+              "date": "2026-10-24T06:00:00.000Z"
+            },
+            {
+              "label": "Stazione",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-10-26T17:30:00.000Z"
+            },
+            {
+              "label": "Giardino",
+              "detail": "Coldrerio, Mendrisiotto",
+              "date": "2026-10-27T07:00:00.000Z"
+            },
+            {
+              "label": "Boscolo",
+              "detail": "Airolo, Biasca e Valli",
+              "date": "2026-10-30T17:00:00.000Z"
+            },
+            {
+              "label": "Pedrazzetti",
+              "detail": "Giubiasco, Bellinzonese",
+              "date": "2026-10-30T17:30:00.000Z"
+            }
+          ],
+          "sourceName": "Offizieller Apotheken-Notfalldienst",
+          "sourceUrl": "https://www.ofct.ch/farmacieturno/",
+          "updatedAt": "2026-10-30T11:00:19.924Z"
         },
         {
           "id": "aste-targhe",
@@ -603,7 +728,7 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/congresso-infertilita.html"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -686,7 +811,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     },
     "fr": {
       "canton": "TI",
@@ -726,6 +851,46 @@
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-25T09:11:35.438Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "Pharmacies de garde",
+          "description": "Prochaines gardes publiées par le service officiel du canton.",
+          "items": [
+            {
+              "label": "Amavita Biasca",
+              "detail": "Biasca, Biasca e Valli",
+              "date": "2026-10-23T16:00:00.000Z"
+            },
+            {
+              "label": "Farmacia Coop Vitality Viganello",
+              "detail": "Viganello, Luganese",
+              "date": "2026-10-24T06:00:00.000Z"
+            },
+            {
+              "label": "Stazione",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-10-26T17:30:00.000Z"
+            },
+            {
+              "label": "Giardino",
+              "detail": "Coldrerio, Mendrisiotto",
+              "date": "2026-10-27T07:00:00.000Z"
+            },
+            {
+              "label": "Boscolo",
+              "detail": "Airolo, Biasca e Valli",
+              "date": "2026-10-30T17:00:00.000Z"
+            },
+            {
+              "label": "Pedrazzetti",
+              "detail": "Giubiasco, Bellinzonese",
+              "date": "2026-10-30T17:30:00.000Z"
+            }
+          ],
+          "sourceName": "Service officiel des pharmacies de garde",
+          "sourceUrl": "https://www.ofct.ch/farmacieturno/",
+          "updatedAt": "2026-10-30T11:00:19.924Z"
         },
         {
           "id": "aste-targhe",
@@ -821,7 +986,7 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/congresso-infertilita.html"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -901,7 +1066,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     }
   }
 }

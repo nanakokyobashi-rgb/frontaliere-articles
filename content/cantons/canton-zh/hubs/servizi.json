@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "servizi",
-  "updatedAt": "2026-10-30T15:09:51.722Z",
-  "contentHash": "c93fe872e090579a75a28a20f356434fed08b346c499f425ce9f4e693162e601",
+  "updatedAt": "2026-10-30T15:34:43.777Z",
+  "contentHash": "088492405df41751505e9fc2de232c45eeb7f06ecd912a1efc7d39c915254ef1",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-30T06:35:00.814Z",
+      "updatedAt": "2026-10-30T11:01:15.952Z",
       "keyFacts": 0
     },
     {
@@ -29,7 +29,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-29T22:02:50.125Z",
+      "updatedAt": "2026-10-30T11:41:14.746Z",
       "keyFacts": 0
     }
   ],
@@ -116,7 +116,7 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-30T06:35:00.814Z"
+          "updatedAt": "2026-10-30T11:01:15.952Z"
         },
         {
           "id": "aste-targhe",
@@ -169,6 +169,16 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Rückblick | Rheuma-Workshop USZ | 24. September 2026",
+              "date": "2026-10-30T11:33:43.000Z",
+              "url": "https://www.usz.ch/rueckblick-rheuma-workshop-usz-24-september-2026/"
+            },
+            {
+              "label": "Innosuisse-Förderung für «PhariX»",
+              "date": "2026-10-30T06:45:39.000Z",
+              "url": "https://www.usz.ch/innosuisse-foerderung-fuer-pharix/"
+            },
+            {
               "label": "Gemeinsam gegen Brustkrebs: Ein starkes Zeichen für die Brustgesundheit",
               "date": "2026-10-29T14:32:30.000Z",
               "url": "https://www.usz.ch/gemeinsam-gegen-brustkrebs-ein-starkes-zeichen-fuer-die-brustgesundheit/"
@@ -187,19 +197,9 @@
               "label": "Brustkrebs und Kinderwunsch: Fruchtbarkeit erhalten, ohne die Therapie zu verzögern",
               "date": "2026-10-28T12:51:51.000Z",
               "url": "https://www.usz.ch/brustkrebs-und-kinderwunsch-fruchtbarkeit-erhalten-ohne-die-therapie-zu-verzoegern/"
-            },
-            {
-              "label": "USZ lanciert den DAISY Award für aussergewöhnliche Pflegefachpersonen und Hebammen",
-              "date": "2026-10-28T09:02:16.000Z",
-              "url": "https://www.usz.ch/usz-lanciert-den-daisy-award/"
-            },
-            {
-              "label": "„Der Drang, herauszufinden, wie die Dinge zusammenhängen, treibt mich an.“",
-              "date": "2026-10-27T14:15:55.000Z",
-              "url": "https://www.usz.ch/der-drang-herauszufinden-wie-die-dinge-zusammenhaengen-treibt-mich-an/"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -279,7 +279,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     },
     "en": {
       "canton": "ZH",
@@ -363,7 +363,7 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-30T06:35:00.814Z"
+          "updatedAt": "2026-10-30T11:01:15.952Z"
         },
         {
           "id": "aste-targhe",
@@ -416,6 +416,16 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Rückblick | Rheuma-Workshop USZ | 24. September 2026",
+              "date": "2026-10-30T11:33:43.000Z",
+              "url": "https://www.usz.ch/rueckblick-rheuma-workshop-usz-24-september-2026/"
+            },
+            {
+              "label": "Innosuisse-Förderung für «PhariX»",
+              "date": "2026-10-30T06:45:39.000Z",
+              "url": "https://www.usz.ch/innosuisse-foerderung-fuer-pharix/"
+            },
+            {
               "label": "Gemeinsam gegen Brustkrebs: Ein starkes Zeichen für die Brustgesundheit",
               "date": "2026-10-29T14:32:30.000Z",
               "url": "https://www.usz.ch/gemeinsam-gegen-brustkrebs-ein-starkes-zeichen-fuer-die-brustgesundheit/"
@@ -434,19 +444,9 @@
               "label": "Brustkrebs und Kinderwunsch: Fruchtbarkeit erhalten, ohne die Therapie zu verzögern",
               "date": "2026-10-28T12:51:51.000Z",
               "url": "https://www.usz.ch/brustkrebs-und-kinderwunsch-fruchtbarkeit-erhalten-ohne-die-therapie-zu-verzoegern/"
-            },
-            {
-              "label": "USZ lanciert den DAISY Award für aussergewöhnliche Pflegefachpersonen und Hebammen",
-              "date": "2026-10-28T09:02:16.000Z",
-              "url": "https://www.usz.ch/usz-lanciert-den-daisy-award/"
-            },
-            {
-              "label": "„Der Drang, herauszufinden, wie die Dinge zusammenhängen, treibt mich an.“",
-              "date": "2026-10-27T14:15:55.000Z",
-              "url": "https://www.usz.ch/der-drang-herauszufinden-wie-die-dinge-zusammenhaengen-treibt-mich-an/"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -522,7 +522,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     },
     "de": {
       "canton": "ZH",
@@ -606,7 +606,7 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-30T06:35:00.814Z"
+          "updatedAt": "2026-10-30T11:01:15.952Z"
         },
         {
           "id": "aste-targhe",
@@ -659,6 +659,16 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Rückblick | Rheuma-Workshop USZ | 24. September 2026",
+              "date": "2026-10-30T11:33:43.000Z",
+              "url": "https://www.usz.ch/rueckblick-rheuma-workshop-usz-24-september-2026/"
+            },
+            {
+              "label": "Innosuisse-Förderung für «PhariX»",
+              "date": "2026-10-30T06:45:39.000Z",
+              "url": "https://www.usz.ch/innosuisse-foerderung-fuer-pharix/"
+            },
+            {
               "label": "Gemeinsam gegen Brustkrebs: Ein starkes Zeichen für die Brustgesundheit",
               "date": "2026-10-29T14:32:30.000Z",
               "url": "https://www.usz.ch/gemeinsam-gegen-brustkrebs-ein-starkes-zeichen-fuer-die-brustgesundheit/"
@@ -677,19 +687,9 @@
               "label": "Brustkrebs und Kinderwunsch: Fruchtbarkeit erhalten, ohne die Therapie zu verzögern",
               "date": "2026-10-28T12:51:51.000Z",
               "url": "https://www.usz.ch/brustkrebs-und-kinderwunsch-fruchtbarkeit-erhalten-ohne-die-therapie-zu-verzoegern/"
-            },
-            {
-              "label": "USZ lanciert den DAISY Award für aussergewöhnliche Pflegefachpersonen und Hebammen",
-              "date": "2026-10-28T09:02:16.000Z",
-              "url": "https://www.usz.ch/usz-lanciert-den-daisy-award/"
-            },
-            {
-              "label": "„Der Drang, herauszufinden, wie die Dinge zusammenhängen, treibt mich an.“",
-              "date": "2026-10-27T14:15:55.000Z",
-              "url": "https://www.usz.ch/der-drang-herauszufinden-wie-die-dinge-zusammenhaengen-treibt-mich-an/"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -765,7 +765,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     },
     "fr": {
       "canton": "ZH",
@@ -849,7 +849,7 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-30T06:35:00.814Z"
+          "updatedAt": "2026-10-30T11:01:15.952Z"
         },
         {
           "id": "aste-targhe",
@@ -902,6 +902,16 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Rückblick | Rheuma-Workshop USZ | 24. September 2026",
+              "date": "2026-10-30T11:33:43.000Z",
+              "url": "https://www.usz.ch/rueckblick-rheuma-workshop-usz-24-september-2026/"
+            },
+            {
+              "label": "Innosuisse-Förderung für «PhariX»",
+              "date": "2026-10-30T06:45:39.000Z",
+              "url": "https://www.usz.ch/innosuisse-foerderung-fuer-pharix/"
+            },
+            {
               "label": "Gemeinsam gegen Brustkrebs: Ein starkes Zeichen für die Brustgesundheit",
               "date": "2026-10-29T14:32:30.000Z",
               "url": "https://www.usz.ch/gemeinsam-gegen-brustkrebs-ein-starkes-zeichen-fuer-die-brustgesundheit/"
@@ -920,19 +930,9 @@
               "label": "Brustkrebs und Kinderwunsch: Fruchtbarkeit erhalten, ohne die Therapie zu verzögern",
               "date": "2026-10-28T12:51:51.000Z",
               "url": "https://www.usz.ch/brustkrebs-und-kinderwunsch-fruchtbarkeit-erhalten-ohne-die-therapie-zu-verzoegern/"
-            },
-            {
-              "label": "USZ lanciert den DAISY Award für aussergewöhnliche Pflegefachpersonen und Hebammen",
-              "date": "2026-10-28T09:02:16.000Z",
-              "url": "https://www.usz.ch/usz-lanciert-den-daisy-award/"
-            },
-            {
-              "label": "„Der Drang, herauszufinden, wie die Dinge zusammenhängen, treibt mich an.“",
-              "date": "2026-10-27T14:15:55.000Z",
-              "url": "https://www.usz.ch/der-drang-herauszufinden-wie-die-dinge-zusammenhaengen-treibt-mich-an/"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -1004,7 +1004,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     }
   }
 }

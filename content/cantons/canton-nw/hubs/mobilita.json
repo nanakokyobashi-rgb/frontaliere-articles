@@ -4,8 +4,8 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "mobilita",
-  "updatedAt": "2026-10-30T15:09:51.722Z",
-  "contentHash": "266657af175d8046ec6fb9bb11890e875c176e704496f4a12f646b9816d66a10",
+  "updatedAt": "2026-10-30T15:34:43.777Z",
+  "contentHash": "490becaf49a2553ca771398f8e56f3d7b94ea1131415351da8bc1aee0a7238b1",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-29T22:02:50.125Z",
+      "updatedAt": "2026-10-30T11:41:14.746Z",
       "keyFacts": 0
     }
   ],
@@ -82,6 +82,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Kanalaufnahmen kantonale Strassenentwässerung",
+              "date": "2026-10-29",
+              "url": "https://www.hergiswil.ch/_rte/information/3035752"
+            },
+            {
               "label": "Wanderweg vom 28.10. - 30.10.2026 wegen Holzschlag gesperrt - Scheitholz bis Hinter Rengg",
               "date": "2026-10-19",
               "url": "https://www.hergiswil.ch/_rte/information/3014485"
@@ -105,14 +110,9 @@
               "label": "Verkehrseinschränkung CISM OL WM 2026",
               "date": "2026-10-13",
               "url": "https://www.stans.ch/_rte/information/2999005"
-            },
-            {
-              "label": "Postauto Fahrplanwechsel ab dem 13. Dezember 2026",
-              "date": "2026-10-09",
-              "url": "https://www.buochs.ch/_rte/information/3007873"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -140,7 +140,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     },
     "en": {
       "canton": "NW",
@@ -205,6 +205,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Kanalaufnahmen kantonale Strassenentwässerung",
+              "date": "2026-10-29",
+              "url": "https://www.hergiswil.ch/_rte/information/3035752"
+            },
+            {
               "label": "Wanderweg vom 28.10. - 30.10.2026 wegen Holzschlag gesperrt - Scheitholz bis Hinter Rengg",
               "date": "2026-10-19",
               "url": "https://www.hergiswil.ch/_rte/information/3014485"
@@ -228,14 +233,9 @@
               "label": "Verkehrseinschränkung CISM OL WM 2026",
               "date": "2026-10-13",
               "url": "https://www.stans.ch/_rte/information/2999005"
-            },
-            {
-              "label": "Postauto Fahrplanwechsel ab dem 13. Dezember 2026",
-              "date": "2026-10-09",
-              "url": "https://www.buochs.ch/_rte/information/3007873"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -263,7 +263,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     },
     "de": {
       "canton": "NW",
@@ -328,6 +328,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Kanalaufnahmen kantonale Strassenentwässerung",
+              "date": "2026-10-29",
+              "url": "https://www.hergiswil.ch/_rte/information/3035752"
+            },
+            {
               "label": "Wanderweg vom 28.10. - 30.10.2026 wegen Holzschlag gesperrt - Scheitholz bis Hinter Rengg",
               "date": "2026-10-19",
               "url": "https://www.hergiswil.ch/_rte/information/3014485"
@@ -351,14 +356,9 @@
               "label": "Verkehrseinschränkung CISM OL WM 2026",
               "date": "2026-10-13",
               "url": "https://www.stans.ch/_rte/information/2999005"
-            },
-            {
-              "label": "Postauto Fahrplanwechsel ab dem 13. Dezember 2026",
-              "date": "2026-10-09",
-              "url": "https://www.buochs.ch/_rte/information/3007873"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -386,7 +386,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     },
     "fr": {
       "canton": "NW",
@@ -451,6 +451,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Kanalaufnahmen kantonale Strassenentwässerung",
+              "date": "2026-10-29",
+              "url": "https://www.hergiswil.ch/_rte/information/3035752"
+            },
+            {
               "label": "Wanderweg vom 28.10. - 30.10.2026 wegen Holzschlag gesperrt - Scheitholz bis Hinter Rengg",
               "date": "2026-10-19",
               "url": "https://www.hergiswil.ch/_rte/information/3014485"
@@ -474,14 +479,9 @@
               "label": "Verkehrseinschränkung CISM OL WM 2026",
               "date": "2026-10-13",
               "url": "https://www.stans.ch/_rte/information/2999005"
-            },
-            {
-              "label": "Postauto Fahrplanwechsel ab dem 13. Dezember 2026",
-              "date": "2026-10-09",
-              "url": "https://www.buochs.ch/_rte/information/3007873"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -509,7 +509,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     }
   }
 }

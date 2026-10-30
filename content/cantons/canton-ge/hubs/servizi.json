@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "servizi",
-  "updatedAt": "2026-10-30T15:09:51.722Z",
-  "contentHash": "ad9657e8150edc5fc842d6281df5c4b6d4d97f749c17aad20816e216e94e879b",
+  "updatedAt": "2026-10-30T15:34:43.777Z",
+  "contentHash": "d8968f1e82801cc85587001448aace61f401976ba1b586a831f467e3d0ec5c5b",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-30T06:34:59.462Z",
+      "updatedAt": "2026-10-30T11:01:14.459Z",
       "keyFacts": 0
     },
     {
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-29T22:02:50.125Z",
+      "updatedAt": "2026-10-30T11:41:14.746Z",
       "keyFacts": 0
     }
   ],
@@ -96,7 +96,7 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-30T06:34:59.462Z"
+          "updatedAt": "2026-10-30T11:01:14.459Z"
         },
         {
           "id": "meteo",
@@ -118,9 +118,24 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Deux projets de recherche et un poster distingués lors de la Journée de la recherche clinique 2026",
+              "date": "2026-10-30",
+              "url": "https://www.hug.ch/actualite/crc/deux-projets-recherche-poster-distingues-lors-journee-recherche-clinique-2026"
+            },
+            {
+              "label": "Le guichet de la capitainerie cantonale déménage !",
+              "date": "2026-10-29",
+              "url": "https://www.ge.ch/node/45379"
+            },
+            {
               "label": "Appel à projets - Santé mentale des jeunes",
               "date": "2026-10-29",
               "url": "https://www.ge.ch/node/45359"
+            },
+            {
+              "label": "Rapport sur l'état de santé des cours d'eau genevois: le secteur de La Laire - Champagne",
+              "date": "2026-10-29",
+              "url": "https://www.ge.ch/node/45376"
             },
             {
               "label": "OCIRT-Formation 200-26 - Stockage des produits chimiques dans les entreprises",
@@ -131,24 +146,9 @@
               "label": "Formulaires pour les demandes de subsides 2027",
               "date": "2026-10-27",
               "url": "https://www.ge.ch/node/45339"
-            },
-            {
-              "label": "Promotion de la santé et prévention dans les structures d'accueil de la petite enfance",
-              "date": "2026-10-27",
-              "url": "https://www.ge.ch/node/15188"
-            },
-            {
-              "label": "Primes d'assurance-maladie 2027",
-              "date": "2026-10-27",
-              "url": "https://www.ge.ch/node/45340"
-            },
-            {
-              "label": "Barèmes et catégories 2027 pour les subsides d'assurance-maladie",
-              "date": "2026-10-26",
-              "url": "https://www.ge.ch/node/45327"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -228,7 +228,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     },
     "en": {
       "canton": "GE",
@@ -297,7 +297,7 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-30T06:34:59.462Z"
+          "updatedAt": "2026-10-30T11:01:14.459Z"
         },
         {
           "id": "meteo",
@@ -319,9 +319,24 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Deux projets de recherche et un poster distingués lors de la Journée de la recherche clinique 2026",
+              "date": "2026-10-30",
+              "url": "https://www.hug.ch/actualite/crc/deux-projets-recherche-poster-distingues-lors-journee-recherche-clinique-2026"
+            },
+            {
+              "label": "Le guichet de la capitainerie cantonale déménage !",
+              "date": "2026-10-29",
+              "url": "https://www.ge.ch/node/45379"
+            },
+            {
               "label": "Appel à projets - Santé mentale des jeunes",
               "date": "2026-10-29",
               "url": "https://www.ge.ch/node/45359"
+            },
+            {
+              "label": "Rapport sur l'état de santé des cours d'eau genevois: le secteur de La Laire - Champagne",
+              "date": "2026-10-29",
+              "url": "https://www.ge.ch/node/45376"
             },
             {
               "label": "OCIRT-Formation 200-26 - Stockage des produits chimiques dans les entreprises",
@@ -332,24 +347,9 @@
               "label": "Formulaires pour les demandes de subsides 2027",
               "date": "2026-10-27",
               "url": "https://www.ge.ch/node/45339"
-            },
-            {
-              "label": "Promotion de la santé et prévention dans les structures d'accueil de la petite enfance",
-              "date": "2026-10-27",
-              "url": "https://www.ge.ch/node/15188"
-            },
-            {
-              "label": "Primes d'assurance-maladie 2027",
-              "date": "2026-10-27",
-              "url": "https://www.ge.ch/node/45340"
-            },
-            {
-              "label": "Barèmes et catégories 2027 pour les subsides d'assurance-maladie",
-              "date": "2026-10-26",
-              "url": "https://www.ge.ch/node/45327"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -424,7 +424,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     },
     "de": {
       "canton": "GE",
@@ -493,7 +493,7 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-30T06:34:59.462Z"
+          "updatedAt": "2026-10-30T11:01:14.459Z"
         },
         {
           "id": "meteo",
@@ -515,9 +515,24 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Deux projets de recherche et un poster distingués lors de la Journée de la recherche clinique 2026",
+              "date": "2026-10-30",
+              "url": "https://www.hug.ch/actualite/crc/deux-projets-recherche-poster-distingues-lors-journee-recherche-clinique-2026"
+            },
+            {
+              "label": "Le guichet de la capitainerie cantonale déménage !",
+              "date": "2026-10-29",
+              "url": "https://www.ge.ch/node/45379"
+            },
+            {
               "label": "Appel à projets - Santé mentale des jeunes",
               "date": "2026-10-29",
               "url": "https://www.ge.ch/node/45359"
+            },
+            {
+              "label": "Rapport sur l'état de santé des cours d'eau genevois: le secteur de La Laire - Champagne",
+              "date": "2026-10-29",
+              "url": "https://www.ge.ch/node/45376"
             },
             {
               "label": "OCIRT-Formation 200-26 - Stockage des produits chimiques dans les entreprises",
@@ -528,24 +543,9 @@
               "label": "Formulaires pour les demandes de subsides 2027",
               "date": "2026-10-27",
               "url": "https://www.ge.ch/node/45339"
-            },
-            {
-              "label": "Promotion de la santé et prévention dans les structures d'accueil de la petite enfance",
-              "date": "2026-10-27",
-              "url": "https://www.ge.ch/node/15188"
-            },
-            {
-              "label": "Primes d'assurance-maladie 2027",
-              "date": "2026-10-27",
-              "url": "https://www.ge.ch/node/45340"
-            },
-            {
-              "label": "Barèmes et catégories 2027 pour les subsides d'assurance-maladie",
-              "date": "2026-10-26",
-              "url": "https://www.ge.ch/node/45327"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -620,7 +620,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     },
     "fr": {
       "canton": "GE",
@@ -689,7 +689,7 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-30T06:34:59.462Z"
+          "updatedAt": "2026-10-30T11:01:14.459Z"
         },
         {
           "id": "meteo",
@@ -711,9 +711,24 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Deux projets de recherche et un poster distingués lors de la Journée de la recherche clinique 2026",
+              "date": "2026-10-30",
+              "url": "https://www.hug.ch/actualite/crc/deux-projets-recherche-poster-distingues-lors-journee-recherche-clinique-2026"
+            },
+            {
+              "label": "Le guichet de la capitainerie cantonale déménage !",
+              "date": "2026-10-29",
+              "url": "https://www.ge.ch/node/45379"
+            },
+            {
               "label": "Appel à projets - Santé mentale des jeunes",
               "date": "2026-10-29",
               "url": "https://www.ge.ch/node/45359"
+            },
+            {
+              "label": "Rapport sur l'état de santé des cours d'eau genevois: le secteur de La Laire - Champagne",
+              "date": "2026-10-29",
+              "url": "https://www.ge.ch/node/45376"
             },
             {
               "label": "OCIRT-Formation 200-26 - Stockage des produits chimiques dans les entreprises",
@@ -724,24 +739,9 @@
               "label": "Formulaires pour les demandes de subsides 2027",
               "date": "2026-10-27",
               "url": "https://www.ge.ch/node/45339"
-            },
-            {
-              "label": "Promotion de la santé et prévention dans les structures d'accueil de la petite enfance",
-              "date": "2026-10-27",
-              "url": "https://www.ge.ch/node/15188"
-            },
-            {
-              "label": "Primes d'assurance-maladie 2027",
-              "date": "2026-10-27",
-              "url": "https://www.ge.ch/node/45340"
-            },
-            {
-              "label": "Barèmes et catégories 2027 pour les subsides d'assurance-maladie",
-              "date": "2026-10-26",
-              "url": "https://www.ge.ch/node/45327"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -813,7 +813,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     }
   }
 }

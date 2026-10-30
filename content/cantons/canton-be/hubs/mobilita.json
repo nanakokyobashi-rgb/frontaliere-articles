@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-30T15:09:51.722Z",
-  "contentHash": "676b9bdf28b668831a445270ea93c161b6cfe7f0c31cf02aaad38d5722732517",
+  "updatedAt": "2026-10-30T15:34:43.777Z",
+  "contentHash": "e6e76e0152f0f6e59fbaa827acdee7221b83a75e11721064e30c5a57a544aae2",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-29T22:02:50.125Z",
+      "updatedAt": "2026-10-30T11:41:14.746Z",
       "keyFacts": 0
     }
   ],
@@ -99,6 +99,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Start der Bauarbeiten für den historischen Rathausgasse-Brunnen",
+              "date": "2026-10-30T10:00:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/start-der-bauarbeiten-fuer-den-historischen-rathausgasse-brunnen"
+            },
+            {
               "label": "Massnahmen zur Verbesserung der Sicherheit in den Velostationen",
               "date": "2026-10-27T10:00:00.000Z",
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/massnahmen-zur-verbesserung-der-sicherheit-in-den-velostationen"
@@ -122,14 +127,9 @@
               "label": "Neue Veloverbindung von Schauplatzgasse auf Bubenbergplatz",
               "date": "2026-10-15T05:00:00.000Z",
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/neue-veloverbindung-von-schauplatzgasse-auf-bubenberg-platz"
-            },
-            {
-              "label": "Mehrfamilienhäuser an der Zelgstrasse werden saniert",
-              "date": "2026-10-15T04:58:00.000Z",
-              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/mehrfamilienhaeuser-an-der-zelgstrasse-werden-saniert"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -181,7 +181,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     },
     "en": {
       "canton": "BE",
@@ -263,6 +263,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Start der Bauarbeiten für den historischen Rathausgasse-Brunnen",
+              "date": "2026-10-30T10:00:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/start-der-bauarbeiten-fuer-den-historischen-rathausgasse-brunnen"
+            },
+            {
               "label": "Massnahmen zur Verbesserung der Sicherheit in den Velostationen",
               "date": "2026-10-27T10:00:00.000Z",
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/massnahmen-zur-verbesserung-der-sicherheit-in-den-velostationen"
@@ -286,14 +291,9 @@
               "label": "Neue Veloverbindung von Schauplatzgasse auf Bubenbergplatz",
               "date": "2026-10-15T05:00:00.000Z",
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/neue-veloverbindung-von-schauplatzgasse-auf-bubenberg-platz"
-            },
-            {
-              "label": "Mehrfamilienhäuser an der Zelgstrasse werden saniert",
-              "date": "2026-10-15T04:58:00.000Z",
-              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/mehrfamilienhaeuser-an-der-zelgstrasse-werden-saniert"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     },
     "de": {
       "canton": "BE",
@@ -427,6 +427,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Start der Bauarbeiten für den historischen Rathausgasse-Brunnen",
+              "date": "2026-10-30T10:00:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/start-der-bauarbeiten-fuer-den-historischen-rathausgasse-brunnen"
+            },
+            {
               "label": "Massnahmen zur Verbesserung der Sicherheit in den Velostationen",
               "date": "2026-10-27T10:00:00.000Z",
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/massnahmen-zur-verbesserung-der-sicherheit-in-den-velostationen"
@@ -450,14 +455,9 @@
               "label": "Neue Veloverbindung von Schauplatzgasse auf Bubenbergplatz",
               "date": "2026-10-15T05:00:00.000Z",
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/neue-veloverbindung-von-schauplatzgasse-auf-bubenberg-platz"
-            },
-            {
-              "label": "Mehrfamilienhäuser an der Zelgstrasse werden saniert",
-              "date": "2026-10-15T04:58:00.000Z",
-              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/mehrfamilienhaeuser-an-der-zelgstrasse-werden-saniert"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -509,7 +509,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     },
     "fr": {
       "canton": "BE",
@@ -591,6 +591,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Start der Bauarbeiten für den historischen Rathausgasse-Brunnen",
+              "date": "2026-10-30T10:00:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/start-der-bauarbeiten-fuer-den-historischen-rathausgasse-brunnen"
+            },
+            {
               "label": "Massnahmen zur Verbesserung der Sicherheit in den Velostationen",
               "date": "2026-10-27T10:00:00.000Z",
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/massnahmen-zur-verbesserung-der-sicherheit-in-den-velostationen"
@@ -614,14 +619,9 @@
               "label": "Neue Veloverbindung von Schauplatzgasse auf Bubenbergplatz",
               "date": "2026-10-15T05:00:00.000Z",
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/neue-veloverbindung-von-schauplatzgasse-auf-bubenberg-platz"
-            },
-            {
-              "label": "Mehrfamilienhäuser an der Zelgstrasse werden saniert",
-              "date": "2026-10-15T04:58:00.000Z",
-              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/mehrfamilienhaeuser-an-der-zelgstrasse-werden-saniert"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -673,7 +673,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     }
   }
 }

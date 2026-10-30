@@ -4,12 +4,12 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "carburanti",
-  "updatedAt": "2026-10-29T22:43:52.010Z",
-  "contentHash": "1e84ceddc85cda78607e6763a4e20a7b2a097a288927a0ab473002c98c8e5312",
+  "updatedAt": "2026-10-30T15:34:43.777Z",
+  "contentHash": "abcc4dde0fcb453e2d39753b269af66c3feec92155047576e4cc8130abae7097",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-29T13:43:32.294Z",
+      "updatedAt": "2026-10-29T23:43:50.820Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-11-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-29T13:43:32.294Z"
+          "updatedAt": "2026-10-29T23:43:50.820Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Glarona: governo prende posizione su detrazioni energetiche",
+          "url": "/articoli-glarona/glarona-detrazioni-energia/",
+          "excerpt": "Il governo di Glarona prende posizione sulle detrazioni fiscali per le misure di risparmio energetico.",
+          "date": "2026-10-30T15:30:05.508Z"
+        },
         {
           "title": "Il Canton Glarona vuole rinnovare strade e ponti nel 2027",
           "url": "/articoli-glarona/cantieri-strade-glarona-2027/",
@@ -82,12 +88,6 @@
           "url": "/articoli-glarona/landrat-ottobre-glarona-2026/",
           "excerpt": "Il 21 ottobre 2026 il Landrat ha approvato CHF 4 milioni per la perequazione tra Cantone e comuni, respinto due proposte sulla concessione idroelettrica di Rüti e stanziato un credito sportivo di 3 milioni per il…",
           "date": "2026-10-22T01:24:23.964Z"
-        },
-        {
-          "title": "Mercato immobiliare a Glarona: prezzi in crescita nel 2026",
-          "url": "/articoli-glarona/glarona-mercato-immobiliare-2026/",
-          "excerpt": "La domanda immobiliare resta alta nel Canton Glarona L'offerta limitata sostiene l'aumento dei prezzi Condomini +4,4% tra il 2° trimestre 2025 e il 2° 2026",
-          "date": "2026-10-21T01:34:50.414Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-29T22:43:52.010Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     },
     "en": {
       "canton": "GL",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-29T13:43:32.294Z"
+          "updatedAt": "2026-10-29T23:43:50.820Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Glarus: government takes a position on energy deductions",
+          "url": "/en/glarus-articles/glarus-energy-tax-deductions/",
+          "excerpt": "The government of Glarus takes a position on tax deductions for energy-saving measures.",
+          "date": "2026-10-30T15:30:05.508Z"
+        },
         {
           "title": "The Canton of Glarus wants to renovate roads and bridges in 2027",
           "url": "/en/glarus-articles/glarus-roads-bridges-2027/",
@@ -169,12 +175,6 @@
           "url": "/en/glarus-articles/glarus-council-october-2026/",
           "excerpt": "On October 21, 2026, the Landrat approved CHF 4 million for the equalization between Canton and municipalities, rejected two proposals on the Rüti hydroelectric concession and allocated a sports credit of 3 million for…",
           "date": "2026-10-22T01:24:23.964Z"
-        },
-        {
-          "title": "Real estate market in Glarus: prices rising in 2026",
-          "url": "/en/glarus-articles/glarus-real-estate-market-2026/",
-          "excerpt": "Housing demand remains high in the Canton of Glarus Limited supply supports rising prices Condominiums +4,4% between the 2nd quarter of 2025 and the 2nd quarter",
-          "date": "2026-10-21T01:34:50.414Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-29T22:43:52.010Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     },
     "de": {
       "canton": "GL",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-29T13:43:32.294Z"
+          "updatedAt": "2026-10-29T23:43:50.820Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Glarus: Regierung nimmt Stellung zu Energieabzügen",
+          "url": "/de/glarus-artikel/glarus-steuerabzuege-energie/",
+          "excerpt": "Die Regierung des Kantons Glarus nimmt Stellung zu den Steuerabzügen für Energiesparmassnahmen.",
+          "date": "2026-10-30T15:30:05.508Z"
+        },
         {
           "title": "Der Kanton Glarus will im Jahr 2027 Straßen und Brücken erneuern",
           "url": "/de/glarus-artikel/glarner-strassen-bruecken-2027/",
@@ -256,12 +262,6 @@
           "url": "/de/glarus-artikel/glarner-landrat-oktober-2026/",
           "excerpt": "Am 21. Oktober 2026 genehmigte der Landrat CHF 4 Mio. für den Ausgleich zwischen Kanton und Gemeinden, lehnte zwei Vorschläge zur Wasserkraftkonzession Rüti ab und bewilligte einen Sportkredit von 3 Mio. für den…",
           "date": "2026-10-22T01:24:23.964Z"
-        },
-        {
-          "title": "Immobilienmarkt in Glarus: steigende Preise im Jahr 2026",
-          "url": "/de/glarus-artikel/glarner-immobilienmarkt-2026/",
-          "excerpt": "Die Nachfrage nach Immobilien bleibt im Kanton Glarus hoch Das begrenzte Angebot stützt den Preisanstieg Eigentumswohnungen +4,4% zwischen dem 2.",
-          "date": "2026-10-21T01:34:50.414Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-29T22:43:52.010Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     },
     "fr": {
       "canton": "GL",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-29T13:43:32.294Z"
+          "updatedAt": "2026-10-29T23:43:50.820Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Glaris : le gouvernement prend position sur les déductions énergétiques",
+          "url": "/fr/articles-glaris/glaris-deductions-fiscales-energie/",
+          "excerpt": "Le gouvernement de Glaris prend position sur les déductions fiscales pour les mesures d'économie d'énergie.",
+          "date": "2026-10-30T15:30:05.508Z"
+        },
         {
           "title": "Le canton de Glaris veut rénover des routes et des ponts en 2027",
           "url": "/fr/articles-glaris/routes-ponts-glaris-2027/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-glaris/conseil-glaris-octobre-2026/",
           "excerpt": "Le 21 octobre 2026, le Landrat a approuvé CHF 4 millions pour la péréquation entre le canton et les communes, rejeté deux propositions sur la concession hydroélectrique de Rüti et alloué un crédit sportif de 3 millions…",
           "date": "2026-10-22T01:24:23.964Z"
-        },
-        {
-          "title": "Marché immobilier à Glaris : les prix en hausse en 2026",
-          "url": "/fr/articles-glaris/marche-immobilier-glaris-2026/",
-          "excerpt": "La demande immobilière reste élevée dans le canton de Glaris L'offre limitée soutient la hausse des prix Appartements en copropriété +4,4% entre le 2e trimestre",
-          "date": "2026-10-21T01:34:50.414Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-29T22:43:52.010Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     }
   }
 }

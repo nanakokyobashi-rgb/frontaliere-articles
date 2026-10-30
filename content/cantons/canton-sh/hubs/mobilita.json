@@ -4,8 +4,8 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "mobilita",
-  "updatedAt": "2026-10-30T15:09:51.722Z",
-  "contentHash": "11e03e859b1d83ed1a9b5b249e656b5d2802367d36658fa894eb784e5e002c01",
+  "updatedAt": "2026-10-30T15:34:43.777Z",
+  "contentHash": "191b34bb8b70b735fcc4614769714684ae8747b074159bb4b72b1bf6b1f61d5d",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-29T22:02:50.125Z",
+      "updatedAt": "2026-10-30T11:41:14.746Z",
       "keyFacts": 0
     }
   ],
@@ -96,6 +96,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Arbeitskreis Rad- und Fußverkehr gestaltet die Mobilität von morgen",
+              "date": "2026-10-30T11:23:11.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/arbeitskreis+rad-+und+fussverkehr+gestaltet+die+mobilitaet+von+morgen"
+            },
+            {
               "label": "Radverkehr in der Hafenstraße",
               "date": "2026-10-29T13:37:01.000Z",
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/radverkehr+in+der+hafenstrasse"
@@ -119,14 +124,9 @@
               "label": "Kleine Markierungen, mehr Sicherheit: Technische Betriebe Konstanz setzen zwei weitere Maßnahmen für den Radverkehr um",
               "date": "2026-10-20T08:56:51.000Z",
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/kleine+markierungen_+mehr+sicherheit_+technische+betriebe+konstanz+setzen+zwei+weitere+massnahmen+fuer+den+radverkehr+um"
-            },
-            {
-              "label": "Verlängerung der Vollsperrung der Landesstraße L221",
-              "date": "2026-10-15T15:56:57.000Z",
-              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/verlaengerung+der+vollsperrung+der+landesstrasse+l221"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -198,7 +198,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     },
     "en": {
       "canton": "SH",
@@ -277,6 +277,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Arbeitskreis Rad- und Fußverkehr gestaltet die Mobilität von morgen",
+              "date": "2026-10-30T11:23:11.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/arbeitskreis+rad-+und+fussverkehr+gestaltet+die+mobilitaet+von+morgen"
+            },
+            {
               "label": "Radverkehr in der Hafenstraße",
               "date": "2026-10-29T13:37:01.000Z",
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/radverkehr+in+der+hafenstrasse"
@@ -300,14 +305,9 @@
               "label": "Kleine Markierungen, mehr Sicherheit: Technische Betriebe Konstanz setzen zwei weitere Maßnahmen für den Radverkehr um",
               "date": "2026-10-20T08:56:51.000Z",
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/kleine+markierungen_+mehr+sicherheit_+technische+betriebe+konstanz+setzen+zwei+weitere+massnahmen+fuer+den+radverkehr+um"
-            },
-            {
-              "label": "Verlängerung der Vollsperrung der Landesstraße L221",
-              "date": "2026-10-15T15:56:57.000Z",
-              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/verlaengerung+der+vollsperrung+der+landesstrasse+l221"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -379,7 +379,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     },
     "de": {
       "canton": "SH",
@@ -458,6 +458,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Arbeitskreis Rad- und Fußverkehr gestaltet die Mobilität von morgen",
+              "date": "2026-10-30T11:23:11.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/arbeitskreis+rad-+und+fussverkehr+gestaltet+die+mobilitaet+von+morgen"
+            },
+            {
               "label": "Radverkehr in der Hafenstraße",
               "date": "2026-10-29T13:37:01.000Z",
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/radverkehr+in+der+hafenstrasse"
@@ -481,14 +486,9 @@
               "label": "Kleine Markierungen, mehr Sicherheit: Technische Betriebe Konstanz setzen zwei weitere Maßnahmen für den Radverkehr um",
               "date": "2026-10-20T08:56:51.000Z",
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/kleine+markierungen_+mehr+sicherheit_+technische+betriebe+konstanz+setzen+zwei+weitere+massnahmen+fuer+den+radverkehr+um"
-            },
-            {
-              "label": "Verlängerung der Vollsperrung der Landesstraße L221",
-              "date": "2026-10-15T15:56:57.000Z",
-              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/verlaengerung+der+vollsperrung+der+landesstrasse+l221"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -560,7 +560,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     },
     "fr": {
       "canton": "SH",
@@ -639,6 +639,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Arbeitskreis Rad- und Fußverkehr gestaltet die Mobilität von morgen",
+              "date": "2026-10-30T11:23:11.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/arbeitskreis+rad-+und+fussverkehr+gestaltet+die+mobilitaet+von+morgen"
+            },
+            {
               "label": "Radverkehr in der Hafenstraße",
               "date": "2026-10-29T13:37:01.000Z",
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/radverkehr+in+der+hafenstrasse"
@@ -662,14 +667,9 @@
               "label": "Kleine Markierungen, mehr Sicherheit: Technische Betriebe Konstanz setzen zwei weitere Maßnahmen für den Radverkehr um",
               "date": "2026-10-20T08:56:51.000Z",
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/kleine+markierungen_+mehr+sicherheit_+technische+betriebe+konstanz+setzen+zwei+weitere+massnahmen+fuer+den+radverkehr+um"
-            },
-            {
-              "label": "Verlängerung der Vollsperrung der Landesstraße L221",
-              "date": "2026-10-15T15:56:57.000Z",
-              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/verlaengerung+der+vollsperrung+der+landesstrasse+l221"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -741,7 +741,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     }
   }
 }

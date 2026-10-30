@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "mobilita",
-  "updatedAt": "2026-10-30T15:09:51.722Z",
-  "contentHash": "62a4fea2b85f9440305c176e36d6f39cd34c6de4914c321da056cb8197ac553d",
+  "updatedAt": "2026-10-30T15:34:43.777Z",
+  "contentHash": "4a0f32163ac777ac4cd31281f232b563da39ad74322c7121ee5590db1357e72d",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-29T22:02:50.125Z",
+      "updatedAt": "2026-10-30T11:41:14.746Z",
       "keyFacts": 0
     }
   ],
@@ -37,7 +37,7 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "22",
+          "value": "20",
           "note": "segnalazioni aggiornate: 30 ottobre 2026"
         },
         {
@@ -129,15 +129,14 @@
               "date": "2026-09-28T06:00:00.000Z"
             },
             {
-              "label": "Turtmann -> Gruben tra Luogo Oberems E Luogo Gruben Situazione: chiusa Causa: lavori di manutenzione",
-              "value": "Chiusura",
-              "detail": "fine prevista: 30 ottobre 2026",
-              "date": "2026-10-19T06:00:00.000Z"
-            },
-            {
               "label": "Sion <-> Sanetschpass Passo Col du Sanetsch Situazione: chiusa",
               "value": "Chiusura",
               "date": "2026-10-20T13:09:00.000Z"
+            },
+            {
+              "label": "Ausserbinn, Ernen in tutte le direzioni Situazione: chiusa Causa: chiusura invernale",
+              "value": "Chiusura",
+              "date": "2026-10-21T05:22:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
@@ -179,7 +178,7 @@
               "url": "https://www.ossolanews.it/2026/10/26/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/autovelox-in-piemonte-ecco-dove-saranno-i-controlli-dal-26-ottobre-al-1-novembre.html"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -249,7 +248,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     },
     "en": {
       "canton": "VS",
@@ -264,7 +263,7 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "22",
+          "value": "20",
           "note": "reports as of 30 October 2026"
         },
         {
@@ -356,15 +355,14 @@
               "date": "2026-09-28T06:00:00.000Z"
             },
             {
-              "label": "Turtmann -> Gruben tra Luogo Oberems E Luogo Gruben Situazione: chiusa Causa: lavori di manutenzione",
-              "value": "Closure",
-              "detail": "until 30 October 2026",
-              "date": "2026-10-19T06:00:00.000Z"
-            },
-            {
               "label": "Sion <-> Sanetschpass Passo Col du Sanetsch Situazione: chiusa",
               "value": "Closure",
               "date": "2026-10-20T13:09:00.000Z"
+            },
+            {
+              "label": "Ausserbinn, Ernen in tutte le direzioni Situazione: chiusa Causa: chiusura invernale",
+              "value": "Closure",
+              "date": "2026-10-21T05:22:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
@@ -406,7 +404,7 @@
               "url": "https://www.ossolanews.it/2026/10/26/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/autovelox-in-piemonte-ecco-dove-saranno-i-controlli-dal-26-ottobre-al-1-novembre.html"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -476,7 +474,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     },
     "de": {
       "canton": "VS",
@@ -491,7 +489,7 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "22",
+          "value": "20",
           "note": "Meldungen vom 30. Oktober 2026"
         },
         {
@@ -583,15 +581,14 @@
               "date": "2026-09-28T06:00:00.000Z"
             },
             {
-              "label": "Turtmann -> Gruben zwischen Ortschaft Oberems und Ortschaft Gruben Sachlage: Strecke gesperrt Ursache: Unterhaltsarbeiten",
-              "value": "Sperrung",
-              "detail": "bis 30. Oktober 2026",
-              "date": "2026-10-19T06:00:00.000Z"
-            },
-            {
               "label": "Sion <-> Sanetschpass Pass Col du Sanetsch Sachlage: Strecke gesperrt",
               "value": "Sperrung",
               "date": "2026-10-20T13:09:00.000Z"
+            },
+            {
+              "label": "Ausserbinn, Ernen in beide Richtungen Sachlage: Strecke gesperrt Ursache: Wintersperre",
+              "value": "Sperrung",
+              "date": "2026-10-21T05:22:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
@@ -633,7 +630,7 @@
               "url": "https://www.ossolanews.it/2026/10/26/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/autovelox-in-piemonte-ecco-dove-saranno-i-controlli-dal-26-ottobre-al-1-novembre.html"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -703,7 +700,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     },
     "fr": {
       "canton": "VS",
@@ -718,7 +715,7 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "22",
+          "value": "20",
           "note": "signalements au 30 octobre 2026"
         },
         {
@@ -810,15 +807,14 @@
               "date": "2026-09-28T06:00:00.000Z"
             },
             {
-              "label": "Tourtemagne -> Gruben entre Localité Oberems et Localité Gruben Situation: fermé Raison: travaux de maintenance",
-              "value": "Fermeture",
-              "detail": "jusqu’au 30 octobre 2026",
-              "date": "2026-10-19T06:00:00.000Z"
-            },
-            {
               "label": "Sion <-> Sanetschpass Col Col du Sanetsch Situation: fermé",
               "value": "Fermeture",
               "date": "2026-10-20T13:09:00.000Z"
+            },
+            {
+              "label": "Ausserbinn, Ernen dans les deux sens Situation: fermé Raison: fermeture hivernale",
+              "value": "Fermeture",
+              "date": "2026-10-21T05:22:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
@@ -860,7 +856,7 @@
               "url": "https://www.ossolanews.it/2026/10/26/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/autovelox-in-piemonte-ecco-dove-saranno-i-controlli-dal-26-ottobre-al-1-novembre.html"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -930,7 +926,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     }
   }
 }

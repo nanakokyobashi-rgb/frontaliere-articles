@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-30T15:09:51.722Z",
-  "contentHash": "c3b7ef7654c159325ee306c1f44ff21ae2647b04d9217b655e47dfa2fb2c92e8",
+  "updatedAt": "2026-10-30T15:34:43.777Z",
+  "contentHash": "3b10d04659a13548376896cafba9c9d102e4005f428c7c7dd8db6d9bd37422ef",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-29T22:02:50.125Z",
+      "updatedAt": "2026-10-30T11:41:14.746Z",
       "keyFacts": 0
     }
   ],
@@ -168,6 +168,16 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Rodéos routiers et excès de vitesse : les conséquences vont bien au-delà de l’amende",
+              "date": "2026-10-30",
+              "url": "https://www.ge.ch/node/45377"
+            },
+            {
+              "label": "Fermeture temporaire des caisses du service des contraventions jusqu’à nouvel avis.",
+              "date": "2026-10-29",
+              "url": "https://www.ge.ch/node/45029"
+            },
+            {
               "label": "Nouveau quartier des Grand-Esserts à Veyrier: Un accord trouvé qui respecte la volonté populaire et un développement pragmatique du chantier",
               "date": "2026-10-29",
               "url": "https://www.ge.ch/node/45353"
@@ -186,19 +196,9 @@
               "label": "Portraits croisés",
               "date": "2026-10-21T07:00:31.000Z",
               "url": "https://www.lemanexpress.com/2026/10/21/portraits-croises/"
-            },
-            {
-              "label": "NUIT DU 24 AU 25 OCTOBRE : PASSAGE A L’HEURE HIVER",
-              "date": "2026-10-20T04:54:57.000Z",
-              "url": "https://www.lemanexpress.com/2026/10/20/nuit-du-24-au-25-octobre-passage-a-lheure-hiver/"
-            },
-            {
-              "label": "Fermeture exceptionnelle du guichet d'information de l'office de l'urbanisme",
-              "date": "2026-10-19",
-              "url": "https://www.ge.ch/node/6308"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -258,7 +258,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     },
     "en": {
       "canton": "GE",
@@ -404,6 +404,16 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Rodéos routiers et excès de vitesse : les conséquences vont bien au-delà de l’amende",
+              "date": "2026-10-30",
+              "url": "https://www.ge.ch/node/45377"
+            },
+            {
+              "label": "Fermeture temporaire des caisses du service des contraventions jusqu’à nouvel avis.",
+              "date": "2026-10-29",
+              "url": "https://www.ge.ch/node/45029"
+            },
+            {
               "label": "Nouveau quartier des Grand-Esserts à Veyrier: Un accord trouvé qui respecte la volonté populaire et un développement pragmatique du chantier",
               "date": "2026-10-29",
               "url": "https://www.ge.ch/node/45353"
@@ -422,19 +432,9 @@
               "label": "Portraits croisés",
               "date": "2026-10-21T07:00:31.000Z",
               "url": "https://www.lemanexpress.com/2026/10/21/portraits-croises/"
-            },
-            {
-              "label": "NUIT DU 24 AU 25 OCTOBRE : PASSAGE A L’HEURE HIVER",
-              "date": "2026-10-20T04:54:57.000Z",
-              "url": "https://www.lemanexpress.com/2026/10/20/nuit-du-24-au-25-octobre-passage-a-lheure-hiver/"
-            },
-            {
-              "label": "Fermeture exceptionnelle du guichet d'information de l'office de l'urbanisme",
-              "date": "2026-10-19",
-              "url": "https://www.ge.ch/node/6308"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -494,7 +494,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     },
     "de": {
       "canton": "GE",
@@ -640,6 +640,16 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Rodéos routiers et excès de vitesse : les conséquences vont bien au-delà de l’amende",
+              "date": "2026-10-30",
+              "url": "https://www.ge.ch/node/45377"
+            },
+            {
+              "label": "Fermeture temporaire des caisses du service des contraventions jusqu’à nouvel avis.",
+              "date": "2026-10-29",
+              "url": "https://www.ge.ch/node/45029"
+            },
+            {
               "label": "Nouveau quartier des Grand-Esserts à Veyrier: Un accord trouvé qui respecte la volonté populaire et un développement pragmatique du chantier",
               "date": "2026-10-29",
               "url": "https://www.ge.ch/node/45353"
@@ -658,19 +668,9 @@
               "label": "Portraits croisés",
               "date": "2026-10-21T07:00:31.000Z",
               "url": "https://www.lemanexpress.com/2026/10/21/portraits-croises/"
-            },
-            {
-              "label": "NUIT DU 24 AU 25 OCTOBRE : PASSAGE A L’HEURE HIVER",
-              "date": "2026-10-20T04:54:57.000Z",
-              "url": "https://www.lemanexpress.com/2026/10/20/nuit-du-24-au-25-octobre-passage-a-lheure-hiver/"
-            },
-            {
-              "label": "Fermeture exceptionnelle du guichet d'information de l'office de l'urbanisme",
-              "date": "2026-10-19",
-              "url": "https://www.ge.ch/node/6308"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -730,7 +730,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     },
     "fr": {
       "canton": "GE",
@@ -876,6 +876,16 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Rodéos routiers et excès de vitesse : les conséquences vont bien au-delà de l’amende",
+              "date": "2026-10-30",
+              "url": "https://www.ge.ch/node/45377"
+            },
+            {
+              "label": "Fermeture temporaire des caisses du service des contraventions jusqu’à nouvel avis.",
+              "date": "2026-10-29",
+              "url": "https://www.ge.ch/node/45029"
+            },
+            {
               "label": "Nouveau quartier des Grand-Esserts à Veyrier: Un accord trouvé qui respecte la volonté populaire et un développement pragmatique du chantier",
               "date": "2026-10-29",
               "url": "https://www.ge.ch/node/45353"
@@ -894,19 +904,9 @@
               "label": "Portraits croisés",
               "date": "2026-10-21T07:00:31.000Z",
               "url": "https://www.lemanexpress.com/2026/10/21/portraits-croises/"
-            },
-            {
-              "label": "NUIT DU 24 AU 25 OCTOBRE : PASSAGE A L’HEURE HIVER",
-              "date": "2026-10-20T04:54:57.000Z",
-              "url": "https://www.lemanexpress.com/2026/10/20/nuit-du-24-au-25-octobre-passage-a-lheure-hiver/"
-            },
-            {
-              "label": "Fermeture exceptionnelle du guichet d'information de l'office de l'urbanisme",
-              "date": "2026-10-19",
-              "url": "https://www.ge.ch/node/6308"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -966,7 +966,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     }
   }
 }

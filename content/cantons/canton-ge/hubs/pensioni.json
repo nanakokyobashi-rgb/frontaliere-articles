@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "pensioni",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "71ff6e1961fd879eedd483ae6eb18e4c7e0c0660c87ee6cbd51be5374ecbbfef",
+  "updatedAt": "2026-10-30T15:34:43.777Z",
+  "contentHash": "ffed397d2f8e928afa9bbb1a04bf40e22709bb00c27cfda2a1531c912649e019",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-24T19:51:00.050Z",
+      "updatedAt": "2026-10-30T11:41:14.746Z",
       "keyFacts": 0
     }
   ],
@@ -136,6 +136,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Donnez votre avis sur l’Assurance retraite",
+              "date": "2026-10-30",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19121"
+            },
+            {
               "label": "Retraite de réversion : la procédure pour bénéficier du dispositif a été simplifiée",
               "date": "2026-10-23",
               "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19103"
@@ -159,14 +164,9 @@
               "label": "Le téléphone au volant peut entraîner une suspension administrative du permis de conduire",
               "date": "2026-10-08",
               "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19086"
-            },
-            {
-              "label": "Le rapport du jury du concours Cirses est disponible",
-              "date": "2026-08-19",
-              "url": "https://www.cpeg.ch/immobilier/le-rapport-du-jury-du-concours-cirses-est-disponible/"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -208,7 +208,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     },
     "en": {
       "canton": "GE",
@@ -317,6 +317,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Donnez votre avis sur l’Assurance retraite",
+              "date": "2026-10-30",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19121"
+            },
+            {
               "label": "Retraite de réversion : la procédure pour bénéficier du dispositif a été simplifiée",
               "date": "2026-10-23",
               "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19103"
@@ -340,14 +345,9 @@
               "label": "Le téléphone au volant peut entraîner une suspension administrative du permis de conduire",
               "date": "2026-10-08",
               "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19086"
-            },
-            {
-              "label": "Le rapport du jury du concours Cirses est disponible",
-              "date": "2026-08-19",
-              "url": "https://www.cpeg.ch/immobilier/le-rapport-du-jury-du-concours-cirses-est-disponible/"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -389,7 +389,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     },
     "de": {
       "canton": "GE",
@@ -498,6 +498,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Donnez votre avis sur l’Assurance retraite",
+              "date": "2026-10-30",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19121"
+            },
+            {
               "label": "Retraite de réversion : la procédure pour bénéficier du dispositif a été simplifiée",
               "date": "2026-10-23",
               "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19103"
@@ -521,14 +526,9 @@
               "label": "Le téléphone au volant peut entraîner une suspension administrative du permis de conduire",
               "date": "2026-10-08",
               "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19086"
-            },
-            {
-              "label": "Le rapport du jury du concours Cirses est disponible",
-              "date": "2026-08-19",
-              "url": "https://www.cpeg.ch/immobilier/le-rapport-du-jury-du-concours-cirses-est-disponible/"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -570,7 +570,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     },
     "fr": {
       "canton": "GE",
@@ -679,6 +679,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Donnez votre avis sur l’Assurance retraite",
+              "date": "2026-10-30",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19121"
+            },
+            {
               "label": "Retraite de réversion : la procédure pour bénéficier du dispositif a été simplifiée",
               "date": "2026-10-23",
               "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19103"
@@ -702,14 +707,9 @@
               "label": "Le téléphone au volant peut entraîner une suspension administrative du permis de conduire",
               "date": "2026-10-08",
               "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19086"
-            },
-            {
-              "label": "Le rapport du jury du concours Cirses est disponible",
-              "date": "2026-08-19",
-              "url": "https://www.cpeg.ch/immobilier/le-rapport-du-jury-du-concours-cirses-est-disponible/"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -751,7 +751,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     }
   }
 }

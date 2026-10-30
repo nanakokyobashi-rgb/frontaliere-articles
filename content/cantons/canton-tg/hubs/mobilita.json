@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-30T15:09:51.722Z",
-  "contentHash": "01806f226bc620d9618b8fa7d3fcbd94a3e598a7cd089ce1d18505c2ebdd6106",
+  "updatedAt": "2026-10-30T15:34:43.777Z",
+  "contentHash": "03290d65d0b966a56f2744aea55e9aa43bc0721e6b0f3858d3ddb29c1d4b728a",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-29T22:02:50.125Z",
+      "updatedAt": "2026-10-30T11:41:14.746Z",
       "keyFacts": 0
     }
   ],
@@ -103,6 +103,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Botschaft zur Änderung des Gesetzes über Strassen und Wege verabschiedet",
+              "date": "2026-10-30",
+              "url": "https://www.tg.ch/news.html/485/news/80605"
+            },
+            {
               "label": "Einige Änderungen im Bahn- und Busfahrplan für 2027",
               "date": "2026-10-23",
               "url": "https://www.tg.ch/news.html/485/news/80512"
@@ -126,14 +131,9 @@
               "label": "Sperrung der Kantonsstrasse in Kesswil",
               "date": "2026-10-08",
               "url": "https://www.tg.ch/news.html/485/news/80385"
-            },
-            {
-              "label": "Sanierung der Fabrikstrasse in Bischofszell",
-              "date": "2026-10-02",
-              "url": "https://www.tg.ch/news.html/485/news/80333"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -193,7 +193,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     },
     "en": {
       "canton": "TG",
@@ -274,6 +274,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Botschaft zur Änderung des Gesetzes über Strassen und Wege verabschiedet",
+              "date": "2026-10-30",
+              "url": "https://www.tg.ch/news.html/485/news/80605"
+            },
+            {
               "label": "Einige Änderungen im Bahn- und Busfahrplan für 2027",
               "date": "2026-10-23",
               "url": "https://www.tg.ch/news.html/485/news/80512"
@@ -297,14 +302,9 @@
               "label": "Sperrung der Kantonsstrasse in Kesswil",
               "date": "2026-10-08",
               "url": "https://www.tg.ch/news.html/485/news/80385"
-            },
-            {
-              "label": "Sanierung der Fabrikstrasse in Bischofszell",
-              "date": "2026-10-02",
-              "url": "https://www.tg.ch/news.html/485/news/80333"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -364,7 +364,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     },
     "de": {
       "canton": "TG",
@@ -445,6 +445,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Botschaft zur Änderung des Gesetzes über Strassen und Wege verabschiedet",
+              "date": "2026-10-30",
+              "url": "https://www.tg.ch/news.html/485/news/80605"
+            },
+            {
               "label": "Einige Änderungen im Bahn- und Busfahrplan für 2027",
               "date": "2026-10-23",
               "url": "https://www.tg.ch/news.html/485/news/80512"
@@ -468,14 +473,9 @@
               "label": "Sperrung der Kantonsstrasse in Kesswil",
               "date": "2026-10-08",
               "url": "https://www.tg.ch/news.html/485/news/80385"
-            },
-            {
-              "label": "Sanierung der Fabrikstrasse in Bischofszell",
-              "date": "2026-10-02",
-              "url": "https://www.tg.ch/news.html/485/news/80333"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -535,7 +535,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     },
     "fr": {
       "canton": "TG",
@@ -616,6 +616,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Botschaft zur Änderung des Gesetzes über Strassen und Wege verabschiedet",
+              "date": "2026-10-30",
+              "url": "https://www.tg.ch/news.html/485/news/80605"
+            },
+            {
               "label": "Einige Änderungen im Bahn- und Busfahrplan für 2027",
               "date": "2026-10-23",
               "url": "https://www.tg.ch/news.html/485/news/80512"
@@ -639,14 +644,9 @@
               "label": "Sperrung der Kantonsstrasse in Kesswil",
               "date": "2026-10-08",
               "url": "https://www.tg.ch/news.html/485/news/80385"
-            },
-            {
-              "label": "Sanierung der Fabrikstrasse in Bischofszell",
-              "date": "2026-10-02",
-              "url": "https://www.tg.ch/news.html/485/news/80333"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -706,7 +706,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-30T15:09:51.722Z",
-  "contentHash": "dbb05c588e1913b1e5e53cdcead615fbe4aac8b3a0b064fc72f48048132de5a0",
+  "updatedAt": "2026-10-30T15:34:43.777Z",
+  "contentHash": "cc16b656e06af3b5cfb9e17db2901c882643cc02657b6e95e4c04cf73a9d030b",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-29T22:02:50.125Z",
+      "updatedAt": "2026-10-30T11:41:14.746Z",
       "keyFacts": 0
     }
   ],
@@ -168,6 +168,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Neue St. Petersbachbrücke in Obersaxen ist eröffnet",
+              "date": "2026-10-30",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026103001.aspx"
+            },
+            {
               "label": "Historische Stoffe, bleibende Erinnerung: Widmung des Salonwagens As 1141 an Willy Hochstrasser",
               "date": "2026-10-28",
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/rollout-as-1141/"
@@ -191,14 +196,9 @@
               "label": "Bahnersatzbusse auf der Arosalinie",
               "date": "2026-10-19",
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/bahnersatzbusse-arosalinie/"
-            },
-            {
-              "label": "Rechtsrheinische Oberländerstrasse: Nächtliche Sperrungen wegen Instandsetzungs- und Sanierungsarbeiten",
-              "date": "2026-09-24",
-              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026092403.aspx"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -290,7 +290,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     },
     "en": {
       "canton": "GR",
@@ -436,6 +436,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Neue St. Petersbachbrücke in Obersaxen ist eröffnet",
+              "date": "2026-10-30",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026103001.aspx"
+            },
+            {
               "label": "Historische Stoffe, bleibende Erinnerung: Widmung des Salonwagens As 1141 an Willy Hochstrasser",
               "date": "2026-10-28",
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/rollout-as-1141/"
@@ -459,14 +464,9 @@
               "label": "Bahnersatzbusse auf der Arosalinie",
               "date": "2026-10-19",
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/bahnersatzbusse-arosalinie/"
-            },
-            {
-              "label": "Rechtsrheinische Oberländerstrasse: Nächtliche Sperrungen wegen Instandsetzungs- und Sanierungsarbeiten",
-              "date": "2026-09-24",
-              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026092403.aspx"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -557,7 +557,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     },
     "de": {
       "canton": "GR",
@@ -703,6 +703,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Neue St. Petersbachbrücke in Obersaxen ist eröffnet",
+              "date": "2026-10-30",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026103001.aspx"
+            },
+            {
               "label": "Historische Stoffe, bleibende Erinnerung: Widmung des Salonwagens As 1141 an Willy Hochstrasser",
               "date": "2026-10-28",
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/rollout-as-1141/"
@@ -726,14 +731,9 @@
               "label": "Bahnersatzbusse auf der Arosalinie",
               "date": "2026-10-19",
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/bahnersatzbusse-arosalinie/"
-            },
-            {
-              "label": "Rechtsrheinische Oberländerstrasse: Nächtliche Sperrungen wegen Instandsetzungs- und Sanierungsarbeiten",
-              "date": "2026-09-24",
-              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026092403.aspx"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -825,7 +825,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     },
     "fr": {
       "canton": "GR",
@@ -971,6 +971,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Neue St. Petersbachbrücke in Obersaxen ist eröffnet",
+              "date": "2026-10-30",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026103001.aspx"
+            },
+            {
               "label": "Historische Stoffe, bleibende Erinnerung: Widmung des Salonwagens As 1141 an Willy Hochstrasser",
               "date": "2026-10-28",
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/rollout-as-1141/"
@@ -994,14 +999,9 @@
               "label": "Bahnersatzbusse auf der Arosalinie",
               "date": "2026-10-19",
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/bahnersatzbusse-arosalinie/"
-            },
-            {
-              "label": "Rechtsrheinische Oberländerstrasse: Nächtliche Sperrungen wegen Instandsetzungs- und Sanierungsarbeiten",
-              "date": "2026-09-24",
-              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026092403.aspx"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -1093,7 +1093,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T15:34:43.777Z"
     }
   }
 }
