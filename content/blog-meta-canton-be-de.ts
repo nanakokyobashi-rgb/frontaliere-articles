@@ -69,6 +69,9 @@ const blogMetaCantonBeDe: Record<string, string> = {
     'blog.article.riduzione-premi-malattia-2027.title': 'Bern: Mehr Prämienverbilligung für Krankenkassenprämien ab 2027',
     'blog.article.riduzione-premi-malattia-2027.excerpt': 'Der Kanton Bern kündigt ab 2027 mehr Prämienverbilligung für Krankenkassenprämien an, ohne Beträge oder Prozentsätze zu nennen.',
     'blog.article.riduzione-premi-malattia-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.aumento-soglie-reddito-2027.title': 'Anhebung der Einkommensgrenzen für die Prämienverbilligung ab 2027',
+    'blog.article.aumento-soglie-reddito-2027.excerpt': 'Ab dem 1. Januar 2027 steigen die Einkommensgrenzen; rund 19.000 Personen werden anspruchsberechtigt, mit einem voraussichtlichen Anteil von 25,35%.',
+    'blog.article.aumento-soglie-reddito-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonBeDe;

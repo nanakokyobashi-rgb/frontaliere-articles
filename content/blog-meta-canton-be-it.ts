@@ -69,6 +69,9 @@ const blogMetaCantonBeIt: Record<string, string> = {
     'blog.article.riduzione-premi-malattia-2027.title': 'Berna: più sussidi ai premi delle casse malati dal 2027',
     'blog.article.riduzione-premi-malattia-2027.excerpt': 'Il Canton Berna annuncia più sussidi per la riduzione dei premi delle casse malati dal 2027, senza indicare importi o percentuali.',
     'blog.article.riduzione-premi-malattia-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.aumento-soglie-reddito-2027.title': 'Aumento soglie reddito per riduzione premi a partire dal 2027',
+    'blog.article.aumento-soglie-reddito-2027.excerpt': 'Dal 1° gennaio 2027 salgono le soglie di reddito; circa 19.000 persone diventano aventi diritto, con una quota prevista del 25,35%.',
+    'blog.article.aumento-soglie-reddito-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonBeIt;

@@ -69,6 +69,9 @@ const blogMetaCantonBeFr: Record<string, string> = {
     'blog.article.riduzione-premi-malattia-2027.title': 'Berne : plus de subsides aux primes-maladie dès 2027',
     'blog.article.riduzione-premi-malattia-2027.excerpt': 'Le canton de Berne annonce davantage de subsides pour la réduction des primes des caisses-maladie à partir de 2027, sans indiquer de montants ni de pourcentages.',
     'blog.article.riduzione-premi-malattia-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.aumento-soglie-reddito-2027.title': 'Augmentation des seuils de revenu pour la réduction des primes à partir de 2027',
+    'blog.article.aumento-soglie-reddito-2027.excerpt': 'À partir du 1er janvier 2027, les seuils de revenu augmentent ; environ 19.000 personnes deviennent ayants droit, avec un taux prévu de 25,35%.',
+    'blog.article.aumento-soglie-reddito-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonBeFr;

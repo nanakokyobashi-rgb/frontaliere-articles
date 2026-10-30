@@ -69,6 +69,9 @@ const blogMetaCantonBeEn: Record<string, string> = {
     'blog.article.riduzione-premi-malattia-2027.title': 'Bern: more subsidies for health insurance premiums from 2027',
     'blog.article.riduzione-premi-malattia-2027.excerpt': 'The Canton of Bern announces more subsidies to reduce health insurance premiums from 2027, without specifying amounts or percentages.',
     'blog.article.riduzione-premi-malattia-2027.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.aumento-soglie-reddito-2027.title': 'Increase in income thresholds for premium reductions starting in 2027',
+    'blog.article.aumento-soglie-reddito-2027.excerpt': 'From January 1, 2027, income thresholds increase; approximately 19.000 people become eligible, with an expected share of 25,35%.',
+    'blog.article.aumento-soglie-reddito-2027.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonBeEn;

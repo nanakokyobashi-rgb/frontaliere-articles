@@ -25,6 +25,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'ramsei-taglio-sicurezza-strada': { it: 'ramsei-taglio-sicurezza-strada', en: 'ramsei-safety-logging-road', de: 'ramsei-sicherheitsholzerei-strasse', fr: 'ramsei-abattage-securite-route' },
  'credito-volksschule-breitfeld': { it: 'credito-volksschule-breitfeld', en: 'breitfeld-volksschule-credit', de: 'volksschule-breitfeld-kredit', fr: 'credit-volksschule-breitfeld' },
  'riduzione-premi-malattia-2027': { it: 'riduzione-premi-malattia-2027', en: 'health-premium-subsidies-2027', de: 'praemienverbilligung-krankenkassen-2027', fr: 'aides-primes-maladie-2027' },
+ 'aumento-soglie-reddito-2027': { it: 'aumento-soglie-reddito-2027', en: 'income-threshold-increase-2027', de: 'einkommensschwellen-erhoehung-2027', fr: 'augmentation-seuils-revenu-2027' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
