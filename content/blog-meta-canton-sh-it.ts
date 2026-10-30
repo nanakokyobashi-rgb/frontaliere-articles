@@ -81,6 +81,9 @@ const blogMetaCantonShIt: Record<string, string> = {
     'blog.article.competenze-finanziarie-sciaffusa.title': 'Sciaffusa aggiorna le competenze finanziarie dal 2027',
     'blog.article.competenze-finanziarie-sciaffusa.excerpt': 'Dal 1° gennaio 2027 il Governo potrà autorizzare spese una tantum fino a CHF 200\'000; il Parlamento cantonale fino a CHF 1,5 milioni.',
     'blog.article.competenze-finanziarie-sciaffusa.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.schaffhausen-pharma-medtech-circolar.title': 'Centro di competenza per pharma e medtech a Sciaffusa',
+    'blog.article.schaffhausen-pharma-medtech-circolar.excerpt': 'Il progetto be circular a Neuhausen am Rheinfall mira alla circolarità in pharma e medtech, sostenuto dal Cantone con massimo CHF 630\'000 in tre anni.',
+    'blog.article.schaffhausen-pharma-medtech-circolar.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonShIt;

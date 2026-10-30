@@ -1021,6 +1021,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-schaffhausen-pharma-medtech-circolar': {
+    title: 'Centro di competenza per pharma e medtech a Sciaffusa',
+    description: 'Il progetto be circular a Neuhausen am Rheinfall mira alla circolarità in pharma e medtech, sostenuto dal Cantone con massimo CHF 630\'000 in tre anni.',
+    keywords: 'frontalieri, ticino, svizzera, italia, centro, competenza, pharma, medtech',
+    ogTitle: 'Centro di competenza per pharma e medtech a Sciaffusa',
+    ogDescription: 'Il progetto be circular a Neuhausen am Rheinfall mira alla circolarità in pharma e medtech, sostenuto dal Cantone con massimo CHF 630\'000 in tre anni.',
+    canonicalPath: '/articoli-sciaffusa/schaffhausen-pharma-medtech-circolar/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Centro di competenza per pharma e medtech a Sciaffusa",
+      "description": "Il progetto be circular a Neuhausen am Rheinfall mira alla circolarità in pharma e medtech, sostenuto dal Cantone con massimo CHF 630'000 in tre anni.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-schaffhausen-pharma-medtech-circolar.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-30T18:48:28+00:00",
+      "dateModified": "2026-10-30T18:48:28+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-sciaffusa/schaffhausen-pharma-medtech-circolar/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

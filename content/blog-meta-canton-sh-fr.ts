@@ -81,6 +81,9 @@ const blogMetaCantonShFr: Record<string, string> = {
     'blog.article.competenze-finanziarie-sciaffusa.title': 'Schaffhouse actualise les compétences financières à partir de 2027',
     'blog.article.competenze-finanziarie-sciaffusa.excerpt': 'À partir du 1er janvier 2027, le Gouvernement pourra autoriser des dépenses ponctuelles jusqu’à CHF 200\'000 ; le Parlement cantonal jusqu’à CHF 1,5 million.',
     'blog.article.competenze-finanziarie-sciaffusa.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.schaffhausen-pharma-medtech-circolar.title': 'Centre de compétences pour la pharma et les medtech à Schaffhouse',
+    'blog.article.schaffhausen-pharma-medtech-circolar.excerpt': 'Le projet be circular à Neuhausen am Rheinfall vise la circularité dans la pharma et les medtech, soutenu par le Canton à hauteur de CHF 630\'000 au maximum sur trois ans.',
+    'blog.article.schaffhausen-pharma-medtech-circolar.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonShFr;

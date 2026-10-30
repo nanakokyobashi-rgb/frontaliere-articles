@@ -81,6 +81,9 @@ const blogMetaCantonShDe: Record<string, string> = {
     'blog.article.competenze-finanziarie-sciaffusa.title': 'Schaffhausen passt die Finanzkompetenzen ab 2027 an',
     'blog.article.competenze-finanziarie-sciaffusa.excerpt': 'Ab dem 1. Januar 2027 kann die Regierung einmalige Ausgaben bis zu CHF 200\'000 bewilligen; das Kantonsparlament bis zu CHF 1,5 Millionen.',
     'blog.article.competenze-finanziarie-sciaffusa.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.schaffhausen-pharma-medtech-circolar.title': 'Kompetenzzentrum für Pharma und Medtech in Schaffhausen',
+    'blog.article.schaffhausen-pharma-medtech-circolar.excerpt': 'Das Projekt be circular in Neuhausen am Rheinfall zielt auf Kreislaufwirtschaft in Pharma und Medtech ab und wird vom Kanton mit maximal CHF 630\'000 über drei Jahre unterstützt.',
+    'blog.article.schaffhausen-pharma-medtech-circolar.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonShDe;
