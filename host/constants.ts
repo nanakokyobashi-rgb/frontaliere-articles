@@ -161,7 +161,7 @@ const initialDocumentGuard = JSON.parse(readFileSync(new NodeURL('./third-party-
 if (typeof initialDocumentGuard?.content !== 'string' || !initialDocumentGuard.content || createHash('sha256').update(initialDocumentGuard.content).digest('hex') !== initialDocumentGuard.sha256) {
  throw new Error('Transported initial privacy guard hash mismatch');
 }
-export const PARTNERIZE_TAG_SNIPPET = `<script>${initialDocumentGuard.content}</script><script defer src="/assets/partnerize-tag-525f7efe490b.js"></script>`;
+export const PARTNERIZE_TAG_SNIPPET = `<script>${initialDocumentGuard.content}</script><script defer src="/assets/partnerize-tag-798af2ba8d3e.js"></script>`;
 
 /**
  * Google AdSense loader snippet. Included in every statically-generated page
@@ -190,7 +190,7 @@ export const PARTNERIZE_TAG_SNIPPET = `<script>${initialDocumentGuard.content}</
  */
 export const ADSENSE_CLIENT_ID = 'ca-pub-8628054934855353';
 
-export const ADSENSE_LOADER_FILENAME = 'adsense-loader-1833493670a2.js';
+export const ADSENSE_LOADER_FILENAME = 'adsense-loader-a753d4908b1c.js';
 
 export const ADSENSE_LAZY_LOADER = `<script defer src="/assets/${ADSENSE_LOADER_FILENAME}"></script>`;
 
