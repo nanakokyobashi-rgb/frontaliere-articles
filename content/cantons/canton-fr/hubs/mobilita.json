@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-30T15:09:51.722Z",
-  "contentHash": "c1d04fac39f6d5dbcae077e066ca2dae3bc5e24ab96c5723b8804ac7d02b5a08",
+  "updatedAt": "2026-10-30T17:25:22.503Z",
+  "contentHash": "a44a168445626514ede3a80205cb81f7b56a40b9e5c3758533a5fc8f842e3146",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-29T22:02:50.125Z",
+      "updatedAt": "2026-10-30T11:41:14.746Z",
       "keyFacts": 0
     }
   ],
@@ -27,12 +27,12 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "21",
+          "value": "15",
           "note": "segnalazioni aggiornate: 30 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "6",
+          "value": "5",
           "note": "segnalazioni aggiornate: 30 ottobre 2026"
         }
       ],
@@ -43,40 +43,10 @@
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
             {
-              "label": "Rue du Russon, Vuadens Situazione: chiusa cantiere Causa: lavori di manutenzione Limitazione del traffico: nuova viabilità",
-              "value": "Chiusura",
-              "detail": "fine prevista: 30 ottobre 2026",
-              "date": "2026-04-07T12:18:00.000Z"
-            },
-            {
-              "label": "Route d'Onnens, Neyruz in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
-              "value": "Chiusura",
-              "detail": "fine prevista: 30 ottobre 2026",
-              "date": "2026-07-30T09:34:00.000Z"
-            },
-            {
               "label": "Petites-Rames, Fribourg in tutte le direzioni Situazione: chiusa",
               "value": "Chiusura",
               "detail": "fine prevista: 4 dicembre 2026",
               "date": "2026-09-07T09:03:00.000Z"
-            },
-            {
-              "label": "Route de Morat, Fribourg in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
-              "value": "Chiusura",
-              "detail": "fine prevista: 30 ottobre 2026",
-              "date": "2026-09-21T12:35:00.000Z"
-            },
-            {
-              "label": "Route de la Verrerie 27, Saint-Martin (FR) <-> Route de la Verrerie 140, Fiaugères Situazione: divieto di transito Causa: lavori di costruzione",
-              "value": "Chiusura",
-              "detail": "fine prevista: 30 ottobre 2026",
-              "date": "2026-09-23T09:32:00.000Z"
-            },
-            {
-              "label": "Rue du Progrès, Fribourg in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
-              "value": "Chiusura",
-              "detail": "fine prevista: 30 ottobre 2026",
-              "date": "2026-09-24T06:39:00.000Z"
             },
             {
               "label": "Ettiwil, St. Ursen in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
@@ -89,6 +59,36 @@
               "value": "Chiusura",
               "detail": "fine prevista: 30 novembre 2026",
               "date": "2026-10-08T10:45:00.000Z"
+            },
+            {
+              "label": "Route de Bel-Air, Marly in tutte le direzioni Situazione: chiusa Causa: lavori di manutenzione",
+              "value": "Chiusura",
+              "detail": "fine prevista: 12 dicembre 2026",
+              "date": "2026-10-12T16:35:00.000Z"
+            },
+            {
+              "label": "Altavilla, Murten in tutte le direzioni Situazione: chiusa Causa: lavori di manutenzione",
+              "value": "Chiusura",
+              "detail": "fine prevista: 6 novembre 2026",
+              "date": "2026-10-15T05:00:00.000Z"
+            },
+            {
+              "label": "A12 Fribourg -> Vevey tra Svincolo autostradale Fribourg Sud E Svincolo autostradale Matran Situazione: chiusa cantiere Causa: lavori di costruzione",
+              "value": "Chiusura",
+              "detail": "fine prevista: 3 novembre 2026",
+              "date": "2026-10-15T06:41:00.000Z"
+            },
+            {
+              "label": "A1 Yverdon -> Morat Svincolo autostradale Morat Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 1.0 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.5",
+              "value": "Chiusura",
+              "detail": "fine prevista: 31 ottobre 2026",
+              "date": "2026-10-21T12:54:00.000Z"
+            },
+            {
+              "label": "Route des Chapelettes, Chapelle in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
+              "value": "Chiusura",
+              "detail": "fine prevista: 6 novembre 2026",
+              "date": "2026-10-21T14:24:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
@@ -130,7 +130,7 @@
               "url": "https://www.ville-fribourg.ch/actualites/restriction-de-circulation-route-de-champriond-du-12-octobre-au-27-novembre-2026"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -194,7 +194,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T17:25:22.503Z"
     },
     "en": {
       "canton": "FR",
@@ -204,12 +204,12 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "21",
+          "value": "15",
           "note": "reports as of 30 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "6",
+          "value": "5",
           "note": "reports as of 30 October 2026"
         }
       ],
@@ -220,40 +220,10 @@
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
             {
-              "label": "Rue du Russon, Vuadens Situazione: chiusa cantiere Causa: lavori di manutenzione Limitazione del traffico: nuova viabilità",
-              "value": "Closure",
-              "detail": "until 30 October 2026",
-              "date": "2026-04-07T12:18:00.000Z"
-            },
-            {
-              "label": "Route d'Onnens, Neyruz in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
-              "value": "Closure",
-              "detail": "until 30 October 2026",
-              "date": "2026-07-30T09:34:00.000Z"
-            },
-            {
               "label": "Petites-Rames, Fribourg in tutte le direzioni Situazione: chiusa",
               "value": "Closure",
               "detail": "until 4 December 2026",
               "date": "2026-09-07T09:03:00.000Z"
-            },
-            {
-              "label": "Route de Morat, Fribourg in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
-              "value": "Closure",
-              "detail": "until 30 October 2026",
-              "date": "2026-09-21T12:35:00.000Z"
-            },
-            {
-              "label": "Route de la Verrerie 27, Saint-Martin (FR) <-> Route de la Verrerie 140, Fiaugères Situazione: divieto di transito Causa: lavori di costruzione",
-              "value": "Closure",
-              "detail": "until 30 October 2026",
-              "date": "2026-09-23T09:32:00.000Z"
-            },
-            {
-              "label": "Rue du Progrès, Fribourg in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
-              "value": "Closure",
-              "detail": "until 30 October 2026",
-              "date": "2026-09-24T06:39:00.000Z"
             },
             {
               "label": "Ettiwil, St. Ursen in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
@@ -266,6 +236,36 @@
               "value": "Closure",
               "detail": "until 30 November 2026",
               "date": "2026-10-08T10:45:00.000Z"
+            },
+            {
+              "label": "Route de Bel-Air, Marly in tutte le direzioni Situazione: chiusa Causa: lavori di manutenzione",
+              "value": "Closure",
+              "detail": "until 12 December 2026",
+              "date": "2026-10-12T16:35:00.000Z"
+            },
+            {
+              "label": "Altavilla, Murten in tutte le direzioni Situazione: chiusa Causa: lavori di manutenzione",
+              "value": "Closure",
+              "detail": "until 6 November 2026",
+              "date": "2026-10-15T05:00:00.000Z"
+            },
+            {
+              "label": "A12 Fribourg -> Vevey tra Svincolo autostradale Fribourg Sud E Svincolo autostradale Matran Situazione: chiusa cantiere Causa: lavori di costruzione",
+              "value": "Closure",
+              "detail": "until 3 November 2026",
+              "date": "2026-10-15T06:41:00.000Z"
+            },
+            {
+              "label": "A1 Yverdon -> Morat Svincolo autostradale Morat Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 1.0 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.5",
+              "value": "Closure",
+              "detail": "until 31 October 2026",
+              "date": "2026-10-21T12:54:00.000Z"
+            },
+            {
+              "label": "Route des Chapelettes, Chapelle in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
+              "value": "Closure",
+              "detail": "until 6 November 2026",
+              "date": "2026-10-21T14:24:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
@@ -307,7 +307,7 @@
               "url": "https://www.ville-fribourg.ch/actualites/restriction-de-circulation-route-de-champriond-du-12-octobre-au-27-novembre-2026"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -371,7 +371,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T17:25:22.503Z"
     },
     "de": {
       "canton": "FR",
@@ -381,12 +381,12 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "21",
+          "value": "15",
           "note": "Meldungen vom 30. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "6",
+          "value": "5",
           "note": "Meldungen vom 30. Oktober 2026"
         }
       ],
@@ -397,40 +397,10 @@
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
             {
-              "label": "Rue du Russon, Vuadens Sachlage: Strecke gesperrt Baustelle Ursache: Unterhaltsarbeiten Verkehrsführung: veränderte Verkehrsführung",
-              "value": "Sperrung",
-              "detail": "bis 30. Oktober 2026",
-              "date": "2026-04-07T12:18:00.000Z"
-            },
-            {
-              "label": "Route d'Onnens, Neyruz in beide Richtungen Sachlage: gesperrt für Durchgangsverkehr Ursache: Bauarbeiten",
-              "value": "Sperrung",
-              "detail": "bis 30. Oktober 2026",
-              "date": "2026-07-30T09:34:00.000Z"
-            },
-            {
               "label": "Petites-Rames, Fribourg in beide Richtungen Sachlage: Strecke gesperrt",
               "value": "Sperrung",
               "detail": "bis 4. Dezember 2026",
               "date": "2026-09-07T09:03:00.000Z"
-            },
-            {
-              "label": "Route de Morat, Fribourg in beide Richtungen Sachlage: gesperrt für Durchgangsverkehr Ursache: Bauarbeiten",
-              "value": "Sperrung",
-              "detail": "bis 30. Oktober 2026",
-              "date": "2026-09-21T12:35:00.000Z"
-            },
-            {
-              "label": "Route de la Verrerie 27, Saint-Martin (FR) <-> Route de la Verrerie 140, Fiaugères Sachlage: gesperrt für Durchgangsverkehr Ursache: Bauarbeiten",
-              "value": "Sperrung",
-              "detail": "bis 30. Oktober 2026",
-              "date": "2026-09-23T09:32:00.000Z"
-            },
-            {
-              "label": "Rue du Progrès, Fribourg in beide Richtungen Sachlage: gesperrt für Durchgangsverkehr Ursache: Bauarbeiten",
-              "value": "Sperrung",
-              "detail": "bis 30. Oktober 2026",
-              "date": "2026-09-24T06:39:00.000Z"
             },
             {
               "label": "Ettiwil, St. Ursen in beide Richtungen Sachlage: gesperrt für Durchgangsverkehr Ursache: Bauarbeiten",
@@ -443,6 +413,36 @@
               "value": "Sperrung",
               "detail": "bis 30. November 2026",
               "date": "2026-10-08T10:45:00.000Z"
+            },
+            {
+              "label": "Route de Bel-Air, Marly in beide Richtungen Sachlage: Strecke gesperrt Ursache: Unterhaltsarbeiten",
+              "value": "Sperrung",
+              "detail": "bis 12. Dezember 2026",
+              "date": "2026-10-12T16:35:00.000Z"
+            },
+            {
+              "label": "Altavilla, Murten in beide Richtungen Sachlage: Strecke gesperrt Ursache: Unterhaltsarbeiten",
+              "value": "Sperrung",
+              "detail": "bis 6. November 2026",
+              "date": "2026-10-15T05:00:00.000Z"
+            },
+            {
+              "label": "A12 Freiburg -> Vevey zwischen Anschluss Freiburg-Süd und Anschluss Matran Sachlage: Strecke gesperrt Baustelle Ursache: Bauarbeiten",
+              "value": "Sperrung",
+              "detail": "bis 3. November 2026",
+              "date": "2026-10-15T06:41:00.000Z"
+            },
+            {
+              "label": "A1 Yverdon -> Murten Anschluss Murten Sachlage: Einfahrt gesperrt Baustelle, Länge [km] 1.0 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.5",
+              "value": "Sperrung",
+              "detail": "bis 31. Oktober 2026",
+              "date": "2026-10-21T12:54:00.000Z"
+            },
+            {
+              "label": "Route des Chapelettes, Chapelle in beide Richtungen Sachlage: gesperrt für Durchgangsverkehr Ursache: Bauarbeiten",
+              "value": "Sperrung",
+              "detail": "bis 6. November 2026",
+              "date": "2026-10-21T14:24:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
@@ -484,7 +484,7 @@
               "url": "https://www.ville-fribourg.ch/actualites/restriction-de-circulation-route-de-champriond-du-12-octobre-au-27-novembre-2026"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -548,7 +548,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T17:25:22.503Z"
     },
     "fr": {
       "canton": "FR",
@@ -558,12 +558,12 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "21",
+          "value": "15",
           "note": "signalements au 30 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "6",
+          "value": "5",
           "note": "signalements au 30 octobre 2026"
         }
       ],
@@ -574,40 +574,10 @@
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
             {
-              "label": "Rue du Russon, Vuadens Situation: fermé travaux Raison: travaux de maintenance Gestion du trafic: nouveau plan de circulation",
-              "value": "Fermeture",
-              "detail": "jusqu’au 30 octobre 2026",
-              "date": "2026-04-07T12:18:00.000Z"
-            },
-            {
-              "label": "Route d'Onnens, Neyruz dans les deux sens Situation: circulation de transit interdite Raison: travaux de construction",
-              "value": "Fermeture",
-              "detail": "jusqu’au 30 octobre 2026",
-              "date": "2026-07-30T09:34:00.000Z"
-            },
-            {
               "label": "Petites-Rames, Fribourg dans les deux sens Situation: fermé",
               "value": "Fermeture",
               "detail": "jusqu’au 4 décembre 2026",
               "date": "2026-09-07T09:03:00.000Z"
-            },
-            {
-              "label": "Route de Morat, Fribourg dans les deux sens Situation: circulation de transit interdite Raison: travaux de construction",
-              "value": "Fermeture",
-              "detail": "jusqu’au 30 octobre 2026",
-              "date": "2026-09-21T12:35:00.000Z"
-            },
-            {
-              "label": "Route de la Verrerie 27, Saint-Martin (FR) <-> Route de la Verrerie 140, Fiaugères Situation: circulation de transit interdite Raison: travaux de construction",
-              "value": "Fermeture",
-              "detail": "jusqu’au 30 octobre 2026",
-              "date": "2026-09-23T09:32:00.000Z"
-            },
-            {
-              "label": "Rue du Progrès, Fribourg dans les deux sens Situation: circulation de transit interdite Raison: travaux de construction",
-              "value": "Fermeture",
-              "detail": "jusqu’au 30 octobre 2026",
-              "date": "2026-09-24T06:39:00.000Z"
             },
             {
               "label": "Ettiwil, St. Ursen dans les deux sens Situation: circulation de transit interdite Raison: travaux de construction",
@@ -620,6 +590,36 @@
               "value": "Fermeture",
               "detail": "jusqu’au 30 novembre 2026",
               "date": "2026-10-08T10:45:00.000Z"
+            },
+            {
+              "label": "Route de Bel-Air, Marly dans les deux sens Situation: fermé Raison: travaux de maintenance",
+              "value": "Fermeture",
+              "detail": "jusqu’au 12 décembre 2026",
+              "date": "2026-10-12T16:35:00.000Z"
+            },
+            {
+              "label": "Altavilla, Murten dans les deux sens Situation: fermé Raison: travaux de maintenance",
+              "value": "Fermeture",
+              "detail": "jusqu’au 6 novembre 2026",
+              "date": "2026-10-15T05:00:00.000Z"
+            },
+            {
+              "label": "A12 Fribourg -> Vevey entre Jonction autoroutière Fribourg-Sud et Jonction autoroutière Matran Situation: fermé travaux Raison: travaux de construction",
+              "value": "Fermeture",
+              "detail": "jusqu’au 3 novembre 2026",
+              "date": "2026-10-15T06:41:00.000Z"
+            },
+            {
+              "label": "A1 Yverdon -> Morat Jonction autoroutière Morat Situation: entrée fermée travaux, longueur [km] 1.0 Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.5",
+              "value": "Fermeture",
+              "detail": "jusqu’au 31 octobre 2026",
+              "date": "2026-10-21T12:54:00.000Z"
+            },
+            {
+              "label": "Route des Chapelettes, Chapelle dans les deux sens Situation: circulation de transit interdite Raison: travaux de construction",
+              "value": "Fermeture",
+              "detail": "jusqu’au 6 novembre 2026",
+              "date": "2026-10-21T14:24:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
@@ -661,7 +661,7 @@
               "url": "https://www.ville-fribourg.ch/actualites/restriction-de-circulation-route-de-champriond-du-12-octobre-au-27-novembre-2026"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -725,7 +725,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T17:25:22.503Z"
     }
   }
 }

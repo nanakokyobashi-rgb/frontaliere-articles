@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-10-30T15:34:43.777Z",
-  "contentHash": "e4b3cdc736da6e4a9a06ad222281bc665cab2683c96cd67ff3d733f49895e812",
+  "updatedAt": "2026-10-30T17:25:22.503Z",
+  "contentHash": "ff121c1b9b6366d521bcd4732c4965b70651312076b05e92beb99d7c54f8c3f8",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -79,11 +79,6 @@
           "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
           "items": [
             {
-              "label": "Amavita Biasca",
-              "detail": "Biasca, Biasca e Valli",
-              "date": "2026-10-23T16:00:00.000Z"
-            },
-            {
               "label": "Farmacia Coop Vitality Viganello",
               "detail": "Viganello, Luganese",
               "date": "2026-10-24T06:00:00.000Z"
@@ -107,6 +102,11 @@
               "label": "Pedrazzetti",
               "detail": "Giubiasco, Bellinzonese",
               "date": "2026-10-30T17:30:00.000Z"
+            },
+            {
+              "label": "Generoso",
+              "detail": "Melano, Mendrisiotto",
+              "date": "2026-10-31T07:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
@@ -295,7 +295,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-10-30T15:34:43.777Z"
+      "updatedAt": "2026-10-30T17:25:22.503Z"
     },
     "en": {
       "canton": "TI",
@@ -342,11 +342,6 @@
           "description": "Upcoming duty shifts published by the canton’s official service.",
           "items": [
             {
-              "label": "Amavita Biasca",
-              "detail": "Biasca, Biasca e Valli",
-              "date": "2026-10-23T16:00:00.000Z"
-            },
-            {
               "label": "Farmacia Coop Vitality Viganello",
               "detail": "Viganello, Luganese",
               "date": "2026-10-24T06:00:00.000Z"
@@ -370,6 +365,11 @@
               "label": "Pedrazzetti",
               "detail": "Giubiasco, Bellinzonese",
               "date": "2026-10-30T17:30:00.000Z"
+            },
+            {
+              "label": "Generoso",
+              "detail": "Melano, Mendrisiotto",
+              "date": "2026-10-31T07:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
@@ -553,7 +553,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-10-30T15:34:43.777Z"
+      "updatedAt": "2026-10-30T17:25:22.503Z"
     },
     "de": {
       "canton": "TI",
@@ -600,11 +600,6 @@
           "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
           "items": [
             {
-              "label": "Amavita Biasca",
-              "detail": "Biasca, Biasca e Valli",
-              "date": "2026-10-23T16:00:00.000Z"
-            },
-            {
               "label": "Farmacia Coop Vitality Viganello",
               "detail": "Viganello, Luganese",
               "date": "2026-10-24T06:00:00.000Z"
@@ -628,6 +623,11 @@
               "label": "Pedrazzetti",
               "detail": "Giubiasco, Bellinzonese",
               "date": "2026-10-30T17:30:00.000Z"
+            },
+            {
+              "label": "Generoso",
+              "detail": "Melano, Mendrisiotto",
+              "date": "2026-10-31T07:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
@@ -811,7 +811,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-10-30T15:34:43.777Z"
+      "updatedAt": "2026-10-30T17:25:22.503Z"
     },
     "fr": {
       "canton": "TI",
@@ -858,11 +858,6 @@
           "description": "Prochaines gardes publiées par le service officiel du canton.",
           "items": [
             {
-              "label": "Amavita Biasca",
-              "detail": "Biasca, Biasca e Valli",
-              "date": "2026-10-23T16:00:00.000Z"
-            },
-            {
               "label": "Farmacia Coop Vitality Viganello",
               "detail": "Viganello, Luganese",
               "date": "2026-10-24T06:00:00.000Z"
@@ -886,6 +881,11 @@
               "label": "Pedrazzetti",
               "detail": "Giubiasco, Bellinzonese",
               "date": "2026-10-30T17:30:00.000Z"
+            },
+            {
+              "label": "Generoso",
+              "detail": "Melano, Mendrisiotto",
+              "date": "2026-10-31T07:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
@@ -1066,7 +1066,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-10-30T15:34:43.777Z"
+      "updatedAt": "2026-10-30T17:25:22.503Z"
     }
   }
 }
