@@ -2544,6 +2544,33 @@ function issueStateIsClosed(number) {
   }
 }
 
+/**
+ * Isolate the expected fail-closed result of one issue close from the batch.
+ *
+ * `resolveGithubIssueByNumber()` throws with `persisted: false` when GitHub
+ * accepted (or may have accepted) the close but the immediate post-condition
+ * read did not confirm it. That is retryable work for the next pass, not a
+ * reason to abandon every other issue in this reconciliation. Unexpected
+ * errors still propagate so programming bugs and broken inputs remain fatal.
+ */
+export function resolveRecoveredIssue(
+  issueNumber,
+  context = {},
+  resolver = resolveGithubIssueByNumber,
+) {
+  try {
+    return resolver(issueNumber, context);
+  } catch (error) {
+    if (error?.persisted !== false) throw error;
+    return {
+      number: issueNumber,
+      persisted: false,
+      skipped: 'close-unconfirmed',
+      message: error instanceof Error ? error.message : String(error),
+    };
+  }
+}
+
 function notifyHistoryUnavailable(issue, kind, comments) {
   const scope = failureRunScope(issue, comments || []);
   const note = historyUnavailableNote({ workflow: issue.workflow, kind, branch: scope.branch });
@@ -2973,7 +3000,7 @@ function main() {
       // Query recovery with the unwrapped workflow, but re-read and close only the exact
       // cause-specific Transport title (including its manual blocker key).
       const expectedTitle = failureIssueTitleForRecovery(it);
-      const result = resolveGithubIssueByNumber(it.number, {
+      const result = resolveRecoveredIssue(it.number, {
         expectedTitle, workflow: it.workflow, runUrl, preface,
       });
       if (result === null) {
@@ -2983,7 +3010,11 @@ function main() {
         continue;
       }
       if (result.persisted !== true) {
-        console.log(`  #${it.number} NOT CLOSED (${result.skipped}) — decided on "${it.title}", changed before the write`);
+        if (result.skipped === 'close-unconfirmed') {
+          console.error(`  #${it.number} close non confermata (${result.message || 'post-condition non verificata'}) — keep open, retry next pass`);
+        } else {
+          console.log(`  #${it.number} NOT CLOSED (${result.skipped}) — decided on "${it.title}", changed before the write`);
+        }
         skipped++;
         continue;
       }
