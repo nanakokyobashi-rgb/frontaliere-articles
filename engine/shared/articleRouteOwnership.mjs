@@ -392,6 +392,13 @@ function skipUnsupportedExpression(text, offset) {
       afterMemberAccess = false;
       continue;
     }
+    if (text.startsWith('...', index)) {
+      index += 3;
+      canStartRegex = true;
+      pendingControlHeader = false;
+      afterMemberAccess = false;
+      continue;
+    }
     if (char === '?' && text[index + 1] === '.') {
       index += 2;
       canStartRegex = false;

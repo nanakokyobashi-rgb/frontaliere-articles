@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/rq9rumbcaofx": {
-    "articleId": "dff-progressione-freddo-imposte-2027",
-    "ts": "2026-09-23T01:17:40.104Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1952117/auto-benzina-ogni-chilometri-costi-costa-prezzi-rendono": {
     "articleId": "costi-auto-elettrica-benzina",
     "ts": "2026-09-23T11:31:38.661Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/attualita/1959781/svizzera-cambiamenti-rischi-strumenti-clima": {
     "articleId": "svizzera-rischi-climatici-strumenti",
     "ts": "2026-10-29T22:36:56.417Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/svizzera/svizzera/1959387/modernizzatori-vs-conservatori-atto-ii-dello-scontro-sull-imposizione-fiscale-delle-coppie": {
+    "articleId": "scontro-fiscale-coppie-atto",
+    "ts": "2026-10-30T07:58:23.187Z",
     "keyForm": 2
   }
 }
