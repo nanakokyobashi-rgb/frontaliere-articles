@@ -4,13 +4,18 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "servizi",
-  "updatedAt": "2026-10-30T18:12:42.839Z",
-  "contentHash": "216b4ddd7cf0e19e69f7d689181b6cd04aebdcacfebc51a79cd1c0e7a05bf0f9",
+  "updatedAt": "2026-10-30T19:31:58.244Z",
+  "contentHash": "cb6c3492f0074aed715a8f61fb0155ed5c00722b71191ac12be27ca73dd23148",
   "blocks": [
     {
       "id": "premi-cassa-malati",
       "updatedAt": "2026-10-25T09:11:35.438Z",
       "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-30T15:13:06.562Z",
+      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
@@ -52,6 +57,20 @@
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-25T09:11:35.438Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Lausanne",
+              "value": "10 °C",
+              "detail": "oggi da 8 a 10 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-30T15:13:06.562Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -169,7 +188,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-30T18:12:42.839Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     },
     "en": {
       "canton": "VD",
@@ -204,6 +223,20 @@
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-25T09:11:35.438Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Lausanne",
+              "value": "10 °C",
+              "detail": "today from 8 to 10 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-30T15:13:06.562Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -317,7 +350,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-30T18:12:42.839Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     },
     "de": {
       "canton": "VD",
@@ -352,6 +385,20 @@
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-25T09:11:35.438Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Lausanne",
+              "value": "10 °C",
+              "detail": "heute 8 bis 10 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-30T15:13:06.562Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -465,7 +512,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-30T18:12:42.839Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     },
     "fr": {
       "canton": "VD",
@@ -500,6 +547,20 @@
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-25T09:11:35.438Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Lausanne",
+              "value": "10 °C",
+              "detail": "aujourd’hui de 8 à 10 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-30T15:13:06.562Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -609,7 +670,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-30T18:12:42.839Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     }
   }
 }

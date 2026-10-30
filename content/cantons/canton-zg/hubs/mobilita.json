@@ -4,17 +4,17 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-30T15:09:51.722Z",
-  "contentHash": "68a383747ae3b6ea2d2f1aad18d500956a9dbb531634ebb906aa412a54ce3b99",
+  "updatedAt": "2026-10-30T19:31:58.244Z",
+  "contentHash": "74ac3c40e6f440bc7db12f39312965b8ddf95f8bb2918479f5a332ccbe76cbe4",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-30T06:32:11.488Z",
+      "updatedAt": "2026-10-30T13:39:45.803Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-29T22:02:50.125Z",
+      "updatedAt": "2026-10-30T11:41:14.746Z",
       "keyFacts": 0
     }
   ],
@@ -32,7 +32,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "6",
+          "value": "7",
           "note": "segnalazioni aggiornate: 30 ottobre 2026"
         }
       ],
@@ -83,10 +83,16 @@
               "value": "Cantiere",
               "detail": "fine prevista: 16 novembre 2026",
               "date": "2026-10-30T06:30:00.000Z"
+            },
+            {
+              "label": "A4 Zürich -> Brunnen tra Raccordo autostradale Diramazione Blegi E Svincolo autostradale Cham Situazione: problemi di traffico cantiere, lunghezza [km] 0.6 Limitazione del traffico: nuova viabilità…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 16 novembre 2026",
+              "date": "2026-10-30T19:30:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-30T06:32:11.488Z"
+          "updatedAt": "2026-10-30T13:39:45.803Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -109,7 +115,7 @@
               "url": "https://zg.ch/de/news/2026/September/Gemeinsam-gegen-Food-Waste"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -173,7 +179,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     },
     "en": {
       "canton": "ZG",
@@ -188,7 +194,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "6",
+          "value": "7",
           "note": "reports as of 30 October 2026"
         }
       ],
@@ -239,10 +245,16 @@
               "value": "Roadworks",
               "detail": "until 16 November 2026",
               "date": "2026-10-30T06:30:00.000Z"
+            },
+            {
+              "label": "A4 Zürich -> Brunnen tra Raccordo autostradale Diramazione Blegi E Svincolo autostradale Cham Situazione: problemi di traffico cantiere, lunghezza [km] 0.6 Limitazione del traffico: nuova viabilità…",
+              "value": "Roadworks",
+              "detail": "until 16 November 2026",
+              "date": "2026-10-30T19:30:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-30T06:32:11.488Z"
+          "updatedAt": "2026-10-30T13:39:45.803Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -265,7 +277,7 @@
               "url": "https://zg.ch/de/news/2026/September/Gemeinsam-gegen-Food-Waste"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -329,7 +341,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     },
     "de": {
       "canton": "ZG",
@@ -344,7 +356,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "6",
+          "value": "7",
           "note": "Meldungen vom 30. Oktober 2026"
         }
       ],
@@ -395,10 +407,16 @@
               "value": "Baustelle",
               "detail": "bis 16. November 2026",
               "date": "2026-10-30T06:30:00.000Z"
+            },
+            {
+              "label": "A4 Zürich -> Brunnen zwischen Autobahndreieck Verzweigung Blegi und Anschluss Cham Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.6 Verkehrsführung: veränderte Verkehrsführung Zusatz 1…",
+              "value": "Baustelle",
+              "detail": "bis 16. November 2026",
+              "date": "2026-10-30T19:30:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-30T06:32:11.488Z"
+          "updatedAt": "2026-10-30T13:39:45.803Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -421,7 +439,7 @@
               "url": "https://zg.ch/de/news/2026/September/Gemeinsam-gegen-Food-Waste"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -485,7 +503,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     },
     "fr": {
       "canton": "ZG",
@@ -500,7 +518,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "6",
+          "value": "7",
           "note": "signalements au 30 octobre 2026"
         }
       ],
@@ -551,10 +569,16 @@
               "value": "Chantier",
               "detail": "jusqu’au 16 novembre 2026",
               "date": "2026-10-30T06:30:00.000Z"
+            },
+            {
+              "label": "A4 Zurich -> Brunnen entre Echangeur Echangeur de Blegi et Jonction autoroutière Cham Situation: trafic perturbé travaux, longueur [km] 0.6 Gestion du trafic: nouveau plan de circulation Complément…",
+              "value": "Chantier",
+              "detail": "jusqu’au 16 novembre 2026",
+              "date": "2026-10-30T19:30:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-30T06:32:11.488Z"
+          "updatedAt": "2026-10-30T13:39:45.803Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -577,7 +601,7 @@
               "url": "https://zg.ch/de/news/2026/September/Gemeinsam-gegen-Food-Waste"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -641,7 +665,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "eventi",
-  "updatedAt": "2026-10-30T06:23:49.454Z",
-  "contentHash": "d4af81addfe86cfcb3433ea6324b637376384a57ea87fc5f1b45a6f88be1e5f5",
+  "updatedAt": "2026-10-30T19:31:58.244Z",
+  "contentHash": "f0bd645312f3c0300af9f7af1be80309ad553f60a879b5ac63fe639564cf1c6c",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-29T21:23:37.654Z",
+      "updatedAt": "2026-10-30T13:23:17.161Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "151",
+          "value": "162",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
+              "label": "Corpi in prestito",
+              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
+              "date": "2026-10-30",
+              "url": "https://www.tio.ch/agenda/day/20261030/58243"
+            },
+            {
+              "label": "Fede e guerra - Mostra fotografica",
+              "detail": "Centro pastorale S. Giuseppe, Lugano",
+              "date": "2026-10-30",
+              "url": "https://www.tio.ch/agenda/day/20261030/64618"
+            },
+            {
+              "label": "Fra Roberto tra le mura",
+              "detail": "Sasso Corbaro, Bellinzona",
+              "date": "2026-10-30",
+              "url": "https://www.tio.ch/agenda/day/20261030/61525"
+            },
+            {
+              "label": "Fuori di Zucca, il villaggio delle zucche",
+              "detail": "Fuori di Zucca, Savosa",
+              "date": "2026-10-30",
+              "url": "https://www.tio.ch/agenda/day/20261030/64302"
+            },
+            {
+              "label": "Impressioni - Mostra di pittura di Sisko Naerhi",
+              "detail": "Residenza Rivabella, Magliaso",
+              "date": "2026-10-30",
+              "url": "https://www.tio.ch/agenda/day/20261030/64414"
+            },
+            {
+              "label": "Ivo Soldini - Progetto Castel Grande",
+              "detail": "Castel Grande, Bellinzona",
+              "date": "2026-10-30",
+              "url": "https://www.tio.ch/agenda/day/20261030/62822"
+            },
+            {
+              "label": "Jannis Kounellis: Io sono un pittore",
+              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
+              "date": "2026-10-30",
+              "url": "https://www.tio.ch/agenda/day/20261030/63037"
+            },
+            {
               "label": "Mirabiblia",
               "detail": "Biblioteca cantonale, Bellinzona",
               "date": "2026-10-30",
               "url": "https://www.tio.ch/agenda/day/20261030/63536"
             },
             {
-              "label": "Floating Notes Festival",
-              "detail": "Bellinzona",
+              "label": "Pierrette Bloch. Il gesto di scrivere",
+              "detail": "Museo Villa dei Cedri, Bellinzona",
               "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/floating-notes-festival/"
+              "url": "https://www.tio.ch/agenda/day/20261030/64342"
             },
             {
-              "label": "L’incredibile storia di Winter il delfino",
-              "detail": "Cinema GranRex, Locarno",
+              "label": "PoPoetic",
+              "detail": "Centro ricreativo Il Pettirosso, Savosa",
               "date": "2026-10-30",
-              "url": "https://www.tio.ch/agenda/day/20261030/64407"
-            },
-            {
-              "label": "L'épistolière",
-              "detail": "Centro Elisarion, Minusio",
-              "date": "2026-10-30",
-              "url": "https://www.tio.ch/agenda/day/20261030/63970"
-            },
-            {
-              "label": "BLA Biennale - Le latitudini dell'arte",
-              "detail": "Villa Santa Lucia, Lugano",
-              "date": "2026-10-30",
-              "url": "https://www.tio.ch/agenda/day/20261030/63945"
-            },
-            {
-              "label": "Dentro la musica",
-              "detail": "Sala Musica nel Mendrisiotto, Mendrisio",
-              "date": "2026-10-30",
-              "url": "https://www.tio.ch/agenda/day/20261030/64654"
-            },
-            {
-              "label": "Ticino. Sguardi laterali",
-              "detail": "SpazioReale, Bellinzona",
-              "date": "2026-10-30",
-              "url": "https://www.tio.ch/agenda/day/20261030/64633"
-            },
-            {
-              "label": "Notte delle streghe al Castello Visconteo",
-              "detail": "Castello Visconteo, Locarno",
-              "date": "2026-10-30",
-              "url": "https://www.tio.ch/agenda/day/20261030/64432"
-            },
-            {
-              "label": "Prima del mito — Sergei Mkrtichian, violino solo",
-              "detail": "Basilica del Sacro Cuore, Lugano",
-              "date": "2026-10-30",
-              "url": "https://www.tio.ch/agenda/day/20261030/64334"
-            },
-            {
-              "label": "Floating Notes Festival - Day 1",
-              "detail": "Teatro Sociale, Bellinzona",
-              "date": "2026-10-30",
-              "url": "https://www.tio.ch/agenda/day/20261030/64572"
+              "url": "https://www.tio.ch/agenda/day/20261030/63593"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ticino/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         }
       ],
       "curatedArticles": [
@@ -163,7 +163,7 @@
           "url": "/articoli-frontaliere/eventi-weekend-ticino/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     },
     "en": {
       "canton": "TI",
@@ -173,7 +173,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "151",
+          "value": "162",
           "note": "from the site’s events calendar"
         }
       ],
@@ -184,69 +184,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
+              "label": "Borrowed bodies",
+              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
+              "date": "2026-10-30",
+              "url": "https://www.tio.ch/agenda/day/20261030/58243"
+            },
+            {
+              "label": "Faith and War - Photo Exhibit",
+              "detail": "Centro pastorale S. Giuseppe, Lugano",
+              "date": "2026-10-30",
+              "url": "https://www.tio.ch/agenda/day/20261030/64618"
+            },
+            {
+              "label": "Fra Roberto fra le mura",
+              "detail": "Sasso Corbaro, Bellinzona",
+              "date": "2026-10-30",
+              "url": "https://www.tio.ch/agenda/day/20261030/61525"
+            },
+            {
+              "label": "Outside of Zucca, the village of pumpkins",
+              "detail": "Fuori di Zucca, Savosa",
+              "date": "2026-10-30",
+              "url": "https://www.tio.ch/agenda/day/20261030/64302"
+            },
+            {
+              "label": "Impressions - Painting exhibition by Sisko Naerhi",
+              "detail": "Residenza Rivabella, Magliaso",
+              "date": "2026-10-30",
+              "url": "https://www.tio.ch/agenda/day/20261030/64414"
+            },
+            {
+              "label": "Ivo Soldini - Castel Grande Project",
+              "detail": "Castel Grande, Bellinzona",
+              "date": "2026-10-30",
+              "url": "https://www.tio.ch/agenda/day/20261030/62822"
+            },
+            {
+              "label": "Jannis Kounellis: I am a painter",
+              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
+              "date": "2026-10-30",
+              "url": "https://www.tio.ch/agenda/day/20261030/63037"
+            },
+            {
               "label": "Mirabiblia",
               "detail": "Biblioteca cantonale, Bellinzona",
               "date": "2026-10-30",
               "url": "https://www.tio.ch/agenda/day/20261030/63536"
             },
             {
-              "label": "Floating Notes Festival",
-              "detail": "Bellinzona",
+              "label": "Pierrette Bloch. The gesture of writing",
+              "detail": "Museo Villa dei Cedri, Bellinzona",
               "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/floating-notes-festival/"
+              "url": "https://www.tio.ch/agenda/day/20261030/64342"
             },
             {
-              "label": "The Incredible Story of Winter the Dolphin",
-              "detail": "Cinema GranRex, Locarno",
+              "label": "PoPoetic",
+              "detail": "Centro ricreativo Il Pettirosso, Savosa",
               "date": "2026-10-30",
-              "url": "https://www.tio.ch/agenda/day/20261030/64407"
-            },
-            {
-              "label": "L 'épistolière",
-              "detail": "Centro Elisarion, Minusio",
-              "date": "2026-10-30",
-              "url": "https://www.tio.ch/agenda/day/20261030/63970"
-            },
-            {
-              "label": "BLA Biennale - The latitudes of art",
-              "detail": "Villa Santa Lucia, Lugano",
-              "date": "2026-10-30",
-              "url": "https://www.tio.ch/agenda/day/20261030/63945"
-            },
-            {
-              "label": "Your Music Learn",
-              "detail": "Sala Musica nel Mendrisiotto, Mendrisio",
-              "date": "2026-10-30",
-              "url": "https://www.tio.ch/agenda/day/20261030/64654"
-            },
-            {
-              "label": "Ticino. Side glances",
-              "detail": "SpazioReale, Bellinzona",
-              "date": "2026-10-30",
-              "url": "https://www.tio.ch/agenda/day/20261030/64633"
-            },
-            {
-              "label": "Night of the Witches at Visconti Castle",
-              "detail": "Castello Visconteo, Locarno",
-              "date": "2026-10-30",
-              "url": "https://www.tio.ch/agenda/day/20261030/64432"
-            },
-            {
-              "label": "Before the myth — Sergei Mkrtichian, solo violin",
-              "detail": "Basilica del Sacro Cuore, Lugano",
-              "date": "2026-10-30",
-              "url": "https://www.tio.ch/agenda/day/20261030/64334"
-            },
-            {
-              "label": "Floating Notes Festival-fromy",
-              "detail": "Teatro Sociale, Bellinzona",
-              "date": "2026-10-30",
-              "url": "https://www.tio.ch/agenda/day/20261030/64572"
+              "url": "https://www.tio.ch/agenda/day/20261030/63593"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/ticino/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         }
       ],
       "curatedArticles": [
@@ -314,7 +314,7 @@
           "url": "/en/cross-border-articles/weekend-events-ticino/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     },
     "de": {
       "canton": "TI",
@@ -324,7 +324,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "151",
+          "value": "162",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -335,69 +335,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
+              "label": "Leihkörper",
+              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
+              "date": "2026-10-30",
+              "url": "https://www.tio.ch/agenda/day/20261030/58243"
+            },
+            {
+              "label": "Glaube und Krieg - Fotoausstellung",
+              "detail": "Centro pastorale S. Giuseppe, Lugano",
+              "date": "2026-10-30",
+              "url": "https://www.tio.ch/agenda/day/20261030/64618"
+            },
+            {
+              "label": "Fra Roberto zwischen den Mauern",
+              "detail": "Sasso Corbaro, Bellinzona",
+              "date": "2026-10-30",
+              "url": "https://www.tio.ch/agenda/day/20261030/61525"
+            },
+            {
+              "label": "Außerhalb von Zucca, dem Dorf der Kürbisse",
+              "detail": "Fuori di Zucca, Savosa",
+              "date": "2026-10-30",
+              "url": "https://www.tio.ch/agenda/day/20261030/64302"
+            },
+            {
+              "label": "Impressionen - Gemäldeausstellung von Sisko Naerhi",
+              "detail": "Residenza Rivabella, Magliaso",
+              "date": "2026-10-30",
+              "url": "https://www.tio.ch/agenda/day/20261030/64414"
+            },
+            {
+              "label": "Ivo Soldini - Projekt Castel Grande",
+              "detail": "Castel Grande, Bellinzona",
+              "date": "2026-10-30",
+              "url": "https://www.tio.ch/agenda/day/20261030/62822"
+            },
+            {
+              "label": "Jannis Kounellis: Ich bin Maler",
+              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
+              "date": "2026-10-30",
+              "url": "https://www.tio.ch/agenda/day/20261030/63037"
+            },
+            {
               "label": "Mirabiblia",
               "detail": "Biblioteca cantonale, Bellinzona",
               "date": "2026-10-30",
               "url": "https://www.tio.ch/agenda/day/20261030/63536"
             },
             {
-              "label": "Floating Notes Festival",
-              "detail": "Bellinzona",
+              "label": "Pierrette Bloch. Die Geste des Schreibens",
+              "detail": "Museo Villa dei Cedri, Bellinzona",
               "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/floating-notes-festival/"
+              "url": "https://www.tio.ch/agenda/day/20261030/64342"
             },
             {
-              "label": "Die unglaubliche Geschichte von Winter dem Delfin",
-              "detail": "Cinema GranRex, Locarno",
+              "label": "PoPoetisch",
+              "detail": "Centro ricreativo Il Pettirosso, Savosa",
               "date": "2026-10-30",
-              "url": "https://www.tio.ch/agenda/day/20261030/64407"
-            },
-            {
-              "label": "L 'épistolière",
-              "detail": "Centro Elisarion, Minusio",
-              "date": "2026-10-30",
-              "url": "https://www.tio.ch/agenda/day/20261030/63970"
-            },
-            {
-              "label": "BLA Biennale - Die Breitengrade der Kunst",
-              "detail": "Villa Santa Lucia, Lugano",
-              "date": "2026-10-30",
-              "url": "https://www.tio.ch/agenda/day/20261030/63945"
-            },
-            {
-              "label": "Innerhalb der Musik",
-              "detail": "Sala Musica nel Mendrisiotto, Mendrisio",
-              "date": "2026-10-30",
-              "url": "https://www.tio.ch/agenda/day/20261030/64654"
-            },
-            {
-              "label": "Tessin. Seitliche Blicke",
-              "detail": "SpazioReale, Bellinzona",
-              "date": "2026-10-30",
-              "url": "https://www.tio.ch/agenda/day/20261030/64633"
-            },
-            {
-              "label": "Hexennacht im Castello Visconteo",
-              "detail": "Castello Visconteo, Locarno",
-              "date": "2026-10-30",
-              "url": "https://www.tio.ch/agenda/day/20261030/64432"
-            },
-            {
-              "label": "Vor dem Mythos — Sergei Mkrtichian, Violine solo",
-              "detail": "Basilica del Sacro Cuore, Lugano",
-              "date": "2026-10-30",
-              "url": "https://www.tio.ch/agenda/day/20261030/64334"
-            },
-            {
-              "label": "Floating Notes Festival - Tag 1",
-              "detail": "Teatro Sociale, Bellinzona",
-              "date": "2026-10-30",
-              "url": "https://www.tio.ch/agenda/day/20261030/64572"
+              "url": "https://www.tio.ch/agenda/day/20261030/63593"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/tessin/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         }
       ],
       "curatedArticles": [
@@ -465,7 +465,7 @@
           "url": "/de/grenzgaenger-artikel/wochenend-veranstaltungen-tessin/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     },
     "fr": {
       "canton": "TI",
@@ -475,7 +475,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "151",
+          "value": "162",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -486,69 +486,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
+              "label": "Corps prêtés",
+              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
+              "date": "2026-10-30",
+              "url": "https://www.tio.ch/agenda/day/20261030/58243"
+            },
+            {
+              "label": "Foi et guerre - Exposition photographique",
+              "detail": "Centro pastorale S. Giuseppe, Lugano",
+              "date": "2026-10-30",
+              "url": "https://www.tio.ch/agenda/day/20261030/64618"
+            },
+            {
+              "label": "Frère Roberto entre les murs",
+              "detail": "Sasso Corbaro, Bellinzona",
+              "date": "2026-10-30",
+              "url": "https://www.tio.ch/agenda/day/20261030/61525"
+            },
+            {
+              "label": "En dehors de Zucca, le village des citrouilles",
+              "detail": "Fuori di Zucca, Savosa",
+              "date": "2026-10-30",
+              "url": "https://www.tio.ch/agenda/day/20261030/64302"
+            },
+            {
+              "label": "Impressions - Exposition de peinture de Sisko Naerhi",
+              "detail": "Residenza Rivabella, Magliaso",
+              "date": "2026-10-30",
+              "url": "https://www.tio.ch/agenda/day/20261030/64414"
+            },
+            {
+              "label": "Ivo Soldini - Projet Castel Grande",
+              "detail": "Castel Grande, Bellinzona",
+              "date": "2026-10-30",
+              "url": "https://www.tio.ch/agenda/day/20261030/62822"
+            },
+            {
+              "label": "Jannis Kounellis : Je suis un peintre",
+              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
+              "date": "2026-10-30",
+              "url": "https://www.tio.ch/agenda/day/20261030/63037"
+            },
+            {
               "label": "Mirabiblia",
               "detail": "Biblioteca cantonale, Bellinzona",
               "date": "2026-10-30",
               "url": "https://www.tio.ch/agenda/day/20261030/63536"
             },
             {
-              "label": "Floating Notes Festival",
-              "detail": "Bellinzona",
+              "label": "Pierrette Bloch. Le geste d'écrire",
+              "detail": "Museo Villa dei Cedri, Bellinzona",
               "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/floating-notes-festival/"
+              "url": "https://www.tio.ch/agenda/day/20261030/64342"
             },
             {
-              "label": "L’incroyable histoire de Winter le dauphin",
-              "detail": "Cinema GranRex, Locarno",
+              "label": "PoPoétique",
+              "detail": "Centro ricreativo Il Pettirosso, Savosa",
               "date": "2026-10-30",
-              "url": "https://www.tio.ch/agenda/day/20261030/64407"
-            },
-            {
-              "label": "L’épistolière",
-              "detail": "Centro Elisarion, Minusio",
-              "date": "2026-10-30",
-              "url": "https://www.tio.ch/agenda/day/20261030/63970"
-            },
-            {
-              "label": "BLA Biennale - Les latitudes de l'art",
-              "detail": "Villa Santa Lucia, Lugano",
-              "date": "2026-10-30",
-              "url": "https://www.tio.ch/agenda/day/20261030/63945"
-            },
-            {
-              "label": "À l'intérieur de la musique",
-              "detail": "Sala Musica nel Mendrisiotto, Mendrisio",
-              "date": "2026-10-30",
-              "url": "https://www.tio.ch/agenda/day/20261030/64654"
-            },
-            {
-              "label": "Tessin. Regards latéraux",
-              "detail": "SpazioReale, Bellinzona",
-              "date": "2026-10-30",
-              "url": "https://www.tio.ch/agenda/day/20261030/64633"
-            },
-            {
-              "label": "Nuit des sorcières au Château Visconti",
-              "detail": "Castello Visconteo, Locarno",
-              "date": "2026-10-30",
-              "url": "https://www.tio.ch/agenda/day/20261030/64432"
-            },
-            {
-              "label": "Avant le mythe — Sergei Mkrtichian, violon seul",
-              "detail": "Basilica del Sacro Cuore, Lugano",
-              "date": "2026-10-30",
-              "url": "https://www.tio.ch/agenda/day/20261030/64334"
-            },
-            {
-              "label": "Flottant Notes Festival - Jour 1",
-              "detail": "Teatro Sociale, Bellinzona",
-              "date": "2026-10-30",
-              "url": "https://www.tio.ch/agenda/day/20261030/64572"
+              "url": "https://www.tio.ch/agenda/day/20261030/63593"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/tessin/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         }
       ],
       "curatedArticles": [
@@ -616,7 +616,7 @@
           "url": "/fr/articles-frontalier/evenements-week-end-tessin/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     }
   }
 }

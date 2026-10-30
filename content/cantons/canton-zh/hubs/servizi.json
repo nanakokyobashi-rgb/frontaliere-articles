@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "servizi",
-  "updatedAt": "2026-10-30T18:12:42.839Z",
-  "contentHash": "4578cb6c50d8eb4c07cb8b7d1c564aaf73bf9bae0822f7fa15682d55b9be9a7d",
+  "updatedAt": "2026-10-30T19:31:58.244Z",
+  "contentHash": "a0ae70615d22be19ea68d70d3a91daa482b768f3ad28254bdf4ab0f4f0d4e67e",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,13 +14,18 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-30T11:01:15.952Z",
+      "updatedAt": "2026-10-30T13:31:51.710Z",
       "keyFacts": 0
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-30T05:51:01.110Z",
+      "updatedAt": "2026-10-30T12:52:32.857Z",
       "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-30T15:13:06.562Z",
+      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
@@ -111,7 +116,7 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-30T11:01:15.952Z"
+          "updatedAt": "2026-10-30T13:31:51.710Z"
         },
         {
           "id": "aste-targhe",
@@ -119,18 +124,18 @@
           "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
           "items": [
             {
+              "label": "ZH597",
+              "value": "6400 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-04T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43695"
+            },
+            {
               "label": "ZH8050",
               "value": "6000 CHF",
               "detail": "offerta attuale",
               "date": "2026-11-04T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43696"
-            },
-            {
-              "label": "ZH597",
-              "value": "5600 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-11-04T18:00:00.000Z",
-              "url": "https://www.auktion.stva.zh.ch/de/auction/43695"
             },
             {
               "label": "ZH10553",
@@ -142,7 +147,21 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-30T05:51:01.110Z"
+          "updatedAt": "2026-10-30T12:52:32.857Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "10 °C",
+              "detail": "oggi da 5 a 11 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-30T15:13:06.562Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -260,7 +279,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-30T18:12:42.839Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     },
     "en": {
       "canton": "ZH",
@@ -344,7 +363,7 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-30T11:01:15.952Z"
+          "updatedAt": "2026-10-30T13:31:51.710Z"
         },
         {
           "id": "aste-targhe",
@@ -352,18 +371,18 @@
           "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
           "items": [
             {
+              "label": "ZH597",
+              "value": "6,400 CHF",
+              "detail": "current bid",
+              "date": "2026-11-04T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43695"
+            },
+            {
               "label": "ZH8050",
               "value": "6,000 CHF",
               "detail": "current bid",
               "date": "2026-11-04T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43696"
-            },
-            {
-              "label": "ZH597",
-              "value": "5,600 CHF",
-              "detail": "current bid",
-              "date": "2026-11-04T18:00:00.000Z",
-              "url": "https://www.auktion.stva.zh.ch/de/auction/43695"
             },
             {
               "label": "ZH10553",
@@ -375,7 +394,21 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-30T05:51:01.110Z"
+          "updatedAt": "2026-10-30T12:52:32.857Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "10 °C",
+              "detail": "today from 5 to 11 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-30T15:13:06.562Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -489,7 +522,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-30T18:12:42.839Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     },
     "de": {
       "canton": "ZH",
@@ -573,7 +606,7 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-30T11:01:15.952Z"
+          "updatedAt": "2026-10-30T13:31:51.710Z"
         },
         {
           "id": "aste-targhe",
@@ -581,18 +614,18 @@
           "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
           "items": [
             {
+              "label": "ZH597",
+              "value": "6’400 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-04T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43695"
+            },
+            {
               "label": "ZH8050",
               "value": "6’000 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-11-04T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43696"
-            },
-            {
-              "label": "ZH597",
-              "value": "5’600 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-11-04T18:00:00.000Z",
-              "url": "https://www.auktion.stva.zh.ch/de/auction/43695"
             },
             {
               "label": "ZH10553",
@@ -604,7 +637,21 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-30T05:51:01.110Z"
+          "updatedAt": "2026-10-30T12:52:32.857Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "10 °C",
+              "detail": "heute 5 bis 11 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-30T15:13:06.562Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -718,7 +765,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-30T18:12:42.839Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     },
     "fr": {
       "canton": "ZH",
@@ -802,7 +849,7 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-30T11:01:15.952Z"
+          "updatedAt": "2026-10-30T13:31:51.710Z"
         },
         {
           "id": "aste-targhe",
@@ -810,18 +857,18 @@
           "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
           "items": [
             {
+              "label": "ZH597",
+              "value": "6 400 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-04T18:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43695"
+            },
+            {
               "label": "ZH8050",
               "value": "6 000 CHF",
               "detail": "offre actuelle",
               "date": "2026-11-04T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43696"
-            },
-            {
-              "label": "ZH597",
-              "value": "5 600 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-11-04T18:00:00.000Z",
-              "url": "https://www.auktion.stva.zh.ch/de/auction/43695"
             },
             {
               "label": "ZH10553",
@@ -833,7 +880,21 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-30T05:51:01.110Z"
+          "updatedAt": "2026-10-30T12:52:32.857Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "10 °C",
+              "detail": "aujourd’hui de 5 à 11 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-30T15:13:06.562Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -943,7 +1004,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-30T18:12:42.839Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     }
   }
 }

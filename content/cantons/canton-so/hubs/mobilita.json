@@ -4,17 +4,17 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "mobilita",
-  "updatedAt": "2026-10-30T15:09:51.722Z",
-  "contentHash": "246996394bce52c7d3ba071ed67c93c2d964d2824451767f312c7ab569c0a058",
+  "updatedAt": "2026-10-30T19:31:58.244Z",
+  "contentHash": "037b7618020640240c81ca2c254b881629e8f98f888efd110ee5513be701c66b",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-30T06:32:11.488Z",
+      "updatedAt": "2026-10-30T13:39:45.803Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-29T22:02:50.125Z",
+      "updatedAt": "2026-10-30T11:41:14.746Z",
       "keyFacts": 0
     }
   ],
@@ -32,7 +32,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "11",
+          "value": "13",
           "note": "segnalazioni aggiornate: 30 ottobre 2026"
         }
       ],
@@ -79,9 +79,9 @@
               "date": "2026-10-22T06:00:00.000Z"
             },
             {
-              "label": "A1 Zürich -> Bern tra Svincolo autostradale Oensingen E Raccordo autostradale Diramazione Luterbach Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "label": "A1 Bern -> Zürich tra Svincolo autostradale Kriegstetten E Raccordo autostradale Diramazione Härkingen Situazione: colonna Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 15",
               "value": "Traffico",
-              "date": "2026-10-30T05:28:00.000Z"
+              "date": "2026-10-30T12:26:00.000Z"
             },
             {
               "label": "Balsthal <-> Laufen tra Luogo Oberbeinwil E Passo Passwang Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette",
@@ -91,7 +91,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-30T06:32:11.488Z"
+          "updatedAt": "2026-10-30T13:39:45.803Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -114,7 +114,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -160,7 +160,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     },
     "en": {
       "canton": "SO",
@@ -175,7 +175,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "11",
+          "value": "13",
           "note": "reports as of 30 October 2026"
         }
       ],
@@ -222,9 +222,9 @@
               "date": "2026-10-22T06:00:00.000Z"
             },
             {
-              "label": "A1 Zürich -> Bern tra Svincolo autostradale Oensingen E Raccordo autostradale Diramazione Luterbach Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "label": "A1 Bern -> Zürich tra Svincolo autostradale Kriegstetten E Raccordo autostradale Diramazione Härkingen Situazione: colonna Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 15",
               "value": "Traffic",
-              "date": "2026-10-30T05:28:00.000Z"
+              "date": "2026-10-30T12:26:00.000Z"
             },
             {
               "label": "Balsthal <-> Laufen tra Luogo Oberbeinwil E Passo Passwang Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette",
@@ -234,7 +234,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-30T06:32:11.488Z"
+          "updatedAt": "2026-10-30T13:39:45.803Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -257,7 +257,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -302,7 +302,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     },
     "de": {
       "canton": "SO",
@@ -317,7 +317,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "11",
+          "value": "13",
           "note": "Meldungen vom 30. Oktober 2026"
         }
       ],
@@ -364,9 +364,9 @@
               "date": "2026-10-22T06:00:00.000Z"
             },
             {
-              "label": "A1 Zürich -> Bern zwischen Anschluss Oensingen und Autobahndreieck Verzweigung Luterbach Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
+              "label": "A1 Bern -> Zürich zwischen Anschluss Kriegstetten und Autobahndreieck Verzweigung Härkingen Sachlage: Stau Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 15",
               "value": "Verkehr",
-              "date": "2026-10-30T05:28:00.000Z"
+              "date": "2026-10-30T12:26:00.000Z"
             },
             {
               "label": "Balsthal <-> Laufen zwischen Ortschaft Oberbeinwil und Pass Passwang Sachlage: Verkehrsbehinderung Baustelle Verkehrsführung: Fahrbahnverengung",
@@ -376,7 +376,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-30T06:32:11.488Z"
+          "updatedAt": "2026-10-30T13:39:45.803Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -399,7 +399,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -444,7 +444,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     },
     "fr": {
       "canton": "SO",
@@ -459,7 +459,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "11",
+          "value": "13",
           "note": "signalements au 30 octobre 2026"
         }
       ],
@@ -506,9 +506,9 @@
               "date": "2026-10-22T06:00:00.000Z"
             },
             {
-              "label": "A1 Zurich -> Berne entre Jonction autoroutière Oensingen et Echangeur Echangeur de Luterbach Situation: trafic en accordéon Raison: surcharge de trafic",
+              "label": "A1 Berne -> Zurich entre Jonction autoroutière Kriegstetten et Echangeur Echangeur de Härkingen Situation: bouchon Raison: surcharge de trafic Complément 1: retards Nbre. [min] 15",
               "value": "Trafic",
-              "date": "2026-10-30T05:28:00.000Z"
+              "date": "2026-10-30T12:26:00.000Z"
             },
             {
               "label": "Balsthal <-> Laufon entre Localité Oberbeinwil et Col Passwang Situation: trafic perturbé travaux Gestion du trafic: rétrécissement des voies",
@@ -518,7 +518,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-30T06:32:11.488Z"
+          "updatedAt": "2026-10-30T13:39:45.803Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -541,7 +541,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -587,7 +587,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-30T15:09:51.722Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     }
   }
 }

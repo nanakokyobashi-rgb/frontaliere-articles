@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "servizi",
-  "updatedAt": "2026-10-30T18:12:42.839Z",
-  "contentHash": "6f3154160eed588c23c77efbda8be6f384e03b8657b7731189b900c4eb9aac32",
+  "updatedAt": "2026-10-30T19:31:58.244Z",
+  "contentHash": "cc039752638f9e915337e84430fdff2307dcce36d24fc13c81429f13a8a9fd07",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,8 +14,13 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-30T05:51:01.110Z",
+      "updatedAt": "2026-10-30T12:52:32.857Z",
       "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-30T15:13:06.562Z",
+      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
@@ -39,7 +44,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "10",
-          "note": "offerta mediana 520 CHF"
+          "note": "offerta mediana 530 CHF"
         }
       ],
       "dataBlocks": [
@@ -97,7 +102,21 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-30T05:51:01.110Z"
+          "updatedAt": "2026-10-30T12:52:32.857Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "St. Gallen",
+              "value": "8 °C",
+              "detail": "oggi da 4 a 8 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-30T15:13:06.562Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -215,7 +234,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-30T18:12:42.839Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     },
     "en": {
       "canton": "SG",
@@ -232,7 +251,7 @@
         {
           "label": "Plate auctions running",
           "value": "10",
-          "note": "typical bid 520 CHF"
+          "note": "typical bid 530 CHF"
         }
       ],
       "dataBlocks": [
@@ -290,7 +309,21 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-30T05:51:01.110Z"
+          "updatedAt": "2026-10-30T12:52:32.857Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "St. Gallen",
+              "value": "8 °C",
+              "detail": "today from 4 to 8 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-30T15:13:06.562Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -404,7 +437,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-30T18:12:42.839Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     },
     "de": {
       "canton": "SG",
@@ -421,7 +454,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "10",
-          "note": "mittleres Gebot 520 CHF"
+          "note": "mittleres Gebot 530 CHF"
         }
       ],
       "dataBlocks": [
@@ -479,7 +512,21 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-30T05:51:01.110Z"
+          "updatedAt": "2026-10-30T12:52:32.857Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "St. Gallen",
+              "value": "8 °C",
+              "detail": "heute 4 bis 8 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-30T15:13:06.562Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -593,7 +640,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-30T18:12:42.839Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     },
     "fr": {
       "canton": "SG",
@@ -610,7 +657,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "10",
-          "note": "offre centrale 520 CHF"
+          "note": "offre centrale 530 CHF"
         }
       ],
       "dataBlocks": [
@@ -668,7 +715,21 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-30T05:51:01.110Z"
+          "updatedAt": "2026-10-30T12:52:32.857Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "St. Gallen",
+              "value": "8 °C",
+              "detail": "aujourd’hui de 4 à 8 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-30T15:13:06.562Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -778,7 +839,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-30T18:12:42.839Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     }
   }
 }

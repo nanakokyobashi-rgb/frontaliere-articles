@@ -4,17 +4,17 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "eventi",
-  "updatedAt": "2026-10-30T06:23:49.454Z",
-  "contentHash": "b03cff17aed5bc75df1776c4d865b0a8f26531d58080c52d0101364df7d47965",
+  "updatedAt": "2026-10-30T19:31:58.244Z",
+  "contentHash": "342e8cc061777f67de4962e37cce4c9435e3df6064571065a4f91a92c7b9a37f",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-29T21:23:37.654Z",
+      "updatedAt": "2026-10-30T13:23:17.161Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-29T22:02:50.125Z",
+      "updatedAt": "2026-10-30T11:41:14.746Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "28",
+          "value": "29",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -86,21 +86,21 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
             },
             {
+              "label": "Halloween Trains",
+              "detail": "St-Sulpice NE, Val-de-Travers",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/halloween-trains/"
+            },
+            {
               "label": "Les contes du château hanté (14h00)",
               "detail": "A bijou at the gateway to the Val-de-Ruz - Valangin, Val-de-Ruz",
               "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/les-contes-du-chateau-hante-14h00/"
-            },
-            {
-              "label": "VITRAUX SYMBOLIQUES",
-              "detail": "Couvet, Val-de-Travers",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vitraux-symboliques/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/neuchatel/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -128,7 +128,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -150,7 +150,7 @@
           "url": "/eventi/neuchatel/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     },
     "en": {
       "canton": "NE",
@@ -160,7 +160,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "28",
+          "value": "29",
           "note": "from the site’s events calendar"
         }
       ],
@@ -219,21 +219,21 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
             },
             {
+              "label": "Halloween Trains",
+              "detail": "St-Sulpice NE, Val-de-Travers",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/halloween-trains/"
+            },
+            {
               "label": "Les contes du château hanté (14h00)",
               "detail": "A bijou at the gateway to the Val-de-Ruz - Valangin, Val-de-Ruz",
               "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/les-contes-du-chateau-hante-14h00/"
-            },
-            {
-              "label": "VITRAUX SYMBOLIQUES",
-              "detail": "Couvet, Val-de-Travers",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vitraux-symboliques/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/neuchatel/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -261,7 +261,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -283,7 +283,7 @@
           "url": "/en/events/neuchatel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     },
     "de": {
       "canton": "NE",
@@ -293,7 +293,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "28",
+          "value": "29",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -352,21 +352,21 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
             },
             {
+              "label": "Halloween-Züge",
+              "detail": "St-Sulpice NE, Val-de-Travers",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/halloween-trains/"
+            },
+            {
               "label": "Les contes du château hanté (14h00)",
               "detail": "A bijou at the gateway to the Val-de-Ruz - Valangin, Val-de-Ruz",
               "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/les-contes-du-chateau-hante-14h00/"
-            },
-            {
-              "label": "VITRAUX SYMBOLIQUES",
-              "detail": "Couvet, Val-de-Travers",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vitraux-symboliques/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/neuenburg/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -394,7 +394,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -416,7 +416,7 @@
           "url": "/de/veranstaltungen/neuenburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     },
     "fr": {
       "canton": "NE",
@@ -426,7 +426,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "28",
+          "value": "29",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -485,21 +485,21 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
             },
             {
+              "label": "Trains Halloween",
+              "detail": "St-Sulpice NE, Val-de-Travers",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/halloween-trains/"
+            },
+            {
               "label": "Les contes du château hanté (14h00)",
               "detail": "A bijou at the gateway to the Val-de-Ruz - Valangin, Val-de-Ruz",
               "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/les-contes-du-chateau-hante-14h00/"
-            },
-            {
-              "label": "VITRAUX SYMBOLIQUES",
-              "detail": "Couvet, Val-de-Travers",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vitraux-symboliques/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/neuchatel/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -527,7 +527,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T11:41:14.746Z"
         }
       ],
       "curatedArticles": [
@@ -549,7 +549,7 @@
           "url": "/fr/evenements/neuchatel/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     }
   }
 }

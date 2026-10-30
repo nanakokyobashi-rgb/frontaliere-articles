@@ -4,12 +4,12 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-30T18:12:42.839Z",
-  "contentHash": "cc25fd90373f2b396a6e6160744a7d393ed6c570e1b7399471d6f9b8de5e48d5",
+  "updatedAt": "2026-10-30T19:31:58.244Z",
+  "contentHash": "78f7bcef2571bfd97f549d1cbfa5603922938e5c5f5c047656af6ba69025a14f",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-30T06:32:11.488Z",
+      "updatedAt": "2026-10-30T13:39:45.803Z",
       "keyFacts": 2
     },
     {
@@ -32,7 +32,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "5",
+          "value": "8",
           "note": "segnalazioni aggiornate: 30 ottobre 2026"
         }
       ],
@@ -92,7 +92,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-30T06:32:11.488Z"
+          "updatedAt": "2026-10-30T13:39:45.803Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -194,7 +194,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-30T18:12:42.839Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     },
     "en": {
       "canton": "FR",
@@ -209,7 +209,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "5",
+          "value": "8",
           "note": "reports as of 30 October 2026"
         }
       ],
@@ -269,7 +269,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-30T06:32:11.488Z"
+          "updatedAt": "2026-10-30T13:39:45.803Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -371,7 +371,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-30T18:12:42.839Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     },
     "de": {
       "canton": "FR",
@@ -386,7 +386,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "5",
+          "value": "8",
           "note": "Meldungen vom 30. Oktober 2026"
         }
       ],
@@ -446,7 +446,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-30T06:32:11.488Z"
+          "updatedAt": "2026-10-30T13:39:45.803Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -548,7 +548,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-30T18:12:42.839Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     },
     "fr": {
       "canton": "FR",
@@ -563,7 +563,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "5",
+          "value": "8",
           "note": "signalements au 30 octobre 2026"
         }
       ],
@@ -623,7 +623,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-30T06:32:11.488Z"
+          "updatedAt": "2026-10-30T13:39:45.803Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -725,7 +725,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-30T18:12:42.839Z"
+      "updatedAt": "2026-10-30T19:31:58.244Z"
     }
   }
 }
