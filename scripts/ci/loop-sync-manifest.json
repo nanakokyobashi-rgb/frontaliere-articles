@@ -4086,17 +4086,17 @@
       "path": "host/constants.ts",
       "sitePath": "build-plugins/constants.ts",
       "mode": "adapted",
-      "reason": "Costanti del sito lette dall'engine via SiteShellContract, estratte per chiusura: adapted per costruzione, non byte-identiche al sorgente completo. scalarFingerprint confronta i 22 scalari authoritative, mentre i test runtime verificano i comportamenti del contratto. Il digest 50cb1eaf… estende il riconoscimento ai crawler Google-InspectionTool e GoogleOther, rimuove anche userinfo e credenziali dalle rappresentazioni URL della telemetria e incorpora il gate GA4 del sito, il budget SERP a 150 caratteri, la canonicalizzazione Organization.sameAs, l'aggiunta del profilo Facebook canonico, il riferimento content-addressed a gtag-init e le due regole contestuali trasportate per Chiasso e concorsi pubblici; la specializzazione editoriale resta in additionalType e il runtime Firebase conserva il match sulla chiave esatta, senza segreti nei fingerprint.",
+      "reason": "Costanti del sito lette dall'engine via SiteShellContract, estratte per chiusura: adapted per costruzione, non byte-identiche al sorgente completo. scalarFingerprint confronta i 22 scalari authoritative, mentre i test runtime verificano i comportamenti del contratto. Il digest 124114fb… trasporta anche i riferimenti Ads/Partnerize content-addressed e il bootstrap sincrono prima di React; estende il riconoscimento ai crawler Google-InspectionTool e GoogleOther, rimuove anche userinfo e credenziali dalle rappresentazioni URL della telemetria e incorpora il gate GA4 del sito, il budget SERP a 150 caratteri, la canonicalizzazione Organization.sameAs, l'aggiunta del profilo Facebook canonico, il riferimento content-addressed a gtag-init e le due regole contestuali trasportate per Chiasso e concorsi pubblici; la specializzazione editoriale resta in additionalType e il runtime Firebase conserva il match sulla chiave esatta, senza segreti nei fingerprint.",
       "baseline": {
-        "site": "e8e197f21d0e2f7c",
-        "corpus": "6d3d50cbdf29cfea",
-        "alignedAt": "2026-10-29"
+        "site": "ce88748742da46f8",
+        "corpus": "fa890eb93c295a79",
+        "alignedAt": "2026-10-30"
       },
       "scalarFingerprint": {
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
         "corpusPath": "host/shell-contract-fingerprint.json",
         "scalarFields": 22,
-        "sha256": "50cb1eaf22f6c04e939ee0ff04f403682d917311f324f3b8beb0ce62bcc8f604"
+        "sha256": "124114fb4d1f9eb1259f8d704aaaa23e7d9aa9514fa39269c80fa0908be04a53"
       }
     },
     {
@@ -6736,6 +6736,17 @@
       "baseline": {
         "site": "5fa74b7c7b51ad78",
         "corpus": "5fa74b7c7b51ad78",
+        "alignedAt": "2026-10-30"
+      }
+    },
+    {
+      "path": "host/third-party-shell-assets-fingerprint.json",
+      "sitePath": "tests/third-party-shell-assets-fingerprint.json",
+      "mode": "identical",
+      "reason": "Derived Ads/Partnerize producer and canonical-helper SHA fingerprints bind the transported byte snapshots to the source. Source tests regenerate the projection, host tests verify snapshot hashes and the complete SiteShellContract before publishing.",
+      "baseline": {
+        "site": "fe4eb8f4758c5d58",
+        "corpus": "fe4eb8f4758c5d58",
         "alignedAt": "2026-10-30"
       }
     }

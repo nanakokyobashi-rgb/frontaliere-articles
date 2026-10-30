@@ -145,7 +145,7 @@ export const GTAG_SNIPPET = `<script async crossorigin="anonymous" src="https://
  * Meta' corpus del contratto: il sito lo definisce in
  * `build-plugins/constants.ts` insieme al codice vero
  * (`PARTNERIZE_TAG_CONTENT`), che `staticScriptsPlugin.ts` scrive in
- * `dist/assets/partnerize-tag.js`. Qui serve solo il tag `<script>`, che
+ * `dist/assets/partnerize-tag-<content-hash>.js`. Qui serve solo il tag `<script>`, che
  * DEVE restare byte-identico a quello del sito: il fingerprint scalare del
  * contratto (`host/shell-contract-fingerprint.json` e la entry
  * `scalarFingerprint` di `scripts/ci/loop-sync-manifest.json`) confronta i
@@ -155,7 +155,7 @@ export const GTAG_SNIPPET = `<script async crossorigin="anonymous" src="https://
  * pipeline che gia' rebasa `gtag-init.js`, quindi il file arriva dal deploy
  * del sito senza che questo repo debba emetterlo.
  */
-export const PARTNERIZE_TAG_SNIPPET = `<script defer src="/assets/partnerize-tag.js"></script>`;
+export const PARTNERIZE_TAG_SNIPPET = `<script src="/assets/partnerize-tag-a89366fbc3ed.js"></script>`;
 
 /**
  * Google AdSense loader snippet. Included in every statically-generated page
@@ -184,7 +184,7 @@ export const PARTNERIZE_TAG_SNIPPET = `<script defer src="/assets/partnerize-tag
  */
 export const ADSENSE_CLIENT_ID = 'ca-pub-8628054934855353';
 
-export const ADSENSE_LOADER_FILENAME = 'adsense-loader.js';
+export const ADSENSE_LOADER_FILENAME = 'adsense-loader-c21af7515a16.js';
 
 export const ADSENSE_LAZY_LOADER = `<script defer src="/assets/${ADSENSE_LOADER_FILENAME}"></script>`;
 

@@ -19,6 +19,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
+import vm from 'node:vm';
 import { readFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -312,5 +313,25 @@ test('ogni job che rende pagine carica i secret di Remote Config prima del passo
   const loader = read('generator/scripts/load-rc-env.mjs');
   for (const name of ['CF_API_TOKEN', 'R2_ACCESS_KEY_ID']) {
     assert.match(loader, new RegExp(String.raw`^\s*${name}:\s*\[`, 'm'), `${name} non e' nella mappa RC_TO_ENV`);
+  }
+});
+
+// The implicit producer/helper dependency must invalidate the transported bytes.
+test('Ads/Partnerize snapshots match the shared source fingerprint and reject signed startup', () => {
+  const snapshot = JSON.parse(read('host/third-party-shell-assets.json'));
+  const fingerprint = JSON.parse(read('host/third-party-shell-assets-fingerprint.json'));
+  assert.deepEqual({ ...snapshot, assets: snapshot.assets.map(({ content: _content, ...asset }) => asset) }, fingerprint);
+  assert.equal(snapshot.source.sanitizerSha256, createHash('sha256').update(read('host/analyticsUrlPrivacy.js')).digest('hex'));
+  for (const { content } of snapshot.assets) {
+    const window = { location: { href: 'https://frontaliereticino.ch/?ac=synthetic-code&ne=candidate%40example.test&utm_source=email' } };
+    const document = new Proxy({ referrer: '' }, { get(target, key) {
+      if (key === 'referrer') return target.referrer;
+      throw new Error('A third-party SDK accessed the DOM before privacy suppression');
+    } });
+    const context = vm.createContext({ window, document, URL, URLSearchParams });
+    vm.runInContext(content, context);
+    window.location.href = 'https://frontaliereticino.ch/?utm_source=email';
+    vm.runInContext(content, context);
+    assert.equal(window.__FT_SENSITIVE_DOCUMENT__, true);
   }
 });
