@@ -4,34 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ju::https://www.h-ju.ch/fr/a-propos/medias-presse/communiques-de-presse/la-sante-mentale-au-coeur-de-la-27eme-journee-scientifique-interjurassienne-de-la-sante.html": {
-      "section": "canton-ju",
-      "ts": 1793030581852
-    },
-    "canton-ju::https://www.lejdj.ch/articles/a-moutier-de-jeunes-ingenieurs-rencontrent-les-industriels-104965": {
-      "section": "canton-ju",
-      "ts": 1793058683721
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261026-microsoft-propose-des-departs-volontaires-a-environ-60-000-salaries.html": {
-      "section": "canton-ju",
-      "ts": 1793064531782
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261027-novartis-affecte-au-troisieme-trimestre-par-un-echec-clinique.html": {
-      "section": "canton-ju",
-      "ts": 1793084237891
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261027-hsbc-benefice-net-en-hausse-de-45-inferieur-aux-attentes.html": {
-      "section": "canton-ju",
-      "ts": 1793087431592
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261027-les-jets-prives-sont-de-gros-contributeurs-aux-emissions-de-co2.html": {
-      "section": "canton-ju",
-      "ts": 1793091361886
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261027-automobile-mercedes-benz-abaisse-ses-previsions-pour-2026.html": {
-      "section": "canton-ju",
-      "ts": 1793102332533
-    },
     "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261028-le-commerce-de-detail-en-territoire-positif-sur-neuf-mois.html": {
       "section": "canton-ju",
       "ts": 1793188912796
@@ -47,6 +19,10 @@
     "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261028-ubs-signe-un-solide-3e-trimestre.html": {
       "section": "canton-ju",
       "ts": 1793188946436
+    },
+    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261029-le-trafic-ferroviaire-restreint-sur-la-ligne-du-pied-du-jura.html": {
+      "section": "canton-ju",
+      "ts": 1793342636803
     }
   }
 }
