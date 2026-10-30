@@ -30,6 +30,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'schaffhausen-modello-scolastico-inclusivo': { it: 'schaffhausen-modello-scolastico-inclusivo', en: 'schaffhausen-inclusive-school-model', de: 'schaffhausen-schulmodell-inklusiv', fr: 'schaffhouse-modele-scolaire-inclusif' },
  'competenze-finanziarie-sciaffusa': { it: 'competenze-finanziarie-sciaffusa', en: 'schaffhausen-financial-powers-2027', de: 'schaffhausen-finanzkompetenzen-2027', fr: 'schaffhouse-competences-financieres-2027' },
  'schaffhausen-pharma-medtech-circolar': { it: 'schaffhausen-pharma-medtech-circolar', en: 'schaffhausen-pharma-medtech-circular', de: 'schaffhausen-pharma-medtech-cirgular', fr: 'schaffhouse-pharma-medtech-circulaire' },
+ 'sciaffusa-ricarica-elettrica': { it: 'sciaffusa-ricarica-elettrica', en: 'schaffhausen-electric-charging', de: 'schaffhausen-ladestationen-e-autos', fr: 'schaffhouse-bornes-recharge-electrique' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

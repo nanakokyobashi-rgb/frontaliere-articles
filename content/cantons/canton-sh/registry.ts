@@ -303,4 +303,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'sciaffusa-ricarica-elettrica',
+ category: 'pratico',
+ date: '2026-10-30T21:05:24.930Z',
+ image: '/images/blog/article-sciaffusa-ricarica-elettrica.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

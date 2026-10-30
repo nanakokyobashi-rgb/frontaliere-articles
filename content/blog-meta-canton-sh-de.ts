@@ -84,6 +84,9 @@ const blogMetaCantonShDe: Record<string, string> = {
     'blog.article.schaffhausen-pharma-medtech-circolar.title': 'Kompetenzzentrum für Pharma und Medtech in Schaffhausen',
     'blog.article.schaffhausen-pharma-medtech-circolar.excerpt': 'Das Projekt be circular in Neuhausen am Rheinfall zielt auf Kreislaufwirtschaft in Pharma und Medtech ab und wird vom Kanton mit maximal CHF 630\'000 über drei Jahre unterstützt.',
     'blog.article.schaffhausen-pharma-medtech-circolar.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.sciaffusa-ricarica-elettrica.title': 'Teures Benzin: Schaffhausen will mehr Lademöglichkeiten',
+    'blog.article.sciaffusa-ricarica-elettrica.excerpt': 'Hohe Benzinpreise und Ziel des Kantons: mehr Ladestationen für Elektroautos, wie die bereits in St.',
+    'blog.article.sciaffusa-ricarica-elettrica.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonShDe;

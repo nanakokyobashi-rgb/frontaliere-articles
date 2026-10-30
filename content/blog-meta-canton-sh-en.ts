@@ -84,6 +84,9 @@ const blogMetaCantonShEn: Record<string, string> = {
     'blog.article.schaffhausen-pharma-medtech-circolar.title': 'Competence center for pharma and medtech in Schaffhausen',
     'blog.article.schaffhausen-pharma-medtech-circolar.excerpt': 'The be circular project in Neuhausen am Rheinfall aims to promote circularity in pharma and medtech, supported by the canton with a maximum of CHF 630\'000 over three years.',
     'blog.article.schaffhausen-pharma-medtech-circolar.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.sciaffusa-ricarica-elettrica.title': 'Expensive petrol: Schaffhausen wants more electric charging stations',
+    'blog.article.sciaffusa-ricarica-elettrica.excerpt': 'High petrol prices and the canton’s goal: more charging stations for electric cars, like those already installed in St.',
+    'blog.article.sciaffusa-ricarica-elettrica.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonShEn;

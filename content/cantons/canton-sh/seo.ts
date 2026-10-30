@@ -1060,6 +1060,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-sciaffusa-ricarica-elettrica': {
+    title: 'Benzina cara: Sciaffusa vuole più ricariche elettriche',
+    description: 'Il Cantone di Sciaffusa punta a più stazioni di ricarica per auto elettriche; il lead cita quelle già installate a St. Johann.',
+    keywords: 'frontalieri, ticino, svizzera, italia, benzina, cara, sciaffusa, vuole',
+    ogTitle: 'Sciaffusa vuole più stazioni di ricarica',
+    ogDescription: 'Il titolo richiama i prezzi elevati della benzina. Nel lead pubblico, il Cantone di Sciaffusa indica l\'obiettivo di aumentare le stazioni di ricarica per auto elettriche e cita St. Johann, dove sono già installate.',
+    canonicalPath: '/articoli-sciaffusa/sciaffusa-ricarica-elettrica/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Benzina cara: Sciaffusa vuole più ricariche elettriche",
+      "description": "Il Cantone di Sciaffusa punta a più stazioni di ricarica per auto elettriche; il lead cita quelle già installate a St. Johann.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-sciaffusa-ricarica-elettrica.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-30T21:05:24+00:00",
+      "dateModified": "2026-10-30T21:05:24+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-sciaffusa/sciaffusa-ricarica-elettrica/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

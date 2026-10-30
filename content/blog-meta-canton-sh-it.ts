@@ -84,6 +84,9 @@ const blogMetaCantonShIt: Record<string, string> = {
     'blog.article.schaffhausen-pharma-medtech-circolar.title': 'Centro di competenza per pharma e medtech a Sciaffusa',
     'blog.article.schaffhausen-pharma-medtech-circolar.excerpt': 'Il progetto be circular a Neuhausen am Rheinfall mira alla circolarità in pharma e medtech, sostenuto dal Cantone con massimo CHF 630\'000 in tre anni.',
     'blog.article.schaffhausen-pharma-medtech-circolar.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.sciaffusa-ricarica-elettrica.title': 'Benzina cara: Sciaffusa vuole più ricariche elettriche',
+    'blog.article.sciaffusa-ricarica-elettrica.excerpt': 'Prezzi della benzina elevati e obiettivo del Cantone: più stazioni di ricarica per auto elettriche, come quelle già installate a St.',
+    'blog.article.sciaffusa-ricarica-elettrica.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonShIt;
