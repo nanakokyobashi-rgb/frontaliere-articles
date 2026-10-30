@@ -286,14 +286,14 @@ function fleetWave(startIso, n = EXPECTED_GROUPS) {
   return Array.from({ length: n }, (_, i) => ({ group: pad(i + 1), atMs: start + i * 4 * 60_000 }));
 }
 
-/** Due ondate al giorno per ciascun giorno; `skip` toglie un'ondata, `groups` la riduce. */
-function fleetDays(days, { skip = [], groups = {} } = {}) {
+/** Due ondate al giorno; `groupCount` è il default, `groups` imposta eccezioni per ondata, `skip` la omette. */
+function fleetDays(days, { skip = [], groups = {}, groupCount = EXPECTED_GROUPS } = {}) {
   const out = [];
   for (const day of days) {
     for (const [slot, hhmm] of [['am', '09:19'], ['pm', '20:57']]) {
       const key = `${day}-${slot}`;
       if (skip.includes(key)) continue;
-      out.push(...fleetWave(`${day}T${hhmm}:00Z`, groups[key] ?? EXPECTED_GROUPS));
+      out.push(...fleetWave(`${day}T${hhmm}:00Z`, groups[key] ?? groupCount));
     }
   }
   return out.sort((a, b) => b.atMs - a.atMs);
@@ -336,7 +336,8 @@ test('REPLAY 30-09: copertura sopra soglia ma 14,4h senza consegne → issue ape
   // `delivering`: chiudere su quel verdetto avrebbe dato per guarita un'ondata
   // persa.
   const nowMs = Date.parse('2026-09-30T12:51:00Z');
-  const deliveries = fleetDays(['2026-09-26', '2026-09-27', '2026-09-28', '2026-09-29'])
+  // Il replay precede l'aggiunta del gruppo 25: usa il roster storico di 24.
+  const deliveries = fleetDays(['2026-09-26', '2026-09-27', '2026-09-28', '2026-09-29'], { groupCount: 24 })
     .filter((d) => d.atMs <= nowMs);
   const v = stallVerdict({ deliveries, nowMs, stallHours: 6, readable: true });
   assert.equal(v.stalled, false, 'il verdetto indebolito non suona');
