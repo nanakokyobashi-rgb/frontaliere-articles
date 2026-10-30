@@ -1580,8 +1580,8 @@
       "reason": "Passo dei workflow di pubblicazione (fast-publish-article.yml, fast-publish-section.yml): prima di rendere e pubblicare, garantisce sulla CDN i file della shell di cui host/ porta il contenuto, oggi il produttore GA4 con il nome derivato dal contenuto (`gtag-init-<hash>.js`). L'omologo del sito e' scripts/ci/ensure-cdn-shell-assets.mjs, che legge la lista da build-plugins/staticScriptsPlugin.ts: quel plugin qui non esiste, quindi lo script d'ingresso e' proprio di questo repo e la logica condivisa sta nel gemello identical scripts/lib/cdn-shell-assets.mjs.",
       "baseline": {
         "site": null,
-        "corpus": "70988426e86e683a",
-        "alignedAt": "2026-10-08"
+        "corpus": "2d847e28fce27a85",
+        "alignedAt": "2026-10-30"
       }
     },
     {
@@ -4313,9 +4313,9 @@
       "mode": "identical",
       "reason": "Impronta SHA-256 dei 22 campi scalari di SiteShellContract, prodotta e verificata da `host/tests/shell-contract-fingerprint.test.mjs`. Il gemello del sito vive in `tests/articles-shell-contract-fingerprint.json` con lo stesso contenuto; i due artefatti restano `identical` e la baseline ne sorveglia il drift. E' il gate runtime che impedisce di spedire l'engine senza la sua meta' `host/`.",
       "baseline": {
-        "site": "0974fffd0ad5890e",
-        "corpus": "0974fffd0ad5890e",
-        "alignedAt": "2026-10-29"
+        "site": "00b545214148f72a",
+        "corpus": "00b545214148f72a",
+        "alignedAt": "2026-10-30"
       }
     },
     {
@@ -4364,8 +4364,8 @@
       "reason": "Test node:test (sotto tsx, come gli altri di host/tests/) della garanzia sugli asset della shell: ogni riferimento con nome derivato dal contenuto nel contratto deve essere un file di cui host/ porta i byte, lo script d'ingresso passa quei file alla libreria, e ogni job che rende pagine con la shell esegue il passo prima del primo emettitore. Il sito copre la libreria con tests/cdn-shell-assets.test.ts (Vitest); questo harness legge host/ e i workflow di questo repo.",
       "baseline": {
         "site": null,
-        "corpus": "ca74194f66bb7947",
-        "alignedAt": "2026-10-08"
+        "corpus": "06e02decc0029b03",
+        "alignedAt": "2026-10-30"
       }
     },
     {
