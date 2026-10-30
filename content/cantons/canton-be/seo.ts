@@ -928,6 +928,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-procedure-impianti-solari-eolici': {
+    title: 'Revisione legge edilizia Berna per impianti solari ed eolici',
+    description: 'Berna adegua la legge edilizia per l\'obbligo federale dal 1° aprile 2026 su impianti solari ed eolici di interesse nazionale. Procedure ordinarie',
+    keywords: 'frontalieri, ticino, svizzera, italia, revisione, legge, edilizia, berna',
+    ogTitle: 'Revisione legge edilizia Berna impianti solari e eolici',
+    ogDescription: 'Il Canton Berna adegua la legge edilizia per rispettare l\'obbligo federale dal 1° aprile 2026 per impianti solari ed eolici di interesse nazionale. Le procedure ordinarie restano valide fino alla riforma.',
+    canonicalPath: '/articoli-berna/procedure-impianti-solari-eolici/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Revisione legge edilizia Berna per impianti solari ed eolici",
+      "description": "Berna adegua la legge edilizia per l'obbligo federale dal 1° aprile 2026 su impianti solari ed eolici di interesse nazionale. Procedure ordinarie",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-procedure-impianti-solari-eolici.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-30T22:00:04+00:00",
+      "dateModified": "2026-10-30T22:00:04+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-berna/procedure-impianti-solari-eolici/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

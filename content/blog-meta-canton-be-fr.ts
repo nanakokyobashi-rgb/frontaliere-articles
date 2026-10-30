@@ -75,6 +75,9 @@ const blogMetaCantonBeFr: Record<string, string> = {
     'blog.article.sportello-virtuale-polizia-berna.title': 'La police cantonale de Berne étend son guichet virtuel',
     'blog.article.sportello-virtuale-polizia-berna.excerpt': 'À partir du 2 novembre 2026, la police cantonale de Berne propose dans tout le canton des services simples par visioconférence, également en allemand.',
     'blog.article.sportello-virtuale-polizia-berna.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.procedure-impianti-solari-eolici.title': 'Révision de la loi bernoise sur le solaire et l\'éolien',
+    'blog.article.procedure-impianti-solari-eolici.excerpt': 'Depuis le 1er avril 2026, l\'obligation fédérale concernant les installations solaires et éoliennes d\'intérêt national est en vigueur ; Berne adapte la loi sur les constructions.',
+    'blog.article.procedure-impianti-solari-eolici.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonBeFr;

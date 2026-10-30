@@ -75,6 +75,9 @@ const blogMetaCantonBeEn: Record<string, string> = {
     'blog.article.sportello-virtuale-polizia-berna.title': 'Bern cantonal police expands its virtual service desk',
     'blog.article.sportello-virtuale-polizia-berna.excerpt': 'From 2 November 2026, the Bern Cantonal Police will offer simple services via video call throughout the canton, also in German.',
     'blog.article.sportello-virtuale-polizia-berna.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.procedure-impianti-solari-eolici.title': 'Revision of Bern building law for solar and wind installations',
+    'blog.article.procedure-impianti-solari-eolici.excerpt': 'Since April 1, 2026, the federal requirement for solar and wind installations of national interest has been in force; Bern is amending the building law.',
+    'blog.article.procedure-impianti-solari-eolici.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonBeEn;

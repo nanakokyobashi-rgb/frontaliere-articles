@@ -4,74 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-be::https://ajour.ch/story/703994/bern-f%c3%bchrt-neue-sicherheitsmassnahmen-f%c3%bcr-velostationen-ein": {
-      "section": "canton-be",
-      "ts": 1793103860684
-    },
-    "canton-be::https://ajour.ch/story/704016/thuner-budget-2027-mit-schwarzer-null": {
-      "section": "canton-be",
-      "ts": 1793103863041
-    },
-    "canton-be::https://ajour.ch/story/703952/microsoft-a-propos-lundi-environ-60000-salaris-de-quitter-volontairement-le-groupe": {
-      "section": "canton-be",
-      "ts": 1793103865869
-    },
-    "canton-be::https://ajour.ch/story/704054/solothurner-staatsangestellte-erhalten-mehr-lohn": {
-      "section": "canton-be",
-      "ts": 1793108190160
-    },
-    "canton-be::https://ajour.ch/story/704052/221-millionen-franken-f%c3%bcr-pr%c3%a4mienverbilligung-im-kanton-solothurn": {
-      "section": "canton-be",
-      "ts": 1793108192754
-    },
-    "canton-be::https://ajour.ch/story/703842/ich-habe-ein-sehr-gutes-gef%c3%bchl-neue-k%c3%b6pfe-f%c3%bcr-die-neue-legislatur": {
-      "section": "canton-be",
-      "ts": 1793108194930
-    },
-    "canton-be::https://ajour.ch/story/703893/tempo-80-auf-der-autobahn-so-viele-millionen-liter-sprit-kann-die-schweiz-einsparen": {
-      "section": "canton-be",
-      "ts": 1793112523790
-    },
-    "canton-be::https://ajour.ch/story/703929/so-sah-das-doppelleben-des-sbbmanagers-aus-er-flog-wegen-einer-aff%c3%a4re-auf": {
-      "section": "canton-be",
-      "ts": 1793112525987
-    },
-    "canton-be::https://ajour.ch/story/703895/vui-ist-geschlagen-doch-f%c3%bcr-serbiens-studenten-beginnt-die-schwierigste-pr%c3%bcfung-erst-jetzt": {
-      "section": "canton-be",
-      "ts": 1793112527461
-    },
-    "canton-be::https://ajour.ch/story/704099/sieben-verletzte-bei-kettenkollision-auf-freiburger-autobahn": {
-      "section": "canton-be",
-      "ts": 1793139222045
-    },
-    "canton-be::https://ajour.ch/story/704171/un-exemploy-des-cff-accus-davoir-dtourn-des-millions": {
-      "section": "canton-be",
-      "ts": 1793139224317
-    },
-    "canton-be::https://www.nau.ch/sport/fussball/yb-trainer-seoane-gibt-gesundheits-update-nach-spital-schock-67194055": {
-      "section": "canton-be",
-      "ts": 1793139231469
-    },
-    "canton-be::https://ajour.ch/story/703849/pro-velo-schl%c3%a4gt-alarm-schulweg-in-aarberg-ist-zu-gef%c3%a4hrlich": {
-      "section": "canton-be",
-      "ts": 1793165925508
-    },
-    "canton-be::https://ajour.ch/story/703597/hat-der-m%c3%b6riger-gemeinderat-hunderttausende-franken-in-den-sand-gesetzt": {
-      "section": "canton-be",
-      "ts": 1793165927129
-    },
-    "canton-be::https://ajour.ch/story/703830/regeln-f%c3%bcr-waffenexport-werden-gelockert%c2%a0-aber-nicht-f%c3%bcr-die-ukraine-die-wichtigsten-antworten": {
-      "section": "canton-be",
-      "ts": 1793165929153
-    },
-    "canton-be::https://ajour.ch/story/703827/le-conseil-des-affaires-francophones-de-bienne-fte-ses-20-ans": {
-      "section": "canton-be",
-      "ts": 1793187218409
-    },
-    "canton-be::https://www.nau.ch/politik/bundeshaus/bundesrat-verabschiedet-strategie-gegen-hitze-und-trockenheit-67194450": {
-      "section": "canton-be",
-      "ts": 1793213632199
-    },
     "canton-be::https://ajour.ch/story/704319/die-sbbapp-wird-noch-viel-praktischer-das-sind-die-wichtigsten-neuerungen": {
       "section": "canton-be",
       "ts": 1793261541328
@@ -103,6 +35,22 @@
     "canton-be::https://ajour.ch/story/704000/volksschule-mut-zur-kurskorrektur": {
       "section": "canton-be",
       "ts": 1793264584145
+    },
+    "canton-be::https://ajour.ch/story/704545/sbb-muss-verkehr-zwischen-biel-und-grenchen-wegen-trockenen-sommers-notfallm%c3%a4ssig-einschr%c3%a4nken": {
+      "section": "canton-be",
+      "ts": 1793397190683
+    },
+    "canton-be::https://ajour.ch/story/704441/19000-personen-erhalten-im-kanton-bern-neu-pr%c3%a4mienverbilligung": {
+      "section": "canton-be",
+      "ts": 1793397192898
+    },
+    "canton-be::https://ajour.ch/story/704417/rduction-des-primes-plus-gnreuse-dans-le-canton-de-berne": {
+      "section": "canton-be",
+      "ts": 1793397194920
+    },
+    "canton-be::https://ajour.ch/story/704661/virtueller-polizeischalter-steht-ganzem-kanton-bern-zur-verf%c3%bcgung": {
+      "section": "canton-be",
+      "ts": 1793397274376
     }
   }
 }

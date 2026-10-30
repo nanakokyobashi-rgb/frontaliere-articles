@@ -75,6 +75,9 @@ const blogMetaCantonBeDe: Record<string, string> = {
     'blog.article.sportello-virtuale-polizia-berna.title': 'Kantonspolizei Bern erweitert den virtuellen Schalter',
     'blog.article.sportello-virtuale-polizia-berna.excerpt': 'Ab dem 2. November 2026 bietet die Kantonspolizei Bern im gesamten Kanton einfache Dienstleistungen per Videoanruf an, auch auf Deutsch.',
     'blog.article.sportello-virtuale-polizia-berna.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.procedure-impianti-solari-eolici.title': 'Revision des Berner Baugesetzes für Solar- und Windenergieanlagen',
+    'blog.article.procedure-impianti-solari-eolici.excerpt': 'Ab dem 1. April 2026 ist die Bundespflicht für Solar- und Windenergieanlagen von nationalem Interesse in Kraft; Bern passt das Baugesetz an.',
+    'blog.article.procedure-impianti-solari-eolici.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonBeDe;

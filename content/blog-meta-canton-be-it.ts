@@ -75,6 +75,9 @@ const blogMetaCantonBeIt: Record<string, string> = {
     'blog.article.sportello-virtuale-polizia-berna.title': 'Polizia cantonale di Berna estende lo sportello virtuale',
     'blog.article.sportello-virtuale-polizia-berna.excerpt': 'Dal 2 novembre 2026 la Polizia cantonale di Berna offre in tutto il Cantone semplici servizi via videochiamata, anche in tedesco.',
     'blog.article.sportello-virtuale-polizia-berna.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.procedure-impianti-solari-eolici.title': 'Revisione legge edilizia Berna per impianti solari ed eolici',
+    'blog.article.procedure-impianti-solari-eolici.excerpt': 'Dal 1° aprile 2026 è in vigore l\'obbligo federale per impianti solari ed eolici di interesse nazionale; Berna adegua la legge edilizia.',
+    'blog.article.procedure-impianti-solari-eolici.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonBeIt;
