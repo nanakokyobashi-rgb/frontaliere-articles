@@ -32,10 +32,14 @@ function skipQuotedLiteral(source, start, quote) {
 }
 
 const REGEX_PREFIX_KEYWORDS = new Set([
+  'break',
   'await',
   'case',
   'delete',
   'do',
+  'default',
+  'continue',
+  'debugger',
   'else',
   'extends',
   'in',
@@ -47,6 +51,15 @@ const REGEX_PREFIX_KEYWORDS = new Set([
   'typeof',
   'void',
   'yield',
+]);
+
+const REGEX_PREFIX_PUNCTUATION = new Set([
+  '(', '[', '{', ',', ':', ';', '=', '!', '?', '+', '-', '*', '%', '&', '|', '^', '~', '<', '>',
+]);
+
+const CONTROL_PAREN_KEYWORDS = new Set(['catch', 'for', 'if', 'switch', 'while', 'with']);
+const BLOCK_BRACE_KEYWORDS = new Set([
+  'catch', 'class', 'do', 'else', 'enum', 'finally', 'function', 'interface', 'module', 'namespace', 'static', 'try',
 ]);
 
 function isIdentifierStart(char) {
@@ -92,22 +105,194 @@ function skipRegexLiteral(source, start) {
   return source.length;
 }
 
-function advanceNormalToken(source, start) {
+function createLexicalState() {
+  return {
+    previousToken: null,
+    parenContexts: [],
+    braceContexts: [],
+    statementStart: true,
+    awaitingFunctionParams: false,
+    pendingBlockKeyword: false,
+  };
+}
+
+/**
+ * Return whether a slash at the current cursor can begin a regex literal.
+ *
+ * A plain `canStartRegex = char !== ')'` heuristic is not enough: a slash can
+ * begin a statement after the closing parenthesis of `if`, `for`, `while`,
+ * `with`, `catch`, or `switch`, but it is division after an ordinary grouping
+ * or call. Keeping that distinction in the token state prevents a regex body
+ * such as `\/ *` from being mistaken for a block comment and hiding the real
+ * renderer export.
+ *
+ * @param {{ type?: string, value?: string }|null} previousToken
+ * @returns {boolean}
+ */
+export function isRegexLiteralContext(previousToken) {
+  if (!previousToken) return true;
+  if (previousToken.type === 'keyword') return REGEX_PREFIX_KEYWORDS.has(previousToken.value);
+  if (previousToken.type === 'punctuation') return REGEX_PREFIX_PUNCTUATION.has(previousToken.value);
+  return previousToken.type === 'control-close'
+    || previousToken.type === 'block-close'
+    || previousToken.type === 'division'
+    || previousToken.type === 'prefix'
+    || previousToken.type === 'arrow';
+}
+
+function isBlockOpening(state) {
+  const previousToken = state.previousToken;
+  if (state.statementStart || state.pendingBlockKeyword) return true;
+  if (!previousToken) return true;
+  if (previousToken.type === 'control-close'
+    || previousToken.type === 'function-close'
+    || previousToken.type === 'close-paren'
+    || previousToken.type === 'arrow') return true;
+  return previousToken.type === 'word' && BLOCK_BRACE_KEYWORDS.has(previousToken.value);
+}
+
+function advanceNormalToken(source, start, state) {
   const char = source[start];
   if (isIdentifierStart(char)) {
     const end = skipIdentifier(source, start);
-    return { end, canStartRegex: REGEX_PREFIX_KEYWORDS.has(source.slice(start, end)) };
+    const value = source.slice(start, end);
+    const member = state.previousToken?.type === 'member-access';
+    state.previousToken = {
+      type: !member && REGEX_PREFIX_KEYWORDS.has(value) ? 'keyword' : 'word',
+      value,
+      member,
+    };
+    state.statementStart = false;
+    if (!member && value === 'function') state.awaitingFunctionParams = true;
+    if (!member && BLOCK_BRACE_KEYWORDS.has(value)) state.pendingBlockKeyword = true;
+    return end;
   }
-  if (char >= '0' && char <= '9') return { end: skipNumber(source, start), canStartRegex: false };
+  if (char >= '0' && char <= '9') {
+    const end = skipNumber(source, start);
+    state.previousToken = { type: 'literal' };
+    state.statementStart = false;
+    return end;
+  }
+  if (source.startsWith('...', start)) {
+    state.previousToken = { type: 'prefix', value: '...' };
+    state.statementStart = false;
+    state.pendingBlockKeyword = false;
+    return start + 3;
+  }
   if ((char === '+' && source[start + 1] === '+') || (char === '-' && source[start + 1] === '-')) {
-    return { end: start + 2, canStartRegex: false };
+    state.previousToken = {
+      type: isRegexLiteralContext(state.previousToken) ? 'prefix' : 'postfix',
+      value: char + char,
+    };
+    state.statementStart = false;
+    state.pendingBlockKeyword = false;
+    return start + 2;
   }
-  return { end: start + 1, canStartRegex: char !== ')' && char !== ']' && char !== '}' && char !== '.' };
+  if (char === '/' && source[start + 1] === '=') {
+    state.previousToken = { type: 'division', value: '/=' };
+    state.statementStart = false;
+    state.pendingBlockKeyword = false;
+    return start + 2;
+  }
+  if (char === '/') {
+    state.previousToken = { type: 'division', value: '/' };
+    state.statementStart = false;
+    state.pendingBlockKeyword = false;
+    return start + 1;
+  }
+  if (source.startsWith('?.', start)) {
+    state.previousToken = { type: 'member-access', value: '?.' };
+    state.statementStart = false;
+    state.pendingBlockKeyword = false;
+    return start + 2;
+  }
+  if (char === '.') {
+    state.previousToken = { type: 'member-access', value: '.' };
+    state.statementStart = false;
+    state.pendingBlockKeyword = false;
+    return start + 1;
+  }
+  if (char === '#') {
+    state.previousToken = { type: 'member-access', value: '#' };
+    state.statementStart = false;
+    state.pendingBlockKeyword = false;
+    return start + 1;
+  }
+  if (char === '!' && source[start + 1] !== '=') {
+    state.previousToken = {
+      type: isRegexLiteralContext(state.previousToken) ? 'prefix' : 'postfix',
+      value: char,
+    };
+    state.statementStart = false;
+    state.pendingBlockKeyword = false;
+    return start + 1;
+  }
+  if (char === '=' && source[start + 1] === '>') {
+    state.previousToken = { type: 'arrow', value: '=>' };
+    state.statementStart = false;
+    state.pendingBlockKeyword = false;
+    return start + 2;
+  }
+  if (char === '(') {
+    const previousToken = state.previousToken;
+    const control = Boolean(
+      previousToken
+      && !previousToken.member
+      && (previousToken.type === 'word' || previousToken.type === 'keyword')
+      && CONTROL_PAREN_KEYWORDS.has(previousToken.value),
+    );
+    const functionParams = state.awaitingFunctionParams;
+    state.parenContexts.push({ control, functionParams });
+    state.previousToken = { type: 'punctuation', value: '(' };
+    state.statementStart = false;
+    if (!control && !functionParams) state.pendingBlockKeyword = false;
+    return start + 1;
+  }
+  if (char === ')') {
+    const context = state.parenContexts.pop() ?? {};
+    state.previousToken = context.control
+      ? { type: 'control-close', value: ')' }
+      : context.functionParams
+        ? { type: 'function-close', value: ')' }
+        : { type: 'close-paren', value: ')' };
+    state.statementStart = context.control === true;
+    state.pendingBlockKeyword = context.control === true || context.functionParams === true;
+    if (context.functionParams) state.awaitingFunctionParams = false;
+    return start + 1;
+  }
+  if (char === '{') {
+    const block = isBlockOpening(state);
+    state.braceContexts.push({ block });
+    state.previousToken = { type: 'punctuation', value: '{', block };
+    state.statementStart = block;
+    state.pendingBlockKeyword = false;
+    return start + 1;
+  }
+  if (char === '}') {
+    const context = state.braceContexts.pop() ?? {};
+    state.previousToken = context.block
+      ? { type: 'block-close', value: '}' }
+      : { type: 'close-object', value: '}' };
+    state.statementStart = context.block === true;
+    state.pendingBlockKeyword = false;
+    return start + 1;
+  }
+  const end = start + 1;
+  state.previousToken = { type: 'punctuation', value: char };
+  state.statementStart = char === ';';
+  state.pendingBlockKeyword = false;
+  return end;
+}
+
+function markLiteral(state) {
+  state.previousToken = { type: 'literal' };
+  state.statementStart = false;
+  state.pendingBlockKeyword = false;
 }
 
 function skipTemplateExpression(source, start) {
   let depth = 1;
-  let canStartRegex = true;
+  const state = createLexicalState();
   for (let index = start; index < source.length;) {
     if (source[index] === '/' && source[index + 1] === '/') {
       index += 2;
@@ -121,15 +306,17 @@ function skipTemplateExpression(source, start) {
     }
     if (source[index] === '\'' || source[index] === '"') {
       index = skipQuotedLiteral(source, index, source[index]);
+      markLiteral(state);
       continue;
     }
     if (source[index] === '`') {
       index = skipTemplateLiteral(source, index);
+      markLiteral(state);
       continue;
     }
-    if (source[index] === '/' && canStartRegex) {
+    if (source[index] === '/' && isRegexLiteralContext(state.previousToken)) {
       index = skipRegexLiteral(source, index);
-      canStartRegex = false;
+      markLiteral(state);
       continue;
     }
     if (/\s/u.test(source[index])) {
@@ -138,13 +325,13 @@ function skipTemplateExpression(source, start) {
     }
     if (source[index] === '{') {
       depth += 1;
-    } else if (source[index] === '}') {
-      depth -= 1;
-      if (depth === 0) return index + 1;
     }
-    const token = advanceNormalToken(source, index);
-    index = token.end;
-    canStartRegex = token.canStartRegex;
+    const end = advanceNormalToken(source, index, state);
+    if (source[index] === '}') {
+      depth -= 1;
+      if (depth === 0) return end;
+    }
+    index = end;
   }
   return source.length;
 }
@@ -168,7 +355,7 @@ function skipTemplateLiteral(source, start) {
 function lexicalView(source, { maskLiterals }) {
   const chunks = [];
   let last = 0;
-  let canStartRegex = true;
+  const state = createLexicalState();
   for (let index = 0; index < source.length;) {
     if (/\s/u.test(source[index])) {
       index += 1;
@@ -177,7 +364,10 @@ function lexicalView(source, { maskLiterals }) {
     let end;
     const isLineComment = source[index] === '/' && source[index + 1] === '/';
     const isBlockComment = source[index] === '/' && source[index + 1] === '*';
-    const isRegex = source[index] === '/' && !isLineComment && !isBlockComment && canStartRegex;
+    const isRegex = source[index] === '/'
+      && !isLineComment
+      && !isBlockComment
+      && isRegexLiteralContext(state.previousToken);
     if (isLineComment) {
       end = index + 2;
       while (end < source.length && source[end] !== '\r' && source[end] !== '\n') end += 1;
@@ -191,16 +381,14 @@ function lexicalView(source, { maskLiterals }) {
     } else if (source[index] === '`') {
       end = skipTemplateLiteral(source, index);
     } else {
-      const token = advanceNormalToken(source, index);
-      index = token.end;
-      canStartRegex = token.canStartRegex;
+      index = advanceNormalToken(source, index, state);
       continue;
     }
     chunks.push(source.slice(last, index));
     chunks.push((maskLiterals || isLineComment || isBlockComment || isRegex) ? maskRange(source, index, end) : source.slice(index, end));
     index = end;
     last = end;
-    if (!isLineComment && !isBlockComment) canStartRegex = false;
+    if (!isLineComment && !isBlockComment) markLiteral(state);
   }
   chunks.push(source.slice(last));
   return chunks.join('');

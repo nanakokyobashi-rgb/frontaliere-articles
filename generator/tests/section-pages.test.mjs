@@ -89,7 +89,10 @@ import {
   pageManifestUrl,
 } from '../../scripts/lib/section-page-manifest.mjs';
 import { cantonHubCoverage, cantonHubDataFile, cantonHubTopics, readCantonHubData } from '../../scripts/lib/canton-hub-data.mjs';
-import { parseCantonLandingCardLimitExport } from '../../scripts/lib/canton-landing-card-limit.mjs';
+import {
+  isRegexLiteralContext,
+  parseCantonLandingCardLimitExport,
+} from '../../scripts/lib/canton-landing-card-limit.mjs';
 import { declaredRegistryErrors, SECTION_REGISTRY_FILE } from '../../scripts/lib/section-registry.mjs';
 import { sourceRegistryIds } from '../../scripts/lib/corpus-floors.mjs';
 import { bodyRegex, fetchEdgeSectionRegistry, liveR2ReconciliationPlan, liveRegistryTransitionSections, r2ApiPushPlan, r2PublishPlan } from '../../scripts/ci/fast-publish-section.mjs';
@@ -3123,6 +3126,28 @@ test('reconcile: il parser ignora dichiarazioni nei commenti e nei literal e nor
   ].join('\n');
   assert.equal(parseCantonLandingCardLimitExport(source), 24);
   assert.equal(parseCantonLandingCardLimitExport('\uFEFFexport const CANTON_LANDING_CARD_LIMIT = 24;'), 24);
+});
+
+test('reconcile: il lexer distingue la regex dopo il controllo dalla divisione dopo una parentesi ordinaria', () => {
+  assert.equal(isRegexLiteralContext({ type: 'control-close', value: ')' }), true);
+  assert.equal(isRegexLiteralContext({ type: 'close-paren', value: ')' }), false);
+  assert.equal(isRegexLiteralContext({ type: 'division', value: '/' }), true);
+
+  const regexLiteral = '/foo\\/*bar/';
+  for (const prefix of [
+    'if (ready)',
+    'for (;;)',
+    'while (ready)',
+    'with (scope)',
+  ]) {
+    const source = `${prefix} ${regexLiteral};\nexport const CANTON_LANDING_CARD_LIMIT = 24;`;
+    assert.equal(parseCantonLandingCardLimitExport(source), 24, prefix);
+  }
+
+  assert.equal(
+    parseCantonLandingCardLimitExport('const grouped = (ready);\nconst ratio = grouped / 2;\nexport const CANTON_LANDING_CARD_LIMIT = 24;'),
+    24,
+  );
 });
 
 test('reconcile: il parser accetta commenti a blocco dopo una dichiarazione semicolonless', () => {
