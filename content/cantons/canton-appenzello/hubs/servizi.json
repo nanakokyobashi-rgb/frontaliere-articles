@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "servizi",
-  "updatedAt": "2026-10-29T21:57:02.700Z",
-  "contentHash": "448962ac343c235b5d2c0cdf885280f9b7d6095e22d2eff577e9781d2bbfd0b3",
+  "updatedAt": "2026-10-30T06:23:49.454Z",
+  "contentHash": "2f6f20cc150d005a8c4dd4c9a14eb84e80fee02a964579818d82e268b6f89fa2",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -19,12 +19,12 @@
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-29T15:24:02.220Z",
+      "updatedAt": "2026-10-29T21:17:01.193Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-29T11:47:10.249Z",
+      "updatedAt": "2026-10-29T22:02:50.125Z",
       "keyFacts": 0
     }
   ],
@@ -106,17 +106,17 @@
           "items": [
             {
               "label": "Appenzell",
-              "value": "9 °C",
-              "detail": "oggi da 2 a 9 °C"
+              "value": "5 °C",
+              "detail": "oggi da 3 a 7 °C"
             },
             {
               "label": "Herisau",
-              "value": "8 °C",
-              "detail": "oggi da 3 a 8 °C"
+              "value": "4 °C",
+              "detail": "oggi da 3 a 6 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-29T15:24:02.220Z"
+          "updatedAt": "2026-10-29T21:17:01.193Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -149,7 +149,7 @@
               "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/bruno-streule-wird-neuer-leiter-des-amts-fuer-gesundheit/"
             }
           ],
-          "updatedAt": "2026-10-29T11:47:10.249Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -237,7 +237,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-29T21:57:02.700Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -316,17 +316,17 @@
           "items": [
             {
               "label": "Appenzell",
-              "value": "9 °C",
-              "detail": "today from 2 to 9 °C"
+              "value": "5 °C",
+              "detail": "today from 3 to 7 °C"
             },
             {
               "label": "Herisau",
-              "value": "8 °C",
-              "detail": "today from 3 to 8 °C"
+              "value": "4 °C",
+              "detail": "today from 3 to 6 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-29T15:24:02.220Z"
+          "updatedAt": "2026-10-29T21:17:01.193Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -359,7 +359,7 @@
               "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/bruno-streule-wird-neuer-leiter-des-amts-fuer-gesundheit/"
             }
           ],
-          "updatedAt": "2026-10-29T11:47:10.249Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -439,7 +439,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-29T21:57:02.700Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -518,17 +518,17 @@
           "items": [
             {
               "label": "Appenzell",
-              "value": "9 °C",
-              "detail": "heute 2 bis 9 °C"
+              "value": "5 °C",
+              "detail": "heute 3 bis 7 °C"
             },
             {
               "label": "Herisau",
-              "value": "8 °C",
-              "detail": "heute 3 bis 8 °C"
+              "value": "4 °C",
+              "detail": "heute 3 bis 6 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-29T15:24:02.220Z"
+          "updatedAt": "2026-10-29T21:17:01.193Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -561,7 +561,7 @@
               "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/bruno-streule-wird-neuer-leiter-des-amts-fuer-gesundheit/"
             }
           ],
-          "updatedAt": "2026-10-29T11:47:10.249Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -641,7 +641,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-29T21:57:02.700Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -720,17 +720,17 @@
           "items": [
             {
               "label": "Appenzell",
-              "value": "9 °C",
-              "detail": "aujourd’hui de 2 à 9 °C"
+              "value": "5 °C",
+              "detail": "aujourd’hui de 3 à 7 °C"
             },
             {
               "label": "Herisau",
-              "value": "8 °C",
-              "detail": "aujourd’hui de 3 à 8 °C"
+              "value": "4 °C",
+              "detail": "aujourd’hui de 3 à 6 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-29T15:24:02.220Z"
+          "updatedAt": "2026-10-29T21:17:01.193Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -763,7 +763,7 @@
               "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/bruno-streule-wird-neuer-leiter-des-amts-fuer-gesundheit/"
             }
           ],
-          "updatedAt": "2026-10-29T11:47:10.249Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -835,7 +835,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-29T21:57:02.700Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     }
   }
 }

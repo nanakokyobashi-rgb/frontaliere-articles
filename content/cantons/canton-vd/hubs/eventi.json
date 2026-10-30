@@ -4,17 +4,17 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "eventi",
-  "updatedAt": "2026-10-29T07:40:41.678Z",
-  "contentHash": "f3fc11011c5d62886a95d53d2cad7cbc2dfd2c101dd63775bda6ac0ac47576bf",
+  "updatedAt": "2026-10-30T06:23:49.454Z",
+  "contentHash": "3a9412ce3431054c055f6cfd16fb4b69610a0211ce09b9a95a0aa8adfac567d6",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-28T19:25:39.771Z",
+      "updatedAt": "2026-10-29T21:23:37.654Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-28T21:56:57.371Z",
+      "updatedAt": "2026-10-29T22:02:50.125Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "106",
+          "value": "103",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Joe Armon-Jones + Miss C-Line",
+              "label": "Ace Ross + Nubiyan Twist + DJ Leo Luscher & Mystic V",
               "detail": "Jumeaux Jazz Club",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/events/music/lausanne/joe-armon-jones-miss-c-line_A4cfqyY"
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/ace-ross-nubiyan-twist-dj-leo-luscher-und-mystic-v_AJwPTH4"
             },
             {
-              "label": "STANISLAS (FR) + SUPPORT",
-              "detail": "Losanna, Lausanne",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/stanislas-fr-support/"
+              "label": "Eva Antonnikov Literary Event",
+              "detail": "Bibliothèque de Montreux-Veytaux, Montreux",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/rendez-vous-litteraire-eva-antonnikov/"
             },
             {
-              "label": "Halloween at the former Payerne abattoirs",
-              "detail": "Les Anciens abattoirs, Payerne",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-at-the-former-payerne-abattoirs/"
+              "label": "Feast of the dead",
+              "detail": "Vevey",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/feast-of-the-dead/"
             },
             {
-              "label": "LINH",
-              "detail": "Salle Métropole, Lausanne",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/linh/"
+              "label": "I Love Reggaeton Halloween",
+              "detail": "MAD - MAINFLOOR",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/i-love-reggaeton-halloween_Ajc9HEH"
             },
             {
-              "label": "Atelier de mosaïque",
-              "detail": "Renens",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-mosaique/"
+              "label": "Jérémie Kisling",
+              "detail": "Théâtre de l'Odéon",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/evenements/musique/villeneuve-vd/jeremie-kisling_AkdAR6x"
             },
             {
-              "label": "ISAIAH COLLIER PLAYS COLTRANE",
+              "label": "Nubiyan Twist + Ace Ross + DJ Leo Luscher & Mystic V",
+              "detail": "Jumeaux Jazz Club",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/lausanne/nubiyan-twist-ace-ross-dj-leo-luscher-und-mystic-v_ALLm816"
+            },
+            {
+              "label": "Nubiyan Twist + Ace Ross + DJ Leo Luscher & Mystic V",
+              "detail": "Jumeaux Jazz Club, Lausanne",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/nubiyan-twist-ace-ross-dj-leo-luscher-mystic-v/"
+            },
+            {
+              "label": "The Jazz Room at Château Salavaux: a journey to the heart of New Orleans",
+              "detail": "Salavaux, Vully-les-Lacs",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-jazz-room-at-chateau-salavaux-a-journey-to-the-heart-of-new-orleans/"
+            },
+            {
+              "label": "Cabaret of the Strange",
+              "detail": "Cully, Bourg-en-Lavaux",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/cabaret-of-the-strange/"
+            },
+            {
+              "label": "Frissons au musée",
               "detail": "Lausanne",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/isaiah-collier-plays-coltrane/"
-            },
-            {
-              "label": "NATE SMITH / JOHN BEASLEY & HEMU JAZZ ORCHESTRA",
-              "detail": "Casino de Montbenon",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/nate-smith-john-beasley-und-hemu-jazz-orchestra_AywPAj8"
-            },
-            {
-              "label": "Miss C-Line + Joe Armon-Jones",
-              "detail": "Jumeaux Jazz Club",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/miss-c-line-joe-armon-jones_AdMrQiF"
-            },
-            {
-              "label": "Leading with Compassion - Leadership Immersion",
-              "detail": "Caux, Montreux — in corso, ultimo giorno: 30 ottobre 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/leading-with-compassion-leadership-immersion/"
-            },
-            {
-              "label": "The Navigator",
-              "detail": "Le Reflet – Théâtre de Vevey, Vevey — in corso, ultimo giorno: 29 ottobre 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/the-navigator/"
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/frissons-au-musee/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vaud/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -118,7 +118,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -140,7 +140,7 @@
           "url": "/eventi/vaud/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "en": {
       "canton": "VD",
@@ -150,7 +150,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "106",
+          "value": "103",
           "note": "from the site’s events calendar"
         }
       ],
@@ -161,69 +161,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Joe Armon-Jones + Miss C-Line",
+              "label": "Ace Ross + Nubiyan Twist + DJ Leo Luscher & Mystic V",
               "detail": "Jumeaux Jazz Club",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/events/music/lausanne/joe-armon-jones-miss-c-line_A4cfqyY"
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/ace-ross-nubiyan-twist-dj-leo-luscher-und-mystic-v_AJwPTH4"
             },
             {
-              "label": "STANISLAS (FR) + SUPPORT",
-              "detail": "Losanna, Lausanne",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/stanislas-fr-support/"
+              "label": "Eva Antonnikov Literary Event",
+              "detail": "Bibliothèque de Montreux-Veytaux, Montreux",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/rendez-vous-litteraire-eva-antonnikov/"
             },
             {
-              "label": "Halloween at the former Payerne abattoirs",
-              "detail": "Les Anciens abattoirs, Payerne",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-at-the-former-payerne-abattoirs/"
+              "label": "Feast of the dead",
+              "detail": "Vevey",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/feast-of-the-dead/"
             },
             {
-              "label": "LINH",
-              "detail": "Salle Métropole, Lausanne",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/linh/"
+              "label": "I Love Reggaeton Halloween",
+              "detail": "MAD - MAINFLOOR",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/i-love-reggaeton-halloween_Ajc9HEH"
             },
             {
-              "label": "Atelier de mosaïque",
-              "detail": "Renens",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-mosaique/"
+              "label": "Jérémie Kisling",
+              "detail": "Théâtre de l'Odéon",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/evenements/musique/villeneuve-vd/jeremie-kisling_AkdAR6x"
             },
             {
-              "label": "ISAIAH COLLIER PLAYS COLTRANE",
+              "label": "Nubiyan Twist + Ace Ross + DJ Leo Luscher & Mystic V",
+              "detail": "Jumeaux Jazz Club",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/lausanne/nubiyan-twist-ace-ross-dj-leo-luscher-und-mystic-v_ALLm816"
+            },
+            {
+              "label": "Nubiyan Twist + Ace Ross + DJ Leo Luscher & Mystic V",
+              "detail": "Jumeaux Jazz Club, Lausanne",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/nubiyan-twist-ace-ross-dj-leo-luscher-mystic-v/"
+            },
+            {
+              "label": "The Jazz Room at Château Salavaux: a journey to the heart of New Orleans",
+              "detail": "Salavaux, Vully-les-Lacs",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-jazz-room-at-chateau-salavaux-a-journey-to-the-heart-of-new-orleans/"
+            },
+            {
+              "label": "Cabaret of the Strange",
+              "detail": "Cully, Bourg-en-Lavaux",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/cabaret-of-the-strange/"
+            },
+            {
+              "label": "Frissons au musée",
               "detail": "Lausanne",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/isaiah-collier-plays-coltrane/"
-            },
-            {
-              "label": "NATE SMITH / H",
-              "detail": "Casino de Montbenon",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/nate-smith-john-beasley-und-hemu-jazz-orchestra_AywPAj8"
-            },
-            {
-              "label": "Miss C-Line + Joe Armon-Jones",
-              "detail": "Jumeaux Jazz Club",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/miss-c-line-joe-armon-jones_AdMrQiF"
-            },
-            {
-              "label": "Leading with Compassion - Leadership Immersion",
-              "detail": "Caux, Montreux — ongoing, last day: 30 October 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/leading-with-compassion-leadership-immersion/"
-            },
-            {
-              "label": "The Navigator",
-              "detail": "Le Reflet – Théâtre de Vevey, Vevey — ongoing, last day: 29 October 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/the-navigator/"
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/frissons-au-musee/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/vaud/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -241,7 +241,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -263,7 +263,7 @@
           "url": "/en/events/vaud/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "de": {
       "canton": "VD",
@@ -273,7 +273,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "106",
+          "value": "103",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -284,69 +284,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Joe Armon-Jones + Miss C-Line",
+              "label": "Ace Ross + Nubiyan Twist + DJ Leo Luscher & Mystic V",
               "detail": "Jumeaux Jazz Club",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/events/music/lausanne/joe-armon-jones-miss-c-line_A4cfqyY"
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/ace-ross-nubiyan-twist-dj-leo-luscher-und-mystic-v_AJwPTH4"
             },
             {
-              "label": "STANISLAS (FR) + SUPPORT",
-              "detail": "Losanna, Lausanne",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/stanislas-fr-support/"
+              "label": "Literaturtreffen mit Eva Antonnikov",
+              "detail": "Bibliothèque de Montreux-Veytaux, Montreux",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/rendez-vous-litteraire-eva-antonnikov/"
             },
             {
-              "label": "Halloween in den alten Schlachthöfen von Payerne",
-              "detail": "Les Anciens abattoirs, Payerne",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-at-the-former-payerne-abattoirs/"
+              "label": "Fest der Toten",
+              "detail": "Vevey",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/feast-of-the-dead/"
             },
             {
-              "label": "LINH",
-              "detail": "Salle Métropole, Lausanne",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/linh/"
+              "label": "I Love Reggaeton Halloween",
+              "detail": "MAD - MAINFLOOR",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/i-love-reggaeton-halloween_Ajc9HEH"
             },
             {
-              "label": "Atelier de mosaïque",
-              "detail": "Renens",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-mosaique/"
+              "label": "Jérémie Kisling",
+              "detail": "Théâtre de l'Odéon",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/evenements/musique/villeneuve-vd/jeremie-kisling_AkdAR6x"
             },
             {
-              "label": "ISAIAH COLLIER PLAYS COLTRANE",
+              "label": "Nubiyan Twist + Ace Ross + DJ Leo Luscher & Mystic V",
+              "detail": "Jumeaux Jazz Club",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/lausanne/nubiyan-twist-ace-ross-dj-leo-luscher-und-mystic-v_ALLm816"
+            },
+            {
+              "label": "Nubiyan Twist + Ace Ross + DJ Leo Luscher & Mystic V",
+              "detail": "Jumeaux Jazz Club, Lausanne",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/nubiyan-twist-ace-ross-dj-leo-luscher-mystic-v/"
+            },
+            {
+              "label": "„The Jazz Room“ im Château Salavaux: eine Reise ins Herz von New Orleans",
+              "detail": "Salavaux, Vully-les-Lacs",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-jazz-room-at-chateau-salavaux-a-journey-to-the-heart-of-new-orleans/"
+            },
+            {
+              "label": "Cabaret de l’Etrange",
+              "detail": "Cully, Bourg-en-Lavaux",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/cabaret-of-the-strange/"
+            },
+            {
+              "label": "Frissons au musée",
               "detail": "Lausanne",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/isaiah-collier-plays-coltrane/"
-            },
-            {
-              "label": "NATE SMITH / JOHN BEASLEY & HEMU JAZZORCHESTER",
-              "detail": "Casino de Montbenon",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/nate-smith-john-beasley-und-hemu-jazz-orchestra_AywPAj8"
-            },
-            {
-              "label": "Miss C-Line + Joe Armon-Jones",
-              "detail": "Jumeaux Jazz Club",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/miss-c-line-joe-armon-jones_AdMrQiF"
-            },
-            {
-              "label": "Führen mit Menschlichkeit – Immersion Leadership",
-              "detail": "Caux, Montreux — läuft, letzter Tag: 30. Oktober 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/leading-with-compassion-leadership-immersion/"
-            },
-            {
-              "label": "The Navigator",
-              "detail": "Le Reflet – Théâtre de Vevey, Vevey — läuft, letzter Tag: 29. Oktober 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/the-navigator/"
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/frissons-au-musee/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/waadt/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -364,7 +364,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -386,7 +386,7 @@
           "url": "/de/veranstaltungen/waadt/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "fr": {
       "canton": "VD",
@@ -396,7 +396,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "106",
+          "value": "103",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -407,69 +407,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Joe Armon-Jones + Miss C-Line",
+              "label": "Ace Ross + Nubiyan Twist + DJ Leo Luscher & Mystic V",
               "detail": "Jumeaux Jazz Club",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/events/music/lausanne/joe-armon-jones-miss-c-line_A4cfqyY"
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/ace-ross-nubiyan-twist-dj-leo-luscher-und-mystic-v_AJwPTH4"
             },
             {
-              "label": "STANISLAS (FR) + SUPPORT",
-              "detail": "Losanna, Lausanne",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/stanislas-fr-support/"
+              "label": "Rendez-vous Littéraire Eva Antonnikov",
+              "detail": "Bibliothèque de Montreux-Veytaux, Montreux",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/rendez-vous-litteraire-eva-antonnikov/"
             },
             {
-              "label": "Halloween aux anciens Abattoirs de Payerne",
-              "detail": "Les Anciens abattoirs, Payerne",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-at-the-former-payerne-abattoirs/"
+              "label": "Fête des morts",
+              "detail": "Vevey",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/feast-of-the-dead/"
             },
             {
-              "label": "LINH",
-              "detail": "Salle Métropole, Lausanne",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/linh/"
+              "label": "I Love Reggaeton Halloween",
+              "detail": "MAD - MAINFLOOR",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/i-love-reggaeton-halloween_Ajc9HEH"
             },
             {
-              "label": "Atelier de mosaïque",
-              "detail": "Renens",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-mosaique/"
+              "label": "Jérémie Kisling",
+              "detail": "Théâtre de l'Odéon",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/evenements/musique/villeneuve-vd/jeremie-kisling_AkdAR6x"
             },
             {
-              "label": "ISAIAH COLLIER PLAYS COLTRANE",
+              "label": "Nubiyan Twist + Ace Ross + DJ Leo Luscher & Mystic V",
+              "detail": "Jumeaux Jazz Club",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/lausanne/nubiyan-twist-ace-ross-dj-leo-luscher-und-mystic-v_ALLm816"
+            },
+            {
+              "label": "Nubiyan Twist + Ace Ross + DJ Leo Luscher & Mystic V",
+              "detail": "Jumeaux Jazz Club, Lausanne",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/nubiyan-twist-ace-ross-dj-leo-luscher-mystic-v/"
+            },
+            {
+              "label": "The Jazz Room au Château Salavaux : un voyage au cœur de la Nouvelle-Orléans",
+              "detail": "Salavaux, Vully-les-Lacs",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-jazz-room-at-chateau-salavaux-a-journey-to-the-heart-of-new-orleans/"
+            },
+            {
+              "label": "Le Cabaret de l'Étrange",
+              "detail": "Cully, Bourg-en-Lavaux",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/cabaret-of-the-strange/"
+            },
+            {
+              "label": "Frissons au musée",
               "detail": "Lausanne",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/isaiah-collier-plays-coltrane/"
-            },
-            {
-              "label": "NATE SMITH / JOHN BEASLEY & HEMU JAZZ ORCHESTRE",
-              "detail": "Casino de Montbenon",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/nate-smith-john-beasley-und-hemu-jazz-orchestra_AywPAj8"
-            },
-            {
-              "label": "Miss C-Line + Joe Armon-Jones",
-              "detail": "Jumeaux Jazz Club",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/miss-c-line-joe-armon-jones_AdMrQiF"
-            },
-            {
-              "label": "Diriger avec Humanité - Immersion Leadership",
-              "detail": "Caux, Montreux — en cours, dernier jour : 30 octobre 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/leading-with-compassion-leadership-immersion/"
-            },
-            {
-              "label": "The Navigator",
-              "detail": "Le Reflet – Théâtre de Vevey, Vevey — en cours, dernier jour : 29 octobre 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/the-navigator/"
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/frissons-au-musee/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/vaud/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -487,7 +487,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -509,7 +509,7 @@
           "url": "/fr/evenements/vaud/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     }
   }
 }

@@ -4,17 +4,17 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "eventi",
-  "updatedAt": "2026-10-29T07:40:41.678Z",
-  "contentHash": "b4fb00f7cda437edee0c40c380ba08c64016e9b4f0ae83a1bc37f6bb59678e36",
+  "updatedAt": "2026-10-30T06:23:49.454Z",
+  "contentHash": "b03cff17aed5bc75df1776c4d865b0a8f26531d58080c52d0101364df7d47965",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-28T19:25:39.771Z",
+      "updatedAt": "2026-10-29T21:23:37.654Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-28T21:56:57.371Z",
+      "updatedAt": "2026-10-29T22:02:50.125Z",
       "keyFacts": 0
     }
   ],
@@ -37,30 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "12th biennal of watchmaker's heritage day",
-              "detail": "Tourisme neuchâtelois - Montagnes, La Chaux-de-Fonds",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/11e-biennale-du-patrimoine-horloger/"
-            },
-            {
-              "label": "Midi Théâtre — Tavolo Pour Drü",
-              "detail": "Neuchâtel",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/midi-theatre-tavolo-pour-drue/"
-            },
-            {
-              "label": "Qui Som ?",
-              "detail": "Théâtre du Passage, Neuchâtel",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/qui-som/"
-            },
-            {
-              "label": "Atelier de gravure pour tous",
-              "detail": "Musée d'art et d'histoire, Neuchâtel — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
-            },
             {
               "label": "Chocolatissimo",
               "detail": "Chocolatissimo, Neuchâtel",
@@ -92,15 +68,39 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/une-bonne-soiree-entre-gens-sympas-1/"
             },
             {
+              "label": "12th biennal of watchmaker's heritage day",
+              "detail": "Tourisme neuchâtelois - Montagnes, La Chaux-de-Fonds — in corso, ultimo giorno: 1 novembre 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/11e-biennale-du-patrimoine-horloger/"
+            },
+            {
+              "label": "Qui Som ?",
+              "detail": "Théâtre du Passage, Neuchâtel — in corso, ultimo giorno: 31 ottobre 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/qui-som/"
+            },
+            {
+              "label": "Atelier de gravure pour tous",
+              "detail": "Musée d'art et d'histoire, Neuchâtel — in corso, ultimo giorno: 1 novembre 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
+            },
+            {
               "label": "Les contes du château hanté (14h00)",
               "detail": "A bijou at the gateway to the Val-de-Ruz - Valangin, Val-de-Ruz",
               "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/les-contes-du-chateau-hante-14h00/"
+            },
+            {
+              "label": "VITRAUX SYMBOLIQUES",
+              "detail": "Couvet, Val-de-Travers",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vitraux-symboliques/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/neuchatel/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -128,7 +128,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -150,7 +150,7 @@
           "url": "/eventi/neuchatel/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "en": {
       "canton": "NE",
@@ -170,30 +170,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "12th biennal of watchmaker's heritage day",
-              "detail": "Tourisme neuchâtelois - Montagnes, La Chaux-de-Fonds",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/11e-biennale-du-patrimoine-horloger/"
-            },
-            {
-              "label": "Midi Théâtre — Tavolo Pour Drü",
-              "detail": "Neuchâtel",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/midi-theatre-tavolo-pour-drue/"
-            },
-            {
-              "label": "Qui Som ?",
-              "detail": "Théâtre du Passage, Neuchâtel",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/qui-som/"
-            },
-            {
-              "label": "Atelier de gravure pour tous",
-              "detail": "Musée d'art et d'histoire, Neuchâtel — ongoing, last day: 1 November 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
-            },
             {
               "label": "Chocolatissimo",
               "detail": "Chocolatissimo, Neuchâtel",
@@ -225,15 +201,39 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/une-bonne-soiree-entre-gens-sympas-1/"
             },
             {
+              "label": "12th biennal of watchmaker's heritage day",
+              "detail": "Tourisme neuchâtelois - Montagnes, La Chaux-de-Fonds — ongoing, last day: 1 November 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/11e-biennale-du-patrimoine-horloger/"
+            },
+            {
+              "label": "Qui Som ?",
+              "detail": "Théâtre du Passage, Neuchâtel — ongoing, last day: 31 October 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/qui-som/"
+            },
+            {
+              "label": "Atelier de gravure pour tous",
+              "detail": "Musée d'art et d'histoire, Neuchâtel — ongoing, last day: 1 November 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
+            },
+            {
               "label": "Les contes du château hanté (14h00)",
               "detail": "A bijou at the gateway to the Val-de-Ruz - Valangin, Val-de-Ruz",
               "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/les-contes-du-chateau-hante-14h00/"
+            },
+            {
+              "label": "VITRAUX SYMBOLIQUES",
+              "detail": "Couvet, Val-de-Travers",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vitraux-symboliques/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/neuchatel/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -261,7 +261,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -283,7 +283,7 @@
           "url": "/en/events/neuchatel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "de": {
       "canton": "NE",
@@ -303,30 +303,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "12. Biennale des Uhrmacher-Patrimoniums",
-              "detail": "Tourisme neuchâtelois - Montagnes, La Chaux-de-Fonds",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/11e-biennale-du-patrimoine-horloger/"
-            },
-            {
-              "label": "Midi Théâtre — Tavolo Pour Drü",
-              "detail": "Neuchâtel",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/midi-theatre-tavolo-pour-drue/"
-            },
-            {
-              "label": "Qui Som ?",
-              "detail": "Théâtre du Passage, Neuchâtel",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/qui-som/"
-            },
-            {
-              "label": "Atelier de gravure pour tous",
-              "detail": "Musée d'art et d'histoire, Neuchâtel — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
-            },
             {
               "label": "Chocolatissimo",
               "detail": "Chocolatissimo, Neuchâtel",
@@ -358,15 +334,39 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/une-bonne-soiree-entre-gens-sympas-1/"
             },
             {
+              "label": "12. Biennale des Uhrmacher-Patrimoniums",
+              "detail": "Tourisme neuchâtelois - Montagnes, La Chaux-de-Fonds — läuft, letzter Tag: 1. November 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/11e-biennale-du-patrimoine-horloger/"
+            },
+            {
+              "label": "Qui Som ?",
+              "detail": "Théâtre du Passage, Neuchâtel — läuft, letzter Tag: 31. Oktober 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/qui-som/"
+            },
+            {
+              "label": "Atelier de gravure pour tous",
+              "detail": "Musée d'art et d'histoire, Neuchâtel — läuft, letzter Tag: 1. November 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
+            },
+            {
               "label": "Les contes du château hanté (14h00)",
               "detail": "A bijou at the gateway to the Val-de-Ruz - Valangin, Val-de-Ruz",
               "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/les-contes-du-chateau-hante-14h00/"
+            },
+            {
+              "label": "VITRAUX SYMBOLIQUES",
+              "detail": "Couvet, Val-de-Travers",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vitraux-symboliques/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/neuenburg/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -394,7 +394,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -416,7 +416,7 @@
           "url": "/de/veranstaltungen/neuenburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "fr": {
       "canton": "NE",
@@ -436,30 +436,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "12e biennale du patrimoine horloger",
-              "detail": "Tourisme neuchâtelois - Montagnes, La Chaux-de-Fonds",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/11e-biennale-du-patrimoine-horloger/"
-            },
-            {
-              "label": "Midi Théâtre — Tavolo Pour Drü",
-              "detail": "Neuchâtel",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/midi-theatre-tavolo-pour-drue/"
-            },
-            {
-              "label": "Qui Som ?",
-              "detail": "Théâtre du Passage, Neuchâtel",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/qui-som/"
-            },
-            {
-              "label": "Atelier de gravure pour tous",
-              "detail": "Musée d'art et d'histoire, Neuchâtel — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
-            },
             {
               "label": "Chocolatissimo",
               "detail": "Chocolatissimo, Neuchâtel",
@@ -491,15 +467,39 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/une-bonne-soiree-entre-gens-sympas-1/"
             },
             {
+              "label": "12e biennale du patrimoine horloger",
+              "detail": "Tourisme neuchâtelois - Montagnes, La Chaux-de-Fonds — en cours, dernier jour : 1er novembre 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/11e-biennale-du-patrimoine-horloger/"
+            },
+            {
+              "label": "Qui Som ?",
+              "detail": "Théâtre du Passage, Neuchâtel — en cours, dernier jour : 31 octobre 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/qui-som/"
+            },
+            {
+              "label": "Atelier de gravure pour tous",
+              "detail": "Musée d'art et d'histoire, Neuchâtel — en cours, dernier jour : 1er novembre 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
+            },
+            {
               "label": "Les contes du château hanté (14h00)",
               "detail": "A bijou at the gateway to the Val-de-Ruz - Valangin, Val-de-Ruz",
               "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/les-contes-du-chateau-hante-14h00/"
+            },
+            {
+              "label": "VITRAUX SYMBOLIQUES",
+              "detail": "Couvet, Val-de-Travers",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vitraux-symboliques/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/neuchatel/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -527,7 +527,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -549,7 +549,7 @@
           "url": "/fr/evenements/neuchatel/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     }
   }
 }

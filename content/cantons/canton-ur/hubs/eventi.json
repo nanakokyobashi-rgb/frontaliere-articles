@@ -4,12 +4,12 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "eventi",
-  "updatedAt": "2026-10-29T07:40:41.678Z",
-  "contentHash": "be1dc1c0a00a8efeb792b959c8d7ffad5a23ca3b8caa501895f6365527fef14c",
+  "updatedAt": "2026-10-30T06:23:49.454Z",
+  "contentHash": "3994400476932b7e4a7bda97ed3635d44d5f75177c8455775090a5407532f425",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-28T19:25:39.771Z",
+      "updatedAt": "2026-10-29T21:23:37.654Z",
       "keyFacts": 1
     }
   ],
@@ -33,22 +33,16 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Holz | Stein | Farbe - Kunstausstellung",
-              "detail": "Zeughaus",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/holz-stein-farbe-kunstausstellung/"
-            },
-            {
-              "label": "Literarischer Abend: «Literatur der Welt - Welt der Literatur»",
-              "detail": "Kantonsbibliothek Uri, Altdorf (UR)",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/literarischer-abend-literatur-der-welt-welt-der-literatur/"
-            },
-            {
               "label": "Joël von Mutzenbecher – UNBOXED",
               "detail": "Altdorf, Altdorf (UR)",
               "date": "2026-10-30",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/joel-von-mutzenbecher-unboxed-2/"
+            },
+            {
+              "label": "Holz | Stein | Farbe - Kunstausstellung",
+              "detail": "Zeughaus — in corso, ultimo giorno: 3 novembre 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/holz-stein-farbe-kunstausstellung/"
             },
             {
               "label": "Einzig und dr Andr",
@@ -91,11 +85,17 @@
               "detail": "Altdorf",
               "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/julia-steiner/"
+            },
+            {
+              "label": "Cardmania",
+              "detail": "Schattdorf",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cardmania/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/uri/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/uri/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "en": {
       "canton": "UR",
@@ -138,22 +138,16 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Holz | Stein | Farbe - Kunstausstellung",
-              "detail": "Zeughaus",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/holz-stein-farbe-kunstausstellung/"
-            },
-            {
-              "label": "Literarischer Abend: «Literatur der Welt - Welt der Literatur»",
-              "detail": "Kantonsbibliothek Uri, Altdorf (UR)",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/literarischer-abend-literatur-der-welt-welt-der-literatur/"
-            },
-            {
               "label": "Joël von Mutzenbecher – UNBOXED",
               "detail": "Altdorf, Altdorf (UR)",
               "date": "2026-10-30",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/joel-von-mutzenbecher-unboxed-2/"
+            },
+            {
+              "label": "Holz | Stein | Farbe - Kunstausstellung",
+              "detail": "Zeughaus — ongoing, last day: 3 November 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/holz-stein-farbe-kunstausstellung/"
             },
             {
               "label": "Einzig und dr Andr",
@@ -196,11 +190,17 @@
               "detail": "Altdorf",
               "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/julia-steiner/"
+            },
+            {
+              "label": "Cardmania",
+              "detail": "Schattdorf",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cardmania/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/uri/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/uri/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "de": {
       "canton": "UR",
@@ -243,22 +243,16 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Holz | Stein | Farbe - Kunstausstellung",
-              "detail": "Zeughaus",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/holz-stein-farbe-kunstausstellung/"
-            },
-            {
-              "label": "Literarischer Abend: «Literatur der Welt - Welt der Literatur»",
-              "detail": "Kantonsbibliothek Uri, Altdorf (UR)",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/literarischer-abend-literatur-der-welt-welt-der-literatur/"
-            },
-            {
               "label": "Joël von Mutzenbecher – UNBOXED",
               "detail": "Altdorf, Altdorf (UR)",
               "date": "2026-10-30",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/joel-von-mutzenbecher-unboxed-2/"
+            },
+            {
+              "label": "Holz | Stein | Farbe - Kunstausstellung",
+              "detail": "Zeughaus — läuft, letzter Tag: 3. November 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/holz-stein-farbe-kunstausstellung/"
             },
             {
               "label": "Einzig und dr Andr",
@@ -301,11 +295,17 @@
               "detail": "Altdorf",
               "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/julia-steiner/"
+            },
+            {
+              "label": "Cardmania",
+              "detail": "Schattdorf",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cardmania/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/uri/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/uri/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "fr": {
       "canton": "UR",
@@ -348,22 +348,16 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Holz | Stein | Farbe - Kunstausstellung",
-              "detail": "Zeughaus",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/holz-stein-farbe-kunstausstellung/"
-            },
-            {
-              "label": "Literarischer Abend: «Literatur der Welt - Welt der Literatur»",
-              "detail": "Kantonsbibliothek Uri, Altdorf (UR)",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/literarischer-abend-literatur-der-welt-welt-der-literatur/"
-            },
-            {
               "label": "Joël von Mutzenbecher – UNBOXED",
               "detail": "Altdorf, Altdorf (UR)",
               "date": "2026-10-30",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/joel-von-mutzenbecher-unboxed-2/"
+            },
+            {
+              "label": "Holz | Stein | Farbe - Kunstausstellung",
+              "detail": "Zeughaus — en cours, dernier jour : 3 novembre 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/holz-stein-farbe-kunstausstellung/"
             },
             {
               "label": "Einzig und dr Andr",
@@ -406,11 +400,17 @@
               "detail": "Altdorf",
               "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/julia-steiner/"
+            },
+            {
+              "label": "Cardmania",
+              "detail": "Schattdorf",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cardmania/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/uri/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/uri/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     }
   }
 }

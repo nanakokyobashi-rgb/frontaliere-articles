@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "servizi",
-  "updatedAt": "2026-10-29T21:57:02.700Z",
-  "contentHash": "c39861bc6be8b26a6de7bd57f0c55789c92ffb425e1bddc83bc19eb195f75fc2",
+  "updatedAt": "2026-10-30T06:23:49.454Z",
+  "contentHash": "3ade3d45a6ddb38044e8c298560eb23be769f560482e664abd802697b5347e28",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -19,12 +19,12 @@
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-29T15:24:02.220Z",
+      "updatedAt": "2026-10-29T21:17:01.193Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-29T11:47:10.249Z",
+      "updatedAt": "2026-10-29T22:02:50.125Z",
       "keyFacts": 0
     }
   ],
@@ -101,12 +101,12 @@
           "items": [
             {
               "label": "Aarau",
-              "value": "11 °C",
-              "detail": "oggi da 5 a 12 °C"
+              "value": "7 °C",
+              "detail": "oggi da 5 a 9 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-29T15:24:02.220Z"
+          "updatedAt": "2026-10-29T21:17:01.193Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -144,7 +144,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
             }
           ],
-          "updatedAt": "2026-10-29T11:47:10.249Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -224,7 +224,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-29T21:57:02.700Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "en": {
       "canton": "AG",
@@ -298,12 +298,12 @@
           "items": [
             {
               "label": "Aarau",
-              "value": "11 °C",
-              "detail": "today from 5 to 12 °C"
+              "value": "7 °C",
+              "detail": "today from 5 to 9 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-29T15:24:02.220Z"
+          "updatedAt": "2026-10-29T21:17:01.193Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -341,7 +341,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
             }
           ],
-          "updatedAt": "2026-10-29T11:47:10.249Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -417,7 +417,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-29T21:57:02.700Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "de": {
       "canton": "AG",
@@ -491,12 +491,12 @@
           "items": [
             {
               "label": "Aarau",
-              "value": "11 °C",
-              "detail": "heute 5 bis 12 °C"
+              "value": "7 °C",
+              "detail": "heute 5 bis 9 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-29T15:24:02.220Z"
+          "updatedAt": "2026-10-29T21:17:01.193Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -534,7 +534,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
             }
           ],
-          "updatedAt": "2026-10-29T11:47:10.249Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -610,7 +610,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-29T21:57:02.700Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "fr": {
       "canton": "AG",
@@ -684,12 +684,12 @@
           "items": [
             {
               "label": "Aarau",
-              "value": "11 °C",
-              "detail": "aujourd’hui de 5 à 12 °C"
+              "value": "7 °C",
+              "detail": "aujourd’hui de 5 à 9 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-29T15:24:02.220Z"
+          "updatedAt": "2026-10-29T21:17:01.193Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -727,7 +727,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
             }
           ],
-          "updatedAt": "2026-10-29T11:47:10.249Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -799,7 +799,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-29T21:57:02.700Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     }
   }
 }

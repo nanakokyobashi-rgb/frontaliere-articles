@@ -4,12 +4,12 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "eventi",
-  "updatedAt": "2026-10-29T07:40:41.678Z",
-  "contentHash": "f39bdb99d2249d0d04279a18b4c0fd0a8c6e533160392017998cd12b6ecf3105",
+  "updatedAt": "2026-10-30T06:23:49.454Z",
+  "contentHash": "c9cc6a94b2dbc19204530959d44224d47863af60cac0fb66db5f14046b6c2f99",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-28T19:25:39.771Z",
+      "updatedAt": "2026-10-29T21:23:37.654Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "89",
+          "value": "82",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Basel Jazz Orchestra plays George Gruntz",
-              "detail": "the bird's eye jazz club, Basel",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/basel-jazz-orchestra_AEVbtJQ"
-            },
-            {
-              "label": "Gin Workshop: eigenen Gin entwickeln in der Brennerei",
-              "detail": "Basel",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gin-workshop-eigenen-gin-entwickeln-in-der-brennerei/"
+              "label": "Tyn Wybenga Brainteaser Orchestra",
+              "detail": "the bird's eye jazz club",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/tyn-wybenga-brainteaser-orchestra_AEQGpsj"
             },
             {
               "label": "mini.musik",
               "detail": "Theater Basel, Basel",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/basel/minimusik_ArwC5MD"
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/basel/minimusik_A6dhDvZ"
             },
             {
-              "label": "Irish Folk Festival",
-              "detail": "Stadtcasino Basel, Basel",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/basel/irish-folk-festival_ANYkapT"
+              "label": "Roche 'n' Jazz: Tyn Wybenga Brainteaser Orchestra",
+              "detail": "Museum Tinguely",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/roche-n-jazz-tyn-wybenga-brainteaser-orchestra_ACNfPtq"
             },
             {
-              "label": "Rhine Classics: Encounter I",
+              "label": "Ueli x Brandhärd: Beats, Beers & Burgers",
+              "detail": "Ueli-Brau-Bar",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/museums/children/events/basel/ueli-x-brandhaerd-beats-beers-und-burgers_AXY3VVY"
+            },
+            {
+              "label": "Country Boat sul Rhy con musica dal vivo: Route 65",
+              "detail": "MS Christoph Merian",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/events/music/basel/country-boat-on-the-rhine-with-live-music-route-65_A3ASxDn"
+            },
+            {
+              "label": "Extrakonzert \"Musikschule@Museum\" - VOZ E VENTO",
+              "detail": "Museum Allschwil - Haus für Kultur und Geschichte, Allschwil",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/allschwil/extrakonzert-musikschulemuseum-voz-e-vento_Aj9nbT1"
+            },
+            {
+              "label": "TEXTUR 2026 - Gregor auf dem Stein",
+              "detail": "Museum Kleines Klingental",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/textur-2026-gregor-auf-dem-stein_ATp84KQ"
+            },
+            {
+              "label": "Pippo Pollina & Quartetto Acustico",
+              "detail": "Volkshaus Basel, Basel",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/ricerca/basilea/pippo-pollina-und-quartetto-acustico_ALFMEXt"
+            },
+            {
+              "label": "«Le Carillon des Regrets» CD-Präsentation Cardinal Complex",
               "detail": "Basel",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ensemble-rhein-klassik/"
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-carillon-des-regrets-cd-praesentation-cardinal-complex/"
             },
             {
-              "label": "Cantuccini - Neues Programm",
-              "detail": "Theater Fauteuil - Tabourettli",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/cantuccini-neues-programm_AE4hULr"
-            },
-            {
-              "label": "Grietas/A Hot Chick in the Oven",
-              "detail": "Tanzhaus Basel - Magazin 1 - Studio Bühne, Basel",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/grietasa-hot-chick-in-the-oven_A2vegu2"
-            },
-            {
-              "label": "StandUp Comedy: Simon Stäblein - Absolute Frechheit",
-              "detail": "Häbse-Theater Basel, Basel",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/standup-comedy-simon-staeblein-absolute-frechheit-1/"
-            },
-            {
-              "label": "Starbugs Comedy - Showtime!",
-              "detail": "Basel",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/starbugs-comedy-showtime-1/"
-            },
-            {
-              "label": "Daniela Dill: «Trotzdäm»",
-              "detail": "Der Teufelhof Basel, Basel",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/daniela-dill-trotzdaem/"
+              "label": "IMAGINE Gospelkonzert",
+              "detail": "Evang.-ref. Christuskirche, Allschwil",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/allschwil/imagine-gospelkonzert_AARaZAV"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/basilea/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/basilea/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "89",
+          "value": "82",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Basel Jazz Orchestra plays George Gruntz",
-              "detail": "the bird's eye jazz club, Basel",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/basel-jazz-orchestra_AEVbtJQ"
-            },
-            {
-              "label": "Gin Workshop: eigenen Gin entwickeln in der Brennerei",
-              "detail": "Basel",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gin-workshop-eigenen-gin-entwickeln-in-der-brennerei/"
+              "label": "Tyn Wybenga Brainteaser Orchestra",
+              "detail": "the bird's eye jazz club",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/tyn-wybenga-brainteaser-orchestra_AEQGpsj"
             },
             {
               "label": "mini.musik",
               "detail": "Theater Basel, Basel",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/basel/minimusik_ArwC5MD"
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/basel/minimusik_A6dhDvZ"
             },
             {
-              "label": "Irish Folk Festival",
-              "detail": "Stadtcasino Basel, Basel",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/basel/irish-folk-festival_ANYkapT"
+              "label": "Roche 'n' Jazz: Tyn Wybenga Brainteaser Orchestra",
+              "detail": "Museum Tinguely",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/roche-n-jazz-tyn-wybenga-brainteaser-orchestra_ACNfPtq"
             },
             {
-              "label": "Rhine Classics: Encounter I",
+              "label": "Ueli x Brandhärd: Beats, Beers & Burgers",
+              "detail": "Ueli-Brau-Bar",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/museums/children/events/basel/ueli-x-brandhaerd-beats-beers-und-burgers_AXY3VVY"
+            },
+            {
+              "label": "Country Boat on the Rhine with Live Music: Route 65",
+              "detail": "MS Christoph Merian",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/events/music/basel/country-boat-on-the-rhine-with-live-music-route-65_A3ASxDn"
+            },
+            {
+              "label": "Extrakonzert \"Musikschule@Museum\" - VOZ E VENTO",
+              "detail": "Museum Allschwil - Haus für Kultur und Geschichte, Allschwil",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/allschwil/extrakonzert-musikschulemuseum-voz-e-vento_Aj9nbT1"
+            },
+            {
+              "label": "TEXTUR 2026 - Gregor auf dem Stein",
+              "detail": "Museum Kleines Klingental",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/textur-2026-gregor-auf-dem-stein_ATp84KQ"
+            },
+            {
+              "label": "Pippo Pollina & Acoustic Quartet",
+              "detail": "Volkshaus Basel, Basel",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/ricerca/basilea/pippo-pollina-und-quartetto-acustico_ALFMEXt"
+            },
+            {
+              "label": "«Le Carillon des Regrets» CD-Präsentation Cardinal Complex",
               "detail": "Basel",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ensemble-rhein-klassik/"
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-carillon-des-regrets-cd-praesentation-cardinal-complex/"
             },
             {
-              "label": "Cantuccini - Neues Programm",
-              "detail": "Theater Fauteuil - Tabourettli",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/cantuccini-neues-programm_AE4hULr"
-            },
-            {
-              "label": "Grietas/A Hot Chick in the Oven",
-              "detail": "Tanzhaus Basel - Magazin 1 - Studio Bühne, Basel",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/grietasa-hot-chick-in-the-oven_A2vegu2"
-            },
-            {
-              "label": "StandUp Comedy",
-              "detail": "Häbse-Theater Basel, Basel",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/standup-comedy-simon-staeblein-absolute-frechheit-1/"
-            },
-            {
-              "label": "Starbugs Comedy - Showtime!",
-              "detail": "Basel",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/starbugs-comedy-showtime-1/"
-            },
-            {
-              "label": "Daniela Dill: «Trotzdäm»",
-              "detail": "Der Teufelhof Basel, Basel",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/daniela-dill-trotzdaem/"
+              "label": "IMAGINE Gospelkonzert",
+              "detail": "Evang.-ref. Christuskirche, Allschwil",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/allschwil/imagine-gospelkonzert_AARaZAV"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/basel/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/basel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "89",
+          "value": "82",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Basel Jazz Orchestra plays George Gruntz",
-              "detail": "the bird's eye jazz club, Basel",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/basel-jazz-orchestra_AEVbtJQ"
-            },
-            {
-              "label": "Gin Workshop: eigenen Gin entwickeln in der Brennerei",
-              "detail": "Basel",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gin-workshop-eigenen-gin-entwickeln-in-der-brennerei/"
+              "label": "Tyn Wybenga Brainteaser Orchestra",
+              "detail": "the bird's eye jazz club",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/tyn-wybenga-brainteaser-orchestra_AEQGpsj"
             },
             {
               "label": "mini.musik",
               "detail": "Theater Basel, Basel",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/basel/minimusik_ArwC5MD"
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/basel/minimusik_A6dhDvZ"
             },
             {
-              "label": "Irish Folk Festival",
-              "detail": "Stadtcasino Basel, Basel",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/basel/irish-folk-festival_ANYkapT"
+              "label": "Roche 'n' Jazz: Tyn Wybenga Brainteaser Orchestra",
+              "detail": "Museum Tinguely",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/roche-n-jazz-tyn-wybenga-brainteaser-orchestra_ACNfPtq"
             },
             {
-              "label": "Rhein Klassik: Begegnung I",
+              "label": "Ueli x Brandhärd: Beats, Beers & Burgers",
+              "detail": "Ueli-Brau-Bar",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/museums/children/events/basel/ueli-x-brandhaerd-beats-beers-und-burgers_AXY3VVY"
+            },
+            {
+              "label": "Country Boat uff em Rhy mit Live-Musik: Route 65",
+              "detail": "MS Christoph Merian",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/events/music/basel/country-boat-on-the-rhine-with-live-music-route-65_A3ASxDn"
+            },
+            {
+              "label": "Extrakonzert \"Musikschule@Museum\" - VOZ E VENTO",
+              "detail": "Museum Allschwil - Haus für Kultur und Geschichte, Allschwil",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/allschwil/extrakonzert-musikschulemuseum-voz-e-vento_Aj9nbT1"
+            },
+            {
+              "label": "TEXTUR 2026 - Gregor auf dem Stein",
+              "detail": "Museum Kleines Klingental",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/textur-2026-gregor-auf-dem-stein_ATp84KQ"
+            },
+            {
+              "label": "Pippo Pollina & akustisches Quartett",
+              "detail": "Volkshaus Basel, Basel",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/ricerca/basilea/pippo-pollina-und-quartetto-acustico_ALFMEXt"
+            },
+            {
+              "label": "«Le Carillon des Regrets» CD-Präsentation Cardinal Complex",
               "detail": "Basel",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ensemble-rhein-klassik/"
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-carillon-des-regrets-cd-praesentation-cardinal-complex/"
             },
             {
-              "label": "Cantuccini - Neues Programm",
-              "detail": "Theater Fauteuil - Tabourettli",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/cantuccini-neues-programm_AE4hULr"
-            },
-            {
-              "label": "Grietas/A Hot Chick in the Oven",
-              "detail": "Tanzhaus Basel - Magazin 1 - Studio Bühne, Basel",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/grietasa-hot-chick-in-the-oven_A2vegu2"
-            },
-            {
-              "label": "Stand-up-Comedy: Simon Stäblein – Absolute Frechheit",
-              "detail": "Häbse-Theater Basel, Basel",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/standup-comedy-simon-staeblein-absolute-frechheit-1/"
-            },
-            {
-              "label": "Starbugs Comedy - Showtime!",
-              "detail": "Basel",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/starbugs-comedy-showtime-1/"
-            },
-            {
-              "label": "Daniela Dill: «Trotzdäm»",
-              "detail": "Der Teufelhof Basel, Basel",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/daniela-dill-trotzdaem/"
+              "label": "IMAGINE Gospelkonzert",
+              "detail": "Evang.-ref. Christuskirche, Allschwil",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/allschwil/imagine-gospelkonzert_AARaZAV"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/basel/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/basel/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "89",
+          "value": "82",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Basel Jazz Orchestra plays George Gruntz",
-              "detail": "the bird's eye jazz club, Basel",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/basel-jazz-orchestra_AEVbtJQ"
-            },
-            {
-              "label": "Gin Workshop: eigenen Gin entwickeln in der Brennerei",
-              "detail": "Basel",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gin-workshop-eigenen-gin-entwickeln-in-der-brennerei/"
+              "label": "Tyn Wybenga Brainteaser Orchestra",
+              "detail": "the bird's eye jazz club",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/tyn-wybenga-brainteaser-orchestra_AEQGpsj"
             },
             {
               "label": "mini.musik",
               "detail": "Theater Basel, Basel",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/basel/minimusik_ArwC5MD"
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/basel/minimusik_A6dhDvZ"
             },
             {
-              "label": "Irish Folk Festival",
-              "detail": "Stadtcasino Basel, Basel",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/basel/irish-folk-festival_ANYkapT"
+              "label": "Roche 'n' Jazz: Tyn Wybenga Brainteaser Orchestra",
+              "detail": "Museum Tinguely",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/roche-n-jazz-tyn-wybenga-brainteaser-orchestra_ACNfPtq"
             },
             {
-              "label": "Rhein Klassik : Rencontre I",
+              "label": "Ueli x Brandhärd: Beats, Beers & Burgers",
+              "detail": "Ueli-Brau-Bar",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/museums/children/events/basel/ueli-x-brandhaerd-beats-beers-und-burgers_AXY3VVY"
+            },
+            {
+              "label": "Country Boat sur le Rhin avec de la musique live : Route 65",
+              "detail": "MS Christoph Merian",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/events/music/basel/country-boat-on-the-rhine-with-live-music-route-65_A3ASxDn"
+            },
+            {
+              "label": "Extrakonzert \"Musikschule@Museum\" - VOZ E VENTO",
+              "detail": "Museum Allschwil - Haus für Kultur und Geschichte, Allschwil",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/allschwil/extrakonzert-musikschulemuseum-voz-e-vento_Aj9nbT1"
+            },
+            {
+              "label": "TEXTUR 2026 - Gregor auf dem Stein",
+              "detail": "Museum Kleines Klingental",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/textur-2026-gregor-auf-dem-stein_ATp84KQ"
+            },
+            {
+              "label": "Pippo Pollina & Quatuor acoustique",
+              "detail": "Volkshaus Basel, Basel",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/ricerca/basilea/pippo-pollina-und-quartetto-acustico_ALFMEXt"
+            },
+            {
+              "label": "«Le Carillon des Regrets» CD-Präsentation Cardinal Complex",
               "detail": "Basel",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ensemble-rhein-klassik/"
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-carillon-des-regrets-cd-praesentation-cardinal-complex/"
             },
             {
-              "label": "Cantuccini - Neues Programm",
-              "detail": "Theater Fauteuil - Tabourettli",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/cantuccini-neues-programm_AE4hULr"
-            },
-            {
-              "label": "Grietas/A Hot Chick in the Oven",
-              "detail": "Tanzhaus Basel - Magazin 1 - Studio Bühne, Basel",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/grietasa-hot-chick-in-the-oven_A2vegu2"
-            },
-            {
-              "label": "StandUp Comedy : Simon Stäblein - Absolute Frechheit",
-              "detail": "Häbse-Theater Basel, Basel",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/standup-comedy-simon-staeblein-absolute-frechheit-1/"
-            },
-            {
-              "label": "Starbugs Comedy - Showtime!",
-              "detail": "Basel",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/starbugs-comedy-showtime-1/"
-            },
-            {
-              "label": "Daniela Dill: «Trotzdäm»",
-              "detail": "Der Teufelhof Basel, Basel",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/daniela-dill-trotzdaem/"
+              "label": "IMAGINE Gospelkonzert",
+              "detail": "Evang.-ref. Christuskirche, Allschwil",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/allschwil/imagine-gospelkonzert_AARaZAV"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/bale/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/bale/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     }
   }
 }

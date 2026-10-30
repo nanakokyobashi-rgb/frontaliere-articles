@@ -4,12 +4,12 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "eventi",
-  "updatedAt": "2026-10-29T07:40:41.678Z",
-  "contentHash": "5b098d4eaa2ecbcb3fd00c16915becc9f7af41972b0fea07cf1d92f83f184018",
+  "updatedAt": "2026-10-30T06:23:49.454Z",
+  "contentHash": "47f096372bc37a33bf304d956c02cd8c4c889f3263912f74bc00adcd691cfadd",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-28T19:25:39.771Z",
+      "updatedAt": "2026-10-29T21:23:37.654Z",
       "keyFacts": 1
     }
   ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Badener WunderDorf - The most beautiful Christmas village in the Limmat Valley",
-              "detail": "Baden",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/badener-wunderdorf-theaterplatz-das-schoenste-weihnachtsdorf-im-limmattal/"
-            },
-            {
-              "label": "Afterwork Live Musik- Louie & The Wolf Gang",
-              "detail": "Henry's Live Music & Sport Bar, Baden",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/baden/afterwork-live-musik-louie-und-the-wolf-gang_AXydWBy"
-            },
-            {
-              "label": "Traumafolgestörung und Depression: vom Überleben ins Leben",
-              "detail": "Windisch",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/traumafolgestoerung-und-depression-vom-ueberleben-ins-leben/"
-            },
-            {
-              "label": "Musig im Rüebligarten",
-              "detail": "Tibits Aarau, Aarau",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/musig-im-rueebligarten-tibits-aarau_AYHxsQu"
-            },
-            {
-              "label": "Chris Regez Band & Alain Boog",
-              "detail": "Spagi by Marcello, Aarau",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/chris-regez-band-und-alain-boog_AfJRsgZ"
-            },
-            {
-              "label": "Winner Swiss Blues Challenge 2026: Ronny Rast (CH)",
-              "detail": "Aktionshalle Stanzerei, Baden",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/winner-swiss-blues-challenge-2026-ronny-rast-ch_A1eSFR4"
-            },
-            {
-              "label": "Die Habsburger – 800 Jahre europäische Geschichte",
-              "detail": "Laufenburg — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
-            },
-            {
-              "label": "Oktoberfest Baden 2026",
-              "detail": "Brown Boveri Platz, Baden — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
-            },
-            {
-              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
-              "detail": "Untersiggenthal — in corso, ultimo giorno: 30 ottobre 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
-            },
-            {
               "label": "DIE GRÖSSTE +16 HALLOWEEN PARTY | DRUCKEREI, BADEN",
               "detail": "Druckerei Eventlokal Baden, Baden",
               "date": "2026-10-30",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/die-groesste-16-halloween-party-druckerei-baden/"
+            },
+            {
+              "label": "Schreiben und Bewegen",
+              "detail": "Propstei Wislikofen",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schreiben-und-bewegen/"
+            },
+            {
+              "label": "TAG DER OFFENEN FLASCHEN, 30. & 31. OKTOBER 2026",
+              "detail": "Edvin Weine / Weinkellereien Aarau, Aarau",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tag-der-offenen-flaschen-30-31-oktober-2026/"
+            },
+            {
+              "label": "Mehr als Rescue-Notfalltropfen: Bach Blüten Level 1",
+              "detail": "Baden",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-als-rescue-notfalltropfen-bach-blueten-level-1/"
+            },
+            {
+              "label": "Jahreskonzert Musikgesellschaft Rietheim",
+              "detail": "Mehrzweckhalle Rietheim",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/eventi/musica/rietheim/jahreskonzert-musikgesellschaft-rietheim_AwwWjEM"
+            },
+            {
+              "label": "Wassersinfonie Dernière",
+              "detail": "Kurpark Bad Zurzach, Zurzach",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bad-zurzach/wassersinfonie-derniere_Aa5geKv"
+            },
+            {
+              "label": "ACRES (UK)",
+              "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/aarau/acres-uk_Ae9wBAS"
+            },
+            {
+              "label": "ANUNDPFIRSICH - Improtheater/Theatersport",
+              "detail": "Dorfschüür, Würenlingen",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/wuerenlingen/anundpfirsich-improtheatertheatersport_A6mXjay"
+            },
+            {
+              "label": "Prishtina– Vrasja e paralajmëruar e një ëndrre",
+              "detail": "Bühne Aarau, Aarau",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/prishtina-vrasja-e-paralajmeruar-e-nje-endrre/"
+            },
+            {
+              "label": "Rock'n'Roll Tanzparty",
+              "detail": "Restaurant Bären, Aarburg",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarburg/rocknroll-tanzparty_Ak38jx4"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/argovia/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/argovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "en": {
       "canton": "AG",
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Badener WunderDorf - The most beautiful Christmas village in the Limmat Valley",
-              "detail": "Baden",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/badener-wunderdorf-theaterplatz-das-schoenste-weihnachtsdorf-im-limmattal/"
-            },
-            {
-              "label": "Afterwork Live Musik- Louie & The Wolf Gang",
-              "detail": "Henry's Live Music & Sport Bar, Baden",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/baden/afterwork-live-musik-louie-und-the-wolf-gang_AXydWBy"
-            },
-            {
-              "label": "Traumafolgestörung und Depression: vom Überleben ins Leben",
-              "detail": "Windisch",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/traumafolgestoerung-und-depression-vom-ueberleben-ins-leben/"
-            },
-            {
-              "label": "Musig im Rüebligarten",
-              "detail": "Tibits Aarau, Aarau",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/musig-im-rueebligarten-tibits-aarau_AYHxsQu"
-            },
-            {
-              "label": "Chris Regez Band & Alain Boog",
-              "detail": "Spagi by Marcello, Aarau",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/chris-regez-band-und-alain-boog_AfJRsgZ"
-            },
-            {
-              "label": "Winner Swiss Blues Challenge 2026: Ronny Rast (CH)",
-              "detail": "Aktionshalle Stanzerei, Baden",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/winner-swiss-blues-challenge-2026-ronny-rast-ch_A1eSFR4"
-            },
-            {
-              "label": "Die Habsburger – 800 Jahre europäische Geschichte",
-              "detail": "Laufenburg — ongoing, last day: 1 November 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
-            },
-            {
-              "label": "Oktoberfest Baden 2026",
-              "detail": "Brown Boveri Platz, Baden — ongoing, last day: 31 October 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
-            },
-            {
-              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
-              "detail": "Untersiggenthal — ongoing, last day: 30 October 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
-            },
-            {
               "label": "DIE GRÖSSTE +16 HALLOWEEN PARTY | DRUCKEREI, BADEN",
               "detail": "Druckerei Eventlokal Baden, Baden",
               "date": "2026-10-30",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/die-groesste-16-halloween-party-druckerei-baden/"
+            },
+            {
+              "label": "Schreiben und Bewegen",
+              "detail": "Propstei Wislikofen",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schreiben-und-bewegen/"
+            },
+            {
+              "label": "TAG DER OFFENEN FLASCHEN, 30. & 31. OKTOBER 2026",
+              "detail": "Edvin Weine / Weinkellereien Aarau, Aarau",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tag-der-offenen-flaschen-30-31-oktober-2026/"
+            },
+            {
+              "label": "Mehr als Rescue-Notfalltropfen: Bach Blüten Level 1",
+              "detail": "Baden",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-als-rescue-notfalltropfen-bach-blueten-level-1/"
+            },
+            {
+              "label": "Jahreskonzert Musikgesellschaft Rietheim",
+              "detail": "Mehrzweckhalle Rietheim",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/eventi/musica/rietheim/jahreskonzert-musikgesellschaft-rietheim_AwwWjEM"
+            },
+            {
+              "label": "Wassersinfonie Dernière",
+              "detail": "Kurpark Bad Zurzach, Zurzach",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bad-zurzach/wassersinfonie-derniere_Aa5geKv"
+            },
+            {
+              "label": "ACRES (UK)",
+              "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/aarau/acres-uk_Ae9wBAS"
+            },
+            {
+              "label": "ANUNDPFIRSICH-Improtheater / Theatersport",
+              "detail": "Dorfschüür, Würenlingen",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/wuerenlingen/anundpfirsich-improtheatertheatersport_A6mXjay"
+            },
+            {
+              "label": "Prishtina– Vrasja e paralajmëruar e një ëndrre",
+              "detail": "Bühne Aarau, Aarau",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/prishtina-vrasja-e-paralajmeruar-e-nje-endrre/"
+            },
+            {
+              "label": "Rock'n'Roll Tanzparty",
+              "detail": "Restaurant Bären, Aarburg",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarburg/rocknroll-tanzparty_Ak38jx4"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/aargau/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/aargau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "de": {
       "canton": "AG",
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Badener WunderDorf - Das schönste Weihnachtsdorf im Limmattal",
-              "detail": "Baden",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/badener-wunderdorf-theaterplatz-das-schoenste-weihnachtsdorf-im-limmattal/"
-            },
-            {
-              "label": "Afterwork Live Musik- Louie & The Wolf Gang",
-              "detail": "Henry's Live Music & Sport Bar, Baden",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/baden/afterwork-live-musik-louie-und-the-wolf-gang_AXydWBy"
-            },
-            {
-              "label": "Traumafolgestörung und Depression: vom Überleben ins Leben",
-              "detail": "Windisch",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/traumafolgestoerung-und-depression-vom-ueberleben-ins-leben/"
-            },
-            {
-              "label": "Musig im Rüebligarten",
-              "detail": "Tibits Aarau, Aarau",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/musig-im-rueebligarten-tibits-aarau_AYHxsQu"
-            },
-            {
-              "label": "Chris Regez Band & Alain Boog",
-              "detail": "Spagi by Marcello, Aarau",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/chris-regez-band-und-alain-boog_AfJRsgZ"
-            },
-            {
-              "label": "Winner Swiss Blues Challenge 2026: Ronny Rast (CH)",
-              "detail": "Aktionshalle Stanzerei, Baden",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/winner-swiss-blues-challenge-2026-ronny-rast-ch_A1eSFR4"
-            },
-            {
-              "label": "Die Habsburger – 800 Jahre europäische Geschichte",
-              "detail": "Laufenburg — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
-            },
-            {
-              "label": "Oktoberfest Baden 2026",
-              "detail": "Brown Boveri Platz, Baden — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
-            },
-            {
-              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
-              "detail": "Untersiggenthal — läuft, letzter Tag: 30. Oktober 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
-            },
-            {
               "label": "DIE GRÖSSTE +16 HALLOWEEN PARTY | DRUCKEREI, BADEN",
               "detail": "Druckerei Eventlokal Baden, Baden",
               "date": "2026-10-30",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/die-groesste-16-halloween-party-druckerei-baden/"
+            },
+            {
+              "label": "Schreiben und Bewegen",
+              "detail": "Propstei Wislikofen",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schreiben-und-bewegen/"
+            },
+            {
+              "label": "TAG DER OFFENEN FLASCHEN, 30. & 31. OKTOBER 2026",
+              "detail": "Edvin Weine / Weinkellereien Aarau, Aarau",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tag-der-offenen-flaschen-30-31-oktober-2026/"
+            },
+            {
+              "label": "Mehr als Rescue-Notfalltropfen: Bach Blüten Level 1",
+              "detail": "Baden",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-als-rescue-notfalltropfen-bach-blueten-level-1/"
+            },
+            {
+              "label": "Jahreskonzert Musikgesellschaft Rietheim",
+              "detail": "Mehrzweckhalle Rietheim",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/eventi/musica/rietheim/jahreskonzert-musikgesellschaft-rietheim_AwwWjEM"
+            },
+            {
+              "label": "Wassersinfonie Dernière",
+              "detail": "Kurpark Bad Zurzach, Zurzach",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bad-zurzach/wassersinfonie-derniere_Aa5geKv"
+            },
+            {
+              "label": "ACRES (UK)",
+              "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/aarau/acres-uk_Ae9wBAS"
+            },
+            {
+              "label": "ANUNDPFIRSICH – Improtheater/Theatersport",
+              "detail": "Dorfschüür, Würenlingen",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/wuerenlingen/anundpfirsich-improtheatertheatersport_A6mXjay"
+            },
+            {
+              "label": "Prishtina– Vrasja e paralajmëruar e një ëndrre",
+              "detail": "Bühne Aarau, Aarau",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/prishtina-vrasja-e-paralajmeruar-e-nje-endrre/"
+            },
+            {
+              "label": "Rock'n'Roll Tanzparty",
+              "detail": "Restaurant Bären, Aarburg",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarburg/rocknroll-tanzparty_Ak38jx4"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/aargau/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/aargau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "fr": {
       "canton": "AG",
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Badener WunderDorf - Le plus beau village de Noël de la vallée de la Limmat",
-              "detail": "Baden",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/badener-wunderdorf-theaterplatz-das-schoenste-weihnachtsdorf-im-limmattal/"
-            },
-            {
-              "label": "Afterwork Live Musik- Louie & The Wolf Gang",
-              "detail": "Henry's Live Music & Sport Bar, Baden",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/baden/afterwork-live-musik-louie-und-the-wolf-gang_AXydWBy"
-            },
-            {
-              "label": "Traumafolgestörung und Depression: vom Überleben ins Leben",
-              "detail": "Windisch",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/traumafolgestoerung-und-depression-vom-ueberleben-ins-leben/"
-            },
-            {
-              "label": "Musig im Rüebligarten",
-              "detail": "Tibits Aarau, Aarau",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/musig-im-rueebligarten-tibits-aarau_AYHxsQu"
-            },
-            {
-              "label": "Groupe de Chris Regez et Alain Boog",
-              "detail": "Spagi by Marcello, Aarau",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/chris-regez-band-und-alain-boog_AfJRsgZ"
-            },
-            {
-              "label": "Winner Swiss Blues Challenge 2026: Ronny Rast (CH)",
-              "detail": "Aktionshalle Stanzerei, Baden",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/winner-swiss-blues-challenge-2026-ronny-rast-ch_A1eSFR4"
-            },
-            {
-              "label": "Die Habsburger – 800 Jahre europäische Geschichte",
-              "detail": "Laufenburg — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
-            },
-            {
-              "label": "Oktoberfest Baden 2026",
-              "detail": "Brown Boveri Platz, Baden — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
-            },
-            {
-              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
-              "detail": "Untersiggenthal — en cours, dernier jour : 30 octobre 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
-            },
-            {
               "label": "DIE GRÖSSTE +16 HALLOWEEN PARTY | DRUCKEREI, BADEN",
               "detail": "Druckerei Eventlokal Baden, Baden",
               "date": "2026-10-30",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/die-groesste-16-halloween-party-druckerei-baden/"
+            },
+            {
+              "label": "Schreiben und Bewegen",
+              "detail": "Propstei Wislikofen",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schreiben-und-bewegen/"
+            },
+            {
+              "label": "TAG DER OFFENEN FLASCHEN, 30. & 31. OKTOBER 2026",
+              "detail": "Edvin Weine / Weinkellereien Aarau, Aarau",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tag-der-offenen-flaschen-30-31-oktober-2026/"
+            },
+            {
+              "label": "Mehr als Rescue-Notfalltropfen: Bach Blüten Level 1",
+              "detail": "Baden",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-als-rescue-notfalltropfen-bach-blueten-level-1/"
+            },
+            {
+              "label": "Jahreskonzert Musikgesellschaft Rietheim",
+              "detail": "Mehrzweckhalle Rietheim",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/eventi/musica/rietheim/jahreskonzert-musikgesellschaft-rietheim_AwwWjEM"
+            },
+            {
+              "label": "Wassersinfonie Dernière",
+              "detail": "Kurpark Bad Zurzach, Zurzach",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bad-zurzach/wassersinfonie-derniere_Aa5geKv"
+            },
+            {
+              "label": "ACRES (UK)",
+              "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/aarau/acres-uk_Ae9wBAS"
+            },
+            {
+              "label": "ANUNDPFIRSICH - Improthéâtre/Théâtresport",
+              "detail": "Dorfschüür, Würenlingen",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/wuerenlingen/anundpfirsich-improtheatertheatersport_A6mXjay"
+            },
+            {
+              "label": "Prishtina– Vrasja e paralajmëruar e një ëndrre",
+              "detail": "Bühne Aarau, Aarau",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/prishtina-vrasja-e-paralajmeruar-e-nje-endrre/"
+            },
+            {
+              "label": "Rock'n'Roll Tanzparty",
+              "detail": "Restaurant Bären, Aarburg",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarburg/rocknroll-tanzparty_Ak38jx4"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/argovie/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/argovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "servizi",
-  "updatedAt": "2026-10-29T21:57:02.700Z",
-  "contentHash": "7d0168c22e24a0040dc392aec79f5d55323cbb4ccf75e77cc5e8e81300b6a667",
+  "updatedAt": "2026-10-30T06:23:49.454Z",
+  "contentHash": "1c32903ed4268c8b048fe09c764aa24a289173beb7f62ec96d53f72adc2bed05",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -19,12 +19,12 @@
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-29T15:24:02.220Z",
+      "updatedAt": "2026-10-29T21:17:01.193Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-29T11:47:10.249Z",
+      "updatedAt": "2026-10-29T22:02:50.125Z",
       "keyFacts": 0
     }
   ],
@@ -111,12 +111,12 @@
           "items": [
             {
               "label": "Bern",
-              "value": "10 °C",
-              "detail": "oggi da 5 a 10 °C"
+              "value": "7 °C",
+              "detail": "oggi da 5 a 8 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-29T15:24:02.220Z"
+          "updatedAt": "2026-10-29T21:17:01.193Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -129,7 +129,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/gesundheit-am-arbeitsplatz-zeitdruck-groesste-herausforderung"
             }
           ],
-          "updatedAt": "2026-10-29T11:47:10.249Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -209,7 +209,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-29T21:57:02.700Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "en": {
       "canton": "BE",
@@ -293,12 +293,12 @@
           "items": [
             {
               "label": "Bern",
-              "value": "10 °C",
-              "detail": "today from 5 to 10 °C"
+              "value": "7 °C",
+              "detail": "today from 5 to 8 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-29T15:24:02.220Z"
+          "updatedAt": "2026-10-29T21:17:01.193Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -311,7 +311,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/gesundheit-am-arbeitsplatz-zeitdruck-groesste-herausforderung"
             }
           ],
-          "updatedAt": "2026-10-29T11:47:10.249Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -387,7 +387,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-29T21:57:02.700Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "de": {
       "canton": "BE",
@@ -471,12 +471,12 @@
           "items": [
             {
               "label": "Bern",
-              "value": "10 °C",
-              "detail": "heute 5 bis 10 °C"
+              "value": "7 °C",
+              "detail": "heute 5 bis 8 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-29T15:24:02.220Z"
+          "updatedAt": "2026-10-29T21:17:01.193Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -489,7 +489,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/gesundheit-am-arbeitsplatz-zeitdruck-groesste-herausforderung"
             }
           ],
-          "updatedAt": "2026-10-29T11:47:10.249Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -565,7 +565,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-29T21:57:02.700Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "fr": {
       "canton": "BE",
@@ -649,12 +649,12 @@
           "items": [
             {
               "label": "Bern",
-              "value": "10 °C",
-              "detail": "aujourd’hui de 5 à 10 °C"
+              "value": "7 °C",
+              "detail": "aujourd’hui de 5 à 8 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-29T15:24:02.220Z"
+          "updatedAt": "2026-10-29T21:17:01.193Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -667,7 +667,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/gesundheit-am-arbeitsplatz-zeitdruck-groesste-herausforderung"
             }
           ],
-          "updatedAt": "2026-10-29T11:47:10.249Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -739,7 +739,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-29T21:57:02.700Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     }
   }
 }

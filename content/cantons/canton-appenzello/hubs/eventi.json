@@ -4,12 +4,12 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "eventi",
-  "updatedAt": "2026-10-26T01:02:08.769Z",
-  "contentHash": "fb6a1c001bc25ed5fc4f6020df3699c296923440bef9398515241752582c8f6f",
+  "updatedAt": "2026-10-30T06:23:49.454Z",
+  "contentHash": "005af5eb68916bcade5339c26d93aeb3f6a74f45dd3ba81ef8d6e7887b644dfc",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-25T02:23:31.213Z",
+      "updatedAt": "2026-10-29T21:23:37.654Z",
       "keyFacts": 1
     }
   ],
@@ -32,12 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Chäller - Collegamento errato",
-              "detail": "Casino Herisau, Herisau",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/chaeller-collegamento-errato/"
-            },
             {
               "label": "II. Kammermusikwettbewerb Paul Juon",
               "detail": "Kunsthalle Appenzell, Appenzell",
@@ -91,11 +85,17 @@
               "detail": "Casino Herisau, Herisau",
               "date": "2026-11-04",
               "url": "https://www.guidle.com/it/akce/klasicky/herisau/cuarteto-quiroga_AsgGLCC"
+            },
+            {
+              "label": "Acoustic Voyagers und Wooden Impact",
+              "detail": "Appenzell",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/acoustic-voyagers-und-wooden-impact/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/appenzello/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/appenzello/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -137,12 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Chäller - Wrongly connected",
-              "detail": "Casino Herisau, Herisau",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/chaeller-collegamento-errato/"
-            },
             {
               "label": "II. Kammermusikwettbewerb Paul Juon",
               "detail": "Kunsthalle Appenzell, Appenzell",
@@ -196,11 +190,17 @@
               "detail": "Casino Herisau, Herisau",
               "date": "2026-11-04",
               "url": "https://www.guidle.com/it/akce/klasicky/herisau/cuarteto-quiroga_AsgGLCC"
+            },
+            {
+              "label": "Acoustic Voyagers und Wooden Impact",
+              "detail": "Appenzell",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/acoustic-voyagers-und-wooden-impact/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/appenzell/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/appenzell/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -242,12 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Chäller - Falsch verbunden",
-              "detail": "Casino Herisau, Herisau",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/chaeller-collegamento-errato/"
-            },
             {
               "label": "II. Kammermusikwettbewerb Paul Juon",
               "detail": "Kunsthalle Appenzell, Appenzell",
@@ -301,11 +295,17 @@
               "detail": "Casino Herisau, Herisau",
               "date": "2026-11-04",
               "url": "https://www.guidle.com/it/akce/klasicky/herisau/cuarteto-quiroga_AsgGLCC"
+            },
+            {
+              "label": "Acoustic Voyagers und Wooden Impact",
+              "detail": "Appenzell",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/acoustic-voyagers-und-wooden-impact/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/appenzell/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/appenzell/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -347,12 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Chäller - Faux-semblant",
-              "detail": "Casino Herisau, Herisau",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/chaeller-collegamento-errato/"
-            },
             {
               "label": "II. Kammermusikwettbewerb Paul Juon",
               "detail": "Kunsthalle Appenzell, Appenzell",
@@ -406,11 +400,17 @@
               "detail": "Casino Herisau, Herisau",
               "date": "2026-11-04",
               "url": "https://www.guidle.com/it/akce/klasicky/herisau/cuarteto-quiroga_AsgGLCC"
+            },
+            {
+              "label": "Acoustic Voyagers und Wooden Impact",
+              "detail": "Appenzell",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/acoustic-voyagers-und-wooden-impact/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/appenzell/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/appenzell/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     }
   }
 }

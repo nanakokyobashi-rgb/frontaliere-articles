@@ -4,17 +4,17 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "eventi",
-  "updatedAt": "2026-10-29T21:57:02.700Z",
-  "contentHash": "8237728172ede697bf441a8a9765c334577026abac3f0a1e85a3e4d786788dcc",
+  "updatedAt": "2026-10-30T06:23:49.454Z",
+  "contentHash": "6bbde9d9f970f37a96fd40be4daf69756559d9d54aacca0a10f2489d5ec02543",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-29T15:31:36.718Z",
+      "updatedAt": "2026-10-29T21:23:37.654Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-29T11:47:10.249Z",
+      "updatedAt": "2026-10-29T22:02:50.125Z",
       "keyFacts": 0
     }
   ],
@@ -37,24 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Moules et Frites",
-              "detail": "CAMPUS SURSEE, Oberkirch",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/moules-et-frites/"
-            },
-            {
-              "label": "Einführung für Lehrer:innen",
-              "detail": "Museum Sammlung Rosengart Luzern, Luzern — in corso, ultimo giorno: 25 novembre 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
-            },
-            {
-              "label": "360° Mitsingen",
-              "detail": "Bourbaki Panorama — in corso, ultimo giorno: 12 novembre 2026",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
-            },
             {
               "label": "Kunstausstellung Visarte",
               "detail": "Luzern",
@@ -96,17 +78,50 @@
               "detail": "Weggis",
               "date": "2026-10-30",
               "url": "https://www.guidle.com/it/events/music/weggis/brass-sounds-lakeside_Ax5nhrM"
+            },
+            {
+              "label": "Irish Folk Festival",
+              "detail": "KKL Luzern, Luzern",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/luzern/irish-folk-festival_AHwn7mP"
+            },
+            {
+              "label": "Salsa Fiesta WEMILERE mit Los Capitanes del Son",
+              "detail": "Hirschen Sursee, Sursee",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/sursee/salsa-fiesta-wemilere-mit-los-capitanes-del-son_AU7YiN8"
+            },
+            {
+              "label": "Der Dicke Polizist",
+              "detail": "Musikzentrum Sedel",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/emmenbruecke/der-dicke-polizist_AjD4NZT"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/lucerna/",
-          "updatedAt": "2026-10-29T15:31:36.718Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Kunstausstellung Visarte",
+              "date": "2026-10-29T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7587574"
+            },
+            {
+              "label": "Salonkonzert",
+              "date": "2026-10-29T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7463713"
+            },
+            {
+              "label": "Winter Qi Gong Waldfriedhof Staffeln",
+              "date": "2026-10-29T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694299"
+            },
             {
               "label": "«Trop chaud» - Klimaseniorinnen - Film im Rahmen der «Lebensreise»",
               "date": "2026-10-27T23:00:00.000Z",
@@ -121,24 +136,9 @@
               "label": "Energie Apéro Luzern: Regenerative Baumaterialien – eine Wiederentdeckung",
               "date": "2026-10-25T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7253945"
-            },
-            {
-              "label": "Bewegung und Begegnung - Feldenkrais",
-              "date": "2026-10-25T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7648408"
-            },
-            {
-              "label": "Öffentliche Führung",
-              "date": "2026-10-24T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7463668"
-            },
-            {
-              "label": "Flechten und Moose in Luzern",
-              "date": "2026-10-23T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7626904"
             }
           ],
-          "updatedAt": "2026-10-29T11:47:10.249Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -172,7 +172,7 @@
           "url": "/eventi/lucerna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-29T21:57:02.700Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "en": {
       "canton": "LU",
@@ -192,24 +192,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Moules et Frites",
-              "detail": "CAMPUS SURSEE, Oberkirch",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/moules-et-frites/"
-            },
-            {
-              "label": "Einführung für Lehrer:innen",
-              "detail": "Museum Sammlung Rosengart Luzern, Luzern — ongoing, last day: 25 November 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
-            },
-            {
-              "label": "360° Mitsingen",
-              "detail": "Bourbaki Panorama — ongoing, last day: 12 November 2026",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
-            },
             {
               "label": "Kunstausstellung Visarte",
               "detail": "Luzern",
@@ -251,17 +233,50 @@
               "detail": "Weggis",
               "date": "2026-10-30",
               "url": "https://www.guidle.com/it/events/music/weggis/brass-sounds-lakeside_Ax5nhrM"
+            },
+            {
+              "label": "Irish Folk Festival",
+              "detail": "KKL Luzern, Luzern",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/luzern/irish-folk-festival_AHwn7mP"
+            },
+            {
+              "label": "Salsa Fiesta WEMILERE mit Los Capitanes del Son",
+              "detail": "Hirschen Sursee, Sursee",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/sursee/salsa-fiesta-wemilere-mit-los-capitanes-del-son_AU7YiN8"
+            },
+            {
+              "label": "Der Dicke Polizist",
+              "detail": "Musikzentrum Sedel",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/emmenbruecke/der-dicke-polizist_AjD4NZT"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/lucerne/",
-          "updatedAt": "2026-10-29T15:31:36.718Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Kunstausstellung Visarte",
+              "date": "2026-10-29T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7587574"
+            },
+            {
+              "label": "Salonkonzert",
+              "date": "2026-10-29T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7463713"
+            },
+            {
+              "label": "Winter Qi Gong Waldfriedhof Staffeln",
+              "date": "2026-10-29T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694299"
+            },
             {
               "label": "«Trop chaud» - Klimaseniorinnen - Film im Rahmen der «Lebensreise»",
               "date": "2026-10-27T23:00:00.000Z",
@@ -276,24 +291,9 @@
               "label": "Energie Apéro Luzern: Regenerative Baumaterialien – eine Wiederentdeckung",
               "date": "2026-10-25T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7253945"
-            },
-            {
-              "label": "Bewegung und Begegnung - Feldenkrais",
-              "date": "2026-10-25T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7648408"
-            },
-            {
-              "label": "Öffentliche Führung",
-              "date": "2026-10-24T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7463668"
-            },
-            {
-              "label": "Flechten und Moose in Luzern",
-              "date": "2026-10-23T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7626904"
             }
           ],
-          "updatedAt": "2026-10-29T11:47:10.249Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/en/events/lucerne/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-29T21:57:02.700Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "de": {
       "canton": "LU",
@@ -347,24 +347,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Moules et Frites",
-              "detail": "CAMPUS SURSEE, Oberkirch",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/moules-et-frites/"
-            },
-            {
-              "label": "Einführung für Lehrer:innen",
-              "detail": "Museum Sammlung Rosengart Luzern, Luzern — läuft, letzter Tag: 25. November 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
-            },
-            {
-              "label": "360° Mitsingen",
-              "detail": "Bourbaki Panorama — läuft, letzter Tag: 12. November 2026",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
-            },
             {
               "label": "Kunstausstellung Visarte",
               "detail": "Luzern",
@@ -406,17 +388,50 @@
               "detail": "Weggis",
               "date": "2026-10-30",
               "url": "https://www.guidle.com/it/events/music/weggis/brass-sounds-lakeside_Ax5nhrM"
+            },
+            {
+              "label": "Irish Folk Festival",
+              "detail": "KKL Luzern, Luzern",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/luzern/irish-folk-festival_AHwn7mP"
+            },
+            {
+              "label": "Salsa Fiesta WEMILERE mit Los Capitanes del Son",
+              "detail": "Hirschen Sursee, Sursee",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/sursee/salsa-fiesta-wemilere-mit-los-capitanes-del-son_AU7YiN8"
+            },
+            {
+              "label": "Der Dicke Polizist",
+              "detail": "Musikzentrum Sedel",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/emmenbruecke/der-dicke-polizist_AjD4NZT"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/luzern/",
-          "updatedAt": "2026-10-29T15:31:36.718Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Kunstausstellung Visarte",
+              "date": "2026-10-29T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7587574"
+            },
+            {
+              "label": "Salonkonzert",
+              "date": "2026-10-29T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7463713"
+            },
+            {
+              "label": "Winter Qi Gong Waldfriedhof Staffeln",
+              "date": "2026-10-29T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694299"
+            },
             {
               "label": "«Trop chaud» - Klimaseniorinnen - Film im Rahmen der «Lebensreise»",
               "date": "2026-10-27T23:00:00.000Z",
@@ -431,24 +446,9 @@
               "label": "Energie Apéro Luzern: Regenerative Baumaterialien – eine Wiederentdeckung",
               "date": "2026-10-25T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7253945"
-            },
-            {
-              "label": "Bewegung und Begegnung - Feldenkrais",
-              "date": "2026-10-25T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7648408"
-            },
-            {
-              "label": "Öffentliche Führung",
-              "date": "2026-10-24T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7463668"
-            },
-            {
-              "label": "Flechten und Moose in Luzern",
-              "date": "2026-10-23T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7626904"
             }
           ],
-          "updatedAt": "2026-10-29T11:47:10.249Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -482,7 +482,7 @@
           "url": "/de/veranstaltungen/luzern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-29T21:57:02.700Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "fr": {
       "canton": "LU",
@@ -502,24 +502,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Moules et Frites",
-              "detail": "CAMPUS SURSEE, Oberkirch",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/moules-et-frites/"
-            },
-            {
-              "label": "Einführung für Lehrer:innen",
-              "detail": "Museum Sammlung Rosengart Luzern, Luzern — en cours, dernier jour : 25 novembre 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
-            },
-            {
-              "label": "360° Mitsingen",
-              "detail": "Bourbaki Panorama — en cours, dernier jour : 12 novembre 2026",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
-            },
             {
               "label": "Kunstausstellung Visarte",
               "detail": "Luzern",
@@ -561,17 +543,50 @@
               "detail": "Weggis",
               "date": "2026-10-30",
               "url": "https://www.guidle.com/it/events/music/weggis/brass-sounds-lakeside_Ax5nhrM"
+            },
+            {
+              "label": "Irish Folk Festival",
+              "detail": "KKL Luzern, Luzern",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/luzern/irish-folk-festival_AHwn7mP"
+            },
+            {
+              "label": "Salsa Fiesta WEMILERE mit Los Capitanes del Son",
+              "detail": "Hirschen Sursee, Sursee",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/sursee/salsa-fiesta-wemilere-mit-los-capitanes-del-son_AU7YiN8"
+            },
+            {
+              "label": "Der Dicke Polizist",
+              "detail": "Musikzentrum Sedel",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/emmenbruecke/der-dicke-polizist_AjD4NZT"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/lucerne/",
-          "updatedAt": "2026-10-29T15:31:36.718Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Kunstausstellung Visarte",
+              "date": "2026-10-29T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7587574"
+            },
+            {
+              "label": "Salonkonzert",
+              "date": "2026-10-29T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7463713"
+            },
+            {
+              "label": "Winter Qi Gong Waldfriedhof Staffeln",
+              "date": "2026-10-29T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694299"
+            },
             {
               "label": "«Trop chaud» - Klimaseniorinnen - Film im Rahmen der «Lebensreise»",
               "date": "2026-10-27T23:00:00.000Z",
@@ -586,24 +601,9 @@
               "label": "Energie Apéro Luzern: Regenerative Baumaterialien – eine Wiederentdeckung",
               "date": "2026-10-25T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7253945"
-            },
-            {
-              "label": "Bewegung und Begegnung - Feldenkrais",
-              "date": "2026-10-25T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7648408"
-            },
-            {
-              "label": "Öffentliche Führung",
-              "date": "2026-10-24T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7463668"
-            },
-            {
-              "label": "Flechten und Moose in Luzern",
-              "date": "2026-10-23T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7626904"
             }
           ],
-          "updatedAt": "2026-10-29T11:47:10.249Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -637,7 +637,7 @@
           "url": "/fr/evenements/lucerne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-29T21:57:02.700Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     }
   }
 }

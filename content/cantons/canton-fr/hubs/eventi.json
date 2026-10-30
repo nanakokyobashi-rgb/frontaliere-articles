@@ -4,17 +4,17 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "eventi",
-  "updatedAt": "2026-10-29T15:32:04.680Z",
-  "contentHash": "4e1c0655cd63d4203196e9b9668b50be9bda31c9fe7ad293df745b2e137fa55f",
+  "updatedAt": "2026-10-30T06:23:49.454Z",
+  "contentHash": "69dc6ac7d6e8ee41ab5a4776991568d61ed4f18952e64433005e8ca4bd0caa12",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-28T19:25:39.771Z",
+      "updatedAt": "2026-10-29T21:23:37.654Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-29T11:47:10.249Z",
+      "updatedAt": "2026-10-29T22:02:50.125Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "49",
+          "value": "47",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,48 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "jO Mettraux : concert-vernissage",
-              "detail": "Fribourg",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jo-mettraux-concert-vernissage/"
-            },
-            {
-              "label": "Journée cantonale du développement durable",
-              "detail": "Fribourg",
-              "date": "2026-10-29",
-              "url": "https://www.fr.ch/dime/developpement-durable/evenements/journee-cantonale-du-developpement-durable"
-            },
-            {
-              "label": "Le sort des bibliothèques dans le contexte de la Réforme et des guerres en Europe du Nord ...",
-              "detail": "Fribourg",
-              "date": "2026-10-29",
-              "url": "https://www.fr.ch/bcu/evenements/le-sort-des-bibliotheques-dans-le-contexte-de-la-reforme-et-des-guerres-en-europe-du-nord"
-            },
-            {
-              "label": "Circus Knie",
-              "detail": "Fribourg",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/circus-knie-2026-17/"
-            },
-            {
-              "label": "Foutue bergerie – Pierre Guillois / Cie le Fils du Grand réseau",
-              "detail": "Villars-sur-Glâne — in corso, ultimo giorno: 29 ottobre 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/foutue-bergerie-pierre-guillois-cie-le-fils-du-grand-reseau/"
-            },
-            {
-              "label": "Regards affinés",
-              "detail": "L'Atelier, Fribourg — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
-            },
-            {
-              "label": "Halloween à Moléson",
-              "detail": "Office du Tourisme de Moléson, Gruyères — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
-            },
             {
               "label": "Leonard Cohen: dix ans plus tard, toujours vivant",
               "detail": "Bibliothèque cantonale et universitaire (BCU)",
@@ -96,11 +54,53 @@
               "detail": "Fribourg",
               "date": "2026-10-30",
               "url": "https://www.fr.ch/bcu/evenements/leonard-cohen-dix-ans-plus-tard-toujours-vivant"
+            },
+            {
+              "label": "jO Mettraux : concert-vernissage",
+              "detail": "Fribourg — in corso, ultimo giorno: 30 ottobre 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jo-mettraux-concert-vernissage/"
+            },
+            {
+              "label": "Circus Knie",
+              "detail": "Fribourg — in corso, ultimo giorno: 1 novembre 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/circus-knie-2026-17/"
+            },
+            {
+              "label": "Regards affinés",
+              "detail": "L'Atelier, Fribourg — in corso, ultimo giorno: 31 ottobre 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
+            },
+            {
+              "label": "Halloween à Moléson",
+              "detail": "Office du Tourisme de Moléson, Gruyères — in corso, ultimo giorno: 1 novembre 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
+            },
+            {
+              "label": "“RUNNING DEAD” 2ème édition",
+              "detail": "Running dead",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/running-dead-2eme-edition/"
+            },
+            {
+              "label": "Amor, choisir sans renoncer",
+              "detail": "Treyvaux",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/amor-choisir-sans-renoncer/"
+            },
+            {
+              "label": "Concerts O’pus",
+              "detail": "Temple Réformé, Fribourg",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/concerts-opus/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/friburgo/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -113,7 +113,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-10-29T11:47:10.249Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +135,7 @@
           "url": "/eventi/friburgo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-29T15:32:04.680Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "en": {
       "canton": "FR",
@@ -145,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "49",
+          "value": "47",
           "note": "from the site’s events calendar"
         }
       ],
@@ -155,48 +155,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "jO Mettraux : concert-vernissage",
-              "detail": "Fribourg",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jo-mettraux-concert-vernissage/"
-            },
-            {
-              "label": "Journée cantonale du développement durable",
-              "detail": "Fribourg",
-              "date": "2026-10-29",
-              "url": "https://www.fr.ch/dime/developpement-durable/evenements/journee-cantonale-du-developpement-durable"
-            },
-            {
-              "label": "Le sort des bibliothèques dans le contexte de la Réforme et des guerres en Europe du Nord ...",
-              "detail": "Fribourg",
-              "date": "2026-10-29",
-              "url": "https://www.fr.ch/bcu/evenements/le-sort-des-bibliotheques-dans-le-contexte-de-la-reforme-et-des-guerres-en-europe-du-nord"
-            },
-            {
-              "label": "Circus Knie",
-              "detail": "Fribourg",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/circus-knie-2026-17/"
-            },
-            {
-              "label": "Foutue bergerie – Pierre Guillois / Cie le Fils du Grand réseau",
-              "detail": "Villars-sur-Glâne — ongoing, last day: 29 October 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/foutue-bergerie-pierre-guillois-cie-le-fils-du-grand-reseau/"
-            },
-            {
-              "label": "Regards affinés",
-              "detail": "L'Atelier, Fribourg — ongoing, last day: 31 October 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
-            },
-            {
-              "label": "Halloween à Moléson",
-              "detail": "Office du Tourisme de Moléson, Gruyères — ongoing, last day: 1 November 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
-            },
             {
               "label": "Leonard Cohen: dix ans plus tard, toujours vivant",
               "detail": "Bibliothèque cantonale et universitaire (BCU)",
@@ -214,11 +172,53 @@
               "detail": "Fribourg",
               "date": "2026-10-30",
               "url": "https://www.fr.ch/bcu/evenements/leonard-cohen-dix-ans-plus-tard-toujours-vivant"
+            },
+            {
+              "label": "jO Mettraux : concert-vernissage",
+              "detail": "Fribourg — ongoing, last day: 30 October 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jo-mettraux-concert-vernissage/"
+            },
+            {
+              "label": "Circus Knie",
+              "detail": "Fribourg — ongoing, last day: 1 November 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/circus-knie-2026-17/"
+            },
+            {
+              "label": "Regards affinés",
+              "detail": "L'Atelier, Fribourg — ongoing, last day: 31 October 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
+            },
+            {
+              "label": "Halloween à Moléson",
+              "detail": "Office du Tourisme de Moléson, Gruyères — ongoing, last day: 1 November 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
+            },
+            {
+              "label": "“RUNNING DEAD” 2ème édition",
+              "detail": "Running dead",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/running-dead-2eme-edition/"
+            },
+            {
+              "label": "Amor, choisir sans renoncer",
+              "detail": "Treyvaux",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/amor-choisir-sans-renoncer/"
+            },
+            {
+              "label": "Concerts O’pus",
+              "detail": "Temple Réformé, Fribourg",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/concerts-opus/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/fribourg/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -231,7 +231,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-10-29T11:47:10.249Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -253,7 +253,7 @@
           "url": "/en/events/fribourg/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-29T15:32:04.680Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "de": {
       "canton": "FR",
@@ -263,7 +263,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "49",
+          "value": "47",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -273,48 +273,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "jO Mettraux : concert-vernissage",
-              "detail": "Fribourg",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jo-mettraux-concert-vernissage/"
-            },
-            {
-              "label": "Journée cantonale du développement durable",
-              "detail": "Fribourg",
-              "date": "2026-10-29",
-              "url": "https://www.fr.ch/dime/developpement-durable/evenements/journee-cantonale-du-developpement-durable"
-            },
-            {
-              "label": "Le sort des bibliothèques dans le contexte de la Réforme et des guerres en Europe du Nord ...",
-              "detail": "Fribourg",
-              "date": "2026-10-29",
-              "url": "https://www.fr.ch/bcu/evenements/le-sort-des-bibliotheques-dans-le-contexte-de-la-reforme-et-des-guerres-en-europe-du-nord"
-            },
-            {
-              "label": "Circus Knie",
-              "detail": "Fribourg",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/circus-knie-2026-17/"
-            },
-            {
-              "label": "Foutue bergerie – Pierre Guillois / Cie le Fils du Grand réseau",
-              "detail": "Villars-sur-Glâne — läuft, letzter Tag: 29. Oktober 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/foutue-bergerie-pierre-guillois-cie-le-fils-du-grand-reseau/"
-            },
-            {
-              "label": "Regards affinés",
-              "detail": "L'Atelier, Fribourg — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
-            },
-            {
-              "label": "Halloween à Moléson",
-              "detail": "Office du Tourisme de Moléson, Gruyères — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
-            },
             {
               "label": "Leonard Cohen: dix ans plus tard, toujours vivant",
               "detail": "Bibliothèque cantonale et universitaire (BCU)",
@@ -332,11 +290,53 @@
               "detail": "Fribourg",
               "date": "2026-10-30",
               "url": "https://www.fr.ch/bcu/evenements/leonard-cohen-dix-ans-plus-tard-toujours-vivant"
+            },
+            {
+              "label": "jO Mettraux : concert-vernissage",
+              "detail": "Fribourg — läuft, letzter Tag: 30. Oktober 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jo-mettraux-concert-vernissage/"
+            },
+            {
+              "label": "Circus Knie",
+              "detail": "Fribourg — läuft, letzter Tag: 1. November 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/circus-knie-2026-17/"
+            },
+            {
+              "label": "Regards affinés",
+              "detail": "L'Atelier, Fribourg — läuft, letzter Tag: 31. Oktober 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
+            },
+            {
+              "label": "Halloween à Moléson",
+              "detail": "Office du Tourisme de Moléson, Gruyères — läuft, letzter Tag: 1. November 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
+            },
+            {
+              "label": "“RUNNING DEAD” 2ème édition",
+              "detail": "Running dead",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/running-dead-2eme-edition/"
+            },
+            {
+              "label": "Amor, choisir sans renoncer",
+              "detail": "Treyvaux",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/amor-choisir-sans-renoncer/"
+            },
+            {
+              "label": "Concerts O’pus",
+              "detail": "Temple Réformé, Fribourg",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/concerts-opus/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/freiburg/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -349,7 +349,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-10-29T11:47:10.249Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -371,7 +371,7 @@
           "url": "/de/veranstaltungen/freiburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-29T15:32:04.680Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "fr": {
       "canton": "FR",
@@ -381,7 +381,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "49",
+          "value": "47",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -391,48 +391,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "jO Mettraux : concert-vernissage",
-              "detail": "Fribourg",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jo-mettraux-concert-vernissage/"
-            },
-            {
-              "label": "Journée cantonale du développement durable",
-              "detail": "Fribourg",
-              "date": "2026-10-29",
-              "url": "https://www.fr.ch/dime/developpement-durable/evenements/journee-cantonale-du-developpement-durable"
-            },
-            {
-              "label": "Le sort des bibliothèques dans le contexte de la Réforme et des guerres en Europe du Nord ...",
-              "detail": "Fribourg",
-              "date": "2026-10-29",
-              "url": "https://www.fr.ch/bcu/evenements/le-sort-des-bibliotheques-dans-le-contexte-de-la-reforme-et-des-guerres-en-europe-du-nord"
-            },
-            {
-              "label": "Circus Knie",
-              "detail": "Fribourg",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/circus-knie-2026-17/"
-            },
-            {
-              "label": "Foutue bergerie – Pierre Guillois / Cie le Fils du Grand réseau",
-              "detail": "Villars-sur-Glâne — en cours, dernier jour : 29 octobre 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/foutue-bergerie-pierre-guillois-cie-le-fils-du-grand-reseau/"
-            },
-            {
-              "label": "Regards affinés",
-              "detail": "L'Atelier, Fribourg — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
-            },
-            {
-              "label": "Halloween à Moléson",
-              "detail": "Office du Tourisme de Moléson, Gruyères — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
-            },
             {
               "label": "Leonard Cohen: dix ans plus tard, toujours vivant",
               "detail": "Bibliothèque cantonale et universitaire (BCU)",
@@ -450,11 +408,53 @@
               "detail": "Fribourg",
               "date": "2026-10-30",
               "url": "https://www.fr.ch/bcu/evenements/leonard-cohen-dix-ans-plus-tard-toujours-vivant"
+            },
+            {
+              "label": "jO Mettraux : concert-vernissage",
+              "detail": "Fribourg — en cours, dernier jour : 30 octobre 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jo-mettraux-concert-vernissage/"
+            },
+            {
+              "label": "Circus Knie",
+              "detail": "Fribourg — en cours, dernier jour : 1er novembre 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/circus-knie-2026-17/"
+            },
+            {
+              "label": "Regards affinés",
+              "detail": "L'Atelier, Fribourg — en cours, dernier jour : 31 octobre 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
+            },
+            {
+              "label": "Halloween à Moléson",
+              "detail": "Office du Tourisme de Moléson, Gruyères — en cours, dernier jour : 1er novembre 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
+            },
+            {
+              "label": "“RUNNING DEAD” 2ème édition",
+              "detail": "Running dead",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/running-dead-2eme-edition/"
+            },
+            {
+              "label": "Amor, choisir sans renoncer",
+              "detail": "Treyvaux",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/amor-choisir-sans-renoncer/"
+            },
+            {
+              "label": "Concerts O’pus",
+              "detail": "Temple Réformé, Fribourg",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/concerts-opus/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/fribourg/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -467,7 +467,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-10-29T11:47:10.249Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -489,7 +489,7 @@
           "url": "/fr/evenements/fribourg/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-29T15:32:04.680Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     }
   }
 }

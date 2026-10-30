@@ -4,12 +4,12 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-10-29T21:57:02.700Z",
-  "contentHash": "aa2e59a0e52c622e21707f07ec19c986cdd39003fd084ebf0ca3564d323673e9",
+  "updatedAt": "2026-10-30T06:23:49.454Z",
+  "contentHash": "f16116691f9ce3306a250c4da12b4bfc9a2af936e3f2a872aed67059917d0f85",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-29T15:31:36.718Z",
+      "updatedAt": "2026-10-29T21:23:37.654Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "349",
+          "value": "344",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "RECOLLECTION – CASPER FAASSEN",
-              "detail": "Bildhalle Zürich, Zürich",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/recollection-casper-faassen_AymMLHv"
+              "label": "Seniorennachmittag",
+              "detail": "Evang.-ref. Kirchgemeindehaus, Dietikon",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/events/music/dietikon/seniorennachmittag_AgwsJqt"
             },
             {
-              "label": "En route: «Partizipation stärken durch Co-Creation»",
+              "label": "Erzählnacht im Purzelhuus",
+              "detail": "Illnau, Illnau-Effretikon",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erzaehlnacht-im-purzelhuus/"
+            },
+            {
+              "label": "Krebsexkursion",
+              "detail": "Sihlwald",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/krebsexkursion/"
+            },
+            {
+              "label": "Sporthilfe Super10Kampf 2026 - VIP Package",
               "detail": "Zurich, Zürich",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/en-route-partizipation-staerken-durch-co-creation/"
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sporthilfe-super10kampf-2026-vip-package/"
             },
             {
-              "label": "World-building through sounds and Creative Audio Description",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/world-building-through-sounds-and-creative-audio-description/"
-            },
-            {
-              "label": "Wasser-Gymnastik 60+ / Organisiert vom Frauenverein",
+              "label": "Plausch-Jassturnier",
               "detail": "Urdorf",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wassergymnastik-60-organisiert-vom-frauenverein-23/"
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/plausch-jassturnier/"
             },
             {
-              "label": "ARTdeSUISSE Zurigo, edizione autunnale 2026, Galleria Trittli-Gasse",
-              "detail": "Galerie Trittli-Gasse, Zürich",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/artdesuisse-zuerich-herbstausgabe-2026-galerie-trittligasse/"
+              "label": "City Special - Frühabendmusik",
+              "detail": "Christ.-kath. Augustinerkirche",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/zuerich/konzert-klassik/city-special-fruehabendmusik_AXPkh3d"
             },
             {
-              "label": "Einladung zum Wild Abend",
-              "detail": "Schlieren",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einladung-zum-wild-abend/"
+              "label": "Feierabendmusik",
+              "detail": "Kloten",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/feierabendmusik-1/"
             },
             {
-              "label": "Führungen",
-              "detail": "Winterthur",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fuehrungen/"
+              "label": "Absenden End- und Wyberschiessen",
+              "detail": "Schützenhaus Eichholz Aesch ZH",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/absenden-end-und-wyberschiessen/"
             },
             {
-              "label": "Schulprojekt: Mittendrin",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schulprojekt-mittendrin/"
+              "label": "Degustazione delle massime rarità di whisky e musica - Un'esperienza irripetibile",
+              "detail": "Volkshaus Zürich, Zürich",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/whisky-und-music-top-raritaeten-tasting-once-in-a-lifetime_AdSR5fG"
             },
             {
-              "label": "Workshop Kerzen verzieren",
-              "detail": "Uster",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-kerzen-verzieren/"
-            },
-            {
-              "label": "Choir Workshop: Earworms for the Rich to Fall in Love With Getting Poor",
-              "detail": "Migros Museum für Gegenwartskunst",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/choir-workshop-earworms-for-the-rich-to-fall-in-love-with-getting-poor_ARCSqak"
+              "label": "Ladies Night 2026",
+              "detail": "Hinwil",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ladies-night-2026/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zurigo/",
-          "updatedAt": "2026-10-29T15:31:36.718Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-29T21:57:02.700Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "en": {
       "canton": "ZH",
@@ -133,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "349",
+          "value": "344",
           "note": "from the site’s events calendar"
         }
       ],
@@ -144,69 +144,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "RECOLLECTION – CASPER FAASSEN",
-              "detail": "Bildhalle Zürich, Zürich",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/recollection-casper-faassen_AymMLHv"
+              "label": "Seniorennachmittag",
+              "detail": "Evang.-ref. Kirchgemeindehaus, Dietikon",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/events/music/dietikon/seniorennachmittag_AgwsJqt"
             },
             {
-              "label": "En route: «Partizipation stärken durch Co-Creation»",
+              "label": "Erzählnacht im Purzelhuus",
+              "detail": "Illnau, Illnau-Effretikon",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erzaehlnacht-im-purzelhuus/"
+            },
+            {
+              "label": "Krebsexkursion",
+              "detail": "Sihlwald",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/krebsexkursion/"
+            },
+            {
+              "label": "Sporthilfe Super10Kampf 2026 - VIP Package",
               "detail": "Zurich, Zürich",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/en-route-partizipation-staerken-durch-co-creation/"
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sporthilfe-super10kampf-2026-vip-package/"
             },
             {
-              "label": "World-building through sounds and Creative Audio Description",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/world-building-through-sounds-and-creative-audio-description/"
-            },
-            {
-              "label": "Wasser-Gymnastik 60+ / Organisiert vom Frauenverein",
+              "label": "Plausch-Jassturnier",
               "detail": "Urdorf",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wassergymnastik-60-organisiert-vom-frauenverein-23/"
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/plausch-jassturnier/"
             },
             {
-              "label": "ARTdeSUISSE Zurich, Fall 2026 Edition, Galerie Trittli-Gasse",
-              "detail": "Galerie Trittli-Gasse, Zürich",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/artdesuisse-zuerich-herbstausgabe-2026-galerie-trittligasse/"
+              "label": "City Special - Frühabendmusik",
+              "detail": "Christ.-kath. Augustinerkirche",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/zuerich/konzert-klassik/city-special-fruehabendmusik_AXPkh3d"
             },
             {
-              "label": "Einladung zum Wild Abend",
-              "detail": "Schlieren",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einladung-zum-wild-abend/"
+              "label": "Feierabendmusik",
+              "detail": "Kloten",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/feierabendmusik-1/"
             },
             {
-              "label": "Führungen",
-              "detail": "Winterthur",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fuehrungen/"
+              "label": "Absenden End- und Wyberschiessen",
+              "detail": "Schützenhaus Eichholz Aesch ZH",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/absenden-end-und-wyberschiessen/"
             },
             {
-              "label": "Schulprojekt: Mittendrin",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schulprojekt-mittendrin/"
+              "label": "Whiskey & Music: Tasting of Top Rarities—Once in a Lifetime",
+              "detail": "Volkshaus Zürich, Zürich",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/whisky-und-music-top-raritaeten-tasting-once-in-a-lifetime_AdSR5fG"
             },
             {
-              "label": "Workshop Kerzen verzieren",
-              "detail": "Uster",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-kerzen-verzieren/"
-            },
-            {
-              "label": "Choir Workshop: Earworms for the Rich to Fall in Love With Getting Poor",
-              "detail": "Migros Museum für Gegenwartskunst",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/choir-workshop-earworms-for-the-rich-to-fall-in-love-with-getting-poor_ARCSqak"
+              "label": "Ladies Night 2026",
+              "detail": "Hinwil",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ladies-night-2026/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zurich/",
-          "updatedAt": "2026-10-29T15:31:36.718Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-29T21:57:02.700Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "de": {
       "canton": "ZH",
@@ -244,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "349",
+          "value": "344",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -255,69 +255,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "RECOLLECTION – CASPER FAASSEN",
-              "detail": "Bildhalle Zürich, Zürich",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/recollection-casper-faassen_AymMLHv"
+              "label": "Seniorennachmittag",
+              "detail": "Evang.-ref. Kirchgemeindehaus, Dietikon",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/events/music/dietikon/seniorennachmittag_AgwsJqt"
             },
             {
-              "label": "En route: «Partizipation stärken durch Co-Creation»",
+              "label": "Erzählnacht im Purzelhuus",
+              "detail": "Illnau, Illnau-Effretikon",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erzaehlnacht-im-purzelhuus/"
+            },
+            {
+              "label": "Krebsexkursion",
+              "detail": "Sihlwald",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/krebsexkursion/"
+            },
+            {
+              "label": "Sporthilfe Super10Kampf 2026 - VIP Package",
               "detail": "Zurich, Zürich",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/en-route-partizipation-staerken-durch-co-creation/"
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sporthilfe-super10kampf-2026-vip-package/"
             },
             {
-              "label": "World-building through sounds and Creative Audio Description",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/world-building-through-sounds-and-creative-audio-description/"
-            },
-            {
-              "label": "Wasser-Gymnastik 60+ / Organisiert vom Frauenverein",
+              "label": "Plausch-Jassturnier",
               "detail": "Urdorf",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wassergymnastik-60-organisiert-vom-frauenverein-23/"
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/plausch-jassturnier/"
             },
             {
-              "label": "ARTdeSUISSE Zürich, Herbstausgabe 2026, Galerie Trittli-Gasse",
-              "detail": "Galerie Trittli-Gasse, Zürich",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/artdesuisse-zuerich-herbstausgabe-2026-galerie-trittligasse/"
+              "label": "City Special - Frühabendmusik",
+              "detail": "Christ.-kath. Augustinerkirche",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/zuerich/konzert-klassik/city-special-fruehabendmusik_AXPkh3d"
             },
             {
-              "label": "Einladung zum Wild Abend",
-              "detail": "Schlieren",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einladung-zum-wild-abend/"
+              "label": "Feierabendmusik",
+              "detail": "Kloten",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/feierabendmusik-1/"
             },
             {
-              "label": "Führungen",
-              "detail": "Winterthur",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fuehrungen/"
+              "label": "Absenden End- und Wyberschiessen",
+              "detail": "Schützenhaus Eichholz Aesch ZH",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/absenden-end-und-wyberschiessen/"
             },
             {
-              "label": "Schulprojekt: Mittendrin",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schulprojekt-mittendrin/"
+              "label": "Whisky & Music Top Raritäten Tasting - Once in a Lifetime",
+              "detail": "Volkshaus Zürich, Zürich",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/whisky-und-music-top-raritaeten-tasting-once-in-a-lifetime_AdSR5fG"
             },
             {
-              "label": "Workshop Kerzen verzieren",
-              "detail": "Uster",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-kerzen-verzieren/"
-            },
-            {
-              "label": "Choir Workshop: Earworms for the Rich to Fall in Love With Getting Poor",
-              "detail": "Migros Museum für Gegenwartskunst",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/choir-workshop-earworms-for-the-rich-to-fall-in-love-with-getting-poor_ARCSqak"
+              "label": "Ladies Night 2026",
+              "detail": "Hinwil",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ladies-night-2026/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zurich/",
-          "updatedAt": "2026-10-29T15:31:36.718Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-29T21:57:02.700Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "fr": {
       "canton": "ZH",
@@ -355,7 +355,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "349",
+          "value": "344",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -366,69 +366,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "RECOLLECTION – CASPER FAASSEN",
-              "detail": "Bildhalle Zürich, Zürich",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/recollection-casper-faassen_AymMLHv"
+              "label": "Seniorennachmittag",
+              "detail": "Evang.-ref. Kirchgemeindehaus, Dietikon",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/events/music/dietikon/seniorennachmittag_AgwsJqt"
             },
             {
-              "label": "En route: «Partizipation stärken durch Co-Creation»",
+              "label": "Erzählnacht im Purzelhuus",
+              "detail": "Illnau, Illnau-Effretikon",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erzaehlnacht-im-purzelhuus/"
+            },
+            {
+              "label": "Krebsexkursion",
+              "detail": "Sihlwald",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/krebsexkursion/"
+            },
+            {
+              "label": "Sporthilfe Super10Kampf 2026 - VIP Package",
               "detail": "Zurich, Zürich",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/en-route-partizipation-staerken-durch-co-creation/"
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sporthilfe-super10kampf-2026-vip-package/"
             },
             {
-              "label": "World-building through sounds and Creative Audio Description",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/world-building-through-sounds-and-creative-audio-description/"
-            },
-            {
-              "label": "Wasser-Gymnastik 60+ / Organisiert vom Frauenverein",
+              "label": "Plausch-Jassturnier",
               "detail": "Urdorf",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wassergymnastik-60-organisiert-vom-frauenverein-23/"
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/plausch-jassturnier/"
             },
             {
-              "label": "ARTdeSUISSE Zurich, édition d'automne 2026, Galerie Trittli-Gasse",
-              "detail": "Galerie Trittli-Gasse, Zürich",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/artdesuisse-zuerich-herbstausgabe-2026-galerie-trittligasse/"
+              "label": "City Special - Frühabendmusik",
+              "detail": "Christ.-kath. Augustinerkirche",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/zuerich/konzert-klassik/city-special-fruehabendmusik_AXPkh3d"
             },
             {
-              "label": "Einladung zum Wild Abend",
-              "detail": "Schlieren",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einladung-zum-wild-abend/"
+              "label": "Feierabendmusik",
+              "detail": "Kloten",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/feierabendmusik-1/"
             },
             {
-              "label": "Führungen",
-              "detail": "Winterthur",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fuehrungen/"
+              "label": "Absenden End- und Wyberschiessen",
+              "detail": "Schützenhaus Eichholz Aesch ZH",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/absenden-end-und-wyberschiessen/"
             },
             {
-              "label": "Schulprojekt: Mittendrin",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schulprojekt-mittendrin/"
+              "label": "Dégustation de grandes raretés : whisky et musique - Une expérience unique",
+              "detail": "Volkshaus Zürich, Zürich",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/whisky-und-music-top-raritaeten-tasting-once-in-a-lifetime_AdSR5fG"
             },
             {
-              "label": "Workshop Kerzen verzieren",
-              "detail": "Uster",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-kerzen-verzieren/"
-            },
-            {
-              "label": "Choir Workshop: Earworms for the Rich to Fall in Love With Getting Poor",
-              "detail": "Migros Museum für Gegenwartskunst",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/choir-workshop-earworms-for-the-rich-to-fall-in-love-with-getting-poor_ARCSqak"
+              "label": "Ladies Night 2026",
+              "detail": "Hinwil",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ladies-night-2026/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zurich/",
-          "updatedAt": "2026-10-29T15:31:36.718Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-29T21:57:02.700Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     }
   }
 }

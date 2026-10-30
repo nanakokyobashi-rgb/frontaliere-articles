@@ -4,12 +4,12 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "eventi",
-  "updatedAt": "2026-10-29T07:40:41.678Z",
-  "contentHash": "f95b3e31dceb054b331b34fd29f5842b6648d362bdc150dc15cbc402bc443296",
+  "updatedAt": "2026-10-30T06:23:49.454Z",
+  "contentHash": "c307b9ccf571933a8e2d094ed0194fb52e768af06a6532858950eea086bd1ab9",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-28T19:25:39.771Z",
+      "updatedAt": "2026-10-29T21:23:37.654Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "75",
+          "value": "77",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Wanderung für Seniorinnen und Senioren",
-              "detail": "Bahnhof SBB Chur, Chur",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wanderung-fuer-seniorinnen-und-senioren-10/"
+              "label": "Incontro con 18enni",
+              "detail": "Roveredo GR",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/incontro-con-18enni/"
             },
             {
-              "label": "Gesundheitsturnen",
-              "detail": "Arosa",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gesundheitsturnen-1/"
+              "label": "Luo Lingyuan: «Kinder der roten Erde»",
+              "detail": "Stadtbibliothek Chur, Chur",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/luo-lingyuan-kinder-der-roten-erde/"
             },
             {
-              "label": "Alte Techniken entdecken - Besen binden",
-              "detail": "Vnà",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/alte-techniken-entdecken-besen-binden/"
+              "label": "Seminar «Innere Schönheit»",
+              "detail": "La Stalla, Surses",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/seminar-innere-schoenheit/"
             },
             {
-              "label": "Gemeindenachmittag 60+",
-              "detail": "Davos",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeindenachmittag-60/"
-            },
-            {
-              "label": "Gemeindenachmittag 60+",
-              "detail": "Davos",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeindenachmittag-60-1/"
+              "label": "Cinema Staziun Lavin - BECAARIA",
+              "detail": "Cinema Staziun, Zernez",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/cinema-staziun-lavin-becaaria/"
             },
             {
               "label": "Faust: Reloaded",
-              "detail": "Theater Chur, Chur",
-              "date": "2026-10-29",
+              "detail": "Theater Chur, Chur — in corso, ultimo giorno: 30 ottobre 2026",
+              "date": "2026-10-30",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/faustreloaded/"
-            },
-            {
-              "label": "Luigi Panettone live - Elvis Love Songs",
-              "detail": "Marsöl die Bar, Chur",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/luigi-panettone-elvis-favourites-2/"
-            },
-            {
-              "label": "Imparare il valzer e la mazurka",
-              "detail": "7000 Chur, Chur",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lerne-walzer-und-mazurka/"
             },
             {
               "label": "Tematizzare la Valle Riflessioni sulle forme di vita in Valposchiavo",
               "detail": "Casa Torre, Poschiavo — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-10-29",
+              "date": "2026-10-30",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
             },
             {
               "label": "Calanda Oktoberfest",
               "detail": "AREON Eventhalle, Chur — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-29",
+              "date": "2026-10-30",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/calanda-oktoberfest/"
+            },
+            {
+              "label": "Waldbaden Alpin",
+              "detail": "Scuol — in corso, ultimo giorno: 6 novembre 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
+            },
+            {
+              "label": "Caffè Rumantsch ad Ardez",
+              "detail": "Ardez, Scuol — in corso, ultimo giorno: 11 novembre 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
+            },
+            {
+              "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
+              "detail": "Ardez, Scuol — in corso, ultimo giorno: 7 novembre 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/grigioni/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         }
       ],
       "curatedArticles": [
@@ -147,7 +147,7 @@
           "url": "/eventi/grigioni/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "en": {
       "canton": "GR",
@@ -157,7 +157,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "75",
+          "value": "77",
           "note": "from the site’s events calendar"
         }
       ],
@@ -168,69 +168,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Wanderung für Seniorinnen und Senioren",
-              "detail": "Bahnhof SBB Chur, Chur",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wanderung-fuer-seniorinnen-und-senioren-10/"
+              "label": "Incontro con 18enni",
+              "detail": "Roveredo GR",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/incontro-con-18enni/"
             },
             {
-              "label": "Gesundheitsturnen",
-              "detail": "Arosa",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gesundheitsturnen-1/"
+              "label": "Luo Lingyuan: «Kinder der roten Erde»",
+              "detail": "Stadtbibliothek Chur, Chur",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/luo-lingyuan-kinder-der-roten-erde/"
             },
             {
-              "label": "Alte Techniken entdecken - Besen binden",
-              "detail": "Vnà",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/alte-techniken-entdecken-besen-binden/"
+              "label": "Seminar «Innere Schönheit»",
+              "detail": "La Stalla, Surses",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/seminar-innere-schoenheit/"
             },
             {
-              "label": "Gemeindenachmittag 60+",
-              "detail": "Davos",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeindenachmittag-60/"
-            },
-            {
-              "label": "Gemeindenachmittag 60+",
-              "detail": "Davos",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeindenachmittag-60-1/"
+              "label": "Cinema Staziun Lavin - BECAARIA",
+              "detail": "Cinema Staziun, Zernez",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/cinema-staziun-lavin-becaaria/"
             },
             {
               "label": "Faust: Reloaded",
-              "detail": "Theater Chur, Chur",
-              "date": "2026-10-29",
+              "detail": "Theater Chur, Chur — ongoing, last day: 30 October 2026",
+              "date": "2026-10-30",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/faustreloaded/"
-            },
-            {
-              "label": "Luigi Panettone live - Elvis Love Songs",
-              "detail": "Marsöl die Bar, Chur",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/luigi-panettone-elvis-favourites-2/"
-            },
-            {
-              "label": "Learn to waltz and mazurka",
-              "detail": "7000 Chur, Chur",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lerne-walzer-und-mazurka/"
             },
             {
               "label": "Tematizzare la Valle. Riflessioni sulle forme di vita in Valposchiavo",
               "detail": "Casa Torre, Poschiavo — ongoing, last day: 14 November 2026",
-              "date": "2026-10-29",
+              "date": "2026-10-30",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
             },
             {
               "label": "Calanda Oktoberfest",
               "detail": "AREON Eventhalle, Chur — ongoing, last day: 31 October 2026",
-              "date": "2026-10-29",
+              "date": "2026-10-30",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/calanda-oktoberfest/"
+            },
+            {
+              "label": "Forest Bathing Alpin",
+              "detail": "Scuol — ongoing, last day: 6 November 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
+            },
+            {
+              "label": "Café Rumantsch ad Ardez",
+              "detail": "Ardez, Scuol — ongoing, last day: 11 November 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
+            },
+            {
+              "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
+              "detail": "Ardez, Scuol — ongoing, last day: 7 November 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/graubunden/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         }
       ],
       "curatedArticles": [
@@ -282,7 +282,7 @@
           "url": "/en/events/graubunden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "de": {
       "canton": "GR",
@@ -292,7 +292,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "75",
+          "value": "77",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -303,69 +303,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Wanderung für Seniorinnen und Senioren",
-              "detail": "Bahnhof SBB Chur, Chur",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wanderung-fuer-seniorinnen-und-senioren-10/"
+              "label": "Incontro con 18enni",
+              "detail": "Roveredo GR",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/incontro-con-18enni/"
             },
             {
-              "label": "Gesundheitsturnen",
-              "detail": "Arosa",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gesundheitsturnen-1/"
+              "label": "Luo Lingyuan: «Kinder der roten Erde»",
+              "detail": "Stadtbibliothek Chur, Chur",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/luo-lingyuan-kinder-der-roten-erde/"
             },
             {
-              "label": "Alte Techniken entdecken - Besen binden",
-              "detail": "Vnà",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/alte-techniken-entdecken-besen-binden/"
+              "label": "Seminar «Innere Schönheit»",
+              "detail": "La Stalla, Surses",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/seminar-innere-schoenheit/"
             },
             {
-              "label": "Gemeindenachmittag 60+",
-              "detail": "Davos",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeindenachmittag-60/"
-            },
-            {
-              "label": "Gemeindenachmittag 60+",
-              "detail": "Davos",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeindenachmittag-60-1/"
+              "label": "Cinema Staziun Lavin - BECAARIA",
+              "detail": "Cinema Staziun, Zernez",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/cinema-staziun-lavin-becaaria/"
             },
             {
               "label": "Faust: Reloaded",
-              "detail": "Theater Chur, Chur",
-              "date": "2026-10-29",
+              "detail": "Theater Chur, Chur — läuft, letzter Tag: 30. Oktober 2026",
+              "date": "2026-10-30",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/faustreloaded/"
-            },
-            {
-              "label": "Luigi Panettone: Elvis Favourites",
-              "detail": "Marsöl die Bar, Chur",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/luigi-panettone-elvis-favourites-2/"
-            },
-            {
-              "label": "Lerne Walzer und Mazurka",
-              "detail": "7000 Chur, Chur",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lerne-walzer-und-mazurka/"
             },
             {
               "label": "Tematizzare la Valle. Riflessioni sulle forme di vita in Valposchiavo",
               "detail": "Casa Torre, Poschiavo — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-10-29",
+              "date": "2026-10-30",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
             },
             {
               "label": "Calanda Oktoberfest",
               "detail": "AREON Eventhalle, Chur — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-29",
+              "date": "2026-10-30",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/calanda-oktoberfest/"
+            },
+            {
+              "label": "Waldbaden Alpin",
+              "detail": "Scuol — läuft, letzter Tag: 6. November 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
+            },
+            {
+              "label": "Cafè Rumantsch ad Ardez",
+              "detail": "Ardez, Scuol — läuft, letzter Tag: 11. November 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
+            },
+            {
+              "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
+              "detail": "Ardez, Scuol — läuft, letzter Tag: 7. November 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/graubunden/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         }
       ],
       "curatedArticles": [
@@ -417,7 +417,7 @@
           "url": "/de/veranstaltungen/graubunden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "fr": {
       "canton": "GR",
@@ -427,7 +427,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "75",
+          "value": "77",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -438,69 +438,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Wanderung für Seniorinnen und Senioren",
-              "detail": "Bahnhof SBB Chur, Chur",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wanderung-fuer-seniorinnen-und-senioren-10/"
+              "label": "Incontro con 18enni",
+              "detail": "Roveredo GR",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/incontro-con-18enni/"
             },
             {
-              "label": "Gesundheitsturnen",
-              "detail": "Arosa",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gesundheitsturnen-1/"
+              "label": "Luo Lingyuan: «Kinder der roten Erde»",
+              "detail": "Stadtbibliothek Chur, Chur",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/luo-lingyuan-kinder-der-roten-erde/"
             },
             {
-              "label": "Alte Techniken entdecken - Besen binden",
-              "detail": "Vnà",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/alte-techniken-entdecken-besen-binden/"
+              "label": "Seminar «Innere Schönheit»",
+              "detail": "La Stalla, Surses",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/seminar-innere-schoenheit/"
             },
             {
-              "label": "Gemeindenachmittag 60+",
-              "detail": "Davos",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeindenachmittag-60/"
-            },
-            {
-              "label": "Gemeindenachmittag 60+",
-              "detail": "Davos",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeindenachmittag-60-1/"
+              "label": "Cinema Staziun Lavin - BECAARIA",
+              "detail": "Cinema Staziun, Zernez",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/cinema-staziun-lavin-becaaria/"
             },
             {
               "label": "Faust: Reloaded",
-              "detail": "Theater Chur, Chur",
-              "date": "2026-10-29",
+              "detail": "Theater Chur, Chur — en cours, dernier jour : 30 octobre 2026",
+              "date": "2026-10-30",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/faustreloaded/"
-            },
-            {
-              "label": "Luigi Panettone live - Elvis Love Songs",
-              "detail": "Marsöl die Bar, Chur",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/luigi-panettone-elvis-favourites-2/"
-            },
-            {
-              "label": "Learn to waltz and mazurka",
-              "detail": "7000 Chur, Chur",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lerne-walzer-und-mazurka/"
             },
             {
               "label": "Tematizzare la Valle. Riflessioni sulle forme di vita in Valposchiavo",
               "detail": "Casa Torre, Poschiavo — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-10-29",
+              "date": "2026-10-30",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
             },
             {
               "label": "Calanda Oktoberfest",
               "detail": "AREON Eventhalle, Chur — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-29",
+              "date": "2026-10-30",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/calanda-oktoberfest/"
+            },
+            {
+              "label": "Waldbaden Alpin",
+              "detail": "Scuol — en cours, dernier jour : 6 novembre 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
+            },
+            {
+              "label": "Café Rumantsch ad Ardez",
+              "detail": "Ardez, Scuol — en cours, dernier jour : 11 novembre 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
+            },
+            {
+              "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
+              "detail": "Ardez, Scuol — en cours, dernier jour : 7 novembre 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/grisons/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         }
       ],
       "curatedArticles": [
@@ -552,7 +552,7 @@
           "url": "/fr/evenements/grisons/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     }
   }
 }

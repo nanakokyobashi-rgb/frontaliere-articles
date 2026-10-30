@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "mobilita",
-  "updatedAt": "2026-10-29T08:53:42.745Z",
-  "contentHash": "df7c719fc434ddce62411cdac77216a88ab6f7f8f2373ee1b558a362d5dc963e",
+  "updatedAt": "2026-10-30T06:23:49.454Z",
+  "contentHash": "4767ee59896d27292ac147e9bfdd93fb69d8d3237a3c220c01f5264bc9ebaab2",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-29T01:18:28.468Z",
+      "updatedAt": "2026-10-29T18:42:38.256Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-28T21:56:57.371Z",
+      "updatedAt": "2026-10-29T22:02:50.125Z",
       "keyFacts": 0
     }
   ],
@@ -37,12 +37,12 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "18",
+          "value": "16",
           "note": "segnalazioni aggiornate: 29 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "23",
+          "value": "19",
           "note": "segnalazioni aggiornate: 29 ottobre 2026"
         }
       ],
@@ -99,12 +99,6 @@
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
             {
-              "label": "A9 Pontarlier <-> Losanna tra Svincolo autostradale Ballaigues E Svincolo autostradale Les Clées Situazione: chiusa cantiere Limitazione del traffico: corsia di sinistra chiusa",
-              "value": "Chiusura",
-              "detail": "fine prevista: 30 ottobre 2026",
-              "date": "2025-10-29T11:17:00.000Z"
-            },
-            {
               "label": "A9 Vevey <-> Martigny tra Svincolo autostradale Bex Sud E Svincolo autostradale St-Maurice Situazione: chiusa cantiere, lunghezza [km] 6.0 Limitazione del traffico: corsia chiusa",
               "value": "Chiusura",
               "detail": "fine prevista: 21 novembre 2026",
@@ -145,16 +139,32 @@
               "value": "Chiusura",
               "detail": "fine prevista: 8 luglio 2027",
               "date": "2026-09-16T12:09:00.000Z"
+            },
+            {
+              "label": "A1A Lausanne-Maladière -> Diramazione Ecublens tra Svincolo autostradale Lausanne-Maladière E Raccordo autostradale Diramazione Ecublens Situazione: chiusa cantiere",
+              "value": "Chiusura",
+              "detail": "fine prevista: 6 novembre 2026",
+              "date": "2026-10-15T06:05:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-29T01:18:28.468Z"
+          "updatedAt": "2026-10-29T18:42:38.256Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Piscine de Mon-Repos - crédit complémentaire pour les travaux d'assainissement et de mise aux normes réalisés",
+              "date": "2026-10-29T12:30:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90850"
+            },
+            {
+              "label": "Fermeture de la poste de la gare: la Ville dénonce une journée noire pour le service public",
+              "date": "2026-10-29T12:30:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90840"
+            },
             {
               "label": "Travaux de rénovation et de réhabilitation des parcs et domaines",
               "date": "2026-10-19T12:00:00.000Z",
@@ -174,19 +184,9 @@
               "label": "Tarifs à compter du 13 décembre 2026",
               "date": "2026-09-30T14:50:25.000Z",
               "url": "https://www.mobilis-vaud.ch/tarifs-a-compter-du-13-decembre-2026/"
-            },
-            {
-              "label": "Réponse à la consultation sur l’avant-projet de loi sur la mobilité",
-              "date": "2026-09-24T12:00:00.000Z",
-              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90320"
-            },
-            {
-              "label": "Poste de Vers-chez-les-Blanc: la Ville obtient gain de cause contre sa fermeture",
-              "date": "2026-09-23T07:00:00.000Z",
-              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90330"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -270,7 +270,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-29T08:53:42.745Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "en": {
       "canton": "VD",
@@ -285,12 +285,12 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "18",
+          "value": "16",
           "note": "reports as of 29 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "23",
+          "value": "19",
           "note": "reports as of 29 October 2026"
         }
       ],
@@ -347,12 +347,6 @@
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
             {
-              "label": "A9 Pontarlier <-> Losanna tra Svincolo autostradale Ballaigues E Svincolo autostradale Les Clées Situazione: chiusa cantiere Limitazione del traffico: corsia di sinistra chiusa",
-              "value": "Closure",
-              "detail": "until 30 October 2026",
-              "date": "2025-10-29T11:17:00.000Z"
-            },
-            {
               "label": "A9 Vevey <-> Martigny tra Svincolo autostradale Bex Sud E Svincolo autostradale St-Maurice Situazione: chiusa cantiere, lunghezza [km] 6.0 Limitazione del traffico: corsia chiusa",
               "value": "Closure",
               "detail": "until 21 November 2026",
@@ -393,16 +387,32 @@
               "value": "Closure",
               "detail": "until 8 July 2027",
               "date": "2026-09-16T12:09:00.000Z"
+            },
+            {
+              "label": "A1A Lausanne-Maladière -> Diramazione Ecublens tra Svincolo autostradale Lausanne-Maladière E Raccordo autostradale Diramazione Ecublens Situazione: chiusa cantiere",
+              "value": "Closure",
+              "detail": "until 6 November 2026",
+              "date": "2026-10-15T06:05:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-29T01:18:28.468Z"
+          "updatedAt": "2026-10-29T18:42:38.256Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Piscine de Mon-Repos - crédit complémentaire pour les travaux d'assainissement et de mise aux normes réalisés",
+              "date": "2026-10-29T12:30:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90850"
+            },
+            {
+              "label": "Fermeture de la poste de la gare: la Ville dénonce une journée noire pour le service public",
+              "date": "2026-10-29T12:30:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90840"
+            },
             {
               "label": "Travaux de rénovation et de réhabilitation des parcs et domaines",
               "date": "2026-10-19T12:00:00.000Z",
@@ -422,19 +432,9 @@
               "label": "Tarifs à compter du 13 décembre 2026",
               "date": "2026-09-30T14:50:25.000Z",
               "url": "https://www.mobilis-vaud.ch/tarifs-a-compter-du-13-decembre-2026/"
-            },
-            {
-              "label": "Réponse à la consultation sur l’avant-projet de loi sur la mobilité",
-              "date": "2026-09-24T12:00:00.000Z",
-              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90320"
-            },
-            {
-              "label": "Poste de Vers-chez-les-Blanc: la Ville obtient gain de cause contre sa fermeture",
-              "date": "2026-09-23T07:00:00.000Z",
-              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90330"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -517,7 +517,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-29T08:53:42.745Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "de": {
       "canton": "VD",
@@ -532,12 +532,12 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "18",
+          "value": "16",
           "note": "Meldungen vom 29. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "23",
+          "value": "19",
           "note": "Meldungen vom 29. Oktober 2026"
         }
       ],
@@ -594,12 +594,6 @@
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
             {
-              "label": "A9 Pontarlier <-> Lausanne zwischen Anschluss Ballaigues und Anschluss Les Clées Sachlage: Strecke gesperrt Baustelle Verkehrsführung: linker Fahrstreifen gesperrt",
-              "value": "Sperrung",
-              "detail": "bis 30. Oktober 2026",
-              "date": "2025-10-29T11:17:00.000Z"
-            },
-            {
               "label": "A9 Vevey <-> Martigny zwischen Anschluss Bex-Süd und Anschluss St-Maurice Sachlage: Strecke gesperrt Baustelle, Länge [km] 6.0 Verkehrsführung: Fahrstreifen gesperrt",
               "value": "Sperrung",
               "detail": "bis 21. November 2026",
@@ -640,16 +634,32 @@
               "value": "Sperrung",
               "detail": "bis 8. Juli 2027",
               "date": "2026-09-16T12:09:00.000Z"
+            },
+            {
+              "label": "A1A Lausanne-Maladière -> Verzweigung Ecublens zwischen Anschluss Lausanne-Maladière und Autobahndreieck Verzweigung Ecublens Sachlage: Strecke gesperrt Baustelle",
+              "value": "Sperrung",
+              "detail": "bis 6. November 2026",
+              "date": "2026-10-15T06:05:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-29T01:18:28.468Z"
+          "updatedAt": "2026-10-29T18:42:38.256Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Piscine de Mon-Repos - crédit complémentaire pour les travaux d'assainissement et de mise aux normes réalisés",
+              "date": "2026-10-29T12:30:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90850"
+            },
+            {
+              "label": "Fermeture de la poste de la gare: la Ville dénonce une journée noire pour le service public",
+              "date": "2026-10-29T12:30:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90840"
+            },
             {
               "label": "Travaux de rénovation et de réhabilitation des parcs et domaines",
               "date": "2026-10-19T12:00:00.000Z",
@@ -669,19 +679,9 @@
               "label": "Tarifs à compter du 13 décembre 2026",
               "date": "2026-09-30T14:50:25.000Z",
               "url": "https://www.mobilis-vaud.ch/tarifs-a-compter-du-13-decembre-2026/"
-            },
-            {
-              "label": "Réponse à la consultation sur l’avant-projet de loi sur la mobilité",
-              "date": "2026-09-24T12:00:00.000Z",
-              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90320"
-            },
-            {
-              "label": "Poste de Vers-chez-les-Blanc: la Ville obtient gain de cause contre sa fermeture",
-              "date": "2026-09-23T07:00:00.000Z",
-              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90330"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -764,7 +764,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-29T08:53:42.745Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "fr": {
       "canton": "VD",
@@ -779,12 +779,12 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "18",
+          "value": "16",
           "note": "signalements au 29 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "23",
+          "value": "19",
           "note": "signalements au 29 octobre 2026"
         }
       ],
@@ -841,12 +841,6 @@
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
             {
-              "label": "A9 Pontarlier <-> Lausanne entre Jonction autoroutière Ballaigues et Jonction autoroutière Les Clées Situation: fermé travaux Gestion du trafic: voie de gauche fermée",
-              "value": "Fermeture",
-              "detail": "jusqu’au 30 octobre 2026",
-              "date": "2025-10-29T11:17:00.000Z"
-            },
-            {
               "label": "A9 Vevey <-> Martigny entre Jonction autoroutière Bex-Sud et Jonction autoroutière St-Maurice Situation: fermé travaux, longueur [km] 6.0 Gestion du trafic: voie fermée",
               "value": "Fermeture",
               "detail": "jusqu’au 21 novembre 2026",
@@ -887,16 +881,32 @@
               "value": "Fermeture",
               "detail": "jusqu’au 8 juillet 2027",
               "date": "2026-09-16T12:09:00.000Z"
+            },
+            {
+              "label": "A1A Lausanne-Maladière -> Echangeur d'Ecublens entre Jonction autoroutière Lausanne-Maladière et Echangeur Echangeur d'Ecublens Situation: fermé travaux",
+              "value": "Fermeture",
+              "detail": "jusqu’au 6 novembre 2026",
+              "date": "2026-10-15T06:05:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-29T01:18:28.468Z"
+          "updatedAt": "2026-10-29T18:42:38.256Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Piscine de Mon-Repos - crédit complémentaire pour les travaux d'assainissement et de mise aux normes réalisés",
+              "date": "2026-10-29T12:30:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90850"
+            },
+            {
+              "label": "Fermeture de la poste de la gare: la Ville dénonce une journée noire pour le service public",
+              "date": "2026-10-29T12:30:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90840"
+            },
             {
               "label": "Travaux de rénovation et de réhabilitation des parcs et domaines",
               "date": "2026-10-19T12:00:00.000Z",
@@ -916,19 +926,9 @@
               "label": "Tarifs à compter du 13 décembre 2026",
               "date": "2026-09-30T14:50:25.000Z",
               "url": "https://www.mobilis-vaud.ch/tarifs-a-compter-du-13-decembre-2026/"
-            },
-            {
-              "label": "Réponse à la consultation sur l’avant-projet de loi sur la mobilité",
-              "date": "2026-09-24T12:00:00.000Z",
-              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90320"
-            },
-            {
-              "label": "Poste de Vers-chez-les-Blanc: la Ville obtient gain de cause contre sa fermeture",
-              "date": "2026-09-23T07:00:00.000Z",
-              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90330"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -1012,7 +1012,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-29T08:53:42.745Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     }
   }
 }

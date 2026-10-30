@@ -4,17 +4,17 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "eventi",
-  "updatedAt": "2026-10-29T07:40:41.678Z",
-  "contentHash": "19d028d466765fb7d069814de4997fc4ce667dd9b8a6fcbc19691c4b85581baf",
+  "updatedAt": "2026-10-30T06:23:49.454Z",
+  "contentHash": "976bd33eb83df68407ea24bed58bdf92d45df8e548e861811ba399a2c7f1eca8",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-28T19:25:39.771Z",
+      "updatedAt": "2026-10-29T21:23:37.654Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-28T21:56:57.371Z",
+      "updatedAt": "2026-10-29T22:02:50.125Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "23",
+          "value": "22",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,18 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "speis&trank stories with Annina Keller: Rösti, sugar cane and love",
-              "detail": "Haberhaus Bühne, Schaffhausen",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/speistrank-stories-with-annina-keller-roesti-sugar-cane-and-love/"
-            },
-            {
-              "label": "MANUEL STAHLBERGER [CH] «ES GEHT»",
-              "detail": "TapTab",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/manuel-stahlberger-ch-es-geht_AyCHXX2"
-            },
             {
               "label": "Acoustic Blues Drifters",
               "detail": "Bistro Chez Ulrique, Stein am Rhein",
@@ -96,11 +84,23 @@
               "detail": "Bahnhof SBB Schaffhausen, Schaffhausen",
               "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/auf-den-spuren-einer-vergessenen-kultur-das-landjudentum-am-hochrhein/"
+            },
+            {
+              "label": "Sonntags um 11: Kulturelle Begegnung 2 «ADVENTSKONZERT»",
+              "detail": "Schaffhausen",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sonntags-um-11-kulturelle-begegnung-2-adventskonzert/"
+            },
+            {
+              "label": "Hand im Glück Puppet Theater - Finitopepitto! (Children's Theater, ages 5+)",
+              "detail": "Theater Bachturnhalle, Schaffhausen",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/figurentheater-hand-im-glueck-finitopepitto-kindertheater-5/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/sciaffusa/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -133,7 +133,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -155,7 +155,7 @@
           "url": "/eventi/sciaffusa/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "en": {
       "canton": "SH",
@@ -165,7 +165,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "23",
+          "value": "22",
           "note": "from the site’s events calendar"
         }
       ],
@@ -175,18 +175,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "speis&trank stories with Annina Keller: Rösti, sugar cane and love",
-              "detail": "Haberhaus Bühne, Schaffhausen",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/speistrank-stories-with-annina-keller-roesti-sugar-cane-and-love/"
-            },
-            {
-              "label": "MANUEL STAHLBERGER [CH] «ES GEHT»",
-              "detail": "TapTab",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/manuel-stahlberger-ch-es-geht_AyCHXX2"
-            },
             {
               "label": "Acoustic Blues Drifters",
               "detail": "Bistro Chez Ulrique, Stein am Rhein",
@@ -234,11 +222,23 @@
               "detail": "Bahnhof SBB Schaffhausen, Schaffhausen",
               "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/auf-den-spuren-einer-vergessenen-kultur-das-landjudentum-am-hochrhein/"
+            },
+            {
+              "label": "Sonntags um 11: Kulturelle Begegnung 2 «ADVENTSKONZERT»",
+              "detail": "Schaffhausen",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sonntags-um-11-kulturelle-begegnung-2-adventskonzert/"
+            },
+            {
+              "label": "Hand im Glück Puppet Theater - Finitopepitto! (Children's Theater, ages 5+)",
+              "detail": "Theater Bachturnhalle, Schaffhausen",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/figurentheater-hand-im-glueck-finitopepitto-kindertheater-5/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schaffhausen/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -271,7 +271,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -293,7 +293,7 @@
           "url": "/en/events/schaffhausen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "de": {
       "canton": "SH",
@@ -303,7 +303,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "23",
+          "value": "22",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -313,18 +313,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "speis&trank geschichten mit Annina Keller: Rösti, Zuckerrohr und Liebe",
-              "detail": "Haberhaus Bühne, Schaffhausen",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/speistrank-stories-with-annina-keller-roesti-sugar-cane-and-love/"
-            },
-            {
-              "label": "MANUEL STAHLBERGER [CH] «ES GEHT»",
-              "detail": "TapTab",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/manuel-stahlberger-ch-es-geht_AyCHXX2"
-            },
             {
               "label": "Akustische Blues-Drifter",
               "detail": "Bistro Chez Ulrique, Stein am Rhein",
@@ -372,11 +360,23 @@
               "detail": "Bahnhof SBB Schaffhausen, Schaffhausen",
               "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/auf-den-spuren-einer-vergessenen-kultur-das-landjudentum-am-hochrhein/"
+            },
+            {
+              "label": "Sonntags um 11: Kulturelle Begegnung 2 «ADVENTSKONZERT»",
+              "detail": "Schaffhausen",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sonntags-um-11-kulturelle-begegnung-2-adventskonzert/"
+            },
+            {
+              "label": "Figurentheater Hand im Glück - Finitopepitto! (Kindertheater 5+)",
+              "detail": "Theater Bachturnhalle, Schaffhausen",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/figurentheater-hand-im-glueck-finitopepitto-kindertheater-5/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schaffhausen/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -409,7 +409,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -431,7 +431,7 @@
           "url": "/de/veranstaltungen/schaffhausen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "fr": {
       "canton": "SH",
@@ -441,7 +441,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "23",
+          "value": "22",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -451,18 +451,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "speis&trank stichten mit Annina Keller : Rösti, canne à sucre et amour",
-              "detail": "Haberhaus Bühne, Schaffhausen",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/speistrank-stories-with-annina-keller-roesti-sugar-cane-and-love/"
-            },
-            {
-              "label": "MANUEL STAHLBERGER [CH] «ES GEHT»",
-              "detail": "TapTab",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/manuel-stahlberger-ch-es-geht_AyCHXX2"
-            },
             {
               "label": "Acoustique Blues Drifters",
               "detail": "Bistro Chez Ulrique, Stein am Rhein",
@@ -510,11 +498,23 @@
               "detail": "Bahnhof SBB Schaffhausen, Schaffhausen",
               "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/auf-den-spuren-einer-vergessenen-kultur-das-landjudentum-am-hochrhein/"
+            },
+            {
+              "label": "Sonntags um 11: Kulturelle Begegnung 2 «ADVENTSKONZERT»",
+              "detail": "Schaffhausen",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sonntags-um-11-kulturelle-begegnung-2-adventskonzert/"
+            },
+            {
+              "label": "Théâtre de marionnettes « Hand im Glück » - Finitopepitto ! (Théâtre pour enfants à partir de 5 ans)",
+              "detail": "Theater Bachturnhalle, Schaffhausen",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/figurentheater-hand-im-glueck-finitopepitto-kindertheater-5/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schaffhouse/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -547,7 +547,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -569,7 +569,7 @@
           "url": "/fr/evenements/schaffhouse/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     }
   }
 }

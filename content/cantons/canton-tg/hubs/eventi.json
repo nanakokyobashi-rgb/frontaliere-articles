@@ -4,17 +4,17 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "eventi",
-  "updatedAt": "2026-10-29T07:40:41.678Z",
-  "contentHash": "422cb165f3eba6277b859d332537e78dcdfcbc12a49bd807a8a20e6325933fec",
+  "updatedAt": "2026-10-30T06:23:49.454Z",
+  "contentHash": "9c1d41ee95d532a9032a4784bf3a7e2406ca1f8c53f89fb4b01308f63172b64a",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-28T19:25:39.771Z",
+      "updatedAt": "2026-10-29T21:23:37.654Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-28T21:56:57.371Z",
+      "updatedAt": "2026-10-29T22:02:50.125Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "44",
+          "value": "47",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,36 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Metzgete auf dem Schiff in Ermatingen - Traditionell & maritim!",
-              "detail": "8272 Ermatingen, Ermatingen",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/metzgete-auf-dem-schiff-in-ermatingen-traditionell-maritim/"
-            },
-            {
-              "label": "Fledermäuse unterm Museumsdach",
-              "detail": "Kreuzlingen",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fledermaeuse-unterm-museumsdach/"
-            },
-            {
-              "label": "Sterben gehört zum Leben - Gut umsorgt bis zuletzt",
-              "detail": "Weinfelden",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sterben-gehoert-zum-leben-gut-umsorgt-bis-zuletzt/"
-            },
-            {
-              "label": "Philosophie im Löchlgaischt",
-              "detail": "Eschenz — in corso, ultimo giorno: 24 novembre 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
-            },
-            {
-              "label": "Ziegentrekking",
-              "detail": "geissgada, Hohentannen — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
-            },
             {
               "label": "Diamante im Stroh",
               "detail": "Hefenhofen",
@@ -96,11 +66,41 @@
               "detail": "Restaurant Seegarten, Kreuzlingen",
               "date": "2026-10-30",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
+            },
+            {
+              "label": "Vocal Jazz Affair - Grosses Chorkonzert",
+              "detail": "Kornhaus Romanshorn, Romanshorn",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/romanshorn/vocal-jazz-affair-grosses-chorkonzert_AH8CLJM"
+            },
+            {
+              "label": "Salsa y Bachata en Halloween",
+              "detail": "KAFF Kulturlokal, Frauenfeld",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/salsa-y-bachata-en-halloween_AWHmnvW"
+            },
+            {
+              "label": "Lukas Bärfuss",
+              "detail": "Weinfelden",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lukas-baerfuss/"
+            },
+            {
+              "label": "Metzgete auf dem Schiff in Ermatingen - Traditionell & maritim!",
+              "detail": "8272 Ermatingen, Ermatingen — in corso, ultimo giorno: 31 ottobre 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/metzgete-auf-dem-schiff-in-ermatingen-traditionell-maritim/"
+            },
+            {
+              "label": "Philosophie im Löchlgaischt",
+              "detail": "Eschenz — in corso, ultimo giorno: 24 novembre 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/turgovia/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -123,7 +123,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -151,7 +151,7 @@
           "url": "/eventi/turgovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "en": {
       "canton": "TG",
@@ -161,7 +161,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "44",
+          "value": "47",
           "note": "from the site’s events calendar"
         }
       ],
@@ -171,36 +171,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Metzgete auf dem Schiff in Ermatingen - Traditionell & maritim!",
-              "detail": "8272 Ermatingen, Ermatingen",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/metzgete-auf-dem-schiff-in-ermatingen-traditionell-maritim/"
-            },
-            {
-              "label": "Fledermäuse unterm Museumsdach",
-              "detail": "Kreuzlingen",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fledermaeuse-unterm-museumsdach/"
-            },
-            {
-              "label": "Sterben gehört zum Leben - Gut umsorgt bis zuletzt",
-              "detail": "Weinfelden",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sterben-gehoert-zum-leben-gut-umsorgt-bis-zuletzt/"
-            },
-            {
-              "label": "Philosophie im Löchlgaischt",
-              "detail": "Eschenz — ongoing, last day: 24 November 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
-            },
-            {
-              "label": "Ziegentrekking",
-              "detail": "geissgada, Hohentannen — ongoing, last day: 31 October 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
-            },
             {
               "label": "Diamante im Stroh",
               "detail": "Hefenhofen",
@@ -230,11 +200,41 @@
               "detail": "Restaurant Seegarten, Kreuzlingen",
               "date": "2026-10-30",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
+            },
+            {
+              "label": "Vocal Aff",
+              "detail": "Kornhaus Romanshorn, Romanshorn",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/romanshorn/vocal-jazz-affair-grosses-chorkonzert_AH8CLJM"
+            },
+            {
+              "label": "Salsa y Bachata en Halloween",
+              "detail": "KAFF Kulturlokal, Frauenfeld",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/salsa-y-bachata-en-halloween_AWHmnvW"
+            },
+            {
+              "label": "Lukas Bärfuss",
+              "detail": "Weinfelden",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lukas-baerfuss/"
+            },
+            {
+              "label": "Metzgete auf dem Schiff in Ermatingen - Traditionell & maritim!",
+              "detail": "8272 Ermatingen, Ermatingen — ongoing, last day: 31 October 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/metzgete-auf-dem-schiff-in-ermatingen-traditionell-maritim/"
+            },
+            {
+              "label": "Philosophie im Löchlgaischt",
+              "detail": "Eschenz — ongoing, last day: 24 November 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/thurgau/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -257,7 +257,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -285,7 +285,7 @@
           "url": "/en/events/thurgau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "de": {
       "canton": "TG",
@@ -295,7 +295,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "44",
+          "value": "47",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -305,36 +305,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Metzgete auf dem Schiff in Ermatingen - Traditionell & maritim!",
-              "detail": "8272 Ermatingen, Ermatingen",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/metzgete-auf-dem-schiff-in-ermatingen-traditionell-maritim/"
-            },
-            {
-              "label": "Fledermäuse unterm Museumsdach",
-              "detail": "Kreuzlingen",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fledermaeuse-unterm-museumsdach/"
-            },
-            {
-              "label": "Sterben gehört zum Leben - Gut umsorgt bis zuletzt",
-              "detail": "Weinfelden",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sterben-gehoert-zum-leben-gut-umsorgt-bis-zuletzt/"
-            },
-            {
-              "label": "Philosophie im Löchlgaischt",
-              "detail": "Eschenz — läuft, letzter Tag: 24. November 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
-            },
-            {
-              "label": "Ziegentrekking",
-              "detail": "geissgada, Hohentannen — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
-            },
             {
               "label": "Diamante im Stroh",
               "detail": "Hefenhofen",
@@ -364,11 +334,41 @@
               "detail": "Restaurant Seegarten, Kreuzlingen",
               "date": "2026-10-30",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
+            },
+            {
+              "label": "Vocal Jazz Affair – Grosses Chorkonzert",
+              "detail": "Kornhaus Romanshorn, Romanshorn",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/romanshorn/vocal-jazz-affair-grosses-chorkonzert_AH8CLJM"
+            },
+            {
+              "label": "Salsa y Bachata en Halloween",
+              "detail": "KAFF Kulturlokal, Frauenfeld",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/salsa-y-bachata-en-halloween_AWHmnvW"
+            },
+            {
+              "label": "Lukas Bärfuss",
+              "detail": "Weinfelden",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lukas-baerfuss/"
+            },
+            {
+              "label": "Metzgete auf dem Schiff in Ermatingen - Traditionell & maritim!",
+              "detail": "8272 Ermatingen, Ermatingen — läuft, letzter Tag: 31. Oktober 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/metzgete-auf-dem-schiff-in-ermatingen-traditionell-maritim/"
+            },
+            {
+              "label": "Philosophie im Löchlgaischt",
+              "detail": "Eschenz — läuft, letzter Tag: 24. November 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/thurgau/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -391,7 +391,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -419,7 +419,7 @@
           "url": "/de/veranstaltungen/thurgau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "fr": {
       "canton": "TG",
@@ -429,7 +429,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "44",
+          "value": "47",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -439,36 +439,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Metzgete auf dem Schiff in Ermatingen - Traditionell & maritim!",
-              "detail": "8272 Ermatingen, Ermatingen",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/metzgete-auf-dem-schiff-in-ermatingen-traditionell-maritim/"
-            },
-            {
-              "label": "Fledermäuse unterm Museumsdach",
-              "detail": "Kreuzlingen",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fledermaeuse-unterm-museumsdach/"
-            },
-            {
-              "label": "Sterben gehört zum Leben - Gut umsorgt bis zuletzt",
-              "detail": "Weinfelden",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sterben-gehoert-zum-leben-gut-umsorgt-bis-zuletzt/"
-            },
-            {
-              "label": "Philosophie im Löchlgaischt",
-              "detail": "Eschenz — en cours, dernier jour : 24 novembre 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
-            },
-            {
-              "label": "Ziegentrekking",
-              "detail": "geissgada, Hohentannen — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
-            },
             {
               "label": "Diamante im Stroh",
               "detail": "Hefenhofen",
@@ -498,11 +468,41 @@
               "detail": "Restaurant Seegarten, Kreuzlingen",
               "date": "2026-10-30",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
+            },
+            {
+              "label": "Aff Vocal",
+              "detail": "Kornhaus Romanshorn, Romanshorn",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/romanshorn/vocal-jazz-affair-grosses-chorkonzert_AH8CLJM"
+            },
+            {
+              "label": "Salsa y Bachata en Halloween",
+              "detail": "KAFF Kulturlokal, Frauenfeld",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/salsa-y-bachata-en-halloween_AWHmnvW"
+            },
+            {
+              "label": "Lukas Bärfuss",
+              "detail": "Weinfelden",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lukas-baerfuss/"
+            },
+            {
+              "label": "Metzgete auf dem Schiff in Ermatingen - Traditionell & maritim!",
+              "detail": "8272 Ermatingen, Ermatingen — en cours, dernier jour : 31 octobre 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/metzgete-auf-dem-schiff-in-ermatingen-traditionell-maritim/"
+            },
+            {
+              "label": "Philosophie im Löchlgaischt",
+              "detail": "Eschenz — en cours, dernier jour : 24 novembre 2026",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/thurgovie/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -525,7 +525,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-28T21:56:57.371Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -553,7 +553,7 @@
           "url": "/fr/evenements/thurgovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     }
   }
 }

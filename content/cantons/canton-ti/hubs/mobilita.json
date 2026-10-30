@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "mobilita",
-  "updatedAt": "2026-10-29T22:43:52.010Z",
-  "contentHash": "3b4afe67546dc72bf768d809fa058aaa180b4d74e07871a47ea6690319eb98d9",
+  "updatedAt": "2026-10-30T06:23:49.454Z",
+  "contentHash": "ad6fd4a97211bad8e8a35df2e908dfe7c1be2fa2f705273e81e1c4682538ef7c",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-29T11:47:10.249Z",
+      "updatedAt": "2026-10-29T22:02:50.125Z",
       "keyFacts": 0
     }
   ],
@@ -37,12 +37,12 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "5",
+          "value": "4",
           "note": "segnalazioni aggiornate: 29 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "29",
+          "value": "27",
           "note": "segnalazioni aggiornate: 29 ottobre 2026"
         }
       ],
@@ -111,12 +111,6 @@
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
             {
-              "label": "A13 Ascona <-> Aeroporto di Locarno tra Svincolo autostradale Minusio E Svincolo autostradale Locarno Situazione: chiusa cantiere, lunghezza [km] 5.5",
-              "value": "Chiusura",
-              "detail": "fine prevista: 30 ottobre 2026",
-              "date": "2026-09-21T14:56:00.000Z"
-            },
-            {
               "label": "Gordola <-> Sonogno tra Luogo Gordola E Luogo Berzona Situazione: chiusa Causa: lavori di manutenzione",
               "value": "Chiusura",
               "detail": "fine prevista: 31 ottobre 2026",
@@ -154,6 +148,12 @@
               "value": "Cantiere",
               "detail": "fine prevista: 29 dicembre 2028",
               "date": "2022-04-20T03:00:00.000Z"
+            },
+            {
+              "label": "A2 S. Gottardo -> Chiasso tra Parcheggio Area di dosaggio Airolo E Svincolo autostradale Airolo Situazione: problemi di traffico cantiere, lunghezza [km] 0.1 Causa: lavori stradali sulla banchina",
+              "value": "Cantiere",
+              "detail": "fine prevista: 28 giugno 2028",
+              "date": "2024-11-14T15:24:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
@@ -195,7 +195,7 @@
               "url": "https://www.tilo.ch/avvisi/261019_ZEB-Vezia-Capolago.html"
             }
           ],
-          "updatedAt": "2026-10-29T11:47:10.249Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -291,7 +291,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-29T22:43:52.010Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "en": {
       "canton": "TI",
@@ -306,12 +306,12 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "5",
+          "value": "4",
           "note": "reports as of 29 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "29",
+          "value": "27",
           "note": "reports as of 29 October 2026"
         }
       ],
@@ -380,12 +380,6 @@
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
             {
-              "label": "A13 Ascona <-> Aeroporto di Locarno tra Svincolo autostradale Minusio E Svincolo autostradale Locarno Situazione: chiusa cantiere, lunghezza [km] 5.5",
-              "value": "Closure",
-              "detail": "until 30 October 2026",
-              "date": "2026-09-21T14:56:00.000Z"
-            },
-            {
               "label": "Gordola <-> Sonogno tra Luogo Gordola E Luogo Berzona Situazione: chiusa Causa: lavori di manutenzione",
               "value": "Closure",
               "detail": "until 31 October 2026",
@@ -423,6 +417,12 @@
               "value": "Roadworks",
               "detail": "until 29 December 2028",
               "date": "2022-04-20T03:00:00.000Z"
+            },
+            {
+              "label": "A2 S. Gottardo -> Chiasso tra Parcheggio Area di dosaggio Airolo E Svincolo autostradale Airolo Situazione: problemi di traffico cantiere, lunghezza [km] 0.1 Causa: lavori stradali sulla banchina",
+              "value": "Roadworks",
+              "detail": "until 28 June 2028",
+              "date": "2024-11-14T15:24:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
@@ -464,7 +464,7 @@
               "url": "https://www.tilo.ch/avvisi/261019_ZEB-Vezia-Capolago.html"
             }
           ],
-          "updatedAt": "2026-10-29T11:47:10.249Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -559,7 +559,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-29T22:43:52.010Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "de": {
       "canton": "TI",
@@ -574,12 +574,12 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "5",
+          "value": "4",
           "note": "Meldungen vom 29. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "29",
+          "value": "27",
           "note": "Meldungen vom 29. Oktober 2026"
         }
       ],
@@ -648,12 +648,6 @@
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
             {
-              "label": "A13 Ascona <-> Flughafen Locarno zwischen Anschluss Minusio und Anschluss Locarno Sachlage: Strecke gesperrt Baustelle, Länge [km] 5.5",
-              "value": "Sperrung",
-              "detail": "bis 30. Oktober 2026",
-              "date": "2026-09-21T14:56:00.000Z"
-            },
-            {
               "label": "Gordola <-> Sonogno zwischen Ortschaft Gordola und Ortschaft Berzona Sachlage: Strecke gesperrt Ursache: Unterhaltsarbeiten",
               "value": "Sperrung",
               "detail": "bis 31. Oktober 2026",
@@ -691,6 +685,12 @@
               "value": "Baustelle",
               "detail": "bis 29. Dezember 2028",
               "date": "2022-04-20T03:00:00.000Z"
+            },
+            {
+              "label": "A2 Gotthard -> Chiasso zwischen Parkplatz Dosierstelle Airolo und Anschluss Airolo Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.1 Ursache: Arbeiten am Pannenstreifen",
+              "value": "Baustelle",
+              "detail": "bis 28. Juni 2028",
+              "date": "2024-11-14T15:24:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
@@ -732,7 +732,7 @@
               "url": "https://www.tilo.ch/avvisi/261019_ZEB-Vezia-Capolago.html"
             }
           ],
-          "updatedAt": "2026-10-29T11:47:10.249Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -827,7 +827,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-29T22:43:52.010Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "fr": {
       "canton": "TI",
@@ -842,12 +842,12 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "5",
+          "value": "4",
           "note": "signalements au 29 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "29",
+          "value": "27",
           "note": "signalements au 29 octobre 2026"
         }
       ],
@@ -916,12 +916,6 @@
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
             {
-              "label": "A13 Ascona <-> Aeroprt de Locarno entre Jonction autoroutière Minusio et Jonction autoroutière Locarno Situation: fermé travaux, longueur [km] 5.5",
-              "value": "Fermeture",
-              "detail": "jusqu’au 30 octobre 2026",
-              "date": "2026-09-21T14:56:00.000Z"
-            },
-            {
               "label": "Gordola <-> Sonogno entre Localité Gordola et Localité Berzona Situation: fermé Raison: travaux de maintenance",
               "value": "Fermeture",
               "detail": "jusqu’au 31 octobre 2026",
@@ -959,6 +953,12 @@
               "value": "Chantier",
               "detail": "jusqu’au 29 décembre 2028",
               "date": "2022-04-20T03:00:00.000Z"
+            },
+            {
+              "label": "A2 St-Gothard -> Chiasso entre Parking Aire de dosage Airolo et Jonction autoroutière Airolo Situation: trafic perturbé travaux, longueur [km] 0.1 Raison: travaux sur la bande d'arrêt d'urgence",
+              "value": "Chantier",
+              "detail": "jusqu’au 28 juin 2028",
+              "date": "2024-11-14T15:24:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
@@ -1000,7 +1000,7 @@
               "url": "https://www.tilo.ch/avvisi/261019_ZEB-Vezia-Capolago.html"
             }
           ],
-          "updatedAt": "2026-10-29T11:47:10.249Z"
+          "updatedAt": "2026-10-29T22:02:50.125Z"
         }
       ],
       "curatedArticles": [
@@ -1096,7 +1096,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-29T22:43:52.010Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "eventi",
-  "updatedAt": "2026-10-29T07:40:41.678Z",
-  "contentHash": "f26388d9e83bde3d013a9d26f2f550eff966261d5c19cf5676da99cf3a758861",
+  "updatedAt": "2026-10-30T06:23:49.454Z",
+  "contentHash": "6cd4948eb12260e3f14e172bfb7d72bebad98532d7b6927999e75cbe7bddba4e",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-28T19:25:39.771Z",
+      "updatedAt": "2026-10-29T21:23:37.654Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "21",
+          "value": "18",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,24 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Serata Italiana - Tavolata & Livemusik",
-              "detail": "Marina Lachen, Lachen",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/museums/children/events/lachen-sz/serata-italiana-italian-evening-with-live-music_ArMVGkk"
-            },
-            {
-              "label": "Serata Italiana -Tavolata & Live Music",
-              "detail": "Lachen SZ, Lachen",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/serata-italiana-tavolata-live-music/"
-            },
-            {
-              "label": "Venus and Adonis",
-              "detail": "Theatersaal, Einsiedeln",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/venus-and-adonis-3/"
-            },
             {
               "label": "The Two - Blues & Dine - DER HERBST 26",
               "detail": "Gersau",
@@ -91,11 +73,29 @@
               "detail": "Muotathal",
               "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/hoelloch-expedition-glitter-gate-1/"
+            },
+            {
+              "label": "Hölloch Tages-Expedition Glitzertor",
+              "detail": "Hölloch Center, Muotathal",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/muotathal/hoelloch-tages-expedition-glitzertor_AxiRDhS"
+            },
+            {
+              "label": "Hölloch 2-Tages-Expedition",
+              "detail": "Hölloch Center Muotathal, Muotathal",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/muotathal/dies-und-das/hoelloch-parcours_Avpatrc"
+            },
+            {
+              "label": "Martinsmarkt Gersau",
+              "detail": "6442 Gersau, Gersau",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/martinsmarkt-gersau/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/svitto/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/svitto/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "en": {
       "canton": "SZ",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "21",
+          "value": "18",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,24 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Serata Italiana -Tavolata & Live Music",
-              "detail": "Marina Lachen, Lachen",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/museums/children/events/lachen-sz/serata-italiana-italian-evening-with-live-music_ArMVGkk"
-            },
-            {
-              "label": "Serata Italiana -Tavolata & Live Music",
-              "detail": "Lachen SZ, Lachen",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/serata-italiana-tavolata-live-music/"
-            },
-            {
-              "label": "Venus and Adonis",
-              "detail": "Theatersaal, Einsiedeln",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/venus-and-adonis-3/"
-            },
             {
               "label": "The Two - Blues & Dine - DER HERBST 26",
               "detail": "Gersau",
@@ -196,11 +178,29 @@
               "detail": "Muotathal",
               "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/hoelloch-expedition-glitter-gate-1/"
+            },
+            {
+              "label": "Hölloch Expedition Glitter Gate",
+              "detail": "Hölloch Center, Muotathal",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/muotathal/hoelloch-tages-expedition-glitzertor_AxiRDhS"
+            },
+            {
+              "label": "H 2 Lloch 2-Tages-Ex",
+              "detail": "Hölloch Center Muotathal, Muotathal",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/muotathal/dies-und-das/hoelloch-parcours_Avpatrc"
+            },
+            {
+              "label": "Martinsmarkt Gersau",
+              "detail": "6442 Gersau, Gersau",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/martinsmarkt-gersau/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schwyz/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/schwyz/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "de": {
       "canton": "SZ",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "21",
+          "value": "18",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,24 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Serata Italiana - Tavolata & Livemusik",
-              "detail": "Marina Lachen, Lachen",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/museums/children/events/lachen-sz/serata-italiana-italian-evening-with-live-music_ArMVGkk"
-            },
-            {
-              "label": "Serata Italiana - Tavolata & Livemusik",
-              "detail": "Lachen SZ, Lachen",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/serata-italiana-tavolata-live-music/"
-            },
-            {
-              "label": "Venus and Adonis",
-              "detail": "Theatersaal, Einsiedeln",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/venus-and-adonis-3/"
-            },
             {
               "label": "The Two - Blues & Dine - DER HERBST 26",
               "detail": "Gersau",
@@ -301,11 +283,29 @@
               "detail": "Muotathal",
               "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/hoelloch-expedition-glitter-gate-1/"
+            },
+            {
+              "label": "Hölloch Tages-Expedition Glitzertor",
+              "detail": "Hölloch Center, Muotathal",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/muotathal/hoelloch-tages-expedition-glitzertor_AxiRDhS"
+            },
+            {
+              "label": "H Zucchlloch 2-Tages-E Zucchppedition",
+              "detail": "Hölloch Center Muotathal, Muotathal",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/muotathal/dies-und-das/hoelloch-parcours_Avpatrc"
+            },
+            {
+              "label": "Martinsmarkt Gersau",
+              "detail": "6442 Gersau, Gersau",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/martinsmarkt-gersau/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schwyz/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/schwyz/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "fr": {
       "canton": "SZ",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "21",
+          "value": "18",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,24 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Serata Italiana - Tavolata & Musique",
-              "detail": "Marina Lachen, Lachen",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/museums/children/events/lachen-sz/serata-italiana-italian-evening-with-live-music_ArMVGkk"
-            },
-            {
-              "label": "Serata Italiana - Tavolata & Musique",
-              "detail": "Lachen SZ, Lachen",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/serata-italiana-tavolata-live-music/"
-            },
-            {
-              "label": "Venus and Adonis",
-              "detail": "Theatersaal, Einsiedeln",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/venus-and-adonis-3/"
-            },
             {
               "label": "The Two - Blues & Dine - DER HERBST 26",
               "detail": "Gersau",
@@ -406,11 +388,29 @@
               "detail": "Muotathal",
               "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/hoelloch-expedition-glitter-gate-1/"
+            },
+            {
+              "label": "Hölloch Tages-Expedition Glitzertor",
+              "detail": "Hölloch Center, Muotathal",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/muotathal/hoelloch-tages-expedition-glitzertor_AxiRDhS"
+            },
+            {
+              "label": "Hölloch 2-Tages-Expédition",
+              "detail": "Hölloch Center Muotathal, Muotathal",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/muotathal/dies-und-das/hoelloch-parcours_Avpatrc"
+            },
+            {
+              "label": "Martinsmarkt Gersau",
+              "detail": "6442 Gersau, Gersau",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/martinsmarkt-gersau/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schwytz/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/schwytz/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     }
   }
 }

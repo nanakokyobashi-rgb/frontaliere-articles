@@ -4,12 +4,12 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "eventi",
-  "updatedAt": "2026-10-29T07:40:41.678Z",
-  "contentHash": "01a8026a881504a8c7c2b2e25dabff7c4bf0f33b79d0a1830a82eff1b2cbe5cf",
+  "updatedAt": "2026-10-30T06:23:49.454Z",
+  "contentHash": "87788b7c453e256296d12055d51557cf524a52da459c4c6a6b383b4712085abf",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-28T19:25:39.771Z",
+      "updatedAt": "2026-10-29T21:23:37.654Z",
       "keyFacts": 1
     }
   ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Entspannt durch die Vorweihnachtszeit mit TRE®",
-              "detail": "Entspannt leben, Diemtigen",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/entspannt-durch-die-vorweihnachtszeit-mit-tre/"
+              "label": "„The Jazz Room“ im Château Salavaux: eine Reise ins Herz von New Orleans",
+              "detail": "Château Salavaux, Ins",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/salavaux/the-jazz-room-im-chateau-salavaux-eine-reise-ins-herz-von-new-orleans_AEP66rS"
             },
             {
-              "label": "PARLE À MON CUL, MA TÊTE EST MALADE",
-              "detail": "Nebia poche",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/parle-a-mon-cul-ma-tete-est-malade/"
+              "label": "SAZ Oldies Disco Halloween Special",
+              "detail": "Kulturhalle Sägegasse, Burgdorf",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/saz-oldies-disco-halloween-special/"
             },
             {
-              "label": "WORTORT: Ole Liebl - «BRUTAL FRAGILE TYPEN»",
-              "detail": "PROGR - Zentrum für Kulturproduktion",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/bern/wortort-ole-liebl-brutal-fragile-typen_AHUULtU"
+              "label": "Shrizz N Maze feat. Greg Boyer",
+              "detail": "Ittigen",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/shrizz-n-maze-feat-greg-boyer/"
             },
             {
-              "label": "20. \"zoom in\" Festival für experimentelle und improvisierte Musik",
-              "detail": "Bern",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/20-zoom-in-festival-fuer-experimentelle-und-improvisierte-musik/"
+              "label": "solo exhibition by Andrea Cindy Raemy",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/solo-exhibition-by-andrea-cindy-raemy/"
             },
             {
-              "label": "Anton O'Donnell (solo)",
-              "detail": "Villa Stucki",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/anton-odonnell-solo_AecpQMy"
+              "label": "Viaggio verso la libertà. Capri - Skagen - Monte Verità",
+              "detail": "Kunstmuseum Bern, Bern",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/voyage-vers-la-liberte-capri-skagen-monte-verita/"
             },
             {
-              "label": "Bastian Baker «Live Acoustic Tour»",
-              "detail": "Kirchgemeindehaus Matten, Interlaken",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/eventos/musica/matten-b-interlaken/bastian-baker-live-acoustic-tour_AkisK8B"
+              "label": "Market Frutigen",
+              "detail": "3714 Frutigen, Frutigen",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/frutigmaerit/"
             },
             {
-              "label": "REENA",
-              "detail": "Steffisburg",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reena/"
+              "label": "Langnauer Oktoberfest",
+              "detail": "Emmental Versicherung Arena, Langnau im Emmental",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/langnauer-oktoberfest/"
             },
             {
-              "label": "Troubas Kater - Tourabschluss",
-              "detail": "Mühle Hunziken, Rubigen",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/troubas-kater-tourabschluss_AVCMrJ2"
+              "label": "Family Literacy Arabisch - احكي لي حكاية",
+              "detail": "Biel",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/family-literacy-arabisch/"
             },
             {
-              "label": "Co Streiff – Russ Johnson Quartet",
-              "detail": "BeJazz Club",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/liebefeld/co-streiff-russ-johnson-quartet_AUmM6Te"
+              "label": "Frutigmärit mit Ländler Panache",
+              "detail": "Hotel Simplon, Frutigen",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/frutigen/frutigmaerit-mit-laendler-panache_AfJq15k"
             },
             {
-              "label": "Kleider-Basar",
-              "detail": "Habkern — in corso, ultimo giorno: 29 ottobre 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kleider-basar/"
+              "label": "Jubiläumskonzert - Krönungsmesse",
+              "detail": "Johannes-Kirche Thun, Thun",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jubilaeumskonzert-kroenungsmesse/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/berna/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +135,7 @@
           "url": "/eventi/berna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "en": {
       "canton": "BE",
@@ -156,69 +156,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Entspannt durch die Vorweihnachtszeit mit TRE®",
-              "detail": "Entspannt leben, Diemtigen",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/entspannt-durch-die-vorweihnachtszeit-mit-tre/"
+              "label": "The Jazz Room at Château Salavaux: a journey to the heart of New Orleans",
+              "detail": "Château Salavaux, Ins",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/salavaux/the-jazz-room-im-chateau-salavaux-eine-reise-ins-herz-von-new-orleans_AEP66rS"
             },
             {
-              "label": "PARLE À MON CUL, MA TÊTE EST MALADE",
-              "detail": "Nebia poche",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/parle-a-mon-cul-ma-tete-est-malade/"
+              "label": "SAZ Oldies Disco Halloween Special",
+              "detail": "Kulturhalle Sägegasse, Burgdorf",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/saz-oldies-disco-halloween-special/"
             },
             {
-              "label": "WORTORT: Ole Liebl - «BRUTAL FRAGILE TYPEN»",
-              "detail": "PROGR - Zentrum für Kulturproduktion",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/bern/wortort-ole-liebl-brutal-fragile-typen_AHUULtU"
+              "label": "Shrizz N Maze feat. Greg Boyer",
+              "detail": "Ittigen",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/shrizz-n-maze-feat-greg-boyer/"
             },
             {
-              "label": "20. \"zoom in\" Festival für experimentelle und improvisierte Musik",
-              "detail": "Bern",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/20-zoom-in-festival-fuer-experimentelle-und-improvisierte-musik/"
+              "label": "solo exhibition by Andrea Cindy Raemy",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/solo-exhibition-by-andrea-cindy-raemy/"
             },
             {
-              "label": "Anton O'Donnell (solo)",
-              "detail": "Villa Stucki",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/anton-odonnell-solo_AecpQMy"
+              "label": "Journey to freedom. Capri - Skagen - Monte Verità",
+              "detail": "Kunstmuseum Bern, Bern",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/voyage-vers-la-liberte-capri-skagen-monte-verita/"
             },
             {
-              "label": "Bastian Baker “Live Acoustic Tour”",
-              "detail": "Kirchgemeindehaus Matten, Interlaken",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/eventos/musica/matten-b-interlaken/bastian-baker-live-acoustic-tour_AkisK8B"
+              "label": "Market Frutigen",
+              "detail": "3714 Frutigen, Frutigen",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/frutigmaerit/"
             },
             {
-              "label": "REENA",
-              "detail": "Steffisburg",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reena/"
+              "label": "Langnauer Oktoberfest",
+              "detail": "Emmental Versicherung Arena, Langnau im Emmental",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/langnauer-oktoberfest/"
             },
             {
-              "label": "Troubas Kater - Tourabschluss",
-              "detail": "Mühle Hunziken, Rubigen",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/troubas-kater-tourabschluss_AVCMrJ2"
+              "label": "Family Literacy Arabisch - احكي لي حكاية",
+              "detail": "Biel",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/family-literacy-arabisch/"
             },
             {
-              "label": "Co Streiff – Russ Johnson Quartet",
-              "detail": "BeJazz Club",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/liebefeld/co-streiff-russ-johnson-quartet_AUmM6Te"
+              "label": "Frutigmärit with Ländler Panache",
+              "detail": "Hotel Simplon, Frutigen",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/frutigen/frutigmaerit-mit-laendler-panache_AfJq15k"
             },
             {
-              "label": "Kleider-Basar",
-              "detail": "Habkern — ongoing, last day: 29 October 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kleider-basar/"
+              "label": "Jubiläumskonzert - Krönungsmesse",
+              "detail": "Johannes-Kirche Thun, Thun",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jubilaeumskonzert-kroenungsmesse/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/bern/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         }
       ],
       "curatedArticles": [
@@ -258,7 +258,7 @@
           "url": "/en/events/bern/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "de": {
       "canton": "BE",
@@ -279,69 +279,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Entspannt durch die Vorweihnachtszeit mit TRE®",
-              "detail": "Entspannt leben, Diemtigen",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/entspannt-durch-die-vorweihnachtszeit-mit-tre/"
+              "label": "„The Jazz Room“ im Château Salavaux: eine Reise ins Herz von New Orleans",
+              "detail": "Château Salavaux, Ins",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/salavaux/the-jazz-room-im-chateau-salavaux-eine-reise-ins-herz-von-new-orleans_AEP66rS"
             },
             {
-              "label": "PARLE À MON CUL, MA TÊTE EST MALADE",
-              "detail": "Nebia poche",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/parle-a-mon-cul-ma-tete-est-malade/"
+              "label": "SAZ Oldies Disco Halloween Special",
+              "detail": "Kulturhalle Sägegasse, Burgdorf",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/saz-oldies-disco-halloween-special/"
             },
             {
-              "label": "WORTORT: Ole Liebl - «BRUTAL FRAGILE TYPEN»",
-              "detail": "PROGR - Zentrum für Kulturproduktion",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/bern/wortort-ole-liebl-brutal-fragile-typen_AHUULtU"
+              "label": "Shrizz N Maze feat. Greg Boyer",
+              "detail": "Ittigen",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/shrizz-n-maze-feat-greg-boyer/"
             },
             {
-              "label": "20. \"zoom in\" Festival für experimentelle und improvisierte Musik",
-              "detail": "Bern",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/20-zoom-in-festival-fuer-experimentelle-und-improvisierte-musik/"
+              "label": "solo exhibition by Andrea Cindy Raemy",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/solo-exhibition-by-andrea-cindy-raemy/"
             },
             {
-              "label": "Anton O'Donnell (solo)",
-              "detail": "Villa Stucki",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/anton-odonnell-solo_AecpQMy"
+              "label": "Reise in die Freiheit. Capri – Skagen – Monte Verità",
+              "detail": "Kunstmuseum Bern, Bern",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/voyage-vers-la-liberte-capri-skagen-monte-verita/"
             },
             {
-              "label": "Bastian Baker «Live Acoustic Tour»",
-              "detail": "Kirchgemeindehaus Matten, Interlaken",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/eventos/musica/matten-b-interlaken/bastian-baker-live-acoustic-tour_AkisK8B"
+              "label": "Frutigmärit",
+              "detail": "3714 Frutigen, Frutigen",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/frutigmaerit/"
             },
             {
-              "label": "REENA",
-              "detail": "Steffisburg",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reena/"
+              "label": "Langnauer Oktoberfest",
+              "detail": "Emmental Versicherung Arena, Langnau im Emmental",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/langnauer-oktoberfest/"
             },
             {
-              "label": "Troubas Kater - Tourabschluss",
-              "detail": "Mühle Hunziken, Rubigen",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/troubas-kater-tourabschluss_AVCMrJ2"
+              "label": "Family Literacy Arabisch - احكي لي حكاية",
+              "detail": "Biel",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/family-literacy-arabisch/"
             },
             {
-              "label": "Co Streiff – Russ Johnson Quartet",
-              "detail": "BeJazz Club",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/liebefeld/co-streiff-russ-johnson-quartet_AUmM6Te"
+              "label": "Frutigm ⑤rit mit L Nevrndler Panache",
+              "detail": "Hotel Simplon, Frutigen",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/frutigen/frutigmaerit-mit-laendler-panache_AfJq15k"
             },
             {
-              "label": "Kleider-Basar",
-              "detail": "Habkern — läuft, letzter Tag: 29. Oktober 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kleider-basar/"
+              "label": "Jubiläumskonzert - Krönungsmesse",
+              "detail": "Johannes-Kirche Thun, Thun",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jubilaeumskonzert-kroenungsmesse/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/bern/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         }
       ],
       "curatedArticles": [
@@ -381,7 +381,7 @@
           "url": "/de/veranstaltungen/bern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     },
     "fr": {
       "canton": "BE",
@@ -402,69 +402,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Entspannt durch die Vorweihnachtszeit mit TRE®",
-              "detail": "Entspannt leben, Diemtigen",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/entspannt-durch-die-vorweihnachtszeit-mit-tre/"
+              "label": "The Jazz Room au Château Salavaux : un voyage au cœur de la Nouvelle-Orléans",
+              "detail": "Château Salavaux, Ins",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/salavaux/the-jazz-room-im-chateau-salavaux-eine-reise-ins-herz-von-new-orleans_AEP66rS"
             },
             {
-              "label": "PARLE À MON CUL, MA TÊTE EST MALADE",
-              "detail": "Nebia poche",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/parle-a-mon-cul-ma-tete-est-malade/"
+              "label": "SAZ Oldies Disco Halloween Special",
+              "detail": "Kulturhalle Sägegasse, Burgdorf",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/saz-oldies-disco-halloween-special/"
             },
             {
-              "label": "WORTORT: Ole Liebl - «BRUTAL FRAGILE TYPEN»",
-              "detail": "PROGR - Zentrum für Kulturproduktion",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/bern/wortort-ole-liebl-brutal-fragile-typen_AHUULtU"
+              "label": "Shrizz N Maze feat. Greg Boyer",
+              "detail": "Ittigen",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/shrizz-n-maze-feat-greg-boyer/"
             },
             {
-              "label": "20. \"zoom in\" Festival für experimentelle und improvisierte Musik",
-              "detail": "Bern",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/20-zoom-in-festival-fuer-experimentelle-und-improvisierte-musik/"
+              "label": "solo exhibition by Andrea Cindy Raemy",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/solo-exhibition-by-andrea-cindy-raemy/"
             },
             {
-              "label": "Anton O'Donnell (solo)",
-              "detail": "Villa Stucki",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/anton-odonnell-solo_AecpQMy"
+              "label": "Voyage vers la liberté. Capri - Skagen - Monte Verità",
+              "detail": "Kunstmuseum Bern, Bern",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/voyage-vers-la-liberte-capri-skagen-monte-verita/"
             },
             {
-              "label": "Bastian Baker « Live Acoustic Tour »",
-              "detail": "Kirchgemeindehaus Matten, Interlaken",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/eventos/musica/matten-b-interlaken/bastian-baker-live-acoustic-tour_AkisK8B"
+              "label": "Marché Frutigen",
+              "detail": "3714 Frutigen, Frutigen",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/frutigmaerit/"
             },
             {
-              "label": "REENA",
-              "detail": "Steffisburg",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reena/"
+              "label": "Langnauer Oktoberfest",
+              "detail": "Emmental Versicherung Arena, Langnau im Emmental",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/langnauer-oktoberfest/"
             },
             {
-              "label": "Troubas Kater - Tourabschluss",
-              "detail": "Mühle Hunziken, Rubigen",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/troubas-kater-tourabschluss_AVCMrJ2"
+              "label": "Family Literacy Arabe - احكي لي حكاية",
+              "detail": "Biel",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/family-literacy-arabisch/"
             },
             {
-              "label": "Co Streiff – Russ Johnson Quartet",
-              "detail": "BeJazz Club",
-              "date": "2026-10-29",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/liebefeld/co-streiff-russ-johnson-quartet_AUmM6Te"
+              "label": "Fruits avec Ländler Panache",
+              "detail": "Hotel Simplon, Frutigen",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/frutigen/frutigmaerit-mit-laendler-panache_AfJq15k"
             },
             {
-              "label": "Kleider-Basar",
-              "detail": "Habkern — en cours, dernier jour : 29 octobre 2026",
-              "date": "2026-10-29",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kleider-basar/"
+              "label": "Jubiläumskonzert - Krönungsmesse",
+              "detail": "Johannes-Kirche Thun, Thun",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jubilaeumskonzert-kroenungsmesse/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/berne/",
-          "updatedAt": "2026-10-28T19:25:39.771Z"
+          "updatedAt": "2026-10-29T21:23:37.654Z"
         }
       ],
       "curatedArticles": [
@@ -504,7 +504,7 @@
           "url": "/fr/evenements/berne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-29T07:40:41.678Z"
+      "updatedAt": "2026-10-30T06:23:49.454Z"
     }
   }
 }
