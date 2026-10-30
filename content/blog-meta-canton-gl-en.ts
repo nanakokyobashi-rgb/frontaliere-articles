@@ -39,6 +39,9 @@ const blogMetaCantonGlEn: Record<string, string> = {
     'blog.article.cantieri-strade-glarona-2027.title': 'The Canton of Glarus wants to renovate roads and bridges in 2027',
     'blog.article.cantieri-strade-glarona-2027.excerpt': 'In 2027, the Kirchweg in Glarus will become a construction site; an 80-year-old bridge will be replaced in Rüti.',
     'blog.article.cantieri-strade-glarona-2027.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.glarona-detrazioni-energia.title': 'Glarus: government takes a position on energy deductions',
+    'blog.article.glarona-detrazioni-energia.excerpt': 'The government of Glarus takes a position on tax deductions for energy-saving measures.',
+    'blog.article.glarona-detrazioni-energia.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonGlEn;

@@ -39,6 +39,9 @@ const blogMetaCantonGlIt: Record<string, string> = {
     'blog.article.cantieri-strade-glarona-2027.title': 'Il Canton Glarona vuole rinnovare strade e ponti nel 2027',
     'blog.article.cantieri-strade-glarona-2027.excerpt': 'Nel 2027 il Kirchweg di Glarona diventerà un cantiere; a Rüti sarà sostituito un ponte di 80 anni.',
     'blog.article.cantieri-strade-glarona-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.glarona-detrazioni-energia.title': 'Glarona: governo prende posizione su detrazioni energetiche',
+    'blog.article.glarona-detrazioni-energia.excerpt': 'Il governo di Glarona prende posizione sulle detrazioni fiscali per le misure di risparmio energetico.',
+    'blog.article.glarona-detrazioni-energia.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonGlIt;

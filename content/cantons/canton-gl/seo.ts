@@ -470,6 +470,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-glarona-detrazioni-energia': {
+    title: 'Glarona: governo prende posizione su detrazioni energetiche',
+    description: 'Il governo di Glarona prende posizione sulle detrazioni fiscali per le misure di risparmio energetico nel quadro del fisco svizzero.',
+    keywords: 'frontalieri, ticino, svizzera, italia, glarona, governo, prende, posizione',
+    ogTitle: 'Glarona: governo su detrazioni energetiche',
+    ogDescription: 'La newsroom del Canton Glarona dedica una presa di posizione alle detrazioni fiscali per misure di risparmio energetico. Il tema va letto tra imposta federale diretta, imposta cantonale e imposta comunale, con competenze distinte.',
+    canonicalPath: '/articoli-glarona/glarona-detrazioni-energia/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Glarona: governo prende posizione su detrazioni energetiche",
+      "description": "Il governo di Glarona prende posizione sulle detrazioni fiscali per le misure di risparmio energetico nel quadro del fisco svizzero.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-glarona-detrazioni-energia.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-30T15:30:05+00:00",
+      "dateModified": "2026-10-30T15:30:05+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-glarona/glarona-detrazioni-energia/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

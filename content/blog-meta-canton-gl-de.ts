@@ -39,6 +39,9 @@ const blogMetaCantonGlDe: Record<string, string> = {
     'blog.article.cantieri-strade-glarona-2027.title': 'Der Kanton Glarus will im Jahr 2027 Straßen und Brücken erneuern',
     'blog.article.cantieri-strade-glarona-2027.excerpt': 'Im Jahr 2027 wird der Kirchweg in Glarus zu einer Baustelle; in Rüti wird eine 80 Jahre alte Brücke ersetzt.',
     'blog.article.cantieri-strade-glarona-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.glarona-detrazioni-energia.title': 'Glarus: Regierung nimmt Stellung zu Energieabzügen',
+    'blog.article.glarona-detrazioni-energia.excerpt': 'Die Regierung des Kantons Glarus nimmt Stellung zu den Steuerabzügen für Energiesparmassnahmen.',
+    'blog.article.glarona-detrazioni-energia.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonGlDe;

@@ -39,6 +39,9 @@ const blogMetaCantonGlFr: Record<string, string> = {
     'blog.article.cantieri-strade-glarona-2027.title': 'Le canton de Glaris veut rénover des routes et des ponts en 2027',
     'blog.article.cantieri-strade-glarona-2027.excerpt': 'En 2027, le Kirchweg de Glaris deviendra un chantier ; à Rüti, un pont vieux de 80 ans sera remplacé.',
     'blog.article.cantieri-strade-glarona-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.glarona-detrazioni-energia.title': 'Glaris : le gouvernement prend position sur les déductions énergétiques',
+    'blog.article.glarona-detrazioni-energia.excerpt': 'Le gouvernement de Glaris prend position sur les déductions fiscales pour les mesures d\'économie d\'énergie.',
+    'blog.article.glarona-detrazioni-energia.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonGlFr;

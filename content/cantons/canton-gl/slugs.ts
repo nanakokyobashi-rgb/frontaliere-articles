@@ -15,6 +15,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'braunwald-progetto-80-milioni': { it: 'braunwald-progetto-80-milioni', en: 'braunwald-project-80-million', de: 'braunwald-projekt-80-millionen', fr: 'braunwald-projet-80-millions' },
  'glarona-adesione-programma-perspecta': { it: 'glarona-adesione-programma-perspecta', en: 'glarus-joins-perspecta-program', de: 'glarus-nimmt-an-perspecta-teil', fr: 'glaris-adhere-au-programme-perspecta' },
  'cantieri-strade-glarona-2027': { it: 'cantieri-strade-glarona-2027', en: 'glarus-roads-bridges-2027', de: 'glarner-strassen-bruecken-2027', fr: 'routes-ponts-glaris-2027' },
+ 'glarona-detrazioni-energia': { it: 'glarona-detrazioni-energia', en: 'glarus-energy-tax-deductions', de: 'glarus-steuerabzuege-energie', fr: 'glaris-deductions-fiscales-energie' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
