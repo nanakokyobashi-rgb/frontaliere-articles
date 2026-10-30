@@ -18,6 +18,9 @@ const blogMetaCantonNwEn: Record<string, string> = {
     'blog.article.hergiswil-fattura-fiscale-online.title': 'Hergiswil: online request for the provisional tax bill',
     'blog.article.hergiswil-fattura-fiscale-online.excerpt': 'In Hergiswil, provisional tax bills can be requested online: the form allows you to submit changes that will then be incorporated into the bill.',
     'blog.article.hergiswil-fattura-fiscale-online.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.chiusura-ponte-scheidgraben.title': 'Bridge over the Scheidgraben closed in Ennetbürgen',
+    'blog.article.chiusura-ponte-scheidgraben.excerpt': 'The bridge between Alpenstrasse and Seefeld will be closed for renovation work from November 3, 2026, at 16.30 until November 6 at 08.00.',
+    'blog.article.chiusura-ponte-scheidgraben.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonNwEn;

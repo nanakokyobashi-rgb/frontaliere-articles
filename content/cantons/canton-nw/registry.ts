@@ -61,4 +61,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'chiusura-ponte-scheidgraben',
+ category: 'pratico',
+ date: '2026-10-30T20:11:37.696Z',
+ image: '/images/blog/article-chiusura-ponte-scheidgraben.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['NW'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

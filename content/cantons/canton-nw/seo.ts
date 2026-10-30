@@ -202,6 +202,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-chiusura-ponte-scheidgraben': {
+    title: 'Ponte sullo Scheidgraben chiuso a Ennetbürgen | Frontaliere Ticino',
+    description: 'A Ennetbürgen, il ponte sullo Scheidgraben sarà chiuso per risanamento dal 3 novembre 2026 alle 16.30 al 6 novembre 2026 alle 08.00.',
+    keywords: 'frontalieri, ticino, svizzera, italia, ponte, sullo, scheidgraben, chiuso',
+    ogTitle: 'Ponte sullo Scheidgraben chiuso a Ennetbürgen',
+    ogDescription: 'La comunicazione riguarda il ponte sullo Scheidgraben tra Alpenstrasse e Seefeld: chiusura da martedì 3 novembre 2026 alle 16.30 a venerdì 6 novembre 2026 alle 08.00 per lavori di risanamento. Pedoni e ciclisti sono invitati a passare',
+    canonicalPath: '/articoli-nidvaldo/chiusura-ponte-scheidgraben/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Ponte sullo Scheidgraben chiuso a Ennetbürgen",
+      "description": "A Ennetbürgen, il ponte sullo Scheidgraben sarà chiuso per risanamento dal 3 novembre 2026 alle 16.30 al 6 novembre 2026 alle 08.00.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-chiusura-ponte-scheidgraben.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-30T20:11:37+00:00",
+      "dateModified": "2026-10-30T20:11:37+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-nidvaldo/chiusura-ponte-scheidgraben/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

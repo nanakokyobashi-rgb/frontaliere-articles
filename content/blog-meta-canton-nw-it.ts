@@ -18,6 +18,9 @@ const blogMetaCantonNwIt: Record<string, string> = {
     'blog.article.hergiswil-fattura-fiscale-online.title': 'Hergiswil: richiesta online della fattura fiscale provvisoria',
     'blog.article.hergiswil-fattura-fiscale-online.excerpt': 'A Hergiswil le fatture fiscali provvisorie possono essere richieste online: il modulo consente di trasmettere modifiche che saranno poi recepite nella fattura.',
     'blog.article.hergiswil-fattura-fiscale-online.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.chiusura-ponte-scheidgraben.title': 'Ponte sullo Scheidgraben chiuso a Ennetbürgen',
+    'blog.article.chiusura-ponte-scheidgraben.excerpt': 'Il ponte tra Alpenstrasse e Seefeld sarà chiuso per lavori di risanamento dal 3 novembre 2026 alle 16.30 al 6 novembre alle 08.00.',
+    'blog.article.chiusura-ponte-scheidgraben.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonNwIt;

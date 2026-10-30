@@ -8,6 +8,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'life-forestry-stans-liquidazione': { it: 'life-forestry-stans-liquidazione', en: 'life-forestry-stans-liquidation', de: 'life-forestry-stans-liquidation', fr: 'life-forestry-stans-liquidation' },
  'eventi-weekend-nidvaldo': { it: 'eventi-weekend-nidvaldo', en: 'weekend-events-nidwalden', de: 'wochenend-veranstaltungen-nidwalden', fr: 'evenements-week-end-nidwald' },
  'hergiswil-fattura-fiscale-online': { it: 'hergiswil-fattura-fiscale-online', en: 'hergiswil-provisional-tax-bill', de: 'hergiswil-provisorische-steuerrechnung', fr: 'hergiswil-facture-fiscale-provisoire' },
+ 'chiusura-ponte-scheidgraben': { it: 'chiusura-ponte-scheidgraben', en: 'scheidgraben-bridge-closure', de: 'sperrung-scheidgraben-bruecke', fr: 'fermeture-pont-scheidgraben' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
