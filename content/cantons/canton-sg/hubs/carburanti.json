@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-30T19:31:58.244Z",
-  "contentHash": "1c1d64bb8bd5e4360b408be32429ae5c9bc7f1e10ac612642695ef449cd94b42",
+  "updatedAt": "2026-10-31T10:55:47.675Z",
+  "contentHash": "00eaee03a0f838b2ecd7ad63dfe04892d9216fa872f1e1e4247284d9c9a1e166",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -84,6 +84,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Scontro sulla A1 a Gossau: quattro feriti",
+          "url": "/articoli-san-gallo/tamponamento-a1-gossau/",
+          "excerpt": "Incidente tra due auto sulla A1 a Gossau il 29 ottobre 2026: un 55enne ferito in modo significativo, tre feriti lievi e coda verso St.Gallen.",
+          "date": "2026-10-31T10:32:07.607Z"
+        },
+        {
           "title": "Wil approva supplemento al preventivo 2027 con moltiplicatore fiscale al 115%",
           "url": "/articoli-san-gallo/wil-budget-nachtrag-2027-115/",
           "excerpt": "Il preventivo 2027 prevede un moltiplicatore fiscale del 115%, con minori entrate di circa CHF 3,8 milioni e un deficit stimato di circa CHF 5,78 milioni.",
@@ -106,12 +112,6 @@
           "url": "/articoli-san-gallo/positive-chiusure-2025-sg/",
           "excerpt": "Su 75 comuni politici, 40 hanno chiuso il 2025 con avanzo; l'eccedenza aggregata è di circa CHF 28 milioni.",
           "date": "2026-10-26T17:48:42.058Z"
-        },
-        {
-          "title": "Tamponamento A13 a Sevelen: due feriti il 25 ottobre 2026",
-          "url": "/articoli-san-gallo/unfall-a13-sevelen-2026/",
-          "excerpt": "Il 25 ottobre due auto si sono tamponate sulla A13 a Sevelen Feriti un conducente di 79 anni e la passeggera di 86 Il conducente della seconda auto, 53 anni, è",
-          "date": "2026-10-26T16:46:48.908Z"
         }
       ],
       "links": [
@@ -124,7 +124,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T10:55:47.675Z"
     },
     "en": {
       "canton": "SG",
@@ -195,6 +195,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Crash on the A1 in Gossau: four injured",
+          "url": "/en/st-gallen-articles/gossau-a1-crash/",
+          "excerpt": "Accident involving two cars on the A1 in Gossau on October 29, 2026: a 55-year-old seriously injured, three people with minor injuries, and traffic backed up toward St.Gallen.",
+          "date": "2026-10-31T10:32:07.607Z"
+        },
+        {
           "title": "Wil approves the supplement to the 2027 estimate with a tax multiplier of 115%",
           "url": "/en/st-gallen-articles/wil-budget-supplement-2027-115/",
           "excerpt": "The 2027 budget provides for a tax multiplier of 115%, with lower revenue of approximately CHF 3,8 million and an estimated deficit of approximately CHF 5,78 million.",
@@ -217,12 +223,6 @@
           "url": "/en/st-gallen-articles/positive-closures-2025-sg/",
           "excerpt": "Of 75 political municipalities, 40 closed 2025 with a surplus; the aggregate surplus is approximately CHF 28 million.",
           "date": "2026-10-26T17:48:42.058Z"
-        },
-        {
-          "title": "Rear-end collision on A13 in Sevelen: two injured on October 25, 2026",
-          "url": "/en/st-gallen-articles/accident-a13-sevelen-2026/",
-          "excerpt": "On October 25, two cars rear-ended each other on the A13 at Sevelen A 79-year-old driver and an 86-year-old passenger were injured The driver of the second car",
-          "date": "2026-10-26T16:46:48.908Z"
         }
       ],
       "links": [
@@ -235,7 +235,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T10:55:47.675Z"
     },
     "de": {
       "canton": "SG",
@@ -306,6 +306,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Kollision auf der A1 bei Gossau: vier Verletzte",
+          "url": "/de/st-gallen-artikel/auffahrunfall-a1-gossau/",
+          "excerpt": "Unfall zwischen zwei Autos auf der A1 bei Gossau am 29.",
+          "date": "2026-10-31T10:32:07.607Z"
+        },
+        {
           "title": "Wil genehmigt den Nachtrag zum Budget 2027 mit einem Steuerfuss von 115%",
           "url": "/de/st-gallen-artikel/wil-budgetnachtrag-2027-115/",
           "excerpt": "Das Budget 2027 sieht einen Steuerfuss von 115% vor, mit Mindereinnahmen von etwa CHF 3,8 Millionen und einem geschätzten Defizit von etwa CHF 5,78 Millionen.",
@@ -328,12 +334,6 @@
           "url": "/de/st-gallen-artikel/40-gemeinden-des-kantons-st-gallen-schliessen-das-jahr-2025-positiv-ab/",
           "excerpt": "Von 75 politischen Gemeinden schlossen 40 das Jahr 2025 mit einem Überschuss ab; der kumulierte Überschuss beträgt rund CHF 28 Millionen.",
           "date": "2026-10-26T17:48:42.058Z"
-        },
-        {
-          "title": "Auffahrunfall auf der A13 bei Sevelen: zwei Verletzte am 25. Oktober 2026",
-          "url": "/de/st-gallen-artikel/auffahrunfall-auf-der-a13-bei-sevelen-zwei-verletzte-am-25-oktober-2026/",
-          "excerpt": "Am 25. Oktober fuhren auf der A13 bei Sevelen zwei Autos aufeinander auf Ein 79-jähriger Fahrer und die 86-jährige Beifahrerin wurden verletzt Der 53-jährige",
-          "date": "2026-10-26T16:46:48.908Z"
         }
       ],
       "links": [
@@ -346,7 +346,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T10:55:47.675Z"
     },
     "fr": {
       "canton": "SG",
@@ -417,6 +417,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Collision sur l’A1 à Gossau : quatre blessés",
+          "url": "/fr/articles-saint-gall/accident-a1-gossau/",
+          "excerpt": "Accident entre deux voitures sur l’A1 à Gossau le 29 octobre 2026 : un homme de 55 ans grièvement blessé, trois blessés légers et un embouteillage en direction de St.Gallen.",
+          "date": "2026-10-31T10:32:07.607Z"
+        },
+        {
           "title": "Wil approuve un supplément au budget 2027 avec un coefficient fiscal de 115%",
           "url": "/fr/articles-saint-gall/wil-suppl-budget-2027-115/",
           "excerpt": "Le budget 2027 prévoit un coefficient fiscal de 115%, avec des recettes inférieures d’environ CHF 3,8 millions et un déficit estimé à environ CHF 5,78 millions.",
@@ -439,12 +445,6 @@
           "url": "/fr/articles-saint-gall/positifs-clotures-2025-sg/",
           "excerpt": "Sur 75 communes politiques, 40 ont clôturé l'année 2025 avec un excédent ; l'excédent cumulé est d'environ 28 millions de CHF.",
           "date": "2026-10-26T17:48:42.058Z"
-        },
-        {
-          "title": "Collision par l’arrière sur l’A13 à Sevelen : deux blessés le 25 octobre 2026",
-          "url": "/fr/articles-saint-gall/accident-a13-sevelen-2026/",
-          "excerpt": "Le 25 octobre, deux voitures se sont percutées par l’arrière sur l’A13 à Sevelen Un conducteur de 79 ans et la passagère de 86 ans ont été blessés Le conducteur",
-          "date": "2026-10-26T16:46:48.908Z"
         }
       ],
       "links": [
@@ -457,7 +457,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T10:55:47.675Z"
     }
   }
 }

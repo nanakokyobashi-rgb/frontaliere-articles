@@ -63,6 +63,12 @@ const blogMetaCantonTgFr: Record<string, string> = {
     'blog.article.frauenfeld-revisione-regolamento-salariale.title': 'Frauenfeld : publication de la révision partielle du règlement salarial',
     'blog.article.frauenfeld-revisione-regolamento-salariale.excerpt': 'La ville de Frauenfeld présente une publication référendaire consacrée à la révision partielle du règlement salarial, accompagnée d\'une pièce jointe PDF de 88 KB.',
     'blog.article.frauenfeld-revisione-regolamento-salariale.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.messaggio-modifica-legge-strade.title': 'Le gouvernement thurgovien approuve la réforme routière',
+    'blog.article.messaggio-modifica-legge-strade.excerpt': 'Le Gouvernement du canton de Thurgovie a approuvé le message destiné au Grand Conseil visant à réglementer les affiches électorales et de votation, en subordonnant l’exception à la sécurité routière.',
+    'blog.article.messaggio-modifica-legge-strade.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.turgovia-tariffa-cure-familiare-2026.title': 'Thurgovie : nouveau tarif fixé pour les soins prodigués par des proches',
+    'blog.article.turgovia-tariffa-cure-familiare-2026.excerpt': 'Le Gouvernement cantonal de Thurgovie fixe le tarif à CHF 52,60 de l\'heure pour les prestations de soins prodigués par des proches, avec effet rétroactif au 1er janvier 2026.',
+    'blog.article.turgovia-tariffa-cure-familiare-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonTgFr;

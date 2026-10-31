@@ -1,14 +1,4 @@
 {
-  "https://www.varesenoi.it/2026/09/20/leggi-notizia/argomenti/territorio/articolo/lassociazione-comuni-italiani-di-frontiera-soddisfazione-per-ristorni-ed-extra-gettito.html": {
-    "articleId": "ristorni-comuni-frontiera-incremento",
-    "ts": "2026-09-20T16:48:28.321Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/rubriche/ospite/1951451/puo-inflazione-costo-portafoglio-elio-baggio-svizzera": {
-    "articleId": "inflazione-portafoglio-svizzera",
-    "ts": "2026-09-21T00:12:25.026Z",
-    "keyForm": 2
-  },
   "https://www.varesenews.it/2026/09/pellicini-fdi-indennita-di-frontiera-misura-storica-25-miliardi-nei-prossimi-anni/2684206": {
     "articleId": "pellicini-fdi-indennita-frontiera",
     "ts": "2026-09-21T00:21:18.135Z",
@@ -2497,6 +2487,16 @@
   "https://www.rsi.ch/s/4206471": {
     "articleId": "arresto-napoletano-cassarate",
     "ts": "2026-10-31T10:05:20.654Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/economia/1960077/franchi-via-imposta-figurano-moltiplicatore": {
+    "articleId": "massagno-moltiplicatore-2027",
+    "ts": "2026-10-31T10:46:55.816Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4199961": {
+    "articleId": "voto-cinque-temi-28-febbraio",
+    "ts": "2026-10-31T11:19:43.099Z",
     "keyForm": 2
   }
 }

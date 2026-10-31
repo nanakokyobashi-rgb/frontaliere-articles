@@ -1099,6 +1099,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-frick-volksmotion-kantonsrat': {
+    title: 'Volksmotion Frick: discussione in Kantonsrat su competenze comunali',
+    description: 'Il Kantonsrat tratterà la mozione di Matthias Frick sulle competenze comunali; voto Rhigüetli il 29 novembre. Sequestro caffè al confine.',
+    keywords: 'frontalieri, ticino, svizzera, italia, volksmotion, frick, discussione, kantonsrat',
+    ogTitle: 'Volksmotion Frick e voto Rhigüetli in Sciaffusa',
+    ogDescription: 'Il Kantonsrat di Sciaffusa discuterà la mozione di Matthias Frick sulle competenze comunali sulla circolazione. Il voto sull\'iniziativa Rhigüetli è fissato al 29 novembre. Al confine sono stati sequestrati quasi 200 kg di caffè.',
+    canonicalPath: '/articoli-sciaffusa/frick-volksmotion-kantonsrat/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Volksmotion Frick: discussione in Kantonsrat su competenze comunali",
+      "description": "Il Kantonsrat tratterà la mozione di Matthias Frick sulle competenze comunali; voto Rhigüetli il 29 novembre. Sequestro caffè al confine.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-frick-volksmotion-kantonsrat.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-31T10:44:21+00:00",
+      "dateModified": "2026-10-31T10:44:21+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-sciaffusa/frick-volksmotion-kantonsrat/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

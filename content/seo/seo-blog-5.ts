@@ -113952,6 +113952,84 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-massagno-moltiplicatore-2027': {
+    title: 'Massagno propone moltiplicatore d\'imposta al 77% per il 2027',
+    description: 'Massagno propone il 77% per il Preventivo 2027 Il disavanzo previsto è di 528\'142 franchi Investimenti netti pari a 7\'732\'000 franchi Il Consiglio',
+    keywords: 'frontalieri, ticino, svizzera, italia, massagno, propone, moltiplicatore, imposta',
+    ogTitle: 'Massagno: moltiplicatore d\'imposta 77% per 2027',
+    ogDescription: 'Massagno propone il 77% per il Preventivo 2027 Il disavanzo previsto è di 528\'142 franchi Investimenti netti pari a 7\'732\'000 franchi Il Consiglio comunale',
+    canonicalPath: '/articoli-frontaliere/massagno-moltiplicatore-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Massagno propone moltiplicatore d'imposta al 77% per il 2027",
+      "description": "Massagno propone il 77% per il Preventivo 2027 Il disavanzo previsto è di 528'142 franchi Investimenti netti pari a 7'732'000 franchi Il Consiglio",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-massagno-moltiplicatore-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-31T10:46:54+00:00",
+      "dateModified": "2026-10-31T10:46:54+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/massagno-moltiplicatore-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-voto-cinque-temi-28-febbraio': {
+    title: 'Cinque temi al voto il 28 febbraio 2027 | Frontaliere Ticino',
+    description: 'Il 28 febbraio 2027 la popolazione voterà su cinque temi Il nucleare è il controprogetto a «Stop al blackout» Foie gras e naturalizzazione arrivano',
+    keywords: 'frontalieri, ticino, svizzera, italia, cinque, temi, voto, febbraio',
+    ogTitle: 'Cinque temi al voto il 28 febbraio 2027',
+    ogDescription: 'Il 28 febbraio 2027 la popolazione voterà su cinque temi Il nucleare è il controprogetto a «Stop al blackout» Foie gras e naturalizzazione arrivano con due',
+    canonicalPath: '/articoli-frontaliere/voto-cinque-temi-28-febbraio/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cinque temi al voto il 28 febbraio 2027",
+      "description": "Il 28 febbraio 2027 la popolazione voterà su cinque temi Il nucleare è il controprogetto a «Stop al blackout» Foie gras e naturalizzazione arrivano",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-voto-cinque-temi-28-febbraio.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-31T11:19:42+00:00",
+      "dateModified": "2026-10-31T11:19:42+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/voto-cinque-temi-28-febbraio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

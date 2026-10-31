@@ -46006,6 +46006,26 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'massagno-moltiplicatore-2027',
+ category: 'fiscale',
+ date: '2026-10-31T10:46:54.397Z',
+ image: '/images/blog/article-massagno-moltiplicatore-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
+ {
+ id: 'voto-cinque-temi-28-febbraio',
+ category: 'novita',
+ date: '2026-10-31T11:19:41.828Z',
+ image: '/images/blog/article-voto-cinque-temi-28-febbraio.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

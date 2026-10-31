@@ -20,6 +20,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'val-calanca-strada-chiusa': { it: 'val-calanca-strada-chiusa', en: 'val-calanca-road-closed', de: 'val-calanca-strasse-geschlossen', fr: 'val-calanca-route-fermee' },
  'brigels-sette-milioni-impianti': { it: 'brigels-sette-milioni-impianti', en: 'brigels-seven-million-mountain-lifts', de: 'brigels-sieben-millionen-bergbahnen', fr: 'brigels-sept-millions-remontees' },
  'bus-sostitutivi-grigioni': { it: 'bus-sostitutivi-grigioni', en: 'rhb-replacement-buses', de: 'rhb-ersatzbusse-graubuenden', fr: 'bus-remplacement-grisons' },
+ 'ofenberg-chiusura-notte': { it: 'ofenberg-chiusura-notte', en: 'ofenbergstrasse-night-closure', de: 'ofenbergstrasse-nachtsperre', fr: 'fermeture-nocturne-ofenbergstrasse' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

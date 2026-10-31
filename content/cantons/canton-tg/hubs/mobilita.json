@@ -4,12 +4,12 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-31T06:45:46.687Z",
-  "contentHash": "888c172542a853d073d9d464a6ce1e5e91a203004c10499364c63d0bb8e8d3fc",
+  "updatedAt": "2026-10-31T11:25:56.230Z",
+  "contentHash": "5f249692e22d9adcbc21f4df00743210e85fdcdaef266f3642da2a846075a9d2",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-29T23:59:59.000Z",
+      "updatedAt": "2026-10-30T23:59:59.000Z",
       "keyFacts": 1
     },
     {
@@ -33,7 +33,7 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Diessenhofen – Gailingen am Hochrhein, settimana conclusa: 29 ottobre 2026"
+          "note": "Diessenhofen – Gailingen am Hochrhein, settimana conclusa: 30 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
@@ -45,7 +45,7 @@
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 23 ottobre 2026 – 29 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 24 ottobre 2026 – 30 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Diessenhofen – Gailingen am Hochrhein",
@@ -74,7 +74,7 @@
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-29T23:59:59.000Z"
+          "updatedAt": "2026-10-30T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -144,6 +144,12 @@
           "date": "2026-10-08T11:25:33.511Z"
         },
         {
+          "title": "Governo Turgovia approva messaggio per modifica legge strade e vie",
+          "url": "/articoli-turgovia/messaggio-modifica-legge-strade/",
+          "excerpt": "Il Governo del Canton Turgovia ha approvato il messaggio al Gran Consiglio per disciplinare i manifesti di elezioni e votazioni, subordinando l'eccezione alla sicurezza stradale.",
+          "date": "2026-10-31T11:15:56.284Z"
+        },
+        {
           "title": "Strada principale di Felben-Wellhausen: risanamento",
           "url": "/articoli-turgovia/felben-wellhausen-cantiere/",
           "excerpt": "Dal 19 ottobre 2026 a metà luglio 2027, la Hauptstrasse di Felben-Wellhausen sarà risanata: Römerstrasse chiusa a tratti, Römerhof spostata o soppressa.",
@@ -193,7 +199,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-31T06:45:46.687Z"
+      "updatedAt": "2026-10-31T11:25:56.230Z"
     },
     "en": {
       "canton": "TG",
@@ -204,7 +210,7 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Diessenhofen – Gailingen am Hochrhein, week ending 29 October 2026"
+          "note": "Diessenhofen – Gailingen am Hochrhein, week ending 30 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
@@ -216,7 +222,7 @@
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 23 October 2026 to 29 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 24 October 2026 to 30 October 2026, fastest first.",
           "items": [
             {
               "label": "Diessenhofen – Gailingen am Hochrhein",
@@ -245,7 +251,7 @@
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-29T23:59:59.000Z"
+          "updatedAt": "2026-10-30T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -315,6 +321,12 @@
           "date": "2026-10-08T11:25:33.511Z"
         },
         {
+          "title": "Thurgau government approves proposal to amend the Roads and Paths Act",
+          "url": "/en/thurgau-articles/law-amendment-roads-thurgau/",
+          "excerpt": "The Government of the Canton of Thurgau approved the submission to the Grand Council to regulate election and voting posters, making the exception conditional on road safety.",
+          "date": "2026-10-31T11:15:56.284Z"
+        },
+        {
           "title": "Felben-Wellhausen main road: renovation",
           "url": "/en/thurgau-articles/felben-wellhausen-road-works/",
           "excerpt": "From October 19, 2026 to mid-July 2027, Felben-Wellhausen’s Hauptstrasse will be renovated: Römerstrasse closed in sections, Römerhof relocated or discontinued.",
@@ -364,7 +376,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-31T06:45:46.687Z"
+      "updatedAt": "2026-10-31T11:25:56.230Z"
     },
     "de": {
       "canton": "TG",
@@ -375,7 +387,7 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Diessenhofen – Gailingen am Hochrhein, Woche bis 29. Oktober 2026"
+          "note": "Diessenhofen – Gailingen am Hochrhein, Woche bis 30. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
@@ -387,7 +399,7 @@
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 23. Oktober 2026 bis 29. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 24. Oktober 2026 bis 30. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Diessenhofen – Gailingen am Hochrhein",
@@ -416,7 +428,7 @@
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-29T23:59:59.000Z"
+          "updatedAt": "2026-10-30T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -486,6 +498,12 @@
           "date": "2026-10-08T11:25:33.511Z"
         },
         {
+          "title": "Thurgau genehmigt Botschaft zur Strassengesetz-Änderung",
+          "url": "/de/thurgau-artikel/gesetz-aenderung-strassen-turgau/",
+          "excerpt": "Die Regierung des Kantons Thurgau hat die Botschaft an den Grossen Rat zur Regelung der Plakate für Wahlen und Abstimmungen genehmigt und die Ausnahme von der Verkehrssicherheit abhängig gemacht.",
+          "date": "2026-10-31T11:15:56.284Z"
+        },
+        {
           "title": "Hauptstrasse in Felben-Wellhausen: Sanierung",
           "url": "/de/thurgau-artikel/felben-wellhausen-hauptstrasse-sanierung/",
           "excerpt": "Vom 19. Oktober 2026 bis Mitte Juli 2027 wird die Hauptstrasse in Felben-Wellhausen saniert: Die Römerstrasse wird abschnittsweise gesperrt, die Haltestelle Römerhof verlegt oder aufgehoben.",
@@ -535,7 +553,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-31T06:45:46.687Z"
+      "updatedAt": "2026-10-31T11:25:56.230Z"
     },
     "fr": {
       "canton": "TG",
@@ -546,7 +564,7 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Diessenhofen – Gailingen am Hochrhein, semaine jusqu’au 29 octobre 2026"
+          "note": "Diessenhofen – Gailingen am Hochrhein, semaine jusqu’au 30 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
@@ -558,7 +576,7 @@
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 23 octobre 2026 au 29 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 24 octobre 2026 au 30 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Diessenhofen – Gailingen am Hochrhein",
@@ -587,7 +605,7 @@
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-29T23:59:59.000Z"
+          "updatedAt": "2026-10-30T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -657,6 +675,12 @@
           "date": "2026-10-08T11:25:33.511Z"
         },
         {
+          "title": "Le gouvernement thurgovien approuve la réforme routière",
+          "url": "/fr/articles-thurgovie/modification-loi-routes-thurgovie/",
+          "excerpt": "Le Gouvernement du canton de Thurgovie a approuvé le message destiné au Grand Conseil visant à réglementer les affiches électorales et de votation, en subordonnant l’exception à la sécurité routière.",
+          "date": "2026-10-31T11:15:56.284Z"
+        },
+        {
           "title": "Route principale de Felben-Wellhausen : assainissement",
           "url": "/fr/articles-thurgovie/felben-wellhausen-travaux-route/",
           "excerpt": "Du 19 octobre 2026 à la mi-juillet 2027, la Hauptstrasse de Felben-Wellhausen sera assainie : Römerstrasse fermée par tronçons, Römerhof déplacé ou supprimé.",
@@ -706,7 +730,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-31T06:45:46.687Z"
+      "updatedAt": "2026-10-31T11:25:56.230Z"
     }
   }
 }
