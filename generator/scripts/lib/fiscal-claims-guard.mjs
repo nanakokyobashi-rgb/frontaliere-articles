@@ -163,6 +163,16 @@ export function findFiscalClaims(text) {
 /** Una percentuale riferita alla paga: le altre (sondaggi, aumenti) non sono l'aliquota. */
 const RATE_ON_PAY_RE = /(\d{1,2}(?:[.,]\d)?)(?:\s?%?\s?(?:-|–|—|a|al|to|bis|à)\s?(\d{1,2}(?:[.,]\d)?))?\s?%\s+(?:del|dello|della|sul|sullo|sulla|von|vom|auf|auf den|auf das|of|of the|on|on the|des|du|de|de la|sur|sur le|sur la)\s+(?:proprio\s+|their\s+|ihres\s+)?(?:reddit|salari|stipendi|income|salary|wage|einkommen|nettoeinkommen|bruttoeinkommen|lohn|gehalt|brutto|netto|revenu|salaire|gross|net)\w*(?:\s+(?:netto|lordo|net|gross|brut|brutto))?/gi;
 
+/** Un importo in euro riferito al mese: la quota SSN sta fra 30 e 200 per mese lavorato. */
+const MONTHLY_EURO_RE = /(?:€\s?(\d{1,3}(?:[.'’\u00a0 ]\d{3})*)|(\d{1,3}(?:[.'’\u00a0 ]\d{3})*)\s?(?:€|euro|eur)\b)\s*(?:al mese|per mese|a month|per month|pro monat|im monat|par mois)/gi;
+
+function monthlyAmountsOutOfRange(sentence) {
+  return [...sentence.matchAll(MONTHLY_EURO_RE)].some((match) => {
+    const value = Number((match[1] ?? match[2]).replace(/\D/g, ''));
+    return value < 30 || value > 200;
+  });
+}
+
 /**
  * Quota SSN: la base e' il salario netto e la forchetta e' 3-6%. Un'affermazione
  * che la lega al lordo o a una percentuale fuori forchetta non passa.
@@ -171,7 +181,7 @@ export function findTaxHealthParameterErrors(text) {
   if (typeof text !== 'string') return [];
   const errors = [];
   const seenSpans = new Set();
-  const re = /(tassa (?:sulla )?salute|tassa sanitaria|quota ssn|health tax|gesundheitssteuer|gesundheitsabgabe|taxe (?:sur la )?sant[eé])/gi;
+  const re = /(tassa (?:sulla )?salute|tassa sanitaria|quota ssn|quota di compartecipazione|compartecipazione al (?:ssn|servizio sanitario)|contributo al (?:ssn|servizio sanitario)|servizio sanitario nazionale|health tax|ssn contribution|national health service contribution|gesundheitssteuer|gesundheitsabgabe|ssn-beitrag|taxe (?:sur la )?sant[eé]|contribution (?:au )?ssn)/gi;
   for (const match of text.matchAll(re)) {
     const { start, end } = sentenceSpanAt(text, match.index);
     // Due nomi della quota nella stessa frase sono un errore solo: chi consuma
@@ -179,6 +189,10 @@ export function findTaxHealthParameterErrors(text) {
     if (seenSpans.has(start)) continue;
     seenSpans.add(start);
     const sentence = text.slice(start, end);
+    if (monthlyAmountsOutOfRange(sentence)) {
+      errors.push({ id: 'tassa-salute-parametri', source: 'DM Salute 14/11/2025 art. 1', start, end, sentence });
+      continue;
+    }
     for (const percent of sentence.matchAll(RATE_ON_PAY_RE)) {
       const values = [percent[1], percent[2]].filter(Boolean).map((value) => Number(value.replace(',', '.')));
       if (/(lordo|gross|brutto|brut)/i.test(percent[0]) || values.some((value) => value < 3 || value > 6)) {

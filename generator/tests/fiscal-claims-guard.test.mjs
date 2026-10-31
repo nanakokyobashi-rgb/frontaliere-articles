@@ -90,6 +90,16 @@ test('quota SSN: anche con sul/sulla/vom/on, e un errore solo per frase', () => 
   assert.equal(findTaxHealthParameterErrors('La tassa salute è del 5% sul salario netto.').length, 0);
 });
 
+test('quota SSN: tutti i nomi della quota e il limite mensile', () => {
+  assert.equal(findTaxHealthParameterErrors('La quota di compartecipazione al Servizio sanitario nazionale vale il 10% del salario lordo.').length, 1);
+  assert.equal(findTaxHealthParameterErrors('Der SSN-Beitrag beträgt 10 % vom Nettolohn.').length, 1);
+  assert.equal(findTaxHealthParameterErrors('La tassa salute vale il 3% del salario netto, fino a 2.000 euro al mese.').length, 1);
+  assert.equal(findTaxHealthParameterErrors('The health tax is €500 per month.').length, 1);
+  assert.equal(findTaxHealthParameterErrors('La tassa salute costa 10 euro al mese.').length, 1);
+  assert.equal(findTaxHealthParameterErrors('La tassa salute va da 30 a 200 euro per mese lavorato.').length, 0);
+  assert.equal(findTaxHealthParameterErrors('La tassa salute vale il 4% del salario netto, circa 150 euro al mese.').length, 0);
+});
+
 test('data di vigore: anche in forma numerica', () => {
   assert.deepEqual(ids('L\'Accordo è in vigore dal 1/1/2024 per i frontalieri.'), ['accordo-in-vigore-2024']);
   assert.deepEqual(ids('Il Nuovo Accordo, in vigore dal 01.01.2024, cambia le regole.'), ['accordo-in-vigore-2024']);
