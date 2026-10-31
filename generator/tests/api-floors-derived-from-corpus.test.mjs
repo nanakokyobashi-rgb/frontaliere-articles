@@ -1152,7 +1152,8 @@ test('build-api usa il parser SEO condiviso, non una terza finestra locale', () 
   // sezione pubblicabile, nel loop sulle sezioni pubbliche (oggi frontaliere
   // e svizzera; da P7 anche le cantonali effettivamente live, con la politica
   // di famiglia).
-  assert.match(build, /for \(const section of PUBLIC_API_SECTIONS\) \{\s*const file = section\.api\.sitemap;\s*const source = countSourceSitemapEntries\(ROOT, section\.section, \{\s*excludedIds: indexExcludedArticleIds\(section\),\s*\}\);/);
+  assert.match(build, /for \(const section of PUBLIC_API_SECTIONS\) \{\s*const file = section\.api\.sitemap;\s*const source = countSourceSitemapEntries\(ROOT, section\.section\);/);
+  assert.match(build, /const effectiveSource = Math\.max\(0, source - countIndexExcludedSourceEntries\(section\)\);/);
   assert.doesNotMatch(build, /countSitemapEntries\(ARTICLES/);
   assert.doesNotMatch(build, /countSitemapEntries\(SWISS_ARTICLES/);
   assert.doesNotMatch(build, /countSitemapEntries\(SECTION_REGISTRIES/);
