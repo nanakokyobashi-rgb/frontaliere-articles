@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "servizi",
-  "updatedAt": "2026-10-31T09:03:35.366Z",
-  "contentHash": "641247c9686d533e641061355139234c402af13f6f6f63db290d88819bec6887",
+  "updatedAt": "2026-10-31T11:03:15.690Z",
+  "contentHash": "13062d155b95c09b2b39b1b61e346c65b6c0d200d028a0ea1244aa06273e74fd",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,8 +14,13 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-30T22:19:25.949Z",
+      "updatedAt": "2026-10-31T05:38:53.303Z",
       "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-31T06:01:57.900Z",
+      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
@@ -79,7 +84,7 @@
             },
             {
               "label": "AG10048",
-              "value": "2520 CHF",
+              "value": "2800 CHF",
               "detail": "offerta attuale",
               "date": "2026-11-11T20:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58812"
@@ -87,7 +92,21 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion-ag.ch/de/",
-          "updatedAt": "2026-10-30T22:19:25.949Z"
+          "updatedAt": "2026-10-31T05:38:53.303Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Aarau",
+              "value": "5 °C",
+              "detail": "oggi da 5 a 11 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-31T06:01:57.900Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -205,7 +224,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-31T09:03:35.366Z"
+      "updatedAt": "2026-10-31T11:03:15.690Z"
     },
     "en": {
       "canton": "AG",
@@ -262,7 +281,7 @@
             },
             {
               "label": "AG10048",
-              "value": "2,520 CHF",
+              "value": "2,800 CHF",
               "detail": "current bid",
               "date": "2026-11-11T20:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58812"
@@ -270,7 +289,21 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion-ag.ch/de/",
-          "updatedAt": "2026-10-30T22:19:25.949Z"
+          "updatedAt": "2026-10-31T05:38:53.303Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Aarau",
+              "value": "5 °C",
+              "detail": "today from 5 to 11 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-31T06:01:57.900Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -384,7 +417,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-31T09:03:35.366Z"
+      "updatedAt": "2026-10-31T11:03:15.690Z"
     },
     "de": {
       "canton": "AG",
@@ -441,7 +474,7 @@
             },
             {
               "label": "AG10048",
-              "value": "2’520 CHF",
+              "value": "2’800 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-11-11T20:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58812"
@@ -449,7 +482,21 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion-ag.ch/de/",
-          "updatedAt": "2026-10-30T22:19:25.949Z"
+          "updatedAt": "2026-10-31T05:38:53.303Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Aarau",
+              "value": "5 °C",
+              "detail": "heute 5 bis 11 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-31T06:01:57.900Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -563,7 +610,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-31T09:03:35.366Z"
+      "updatedAt": "2026-10-31T11:03:15.690Z"
     },
     "fr": {
       "canton": "AG",
@@ -620,7 +667,7 @@
             },
             {
               "label": "AG10048",
-              "value": "2 520 CHF",
+              "value": "2 800 CHF",
               "detail": "offre actuelle",
               "date": "2026-11-11T20:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58812"
@@ -628,7 +675,21 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion-ag.ch/de/",
-          "updatedAt": "2026-10-30T22:19:25.949Z"
+          "updatedAt": "2026-10-31T05:38:53.303Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Aarau",
+              "value": "5 °C",
+              "detail": "aujourd’hui de 5 à 11 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-31T06:01:57.900Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -738,7 +799,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-31T09:03:35.366Z"
+      "updatedAt": "2026-10-31T11:03:15.690Z"
     }
   }
 }
