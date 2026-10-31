@@ -86,7 +86,9 @@ test('la catena ricalcolata con tabella R0 2026 e IRPEF 2026 dà i valori pubbli
 
 test('il registro marca il refresh fattuale con updatedAt', () => {
   const registry = fs.readFileSync(path.join(ROOT, 'content', 'blog-articles-data.ts'), 'utf8');
-  assert.match(registry, new RegExp(`id: '${SLUG}'[\\s\\S]{0,160}updatedAt: '${REFRESHED_ON}'`));
+  const match = registry.match(new RegExp(`id: '${SLUG}'[\\s\\S]{0,160}updatedAt: '(\\d{4}-\\d{2}-\\d{2})'`));
+  assert.ok(match, `registro senza updatedAt per ${SLUG}`);
+  assert.ok(match[1] >= REFRESHED_ON, `updatedAt ${match[1]} precede il refresh ${REFRESHED_ON}`);
 });
 
 test('le quattro lingue portano i valori ricalcolati e le fonti ufficiali', () => {

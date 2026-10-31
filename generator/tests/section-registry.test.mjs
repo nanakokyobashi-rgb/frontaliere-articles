@@ -584,7 +584,8 @@ test('sitemap di sezione: un articolo ritirato o spostato in QUALSIASI locale es
   const build = readFileSync(path.join(ROOT, 'scripts/build-api.mjs'), 'utf8');
   assert.match(build, /registryRetiredSlugs\(declaredSections\.sections\[section\.section\]/);
   // I ritiri dichiarati escono anche dal riferimento del pavimento di famiglia.
-  assert.match(build, /source: Math\.max\(0, source - retiredSource\)/);
+  assert.match(build, /const excluded = new Set\(\[\s*\.\.\.retiredByRegistry\(section\),/);
+  assert.match(build, /const effectiveSource = Math\.max\(0, source - excludedSource\)/);
 });
 
 test('una sezione di famiglia accesa e VUOTA attraversa tutti i gate di publish-api (indice runtime, pavimenti dei feed)', () => {
@@ -1650,8 +1651,8 @@ test('sitemap cantonale: uno slug IT provvisorio rifiuta l’identità prima del
 
 test('build-api: il pavimento RSS di famiglia ha il corpus come riferimento, non il parser del feed', () => {
   const build = readFileSync(path.join(ROOT, 'scripts/build-api.mjs'), 'utf8');
-  assert.match(build, /familyRssRows\.push\(\{/);
-  assert.match(build, /source: countSourceArticles\(ROOT, section\.id, \{\s*excludedIds\s*\}\)/);
+  assert.match(build, /const source = countSourceArticles\(ROOT, section\.id\)/);
+  assert.match(build, /familyRssRows\.push\(\{ section: section\.id, source: effectiveSource, emitted: sectionItems \}\)/);
   assert.doesNotMatch(build, /source: section\.articleCount/);
 });
 

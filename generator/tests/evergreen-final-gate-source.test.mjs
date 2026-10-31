@@ -41,6 +41,12 @@ import { runFactualityGates, formatIssues } from '../scripts/lib/article-factual
 import { checkCorpusFabricatedInstitutionNames } from '../scripts/lib/corpus-fabricated-institution-names.mjs';
 import { findArticleLocalizedToponymMismatches } from '../scripts/lib/localized-toponyms.mjs';
 import { assertNoFiscalErrorsInLocales } from '../scripts/lib/article-ymyl-gate.mjs';
+import {
+  CLAIM_LOCALES,
+  HEALTH_TAX_SUMMARY,
+  repairEditorialClaims,
+  assertNoEditorialClaims,
+} from '../../engine/shared/editorialClaims.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CREATE_ARTICLE = path.resolve(HERE, '../scripts/create-article.mjs');
@@ -85,7 +91,10 @@ const GATE_SRC = [
   cutFunctionIfPresent('factualityGateSourceText'),
   cutFunctionIfPresent('assertItalianArticlePassesFactualityGates'),
   cutFunction('collectPublishedTextValues'),
+  cutFunction('repairEditorialClaimsInObject'),
+  cutFunction('repairArticleEditorialClaims'),
   cutFunction('assertArticlePassesFactualityGates'),
+  cutFunction('assertPublishedEditorialClaims'),
   cutFunction('assertNoCorpusFabricatedInstitutionNames'),
   cutFunctionIfPresent('assertLocalizedToponyms'),
 ].join('\n');
@@ -101,6 +110,10 @@ function makeGate() {
     'checkStatsAstraCountFidelity',
     'joinBodySections',
     'assertTranslationsPassFactualityGates',
+    'CLAIM_LOCALES',
+    'HEALTH_TAX_SUMMARY',
+    'repairEditorialClaims',
+    'assertNoEditorialClaims',
     'assertNoFiscalErrorsInLocales',
     'assertArticleRelevance',
     'assertYmylPublishable',
@@ -117,6 +130,10 @@ function makeGate() {
     () => ({ passed: true }),
     (content) => Object.values(content).join(' '),
     (data) => { translationCalls.push(data); },
+    CLAIM_LOCALES,
+    HEALTH_TAX_SUMMARY,
+    repairEditorialClaims,
+    assertNoEditorialClaims,
     assertNoFiscalErrorsInLocales,
     () => {},
     () => {},
@@ -201,11 +218,21 @@ test('#4 il guard scandisce FAQ annidate e tutti i campi SEO', () => {
     err.qualityReject === true && /istituzione inventata/.test(err.message)
   ));
 
+  const seoClaimData = withSource(article(), 'evergreen://vivere-friburgo', BRIEF);
+  seoClaimData.seo = { description: 'La tassa sulla salute è di CHF 100.' };
+  assert.doesNotThrow(() => makeGate().gate(seoClaimData));
+  assert.match(seoClaimData.seo.description, /3% al 6%/);
+
   const imageAltData = withSource(article(), 'evergreen://vivere-friburgo', BRIEF);
   imageAltData.imageAlt = { it: 'Federal Statistical Office (IFS)' };
   assert.throws(() => makeGate().gate(imageAltData), (err) => (
     err.qualityReject === true && /istituzione inventata/.test(err.message)
   ));
+
+  const imageAltClaimData = withSource(article(), 'evergreen://vivere-friburgo', BRIEF);
+  imageAltClaimData.imageAlt = { it: 'La tassa sulla salute è di CHF 100.' };
+  assert.doesNotThrow(() => makeGate().gate(imageAltClaimData));
+  assert.equal(imageAltClaimData.imageAlt.it, '');
 });
 
 test('#5 il guard riconosce parentesi terminali e la grafia Aussenpolitik', () => {

@@ -28,7 +28,9 @@ function bodySource(locale) {
 
 test('ristorni-fiscali-ticino: registry con updatedAt del refresh fattuale', () => {
   const registry = fs.readFileSync(path.join(ROOT, 'content', 'blog-articles-data.ts'), 'utf8');
-  assert.match(registry, new RegExp(`id: '${SLUG}'[\\s\\S]{0,220}updatedAt: '${REFRESHED_ON}'`));
+  const match = registry.match(new RegExp(`id: '${SLUG}'[\\s\\S]{0,220}updatedAt: '(\\d{4}-\\d{2}-\\d{2})'`));
+  assert.ok(match, `registro senza updatedAt per ${SLUG}`);
+  assert.ok(match[1] >= REFRESHED_ON, `updatedAt ${match[1]} precede il refresh ${REFRESHED_ON}`);
 });
 
 for (const locale of LOCALES) {

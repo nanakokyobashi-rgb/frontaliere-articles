@@ -42,13 +42,6 @@ import { fileURLToPath } from 'node:url';
 import os from 'node:os';
 import { execSync } from 'node:child_process';
 import { buildSectionFeeds, RSS_SECTIONS } from './lib/rss-feed-body-adapter.mjs';
-import {
-  ARTICLE_INDEX_EXCLUSIONS_FILES,
-  articleIndexExclusionKey,
-  loadArticleIndexExclusions,
-} from '../engine/shared/articleIndexExclusions.mjs';
-import { ARTICLE_SECTION_CORE_ALL } from '../engine/shared/articleSectionCore.mjs';
-import { unknownIndexExclusionKeys } from './lib/article-index-exclusions-check.mjs';
 // repairSerpSnippet vive in clauseTail.mjs (un .mjs) proprio perche' questo file
 // non puo' importare un .ts: e' la sorgente unica che il layer TS riesporta.
 // Senza passarla, rssFeeds.mjs spedirebbe le description verbatim (#5453).
@@ -174,6 +167,12 @@ import {
 } from './lib/section-registry.mjs';
 import { cantonHubCoverage, cantonHubTopics, readCantonHubDocument } from './lib/canton-hub-data.mjs';
 import { isReservedPublishedSlug } from './lib/published-slug-guard.mjs';
+import {
+  ARTICLE_INDEX_EXCLUSIONS_FILES,
+  assertArticleIndexExclusionsKnown,
+  articleIndexExclusionKey,
+  loadArticleIndexExclusions,
+} from '../engine/shared/articleIndexExclusions.mjs';
 // Il corpus nel layout dell'engine, per i feed delle sezioni di famiglia.
 import { createEngineCorpusView, engineViewRssLayout, seoChunkSources } from './lib/engine-corpus-view.mjs';
 // Allowlist dei campi pubblici di articles.json / swiss-articles.json.
@@ -616,6 +615,31 @@ for (const section of PUBLISHED_API_SECTIONS) {
 if (reservedSlugEntries.length > 0) {
   throw new Error(`reserved/service-marker published identity value(s) in source maps: ${reservedSlugEntries.join(', ')}`);
 }
+// This ledger is an index withdrawal, not a corpus deletion: the article stays
+// live and followable, but it must be absent from every index surface owned by
+// this build. Load it once so sitemap, Google News and RSS cannot drift.
+const articleIndexExclusions = loadArticleIndexExclusions(
+  fs,
+  ARTICLE_INDEX_EXCLUSIONS_FILES.map((candidate) => path.join(ROOT, candidate)),
+);
+const knownArticleIndexExclusionKeys = new Set(
+  PUBLISHED_API_SECTIONS.flatMap((section) => (
+    SECTION_REGISTRIES[section.section] ?? []
+  ).map((article) => articleIndexExclusionKey(section.section, article.id))),
+);
+assertArticleIndexExclusionsKnown(articleIndexExclusions, knownArticleIndexExclusionKeys);
+const SECTION_INDEX_EXCLUDED_SLUGS = Object.fromEntries(
+  PUBLISHED_API_SECTIONS.map((section) => [
+    section.section,
+    new Set(
+      (SECTION_REGISTRIES[section.section] ?? [])
+        .filter((article) => articleIndexExclusions.has(articleIndexExclusionKey(section.section, article.id)))
+        .map((article) => slugMapOf(section.section)?.[article.id]?.it)
+        .filter(Boolean),
+    ),
+  ]),
+);
+console.log(`[build-api] article-index exclusions loaded: ${articleIndexExclusions.size}`);
 // L'ordine delle chiavi e' quello storico — la prima sezione, poi
 // `fallbackReasons` di tutte, poi le altre — perche' slugs.json resti
 // byte-identico a prima che le sezioni venissero dal core.
@@ -708,37 +732,6 @@ for (const section of PUBLISHED_API_SECTIONS) {
 }
 const shadowedFrontaliereSlugs = SECTION_CANONICAL_SHADOW[FRONTALIERE.section];
 
-// Articoli ritirati dall'indice (content/article-index-exclusions.json): la
-// pagina e' `noindex,follow`, quindi non sta in nessuna sitemap, e da li' escono
-// anche sitemap-news e la famiglia llms che il sito deriva dalle sitemap.
-const indexExclusions = loadArticleIndexExclusions(
-  fs,
-  ARTICLE_INDEX_EXCLUSIONS_FILES.map((candidate) => path.join(ROOT, candidate)),
-);
-console.log(`[build-api] articoli esclusi dall'indice: ${indexExclusions.size}`);
-{
-  const publishedSections = new Set(PUBLISHED_API_SECTIONS.map((section) => section.section));
-  const unknownExclusions = unknownIndexExclusionKeys(
-    indexExclusions,
-    PUBLISHED_API_SECTIONS.flatMap((section) => (SECTION_REGISTRIES[section.section] ?? [])
-      .map((article) => articleIndexExclusionKey(section.section, article.id))),
-    publishedSections,
-    new Set(Object.keys(ARTICLE_SECTION_CORE_ALL)),
-  );
-  if (unknownExclusions.length > 0) {
-    throw new Error(`article-index-exclusions: righe senza articolo (${unknownExclusions.join(', ')}) — refusing to publish`);
-  }
-}
-const indexExcludedArticles = (section) => (SECTION_REGISTRIES[section.section] ?? [])
-  .filter((article) => indexExclusions.has(articleIndexExclusionKey(section.section, article.id)));
-const indexExcludedArticleIds = (section) => new Set(indexExcludedArticles(section).map((article) => article.id));
-const indexExcludedSlugs = (section) => {
-  const slugMap = slugMapOf(section.section);
-  return indexExcludedArticles(section)
-    .map((article) => slugMap?.[article.id]?.it)
-    .filter(Boolean);
-};
-
 const SECTION_META_IT = {};
 for (const section of PUBLISHED_API_SECTIONS) {
   SECTION_META_IT[section.section] = await loadSectionMeta(section, 'it');
@@ -766,16 +759,48 @@ const retiredByRegistry = (section) =>
 const SECTION_SITEMAP_SHADOW = Object.fromEntries(
   PUBLIC_API_SECTIONS.map((section) => [
     section.section,
-    new Set([
-      ...(section.retiredDailyEditions
-        ? new Set([...retiredDailyEditionSlugs, ...SECTION_CANONICAL_SHADOW[section.section]])
-        : section.api.family !== null
-          ? new Set([...SECTION_CANONICAL_SHADOW[section.section], ...retiredByRegistry(section)])
-          : SECTION_CANONICAL_SHADOW[section.section]),
-      ...indexExcludedSlugs(section),
-    ]),
+    section.retiredDailyEditions
+      ? new Set([...retiredDailyEditionSlugs, ...SECTION_CANONICAL_SHADOW[section.section]])
+      : section.api.family !== null
+        ? new Set([...SECTION_CANONICAL_SHADOW[section.section], ...retiredByRegistry(section)])
+        : SECTION_CANONICAL_SHADOW[section.section],
   ]),
 );
+// Keep the pre-ledger set for floor accounting: countSourceSitemapEntries()
+// already subtracts canonical overrides and retired daily editions, while the
+// ledger is a separate intentional exclusion that must be subtracted exactly
+// once from the same reference.
+const SECTION_SITEMAP_BASE_SHADOW = Object.fromEntries(
+  Object.entries(SECTION_SITEMAP_SHADOW).map(([section, shadowed]) => [section, new Set(shadowed)]),
+);
+for (const section of PUBLIC_API_SECTIONS) {
+  SECTION_SITEMAP_SHADOW[section.section] = new Set(SECTION_SITEMAP_SHADOW[section.section]);
+  const shadowed = SECTION_SITEMAP_SHADOW[section.section];
+  for (const slug of SECTION_INDEX_EXCLUDED_SLUGS[section.section] ?? []) shadowed.add(slug);
+  if ((SECTION_INDEX_EXCLUDED_SLUGS[section.section] ?? new Set()).size > 0) {
+    console.log(
+      `[build-api] article-index exclusions de-listed from ${section.api.sitemap}: `
+        + `${SECTION_INDEX_EXCLUDED_SLUGS[section.section].size}`,
+    );
+  }
+}
+const countIndexExcludedSourceEntries = (section) => countSitemapEntries(
+  (SECTION_REGISTRIES[section.section] ?? []).filter((article) => {
+    const slug = slugMapOf(section.section)?.[article.id]?.it;
+    return (SECTION_INDEX_EXCLUDED_SLUGS[section.section] ?? new Set()).has(slug)
+      && !SECTION_SITEMAP_BASE_SHADOW[section.section].has(slug);
+  }),
+  slugMapOf(section.section),
+  SECTION_SITEMAP_BASE_SHADOW[section.section],
+);
+const countIndexExcludedSourceArticles = (sectionId) => {
+  const section = PUBLISHED_BY_SECTION[sectionId];
+  if (!section?.bodyDir) return 0;
+  return (SECTION_REGISTRIES[sectionId] ?? []).filter((article) => (
+    articleIndexExclusions.has(articleIndexExclusionKey(sectionId, article.id))
+    && fs.existsSync(path.join(ROOT, section.bodyDir, 'it', `${article.id}.ts`))
+  )).length;
+};
 // La dimensione di pagina dell'archivio viene dalla sorgente unica dell'host
 // (il valore cablato nel SiteShellContract dell'engine): la usano la sitemap
 // dell'archivio storico e quella di ogni sezione di famiglia.
@@ -815,9 +840,9 @@ for (const section of PUBLIC_API_SECTIONS) {
   );
 }
 // I pavimenti sono relativi al registro IT meno le esclusioni esplicite già
-// validate (canonical override e daily edition ritirate), non al predicato del
-// builder: un filtro nuovo o una slug map troncata deve far scattare il floor,
-// non abbassarlo insieme alla sitemap. Gli override hanno una chiave per
+// validate (canonical override, daily edition ritirate e ledger article-index),
+// non al predicato del builder: un filtro nuovo o una slug map troncata deve
+// far scattare il floor, non abbassarlo insieme alla sitemap. Gli override hanno una chiave per
 // locale; il contatore del floor resta a una identita' per articolo anche per
 // le sitemap cantonali, che ora emettono una URL per ogni locale. Il vecchio `< 100`
 // proteggeva il 2,6% del corpus frontaliere e non proteggeva affatto la sitemap
@@ -836,38 +861,39 @@ const sitemapSources = {};
 const familySitemapRows = [];
 for (const section of PUBLIC_API_SECTIONS) {
   const file = section.api.sitemap;
-  const source = countSourceSitemapEntries(ROOT, section.section, {
-    excludedIds: indexExcludedArticleIds(section),
-  });
-  sitemapSources[section.section] = source;
+  const source = countSourceSitemapEntries(ROOT, section.section);
   if (floorPolicyOf(section.section) === 'family') {
-    // Gli articoli che il registro ritira (`gone`/`redirects`) escono dalla
-    // sitemap per scelta dichiarata: vanno tolti anche dal RIFERIMENTO, come
-    // gli override canonici, altrimenti un ritiro intenzionale oltre il 10%
+    // Gli articoli che il registro ritira (`gone`/`redirects`) e quelli ritirati
+    // dal ledger escono dalla sitemap per scelta dichiarata: vanno tolti anche
+    // dal RIFERIMENTO, altrimenti un'esclusione intenzionale oltre il 10%
     // sembrerebbe un troncamento e fermerebbe l'intera pubblicazione.
-    const retired = new Set(retiredByRegistry(section));
-    const retiredSource = countSitemapEntries(
-      SECTION_REGISTRIES[section.section].filter((article) => retired.has(slugMapOf(section.section)?.[article.id]?.it)),
+    const excluded = new Set([
+      ...retiredByRegistry(section),
+      ...(SECTION_INDEX_EXCLUDED_SLUGS[section.section] ?? []),
+    ]);
+    const excludedSource = countSitemapEntries(
+      SECTION_REGISTRIES[section.section].filter((article) => excluded.has(slugMapOf(section.section)?.[article.id]?.it)),
       slugMapOf(section.section),
-      new Set([
-        ...SECTION_CANONICAL_SHADOW[section.section],
-        ...indexExcludedSlugs(section),
-      ]),
+      SECTION_CANONICAL_SHADOW[section.section],
     );
+    const effectiveSource = Math.max(0, source - excludedSource);
+    sitemapSources[section.section] = effectiveSource;
     familySitemapRows.push({
       section: section.section,
-      source: Math.max(0, source - retiredSource),
+      source: effectiveSource,
       emitted: familySitemapArticles[section.section] ?? 0,
     });
     continue;
   }
-  if (source <= 0) {
+  const effectiveSource = Math.max(0, source - countIndexExcludedSourceEntries(section));
+  sitemapSources[section.section] = effectiveSource;
+  if (effectiveSource <= 0) {
     throw new Error(`${file} has no emittable IT registry entries — refusing to publish an empty sitemap`);
   }
-  const floor = floorFrom(source);
+  const floor = floorFrom(effectiveSource);
   if (sitemapCounts[section.section] < floor) {
     throw new Error(
-      `${file} has only ${sitemapCounts[section.section]} urls against ${source} emittable IT registry entries ` +
+      `${file} has only ${sitemapCounts[section.section]} urls against ${effectiveSource} emittable IT registry entries ` +
         `(floor ${floor}) — refusing to publish a truncated sitemap`,
     );
   }
@@ -1009,11 +1035,13 @@ console.log(
 // `layout` is the data-path difference between the two callers: the site keeps
 // the corpus under services/, this repo under content/.
 //
-// ── `registries` is passed UNFILTERED, and that is the decision, not an omission ──
+// ── `registries` remains raw; index withdrawals are applied by the engine ──
 //
 // The canonical-override shadowing applied above stops at the sitemaps. Both
-// override files say so in their own `_doc`, which is where the rule was
-// written down before any of this code existed:
+// override files say so in their own `_doc`, which is where that rule was
+// written down before any of this code existed. This does not conflict with
+// the separate article-index ledger: its noindex/follow withdrawal applies to
+// RSS as well, and the shared engine owns that filter for both callers.
 //
 //   content/swiss-article-canonical-overrides.json:
 //     "RSS (rss-svizzera*.xml) is NOT touched by this: RSS item lists are not
@@ -1022,8 +1050,8 @@ console.log(
 //   engine/shared/frontaliere-article-canonical-overrides.json:
 //     "RSS is NOT touched, same as the svizzera precedent."
 //
-// The rule the shadowing implements is narrow and mechanical: "a sitemap <loc>
-// whose page canonicalises elsewhere is a hard CI gate failure"
+// The canonical rule the shadowing implements is narrow and mechanical: "a
+// sitemap <loc> whose page canonicalises elsewhere is a hard CI gate failure"
 // (scripts/audit-sitemap-canonicals.mjs, scripts/validate-sitemap-pages.mjs).
 // sitemap-blog.xml and sitemap-news-candidates.xml are sitemaps and are gated;
 // an RSS <item> is not a <loc> and no gate reads it. The shadowed page also
@@ -1040,11 +1068,12 @@ console.log(
 // article, and the winner is in the same feeds alongside it — which is the
 // documented outcome, not a leak.
 //
-// If the policy is ever reversed, the filter does NOT belong on this line: the
-// `_doc` of both override files has to change first, and the exclusion belongs
-// inside engine/rssFeeds.mjs (one module, two callers — that module's header
-// forbids caller-side divergence by construction). generator/tests/frontaliere-sitemap-shadow.test.mjs
-// pins both halves of that.
+// If the canonical policy is ever reversed, that filter does NOT belong on the
+// registry line: the `_doc` of both override files has to change first. The
+// article-index filter is deliberately different and is passed as data to
+// engine/rssFeeds.mjs (one module, two callers — its header forbids caller-side
+// divergence by construction). generator/tests/frontaliere-sitemap-shadow.test.mjs
+// pins the canonical half of that boundary.
 //
 // Una chiamata PER SEZIONE (e' cio' che `buildAllRssFeeds` fa, sezione per
 // sezione) invece di una sola con un layout unico, perche' radice e layout non
@@ -1070,7 +1099,7 @@ try {
       rootDir: viaView ? familyRssView : ROOT,
       section,
       registry: SECTION_REGISTRIES[section.id] ?? [],
-      indexExclusions,
+      indexExclusions: articleIndexExclusions,
       layout: viaView ? engineViewRssLayout(published.slugFile) : sectionRssLayout(section.id),
       // Il corpus e' il produttore REALE dei feed: il sito chiama l'engine solo
       // dai test. Se questa riga manca, la riparazione della coda resta inerte
@@ -1108,14 +1137,9 @@ let rssItemTotal = 0;
 const familyRssRows = [];
 for (const section of rssSections) {
   const familyPolicy = floorPolicyOf(section.id) === 'family';
-  const published = PUBLISHED_BY_SECTION[section.id];
-  const excludedIds = published ? indexExcludedArticleIds(published) : new Set();
-  // `buildSectionFeeds` filters the ledger before rendering. If every parsed
-  // feed-eligible SEO entry is withdrawn, no RSS file is expected for a
-  // historical section; a zero here is an intentional noindex state, not a
-  // broken feed. `withdrawnArticleCount` is scoped to the parsed SEO entries,
-  // so an exclusion for an article that never reached the parser cannot mask a
-  // truncation. A partial or missing filter must still fail closed below.
+  // A historical section may legitimately have no feed when every parsed SEO
+  // entry is withdrawn by the index ledger. Unknown dates alone are not enough
+  // to bypass the empty-feed guard: they still indicate an incomplete source.
   const ledgerOnly = section.articleCount === 0 && section.withdrawnArticleCount > 0;
   // I feed di una sezione di famiglia sono una superficie di LETTURA (titoli,
   // estratti, link agli articoli): escono su Pages solo se la release di
@@ -1164,11 +1188,9 @@ for (const section of rssSections) {
   // che scrive il feed, quindi un chunk SEO mancante o troncato lo azzererebbe
   // insieme agli item e la sezione svuotata passerebbe per «nuova».
   if (familyPolicy && releaseLiveSections.has(section.id)) {
-    familyRssRows.push({
-      section: section.id,
-      source: countSourceArticles(ROOT, section.id, { excludedIds }),
-      emitted: sectionItems,
-    });
+    const source = countSourceArticles(ROOT, section.id);
+    const effectiveSource = Math.max(0, source - countIndexExcludedSourceArticles(section.id));
+    familyRssRows.push({ section: section.id, source: effectiveSource, emitted: sectionItems });
   }
 }
 // Per i feed vale solo la meta' «nessuna sezione svuotata» del verdetto di
@@ -1359,10 +1381,9 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
     for (const a of entries) {
       const slug = slugMap?.[a.id]?.it;
       if (!slug || isReservedPublishedSlug(slug)) continue;
-      // Same self-canonical gate sitemap-blog.xml enforces (buildSitemap in
-      // scripts/lib/build-sitemap.mjs): a canonical-shadowed article's own page
-      // points elsewhere, so listing its <loc> here is the same defect this PR
-      // fixes for the blog sitemap, just in the news-candidates feed instead.
+      // Same sitemap index gate sitemap-blog.xml enforces (buildSitemap in
+      // scripts/lib/build-sitemap.mjs): canonical-shadowed and article-index-
+      // withdrawn pages must not be listed as their own news candidate.
       if (shadowed.has(slug)) continue;
       const localeRows = publishedArticleLocales(a, paths, slugMap, shadowed, fallbackReasons);
       const italian = localeRows.find(({ locale }) => locale === 'it');

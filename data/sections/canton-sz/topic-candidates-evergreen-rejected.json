@@ -35,6 +35,18 @@
     "canton-sz::https://www.bote.ch/nachrichten/schweizundwelt/eu-paket-abstimmung-vor-den-wahlen-wohl-kaum-moeglich-art-1729379": {
       "section": "canton-sz",
       "ts": 1793447252604
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/gemeinde-hospental-genehmigt-budget-und-steuerfuss-art-1729739": {
+      "section": "canton-sz",
+      "ts": 1793475967846
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/schweizundwelt/ahv-finanzierung-fdp-und-svp-tischen-maerchen-auf-art-1729302": {
+      "section": "canton-sz",
+      "ts": 1793476202816
+    },
+    "canton-sz::https://www.marchanzeiger.ch/2026/10/30/herbstsession-im-kinderparlament": {
+      "section": "canton-sz",
+      "ts": 1793476214895
     }
   }
 }
