@@ -15264,7 +15264,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-secondo-pilastro-lpp-frontalieri-prelievo': {
     title: 'Il secondo pilastro LPP: quando si può prelevare e tassazione Italia e Svizzera',
-    description: 'I nuovi frontalieri hanno una franchigia IRPEF di 10.000 euro, mentre i vecchi frontalieri restano tassati solo in Svizzera (art. 9 dell\'Accordo del 2020). Ma come funziona il secondo pilastro LPP e come si può',
+    description: 'Secondo pilastro LPP per frontalieri: quando si può prelevare e come funziona la tassazione tra Italia e Svizzera.',
     keywords: 'frontalieri, ticino, svizzera, italia, secondo, pilastro, quando, prelevare',
     ogTitle: 'Il secondo pilastro LPP: quando si può prelevare e tassazione Italia e Svizzera',
     ogDescription: 'I nuovi frontalieri hanno una franchigia IRPEF di 10.000 euro, mentre i vecchi frontalieri restano tassati solo in Svizzera (art. 9 dell\'Accordo del 2020). Ma come funziona il secondo pilastro LPP e come si può',
@@ -17589,7 +17589,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-frontaliere-pasticciere-ticino-stipendio-requisiti': {
     title: 'Frontaliere pasticceria: stipendio, requisiti e riconoscimento',
-    description: 'Il Nuovo Accordo Frontalieri prevede la franchigia di €10.000 per i nuovi frontalieri. I vecchi frontalieri restano tassati solo in Svizzera (art. 9 dell\'Accordo del 2020).',
+    description: 'Frontaliere pasticciere in Ticino: stipendio, requisiti, riconoscimento del titolo e permesso G.',
     keywords: 'frontalieri, ticino, svizzera, italia, pasticceria, stipendio, requisiti, riconoscimento',
     ogTitle: 'Frontaliere pasticcere Ticino: stipendio medio, requisiti, riconoscimento titolo di studio e permesso G.',
     ogDescription: 'Il Nuovo Accordo Frontalieri prevede la franchigia di €10.000 per i nuovi frontalieri. I vecchi frontalieri restano tassati solo in Svizzera (art. 9 dell\'Accordo del 2020).',
