@@ -3185,7 +3185,7 @@
       "reason": "Gate YMYL della pubblicazione automatica: vive col generatore, che esiste solo qui.",
       "baseline": {
         "site": null,
-        "corpus": "79a23fa4cc2cdc0d",
+        "corpus": "89997b0be8140cce",
         "alignedAt": "2026-10-31"
       }
     },
@@ -3195,7 +3195,7 @@
       "reason": "Affermazioni fiscali smentite dalle fonti primarie, usate dal generatore e dal test sul corpus.",
       "baseline": {
         "site": null,
-        "corpus": "6e0fa36d15fd0e41",
+        "corpus": "00249ef07cef57db",
         "alignedAt": "2026-10-31"
       }
     },
