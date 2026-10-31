@@ -113796,6 +113796,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-lavori-barriere-antirumore-a8': {
+    title: 'Lavori su barriere antirumore in A8 e D08: guida alle chiusure',
+    description: 'Chiusure notturne su A8 e D08 dal 2 al 6 novembre Prime fasce: dalle 23:00 alle 5:00 Gallarate, Besnate e Busto Arsizio nei percorsi indicati Seconda',
+    keywords: 'frontalieri, ticino, svizzera, italia, lavori, barriere, antirumore, alle',
+    ogTitle: 'Lavori A8 D08: chiusure notturne 2-6 novembre',
+    ogDescription: 'Chiusure notturne su A8 e D08 dal 2 al 6 novembre Prime fasce: dalle 23:00 alle 5:00 Gallarate, Besnate e Busto Arsizio nei percorsi indicati Seconda fase',
+    canonicalPath: '/articoli-frontaliere/lavori-barriere-antirumore-a8/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lavori su barriere antirumore in A8 e D08: guida alle chiusure",
+      "description": "Chiusure notturne su A8 e D08 dal 2 al 6 novembre Prime fasce: dalle 23:00 alle 5:00 Gallarate, Besnate e Busto Arsizio nei percorsi indicati Seconda",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-lavori-barriere-antirumore-a8.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-31T08:27:34+00:00",
+      "dateModified": "2026-10-31T08:27:34+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/lavori-barriere-antirumore-a8/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

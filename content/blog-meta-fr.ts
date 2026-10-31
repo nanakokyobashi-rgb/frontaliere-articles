@@ -13641,6 +13641,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.cassa-pensione-snl-sev-attacca.title': 'Caisse de pension SNL : le SEV conteste l’interprétation des résultats',
     'blog.article.cassa-pensione-snl-sev-attacca.excerpt': 'UBS gérera le patrimoine de la Caisse de pension SNL ATIOZ a imposé une nouvelle procédure après un conflit d’intérêts Le taux de couverture était de 104,1% à la fin',
     'blog.article.cassa-pensione-snl-sev-attacca.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.lavori-barriere-antirumore-a8.title': 'Travaux sur des barrières antibruit sur l’A8 et la D08 : guide des fermetures',
+    'blog.article.lavori-barriere-antirumore-a8.excerpt': 'Fermetures nocturnes sur l’A8 et la D08 du 2 au 6 novembre Premiers créneaux : de 23:00 à 5:00 Gallarate, Besnate et Busto Arsizio sur les itinéraires indiqués Deuxième phase',
+    'blog.article.lavori-barriere-antirumore-a8.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaFr;

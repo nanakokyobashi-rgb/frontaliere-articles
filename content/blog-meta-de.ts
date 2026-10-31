@@ -13638,6 +13638,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.cassa-pensione-snl-sev-attacca.title': 'Pensionskasse SNL: SEV stellt die Interpretation der Ergebnisse infrage',
     'blog.article.cassa-pensione-snl-sev-attacca.excerpt': 'UBS wird das Vermögen der Pensionskasse SNL verwalten ATIOZ setzte nach einem Interessenkonflikt ein neues Verfahren durch Der Deckungsgrad lag Ende',
     'blog.article.cassa-pensione-snl-sev-attacca.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.lavori-barriere-antirumore-a8.title': 'Arbeiten an Lärmschutzwänden auf der A8 und der D08: Leitfaden zu den Sperrungen',
+    'blog.article.lavori-barriere-antirumore-a8.excerpt': 'Nächtliche Sperrungen auf der A8 und der D08 vom 2. (Gallarate, Besnate)',
+    'blog.article.lavori-barriere-antirumore-a8.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaDe;

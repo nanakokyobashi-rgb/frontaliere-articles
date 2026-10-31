@@ -45965,6 +45965,16 @@ const RAW_ARTICLES = [
  authorSlug: 'laura-bianchi',
  authorName: 'Laura Bianchi',
  },
+ {
+ id: 'lavori-barriere-antirumore-a8',
+ category: 'pratico',
+ date: '2026-10-31T08:27:33.922Z',
+ image: '/images/blog/article-lavori-barriere-antirumore-a8.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
