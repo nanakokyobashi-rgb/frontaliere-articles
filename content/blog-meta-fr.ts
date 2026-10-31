@@ -13647,6 +13647,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.bellinzona-imposte-piu-salate-2028.title': 'À Bellinzona, des impôts plus élevés dès 2028',
     'blog.article.bellinzona-imposte-piu-salate-2028.excerpt': 'La Municipalité de Bellinzona a annoncé des impôts plus élevés dès 2028, en concomitance avec le budget 2026, qui affiche un déficit de 10,6 millions.',
     'blog.article.bellinzona-imposte-piu-salate-2028.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.infermieri-osc-sindacati-stipendi.title': 'Infirmiers Osc et syndicats demandent le déblocage des salaires',
+    'blog.article.infermieri-osc-sindacati-stipendi.excerpt': 'La reclassification Osc est bloquée depuis des années 2019 : classe 4→5 pour les infirmiers, 5→6 pour les spécialités Augmentations annuelles de 5\'159 à 8\'941 francs Assemblée le 10 novembre',
+    'blog.article.infermieri-osc-sindacati-stipendi.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaFr;

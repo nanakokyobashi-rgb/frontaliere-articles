@@ -45986,6 +45986,16 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'infermieri-osc-sindacati-stipendi',
+ category: 'novita',
+ date: '2026-10-31T09:38:45.209Z',
+ image: '/images/blog/article-assemblea-ccti-rotta-economia.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

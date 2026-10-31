@@ -13646,6 +13646,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.bellinzona-imposte-piu-salate-2028.title': 'A Bellinzona imposte più salate dal 2028',
     'blog.article.bellinzona-imposte-piu-salate-2028.excerpt': 'Il Municipio di Bellinzona ha annunciato imposte più salate dal 2028, in concomitanza con il Preventivo 2026 che mostra un disavanzo di 10,6 milioni.',
     'blog.article.bellinzona-imposte-piu-salate-2028.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.infermieri-osc-sindacati-stipendi.title': 'Infermieri Osc e sindacati chiedono sblocco stipendi',
+    'blog.article.infermieri-osc-sindacati-stipendi.excerpt': 'La riclassificazione Osc è ferma da anni 2019: classe 4→5 per infermieri, 5→6 per specialità Aumenti annui da 5\'159 a 8\'941 franchi Assemblea il 10 novembre',
+    'blog.article.infermieri-osc-sindacati-stipendi.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaIt;
