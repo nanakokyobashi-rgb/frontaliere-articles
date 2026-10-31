@@ -172,4 +172,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'salario-minimo-basilea-aumento',
+ category: 'novita',
+ date: '2026-10-31T13:24:22.926Z',
+ image: '/images/blog/article-salario-minimo-basilea-aumento.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['BASILEA'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

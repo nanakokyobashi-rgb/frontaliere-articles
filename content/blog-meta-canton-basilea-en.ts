@@ -48,6 +48,9 @@ const blogMetaCantonBasileaEn: Record<string, string> = {
     'blog.article.bvb-rasatura-tram-episodio.title': 'BVB: mowing in trams, documented cleaning',
     'blog.article.bvb-rasatura-tram-episodio.excerpt': 'The Basler Verkehrsbetriebe (BVB) posted on Facebook a photo of two blue razors and hair on the floor of a tram; it is the first known episode of this type.',
     'blog.article.bvb-rasatura-tram-episodio.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.salario-minimo-basilea-aumento.title': 'Basel City minimum wage rises to CHF 22.50 gross per hour from 2027',
+    'blog.article.salario-minimo-basilea-aumento.excerpt': 'From January 1, 2027, the gross hourly minimum wage in Basel-Stadt will increase from CHF 22,20 to CHF 22,50, based on the Swiss mixed index.',
+    'blog.article.salario-minimo-basilea-aumento.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonBasileaEn;

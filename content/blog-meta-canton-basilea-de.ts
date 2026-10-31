@@ -48,6 +48,9 @@ const blogMetaCantonBasileaDe: Record<string, string> = {
     'blog.article.bvb-rasatura-tram-episodio.title': 'BVB: Mähen in Straßenbahnen, dokumentierte Reinigung',
     'blog.article.bvb-rasatura-tram-episodio.excerpt': 'Die Basler Verkehrsbetriebe (BVB) veröffentlichten auf Facebook ein Foto von zwei blauen Rasierern und Haaren auf dem Boden einer Straßenbahn; es ist der erste bekannte Vorfall dieser Art.',
     'blog.article.bvb-rasatura-tram-episodio.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.salario-minimo-basilea-aumento.title': 'Mindestlohn in Basel-Stadt steigt ab 2027 auf CHF 22,50 brutto pro Stunde',
+    'blog.article.salario-minimo-basilea-aumento.excerpt': 'Ab dem 1. Januar 2027 wird der Bruttomindestlohn pro Stunde in Basel-Stadt auf Grundlage des Schweizer Mischindexes von CHF 22,20 auf CHF 22,50 steigen.',
+    'blog.article.salario-minimo-basilea-aumento.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonBasileaDe;
