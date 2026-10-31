@@ -4,17 +4,9 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ur::https://www.ur.ch/_rte/information/139063": {
+    "canton-ur::https://www.ur.ch/_rte/information/138976": {
       "section": "canton-ur",
-      "ts": 1792761164464
-    },
-    "canton-ur::http://www.urnerwochenblatt.ch/artikel/auch-2026-ist-eine-nachjagd-auf-hirsche-noetig": {
-      "section": "canton-ur",
-      "ts": 1792761176898
-    },
-    "canton-ur::https://www.ur.ch/_rte/information/139069": {
-      "section": "canton-ur",
-      "ts": 1792761189135
+      "ts": 1793447976051
     }
   }
 }
