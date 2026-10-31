@@ -176,7 +176,6 @@ export function findTaxHealthParameterErrors(text) {
     const sentence = text.slice(start, end);
     for (const percent of sentence.matchAll(RATE_ON_PAY_RE)) {
       const values = [percent[1], percent[2]].filter(Boolean).map((value) => Number(value.replace(',', '.')));
-      if (/(rappresent|represent|dargestellt|repr[eé]sent)/i.test(sentence)) break;
       if (/(lordo|gross|brutto|brut)/i.test(percent[0]) || values.some((value) => value < 3 || value > 6)) {
         errors.push({ id: 'tassa-salute-parametri', source: 'DM Salute 14/11/2025 art. 1', start, end, sentence });
         break;

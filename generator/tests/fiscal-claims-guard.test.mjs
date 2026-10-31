@@ -72,7 +72,7 @@ test('quota SSN: base lorda o aliquota fuori forchetta, non un sondaggio o un au
   assert.equal(findTaxHealthParameterErrors('La tassa salute è pari a 0,8% del reddito annuo.').length, 1);
   assert.equal(findTaxHealthParameterErrors('La tassa salute vale il 4% del salario netto.').length, 0);
   assert.equal(findTaxHealthParameterErrors('L\'87,8% dei frontalieri giudica negativa la tassa salute.').length, 0);
-  assert.equal(findTaxHealthParameterErrors('Con uno stipendio di 50.000 € la tassa salute avrebbe rappresentato lo 0,4% dello stipendio lordo.').length, 0);
+  assert.equal(findTaxHealthParameterErrors('La tassa salute rappresenta il 10% del salario lordo.').length, 1);
 });
 
 test('quota SSN: gli intervalli si giudicano su entrambi gli estremi', () => {
