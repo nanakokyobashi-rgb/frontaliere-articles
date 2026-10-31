@@ -738,7 +738,7 @@ export function coerceRemoteConfigValue(value) {
   };
 
   try {
-    return stableJson(value);
+    return stableJson(value) ?? null;
   } catch {
     // A cyclic/non-serializable value cannot come from the JSON REST template;
     // treating it as absent keeps the loader fail-open without writing a
