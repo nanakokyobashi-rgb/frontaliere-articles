@@ -69,6 +69,9 @@ const blogMetaCantonTgEn: Record<string, string> = {
     'blog.article.turgovia-tariffa-cure-familiare-2026.title': 'Thurgau: new tariff set for care provided by family members',
     'blog.article.turgovia-tariffa-cure-familiare-2026.excerpt': 'The Government of the Canton of Thurgau sets the rate at CHF 52,60 per hour for family care services, with retroactive effect from 1 January 2026.',
     'blog.article.turgovia-tariffa-cure-familiare-2026.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.ufficio-imposte-frauenfeld-orari.title': 'Frauenfeld Tax Office changes hours from November 2, 2026',
+    'blog.article.ufficio-imposte-frauenfeld-orari.excerpt': 'From November 2, 2026, the Frauenfeld city tax office will be closed on Monday and Wednesday afternoons due to a high workload.',
+    'blog.article.ufficio-imposte-frauenfeld-orari.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonTgEn;

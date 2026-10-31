@@ -69,6 +69,9 @@ const blogMetaCantonTgFr: Record<string, string> = {
     'blog.article.turgovia-tariffa-cure-familiare-2026.title': 'Thurgovie : nouveau tarif fixé pour les soins prodigués par des proches',
     'blog.article.turgovia-tariffa-cure-familiare-2026.excerpt': 'Le Gouvernement cantonal de Thurgovie fixe le tarif à CHF 52,60 de l\'heure pour les prestations de soins prodigués par des proches, avec effet rétroactif au 1er janvier 2026.',
     'blog.article.turgovia-tariffa-cure-familiare-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.ufficio-imposte-frauenfeld-orari.title': 'Office des impôts : horaires modifiés à Frauenfeld dès 2/11',
+    'blog.article.ufficio-imposte-frauenfeld-orari.excerpt': 'À partir du 2 novembre 2026, l’Office des impôts de la ville de Frauenfeld sera fermé les lundis et mercredis après-midi en raison d’un volume de travail élevé.',
+    'blog.article.ufficio-imposte-frauenfeld-orari.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonTgFr;

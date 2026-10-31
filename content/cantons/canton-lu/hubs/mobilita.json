@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "mobilita",
-  "updatedAt": "2026-10-31T09:39:38.386Z",
-  "contentHash": "b67c877fb2986d38f0c11178f6548e22b51019c707900f683c9c4cd730995449",
+  "updatedAt": "2026-10-31T12:03:49.035Z",
+  "contentHash": "1d59f6ed55fd99796e528c9c1806a065a90f2c39ab4f6940c85608854c958441",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -126,6 +126,12 @@
           "date": "2026-10-31T09:19:08.597Z"
         },
         {
+          "title": "Tunnel Sonnenberg chiuso per ispezione strutturale",
+          "url": "/articoli-lucerna/tunnel-sonnenberg-chiusura-notte/",
+          "excerpt": "Chiusura completa del tunnel Sonnenberg in entrambe le direzioni dalla notte tra il 4 e il 5 novembre 2026, dalle 22.00 alle 05.00.",
+          "date": "2026-10-31T11:51:39.474Z"
+        },
+        {
           "title": "Tifosi Lucerna a Lugano: strade chiuse e traffico",
           "url": "/articoli-frontaliere/tifosi-lucerna-lugano-traffico/",
           "excerpt": "Partita alle 18 allo stadio di Cornaredo",
@@ -167,7 +173,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-31T09:39:38.386Z"
+      "updatedAt": "2026-10-31T12:03:49.035Z"
     },
     "en": {
       "canton": "LU",
@@ -276,6 +282,12 @@
           "date": "2026-10-31T09:19:08.597Z"
         },
         {
+          "title": "Sonnenberg Tunnel closed for structural inspection",
+          "url": "/en/lucerne-articles/sonnenberg-tunnel-night-closure/",
+          "excerpt": "Complete closure of the Sonnenberg tunnel in both directions during the night of November 4–5, 2026, from 22.00 to 05.00.",
+          "date": "2026-10-31T11:51:39.474Z"
+        },
+        {
           "title": "Lucerne fans in Lugano: roads closed and traffic",
           "url": "/en/cross-border-articles/lucerne-fans-in-lugano-roads-closed-and-traffic/",
           "date": "2026-10-08T11:31:48.408Z"
@@ -315,7 +327,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-31T09:39:38.386Z"
+      "updatedAt": "2026-10-31T12:03:49.035Z"
     },
     "de": {
       "canton": "LU",
@@ -424,6 +436,12 @@
           "date": "2026-10-31T09:19:08.597Z"
         },
         {
+          "title": "Tunnel Sonnenberg wegen struktureller Inspektion gesperrt",
+          "url": "/de/luzern-artikel/sonnenberg-tunnel-nachtschliessung/",
+          "excerpt": "Vollständige Sperrung des Tunnels Sonnenberg in beiden Richtungen ab der Nacht vom 4.",
+          "date": "2026-10-31T11:51:39.474Z"
+        },
+        {
           "title": "Luzern-Fans in Lugano: gesperrte Straßen und Verkehr",
           "url": "/de/grenzgaenger-artikel/luzern-fans-in-lugano-gesperrte-stra-en-und-verkehr/",
           "date": "2026-10-08T11:31:48.408Z"
@@ -463,7 +481,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-31T09:39:38.386Z"
+      "updatedAt": "2026-10-31T12:03:49.035Z"
     },
     "fr": {
       "canton": "LU",
@@ -572,6 +590,12 @@
           "date": "2026-10-31T09:19:08.597Z"
         },
         {
+          "title": "Tunnel du Sonnenberg fermé pour inspection structurelle",
+          "url": "/fr/articles-lucerne/tunnel-sonnenberg-fermeture-nuit/",
+          "excerpt": "Fermeture complète du tunnel du Sonnenberg dans les deux directions dans la nuit du 4 au 5 novembre 2026, de 22.00 à 05.00.",
+          "date": "2026-10-31T11:51:39.474Z"
+        },
+        {
           "title": "Supporters de Lucerne à Lugano : routes fermées et trafic",
           "url": "/fr/articles-frontalier/supporters-de-lucerne-a-lugano-routes-fermees-et-trafic/",
           "excerpt": "Match à 18 h au stade de Cornaredo",
@@ -613,7 +637,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-31T09:39:38.386Z"
+      "updatedAt": "2026-10-31T12:03:49.035Z"
     }
   }
 }

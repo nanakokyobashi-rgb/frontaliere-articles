@@ -31,7 +31,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const SLUG = 'smart-working-frontalieri-2026';
 const LOCALES = ['it', 'en', 'de', 'fr'];
-const REFRESHED_ON = '2026-09-25';
+const REFRESHED_ON = '2026-09-27';
 
 const BSV_URL = {
   it: /bsv\.admin\.ch\/it\/telelavoro/,

@@ -48,6 +48,9 @@ const blogMetaCantonBasileaIt: Record<string, string> = {
     'blog.article.bvb-rasatura-tram-episodio.title': 'BVB: rasatura in tram, intervento di pulizia documentato',
     'blog.article.bvb-rasatura-tram-episodio.excerpt': 'La Basler Verkehrsbetriebe (BVB) ha pubblicato su Facebook una foto di due rasoi blu e capelli sul pavimento di un tram; è il primo episodio di questo tipo noto.',
     'blog.article.bvb-rasatura-tram-episodio.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.salario-minimo-basilea-aumento.title': 'Salario minimo Basilea Città sale a CHF 22,50 lordi/ora dal 2027',
+    'blog.article.salario-minimo-basilea-aumento.excerpt': 'Dal 1° gennaio 2027, il minimo lordo orario a Basilea Città passerà da CHF 22,20 a CHF 22,50, in base all\'indice misto svizzero.',
+    'blog.article.salario-minimo-basilea-aumento.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonBasileaIt;

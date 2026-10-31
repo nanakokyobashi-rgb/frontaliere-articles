@@ -15,7 +15,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const SLUG = 'tassazione-individuale-lavoro-ticino';
 const LOCALES = ['it', 'en', 'de', 'fr'];
-const REFRESHED_ON = '2026-09-24';
+const REFRESHED_ON = '2026-10-08';
 const UNSUPPORTED_FAQ_CLAIMS = Object.freeze({
   it: ['crescita +8% rispetto al 2024', "3\\'200 nuove offerte", 'può ridurre il tempo medio di ricerca da 3 a 1,5 mesi'],
   en: ['growth +8% compared to 2024', "3\\'200 new offers", 'can reduce the average search time from 3 to 1.5 months'],

@@ -51,6 +51,8 @@ on:
       - 'generator/scripts/lib/rewire-fetch.mjs'
       - 'generator/scripts/lib/border-wait-ranking.mjs'
       - 'generator/scripts/lib/border-wait-ranking-content.mjs'
+      - 'scripts/ci/stamp-content-updated-at.mjs'
+      - 'scripts/lib/content-updated-at.mjs'
   workflow_dispatch:
     inputs:
       dry_run:
@@ -132,6 +134,10 @@ jobs:
         env:
           DRY_RUN: ${{ steps.mode.outputs.dry == 'true' && '1' || '0' }}
         run: npx -y tsx@4.23.15 generator/scripts/generate-border-wait-ranking-article.mjs
+
+      - name: Stamp updatedAt for changed article bodies
+        if: steps.mode.outputs.dry != 'true'
+        run: node scripts/ci/stamp-content-updated-at.mjs
 
       # ── La guardia sul percorso di scrittura (issue #275) ──────────────────
       #

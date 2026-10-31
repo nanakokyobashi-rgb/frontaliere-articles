@@ -168,6 +168,26 @@
       }
     },
     {
+      "path": "scripts/ci/backfill-content-updated-at.mjs",
+      "mode": "corpus-only",
+      "reason": "Backfill storico del campo `updatedAt` nei registry del corpus: legge la storia dei body e riscrive le sorgenti TypeScript dopo la pubblicazione. Il sito consuma la superficie JSON e non possiede il corpus, il suo backfill o il relativo workflow.",
+      "baseline": {
+        "site": null,
+        "corpus": "168a58a5c6d116a3",
+        "alignedAt": "2026-10-31"
+      }
+    },
+    {
+      "path": "scripts/ci/stamp-content-updated-at.mjs",
+      "mode": "corpus-only",
+      "reason": "Stamp fail-closed dei registry quando i writer del corpus modificano body esistenti: coordina lo stato Git del checkout e le sorgenti registry prima del commit. Il sito non esegue i writer né conserva il corpus sorgente.",
+      "baseline": {
+        "site": null,
+        "corpus": "a4a97a42581f09fd",
+        "alignedAt": "2026-10-31"
+      }
+    },
+    {
       "path": "scripts/ci/article-publication-observer.mjs",
       "mode": "corpus-only",
       "reason": "Osservatore e repairer bounded della pubblicazione articoli: legge la storia dei body nel corpus, confronta le revisioni con le pagine servite dai due publisher, conserva nel body di una issue stabile l elenco durevole delle pagine degradate e dei blocker di preparazione, e dispatcha il publisher solo dopo una prova live + immagine disponibile. Vive solo qui perche' la sorgente delle revisioni e il coordinamento dei publisher appartengono al corpus; il sito consuma la superficie pubblicata e non deve osservare la propria copia del corpus.",
@@ -776,7 +796,7 @@
       "reason": "Fa girare su `main` il sottoinsieme MISURATO dei gate che leggono `content/**`, e su offender apre UNA issue deduplicata sul titolo invece di rendere rossa una run. Non ha gemello sul sito e non puo' averlo: il difetto che chiude e' la scrittura diretta su `main` dei produttori di QUESTO repo (`generate-article.yml` e i suoi fratelli fanno `git push HEAD:main` — 88 articoli nelle ultime 24h), mentre sul sito il contenuto non e' versionato e nessun bot scrive su `main`. Anche la lista `CONTENT_GATES` e' topologia locale: sono file sotto `generator/tests/`, cartella che sul sito non esiste. La guardia ESM/main confronta il realpath per mantenere attiva la CLI anche via symlink; `generator/tests/content-gates-main-entrypoint.test.mjs` ne verifica offline l'import inerte e l'avvio. Non e' `corpus-only-pending` — non c'e' niente da portare di la'.",
       "baseline": {
         "site": null,
-        "corpus": "23f73267fded62af",
+        "corpus": "c9d7f5f6438cffd4",
         "alignedAt": "2026-09-12"
       }
     },
@@ -966,6 +986,16 @@
         "site": "339d945b935b757d",
         "corpus": "339d945b935b757d",
         "alignedAt": "2026-09-26"
+      }
+    },
+    {
+      "path": "scripts/lib/content-updated-at.mjs",
+      "mode": "corpus-only",
+      "reason": "Sorgente unica per derivare e applicare `updatedAt` dai commit dei body ai registry TypeScript del corpus. Il sito riceve JSON pubblicato via HTTP e non deve importare la logica che legge e modifica le sorgenti content/.",
+      "baseline": {
+        "site": null,
+        "corpus": "2e1184c00703685b",
+        "alignedAt": "2026-10-31"
       }
     },
     {
@@ -2857,9 +2887,9 @@
       "sitePath": "scripts/lib/article-factuality-gates.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "954e1ff64e9166d7",
-        "corpus": "954e1ff64e9166d7",
-        "alignedAt": "2026-10-26"
+        "site": "c735a051b563af0c",
+        "corpus": "c735a051b563af0c",
+        "alignedAt": "2026-10-31"
       }
     },
     {
@@ -4126,7 +4156,7 @@
       "path": "host/constants.ts",
       "sitePath": "build-plugins/constants.ts",
       "mode": "adapted",
-      "reason": "Costanti del sito lette dall'engine via SiteShellContract, estratte per chiusura: adapted per costruzione, non byte-identiche al sorgente completo. scalarFingerprint confronta i 22 scalari authoritative, mentre i test runtime verificano i comportamenti del contratto. Il digest cddf19de… preserva i payload gzip del replay e trasporta anche i riferimenti Ads/Partnerize content-addressed e la cattura strutturale conservativa inline prima di React e producer differiti con ripristino solo a contesto/DOM puliti; estende il riconoscimento ai crawler Google-InspectionTool e GoogleOther, rimuove anche userinfo e credenziali dalle rappresentazioni URL della telemetria e incorpora il gate GA4 del sito, il budget SERP a 150 caratteri, la canonicalizzazione Organization.sameAs, l'aggiunta del profilo Facebook canonico, il riferimento content-addressed a gtag-init e le due regole contestuali trasportate per Chiasso e concorsi pubblici; la specializzazione editoriale resta in additionalType e il runtime Firebase conserva il match sulla chiave esatta, senza segreti nei fingerprint.",
+      "reason": "Costanti del sito lette dall'engine via SiteShellContract, estratte per chiusura: adapted per costruzione, non byte-identiche al sorgente completo. scalarFingerprint confronta i 22 scalari authoritative, mentre i test runtime verificano i comportamenti del contratto. Il digest aa8af3a6… preserva i payload gzip del replay e trasporta anche i riferimenti Ads/Partnerize content-addressed e la cattura strutturale conservativa inline prima di React e producer differiti con ripristino solo a contesto/DOM puliti; estende il riconoscimento ai crawler Google-InspectionTool e GoogleOther, rimuove anche userinfo e credenziali dalle rappresentazioni URL della telemetria e incorpora il gate GA4 del sito, il budget SERP a 150 caratteri, la canonicalizzazione Organization.sameAs, l'aggiunta del profilo Facebook canonico, il riferimento content-addressed a gtag-init e le due regole contestuali trasportate per Chiasso e concorsi pubblici; la specializzazione editoriale resta in additionalType e il runtime Firebase conserva il match sulla chiave esatta, senza segreti nei fingerprint.",
       "baseline": {
         "site": "c9f803f4645a9ab0",
         "corpus": "598612b34529c6c5",
@@ -4136,7 +4166,7 @@
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
         "corpusPath": "host/shell-contract-fingerprint.json",
         "scalarFields": 22,
-        "sha256": "cddf19de2a6f800c7c78bf18a9477caa0cb9a6df1230253730eabcf0af25056b"
+        "sha256": "aa8af3a66d51ca2fbe172f10d29eaa4d47502eb4c0587cd9d8741cb0120958de"
       }
     },
     {
@@ -4175,9 +4205,9 @@
       "sitePath": "services/seo/organizationLd.ts",
       "mode": "identical",
       "baseline": {
-        "site": "33f33cecc52a42da",
-        "corpus": "33f33cecc52a42da",
-        "alignedAt": "2026-10-25"
+        "site": "5249a1233adfaa84",
+        "corpus": "5249a1233adfaa84",
+        "alignedAt": "2026-10-31"
       }
     },
     {
@@ -4353,9 +4383,9 @@
       "mode": "identical",
       "reason": "Impronta SHA-256 dei 22 campi scalari di SiteShellContract, prodotta e verificata da `host/tests/shell-contract-fingerprint.test.mjs`. Il gemello del sito vive in `tests/articles-shell-contract-fingerprint.json` con lo stesso contenuto; i due artefatti restano `identical` e la baseline ne sorveglia il drift. E' il gate runtime che impedisce di spedire l'engine senza la sua meta' `host/`.",
       "baseline": {
-        "site": "ee464dc6ba4efb40",
-        "corpus": "ee464dc6ba4efb40",
-        "alignedAt": "2026-10-30"
+        "site": "18e683c9406ca2e8",
+        "corpus": "18e683c9406ca2e8",
+        "alignedAt": "2026-10-31"
       }
     },
     {
@@ -6785,9 +6815,9 @@
       "mode": "identical",
       "reason": "Derived Ads/Partnerize producer and canonical-helper SHA fingerprints bind the transported byte snapshots to the source. Source tests regenerate the projection, host tests verify snapshot hashes and the complete SiteShellContract before publishing.",
       "baseline": {
-        "site": "2d6b828378b8ee98",
-        "corpus": "2d6b828378b8ee98",
-        "alignedAt": "2026-10-30"
+        "site": "2a96d3934487a51d",
+        "corpus": "2a96d3934487a51d",
+        "alignedAt": "2026-10-31"
       }
     },
     {

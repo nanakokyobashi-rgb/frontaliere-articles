@@ -12081,10 +12081,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.ticinonews.ch/economia/lastminutecom-il-fatturato-scende-ma-gli-utili-aumentano-445572": {
-      "section": "frontaliere",
-      "ts": 1793274584530
-    },
     "frontaliere::https://www.tio.ch/ticino/politica/1959806/conti-ancora-in-rosso-e-il-municipio-propone-di-aumentare-le-imposte": {
       "section": "frontaliere",
       "ts": 1793294426271
@@ -12144,6 +12140,18 @@
     "frontaliere::https://www.varesenoi.it/2026/10/30/leggi-notizia/argomenti/economia-13/articolo/imprese-varesine-oltre-confine-alla-ricerca-di-nuovi-partner-in-svizzera.html": {
       "section": "frontaliere",
       "ts": 1793443088162
+    },
+    "frontaliere::https://cassa-disoccupazione.unia.ch": {
+      "section": "frontaliere",
+      "ts": 1793451690870
+    },
+    "frontaliere::http://www.cd-ocst.ch": {
+      "section": "frontaliere",
+      "ts": 1793451880991
+    },
+    "frontaliere::https://www.laregione.ch/cantone/ticino/1959681/la-politica-dell-alloggio-sia-orientata-ai-risultati": {
+      "section": "frontaliere",
+      "ts": 1793451905471
     }
   }
 }

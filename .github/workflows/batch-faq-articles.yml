@@ -66,6 +66,8 @@ on:
       - 'generator/scripts/lib/fetch-with-ref-timeout.mjs'
       - 'generator/scripts/fix-faq-locales.mjs'
       - 'generator/scripts/load-rc-env.mjs'
+      - 'scripts/ci/stamp-content-updated-at.mjs'
+      - 'scripts/lib/content-updated-at.mjs'
       - 'scripts/ci/article-source-runtime/**'
       - 'scripts/ci/check-article-source-runtime.mjs'
       - 'scripts/lib/npm-ci-retry.sh'
@@ -258,6 +260,10 @@ jobs:
           FREE_TRANSLATE_CODEX_MAX_MS: '1200000'
         run: node generator/scripts/fix-faq-locales.mjs --limit 500
 
+      - name: Stamp updatedAt for changed article bodies
+        if: steps.mode.outputs.dry != 'true'
+        run: node scripts/ci/stamp-content-updated-at.mjs
+
       - name: Cleanup Codex auth broker
         if: always()
         continue-on-error: true
@@ -354,6 +360,7 @@ jobs:
           fi
 
           git add content/blog-body/
+          git add content/blog-articles-data.ts content/swiss-articles-data.ts
           git add -f data/batch-faq-progress.json 2>/dev/null || true
           if [ -e data/faq-locale-rejections.json ]; then
             git add -f data/faq-locale-rejections.json

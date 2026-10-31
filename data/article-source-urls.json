@@ -1,14 +1,4 @@
 {
-  "https://www.varesenews.it/2026/09/pellicini-fdi-indennita-di-frontiera-misura-storica-25-miliardi-nei-prossimi-anni/2684206": {
-    "articleId": "pellicini-fdi-indennita-frontiera",
-    "ts": "2026-09-21T00:21:18.135Z",
-    "keyForm": 2
-  },
-  "https://www.laregione.ch/cantone/ticino/1951236/per-garantire-trasparenza-e-imparzialita-nelle-assunzioni-occorrono-regole-chiare": {
-    "articleId": "regole-chiare-assunzioni-ticino",
-    "ts": "2026-09-21T00:30:20.033Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/ticino/politica/1951514/premi-di-cassa-malati-il-plr-intervenire-sui-costi-della-sanita": {
     "articleId": "plr-strategia-costi-sanitari-ticino",
     "ts": "2026-09-21T10:18:58.379Z",
@@ -2497,6 +2487,16 @@
   "https://www.rsi.ch/s/4199961": {
     "articleId": "voto-cinque-temi-28-febbraio",
     "ts": "2026-10-31T11:19:43.099Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/cantone/mendrisiotto/1959823/castel-san-pietro-preventivo-2027-nelle-cifre-rosse": {
+    "articleId": "castel-san-pietro-preventivo-2027",
+    "ts": "2026-10-31T12:35:28.228Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/attualita/incidente-in-provincia-di-como-lauto-si-ribalta-e-resta-sul-fianco-in-mezzo-alla-strada-un-ferito": {
+    "articleId": "montano-lucino-via-roma",
+    "ts": "2026-10-31T13:16:15.101Z",
     "keyForm": 2
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "servizi",
-  "updatedAt": "2026-10-31T11:03:15.690Z",
-  "contentHash": "aee865528a6f89a63746aa1267eaef35be4ed5c616543adacadc8ef6eb183804",
+  "updatedAt": "2026-10-31T13:29:32.715Z",
+  "contentHash": "e83274f9dcb48537e116c66f82a6a64112d66d04ea03e6fde4d56031424a96a8",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -173,6 +173,18 @@
           "date": "2026-10-12T00:12:21.272Z"
         },
         {
+          "title": "Ufficio imposte Frauenfeld modifica orari dal 2 novembre 2026",
+          "url": "/articoli-turgovia/ufficio-imposte-frauenfeld-orari/",
+          "excerpt": "Dal 2 novembre 2026, l'Ufficio imposte della città di Frauenfeld chiuderà lunedì e mercoledì pomeriggio per elevato volume di lavoro.",
+          "date": "2026-10-31T13:22:10.345Z"
+        },
+        {
+          "title": "Turgovia: fissata la nuova tariffa per le cure dei familiari",
+          "url": "/articoli-turgovia/turgovia-tariffa-cure-familiare-2026/",
+          "excerpt": "Il Governo cantonale del Turgovia fissa la tariffa a CHF 52,60 all'ora per le prestazioni di cura familiare con decorrenza retroattiva dal 1° gennaio 2026.",
+          "date": "2026-10-31T11:54:22.387Z"
+        },
+        {
           "title": "Domanda edilizia a Frauenfeld: Juchstrasse 22-22b",
           "url": "/articoli-turgovia/baugesuch-juchstrasse-frauenfeld/",
           "excerpt": "Domanda edilizia per Juchstrasse 22, 22a e 22b: dal 7 al 26 ottobre 2026 gli atti sono consultabili al Bankplatz 3.",
@@ -183,18 +195,6 @@
           "url": "/articoli-svizzera/permesso-dimora-b-canton-turgovia-requisiti-rinnovo/",
           "excerpt": "Scopri i requisiti e la procedura per il rinnovo del permesso di dimora B nel Cantone di Turgovia.",
           "date": "2026-09-07T03:40:46.786Z"
-        },
-        {
-          "title": "Permesso L breve durata Turgovia: proroga e rinnovo",
-          "url": "/articoli-svizzera/permesso-l-breve-durata-turgovia/",
-          "excerpt": "Il permesso L consente di lavorare in Svizzera per periodi fino a un anno. Scopri come funziona in Turgovia, le condizioni di proroga e il passaggio al permesso B.",
-          "date": "2026-09-07T03:58:39.449Z"
-        },
-        {
-          "title": "Premi cassa malati Canton Turgovia: riduzione",
-          "url": "/articoli-svizzera/premi-cassa-malati-canton-turgovia-riduzione/",
-          "excerpt": "Come ottenere la riduzione sui premi della LAMal nel Canton Turgovia: franchigie disponibili, requisiti per il sussidio e procedure per richiedere il beneficio cantonale.",
-          "date": "2026-09-03T02:24:34.012Z"
         }
       ],
       "latestCantonArticles": [],
@@ -224,7 +224,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-31T11:03:15.690Z"
+      "updatedAt": "2026-10-31T13:29:32.715Z"
     },
     "en": {
       "canton": "TG",
@@ -370,6 +370,18 @@
           "date": "2026-10-12T00:12:21.272Z"
         },
         {
+          "title": "Frauenfeld Tax Office changes hours from November 2, 2026",
+          "url": "/en/thurgau-articles/frauenfeld-tax-office-hours/",
+          "excerpt": "From November 2, 2026, the Frauenfeld city tax office will be closed on Monday and Wednesday afternoons due to a high workload.",
+          "date": "2026-10-31T13:22:10.345Z"
+        },
+        {
+          "title": "Thurgau: new tariff set for care provided by family members",
+          "url": "/en/thurgau-articles/thurgau-family-care-tariff-2026/",
+          "excerpt": "The Government of the Canton of Thurgau sets the rate at CHF 52,60 per hour for family care services, with retroactive effect from 1 January 2026.",
+          "date": "2026-10-31T11:54:22.387Z"
+        },
+        {
           "title": "Building application in Frauenfeld: Juchstrasse 22-22b",
           "url": "/en/thurgau-articles/frauenfeld-building-application-juchstrasse/",
           "excerpt": "Building application for Juchstrasse 22, 22a and 22b: from October 7 to 26, 2026, the documents can be consulted at Bankplatz 3.",
@@ -380,18 +392,6 @@
           "url": "/en/swiss-articles/residence-permit-b-canton-thurgau-requirements-renewal/",
           "excerpt": "Learn about the requirements and procedure for renewing a B residence permit in the Canton of Thurgau.",
           "date": "2026-09-07T03:40:46.786Z"
-        },
-        {
-          "title": "Permit L short duration Thurgau: extension and renewal",
-          "url": "/en/swiss-articles/permit-l-short-term-thurgau/",
-          "excerpt": "The L permit allows you to work in Switzerland for periods of up to one year. Find out how it works in Thurgau, the extension conditions and the switch to the B permit.",
-          "date": "2026-09-07T03:58:39.449Z"
-        },
-        {
-          "title": "Health insurance premiums Canton Thurgau: reduction",
-          "url": "/en/swiss-articles/health-insurance-premiums-canton-aargau-reduction/",
-          "excerpt": "How to get the LAMal premium reduction in the canton of Thurgau: available deductibles, subsidy requirements and procedures to apply for the cantonal benefit.",
-          "date": "2026-09-03T02:24:34.012Z"
         }
       ],
       "latestCantonArticles": [],
@@ -417,7 +417,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-31T11:03:15.690Z"
+      "updatedAt": "2026-10-31T13:29:32.715Z"
     },
     "de": {
       "canton": "TG",
@@ -563,6 +563,18 @@
           "date": "2026-10-12T00:12:21.272Z"
         },
         {
+          "title": "Steueramt Frauenfeld ändert die Öffnungszeiten ab dem 2. November 2026",
+          "url": "/de/thurgau-artikel/steueramt-frauenfeld-zeiten/",
+          "excerpt": "Ab dem 2. November 2026 schließt das Steueramt der Stadt Frauenfeld am Montagnachmittag und am Mittwochnachmittag wegen des hohen Arbeitsvolumens.",
+          "date": "2026-10-31T13:22:10.345Z"
+        },
+        {
+          "title": "Thurgau: Neuer Tarif für die Angehörigenpflege festgelegt",
+          "url": "/de/thurgau-artikel/turgau-tarif-pflegende-angehoerige-2026/",
+          "excerpt": "Die Thurgauer Kantonsregierung setzt den Tarif für Leistungen der Angehörigenpflege mit rückwirkender Geltung ab dem 1.",
+          "date": "2026-10-31T11:54:22.387Z"
+        },
+        {
           "title": "Baugesuch in Frauenfeld: Juchstrasse 22-22b",
           "url": "/de/thurgau-artikel/baugesuch-frauenfeld-juchstrasse/",
           "excerpt": "Baugesuch für Juchstrasse 22, 22a und 22b: Vom 7. bis 26. Oktober 2026 können die Unterlagen am Bankplatz 3 eingesehen werden.",
@@ -573,18 +585,6 @@
           "url": "/de/schweiz-artikel/aufenthaltsbewilligung-b-kanton-thurgau-voraussetzungen-verlaengerung/",
           "excerpt": "Erfahren Sie mehr über die Voraussetzungen und das Verfahren zur Verlängerung der Aufenthaltsbewilligung B im Kanton Thurgau.",
           "date": "2026-09-07T03:40:46.786Z"
-        },
-        {
-          "title": "Kurzzeitbewilligung Thurgau: Verlängerung und Erneuerung",
-          "url": "/de/schweiz-artikel/arbeitsgenehmigung-l-kurzfristig-thurgau/",
-          "excerpt": "Mit der Bewilligung L können Sie bis zu einem Jahr in der Schweiz arbeiten. Erfahren Sie, wie es im Thurgau funktioniert, die Verlängerungsbedingungen und den Übergang zur B-Bewilligung.",
-          "date": "2026-09-07T03:58:39.449Z"
-        },
-        {
-          "title": "Krankenkassenprämien Kanton Thurgau: Reduktion",
-          "url": "/de/schweiz-artikel/krankenkassenpramien-kanton-aargau-reduktion/",
-          "excerpt": "So erhalten Sie die KVG-Prämienreduktion im Kanton Thurgau: Verfügbare Franchisen, Beitragsvoraussetzungen und Verfahren zur Beantragung der kantonalen Leistung.",
-          "date": "2026-09-03T02:24:34.012Z"
         }
       ],
       "latestCantonArticles": [],
@@ -610,7 +610,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-31T11:03:15.690Z"
+      "updatedAt": "2026-10-31T13:29:32.715Z"
     },
     "fr": {
       "canton": "TG",
@@ -756,6 +756,18 @@
           "date": "2026-10-12T00:12:21.272Z"
         },
         {
+          "title": "Office des impôts : horaires modifiés à Frauenfeld dès 2/11",
+          "url": "/fr/articles-thurgovie/bureau-impots-frauenfeld-horaires/",
+          "excerpt": "À partir du 2 novembre 2026, l’Office des impôts de la ville de Frauenfeld sera fermé les lundis et mercredis après-midi en raison d’un volume de travail élevé.",
+          "date": "2026-10-31T13:22:10.345Z"
+        },
+        {
+          "title": "Thurgovie : nouveau tarif fixé pour les soins prodigués par des proches",
+          "url": "/fr/articles-thurgovie/thurgovie-tarif-soins-proches-aidants-2026/",
+          "excerpt": "Le Gouvernement cantonal de Thurgovie fixe le tarif à CHF 52,60 de l'heure pour les prestations de soins prodigués par des proches, avec effet rétroactif au 1er janvier 2026.",
+          "date": "2026-10-31T11:54:22.387Z"
+        },
+        {
           "title": "Demande de permis de construire à Frauenfeld : Juchstrasse 22-22b",
           "url": "/fr/articles-thurgovie/demande-construction-frauenfeld-juchstrasse/",
           "excerpt": "Demande de permis de construire pour Juchstrasse 22, 22a et 22b : du 7 au 26 octobre 2026, les documents peuvent être consultés au Bankplatz 3.",
@@ -766,18 +778,6 @@
           "url": "/fr/articles-suisse/permis-de-sejour-b-canton-de-thurgovie-exigences-renouvellement/",
           "excerpt": "Découvrez les conditions et la procédure de renouvellement du permis de séjour B dans le canton de Thurgovie.",
           "date": "2026-09-07T03:40:46.786Z"
-        },
-        {
-          "title": "Permis L courte durée Thurgovie : prorogation et renouvellement",
-          "url": "/fr/articles-suisse/permis-l-courte-duree-thurgovie/",
-          "excerpt": "Le permis L permet de travailler en Suisse pour des périodes allant jusqu'à un an. Découvrez comment cela fonctionne en Thurgovie, les conditions de prolongation et le passage au permis B.",
-          "date": "2026-09-07T03:58:39.449Z"
-        },
-        {
-          "title": "Primes caisse-maladie Canton Thurgovie : réduction",
-          "url": "/fr/articles-suisse/primes-assurance-maladie-canton-argovie-reduction/",
-          "excerpt": "Comment obtenir la réduction sur les primes de LAMal dans le canton de Thurgovie : franchises disponibles, conditions de subvention et procédures pour demander l'avantage cantonal.",
-          "date": "2026-09-03T02:24:34.012Z"
         }
       ],
       "latestCantonArticles": [],
@@ -799,7 +799,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-31T11:03:15.690Z"
+      "updatedAt": "2026-10-31T13:29:32.715Z"
     }
   }
 }

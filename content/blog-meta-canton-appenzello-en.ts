@@ -69,6 +69,9 @@ const blogMetaCantonAppenzelloEn: Record<string, string> = {
     'blog.article.costi-sanita-meno-entrate.title': 'Healthcare costs and lower revenues weigh on the budget',
     'blog.article.costi-sanita-meno-entrate.excerpt': 'The 2027 budget projects a total loss of 12,4 million CHF due to rising healthcare costs and lower tax revenues.',
     'blog.article.costi-sanita-meno-entrate.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.45-residenti-richiesta-rumore.title': '45 residents call for measures against noise on Langgasse',
+    'blog.article.45-residenti-richiesta-rumore.excerpt': '45 residents filed a request with the municipality on Wednesday, October 28, for the urgent review of Tempo 30 and traffic-calming measures.',
+    'blog.article.45-residenti-richiesta-rumore.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonAppenzelloEn;

@@ -18,6 +18,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'sissach-parco-giochi-fasce-quiete': { it: 'sissach-parco-giochi-fasce-quiete', en: 'sissach-playground-quiet-times', de: 'sissach-spielplatz-ruhezeiten', fr: 'sissach-aire-jeux-calme' },
  'basilea-stop-sconto-elettriche': { it: 'basilea-stop-sconto-elettriche', en: 'basel-electric-car-discount', de: 'basel-elektroauto-steuerrabatt', fr: 'bale-rabais-voitures-electriques' },
  'bvb-rasatura-tram-episodio': { it: 'bvb-rasatura-tram-episodio', en: 'bvb-tram-shaving-incident', de: 'bvb-tram-rasurungsfall', fr: 'bvb-incident-rasage-tram' },
+ 'salario-minimo-basilea-aumento': { it: 'salario-minimo-basilea-aumento', en: 'basel-minimum-wage-increase', de: 'basel-mindestlohn-erhoehung', fr: 'augmentation-salaire-minimum-basle' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

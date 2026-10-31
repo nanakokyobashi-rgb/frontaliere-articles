@@ -860,6 +860,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-45-residenti-richiesta-rumore': {
+    title: '45 residenti chiedono misure contro il rumore sulla Langgasse',
+    description: '45 residenti hanno chiesto al comune l\'esame urgente di Tempo 30 e misure di moderazione del traffico sulla Langgasse, tra rotonda e piazza del paese.',
+    keywords: 'frontalieri, ticino, svizzera, italia, residenti, chiedono, misure, contro',
+    ogTitle: '45 residenti chiedono misure contro il rumore',
+    ogDescription: '45 residenti hanno presentato al comune mercoledì 28 ottobre un\'istanza per l\'esame urgente di Tempo 30 e misure di moderazione del traffico sulla Langgasse.',
+    canonicalPath: '/articoli-appenzello/45-residenti-richiesta-rumore/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "45 residenti chiedono misure contro il rumore sulla Langgasse",
+      "description": "45 residenti hanno chiesto al comune l'esame urgente di Tempo 30 e misure di moderazione del traffico sulla Langgasse, tra rotonda e piazza del paese.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-45-residenti-richiesta-rumore.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-31T13:30:50+00:00",
+      "dateModified": "2026-10-31T13:30:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-appenzello/45-residenti-richiesta-rumore/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

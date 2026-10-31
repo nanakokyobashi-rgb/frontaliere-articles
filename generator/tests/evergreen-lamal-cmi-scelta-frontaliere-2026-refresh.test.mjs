@@ -24,7 +24,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const SLUG = 'lamal-cmi-scelta-frontaliere-2026';
 const LOCALES = ['it', 'en', 'de', 'fr'];
-const REFRESHED_ON = '2026-09-26';
+const REFRESHED_ON = '2026-09-27';
 
 function read(rel) {
   return fs.readFileSync(path.join(ROOT, rel), 'utf8');

@@ -136,6 +136,10 @@ export const CONTENT_GATES = [
   // sul corpus reale: un registro o un pavimento pubblicato rotto deve aprire
   // la stessa issue degli altri lettori, non nascondersi nella meta-suite.
   'generator/tests/content-gates-main.test.mjs',
+  // Il contratto updatedAt legge record reali per verificare le date di
+  // pubblicazione; un cambiamento del corpus deve quindi aprire l'alert di
+  // main come gli altri gate che consumano content/.
+  'generator/tests/content-updated-at.test.mjs',
   // I link Markdown sono HTML crawlable dopo il render: il gate deve vedere
   // anche un articolo scritto da un produttore direttamente su main.
   'generator/tests/blog-body-link-contract.test.mjs',

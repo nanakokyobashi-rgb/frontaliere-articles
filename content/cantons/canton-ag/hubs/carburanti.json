@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-30T19:31:58.244Z",
-  "contentHash": "963740ec346585d9685591ffac903a8a8a30c20bdf8a6e37c183cf43ee81e7e8",
+  "updatedAt": "2026-10-31T12:39:05.963Z",
+  "contentHash": "651587a95ad3a40192e08b30475020eb0b03f498a6ab9c233135f6bb1385c811",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Fislisbach: il 5 novembre incontro sulla scuola Leematten",
+          "url": "/articoli-argovia/fislisbach-sondaggio-leematten/",
+          "excerpt": "Il Comune di Fislisbach presenta il 5 novembre i risultati del sondaggio dopo il voto che ha respinto un credito da CHF 5,28 milioni.",
+          "date": "2026-10-31T12:27:23.904Z"
+        },
+        {
           "title": "MS Saphir: passaggio previsto all'idrogeno verde nel 2027",
           "url": "/articoli-argovia/saphir-idrogeno-verde-axpo/",
           "excerpt": "La SGV fa riconvertire la MS Saphir da Shiptec AG: il ritorno alle corse nel bacino di Lucerna è previsto per il 26 marzo 2027.",
@@ -94,12 +100,6 @@
           "url": "/articoli-argovia/mellingen-budget-2027/",
           "excerpt": "Il comune di Mellingen prevede per il 2027 un disavanzo di 3.546.810 franchi e conferma il coefficiente fiscale al 110%.",
           "date": "2026-10-24T12:03:10.391Z"
-        },
-        {
-          "title": "Mobilità Argovia: sistema unico e potenziamento trasporti",
-          "url": "/articoli-argovia/mobilita-aargovia-sistema-unico/",
-          "excerpt": "Cinque esperti hanno presentato la revisione di mobilitätAargau, puntando a frequenze bus ogni 30 minuti e ferrovia ogni 15 minuti da 2027.",
-          "date": "2026-10-24T11:27:50.606Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T12:39:05.963Z"
     },
     "en": {
       "canton": "AG",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Fislisbach: November 5 meeting about Leematten school",
+          "url": "/en/aargau-articles/fislisbach-leematten-survey/",
+          "excerpt": "The Municipality of Fislisbach presents the survey results on November 5 following the vote that rejected a credit of CHF 5,28 million.",
+          "date": "2026-10-31T12:27:23.904Z"
+        },
+        {
           "title": "MS Saphir: planned switch to green hydrogen in 2027",
           "url": "/en/aargau-articles/saphir-green-hydrogen-axpo/",
           "excerpt": "SGV is having the MS Saphir converted by Shiptec AG: its return to service in the Lake Lucerne basin is scheduled for March 26, 2027.",
@@ -193,12 +199,6 @@
           "url": "/en/aargau-articles/mellingen-2027-budget-with-a-deficit-of-3-54-million/",
           "excerpt": "The municipality of Mellingen forecasts a deficit of CHF 3,546,810 for 2027 and confirms the tax coefficient at 110%.",
           "date": "2026-10-24T12:03:10.391Z"
-        },
-        {
-          "title": "Aargau Mobility: unified system and transport expansion",
-          "url": "/en/aargau-articles/aargau-mobility-unified-system/",
-          "excerpt": "Five experts presented the revision of mobilitätAargau, aiming for bus services every 30 minutes and rail services every 15 minutes starting in 2027.",
-          "date": "2026-10-24T11:27:50.606Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T12:39:05.963Z"
     },
     "de": {
       "canton": "AG",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Fislisbach: Am 5. November Treffen zur Schule Leematten",
+          "url": "/de/aargau-artikel/fislisbach-leematten-umfrage/",
+          "excerpt": "Die Gemeinde Fislisbach stellt am 5.",
+          "date": "2026-10-31T12:27:23.904Z"
+        },
+        {
           "title": "MS Saphir: geplanter Umstieg auf grünen Wasserstoff im Jahr 2027",
           "url": "/de/aargau-artikel/saphir-gruener-wasserstoff-axpo/",
           "excerpt": "Die SGV lässt die MS Saphir von Shiptec AG umrüsten: Die Wiederaufnahme des Fahrbetriebs im Luzerner Seebecken ist für den 26.",
@@ -292,12 +298,6 @@
           "url": "/de/aargau-artikel/mellingen-kostenvoranschlag-2027-mit-einem-defizit-von-3-54-mio/",
           "excerpt": "Die Gemeinde Mellingen rechnet für 2027 mit einem Defizit von 3.546.810 Franken und bestätigt die Steuerquote von 110%.",
           "date": "2026-10-24T12:03:10.391Z"
-        },
-        {
-          "title": "Mobilität Aargau: einheitliches System und Ausbau des Verkehrs",
-          "url": "/de/aargau-artikel/mobilitaet-aargau-einheitliches-system/",
-          "excerpt": "Fünf Experten haben die Überarbeitung von mobilitätAargau vorgestellt und dabei Busverbindungen alle 30 Minuten sowie Bahnverbindungen alle 15 Minuten ab 2027 angestrebt.",
-          "date": "2026-10-24T11:27:50.606Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T12:39:05.963Z"
     },
     "fr": {
       "canton": "AG",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Fislisbach : le 5 novembre, rencontre au sujet de l’école Leematten",
+          "url": "/fr/articles-argovie/fislisbach-sondage-leematten/",
+          "excerpt": "La commune de Fislisbach présente le 5 novembre les résultats du sondage après le vote qui a rejeté un crédit de CHF 5,28 millions.",
+          "date": "2026-10-31T12:27:23.904Z"
+        },
+        {
           "title": "MS Saphir : passage prévu à l’hydrogène vert en 2027",
           "url": "/fr/articles-argovie/saphir-hydrogene-vert-axpo/",
           "excerpt": "La SGV fait reconvertir la MS Saphir par Shiptec AG : le retour en service sur le bassin de Lucerne est prévu pour le 26 mars 2027.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-argovie/mellingen-devis-2027-avec-un-deficit-de-3-54-millions/",
           "excerpt": "La commune de Mellingen prévoit pour 2027 un déficit de 3 546 810 francs et confirme le coefficient d'imposition à 110 %.",
           "date": "2026-10-24T12:03:10.391Z"
-        },
-        {
-          "title": "Mobilité en Argovie : système unique et renforcement des transports",
-          "url": "/fr/articles-argovie/mobilite-argovie-systeme-unique/",
-          "excerpt": "Cinq experts ont présenté la révision de mobilitätAargau, visant une fréquence des bus toutes les 30 minutes et du rail toutes les 15 minutes à partir de 2027.",
-          "date": "2026-10-24T11:27:50.606Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T12:39:05.963Z"
     }
   }
 }

@@ -66,6 +66,12 @@ const blogMetaCantonLuFr: Record<string, string> = {
     'blog.article.tunnel-sonnenberg-chiusura-notte.title': 'Tunnel du Sonnenberg fermé pour inspection structurelle',
     'blog.article.tunnel-sonnenberg-chiusura-notte.excerpt': 'Fermeture complète du tunnel du Sonnenberg dans les deux directions dans la nuit du 4 au 5 novembre 2026, de 22.00 à 05.00.',
     'blog.article.tunnel-sonnenberg-chiusura-notte.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.kanti-rektor-draht-universitaet.title': 'Le recteur Kanti renforce les liens avec l\'Université de Lucerne',
+    'blog.article.kanti-rektor-draht-universitaet.excerpt': 'Marco Stössel, recteur de la Kantonsschule de Beromünster, est intervenu lors du Dies Academicus 2026 sur le parcours de formation commun entre les lycées et les universités.',
+    'blog.article.kanti-rektor-draht-universitaet.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.lukb-utile-nove-mesi.title': 'Banque cantonale de Lucerne : bénéfice en hausse de 8,7 % sur neuf mois',
+    'blog.article.lukb-utile-nove-mesi.excerpt': 'La LUKB enregistre un bénéfice de 223,3 millions de francs au cours des neuf premiers mois.',
+    'blog.article.lukb-utile-nove-mesi.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonLuFr;

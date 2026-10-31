@@ -69,6 +69,9 @@ const blogMetaCantonAppenzelloIt: Record<string, string> = {
     'blog.article.costi-sanita-meno-entrate.title': 'Costi sanitari e minori entrate pesano sul preventivo',
     'blog.article.costi-sanita-meno-entrate.excerpt': 'Il preventivo 2027 prevede una perdita complessiva di 12,4 milioni di CHF, a causa di costi sanitari crescenti e minori entrate fiscali.',
     'blog.article.costi-sanita-meno-entrate.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.45-residenti-richiesta-rumore.title': '45 residenti chiedono misure contro il rumore sulla Langgasse',
+    'blog.article.45-residenti-richiesta-rumore.excerpt': '45 residenti hanno depositato al comune il mercoledì 28 ottobre una richiesta per l\'esame urgente di Tempo 30 e misure di moderazione del traffico.',
+    'blog.article.45-residenti-richiesta-rumore.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonAppenzelloIt;

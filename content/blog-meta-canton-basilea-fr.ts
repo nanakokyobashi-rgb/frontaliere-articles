@@ -48,6 +48,9 @@ const blogMetaCantonBasileaFr: Record<string, string> = {
     'blog.article.bvb-rasatura-tram-episodio.title': 'BVB : tonte dans les tramways, nettoyage documenté',
     'blog.article.bvb-rasatura-tram-episodio.excerpt': 'La Basler Verkehrsbetriebe (BVB) a publié sur Facebook une photo de deux rasoirs bleus et de cheveux sur le sol d\'un tramway ; c\'est le premier épisode connu de ce type.',
     'blog.article.bvb-rasatura-tram-episodio.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.salario-minimo-basilea-aumento.title': 'Le salaire minimum à Bâle-Ville passe à CHF 22,50 bruts/heure dès 2027',
+    'blog.article.salario-minimo-basilea-aumento.excerpt': 'À partir du 1er janvier 2027, le minimum brut horaire à Bâle-Ville passera de CHF 22,20 à CHF 22,50, sur la base de l’indice mixte suisse.',
+    'blog.article.salario-minimo-basilea-aumento.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonBasileaFr;

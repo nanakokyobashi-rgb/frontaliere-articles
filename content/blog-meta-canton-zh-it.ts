@@ -66,6 +66,9 @@ const blogMetaCantonZhIt: Record<string, string> = {
     'blog.article.spital-wetzikon-decisione-mercoled.title': 'Spital Wetzikon: decisione cruciale questo mercoledì',
     'blog.article.spital-wetzikon-decisione-mercoled.excerpt': 'I creditori minacciano il fallimento dello Spital Wetzikon in vista della decisione definita decisiva di questo mercoledì.',
     'blog.article.spital-wetzikon-decisione-mercoled.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.forchstrasse-sicurezza-zollikon.title': 'Forchstrasse: più sicurezza tra Zollikerberg e Zumikon',
+    'blog.article.forchstrasse-sicurezza-zollikon.excerpt': 'Il Canton Zurigo pianifica quasi 1,7 km tra Zumikon e Zollikerberg: CHF 24,2 milioni, tre sottopassi senza barriere e avvio a fine 2028 se il Kantonsrat approva.',
+    'blog.article.forchstrasse-sicurezza-zollikon.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonZhIt;
