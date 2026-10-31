@@ -1108,13 +1108,13 @@ let rssItemTotal = 0;
 const familyRssRows = [];
 for (const section of rssSections) {
   const familyPolicy = floorPolicyOf(section.id) === 'family';
-  const published = PUBLISHED_BY_SECTION[section.id];
-  const excludedIds = published ? indexExcludedArticleIds(published) : new Set();
   // `buildSectionFeeds` filters the ledger before rendering. If every parsed
-  // SEO entry is withdrawn, no RSS file is expected for a historical section;
-  // a zero here is an intentional noindex state, not a broken feed. A partial
-  // or missing filter must still fail closed below.
-  const ledgerOnly = section.articleCount > 0 && excludedIds.size >= section.articleCount;
+  // feed-eligible SEO entry is withdrawn, no RSS file is expected for a
+  // historical section; a zero here is an intentional noindex state, not a
+  // broken feed. `withdrawnArticleCount` is scoped to the parsed SEO entries,
+  // so an exclusion for an article that never reached the parser cannot mask a
+  // truncation. A partial or missing filter must still fail closed below.
+  const ledgerOnly = section.articleCount === 0 && section.withdrawnArticleCount > 0;
   // I feed di una sezione di famiglia sono una superficie di LETTURA (titoli,
   // estratti, link agli articoli): escono su Pages solo se la release di
   // questo build dichiara la sezione live. Per una sezione draft, ritirata o
@@ -1135,7 +1135,7 @@ for (const section of rssSections) {
     }
     if (items > 0 && ledgerOnly) {
       throw new Error(
-        `rss: ${name} emitted ${items} <item> entries although all ${section.articleCount} `
+        `rss: ${name} emitted ${items} <item> entries although all ${section.withdrawnArticleCount} `
           + 'SEO entries are withdrawn by article-index-exclusions — refusing to publish',
       );
     }

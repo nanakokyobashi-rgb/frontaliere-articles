@@ -95,6 +95,12 @@ test('quota SSN: gli intervalli mensili si giudicano su entrambi gli estremi', (
   assert.equal(findTaxHealthParameterErrors('La tassa salute costa da 30 a 200 euro al mese.').length, 0);
 });
 
+test('quota SSN: gli importi mensili con decimali locali si normalizzano prima del confronto', () => {
+  assert.equal(findTaxHealthParameterErrors('La tassa salute costa €20,50 al mese.').length, 1);
+  assert.equal(findTaxHealthParameterErrors('La tassa salute costa €30,00 al mese.').length, 0);
+  assert.equal(findTaxHealthParameterErrors('La tassa salute costa €200,00 al mese.').length, 0);
+});
+
 test('riparazione: una coppia dentro un calcolo non diventa un risultato falso', () => {
   const source = 'La franchigia: 7.500 € - 10.000 € = 17.500 € totali.';
   const { text, arith } = repairFiscalText(source, 'blog-body/it/x.ts');

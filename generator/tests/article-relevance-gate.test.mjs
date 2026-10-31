@@ -16,6 +16,7 @@ const FILLER_FRONTALIERI = 'I frontalieri del Ticino e la Svizzera seguono il te
 for (const [id, title, family] of [
   ['como-napoli-pareggio-2026', 'Como-Napoli 0-0: Nico Paz brilla, ma Douvikas e Diao non concretizzano', 'sport'],
   ['openjobmetis-trieste-vittoria-kastritis', 'Varese batte Trieste: analisi e dichiarazioni', 'sport'],
+  ['sport-a-varese', 'Sport a Varese: risultati e classifiche', 'sport'],
   ['blackout-internet-iran-70-giorni', 'Blackout internet in Iran: 70 giorni di disconnessione', 'esteri'],
   ['burraco-solidale-buguggiate', 'Burraco benefico a Buguggiate: 140 partecipanti per ABAD ETS', 'giochi'],
   ['sospensione-lavori-muro-anti-migranti-big-bend-texas', 'Texas, sospesi i lavori per il muro anti-migranti a Big Bend', 'esteri'],
@@ -95,6 +96,8 @@ test('il rifiuto in generazione e\' un rifiuto del topic-gate: il ranker prosegu
 
 test('filtro prima della spesa: decide solo sulla headline, senza guardare la sezione', () => {
   assert.equal(isOffTopicHeadline('Serie A, il Como pareggia a Napoli'), true);
+  assert.equal(isOffTopicHeadline('Sport a Varese'), true);
+  assert.equal(isOffTopicHeadline('Sport a Lugano'), false);
   assert.equal(isOffTopicHeadline('Partita IVA per frontalieri: cosa cambia'), false);
   assert.equal(isOffTopicHeadline('Consiglio federale: nuove regole sul lavoro'), false);
 });

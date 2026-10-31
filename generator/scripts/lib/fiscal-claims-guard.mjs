@@ -185,12 +185,37 @@ function skipSeparators(text, index) {
 }
 
 /** Un importo in euro riferito al mese: la quota SSN sta fra 30 e 200 per mese lavorato. */
-const MONTHLY_EURO_RE = /(?:(\d{1,3}(?:[.'’\u00a0 ]\d{3})*)\s?(?:€|euro|eur)?\s?(?:-|–|—|a|al|to|bis|à)\s?)?(?:€\s?(\d{1,3}(?:[.'’\u00a0 ]\d{3})*)|(\d{1,3}(?:[.'’\u00a0 ]\d{3})*)\s?(?:€|(?:euro|eur)\b))\s*(?:al mese|per mese|\/mese|mensil\w*|a month|per month|\/month|monthly|pro monat|im monat|monatlich\w*|\/monat|par mois|\/mois|mensuel\w*)/gi;
+const EURO_INTEGER_PATTERN = String.raw`(?:\d{1,3}(?:[.'’\u00a0 ]\d{3})+|\d+)`;
+const EURO_AMOUNT_PATTERN = String.raw`${EURO_INTEGER_PATTERN}(?:[.,]\d{1,2})?`;
+const MONTHLY_EURO_RE = new RegExp(
+  String.raw`(?:(${EURO_AMOUNT_PATTERN})\s?(?:€|euro|eur)?\s?(?:-|–|—|a|al|to|bis|à)\s?)?` +
+    String.raw`(?:€\s?(${EURO_AMOUNT_PATTERN})|(${EURO_AMOUNT_PATTERN})\s?(?:€|(?:euro|eur)\b))` +
+    String.raw`\s*(?:al mese|per mese|\/mese|mensil\w*|a month|per month|\/month|monthly|pro monat|im monat|monatlich\w*|\/monat|par mois|\/mois|mensuel\w*)`,
+  'gi',
+);
+
+function parseEuroAmount(raw) {
+  const compact = String(raw).replace(/[’'\u00a0 ]/g, '');
+  const commaIndex = compact.lastIndexOf(',');
+  const dotIndex = compact.lastIndexOf('.');
+  let decimalIndex = -1;
+  if (commaIndex >= 0 && dotIndex >= 0) {
+    decimalIndex = Math.max(commaIndex, dotIndex);
+  } else if (commaIndex >= 0 && compact.length - commaIndex - 1 <= 2) {
+    decimalIndex = commaIndex;
+  } else if (dotIndex >= 0 && compact.length - dotIndex - 1 <= 2) {
+    decimalIndex = dotIndex;
+  }
+  if (decimalIndex < 0) return Number(compact.replace(/[.,]/g, ''));
+  const integer = compact.slice(0, decimalIndex).replace(/[.,]/g, '');
+  const fraction = compact.slice(decimalIndex + 1).replace(/[.,]/g, '');
+  return Number(`${integer}.${fraction}`);
+}
 
 function monthlyAmountsOutOfRange(sentence) {
   return [...sentence.matchAll(MONTHLY_EURO_RE)].some((match) => {
     return [match[1], match[2], match[3]].filter(Boolean).some((amount) => {
-      const value = Number(amount.replace(/\D/g, ''));
+      const value = parseEuroAmount(amount);
       return value < 30 || value > 200;
     });
   });

@@ -95,16 +95,21 @@ const BORDER_PROVINCE_RE = wordStartRe([
  * senso economico: niente «partita» nuda (partita IVA), niente «tappa» o «giro»,
  * niente «cina» o «russia» da sole quando sono mercati e non esteri puri.
  */
+const SPORT_FAMILY_TERMS = [
+  'serie a ', 'serie b ', 'serie c ', 'champions', 'europa league', 'conference league',
+  'pareggi', 'playoff', 'play off', 'playout', 'basket', 'pallacanestro', 'pallavolo', 'volley',
+  'calcio ', 'calciator', 'gol ', 'derby', 'campionat', 'allenator', 'tennis', 'ciclism',
+  'giro d italia', 'tour de france', 'motogp', 'formula 1', 'maratona', 'atletica', 'nuoto',
+  'rugby', 'ginnastica', 'kastritis', 'partita con', 'partita contro', 'partita di', 'la partita',
+  'una partita', 'vince la partita', 'batte ', 'sconfitta contro', 'vittoria contro', 'vittoria su',
+  'nazionale italiana', 'azzurri', 'scudetto', 'coppa italia',
+];
+const SPORT_FAMILY_RE = new RegExp(
+  `${wordStartRe(SPORT_FAMILY_TERMS).source}|${wholeWordRe(['sport']).source}`,
+);
+
 export const OFF_TOPIC_FAMILIES = Object.freeze({
-  sport: wordStartRe([
-    'serie a ', 'serie b ', 'serie c ', 'champions', 'europa league', 'conference league',
-    'pareggi', 'playoff', 'play off', 'playout', 'basket', 'pallacanestro', 'pallavolo', 'volley',
-    'calcio ', 'calciator', 'gol ', 'derby', 'campionat', 'allenator', 'tennis', 'ciclism',
-    'giro d italia', 'tour de france', 'motogp', 'formula 1', 'maratona', 'atletica', 'nuoto',
-    'rugby', 'ginnastica', 'kastritis', 'partita con', 'partita contro', 'partita di', 'la partita',
-    'una partita', 'vince la partita', 'batte ', 'sconfitta contro', 'vittoria contro', 'vittoria su',
-    'nazionale italiana', 'azzurri', 'scudetto', 'coppa italia',
-  ]),
+  sport: SPORT_FAMILY_RE,
   giochi: wordStartRe(['burraco', 'tombola', 'briscola', 'scopone', 'bingo']),
   esteri: wordStartRe([
     'iran', 'teheran', 'hormuz', 'israel', 'gaza', 'hamas', 'hezbollah', 'libano', 'siria',
