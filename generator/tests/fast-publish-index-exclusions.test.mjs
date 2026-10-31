@@ -50,13 +50,15 @@ test('un id fuori registro non arriva al renderer', () => {
   assert.deepEqual(idsOf(result, 'frontaliere'), []);
 });
 
-test('il piano R2 segue la stessa transizione: le pagine cantonali portano il robots', () => {
+test('il ledger R2 rifiuta una riga di esclusione per una pagina cantonale', () => {
   const canton = [ARTICLE_SECTION_CORE_ALL['canton-gr']];
-  const result = r2PublishPlan([LEDGER], canton, {
-    readCurrentSource: () => ledger({ section: 'canton-gr', id: 'nuovo' }, { section: 'frontaliere', id: 'a' }),
-    readPreviousSource: () => ledger(),
-  });
-  assert.deepEqual(result, [{ section: 'canton-gr', ids: ['nuovo'], bootstrap: false }]);
+  assert.throws(
+    () => r2PublishPlan([LEDGER], canton, {
+      readCurrentSource: () => ledger({ section: 'canton-gr', id: 'nuovo' }, { section: 'frontaliere', id: 'a' }),
+      readPreviousSource: () => ledger(),
+    }),
+    /article-index-exclusions: sezione non supportata: canton-gr/,
+  );
 });
 
 test('il workflow cantonale parte quando cambia il ledger', () => {
