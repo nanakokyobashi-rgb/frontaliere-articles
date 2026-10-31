@@ -190,16 +190,10 @@ export const CORE_REPLACEMENTS = [
       + '          CALLER_WORKFLOW: ${{ inputs.caller_workflow }}\n',
   },
   {
-    id: 'admit: le run in volo sono quelle del chiamante',
+    id: 'admit: la snapshot bounded legge le run del chiamante',
     count: 1,
-    find: '"repos/$REPO/actions/workflows/generate-article.yml/runs?per_page=100&status=$status"',
-    replace: '"repos/$REPO/actions/workflows/$CALLER_WORKFLOW/runs?per_page=100&status=$status"',
-  },
-  {
-    id: 'admit: il tetto orario legge la finestra del chiamante',
-    count: 1,
-    find: '"repos/$REPO/actions/workflows/generate-article.yml/runs?per_page=100&created=%3E%3D$recent_since"',
-    replace: '"repos/$REPO/actions/workflows/$CALLER_WORKFLOW/runs?per_page=100&created=%3E%3D$recent_since"',
+    find: '"repos/$REPO/actions/workflows/generate-article.yml/runs?per_page=100&created=%3E%3D$admission_since"',
+    replace: '"repos/$REPO/actions/workflows/$CALLER_WORKFLOW/runs?per_page=100&created=%3E%3D$admission_since"',
   },
   {
     id: 'generate: dipende anche dal gate di sezione',
