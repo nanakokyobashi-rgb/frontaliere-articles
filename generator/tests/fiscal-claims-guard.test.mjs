@@ -119,6 +119,15 @@ test('riparazione: una fascia salariale o una legge qualunque restano come sono'
   }
 });
 
+test('forme dirette: anno nudo, credito dell\'80%, 20% versato', () => {
+  assert.deepEqual(ids('L\'Accordo è in vigore dal 2024.'), ['accordo-in-vigore-2024']);
+  assert.deepEqual(ids('Il credito d\'imposta dell\'80% vale per tutti.'), ['credito-80']);
+  assert.deepEqual(ids('The tax credit of 80% applies.'), ['credito-80']);
+  assert.deepEqual(ids('Il 20% viene versato ai comuni italiani.'), ['retrocessione-20']);
+  assert.deepEqual(ids('Il 20% non viene trasferito ai comuni.'), []);
+  assert.deepEqual(ids('L\'Accordo è in vigore dal 17 luglio 2023.'), []);
+});
+
 test('i falsi amici non scattano', () => {
   assert.deepEqual(ids('Health insurance premiums count only for the share above the flat-rate deduction.'), []);
   assert.deepEqual(ids('The 20% is not returned to municipalities.'), []);

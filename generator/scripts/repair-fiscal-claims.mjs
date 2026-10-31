@@ -101,6 +101,10 @@ const DATE_IT = String.raw`(?:1°?\s*(?:o\s+)?|primo\s+)?gennaio 2024|0?1[/.]0?1
 const DATE_EN = String.raw`(?:1(?:st)?\s+)?January(?:\s+1(?:st)?,?)?\s+2024|0?1[/.]0?1[/.]2024`;
 const DATE_FR = String.raw`(?:1er\s+|premier\s+)?janvier 2024|0?1[/.]0?1[/.]2024`;
 const IN_FORCE_2024 = [
+  [/\bin vigore dal 2024\b/gi, 'applicato dal 2024'],
+  [/\bin force since 2024\b/gi, 'applied since 2024'],
+  [/\bseit 2024 in Kraft\b/gi, 'seit 2024 anwendbar'],
+  [/\ben vigueur depuis 2024\b/gi, 'appliqué depuis 2024'],
   [new RegExp(String.raw`\b(?:entrat[oa] )?in vigore (?:dal(?:l)?|da|il)\s+(${DATE_IT})`, 'gi'), 'applicato dal $1'],
   [new RegExp(String.raw`\bentrat[oa] in vigore\s+(${DATE_IT})`, 'gi'), 'applicato dal $1'],
   [new RegExp(String.raw`\b(?:in force from|in force since|in force as of|effective from|has been in force since|entered into force on|entered into force in|came into force on|came into force in|took effect on|took effect in)\s+(?:the\s+)?(${DATE_EN})`, 'gi'), 'applied since $1'],
