@@ -66,6 +66,9 @@ const blogMetaCantonZhEn: Record<string, string> = {
     'blog.article.spital-wetzikon-decisione-mercoled.title': 'Spital Wetzikon: crucial decision this Wednesday',
     'blog.article.spital-wetzikon-decisione-mercoled.excerpt': 'Creditors threaten Spital Wetzikon with bankruptcy ahead of Wednesday’s decision, deemed decisive.',
     'blog.article.spital-wetzikon-decisione-mercoled.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.forchstrasse-sicurezza-zollikon.title': 'Forchstrasse: greater safety between Zollikerberg and Zumikon',
+    'blog.article.forchstrasse-sicurezza-zollikon.excerpt': 'The Canton of Zurich is planning nearly 1,7 km between Zumikon and Zollikerberg: CHF 24,2 million, three barrier-free underpasses and a start at the end of 2028 if the Kantonsrat approves.',
+    'blog.article.forchstrasse-sicurezza-zollikon.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonZhEn;

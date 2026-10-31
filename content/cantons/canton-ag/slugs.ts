@@ -27,6 +27,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'ristrizioni-rueeblimart-aarau': { it: 'ristrizioni-rueeblimart-aarau', en: 'aarau-rueeblimart-restrictions', de: 'aarau-rueeblimart-einschrankungen', fr: 'restrictions-rueeblimart-aarau' },
  'fislisbach-acqua-potabile': { it: 'fislisbach-acqua-potabile', en: 'fislisbach-drinking-water', de: 'fislisbach-trinkwasser', fr: 'fislisbach-eau-potable' },
  'saphir-idrogeno-verde-axpo': { it: 'saphir-idrogeno-verde-axpo', en: 'saphir-green-hydrogen-axpo', de: 'saphir-gruener-wasserstoff-axpo', fr: 'saphir-hydrogene-vert-axpo' },
+ 'fislisbach-sondaggio-leematten': { it: 'fislisbach-sondaggio-leematten', en: 'fislisbach-leematten-survey', de: 'fislisbach-leematten-umfrage', fr: 'fislisbach-sondage-leematten' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

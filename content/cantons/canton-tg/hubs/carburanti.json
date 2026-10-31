@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-31T11:25:56.230Z",
-  "contentHash": "a79543d0304145814b76414f94e2072c0784ace3502daa375d54e141ea25589e",
+  "updatedAt": "2026-10-31T12:09:06.969Z",
+  "contentHash": "257d57ed15d2a03828e911c6f7ce219b9d52346d778783dc840a7aede12c4cf0",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Turgovia: fissata la nuova tariffa per le cure dei familiari",
+          "url": "/articoli-turgovia/turgovia-tariffa-cure-familiare-2026/",
+          "excerpt": "Il Governo cantonale del Turgovia fissa la tariffa a CHF 52,60 all'ora per le prestazioni di cura familiare con decorrenza retroattiva dal 1° gennaio 2026.",
+          "date": "2026-10-31T11:54:22.387Z"
+        },
+        {
           "title": "Governo Turgovia approva messaggio per modifica legge strade e vie",
           "url": "/articoli-turgovia/messaggio-modifica-legge-strade/",
           "excerpt": "Il Governo del Canton Turgovia ha approvato il messaggio al Gran Consiglio per disciplinare i manifesti di elezioni e votazioni, subordinando l'eccezione alla sicurezza stradale.",
@@ -94,12 +100,6 @@
           "url": "/articoli-turgovia/sedi-rav-lavoratori-tg/",
           "excerpt": "Le sedi RAV sono ad Amriswil, Frauenfeld e Kreuzlingen; le vacancy si pubblicano gratis su arbeit.swiss.",
           "date": "2026-10-25T12:02:52.564Z"
-        },
-        {
-          "title": "Turgovia: modifica piano direttore per sedi economiche",
-          "url": "/articoli-turgovia/turgovia-modifica-piano-direttore-2027/",
-          "excerpt": "Il Canton Turgovia avvia la consultazione sulla revisione del piano direttore per lo sviluppo di commercio e industria.",
-          "date": "2026-10-23T03:27:25.835Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-31T11:25:56.230Z"
+      "updatedAt": "2026-10-31T12:09:06.969Z"
     },
     "en": {
       "canton": "TG",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Thurgau: new tariff set for care provided by family members",
+          "url": "/en/thurgau-articles/thurgau-family-care-tariff-2026/",
+          "excerpt": "The Government of the Canton of Thurgau sets the rate at CHF 52,60 per hour for family care services, with retroactive effect from 1 January 2026.",
+          "date": "2026-10-31T11:54:22.387Z"
+        },
+        {
           "title": "Thurgau government approves proposal to amend the Roads and Paths Act",
           "url": "/en/thurgau-articles/law-amendment-roads-thurgau/",
           "excerpt": "The Government of the Canton of Thurgau approved the submission to the Grand Council to regulate election and voting posters, making the exception conditional on road safety.",
@@ -193,12 +199,6 @@
           "url": "/en/thurgau-articles/rav-thurgau-workers-locations/",
           "excerpt": "The RAV offices are in Amriswil, Frauenfeld and Kreuzlingen; vacancies are posted free of charge on arbeit.swiss.",
           "date": "2026-10-25T12:02:52.564Z"
-        },
-        {
-          "title": "Thurgau: amendment to the structure plan for business locations",
-          "url": "/en/thurgau-articles/thurgau-master-plan-revision-2027/",
-          "excerpt": "The Canton of Thurgau launches the consultation on the revision of the structure plan for the development of commerce and industry.",
-          "date": "2026-10-23T03:27:25.835Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-31T11:25:56.230Z"
+      "updatedAt": "2026-10-31T12:09:06.969Z"
     },
     "de": {
       "canton": "TG",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Thurgau: Neuer Tarif für die Angehörigenpflege festgelegt",
+          "url": "/de/thurgau-artikel/turgau-tarif-pflegende-angehoerige-2026/",
+          "excerpt": "Die Thurgauer Kantonsregierung setzt den Tarif für Leistungen der Angehörigenpflege mit rückwirkender Geltung ab dem 1.",
+          "date": "2026-10-31T11:54:22.387Z"
+        },
+        {
           "title": "Thurgau genehmigt Botschaft zur Strassengesetz-Änderung",
           "url": "/de/thurgau-artikel/gesetz-aenderung-strassen-turgau/",
           "excerpt": "Die Regierung des Kantons Thurgau hat die Botschaft an den Grossen Rat zur Regelung der Plakate für Wahlen und Abstimmungen genehmigt und die Ausnahme von der Verkehrssicherheit abhängig gemacht.",
@@ -292,12 +298,6 @@
           "url": "/de/thurgau-artikel/rav-thurgau-arbeitsnehmer-standorte/",
           "excerpt": "Die RAV-Standorte befinden sich in Amriswil, Frauenfeld und Kreuzlingen; offene Stellen werden kostenlos auf arbeit.swiss veröffentlicht.",
           "date": "2026-10-25T12:02:52.564Z"
-        },
-        {
-          "title": "Thurgau: Änderung des Richtplans für Wirtschaftsstandorte",
-          "url": "/de/thurgau-artikel/thurgau-richtplan-aenderung-2027/",
-          "excerpt": "Der Kanton Thurgau eröffnet die Vernehmlassung zur Überarbeitung des Richtplans für die Entwicklung von Handel und Industrie.",
-          "date": "2026-10-23T03:27:25.835Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-31T11:25:56.230Z"
+      "updatedAt": "2026-10-31T12:09:06.969Z"
     },
     "fr": {
       "canton": "TG",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Thurgovie : nouveau tarif fixé pour les soins prodigués par des proches",
+          "url": "/fr/articles-thurgovie/thurgovie-tarif-soins-proches-aidants-2026/",
+          "excerpt": "Le Gouvernement cantonal de Thurgovie fixe le tarif à CHF 52,60 de l'heure pour les prestations de soins prodigués par des proches, avec effet rétroactif au 1er janvier 2026.",
+          "date": "2026-10-31T11:54:22.387Z"
+        },
+        {
           "title": "Le gouvernement thurgovien approuve la réforme routière",
           "url": "/fr/articles-thurgovie/modification-loi-routes-thurgovie/",
           "excerpt": "Le Gouvernement du canton de Thurgovie a approuvé le message destiné au Grand Conseil visant à réglementer les affiches électorales et de votation, en subordonnant l’exception à la sécurité routière.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-thurgovie/rav-thurgovie-travailleurs-lieux/",
           "excerpt": "Les agences RAV se trouvent à Amriswil, Frauenfeld et Kreuzlingen ; les postes vacants peuvent être publiés gratuitement sur arbeit.swiss.",
           "date": "2026-10-25T12:02:52.564Z"
-        },
-        {
-          "title": "Thurgovie : modification du plan directeur pour des sites économiques",
-          "url": "/fr/articles-thurgovie/thurgovie-revision-plan-directeur-2027/",
-          "excerpt": "Le canton de Thurgovie lance la consultation sur la révision du plan directeur pour le développement du commerce et de l’industrie.",
-          "date": "2026-10-23T03:27:25.835Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-31T11:25:56.230Z"
+      "updatedAt": "2026-10-31T12:09:06.969Z"
     }
   }
 }
