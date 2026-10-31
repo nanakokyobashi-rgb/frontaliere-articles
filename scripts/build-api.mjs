@@ -169,6 +169,7 @@ import { cantonHubCoverage, cantonHubTopics, readCantonHubDocument } from './lib
 import { isReservedPublishedSlug } from './lib/published-slug-guard.mjs';
 import {
   ARTICLE_INDEX_EXCLUSIONS_FILES,
+  assertArticleIndexExclusionsKnown,
   articleIndexExclusionKey,
   loadArticleIndexExclusions,
 } from '../engine/shared/articleIndexExclusions.mjs';
@@ -621,6 +622,12 @@ const articleIndexExclusions = loadArticleIndexExclusions(
   fs,
   ARTICLE_INDEX_EXCLUSIONS_FILES.map((candidate) => path.join(ROOT, candidate)),
 );
+const knownArticleIndexExclusionKeys = new Set(
+  PUBLISHED_API_SECTIONS.flatMap((section) => (
+    SECTION_REGISTRIES[section.section] ?? []
+  ).map((article) => articleIndexExclusionKey(section.section, article.id))),
+);
+assertArticleIndexExclusionsKnown(articleIndexExclusions, knownArticleIndexExclusionKeys);
 const SECTION_INDEX_EXCLUDED_SLUGS = Object.fromEntries(
   PUBLISHED_API_SECTIONS.map((section) => [
     section.section,

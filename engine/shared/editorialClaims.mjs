@@ -396,10 +396,9 @@ function hasPromptEcho(sentence, locale) {
 }
 
 /** Etichette del prompt tradotte: «TITOLO ARTICOLO:» arriva in quattro lingue. */
-const PROMPT_TITLE_LABEL = /(?<![\p{L}\p{N}])(?:TITOLO\s+(?:DELL['’]?ARTICOLO|ARTICOLO)|TITRE(?:\s+(?:DE\s+L['’]ARTICLE|ARTICLE))?|TITEL(?:\s+(?:DES\s+ARTIKELS|ARTIKEL))?|ARTIKEL-?TITEL|ARTICLE\s+TITLE|TITLE\s+ARTICLE|TITLE\s+OF\s+THE\s+ARTICLE)\s*:\s*/u;
-const LABEL_LINE_MAX = 180;
+const PROMPT_TITLE_LABEL = /(?<![\p{L}\p{N}])(?:TITOLO\s+(?:DELL['’]?ARTICOLO|ARTICOLO)|TITRE(?:\s+(?:DE\s+L['’]ARTICLE|ARTICLE))?|TITEL(?:\s+(?:DES\s+ARTIKELS|ARTIKEL))?|ARTIKEL-?TITEL|ARTICLE\s+TITLE|TITLE\s+ARTICLE|TITLE\s+OF\s+THE\s+ARTICLE)\s*:\s*/iu;
 /** Stessa etichetta come riga intera, anche in minuscolo o come intestazione. */
-const PROMPT_TITLE_LINE = /^[ \t]*#{0,6}[ \t]*(?:\*\*)?(?:titolo\s+(?:dell['’]?articolo|articolo)|article\s+title|title\s+of\s+the\s+article|title\s+article|titel\s+des\s+artikels|artikel-?titel|titre\s+(?:de\s+l['’]artic\S*|article))(?:\*\*)?[ \t]*(?::[^\n]{0,200})?$\n?/gimu;
+const PROMPT_TITLE_LINE = /^[ \t]*#{0,6}[ \t]*(?:\*\*)?(?:titolo\s+(?:dell['’]?articolo|articolo)|article\s+title|title\s+of\s+the\s+article|title\s+article|titel\s+des\s+artikels|artikel-?titel|titre\s+(?:de\s+l['’]artic\S*|article))(?:\*\*)?[ \t]*(?::[ \t]*(?:\n|$)|(?=\n|$))/gimu;
 
 /**
  * Toglie la riga con l'etichetta del prompt. Se dopo l'etichetta c'e' testo vero
@@ -419,11 +418,12 @@ export function stripPromptTitleLabels(text, { title = '' } = {}) {
     const lineEnd = newline === -1 ? value.length : newline;
     const rest = value.slice(afterLabel, lineEnd);
     let cut = afterLabel;
-    if (rest.length <= LABEL_LINE_MAX) cut = lineEnd;
+    if (!rest.trim()) cut = lineEnd;
     else if (title && rest.startsWith(title)) cut = afterLabel + title.length;
     const before = value.slice(0, start).replace(/[ \t]+$/, '');
     const after = value.slice(cut);
-    value = cut === lineEnd ? `${before.replace(/\n+$/, '')}${after}` : `${before}${before ? ' ' : ''}${after.replace(/^\s+/, '')}`;
+    const joiner = before && !/\n$/u.test(before) ? ' ' : '';
+    value = cut === lineEnd ? `${before.replace(/\n+$/, '')}${after}` : `${before}${joiner}${after.replace(/^\s+/, '')}`;
     removed += 1;
   }
   return { value, removed };
@@ -588,10 +588,10 @@ function hasMonthlyAmountOutOfRange(sentence, locale) {
 }
 
 const PERCENT_OF_PAY = {
-  it: /(\d{1,2}(?:[.,]\d+)?)\s?(?:%|per\s+cento)\s+(?:del(?:lo|l['’])?|sul(?:lo|l['’])?)\s+(?:salario|stipendio|reddito|netto|lordo|imposta)/gi,
-  en: /(\d{1,2}(?:[.,]\d+)?)\s?(?:%|percent)\s+(?:of|on)\s+(?:the\s+)?(?:gross|net|salary|income|wage)/gi,
-  de: /(\d{1,2}(?:[.,]\d+)?)\s?(?:%|Prozent)\s+(?:des|vom|auf\s+das)\s+(?:Brutto|Netto|Lohn\w*|Einkommen\w*|Gehalt\w*)/gi,
-  fr: /(\d{1,2}(?:[.,]\d+)?)\s?(?:%|pour\s+cent)\s+(?:du|sur\s+le)\s+(?:salaire|revenu|brut|net)/gi,
+  it: /(\d{1,3}(?:[.,]\d+)?)\s?(?:%|per\s+cento)\s+(?:del(?:lo|l['’])?|sul(?:lo|l['’])?)\s+(?:salario|stipendio|reddito|netto|lordo|imposta)/gi,
+  en: /(\d{1,3}(?:[.,]\d+)?)\s?(?:%|percent)\s+(?:of|on)\s+(?:the\s+)?(?:gross|net|salary|income|wage)/gi,
+  de: /(\d{1,3}(?:[.,]\d+)?)\s?(?:%|Prozent)\s+(?:des|vom|auf\s+das)\s+(?:Brutto|Netto|Lohn\w*|Einkommen\w*|Gehalt\w*)/gi,
+  fr: /(\d{1,3}(?:[.,]\d+)?)\s?(?:%|pour\s+cent)\s+(?:du|sur\s+le)\s+(?:salaire|revenu|brut|net)/gi,
 };
 
 function isHealthTaxClaim(sentence, locale) {
@@ -600,7 +600,10 @@ function isHealthTaxClaim(sentence, locale) {
   if (HEALTH_TAX_EXEMPT[locale].test(sentence)) return false;
   if (SWISS_FRANC_AMOUNT.test(sentence) || YEARLY_EURO[locale].test(sentence)) return true;
   if (hasMonthlyAmountOutOfRange(sentence, locale)) return true;
-  return [...sentence.matchAll(PERCENT_OF_PAY[locale])].some(([, value]) => !['3', '6'].includes(value.replace(',', '.')));
+  return [...sentence.matchAll(PERCENT_OF_PAY[locale])].some(([, value]) => {
+    const percentage = Number(value.replace(',', '.'));
+    return !Number.isFinite(percentage) || percentage < 3 || percentage > 6;
+  });
 }
 
 /** Un importo o una base non verificabile si toglie: non c'e' un valore da mettere. */
@@ -646,6 +649,28 @@ export function findEditorialClaims(text, { locale = 'it' } = {}) {
   return found;
 }
 
+function removeClaimSegment(segments, index, { structural = false } = {}) {
+  const before = segments[index - 2] ?? '';
+  const after = segments[index + 2] ?? '';
+  const beforeSeparator = segments[index - 1] ?? '';
+  const afterSeparator = segments[index + 1] ?? '';
+  segments[index] = '';
+
+  // In ordinary prose keep one of the original boundaries. Clearing both
+  // separators is what turns two valid neighbours into `Prima.Dopo`.
+  if (!structural && before && after) {
+    if (beforeSeparator) segments[index + 1] = '';
+    else if (afterSeparator) segments[index - 1] = '';
+    else segments[index + 1] = ' ';
+    return;
+  }
+
+  // FAQ JSON and tables carry their own punctuation/delimiters. Preserve that
+  // structure and retain the historical whitespace cleanup at the edges.
+  if (/^\s+$/.test(afterSeparator)) segments[index + 1] = '';
+  else if (!afterSeparator && /^\s+$/.test(beforeSeparator)) segments[index - 1] = '';
+}
+
 /**
  * Applica le riparazioni deterministiche a un campo. Una stessa frase canonica
  * non si ripete nello stesso campo: la seconda occorrenza si toglie, tranne nei
@@ -672,11 +697,11 @@ export function repairEditorialClaims(text, { locale = 'it', title = '' } = {}) 
     }
     if (current === sentence) continue;
     if (!current) {
-      segments[index] = '';
-      // La frase sparisce con il suo separatore, salvo i confini di FAQ e tabelle.
-      const after = segments[index + 1] ?? '';
-      if (/^\s+$/.test(after)) segments[index + 1] = '';
-      else if (!after && /^\s+$/.test(segments[index - 1] ?? '')) segments[index - 1] = '';
+      const prev = segments[index - 1] ?? '';
+      const next = segments[index + 1] ?? '';
+      const structural = /^\s*(?:[-*•|]|\d+[.)])/.test(sentence) || /\|/.test(prev) || /\|/.test(next)
+        || /"/.test(prev) || /"/.test(next);
+      removeClaimSegment(segments, index, { structural });
       continue;
     }
     const canonical = [
@@ -690,8 +715,7 @@ export function repairEditorialClaims(text, { locale = 'it', title = '' } = {}) 
     const structural = /^\s*(?:[-*•|]|\d+[.)])/.test(current) || /\|/.test(prev) || /\|/.test(next)
       || /"/.test(prev) || /"/.test(next);
     if (canonical && used.has(canonical) && !structural) {
-      segments[index] = '';
-      if (index + 1 < segments.length) segments[index + 1] = prev && /\n/.test(next) ? next : '';
+      removeClaimSegment(segments, index);
       continue;
     }
     if (canonical) used.add(canonical);

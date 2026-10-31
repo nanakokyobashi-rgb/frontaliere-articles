@@ -317,6 +317,7 @@ import {
 import { imageCreditRecordFromGeneratedImageRecord } from '../../engine/shared/imageCredits.mjs';
 import {
   CLAIM_LOCALES,
+  HEALTH_TAX_SUMMARY,
   repairEditorialClaims,
   assertNoEditorialClaims,
 } from '../../engine/shared/editorialClaims.mjs';
@@ -5299,8 +5300,14 @@ function bodyTextForCantonPostcondition(data) {
 function repairEditorialClaimsInObject(value, { locale, title, field, changes, seen }) {
   if (typeof value === 'string') {
     const repaired = repairEditorialClaims(value, { locale, title });
-    if (repaired.value !== value) changes.push(`${locale}/${field}`);
-    return repaired.value;
+    let output = repaired.value;
+    const metadataField = /(?:^|\.)(?:excerpt|description|ogDescription)$/u.test(field);
+    const removedHealthTax = repaired.changes.some((change) => change.class === 'tassa-salute');
+    if (metadataField && value.trim() && output === '' && removedHealthTax) {
+      output = HEALTH_TAX_SUMMARY[locale] ?? HEALTH_TAX_SUMMARY.it;
+    }
+    if (output !== value) changes.push(`${locale}/${field}`);
+    return output;
   }
   if (!value || typeof value !== 'object' || seen.has(value)) return value;
   seen.add(value);
@@ -5344,6 +5351,37 @@ function repairArticleEditorialClaims(data) {
       seen,
     });
   }
+  if (typeof data?.imageAlt === 'string') {
+    data.imageAlt = repairEditorialClaimsInObject(data.imageAlt, {
+      locale: 'it',
+      title: typeof data.content?.it?.title === 'string' ? data.content.it.title : '',
+      field: 'imageAlt',
+      changes,
+      seen,
+    });
+  } else if (data?.imageAlt && typeof data.imageAlt === 'object') {
+    for (const locale of CLAIM_LOCALES) {
+      if (!(locale in data.imageAlt)) continue;
+      const localeTitle = typeof data.content?.[locale]?.title === 'string' ? data.content[locale].title : '';
+      if (typeof data.imageAlt[locale] === 'string') {
+        data.imageAlt[locale] = repairEditorialClaimsInObject(data.imageAlt[locale], {
+          locale,
+          title: localeTitle,
+          field: `imageAlt.${locale}`,
+          changes,
+          seen,
+        });
+      } else {
+        repairEditorialClaimsInObject(data.imageAlt[locale], {
+          locale,
+          title: localeTitle,
+          field: `imageAlt.${locale}`,
+          changes,
+          seen,
+        });
+      }
+    }
+  }
   if (changes.length > 0) {
     console.error(
       `  🧹 [editorial-claims] ${data?.id || '(id mancante)'}: `
@@ -5357,6 +5395,16 @@ function assertPublishedEditorialClaims(data) {
     assertNoEditorialClaims(data?.content);
     if (data?.seo && typeof data.seo === 'object') {
       assertNoEditorialClaims({ it: data.seo });
+    }
+    if (typeof data?.imageAlt === 'string') {
+      assertNoEditorialClaims({ it: data.imageAlt });
+    } else if (data?.imageAlt && typeof data.imageAlt === 'object') {
+      const imageAltByLocale = Object.fromEntries(
+        CLAIM_LOCALES
+          .filter((locale) => locale in data.imageAlt)
+          .map((locale) => [locale, data.imageAlt[locale]]),
+      );
+      assertNoEditorialClaims(imageAltByLocale);
     }
   } catch (error) {
     error.qualityReject = true;
