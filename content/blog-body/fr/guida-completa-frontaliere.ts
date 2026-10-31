@@ -157,7 +157,7 @@ La fiscalité est l'aspect le plus complexe et le plus important pour un frontal
 
 ### L'ancien régime (travailleurs avant juillet 2023)
 
-Ceux qui ont commencé à travailler comme frontaliers **avant le 17 juillet 2023** restent dans le régime de l'art. 9 de l'Accord, sans date de fin :
+Ceux qui ont commencé à travailler comme frontaliers **avant le 17 juillet 2023** restent dans le régime de l'art. 9 de l'Accord :
 
 - **Impôt à la source suisse uniquement** (pas d'imposition en Italie)
 - L'impôt à la source est retenu par l'employeur
