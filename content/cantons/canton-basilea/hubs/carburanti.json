@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "carburanti",
-  "updatedAt": "2026-10-30T19:31:58.244Z",
-  "contentHash": "7d9400e0016861d53078e107eaf7f6a192655756c8c19ff13cbca0a71c67874f",
+  "updatedAt": "2026-10-31T13:32:41.676Z",
+  "contentHash": "4336d169861b1056f44400b68c962839d828cc8412bd39bcd14946b91c656908",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -84,6 +84,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Salario minimo Basilea Città sale a CHF 22,50 lordi/ora dal 2027",
+          "url": "/articoli-basilea/salario-minimo-basilea-aumento/",
+          "excerpt": "Dal 1° gennaio 2027, il minimo lordo orario a Basilea Città passerà da CHF 22,20 a CHF 22,50, in base all'indice misto svizzero.",
+          "date": "2026-10-31T13:24:22.926Z"
+        },
+        {
           "title": "BVB: rasatura in tram, intervento di pulizia documentato",
           "url": "/articoli-basilea/bvb-rasatura-tram-episodio/",
           "excerpt": "La Basler Verkehrsbetriebe (BVB) ha pubblicato su Facebook una foto di due rasoi blu e capelli sul pavimento di un tram; è il primo episodio di questo tipo noto.",
@@ -106,12 +112,6 @@
           "url": "/articoli-basilea/salario-minimo-basilea-2027/",
           "excerpt": "Dal 1° gennaio 2027 il minimo sarà 22,50 CHF lordi L’aumento previsto è di 30 centesimi per ora L’adeguamento segue l’indice misto svizzero Cantone →",
           "date": "2026-10-26T11:06:00.747Z"
-        },
-        {
-          "title": "Canton Basilea Città riattiva siti dopo panne tecnico",
-          "url": "/articoli-basilea/basel-stadt-siti-online-di-nuoto/",
-          "excerpt": "La riapertura dei siti e applicazioni del Canton Basilea Città è progressiva da mercoledì notte; nessun incidente rilevante per la sicurezza è stato registrato giovedì.",
-          "date": "2026-10-25T05:03:13.974Z"
         }
       ],
       "links": [
@@ -124,7 +124,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T13:32:41.676Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -195,6 +195,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Basel City minimum wage rises to CHF 22.50 gross per hour from 2027",
+          "url": "/en/basel-articles/basel-minimum-wage-increase/",
+          "excerpt": "From January 1, 2027, the gross hourly minimum wage in Basel-Stadt will increase from CHF 22,20 to CHF 22,50, based on the Swiss mixed index.",
+          "date": "2026-10-31T13:24:22.926Z"
+        },
+        {
           "title": "BVB: mowing in trams, documented cleaning",
           "url": "/en/basel-articles/bvb-tram-shaving-incident/",
           "excerpt": "The Basler Verkehrsbetriebe (BVB) posted on Facebook a photo of two blue razors and hair on the floor of a tram; it is the first known episode of this type.",
@@ -217,12 +223,6 @@
           "url": "/en/basel-articles/basel-minimum-wage-2027/",
           "excerpt": "From January 1st, 2027, the minimum wage will be 22,50 CHF gross The planned increase is 30 cents per hour The adjustment follows the Swiss mixed index Canton →",
           "date": "2026-10-26T11:06:00.747Z"
-        },
-        {
-          "title": "Canton Basel-Stadt reactivates websites after technical outage",
-          "url": "/en/basel-articles/basel-stadt-sites-online-reactivation/",
-          "excerpt": "The reopening of the Canton of Basel-Stadt's websites and applications has been gradual since Wednesday night; no significant security incident was recorded on Thursday.",
-          "date": "2026-10-25T05:03:13.974Z"
         }
       ],
       "links": [
@@ -235,7 +235,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T13:32:41.676Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -306,6 +306,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Mindestlohn in Basel-Stadt steigt ab 2027 auf CHF 22,50 brutto pro Stunde",
+          "url": "/de/basel-artikel/basel-mindestlohn-erhoehung/",
+          "excerpt": "Ab dem 1. Januar 2027 wird der Bruttomindestlohn pro Stunde in Basel-Stadt auf Grundlage des Schweizer Mischindexes von CHF 22,20 auf CHF 22,50 steigen.",
+          "date": "2026-10-31T13:24:22.926Z"
+        },
+        {
           "title": "BVB: Mähen in Straßenbahnen, dokumentierte Reinigung",
           "url": "/de/basel-artikel/bvb-tram-rasurungsfall/",
           "excerpt": "Die Basler Verkehrsbetriebe (BVB) veröffentlichten auf Facebook ein Foto von zwei blauen Rasierern und Haaren auf dem Boden einer Straßenbahn; es ist der erste bekannte Vorfall dieser Art.",
@@ -328,12 +334,6 @@
           "url": "/de/basel-artikel/basel-mindestlohn-2027/",
           "excerpt": "Ab dem 1. Januar 2027 beträgt der Mindestlohn 22,50 CHF brutto Die vorgesehene Erhöhung beträgt 30 Rappen pro Stunde Die Anpassung folgt dem Schweizer",
           "date": "2026-10-26T11:06:00.747Z"
-        },
-        {
-          "title": "Kanton Basel-Stadt reaktiviert Websites nach technischer Panne",
-          "url": "/de/basel-artikel/basel-stadt-siti-online-wiederaufnahme/",
-          "excerpt": "Die Wiedereröffnung der Websites und Anwendungen des Kantons Basel-Stadt erfolgt seit Mittwochnacht schrittweise; am Donnerstag wurde kein erheblicher Sicherheitsvorfall registriert.",
-          "date": "2026-10-25T05:03:13.974Z"
         }
       ],
       "links": [
@@ -346,7 +346,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T13:32:41.676Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -417,6 +417,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Le salaire minimum à Bâle-Ville passe à CHF 22,50 bruts/heure dès 2027",
+          "url": "/fr/articles-bale/augmentation-salaire-minimum-basle/",
+          "excerpt": "À partir du 1er janvier 2027, le minimum brut horaire à Bâle-Ville passera de CHF 22,20 à CHF 22,50, sur la base de l’indice mixte suisse.",
+          "date": "2026-10-31T13:24:22.926Z"
+        },
+        {
           "title": "BVB : tonte dans les tramways, nettoyage documenté",
           "url": "/fr/articles-bale/bvb-incident-rasage-tram/",
           "excerpt": "La Basler Verkehrsbetriebe (BVB) a publié sur Facebook une photo de deux rasoirs bleus et de cheveux sur le sol d'un tramway ; c'est le premier épisode connu de ce type.",
@@ -439,12 +445,6 @@
           "url": "/fr/articles-bale/salaire-minimum-basle-2027/",
           "excerpt": "À partir du 1er janvier 2027, le minimum sera de 22,50 CHF bruts L’augmentation prévue est de 30 centimes par heure L’ajustement suit l’indice mixte suisse",
           "date": "2026-10-26T11:06:00.747Z"
-        },
-        {
-          "title": "Le canton de Bâle-Ville réactive ses sites après une panne technique",
-          "url": "/fr/articles-bale/basile-sites-en-ligne-reactivation/",
-          "excerpt": "La réouverture des sites et applications du canton de Bâle-Ville est progressive depuis mercredi soir ; aucun incident de sécurité important n’a été enregistré jeudi.",
-          "date": "2026-10-25T05:03:13.974Z"
         }
       ],
       "links": [
@@ -457,7 +457,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T13:32:41.676Z"
     }
   }
 }
