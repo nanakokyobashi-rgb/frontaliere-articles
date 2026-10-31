@@ -395,6 +395,18 @@ test('la review corrente conserva il commit selezionato quando classifica un fin
   assert.match(r.stdout, /follow-up|fuori dal diff/i, r.stdout);
 });
 
+test('carry-forward validato conserva la classificazione di un finding storico fuori dal diff', () => {
+  const finding = '`generator/scripts/outside.mjs:10`: 🔴 Important: il controllo condiviso manca.';
+  const r = runGate({
+    reviews: [botReview(OLD, `${finding}\n\n## LGTM`, { id: 12 })],
+    files: ['generator/scripts/in-scope.mjs'],
+    compare: COMPARE_SAME,
+  });
+  assert.equal(r.status, 0, `Il carry-forward validato deve riusare la classificazione fuori diff.\n${r.stdout}`);
+  assert.doesNotMatch(r.stdout, /review non applicabile alla HEAD corrente/i, r.stdout);
+  assert.match(r.stdout, /carry-forward|follow-up|fuori dal diff/i, r.stdout);
+});
+
 test('reviewCommit mancante o stantio resta fail-closed prima della classificazione', async () => {
   const body = '`generator/scripts/outside.mjs:10`: 🔴 Important: il controllo condiviso manca.';
   for (const reviewCommit of ['', OLD]) {

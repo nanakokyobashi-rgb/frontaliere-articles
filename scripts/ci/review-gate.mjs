@@ -524,6 +524,7 @@ async function main() {
           headSha: HEAD_SHA,
           reviewCommit: last.commit_id,
           reviewId: last.id,
+          reviewCarryForwardValidated: applies && last.commit_id !== HEAD_SHA,
           bodyContractPassed: BODY_CONTRACT_PASSED,
         });
         for (const finding of scope.staleBodyDeclassified ?? []) {

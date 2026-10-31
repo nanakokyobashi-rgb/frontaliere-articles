@@ -1235,6 +1235,7 @@ async function mintFollowup({ repo, pr, prUrl, body, findings }) {
 export async function classifyAndMintReview(body, {
   repo, pr, prUrl, mutate = true, headSha = null,
   reviewCommit = null, reviewId = null,
+  reviewCarryForwardValidated = false,
   priorFindingIds = null, changedLinesSince = null,
   // `null`/assente = «non lo so»: il verdetto si RICALCOLA dal body con gli
   // stessi moduli del gate. Un booleano esplicito lo impone (il review gate
@@ -1246,8 +1247,14 @@ export async function classifyAndMintReview(body, {
   if (!repo || !pr) throw new Error('repo e pr sono obbligatori');
   const findings = importantFindings(body);
   const hasApplicabilityContext = reviewCommit !== null || headSha !== null || reviewId !== null;
+  // Il gate può autorizzare esplicitamente il carry-forward solo dopo aver
+  // verificato il fingerprint code-only; un commit stantio da solo resta
+  // contesto non applicabile e quindi fail-closed.
+  const hasValidatedCarryForward = reviewCarryForwardValidated
+    && Boolean(reviewCommit && headSha && reviewId !== null);
   if (findings.length > 0 && hasApplicabilityContext
-      && !reviewAppliesToHead(reviewCommit, headSha)) {
+      && !reviewAppliesToHead(reviewCommit, headSha)
+      && !hasValidatedCarryForward) {
     console.error('review-scope: review non applicabile alla HEAD corrente → classificazione bloccata.');
     return nonApplicableClassification(findings);
   }
