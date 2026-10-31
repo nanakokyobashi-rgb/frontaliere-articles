@@ -3,6 +3,7 @@ const bodyTassaSaluteLombardiaRinvio: Record<string, string> = {
  'blog.article.tassa-salute-lombardia-rinvio.body2': '## Tool utili per il tuo caso\nPer verificare in modo pratico il tuo scenario entro/oltre 20 km, usa il [calcolatore stipendio netto](nav:calculator) e la [guida dichiarazione redditi](nav:tax-return).',
  'blog.article.tassa-salute-lombardia-rinvio.body3': 'La nostra fonte è l\'articolo pubblicato su ComoZero il 5 marzo 2026.',
  'blog.article.tassa-salute-lombardia-rinvio.faq': '[{"q":"Quale è lo stato attuale dell\'applicazione della tassa sulla salute per i frontalieri in Lombardia?","a":"La Regione Lombardia ha rinviato l\'applicazione, creando incertezza."}]',
+    'blog.article.tassa-salute-lombardia-rinvio.body4': 'La notizia descrive un rinvio politico: non è una conferma dell\'esenzione e non stabilisce da sola una scadenza definitiva.',
 };
 
 export default bodyTassaSaluteLombardiaRinvio;
