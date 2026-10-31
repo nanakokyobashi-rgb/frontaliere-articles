@@ -4,13 +4,9 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ge::https://lecourrier.ch/2026/10/28/sante-les-communes-payent-les-pots-casses": {
+    "canton-ge::https://www.ge.ch/node/45029": {
       "section": "canton-ge",
-      "ts": 1793264902869
-    },
-    "canton-ge::https://statistique.ge.ch/rss/affiche_article.asp?url=https://statistique.ge.ch/actualites/welcome.asp?actu=6065": {
-      "section": "canton-ge",
-      "ts": 1793265098387
+      "ts": 1793447365538
     }
   }
 }
