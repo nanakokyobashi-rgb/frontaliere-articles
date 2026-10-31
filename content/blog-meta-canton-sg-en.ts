@@ -78,6 +78,9 @@ const blogMetaCantonSgEn: Record<string, string> = {
     'blog.article.wil-budget-nachtrag-2027-115.title': 'Wil approves the supplement to the 2027 estimate with a tax multiplier of 115%',
     'blog.article.wil-budget-nachtrag-2027-115.excerpt': 'The 2027 budget provides for a tax multiplier of 115%, with lower revenue of approximately CHF 3,8 million and an estimated deficit of approximately CHF 5,78 million.',
     'blog.article.wil-budget-nachtrag-2027-115.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.tamponamento-a1-gossau.title': 'Crash on the A1 in Gossau: four injured',
+    'blog.article.tamponamento-a1-gossau.excerpt': 'Accident involving two cars on the A1 in Gossau on October 29, 2026: a 55-year-old seriously injured, three people with minor injuries, and traffic backed up toward St.Gallen.',
+    'blog.article.tamponamento-a1-gossau.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSgEn;

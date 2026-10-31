@@ -78,6 +78,9 @@ const blogMetaCantonSgDe: Record<string, string> = {
     'blog.article.wil-budget-nachtrag-2027-115.title': 'Wil genehmigt den Nachtrag zum Budget 2027 mit einem Steuerfuss von 115%',
     'blog.article.wil-budget-nachtrag-2027-115.excerpt': 'Das Budget 2027 sieht einen Steuerfuss von 115% vor, mit Mindereinnahmen von etwa CHF 3,8 Millionen und einem geschätzten Defizit von etwa CHF 5,78 Millionen.',
     'blog.article.wil-budget-nachtrag-2027-115.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.tamponamento-a1-gossau.title': 'Kollision auf der A1 bei Gossau: vier Verletzte',
+    'blog.article.tamponamento-a1-gossau.excerpt': 'Unfall zwischen zwei Autos auf der A1 bei Gossau am 29.',
+    'blog.article.tamponamento-a1-gossau.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSgDe;
