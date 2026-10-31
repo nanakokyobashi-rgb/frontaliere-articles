@@ -992,7 +992,7 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.clima-ticino-stagioni.excerpt': 'Das Tessin bietet ein gemäßigtes Klima mit vier klar unterscheidbaren Jahreszeiten. Die Durchschnittstemperatur liegt im Sommer bei ca. 25°C, im Winter bei ca. 0°C.',
     'blog.article.clima-ticino-stagioni.imageAlt': 'Luganoer See im Frühling',
     'blog.article.frontaliere-meccanico-auto-ticino.title': 'Automechanischer Grenzgänger im Tessin: Gehalt und Regeln',
-    'blog.article.frontaliere-meccanico-auto-ticino.excerpt': 'Vollständiger Leitfaden für Grenzmechaniker im Tessin: Gehalt, G-Bewilligung, Besteuerung und das neue Steuerabkommen, das am 1. Januar 2024 in Kraft getreten ist.',
+    'blog.article.frontaliere-meccanico-auto-ticino.excerpt': 'Vollständiger Leitfaden für Grenzmechaniker im Tessin: Gehalt, G-Bewilligung, Besteuerung und das neue Steuerabkommen, das seit dem 1. Januar 2024 anwendbar ist.',
     'blog.article.frontaliere-meccanico-auto-ticino.imageAlt': 'Mechaniker in einer Werkstatt im Tessin',
     'blog.article.cessione-del-quinto-della-pensione-2026.title': 'Fünftelsrente-Neues INPS-Konzept: Was ändert sich?',
     'blog.article.cessione-del-quinto-della-pensione-2026.excerpt': 'Die neue INPS-Vereinbarung für die Abtretung des Fünftels der Rente führt einige Verfahrensneuheiten ein.',

@@ -248,7 +248,7 @@ Exemptions provided for the condition can reduce the cost of services in Italy. 
 ## Common mistakes to avoid when choosing LAMal vs SSN
 
 ### 1. Believing there is a 7.5% SSN contribution on income
-A health contribution of 7.5% of income does not exist: “new” workers have no specific contribution; “old” workers follow the 3% to 6% contribution, with a minimum of €30 and maximum of €200 per month.
+
 
 ### 2. Failing to count premiums for the whole family
 With LAMal, every member pays their own premium. For two adults and two minors, the minimum example is **CHF 686.40 per month**.

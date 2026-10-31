@@ -46,7 +46,7 @@ Non poter votare non significa essere privi di canali per influenzare le politic
 **Impegno nei comuni italiani.** I frontalieri sono residenti italiani a pieno titolo e votano nelle elezioni politiche, regionali e comunali italiane. I comuni di confine (Como, Varese, Luino, Domodossola) hanno interesse a rappresentare adeguatamente i frontalieri nelle loro richieste verso Roma — a cominciare dall'accordo fiscale, dalle infrastrutture di trasporto verso il confine e dalla mobilità transfrontaliera.
 
 ### Riferimenti normativi
-- Accordo sui lavoratori frontalieri CH-IT (1974, aggiornato con il nuovo Accordo fiscale 2023, in vigore dal 1° gennaio 2024)
+- Accordo sui lavoratori frontalieri CH-IT (1974, aggiornato con il nuovo Accordo fiscale 2023, applicato dal 1° gennaio 2024)
 - Legge federale sugli stranieri e la loro integrazione (LStrI)
 - Legge sulla cittadinanza svizzera (LCit, RS 141.0)
 - Contratti collettivi di lavoro applicabili in Ticino (edilizia, industria metalmeccanica, commercio al dettaglio, ristorazione)

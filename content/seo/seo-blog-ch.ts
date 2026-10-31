@@ -9121,7 +9121,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Nuove regole fiscali per frontalieri Italia-Svizzera dal 2024: imposta alla fonte, esenzioni, franchigie e credito d\'imposta. Dati aggiornati 2026 per',
     keywords: 'frontalieri, ticino, svizzera, italia, grenzgänger, schweiz, steuern, regole',
     ogTitle: 'grenzgänger schweiz steuern 2026: guida fiscale aggiornata',
-    ogDescription: 'Accordo Frontalieri in vigore dal 2024: imposta alla fonte, esenzione €7\'500, franchigia €10\'000 e come evitare la doppia imposizione.',
+    ogDescription: 'Vecchi frontalieri tassati solo in Svizzera; franchigia IRPEF di 10.000 € per chi è tassato in Italia.',
     canonicalPath: '/articoli-svizzera/grenzgaenger-steuern-nuovo-accordo-2026/',
     structuredData: {
       "@context": "https://schema.org",
@@ -11716,7 +11716,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-credito-imposta-frontaliere-2026': {
     title: 'Credito imposta frontaliere 2026: guida entro i 20 km',
-    description: 'Scopri come funziona il credito d\'imposta per frontalieri nel 2026: franchigie 7.500€ e 10.000€, quadro CE e limiti entro i 20 km. Guida pratica.',
+    description: 'Scopri come funziona il credito d\'imposta per frontalieri nel 2026: franchigia 10.000 €, quadro CE e limiti entro i 20 km. Guida pratica.',
     keywords: 'frontalieri, ticino, svizzera, italia, credito, imposta, entro, calcolo',
     ogTitle: 'Credito Imposta Frontaliere 2026: Guida Pratica',
     ogDescription: 'Tutto sul credito d\'imposta per frontalieri 2026: calcolo, franchigie e compilazione dichiarazione italiana.',
@@ -11725,7 +11725,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Credito imposta frontaliere 2026: guida entro i 20 km",
-      "description": "Scopri come funziona il credito d'imposta per frontalieri nel 2026: franchigie 7.500€ e 10.000€, quadro CE e limiti entro i 20 km. Guida pratica.",
+      "description": "Scopri come funziona il credito d'imposta per frontalieri nel 2026: franchigia 10.000 €, quadro CE e limiti entro i 20 km. Guida pratica.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
@@ -12627,16 +12627,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-frontaliere-meccanico-auto-ticino': {
     title: 'Frontaliere meccanico auto in Ticino: stipendio e regole',
-    description: 'Guida per meccanici frontalieri in Ticino: stipendio, permesso G, tassazione e il nuovo accordo fiscale in vigore dal 1° gennaio 2024. Dati aggiornati 2026 per',
+    description: 'Guida per meccanici frontalieri in Ticino: stipendio, permesso G, tassazione e il nuovo accordo fiscale applicato dal 1° gennaio 2024. Dati aggiornati 2026 per',
     keywords: 'frontalieri, ticino, svizzera, italia, meccanico, auto, stipendio, regole',
     ogTitle: 'Frontaliere meccanico auto in Ticino: stipendio e regole',
-    ogDescription: 'Guida per meccanici frontalieri in Ticino: stipendio, permesso G, tassazione e il nuovo accordo fiscale in vigore dal 1° gennaio 2024.',
+    ogDescription: 'Guida per meccanici frontalieri in Ticino: stipendio, permesso G, tassazione e il nuovo accordo fiscale applicato dal 1° gennaio 2024.',
     canonicalPath: '/articoli-svizzera/frontaliere-meccanico-auto-ticino/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Frontaliere meccanico auto in Ticino: stipendio e regole",
-      "description": "Guida per meccanici frontalieri in Ticino: stipendio, permesso G, tassazione e il nuovo accordo fiscale in vigore dal 1° gennaio 2024. Dati aggiornati 2026 per",
+      "description": "Guida per meccanici frontalieri in Ticino: stipendio, permesso G, tassazione e il nuovo accordo fiscale applicato dal 1° gennaio 2024. Dati aggiornati 2026 per",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
@@ -17589,16 +17589,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-frontaliere-pasticciere-ticino-stipendio-requisiti': {
     title: 'Frontaliere pasticceria: stipendio, requisiti e riconoscimento',
-    description: 'Il Nuovo Accordo Frontalieri prevede la franchigia di €10.000 per i nuovi frontalieri. I vecchi frontalieri esentati di €7.500 avranno un regime transitorio',
+    description: 'Il Nuovo Accordo Frontalieri prevede la franchigia di €10.000 per i nuovi frontalieri. Vecchi frontalieri tassati solo in Svizzera; franchigia IRPEF di 10.000 € per chi è tassato in Italia.',
     keywords: 'frontalieri, ticino, svizzera, italia, pasticceria, stipendio, requisiti, riconoscimento',
     ogTitle: 'Frontaliere pasticcere Ticino: stipendio medio, requisiti, riconoscimento titolo di studio e permesso G.',
-    ogDescription: 'Il Nuovo Accordo Frontalieri prevede la franchigia di €10.000 per i nuovi frontalieri. I vecchi frontalieri esentati di €7.500 avranno un regime transitorio',
+    ogDescription: 'Il Nuovo Accordo Frontalieri prevede la franchigia di €10.000 per i nuovi frontalieri. Vecchi frontalieri tassati solo in Svizzera; franchigia IRPEF di 10.000 € per chi è tassato in Italia.',
     canonicalPath: '/articoli-svizzera/frontaliere-pasticciere-ticino-stipendio-requisiti/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Frontaliere pasticceria: stipendio, requisiti e riconoscimento",
-      "description": "Il Nuovo Accordo Frontalieri prevede la franchigia di €10.000 per i nuovi frontalieri. I vecchi frontalieri esentati di €7.500 avranno un regime transitorio",
+      "description": "Il Nuovo Accordo Frontalieri prevede la franchigia di €10.000 per i nuovi frontalieri. Vecchi frontalieri tassati solo in Svizzera; franchigia IRPEF di 10.000 € per chi è tassato in Italia.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
@@ -21742,7 +21742,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-fondi-frontalieri-varesotto-14-milioni': {
     title: '14 milioni ai territori di confine: fondi per frontalieri nel Varesotto',
-    description: 'Oltre 14 mln € ai comuni di frontiera per ristorni frontalieri. Nuovo Accordo 2024, franchigie 7.500/10.000 €, credito d\'imposta: guida pratica. Dati aggiornati',
+    description: 'Oltre 14 mln € ai comuni di frontiera per ristorni frontalieri. Nuovo Accordo 2024, franchigia 10.000 €, credito d\'imposta: guida pratica. Dati aggiornati',
     keywords: 'frontalieri, ticino, svizzera, italia, milioni, territori, confine, fondi',
     ogTitle: '14 milioni ai territori di confine: fondi per frontalieri nel Varesotto',
     ogDescription: 'Ristorni fiscali per i comuni di frontiera italiani. Nuovo Accordo frontalieri 2024: franchigie, credito d\'imposta e adempimenti.',
@@ -21751,7 +21751,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "14 milioni ai territori di confine: fondi per frontalieri nel Varesotto",
-      "description": "Oltre 14 mln € ai comuni di frontiera per ristorni frontalieri. Nuovo Accordo 2024, franchigie 7.500/10.000 €, credito d'imposta: guida pratica. Dati aggiornati",
+      "description": "Oltre 14 mln € ai comuni di frontiera per ristorni frontalieri. Nuovo Accordo 2024, franchigia 10.000 €, credito d'imposta: guida pratica. Dati aggiornati",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
@@ -24681,16 +24681,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-salario-medio-professioni-svizzera-2026-basilea': {
     title: 'Salario medio professioni Svizzera 2026 canton Basilea',
-    description: 'Aliquote AVS/AI/IPG 5,3%, AD/AC 1,1% (cap CHF 148\'200), LAINF 0,7–1,5%, LPP 7–18%. Nuovo Accordo Frontalieri in vigore dal 1 gennaio 2024. Dati ufficiali per',
+    description: 'Aliquote AVS/AI/IPG 5,3%, AD/AC 1,1% (cap CHF 148\'200), LAINF 0,7–1,5%, LPP 7–18%. Nuovo Accordo Frontalieri applicato dal 1 gennaio 2024. Dati ufficiali per',
     keywords: 'frontalieri, ticino, svizzera, italia, salario, medio, professioni, canton',
     ogTitle: 'Salario medio professioni Svizzera 2026 canton Basilea',
-    ogDescription: 'Scopri le aliquote contributive svizzere (AVS/AI/IPG 5,3%, AD/AC 1,1%), i dettagli del Nuovo Accordo Frontalieri in vigore dal 1 gennaio 2024 e come evitare la',
+    ogDescription: 'Scopri le aliquote contributive svizzere (AVS/AI/IPG 5,3%, AD/AC 1,1%), i dettagli del Nuovo Accordo Frontalieri applicato dal 1 gennaio 2024 e come evitare la',
     canonicalPath: '/articoli-svizzera/salario-medio-professioni-svizzera-2026-basilea/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Salario medio professioni Svizzera 2026 canton Basilea",
-      "description": "Aliquote AVS/AI/IPG 5,3%, AD/AC 1,1% (cap CHF 148'200), LAINF 0,7–1,5%, LPP 7–18%. Nuovo Accordo Frontalieri in vigore dal 1 gennaio 2024. Dati ufficiali per",
+      "description": "Aliquote AVS/AI/IPG 5,3%, AD/AC 1,1% (cap CHF 148'200), LAINF 0,7–1,5%, LPP 7–18%. Nuovo Accordo Frontalieri applicato dal 1 gennaio 2024. Dati ufficiali per",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/salario-medio-professioni-svizzera-2026-basilea.webp`,
@@ -29191,16 +29191,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-iva-aumento-governo-difesa-2026': {
     title: 'Governo: 0,5 punti percentuali di aumento per 12 anni',
-    description: 'L\'aumento dell\'IVA di 0,5 punti percentuali sarà applicato dal 2028 e per un periodo di 12 anni. Dati aggiornati 2026 per frontalieri in Ticino.',
+    description: 'L\'aumento dell\'IVA di 0,5 punti percentuali è applicato dal 2028 e per un periodo di 12 anni. Dati aggiornati 2026 per frontalieri in Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, governo, punti, percentuali, aumento',
     ogTitle: 'Aumento dell\'IVA di 0,5 punti percentuali per un periodo di 12 anni',
-    ogDescription: 'L\'aumento dell\'IVA di 0,5 punti percentuali sarà applicato dal 2028 e per un periodo di 12 anni.',
+    ogDescription: 'L\'aumento dell\'IVA di 0,5 punti percentuali è applicato dal 2028 e per un periodo di 12 anni.',
     canonicalPath: '/articoli-svizzera/iva-aumento-governo-difesa-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Governo: 0,5 punti percentuali di aumento per 12 anni",
-      "description": "L'aumento dell'IVA di 0,5 punti percentuali sarà applicato dal 2028 e per un periodo di 12 anni. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "description": "L'aumento dell'IVA di 0,5 punti percentuali è applicato dal 2028 e per un periodo di 12 anni. Dati aggiornati 2026 per frontalieri in Ticino.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",

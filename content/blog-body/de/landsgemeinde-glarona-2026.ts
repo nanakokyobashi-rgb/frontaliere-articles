@@ -46,7 +46,7 @@ Kein Stimmrecht zu haben bedeutet nicht, ohne Einfluss zu sein. Grenzgänger kö
 **Engagement in italienischen Gemeinden.** Grenzgänger sind vollwertige italienische Einwohner und wählen bei italienischen Parlaments-, Regional- und Kommunalwahlen. Grenzgemeinden (Como, Varese, Luino, Domodossola) haben ein Interesse daran, die Anliegen der Grenzgänger gegenüber Rom zu vertreten — angefangen beim Steuerabkommen über die Verkehrsinfrastruktur bis zur grenzüberschreitenden Mobilität.
 
 ### Rechtliche Grundlagen
-- CH-IT-Grenzgängerabkommen (1974, aktualisiert durch das neue Steuerabkommen 2023, in Kraft seit 1. Januar 2024)
+- CH-IT-Grenzgängerabkommen (1974, aktualisiert durch das neue Steuerabkommen 2023, anwendbar seit dem 1. Januar 2024)
 - Ausländer- und Integrationsgesetz (AIG)
 - Bürgerrechtsgesetz (BüG, SR 141.0)
 - Im Tessin anwendbare Gesamtarbeitsverträge (Bauwesen, Maschinenindustrie, Detailhandel, Gastgewerbe)

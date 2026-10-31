@@ -592,7 +592,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  keywords: 'frontalieri, ticino, svizzera, italia, turismo, 2025, stato, anno',
  ogTitle: 'Turismo in Ticino: Il 2025 è stato un anno eccezionale',
  ogDescription: 'La regione ha registrato un aumento dei turisti rispetto ai competitor europei, con un esito positivo per l\'economia locale.',
- canonicalPath: '/articoli-frontaliere/kebab-case-turismo-ticino/',
+ canonicalPath: '/articoli-frontaliere/turismo-ticino-anno-eccezionale-2025/',
  structuredData: {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
@@ -609,7 +609,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  "inLanguage": "it",
  "author": {"@type": "Person", "name": "Valerie Linc", "jobTitle": "Esperta fiscale frontalieri", "url": "https://frontaliereticino.ch/chi-siamo/", "sameAs": "https://www.linkedin.com/in/valerie-linc/"},
  "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
- "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/kebab-case-turismo-ticino/`,
+ "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/turismo-ticino-anno-eccezionale-2025/`,
  "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["h1", ".article-body p:first-of-type"] },
  "isAccessibleForFree": true
  }
@@ -1549,7 +1549,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  keywords: 'frontalieri, ticino, svizzera, italia, contributo, cantonale, ripristino, strutture',
  ogTitle: 'Ticino: contributo cantonale per ripristino strutture',
  ogDescription: 'Il governo grigionese concede 511\'000 franchi per ripristino strutture agricole danneggiate dal nubifragio del 2024 nella regione Grigioni.',
- canonicalPath: '/articoli-frontaliere/kebab-case-ticino-nubifragio-grigioni/',
+ canonicalPath: '/articoli-frontaliere/ticino-contributo-agricoltura-nubifragio/',
  structuredData: {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
@@ -1566,7 +1566,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  "inLanguage": "it",
  "author": {"@type": "Person", "name": "Valerie Linc", "jobTitle": "Esperta fiscale frontalieri", "url": "https://frontaliereticino.ch/chi-siamo/", "sameAs": "https://www.linkedin.com/in/valerie-linc/"},
  "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
- "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/kebab-case-ticino-nubifragio-grigioni/`,
+ "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/ticino-contributo-agricoltura-nubifragio/`,
  "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["h1", ".article-body p:first-of-type"] },
  "isAccessibleForFree": true
  }
@@ -1578,7 +1578,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  keywords: 'frontalieri, ticino, svizzera, italia, tassa, transito, bruxelles, storce',
  ogTitle: 'Tassa di transito, Bruxelles storce il naso - Frontaliere Ticino',
  ogDescription: 'La Svizzera introduce la tassa di transito per ridurre il traffico, ma la Commissione europea non è contenta.',
- canonicalPath: '/articoli-frontaliere/kebab-case-rossi-bruxelles-ticino/',
+ canonicalPath: '/articoli-frontaliere/tassa-transito-bruxelles-rossi/',
  structuredData: {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
@@ -1595,7 +1595,7 @@ const BLOG_SEO_METADATA_4: Record<string, SEOMetadata> = {
  "inLanguage": "it",
  "author": {"@type": "Person", "name": "Valerie Linc", "jobTitle": "Esperta fiscale frontalieri", "url": "https://frontaliereticino.ch/chi-siamo/", "sameAs": "https://www.linkedin.com/in/valerie-linc/"},
  "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
- "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/kebab-case-rossi-bruxelles-ticino/`,
+ "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/tassa-transito-bruxelles-rossi/`,
  "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["h1", ".article-body p:first-of-type"] },
  "isAccessibleForFree": true
  }

@@ -247,7 +247,7 @@ Die für die Erkrankung vorgesehenen Befreiungen können die Kosten der Leistung
 
 ## Häufige Fehler bei der Wahl zwischen KVG und SSN
 
-### 1. Zu glauben, es gebe einen SSN-Beitrag von 7,5 % des Einkommens
+### 1. 
 Einen solchen Beitrag gibt es nicht: «neue» Grenzgänger zahlen keinen spezifischen Gesundheitsbeitrag; für «alte» gilt eine Beteiligung von 3 % bis 6 %, mindestens 30 und höchstens 200 Euro pro Monat.
 
 ### 2. Die Prämien der ganzen Familie nicht zu zählen

@@ -247,7 +247,7 @@ Les exonérations prévues pour la pathologie peuvent réduire le coût des pres
 
 ## Erreurs courantes à éviter dans le choix entre LAMal et SSN
 
-### 1. Croire qu'il existe une contribution SSN de 7,5 % du revenu
+### 1. 
 Il n'existe pas : les « nouveaux » frontaliers n'ont pas de contribution sanitaire spécifique ; pour les « anciens », la quote-part est de 3 % à 6 %, avec un minimum de 30 et un maximum de 200 euros par mois.
 
 ### 2. Ne pas compter les primes de toute la famille

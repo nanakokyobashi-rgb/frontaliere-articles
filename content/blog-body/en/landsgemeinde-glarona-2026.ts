@@ -46,7 +46,7 @@ Being unable to vote does not mean being without channels to influence policy. C
 **Engagement in Italian municipalities.** Cross-border workers are full Italian residents with the right to vote in Italian political, regional, and municipal elections. Border municipalities (Como, Varese, Luino, Domodossola) have every interest in representing cross-border workers' needs to Rome — starting with the tax agreement, transport infrastructure toward the border, and cross-border mobility.
 
 ### Regulatory references
-- CH-IT Cross-border Workers Agreement (1974, updated with the new fiscal agreement 2023, in force from 1 January 2024)
+- CH-IT Cross-border Workers Agreement (1974, updated with the new fiscal agreement 2023, applied since 1 January 2024)
 - Federal Act on Foreign Nationals and Integration (AIG)
 - Swiss Citizenship Act (BüG, SR 141.0)
 - Collective labour agreements applicable in Ticino

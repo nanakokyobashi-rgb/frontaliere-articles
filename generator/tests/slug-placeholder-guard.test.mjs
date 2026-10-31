@@ -506,31 +506,6 @@ test('derive: nessun log quando non c\'e\' niente da correggere', () => {
  * modifica di codice.
  */
 const LEGACY_OFFENDERS = new Set([
-  // Giro precedente dello stesso difetto: il segnaposto nell'`id`, quindi
-  // anche nello slug italiano (`data.slugs.it = data.id`).
-  'blog|kebab-case-turismo-ticino|it',
-  'blog|kebab-case-ticino-nubifragio-grigioni|it',
-  'blog|kebab-case-rossi-bruxelles-ticino|it',
-  'blog|kebab-case-3-5-words-max-40-chars|it',
-  // 2026-08-09: la famiglia `slug-*`, mai coperta da niente.
-  'blog|kebab-case-3-5-words-max-40-chars|en',
-  'blog|kebab-case-3-5-words-max-40-chars|de',
-  'blog|kebab-case-3-5-words-max-40-chars|fr',
-  'blog|dipiu-frenata-per-gli-annunci-di-lavoro-in-svizzera|en',
-  'blog|dipiu-frenata-per-gli-annunci-di-lavoro-in-svizzera|de',
-  'blog|dipiu-frenata-per-gli-annunci-di-lavoro-in-svizzera|fr',
-  'swiss|traffico-da-record|en',
-  'swiss|traffico-da-record|de',
-  'swiss|traffico-da-record|fr',
-  'swiss|raffreddare-le-citta-svizzere-il-lavoro-e-appena-iniziato|en',
-  'swiss|raffreddare-le-citta-svizzere-il-lavoro-e-appena-iniziato|de',
-  'swiss|raffreddare-le-citta-svizzere-il-lavoro-e-appena-iniziato|fr',
-  'swiss|terzo-pilastro-3a-svizzero-vantaggi-2026-canton-basilea|en',
-  'swiss|terzo-pilastro-3a-svizzero-vantaggi-2026-canton-basilea|de',
-  'swiss|terzo-pilastro-3a-svizzero-vantaggi-2026-canton-basilea|fr',
-  'swiss|terzo-pilastro-3a-svizzero-vantaggi-canton-lucerna|en',
-  'swiss|terzo-pilastro-3a-svizzero-vantaggi-canton-lucerna|de',
-  'swiss|terzo-pilastro-3a-svizzero-vantaggi-canton-lucerna|fr',
 ]);
 
 const REGISTRIES = [

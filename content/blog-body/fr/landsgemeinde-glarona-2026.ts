@@ -46,7 +46,7 @@ Ne pas avoir le droit de vote ne signifie pas être sans voix. Les frontaliers p
 **Engagement dans les communes italiennes.** Les frontaliers sont des résidents italiens à part entière et votent lors des élections politiques, régionales et communales italiennes. Les communes frontalières (Côme, Varèse, Luino, Domodossola) ont tout intérêt à représenter adéquatement les frontaliers auprès de Rome — en commençant par l'accord fiscal, les infrastructures de transport vers la frontière et la mobilité transfrontalière.
 
 ### Références réglementaires
-- Accord CH-IT sur les travailleurs frontaliers (1974, mis à jour par le nouvel accord fiscal 2023, en vigueur depuis le 1er janvier 2024)
+- Accord CH-IT sur les travailleurs frontaliers (1974, mis à jour par le nouvel accord fiscal 2023, appliqué depuis le 1er janvier 2024)
 - Loi fédérale sur les étrangers et l'intégration (LEI)
 - Loi sur la nationalité suisse (LN, RS 141.0)
 - Conventions collectives de travail applicables au Tessin (construction, industrie des machines, commerce de détail, restauration)
