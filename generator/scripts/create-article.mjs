@@ -11445,7 +11445,7 @@ Le risposte devono includere dati concreti dalla fonte/contesto e rispettare il 
   const mustCoverLsiBlock = IS_FRONTALIERE && !localNewsSource
     ? `\n═══ MUST-COVER ENTITIES (E-E-A-T + LSI) ═══
 Almeno 6 dei seguenti termini DEVONO comparire naturalmente nel testo (no keyword stuffing):
-permesso G, AVS, LPP, LAMal, ristorni, imposta alla fonte, Brogeda, INPS, Canton Ticino, frontaliere, nuovo accordo fiscale 2026, doppia imposizione.\n`
+permesso G, AVS, LPP, LAMal, ristorni, imposta alla fonte, Brogeda, INPS, Canton Ticino, frontaliere, Nuovo Accordo Frontalieri, doppia imposizione.\n`
     : localNewsSource
     ? `\n═══ MUST-COVER ENTITIES (E-E-A-T + LSI) ═══
 Cronaca locale: nomina luoghi, enti e persone della fonte (comune, polizia cantonale, società sportiva, organizzatori). Termini frontalieri solo se la fonte ne dà motivo.\n`
