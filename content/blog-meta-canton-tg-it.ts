@@ -69,6 +69,9 @@ const blogMetaCantonTgIt: Record<string, string> = {
     'blog.article.turgovia-tariffa-cure-familiare-2026.title': 'Turgovia: fissata la nuova tariffa per le cure dei familiari',
     'blog.article.turgovia-tariffa-cure-familiare-2026.excerpt': 'Il Governo cantonale del Turgovia fissa la tariffa a CHF 52,60 all\'ora per le prestazioni di cura familiare con decorrenza retroattiva dal 1° gennaio 2026.',
     'blog.article.turgovia-tariffa-cure-familiare-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.ufficio-imposte-frauenfeld-orari.title': 'Ufficio imposte Frauenfeld modifica orari dal 2 novembre 2026',
+    'blog.article.ufficio-imposte-frauenfeld-orari.excerpt': 'Dal 2 novembre 2026, l\'Ufficio imposte della città di Frauenfeld chiuderà lunedì e mercoledì pomeriggio per elevato volume di lavoro.',
+    'blog.article.ufficio-imposte-frauenfeld-orari.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonTgIt;

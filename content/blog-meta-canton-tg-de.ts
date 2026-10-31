@@ -69,6 +69,9 @@ const blogMetaCantonTgDe: Record<string, string> = {
     'blog.article.turgovia-tariffa-cure-familiare-2026.title': 'Thurgau: Neuer Tarif für die Angehörigenpflege festgelegt',
     'blog.article.turgovia-tariffa-cure-familiare-2026.excerpt': 'Die Thurgauer Kantonsregierung setzt den Tarif für Leistungen der Angehörigenpflege mit rückwirkender Geltung ab dem 1.',
     'blog.article.turgovia-tariffa-cure-familiare-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.ufficio-imposte-frauenfeld-orari.title': 'Steueramt Frauenfeld ändert die Öffnungszeiten ab dem 2. November 2026',
+    'blog.article.ufficio-imposte-frauenfeld-orari.excerpt': 'Ab dem 2. November 2026 schließt das Steueramt der Stadt Frauenfeld am Montagnachmittag und am Mittwochnachmittag wegen des hohen Arbeitsvolumens.',
+    'blog.article.ufficio-imposte-frauenfeld-orari.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonTgDe;

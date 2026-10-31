@@ -250,4 +250,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'ufficio-imposte-frauenfeld-orari',
+ category: 'fiscale',
+ date: '2026-10-31T13:22:10.345Z',
+ image: '/images/blog/article-ufficio-imposte-frauenfeld-orari.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TG'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];
