@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "servizi",
-  "updatedAt": "2026-10-31T11:03:15.690Z",
-  "contentHash": "13062d155b95c09b2b39b1b61e346c65b6c0d200d028a0ea1244aa06273e74fd",
+  "updatedAt": "2026-10-31T12:39:05.963Z",
+  "contentHash": "c9c1dbdff3dcf5d02f49fec2c5afb8845c2e06934e3f28553d8174b30e47de66",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -149,6 +149,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Fislisbach: il 5 novembre incontro sulla scuola Leematten",
+          "url": "/articoli-argovia/fislisbach-sondaggio-leematten/",
+          "excerpt": "Il Comune di Fislisbach presenta il 5 novembre i risultati del sondaggio dopo il voto che ha respinto un credito da CHF 5,28 milioni.",
+          "date": "2026-10-31T12:27:23.904Z"
+        },
+        {
           "title": "Riduzione premi Argovia 2027: domanda entro il 31 dicembre",
           "url": "/articoli-argovia/riduzione-premi-argovia-2027/",
           "excerpt": "La SVA Aargau invia i codici per la riduzione dei premi. Per il 2027 la domanda va presentata entro giovedì 31 dicembre.",
@@ -189,12 +195,6 @@
           "url": "/articoli-svizzera/parlamento-svizzero-velo-divieto-diritti/",
           "excerpt": "Il Parlamento di Argovia ha votato per vietare il velo nelle scuole pubbliche fino ai 16 anni con 78 sì e 54 no, ma il Tribunale federale mette in dubbio la legalità della misura.",
           "date": "2026-08-25T23:47:24.519Z"
-        },
-        {
-          "title": "Argovia verso il divieto del velo nelle scuole",
-          "url": "/articoli-svizzera/argovia-divieto-velo-scuole/",
-          "excerpt": "Gran Consiglio argoviese approva mozione con 78 voti. Governo cantonale si oppone per dubbi costituzionali sulla base della sentenza del Tribunale federale del 2015.",
-          "date": "2026-08-25T16:30:23.961Z"
         }
       ],
       "latestCantonArticles": [],
@@ -224,7 +224,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-31T11:03:15.690Z"
+      "updatedAt": "2026-10-31T12:39:05.963Z"
     },
     "en": {
       "canton": "AG",
@@ -346,6 +346,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Fislisbach: November 5 meeting about Leematten school",
+          "url": "/en/aargau-articles/fislisbach-leematten-survey/",
+          "excerpt": "The Municipality of Fislisbach presents the survey results on November 5 following the vote that rejected a credit of CHF 5,28 million.",
+          "date": "2026-10-31T12:27:23.904Z"
+        },
+        {
           "title": "Aargau premium reduction 2027: application by 31 December",
           "url": "/en/aargau-articles/aargau-premium-reduction-2027/",
           "excerpt": "SVA Aargau sends the codes for premium reduction. For 2027, the application must be submitted by Thursday, December 31.",
@@ -386,12 +392,6 @@
           "url": "/en/swiss-articles/swiss-parliament-veil-ban-rights/",
           "excerpt": "The Parliament of Aargau voted to ban the veil in public schools until the age of 16 with 78 yes and 54 no, but the Federal Court questions the legality of the measure.",
           "date": "2026-08-25T23:47:24.519Z"
-        },
-        {
-          "title": "Aargau towards a ban on headscarves in schools",
-          "url": "/en/swiss-articles/aargau-veil-ban-schools/",
-          "excerpt": "The Argovian Grand Council approved the motion with 78 votes. Cantonal government objects due to constitutional doubts on the basis of the 2015 Federal Court ruling.",
-          "date": "2026-08-25T16:30:23.961Z"
         }
       ],
       "latestCantonArticles": [],
@@ -417,7 +417,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-31T11:03:15.690Z"
+      "updatedAt": "2026-10-31T12:39:05.963Z"
     },
     "de": {
       "canton": "AG",
@@ -539,6 +539,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Fislisbach: Am 5. November Treffen zur Schule Leematten",
+          "url": "/de/aargau-artikel/fislisbach-leematten-umfrage/",
+          "excerpt": "Die Gemeinde Fislisbach stellt am 5.",
+          "date": "2026-10-31T12:27:23.904Z"
+        },
+        {
           "title": "Prämienverbilligung Aargau 2027: Antrag bis zum 31. Dezember",
           "url": "/de/aargau-artikel/praemienverbilligung-aargau-2027/",
           "excerpt": "Die SVA Aargau versendet die Codes für die Prämienverbilligung. Für 2027 muss der Antrag bis Donnerstag, 31. Dezember, eingereicht werden.",
@@ -579,12 +585,6 @@
           "url": "/de/schweiz-artikel/schweizer-parlament-kopftuch-verbot/",
           "excerpt": "Das Aargauer Parlament hat mit 78 Ja und 54 Nein für ein Kopftuchverbot in öffentlichen Schulen bis 16 Jahre gestimmt, doch das Bundesgericht stellt die Rechtmässigkeit der Massnahme in Frage.",
           "date": "2026-08-25T23:47:24.519Z"
-        },
-        {
-          "title": "Aargau auf dem Weg zum Kopftuchverbot in Schulen",
-          "url": "/de/schweiz-artikel/aargau-kopftuch-verbot-schulen/",
-          "excerpt": "Der Grosse Aargauer Rat nimmt die Motion mit 78 Stimmen an. Die Kantonsregierung wendet sich aus verfassungsrechtlichen Gründen gegen das Bundesgerichtsurteil von 2015.",
-          "date": "2026-08-25T16:30:23.961Z"
         }
       ],
       "latestCantonArticles": [],
@@ -610,7 +610,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-31T11:03:15.690Z"
+      "updatedAt": "2026-10-31T12:39:05.963Z"
     },
     "fr": {
       "canton": "AG",
@@ -732,6 +732,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Fislisbach : le 5 novembre, rencontre au sujet de l’école Leematten",
+          "url": "/fr/articles-argovie/fislisbach-sondage-leematten/",
+          "excerpt": "La commune de Fislisbach présente le 5 novembre les résultats du sondage après le vote qui a rejeté un crédit de CHF 5,28 millions.",
+          "date": "2026-10-31T12:27:23.904Z"
+        },
+        {
           "title": "Réduction des primes en Argovie 2027 : demande avant le 31 décembre",
           "url": "/fr/articles-argovie/reduction-primes-argovie-2027/",
           "excerpt": "La SVA Aargau envoie les codes pour la réduction des primes. Pour 2027, la demande doit être déposée d’ici au jeudi 31 décembre.",
@@ -772,12 +778,6 @@
           "url": "/fr/articles-suisse/parlement-suisse-voile-interdiction/",
           "excerpt": "Le Parlement d'Argovie a voté pour interdire le voile dans les écoles publiques jusqu'à 16 ans avec 78 oui et 54 non, mais le Tribunal fédéral met en doute la légalité de la mesure.",
           "date": "2026-08-25T23:47:24.519Z"
-        },
-        {
-          "title": "Argovie vers l'interdiction du voile dans les écoles",
-          "url": "/fr/articles-suisse/argovie-interdiction-voile-ecoles/",
-          "excerpt": "Le Grand Conseil argovien approuve la motion par 78 voix. Le gouvernement cantonal s'y oppose pour des doutes constitutionnels sur la base de l'arrêt du Tribunal fédéral de 2015.",
-          "date": "2026-08-25T16:30:23.961Z"
         }
       ],
       "latestCantonArticles": [],
@@ -799,7 +799,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-31T11:03:15.690Z"
+      "updatedAt": "2026-10-31T12:39:05.963Z"
     }
   }
 }
