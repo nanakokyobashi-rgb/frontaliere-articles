@@ -13655,6 +13655,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.massagno-moltiplicatore-2027.title': 'Massagno propone moltiplicatore d\'imposta al 77% per il 2027',
     'blog.article.massagno-moltiplicatore-2027.excerpt': 'Massagno propone il 77% per il Preventivo 2027 Il disavanzo previsto è di 528\'142 franchi Investimenti netti pari a 7\'732\'000 franchi Il Consiglio comunale',
     'blog.article.massagno-moltiplicatore-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.voto-cinque-temi-28-febbraio.title': 'Cinque temi al voto il 28 febbraio 2027',
+    'blog.article.voto-cinque-temi-28-febbraio.excerpt': 'Il 28 febbraio 2027 la popolazione voterà su cinque temi Il nucleare è il controprogetto a «Stop al blackout» Foie gras e naturalizzazione arrivano con due',
+    'blog.article.voto-cinque-temi-28-febbraio.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaIt;

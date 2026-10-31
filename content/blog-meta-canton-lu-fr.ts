@@ -63,6 +63,9 @@ const blogMetaCantonLuFr: Record<string, string> = {
     'blog.article.passepartout-trasporto-centrale.title': 'Passepartout : accès plus simple aux transports publics',
     'blog.article.passepartout-trasporto-centrale.excerpt': 'Avant 1986, plusieurs billets étaient nécessaires pour un trajet en transports publics.',
     'blog.article.passepartout-trasporto-centrale.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.tunnel-sonnenberg-chiusura-notte.title': 'Tunnel du Sonnenberg fermé pour inspection structurelle',
+    'blog.article.tunnel-sonnenberg-chiusura-notte.excerpt': 'Fermeture complète du tunnel du Sonnenberg dans les deux directions dans la nuit du 4 au 5 novembre 2026, de 22.00 à 05.00.',
+    'blog.article.tunnel-sonnenberg-chiusura-notte.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonLuFr;

@@ -787,6 +787,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tunnel-sonnenberg-chiusura-notte': {
+    title: 'Tunnel Sonnenberg chiuso per ispezione strutturale',
+    description: 'Il tunnel Sonnenberg di Lucerna sarà chiuso in entrambe le direzioni tra il 4 e il 5 novembre 2026 per ispezione strutturale del pozzo',
+    keywords: 'frontalieri, ticino, svizzera, italia, tunnel, sonnenberg, chiuso, ispezione',
+    ogTitle: 'Tunnel Sonnenberg chiuso notte 4-5 novembre 2026',
+    ogDescription: 'Informazioni sulla chiusura completa del tunnel Sonnenberg in entrambe le direzioni tra il 4 e il 5 novembre 2026 per ispezione strutturale del pozzo di ventilazione da ASTRA.',
+    canonicalPath: '/articoli-lucerna/tunnel-sonnenberg-chiusura-notte/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Tunnel Sonnenberg chiuso per ispezione strutturale",
+      "description": "Il tunnel Sonnenberg di Lucerna sarà chiuso in entrambe le direzioni tra il 4 e il 5 novembre 2026 per ispezione strutturale del pozzo",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-tunnel-sonnenberg-chiusura-notte.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-31T11:51:39+00:00",
+      "dateModified": "2026-10-31T11:51:39+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-lucerna/tunnel-sonnenberg-chiusura-notte/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

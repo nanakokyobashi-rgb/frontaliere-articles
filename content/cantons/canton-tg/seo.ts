@@ -777,6 +777,84 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-messaggio-modifica-legge-strade': {
+    title: 'Governo Turgovia approva messaggio per modifica legge strade e vie',
+    description: 'Il Governo del Canton Turgovia ha approvato il messaggio per modificare la legge su strade e vie, introducendo un\'eccezione per i manifesti',
+    keywords: 'frontalieri, ticino, svizzera, italia, governo, turgovia, approva, messaggio',
+    ogTitle: 'Governo Turgovia approva modifica legge strade',
+    ogDescription: 'Il Governo del Canton Turgovia ha approvato il messaggio al Gran Consiglio per uniformare la disciplina dei manifesti di elezioni e votazioni, garantendo il rispetto della sicurezza stradale.',
+    canonicalPath: '/articoli-turgovia/messaggio-modifica-legge-strade/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Governo Turgovia approva messaggio per modifica legge strade e vie",
+      "description": "Il Governo del Canton Turgovia ha approvato il messaggio per modificare la legge su strade e vie, introducendo un'eccezione per i manifesti",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-messaggio-modifica-legge-strade.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-31T11:15:56+00:00",
+      "dateModified": "2026-10-31T11:15:56+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-turgovia/messaggio-modifica-legge-strade/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-turgovia-tariffa-cure-familiare-2026': {
+    title: 'Turgovia: fissata la nuova tariffa per le cure dei familiari',
+    description: 'Il Governo del Turgovia fissa la tariffa per le cure familiari a CHF 52,60 all\'ora con decorrenza retroattiva dal 1° gennaio 2026.',
+    keywords: 'frontalieri, ticino, svizzera, italia, turgovia, fissata, nuova, tariffa',
+    ogTitle: 'Turgovia: nuova tariffa cure familiari a CHF 52,60',
+    ogDescription: 'Il Governo cantonale del Turgovia ha stabilito la tariffa per le prestazioni di cura dei familiari a CHF 52,60 all\'ora, con effetto retroattivo dal 1° gennaio 2026 in seguito alla pronuncia del Tribunale federale.',
+    canonicalPath: '/articoli-turgovia/turgovia-tariffa-cure-familiare-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Turgovia: fissata la nuova tariffa per le cure dei familiari",
+      "description": "Il Governo del Turgovia fissa la tariffa per le cure familiari a CHF 52,60 all'ora con decorrenza retroattiva dal 1° gennaio 2026.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-turgovia-tariffa-cure-familiare-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-31T11:54:22+00:00",
+      "dateModified": "2026-10-31T11:54:22+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-turgovia/turgovia-tariffa-cure-familiare-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

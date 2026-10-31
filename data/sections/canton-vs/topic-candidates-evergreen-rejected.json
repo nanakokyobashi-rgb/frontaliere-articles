@@ -4,17 +4,33 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vs::https://www.ossolanews.it/2026/10/25/leggi-notizia/argomenti/confine/articolo/frontalieri-la-svizzera-dice-no-ai-rimborsi-sul-secondo-pilastro.html": {
+    "canton-vs::https://www.lastampa.it/verbano-cusio-ossola/2026/10/30/news/frontalieri_ossolani_protesta_parcheggio_pagamento_iselle-15782963": {
       "section": "canton-vs",
-      "ts": 1793104392128
+      "ts": 1793444932743
     },
-    "canton-vs::https://www.pomona.ch/story/819237/steghohtenn-wagt-den-zweiten-anlauf-die-energiedienste-sollen-in-der-rell-aufgehen": {
+    "canton-vs::https://www.pomona.ch/story/820235/die-sbbapp-wird-noch-viel-praktischer-das-sind-die-wichtigsten-neuerungen": {
       "section": "canton-vs",
-      "ts": 1793124683018
+      "ts": 1793444936313
     },
-    "canton-vs::https://www.regionvalaisromand.ch/fr/bienvenue-valais-cote-coulisses-2057.html": {
+    "canton-vs::https://www.pomona.ch/story/820899/darum-ruht-die-baustelle-beim-fuxji-in-visp": {
       "section": "canton-vs",
-      "ts": 1793204877696
+      "ts": 1793444938206
+    },
+    "canton-vs::https://www.rhonefm.ch/valais/une-patinoire-itinerante-a-conthey-des-halloween-jusqu-a-fin-avril-1835383": {
+      "section": "canton-vs",
+      "ts": 1793445760521
+    },
+    "canton-vs::https://www.pomona.ch/story/820643/tiefe-l%c3%b6hne-haben-ihren-preis": {
+      "section": "canton-vs",
+      "ts": 1793445763791
+    },
+    "canton-vs::https://www.pomona.ch/story/820359/trinkwasser-in-ergisch-wieder-geniessbar": {
+      "section": "canton-vs",
+      "ts": 1793445768833
+    },
+    "canton-vs::https://www.pomona.ch/story/820116/der-grossrat-der-das-glas-wein-von-der-krankenkasse-bezahlen-lassen-will": {
+      "section": "canton-vs",
+      "ts": 1793445771001
     }
   }
 }

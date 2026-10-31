@@ -227,4 +227,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'tunnel-sonnenberg-chiusura-notte',
+ category: 'pratico',
+ date: '2026-10-31T11:51:39.474Z',
+ image: '/images/blog/article-tunnel-sonnenberg-chiusura-notte.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['LU'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

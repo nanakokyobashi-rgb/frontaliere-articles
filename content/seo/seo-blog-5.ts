@@ -113991,6 +113991,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-voto-cinque-temi-28-febbraio': {
+    title: 'Cinque temi al voto il 28 febbraio 2027 | Frontaliere Ticino',
+    description: 'Il 28 febbraio 2027 la popolazione voterà su cinque temi Il nucleare è il controprogetto a «Stop al blackout» Foie gras e naturalizzazione arrivano',
+    keywords: 'frontalieri, ticino, svizzera, italia, cinque, temi, voto, febbraio',
+    ogTitle: 'Cinque temi al voto il 28 febbraio 2027',
+    ogDescription: 'Il 28 febbraio 2027 la popolazione voterà su cinque temi Il nucleare è il controprogetto a «Stop al blackout» Foie gras e naturalizzazione arrivano con due',
+    canonicalPath: '/articoli-frontaliere/voto-cinque-temi-28-febbraio/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cinque temi al voto il 28 febbraio 2027",
+      "description": "Il 28 febbraio 2027 la popolazione voterà su cinque temi Il nucleare è il controprogetto a «Stop al blackout» Foie gras e naturalizzazione arrivano",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-voto-cinque-temi-28-febbraio.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-31T11:19:42+00:00",
+      "dateModified": "2026-10-31T11:19:42+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/voto-cinque-temi-28-febbraio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
