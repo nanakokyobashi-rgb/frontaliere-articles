@@ -15,6 +15,7 @@ import { readFileSync } from 'node:fs';
 import { isManagedReview, REDFLAG_IMPORTANT_RE } from './lib/constants.mjs';
 import { fetchPrFiles } from './lib/fetchPrFiles.mjs';
 import { isTerminalReviewState } from './lib/review-states.mjs';
+import { REVIEW_INPUT_REVISION_MARKER_RE } from './review-test-policy.mjs';
 import { createGithubIssue } from '../lib/github-issue-creator.mjs';
 import { evaluateBodyContract } from '../lib/pr-body-contract-eval.mjs';
 import {
@@ -776,6 +777,15 @@ function reviewAppliesToHead(reviewCommit, headSha) {
     && String(reviewCommit).toLowerCase() === String(headSha).toLowerCase());
 }
 
+const REVIEW_INPUT_MARKER_LINE_RE = new RegExp(
+  REVIEW_INPUT_REVISION_MARKER_RE.source,
+  REVIEW_INPUT_REVISION_MARKER_RE.flags.replace('g', ''),
+);
+
+function hasFormalReviewInput(body) {
+  return String(body || '').split(/\r?\n/u).some((line) => REVIEW_INPUT_MARKER_LINE_RE.test(line));
+}
+
 function nonApplicableClassification(findings) {
   return {
     findings,
@@ -1246,15 +1256,20 @@ export async function classifyAndMintReview(body, {
 } = {}) {
   if (!repo || !pr) throw new Error('repo e pr sono obbligatori');
   const findings = importantFindings(body);
-  const hasApplicabilityContext = reviewCommit !== null || headSha !== null || reviewId !== null;
   // Il gate può autorizzare esplicitamente il carry-forward solo dopo aver
   // verificato il fingerprint code-only; un commit stantio da solo resta
   // contesto non applicabile e quindi fail-closed.
   const hasValidatedCarryForward = reviewCarryForwardValidated
-    && Boolean(reviewCommit && headSha && reviewId !== null);
-  if (findings.length > 0 && hasApplicabilityContext
-      && !reviewAppliesToHead(reviewCommit, headSha)
-      && !hasValidatedCarryForward) {
+    && Boolean(reviewCommit && headSha && reviewId !== null
+      && String(reviewId).trim() !== '');
+  const hasAnyApplicabilityContext = reviewCommit !== null || headSha !== null || reviewId !== null;
+  const requiresApplicabilityContext = hasFormalReviewInput(body) || hasAnyApplicabilityContext;
+  const hasCompleteApplicabilityContext = Boolean(
+    reviewCommit && headSha && reviewId !== null && String(reviewId).trim() !== '',
+  );
+  if (findings.length > 0 && requiresApplicabilityContext
+      && (!hasCompleteApplicabilityContext
+        || (!reviewAppliesToHead(reviewCommit, headSha) && !hasValidatedCarryForward))) {
     console.error('review-scope: review non applicabile alla HEAD corrente → classificazione bloccata.');
     return nonApplicableClassification(findings);
   }

@@ -185,6 +185,7 @@ exit 0
 }
 
 const botReview = (commit, body, { reviewRevision = BODY_REVISION, ...overrides } = {}) => ({
+  id: 1,
   user: { type: 'Bot', login: 'claude[bot]' },
   state: 'COMMENTED',
   commit_id: commit,
@@ -409,6 +410,16 @@ test('carry-forward validato conserva la classificazione di un finding storico f
 
 test('reviewCommit mancante o stantio resta fail-closed prima della classificazione', async () => {
   const body = '`generator/scripts/outside.mjs:10`: 🔴 Important: il controllo condiviso manca.';
+  const formalBody = `${body}\n<!-- REVIEW_INPUT_REVISION: body:${'a'.repeat(64)} -->`;
+  const missingContext = await classifyAndMintReview(formalBody, {
+    repo: 'o/r',
+    pr: 901,
+    mutate: false,
+  });
+  assert.equal(missingContext.blocking, true, 'il contesto completamente assente deve bloccare');
+  assert.equal(missingContext.outsideOnly, false, 'il contesto completamente assente non può approvare');
+  assert.equal(missingContext.unresolved.length, 1, 'il finding resta irrisolto senza provenienza');
+  assert.equal(missingContext.unresolved[0].reason, 'review non applicabile alla HEAD corrente');
   for (const reviewCommit of ['', OLD]) {
     const result = await classifyAndMintReview(body, {
       repo: 'o/r',
