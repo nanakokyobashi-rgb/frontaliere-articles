@@ -68,6 +68,7 @@ on:
       - 'sections/**'
       - 'scripts/lib/section-registry.mjs'
       - 'scripts/lib/canton-hub-data.mjs'
+      - 'scripts/lib/article-index-exclusions-check.mjs'
       - 'scripts/lib/canton-hub-content.mjs'
       - 'generator/scripts/lib/canton-hubs/paths.mjs'
       - 'scripts/publish-section-edge.mjs'

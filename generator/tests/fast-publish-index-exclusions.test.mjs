@@ -3,6 +3,7 @@
  * Senza una voce nel piano del fast-publish il noindex resterebbe nel JSON e la
  * pagina servita continuerebbe a dire `index`.
  */
+import '../../host/cantonSectionsBootstrap.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { articlePublishPlan, r2PublishPlan } from '../../scripts/ci/fast-publish-section.mjs';
