@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "fisco",
-  "updatedAt": "2026-10-23T00:30:32.988Z",
-  "contentHash": "3929f90d935ff8f52a3b61389277944c253a4e1a042b30321345afe9f9e5793c",
+  "updatedAt": "2026-10-31T13:52:20.998Z",
+  "contentHash": "5f06a6a6c4efacdff09f9f0a75c00409f5487b61de791edce4128d56ea600a64",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-22T16:03:41.824Z",
+      "updatedAt": "2026-10-30T21:45:03.956Z",
       "keyFacts": 0
     }
   ],
@@ -115,7 +115,7 @@
               "url": "https://www.gr.ch/DE/institutionen/verwaltung/dfg/stv/mitteilungen/Seiten/Systemwechsel-bei-der-Wohneigentumsbesteuerung-und-Einf%C3%BChrung-einer-besonderen-Liegenschaftssteuer.aspx"
             }
           ],
-          "updatedAt": "2026-10-22T16:03:41.824Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -134,13 +134,13 @@
         {
           "title": "Frontaliere Chiesa-Grigioni: guida fiscale e pratica",
           "url": "/articoli-frontaliere/chiesa-valmalenco-grigioni-frontaliere/",
-          "excerpt": "Vivere a Chiesa in Valmalenco e lavorare nei Grigioni: nuovo accordo 2024, esenzioni €7.500-€10.000, tassazione svizzera e credito d'imposta italiano.",
+          "excerpt": "Vivere a Chiesa in Valmalenco e lavorare nei Grigioni: nuovo accordo 2024, esenzioni €10.000, tassazione svizzera e credito d'imposta italiano.",
           "date": "2026-09-02T21:26:24.983Z"
         },
         {
           "title": "Vivere a Silandro e lavorare in Grigioni: guida fiscale",
           "url": "/articoli-frontaliere/silandro-grigioni-tassazione-permesso-g/",
-          "excerpt": "Nuovo Accordo Frontalieri dal 1° gennaio 2024: esenzione €7.500 per vecchi frontalieri, €10.000 per nuovi. Imposta alla fonte in Svizzera, credito d'imposta in Italia. AVS e LPP versati solo in Svizzera.",
+          "excerpt": "I nuovi frontalieri hanno una franchigia IRPEF di 10.000 euro, mentre i vecchi frontalieri restano tassati solo in Svizzera (art. 9 dell'Accordo del 2020). Imposta alla fonte in Svizzera, credito d'imposta in Italia…",
           "date": "2026-08-22T02:15:33.938Z"
         },
         {
@@ -195,7 +195,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-31T13:52:20.998Z"
     },
     "en": {
       "canton": "GR",
@@ -288,7 +288,7 @@
               "url": "https://www.gr.ch/DE/institutionen/verwaltung/dfg/stv/mitteilungen/Seiten/Systemwechsel-bei-der-Wohneigentumsbesteuerung-und-Einf%C3%BChrung-einer-besonderen-Liegenschaftssteuer.aspx"
             }
           ],
-          "updatedAt": "2026-10-22T16:03:41.824Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -307,13 +307,13 @@
         {
           "title": "Church-Grison Frontiers: Tax Guide and Practice",
           "url": "/en/cross-border-articles/chiesa-valmalenco-graubunden-cross-border/",
-          "excerpt": "Living in Chiesa in Valmalenco and working in Graubünden: new 2024 agreement, exemptions €7,500-€10,000, Swiss taxation and Italian tax credit.",
+          "excerpt": "Living in Chiesa in Valmalenco and working in Graubünden: new 2024 agreement, exemptions €10,000, Swiss taxation and Italian tax credit.",
           "date": "2026-09-02T21:26:24.983Z"
         },
         {
           "title": "Living in Silandro and working in Graubünden: a tax guide",
           "url": "/en/cross-border-articles/silandro-graubunden-taxation-permit-g/",
-          "excerpt": "New Frontier Agreement from 1 January 2024: exemption €7,500 for old frontier workers, €10,000 for new ones. Tax at source in Switzerland, tax credit in Italy. AVS and LPP paid only in Switzerland.",
+          "excerpt": "New cross-border workers have a €10,000 IRPEF allowance, while old cross-border workers remain taxed only in Switzerland (Art. 9 of the 2020 Agreement). Tax at source in Switzerland, tax credit in Italy. AVS and LPP…",
           "date": "2026-08-22T02:15:33.938Z"
         },
         {
@@ -368,7 +368,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-31T13:52:20.998Z"
     },
     "de": {
       "canton": "GR",
@@ -461,7 +461,7 @@
               "url": "https://www.gr.ch/DE/institutionen/verwaltung/dfg/stv/mitteilungen/Seiten/Systemwechsel-bei-der-Wohneigentumsbesteuerung-und-Einf%C3%BChrung-einer-besonderen-Liegenschaftssteuer.aspx"
             }
           ],
-          "updatedAt": "2026-10-22T16:03:41.824Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -480,7 +480,7 @@
         {
           "title": "Grenzgänger Kirche-Graubünden: Steuer- und Praxisleitfaden",
           "url": "/de/grenzgaenger-artikel/chiesa-valmalenco-graubuenden-grenzgaenger/",
-          "excerpt": "Leben in Chiesa in Valmalenco und Arbeiten in Graubünden: Neues Abkommen 2024, Befreiungen €7.500- € 10.000, Schweizer Besteuerung und italienische Steuergutschrift.",
+          "excerpt": "Leben in Chiesa in Valmalenco und Arbeiten in Graubünden: Neues Abkommen 2024, Befreiungen € 10.000, Schweizer Besteuerung und italienische Steuergutschrift.",
           "date": "2026-09-02T21:26:24.983Z"
         },
         {
@@ -541,7 +541,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-31T13:52:20.998Z"
     },
     "fr": {
       "canton": "GR",
@@ -634,7 +634,7 @@
               "url": "https://www.gr.ch/DE/institutionen/verwaltung/dfg/stv/mitteilungen/Seiten/Systemwechsel-bei-der-Wohneigentumsbesteuerung-und-Einf%C3%BChrung-einer-besonderen-Liegenschaftssteuer.aspx"
             }
           ],
-          "updatedAt": "2026-10-22T16:03:41.824Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -653,7 +653,7 @@
         {
           "title": "Frontière Église-Grisons : guide fiscal et pratique",
           "url": "/fr/articles-frontalier/chiesa-valmalenco-grisons-frontalier/",
-          "excerpt": "Vivre à Chiesa in Valmalenco et travailler dans les Grisons : nouvel accord 2024, exonérations € 7.500-€ 10.000, fiscalité suisse et crédit d'impôt italien.",
+          "excerpt": "Vivre à Chiesa in Valmalenco et travailler dans les Grisons : nouvel accord 2024, exonérations € 10.000, fiscalité suisse et crédit d'impôt italien.",
           "date": "2026-09-02T21:26:24.983Z"
         },
         {
@@ -714,7 +714,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-31T13:52:20.998Z"
     }
   }
 }
