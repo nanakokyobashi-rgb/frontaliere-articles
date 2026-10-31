@@ -19,6 +19,7 @@
  *   node scripts/audit-article-relevance.mjs --write    # riscrive il ledger
  *   node scripts/audit-article-relevance.mjs --check    # esce 1 se il ledger e' fuori sync
  */
+import '../host/cantonSectionsBootstrap.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -26,6 +27,7 @@ import { fileURLToPath } from 'node:url';
 import { ARTICLE_SECTION_CORE_ALL } from '../engine/shared/articleSectionCore.mjs';
 import { corpusPath } from '../generator/scripts/lib/corpus-paths.mjs';
 import { unescapeForSingleQuoteTS } from '../generator/scripts/lib/article-meta-block.mjs';
+import { writeFileAtomic } from '../generator/scripts/lib/atomic-write-file.mjs';
 import { classifyArticleRelevance } from '../generator/scripts/lib/article-relevance-gate.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -145,7 +147,7 @@ function main(argv) {
     for (const row of ledger.excluded) console.log(`${row.rule}\t${row.family ?? ''}\t${row.term ?? ''}\t${row.section}\t${row.id}`);
   }
   if (argv.includes('--write')) {
-    fs.writeFileSync(path.join(ROOT, LEDGER_FILE), text);
+    writeFileAtomic(path.join(ROOT, LEDGER_FILE), text);
     return 0;
   }
   if (argv.includes('--check') && readIfPresent(LEDGER_FILE) !== text) {

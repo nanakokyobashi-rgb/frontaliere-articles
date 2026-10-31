@@ -29,10 +29,13 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import * as IRPEF from '../scripts/lib/irpef-scaglioni.mjs';
+import * as IRPEF_MODULE from '../scripts/lib/irpef-scaglioni.mjs';
+import { YMYL_SOURCES_BRIEF, YMYL_SOURCES_BRIEF_CH } from '../scripts/lib/article-ymyl-gate.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CREATE_ARTICLE = path.resolve(HERE, '../scripts/create-article.mjs');
+// Gli stessi nomi che il template interpola: il blocco estratto non ha gli import.
+const IRPEF = { ...IRPEF_MODULE, YMYL_SOURCES_BRIEF, YMYL_SOURCES_BRIEF_CH };
 const IRPEF_SOURCE = readFileSync(path.resolve(HERE, '../scripts/lib/irpef-scaglioni.mjs'), 'utf-8');
 const SRC = readFileSync(CREATE_ARTICLE, 'utf-8');
 

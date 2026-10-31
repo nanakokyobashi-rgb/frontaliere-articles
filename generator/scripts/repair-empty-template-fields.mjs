@@ -25,6 +25,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { writeFileSnapshotAtomically } from '../../scripts/lib/write-file-pair-atomically.mjs';
 import { escapeForSingleQuoteTS, unescapeForSingleQuoteTS } from './lib/article-meta-block.mjs';
 import { factValueOf, isEmptyAmountFact, matchesVacuousValue, parseAiSearchSections } from './lib/key-facts-specificity.mjs';
 
@@ -140,7 +141,7 @@ function main(argv) {
         });
         if (next === source) continue;
         totals.file += 1;
-        if (!check) fs.writeFileSync(file, next);
+        if (!check) writeFileSnapshotAtomically(file, source, next);
       }
     }
   }

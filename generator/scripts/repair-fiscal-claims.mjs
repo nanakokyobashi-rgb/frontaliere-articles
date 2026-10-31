@@ -32,6 +32,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { writeFileSnapshotAtomically } from '../../scripts/lib/write-file-pair-atomically.mjs';
 import { AMOUNT_7500, findFiscalClaims, findTaxHealthParameterErrors } from './lib/fiscal-claims-guard.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
@@ -219,7 +220,7 @@ function main(argv) {
     for (const sentence of found) arith.push(`${rel}: ${sentence}`);
     if (text === source) continue;
     touched.push(rel);
-    if (!check) fs.writeFileSync(file, text);
+    if (!check) writeFileSnapshotAtomically(file, source, text);
   }
   console.log(JSON.stringify({ fileRiparati: touched.length, esempiAritmetici: arith.length }));
   for (const row of arith) console.log(`ARITH ${row}`);

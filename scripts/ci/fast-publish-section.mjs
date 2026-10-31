@@ -45,8 +45,8 @@
  *
  * Solo builtin Node: gira nel primo step del workflow, prima di setup-node.
  */
-import { articleIndexExclusionKey, parseArticleIndexExclusions } from '../../engine/shared/articleIndexExclusions.mjs';
 import '../../host/cantonSectionsBootstrap.mjs';
+import { articleIndexExclusionKey, parseArticleIndexExclusions } from '../../engine/shared/articleIndexExclusions.mjs';
 import { execFileSync } from 'node:child_process';
 import { existsSync, readFileSync, realpathSync } from 'node:fs';
 import path from 'node:path';

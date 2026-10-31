@@ -727,11 +727,14 @@ const retiredByRegistry = (section) =>
 const SECTION_SITEMAP_SHADOW = Object.fromEntries(
   PUBLIC_API_SECTIONS.map((section) => [
     section.section,
-    section.retiredDailyEditions
-      ? new Set([...retiredDailyEditionSlugs, ...SECTION_CANONICAL_SHADOW[section.section], ...indexExcludedSlugs(section)])
-      : section.api.family !== null
-        ? new Set([...SECTION_CANONICAL_SHADOW[section.section], ...retiredByRegistry(section), ...indexExcludedSlugs(section)])
-        : new Set([...SECTION_CANONICAL_SHADOW[section.section], ...indexExcludedSlugs(section)]),
+    new Set([
+      ...(section.retiredDailyEditions
+        ? new Set([...retiredDailyEditionSlugs, ...SECTION_CANONICAL_SHADOW[section.section]])
+        : section.api.family !== null
+          ? new Set([...SECTION_CANONICAL_SHADOW[section.section], ...retiredByRegistry(section)])
+          : SECTION_CANONICAL_SHADOW[section.section]),
+      ...indexExcludedSlugs(section),
+    ]),
   ]),
 );
 // La dimensione di pagina dell'archivio viene dalla sorgente unica dell'host

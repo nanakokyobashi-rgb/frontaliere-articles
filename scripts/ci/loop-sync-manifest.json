@@ -3170,6 +3170,36 @@
       }
     },
     {
+      "path": "generator/scripts/lib/article-relevance-gate.mjs",
+      "mode": "corpus-only",
+      "reason": "Gate deterministico del nesso editoriale degli articoli generati: vive col generatore, che esiste solo qui.",
+      "baseline": {
+        "site": null,
+        "corpus": "a28458296ee9442d",
+        "alignedAt": "2026-10-31"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/article-ymyl-gate.mjs",
+      "mode": "corpus-only",
+      "reason": "Gate YMYL della pubblicazione automatica: vive col generatore, che esiste solo qui.",
+      "baseline": {
+        "site": null,
+        "corpus": "79a23fa4cc2cdc0d",
+        "alignedAt": "2026-10-31"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/fiscal-claims-guard.mjs",
+      "mode": "corpus-only",
+      "reason": "Affermazioni fiscali smentite dalle fonti primarie, usate dal generatore e dal test sul corpus.",
+      "baseline": {
+        "site": null,
+        "corpus": "6e0fa36d15fd0e41",
+        "alignedAt": "2026-10-31"
+      }
+    },
+    {
       "path": "generator/scripts/lib/key-facts-specificity.mjs",
       "mode": "corpus-only",
       "reason": "Rilevatore puro dei fatti chiave senza valore nelle quattro lingue. Lo scanner di #1054 usa la forma di riferimento per misurare 53 file-locale/29 articoli; il gate di #1055 rimuove una coppia solo se restano almeno tre fatti e rifiuta il payload sotto soglia. E' una libreria del generatore del corpus e non ha gemello sul sito.",
