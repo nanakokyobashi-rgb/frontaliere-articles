@@ -13641,6 +13641,12 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.lavori-barriere-antirumore-a8.title': 'Arbeiten an Lärmschutzwänden auf der A8 und der D08: Leitfaden zu den Sperrungen',
     'blog.article.lavori-barriere-antirumore-a8.excerpt': 'Nächtliche Sperrungen auf der A8 und der D08 vom 2. (Gallarate, Besnate)',
     'blog.article.lavori-barriere-antirumore-a8.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.bellinzona-imposte-piu-salate-2028.title': 'In Bellinzona ab 2028 höhere Steuern',
+    'blog.article.bellinzona-imposte-piu-salate-2028.excerpt': 'Der Stadtrat von Bellinzona hat ab 2028 höhere Steuern angekündigt, zeitgleich mit dem Voranschlag 2026, der ein Defizit von 10,6 Millionen ausweist.',
+    'blog.article.bellinzona-imposte-piu-salate-2028.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.infermieri-osc-sindacati-stipendi.title': 'OSC-Pflegekräfte und Gewerkschaften: Lohnstopp aufheben',
+    'blog.article.infermieri-osc-sindacati-stipendi.excerpt': 'Die Neuklassifizierung der Osc ist seit Jahren blockiert 2019: Klasse 4→5 für Pflegefachpersonen, 5→6 für Spezialisierungen Jährliche Erhöhungen von 5\'159 bis 8\'941 Franken Versammlung am 10.',
+    'blog.article.infermieri-osc-sindacati-stipendi.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaDe;

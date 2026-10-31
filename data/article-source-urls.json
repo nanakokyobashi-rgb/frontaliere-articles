@@ -1,14 +1,4 @@
 {
-  "https://www.vconews.it/2026/09/18/leggi-notizia/argomenti/confine-1/articolo/frontalieri-barbazza-scrive-al-governo-difendere-le-risorse-destinate-ai-comuni-di-confine.html": {
-    "articleId": "sindaco-malesco-fondi-confine",
-    "ts": "2026-09-19T01:57:04.790Z",
-    "keyForm": 2
-  },
-  "https://www.varesenews.it/2026/09/accoglienza-e-lavoro-confapi-varese-e-fondazione-avsi-siglano-laccordo/2683126": {
-    "articleId": "confapi-avsi-accordo-varese-formazione",
-    "ts": "2026-09-19T02:39:34.841Z",
-    "keyForm": 2
-  },
   "https://comozero.it/attualita/comuni-di-frontiera-ristorni-da-89-a-108-milioni-esultano-i-sindaci-accolta-la-nostra-richiesta": {
     "articleId": "comuni-frontiera-ristorni-108-milioni",
     "ts": "2026-09-20T09:52:25.472Z",
@@ -2497,6 +2487,16 @@
   "https://www.varesenews.it/2026/10/lavori-sulle-barriere-antirumore-in-a8-e-diramazione-gallarate-gattico-la-guida-alle-chiusure/2724793": {
     "articleId": "lavori-barriere-antirumore-a8",
     "ts": "2026-10-31T08:27:35.352Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/cantone/bellinzonese/1959787/a-bellinzona-imposte-piu-salate-dal-2028": {
+    "articleId": "bellinzona-imposte-piu-salate-2028",
+    "ts": "2026-10-31T08:56:47.997Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/cantone/mendrisiotto/1960098/infermieri-osc-e-sindacati-chiedono-lo-sblocco-degli-stipendi": {
+    "articleId": "infermieri-osc-sindacati-stipendi",
+    "ts": "2026-10-31T09:38:46.362Z",
     "keyForm": 2
   }
 }

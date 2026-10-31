@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "fisco",
-  "updatedAt": "2026-10-27T03:15:48.569Z",
-  "contentHash": "9130c62ce46e4180cc5283d297a0a3b9d02f47c96a42a3104d91e747187ed626",
+  "updatedAt": "2026-10-31T09:03:35.366Z",
+  "contentHash": "85c03ae964daa0025fe53d939b87346b487bb7236877859579a461f9e54c2e3e",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -138,16 +138,16 @@
           "date": "2026-10-08T11:44:40.237Z"
         },
         {
+          "title": "A Bellinzona imposte più salate dal 2028",
+          "url": "/articoli-frontaliere/bellinzona-imposte-piu-salate-2028/",
+          "excerpt": "Il Municipio di Bellinzona ha annunciato imposte più salate dal 2028, in concomitanza con il Preventivo 2026 che mostra un disavanzo di 10,6 milioni.",
+          "date": "2026-10-31T08:56:46.770Z"
+        },
+        {
           "title": "Preventivo 2027: disavanzo e conti pubblici in Ticino",
           "url": "/articoli-svizzera/preventivo-2027-conti-pubblici/",
           "excerpt": "Il Preventivo 2027 del Cantone prevede un disavanzo di 98,5 milioni. Tra burocrazia, personale e fisco, ecco le reazioni e il dibattito a Bellinzona.",
           "date": "2026-10-01T04:47:59.002Z"
-        },
-        {
-          "title": "Incentivo fiscale per acquisti locali in Ticino: proposta",
-          "url": "/articoli-svizzera/incentivo-fiscale-acquisto-locale/",
-          "excerpt": "Il Centro propone un credito d'imposta fino al 25% per chi destina fino al 5% dello stipendio o reddito annuo a commercianti ticinesi aderenti.",
-          "date": "2026-09-25T14:19:43.225Z"
         }
       ],
       "latestCantonArticles": [],
@@ -177,7 +177,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-27T03:15:48.569Z"
+      "updatedAt": "2026-10-31T09:03:35.366Z"
     },
     "en": {
       "canton": "TI",
@@ -296,16 +296,16 @@
           "date": "2026-10-08T11:44:40.237Z"
         },
         {
+          "title": "Higher taxes in Bellinzona from 2028",
+          "url": "/en/cross-border-articles/bellinzona-taxes-higher-2028/",
+          "excerpt": "The Bellinzona municipal government announced higher taxes from 2028, alongside the 2026 budget, which shows a deficit of 10,6 million.",
+          "date": "2026-10-31T08:56:46.770Z"
+        },
+        {
           "title": "2027 budget: deficit and public accounts in Ticino",
           "url": "/en/swiss-articles/preventivo-2027-public-accounts/",
           "excerpt": "The Canton's 2027 Budget forecasts a deficit of 98.5 million. Between bureaucracy, personnel and taxation, here are the reactions and the debate in Bellinzona.",
           "date": "2026-10-01T04:47:59.002Z"
-        },
-        {
-          "title": "Tax incentive for local purchases in Ticino: proposal",
-          "url": "/en/swiss-articles/tax-incentive-local-shopping-ticino/",
-          "excerpt": "The Centre offers a tax credit of up to 25% for those who allocate up to 5% of their annual salary or income to participating Ticino merchants.",
-          "date": "2026-09-25T14:19:43.225Z"
         }
       ],
       "latestCantonArticles": [],
@@ -335,7 +335,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-27T03:15:48.569Z"
+      "updatedAt": "2026-10-31T09:03:35.366Z"
     },
     "de": {
       "canton": "TI",
@@ -454,16 +454,16 @@
           "date": "2026-10-08T11:44:40.237Z"
         },
         {
+          "title": "In Bellinzona ab 2028 höhere Steuern",
+          "url": "/de/grenzgaenger-artikel/bellinzona-steuern-hoher-2028/",
+          "excerpt": "Der Stadtrat von Bellinzona hat ab 2028 höhere Steuern angekündigt, zeitgleich mit dem Voranschlag 2026, der ein Defizit von 10,6 Millionen ausweist.",
+          "date": "2026-10-31T08:56:46.770Z"
+        },
+        {
           "title": "Haushalt 2027: Defizit und öffentliche Konten im Tessin",
           "url": "/de/schweiz-artikel/preventivo-2027-oeffentliche-finanzen/",
           "excerpt": "Der Kantonshaushalt für 2027 prognostiziert ein Defizit von 98,5 Millionen. Zwischen Bürokratie, Personal und Steuern sind hier die Reaktionen und die Debatte in Bellinzona.",
           "date": "2026-10-01T04:47:59.002Z"
-        },
-        {
-          "title": "Steuerlicher Anreiz für lokale Einkäufe im Tessin: Vorschlag",
-          "url": "/de/schweiz-artikel/steuerbonus-lokale-einkaeufe-tessin/",
-          "excerpt": "Das Zentrum bietet eine Steuergutschrift von bis zu 25% für Personen an, die bis zu 5% ihres Gehalts oder Jahreseinkommens teilnehmenden Tessiner Händlern zukommen lassen.",
-          "date": "2026-09-25T14:19:43.225Z"
         }
       ],
       "latestCantonArticles": [],
@@ -493,7 +493,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-27T03:15:48.569Z"
+      "updatedAt": "2026-10-31T09:03:35.366Z"
     },
     "fr": {
       "canton": "TI",
@@ -614,16 +614,16 @@
           "date": "2026-10-08T11:44:40.237Z"
         },
         {
+          "title": "À Bellinzona, des impôts plus élevés dès 2028",
+          "url": "/fr/articles-frontalier/bellinzona-taxes-plus-cheres-2028/",
+          "excerpt": "La Municipalité de Bellinzona a annoncé des impôts plus élevés dès 2028, en concomitance avec le budget 2026, qui affiche un déficit de 10,6 millions.",
+          "date": "2026-10-31T08:56:46.770Z"
+        },
+        {
           "title": "Budget 2027 : déficit et comptes publics au Tessin",
           "url": "/fr/articles-suisse/preventivo-2027-comptes-publics/",
           "excerpt": "Le budget 2027 du canton prévoit un déficit de 98,5 millions. Entre bureaucratie, personnel et fiscalité, voici les réactions et le débat à Bellinzona.",
           "date": "2026-10-01T04:47:59.002Z"
-        },
-        {
-          "title": "Incitation fiscale pour les achats locaux au Tessin : proposition",
-          "url": "/fr/articles-suisse/incentive-fiscal-achats-locaux-tessin/",
-          "excerpt": "Le Centre propose un crédit d'impôt jusqu'à 25 % pour ceux qui destinent jusqu'à 5 % du salaire ou du revenu annuel aux commerçants tessinois adhérents.",
-          "date": "2026-09-25T14:19:43.225Z"
         }
       ],
       "latestCantonArticles": [],
@@ -653,7 +653,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-27T03:15:48.569Z"
+      "updatedAt": "2026-10-31T09:03:35.366Z"
     }
   }
 }
