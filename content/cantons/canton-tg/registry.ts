@@ -237,4 +237,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'turgovia-tariffa-cure-familiare-2026',
+ category: 'novita',
+ date: '2026-10-31T11:54:22.387Z',
+ image: '/images/blog/article-turgovia-tariffa-cure-familiare-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

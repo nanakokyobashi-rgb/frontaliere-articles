@@ -66,6 +66,9 @@ const blogMetaCantonTgIt: Record<string, string> = {
     'blog.article.messaggio-modifica-legge-strade.title': 'Governo Turgovia approva messaggio per modifica legge strade e vie',
     'blog.article.messaggio-modifica-legge-strade.excerpt': 'Il Governo del Canton Turgovia ha approvato il messaggio al Gran Consiglio per disciplinare i manifesti di elezioni e votazioni, subordinando l\'eccezione alla sicurezza stradale.',
     'blog.article.messaggio-modifica-legge-strade.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.turgovia-tariffa-cure-familiare-2026.title': 'Turgovia: fissata la nuova tariffa per le cure dei familiari',
+    'blog.article.turgovia-tariffa-cure-familiare-2026.excerpt': 'Il Governo cantonale del Turgovia fissa la tariffa a CHF 52,60 all\'ora per le prestazioni di cura familiare con decorrenza retroattiva dal 1° gennaio 2026.',
+    'blog.article.turgovia-tariffa-cure-familiare-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonTgIt;

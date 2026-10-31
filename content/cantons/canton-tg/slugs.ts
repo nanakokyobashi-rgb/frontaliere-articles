@@ -24,6 +24,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'imprenditori-cantone-turgovia-sostegno': { it: 'imprenditori-cantone-turgovia-sostegno', en: 'thurgau-entrepreneurs-canton-support', de: 'unternehmer-kanton-thurgau-unterstuetzung', fr: 'entrepreneurs-canton-thurgovie-soutien' },
  'frauenfeld-revisione-regolamento-salariale': { it: 'frauenfeld-revisione-regolamento-salariale', en: 'frauenfeld-salary-regulations-revision', de: 'frauenfeld-lohnreglement-teilrevision', fr: 'frauenfeld-revision-reglement-salaires' },
  'messaggio-modifica-legge-strade': { it: 'messaggio-modifica-legge-strade', en: 'law-amendment-roads-thurgau', de: 'gesetz-aenderung-strassen-turgau', fr: 'modification-loi-routes-thurgovie' },
+ 'turgovia-tariffa-cure-familiare-2026': { it: 'turgovia-tariffa-cure-familiare-2026', en: 'thurgau-family-care-tariff-2026', de: 'turgau-tarif-pflegende-angehoerige-2026', fr: 'thurgovie-tarif-soins-proches-aidants-2026' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
