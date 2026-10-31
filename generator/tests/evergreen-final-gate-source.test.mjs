@@ -40,6 +40,7 @@ import { fileURLToPath } from 'node:url';
 import { runFactualityGates, formatIssues } from '../scripts/lib/article-factuality-gates.mjs';
 import { checkCorpusFabricatedInstitutionNames } from '../scripts/lib/corpus-fabricated-institution-names.mjs';
 import { findArticleLocalizedToponymMismatches } from '../scripts/lib/localized-toponyms.mjs';
+import { assertNoFiscalErrorsInLocales } from '../scripts/lib/article-ymyl-gate.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CREATE_ARTICLE = path.resolve(HERE, '../scripts/create-article.mjs');
@@ -100,6 +101,9 @@ function makeGate() {
     'checkStatsAstraCountFidelity',
     'joinBodySections',
     'assertTranslationsPassFactualityGates',
+    'assertNoFiscalErrorsInLocales',
+    'assertArticleRelevance',
+    'assertYmylPublishable',
     'checkCorpusFabricatedInstitutionNames',
     'findArticleLocalizedToponymMismatches',
     `${GATE_SRC}\nreturn assertArticlePassesFactualityGates;`,
@@ -113,6 +117,9 @@ function makeGate() {
     () => ({ passed: true }),
     (content) => Object.values(content).join(' '),
     (data) => { translationCalls.push(data); },
+    assertNoFiscalErrorsInLocales,
+    () => {},
+    () => {},
     checkCorpusFabricatedInstitutionNames,
     findArticleLocalizedToponymMismatches,
   );

@@ -244,6 +244,10 @@ test('il denominatore sitemap non si abbassa insieme a una slug map troncata', (
     // riferimento deve invece restare a 2, cosi' l'entry senza slug abbassa
     // l'artefatto ma non il suo floor.
     assert.equal(countSourceSitemapEntries(dir, 'frontaliere'), 2);
+    assert.equal(
+      countSourceSitemapEntries(dir, 'frontaliere', { excludedIds: new Set(['kept']) }),
+      1,
+    );
   } finally {
     fs.rmSync(dir, { recursive: true, force: true });
   }
@@ -478,6 +482,32 @@ test("chunk SEO assenti = violazione, una per sezione e non una per feed", () =>
   assert.match(violations.join('\n'), /chunk di frontaliere/);
   assert.match(violations.join('\n'), /chunk di svizzera/);
   for (const v of violations) assert.match(v, /content[\\/]seo/);
+});
+
+test('un feed vuoto per ledger noindex passa, ma un item non filtrato blocca', () => {
+  const { measured, expected } = healthy();
+  const ledgerExpected = {
+    ...expected,
+    feedSources: { ...expected.feedSources, frontaliere: 0 },
+    feedSourcesExcludedOnly: { frontaliere: true, svizzera: false },
+  };
+  const empty = {
+    ...measured,
+    feeds: measured.feeds.map((feed) => (
+      feed.name === 'rss.xml' || feed.name === 'rss-it.xml'
+        ? { ...feed, items: 0 }
+        : feed
+    )),
+  };
+  assert.deepEqual(floorViolations(empty, ledgerExpected), []);
+
+  const leaked = {
+    ...empty,
+    feeds: [{ name: 'rss.xml', items: 1 }],
+  };
+  const violations = floorViolations(leaked, ledgerExpected);
+  assert.equal(violations.length, 1);
+  assert.match(violations[0], /ledger article-index-exclusions/);
 });
 
 /*
@@ -836,6 +866,12 @@ test('countSeoEntries conta le voci come le conta parseSeoBlogs', () => {
   assert.equal(countSeoEntries(dir, ['seo-blog.ts', 'seo-blog-2.ts']), 3, 'a, b, e — non c (senza data), non d (headline vuota), e a una volta sola');
   // Un chunk assente viene saltato, come lo salta parseSeoBlogs.
   assert.equal(countSeoEntries(dir, ['seo-blog.ts', 'mai-esistito.ts']), 2);
+  // Il ledger noindex deve togliere le stesse id che il producer RSS filtra,
+  // senza cambiare la semantica del dedupe fra chunk.
+  assert.equal(
+    countSeoEntries(dir, ['seo-blog.ts', 'seo-blog-2.ts'], undefined, { excludedIds: ['a', 'e'] }),
+    1,
+  );
   assert.equal(collectSeoEntryIds('nessuna voce qui').size, 0);
   const metadata = collectSeoEntryMetadata(entry('long'));
   assert.equal(metadata.get('long').headline, 'T long');
@@ -974,6 +1010,14 @@ test('latestSeoPublication prende la data piu\' recente dai chunk che alimentano
     datePublished: '2026-02-03T04:05:06Z',
     timestamp: Date.parse('2026-02-03T04:05:06Z'),
   });
+  assert.deepEqual(
+    latestSeoPublication(dir, ['older.ts', 'newer.ts'], undefined, { excludedIds: ['new'] }),
+    {
+      articleId: 'old',
+      datePublished: '2026-01-01T00:00:00Z',
+      timestamp: Date.parse('2026-01-01T00:00:00Z'),
+    },
+  );
   fs.rmSync(dir, { recursive: true, force: true });
 });
 
@@ -1101,7 +1145,7 @@ test('build-api usa il parser SEO condiviso, non una terza finestra locale', () 
   // sezione pubblicabile, nel loop sulle sezioni pubbliche (oggi frontaliere
   // e svizzera; da P7 anche le cantonali effettivamente live, con la politica
   // di famiglia).
-  assert.match(build, /for \(const section of PUBLIC_API_SECTIONS\) \{\s*const file = section\.api\.sitemap;\s*const source = countSourceSitemapEntries\(ROOT, section\.section\);/);
+  assert.match(build, /for \(const section of PUBLIC_API_SECTIONS\) \{\s*const file = section\.api\.sitemap;\s*const source = countSourceSitemapEntries\(ROOT, section\.section, \{\s*excludedIds: indexExcludedArticleIds\(section\),\s*\}\);/);
   assert.doesNotMatch(build, /countSitemapEntries\(ARTICLES/);
   assert.doesNotMatch(build, /countSitemapEntries\(SWISS_ARTICLES/);
   assert.doesNotMatch(build, /countSitemapEntries\(SECTION_REGISTRIES/);

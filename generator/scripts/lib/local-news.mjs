@@ -9,6 +9,11 @@
  *  2. «Fai passare anche queste notizie: cronaca nera, sport, cultura e
  *     incidenti stradali» — this module.
  *
+ * Narrowed by the GEO audit of 2026-10-31: sport and games of the Italian
+ * provinces no longer publish (article-relevance-gate.mjs rejects them after
+ * this module admits them). Ticino sport, and cronaca and culture of the whole
+ * area, are unchanged.
+ *
  * Two questions, both answered deterministically here.
  *
  * WHERE — Ticino and the Italian provinces of Varese, Como and VCO, from

@@ -42,6 +42,13 @@ import { fileURLToPath } from 'node:url';
 import os from 'node:os';
 import { execSync } from 'node:child_process';
 import { buildSectionFeeds, RSS_SECTIONS } from './lib/rss-feed-body-adapter.mjs';
+import {
+  ARTICLE_INDEX_EXCLUSIONS_FILES,
+  articleIndexExclusionKey,
+  loadArticleIndexExclusions,
+} from '../engine/shared/articleIndexExclusions.mjs';
+import { ARTICLE_SECTION_CORE_ALL } from '../engine/shared/articleSectionCore.mjs';
+import { unknownIndexExclusionKeys } from './lib/article-index-exclusions-check.mjs';
 // repairSerpSnippet vive in clauseTail.mjs (un .mjs) proprio perche' questo file
 // non puo' importare un .ts: e' la sorgente unica che il layer TS riesporta.
 // Senza passarla, rssFeeds.mjs spedirebbe le description verbatim (#5453).
@@ -701,6 +708,37 @@ for (const section of PUBLISHED_API_SECTIONS) {
 }
 const shadowedFrontaliereSlugs = SECTION_CANONICAL_SHADOW[FRONTALIERE.section];
 
+// Articoli ritirati dall'indice (content/article-index-exclusions.json): la
+// pagina e' `noindex,follow`, quindi non sta in nessuna sitemap, e da li' escono
+// anche sitemap-news e la famiglia llms che il sito deriva dalle sitemap.
+const indexExclusions = loadArticleIndexExclusions(
+  fs,
+  ARTICLE_INDEX_EXCLUSIONS_FILES.map((candidate) => path.join(ROOT, candidate)),
+);
+console.log(`[build-api] articoli esclusi dall'indice: ${indexExclusions.size}`);
+{
+  const publishedSections = new Set(PUBLISHED_API_SECTIONS.map((section) => section.section));
+  const unknownExclusions = unknownIndexExclusionKeys(
+    indexExclusions,
+    PUBLISHED_API_SECTIONS.flatMap((section) => (SECTION_REGISTRIES[section.section] ?? [])
+      .map((article) => articleIndexExclusionKey(section.section, article.id))),
+    publishedSections,
+    new Set(Object.keys(ARTICLE_SECTION_CORE_ALL)),
+  );
+  if (unknownExclusions.length > 0) {
+    throw new Error(`article-index-exclusions: righe senza articolo (${unknownExclusions.join(', ')}) — refusing to publish`);
+  }
+}
+const indexExcludedArticles = (section) => (SECTION_REGISTRIES[section.section] ?? [])
+  .filter((article) => indexExclusions.has(articleIndexExclusionKey(section.section, article.id)));
+const indexExcludedArticleIds = (section) => new Set(indexExcludedArticles(section).map((article) => article.id));
+const indexExcludedSlugs = (section) => {
+  const slugMap = slugMapOf(section.section);
+  return indexExcludedArticles(section)
+    .map((article) => slugMap?.[article.id]?.it)
+    .filter(Boolean);
+};
+
 const SECTION_META_IT = {};
 for (const section of PUBLISHED_API_SECTIONS) {
   SECTION_META_IT[section.section] = await loadSectionMeta(section, 'it');
@@ -728,11 +766,14 @@ const retiredByRegistry = (section) =>
 const SECTION_SITEMAP_SHADOW = Object.fromEntries(
   PUBLIC_API_SECTIONS.map((section) => [
     section.section,
-    section.retiredDailyEditions
-      ? new Set([...retiredDailyEditionSlugs, ...SECTION_CANONICAL_SHADOW[section.section]])
-      : section.api.family !== null
-        ? new Set([...SECTION_CANONICAL_SHADOW[section.section], ...retiredByRegistry(section)])
-        : SECTION_CANONICAL_SHADOW[section.section],
+    new Set([
+      ...(section.retiredDailyEditions
+        ? new Set([...retiredDailyEditionSlugs, ...SECTION_CANONICAL_SHADOW[section.section]])
+        : section.api.family !== null
+          ? new Set([...SECTION_CANONICAL_SHADOW[section.section], ...retiredByRegistry(section)])
+          : SECTION_CANONICAL_SHADOW[section.section]),
+      ...indexExcludedSlugs(section),
+    ]),
   ]),
 );
 // La dimensione di pagina dell'archivio viene dalla sorgente unica dell'host
@@ -795,7 +836,9 @@ const sitemapSources = {};
 const familySitemapRows = [];
 for (const section of PUBLIC_API_SECTIONS) {
   const file = section.api.sitemap;
-  const source = countSourceSitemapEntries(ROOT, section.section);
+  const source = countSourceSitemapEntries(ROOT, section.section, {
+    excludedIds: indexExcludedArticleIds(section),
+  });
   sitemapSources[section.section] = source;
   if (floorPolicyOf(section.section) === 'family') {
     // Gli articoli che il registro ritira (`gone`/`redirects`) escono dalla
@@ -806,7 +849,10 @@ for (const section of PUBLIC_API_SECTIONS) {
     const retiredSource = countSitemapEntries(
       SECTION_REGISTRIES[section.section].filter((article) => retired.has(slugMapOf(section.section)?.[article.id]?.it)),
       slugMapOf(section.section),
-      SECTION_CANONICAL_SHADOW[section.section],
+      new Set([
+        ...SECTION_CANONICAL_SHADOW[section.section],
+        ...indexExcludedSlugs(section),
+      ]),
     );
     familySitemapRows.push({
       section: section.section,
@@ -1024,6 +1070,7 @@ try {
       rootDir: viaView ? familyRssView : ROOT,
       section,
       registry: SECTION_REGISTRIES[section.id] ?? [],
+      indexExclusions,
       layout: viaView ? engineViewRssLayout(published.slugFile) : sectionRssLayout(section.id),
       // Il corpus e' il produttore REALE dei feed: il sito chiama l'engine solo
       // dai test. Se questa riga manca, la riparazione della coda resta inerte
@@ -1061,6 +1108,15 @@ let rssItemTotal = 0;
 const familyRssRows = [];
 for (const section of rssSections) {
   const familyPolicy = floorPolicyOf(section.id) === 'family';
+  const published = PUBLISHED_BY_SECTION[section.id];
+  const excludedIds = published ? indexExcludedArticleIds(published) : new Set();
+  // `buildSectionFeeds` filters the ledger before rendering. If every parsed
+  // feed-eligible SEO entry is withdrawn, no RSS file is expected for a
+  // historical section; a zero here is an intentional noindex state, not a
+  // broken feed. `withdrawnArticleCount` is scoped to the parsed SEO entries,
+  // so an exclusion for an article that never reached the parser cannot mask a
+  // truncation. A partial or missing filter must still fail closed below.
+  const ledgerOnly = section.articleCount === 0 && section.withdrawnArticleCount > 0;
   // I feed di una sezione di famiglia sono una superficie di LETTURA (titoli,
   // estratti, link agli articoli): escono su Pages solo se la release di
   // questo build dichiara la sezione live. Per una sezione draft, ritirata o
@@ -1068,7 +1124,7 @@ for (const section of rssSections) {
   // pubblico ne esporrebbe comunque gli articoli. Il feed si costruisce lo
   // stesso (il pavimento qui sotto lo giudica), ma non si scrive.
   const publishFeeds = !familyPolicy || releaseLiveSections.has(section.id);
-  if (section.feeds.length === 0 && !familyPolicy) {
+  if (section.feeds.length === 0 && !familyPolicy && !ledgerOnly) {
     throw new Error(
       `rss: section '${section.id}' produced no feeds (${section.articleCount} articles parsed) — refusing to publish`,
     );
@@ -1076,7 +1132,15 @@ for (const section of rssSections) {
   let sectionItems = 0;
   for (const [name, xml] of section.feeds) {
     const items = countXmlTags(xml, 'item');
-    if (items === 0 && !familyPolicy) throw new Error(`rss: ${name} has no <item> entries — refusing to publish`);
+    if (items === 0 && !familyPolicy && !ledgerOnly) {
+      throw new Error(`rss: ${name} has no <item> entries — refusing to publish`);
+    }
+    if (items > 0 && ledgerOnly) {
+      throw new Error(
+        `rss: ${name} emitted ${items} <item> entries although all ${section.withdrawnArticleCount} `
+          + 'SEO entries are withdrawn by article-index-exclusions — refusing to publish',
+      );
+    }
     sectionItems += items;
     // The feeds come out of engine/rssFeeds.mjs, which arrives by mirror and is
     // not ours to edit here (a change would be overwritten on the next mirror
@@ -1099,7 +1163,13 @@ for (const section of rssSections) {
   // `section.articleCount`: quello lo produce lo stesso parser dei chunk SEO
   // che scrive il feed, quindi un chunk SEO mancante o troncato lo azzererebbe
   // insieme agli item e la sezione svuotata passerebbe per «nuova».
-  if (familyPolicy && releaseLiveSections.has(section.id)) familyRssRows.push({ section: section.id, source: countSourceArticles(ROOT, section.id), emitted: sectionItems });
+  if (familyPolicy && releaseLiveSections.has(section.id)) {
+    familyRssRows.push({
+      section: section.id,
+      source: countSourceArticles(ROOT, section.id, { excludedIds }),
+      emitted: sectionItems,
+    });
+  }
 }
 // Per i feed vale solo la meta' «nessuna sezione svuotata» del verdetto di
 // famiglia: un feed e' una finestra (RSS_MAX_ITEMS), quindi la somma degli item

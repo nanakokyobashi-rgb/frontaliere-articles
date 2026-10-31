@@ -585,7 +585,7 @@ test('il gate di generazione importa e invoca il controllo prima della scrittura
   const registerSource = source.slice(registerStart);
   const decodePosition = registerSource.indexOf('decodeArticleEntities(data);');
   const slugPosition = registerSource.indexOf('const slugs = deriveAndSanitizeArticleSlugs(data);');
-  const gatePosition = registerSource.indexOf('assertArticlePassesFactualityGates(data);');
+  const gatePosition = registerSource.indexOf('assertArticlePassesFactualityGates(data');
   const lockPosition = registerSource.indexOf('beginRegisterLock(data.id)');
   assert.ok(decodePosition >= 0 && slugPosition > decodePosition && gatePosition > slugPosition
     && lockPosition > gatePosition,

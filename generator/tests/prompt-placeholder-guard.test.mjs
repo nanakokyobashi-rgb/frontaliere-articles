@@ -931,7 +931,7 @@ describe('wiring — il guard e\' cablato sul percorso di scrittura CONDIVISO', 
     const corpo = registerArticleFilesBody();
     const sanitizeAt = corpo.indexOf('sanitizePromptPlaceholders(data)');
     const municipalitiesAt = corpo.indexOf('preserveMunicipalityNamesInMetadata(data)');
-    const factualityAt = corpo.indexOf('assertArticlePassesFactualityGates(data)');
+    const factualityAt = corpo.indexOf('assertArticlePassesFactualityGates(data');
     assert.ok(sanitizeAt !== -1, 'guard placeholder mancante nel percorso condiviso');
     assert.ok(municipalitiesAt !== -1, 'postcondizione dei comuni mancante nel percorso condiviso');
     assert.ok(factualityAt !== -1, 'gate di factuality mancante nel percorso condiviso');

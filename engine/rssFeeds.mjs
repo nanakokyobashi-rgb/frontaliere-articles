@@ -48,6 +48,11 @@ import {
 import { createImageCreditReader, mediaRssCreditXml, renderImageCreditHtml } from './shared/imageCredits.mjs';
 import { articleSectionEntry } from './shared/articleSectionCore.mjs';
 import { cantonRssChannel } from './shared/cantonSectionCopy.mjs';
+import {
+  ARTICLE_INDEX_EXCLUSIONS_FILES,
+  articleIndexExclusionKey,
+  loadArticleIndexExclusions,
+} from './shared/articleIndexExclusions.mjs';
 
 export const BASE_URL = 'https://frontaliereticino.ch';
 export const RSS_LOCALES = ['it', 'en', 'de', 'fr'];
@@ -539,15 +544,19 @@ ${itemsXml}
 /**
  * Build every RSS feed for one section.
  *
- * Returns `{ id, articleCount, slugCount, feeds }` where `feeds` is an ordered
+ * Returns `{ id, articleCount, withdrawnArticleCount, slugCount, feeds }` where `feeds` is an ordered
  * `[filename, xml]` list — the caller decides where the bytes land (public/ in
  * the site, dist/api/ in the publisher). Nothing is written here.
  *
  * `registry` is the section's article array; `id` and `image` are read to
  * resolve `media:content` without touching the filesystem, and `date === ''`
  * (publication date unknown) keeps that article out of the feed.
+ *
+ * `indexExclusions` is the loaded ledger of articles withdrawn from the index.
+ * Omit it and the ledger is read from `rootDir`; the corpus passes it explicitly
+ * for canton sections, whose `rootDir` is a view that does not carry the file.
  */
-export function buildSectionFeeds({ fs, path, rootDir, section, registry = [], layout = {}, repairSerpSnippet }) {
+export function buildSectionFeeds({ fs, path, rootDir, section, registry = [], layout = {}, repairSerpSnippet, indexExclusions }) {
   // NON opzionale, e senza fallback identita'. Il produttore reale dei feed e'
   // `scripts/build-api.mjs` del repo corpus (qui dentro l'unico altro chiamante
   // e' tests/rss-feeds-module.test.ts), quindi un default silenzioso renderebbe
@@ -571,7 +580,7 @@ export function buildSectionFeeds({ fs, path, rootDir, section, registry = [], l
     section.slugConst,
   );
   if (articles.size === 0) {
-    return { id: section.id, articleCount: 0, slugCount: slugs.size, feeds: [] };
+    return { id: section.id, articleCount: 0, withdrawnArticleCount: 0, slugCount: slugs.size, feeds: [] };
   }
 
   // `Article.image` is already absolute for blog heroes (the registry maps them
@@ -606,8 +615,20 @@ export function buildSectionFeeds({ fs, path, rootDir, section, registry = [], l
   const unknownDateIds = new Set(
     registry.filter((a) => a && a.id && a.date === '').map((a) => a.id),
   );
-  const feedArticles = unknownDateIds.size
-    ? new Map([...articles].filter(([id]) => !unknownDateIds.has(id)))
+  // A noindex page is not something to announce to subscribers and aggregators.
+  // This is the opposite call from a canonical override, whose page stays
+  // indexable through its winner and whose item therefore stays in the feed.
+  const withdrawn = indexExclusions ?? loadArticleIndexExclusions(
+    fs,
+    ARTICLE_INDEX_EXCLUSIONS_FILES.map((candidate) => path.join(rootDir, candidate)),
+  );
+  const withdrawnArticleCount = [...articles.keys()].filter((id) =>
+    withdrawn.has(articleIndexExclusionKey(section.id, id)),
+  ).length;
+  const feedArticles = unknownDateIds.size || withdrawn.size
+    ? new Map([...articles].filter(([id]) => (
+      !unknownDateIds.has(id) && !withdrawn.has(articleIndexExclusionKey(section.id, id))
+    )))
     : articles;
 
   const feeds = [];
@@ -625,7 +646,13 @@ export function buildSectionFeeds({ fs, path, rootDir, section, registry = [], l
     if (locale === 'it') feeds.push([section.mainFeed, xml]);
   }
 
-  return { id: section.id, articleCount: articles.size, slugCount: slugs.size, feeds };
+  return {
+    id: section.id,
+    articleCount: feedArticles.size,
+    withdrawnArticleCount,
+    slugCount: slugs.size,
+    feeds,
+  };
 }
 
 /**
@@ -633,7 +660,7 @@ export function buildSectionFeeds({ fs, path, rootDir, section, registry = [], l
  * Defaults to the active publisher table for the corpus/R2 caller; a site
  * emitter must pass `SITE_RSS_SECTIONS` explicitly.
  */
-export function buildAllRssFeeds({ fs, path, rootDir, registries = {}, layout = {}, repairSerpSnippet, sections = RSS_SECTIONS }) {
+export function buildAllRssFeeds({ fs, path, rootDir, registries = {}, layout = {}, repairSerpSnippet, sections = RSS_SECTIONS, indexExclusions }) {
   return sections.map((section) =>
     buildSectionFeeds({
       fs,
@@ -643,6 +670,7 @@ export function buildAllRssFeeds({ fs, path, rootDir, registries = {}, layout = 
       registry: registries[section.id] ?? [],
       layout,
       repairSerpSnippet,
+      indexExclusions,
     }),
   );
 }

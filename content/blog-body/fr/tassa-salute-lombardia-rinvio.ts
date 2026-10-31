@@ -3,6 +3,7 @@ const bodyTassaSaluteLombardiaRinvio: Record<string, string> = {
  'blog.article.tassa-salute-lombardia-rinvio.body2': '## Outils utiles pour protéger votre net\nPour réduire les pertes de change, comparez le [change CHF-EUR](nav:exchange) et les [banques pour frontaliers](nav:banks).',
  'blog.article.tassa-salute-lombardia-rinvio.body3': 'Notre source est l\'article publié sur ComoZero le 5 mars 2026.',
  'blog.article.tassa-salute-lombardia-rinvio.faq': '[{"q":"Quel est l\'état actuel de l\'application de la taxe de santé pour les frontaliers en Lombardie ?","a":"La Région Lombardie a reporté l\'application, créant une incertitude."}]',
+    'blog.article.tassa-salute-lombardia-rinvio.body4': 'La nouvelle décrit un report politique : elle ne confirme pas une exonération et ne fixe pas à elle seule une échéance définitive.',
 };
 
 export default bodyTassaSaluteLombardiaRinvio;

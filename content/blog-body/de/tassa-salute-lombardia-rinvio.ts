@@ -3,6 +3,7 @@ const bodyTassaSaluteLombardiaRinvio: Record<string, string> = {
  'blog.article.tassa-salute-lombardia-rinvio.body2': '## Nützliche Tools zum Schutz Ihres Nettolohns\nUm Wechselkursverluste zu reduzieren, vergleichen Sie [CHF-EUR-Wechseloptionen](nav:exchange) und [Banken für Grenzgänger](nav:banks).',
  'blog.article.tassa-salute-lombardia-rinvio.body3': 'Unsere Quelle ist der am 5. März 2026 auf ComoZero veröffentlichte Artikel.',
  'blog.article.tassa-salute-lombardia-rinvio.faq': '[{"q":"Wie ist der aktuelle Stand der Anwendung der Gesundheitsabgabe für Grenzgänger in der Lombardei?","a":"Die Region Lombardei hat die Anwendung verschoben, was zu Unsicherheit geführt hat."}]',
+    'blog.article.tassa-salute-lombardia-rinvio.body4': 'Der Bericht beschreibt einen politischen Aufschub: Er bestätigt keine Befreiung und legt allein keine endgültige Frist fest.',
 };
 
 export default bodyTassaSaluteLombardiaRinvio;
