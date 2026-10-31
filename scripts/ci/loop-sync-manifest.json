@@ -3195,7 +3195,7 @@
       "reason": "Affermazioni fiscali smentite dalle fonti primarie, usate dal generatore e dal test sul corpus.",
       "baseline": {
         "site": null,
-        "corpus": "5f14243e6cceb4cc",
+        "corpus": "1d4204e9b23a7a49",
         "alignedAt": "2026-10-31"
       }
     },

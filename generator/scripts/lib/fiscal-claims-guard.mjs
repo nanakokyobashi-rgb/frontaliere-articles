@@ -43,7 +43,11 @@ const MONTHLY_RE = /(al mese|mensil|\/mese|per month|a month|monthly|pro monat|m
 const HISTORIC_RE = /(fino al 2023|prima del 2024|until 2023|before 2024|bis 2023|vor 2024|jusqu.en 2023|avant 2024)/i;
 
 const RETURNED_VERBS = 'retrocess|riversat|restituit|rimborsat|returned|rebated|refunded|paid back|r[eé]troc[eé]d|revers[eé]|rembours[eé]|zur[uü]ck(?:erstatt|gegeben|gezahlt|fl[iï]e(?:ss|ß)t)|r[uü]ckerstatt';
-const NEGATED_RETROCESSION_RE = new RegExp(`(?:\\bnon\\b|\\bnessun[ao]?\\b|\\bnot\\b|\\bno\\b|\\bnicht\\b|\\bkein\\w*|\\bne\\b|\\bn['’]|\\baucun\\w*)[^.]{0,40}(?:${RETURNED_VERBS})`, 'i');
+const NEGATION_RE = /(?:\bnon\b|\bnessun[ao]?\b|\bnot\b|\bno\b|\bnicht\b|\bkein\w*|\bne\b|\bn['’]|\baucun\w*)/i;
+
+/** Le date con cui si dice che l'Accordo sarebbe in vigore dal 2024: e' invece la prima applicazione. */
+const DATE_2024 = "(?:1°?\\s*(?:o\\s+)?|primo\\s+|1\\.?\\s*|1st\\s+|1er\\s+|premier\\s+|ersten\\s+)?(?:gennaio|january|januar|janvier)(?:\\s+1(?:st)?,?)?\\s+2024|0?1[/.]\\s?0?1[/.]\\s?2024";
+const IN_FORCE_WORDS = "in vigore (?:dal|da|il)|entrat[oa] in vigore(?: il| dal| a)?|in force (?:from|since|as of)|(?:came|entered) into force(?: on| in)?|took effect(?: on| in)?|in kraft seit|in kraft getreten (?:am|seit)|en vigueur (?:depuis|d[eè]s|le)|entr[eé]e? en vigueur(?: le| en)?";
 
 export const CLAIM_RULES = Object.freeze([
   {
@@ -79,9 +83,12 @@ export const CLAIM_RULES = Object.freeze([
   {
     id: 'retrocessione-20',
     source: 'Accordo 2020 art. 3',
-    matches: (sentence) => new RegExp(`\\b20\\s?%[^.]{0,40}(?:${RETURNED_VERBS})`, 'i').test(sentence)
-      && /(frontalier|grenzg|cross-border|comun|municip|gemeinde|commune)/i.test(sentence)
-      && !NEGATED_RETROCESSION_RE.test(sentence),
+    matches: (sentence) => {
+      const claim = new RegExp(`\\b20\\s?%[^.,;]{0,40}(?:${RETURNED_VERBS})`, 'i').exec(sentence);
+      return claim !== null
+        && !NEGATION_RE.test(claim[0])
+        && /(frontalier|grenzg|cross-border|comun|municip|gemeinde|commune)/i.test(sentence);
+    },
   },
   {
     id: 'mai-in-entrambi',
@@ -91,7 +98,8 @@ export const CLAIM_RULES = Object.freeze([
   {
     id: 'accordo-in-vigore-2024',
     source: 'Accordo 2020 art. 8',
-    matches: (sentence) => /abkommen[^.]{0,60}seit\s+(?:dem\s+)?(?:1\.\s*januar 2024|0?1\.\s?0?1\.\s?2024)\s+in kraft/i.test(sentence) || /(accordo|agreement|abkommen|accord)[^.]{0,50}(in vigore dal|in force (?:from|since)|entered into force on|in kraft seit|en vigueur depuis)\s+(?:il\s+|le\s+)?(?:1°?\s*(?:o\s+)?gennaio 2024|1\.?\s*(?:january|januar) 2024|january 1,? 2024|1er janvier 2024|0?1[/.]\s?0?1[/.]\s?2024)/i.test(sentence),
+    matches: (sentence) => new RegExp(`(?:accordo|agreement|abkommen|accord)[^.]{0,60}(?:${IN_FORCE_WORDS})\\s+(?:il\\s+|le\\s+|the\\s+)?(?:${DATE_2024})`, 'i').test(sentence)
+      || new RegExp(`abkommen[^.]{0,60}(?:am|seit)\\s+(?:dem\\s+)?(?:${DATE_2024})\\s+in kraft`, 'i').test(sentence),
   },
 ]);
 
@@ -139,7 +147,7 @@ export function sentenceSpanAt(text, index, maxLength = 700) {
 const CANDIDATE_RE = new RegExp(
   `${AMOUNT_7500}|forfe?t+ari|flat[- ]rate|pauschal|forfaitaire|38[,.]8|\\b80\\s?%|\\b20\\s?%`
   + '|mai in entrambi|never in both|nie(?:mals)? in beiden|jamais dans les deux'
-  + '|gennaio 2024|january 2024|january 1,? 2024|januar 2024|janvier 2024|\\b0?1[/.]\\s?0?1[/.]\\s?2024',
+  + '|gennaio 2024|january 2024|january 1(?:st)?,? 2024|januar 2024|janvier 2024|\\b0?1[/.]\\s?0?1[/.]\\s?2024',
   'gi',
 );
 
@@ -168,7 +176,7 @@ export function findFiscalClaims(text) {
 const RATE_ON_PAY_RE = /(\d{1,2}(?:[.,]\d)?)(?:\s?%?\s?(?:-|–|—|a|al|to|bis|à)\s?(\d{1,2}(?:[.,]\d)?))?\s?%\s+(?:del|dello|della|sul|sullo|sulla|von|vom|auf|auf den|auf das|of|of the|on|on the|des|du|de|de la|sur|sur le|sur la)\s+(?:proprio\s+|their\s+|ihres\s+)?(?:reddit|salari|stipendi|income|salary|wage|einkommen|nettoeinkommen|bruttoeinkommen|lohn|gehalt|brutto|netto|revenu|salaire|gross|net)\w*(?:\s+(?:netto|lordo|net|gross|brut|brutto))?/gi;
 
 /** Un importo in euro riferito al mese: la quota SSN sta fra 30 e 200 per mese lavorato. */
-const MONTHLY_EURO_RE = /(?:€\s?(\d{1,3}(?:[.'’\u00a0 ]\d{3})*)|(\d{1,3}(?:[.'’\u00a0 ]\d{3})*)\s?(?:€|euro|eur)\b)\s*(?:al mese|per mese|a month|per month|pro monat|im monat|par mois)/gi;
+const MONTHLY_EURO_RE = /(?:€\s?(\d{1,3}(?:[.'’\u00a0 ]\d{3})*)|(\d{1,3}(?:[.'’\u00a0 ]\d{3})*)\s?(?:€|(?:euro|eur)\b))\s*(?:al mese|per mese|\/mese|mensil\w*|a month|per month|\/month|monthly|pro monat|im monat|monatlich\w*|\/monat|par mois|\/mois|mensuel\w*)/gi;
 
 function monthlyAmountsOutOfRange(sentence) {
   return [...sentence.matchAll(MONTHLY_EURO_RE)].some((match) => {

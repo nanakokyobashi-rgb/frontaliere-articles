@@ -96,14 +96,17 @@ const NEVER_BOTH = [
 ];
 
 /** L'Accordo e' in vigore dal 17/7/2023: dal 1/1/2024 si applica. */
+const DATE_IT = String.raw`(?:1°?\s*(?:o\s+)?|primo\s+)?gennaio 2024|0?1[/.]0?1[/.]2024`;
+const DATE_EN = String.raw`(?:1(?:st)?\s+)?January(?:\s+1(?:st)?,?)?\s+2024|0?1[/.]0?1[/.]2024`;
+const DATE_FR = String.raw`(?:1er\s+|premier\s+)?janvier 2024|0?1[/.]0?1[/.]2024`;
 const IN_FORCE_2024 = [
-  [/\bin vigore dal(?:l)?\s+(1°?\s*(?:o\s+)?gennaio 2024|0?1[/.]0?1[/.]2024)/gi, 'applicato dal $1'],
-  [/\b(?:in force from|in force since|effective from)\s+((?:1 January|January 1,?) 2024)/gi, 'applied since $1'],
-  [/\bentered into force on\s+((?:1 January|January 1,?) 2024)/gi, 'applied from $1'],
+  [new RegExp(String.raw`\b(?:entrat[oa] )?in vigore (?:dal(?:l)?|da|il)\s+(${DATE_IT})`, 'gi'), 'applicato dal $1'],
+  [new RegExp(String.raw`\bentrat[oa] in vigore\s+(${DATE_IT})`, 'gi'), 'applicato dal $1'],
+  [new RegExp(String.raw`\b(?:in force from|in force since|in force as of|effective from|has been in force since|entered into force on|entered into force in|came into force on|came into force in|took effect on|took effect in)\s+(?:the\s+)?(${DATE_EN})`, 'gi'), 'applied since $1'],
   [/\b(?:has been in force since|entered into force on|in force from|in force since)\s+1° gennaio 2024/gi, 'applied since 1 January 2024'],
-  [/\bin Kraft seit\s+(1\.\s*Januar 2024)/gi, 'anwendbar seit $1'],
-  [/\bseit\s+(dem\s+)?(1\.\s*Januar 2024)\s+in Kraft/gi, 'seit dem $2 anwendbar'],
-  [/\ben vigueur depuis\s+(?:le\s+)?(1er janvier 2024)/gi, 'appliqué depuis le $1'],
+  [/\bin Kraft seit\s+(?:dem\s+)?(1\.\s*Januar 2024)/gi, 'anwendbar seit dem $1'],
+  [/\b(?:am|seit)\s+(?:dem\s+)?(1\.\s*Januar 2024)\s+in Kraft(?: getreten)?/gi, 'seit dem $1 anwendbar'],
+  [new RegExp(String.raw`\b(?:entr[eé]e? en vigueur|en vigueur)(?: depuis| d[eè]s| le| en)?\s+(?:le\s+)?(${DATE_FR})`, 'gi'), 'appliqué depuis le $1'],
 ];
 
 const ARITHMETIC_RE = new RegExp(`[-−–]\\s*(?:€\\s?)?${AMOUNT_7500}|${AMOUNT_7500}\\s?(?:€\\s?)?\\)?\\s*=|=\\s*€?\\s?\\d`);

@@ -63,6 +63,32 @@ test('le stesse affermazioni nelle traduzioni, in ogni ordine naturale', () => {
   assert.deepEqual(ids('Das Abkommen ist seit dem 1. Januar 2024 in Kraft.'), ['accordo-in-vigore-2024']);
 });
 
+test('la negazione vale solo dentro la stessa affermazione', () => {
+  assert.deepEqual(ids('Il 20% viene retrocesso ai comuni, ma non viene restituito ai lavoratori.'), ['retrocessione-20']);
+  assert.deepEqual(ids('Il 20% non viene retrocesso ai comuni.'), []);
+});
+
+test('data di vigore: forme ordinali e ogni verbo', () => {
+  for (const sentence of [
+    'L\'Accordo è in vigore dal primo gennaio 2024.',
+    'Il Nuovo Accordo è entrato in vigore il 1° gennaio 2024.',
+    'The Agreement came into force on 1 January 2024.',
+    'The Agreement took effect on January 1st, 2024.',
+    'L\'accord est entré en vigueur le 1er janvier 2024.',
+    'Das Abkommen ist am 1. Januar 2024 in Kraft getreten.',
+  ]) {
+    assert.deepEqual(ids(sentence), ['accordo-in-vigore-2024'], sentence);
+    assert.deepEqual(ids(repairFiscalText(sentence, 'blog-body/it/x.ts').text), [], sentence);
+  }
+  assert.deepEqual(ids('L\'Accordo è in vigore dal 17 luglio 2023 e si applica dal 1° gennaio 2024.'), []);
+});
+
+test('quota SSN: ogni forma dell\'importo mensile', () => {
+  for (const sentence of ['La tassa salute costa 250 € mensili.', 'Die Gesundheitssteuer kostet 250 € monatlich.', 'La taxe santé coûte 250 € mensuel.']) {
+    assert.equal(findTaxHealthParameterErrors(sentence).length, 1, sentence);
+  }
+});
+
 test('i falsi amici non scattano', () => {
   assert.deepEqual(ids('Health insurance premiums count only for the share above the flat-rate deduction.'), []);
   assert.deepEqual(ids('The 20% is not returned to municipalities.'), []);
