@@ -83002,17 +83002,17 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
   },
 
   'blog-guida-vivere-mese-grigioni': {
-    title: 'Vivere a Mese e lavorare nei Grigioni: guida fiscale',
-    description: 'Permesso G, imposta alla fonte e franchigia del reddito frontaliere: guida per chi vive a Mese e lavora nei Grigioni svizzeri. Norme 2024, LAMal, procedura.',
-    keywords: 'frontalieri, ticino, svizzera, italia, vivere, mese, lavorare, grigioni',
-    ogTitle: 'Frontaliere nei Grigioni: vivere a Mese, guida 2024',
-    ogDescription: 'Trasferirsi a Mese per lavorare nei Grigioni: scopri come funziona il Permesso G, l\'imposta alla fonte svizzera, le franchigie del Nuovo Accordo 2024, la protezione sociale AVS/LPP/LAMal e la procedura pratica per iniziare.',
+    title: 'Vivere a Mese (Sondrio, Italia) e lavorare nei Grigioni: guida fiscale',
+    description: 'Mese è un comune italiano in provincia di Sondrio: guida per chi vi risiede e lavora nei Grigioni svizzeri, tra permesso G, imposta alla fonte, previdenza e LAMal.',
+    keywords: 'frontalieri, svizzera, italia, lombardia, provincia di sondrio, comune di mese, lavorare, grigioni',
+    ogTitle: 'Frontaliere nei Grigioni: vivere a Mese (Sondrio, Italia)',
+    ogDescription: 'Guida per chi vive nel Comune di Mese (SO), Italia, e lavora nei Grigioni: permesso G, imposta alla fonte, previdenza, LAMal e fonti ufficiali per distinguere comune italiano e cantone svizzero.',
     canonicalPath: '/articoli-frontaliere/guida-vivere-mese-grigioni',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
-      "headline": "Vivere a Mese e lavorare nei Grigioni: guida fiscale",
-      "description": "Permesso G, imposta alla fonte e franchigia del reddito frontaliere: guida per chi vive a Mese e lavora nei Grigioni svizzeri. Norme 2024, LAMal, procedura.",
+      "headline": "Vivere a Mese (Sondrio, Italia) e lavorare nei Grigioni: guida fiscale",
+      "description": "Mese è un comune italiano in provincia di Sondrio: guida per chi vi risiede e lavora nei Grigioni svizzeri, tra permesso G, imposta alla fonte, previdenza e LAMal.",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/guida-vivere-mese-grigioni.webp`,
@@ -83021,7 +83021,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "caption": "Panorama del confine Svizzera-Italia sul Lago di Lugano al tramonto"
       },
       "datePublished": "2026-09-02T23:43:39+00:00",
-      "dateModified": "2026-09-02T23:43:39+00:00",
+      "dateModified": "2026-10-31T00:00:00+00:00",
       "inLanguage": "it",
       "author": {
         "@type": "Person",

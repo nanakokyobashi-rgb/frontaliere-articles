@@ -315,6 +315,12 @@ import {
   imageRecordForPath,
 } from './lib/blog-image-registry.mjs';
 import { imageCreditRecordFromGeneratedImageRecord } from '../../engine/shared/imageCredits.mjs';
+import {
+  CLAIM_LOCALES,
+  HEALTH_TAX_SUMMARY,
+  repairEditorialClaims,
+  assertNoEditorialClaims,
+} from '../../engine/shared/editorialClaims.mjs';
 import { DETERMINISTIC_CARD_KIND, DETERMINISTIC_CARD_LICENSE_URL } from './lib/deterministic-card-provenance.mjs';
 import {
   ARTICLE_COVER_FALLBACK_ERROR_CODES,
@@ -5291,13 +5297,130 @@ function bodyTextForCantonPostcondition(data) {
   ), { requireParagraphBreak: true });
 }
 
+function repairEditorialClaimsInObject(value, { locale, title, field, changes, seen }) {
+  if (typeof value === 'string') {
+    const repaired = repairEditorialClaims(value, { locale, title });
+    let output = repaired.value;
+    const metadataField = /(?:^|\.)(?:excerpt|description|ogDescription)$/u.test(field);
+    const removedHealthTax = repaired.changes.some((change) => change.class === 'tassa-salute');
+    if (metadataField && value.trim() && output === '' && removedHealthTax) {
+      output = HEALTH_TAX_SUMMARY[locale] ?? HEALTH_TAX_SUMMARY.it;
+    }
+    if (output !== value) changes.push(`${locale}/${field}`);
+    return output;
+  }
+  if (!value || typeof value !== 'object' || seen.has(value)) return value;
+  seen.add(value);
+  for (const [key, child] of Object.entries(value)) {
+    value[key] = repairEditorialClaimsInObject(child, {
+      locale,
+      title,
+      field: `${field}.${key}`,
+      changes,
+      seen,
+    });
+  }
+  return value;
+}
+
+/**
+ * Apply the engine's deterministic editorial-claim repairs before any quality
+ * measurement. The same pass covers every generated translation and the
+ * Italian SEO entry that is written to content/seo.
+ */
+function repairArticleEditorialClaims(data) {
+  const changes = [];
+  const seen = new Set();
+  for (const locale of CLAIM_LOCALES) {
+    const localeContent = data?.content?.[locale];
+    if (!localeContent || typeof localeContent !== 'object') continue;
+    repairEditorialClaimsInObject(localeContent, {
+      locale,
+      title: typeof localeContent.title === 'string' ? localeContent.title : '',
+      field: 'content',
+      changes,
+      seen,
+    });
+  }
+  if (data?.seo && typeof data.seo === 'object') {
+    repairEditorialClaimsInObject(data.seo, {
+      locale: 'it',
+      title: typeof data.content?.it?.title === 'string' ? data.content.it.title : '',
+      field: 'seo',
+      changes,
+      seen,
+    });
+  }
+  if (typeof data?.imageAlt === 'string') {
+    data.imageAlt = repairEditorialClaimsInObject(data.imageAlt, {
+      locale: 'it',
+      title: typeof data.content?.it?.title === 'string' ? data.content.it.title : '',
+      field: 'imageAlt',
+      changes,
+      seen,
+    });
+  } else if (data?.imageAlt && typeof data.imageAlt === 'object') {
+    for (const locale of CLAIM_LOCALES) {
+      if (!(locale in data.imageAlt)) continue;
+      const localeTitle = typeof data.content?.[locale]?.title === 'string' ? data.content[locale].title : '';
+      if (typeof data.imageAlt[locale] === 'string') {
+        data.imageAlt[locale] = repairEditorialClaimsInObject(data.imageAlt[locale], {
+          locale,
+          title: localeTitle,
+          field: `imageAlt.${locale}`,
+          changes,
+          seen,
+        });
+      } else {
+        repairEditorialClaimsInObject(data.imageAlt[locale], {
+          locale,
+          title: localeTitle,
+          field: `imageAlt.${locale}`,
+          changes,
+          seen,
+        });
+      }
+    }
+  }
+  if (changes.length > 0) {
+    console.error(
+      `  🧹 [editorial-claims] ${data?.id || '(id mancante)'}: `
+        + `riparati ${changes.length} campo/i prima dei gate`,
+    );
+  }
+}
+
+function assertPublishedEditorialClaims(data) {
+  try {
+    assertNoEditorialClaims(data?.content);
+    if (data?.seo && typeof data.seo === 'object') {
+      assertNoEditorialClaims({ it: data.seo });
+    }
+    if (typeof data?.imageAlt === 'string') {
+      assertNoEditorialClaims({ it: data.imageAlt });
+    } else if (data?.imageAlt && typeof data.imageAlt === 'object') {
+      const imageAltByLocale = Object.fromEntries(
+        CLAIM_LOCALES
+          .filter((locale) => locale in data.imageAlt)
+          .map((locale) => [locale, data.imageAlt[locale]]),
+      );
+      assertNoEditorialClaims(imageAltByLocale);
+    }
+  } catch (error) {
+    error.qualityReject = true;
+    throw error;
+  }
+}
+
 /**
  * Gate comune per i payload appena generati, prima di traduzioni, immagini e
- * scritture. Le coppie `placeholder-value` vengono tolte solo quando la lista
- * conserva almeno tre fatti; una lista sotto soglia e una guida con toponimi
- * di un altro cantone fanno fallire l'headline corrente come qualityReject.
+ * scritture. Applica prima le riparazioni editoriali deterministiche; le
+ * coppie `placeholder-value` vengono tolte solo quando la lista conserva
+ * almeno tre fatti; una lista sotto soglia e una guida con toponimi di un altro
+ * cantone fanno fallire l'headline corrente come qualityReject.
  */
 function assertGeneratedArticleQuality(data, { cantonBody = null } = {}) {
+  repairArticleEditorialClaims(data);
   const content = data?.content;
   if (!content || typeof content !== 'object') return;
 
@@ -5710,10 +5833,19 @@ export async function repairGeneratedArticleSourceCopy(article, sourceText, {
  * which do not pass through the primary generation loop.
  */
 export function assertArticlePassesFactualityGates(data, options = {}) {
+  // Direct producers may call this gate without the broader generation-quality
+  // pass (for example during a metadata-only refresh), so keep the deterministic
+  // editorial repair at this shared boundary as well.
+  repairArticleEditorialClaims(data);
   assertItalianArticlePassesFactualityGates(data, options);
   assertTranslationsPassFactualityGates(data);
   assertNoCorpusFabricatedInstitutionNames(data);
   assertLocalizedToponyms(data);
+  // Run after all repairs and translation mutations, immediately before the
+  // common registrar/writer boundary, so a prohibited claim cannot reach
+  // content/** or content/seo/** even when a direct producer skips the main
+  // generation loop.
+  assertPublishedEditorialClaims(data);
 }
 
 function collectPublishedTextValues(value, path = [], seen = new Set()) {
