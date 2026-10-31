@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-31T11:03:15.690Z",
-  "contentHash": "010191c61972a0b43ff889e8b00201e538e81d00e144e62de5cafd0d397a63f4",
+  "updatedAt": "2026-10-31T14:42:02.554Z",
+  "contentHash": "8db8877b21a50636a96279646c794dc9d06a01b71d253b6af9a15268a843d16e",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-31T01:06:50.670Z",
+      "updatedAt": "2026-10-31T10:01:09.440Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-30T21:45:03.956Z",
+      "updatedAt": "2026-10-31T11:16:57.003Z",
       "keyFacts": 0
     }
   ],
@@ -160,7 +160,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-31T01:06:50.670Z"
+          "updatedAt": "2026-10-31T10:01:09.440Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -168,37 +168,37 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
-              "label": "Herbstaktion: Velo-Reinigung in der Velostation",
-              "date": "2026-10-29",
-              "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/10/herbstaktion--velo-reinigung-in-der-velostation.html"
+              "label": "Mels: Festnahme nach versuchtem Telefonbetrug",
+              "date": "2026-10-31",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/mels--festnahme-nach-versuchtem-telefonbetrug.html"
             },
             {
-              "label": "Kanton St.Gallen: Fünf fahrunfähige Verkehrsteilnehmende angehalten",
-              "date": "2026-10-28",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/kanton-st-gallen--fuenf-fahrunfaehige-verkehrsteilnehmende-angeh.html"
+              "label": "Kanton St. Gallen: Mehrere Einbrüche",
+              "date": "2026-10-31",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/kanton-st--gallen--mehrere-einbrueche.html"
             },
             {
-              "label": "Velovorzugsroute entlang der Bahn - öffentliche Mitwirkung startet im November",
-              "date": "2026-10-26",
-              "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/10/velovorzugsroute-entlang-der-bahn---oeffentliche-mitwirkung.html"
+              "label": "Weesen: Fahrunfähig Selbstunfall verursacht",
+              "date": "2026-10-31",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/weesen--fahrunfaehig-selbstunfall-verursacht.html"
             },
             {
-              "label": "Kolumbanstrasse neu gestaltet",
-              "date": "2026-10-23",
-              "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/10/kolumbanstrasse--mehr-sicherheit-und-besserer-verkehrsfluss.html"
+              "label": "Abstimmungsvorlagen: Mehr Selbstbestimmung für Menschen mit Behinderung",
+              "date": "2026-10-30",
+              "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/abstimmungsvorlagen--mehr-selbstbestimmung--fuer-menschen-mit-be.html"
             },
             {
-              "label": "A1 Neudorf – Rheineck: Nächtliche Sperrungen zum Einbau neuer Signalträger",
-              "date": "2026-10-16",
-              "url": "https://www.stadt.sg.ch/news/stsg_home/2026/10/a1-neudorf---rheineck--naechtliche--sperrungen-zum-einbau-neuer-.html"
+              "label": "Gossau: Unfall auf A1",
+              "date": "2026-10-30",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/gossau--unfall-auf-a1.html"
             },
             {
-              "label": "Donnerstag, 15.10.2026 Achraintunnel: Tages- und Nachtsperren im Oktober erforderlich",
-              "date": "2026-10-15",
-              "url": "https://presse.vorarlberg.at/land/public/Achraintunnel-Tages-und-Nachtsperren-im-Oktober-erforderlich1"
+              "label": "Lichtensteig: Gewässerverschmutzung des Lederbachs",
+              "date": "2026-10-30",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/lichtensteig--gewaesserverschmutzung-des-lederbachs.html"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-10-31T11:16:57.003Z"
         }
       ],
       "curatedArticles": [
@@ -286,7 +286,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-31T11:03:15.690Z"
+      "updatedAt": "2026-10-31T14:42:02.554Z"
     },
     "en": {
       "canton": "SG",
@@ -424,7 +424,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-31T01:06:50.670Z"
+          "updatedAt": "2026-10-31T10:01:09.440Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -432,37 +432,37 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
-              "label": "Herbstaktion: Velo-Reinigung in der Velostation",
-              "date": "2026-10-29",
-              "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/10/herbstaktion--velo-reinigung-in-der-velostation.html"
+              "label": "Mels: Festnahme nach versuchtem Telefonbetrug",
+              "date": "2026-10-31",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/mels--festnahme-nach-versuchtem-telefonbetrug.html"
             },
             {
-              "label": "Kanton St.Gallen: Fünf fahrunfähige Verkehrsteilnehmende angehalten",
-              "date": "2026-10-28",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/kanton-st-gallen--fuenf-fahrunfaehige-verkehrsteilnehmende-angeh.html"
+              "label": "Kanton St. Gallen: Mehrere Einbrüche",
+              "date": "2026-10-31",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/kanton-st--gallen--mehrere-einbrueche.html"
             },
             {
-              "label": "Velovorzugsroute entlang der Bahn - öffentliche Mitwirkung startet im November",
-              "date": "2026-10-26",
-              "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/10/velovorzugsroute-entlang-der-bahn---oeffentliche-mitwirkung.html"
+              "label": "Weesen: Fahrunfähig Selbstunfall verursacht",
+              "date": "2026-10-31",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/weesen--fahrunfaehig-selbstunfall-verursacht.html"
             },
             {
-              "label": "Kolumbanstrasse neu gestaltet",
-              "date": "2026-10-23",
-              "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/10/kolumbanstrasse--mehr-sicherheit-und-besserer-verkehrsfluss.html"
+              "label": "Abstimmungsvorlagen: Mehr Selbstbestimmung für Menschen mit Behinderung",
+              "date": "2026-10-30",
+              "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/abstimmungsvorlagen--mehr-selbstbestimmung--fuer-menschen-mit-be.html"
             },
             {
-              "label": "A1 Neudorf – Rheineck: Nächtliche Sperrungen zum Einbau neuer Signalträger",
-              "date": "2026-10-16",
-              "url": "https://www.stadt.sg.ch/news/stsg_home/2026/10/a1-neudorf---rheineck--naechtliche--sperrungen-zum-einbau-neuer-.html"
+              "label": "Gossau: Unfall auf A1",
+              "date": "2026-10-30",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/gossau--unfall-auf-a1.html"
             },
             {
-              "label": "Donnerstag, 15.10.2026 Achraintunnel: Tages- und Nachtsperren im Oktober erforderlich",
-              "date": "2026-10-15",
-              "url": "https://presse.vorarlberg.at/land/public/Achraintunnel-Tages-und-Nachtsperren-im-Oktober-erforderlich1"
+              "label": "Lichtensteig: Gewässerverschmutzung des Lederbachs",
+              "date": "2026-10-30",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/lichtensteig--gewaesserverschmutzung-des-lederbachs.html"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-10-31T11:16:57.003Z"
         }
       ],
       "curatedArticles": [
@@ -549,7 +549,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-31T11:03:15.690Z"
+      "updatedAt": "2026-10-31T14:42:02.554Z"
     },
     "de": {
       "canton": "SG",
@@ -687,7 +687,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-31T01:06:50.670Z"
+          "updatedAt": "2026-10-31T10:01:09.440Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -695,37 +695,37 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
-              "label": "Herbstaktion: Velo-Reinigung in der Velostation",
-              "date": "2026-10-29",
-              "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/10/herbstaktion--velo-reinigung-in-der-velostation.html"
+              "label": "Mels: Festnahme nach versuchtem Telefonbetrug",
+              "date": "2026-10-31",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/mels--festnahme-nach-versuchtem-telefonbetrug.html"
             },
             {
-              "label": "Kanton St.Gallen: Fünf fahrunfähige Verkehrsteilnehmende angehalten",
-              "date": "2026-10-28",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/kanton-st-gallen--fuenf-fahrunfaehige-verkehrsteilnehmende-angeh.html"
+              "label": "Kanton St. Gallen: Mehrere Einbrüche",
+              "date": "2026-10-31",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/kanton-st--gallen--mehrere-einbrueche.html"
             },
             {
-              "label": "Velovorzugsroute entlang der Bahn - öffentliche Mitwirkung startet im November",
-              "date": "2026-10-26",
-              "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/10/velovorzugsroute-entlang-der-bahn---oeffentliche-mitwirkung.html"
+              "label": "Weesen: Fahrunfähig Selbstunfall verursacht",
+              "date": "2026-10-31",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/weesen--fahrunfaehig-selbstunfall-verursacht.html"
             },
             {
-              "label": "Kolumbanstrasse neu gestaltet",
-              "date": "2026-10-23",
-              "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/10/kolumbanstrasse--mehr-sicherheit-und-besserer-verkehrsfluss.html"
+              "label": "Abstimmungsvorlagen: Mehr Selbstbestimmung für Menschen mit Behinderung",
+              "date": "2026-10-30",
+              "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/abstimmungsvorlagen--mehr-selbstbestimmung--fuer-menschen-mit-be.html"
             },
             {
-              "label": "A1 Neudorf – Rheineck: Nächtliche Sperrungen zum Einbau neuer Signalträger",
-              "date": "2026-10-16",
-              "url": "https://www.stadt.sg.ch/news/stsg_home/2026/10/a1-neudorf---rheineck--naechtliche--sperrungen-zum-einbau-neuer-.html"
+              "label": "Gossau: Unfall auf A1",
+              "date": "2026-10-30",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/gossau--unfall-auf-a1.html"
             },
             {
-              "label": "Donnerstag, 15.10.2026 Achraintunnel: Tages- und Nachtsperren im Oktober erforderlich",
-              "date": "2026-10-15",
-              "url": "https://presse.vorarlberg.at/land/public/Achraintunnel-Tages-und-Nachtsperren-im-Oktober-erforderlich1"
+              "label": "Lichtensteig: Gewässerverschmutzung des Lederbachs",
+              "date": "2026-10-30",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/lichtensteig--gewaesserverschmutzung-des-lederbachs.html"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-10-31T11:16:57.003Z"
         }
       ],
       "curatedArticles": [
@@ -812,7 +812,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-31T11:03:15.690Z"
+      "updatedAt": "2026-10-31T14:42:02.554Z"
     },
     "fr": {
       "canton": "SG",
@@ -950,7 +950,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-31T01:06:50.670Z"
+          "updatedAt": "2026-10-31T10:01:09.440Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -958,37 +958,37 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
-              "label": "Herbstaktion: Velo-Reinigung in der Velostation",
-              "date": "2026-10-29",
-              "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/10/herbstaktion--velo-reinigung-in-der-velostation.html"
+              "label": "Mels: Festnahme nach versuchtem Telefonbetrug",
+              "date": "2026-10-31",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/mels--festnahme-nach-versuchtem-telefonbetrug.html"
             },
             {
-              "label": "Kanton St.Gallen: Fünf fahrunfähige Verkehrsteilnehmende angehalten",
-              "date": "2026-10-28",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/kanton-st-gallen--fuenf-fahrunfaehige-verkehrsteilnehmende-angeh.html"
+              "label": "Kanton St. Gallen: Mehrere Einbrüche",
+              "date": "2026-10-31",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/kanton-st--gallen--mehrere-einbrueche.html"
             },
             {
-              "label": "Velovorzugsroute entlang der Bahn - öffentliche Mitwirkung startet im November",
-              "date": "2026-10-26",
-              "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/10/velovorzugsroute-entlang-der-bahn---oeffentliche-mitwirkung.html"
+              "label": "Weesen: Fahrunfähig Selbstunfall verursacht",
+              "date": "2026-10-31",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/weesen--fahrunfaehig-selbstunfall-verursacht.html"
             },
             {
-              "label": "Kolumbanstrasse neu gestaltet",
-              "date": "2026-10-23",
-              "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/10/kolumbanstrasse--mehr-sicherheit-und-besserer-verkehrsfluss.html"
+              "label": "Abstimmungsvorlagen: Mehr Selbstbestimmung für Menschen mit Behinderung",
+              "date": "2026-10-30",
+              "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/abstimmungsvorlagen--mehr-selbstbestimmung--fuer-menschen-mit-be.html"
             },
             {
-              "label": "A1 Neudorf – Rheineck: Nächtliche Sperrungen zum Einbau neuer Signalträger",
-              "date": "2026-10-16",
-              "url": "https://www.stadt.sg.ch/news/stsg_home/2026/10/a1-neudorf---rheineck--naechtliche--sperrungen-zum-einbau-neuer-.html"
+              "label": "Gossau: Unfall auf A1",
+              "date": "2026-10-30",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/gossau--unfall-auf-a1.html"
             },
             {
-              "label": "Donnerstag, 15.10.2026 Achraintunnel: Tages- und Nachtsperren im Oktober erforderlich",
-              "date": "2026-10-15",
-              "url": "https://presse.vorarlberg.at/land/public/Achraintunnel-Tages-und-Nachtsperren-im-Oktober-erforderlich1"
+              "label": "Lichtensteig: Gewässerverschmutzung des Lederbachs",
+              "date": "2026-10-30",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/lichtensteig--gewaesserverschmutzung-des-lederbachs.html"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-10-31T11:16:57.003Z"
         }
       ],
       "curatedArticles": [
@@ -1076,7 +1076,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-31T11:03:15.690Z"
+      "updatedAt": "2026-10-31T14:42:02.554Z"
     }
   }
 }

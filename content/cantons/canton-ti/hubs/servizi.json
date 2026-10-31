@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-10-31T11:03:15.690Z",
-  "contentHash": "d88e39a0ac777a5ec20c8dbe4e4380cfb14f8c99c0280429f39f5842f2b630ce",
+  "updatedAt": "2026-10-31T14:42:02.554Z",
+  "contentHash": "84235e0f7427932270ca40cb959d60b0db3a12241a43bb4dc2b220347cffd5be",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-31T01:55:24.654Z",
+      "updatedAt": "2026-10-31T10:30:41.755Z",
       "keyFacts": 0
     },
     {
@@ -29,7 +29,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-30T21:45:03.956Z",
+      "updatedAt": "2026-10-31T11:16:57.003Z",
       "keyFacts": 0
     }
   ],
@@ -111,7 +111,7 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-31T01:55:24.654Z"
+          "updatedAt": "2026-10-31T10:30:41.755Z"
         },
         {
           "id": "aste-targhe",
@@ -177,6 +177,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Campagna Drive awake",
+              "date": "2026-10-31",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/Campagna-Drive-awake-.html"
+            },
+            {
               "label": "Ottenuti importanti finanziamenti dall’Istituto di Ricerca Traslazionale USI-EOC",
               "date": "2026-10-25",
               "url": "https://www.eoc.ch/media-e-news/news/2026/finanziamenti-irt.html"
@@ -200,14 +205,9 @@
               "label": "Nuovi spazi per la medicina ambulatoriale specialistica all’Ospedale San Giovanni di Bellinzona",
               "date": "2026-10-08",
               "url": "https://www.eoc.ch/media-e-news/news/2026/CS-osg-ambulatoriale.html"
-            },
-            {
-              "label": "A Lugano il Congresso Infertilità 2026",
-              "date": "2026-10-01",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/congresso-infertilita.html"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-10-31T11:16:57.003Z"
         }
       ],
       "curatedArticles": [
@@ -295,7 +295,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-10-31T11:03:15.690Z"
+      "updatedAt": "2026-10-31T14:42:02.554Z"
     },
     "en": {
       "canton": "TI",
@@ -374,7 +374,7 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-31T01:55:24.654Z"
+          "updatedAt": "2026-10-31T10:30:41.755Z"
         },
         {
           "id": "aste-targhe",
@@ -440,6 +440,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Campagna Drive awake",
+              "date": "2026-10-31",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/Campagna-Drive-awake-.html"
+            },
+            {
               "label": "Ottenuti importanti finanziamenti dall’Istituto di Ricerca Traslazionale USI-EOC",
               "date": "2026-10-25",
               "url": "https://www.eoc.ch/media-e-news/news/2026/finanziamenti-irt.html"
@@ -463,14 +468,9 @@
               "label": "Nuovi spazi per la medicina ambulatoriale specialistica all’Ospedale San Giovanni di Bellinzona",
               "date": "2026-10-08",
               "url": "https://www.eoc.ch/media-e-news/news/2026/CS-osg-ambulatoriale.html"
-            },
-            {
-              "label": "A Lugano il Congresso Infertilità 2026",
-              "date": "2026-10-01",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/congresso-infertilita.html"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-10-31T11:16:57.003Z"
         }
       ],
       "curatedArticles": [
@@ -553,7 +553,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-10-31T11:03:15.690Z"
+      "updatedAt": "2026-10-31T14:42:02.554Z"
     },
     "de": {
       "canton": "TI",
@@ -632,7 +632,7 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-31T01:55:24.654Z"
+          "updatedAt": "2026-10-31T10:30:41.755Z"
         },
         {
           "id": "aste-targhe",
@@ -698,6 +698,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Campagna Drive awake",
+              "date": "2026-10-31",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/Campagna-Drive-awake-.html"
+            },
+            {
               "label": "Ottenuti importanti finanziamenti dall’Istituto di Ricerca Traslazionale USI-EOC",
               "date": "2026-10-25",
               "url": "https://www.eoc.ch/media-e-news/news/2026/finanziamenti-irt.html"
@@ -721,14 +726,9 @@
               "label": "Nuovi spazi per la medicina ambulatoriale specialistica all’Ospedale San Giovanni di Bellinzona",
               "date": "2026-10-08",
               "url": "https://www.eoc.ch/media-e-news/news/2026/CS-osg-ambulatoriale.html"
-            },
-            {
-              "label": "A Lugano il Congresso Infertilità 2026",
-              "date": "2026-10-01",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/congresso-infertilita.html"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-10-31T11:16:57.003Z"
         }
       ],
       "curatedArticles": [
@@ -811,7 +811,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-10-31T11:03:15.690Z"
+      "updatedAt": "2026-10-31T14:42:02.554Z"
     },
     "fr": {
       "canton": "TI",
@@ -890,7 +890,7 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-31T01:55:24.654Z"
+          "updatedAt": "2026-10-31T10:30:41.755Z"
         },
         {
           "id": "aste-targhe",
@@ -956,6 +956,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Campagna Drive awake",
+              "date": "2026-10-31",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/Campagna-Drive-awake-.html"
+            },
+            {
               "label": "Ottenuti importanti finanziamenti dall’Istituto di Ricerca Traslazionale USI-EOC",
               "date": "2026-10-25",
               "url": "https://www.eoc.ch/media-e-news/news/2026/finanziamenti-irt.html"
@@ -979,14 +984,9 @@
               "label": "Nuovi spazi per la medicina ambulatoriale specialistica all’Ospedale San Giovanni di Bellinzona",
               "date": "2026-10-08",
               "url": "https://www.eoc.ch/media-e-news/news/2026/CS-osg-ambulatoriale.html"
-            },
-            {
-              "label": "A Lugano il Congresso Infertilità 2026",
-              "date": "2026-10-01",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/congresso-infertilita.html"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-10-31T11:16:57.003Z"
         }
       ],
       "curatedArticles": [
@@ -1066,7 +1066,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-10-31T11:03:15.690Z"
+      "updatedAt": "2026-10-31T14:42:02.554Z"
     }
   }
 }
