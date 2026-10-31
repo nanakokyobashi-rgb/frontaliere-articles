@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1952117/auto-benzina-ogni-chilometri-costi-costa-prezzi-rendono": {
-    "articleId": "costi-auto-elettrica-benzina",
-    "ts": "2026-09-23T11:31:38.661Z",
-    "keyForm": 2
-  },
   "stats-astra://monthly/2026-09/svizzera": {
     "articleId": "parco-veicoli-svizzera-2026",
     "ts": "2026-09-23T12:36:37.366Z",
@@ -2497,6 +2492,11 @@
   "https://www.laregione.ch/svizzera/svizzera/1959387/modernizzatori-vs-conservatori-atto-ii-dello-scontro-sull-imposizione-fiscale-delle-coppie": {
     "articleId": "scontro-fiscale-coppie-atto",
     "ts": "2026-10-30T07:58:23.187Z",
+    "keyForm": 2
+  },
+  "https://www.cdt.ch/news/economia/startup-e-innovazione-sociale-la-open-call-2026-mette-a-disposizione-formazione-e-finanziamenti-442875": {
+    "articleId": "startup-innovazione-sociale-open-call",
+    "ts": "2026-10-31T14:07:58.997Z",
     "keyForm": 2
   }
 }
