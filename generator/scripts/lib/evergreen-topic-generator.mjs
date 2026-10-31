@@ -113,6 +113,26 @@ const PROVINCE_CANTON = {
   AO: 'Vallese', VC: 'Vallese',
 };
 
+/**
+ * Le due nomenclature ufficiali da usare quando un evergreen nomina un
+ * comune. `MUNICIPALITIES` contiene comuni italiani di frontiera; il cantone
+ * prodotto da `resolveComuneCanton` descrive invece il luogo di lavoro in
+ * Svizzera. Esplicitare entrambe le fonti qui impedisce che una provincia
+ * italiana venga interpretata come un elenco di comuni svizzeri.
+ */
+export const OFFICIAL_MUNICIPALITY_REGISTRY_SOURCES = Object.freeze({
+  italy: Object.freeze({
+    authority: 'ISTAT',
+    label: 'elenco ufficiale dei Comuni italiani',
+    url: 'https://www.istat.it/classificazione/codici-dei-comuni-delle-province-e-delle-regioni/',
+  }),
+  switzerland: Object.freeze({
+    authority: 'UST',
+    label: 'Elenco ufficiale dei Comuni della Svizzera',
+    url: 'https://statistik.admin.ch/it/capire-statistiche-dati/nomenclature/agvch',
+  }),
+});
+
 // The remaining 5 provinces (MB/BG/BS/TN/BZ, 35 comuni) sit on the official
 // ti.ch frontier list too, but province alone can't resolve their canton —
 // unlike CO/VA/VB/SO/AO/VC above, none of these provinces is unambiguously
@@ -305,7 +325,7 @@ export function buildComuneEvergreenTopics(municipalities) {
       // into the one candidate that survives.
       out.push({
         keyword: `vivere a ${m.name} e lavorare in ${canton} da frontaliere`,
-        angle: `Vivere a ${m.name} e lavorare in ${canton} da frontaliere: collegamenti, tempi di percorrenza, costo della vita, zone consigliate, vantaggi e svantaggi del trasferimento, cosa considerare prima di trasferirsi.`,
+        angle: `Luogo italiano: ${m.name} (Italia, provincia ${m.province ?? 'da verificare'}); verificarne la denominazione nei codici ISTAT. Destinazione lavorativa: ${canton}; non è il luogo italiano e va verificata nella nomenclatura UST. Trattare collegamenti, tempi di percorrenza, costo della vita, zone consigliate, vantaggi e svantaggi del trasferimento senza confondere i due territori.`,
       });
     }
   }
