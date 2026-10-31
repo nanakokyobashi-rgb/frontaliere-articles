@@ -1248,7 +1248,7 @@ export async function classifyAndMintReview(body, {
   const hasApplicabilityContext = reviewCommit !== null || headSha !== null || reviewId !== null;
   if (findings.length > 0 && hasApplicabilityContext
       && !reviewAppliesToHead(reviewCommit, headSha)) {
-    console.log('review-scope: review non applicabile alla HEAD corrente → classificazione bloccata.');
+    console.error('review-scope: review non applicabile alla HEAD corrente → classificazione bloccata.');
     return nonApplicableClassification(findings);
   }
   const effectivePrBody = prBody === null && bodyContractPassed !== false
