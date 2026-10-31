@@ -186,18 +186,32 @@ export function repairFiscalText(input, rel, { replaceArithmetic = false } = {})
   return { text: dropWrongTaxHealthRates(dropRefutedSentences(out + text.slice(last), rel), rel), arith };
 }
 
+function mergeOverlappingSpans(spans) {
+  const merged = [];
+  for (const { start, end } of [...spans].sort((left, right) => left.start - right.start || right.end - left.end)) {
+    const previous = merged.at(-1);
+    if (previous && start < previous.end) {
+      previous.end = Math.max(previous.end, end);
+    } else {
+      merged.push({ start, end });
+    }
+  }
+  return merged;
+}
+
+function removeSpans(text, spans) {
+  return mergeOverlappingSpans(spans)
+    .sort((left, right) => right.start - left.start)
+    .reduce((out, { start, end }) => out.slice(0, start) + out.slice(end), text);
+}
+
 /**
  * Le altre regole non hanno una frase sostitutiva sicura: la frase e' falsa per
  * intero, e l'unica correzione generale e' toglierla.
  */
 function dropRefutedSentences(text, rel) {
   if (FABRICATED_TAX_HEALTH_ARTICLES.test(rel)) return text;
-  let out = text;
-  const spans = new Map(findFiscalClaims(text).filter(({ id }) => id !== 'franchigia-7500').map((claim) => [claim.start, claim]));
-  for (const claim of [...spans.values()].sort((left, right) => right.start - left.start)) {
-    out = out.slice(0, claim.start) + out.slice(claim.end);
-  }
-  return out;
+  return removeSpans(text, findFiscalClaims(text).filter(({ id }) => id !== 'franchigia-7500'));
 }
 
 /**
@@ -209,11 +223,7 @@ const FABRICATED_TAX_HEALTH_ARTICLES = /\/tassa-salute-frontalieri-ticino-2026\.
 
 function dropWrongTaxHealthRates(text, rel) {
   if (FABRICATED_TAX_HEALTH_ARTICLES.test(rel)) return text;
-  let out = text;
-  for (const error of findTaxHealthParameterErrors(text).reverse()) {
-    out = out.slice(0, error.start) + out.slice(error.end);
-  }
-  return out;
+  return removeSpans(text, findTaxHealthParameterErrors(text));
 }
 
 function* corpusFiles(dir) {

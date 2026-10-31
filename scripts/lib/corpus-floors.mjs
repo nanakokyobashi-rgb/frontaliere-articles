@@ -708,15 +708,17 @@ export function countSourceArticles(root, section) {
  *
  * Il denominatore parte dal registro, non dal predicato del writer: un nuovo
  * filtro o una mappa slug troncata deve far scattare il floor, non abbassarlo
- * insieme all'artefatto. Si sottraggono solo le esclusioni già dichiarate nei
- * dati di canonical override o nella retention delle daily edition, mappate
- * esplicitamente allo slug IT di una entry del registro.
+ * insieme all'artefatto. Si sottraggono le esclusioni già dichiarate nei dati
+ * di canonical override o nella retention delle daily edition e gli id
+ * esplicitamente passati dal chiamante (per esempio il ledger
+ * `article-index-exclusions`), mappati allo slug IT di una entry del registro.
  */
-export function countSourceSitemapEntries(root, section) {
+export function countSourceSitemapEntries(root, section, { excludedIds = [] } = {}) {
   if (isNewFamilySection(root, section) || isEmptyFamilySection(root, section)) return 0;
   const registry = readRegistryData(root, section);
   const slugMap = readSlugMap(root, section);
   const shadowed = readCanonicalOverrideSlugs(root, section);
+  const explicitlyExcluded = new Set(excludedIds);
 
   if (sourceOf(section).retiredDailyEditions) {
     for (const id of selectRetiredDailyEditions([...registry.ids])) {
@@ -725,7 +727,7 @@ export function countSourceSitemapEntries(root, section) {
     }
   }
 
-  return registry.entryIds.filter((id) => !shadowed.has(slugMap[id]?.it)).length;
+  return registry.entryIds.filter((id) => !explicitlyExcluded.has(id) && !shadowed.has(slugMap[id]?.it)).length;
 }
 
 /**

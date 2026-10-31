@@ -20119,6 +20119,15 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // `Zürich` to the localized-exonym detector and can be published in place
   // of the required English `Zurich`.
   decodeArticleEntities(data);
+  // Entity decoding is the last content normalization before the write path.
+  // Re-run the fiscal guard on every locale here: the earlier check ran before
+  // the final source-copy repair and deterministic postconditions.
+  assertNoFiscalErrorsInLocales({
+    it: data.content.it,
+    en: data.content.en,
+    de: data.content.de,
+    fr: data.content.fr,
+  });
   Object.defineProperties(data, {
     _sourceUrl: { value: url, configurable: true },
     _sourceText: { value: factualityGateSourceText(url, pageContent), configurable: true },

@@ -65,12 +65,25 @@ import { countXmlTags } from '../lib/count-xml-tags.mjs';
 import { seoChunkSources } from '../lib/engine-corpus-view.mjs';
 import { EDGE_SECTION_REGISTRY_FILE } from '../lib/section-registry.mjs';
 import { stripNonMarkup } from '../lib/count-xml-tags.mjs';
+import {
+  ARTICLE_INDEX_EXCLUSIONS_FILES,
+  loadArticleIndexExclusions,
+} from '../../engine/shared/articleIndexExclusions.mjs';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 
 // Re-export per i consumer del verifier: la definizione condivisa vive nel
 // modulo dei floor, così writer e gate non possono divergere sui nomi.
 export { SECTION_COUNTERS, SECTION_SITEMAPS, ARCHIVE_SITEMAP };
+
+function indexExcludedArticleIds(indexExclusions, section) {
+  const prefix = `${section}|`;
+  return new Set(
+    [...indexExclusions]
+      .filter((key) => key.startsWith(prefix))
+      .map((key) => key.slice(prefix.length)),
+  );
+}
 
 const IMAGE_SOURCE_LABEL = IMAGE_SOURCE_DIRS.join(' or ');
 
@@ -723,9 +736,15 @@ export async function expectFromCorpus(root) {
   const sourceArchiveSitemapErrors = {};
   const sourceArchiveHtmlPages = {};
   const sourceArchiveHtmlPageErrors = {};
+  const indexExclusions = loadArticleIndexExclusions(
+    fs,
+    ARTICLE_INDEX_EXCLUSIONS_FILES.map((candidate) => path.join(root, candidate)),
+  );
   for (const section of Object.keys(SECTION_COUNTERS)) {
     try {
-      sourceSitemaps[section] = countSourceSitemapEntries(root, section);
+      sourceSitemaps[section] = countSourceSitemapEntries(root, section, {
+        excludedIds: indexExcludedArticleIds(indexExclusions, section),
+      });
     } catch (error) {
       // Some unit fixtures model only the body/SEO corpus because they never
       // invoke the sitemap writer. A real publish checkout has these inputs —

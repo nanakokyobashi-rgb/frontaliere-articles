@@ -707,10 +707,12 @@ console.log(`[build-api] articoli esclusi dall'indice: ${indexExclusions.size}`)
     throw new Error(`article-index-exclusions: righe senza articolo (${unknownExclusions.join(', ')}) — refusing to publish`);
   }
 }
+const indexExcludedArticles = (section) => (SECTION_REGISTRIES[section.section] ?? [])
+  .filter((article) => indexExclusions.has(articleIndexExclusionKey(section.section, article.id)));
+const indexExcludedArticleIds = (section) => new Set(indexExcludedArticles(section).map((article) => article.id));
 const indexExcludedSlugs = (section) => {
   const slugMap = slugMapOf(section.section);
-  return (SECTION_REGISTRIES[section.section] ?? [])
-    .filter((article) => indexExclusions.has(articleIndexExclusionKey(section.section, article.id)))
+  return indexExcludedArticles(section)
     .map((article) => slugMap?.[article.id]?.it)
     .filter(Boolean);
 };
@@ -812,7 +814,9 @@ const sitemapSources = {};
 const familySitemapRows = [];
 for (const section of PUBLIC_API_SECTIONS) {
   const file = section.api.sitemap;
-  const source = countSourceSitemapEntries(ROOT, section.section);
+  const source = countSourceSitemapEntries(ROOT, section.section, {
+    excludedIds: indexExcludedArticleIds(section),
+  });
   sitemapSources[section.section] = source;
   if (floorPolicyOf(section.section) === 'family') {
     // Gli articoli che il registro ritira (`gone`/`redirects`) escono dalla
@@ -823,7 +827,10 @@ for (const section of PUBLIC_API_SECTIONS) {
     const retiredSource = countSitemapEntries(
       SECTION_REGISTRIES[section.section].filter((article) => retired.has(slugMapOf(section.section)?.[article.id]?.it)),
       slugMapOf(section.section),
-      SECTION_CANONICAL_SHADOW[section.section],
+      new Set([
+        ...SECTION_CANONICAL_SHADOW[section.section],
+        ...indexExcludedSlugs(section),
+      ]),
     );
     familySitemapRows.push({
       section: section.section,

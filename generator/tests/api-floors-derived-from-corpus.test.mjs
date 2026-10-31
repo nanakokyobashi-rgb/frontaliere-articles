@@ -244,6 +244,10 @@ test('il denominatore sitemap non si abbassa insieme a una slug map troncata', (
     // riferimento deve invece restare a 2, cosi' l'entry senza slug abbassa
     // l'artefatto ma non il suo floor.
     assert.equal(countSourceSitemapEntries(dir, 'frontaliere'), 2);
+    assert.equal(
+      countSourceSitemapEntries(dir, 'frontaliere', { excludedIds: new Set(['kept']) }),
+      1,
+    );
   } finally {
     fs.rmSync(dir, { recursive: true, force: true });
   }
@@ -1101,7 +1105,7 @@ test('build-api usa il parser SEO condiviso, non una terza finestra locale', () 
   // sezione pubblicabile, nel loop sulle sezioni pubbliche (oggi frontaliere
   // e svizzera; da P7 anche le cantonali effettivamente live, con la politica
   // di famiglia).
-  assert.match(build, /for \(const section of PUBLIC_API_SECTIONS\) \{\s*const file = section\.api\.sitemap;\s*const source = countSourceSitemapEntries\(ROOT, section\.section\);/);
+  assert.match(build, /for \(const section of PUBLIC_API_SECTIONS\) \{\s*const file = section\.api\.sitemap;\s*const source = countSourceSitemapEntries\(ROOT, section\.section, \{\s*excludedIds: indexExcludedArticleIds\(section\),\s*\}\);/);
   assert.doesNotMatch(build, /countSitemapEntries\(ARTICLES/);
   assert.doesNotMatch(build, /countSitemapEntries\(SWISS_ARTICLES/);
   assert.doesNotMatch(build, /countSitemapEntries\(SECTION_REGISTRIES/);

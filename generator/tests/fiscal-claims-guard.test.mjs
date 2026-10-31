@@ -278,6 +278,14 @@ test('riparazione: due nomi della quota nella stessa frase non tagliano la frase
   assert.doesNotMatch(text, /9%/);
 });
 
+test('riparazione: span fiscali sovrapposti rimuovono la frase una volta sola', () => {
+  const source = "Il credito d'imposta fino all'80% del prelievo "
+    + 'x'.repeat(700)
+    + ' 20% viene retrocesso ai comuni. TAIL intatto.';
+  const { text } = repairFiscalText(source, 'blog-body/it/x.ts');
+  assert.equal(text, ' TAIL intatto.');
+});
+
 test('riparazione: «mai in entrambi» e data di vigore cambiano solo l\'inciso', () => {
   assert.equal(
     repairFiscalText('Trattenuta SOLO in Svizzera, mai in entrambi i paesi.', 'blog-body/it/x.ts').text,
