@@ -388,7 +388,7 @@ jobs:
             'content/blog-body/**' 'content/blog-body-ch/**' | wc -l | tr -d ' ')
           git diff --cached --name-only
           if [ "$STAGED_BODY" != "$WRITTEN" ]; then
-            echo "::error::il report dice $WRITTEN coppie scritte ma i body staged sono $STAGED_BODY; i registry updatedAt sono addizionali e attesi"
+            echo "::error::il report dice $WRITTEN coppie scritte ma sotto content/ sono cambiati $STAGED_BODY file; i body staged sono $STAGED_BODY e i registry updatedAt sono addizionali e attesi"
             exit 1
           fi
           git commit -m "chore(content): bonifica ${WRITTEN} body bloccanti (${CODE:-tutti i codici}, ${LOCALE})"

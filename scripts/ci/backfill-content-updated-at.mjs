@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 /** Backfill `updatedAt` from real post-publication body commits. */
+import '../../host/cantonSectionsBootstrap.mjs';
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';

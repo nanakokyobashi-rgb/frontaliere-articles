@@ -7,6 +7,7 @@
  * so the workflow boundary calls this one small, fail-closed stamp instead of
  * copying the registry rewrite into each producer.
  */
+import '../../host/cantonSectionsBootstrap.mjs';
 import { execSync } from 'node:child_process';
 import { writeFileSync } from 'node:fs';
 import path from 'node:path';

@@ -168,6 +168,26 @@
       }
     },
     {
+      "path": "scripts/ci/backfill-content-updated-at.mjs",
+      "mode": "corpus-only",
+      "reason": "Backfill storico del campo `updatedAt` nei registry del corpus: legge la storia dei body e riscrive le sorgenti TypeScript dopo la pubblicazione. Il sito consuma la superficie JSON e non possiede il corpus, il suo backfill o il relativo workflow.",
+      "baseline": {
+        "site": null,
+        "corpus": "168a58a5c6d116a3",
+        "alignedAt": "2026-10-31"
+      }
+    },
+    {
+      "path": "scripts/ci/stamp-content-updated-at.mjs",
+      "mode": "corpus-only",
+      "reason": "Stamp fail-closed dei registry quando i writer del corpus modificano body esistenti: coordina lo stato Git del checkout e le sorgenti registry prima del commit. Il sito non esegue i writer né conserva il corpus sorgente.",
+      "baseline": {
+        "site": null,
+        "corpus": "a4a97a42581f09fd",
+        "alignedAt": "2026-10-31"
+      }
+    },
+    {
       "path": "scripts/ci/article-publication-observer.mjs",
       "mode": "corpus-only",
       "reason": "Osservatore e repairer bounded della pubblicazione articoli: legge la storia dei body nel corpus, confronta le revisioni con le pagine servite dai due publisher, conserva nel body di una issue stabile l elenco durevole delle pagine degradate e dei blocker di preparazione, e dispatcha il publisher solo dopo una prova live + immagine disponibile. Vive solo qui perche' la sorgente delle revisioni e il coordinamento dei publisher appartengono al corpus; il sito consuma la superficie pubblicata e non deve osservare la propria copia del corpus.",
@@ -776,7 +796,7 @@
       "reason": "Fa girare su `main` il sottoinsieme MISURATO dei gate che leggono `content/**`, e su offender apre UNA issue deduplicata sul titolo invece di rendere rossa una run. Non ha gemello sul sito e non puo' averlo: il difetto che chiude e' la scrittura diretta su `main` dei produttori di QUESTO repo (`generate-article.yml` e i suoi fratelli fanno `git push HEAD:main` — 88 articoli nelle ultime 24h), mentre sul sito il contenuto non e' versionato e nessun bot scrive su `main`. Anche la lista `CONTENT_GATES` e' topologia locale: sono file sotto `generator/tests/`, cartella che sul sito non esiste. La guardia ESM/main confronta il realpath per mantenere attiva la CLI anche via symlink; `generator/tests/content-gates-main-entrypoint.test.mjs` ne verifica offline l'import inerte e l'avvio. Non e' `corpus-only-pending` — non c'e' niente da portare di la'.",
       "baseline": {
         "site": null,
-        "corpus": "23f73267fded62af",
+        "corpus": "c9d7f5f6438cffd4",
         "alignedAt": "2026-09-12"
       }
     },
@@ -966,6 +986,16 @@
         "site": "339d945b935b757d",
         "corpus": "339d945b935b757d",
         "alignedAt": "2026-09-26"
+      }
+    },
+    {
+      "path": "scripts/lib/content-updated-at.mjs",
+      "mode": "corpus-only",
+      "reason": "Sorgente unica per derivare e applicare `updatedAt` dai commit dei body ai registry TypeScript del corpus. Il sito riceve JSON pubblicato via HTTP e non deve importare la logica che legge e modifica le sorgenti content/.",
+      "baseline": {
+        "site": null,
+        "corpus": "329a7f0c23a80dd8",
+        "alignedAt": "2026-10-31"
       }
     },
     {
