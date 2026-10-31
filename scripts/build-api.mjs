@@ -1108,6 +1108,8 @@ let rssItemTotal = 0;
 const familyRssRows = [];
 for (const section of rssSections) {
   const familyPolicy = floorPolicyOf(section.id) === 'family';
+  const published = PUBLISHED_BY_SECTION[section.id];
+  const excludedIds = published ? indexExcludedArticleIds(published) : new Set();
   // `buildSectionFeeds` filters the ledger before rendering. If every parsed
   // feed-eligible SEO entry is withdrawn, no RSS file is expected for a
   // historical section; a zero here is an intentional noindex state, not a
