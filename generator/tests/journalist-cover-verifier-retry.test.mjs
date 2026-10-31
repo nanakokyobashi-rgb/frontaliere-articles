@@ -61,7 +61,8 @@ test('a journalist catalog-pick with generated provenance replaces title-derived
   const provenanceWriter = SRC.slice(provenanceStart, resolverStart + 2);
   assert.match(provenanceWriter, /applyGeneratedHeroAlt\(data, provenance\)/,
     'un record catalogato generated deve neutralizzare l’alt derivato dal titolo prima di registerArticleFiles');
-  assert.match(SRC, /registerArticleFiles\(data\)/);
+  assert.match(SRC, /registerArticleFiles\(data(?:, \{ writer: 'journalist' \})?\)/,
+    'il publisher giornalista deve passare dal writer condiviso con il bypass esplicito');
 });
 
 test('deferred submissions remain in the queued snapshot and are processed only once per drain', () => {
