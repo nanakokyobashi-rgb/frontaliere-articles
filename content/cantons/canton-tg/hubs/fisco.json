@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "fisco",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "2564cc83f7882b7a321bac1fe04e30c2e8b151cbbded0ef2152ecb0cd7918a57",
+  "updatedAt": "2026-10-31T13:29:32.715Z",
+  "contentHash": "360063a70f83c231f7b81c7b32592b7ab2899c26b57812f37efdd89a2489cfd5",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T15:45:54.463Z",
+      "updatedAt": "2026-10-30T21:45:03.956Z",
       "keyFacts": 0
     }
   ],
@@ -125,10 +125,16 @@
               "url": "https://steuerverwaltung.tg.ch/news/detailseite-news.html/4067/news/80050"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Ufficio imposte Frauenfeld modifica orari dal 2 novembre 2026",
+          "url": "/articoli-turgovia/ufficio-imposte-frauenfeld-orari/",
+          "excerpt": "Dal 2 novembre 2026, l'Ufficio imposte della città di Frauenfeld chiuderà lunedì e mercoledì pomeriggio per elevato volume di lavoro.",
+          "date": "2026-10-31T13:22:10.345Z"
+        },
         {
           "title": "Comprare casa in Turgovia: tasse e mutuo ipotecario",
           "url": "/articoli-svizzera/comprare-casa-turgovia-mutuo/",
@@ -163,7 +169,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-31T13:29:32.715Z"
     },
     "en": {
       "canton": "TG",
@@ -266,10 +272,16 @@
               "url": "https://steuerverwaltung.tg.ch/news/detailseite-news.html/4067/news/80050"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Frauenfeld Tax Office changes hours from November 2, 2026",
+          "url": "/en/thurgau-articles/frauenfeld-tax-office-hours/",
+          "excerpt": "From November 2, 2026, the Frauenfeld city tax office will be closed on Monday and Wednesday afternoons due to a high workload.",
+          "date": "2026-10-31T13:22:10.345Z"
+        },
         {
           "title": "Buying a house in Thurgau: taxes and mortgage",
           "url": "/en/swiss-articles/buy-house-thurgau-mortgage/",
@@ -304,7 +316,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-31T13:29:32.715Z"
     },
     "de": {
       "canton": "TG",
@@ -407,10 +419,16 @@
               "url": "https://steuerverwaltung.tg.ch/news/detailseite-news.html/4067/news/80050"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Steueramt Frauenfeld ändert die Öffnungszeiten ab dem 2. November 2026",
+          "url": "/de/thurgau-artikel/steueramt-frauenfeld-zeiten/",
+          "excerpt": "Ab dem 2. November 2026 schließt das Steueramt der Stadt Frauenfeld am Montagnachmittag und am Mittwochnachmittag wegen des hohen Arbeitsvolumens.",
+          "date": "2026-10-31T13:22:10.345Z"
+        },
         {
           "title": "Haus kaufen im Thurgau: Steuern und Hypothekendarlehen",
           "url": "/de/schweiz-artikel/haus-kaufen-thurgau-hypothek/",
@@ -445,7 +463,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-31T13:29:32.715Z"
     },
     "fr": {
       "canton": "TG",
@@ -548,10 +566,16 @@
               "url": "https://steuerverwaltung.tg.ch/news/detailseite-news.html/4067/news/80050"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Office des impôts : horaires modifiés à Frauenfeld dès 2/11",
+          "url": "/fr/articles-thurgovie/bureau-impots-frauenfeld-horaires/",
+          "excerpt": "À partir du 2 novembre 2026, l’Office des impôts de la ville de Frauenfeld sera fermé les lundis et mercredis après-midi en raison d’un volume de travail élevé.",
+          "date": "2026-10-31T13:22:10.345Z"
+        },
         {
           "title": "Acheter une maison en Thurgovie : taxes et hypothèque",
           "url": "/fr/articles-suisse/acheter-maison-thurgovie-hypotheque/",
@@ -586,7 +610,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-31T13:29:32.715Z"
     }
   }
 }
