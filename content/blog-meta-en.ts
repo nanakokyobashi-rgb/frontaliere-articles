@@ -13648,6 +13648,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.infermieri-osc-sindacati-stipendi.title': 'OSC nurses and unions call for salaries to be unfrozen',
     'blog.article.infermieri-osc-sindacati-stipendi.excerpt': 'The Osc reclassification has been stalled since 2019: class 4→5 for nurses, 5→6 for specialties Annual increases from 5\'159 to 8\'941 francs Assembly on November 10',
     'blog.article.infermieri-osc-sindacati-stipendi.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.arresto-napoletano-cassarate.title': '62-year-old Neapolitan man arrested in Cassarate over financial flows',
+    'blog.article.arresto-napoletano-cassarate.excerpt': 'A 62-year-old Neapolitan man arrested in Cassarate on October 21 Approximately 50 million euros between July 2025 and March 2026 From Luxembourg, the funds passed into the wallets',
+    'blog.article.arresto-napoletano-cassarate.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaEn;

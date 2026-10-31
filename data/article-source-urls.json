@@ -1,9 +1,4 @@
 {
-  "https://comozero.it/attualita/comuni-di-frontiera-ristorni-da-89-a-108-milioni-esultano-i-sindaci-accolta-la-nostra-richiesta": {
-    "articleId": "comuni-frontiera-ristorni-108-milioni",
-    "ts": "2026-09-20T09:52:25.472Z",
-    "keyForm": 2
-  },
   "https://www.varesenoi.it/2026/09/20/leggi-notizia/argomenti/territorio/articolo/lassociazione-comuni-italiani-di-frontiera-soddisfazione-per-ristorni-ed-extra-gettito.html": {
     "articleId": "ristorni-comuni-frontiera-incremento",
     "ts": "2026-09-20T16:48:28.321Z",
@@ -2497,6 +2492,11 @@
   "https://www.laregione.ch/cantone/mendrisiotto/1960098/infermieri-osc-e-sindacati-chiedono-lo-sblocco-degli-stipendi": {
     "articleId": "infermieri-osc-sindacati-stipendi",
     "ts": "2026-10-31T09:38:46.362Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4206471": {
+    "articleId": "arresto-napoletano-cassarate",
+    "ts": "2026-10-31T10:05:20.654Z",
     "keyForm": 2
   }
 }

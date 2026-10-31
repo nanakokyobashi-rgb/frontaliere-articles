@@ -13647,6 +13647,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.infermieri-osc-sindacati-stipendi.title': 'OSC-Pflegekräfte und Gewerkschaften: Lohnstopp aufheben',
     'blog.article.infermieri-osc-sindacati-stipendi.excerpt': 'Die Neuklassifizierung der Osc ist seit Jahren blockiert 2019: Klasse 4→5 für Pflegefachpersonen, 5→6 für Spezialisierungen Jährliche Erhöhungen von 5\'159 bis 8\'941 Franken Versammlung am 10.',
     'blog.article.infermieri-osc-sindacati-stipendi.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.arresto-napoletano-cassarate.title': 'In Cassarate wegen Finanzströmen ein 62-jähriger Neapolitaner festgenommen',
+    'blog.article.arresto-napoletano-cassarate.excerpt': 'Am 21. Oktober wurde in Cassarate ein 62-jähriger Neapolitaner festgenommen Etwa 50 Millionen Euro zwischen Juli 2025 und März 2026 Aus Luxemburg flossen die Gelder in die Wallets',
+    'blog.article.arresto-napoletano-cassarate.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaDe;

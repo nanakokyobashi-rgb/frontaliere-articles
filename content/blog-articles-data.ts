@@ -45996,6 +45996,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'arresto-napoletano-cassarate',
+ category: 'fiscale',
+ date: '2026-10-31T10:05:19.769Z',
+ image: '/images/blog/article-arresto-napoletano-cassarate.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

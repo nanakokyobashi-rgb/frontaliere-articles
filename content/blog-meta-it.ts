@@ -13649,6 +13649,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.infermieri-osc-sindacati-stipendi.title': 'Infermieri Osc e sindacati chiedono sblocco stipendi',
     'blog.article.infermieri-osc-sindacati-stipendi.excerpt': 'La riclassificazione Osc è ferma da anni 2019: classe 4→5 per infermieri, 5→6 per specialità Aumenti annui da 5\'159 a 8\'941 franchi Assemblea il 10 novembre',
     'blog.article.infermieri-osc-sindacati-stipendi.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.arresto-napoletano-cassarate.title': 'Arrestato a Cassarate un 62enne napoletano per flussi finanziari',
+    'blog.article.arresto-napoletano-cassarate.excerpt': 'Arrestato a Cassarate il 21 ottobre un 62enne napoletano Circa 50 milioni di euro tra luglio 2025 e marzo 2026 Dal Lussemburgo i fondi passavano ai portafogli',
+    'blog.article.arresto-napoletano-cassarate.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaIt;
