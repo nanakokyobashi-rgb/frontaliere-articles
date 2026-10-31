@@ -87,6 +87,9 @@ const blogMetaCantonShFr: Record<string, string> = {
     'blog.article.sciaffusa-ricarica-elettrica.title': 'Essence chère : Schaffhouse veut davantage de bornes de recharge électrique',
     'blog.article.sciaffusa-ricarica-elettrica.excerpt': 'Prix de l’essence élevés et objectif du canton : davantage de stations de recharge pour voitures électriques, comme celles déjà installées à St.',
     'blog.article.sciaffusa-ricarica-elettrica.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.frick-volksmotion-kantonsrat.title': 'Motion Frick: débat sur compétences communales au Conseil cantonal',
+    'blog.article.frick-volksmotion-kantonsrat.excerpt': 'Le Conseil cantonal examinera la motion populaire de Matthias Frick, qui demande aux communes de disposer de compétences accrues en matière de circulation.',
+    'blog.article.frick-volksmotion-kantonsrat.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonShFr;
