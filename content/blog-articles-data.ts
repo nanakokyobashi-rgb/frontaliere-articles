@@ -39336,6 +39336,7 @@ const RAW_ARTICLES = [
  updatedAt: '2026-10-31',
  image: '/images/blog/guida-vivere-mese-grigioni.webp',
  hasCalculator: true,
+ articleType: 'evergreen',
  canton: ['GR'],
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',

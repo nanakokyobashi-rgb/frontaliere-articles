@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "fisco",
-  "updatedAt": "2026-10-31T13:52:20.998Z",
-  "contentHash": "5f06a6a6c4efacdff09f9f0a75c00409f5487b61de791edce4128d56ea600a64",
+  "updatedAt": "2026-10-31T20:59:20.874Z",
+  "contentHash": "de46dd1a9bc95c63672a65e3e581fb3f16ad3dfd389a553c2608fdc406d853b6",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-30T21:45:03.956Z",
+      "updatedAt": "2026-10-31T11:16:57.003Z",
       "keyFacts": 0
     }
   ],
@@ -115,7 +115,7 @@
               "url": "https://www.gr.ch/DE/institutionen/verwaltung/dfg/stv/mitteilungen/Seiten/Systemwechsel-bei-der-Wohneigentumsbesteuerung-und-Einf%C3%BChrung-einer-besonderen-Liegenschaftssteuer.aspx"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-10-31T11:16:57.003Z"
         }
       ],
       "curatedArticles": [
@@ -124,12 +124,6 @@
           "url": "/articoli-svizzera/aprire-attivita-grigioni-guida-costi/",
           "excerpt": "Dalla forma giuridica ai contributi salariali: guida pratica sui tre livelli fiscali e gli obblighi previdenziali per chi avvia un'impresa nei Grigioni.",
           "date": "2026-10-02T07:24:44.114Z"
-        },
-        {
-          "title": "Vivere a Mese e lavorare nei Grigioni: guida fiscale",
-          "url": "/articoli-frontaliere/guida-vivere-mese-grigioni/",
-          "excerpt": "Permesso G, imposta alla fonte e franchigia del reddito frontaliere: guida per chi vive a Mese e lavora nei Grigioni svizzeri. Norme 2024, LAMal, procedura.",
-          "date": "2026-09-02T23:43:39.896Z"
         },
         {
           "title": "Frontaliere Chiesa-Grigioni: guida fiscale e pratica",
@@ -166,6 +160,12 @@
           "url": "/articoli-frontaliere/frontaliere-poggiridenti-grigioni/",
           "excerpt": "Vivere a Poggiridenti e lavorare nei Grigioni: permesso G, imposta alla fonte, Nuovo Accordo Frontalieri 2024 e contributi AVS/LPP. Guida pratica e checklist.",
           "date": "2026-09-06T23:47:41.211Z"
+        },
+        {
+          "title": "Comprare casa Grigioni: mutuo e imposte",
+          "url": "/articoli-svizzera/comprare-casa-grigioni-mutuo-imposte/",
+          "excerpt": "Acquistare nel Grigioni: fondi propri 20-30%, mutuo ipotecario fino all'80%, imposta trasporto variabile per comune, spese notarili 1-2%. Procedura e costi spiegati.",
+          "date": "2026-09-06T03:48:30.725Z"
         }
       ],
       "latestCantonArticles": [],
@@ -195,7 +195,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-31T13:52:20.998Z"
+      "updatedAt": "2026-10-31T20:59:20.874Z"
     },
     "en": {
       "canton": "GR",
@@ -288,7 +288,7 @@
               "url": "https://www.gr.ch/DE/institutionen/verwaltung/dfg/stv/mitteilungen/Seiten/Systemwechsel-bei-der-Wohneigentumsbesteuerung-und-Einf%C3%BChrung-einer-besonderen-Liegenschaftssteuer.aspx"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-10-31T11:16:57.003Z"
         }
       ],
       "curatedArticles": [
@@ -297,12 +297,6 @@
           "url": "/en/swiss-articles/start-business-graubunden-cost-guide/",
           "excerpt": "From Legal Structure to Payroll Taxes: A Practical Guide to the Three Tax Levels and Social Security Obligations for Those Starting a Business in Graubünden.",
           "date": "2026-10-02T07:24:44.114Z"
-        },
-        {
-          "title": "Living by Month and Working in Graubünden: A Tax Guide",
-          "url": "/en/cross-border-articles/guide-living-mese-graubunden/",
-          "excerpt": "Permit G, tax at source and deductible of border income: a guide for those who live in Mese and work in Swiss Graubünden. Standards 2024, LAMal, procedure.",
-          "date": "2026-09-02T23:43:39.896Z"
         },
         {
           "title": "Church-Grison Frontiers: Tax Guide and Practice",
@@ -339,6 +333,12 @@
           "url": "/en/cross-border-articles/cross-border-poggiridenti-graubunden/",
           "excerpt": "Living in Poggiridenti and working in Graubünden: G permit, tax at source, New Frontier Agreement 2024 and AVS/LPP contributions. Practical guide and checklist.",
           "date": "2026-09-06T23:47:41.211Z"
+        },
+        {
+          "title": "Buying Casa Grisioni: mortgage and taxes",
+          "url": "/en/swiss-articles/buy-house-graubunden-mortgage-taxes/",
+          "excerpt": "Purchase in Graubünden: own funds 20-30%, mortgage loan up to 80%, variable transport tax per municipality, notary fees 1-2%. Explained procedure and costs.",
+          "date": "2026-09-06T03:48:30.725Z"
         }
       ],
       "latestCantonArticles": [],
@@ -368,7 +368,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-31T13:52:20.998Z"
+      "updatedAt": "2026-10-31T20:59:20.874Z"
     },
     "de": {
       "canton": "GR",
@@ -461,7 +461,7 @@
               "url": "https://www.gr.ch/DE/institutionen/verwaltung/dfg/stv/mitteilungen/Seiten/Systemwechsel-bei-der-Wohneigentumsbesteuerung-und-Einf%C3%BChrung-einer-besonderen-Liegenschaftssteuer.aspx"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-10-31T11:16:57.003Z"
         }
       ],
       "curatedArticles": [
@@ -470,12 +470,6 @@
           "url": "/de/schweiz-artikel/unternehmen-graubuenden-kosten-leitfaden/",
           "excerpt": "Von der Rechtsform bis zu den Lohnbeiträgen: Ein praktischer Leitfaden zu den drei Steuerstufen und den Sozialversicherungspflichten für Existenzgründer in Graubünden.",
           "date": "2026-10-02T07:24:44.114Z"
-        },
-        {
-          "title": "Wohnen in Monat und Arbeiten in Graubünden: Steuerleitfaden",
-          "url": "/de/grenzgaenger-artikel/anleitung-leben-mese-graubuenden/",
-          "excerpt": "G-Bewilligung, Quellensteuer und Grenzeinkommensfreibetrag: Leitfaden für Personen, die in Monat leben und in Graubünden arbeiten. Normen 2024, KVG, Verfahren.",
-          "date": "2026-09-02T23:43:39.896Z"
         },
         {
           "title": "Grenzgänger Kirche-Graubünden: Steuer- und Praxisleitfaden",
@@ -512,6 +506,12 @@
           "url": "/de/grenzgaenger-artikel/grenzgaenger-poggiridenti-graubuenden/",
           "excerpt": "Wohnen in Poggiridenti und Arbeiten in Graubünden: Bewilligung G, Quellensteuer, Neue Grenzgängervereinbarung 2024 und AHV/BVG-BEITRÄGE. Praktischer Leitfaden und Checkliste.",
           "date": "2026-09-06T23:47:41.211Z"
+        },
+        {
+          "title": "Graubünden Haus kaufen: Hypothek und Steuern",
+          "url": "/de/schweiz-artikel/haus-kaufen-graubuenden-hypothek-steuern/",
+          "excerpt": "Kaufen in Graubünden: Eigenmittel 20-30%, Hypothekendarlehen bis 80%, variable Transportsteuer pro Gemeinde, Notarkosten 1-2%. Vorgehensweise und Kosten erklärt.",
+          "date": "2026-09-06T03:48:30.725Z"
         }
       ],
       "latestCantonArticles": [],
@@ -541,7 +541,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-31T13:52:20.998Z"
+      "updatedAt": "2026-10-31T20:59:20.874Z"
     },
     "fr": {
       "canton": "GR",
@@ -634,7 +634,7 @@
               "url": "https://www.gr.ch/DE/institutionen/verwaltung/dfg/stv/mitteilungen/Seiten/Systemwechsel-bei-der-Wohneigentumsbesteuerung-und-Einf%C3%BChrung-einer-besonderen-Liegenschaftssteuer.aspx"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-10-31T11:16:57.003Z"
         }
       ],
       "curatedArticles": [
@@ -643,12 +643,6 @@
           "url": "/fr/articles-suisse/ouvrir-entreprise-grisons-guide-couts/",
           "excerpt": "De la forme juridique aux cotisations salariales : guide pratique sur les trois niveaux d'imposition et les obligations en matière de sécurité sociale pour ceux qui créent une entreprise dans les Grisons.",
           "date": "2026-10-02T07:24:44.114Z"
-        },
-        {
-          "title": "Vivre au mois et travailler dans les Grisons : guide fiscal",
-          "url": "/fr/articles-frontalier/guide-vivre-mese-grisons/",
-          "excerpt": "Permis G, impôt à la source et franchise du revenu frontalier : guide pour ceux qui vivent au mois et travaillent dans les Grisons suisses. Normes 2024, LAMal, procédure.",
-          "date": "2026-09-02T23:43:39.896Z"
         },
         {
           "title": "Frontière Église-Grisons : guide fiscal et pratique",
@@ -685,6 +679,12 @@
           "url": "/fr/articles-frontalier/frontalier-poggiridenti-grisons/",
           "excerpt": "Vivre à Poggiridenti et travailler dans les Grisons : permis G, impôt à la source, nouvel accord frontalier 2024 et cotisations AVS/LPP. Guide pratique et checklist.",
           "date": "2026-09-06T23:47:41.211Z"
+        },
+        {
+          "title": "Acheter maison Grisons : hypothèque et taxes",
+          "url": "/fr/articles-suisse/acheter-maison-grisons-hypotheque-impots/",
+          "excerpt": "Acheter dans les Grisons : fonds propres 20-30%, prêt hypothécaire jusqu'à 80%, taxe de transport variable par commune, frais de notaire 1-2%. Procédure et coûts expliqués.",
+          "date": "2026-09-06T03:48:30.725Z"
         }
       ],
       "latestCantonArticles": [],
@@ -714,7 +714,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-31T13:52:20.998Z"
+      "updatedAt": "2026-10-31T20:59:20.874Z"
     }
   }
 }
