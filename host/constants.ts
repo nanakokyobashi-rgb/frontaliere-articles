@@ -145,17 +145,24 @@ export const GTAG_SNIPPET = `<script async crossorigin="anonymous" src="https://
  * Meta' corpus del contratto: il sito lo definisce in
  * `build-plugins/constants.ts` insieme al codice vero
  * (`PARTNERIZE_TAG_CONTENT`), che `staticScriptsPlugin.ts` scrive in
- * `dist/assets/partnerize-tag.js`. Qui serve solo il tag `<script>`, che
+ * `dist/assets/partnerize-tag-<content-hash>.js`. Qui serve solo il tag `<script>`, che
  * DEVE restare byte-identico a quello del sito: il fingerprint scalare del
  * contratto (`host/shell-contract-fingerprint.json` e la entry
  * `scalarFingerprint` di `scripts/ci/loop-sync-manifest.json`) confronta i
  * due lati, e un carattere di differenza li fa divergere.
  *
- * Il path `/assets/...` viene riscritto su ASSET_CDN dalla stessa
- * pipeline che gia' rebasa `gtag-init.js`, quindi il file arriva dal deploy
- * del sito senza che questo repo debba emetterlo.
+ * Il path `/assets/...` viene riscritto su ASSET_CDN dalla pipeline.
+ * Il corpus trasporta i byte nello snapshot e garantisce il file hashato
+ * prima dell'HTML; gli alias stabili restano pubblicati dal deploy del sito.
  */
-export const PARTNERIZE_TAG_SNIPPET = `<script defer src="/assets/partnerize-tag.js"></script>`;
+// The generated snapshot also carries the conservative inline capture. It records
+// only potential query/fragment/userinfo provenance before React, without a parser-blocking CDN request.
+const initialDocumentGuard = JSON.parse(readFileSync(new NodeURL('./third-party-shell-assets.json', import.meta.url), 'utf8')).initialDocumentGuard;
+if (typeof initialDocumentGuard?.content !== 'string' || !initialDocumentGuard.content || createHash('sha256').update(initialDocumentGuard.content).digest('hex') !== initialDocumentGuard.sha256) {
+ throw new Error('Transported initial privacy guard hash mismatch');
+}
+export const PARTNERIZE_TAG_FILENAME = 'partnerize-tag-bd99f75355f6.js';
+export const PARTNERIZE_TAG_SNIPPET = `<script>${initialDocumentGuard.content}</script><script defer src="/assets/${PARTNERIZE_TAG_FILENAME}"></script>`;
 
 /**
  * Google AdSense loader snippet. Included in every statically-generated page
@@ -184,7 +191,7 @@ export const PARTNERIZE_TAG_SNIPPET = `<script defer src="/assets/partnerize-tag
  */
 export const ADSENSE_CLIENT_ID = 'ca-pub-8628054934855353';
 
-export const ADSENSE_LOADER_FILENAME = 'adsense-loader.js';
+export const ADSENSE_LOADER_FILENAME = 'adsense-loader-1cec53b813a5.js';
 
 export const ADSENSE_LAZY_LOADER = `<script defer src="/assets/${ADSENSE_LOADER_FILENAME}"></script>`;
 

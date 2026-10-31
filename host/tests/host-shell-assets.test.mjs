@@ -19,6 +19,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
+import vm from 'node:vm';
 import { readFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -86,6 +87,40 @@ test('ogni file della shell che host/ porta ha il nome derivato dal proprio cont
   for (const [name, content] of files) {
     const digest = createHash('sha256').update(content).digest('hex');
     assert.ok(name.includes(digest.slice(0, 12)), `${name} non porta l'impronta del proprio contenuto (${digest.slice(0, 12)})`);
+  }
+});
+
+test('the publisher rejects incomplete, renamed, duplicate or malformed snapshots before ensure', async () => {
+  const snapshot = JSON.parse(read('host/third-party-shell-assets.json'));
+  const [ads, partnerize] = snapshot.assets;
+  const invalid = [
+    null, {}, { ...snapshot, assets: null }, { ...snapshot, assets: {} },
+    { ...snapshot, assets: [] },
+    { ...snapshot, assets: [ads] }, { ...snapshot, assets: [partnerize] },
+    { ...snapshot, assets: [ads, ads] }, { ...snapshot, assets: [ads, partnerize, ads] },
+    { ...snapshot, assets: [null, partnerize] },
+    { ...snapshot, assets: [{ ...ads, name: 'wrong-' + ads.sha256.slice(0, 12) + '.js' }, partnerize] },
+    { ...snapshot, assets: [{ ...ads, content: ads.content + ' ' }, partnerize] },
+    { ...snapshot, assets: [{ ...ads, sha256: 'invalid' }, partnerize] },
+    { ...snapshot, assets: [{ ...ads, content: null }, partnerize] },
+  ];
+  let ensures = 0;
+  for (const supplied of invalid) {
+    await assert.rejects(main({
+      listFiles: () => hostShellFiles(supplied),
+      ensure: async () => { ensures++; return []; },
+    }));
+  }
+  assert.equal(ensures, 0, 'invalid input must stop before network availability/upload checks');
+});
+
+test('the exact two required assets are accepted in either order', () => {
+  const snapshot = JSON.parse(read('host/third-party-shell-assets.json'));
+  const expected = hostShellFiles().map(([name]) => name).sort();
+  for (const assets of [snapshot.assets, [...snapshot.assets].reverse()]) {
+    const files = hostShellFiles({ ...snapshot, assets });
+    assert.deepEqual(files.map(([name]) => name).sort(), expected);
+    for (const [name, content] of files) assert.ok(name.includes(createHash('sha256').update(content).digest('hex').slice(0, 12)));
   }
 });
 
@@ -313,4 +348,116 @@ test('ogni job che rende pagine carica i secret di Remote Config prima del passo
   for (const name of ['CF_API_TOKEN', 'R2_ACCESS_KEY_ID']) {
     assert.match(loader, new RegExp(String.raw`^\s*${name}:\s*\[`, 'm'), `${name} non e' nella mappa RC_TO_ENV`);
   }
+});
+
+// The implicit producer/helper dependency must invalidate the transported bytes.
+test('Ads/Partnerize snapshots match the shared source fingerprint and reject signed startup', () => {
+  const snapshot = JSON.parse(read('host/third-party-shell-assets.json'));
+  const fingerprint = JSON.parse(read('host/third-party-shell-assets-fingerprint.json'));
+  assert.deepEqual({ ...snapshot, initialDocumentGuard: { sha256: snapshot.initialDocumentGuard.sha256 }, assets: snapshot.assets.map(({ content: _content, ...asset }) => asset) }, fingerprint);
+  assert.equal(createHash('sha256').update(snapshot.initialDocumentGuard.content).digest('hex'), snapshot.initialDocumentGuard.sha256);
+  assert.equal(snapshot.source.sanitizerSha256, createHash('sha256').update(read('host/analyticsUrlPrivacy.js')).digest('hex'));
+  for (const { content } of snapshot.assets) {
+    const window = { location: { href: 'https://frontaliereticino.ch/?ac=synthetic-code&ne=candidate%40example.test&utm_source=email' } };
+    const document = new Proxy({ referrer: '' }, { get(target, key) {
+      if (key === 'referrer') return target.referrer;
+      throw new Error('A third-party SDK accessed the DOM before privacy suppression');
+    } });
+    const context = vm.createContext({ window, document, URL, URLSearchParams });
+    vm.runInContext(content, context);
+    window.location.href = 'https://frontaliereticino.ch/?utm_source=email';
+    vm.runInContext(content, context);
+    assert.equal(window.__FT_SENSITIVE_DOCUMENT__, true);
+  }
+});
+
+// Execute the shipped Partnerize bootstrap without any real vendor requests.
+function partnerizeStartupModel(href, signed) {
+  const state = { observers: 0, popstateAdded: 0, popstateRemoved: 0,
+    disconnected: 0, ready: [], scripts: [], requests: [], dirty: false };
+  const window = {
+    location: { href },
+    crypto: { subtle: { digest: async () => new ArrayBuffer(20) } },
+    addEventListener(name, callback) {
+      assert.equal(name, 'popstate');
+      state.popstateAdded++;
+      state.popstate = callback;
+    },
+    removeEventListener(name, callback) {
+      assert.equal(name, 'popstate');
+      assert.equal(callback, state.popstate);
+      state.popstateRemoved++;
+    },
+    MutationObserver: class {
+      constructor(callback) { state.observers++; state.changed = callback; }
+      observe() {}
+      disconnect() { state.disconnected++; }
+    },
+  };
+  const document = {
+    referrer: '', documentElement: {}, readyState: 'loading',
+    querySelectorAll: () => state.dirty
+      ? [{ tagName: 'IFRAME', attributes: [{ name: 'src', value: signed }] }] : [],
+    createElement: () => ({}),
+    body: { appendChild: (script) => state.scripts.push(script) },
+    addEventListener(name, callback) {
+      assert.equal(name, 'DOMContentLoaded');
+      state.ready.push(callback);
+    },
+  };
+  const context = vm.createContext({ window, document, URL, URLSearchParams, TextEncoder,
+    fetch: async (_url, options) => { state.requests.push(JSON.parse(options.body)); },
+  });
+  return { window, state, context };
+}
+
+test('a conservative marker on an ordinary UTM starts one Partnerize SDK and preserves safe attribution', async () => {
+  const snapshot = JSON.parse(read('host/third-party-shell-assets.json'));
+  const source = snapshot.assets.find((asset) => asset.name.startsWith('partnerize')).content;
+  const href = 'https://frontaliereticino.ch/?utm_source=x';
+  const model = partnerizeStartupModel(href);
+  vm.runInContext(snapshot.initialDocumentGuard.content, model.context);
+  assert.equal(model.window.__FT_SENSITIVE_DOCUMENT__, true, 'the marker records possible query syntax, not an auth verdict');
+  vm.runInContext(source, model.context);
+  vm.runInContext(source, model.context);
+  assert.equal(model.state.observers, 0);
+  assert.equal(model.state.ready.length, 1);
+  model.state.ready[0]();
+  for (let i = 0; i < 8; i++) await Promise.resolve();
+  assert.equal(model.state.scripts.length, 1);
+  model.state.scripts[0].onload();
+  assert.equal(model.state.requests.length, 1);
+  assert.equal(model.state.requests[0].url, href, 'the raw URL is safe and must preserve its UTM');
+  assert.equal(model.window.location.href, href);
+});
+
+test('unsafe retries retain one observer/popstate and cleanup disconnects before one SDK startup', async () => {
+  const snapshot = JSON.parse(read('host/third-party-shell-assets.json'));
+  const source = snapshot.assets.find((asset) => asset.name.startsWith('partnerize')).content;
+  const clean = 'https://frontaliereticino.ch/?utm_source=x';
+  const signed = clean + '&ac=synthetic-code&ne=candidate%40example.test';
+  const model = partnerizeStartupModel(signed, signed);
+  vm.runInContext(snapshot.initialDocumentGuard.content, model.context);
+  vm.runInContext(source, model.context);
+  for (let i = 0; i < 12; i++) model.state.changed();
+  model.window.location.href = clean;
+  model.state.dirty = true;
+  for (let i = 0; i < 12; i++) model.state.changed();
+  assert.equal(model.state.observers, 1);
+  assert.equal(model.state.popstateAdded, 1);
+  assert.equal(model.state.disconnected, 0);
+  assert.equal(model.state.ready.length, 0);
+  assert.equal(model.state.scripts.length, 0);
+  model.state.dirty = false;
+  model.state.changed();
+  assert.equal(model.state.observers, 1);
+  assert.equal(model.state.disconnected, 1);
+  assert.equal(model.state.popstateRemoved, 1);
+  assert.equal(model.state.ready.length, 1);
+  vm.runInContext(source, model.context);
+  assert.equal(model.state.ready.length, 1);
+  model.state.ready[0]();
+  for (let i = 0; i < 8; i++) await Promise.resolve();
+  assert.equal(model.state.scripts.length, 1);
+  assert.equal(model.window.location.href, clean);
 });

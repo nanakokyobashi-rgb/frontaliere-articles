@@ -1520,8 +1520,8 @@
       "reason": "Fratello di loop-scripts-closure.test.mjs per i riferimenti che NON sono import. Nato dal caso #45: alert-pat-down.mjs e' arrivato qui identical dichiarando che gh-pat-expiry-monitor.yml e' «l'unico punto di chiusura» del suo alert, con quel workflow assente — una issue priority:urgent che niente poteva chiudere, con le voci not-ported a 0 e la CI verde. Stessa forma del SiteShellContract: un contratto senza forma di import non e' coperto dai guard che seguono gli import. Ogni citazione non risolta va DICHIARATA con un kind chiuso e una ragione scritta, perche' l'intento non si indovina dalla prosa (la citazione contrastiva «e' X, non Y» nomina Y proprio per negarlo) — e' lo stesso errore che false-positive-declaration.mjs documenta. Il valore non e' classificare le 29 di oggi ma rendere impossibile aggiungere la 30esima in silenzio.",
       "baseline": {
         "site": null,
-        "corpus": "a0ac6f742fdcc87d",
-        "alignedAt": "2026-10-07"
+        "corpus": "fe34f7c5d724a0b9",
+        "alignedAt": "2026-10-30"
       }
     },
     {
@@ -1577,11 +1577,11 @@
     {
       "path": "scripts/ci/ensure-host-shell-assets.mjs",
       "mode": "corpus-only",
-      "reason": "Passo dei workflow di pubblicazione (fast-publish-article.yml, fast-publish-section.yml): prima di rendere e pubblicare, garantisce sulla CDN i file della shell di cui host/ porta il contenuto, oggi il produttore GA4 con il nome derivato dal contenuto (`gtag-init-<hash>.js`). L'omologo del sito e' scripts/ci/ensure-cdn-shell-assets.mjs, che legge la lista da build-plugins/staticScriptsPlugin.ts: quel plugin qui non esiste, quindi lo script d'ingresso e' proprio di questo repo e la logica condivisa sta nel gemello identical scripts/lib/cdn-shell-assets.mjs.",
+      "reason": "Passo dei workflow di pubblicazione (fast-publish-article.yml, fast-publish-section.yml): prima di rendere e pubblicare, garantisce sulla CDN i file della shell di cui host/ porta il contenuto, i produttori GA4, Ads e Partnerize con il nome derivato dal contenuto (`gtag-init-<hash>.js`). L'omologo del sito e' scripts/ci/ensure-cdn-shell-assets.mjs, che legge la lista da build-plugins/staticScriptsPlugin.ts: quel plugin qui non esiste, quindi lo script d'ingresso e' proprio di questo repo e la logica condivisa sta nel gemello identical scripts/lib/cdn-shell-assets.mjs.",
       "baseline": {
         "site": null,
-        "corpus": "70988426e86e683a",
-        "alignedAt": "2026-10-08"
+        "corpus": "376823114717a68d",
+        "alignedAt": "2026-10-31"
       }
     },
     {
@@ -4086,17 +4086,17 @@
       "path": "host/constants.ts",
       "sitePath": "build-plugins/constants.ts",
       "mode": "adapted",
-      "reason": "Costanti del sito lette dall'engine via SiteShellContract, estratte per chiusura: adapted per costruzione, non byte-identiche al sorgente completo. scalarFingerprint confronta i 22 scalari authoritative, mentre i test runtime verificano i comportamenti del contratto. Il digest 9c6a2589… lascia intatti i payload gzip del replay nel sanitizer; il precedente 50cb1eaf… estende il riconoscimento ai crawler Google-InspectionTool e GoogleOther, rimuove anche userinfo e credenziali dalle rappresentazioni URL della telemetria e incorpora il gate GA4 del sito, il budget SERP a 150 caratteri, la canonicalizzazione Organization.sameAs, l'aggiunta del profilo Facebook canonico, il riferimento content-addressed a gtag-init e le due regole contestuali trasportate per Chiasso e concorsi pubblici; la specializzazione editoriale resta in additionalType e il runtime Firebase conserva il match sulla chiave esatta, senza segreti nei fingerprint.",
+      "reason": "Costanti del sito lette dall'engine via SiteShellContract, estratte per chiusura: adapted per costruzione, non byte-identiche al sorgente completo. scalarFingerprint confronta i 22 scalari authoritative, mentre i test runtime verificano i comportamenti del contratto. Il digest a7391c85… preserva i payload gzip del replay e trasporta anche i riferimenti Ads/Partnerize content-addressed e la cattura strutturale conservativa inline prima di React e producer differiti con ripristino solo a contesto/DOM puliti; estende il riconoscimento ai crawler Google-InspectionTool e GoogleOther, rimuove anche userinfo e credenziali dalle rappresentazioni URL della telemetria e incorpora il gate GA4 del sito, il budget SERP a 150 caratteri, la canonicalizzazione Organization.sameAs, l'aggiunta del profilo Facebook canonico, il riferimento content-addressed a gtag-init e le due regole contestuali trasportate per Chiasso e concorsi pubblici; la specializzazione editoriale resta in additionalType e il runtime Firebase conserva il match sulla chiave esatta, senza segreti nei fingerprint.",
       "baseline": {
-        "site": "bab5f5a10c857c7c",
-        "corpus": "6d3d50cbdf29cfea",
-        "alignedAt": "2026-10-30"
+        "site": "c9f803f4645a9ab0",
+        "corpus": "598612b34529c6c5",
+        "alignedAt": "2026-10-31"
       },
       "scalarFingerprint": {
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
         "corpusPath": "host/shell-contract-fingerprint.json",
         "scalarFields": 22,
-        "sha256": "9c6a2589370987fce744919626de9e6324d94f55ee1e556f8a2c13eb9cfb0860"
+        "sha256": "a7391c858d5931304ba54dc8b36257cde977a7e9f245fc9186b6698063dcb620"
       }
     },
     {
@@ -4313,8 +4313,8 @@
       "mode": "identical",
       "reason": "Impronta SHA-256 dei 22 campi scalari di SiteShellContract, prodotta e verificata da `host/tests/shell-contract-fingerprint.test.mjs`. Il gemello del sito vive in `tests/articles-shell-contract-fingerprint.json` con lo stesso contenuto; i due artefatti restano `identical` e la baseline ne sorveglia il drift. E' il gate runtime che impedisce di spedire l'engine senza la sua meta' `host/`.",
       "baseline": {
-        "site": "8bea62ed25f6e8f1",
-        "corpus": "8bea62ed25f6e8f1",
+        "site": "ee464dc6ba4efb40",
+        "corpus": "ee464dc6ba4efb40",
         "alignedAt": "2026-10-30"
       }
     },
@@ -4364,8 +4364,8 @@
       "reason": "Test node:test (sotto tsx, come gli altri di host/tests/) della garanzia sugli asset della shell: ogni riferimento con nome derivato dal contenuto nel contratto deve essere un file di cui host/ porta i byte, lo script d'ingresso passa quei file alla libreria, e ogni job che rende pagine con la shell esegue il passo prima del primo emettitore. Il sito copre la libreria con tests/cdn-shell-assets.test.ts (Vitest); questo harness legge host/ e i workflow di questo repo.",
       "baseline": {
         "site": null,
-        "corpus": "ca74194f66bb7947",
-        "alignedAt": "2026-10-08"
+        "corpus": "434d61541d4037c6",
+        "alignedAt": "2026-10-31"
       }
     },
     {
@@ -6736,6 +6736,28 @@
       "baseline": {
         "site": "5fa74b7c7b51ad78",
         "corpus": "5fa74b7c7b51ad78",
+        "alignedAt": "2026-10-30"
+      }
+    },
+    {
+      "path": "host/third-party-shell-assets-fingerprint.json",
+      "sitePath": "tests/third-party-shell-assets-fingerprint.json",
+      "mode": "identical",
+      "reason": "Derived Ads/Partnerize producer and canonical-helper SHA fingerprints bind the transported byte snapshots to the source. Source tests regenerate the projection, host tests verify snapshot hashes and the complete SiteShellContract before publishing.",
+      "baseline": {
+        "site": "2d6b828378b8ee98",
+        "corpus": "2d6b828378b8ee98",
+        "alignedAt": "2026-10-30"
+      }
+    },
+    {
+      "path": "host/third-party-shell-assets.json",
+      "sitePath": "scripts/ci/export-third-party-shell-assets.ts",
+      "mode": "adapted",
+      "reason": "Byte-exact public assets and canonical inline guard snapshot derived from the source exporter; hostShellFiles consumes these bytes without a cross-repository import. The shared identical producer fingerprint and both SiteShellContract scalar fingerprints invalidate changes in constants, canonical helpers or raw static controllers before publication. Regenerate through the source exporter, update both fingerprint projections, then verify all names and SHA-256 values.",
+      "baseline": {
+        "site": "b18653746619d369",
+        "corpus": "30ee6bcb409a26f3",
         "alignedAt": "2026-10-30"
       }
     }

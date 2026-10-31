@@ -13,8 +13,9 @@
  * place of its static GA4 page_view for 2 h 40 min.
  *
  * This repository can publish exactly the files whose content it holds: today
- * the GA4 producer. The other shell scripts (`adsense-loader.js`,
- * `partnerize-tag.js`, …) are stable names written only by the site's build.
+ * the GA4 producer and derived byte-exact Ads/Partnerize snapshots exported by
+ * scripts/ci/export-third-party-shell-assets.ts on the site. New HTML names their
+ * hashes; the site's stable aliases remain available for older documents.
  * The decision itself — ask the CDN, read R2 only for a file it did not serve,
  * upload what R2 does not hold, never replace an object, stop when it cannot
  * tell — lives in scripts/lib/cdn-shell-assets.mjs, an identical twin of the
@@ -27,15 +28,30 @@
  *   by scripts/lib/upload-cdn-file.sh, and only for a file the CDN did not serve.
  * Exit: 0 when every file is available, 1 otherwise (nothing may be pushed).
  */
-import { realpathSync } from 'node:fs';
+import { realpathSync, readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { URL as NodeURL } from 'node:url';
 import { fileURLToPath } from 'node:url';
 
-import { GTAG_INIT_CONTENT, GTAG_INIT_VERSIONED_FILENAME } from '../../host/constants.ts';
+import { ADSENSE_LOADER_FILENAME, PARTNERIZE_TAG_FILENAME, GTAG_INIT_CONTENT, GTAG_INIT_VERSIONED_FILENAME } from '../../host/constants.ts';
 import { ensureCdnShellAssets, shellAssetsFromStaticScripts } from '../lib/cdn-shell-assets.mjs';
 
 /** [name, content] of every shell file whose bytes `host/` holds. */
-export function hostShellFiles() {
-  return [[GTAG_INIT_VERSIONED_FILENAME, GTAG_INIT_CONTENT]];
+export function hostShellFiles(snapshot = JSON.parse(readFileSync(new NodeURL('../../host/third-party-shell-assets.json', import.meta.url), 'utf8'))) {
+  // Bind availability to the very filenames used by the HTML, not to whatever
+  // subset or alternate names an otherwise hash-valid snapshot happens to hold.
+  const required = new Set([ADSENSE_LOADER_FILENAME, PARTNERIZE_TAG_FILENAME]);
+  if (!Array.isArray(snapshot?.assets)) throw new Error('Transported asset set mismatch');
+  const names = new Set(snapshot.assets.map((asset) => asset?.name));
+  if (snapshot.assets.length !== required.size || names.size !== required.size || [...required].some((name) => !names.has(name))) {
+    throw new Error('Transported asset set mismatch');
+  }
+  const assets = snapshot.assets.map(({ name, content, sha256 }) => {
+    const actual = createHash('sha256').update(content).digest('hex');
+    if (actual !== sha256 || !name.includes(actual.slice(0, 12))) throw new Error(`Transported asset hash mismatch: ${name}`);
+    return [name, content];
+  });
+  return [[GTAG_INIT_VERSIONED_FILENAME, GTAG_INIT_CONTENT], ...assets];
 }
 
 export async function main({ ensure = ensureCdnShellAssets, listFiles = hostShellFiles } = {}) {
