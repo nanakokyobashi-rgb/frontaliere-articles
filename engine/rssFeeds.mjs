@@ -549,7 +549,8 @@ ${itemsXml}
 /**
  * Build every RSS feed for one section.
  *
- * Returns `{ id, articleCount, slugCount, feeds }` where `feeds` is an ordered
+ * Returns `{ id, articleCount, slugCount, feeds }` where `articleCount` is the
+ * feed-eligible population after date/ledger withdrawals and `feeds` is an ordered
  * `[filename, xml]` list — the caller decides where the bytes land (public/ in
  * the site, dist/api/ in the publisher). Nothing is written here.
  *
@@ -648,7 +649,7 @@ export function buildSectionFeeds({ fs, path, rootDir, section, registry = [], l
     if (locale === 'it') feeds.push([section.mainFeed, xml]);
   }
 
-  return { id: section.id, articleCount: articles.size, slugCount: slugs.size, feeds };
+  return { id: section.id, articleCount: feedArticles.size, slugCount: slugs.size, feeds };
 }
 
 /**
