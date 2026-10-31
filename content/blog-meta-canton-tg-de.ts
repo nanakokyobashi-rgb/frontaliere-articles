@@ -63,6 +63,9 @@ const blogMetaCantonTgDe: Record<string, string> = {
     'blog.article.frauenfeld-revisione-regolamento-salariale.title': 'Frauenfeld: Teilrevision des Lohnreglements veröffentlicht',
     'blog.article.frauenfeld-revisione-regolamento-salariale.excerpt': 'Die Stadt Frauenfeld präsentiert eine Referendumspublikation zur Teilrevision des Lohnreglements, versehen mit einem PDF-Anhang von 88 KB.',
     'blog.article.frauenfeld-revisione-regolamento-salariale.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.messaggio-modifica-legge-strade.title': 'Thurgau genehmigt Botschaft zur Strassengesetz-Änderung',
+    'blog.article.messaggio-modifica-legge-strade.excerpt': 'Die Regierung des Kantons Thurgau hat die Botschaft an den Grossen Rat zur Regelung der Plakate für Wahlen und Abstimmungen genehmigt und die Ausnahme von der Verkehrssicherheit abhängig gemacht.',
+    'blog.article.messaggio-modifica-legge-strade.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonTgDe;

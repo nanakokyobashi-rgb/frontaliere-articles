@@ -226,4 +226,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'messaggio-modifica-legge-strade',
+ category: 'pratico',
+ date: '2026-10-31T11:15:56.284Z',
+ image: '/images/blog/article-messaggio-modifica-legge-strade.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

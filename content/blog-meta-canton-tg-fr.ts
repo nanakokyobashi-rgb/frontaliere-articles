@@ -63,6 +63,9 @@ const blogMetaCantonTgFr: Record<string, string> = {
     'blog.article.frauenfeld-revisione-regolamento-salariale.title': 'Frauenfeld : publication de la révision partielle du règlement salarial',
     'blog.article.frauenfeld-revisione-regolamento-salariale.excerpt': 'La ville de Frauenfeld présente une publication référendaire consacrée à la révision partielle du règlement salarial, accompagnée d\'une pièce jointe PDF de 88 KB.',
     'blog.article.frauenfeld-revisione-regolamento-salariale.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.messaggio-modifica-legge-strade.title': 'Le gouvernement thurgovien approuve la réforme routière',
+    'blog.article.messaggio-modifica-legge-strade.excerpt': 'Le Gouvernement du canton de Thurgovie a approuvé le message destiné au Grand Conseil visant à réglementer les affiches électorales et de votation, en subordonnant l’exception à la sécurité routière.',
+    'blog.article.messaggio-modifica-legge-strade.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonTgFr;

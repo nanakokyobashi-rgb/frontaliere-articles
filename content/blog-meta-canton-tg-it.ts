@@ -63,6 +63,9 @@ const blogMetaCantonTgIt: Record<string, string> = {
     'blog.article.frauenfeld-revisione-regolamento-salariale.title': 'Frauenfeld: pubblicata la revisione parziale del regolamento salariale',
     'blog.article.frauenfeld-revisione-regolamento-salariale.excerpt': 'La citta di Frauenfeld presenta una pubblicazione referendaria dedicata alla revisione parziale del regolamento salariale, corredata da un allegato PDF di 88 KB.',
     'blog.article.frauenfeld-revisione-regolamento-salariale.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.messaggio-modifica-legge-strade.title': 'Governo Turgovia approva messaggio per modifica legge strade e vie',
+    'blog.article.messaggio-modifica-legge-strade.excerpt': 'Il Governo del Canton Turgovia ha approvato il messaggio al Gran Consiglio per disciplinare i manifesti di elezioni e votazioni, subordinando l\'eccezione alla sicurezza stradale.',
+    'blog.article.messaggio-modifica-legge-strade.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonTgIt;

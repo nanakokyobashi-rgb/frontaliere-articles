@@ -63,6 +63,9 @@ const blogMetaCantonTgEn: Record<string, string> = {
     'blog.article.frauenfeld-revisione-regolamento-salariale.title': 'Frauenfeld: partial revision of the salary regulations published',
     'blog.article.frauenfeld-revisione-regolamento-salariale.excerpt': 'The city of Frauenfeld presents a referendum publication dedicated to the partial revision of the salary regulations, accompanied by an 88 KB PDF attachment.',
     'blog.article.frauenfeld-revisione-regolamento-salariale.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.messaggio-modifica-legge-strade.title': 'Thurgau government approves proposal to amend the Roads and Paths Act',
+    'blog.article.messaggio-modifica-legge-strade.excerpt': 'The Government of the Canton of Thurgau approved the submission to the Grand Council to regulate election and voting posters, making the exception conditional on road safety.',
+    'blog.article.messaggio-modifica-legge-strade.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonTgEn;
