@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-31T11:03:15.690Z",
-  "contentHash": "ffee7c5a237e48f282f6adc36c798060e1e089fde9822aeb788c19098b6205d2",
+  "updatedAt": "2026-10-31T11:19:20.504Z",
+  "contentHash": "718b516177b02fdcd766d1c6690c4b75047229310d3c29b51fb148c72c8cffb5",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -209,6 +209,12 @@
           "date": "2026-10-23T12:26:06.032Z"
         },
         {
+          "title": "Ofenbergstrasse chiusa di notte dal 2 al 6 novembre",
+          "url": "/articoli-grigioni/ofenberg-chiusura-notte/",
+          "excerpt": "La Ofenbergstrasse sarà chiusa di notte tra il 2 e il 6 novembre tra Fall da l'Uors e Punt la Drossa: deviazione sulla B180 Reschenstrasse.",
+          "date": "2026-10-31T11:10:58.727Z"
+        },
+        {
           "title": "Bus sostitutivi RhB tra Thusis e Preda per un cantiere",
           "url": "/articoli-grigioni/bus-sostitutivi-grigioni/",
           "excerpt": "La fonte segnala bus sostitutivi tra Thusis e Preda a causa di un cantiere RhB; il Verkehrsticker segue lo stato delle vie di traffico grigionesi.",
@@ -243,12 +249,6 @@
           "url": "/articoli-grigioni/strada-calanca-chiusura-preventiva/",
           "excerpt": "Chiusura totale da mercoledì alle 21",
           "date": "2026-10-07T06:43:54.388Z"
-        },
-        {
-          "title": "Abbonamenti trasporti pubblici Grigioni: zone e tariffe",
-          "url": "/articoli-svizzera/grigioni-percorso-quotidiano-pass/",
-          "excerpt": "Comunità tariffaria, zone, abbonamenti annuali e mensili: il confronto nei Grigioni include metà-prezzo, AG e sconti per studenti e apprendisti.",
-          "date": "2026-10-01T03:03:01.471Z"
         }
       ],
       "latestCantonArticles": [],
@@ -290,7 +290,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-31T11:03:15.690Z"
+      "updatedAt": "2026-10-31T11:19:20.504Z"
     },
     "en": {
       "canton": "GR",
@@ -477,6 +477,12 @@
           "date": "2026-10-23T12:26:06.032Z"
         },
         {
+          "title": "Ofenbergstrasse closed at night from November 2 to 6",
+          "url": "/en/graubunden-articles/ofenbergstrasse-night-closure/",
+          "excerpt": "Ofenbergstrasse will be closed at night between November 2 and 6 between Fall da l'Uors and Punt la Drossa: detour via the B180 Reschenstrasse.",
+          "date": "2026-10-31T11:10:58.727Z"
+        },
+        {
           "title": "RhB replacement buses between Thusis and Preda due to construction work",
           "url": "/en/graubunden-articles/rhb-replacement-buses/",
           "excerpt": "The source reports replacement buses between Thusis and Preda due to RhB construction work; the Verkehrsticker tracks the status of Graubünden’s traffic routes.",
@@ -510,12 +516,6 @@
           "title": "Calanca Road: complete closure between Molina and Arvigo",
           "url": "/en/graubunden-articles/calanca-road-preventive-closure/",
           "date": "2026-10-07T06:43:54.388Z"
-        },
-        {
-          "title": "Graubünden Public Transportation Passes: Zones and Fares",
-          "url": "/en/swiss-articles/graubunden-public-transport-pass/",
-          "excerpt": "Fare network, zones, annual and monthly travelcards: the comparison in Graubünden includes Half-Fare travelcard, GA travelcard and discounts for students and apprentices.",
-          "date": "2026-10-01T03:03:01.471Z"
         }
       ],
       "latestCantonArticles": [],
@@ -557,7 +557,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-31T11:03:15.690Z"
+      "updatedAt": "2026-10-31T11:19:20.504Z"
     },
     "de": {
       "canton": "GR",
@@ -744,6 +744,12 @@
           "date": "2026-10-23T12:26:06.032Z"
         },
         {
+          "title": "Ofenbergstrasse nachts vom 2. bis 6. November gesperrt",
+          "url": "/de/graubunden-artikel/ofenbergstrasse-nachtsperre/",
+          "excerpt": "Die Ofenbergstrasse wird nachts zwischen dem 2.",
+          "date": "2026-10-31T11:10:58.727Z"
+        },
+        {
           "title": "Ersatzbusse zwischen Thusis und Preda wegen einer Baustelle der RhB",
           "url": "/de/graubunden-artikel/rhb-ersatzbusse-graubuenden/",
           "excerpt": "Die Quelle weist auf Ersatzbusse zwischen Thusis und Preda aufgrund einer Baustelle der RhB hin; der Verkehrsticker verfolgt den Zustand der Verkehrswege in Graubünden.",
@@ -778,12 +784,6 @@
           "url": "/de/graubunden-artikel/calancastrasse-praventive-sperrung/",
           "excerpt": "Vollständige Schließung von Mittwoch um 21 Uhr",
           "date": "2026-10-07T06:43:54.388Z"
-        },
-        {
-          "title": "Abonnements für den öffentlichen Nahverkehr in Graubünden: Zonen und Tarife",
-          "url": "/de/schweiz-artikel/graubuenden-oev-abos/",
-          "excerpt": "Tarifverbund, Zonen, Jahres- und Monatsabonnemente: Der Vergleich in Graubünden umfasst den Halbtax, das GA sowie Ermäßigungen für Studierende und Auszubildende.",
-          "date": "2026-10-01T03:03:01.471Z"
         }
       ],
       "latestCantonArticles": [],
@@ -825,7 +825,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-31T11:03:15.690Z"
+      "updatedAt": "2026-10-31T11:19:20.504Z"
     },
     "fr": {
       "canton": "GR",
@@ -1012,6 +1012,12 @@
           "date": "2026-10-23T12:26:06.032Z"
         },
         {
+          "title": "Ofenbergstrasse fermée de nuit du 2 au 6 novembre",
+          "url": "/fr/articles-grisons/fermeture-nocturne-ofenbergstrasse/",
+          "excerpt": "L’Ofenbergstrasse sera fermée de nuit entre le 2 et le 6 novembre entre Fall da l'Uors et Punt la Drossa : déviation par la B180 Reschenstrasse.",
+          "date": "2026-10-31T11:10:58.727Z"
+        },
+        {
           "title": "Bus de remplacement RhB entre Thusis et Preda en raison de travaux",
           "url": "/fr/articles-grisons/bus-remplacement-grisons/",
           "excerpt": "La source signale des bus de remplacement entre Thusis et Preda en raison de travaux de la RhB ; le Verkehrsticker suit l’état des voies de circulation grisonnes.",
@@ -1046,12 +1052,6 @@
           "url": "/fr/articles-grisons/route-calanca-fermeture-preventive/",
           "excerpt": "Fermeture totale à partir de mercredi à 21 h",
           "date": "2026-10-07T06:43:54.388Z"
-        },
-        {
-          "title": "Abonnements aux transports publics des Grisons : zones et tarifs",
-          "url": "/fr/articles-suisse/grisons-transports-abonnements/",
-          "excerpt": "Réseau tarifaire, zones, cartes de voyage annuelles et mensuelles : la comparaison en Grisons inclut une carte de voyage à demi-tarif, une carte de voyage GA et des réductions pour les étudiants et apprentis.",
-          "date": "2026-10-01T03:03:01.471Z"
         }
       ],
       "latestCantonArticles": [],
@@ -1093,7 +1093,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-31T11:03:15.690Z"
+      "updatedAt": "2026-10-31T11:19:20.504Z"
     }
   }
 }
