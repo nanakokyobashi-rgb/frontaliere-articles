@@ -54,6 +54,9 @@ const blogMetaCantonGrIt: Record<string, string> = {
     'blog.article.bus-sostitutivi-grigioni.title': 'Bus sostitutivi RhB tra Thusis e Preda per un cantiere',
     'blog.article.bus-sostitutivi-grigioni.excerpt': 'La fonte segnala bus sostitutivi tra Thusis e Preda a causa di un cantiere RhB; il Verkehrsticker segue lo stato delle vie di traffico grigionesi.',
     'blog.article.bus-sostitutivi-grigioni.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.ofenberg-chiusura-notte.title': 'Ofenbergstrasse chiusa di notte dal 2 al 6 novembre',
+    'blog.article.ofenberg-chiusura-notte.excerpt': 'La Ofenbergstrasse sarà chiusa di notte tra il 2 e il 6 novembre tra Fall da l\'Uors e Punt la Drossa: deviazione sulla B180 Reschenstrasse.',
+    'blog.article.ofenberg-chiusura-notte.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonGrIt;
