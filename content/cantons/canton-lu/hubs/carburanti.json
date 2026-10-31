@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "carburanti",
-  "updatedAt": "2026-10-31T12:03:49.035Z",
-  "contentHash": "e65b284c563eeeec36c021c2307e7ef495814cda21df565adc602286b712097f",
+  "updatedAt": "2026-10-31T13:09:44.479Z",
+  "contentHash": "437d41fa1bbe50572f052534c25a198cdfd4eb7186753d54a3218fc3c63a95a9",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -60,6 +60,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Rettore Kanti promuove legame con l'Università di Lucerna",
+          "url": "/articoli-lucerna/kanti-rektor-draht-universitaet/",
+          "excerpt": "Marco Stössel, rettore della Kantonsschule Beromünster, ha parlato al Dies Academicus 2026 sul percorso formativo comune tra ginnasi e università.",
+          "date": "2026-10-31T13:00:04.976Z"
+        },
+        {
           "title": "Tunnel Sonnenberg chiuso per ispezione strutturale",
           "url": "/articoli-lucerna/tunnel-sonnenberg-chiusura-notte/",
           "excerpt": "Chiusura completa del tunnel Sonnenberg in entrambe le direzioni dalla notte tra il 4 e il 5 novembre 2026, dalle 22.00 alle 05.00.",
@@ -82,12 +88,6 @@
           "url": "/articoli-lucerna/fluhli-tassa-seconde-case/",
           "excerpt": "Con 70 voti contro 41, il Parlamento cantonale di Lucerna ha accolto la mozione di Hella Schnider per una tassa speciale sulle seconde case.",
           "date": "2026-10-26T11:23:57.392Z"
-        },
-        {
-          "title": "Consultazione controprogetto abitazioni accessibili nel Cantone Lucerna",
-          "url": "/articoli-lucerna/consultazione-abitazioni-lucerna/",
-          "excerpt": "La consultazione sul controprogetto all'iniziativa «Per abitazioni accessibili» è aperta dal 21 ottobre 2026 fino al 22 gennaio 2027, con voto previsto per la primavera 2028.",
-          "date": "2026-10-23T18:56:47.091Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-31T12:03:49.035Z"
+      "updatedAt": "2026-10-31T13:09:44.479Z"
     },
     "en": {
       "canton": "LU",
@@ -147,6 +147,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Rector Kanti Strengthens Ties with the University of Lucerne",
+          "url": "/en/lucerne-articles/kanti-rector-university-link/",
+          "excerpt": "Marco Stössel, principal of the Kantonsschule Beromünster, spoke at the 2026 Dies Academicus about the common educational pathway between high schools and universities.",
+          "date": "2026-10-31T13:00:04.976Z"
+        },
+        {
           "title": "Sonnenberg Tunnel closed for structural inspection",
           "url": "/en/lucerne-articles/sonnenberg-tunnel-night-closure/",
           "excerpt": "Complete closure of the Sonnenberg tunnel in both directions during the night of November 4–5, 2026, from 22.00 to 05.00.",
@@ -169,12 +175,6 @@
           "url": "/en/lucerne-articles/fluehli-second-home-tax/",
           "excerpt": "With 70 votes against 41, the Lucerne Cantonal Parliament approved Hella Schnider’s motion for a special tax on second homes.",
           "date": "2026-10-26T11:23:57.392Z"
-        },
-        {
-          "title": "Lucerne affordable housing counterproposal consultation",
-          "url": "/en/lucerne-articles/lucerne-housing-consultation/",
-          "excerpt": "The consultation on the counterproposal to the “For affordable housing” initiative is open from October 21, 2026, until January 22, 2027, with a vote scheduled for spring 2028.",
-          "date": "2026-10-23T18:56:47.091Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-31T12:03:49.035Z"
+      "updatedAt": "2026-10-31T13:09:44.479Z"
     },
     "de": {
       "canton": "LU",
@@ -234,6 +234,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Rektor Kanti fördert die Zusammenarbeit mit der Universität Luzern",
+          "url": "/de/luzern-artikel/kanti-rektor-universitaet-draht/",
+          "excerpt": "Marco Stössel, Rektor der Kantonsschule Beromünster, sprach am Dies Academicus 2026 über den gemeinsamen Bildungsweg von Gymnasium und Universität.",
+          "date": "2026-10-31T13:00:04.976Z"
+        },
+        {
           "title": "Tunnel Sonnenberg wegen struktureller Inspektion gesperrt",
           "url": "/de/luzern-artikel/sonnenberg-tunnel-nachtschliessung/",
           "excerpt": "Vollständige Sperrung des Tunnels Sonnenberg in beiden Richtungen ab der Nacht vom 4.",
@@ -256,12 +262,6 @@
           "url": "/de/luzern-artikel/fluehli-steuer-zweitwohnungen/",
           "excerpt": "Mit 70 zu 41 Stimmen hat das Luzerner Kantonsparlament die Motion von Hella Schnider für eine Sondersteuer auf Zweitwohnungen angenommen.",
           "date": "2026-10-26T11:23:57.392Z"
-        },
-        {
-          "title": "Vernehmlassung zum Gegenvorschlag für bezahlbaren Wohnraum im Kanton Luzern",
-          "url": "/de/luzern-artikel/wohnraum-konsultation-luzern/",
-          "excerpt": "Die Vernehmlassung zum Gegenvorschlag zur Initiative «Für bezahlbaren Wohnraum» läuft vom 21.",
-          "date": "2026-10-23T18:56:47.091Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-31T12:03:49.035Z"
+      "updatedAt": "2026-10-31T13:09:44.479Z"
     },
     "fr": {
       "canton": "LU",
@@ -321,6 +321,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Le recteur Kanti renforce les liens avec l'Université de Lucerne",
+          "url": "/fr/articles-lucerne/kanti-recteur-lien-universite/",
+          "excerpt": "Marco Stössel, recteur de la Kantonsschule de Beromünster, est intervenu lors du Dies Academicus 2026 sur le parcours de formation commun entre les lycées et les universités.",
+          "date": "2026-10-31T13:00:04.976Z"
+        },
+        {
           "title": "Tunnel du Sonnenberg fermé pour inspection structurelle",
           "url": "/fr/articles-lucerne/tunnel-sonnenberg-fermeture-nuit/",
           "excerpt": "Fermeture complète du tunnel du Sonnenberg dans les deux directions dans la nuit du 4 au 5 novembre 2026, de 22.00 à 05.00.",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-lucerne/fluehli-taxe-residences-secondaires/",
           "excerpt": "Par 70 voix contre 41, le Parlement cantonal de Lucerne a adopté la motion de Hella Schnider en faveur d’une taxe spéciale sur les résidences secondaires.",
           "date": "2026-10-26T11:23:57.392Z"
-        },
-        {
-          "title": "Contre-projet logements abordables Lucerne : consultation",
-          "url": "/fr/articles-lucerne/consultation-logements-lucerne/",
-          "excerpt": "La consultation sur le contre-projet à l’initiative « Pour des logements abordables » est ouverte du 21 octobre 2026 au 22 janvier 2027, avec un vote prévu au printemps 2028.",
-          "date": "2026-10-23T18:56:47.091Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-31T12:03:49.035Z"
+      "updatedAt": "2026-10-31T13:09:44.479Z"
     }
   }
 }
