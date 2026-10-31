@@ -45,7 +45,9 @@ for (const relativePath of WORKFLOWS) {
     const linkGate = source.indexOf('if [ "$is_link" = "true" ]; then');
     const snapshot = source.indexOf('created=%3E%3D$admission_since');
     assert.ok(
-      linkGate >= 0 && snapshot > source.indexOf('fail_closed_admission()'),
+      linkGate >= 0
+        && snapshot > source.indexOf('fail_closed_admission()')
+        && snapshot < linkGate,
       'la snapshot bounded deve essere parte del gate di ammissione',
     );
     assert.doesNotMatch(
