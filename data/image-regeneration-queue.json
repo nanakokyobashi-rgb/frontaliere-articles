@@ -15,41 +15,41 @@
       "articleId": "giovani-donne-stipendi-svizzera",
       "title": "Di più Le giovani svizzere guadagnano meno nonostante siano più istruite",
       "fallbackImage": "/images/blog/article-divario-reddito-giovani-svizzera.webp",
-      "reason": "All image providers failed for article-giovani-donne-stipendi-svizzera: openai-codex (vision gate rejected image: Generic synthetic editorial scene with a clearly visible foreground person; no text, logo, or recognizable face.); gemini (Gem",
+      "reason": "All image providers failed for article-giovani-donne-stipendi-svizzera: openai-codex (vision gate rejected image: Synthetic editorial illustration relevant to education and pay inequality in Switzerland, but it includes a recognizable foreg",
       "status": "failed",
-      "failureCount": 14,
+      "failureCount": 15,
       "requestedAt": "2026-10-19T03:17:12.439Z",
-      "lastFailureAt": "2026-10-30T16:34:07.082Z"
+      "lastFailureAt": "2026-10-31T00:11:46.183Z"
     },
     {
       "articleId": "sanitari-italiani-fuga-svizzera",
       "title": "Operatori sanitari frontalieri: Como boccheggia",
       "fallbackImage": "/images/blog/article-confusione-tassa-salute-frontalieri.webp",
-      "reason": "All image providers failed for article-sanitari-italiani-fuga-svizzera: openai-codex (vision gate rejected image: Generic synthetic editorial illustration relevant to cross-border rail commuting, but a recognizable foreground person is visi",
+      "reason": "All image providers failed for article-sanitari-italiani-fuga-svizzera: openai-codex (vision gate rejected image: Synthetic editorial illustration with a clear commuter in the foreground; no text, logo, recognizable face, or specific real e",
       "status": "failed",
-      "failureCount": 13,
+      "failureCount": 14,
       "requestedAt": "2026-10-23T15:23:52.650Z",
-      "lastFailureAt": "2026-10-30T16:35:33.472Z"
+      "lastFailureAt": "2026-10-31T00:12:49.574Z"
     },
     {
       "articleId": "cisl-ricerca-lavoratori-ritiene",
       "title": "55,6% lavoratori frontalieri ritiene stipendio inferiore a residente svizzero",
       "fallbackImage": "/images/blog/article-ricerca-cisl-frontalieri-2026.webp",
-      "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to Ticino rail commuting, but it includes a recognizable foreground woman and a vis",
+      "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to cross-border commuting in Ticino, but it contains a recognizable foreground pers",
       "status": "failed",
-      "failureCount": 13,
+      "failureCount": 14,
       "requestedAt": "2026-10-24T19:06:53.846Z",
-      "lastFailureAt": "2026-10-30T16:36:40.096Z"
+      "lastFailureAt": "2026-10-31T00:13:57.061Z"
     },
     {
       "articleId": "sindacati-aumenti-infermieri-ticino",
       "title": "Infermieri sociopsichiatrici: sindacati chiedono aumenti fino a 8'941 franchi",
       "fallbackImage": "/images/blog/article-ocst-storia-frontalieri-ticino.webp",
-      "reason": "All image providers failed for article-sindacati-aumenti-infermieri-ticino: openai-codex (vision gate rejected image: Synthetic photorealistic editorial illustration; a recognizabl",
-      "status": "queued",
-      "failureCount": 0,
+      "reason": "All image providers failed for article-sindacati-aumenti-infermieri-ticino: openai-codex (vision gate rejected image: Generic synthetic editorial illustration relevant to a healthcare worker and cross-border commuting, but it contains a rec",
+      "status": "failed",
+      "failureCount": 1,
       "requestedAt": "2026-10-30T20:19:38.286Z",
-      "lastFailureAt": "2026-10-30T20:19:38.286Z"
+      "lastFailureAt": "2026-10-31T00:15:56.741Z"
     }
   ]
 }
