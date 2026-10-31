@@ -16,6 +16,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'axenstrasse-chiusa-novembre-2026': { it: 'axenstrasse-chiusa-novembre-2026', en: 'axenstrasse-closed-november-2026', de: 'axenstrasse-geschlossen-november-2026', fr: 'axenstrasse-fermee-novembre-2026' },
  'conteggio-traffico-uri-novembre': { it: 'conteggio-traffico-uri-novembre', en: 'uri-traffic-count-november', de: 'verkehrszaehlung-uri-november', fr: 'comptage-trafic-uri-novembre' },
  'susten-furka-chiusura-invernale': { it: 'susten-furka-chiusura-invernale', en: 'susten-furka-winter-closure', de: 'susten-furka-wintersperre', fr: 'fermeture-hivernale-susten-furka' },
+ 'incendio-tunnel-fluelen': { it: 'incendio-tunnel-fluelen', en: 'vehicle-fire-fluelen-tunnel', de: 'fahrzeugbrand-fluelen-tunnel', fr: 'incendie-tunnel-fluelen' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

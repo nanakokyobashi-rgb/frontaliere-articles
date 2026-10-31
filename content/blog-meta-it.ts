@@ -13646,6 +13646,15 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.bellinzona-imposte-piu-salate-2028.title': 'A Bellinzona imposte più salate dal 2028',
     'blog.article.bellinzona-imposte-piu-salate-2028.excerpt': 'Il Municipio di Bellinzona ha annunciato imposte più salate dal 2028, in concomitanza con il Preventivo 2026 che mostra un disavanzo di 10,6 milioni.',
     'blog.article.bellinzona-imposte-piu-salate-2028.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.infermieri-osc-sindacati-stipendi.title': 'Infermieri Osc e sindacati chiedono sblocco stipendi',
+    'blog.article.infermieri-osc-sindacati-stipendi.excerpt': 'La riclassificazione Osc è ferma da anni 2019: classe 4→5 per infermieri, 5→6 per specialità Aumenti annui da 5\'159 a 8\'941 franchi Assemblea il 10 novembre',
+    'blog.article.infermieri-osc-sindacati-stipendi.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.arresto-napoletano-cassarate.title': 'Arrestato a Cassarate un 62enne napoletano per flussi finanziari',
+    'blog.article.arresto-napoletano-cassarate.excerpt': 'Arrestato a Cassarate il 21 ottobre un 62enne napoletano Circa 50 milioni di euro tra luglio 2025 e marzo 2026 Dal Lussemburgo i fondi passavano ai portafogli',
+    'blog.article.arresto-napoletano-cassarate.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.massagno-moltiplicatore-2027.title': 'Massagno propone moltiplicatore d\'imposta al 77% per il 2027',
+    'blog.article.massagno-moltiplicatore-2027.excerpt': 'Massagno propone il 77% per il Preventivo 2027 Il disavanzo previsto è di 528\'142 franchi Investimenti netti pari a 7\'732\'000 franchi Il Consiglio comunale',
+    'blog.article.massagno-moltiplicatore-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaIt;

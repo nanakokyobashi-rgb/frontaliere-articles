@@ -15,6 +15,18 @@
     "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/passepartout-praegt-den-oev-in-der-zentralschweiz-seit-40-jahren-art-1729692": {
       "section": "canton-sz",
       "ts": 1793427652903
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/luzern-stimmt-ueber-digitalisierung-der-verwaltung-ab-art-1729165": {
+      "section": "canton-sz",
+      "ts": 1793442128615
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/falsche-lohnausweise-fuer-kantonsratsmitglieder-politiker-verlangt-antworten-art-1729607": {
+      "section": "canton-sz",
+      "ts": 1793442137053
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/schweizundwelt/eu-vertraege-und-staendemehr-fahrplan-im-parlament-koennte-kippen-art-1729519": {
+      "section": "canton-sz",
+      "ts": 1793442341283
     }
   }
 }

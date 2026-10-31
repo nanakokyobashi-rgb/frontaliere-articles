@@ -87,6 +87,9 @@ const blogMetaCantonShEn: Record<string, string> = {
     'blog.article.sciaffusa-ricarica-elettrica.title': 'Expensive petrol: Schaffhausen wants more electric charging stations',
     'blog.article.sciaffusa-ricarica-elettrica.excerpt': 'High petrol prices and the canton’s goal: more charging stations for electric cars, like those already installed in St.',
     'blog.article.sciaffusa-ricarica-elettrica.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.frick-volksmotion-kantonsrat.title': 'Volksmotion Frick: Debate in the Kantonsrat on Municipal Powers',
+    'blog.article.frick-volksmotion-kantonsrat.excerpt': 'The Kantonsrat will consider the citizens\' initiative proposed by Matthias Frick, which calls for municipalities to be granted greater authority over traffic matters.',
+    'blog.article.frick-volksmotion-kantonsrat.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonShEn;

@@ -13647,6 +13647,15 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.bellinzona-imposte-piu-salate-2028.title': 'À Bellinzona, des impôts plus élevés dès 2028',
     'blog.article.bellinzona-imposte-piu-salate-2028.excerpt': 'La Municipalité de Bellinzona a annoncé des impôts plus élevés dès 2028, en concomitance avec le budget 2026, qui affiche un déficit de 10,6 millions.',
     'blog.article.bellinzona-imposte-piu-salate-2028.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.infermieri-osc-sindacati-stipendi.title': 'Infirmiers Osc et syndicats demandent le déblocage des salaires',
+    'blog.article.infermieri-osc-sindacati-stipendi.excerpt': 'La reclassification Osc est bloquée depuis des années 2019 : classe 4→5 pour les infirmiers, 5→6 pour les spécialités Augmentations annuelles de 5\'159 à 8\'941 francs Assemblée le 10 novembre',
+    'blog.article.infermieri-osc-sindacati-stipendi.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.arresto-napoletano-cassarate.title': 'Un Napolitain de 62 ans arrêté à Cassarate pour des flux financiers',
+    'blog.article.arresto-napoletano-cassarate.excerpt': 'Arrêté à Cassarate le 21 octobre, un Napolitain de 62 ans Environ 50 millions d’euros entre juillet 2025 et mars 2026 Depuis le Luxembourg, les fonds passaient dans les portefeuilles',
+    'blog.article.arresto-napoletano-cassarate.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.massagno-moltiplicatore-2027.title': 'Massagno propose un multiplicateur d\'impôt de 77% pour 2027',
+    'blog.article.massagno-moltiplicatore-2027.excerpt': 'Massagno propose 77% pour le budget 2027 Le déficit prévu est de 528\'142 francs Investissements nets de 7\'732\'000 francs Le Conseil communal',
+    'blog.article.massagno-moltiplicatore-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaFr;

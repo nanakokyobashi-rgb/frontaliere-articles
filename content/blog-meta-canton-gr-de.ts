@@ -54,6 +54,9 @@ const blogMetaCantonGrDe: Record<string, string> = {
     'blog.article.bus-sostitutivi-grigioni.title': 'Ersatzbusse zwischen Thusis und Preda wegen einer Baustelle der RhB',
     'blog.article.bus-sostitutivi-grigioni.excerpt': 'Die Quelle weist auf Ersatzbusse zwischen Thusis und Preda aufgrund einer Baustelle der RhB hin; der Verkehrsticker verfolgt den Zustand der Verkehrswege in Graubünden.',
     'blog.article.bus-sostitutivi-grigioni.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.ofenberg-chiusura-notte.title': 'Ofenbergstrasse nachts vom 2. bis 6. November gesperrt',
+    'blog.article.ofenberg-chiusura-notte.excerpt': 'Die Ofenbergstrasse wird nachts zwischen dem 2.',
+    'blog.article.ofenberg-chiusura-notte.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonGrDe;

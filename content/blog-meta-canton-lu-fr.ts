@@ -60,6 +60,9 @@ const blogMetaCantonLuFr: Record<string, string> = {
     'blog.article.einwohnerrat-budget-bahnhof-ost.title': 'L\'Einwohnerrat décide du budget 2027 et du crédit Bahnhof Ost',
     'blog.article.einwohnerrat-budget-bahnhof-ost.excerpt': 'Le 17 novembre 2026, l\'Einwohnerrat d\'Ebikon se réunit Le budget 2027 prévoit un excédent de CHF 2,14 millions Le multiplicateur reste à 2,05 unités Bahnhof Ost',
     'blog.article.einwohnerrat-budget-bahnhof-ost.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.passepartout-trasporto-centrale.title': 'Passepartout : accès plus simple aux transports publics',
+    'blog.article.passepartout-trasporto-centrale.excerpt': 'Avant 1986, plusieurs billets étaient nécessaires pour un trajet en transports publics.',
+    'blog.article.passepartout-trasporto-centrale.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonLuFr;

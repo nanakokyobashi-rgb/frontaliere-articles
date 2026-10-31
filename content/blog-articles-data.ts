@@ -45986,6 +45986,36 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'infermieri-osc-sindacati-stipendi',
+ category: 'novita',
+ date: '2026-10-31T09:38:45.209Z',
+ image: '/images/blog/article-assemblea-ccti-rotta-economia.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'arresto-napoletano-cassarate',
+ category: 'fiscale',
+ date: '2026-10-31T10:05:19.769Z',
+ image: '/images/blog/article-arresto-napoletano-cassarate.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
+ {
+ id: 'massagno-moltiplicatore-2027',
+ category: 'fiscale',
+ date: '2026-10-31T10:46:54.397Z',
+ image: '/images/blog/article-massagno-moltiplicatore-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

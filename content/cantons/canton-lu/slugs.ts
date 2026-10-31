@@ -22,6 +22,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'consultazione-abitazioni-lucerna': { it: 'consultazione-abitazioni-lucerna', en: 'lucerne-housing-consultation', de: 'wohnraum-konsultation-luzern', fr: 'consultation-logements-lucerne' },
  'fluhli-tassa-seconde-case': { it: 'fluhli-tassa-seconde-case', en: 'fluehli-second-home-tax', de: 'fluehli-steuer-zweitwohnungen', fr: 'fluehli-taxe-residences-secondaires' },
  'einwohnerrat-budget-bahnhof-ost': { it: 'einwohnerrat-budget-bahnhof-ost', en: 'residents-council-decides-on-budget-2027-and-bahnhof-ost-credit', de: 'einwohnerrat-entscheidet-uber-budget-2027-und-kredit-fur-bahnhof-ost', fr: 'l-einwohnerrat-decide-du-budget-2027-et-du-credit-bahnhof-ost' },
+ 'passepartout-trasporto-centrale': { it: 'passepartout-trasporto-centrale', en: 'passepartout-central-transit', de: 'passepartout-zentralschweiz-oev', fr: 'passepartout-transports-centre' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

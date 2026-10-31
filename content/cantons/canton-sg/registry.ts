@@ -281,4 +281,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'tamponamento-a1-gossau',
+ category: 'pratico',
+ date: '2026-10-31T10:32:07.607Z',
+ image: '/images/blog/article-tamponamento-a1-gossau.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

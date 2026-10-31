@@ -504,6 +504,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-incendio-tunnel-fluelen': {
+    title: 'Incendio di un veicolo, chiuso il tunnel di Flüelen',
+    description: 'Il Flüeler Tunnel è rimasto chiuso per circa un\'ora e mezza giovedì 29 ottobre dopo un incendio di un veicolo. Nessun ferito.',
+    keywords: 'frontalieri, ticino, svizzera, italia, incendio, veicolo, chiuso, tunnel',
+    ogTitle: 'Incendio di un veicolo, chiuso il tunnel di Flüelen',
+    ogDescription: 'Il lead pubblico dell\'Urner Wochenblatt riferisce un incendio di un veicolo nel Flüeler Tunnel. La chiusura è durata circa un\'ora e mezza giovedì 29 ottobre; nessuno è rimasto ferito. Il testo accessibile non aggiunge dettagli su cause, danni',
+    canonicalPath: '/articoli-uri/incendio-tunnel-fluelen/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Incendio di un veicolo, chiuso il tunnel di Flüelen",
+      "description": "Il Flüeler Tunnel è rimasto chiuso per circa un'ora e mezza giovedì 29 ottobre dopo un incendio di un veicolo. Nessun ferito.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-incendio-tunnel-fluelen.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-31T10:27:30+00:00",
+      "dateModified": "2026-10-31T10:27:30+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-uri/incendio-tunnel-fluelen/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

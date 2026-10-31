@@ -42,6 +42,9 @@ const blogMetaCantonUrIt: Record<string, string> = {
     'blog.article.susten-furka-chiusura-invernale.title': 'Susten e Furka chiusi, San Gottardo percorribile di giorno',
     'blog.article.susten-furka-chiusura-invernale.excerpt': 'Dal mercoledì 28 ottobre i passi della Furka e del Susten sono chiusi per l\'inverno; il passo del San Gottardo resta percorribile di giorno.',
     'blog.article.susten-furka-chiusura-invernale.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.incendio-tunnel-fluelen.title': 'Incendio di un veicolo, chiuso il tunnel di Flüelen',
+    'blog.article.incendio-tunnel-fluelen.excerpt': 'Un incendio di un veicolo ha imposto la chiusura del tunnel di Flüelen per circa un\'ora e mezza giovedì 29 ottobre.',
+    'blog.article.incendio-tunnel-fluelen.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonUrIt;

@@ -40,6 +40,17 @@
       "failureCount": 15,
       "requestedAt": "2026-10-24T19:06:53.846Z",
       "lastFailureAt": "2026-10-31T06:21:37.165Z"
+    },
+    {
+      "articleId": "infermieri-osc-sindacati-stipendi",
+      "title": "Infermieri Osc e sindacati chiedono sblocco stipendi",
+      "fallbackImage": "/images/blog/article-assemblea-ccti-rotta-economia.webp",
+      "reason": "All image providers failed for article-infermieri-osc-sindacati-stipendi: openai-codex (vision gate rejected image: Synthetic editorial street scene relevant to healthcare workers",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-31T09:38:46.360Z",
+      "lastFailureAt": "2026-10-31T09:38:46.360Z",
+      "retryHint": "no-text"
     }
   ]
 }

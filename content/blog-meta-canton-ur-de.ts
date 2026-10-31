@@ -42,6 +42,9 @@ const blogMetaCantonUrDe: Record<string, string> = {
     'blog.article.susten-furka-chiusura-invernale.title': 'Susten und Furka gesperrt, Gotthard tagsüber befahrbar',
     'blog.article.susten-furka-chiusura-invernale.excerpt': 'Ab Mittwoch, dem 28.',
     'blog.article.susten-furka-chiusura-invernale.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.incendio-tunnel-fluelen.title': 'Brand eines Fahrzeugs, Tunnel von Flüelen geschlossen',
+    'blog.article.incendio-tunnel-fluelen.excerpt': 'Ein Fahrzeugbrand zwang am Donnerstag, 29.',
+    'blog.article.incendio-tunnel-fluelen.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonUrDe;

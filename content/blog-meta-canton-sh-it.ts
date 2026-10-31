@@ -87,6 +87,9 @@ const blogMetaCantonShIt: Record<string, string> = {
     'blog.article.sciaffusa-ricarica-elettrica.title': 'Benzina cara: Sciaffusa vuole più ricariche elettriche',
     'blog.article.sciaffusa-ricarica-elettrica.excerpt': 'Prezzi della benzina elevati e obiettivo del Cantone: più stazioni di ricarica per auto elettriche, come quelle già installate a St.',
     'blog.article.sciaffusa-ricarica-elettrica.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.frick-volksmotion-kantonsrat.title': 'Volksmotion Frick: discussione in Kantonsrat su competenze comunali',
+    'blog.article.frick-volksmotion-kantonsrat.excerpt': 'Il Kantonsrat tratterà la Volksmotion di Matthias Frick, che chiede ai Comuni maggiori competenze sulla circolazione.',
+    'blog.article.frick-volksmotion-kantonsrat.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonShIt;

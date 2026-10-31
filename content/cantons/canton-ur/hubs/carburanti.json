@@ -4,12 +4,12 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "carburanti",
-  "updatedAt": "2026-10-28T18:02:21.438Z",
-  "contentHash": "5a81d540fed6b5d440bc368b5960e20af4bb3a66ebf0a5d923b2cffb318845af",
+  "updatedAt": "2026-10-31T10:42:05.181Z",
+  "contentHash": "63ace267e9c07c8a7db2dcc837abf5f06a5c634d9a65193d19a7b7fbfff1143d",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-26T13:32:45.792Z",
+      "updatedAt": "2026-10-30T13:38:40.478Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-11-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-26T13:32:45.792Z"
+          "updatedAt": "2026-10-30T13:38:40.478Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Incendio di un veicolo, chiuso il tunnel di Flüelen",
+          "url": "/articoli-uri/incendio-tunnel-fluelen/",
+          "excerpt": "Un incendio di un veicolo ha imposto la chiusura del tunnel di Flüelen per circa un'ora e mezza giovedì 29 ottobre.",
+          "date": "2026-10-31T10:27:30.338Z"
+        },
         {
           "title": "Susten e Furka chiusi, San Gottardo percorribile di giorno",
           "url": "/articoli-uri/susten-furka-chiusura-invernale/",
@@ -82,12 +88,6 @@
           "url": "/articoli-uri/felix-gisler-pensione-uri/",
           "excerpt": "Dopo circa 37 anni, Felix Gisler lascerà l'amministrazione cantonale di Uri a fine ottobre 2026 per pensionamento ordinario.",
           "date": "2026-10-25T14:44:59.995Z"
-        },
-        {
-          "title": "Andermatt abbassa le imposte: progetto Wyden rinviato",
-          "url": "/articoli-uri/andermatt-fisco-wyden/",
-          "excerpt": "Andermatt riduce il moltiplicatore fiscale di 5 punti, al 94%; il consiglio comunale rinvia per ora il contestato progetto Wyden.",
-          "date": "2026-10-23T15:40:41.343Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-28T18:02:21.438Z"
+      "updatedAt": "2026-10-31T10:42:05.181Z"
     },
     "en": {
       "canton": "UR",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-26T13:32:45.792Z"
+          "updatedAt": "2026-10-30T13:38:40.478Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Vehicle fire, Flüelen tunnel closed",
+          "url": "/en/uri-articles/vehicle-fire-fluelen-tunnel/",
+          "excerpt": "A vehicle fire forced the closure of the Flüelen tunnel for about an hour and a half on Thursday, October 29.",
+          "date": "2026-10-31T10:27:30.338Z"
+        },
         {
           "title": "Susten and Furka closed, Gotthard passable during the day",
           "url": "/en/uri-articles/susten-furka-winter-closure/",
@@ -169,12 +175,6 @@
           "url": "/en/uri-articles/felix-gisler-uri-retirement/",
           "excerpt": "After approximately 37 years, Felix Gisler will leave the cantonal administration of Uri at the end of October 2026 due to regular retirement.",
           "date": "2026-10-25T14:44:59.995Z"
-        },
-        {
-          "title": "Andermatt cuts taxes: Wyden project postponed",
-          "url": "/en/uri-articles/andermatt-tax-wyden-postponed/",
-          "excerpt": "Andermatt reduces the tax multiplier by 5 points, to 94%; the municipal council postpones the controversial Wyden project for now.",
-          "date": "2026-10-23T15:40:41.343Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-28T18:02:21.438Z"
+      "updatedAt": "2026-10-31T10:42:05.181Z"
     },
     "de": {
       "canton": "UR",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-26T13:32:45.792Z"
+          "updatedAt": "2026-10-30T13:38:40.478Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Brand eines Fahrzeugs, Tunnel von Flüelen geschlossen",
+          "url": "/de/uri-artikel/fahrzeugbrand-fluelen-tunnel/",
+          "excerpt": "Ein Fahrzeugbrand zwang am Donnerstag, 29.",
+          "date": "2026-10-31T10:27:30.338Z"
+        },
         {
           "title": "Susten und Furka gesperrt, Gotthard tagsüber befahrbar",
           "url": "/de/uri-artikel/susten-furka-wintersperre/",
@@ -256,12 +262,6 @@
           "url": "/de/uri-artikel/felix-gisler-uri-pensionierung/",
           "excerpt": "Nach rund 37 Jahren wird Felix Gisler die Kantonsverwaltung Uri Ende Oktober 2026 infolge ordentlicher Pensionierung verlassen.",
           "date": "2026-10-25T14:44:59.995Z"
-        },
-        {
-          "title": "Andermatt senkt die Steuern: Projekt Wyden verschoben",
-          "url": "/de/uri-artikel/andermatt-steuern-wyden/",
-          "excerpt": "Andermatt senkt den Steuerfuss um 5 Punkte auf 94 Prozent; der Gemeinderat verschiebt das umstrittene Projekt Wyden vorerst.",
-          "date": "2026-10-23T15:40:41.343Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-28T18:02:21.438Z"
+      "updatedAt": "2026-10-31T10:42:05.181Z"
     },
     "fr": {
       "canton": "UR",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-26T13:32:45.792Z"
+          "updatedAt": "2026-10-30T13:38:40.478Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Incendie d’un véhicule, tunnel de Flüelen fermé",
+          "url": "/fr/articles-uri/incendie-tunnel-fluelen/",
+          "excerpt": "L’incendie d’un véhicule a entraîné la fermeture du tunnel de Flüelen pendant environ une heure et demie jeudi 29 octobre.",
+          "date": "2026-10-31T10:27:30.338Z"
+        },
         {
           "title": "Susten et Furka fermés, Saint-Gothard praticable de jour",
           "url": "/fr/articles-uri/fermeture-hivernale-susten-furka/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-uri/felix-gisler-uri-retraite/",
           "excerpt": "Après environ 37 ans, Felix Gisler quittera l’administration cantonale d’Uri à la fin du mois d’octobre 2026 pour prendre sa retraite ordinaire.",
           "date": "2026-10-25T14:44:59.995Z"
-        },
-        {
-          "title": "Andermatt baisse les impôts : projet Wyden reporté",
-          "url": "/fr/articles-uri/andermatt-impots-wyden/",
-          "excerpt": "Andermatt réduit le multiplicateur fiscal de 5 points, à 94 % ; le conseil communal reporte pour l’instant le projet Wyden controversé.",
-          "date": "2026-10-23T15:40:41.343Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-28T18:02:21.438Z"
+      "updatedAt": "2026-10-31T10:42:05.181Z"
     }
   }
 }
