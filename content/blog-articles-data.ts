@@ -45975,6 +45975,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'bellinzona-imposte-piu-salate-2028',
+ category: 'fiscale',
+ date: '2026-10-31T08:56:46.770Z',
+ image: '/images/blog/article-bellinzona-imposte-piu-salate-2028.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

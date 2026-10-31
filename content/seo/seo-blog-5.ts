@@ -113835,6 +113835,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-bellinzona-imposte-piu-salate-2028': {
+    title: 'A Bellinzona imposte più salate dal 2028 | Frontaliere Ticino',
+    description: 'Il Municipio di Bellinzona annuncia imposte più salate dal 2028. Preventivo 2026 con disavanzo di 10,6 milioni; moltiplicatore 93% per l\'anno',
+    keywords: 'frontalieri, ticino, svizzera, italia, bellinzona, imposte, salate, municipio',
+    ogTitle: 'Imposte Bellinzona più salate dal 2028',
+    ogDescription: 'Il Municipio di Bellinzona annuncia imposte più salate dal 2028. Il Preventivo 2026 mostra un disavanzo di 10,6 milioni e il moltiplicatore per l\'anno prossimo è 93%.',
+    canonicalPath: '/articoli-frontaliere/bellinzona-imposte-piu-salate-2028/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "A Bellinzona imposte più salate dal 2028",
+      "description": "Il Municipio di Bellinzona annuncia imposte più salate dal 2028. Preventivo 2026 con disavanzo di 10,6 milioni; moltiplicatore 93% per l'anno",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-bellinzona-imposte-piu-salate-2028.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-31T08:56:47+00:00",
+      "dateModified": "2026-10-31T08:56:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/bellinzona-imposte-piu-salate-2028/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
