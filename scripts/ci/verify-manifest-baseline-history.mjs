@@ -62,6 +62,12 @@ const MANIFEST_REL = 'scripts/ci/loop-sync-manifest.json';
 const JSON_OUT = process.argv.includes('--json');
 export const CANONICAL_HISTORY_REF = 'origin/main';
 export const CURRENT_HISTORY_REF = 'HEAD';
+// Un batch unico può contenere tutte le revisioni storiche dei path del
+// manifest: su un runner completo il buffer stdout e il processo git possono
+// superare il limite di memoria e `spawnSync` torna con `status: null`. I
+// chunk mantengono la verifica integrale ma limitano la memoria per passata.
+const CAT_FILE_BATCH_SIZE = 128;
+const CAT_FILE_MAX_BUFFER = 1 << 28;
 
 /**
  * Il verdetto, PURO: niente disco, niente git, niente rete — e' questo a
@@ -284,17 +290,31 @@ export function blobsByPathFromHistory(paths, { cwd = ROOT, partialClone = isPar
     remember(oid, record.slice(tab + 1));
   }
   if (oidToPaths.size === 0) return new Map();
-  const res = spawnSync('git', ['-c', 'core.quotePath=false', 'cat-file', '--batch'], {
-    cwd,
-    input: `${[...oidToPaths.keys()].join('\n')}\n`,
-    maxBuffer: 1 << 30,
-  });
-  if (res.status !== 0) {
-    const stderr = res.stderr?.toString() || '';
-    if (partialClone && isLazyFetchFailure(stderr)) return null;
-    throw new Error(`git cat-file --batch: ${stderr || res.status}`);
+  const entries = [...oidToPaths.entries()];
+  const byPath = new Map();
+  for (let start = 0; start < entries.length; start += CAT_FILE_BATCH_SIZE) {
+    const batch = new Map(entries.slice(start, start + CAT_FILE_BATCH_SIZE));
+    const res = spawnSync('git', ['-c', 'core.quotePath=false', 'cat-file', '--batch'], {
+      cwd,
+      input: `${[...batch.keys()].join('\n')}\n`,
+      maxBuffer: CAT_FILE_MAX_BUFFER,
+    });
+    if (res.status !== 0) {
+      const stderr = res.stderr?.toString() || '';
+      const signal = res.signal ? `signal ${res.signal}` : '';
+      const spawnError = res.error?.message || '';
+      const diagnostic = [stderr, spawnError, signal].filter(Boolean).join('; ');
+      if (partialClone && isLazyFetchFailure(diagnostic)) return null;
+      throw new Error(`git cat-file --batch: ${diagnostic || res.status}`);
+    }
+    const parsed = parseCatFileBatchOutput(res.stdout, batch, { allowMissing: partialClone });
+    if (parsed === null) return null;
+    for (const [rel, hashes] of parsed) {
+      if (!byPath.has(rel)) byPath.set(rel, new Set());
+      for (const hash of hashes) byPath.get(rel).add(hash);
+    }
   }
-  return parseCatFileBatchOutput(res.stdout, oidToPaths, { allowMissing: partialClone });
+  return byPath;
 }
 
 /**

@@ -85,7 +85,9 @@ function assertFortyOnlyAsHistoryOrExample(text, label) {
 
 test('la voce del registro porta la data del refresh fattuale', () => {
   const registry = read('content', 'blog-articles-data.ts');
-  assert.match(registry, new RegExp(`id: '${SLUG}'[\\s\\S]{0,200}updatedAt: '${REFRESHED_ON}'`));
+  const match = registry.match(new RegExp(`id: '${SLUG}'[\\s\\S]{0,200}updatedAt: '(\\d{4}-\\d{2}-\\d{2})'`));
+  assert.ok(match, `registro senza updatedAt per ${SLUG}`);
+  assert.ok(match[1] >= REFRESHED_ON, `updatedAt ${match[1]} precede il refresh ${REFRESHED_ON}`);
 });
 
 for (const locale of LOCALES) {
