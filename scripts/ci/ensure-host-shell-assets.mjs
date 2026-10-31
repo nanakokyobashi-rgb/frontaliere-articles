@@ -33,12 +33,19 @@ import { createHash } from 'node:crypto';
 import { URL as NodeURL } from 'node:url';
 import { fileURLToPath } from 'node:url';
 
-import { GTAG_INIT_CONTENT, GTAG_INIT_VERSIONED_FILENAME } from '../../host/constants.ts';
+import { ADSENSE_LOADER_FILENAME, PARTNERIZE_TAG_FILENAME, GTAG_INIT_CONTENT, GTAG_INIT_VERSIONED_FILENAME } from '../../host/constants.ts';
 import { ensureCdnShellAssets, shellAssetsFromStaticScripts } from '../lib/cdn-shell-assets.mjs';
 
 /** [name, content] of every shell file whose bytes `host/` holds. */
-export function hostShellFiles() {
-  const snapshot = JSON.parse(readFileSync(new NodeURL('../../host/third-party-shell-assets.json', import.meta.url), 'utf8'));
+export function hostShellFiles(snapshot = JSON.parse(readFileSync(new NodeURL('../../host/third-party-shell-assets.json', import.meta.url), 'utf8'))) {
+  // Bind availability to the very filenames used by the HTML, not to whatever
+  // subset or alternate names an otherwise hash-valid snapshot happens to hold.
+  const required = new Set([ADSENSE_LOADER_FILENAME, PARTNERIZE_TAG_FILENAME]);
+  if (!Array.isArray(snapshot?.assets)) throw new Error('Transported asset set mismatch');
+  const names = new Set(snapshot.assets.map((asset) => asset?.name));
+  if (snapshot.assets.length !== required.size || names.size !== required.size || [...required].some((name) => !names.has(name))) {
+    throw new Error('Transported asset set mismatch');
+  }
   const assets = snapshot.assets.map(({ name, content, sha256 }) => {
     const actual = createHash('sha256').update(content).digest('hex');
     if (actual !== sha256 || !name.includes(actual.slice(0, 12))) throw new Error(`Transported asset hash mismatch: ${name}`);

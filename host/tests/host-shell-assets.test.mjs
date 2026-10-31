@@ -90,6 +90,40 @@ test('ogni file della shell che host/ porta ha il nome derivato dal proprio cont
   }
 });
 
+test('the publisher rejects incomplete, renamed, duplicate or malformed snapshots before ensure', async () => {
+  const snapshot = JSON.parse(read('host/third-party-shell-assets.json'));
+  const [ads, partnerize] = snapshot.assets;
+  const invalid = [
+    null, {}, { ...snapshot, assets: null }, { ...snapshot, assets: {} },
+    { ...snapshot, assets: [] },
+    { ...snapshot, assets: [ads] }, { ...snapshot, assets: [partnerize] },
+    { ...snapshot, assets: [ads, ads] }, { ...snapshot, assets: [ads, partnerize, ads] },
+    { ...snapshot, assets: [null, partnerize] },
+    { ...snapshot, assets: [{ ...ads, name: 'wrong-' + ads.sha256.slice(0, 12) + '.js' }, partnerize] },
+    { ...snapshot, assets: [{ ...ads, content: ads.content + ' ' }, partnerize] },
+    { ...snapshot, assets: [{ ...ads, sha256: 'invalid' }, partnerize] },
+    { ...snapshot, assets: [{ ...ads, content: null }, partnerize] },
+  ];
+  let ensures = 0;
+  for (const supplied of invalid) {
+    await assert.rejects(main({
+      listFiles: () => hostShellFiles(supplied),
+      ensure: async () => { ensures++; return []; },
+    }));
+  }
+  assert.equal(ensures, 0, 'invalid input must stop before network availability/upload checks');
+});
+
+test('the exact two required assets are accepted in either order', () => {
+  const snapshot = JSON.parse(read('host/third-party-shell-assets.json'));
+  const expected = hostShellFiles().map(([name]) => name).sort();
+  for (const assets of [snapshot.assets, [...snapshot.assets].reverse()]) {
+    const files = hostShellFiles({ ...snapshot, assets });
+    assert.deepEqual(files.map(([name]) => name).sort(), expected);
+    for (const [name, content] of files) assert.ok(name.includes(createHash('sha256').update(content).digest('hex').slice(0, 12)));
+  }
+});
+
 test('ogni riferimento con nome derivato dal contenuto nel contratto e\' un file che questo repo sa pubblicare', async () => {
   const { contract } = await import('../siteShellBootstrap.ts');
   const publishable = new Set(hostShellFiles().map(([name]) => name));

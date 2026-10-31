@@ -151,9 +151,9 @@ export const GTAG_SNIPPET = `<script async crossorigin="anonymous" src="https://
  * `scalarFingerprint` di `scripts/ci/loop-sync-manifest.json`) confronta i
  * due lati, e un carattere di differenza li fa divergere.
  *
- * Il path `/assets/...` viene riscritto su ASSET_CDN dalla stessa
- * pipeline che gia' rebasa `gtag-init.js`, quindi il file arriva dal deploy
- * del sito senza che questo repo debba emetterlo.
+ * Il path `/assets/...` viene riscritto su ASSET_CDN dalla pipeline.
+ * Il corpus trasporta i byte nello snapshot e garantisce il file hashato
+ * prima dell'HTML; gli alias stabili restano pubblicati dal deploy del sito.
  */
 // The generated snapshot also carries the conservative inline capture. It records
 // only potential query/fragment/userinfo provenance before React, without a parser-blocking CDN request.
@@ -161,7 +161,8 @@ const initialDocumentGuard = JSON.parse(readFileSync(new NodeURL('./third-party-
 if (typeof initialDocumentGuard?.content !== 'string' || !initialDocumentGuard.content || createHash('sha256').update(initialDocumentGuard.content).digest('hex') !== initialDocumentGuard.sha256) {
  throw new Error('Transported initial privacy guard hash mismatch');
 }
-export const PARTNERIZE_TAG_SNIPPET = `<script>${initialDocumentGuard.content}</script><script defer src="/assets/partnerize-tag-bd99f75355f6.js"></script>`;
+export const PARTNERIZE_TAG_FILENAME = 'partnerize-tag-bd99f75355f6.js';
+export const PARTNERIZE_TAG_SNIPPET = `<script>${initialDocumentGuard.content}</script><script defer src="/assets/${PARTNERIZE_TAG_FILENAME}"></script>`;
 
 /**
  * Google AdSense loader snippet. Included in every statically-generated page
