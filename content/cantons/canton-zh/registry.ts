@@ -237,4 +237,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'forchstrasse-sicurezza-zollikon',
+ category: 'novita',
+ date: '2026-10-31T11:57:11.936Z',
+ image: '/images/blog/article-forchstrasse-sicurezza-zollikon.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['ZH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

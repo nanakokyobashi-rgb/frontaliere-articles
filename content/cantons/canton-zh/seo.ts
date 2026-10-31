@@ -816,6 +816,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-forchstrasse-sicurezza-zollikon': {
+    title: 'Forchstrasse: più sicurezza tra Zollikerberg e Zumikon',
+    description: 'Il Canton Zurigo prevede la riqualificazione della Forchstrasse tra Zumikon e Zollikerberg: CHF 24,2 milioni e avvio previsto a fine 2028.',
+    keywords: 'frontalieri, ticino, svizzera, italia, forchstrasse, sicurezza, zollikerberg, zumikon',
+    ogTitle: 'Forchstrasse: CHF 24,2 milioni per la sicurezza',
+    ogDescription: 'Il piano interessa quasi 1,7 km dalla fine della Forchautostrasse alla Rosengarten-Kreuzung: pavimentazione a bassa rumorosità, percorso ciclabile separato, sottopassi senza barriere e interventi su Forchbahn e Brunnenbächli.',
+    canonicalPath: '/articoli-zurigo/forchstrasse-sicurezza-zollikon/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Forchstrasse: più sicurezza tra Zollikerberg e Zumikon",
+      "description": "Il Canton Zurigo prevede la riqualificazione della Forchstrasse tra Zumikon e Zollikerberg: CHF 24,2 milioni e avvio previsto a fine 2028.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-forchstrasse-sicurezza-zollikon.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-31T11:57:11+00:00",
+      "dateModified": "2026-10-31T11:57:11+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-zurigo/forchstrasse-sicurezza-zollikon/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

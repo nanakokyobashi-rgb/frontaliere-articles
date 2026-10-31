@@ -75,6 +75,9 @@ const blogMetaCantonAgDe: Record<string, string> = {
     'blog.article.saphir-idrogeno-verde-axpo.title': 'MS Saphir: geplanter Umstieg auf grünen Wasserstoff im Jahr 2027',
     'blog.article.saphir-idrogeno-verde-axpo.excerpt': 'Die SGV lässt die MS Saphir von Shiptec AG umrüsten: Die Wiederaufnahme des Fahrbetriebs im Luzerner Seebecken ist für den 26.',
     'blog.article.saphir-idrogeno-verde-axpo.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.fislisbach-sondaggio-leematten.title': 'Fislisbach: Am 5. November Treffen zur Schule Leematten',
+    'blog.article.fislisbach-sondaggio-leematten.excerpt': 'Die Gemeinde Fislisbach stellt am 5.',
+    'blog.article.fislisbach-sondaggio-leematten.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonAgDe;

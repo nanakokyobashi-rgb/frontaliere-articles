@@ -75,6 +75,9 @@ const blogMetaCantonAgFr: Record<string, string> = {
     'blog.article.saphir-idrogeno-verde-axpo.title': 'MS Saphir : passage prévu à l’hydrogène vert en 2027',
     'blog.article.saphir-idrogeno-verde-axpo.excerpt': 'La SGV fait reconvertir la MS Saphir par Shiptec AG : le retour en service sur le bassin de Lucerne est prévu pour le 26 mars 2027.',
     'blog.article.saphir-idrogeno-verde-axpo.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.fislisbach-sondaggio-leematten.title': 'Fislisbach : le 5 novembre, rencontre au sujet de l’école Leematten',
+    'blog.article.fislisbach-sondaggio-leematten.excerpt': 'La commune de Fislisbach présente le 5 novembre les résultats du sondage après le vote qui a rejeté un crédit de CHF 5,28 millions.',
+    'blog.article.fislisbach-sondaggio-leematten.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonAgFr;
