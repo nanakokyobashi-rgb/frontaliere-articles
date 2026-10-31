@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-lavori-barriere-antirumore-a8.webp",
-      "sha256": "e9c7c2b48431e4c972180161fee2b4b61eb2e6ac938d41c64e4b1ae97c2071e3"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-lavori-barriere-antirumore-a8-480w.webp",
-      "sha256": "6c82917a65904b794748e96642e186cb9d135756cd0bdcbd895b1828b5f291e2"
-    }
-  ]
+  "items": []
 }
