@@ -10,6 +10,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'lavoro-ar-rav-settembre-2026',
  category: 'novita',
  date: '2026-10-07T10:17:50.894Z',
+ updatedAt: '2026-10-08',
  image: '/images/blog/article-lavoro-ar-rav-settembre-2026.webp',
  hasCalculator: true,
  articleType: 'news',

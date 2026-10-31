@@ -21,6 +21,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'scambio-dati-salariali-2027',
  category: 'fiscale',
  date: '2026-10-07T06:25:44.294Z',
+ updatedAt: '2026-10-08',
  image: '/images/blog/article-scambio-dati-salariali-2027.webp',
  hasCalculator: true,
  articleType: 'news',

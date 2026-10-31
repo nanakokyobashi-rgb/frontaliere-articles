@@ -21,6 +21,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'benzina-grigioni-deviazione',
  category: 'pratico',
  date: '2026-10-07T06:53:48.091Z',
+ updatedAt: '2026-10-08',
  image: '/images/blog/article-benzina-grigioni-deviazione.webp',
  hasCalculator: true,
  articleType: 'news',

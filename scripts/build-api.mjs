@@ -199,6 +199,10 @@ import {
   RELEASE_MARKER_CONTRACT_VERSION,
   validateReleaseMarkers,
 } from './lib/announced-surface.mjs';
+import {
+  enrichRegistriesFromHistory,
+  readContentHistory,
+} from './lib/content-updated-at.mjs';
 
 import {
   appendArticleBodyQuarantineSummary,
@@ -376,6 +380,24 @@ for (const section of PUBLISHED_API_SECTIONS) {
     );
   }
   SECTION_REGISTRIES[section.section] = registry;
+}
+// The registry is source data, but body writers and the historical extraction
+// are not guaranteed to have touched it. Derive the public freshness signal
+// from the complete body history before every surface is projected, so an
+// older registry cannot publish `dateModified = datePublished` after a real
+// post-publication text change. `publish-api.yml` checks out fetch-depth: 0;
+// losing that history is therefore a publisher configuration error.
+const contentHistory = readContentHistory({ root: ROOT, sections: PUBLISHED_API_SECTIONS });
+const enrichedRegistries = enrichRegistriesFromHistory(
+  SECTION_REGISTRIES,
+  PUBLISHED_API_SECTIONS,
+  contentHistory,
+);
+for (const section of PUBLISHED_API_SECTIONS) {
+  SECTION_REGISTRIES[section.section] = enrichedRegistries.registries[section.section];
+}
+if (enrichedRegistries.changed.length > 0) {
+  console.log(`[build-api] derived updatedAt for ${enrichedRegistries.changed.length} post-publication body changes`);
 }
 const globalArticleOwners = new Map();
 for (const section of PUBLISHED_API_SECTIONS) {

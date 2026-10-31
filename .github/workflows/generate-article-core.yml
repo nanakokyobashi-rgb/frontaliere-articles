@@ -1103,6 +1103,10 @@ jobs:
           if-no-files-found: ignore
           retention-days: 14
 
+      - name: Stamp updatedAt for changed article bodies
+        if: steps.mode.outputs.dry != 'true' && steps.generate.outputs.article == 'true'
+        run: node scripts/ci/stamp-content-updated-at.mjs
+
       - name: Guard — l'articolo generato non raggiunge main se viola le guardie
         id: guard
         if: steps.mode.outputs.dry != 'true' && steps.generate.outputs.article == 'true'

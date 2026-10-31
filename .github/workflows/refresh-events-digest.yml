@@ -53,6 +53,8 @@ on:
       - 'generator/data/canton-url-slugs.json'
       - 'generator/scripts/lib/events-digest-meta.mjs'
       - 'generator/scripts/lib/events-utils.mjs'
+      - 'scripts/ci/stamp-content-updated-at.mjs'
+      - 'scripts/lib/content-updated-at.mjs'
   workflow_dispatch:
     inputs:
       canton:
@@ -183,6 +185,10 @@ jobs:
               node generator/scripts/generate-events-digest-article.mjs
             fi
           done
+
+      - name: Stamp updatedAt for changed article bodies
+        if: steps.mode.outputs.dry != 'true'
+        run: node scripts/ci/stamp-content-updated-at.mjs
 
       # ── La guardia sul percorso di scrittura (issue #275) ──────────────────
       #

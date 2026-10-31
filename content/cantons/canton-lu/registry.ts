@@ -87,6 +87,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'lucerna-forensic-nurses-violenza',
  category: 'novita',
  date: '2026-10-19T23:59:14.540Z',
+ updatedAt: '2026-10-20',
  image: '/images/blog/article-lucerna-forensic-nurses-violenza.webp',
  hasCalculator: true,
  articleType: 'news',

@@ -10,6 +10,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'permessi-edilizi-digitali-basel',
  category: 'novita',
  date: '2026-10-07T08:43:35.073Z',
+ updatedAt: '2026-10-08',
  image: '/images/blog/article-permessi-edilizi-digitali-basel.webp',
  hasCalculator: true,
  articleType: 'news',

@@ -10,6 +10,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'zugo-bilancio-2027-avanzzo-15-6-milioni-tasso-52',
  category: 'fiscale',
  date: '2026-10-07T08:41:12.746Z',
+ updatedAt: '2026-10-08',
  image: '/images/blog/article-zugo-bilancio-2027-avanzzo-15-6-milioni-tasso-52.webp',
  hasCalculator: true,
  articleType: 'news',

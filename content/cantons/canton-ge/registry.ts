@@ -21,6 +21,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'accordo-cure-oncologiche-ginevra',
  category: 'novita',
  date: '2026-10-07T08:57:01.058Z',
+ updatedAt: '2026-10-08',
  image: '/images/blog/article-accordo-cure-oncologiche-ginevra.webp',
  hasCalculator: true,
  articleType: 'news',

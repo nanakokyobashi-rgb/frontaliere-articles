@@ -30,7 +30,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const SLUG = 'costo-pendolare-auto-ticino-2026';
 const LOCALES = ['it', 'en', 'de', 'fr'];
-const REFRESHED_ON = '2026-09-24';
+const REFRESHED_ON = '2026-09-27';
 
 // Separatore delle migliaia: punto (it, de), virgola (en), spazio (fr).
 const n = (digits) => digits.replace(/^(\d+)(\d{3})$/, '$1[.,  ]$2');
