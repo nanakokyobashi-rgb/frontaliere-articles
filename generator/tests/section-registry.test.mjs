@@ -1650,7 +1650,8 @@ test('sitemap cantonale: uno slug IT provvisorio rifiuta l’identità prima del
 
 test('build-api: il pavimento RSS di famiglia ha il corpus come riferimento, non il parser del feed', () => {
   const build = readFileSync(path.join(ROOT, 'scripts/build-api.mjs'), 'utf8');
-  assert.match(build, /familyRssRows\.push\(\{ section: section\.id, source: countSourceArticles\(ROOT, section\.id\), emitted: sectionItems \}\)/);
+  assert.match(build, /const source = countSourceArticles\(ROOT, section\.id\)/);
+  assert.match(build, /familyRssRows\.push\(\{ section: section\.id, source: effectiveSource, emitted: sectionItems \}\)/);
   assert.doesNotMatch(build, /source: section\.articleCount/);
 });
 
