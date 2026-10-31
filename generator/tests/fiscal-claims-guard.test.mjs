@@ -82,6 +82,19 @@ test('quota SSN: gli intervalli si giudicano su entrambi gli estremi', () => {
   assert.equal(findTaxHealthParameterErrors('La tassa salute vale 2-5% del salario netto.').length, 1);
 });
 
+test('quota SSN: anche con sul/sulla/vom/on, e un errore solo per frase', () => {
+  assert.equal(findTaxHealthParameterErrors('La tassa salute è del 2% sul salario netto.').length, 1);
+  assert.equal(findTaxHealthParameterErrors('Die Gesundheitssteuer beträgt 8 % vom Nettolohn.').length, 1);
+  assert.equal(findTaxHealthParameterErrors('The health tax is 2% on net salary.').length, 1);
+  assert.equal(findTaxHealthParameterErrors('La tassa salute, cioe\' la quota SSN, vale il 9% del salario netto.').length, 1);
+  assert.equal(findTaxHealthParameterErrors('La tassa salute è del 5% sul salario netto.').length, 0);
+});
+
+test('data di vigore: anche in forma numerica', () => {
+  assert.deepEqual(ids('L\'Accordo è in vigore dal 1/1/2024 per i frontalieri.'), ['accordo-in-vigore-2024']);
+  assert.deepEqual(ids('Il Nuovo Accordo, in vigore dal 01.01.2024, cambia le regole.'), ['accordo-in-vigore-2024']);
+});
+
 test('retrocessione: la negazione e\' la frase corretta, nelle quattro lingue', () => {
   for (const sentence of [
     'Il 20% non viene retrocesso ai comuni.',
@@ -207,6 +220,12 @@ test('riparazione: un calcolo non si tocca, perche\' le righe dopo ne dipendono'
   const { text, arith } = repairFiscalText(source, 'blog-body/it/x.ts');
   assert.equal(text, source);
   assert.equal(arith.length, 1);
+});
+
+test('riparazione: due nomi della quota nella stessa frase non tagliano la frase dopo', () => {
+  const { text } = repairFiscalText('Primo. La tassa salute, cioe la quota SSN, vale il 9% del salario netto. Ultimo fatto intatto.', 'blog-body/it/x.ts');
+  assert.match(text, /Ultimo fatto intatto\.$/);
+  assert.doesNotMatch(text, /9%/);
 });
 
 test('riparazione: «mai in entrambi» e data di vigore cambiano solo l\'inciso', () => {

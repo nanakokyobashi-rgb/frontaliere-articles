@@ -97,7 +97,7 @@ const NEVER_BOTH = [
 
 /** L'Accordo e' in vigore dal 17/7/2023: dal 1/1/2024 si applica. */
 const IN_FORCE_2024 = [
-  [/\bin vigore dal(?:l)?\s+(1°?\s*(?:o\s+)?gennaio 2024)/gi, 'applicato dal $1'],
+  [/\bin vigore dal(?:l)?\s+(1°?\s*(?:o\s+)?gennaio 2024|0?1[/.]0?1[/.]2024)/gi, 'applicato dal $1'],
   [/\b(?:in force from|in force since|effective from)\s+((?:1 January|January 1,?) 2024)/gi, 'applied since $1'],
   [/\bentered into force on\s+((?:1 January|January 1,?) 2024)/gi, 'applied from $1'],
   [/\b(?:has been in force since|entered into force on|in force from|in force since)\s+1° gennaio 2024/gi, 'applied since 1 January 2024'],
@@ -189,7 +189,8 @@ export function repairFiscalText(input, rel, { replaceArithmetic = false } = {})
 function dropRefutedSentences(text, rel) {
   if (FABRICATED_TAX_HEALTH_ARTICLES.test(rel)) return text;
   let out = text;
-  for (const claim of findFiscalClaims(text).filter(({ id }) => id !== 'franchigia-7500').reverse()) {
+  const spans = new Map(findFiscalClaims(text).filter(({ id }) => id !== 'franchigia-7500').map((claim) => [claim.start, claim]));
+  for (const claim of [...spans.values()].sort((left, right) => right.start - left.start)) {
     out = out.slice(0, claim.start) + out.slice(claim.end);
   }
   return out;

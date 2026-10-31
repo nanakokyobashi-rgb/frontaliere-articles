@@ -87,7 +87,7 @@ export const CLAIM_RULES = Object.freeze([
   {
     id: 'accordo-in-vigore-2024',
     source: 'Accordo 2020 art. 8',
-    matches: (sentence) => /(accordo|agreement|abkommen|accord)[^.]{0,50}(in vigore dal|in force (?:from|since)|entered into force on|in kraft seit|en vigueur depuis)\s+(?:il\s+)?(?:1°?\s*(?:o\s+)?gennaio 2024|1\.?\s*(?:january|januar) 2024|january 1,? 2024|1er janvier 2024)/i.test(sentence),
+    matches: (sentence) => /(accordo|agreement|abkommen|accord)[^.]{0,50}(in vigore dal|in force (?:from|since)|entered into force on|in kraft seit|en vigueur depuis)\s+(?:il\s+|le\s+)?(?:1°?\s*(?:o\s+)?gennaio 2024|1\.?\s*(?:january|januar) 2024|january 1,? 2024|1er janvier 2024|0?1[/.]\s?0?1[/.]\s?2024)/i.test(sentence),
   },
 ]);
 
@@ -135,7 +135,7 @@ export function sentenceSpanAt(text, index, maxLength = 700) {
 const CANDIDATE_RE = new RegExp(
   `${AMOUNT_7500}|forfe?t+ari|flat[- ]rate|pauschal|forfaitaire|38[,.]8|\\b80\\s?%|\\b20\\s?%`
   + '|mai in entrambi|never in both|nie(?:mals)? in beiden|jamais dans les deux'
-  + '|gennaio 2024|january 2024|january 1,? 2024|januar 2024|janvier 2024',
+  + '|gennaio 2024|january 2024|january 1,? 2024|januar 2024|janvier 2024|\\b0?1[/.]\\s?0?1[/.]\\s?2024',
   'gi',
 );
 
@@ -161,7 +161,7 @@ export function findFiscalClaims(text) {
 }
 
 /** Una percentuale riferita alla paga: le altre (sondaggi, aumenti) non sono l'aliquota. */
-const RATE_ON_PAY_RE = /(\d{1,2}(?:[.,]\d)?)(?:\s?%?\s?(?:-|–|—|a|al|to|bis|à)\s?(\d{1,2}(?:[.,]\d)?))?\s?%\s+(?:del|dello|della|von|of|of the|des|du|de|de la)\s+(?:proprio\s+|their\s+|ihres\s+)?(?:reddit|salari|stipendi|income|salary|wage|einkommen|nettoeinkommen|bruttoeinkommen|lohn|gehalt|brutto|netto|revenu|salaire|gross|net)\w*(?:\s+(?:netto|lordo|net|gross|brut|brutto))?/gi;
+const RATE_ON_PAY_RE = /(\d{1,2}(?:[.,]\d)?)(?:\s?%?\s?(?:-|–|—|a|al|to|bis|à)\s?(\d{1,2}(?:[.,]\d)?))?\s?%\s+(?:del|dello|della|sul|sullo|sulla|von|vom|auf|auf den|auf das|of|of the|on|on the|des|du|de|de la|sur|sur le|sur la)\s+(?:proprio\s+|their\s+|ihres\s+)?(?:reddit|salari|stipendi|income|salary|wage|einkommen|nettoeinkommen|bruttoeinkommen|lohn|gehalt|brutto|netto|revenu|salaire|gross|net)\w*(?:\s+(?:netto|lordo|net|gross|brut|brutto))?/gi;
 
 /**
  * Quota SSN: la base e' il salario netto e la forchetta e' 3-6%. Un'affermazione
@@ -170,9 +170,14 @@ const RATE_ON_PAY_RE = /(\d{1,2}(?:[.,]\d)?)(?:\s?%?\s?(?:-|–|—|a|al|to|bis|
 export function findTaxHealthParameterErrors(text) {
   if (typeof text !== 'string') return [];
   const errors = [];
+  const seenSpans = new Set();
   const re = /(tassa (?:sulla )?salute|tassa sanitaria|quota ssn|health tax|gesundheitssteuer|gesundheitsabgabe|taxe (?:sur la )?sant[eé])/gi;
   for (const match of text.matchAll(re)) {
     const { start, end } = sentenceSpanAt(text, match.index);
+    // Due nomi della quota nella stessa frase sono un errore solo: chi consuma
+    // questi offset li toglie dal testo, e uno span doppio taglierebbe la frase dopo.
+    if (seenSpans.has(start)) continue;
+    seenSpans.add(start);
     const sentence = text.slice(start, end);
     for (const percent of sentence.matchAll(RATE_ON_PAY_RE)) {
       const values = [percent[1], percent[2]].filter(Boolean).map((value) => Number(value.replace(',', '.')));
