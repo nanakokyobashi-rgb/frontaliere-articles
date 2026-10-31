@@ -29,24 +29,24 @@ for (const relativePath of WORKFLOWS) {
     assert.doesNotMatch(source, /^\s+gh api\b/m, 'nessuna chiamata deve bypassare il wrapper');
     assert.equal(
       (source.match(/gh_api_timeout(?:\s|\()/g) || []).length,
-      5,
-      'quattro chiamate bounded piu\u0300 la definizione devono restare protette',
+      4,
+      'tre chiamate bounded piu\u0300 la definizione devono restare protette',
     );
     assert.match(
       source,
-      /actions\/workflows\/(?:generate-article\.yml|\$CALLER_WORKFLOW)\/runs\?per_page=100&status=\$status/,
-      'le run in volo devono essere lette per status',
+      /actions\/workflows\/(?:generate-article\.yml|\$CALLER_WORKFLOW)\/runs\?per_page=100&created=%3E%3D\$admission_since/,
+      'le run devono essere lette in una snapshot bounded',
     );
     assert.match(
       source,
-      /actions\/workflows\/(?:generate-article\.yml|\$CALLER_WORKFLOW)\/runs\?per_page=100&created=%3E%3D\$recent_since/,
-      'il tetto orario deve leggere solo la finestra recente',
+      /ALL_RUN_STATUSES='\["queued","in_progress","requested","waiting","pending","completed"\]'/,
+      'la snapshot deve validare tutti gli stati restituiti dall\'API',
     );
     const linkGate = source.indexOf('if [ "$is_link" = "true" ]; then');
-    const recentWindow = source.indexOf('created=%3E%3D$recent_since');
+    const snapshot = source.indexOf('created=%3E%3D$admission_since');
     assert.ok(
-      linkGate >= 0 && recentWindow > linkGate,
-      'la finestra oraria deve essere letta solo per gli anelli',
+      linkGate >= 0 && snapshot > source.indexOf('fail_closed_admission()'),
+      'la snapshot bounded deve essere parte del gate di ammissione',
     );
     assert.doesNotMatch(
       source,
