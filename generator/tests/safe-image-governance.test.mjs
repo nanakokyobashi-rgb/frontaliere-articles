@@ -7,6 +7,10 @@ import {
   classifyJournalistImage,
   editorialUploadMetadata,
 } from '../scripts/lib/journalist-image-policy.mjs';
+import {
+  ARTICLE_HERO_SAFETY_HINT,
+  articleHeroPromptArea,
+} from '../scripts/lib/article-cover-engine.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const read = (relative) => fs.readFileSync(path.join(ROOT, relative), 'utf8');
@@ -39,6 +43,15 @@ test('create-article usa solo il motore governato per nuove copertine', () => {
   assert.match(COVER_ENGINE, /topic: articleImageTopic/);
   assert.match(COVER_ENGINE, /place: articleImagePlace/);
   assert.match(COVER_ENGINE, /keywords: articleImageKeywords/);
+});
+
+test('i hero articolo trasformano i temi centrati sulle persone in metafore senza figure umane', () => {
+  const promptArea = articleHeroPromptArea('Svizzera');
+  assert.match(ARTICLE_HERO_SAFETY_HINT, /no human figures at all/i);
+  assert.match(promptArea, /no faces, hands, bodies, silhouettes, crowds/i);
+  assert.match(promptArea, /inanimate symbolic objects/i);
+  assert.match(articleHeroPromptArea('Svizzera', 'avoid readable text'), /avoid readable text/);
+  assert.match(COVER_ENGINE, /const promptArea = articleHeroPromptArea\(area, safetyHint\)/);
 });
 
 test('il publisher non scarica URL senza prova di licenza', () => {

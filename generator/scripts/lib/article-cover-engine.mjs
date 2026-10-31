@@ -31,6 +31,22 @@ export {
   articleImageKeywords,
 } from './article-cover-identity.mjs';
 
+// Article headlines often describe people, but the shared article-hero gate
+// rejects recognizable foreground people. Keep that policy from becoming a
+// prompt contradiction: use objects and environments as the visual metaphor
+// before the provider has a chance to turn a people-centred subject into a
+// rejected portrait or couple scene.
+export const ARTICLE_HERO_SAFETY_HINT = [
+  'Use an object-led editorial composition with no human figures at all: no faces, hands, bodies, silhouettes, crowds or recognizable people.',
+  'For people-centred topics, use inanimate symbolic objects or an empty relevant environment instead of depicting a person.',
+].join(' ');
+
+export function articleHeroPromptArea(area, safetyHint = '') {
+  return [area, ARTICLE_HERO_SAFETY_HINT, String(safetyHint || '').trim()]
+    .filter(Boolean)
+    .join('. ');
+}
+
 /**
  * Return the source-page identity the photo engine can actually compare for
  * one legacy credit record.
@@ -253,7 +269,7 @@ export async function generateGovernedArticleHero({
 } = {}) {
   const articleData = data || { id: articleId, title, imagePrompt };
   const assetId = articleImageAssetId(articleData);
-  const promptArea = [area, String(safetyHint || '').trim()].filter(Boolean).join('. ');
+  const promptArea = articleHeroPromptArea(area, safetyHint);
   const stagingDir = path.join(
     root,
     '.cache',
