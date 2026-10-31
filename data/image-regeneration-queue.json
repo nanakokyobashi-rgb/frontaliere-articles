@@ -5,51 +5,41 @@
       "articleId": "arianna-di-claudio-roma",
       "title": "Arianna di claudio alla festa del cinema di roma",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (vision gate rejected image: Generic synthetic train-station scene with a prominent foreground commuter; no readable text or logos, but it does not clearly match t",
+      "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (vision gate rejected image: Generic synthetic commuting scene with a recognizable foreground person; it does not clearly match Arianna di Claudio at the Rome Film",
       "status": "failed",
-      "failureCount": 17,
+      "failureCount": 18,
       "requestedAt": "2026-10-18T07:27:16.643Z",
-      "lastFailureAt": "2026-10-30T19:52:16.316Z"
+      "lastFailureAt": "2026-10-31T06:17:21.034Z"
     },
     {
       "articleId": "giovani-donne-stipendi-svizzera",
       "title": "Di più Le giovani svizzere guadagnano meno nonostante siano più istruite",
       "fallbackImage": "/images/blog/article-divario-reddito-giovani-svizzera.webp",
-      "reason": "All image providers failed for article-giovani-donne-stipendi-svizzera: openai-codex (vision gate rejected image: Synthetic editorial illustration relevant to education and pay inequality in Switzerland, but it includes a recognizable foreg",
+      "reason": "All image providers failed for article-giovani-donne-stipendi-svizzera: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to education and earnings disparity, but it contains a recognizable foreground pers",
       "status": "failed",
-      "failureCount": 15,
+      "failureCount": 16,
       "requestedAt": "2026-10-19T03:17:12.439Z",
-      "lastFailureAt": "2026-10-31T00:11:46.183Z"
+      "lastFailureAt": "2026-10-31T06:18:34.969Z"
     },
     {
       "articleId": "sanitari-italiani-fuga-svizzera",
       "title": "Operatori sanitari frontalieri: Como boccheggia",
       "fallbackImage": "/images/blog/article-confusione-tassa-salute-frontalieri.webp",
-      "reason": "All image providers failed for article-sanitari-italiani-fuga-svizzera: openai-codex (vision gate rejected image: Synthetic editorial illustration with a clear commuter in the foreground; no text, logo, recognizable face, or specific real e",
+      "reason": "All image providers failed for article-sanitari-italiani-fuga-svizzera: openai-codex (vision gate rejected image: Synthetic commuter scene relevant to cross-border healthcare commuting, but it includes a clearly visible foreground person.);",
       "status": "failed",
-      "failureCount": 14,
+      "failureCount": 15,
       "requestedAt": "2026-10-23T15:23:52.650Z",
-      "lastFailureAt": "2026-10-31T00:12:49.574Z"
+      "lastFailureAt": "2026-10-31T06:20:21.519Z"
     },
     {
       "articleId": "cisl-ricerca-lavoratori-ritiene",
       "title": "55,6% lavoratori frontalieri ritiene stipendio inferiore a residente svizzero",
       "fallbackImage": "/images/blog/article-ricerca-cisl-frontalieri-2026.webp",
-      "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to cross-border commuting in Ticino, but it contains a recognizable foreground pers",
+      "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (vision gate rejected image: Generic synthetic commuter scene with no readable text, logos, or identifiable face, but a recognizable foreground person is p",
       "status": "failed",
-      "failureCount": 14,
+      "failureCount": 15,
       "requestedAt": "2026-10-24T19:06:53.846Z",
-      "lastFailureAt": "2026-10-31T00:13:57.061Z"
-    },
-    {
-      "articleId": "sindacati-aumenti-infermieri-ticino",
-      "title": "Infermieri sociopsichiatrici: sindacati chiedono aumenti fino a 8'941 franchi",
-      "fallbackImage": "/images/blog/article-ocst-storia-frontalieri-ticino.webp",
-      "reason": "All image providers failed for article-sindacati-aumenti-infermieri-ticino: openai-codex (vision gate rejected image: Generic synthetic editorial illustration relevant to a healthcare worker and cross-border commuting, but it contains a rec",
-      "status": "failed",
-      "failureCount": 1,
-      "requestedAt": "2026-10-30T20:19:38.286Z",
-      "lastFailureAt": "2026-10-31T00:15:56.741Z"
+      "lastFailureAt": "2026-10-31T06:21:37.165Z"
     }
   ]
 }
