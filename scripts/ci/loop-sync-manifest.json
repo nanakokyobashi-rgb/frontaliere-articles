@@ -4096,7 +4096,7 @@
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
         "corpusPath": "host/shell-contract-fingerprint.json",
         "scalarFields": 22,
-        "sha256": "cddf19de2a6f800c7c78bf18a9477caa0cb9a6df1230253730eabcf0af25056b"
+        "sha256": "aa8af3a66d51ca2fbe172f10d29eaa4d47502eb4c0587cd9d8741cb0120958de"
       }
     },
     {
@@ -4135,9 +4135,9 @@
       "sitePath": "services/seo/organizationLd.ts",
       "mode": "identical",
       "baseline": {
-        "site": "33f33cecc52a42da",
-        "corpus": "33f33cecc52a42da",
-        "alignedAt": "2026-10-25"
+        "site": "5249a1233adfaa84",
+        "corpus": "5249a1233adfaa84",
+        "alignedAt": "2026-10-31"
       }
     },
     {
