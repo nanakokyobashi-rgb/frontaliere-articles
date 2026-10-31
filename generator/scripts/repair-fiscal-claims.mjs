@@ -102,6 +102,7 @@ const IN_FORCE_2024 = [
   [/\bentered into force on\s+((?:1 January|January 1,?) 2024)/gi, 'applied from $1'],
   [/\b(?:has been in force since|entered into force on|in force from|in force since)\s+1° gennaio 2024/gi, 'applied since 1 January 2024'],
   [/\bin Kraft seit\s+(1\.\s*Januar 2024)/gi, 'anwendbar seit $1'],
+  [/\bseit\s+(dem\s+)?(1\.\s*Januar 2024)\s+in Kraft/gi, 'seit dem $2 anwendbar'],
   [/\ben vigueur depuis\s+(?:le\s+)?(1er janvier 2024)/gi, 'appliqué depuis le $1'],
 ];
 

@@ -55,6 +55,20 @@ test('gli altri falsi: forfait sanitario, 38,8%, credito 80%, retrocessione, ent
   assert.deepEqual(ids('Il Nuovo Accordo Frontalieri, in vigore dal 1° gennaio 2024, cambia le regole.'), ['accordo-in-vigore-2024']);
 });
 
+test('le stesse affermazioni nelle traduzioni, in ogni ordine naturale', () => {
+  assert.deepEqual(ids('They also get a flat-rate health deduction of €3,000.'), ['deduzione-forfetaria-sanitaria']);
+  assert.deepEqual(ids('Dazu kommt ein pauschaler Gesundheitsabzug von 3.000 €.'), ['deduzione-forfetaria-sanitaria']);
+  assert.deepEqual(ids('The remaining 20% is returned to Italian municipalities.'), ['retrocessione-20']);
+  assert.deepEqual(ids('20 % wird an die Gemeinden zurückerstattet.'), ['retrocessione-20']);
+  assert.deepEqual(ids('Das Abkommen ist seit dem 1. Januar 2024 in Kraft.'), ['accordo-in-vigore-2024']);
+});
+
+test('i falsi amici non scattano', () => {
+  assert.deepEqual(ids('Health insurance premiums count only for the share above the flat-rate deduction.'), []);
+  assert.deepEqual(ids('The 20% is not returned to municipalities.'), []);
+  assert.deepEqual(ids('Das Abkommen ist seit dem 17. Juli 2023 in Kraft.'), []);
+});
+
 test('le frasi corrette passano', () => {
   for (const sentence of [
     'La Svizzera preleva al massimo l\'80% dell\'imposta ordinaria e l\'Italia riconosce il credito entro la quota IRPEF.',

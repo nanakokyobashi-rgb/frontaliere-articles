@@ -42,7 +42,8 @@ const EURO_RE = /(€|\beuro|\beur\b)/i;
 const MONTHLY_RE = /(al mese|mensil|\/mese|per month|a month|monthly|pro monat|monatlich|par mois|mensuel)/i;
 const HISTORIC_RE = /(fino al 2023|prima del 2024|until 2023|before 2024|bis 2023|vor 2024|jusqu.en 2023|avant 2024)/i;
 
-const NEGATED_RETROCESSION_RE = /(?:\bnon\b|\bnessun[ao]?\b|\bnot\b|\bno\b|\bnicht\b|\bkein\w*|\bne\b|\bn['’]|\baucun\w*)[^.]{0,40}(?:retrocess|r[eé]troc[eé]d)/i;
+const RETURNED_VERBS = 'retrocess|riversat|restituit|rimborsat|returned|rebated|refunded|paid back|r[eé]troc[eé]d|revers[eé]|rembours[eé]|zur[uü]ck(?:erstatt|gegeben|gezahlt|fl[iï]e(?:ss|ß)t)|r[uü]ckerstatt';
+const NEGATED_RETROCESSION_RE = new RegExp(`(?:\\bnon\\b|\\bnessun[ao]?\\b|\\bnot\\b|\\bno\\b|\\bnicht\\b|\\bkein\\w*|\\bne\\b|\\bn['’]|\\baucun\\w*)[^.]{0,40}(?:${RETURNED_VERBS})`, 'i');
 
 export const CLAIM_RULES = Object.freeze([
   {
@@ -58,7 +59,10 @@ export const CLAIM_RULES = Object.freeze([
   {
     id: 'deduzione-forfetaria-sanitaria',
     source: 'L. 83/2023 art. 5; L. 213/2023 cc. 237-239',
-    matches: (sentence) => /(deduzione|deduction|abzug|d[eé]duction)[^.]{0,30}(forfe?t+ari|flat[- ]rate|pauschal|forfaitaire)[^.]{0,30}(sanitari|health|gesundheit|sant[eé])/i.test(sentence),
+    // Forfait e sanita' devono stare vicini: «the flat-rate deduction» accanto ai
+    // premi malattia e' un istituto svizzero vero, non questa affermazione.
+    matches: (sentence) => /(deduzion|deduction|abzug|abz[uü]ge|d[eé]duction)/i.test(sentence)
+      && /(forfe?t+ari\w*|flat[- ]rate|pauschal\w*|forfaitaire)\W+(?:\w+\W+){0,2}(sanitari|health|gesundheit|sant[eé])|(sanitari\w*|health|gesundheit\w*|sant[eé])\W+(?:\w+\W+){0,2}(forfe?t+ari|flat[- ]rate|pauschal|forfaitaire)/i.test(sentence),
   },
   {
     id: 'ristorni-38-8',
@@ -75,8 +79,8 @@ export const CLAIM_RULES = Object.freeze([
   {
     id: 'retrocessione-20',
     source: 'Accordo 2020 art. 3',
-    matches: (sentence) => /\b20\s?%[^.]{0,40}(retrocess|r[eé]troc[eé]d)/i.test(sentence)
-      && /(frontalier|grenzg|cross-border|comun|municip)/i.test(sentence)
+    matches: (sentence) => new RegExp(`\\b20\\s?%[^.]{0,40}(?:${RETURNED_VERBS})`, 'i').test(sentence)
+      && /(frontalier|grenzg|cross-border|comun|municip|gemeinde|commune)/i.test(sentence)
       && !NEGATED_RETROCESSION_RE.test(sentence),
   },
   {
@@ -87,7 +91,7 @@ export const CLAIM_RULES = Object.freeze([
   {
     id: 'accordo-in-vigore-2024',
     source: 'Accordo 2020 art. 8',
-    matches: (sentence) => /(accordo|agreement|abkommen|accord)[^.]{0,50}(in vigore dal|in force (?:from|since)|entered into force on|in kraft seit|en vigueur depuis)\s+(?:il\s+|le\s+)?(?:1°?\s*(?:o\s+)?gennaio 2024|1\.?\s*(?:january|januar) 2024|january 1,? 2024|1er janvier 2024|0?1[/.]\s?0?1[/.]\s?2024)/i.test(sentence),
+    matches: (sentence) => /abkommen[^.]{0,60}seit\s+(?:dem\s+)?(?:1\.\s*januar 2024|0?1\.\s?0?1\.\s?2024)\s+in kraft/i.test(sentence) || /(accordo|agreement|abkommen|accord)[^.]{0,50}(in vigore dal|in force (?:from|since)|entered into force on|in kraft seit|en vigueur depuis)\s+(?:il\s+|le\s+)?(?:1°?\s*(?:o\s+)?gennaio 2024|1\.?\s*(?:january|januar) 2024|january 1,? 2024|1er janvier 2024|0?1[/.]\s?0?1[/.]\s?2024)/i.test(sentence),
   },
 ]);
 
