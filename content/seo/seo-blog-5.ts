@@ -49346,7 +49346,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-franchigia-doganale-acquisti-svizzera': {
     title: 'Franchigia doganale acquisti svizzera: limiti e conseguenze per i frontalieri',
-    description: 'La franchigia doganale per gli acquisti in Svizzera è stata aumentata a €10\'000 per i nuovi frontaliere. I vecchi frontalieri restano tassati solo in Svizzera (art. 9 dell\'Accordo del 2020).',
+    description: 'Franchigia doganale in Svizzera: limiti per gli acquisti e conseguenze per i frontalieri. Regole aggiornate per nuovi e vecchi frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, franchigia, doganale, acquisti, limiti',
     ogTitle: 'Franchigia doganale acquisti svizzera: limiti e conseguenze per i frontalieri',
     ogDescription: 'La franchigia doganale per gli acquisti in Svizzera è stata aumentata a €10\'000 per i nuovi frontaliere.',
@@ -55015,7 +55015,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-lite-lombardia-svizzera-frontalieri': {
     title: 'Lite Lombardia e Svizzera: il nodo fiscale dei frontalieri',
-    description: 'I nuovi frontalieri hanno una franchigia IRPEF di 10.000 euro, mentre i vecchi frontalieri restano tassati solo in Svizzera (art. 9 dell\'Accordo del 2020). Guida alla fiscalità Ticino-Italia dal 2024.',
+    description: 'Lite fiscale tra Lombardia e Svizzera: cosa cambia per i frontalieri e come si applica la tassazione Ticino-Italia dal 2024.',
     keywords: 'frontalieri, ticino, svizzera, italia, lite, lombardia, nodo, fiscale',
     ogTitle: 'Lite Lombardia e Svizzera: Tasse Vecchi Frontalieri',
     ogDescription: 'Scopri cosa cambia con il Nuovo Accordo Frontalieri 2024: esenzioni, franchigie e gestione dell\'imposta alla fonte tra Ticino e Italia.',
@@ -69795,7 +69795,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     description: 'Guida al nuovo accordo frontalieri 2024: tassazione, imposta alla fonte svizzera, franchigie, dichiarazione redditi italiana, Permesso G e credito d\'imposta.',
     keywords: 'frontalieri, ticino, svizzera, italia, vivere, ferrera, varese, lavorare',
     ogTitle: 'Vivere a Ferrera di Varese e lavorare in Ticino da frontaliere',
-    ogDescription: 'Nuovo accordo frontalieri 2024 in vigore dal 1° gennaio: scopri come gestire tassazione, contributi AVS/LPP, LAMal, dichiarazione redditi e ristorni se vivi a Ferrera di Varese e lavori nel Canton Ticino. I nuovi frontalieri hanno una franchigia IRPEF di 10.000 euro, mentre i vecchi frontalieri restano tassati solo in Svizzera (art. 9 dell\'Accordo del 2020).',
+    ogDescription: 'Ferrera di Varese e Ticino: guida a tassazione, AVS/LPP, LAMal, dichiarazione dei redditi e ristorni per i frontalieri.',
     canonicalPath: '/articoli-frontaliere/ferrera-varese-frontaliere-ticino',
     structuredData: {
       "@context": "https://schema.org",
@@ -71228,7 +71228,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     description: 'Credito d\'imposta 2026 per frontalieri: calcolo del quadro CE, franchigia €10.000 (nuovi), dichiarazione 730 e checklist operativa',
     keywords: 'frontalieri, ticino, svizzera, italia, credito, imposta, oltre, gennaio',
     ogTitle: 'Credito d\'imposta 2026: la guida frontalieri oltre 20 km',
-    ogDescription: 'Dal 1° gennaio 2024 il Nuovo Accordo riforma il credito d\'imposta. I nuovi frontalieri hanno una franchigia IRPEF di 10.000 euro, mentre i vecchi frontalieri restano tassati solo in Svizzera (art. 9 dell\'Accordo del 2020). Quadro CE 730 e calcolo nel 2026: guida pratica.',
+    ogDescription: 'Credito d\'imposta 2026 per frontalieri oltre 20 km: quadro CE, franchigia e modello 730.',
     canonicalPath: '/articoli-frontaliere/credito-dichiarazione-redditi-2026',
     structuredData: {
       "@context": "https://schema.org",
@@ -71384,7 +71384,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     description: 'Coordinamento AVS-INPS per frontalieri con famiglia nel 2026: franchigie, totalizzazione, busta paga e pianificazione previdenziale con figli. Dati aggiornati',
     keywords: 'frontalieri, ticino, svizzera, italia, pensione, coordinamento, avs-inps, franchigia',
     ogTitle: 'Pensione frontaliere 2026: coordinamento AVS-INPS',
-    ogDescription: 'Nel 2026 il coordinamento AVS-INPS diventa cruciale per i frontalieri con figli. I nuovi frontalieri hanno una franchigia IRPEF di 10.000 euro, mentre i vecchi frontalieri restano tassati solo in Svizzera (art. 9 dell\'Accordo del 2020). Piano previdenziale e checklist operativa.',
+    ogDescription: 'Pensione dei frontalieri con figli nel 2026: coordinamento AVS-INPS, totalizzazione e pianificazione previdenziale.',
     canonicalPath: '/articoli-frontaliere/coordinamento-pensione-famiglia-figli-2026',
     structuredData: {
       "@context": "https://schema.org",
@@ -71883,7 +71883,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-vivere-carimate-lavorare-ticino-frontaliere': {
     title: 'Vivere a Carimate, lavorare in Ticino: vantaggi e svantaggi',
-    description: 'I nuovi frontalieri hanno una franchigia IRPEF di 10.000 euro, mentre i vecchi frontalieri restano tassati solo in Svizzera (art. 9 dell\'Accordo del 2020). Dati aggiornati 2026',
+    description: 'Vivere a Carimate e lavorare in Ticino: guida fiscale aggiornata 2026 per i frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, vivere, carimate, lavorare, vantaggi',
     ogTitle: 'Vivere a Carimate e lavorare in Ticino da frontaliere',
     ogDescription: 'I nuovi frontalieri hanno una franchigia IRPEF di 10.000 euro, mentre i vecchi frontalieri restano tassati solo in Svizzera (art. 9 dell\'Accordo del 2020).',
@@ -74452,10 +74452,10 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-silandro-grigioni-tassazione-permesso-g': {
     title: 'Vivere a Silandro e lavorare in Grigioni: guida fiscale',
-    description: 'I nuovi frontalieri hanno una franchigia IRPEF di 10.000 euro, mentre i vecchi frontalieri restano tassati solo in Svizzera (art. 9 dell\'Accordo del 2020). Imposta alla fonte in Svizzera, credito d\'imposta',
+    description: 'Vivere a Silandro e lavorare nei Grigioni: imposta alla fonte, credito d\'imposta, AVS, LPP e permesso G.',
     keywords: 'frontalieri, ticino, svizzera, italia, vivere, silandro, lavorare, grigioni',
     ogTitle: 'Vivere a Silandro e lavorare in Grigioni: guida fiscale',
-    ogDescription: 'I nuovi frontalieri hanno una franchigia IRPEF di 10.000 euro, mentre i vecchi frontalieri restano tassati solo in Svizzera (art. 9 dell\'Accordo del 2020). Imposta alla fonte in Svizzera, credito d\'imposta in Italia. AVS e LPP versati solo in Svizzera.',
+    ogDescription: 'Silandro e Grigioni: imposta alla fonte, credito d\'imposta in Italia, AVS, LPP e permesso G per frontalieri.',
     canonicalPath: '/articoli-frontaliere/silandro-grigioni-tassazione-permesso-g',
     structuredData: {
       "@context": "https://schema.org",
@@ -74879,7 +74879,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     description: 'Imposta alla fonte Ticino: aliquote federali 2026, esenzioni frontalieri €10\'000, credito d\'imposta italiano e simulatore passo passo. Dati aggiornati',
     keywords: 'frontalieri, ticino, svizzera, italia, calcolare, imposta, alla, fonte',
     ogTitle: 'Busta paga dei frontalieri: simulare l\'imposta alla fonte',
-    ogDescription: 'Frontalieri Ticino–Italia: come calcolare l\'imposta alla fonte sulla busta paga svizzera 2026. I nuovi frontalieri hanno una franchigia IRPEF di 10.000 euro, mentre i vecchi frontalieri restano tassati solo in Svizzera (art. 9 dell\'Accordo del 2020). Passo passo per il 730.',
+    ogDescription: 'Simulatore busta paga frontalieri Ticino 2026: calcolo dell\'imposta alla fonte e passaggi per il 730.',
     canonicalPath: '/articoli-frontaliere/simulatore-busta-paga-ticino-frontalieri',
     structuredData: {
       "@context": "https://schema.org",
@@ -78780,7 +78780,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-imposte-frontalieri-20km-distanza': {
     title: 'Frontalieri oltre 20 km: come cambia la tassazione',
-    description: 'I nuovi frontalieri hanno una franchigia IRPEF di 10.000 euro, mentre i vecchi frontalieri restano tassati solo in Svizzera (art. 9 dell\'Accordo del 2020). Ristorni, credito d\'imposta, procedura 730. Guida',
+    description: 'Frontalieri oltre 20 km: tassazione, ristorni, credito d\'imposta e procedura 730 dopo il nuovo accordo.',
     keywords: 'frontalieri, ticino, svizzera, italia, oltre, cambia, tassazione, nuovo',
     ogTitle: 'Frontalieri oltre 20 km: come cambia la tassazione',
     ogDescription: 'Il Nuovo Accordo Frontalieri (1° gennaio 2024) modifica agevolazioni e calcolo imposte. Scopri esenzione €10.000, IRPEF 23-43%, credito d\'imposta, ristorni 730 e procedure step-by-step per frontalieri Ticino-Italia.',
@@ -78970,7 +78970,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-frontaliere-esenzione-franchigia-2026': {
     title: 'Frontalieri 2026: esenzione vs franchigia dopo accordo',
-    description: 'Accordo Frontalieri 2024: regole tassazione 2026. I nuovi frontalieri hanno una franchigia IRPEF di 10.000 euro, mentre i vecchi frontalieri restano tassati solo in Svizzera (art. 9 dell\'Accordo del 2020). Credito d\'imposta e dichiarazione Agenzia Entrate.',
+    description: 'Frontalieri 2026: differenza tra esenzione e franchigia, credito d\'imposta e dichiarazione dei redditi in Italia.',
     keywords: 'frontalieri, ticino, svizzera, italia, esenzione, franchigia, dopo, accordo',
     ogTitle: 'Frontalieri 2026: esenzione vs franchigia dopo accordo',
     ogDescription: 'I nuovi frontalieri hanno una franchigia IRPEF di 10.000 euro, mentre i vecchi frontalieri restano tassati solo in Svizzera (art. 9 dell\'Accordo del 2020). Scopri credito d\'imposta e dichiarazione dei redditi in Italia.',
@@ -79748,7 +79748,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     description: 'Cambiare lavoro da frontaliere over 55: impatto su Permesso G, imposta alla fonte, LPP, esenzione €10\'000 dal Nuovo Accordo 2024.',
     keywords: 'frontalieri, ticino, svizzera, italia, over, cambio, lavoro, cosa',
     ogTitle: 'Frontaliere over 55, cambio lavoro: cosa sapere',
-    ogDescription: 'Ricollocarsi dopo i 55 anni da frontaliere: Permesso G, imposta alla fonte, LPP, esenzione €10\'000. I nuovi frontalieri hanno una franchigia IRPEF di 10.000 euro, mentre i vecchi frontalieri restano tassati solo in Svizzera (art. 9 dell\'Accordo del 2020).',
+    ogDescription: 'Frontaliere over 55: ricollocazione in Svizzera, Permesso G, imposta alla fonte, LPP e regole dell\'accordo 2024.',
     canonicalPath: '/articoli-frontaliere/over-55-frontaliere-ricollocamento-lavoro',
     structuredData: {
       "@context": "https://schema.org",
@@ -80876,10 +80876,10 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-credito-2026-famiglia-calcolo-limiti': {
     title: 'Credito d\'imposta 2026: calcolo per famiglia con figli',
-    description: 'Guida al credito d\'imposta per frontalieri con figli nel 2026. I nuovi frontalieri hanno una franchigia IRPEF di 10.000 euro, mentre i vecchi frontalieri restano tassati solo in Svizzera (art. 9 dell\'Accordo del 2020).',
+    description: 'Credito d\'imposta 2026 per frontalieri con figli: calcolo, franchigia e dichiarazione italiana.',
     keywords: 'frontalieri, ticino, svizzera, italia, credito, imposta, calcolo, famiglia',
     ogTitle: 'Credito d\'imposta 2026: calcolo per famiglia con figli',
-    ogDescription: 'Come calcolare il credito d\'imposta nel quadro CE della dichiarazione italiana per frontalieri con figli nel 2026? I nuovi frontalieri hanno una franchigia IRPEF di 10.000 euro, mentre i vecchi frontalieri restano tassati solo in Svizzera (art. 9 dell\'Accordo del 2020).',
+    ogDescription: 'Credito d\'imposta 2026 per frontalieri con figli: calcolo nel quadro CE e regole della dichiarazione italiana.',
     canonicalPath: '/articoli-frontaliere/credito-2026-famiglia-calcolo-limiti',
     structuredData: {
       "@context": "https://schema.org",
@@ -82745,7 +82745,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-crodo-frontaliere-guida-pratica': {
     title: 'Crodo: guida per frontalieri che lavorano in Ticino',
-    description: 'Crodo offre costo della vita basso per frontalieri del Ticino. Permesso G, fisco, AVS/LPP, LAMal, valichi, ristorni. I nuovi frontalieri hanno una franchigia IRPEF di 10.000 euro, mentre i vecchi frontalieri restano tassati solo in Svizzera (art. 9 dell\'Accordo del 2020).',
+    description: 'Crodo per frontalieri in Ticino: costo della vita, permesso G, fisco, AVS/LPP, LAMal e valichi.',
     keywords: 'frontalieri, ticino, svizzera, italia, crodo, lavorano, offre, costo',
     ogTitle: 'Crodo: guida per frontalieri che lavorano in Ticino',
     ogDescription: 'Crodo (Piemonte) è ideale per frontalieri: costo della vita basso, accesso rapido valichi, nuovo accordo 2024 con esenzione €7.500 (vecchi frontalieri). Scopri permesso G, fisco, AVS/LPP, LAMal, ristorni e come trasferirsi.',
@@ -83592,10 +83592,10 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-frontaliere-730-ristorni-2026': {
     title: 'Detrazioni fiscali frontalieri Italia 2026 | Frontaliere Ticino',
-    description: 'Nuovo Accordo Frontalieri dal 2024: come recuperare le tasse con il 730. I nuovi frontalieri hanno una franchigia IRPEF di 10.000 euro, mentre i vecchi frontalieri restano tassati solo in Svizzera (art. 9 dell\'Accordo del 2020). Ristorni e credito d\'imposta spiegati.',
+    description: 'Frontalieri e 730 2026: come recuperare le tasse, gestire ristorni e credito d\'imposta.',
     keywords: 'frontalieri, ticino, svizzera, italia, detrazioni, fiscali, nuovo, accordo',
     ogTitle: 'Detrazioni fiscali frontalieri Italia 2026',
-    ogDescription: 'Nuovo Accordo Frontalieri dal 2024: come recuperare le tasse con il 730. I nuovi frontalieri hanno una franchigia IRPEF di 10.000 euro, mentre i vecchi frontalieri restano tassati solo in Svizzera (art. 9 dell\'Accordo del 2020). Ristorni e credito d\'imposta spiegati.',
+    ogDescription: 'Frontalieri e 730 2026: guida a recupero delle tasse, ristorni e credito d\'imposta.',
     canonicalPath: '/articoli-frontaliere/frontaliere-730-ristorni-2026',
     structuredData: {
       "@context": "https://schema.org",
@@ -85509,7 +85509,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     description: 'Guida pratica busta paga frontalieri: come leggere le trattenute (imposta fonte, AVS, LPP, LAMal), calcolare il netto, recuperare tasse nel 730 con franchigia',
     keywords: 'frontalieri, ticino, svizzera, italia, busta, paga, pratica, leggi',
     ogTitle: 'Busta paga frontalieri Svizzera 2026: trattenute e calcolo netto',
-    ogDescription: 'Scopri come leggere la busta paga frontaliera svizzera: imposta fonte, AVS 5.3%, LPP 7–18%, LAMal. Calcola il netto reale, recupera tasse nel 730. I nuovi frontalieri hanno una franchigia IRPEF di 10.000 euro, mentre i vecchi frontalieri restano tassati solo in Svizzera (art. 9 dell\'Accordo del 2020).',
+    ogDescription: 'Busta paga svizzera dei frontalieri: imposta alla fonte, AVS, LPP, LAMal, calcolo del netto e recupero nel 730.',
     canonicalPath: '/articoli-frontaliere/frontalieri-come-calcolare-busta-paga',
     structuredData: {
       "@context": "https://schema.org",
@@ -97197,7 +97197,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-carugo-ticino-fisco': {
     title: 'Vivere a Carugo e lavorare in Ticino da frontaliere',
-    description: 'I nuovi frontalieri hanno una franchigia IRPEF di 10.000 euro, mentre i vecchi frontalieri restano tassati solo in Svizzera (art. 9 dell\'Accordo del 2020). Dati aggiornati 2026',
+    description: 'Vivere a Carugo e lavorare in Ticino: guida fiscale 2026 su accordo, imposte e contributi per frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, vivere, carugo, lavorare, accordo',
     ogTitle: 'Carugo-Ticino: guida fiscale per frontalieri',
     ogDescription: 'Chi valuta di vivere a Carugo e lavorare in Ticino deve distinguere vecchi e nuovi frontalieri, leggere la trattenuta svizzera e separare AVS, LPP e LAMal. Una guida pratica per evitare confronti fiscali errati.',
@@ -111770,7 +111770,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-frontaliere-tasse-dopo-licenziamento': {
     title: 'Licenziamento frontaliere 2026: diritti fiscali e contributi',
-    description: 'Il Nuovo Accordo Frontalieri vale dal 1° gennaio 2024. I vecchi frontalieri restano tassati solo in Svizzera (art. 9 dell\'Accordo del 2020). Nuovi frontalieri: franchigia di €10\'000',
+    description: 'Licenziamento del frontaliere nel 2026: diritti fiscali, contributi e regole per i nuovi frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, licenziamento, diritti, fiscali, contributi',
     ogTitle: 'Licenziamento frontaliere 2026: diritti fiscali e contributi',
     ogDescription: 'Il Nuovo Accordo Frontalieri vale dal 1° gennaio 2024.',
