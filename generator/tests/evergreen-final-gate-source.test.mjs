@@ -40,6 +40,11 @@ import { fileURLToPath } from 'node:url';
 import { runFactualityGates, formatIssues } from '../scripts/lib/article-factuality-gates.mjs';
 import { checkCorpusFabricatedInstitutionNames } from '../scripts/lib/corpus-fabricated-institution-names.mjs';
 import { findArticleLocalizedToponymMismatches } from '../scripts/lib/localized-toponyms.mjs';
+import {
+  CLAIM_LOCALES,
+  repairEditorialClaims,
+  assertNoEditorialClaims,
+} from '../../engine/shared/editorialClaims.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CREATE_ARTICLE = path.resolve(HERE, '../scripts/create-article.mjs');
@@ -84,7 +89,10 @@ const GATE_SRC = [
   cutFunctionIfPresent('factualityGateSourceText'),
   cutFunctionIfPresent('assertItalianArticlePassesFactualityGates'),
   cutFunction('collectPublishedTextValues'),
+  cutFunction('repairEditorialClaimsInObject'),
+  cutFunction('repairArticleEditorialClaims'),
   cutFunction('assertArticlePassesFactualityGates'),
+  cutFunction('assertPublishedEditorialClaims'),
   cutFunction('assertNoCorpusFabricatedInstitutionNames'),
   cutFunctionIfPresent('assertLocalizedToponyms'),
 ].join('\n');
@@ -100,6 +108,9 @@ function makeGate() {
     'checkStatsAstraCountFidelity',
     'joinBodySections',
     'assertTranslationsPassFactualityGates',
+    'CLAIM_LOCALES',
+    'repairEditorialClaims',
+    'assertNoEditorialClaims',
     'checkCorpusFabricatedInstitutionNames',
     'findArticleLocalizedToponymMismatches',
     `${GATE_SRC}\nreturn assertArticlePassesFactualityGates;`,
@@ -113,6 +124,9 @@ function makeGate() {
     () => ({ passed: true }),
     (content) => Object.values(content).join(' '),
     (data) => { translationCalls.push(data); },
+    CLAIM_LOCALES,
+    repairEditorialClaims,
+    assertNoEditorialClaims,
     checkCorpusFabricatedInstitutionNames,
     findArticleLocalizedToponymMismatches,
   );
