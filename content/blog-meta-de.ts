@@ -13653,6 +13653,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.massagno-moltiplicatore-2027.title': 'Massagno schlägt für 2027 einen Steuerfuss von 77% vor',
     'blog.article.massagno-moltiplicatore-2027.excerpt': 'Massagno schlägt 77% für das Budget 2027 vor Der erwartete Fehlbetrag beträgt 528\'142 Franken Nettoinvestitionen in Höhe von 7\'732\'000 Franken Das Gemeindeparlament',
     'blog.article.massagno-moltiplicatore-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.voto-cinque-temi-28-febbraio.title': 'Fünf Themen stehen am 28. Februar 2027 zur Abstimmung',
+    'blog.article.voto-cinque-temi-28-febbraio.excerpt': 'Am 28. Februar 2027 wird die Bevölkerung über fünf Themen abstimmen Die Kernenergie ist der Gegenvorschlag zu «Stop al blackout» Foie gras und Einbürgerung kommen mit zwei',
+    'blog.article.voto-cinque-temi-28-febbraio.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaDe;

@@ -13654,6 +13654,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.massagno-moltiplicatore-2027.title': 'Massagno proposes a tax multiplier of 77% for 2027',
     'blog.article.massagno-moltiplicatore-2027.excerpt': 'Massagno proposes 77% for the 2027 budget The projected deficit is 528\'142 francs Net investments amount to 7\'732\'000 francs The municipal council',
     'blog.article.massagno-moltiplicatore-2027.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.voto-cinque-temi-28-febbraio.title': 'Five issues on the ballot on February 28, 2027',
+    'blog.article.voto-cinque-temi-28-febbraio.excerpt': 'On February 28, 2027 the population will vote on five issues Nuclear power is the counterproposal to “Stop the blackout” Foie gras and naturalization come with two',
+    'blog.article.voto-cinque-temi-28-febbraio.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaEn;

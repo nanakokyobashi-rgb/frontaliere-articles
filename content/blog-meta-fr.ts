@@ -13656,6 +13656,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.massagno-moltiplicatore-2027.title': 'Massagno propose un multiplicateur d\'impôt de 77% pour 2027',
     'blog.article.massagno-moltiplicatore-2027.excerpt': 'Massagno propose 77% pour le budget 2027 Le déficit prévu est de 528\'142 francs Investissements nets de 7\'732\'000 francs Le Conseil communal',
     'blog.article.massagno-moltiplicatore-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.voto-cinque-temi-28-febbraio.title': 'Cinq objets soumis au vote le 28 février 2027',
+    'blog.article.voto-cinque-temi-28-febbraio.excerpt': 'Le 28 février 2027 la population votera sur cinq objets Le nucléaire est le contre-projet à «Stop al blackout» Le foie gras et la naturalisation arrivent avec deux',
+    'blog.article.voto-cinque-temi-28-febbraio.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaFr;
