@@ -47,6 +47,8 @@ import {
   articleIndexExclusionKey,
   loadArticleIndexExclusions,
 } from '../engine/shared/articleIndexExclusions.mjs';
+import { ARTICLE_SECTION_CORE_ALL } from '../engine/shared/articleSectionCore.mjs';
+import { unknownIndexExclusionKeys } from './lib/article-index-exclusions-check.mjs';
 // repairSerpSnippet vive in clauseTail.mjs (un .mjs) proprio perche' questo file
 // non puo' importare un .ts: e' la sorgente unica che il layer TS riesporta.
 // Senza passarla, rssFeeds.mjs spedirebbe le description verbatim (#5453).
@@ -692,6 +694,19 @@ const indexExclusions = loadArticleIndexExclusions(
   ARTICLE_INDEX_EXCLUSIONS_FILES.map((candidate) => path.join(ROOT, candidate)),
 );
 console.log(`[build-api] articoli esclusi dall'indice: ${indexExclusions.size}`);
+{
+  const publishedSections = new Set(PUBLISHED_API_SECTIONS.map((section) => section.section));
+  const unknownExclusions = unknownIndexExclusionKeys(
+    indexExclusions,
+    PUBLISHED_API_SECTIONS.flatMap((section) => (SECTION_REGISTRIES[section.section] ?? [])
+      .map((article) => articleIndexExclusionKey(section.section, article.id))),
+    publishedSections,
+    new Set(Object.keys(ARTICLE_SECTION_CORE_ALL)),
+  );
+  if (unknownExclusions.length > 0) {
+    throw new Error(`article-index-exclusions: righe senza articolo (${unknownExclusions.join(', ')}) — refusing to publish`);
+  }
+}
 const indexExcludedSlugs = (section) => {
   const slugMap = slugMapOf(section.section);
   return (SECTION_REGISTRIES[section.section] ?? [])

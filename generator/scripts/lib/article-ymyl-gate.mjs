@@ -60,7 +60,7 @@ export const YMYL_SOURCES_BRIEF_CH = sourcesBrief([
   OFFICIAL_SOURCE_LINKS.find(({ label }) => label === 'UFAS'),
 ]);
 
-const YMYL_RE = /(?:^| )(?:tassa salute|tassa sulla salute|imposta alla fonte|imposte alla fonte|irpef|dichiarazione dei redditi|franchigia|detrazion|deduzion|avs|lpp|pilastro|previdenz|pension|inps|naspi|ristorn|lamal|cassa malati|casse malati|accordo fiscale|doppia imposizione|fisco|fiscal)/;
+const YMYL_RE = /(?:^| )(?:tasse(?: |$)|tassazion|tassa salute|tassa sulla salute|tassa sanitaria|imposta(?: |$)|imposte(?: |$)|irpef|dichiarazione dei redditi|franchigia|detrazion|deduzion|avs|lpp|pilastro|previdenz|pension|inps|naspi|ristorn|lamal|cassa malati|casse malati|assicurazione malattia|premi malattia|servizio sanitario|ssn(?: |$)|accordo fiscale|doppia imposizione|fisco|fiscal)/;
 
 /**
  * @param {{id?: string, title?: string, excerpt?: string}} article testi italiani
@@ -88,11 +88,20 @@ export function linksIn(text) {
   return [...String(text ?? '').matchAll(/https?:\/\/[^\s)\]"'<>]+/g)].map((match) => match[0]);
 }
 
-function articleText(it = {}) {
-  return Object.keys(it)
-    .filter((key) => /^(?:title|excerpt|faq|body\d+)$/.test(key))
-    .map((key) => (typeof it[key] === 'string' ? it[key] : JSON.stringify(it[key])))
-    .join('\n');
+/** Ogni testo pubblicato: corpo, FAQ, excerpt e i campi SEO. Gli URL non sono testo. */
+function articleText(...sources) {
+  const texts = [];
+  const visit = (value) => {
+    if (typeof value === 'string') {
+      if (!/^https?:\/\//.test(value)) texts.push(value);
+    } else if (Array.isArray(value)) {
+      value.forEach(visit);
+    } else if (value && typeof value === 'object') {
+      Object.values(value).forEach(visit);
+    }
+  };
+  sources.forEach(visit);
+  return texts.join('\n');
 }
 
 /**
@@ -105,7 +114,7 @@ export function checkYmylPublishable(data, { sourceUrl = '' } = {}) {
   if (!isYmylArticle({ id: data?.id, title: it.title, excerpt: it.excerpt })) {
     return { ymyl: false, problems: [] };
   }
-  const text = articleText(it);
+  const text = articleText(it, data?.seo);
   const problems = findFiscalErrors(text).map((error) => `${error.id} (${error.source}): ${error.sentence.trim().slice(0, 120)}`);
   if (![sourceUrl, ...linksIn(text)].some(isOfficialSourceUrl)) {
     problems.unshift('nessun link a una fonte ufficiale');

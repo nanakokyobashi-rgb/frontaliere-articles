@@ -1107,7 +1107,12 @@ export function shardOf(section, coreList = activeCorpusCoreEntries()) {
 export function r2PublishPlan(
   files,
   coreList = activeCorpusCoreEntries(),
-  { registryRefreshSections = [], registryCleanupSections = [] } = {},
+  {
+    registryRefreshSections = [],
+    registryCleanupSections = [],
+    readCurrentSource = (rel) => (existsSync(rel) ? readFileSync(rel, 'utf8') : null),
+    readPreviousSource = () => null,
+  } = {},
 ) {
   const sections = activeSourceSections(coreList).filter((s) => !s.shardKey);
   const plan = new Map();
@@ -1133,6 +1138,17 @@ export function r2PublishPlan(
   }
   for (const { rel, status } of changedFiles) {
     if (!rel) continue;
+    if (rel === ARTICLE_INDEX_EXCLUSIONS_FILE) {
+      // Stessa transizione del piano degli shard: l'HTML su R2 porta il robots.
+      const changed = indexExclusionChangedKeys(sourceText(readPreviousSource, rel), sourceText(readCurrentSource, rel));
+      for (const section of sections) {
+        const prefix = articleIndexExclusionKey(section.section, '');
+        for (const key of changed) {
+          if (key.startsWith(prefix)) touch(section.section).ids.add(key.slice(prefix.length));
+        }
+      }
+      continue;
+    }
     const body = sectionForBodyPath(rel, coreList);
     if (body) {
       const target = sections.find((s) => s.section === body.section);
@@ -1215,9 +1231,12 @@ if (isMain()) {
           .filter(({ removeStaleCantonRssFeeds }) => removeStaleCantonRssFeeds)
           .map(({ section }) => section);
       }
+      let ledgerBefore = process.env.PUSH_BEFORE ?? '';
+      if (!/^[a-f0-9]{40,64}$/i.test(ledgerBefore) || /^0+$/.test(ledgerBefore)) ledgerBefore = 'HEAD~1';
       console.log(JSON.stringify(r2PublishPlan(files, activeCorpusCoreEntries(), {
         registryRefreshSections,
         registryCleanupSections,
+        readPreviousSource: (rel) => gitSourceAtRevision(ledgerBefore, rel),
       })));
     }
     else if (cmd === 'r2-reconcile-plan') {

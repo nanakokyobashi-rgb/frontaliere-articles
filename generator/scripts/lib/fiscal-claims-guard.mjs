@@ -42,6 +42,8 @@ const EURO_RE = /(€|\beuro|\beur\b)/i;
 const MONTHLY_RE = /(al mese|mensil|\/mese|per month|a month|monthly|pro monat|monatlich|par mois|mensuel)/i;
 const HISTORIC_RE = /(fino al 2023|prima del 2024|until 2023|before 2024|bis 2023|vor 2024|jusqu.en 2023|avant 2024)/i;
 
+const NEGATED_RETROCESSION_RE = /(?:\bnon\b|\bnessun[ao]?\b|\bnot\b|\bno\b|\bnicht\b|\bkein\w*|\bne\b|\bn['’]|\baucun\w*)[^.]{0,40}(?:retrocess|r[eé]troc[eé]d)/i;
+
 export const CLAIM_RULES = Object.freeze([
   {
     id: 'franchigia-7500',
@@ -75,7 +77,7 @@ export const CLAIM_RULES = Object.freeze([
     source: 'Accordo 2020 art. 3',
     matches: (sentence) => /\b20\s?%[^.]{0,40}(retrocess|r[eé]troc[eé]d)/i.test(sentence)
       && /(frontalier|grenzg|cross-border|comun|municip)/i.test(sentence)
-      && !/non esiste|no retrocession|keine/i.test(sentence),
+      && !NEGATED_RETROCESSION_RE.test(sentence),
   },
   {
     id: 'mai-in-entrambi',
@@ -159,7 +161,7 @@ export function findFiscalClaims(text) {
 }
 
 /** Una percentuale riferita alla paga: le altre (sondaggi, aumenti) non sono l'aliquota. */
-const RATE_ON_PAY_RE = /(\d{1,2}(?:[.,]\d)?)\s?%\s+(?:del|dello|della|von|of|of the|des|du|de|de la)\s+(?:proprio\s+|their\s+|ihres\s+)?(?:reddit|salari|stipendi|income|salary|wage|einkommen|nettoeinkommen|bruttoeinkommen|lohn|gehalt|brutto|netto|revenu|salaire|gross|net)\w*(?:\s+(?:netto|lordo|net|gross|brut|brutto))?/gi;
+const RATE_ON_PAY_RE = /(\d{1,2}(?:[.,]\d)?)(?:\s?%?\s?(?:-|–|—|a|al|to|bis|à)\s?(\d{1,2}(?:[.,]\d)?))?\s?%\s+(?:del|dello|della|von|of|of the|des|du|de|de la)\s+(?:proprio\s+|their\s+|ihres\s+)?(?:reddit|salari|stipendi|income|salary|wage|einkommen|nettoeinkommen|bruttoeinkommen|lohn|gehalt|brutto|netto|revenu|salaire|gross|net)\w*(?:\s+(?:netto|lordo|net|gross|brut|brutto))?/gi;
 
 /**
  * Quota SSN: la base e' il salario netto e la forchetta e' 3-6%. Un'affermazione
@@ -173,9 +175,9 @@ export function findTaxHealthParameterErrors(text) {
     const { start, end } = sentenceSpanAt(text, match.index);
     const sentence = text.slice(start, end);
     for (const percent of sentence.matchAll(RATE_ON_PAY_RE)) {
-      const value = Number(percent[1].replace(',', '.'));
+      const values = [percent[1], percent[2]].filter(Boolean).map((value) => Number(value.replace(',', '.')));
       if (/(rappresent|represent|dargestellt|repr[eé]sent)/i.test(sentence)) break;
-      if (/(lordo|gross|brutto|brut)/i.test(percent[0]) || value < 3 || value > 6) {
+      if (/(lordo|gross|brutto|brut)/i.test(percent[0]) || values.some((value) => value < 3 || value > 6)) {
         errors.push({ id: 'tassa-salute-parametri', source: 'DM Salute 14/11/2025 art. 1', start, end, sentence });
         break;
       }

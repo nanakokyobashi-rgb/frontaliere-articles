@@ -2623,7 +2623,7 @@ const PRIORITY_EVERGREEN_TOPICS = [
   { keyword: 'quanto costa vivere a Lugano da frontaliere', angle: 'Analisi costi reali: affitto, trasporti, assicurazione, spesa alimentare per un frontaliere che valuta il trasferimento' },
   { keyword: 'frontaliere permesso G vantaggi svantaggi', angle: 'Pro e contro completi del permesso G: fisco, previdenza, sanità, mobilità lavorativa. Quando conviene e quando no' },
   { keyword: 'calcolo pensione frontaliere AVS italiana', angle: 'Come funziona la pensione da frontaliere: contributi AVS svizzeri + INPS italiana, totalizzazione, tempistica' },
-  { keyword: 'frontaliere tassazione 2026 dopo nuovo accordo fiscale', angle: 'Regole operative 2026 dopo l’Accordo frontalieri in vigore dal 1 gennaio 2024: differenze tra vecchi e nuovi frontalieri, franchigia e credito d’imposta con scenari ipotetici' },
+  { keyword: 'frontaliere tassazione 2026 dopo nuovo accordo fiscale', angle: 'Regole operative 2026 dopo l’Accordo frontalieri applicato dal 1 gennaio 2024: differenze tra vecchi e nuovi frontalieri, franchigia e credito d’imposta con scenari ipotetici' },
   { keyword: 'LAMal o CMI frontaliere quale conviene 2026', angle: 'Confronto aggiornato LAMal vs CMI: premi, coperture, franchigia, casi pratici per famiglie e single' },
   { keyword: 'frontaliere doppia imposizione credito imposta come funziona', angle: 'Come evitare la doppia tassazione: meccanismo del credito d\'imposta per frontalieri, quadro CE del 730, esempi pratici con cifre reali' },
   { keyword: 'costo auto pendolare frontaliere Ticino', angle: 'Tutti i costi dell\'auto per il pendolare: benzina, vignette, parcheggio, usura, confronto con treno e bus' },

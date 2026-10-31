@@ -15,6 +15,8 @@
  *  3. la frase che resta falsa si sostituisce con quella corretta, nella lingua del
  *     file. Nello stesso file la frase corretta compare una volta nella prosa: le
  *     successive si tolgono. Bullet, celle e FAQ mantengono la propria struttura.
+ *     Le altre regole del guard (forfait sanitario, 38,8%, credito 80%, 20%
+ *     retrocesso) non hanno una frase sostitutiva sicura: la frase esce.
  *
  * Gli esempi aritmetici non si toccano qui: un calcolo con una base sbagliata ha
  * righe successive che ne dipendono, e sostituire la riga lascerebbe un totale
@@ -177,7 +179,20 @@ export function repairFiscalText(input, rel, { replaceArithmetic = false } = {})
     out += text.slice(last, start) + replacement;
     last = claim.end;
   }
-  return { text: dropWrongTaxHealthRates(out + text.slice(last), rel), arith };
+  return { text: dropWrongTaxHealthRates(dropRefutedSentences(out + text.slice(last), rel), rel), arith };
+}
+
+/**
+ * Le altre regole non hanno una frase sostitutiva sicura: la frase e' falsa per
+ * intero, e l'unica correzione generale e' toglierla.
+ */
+function dropRefutedSentences(text, rel) {
+  if (FABRICATED_TAX_HEALTH_ARTICLES.test(rel)) return text;
+  let out = text;
+  for (const claim of findFiscalClaims(text).filter(({ id }) => id !== 'franchigia-7500').reverse()) {
+    out = out.slice(0, claim.start) + out.slice(claim.end);
+  }
+  return out;
 }
 
 /**

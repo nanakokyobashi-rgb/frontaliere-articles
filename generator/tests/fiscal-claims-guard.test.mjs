@@ -75,8 +75,53 @@ test('quota SSN: base lorda o aliquota fuori forchetta, non un sondaggio o un au
   assert.equal(findTaxHealthParameterErrors('Con uno stipendio di 50.000 € la tassa salute avrebbe rappresentato lo 0,4% dello stipendio lordo.').length, 0);
 });
 
+test('quota SSN: gli intervalli si giudicano su entrambi gli estremi', () => {
+  assert.equal(findTaxHealthParameterErrors('La tassa salute vale 3-6% del salario netto.').length, 0);
+  assert.equal(findTaxHealthParameterErrors('La tassa salute vale il 7–8% del salario netto.').length, 1);
+  assert.equal(findTaxHealthParameterErrors('La tassa salute vale 1-2% del salario netto.').length, 1);
+  assert.equal(findTaxHealthParameterErrors('La tassa salute vale 2-5% del salario netto.').length, 1);
+});
+
+test('retrocessione: la negazione e\' la frase corretta, nelle quattro lingue', () => {
+  for (const sentence of [
+    'Il 20% non viene retrocesso ai comuni.',
+    'Il restante 20% del prelievo non è retrocesso ai comuni italiani.',
+    'The other 20% is not retroceded to municipalities.',
+    'Les 20 % ne sont pas rétrocédés aux communes.',
+  ]) {
+    assert.deepEqual(ids(sentence), [], sentence);
+  }
+});
+
+test('riparazione: ogni regola del guard ha un esito, non solo la franchigia', () => {
+  const { text } = repairFiscalText('Primo fatto. Si aggiunge la deduzione forfetaria sanitaria di 3.000 €. Ultimo fatto.', 'blog-body/it/x.ts');
+  assert.deepEqual(findFiscalClaims(text), []);
+  assert.match(text, /^Primo fatto\./);
+  assert.match(text, /Ultimo fatto\.$/);
+});
+
+test('YMYL: tasse e sanita\' generiche rientrano, e i campi SEO sono testo pubblicato', () => {
+  assert.equal(isYmylArticle({ title: 'Calcolo tasse frontalieri' }), true);
+  assert.equal(isYmylArticle({ title: 'Imposte e tassazione del reddito' }), true);
+  assert.equal(isYmylArticle({ title: 'Quanto costa il Servizio sanitario' }), true);
+  assert.equal(isYmylArticle({ title: 'Il tassista di Lugano' }), false);
+  const data = {
+    id: 'calcolo-tasse-frontalieri',
+    content: { it: { title: 'Calcolo tasse frontalieri', excerpt: '', body1: 'Testo.', seoDescription: 'Esenzione di 7.500 euro per i vecchi frontalieri.' } },
+    seo: { ogDescription: 'Credito d’imposta fino all’80% del prelievo svizzero.' },
+  };
+  const { problems } = checkYmylPublishable(data, { sourceUrl: 'https://www.admin.ch/x' });
+  assert.ok(problems.some((problem) => /franchigia-7500/.test(problem)));
+  assert.ok(problems.some((problem) => /credito-80/.test(problem)));
+  assert.throws(
+    () => assertNoFiscalErrorsInLocales({ en: { ogDescription: 'Old frontier workers: exemption of €7,500.' } }),
+    /franchigia-7500/,
+  );
+});
+
 test('il prompt non insegna piu\' cio\' che il guard rifiuta', () => {
   const source = readFileSync(new URL('../scripts/create-article.mjs', import.meta.url), 'utf8');
+  assert.doesNotMatch(source, /Accordo[^\n]{0,40}in vigore dal 1°? gennaio 2024/i);
   const start = source.indexOf('const VERIFIED_DOMAIN_FACTS = `');
   const end = source.indexOf('const EVERGREEN_FACTS_BRIEF_CH = `');
   assert.ok(start !== -1 && end > start);
