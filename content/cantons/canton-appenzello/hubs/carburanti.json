@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "carburanti",
-  "updatedAt": "2026-10-30T19:31:58.244Z",
-  "contentHash": "b7be3f06e397d8869729977ea85d789426f91b6040c756d3727457a4e5fd96b1",
+  "updatedAt": "2026-10-31T13:37:43.304Z",
+  "contentHash": "de061758923394aaf94e0724aaa2903dbdf0d7c556dcbf83e414765589199942",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "45 residenti chiedono misure contro il rumore sulla Langgasse",
+          "url": "/articoli-appenzello/45-residenti-richiesta-rumore/",
+          "excerpt": "45 residenti hanno depositato al comune il mercoledì 28 ottobre una richiesta per l'esame urgente di Tempo 30 e misure di moderazione del traffico.",
+          "date": "2026-10-31T13:30:50.111Z"
+        },
+        {
           "title": "Costi sanitari e minori entrate pesano sul preventivo",
           "url": "/articoli-appenzello/costi-sanita-meno-entrate/",
           "excerpt": "Il preventivo 2027 prevede una perdita complessiva di 12,4 milioni di CHF, a causa di costi sanitari crescenti e minori entrate fiscali.",
@@ -94,12 +100,6 @@
           "url": "/articoli-appenzello/credito-pfas-appenzello/",
           "excerpt": "Il Parlamento di Appenzello Esterno ha approvato con 60 voti a zero e un'astensione il credito per un programma PFAS.",
           "date": "2026-10-27T00:02:34.724Z"
-        },
-        {
-          "title": "Herisau, più risorse per la RBH Hinterland",
-          "url": "/articoli-appenzello/rbh-herisau-piu-risorse/",
-          "excerpt": "Il Comune di Herisau segnala casi in aumento e maggiore complessità nella gestione della RBH Hinterland; negli anni scorsi sono cresciute anche le posizioni.",
-          "date": "2026-10-23T12:58:04.345Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T13:37:43.304Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "45 residents call for measures against noise on Langgasse",
+          "url": "/en/appenzell-articles/45-residents-noise-request/",
+          "excerpt": "45 residents filed a request with the municipality on Wednesday, October 28, for the urgent review of Tempo 30 and traffic-calming measures.",
+          "date": "2026-10-31T13:30:50.111Z"
+        },
+        {
           "title": "Healthcare costs and lower revenues weigh on the budget",
           "url": "/en/appenzell-articles/health-costs-less-revenue/",
           "excerpt": "The 2027 budget projects a total loss of 12,4 million CHF due to rising healthcare costs and lower tax revenues.",
@@ -193,12 +199,6 @@
           "url": "/en/appenzell-articles/appenzell-ausserrhoden-pfas-credit/",
           "excerpt": "The Parliament of Appenzell Ausserrhoden approved the funding for a PFAS program by 60 votes to zero, with one abstention.",
           "date": "2026-10-27T00:02:34.724Z"
-        },
-        {
-          "title": "Herisau, more resources for RBH Hinterland",
-          "url": "/en/appenzell-articles/herisau-rbh-more-resources/",
-          "excerpt": "The Municipality of Herisau reports an increase in cases and greater complexity in managing RBH Hinterland; positions have also increased in recent years.",
-          "date": "2026-10-23T12:58:04.345Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T13:37:43.304Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "45 Anwohner fordern Maßnahmen gegen den Lärm auf der Langgasse",
+          "url": "/de/appenzell-artikel/45-einwohner-laerm-forderung/",
+          "excerpt": "45 Anwohner haben am Mittwoch, dem 28.",
+          "date": "2026-10-31T13:30:50.111Z"
+        },
+        {
           "title": "Gesundheitskosten und geringere Einnahmen belasten den Voranschlag",
           "url": "/de/appenzell-artikel/kosten-sanita-weniger-einnahmen/",
           "excerpt": "Der Voranschlag 2027 sieht aufgrund steigender Gesundheitskosten und geringerer Steuereinnahmen einen Gesamtverlust von 12,4 Millionen CHF vor.",
@@ -292,12 +298,6 @@
           "url": "/de/appenzell-artikel/appenzell-ausserrhoden-pfas-kredit/",
           "excerpt": "Das Parlament von Appenzell Ausserrhoden hat den Kredit für ein PFAS-Programm mit 60 zu 0 Stimmen und einer Enthaltung genehmigt.",
           "date": "2026-10-27T00:02:34.724Z"
-        },
-        {
-          "title": "Herisau, mehr Ressourcen für die RBH Hinterland",
-          "url": "/de/appenzell-artikel/herisau-rbh-mehr-ressourcen/",
-          "excerpt": "Die Gemeinde Herisau weist auf zunehmende Fallzahlen und eine grössere Komplexität bei der Bearbeitung der RBH Hinterland hin; in den vergangenen Jahren ist auch die Zahl der Stellen gestiegen.",
-          "date": "2026-10-23T12:58:04.345Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T13:37:43.304Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "45 résidents demandent des mesures contre le bruit sur la Langgasse",
+          "url": "/fr/articles-appenzell/45-residents-demande-bruit/",
+          "excerpt": "45 résidents ont déposé auprès de la commune, le mercredi 28 octobre, une demande visant l’examen urgent de Tempo 30 et des mesures d’apaisement du trafic.",
+          "date": "2026-10-31T13:30:50.111Z"
+        },
+        {
           "title": "Les coûts de santé et la baisse des recettes pèsent sur le budget",
           "url": "/fr/articles-appenzell/couts-sante-moins-revenus/",
           "excerpt": "Le budget 2027 prévoit une perte globale de 12,4 millions de CHF, en raison de la hausse des coûts de santé et de la baisse des recettes fiscales.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-appenzell/appenzell-exterieur-credit-pfas/",
           "excerpt": "Le Parlement d’Appenzell Rhodes-Extérieures a approuvé par 60 voix contre zéro et une abstention le crédit pour un programme PFAS.",
           "date": "2026-10-27T00:02:34.724Z"
-        },
-        {
-          "title": "Herisau, davantage de ressources pour la RBH Hinterland",
-          "url": "/fr/articles-appenzell/herisau-rbh-plus-ressources/",
-          "excerpt": "La commune de Herisau signale une hausse des cas et une plus grande complexité dans la gestion de la RBH Hinterland ; ces dernières années, les postes ont également augmenté.",
-          "date": "2026-10-23T12:58:04.345Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T13:37:43.304Z"
     }
   }
 }
