@@ -204,7 +204,12 @@ import {
 import { AI_SEARCH_PROMPT_BLOCK_IT } from './lib/ai-search-template.mjs';
 import { findOrphanedKeyFactsList } from './lib/key-facts-specificity.mjs';
 import { assertArticleRelevance, isOffTopicHeadline } from './lib/article-relevance-gate.mjs';
-import { assertNoFiscalErrorsInLocales, assertYmylPublishable } from './lib/article-ymyl-gate.mjs';
+import {
+  assertNoFiscalErrorsInLocales,
+  assertYmylPublishable,
+  YMYL_SOURCES_BRIEF,
+  YMYL_SOURCES_BRIEF_CH,
+} from './lib/article-ymyl-gate.mjs';
 import { stripVacuousFacts } from './lib/key-facts-specificity.mjs';
 import { checkCantonToponymConsistency } from './lib/cantone-toponimi-coerenza.mjs';
 import {
@@ -5714,8 +5719,15 @@ export async function repairGeneratedArticleSourceCopy(article, sourceText, {
 export function assertArticlePassesFactualityGates(data, options = {}) {
   assertItalianArticlePassesFactualityGates(data, options);
   assertTranslationsPassFactualityGates(data);
+  assertNoFiscalErrorsInLocales(data?.content || {});
   assertNoCorpusFabricatedInstitutionNames(data);
   assertLocalizedToponyms(data);
+  if (options.writer !== 'journalist') {
+    assertArticleRelevance(data, options.sectionName || SECTION_NAME);
+    assertYmylPublishable(data, {
+      sourceUrl: options.sourceUrl ?? data?._sourceUrl ?? data?.sourceUrl ?? '',
+    });
+  }
 }
 
 function collectPublishedTextValues(value, path = [], seen = new Set()) {
@@ -11669,9 +11681,27 @@ La fonte è cronaca locale (cronaca nera, incidente, sport, cultura o evento) in
   // testo nazionale, cosi' il limite conserva prima fisco e previdenza locali.
   const MAX_DOMAIN_FACTS_CHARS = 1600;
   const domainFactsBrief = evergreenFactsBriefFor(SECTION_NAME, CANTON_FACTS_BRIEF);
-  const truncatedDomainFactsBrief = domainFactsBrief.length > MAX_DOMAIN_FACTS_CHARS
-    ? domainFactsBrief.slice(0, MAX_DOMAIN_FACTS_CHARS).replace(/\n-[^\n]*$/, '') + '\n[...altri fatti di dominio omessi per brevità]'
+  // Keep the official-source block used by the news prompt on the same source
+  // of truth as the final YMYL gate. The evergreen constants predate the gate
+  // module and carry the same text; replace only that prefix so the prompt
+  // length and the verified-facts payload remain unchanged. For canton briefs
+  // the CH block is embedded after the annual dataset and is replaced there.
+  // `typeof` keeps the dependency-free prompt extraction tests valid: they
+  // execute this block without importing the module that owns the canonical
+  // brief, while production always has both exports available.
+  const ymylSourcesBrief = IS_FRONTALIERE
+    ? (typeof YMYL_SOURCES_BRIEF === 'string' ? YMYL_SOURCES_BRIEF : '')
+    : (typeof YMYL_SOURCES_BRIEF_CH === 'string' ? YMYL_SOURCES_BRIEF_CH : '');
+  const legacySourcesPrefix = domainFactsBrief.match(
+    /FONTI UFFICIALI [\s\S]*?(?=\n\nFATTI VERIFICATI)/,
+  )?.[0] || '';
+  const canonicalSourcesPrefix = ymylSourcesBrief || legacySourcesPrefix;
+  const canonicalDomainFactsBrief = legacySourcesPrefix && domainFactsBrief.includes(legacySourcesPrefix)
+    ? domainFactsBrief.replace(legacySourcesPrefix, canonicalSourcesPrefix)
     : domainFactsBrief;
+  const truncatedDomainFactsBrief = canonicalDomainFactsBrief.length > MAX_DOMAIN_FACTS_CHARS
+    ? canonicalDomainFactsBrief.slice(0, MAX_DOMAIN_FACTS_CHARS).replace(/\n-[^\n]*$/, '') + '\n[...altri fatti di dominio omessi per brevità]'
+    : canonicalDomainFactsBrief;
   const domainFactsBlock = isSyntheticSource ? '' : `\nFATTI DI DOMINIO VERIFICATI (riferimento facoltativo, separato dalla notizia sopra — attribuiscili al riferimento, non alla fonte, e usali solo se direttamente pertinenti al fatto; non inserirli per creare un nesso o allungare il testo):\n${truncatedDomainFactsBrief}\n`;
 
   // Il template e' una FUNZIONE dei due blocchi elastici invece di una
@@ -21293,15 +21323,16 @@ export async function registerArticleFiles(data, opts = {}) {
   // flusso primario. Il controllo arriva dopo la derivazione definitiva degli
   // slug, così copre anche l'identita' pubblicata senza rifiutare un valore
   // provvisorio ancora non sanitizzato.
-  assertArticlePassesFactualityGates(data);
-  // The shared writer is the publication boundary for deterministic producers;
-  // apply the same editorial and YMYL gates that protect the primary AI path.
+  // The registrar is the shared publication boundary for every producer. Keep
+  // relevance, YMYL and every-locale fiscal checks in this one final call so
+  // refresh writers cannot bypass a guard that only the AI path happens to run.
   // The only exception is the explicitly identified human journalist path,
-  // whose editorial approval is the source of truth for those two topic gates.
-  if (opts.writer !== 'journalist') {
-    assertArticleRelevance(data, SECTION_NAME);
-    assertYmylPublishable(data, { sourceUrl: data.sourceUrl || data._sourceUrl || '' });
-  }
+  // whose editorial approval is the source of truth for the two topic gates.
+  assertArticlePassesFactualityGates(data, {
+    writer: opts.writer,
+    sourceUrl: data._sourceUrl || data.sourceUrl || '',
+    sectionName: SECTION_NAME,
+  });
   // Every deterministic producer enters this shared writer directly. Apply
   // the Markdown-link contract before registration writes, so invalid nav
   // actions cannot reach the published body files.

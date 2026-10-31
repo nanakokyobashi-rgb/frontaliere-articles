@@ -371,16 +371,17 @@ export const IMAGE_SOURCE_DIRS = Object.freeze([
   path.join('public', 'images', 'generated'),
 ]);
 
-function countFiles(dir, ext) {
+function countFiles(dir, ext, excludedIds = []) {
   const stat = fs.statSync(dir, { throwIfNoEntry: false });
   if (!stat?.isDirectory()) return 0;
   const files = fs.readdirSync(dir);
-  return files.filter((f) => f.endsWith(ext)).length;
+  const excluded = new Set(excludedIds);
+  return files.filter((f) => f.endsWith(ext) && !excluded.has(f.slice(0, -ext.length))).length;
 }
 
-function countCorpusFiles(root, rel, ext, what) {
+function countCorpusFiles(root, rel, ext, what, excludedIds = []) {
   try {
-    return countFiles(path.join(root, rel), ext);
+    return countFiles(path.join(root, rel), ext, excludedIds);
   } catch (error) {
     if (error?.code === 'ELOOP' || error?.code === 'EACCES') {
       const wrapped = new Error(missingCorpusMessage(what, path.join(root, rel)), { cause: error });
@@ -697,10 +698,10 @@ export function sourceRegistryIds(root, section) {
 }
 
 /** Quanti articoli sorgente ha la sezione, contati sui file di corpo. */
-export function countSourceArticles(root, section) {
+export function countSourceArticles(root, section, { excludedIds = [] } = {}) {
   assertFamilySourcePair(root, section);
   const rel = path.join(sourceOf(section).bodyDir, 'it');
-  return countCorpusFiles(root, rel, '.ts', section);
+  return countCorpusFiles(root, rel, '.ts', section, excludedIds);
 }
 
 /**
@@ -915,12 +916,15 @@ export function collectSeoEntryIds(src, into = new Set()) {
  * zero, quello NON e' un pavimento a zero: e' l'assenza del riferimento, e il
  * chiamante deve trattarlo come errore (vedi `missingCorpusMessage`).
  */
-export function countSeoEntries(root, seoFiles, seoDir = SEO_CHUNK_DIR) {
+export function countSeoEntries(root, seoFiles, seoDir = SEO_CHUNK_DIR, { excludedIds = [] } = {}) {
+  const excluded = new Set(excludedIds);
   const ids = new Set();
   for (const file of seoFiles) {
     const filePath = path.join(root, seoDir, file);
     if (!fs.existsSync(filePath)) continue;
-    collectSeoEntryIds(fs.readFileSync(filePath, 'utf-8'), ids);
+    for (const id of collectSeoEntryIds(fs.readFileSync(filePath, 'utf-8'))) {
+      if (!excluded.has(id)) ids.add(id);
+    }
   }
   return ids.size;
 }
@@ -936,7 +940,8 @@ export function countSeoEntries(root, seoFiles, seoDir = SEO_CHUNK_DIR) {
  * un floor piu' basso. Eventuali eccezioni cross-repo vanno risolte dal
  * chiamante prima di passare la lista al producer.
  */
-export function latestSeoPublication(root, seoFiles, seoDir = SEO_CHUNK_DIR) {
+export function latestSeoPublication(root, seoFiles, seoDir = SEO_CHUNK_DIR, { excludedIds = [] } = {}) {
+  const excluded = new Set(excludedIds);
   const missing = seoFiles.filter((file) => !fs.existsSync(path.join(root, seoDir, file)));
   if (missing.length) {
     const error = new Error(
@@ -959,6 +964,7 @@ export function latestSeoPublication(root, seoFiles, seoDir = SEO_CHUNK_DIR) {
     for (const [articleId, metadata] of collectSeoFeedEntryMetadata(fs.readFileSync(filePath, 'utf-8'))) {
       // Il collector RSS filtra prima del Map.set: una voce non emettibile non
       // sostituisce quella valida precedente.
+      if (excluded.has(articleId)) continue;
       entries.set(articleId, metadata);
     }
   }

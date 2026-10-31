@@ -1108,6 +1108,13 @@ let rssItemTotal = 0;
 const familyRssRows = [];
 for (const section of rssSections) {
   const familyPolicy = floorPolicyOf(section.id) === 'family';
+  const published = PUBLISHED_BY_SECTION[section.id];
+  const excludedIds = published ? indexExcludedArticleIds(published) : new Set();
+  // `buildSectionFeeds` filters the ledger before rendering. If every parsed
+  // SEO entry is withdrawn, no RSS file is expected for a historical section;
+  // a zero here is an intentional noindex state, not a broken feed. A partial
+  // or missing filter must still fail closed below.
+  const ledgerOnly = section.articleCount > 0 && excludedIds.size >= section.articleCount;
   // I feed di una sezione di famiglia sono una superficie di LETTURA (titoli,
   // estratti, link agli articoli): escono su Pages solo se la release di
   // questo build dichiara la sezione live. Per una sezione draft, ritirata o
@@ -1115,7 +1122,7 @@ for (const section of rssSections) {
   // pubblico ne esporrebbe comunque gli articoli. Il feed si costruisce lo
   // stesso (il pavimento qui sotto lo giudica), ma non si scrive.
   const publishFeeds = !familyPolicy || releaseLiveSections.has(section.id);
-  if (section.feeds.length === 0 && !familyPolicy) {
+  if (section.feeds.length === 0 && !familyPolicy && !ledgerOnly) {
     throw new Error(
       `rss: section '${section.id}' produced no feeds (${section.articleCount} articles parsed) — refusing to publish`,
     );
@@ -1123,7 +1130,15 @@ for (const section of rssSections) {
   let sectionItems = 0;
   for (const [name, xml] of section.feeds) {
     const items = countXmlTags(xml, 'item');
-    if (items === 0 && !familyPolicy) throw new Error(`rss: ${name} has no <item> entries — refusing to publish`);
+    if (items === 0 && !familyPolicy && !ledgerOnly) {
+      throw new Error(`rss: ${name} has no <item> entries — refusing to publish`);
+    }
+    if (items > 0 && ledgerOnly) {
+      throw new Error(
+        `rss: ${name} emitted ${items} <item> entries although all ${section.articleCount} `
+          + 'SEO entries are withdrawn by article-index-exclusions — refusing to publish',
+      );
+    }
     sectionItems += items;
     // The feeds come out of engine/rssFeeds.mjs, which arrives by mirror and is
     // not ours to edit here (a change would be overwritten on the next mirror
@@ -1146,7 +1161,13 @@ for (const section of rssSections) {
   // `section.articleCount`: quello lo produce lo stesso parser dei chunk SEO
   // che scrive il feed, quindi un chunk SEO mancante o troncato lo azzererebbe
   // insieme agli item e la sezione svuotata passerebbe per «nuova».
-  if (familyPolicy && releaseLiveSections.has(section.id)) familyRssRows.push({ section: section.id, source: countSourceArticles(ROOT, section.id), emitted: sectionItems });
+  if (familyPolicy && releaseLiveSections.has(section.id)) {
+    familyRssRows.push({
+      section: section.id,
+      source: countSourceArticles(ROOT, section.id, { excludedIds }),
+      emitted: sectionItems,
+    });
+  }
 }
 // Per i feed vale solo la meta' «nessuna sezione svuotata» del verdetto di
 // famiglia: un feed e' una finestra (RSS_MAX_ITEMS), quindi la somma degli item
