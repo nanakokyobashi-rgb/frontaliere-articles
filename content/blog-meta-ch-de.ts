@@ -8657,6 +8657,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.scontro-fiscale-coppie-atto.title': 'Modernisierer vs. Konservative: Steuerstreit Paare Teil II',
     'blog.article.scontro-fiscale-coppie-atto.excerpt': 'Der 8. März wird als eine „Revolution“ in Gefahr dargestellt Das als Bedrohung bezeichnete Modell ist die Zusammenrechnung der Einkommen Die Quelle spricht',
     'blog.article.scontro-fiscale-coppie-atto.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.startup-innovazione-sociale-open-call.title': 'Open Call 2026: Weiterbildung und Finanzierung für soziale Startups',
+    'blog.article.startup-innovazione-sociale-open-call.excerpt': 'Bewerbungen bis zum 15.',
+    'blog.article.startup-innovazione-sociale-open-call.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaChDe;

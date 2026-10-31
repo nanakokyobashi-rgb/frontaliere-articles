@@ -30081,6 +30081,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'startup-innovazione-sociale-open-call',
+    category: 'novita',
+    date: '2026-10-31T14:07:57.782Z',
+    image: '/images/blog/article-startup-innovazione-sociale-open-call.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

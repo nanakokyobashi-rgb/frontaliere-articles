@@ -8657,6 +8657,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.scontro-fiscale-coppie-atto.title': 'Modernizzatori vs conservatori: atto II sullo scontro fiscale delle coppie',
     'blog.article.scontro-fiscale-coppie-atto.excerpt': 'L\'8 marzo viene presentato come una «rivoluzione» in pericolo Il modello indicato come minaccia è il cumulo dei redditi La fonte parla del secondo atto',
     'blog.article.scontro-fiscale-coppie-atto.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.startup-innovazione-sociale-open-call.title': 'Open Call 2026: formazione e finanziamenti per startup sociali',
+    'blog.article.startup-innovazione-sociale-open-call.excerpt': 'Candidature aperte fino al 15 gennaio 2027 20.000 franchi in palio per cinque startup selezionate Social Business Conference 2027 a Lugano il 19 maggio',
+    'blog.article.startup-innovazione-sociale-open-call.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaChIt;
