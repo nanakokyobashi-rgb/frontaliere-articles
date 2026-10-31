@@ -9121,7 +9121,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Nuove regole fiscali per frontalieri Italia-Svizzera dal 2024: imposta alla fonte, esenzioni, franchigie e credito d\'imposta. Dati aggiornati 2026 per',
     keywords: 'frontalieri, ticino, svizzera, italia, grenzgänger, schweiz, steuern, regole',
     ogTitle: 'grenzgänger schweiz steuern 2026: guida fiscale aggiornata',
-    ogDescription: 'Accordo Frontalieri in vigore dal 2024: imposta alla fonte, esenzione €7\'500, franchigia €10\'000 e come evitare la doppia imposizione.',
+    ogDescription: 'I nuovi frontalieri hanno una franchigia IRPEF di 10.000 euro, mentre i vecchi frontalieri restano tassati solo in Svizzera (art. 9 dell\'Accordo del 2020).',
     canonicalPath: '/articoli-svizzera/grenzgaenger-steuern-nuovo-accordo-2026/',
     structuredData: {
       "@context": "https://schema.org",
@@ -11716,7 +11716,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-credito-imposta-frontaliere-2026': {
     title: 'Credito imposta frontaliere 2026: guida entro i 20 km',
-    description: 'Scopri come funziona il credito d\'imposta per frontalieri nel 2026: franchigie 7.500€ e 10.000€, quadro CE e limiti entro i 20 km. Guida pratica.',
+    description: 'Scopri come funziona il credito d\'imposta per frontalieri nel 2026: franchigie10.000€, quadro CE e limiti entro i 20 km. Guida pratica.',
     keywords: 'frontalieri, ticino, svizzera, italia, credito, imposta, entro, calcolo',
     ogTitle: 'Credito Imposta Frontaliere 2026: Guida Pratica',
     ogDescription: 'Tutto sul credito d\'imposta per frontalieri 2026: calcolo, franchigie e compilazione dichiarazione italiana.',
@@ -11725,7 +11725,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Credito imposta frontaliere 2026: guida entro i 20 km",
-      "description": "Scopri come funziona il credito d'imposta per frontalieri nel 2026: franchigie 7.500€ e 10.000€, quadro CE e limiti entro i 20 km. Guida pratica.",
+      "description": "Scopri come funziona il credito d'imposta per frontalieri nel 2026: franchigie10.000€, quadro CE e limiti entro i 20 km. Guida pratica.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
@@ -11828,16 +11828,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-caissiere-migros': {
     title: 'La nuova caissière di Migros a Vaud e il regime transitorio per i frontalieri',
-    description: 'La società cooperativa Migros Vaud ha annunciato la sostituzione della caissière, mentre i frontalieri saranno esenti dal regime transitorio fino al 2033',
+    description: 'I vecchi frontalieri restano tassati solo in Svizzera (art. 9 dell\'Accordo del 2020).',
     keywords: 'frontalieri, ticino, svizzera, italia, nuova, caissière, migros, vaud',
     ogTitle: 'La nuova caissière di Migros a Vaud e il regime transitorio per i frontalieri',
-    ogDescription: 'La società cooperativa Migros Vaud ha annunciato la sostituzione della caissière, mentre i frontalieri saranno esenti dal regime transitorio fino al 2033',
+    ogDescription: 'I vecchi frontalieri restano tassati solo in Svizzera (art. 9 dell\'Accordo del 2020).',
     canonicalPath: '/articoli-svizzera/caissiere-migros/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "La nuova caissière di Migros a Vaud e il regime transitorio per i frontalieri",
-      "description": "La società cooperativa Migros Vaud ha annunciato la sostituzione della caissière, mentre i frontalieri saranno esenti dal regime transitorio fino al 2033",
+      "description": "I vecchi frontalieri restano tassati solo in Svizzera (art. 9 dell'Accordo del 2020).",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
@@ -15264,16 +15264,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-secondo-pilastro-lpp-frontalieri-prelievo': {
     title: 'Il secondo pilastro LPP: quando si può prelevare e tassazione Italia e Svizzera',
-    description: 'Il nuovo accordo frontalieri prevede una franchigia di 10\'000 CHF e un regime transitorio fino al 2033. Ma come funziona il secondo pilastro LPP e come si può',
+    description: 'I nuovi frontalieri hanno una franchigia IRPEF di 10.000 euro, mentre i vecchi frontalieri restano tassati solo in Svizzera (art. 9 dell\'Accordo del 2020). Ma come funziona il secondo pilastro LPP e come si può',
     keywords: 'frontalieri, ticino, svizzera, italia, secondo, pilastro, quando, prelevare',
     ogTitle: 'Il secondo pilastro LPP: quando si può prelevare e tassazione Italia e Svizzera',
-    ogDescription: 'Il nuovo accordo frontalieri prevede una franchigia di 10\'000 CHF e un regime transitorio fino al 2033. Ma come funziona il secondo pilastro LPP e come si può',
+    ogDescription: 'I nuovi frontalieri hanno una franchigia IRPEF di 10.000 euro, mentre i vecchi frontalieri restano tassati solo in Svizzera (art. 9 dell\'Accordo del 2020). Ma come funziona il secondo pilastro LPP e come si può',
     canonicalPath: '/articoli-svizzera/secondo-pilastro-lpp-frontalieri-prelievo/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Il secondo pilastro LPP: quando si può prelevare e tassazione Italia e Svizzera",
-      "description": "Il nuovo accordo frontalieri prevede una franchigia di 10'000 CHF e un regime transitorio fino al 2033. Ma come funziona il secondo pilastro LPP e come si può",
+      "description": "I nuovi frontalieri hanno una franchigia IRPEF di 10.000 euro, mentre i vecchi frontalieri restano tassati solo in Svizzera (art. 9 dell'Accordo del 2020). Ma come funziona il secondo pilastro LPP e come si può",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
@@ -17043,16 +17043,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-frontalieredicente-stipendio-requisiti-ticino': {
     title: 'Docenti frontalieri in Ticino: stipendio e requisiti',
-    description: 'Impostazione della fonte sul reddito da lavoro: trattenuta SOLO in Svizzera per i frontalieri. Dati aggiornati 2026 per frontalieri in Ticino.',
+    description: 'Impostazione della fonte sul reddito da lavoro: trattenuta in Svizzera per i frontalieri. Dati aggiornati 2026 per frontalieri in Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, docenti, stipendio, requisiti, impostazione',
     ogTitle: 'Lavorare come docente in Ticino da frontaliere: stipendio medio, requisiti, eventuale riconoscimento del titolo di studio',
-    ogDescription: 'Impostazione della fonte sul reddito da lavoro: trattenuta SOLO in Svizzera per i frontalieri',
+    ogDescription: 'Impostazione della fonte sul reddito da lavoro: trattenuta in Svizzera per i frontalieri',
     canonicalPath: '/articoli-svizzera/frontalieredicente-stipendio-requisiti-ticino/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Docenti frontalieri in Ticino: stipendio e requisiti",
-      "description": "Impostazione della fonte sul reddito da lavoro: trattenuta SOLO in Svizzera per i frontalieri. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "description": "Impostazione della fonte sul reddito da lavoro: trattenuta in Svizzera per i frontalieri. Dati aggiornati 2026 per frontalieri in Ticino.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
@@ -17589,16 +17589,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-frontaliere-pasticciere-ticino-stipendio-requisiti': {
     title: 'Frontaliere pasticceria: stipendio, requisiti e riconoscimento',
-    description: 'Il Nuovo Accordo Frontalieri prevede la franchigia di €10.000 per i nuovi frontalieri. I vecchi frontalieri esentati di €7.500 avranno un regime transitorio',
+    description: 'Il Nuovo Accordo Frontalieri prevede la franchigia di €10.000 per i nuovi frontalieri. I vecchi frontalieri restano tassati solo in Svizzera (art. 9 dell\'Accordo del 2020).',
     keywords: 'frontalieri, ticino, svizzera, italia, pasticceria, stipendio, requisiti, riconoscimento',
     ogTitle: 'Frontaliere pasticcere Ticino: stipendio medio, requisiti, riconoscimento titolo di studio e permesso G.',
-    ogDescription: 'Il Nuovo Accordo Frontalieri prevede la franchigia di €10.000 per i nuovi frontalieri. I vecchi frontalieri esentati di €7.500 avranno un regime transitorio',
+    ogDescription: 'Il Nuovo Accordo Frontalieri prevede la franchigia di €10.000 per i nuovi frontalieri. I vecchi frontalieri restano tassati solo in Svizzera (art. 9 dell\'Accordo del 2020).',
     canonicalPath: '/articoli-svizzera/frontaliere-pasticciere-ticino-stipendio-requisiti/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Frontaliere pasticceria: stipendio, requisiti e riconoscimento",
-      "description": "Il Nuovo Accordo Frontalieri prevede la franchigia di €10.000 per i nuovi frontalieri. I vecchi frontalieri esentati di €7.500 avranno un regime transitorio",
+      "description": "Il Nuovo Accordo Frontalieri prevede la franchigia di €10.000 per i nuovi frontalieri. I vecchi frontalieri restano tassati solo in Svizzera (art. 9 dell'Accordo del 2020).",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
@@ -21742,7 +21742,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-fondi-frontalieri-varesotto-14-milioni': {
     title: '14 milioni ai territori di confine: fondi per frontalieri nel Varesotto',
-    description: 'Oltre 14 mln € ai comuni di frontiera per ristorni frontalieri. Nuovo Accordo 2024, franchigie 7.500/10.000 €, credito d\'imposta: guida pratica. Dati aggiornati',
+    description: 'Oltre 14 mln € ai comuni di frontiera per ristorni frontalieri. Nuovo Accordo 2024, franchigie10.000 €, credito d\'imposta: guida pratica. Dati aggiornati',
     keywords: 'frontalieri, ticino, svizzera, italia, milioni, territori, confine, fondi',
     ogTitle: '14 milioni ai territori di confine: fondi per frontalieri nel Varesotto',
     ogDescription: 'Ristorni fiscali per i comuni di frontiera italiani. Nuovo Accordo frontalieri 2024: franchigie, credito d\'imposta e adempimenti.',
@@ -21751,7 +21751,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "14 milioni ai territori di confine: fondi per frontalieri nel Varesotto",
-      "description": "Oltre 14 mln € ai comuni di frontiera per ristorni frontalieri. Nuovo Accordo 2024, franchigie 7.500/10.000 €, credito d'imposta: guida pratica. Dati aggiornati",
+      "description": "Oltre 14 mln € ai comuni di frontiera per ristorni frontalieri. Nuovo Accordo 2024, franchigie10.000 €, credito d'imposta: guida pratica. Dati aggiornati",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
