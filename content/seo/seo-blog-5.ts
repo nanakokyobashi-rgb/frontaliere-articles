@@ -114069,6 +114069,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-montano-lucino-via-roma': {
+    title: 'Auto fuori strada a Montano Lucino: ferito il conducente',
+    description: 'Mercoledì sera incidente a Montano Lucino Auto fuori strada in via Roma alle 23:45 Coinvolto un solo veicolo Ferito il conducente; intervenuti 118',
+    keywords: 'frontalieri, ticino, svizzera, italia, auto, fuori, strada, montano',
+    ogTitle: 'Auto fuori strada a Montano Lucino: un ferito',
+    ogDescription: 'Mercoledì sera incidente a Montano Lucino Auto fuori strada in via Roma alle 23:45 Coinvolto un solo veicolo Ferito il conducente; intervenuti 118 e Vigili',
+    canonicalPath: '/articoli-frontaliere/montano-lucino-via-roma/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Auto fuori strada a Montano Lucino: ferito il conducente",
+      "description": "Mercoledì sera incidente a Montano Lucino Auto fuori strada in via Roma alle 23:45 Coinvolto un solo veicolo Ferito il conducente; intervenuti 118",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-montano-lucino-via-roma.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-31T13:16:14+00:00",
+      "dateModified": "2026-10-31T13:16:14+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/montano-lucino-via-roma/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

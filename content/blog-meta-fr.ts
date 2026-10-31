@@ -13662,6 +13662,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.castel-san-pietro-preventivo-2027.title': 'Castel San Pietro : Budget 2027 dans le rouge',
     'blog.article.castel-san-pietro-preventivo-2027.excerpt': 'Le budget 2027 prévoit un déficit de près de deux millions Les dépenses augmentent de 7,49% par rapport à 2026 PF à 75% et PG à 80%, tous deux en hausse de 5 points',
     'blog.article.castel-san-pietro-preventivo-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.montano-lucino-via-roma.title': 'Voiture sortie de route à Montano Lucino : le conducteur blessé',
+    'blog.article.montano-lucino-via-roma.excerpt': 'Mercredi soir, accident à Montano Lucino Voiture sortie de route dans la rue Roma à 23:45 Un seul véhicule impliqué Conducteur blessé ; le 118 et les pompiers sont intervenus',
+    'blog.article.montano-lucino-via-roma.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaFr;

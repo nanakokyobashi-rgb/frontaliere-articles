@@ -13659,6 +13659,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.castel-san-pietro-preventivo-2027.title': 'Castel San Pietro: Voranschlag 2027 in den roten Zahlen',
     'blog.article.castel-san-pietro-preventivo-2027.excerpt': 'Der Voranschlag 2027 sieht ein Defizit von fast zwei Millionen vor Die Ausgaben steigen gegenüber 2026 um 7,49% PF bei 75% und PG bei 80%, beide um 5 Punkte angehoben',
     'blog.article.castel-san-pietro-preventivo-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.montano-lucino-via-roma.title': 'Auto in Montano Lucino von der Straße abgekommen: Fahrer verletzt',
+    'blog.article.montano-lucino-via-roma.excerpt': 'Unfall am Mittwochabend in Montano Lucino Auto in der Via Roma um 23:45 von der Straße abgekommen Nur ein Fahrzeug beteiligt Fahrer verletzt; 118 und Feuerwehr im Einsatz',
+    'blog.article.montano-lucino-via-roma.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaDe;

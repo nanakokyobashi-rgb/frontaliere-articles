@@ -13661,6 +13661,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.castel-san-pietro-preventivo-2027.title': 'Castel San Pietro: Preventivo 2027 nelle cifre rosse',
     'blog.article.castel-san-pietro-preventivo-2027.excerpt': 'Il Preventivo 2027 prevede quasi due milioni di disavanzo La spesa cresce del 7,49% rispetto al 2026 PF al 75% e PG all’80%, entrambi in aumento di 5 punti',
     'blog.article.castel-san-pietro-preventivo-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.montano-lucino-via-roma.title': 'Auto fuori strada a Montano Lucino: ferito il conducente',
+    'blog.article.montano-lucino-via-roma.excerpt': 'Mercoledì sera incidente a Montano Lucino Auto fuori strada in via Roma alle 23:45 Coinvolto un solo veicolo Ferito il conducente; intervenuti 118 e Vigili',
+    'blog.article.montano-lucino-via-roma.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaIt;

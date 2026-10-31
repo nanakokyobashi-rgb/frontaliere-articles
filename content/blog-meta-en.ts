@@ -13660,6 +13660,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.castel-san-pietro-preventivo-2027.title': 'Castel San Pietro: 2027 estimate in the red',
     'blog.article.castel-san-pietro-preventivo-2027.excerpt': 'The 2027 Budget forecasts a deficit of nearly two million Spending increases by 7.49% compared with 2026 PF at 75% and PG at 80%, both up by 5 points',
     'blog.article.castel-san-pietro-preventivo-2027.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.montano-lucino-via-roma.title': 'Car veers off the road in Montano Lucino: driver injured',
+    'blog.article.montano-lucino-via-roma.excerpt': 'Wednesday evening accident at Montano Lucino Auto off the road on Via Roma at 23:45 Only one vehicle involved Driver injured; 118 and Fire Brigade intervened',
+    'blog.article.montano-lucino-via-roma.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaEn;
