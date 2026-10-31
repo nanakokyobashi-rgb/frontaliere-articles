@@ -89,6 +89,19 @@ test('quota SSN: ogni forma dell\'importo mensile', () => {
   }
 });
 
+test('quota SSN: gli intervalli mensili si giudicano su entrambi gli estremi', () => {
+  assert.equal(findTaxHealthParameterErrors('La tassa salute costa 20–30 € al mese.').length, 1);
+  assert.equal(findTaxHealthParameterErrors('La tassa salute costa da 100 a 300 euro al mese.').length, 1);
+  assert.equal(findTaxHealthParameterErrors('La tassa salute costa da 30 a 200 euro al mese.').length, 0);
+});
+
+test('riparazione: una coppia dentro un calcolo non diventa un risultato falso', () => {
+  const source = 'La franchigia: 7.500 € - 10.000 € = 17.500 € totali.';
+  const { text, arith } = repairFiscalText(source, 'blog-body/it/x.ts');
+  assert.equal(text, source);
+  assert.equal(arith.length, 1);
+});
+
 test('i falsi amici non scattano', () => {
   assert.deepEqual(ids('Health insurance premiums count only for the share above the flat-rate deduction.'), []);
   assert.deepEqual(ids('The 20% is not returned to municipalities.'), []);

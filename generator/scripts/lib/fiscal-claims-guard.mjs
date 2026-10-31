@@ -176,12 +176,14 @@ export function findFiscalClaims(text) {
 const RATE_ON_PAY_RE = /(\d{1,2}(?:[.,]\d)?)(?:\s?%?\s?(?:-|–|—|a|al|to|bis|à)\s?(\d{1,2}(?:[.,]\d)?))?\s?%\s+(?:del|dello|della|sul|sullo|sulla|von|vom|auf|auf den|auf das|of|of the|on|on the|des|du|de|de la|sur|sur le|sur la)\s+(?:proprio\s+|their\s+|ihres\s+)?(?:reddit|salari|stipendi|income|salary|wage|einkommen|nettoeinkommen|bruttoeinkommen|lohn|gehalt|brutto|netto|revenu|salaire|gross|net)\w*(?:\s+(?:netto|lordo|net|gross|brut|brutto))?/gi;
 
 /** Un importo in euro riferito al mese: la quota SSN sta fra 30 e 200 per mese lavorato. */
-const MONTHLY_EURO_RE = /(?:€\s?(\d{1,3}(?:[.'’\u00a0 ]\d{3})*)|(\d{1,3}(?:[.'’\u00a0 ]\d{3})*)\s?(?:€|(?:euro|eur)\b))\s*(?:al mese|per mese|\/mese|mensil\w*|a month|per month|\/month|monthly|pro monat|im monat|monatlich\w*|\/monat|par mois|\/mois|mensuel\w*)/gi;
+const MONTHLY_EURO_RE = /(?:(\d{1,3}(?:[.'’\u00a0 ]\d{3})*)\s?(?:€|euro|eur)?\s?(?:-|–|—|a|al|to|bis|à)\s?)?(?:€\s?(\d{1,3}(?:[.'’\u00a0 ]\d{3})*)|(\d{1,3}(?:[.'’\u00a0 ]\d{3})*)\s?(?:€|(?:euro|eur)\b))\s*(?:al mese|per mese|\/mese|mensil\w*|a month|per month|\/month|monthly|pro monat|im monat|monatlich\w*|\/monat|par mois|\/mois|mensuel\w*)/gi;
 
 function monthlyAmountsOutOfRange(sentence) {
   return [...sentence.matchAll(MONTHLY_EURO_RE)].some((match) => {
-    const value = Number((match[1] ?? match[2]).replace(/\D/g, ''));
-    return value < 30 || value > 200;
+    return [match[1], match[2], match[3]].filter(Boolean).some((amount) => {
+      const value = Number(amount.replace(/\D/g, ''));
+      return value < 30 || value > 200;
+    });
   });
 }
 

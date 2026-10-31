@@ -124,6 +124,9 @@ function repairPairs(text, rel) {
   let out = '';
   let last = 0;
   for (const match of text.matchAll(PAIR_RE)) {
+    // Una coppia dentro un calcolo non e' un'alternativa: toccarla falserebbe il
+    // risultato. Resta dov'e' e la frase finisce fra gli esempi aritmetici.
+    if (/^\s*=/.test(text.slice(match.index + match[0].length, match.index + match[0].length + 4))) continue;
     const locale = localeOf(rel, text.slice(Math.max(0, match.index - 120), match.index));
     const head = text.slice(last, match.index).replace(PLURAL_RE, (all, word, tail) => `${SINGULAR[word]}${tail}`);
     out += head + TEXTS[locale].amount;
