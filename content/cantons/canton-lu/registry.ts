@@ -249,4 +249,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'lukb-utile-nove-mesi',
+ category: 'novita',
+ date: '2026-10-31T13:51:58.051Z',
+ image: '/images/blog/article-lukb-utile-nove-mesi.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['LU'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
