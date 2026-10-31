@@ -8575,7 +8575,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Guida pratica al permesso G 2026: come presentare domanda, costi 65 CHF, documenti, validità 5 anni e rinnovo presso Migrationsamt. Dati aggiornati 2026 per',
     keywords: 'frontalieri, ticino, svizzera, italia, g-bewilligung, antrag, completa, costi',
     ogTitle: 'G-Bewilligung Antrag 2026: costi, rinnovo, documenti',
-    ogDescription: 'Procedura domanda permesso G 2026: costo 65 CHF, validità 5 anni, rinnovo e documenti presso Migrationsamt.',
+    ogDescription: '',
     canonicalPath: '/articoli-svizzera/g-bewilligung-antrag-2026-step/',
     structuredData: {
       "@context": "https://schema.org",

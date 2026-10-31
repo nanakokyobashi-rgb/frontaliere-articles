@@ -88,7 +88,7 @@ Mit der Option für den italienischen Gesundheitsdienst bleibst du bei der ASL d
 
 «Neue» Grenzgänger, die ab dem **17. Juli 2023** eingestellt wurden und auch in Italien besteuert werden, zahlen keinen spezifischen Gesundheitsbeitrag: Der Dienst wird über die allgemeine Besteuerung finanziert. «Alte» Grenzgänger, die zwischen dem **31. Dezember 2018** und dem 17. Juli 2023 tätig waren, nur in der Schweiz besteuert werden und den italienischen Gesundheitsdienst gewählt haben, unterliegen der gesetzlichen Beteiligung.
 
-Das Gesetz 213/2023 (Art. 1, Abs. 237-239) sieht für «alte» Grenzgänger eine an die Wohnregion zu zahlende Beteiligung vor: **3 % bis 6 %** des in der Schweiz erzielten Nettolohns, progressiv nach Einkommen und Familienlasten, mit mindestens **30 Euro** und höchstens **200 Euro** für jeden gearbeiteten Monat. Die Beteiligung betrifft auch unterhaltsberechtigte Familienmitglieder.
+Das [Gesetz 213/2023](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2023-12-30;213~art1!vig=2026-10-31) (Art. 1, Abs. 237-239) sieht für «alte» Grenzgänger eine an die Wohnregion zu zahlende Beteiligung vor: **3 % bis 6 %** des in der Schweiz erzielten Nettolohns, progressiv nach Einkommen und Familienlasten, mit mindestens **30 Euro** und höchstens **200 Euro** für jeden gearbeiteten Monat. Die Beteiligung betrifft auch unterhaltsberechtigte Familienmitglieder.
 
 Das Ausführungsdekret datiert vom **14. November 2025** und wurde am **18. Dezember 2025** im Amtsblatt veröffentlicht. Die Lombardei hat **3 %** gewählt, für Einkommen 2025 und ohne Rückwirkung. Der Beginn der Erhebung ist nicht bestätigt: Den aktuellen Stand findest du auf der Seite der Website zum Gesundheitsbeitrag.
 

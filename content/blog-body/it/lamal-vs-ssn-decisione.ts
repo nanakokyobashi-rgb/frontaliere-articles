@@ -88,7 +88,7 @@ Con l'opzione per il Servizio sanitario italiano resti iscritto all'ASL di resid
 
 I nuovi frontalieri, assunti dal **17 luglio 2023** e tassati anche in Italia, non pagano un contributo sanitario specifico: il Servizio sanitario si finanzia con la fiscalità generale. I «vecchi» frontalieri, in attività fra il **31 dicembre 2018** e il 17 luglio 2023 e tassati solo in Svizzera, che hanno scelto il Servizio sanitario, seguono la quota prevista dalla legge.
 
-La legge 213/2023 (art. 1, commi 237-239) prevede per i «vecchi» una quota di compartecipazione da versare alla Regione di residenza: fra il **3% e il 6%** del salario netto percepito in Svizzera, progressiva rispetto a reddito e carichi familiari, con un minimo di **30 euro** e un massimo di **200 euro** per ogni mese lavorato. La quota riguarda anche i familiari a carico.
+La [legge 213/2023](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2023-12-30;213~art1!vig=2026-10-31) (art. 1, commi 237-239) prevede per i «vecchi» una quota di compartecipazione da versare alla Regione di residenza: fra il **3% e il 6%** del salario netto percepito in Svizzera, progressiva rispetto a reddito e carichi familiari, con un minimo di **30 euro** e un massimo di **200 euro** per ogni mese lavorato. La quota riguarda anche i familiari a carico.
 
 Il decreto attuativo è del **14 novembre 2025**, pubblicato nella Gazzetta Ufficiale del **18 dicembre 2025**. La Lombardia ha scelto il **3%** sui redditi 2025 e senza effetto retroattivo. L'avvio della riscossione non è confermato: per lo stato aggiornato consulta la pagina del sito sulla tassa sulla salute.
 

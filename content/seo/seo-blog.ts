@@ -2729,8 +2729,8 @@ const BLOG_SEO_METADATA: Record<string, SEOMetadata> = {
  structuredData: {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
- "headline": "Nuovo Accordo Fiscale 2026: Simulazione Pratica per Frontalieri",
- "description": "Scopri l'impatto del nuovo accordo fiscale 2026 sul tuo stipendio da frontaliere in Ticino. Simulazione reale con 65'000 CHF: confronto vecchio-nuovo regime.",
+ "headline": "Nuovo Accordo Frontalieri: Simulazione Pratica per Frontalieri",
+ "description": "Scopri l'impatto del Nuovo Accordo Frontalieri sul tuo stipendio da frontaliere in Ticino. Simulazione reale con 65'000 CHF: confronto vecchio-nuovo regime.",
  "image": {
  "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/simulazione-fiscale-frontaliere-2026.webp`,
  "width": 1344,
