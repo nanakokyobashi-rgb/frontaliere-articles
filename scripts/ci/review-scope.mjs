@@ -811,8 +811,9 @@ async function resolveFormalReviewContext(body, { repo, pr, prUrl } = {}) {
     const metadata = gh(['api', `repos/${repo}/pulls/${pr}`]);
     const headSha = String(metadata?.head?.sha || '');
     if (!/^[0-9a-f]{40}$/iu.test(headSha)) return null;
-    const reviews = gh(['api', `repos/${repo}/pulls/${pr}/reviews`, '--paginate']);
-    if (!Array.isArray(reviews)) return null;
+    const reviewPages = gh(['api', `repos/${repo}/pulls/${pr}/reviews`, '--paginate', '--slurp']);
+    if (!Array.isArray(reviewPages) || !reviewPages.every(Array.isArray)) return null;
+    const reviews = reviewPages.flat();
     const candidates = reviews
       .filter((review) => isManagedReview(review)
         && isTerminalReviewState(review?.state)
