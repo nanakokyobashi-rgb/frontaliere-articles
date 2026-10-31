@@ -8660,6 +8660,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.startup-innovazione-sociale-open-call.title': 'Open Call 2026: training and funding for social startups',
     'blog.article.startup-innovazione-sociale-open-call.excerpt': 'Applications open until January 15, 2027 20.000 francs at stake for five selected startups Social Business Conference 2027 in Lugano on May 19',
     'blog.article.startup-innovazione-sociale-open-call.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.sospensione-lavori-muro-anti-migranti-big-bend-texas.title': 'Big Bend: CBP pauses construction in the national park',
+    'blog.article.sospensione-lavori-muro-anti-migranti-big-bend-texas.excerpt': 'On 17 August 2026, CBP Commissioner Rodney S. Scott announced a pause in construction activity at Big Bend National Park for an on-the-ground evaluation.',
+    'blog.article.sospensione-lavori-muro-anti-migranti-big-bend-texas.imageAlt': 'Big Bend National Park, Texas',
 };
 
 export default blogMetaChEn;
