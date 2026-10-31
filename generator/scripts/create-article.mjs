@@ -5723,7 +5723,9 @@ export function assertArticlePassesFactualityGates(data, options = {}) {
   assertNoCorpusFabricatedInstitutionNames(data);
   assertLocalizedToponyms(data);
   if (options.writer !== 'journalist') {
-    assertArticleRelevance(data, options.sectionName || SECTION_NAME);
+    const sectionName = options.sectionName
+      || (typeof SECTION_NAME === 'string' ? SECTION_NAME : 'frontaliere');
+    assertArticleRelevance(data, sectionName);
     assertYmylPublishable(data, {
       sourceUrl: options.sourceUrl ?? data?._sourceUrl ?? data?.sourceUrl ?? '',
     });
