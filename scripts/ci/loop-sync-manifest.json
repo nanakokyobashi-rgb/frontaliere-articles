@@ -994,7 +994,7 @@
       "reason": "Sorgente unica per derivare e applicare `updatedAt` dai commit dei body ai registry TypeScript del corpus. Il sito riceve JSON pubblicato via HTTP e non deve importare la logica che legge e modifica le sorgenti content/.",
       "baseline": {
         "site": null,
-        "corpus": "329a7f0c23a80dd8",
+        "corpus": "c772d9abb8191849",
         "alignedAt": "2026-10-31"
       }
     },
