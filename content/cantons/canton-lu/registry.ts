@@ -216,4 +216,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'passepartout-trasporto-centrale',
+ category: 'pratico',
+ date: '2026-10-31T09:19:08.597Z',
+ image: '/images/blog/article-passepartout-trasporto-centrale.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['LU'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

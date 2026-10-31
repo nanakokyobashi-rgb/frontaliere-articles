@@ -748,6 +748,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-passepartout-trasporto-centrale': {
+    title: 'Passepartout: accesso più semplice al trasporto pubblico',
+    description: 'Prima del 1986 servivano più biglietti per un viaggio nell\'ÖV. Dal 1986 il nuovo Tarifverbund ha migliorato l\'accesso nella Svizzera centrale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, passepartout, accesso, semplice, trasporto',
+    ogTitle: 'Passepartout: trasporto pubblico più semplice dal 1986',
+    ogDescription: 'Il Passepartout caratterizza la Svizzera centrale da 40 anni. Il lead pubblico ricorda il passaggio del 1986: prima di allora, per un viaggio nell\'ÖV servivano più biglietti. Il materiale pubblico non riporta prezzi o dettagli operativi.',
+    canonicalPath: '/articoli-lucerna/passepartout-trasporto-centrale/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Passepartout: accesso più semplice al trasporto pubblico",
+      "description": "Prima del 1986 servivano più biglietti per un viaggio nell'ÖV. Dal 1986 il nuovo Tarifverbund ha migliorato l'accesso nella Svizzera centrale.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-passepartout-trasporto-centrale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-31T09:19:08+00:00",
+      "dateModified": "2026-10-31T09:19:08+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-lucerna/passepartout-trasporto-centrale/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

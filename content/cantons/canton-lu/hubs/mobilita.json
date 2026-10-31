@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "mobilita",
-  "updatedAt": "2026-10-31T06:45:46.687Z",
-  "contentHash": "3cedce932dd88491ef69d69cec271b10c744b81753e0a5ba6df12a38a242f15e",
+  "updatedAt": "2026-10-31T09:39:38.386Z",
+  "contentHash": "b67c877fb2986d38f0c11178f6548e22b51019c707900f683c9c4cd730995449",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -120,6 +120,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Passepartout: accesso più semplice al trasporto pubblico",
+          "url": "/articoli-lucerna/passepartout-trasporto-centrale/",
+          "excerpt": "Prima del 1986 servivano più biglietti per un viaggio nell'ÖV.",
+          "date": "2026-10-31T09:19:08.597Z"
+        },
+        {
           "title": "Tifosi Lucerna a Lugano: strade chiuse e traffico",
           "url": "/articoli-frontaliere/tifosi-lucerna-lugano-traffico/",
           "excerpt": "Partita alle 18 allo stadio di Cornaredo",
@@ -161,7 +167,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-31T06:45:46.687Z"
+      "updatedAt": "2026-10-31T09:39:38.386Z"
     },
     "en": {
       "canton": "LU",
@@ -264,6 +270,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Passepartout: easier access to public transport",
+          "url": "/en/lucerne-articles/passepartout-central-transit/",
+          "excerpt": "Before 1986, multiple tickets were required for a journey on public transport.",
+          "date": "2026-10-31T09:19:08.597Z"
+        },
+        {
           "title": "Lucerne fans in Lugano: roads closed and traffic",
           "url": "/en/cross-border-articles/lucerne-fans-in-lugano-roads-closed-and-traffic/",
           "date": "2026-10-08T11:31:48.408Z"
@@ -303,7 +315,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-31T06:45:46.687Z"
+      "updatedAt": "2026-10-31T09:39:38.386Z"
     },
     "de": {
       "canton": "LU",
@@ -406,6 +418,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Passepartout: Einfacherer Zugang zum öffentlichen Verkehr",
+          "url": "/de/luzern-artikel/passepartout-zentralschweiz-oev/",
+          "excerpt": "Vor 1986 waren für eine Fahrt im ÖV mehrere Billette nötig.",
+          "date": "2026-10-31T09:19:08.597Z"
+        },
+        {
           "title": "Luzern-Fans in Lugano: gesperrte Straßen und Verkehr",
           "url": "/de/grenzgaenger-artikel/luzern-fans-in-lugano-gesperrte-stra-en-und-verkehr/",
           "date": "2026-10-08T11:31:48.408Z"
@@ -445,7 +463,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-31T06:45:46.687Z"
+      "updatedAt": "2026-10-31T09:39:38.386Z"
     },
     "fr": {
       "canton": "LU",
@@ -548,6 +566,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Passepartout : accès plus simple aux transports publics",
+          "url": "/fr/articles-lucerne/passepartout-transports-centre/",
+          "excerpt": "Avant 1986, plusieurs billets étaient nécessaires pour un trajet en transports publics.",
+          "date": "2026-10-31T09:19:08.597Z"
+        },
+        {
           "title": "Supporters de Lucerne à Lugano : routes fermées et trafic",
           "url": "/fr/articles-frontalier/supporters-de-lucerne-a-lugano-routes-fermees-et-trafic/",
           "excerpt": "Match à 18 h au stade de Cornaredo",
@@ -589,7 +613,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-31T06:45:46.687Z"
+      "updatedAt": "2026-10-31T09:39:38.386Z"
     }
   }
 }
