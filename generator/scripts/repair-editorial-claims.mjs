@@ -24,7 +24,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { readTsStringLiteral } from './lib/ts-string-map.mjs';
 import { escapeForSingleQuoteTS } from './lib/article-meta-block.mjs';
-import { CLAIM_LOCALES, repairEditorialClaims } from '../../engine/shared/editorialClaims.mjs';
+import { CLAIM_LOCALES, HEALTH_TAX_SUMMARY, repairEditorialClaims } from '../../engine/shared/editorialClaims.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const CONTENT = path.join(ROOT, 'content');
@@ -49,6 +49,30 @@ function record(surface, id, locale, field, changes) {
   touched.add(id);
 }
 
+/** Una FAQ rimasta senza domanda o senza risposta si toglie, il resto resta valido. */
+function cleanFaqValue(value) {
+  const pairs = JSON.parse(value);
+  return JSON.stringify(pairs.filter((pair) => pair.q?.trim() && pair.a?.trim()));
+}
+
+function readTitles() {
+  const out = new Map();
+  for (const locale of CLAIM_LOCALES) {
+    for (const name of [`blog-meta-${locale}.ts`, `blog-meta-ch-${locale}.ts`]) {
+      const source = fs.readFileSync(path.join(CONTENT, name), 'utf8');
+      FIELD_KEY.lastIndex = 0;
+      for (let match = FIELD_KEY.exec(source); match; match = FIELD_KEY.exec(source)) {
+        if (match[3] !== 'title') continue;
+        const literal = readTsStringLiteral(source, match.index + match[0].length);
+        if (literal) out.set(`${locale}:${match[2]}`, literal.value);
+      }
+    }
+  }
+  return out;
+}
+
+const titles = readTitles();
+
 function repairStringFields(file, locale, surface) {
   const source = fs.readFileSync(file, 'utf8');
   let out = '';
@@ -58,9 +82,18 @@ function repairStringFields(file, locale, surface) {
     const start = match.index + match[0].length;
     const literal = readTsStringLiteral(source, start);
     if (!literal) continue;
-    const repaired = repairEditorialClaims(literal.value, { locale });
-    if (repaired.changes.length === 0) continue;
     const [, , id, field] = match;
+    const repaired = repairEditorialClaims(literal.value, { locale, title: titles.get(`${locale}:${id}`) ?? '' });
+    if (repaired.changes.length === 0) continue;
+    if (field === 'faq') repaired.value = cleanFaqValue(repaired.value);
+    // Excerpt e titoli non possono restare vuoti: un body si', perche' ne resta il resto.
+    if (surface.startsWith('meta') && !repaired.value.trim()) {
+      if (field !== 'excerpt') {
+        report.skipped.push({ surface, id, locale, field, reason: 'campo-vuoto' });
+        continue;
+      }
+      repaired.value = HEALTH_TAX_SUMMARY[locale];
+    }
     const raw = source.slice(start + 1, literal.end - 1);
     if (source[start] !== "'" || escapeForSingleQuoteTS(literal.value) !== raw) {
       report.skipped.push({ surface, id, locale, field, reason: 'literal-non-round-trip' });
@@ -84,6 +117,7 @@ function repairSeoFile(file) {
     for (const locale of CLAIM_LOCALES) {
       const repaired = repairEditorialClaims(value, { locale });
       if (repaired.changes.length === 0) continue;
+      if (!repaired.value.trim()) repaired.value = HEALTH_TAX_SUMMARY[locale];
       const next = quote === "'" ? repaired.value.replace(/'/g, "\\'") : repaired.value;
       lines[index] = `${head}${quote}${next}${quote}${tail}`;
       changed = true;

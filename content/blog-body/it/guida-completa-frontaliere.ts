@@ -133,7 +133,7 @@ Il **permesso G** (permesso per frontalieri) è il documento che autorizza un ci
 |---|---|---|
 | Firma del contratto | — | Lavoratore + datore |
 | Richiesta del permesso | Entro l'inizio dell'attività | Datore di lavoro (solitamente) |
-| Rilascio del permesso G | 2-4 settimane | Ufficio della migrazione cantonale |
+| Rilascio del permesso G | 2-4 settimane | [Ufficio della migrazione](https://www4.ti.ch/index.php?id=122090) cantonale |
 | Validità iniziale | 5 anni (se contratto indeterminato) | Automatico |
 | Rinnovo | Ogni 5 anni, automatico | Ufficio della migrazione |
 
@@ -157,7 +157,7 @@ La fiscalità è l'aspetto più complesso e più importante per un frontaliere. 
 
 ### Il vecchio regime (lavoratori pre-luglio 2023)
 
-Chi ha iniziato a lavorare come frontaliere **prima del 17 luglio 2023** resta nel regime dell'art. 9 dell'Accordo, senza termine:
+Chi ha iniziato a lavorare come frontaliere **prima del 17 luglio 2023** resta nel regime dell'art. 9 dell'Accordo:
 
 - **Solo imposta alla fonte svizzera**: niente IRPEF su questo reddito per i vecchi frontalieri
 - L'imposta alla fonte viene trattenuta dal datore di lavoro

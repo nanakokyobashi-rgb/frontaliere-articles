@@ -157,7 +157,7 @@ Taxation is the most complex and most important aspect for a cross-border worker
 
 ### The old regime (workers pre-July 2023)
 
-Those who started working as cross-border workers **before 17 July 2023** remain in the Art. 9 regime of the Agreement, with no end date:
+Those who started working as cross-border workers **before 17 July 2023** remain in the Art. 9 regime of the Agreement:
 
 - **Swiss withholding tax only** (no Italian taxation)
 - The withholding tax is deducted by the employer

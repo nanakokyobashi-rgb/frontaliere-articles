@@ -88,7 +88,7 @@ Avec l'option pour le service de santé italien, vous restez inscrit auprès de 
 
 Les « nouveaux » frontaliers, embauchés à partir du **17 juillet 2023** et imposés aussi en Italie, ne paient aucune contribution sanitaire spécifique : le service est financé par la fiscalité générale. Les « anciens » frontaliers, actifs entre le **31 décembre 2018** et le 17 juillet 2023, imposés uniquement en Suisse et ayant choisi le service de santé italien, sont soumis à la quote-part prévue par la loi.
 
-La loi 213/2023 (art. 1, alinéas 237-239) prévoit pour les « anciens » une quote-part à verser à la région de résidence : **3 % à 6 %** du salaire net perçu en Suisse, progressive selon le revenu et les charges familiales, avec un minimum de **30 euros** et un maximum de **200 euros** pour chaque mois travaillé. La quote-part concerne aussi les membres de la famille à charge.
+La [loi 213/2023](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2023-12-30;213~art1!vig=2026-10-31) (art. 1, alinéas 237-239) prévoit pour les « anciens » une quote-part à verser à la région de résidence : **3 % à 6 %** du salaire net perçu en Suisse, progressive selon le revenu et les charges familiales, avec un minimum de **30 euros** et un maximum de **200 euros** pour chaque mois travaillé. La quote-part concerne aussi les membres de la famille à charge.
 
 Le décret d'application date du **14 novembre 2025** et a été publié au Journal officiel le **18 décembre 2025**. La Lombardie a choisi **3 %**, sur les revenus 2025 et sans effet rétroactif. Le début de la perception n'est pas confirmé : consultez la page du site consacrée à la contribution sanitaire pour connaître l'état actualisé.
 

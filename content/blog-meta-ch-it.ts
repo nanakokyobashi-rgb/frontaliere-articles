@@ -677,7 +677,7 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.quellensteuer-tarife-svizzera-2026.excerpt': 'Quellensteuer Svizzera 2026: tariffe, abbuoni, soglie NOV 120k CHF per Ticino, Grigioni, Vallese, Berna. Guida al calcolo e ai principali abbuoni.',
     'blog.article.quellensteuer-tarife-svizzera-2026.imageAlt': 'Ufficio fiscale svizzero moderno con documenti e calcolatrici, Ticino.',
     'blog.article.g-bewilligung-antrag-2026-step.title': 'G-Bewilligung Antrag 2026: guida completa, costi e rinnovo',
-    'blog.article.g-bewilligung-antrag-2026-step.excerpt': 'Procedura dettagliata per il permesso G dal 2026: documenti, Migrationsamt, costo 65 CHF, validità 5 anni e rinnovo.',
+    'blog.article.g-bewilligung-antrag-2026-step.excerpt': '',
     'blog.article.g-bewilligung-antrag-2026-step.imageAlt': 'Sportello di un ufficio migrazione svizzero con documenti ufficiali.',
     'blog.article.cambio-commando-volontari-lugano.title': 'Cambio di comando ai Volontari Luganesi',
     'blog.article.cambio-commando-volontari-lugano.excerpt': 'Sergio Romaneschi ha guidato il corpo per 13 anni. Il nuovo comandante è Paolo Baiardi. Cerimonia a Palazzo Civico.',

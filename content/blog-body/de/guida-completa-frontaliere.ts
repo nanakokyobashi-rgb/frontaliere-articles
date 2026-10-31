@@ -133,7 +133,7 @@ Die **G-Bewilligung** (Grenzgängerbewilligung) ist das Dokument, das einen EU/E
 |---|---|---|
 | Vertragsunterzeichnung | — | Arbeitnehmer + Arbeitgeber |
 | Bewilligungsantrag | Vor Arbeitsbeginn | Arbeitgeber (in der Regel) |
-| Ausstellung G-Bewilligung | 2-4 Wochen | Kantonales Migrationsamt |
+| Ausstellung G-Bewilligung | 2-4 Wochen | Kantonales [Migrationsamt](https://www4.ti.ch/index.php?id=122090) |
 | Erstgültigkeit | 5 Jahre (bei unbefristetem Vertrag) | Automatisch |
 | Erneuerung | Alle 5 Jahre, automatisch | Migrationsamt |
 
@@ -157,7 +157,7 @@ Die Besteuerung ist der komplexeste und wichtigste Aspekt für einen Grenzgänge
 
 ### Das alte Regime (Arbeitende vor Juli 2023)
 
-Wer **vor dem 17. Juli 2023** als Grenzgänger zu arbeiten begann, bleibt in der Regelung von Art. 9 des Abkommens, ohne Enddatum:
+Wer **vor dem 17. Juli 2023** als Grenzgänger zu arbeiten begann, bleibt in der Regelung von Art. 9 des Abkommens:
 
 - **Nur Schweizer Quellensteuer** (keine italienische Besteuerung)
 - Die Quellensteuer wird vom Arbeitgeber abgezogen
