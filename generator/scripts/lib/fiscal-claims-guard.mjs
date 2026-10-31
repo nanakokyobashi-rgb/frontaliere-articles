@@ -42,11 +42,11 @@ const EURO_RE = /(€|\beuro|\beur\b)/i;
 const MONTHLY_RE = /(al mese|mensil|\/mese|per month|a month|monthly|pro monat|monatlich|par mois|mensuel)/i;
 const HISTORIC_RE = /(fino al 2023|prima del 2024|until 2023|before 2024|bis 2023|vor 2024|jusqu.en 2023|avant 2024)/i;
 
-const RETURNED_VERBS = 'retrocess|riversat|restituit|rimborsat|returned|rebated|refunded|paid back|r[eé]troc[eé]d|revers[eé]|rembours[eé]|zur[uü]ck(?:erstatt|gegeben|gezahlt|fl[iï]e(?:ss|ß)t)|r[uü]ckerstatt';
+const RETURNED_VERBS = 'retrocess|riversat|restituit|rimborsat|versat|trasferit|returned|rebated|refunded|paid back|paid to|transferred|[uü]berwiesen|vers[eé]|transf[eé]r[eé]|r[eé]troc[eé]d|revers[eé]|rembours[eé]|zur[uü]ck(?:erstatt|gegeben|gezahlt|fl[iï]e(?:ss|ß)t)|r[uü]ckerstatt';
 const NEGATION_RE = /(?:\bnon\b|\bnessun[ao]?\b|\bnot\b|\bno\b|\bnicht\b|\bkein\w*|\bne\b|\bn['’]|\baucun\w*)/i;
 
 /** Le date con cui si dice che l'Accordo sarebbe in vigore dal 2024: e' invece la prima applicazione. */
-const DATE_2024 = "(?:1°?\\s*(?:o\\s+)?|primo\\s+|1\\.?\\s*|1st\\s+|1er\\s+|premier\\s+|ersten\\s+)?(?:gennaio|january|januar|janvier)(?:\\s+1(?:st)?,?)?\\s+2024|0?1[/.]\\s?0?1[/.]\\s?2024";
+const DATE_2024 = "(?:1°?\\s*(?:o\\s+)?|primo\\s+|1\\.?\\s*|1st\\s+|1er\\s+|premier\\s+|ersten\\s+)?(?:gennaio|january|januar|janvier)(?:\\s+1(?:st)?,?)?\\s+2024|0?1[/.]\\s?0?1[/.]\\s?2024|2024(?![/\\d]|\\.\\d)";
 const IN_FORCE_WORDS = "in vigore (?:dal|da|il)|entrat[oa] in vigore(?: il| dal| a)?|in force (?:from|since|as of)|(?:came|entered) into force(?: on| in)?|took effect(?: on| in)?|in kraft seit|in kraft getreten (?:am|seit)|en vigueur (?:depuis|d[eè]s|le)|entr[eé]e? en vigueur(?: le| en)?";
 
 export const CLAIM_RULES = Object.freeze([
@@ -78,7 +78,8 @@ export const CLAIM_RULES = Object.freeze([
   {
     id: 'credito-80',
     source: 'Accordo 2020 art. 3; Convenzione art. 24',
-    matches: (sentence) => /(credito d.imposta|tax credit|steueranrechnung|steuergutschrift|cr[eé]dit d.imp[oô]t)[^.]{0,40}(fino all.80|up to 80|bis zu 80|jusqu.[àa] 80|80\s?%\s+(?:del|of the|der|du)\s+(?:prelievo|ritenuta|withh|quellen|pr[eé]l))/i.test(sentence),
+    matches: (sentence) => /(credito d.imposta|tax credit|steueranrechnung|steuergutschrift|cr[eé]dit d.imp[oô]t)[^.]{0,40}(fino all.80|up to 80|bis zu 80|jusqu.[àa] 80|80\s?%\s+(?:del|of the|der|du)\s+(?:prelievo|ritenuta|withh|quellen|pr[eé]l))/i.test(sentence)
+      || /(credito d.imposta|tax credit|steueranrechnung|steuergutschrift|cr[eé]dit d.imp[oô]t)\s+(?:dell.|pari all.|del|of|von|de|du)\s*80\s?%/i.test(sentence),
   },
   {
     id: 'retrocessione-20',
@@ -147,7 +148,7 @@ export function sentenceSpanAt(text, index, maxLength = 700) {
 const CANDIDATE_RE = new RegExp(
   `${AMOUNT_7500}|forfe?t+ari|flat[- ]rate|pauschal|forfaitaire|38[,.]8|\\b80\\s?%|\\b20\\s?%`
   + '|mai in entrambi|never in both|nie(?:mals)? in beiden|jamais dans les deux'
-  + '|gennaio 2024|january 2024|january 1(?:st)?,? 2024|januar 2024|janvier 2024|\\b0?1[/.]\\s?0?1[/.]\\s?2024',
+  + '|gennaio 2024|january 2024|january 1(?:st)?,? 2024|januar 2024|janvier 2024|\\b0?1[/.]\\s?0?1[/.]\\s?2024|in vigore dal 2024|in force since 2024|seit 2024 in kraft|en vigueur depuis 2024',
   'gi',
 );
 
