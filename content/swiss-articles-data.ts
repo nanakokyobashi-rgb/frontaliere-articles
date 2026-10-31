@@ -10600,16 +10600,6 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorName: 'Redazione Frontaliere Ticino',
    },
    {
-    id: 'sospensione-lavori-muro-anti-migranti-big-bend-texas',
-    category: 'fiscale',
-    date: '2026-08-17T21:50:58.327Z',
-    image: '/images/blog/sospensione-lavori-muro-anti-migranti-big-bend-texas.webp',
-    hasCalculator: true,
-    articleType: 'news',
-    authorSlug: 'laura-bianchi',
-    authorName: 'Laura Bianchi',
-   },
-   {
     id: 'infantino-fifa-lamour-licenziato',
     category: 'novita',
     date: '2026-08-17T22:00:45.252Z',

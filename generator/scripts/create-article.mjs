@@ -6073,7 +6073,9 @@ FATTI VERIFICATI DI RIFERIMENTO — usa come ground truth:
 CONVENZIONI E ACCORDI:
 - Convenzione italo-svizzera contro le doppie imposizioni: firmata il 9 MARZO 1976 (NON dicembre, NON 1974)
 - Nuovo Accordo Frontalieri: firmato 23 DICEMBRE 2020, in vigore dal 1° GENNAIO 2024
-- Periodo transitorio: dal 2024 al 2033 (10 anni) per chi era già frontaliere prima del 17/7/2023
+- Vecchi frontalieri (Accordo art. 9): residenti in Italia che lavoravano in Ticino, Grigioni o Vallese tra il 31/12/2018 e il 17/7/2023; restano tassati solo in Svizzera, senza termine. Il 2033 riguarda solo i ristorni ai Comuni (art. 9 par. 2)
+- Nuovi frontalieri (Accordo art. 3): Svizzera fino all'80% dell'imposta, poi tassazione in Italia con eliminazione della doppia imposizione
+- Fuori da Ticino, Grigioni e Vallese non si applica l'Accordo frontalieri: valgono la Convenzione del 1976 e la tassazione in Italia con credito d'imposta
 - Ratifica italiana: Legge 83 del 13 GIUGNO 2023
 
 ALIQUOTE SVIZZERE:
@@ -6086,8 +6088,8 @@ ALIQUOTE SVIZZERE:
 ALIQUOTE ITALIANE:
 - IRPEF dal ${IRPEF_ANNO_CORRENTE}: ${irpefScaglioniTesto(IRPEF_ANNO_CORRENTE)} (${IRPEF_FONTE_CORRENTE})
 - IRPEF 2024-${IRPEF_ANNO_PRECEDENTE}: ${irpefAliquoteBreve(IRPEF_ANNO_PRECEDENTE)} — corretta SOLO per redditi di quegli anni
-- Franchigia nuovo accordo: €10'000 esenti per NUOVI frontalieri (dal 2024)
-- Vecchi frontalieri (ante 17/7/2023): esenzione €7'500 fino al 2033
+- Franchigia IRPEF: €10'000 (L. 83/2023 art. 4, dal 2024); non riguarda i vecchi frontalieri, che su quel reddito non pagano IRPEF
+- Quota di compartecipazione al SSN ("tassa sulla salute", L. 213/2023 art. 1 c. 237-239): dal 3% al 6% del salario netto, da 30 a 200 euro per mese lavorato, definita ogni anno dalla Regione di residenza
 
 ISTITUZIONI REALI:
 - Svizzera: SECO, SEM, SUVA, USTAT, UFSP (BAG in tedesco), SUPSI, USI, EOC, DFE, DSS, ARE, BFS, AFC/ESTV, BNS/SNB
@@ -6165,9 +6167,9 @@ ASSICURAZIONI:
 // criteria 3-4) grows 2830 -> 2980 chars (+150, ~43 est. tokens); it rides on up to 24000 chars of
 // article, so its admission is set by the article, not by this delta.
 const EVERGREEN_FACTS_BRIEF = `FATTI VERIFICATI (ground truth — il fact-checker blocca l'articolo se diverghi da questi valori):
-- Imposta alla fonte sul reddito da lavoro: trattenuta SOLO in Svizzera per i frontalieri (MAI "in entrambi i paesi"). L'Italia evita la doppia imposizione con il credito d'imposta (quadro CE del 730).
-- Nuovo Accordo Frontalieri: firmato 23/12/2020, in vigore dal 1° GENNAIO 2024 (NON 2026). Ratifica IT: Legge 83 del 13/6/2023.
-- Vecchi frontalieri (già tali prima del 17/7/2023): esenzione €7'500, regime transitorio 2024–2033. Nuovi frontalieri: franchigia €10'000.
+- Imposta alla fonte sul reddito da lavoro: trattenuta in Svizzera. Nuovi frontalieri: la Svizzera preleva fino all'80% e l'Italia tassa il reddito, eliminando la doppia imposizione con il credito d'imposta (quadro CE del 730). Vecchi frontalieri (Accordo art. 9): tassati solo in Svizzera.
+- Nuovo Accordo Frontalieri: firmato 23/12/2020, in vigore dal 17/7/2023, applicato dal 1° GENNAIO 2024. Ratifica IT: Legge 83 del 13/6/2023.
+- Nuovi frontalieri: franchigia IRPEF €10'000. Vecchi frontalieri (lavoro in Ticino, Grigioni o Vallese tra il 31/12/2018 e il 17/7/2023): regime senza termine; il 2033 riguarda solo i ristorni ai Comuni.
 - Convenzione doppie imposizioni Italia-Svizzera: firmata il 9 MARZO 1976 (NON dicembre). La Svizzera NON è membro UE/SEE.
 - Aliquote/contributi svizzeri: AVS/AI/IPG 5.3% dipendente, AD/AC 1.1% (cap CHF 148'200), LAINF 0.7–1.5%, LPP 7–18% per fascia età (dal 25 anni). IRPEF italiana dal ${IRPEF_ANNO_CORRENTE}: ${irpefScaglioniTesto(IRPEF_ANNO_CORRENTE)} (${IRPEF_FONTE_CORRENTE}; redditi 2024–${IRPEF_ANNO_PRECEDENTE}: ${irpefAliquoteBreve(IRPEF_ANNO_PRECEDENTE)}).
 - Acronimi/enti VALIDI (non inventarne altri): SECO, SEM, USTAT, UFSP/BAG, SUVA, INPS, Agenzia delle Entrate, MEF, BFS (Ufficio Federale di Statistica), AFC/ESTV (Amministrazione Federale delle Contribuzioni).
