@@ -325,7 +325,7 @@ export function buildComuneEvergreenTopics(municipalities) {
       // into the one candidate that survives.
       out.push({
         keyword: `vivere a ${m.name} e lavorare in ${canton} da frontaliere`,
-        angle: `Comune di residenza: ${m.name} (Italia, provincia ${m.province ?? 'da verificare'}); verificarne la denominazione nell'${OFFICIAL_MUNICIPALITY_REGISTRY_SOURCES.italy.label} ISTAT (${OFFICIAL_MUNICIPALITY_REGISTRY_SOURCES.italy.url}). Cantone di lavoro: ${canton}; non è il comune di residenza e va verificato nell'${OFFICIAL_MUNICIPALITY_REGISTRY_SOURCES.switzerland.label} (${OFFICIAL_MUNICIPALITY_REGISTRY_SOURCES.switzerland.url}). Trattare collegamenti, tempi di percorrenza, costo della vita, zone consigliate, vantaggi e svantaggi del trasferimento senza confondere i due territori.`,
+        angle: `Luogo italiano: ${m.name} (Italia, provincia ${m.province ?? 'da verificare'}); verificarne la denominazione nei codici ISTAT. Destinazione lavorativa: ${canton}; non è il luogo italiano e va verificata nella nomenclatura UST. Trattare collegamenti, tempi di percorrenza, costo della vita, zone consigliate, vantaggi e svantaggi del trasferimento senza confondere i due territori.`,
       });
     }
   }

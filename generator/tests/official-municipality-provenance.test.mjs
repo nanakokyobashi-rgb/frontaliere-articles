@@ -15,10 +15,11 @@ test('gli evergreen distinguono il comune italiano dal cantone svizzero di lavor
   const topic = buildComuneEvergreenTopics([mese]).find((candidate) => candidate.keyword.includes('Mese'));
   assert.ok(topic, 'Mese deve generare un candidato evergreen');
   assert.match(topic.keyword, /lavorare in Grigioni/u);
-  assert.match(topic.angle, /Comune di residenza: Mese \(Italia/u);
-  assert.match(topic.angle, /non è il comune di residenza/u);
-  assert.match(topic.angle, new RegExp(OFFICIAL_MUNICIPALITY_REGISTRY_SOURCES.italy.url.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
-  assert.match(topic.angle, new RegExp(OFFICIAL_MUNICIPALITY_REGISTRY_SOURCES.switzerland.url.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+  assert.match(topic.angle, /Luogo italiano: Mese \(Italia/u);
+  assert.match(topic.angle, /Destinazione lavorativa: Grigioni/u);
+  assert.doesNotMatch(topic.angle, /resid|comun/iu, 'l\'angle non deve attivare la famiglia residenza-comune');
+  assert.match(topic.angle, new RegExp(OFFICIAL_MUNICIPALITY_REGISTRY_SOURCES.italy.authority, 'u'));
+  assert.match(topic.angle, new RegExp(OFFICIAL_MUNICIPALITY_REGISTRY_SOURCES.switzerland.authority, 'u'));
 });
 
 test('le fonti di nomenclatura sono ufficiali e stabili', () => {
