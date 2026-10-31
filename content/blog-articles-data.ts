@@ -209,7 +209,6 @@ const RAW_ARTICLES = [
  id: 'stop-ristorni-tassa-salute',
  category: 'fiscale',
  date: '',
- updatedAt: '2026-10-31',
  image: '/images/blog/stop-ristorni-tassa-salute.webp',
  hasCalculator: true,
  articleType: 'news',
