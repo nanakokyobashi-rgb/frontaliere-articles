@@ -20128,6 +20128,9 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     de: data.content.de,
     fr: data.content.fr,
   });
+  // YMYL also inspects SEO fields and must run after every final metadata/body
+  // mutation, immediately before the primary write path.
+  assertYmylPublishable(data, { sourceUrl: url });
   Object.defineProperties(data, {
     _sourceUrl: { value: url, configurable: true },
     _sourceText: { value: factualityGateSourceText(url, pageContent), configurable: true },
@@ -21291,6 +21294,14 @@ export async function registerArticleFiles(data, opts = {}) {
   // slug, così copre anche l'identita' pubblicata senza rifiutare un valore
   // provvisorio ancora non sanitizzato.
   assertArticlePassesFactualityGates(data);
+  // The shared writer is the publication boundary for deterministic producers;
+  // apply the same editorial and YMYL gates that protect the primary AI path.
+  // The only exception is the explicitly identified human journalist path,
+  // whose editorial approval is the source of truth for those two topic gates.
+  if (opts.writer !== 'journalist') {
+    assertArticleRelevance(data, SECTION_NAME);
+    assertYmylPublishable(data, { sourceUrl: data.sourceUrl || data._sourceUrl || '' });
+  }
   // Every deterministic producer enters this shared writer directly. Apply
   // the Markdown-link contract before registration writes, so invalid nav
   // actions cannot reach the published body files.
