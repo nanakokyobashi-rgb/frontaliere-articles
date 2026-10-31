@@ -13651,6 +13651,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.arresto-napoletano-cassarate.title': '62-year-old Neapolitan man arrested in Cassarate over financial flows',
     'blog.article.arresto-napoletano-cassarate.excerpt': 'A 62-year-old Neapolitan man arrested in Cassarate on October 21 Approximately 50 million euros between July 2025 and March 2026 From Luxembourg, the funds passed into the wallets',
     'blog.article.arresto-napoletano-cassarate.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.massagno-moltiplicatore-2027.title': 'Massagno proposes a tax multiplier of 77% for 2027',
+    'blog.article.massagno-moltiplicatore-2027.excerpt': 'Massagno proposes 77% for the 2027 budget The projected deficit is 528\'142 francs Net investments amount to 7\'732\'000 francs The municipal council',
+    'blog.article.massagno-moltiplicatore-2027.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaEn;

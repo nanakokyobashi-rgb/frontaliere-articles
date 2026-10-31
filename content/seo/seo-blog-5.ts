@@ -113952,6 +113952,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-massagno-moltiplicatore-2027': {
+    title: 'Massagno propone moltiplicatore d\'imposta al 77% per il 2027',
+    description: 'Massagno propone il 77% per il Preventivo 2027 Il disavanzo previsto è di 528\'142 franchi Investimenti netti pari a 7\'732\'000 franchi Il Consiglio',
+    keywords: 'frontalieri, ticino, svizzera, italia, massagno, propone, moltiplicatore, imposta',
+    ogTitle: 'Massagno: moltiplicatore d\'imposta 77% per 2027',
+    ogDescription: 'Massagno propone il 77% per il Preventivo 2027 Il disavanzo previsto è di 528\'142 franchi Investimenti netti pari a 7\'732\'000 franchi Il Consiglio comunale',
+    canonicalPath: '/articoli-frontaliere/massagno-moltiplicatore-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Massagno propone moltiplicatore d'imposta al 77% per il 2027",
+      "description": "Massagno propone il 77% per il Preventivo 2027 Il disavanzo previsto è di 528'142 franchi Investimenti netti pari a 7'732'000 franchi Il Consiglio",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-massagno-moltiplicatore-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-31T10:46:54+00:00",
+      "dateModified": "2026-10-31T10:46:54+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/massagno-moltiplicatore-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

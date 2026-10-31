@@ -46006,6 +46006,16 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'massagno-moltiplicatore-2027',
+ category: 'fiscale',
+ date: '2026-10-31T10:46:54.397Z',
+ image: '/images/blog/article-massagno-moltiplicatore-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

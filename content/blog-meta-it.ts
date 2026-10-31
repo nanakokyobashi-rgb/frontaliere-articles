@@ -13652,6 +13652,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.arresto-napoletano-cassarate.title': 'Arrestato a Cassarate un 62enne napoletano per flussi finanziari',
     'blog.article.arresto-napoletano-cassarate.excerpt': 'Arrestato a Cassarate il 21 ottobre un 62enne napoletano Circa 50 milioni di euro tra luglio 2025 e marzo 2026 Dal Lussemburgo i fondi passavano ai portafogli',
     'blog.article.arresto-napoletano-cassarate.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.massagno-moltiplicatore-2027.title': 'Massagno propone moltiplicatore d\'imposta al 77% per il 2027',
+    'blog.article.massagno-moltiplicatore-2027.excerpt': 'Massagno propone il 77% per il Preventivo 2027 Il disavanzo previsto è di 528\'142 franchi Investimenti netti pari a 7\'732\'000 franchi Il Consiglio comunale',
+    'blog.article.massagno-moltiplicatore-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaIt;
