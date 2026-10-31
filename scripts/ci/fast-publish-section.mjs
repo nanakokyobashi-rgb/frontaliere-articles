@@ -45,6 +45,7 @@
  *
  * Solo builtin Node: gira nel primo step del workflow, prima di setup-node.
  */
+import { articleIndexExclusionKey, parseArticleIndexExclusions } from '../../engine/shared/articleIndexExclusions.mjs';
 import '../../host/cantonSectionsBootstrap.mjs';
 import { execFileSync } from 'node:child_process';
 import { existsSync, readFileSync, realpathSync } from 'node:fs';
@@ -549,6 +550,18 @@ function canonicalOverrideChangedIds(previous, next, previousSlugRecords, nextSl
   return canonicalIdsForSlugs(changedSlugs, [previousSlugRecords, nextSlugRecords], candidateIds);
 }
 
+/**
+ * Un articolo che entra o esce dal ledger cambia il robots della sua pagina senza
+ * cambiare corpo, meta o SEO: va ripubblicato, o il noindex resta solo sulla carta.
+ */
+const ARTICLE_INDEX_EXCLUSIONS_FILE = 'content/article-index-exclusions.json';
+
+function indexExclusionChangedKeys(previous, next) {
+  const before = previous === null ? new Set() : parseArticleIndexExclusions(previous);
+  const after = next === null ? new Set() : parseArticleIndexExclusions(next);
+  return [...before, ...after].filter((key) => before.has(key) !== after.has(key));
+}
+
 function articleSurfaceKind(rel, section) {
   const surfaces = sectionSourceSurfaces(section.section);
   if (rel === surfaces.registryFile) return 'registry';
@@ -682,6 +695,15 @@ export function articlePublishPlan(
   const targets = new Map(sections.map((section) => [section.section, new Set()]));
 
   for (const { rel } of changedFileRecords(files)) {
+    if (rel === ARTICLE_INDEX_EXCLUSIONS_FILE) {
+      const changed = indexExclusionChangedKeys(sourceText(readPreviousSource, rel), sourceText(readCurrentSource, rel));
+      for (const section of sections) {
+        for (const id of registeredBySection.get(section.section)) {
+          if (changed.includes(articleIndexExclusionKey(section.section, id))) targets.get(section.section).add(id);
+        }
+      }
+      continue;
+    }
     const dependencyOwners = sectionBySurface.filter(({ section }) => (
       !articleSurfaceKind(rel, section)
       && registryDependencyChanged(

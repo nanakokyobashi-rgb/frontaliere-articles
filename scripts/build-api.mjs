@@ -42,6 +42,11 @@ import { fileURLToPath } from 'node:url';
 import os from 'node:os';
 import { execSync } from 'node:child_process';
 import { buildSectionFeeds, RSS_SECTIONS } from './lib/rss-feed-body-adapter.mjs';
+import {
+  ARTICLE_INDEX_EXCLUSIONS_FILES,
+  articleIndexExclusionKey,
+  loadArticleIndexExclusions,
+} from '../engine/shared/articleIndexExclusions.mjs';
 // repairSerpSnippet vive in clauseTail.mjs (un .mjs) proprio perche' questo file
 // non puo' importare un .ts: e' la sorgente unica che il layer TS riesporta.
 // Senza passarla, rssFeeds.mjs spedirebbe le description verbatim (#5453).
@@ -679,6 +684,22 @@ for (const section of PUBLISHED_API_SECTIONS) {
 }
 const shadowedFrontaliereSlugs = SECTION_CANONICAL_SHADOW[FRONTALIERE.section];
 
+// Articoli ritirati dall'indice (content/article-index-exclusions.json): la
+// pagina e' `noindex,follow`, quindi non sta in nessuna sitemap, e da li' escono
+// anche sitemap-news e la famiglia llms che il sito deriva dalle sitemap.
+const indexExclusions = loadArticleIndexExclusions(
+  fs,
+  ARTICLE_INDEX_EXCLUSIONS_FILES.map((candidate) => path.join(ROOT, candidate)),
+);
+console.log(`[build-api] articoli esclusi dall'indice: ${indexExclusions.size}`);
+const indexExcludedSlugs = (section) => {
+  const slugMap = slugMapOf(section.section);
+  return (SECTION_REGISTRIES[section.section] ?? [])
+    .filter((article) => indexExclusions.has(articleIndexExclusionKey(section.section, article.id)))
+    .map((article) => slugMap?.[article.id]?.it)
+    .filter(Boolean);
+};
+
 const SECTION_META_IT = {};
 for (const section of PUBLISHED_API_SECTIONS) {
   SECTION_META_IT[section.section] = await loadSectionMeta(section, 'it');
@@ -707,10 +728,10 @@ const SECTION_SITEMAP_SHADOW = Object.fromEntries(
   PUBLIC_API_SECTIONS.map((section) => [
     section.section,
     section.retiredDailyEditions
-      ? new Set([...retiredDailyEditionSlugs, ...SECTION_CANONICAL_SHADOW[section.section]])
+      ? new Set([...retiredDailyEditionSlugs, ...SECTION_CANONICAL_SHADOW[section.section], ...indexExcludedSlugs(section)])
       : section.api.family !== null
-        ? new Set([...SECTION_CANONICAL_SHADOW[section.section], ...retiredByRegistry(section)])
-        : SECTION_CANONICAL_SHADOW[section.section],
+        ? new Set([...SECTION_CANONICAL_SHADOW[section.section], ...retiredByRegistry(section), ...indexExcludedSlugs(section)])
+        : new Set([...SECTION_CANONICAL_SHADOW[section.section], ...indexExcludedSlugs(section)]),
   ]),
 );
 // La dimensione di pagina dell'archivio viene dalla sorgente unica dell'host
@@ -1002,6 +1023,7 @@ try {
       rootDir: viaView ? familyRssView : ROOT,
       section,
       registry: SECTION_REGISTRIES[section.id] ?? [],
+      indexExclusions,
       layout: viaView ? engineViewRssLayout(published.slugFile) : sectionRssLayout(section.id),
       // Il corpus e' il produttore REALE dei feed: il sito chiama l'engine solo
       // dai test. Se questa riga manca, la riparazione della coda resta inerte

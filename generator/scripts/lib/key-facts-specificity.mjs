@@ -102,6 +102,22 @@ function trimValueMarkup(value) {
     .trim();
 }
 
+const AMOUNT_LABEL_RX = /^(?:importo|amount|betrag|montant|salario|salary|lohn|salaire)$/u;
+const NO_AMOUNT_RX = /^(?:nessuno|nessuna|none|keine?r?|aucun|aucune)$/u;
+
+/**
+ * «Importo: Nessuno»: lo schema del prompt chiede un importo e la notizia non ne
+ * ha. Vale solo per le etichette di importo: «Impatto diurno: Nessuno» e' un fatto.
+ */
+export function isEmptyAmountFact(item) {
+  const clean = String(item).replace(/\*\*/gu, '').replace(/^[\s>*•-]+/u, '').trim();
+  const separator = /\s*(?::|→|->)\s*/u.exec(clean);
+  if (!separator) return false;
+  const label = normalizeText(clean.slice(0, separator.index));
+  const value = trimValueMarkup(clean.slice(separator.index + separator[0].length));
+  return AMOUNT_LABEL_RX.test(label) && NO_AMOUNT_RX.test(value);
+}
+
 /** Vero se il valore completo del fatto e' un non-valore. */
 export function matchesVacuousValue(value) {
   if (typeof value !== 'string') return false;
@@ -353,7 +369,9 @@ export function stripVacuousFacts(body) {
   const residual = [];
 
   for (const section of parseAiSearchSections(body)) {
-    const bad = section.bullets.filter((bullet) => matchesVacuousValue(bullet.value));
+    const bad = section.bullets.filter((bullet) => (
+      matchesVacuousValue(bullet.value) || isEmptyAmountFact(bullet.raw)
+    ));
     for (const bullet of section.bullets) {
       if (bad.includes(bullet)) continue;
       if (VACUOUS_ANYWHERE_RX.test(normalizeText(bullet.value)) && !/\d/u.test(bullet.value)) {

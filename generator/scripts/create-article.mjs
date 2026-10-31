@@ -203,6 +203,8 @@ import {
 } from '../../scripts/lib/published-slug-guard.mjs';
 import { AI_SEARCH_PROMPT_BLOCK_IT } from './lib/ai-search-template.mjs';
 import { findOrphanedKeyFactsList } from './lib/key-facts-specificity.mjs';
+import { assertArticleRelevance, isOffTopicHeadline } from './lib/article-relevance-gate.mjs';
+import { YMYL_SOURCES_BRIEF, YMYL_SOURCES_BRIEF_CH, assertNoFiscalErrorsInLocales, assertYmylPublishable } from './lib/article-ymyl-gate.mjs';
 import { stripVacuousFacts } from './lib/key-facts-specificity.mjs';
 import { checkCantonToponymConsistency } from './lib/cantone-toponimi-coerenza.mjs';
 import {
@@ -6072,7 +6074,7 @@ FATTI VERIFICATI DI RIFERIMENTO — usa come ground truth:
 
 CONVENZIONI E ACCORDI:
 - Convenzione italo-svizzera contro le doppie imposizioni: firmata il 9 MARZO 1976 (NON dicembre, NON 1974)
-- Nuovo Accordo Frontalieri: firmato 23 DICEMBRE 2020, in vigore dal 1° GENNAIO 2024
+- Nuovo Accordo Frontalieri: firmato 23 DICEMBRE 2020, in vigore dal 17 LUGLIO 2023, applicato dal 1° GENNAIO 2024
 - Periodo transitorio: dal 2024 al 2033 (10 anni) per chi era già frontaliere prima del 17/7/2023
 - Ratifica italiana: Legge 83 del 13 GIUGNO 2023
 
@@ -6086,8 +6088,8 @@ ALIQUOTE SVIZZERE:
 ALIQUOTE ITALIANE:
 - IRPEF dal ${IRPEF_ANNO_CORRENTE}: ${irpefScaglioniTesto(IRPEF_ANNO_CORRENTE)} (${IRPEF_FONTE_CORRENTE})
 - IRPEF 2024-${IRPEF_ANNO_PRECEDENTE}: ${irpefAliquoteBreve(IRPEF_ANNO_PRECEDENTE)} — corretta SOLO per redditi di quegli anni
-- Franchigia nuovo accordo: €10'000 esenti per NUOVI frontalieri (dal 2024)
-- Vecchi frontalieri (ante 17/7/2023): esenzione €7'500 fino al 2033
+- Franchigia IRPEF: €10'000 dal 2024 per i frontalieri il cui reddito e' tassato in Italia (L. 83/2023 art. 4; €7'500 era il valore fino al 2023)
+- Vecchi frontalieri (art. 9 dell'Accordo): salario tassato SOLO in Svizzera, nessuna IRPEF su quel reddito e nessuna esenzione. La compensazione del 40% ai Comuni dura fino all'anno fiscale 2033
 
 ISTITUZIONI REALI:
 - Svizzera: SECO, SEM, SUVA, USTAT, UFSP (BAG in tedesco), SUPSI, USI, EOC, DFE, DSS, ARE, BFS, AFC/ESTV, BNS/SNB
@@ -6164,10 +6166,12 @@ ASSICURAZIONI:
 // under 8000 tokens. The fact-check sheet (VERIFIED_DOMAIN_FACTS plus
 // criteria 3-4) grows 2830 -> 2980 chars (+150, ~43 est. tokens); it rides on up to 24000 chars of
 // article, so its admission is set by the article, not by this delta.
-const EVERGREEN_FACTS_BRIEF = `FATTI VERIFICATI (ground truth — il fact-checker blocca l'articolo se diverghi da questi valori):
-- Imposta alla fonte sul reddito da lavoro: trattenuta SOLO in Svizzera per i frontalieri (MAI "in entrambi i paesi"). L'Italia evita la doppia imposizione con il credito d'imposta (quadro CE del 730).
-- Nuovo Accordo Frontalieri: firmato 23/12/2020, in vigore dal 1° GENNAIO 2024 (NON 2026). Ratifica IT: Legge 83 del 13/6/2023.
-- Vecchi frontalieri (già tali prima del 17/7/2023): esenzione €7'500, regime transitorio 2024–2033. Nuovi frontalieri: franchigia €10'000.
+const EVERGREEN_FACTS_BRIEF = `${YMYL_SOURCES_BRIEF}
+
+FATTI VERIFICATI (ground truth — il fact-checker blocca l'articolo se diverghi da questi valori):
+- Imposta alla fonte sul reddito da lavoro: la ritenuta la applica la Svizzera. I vecchi frontalieri (art. 9) sono tassati solo li'. I nuovi sono tassati in entrambi i Paesi: la Svizzera preleva al massimo l'80% dell'imposta ordinaria, l'Italia tassa il reddito e riconosce il credito entro la quota di IRPEF proporzionale (quadro CE)
+- Nuovo Accordo Frontalieri: firmato 23/12/2020, in vigore dal 17/7/2023, applicato dal 1° GENNAIO 2024 (NON 2026). Ratifica IT: Legge 83 del 13/6/2023.
+- Franchigia IRPEF: €10'000 dal 2024 per i frontalieri tassati in Italia. Non esiste una esenzione per i vecchi frontalieri. La compensazione art. 9 e' il 40% fino al 2033; il restante 20% del prelievo non viene retrocesso a nessuno.
 - Convenzione doppie imposizioni Italia-Svizzera: firmata il 9 MARZO 1976 (NON dicembre). La Svizzera NON è membro UE/SEE.
 - Aliquote/contributi svizzeri: AVS/AI/IPG 5.3% dipendente, AD/AC 1.1% (cap CHF 148'200), LAINF 0.7–1.5%, LPP 7–18% per fascia età (dal 25 anni). IRPEF italiana dal ${IRPEF_ANNO_CORRENTE}: ${irpefScaglioniTesto(IRPEF_ANNO_CORRENTE)} (${IRPEF_FONTE_CORRENTE}; redditi 2024–${IRPEF_ANNO_PRECEDENTE}: ${irpefAliquoteBreve(IRPEF_ANNO_PRECEDENTE)}).
 - Acronimi/enti VALIDI (non inventarne altri): SECO, SEM, USTAT, UFSP/BAG, SUVA, INPS, Agenzia delle Entrate, MEF, BFS (Ufficio Federale di Statistica), AFC/ESTV (Amministrazione Federale delle Contribuzioni).
@@ -6204,7 +6208,9 @@ const EVERGREEN_FACTS_BRIEF = `FATTI VERIFICATI (ground truth — il fact-checke
 // deliberatamente ASSENTI: l'istruzione esplicita e' di ometterle, non di
 // ricostruirle a memoria, che e' il modo in cui nascono le allucinazioni che
 // checkFabricatedInstitutionAcronyms poi blocca.
-const EVERGREEN_FACTS_BRIEF_CH = `FATTI VERIFICATI (ground truth — il fact-checker blocca l'articolo se diverghi da questi valori):
+const EVERGREEN_FACTS_BRIEF_CH = `${YMYL_SOURCES_BRIEF_CH}
+
+FATTI VERIFICATI (ground truth — il fact-checker blocca l'articolo se diverghi da questi valori):
 - Fisco: 3 livelli (IFD federale + cantonale + comunale); ogni cantone ha legge/moltiplicatore propri (comuni: moltiplicatore sul cantonale).
 - Competenze (MAI confonderle): AFC/ESTV = IFD + IVA; amministrazioni CANTONALI = cantonale/comunale; UFAS/BSV = previdenza sociale (AVS/AI/LPP), NON fissa imposte; UST/BFS = statistiche, NON fissa aliquote.
 - Contributi su salario: AVS/AI/IPG 5.3% dipendente (10.6% tot. con datore), AD/AC 1.1% fino a massimale annuo, LAINF/LAA 0.7–1.5% secondo settore; LPP (salario coordinato): 7% (25–34), 10% (35–44), 15% (45–54), 18% (55+ fino a eta' di riferimento).
@@ -10679,7 +10685,7 @@ async function scanNewsSources() {
         droppedAnchor += 1;
         continue;
       }
-      if (dropNonTopical && !hasAdmissionSignal(gateText)) {
+      if (dropNonTopical && (!hasAdmissionSignal(gateText) || isOffTopicHeadline(h.headline || ''))) {
         droppedTopic += 1;
         continue;
       }
@@ -19198,6 +19204,13 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
       }
     }
 
+    // Step 3a.0-rel: nesso editoriale deterministico. Il corpo generato si piega
+    // all'angolo chiesto dal prompt, quindi il gate di densita' qui sopra non
+    // vede l'articolo sull'Iran che dice «frontalieri» dieci volte: decide cio'
+    // di cui l'articolo dichiara di parlare (lib/article-relevance-gate.mjs).
+    // Stesso rifiuto del topic-gate: niente pubblicazione, il ranker prosegue.
+    assertArticleRelevance(data, SECTION_NAME);
+
     // Step 3a.0-headline: Google News compliance — A5
     //
     // Validate the IT title (which becomes both the JSON-LD `headline` and
@@ -19309,6 +19322,21 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
         continue;
       }
       throw consistencyErr;
+    }
+
+    // Step 3a.0a-bis: fisco, previdenza e tassa salute non escono in automatico
+    // senza una fonte ufficiale e senza il controllo dei parametri fiscali
+    // (lib/article-ymyl-gate.mjs). Rigenera finche' ci sono tentativi; poi e' un
+    // rifiuto del topic-gate: l'articolo non esce e il ranker prosegue.
+    try {
+      assertYmylPublishable(data, { sourceUrl: url });
+    } catch (ymylErr) {
+      console.error(`  ⚠️  ${ymylErr.message}`);
+      if (attempt < maxAttempts) {
+        console.error(`  🔄 Rigenero contenuto IT per il gate YMYL (${attempt}/${maxAttempts})...`);
+        continue;
+      }
+      throw ymylErr;
     }
 
     // Step 3a.0b: Fabricated references check — BLOCKING (fast regex pre-filter)
@@ -19877,6 +19905,8 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // unchanged (it did, byte-identical, for apprendistato-urie-2024-2025)
   // was never re-checked on the en/de/fr output.
   assertNoFabricatedNormAcronyms({ en: data.content.en, de: data.content.de, fr: data.content.fr });
+  // La traduzione puo' reintrodurre un'affermazione che l'italiano non ha.
+  assertNoFiscalErrorsInLocales({ en: data.content.en, de: data.content.de, fr: data.content.fr });
 
   // Step 3c: Sanitize bold + URLs + nav links on translated content
   console.error('✂️  Sanitizzazione grassetto (traduzioni):');

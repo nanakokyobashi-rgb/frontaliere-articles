@@ -38,6 +38,7 @@ import { fileURLToPath } from 'node:url';
 
 import { extractSourceAnchors, checkSourceFidelity } from '../scripts/lib/article-factuality-gates.mjs';
 import { svizzeraEvergreenPool, clearStrikesForPool } from '../scripts/reset-evergreen-strikes.mjs';
+import { YMYL_SOURCES_BRIEF, YMYL_SOURCES_BRIEF_CH } from '../scripts/lib/article-ymyl-gate.mjs';
 import * as IRPEF from '../scripts/lib/irpef-scaglioni.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -68,11 +69,13 @@ function loadBriefBlock() {
   // Il brief frontaliero interpola gli scaglioni IRPEF dalla loro unica
   // sorgente (lib/irpef-scaglioni.mjs, issue #1777): il blocco estratto non ha
   // gli import del modulo, quindi quei nomi entrano come parametri — gli
-  // stessi export che create-article.mjs importa, non una replica.
-  const irpefNames = Object.keys(IRPEF);
+  // stessi export che create-article.mjs importa, non una replica. Lo stesso
+  // vale per le fonti ufficiali del gate YMYL.
+  const imports = { ...IRPEF, YMYL_SOURCES_BRIEF, YMYL_SOURCES_BRIEF_CH };
+  const irpefNames = Object.keys(imports);
   // eslint-disable-next-line no-new-func
   const factory = new Function(...irpefNames, `${body}\nreturn { EVERGREEN_FACTS_BRIEF, EVERGREEN_FACTS_BRIEF_CH, EVERGREEN_FACTS_BRIEFS, evergreenFactsBriefFor, stripInjectedBriefs };`);
-  return factory(...irpefNames.map((k) => IRPEF[k]));
+  return factory(...irpefNames.map((k) => imports[k]));
 }
 
 const B = loadBriefBlock();
