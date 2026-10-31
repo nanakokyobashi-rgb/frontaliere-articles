@@ -63,6 +63,9 @@ const blogMetaCantonLuDe: Record<string, string> = {
     'blog.article.passepartout-trasporto-centrale.title': 'Passepartout: Einfacherer Zugang zum öffentlichen Verkehr',
     'blog.article.passepartout-trasporto-centrale.excerpt': 'Vor 1986 waren für eine Fahrt im ÖV mehrere Billette nötig.',
     'blog.article.passepartout-trasporto-centrale.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.tunnel-sonnenberg-chiusura-notte.title': 'Tunnel Sonnenberg wegen struktureller Inspektion gesperrt',
+    'blog.article.tunnel-sonnenberg-chiusura-notte.excerpt': 'Vollständige Sperrung des Tunnels Sonnenberg in beiden Richtungen ab der Nacht vom 4.',
+    'blog.article.tunnel-sonnenberg-chiusura-notte.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonLuDe;

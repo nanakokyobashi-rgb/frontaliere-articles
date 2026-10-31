@@ -90,6 +90,20 @@
       }
     },
     {
+      "id": "sospensione-lavori-muro-anti-migranti-big-bend-texas",
+      "section": "svizzera",
+      "winnerId": "imposte-cantonali-canton-lucerna-aliquote",
+      "winnerSection": "svizzera",
+      "retiredOn": "2026-10-31",
+      "duplicateOf": [],
+      "slugs": {
+        "it": "sospensione-lavori-muro-anti-migranti-big-bend-texas",
+        "en": "suspension-of-work-on-anti-migrant-wall-in-big-bend-texas",
+        "de": "arbeit-am-anti-migrant-wall-in-big-bend-texas-einstellen",
+        "fr": "suspension-des-travaux-du-mur-anti-migrants-a-big-bend-au-texas"
+      }
+    },
+    {
       "id": "un-matrimonio-che-vale-cento-posti-di-lavoro",
       "section": "svizzera",
       "winnerId": "matrimonio-aziendale-vallemaggia-100",

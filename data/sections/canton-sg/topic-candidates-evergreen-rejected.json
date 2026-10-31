@@ -7,6 +7,14 @@
     "canton-sg::https://www.stgallen24.ch/articles/415929-axenstrasse-veloshuttle-faehrt-ab-november-nach-winterfahrplan": {
       "section": "canton-sg",
       "ts": 1793356396588
+    },
+    "canton-sg::https://www.unisg.ch/de/newsroom/themenschwerpunkt-kuenstliche-intelligenz": {
+      "section": "canton-sg",
+      "ts": 1793447595456
+    },
+    "canton-sg::https://www.stgallen24.ch/articles/416010-jekyll-hyde-besetzung-fuer-st-gallen-steht-fest": {
+      "section": "canton-sg",
+      "ts": 1793447602536
     }
   }
 }

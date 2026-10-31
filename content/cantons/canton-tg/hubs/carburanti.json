@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-30T19:31:58.244Z",
-  "contentHash": "8d9aaa0b07df06fc123f9a9fe99ee32d50c0cec1f71ebcee12da7d9e37ee4d5e",
+  "updatedAt": "2026-10-31T11:25:56.230Z",
+  "contentHash": "a79543d0304145814b76414f94e2072c0784ace3502daa375d54e141ea25589e",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Governo Turgovia approva messaggio per modifica legge strade e vie",
+          "url": "/articoli-turgovia/messaggio-modifica-legge-strade/",
+          "excerpt": "Il Governo del Canton Turgovia ha approvato il messaggio al Gran Consiglio per disciplinare i manifesti di elezioni e votazioni, subordinando l'eccezione alla sicurezza stradale.",
+          "date": "2026-10-31T11:15:56.284Z"
+        },
+        {
           "title": "Frauenfeld: pubblicata la revisione parziale del regolamento salariale",
           "url": "/articoli-turgovia/frauenfeld-revisione-regolamento-salariale/",
           "excerpt": "La citta di Frauenfeld presenta una pubblicazione referendaria dedicata alla revisione parziale del regolamento salariale, corredata da un allegato PDF di 88 KB.",
@@ -94,12 +100,6 @@
           "url": "/articoli-turgovia/turgovia-modifica-piano-direttore-2027/",
           "excerpt": "Il Canton Turgovia avvia la consultazione sulla revisione del piano direttore per lo sviluppo di commercio e industria.",
           "date": "2026-10-23T03:27:25.835Z"
-        },
-        {
-          "title": "Turgovia: approvata PBV revisionata per RPG2",
-          "url": "/articoli-turgovia/pbv-rpg2-turgovia-2026/",
-          "excerpt": "Il Governo ha approvato la PBV revisionata RPG2 riguarda le costruzioni fuori dalle zone edificabili L'obiettivo è limitare la crescita a un massimo del 2%",
-          "date": "2026-10-23T01:44:38.536Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T11:25:56.230Z"
     },
     "en": {
       "canton": "TG",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Thurgau government approves proposal to amend the Roads and Paths Act",
+          "url": "/en/thurgau-articles/law-amendment-roads-thurgau/",
+          "excerpt": "The Government of the Canton of Thurgau approved the submission to the Grand Council to regulate election and voting posters, making the exception conditional on road safety.",
+          "date": "2026-10-31T11:15:56.284Z"
+        },
+        {
           "title": "Frauenfeld: partial revision of the salary regulations published",
           "url": "/en/thurgau-articles/frauenfeld-salary-regulations-revision/",
           "excerpt": "The city of Frauenfeld presents a referendum publication dedicated to the partial revision of the salary regulations, accompanied by an 88 KB PDF attachment.",
@@ -193,12 +199,6 @@
           "url": "/en/thurgau-articles/thurgau-master-plan-revision-2027/",
           "excerpt": "The Canton of Thurgau launches the consultation on the revision of the structure plan for the development of commerce and industry.",
           "date": "2026-10-23T03:27:25.835Z"
-        },
-        {
-          "title": "Thurgau: revised PBV approved for RPG2",
-          "url": "/en/thurgau-articles/pbv-rpg2-thurgau-2026/",
-          "excerpt": "The Government approved the revised PBV RPG2 concerns construction outside building zones The objective is to limit growth to a maximum of 2% The PBV brings",
-          "date": "2026-10-23T01:44:38.536Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T11:25:56.230Z"
     },
     "de": {
       "canton": "TG",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Thurgau genehmigt Botschaft zur Strassengesetz-Änderung",
+          "url": "/de/thurgau-artikel/gesetz-aenderung-strassen-turgau/",
+          "excerpt": "Die Regierung des Kantons Thurgau hat die Botschaft an den Grossen Rat zur Regelung der Plakate für Wahlen und Abstimmungen genehmigt und die Ausnahme von der Verkehrssicherheit abhängig gemacht.",
+          "date": "2026-10-31T11:15:56.284Z"
+        },
+        {
           "title": "Frauenfeld: Teilrevision des Lohnreglements veröffentlicht",
           "url": "/de/thurgau-artikel/frauenfeld-lohnreglement-teilrevision/",
           "excerpt": "Die Stadt Frauenfeld präsentiert eine Referendumspublikation zur Teilrevision des Lohnreglements, versehen mit einem PDF-Anhang von 88 KB.",
@@ -292,12 +298,6 @@
           "url": "/de/thurgau-artikel/thurgau-richtplan-aenderung-2027/",
           "excerpt": "Der Kanton Thurgau eröffnet die Vernehmlassung zur Überarbeitung des Richtplans für die Entwicklung von Handel und Industrie.",
           "date": "2026-10-23T03:27:25.835Z"
-        },
-        {
-          "title": "Thurgau: Revidierte PBV für RPG2 genehmigt",
-          "url": "/de/thurgau-artikel/pbv-rpg2-thurgau-2026/",
-          "excerpt": "Die Regierung hat die revidierte PBV genehmigt RPG2 betrifft Bauten ausserhalb der Bauzonen Ziel ist, das Wachstum auf maximal 2 % zu begrenzen Die PBV fasst",
-          "date": "2026-10-23T01:44:38.536Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T11:25:56.230Z"
     },
     "fr": {
       "canton": "TG",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Le gouvernement thurgovien approuve la réforme routière",
+          "url": "/fr/articles-thurgovie/modification-loi-routes-thurgovie/",
+          "excerpt": "Le Gouvernement du canton de Thurgovie a approuvé le message destiné au Grand Conseil visant à réglementer les affiches électorales et de votation, en subordonnant l’exception à la sécurité routière.",
+          "date": "2026-10-31T11:15:56.284Z"
+        },
+        {
           "title": "Frauenfeld : publication de la révision partielle du règlement salarial",
           "url": "/fr/articles-thurgovie/frauenfeld-revision-reglement-salaires/",
           "excerpt": "La ville de Frauenfeld présente une publication référendaire consacrée à la révision partielle du règlement salarial, accompagnée d'une pièce jointe PDF de 88 KB.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-thurgovie/thurgovie-revision-plan-directeur-2027/",
           "excerpt": "Le canton de Thurgovie lance la consultation sur la révision du plan directeur pour le développement du commerce et de l’industrie.",
           "date": "2026-10-23T03:27:25.835Z"
-        },
-        {
-          "title": "Thurgovie : PBV révisée approuvée pour RPG2",
-          "url": "/fr/articles-thurgovie/pbv-rpg2-thurgovie-2026/",
-          "excerpt": "Le Gouvernement a approuvé la PBV révisée RPG2 concerne les constructions hors des zones à bâtir L’objectif est de limiter la croissance à un maximum de 2%",
-          "date": "2026-10-23T01:44:38.536Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T11:25:56.230Z"
     }
   }
 }
