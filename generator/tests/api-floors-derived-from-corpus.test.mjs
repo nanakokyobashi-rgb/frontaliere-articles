@@ -491,6 +491,13 @@ test('un feed vuoto per ledger noindex passa, ma un item non filtrato blocca', (
     feedSources: { ...expected.feedSources, frontaliere: 0 },
     feedSourcesExcludedOnly: { frontaliere: true, svizzera: false },
   };
+  const missing = {
+    ...measured,
+    feeds: measured.feeds.filter((feed) => !['rss.xml', 'rss-it.xml'].includes(feed.name)),
+    missingFeeds: ['rss.xml', 'rss-it.xml'],
+  };
+  assert.deepEqual(floorViolations(missing, ledgerExpected), []);
+
   const empty = {
     ...measured,
     feeds: measured.feeds.map((feed) => (

@@ -291,7 +291,8 @@ export function floorViolations(measured, expected, retention = undefined) {
   const rssSections = expected.rssSections ?? RSS_SECTIONS;
   for (const feedName of measured.missingFeeds ?? []) {
     const owner = feedSection(feedName, rssSections);
-    if (newFamily.has(owner) || unpublished.has(owner)) continue;
+    const excludedOnly = expected.feedSourcesExcludedOnly?.[owner] === true;
+    if (newFamily.has(owner) || unpublished.has(owner) || excludedOnly) continue;
     violations.push(`${feedName}: feed RSS atteso da RSS_SECTIONS assente o non è un documento RSS`);
   }
 
