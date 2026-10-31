@@ -767,6 +767,36 @@ function readPrBody(repo, pr) {
 }
 
 /**
+ * Un contesto di applicabilità esplicito deve legare la review al commit che
+ * il gate ha selezionato. Un reviewCommit mancante o stantio non può diventare
+ * un pretesto per classificare finding recuperati dalla cronologia.
+ */
+function reviewAppliesToHead(reviewCommit, headSha) {
+  return Boolean(reviewCommit && headSha
+    && String(reviewCommit).toLowerCase() === String(headSha).toLowerCase());
+}
+
+function nonApplicableClassification(findings) {
+  return {
+    findings,
+    outside: [],
+    inScope: [],
+    unresolved: findings.map((finding) => ({
+      ...finding,
+      reason: 'review non applicabile alla HEAD corrente',
+    })),
+    bodyDeclassified: [],
+    staleBodyDeclassified: [],
+    staleDeclassified: [],
+    bodyOnly: false,
+    outsideOnly: false,
+    blocking: true,
+    minted: false,
+    error: 'review non applicabile alla HEAD corrente',
+  };
+}
+
+/**
  * Id stabili dei 🔴 gia' emessi dalle review precedenti, e la finestra di
  * confronto su cui misurare «righe non cambiate»: il commit dell'ultima review
  * gestita PRIMA di quella corrente, su un commit DIVERSO. Il commit diverso non
@@ -1204,7 +1234,7 @@ async function mintFollowup({ repo, pr, prUrl, body, findings }) {
  */
 export async function classifyAndMintReview(body, {
   repo, pr, prUrl, mutate = true, headSha = null,
-  reviewId = null,
+  reviewCommit = null, reviewId = null,
   priorFindingIds = null, changedLinesSince = null,
   // `null`/assente = «non lo so»: il verdetto si RICALCOLA dal body con gli
   // stessi moduli del gate. Un booleano esplicito lo impone (il review gate
@@ -1214,6 +1244,13 @@ export async function classifyAndMintReview(body, {
   bodyContractPassed = null, prBody = null,
 } = {}) {
   if (!repo || !pr) throw new Error('repo e pr sono obbligatori');
+  const findings = importantFindings(body);
+  const hasApplicabilityContext = reviewCommit !== null || headSha !== null || reviewId !== null;
+  if (findings.length > 0 && hasApplicabilityContext
+      && !reviewAppliesToHead(reviewCommit, headSha)) {
+    console.log('review-scope: review non applicabile alla HEAD corrente → classificazione bloccata.');
+    return nonApplicableClassification(findings);
+  }
   const effectivePrBody = prBody === null && bodyContractPassed !== false
     ? readPrBody(repo, pr)
     : prBody;
@@ -1223,7 +1260,6 @@ export async function classifyAndMintReview(body, {
   const changed = fetchChangedFiles(repo, pr);
   const diffUnavailable = changed.complete !== true || changed.files.length === 0;
   if (diffUnavailable) {
-    const findings = importantFindings(body);
     const reason = changed.files.length === 0 ? 'empty' : changed.reason;
     // Un finding sul body non dipende dal diff: la sola prova ammessa è che la
     // citazione testuale non compaia più nel body corrente. Un diff illeggibile

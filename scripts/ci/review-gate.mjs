@@ -522,6 +522,7 @@ async function main() {
           pr: PR,
           prUrl: `https://github.com/${REPO}/pull/${PR}`,
           headSha: HEAD_SHA,
+          reviewCommit: last.commit_id,
           reviewId: last.id,
           bodyContractPassed: BODY_CONTRACT_PASSED,
         });

@@ -19,6 +19,7 @@
  */
 import { formatCodexFallbackEvidence } from '../../scripts/ci/claude-codex-fallback.mjs';
 import { codeContributionFingerprint } from '../../scripts/ci/auto-merge-eval.mjs';
+import { classifyAndMintReview } from '../../scripts/ci/review-scope.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
@@ -371,6 +372,45 @@ test('Important fuori dal diff → il gate e\' verde e il finding diventa follow
   });
   assert.equal(r.status, 0, `Un finding solo fuori dal diff non deve bloccare.\n${r.stdout}`);
   assert.match(r.stdout, /follow-up|fuori dal diff/i, r.stdout);
+});
+
+test('la review corrente conserva il commit selezionato quando classifica un finding storico', () => {
+  const finding = '`generator/scripts/outside.mjs:10`: 🔴 Important: il controllo condiviso manca.';
+  const r = runGate({
+    reviews: [
+      botReview(OLD, finding, {
+        id: 10,
+        submitted_at: '2026-09-18T09:00:00Z',
+      }),
+      botReview(HEAD, `${finding}\n\n## LGTM`, {
+        id: 11,
+        submitted_at: '2026-09-18T09:01:00Z',
+      }),
+    ],
+    files: ['generator/scripts/in-scope.mjs'],
+    meta: { base: { sha: 'c'.repeat(40) }, head: { sha: HEAD } },
+  });
+  assert.equal(r.status, 0, `La review sulla HEAD esatta deve classificare il finding storico.\n${r.stdout}`);
+  assert.doesNotMatch(r.stdout, /review non applicabile alla HEAD corrente/i, r.stdout);
+  assert.match(r.stdout, /follow-up|fuori dal diff/i, r.stdout);
+});
+
+test('reviewCommit mancante o stantio resta fail-closed prima della classificazione', async () => {
+  const body = '`generator/scripts/outside.mjs:10`: 🔴 Important: il controllo condiviso manca.';
+  for (const reviewCommit of ['', OLD]) {
+    const result = await classifyAndMintReview(body, {
+      repo: 'o/r',
+      pr: 901,
+      mutate: false,
+      headSha: HEAD,
+      reviewCommit,
+      reviewId: 11,
+    });
+    assert.equal(result.blocking, true, `reviewCommit=${reviewCommit || '<missing>'}`);
+    assert.equal(result.outsideOnly, false, `reviewCommit=${reviewCommit || '<missing>'}`);
+    assert.equal(result.unresolved.length, 1, `reviewCommit=${reviewCommit || '<missing>'}`);
+    assert.equal(result.unresolved[0].reason, 'review non applicabile alla HEAD corrente');
+  }
 });
 
 test('Important che inizia con nessuno resta rosso se cita un file nel diff', () => {
