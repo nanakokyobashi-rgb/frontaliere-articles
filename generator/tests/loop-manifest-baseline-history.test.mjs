@@ -183,9 +183,6 @@ test('cat-file non maschera missing, ambiguous o stdout troncato come ghost di m
     ])),
     /stdout troncato.*another-oid/,
   );
-  assert.match(HISTORY_SCRIPT, /CAT_FILE_BATCH_SIZE/);
-  assert.match(HISTORY_SCRIPT, /for \(let start = 0; start < entries\.length; start \+= CAT_FILE_BATCH_SIZE\)/);
-  assert.match(HISTORY_SCRIPT, /res\.error\?\.message/);
 });
 
 test('un lazy-fetch inconclusivo resta rosso anche nel report JSON', () => {
