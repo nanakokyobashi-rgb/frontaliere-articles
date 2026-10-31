@@ -13656,6 +13656,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.voto-cinque-temi-28-febbraio.title': 'Fünf Themen stehen am 28. Februar 2027 zur Abstimmung',
     'blog.article.voto-cinque-temi-28-febbraio.excerpt': 'Am 28. Februar 2027 wird die Bevölkerung über fünf Themen abstimmen Die Kernenergie ist der Gegenvorschlag zu «Stop al blackout» Foie gras und Einbürgerung kommen mit zwei',
     'blog.article.voto-cinque-temi-28-febbraio.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.castel-san-pietro-preventivo-2027.title': 'Castel San Pietro: Voranschlag 2027 in den roten Zahlen',
+    'blog.article.castel-san-pietro-preventivo-2027.excerpt': 'Der Voranschlag 2027 sieht ein Defizit von fast zwei Millionen vor Die Ausgaben steigen gegenüber 2026 um 7,49% PF bei 75% und PG bei 80%, beide um 5 Punkte angehoben',
+    'blog.article.castel-san-pietro-preventivo-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaDe;

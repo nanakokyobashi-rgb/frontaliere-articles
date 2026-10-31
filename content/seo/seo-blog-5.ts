@@ -114030,6 +114030,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-castel-san-pietro-preventivo-2027': {
+    title: 'Castel San Pietro: Preventivo 2027 nelle cifre rosse',
+    description: 'Il Preventivo 2027 prevede quasi due milioni di disavanzo La spesa cresce del 7,49% rispetto al 2026 PF al 75% e PG all’80%, entrambi in aumento di 5',
+    keywords: 'frontalieri, ticino, svizzera, italia, castel, pietro, preventivo, nelle',
+    ogTitle: 'Castel San Pietro: Preventivo 2027 con disavanzo e tasse in aumento',
+    ogDescription: 'Il Preventivo 2027 prevede quasi due milioni di disavanzo La spesa cresce del 7,49% rispetto al 2026 PF al 75% e PG all’80%, entrambi in aumento di 5 punti',
+    canonicalPath: '/articoli-frontaliere/castel-san-pietro-preventivo-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Castel San Pietro: Preventivo 2027 nelle cifre rosse",
+      "description": "Il Preventivo 2027 prevede quasi due milioni di disavanzo La spesa cresce del 7,49% rispetto al 2026 PF al 75% e PG all’80%, entrambi in aumento di 5",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-castel-san-pietro-preventivo-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-31T12:35:27+00:00",
+      "dateModified": "2026-10-31T12:35:27+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/castel-san-pietro-preventivo-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

@@ -13658,6 +13658,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.voto-cinque-temi-28-febbraio.title': 'Cinque temi al voto il 28 febbraio 2027',
     'blog.article.voto-cinque-temi-28-febbraio.excerpt': 'Il 28 febbraio 2027 la popolazione voterà su cinque temi Il nucleare è il controprogetto a «Stop al blackout» Foie gras e naturalizzazione arrivano con due',
     'blog.article.voto-cinque-temi-28-febbraio.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.castel-san-pietro-preventivo-2027.title': 'Castel San Pietro: Preventivo 2027 nelle cifre rosse',
+    'blog.article.castel-san-pietro-preventivo-2027.excerpt': 'Il Preventivo 2027 prevede quasi due milioni di disavanzo La spesa cresce del 7,49% rispetto al 2026 PF al 75% e PG all’80%, entrambi in aumento di 5 punti',
+    'blog.article.castel-san-pietro-preventivo-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaIt;

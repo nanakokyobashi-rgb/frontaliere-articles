@@ -1,9 +1,4 @@
 {
-  "https://www.varesenews.it/2026/09/pellicini-fdi-indennita-di-frontiera-misura-storica-25-miliardi-nei-prossimi-anni/2684206": {
-    "articleId": "pellicini-fdi-indennita-frontiera",
-    "ts": "2026-09-21T00:21:18.135Z",
-    "keyForm": 2
-  },
   "https://www.laregione.ch/cantone/ticino/1951236/per-garantire-trasparenza-e-imparzialita-nelle-assunzioni-occorrono-regole-chiare": {
     "articleId": "regole-chiare-assunzioni-ticino",
     "ts": "2026-09-21T00:30:20.033Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4199961": {
     "articleId": "voto-cinque-temi-28-febbraio",
     "ts": "2026-10-31T11:19:43.099Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/cantone/mendrisiotto/1959823/castel-san-pietro-preventivo-2027-nelle-cifre-rosse": {
+    "articleId": "castel-san-pietro-preventivo-2027",
+    "ts": "2026-10-31T12:35:28.228Z",
     "keyForm": 2
   }
 }

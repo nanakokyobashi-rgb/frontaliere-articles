@@ -13659,6 +13659,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.voto-cinque-temi-28-febbraio.title': 'Cinq objets soumis au vote le 28 février 2027',
     'blog.article.voto-cinque-temi-28-febbraio.excerpt': 'Le 28 février 2027 la population votera sur cinq objets Le nucléaire est le contre-projet à «Stop al blackout» Le foie gras et la naturalisation arrivent avec deux',
     'blog.article.voto-cinque-temi-28-febbraio.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.castel-san-pietro-preventivo-2027.title': 'Castel San Pietro : Budget 2027 dans le rouge',
+    'blog.article.castel-san-pietro-preventivo-2027.excerpt': 'Le budget 2027 prévoit un déficit de près de deux millions Les dépenses augmentent de 7,49% par rapport à 2026 PF à 75% et PG à 80%, tous deux en hausse de 5 points',
+    'blog.article.castel-san-pietro-preventivo-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaFr;
