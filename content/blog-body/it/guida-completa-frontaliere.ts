@@ -157,9 +157,9 @@ La fiscalità è l'aspetto più complesso e più importante per un frontaliere. 
 
 ### Il vecchio regime (lavoratori pre-luglio 2023)
 
-Chi ha iniziato a lavorare come frontaliere **prima del 17 luglio 2023** gode di un regime transitorio che durerà fino al 2033:
+Chi ha iniziato a lavorare come frontaliere **prima del 17 luglio 2023** resta nel regime dell'art. 9 dell'Accordo, senza termine:
 
-- **Solo imposta alla fonte svizzera** (nessuna tassazione in Italia)
+- **Solo imposta alla fonte svizzera**: niente IRPEF su questo reddito per i vecchi frontalieri
 - L'imposta alla fonte viene trattenuta dal datore di lavoro
 - Il 40% dell'imposta alla fonte viene retrocesso ai comuni italiani di confine (i cosiddetti **ristorni**)
 - Nessun obbligo di dichiarazione dei redditi in Italia per il reddito da lavoro svizzero

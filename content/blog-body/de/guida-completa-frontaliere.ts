@@ -157,7 +157,7 @@ Die Besteuerung ist der komplexeste und wichtigste Aspekt für einen Grenzgänge
 
 ### Das alte Regime (Arbeitende vor Juli 2023)
 
-Wer **vor dem 17. Juli 2023** als Grenzgänger zu arbeiten begann, profitiert von einem Übergangsregime bis 2033:
+Wer **vor dem 17. Juli 2023** als Grenzgänger zu arbeiten begann, bleibt in der Regelung von Art. 9 des Abkommens, ohne Enddatum:
 
 - **Nur Schweizer Quellensteuer** (keine italienische Besteuerung)
 - Die Quellensteuer wird vom Arbeitgeber abgezogen

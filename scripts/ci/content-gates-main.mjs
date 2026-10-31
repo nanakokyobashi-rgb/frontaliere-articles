@@ -128,6 +128,8 @@ export const TITLE = 'gate content su main: offender nel corpus generato dai bot
  */
 export const CONTENT_GATES = [
   'generator/tests/brogeda-editorial-correction.test.mjs',
+  // Bonifica del 31/10/2026: regole fiscali vietate in corpi e meta, quattro lingue.
+  'generator/tests/editorial-claims-corpus.test.mjs',
   // Seconda correzione editoriale fissata da un test: il toponimo dell'incidente
   // di Porlezza in tre articoli e nelle loro quattro lingue.
   'generator/tests/porlezza-toponym-correction.test.mjs',
