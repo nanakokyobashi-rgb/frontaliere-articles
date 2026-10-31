@@ -4,21 +4,17 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ne::https://www.canalalpha.ch/play/la-boucle/episode/43715/interview-ruwaiyda-al-hasheme-gabriel-nyange-les-nouveaux-ambassadeurs-du-canton-de-neuchatel": {
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261030-en-france-le-pib-recule-et-l-economie-francaise-est-a-l-arret.html": {
       "section": "canton-ne",
-      "ts": 1793106164491
+      "ts": 1793472761563
     },
-    "canton-ne::https://www.estrepublicain.fr/culture-loisirs/2026/10/24/avec-le-festival-resonance-quatre-jours-pour-celebrer-la-danse": {
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261030-les-perspectives-de-l-economie-suisse-restent-solides.html": {
       "section": "canton-ne",
-      "ts": 1793107467815
+      "ts": 1793472770879
     },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261027-une-suisse-plus-independante-energetiquement-grace-au-nucleaire.html": {
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261030-benefice-net-de-19-07-milliards-pour-la-bns-au-3e-trimestre.html": {
       "section": "canton-ne",
-      "ts": 1793107478464
-    },
-    "canton-ne::https://www.ne.ch/communiques-de-presse/pour-sa-30eme-edition-le-prix-interculturel-salut-letranger-recompense-le-centre-portugais-de-neuchatel-et-madame-carmen-diaz-pumarejo": {
-      "section": "canton-ne",
-      "ts": 1793263057734
+      "ts": 1793472779232
     }
   }
 }
