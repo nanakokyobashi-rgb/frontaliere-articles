@@ -9,7 +9,8 @@
  * Tre passaggi, dal piu' chirurgico al piu' netto:
  *
  *  1. coppie di importi: «franchigia 7.500/10.000 €», «(7.500 € o 10.000 €)» e
- *     varianti diventano il solo importo in vigore; il resto della frase resta;
+ *     varianti diventano il solo importo in vigore; il resto della frase resta.
+ *     Vale solo nelle frasi riconosciute dal guard, come i due passaggi dopo;
  *  2. «mai in entrambi i Paesi»: si toglie solo l'inciso, perche' «trattenuta solo
  *     in Svizzera» e' vero per la ritenuta;
  *  3. la frase che resta falsa si sostituisce con quella corretta, nella lingua del
@@ -120,6 +121,21 @@ function localeOf(rel, sentence) {
   return 'it';
 }
 
+/**
+ * Applica `transform` solo agli span delle frasi che il guard riconosce per `id`.
+ * Una fascia salariale «7.500-10.000 CHF» o una legge «in vigore dal 1° gennaio
+ * 2024» che non parla dell'Accordo non sono affermazioni da riparare, e riscriverle
+ * pubblicherebbe una frase falsa.
+ */
+function withinClaims(text, id, transform) {
+  const spans = new Map(findFiscalClaims(text).filter((claim) => claim.id === id).map((claim) => [claim.start, claim]));
+  let out = text;
+  for (const claim of [...spans.values()].sort((left, right) => right.start - left.start)) {
+    out = out.slice(0, claim.start) + transform(out.slice(claim.start, claim.end)) + out.slice(claim.end);
+  }
+  return out;
+}
+
 function repairPairs(text, rel) {
   let out = '';
   let last = 0;
@@ -164,9 +180,12 @@ function replacementFor(text, rel, claim, state) {
 }
 
 export function repairFiscalText(input, rel, { replaceArithmetic = false } = {}) {
-  let text = repairPairs(input, rel);
-  for (const re of NEVER_BOTH) text = text.replace(re, '');
-  for (const [re, replacement] of IN_FORCE_2024) text = text.replace(re, replacement);
+  let text = withinClaims(input, 'franchigia-7500', (sentence) => repairPairs(sentence, rel));
+  text = withinClaims(text, 'mai-in-entrambi', (sentence) => NEVER_BOTH.reduce((value, re) => value.replace(re, ''), sentence));
+  text = withinClaims(text, 'accordo-in-vigore-2024', (sentence) => IN_FORCE_2024.reduce(
+    (value, [re, replacement]) => value.replace(re, replacement),
+    sentence,
+  ));
   const state = { used: false };
   const arith = [];
   const claims = findFiscalClaims(text).filter((claim) => claim.id === 'franchigia-7500');

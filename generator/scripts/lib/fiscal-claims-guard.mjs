@@ -175,6 +175,14 @@ export function findFiscalClaims(text) {
 /** Una percentuale riferita alla paga: le altre (sondaggi, aumenti) non sono l'aliquota. */
 const RATE_ON_PAY_RE = /(\d{1,2}(?:[.,]\d)?)(?:\s?%?\s?(?:-|–|—|a|al|to|bis|à)\s?(\d{1,2}(?:[.,]\d)?))?\s?%\s+(?:del|dello|della|sul|sullo|sulla|von|vom|auf|auf den|auf das|of|of the|on|on the|des|du|de|de la|sur|sur le|sur la)\s+(?:proprio\s+|their\s+|ihres\s+)?(?:reddit|salari|stipendi|income|salary|wage|einkommen|nettoeinkommen|bruttoeinkommen|lohn|gehalt|brutto|netto|revenu|salaire|gross|net)\w*(?:\s+(?:netto|lordo|net|gross|brut|brutto))?/gi;
 
+const OTHER_LEVY_RE = /(\bavs\b|\bahv\b|\blpp\b|\bbvg\b|irpef|impost|imp[oô]t|quellensteuer|withholding|pilastr|pilier|s[aä]ule|\binps\b|contribut[io] (?:avs|previdenz))/i;
+
+function skipSeparators(text, index) {
+  let cursor = index;
+  while (cursor < text.length && cursor < index + 8 && /[\s\\n]/.test(text[cursor])) cursor += 1;
+  return cursor;
+}
+
 /** Un importo in euro riferito al mese: la quota SSN sta fra 30 e 200 per mese lavorato. */
 const MONTHLY_EURO_RE = /(?:(\d{1,3}(?:[.'’\u00a0 ]\d{3})*)\s?(?:€|euro|eur)?\s?(?:-|–|—|a|al|to|bis|à)\s?)?(?:€\s?(\d{1,3}(?:[.'’\u00a0 ]\d{3})*)|(\d{1,3}(?:[.'’\u00a0 ]\d{3})*)\s?(?:€|(?:euro|eur)\b))\s*(?:al mese|per mese|\/mese|mensil\w*|a month|per month|\/month|monthly|pro monat|im monat|monatlich\w*|\/monat|par mois|\/mois|mensuel\w*)/gi;
 
@@ -203,19 +211,29 @@ export function findTaxHealthParameterErrors(text) {
     if (seenSpans.has(start)) continue;
     seenSpans.add(start);
     const sentence = text.slice(start, end);
-    if (monthlyAmountsOutOfRange(sentence)) {
+    if (hasWrongTaxHealthParameter(sentence)) {
       errors.push({ id: 'tassa-salute-parametri', source: 'DM Salute 14/11/2025 art. 1', start, end, sentence });
       continue;
     }
-    for (const percent of sentence.matchAll(RATE_ON_PAY_RE)) {
-      const values = [percent[1], percent[2]].filter(Boolean).map((value) => Number(value.replace(',', '.')));
-      if (/(lordo|gross|brutto|brut)/i.test(percent[0]) || values.some((value) => value < 3 || value > 6)) {
-        errors.push({ id: 'tassa-salute-parametri', source: 'DM Salute 14/11/2025 art. 1', start, end, sentence });
-        break;
-      }
+    // La cifra puo' stare nella frase dopo quella che nomina la quota. Vale solo se
+    // quella frase non parla di un altro prelievo: AVS o imposte hanno altre aliquote.
+    const next = sentenceSpanAt(text, skipSeparators(text, end));
+    const following = text.slice(next.start, next.end);
+    if (next.start >= end && !seenSpans.has(next.start) && !OTHER_LEVY_RE.test(following) && hasWrongTaxHealthParameter(following)) {
+      seenSpans.add(next.start);
+      errors.push({ id: 'tassa-salute-parametri', source: 'DM Salute 14/11/2025 art. 1', start: next.start, end: next.end, sentence: following });
     }
   }
   return errors;
+}
+
+function hasWrongTaxHealthParameter(sentence) {
+  if (monthlyAmountsOutOfRange(sentence)) return true;
+  for (const percent of sentence.matchAll(RATE_ON_PAY_RE)) {
+    const values = [percent[1], percent[2]].filter(Boolean).map((value) => Number(value.replace(',', '.')));
+    if (/(lordo|gross|brutto|brut)/i.test(percent[0]) || values.some((value) => value < 3 || value > 6)) return true;
+  }
+  return false;
 }
 
 /** Tutti gli errori fiscali di un testo. */

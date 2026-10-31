@@ -102,6 +102,23 @@ test('riparazione: una coppia dentro un calcolo non diventa un risultato falso',
   assert.equal(arith.length, 1);
 });
 
+test('quota SSN: la cifra nella frase dopo, ma non quella di un altro prelievo', () => {
+  assert.equal(findTaxHealthParameterErrors('La tassa salute riguarda i frontalieri. Vale il 2% del salario netto.').length, 1);
+  assert.equal(findTaxHealthParameterErrors('La tassa salute riguarda i frontalieri. Vale il 4% del salario netto.').length, 0);
+  assert.equal(findTaxHealthParameterErrors('La tassa salute riguarda i frontalieri. L\'AVS vale il 5,3% del salario.').length, 0);
+});
+
+test('riparazione: una fascia salariale o una legge qualunque restano come sono', () => {
+  for (const source of [
+    'Lo stipendio va da CHF 7.500 a CHF 10.000 al mese.',
+    'Salario lordo: 7.500-10.000 CHF.',
+    'La nuova legge sul lavoro è in vigore dal 1° gennaio 2024.',
+    'The new regulation has been in force since 1 January 2024.',
+  ]) {
+    assert.equal(repairFiscalText(source, 'blog-body/it/x.ts').text, source);
+  }
+});
+
 test('i falsi amici non scattano', () => {
   assert.deepEqual(ids('Health insurance premiums count only for the share above the flat-rate deduction.'), []);
   assert.deepEqual(ids('The 20% is not returned to municipalities.'), []);
