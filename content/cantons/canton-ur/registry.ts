@@ -149,4 +149,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'incendio-tunnel-fluelen',
+ category: 'pratico',
+ date: '2026-10-31T10:27:30.338Z',
+ image: '/images/blog/article-incendio-tunnel-fluelen.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['UR'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

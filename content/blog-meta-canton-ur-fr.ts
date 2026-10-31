@@ -42,6 +42,9 @@ const blogMetaCantonUrFr: Record<string, string> = {
     'blog.article.susten-furka-chiusura-invernale.title': 'Susten et Furka fermés, Saint-Gothard praticable de jour',
     'blog.article.susten-furka-chiusura-invernale.excerpt': 'À partir du mercredi 28 octobre, les cols de la Furka et du Susten sont fermés pour l\'hiver ; le col du Saint-Gothard reste praticable de jour.',
     'blog.article.susten-furka-chiusura-invernale.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.incendio-tunnel-fluelen.title': 'Incendie d’un véhicule, tunnel de Flüelen fermé',
+    'blog.article.incendio-tunnel-fluelen.excerpt': 'L’incendie d’un véhicule a entraîné la fermeture du tunnel de Flüelen pendant environ une heure et demie jeudi 29 octobre.',
+    'blog.article.incendio-tunnel-fluelen.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonUrFr;

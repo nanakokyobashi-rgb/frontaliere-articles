@@ -53,5 +53,10 @@
     "articleId": "susten-furka-chiusura-invernale",
     "ts": "2026-10-28T17:45:24.510Z",
     "keyForm": 2
+  },
+  "http://www.urnerwochenblatt.ch/artikel/fahrzeugbrand-im-flueeler-tunnel": {
+    "articleId": "incendio-tunnel-fluelen",
+    "ts": "2026-10-31T10:27:30.401Z",
+    "keyForm": 2
   }
 }

@@ -42,6 +42,9 @@ const blogMetaCantonUrEn: Record<string, string> = {
     'blog.article.susten-furka-chiusura-invernale.title': 'Susten and Furka closed, Gotthard passable during the day',
     'blog.article.susten-furka-chiusura-invernale.excerpt': 'As of Wednesday, October 28, the Furka and Susten passes are closed for the winter; the San Gottardo Pass remains passable during the day.',
     'blog.article.susten-furka-chiusura-invernale.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.incendio-tunnel-fluelen.title': 'Vehicle fire, Flüelen tunnel closed',
+    'blog.article.incendio-tunnel-fluelen.excerpt': 'A vehicle fire forced the closure of the Flüelen tunnel for about an hour and a half on Thursday, October 29.',
+    'blog.article.incendio-tunnel-fluelen.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonUrEn;
