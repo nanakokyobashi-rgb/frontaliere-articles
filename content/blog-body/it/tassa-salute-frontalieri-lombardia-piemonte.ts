@@ -3,6 +3,7 @@ const bodyTassaSaluteFrontalieriLombardiaPiemonte: Record<string, string> = {
     'blog.article.tassa-salute-frontalieri-lombardia-piemonte.body2': '## Tool utili per massimizzare il netto\nPer ridurre la perdita sul cambio, confronta il [cambio CHF-EUR](nav:exchange) e le [banche per frontalieri](nav:banks).',
     'blog.article.tassa-salute-frontalieri-lombardia-piemonte.body3': '*Fonte: [comozero.it](https://comozero.it/attualita/il-caos-tassa-salute-e-frontalieri-la-lombardia-richiama-allordine-ma-dal-piemonte-un-secco-no/)*',
     'blog.article.tassa-salute-frontalieri-lombardia-piemonte.faq': '[]',
+    'blog.article.tassa-salute-frontalieri-lombardia-piemonte.body4': '### Perché conta il confronto tra Regioni\nIl testo mette a confronto la posizione lombarda riportata dalla cronaca con il rifiuto espresso dal Piemonte. Sono due posizioni politiche diverse, non due calcoli personalizzati del contributo e nemmeno una prova che la norma sia già applicata nello stesso modo ovunque. Per un frontaliere la Regione di residenza resta un elemento decisivo, insieme alla legge nazionale e agli eventuali provvedimenti attuativi. Il disallineamento descritto spiega l\'incertezza, ma non permette di dedurre quale importo debba pagare una persona concreta. La verifica va fatta sugli atti ufficiali della propria Regione prima di usare la cifra nel calcolo del netto.',
 };
 
 export default bodyTassaSaluteFrontalieriLombardiaPiemonte;
