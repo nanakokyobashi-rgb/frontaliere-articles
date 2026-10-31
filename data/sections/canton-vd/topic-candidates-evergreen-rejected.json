@@ -4,97 +4,9 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vd::https://www.guidedufrontalier.com/actualites/contribution-differentielle-hauts-revenus-frontaliers": {
+    "canton-vd::https://www.guidedufrontalier.com/actualites/hebdo-frontalier-30-au-06-novembre-2026": {
       "section": "canton-vd",
-      "ts": 1793014244188
-    },
-    "canton-vd::https://www.guidedufrontalier.com/actualites/retraite-frontalier-polypensionne": {
-      "section": "canton-vd",
-      "ts": 1793014425497
-    },
-    "canton-vd::https://www.guidedufrontalier.com/actualites/hebdo-du-frontalier": {
-      "section": "canton-vd",
-      "ts": 1793014434254
-    },
-    "canton-vd::https://www.ledauphine.com/economie/2026/10/26/atmb-ou-en-sont-les-gros-dossiers-de-la-societe-d-autoroute": {
-      "section": "canton-vd",
-      "ts": 1793035313632
-    },
-    "canton-vd::https://www.ledauphine.com/economie/2026/10/26/un-projet-de-poulailler-geant-suscite-des-inquietudes": {
-      "section": "canton-vd",
-      "ts": 1793035322301
-    },
-    "canton-vd::https://www.ledauphine.com/economie/2026/10/26/l-horlogerie-repart-avec-une-hausse-generale-des-exportations": {
-      "section": "canton-vd",
-      "ts": 1793035329858
-    },
-    "canton-vd::https://www.ledauphine.com/sante/2026/10/25/deux-journees-d-immersion-pour-vanter-les-bienfaits-du-thermalisme": {
-      "section": "canton-vd",
-      "ts": 1793036154953
-    },
-    "canton-vd::https://latele.ch/emissions/national-league-saison/lausanne-fribourg-2": {
-      "section": "canton-vd",
-      "ts": 1793036162027
-    },
-    "canton-vd::https://www.ledauphine.com/economie/2026/10/26/un-dechet-jete-a-morzine-a-des-chances-de-finir-dans-le-lac-comment-l-usine-de-chevilly-parvient-a-potabiliser-l-eau-du-leman": {
-      "section": "canton-vd",
-      "ts": 1793058924478
-    },
-    "canton-vd::https://www.ledauphine.com/economie/2026/10/26/deux-reunions-publiques-sur-l-evolution-du-projet-d-ecoquartier-de-la-gare": {
-      "section": "canton-vd",
-      "ts": 1793058931950
-    },
-    "canton-vd::https://www.ledauphine.com/economie/2026/10/26/halloween-vtt-bike-park-le-plein-d-activites-pendant-les-vacances-de-la-toussaint": {
-      "section": "canton-vd",
-      "ts": 1793058938737
-    },
-    "canton-vd::https://latele.ch/emissions/info-vaud/info-vaud-s-2026-e-161?s=4": {
-      "section": "canton-vd",
-      "ts": 1793064576047
-    },
-    "canton-vd::https://latele.ch/emissions/les-puckalistes/les-puckalistes-s-2026-e-31?s=2": {
-      "section": "canton-vd",
-      "ts": 1793064578448
-    },
-    "canton-vd::https://latele.ch/emissions/les-puckalistes/les-puckalistes-s-2026-e-31?s=5": {
-      "section": "canton-vd",
-      "ts": 1793064580193
-    },
-    "canton-vd::https://latele.ch/emissions/info-vaud/info-vaud-s-2026-e-161?s=6": {
-      "section": "canton-vd",
-      "ts": 1793068612951
-    },
-    "canton-vd::https://www.ledauphine.com/faits-divers-justice/2026/10/27/autoroute-a412-la-justice-ne-suspend-pas-le-chantier-mais": {
-      "section": "canton-vd",
-      "ts": 1793097791312
-    },
-    "canton-vd::https://www.ledauphine.com/societe/2026/10/27/mobilite-l-enquete-lancee-par-l-agglo-se-poursuit": {
-      "section": "canton-vd",
-      "ts": 1793150519884
-    },
-    "canton-vd::https://www.ledauphine.com/societe/2026/10/27/table-ronde-dans-les-locaux-de-pays-de-gex-entreprises": {
-      "section": "canton-vd",
-      "ts": 1793150532518
-    },
-    "canton-vd::https://www.ledauphine.com/social/2026/10/27/loin-des-chercheurs-d-or-les-projets-construits-des-francais-en-quete-d-un-emploi-en-suisse": {
-      "section": "canton-vd",
-      "ts": 1793155392478
-    },
-    "canton-vd::https://www.ledauphine.com/societe/2026/10/27/assemblee-generale-de-l-universite-populaire-ce-mercredi-soir": {
-      "section": "canton-vd",
-      "ts": 1793155401316
-    },
-    "canton-vd::https://latele.ch/emissions/info-vaud/info-vaud-s-2026-e-162?s=5": {
-      "section": "canton-vd",
-      "ts": 1793155403262
-    },
-    "canton-vd::https://www.guidedufrontalier.com/actualites/pret-immobilier-chf-tournant-juridique": {
-      "section": "canton-vd",
-      "ts": 1793187013760
-    },
-    "canton-vd::https://www.guidedufrontalier.com/actualites/declaration-dris-tou-couple-frontalier": {
-      "section": "canton-vd",
-      "ts": 1793187020562
+      "ts": 1793443768450
     }
   }
 }
