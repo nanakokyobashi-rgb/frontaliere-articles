@@ -153,6 +153,7 @@ export const RC_TO_ENV = {
   GA_MEASUREMENT_ID:              ['GA_MEASUREMENT_ID'],
   RECAPTCHA_SITE_KEY:             ['RECAPTCHA_SITE_KEY'],
   TWELVEDATA_API_KEY:             ['TWELVEDATA_API_KEY'],
+  ASSISTED_APPLICATION_ANSWER_CONTRACT_REQUIRED: ['ASSISTED_APPLICATION_ANSWER_CONTRACT_REQUIRED'],
   // Assisted-application payment provider and SumUp credentials. Stripe is
   // still the application default until the merchant setup is complete.
   ASSISTED_APPLICATION_PAYMENT_PROVIDER: ['ASSISTED_APPLICATION_PAYMENT_PROVIDER'],
