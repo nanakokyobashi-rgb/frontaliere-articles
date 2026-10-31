@@ -69,6 +69,9 @@ const blogMetaCantonAppenzelloFr: Record<string, string> = {
     'blog.article.costi-sanita-meno-entrate.title': 'Les coûts de santé et la baisse des recettes pèsent sur le budget',
     'blog.article.costi-sanita-meno-entrate.excerpt': 'Le budget 2027 prévoit une perte globale de 12,4 millions de CHF, en raison de la hausse des coûts de santé et de la baisse des recettes fiscales.',
     'blog.article.costi-sanita-meno-entrate.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.45-residenti-richiesta-rumore.title': '45 résidents demandent des mesures contre le bruit sur la Langgasse',
+    'blog.article.45-residenti-richiesta-rumore.excerpt': '45 résidents ont déposé auprès de la commune, le mercredi 28 octobre, une demande visant l’examen urgent de Tempo 30 et des mesures d’apaisement du trafic.',
+    'blog.article.45-residenti-richiesta-rumore.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonAppenzelloFr;

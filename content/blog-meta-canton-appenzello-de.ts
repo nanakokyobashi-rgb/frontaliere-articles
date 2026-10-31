@@ -69,6 +69,9 @@ const blogMetaCantonAppenzelloDe: Record<string, string> = {
     'blog.article.costi-sanita-meno-entrate.title': 'Gesundheitskosten und geringere Einnahmen belasten den Voranschlag',
     'blog.article.costi-sanita-meno-entrate.excerpt': 'Der Voranschlag 2027 sieht aufgrund steigender Gesundheitskosten und geringerer Steuereinnahmen einen Gesamtverlust von 12,4 Millionen CHF vor.',
     'blog.article.costi-sanita-meno-entrate.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.45-residenti-richiesta-rumore.title': '45 Anwohner fordern Maßnahmen gegen den Lärm auf der Langgasse',
+    'blog.article.45-residenti-richiesta-rumore.excerpt': '45 Anwohner haben am Mittwoch, dem 28.',
+    'blog.article.45-residenti-richiesta-rumore.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonAppenzelloDe;

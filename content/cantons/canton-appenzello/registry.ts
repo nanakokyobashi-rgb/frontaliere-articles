@@ -249,4 +249,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: '45-residenti-richiesta-rumore',
+ category: 'pratico',
+ date: '2026-10-31T13:30:50.111Z',
+ image: '/images/blog/article-45-residenti-richiesta-rumore.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['APPENZELLO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
