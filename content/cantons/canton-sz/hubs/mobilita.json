@@ -4,12 +4,12 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "mobilita",
-  "updatedAt": "2026-10-30T19:31:58.244Z",
-  "contentHash": "a3f4a3600c49d3c4e3d895c52e065770de22333631046cae6c2a82fd96bae84f",
+  "updatedAt": "2026-10-31T06:15:08.747Z",
+  "contentHash": "360e3985ebaa98140f7a0d568d91541401cc76379ac6ce2c2085072926e5d856",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-30T13:39:45.803Z",
+      "updatedAt": "2026-10-30T20:12:21.426Z",
       "keyFacts": 2
     }
   ],
@@ -50,11 +50,6 @@
               "date": "2026-10-23T12:31:00.000Z"
             },
             {
-              "label": "Revocato: A15 Brüttisellen -> Uster tra Svincolo autostradale Wangen E Svincolo autostradale Hegnau Situazione: problemi di traffico Causa: oggetto sulla strada",
-              "value": "Traffico",
-              "date": "2026-10-30T12:48:00.000Z"
-            },
-            {
               "label": "A4 Altdorf <-> Brunnen Svincolo autostradale Brunnen Süd Situazione: problemi di traffico cantiere, lunghezza [km] 0.12 Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo…",
               "value": "Cantiere",
               "detail": "fine prevista: 11 novembre 2026",
@@ -62,7 +57,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-30T13:39:45.803Z"
+          "updatedAt": "2026-10-30T20:12:21.426Z"
         }
       ],
       "curatedArticles": [
@@ -96,7 +91,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "en": {
       "canton": "SZ",
@@ -134,11 +129,6 @@
               "date": "2026-10-23T12:31:00.000Z"
             },
             {
-              "label": "Revocato: A15 Brüttisellen -> Uster tra Svincolo autostradale Wangen E Svincolo autostradale Hegnau Situazione: problemi di traffico Causa: oggetto sulla strada",
-              "value": "Traffic",
-              "date": "2026-10-30T12:48:00.000Z"
-            },
-            {
               "label": "A4 Altdorf <-> Brunnen Svincolo autostradale Brunnen Süd Situazione: problemi di traffico cantiere, lunghezza [km] 0.12 Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo…",
               "value": "Roadworks",
               "detail": "until 11 November 2026",
@@ -146,7 +136,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-30T13:39:45.803Z"
+          "updatedAt": "2026-10-30T20:12:21.426Z"
         }
       ],
       "curatedArticles": [
@@ -180,7 +170,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "de": {
       "canton": "SZ",
@@ -218,11 +208,6 @@
               "date": "2026-10-23T12:31:00.000Z"
             },
             {
-              "label": "Aufgehoben: A15 Brüttisellen -> Uster zwischen Anschluss Wangen und Anschluss Hegnau Sachlage: Verkehrsbehinderung Ursache: Gegenstände auf der Fahrbahn",
-              "value": "Verkehr",
-              "date": "2026-10-30T12:48:00.000Z"
-            },
-            {
               "label": "A4 Altdorf <-> Brunnen Anschluss Brunnen-Süd Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.12 Verkehrsführung: veränderte Verkehrsführung Zusatz 1: vorübergehende Begrenzung der Breite…",
               "value": "Baustelle",
               "detail": "bis 11. November 2026",
@@ -230,7 +215,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-30T13:39:45.803Z"
+          "updatedAt": "2026-10-30T20:12:21.426Z"
         }
       ],
       "curatedArticles": [
@@ -264,7 +249,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "fr": {
       "canton": "SZ",
@@ -302,11 +287,6 @@
               "date": "2026-10-23T12:31:00.000Z"
             },
             {
-              "label": "Révoqué: A15 Brüttisellen -> Uster entre Jonction autoroutière Wangen et Jonction autoroutière Hegnau Situation: trafic perturbé Raison: objets sur la chaussée",
-              "value": "Trafic",
-              "date": "2026-10-30T12:48:00.000Z"
-            },
-            {
               "label": "A4 Altdorf <-> Brunnen Jonction autoroutière Brunnen-Sud Situation: trafic perturbé travaux, longueur [km] 0.12 Gestion du trafic: nouveau plan de circulation Complément 1: limitation temporaire de…",
               "value": "Chantier",
               "detail": "jusqu’au 11 novembre 2026",
@@ -314,7 +294,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-30T13:39:45.803Z"
+          "updatedAt": "2026-10-30T20:12:21.426Z"
         }
       ],
       "curatedArticles": [
@@ -348,7 +328,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     }
   }
 }

@@ -4,17 +4,17 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "eventi",
-  "updatedAt": "2026-10-30T06:23:49.454Z",
-  "contentHash": "3a9412ce3431054c055f6cfd16fb4b69610a0211ce09b9a95a0aa8adfac567d6",
+  "updatedAt": "2026-10-31T06:15:08.747Z",
+  "contentHash": "59a0c0ff5799093cf9f45fd9aa09353644aca4b3ce0b94c3d5f9e0ceee3af9f5",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-29T21:23:37.654Z",
+      "updatedAt": "2026-10-30T13:23:17.161Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-29T22:02:50.125Z",
+      "updatedAt": "2026-10-30T21:45:03.956Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "103",
+          "value": "91",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Ace Ross + Nubiyan Twist + DJ Leo Luscher & Mystic V",
-              "detail": "Jumeaux Jazz Club",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/ace-ross-nubiyan-twist-dj-leo-luscher-und-mystic-v_AJwPTH4"
+              "label": "Ensemble orchestrale \"Les Vents du Vallon\"",
+              "detail": "Église évang.-réf. de La Tour-de-Peilz, La Tour-de-Peilz",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/orchesterensemble-les-vents-du-vallon-1/"
             },
             {
-              "label": "Eva Antonnikov Literary Event",
-              "detail": "Bibliothèque de Montreux-Veytaux, Montreux",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/rendez-vous-litteraire-eva-antonnikov/"
+              "label": "An hour waiting for you",
+              "detail": "Le Reflet – Théâtre de Vevey, Vevey",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/une-heure-a-tattendre/"
             },
             {
-              "label": "Feast of the dead",
+              "label": "Benefizessen – DonnAccord-Konzert",
+              "detail": "Grande Salle Le Grammont",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/evenements/musique/st-legier-la-chiesaz/repas-de-soutien-concert-donnaccord_ABeLpQS"
+            },
+            {
+              "label": "Guided Tours of the “Relics of the Future” Exhibition",
+              "detail": "Fondation du Château de Chillon, Montreux",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/visites-guidees-de-lexposition-reliques-du-futur/"
+            },
+            {
+              "label": "Halloween at Villeneuve mini-golf course",
+              "detail": "Mini-Golf, Villeneuve (VD)",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/halloween-au-mini-golf-de-villeneuve/"
+            },
+            {
+              "label": "Have your portrait taken at the 555th Saint-Martin Fair!",
               "detail": "Vevey",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/feast-of-the-dead/"
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/have-your-portrait-taken-at-the-555th-saintmartin-fair/"
             },
             {
-              "label": "I Love Reggaeton Halloween",
-              "detail": "MAD - MAINFLOOR",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/i-love-reggaeton-halloween_Ajc9HEH"
+              "label": "Kumquat / Vernissage",
+              "detail": "Caveau du Coeur d'Or, Chexbres",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/evenements/musique/chexbres/kumquat-vernissage_AAbFC8s"
             },
             {
-              "label": "Jérémie Kisling",
-              "detail": "Théâtre de l'Odéon",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/evenements/musique/villeneuve-vd/jeremie-kisling_AkdAR6x"
+              "label": "Orchesterensemble „Les Vents du Vallon“",
+              "detail": "Église évang.-réf. de La Tour-de-Peilz, La Tour-de-Peilz",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/la-tour-de-peilz/orchesterensemble-les-vents-du-vallon_ANx52wd"
             },
             {
-              "label": "Nubiyan Twist + Ace Ross + DJ Leo Luscher & Mystic V",
-              "detail": "Jumeaux Jazz Club",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/lausanne/nubiyan-twist-ace-ross-dj-leo-luscher-und-mystic-v_ALLm816"
+              "label": "Recreational Orienteering Race",
+              "detail": "Mont Pèlerin, Chardonne",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/recreational-orienteering-race/"
             },
             {
-              "label": "Nubiyan Twist + Ace Ross + DJ Leo Luscher & Mystic V",
-              "detail": "Jumeaux Jazz Club, Lausanne",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/nubiyan-twist-ace-ross-dj-leo-luscher-mystic-v/"
-            },
-            {
-              "label": "The Jazz Room at Château Salavaux: a journey to the heart of New Orleans",
-              "detail": "Salavaux, Vully-les-Lacs",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-jazz-room-at-chateau-salavaux-a-journey-to-the-heart-of-new-orleans/"
-            },
-            {
-              "label": "Cabaret of the Strange",
-              "detail": "Cully, Bourg-en-Lavaux",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/cabaret-of-the-strange/"
-            },
-            {
-              "label": "Frissons au musée",
-              "detail": "Lausanne",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/frissons-au-musee/"
+              "label": "Vacherin Mont d'Or baked at the Terrace",
+              "detail": "Villeneuve VD",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vacherin-mont-dor-baked-at-the-terrace/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vaud/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -118,7 +118,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -140,7 +140,7 @@
           "url": "/eventi/vaud/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "en": {
       "canton": "VD",
@@ -150,7 +150,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "103",
+          "value": "91",
           "note": "from the site’s events calendar"
         }
       ],
@@ -161,69 +161,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Ace Ross + Nubiyan Twist + DJ Leo Luscher & Mystic V",
-              "detail": "Jumeaux Jazz Club",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/ace-ross-nubiyan-twist-dj-leo-luscher-und-mystic-v_AJwPTH4"
+              "label": "Orchestra ensemble \"Les Vents du Vallon\"",
+              "detail": "Église évang.-réf. de La Tour-de-Peilz, La Tour-de-Peilz",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/orchesterensemble-les-vents-du-vallon-1/"
             },
             {
-              "label": "Eva Antonnikov Literary Event",
-              "detail": "Bibliothèque de Montreux-Veytaux, Montreux",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/rendez-vous-litteraire-eva-antonnikov/"
+              "label": "An hour waiting for you",
+              "detail": "Le Reflet – Théâtre de Vevey, Vevey",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/une-heure-a-tattendre/"
             },
             {
-              "label": "Feast of the dead",
+              "label": "Fundraising Dinner and DonnAccord Concert",
+              "detail": "Grande Salle Le Grammont",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/evenements/musique/st-legier-la-chiesaz/repas-de-soutien-concert-donnaccord_ABeLpQS"
+            },
+            {
+              "label": "Guided Tours of the “Relics of the Future” Exhibition",
+              "detail": "Fondation du Château de Chillon, Montreux",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/visites-guidees-de-lexposition-reliques-du-futur/"
+            },
+            {
+              "label": "Halloween at Villeneuve mini-golf course",
+              "detail": "Mini-Golf, Villeneuve (VD)",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/halloween-au-mini-golf-de-villeneuve/"
+            },
+            {
+              "label": "Have your portrait taken at the 555th Saint-Martin Fair!",
               "detail": "Vevey",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/feast-of-the-dead/"
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/have-your-portrait-taken-at-the-555th-saintmartin-fair/"
             },
             {
-              "label": "I Love Reggaeton Halloween",
-              "detail": "MAD - MAINFLOOR",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/i-love-reggaeton-halloween_Ajc9HEH"
+              "label": "Kumquat / Opening Reception",
+              "detail": "Caveau du Coeur d'Or, Chexbres",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/evenements/musique/chexbres/kumquat-vernissage_AAbFC8s"
             },
             {
-              "label": "Jérémie Kisling",
-              "detail": "Théâtre de l'Odéon",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/evenements/musique/villeneuve-vd/jeremie-kisling_AkdAR6x"
+              "label": "\"Les Vents du Vallon\" Orchestra",
+              "detail": "Église évang.-réf. de La Tour-de-Peilz, La Tour-de-Peilz",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/la-tour-de-peilz/orchesterensemble-les-vents-du-vallon_ANx52wd"
             },
             {
-              "label": "Nubiyan Twist + Ace Ross + DJ Leo Luscher & Mystic V",
-              "detail": "Jumeaux Jazz Club",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/lausanne/nubiyan-twist-ace-ross-dj-leo-luscher-und-mystic-v_ALLm816"
+              "label": "Recreational Orienteering Race",
+              "detail": "Mont Pèlerin, Chardonne",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/recreational-orienteering-race/"
             },
             {
-              "label": "Nubiyan Twist + Ace Ross + DJ Leo Luscher & Mystic V",
-              "detail": "Jumeaux Jazz Club, Lausanne",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/nubiyan-twist-ace-ross-dj-leo-luscher-mystic-v/"
-            },
-            {
-              "label": "The Jazz Room at Château Salavaux: a journey to the heart of New Orleans",
-              "detail": "Salavaux, Vully-les-Lacs",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-jazz-room-at-chateau-salavaux-a-journey-to-the-heart-of-new-orleans/"
-            },
-            {
-              "label": "Cabaret of the Strange",
-              "detail": "Cully, Bourg-en-Lavaux",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/cabaret-of-the-strange/"
-            },
-            {
-              "label": "Frissons au musée",
-              "detail": "Lausanne",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/frissons-au-musee/"
+              "label": "Vacherin Mont d'Or baked at the Terrace",
+              "detail": "Villeneuve VD",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vacherin-mont-dor-baked-at-the-terrace/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/vaud/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -241,7 +241,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -263,7 +263,7 @@
           "url": "/en/events/vaud/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "de": {
       "canton": "VD",
@@ -273,7 +273,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "103",
+          "value": "91",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -284,69 +284,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Ace Ross + Nubiyan Twist + DJ Leo Luscher & Mystic V",
-              "detail": "Jumeaux Jazz Club",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/ace-ross-nubiyan-twist-dj-leo-luscher-und-mystic-v_AJwPTH4"
+              "label": "Orchesterensemble „Les Vents du Vallon“",
+              "detail": "Église évang.-réf. de La Tour-de-Peilz, La Tour-de-Peilz",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/orchesterensemble-les-vents-du-vallon-1/"
             },
             {
-              "label": "Literaturtreffen mit Eva Antonnikov",
-              "detail": "Bibliothèque de Montreux-Veytaux, Montreux",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/rendez-vous-litteraire-eva-antonnikov/"
+              "label": "Eine Stunde auf dich warten",
+              "detail": "Le Reflet – Théâtre de Vevey, Vevey",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/une-heure-a-tattendre/"
             },
             {
-              "label": "Fest der Toten",
+              "label": "Benefizessen – DonnAccord-Konzert",
+              "detail": "Grande Salle Le Grammont",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/evenements/musique/st-legier-la-chiesaz/repas-de-soutien-concert-donnaccord_ABeLpQS"
+            },
+            {
+              "label": "Führungen durch die Ausstellung „Relikte der Zukunft“",
+              "detail": "Fondation du Château de Chillon, Montreux",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/visites-guidees-de-lexposition-reliques-du-futur/"
+            },
+            {
+              "label": "Halloween auf dem Minigolfplatz von Villeneuve",
+              "detail": "Mini-Golf, Villeneuve (VD)",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/halloween-au-mini-golf-de-villeneuve/"
+            },
+            {
+              "label": "Ihr Porträt auf der 555. Sankt-Martin-Messe!",
               "detail": "Vevey",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/feast-of-the-dead/"
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/have-your-portrait-taken-at-the-555th-saintmartin-fair/"
             },
             {
-              "label": "I Love Reggaeton Halloween",
-              "detail": "MAD - MAINFLOOR",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/i-love-reggaeton-halloween_Ajc9HEH"
+              "label": "Kumquat / Vernissage",
+              "detail": "Caveau du Coeur d'Or, Chexbres",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/evenements/musique/chexbres/kumquat-vernissage_AAbFC8s"
             },
             {
-              "label": "Jérémie Kisling",
-              "detail": "Théâtre de l'Odéon",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/evenements/musique/villeneuve-vd/jeremie-kisling_AkdAR6x"
+              "label": "Orchesterensemble „Les Vents du Vallon“",
+              "detail": "Église évang.-réf. de La Tour-de-Peilz, La Tour-de-Peilz",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/la-tour-de-peilz/orchesterensemble-les-vents-du-vallon_ANx52wd"
             },
             {
-              "label": "Nubiyan Twist + Ace Ross + DJ Leo Luscher & Mystic V",
-              "detail": "Jumeaux Jazz Club",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/lausanne/nubiyan-twist-ace-ross-dj-leo-luscher-und-mystic-v_ALLm816"
+              "label": "Volksorientierungslauf",
+              "detail": "Mont Pèlerin, Chardonne",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/recreational-orienteering-race/"
             },
             {
-              "label": "Nubiyan Twist + Ace Ross + DJ Leo Luscher & Mystic V",
-              "detail": "Jumeaux Jazz Club, Lausanne",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/nubiyan-twist-ace-ross-dj-leo-luscher-mystic-v/"
-            },
-            {
-              "label": "„The Jazz Room“ im Château Salavaux: eine Reise ins Herz von New Orleans",
-              "detail": "Salavaux, Vully-les-Lacs",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-jazz-room-at-chateau-salavaux-a-journey-to-the-heart-of-new-orleans/"
-            },
-            {
-              "label": "Cabaret de l’Etrange",
-              "detail": "Cully, Bourg-en-Lavaux",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/cabaret-of-the-strange/"
-            },
-            {
-              "label": "Frissons au musée",
-              "detail": "Lausanne",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/frissons-au-musee/"
+              "label": "Vacherin Mont d'Or aus dem Ofen à la Terrasse",
+              "detail": "Villeneuve VD",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vacherin-mont-dor-baked-at-the-terrace/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/waadt/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -364,7 +364,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -386,7 +386,7 @@
           "url": "/de/veranstaltungen/waadt/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "fr": {
       "canton": "VD",
@@ -396,7 +396,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "103",
+          "value": "91",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -407,69 +407,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Ace Ross + Nubiyan Twist + DJ Leo Luscher & Mystic V",
-              "detail": "Jumeaux Jazz Club",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/ace-ross-nubiyan-twist-dj-leo-luscher-und-mystic-v_AJwPTH4"
+              "label": "Ensemble orchestral Les Vents du Vallon",
+              "detail": "Église évang.-réf. de La Tour-de-Peilz, La Tour-de-Peilz",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/orchesterensemble-les-vents-du-vallon-1/"
             },
             {
-              "label": "Rendez-vous Littéraire Eva Antonnikov",
-              "detail": "Bibliothèque de Montreux-Veytaux, Montreux",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/rendez-vous-litteraire-eva-antonnikov/"
+              "label": "Une heure à t'attendre",
+              "detail": "Le Reflet – Théâtre de Vevey, Vevey",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/une-heure-a-tattendre/"
             },
             {
-              "label": "Fête des morts",
+              "label": "Repas de soutien - concert DonnAccord",
+              "detail": "Grande Salle Le Grammont",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/evenements/musique/st-legier-la-chiesaz/repas-de-soutien-concert-donnaccord_ABeLpQS"
+            },
+            {
+              "label": "Visites guidées de l'exposition \"Reliques du futur\"",
+              "detail": "Fondation du Château de Chillon, Montreux",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/visites-guidees-de-lexposition-reliques-du-futur/"
+            },
+            {
+              "label": "Halloween au Mini-Golf de Villeneuve",
+              "detail": "Mini-Golf, Villeneuve (VD)",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/halloween-au-mini-golf-de-villeneuve/"
+            },
+            {
+              "label": "Votre portrait à la 555e Foire de la Saint-Martin !",
               "detail": "Vevey",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/feast-of-the-dead/"
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/have-your-portrait-taken-at-the-555th-saintmartin-fair/"
             },
             {
-              "label": "I Love Reggaeton Halloween",
-              "detail": "MAD - MAINFLOOR",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/i-love-reggaeton-halloween_Ajc9HEH"
+              "label": "Kumquat - Vernissage",
+              "detail": "Caveau du Coeur d'Or, Chexbres",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/evenements/musique/chexbres/kumquat-vernissage_AAbFC8s"
             },
             {
-              "label": "Jérémie Kisling",
-              "detail": "Théâtre de l'Odéon",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/evenements/musique/villeneuve-vd/jeremie-kisling_AkdAR6x"
+              "label": "Ensemble orchestral Les Vents du Vallon",
+              "detail": "Église évang.-réf. de La Tour-de-Peilz, La Tour-de-Peilz",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/la-tour-de-peilz/orchesterensemble-les-vents-du-vallon_ANx52wd"
             },
             {
-              "label": "Nubiyan Twist + Ace Ross + DJ Leo Luscher & Mystic V",
-              "detail": "Jumeaux Jazz Club",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/lausanne/nubiyan-twist-ace-ross-dj-leo-luscher-und-mystic-v_ALLm816"
+              "label": "Course d'orientation populaire",
+              "detail": "Mont Pèlerin, Chardonne",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/recreational-orienteering-race/"
             },
             {
-              "label": "Nubiyan Twist + Ace Ross + DJ Leo Luscher & Mystic V",
-              "detail": "Jumeaux Jazz Club, Lausanne",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/nubiyan-twist-ace-ross-dj-leo-luscher-mystic-v/"
-            },
-            {
-              "label": "The Jazz Room au Château Salavaux : un voyage au cœur de la Nouvelle-Orléans",
-              "detail": "Salavaux, Vully-les-Lacs",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-jazz-room-at-chateau-salavaux-a-journey-to-the-heart-of-new-orleans/"
-            },
-            {
-              "label": "Le Cabaret de l'Étrange",
-              "detail": "Cully, Bourg-en-Lavaux",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/cabaret-of-the-strange/"
-            },
-            {
-              "label": "Frissons au musée",
-              "detail": "Lausanne",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/frissons-au-musee/"
+              "label": "Brisolée à la Terrasse",
+              "detail": "Villeneuve VD",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vacherin-mont-dor-baked-at-the-terrace/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/vaud/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -487,7 +487,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -509,7 +509,7 @@
           "url": "/fr/evenements/vaud/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     }
   }
 }

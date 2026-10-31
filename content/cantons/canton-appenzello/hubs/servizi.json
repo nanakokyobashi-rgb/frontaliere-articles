@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "servizi",
-  "updatedAt": "2026-10-30T19:31:58.244Z",
-  "contentHash": "e0d03c3fda0901a5088eb713cb8ab68eda44f905f39afee547a6dbba5834d547",
+  "updatedAt": "2026-10-31T06:15:08.747Z",
+  "contentHash": "7a02e2abf29699aeef5a9e932a53674ee5f011b23cd8c49fc3b308ec2ab4abc3",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-30T12:52:32.857Z",
+      "updatedAt": "2026-10-30T22:19:25.949Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-30T15:13:06.562Z",
+      "updatedAt": "2026-10-30T20:58:15.445Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-30T11:41:14.746Z",
+      "updatedAt": "2026-10-30T21:45:03.956Z",
       "keyFacts": 0
     }
   ],
@@ -97,7 +97,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder#liste-freie-kontrollschilder",
-          "updatedAt": "2026-10-30T12:52:32.857Z"
+          "updatedAt": "2026-10-30T22:19:25.949Z"
         },
         {
           "id": "meteo",
@@ -106,17 +106,17 @@
           "items": [
             {
               "label": "Appenzell",
-              "value": "8 °C",
-              "detail": "oggi da 3 a 8 °C"
+              "value": "5 °C",
+              "detail": "oggi da 3 a 6 °C"
             },
             {
               "label": "Herisau",
-              "value": "7 °C",
-              "detail": "oggi da 3 a 7 °C"
+              "value": "5 °C",
+              "detail": "oggi da 3 a 6 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-30T15:13:06.562Z"
+          "updatedAt": "2026-10-30T20:58:15.445Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -149,7 +149,7 @@
               "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/bruno-streule-wird-neuer-leiter-des-amts-fuer-gesundheit/"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -237,7 +237,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -307,7 +307,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder#liste-freie-kontrollschilder",
-          "updatedAt": "2026-10-30T12:52:32.857Z"
+          "updatedAt": "2026-10-30T22:19:25.949Z"
         },
         {
           "id": "meteo",
@@ -316,17 +316,17 @@
           "items": [
             {
               "label": "Appenzell",
-              "value": "8 °C",
-              "detail": "today from 3 to 8 °C"
+              "value": "5 °C",
+              "detail": "today from 3 to 6 °C"
             },
             {
               "label": "Herisau",
-              "value": "7 °C",
-              "detail": "today from 3 to 7 °C"
+              "value": "5 °C",
+              "detail": "today from 3 to 6 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-30T15:13:06.562Z"
+          "updatedAt": "2026-10-30T20:58:15.445Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -359,7 +359,7 @@
               "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/bruno-streule-wird-neuer-leiter-des-amts-fuer-gesundheit/"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -439,7 +439,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -509,7 +509,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder#liste-freie-kontrollschilder",
-          "updatedAt": "2026-10-30T12:52:32.857Z"
+          "updatedAt": "2026-10-30T22:19:25.949Z"
         },
         {
           "id": "meteo",
@@ -518,17 +518,17 @@
           "items": [
             {
               "label": "Appenzell",
-              "value": "8 °C",
-              "detail": "heute 3 bis 8 °C"
+              "value": "5 °C",
+              "detail": "heute 3 bis 6 °C"
             },
             {
               "label": "Herisau",
-              "value": "7 °C",
-              "detail": "heute 3 bis 7 °C"
+              "value": "5 °C",
+              "detail": "heute 3 bis 6 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-30T15:13:06.562Z"
+          "updatedAt": "2026-10-30T20:58:15.445Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -561,7 +561,7 @@
               "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/bruno-streule-wird-neuer-leiter-des-amts-fuer-gesundheit/"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -641,7 +641,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -711,7 +711,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder#liste-freie-kontrollschilder",
-          "updatedAt": "2026-10-30T12:52:32.857Z"
+          "updatedAt": "2026-10-30T22:19:25.949Z"
         },
         {
           "id": "meteo",
@@ -720,17 +720,17 @@
           "items": [
             {
               "label": "Appenzell",
-              "value": "8 °C",
-              "detail": "aujourd’hui de 3 à 8 °C"
+              "value": "5 °C",
+              "detail": "aujourd’hui de 3 à 6 °C"
             },
             {
               "label": "Herisau",
-              "value": "7 °C",
-              "detail": "aujourd’hui de 3 à 7 °C"
+              "value": "5 °C",
+              "detail": "aujourd’hui de 3 à 6 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-30T15:13:06.562Z"
+          "updatedAt": "2026-10-30T20:58:15.445Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -763,7 +763,7 @@
               "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/bruno-streule-wird-neuer-leiter-des-amts-fuer-gesundheit/"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -835,7 +835,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     }
   }
 }

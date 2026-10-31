@@ -4,12 +4,12 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "eventi",
-  "updatedAt": "2026-10-30T06:23:49.454Z",
-  "contentHash": "6a19ae5c1d4747433ab5eda39fb600ecae8ae70f556876e88fe84fe92ea7157f",
+  "updatedAt": "2026-10-31T06:15:08.747Z",
+  "contentHash": "87a49ad767a72003c66462b31d8a664511f3e37cb4d9d737fc37e640e44eb6d0",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-29T21:23:37.654Z",
+      "updatedAt": "2026-10-30T13:23:17.161Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "60",
+          "value": "57",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Tiny House konkret – Von der Idee zum realistischen Plan",
+              "label": "SoloCon - Solothurner Convention 2026",
+              "detail": "Enter Technikwelt, Derendingen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/solocon-solothurner-convention-2026/"
+            },
+            {
+              "label": "Dynamisch Zeichnen",
               "detail": "Solothurn",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tiny-house-konkret-von-der-idee-zum-realistischen-plan/"
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dynamisch-zeichnen/"
             },
             {
-              "label": "GZUZ (Zusatzshow)",
-              "detail": "Kulturfabrik Kofmehl, Solothurn",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gzuz-zusatzshow/"
+              "label": "Halloween im Haus der Museen",
+              "detail": "Olten",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/halloween-im-haus-der-museen/"
             },
             {
-              "label": "Stress - The How To Heal Tour",
-              "detail": "Konzertsaal Solothurn, Solothurn",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/solothurn/stress-the-how-to-heal-tour_AY4q75m"
+              "label": "Themenführung: Heilige, Hexen, Henker und Halunken",
+              "detail": "Kanton Solothurn Tourismus, Solothurn",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/themenfuehrung-heilige-hexen-henker-und-halunken/"
             },
             {
-              "label": "Schreiber vs. Schneider – Schatz!",
+              "label": "Pizza, Pasta, Mord - Ein DinnerKrimi",
+              "detail": "Kriegstetten",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/pizza-pasta-mord-ein-dinnerkrimi/"
+            },
+            {
+              "label": "Starbugs Comedy",
+              "detail": "Soletta",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/starbugs-comedy/"
+            },
+            {
+              "label": "Starbugs Comedy",
               "detail": "Solothurn",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schreiber-vs-schneider-schatz-3/"
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/starbugs-comedy-2/"
             },
             {
-              "label": "HELLO HALLOWEEN",
-              "detail": "Solothurn",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hello-halloween/"
+              "label": "Ü50! Let’s dance – Let’s party! – Halloween Special",
+              "detail": "KulturBistro Solothurn, Solothurn",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ue50-lets-dance-lets-party-halloween-special/"
             },
             {
               "label": "Vom Urknall zum Leben",
               "detail": "Solothurn — in corso, ultimo giorno: 18 novembre 2026",
-              "date": "2026-10-30",
+              "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/vom-urknall-zum-leben/"
             },
             {
               "label": "Il Centro Italiano è ospite dell'Hotel Roten Ochsen di Soletta.",
               "detail": "Hotel Roter Ochsen — in corso, ultimo giorno: 16 novembre 2026",
-              "date": "2026-10-30",
+              "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/centro-italiano-as-guest-at-the-hotel-roten-ochsen-solothurn/"
-            },
-            {
-              "label": "Oktoberfest",
-              "detail": "Rythalle Soledurn, Solothurn — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktoberfest-9/"
-            },
-            {
-              "label": "Computer Grundlagen",
-              "detail": "Volkshochschule Solothurn, Solothurn — in corso, ultimo giorno: 10 novembre 2026",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/computer-grundlagen-2/"
-            },
-            {
-              "label": "DLG Theater 2026 \"Tschingge- Ein Stück Schweiz\"",
-              "detail": "Hauslimattschulhaus, Balsthal — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dlg-theater-2026-tschingge-ein-stueck-schweiz/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/soletta/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/soletta/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "en": {
       "canton": "SO",
@@ -133,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "60",
+          "value": "57",
           "note": "from the site’s events calendar"
         }
       ],
@@ -144,69 +144,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Tiny House konkret – Von der Idee zum realistischen Plan",
+              "label": "SoloCon - Solothurner Convention 2026",
+              "detail": "Enter Technikwelt, Derendingen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/solocon-solothurner-convention-2026/"
+            },
+            {
+              "label": "Dynamisch Zeichnen",
               "detail": "Solothurn",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tiny-house-konkret-von-der-idee-zum-realistischen-plan/"
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dynamisch-zeichnen/"
             },
             {
-              "label": "GZUZ (Zusatzshow)",
-              "detail": "Kulturfabrik Kofmehl, Solothurn",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gzuz-zusatzshow/"
+              "label": "Halloween im Haus der Museen",
+              "detail": "Olten",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/halloween-im-haus-der-museen/"
             },
             {
-              "label": "Stress - The How To Heal Tour",
-              "detail": "Konzertsaal Solothurn, Solothurn",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/solothurn/stress-the-how-to-heal-tour_AY4q75m"
+              "label": "Themed tour: Saints, Sorcerers, Executioners and Crooks",
+              "detail": "Kanton Solothurn Tourismus, Solothurn",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/themenfuehrung-heilige-hexen-henker-und-halunken/"
             },
             {
-              "label": "Schreiber vs. Schneider – Schatz!",
+              "label": "Pizza, Pasta, Mord - Ein DinnerKrimi",
+              "detail": "Kriegstetten",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/pizza-pasta-mord-ein-dinnerkrimi/"
+            },
+            {
+              "label": "Starbugs Comedy",
+              "detail": "Soletta",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/starbugs-comedy/"
+            },
+            {
+              "label": "Starbugs Comedy",
               "detail": "Solothurn",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schreiber-vs-schneider-schatz-3/"
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/starbugs-comedy-2/"
             },
             {
-              "label": "HELLO HALLOWEEN",
-              "detail": "Solothurn",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hello-halloween/"
+              "label": "Ü50! Let’s dance – Let’s party! – Halloween Special",
+              "detail": "KulturBistro Solothurn, Solothurn",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ue50-lets-dance-lets-party-halloween-special/"
             },
             {
               "label": "Vom Urknall zum Leben",
               "detail": "Solothurn — ongoing, last day: 18 November 2026",
-              "date": "2026-10-30",
+              "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/vom-urknall-zum-leben/"
             },
             {
               "label": "Centro Italiano as guest at the Hotel Roten Ochsen, Solothurn",
               "detail": "Hotel Roter Ochsen — ongoing, last day: 16 November 2026",
-              "date": "2026-10-30",
+              "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/centro-italiano-as-guest-at-the-hotel-roten-ochsen-solothurn/"
-            },
-            {
-              "label": "Oktoberfest",
-              "detail": "Rythalle Soledurn, Solothurn — ongoing, last day: 31 October 2026",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktoberfest-9/"
-            },
-            {
-              "label": "Computer Grundlagen",
-              "detail": "Volkshochschule Solothurn, Solothurn — ongoing, last day: 10 November 2026",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/computer-grundlagen-2/"
-            },
-            {
-              "label": "DLG Theater 2026 \"Tschingge- Ein Stück Schweiz\"",
-              "detail": "Hauslimattschulhaus, Balsthal — ongoing, last day: 31 October 2026",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dlg-theater-2026-tschingge-ein-stueck-schweiz/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/solothurn/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/solothurn/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "de": {
       "canton": "SO",
@@ -244,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "60",
+          "value": "57",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -255,69 +255,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Tiny House konkret – Von der Idee zum realistischen Plan",
+              "label": "SoloCon - Solothurner Convention 2026",
+              "detail": "Enter Technikwelt, Derendingen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/solocon-solothurner-convention-2026/"
+            },
+            {
+              "label": "Dynamisch Zeichnen",
               "detail": "Solothurn",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tiny-house-konkret-von-der-idee-zum-realistischen-plan/"
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dynamisch-zeichnen/"
             },
             {
-              "label": "GZUZ (Zusatzshow)",
-              "detail": "Kulturfabrik Kofmehl, Solothurn",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gzuz-zusatzshow/"
+              "label": "Halloween im Haus der Museen",
+              "detail": "Olten",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/halloween-im-haus-der-museen/"
             },
             {
-              "label": "Stress - The How To Heal Tour",
-              "detail": "Konzertsaal Solothurn, Solothurn",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/solothurn/stress-the-how-to-heal-tour_AY4q75m"
+              "label": "Themenführung: Heilige, Hexen, Henker und Halunken",
+              "detail": "Kanton Solothurn Tourismus, Solothurn",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/themenfuehrung-heilige-hexen-henker-und-halunken/"
             },
             {
-              "label": "Schreiber vs. Schneider – Schatz!",
+              "label": "Pizza, Pasta, Mord - Ein DinnerKrimi",
+              "detail": "Kriegstetten",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/pizza-pasta-mord-ein-dinnerkrimi/"
+            },
+            {
+              "label": "Starbugs Comedy",
+              "detail": "Soletta",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/starbugs-comedy/"
+            },
+            {
+              "label": "Starbugs Comedy",
               "detail": "Solothurn",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schreiber-vs-schneider-schatz-3/"
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/starbugs-comedy-2/"
             },
             {
-              "label": "HELLO HALLOWEEN",
-              "detail": "Solothurn",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hello-halloween/"
+              "label": "Ü50! Let’s dance – Let’s party! – Halloween Special",
+              "detail": "KulturBistro Solothurn, Solothurn",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ue50-lets-dance-lets-party-halloween-special/"
             },
             {
               "label": "Vom Urknall zum Leben",
               "detail": "Solothurn — läuft, letzter Tag: 18. November 2026",
-              "date": "2026-10-30",
+              "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/vom-urknall-zum-leben/"
             },
             {
               "label": "Centro Italiano zu Gast im Hotel Roten Ochsen, Solothurn",
               "detail": "Hotel Roter Ochsen — läuft, letzter Tag: 16. November 2026",
-              "date": "2026-10-30",
+              "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/centro-italiano-as-guest-at-the-hotel-roten-ochsen-solothurn/"
-            },
-            {
-              "label": "Oktoberfest",
-              "detail": "Rythalle Soledurn, Solothurn — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktoberfest-9/"
-            },
-            {
-              "label": "Computer Grundlagen",
-              "detail": "Volkshochschule Solothurn, Solothurn — läuft, letzter Tag: 10. November 2026",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/computer-grundlagen-2/"
-            },
-            {
-              "label": "DLG Theater 2026 \"Tschingge- Ein Stück Schweiz\"",
-              "detail": "Hauslimattschulhaus, Balsthal — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dlg-theater-2026-tschingge-ein-stueck-schweiz/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/solothurn/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/solothurn/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "fr": {
       "canton": "SO",
@@ -355,7 +355,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "60",
+          "value": "57",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -366,69 +366,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Tiny House konkret – Von der Idee zum realistischen Plan",
+              "label": "SoloCon - Solothurner Convention 2026",
+              "detail": "Enter Technikwelt, Derendingen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/solocon-solothurner-convention-2026/"
+            },
+            {
+              "label": "Dynamisch Zeichnen",
               "detail": "Solothurn",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tiny-house-konkret-von-der-idee-zum-realistischen-plan/"
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dynamisch-zeichnen/"
             },
             {
-              "label": "GZUZ (Zusatzshow)",
-              "detail": "Kulturfabrik Kofmehl, Solothurn",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gzuz-zusatzshow/"
+              "label": "Halloween im Haus der Museen",
+              "detail": "Olten",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/halloween-im-haus-der-museen/"
             },
             {
-              "label": "Stress - The How To Heal Tour",
-              "detail": "Konzertsaal Solothurn, Solothurn",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/solothurn/stress-the-how-to-heal-tour_AY4q75m"
+              "label": "Visite guidée à thème: Les saintes, les sorcières, le bourreau et les coquins",
+              "detail": "Kanton Solothurn Tourismus, Solothurn",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/themenfuehrung-heilige-hexen-henker-und-halunken/"
             },
             {
-              "label": "Schreiber vs. Schneider – Schatz!",
+              "label": "Pizza, Pasta, Mord - Ein DinnerKrimi",
+              "detail": "Kriegstetten",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/pizza-pasta-mord-ein-dinnerkrimi/"
+            },
+            {
+              "label": "Starbugs Comedy",
+              "detail": "Soletta",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/starbugs-comedy/"
+            },
+            {
+              "label": "Starbugs Comedy",
               "detail": "Solothurn",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schreiber-vs-schneider-schatz-3/"
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/starbugs-comedy-2/"
             },
             {
-              "label": "HELLO HALLOWEEN",
-              "detail": "Solothurn",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hello-halloween/"
+              "label": "Ü50! Let’s dance – Let’s party! – Halloween Special",
+              "detail": "KulturBistro Solothurn, Solothurn",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ue50-lets-dance-lets-party-halloween-special/"
             },
             {
               "label": "Vom Urknall zum Leben",
               "detail": "Solothurn — en cours, dernier jour : 18 novembre 2026",
-              "date": "2026-10-30",
+              "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/vom-urknall-zum-leben/"
             },
             {
               "label": "Le Centro Italiano invité à l'hôtel Roten Ochsen, Soleure",
               "detail": "Hotel Roter Ochsen — en cours, dernier jour : 16 novembre 2026",
-              "date": "2026-10-30",
+              "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/centro-italiano-as-guest-at-the-hotel-roten-ochsen-solothurn/"
-            },
-            {
-              "label": "Oktoberfest",
-              "detail": "Rythalle Soledurn, Solothurn — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktoberfest-9/"
-            },
-            {
-              "label": "Computer Grundlagen",
-              "detail": "Volkshochschule Solothurn, Solothurn — en cours, dernier jour : 10 novembre 2026",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/computer-grundlagen-2/"
-            },
-            {
-              "label": "DLG Theater 2026 \"Tschingge- Ein Stück Schweiz\"",
-              "detail": "Hauslimattschulhaus, Balsthal — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dlg-theater-2026-tschingge-ein-stueck-schweiz/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/soleure/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/soleure/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     }
   }
 }

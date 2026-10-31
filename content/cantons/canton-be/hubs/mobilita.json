@@ -4,17 +4,17 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-30T19:31:58.244Z",
-  "contentHash": "a83be9ac80a45cbf21ba789bdf1ea9f3775529a61954f2699a4547c7be74a3a9",
+  "updatedAt": "2026-10-31T06:15:08.747Z",
+  "contentHash": "970e6dd45f5384fe7559fb4b4f74fe3124c6a304703c3dbfedf09511d50e25ee",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-30T13:39:45.803Z",
+      "updatedAt": "2026-10-30T20:12:21.426Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-30T11:41:14.746Z",
+      "updatedAt": "2026-10-30T21:45:03.956Z",
       "keyFacts": 0
     }
   ],
@@ -27,12 +27,12 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "18",
+          "value": "17",
           "note": "segnalazioni aggiornate: 30 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "82",
+          "value": "84",
           "note": "segnalazioni aggiornate: 30 ottobre 2026"
         }
       ],
@@ -53,12 +53,6 @@
               "value": "Chiusura",
               "detail": "fine prevista: 27 agosto 2027",
               "date": "2024-10-02T05:00:00.000Z"
-            },
-            {
-              "label": "A1 Berna <-> Zurigo Svincolo autostradale Wangen an der Aare Situazione: problemi di traffico cantiere Limitazione del traffico: corsia d'emergenza chiusa Aggiunta 1: limite temporaneo larghezza…",
-              "value": "Chiusura",
-              "detail": "fine prevista: 30 novembre 2026",
-              "date": "2025-04-28T03:00:00.000Z"
             },
             {
               "label": "A6W Raccordo di Lattigen <-> Port tra Svincolo autostradale Port E Svincolo autostradale Wimmis Situazione: chiusa cantiere, lunghezza [km] 1.5",
@@ -88,10 +82,16 @@
               "value": "Chiusura",
               "detail": "fine prevista: 12 novembre 2026",
               "date": "2026-08-28T15:09:00.000Z"
+            },
+            {
+              "label": "Bühl -> Siselen tra Luogo Walperswil E Luogo Siselen Situazione: ponte chiuso Causa: lavori di costruzione Limitazione del traffico: corsia chiusa",
+              "value": "Chiusura",
+              "detail": "fine prevista: 30 giugno 2027",
+              "date": "2026-09-28T04:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-30T13:39:45.803Z"
+          "updatedAt": "2026-10-30T20:12:21.426Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -129,7 +129,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/neue-veloverbindung-von-schauplatzgasse-auf-bubenberg-platz"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -181,7 +181,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "en": {
       "canton": "BE",
@@ -191,12 +191,12 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "18",
+          "value": "17",
           "note": "reports as of 30 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "82",
+          "value": "84",
           "note": "reports as of 30 October 2026"
         }
       ],
@@ -217,12 +217,6 @@
               "value": "Closure",
               "detail": "until 27 August 2027",
               "date": "2024-10-02T05:00:00.000Z"
-            },
-            {
-              "label": "A1 Berna <-> Zurigo Svincolo autostradale Wangen an der Aare Situazione: problemi di traffico cantiere Limitazione del traffico: corsia d'emergenza chiusa Aggiunta 1: limite temporaneo larghezza…",
-              "value": "Closure",
-              "detail": "until 30 November 2026",
-              "date": "2025-04-28T03:00:00.000Z"
             },
             {
               "label": "A6W Raccordo di Lattigen <-> Port tra Svincolo autostradale Port E Svincolo autostradale Wimmis Situazione: chiusa cantiere, lunghezza [km] 1.5",
@@ -252,10 +246,16 @@
               "value": "Closure",
               "detail": "until 12 November 2026",
               "date": "2026-08-28T15:09:00.000Z"
+            },
+            {
+              "label": "Bühl -> Siselen tra Luogo Walperswil E Luogo Siselen Situazione: ponte chiuso Causa: lavori di costruzione Limitazione del traffico: corsia chiusa",
+              "value": "Closure",
+              "detail": "until 30 June 2027",
+              "date": "2026-09-28T04:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-30T13:39:45.803Z"
+          "updatedAt": "2026-10-30T20:12:21.426Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -293,7 +293,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/neue-veloverbindung-von-schauplatzgasse-auf-bubenberg-platz"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "de": {
       "canton": "BE",
@@ -355,12 +355,12 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "18",
+          "value": "17",
           "note": "Meldungen vom 30. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "82",
+          "value": "84",
           "note": "Meldungen vom 30. Oktober 2026"
         }
       ],
@@ -381,12 +381,6 @@
               "value": "Sperrung",
               "detail": "bis 27. August 2027",
               "date": "2024-10-02T05:00:00.000Z"
-            },
-            {
-              "label": "A1 Bern <-> Zürich Anschluss Wangen an der Aare Sachlage: Verkehrsbehinderung Baustelle Verkehrsführung: Pannenstreifen gesperrt Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m]…",
-              "value": "Sperrung",
-              "detail": "bis 30. November 2026",
-              "date": "2025-04-28T03:00:00.000Z"
             },
             {
               "label": "A6W Verzweigung Lattigen <-> Port zwischen Anschluss Port und Anschluss Wimmis Sachlage: Strecke gesperrt Baustelle, Länge [km] 1.5",
@@ -416,10 +410,16 @@
               "value": "Sperrung",
               "detail": "bis 12. November 2026",
               "date": "2026-08-28T15:09:00.000Z"
+            },
+            {
+              "label": "Bühl -> Siselen zwischen Ortschaft Walperswil und Ortschaft Siselen Sachlage: Brücke gesperrt Ursache: Bauarbeiten Verkehrsführung: Fahrstreifen gesperrt",
+              "value": "Sperrung",
+              "detail": "bis 30. Juni 2027",
+              "date": "2026-09-28T04:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-30T13:39:45.803Z"
+          "updatedAt": "2026-10-30T20:12:21.426Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -457,7 +457,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/neue-veloverbindung-von-schauplatzgasse-auf-bubenberg-platz"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -509,7 +509,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "fr": {
       "canton": "BE",
@@ -519,12 +519,12 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "18",
+          "value": "17",
           "note": "signalements au 30 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "82",
+          "value": "84",
           "note": "signalements au 30 octobre 2026"
         }
       ],
@@ -545,12 +545,6 @@
               "value": "Fermeture",
               "detail": "jusqu’au 27 août 2027",
               "date": "2024-10-02T05:00:00.000Z"
-            },
-            {
-              "label": "A1 Berne <-> Zurich Jonction autoroutière Wangen an der Aare Situation: trafic perturbé travaux Gestion du trafic: bande d'arrêt d'urgence fermée Complément 1: limitation temporaire de largeur…",
-              "value": "Fermeture",
-              "detail": "jusqu’au 30 novembre 2026",
-              "date": "2025-04-28T03:00:00.000Z"
             },
             {
               "label": "A6W Echangeur de Lattigen <-> Port entre Jonction autoroutière Port et Jonction autoroutière Wimmis Situation: fermé travaux, longueur [km] 1.5",
@@ -580,10 +574,16 @@
               "value": "Fermeture",
               "detail": "jusqu’au 12 novembre 2026",
               "date": "2026-08-28T15:09:00.000Z"
+            },
+            {
+              "label": "Bühl -> Siselen entre Localité Walperswil et Localité Siselen Situation: pont fermé Raison: travaux de construction Gestion du trafic: voie fermée",
+              "value": "Fermeture",
+              "detail": "jusqu’au 30 juin 2027",
+              "date": "2026-09-28T04:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-30T13:39:45.803Z"
+          "updatedAt": "2026-10-30T20:12:21.426Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -621,7 +621,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/neue-veloverbindung-von-schauplatzgasse-auf-bubenberg-platz"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -673,7 +673,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     }
   }
 }

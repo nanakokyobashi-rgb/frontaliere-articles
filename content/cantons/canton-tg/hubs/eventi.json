@@ -4,17 +4,17 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "eventi",
-  "updatedAt": "2026-10-30T06:23:49.454Z",
-  "contentHash": "9c1d41ee95d532a9032a4784bf3a7e2406ca1f8c53f89fb4b01308f63172b64a",
+  "updatedAt": "2026-10-31T06:15:08.747Z",
+  "contentHash": "bd7f68aac0413d072f8d9ed9a2b62638f7c018ecd6379527f54affb861ad000c",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-29T21:23:37.654Z",
+      "updatedAt": "2026-10-30T13:23:17.161Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-29T22:02:50.125Z",
+      "updatedAt": "2026-10-30T21:45:03.956Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "47",
+          "value": "45",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
+              "label": "Fiire mit de Chliine",
+              "detail": "Weinfelden",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fiire-mit-de-chliine-5/"
+            },
+            {
+              "label": "Manik Sarkar",
+              "detail": "Weinfelden",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/manik-sarkar/"
+            },
+            {
+              "label": "\"Dominanzgesten & Führungsanfragen\" Themenabend mit Katrin Scholz",
+              "detail": "Märstetten",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dominanzgesten-fuehrungsanfragen-themenabend-mit-katrin-scholz/"
+            },
+            {
+              "label": "Konzert Singing People",
+              "detail": "Katholische Kirche",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/tobel/konzert-singing-people_ArZgxnt"
+            },
+            {
+              "label": "Konzert Singing People",
+              "detail": "Katholische Kirche, Tobel-Tägerschen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/konzert-singing-people-4/"
+            },
+            {
+              "label": "Dussex's Soultrain feat. Freda Goodlett",
+              "detail": "Eisenwerk, Frauenfeld",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/dussexs-soultrain-feat-freda-goodlett_AFaJH1W"
+            },
+            {
+              "label": "Helene Bracht",
+              "detail": "Weinfelden",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helene-bracht/"
+            },
+            {
+              "label": "Ulan & Bator - Überraschungszwei",
+              "detail": "Löwen Arena, Sommeri",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ulan-bator-ueberraschungszwei/"
+            },
+            {
               "label": "Diamante im Stroh",
-              "detail": "Hefenhofen",
-              "date": "2026-10-30",
+              "detail": "Hefenhofen — in corso, ultimo giorno: 31 ottobre 2026",
+              "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/diamante-im-stroh/"
             },
             {
-              "label": "Halloween@the Brewery",
-              "detail": "Barfuss Brauerei, Bürglen (TG)",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloweenthe-brewery/"
-            },
-            {
-              "label": "Gourmet-Metzgete in der Seemöwe",
-              "detail": "Güttingen",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gourmet-metzgete-in-der-seemoewe/"
-            },
-            {
-              "label": "Jarka Kubsova",
-              "detail": "Weinfelden",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jarka-kubsova/"
-            },
-            {
               "label": "La Table d'Amis | Tavolata",
-              "detail": "Restaurant Seegarten, Kreuzlingen",
-              "date": "2026-10-30",
+              "detail": "Restaurant Seegarten, Kreuzlingen — in corso, ultimo giorno: 13 novembre 2026",
+              "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
-            },
-            {
-              "label": "Vocal Jazz Affair - Grosses Chorkonzert",
-              "detail": "Kornhaus Romanshorn, Romanshorn",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/romanshorn/vocal-jazz-affair-grosses-chorkonzert_AH8CLJM"
-            },
-            {
-              "label": "Salsa y Bachata en Halloween",
-              "detail": "KAFF Kulturlokal, Frauenfeld",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/salsa-y-bachata-en-halloween_AWHmnvW"
-            },
-            {
-              "label": "Lukas Bärfuss",
-              "detail": "Weinfelden",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lukas-baerfuss/"
-            },
-            {
-              "label": "Metzgete auf dem Schiff in Ermatingen - Traditionell & maritim!",
-              "detail": "8272 Ermatingen, Ermatingen — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/metzgete-auf-dem-schiff-in-ermatingen-traditionell-maritim/"
-            },
-            {
-              "label": "Philosophie im Löchlgaischt",
-              "detail": "Eschenz — in corso, ultimo giorno: 24 novembre 2026",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/turgovia/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -123,7 +123,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -151,7 +151,7 @@
           "url": "/eventi/turgovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "en": {
       "canton": "TG",
@@ -161,7 +161,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "47",
+          "value": "45",
           "note": "from the site’s events calendar"
         }
       ],
@@ -172,69 +172,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
+              "label": "Fiire mit de Chliine",
+              "detail": "Weinfelden",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fiire-mit-de-chliine-5/"
+            },
+            {
+              "label": "Manik Sarkar",
+              "detail": "Weinfelden",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/manik-sarkar/"
+            },
+            {
+              "label": "\"Dominanzgesten & Führungsanfragen\" Themenabend mit Katrin Scholz",
+              "detail": "Märstetten",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dominanzgesten-fuehrungsanfragen-themenabend-mit-katrin-scholz/"
+            },
+            {
+              "label": "Konzert Singing People",
+              "detail": "Katholische Kirche",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/tobel/konzert-singing-people_ArZgxnt"
+            },
+            {
+              "label": "Konzert Singing People",
+              "detail": "Katholische Kirche, Tobel-Tägerschen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/konzert-singing-people-4/"
+            },
+            {
+              "label": "Dussex's Soultrain feat. Freda Goodlett",
+              "detail": "Eisenwerk, Frauenfeld",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/dussexs-soultrain-feat-freda-goodlett_AFaJH1W"
+            },
+            {
+              "label": "Helene Bracht",
+              "detail": "Weinfelden",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helene-bracht/"
+            },
+            {
+              "label": "Ulan & Bator - Überraschungszwei",
+              "detail": "Löwen Arena, Sommeri",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ulan-bator-ueberraschungszwei/"
+            },
+            {
               "label": "Diamante im Stroh",
-              "detail": "Hefenhofen",
-              "date": "2026-10-30",
+              "detail": "Hefenhofen — ongoing, last day: 31 October 2026",
+              "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/diamante-im-stroh/"
             },
             {
-              "label": "Halloween@the Brewery",
-              "detail": "Barfuss Brauerei, Bürglen (TG)",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloweenthe-brewery/"
-            },
-            {
-              "label": "Gourmet-Metzgete in der Seemöwe",
-              "detail": "Güttingen",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gourmet-metzgete-in-der-seemoewe/"
-            },
-            {
-              "label": "Jarka Kubsova",
-              "detail": "Weinfelden",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jarka-kubsova/"
-            },
-            {
               "label": "La Table d'Amis | Tavolata",
-              "detail": "Restaurant Seegarten, Kreuzlingen",
-              "date": "2026-10-30",
+              "detail": "Restaurant Seegarten, Kreuzlingen — ongoing, last day: 13 November 2026",
+              "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
-            },
-            {
-              "label": "Vocal Aff",
-              "detail": "Kornhaus Romanshorn, Romanshorn",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/romanshorn/vocal-jazz-affair-grosses-chorkonzert_AH8CLJM"
-            },
-            {
-              "label": "Salsa y Bachata en Halloween",
-              "detail": "KAFF Kulturlokal, Frauenfeld",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/salsa-y-bachata-en-halloween_AWHmnvW"
-            },
-            {
-              "label": "Lukas Bärfuss",
-              "detail": "Weinfelden",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lukas-baerfuss/"
-            },
-            {
-              "label": "Metzgete auf dem Schiff in Ermatingen - Traditionell & maritim!",
-              "detail": "8272 Ermatingen, Ermatingen — ongoing, last day: 31 October 2026",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/metzgete-auf-dem-schiff-in-ermatingen-traditionell-maritim/"
-            },
-            {
-              "label": "Philosophie im Löchlgaischt",
-              "detail": "Eschenz — ongoing, last day: 24 November 2026",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/thurgau/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -257,7 +257,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -285,7 +285,7 @@
           "url": "/en/events/thurgau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "de": {
       "canton": "TG",
@@ -295,7 +295,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "47",
+          "value": "45",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -306,69 +306,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
+              "label": "Fiire mit de Chliine",
+              "detail": "Weinfelden",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fiire-mit-de-chliine-5/"
+            },
+            {
+              "label": "Manik Sarkar",
+              "detail": "Weinfelden",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/manik-sarkar/"
+            },
+            {
+              "label": "\"Dominanzgesten & Führungsanfragen\" Themenabend mit Katrin Scholz",
+              "detail": "Märstetten",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dominanzgesten-fuehrungsanfragen-themenabend-mit-katrin-scholz/"
+            },
+            {
+              "label": "Konzert Singing People",
+              "detail": "Katholische Kirche",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/tobel/konzert-singing-people_ArZgxnt"
+            },
+            {
+              "label": "Konzert Singing People",
+              "detail": "Katholische Kirche, Tobel-Tägerschen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/konzert-singing-people-4/"
+            },
+            {
+              "label": "Dussex's Soultrain feat. Freda Goodlett",
+              "detail": "Eisenwerk, Frauenfeld",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/dussexs-soultrain-feat-freda-goodlett_AFaJH1W"
+            },
+            {
+              "label": "Helene Bracht",
+              "detail": "Weinfelden",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helene-bracht/"
+            },
+            {
+              "label": "Ulan & Bator - Überraschungszwei",
+              "detail": "Löwen Arena, Sommeri",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ulan-bator-ueberraschungszwei/"
+            },
+            {
               "label": "Diamante im Stroh",
-              "detail": "Hefenhofen",
-              "date": "2026-10-30",
+              "detail": "Hefenhofen — läuft, letzter Tag: 31. Oktober 2026",
+              "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/diamante-im-stroh/"
             },
             {
-              "label": "Halloween@the Brewery",
-              "detail": "Barfuss Brauerei, Bürglen (TG)",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloweenthe-brewery/"
-            },
-            {
-              "label": "Gourmet-Metzgete in der Seemöwe",
-              "detail": "Güttingen",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gourmet-metzgete-in-der-seemoewe/"
-            },
-            {
-              "label": "Jarka Kubsova",
-              "detail": "Weinfelden",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jarka-kubsova/"
-            },
-            {
               "label": "La Table d'Amis | Tavolata",
-              "detail": "Restaurant Seegarten, Kreuzlingen",
-              "date": "2026-10-30",
+              "detail": "Restaurant Seegarten, Kreuzlingen — läuft, letzter Tag: 13. November 2026",
+              "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
-            },
-            {
-              "label": "Vocal Jazz Affair – Grosses Chorkonzert",
-              "detail": "Kornhaus Romanshorn, Romanshorn",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/romanshorn/vocal-jazz-affair-grosses-chorkonzert_AH8CLJM"
-            },
-            {
-              "label": "Salsa y Bachata en Halloween",
-              "detail": "KAFF Kulturlokal, Frauenfeld",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/salsa-y-bachata-en-halloween_AWHmnvW"
-            },
-            {
-              "label": "Lukas Bärfuss",
-              "detail": "Weinfelden",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lukas-baerfuss/"
-            },
-            {
-              "label": "Metzgete auf dem Schiff in Ermatingen - Traditionell & maritim!",
-              "detail": "8272 Ermatingen, Ermatingen — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/metzgete-auf-dem-schiff-in-ermatingen-traditionell-maritim/"
-            },
-            {
-              "label": "Philosophie im Löchlgaischt",
-              "detail": "Eschenz — läuft, letzter Tag: 24. November 2026",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/thurgau/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -391,7 +391,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -419,7 +419,7 @@
           "url": "/de/veranstaltungen/thurgau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "fr": {
       "canton": "TG",
@@ -429,7 +429,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "47",
+          "value": "45",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -440,69 +440,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
+              "label": "Fiire mit de Chliine",
+              "detail": "Weinfelden",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fiire-mit-de-chliine-5/"
+            },
+            {
+              "label": "Manik Sarkar",
+              "detail": "Weinfelden",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/manik-sarkar/"
+            },
+            {
+              "label": "\"Dominanzgesten & Führungsanfragen\" Themenabend mit Katrin Scholz",
+              "detail": "Märstetten",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dominanzgesten-fuehrungsanfragen-themenabend-mit-katrin-scholz/"
+            },
+            {
+              "label": "Konzert Singing People",
+              "detail": "Katholische Kirche",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/tobel/konzert-singing-people_ArZgxnt"
+            },
+            {
+              "label": "Konzert Singing People",
+              "detail": "Katholische Kirche, Tobel-Tägerschen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/konzert-singing-people-4/"
+            },
+            {
+              "label": "Dussex's Soultrain feat. Freda Goodlett",
+              "detail": "Eisenwerk, Frauenfeld",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/dussexs-soultrain-feat-freda-goodlett_AFaJH1W"
+            },
+            {
+              "label": "Helene Bracht",
+              "detail": "Weinfelden",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helene-bracht/"
+            },
+            {
+              "label": "Ulan & Bator - Überraschungszwei",
+              "detail": "Löwen Arena, Sommeri",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ulan-bator-ueberraschungszwei/"
+            },
+            {
               "label": "Diamante im Stroh",
-              "detail": "Hefenhofen",
-              "date": "2026-10-30",
+              "detail": "Hefenhofen — en cours, dernier jour : 31 octobre 2026",
+              "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/diamante-im-stroh/"
             },
             {
-              "label": "Halloween@the Brewery",
-              "detail": "Barfuss Brauerei, Bürglen (TG)",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloweenthe-brewery/"
-            },
-            {
-              "label": "Gourmet-Metzgete in der Seemöwe",
-              "detail": "Güttingen",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gourmet-metzgete-in-der-seemoewe/"
-            },
-            {
-              "label": "Jarka Kubsova",
-              "detail": "Weinfelden",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jarka-kubsova/"
-            },
-            {
               "label": "La Table d'Amis | Tavolata",
-              "detail": "Restaurant Seegarten, Kreuzlingen",
-              "date": "2026-10-30",
+              "detail": "Restaurant Seegarten, Kreuzlingen — en cours, dernier jour : 13 novembre 2026",
+              "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
-            },
-            {
-              "label": "Aff Vocal",
-              "detail": "Kornhaus Romanshorn, Romanshorn",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/romanshorn/vocal-jazz-affair-grosses-chorkonzert_AH8CLJM"
-            },
-            {
-              "label": "Salsa y Bachata en Halloween",
-              "detail": "KAFF Kulturlokal, Frauenfeld",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/salsa-y-bachata-en-halloween_AWHmnvW"
-            },
-            {
-              "label": "Lukas Bärfuss",
-              "detail": "Weinfelden",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lukas-baerfuss/"
-            },
-            {
-              "label": "Metzgete auf dem Schiff in Ermatingen - Traditionell & maritim!",
-              "detail": "8272 Ermatingen, Ermatingen — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/metzgete-auf-dem-schiff-in-ermatingen-traditionell-maritim/"
-            },
-            {
-              "label": "Philosophie im Löchlgaischt",
-              "detail": "Eschenz — en cours, dernier jour : 24 novembre 2026",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/thurgovie/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -525,7 +525,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -553,7 +553,7 @@
           "url": "/fr/evenements/thurgovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     }
   }
 }

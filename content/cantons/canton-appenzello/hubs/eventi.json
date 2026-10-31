@@ -4,12 +4,12 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "eventi",
-  "updatedAt": "2026-10-30T06:23:49.454Z",
-  "contentHash": "005af5eb68916bcade5339c26d93aeb3f6a74f45dd3ba81ef8d6e7887b644dfc",
+  "updatedAt": "2026-10-31T06:15:08.747Z",
+  "contentHash": "9a63d68444a57794ec651a3e3717ffd2a785debf447d4a4fae506f5004bb103d",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-29T21:23:37.654Z",
+      "updatedAt": "2026-10-30T13:23:17.161Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "17",
+          "value": "20",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -95,7 +95,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/appenzello/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/appenzello/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "17",
+          "value": "20",
           "note": "from the site’s events calendar"
         }
       ],
@@ -200,7 +200,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/appenzell/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/appenzell/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "17",
+          "value": "20",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -305,7 +305,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/appenzell/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/appenzell/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "17",
+          "value": "20",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -410,7 +410,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/appenzell/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/appenzell/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     }
   }
 }

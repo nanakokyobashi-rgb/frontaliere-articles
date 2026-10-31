@@ -4,8 +4,8 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "servizi",
-  "updatedAt": "2026-10-30T19:31:58.244Z",
-  "contentHash": "24df1a979905d314ff6f6fac340243d2136eb5efdd52577ac1edc82294c1695c",
+  "updatedAt": "2026-10-31T06:15:08.747Z",
+  "contentHash": "860ae1e6551078d00e7255d734cb2341218827ac130e58fd614be3f4e1ac0a35",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-30T15:13:06.562Z",
+      "updatedAt": "2026-10-30T20:58:15.445Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-30T11:41:14.746Z",
+      "updatedAt": "2026-10-30T21:45:03.956Z",
       "keyFacts": 0
     }
   ],
@@ -60,12 +60,12 @@
           "items": [
             {
               "label": "Stans",
-              "value": "10 °C",
-              "detail": "oggi da 7 a 10 °C"
+              "value": "8 °C",
+              "detail": "oggi da 7 a 9 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-30T15:13:06.562Z"
+          "updatedAt": "2026-10-30T20:58:15.445Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -93,7 +93,7 @@
               "url": "https://www.buochs.ch/_rte/information/2939209"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -110,12 +110,6 @@
           "date": "2026-08-23T10:13:59.842Z"
         },
         {
-          "title": "Permesso C Canton Nidvaldo: requisiti e domanda",
-          "url": "/articoli-svizzera/permesso-c-nidvaldo-requisiti/",
-          "excerpt": "Guida completa al permesso di domicilio C nel Cantone di Nidvaldo: anni di residenza, criteri di integrazione e procedura.",
-          "date": "2026-09-14T00:24:26.273Z"
-        },
-        {
           "title": "Permesso di dimora B nel Cantone di Nidvaldo: requisiti e rinnovo",
           "url": "/articoli-svizzera/permesso-di-dimora-b-canton-nidvaldo-requisiti-rinnovo/",
           "excerpt": "Il permesso di dimora B nel Cantone di Nidvaldo è un documento importante per i frontalieri che desiderano risiedere nel cantone.",
@@ -126,6 +120,12 @@
           "url": "/articoli-svizzera/premi-cassa-malati-cantone-nidvaldo/",
           "excerpt": "La legge sulle assicurazioni malattie obbligatorie nel Cantone di Nidvaldo ha ridotto i premi per le assicurazioni malattie.",
           "date": "2026-08-16T19:00:08.445Z"
+        },
+        {
+          "title": "Permesso C Canton Nidvaldo: requisiti e domanda",
+          "url": "/articoli-svizzera/permesso-c-nidvaldo-requisiti/",
+          "excerpt": "Guida completa al permesso di domicilio C nel Cantone di Nidvaldo: anni di residenza, criteri di integrazione e procedura.",
+          "date": "2026-09-14T00:24:26.273Z"
         },
         {
           "title": "Patente di guida in Nidvaldo: conversione e esami obbligatori",
@@ -173,7 +173,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "en": {
       "canton": "NW",
@@ -211,12 +211,12 @@
           "items": [
             {
               "label": "Stans",
-              "value": "10 °C",
-              "detail": "today from 7 to 10 °C"
+              "value": "8 °C",
+              "detail": "today from 7 to 9 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-30T15:13:06.562Z"
+          "updatedAt": "2026-10-30T20:58:15.445Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -244,7 +244,7 @@
               "url": "https://www.buochs.ch/_rte/information/2939209"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -261,12 +261,6 @@
           "date": "2026-08-23T10:13:59.842Z"
         },
         {
-          "title": "Permit C Canton Nidwalden: requirements and application",
-          "url": "/en/swiss-articles/permits-c-nidwalden-requirements/",
-          "excerpt": "Complete guide to residence permit C in the Canton of Nidwalden: years of residence, integration criteria and procedure.",
-          "date": "2026-09-14T00:24:26.273Z"
-        },
-        {
           "title": "Residence permit B in the Canton of Nidwalden: requirements and renewal",
           "url": "/en/swiss-articles/residence-permit-b-in-the-canton-of-nidwalden-requirements-and-renewal/",
           "excerpt": "The residence permit B in the Canton of Nidwalden is an important document for border workers who wish to reside in the canton.",
@@ -277,6 +271,12 @@
           "url": "/en/swiss-articles/canton-nidwalden-health-insurance-premiums/",
           "excerpt": "The law on compulsory health insurance in the Canton of Nidwalden has reduced health insurance premiums.",
           "date": "2026-08-16T19:00:08.445Z"
+        },
+        {
+          "title": "Permit C Canton Nidwalden: requirements and application",
+          "url": "/en/swiss-articles/permits-c-nidwalden-requirements/",
+          "excerpt": "Complete guide to residence permit C in the Canton of Nidwalden: years of residence, integration criteria and procedure.",
+          "date": "2026-09-14T00:24:26.273Z"
         },
         {
           "title": "Driving licence in Nidwalden: conversion and mandatory exams",
@@ -320,7 +320,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "de": {
       "canton": "NW",
@@ -358,12 +358,12 @@
           "items": [
             {
               "label": "Stans",
-              "value": "10 °C",
-              "detail": "heute 7 bis 10 °C"
+              "value": "8 °C",
+              "detail": "heute 7 bis 9 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-30T15:13:06.562Z"
+          "updatedAt": "2026-10-30T20:58:15.445Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -391,7 +391,7 @@
               "url": "https://www.buochs.ch/_rte/information/2939209"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -408,12 +408,6 @@
           "date": "2026-08-23T10:13:59.842Z"
         },
         {
-          "title": "C-Genehmigung Kanton Nidwalden: Voraussetzungen und Antrag",
-          "url": "/de/schweiz-artikel/bewilligung-c-nidwalden-voraussetzungen/",
-          "excerpt": "Vollständiger Leitfaden zur Niederlassungsbewilligung C im Kanton Nidwalden: Aufenthaltsjahre, Integrationskriterien und Verfahren.",
-          "date": "2026-09-14T00:24:26.273Z"
-        },
-        {
           "title": "Aufenthaltsbewilligung B im Kanton Nidwalden: Voraussetzungen und Verlängerung",
           "url": "/de/schweiz-artikel/aufenthaltsbewilligung-b-im-kanton-nidwalden-voraussetzungen-und-verlangerung/",
           "excerpt": "Die Aufenthaltsbewilligung B im Kanton Nidwalden ist ein wichtiges Dokument für Grenzgänger, die im Kanton Nidwalden wohnen möchten.",
@@ -424,6 +418,12 @@
           "url": "/de/schweiz-artikel/kanton-nidwalden-krankenversicherungspramien/",
           "excerpt": "Das Gesetz über die obligatorischen Krankenversicherungen im Kanton Nidwalden hat die Prämien für die Krankenversicherungen gesenkt.",
           "date": "2026-08-16T19:00:08.445Z"
+        },
+        {
+          "title": "C-Genehmigung Kanton Nidwalden: Voraussetzungen und Antrag",
+          "url": "/de/schweiz-artikel/bewilligung-c-nidwalden-voraussetzungen/",
+          "excerpt": "Vollständiger Leitfaden zur Niederlassungsbewilligung C im Kanton Nidwalden: Aufenthaltsjahre, Integrationskriterien und Verfahren.",
+          "date": "2026-09-14T00:24:26.273Z"
         },
         {
           "title": "Führerschein in Nidwalden: Umschulung und Pflichtprüfungen",
@@ -467,7 +467,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "fr": {
       "canton": "NW",
@@ -505,12 +505,12 @@
           "items": [
             {
               "label": "Stans",
-              "value": "10 °C",
-              "detail": "aujourd’hui de 7 à 10 °C"
+              "value": "8 °C",
+              "detail": "aujourd’hui de 7 à 9 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-30T15:13:06.562Z"
+          "updatedAt": "2026-10-30T20:58:15.445Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -538,7 +538,7 @@
               "url": "https://www.buochs.ch/_rte/information/2939209"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -555,12 +555,6 @@
           "date": "2026-08-23T10:13:59.842Z"
         },
         {
-          "title": "Permis C canton Nidwald : exigences et demande",
-          "url": "/fr/articles-suisse/permis-c-nidwald-conditions/",
-          "excerpt": "Guide complet du permis de séjour C dans le canton de Nidwald : années de résidence, critères d'intégration et procédure.",
-          "date": "2026-09-14T00:24:26.273Z"
-        },
-        {
           "title": "Permis de séjour B dans le canton de Nidwald : exigences et renouvellement",
           "url": "/fr/articles-suisse/permis-de-sejour-b-dans-le-canton-de-nidwald-exigences-et-renouvellement/",
           "excerpt": "Le permis de séjour B dans le canton de Nidwald est un document important pour les frontaliers qui souhaitent résider dans le canton.",
@@ -571,6 +565,12 @@
           "url": "/fr/articles-suisse/canton-nidwald-premies-assurance-maladie/",
           "excerpt": "La loi sur les assurances-maladie obligatoires dans le canton de Nidwald a réduit les primes pour les assurances-maladie.",
           "date": "2026-08-16T19:00:08.445Z"
+        },
+        {
+          "title": "Permis C canton Nidwald : exigences et demande",
+          "url": "/fr/articles-suisse/permis-c-nidwald-conditions/",
+          "excerpt": "Guide complet du permis de séjour C dans le canton de Nidwald : années de résidence, critères d'intégration et procédure.",
+          "date": "2026-09-14T00:24:26.273Z"
         },
         {
           "title": "Permis de conduire à Nidwald : conversion et examens obligatoires",
@@ -610,7 +610,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     }
   }
 }

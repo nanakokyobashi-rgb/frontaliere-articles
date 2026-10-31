@@ -4,17 +4,17 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "mobilita",
-  "updatedAt": "2026-10-30T20:19:55.220Z",
-  "contentHash": "c80b5d290d3da40bd5f4678626a1b782baefa94e5960b2bd96dfdaab3f351554",
+  "updatedAt": "2026-10-31T06:15:08.747Z",
+  "contentHash": "ab8e0af319eca3e2de4bfdd1cb8b66d35dc6cb2270c6e6694cfd8e8d1ea77d3c",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-30T13:39:45.803Z",
+      "updatedAt": "2026-10-30T20:12:21.426Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-30T11:41:14.746Z",
+      "updatedAt": "2026-10-30T21:45:03.956Z",
       "keyFacts": 0
     }
   ],
@@ -80,13 +80,18 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-30T13:39:45.803Z"
+          "updatedAt": "2026-10-30T20:12:21.426Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Sperrung der Brücke über den Scheidgraben",
+              "date": "2026-10-29",
+              "url": "https://www.ennetbuergen.ch/_rte/information/3035194"
+            },
             {
               "label": "Kanalaufnahmen kantonale Strassenentwässerung",
               "date": "2026-10-29",
@@ -111,14 +116,9 @@
               "label": "Älperchilbi: Einschränkungen im Verkehr",
               "date": "2026-10-13",
               "url": "https://www.stans.ch/_rte/information/2992174"
-            },
-            {
-              "label": "Verkehrseinschränkung CISM OL WM 2026",
-              "date": "2026-10-13",
-              "url": "https://www.stans.ch/_rte/information/2999005"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -152,7 +152,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-30T20:19:55.220Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "en": {
       "canton": "NW",
@@ -215,13 +215,18 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-30T13:39:45.803Z"
+          "updatedAt": "2026-10-30T20:12:21.426Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Sperrung der Brücke über den Scheidgraben",
+              "date": "2026-10-29",
+              "url": "https://www.ennetbuergen.ch/_rte/information/3035194"
+            },
             {
               "label": "Kanalaufnahmen kantonale Strassenentwässerung",
               "date": "2026-10-29",
@@ -246,14 +251,9 @@
               "label": "Älperchilbi: Einschränkungen im Verkehr",
               "date": "2026-10-13",
               "url": "https://www.stans.ch/_rte/information/2992174"
-            },
-            {
-              "label": "Verkehrseinschränkung CISM OL WM 2026",
-              "date": "2026-10-13",
-              "url": "https://www.stans.ch/_rte/information/2999005"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -287,7 +287,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-30T20:19:55.220Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "de": {
       "canton": "NW",
@@ -350,13 +350,18 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-30T13:39:45.803Z"
+          "updatedAt": "2026-10-30T20:12:21.426Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Sperrung der Brücke über den Scheidgraben",
+              "date": "2026-10-29",
+              "url": "https://www.ennetbuergen.ch/_rte/information/3035194"
+            },
             {
               "label": "Kanalaufnahmen kantonale Strassenentwässerung",
               "date": "2026-10-29",
@@ -381,14 +386,9 @@
               "label": "Älperchilbi: Einschränkungen im Verkehr",
               "date": "2026-10-13",
               "url": "https://www.stans.ch/_rte/information/2992174"
-            },
-            {
-              "label": "Verkehrseinschränkung CISM OL WM 2026",
-              "date": "2026-10-13",
-              "url": "https://www.stans.ch/_rte/information/2999005"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -422,7 +422,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-30T20:19:55.220Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "fr": {
       "canton": "NW",
@@ -485,13 +485,18 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-30T13:39:45.803Z"
+          "updatedAt": "2026-10-30T20:12:21.426Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Sperrung der Brücke über den Scheidgraben",
+              "date": "2026-10-29",
+              "url": "https://www.ennetbuergen.ch/_rte/information/3035194"
+            },
             {
               "label": "Kanalaufnahmen kantonale Strassenentwässerung",
               "date": "2026-10-29",
@@ -516,14 +521,9 @@
               "label": "Älperchilbi: Einschränkungen im Verkehr",
               "date": "2026-10-13",
               "url": "https://www.stans.ch/_rte/information/2992174"
-            },
-            {
-              "label": "Verkehrseinschränkung CISM OL WM 2026",
-              "date": "2026-10-13",
-              "url": "https://www.stans.ch/_rte/information/2999005"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -557,7 +557,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-30T20:19:55.220Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "eventi",
-  "updatedAt": "2026-10-30T06:23:49.454Z",
-  "contentHash": "6cd4948eb12260e3f14e172bfb7d72bebad98532d7b6927999e75cbe7bddba4e",
+  "updatedAt": "2026-10-31T06:15:08.747Z",
+  "contentHash": "58da413760826b0dee994fd72259c0fb4474f4c680de6de7820f2f9f72b6876d",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-29T21:23:37.654Z",
+      "updatedAt": "2026-10-30T13:23:17.161Z",
       "keyFacts": 1
     }
   ],
@@ -32,12 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "The Two - Blues & Dine - DER HERBST 26",
-              "detail": "Gersau",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-two-blues-dine-der-herbst-26/"
-            },
             {
               "label": "GfuG Family-Day – Musikalische Lesung «Für das Auerhuhn»",
               "detail": "Schwyz",
@@ -91,11 +85,17 @@
               "detail": "6442 Gersau, Gersau",
               "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/martinsmarkt-gersau/"
+            },
+            {
+              "label": "2. Handgruobi-Chilbi",
+              "detail": "Rickenbach b. Schwyz, Schwyz",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/2-handgruobichilbi/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/svitto/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/svitto/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "en": {
       "canton": "SZ",
@@ -137,12 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "The Two - Blues & Dine - DER HERBST 26",
-              "detail": "Gersau",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-two-blues-dine-der-herbst-26/"
-            },
             {
               "label": "GfuG Family-Day – Musikalische Lesung «Für das Auerhuhn»",
               "detail": "Schwyz",
@@ -196,11 +190,17 @@
               "detail": "6442 Gersau, Gersau",
               "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/martinsmarkt-gersau/"
+            },
+            {
+              "label": "2. Handgruobi-Chilbi",
+              "detail": "Rickenbach b. Schwyz, Schwyz",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/2-handgruobichilbi/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schwyz/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/schwyz/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "de": {
       "canton": "SZ",
@@ -242,12 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "The Two - Blues & Dine - DER HERBST 26",
-              "detail": "Gersau",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-two-blues-dine-der-herbst-26/"
-            },
             {
               "label": "GfuG Family-Day – Musikalische Lesung «Für das Auerhuhn»",
               "detail": "Schwyz",
@@ -301,11 +295,17 @@
               "detail": "6442 Gersau, Gersau",
               "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/martinsmarkt-gersau/"
+            },
+            {
+              "label": "2. Handgruobi-Chilbi",
+              "detail": "Rickenbach b. Schwyz, Schwyz",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/2-handgruobichilbi/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schwyz/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/schwyz/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "fr": {
       "canton": "SZ",
@@ -347,12 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "The Two - Blues & Dine - DER HERBST 26",
-              "detail": "Gersau",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-two-blues-dine-der-herbst-26/"
-            },
             {
               "label": "GfuG Family-Day – Musikalische Lesung «Für das Auerhuhn»",
               "detail": "Schwyz",
@@ -406,11 +400,17 @@
               "detail": "6442 Gersau, Gersau",
               "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/martinsmarkt-gersau/"
+            },
+            {
+              "label": "2. Handgruobi-Chilbi",
+              "detail": "Rickenbach b. Schwyz, Schwyz",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/2-handgruobichilbi/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schwytz/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/schwytz/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     }
   }
 }

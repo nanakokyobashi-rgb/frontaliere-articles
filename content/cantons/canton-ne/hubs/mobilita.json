@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-30T19:31:58.244Z",
-  "contentHash": "a31d8300f0d93ae91b32c01b169e2628593b5b910b3cbbf9fbaafa6fbbfc3261",
+  "updatedAt": "2026-10-31T06:15:08.747Z",
+  "contentHash": "67ae87d45dcc7f123b87ba2b349e2963f2e628f7588786ede5b525e715c38db2",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-30T13:39:45.803Z",
+      "updatedAt": "2026-10-30T20:12:21.426Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-30T11:41:14.746Z",
+      "updatedAt": "2026-10-30T21:45:03.956Z",
       "keyFacts": 0
     }
   ],
@@ -37,7 +37,7 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "6",
+          "value": "5",
           "note": "segnalazioni aggiornate: 30 ottobre 2026"
         },
         {
@@ -81,12 +81,6 @@
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
             {
-              "label": "A20 Diramazione Neuchâtel-Vauseyon -> La Chaux-de-Fonds tra Svincolo autostradale Neuchâtel-Vauseyon E Svincolo autostradale Boudevilliers Situazione: chiusa cantiere, lunghezza [km] 4.4 Limitazione…",
-              "value": "Chiusura",
-              "detail": "fine prevista: 31 ottobre 2026",
-              "date": "2026-09-25T11:05:00.000Z"
-            },
-            {
               "label": "Neuchâtel, Neuenburg <-> Rue de la Pierre-à-Mazel, Neuenburg Situazione: chiusa Causa: incidente",
               "value": "Chiusura",
               "date": "2026-10-05T02:26:00.000Z"
@@ -118,7 +112,7 @@
             {
               "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
               "value": "Traffico",
-              "date": "2026-10-30T13:39:45.803Z",
+              "date": "2026-10-30T20:12:21.426Z",
               "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             },
             {
@@ -126,10 +120,16 @@
               "value": "Cantiere",
               "detail": "fine prevista: 31 dicembre 2026",
               "date": "2024-09-06T05:22:00.000Z"
+            },
+            {
+              "label": "H5 Neuchâtel <-> Bienne Luogo St-Blaise Situazione: problemi di traffico cantiere",
+              "value": "Cantiere",
+              "detail": "fine prevista: 30 aprile 2027",
+              "date": "2025-04-08T11:07:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-30T13:39:45.803Z"
+          "updatedAt": "2026-10-30T20:12:21.426Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -152,7 +152,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -206,7 +206,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "en": {
       "canton": "NE",
@@ -221,7 +221,7 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "6",
+          "value": "5",
           "note": "reports as of 30 October 2026"
         },
         {
@@ -265,12 +265,6 @@
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
             {
-              "label": "A20 Diramazione Neuchâtel-Vauseyon -> La Chaux-de-Fonds tra Svincolo autostradale Neuchâtel-Vauseyon E Svincolo autostradale Boudevilliers Situazione: chiusa cantiere, lunghezza [km] 4.4 Limitazione…",
-              "value": "Closure",
-              "detail": "until 31 October 2026",
-              "date": "2026-09-25T11:05:00.000Z"
-            },
-            {
               "label": "Neuchâtel, Neuenburg <-> Rue de la Pierre-à-Mazel, Neuenburg Situazione: chiusa Causa: incidente",
               "value": "Closure",
               "date": "2026-10-05T02:26:00.000Z"
@@ -302,7 +296,7 @@
             {
               "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
               "value": "Traffic",
-              "date": "2026-10-30T13:39:45.803Z",
+              "date": "2026-10-30T20:12:21.426Z",
               "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             },
             {
@@ -310,10 +304,16 @@
               "value": "Roadworks",
               "detail": "until 31 December 2026",
               "date": "2024-09-06T05:22:00.000Z"
+            },
+            {
+              "label": "H5 Neuchâtel <-> Bienne Luogo St-Blaise Situazione: problemi di traffico cantiere",
+              "value": "Roadworks",
+              "detail": "until 30 April 2027",
+              "date": "2025-04-08T11:07:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-30T13:39:45.803Z"
+          "updatedAt": "2026-10-30T20:12:21.426Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -336,7 +336,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -390,7 +390,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "de": {
       "canton": "NE",
@@ -405,7 +405,7 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "6",
+          "value": "5",
           "note": "Meldungen vom 30. Oktober 2026"
         },
         {
@@ -449,12 +449,6 @@
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
             {
-              "label": "A20 Verzweigung Neuenburg-Vauseyon -> La Chaux-de-Fonds zwischen Anschluss Neuenburg-Vauseyon und Anschluss Boudevilliers Sachlage: Strecke gesperrt Baustelle, Länge [km] 4.4 Verkehrsführung…",
-              "value": "Sperrung",
-              "detail": "bis 31. Oktober 2026",
-              "date": "2026-09-25T11:05:00.000Z"
-            },
-            {
               "label": "Neuchâtel, Neuenburg <-> Rue de la Pierre-à-Mazel, Neuenburg Sachlage: Strecke gesperrt Ursache: Unfall",
               "value": "Sperrung",
               "date": "2026-10-05T02:26:00.000Z"
@@ -486,7 +480,7 @@
             {
               "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
               "value": "Verkehr",
-              "date": "2026-10-30T13:39:45.803Z",
+              "date": "2026-10-30T20:12:21.426Z",
               "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             },
             {
@@ -494,10 +488,16 @@
               "value": "Baustelle",
               "detail": "bis 31. Dezember 2026",
               "date": "2024-09-06T05:22:00.000Z"
+            },
+            {
+              "label": "H5 Neuenburg <-> Biel Ortschaft St-Blaise Sachlage: Verkehrsbehinderung Baustelle",
+              "value": "Baustelle",
+              "detail": "bis 30. April 2027",
+              "date": "2025-04-08T11:07:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-30T13:39:45.803Z"
+          "updatedAt": "2026-10-30T20:12:21.426Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -520,7 +520,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -574,7 +574,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "fr": {
       "canton": "NE",
@@ -589,7 +589,7 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "6",
+          "value": "5",
           "note": "signalements au 30 octobre 2026"
         },
         {
@@ -633,12 +633,6 @@
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
             {
-              "label": "A20 Echangeur de Neuchâtel-Vauseyon -> La Chaux-de-Fonds entre Jonction autoroutière Neuchâtel-Vauseyon et Jonction autoroutière Boudevilliers Situation: fermé travaux, longueur [km] 4.4 Gestion du…",
-              "value": "Fermeture",
-              "detail": "jusqu’au 31 octobre 2026",
-              "date": "2026-09-25T11:05:00.000Z"
-            },
-            {
               "label": "Neuchâtel, Neuenburg <-> Rue de la Pierre-à-Mazel, Neuenburg Situation: fermé Raison: accident",
               "value": "Fermeture",
               "date": "2026-10-05T02:26:00.000Z"
@@ -670,7 +664,7 @@
             {
               "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
               "value": "Trafic",
-              "date": "2026-10-30T13:39:45.803Z",
+              "date": "2026-10-30T20:12:21.426Z",
               "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             },
             {
@@ -678,10 +672,16 @@
               "value": "Chantier",
               "detail": "jusqu’au 31 décembre 2026",
               "date": "2024-09-06T05:22:00.000Z"
+            },
+            {
+              "label": "H5 Neuchâtel <-> Bienne Localité St-Blaise Situation: trafic perturbé travaux",
+              "value": "Chantier",
+              "detail": "jusqu’au 30 avril 2027",
+              "date": "2025-04-08T11:07:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-30T13:39:45.803Z"
+          "updatedAt": "2026-10-30T20:12:21.426Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -704,7 +704,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -758,7 +758,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     }
   }
 }

@@ -4,17 +4,17 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "eventi",
-  "updatedAt": "2026-10-30T06:23:49.454Z",
-  "contentHash": "976bd33eb83df68407ea24bed58bdf92d45df8e548e861811ba399a2c7f1eca8",
+  "updatedAt": "2026-10-31T06:15:08.747Z",
+  "contentHash": "d2af350be374c0a7cfa8a6e96c2b0ea3f14fa97bb5416b7702c2e345d32b7f44",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-29T21:23:37.654Z",
+      "updatedAt": "2026-10-30T13:23:17.161Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-29T22:02:50.125Z",
+      "updatedAt": "2026-10-30T21:45:03.956Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "22",
+          "value": "23",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,24 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Acoustic Blues Drifters",
-              "detail": "Bistro Chez Ulrique, Stein am Rhein",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/events/small-stage/stein-am-rhein/acoustic-blues-drifters_AsqQRPg"
-            },
-            {
-              "label": "ÃO [BE]",
-              "detail": "TapTab",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/events/alternative/schaffhausen/o-be_ASiEmsf"
-            },
-            {
-              "label": "ÃO [BE]",
-              "detail": "TapTab Musikraum, Schaffhausen",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/ao-be/"
-            },
             {
               "label": "Viel Lärm um nichts",
               "detail": "Stadttheater Schaffhausen, Schaffhausen",
@@ -96,11 +78,29 @@
               "detail": "Theater Bachturnhalle, Schaffhausen",
               "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/figurentheater-hand-im-glueck-finitopepitto-kindertheater-5/"
+            },
+            {
+              "label": "\"Dusha&Cheese\" SPECIAL GUEST Sara Santos, Flamencotänzerin",
+              "detail": "Haberhaus Bühne",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/dusha-und-cheese-special-guest-sara-santos-flamencotaenzerin_ApgqrL4"
+            },
+            {
+              "label": "Vibes im Visitor Centre – ein First Friday Event",
+              "detail": "Schaffhauserland Tourismus",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/vibes-im-visitor-centre-ein-first-friday-event_Asveyax"
+            },
+            {
+              "label": "Vibes im Visitor Centre – ein First Friday Event",
+              "detail": "Schaffhauserland Tourismus, Schaffhausen",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vibes-im-visitor-centre-ein-first-friday-event/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/sciaffusa/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -133,7 +133,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -155,7 +155,7 @@
           "url": "/eventi/sciaffusa/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "en": {
       "canton": "SH",
@@ -165,7 +165,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "22",
+          "value": "23",
           "note": "from the site’s events calendar"
         }
       ],
@@ -175,24 +175,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Acoustic Blues Drifters",
-              "detail": "Bistro Chez Ulrique, Stein am Rhein",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/events/small-stage/stein-am-rhein/acoustic-blues-drifters_AsqQRPg"
-            },
-            {
-              "label": "ÃO [BE]",
-              "detail": "TapTab",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/events/alternative/schaffhausen/o-be_ASiEmsf"
-            },
-            {
-              "label": "ÃO [BE]",
-              "detail": "TapTab Musikraum, Schaffhausen",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/ao-be/"
-            },
             {
               "label": "Viel Lärm um nichts",
               "detail": "Stadttheater Schaffhausen, Schaffhausen",
@@ -234,11 +216,29 @@
               "detail": "Theater Bachturnhalle, Schaffhausen",
               "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/figurentheater-hand-im-glueck-finitopepitto-kindertheater-5/"
+            },
+            {
+              "label": "\"Dusha&Cheese\" SPECIAL GUEST Sara Santos, flamenco dancer",
+              "detail": "Haberhaus Bühne",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/dusha-und-cheese-special-guest-sara-santos-flamencotaenzerin_ApgqrL4"
+            },
+            {
+              "label": "Vibes im Visitor Centre – ein First Friday Event",
+              "detail": "Schaffhauserland Tourismus",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/vibes-im-visitor-centre-ein-first-friday-event_Asveyax"
+            },
+            {
+              "label": "Vibes im Visitor Centre – ein First Friday Event",
+              "detail": "Schaffhauserland Tourismus, Schaffhausen",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vibes-im-visitor-centre-ein-first-friday-event/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schaffhausen/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -271,7 +271,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -293,7 +293,7 @@
           "url": "/en/events/schaffhausen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "de": {
       "canton": "SH",
@@ -303,7 +303,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "22",
+          "value": "23",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -313,24 +313,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Akustische Blues-Drifter",
-              "detail": "Bistro Chez Ulrique, Stein am Rhein",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/events/small-stage/stein-am-rhein/acoustic-blues-drifters_AsqQRPg"
-            },
-            {
-              "label": "ÃO [BE]",
-              "detail": "TapTab",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/events/alternative/schaffhausen/o-be_ASiEmsf"
-            },
-            {
-              "label": "ÃO [BE]",
-              "detail": "TapTab Musikraum, Schaffhausen",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/ao-be/"
-            },
             {
               "label": "Viel Lärm um nichts",
               "detail": "Stadttheater Schaffhausen, Schaffhausen",
@@ -372,11 +354,29 @@
               "detail": "Theater Bachturnhalle, Schaffhausen",
               "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/figurentheater-hand-im-glueck-finitopepitto-kindertheater-5/"
+            },
+            {
+              "label": "\"Dusha&Cheese\" SPECIAL GUEST Sara Santos, Flamencotänzerin",
+              "detail": "Haberhaus Bühne",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/dusha-und-cheese-special-guest-sara-santos-flamencotaenzerin_ApgqrL4"
+            },
+            {
+              "label": "Vibes im Visitor Centre – ein First Friday Event",
+              "detail": "Schaffhauserland Tourismus",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/vibes-im-visitor-centre-ein-first-friday-event_Asveyax"
+            },
+            {
+              "label": "Vibes im Visitor Centre – ein First Friday Event",
+              "detail": "Schaffhauserland Tourismus, Schaffhausen",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vibes-im-visitor-centre-ein-first-friday-event/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schaffhausen/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -409,7 +409,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -431,7 +431,7 @@
           "url": "/de/veranstaltungen/schaffhausen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "fr": {
       "canton": "SH",
@@ -441,7 +441,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "22",
+          "value": "23",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -451,24 +451,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Acoustique Blues Drifters",
-              "detail": "Bistro Chez Ulrique, Stein am Rhein",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/events/small-stage/stein-am-rhein/acoustic-blues-drifters_AsqQRPg"
-            },
-            {
-              "label": "ÃO [BE]",
-              "detail": "TapTab",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/events/alternative/schaffhausen/o-be_ASiEmsf"
-            },
-            {
-              "label": "ÃO [BE]",
-              "detail": "TapTab Musikraum, Schaffhausen",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/ao-be/"
-            },
             {
               "label": "Viel Lärm um nichts",
               "detail": "Stadttheater Schaffhausen, Schaffhausen",
@@ -510,11 +492,29 @@
               "detail": "Theater Bachturnhalle, Schaffhausen",
               "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/figurentheater-hand-im-glueck-finitopepitto-kindertheater-5/"
+            },
+            {
+              "label": "« Dusha&Cheese » INVITÉE SPÉCIALE : Sara Santos, danseuse de flamenco",
+              "detail": "Haberhaus Bühne",
+              "date": "2026-11-05",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/dusha-und-cheese-special-guest-sara-santos-flamencotaenzerin_ApgqrL4"
+            },
+            {
+              "label": "Vibes im Visitor Centre – ein First Friday Event",
+              "detail": "Schaffhauserland Tourismus",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/vibes-im-visitor-centre-ein-first-friday-event_Asveyax"
+            },
+            {
+              "label": "Vibes im Visitor Centre – ein First Friday Event",
+              "detail": "Schaffhauserland Tourismus, Schaffhausen",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vibes-im-visitor-centre-ein-first-friday-event/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schaffhouse/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -547,7 +547,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-29T22:02:50.125Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -569,7 +569,7 @@
           "url": "/fr/evenements/schaffhouse/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     }
   }
 }

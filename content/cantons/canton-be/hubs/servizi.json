@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "servizi",
-  "updatedAt": "2026-10-30T21:41:46.032Z",
-  "contentHash": "1889f40fa6d85304d7f71aa46770985b484b10343d5ddc5963c0c8b2c736caaf",
+  "updatedAt": "2026-10-31T06:15:08.747Z",
+  "contentHash": "f5233ccdb1d358164aa2caa2d9860532bf0efe28131afa72907b72904ce880d5",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-30T12:52:32.857Z",
+      "updatedAt": "2026-10-30T22:19:25.949Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-30T15:13:06.562Z",
+      "updatedAt": "2026-10-30T20:58:15.445Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-30T11:41:14.746Z",
+      "updatedAt": "2026-10-30T21:45:03.956Z",
       "keyFacts": 0
     }
   ],
@@ -102,7 +102,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://auktion-be.ch/de/",
-          "updatedAt": "2026-10-30T12:52:32.857Z"
+          "updatedAt": "2026-10-30T22:19:25.949Z"
         },
         {
           "id": "meteo",
@@ -111,12 +111,12 @@
           "items": [
             {
               "label": "Bern",
-              "value": "9 °C",
-              "detail": "oggi da 5 a 9 °C"
+              "value": "7 °C",
+              "detail": "oggi da 5 a 8 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-30T15:13:06.562Z"
+          "updatedAt": "2026-10-30T20:58:15.445Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -129,7 +129,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/gesundheit-am-arbeitsplatz-zeitdruck-groesste-herausforderung"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -209,7 +209,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-30T21:41:46.032Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "en": {
       "canton": "BE",
@@ -284,7 +284,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://auktion-be.ch/de/",
-          "updatedAt": "2026-10-30T12:52:32.857Z"
+          "updatedAt": "2026-10-30T22:19:25.949Z"
         },
         {
           "id": "meteo",
@@ -293,12 +293,12 @@
           "items": [
             {
               "label": "Bern",
-              "value": "9 °C",
-              "detail": "today from 5 to 9 °C"
+              "value": "7 °C",
+              "detail": "today from 5 to 8 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-30T15:13:06.562Z"
+          "updatedAt": "2026-10-30T20:58:15.445Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -311,7 +311,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/gesundheit-am-arbeitsplatz-zeitdruck-groesste-herausforderung"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -387,7 +387,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-30T21:41:46.032Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "de": {
       "canton": "BE",
@@ -462,7 +462,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://auktion-be.ch/de/",
-          "updatedAt": "2026-10-30T12:52:32.857Z"
+          "updatedAt": "2026-10-30T22:19:25.949Z"
         },
         {
           "id": "meteo",
@@ -471,12 +471,12 @@
           "items": [
             {
               "label": "Bern",
-              "value": "9 °C",
-              "detail": "heute 5 bis 9 °C"
+              "value": "7 °C",
+              "detail": "heute 5 bis 8 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-30T15:13:06.562Z"
+          "updatedAt": "2026-10-30T20:58:15.445Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -489,7 +489,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/gesundheit-am-arbeitsplatz-zeitdruck-groesste-herausforderung"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -565,7 +565,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-30T21:41:46.032Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "fr": {
       "canton": "BE",
@@ -640,7 +640,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://auktion-be.ch/de/",
-          "updatedAt": "2026-10-30T12:52:32.857Z"
+          "updatedAt": "2026-10-30T22:19:25.949Z"
         },
         {
           "id": "meteo",
@@ -649,12 +649,12 @@
           "items": [
             {
               "label": "Bern",
-              "value": "9 °C",
-              "detail": "aujourd’hui de 5 à 9 °C"
+              "value": "7 °C",
+              "detail": "aujourd’hui de 5 à 8 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-30T15:13:06.562Z"
+          "updatedAt": "2026-10-30T20:58:15.445Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -667,7 +667,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/gesundheit-am-arbeitsplatz-zeitdruck-groesste-herausforderung"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -739,7 +739,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-30T21:41:46.032Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     }
   }
 }

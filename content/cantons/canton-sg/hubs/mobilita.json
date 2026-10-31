@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-30T19:31:58.244Z",
-  "contentHash": "d5b8a304152f0451d26c38c3a569c1f606eb7424c762dd959eba34a18c3de625",
+  "updatedAt": "2026-10-31T06:15:08.747Z",
+  "contentHash": "796683a58dcfcec0f168541b66294f7ad967fbc6fbed05b1ba69d96897d97854",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-30T13:39:45.803Z",
+      "updatedAt": "2026-10-30T20:12:21.426Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-30T11:41:14.746Z",
+      "updatedAt": "2026-10-30T21:45:03.956Z",
       "keyFacts": 0
     }
   ],
@@ -42,7 +42,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "16",
+          "value": "15",
           "note": "segnalazioni aggiornate: 30 ottobre 2026"
         }
       ],
@@ -160,7 +160,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-30T13:39:45.803Z"
+          "updatedAt": "2026-10-30T20:12:21.426Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -171,6 +171,11 @@
               "label": "Herbstaktion: Velo-Reinigung in der Velostation",
               "date": "2026-10-29",
               "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/10/herbstaktion--velo-reinigung-in-der-velostation.html"
+            },
+            {
+              "label": "Kanton St.Gallen: Fünf fahrunfähige Verkehrsteilnehmende angehalten",
+              "date": "2026-10-28",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/kanton-st-gallen--fuenf-fahrunfaehige-verkehrsteilnehmende-angeh.html"
             },
             {
               "label": "Velovorzugsroute entlang der Bahn - öffentliche Mitwirkung startet im November",
@@ -191,14 +196,9 @@
               "label": "Donnerstag, 15.10.2026 Achraintunnel: Tages- und Nachtsperren im Oktober erforderlich",
               "date": "2026-10-15",
               "url": "https://presse.vorarlberg.at/land/public/Achraintunnel-Tages-und-Nachtsperren-im-Oktober-erforderlich1"
-            },
-            {
-              "label": "St.Gallen: Falschfahrer auf A1 angehalten",
-              "date": "2026-10-13",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/st-gallen--falschfahrer-auf-a1-angehalten.html"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -286,7 +286,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "en": {
       "canton": "SG",
@@ -306,7 +306,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "16",
+          "value": "15",
           "note": "reports as of 30 October 2026"
         }
       ],
@@ -424,7 +424,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-30T13:39:45.803Z"
+          "updatedAt": "2026-10-30T20:12:21.426Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -435,6 +435,11 @@
               "label": "Herbstaktion: Velo-Reinigung in der Velostation",
               "date": "2026-10-29",
               "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/10/herbstaktion--velo-reinigung-in-der-velostation.html"
+            },
+            {
+              "label": "Kanton St.Gallen: Fünf fahrunfähige Verkehrsteilnehmende angehalten",
+              "date": "2026-10-28",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/kanton-st-gallen--fuenf-fahrunfaehige-verkehrsteilnehmende-angeh.html"
             },
             {
               "label": "Velovorzugsroute entlang der Bahn - öffentliche Mitwirkung startet im November",
@@ -455,14 +460,9 @@
               "label": "Donnerstag, 15.10.2026 Achraintunnel: Tages- und Nachtsperren im Oktober erforderlich",
               "date": "2026-10-15",
               "url": "https://presse.vorarlberg.at/land/public/Achraintunnel-Tages-und-Nachtsperren-im-Oktober-erforderlich1"
-            },
-            {
-              "label": "St.Gallen: Falschfahrer auf A1 angehalten",
-              "date": "2026-10-13",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/st-gallen--falschfahrer-auf-a1-angehalten.html"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -549,7 +549,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "de": {
       "canton": "SG",
@@ -569,7 +569,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "16",
+          "value": "15",
           "note": "Meldungen vom 30. Oktober 2026"
         }
       ],
@@ -687,7 +687,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-30T13:39:45.803Z"
+          "updatedAt": "2026-10-30T20:12:21.426Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -698,6 +698,11 @@
               "label": "Herbstaktion: Velo-Reinigung in der Velostation",
               "date": "2026-10-29",
               "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/10/herbstaktion--velo-reinigung-in-der-velostation.html"
+            },
+            {
+              "label": "Kanton St.Gallen: Fünf fahrunfähige Verkehrsteilnehmende angehalten",
+              "date": "2026-10-28",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/kanton-st-gallen--fuenf-fahrunfaehige-verkehrsteilnehmende-angeh.html"
             },
             {
               "label": "Velovorzugsroute entlang der Bahn - öffentliche Mitwirkung startet im November",
@@ -718,14 +723,9 @@
               "label": "Donnerstag, 15.10.2026 Achraintunnel: Tages- und Nachtsperren im Oktober erforderlich",
               "date": "2026-10-15",
               "url": "https://presse.vorarlberg.at/land/public/Achraintunnel-Tages-und-Nachtsperren-im-Oktober-erforderlich1"
-            },
-            {
-              "label": "St.Gallen: Falschfahrer auf A1 angehalten",
-              "date": "2026-10-13",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/st-gallen--falschfahrer-auf-a1-angehalten.html"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -812,7 +812,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "fr": {
       "canton": "SG",
@@ -832,7 +832,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "16",
+          "value": "15",
           "note": "signalements au 30 octobre 2026"
         }
       ],
@@ -950,7 +950,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-30T13:39:45.803Z"
+          "updatedAt": "2026-10-30T20:12:21.426Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -961,6 +961,11 @@
               "label": "Herbstaktion: Velo-Reinigung in der Velostation",
               "date": "2026-10-29",
               "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/10/herbstaktion--velo-reinigung-in-der-velostation.html"
+            },
+            {
+              "label": "Kanton St.Gallen: Fünf fahrunfähige Verkehrsteilnehmende angehalten",
+              "date": "2026-10-28",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/kanton-st-gallen--fuenf-fahrunfaehige-verkehrsteilnehmende-angeh.html"
             },
             {
               "label": "Velovorzugsroute entlang der Bahn - öffentliche Mitwirkung startet im November",
@@ -981,14 +986,9 @@
               "label": "Donnerstag, 15.10.2026 Achraintunnel: Tages- und Nachtsperren im Oktober erforderlich",
               "date": "2026-10-15",
               "url": "https://presse.vorarlberg.at/land/public/Achraintunnel-Tages-und-Nachtsperren-im-Oktober-erforderlich1"
-            },
-            {
-              "label": "St.Gallen: Falschfahrer auf A1 angehalten",
-              "date": "2026-10-13",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/st-gallen--falschfahrer-auf-a1-angehalten.html"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -1076,7 +1076,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     }
   }
 }

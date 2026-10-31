@@ -4,12 +4,12 @@
   "section": "canton-ow",
   "canton": "OW",
   "topic": "eventi",
-  "updatedAt": "2026-10-30T06:23:49.454Z",
-  "contentHash": "04cf6fdf708865b72c14383a3922c204ff570767f7ed9f651b07979a36635d35",
+  "updatedAt": "2026-10-31T06:15:08.747Z",
+  "contentHash": "0bc180be2d2ad9a5e01c9b0498a2c28fbaa72cbaee90797bd174a7af31065098",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-29T21:23:37.654Z",
+      "updatedAt": "2026-10-30T13:23:17.161Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "28",
+          "value": "27",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,18 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Älplerchilbi Schwendi",
-              "detail": "Restaurant Rössli Stalden, Stalden (Sarnen), Sarnen",
-              "date": "2026-10-30",
-              "url": "https://www.ow.ch/anlaesseaktuelles/93691"
-            },
-            {
-              "label": "Stubete im Gasthaus Bahnhof",
-              "detail": "Gasthaus Bahnhof, Sachseln, Sachseln",
-              "date": "2026-10-30",
-              "url": "https://www.ow.ch/anlaesseaktuelles/94108"
-            },
             {
               "label": "Die lange Nacht der kurzen Geschichten",
               "detail": "Hotel Metzgern Sarnen, Sarnen, Sarnen",
@@ -91,11 +79,23 @@
               "detail": "Residenz Am Schärme, Grüner Saal, Sarnen, Sarnen",
               "date": "2026-11-05",
               "url": "https://www.ow.ch/anlaesseaktuelles/94741"
+            },
+            {
+              "label": "Buchvernissage Obwaldner Geschichtsblätter, Heft 29",
+              "detail": "Residenz Am Schärme, Grüner Saal, Sarnen, Sarnen",
+              "date": "2026-11-05",
+              "url": "https://www.ow.ch/anlaesseaktuelles/94747"
+            },
+            {
+              "label": "FG Sarnen: Abendspaziergang",
+              "detail": "Dreifachhalle, Sarnen, Sarnen",
+              "date": "2026-11-05",
+              "url": "https://www.ow.ch/anlaesseaktuelles/88730"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/obvaldo/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/obvaldo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "en": {
       "canton": "OW",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "28",
+          "value": "27",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,18 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Älplerchilbi Schwendi",
-              "detail": "Restaurant Rössli Stalden, Stalden (Sarnen), Sarnen",
-              "date": "2026-10-30",
-              "url": "https://www.ow.ch/anlaesseaktuelles/93691"
-            },
-            {
-              "label": "Stubete im Gasthaus Bahnhof",
-              "detail": "Gasthaus Bahnhof, Sachseln, Sachseln",
-              "date": "2026-10-30",
-              "url": "https://www.ow.ch/anlaesseaktuelles/94108"
-            },
             {
               "label": "Die lange Nacht der kurzen Geschichten",
               "detail": "Hotel Metzgern Sarnen, Sarnen, Sarnen",
@@ -196,11 +184,23 @@
               "detail": "Residenz Am Schärme, Grüner Saal, Sarnen, Sarnen",
               "date": "2026-11-05",
               "url": "https://www.ow.ch/anlaesseaktuelles/94741"
+            },
+            {
+              "label": "Buchvernissage Obwaldner Geschichtsblätter, Heft 29",
+              "detail": "Residenz Am Schärme, Grüner Saal, Sarnen, Sarnen",
+              "date": "2026-11-05",
+              "url": "https://www.ow.ch/anlaesseaktuelles/94747"
+            },
+            {
+              "label": "FG Sarnen: Abendspaziergang",
+              "detail": "Dreifachhalle, Sarnen, Sarnen",
+              "date": "2026-11-05",
+              "url": "https://www.ow.ch/anlaesseaktuelles/88730"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/obwalden/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/obwalden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "de": {
       "canton": "OW",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "28",
+          "value": "27",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,18 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Älplerchilbi Schwendi",
-              "detail": "Restaurant Rössli Stalden, Stalden (Sarnen), Sarnen",
-              "date": "2026-10-30",
-              "url": "https://www.ow.ch/anlaesseaktuelles/93691"
-            },
-            {
-              "label": "Stubete im Gasthaus Bahnhof",
-              "detail": "Gasthaus Bahnhof, Sachseln, Sachseln",
-              "date": "2026-10-30",
-              "url": "https://www.ow.ch/anlaesseaktuelles/94108"
-            },
             {
               "label": "Die lange Nacht der kurzen Geschichten",
               "detail": "Hotel Metzgern Sarnen, Sarnen, Sarnen",
@@ -301,11 +289,23 @@
               "detail": "Residenz Am Schärme, Grüner Saal, Sarnen, Sarnen",
               "date": "2026-11-05",
               "url": "https://www.ow.ch/anlaesseaktuelles/94741"
+            },
+            {
+              "label": "Buchvernissage Obwaldner Geschichtsblätter, Heft 29",
+              "detail": "Residenz Am Schärme, Grüner Saal, Sarnen, Sarnen",
+              "date": "2026-11-05",
+              "url": "https://www.ow.ch/anlaesseaktuelles/94747"
+            },
+            {
+              "label": "FG Sarnen: Abendspaziergang",
+              "detail": "Dreifachhalle, Sarnen, Sarnen",
+              "date": "2026-11-05",
+              "url": "https://www.ow.ch/anlaesseaktuelles/88730"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/obwalden/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/obwalden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "fr": {
       "canton": "OW",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "28",
+          "value": "27",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,18 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Älplerchilbi Schwendi",
-              "detail": "Restaurant Rössli Stalden, Stalden (Sarnen), Sarnen",
-              "date": "2026-10-30",
-              "url": "https://www.ow.ch/anlaesseaktuelles/93691"
-            },
-            {
-              "label": "Stubete im Gasthaus Bahnhof",
-              "detail": "Gasthaus Bahnhof, Sachseln, Sachseln",
-              "date": "2026-10-30",
-              "url": "https://www.ow.ch/anlaesseaktuelles/94108"
-            },
             {
               "label": "Die lange Nacht der kurzen Geschichten",
               "detail": "Hotel Metzgern Sarnen, Sarnen, Sarnen",
@@ -406,11 +394,23 @@
               "detail": "Residenz Am Schärme, Grüner Saal, Sarnen, Sarnen",
               "date": "2026-11-05",
               "url": "https://www.ow.ch/anlaesseaktuelles/94741"
+            },
+            {
+              "label": "Buchvernissage Obwaldner Geschichtsblätter, Heft 29",
+              "detail": "Residenz Am Schärme, Grüner Saal, Sarnen, Sarnen",
+              "date": "2026-11-05",
+              "url": "https://www.ow.ch/anlaesseaktuelles/94747"
+            },
+            {
+              "label": "FG Sarnen: Abendspaziergang",
+              "detail": "Dreifachhalle, Sarnen, Sarnen",
+              "date": "2026-11-05",
+              "url": "https://www.ow.ch/anlaesseaktuelles/88730"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/obwald/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/obwald/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "eventi",
-  "updatedAt": "2026-10-30T22:08:31.539Z",
-  "contentHash": "90a5337a62551c5032147852e04f191078b08164623bbe594f12037b1640322e",
+  "updatedAt": "2026-10-31T06:15:08.747Z",
+  "contentHash": "1470298684ace941b89a2e7c56e2ca89d404a466910ca5e50d93da8f5027cc46",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-30T11:41:14.746Z",
+      "updatedAt": "2026-10-30T21:45:03.956Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "60",
+          "value": "61",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,64 +38,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Kunstausstellung Visarte",
+              "label": "Schweizer Wohntage: Luzern",
               "detail": "Luzern",
-              "date": "2026-10-30",
-              "url": "https://www.stadtluzern.ch/sitzung/7587574"
+              "date": "2026-10-31",
+              "url": "https://www.stadtluzern.ch/sitzung/7723786"
             },
             {
-              "label": "WeekendKrimi di Peter Denlo Floraalpina Vitznau",
-              "detail": "Vitznau",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/weekendkrimi-di-peter-denlo-floraalpina-vitznau/"
+              "label": "Backworkshop auf dem Burgrain",
+              "detail": "Agrovision Burgrain AG, Alberswil",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/backworkshop-auf-dem-burgrain-1/"
             },
             {
-              "label": "Kaltbach Herbstmarkt – Genuss aus der Höhle: regional, echt und herbstlich fein",
-              "detail": "Emmi Kaltbach, Mauensee",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kaltbach-herbstmarkt-genuss-aus-der-hoehle-regional-echt-und-herbstlich-fein/"
+              "label": "Die Opern-Tode meiner Mutter",
+              "detail": "Lucerne",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-opern-tode-meiner-mutter/"
             },
             {
-              "label": "Winter Qi Gong Waldfriedhof Staffeln",
-              "detail": "Sursee",
-              "date": "2026-10-30",
-              "url": "https://www.stadtluzern.ch/sitzung/7694299"
+              "label": "Musikalische Unterhaltung",
+              "detail": "Kurhaus Seeblick, Weggis",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/events/music/weggis/musical-entertainment_ANM4NQC"
             },
             {
-              "label": "Salonkonzert",
-              "detail": "Luzern",
-              "date": "2026-10-30",
-              "url": "https://www.stadtluzern.ch/sitzung/7463713"
+              "label": "6. Halloween Dinner & Party",
+              "detail": "Wasserschloss Wyher & Schloss Altishofen, Altishofen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/6-halloween-dinner-party/"
             },
             {
-              "label": "Krimi-Dinner auf dem Schloss Wyher",
-              "detail": "Ettiswil",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/krimi-dinner-auf-dem-schloss-wyher/"
-            },
-            {
-              "label": "Brass Sounds Lakeside",
-              "detail": "Weggis",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/events/music/weggis/brass-sounds-lakeside_Ax5nhrM"
-            },
-            {
-              "label": "Irish Folk Festival",
+              "label": "Obrasso Concerts: Verdi Requiem",
               "detail": "KKL Luzern, Luzern",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/luzern/irish-folk-festival_AHwn7mP"
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/obrasso-concerts-verdi-requiem/"
             },
             {
-              "label": "Salsa Fiesta WEMILERE mit Los Capitanes del Son",
-              "detail": "Hirschen Sursee, Sursee",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/sursee/salsa-fiesta-wemilere-mit-los-capitanes-del-son_AU7YiN8"
+              "label": "Verdi Requiem",
+              "detail": "KKL Luzern, Luzern",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/evenements/musique/lucerne/obrasso-concerts-requiem-de-verdi_ABWJgYw"
             },
             {
-              "label": "Der Dicke Polizist",
-              "detail": "Musikzentrum Sedel",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/emmenbruecke/der-dicke-polizist_AjD4NZT"
+              "label": "Asima",
+              "detail": "Rathaus Sempach, Sempach",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/sempach/asima_Ab4ehKC"
+            },
+            {
+              "label": "MEGHADOOTAM – der Wolkenbote",
+              "detail": "Theater Pavillon",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/meghadootam-der-wolkenbote_AYBpFm5"
+            },
+            {
+              "label": "Kunstausstellung Visarte",
+              "detail": "Luzern — in corso, ultimo giorno: 15 novembre 2026",
+              "date": "2026-10-31",
+              "url": "https://www.stadtluzern.ch/sitzung/7587574"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -138,7 +138,7 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694110"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -172,7 +172,7 @@
           "url": "/eventi/lucerna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-30T22:08:31.539Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "en": {
       "canton": "LU",
@@ -182,7 +182,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "60",
+          "value": "61",
           "note": "from the site’s events calendar"
         }
       ],
@@ -193,64 +193,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Kunstausstellung Visarte",
+              "label": "Schweizer Wohntage: Luzern",
               "detail": "Luzern",
-              "date": "2026-10-30",
-              "url": "https://www.stadtluzern.ch/sitzung/7587574"
+              "date": "2026-10-31",
+              "url": "https://www.stadtluzern.ch/sitzung/7723786"
             },
             {
-              "label": "WeekendKrimi by Peter Denlo Floraalpina Vitznau",
-              "detail": "Vitznau",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/weekendkrimi-di-peter-denlo-floraalpina-vitznau/"
+              "label": "Backworkshop auf dem Burgrain",
+              "detail": "Agrovision Burgrain AG, Alberswil",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/backworkshop-auf-dem-burgrain-1/"
             },
             {
-              "label": "Kaltbach Herbstmarkt – Genuss aus der Höhle: regional, echt und herbstlich fein",
-              "detail": "Emmi Kaltbach, Mauensee",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kaltbach-herbstmarkt-genuss-aus-der-hoehle-regional-echt-und-herbstlich-fein/"
+              "label": "Die Opern-Tode meiner Mutter",
+              "detail": "Lucerne",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-opern-tode-meiner-mutter/"
             },
             {
-              "label": "Winter Qi Gong Waldfriedhof Staffeln",
-              "detail": "Sursee",
-              "date": "2026-10-30",
-              "url": "https://www.stadtluzern.ch/sitzung/7694299"
+              "label": "Musical entertainment",
+              "detail": "Kurhaus Seeblick, Weggis",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/events/music/weggis/musical-entertainment_ANM4NQC"
             },
             {
-              "label": "Salonkonzert",
-              "detail": "Luzern",
-              "date": "2026-10-30",
-              "url": "https://www.stadtluzern.ch/sitzung/7463713"
+              "label": "6. Halloween Dinner & Party",
+              "detail": "Wasserschloss Wyher & Schloss Altishofen, Altishofen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/6-halloween-dinner-party/"
             },
             {
-              "label": "Krimi-Dinner auf dem Schloss Wyher",
-              "detail": "Ettiswil",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/krimi-dinner-auf-dem-schloss-wyher/"
-            },
-            {
-              "label": "Brass Sounds Lakeside",
-              "detail": "Weggis",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/events/music/weggis/brass-sounds-lakeside_Ax5nhrM"
-            },
-            {
-              "label": "Irish Folk Festival",
+              "label": "Obrasso Concerts: Verdi Requiem",
               "detail": "KKL Luzern, Luzern",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/luzern/irish-folk-festival_AHwn7mP"
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/obrasso-concerts-verdi-requiem/"
             },
             {
-              "label": "Salsa Fiesta WEMILERE mit Los Capitanes del Son",
-              "detail": "Hirschen Sursee, Sursee",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/sursee/salsa-fiesta-wemilere-mit-los-capitanes-del-son_AU7YiN8"
+              "label": "Obrasso Concerts: Verdi Requiem",
+              "detail": "KKL Luzern, Luzern",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/evenements/musique/lucerne/obrasso-concerts-requiem-de-verdi_ABWJgYw"
             },
             {
-              "label": "Der Dicke Polizist",
-              "detail": "Musikzentrum Sedel",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/emmenbruecke/der-dicke-polizist_AjD4NZT"
+              "label": "Asima",
+              "detail": "Rathaus Sempach, Sempach",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/sempach/asima_Ab4ehKC"
+            },
+            {
+              "label": "MEGHADOOTAM – der Wolkenbote",
+              "detail": "Theater Pavillon",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/meghadootam-der-wolkenbote_AYBpFm5"
+            },
+            {
+              "label": "Kunstausstellung Visarte",
+              "detail": "Luzern — ongoing, last day: 15 November 2026",
+              "date": "2026-10-31",
+              "url": "https://www.stadtluzern.ch/sitzung/7587574"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -293,7 +293,7 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694110"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/en/events/lucerne/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-30T22:08:31.539Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "de": {
       "canton": "LU",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "60",
+          "value": "61",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -348,64 +348,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Kunstausstellung Visarte",
+              "label": "Schweizer Wohntage: Luzern",
               "detail": "Luzern",
-              "date": "2026-10-30",
-              "url": "https://www.stadtluzern.ch/sitzung/7587574"
+              "date": "2026-10-31",
+              "url": "https://www.stadtluzern.ch/sitzung/7723786"
             },
             {
-              "label": "WeekendKrimi by Peter Denlo Floraalpina Vitznau",
-              "detail": "Vitznau",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/weekendkrimi-di-peter-denlo-floraalpina-vitznau/"
+              "label": "Backworkshop auf dem Burgrain",
+              "detail": "Agrovision Burgrain AG, Alberswil",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/backworkshop-auf-dem-burgrain-1/"
             },
             {
-              "label": "Kaltbach Herbstmarkt – Genuss aus der Höhle: regional, echt und herbstlich fein",
-              "detail": "Emmi Kaltbach, Mauensee",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kaltbach-herbstmarkt-genuss-aus-der-hoehle-regional-echt-und-herbstlich-fein/"
+              "label": "Die Opern-Tode meiner Mutter",
+              "detail": "Lucerne",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-opern-tode-meiner-mutter/"
             },
             {
-              "label": "Winter Qi Gong Waldfriedhof Staffeln",
-              "detail": "Sursee",
-              "date": "2026-10-30",
-              "url": "https://www.stadtluzern.ch/sitzung/7694299"
+              "label": "Musikalische Unterhaltung",
+              "detail": "Kurhaus Seeblick, Weggis",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/events/music/weggis/musical-entertainment_ANM4NQC"
             },
             {
-              "label": "Salonkonzert",
-              "detail": "Luzern",
-              "date": "2026-10-30",
-              "url": "https://www.stadtluzern.ch/sitzung/7463713"
+              "label": "6. Halloween Dinner & Party",
+              "detail": "Wasserschloss Wyher & Schloss Altishofen, Altishofen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/6-halloween-dinner-party/"
             },
             {
-              "label": "Krimi-Dinner auf dem Schloss Wyher",
-              "detail": "Ettiswil",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/krimi-dinner-auf-dem-schloss-wyher/"
-            },
-            {
-              "label": "Brass Sounds Lakeside",
-              "detail": "Weggis",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/events/music/weggis/brass-sounds-lakeside_Ax5nhrM"
-            },
-            {
-              "label": "Irish Folk Festival",
+              "label": "Verdi Requiem",
               "detail": "KKL Luzern, Luzern",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/luzern/irish-folk-festival_AHwn7mP"
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/obrasso-concerts-verdi-requiem/"
             },
             {
-              "label": "Salsa Fiesta WEMILERE mit Los Capitanes del Son",
-              "detail": "Hirschen Sursee, Sursee",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/sursee/salsa-fiesta-wemilere-mit-los-capitanes-del-son_AU7YiN8"
+              "label": "Verdi Requiem",
+              "detail": "KKL Luzern, Luzern",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/evenements/musique/lucerne/obrasso-concerts-requiem-de-verdi_ABWJgYw"
             },
             {
-              "label": "Der Dicke Polizist",
-              "detail": "Musikzentrum Sedel",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/emmenbruecke/der-dicke-polizist_AjD4NZT"
+              "label": "Asima",
+              "detail": "Rathaus Sempach, Sempach",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/sempach/asima_Ab4ehKC"
+            },
+            {
+              "label": "MEGHADOOTAM – der Wolkenbote",
+              "detail": "Theater Pavillon",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/meghadootam-der-wolkenbote_AYBpFm5"
+            },
+            {
+              "label": "Kunstausstellung Visarte",
+              "detail": "Luzern — läuft, letzter Tag: 15. November 2026",
+              "date": "2026-10-31",
+              "url": "https://www.stadtluzern.ch/sitzung/7587574"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -448,7 +448,7 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694110"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -482,7 +482,7 @@
           "url": "/de/veranstaltungen/luzern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-30T22:08:31.539Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "fr": {
       "canton": "LU",
@@ -492,7 +492,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "60",
+          "value": "61",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -503,64 +503,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Kunstausstellung Visarte",
+              "label": "Schweizer Wohntage: Luzern",
               "detail": "Luzern",
-              "date": "2026-10-30",
-              "url": "https://www.stadtluzern.ch/sitzung/7587574"
+              "date": "2026-10-31",
+              "url": "https://www.stadtluzern.ch/sitzung/7723786"
             },
             {
-              "label": "Week-endPolicier par Peter Denlo Floraalpina Vitznau",
-              "detail": "Vitznau",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/weekendkrimi-di-peter-denlo-floraalpina-vitznau/"
+              "label": "Backworkshop auf dem Burgrain",
+              "detail": "Agrovision Burgrain AG, Alberswil",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/backworkshop-auf-dem-burgrain-1/"
             },
             {
-              "label": "Kaltbach Herbstmarkt – Genuss aus der Höhle: regional, echt und herbstlich fein",
-              "detail": "Emmi Kaltbach, Mauensee",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kaltbach-herbstmarkt-genuss-aus-der-hoehle-regional-echt-und-herbstlich-fein/"
+              "label": "Die Opern-Tode meiner Mutter",
+              "detail": "Lucerne",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-opern-tode-meiner-mutter/"
             },
             {
-              "label": "Winter Qi Gong Waldfriedhof Staffeln",
-              "detail": "Sursee",
-              "date": "2026-10-30",
-              "url": "https://www.stadtluzern.ch/sitzung/7694299"
+              "label": "Animation musicale",
+              "detail": "Kurhaus Seeblick, Weggis",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/events/music/weggis/musical-entertainment_ANM4NQC"
             },
             {
-              "label": "Salonkonzert",
-              "detail": "Luzern",
-              "date": "2026-10-30",
-              "url": "https://www.stadtluzern.ch/sitzung/7463713"
+              "label": "6. Halloween Dinner & Party",
+              "detail": "Wasserschloss Wyher & Schloss Altishofen, Altishofen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/6-halloween-dinner-party/"
             },
             {
-              "label": "Krimi-Dinner auf dem Schloss Wyher",
-              "detail": "Ettiswil",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/krimi-dinner-auf-dem-schloss-wyher/"
-            },
-            {
-              "label": "Brass Sounds Lakeside",
-              "detail": "Weggis",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/events/music/weggis/brass-sounds-lakeside_Ax5nhrM"
-            },
-            {
-              "label": "Irish Folk Festival",
+              "label": "Obrasso Concerts : Requiem de Verdi",
               "detail": "KKL Luzern, Luzern",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/luzern/irish-folk-festival_AHwn7mP"
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/obrasso-concerts-verdi-requiem/"
             },
             {
-              "label": "Salsa Fiesta WEMILERE mit Los Capitanes del Son",
-              "detail": "Hirschen Sursee, Sursee",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/sursee/salsa-fiesta-wemilere-mit-los-capitanes-del-son_AU7YiN8"
+              "label": "Obrasso Concerts : Requiem de Verdi",
+              "detail": "KKL Luzern, Luzern",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/evenements/musique/lucerne/obrasso-concerts-requiem-de-verdi_ABWJgYw"
             },
             {
-              "label": "Der Dicke Polizist",
-              "detail": "Musikzentrum Sedel",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/emmenbruecke/der-dicke-polizist_AjD4NZT"
+              "label": "Asima",
+              "detail": "Rathaus Sempach, Sempach",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/sempach/asima_Ab4ehKC"
+            },
+            {
+              "label": "MEGHADOOTAM – der Wolkenbote",
+              "detail": "Theater Pavillon",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/meghadootam-der-wolkenbote_AYBpFm5"
+            },
+            {
+              "label": "Kunstausstellung Visarte",
+              "detail": "Luzern — en cours, dernier jour : 15 novembre 2026",
+              "date": "2026-10-31",
+              "url": "https://www.stadtluzern.ch/sitzung/7587574"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -603,7 +603,7 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694110"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -637,7 +637,7 @@
           "url": "/fr/evenements/lucerne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-30T22:08:31.539Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     }
   }
 }

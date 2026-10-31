@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "servizi",
-  "updatedAt": "2026-10-30T19:31:58.244Z",
-  "contentHash": "f4657d51bf1e212f0e22484adb341fbd1bb13e0300b362d36b75c021eb49d1fa",
+  "updatedAt": "2026-10-31T06:15:08.747Z",
+  "contentHash": "ee5b3f20f730e99718f6e6724fd1148cae33f26dae91e12bf13b69b65bb459f2",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-30T12:52:32.857Z",
+      "updatedAt": "2026-10-30T22:19:25.949Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-30T15:13:06.562Z",
+      "updatedAt": "2026-10-30T20:58:15.445Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-30T11:41:14.746Z",
+      "updatedAt": "2026-10-30T21:45:03.956Z",
       "keyFacts": 0
     }
   ],
@@ -44,7 +44,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "18",
-          "note": "offerta mediana 1020 CHF"
+          "note": "offerta mediana 1270 CHF"
         }
       ],
       "dataBlocks": [
@@ -76,23 +76,23 @@
               "url": "https://www.auktion-ag.ch/de/auction/58808"
             },
             {
+              "label": "AG8843",
+              "value": "2800 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-11-11T20:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58809"
+            },
+            {
               "label": "AG10048",
               "value": "2520 CHF",
               "detail": "offerta attuale",
               "date": "2026-11-11T20:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58812"
-            },
-            {
-              "label": "AG8843",
-              "value": "2400 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-11-11T20:00:00.000Z",
-              "url": "https://www.auktion-ag.ch/de/auction/58809"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion-ag.ch/de/",
-          "updatedAt": "2026-10-30T12:52:32.857Z"
+          "updatedAt": "2026-10-30T22:19:25.949Z"
         },
         {
           "id": "meteo",
@@ -101,12 +101,12 @@
           "items": [
             {
               "label": "Aarau",
-              "value": "11 °C",
-              "detail": "oggi da 5 a 11 °C"
+              "value": "7 °C",
+              "detail": "oggi da 5 a 9 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-30T15:13:06.562Z"
+          "updatedAt": "2026-10-30T20:58:15.445Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -144,7 +144,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -224,7 +224,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "en": {
       "canton": "AG",
@@ -241,7 +241,7 @@
         {
           "label": "Plate auctions running",
           "value": "18",
-          "note": "typical bid 1,020 CHF"
+          "note": "typical bid 1,270 CHF"
         }
       ],
       "dataBlocks": [
@@ -273,23 +273,23 @@
               "url": "https://www.auktion-ag.ch/de/auction/58808"
             },
             {
+              "label": "AG8843",
+              "value": "2,800 CHF",
+              "detail": "current bid",
+              "date": "2026-11-11T20:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58809"
+            },
+            {
               "label": "AG10048",
               "value": "2,520 CHF",
               "detail": "current bid",
               "date": "2026-11-11T20:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58812"
-            },
-            {
-              "label": "AG8843",
-              "value": "2,400 CHF",
-              "detail": "current bid",
-              "date": "2026-11-11T20:00:00.000Z",
-              "url": "https://www.auktion-ag.ch/de/auction/58809"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion-ag.ch/de/",
-          "updatedAt": "2026-10-30T12:52:32.857Z"
+          "updatedAt": "2026-10-30T22:19:25.949Z"
         },
         {
           "id": "meteo",
@@ -298,12 +298,12 @@
           "items": [
             {
               "label": "Aarau",
-              "value": "11 °C",
-              "detail": "today from 5 to 11 °C"
+              "value": "7 °C",
+              "detail": "today from 5 to 9 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-30T15:13:06.562Z"
+          "updatedAt": "2026-10-30T20:58:15.445Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -341,7 +341,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -417,7 +417,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "de": {
       "canton": "AG",
@@ -434,7 +434,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "18",
-          "note": "mittleres Gebot 1’020 CHF"
+          "note": "mittleres Gebot 1’270 CHF"
         }
       ],
       "dataBlocks": [
@@ -466,23 +466,23 @@
               "url": "https://www.auktion-ag.ch/de/auction/58808"
             },
             {
+              "label": "AG8843",
+              "value": "2’800 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-11-11T20:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58809"
+            },
+            {
               "label": "AG10048",
               "value": "2’520 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-11-11T20:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58812"
-            },
-            {
-              "label": "AG8843",
-              "value": "2’400 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-11-11T20:00:00.000Z",
-              "url": "https://www.auktion-ag.ch/de/auction/58809"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion-ag.ch/de/",
-          "updatedAt": "2026-10-30T12:52:32.857Z"
+          "updatedAt": "2026-10-30T22:19:25.949Z"
         },
         {
           "id": "meteo",
@@ -491,12 +491,12 @@
           "items": [
             {
               "label": "Aarau",
-              "value": "11 °C",
-              "detail": "heute 5 bis 11 °C"
+              "value": "7 °C",
+              "detail": "heute 5 bis 9 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-30T15:13:06.562Z"
+          "updatedAt": "2026-10-30T20:58:15.445Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -534,7 +534,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -610,7 +610,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "fr": {
       "canton": "AG",
@@ -627,7 +627,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "18",
-          "note": "offre centrale 1 020 CHF"
+          "note": "offre centrale 1 270 CHF"
         }
       ],
       "dataBlocks": [
@@ -659,23 +659,23 @@
               "url": "https://www.auktion-ag.ch/de/auction/58808"
             },
             {
+              "label": "AG8843",
+              "value": "2 800 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-11-11T20:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58809"
+            },
+            {
               "label": "AG10048",
               "value": "2 520 CHF",
               "detail": "offre actuelle",
               "date": "2026-11-11T20:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58812"
-            },
-            {
-              "label": "AG8843",
-              "value": "2 400 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-11-11T20:00:00.000Z",
-              "url": "https://www.auktion-ag.ch/de/auction/58809"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion-ag.ch/de/",
-          "updatedAt": "2026-10-30T12:52:32.857Z"
+          "updatedAt": "2026-10-30T22:19:25.949Z"
         },
         {
           "id": "meteo",
@@ -684,12 +684,12 @@
           "items": [
             {
               "label": "Aarau",
-              "value": "11 °C",
-              "detail": "aujourd’hui de 5 à 11 °C"
+              "value": "7 °C",
+              "detail": "aujourd’hui de 5 à 9 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-30T15:13:06.562Z"
+          "updatedAt": "2026-10-30T20:58:15.445Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -727,7 +727,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -799,7 +799,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     }
   }
 }

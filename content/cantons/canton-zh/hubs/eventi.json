@@ -4,12 +4,12 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-10-30T06:23:49.454Z",
-  "contentHash": "f16116691f9ce3306a250c4da12b4bfc9a2af936e3f2a872aed67059917d0f85",
+  "updatedAt": "2026-10-31T06:15:08.747Z",
+  "contentHash": "e5f0ed53cd04e58f0c7facde647cd6e2be1fae3f312b47e689f3b2eb30e3c59c",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-29T21:23:37.654Z",
+      "updatedAt": "2026-10-30T13:23:17.161Z",
       "keyFacts": 1
     }
   ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Seniorennachmittag",
-              "detail": "Evang.-ref. Kirchgemeindehaus, Dietikon",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/events/music/dietikon/seniorennachmittag_AgwsJqt"
+              "label": "Fast Feet Floor",
+              "detail": "Winterthur",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fast-feet-floor/"
             },
             {
-              "label": "Erzählnacht im Purzelhuus",
-              "detail": "Illnau, Illnau-Effretikon",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erzaehlnacht-im-purzelhuus/"
+              "label": "17. Kellerämterlauf",
+              "detail": "Schützenhaus Jonen-Ottenbach, Ottenbach",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/17-kelleraemterlauf/"
             },
             {
-              "label": "Krebsexkursion",
-              "detail": "Sihlwald",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/krebsexkursion/"
+              "label": "Hundemilitary- im Einsatz für die Tiere",
+              "detail": "8154 Oberglatt ZH, Oberglatt",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/hundemilitary-im-einsatz-fuer-die-tiere/"
             },
             {
-              "label": "Sporthilfe Super10Kampf 2026 - VIP Package",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sporthilfe-super10kampf-2026-vip-package/"
+              "label": "Kochkurs für Seniorinnen und Senioren - OV Rüti",
+              "detail": "Rüti ZH, Rüti (ZH)",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kochkurs-fuer-seniorinnen-und-senioren-ov-rueti/"
             },
             {
-              "label": "Plausch-Jassturnier",
-              "detail": "Urdorf",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/plausch-jassturnier/"
+              "label": "Repair-Café",
+              "detail": "Sekundarschule Worbiger, Rümlang",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/ruemlang/repair-cafe_ACgc25N"
             },
             {
-              "label": "City Special - Frühabendmusik",
-              "detail": "Christ.-kath. Augustinerkirche",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/zuerich/konzert-klassik/city-special-fruehabendmusik_AXPkh3d"
+              "label": "Workshop Tanzen (ohne Partner)",
+              "detail": "Bewusstes Bewegen GmbH, Uster",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/uster/workshop-tanz_A2kqUDt"
             },
             {
-              "label": "Feierabendmusik",
-              "detail": "Kloten",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/feierabendmusik-1/"
+              "label": "Oktoberfest im Bruggwiesen",
+              "detail": "Effretikon, Illnau-Effretikon",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oktoberfest-im-bruggwiesen/"
             },
             {
-              "label": "Absenden End- und Wyberschiessen",
-              "detail": "Schützenhaus Eichholz Aesch ZH",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/absenden-end-und-wyberschiessen/"
+              "label": "Chum in Stall...",
+              "detail": "Dietikon",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/chum-in-stall-2/"
             },
             {
-              "label": "Degustazione delle massime rarità di whisky e musica - Un'esperienza irripetibile",
-              "detail": "Volkshaus Zürich, Zürich",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/whisky-und-music-top-raritaeten-tasting-once-in-a-lifetime_AdSR5fG"
+              "label": "Der kleine Prinz",
+              "detail": "Stadthaus, Winterthur",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/der-kleine-prinz-4/"
             },
             {
-              "label": "Ladies Night 2026",
-              "detail": "Hinwil",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ladies-night-2026/"
+              "label": "Heart w/ Fahlberg & Kotier",
+              "detail": "Schauspielhaus Schiffbau",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/heart-w-fahlberg-und-kotier_ArLYSkN"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zurigo/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "en": {
       "canton": "ZH",
@@ -144,69 +144,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Seniorennachmittag",
-              "detail": "Evang.-ref. Kirchgemeindehaus, Dietikon",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/events/music/dietikon/seniorennachmittag_AgwsJqt"
+              "label": "Fast Feet Floor",
+              "detail": "Winterthur",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fast-feet-floor/"
             },
             {
-              "label": "Erzählnacht im Purzelhuus",
-              "detail": "Illnau, Illnau-Effretikon",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erzaehlnacht-im-purzelhuus/"
+              "label": "17. Kellerämterlauf",
+              "detail": "Schützenhaus Jonen-Ottenbach, Ottenbach",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/17-kelleraemterlauf/"
             },
             {
-              "label": "Krebsexkursion",
-              "detail": "Sihlwald",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/krebsexkursion/"
+              "label": "Hundemilitary- im Einsatz für die Tiere",
+              "detail": "8154 Oberglatt ZH, Oberglatt",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/hundemilitary-im-einsatz-fuer-die-tiere/"
             },
             {
-              "label": "Sporthilfe Super10Kampf 2026 - VIP Package",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sporthilfe-super10kampf-2026-vip-package/"
+              "label": "Kochkurs für Seniorinnen und Senioren - OV Rüti",
+              "detail": "Rüti ZH, Rüti (ZH)",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kochkurs-fuer-seniorinnen-und-senioren-ov-rueti/"
             },
             {
-              "label": "Plausch-Jassturnier",
-              "detail": "Urdorf",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/plausch-jassturnier/"
+              "label": "Repair-Café",
+              "detail": "Sekundarschule Worbiger, Rümlang",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/ruemlang/repair-cafe_ACgc25N"
             },
             {
-              "label": "City Special - Frühabendmusik",
-              "detail": "Christ.-kath. Augustinerkirche",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/zuerich/konzert-klassik/city-special-fruehabendmusik_AXPkh3d"
+              "label": "Workshop Tanzen (ohne Partner)",
+              "detail": "Bewusstes Bewegen GmbH, Uster",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/uster/workshop-tanz_A2kqUDt"
             },
             {
-              "label": "Feierabendmusik",
-              "detail": "Kloten",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/feierabendmusik-1/"
+              "label": "Oktoberfest at Bruggwiesen",
+              "detail": "Effretikon, Illnau-Effretikon",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oktoberfest-im-bruggwiesen/"
             },
             {
-              "label": "Absenden End- und Wyberschiessen",
-              "detail": "Schützenhaus Eichholz Aesch ZH",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/absenden-end-und-wyberschiessen/"
+              "label": "Chum in Stall...",
+              "detail": "Dietikon",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/chum-in-stall-2/"
             },
             {
-              "label": "Whiskey & Music: Tasting of Top Rarities—Once in a Lifetime",
-              "detail": "Volkshaus Zürich, Zürich",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/whisky-und-music-top-raritaeten-tasting-once-in-a-lifetime_AdSR5fG"
+              "label": "Der kleine Prinz",
+              "detail": "Stadthaus, Winterthur",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/der-kleine-prinz-4/"
             },
             {
-              "label": "Ladies Night 2026",
-              "detail": "Hinwil",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ladies-night-2026/"
+              "label": "Heart w",
+              "detail": "Schauspielhaus Schiffbau",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/heart-w-fahlberg-und-kotier_ArLYSkN"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zurich/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "de": {
       "canton": "ZH",
@@ -255,69 +255,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Seniorennachmittag",
-              "detail": "Evang.-ref. Kirchgemeindehaus, Dietikon",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/events/music/dietikon/seniorennachmittag_AgwsJqt"
+              "label": "Fast Feet Floor",
+              "detail": "Winterthur",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fast-feet-floor/"
             },
             {
-              "label": "Erzählnacht im Purzelhuus",
-              "detail": "Illnau, Illnau-Effretikon",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erzaehlnacht-im-purzelhuus/"
+              "label": "17. Kellerämterlauf",
+              "detail": "Schützenhaus Jonen-Ottenbach, Ottenbach",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/17-kelleraemterlauf/"
             },
             {
-              "label": "Krebsexkursion",
-              "detail": "Sihlwald",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/krebsexkursion/"
+              "label": "Hundemilitary- im Einsatz für die Tiere",
+              "detail": "8154 Oberglatt ZH, Oberglatt",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/hundemilitary-im-einsatz-fuer-die-tiere/"
             },
             {
-              "label": "Sporthilfe Super10Kampf 2026 - VIP Package",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sporthilfe-super10kampf-2026-vip-package/"
+              "label": "Kochkurs für Seniorinnen und Senioren - OV Rüti",
+              "detail": "Rüti ZH, Rüti (ZH)",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kochkurs-fuer-seniorinnen-und-senioren-ov-rueti/"
             },
             {
-              "label": "Plausch-Jassturnier",
-              "detail": "Urdorf",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/plausch-jassturnier/"
+              "label": "Repair-Café",
+              "detail": "Sekundarschule Worbiger, Rümlang",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/ruemlang/repair-cafe_ACgc25N"
             },
             {
-              "label": "City Special - Frühabendmusik",
-              "detail": "Christ.-kath. Augustinerkirche",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/zuerich/konzert-klassik/city-special-fruehabendmusik_AXPkh3d"
+              "label": "Workshop Tanzen (ohne Partner)",
+              "detail": "Bewusstes Bewegen GmbH, Uster",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/uster/workshop-tanz_A2kqUDt"
             },
             {
-              "label": "Feierabendmusik",
-              "detail": "Kloten",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/feierabendmusik-1/"
+              "label": "Oktoberfest auf der Bruggwiese",
+              "detail": "Effretikon, Illnau-Effretikon",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oktoberfest-im-bruggwiesen/"
             },
             {
-              "label": "Absenden End- und Wyberschiessen",
-              "detail": "Schützenhaus Eichholz Aesch ZH",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/absenden-end-und-wyberschiessen/"
+              "label": "Chum in Stall...",
+              "detail": "Dietikon",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/chum-in-stall-2/"
             },
             {
-              "label": "Whisky & Music Top Raritäten Tasting - Once in a Lifetime",
-              "detail": "Volkshaus Zürich, Zürich",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/whisky-und-music-top-raritaeten-tasting-once-in-a-lifetime_AdSR5fG"
+              "label": "Der kleine Prinz",
+              "detail": "Stadthaus, Winterthur",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/der-kleine-prinz-4/"
             },
             {
-              "label": "Ladies Night 2026",
-              "detail": "Hinwil",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ladies-night-2026/"
+              "label": "Herz mit Fahlberg & Kotier",
+              "detail": "Schauspielhaus Schiffbau",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/heart-w-fahlberg-und-kotier_ArLYSkN"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zurich/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "fr": {
       "canton": "ZH",
@@ -366,69 +366,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Seniorennachmittag",
-              "detail": "Evang.-ref. Kirchgemeindehaus, Dietikon",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/events/music/dietikon/seniorennachmittag_AgwsJqt"
+              "label": "Fast Feet Floor",
+              "detail": "Winterthur",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fast-feet-floor/"
             },
             {
-              "label": "Erzählnacht im Purzelhuus",
-              "detail": "Illnau, Illnau-Effretikon",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/erzaehlnacht-im-purzelhuus/"
+              "label": "17. Kellerämterlauf",
+              "detail": "Schützenhaus Jonen-Ottenbach, Ottenbach",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/17-kelleraemterlauf/"
             },
             {
-              "label": "Krebsexkursion",
-              "detail": "Sihlwald",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/krebsexkursion/"
+              "label": "Hundemilitary- im Einsatz für die Tiere",
+              "detail": "8154 Oberglatt ZH, Oberglatt",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/hundemilitary-im-einsatz-fuer-die-tiere/"
             },
             {
-              "label": "Sporthilfe Super10Kampf 2026 - VIP Package",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sporthilfe-super10kampf-2026-vip-package/"
+              "label": "Kochkurs für Seniorinnen und Senioren - OV Rüti",
+              "detail": "Rüti ZH, Rüti (ZH)",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kochkurs-fuer-seniorinnen-und-senioren-ov-rueti/"
             },
             {
-              "label": "Plausch-Jassturnier",
-              "detail": "Urdorf",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/plausch-jassturnier/"
+              "label": "Repair-Café",
+              "detail": "Sekundarschule Worbiger, Rümlang",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/ruemlang/repair-cafe_ACgc25N"
             },
             {
-              "label": "City Special - Frühabendmusik",
-              "detail": "Christ.-kath. Augustinerkirche",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/zuerich/konzert-klassik/city-special-fruehabendmusik_AXPkh3d"
+              "label": "Workshop Tanzen (ohne Partner)",
+              "detail": "Bewusstes Bewegen GmbH, Uster",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/uster/workshop-tanz_A2kqUDt"
             },
             {
-              "label": "Feierabendmusik",
-              "detail": "Kloten",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/feierabendmusik-1/"
+              "label": "Oktoberfest à Bruggwiesen",
+              "detail": "Effretikon, Illnau-Effretikon",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oktoberfest-im-bruggwiesen/"
             },
             {
-              "label": "Absenden End- und Wyberschiessen",
-              "detail": "Schützenhaus Eichholz Aesch ZH",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/absenden-end-und-wyberschiessen/"
+              "label": "Chum in Stall...",
+              "detail": "Dietikon",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/chum-in-stall-2/"
             },
             {
-              "label": "Dégustation de grandes raretés : whisky et musique - Une expérience unique",
-              "detail": "Volkshaus Zürich, Zürich",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/whisky-und-music-top-raritaeten-tasting-once-in-a-lifetime_AdSR5fG"
+              "label": "Der kleine Prinz",
+              "detail": "Stadthaus, Winterthur",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/der-kleine-prinz-4/"
             },
             {
-              "label": "Ladies Night 2026",
-              "detail": "Hinwil",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ladies-night-2026/"
+              "label": "Heart avec Fahlberg & Kotier",
+              "detail": "Schauspielhaus Schiffbau",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/heart-w-fahlberg-und-kotier_ArLYSkN"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zurich/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     }
   }
 }

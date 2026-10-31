@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "eventi",
-  "updatedAt": "2026-10-30T19:31:58.244Z",
-  "contentHash": "19e832b16093a9b7ba576bf74e6a133e91a340df9e38ce7dce861e71d161f092",
+  "updatedAt": "2026-10-31T06:15:08.747Z",
+  "contentHash": "55da262e70d50dc2d791688ccc38b8134d894164d747cde250ca5b49b1c17b3c",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "75",
+          "value": "65",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,64 +33,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Live Musik in der Café-Bar mit dem Trio Querdöre",
-              "detail": "Café-Bar Bahnhof Unterwasser",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/unterwasser/live-musik-in-der-cafe-bar-mit-dem-trio-querdoere_ANfCUHZ"
+              "label": "Karaoke Night in der Brauerei St. Johann - Halloween Special",
+              "detail": "Brauerei St. Johann, Nesslau",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/karaoke-night-in-der-brauerei-st-johann-halloween-special/"
             },
             {
-              "label": "Live Musik in der Café-Bar mit dem Trio Querdöre",
-              "detail": "Unterwasser, Wildhaus-Alt St. Johann",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/live-musik-in-der-cafe-bar-mit-dem-trio-querdoere/"
+              "label": "Art for Tea",
+              "detail": "Forum Würth Rorschach, Rorschach",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/art-for-tea-2/"
             },
             {
-              "label": "Bügel & Bass - Secondhandkleider & Musik & leckere Drinks",
-              "detail": "Sax, Sennwald",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/buegel-bass-secondhandkleider-musik-leckere-drinks/"
+              "label": "klanghalt - im Oktober",
+              "detail": "Evang.-ref. Kirche St. Mangen",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/klanghalt-im-oktober_AQCvqQu"
             },
             {
-              "label": "CARROUSEL · Support-Act: SAWI (Sarina Wiesli)",
-              "detail": "Alte Gerbi, Oberuzwil",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/oberuzwil/carrousel-eclaircies_AK8Kw5B"
+              "label": "Ratzliedli und Jassen",
+              "detail": "Wildhaus",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ratzliedli-und-jassen/"
             },
             {
-              "label": "Dis, quand reviendras-tu – Hommage à Barbara",
-              "detail": "Theater 111",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/dis-quand-reviendras-tu-hommage-a-barbara_ARgrqeg"
+              "label": "Die Brahmskommode – ein literarisch-musikalischer Abend",
+              "detail": "opus278",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/die-brahmskommode_AYDHSfm"
             },
             {
-              "label": "20. Jazz Night Rorschach",
-              "detail": "Innenstadt, Rorschach",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/rorschach/19-jazz-night-rorschach_Afj5vhe"
+              "label": "Krimidinner mit Florian Rexer",
+              "detail": "Stump's Alpenrose AG, Wildhaus-Alt St. Johann",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/krimidinner-mit-florian-rexer/"
             },
             {
-              "label": "Anton Violinist & Friends 'Folk Passion'",
-              "detail": "Tonhalle",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/anton-violinist-und-friends-folk-passion_A2cvnDT"
+              "label": "Streusel on Top",
+              "detail": "Verrucano Mels - Kultur und Kongresshaus, Mels",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/streusel-on-top/"
             },
             {
-              "label": "Duo Kaleido – das Duo, das musikalische Welten dreht!",
-              "detail": "Kaffeehaus",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/duo-kaleido-das-duo-das-musikalische-welten-dreht_AWiKWbf"
+              "label": "Hart auf Hart - Sie sagen Stopp",
+              "detail": "Mogelsberg",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hart-auf-hart-sie-sagen-stopp-1/"
             },
             {
-              "label": "Gitarrenkonzert Roland Mueller",
-              "detail": "St. Gallen",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gitarrenkonzert-roland-mueller-5/"
+              "label": "Allstar Poetry Slam St.Gallen",
+              "detail": "Lokremise St.Gallen, St. Gallen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/allstar-poetry-slam-stgallen/"
             },
             {
-              "label": "Frölein da Capo",
-              "detail": "Tonhalle Wil",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/froelein-da-capo_AvEbJ1s"
+              "label": "LUNIK",
+              "detail": "Restaurant Eintracht",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/kirchberg-sg/lunik_Av9XdZZ"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -117,7 +117,7 @@
           "url": "/eventi/san-gallo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "en": {
       "canton": "SG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "75",
+          "value": "65",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,64 +138,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Live Musik in der Café-Bar mit dem Trio Querdöre",
-              "detail": "Café-Bar Bahnhof Unterwasser",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/unterwasser/live-musik-in-der-cafe-bar-mit-dem-trio-querdoere_ANfCUHZ"
+              "label": "Karaoke Night in der Brauerei St. Johann - Halloween Special",
+              "detail": "Brauerei St. Johann, Nesslau",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/karaoke-night-in-der-brauerei-st-johann-halloween-special/"
             },
             {
-              "label": "Live Musik in der Café-Bar mit dem Trio Querdöre",
-              "detail": "Unterwasser, Wildhaus-Alt St. Johann",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/live-musik-in-der-cafe-bar-mit-dem-trio-querdoere/"
+              "label": "Art for Tea",
+              "detail": "Forum Würth Rorschach, Rorschach",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/art-for-tea-2/"
             },
             {
-              "label": "Bügel & Bass - Secondhandkleider & Musik & leckere Drinks",
-              "detail": "Sax, Sennwald",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/buegel-bass-secondhandkleider-musik-leckere-drinks/"
+              "label": "klanghalt - im Oktober",
+              "detail": "Evang.-ref. Kirche St. Mangen",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/klanghalt-im-oktober_AQCvqQu"
             },
             {
-              "label": "CARROUSEL · Support-Act: SAWI (Sarina Wiesli)",
-              "detail": "Alte Gerbi, Oberuzwil",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/oberuzwil/carrousel-eclaircies_AK8Kw5B"
+              "label": "Ratzliedli und Jassen",
+              "detail": "Wildhaus",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ratzliedli-und-jassen/"
             },
             {
-              "label": "Dis, quand reviendras-tu – Hommage à Barbara",
-              "detail": "Theater 111",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/dis-quand-reviendras-tu-hommage-a-barbara_ARgrqeg"
+              "label": "Die Brahmskommode – ein literarisch-musikalischer Abend",
+              "detail": "opus278",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/die-brahmskommode_AYDHSfm"
             },
             {
-              "label": "20. Jazz Night Rorschach",
-              "detail": "Innenstadt, Rorschach",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/rorschach/19-jazz-night-rorschach_Afj5vhe"
+              "label": "Krimidinner mit Florian Rexer",
+              "detail": "Stump's Alpenrose AG, Wildhaus-Alt St. Johann",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/krimidinner-mit-florian-rexer/"
             },
             {
-              "label": "Anton Violinist & Friends 'Folk Passion'",
-              "detail": "Tonhalle",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/anton-violinist-und-friends-folk-passion_A2cvnDT"
+              "label": "Streusel on Top",
+              "detail": "Verrucano Mels - Kultur und Kongresshaus, Mels",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/streusel-on-top/"
             },
             {
-              "label": "Duo Kaleido – das Duo, das musikalische Welten dreht!",
-              "detail": "Kaffeehaus",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/duo-kaleido-das-duo-das-musikalische-welten-dreht_AWiKWbf"
+              "label": "Hart auf Hart - Sie sagen Stopp",
+              "detail": "Mogelsberg",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hart-auf-hart-sie-sagen-stopp-1/"
             },
             {
-              "label": "Gitarrenkonzert Roland Mueller",
-              "detail": "St. Gallen",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gitarrenkonzert-roland-mueller-5/"
+              "label": "Allstar Poetry Slam St.Gallen",
+              "detail": "Lokremise St.Gallen, St. Gallen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/allstar-poetry-slam-stgallen/"
             },
             {
-              "label": "Frölein da Capo",
-              "detail": "Tonhalle Wil",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/froelein-da-capo_AvEbJ1s"
+              "label": "LUNIK",
+              "detail": "Restaurant Eintracht",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/kirchberg-sg/lunik_Av9XdZZ"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -222,7 +222,7 @@
           "url": "/en/events/st-gallen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "de": {
       "canton": "SG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "75",
+          "value": "65",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,64 +243,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Live Musik in der Café-Bar mit dem Trio Querdöre",
-              "detail": "Café-Bar Bahnhof Unterwasser",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/unterwasser/live-musik-in-der-cafe-bar-mit-dem-trio-querdoere_ANfCUHZ"
+              "label": "Karaoke Night in der Brauerei St. Johann - Halloween Special",
+              "detail": "Brauerei St. Johann, Nesslau",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/karaoke-night-in-der-brauerei-st-johann-halloween-special/"
             },
             {
-              "label": "Live Musik in der Café-Bar mit dem Trio Querdöre",
-              "detail": "Unterwasser, Wildhaus-Alt St. Johann",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/live-musik-in-der-cafe-bar-mit-dem-trio-querdoere/"
+              "label": "Art for Tea",
+              "detail": "Forum Würth Rorschach, Rorschach",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/art-for-tea-2/"
             },
             {
-              "label": "Bügel & Bass - Secondhandkleider & Musik & leckere Drinks",
-              "detail": "Sax, Sennwald",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/buegel-bass-secondhandkleider-musik-leckere-drinks/"
+              "label": "klanghalt - im Oktober",
+              "detail": "Evang.-ref. Kirche St. Mangen",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/klanghalt-im-oktober_AQCvqQu"
             },
             {
-              "label": "CARROUSEL · Support-Act: SAWI (Sarina Wiesli)",
-              "detail": "Alte Gerbi, Oberuzwil",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/oberuzwil/carrousel-eclaircies_AK8Kw5B"
+              "label": "Ratzliedli und Jassen",
+              "detail": "Wildhaus",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ratzliedli-und-jassen/"
             },
             {
-              "label": "Dis, quand reviendras-tu – Hommage à Barbara",
-              "detail": "Theater 111",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/dis-quand-reviendras-tu-hommage-a-barbara_ARgrqeg"
+              "label": "Die Brahmskommode – ein literarisch-musikalischer Abend",
+              "detail": "opus278",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/die-brahmskommode_AYDHSfm"
             },
             {
-              "label": "20. Jazz Night Rorschach",
-              "detail": "Innenstadt, Rorschach",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/rorschach/19-jazz-night-rorschach_Afj5vhe"
+              "label": "Krimidinner mit Florian Rexer",
+              "detail": "Stump's Alpenrose AG, Wildhaus-Alt St. Johann",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/krimidinner-mit-florian-rexer/"
             },
             {
-              "label": "Anton Violinist & Friends 'Folk Passion'",
-              "detail": "Tonhalle",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/anton-violinist-und-friends-folk-passion_A2cvnDT"
+              "label": "Streusel on Top",
+              "detail": "Verrucano Mels - Kultur und Kongresshaus, Mels",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/streusel-on-top/"
             },
             {
-              "label": "Duo Kaleido – das Duo, das musikalische Welten dreht!",
-              "detail": "Kaffeehaus",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/duo-kaleido-das-duo-das-musikalische-welten-dreht_AWiKWbf"
+              "label": "Hart auf Hart - Sie sagen Stopp",
+              "detail": "Mogelsberg",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hart-auf-hart-sie-sagen-stopp-1/"
             },
             {
-              "label": "Gitarrenkonzert Roland Mueller",
-              "detail": "St. Gallen",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gitarrenkonzert-roland-mueller-5/"
+              "label": "Allstar Poetry Slam St.Gallen",
+              "detail": "Lokremise St.Gallen, St. Gallen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/allstar-poetry-slam-stgallen/"
             },
             {
-              "label": "Frölein da Capo",
-              "detail": "Tonhalle Wil",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/froelein-da-capo_AvEbJ1s"
+              "label": "LUNIK",
+              "detail": "Restaurant Eintracht",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/kirchberg-sg/lunik_Av9XdZZ"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/st-gallen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "fr": {
       "canton": "SG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "75",
+          "value": "65",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,64 +348,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Live Musik in der Café-Bar mit dem Trio Querdöre",
-              "detail": "Café-Bar Bahnhof Unterwasser",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/unterwasser/live-musik-in-der-cafe-bar-mit-dem-trio-querdoere_ANfCUHZ"
+              "label": "Karaoke Night in der Brauerei St. Johann - Halloween Special",
+              "detail": "Brauerei St. Johann, Nesslau",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/karaoke-night-in-der-brauerei-st-johann-halloween-special/"
             },
             {
-              "label": "Live Musik in der Café-Bar mit dem Trio Querdöre",
-              "detail": "Unterwasser, Wildhaus-Alt St. Johann",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/live-musik-in-der-cafe-bar-mit-dem-trio-querdoere/"
+              "label": "Art for Tea",
+              "detail": "Forum Würth Rorschach, Rorschach",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/art-for-tea-2/"
             },
             {
-              "label": "Bügel & Bass - Secondhandkleider & Musik & leckere Drinks",
-              "detail": "Sax, Sennwald",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/buegel-bass-secondhandkleider-musik-leckere-drinks/"
+              "label": "klanghalt - im Oktober",
+              "detail": "Evang.-ref. Kirche St. Mangen",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/klanghalt-im-oktober_AQCvqQu"
             },
             {
-              "label": "CARROUSEL · Support-Act: SAWI (Sarina Wiesli)",
-              "detail": "Alte Gerbi, Oberuzwil",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/oberuzwil/carrousel-eclaircies_AK8Kw5B"
+              "label": "Ratzliedli und Jassen",
+              "detail": "Wildhaus",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ratzliedli-und-jassen/"
             },
             {
-              "label": "Dis, quand reviendras-tu – Hommage à Barbara",
-              "detail": "Theater 111",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/dis-quand-reviendras-tu-hommage-a-barbara_ARgrqeg"
+              "label": "Die Brahmskommode – ein literarisch-musikalischer Abend",
+              "detail": "opus278",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/die-brahmskommode_AYDHSfm"
             },
             {
-              "label": "20. Jazz Night Rorschach",
-              "detail": "Innenstadt, Rorschach",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/rorschach/19-jazz-night-rorschach_Afj5vhe"
+              "label": "Krimidinner mit Florian Rexer",
+              "detail": "Stump's Alpenrose AG, Wildhaus-Alt St. Johann",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/krimidinner-mit-florian-rexer/"
             },
             {
-              "label": "Anton Violinist & Friends 'Folk Passion'",
-              "detail": "Tonhalle",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/anton-violinist-und-friends-folk-passion_A2cvnDT"
+              "label": "Streusel on Top",
+              "detail": "Verrucano Mels - Kultur und Kongresshaus, Mels",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/streusel-on-top/"
             },
             {
-              "label": "Duo Kaleido – das Duo, das musikalische Welten dreht!",
-              "detail": "Kaffeehaus",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/duo-kaleido-das-duo-das-musikalische-welten-dreht_AWiKWbf"
+              "label": "Hart auf Hart - Sie sagen Stopp",
+              "detail": "Mogelsberg",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hart-auf-hart-sie-sagen-stopp-1/"
             },
             {
-              "label": "Gitarrenkonzert Roland Mueller",
-              "detail": "St. Gallen",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gitarrenkonzert-roland-mueller-5/"
+              "label": "Allstar Poetry Slam St.Gallen",
+              "detail": "Lokremise St.Gallen, St. Gallen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/allstar-poetry-slam-stgallen/"
             },
             {
-              "label": "Frölein da Capo",
-              "detail": "Tonhalle Wil",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/froelein-da-capo_AvEbJ1s"
+              "label": "LUNIK",
+              "detail": "Restaurant Eintracht",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/kirchberg-sg/lunik_Av9XdZZ"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/saint-gall/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "eventi",
-  "updatedAt": "2026-10-30T06:23:49.454Z",
-  "contentHash": "8ff72163111a11e5962b3bb5888784ad72508081fdcc5e6a14405c3465c2eea0",
+  "updatedAt": "2026-10-31T06:15:08.747Z",
+  "contentHash": "864e1b56ae77d4e7a0275176339b3c48a055840e0a7848034909a108d4682bb8",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-29T21:23:37.654Z",
+      "updatedAt": "2026-10-30T13:23:17.161Z",
       "keyFacts": 1
     }
   ],
@@ -33,42 +33,6 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Zuger Märchenspaziergang: Halloween - die wahre(n) Geschichte(n)",
-              "detail": "Zug",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zuger-maerchenspaziergang-halloween-die-wahren-geschichten/"
-            },
-            {
-              "label": "RUEGO & FRIENDS – PLATTENTAUFE «Y»",
-              "detail": "Chollerhalle",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/ruego-und-friends-plattentaufe-y_ABtHdwh"
-            },
-            {
-              "label": "RUEGO & FRIENDS – PLATTENTAUFE «Y»",
-              "detail": "Zug",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ruego-friends-plattentaufe-y/"
-            },
-            {
-              "label": "Galgen, Rad und Scheiterhaufen. Die Taschenlampenführung für Erwachsene",
-              "detail": "Museum Burg Zug, Zug — in corso, ultimo giorno: 27 novembre 2026",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
-            },
-            {
-              "label": "Zuger Messe 2026",
-              "detail": "Stierenmarktareal, Zug — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/fr-ch/experiences/events/zuger-messe-2026/"
-            },
-            {
-              "label": "Gemeinsam sprechen und lernen",
-              "detail": "Zug — in corso, ultimo giorno: 10 novembre 2026",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
-            },
-            {
               "label": "ZuKi-Halloween",
               "detail": "Cham",
               "date": "2026-10-31",
@@ -81,6 +45,24 @@
               "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/manuel-stahlberger-es-geht_A7Hw3u3"
             },
             {
+              "label": "Galgen, Rad und Scheiterhaufen. Die Taschenlampenführung für Erwachsene",
+              "detail": "Museum Burg Zug, Zug — in corso, ultimo giorno: 27 novembre 2026",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
+            },
+            {
+              "label": "Zuger Messe 2026",
+              "detail": "Stierenmarktareal, Zug — in corso, ultimo giorno: 1 novembre 2026",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/fr-ch/experiences/events/zuger-messe-2026/"
+            },
+            {
+              "label": "Gemeinsam sprechen und lernen",
+              "detail": "Zug — in corso, ultimo giorno: 10 novembre 2026",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
+            },
+            {
               "label": "Balance im Familienalltag",
               "detail": "Bibliothek Zug, Zug",
               "date": "2026-11-05",
@@ -91,11 +73,29 @@
               "detail": "Bibliothek Zug, Zug",
               "date": "2026-11-05",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/podium-ueber-ernaehrung-und-gesundheit-genussvoll-und-gesund-essen_AiukKan"
+            },
+            {
+              "label": "Arthur Hnatek mit Sophie Le Meillour",
+              "detail": "Chollerhalle, Zug",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/arthur-hnatek-mit-sophie-le-meillour/"
+            },
+            {
+              "label": "Taschenlampenführung durch die Burg",
+              "detail": "Zug",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/taschenlampenfuehrung-durch-die-burg/"
+            },
+            {
+              "label": "Cena soul con Camen & Band",
+              "detail": "aigu Restaurant & Bar",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/eventi/musica/zugo/cena-soul-con-camen-und-band_AdaQ1B1"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zugo/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/zugo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "en": {
       "canton": "ZG",
@@ -138,42 +138,6 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Zuger Märchenspaziergang: Halloween - die wahre(n) Geschichte(n)",
-              "detail": "Zug",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zuger-maerchenspaziergang-halloween-die-wahren-geschichten/"
-            },
-            {
-              "label": "RUEGO & FRIENDS – PLATTENTAUFE «Y»",
-              "detail": "Chollerhalle",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/ruego-und-friends-plattentaufe-y_ABtHdwh"
-            },
-            {
-              "label": "RUEGO & FRIENDS – PLATTENTAUFE «Y»",
-              "detail": "Zug",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ruego-friends-plattentaufe-y/"
-            },
-            {
-              "label": "Gallows, Wheel, and Pyre: A Flashlight Tour for Adults",
-              "detail": "Museum Burg Zug, Zug — ongoing, last day: 27 November 2026",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
-            },
-            {
-              "label": "Zuger Messe 2026",
-              "detail": "Stierenmarktareal, Zug — ongoing, last day: 1 November 2026",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/fr-ch/experiences/events/zuger-messe-2026/"
-            },
-            {
-              "label": "Gemeinsam sprechen und lernen",
-              "detail": "Zug — ongoing, last day: 10 November 2026",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
-            },
-            {
               "label": "ZuKi-Halloween",
               "detail": "Cham",
               "date": "2026-10-31",
@@ -186,6 +150,24 @@
               "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/manuel-stahlberger-es-geht_A7Hw3u3"
             },
             {
+              "label": "Gallows, Wheel, and Pyre: A Flashlight Tour for Adults",
+              "detail": "Museum Burg Zug, Zug — ongoing, last day: 27 November 2026",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
+            },
+            {
+              "label": "Zuger Messe 2026",
+              "detail": "Stierenmarktareal, Zug — ongoing, last day: 1 November 2026",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/fr-ch/experiences/events/zuger-messe-2026/"
+            },
+            {
+              "label": "Gemeinsam sprechen und lernen",
+              "detail": "Zug — ongoing, last day: 10 November 2026",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
+            },
+            {
               "label": "Balance im Familienalltag",
               "detail": "Bibliothek Zug, Zug",
               "date": "2026-11-05",
@@ -196,11 +178,29 @@
               "detail": "Bibliothek Zug, Zug",
               "date": "2026-11-05",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/podium-ueber-ernaehrung-und-gesundheit-genussvoll-und-gesund-essen_AiukKan"
+            },
+            {
+              "label": "Arthur Hnatek mit Sophie Le Meillour",
+              "detail": "Chollerhalle, Zug",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/arthur-hnatek-mit-sophie-le-meillour/"
+            },
+            {
+              "label": "Taschenlampenführung durch die Burg",
+              "detail": "Zug",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/taschenlampenfuehrung-durch-die-burg/"
+            },
+            {
+              "label": "Soul Dinner with Camen & Band",
+              "detail": "aigu Restaurant & Bar",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/eventi/musica/zugo/cena-soul-con-camen-und-band_AdaQ1B1"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zug/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/zug/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "de": {
       "canton": "ZG",
@@ -243,42 +243,6 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Zuger Märchenspaziergang: Halloween - die wahre(n) Geschichte(n)",
-              "detail": "Zug",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zuger-maerchenspaziergang-halloween-die-wahren-geschichten/"
-            },
-            {
-              "label": "RUEGO & FRIENDS – PLATTENTAUFE «Y»",
-              "detail": "Chollerhalle",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/ruego-und-friends-plattentaufe-y_ABtHdwh"
-            },
-            {
-              "label": "RUEGO & FRIENDS – PLATTENTAUFE «Y»",
-              "detail": "Zug",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ruego-friends-plattentaufe-y/"
-            },
-            {
-              "label": "Galgen, Rad und Scheiterhaufen. Die Taschenlampenf Acrymmhrung f acrymmr er Acrymmachsene",
-              "detail": "Museum Burg Zug, Zug — läuft, letzter Tag: 27. November 2026",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
-            },
-            {
-              "label": "Zuger Messe 2026",
-              "detail": "Stierenmarktareal, Zug — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/fr-ch/experiences/events/zuger-messe-2026/"
-            },
-            {
-              "label": "Gemeinsam sprechen und lernen",
-              "detail": "Zug — läuft, letzter Tag: 10. November 2026",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
-            },
-            {
               "label": "ZuKi-Halloween",
               "detail": "Cham",
               "date": "2026-10-31",
@@ -291,6 +255,24 @@
               "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/manuel-stahlberger-es-geht_A7Hw3u3"
             },
             {
+              "label": "Galgen, Rad und Scheiterhaufen. Die Taschenlampenf Acrymmhrung f acrymmr er Acrymmachsene",
+              "detail": "Museum Burg Zug, Zug — läuft, letzter Tag: 27. November 2026",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
+            },
+            {
+              "label": "Zuger Messe 2026",
+              "detail": "Stierenmarktareal, Zug — läuft, letzter Tag: 1. November 2026",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/fr-ch/experiences/events/zuger-messe-2026/"
+            },
+            {
+              "label": "Gemeinsam sprechen und lernen",
+              "detail": "Zug — läuft, letzter Tag: 10. November 2026",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
+            },
+            {
               "label": "Balance im Familienalltag",
               "detail": "Bibliothek Zug, Zug",
               "date": "2026-11-05",
@@ -301,11 +283,29 @@
               "detail": "Bibliothek Zug, Zug",
               "date": "2026-11-05",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/podium-ueber-ernaehrung-und-gesundheit-genussvoll-und-gesund-essen_AiukKan"
+            },
+            {
+              "label": "Arthur Hnatek mit Sophie Le Meillour",
+              "detail": "Chollerhalle, Zug",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/arthur-hnatek-mit-sophie-le-meillour/"
+            },
+            {
+              "label": "Taschenlampenführung durch die Burg",
+              "detail": "Zug",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/taschenlampenfuehrung-durch-die-burg/"
+            },
+            {
+              "label": "Soul Dinner mit Camen & Band",
+              "detail": "aigu Restaurant & Bar",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/eventi/musica/zugo/cena-soul-con-camen-und-band_AdaQ1B1"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zug/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/zug/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "fr": {
       "canton": "ZG",
@@ -348,42 +348,6 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Zuger Märchenspaziergang: Halloween - die wahre(n) Geschichte(n)",
-              "detail": "Zug",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zuger-maerchenspaziergang-halloween-die-wahren-geschichten/"
-            },
-            {
-              "label": "RUEGO & FRIENDS – PLATTENTAUFE «Y»",
-              "detail": "Chollerhalle",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/ruego-und-friends-plattentaufe-y_ABtHdwh"
-            },
-            {
-              "label": "RUEGO & FRIENDS – PLATTENTAUFE «Y»",
-              "detail": "Zug",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ruego-friends-plattentaufe-y/"
-            },
-            {
-              "label": "La potence, la roue et le bûcher. La visite guidée à la lampe de poche pour adultes",
-              "detail": "Museum Burg Zug, Zug — en cours, dernier jour : 27 novembre 2026",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
-            },
-            {
-              "label": "Zuger Messe 2026",
-              "detail": "Stierenmarktareal, Zug — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/fr-ch/experiences/events/zuger-messe-2026/"
-            },
-            {
-              "label": "Gemeinsam sprechen und lernen",
-              "detail": "Zug — en cours, dernier jour : 10 novembre 2026",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
-            },
-            {
               "label": "ZuKi-Halloween",
               "detail": "Cham",
               "date": "2026-10-31",
@@ -396,6 +360,24 @@
               "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/manuel-stahlberger-es-geht_A7Hw3u3"
             },
             {
+              "label": "La potence, la roue et le bûcher. La visite guidée à la lampe de poche pour adultes",
+              "detail": "Museum Burg Zug, Zug — en cours, dernier jour : 27 novembre 2026",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
+            },
+            {
+              "label": "Zuger Messe 2026",
+              "detail": "Stierenmarktareal, Zug — en cours, dernier jour : 1er novembre 2026",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/fr-ch/experiences/events/zuger-messe-2026/"
+            },
+            {
+              "label": "Gemeinsam sprechen und lernen",
+              "detail": "Zug — en cours, dernier jour : 10 novembre 2026",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
+            },
+            {
               "label": "Balance im Familienalltag",
               "detail": "Bibliothek Zug, Zug",
               "date": "2026-11-05",
@@ -406,11 +388,29 @@
               "detail": "Bibliothek Zug, Zug",
               "date": "2026-11-05",
               "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/podium-ueber-ernaehrung-und-gesundheit-genussvoll-und-gesund-essen_AiukKan"
+            },
+            {
+              "label": "Arthur Hnatek mit Sophie Le Meillour",
+              "detail": "Chollerhalle, Zug",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/arthur-hnatek-mit-sophie-le-meillour/"
+            },
+            {
+              "label": "Taschenlampenführung durch die Burg",
+              "detail": "Zug",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/taschenlampenfuehrung-durch-die-burg/"
+            },
+            {
+              "label": "Soirée « Soul Dinner » avec Camen et son groupe",
+              "detail": "aigu Restaurant & Bar",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/eventi/musica/zugo/cena-soul-con-camen-und-band_AdaQ1B1"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zoug/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/zoug/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     }
   }
 }

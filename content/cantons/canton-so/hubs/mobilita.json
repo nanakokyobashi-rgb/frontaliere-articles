@@ -4,17 +4,17 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "mobilita",
-  "updatedAt": "2026-10-30T19:31:58.244Z",
-  "contentHash": "037b7618020640240c81ca2c254b881629e8f98f888efd110ee5513be701c66b",
+  "updatedAt": "2026-10-31T06:15:08.747Z",
+  "contentHash": "a4a786316816cc330811a6ed52e37add2a046d66464b4f95fc066b38f7e1412b",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-30T13:39:45.803Z",
+      "updatedAt": "2026-10-30T20:12:21.426Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-30T11:41:14.746Z",
+      "updatedAt": "2026-10-30T21:45:03.956Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "6",
+          "value": "5",
           "note": "segnalazioni aggiornate: 30 ottobre 2026"
         },
         {
@@ -42,12 +42,6 @@
           "title": "Chiusure, cantieri e disagi",
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
-            {
-              "label": "A1 Berna <-> Zurigo Raccordo autostradale Raccordo di Luterbach Situazione: problemi di traffico cantiere Limitazione del traffico: corsia d'emergenza chiusa Aggiunta 1: limite temporaneo larghezza…",
-              "value": "Chiusura",
-              "detail": "fine prevista: 30 novembre 2026",
-              "date": "2025-04-28T03:00:00.000Z"
-            },
             {
               "label": "A5 Bienne <-> Soletta tra Svincolo autostradale Soletta-Sud E Svincolo autostradale Soletta-Est Situazione: chiusa cantiere Limitazione del traffico: corsia chiusa",
               "value": "Chiusura",
@@ -79,19 +73,26 @@
               "date": "2026-10-22T06:00:00.000Z"
             },
             {
-              "label": "A1 Bern -> Zürich tra Svincolo autostradale Kriegstetten E Raccordo autostradale Diramazione Härkingen Situazione: colonna Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 15",
-              "value": "Traffico",
-              "date": "2026-10-30T12:26:00.000Z"
-            },
-            {
               "label": "Balsthal <-> Laufen tra Luogo Oberbeinwil E Passo Passwang Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette",
               "value": "Cantiere",
               "detail": "fine prevista: 31 dicembre 2028",
               "date": "2024-12-30T04:49:00.000Z"
+            },
+            {
+              "label": "Balsthal <-> Laufen tra Passo Passwang E Luogo Oberbeinwil Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette",
+              "value": "Cantiere",
+              "detail": "fine prevista: 31 dicembre 2029",
+              "date": "2024-12-30T05:49:00.000Z"
+            },
+            {
+              "label": "A2 Lucerna <-> Basilea Svincolo autostradale Egerkingen Situazione: problemi di traffico cantiere, lunghezza [km] 0.6 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.5",
+              "value": "Cantiere",
+              "detail": "fine prevista: 30 luglio 2027",
+              "date": "2025-04-11T05:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-30T13:39:45.803Z"
+          "updatedAt": "2026-10-30T20:12:21.426Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -114,7 +115,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -160,7 +161,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "en": {
       "canton": "SO",
@@ -170,7 +171,7 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "6",
+          "value": "5",
           "note": "reports as of 30 October 2026"
         },
         {
@@ -185,12 +186,6 @@
           "title": "Closures, roadworks and disruptions",
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
-            {
-              "label": "A1 Berna <-> Zurigo Raccordo autostradale Raccordo di Luterbach Situazione: problemi di traffico cantiere Limitazione del traffico: corsia d'emergenza chiusa Aggiunta 1: limite temporaneo larghezza…",
-              "value": "Closure",
-              "detail": "until 30 November 2026",
-              "date": "2025-04-28T03:00:00.000Z"
-            },
             {
               "label": "A5 Bienne <-> Soletta tra Svincolo autostradale Soletta-Sud E Svincolo autostradale Soletta-Est Situazione: chiusa cantiere Limitazione del traffico: corsia chiusa",
               "value": "Closure",
@@ -222,19 +217,26 @@
               "date": "2026-10-22T06:00:00.000Z"
             },
             {
-              "label": "A1 Bern -> Zürich tra Svincolo autostradale Kriegstetten E Raccordo autostradale Diramazione Härkingen Situazione: colonna Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 15",
-              "value": "Traffic",
-              "date": "2026-10-30T12:26:00.000Z"
-            },
-            {
               "label": "Balsthal <-> Laufen tra Luogo Oberbeinwil E Passo Passwang Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette",
               "value": "Roadworks",
               "detail": "until 31 December 2028",
               "date": "2024-12-30T04:49:00.000Z"
+            },
+            {
+              "label": "Balsthal <-> Laufen tra Passo Passwang E Luogo Oberbeinwil Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette",
+              "value": "Roadworks",
+              "detail": "until 31 December 2029",
+              "date": "2024-12-30T05:49:00.000Z"
+            },
+            {
+              "label": "A2 Lucerna <-> Basilea Svincolo autostradale Egerkingen Situazione: problemi di traffico cantiere, lunghezza [km] 0.6 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.5",
+              "value": "Roadworks",
+              "detail": "until 30 July 2027",
+              "date": "2025-04-11T05:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-30T13:39:45.803Z"
+          "updatedAt": "2026-10-30T20:12:21.426Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -257,7 +259,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -302,7 +304,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "de": {
       "canton": "SO",
@@ -312,7 +314,7 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "6",
+          "value": "5",
           "note": "Meldungen vom 30. Oktober 2026"
         },
         {
@@ -327,12 +329,6 @@
           "title": "Sperrungen, Baustellen und Störungen",
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
-            {
-              "label": "A1 Bern <-> Zürich Autobahndreieck Verzweigung Luterbach Sachlage: Verkehrsbehinderung Baustelle Verkehrsführung: Pannenstreifen gesperrt Zusatz 1: vorübergehende Begrenzung der Breite…",
-              "value": "Sperrung",
-              "detail": "bis 30. November 2026",
-              "date": "2025-04-28T03:00:00.000Z"
-            },
             {
               "label": "A5 Biel <-> Solothurn zwischen Anschluss Solothurn-Süd und Anschluss Solothurn-Ost Sachlage: Strecke gesperrt Baustelle Verkehrsführung: Fahrstreifen gesperrt",
               "value": "Sperrung",
@@ -364,19 +360,26 @@
               "date": "2026-10-22T06:00:00.000Z"
             },
             {
-              "label": "A1 Bern -> Zürich zwischen Anschluss Kriegstetten und Autobahndreieck Verzweigung Härkingen Sachlage: Stau Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 15",
-              "value": "Verkehr",
-              "date": "2026-10-30T12:26:00.000Z"
-            },
-            {
               "label": "Balsthal <-> Laufen zwischen Ortschaft Oberbeinwil und Pass Passwang Sachlage: Verkehrsbehinderung Baustelle Verkehrsführung: Fahrbahnverengung",
               "value": "Baustelle",
               "detail": "bis 31. Dezember 2028",
               "date": "2024-12-30T04:49:00.000Z"
+            },
+            {
+              "label": "Balsthal <-> Laufen zwischen Pass Passwang und Ortschaft Oberbeinwil Sachlage: Verkehrsbehinderung Baustelle Verkehrsführung: Fahrbahnverengung",
+              "value": "Baustelle",
+              "detail": "bis 31. Dezember 2029",
+              "date": "2024-12-30T05:49:00.000Z"
+            },
+            {
+              "label": "A2 Luzern <-> Basel Anschluss Egerkingen Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.6 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.5",
+              "value": "Baustelle",
+              "detail": "bis 30. Juli 2027",
+              "date": "2025-04-11T05:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-30T13:39:45.803Z"
+          "updatedAt": "2026-10-30T20:12:21.426Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -399,7 +402,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -444,7 +447,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "fr": {
       "canton": "SO",
@@ -454,7 +457,7 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "6",
+          "value": "5",
           "note": "signalements au 30 octobre 2026"
         },
         {
@@ -469,12 +472,6 @@
           "title": "Fermetures, chantiers et perturbations",
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
-            {
-              "label": "A1 Berne <-> Zurich Echangeur Echangeur de Luterbach Situation: trafic perturbé travaux Gestion du trafic: bande d'arrêt d'urgence fermée Complément 1: limitation temporaire de largeur largeur de la…",
-              "value": "Fermeture",
-              "detail": "jusqu’au 30 novembre 2026",
-              "date": "2025-04-28T03:00:00.000Z"
-            },
             {
               "label": "A5 Bienne <-> Soleure entre Jonction autoroutière Soleure-Sud et Jonction autoroutière Soleure-Est Situation: fermé travaux Gestion du trafic: voie fermée",
               "value": "Fermeture",
@@ -506,19 +503,26 @@
               "date": "2026-10-22T06:00:00.000Z"
             },
             {
-              "label": "A1 Berne -> Zurich entre Jonction autoroutière Kriegstetten et Echangeur Echangeur de Härkingen Situation: bouchon Raison: surcharge de trafic Complément 1: retards Nbre. [min] 15",
-              "value": "Trafic",
-              "date": "2026-10-30T12:26:00.000Z"
-            },
-            {
               "label": "Balsthal <-> Laufon entre Localité Oberbeinwil et Col Passwang Situation: trafic perturbé travaux Gestion du trafic: rétrécissement des voies",
               "value": "Chantier",
               "detail": "jusqu’au 31 décembre 2028",
               "date": "2024-12-30T04:49:00.000Z"
+            },
+            {
+              "label": "Balsthal <-> Laufon entre Col Passwang et Localité Oberbeinwil Situation: trafic perturbé travaux Gestion du trafic: rétrécissement des voies",
+              "value": "Chantier",
+              "detail": "jusqu’au 31 décembre 2029",
+              "date": "2024-12-30T05:49:00.000Z"
+            },
+            {
+              "label": "A2 Lucerne <-> Bâle Jonction autoroutière Egerkingen Situation: trafic perturbé travaux, longueur [km] 0.6 Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.5",
+              "value": "Chantier",
+              "detail": "jusqu’au 30 juillet 2027",
+              "date": "2025-04-11T05:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-30T13:39:45.803Z"
+          "updatedAt": "2026-10-30T20:12:21.426Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -541,7 +545,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -587,7 +591,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     }
   }
 }

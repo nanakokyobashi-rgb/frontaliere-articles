@@ -4,12 +4,12 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "eventi",
-  "updatedAt": "2026-10-30T06:23:49.454Z",
-  "contentHash": "47f096372bc37a33bf304d956c02cd8c4c889f3263912f74bc00adcd691cfadd",
+  "updatedAt": "2026-10-31T06:15:08.747Z",
+  "contentHash": "e14b12b358610b7ea2467ee4bd2588e3c88ad48135c65aaf16f69b663c205ebb",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-29T21:23:37.654Z",
+      "updatedAt": "2026-10-30T13:23:17.161Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "111",
+          "value": "110",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "DIE GRÖSSTE +16 HALLOWEEN PARTY | DRUCKEREI, BADEN",
-              "detail": "Druckerei Eventlokal Baden, Baden",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/die-groesste-16-halloween-party-druckerei-baden/"
+              "label": "1. Fantasyball der Schweiz",
+              "detail": "Schloss Lenzburg, Lenzburg",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/recherche/lenzburg/1er-fantasyball-de-suisse_AiQJL6s"
             },
             {
-              "label": "Schreiben und Bewegen",
-              "detail": "Propstei Wislikofen",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schreiben-und-bewegen/"
+              "label": "Phyllis Krystal Ausbildung",
+              "detail": "Aarau",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/phyllis-krystal-ausbildung/"
             },
             {
-              "label": "TAG DER OFFENEN FLASCHEN, 30. & 31. OKTOBER 2026",
-              "detail": "Edvin Weine / Weinkellereien Aarau, Aarau",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tag-der-offenen-flaschen-30-31-oktober-2026/"
+              "label": "Stilvoll Kreativmarkt",
+              "detail": "Muri AG",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stilvoll-kreativmarkt/"
             },
             {
-              "label": "Mehr als Rescue-Notfalltropfen: Bach Blüten Level 1",
-              "detail": "Baden",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-als-rescue-notfalltropfen-bach-blueten-level-1/"
+              "label": "Gratis BONSAI Hilfetag",
+              "detail": "MURIMOOS werken und wohnen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gratis-bonsai-hilfetag/"
             },
             {
-              "label": "Jahreskonzert Musikgesellschaft Rietheim",
-              "detail": "Mehrzweckhalle Rietheim",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/eventi/musica/rietheim/jahreskonzert-musikgesellschaft-rietheim_AwwWjEM"
+              "label": "Stadtführung - Aarau, Stadt der schönen Giebel",
+              "detail": "Aarau",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stadtfuehrung-aarau-stadt-der-schoenen-giebel/"
             },
             {
-              "label": "Wassersinfonie Dernière",
-              "detail": "Kurpark Bad Zurzach, Zurzach",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bad-zurzach/wassersinfonie-derniere_Aa5geKv"
+              "label": "Storytelling café: festeggiate i festival!",
+              "detail": "Schloss Hallwyl - Museum Aargau, Seengen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/storytelling-cafe-festeggiate-i-festival-2/"
             },
             {
-              "label": "ACRES (UK)",
-              "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/aarau/acres-uk_Ae9wBAS"
+              "label": "EXKLUSIVER BLICK HINTER DIE KULISSEN",
+              "detail": "Strohmuseum im Park",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/exklusiver-blick-hinter-die-kulissen-1/"
             },
             {
-              "label": "ANUNDPFIRSICH - Improtheater/Theatersport",
-              "detail": "Dorfschüür, Würenlingen",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/wuerenlingen/anundpfirsich-improtheatertheatersport_A6mXjay"
+              "label": "Tino Flautin und Kater Leo",
+              "detail": "Muri AG",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tino-flautin-und-kater-leo/"
             },
             {
-              "label": "Prishtina– Vrasja e paralajmëruar e një ëndrre",
-              "detail": "Bühne Aarau, Aarau",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/prishtina-vrasja-e-paralajmeruar-e-nje-endrre/"
+              "label": "Charity-Konzert mit Michael von der Heide in der Druckerei Baden",
+              "detail": "Druckerei, Baden",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/charity-konzert-mit-michael-von-der-heide-in-der-druckerei-baden_A6fS4fA"
             },
             {
-              "label": "Rock'n'Roll Tanzparty",
-              "detail": "Restaurant Bären, Aarburg",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarburg/rocknroll-tanzparty_Ak38jx4"
+              "label": "Grusel Dinner-Show auf der Habsburg",
+              "detail": "Schloss Habsburg, Habsburg",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/grusel-dinner-show-auf-der-habsburg/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/argovia/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/argovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "en": {
       "canton": "AG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "111",
+          "value": "110",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "DIE GRÖSSTE +16 HALLOWEEN PARTY | DRUCKEREI, BADEN",
-              "detail": "Druckerei Eventlokal Baden, Baden",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/die-groesste-16-halloween-party-druckerei-baden/"
+              "label": "1st Fantasyball of Switzerland",
+              "detail": "Schloss Lenzburg, Lenzburg",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/recherche/lenzburg/1er-fantasyball-de-suisse_AiQJL6s"
             },
             {
-              "label": "Schreiben und Bewegen",
-              "detail": "Propstei Wislikofen",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schreiben-und-bewegen/"
+              "label": "Phyllis Krystal Ausbildung",
+              "detail": "Aarau",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/phyllis-krystal-ausbildung/"
             },
             {
-              "label": "TAG DER OFFENEN FLASCHEN, 30. & 31. OKTOBER 2026",
-              "detail": "Edvin Weine / Weinkellereien Aarau, Aarau",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tag-der-offenen-flaschen-30-31-oktober-2026/"
+              "label": "Stilvoll Kreativmarkt",
+              "detail": "Muri AG",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stilvoll-kreativmarkt/"
             },
             {
-              "label": "Mehr als Rescue-Notfalltropfen: Bach Blüten Level 1",
-              "detail": "Baden",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-als-rescue-notfalltropfen-bach-blueten-level-1/"
+              "label": "Gratis BONSAI Hilfetag",
+              "detail": "MURIMOOS werken und wohnen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gratis-bonsai-hilfetag/"
             },
             {
-              "label": "Jahreskonzert Musikgesellschaft Rietheim",
-              "detail": "Mehrzweckhalle Rietheim",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/eventi/musica/rietheim/jahreskonzert-musikgesellschaft-rietheim_AwwWjEM"
+              "label": "Stadtführung - Aarau, Stadt der schönen Giebel",
+              "detail": "Aarau",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stadtfuehrung-aarau-stadt-der-schoenen-giebel/"
             },
             {
-              "label": "Wassersinfonie Dernière",
-              "detail": "Kurpark Bad Zurzach, Zurzach",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bad-zurzach/wassersinfonie-derniere_Aa5geKv"
+              "label": "Storytelling café: Celebrate festivals!",
+              "detail": "Schloss Hallwyl - Museum Aargau, Seengen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/storytelling-cafe-festeggiate-i-festival-2/"
             },
             {
-              "label": "ACRES (UK)",
-              "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/aarau/acres-uk_Ae9wBAS"
+              "label": "EXKLUSIVER BLICK HINTER DIE KULISSEN",
+              "detail": "Strohmuseum im Park",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/exklusiver-blick-hinter-die-kulissen-1/"
             },
             {
-              "label": "ANUNDPFIRSICH-Improtheater / Theatersport",
-              "detail": "Dorfschüür, Würenlingen",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/wuerenlingen/anundpfirsich-improtheatertheatersport_A6mXjay"
+              "label": "Tino Flautin und Kater Leo",
+              "detail": "Muri AG",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tino-flautin-und-kater-leo/"
             },
             {
-              "label": "Prishtina– Vrasja e paralajmëruar e një ëndrre",
-              "detail": "Bühne Aarau, Aarau",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/prishtina-vrasja-e-paralajmeruar-e-nje-endrre/"
+              "label": "Charity-Konzert mit Michael von der Heide in der Druckerei Baden",
+              "detail": "Druckerei, Baden",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/charity-konzert-mit-michael-von-der-heide-in-der-druckerei-baden_A6fS4fA"
             },
             {
-              "label": "Rock'n'Roll Tanzparty",
-              "detail": "Restaurant Bären, Aarburg",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarburg/rocknroll-tanzparty_Ak38jx4"
+              "label": "Grusel Dinner-Show auf der Habsburg",
+              "detail": "Schloss Habsburg, Habsburg",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/grusel-dinner-show-auf-der-habsburg/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/aargau/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/aargau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "de": {
       "canton": "AG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "111",
+          "value": "110",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "DIE GRÖSSTE +16 HALLOWEEN PARTY | DRUCKEREI, BADEN",
-              "detail": "Druckerei Eventlokal Baden, Baden",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/die-groesste-16-halloween-party-druckerei-baden/"
+              "label": "1. Fantasyball der Schweiz",
+              "detail": "Schloss Lenzburg, Lenzburg",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/recherche/lenzburg/1er-fantasyball-de-suisse_AiQJL6s"
             },
             {
-              "label": "Schreiben und Bewegen",
-              "detail": "Propstei Wislikofen",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schreiben-und-bewegen/"
+              "label": "Phyllis Krystal Ausbildung",
+              "detail": "Aarau",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/phyllis-krystal-ausbildung/"
             },
             {
-              "label": "TAG DER OFFENEN FLASCHEN, 30. & 31. OKTOBER 2026",
-              "detail": "Edvin Weine / Weinkellereien Aarau, Aarau",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tag-der-offenen-flaschen-30-31-oktober-2026/"
+              "label": "Stilvoll Kreativmarkt",
+              "detail": "Muri AG",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stilvoll-kreativmarkt/"
             },
             {
-              "label": "Mehr als Rescue-Notfalltropfen: Bach Blüten Level 1",
-              "detail": "Baden",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-als-rescue-notfalltropfen-bach-blueten-level-1/"
+              "label": "Gratis BONSAI Hilfetag",
+              "detail": "MURIMOOS werken und wohnen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gratis-bonsai-hilfetag/"
             },
             {
-              "label": "Jahreskonzert Musikgesellschaft Rietheim",
-              "detail": "Mehrzweckhalle Rietheim",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/eventi/musica/rietheim/jahreskonzert-musikgesellschaft-rietheim_AwwWjEM"
+              "label": "Stadtführung - Aarau, Stadt der schönen Giebel",
+              "detail": "Aarau",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stadtfuehrung-aarau-stadt-der-schoenen-giebel/"
             },
             {
-              "label": "Wassersinfonie Dernière",
-              "detail": "Kurpark Bad Zurzach, Zurzach",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bad-zurzach/wassersinfonie-derniere_Aa5geKv"
+              "label": "Erzählcafé: Feste feiern!",
+              "detail": "Schloss Hallwyl - Museum Aargau, Seengen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/storytelling-cafe-festeggiate-i-festival-2/"
             },
             {
-              "label": "ACRES (UK)",
-              "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/aarau/acres-uk_Ae9wBAS"
+              "label": "EXKLUSIVER BLICK HINTER DIE KULISSEN",
+              "detail": "Strohmuseum im Park",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/exklusiver-blick-hinter-die-kulissen-1/"
             },
             {
-              "label": "ANUNDPFIRSICH – Improtheater/Theatersport",
-              "detail": "Dorfschüür, Würenlingen",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/wuerenlingen/anundpfirsich-improtheatertheatersport_A6mXjay"
+              "label": "Tino Flautin und Kater Leo",
+              "detail": "Muri AG",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tino-flautin-und-kater-leo/"
             },
             {
-              "label": "Prishtina– Vrasja e paralajmëruar e një ëndrre",
-              "detail": "Bühne Aarau, Aarau",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/prishtina-vrasja-e-paralajmeruar-e-nje-endrre/"
+              "label": "Charity-Konzert mit Michael von der Heide in der Druckerei Baden",
+              "detail": "Druckerei, Baden",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/charity-konzert-mit-michael-von-der-heide-in-der-druckerei-baden_A6fS4fA"
             },
             {
-              "label": "Rock'n'Roll Tanzparty",
-              "detail": "Restaurant Bären, Aarburg",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarburg/rocknroll-tanzparty_Ak38jx4"
+              "label": "Grusel Dinner-Show auf der Habsburg",
+              "detail": "Schloss Habsburg, Habsburg",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/grusel-dinner-show-auf-der-habsburg/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/aargau/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/aargau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "fr": {
       "canton": "AG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "111",
+          "value": "110",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "DIE GRÖSSTE +16 HALLOWEEN PARTY | DRUCKEREI, BADEN",
-              "detail": "Druckerei Eventlokal Baden, Baden",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/die-groesste-16-halloween-party-druckerei-baden/"
+              "label": "1er Fantasyball de Suisse",
+              "detail": "Schloss Lenzburg, Lenzburg",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/recherche/lenzburg/1er-fantasyball-de-suisse_AiQJL6s"
             },
             {
-              "label": "Schreiben und Bewegen",
-              "detail": "Propstei Wislikofen",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schreiben-und-bewegen/"
+              "label": "Phyllis Krystal Ausbildung",
+              "detail": "Aarau",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/phyllis-krystal-ausbildung/"
             },
             {
-              "label": "TAG DER OFFENEN FLASCHEN, 30. & 31. OKTOBER 2026",
-              "detail": "Edvin Weine / Weinkellereien Aarau, Aarau",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tag-der-offenen-flaschen-30-31-oktober-2026/"
+              "label": "Stilvoll Kreativmarkt",
+              "detail": "Muri AG",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stilvoll-kreativmarkt/"
             },
             {
-              "label": "Mehr als Rescue-Notfalltropfen: Bach Blüten Level 1",
-              "detail": "Baden",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-als-rescue-notfalltropfen-bach-blueten-level-1/"
+              "label": "Gratis BONSAI Hilfetag",
+              "detail": "MURIMOOS werken und wohnen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gratis-bonsai-hilfetag/"
             },
             {
-              "label": "Jahreskonzert Musikgesellschaft Rietheim",
-              "detail": "Mehrzweckhalle Rietheim",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/eventi/musica/rietheim/jahreskonzert-musikgesellschaft-rietheim_AwwWjEM"
+              "label": "Stadtführung - Aarau, Stadt der schönen Giebel",
+              "detail": "Aarau",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stadtfuehrung-aarau-stadt-der-schoenen-giebel/"
             },
             {
-              "label": "Wassersinfonie Dernière",
-              "detail": "Kurpark Bad Zurzach, Zurzach",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bad-zurzach/wassersinfonie-derniere_Aa5geKv"
+              "label": "Café-conte: Célébrer les fêtes !",
+              "detail": "Schloss Hallwyl - Museum Aargau, Seengen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/storytelling-cafe-festeggiate-i-festival-2/"
             },
             {
-              "label": "ACRES (UK)",
-              "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/aarau/acres-uk_Ae9wBAS"
+              "label": "EXKLUSIVER BLICK HINTER DIE KULISSEN",
+              "detail": "Strohmuseum im Park",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/exklusiver-blick-hinter-die-kulissen-1/"
             },
             {
-              "label": "ANUNDPFIRSICH - Improthéâtre/Théâtresport",
-              "detail": "Dorfschüür, Würenlingen",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/wuerenlingen/anundpfirsich-improtheatertheatersport_A6mXjay"
+              "label": "Tino Flautin und Kater Leo",
+              "detail": "Muri AG",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tino-flautin-und-kater-leo/"
             },
             {
-              "label": "Prishtina– Vrasja e paralajmëruar e një ëndrre",
-              "detail": "Bühne Aarau, Aarau",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/prishtina-vrasja-e-paralajmeruar-e-nje-endrre/"
+              "label": "Charity-Konzert mit Michael von der Heide in der Druckerei Baden",
+              "detail": "Druckerei, Baden",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/charity-konzert-mit-michael-von-der-heide-in-der-druckerei-baden_A6fS4fA"
             },
             {
-              "label": "Rock'n'Roll Tanzparty",
-              "detail": "Restaurant Bären, Aarburg",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarburg/rocknroll-tanzparty_Ak38jx4"
+              "label": "Grusel Dinner-Show auf der Habsburg",
+              "detail": "Schloss Habsburg, Habsburg",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/grusel-dinner-show-auf-der-habsburg/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/argovie/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/argovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     }
   }
 }

@@ -4,17 +4,17 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "mobilita",
-  "updatedAt": "2026-10-30T19:31:58.244Z",
-  "contentHash": "adfe5c25b446181d26a56721b894702e2731e8f34bf8a3a99c77ff345f0df7d5",
+  "updatedAt": "2026-10-31T06:15:08.747Z",
+  "contentHash": "346bee946d1d16f528a67126cb9707777cc899416e7a801cecbf052748d8c8ec",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-30T13:39:45.803Z",
+      "updatedAt": "2026-10-30T20:12:21.426Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-30T11:41:14.746Z",
+      "updatedAt": "2026-10-30T21:45:03.956Z",
       "keyFacts": 0
     }
   ],
@@ -27,12 +27,12 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "3",
+          "value": "4",
           "note": "segnalazioni aggiornate: 30 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "26",
+          "value": "27",
           "note": "segnalazioni aggiornate: 30 ottobre 2026"
         }
       ],
@@ -53,6 +53,11 @@
               "value": "Chiusura",
               "detail": "fine prevista: 6 novembre 2026",
               "date": "2026-10-28T06:55:00.000Z"
+            },
+            {
+              "label": "A2 Luzern -> Basel tra Raccordo autostradale Diramazione Hagnau E Raccordo autostradale Diramazione Gellert, al chilometro 5.4 Situazione: problemi di traffico Causa: veicolo in avaria Limitazione…",
+              "value": "Chiusura",
+              "date": "2026-10-30T20:07:00.000Z"
             },
             {
               "label": "H10 Berna <-> Lucerna Luogo Schüpfheim Situazione: divieto di transito Causa: evento importante",
@@ -83,16 +88,10 @@
               "value": "Cantiere",
               "detail": "fine prevista: 11 dicembre 2026",
               "date": "2025-12-04T19:00:00.000Z"
-            },
-            {
-              "label": "A2 Lucerna -> Basilea Parcheggio Eggberg Situazione: parcheggio chiuso cantiere, lunghezza [km] 0.4",
-              "value": "Cantiere",
-              "detail": "fine prevista: 12 novembre 2026",
-              "date": "2026-02-02T07:02:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-30T13:39:45.803Z"
+          "updatedAt": "2026-10-30T20:12:21.426Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -115,7 +114,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -161,7 +160,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "en": {
       "canton": "LU",
@@ -171,12 +170,12 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "3",
+          "value": "4",
           "note": "reports as of 30 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "26",
+          "value": "27",
           "note": "reports as of 30 October 2026"
         }
       ],
@@ -197,6 +196,11 @@
               "value": "Closure",
               "detail": "until 6 November 2026",
               "date": "2026-10-28T06:55:00.000Z"
+            },
+            {
+              "label": "A2 Luzern -> Basel tra Raccordo autostradale Diramazione Hagnau E Raccordo autostradale Diramazione Gellert, al chilometro 5.4 Situazione: problemi di traffico Causa: veicolo in avaria Limitazione…",
+              "value": "Closure",
+              "date": "2026-10-30T20:07:00.000Z"
             },
             {
               "label": "H10 Berna <-> Lucerna Luogo Schüpfheim Situazione: divieto di transito Causa: evento importante",
@@ -227,16 +231,10 @@
               "value": "Roadworks",
               "detail": "until 11 December 2026",
               "date": "2025-12-04T19:00:00.000Z"
-            },
-            {
-              "label": "A2 Lucerna -> Basilea Parcheggio Eggberg Situazione: parcheggio chiuso cantiere, lunghezza [km] 0.4",
-              "value": "Roadworks",
-              "detail": "until 12 November 2026",
-              "date": "2026-02-02T07:02:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-30T13:39:45.803Z"
+          "updatedAt": "2026-10-30T20:12:21.426Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -259,7 +257,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -303,7 +301,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "de": {
       "canton": "LU",
@@ -313,12 +311,12 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "3",
+          "value": "4",
           "note": "Meldungen vom 30. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "26",
+          "value": "27",
           "note": "Meldungen vom 30. Oktober 2026"
         }
       ],
@@ -339,6 +337,11 @@
               "value": "Sperrung",
               "detail": "bis 6. November 2026",
               "date": "2026-10-28T06:55:00.000Z"
+            },
+            {
+              "label": "A2 Luzern -> Basel zwischen Autobahndreieck Verzweigung Hagnau und Autobahndreieck Verzweigung Gellert, bei Kilometer 5.4 Sachlage: Verkehrsbehinderung Ursache: Pannenfahrzeug Verkehrsführung…",
+              "value": "Sperrung",
+              "date": "2026-10-30T20:07:00.000Z"
             },
             {
               "label": "H10 Bern <-> Luzern Ortschaft Schüpfheim Sachlage: gesperrt für Durchgangsverkehr Ursache: Veranstaltung",
@@ -369,16 +372,10 @@
               "value": "Baustelle",
               "detail": "bis 11. Dezember 2026",
               "date": "2025-12-04T19:00:00.000Z"
-            },
-            {
-              "label": "A2 Luzern -> Basel Parkplatz Eggberg Sachlage: Parkplatz geschlossen Baustelle, Länge [km] 0.4",
-              "value": "Baustelle",
-              "detail": "bis 12. November 2026",
-              "date": "2026-02-02T07:02:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-30T13:39:45.803Z"
+          "updatedAt": "2026-10-30T20:12:21.426Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -401,7 +398,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -445,7 +442,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "fr": {
       "canton": "LU",
@@ -455,12 +452,12 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "3",
+          "value": "4",
           "note": "signalements au 30 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "26",
+          "value": "27",
           "note": "signalements au 30 octobre 2026"
         }
       ],
@@ -481,6 +478,11 @@
               "value": "Fermeture",
               "detail": "jusqu’au 6 novembre 2026",
               "date": "2026-10-28T06:55:00.000Z"
+            },
+            {
+              "label": "A2 Lucerne -> Bâle entre Echangeur Echangeur de Hagnau et Echangeur Echangeur de Gellert, au kilomètre 5.4 Situation: trafic perturbé Raison: véhicule en panne Gestion du trafic: voie de droite fermée",
+              "value": "Fermeture",
+              "date": "2026-10-30T20:07:00.000Z"
             },
             {
               "label": "H10 Berne <-> Lucerne Localité Schüpfheim Situation: circulation de transit interdite Raison: événement majeur",
@@ -511,16 +513,10 @@
               "value": "Chantier",
               "detail": "jusqu’au 11 décembre 2026",
               "date": "2025-12-04T19:00:00.000Z"
-            },
-            {
-              "label": "A2 Lucerne -> Bâle Parking Eggberg Situation: parking fermé travaux, longueur [km] 0.4",
-              "value": "Chantier",
-              "detail": "jusqu’au 12 novembre 2026",
-              "date": "2026-02-02T07:02:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-30T13:39:45.803Z"
+          "updatedAt": "2026-10-30T20:12:21.426Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -543,7 +539,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -589,7 +585,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     }
   }
 }

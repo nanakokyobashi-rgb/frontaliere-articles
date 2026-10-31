@@ -4,8 +4,8 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "servizi",
-  "updatedAt": "2026-10-30T19:31:58.244Z",
-  "contentHash": "1c3f4fdb4a2a3257788e7b69d274815e5514b21000ee5dc5be4f47727bd606ee",
+  "updatedAt": "2026-10-31T06:15:08.747Z",
+  "contentHash": "3eb3f80ec2ddc6ef7860f320a5a5485e7389227a1c379000d0a9b59fab55e8db",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-30T12:52:32.857Z",
+      "updatedAt": "2026-10-30T22:19:25.949Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-30T15:13:06.562Z",
+      "updatedAt": "2026-10-30T20:58:15.445Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-30T11:41:14.746Z",
+      "updatedAt": "2026-10-30T21:45:03.956Z",
       "keyFacts": 0
     }
   ],
@@ -97,7 +97,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion-stva.sh.ch/de/",
-          "updatedAt": "2026-10-30T12:52:32.857Z"
+          "updatedAt": "2026-10-30T22:19:25.949Z"
         },
         {
           "id": "meteo",
@@ -106,12 +106,12 @@
           "items": [
             {
               "label": "Schaffhausen",
-              "value": "10 °C",
-              "detail": "oggi da 5 a 10 °C"
+              "value": "7 °C",
+              "detail": "oggi da 5 a 8 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-30T15:13:06.562Z"
+          "updatedAt": "2026-10-30T20:58:15.445Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -124,7 +124,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/neuzentrum+klinikum+singen"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -204,7 +204,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "en": {
       "canton": "SH",
@@ -274,7 +274,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion-stva.sh.ch/de/",
-          "updatedAt": "2026-10-30T12:52:32.857Z"
+          "updatedAt": "2026-10-30T22:19:25.949Z"
         },
         {
           "id": "meteo",
@@ -283,12 +283,12 @@
           "items": [
             {
               "label": "Schaffhausen",
-              "value": "10 °C",
-              "detail": "today from 5 to 10 °C"
+              "value": "7 °C",
+              "detail": "today from 5 to 8 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-30T15:13:06.562Z"
+          "updatedAt": "2026-10-30T20:58:15.445Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -301,7 +301,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/neuzentrum+klinikum+singen"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -377,7 +377,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "de": {
       "canton": "SH",
@@ -447,7 +447,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion-stva.sh.ch/de/",
-          "updatedAt": "2026-10-30T12:52:32.857Z"
+          "updatedAt": "2026-10-30T22:19:25.949Z"
         },
         {
           "id": "meteo",
@@ -456,12 +456,12 @@
           "items": [
             {
               "label": "Schaffhausen",
-              "value": "10 °C",
-              "detail": "heute 5 bis 10 °C"
+              "value": "7 °C",
+              "detail": "heute 5 bis 8 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-30T15:13:06.562Z"
+          "updatedAt": "2026-10-30T20:58:15.445Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -474,7 +474,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/neuzentrum+klinikum+singen"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -550,7 +550,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "fr": {
       "canton": "SH",
@@ -620,7 +620,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion-stva.sh.ch/de/",
-          "updatedAt": "2026-10-30T12:52:32.857Z"
+          "updatedAt": "2026-10-30T22:19:25.949Z"
         },
         {
           "id": "meteo",
@@ -629,12 +629,12 @@
           "items": [
             {
               "label": "Schaffhausen",
-              "value": "10 °C",
-              "detail": "aujourd’hui de 5 à 10 °C"
+              "value": "7 °C",
+              "detail": "aujourd’hui de 5 à 8 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-30T15:13:06.562Z"
+          "updatedAt": "2026-10-30T20:58:15.445Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -647,7 +647,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/neuzentrum+klinikum+singen"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -719,7 +719,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     }
   }
 }

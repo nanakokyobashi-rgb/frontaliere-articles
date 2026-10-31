@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "servizi",
-  "updatedAt": "2026-10-30T19:31:58.244Z",
-  "contentHash": "a0ae70615d22be19ea68d70d3a91daa482b768f3ad28254bdf4ab0f4f0d4e67e",
+  "updatedAt": "2026-10-31T06:15:08.747Z",
+  "contentHash": "723256d88dc336a588e90519d40712a47798db26a6e15f211d5d51b951c5de1e",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,22 +14,22 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-30T13:31:51.710Z",
+      "updatedAt": "2026-10-30T22:45:44.000Z",
       "keyFacts": 0
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-30T12:52:32.857Z",
+      "updatedAt": "2026-10-30T22:19:25.949Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-30T15:13:06.562Z",
+      "updatedAt": "2026-10-30T20:58:15.445Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-30T11:41:14.746Z",
+      "updatedAt": "2026-10-30T21:45:03.956Z",
       "keyFacts": 0
     }
   ],
@@ -49,7 +49,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "31",
-          "note": "offerta mediana 300 CHF"
+          "note": "offerta mediana 420 CHF"
         }
       ],
       "dataBlocks": [
@@ -86,11 +86,6 @@
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-10-29T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
               "date": "2026-10-30T23:00:00.000Z"
             },
             {
@@ -112,11 +107,16 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-11-03T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-04T23:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-30T13:31:51.710Z"
+          "updatedAt": "2026-10-30T22:45:44.000Z"
         },
         {
           "id": "aste-targhe",
@@ -125,7 +125,7 @@
           "items": [
             {
               "label": "ZH597",
-              "value": "6400 CHF",
+              "value": "8400 CHF",
               "detail": "offerta attuale",
               "date": "2026-11-04T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43695"
@@ -147,7 +147,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-30T12:52:32.857Z"
+          "updatedAt": "2026-10-30T22:19:25.949Z"
         },
         {
           "id": "meteo",
@@ -156,18 +156,23 @@
           "items": [
             {
               "label": "Zürich",
-              "value": "10 °C",
-              "detail": "oggi da 5 a 11 °C"
+              "value": "7 °C",
+              "detail": "oggi da 5 a 8 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-30T15:13:06.562Z"
+          "updatedAt": "2026-10-30T20:58:15.445Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Präzision für Diagnose und Therapie: Wann die molekulare Diagnostik entscheidend ist",
+              "date": "2026-10-30T13:25:55.000Z",
+              "url": "https://www.usz.ch/praezision-fuer-diagnose-und-therapie-wann-die-molekulare-diagnostik-entscheidend-ist/"
+            },
             {
               "label": "Rückblick | Rheuma-Workshop USZ | 24. September 2026",
               "date": "2026-10-30T11:33:43.000Z",
@@ -192,14 +197,9 @@
               "label": "Ein Schlaganfall kennt kein Alter",
               "date": "2026-10-29T10:21:38.000Z",
               "url": "https://www.usz.ch/ein-schlaganfall-kennt-kein-alter/"
-            },
-            {
-              "label": "Brustkrebs und Kinderwunsch: Fruchtbarkeit erhalten, ohne die Therapie zu verzögern",
-              "date": "2026-10-28T12:51:51.000Z",
-              "url": "https://www.usz.ch/brustkrebs-und-kinderwunsch-fruchtbarkeit-erhalten-ohne-die-therapie-zu-verzoegern/"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -279,7 +279,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "en": {
       "canton": "ZH",
@@ -296,7 +296,7 @@
         {
           "label": "Plate auctions running",
           "value": "31",
-          "note": "typical bid 300 CHF"
+          "note": "typical bid 420 CHF"
         }
       ],
       "dataBlocks": [
@@ -333,11 +333,6 @@
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-10-29T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
               "date": "2026-10-30T23:00:00.000Z"
             },
             {
@@ -359,11 +354,16 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-11-03T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-04T23:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-30T13:31:51.710Z"
+          "updatedAt": "2026-10-30T22:45:44.000Z"
         },
         {
           "id": "aste-targhe",
@@ -372,7 +372,7 @@
           "items": [
             {
               "label": "ZH597",
-              "value": "6,400 CHF",
+              "value": "8,400 CHF",
               "detail": "current bid",
               "date": "2026-11-04T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43695"
@@ -394,7 +394,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-30T12:52:32.857Z"
+          "updatedAt": "2026-10-30T22:19:25.949Z"
         },
         {
           "id": "meteo",
@@ -403,18 +403,23 @@
           "items": [
             {
               "label": "Zürich",
-              "value": "10 °C",
-              "detail": "today from 5 to 11 °C"
+              "value": "7 °C",
+              "detail": "today from 5 to 8 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-30T15:13:06.562Z"
+          "updatedAt": "2026-10-30T20:58:15.445Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Präzision für Diagnose und Therapie: Wann die molekulare Diagnostik entscheidend ist",
+              "date": "2026-10-30T13:25:55.000Z",
+              "url": "https://www.usz.ch/praezision-fuer-diagnose-und-therapie-wann-die-molekulare-diagnostik-entscheidend-ist/"
+            },
             {
               "label": "Rückblick | Rheuma-Workshop USZ | 24. September 2026",
               "date": "2026-10-30T11:33:43.000Z",
@@ -439,14 +444,9 @@
               "label": "Ein Schlaganfall kennt kein Alter",
               "date": "2026-10-29T10:21:38.000Z",
               "url": "https://www.usz.ch/ein-schlaganfall-kennt-kein-alter/"
-            },
-            {
-              "label": "Brustkrebs und Kinderwunsch: Fruchtbarkeit erhalten, ohne die Therapie zu verzögern",
-              "date": "2026-10-28T12:51:51.000Z",
-              "url": "https://www.usz.ch/brustkrebs-und-kinderwunsch-fruchtbarkeit-erhalten-ohne-die-therapie-zu-verzoegern/"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -522,7 +522,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "de": {
       "canton": "ZH",
@@ -539,7 +539,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "31",
-          "note": "mittleres Gebot 300 CHF"
+          "note": "mittleres Gebot 420 CHF"
         }
       ],
       "dataBlocks": [
@@ -576,11 +576,6 @@
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-10-29T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
               "date": "2026-10-30T23:00:00.000Z"
             },
             {
@@ -602,11 +597,16 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-11-03T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-04T23:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-30T13:31:51.710Z"
+          "updatedAt": "2026-10-30T22:45:44.000Z"
         },
         {
           "id": "aste-targhe",
@@ -615,7 +615,7 @@
           "items": [
             {
               "label": "ZH597",
-              "value": "6’400 CHF",
+              "value": "8’400 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-11-04T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43695"
@@ -637,7 +637,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-30T12:52:32.857Z"
+          "updatedAt": "2026-10-30T22:19:25.949Z"
         },
         {
           "id": "meteo",
@@ -646,18 +646,23 @@
           "items": [
             {
               "label": "Zürich",
-              "value": "10 °C",
-              "detail": "heute 5 bis 11 °C"
+              "value": "7 °C",
+              "detail": "heute 5 bis 8 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-30T15:13:06.562Z"
+          "updatedAt": "2026-10-30T20:58:15.445Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Präzision für Diagnose und Therapie: Wann die molekulare Diagnostik entscheidend ist",
+              "date": "2026-10-30T13:25:55.000Z",
+              "url": "https://www.usz.ch/praezision-fuer-diagnose-und-therapie-wann-die-molekulare-diagnostik-entscheidend-ist/"
+            },
             {
               "label": "Rückblick | Rheuma-Workshop USZ | 24. September 2026",
               "date": "2026-10-30T11:33:43.000Z",
@@ -682,14 +687,9 @@
               "label": "Ein Schlaganfall kennt kein Alter",
               "date": "2026-10-29T10:21:38.000Z",
               "url": "https://www.usz.ch/ein-schlaganfall-kennt-kein-alter/"
-            },
-            {
-              "label": "Brustkrebs und Kinderwunsch: Fruchtbarkeit erhalten, ohne die Therapie zu verzögern",
-              "date": "2026-10-28T12:51:51.000Z",
-              "url": "https://www.usz.ch/brustkrebs-und-kinderwunsch-fruchtbarkeit-erhalten-ohne-die-therapie-zu-verzoegern/"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -765,7 +765,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "fr": {
       "canton": "ZH",
@@ -782,7 +782,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "31",
-          "note": "offre centrale 300 CHF"
+          "note": "offre centrale 420 CHF"
         }
       ],
       "dataBlocks": [
@@ -819,11 +819,6 @@
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-10-29T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
               "date": "2026-10-30T23:00:00.000Z"
             },
             {
@@ -845,11 +840,16 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-11-03T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-04T23:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-30T13:31:51.710Z"
+          "updatedAt": "2026-10-30T22:45:44.000Z"
         },
         {
           "id": "aste-targhe",
@@ -858,7 +858,7 @@
           "items": [
             {
               "label": "ZH597",
-              "value": "6 400 CHF",
+              "value": "8 400 CHF",
               "detail": "offre actuelle",
               "date": "2026-11-04T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43695"
@@ -880,7 +880,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-30T12:52:32.857Z"
+          "updatedAt": "2026-10-30T22:19:25.949Z"
         },
         {
           "id": "meteo",
@@ -889,18 +889,23 @@
           "items": [
             {
               "label": "Zürich",
-              "value": "10 °C",
-              "detail": "aujourd’hui de 5 à 11 °C"
+              "value": "7 °C",
+              "detail": "aujourd’hui de 5 à 8 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-30T15:13:06.562Z"
+          "updatedAt": "2026-10-30T20:58:15.445Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Präzision für Diagnose und Therapie: Wann die molekulare Diagnostik entscheidend ist",
+              "date": "2026-10-30T13:25:55.000Z",
+              "url": "https://www.usz.ch/praezision-fuer-diagnose-und-therapie-wann-die-molekulare-diagnostik-entscheidend-ist/"
+            },
             {
               "label": "Rückblick | Rheuma-Workshop USZ | 24. September 2026",
               "date": "2026-10-30T11:33:43.000Z",
@@ -925,14 +930,9 @@
               "label": "Ein Schlaganfall kennt kein Alter",
               "date": "2026-10-29T10:21:38.000Z",
               "url": "https://www.usz.ch/ein-schlaganfall-kennt-kein-alter/"
-            },
-            {
-              "label": "Brustkrebs und Kinderwunsch: Fruchtbarkeit erhalten, ohne die Therapie zu verzögern",
-              "date": "2026-10-28T12:51:51.000Z",
-              "url": "https://www.usz.ch/brustkrebs-und-kinderwunsch-fruchtbarkeit-erhalten-ohne-die-therapie-zu-verzoegern/"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -1004,7 +1004,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     }
   }
 }

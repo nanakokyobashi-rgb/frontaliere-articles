@@ -4,12 +4,12 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "mobilita",
-  "updatedAt": "2026-10-30T19:31:58.244Z",
-  "contentHash": "1c0928785e49909ef15c0c122d9a529f85d55aafb007457f3ac24e171f4bd515",
+  "updatedAt": "2026-10-31T06:15:08.747Z",
+  "contentHash": "96c8c9c6b1297dcdb8df55d5a1b02b314c251c8b4e59ae086f29df56c2c4482f",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-30T13:39:45.803Z",
+      "updatedAt": "2026-10-30T20:12:21.426Z",
       "keyFacts": 2
     }
   ],
@@ -44,11 +44,6 @@
               "date": "2026-10-26T15:45:00.000Z"
             },
             {
-              "label": "H17 Glarus -> Uznach tra Luogo Netstal E Svincolo autostradale Näfels Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-10-30T12:27:00.000Z"
-            },
-            {
               "label": "A3 Chur -> Zürich tra Raccordo autostradale Diramazione Niederurnen E Svincolo autostradale Bilten Situazione: problemi di traffico cantiere, lunghezza [km] 3.1 Limitazione del traffico: corsie…",
               "value": "Cantiere",
               "detail": "fine prevista: 6 novembre 2026",
@@ -56,7 +51,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-30T13:39:45.803Z"
+          "updatedAt": "2026-10-30T20:12:21.426Z"
         }
       ],
       "curatedArticles": [
@@ -114,7 +109,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "en": {
       "canton": "GL",
@@ -146,11 +141,6 @@
               "date": "2026-10-26T15:45:00.000Z"
             },
             {
-              "label": "H17 Glarus -> Uznach tra Luogo Netstal E Svincolo autostradale Näfels Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-10-30T12:27:00.000Z"
-            },
-            {
               "label": "A3 Chur -> Zürich tra Raccordo autostradale Diramazione Niederurnen E Svincolo autostradale Bilten Situazione: problemi di traffico cantiere, lunghezza [km] 3.1 Limitazione del traffico: corsie…",
               "value": "Roadworks",
               "detail": "until 6 November 2026",
@@ -158,7 +148,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-30T13:39:45.803Z"
+          "updatedAt": "2026-10-30T20:12:21.426Z"
         }
       ],
       "curatedArticles": [
@@ -216,7 +206,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "de": {
       "canton": "GL",
@@ -248,11 +238,6 @@
               "date": "2026-10-26T15:45:00.000Z"
             },
             {
-              "label": "H17 Glarus -> Uznach zwischen Ortschaft Netstal und Anschluss Näfels Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-10-30T12:27:00.000Z"
-            },
-            {
               "label": "A3 Chur -> Zürich zwischen Autobahndreieck Verzweigung Niederurnen und Anschluss Bilten Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 3.1 Verkehrsführung: Fahrbahnverengung auf einen…",
               "value": "Baustelle",
               "detail": "bis 6. November 2026",
@@ -260,7 +245,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-30T13:39:45.803Z"
+          "updatedAt": "2026-10-30T20:12:21.426Z"
         }
       ],
       "curatedArticles": [
@@ -318,7 +303,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "fr": {
       "canton": "GL",
@@ -350,11 +335,6 @@
               "date": "2026-10-26T15:45:00.000Z"
             },
             {
-              "label": "H17 Glaris -> Uznach entre Localité Netstal et Jonction autoroutière Näfels Situation: trafic en accordéon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-10-30T12:27:00.000Z"
-            },
-            {
               "label": "A3 Coire -> Zurich entre Echangeur Echangeur de Niederurnen et Jonction autoroutière Bilten Situation: trafic perturbé travaux, longueur [km] 3.1 Gestion du trafic: rétrécissement des voies sur une…",
               "value": "Chantier",
               "detail": "jusqu’au 6 novembre 2026",
@@ -362,7 +342,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-30T13:39:45.803Z"
+          "updatedAt": "2026-10-30T20:12:21.426Z"
         }
       ],
       "curatedArticles": [
@@ -420,7 +400,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     }
   }
 }

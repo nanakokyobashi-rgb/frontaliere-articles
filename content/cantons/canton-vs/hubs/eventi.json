@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "eventi",
-  "updatedAt": "2026-10-30T19:31:58.244Z",
-  "contentHash": "2a03515f03766daabf7859794c4a42cfa5cb6c2d026df427b33725471e5f3802",
+  "updatedAt": "2026-10-31T06:15:08.747Z",
+  "contentHash": "b65b78978e3974553eb6f6698eaab729d8b6ae493ebad7e53352b39f01c33a2b",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "59",
+          "value": "62",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,64 +33,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Brisolée",
+              "label": "Maison des Contes et Légendes : Halloween [EN]",
+              "detail": "Dorénaz",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/maison-des-contes-et-legendes-halloween-en/"
+            },
+            {
+              "label": "A la découverte du patrimoine viticole",
+              "detail": "Martigny-Croix, Martigny",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/a-la-decouverte-du-patrimoine-viticole/"
+            },
+            {
+              "label": "Brisolée at the Cave du Chevalier Bayard",
               "detail": "Cave du Chevalier Bayard, Varen",
-              "date": "2026-10-30",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/brisolee-at-the-cave-du-chevalier-bayard/"
+            },
+            {
+              "label": "The Irish Folk Festival",
+              "detail": "Kultur- und Kongresszentrum La Poste, Visp",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/visp/the-irish-folk-festival_A8QEKG4"
+            },
+            {
+              "label": "Werli and the Melodies",
+              "detail": "Zeughaus Kultur",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/events/music/glis/werli-and-the-melodies_AH5Hy7w"
+            },
+            {
+              "label": "Mawak und Franco [CH-VS] – L'affreux [CH-VS] – Elias D [CH-VS]",
+              "detail": "Hacienda, Sierre",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/siders/mawak-und-franco-ch-vs-laffreux-ch-vs-elias-d-ch-vs_A7bki9Q"
+            },
+            {
+              "label": "ARBRE",
+              "detail": "Sion / Sitten, Sion",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/arbre/"
+            },
+            {
+              "label": "Brisolée",
+              "detail": "Cave du Chevalier Bayard, Varen — in corso, ultimo giorno: 31 ottobre 2026",
+              "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/brisolee/"
             },
             {
               "label": "Helga Zumstein",
-              "detail": "Brig, Brig-Glis",
-              "date": "2026-10-30",
+              "detail": "Brig, Brig-Glis — in corso, ultimo giorno: 22 novembre 2026",
+              "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
-            },
-            {
-              "label": "Rilke Poetry Slam",
-              "detail": "Raron",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rilke-poetry-slam/"
-            },
-            {
-              "label": "Konzert & Lesung mit Samuel \"Suma\" Schnydrig (Them Fleurs)",
-              "detail": "Hotel Glocke",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/events/music/reckingen-vs/concert-und-reading-with-samuel-suma-schnydrig-them-fleurs_AiuhXbs"
-            },
-            {
-              "label": "Literary Event",
-              "detail": "Sierre",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/obstwiesen-und-andere-franzoesische-zyklen-1923-1926/"
-            },
-            {
-              "label": "Jusque dans nos bras",
-              "detail": "Martigny",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jusque-dans-nos-bras/"
-            },
-            {
-              "label": "Riverbanks",
-              "detail": "Kulturfels, Naters",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/events/music/naters/riverbanks_AGrdrKv"
-            },
-            {
-              "label": "Avishai Darash Quartet",
-              "detail": "Jazz Chälli, Visp",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/avishai-darash-quartet/"
             },
             {
               "label": "Rally Internazionale del Vallese [DE]",
               "detail": "Martigny Expo, Martigny — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-30",
+              "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/rallye-international-du-valais-en/"
-            },
-            {
-              "label": "Workshop: Chocolat Matterhorn Praline",
-              "detail": "Zermatt — in corso, ultimo giorno: 30 ottobre 2026",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-chocolat-matterhorn-praline/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -117,7 +117,7 @@
           "url": "/eventi/vallese/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "en": {
       "canton": "VS",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "59",
+          "value": "62",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,64 +138,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Brisolée",
+              "label": "Maison des Contes et Légendes : Halloween [EN]",
+              "detail": "Dorénaz",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/maison-des-contes-et-legendes-halloween-en/"
+            },
+            {
+              "label": "A la découverte du patrimoine viticole",
+              "detail": "Martigny-Croix, Martigny",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/a-la-decouverte-du-patrimoine-viticole/"
+            },
+            {
+              "label": "Brisolée at the Cave du Chevalier Bayard",
               "detail": "Cave du Chevalier Bayard, Varen",
-              "date": "2026-10-30",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/brisolee-at-the-cave-du-chevalier-bayard/"
+            },
+            {
+              "label": "The Irish Folk Festival",
+              "detail": "Kultur- und Kongresszentrum La Poste, Visp",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/visp/the-irish-folk-festival_A8QEKG4"
+            },
+            {
+              "label": "Werli and the Melodies",
+              "detail": "Zeughaus Kultur",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/events/music/glis/werli-and-the-melodies_AH5Hy7w"
+            },
+            {
+              "label": "Mawak and Franco [CH-VS] - L'affreux [CH-VS] - Elias D [CH-VS]",
+              "detail": "Hacienda, Sierre",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/siders/mawak-und-franco-ch-vs-laffreux-ch-vs-elias-d-ch-vs_A7bki9Q"
+            },
+            {
+              "label": "ARBRE",
+              "detail": "Sion / Sitten, Sion",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/arbre/"
+            },
+            {
+              "label": "Brisolée",
+              "detail": "Cave du Chevalier Bayard, Varen — ongoing, last day: 31 October 2026",
+              "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/brisolee/"
             },
             {
               "label": "Helga Zumstein",
-              "detail": "Brig, Brig-Glis",
-              "date": "2026-10-30",
+              "detail": "Brig, Brig-Glis — ongoing, last day: 22 November 2026",
+              "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
-            },
-            {
-              "label": "Rilke Poetry Slam",
-              "detail": "Raron",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rilke-poetry-slam/"
-            },
-            {
-              "label": "Concert & Reading with Samuel \"Suma\" Schnydrig (Them Fleurs)",
-              "detail": "Hotel Glocke",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/events/music/reckingen-vs/concert-und-reading-with-samuel-suma-schnydrig-them-fleurs_AiuhXbs"
-            },
-            {
-              "label": "Literary Event",
-              "detail": "Sierre",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/obstwiesen-und-andere-franzoesische-zyklen-1923-1926/"
-            },
-            {
-              "label": "Jusque dans nos bras",
-              "detail": "Martigny",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jusque-dans-nos-bras/"
-            },
-            {
-              "label": "Riverbanks",
-              "detail": "Kulturfels, Naters",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/events/music/naters/riverbanks_AGrdrKv"
-            },
-            {
-              "label": "Avishai Darash Quartet",
-              "detail": "Jazz Chälli, Visp",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/avishai-darash-quartet/"
             },
             {
               "label": "Rallye International du Valais [EN]",
               "detail": "Martigny Expo, Martigny — ongoing, last day: 31 October 2026",
-              "date": "2026-10-30",
+              "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/rallye-international-du-valais-en/"
-            },
-            {
-              "label": "Workshop: Chocolat Matterhorn Praline",
-              "detail": "Zermatt — ongoing, last day: 30 October 2026",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-chocolat-matterhorn-praline/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -222,7 +222,7 @@
           "url": "/en/events/valais/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "de": {
       "canton": "VS",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "59",
+          "value": "62",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,64 +243,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Brisolée",
+              "label": "Maison des Contes et Légendes : Halloween [DE]",
+              "detail": "Dorénaz",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/maison-des-contes-et-legendes-halloween-en/"
+            },
+            {
+              "label": "A la découverte du patrimoine viticole",
+              "detail": "Martigny-Croix, Martigny",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/a-la-decouverte-du-patrimoine-viticole/"
+            },
+            {
+              "label": "Brisolée bei der Cave du Chevalier Bayard",
               "detail": "Cave du Chevalier Bayard, Varen",
-              "date": "2026-10-30",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/brisolee-at-the-cave-du-chevalier-bayard/"
+            },
+            {
+              "label": "The Irish Folk Festival",
+              "detail": "Kultur- und Kongresszentrum La Poste, Visp",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/visp/the-irish-folk-festival_A8QEKG4"
+            },
+            {
+              "label": "Werli and the Melodies",
+              "detail": "Zeughaus Kultur",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/events/music/glis/werli-and-the-melodies_AH5Hy7w"
+            },
+            {
+              "label": "Mawak und Franco [CH-VS] – L'affreux [CH-VS] – Elias D [CH-VS]",
+              "detail": "Hacienda, Sierre",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/siders/mawak-und-franco-ch-vs-laffreux-ch-vs-elias-d-ch-vs_A7bki9Q"
+            },
+            {
+              "label": "ARBRE",
+              "detail": "Sion / Sitten, Sion",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/arbre/"
+            },
+            {
+              "label": "Brisolée",
+              "detail": "Cave du Chevalier Bayard, Varen — läuft, letzter Tag: 31. Oktober 2026",
+              "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/brisolee/"
             },
             {
               "label": "Helga Zumstein",
-              "detail": "Brig, Brig-Glis",
-              "date": "2026-10-30",
+              "detail": "Brig, Brig-Glis — läuft, letzter Tag: 22. November 2026",
+              "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
-            },
-            {
-              "label": "Rilke Poetry Slam",
-              "detail": "Raron",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rilke-poetry-slam/"
-            },
-            {
-              "label": "Konzert & Lesung mit Samuel \"Suma\" Schnydrig (Them Fleurs)",
-              "detail": "Hotel Glocke",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/events/music/reckingen-vs/concert-und-reading-with-samuel-suma-schnydrig-them-fleurs_AiuhXbs"
-            },
-            {
-              "label": "»Obstwiesen« und andere französische Zyklen 1923-1926",
-              "detail": "Sierre",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/obstwiesen-und-andere-franzoesische-zyklen-1923-1926/"
-            },
-            {
-              "label": "Jusque dans nos bras",
-              "detail": "Martigny",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jusque-dans-nos-bras/"
-            },
-            {
-              "label": "Riverbanks",
-              "detail": "Kulturfels, Naters",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/events/music/naters/riverbanks_AGrdrKv"
-            },
-            {
-              "label": "Avishai Darash Quartet",
-              "detail": "Jazz Chälli, Visp",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/avishai-darash-quartet/"
             },
             {
               "label": "Rallye International du Valais [DE]",
               "detail": "Martigny Expo, Martigny — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-30",
+              "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/rallye-international-du-valais-en/"
-            },
-            {
-              "label": "Workshop: Chocolat Matterhörnli® Praline",
-              "detail": "Zermatt — läuft, letzter Tag: 30. Oktober 2026",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-chocolat-matterhorn-praline/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/wallis/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "fr": {
       "canton": "VS",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "59",
+          "value": "62",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,64 +348,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Brisolée",
+              "label": "Maison des Contes et Légendes : Halloween",
+              "detail": "Dorénaz",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/maison-des-contes-et-legendes-halloween-en/"
+            },
+            {
+              "label": "A la découverte du patrimoine viticole",
+              "detail": "Martigny-Croix, Martigny",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/a-la-decouverte-du-patrimoine-viticole/"
+            },
+            {
+              "label": "Brisolée chez la Cave du Chevalier Bayard",
               "detail": "Cave du Chevalier Bayard, Varen",
-              "date": "2026-10-30",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/brisolee-at-the-cave-du-chevalier-bayard/"
+            },
+            {
+              "label": "The Irish Folk Festival",
+              "detail": "Kultur- und Kongresszentrum La Poste, Visp",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/visp/the-irish-folk-festival_A8QEKG4"
+            },
+            {
+              "label": "Werli and the Melodies",
+              "detail": "Zeughaus Kultur",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/events/music/glis/werli-and-the-melodies_AH5Hy7w"
+            },
+            {
+              "label": "Mawak et Franco [CH-VS] - L'affreux [CH-VS] - Elias D [CH-VS]",
+              "detail": "Hacienda, Sierre",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/siders/mawak-und-franco-ch-vs-laffreux-ch-vs-elias-d-ch-vs_A7bki9Q"
+            },
+            {
+              "label": "ARBRE",
+              "detail": "Sion / Sitten, Sion",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/arbre/"
+            },
+            {
+              "label": "Brisolée",
+              "detail": "Cave du Chevalier Bayard, Varen — en cours, dernier jour : 31 octobre 2026",
+              "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/brisolee/"
             },
             {
               "label": "Helga Zumstein",
-              "detail": "Brig, Brig-Glis",
-              "date": "2026-10-30",
+              "detail": "Brig, Brig-Glis — en cours, dernier jour : 22 novembre 2026",
+              "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
-            },
-            {
-              "label": "Rilke Poetry Slam",
-              "detail": "Raron",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rilke-poetry-slam/"
-            },
-            {
-              "label": "Konzert & Lesung mit Samuel \"Suma\" Schnydrig (Them Fleurs)",
-              "detail": "Hotel Glocke",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/events/music/reckingen-vs/concert-und-reading-with-samuel-suma-schnydrig-them-fleurs_AiuhXbs"
-            },
-            {
-              "label": "Rencontre littéraire",
-              "detail": "Sierre",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/obstwiesen-und-andere-franzoesische-zyklen-1923-1926/"
-            },
-            {
-              "label": "Jusque dans nos bras",
-              "detail": "Martigny",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jusque-dans-nos-bras/"
-            },
-            {
-              "label": "Riverbanks",
-              "detail": "Kulturfels, Naters",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/events/music/naters/riverbanks_AGrdrKv"
-            },
-            {
-              "label": "Quatuor d'Avishai Darash",
-              "detail": "Jazz Chälli, Visp",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/avishai-darash-quartet/"
             },
             {
               "label": "Rallye International du Valais",
               "detail": "Martigny Expo, Martigny — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-30",
+              "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/rallye-international-du-valais-en/"
-            },
-            {
-              "label": "Atelier : Praline Chocolat Matterhorn",
-              "detail": "Zermatt — en cours, dernier jour : 30 octobre 2026",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-chocolat-matterhorn-praline/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/valais/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     }
   }
 }

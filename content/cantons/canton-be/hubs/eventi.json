@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "eventi",
-  "updatedAt": "2026-10-30T19:31:58.244Z",
-  "contentHash": "1d681b3992bff671c3dd33e4eeaf036e580be72e2b66c48333e217118bef7391",
+  "updatedAt": "2026-10-31T06:15:08.747Z",
+  "contentHash": "25669a105b3d882ee876ae9f4b3252a44ef18471b98a7dc12071270e250a735d",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "211",
+          "value": "210",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,64 +33,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "„The Jazz Room“ im Château Salavaux: eine Reise ins Herz von New Orleans",
-              "detail": "Château Salavaux, Ins",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/salavaux/the-jazz-room-im-chateau-salavaux-eine-reise-ins-herz-von-new-orleans_AEP66rS"
+              "label": "Parknacht - Halloween Party",
+              "detail": "Crémines",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/nuit-du-parc-halloween-party/"
             },
             {
-              "label": "SAZ Oldies Disco Halloween Special",
-              "detail": "Kulturhalle Sägegasse, Burgdorf",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/saz-oldies-disco-halloween-special/"
+              "label": "Lake Thun Play Ship",
+              "detail": "Thunersee, Thun",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spieleschiff-thunersee/"
             },
             {
-              "label": "Shrizz N Maze feat. Greg Boyer",
-              "detail": "Ittigen",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/shrizz-n-maze-feat-greg-boyer/"
+              "label": "Onion market Aarberg",
+              "detail": "Zibelemärit Aarbärg, Aarberg",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/onion-market-aarberg/"
             },
             {
-              "label": "solo exhibition by Andrea Cindy Raemy",
-              "detail": "Biel, Biel/Bienne",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/solo-exhibition-by-andrea-cindy-raemy/"
+              "label": "Onion Market",
+              "detail": "Neumarktplatz",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/onion-market/"
             },
             {
-              "label": "Viaggio verso la libertà. Capri - Skagen - Monte Verità",
-              "detail": "Kunstmuseum Bern, Bern",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/voyage-vers-la-liberte-capri-skagen-monte-verita/"
+              "label": "Herbst-Gartenkurs in Kaufdorf",
+              "detail": "Kaufdorf",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbst-gartenkurs-in-kaufdorf/"
             },
             {
-              "label": "Market Frutigen",
-              "detail": "3714 Frutigen, Frutigen",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/frutigmaerit/"
+              "label": "Herbst-Gartenkurs in Wattenwil",
+              "detail": "3665 Wattenwil, Wattenwil",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbst-gartenkurs-in-wattenwil/"
             },
             {
-              "label": "Langnauer Oktoberfest",
-              "detail": "Emmental Versicherung Arena, Langnau im Emmental",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/langnauer-oktoberfest/"
+              "label": "Zäme fürs Naturparadies – das Bannholz wird eingewintert!",
+              "detail": "Evang.-ref. Kirche Wahlern, Schwarzenburg",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/ensemble-pour-le-paradis-de-la-nature-mis-en-hivernage/"
             },
             {
-              "label": "Family Literacy Arabisch - احكي لي حكاية",
-              "detail": "Biel",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/family-literacy-arabisch/"
+              "label": "Reiki-Kurs 2 im Blockhaus",
+              "detail": "Oey-Diemtigen, Diemtigen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reiki-kurs-2-im-blockhaus/"
             },
             {
-              "label": "Frutigmärit mit Ländler Panache",
-              "detail": "Hotel Simplon, Frutigen",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/frutigen/frutigmaerit-mit-laendler-panache_AfJq15k"
+              "label": "SAMHAIN Irish Music Pub",
+              "detail": "Schloss Laupen, Laupen",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/laupen-be/samhain-irish-music-pub_An9nydc"
             },
             {
-              "label": "Jubiläumskonzert - Krönungsmesse",
-              "detail": "Johannes-Kirche Thun, Thun",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jubilaeumskonzert-kroenungsmesse/"
+              "label": "Handpan Schnupperkurs",
+              "detail": "Handpanschule Thun, Thun",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/thun/handpan-schnupperkurs_AatDrck"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -135,7 +135,7 @@
           "url": "/eventi/berna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "en": {
       "canton": "BE",
@@ -145,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "211",
+          "value": "210",
           "note": "from the site’s events calendar"
         }
       ],
@@ -156,64 +156,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "The Jazz Room at Château Salavaux: a journey to the heart of New Orleans",
-              "detail": "Château Salavaux, Ins",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/salavaux/the-jazz-room-im-chateau-salavaux-eine-reise-ins-herz-von-new-orleans_AEP66rS"
+              "label": "Parknacht - Halloween Party",
+              "detail": "Crémines",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/nuit-du-parc-halloween-party/"
             },
             {
-              "label": "SAZ Oldies Disco Halloween Special",
-              "detail": "Kulturhalle Sägegasse, Burgdorf",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/saz-oldies-disco-halloween-special/"
+              "label": "Lake Thun Play Ship",
+              "detail": "Thunersee, Thun",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spieleschiff-thunersee/"
             },
             {
-              "label": "Shrizz N Maze feat. Greg Boyer",
-              "detail": "Ittigen",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/shrizz-n-maze-feat-greg-boyer/"
+              "label": "Onion market Aarberg",
+              "detail": "Zibelemärit Aarbärg, Aarberg",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/onion-market-aarberg/"
             },
             {
-              "label": "solo exhibition by Andrea Cindy Raemy",
-              "detail": "Biel, Biel/Bienne",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/solo-exhibition-by-andrea-cindy-raemy/"
+              "label": "Onion Market",
+              "detail": "Neumarktplatz",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/onion-market/"
             },
             {
-              "label": "Journey to freedom. Capri - Skagen - Monte Verità",
-              "detail": "Kunstmuseum Bern, Bern",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/voyage-vers-la-liberte-capri-skagen-monte-verita/"
+              "label": "Herbst-Gartenkurs in Kaufdorf",
+              "detail": "Kaufdorf",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbst-gartenkurs-in-kaufdorf/"
             },
             {
-              "label": "Market Frutigen",
-              "detail": "3714 Frutigen, Frutigen",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/frutigmaerit/"
+              "label": "Herbst-Gartenkurs in Wattenwil",
+              "detail": "3665 Wattenwil, Wattenwil",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbst-gartenkurs-in-wattenwil/"
             },
             {
-              "label": "Langnauer Oktoberfest",
-              "detail": "Emmental Versicherung Arena, Langnau im Emmental",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/langnauer-oktoberfest/"
+              "label": "Zäme fürs Naturparadies – das Bannholz wird eingewintert!",
+              "detail": "Evang.-ref. Kirche Wahlern, Schwarzenburg",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/ensemble-pour-le-paradis-de-la-nature-mis-en-hivernage/"
             },
             {
-              "label": "Family Literacy Arabisch - احكي لي حكاية",
-              "detail": "Biel",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/family-literacy-arabisch/"
+              "label": "Reiki-Kurs 2 im Blockhaus",
+              "detail": "Oey-Diemtigen, Diemtigen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reiki-kurs-2-im-blockhaus/"
             },
             {
-              "label": "Frutigmärit with Ländler Panache",
-              "detail": "Hotel Simplon, Frutigen",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/frutigen/frutigmaerit-mit-laendler-panache_AfJq15k"
+              "label": "SAMHAIN Irish Music Pub",
+              "detail": "Schloss Laupen, Laupen",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/laupen-be/samhain-irish-music-pub_An9nydc"
             },
             {
-              "label": "Jubiläumskonzert - Krönungsmesse",
-              "detail": "Johannes-Kirche Thun, Thun",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jubilaeumskonzert-kroenungsmesse/"
+              "label": "Handpan Schnupperkurs",
+              "detail": "Handpanschule Thun, Thun",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/thun/handpan-schnupperkurs_AatDrck"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -258,7 +258,7 @@
           "url": "/en/events/bern/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "de": {
       "canton": "BE",
@@ -268,7 +268,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "211",
+          "value": "210",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -279,64 +279,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "„The Jazz Room“ im Château Salavaux: eine Reise ins Herz von New Orleans",
-              "detail": "Château Salavaux, Ins",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/salavaux/the-jazz-room-im-chateau-salavaux-eine-reise-ins-herz-von-new-orleans_AEP66rS"
+              "label": "Parknacht - Halloween Party",
+              "detail": "Crémines",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/nuit-du-parc-halloween-party/"
             },
             {
-              "label": "SAZ Oldies Disco Halloween Special",
-              "detail": "Kulturhalle Sägegasse, Burgdorf",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/saz-oldies-disco-halloween-special/"
+              "label": "Spieleschiff Thunersee",
+              "detail": "Thunersee, Thun",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spieleschiff-thunersee/"
             },
             {
-              "label": "Shrizz N Maze feat. Greg Boyer",
-              "detail": "Ittigen",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/shrizz-n-maze-feat-greg-boyer/"
+              "label": "Zibelemärit Aarbärg",
+              "detail": "Zibelemärit Aarbärg, Aarberg",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/onion-market-aarberg/"
             },
             {
-              "label": "solo exhibition by Andrea Cindy Raemy",
-              "detail": "Biel, Biel/Bienne",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/solo-exhibition-by-andrea-cindy-raemy/"
+              "label": "Zwiebelmarkt",
+              "detail": "Neumarktplatz",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/onion-market/"
             },
             {
-              "label": "Reise in die Freiheit. Capri – Skagen – Monte Verità",
-              "detail": "Kunstmuseum Bern, Bern",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/voyage-vers-la-liberte-capri-skagen-monte-verita/"
+              "label": "Herbst-Gartenkurs in Kaufdorf",
+              "detail": "Kaufdorf",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbst-gartenkurs-in-kaufdorf/"
             },
             {
-              "label": "Frutigmärit",
-              "detail": "3714 Frutigen, Frutigen",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/frutigmaerit/"
+              "label": "Herbst-Gartenkurs in Wattenwil",
+              "detail": "3665 Wattenwil, Wattenwil",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbst-gartenkurs-in-wattenwil/"
             },
             {
-              "label": "Langnauer Oktoberfest",
-              "detail": "Emmental Versicherung Arena, Langnau im Emmental",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/langnauer-oktoberfest/"
+              "label": "Zäme fürs Naturparadies – das Bannholz wird eingewintert!",
+              "detail": "Evang.-ref. Kirche Wahlern, Schwarzenburg",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/ensemble-pour-le-paradis-de-la-nature-mis-en-hivernage/"
             },
             {
-              "label": "Family Literacy Arabisch - احكي لي حكاية",
-              "detail": "Biel",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/family-literacy-arabisch/"
+              "label": "Reiki-Kurs 2 im Blockhaus",
+              "detail": "Oey-Diemtigen, Diemtigen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reiki-kurs-2-im-blockhaus/"
             },
             {
-              "label": "Frutigm ⑤rit mit L Nevrndler Panache",
-              "detail": "Hotel Simplon, Frutigen",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/frutigen/frutigmaerit-mit-laendler-panache_AfJq15k"
+              "label": "SAMHAIN Irish Music Pub",
+              "detail": "Schloss Laupen, Laupen",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/laupen-be/samhain-irish-music-pub_An9nydc"
             },
             {
-              "label": "Jubiläumskonzert - Krönungsmesse",
-              "detail": "Johannes-Kirche Thun, Thun",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jubilaeumskonzert-kroenungsmesse/"
+              "label": "Handpan Schnupperkurs",
+              "detail": "Handpanschule Thun, Thun",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/thun/handpan-schnupperkurs_AatDrck"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -381,7 +381,7 @@
           "url": "/de/veranstaltungen/bern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "fr": {
       "canton": "BE",
@@ -391,7 +391,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "211",
+          "value": "210",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -402,64 +402,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "The Jazz Room au Château Salavaux : un voyage au cœur de la Nouvelle-Orléans",
-              "detail": "Château Salavaux, Ins",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/salavaux/the-jazz-room-im-chateau-salavaux-eine-reise-ins-herz-von-new-orleans_AEP66rS"
+              "label": "Nuit du parc - Halloween Party",
+              "detail": "Crémines",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/nuit-du-parc-halloween-party/"
             },
             {
-              "label": "SAZ Oldies Disco Halloween Special",
-              "detail": "Kulturhalle Sägegasse, Burgdorf",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/saz-oldies-disco-halloween-special/"
+              "label": "Bateau ludique du lac de Thoune",
+              "detail": "Thunersee, Thun",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spieleschiff-thunersee/"
             },
             {
-              "label": "Shrizz N Maze feat. Greg Boyer",
-              "detail": "Ittigen",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/shrizz-n-maze-feat-greg-boyer/"
+              "label": "Marché aux oignons d'Aarberg",
+              "detail": "Zibelemärit Aarbärg, Aarberg",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/onion-market-aarberg/"
             },
             {
-              "label": "solo exhibition by Andrea Cindy Raemy",
-              "detail": "Biel, Biel/Bienne",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/solo-exhibition-by-andrea-cindy-raemy/"
+              "label": "Marché aux oignons",
+              "detail": "Neumarktplatz",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/onion-market/"
             },
             {
-              "label": "Voyage vers la liberté. Capri - Skagen - Monte Verità",
-              "detail": "Kunstmuseum Bern, Bern",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/voyage-vers-la-liberte-capri-skagen-monte-verita/"
+              "label": "Herbst-Gartenkurs in Kaufdorf",
+              "detail": "Kaufdorf",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbst-gartenkurs-in-kaufdorf/"
             },
             {
-              "label": "Marché Frutigen",
-              "detail": "3714 Frutigen, Frutigen",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/frutigmaerit/"
+              "label": "Herbst-Gartenkurs in Wattenwil",
+              "detail": "3665 Wattenwil, Wattenwil",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbst-gartenkurs-in-wattenwil/"
             },
             {
-              "label": "Langnauer Oktoberfest",
-              "detail": "Emmental Versicherung Arena, Langnau im Emmental",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/langnauer-oktoberfest/"
+              "label": "Ensemble pour le paradis de la nature – mis en hivernage!",
+              "detail": "Evang.-ref. Kirche Wahlern, Schwarzenburg",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/ensemble-pour-le-paradis-de-la-nature-mis-en-hivernage/"
             },
             {
-              "label": "Family Literacy Arabe - احكي لي حكاية",
-              "detail": "Biel",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/family-literacy-arabisch/"
+              "label": "Reiki-Kurs 2 im Blockhaus",
+              "detail": "Oey-Diemtigen, Diemtigen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reiki-kurs-2-im-blockhaus/"
             },
             {
-              "label": "Fruits avec Ländler Panache",
-              "detail": "Hotel Simplon, Frutigen",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/frutigen/frutigmaerit-mit-laendler-panache_AfJq15k"
+              "label": "SAMHAIN Irish Music Pub",
+              "detail": "Schloss Laupen, Laupen",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/evenements/ceci-cela/laupen-be/samhain-irish-music-pub_An9nydc"
             },
             {
-              "label": "Jubiläumskonzert - Krönungsmesse",
-              "detail": "Johannes-Kirche Thun, Thun",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jubilaeumskonzert-kroenungsmesse/"
+              "label": "Handpan Schnupperkurs",
+              "detail": "Handpanschule Thun, Thun",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/thun/handpan-schnupperkurs_AatDrck"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -504,7 +504,7 @@
           "url": "/fr/evenements/berne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     }
   }
 }

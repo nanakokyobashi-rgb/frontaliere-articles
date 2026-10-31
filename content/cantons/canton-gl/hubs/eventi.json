@@ -4,12 +4,12 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "eventi",
-  "updatedAt": "2026-10-30T06:23:49.454Z",
-  "contentHash": "872663c3530059e90ca7d52e6a3fe9825fef70b3bf9a56e895911307614550bb",
+  "updatedAt": "2026-10-31T06:15:08.747Z",
+  "contentHash": "7c83e738cb42e2441504ac292d56fb7ee23eb122102040315eb34511a6537fb1",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-29T21:23:37.654Z",
+      "updatedAt": "2026-10-30T13:23:17.161Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "19",
+          "value": "21",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,24 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
-              "detail": "Schützenhaus Glarus, Glarus",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
-            },
-            {
-              "label": "Extrawurst- eine schlagkräftige Komödie",
-              "detail": "Kantonsschule Glarus, Glarus",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/glarus/extrawurst-eine-schlagkraeftige-komoedie_AuAFDbZ"
-            },
-            {
-              "label": "Balboa Schnupperkurs",
-              "detail": "Ennenda, Glarus — in corso, ultimo giorno: 11 novembre 2026",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
-            },
             {
               "label": "Glarner Junioren Turnier 2026",
               "detail": "Glarus",
@@ -91,11 +73,29 @@
               "detail": "Wortreich Buchhandlung & Antiquariat",
               "date": "2026-10-31",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/glarus/walts-blues-box-quartett_Awhd7nQ"
+            },
+            {
+              "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
+              "detail": "Schützenhaus Glarus, Glarus — in corso, ultimo giorno: 14 novembre 2026",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
+            },
+            {
+              "label": "Balboa Schnupperkurs",
+              "detail": "Ennenda, Glarus — in corso, ultimo giorno: 11 novembre 2026",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
+            },
+            {
+              "label": "Buchstart für Kinder im November",
+              "detail": "Glarus",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/buchstart-fuer-kinder-im-november/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/glarona/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/glarona/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "en": {
       "canton": "GL",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "19",
+          "value": "21",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,24 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
-              "detail": "Schützenhaus Glarus, Glarus",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
-            },
-            {
-              "label": "Extrawurst- eine schlagkräftige Komödie",
-              "detail": "Kantonsschule Glarus, Glarus",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/glarus/extrawurst-eine-schlagkraeftige-komoedie_AuAFDbZ"
-            },
-            {
-              "label": "Balboa Schnupperkurs",
-              "detail": "Ennenda, Glarus — ongoing, last day: 11 November 2026",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
-            },
             {
               "label": "Glarner Junioren Turnier 2026",
               "detail": "Glarus",
@@ -196,11 +178,29 @@
               "detail": "Wortreich Buchhandlung & Antiquariat",
               "date": "2026-10-31",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/glarus/walts-blues-box-quartett_Awhd7nQ"
+            },
+            {
+              "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
+              "detail": "Schützenhaus Glarus, Glarus — ongoing, last day: 14 November 2026",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
+            },
+            {
+              "label": "Balboa Schnupperkurs",
+              "detail": "Ennenda, Glarus — ongoing, last day: 11 November 2026",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
+            },
+            {
+              "label": "Buchstart für Kinder im November",
+              "detail": "Glarus",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/buchstart-fuer-kinder-im-november/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/glarus/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/glarus/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "de": {
       "canton": "GL",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "19",
+          "value": "21",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,24 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
-              "detail": "Schützenhaus Glarus, Glarus",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
-            },
-            {
-              "label": "Extrawurst- eine schlagkräftige Komödie",
-              "detail": "Kantonsschule Glarus, Glarus",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/glarus/extrawurst-eine-schlagkraeftige-komoedie_AuAFDbZ"
-            },
-            {
-              "label": "Balboa Schnupperkurs",
-              "detail": "Ennenda, Glarus — läuft, letzter Tag: 11. November 2026",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
-            },
             {
               "label": "Glarner Junioren Turnier 2026",
               "detail": "Glarus",
@@ -301,11 +283,29 @@
               "detail": "Wortreich Buchhandlung & Antiquariat",
               "date": "2026-10-31",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/glarus/walts-blues-box-quartett_Awhd7nQ"
+            },
+            {
+              "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
+              "detail": "Schützenhaus Glarus, Glarus — läuft, letzter Tag: 14. November 2026",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
+            },
+            {
+              "label": "Balboa Schnupperkurs",
+              "detail": "Ennenda, Glarus — läuft, letzter Tag: 11. November 2026",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
+            },
+            {
+              "label": "Buchstart für Kinder im November",
+              "detail": "Glarus",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/buchstart-fuer-kinder-im-november/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/glarus/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/glarus/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "fr": {
       "canton": "GL",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "19",
+          "value": "21",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,24 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
-              "detail": "Schützenhaus Glarus, Glarus",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
-            },
-            {
-              "label": "Extrawurst- eine schlagkräftige Komödie",
-              "detail": "Kantonsschule Glarus, Glarus",
-              "date": "2026-10-30",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/glarus/extrawurst-eine-schlagkraeftige-komoedie_AuAFDbZ"
-            },
-            {
-              "label": "Schnupperkurs de Balboa",
-              "detail": "Ennenda, Glarus — en cours, dernier jour : 11 novembre 2026",
-              "date": "2026-10-30",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
-            },
             {
               "label": "Glarner Junioren Turnier 2026",
               "detail": "Glarus",
@@ -406,11 +388,29 @@
               "detail": "Wortreich Buchhandlung & Antiquariat",
               "date": "2026-10-31",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/glarus/walts-blues-box-quartett_Awhd7nQ"
+            },
+            {
+              "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
+              "detail": "Schützenhaus Glarus, Glarus — en cours, dernier jour : 14 novembre 2026",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
+            },
+            {
+              "label": "Schnupperkurs de Balboa",
+              "detail": "Ennenda, Glarus — en cours, dernier jour : 11 novembre 2026",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
+            },
+            {
+              "label": "Buchstart für Kinder im November",
+              "detail": "Glarus",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/buchstart-fuer-kinder-im-november/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/glaris/",
-          "updatedAt": "2026-10-29T21:23:37.654Z"
+          "updatedAt": "2026-10-30T13:23:17.161Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/glaris/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-30T06:23:49.454Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     }
   }
 }

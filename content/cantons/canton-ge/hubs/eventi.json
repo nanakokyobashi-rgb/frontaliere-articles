@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "eventi",
-  "updatedAt": "2026-10-30T19:31:58.244Z",
-  "contentHash": "1f5e35e9d8b11ec1fc92cbad224654a33eb9f2cd16ba567f143fc63ae6ce992e",
+  "updatedAt": "2026-10-31T06:15:08.747Z",
+  "contentHash": "e9d6d11e2a40759857a5e47606b3b9654bc70b09173b8f84145dd2f9b2e2e5df",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-30T11:41:14.746Z",
+      "updatedAt": "2026-10-30T21:45:03.956Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "401",
+          "value": "404",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,64 +38,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "«Quelque chose a changé» Une exposition de l'artiste Lola Jay",
+              "label": "AFRO HALLOWEEN",
               "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/quelque-chose-change-exposition-artiste-lola"
+              "date": "2026-10-31",
+              "url": "https://www.geneve.ch/agenda/afro-halloween"
             },
             {
-              "label": "32e Festival International du Film de Genève (GIFF)",
+              "label": "AFRO HALLOWEEN NIGHT",
               "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/festival-international-film-geneve-giff"
+              "date": "2026-10-31",
+              "url": "https://www.geneve.ch/agenda/afro-halloween-night"
             },
             {
-              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "label": "Alerte rouge !",
               "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+              "date": "2026-10-31",
+              "url": "https://www.geneve.ch/agenda/alerte-rouge-0"
             },
             {
-              "label": "Au cœur de l’héritage de Marguerite Duras : Découvrez le film \"La Douleur\" et rencontrez Jean Marc Turine",
+              "label": "Alerte rouge ! * COMPLET *",
               "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/coeur-heritage-marguerite-duras-decouvrez-film-douleur-rencontrez-jean-marc-turine"
+              "date": "2026-10-31",
+              "url": "https://www.geneve.ch/agenda/alerte-rouge-complet"
             },
             {
-              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
-              "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
+              "label": "Annulé - HALLOMANIA - Double chasse aux bonbons Vignes & Fluo, dégustation de vins à Soral",
+              "detail": "Soral",
+              "date": "2026-10-31",
+              "url": "https://www.geneve.ch/agenda/hallomania-double-chasse-bonbons-vignes-fluo-degustation-vins-soral-0"
             },
             {
-              "label": "Balades Théâtralisées - De la haute-ville aux bas-fonds",
+              "label": "Atelier chocolat pour les enfants - Chocolate monster",
               "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-haute-ville-fonds"
+              "date": "2026-10-31",
+              "url": "https://www.geneve.ch/agenda/atelier-chocolat-enfants-chocolate-monster-3"
             },
             {
-              "label": "Cafés genevois: la vie même",
+              "label": "Atelier Créez Votre Chocolat Halloween",
               "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/cafes-genevois-vie"
+              "date": "2026-10-31",
+              "url": "https://www.geneve.ch/agenda/atelier-creez-chocolat-halloween-2"
             },
             {
-              "label": "CHRÜSIMÜSI",
+              "label": "Atelier Créez Votre Chocolat Halloween",
               "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/chrusimusi"
+              "date": "2026-10-31",
+              "url": "https://www.geneve.ch/agenda/atelier-creez-chocolat-halloween-4"
             },
             {
-              "label": "Ciné club",
+              "label": "Ateliers d’écriture: écrire et réinventer un quartier",
               "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/cine-club"
+              "date": "2026-10-31",
+              "url": "https://www.geneve.ch/agenda/ateliers-ecriture-ecrire-reinventer-quartier"
             },
             {
-              "label": "Concert sur le pouce avec un quatuor à cordes à la Bibliothèque de la Cité",
+              "label": "Balades d'exploration urbaine: «Frontières»",
               "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/concert-pouce-quatuor-cordes-bibliotheque-cite"
+              "date": "2026-10-31",
+              "url": "https://www.geneve.ch/agenda/balades-exploration-urbaine-frontieres"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -118,7 +118,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -140,7 +140,7 @@
           "url": "/eventi/ginevra/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "en": {
       "canton": "GE",
@@ -150,7 +150,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "401",
+          "value": "404",
           "note": "from the site’s events calendar"
         }
       ],
@@ -161,64 +161,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "«Quelque chose a changé» Une exposition de l'artiste Lola Jay",
+              "label": "AFRO HALLOWEEN",
               "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/quelque-chose-change-exposition-artiste-lola"
+              "date": "2026-10-31",
+              "url": "https://www.geneve.ch/agenda/afro-halloween"
             },
             {
-              "label": "32e Festival International du Film de Genève (GIFF)",
+              "label": "AFRO HALLOWEEN NIGHT",
               "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/festival-international-film-geneve-giff"
+              "date": "2026-10-31",
+              "url": "https://www.geneve.ch/agenda/afro-halloween-night"
             },
             {
-              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "label": "Alerte rouge !",
               "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+              "date": "2026-10-31",
+              "url": "https://www.geneve.ch/agenda/alerte-rouge-0"
             },
             {
-              "label": "Au cœur de l’héritage de Marguerite Duras : Découvrez le film \"La Douleur\" et rencontrez Jean Marc Turine",
+              "label": "Alerte rouge ! * COMPLET *",
               "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/coeur-heritage-marguerite-duras-decouvrez-film-douleur-rencontrez-jean-marc-turine"
+              "date": "2026-10-31",
+              "url": "https://www.geneve.ch/agenda/alerte-rouge-complet"
             },
             {
-              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
-              "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
+              "label": "Annulé - HALLOMANIA - Double chasse aux bonbons Vignes & Fluo, dégustation de vins à Soral",
+              "detail": "Soral",
+              "date": "2026-10-31",
+              "url": "https://www.geneve.ch/agenda/hallomania-double-chasse-bonbons-vignes-fluo-degustation-vins-soral-0"
             },
             {
-              "label": "Balades Théâtralisées - De la haute-ville aux bas-fonds",
+              "label": "Atelier chocolat pour les enfants - Chocolate monster",
               "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-haute-ville-fonds"
+              "date": "2026-10-31",
+              "url": "https://www.geneve.ch/agenda/atelier-chocolat-enfants-chocolate-monster-3"
             },
             {
-              "label": "Cafés genevois: la vie même",
+              "label": "Atelier Créez Votre Chocolat Halloween",
               "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/cafes-genevois-vie"
+              "date": "2026-10-31",
+              "url": "https://www.geneve.ch/agenda/atelier-creez-chocolat-halloween-2"
             },
             {
-              "label": "CHRÜSIMÜSI",
+              "label": "Atelier Créez Votre Chocolat Halloween",
               "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/chrusimusi"
+              "date": "2026-10-31",
+              "url": "https://www.geneve.ch/agenda/atelier-creez-chocolat-halloween-4"
             },
             {
-              "label": "Ciné club",
+              "label": "Ateliers d’écriture: écrire et réinventer un quartier",
               "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/cine-club"
+              "date": "2026-10-31",
+              "url": "https://www.geneve.ch/agenda/ateliers-ecriture-ecrire-reinventer-quartier"
             },
             {
-              "label": "Concert sur le pouce avec un quatuor à cordes à la Bibliothèque de la Cité",
+              "label": "Balades d'exploration urbaine: «Frontières»",
               "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/concert-pouce-quatuor-cordes-bibliotheque-cite"
+              "date": "2026-10-31",
+              "url": "https://www.geneve.ch/agenda/balades-exploration-urbaine-frontieres"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -241,7 +241,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -263,7 +263,7 @@
           "url": "/en/events/geneva/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "de": {
       "canton": "GE",
@@ -273,7 +273,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "401",
+          "value": "404",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -284,64 +284,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "«Quelque chose a changé» Une exposition de l'artiste Lola Jay",
+              "label": "AFRO HALLOWEEN",
               "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/quelque-chose-change-exposition-artiste-lola"
+              "date": "2026-10-31",
+              "url": "https://www.geneve.ch/agenda/afro-halloween"
             },
             {
-              "label": "32e Festival International du Film de Genève (GIFF)",
+              "label": "AFRO HALLOWEEN NIGHT",
               "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/festival-international-film-geneve-giff"
+              "date": "2026-10-31",
+              "url": "https://www.geneve.ch/agenda/afro-halloween-night"
             },
             {
-              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "label": "Alerte rouge !",
               "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+              "date": "2026-10-31",
+              "url": "https://www.geneve.ch/agenda/alerte-rouge-0"
             },
             {
-              "label": "Au cœur de l’héritage de Marguerite Duras : Découvrez le film \"La Douleur\" et rencontrez Jean Marc Turine",
+              "label": "Alerte rouge ! * COMPLET *",
               "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/coeur-heritage-marguerite-duras-decouvrez-film-douleur-rencontrez-jean-marc-turine"
+              "date": "2026-10-31",
+              "url": "https://www.geneve.ch/agenda/alerte-rouge-complet"
             },
             {
-              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
-              "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
+              "label": "Annulé - HALLOMANIA - Double chasse aux bonbons Vignes & Fluo, dégustation de vins à Soral",
+              "detail": "Soral",
+              "date": "2026-10-31",
+              "url": "https://www.geneve.ch/agenda/hallomania-double-chasse-bonbons-vignes-fluo-degustation-vins-soral-0"
             },
             {
-              "label": "Balades Théâtralisées - De la haute-ville aux bas-fonds",
+              "label": "Atelier chocolat pour les enfants - Chocolate monster",
               "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-haute-ville-fonds"
+              "date": "2026-10-31",
+              "url": "https://www.geneve.ch/agenda/atelier-chocolat-enfants-chocolate-monster-3"
             },
             {
-              "label": "Cafés genevois: la vie même",
+              "label": "Atelier Créez Votre Chocolat Halloween",
               "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/cafes-genevois-vie"
+              "date": "2026-10-31",
+              "url": "https://www.geneve.ch/agenda/atelier-creez-chocolat-halloween-2"
             },
             {
-              "label": "CHRÜSIMÜSI",
+              "label": "Atelier Créez Votre Chocolat Halloween",
               "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/chrusimusi"
+              "date": "2026-10-31",
+              "url": "https://www.geneve.ch/agenda/atelier-creez-chocolat-halloween-4"
             },
             {
-              "label": "Ciné club",
+              "label": "Ateliers d’écriture: écrire et réinventer un quartier",
               "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/cine-club"
+              "date": "2026-10-31",
+              "url": "https://www.geneve.ch/agenda/ateliers-ecriture-ecrire-reinventer-quartier"
             },
             {
-              "label": "Concert sur le pouce avec un quatuor à cordes à la Bibliothèque de la Cité",
+              "label": "Balades d'exploration urbaine: «Frontières»",
               "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/concert-pouce-quatuor-cordes-bibliotheque-cite"
+              "date": "2026-10-31",
+              "url": "https://www.geneve.ch/agenda/balades-exploration-urbaine-frontieres"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -364,7 +364,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -386,7 +386,7 @@
           "url": "/de/veranstaltungen/genf/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     },
     "fr": {
       "canton": "GE",
@@ -396,7 +396,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "401",
+          "value": "404",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -407,64 +407,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "«Quelque chose a changé» Une exposition de l'artiste Lola Jay",
+              "label": "AFRO HALLOWEEN",
               "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/quelque-chose-change-exposition-artiste-lola"
+              "date": "2026-10-31",
+              "url": "https://www.geneve.ch/agenda/afro-halloween"
             },
             {
-              "label": "32e Festival International du Film de Genève (GIFF)",
+              "label": "AFRO HALLOWEEN NIGHT",
               "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/festival-international-film-geneve-giff"
+              "date": "2026-10-31",
+              "url": "https://www.geneve.ch/agenda/afro-halloween-night"
             },
             {
-              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "label": "Alerte rouge !",
               "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+              "date": "2026-10-31",
+              "url": "https://www.geneve.ch/agenda/alerte-rouge-0"
             },
             {
-              "label": "Au cœur de l’héritage de Marguerite Duras : Découvrez le film \"La Douleur\" et rencontrez Jean Marc Turine",
+              "label": "Alerte rouge ! * COMPLET *",
               "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/coeur-heritage-marguerite-duras-decouvrez-film-douleur-rencontrez-jean-marc-turine"
+              "date": "2026-10-31",
+              "url": "https://www.geneve.ch/agenda/alerte-rouge-complet"
             },
             {
-              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
-              "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
+              "label": "Annulé - HALLOMANIA - Double chasse aux bonbons Vignes & Fluo, dégustation de vins à Soral",
+              "detail": "Soral",
+              "date": "2026-10-31",
+              "url": "https://www.geneve.ch/agenda/hallomania-double-chasse-bonbons-vignes-fluo-degustation-vins-soral-0"
             },
             {
-              "label": "Balades Théâtralisées - De la haute-ville aux bas-fonds",
+              "label": "Atelier chocolat pour les enfants - Chocolate monster",
               "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-haute-ville-fonds"
+              "date": "2026-10-31",
+              "url": "https://www.geneve.ch/agenda/atelier-chocolat-enfants-chocolate-monster-3"
             },
             {
-              "label": "Cafés genevois: la vie même",
+              "label": "Atelier Créez Votre Chocolat Halloween",
               "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/cafes-genevois-vie"
+              "date": "2026-10-31",
+              "url": "https://www.geneve.ch/agenda/atelier-creez-chocolat-halloween-2"
             },
             {
-              "label": "CHRÜSIMÜSI",
+              "label": "Atelier Créez Votre Chocolat Halloween",
               "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/chrusimusi"
+              "date": "2026-10-31",
+              "url": "https://www.geneve.ch/agenda/atelier-creez-chocolat-halloween-4"
             },
             {
-              "label": "Ciné club",
+              "label": "Ateliers d’écriture: écrire et réinventer un quartier",
               "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/cine-club"
+              "date": "2026-10-31",
+              "url": "https://www.geneve.ch/agenda/ateliers-ecriture-ecrire-reinventer-quartier"
             },
             {
-              "label": "Concert sur le pouce avec un quatuor à cordes à la Bibliothèque de la Cité",
+              "label": "Balades d'exploration urbaine: «Frontières»",
               "detail": "Genève",
-              "date": "2026-10-30",
-              "url": "https://www.geneve.ch/agenda/concert-pouce-quatuor-cordes-bibliotheque-cite"
+              "date": "2026-10-31",
+              "url": "https://www.geneve.ch/agenda/balades-exploration-urbaine-frontieres"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -487,7 +487,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-10-30T21:45:03.956Z"
         }
       ],
       "curatedArticles": [
@@ -509,7 +509,7 @@
           "url": "/fr/evenements/geneve/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-30T19:31:58.244Z"
+      "updatedAt": "2026-10-31T06:15:08.747Z"
     }
   }
 }
