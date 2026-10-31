@@ -786,6 +786,73 @@ function hasFormalReviewInput(body) {
   return String(body || '').split(/\r?\n/u).some((line) => REVIEW_INPUT_MARKER_LINE_RE.test(line));
 }
 
+function reviewOrderTimestamp(review) {
+  const timestamps = [review?.submitted_at, review?.submittedAt, review?.created_at, review?.createdAt]
+    .map((value) => Date.parse(value || ''))
+    .filter(Number.isFinite);
+  return timestamps.length > 0 ? Math.max(...timestamps) : Number.NEGATIVE_INFINITY;
+}
+
+function compareReviewOrder(left, right) {
+  return reviewOrderTimestamp(left) - reviewOrderTimestamp(right)
+    || (Number(left?.id || 0) || 0) - (Number(right?.id || 0) || 0);
+}
+
+/**
+ * Recupera il contesto che i consumer legacy non inoltrano ancora. La
+ * selezione è ammessa solo sul target GitHub canonico e sul body esatto della
+ * review: una risposta mancante, ambigua o non confrontabile torna null e il
+ * chiamante resta fail-closed.
+ */
+async function resolveFormalReviewContext(body, { repo, pr, prUrl } = {}) {
+  const canonicalUrl = `https://github.com/${repo}/pull/${pr}`;
+  if (String(prUrl || '').replace(/\/+$/u, '') !== canonicalUrl) return null;
+  try {
+    const metadata = gh(['api', `repos/${repo}/pulls/${pr}`]);
+    const headSha = String(metadata?.head?.sha || '');
+    if (!/^[0-9a-f]{40}$/iu.test(headSha)) return null;
+    const reviews = gh(['api', `repos/${repo}/pulls/${pr}/reviews`, '--paginate']);
+    if (!Array.isArray(reviews)) return null;
+    const candidates = reviews
+      .filter((review) => isManagedReview(review)
+        && isTerminalReviewState(review?.state)
+        && String(review?.body || '') === String(body || ''))
+      .sort(compareReviewOrder);
+    const selected = candidates.at(-1);
+    const reviewCommit = String(selected?.commit_id || '');
+    if (!selected || !/^[0-9a-f]{40}$/iu.test(reviewCommit)
+        || selected.id === null || selected.id === undefined
+        || String(selected.id).trim() === '') return null;
+    let reviewCarryForwardValidated = false;
+    if (reviewCommit.toLowerCase() !== headSha.toLowerCase()) {
+      // The canonical fingerprint implementation belongs to the legacy
+      // auto-merge consumer. Load it only for this stale-review recovery path
+      // so exact-HEAD calls do not introduce a module cycle or extra API work.
+      const { prContributionFingerprint } = await import('./auto-merge-eval.mjs');
+      const headFingerprint = prContributionFingerprint(headSha);
+      const reviewFingerprint = prContributionFingerprint(reviewCommit);
+      reviewCarryForwardValidated = Boolean(
+        headFingerprint && reviewFingerprint && headFingerprint === reviewFingerprint,
+      );
+    }
+    return {
+      headSha,
+      reviewCommit,
+      reviewId: selected.id,
+      reviewCarryForwardValidated,
+    };
+  } catch (error) {
+    console.error(`review-scope: provenienza della review non verificabile (${String(error).slice(0, 160)}).`);
+    return null;
+  }
+}
+
+function canResolveLegacyReviewContext() {
+  const entrypoint = String(process.argv[1] || '');
+  return entrypoint.endsWith('/auto-merge-eval.mjs')
+    || entrypoint.endsWith('/review-scope.mjs');
+}
+
 function nonApplicableClassification(findings) {
   return {
     findings,
@@ -1256,20 +1323,36 @@ export async function classifyAndMintReview(body, {
 } = {}) {
   if (!repo || !pr) throw new Error('repo e pr sono obbligatori');
   const findings = importantFindings(body);
+  let selectedHeadSha = headSha;
+  let selectedReviewCommit = reviewCommit;
+  let selectedReviewId = reviewId;
+  let selectedCarryForwardValidated = reviewCarryForwardValidated;
+  const hasAnyApplicabilityContext = reviewCommit !== null || headSha !== null || reviewId !== null;
+  if (findings.length > 0 && hasFormalReviewInput(body) && !hasAnyApplicabilityContext
+      && canResolveLegacyReviewContext()) {
+    const resolved = await resolveFormalReviewContext(body, { repo, pr, prUrl });
+    if (resolved) {
+      selectedHeadSha = resolved.headSha;
+      selectedReviewCommit = resolved.reviewCommit;
+      selectedReviewId = resolved.reviewId;
+      selectedCarryForwardValidated = resolved.reviewCarryForwardValidated;
+    }
+  }
   // Il gate può autorizzare esplicitamente il carry-forward solo dopo aver
   // verificato il fingerprint code-only; un commit stantio da solo resta
   // contesto non applicabile e quindi fail-closed.
-  const hasValidatedCarryForward = reviewCarryForwardValidated
-    && Boolean(reviewCommit && headSha && reviewId !== null
-      && String(reviewId).trim() !== '');
-  const hasAnyApplicabilityContext = reviewCommit !== null || headSha !== null || reviewId !== null;
+  const hasValidatedCarryForward = selectedCarryForwardValidated
+    && Boolean(selectedReviewCommit && selectedHeadSha && selectedReviewId !== null
+      && String(selectedReviewId).trim() !== '');
   const requiresApplicabilityContext = hasFormalReviewInput(body) || hasAnyApplicabilityContext;
   const hasCompleteApplicabilityContext = Boolean(
-    reviewCommit && headSha && reviewId !== null && String(reviewId).trim() !== '',
+    selectedReviewCommit && selectedHeadSha && selectedReviewId !== null
+      && String(selectedReviewId).trim() !== '',
   );
   if (findings.length > 0 && requiresApplicabilityContext
       && (!hasCompleteApplicabilityContext
-        || (!reviewAppliesToHead(reviewCommit, headSha) && !hasValidatedCarryForward))) {
+        || (!reviewAppliesToHead(selectedReviewCommit, selectedHeadSha)
+          && !hasValidatedCarryForward))) {
     console.error('review-scope: review non applicabile alla HEAD corrente → classificazione bloccata.');
     return nonApplicableClassification(findings);
   }
@@ -1335,8 +1418,8 @@ export async function classifyAndMintReview(body, {
       pr,
       prUrl,
       mutate,
-      headSha: headSha || resolveHeadSha(repo, pr),
-      reviewId,
+      headSha: selectedHeadSha || resolveHeadSha(repo, pr),
+      reviewId: selectedReviewId,
     });
     if (routedResult.identicalRouting?.routed?.length) {
       console.log(`review-scope: instradati ${routedResult.identicalRouting.routed.length} rilievi/path identical al sito`);
@@ -1350,7 +1433,7 @@ export async function classifyAndMintReview(body, {
   // `null` = «non lo so» e si deriva; passarli esplicitamente resta possibile
   // (i test lo fanno) e disattiva la rete.
   const history = (priorFindingIds === null && changedLinesSince === null)
-    ? reviewHistoryContext(repo, pr, headSha || resolveHeadSha(repo, pr))
+    ? reviewHistoryContext(repo, pr, selectedHeadSha || resolveHeadSha(repo, pr))
     : { priorFindingIds, changedLinesSince };
   const result = classifyImportantFindings(body, changed.files, repositoryPaths, {
     bodyContractPassed: contractPassed,
@@ -1376,8 +1459,8 @@ export async function classifyAndMintReview(body, {
     pr,
     prUrl,
     mutate,
-    headSha: headSha || resolveHeadSha(repo, pr),
-    reviewId,
+    headSha: selectedHeadSha || resolveHeadSha(repo, pr),
+    reviewId: selectedReviewId,
   });
   if (routedResult.identicalRouting?.routed?.length) {
     console.log(`review-scope: instradati ${routedResult.identicalRouting.routed.length} rilievi/path identical al sito`);
