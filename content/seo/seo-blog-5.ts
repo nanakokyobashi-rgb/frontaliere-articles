@@ -50972,7 +50972,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     description: 'Tutto sulla nuova tassazione frontalieri Italia-Svizzera dal 2024: franchigie, contributi sociali, calcoli e scadenze. Evita errori fiscali. Dati aggiornati',
     keywords: 'frontalieri, ticino, svizzera, italia, cosa, cambia, nuova, imposta',
     ogTitle: 'Nuova imposta frontalieri 2024: franchigie e contributi',
-    ogDescription: 'Guida pratica alle novità fiscali per frontalieri Italia-Svizzera: cosa cambia con l\'accordo 2020 in vigore dal 2024.',
+    ogDescription: 'Guida pratica alle novità fiscali per frontalieri Italia-Svizzera: cosa cambia con l\'accordo 2020 applicato dal 2024.',
     canonicalPath: '/articoli-frontaliere/frontalieri-nuova-imposta-sostitutiva-2024',
     structuredData: {
       "@context": "https://schema.org",
@@ -61790,7 +61790,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     description: 'Guida per falegnami frontalieri in Ticino: stipendi, permessi, tassazione alla fonte e nuovo accordo 2024. Informazioni pratiche per lavorare in Svizzera.',
     keywords: 'frontalieri, ticino, svizzera, italia, falegname, stipendio, requisiti, completa',
     ogTitle: 'Lavorare come falegname in Ticino: guida per frontalieri',
-    ogDescription: 'Tutto quello che un falegname deve sapere per lavorare in Svizzera: requisiti, fiscalità, contributi e nuovo accordo fiscale in vigore dal 2024.',
+    ogDescription: 'Tutto quello che un falegname deve sapere per lavorare in Svizzera: requisiti, fiscalità, contributi e nuovo accordo fiscale applicato dal 2024.',
     canonicalPath: '/articoli-frontaliere/frontaliere-falegname-ticino-lavoro',
     structuredData: {
       "@context": "https://schema.org",
@@ -63896,7 +63896,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-trasferirsi-valdidentro-frontaliere': {
     title: 'Trasferirsi a Valdidentro da frontaliere: pro e contro',
-    description: 'Trasferirsi a Valdidentro da frontaliere: scopri imposte, franchigie e aspetti fiscali del nuovo accordo CH-IT in vigore dal 2024 per chi lavora in Grigioni.',
+    description: 'Trasferirsi a Valdidentro da frontaliere: scopri imposte, franchigie e aspetti fiscali del nuovo accordo CH-IT applicato dal 2024 per chi lavora in Grigioni.',
     keywords: 'frontalieri, ticino, svizzera, italia, trasferirsi, valdidentro, contro, analisi',
     ogTitle: 'Trasferirsi a Valdidentro da frontaliere: pro e contro',
     ogDescription: 'Guida pratica per chi vive a Valdidentro e lavora in Svizzera: dettagli su tasse, previdenza e il nuovo accordo fiscale tra Italia e Grigioni.',
@@ -63905,7 +63905,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Trasferirsi a Valdidentro da frontaliere: pro e contro",
-      "description": "Trasferirsi a Valdidentro da frontaliere: scopri imposte, franchigie e aspetti fiscali del nuovo accordo CH-IT in vigore dal 2024 per chi lavora in Grigioni.",
+      "description": "Trasferirsi a Valdidentro da frontaliere: scopri imposte, franchigie e aspetti fiscali del nuovo accordo CH-IT applicato dal 2024 per chi lavora in Grigioni.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
@@ -76679,7 +76679,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-vivere-caprezzo-lavorare-ticino': {
     title: 'Vivere a Caprezzo e lavorare in Ticino da frontaliere',
-    description: 'Guida per frontalieri a Caprezzo: tasse, franchigie e normativa sul Nuovo Accordo fiscale tra Italia e Svizzera in vigore dal 2024. Dati aggiornati 2026',
+    description: 'Guida per frontalieri a Caprezzo: tasse, franchigie e normativa sul Nuovo Accordo fiscale tra Italia e Svizzera applicato dal 2024. Dati aggiornati 2026',
     keywords: 'frontalieri, ticino, svizzera, italia, vivere, caprezzo, lavorare, pratica',
     ogTitle: 'Vivere a Caprezzo e lavorare in Ticino da frontaliere',
     ogDescription: 'Scopri le regole fiscali e le procedure per chi vive a Caprezzo e lavora in Canton Ticino, tra nuovo accordo e previdenza sociale.',
@@ -76688,7 +76688,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Vivere a Caprezzo e lavorare in Ticino da frontaliere",
-      "description": "Guida per frontalieri a Caprezzo: tasse, franchigie e normativa sul Nuovo Accordo fiscale tra Italia e Svizzera in vigore dal 2024. Dati aggiornati 2026",
+      "description": "Guida per frontalieri a Caprezzo: tasse, franchigie e normativa sul Nuovo Accordo fiscale tra Italia e Svizzera applicato dal 2024. Dati aggiornati 2026",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
@@ -80138,7 +80138,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     description: 'Trasferirsi a Verbania per lavorare in Canton Ticino: collegamenti, Permesso G, imposta alla fonte e Nuovo Accordo applicato dal 1° gennaio 2024.',
     keywords: 'frontalieri, ticino, svizzera, italia, vivere, verbania, lavorare, cosa',
     ogTitle: 'Vivere a Verbania e lavorare in Ticino da frontaliere',
-    ogDescription: 'Guida pratica per chi vuole risiedere a Verbania e fare il pendolare in Canton Ticino: tempi di percorrenza dai valichi, Permesso G, fiscalità alla fonte e regime transitorio del Nuovo Accordo in vigore dal 2024.',
+    ogDescription: 'Guida pratica per chi vuole risiedere a Verbania e fare il pendolare in Canton Ticino: tempi di percorrenza dai valichi, Permesso G, fiscalità alla fonte e regime transitorio del Nuovo Accordo applicato dal 2024.',
     canonicalPath: '/articoli-frontaliere/vivere-verbania-lavorare-ticino-frontaliere',
     structuredData: {
       "@context": "https://schema.org",
@@ -80489,7 +80489,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     description: 'Trasferirsi a Gurro e fare il pendolare verso il Canton Ticino: Permesso G, Nuovo Accordo 2024, busta paga, LAMal, costi e tempi di percorrenza. Dati aggiornati',
     keywords: 'frontalieri, ticino, svizzera, italia, vivere, gurro, lavorare, trasferirsi',
     ogTitle: 'Vivere a Gurro e lavorare in Ticino da frontaliere',
-    ogDescription: 'Guida pratica per chi valuta di trasferirsi a Gurro e fare il frontaliere in Canton Ticino: Permesso G, Nuovo Accordo in vigore dal 2024, busta paga, LAMal, costi e tempi di percorrenza.',
+    ogDescription: 'Guida pratica per chi valuta di trasferirsi a Gurro e fare il frontaliere in Canton Ticino: Permesso G, Nuovo Accordo applicato dal 2024, busta paga, LAMal, costi e tempi di percorrenza.',
     canonicalPath: '/articoli-frontaliere/vivere-gurro-lavorare-ticino-frontaliere',
     structuredData: {
       "@context": "https://schema.org",
@@ -80837,7 +80837,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-busta-paga-frontalieri-2026-oltre-20km': {
     title: 'Busta paga frontalieri 2026 oltre 20 km: guida completa',
-    description: 'Busta paga svizzera 2026 per frontalieri oltre 20 km: trattenute, contributi AVS/AD/LPP e netto reale dopo il Nuovo Accordo in vigore dal 2024. Dati aggiornati',
+    description: 'Busta paga svizzera 2026 per frontalieri oltre 20 km: trattenute, contributi AVS/AD/LPP e netto reale dopo il Nuovo Accordo applicato dal 2024. Dati aggiornati',
     keywords: 'frontalieri, ticino, svizzera, italia, busta, paga, oltre, completa',
     ogTitle: 'Busta paga frontalieri 2026 oltre 20 km: guida completa',
     ogDescription: 'Tutto sulla busta paga 2026 del frontaliere oltre i 20 km: imposta alla fonte, contributi AVS/AD/LPP, franchigia e credito d\'imposta in Italia dopo il Nuovo Accordo applicato dal 1° gennaio 2024.',
@@ -80846,7 +80846,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Busta paga frontalieri 2026 oltre 20 km: guida completa",
-      "description": "Busta paga svizzera 2026 per frontalieri oltre 20 km: trattenute, contributi AVS/AD/LPP e netto reale dopo il Nuovo Accordo in vigore dal 2024. Dati aggiornati",
+      "description": "Busta paga svizzera 2026 per frontalieri oltre 20 km: trattenute, contributi AVS/AD/LPP e netto reale dopo il Nuovo Accordo applicato dal 2024. Dati aggiornati",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
@@ -80915,16 +80915,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-credito-imposta-frontalieri-2026-errori-comuni': {
     title: 'Credito imposta frontalieri 2026: errori comuni',
-    description: 'Quadro CE del 730, nuovo Accordo in vigore dal 2024 e regime transitorio: gli errori più frequenti dei frontalieri. Dati aggiornati 2026 per frontalieri',
+    description: 'Quadro CE del 730, nuovo Accordo applicato dal 2024 e regime transitorio: gli errori più frequenti dei frontalieri. Dati aggiornati 2026 per frontalieri',
     keywords: 'frontalieri, ticino, svizzera, italia, credito, imposta, errori, comuni',
     ogTitle: 'Credito imposta frontalieri 2026: errori comuni',
-    ogDescription: 'Quadro CE del 730, nuovo Accordo in vigore dal 2024 e regime transitorio: gli errori più frequenti dei frontalieri.',
+    ogDescription: 'Quadro CE del 730, nuovo Accordo applicato dal 2024 e regime transitorio: gli errori più frequenti dei frontalieri.',
     canonicalPath: '/articoli-frontaliere/credito-imposta-frontalieri-2026-errori-comuni',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Credito imposta frontalieri 2026: errori comuni",
-      "description": "Quadro CE del 730, nuovo Accordo in vigore dal 2024 e regime transitorio: gli errori più frequenti dei frontalieri. Dati aggiornati 2026 per frontalieri",
+      "description": "Quadro CE del 730, nuovo Accordo applicato dal 2024 e regime transitorio: gli errori più frequenti dei frontalieri. Dati aggiornati 2026 per frontalieri",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
@@ -81337,7 +81337,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     description: 'Frontaliere licenziato nel 2026: preavviso secondo il CO, indennità INPS, LAMal e credito d\'imposta per famiglie con figli in Ticino. Dati aggiornati 2026',
     keywords: 'frontalieri, ticino, svizzera, italia, licenziato, preavviso, indennità, figli',
     ogTitle: 'Frontaliere licenziato 2026: preavviso, indennità e figli',
-    ogDescription: 'Scenario completo per il frontaliere con famiglia e figli: preavviso secondo il CO svizzero, Nuovo Accordo in vigore dal 2024, credito d\'imposta nel quadro CE, copertura LAMal e posizione contributiva INPS dopo la cessazione del rapporto di lavoro',
+    ogDescription: 'Scenario completo per il frontaliere con famiglia e figli: preavviso secondo il CO svizzero, Nuovo Accordo applicato dal 2024, credito d\'imposta nel quadro CE, copertura LAMal e posizione contributiva INPS dopo la cessazione del rapporto di lavoro',
     canonicalPath: '/articoli-frontaliere/frontaliere-licenziamento-famiglia-figli-2026',
     structuredData: {
       "@context": "https://schema.org",
@@ -94115,7 +94115,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     description: 'Merone-Ticino da frontaliere: regole dell\'Accordo 2024, franchigia di 10.000 €, imposta alla fonte svizzera, AVS, LPP, LAMal e doppia imposizione.',
     keywords: 'frontalieri, ticino, svizzera, italia, vivere, merone, lavorare, cosa',
     ogTitle: 'Vivere a Merone e lavorare in Ticino da frontaliere',
-    ogDescription: 'Vivere a Merone e lavorare nel Canton Ticino richiede di distinguere vecchi e nuovi frontalieri, credito nel quadro CE del 730, trattenute svizzere, AVS, LPP e diritto d\'opzione LAMal. L\'Accordo è firmato nel 2020 e in vigore dal 2024.',
+    ogDescription: 'Vivere a Merone e lavorare nel Canton Ticino richiede di distinguere vecchi e nuovi frontalieri, credito nel quadro CE del 730, trattenute svizzere, AVS, LPP e diritto d\'opzione LAMal. L\'Accordo è firmato nel 2020 e applicato dal 2024.',
     canonicalPath: '/articoli-frontaliere/merone-pendolare-frontiera-ch',
     structuredData: {
       "@context": "https://schema.org",
@@ -111851,7 +111851,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     description: 'Guida al licenziamento del frontaliere nel 2026: preavviso, indennità, accordo CH-IT, imposta alla fonte, franchigie, AVS, LPP, LAMal e fisco italiano.',
     keywords: 'frontalieri, ticino, svizzera, italia, licenziato, diritti, oltre, pratica',
     ogTitle: 'Frontaliere licenziato nel 2026: diritti e controlli',
-    ogDescription: 'Un licenziamento in Ticino va letto separando rapporto di lavoro, preavviso e indennità dal fisco: l\'accordo firmato nel 2020 è in vigore dal 2024, con franchigie diverse e credito d\'imposta nel quadro CE del 730.',
+    ogDescription: 'Un licenziamento in Ticino va letto separando rapporto di lavoro, preavviso e indennità dal fisco: l\'accordo firmato nel 2020 è applicato dal 2024, con franchigie diverse e credito d\'imposta nel quadro CE del 730.',
     canonicalPath: '/articoli-frontaliere/tutele-frontaliero-uscita-ticino/',
     structuredData: {
       "@context": "https://schema.org",
@@ -112082,7 +112082,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-corsi-ticino-famiglia-rendimento': {
     title: 'Formazione frontalieri 2026: corsi, riqualifica e famiglia',
-    description: 'Guida 2026 a formazione e riqualifica per frontalieri: accordo in vigore dal 2024, soglie per vecchi e nuovi, imposta alla fonte e famiglia con figli.',
+    description: 'Guida 2026 a formazione e riqualifica per frontalieri: accordo applicato dal 2024, soglie per vecchi e nuovi, imposta alla fonte e famiglia con figli.',
     keywords: 'frontalieri, ticino, svizzera, italia, formazione, corsi, riqualifica, famiglia',
     ogTitle: 'Frontalieri 2026: formazione e riqualifica familiare',
     ogDescription: 'Il 2026 non sposta la data del Nuovo Accordo Frontalieri: l\'entrata in vigore è il 1° gennaio 2024. Vecchi e nuovi frontalieri hanno soglie diverse; AVS, LPP, LAMal e IRPEF completano il quadro per una famiglia con figli.',
@@ -112091,7 +112091,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Formazione frontalieri 2026: corsi, riqualifica e famiglia",
-      "description": "Guida 2026 a formazione e riqualifica per frontalieri: accordo in vigore dal 2024, soglie per vecchi e nuovi, imposta alla fonte e famiglia con figli.",
+      "description": "Guida 2026 a formazione e riqualifica per frontalieri: accordo applicato dal 2024, soglie per vecchi e nuovi, imposta alla fonte e famiglia con figli.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",

@@ -1046,7 +1046,7 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.naturalizzazione-svizzera-dopo-anni-da-frontaliere-requisiti.excerpt': 'Per ottenere la cittadinanza svizzera dopo anni di lavoro come frontaliere, è necessario soddisfare i requisiti stabiliti dalla legge svizzera.',
     'blog.article.naturalizzazione-svizzera-dopo-anni-da-frontaliere-requisiti.imageAlt': 'Un frontaliere che si trova in una situazione simile potrebbe cercare di ottenere la cittadinanza svizzera dopo anni di lavoro come frontaliere.',
     'blog.article.secondo-lavoro-part-time-frontaliere.title': 'Secondo lavoro part-time in Italia per frontaliere svizzero',
-    'blog.article.secondo-lavoro-part-time-frontaliere.excerpt': 'Guida fiscale e contrattuale: come gestire il doppio reddito tra Svizzera e Italia nel rispetto dell\'Accordo sui frontalieri in vigore dal 2024.',
+    'blog.article.secondo-lavoro-part-time-frontaliere.excerpt': 'Guida fiscale e contrattuale: come gestire il doppio reddito tra Svizzera e Italia nel rispetto dell\'Accordo sui frontalieri applicato dal 2024.',
     'blog.article.secondo-lavoro-part-time-frontaliere.imageAlt': 'Vista panoramica di Lugano con edifici moderni e lago, simbolo del lavoro in Svizzera',
     'blog.article.frontalieri-disoccupati-indennita-900-milioni.title': 'Frontalieri disoccupati: l\'indennità da 900 milioni a carico della Svizzera',
     'blog.article.frontalieri-disoccupati-indennita-900-milioni.excerpt': 'Il Parlamento UE ha approvato la riforma sulla disoccupazione dei frontalieri, causando un aggravio di 900 milioni di franchi per la Svizzera.',

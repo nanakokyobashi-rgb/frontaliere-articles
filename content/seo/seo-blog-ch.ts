@@ -13134,16 +13134,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-frontaliere-magazziniere-logistica-ticino': {
     title: 'Frontaliere magazziniere in Ticino: guida allo stipendio',
-    description: 'Guida pratica per frontalieri magazzinieri in Ticino: stipendio, imposta alla fonte, contributi sociali e nuovo accordo fiscale in vigore dal 2024.',
+    description: 'Guida pratica per frontalieri magazzinieri in Ticino: stipendio, imposta alla fonte, contributi sociali e nuovo accordo fiscale applicato dal 2024.',
     keywords: 'frontalieri, ticino, svizzera, italia, magazziniere, allo, stipendio, scopri',
     ogTitle: 'Frontaliere magazziniere in Ticino: stipendio e regole 2024',
-    ogDescription: 'Guida pratica per frontalieri magazzinieri in Ticino: stipendio, imposta alla fonte, contributi sociali e nuovo accordo fiscale in vigore dal 2024.',
+    ogDescription: 'Guida pratica per frontalieri magazzinieri in Ticino: stipendio, imposta alla fonte, contributi sociali e nuovo accordo fiscale applicato dal 2024.',
     canonicalPath: '/articoli-svizzera/frontaliere-magazziniere-logistica-ticino/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Frontaliere magazziniere in Ticino: guida allo stipendio",
-      "description": "Guida pratica per frontalieri magazzinieri in Ticino: stipendio, imposta alla fonte, contributi sociali e nuovo accordo fiscale in vigore dal 2024.",
+      "description": "Guida pratica per frontalieri magazzinieri in Ticino: stipendio, imposta alla fonte, contributi sociali e nuovo accordo fiscale applicato dal 2024.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
@@ -14484,16 +14484,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-incontro-fiscale-roma-giugno': {
     title: 'Svizzera e Italia: incontro fiscale a Roma entro giugno',
-    description: 'Vertice tra Svizzera e Italia entro fine giugno: si discute di frontalieri, accordi fiscali e nuove normative in vigore dal 2024. Dati aggiornati 2026 per',
+    description: 'Vertice tra Svizzera e Italia entro fine giugno: si discute di frontalieri, accordi fiscali e nuove normative applicato dal 2024. Dati aggiornati 2026 per',
     keywords: 'frontalieri, ticino, svizzera, italia, incontro, fiscale, roma, entro',
     ogTitle: 'Svizzera e Italia: incontro fiscale a Roma entro giugno',
-    ogDescription: 'Vertice tra Svizzera e Italia entro fine giugno: si discute di frontalieri, accordi fiscali e nuove normative in vigore dal 2024.',
+    ogDescription: 'Vertice tra Svizzera e Italia entro fine giugno: si discute di frontalieri, accordi fiscali e nuove normative applicato dal 2024.',
     canonicalPath: '/articoli-svizzera/incontro-fiscale-roma-giugno/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Svizzera e Italia: incontro fiscale a Roma entro giugno",
-      "description": "Vertice tra Svizzera e Italia entro fine giugno: si discute di frontalieri, accordi fiscali e nuove normative in vigore dal 2024. Dati aggiornati 2026 per",
+      "description": "Vertice tra Svizzera e Italia entro fine giugno: si discute di frontalieri, accordi fiscali e nuove normative applicato dal 2024. Dati aggiornati 2026 per",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
