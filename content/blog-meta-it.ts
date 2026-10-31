@@ -13640,6 +13640,12 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.cassa-pensione-snl-sev-attacca.title': 'Cassa pensione SNL: SEV contesta lettura risultati',
     'blog.article.cassa-pensione-snl-sev-attacca.excerpt': 'UBS gestirà il patrimonio della Cassa pensione SNL ATIOZ impose una nuova procedura dopo un conflitto d\'interessi Il grado di copertura era del 104,1% a fine',
     'blog.article.cassa-pensione-snl-sev-attacca.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.lavori-barriere-antirumore-a8.title': 'Lavori su barriere antirumore in A8 e D08: guida alle chiusure',
+    'blog.article.lavori-barriere-antirumore-a8.excerpt': 'Chiusure notturne su A8 e D08 dal 2 al 6 novembre Prime fasce: dalle 23:00 alle 5:00 Gallarate, Besnate e Busto Arsizio nei percorsi indicati Seconda fase',
+    'blog.article.lavori-barriere-antirumore-a8.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.bellinzona-imposte-piu-salate-2028.title': 'A Bellinzona imposte più salate dal 2028',
+    'blog.article.bellinzona-imposte-piu-salate-2028.excerpt': 'Il Municipio di Bellinzona ha annunciato imposte più salate dal 2028, in concomitanza con il Preventivo 2026 che mostra un disavanzo di 10,6 milioni.',
+    'blog.article.bellinzona-imposte-piu-salate-2028.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaIt;

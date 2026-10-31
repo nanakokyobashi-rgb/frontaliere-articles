@@ -4049,6 +4049,31 @@ const NAV_LINK_LABELS_RAW = {
 // sufficiente: il significato resta esplicito anche quando una lingua non ha
 // ancora una coppia tradotta correttamente.
 Object.assign(NAV_LINK_LABELS_RAW, {
+  "accedi al calcolatore stipendio": {
+    "de": "zum Lohnrechner",
+    "fr": "accédez au calculateur de salaire",
+    "en": "access the salary calculator"
+  },
+  "calcolatore lamal/cmi": {
+    "de": "KVG/CMI-Rechner",
+    "fr": "calculateur LAMal/CMI",
+    "en": "LAMal/CMI calculator"
+  },
+  "essenziale utilizzare il calcolatore": {
+    "de": "unerlässlich, den Rechner zu nutzen",
+    "fr": "essentiel d'utiliser le calculateur",
+    "en": "essential to use the calculator"
+  },
+  "permesso g vs permesso b": {
+    "de": "G-Bewilligung vs. B-Bewilligung",
+    "fr": "permis G vs permis B",
+    "en": "G permit vs B permit"
+  },
+  "strumento pianificazione pensione": {
+    "de": "Tool zur Rentenplanung",
+    "fr": "outil de planification de la retraite",
+    "en": "retirement planning tool"
+  },
   "agenzia delle dogane": {
     "de": "Zollbehörde",
     "fr": "administration des douanes",

@@ -352,6 +352,21 @@ test('admit elegge un solo self-test dry quando un commit cambia piu\' caller', 
   assert.match(source.stdout, /workflow sorgente: non partecipa al batch cantonale/);
 });
 
+test('admit usa una snapshot bounded comune per lock e tetto della catena', () => {
+  for (const [label, workflow, caller] of [
+    ['sorgente', SOURCE, 'generate-article.yml'],
+    ['core', CORE, 'generate-article-ti.yml'],
+  ]) {
+    const result = runAdmit(workflow, {
+      caller,
+      changed: ['content/blog-body/it/article.ts'],
+    });
+    assert.equal(result.status, 0, `${label}: ammissione non riuscita`);
+    assert.equal(result.outputs.proceed, 'true', `${label}: la snapshot valida deve ammettere il push`);
+    assert.doesNotMatch(result.stdout, /admit-run-list-unreadable/, `${label}: snapshot non leggibile`);
+  }
+});
+
 const pairGenerateEnv = (extra) => ({ BODY_PATH_RE: PAIR.bodyRe, PRIMARY_SECTION: PAIR.primary, SIBLING_SECTION: PAIR.sibling, ...extra });
 
 test('Generate the article: con gli input della coppia storica il core si comporta come la sorgente', () => {

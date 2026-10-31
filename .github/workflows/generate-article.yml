@@ -522,60 +522,57 @@ jobs:
             exit 0
           }
 
-          # The unfiltered Actions listing contains the whole history of this
-          # workflow (7,799 runs measured on 2026-10-27). Reading it through
-          # the 60-second API wrapper made every scheduled run fail closed
-          # before it could reach `generate`. Partition the active set by
-          # status, and use a bounded one-hour window for the chain cap. Every
-          # filtered response is still paginated and checked against its own
-          # total_count: a short page, a changing count, a partial object, or
-          # an unknown status is not evidence that the lock is free.
+          # A single bounded Actions snapshot replaces the old five status
+          # queries. The partitioned requests could fail closed during normal
+          # status turnover, and a scheduled run then ended green before the
+          # generator was reached. A one-hour window is enough for admission:
+          # runs older than the 1800-second wedge threshold cannot block, while
+          # the same snapshot also supplies the chain's hourly cap.
           IN_FLIGHT_STATUSES='["queued","in_progress","requested","waiting","pending"]'
           ALL_RUN_STATUSES='["queued","in_progress","requested","waiting","pending","completed"]'
-          runs='[]'
-          while IFS= read -r status; do
-            status_pages_json=""
-            if ! status_pages_json="$(gh_api_timeout --paginate --slurp \
-              "repos/$REPO/actions/workflows/generate-article.yml/runs?per_page=100&status=$status" \
-              2>/dev/null)"; then
-              fail_closed_admission
-            fi
-            if ! status_runs="$(jq -c --arg expected "$status" '
-              . as $pages
-              | if (type == "array" and length > 0)
-                  and all(.[];
+          admission_window_seconds=3600
+          if ! admission_since="$(date -u -d "$admission_window_seconds seconds ago" '+%Y-%m-%dT%H:%M:%SZ')"; then
+            fail_closed_admission
+          fi
+          runs_pages_json=""
+          if ! runs_pages_json="$(gh_api_timeout --paginate --slurp \
+            "repos/$REPO/actions/workflows/generate-article.yml/runs?per_page=100&created=%3E%3D$admission_since" \
+            2>/dev/null)"; then
+            fail_closed_admission
+          fi
+          if ! runs="$(jq -c --argjson known "$ALL_RUN_STATUSES" --arg since "$admission_since" '
+            . as $pages
+            | if (type == "array" and length > 0)
+                and all(.[];
+                  type == "object"
+                  and (.workflow_runs | type) == "array"
+                  and (.total_count | type) == "number"
+                  and (.total_count >= 0)
+                  and ((.total_count | floor) == .total_count)
+                  and all(.workflow_runs[];
                     type == "object"
-                    and (.workflow_runs | type) == "array"
-                    and (.total_count | type) == "number"
-                    and (.total_count >= 0)
-                    and ((.total_count | floor) == .total_count)
-                    and all(.workflow_runs[];
-                      type == "object"
-                      and (.id | type) == "number"
-                      and (.id >= 1)
-                      and ((.id | floor) == .id)
-                      and (.created_at | type) == "string"
-                      and (.created_at | length) > 0
-                      and ((try (.created_at | fromdateiso8601) catch null) != null)
-                      and (.status == $expected)
-                    ))
-                  and (($pages | map(.total_count) | unique | length) == 1)
-                  and (($pages | map(.workflow_runs | length) | add) == $pages[0].total_count)
-                  and (([$pages[].workflow_runs[].id] | unique | length)
-                    == ([$pages[].workflow_runs[]] | length))
-                then
-                  [$pages[].workflow_runs[] | {id: .id, created_at: .created_at, status: .status}]
-                else
-                  error("generation run listing incomplete")
-                end
-            ' <<<"$status_pages_json")"; then
-              fail_closed_admission
-            fi
-            if ! runs="$(jq -c --argjson existing "$runs" --argjson current "$status_runs" \
-              '$existing + $current' <<<"$runs")"; then
-              fail_closed_admission
-            fi
-          done < <(jq -r '.[]' <<<"$IN_FLIGHT_STATUSES")
+                    and (.id | type) == "number"
+                    and (.id >= 1)
+                    and ((.id | floor) == .id)
+                    and (.created_at | type) == "string"
+                    and (.created_at | length) > 0
+                    and ((try (.created_at | fromdateiso8601) catch null) != null)
+                    and (.created_at >= $since)
+                    and (.status | type) == "string"
+                    and (.status as $status | ($known | index($status)) != null)
+                  ))
+                and (($pages | map(.total_count) | unique | length) == 1)
+                and (($pages | map(.workflow_runs | length) | add) == $pages[0].total_count)
+                and (([$pages[].workflow_runs[].id] | unique | length)
+                  == ([$pages[].workflow_runs[]] | length))
+              then
+                [$pages[].workflow_runs[] | {id: .id, created_at: .created_at, status: .status}]
+              else
+                error("generation run listing incomplete")
+              end
+          ' <<<"$runs_pages_json")"; then
+            fail_closed_admission
+          fi
           if ! inflight="$(printf '%s' "$runs" \
             | jq -c --argjson in_flight "$IN_FLIGHT_STATUSES" '[.[] | .status as $status | select(($in_flight | index($status)) != null)]' \
             2>/dev/null)"; then
@@ -587,58 +584,16 @@ jobs:
           # `chain_depth` e `no_article_streak` viaggiano NEGLI INPUT: un anello
           # che li dimentica, o un dispatch fatto a mano con i default, riparte
           # da zero e i due cap non vedono niente. Questo tetto invece si calcola
-          # dallo stato vero — letto solo qui, nel ramo degli anelli — e nessuno
-          # può ripulirlo passando un input sbagliato. Vale solo per gli anelli:
-          # un umano e il cron restano fuori (il cron ha due slot, un umano si
+          # dallo stesso snapshot bounded gia' usato dal gate, e nessuno puo'
+          # ripulirlo passando un input sbagliato. Vale solo per gli anelli: un
+          # umano e il cron restano fuori (il cron ha due slot, un umano si
           # ferma da solo).
           if [ "$is_link" = "true" ]; then
-            if ! recent_since="$(date -u -d '1 hour ago' '+%Y-%m-%dT%H:%M:%SZ')"; then
-              fail_closed_admission
-            fi
-            recent_pages_json=""
-            if ! recent_pages_json="$(gh_api_timeout --paginate --slurp \
-              "repos/$REPO/actions/workflows/generate-article.yml/runs?per_page=100&created=%3E%3D$recent_since" \
-              2>/dev/null)"; then
-              fail_closed_admission
-            fi
-            if ! recent_runs="$(jq -c --argjson known "$ALL_RUN_STATUSES" --arg since "$recent_since" '
-              . as $pages
-              | if (type == "array" and length > 0)
-                  and all(.[];
-                    type == "object"
-                    and (.workflow_runs | type) == "array"
-                    and (.total_count | type) == "number"
-                    and (.total_count >= 0)
-                    and ((.total_count | floor) == .total_count)
-                    and all(.workflow_runs[];
-                      type == "object"
-                      and (.id | type) == "number"
-                      and (.id >= 1)
-                      and ((.id | floor) == .id)
-                      and (.created_at | type) == "string"
-                      and (.created_at | length) > 0
-                      and ((try (.created_at | fromdateiso8601) catch null) != null)
-                      and (.created_at >= $since)
-                      and (.status | type) == "string"
-                      and (.status as $status | ($known | index($status)) != null)
-                    ))
-                  and (($pages | map(.total_count) | unique | length) == 1)
-                  and (($pages | map(.workflow_runs | length) | add) == $pages[0].total_count)
-                  and (([$pages[].workflow_runs[].id] | unique | length)
-                    == ([$pages[].workflow_runs[]] | length))
-                then
-                  [$pages[].workflow_runs[] | {id: .id, created_at: .created_at, status: .status}]
-                else
-                  error("recent generation run listing incomplete")
-                end
-            ' <<<"$recent_pages_json")"; then
-              fail_closed_admission
-            fi
             cap="${CHAIN_MAX_RUNS_PER_HOUR:-}"
             case "$cap" in
               ''|*[!0-9]*) cap=20 ;;
             esac
-            last_hour=$(printf '%s' "$recent_runs" \
+            last_hour=$(printf '%s' "$runs" \
               | jq -er 'length' \
               2>/dev/null) || fail_closed_admission
             case "${last_hour:-}" in
@@ -755,9 +710,10 @@ jobs:
             fail_closed_admission
           fi
 
-          # Le vecchie OLTRE la soglia non bloccano piu', ma devono restare
-          # VISIBILI: un'incastrata ignorata in silenzio e' esattamente il
-          # guasto che non si nota finche' non si contano gli articoli mancanti.
+          # La snapshot copre un'ora: le run vecchie oltre la soglia di wedge
+          # non possono bloccare per costruzione e non servono al verdetto. Le
+          # run fra 1800 e 3600 secondi restano invece visibili nel warning,
+          # così un'incastrata recente non diventa silenziosa.
           if ! stale="$(printf '%s' "$inflight" \
             | jq -r --argjson me "$SELF_ID" --arg mine "$self_created" --argjson dad "$parent_id" \
                    --argjson wedge "$WEDGE_SECONDS" \

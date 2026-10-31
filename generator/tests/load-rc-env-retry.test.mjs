@@ -19,9 +19,11 @@ import { fileURLToPath } from 'node:url';
 import {
   ALLOW_EMPTY_RC_KEYS,
   claimEnvKey,
+  coerceRemoteConfigValue,
   EXPECTED_ABSENT_RC_KEYS,
   extractGoogleErrorReason,
   formatMissingRcKeys,
+  getRcValue,
   isRetryableRcFetchStatus,
   rcFetchBackoffMs,
   RC_TO_ENV,
@@ -133,6 +135,47 @@ test('il loader separa assenza prevista, assenza inattesa ed empty esplicito', (
   assert.equal(rcValueState('', 'GEMINI_API_KEY'), 'empty');
   assert.equal(shouldExportRcValue(null, 'TELEGRAM_BOT_TOKEN'), false);
   assert.equal(shouldExportRcValue('', 'OMNIROUTE_PROVIDER_ALLOWLIST'), true);
+});
+
+test('il loader normalizza valori RC non stringa con serializzazione stabile', () => {
+  assert.equal(coerceRemoteConfigValue(true), 'true');
+  assert.equal(coerceRemoteConfigValue(0), '0');
+  assert.equal(
+    coerceRemoteConfigValue({ z: 1, nested: { z: false, a: true }, a: 'first' }),
+    '{"a":"first","nested":{"a":true,"z":false},"z":1}',
+  );
+  assert.equal(coerceRemoteConfigValue(null), null);
+});
+
+test('il loader usa il default e risolve conditionalValues in ordine deterministico', () => {
+  const template = {
+    conditions: [{ name: 'high-priority' }, { name: 'low-priority' }],
+    parameters: {
+      WITH_DEFAULT: {
+        defaultValue: { value: false },
+        conditionalValues: { 'high-priority': { value: 'conditional' } },
+      },
+      CONDITIONAL_ONLY: {
+        conditionalValues: {
+          'low-priority': { value: 'low' },
+          'high-priority': { value: true },
+        },
+      },
+      FALLBACK_ORDER: {
+        conditionalValues: { zulu: { value: 'z' }, alpha: { value: 0 } },
+      },
+      IN_APP_DEFAULT: {
+        defaultValue: { useInAppDefault: true },
+        conditionalValues: { 'high-priority': { value: 'conditional' } },
+      },
+    },
+  };
+
+  assert.equal(getRcValue(template, 'WITH_DEFAULT'), 'false');
+  assert.equal(getRcValue(template, 'CONDITIONAL_ONLY'), 'true');
+  assert.equal(getRcValue(template, 'FALLBACK_ORDER'), '0');
+  assert.equal(getRcValue(template, 'IN_APP_DEFAULT'), 'conditional');
+  assert.equal(getRcValue(template, 'MISSING'), null);
 });
 
 test('il ponte RC espone le credenziali dei canali social al runtime locale', () => {

@@ -13639,6 +13639,12 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.cassa-pensione-snl-sev-attacca.title': 'SNL pension fund: SEV disputes interpretation of results',
     'blog.article.cassa-pensione-snl-sev-attacca.excerpt': 'UBS will manage the assets of the SNL pension fund ATIOZ imposed a new procedure after a conflict of interest The coverage ratio was 104,1% at the end',
     'blog.article.cassa-pensione-snl-sev-attacca.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.lavori-barriere-antirumore-a8.title': 'Work on noise barriers on A8 and D08: guide to closures',
+    'blog.article.lavori-barriere-antirumore-a8.excerpt': 'Night closures on A8 and D08 from November 2 to 6 First time slots: from 23:00 to 5:00 Gallarate, Besnate and Busto Arsizio on the indicated routes Second phase',
+    'blog.article.lavori-barriere-antirumore-a8.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.bellinzona-imposte-piu-salate-2028.title': 'Higher taxes in Bellinzona from 2028',
+    'blog.article.bellinzona-imposte-piu-salate-2028.excerpt': 'The Bellinzona municipal government announced higher taxes from 2028, alongside the 2026 budget, which shows a deficit of 10,6 million.',
+    'blog.article.bellinzona-imposte-piu-salate-2028.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaEn;

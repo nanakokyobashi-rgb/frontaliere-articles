@@ -702,8 +702,103 @@ export function formatMissingRcKeys(keys) {
 
 // ─── Helpers ─────────────────────────────────────────────────────────────
 
-function getRcValue(template, key) {
-  return template?.parameters?.[key]?.defaultValue?.value ?? null;
+/**
+ * Serialize a Remote Config value into the string form expected by the
+ * environment-file writers. Remote Config normally stores explicit values as
+ * strings, but test fixtures and SDK-shaped objects can expose booleans,
+ * numbers, or JSON values directly. Sort object keys so the same value cannot
+ * produce different environment output merely because its insertion order
+ * changed.
+ */
+export function coerceRemoteConfigValue(value) {
+  if (value === null || value === undefined) return null;
+  if (typeof value === 'string') return value;
+  if (typeof value === 'boolean' || typeof value === 'number' || typeof value === 'bigint') {
+    return String(value);
+  }
+  if (typeof value !== 'object') return String(value);
+
+  const stableJson = (current, inArray = false) => {
+    if (current === null) return 'null';
+    if (typeof current === 'string') return JSON.stringify(current);
+    if (typeof current === 'boolean') return current ? 'true' : 'false';
+    if (typeof current === 'number') return Number.isFinite(current) ? String(current) : 'null';
+    if (typeof current === 'bigint') return JSON.stringify(String(current));
+    if (Array.isArray(current)) {
+      return `[${current.map((item) => stableJson(item, true) ?? 'null').join(',')}]`;
+    }
+    if (typeof current === 'object') {
+      const fields = Object.keys(current).sort().flatMap((field) => {
+        const encoded = stableJson(current[field]);
+        return encoded === undefined ? [] : [`${JSON.stringify(field)}:${encoded}`];
+      });
+      return `{${fields.join(',')}}`;
+    }
+    return inArray ? 'null' : undefined;
+  };
+
+  try {
+    return stableJson(value) ?? null;
+  } catch {
+    // A cyclic/non-serializable value cannot come from the JSON REST template;
+    // treating it as absent keeps the loader fail-open without writing a
+    // misleading "[object Object]" into the workflow environment.
+    return null;
+  }
+}
+
+function readRemoteConfigParameterValue(parameterValue) {
+  if (parameterValue === null || parameterValue === undefined) return null;
+  if (typeof parameterValue === 'object' && !Array.isArray(parameterValue)) {
+    if (parameterValue.useInAppDefault === true) return null;
+    if (Object.prototype.hasOwnProperty.call(parameterValue, 'value')) {
+      return coerceRemoteConfigValue(parameterValue.value);
+    }
+  }
+  return coerceRemoteConfigValue(parameterValue);
+}
+
+function conditionName(condition) {
+  if (typeof condition === 'string') return condition;
+  if (!condition || typeof condition !== 'object') return null;
+  return condition.name ?? condition.conditionName ?? null;
+}
+
+/**
+ * Resolve one parameter for the loader's context-free environment bridge.
+ * Explicit defaults win; when a parameter has only conditional values, use the
+ * highest-priority condition from the template and then a stable lexical
+ * fallback for condition entries not listed in the template metadata.
+ */
+export function getRcValue(template, key) {
+  const parameter = template?.parameters?.[key];
+  if (!parameter || typeof parameter !== 'object') return null;
+
+  const defaultValue = readRemoteConfigParameterValue(parameter.defaultValue);
+  if (defaultValue !== null) return defaultValue;
+
+  const conditionalValues = parameter.conditionalValues;
+  if (!conditionalValues || typeof conditionalValues !== 'object' || Array.isArray(conditionalValues)) {
+    return null;
+  }
+
+  const orderedConditions = [];
+  if (Array.isArray(template?.conditions)) {
+    for (const condition of template.conditions) {
+      const name = conditionName(condition);
+      if (name && !orderedConditions.includes(name)) orderedConditions.push(name);
+    }
+  }
+  for (const name of Object.keys(conditionalValues).sort()) {
+    if (!orderedConditions.includes(name)) orderedConditions.push(name);
+  }
+
+  for (const name of orderedConditions) {
+    if (!Object.prototype.hasOwnProperty.call(conditionalValues, name)) continue;
+    const value = readRemoteConfigParameterValue(conditionalValues[name]);
+    if (value !== null) return value;
+  }
+  return null;
 }
 
 /**
