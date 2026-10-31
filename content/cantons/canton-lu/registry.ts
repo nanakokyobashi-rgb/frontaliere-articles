@@ -237,4 +237,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'kanti-rektor-draht-universitaet',
+ category: 'novita',
+ date: '2026-10-31T13:00:04.976Z',
+ image: '/images/blog/article-kanti-rektor-draht-universitaet.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['LU'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

@@ -66,6 +66,9 @@ const blogMetaCantonLuEn: Record<string, string> = {
     'blog.article.tunnel-sonnenberg-chiusura-notte.title': 'Sonnenberg Tunnel closed for structural inspection',
     'blog.article.tunnel-sonnenberg-chiusura-notte.excerpt': 'Complete closure of the Sonnenberg tunnel in both directions during the night of November 4–5, 2026, from 22.00 to 05.00.',
     'blog.article.tunnel-sonnenberg-chiusura-notte.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.kanti-rektor-draht-universitaet.title': 'Rector Kanti Strengthens Ties with the University of Lucerne',
+    'blog.article.kanti-rektor-draht-universitaet.excerpt': 'Marco Stössel, principal of the Kantonsschule Beromünster, spoke at the 2026 Dies Academicus about the common educational pathway between high schools and universities.',
+    'blog.article.kanti-rektor-draht-universitaet.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonLuEn;
