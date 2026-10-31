@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "mobilita",
-  "updatedAt": "2026-10-31T11:03:15.690Z",
-  "contentHash": "a2cc92c11fed1f6ecaaebd4e6a3255894e28c4080809b386c54003055667b499",
+  "updatedAt": "2026-10-31T19:04:20.188Z",
+  "contentHash": "7dfac5ed63bc489d42b81bad21a7e65d0c4966b3ab324f61e81007a5586ca856",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-31T01:06:50.670Z",
+      "updatedAt": "2026-10-31T10:01:09.440Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-30T21:45:03.956Z",
+      "updatedAt": "2026-10-31T11:16:57.003Z",
       "keyFacts": 0
     }
   ],
@@ -42,7 +42,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "16",
+          "value": "15",
           "note": "segnalazioni aggiornate: 31 ottobre 2026"
         }
       ],
@@ -148,7 +148,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-31T01:06:50.670Z"
+          "updatedAt": "2026-10-31T10:01:09.440Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -186,7 +186,7 @@
               "url": "https://www.mobilis-vaud.ch/tarifs-a-compter-du-13-decembre-2026/"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-10-31T11:16:57.003Z"
         }
       ],
       "curatedArticles": [
@@ -270,7 +270,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-31T11:03:15.690Z"
+      "updatedAt": "2026-10-31T19:04:20.188Z"
     },
     "en": {
       "canton": "VD",
@@ -290,7 +290,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "16",
+          "value": "15",
           "note": "reports as of 31 October 2026"
         }
       ],
@@ -396,7 +396,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-31T01:06:50.670Z"
+          "updatedAt": "2026-10-31T10:01:09.440Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -434,7 +434,7 @@
               "url": "https://www.mobilis-vaud.ch/tarifs-a-compter-du-13-decembre-2026/"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-10-31T11:16:57.003Z"
         }
       ],
       "curatedArticles": [
@@ -517,7 +517,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-31T11:03:15.690Z"
+      "updatedAt": "2026-10-31T19:04:20.188Z"
     },
     "de": {
       "canton": "VD",
@@ -537,7 +537,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "16",
+          "value": "15",
           "note": "Meldungen vom 31. Oktober 2026"
         }
       ],
@@ -643,7 +643,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-31T01:06:50.670Z"
+          "updatedAt": "2026-10-31T10:01:09.440Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -681,7 +681,7 @@
               "url": "https://www.mobilis-vaud.ch/tarifs-a-compter-du-13-decembre-2026/"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-10-31T11:16:57.003Z"
         }
       ],
       "curatedArticles": [
@@ -764,7 +764,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-31T11:03:15.690Z"
+      "updatedAt": "2026-10-31T19:04:20.188Z"
     },
     "fr": {
       "canton": "VD",
@@ -784,7 +784,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "16",
+          "value": "15",
           "note": "signalements au 31 octobre 2026"
         }
       ],
@@ -890,7 +890,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-31T01:06:50.670Z"
+          "updatedAt": "2026-10-31T10:01:09.440Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -928,7 +928,7 @@
               "url": "https://www.mobilis-vaud.ch/tarifs-a-compter-du-13-decembre-2026/"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-10-31T11:16:57.003Z"
         }
       ],
       "curatedArticles": [
@@ -1012,7 +1012,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-31T11:03:15.690Z"
+      "updatedAt": "2026-10-31T19:04:20.188Z"
     }
   }
 }
