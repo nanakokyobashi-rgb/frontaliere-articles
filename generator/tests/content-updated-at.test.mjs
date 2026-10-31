@@ -20,40 +20,56 @@ test('la storia body ignora l’estrazione e sceglie il commit più recente tra 
   const history = parseContentHistory([
     `${EXTRACTION}\t2026-07-30T12:27:48Z`,
     '',
-    'content/blog-body/it/article.ts',
+    'M\tcontent/blog-body/it/article.ts',
     'def4567\t2026-07-31T12:00:00Z',
     '',
-    'content/blog-body/it/article.ts',
+    'M\tcontent/blog-body/it/article.ts',
     'abc1234\t2026-10-20T10:00:00Z',
     '',
-    'content/blog-body/en/article.ts',
+    'A\tcontent/blog-body/en/article.ts',
   ].join('\n'));
 
   assert.deepEqual(history.get('content/blog-body/it/article.ts'), {
     commit: 'def4567',
     committedAt: '2026-07-31T12:00:00Z',
+    changeType: 'M',
   });
   assert.deepEqual(history.get('content/blog-body/en/article.ts'), {
     commit: 'abc1234',
     committedAt: '2026-10-20T10:00:00Z',
+    changeType: 'A',
   });
 });
 
-test('il backfill non scambia il commit di pubblicazione per una modifica successiva', () => {
+test('il backfill esclude la prima pubblicazione e confronta le modifiche per istante', () => {
   const sections = [{ section: 'frontaliere', bodyDir: 'content/blog-body' }];
   const history = new Map([
-    ['content/blog-body/it/new.ts', { commit: 'new', committedAt: '2026-10-20T11:00:00Z' }],
-    ['content/blog-body/en/new.ts', { commit: 'new', committedAt: '2026-10-20T11:00:00Z' }],
-    ['content/blog-body/it/old.ts', { commit: 'old', committedAt: '2026-10-21T11:00:00Z' }],
+    ['content/blog-body/it/new.ts', {
+      commit: 'new',
+      committedAt: '2026-10-21T00:01:00Z',
+      changeType: 'A',
+    }],
+    ['content/blog-body/it/old.ts', {
+      commit: 'old',
+      committedAt: '2026-10-21T11:00:00Z',
+      changeType: 'M',
+    }],
+    ['content/blog-body/it/same-day.ts', {
+      commit: 'same-day',
+      committedAt: '2026-10-20T10:00:01Z',
+      changeType: 'M',
+    }],
   ]);
   const result = enrichRegistriesFromHistory({ frontaliere: [
-    { id: 'new', date: '2026-10-20T10:00:00Z' },
+    { id: 'new', date: '2026-10-20T23:59:00Z' },
     { id: 'old', date: '2026-10-01T10:00:00Z' },
+    { id: 'same-day', date: '2026-10-20T10:00:00Z' },
   ] }, sections, history);
 
   assert.equal(result.registries.frontaliere[0].updatedAt, undefined);
   assert.equal(result.registries.frontaliere[1].updatedAt, '2026-10-21');
-  assert.deepEqual(result.changed.map(({ id }) => id), ['old']);
+  assert.equal(result.registries.frontaliere[2].updatedAt, '2026-10-20');
+  assert.deepEqual(result.changed.map(({ id }) => id), ['old', 'same-day']);
 });
 
 test('lo stamp workflow aggiorna solo body esistenti e inserisce il campo nel registry', () => {

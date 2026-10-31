@@ -20,6 +20,7 @@ export const CONTENT_EXTRACTION_COMMIT = '046d940280245c0c587acb4872a74a6838c1b3
 
 const LOCALE_RE = /^(?:it|en|de|fr)$/u;
 const HISTORY_HEADER_RE = /^([0-9a-f]{7,40})\t(\S+)$/u;
+const HISTORY_PATH_RE = /^([AM])\t(.+)$/u;
 
 function sectionId(section) {
   return section?.section ?? section?.id ?? '';
@@ -35,14 +36,14 @@ function sectionRegistryFile(section) {
 }
 
 /**
- * Parse `git log --format='%H%x09%cI' --name-only` output.
+ * Parse `git log --format='%H%x09%cI' --name-status` output.
  *
  * Git emits newest commits first.  Therefore the first occurrence of a body
  * path is its latest content commit; a commit may own several paths and all
  * of them inherit the same timestamp.
  *
  * @param {string} text
- * @returns {Map<string, {commit: string, committedAt: string}>}
+ * @returns {Map<string, {commit: string, committedAt: string, changeType?: 'A'|'M'}>}
  */
 export function parseContentHistory(text) {
   const latestByPath = new Map();
@@ -59,11 +60,15 @@ export function parseContentHistory(text) {
       continue;
     }
     if (!current || current.ignored || line === '' || line.startsWith('(')) continue;
-    if (!latestByPath.has(line)) {
-      latestByPath.set(line, {
+    const pathMatch = HISTORY_PATH_RE.exec(line);
+    const relPath = pathMatch?.[2] ?? line;
+    if (!latestByPath.has(relPath)) {
+      const entry = {
         commit: current.commit,
         committedAt: current.committedAt,
-      });
+      };
+      if (pathMatch) entry.changeType = pathMatch[1];
+      latestByPath.set(relPath, entry);
     }
   }
   return latestByPath;
@@ -76,7 +81,7 @@ export function contentHistoryCommand(sections) {
   // Exclude the extraction and its ancestors before asking Git for path
   // names. Besides encoding the semantic exception, this avoids streaming the
   // one 29k-file extraction commit through every publisher run.
-  return `git log HEAD --format=%H%x09%cI --name-only --diff-filter=AM --no-renames --not ${CONTENT_EXTRACTION_COMMIT} -- ${bodyDirs.join(' ')}`;
+  return `git log HEAD --format=%H%x09%cI --name-status --diff-filter=AM --no-renames --not ${CONTENT_EXTRACTION_COMMIT} -- ${bodyDirs.join(' ')}`;
 }
 
 /**
@@ -117,7 +122,7 @@ function newer(left, right) {
 /**
  * Reduce per-locale body history to one latest commit per article and section.
  *
- * @param {Map<string, {commit: string, committedAt: string}>} history
+ * @param {Map<string, {commit: string, committedAt: string, changeType?: 'A'|'M'}>} history
  * @param {Array<{section?: string, bodyDir: string}>} sections
  * @returns {Map<string, Map<string, {commit: string, committedAt: string}>>}
  */
@@ -134,16 +139,15 @@ export function latestContentUpdatesBySection(history, sections) {
 }
 
 function isPublishedBefore(candidate, published) {
+  // A body added after the extraction is the first publication commit. Its
+  // timestamp may cross midnight relative to the registry date, but it is not
+  // an editorial update. Existing extracted bodies arrive here as `M`, so
+  // their first post-extraction edit remains eligible.
+  if (candidate?.changeType === 'A') return false;
   const candidateMs = Date.parse(candidate?.committedAt ?? '');
   const publishedMs = Date.parse(published ?? '');
   if (Number.isNaN(candidateMs) || Number.isNaN(publishedMs)) return false;
-  // A generation commit is normally a few seconds after the registry date,
-  // because the workflow commits the already-rendered article. Compare the
-  // calendar day for the historical backfill so that first publication is not
-  // misclassified as a later edit. Workflow stamps use the exact timestamp
-  // below because they only receive already tracked body files.
-  return new Date(candidateMs).toISOString().slice(0, 10)
-    > new Date(publishedMs).toISOString().slice(0, 10);
+  return candidateMs > publishedMs;
 }
 
 function isTimestampAfter(candidate, published) {
