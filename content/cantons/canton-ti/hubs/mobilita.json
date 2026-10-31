@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "mobilita",
-  "updatedAt": "2026-10-31T06:15:08.747Z",
-  "contentHash": "f3754bffd3a84a63da0a02aaeb1a9fbb87311a009dc0ff368b9ee72b02861c31",
+  "updatedAt": "2026-10-31T06:45:46.687Z",
+  "contentHash": "f401c5c7c572b32d4091dce1aaaff019ef67338e337ebcbed776add0618c49df",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-30T20:12:21.426Z",
+      "updatedAt": "2026-10-31T01:06:50.670Z",
       "keyFacts": 2
     },
     {
@@ -38,12 +38,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "3",
-          "note": "segnalazioni aggiornate: 30 ottobre 2026"
+          "note": "segnalazioni aggiornate: 31 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "29",
-          "note": "segnalazioni aggiornate: 30 ottobre 2026"
+          "note": "segnalazioni aggiornate: 31 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -159,7 +159,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-30T20:12:21.426Z"
+          "updatedAt": "2026-10-31T01:06:50.670Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -293,7 +293,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-10-31T06:45:46.687Z"
     },
     "en": {
       "canton": "TI",
@@ -309,12 +309,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "3",
-          "note": "reports as of 30 October 2026"
+          "note": "reports as of 31 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "29",
-          "note": "reports as of 30 October 2026"
+          "note": "reports as of 31 October 2026"
         }
       ],
       "dataBlocks": [
@@ -430,7 +430,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-30T20:12:21.426Z"
+          "updatedAt": "2026-10-31T01:06:50.670Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -563,7 +563,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-10-31T06:45:46.687Z"
     },
     "de": {
       "canton": "TI",
@@ -579,12 +579,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "3",
-          "note": "Meldungen vom 30. Oktober 2026"
+          "note": "Meldungen vom 31. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "29",
-          "note": "Meldungen vom 30. Oktober 2026"
+          "note": "Meldungen vom 31. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -700,7 +700,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-30T20:12:21.426Z"
+          "updatedAt": "2026-10-31T01:06:50.670Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -833,7 +833,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-10-31T06:45:46.687Z"
     },
     "fr": {
       "canton": "TI",
@@ -849,12 +849,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "3",
-          "note": "signalements au 30 octobre 2026"
+          "note": "signalements au 31 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "29",
-          "note": "signalements au 30 octobre 2026"
+          "note": "signalements au 31 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -970,7 +970,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-30T20:12:21.426Z"
+          "updatedAt": "2026-10-31T01:06:50.670Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -1104,7 +1104,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-10-31T06:45:46.687Z"
     }
   }
 }

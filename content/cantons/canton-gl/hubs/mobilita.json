@@ -4,12 +4,12 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "mobilita",
-  "updatedAt": "2026-10-31T06:15:08.747Z",
-  "contentHash": "96c8c9c6b1297dcdb8df55d5a1b02b314c251c8b4e59ae086f29df56c2c4482f",
+  "updatedAt": "2026-10-31T06:45:46.687Z",
+  "contentHash": "ed180b3bd792f3cb1e588eab18eb8ad3d9190d81b8f66e1dea9c9c4f730b602f",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-30T20:12:21.426Z",
+      "updatedAt": "2026-10-31T01:06:50.670Z",
       "keyFacts": 2
     }
   ],
@@ -23,12 +23,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "1",
-          "note": "segnalazioni aggiornate: 30 ottobre 2026"
+          "note": "segnalazioni aggiornate: 31 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "1",
-          "note": "segnalazioni aggiornate: 30 ottobre 2026"
+          "note": "segnalazioni aggiornate: 31 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -51,7 +51,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-30T20:12:21.426Z"
+          "updatedAt": "2026-10-31T01:06:50.670Z"
         }
       ],
       "curatedArticles": [
@@ -109,7 +109,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-10-31T06:45:46.687Z"
     },
     "en": {
       "canton": "GL",
@@ -120,12 +120,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "1",
-          "note": "reports as of 30 October 2026"
+          "note": "reports as of 31 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "1",
-          "note": "reports as of 30 October 2026"
+          "note": "reports as of 31 October 2026"
         }
       ],
       "dataBlocks": [
@@ -148,7 +148,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-30T20:12:21.426Z"
+          "updatedAt": "2026-10-31T01:06:50.670Z"
         }
       ],
       "curatedArticles": [
@@ -206,7 +206,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-10-31T06:45:46.687Z"
     },
     "de": {
       "canton": "GL",
@@ -217,12 +217,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "1",
-          "note": "Meldungen vom 30. Oktober 2026"
+          "note": "Meldungen vom 31. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "1",
-          "note": "Meldungen vom 30. Oktober 2026"
+          "note": "Meldungen vom 31. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -245,7 +245,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-30T20:12:21.426Z"
+          "updatedAt": "2026-10-31T01:06:50.670Z"
         }
       ],
       "curatedArticles": [
@@ -303,7 +303,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-10-31T06:45:46.687Z"
     },
     "fr": {
       "canton": "GL",
@@ -314,12 +314,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "1",
-          "note": "signalements au 30 octobre 2026"
+          "note": "signalements au 31 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "1",
-          "note": "signalements au 30 octobre 2026"
+          "note": "signalements au 31 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -342,7 +342,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-30T20:12:21.426Z"
+          "updatedAt": "2026-10-31T01:06:50.670Z"
         }
       ],
       "curatedArticles": [
@@ -400,7 +400,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-10-31T06:45:46.687Z"
     }
   }
 }

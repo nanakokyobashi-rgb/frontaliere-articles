@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-31T06:15:08.747Z",
-  "contentHash": "71e54a9233601d5e5b88924ac36547f055df4fc530ebcc1a56f90e14e0cf1fc1",
+  "updatedAt": "2026-10-31T06:45:46.687Z",
+  "contentHash": "888c172542a853d073d9d464a6ce1e5e91a203004c10499364c63d0bb8e8d3fc",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-30T20:12:21.426Z",
+      "updatedAt": "2026-10-31T01:06:50.670Z",
       "keyFacts": 1
     },
     {
@@ -38,7 +38,7 @@
         {
           "label": "Cantieri attivi o imminenti",
           "value": "2",
-          "note": "segnalazioni aggiornate: 30 ottobre 2026"
+          "note": "segnalazioni aggiornate: 31 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -82,11 +82,6 @@
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
             {
-              "label": "A1 St. Gallen -> Zürich tra Svincolo autostradale Matzingen E Parcheggio Stegen Situazione: pericolo Causa: zona incidentata non protetta",
-              "value": "Traffico",
-              "date": "2026-10-30T20:07:00.000Z"
-            },
-            {
               "label": "A7 Winterthur <-> Kreuzlingen tra Raccordo autostradale Diramazione Grüneck E Svincolo autostradale Frauenfeld Ost Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del…",
               "value": "Cantiere",
               "detail": "fine prevista: 6 novembre 2026",
@@ -100,7 +95,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-30T20:12:21.426Z"
+          "updatedAt": "2026-10-31T01:06:50.670Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -198,7 +193,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-10-31T06:45:46.687Z"
     },
     "en": {
       "canton": "TG",
@@ -214,7 +209,7 @@
         {
           "label": "Roadworks active or imminent",
           "value": "2",
-          "note": "reports as of 30 October 2026"
+          "note": "reports as of 31 October 2026"
         }
       ],
       "dataBlocks": [
@@ -258,11 +253,6 @@
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
             {
-              "label": "A1 St. Gallen -> Zürich tra Svincolo autostradale Matzingen E Parcheggio Stegen Situazione: pericolo Causa: zona incidentata non protetta",
-              "value": "Traffic",
-              "date": "2026-10-30T20:07:00.000Z"
-            },
-            {
               "label": "A7 Winterthur <-> Kreuzlingen tra Raccordo autostradale Diramazione Grüneck E Svincolo autostradale Frauenfeld Ost Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del…",
               "value": "Roadworks",
               "detail": "until 6 November 2026",
@@ -276,7 +266,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-30T20:12:21.426Z"
+          "updatedAt": "2026-10-31T01:06:50.670Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -374,7 +364,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-10-31T06:45:46.687Z"
     },
     "de": {
       "canton": "TG",
@@ -390,7 +380,7 @@
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "2",
-          "note": "Meldungen vom 30. Oktober 2026"
+          "note": "Meldungen vom 31. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -434,11 +424,6 @@
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
             {
-              "label": "A1 St. Gallen -> Zürich zwischen Anschluss Matzingen und Parkplatz Stegen Sachlage: Gefahr Ursache: ungesicherte Unfallstelle",
-              "value": "Verkehr",
-              "date": "2026-10-30T20:07:00.000Z"
-            },
-            {
               "label": "A7 Winterthur <-> Kreuzlingen zwischen Autobahndreieck Verzweigung Grüneck und Anschluss Frauenfeld-Ost Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.2 Verkehrsführung: Fahrbahnverengung auf…",
               "value": "Baustelle",
               "detail": "bis 6. November 2026",
@@ -452,7 +437,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-30T20:12:21.426Z"
+          "updatedAt": "2026-10-31T01:06:50.670Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -550,7 +535,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-10-31T06:45:46.687Z"
     },
     "fr": {
       "canton": "TG",
@@ -566,7 +551,7 @@
         {
           "label": "Chantiers actifs ou imminents",
           "value": "2",
-          "note": "signalements au 30 octobre 2026"
+          "note": "signalements au 31 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -610,11 +595,6 @@
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
             {
-              "label": "A1 St-Gall -> Zurich entre Jonction autoroutière Matzingen et Parking Stegen Situation: danger Raison: zone d'accident non sécurisée",
-              "value": "Trafic",
-              "date": "2026-10-30T20:07:00.000Z"
-            },
-            {
               "label": "A7 Winterthur <-> Kreuzlingen entre Echangeur Echangeur de Grüneck et Jonction autoroutière Frauenfeld-Est Situation: trafic perturbé travaux, longueur [km] 0.2 Gestion du trafic: rétrécissement des…",
               "value": "Chantier",
               "detail": "jusqu’au 6 novembre 2026",
@@ -628,7 +608,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-30T20:12:21.426Z"
+          "updatedAt": "2026-10-31T01:06:50.670Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -726,7 +706,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-10-31T06:45:46.687Z"
     }
   }
 }

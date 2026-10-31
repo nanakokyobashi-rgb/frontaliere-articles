@@ -4,12 +4,12 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-31T06:15:08.747Z",
-  "contentHash": "970e6dd45f5384fe7559fb4b4f74fe3124c6a304703c3dbfedf09511d50e25ee",
+  "updatedAt": "2026-10-31T06:45:46.687Z",
+  "contentHash": "da32090ea18497052600a522715e81f1f3f519f635b7f5003f21830ace04547c",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-30T20:12:21.426Z",
+      "updatedAt": "2026-10-31T01:06:50.670Z",
       "keyFacts": 2
     },
     {
@@ -27,13 +27,13 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "17",
-          "note": "segnalazioni aggiornate: 30 ottobre 2026"
+          "value": "18",
+          "note": "segnalazioni aggiornate: 31 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "84",
-          "note": "segnalazioni aggiornate: 30 ottobre 2026"
+          "note": "segnalazioni aggiornate: 31 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -91,7 +91,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-30T20:12:21.426Z"
+          "updatedAt": "2026-10-31T01:06:50.670Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -181,7 +181,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-10-31T06:45:46.687Z"
     },
     "en": {
       "canton": "BE",
@@ -191,13 +191,13 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "17",
-          "note": "reports as of 30 October 2026"
+          "value": "18",
+          "note": "reports as of 31 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "84",
-          "note": "reports as of 30 October 2026"
+          "note": "reports as of 31 October 2026"
         }
       ],
       "dataBlocks": [
@@ -255,7 +255,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-30T20:12:21.426Z"
+          "updatedAt": "2026-10-31T01:06:50.670Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -345,7 +345,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-10-31T06:45:46.687Z"
     },
     "de": {
       "canton": "BE",
@@ -355,13 +355,13 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "17",
-          "note": "Meldungen vom 30. Oktober 2026"
+          "value": "18",
+          "note": "Meldungen vom 31. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "84",
-          "note": "Meldungen vom 30. Oktober 2026"
+          "note": "Meldungen vom 31. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -419,7 +419,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-30T20:12:21.426Z"
+          "updatedAt": "2026-10-31T01:06:50.670Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -509,7 +509,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-10-31T06:45:46.687Z"
     },
     "fr": {
       "canton": "BE",
@@ -519,13 +519,13 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "17",
-          "note": "signalements au 30 octobre 2026"
+          "value": "18",
+          "note": "signalements au 31 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "84",
-          "note": "signalements au 30 octobre 2026"
+          "note": "signalements au 31 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -583,7 +583,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-30T20:12:21.426Z"
+          "updatedAt": "2026-10-31T01:06:50.670Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -673,7 +673,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-10-31T06:45:46.687Z"
     }
   }
 }

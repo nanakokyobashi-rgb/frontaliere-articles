@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-31T06:15:08.747Z",
-  "contentHash": "67ae87d45dcc7f123b87ba2b349e2963f2e628f7588786ede5b525e715c38db2",
+  "updatedAt": "2026-10-31T06:45:46.687Z",
+  "contentHash": "2fdede0306067c7f6fffb300b493c649717864d10373f87b3f637b031d45b614",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-30T20:12:21.426Z",
+      "updatedAt": "2026-10-31T01:06:50.670Z",
       "keyFacts": 2
     },
     {
@@ -38,12 +38,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "5",
-          "note": "segnalazioni aggiornate: 30 ottobre 2026"
+          "note": "segnalazioni aggiornate: 31 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "5",
-          "note": "segnalazioni aggiornate: 30 ottobre 2026"
+          "note": "segnalazioni aggiornate: 31 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -112,7 +112,7 @@
             {
               "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
               "value": "Traffico",
-              "date": "2026-10-30T20:12:21.426Z",
+              "date": "2026-10-31T01:06:50.670Z",
               "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             },
             {
@@ -129,7 +129,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-30T20:12:21.426Z"
+          "updatedAt": "2026-10-31T01:06:50.670Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -206,7 +206,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-10-31T06:45:46.687Z"
     },
     "en": {
       "canton": "NE",
@@ -222,12 +222,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "5",
-          "note": "reports as of 30 October 2026"
+          "note": "reports as of 31 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "5",
-          "note": "reports as of 30 October 2026"
+          "note": "reports as of 31 October 2026"
         }
       ],
       "dataBlocks": [
@@ -296,7 +296,7 @@
             {
               "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
               "value": "Traffic",
-              "date": "2026-10-30T20:12:21.426Z",
+              "date": "2026-10-31T01:06:50.670Z",
               "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             },
             {
@@ -313,7 +313,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-30T20:12:21.426Z"
+          "updatedAt": "2026-10-31T01:06:50.670Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -390,7 +390,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-10-31T06:45:46.687Z"
     },
     "de": {
       "canton": "NE",
@@ -406,12 +406,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "5",
-          "note": "Meldungen vom 30. Oktober 2026"
+          "note": "Meldungen vom 31. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "5",
-          "note": "Meldungen vom 30. Oktober 2026"
+          "note": "Meldungen vom 31. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -480,7 +480,7 @@
             {
               "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
               "value": "Verkehr",
-              "date": "2026-10-30T20:12:21.426Z",
+              "date": "2026-10-31T01:06:50.670Z",
               "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             },
             {
@@ -497,7 +497,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-30T20:12:21.426Z"
+          "updatedAt": "2026-10-31T01:06:50.670Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -574,7 +574,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-10-31T06:45:46.687Z"
     },
     "fr": {
       "canton": "NE",
@@ -590,12 +590,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "5",
-          "note": "signalements au 30 octobre 2026"
+          "note": "signalements au 31 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "5",
-          "note": "signalements au 30 octobre 2026"
+          "note": "signalements au 31 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -664,7 +664,7 @@
             {
               "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
               "value": "Trafic",
-              "date": "2026-10-30T20:12:21.426Z",
+              "date": "2026-10-31T01:06:50.670Z",
               "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             },
             {
@@ -681,7 +681,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-30T20:12:21.426Z"
+          "updatedAt": "2026-10-31T01:06:50.670Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -758,7 +758,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-10-31T06:45:46.687Z"
     }
   }
 }
