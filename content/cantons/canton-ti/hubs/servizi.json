@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-10-31T06:15:08.747Z",
-  "contentHash": "63bdb7be96060efa6346c8a79fbadfde32df4de7f99636a5fcd9043460235d96",
+  "updatedAt": "2026-10-31T07:51:05.482Z",
+  "contentHash": "630d17cdd3669f290174b37c7ec9ea482c3178f74b0dea9130072703094bc59f",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-30T22:44:53.539Z",
+      "updatedAt": "2026-10-31T01:55:24.654Z",
       "keyFacts": 0
     },
     {
@@ -79,16 +79,6 @@
           "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
           "items": [
             {
-              "label": "Farmacia Coop Vitality Viganello",
-              "detail": "Viganello, Luganese",
-              "date": "2026-10-24T06:00:00.000Z"
-            },
-            {
-              "label": "Giardino",
-              "detail": "Coldrerio, Mendrisiotto",
-              "date": "2026-10-27T07:00:00.000Z"
-            },
-            {
               "label": "Boscolo",
               "detail": "Airolo, Biasca e Valli",
               "date": "2026-10-30T17:00:00.000Z"
@@ -107,11 +97,21 @@
               "label": "Farmacia Contrada dei Patrizi Molino Nuovo",
               "detail": "Lugano, Luganese",
               "date": "2026-10-31T07:00:00.000Z"
+            },
+            {
+              "label": "Internazionale La Rinascente",
+              "detail": "Ligornetto, Mendrisiotto",
+              "date": "2026-11-03T07:00:00.000Z"
+            },
+            {
+              "label": "Martinoli",
+              "detail": "Dongio, Biasca e Valli",
+              "date": "2026-11-06T17:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-30T22:44:53.539Z"
+          "updatedAt": "2026-10-31T01:55:24.654Z"
         },
         {
           "id": "aste-targhe",
@@ -295,7 +295,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-10-31T07:51:05.482Z"
     },
     "en": {
       "canton": "TI",
@@ -342,16 +342,6 @@
           "description": "Upcoming duty shifts published by the canton’s official service.",
           "items": [
             {
-              "label": "Farmacia Coop Vitality Viganello",
-              "detail": "Viganello, Luganese",
-              "date": "2026-10-24T06:00:00.000Z"
-            },
-            {
-              "label": "Giardino",
-              "detail": "Coldrerio, Mendrisiotto",
-              "date": "2026-10-27T07:00:00.000Z"
-            },
-            {
               "label": "Boscolo",
               "detail": "Airolo, Biasca e Valli",
               "date": "2026-10-30T17:00:00.000Z"
@@ -370,11 +360,21 @@
               "label": "Farmacia Contrada dei Patrizi Molino Nuovo",
               "detail": "Lugano, Luganese",
               "date": "2026-10-31T07:00:00.000Z"
+            },
+            {
+              "label": "Internazionale La Rinascente",
+              "detail": "Ligornetto, Mendrisiotto",
+              "date": "2026-11-03T07:00:00.000Z"
+            },
+            {
+              "label": "Martinoli",
+              "detail": "Dongio, Biasca e Valli",
+              "date": "2026-11-06T17:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-30T22:44:53.539Z"
+          "updatedAt": "2026-10-31T01:55:24.654Z"
         },
         {
           "id": "aste-targhe",
@@ -553,7 +553,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-10-31T07:51:05.482Z"
     },
     "de": {
       "canton": "TI",
@@ -600,16 +600,6 @@
           "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
           "items": [
             {
-              "label": "Farmacia Coop Vitality Viganello",
-              "detail": "Viganello, Luganese",
-              "date": "2026-10-24T06:00:00.000Z"
-            },
-            {
-              "label": "Giardino",
-              "detail": "Coldrerio, Mendrisiotto",
-              "date": "2026-10-27T07:00:00.000Z"
-            },
-            {
               "label": "Boscolo",
               "detail": "Airolo, Biasca e Valli",
               "date": "2026-10-30T17:00:00.000Z"
@@ -628,11 +618,21 @@
               "label": "Farmacia Contrada dei Patrizi Molino Nuovo",
               "detail": "Lugano, Luganese",
               "date": "2026-10-31T07:00:00.000Z"
+            },
+            {
+              "label": "Internazionale La Rinascente",
+              "detail": "Ligornetto, Mendrisiotto",
+              "date": "2026-11-03T07:00:00.000Z"
+            },
+            {
+              "label": "Martinoli",
+              "detail": "Dongio, Biasca e Valli",
+              "date": "2026-11-06T17:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-30T22:44:53.539Z"
+          "updatedAt": "2026-10-31T01:55:24.654Z"
         },
         {
           "id": "aste-targhe",
@@ -811,7 +811,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-10-31T07:51:05.482Z"
     },
     "fr": {
       "canton": "TI",
@@ -858,16 +858,6 @@
           "description": "Prochaines gardes publiées par le service officiel du canton.",
           "items": [
             {
-              "label": "Farmacia Coop Vitality Viganello",
-              "detail": "Viganello, Luganese",
-              "date": "2026-10-24T06:00:00.000Z"
-            },
-            {
-              "label": "Giardino",
-              "detail": "Coldrerio, Mendrisiotto",
-              "date": "2026-10-27T07:00:00.000Z"
-            },
-            {
               "label": "Boscolo",
               "detail": "Airolo, Biasca e Valli",
               "date": "2026-10-30T17:00:00.000Z"
@@ -886,11 +876,21 @@
               "label": "Farmacia Contrada dei Patrizi Molino Nuovo",
               "detail": "Lugano, Luganese",
               "date": "2026-10-31T07:00:00.000Z"
+            },
+            {
+              "label": "Internazionale La Rinascente",
+              "detail": "Ligornetto, Mendrisiotto",
+              "date": "2026-11-03T07:00:00.000Z"
+            },
+            {
+              "label": "Martinoli",
+              "detail": "Dongio, Biasca e Valli",
+              "date": "2026-11-06T17:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-30T22:44:53.539Z"
+          "updatedAt": "2026-10-31T01:55:24.654Z"
         },
         {
           "id": "aste-targhe",
@@ -1066,7 +1066,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-10-31T07:51:05.482Z"
     }
   }
 }

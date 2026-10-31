@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "servizi",
-  "updatedAt": "2026-10-31T06:15:08.747Z",
-  "contentHash": "b28ff5349768b59e743be5478d1f86d031e368fe4f83c3bf7fba963042e9e333",
+  "updatedAt": "2026-10-31T07:51:05.482Z",
+  "contentHash": "c294987d11c1c2af7c13a29ea241ee0fad1af818abd887ba157125656defd036",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-30T22:45:44.000Z",
+      "updatedAt": "2026-10-31T01:56:13.965Z",
       "keyFacts": 0
     },
     {
@@ -64,21 +64,6 @@
           "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
           "items": [
             {
-              "label": "Amavita Pré Guillaume",
-              "detail": "Delémont, Delémont",
-              "date": "2026-10-24T06:00:00.000Z"
-            },
-            {
-              "label": "Benu Porrentruy",
-              "detail": "Porrentruy, Ajoie",
-              "date": "2026-10-24T06:00:00.000Z"
-            },
-            {
-              "label": "Centre Coop",
-              "detail": "Moutier, Moutier",
-              "date": "2026-10-30T17:30:00.000Z"
-            },
-            {
               "label": "Amavita Porrentruy",
               "detail": "Porrentruy, Ajoie",
               "date": "2026-10-31T07:00:00.000Z"
@@ -92,11 +77,26 @@
               "label": "Gare",
               "detail": "Moutier, Moutier",
               "date": "2026-10-31T17:30:00.000Z"
+            },
+            {
+              "label": "Gare",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-01T09:00:00.000Z"
+            },
+            {
+              "label": "Gare",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-01T17:30:00.000Z"
+            },
+            {
+              "label": "Gare",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-01T17:30:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-10-30T22:45:44.000Z"
+          "updatedAt": "2026-10-31T01:56:13.965Z"
         },
         {
           "id": "meteo",
@@ -183,7 +183,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-10-31T07:51:05.482Z"
     },
     "en": {
       "canton": "JU",
@@ -220,21 +220,6 @@
           "description": "Upcoming duty shifts published by the canton’s official service.",
           "items": [
             {
-              "label": "Amavita Pré Guillaume",
-              "detail": "Delémont, Delémont",
-              "date": "2026-10-24T06:00:00.000Z"
-            },
-            {
-              "label": "Benu Porrentruy",
-              "detail": "Porrentruy, Ajoie",
-              "date": "2026-10-24T06:00:00.000Z"
-            },
-            {
-              "label": "Centre Coop",
-              "detail": "Moutier, Moutier",
-              "date": "2026-10-30T17:30:00.000Z"
-            },
-            {
               "label": "Amavita Porrentruy",
               "detail": "Porrentruy, Ajoie",
               "date": "2026-10-31T07:00:00.000Z"
@@ -248,11 +233,26 @@
               "label": "Gare",
               "detail": "Moutier, Moutier",
               "date": "2026-10-31T17:30:00.000Z"
+            },
+            {
+              "label": "Gare",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-01T09:00:00.000Z"
+            },
+            {
+              "label": "Gare",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-01T17:30:00.000Z"
+            },
+            {
+              "label": "Gare",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-01T17:30:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-10-30T22:45:44.000Z"
+          "updatedAt": "2026-10-31T01:56:13.965Z"
         },
         {
           "id": "meteo",
@@ -335,7 +335,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-10-31T07:51:05.482Z"
     },
     "de": {
       "canton": "JU",
@@ -372,21 +372,6 @@
           "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
           "items": [
             {
-              "label": "Amavita Pré Guillaume",
-              "detail": "Delémont, Delémont",
-              "date": "2026-10-24T06:00:00.000Z"
-            },
-            {
-              "label": "Benu Porrentruy",
-              "detail": "Porrentruy, Ajoie",
-              "date": "2026-10-24T06:00:00.000Z"
-            },
-            {
-              "label": "Centre Coop",
-              "detail": "Moutier, Moutier",
-              "date": "2026-10-30T17:30:00.000Z"
-            },
-            {
               "label": "Amavita Porrentruy",
               "detail": "Porrentruy, Ajoie",
               "date": "2026-10-31T07:00:00.000Z"
@@ -400,11 +385,26 @@
               "label": "Gare",
               "detail": "Moutier, Moutier",
               "date": "2026-10-31T17:30:00.000Z"
+            },
+            {
+              "label": "Gare",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-01T09:00:00.000Z"
+            },
+            {
+              "label": "Gare",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-01T17:30:00.000Z"
+            },
+            {
+              "label": "Gare",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-01T17:30:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-10-30T22:45:44.000Z"
+          "updatedAt": "2026-10-31T01:56:13.965Z"
         },
         {
           "id": "meteo",
@@ -487,7 +487,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-10-31T07:51:05.482Z"
     },
     "fr": {
       "canton": "JU",
@@ -524,21 +524,6 @@
           "description": "Prochaines gardes publiées par le service officiel du canton.",
           "items": [
             {
-              "label": "Amavita Pré Guillaume",
-              "detail": "Delémont, Delémont",
-              "date": "2026-10-24T06:00:00.000Z"
-            },
-            {
-              "label": "Benu Porrentruy",
-              "detail": "Porrentruy, Ajoie",
-              "date": "2026-10-24T06:00:00.000Z"
-            },
-            {
-              "label": "Centre Coop",
-              "detail": "Moutier, Moutier",
-              "date": "2026-10-30T17:30:00.000Z"
-            },
-            {
               "label": "Amavita Porrentruy",
               "detail": "Porrentruy, Ajoie",
               "date": "2026-10-31T07:00:00.000Z"
@@ -552,11 +537,26 @@
               "label": "Gare",
               "detail": "Moutier, Moutier",
               "date": "2026-10-31T17:30:00.000Z"
+            },
+            {
+              "label": "Gare",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-01T09:00:00.000Z"
+            },
+            {
+              "label": "Gare",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-01T17:30:00.000Z"
+            },
+            {
+              "label": "Gare",
+              "detail": "Moutier, Moutier",
+              "date": "2026-11-01T17:30:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-10-30T22:45:44.000Z"
+          "updatedAt": "2026-10-31T01:56:13.965Z"
         },
         {
           "id": "meteo",
@@ -635,7 +635,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-10-31T07:51:05.482Z"
     }
   }
 }
