@@ -14,7 +14,10 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const SLUGS = ['tassazione-individuale-svizzera', 'tassazione-individuale-lavoro-donne'];
 const LOCALES = ['it', 'en', 'de', 'fr'];
-const REFRESHED_ON = '2026-09-24';
+const REFRESHED_ON = {
+  'tassazione-individuale-svizzera': '2026-10-08',
+  'tassazione-individuale-lavoro-donne': '2026-09-24',
+};
 
 const FUTURE_VOTE = [
   /sarà chiamato/, /si preannuncia/, /Il prossimo 8 marzo/, /prevista per l\\'8 marzo/,
@@ -32,7 +35,7 @@ function bodySource(slug, locale) {
 for (const slug of SLUGS) {
   test(`${slug}: la voce del registro porta la data del refresh fattuale`, () => {
     const registry = fs.readFileSync(path.join(ROOT, 'content', 'blog-articles-data.ts'), 'utf8');
-    assert.match(registry, new RegExp(`id: '${slug}'[\\s\\S]{0,220}updatedAt: '${REFRESHED_ON}'`));
+    assert.match(registry, new RegExp(`id: '${slug}'[\\s\\S]{0,220}updatedAt: '${REFRESHED_ON[slug]}'`));
   });
 
   for (const locale of LOCALES) {

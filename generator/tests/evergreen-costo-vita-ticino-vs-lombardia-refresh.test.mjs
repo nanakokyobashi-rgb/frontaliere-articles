@@ -9,7 +9,7 @@
 // - LAMal: il premio varia per cantone, eta' e assicuratore; il body rimanda
 //   alla pagina ufficiale Priminfo invece di congelare un valore annuale,
 //   evitando che il refresh 2027 diventi stale.
-// Il registry deve portare `updatedAt` alla data del refresh fattuale.
+// Il registry deve portare `updatedAt` all'ultima modifica fattuale del body.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -19,7 +19,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const SLUG = 'costo-vita-ticino-vs-lombardia';
 const LOCALES = ['it', 'en', 'de', 'fr'];
-const REFRESHED_ON = '2026-09-26';
+const REFRESHED_ON = '2026-09-27';
 
 function bodySource(locale) {
   return fs.readFileSync(path.join(ROOT, 'content', 'blog-body', locale, `${SLUG}.ts`), 'utf8');

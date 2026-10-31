@@ -64,6 +64,8 @@ on:
       - '.github/workflows/publish-journalist-articles.yml'
       - 'generator/scripts/publish-journalist-article.mjs'
       - 'generator/scripts/lib/fetch-with-ref-timeout.mjs'
+      - 'scripts/ci/stamp-content-updated-at.mjs'
+      - 'scripts/lib/content-updated-at.mjs'
   workflow_dispatch:
     inputs:
       dry_run:
@@ -169,6 +171,10 @@ jobs:
         id: publish
         if: steps.mode.outputs.dry != 'true'
         run: node generator/scripts/publish-journalist-article.mjs
+
+      - name: Stamp updatedAt for changed article bodies
+        if: steps.mode.outputs.dry != 'true'
+        run: node scripts/ci/stamp-content-updated-at.mjs
 
       # ── La guardia sul percorso di scrittura (issue #275) ──────────────────
       #

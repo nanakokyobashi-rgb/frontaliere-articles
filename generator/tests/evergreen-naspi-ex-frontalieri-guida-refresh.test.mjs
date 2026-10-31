@@ -26,7 +26,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const SLUG = 'naspi-ex-frontalieri-guida';
 const LOCALES = ['it', 'en', 'de', 'fr'];
-const REFRESHED_ON = '2026-09-25';
+const REFRESHED_ON = '2026-10-04';
 
 function bodySource(locale) {
   return fs.readFileSync(path.join(ROOT, 'content', 'blog-body-ch', locale, `${SLUG}.ts`), 'utf8');

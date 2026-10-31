@@ -42,6 +42,7 @@ on:
       # output dependency even though it lives at the package root.
       - 'articleSections.ts'
       - 'scripts/build-api.mjs'
+      - 'scripts/lib/content-updated-at.mjs'
       # The derived floors are part of the publisher's runtime input. Without
       # this path, changing retention or the source-count logic leaves the
       # public API on the previous build until an unrelated input changes.

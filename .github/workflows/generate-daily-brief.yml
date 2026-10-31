@@ -43,6 +43,8 @@ on:
       - 'generator/scripts/lib/daily-brief-data.mjs'
       - 'generator/scripts/lib/daily-brief-insights.mjs'
       - 'generator/scripts/lib/daily-brief-content.mjs'
+      - 'scripts/ci/stamp-content-updated-at.mjs'
+      - 'scripts/lib/content-updated-at.mjs'
       - 'generator/scripts/lib/daily-brief-image.mjs'
       - 'scripts/lib/upload-cdn-file.sh'
       - 'scripts/lib/r2-image-lease-process.sh'
@@ -177,6 +179,10 @@ jobs:
           node .github/actions/setup-claude-haiku-fallback/codex-auth-broker.mjs \
             --cleanup --socket "$CODEX_AUTH_BROKER_SOCKET" \
             || echo "::warning::Codex auth broker cleanup did not complete"
+
+      - name: Stamp updatedAt for changed article bodies
+        if: steps.mode.outputs.dry != 'true'
+        run: node scripts/ci/stamp-content-updated-at.mjs
 
       # ── La guardia sul percorso di scrittura (issue #275) ──────────────────
       #

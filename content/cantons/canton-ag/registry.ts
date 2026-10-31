@@ -32,6 +32,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'argovia-parita-salariale',
  category: 'novita',
  date: '2026-10-07T19:59:34.734Z',
+ updatedAt: '2026-10-08',
  image: '/images/blog/article-argovia-parita-salariale.webp',
  hasCalculator: true,
  articleType: 'news',

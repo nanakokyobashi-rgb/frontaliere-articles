@@ -343,6 +343,10 @@ jobs:
             echo "::warning::Run informativa: tutte le coppie trattate sono campo-vuoto-dalla-cascata (tier MT fuori servizio o senza quota)."
           fi
 
+      - name: Stamp updatedAt for changed article bodies
+        if: steps.guard.outputs.open_bonifiche == '0' && inputs.apply == true && steps.retranslate.outputs.written != '0'
+        run: node scripts/ci/stamp-content-updated-at.mjs
+
       - name: Stock dopo
         if: steps.guard.outputs.open_bonifiche == '0'
         run: |
@@ -350,8 +354,9 @@ jobs:
           node --max-old-space-size=4096 generator/scripts/retranslate-blocking-bodies.mjs --scan --count-only \
             --list-out "$OUT_DIR/stock-after.jsonl" --out "$OUT_DIR/stock-after.json" > /dev/null
 
-      # Solo i file tracciati sotto `content/`, tanti quante le coppie scritte;
-      # push col PAT, perche' col GITHUB_TOKEN i check non partono.
+      # Solo i file tracciati sotto `content/`, con un body per coppia e i
+      # registry `updatedAt` dello stesso commit; push col PAT, perche' col
+      # GITHUB_TOKEN i check non partono.
       - name: Apri la PR di bonifica
         if: steps.guard.outputs.open_bonifiche == '0' && inputs.apply == true && steps.retranslate.outputs.written != '0'
         env:
@@ -379,10 +384,11 @@ jobs:
           git config user.email 'github-actions[bot]@users.noreply.github.com'
           git checkout -b "$BRANCH"
           git add -u -- content/
-          STAGED=$(git diff --cached --name-only | wc -l | tr -d ' ')
+          STAGED_BODY=$(git diff --cached --name-only --diff-filter=ACDMRTUXB -- \
+            'content/blog-body/**' 'content/blog-body-ch/**' | wc -l | tr -d ' ')
           git diff --cached --name-only
-          if [ "$STAGED" != "$WRITTEN" ]; then
-            echo "::error::il report dice $WRITTEN coppie scritte ma sotto content/ sono cambiati $STAGED file"
+          if [ "$STAGED_BODY" != "$WRITTEN" ]; then
+            echo "::error::il report dice $WRITTEN coppie scritte ma i body staged sono $STAGED_BODY; i registry updatedAt sono addizionali e attesi"
             exit 1
           fi
           git commit -m "chore(content): bonifica ${WRITTEN} body bloccanti (${CODE:-tutti i codici}, ${LOCALE})"

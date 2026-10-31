@@ -183,6 +183,8 @@ on:
       - '.github/workflows/generate-article.yml'
       - 'generator/scripts/create-article.mjs'
       - 'generator/scripts/lib/fetch-with-ref-timeout.mjs'
+      - 'scripts/ci/stamp-content-updated-at.mjs'
+      - 'scripts/lib/content-updated-at.mjs'
       # THE CHAIN LINK. A corpus push means an article was actually produced, so
       # the next attempt starts immediately instead of waiting for a cron slot
       # that may never arrive. Runs that produce nothing touch only
@@ -2053,6 +2055,10 @@ jobs:
       # il corpus — quindi il suo rosso corretto e' «questo articolo e' un
       # doppione, rigeneralo su altro», e va letto cosi' prima di cercare il
       # difetto nel gate.
+      - name: Stamp updatedAt for changed article bodies
+        if: steps.mode.outputs.dry != 'true' && steps.generate.outputs.article == 'true'
+        run: node scripts/ci/stamp-content-updated-at.mjs
+
       - name: Guard — l'articolo generato non raggiunge main se viola le guardie
         id: guard
         if: steps.mode.outputs.dry != 'true' && steps.generate.outputs.article == 'true'

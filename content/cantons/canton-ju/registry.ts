@@ -10,6 +10,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'disoccupazione-giura-settembre-2026',
  category: 'pratico',
  date: '2026-10-07T08:42:08.212Z',
+ updatedAt: '2026-10-08',
  image: '/images/blog/article-disoccupazione-giura-settembre-2026.webp',
  hasCalculator: true,
  articleType: 'news',
