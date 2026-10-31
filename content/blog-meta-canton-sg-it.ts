@@ -78,6 +78,9 @@ const blogMetaCantonSgIt: Record<string, string> = {
     'blog.article.wil-budget-nachtrag-2027-115.title': 'Wil approva supplemento al preventivo 2027 con moltiplicatore fiscale al 115%',
     'blog.article.wil-budget-nachtrag-2027-115.excerpt': 'Il preventivo 2027 prevede un moltiplicatore fiscale del 115%, con minori entrate di circa CHF 3,8 milioni e un deficit stimato di circa CHF 5,78 milioni.',
     'blog.article.wil-budget-nachtrag-2027-115.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.tamponamento-a1-gossau.title': 'Scontro sulla A1 a Gossau: quattro feriti',
+    'blog.article.tamponamento-a1-gossau.excerpt': 'Incidente tra due auto sulla A1 a Gossau il 29 ottobre 2026: un 55enne ferito in modo significativo, tre feriti lievi e coda verso St.Gallen.',
+    'blog.article.tamponamento-a1-gossau.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSgIt;

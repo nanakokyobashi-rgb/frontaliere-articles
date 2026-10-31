@@ -78,6 +78,9 @@ const blogMetaCantonSgFr: Record<string, string> = {
     'blog.article.wil-budget-nachtrag-2027-115.title': 'Wil approuve un supplément au budget 2027 avec un coefficient fiscal de 115%',
     'blog.article.wil-budget-nachtrag-2027-115.excerpt': 'Le budget 2027 prévoit un coefficient fiscal de 115%, avec des recettes inférieures d’environ CHF 3,8 millions et un déficit estimé à environ CHF 5,78 millions.',
     'blog.article.wil-budget-nachtrag-2027-115.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.tamponamento-a1-gossau.title': 'Collision sur l’A1 à Gossau : quatre blessés',
+    'blog.article.tamponamento-a1-gossau.excerpt': 'Accident entre deux voitures sur l’A1 à Gossau le 29 octobre 2026 : un homme de 55 ans grièvement blessé, trois blessés légers et un embouteillage en direction de St.Gallen.',
+    'blog.article.tamponamento-a1-gossau.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSgFr;

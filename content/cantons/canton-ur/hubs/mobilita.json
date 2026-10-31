@@ -4,8 +4,8 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-31T06:45:46.687Z",
-  "contentHash": "da5b38bac5d3fe08b9094b1c6cbe649a378eb33fd97cff998927b3f0d49be34d",
+  "updatedAt": "2026-10-31T10:42:05.181Z",
+  "contentHash": "43515e75f2f2c1da104e1ba939e141de67a168b3492a070fdf22ea6647c884c9",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -152,6 +152,12 @@
           "date": "2026-10-28T17:45:24.471Z"
         },
         {
+          "title": "Incendio di un veicolo, chiuso il tunnel di Flüelen",
+          "url": "/articoli-uri/incendio-tunnel-fluelen/",
+          "excerpt": "Un incendio di un veicolo ha imposto la chiusura del tunnel di Flüelen per circa un'ora e mezza giovedì 29 ottobre.",
+          "date": "2026-10-31T10:27:30.338Z"
+        },
+        {
           "title": "Axenstrasse chiusa per quattro notti dal 2 al 6 novembre",
           "url": "/articoli-uri/axenstrasse-chiusa-quattro-notti/",
           "excerpt": "La Axenstrasse sarà completamente chiusa dal 2 al 6 novembre, ogni notte dalle 22 alle 5, per lavori di manutenzione.",
@@ -174,12 +180,6 @@
           "url": "/articoli-svizzera/abbonamenti-trasporti-uri-zone/",
           "excerpt": "Sistema Passepartout nel Cantone Uri: come funzionano le zone, gli abbonamenti annuali e mensili, la metà-prezzo e l'AG delle FFS.",
           "date": "2026-08-29T14:34:47.928Z"
-        },
-        {
-          "title": "Abbonamenti trasporti pubblici nel Cantone di Uri: zone, tariffe e combinazioni",
-          "url": "/articoli-svizzera/abbonamenti-trasporti-canton-uri/",
-          "excerpt": "Conoscere le zone e le tariffe degli abbonamenti trasporti pubblici nel Cantone di Uri",
-          "date": "2026-08-16T10:15:45.029Z"
         }
       ],
       "latestCantonArticles": [],
@@ -193,7 +193,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-31T06:45:46.687Z"
+      "updatedAt": "2026-10-31T10:42:05.181Z"
     },
     "en": {
       "canton": "UR",
@@ -328,6 +328,12 @@
           "date": "2026-10-28T17:45:24.471Z"
         },
         {
+          "title": "Vehicle fire, Flüelen tunnel closed",
+          "url": "/en/uri-articles/vehicle-fire-fluelen-tunnel/",
+          "excerpt": "A vehicle fire forced the closure of the Flüelen tunnel for about an hour and a half on Thursday, October 29.",
+          "date": "2026-10-31T10:27:30.338Z"
+        },
+        {
           "title": "Axenstrasse closed for four nights from November 2 to 6",
           "url": "/en/uri-articles/axenstrasse-closed-four-nights/",
           "excerpt": "Axenstrasse will be completely closed from November 2 to 6, every night from 22 to 5, for maintenance work.",
@@ -350,12 +356,6 @@
           "url": "/en/swiss-articles/uri-canton-transport-zones/",
           "excerpt": "Passepartout system in Canton Uri: how the SBB zones, annual and monthly subscriptions, half-price and AG work.",
           "date": "2026-08-29T14:34:47.928Z"
-        },
-        {
-          "title": "Public transport passes in the canton of Uri: zones, fares and combinations",
-          "url": "/en/swiss-articles/transport-passes-uri-canton/",
-          "excerpt": "Know the areas and rates of public transport subscriptions in the Canton of Uri",
-          "date": "2026-08-16T10:15:45.029Z"
         }
       ],
       "latestCantonArticles": [],
@@ -369,7 +369,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-31T06:45:46.687Z"
+      "updatedAt": "2026-10-31T10:42:05.181Z"
     },
     "de": {
       "canton": "UR",
@@ -504,6 +504,12 @@
           "date": "2026-10-28T17:45:24.471Z"
         },
         {
+          "title": "Brand eines Fahrzeugs, Tunnel von Flüelen geschlossen",
+          "url": "/de/uri-artikel/fahrzeugbrand-fluelen-tunnel/",
+          "excerpt": "Ein Fahrzeugbrand zwang am Donnerstag, 29.",
+          "date": "2026-10-31T10:27:30.338Z"
+        },
+        {
           "title": "Axenstrasse vom 2. bis 6. November vier Nächte lang gesperrt",
           "url": "/de/uri-artikel/axenstrasse-vier-naechte-gesperrt/",
           "excerpt": "Die Axenstrasse wird vom 2.",
@@ -526,12 +532,6 @@
           "url": "/de/schweiz-artikel/abos-nahverkehr-kanton-uri-zonen/",
           "excerpt": "Passepartout-System im Kanton Uri: Funktionsweise der Zonen, Jahres- und Monatsabos, Halbtax und GA der SBB.",
           "date": "2026-08-29T14:34:47.928Z"
-        },
-        {
-          "title": "ÖV-Abo im Kanton Uri: Zonen, Tarife und Kombinationen",
-          "url": "/de/schweiz-artikel/offentliche-verkehrskarten-uri-kanton/",
-          "excerpt": "Kenntnis der Zonen und Tarife der ÖV-Abos im Kanton Uri",
-          "date": "2026-08-16T10:15:45.029Z"
         }
       ],
       "latestCantonArticles": [],
@@ -545,7 +545,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-31T06:45:46.687Z"
+      "updatedAt": "2026-10-31T10:42:05.181Z"
     },
     "fr": {
       "canton": "UR",
@@ -680,6 +680,12 @@
           "date": "2026-10-28T17:45:24.471Z"
         },
         {
+          "title": "Incendie d’un véhicule, tunnel de Flüelen fermé",
+          "url": "/fr/articles-uri/incendie-tunnel-fluelen/",
+          "excerpt": "L’incendie d’un véhicule a entraîné la fermeture du tunnel de Flüelen pendant environ une heure et demie jeudi 29 octobre.",
+          "date": "2026-10-31T10:27:30.338Z"
+        },
+        {
           "title": "Axenstrasse fermée pendant quatre nuits du 2 au 6 novembre",
           "url": "/fr/articles-uri/axenstrasse-fermee-quatre-nuits/",
           "excerpt": "L’Axenstrasse sera complètement fermée du 2 au 6 novembre, chaque nuit de 22 à 5, pour des travaux d’entretien.",
@@ -702,12 +708,6 @@
           "url": "/fr/articles-suisse/abonnements-transports-uri-zones/",
           "excerpt": "Système Passepartout dans le canton d'Uri : fonctionnement des zones, abonnements annuels et mensuels, demi-tarif et AG des CFF.",
           "date": "2026-08-29T14:34:47.928Z"
-        },
-        {
-          "title": "Tarifs transports publics en Uri : zones et combinaisons",
-          "url": "/fr/articles-suisse/cartes-de-transport-uri-canton/",
-          "excerpt": "Connaître les zones et les tarifs des abonnements aux transports publics dans le canton d'Uri",
-          "date": "2026-08-16T10:15:45.029Z"
         }
       ],
       "latestCantonArticles": [],
@@ -721,7 +721,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-31T06:45:46.687Z"
+      "updatedAt": "2026-10-31T10:42:05.181Z"
     }
   }
 }

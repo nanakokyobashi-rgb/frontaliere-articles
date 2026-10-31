@@ -87,6 +87,9 @@ const blogMetaCantonShDe: Record<string, string> = {
     'blog.article.sciaffusa-ricarica-elettrica.title': 'Teures Benzin: Schaffhausen will mehr Lademöglichkeiten',
     'blog.article.sciaffusa-ricarica-elettrica.excerpt': 'Hohe Benzinpreise und Ziel des Kantons: mehr Ladestationen für Elektroautos, wie die bereits in St.',
     'blog.article.sciaffusa-ricarica-elettrica.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.frick-volksmotion-kantonsrat.title': 'Volksmotion Frick: Debatte im Kantonsrat über kommunale Zuständigkeiten',
+    'blog.article.frick-volksmotion-kantonsrat.excerpt': 'Der Kantonsrat wird die Volksmotion von Matthias Frick behandeln, in der mehr Kompetenzen für die Gemeinden im Verkehrsbereich gefordert werden.',
+    'blog.article.frick-volksmotion-kantonsrat.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonShDe;

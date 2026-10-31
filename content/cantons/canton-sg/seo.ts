@@ -972,6 +972,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tamponamento-a1-gossau': {
+    title: 'Scontro sulla A1 a Gossau: quattro feriti | Frontaliere Ticino',
+    description: 'Incidente tra due auto sulla A1 a Gossau il 29 ottobre 2026: un 55enne ferito in modo significativo, tre feriti lievi e coda verso St.Gallen.',
+    keywords: 'frontalieri, ticino, svizzera, italia, scontro, sulla, gossau, quattro',
+    ogTitle: 'A1 a Gossau, quattro feriti dopo lo scontro',
+    ogDescription: 'Uno scontro posteriore tra due auto sulla A1, all\'altezza di Gossau, ha causato quattro feriti. Due ambulanze sono intervenute; la corsia di sorpasso è rimasta chiusa per i rilievi e lo sgombero, con coda verso St.Gallen.',
+    canonicalPath: '/articoli-san-gallo/tamponamento-a1-gossau/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Scontro sulla A1 a Gossau: quattro feriti",
+      "description": "Incidente tra due auto sulla A1 a Gossau il 29 ottobre 2026: un 55enne ferito in modo significativo, tre feriti lievi e coda verso St.Gallen.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-tamponamento-a1-gossau.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-31T10:32:07+00:00",
+      "dateModified": "2026-10-31T10:32:07+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-san-gallo/tamponamento-a1-gossau/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
