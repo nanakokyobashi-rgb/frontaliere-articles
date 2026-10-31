@@ -9,6 +9,8 @@ import { readFileSync } from 'node:fs';
 import { findFiscalClaims, findFiscalErrors, findTaxHealthParameterErrors } from '../scripts/lib/fiscal-claims-guard.mjs';
 import {
   OFFICIAL_SOURCE_LINKS,
+  YMYL_SOURCES_BRIEF,
+  YMYL_SOURCES_BRIEF_CH,
   assertNoFiscalErrorsInLocales,
   assertYmylPublishable,
   checkYmylPublishable,
@@ -79,6 +81,12 @@ test('il prompt non insegna piu\' cio\' che il guard rifiuta', () => {
   const end = source.indexOf('const EVERGREEN_FACTS_BRIEF_CH = `');
   assert.ok(start !== -1 && end > start);
   assert.deepEqual(findFiscalErrors(source.slice(start, end)).map((error) => error.sentence), []);
+});
+
+test('i brief del prompt riportano le stesse fonti del gate', () => {
+  const source = readFileSync(new URL('../scripts/create-article.mjs', import.meta.url), 'utf8');
+  assert.ok(source.includes(YMYL_SOURCES_BRIEF), 'brief frontaliere: fonti diverse da OFFICIAL_SOURCE_LINKS');
+  assert.ok(source.includes(YMYL_SOURCES_BRIEF_CH), 'brief svizzera: fonti diverse da OFFICIAL_SOURCE_LINKS');
 });
 
 test('YMYL: fonte ufficiale obbligatoria, nel testo o come fonte dell\'articolo', () => {

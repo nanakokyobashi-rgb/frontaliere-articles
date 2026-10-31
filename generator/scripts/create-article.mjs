@@ -204,7 +204,7 @@ import {
 import { AI_SEARCH_PROMPT_BLOCK_IT } from './lib/ai-search-template.mjs';
 import { findOrphanedKeyFactsList } from './lib/key-facts-specificity.mjs';
 import { assertArticleRelevance, isOffTopicHeadline } from './lib/article-relevance-gate.mjs';
-import { YMYL_SOURCES_BRIEF, YMYL_SOURCES_BRIEF_CH, assertNoFiscalErrorsInLocales, assertYmylPublishable } from './lib/article-ymyl-gate.mjs';
+import { assertNoFiscalErrorsInLocales, assertYmylPublishable } from './lib/article-ymyl-gate.mjs';
 import { stripVacuousFacts } from './lib/key-facts-specificity.mjs';
 import { checkCantonToponymConsistency } from './lib/cantone-toponimi-coerenza.mjs';
 import {
@@ -6166,7 +6166,13 @@ ASSICURAZIONI:
 // under 8000 tokens. The fact-check sheet (VERIFIED_DOMAIN_FACTS plus
 // criteria 3-4) grows 2830 -> 2980 chars (+150, ~43 est. tokens); it rides on up to 24000 chars of
 // article, so its admission is set by the article, not by this delta.
-const EVERGREEN_FACTS_BRIEF = `${YMYL_SOURCES_BRIEF}
+const EVERGREEN_FACTS_BRIEF = `FONTI UFFICIALI (per fisco, previdenza e tassa salute l'articolo non esce senza almeno un link a una di queste, in formato [etichetta](url)):
+- imposte dei frontalieri: [Foglio informativo AFC](https://m4.ti.ch/fileadmin/DFE/DC/DOC-IF/nuovo_accordo/nuovo_accordo_foglio_informativo_FAQ.pdf)
+- franchigia e credito in Italia: [Agenzia delle Entrate](https://www.agenziaentrate.gov.it/portale/norme-per-i-pendolari-transfrontalieri-dei-paesi-confinanti)
+- Accordo sui frontalieri: [L. 83/2023](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2023-06-13;83)
+- AVS, AI e IPG: [Tabella sinottica AVS 2026](https://www.ahv-iv.ch/p/2.01.i)
+- previdenza: [UFAS](https://www.bsv.admin.ch/it/telelavoro)
+- quota SSN, detta tassa salute: [DM Salute 14/11/2025](https://www.gazzettaufficiale.it/eli/gu/2025/12/18/293/sg/pdf)
 
 FATTI VERIFICATI (ground truth — il fact-checker blocca l'articolo se diverghi da questi valori):
 - Imposta alla fonte sul reddito da lavoro: la ritenuta la applica la Svizzera. I vecchi frontalieri (art. 9) sono tassati solo li'. I nuovi sono tassati in entrambi i Paesi: la Svizzera preleva al massimo l'80% dell'imposta ordinaria, l'Italia tassa il reddito e riconosce il credito entro la quota di IRPEF proporzionale (quadro CE)
@@ -6208,7 +6214,9 @@ FATTI VERIFICATI (ground truth — il fact-checker blocca l'articolo se diverghi
 // deliberatamente ASSENTI: l'istruzione esplicita e' di ometterle, non di
 // ricostruirle a memoria, che e' il modo in cui nascono le allucinazioni che
 // checkFabricatedInstitutionAcronyms poi blocca.
-const EVERGREEN_FACTS_BRIEF_CH = `${YMYL_SOURCES_BRIEF_CH}
+const EVERGREEN_FACTS_BRIEF_CH = `FONTI UFFICIALI (per fisco, previdenza e tassa salute l'articolo non esce senza almeno un link a una di queste, in formato [etichetta](url)):
+- AVS, AI e IPG: [Tabella sinottica AVS 2026](https://www.ahv-iv.ch/p/2.01.i)
+- previdenza: [UFAS](https://www.bsv.admin.ch/it/telelavoro)
 
 FATTI VERIFICATI (ground truth — il fact-checker blocca l'articolo se diverghi da questi valori):
 - Fisco: 3 livelli (IFD federale + cantonale + comunale); ogni cantone ha legge/moltiplicatore propri (comuni: moltiplicatore sul cantonale).
