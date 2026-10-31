@@ -2857,9 +2857,9 @@
       "sitePath": "scripts/lib/article-factuality-gates.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "954e1ff64e9166d7",
-        "corpus": "954e1ff64e9166d7",
-        "alignedAt": "2026-10-26"
+        "site": "c735a051b563af0c",
+        "corpus": "c735a051b563af0c",
+        "alignedAt": "2026-10-31"
       }
     },
     {
@@ -4135,9 +4135,9 @@
       "sitePath": "services/seo/organizationLd.ts",
       "mode": "identical",
       "baseline": {
-        "site": "33f33cecc52a42da",
-        "corpus": "33f33cecc52a42da",
-        "alignedAt": "2026-10-25"
+        "site": "5249a1233adfaa84",
+        "corpus": "5249a1233adfaa84",
+        "alignedAt": "2026-10-31"
       }
     },
     {
@@ -6745,9 +6745,9 @@
       "mode": "identical",
       "reason": "Derived Ads/Partnerize producer and canonical-helper SHA fingerprints bind the transported byte snapshots to the source. Source tests regenerate the projection, host tests verify snapshot hashes and the complete SiteShellContract before publishing.",
       "baseline": {
-        "site": "2d6b828378b8ee98",
-        "corpus": "2d6b828378b8ee98",
-        "alignedAt": "2026-10-30"
+        "site": "2a96d3934487a51d",
+        "corpus": "2a96d3934487a51d",
+        "alignedAt": "2026-10-31"
       }
     },
     {
