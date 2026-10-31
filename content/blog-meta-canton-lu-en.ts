@@ -69,6 +69,9 @@ const blogMetaCantonLuEn: Record<string, string> = {
     'blog.article.kanti-rektor-draht-universitaet.title': 'Rector Kanti Strengthens Ties with the University of Lucerne',
     'blog.article.kanti-rektor-draht-universitaet.excerpt': 'Marco Stössel, principal of the Kantonsschule Beromünster, spoke at the 2026 Dies Academicus about the common educational pathway between high schools and universities.',
     'blog.article.kanti-rektor-draht-universitaet.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.lukb-utile-nove-mesi.title': 'Lucerne Cantonal Bank: profit +8,7% in nine months',
+    'blog.article.lukb-utile-nove-mesi.excerpt': 'LUKB records 223,3 million francs in profit in the first nine months.',
+    'blog.article.lukb-utile-nove-mesi.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonLuEn;

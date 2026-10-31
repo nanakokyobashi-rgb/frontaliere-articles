@@ -865,6 +865,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-lukb-utile-nove-mesi': {
+    title: 'Banca cantonale di Lucerna: utile +8,7% in nove mesi',
+    description: 'La LUKB chiude i primi nove mesi con un utile di CHF 223,3 milioni e un risultato operativo di CHF 273,8 milioni, in crescita.',
+    keywords: 'frontalieri, ticino, svizzera, italia, banca, cantonale, lucerna, utile',
+    ogTitle: 'LUKB: utile a 223,3 milioni dopo nove mesi',
+    ogDescription: 'Da gennaio a settembre il risultato operativo della LUKB è salito dell\'8,5% a CHF 273,8 milioni, mentre l\'utile del gruppo ha raggiunto CHF 223,3 milioni. Il comunicato indica anche il cambio di direzione previsto per l\'inizio del 2027.',
+    canonicalPath: '/articoli-lucerna/lukb-utile-nove-mesi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Banca cantonale di Lucerna: utile +8,7% in nove mesi",
+      "description": "La LUKB chiude i primi nove mesi con un utile di CHF 223,3 milioni e un risultato operativo di CHF 273,8 milioni, in crescita.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-lukb-utile-nove-mesi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-31T13:51:58+00:00",
+      "dateModified": "2026-10-31T13:51:58+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-lucerna/lukb-utile-nove-mesi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

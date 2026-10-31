@@ -8575,7 +8575,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Guida pratica al permesso G 2026: come presentare domanda, costi 65 CHF, documenti, validità 5 anni e rinnovo presso Migrationsamt. Dati aggiornati 2026 per',
     keywords: 'frontalieri, ticino, svizzera, italia, g-bewilligung, antrag, completa, costi',
     ogTitle: 'G-Bewilligung Antrag 2026: costi, rinnovo, documenti',
-    ogDescription: 'Procedura domanda permesso G 2026: costo 65 CHF, validità 5 anni, rinnovo e documenti presso Migrationsamt.',
+    ogDescription: '',
     canonicalPath: '/articoli-svizzera/g-bewilligung-antrag-2026-step/',
     structuredData: {
       "@context": "https://schema.org",
@@ -109423,6 +109423,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       },
       "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
       "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/scontro-fiscale-coppie-atto/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-startup-innovazione-sociale-open-call': {
+    title: 'Open Call 2026: formazione e finanziamenti per startup sociali',
+    description: 'Candidature aperte fino al 15 gennaio 2027 20.000 franchi in palio per cinque startup selezionate Social Business Conference 2027 a Lugano il 19',
+    keywords: 'frontalieri, ticino, svizzera, italia, open, call, formazione, finanziamenti',
+    ogTitle: 'Open Call 2026 startup sociali formazione finanziamenti',
+    ogDescription: 'Candidature aperte fino al 15 gennaio 2027 20.000 franchi in palio per cinque startup selezionate Social Business Conference 2027 a Lugano il 19 maggio',
+    canonicalPath: '/articoli-svizzera/startup-innovazione-sociale-open-call/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Open Call 2026: formazione e finanziamenti per startup sociali",
+      "description": "Candidature aperte fino al 15 gennaio 2027 20.000 franchi in palio per cinque startup selezionate Social Business Conference 2027 a Lugano il 19",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-startup-innovazione-sociale-open-call.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-31T14:07:58+00:00",
+      "dateModified": "2026-10-31T14:07:58+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/startup-innovazione-sociale-open-call/`,
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },

@@ -677,7 +677,7 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.quellensteuer-tarife-svizzera-2026.excerpt': 'Quellensteuer Switzerland 2026: rates, rebates, thresholds NOV 120k CHF for Ticino, Graubünden, Valais, Bern. Calculation guide and main allowances.',
     'blog.article.quellensteuer-tarife-svizzera-2026.imageAlt': 'Modern Swiss tax office with documents and calculators, Ticino.',
     'blog.article.g-bewilligung-antrag-2026-step.title': 'G-Bewilligung Antrag 2026: Complete Guide, Costs and Renewal',
-    'blog.article.g-bewilligung-antrag-2026-step.excerpt': 'Detailed procedure for permit G from 2026: documents, Migrationsamt, cost 65 CHF, validity 5 years and renewal.',
+    'blog.article.g-bewilligung-antrag-2026-step.excerpt': '',
     'blog.article.g-bewilligung-antrag-2026-step.imageAlt': 'Swiss migration office desk with official documents.',
     'blog.article.cambio-commando-volontari-lugano.title': 'Change of command to Lugano Volunteers',
     'blog.article.cambio-commando-volontari-lugano.excerpt': 'Sergio Romaneschi guided the body for 13 years. The new commander is Paolo Baiardi. Ceremony at the Civic Palace.',
@@ -8657,6 +8657,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.scontro-fiscale-coppie-atto.title': 'Modernizers vs. conservatives: Act II in the tax battle over couples',
     'blog.article.scontro-fiscale-coppie-atto.excerpt': 'March 8 is presented as a “revolution” under threat The model identified as a threat is income pooling The source refers to the second act of the tax dispute',
     'blog.article.scontro-fiscale-coppie-atto.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.startup-innovazione-sociale-open-call.title': 'Open Call 2026: training and funding for social startups',
+    'blog.article.startup-innovazione-sociale-open-call.excerpt': 'Applications open until January 15, 2027 20.000 francs at stake for five selected startups Social Business Conference 2027 in Lugano on May 19',
+    'blog.article.startup-innovazione-sociale-open-call.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaChEn;

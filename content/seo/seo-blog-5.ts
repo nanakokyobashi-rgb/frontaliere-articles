@@ -38276,16 +38276,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-permesso-g-vs-b-frontalieri-2026-oltre-20-km': {
     title: 'Confronto tra Permesso G e B nel 2026: quando conviene davvero cambiare status?',
-    description: 'Il nuovo accordo fiscale 2026 potrebbe avere un impatto maggiore sui frontalieri che risiedono oltre 20 km dal confine italo-svizzero. Dati aggiornati 2026 per',
+    description: 'Il Nuovo Accordo Frontalieri potrebbe avere un impatto maggiore sui frontalieri che risiedono oltre 20 km dal confine italo-svizzero. Dati aggiornati 2026 per',
     keywords: 'frontalieri, ticino, svizzera, italia, confronto, permesso, quando, conviene',
     ogTitle: 'Confronto tra Permesso G e B nel 2026: quando conviene davvero cambiare status?',
-    ogDescription: 'Il nuovo accordo fiscale 2026 potrebbe avere un impatto maggiore sui frontalieri che risiedono oltre 20 km dal confine italo-svizzero.',
+    ogDescription: 'Il Nuovo Accordo Frontalieri potrebbe avere un impatto maggiore sui frontalieri che risiedono oltre 20 km dal confine italo-svizzero.',
     canonicalPath: '/articoli-frontaliere/permesso-g-vs-b-frontalieri-2026-oltre-20-km/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Confronto tra Permesso G e B nel 2026: quando conviene davvero cambiare status?",
-      "description": "Il nuovo accordo fiscale 2026 potrebbe avere un impatto maggiore sui frontalieri che risiedono oltre 20 km dal confine italo-svizzero. Dati aggiornati 2026 per",
+      "description": "Il Nuovo Accordo Frontalieri potrebbe avere un impatto maggiore sui frontalieri che risiedono oltre 20 km dal confine italo-svizzero. Dati aggiornati 2026 per",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
@@ -61889,16 +61889,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-guida-lavoro-autista-frontaliere-ticino': {
     title: 'Frontaliere autista in Ticino: stipendio e requisiti',
-    description: 'Guida pratica per autisti frontalieri in Ticino: stipendio, imposta alla fonte, previdenza AVS/LPP e nuovo accordo fiscale 2026. Scopri cosa sapere.',
+    description: 'Guida pratica per autisti frontalieri in Ticino: stipendio, imposta alla fonte, previdenza AVS/LPP e Nuovo Accordo Frontalieri. Scopri cosa sapere.',
     keywords: 'frontalieri, ticino, svizzera, italia, autista, stipendio, requisiti, completa',
     ogTitle: 'Frontaliere autista in Ticino: guida a stipendio e requisiti',
-    ogDescription: 'Tutto quello che un autista deve sapere per lavorare in Ticino: fisco, contributi, assicurazioni e le novità del nuovo accordo fiscale 2026.',
+    ogDescription: 'Tutto quello che un autista deve sapere per lavorare in Ticino: fisco, contributi, assicurazioni e le novità del Nuovo Accordo Frontalieri.',
     canonicalPath: '/articoli-frontaliere/guida-lavoro-autista-frontaliere-ticino',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Frontaliere autista in Ticino: stipendio e requisiti",
-      "description": "Guida pratica per autisti frontalieri in Ticino: stipendio, imposta alla fonte, previdenza AVS/LPP e nuovo accordo fiscale 2026. Scopri cosa sapere.",
+      "description": "Guida pratica per autisti frontalieri in Ticino: stipendio, imposta alla fonte, previdenza AVS/LPP e Nuovo Accordo Frontalieri. Scopri cosa sapere.",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/guida-lavoro-autista-frontaliere-ticino.webp`,
@@ -62429,16 +62429,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-vivere-a-porlezza-e-lavorare-in-ticino-da-frontaliere': {
     title: 'Vivere a Porlezza e lavorare in Ticino da frontaliere: cosa cambia e cosa fare',
-    description: 'Nuovo accordo fiscale 2026: cosa significa per i frontalieri e come si applicherà. Dati aggiornati 2026 per frontalieri in Ticino.',
+    description: 'Nuovo Accordo Frontalieri: cosa significa per i frontalieri e come si applicherà. Dati aggiornati 2026 per frontalieri in Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, vivere, porlezza, lavorare, cosa',
     ogTitle: 'Vivere a Porlezza e lavorare in Ticino da frontaliere: cosa cambia e cosa fare',
-    ogDescription: 'Nuovo accordo fiscale 2026: cosa significa per i frontalieri e come si applicherà',
+    ogDescription: 'Nuovo Accordo Frontalieri: cosa significa per i frontalieri e come si applicherà',
     canonicalPath: '/articoli-frontaliere/vivere-a-porlezza-e-lavorare-in-ticino-da-frontaliere',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Vivere a Porlezza e lavorare in Ticino da frontaliere: cosa cambia e cosa fare",
-      "description": "Nuovo accordo fiscale 2026: cosa significa per i frontalieri e come si applicherà. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "description": "Nuovo Accordo Frontalieri: cosa significa per i frontalieri e come si applicherà. Dati aggiornati 2026 per frontalieri in Ticino.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
@@ -78008,7 +78008,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     description: 'Guida pratica per frontalieri Italia-Svizzera: Permesso G, fiscalità, AVS, LPP, LAMal, imposta alla fonte. Come vivere a Tubre e lavorare in Grigioni.',
     keywords: 'frontalieri, ticino, svizzera, italia, vivere, tubre, lavorare, grigioni',
     ogTitle: 'Vivere a Tubre e lavorare in Grigioni da frontaliere',
-    ogDescription: 'Frontaliere tra Italia e Svizzera: Permesso G, contributi AVS/LPP/LAINF, LAMal, imposta alla fonte, franchigia €10\'000, ristorni, procedure rinnovo annuale. Guida completa e step-by-step.',
+    ogDescription: 'Il permesso G vale cinque anni con un contratto superiore a un anno; con un contratto più breve dura quanto il contratto. Guida completa e step-by-step.',
     canonicalPath: '/articoli-frontaliere/vivere-tubre-lavorare-grigioni-frontaliere',
     structuredData: {
       "@context": "https://schema.org",
@@ -92955,7 +92955,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     description: 'Il Rapporto n. 27 della Ragioneria prevede 67 anni e 6 mesi nel 2030 e analizza la spesa per pensioni, sanità e assistenza agli anziani nei prossimi anni.',
     keywords: 'frontalieri, ticino, svizzera, italia, pensione, anni, mesi, ragioneria',
     ogTitle: 'Età pensione: 67 anni e 6 mesi nel 2030',
-    ogDescription: 'Il Rapporto n. 27 del 22 settembre 2026 non cambia le regole, ma proietta l\'età pensionabile a 67 anni e 6 mesi nel 2030, a 68 anni e 2 mesi nel 2040 e a 70 anni nel 2050. Il tema resta distinto da permesso G, AVS e LPP, che la fonte non esamina.',
+    ogDescription: 'Il Rapporto n. 27 del 22 settembre 2026 non cambia le regole, ma proietta l\'età pensionabile a 67 anni e 6 mesi nel 2030, a 68 anni e 2 mesi nel 2040 e a 70 anni nel 2050.',
     canonicalPath: '/articoli-frontaliere/eta-pensione-2030-ragioneria',
     structuredData: {
       "@context": "https://schema.org",

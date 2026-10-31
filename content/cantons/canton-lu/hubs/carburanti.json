@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "carburanti",
-  "updatedAt": "2026-10-31T13:09:44.479Z",
-  "contentHash": "437d41fa1bbe50572f052534c25a198cdfd4eb7186753d54a3218fc3c63a95a9",
+  "updatedAt": "2026-10-31T14:03:06.193Z",
+  "contentHash": "eb7e71cc353385db04e4d15bf8b7eaa6149ed99cf0655698107a7ea4665d80a1",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -60,6 +60,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Banca cantonale di Lucerna: utile +8,7% in nove mesi",
+          "url": "/articoli-lucerna/lukb-utile-nove-mesi/",
+          "excerpt": "La LUKB registra 223,3 milioni di franchi di utile nei primi nove mesi.",
+          "date": "2026-10-31T13:51:58.051Z"
+        },
+        {
           "title": "Rettore Kanti promuove legame con l'Università di Lucerna",
           "url": "/articoli-lucerna/kanti-rektor-draht-universitaet/",
           "excerpt": "Marco Stössel, rettore della Kantonsschule Beromünster, ha parlato al Dies Academicus 2026 sul percorso formativo comune tra ginnasi e università.",
@@ -82,12 +88,6 @@
           "url": "/articoli-lucerna/einwohnerrat-budget-bahnhof-ost/",
           "excerpt": "Il 17 novembre 2026 si riunisce l'Einwohnerrat di Ebikon Il budget 2027 prevede un avanzo di CHF 2,14 milioni Il moltiplicatore resta a 2,05 unità Bahnhof Ost",
           "date": "2026-10-27T08:22:48.687Z"
-        },
-        {
-          "title": "Mozione sulla tassa per le seconde case approvata a Lucerna",
-          "url": "/articoli-lucerna/fluhli-tassa-seconde-case/",
-          "excerpt": "Con 70 voti contro 41, il Parlamento cantonale di Lucerna ha accolto la mozione di Hella Schnider per una tassa speciale sulle seconde case.",
-          "date": "2026-10-26T11:23:57.392Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-31T13:09:44.479Z"
+      "updatedAt": "2026-10-31T14:03:06.193Z"
     },
     "en": {
       "canton": "LU",
@@ -147,6 +147,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Lucerne Cantonal Bank: profit +8,7% in nine months",
+          "url": "/en/lucerne-articles/lucerne-cantonal-bank-profit-nine-months/",
+          "excerpt": "LUKB records 223,3 million francs in profit in the first nine months.",
+          "date": "2026-10-31T13:51:58.051Z"
+        },
+        {
           "title": "Rector Kanti Strengthens Ties with the University of Lucerne",
           "url": "/en/lucerne-articles/kanti-rector-university-link/",
           "excerpt": "Marco Stössel, principal of the Kantonsschule Beromünster, spoke at the 2026 Dies Academicus about the common educational pathway between high schools and universities.",
@@ -169,12 +175,6 @@
           "url": "/en/lucerne-articles/residents-council-decides-on-budget-2027-and-bahnhof-ost-credit/",
           "excerpt": "On 17 November 2026, the Ebikon Residents' Council meets The 2027 budget provides for a surplus of CHF 2,14 million The multiplier remains at 2,05 units Bahnhof",
           "date": "2026-10-27T08:22:48.687Z"
-        },
-        {
-          "title": "Motion on the second-home tax approved in Lucerne",
-          "url": "/en/lucerne-articles/fluehli-second-home-tax/",
-          "excerpt": "With 70 votes against 41, the Lucerne Cantonal Parliament approved Hella Schnider’s motion for a special tax on second homes.",
-          "date": "2026-10-26T11:23:57.392Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-31T13:09:44.479Z"
+      "updatedAt": "2026-10-31T14:03:06.193Z"
     },
     "de": {
       "canton": "LU",
@@ -234,6 +234,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Luzerner Kantonalbank: Gewinn +8,7% in neun Monaten",
+          "url": "/de/luzern-artikel/luzerner-kantonalbank-gewinn-neun-monate/",
+          "excerpt": "Die LUKB verzeichnet in den ersten neun Monaten einen Gewinn von 223,3 Millionen Franken.",
+          "date": "2026-10-31T13:51:58.051Z"
+        },
+        {
           "title": "Rektor Kanti fördert die Zusammenarbeit mit der Universität Luzern",
           "url": "/de/luzern-artikel/kanti-rektor-universitaet-draht/",
           "excerpt": "Marco Stössel, Rektor der Kantonsschule Beromünster, sprach am Dies Academicus 2026 über den gemeinsamen Bildungsweg von Gymnasium und Universität.",
@@ -256,12 +262,6 @@
           "url": "/de/luzern-artikel/einwohnerrat-entscheidet-uber-budget-2027-und-kredit-fur-bahnhof-ost/",
           "excerpt": "Am 17. November 2026 tagt der Einwohnerrat von Ebikon Das Budget 2027 sieht einen Überschuss von CHF 2,14 Millionen vor Der Steuerfuss bleibt bei 2,05 Einheiten",
           "date": "2026-10-27T08:22:48.687Z"
-        },
-        {
-          "title": "Motion zur Zweitwohnungssteuer in Luzern angenommen",
-          "url": "/de/luzern-artikel/fluehli-steuer-zweitwohnungen/",
-          "excerpt": "Mit 70 zu 41 Stimmen hat das Luzerner Kantonsparlament die Motion von Hella Schnider für eine Sondersteuer auf Zweitwohnungen angenommen.",
-          "date": "2026-10-26T11:23:57.392Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-31T13:09:44.479Z"
+      "updatedAt": "2026-10-31T14:03:06.193Z"
     },
     "fr": {
       "canton": "LU",
@@ -321,6 +321,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Banque cantonale de Lucerne : bénéfice en hausse de 8,7 % sur neuf mois",
+          "url": "/fr/articles-lucerne/banque-cantonale-lucerne-benefice-neuf-mois/",
+          "excerpt": "La LUKB enregistre un bénéfice de 223,3 millions de francs au cours des neuf premiers mois.",
+          "date": "2026-10-31T13:51:58.051Z"
+        },
+        {
           "title": "Le recteur Kanti renforce les liens avec l'Université de Lucerne",
           "url": "/fr/articles-lucerne/kanti-recteur-lien-universite/",
           "excerpt": "Marco Stössel, recteur de la Kantonsschule de Beromünster, est intervenu lors du Dies Academicus 2026 sur le parcours de formation commun entre les lycées et les universités.",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-lucerne/l-einwohnerrat-decide-du-budget-2027-et-du-credit-bahnhof-ost/",
           "excerpt": "Le 17 novembre 2026, l'Einwohnerrat d'Ebikon se réunit Le budget 2027 prévoit un excédent de CHF 2,14 millions Le multiplicateur reste à 2,05 unités Bahnhof Ost",
           "date": "2026-10-27T08:22:48.687Z"
-        },
-        {
-          "title": "Motion sur la taxe sur les résidences secondaires approuvée à Lucerne",
-          "url": "/fr/articles-lucerne/fluehli-taxe-residences-secondaires/",
-          "excerpt": "Par 70 voix contre 41, le Parlement cantonal de Lucerne a adopté la motion de Hella Schnider en faveur d’une taxe spéciale sur les résidences secondaires.",
-          "date": "2026-10-26T11:23:57.392Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-31T13:09:44.479Z"
+      "updatedAt": "2026-10-31T14:03:06.193Z"
     }
   }
 }

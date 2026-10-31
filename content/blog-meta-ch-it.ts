@@ -677,7 +677,7 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.quellensteuer-tarife-svizzera-2026.excerpt': 'Quellensteuer Svizzera 2026: tariffe, abbuoni, soglie NOV 120k CHF per Ticino, Grigioni, Vallese, Berna. Guida al calcolo e ai principali abbuoni.',
     'blog.article.quellensteuer-tarife-svizzera-2026.imageAlt': 'Ufficio fiscale svizzero moderno con documenti e calcolatrici, Ticino.',
     'blog.article.g-bewilligung-antrag-2026-step.title': 'G-Bewilligung Antrag 2026: guida completa, costi e rinnovo',
-    'blog.article.g-bewilligung-antrag-2026-step.excerpt': 'Procedura dettagliata per il permesso G dal 2026: documenti, Migrationsamt, costo 65 CHF, validità 5 anni e rinnovo.',
+    'blog.article.g-bewilligung-antrag-2026-step.excerpt': '',
     'blog.article.g-bewilligung-antrag-2026-step.imageAlt': 'Sportello di un ufficio migrazione svizzero con documenti ufficiali.',
     'blog.article.cambio-commando-volontari-lugano.title': 'Cambio di comando ai Volontari Luganesi',
     'blog.article.cambio-commando-volontari-lugano.excerpt': 'Sergio Romaneschi ha guidato il corpo per 13 anni. Il nuovo comandante è Paolo Baiardi. Cerimonia a Palazzo Civico.',
@@ -8657,6 +8657,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.scontro-fiscale-coppie-atto.title': 'Modernizzatori vs conservatori: atto II sullo scontro fiscale delle coppie',
     'blog.article.scontro-fiscale-coppie-atto.excerpt': 'L\'8 marzo viene presentato come una «rivoluzione» in pericolo Il modello indicato come minaccia è il cumulo dei redditi La fonte parla del secondo atto',
     'blog.article.scontro-fiscale-coppie-atto.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.startup-innovazione-sociale-open-call.title': 'Open Call 2026: formazione e finanziamenti per startup sociali',
+    'blog.article.startup-innovazione-sociale-open-call.excerpt': 'Candidature aperte fino al 15 gennaio 2027 20.000 franchi in palio per cinque startup selezionate Social Business Conference 2027 a Lugano il 19 maggio',
+    'blog.article.startup-innovazione-sociale-open-call.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaChIt;

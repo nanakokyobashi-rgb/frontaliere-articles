@@ -88,7 +88,7 @@ With the option for the Italian National Health Service, you remain registered w
 
 “New” cross-border workers, hired from **17 July 2023** and taxed in Italy as well, pay no specific health contribution: the service is funded through general taxation. “Old” cross-border workers, active between **31 December 2018** and 17 July 2023 and taxed only in Switzerland, who chose the Italian National Health Service, follow the contribution provided by law.
 
-Law 213/2023 (Article 1, paragraphs 237-239) provides for “old” cross-border workers a contribution paid to the region of residence: **3% to 6%** of net salary received in Switzerland, progressive according to income and family responsibilities, with a minimum of **€30** and a maximum of **€200** for each month worked. The contribution also covers dependent family members.
+[Law 213/2023](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2023-12-30;213~art1!vig=2026-10-31) (Article 1, paragraphs 237-239) provides for “old” cross-border workers a contribution paid to the region of residence: **3% to 6%** of net salary received in Switzerland, progressive according to income and family responsibilities, with a minimum of **€30** and a maximum of **€200** for each month worked. The contribution also covers dependent family members.
 
 The implementing decree is dated **14 November 2025** and was published in the Official Gazette on **18 December 2025**. Lombardy chose **3%**, on 2025 income and without retroactive effect. Collection has not been confirmed: for the current status, see the site's page on the health contribution.
 
