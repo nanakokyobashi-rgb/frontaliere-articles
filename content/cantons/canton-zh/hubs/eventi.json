@@ -4,12 +4,12 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-10-31T06:15:08.747Z",
-  "contentHash": "e5f0ed53cd04e58f0c7facde647cd6e2be1fae3f312b47e689f3b2eb30e3c59c",
+  "updatedAt": "2026-11-01T13:11:05.408Z",
+  "contentHash": "338dca408df75b64d5d4538c93d682d019b0982a5f08ffae67ca42e2d7d69721",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-30T13:23:17.161Z",
+      "updatedAt": "2026-10-31T14:21:36.178Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "344",
+          "value": "343",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Fast Feet Floor",
+              "label": "Kinder-Exkursion – Pilze entdecken im Kemptner Tobel",
+              "detail": "Vor der Nagelfabrik Kemptner Tobel",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kinder-exkursion-pilze-entdecken-im-kemptner-tobel/"
+            },
+            {
+              "label": "Allerheiligen",
+              "detail": "Röm.-kath. Kirche Oberengstringen, Oberengstringen",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/eventi/musica/oberengstringen/allerheiligen_AXNmiJE"
+            },
+            {
+              "label": "Babykonzert \"Unterwegs in Europa\"",
+              "detail": "Gemeinschaftszentrum Stürmeierhuus, Schlieren",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/babykonzert-unterwegs-in-europa/"
+            },
+            {
+              "label": "Musikalische und interaktive Lesung \"Räbelichtli\"",
+              "detail": "Uster",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/musikalische-und-interaktive-lesung-raebelichtli/"
+            },
+            {
+              "label": "Kammermusik@ZKO — Elegien der Stille",
+              "detail": "Zurich, Zürich",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kammermusikzko-elegien-der-stille/"
+            },
+            {
+              "label": "3. Kammerkonzert",
+              "detail": "Zurich, Zürich",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/3-kammerkonzert/"
+            },
+            {
+              "label": "Pokerkurs für Beginner",
+              "detail": "Urdorf",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pokerkurs-fuer-beginner-3/"
+            },
+            {
+              "label": "Offenes Atelier für Alle",
+              "detail": "Museum für Gestaltung Zürich, Zürich",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/offenes-atelier-fuer-alle-2/"
+            },
+            {
+              "label": "Abenteuer im Museum",
+              "detail": "Küsnacht ZH",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/abenteuer-im-museum/"
+            },
+            {
+              "label": "Das Dschungel­buch",
               "detail": "Winterthur",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fast-feet-floor/"
-            },
-            {
-              "label": "17. Kellerämterlauf",
-              "detail": "Schützenhaus Jonen-Ottenbach, Ottenbach",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/17-kelleraemterlauf/"
-            },
-            {
-              "label": "Hundemilitary- im Einsatz für die Tiere",
-              "detail": "8154 Oberglatt ZH, Oberglatt",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/hundemilitary-im-einsatz-fuer-die-tiere/"
-            },
-            {
-              "label": "Kochkurs für Seniorinnen und Senioren - OV Rüti",
-              "detail": "Rüti ZH, Rüti (ZH)",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kochkurs-fuer-seniorinnen-und-senioren-ov-rueti/"
-            },
-            {
-              "label": "Repair-Café",
-              "detail": "Sekundarschule Worbiger, Rümlang",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/ruemlang/repair-cafe_ACgc25N"
-            },
-            {
-              "label": "Workshop Tanzen (ohne Partner)",
-              "detail": "Bewusstes Bewegen GmbH, Uster",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/uster/workshop-tanz_A2kqUDt"
-            },
-            {
-              "label": "Oktoberfest im Bruggwiesen",
-              "detail": "Effretikon, Illnau-Effretikon",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oktoberfest-im-bruggwiesen/"
-            },
-            {
-              "label": "Chum in Stall...",
-              "detail": "Dietikon",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/chum-in-stall-2/"
-            },
-            {
-              "label": "Der kleine Prinz",
-              "detail": "Stadthaus, Winterthur",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/der-kleine-prinz-4/"
-            },
-            {
-              "label": "Heart w/ Fahlberg & Kotier",
-              "detail": "Schauspielhaus Schiffbau",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/heart-w-fahlberg-und-kotier_ArLYSkN"
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/das-dschungelbuch/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zurigo/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "en": {
       "canton": "ZH",
@@ -133,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "344",
+          "value": "343",
           "note": "from the site’s events calendar"
         }
       ],
@@ -144,69 +144,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Fast Feet Floor",
+              "label": "Kinder-Exkursion – Pilze entdecken im Kemptner Tobel",
+              "detail": "Vor der Nagelfabrik Kemptner Tobel",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kinder-exkursion-pilze-entdecken-im-kemptner-tobel/"
+            },
+            {
+              "label": "Allerheiligen",
+              "detail": "Röm.-kath. Kirche Oberengstringen, Oberengstringen",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/eventi/musica/oberengstringen/allerheiligen_AXNmiJE"
+            },
+            {
+              "label": "Babykonzert \"Unterwegs in Europa\"",
+              "detail": "Gemeinschaftszentrum Stürmeierhuus, Schlieren",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/babykonzert-unterwegs-in-europa/"
+            },
+            {
+              "label": "Musikalische und interaktive Lesung \"Räbelichtli\"",
+              "detail": "Uster",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/musikalische-und-interaktive-lesung-raebelichtli/"
+            },
+            {
+              "label": "Kammermusik@ZKO — Elegien der Stille",
+              "detail": "Zurich, Zürich",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kammermusikzko-elegien-der-stille/"
+            },
+            {
+              "label": "3. Kammerkonzert",
+              "detail": "Zurich, Zürich",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/3-kammerkonzert/"
+            },
+            {
+              "label": "Pokerkurs für Beginner",
+              "detail": "Urdorf",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pokerkurs-fuer-beginner-3/"
+            },
+            {
+              "label": "Offenes Atelier für Alle",
+              "detail": "Museum für Gestaltung Zürich, Zürich",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/offenes-atelier-fuer-alle-2/"
+            },
+            {
+              "label": "Abenteuer im Museum",
+              "detail": "Küsnacht ZH",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/abenteuer-im-museum/"
+            },
+            {
+              "label": "Das Dschungel­buch",
               "detail": "Winterthur",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fast-feet-floor/"
-            },
-            {
-              "label": "17. Kellerämterlauf",
-              "detail": "Schützenhaus Jonen-Ottenbach, Ottenbach",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/17-kelleraemterlauf/"
-            },
-            {
-              "label": "Hundemilitary- im Einsatz für die Tiere",
-              "detail": "8154 Oberglatt ZH, Oberglatt",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/hundemilitary-im-einsatz-fuer-die-tiere/"
-            },
-            {
-              "label": "Kochkurs für Seniorinnen und Senioren - OV Rüti",
-              "detail": "Rüti ZH, Rüti (ZH)",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kochkurs-fuer-seniorinnen-und-senioren-ov-rueti/"
-            },
-            {
-              "label": "Repair-Café",
-              "detail": "Sekundarschule Worbiger, Rümlang",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/ruemlang/repair-cafe_ACgc25N"
-            },
-            {
-              "label": "Workshop Tanzen (ohne Partner)",
-              "detail": "Bewusstes Bewegen GmbH, Uster",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/uster/workshop-tanz_A2kqUDt"
-            },
-            {
-              "label": "Oktoberfest at Bruggwiesen",
-              "detail": "Effretikon, Illnau-Effretikon",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oktoberfest-im-bruggwiesen/"
-            },
-            {
-              "label": "Chum in Stall...",
-              "detail": "Dietikon",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/chum-in-stall-2/"
-            },
-            {
-              "label": "Der kleine Prinz",
-              "detail": "Stadthaus, Winterthur",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/der-kleine-prinz-4/"
-            },
-            {
-              "label": "Heart w",
-              "detail": "Schauspielhaus Schiffbau",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/heart-w-fahlberg-und-kotier_ArLYSkN"
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/das-dschungelbuch/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zurich/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "de": {
       "canton": "ZH",
@@ -244,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "344",
+          "value": "343",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -255,69 +255,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Fast Feet Floor",
+              "label": "Kinder-Exkursion – Pilze entdecken im Kemptner Tobel",
+              "detail": "Vor der Nagelfabrik Kemptner Tobel",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kinder-exkursion-pilze-entdecken-im-kemptner-tobel/"
+            },
+            {
+              "label": "Allerheiligen",
+              "detail": "Röm.-kath. Kirche Oberengstringen, Oberengstringen",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/eventi/musica/oberengstringen/allerheiligen_AXNmiJE"
+            },
+            {
+              "label": "Babykonzert \"Unterwegs in Europa\"",
+              "detail": "Gemeinschaftszentrum Stürmeierhuus, Schlieren",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/babykonzert-unterwegs-in-europa/"
+            },
+            {
+              "label": "Musikalische und interaktive Lesung \"Räbelichtli\"",
+              "detail": "Uster",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/musikalische-und-interaktive-lesung-raebelichtli/"
+            },
+            {
+              "label": "Kammermusik@ZKO — Elegien der Stille",
+              "detail": "Zurich, Zürich",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kammermusikzko-elegien-der-stille/"
+            },
+            {
+              "label": "3. Kammerkonzert",
+              "detail": "Zurich, Zürich",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/3-kammerkonzert/"
+            },
+            {
+              "label": "Pokerkurs für Beginner",
+              "detail": "Urdorf",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pokerkurs-fuer-beginner-3/"
+            },
+            {
+              "label": "Offenes Atelier für Alle",
+              "detail": "Museum für Gestaltung Zürich, Zürich",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/offenes-atelier-fuer-alle-2/"
+            },
+            {
+              "label": "Abenteuer im Museum",
+              "detail": "Küsnacht ZH",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/abenteuer-im-museum/"
+            },
+            {
+              "label": "Das Dschungel­buch",
               "detail": "Winterthur",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fast-feet-floor/"
-            },
-            {
-              "label": "17. Kellerämterlauf",
-              "detail": "Schützenhaus Jonen-Ottenbach, Ottenbach",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/17-kelleraemterlauf/"
-            },
-            {
-              "label": "Hundemilitary- im Einsatz für die Tiere",
-              "detail": "8154 Oberglatt ZH, Oberglatt",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/hundemilitary-im-einsatz-fuer-die-tiere/"
-            },
-            {
-              "label": "Kochkurs für Seniorinnen und Senioren - OV Rüti",
-              "detail": "Rüti ZH, Rüti (ZH)",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kochkurs-fuer-seniorinnen-und-senioren-ov-rueti/"
-            },
-            {
-              "label": "Repair-Café",
-              "detail": "Sekundarschule Worbiger, Rümlang",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/ruemlang/repair-cafe_ACgc25N"
-            },
-            {
-              "label": "Workshop Tanzen (ohne Partner)",
-              "detail": "Bewusstes Bewegen GmbH, Uster",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/uster/workshop-tanz_A2kqUDt"
-            },
-            {
-              "label": "Oktoberfest auf der Bruggwiese",
-              "detail": "Effretikon, Illnau-Effretikon",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oktoberfest-im-bruggwiesen/"
-            },
-            {
-              "label": "Chum in Stall...",
-              "detail": "Dietikon",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/chum-in-stall-2/"
-            },
-            {
-              "label": "Der kleine Prinz",
-              "detail": "Stadthaus, Winterthur",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/der-kleine-prinz-4/"
-            },
-            {
-              "label": "Herz mit Fahlberg & Kotier",
-              "detail": "Schauspielhaus Schiffbau",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/heart-w-fahlberg-und-kotier_ArLYSkN"
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/das-dschungelbuch/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zurich/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "fr": {
       "canton": "ZH",
@@ -355,7 +355,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "344",
+          "value": "343",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -366,69 +366,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Fast Feet Floor",
+              "label": "Kinder-Exkursion – Pilze entdecken im Kemptner Tobel",
+              "detail": "Vor der Nagelfabrik Kemptner Tobel",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kinder-exkursion-pilze-entdecken-im-kemptner-tobel/"
+            },
+            {
+              "label": "Allerheiligen",
+              "detail": "Röm.-kath. Kirche Oberengstringen, Oberengstringen",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/eventi/musica/oberengstringen/allerheiligen_AXNmiJE"
+            },
+            {
+              "label": "Babykonzert \"Unterwegs in Europa\"",
+              "detail": "Gemeinschaftszentrum Stürmeierhuus, Schlieren",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/babykonzert-unterwegs-in-europa/"
+            },
+            {
+              "label": "Musikalische und interaktive Lesung \"Räbelichtli\"",
+              "detail": "Uster",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/musikalische-und-interaktive-lesung-raebelichtli/"
+            },
+            {
+              "label": "Kammermusik@ZKO — Elegien der Stille",
+              "detail": "Zurich, Zürich",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kammermusikzko-elegien-der-stille/"
+            },
+            {
+              "label": "3. Kammerkonzert",
+              "detail": "Zurich, Zürich",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/3-kammerkonzert/"
+            },
+            {
+              "label": "Pokerkurs für Beginner",
+              "detail": "Urdorf",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pokerkurs-fuer-beginner-3/"
+            },
+            {
+              "label": "Offenes Atelier für Alle",
+              "detail": "Museum für Gestaltung Zürich, Zürich",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/offenes-atelier-fuer-alle-2/"
+            },
+            {
+              "label": "Abenteuer im Museum",
+              "detail": "Küsnacht ZH",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/abenteuer-im-museum/"
+            },
+            {
+              "label": "Das Dschungel­buch",
               "detail": "Winterthur",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fast-feet-floor/"
-            },
-            {
-              "label": "17. Kellerämterlauf",
-              "detail": "Schützenhaus Jonen-Ottenbach, Ottenbach",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/17-kelleraemterlauf/"
-            },
-            {
-              "label": "Hundemilitary- im Einsatz für die Tiere",
-              "detail": "8154 Oberglatt ZH, Oberglatt",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/hundemilitary-im-einsatz-fuer-die-tiere/"
-            },
-            {
-              "label": "Kochkurs für Seniorinnen und Senioren - OV Rüti",
-              "detail": "Rüti ZH, Rüti (ZH)",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kochkurs-fuer-seniorinnen-und-senioren-ov-rueti/"
-            },
-            {
-              "label": "Repair-Café",
-              "detail": "Sekundarschule Worbiger, Rümlang",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/ruemlang/repair-cafe_ACgc25N"
-            },
-            {
-              "label": "Workshop Tanzen (ohne Partner)",
-              "detail": "Bewusstes Bewegen GmbH, Uster",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/uster/workshop-tanz_A2kqUDt"
-            },
-            {
-              "label": "Oktoberfest à Bruggwiesen",
-              "detail": "Effretikon, Illnau-Effretikon",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oktoberfest-im-bruggwiesen/"
-            },
-            {
-              "label": "Chum in Stall...",
-              "detail": "Dietikon",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/chum-in-stall-2/"
-            },
-            {
-              "label": "Der kleine Prinz",
-              "detail": "Stadthaus, Winterthur",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/der-kleine-prinz-4/"
-            },
-            {
-              "label": "Heart avec Fahlberg & Kotier",
-              "detail": "Schauspielhaus Schiffbau",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/heart-w-fahlberg-und-kotier_ArLYSkN"
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/das-dschungelbuch/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zurich/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     }
   }
 }

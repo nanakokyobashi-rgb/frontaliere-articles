@@ -4,12 +4,12 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "eventi",
-  "updatedAt": "2026-10-31T06:15:08.747Z",
-  "contentHash": "b6d18e1360c5285de780af198b0afb0ac18076c9d4a1311670194f48b63ede06",
+  "updatedAt": "2026-11-01T13:11:05.408Z",
+  "contentHash": "fcbbef5ef704b25e609b291a269e57862b714c35605212c4469fda6434904da3",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-30T13:23:17.161Z",
+      "updatedAt": "2026-10-31T14:21:36.178Z",
       "keyFacts": 1
     }
   ],
@@ -33,18 +33,6 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Einzig und dr Andr",
-              "detail": "theater(uri), Altdorf (UR)",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/einzig-und-dr-andr/"
-            },
-            {
-              "label": "Holz | Stein | Farbe - Kunstausstellung",
-              "detail": "Zeughaus — in corso, ultimo giorno: 3 novembre 2026",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/holz-stein-farbe-kunstausstellung/"
-            },
-            {
               "label": "Allerheiligen: Gedächtnis der Verstorbenen und Friedhofsbesuch",
               "detail": "Pfarrkirche St. Peter und Paul, Andermatt",
               "date": "2026-11-01",
@@ -55,6 +43,18 @@
               "detail": "Kulturkloster Altdorf",
               "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/jahreskreisfeier-kulturkloster-altdorf/"
+            },
+            {
+              "label": "Einzig und dr Andr",
+              "detail": "theater(uri), Altdorf (UR) — in corso, ultimo giorno: 1 novembre 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/einzig-und-dr-andr/"
+            },
+            {
+              "label": "Holz | Stein | Farbe - Kunstausstellung",
+              "detail": "Zeughaus — in corso, ultimo giorno: 3 novembre 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/holz-stein-farbe-kunstausstellung/"
             },
             {
               "label": "Mythen, Trends und Gesundheit - was steckt wirklich hinter der Ernährung?",
@@ -95,7 +95,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/uri/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/uri/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "en": {
       "canton": "UR",
@@ -138,18 +138,6 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Einzig und dr Andr",
-              "detail": "theater(uri), Altdorf (UR)",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/einzig-und-dr-andr/"
-            },
-            {
-              "label": "Holz | Stein | Farbe - Kunstausstellung",
-              "detail": "Zeughaus — ongoing, last day: 3 November 2026",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/holz-stein-farbe-kunstausstellung/"
-            },
-            {
               "label": "Allerheiligen: Gedächtnis der Verstorbenen und Friedhofsbesuch",
               "detail": "Pfarrkirche St. Peter und Paul, Andermatt",
               "date": "2026-11-01",
@@ -160,6 +148,18 @@
               "detail": "Kulturkloster Altdorf",
               "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/jahreskreisfeier-kulturkloster-altdorf/"
+            },
+            {
+              "label": "Einzig und dr Andr",
+              "detail": "theater(uri), Altdorf (UR) — ongoing, last day: 1 November 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/einzig-und-dr-andr/"
+            },
+            {
+              "label": "Holz | Stein | Farbe - Kunstausstellung",
+              "detail": "Zeughaus — ongoing, last day: 3 November 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/holz-stein-farbe-kunstausstellung/"
             },
             {
               "label": "M Tr Then, Trends und Gesundheit -as",
@@ -200,7 +200,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/uri/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/uri/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "de": {
       "canton": "UR",
@@ -243,18 +243,6 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Einzig und dr Andr",
-              "detail": "theater(uri), Altdorf (UR)",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/einzig-und-dr-andr/"
-            },
-            {
-              "label": "Holz | Stein | Farbe - Kunstausstellung",
-              "detail": "Zeughaus — läuft, letzter Tag: 3. November 2026",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/holz-stein-farbe-kunstausstellung/"
-            },
-            {
               "label": "Allerheiligen: Gedächtnis der Verstorbenen und Friedhofsbesuch",
               "detail": "Pfarrkirche St. Peter und Paul, Andermatt",
               "date": "2026-11-01",
@@ -265,6 +253,18 @@
               "detail": "Kulturkloster Altdorf",
               "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/jahreskreisfeier-kulturkloster-altdorf/"
+            },
+            {
+              "label": "Einzig und dr Andr",
+              "detail": "theater(uri), Altdorf (UR) — läuft, letzter Tag: 1. November 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/einzig-und-dr-andr/"
+            },
+            {
+              "label": "Holz | Stein | Farbe - Kunstausstellung",
+              "detail": "Zeughaus — läuft, letzter Tag: 3. November 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/holz-stein-farbe-kunstausstellung/"
             },
             {
               "label": "Mythen, Trends und Gesundheit – was steckt wirklich hinter der Ernährung?",
@@ -305,7 +305,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/uri/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/uri/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "fr": {
       "canton": "UR",
@@ -348,18 +348,6 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Einzig und dr Andr",
-              "detail": "theater(uri), Altdorf (UR)",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/einzig-und-dr-andr/"
-            },
-            {
-              "label": "Holz | Stein | Farbe - Kunstausstellung",
-              "detail": "Zeughaus — en cours, dernier jour : 3 novembre 2026",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/holz-stein-farbe-kunstausstellung/"
-            },
-            {
               "label": "Allerheiligen: Gedächtnis der Verstorbenen und Friedhofsbesuch",
               "detail": "Pfarrkirche St. Peter und Paul, Andermatt",
               "date": "2026-11-01",
@@ -370,6 +358,18 @@
               "detail": "Kulturkloster Altdorf",
               "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/jahreskreisfeier-kulturkloster-altdorf/"
+            },
+            {
+              "label": "Einzig und dr Andr",
+              "detail": "theater(uri), Altdorf (UR) — en cours, dernier jour : 1er novembre 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/einzig-und-dr-andr/"
+            },
+            {
+              "label": "Holz | Stein | Farbe - Kunstausstellung",
+              "detail": "Zeughaus — en cours, dernier jour : 3 novembre 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/holz-stein-farbe-kunstausstellung/"
             },
             {
               "label": "Mythen, Trends und Gesundheit - was steckt wirklich hinter der Ernährung ?",
@@ -410,7 +410,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/uri/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/uri/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     }
   }
 }
