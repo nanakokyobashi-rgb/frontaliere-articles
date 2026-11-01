@@ -18,6 +18,7 @@ import {
   validateLocalizedToponymTable,
 } from '../scripts/lib/localized-toponyms.mjs';
 import { extractSlugFallbackLocales } from '../scripts/lib/slug-fallback-provenance.mjs';
+import { scanStaticArticleFieldEntries } from '../scripts/lib/static-article-field-scanner.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -500,8 +501,6 @@ test('ripara il cantone Ticino solo fuori dai nomi ufficiali e solo dove serve',
   );
 });
 
-const ENTRY_RE = /['"]blog\.article\.([^'"]+)\.([^'"]+)['"]\s*:\s*(['"])((?:\\.|(?!\3)[^\r\n])*?)\3\s*(?=[,}])/gu;
-
 function unescapeTsValue(value) {
   return value.replace(/\\([\\'"\\\\])/gu, '$1');
 }
@@ -537,10 +536,15 @@ function collectCorpusEntries() {
     const locale = corpusLocale(file);
     if (!locale) continue;
     const source = readFileSync(file, 'utf8');
-    for (const match of source.matchAll(ENTRY_RE)) {
-      const articleId = match[1];
+    for (const match of scanStaticArticleFieldEntries(source)) {
+      const articleId = match.articleId;
       const entries = byLocale.get(locale).get(articleId) || [];
-      entries.push({ key: `${articleId}|${match[2]}`, field: match[2], value: unescapeTsValue(match[4]), file });
+      entries.push({
+        key: `${articleId}|${match.field}`,
+        field: match.field,
+        value: unescapeTsValue(match.rawValue),
+        file,
+      });
       byLocale.get(locale).set(articleId, entries);
     }
   }
