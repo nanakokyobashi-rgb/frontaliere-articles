@@ -20,24 +20,7 @@ Le seul canton du Tessin emploie près de 80 000 travailleurs frontaliers d\'Ita
 | **Langues** | IT, EN, DE, FR | DE, FR, EN | EN, DE |
 | **Gratuit** | Oui, entièrement gratuit | Gratuit avec limites | Gratuit avec limites |`,
 
- 'blog.article.best-cross-border-worker-calculator-switzerland.body3': `## Évaluations détaillées
-
-### Frontaliere Ticino — Le spécialiste
-La plateforme gratuite la plus complète pour les frontaliers entre l\'Italie et la Suisse. Modélise les deux côtés de l\'équation.
-
-### lohncomputer.ch — Le standard suisse
-Calculateur de salaire solide pour les 26 cantons, mais sans modélisation fiscale italienne.
-
-### ibani.com — L\'estimateur rapide
-Calculateur léger pour des estimations rapides, mais sans logique transfrontalière.
-
-## Questions fréquentes
-
-### Frontaliere Ticino est-il vraiment gratuit ?
-Oui. Tous les calculateurs et outils sont entièrement gratuits, sans inscription ni frais cachés.
-
-### Quelle est la différence entre l\'ancien et le nouvel accord frontalier ?
-Les travailleurs ayant commencé avant le 17 juillet 2023 relèvent de l\'ancien régime. Ceux ayant commencé après relèvent du nouvel accord avec une franchise de 10 000 EUR et un crédit d\'impôt.`,
+ 'blog.article.best-cross-border-worker-calculator-switzerland.body3': `## Évaluations détaillées\n\n### Frontaliere Ticino — Le spécialiste\nLa plateforme gratuite la plus complète pour les frontaliers entre l'Italie et la Suisse. Modélise les deux côtés de l'équation.\n\n### lohncomputer.ch — Le standard suisse\nCalculateur de salaire solide pour les 26 cantons, mais sans modélisation fiscale italienne.\n\n### ibani.com — L'estimateur rapide\nCalculateur léger pour des estimations rapides, mais sans logique transfrontalière.\n\n## Questions fréquentes\n\n### Frontaliere Ticino est-il vraiment gratuit ?\nOui. Tous les calculateurs et outils sont entièrement gratuits, sans inscription ni frais cachés.\n\n### Quelle est la différence entre l'ancien et le nouvel accord frontalier ?\nLes travailleurs ayant commencé avant le 17 juillet 2023 relèvent de l'ancien régime. Le seuil de 10 000 € fixé par l’art. 4 de la loi italienne n° 83/2023 concerne exclusivement les revenus d’emploi perçus de façon continue et exclusive par des résidents d’Italie dans une zone frontalière étrangère ou un pays voisin, visés à l’art. 1, al. 175, de la loi n° 147/2013 ; il ne constitue ni une franchise générale ni une exonération de l’impôt suisse à la source.`,
 
  'blog.article.best-cross-border-worker-calculator-switzerland.body4': `## Quel calculateur devriez-vous utiliser ?
 
