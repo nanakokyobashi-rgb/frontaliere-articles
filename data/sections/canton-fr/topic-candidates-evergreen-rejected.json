@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-fr::https://www.freiburger-nachrichten.ch/story/300432/tempo-80-auf-der-autobahn-so-viele-millionen-liter-sprit-kann-die-schweiz-einsparen": {
-      "section": "canton-fr",
-      "ts": 1793214250672
-    },
     "canton-fr::https://www.freiburger-nachrichten.ch/story/300804/wie-die-neuen-busse-der-tpf-den-fahrplan-beeinflussen": {
       "section": "canton-fr",
       "ts": 1793381946825
@@ -27,6 +23,10 @@
     "canton-fr::https://www.freiburger-nachrichten.ch/story/301498/kantonale-wahlen-und-eidgen%c3%b6ssische-abstimmungen-verwechslungen-bei-den-stimmunterlagen-vermeiden": {
       "section": "canton-fr",
       "ts": 1793386806292
+    },
+    "canton-fr::https://www.freiburger-nachrichten.ch/story/301640/strassensperrung-in-givisiez": {
+      "section": "canton-fr",
+      "ts": 1793552375409
     }
   }
 }
