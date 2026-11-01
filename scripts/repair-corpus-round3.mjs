@@ -1,6 +1,8 @@
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { CLOSING_LABELS, SOURCES, TOPICS } from './corpus-official-source-map.mjs';
+import { dedupeRepeatedParagraphs } from '../generator/scripts/lib/article-body-repetition.mjs';
+import { readTsStringMap } from '../generator/scripts/lib/ts-string-map.mjs';
 import { findOrphanedKeyFactsList } from '../generator/scripts/lib/key-facts-specificity.mjs';
 
 const ROOT = process.cwd();
@@ -8,7 +10,9 @@ const APPLY = process.argv.includes('--apply');
 const KEY_FACTS_ONLY = process.argv.includes('--key-facts-only');
 const KEY_FACTS_PATH = process.argv.find((arg) => arg.startsWith('--key-facts-path='))?.slice('--key-facts-path='.length);
 const LANGS = new Set(['it', 'de', 'fr', 'en']);
-const FIELD_RE = /^([ \t]*)(['"])([^'"\n]+\.body\d+)\2([ \t]*:[ \t]*)(['"])((?:\\.|(?!\5)[^\n])*)\5(,?)([ \t]*)$/gm;
+const BODY_FIELD_RE = /\.body(\d+)$/u;
+const SHARED_BODY_FIELD_RE = /\.body([1-3])$/u;
+const FIELD_RE = /^([ \t]*)(['"])([^'"\r\n]+\.body\d+)\2([ \t]*:[ \t]*)(['"`])((?:\\[\s\S]|(?!\5)[\s\S])*)\5(,?)([ \t]*)(?=\r?$)/gmu;
 
 const SUMMARY_REPAIRS = {
   'content/blog-body/en/grigioni-frontalieri-italiani-1-6-milioni.ts': {
@@ -42,6 +46,14 @@ const TARGETED_CONTENT_REPAIRS = {
     'blog.article.trasferirsi-la-salle-frontaliere-pro-e-contro.body2': [
       {
         marker: '## Eckdaten',
+        expectedHeadings: [
+          '## Eckdaten',
+          '## Als Grenzgänger nach La Salle ziehen: Vor- und Nachteile',
+          '### Mögliche Vorteile',
+          '### Steuerliche Einordnung',
+          '## Nützliche Tools zum Schutz Ihres Nettolohns',
+        ],
+        expectedFragments: ['Die neue Frontalieri-Vereinbarung'],
         replacement: `## Eckdaten
 * Was: Steuerregeln für Grenzgänger zwischen der Schweiz und Italien.
 * Wann: Das Abkommen gilt seit dem 1. Januar 2024.
@@ -120,7 +132,7 @@ const PATTERNS = {
   fuel: /\b(benzina|gasolio|diesel|carburant\w*|benzine|kraftstoff\w*|treibstoff\w*|fuel|petrol|gasoline|essence)\b/,
   fuelSpecificTax: /\b(mineraloelsteuer\w*|mineralolsteuer\w*|mineral oil tax|tassa sugli oli minerali|tassa sul carburante|taxe sur les huiles minerales|taxe sur les carburants|fuel tax|fuel excise|accise sui carburanti|imposta sui carburanti|treibstoffsteuer|benzinst\w*)\b/,
   roadDetail: /\b(traffic data|traffic counts|traffic volume|traffic jam\w*|congestion\w*|strassenverkehr|stau\w*|coda\w*|ingorg\w*|bouchon\w*|autoroute|autostrada|highway\w*|motorway\w*)\b/,
-  publicTransport: /\b(trasporto pubblico|transports publics|public transport|oeffentlicher verkehr|offentlicher verkehr|transport public|sbb|cff|ffs|swisspass|halbtax|ga travelcard|generalabonnement|abbonament\w*|abonnement\w*|abos|travelcard\w*|arcobaleno)\b/,
+  publicTransport: /\b(trasport[oi] pubblic\w*|transports publics|public transport|oeffentlicher verkehr|offentlicher verkehr|transport public\w*|sbb|cff|ffs|swisspass|halbtax|ga travelcard|generalabonnement|travelcard\w*|arcobaleno)\b/,
   pass: /\b(abbonament\w*|abonnement\w*|abo\w*|halbtax|swisspass|travelcard\w*|generalabonnement|ga travelcard|arcobaleno)\b/,
   healthInsurance: /\b(lamal|lammal|kvg|assicurazion\w* malatt\w*|assurance\w* maladie|krankenversicherung\w*|krankenkasse\w*|health insurance|medical insurance|assicurazione sanitaria)\b/,
   tax: /\b(impost\w*|fiscal\w*|steuer\w*|tax\w*|impot\w*|fiscalite|taxation|tassazion\w*)\b/,
@@ -184,7 +196,7 @@ function decodeJsString(raw) {
 }
 
 function encodeJsString(value, quote) {
-  return value
+  let encoded = value
     .replaceAll('\\', '\\\\')
     .replaceAll(quote, `\\${quote}`)
     .replaceAll('\n', '\\n')
@@ -193,6 +205,8 @@ function encodeJsString(value, quote) {
     .replaceAll('\b', '\\b')
     .replaceAll('\f', '\\f')
     .replaceAll('\v', '\\v');
+  if (quote === '`') encoded = encoded.replaceAll('${', '\\${');
+  return encoded;
 }
 
 function getLocale(file) {
@@ -200,58 +214,83 @@ function getLocale(file) {
   return [...parts].reverse().find(part => LANGS.has(part)) ?? null;
 }
 
-function getFields(contents) {
+function getFields(contents, sourceLabel = '<source>') {
+  let parsed;
+  try {
+    parsed = readTsStringMap(contents);
+  } catch (error) {
+    throw new Error(`${sourceLabel}: parser TS non ha letto i campi body: ${error.message}`, { cause: error });
+  }
+  const expected = new Map([...parsed].filter(([key]) => /\.body\d+$/u.test(key)));
   const fields = [];
   for (const match of contents.matchAll(FIELD_RE)) {
-    fields.push({ key: match[3], quote: match[5], value: decodeJsString(match[6]) });
+    const key = match[3];
+    if (!expected.has(key)) continue;
+    const decoded = decodeJsString(match[6]);
+    const value = expected.get(key);
+    if (decoded !== value) {
+      throw new Error(`${sourceLabel}: il valore statico del campo ${key} non coincide con il parser TS condiviso`);
+    }
+    fields.push({ key, quote: match[5], value });
+  }
+  const matched = new Set(fields.map(field => field.key));
+  const unread = [...expected.keys()].filter(key => !matched.has(key));
+  if (unread.length) {
+    throw new Error(`${sourceLabel}: campi body non letti prima del repair: ${unread.join(', ')}`);
   }
   return fields;
 }
 
-function rewriteFields(contents, transform) {
+function rewriteFields(contents, transform, sourceLabel = '<source>') {
+  const parsedFields = new Map(getFields(contents, sourceLabel).map(field => [field.key, field.value]));
   return contents.replace(FIELD_RE, (...args) => {
     const [whole, leading, keyQuote, key, delimiter, valueQuote, rawValue, comma, trailing] = args;
-    const decoded = decodeJsString(rawValue);
+    const decoded = parsedFields.get(key);
+    if (decoded === undefined) return whole;
     const next = transform(key, decoded);
     if (next === decoded) return whole;
     return `${leading}${keyQuote}${key}${keyQuote}${delimiter}${valueQuote}${encodeJsString(next, valueQuote)}${valueQuote}${comma}${trailing}`;
   });
 }
 
-function normalizeSentence(sentence) {
-  const normalized = sentence
-    .replace(/^\s*(?:#{1,6}\s*)?(?:[-*+]\s+|\d+[.)]\s+)?/, '')
-    .replace(/\s+/gu, ' ')
-    .trim()
-    .normalize('NFC')
-    .toLowerCase();
-  const datePart = normalized.replace(/^[*_~`]+|[*_~`]+$/gu, '').replace(/[.,;:!?]+$/u, '').trim();
-  if (/^\d{1,2}$/u.test(datePart) || /^\d{1,4}\.?\s*(?:[-–]\s*\d{1,4}\.?)*$/u.test(datePart) || /^\p{L}\.$/u.test(normalized)) return '';
-  if (/^(?:jan(?:uary|vier)?|feb(?:ruary|ruar)?|mar(?:ch|s|zo)?|apr(?:il)?|may|mai|maggio|juin|junio|july|juillet|luglio|aug(?:ust)?|ao[uû]t|agosto|sep(?:tember)?|septembre|settembre|oct(?:ober)?|oktober|octobre|ottobre|nov(?:ember)?|novembre|dec(?:ember)?|dezember|d[eé]cembre|dicembre)$/u.test(datePart)) return '';
-  return normalized;
+function markdownMarkers(value) {
+  return value.match(/^\s*(?:#{1,6}\s+|[-*+]\s+|\d+[.)]\s+|>\s+|```)/gmu) ?? [];
 }
 
-function dedupeSentences(value, locale) {
-  let segmenter = SENTENCE_SEGMENTERS.get(locale);
-  if (!segmenter) {
-    segmenter = new Intl.Segmenter(locale, { granularity: 'sentence' });
-    SENTENCE_SEGMENTERS.set(locale, segmenter);
+function canonicalBodyText(value) {
+  return value.replace(/\s+/gu, ' ').trim();
+}
+
+function bodyFieldName(key) {
+  const match = key.match(BODY_FIELD_RE);
+  return match ? `body${match[1]}` : null;
+}
+
+function dedupeBodyFields(fields) {
+  const bodies = Object.fromEntries(fields
+    .map(field => [bodyFieldName(field.key), field.value])
+    .filter(([key]) => key));
+  const before = new Map(Object.entries(bodies));
+  const deduped = dedupeRepeatedParagraphs({
+    body1: bodies.body1 ?? '',
+    body2: bodies.body2 ?? '',
+    body3: bodies.body3 ?? '',
+  });
+  for (const [key, value] of before) {
+    if (SHARED_BODY_FIELD_RE.test(`.${key}`)) continue;
+    deduped[key] = dedupeRepeatedParagraphs({ body1: value, body2: '', body3: '' }).body1;
   }
-  const seen = new Set();
-  let removed = 0;
-  const samples = [];
-  const next = [...segmenter.segment(value)].map(({ segment }) => {
-    const key = normalizeSentence(segment);
-    if (!key || !/[\p{L}\p{N}]/u.test(key)) return segment;
-    if (seen.has(key)) {
-      removed += 1;
-      if (samples.length < 2) samples.push(key.slice(0, 100));
-      return '';
-    }
-    seen.add(key);
-    return segment;
-  }).join('');
-  return { value: next, removed, samples };
+  const changed = [...before.entries()]
+    .filter(([key, value]) => {
+      const candidate = deduped[key];
+      if (candidate === value || canonicalBodyText(candidate) === canonicalBodyText(value)) return false;
+      return JSON.stringify(markdownMarkers(candidate)) === JSON.stringify(markdownMarkers(value));
+    })
+    .map(([key]) => key);
+  return {
+    values: new Map([...before.keys()].map(key => [key, changed.includes(key) ? deduped[key] : before.get(key)])),
+    changed,
+  };
 }
 
 function fold(value) {
@@ -351,7 +390,23 @@ function targetedContentRepair(file, key, value) {
   let next = value;
   for (const repair of repairs) {
     if (repair.replacement !== undefined) {
-      if (!next.includes(repair.appendUnless ?? 'Offizielle Quellen: [Überblick bilateraler Weg')) next = repair.replacement;
+      const markerMatches = repair.marker
+        ? [...next.matchAll(new RegExp(`^${repair.marker.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&')}$`, 'gmu'))]
+        : [];
+      if (repair.marker && markerMatches.length !== 1) {
+        throw new Error(`${path.relative(ROOT, file)}:${key}: marker di repair assente o duplicato: ${repair.marker}`);
+      }
+      if (next === repair.replacement || next.includes(repair.appendUnless ?? 'Offizielle Quellen: [Überblick bilateraler Weg')) continue;
+      if (repair.expectedHeadings) {
+        const headings = [...next.matchAll(/^#{2,3}[^\n]*$/gmu)].map(match => match[0].trim());
+        if (headings.join('\n') !== repair.expectedHeadings.join('\n')) {
+          throw new Error(`${path.relative(ROOT, file)}:${key}: shape precedente del repair non riconosciuto`);
+        }
+      }
+      if (repair.expectedFragments?.some(fragment => !next.includes(fragment))) {
+        throw new Error(`${path.relative(ROOT, file)}:${key}: contenuto precedente del repair non riconosciuto`);
+      }
+      next = repair.replacement;
     } else if (repair.append !== undefined) {
       if (!next.includes(repair.appendUnless)) next = `${next.trimEnd()}${repair.append}`;
     } else if (repair.from && next.includes(repair.from)) {
@@ -414,12 +469,17 @@ const stats = {
   examplesByTopic: {},
 };
 
+const inputs = [];
 for (const file of files) {
   const relative = path.relative(ROOT, file);
   const locale = getLocale(relative);
   if (!locale) continue;
   const original = await readFile(file, 'utf8');
-  const fields = getFields(original);
+  const fields = getFields(original, relative);
+  inputs.push({ file, relative, locale, original, fields });
+}
+
+for (const { file, relative, locale, original, fields } of inputs) {
   if (!fields.length) continue;
   stats.fields += fields.length;
 
@@ -429,27 +489,26 @@ for (const file of files) {
       const next = repairOrphanedKeyFactsHeading(value, locale);
       if (next !== value) stats.keyFactsHeadingsAdded += 1;
       return next;
-    });
+    }, relative);
     if (APPLY && repaired !== original) await writeFile(file, repaired);
     continue;
   }
 
-  let localDuplicates = 0;
+  const dedupeResult = dedupeBodyFields(fields);
+  const localDuplicates = dedupeResult.changed.length;
   let deduped = rewriteFields(original, (key, value) => {
-    if (!/\.body\d+$/.test(key)) return value;
-    const result = dedupeSentences(value, locale);
-    localDuplicates += result.removed;
-    if (result.removed && stats.duplicateExamples.length < 5) {
-      stats.duplicateExamples.push({ file: relative, field: key.split('.').at(-1), examples: result.samples });
-    }
-    return result.value;
-  });
+    const body = bodyFieldName(key);
+    return body && dedupeResult.values.has(body) ? dedupeResult.values.get(body) : value;
+  }, relative);
   if (localDuplicates) {
     stats.duplicatedFields += 1;
     stats.duplicateOccurrencesRemoved += localDuplicates;
+    if (stats.duplicateExamples.length < 5) {
+      stats.duplicateExamples.push({ file: relative, field: dedupeResult.changed[0], examples: [] });
+    }
   }
 
-  const dedupedFields = getFields(deduped);
+  const dedupedFields = getFields(deduped, relative);
   const fileHasUrl = /https?:\/\//i.test(original);
   if (!fileHasUrl) {
     stats.missingUrlBefore += 1;
@@ -472,7 +531,7 @@ for (const file of files) {
     } else {
       const lastField = [...dedupedFields].sort((a, b) => Number(a.key.match(/\.body(\d+)$/)?.[1] ?? 0) - Number(b.key.match(/\.body(\d+)$/)?.[1] ?? 0)).at(-1);
       const sourceBlock = `${CLOSING_LABELS[locale]} ${sourceLinks.join(' · ')}`;
-      deduped = rewriteFields(deduped, (key, value) => key === lastField.key ? `${value.trimEnd()}\n\n${sourceBlock}` : value);
+      deduped = rewriteFields(deduped, (key, value) => key === lastField.key ? `${value.trimEnd()}\n\n${sourceBlock}` : value, relative);
       stats.sourceLinksAdded += sourceLinks.length;
       stats.languages[locale] = (stats.languages[locale] ?? 0) + 1;
     }
@@ -481,7 +540,7 @@ for (const file of files) {
 
   let repaired = deduped;
   if (relative in SUMMARY_REPAIRS) {
-    repaired = rewriteFields(repaired, summaryRepair.bind(null, file));
+    repaired = rewriteFields(repaired, summaryRepair.bind(null, file), relative);
     if (repaired !== deduped) stats.restoredSummaryBlocks += 1;
   }
   const beforeTargetedContentRepair = repaired;
@@ -490,7 +549,7 @@ for (const file of files) {
     const next = targetedContentRepair(file, key, value);
     if (next !== value) targetedKeys.push(key);
     return next;
-  });
+  }, relative);
   if (repaired !== beforeTargetedContentRepair) {
     stats.targetedContentFields += 1;
     if (stats.targetedContentExamples.length < 5) stats.targetedContentExamples.push({ file: relative, fields: targetedKeys });
