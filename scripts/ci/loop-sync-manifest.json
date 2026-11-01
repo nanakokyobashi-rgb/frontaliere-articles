@@ -1392,8 +1392,9 @@
     },
     {
       "path": "scripts/ci/lib/pr-delivery-evidence.mjs",
-      "mode": "identical",
-      "reason": "Predicato unico source-first per provare la delivery corrente di issue-fix: sidecar legato a run+attempt, issue/branch/HEAD e tri-state verified-delivery/verified-none/unavailable. Il workflow resta adapted per i consumer del corpus; questo helper e' trasportato byte-identico insieme al marker, dopo la correzione del solo errore di sintassi nel draft sito.",
+      "mode": "adapted",
+      "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/3504",
+      "reason": "Il predicato source-first per provare la delivery corrente resta comune, ma il trasporto non puo' copiare questo helper in isolamento: la versione site-ahead importa `scripts/ci/close-recovered-failure-issues.mjs`, che qui e' `adapted` per il contratto publisher di `publish-api.yml`. La copia isolata trascinerebbe quindi una dipendenza non identical. La divergenza e' intenzionale e resta governata da #3504 finche' i due contratti non vengono riconciliati.",
       "baseline": {
         "site": "61e42b998cf5c988",
         "corpus": "61e42b998cf5c988",
