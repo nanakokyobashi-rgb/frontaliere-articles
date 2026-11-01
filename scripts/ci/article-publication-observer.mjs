@@ -11,8 +11,9 @@
  * this is a courtesy check, not a crawler. Degraded articles are kept in the
  * observer issue body until a live read is sane; at most three proven image
  * repairs and three stale-but-readable page retries are dispatched per run.
- * Unpreparable targets are kept as durable coverage blockers in the same stable
- * issue until they can be observed.
+ * Unpreparable targets with publication metadata are kept as durable coverage
+ * blockers in the same stable issue until they can be observed. A body-only
+ * legacy residue has no publication intent and is not an observer target.
  */
 
 import fs from 'node:fs';
@@ -23,6 +24,7 @@ import { fileURLToPath } from 'node:url';
 import { readTopLevelString, scanTopLevelArticleRecords } from '../lib/article-registry-reader.mjs';
 import { declaredImageIsOwn, extractOgImage, isGenericOgImage, normalizeImagePath } from '../lib/article-image-postcondition.mjs';
 import { fetchDeclaredImage } from '../lib/declared-image-fetch.mjs';
+import { parseArticleMetaIds } from '../lib/article-meta-ids.mjs';
 import {
   DEFAULT_REPAIR_CAP,
   applyDispatchOutcomes,
@@ -231,14 +233,45 @@ export function buildObserverTargets({
   changedBodies = [],
   ledgerItems = [],
   coverageBlockers = [],
-  registrySources,
-  slugSources,
+  registrySources = {},
+  slugSources = {},
+  metaSources = {},
   baseUrl = SITE_BASE_URL,
 }) {
   const targets = [];
   const skipped = [];
+  const metaIdsBySection = Object.fromEntries(
+    [...new Set([...Object.keys(registrySources), ...Object.keys(slugSources), ...Object.keys(metaSources)])]
+      .map((section) => [section, parseArticleMetaIds(metaSources[section] || '')]),
+  );
+  const resolveChange = (change) => {
+    const registrySource = registrySources[change.section] || '';
+    const slugSource = slugSources[change.section] || '';
+    const directRegistry = parseRegistryRecord(registrySource, change.articleId);
+    const canonicalArticleId = directRegistry
+      ? change.articleId
+      : parseArticleIdByItalianSlug(slugSource, change.articleId) || change.articleId;
+    const registry = directRegistry || parseRegistryRecord(registrySource, canonicalArticleId);
+    const slug = parseItalianSlug(slugSource, canonicalArticleId);
+    const metaIds = metaIdsBySection[change.section] || new Set();
+    return {
+      canonicalArticleId,
+      registry,
+      slug,
+      hasPublicationMetadata: metaIds.has(change.articleId) || metaIds.has(canonicalArticleId),
+    };
+  };
+  const isBodyOnlyResidue = (resolved) => !resolved.registry && !resolved.slug && !resolved.hasPublicationMetadata;
+  // The writer records the meta chunk before writing any locale body. A body
+  // without registry, route, or meta therefore comes from an extracted/legacy
+  // corpus residue, not from a publication that is waiting on the site. Keep
+  // the fail-closed path for every item that has any publication evidence.
+  const activeCoverageBlockers = coverageBlockers.filter((item) => {
+    const resolved = resolveChange({ section: item.section, articleId: item.articleId });
+    return !isBodyOnlyResidue(resolved);
+  });
   const durableChanges = [
-    ...coverageBlockers.map((item) => ({
+    ...activeCoverageBlockers.map((item) => ({
       section: item.section,
       articleId: item.articleId,
       changedAt: Number.isFinite(Date.parse(item.firstSeenAt ?? '')) ? Date.parse(item.firstSeenAt) : 0,
@@ -283,14 +316,9 @@ export function buildObserverTargets({
     const key = ledgerKey(change);
     if (seen.has(key)) continue;
     seen.add(key);
-    const registrySource = registrySources[change.section] || '';
-    const slugSource = slugSources[change.section] || '';
-    const directRegistry = parseRegistryRecord(registrySource, change.articleId);
-    const canonicalArticleId = directRegistry
-      ? change.articleId
-      : parseArticleIdByItalianSlug(slugSource, change.articleId) || change.articleId;
-    const registry = directRegistry || parseRegistryRecord(registrySource, canonicalArticleId);
-    const slug = parseItalianSlug(slugSource, canonicalArticleId);
+    const resolved = resolveChange(change);
+    const { canonicalArticleId, registry, slug } = resolved;
+    if (isBodyOnlyResidue(resolved)) continue;
     if (!registry || !slug) {
       skipped.push({ ...change, reason: !registry ? 'registro non trovato' : 'slug italiano non trovato' });
       if (change.durable && !change.coverageBlocker) missingLedgerKeys.push(key);
@@ -311,7 +339,7 @@ export function buildObserverTargets({
       coverageBlocker: Boolean(change.coverageBlocker),
     });
   }
-  return { targets, skipped, missingLedgerKeys };
+  return { targets, skipped, missingLedgerKeys, coverageBlockers: activeCoverageBlockers };
 }
 
 function parseAttrs(tag) {
@@ -676,6 +704,10 @@ function loadSources(rootDir) {
       frontaliere: fs.readFileSync(path.join(rootDir, 'content/routerBlogData.ts'), 'utf8'),
       svizzera: fs.readFileSync(path.join(rootDir, 'content/routerSwissData.ts'), 'utf8'),
     },
+    metaSources: {
+      frontaliere: fs.readFileSync(path.join(rootDir, 'content/blog-meta-it.ts'), 'utf8'),
+      svizzera: fs.readFileSync(path.join(rootDir, 'content/blog-meta-ch-it.ts'), 'utf8'),
+    },
   };
 }
 
@@ -894,6 +926,7 @@ export async function runObserver({
     terminalRetentionDays: DEFAULT_TERMINAL_RETENTION_DAYS,
   });
   const prepared = buildObserverTargets({ changedBodies, ledgerItems: ledger, coverageBlockers, ...sources });
+  coverageBlockers = prepared.coverageBlockers;
   const report = await observePublicationLag({
     targets: prepared.targets,
     nowMs,

@@ -118,6 +118,7 @@ import fs, { realpathSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { findControlChars, isInvalidControlCode, sanitizeHtmlDocument } from './lib/sanitize-control-chars.mjs';
+import { extractMetaArticleId } from './lib/article-meta-ids.mjs';
 // issue #220: due predicati di sporco oltre al C0. Vedi le due sezioni piu'
 // sotto ("SEGNAPOSTO FAQ" e "RESIDUO PROPAGATO") per il perche' di ciascuno.
 // Riuso deliberato: la mappa sezione→shard, l'elenco dei locali e la regola di
@@ -141,6 +142,7 @@ import {
 const ROOT_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
 export { LOCALES };
+export { extractMetaArticleId };
 export {
   ANNOUNCED_SURFACE_FILES,
   ANNOUNCED_SURFACE_MAX_ATTEMPTS,
@@ -223,15 +225,6 @@ export const BODY_DIR_SECTIONS = Object.fromEntries(
 
 export function sectionForBodyDir(dirName) {
   return BODY_DIR_SECTIONS[dirName] ?? null;
-}
-
-// Chiave di un campo dentro un chunk meta o body: 'blog.article.<id>.<campo>': '...'
-const META_KEY_RX = /'blog\.article\.([a-z0-9-]+)\.[a-zA-Z0-9]+'\s*:/;
-
-/** Id nella chiave di una riga di chunk meta, o null se la riga non ne porta una. */
-export function extractMetaArticleId(line) {
-  const m = META_KEY_RX.exec(line);
-  return m ? m[1] : null;
 }
 
 // Chiave di record di un chunk SEO: 'blog-<id>': { ... oppure 'swiss-<id>': { ...

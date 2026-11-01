@@ -18,6 +18,7 @@ import {
   runObserver,
 } from '../../scripts/ci/article-publication-observer.mjs';
 import { renderDegradationLedger } from '../../scripts/lib/article-image-degradation-ledger.mjs';
+import { parseArticleMetaIds } from '../../scripts/lib/article-meta-ids.mjs';
 
 const sha = 'a'.repeat(40);
 const changedAt = Date.parse('2026-10-05T00:00:00Z');
@@ -46,6 +47,16 @@ test('il registry observer legge solo i campi top-level dentro una voce bilancia
     date: '2026-10-04',
     image: '/images/blog/article.webp',
   });
+});
+
+test('il parser dei meta chunk raccoglie gli id da chiavi quotate senza duplicarli', () => {
+  const ids = parseArticleMetaIds([
+    "'blog.article.alpha.title': 'Alpha',",
+    '"blog.article.alpha.excerpt": "...",',
+    "'blog.article-beta.title': 'non una chiave meta',",
+    "'blog.article.beta.title': 'Beta',",
+  ].join('\n'));
+  assert.deepEqual([...ids].sort(), ['alpha', 'beta']);
 });
 
 function page(date, image = ownImage) {
@@ -478,6 +489,12 @@ function observerRoot() {
       "{ id: 'missing-image', date: '2026-09-01', image: '/images/blog/missing-image.webp' },",
     ].join('\n'),
     'content/swiss-articles-data.ts': '',
+    'content/blog-meta-it.ts': [
+      "'blog.article.alpha.title': 'Alpha',",
+      "'blog.article.zeta.title': 'Zeta',",
+      "'blog.article.missing-image.title': 'Missing image',",
+    ].join('\n'),
+    'content/blog-meta-ch-it.ts': '',
     'content/routerBlogData.ts': [
       "'alpha': { it: 'alpha' },",
       "'zeta': { it: 'zeta' },",
@@ -714,6 +731,7 @@ test('una scansione pulita ma incompleta apre il segnale e non risolve l issue s
 
 test('un target senza registry mantiene il segnale fail-closed e impedisce la risoluzione', async () => {
   const rootDir = observerRoot();
+  fs.appendFileSync(path.join(rootDir, 'content/blog-meta-it.ts'), "\n'blog.article.senza-registry.title': 'Senza registry',\n");
   const github = issueClient({ issue: { number: 2448, body: '' } });
   const log = `commit ${'f'.repeat(40)} 1791417600\ncontent/blog-body/it/senza-registry.ts\n`;
   try {
@@ -737,6 +755,7 @@ test('un target senza registry mantiene il segnale fail-closed e impedisce la ri
 
 test('il blocker di preparazione persiste oltre la finestra Git finché il target non è osservato', async () => {
   const rootDir = observerRoot();
+  fs.appendFileSync(path.join(rootDir, 'content/blog-meta-it.ts'), "\n'blog.article.senza-registry.title': 'Senza registry',\n");
   const github = issueClient();
   const log = `commit ${'f'.repeat(40)} 1791417600\ncontent/blog-body/it/senza-registry.ts\n`;
   try {
@@ -782,6 +801,40 @@ test('il blocker di preparazione persiste oltre la finestra Git finché il targe
       fetchImpl: async () => ({ ok: true, status: 200, text: async () => ownPage('/images/blog/senza-registry.webp').replace('2026-09-02', '2026-10-21') }),
     });
     assert.deepEqual(third.coverageBlockers, []);
+    assert.ok(github.calls.some((call) => call.type === 'resolve'));
+  } finally {
+    fs.rmSync(rootDir, { recursive: true, force: true });
+  }
+});
+
+test('ignora il body orfano senza evidenza di pubblicazione e rimuove il blocker storico', async () => {
+  const rootDir = observerRoot();
+  const github = issueClient({
+    issue: {
+      number: 2556,
+      body: renderCoverageLedger([{
+        section: 'frontaliere',
+        articleId: 'body-orfano',
+        sourceCommit: sha,
+        firstSeenAt: '2026-10-05T00:00:00.000Z',
+        lastSeenAt: '2026-10-05T00:00:00.000Z',
+        reason: 'registro non trovato',
+      }]),
+    },
+  });
+  const log = `commit ${'b'.repeat(40)} 1791417600\ncontent/blog-body/it/body-orfano.ts\n`;
+  try {
+    const result = await runObserver({
+      rootDir,
+      nowMs: Date.parse('2026-10-08T00:00:00Z'),
+      githubClient: github.client,
+      gitLogImpl: () => log,
+      minIntervalMs: 0,
+      fetchImpl: async () => { throw new Error('un residuo non deve essere letto'); },
+    });
+    assert.deepEqual(result.skipped, []);
+    assert.deepEqual(result.coverageBlockers, []);
+    assert.equal(result.coverageIncomplete, false);
     assert.ok(github.calls.some((call) => call.type === 'resolve'));
   } finally {
     fs.rmSync(rootDir, { recursive: true, force: true });
