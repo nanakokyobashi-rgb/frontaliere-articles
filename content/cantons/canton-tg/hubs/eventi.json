@@ -4,17 +4,17 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "eventi",
-  "updatedAt": "2026-10-31T06:15:08.747Z",
-  "contentHash": "bd7f68aac0413d072f8d9ed9a2b62638f7c018ecd6379527f54affb861ad000c",
+  "updatedAt": "2026-11-01T13:11:05.408Z",
+  "contentHash": "6f1cb81138c1993aea23051b2273101129c413cc5c120842f6f911b6afd719ae",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-30T13:23:17.161Z",
+      "updatedAt": "2026-10-31T14:21:36.178Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-30T21:45:03.956Z",
+      "updatedAt": "2026-10-31T20:43:08.728Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "45",
+          "value": "42",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Fiire mit de Chliine",
-              "detail": "Weinfelden",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fiire-mit-de-chliine-5/"
-            },
-            {
-              "label": "Manik Sarkar",
-              "detail": "Weinfelden",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/manik-sarkar/"
-            },
-            {
-              "label": "\"Dominanzgesten & Führungsanfragen\" Themenabend mit Katrin Scholz",
-              "detail": "Märstetten",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dominanzgesten-fuehrungsanfragen-themenabend-mit-katrin-scholz/"
-            },
-            {
-              "label": "Konzert Singing People",
-              "detail": "Katholische Kirche",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/tobel/konzert-singing-people_ArZgxnt"
-            },
-            {
-              "label": "Konzert Singing People",
-              "detail": "Katholische Kirche, Tobel-Tägerschen",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/konzert-singing-people-4/"
-            },
-            {
-              "label": "Dussex's Soultrain feat. Freda Goodlett",
+              "label": "Circle-Songs – Tageskurs",
               "detail": "Eisenwerk, Frauenfeld",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/dussexs-soultrain-feat-freda-goodlett_AFaJH1W"
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/frauenfeld/circle-songs-tageskurs_AiX5sKd"
             },
             {
-              "label": "Helene Bracht",
-              "detail": "Weinfelden",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helene-bracht/"
-            },
-            {
-              "label": "Ulan & Bator - Überraschungszwei",
-              "detail": "Löwen Arena, Sommeri",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ulan-bator-ueberraschungszwei/"
-            },
-            {
-              "label": "Diamante im Stroh",
-              "detail": "Hefenhofen — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/diamante-im-stroh/"
+              "label": "Ittinger Sonntagskonzert – Ensemble Orion",
+              "detail": "Warth-Weiningen",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ittinger-sonntagskonzert-ensemble-orion/"
             },
             {
               "label": "La Table d'Amis | Tavolata",
               "detail": "Restaurant Seegarten, Kreuzlingen — in corso, ultimo giorno: 13 novembre 2026",
-              "date": "2026-10-31",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
+            },
+            {
+              "label": "Philosophie im Löchlgaischt",
+              "detail": "Eschenz — in corso, ultimo giorno: 24 novembre 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
+            },
+            {
+              "label": "Schulden- und Budgetberatungen Caritas",
+              "detail": "Haus Weisser, Kreuzlingen",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schulden-und-budgetberatungen-caritas-16/"
+            },
+            {
+              "label": "30 Minuten Orgelmusik",
+              "detail": "Evang.-ref. Kirche Weinfelden, Weinfelden",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/30-minuten-orgelmusik-12/"
+            },
+            {
+              "label": "Metropolis",
+              "detail": "Kulturhaus APOLLO, Kreuzlingen",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/metropolis/"
+            },
+            {
+              "label": "Forum «Zupfer»",
+              "detail": "Musikschule Weinfelden, Weinfelden",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/weinfelden/forum-zupfer_A5tU3bq"
+            },
+            {
+              "label": "Wohnzimmerkonzert mit Mainact The Great Stoyan Duo - Supportact tba",
+              "detail": "Kulturzentrum Presswerk, Arbon",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/arbon/wohnzimmerkonzert-mit-mainact-the-great-stoyan-duo-supportact-tba_AnHmv3m"
+            },
+            {
+              "label": "Inbalanceleben am Bodensee QiGong - Meditation - Achtsamkeit",
+              "detail": "See & Park Hotel Feldbach, Steckborn",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/inbalanceleben-am-bodensee-qigong-meditation-achtsamkeit/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/turgovia/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -123,7 +123,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-10-31T20:43:08.728Z"
         }
       ],
       "curatedArticles": [
@@ -151,7 +151,7 @@
           "url": "/eventi/turgovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "en": {
       "canton": "TG",
@@ -161,7 +161,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "45",
+          "value": "42",
           "note": "from the site’s events calendar"
         }
       ],
@@ -172,69 +172,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Fiire mit de Chliine",
-              "detail": "Weinfelden",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fiire-mit-de-chliine-5/"
-            },
-            {
-              "label": "Manik Sarkar",
-              "detail": "Weinfelden",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/manik-sarkar/"
-            },
-            {
-              "label": "\"Dominanzgesten & Führungsanfragen\" Themenabend mit Katrin Scholz",
-              "detail": "Märstetten",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dominanzgesten-fuehrungsanfragen-themenabend-mit-katrin-scholz/"
-            },
-            {
-              "label": "Konzert Singing People",
-              "detail": "Katholische Kirche",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/tobel/konzert-singing-people_ArZgxnt"
-            },
-            {
-              "label": "Konzert Singing People",
-              "detail": "Katholische Kirche, Tobel-Tägerschen",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/konzert-singing-people-4/"
-            },
-            {
-              "label": "Dussex's Soultrain feat. Freda Goodlett",
+              "label": "Circle-Songs – Tageskurs",
               "detail": "Eisenwerk, Frauenfeld",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/dussexs-soultrain-feat-freda-goodlett_AFaJH1W"
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/frauenfeld/circle-songs-tageskurs_AiX5sKd"
             },
             {
-              "label": "Helene Bracht",
-              "detail": "Weinfelden",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helene-bracht/"
-            },
-            {
-              "label": "Ulan & Bator - Überraschungszwei",
-              "detail": "Löwen Arena, Sommeri",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ulan-bator-ueberraschungszwei/"
-            },
-            {
-              "label": "Diamante im Stroh",
-              "detail": "Hefenhofen — ongoing, last day: 31 October 2026",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/diamante-im-stroh/"
+              "label": "Ittinger Sonntagskonzert – Ensemble Orion",
+              "detail": "Warth-Weiningen",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ittinger-sonntagskonzert-ensemble-orion/"
             },
             {
               "label": "La Table d'Amis | Tavolata",
               "detail": "Restaurant Seegarten, Kreuzlingen — ongoing, last day: 13 November 2026",
-              "date": "2026-10-31",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
+            },
+            {
+              "label": "Philosophie im Löchlgaischt",
+              "detail": "Eschenz — ongoing, last day: 24 November 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
+            },
+            {
+              "label": "Schulden- und Budgetberatungen Caritas",
+              "detail": "Haus Weisser, Kreuzlingen",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schulden-und-budgetberatungen-caritas-16/"
+            },
+            {
+              "label": "30 Minuten Orgelmusik",
+              "detail": "Evang.-ref. Kirche Weinfelden, Weinfelden",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/30-minuten-orgelmusik-12/"
+            },
+            {
+              "label": "Metropolis",
+              "detail": "Kulturhaus APOLLO, Kreuzlingen",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/metropolis/"
+            },
+            {
+              "label": "Forum «Zupfer»",
+              "detail": "Musikschule Weinfelden, Weinfelden",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/weinfelden/forum-zupfer_A5tU3bq"
+            },
+            {
+              "label": "Wohnzimmerkonzert mit Mainact The Great Stoyan Duo - Supportact tba",
+              "detail": "Kulturzentrum Presswerk, Arbon",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/arbon/wohnzimmerkonzert-mit-mainact-the-great-stoyan-duo-supportact-tba_AnHmv3m"
+            },
+            {
+              "label": "Inbalanceleben am Bodensee QiGong-Meditation-Achtsamkeit",
+              "detail": "See & Park Hotel Feldbach, Steckborn",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/inbalanceleben-am-bodensee-qigong-meditation-achtsamkeit/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/thurgau/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -257,7 +257,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-10-31T20:43:08.728Z"
         }
       ],
       "curatedArticles": [
@@ -285,7 +285,7 @@
           "url": "/en/events/thurgau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "de": {
       "canton": "TG",
@@ -295,7 +295,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "45",
+          "value": "42",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -306,69 +306,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Fiire mit de Chliine",
-              "detail": "Weinfelden",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fiire-mit-de-chliine-5/"
-            },
-            {
-              "label": "Manik Sarkar",
-              "detail": "Weinfelden",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/manik-sarkar/"
-            },
-            {
-              "label": "\"Dominanzgesten & Führungsanfragen\" Themenabend mit Katrin Scholz",
-              "detail": "Märstetten",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dominanzgesten-fuehrungsanfragen-themenabend-mit-katrin-scholz/"
-            },
-            {
-              "label": "Konzert Singing People",
-              "detail": "Katholische Kirche",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/tobel/konzert-singing-people_ArZgxnt"
-            },
-            {
-              "label": "Konzert Singing People",
-              "detail": "Katholische Kirche, Tobel-Tägerschen",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/konzert-singing-people-4/"
-            },
-            {
-              "label": "Dussex's Soultrain feat. Freda Goodlett",
+              "label": "Circle-Songs – Tageskurs",
               "detail": "Eisenwerk, Frauenfeld",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/dussexs-soultrain-feat-freda-goodlett_AFaJH1W"
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/frauenfeld/circle-songs-tageskurs_AiX5sKd"
             },
             {
-              "label": "Helene Bracht",
-              "detail": "Weinfelden",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helene-bracht/"
-            },
-            {
-              "label": "Ulan & Bator - Überraschungszwei",
-              "detail": "Löwen Arena, Sommeri",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ulan-bator-ueberraschungszwei/"
-            },
-            {
-              "label": "Diamante im Stroh",
-              "detail": "Hefenhofen — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/diamante-im-stroh/"
+              "label": "Ittinger Sonntagskonzert – Ensemble Orion",
+              "detail": "Warth-Weiningen",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ittinger-sonntagskonzert-ensemble-orion/"
             },
             {
               "label": "La Table d'Amis | Tavolata",
               "detail": "Restaurant Seegarten, Kreuzlingen — läuft, letzter Tag: 13. November 2026",
-              "date": "2026-10-31",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
+            },
+            {
+              "label": "Philosophie im Löchlgaischt",
+              "detail": "Eschenz — läuft, letzter Tag: 24. November 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
+            },
+            {
+              "label": "Schulden- und Budgetberatungen Caritas",
+              "detail": "Haus Weisser, Kreuzlingen",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schulden-und-budgetberatungen-caritas-16/"
+            },
+            {
+              "label": "30 Minuten Orgelmusik",
+              "detail": "Evang.-ref. Kirche Weinfelden, Weinfelden",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/30-minuten-orgelmusik-12/"
+            },
+            {
+              "label": "Metropolis",
+              "detail": "Kulturhaus APOLLO, Kreuzlingen",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/metropolis/"
+            },
+            {
+              "label": "Forum «Zupfer»",
+              "detail": "Musikschule Weinfelden, Weinfelden",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/weinfelden/forum-zupfer_A5tU3bq"
+            },
+            {
+              "label": "Wohnzimmerkonzert mit Mainact The Great Stoyan Duo - Supportact tba",
+              "detail": "Kulturzentrum Presswerk, Arbon",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/arbon/wohnzimmerkonzert-mit-mainact-the-great-stoyan-duo-supportact-tba_AnHmv3m"
+            },
+            {
+              "label": "Inbalanceleben am Bodensee QiGong-Meditation-Achtsamkeit",
+              "detail": "See & Park Hotel Feldbach, Steckborn",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/inbalanceleben-am-bodensee-qigong-meditation-achtsamkeit/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/thurgau/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -391,7 +391,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-10-31T20:43:08.728Z"
         }
       ],
       "curatedArticles": [
@@ -419,7 +419,7 @@
           "url": "/de/veranstaltungen/thurgau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "fr": {
       "canton": "TG",
@@ -429,7 +429,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "45",
+          "value": "42",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -440,69 +440,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Fiire mit de Chliine",
-              "detail": "Weinfelden",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fiire-mit-de-chliine-5/"
-            },
-            {
-              "label": "Manik Sarkar",
-              "detail": "Weinfelden",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/manik-sarkar/"
-            },
-            {
-              "label": "\"Dominanzgesten & Führungsanfragen\" Themenabend mit Katrin Scholz",
-              "detail": "Märstetten",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dominanzgesten-fuehrungsanfragen-themenabend-mit-katrin-scholz/"
-            },
-            {
-              "label": "Konzert Singing People",
-              "detail": "Katholische Kirche",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/tobel/konzert-singing-people_ArZgxnt"
-            },
-            {
-              "label": "Konzert Singing People",
-              "detail": "Katholische Kirche, Tobel-Tägerschen",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/konzert-singing-people-4/"
-            },
-            {
-              "label": "Dussex's Soultrain feat. Freda Goodlett",
+              "label": "Circle-Songs – Tageskurs",
               "detail": "Eisenwerk, Frauenfeld",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/dussexs-soultrain-feat-freda-goodlett_AFaJH1W"
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/frauenfeld/circle-songs-tageskurs_AiX5sKd"
             },
             {
-              "label": "Helene Bracht",
-              "detail": "Weinfelden",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helene-bracht/"
-            },
-            {
-              "label": "Ulan & Bator - Überraschungszwei",
-              "detail": "Löwen Arena, Sommeri",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ulan-bator-ueberraschungszwei/"
-            },
-            {
-              "label": "Diamante im Stroh",
-              "detail": "Hefenhofen — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/diamante-im-stroh/"
+              "label": "Ittinger Sonntagskonzert – Ensemble Orion",
+              "detail": "Warth-Weiningen",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ittinger-sonntagskonzert-ensemble-orion/"
             },
             {
               "label": "La Table d'Amis | Tavolata",
               "detail": "Restaurant Seegarten, Kreuzlingen — en cours, dernier jour : 13 novembre 2026",
-              "date": "2026-10-31",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
+            },
+            {
+              "label": "Philosophie im Löchlgaischt",
+              "detail": "Eschenz — en cours, dernier jour : 24 novembre 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
+            },
+            {
+              "label": "Schulden- und Budgetberatungen Caritas",
+              "detail": "Haus Weisser, Kreuzlingen",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schulden-und-budgetberatungen-caritas-16/"
+            },
+            {
+              "label": "30 Minuten Orgelmusik",
+              "detail": "Evang.-ref. Kirche Weinfelden, Weinfelden",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/30-minuten-orgelmusik-12/"
+            },
+            {
+              "label": "Metropolis",
+              "detail": "Kulturhaus APOLLO, Kreuzlingen",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/metropolis/"
+            },
+            {
+              "label": "Forum «Zupfer»",
+              "detail": "Musikschule Weinfelden, Weinfelden",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/weinfelden/forum-zupfer_A5tU3bq"
+            },
+            {
+              "label": "Wohnzimmerkonzert mit Mainact The Great Stoyan Duo - Supportact tba",
+              "detail": "Kulturzentrum Presswerk, Arbon",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/arbon/wohnzimmerkonzert-mit-mainact-the-great-stoyan-duo-supportact-tba_AnHmv3m"
+            },
+            {
+              "label": "Inbalanceleben am Bodensee QiGong - Méditation - Achtsamkeit",
+              "detail": "See & Park Hotel Feldbach, Steckborn",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/inbalanceleben-am-bodensee-qigong-meditation-achtsamkeit/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/thurgovie/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -525,7 +525,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-10-31T20:43:08.728Z"
         }
       ],
       "curatedArticles": [
@@ -553,7 +553,7 @@
           "url": "/fr/evenements/thurgovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     }
   }
 }

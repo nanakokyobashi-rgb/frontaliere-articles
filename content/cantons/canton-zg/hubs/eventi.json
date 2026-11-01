@@ -4,12 +4,12 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "eventi",
-  "updatedAt": "2026-10-31T06:15:08.747Z",
-  "contentHash": "864e1b56ae77d4e7a0275176339b3c48a055840e0a7848034909a108d4682bb8",
+  "updatedAt": "2026-11-01T13:11:05.408Z",
+  "contentHash": "a71b67003aeb99cae057ab32d9b88bbf33b40dc58c933a6796f8c905e8c27723",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-30T13:23:17.161Z",
+      "updatedAt": "2026-10-31T14:21:36.178Z",
       "keyFacts": 1
     }
   ],
@@ -33,33 +33,21 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "ZuKi-Halloween",
-              "detail": "Cham",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zuki-halloween/"
-            },
-            {
-              "label": "Manuel Stahlberger - ES GEHT",
-              "detail": "Theater im Burgbachkeller",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/manuel-stahlberger-es-geht_A7Hw3u3"
-            },
-            {
               "label": "Galgen, Rad und Scheiterhaufen. Die Taschenlampenführung für Erwachsene",
               "detail": "Museum Burg Zug, Zug — in corso, ultimo giorno: 27 novembre 2026",
-              "date": "2026-10-31",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
             },
             {
               "label": "Zuger Messe 2026",
               "detail": "Stierenmarktareal, Zug — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-10-31",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/fr-ch/experiences/events/zuger-messe-2026/"
             },
             {
               "label": "Gemeinsam sprechen und lernen",
               "detail": "Zug — in corso, ultimo giorno: 10 novembre 2026",
-              "date": "2026-10-31",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
             },
             {
@@ -91,11 +79,23 @@
               "detail": "aigu Restaurant & Bar",
               "date": "2026-11-06",
               "url": "https://www.guidle.com/it/eventi/musica/zugo/cena-soul-con-camen-und-band_AdaQ1B1"
+            },
+            {
+              "label": "Cena soul con Camen & Band",
+              "detail": "Zugo, Zug",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/cena-soul-con-camen-band/"
+            },
+            {
+              "label": "Wine & Dine «Donnafugata»",
+              "detail": "Zug",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-dine-donnafugata-1/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zugo/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/zugo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "en": {
       "canton": "ZG",
@@ -138,33 +138,21 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "ZuKi-Halloween",
-              "detail": "Cham",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zuki-halloween/"
-            },
-            {
-              "label": "Manuel Stahlberger - ES GEHT",
-              "detail": "Theater im Burgbachkeller",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/manuel-stahlberger-es-geht_A7Hw3u3"
-            },
-            {
               "label": "Gallows, Wheel, and Pyre: A Flashlight Tour for Adults",
               "detail": "Museum Burg Zug, Zug — ongoing, last day: 27 November 2026",
-              "date": "2026-10-31",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
             },
             {
               "label": "Zuger Messe 2026",
               "detail": "Stierenmarktareal, Zug — ongoing, last day: 1 November 2026",
-              "date": "2026-10-31",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/fr-ch/experiences/events/zuger-messe-2026/"
             },
             {
               "label": "Gemeinsam sprechen und lernen",
               "detail": "Zug — ongoing, last day: 10 November 2026",
-              "date": "2026-10-31",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
             },
             {
@@ -196,11 +184,23 @@
               "detail": "aigu Restaurant & Bar",
               "date": "2026-11-06",
               "url": "https://www.guidle.com/it/eventi/musica/zugo/cena-soul-con-camen-und-band_AdaQ1B1"
+            },
+            {
+              "label": "Soul Dinner with Camen & Band",
+              "detail": "Zugo, Zug",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/cena-soul-con-camen-band/"
+            },
+            {
+              "label": "Wine & Dine «Donnafugata»",
+              "detail": "Zug",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-dine-donnafugata-1/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zug/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/zug/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "de": {
       "canton": "ZG",
@@ -243,33 +243,21 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "ZuKi-Halloween",
-              "detail": "Cham",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zuki-halloween/"
-            },
-            {
-              "label": "Manuel Stahlberger - ES GEHT",
-              "detail": "Theater im Burgbachkeller",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/manuel-stahlberger-es-geht_A7Hw3u3"
-            },
-            {
               "label": "Galgen, Rad und Scheiterhaufen. Die Taschenlampenf Acrymmhrung f acrymmr er Acrymmachsene",
               "detail": "Museum Burg Zug, Zug — läuft, letzter Tag: 27. November 2026",
-              "date": "2026-10-31",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
             },
             {
               "label": "Zuger Messe 2026",
               "detail": "Stierenmarktareal, Zug — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-10-31",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/fr-ch/experiences/events/zuger-messe-2026/"
             },
             {
               "label": "Gemeinsam sprechen und lernen",
               "detail": "Zug — läuft, letzter Tag: 10. November 2026",
-              "date": "2026-10-31",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
             },
             {
@@ -301,11 +289,23 @@
               "detail": "aigu Restaurant & Bar",
               "date": "2026-11-06",
               "url": "https://www.guidle.com/it/eventi/musica/zugo/cena-soul-con-camen-und-band_AdaQ1B1"
+            },
+            {
+              "label": "Soul Dinner mit Camen & Band",
+              "detail": "Zugo, Zug",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/cena-soul-con-camen-band/"
+            },
+            {
+              "label": "Wine & Dine «Donnafugata»",
+              "detail": "Zug",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-dine-donnafugata-1/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zug/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/zug/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "fr": {
       "canton": "ZG",
@@ -348,33 +348,21 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "ZuKi-Halloween",
-              "detail": "Cham",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zuki-halloween/"
-            },
-            {
-              "label": "Manuel Stahlberger - ES GEHT",
-              "detail": "Theater im Burgbachkeller",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/manuel-stahlberger-es-geht_A7Hw3u3"
-            },
-            {
               "label": "La potence, la roue et le bûcher. La visite guidée à la lampe de poche pour adultes",
               "detail": "Museum Burg Zug, Zug — en cours, dernier jour : 27 novembre 2026",
-              "date": "2026-10-31",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
             },
             {
               "label": "Zuger Messe 2026",
               "detail": "Stierenmarktareal, Zug — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-10-31",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/fr-ch/experiences/events/zuger-messe-2026/"
             },
             {
               "label": "Gemeinsam sprechen und lernen",
               "detail": "Zug — en cours, dernier jour : 10 novembre 2026",
-              "date": "2026-10-31",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
             },
             {
@@ -406,11 +394,23 @@
               "detail": "aigu Restaurant & Bar",
               "date": "2026-11-06",
               "url": "https://www.guidle.com/it/eventi/musica/zugo/cena-soul-con-camen-und-band_AdaQ1B1"
+            },
+            {
+              "label": "Soirée « Soul Dinner » avec Camen et son groupe",
+              "detail": "Zugo, Zug",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/cena-soul-con-camen-band/"
+            },
+            {
+              "label": "Wine & Dine «Donnafugata»",
+              "detail": "Zug",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-dine-donnafugata-1/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zoug/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/zoug/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     }
   }
 }
