@@ -60,7 +60,7 @@ export const YMYL_SOURCES_BRIEF_CH = sourcesBrief([
   OFFICIAL_SOURCE_LINKS.find(({ label }) => label === 'UFAS'),
 ]);
 
-const YMYL_RE = /(?:^| )(?:tasse(?: |$)|tassazion|tassa salute|tassa sulla salute|tassa sanitaria|imposta(?: |$)|imposte(?: |$)|irpef|dichiarazione dei redditi|franchigia|detrazion|deduzion|avs|lpp|pilastro|previdenz|pension|inps|naspi|ristorn|lamal|cassa malati|casse malati|assicurazione malattia|premi malattia|servizio sanitario|ssn(?: |$)|accordo fiscale|doppia imposizione|fisco|fiscal)/;
+const YMYL_RE = /(?:^| )(?:tasse(?: |$)|tassazion|tassa salute|tassa sulla salute|tassa sanitaria|imposta(?: |$)|imposte(?: |$)|irpef|dichiarazione dei redditi|franchigia|detrazion|deduzion|avs|lpp|pilastro|previdenz|pension|inps|naspi|ristorn|lamal|cassa malati|casse malati|assicurazione malattia|premi malattia|sanita|salute|malattia|servizio sanitario|ssn(?: |$)|accordo fiscale|doppia imposizione|fisco|fiscal)/;
 
 /**
  * @param {{id?: string, title?: string, excerpt?: string}} article testi italiani
