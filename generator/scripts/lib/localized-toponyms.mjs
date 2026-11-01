@@ -542,21 +542,29 @@ function localizedToponymHits(value, {
 } = {}) {
   const normalizedText = normalizeToponymMatchText(value);
   const text = withoutUrls(normalizedText);
-  const protectedNameRanges = protectNames
-    ? protectedRanges(normalizedText, sourceText, sourceSearchText)
-    : [];
-  const hits = [];
+  const matches = [];
   const pattern = slug ? TOPONYM_SLUG_PATTERN : TOPONYM_PATTERN;
   for (const match of text.matchAll(pattern)) {
     const start = match.index ?? 0;
     const end = start + match[0].length;
-    if (protectedNameRanges.some(([rangeStart, rangeEnd]) => start >= rangeStart && end <= rangeEnd)) continue;
     const indexKey = slug ? localizedSlugForm(match[0]) : normalizeForm(match[0]);
     const descriptors = (slug ? SLUG_FORM_INDEX : FORM_INDEX).get(indexKey) || [];
     const observedForm = slug ? localizedSlugForm(match[0]) : normalizeForm(match[0]);
-    hits.push(...descriptors.map((descriptor) => ({ ...descriptor, observedForm })));
+    if (descriptors.length > 0) matches.push({ start, end, descriptors, observedForm });
   }
-  return hits;
+  if (matches.length === 0) return [];
+
+  // Protecting official names runs several broad name-span expressions and
+  // re-normalizes the source. Most fields contain no localized toponym at all,
+  // so defer that work until the cheap candidate scan has found something to
+  // filter. The returned hits and protection semantics remain unchanged.
+  const protectedNameRanges = protectNames
+    ? protectedRanges(normalizedText, sourceText, sourceSearchText)
+    : [];
+  return matches.flatMap(({ start, end, descriptors, observedForm }) => {
+    if (protectedNameRanges.some(([rangeStart, rangeEnd]) => start >= rangeStart && end <= rangeEnd)) return [];
+    return descriptors.map((descriptor) => ({ ...descriptor, observedForm }));
+  });
 }
 
 /** Reuse the expensive source-language analysis across translated fields. */

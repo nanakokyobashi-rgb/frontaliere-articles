@@ -91,6 +91,17 @@ test('rileva un esonimo copiato e accetta la forma giusta', () => {
   );
 });
 
+test('il profilo della sorgente riusa l analisi senza cambiare il verdetto', () => {
+  const sourceText = 'Notizia sul cantone di Zurigo e sul lavoro a Lucerna.';
+  const targetText = 'News from Lucerna and Zurich.';
+  const expected = findLocalizedToponymMismatches({ sourceText, targetText, locale: 'en' });
+  const sourceProfile = createLocalizedToponymSourceProfile(sourceText);
+  assert.deepEqual(
+    findLocalizedToponymMismatches({ sourceText, targetText, locale: 'en', sourceProfile }),
+    expected,
+  );
+});
+
 test('normalizza le entità HTML prima del gate e della riparazione', () => {
   assert.equal(normalizeLocalizedToponymText('Z&uuml;rich &amp; Lucerna'), 'Zürich & Lucerna');
   assert.deepEqual(
