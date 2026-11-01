@@ -55,6 +55,10 @@
     "canton-sz::https://www.einsiedeln.ch/verwaltung/mitteilungen/aktuelle-mitteilungen?m=4563": {
       "section": "canton-sz",
       "ts": 1793548771113
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/schweizundwelt/immobilien-zinsanstieg-wird-gefahr-fuer-hausbesitzer-oder-kommt-alles-anders-art-1729703": {
+      "section": "canton-sz",
+      "ts": 1793564045213
     }
   }
 }
