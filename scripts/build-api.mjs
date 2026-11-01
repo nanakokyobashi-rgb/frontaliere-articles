@@ -1137,6 +1137,10 @@ let rssItemTotal = 0;
 const familyRssRows = [];
 for (const section of rssSections) {
   const familyPolicy = floorPolicyOf(section.id) === 'family';
+  // A historical section may legitimately have no feed when every parsed SEO
+  // entry is withdrawn by the index ledger. Unknown dates alone are not enough
+  // to bypass the empty-feed guard: they still indicate an incomplete source.
+  const ledgerOnly = section.articleCount === 0 && section.withdrawnArticleCount > 0;
   // I feed di una sezione di famiglia sono una superficie di LETTURA (titoli,
   // estratti, link agli articoli): escono su Pages solo se la release di
   // questo build dichiara la sezione live. Per una sezione draft, ritirata o
@@ -1144,7 +1148,7 @@ for (const section of rssSections) {
   // pubblico ne esporrebbe comunque gli articoli. Il feed si costruisce lo
   // stesso (il pavimento qui sotto lo giudica), ma non si scrive.
   const publishFeeds = !familyPolicy || releaseLiveSections.has(section.id);
-  if (section.feeds.length === 0 && !familyPolicy) {
+  if (section.feeds.length === 0 && !familyPolicy && !ledgerOnly) {
     throw new Error(
       `rss: section '${section.id}' produced no feeds (${section.articleCount} articles parsed) — refusing to publish`,
     );
@@ -1152,7 +1156,15 @@ for (const section of rssSections) {
   let sectionItems = 0;
   for (const [name, xml] of section.feeds) {
     const items = countXmlTags(xml, 'item');
-    if (items === 0 && !familyPolicy) throw new Error(`rss: ${name} has no <item> entries — refusing to publish`);
+    if (items === 0 && !familyPolicy && !ledgerOnly) {
+      throw new Error(`rss: ${name} has no <item> entries — refusing to publish`);
+    }
+    if (items > 0 && ledgerOnly) {
+      throw new Error(
+        `rss: ${name} emitted ${items} <item> entries although all ${section.withdrawnArticleCount} `
+          + 'SEO entries are withdrawn by article-index-exclusions — refusing to publish',
+      );
+    }
     sectionItems += items;
     // The feeds come out of engine/rssFeeds.mjs, which arrives by mirror and is
     // not ours to edit here (a change would be overwritten on the next mirror

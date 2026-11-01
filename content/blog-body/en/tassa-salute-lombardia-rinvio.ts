@@ -3,6 +3,7 @@ const bodyTassaSaluteLombardiaRinvio: Record<string, string> = {
  'blog.article.tassa-salute-lombardia-rinvio.body2': '## Recommended tools\nFor an updated estimate, use the [net salary calculator](nav:calculator) and the [CHF-EUR exchange comparator](nav:exchange).',
  'blog.article.tassa-salute-lombardia-rinvio.body3': 'Our source is the article published on ComoZero on 5 March 2026.',
  'blog.article.tassa-salute-lombardia-rinvio.faq': '[{"q":"What is the current status of the application of the health tax for border workers in Lombardy?","a":"The Lombardy Region has postponed the application, creating uncertainty."}]',
+    'blog.article.tassa-salute-lombardia-rinvio.body4': 'The report describes a political postponement: it is not confirmation of an exemption and does not set a final deadline by itself.',
 };
 
 export default bodyTassaSaluteLombardiaRinvio;

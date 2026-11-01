@@ -3,6 +3,7 @@ const bodyTassaSaluteFrontalieriLombardiaPiemonte: Record<string, string> = {
     'blog.article.tassa-salute-frontalieri-lombardia-piemonte.body2': '## Useful tools to protect your net income\nTo reduce FX leakage, compare [CHF-EUR exchange options](nav:exchange) and [banks for cross-border workers](nav:banks).',
     'blog.article.tassa-salute-frontalieri-lombardia-piemonte.body3': '*Source: [comozero.it](https://comozero.it/attualita/il-caos-tassa-salute-e-frontalieri-la-lombardia-richiama-allordine-ma-dal-piemonte-un-secco-no/)*',
     'blog.article.tassa-salute-frontalieri-lombardia-piemonte.faq': '[]',
+    'blog.article.tassa-salute-frontalieri-lombardia-piemonte.body4': '### Why the regional comparison matters\nThe article compares the position reported in Lombardy with the refusal expressed by Piedmont. These are political positions, not two personalised calculations and not proof that the rule is already applied in the same way everywhere. For a cross-border worker, the region of residence remains decisive together with national law and any implementing measures. The reported disagreement explains the uncertainty but cannot establish an individual amount.',
 };
 
 export default bodyTassaSaluteFrontalieriLombardiaPiemonte;

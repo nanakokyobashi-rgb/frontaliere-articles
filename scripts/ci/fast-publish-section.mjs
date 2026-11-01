@@ -46,6 +46,7 @@
  * Solo builtin Node: gira nel primo step del workflow, prima di setup-node.
  */
 import '../../host/cantonSectionsBootstrap.mjs';
+import { articleIndexExclusionKey, parseArticleIndexExclusions } from '../../engine/shared/articleIndexExclusions.mjs';
 import { execFileSync } from 'node:child_process';
 import { existsSync, readFileSync, realpathSync } from 'node:fs';
 import path from 'node:path';
@@ -549,6 +550,18 @@ function canonicalOverrideChangedIds(previous, next, previousSlugRecords, nextSl
   return canonicalIdsForSlugs(changedSlugs, [previousSlugRecords, nextSlugRecords], candidateIds);
 }
 
+/**
+ * Un articolo che entra o esce dal ledger cambia il robots della sua pagina senza
+ * cambiare corpo, meta o SEO: va ripubblicato, o il noindex resta solo sulla carta.
+ */
+const ARTICLE_INDEX_EXCLUSIONS_FILE = 'content/article-index-exclusions.json';
+
+function indexExclusionChangedKeys(previous, next) {
+  const before = previous === null ? new Set() : parseArticleIndexExclusions(previous);
+  const after = next === null ? new Set() : parseArticleIndexExclusions(next);
+  return [...before, ...after].filter((key) => before.has(key) !== after.has(key));
+}
+
 function articleSurfaceKind(rel, section) {
   const surfaces = sectionSourceSurfaces(section.section);
   if (rel === surfaces.registryFile) return 'registry';
@@ -682,6 +695,15 @@ export function articlePublishPlan(
   const targets = new Map(sections.map((section) => [section.section, new Set()]));
 
   for (const { rel } of changedFileRecords(files)) {
+    if (rel === ARTICLE_INDEX_EXCLUSIONS_FILE) {
+      const changed = indexExclusionChangedKeys(sourceText(readPreviousSource, rel), sourceText(readCurrentSource, rel));
+      for (const section of sections) {
+        for (const id of registeredBySection.get(section.section)) {
+          if (changed.includes(articleIndexExclusionKey(section.section, id))) targets.get(section.section).add(id);
+        }
+      }
+      continue;
+    }
     const dependencyOwners = sectionBySurface.filter(({ section }) => (
       !articleSurfaceKind(rel, section)
       && registryDependencyChanged(
@@ -1085,7 +1107,12 @@ export function shardOf(section, coreList = activeCorpusCoreEntries()) {
 export function r2PublishPlan(
   files,
   coreList = activeCorpusCoreEntries(),
-  { registryRefreshSections = [], registryCleanupSections = [] } = {},
+  {
+    registryRefreshSections = [],
+    registryCleanupSections = [],
+    readCurrentSource = (rel) => (existsSync(rel) ? readFileSync(rel, 'utf8') : null),
+    readPreviousSource = () => null,
+  } = {},
 ) {
   const sections = activeSourceSections(coreList).filter((s) => !s.shardKey);
   const plan = new Map();
@@ -1111,6 +1138,17 @@ export function r2PublishPlan(
   }
   for (const { rel, status } of changedFiles) {
     if (!rel) continue;
+    if (rel === ARTICLE_INDEX_EXCLUSIONS_FILE) {
+      // Stessa transizione del piano degli shard: l'HTML su R2 porta il robots.
+      const changed = indexExclusionChangedKeys(sourceText(readPreviousSource, rel), sourceText(readCurrentSource, rel));
+      for (const section of sections) {
+        const prefix = articleIndexExclusionKey(section.section, '');
+        for (const key of changed) {
+          if (key.startsWith(prefix)) touch(section.section).ids.add(key.slice(prefix.length));
+        }
+      }
+      continue;
+    }
     const body = sectionForBodyPath(rel, coreList);
     if (body) {
       const target = sections.find((s) => s.section === body.section);
@@ -1193,9 +1231,12 @@ if (isMain()) {
           .filter(({ removeStaleCantonRssFeeds }) => removeStaleCantonRssFeeds)
           .map(({ section }) => section);
       }
+      let ledgerBefore = process.env.PUSH_BEFORE ?? '';
+      if (!/^[a-f0-9]{40,64}$/i.test(ledgerBefore) || /^0+$/.test(ledgerBefore)) ledgerBefore = 'HEAD~1';
       console.log(JSON.stringify(r2PublishPlan(files, activeCorpusCoreEntries(), {
         registryRefreshSections,
         registryCleanupSections,
+        readPreviousSource: (rel) => gitSourceAtRevision(ledgerBefore, rel),
       })));
     }
     else if (cmd === 'r2-reconcile-plan') {
