@@ -19,6 +19,10 @@
     "canton-ur::https://www.ur.ch/_rte/information/139192": {
       "section": "canton-ur",
       "ts": 1793450233115
+    },
+    "canton-ur::http://www.urnerwochenblatt.ch/artikel/auto-brennt-am-oberalppass-vollstaendig-aus": {
+      "section": "canton-ur",
+      "ts": 1793567739866
     }
   }
 }
