@@ -404,10 +404,10 @@ function containsTokenBoundedText(text, candidate) {
  * is protected only when the same marker-anchored span exists in the Italian
  * source, with a translated leading article or preposition removed.
  */
-function sourceIdenticalNameRanges(value, sourceText) {
+function sourceIdenticalNameRanges(value, sourceText, sourceSearchText = null) {
   if (!sourceText) return [];
   const text = normalizeToponymMatchText(value);
-  const sourceSearchText = normalizeNameSearchText(sourceText);
+  const sourceSearchValue = sourceSearchText ?? normalizeNameSearchText(sourceText);
   const knownToponymRanges = [];
   TOPONYM_PATTERN.lastIndex = 0;
   for (const match of withoutUrls(text).matchAll(TOPONYM_PATTERN)) {
@@ -420,7 +420,7 @@ function sourceIdenticalNameRanges(value, sourceText) {
     if (!knownToponymRanges.some(([toponymStart, toponymEnd]) => toponymStart >= start && toponymEnd <= end)) return;
     if (!isLikelyProperNameSpan(candidate)) return;
     const candidateSearchText = normalizeNameSearchText(candidate);
-    if (!candidateSearchText || !containsTokenBoundedText(sourceSearchText, candidateSearchText)) return;
+    if (!candidateSearchText || !containsTokenBoundedText(sourceSearchValue, candidateSearchText)) return;
     ranges.push([start, end]);
   };
   const addMarkerAnchoredSubspans = (start, end) => {
@@ -503,7 +503,7 @@ function mapNormalizedRangesToRaw(value, ranges) {
   ]);
 }
 
-function protectedRanges(value, sourceText = '') {
+function protectedRanges(value, sourceText = '', sourceSearchText = null) {
   const ranges = [];
   const rawText = String(value);
   const text = normalizeToponymMatchText(rawText);
@@ -513,7 +513,7 @@ function protectedRanges(value, sourceText = '') {
       ranges.push([match.index ?? 0, (match.index ?? 0) + match[0].length]);
     }
   }
-  ranges.push(...sourceIdenticalNameRanges(text, sourceText));
+  ranges.push(...sourceIdenticalNameRanges(text, sourceText, sourceSearchText));
   return mapNormalizedRangesToRaw(rawText, ranges);
 }
 
@@ -534,10 +534,17 @@ function replaceOutsideUrls(value, pattern, replacer) {
   return result + replaceSegment(text.slice(cursor), cursor);
 }
 
-function localizedToponymHits(value, { protectNames = false, sourceText = '', slug = false } = {}) {
+function localizedToponymHits(value, {
+  protectNames = false,
+  sourceText = '',
+  sourceSearchText = null,
+  slug = false,
+} = {}) {
   const normalizedText = normalizeToponymMatchText(value);
   const text = withoutUrls(normalizedText);
-  const protectedNameRanges = protectNames ? protectedRanges(normalizedText, sourceText) : [];
+  const protectedNameRanges = protectNames
+    ? protectedRanges(normalizedText, sourceText, sourceSearchText)
+    : [];
   const hits = [];
   const pattern = slug ? TOPONYM_SLUG_PATTERN : TOPONYM_PATTERN;
   for (const match of text.matchAll(pattern)) {
@@ -552,16 +559,38 @@ function localizedToponymHits(value, { protectNames = false, sourceText = '', sl
   return hits;
 }
 
+/** Reuse the expensive source-language analysis across translated fields. */
+export function createLocalizedToponymSourceProfile(sourceText = '') {
+  const text = String(sourceText ?? '');
+  return {
+    sourceText: text,
+    sourceEntities: new Set(localizedToponymHits(text).map((hit) => hit.entity.code)),
+    sourceSearchText: normalizeNameSearchText(text),
+  };
+}
+
 /**
  * Finds a localized exonym copied from another locale. The Italian source is
  * used only to establish which Swiss place the article is about; a foreign
  * place name mentioned in an unrelated article is never judged.
  */
-export function findLocalizedToponymMismatches({ sourceText = '', targetText = '', locale, slug = false } = {}) {
+export function findLocalizedToponymMismatches({
+  sourceText = '',
+  targetText = '',
+  locale,
+  slug = false,
+  sourceProfile = null,
+} = {}) {
   if (!LOCALE_SET.has(locale)) return [];
-  const sourceEntities = new Set(localizedToponymHits(sourceText).map((hit) => hit.entity.code));
+  const profile = sourceProfile || createLocalizedToponymSourceProfile(sourceText);
+  const sourceEntities = profile.sourceEntities;
   if (sourceEntities.size === 0) return [];
-  const targetHits = localizedToponymHits(targetText, { protectNames: true, sourceText, slug });
+  const targetHits = localizedToponymHits(targetText, {
+    protectNames: true,
+    sourceText: profile.sourceText,
+    sourceSearchText: profile.sourceSearchText,
+    slug,
+  });
   const issues = [];
   for (const entity of LOCALIZED_TOPONYMS) {
     if (!sourceEntities.has(entity.code)) continue;
