@@ -15,7 +15,7 @@ import { readFileSync } from 'node:fs';
 import { isManagedReview, REDFLAG_IMPORTANT_RE } from './lib/constants.mjs';
 import { fetchPrFiles } from './lib/fetchPrFiles.mjs';
 import { isTerminalReviewState } from './lib/review-states.mjs';
-import { REVIEW_INPUT_REVISION_MARKER_RE } from './review-test-policy.mjs';
+import { isReviewTestPath, REVIEW_INPUT_REVISION_MARKER_RE } from './review-test-policy.mjs';
 import { createGithubIssue } from '../lib/github-issue-creator.mjs';
 import { evaluateBodyContract } from '../lib/pr-body-contract-eval.mjs';
 import {
@@ -544,6 +544,96 @@ function gh(args, { json = true } = {}) {
   return json ? JSON.parse(output) : output;
 }
 
+const FINGERPRINT_REPO = process.env.GITHUB_REPOSITORY || process.env.REPO || '';
+
+/**
+ * Fingerprint del CONTRIBUTO PROPRIO della PR a un dato commit `sha` =
+ * il diff vs il merge-base con main (3-dot), indipendente dalla churn di main.
+ * Usato per il carry-forward dell'LGTM su un rebase di solo-merge-di-main:
+ * se il contributo a `sha` è byte-identico a quello su cui claude[bot] aveva
+ * dato `## LGTM`, il codice approvato non è cambiato → l'approvazione regge,
+ * SENZA ri-eseguire la review (zero Claude). Tutto via compare API (nessun
+ * git locale → il chiamante non ha bisogno di un checkout).
+ * Conservativo: qualunque incertezza (compare troncato, patch mancanti su file
+ * grossi, errore API) → ritorna null → niente carry-forward (stale come prima).
+ *
+ * Questo helper vive nel modulo condiviso del classificatore. `auto-merge-eval`
+ * lo consuma, ma non può essere il provider: la CLI di questo modulo usa un
+ * top-level `await` e non deve importare il proprio consumer.
+ */
+export function prContributionFingerprint(sha) {
+  let mb;
+  try {
+    mb = gh(['api', `repos/${FINGERPRINT_REPO}/compare/main...${sha}`, '--jq', '.merge_base_commit.sha'],
+      { json: false }).trim();
+  } catch { return null; }
+  if (!mb) return null;
+  let cmp;
+  try {
+    cmp = gh(['api', `repos/${FINGERPRINT_REPO}/compare/${mb}...${sha}`]);
+  } catch { return null; }
+  if (!cmp || !Array.isArray(cmp.files)) return null;
+  // compare API tronca a 300 file e omette `.patch` su file molto grandi: in
+  // entrambi i casi non posso garantire l'identita' -> bail conservativo.
+  if (cmp.files.length >= 300) return null;
+  return codeContributionFingerprint(cmp.files);
+}
+
+// File NON reviewabili come code (dati/static rigenerati): esclusi dal
+// fingerprint del contributo. Stessa lista del tier-gate della review in tests.yml
+// e degli exclude del diff reviewer. Così un push che tocca SOLO questi NON
+// cambia il fingerprint CODE → il carry-forward dell'LGTM regge senza
+// ri-eseguire la review (zero Claude), mentre il gate dei test resta sull'head
+// fresco. Prima il carry-forward valeva SOLO per i rebase di puro main-merge;
+// ora anche per i push di solo corpus.
+//
+// ── L'ALBERO E' QUELLO DI QUESTO REPO, e fino al 2026-09-03 non lo era ──────
+// La lista era arrivata dal sito PAROLA PER PAROLA (`data|public|reports|
+// _newsletter_variants|docs`), cioè nominando due cartelle che qui non esistono
+// e OMETTENDO `content/` e `dist/` — le uniche due che qui cambiano da sole. Il
+// risultato è che il carry-forward, la cui ragione d'essere su questo repo è
+// proprio la churn del corpus (~90 push al giorno su `main` che riscrivono
+// `content/`), non scattava MAI sul caso per cui esiste: ogni rigenerazione
+// cambiava il fingerprint e faceva ripartire una review a vuoto. La stessa
+// lista, nella forma corpus, sta in `NONCODE_RE` dentro `tests.yml`.
+export const NON_REVIEWABLE_FINGERPRINT_RE = /^(content|data|dist|public)\//;
+// I workflow crawler sono proiezioni generate dal sito: la compare API di
+// GitHub puo' elencarli senza `.patch` quando la PR contiene il batch completo.
+// Il generatore, il contratto e la logica restano code reviewabili; qui si
+// escludono solo gli artefatti YAML per non trasformare l'assenza di patch in
+// un falso `UNKNOWN` durante un rebase su main.
+export const GENERATED_CRAWLER_WORKFLOW_RE = /^\.github\/workflows\/crawler-group-\d+\.yml$/;
+
+/**
+ * Costruisce il fingerprint del contributo CODE da `files` (l'array `.files`
+ * della compare API). Puro (niente gh) → testabile. Esclude i file non-code; un
+ * file dati con `.patch` omesso (troppo grande) viene scartato PRIMA del bail,
+ * così la churn dati non forza un bail conservativo. Bail (null) solo se un file
+ * CODE modificato non ha patch (binario/troppo grande → identità non garantita).
+ */
+export function codeContributionFingerprint(files) {
+  if (!Array.isArray(files)) return null;
+  const parts = [];
+  for (const f of files) {
+    if ((isReviewTestPath(f.filename) && (!f.previous_filename || isReviewTestPath(f.previous_filename)))
+      || NON_REVIEWABLE_FINGERPRINT_RE.test(f.filename || '')
+      || GENERATED_CRAWLER_WORKFLOW_RE.test(f.filename || '')) continue; // dati/static/generated: non è contributo CODE
+    // `patch` assente (binario/troppo grande) su un file CODE modificato -> bail.
+    if (f.patch === undefined && f.status !== 'removed' && f.status !== 'added') return null;
+    // Tieni SOLO le righe di contenuto +/- (escludi header +++/--- e hunk @@):
+    // il fingerprint resta invariante allo shift di contesto/numero-riga indotto
+    // dalla churn di main attorno al diff della PR (un merge pulito di main NON
+    // cambia il contenuto proprio +/- della PR).
+    const changed = (f.patch || '')
+      .split('\n')
+      .filter((l) => (l.startsWith('+') || l.startsWith('-')) && !l.startsWith('+++') && !l.startsWith('---'))
+      .join('\n');
+    parts.push([f.filename, f.status, changed].join('\t'));
+  }
+  parts.sort();
+  return parts.join('\n--FILE--\n');
+}
+
 function fetchChangedFiles(repo, pr) {
   return fetchPrFiles(Number(pr), gh, repo);
 }
@@ -826,10 +916,9 @@ async function resolveFormalReviewContext(body, { repo, pr, prUrl } = {}) {
         || String(selected.id).trim() === '') return null;
     let reviewCarryForwardValidated = false;
     if (reviewCommit.toLowerCase() !== headSha.toLowerCase()) {
-      // The canonical fingerprint implementation belongs to the legacy
-      // auto-merge consumer. Load it only for this stale-review recovery path
-      // so exact-HEAD calls do not introduce a module cycle or extra API work.
-      const { prContributionFingerprint } = await import('./auto-merge-eval.mjs');
+      // Keep this recovery path on the acyclic shared helper above. In
+      // particular, do not import auto-merge-eval here: its static import of
+      // this module would deadlock the CLI's top-level await.
       const headFingerprint = prContributionFingerprint(headSha);
       const reviewFingerprint = prContributionFingerprint(reviewCommit);
       reviewCarryForwardValidated = Boolean(

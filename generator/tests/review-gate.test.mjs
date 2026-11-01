@@ -436,6 +436,17 @@ test('reviewCommit mancante o stantio resta fail-closed prima della classificazi
   }
 });
 
+test('la CLI di review-scope non reimporta il consumer nel carry-forward stale', () => {
+  const scope = readFileSync(path.join(ROOT, 'scripts/ci/review-scope.mjs'), 'utf8');
+  const autoMerge = readFileSync(path.join(ROOT, 'scripts/ci/auto-merge-eval.mjs'), 'utf8');
+  assert.match(scope, /export function prContributionFingerprint\(sha\)/u);
+  assert.match(scope, /const headFingerprint = prContributionFingerprint\(headSha\)/u);
+  assert.doesNotMatch(scope, /import\(['"]\.\/auto-merge-eval\.mjs['"]\)/u,
+    'il percorso CLI non deve reimportare il consumer mentre il top-level await è sospeso');
+  assert.match(autoMerge, /prContributionFingerprint,\s*\n\}\s*from ['"]\.\/review-scope\.mjs['"]/u,
+    'auto-merge-eval deve consumare la stessa implementazione aciclica');
+});
+
 test('Important che inizia con nessuno resta rosso se cita un file nel diff', () => {
   const r = runGate({
     reviews: [botReview(HEAD, [
