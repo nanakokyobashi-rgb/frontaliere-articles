@@ -2308,7 +2308,11 @@ test('publisher: una pagina con noindex, senza meta di proprieta\', con asset sa
   const articleNoindex = good
     .replace(page.apexUrl, article.apexUrl)
     .replace('index, follow', 'noindex, follow');
-  assert.deepEqual(pageDefects(article, articleNoindex), [], 'un articolo ritirato puo\' restare noindex,follow');
+  assert.match(
+    pageDefects(article, articleNoindex).join('|'),
+    /noindex/,
+    'anche un articolo cantonale deve restare indexable',
+  );
 });
 
 test('publisher: le landing live annunciano il feed edge della propria locale', () => {

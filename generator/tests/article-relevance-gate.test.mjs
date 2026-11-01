@@ -10,6 +10,7 @@ import {
   classifyArticleRelevance,
   isOffTopicHeadline,
 } from '../scripts/lib/article-relevance-gate.mjs';
+import { AUDITED_ARTICLE_SECTIONS } from '../../scripts/audit-article-relevance.mjs';
 
 const FILLER_FRONTALIERI = 'I frontalieri del Ticino e la Svizzera seguono il tema. '.repeat(10);
 
@@ -100,4 +101,12 @@ test('filtro prima della spesa: decide solo sulla headline, senza guardare la se
   assert.equal(isOffTopicHeadline('Sport a Lugano'), false);
   assert.equal(isOffTopicHeadline('Partita IVA per frontalieri: cosa cambia'), false);
   assert.equal(isOffTopicHeadline('Consiglio federale: nuove regole sul lavoro'), false);
+});
+
+test('l audit del ledger usa solo le sezioni supportate: i cantoni restano indexable', () => {
+  assert.deepEqual(
+    AUDITED_ARTICLE_SECTIONS.map(({ section }) => section),
+    ['frontaliere', 'svizzera'],
+  );
+  assert.equal(AUDITED_ARTICLE_SECTIONS.some(({ kind }) => kind === 'canton'), false);
 });

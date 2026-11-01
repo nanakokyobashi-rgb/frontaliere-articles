@@ -76,6 +76,8 @@ import {
   retentionLines,
   measureDist,
   expectFromCorpus,
+  allSeoEntryIdsExcluded,
+  collectSeoEntryIdsFromChunks,
   FEED_POPULATION_WARN_RETENTION,
   FEED_FRESHNESS_MAX_LAG_HOURS,
   feedSourceFloor,
@@ -515,6 +517,38 @@ test('un feed vuoto per ledger noindex passa, ma un item non filtrato blocca', (
   const violations = floorViolations(leaked, ledgerExpected);
   assert.equal(violations.length, 1);
   assert.match(violations[0], /ledger article-index-exclusions/);
+});
+
+test('il bypass ledger-only confronta gli id SEO, non la sola cardinalita\'', () => {
+  assert.equal(
+    allSeoEntryIdsExcluded(new Set(['ritirato']), new Set(['ritirato', 'estraneo']), ['ritirato']),
+    true,
+  );
+  // Un id attivo manca del tutto dai chunk mentre un id ritirato resta: la
+  // cardinalita' puo' coincidere, ma non e' una sezione composta solo da esclusi.
+  assert.equal(
+    allSeoEntryIdsExcluded(new Set(['ritirato']), new Set(['ritirato']), ['attivo', 'ritirato']),
+    false,
+  );
+});
+
+test('il collector del gate restituisce le identita\' effettivamente nei chunk', () => {
+  const root = fs.mkdtempSync(join(os.tmpdir(), 'seo-source-ids-'));
+  try {
+    const seoDir = join(root, 'content', 'seo');
+    fs.mkdirSync(seoDir, { recursive: true });
+    fs.writeFileSync(
+      join(seoDir, 'seo-blog.ts'),
+      `'blog-attivo': { "headline": "Attivo", "datePublished": "2026-01-01" },\n` +
+        `'blog-ritirato': { "headline": "Ritirato", "datePublished": "2026-01-02" },\n`,
+    );
+    assert.deepEqual(
+      [...collectSeoEntryIdsFromChunks(root, ['seo-blog.ts'])].sort(),
+      ['attivo', 'ritirato'],
+    );
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
 });
 
 /*
@@ -1146,6 +1180,9 @@ test('un feed oltre la soglia di freschezza viene rifiutato rispetto ai chunk SE
 test('build-api usa il parser SEO condiviso, non una terza finestra locale', () => {
   const build = readFileSync(join(ROOT, 'scripts/build-api.mjs'), 'utf8');
   assert.match(build, /collectSeoEntryMetadata/);
+  assert.match(build, /parsedSeoEntryIds/);
+  assert.match(build, /\[\.\.\.parsedIds\]\.every\(\(id\) => articleIndexExclusions\.has\(articleIndexExclusionKey\(section\.id, id\)\)\)/);
+  assert.doesNotMatch(build, /const ledgerOnly = section\.articleCount === 0 && section\.withdrawnArticleCount > 0;/);
   assert.doesNotMatch(build, /const entryRe = \/'blog-\(\[\^'\]\+\):\\s\*\\{\/g/);
   assert.doesNotMatch(build, /start \+ 4000/);
   // Dal 2026-10 (C1) le sezioni vengono dal core: una sola chiamata per

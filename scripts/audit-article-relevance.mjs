@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /**
- * audit-article-relevance.mjs — applica `classifyArticleRelevance` a tutto il
- * corpus pubblicato e mantiene `content/article-index-exclusions.json`.
+ * audit-article-relevance.mjs — applica `classifyArticleRelevance` alle due
+ * sezioni storiche indicizzabili e mantiene `content/article-index-exclusions.json`.
+ * Le sezioni cantonali restano fuori: il loro contratto e' sempre indexable.
  *
  * Il ledger e' committato, non calcolato al build, per due ragioni. Cambiare una
  * parola del lessico non deve togliere pagine dall'indice in silenzio: lo
@@ -25,6 +26,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { ARTICLE_SECTION_CORE_ALL } from '../engine/shared/articleSectionCore.mjs';
+import { ARTICLE_INDEX_EXCLUSION_SECTIONS } from '../engine/shared/articleIndexExclusions.mjs';
 import { corpusPath } from '../generator/scripts/lib/corpus-paths.mjs';
 import { unescapeForSingleQuoteTS } from '../generator/scripts/lib/article-meta-block.mjs';
 import { writeFileAtomic } from '../generator/scripts/lib/atomic-write-file.mjs';
@@ -32,6 +34,16 @@ import { classifyArticleRelevance } from '../generator/scripts/lib/article-relev
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const LEDGER_FILE = 'content/article-index-exclusions.json';
+
+// The ledger parser is deliberately limited to these sections: canton pages
+// are an always-indexable contract surface and must never enter this audit.
+export const AUDITED_ARTICLE_SECTIONS = Object.freeze(
+  ARTICLE_INDEX_EXCLUSION_SECTIONS.map((section) => {
+    const core = ARTICLE_SECTION_CORE_ALL[section];
+    if (!core) throw new Error(`article-index-exclusions: sezione audit sconosciuta: ${section}`);
+    return core;
+  }),
+);
 
 const DOC = 'Articoli pubblicati ma ritirati dall\'indice per mancanza di nesso con frontalieri, Ticino, '
   + 'Svizzera, confine o lavoro. Generato da scripts/audit-article-relevance.mjs (--write): non modificare '
@@ -64,10 +76,10 @@ function readBody(bodyDir, id) {
   return [...source.matchAll(BODY_LITERAL_RE)].map((match) => unescapeForSingleQuoteTS(match[1])).join('\n');
 }
 
-/** Ogni articolo italiano del corpus, per ogni sezione che ha un registro su disco. */
+/** Ogni articolo italiano delle sezioni supportate dal ledger, se ha un registro su disco. */
 export function readCorpusArticles() {
   const articles = [];
-  for (const core of Object.values(ARTICLE_SECTION_CORE_ALL)) {
+  for (const core of AUDITED_ARTICLE_SECTIONS) {
     const registry = readIfPresent(corpusPath(core.registryFile));
     if (registry === null) continue;
     const meta = readMeta(core.metaPrefix);

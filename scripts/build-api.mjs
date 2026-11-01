@@ -1128,6 +1128,22 @@ for (const section of rssSections) {
   }
 }
 
+// The feed builder exposes the post-filter count, but the ledger-only bypass
+// needs the identities it parsed before applying the ledger. Reading the same
+// declared chunks with the shared collector lets the guard distinguish
+// "every parsed entry is withdrawn" from "one active entry disappeared and a
+// different withdrawn entry remains".
+function parsedSeoEntryIds(section) {
+  const { seoDir, files } = seoChunkSources(section);
+  const ids = new Set();
+  for (const file of files) {
+    const filePath = path.join(ROOT, seoDir, file);
+    if (!fs.existsSync(filePath)) continue;
+    for (const id of collectSeoEntryMetadata(fs.readFileSync(filePath, 'utf-8')).keys()) ids.add(id);
+  }
+  return ids;
+}
+
 let rssFeedCount = 0;
 let rssItemTotal = 0;
 // Stessa politica per tipo delle sitemap: una sezione storica senza feed, o un
@@ -1138,9 +1154,15 @@ const familyRssRows = [];
 for (const section of rssSections) {
   const familyPolicy = floorPolicyOf(section.id) === 'family';
   // A historical section may legitimately have no feed when every parsed SEO
-  // entry is withdrawn by the index ledger. Unknown dates alone are not enough
-  // to bypass the empty-feed guard: they still indicate an incomplete source.
-  const ledgerOnly = section.articleCount === 0 && section.withdrawnArticleCount > 0;
+  // identity is withdrawn by the index ledger. Compare identities, not the
+  // ledger cardinality: an active entry with an unknown date must keep the
+  // empty-feed guard fail-closed even when an unrelated withdrawn entry exists.
+  const sourceSection = RSS_SECTIONS.find((candidate) => candidate.id === section.id);
+  const parsedIds = sourceSection ? parsedSeoEntryIds(sourceSection) : new Set();
+  const ledgerOnly = section.articleCount === 0
+    && section.withdrawnArticleCount > 0
+    && parsedIds.size > 0
+    && [...parsedIds].every((id) => articleIndexExclusions.has(articleIndexExclusionKey(section.id, id)));
   // I feed di una sezione di famiglia sono una superficie di LETTURA (titoli,
   // estratti, link agli articoli): escono su Pages solo se la release di
   // questo build dichiara la sezione live. Per una sezione draft, ritirata o
@@ -1161,8 +1183,8 @@ for (const section of rssSections) {
     }
     if (items > 0 && ledgerOnly) {
       throw new Error(
-        `rss: ${name} emitted ${items} <item> entries although all ${section.withdrawnArticleCount} `
-          + 'SEO entries are withdrawn by article-index-exclusions — refusing to publish',
+        `rss: ${name} emitted ${items} <item> entries although every parsed SEO identity in ${section.id} `
+          + 'is withdrawn by article-index-exclusions — refusing to publish',
       );
     }
     sectionItems += items;

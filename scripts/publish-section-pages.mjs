@@ -789,8 +789,8 @@ export function pageDefects(page, html, { requiredRssUrl = null } = {}) {
   // Il router della SPA resta in staticOverlay solo su un documento che porta
   // questo meta: senza, sopra la pagina comparirebbe NotFoundSuggestions.
   if (!html.includes(CORPUS_ROUTE_OWNER_META_TAG)) defects.push('manca il meta ft-route-owner');
-  if (page.kind !== 'article' && (/<meta[^>]+name="robots"[^>]+content="[^"]*noindex/i.test(html) || /<meta[^>]+content="[^"]*noindex[^"]*"[^>]+name="robots"/i.test(html))) {
-    defects.push('porta un robots noindex (nessuna pagina aggregate cantonale e\' noindex)');
+  if (/<meta[^>]+name="robots"[^>]+content="[^"]*noindex/i.test(html) || /<meta[^>]+content="[^"]*noindex[^"]*"[^>]+name="robots"/i.test(html)) {
+    defects.push('porta un robots noindex (nessuna pagina cantonale e\' noindex)');
   }
   if (/(?:src|href)="\/assets\//.test(html)) defects.push('riferimenti /assets/ same-origin (404 in produzione, #5270)');
   const canonical = /<link[^>]+rel="canonical"[^>]+href="([^"]+)"/i.exec(html)?.[1];
