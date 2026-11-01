@@ -6690,6 +6690,16 @@
       }
     },
     {
+      "path": "scripts/lib/article-meta-ids.mjs",
+      "mode": "corpus-only",
+      "reason": "Helper puro per estrarre gli ID articolo dalle chiavi dei meta-chunk generati, riusato da `scripts/ci/article-publication-observer.mjs` e `scripts/find-dirty-content-ids.mjs` così observer e scanner del corpus condividono una sola regex. Legge i sorgenti `content/` del corpus; il sito riceve questa informazione nella superficie JSON e non importa il modulo. Corpus-only per costruzione: non c'è un gemello da portare.",
+      "baseline": {
+        "site": null,
+        "corpus": "051579ba32e5e9b2",
+        "alignedAt": "2026-11-01"
+      }
+    },
+    {
       "path": "scripts/ci/article-source-runtime/README.md",
       "mode": "corpus-only",
       "reason": "Istruzioni locali per il runtime TypeScript isolato dei lettori statici del corpus; il sito mantiene setup e dipendenze nel proprio package manager.",
