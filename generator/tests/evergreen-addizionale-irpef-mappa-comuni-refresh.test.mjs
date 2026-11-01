@@ -100,6 +100,14 @@ const RESIDENCE_DEADLINE = {
   de: [/\*\*2\. November\*\*/, /2\. November 2025/],
   fr: [/\*\*2 novembre\*\*/, /2 novembre 2025/],
 };
+// Il 31 dicembre 2018 resta una data storica valida per il regime transitorio;
+// il gate vieta soltanto di usarlo come scadenza per cambiare residenza.
+const OLD_RESIDENCE_DEADLINE = {
+  it: /(?:residenza|domicilio)[^\\]{0,50}(?:entro|al|fino al)\s+(?:il\s+)?31 dicembre/i,
+  en: /(?:residence|domicile)[^\\]{0,50}(?:by|on|until|before)\s+(?:December 31|31 December)/i,
+  de: /(?:Wohnsitz|Wohnort)[^\\]{0,50}(?:bis zum|bis|am)\s+31\. Dezember/i,
+  fr: /(?:résidence|domicile)[^\\]{0,50}(?:au|avant le|jusqu['’]au)\s+31 décembre/i,
+};
 
 test('la voce del registro porta la data del refresh fattuale', () => {
   const registry = fs.readFileSync(path.join(ROOT, 'content', 'blog-articles-data.ts'), 'utf8');
@@ -136,11 +144,7 @@ for (const locale of LOCALES) {
       "Campione d'Italia fuori dall'addizionale",
     );
     assert.doesNotMatch(source, /\*\*80 euro\*\*|\*\*€80\*\*|\*\*80 €\*\*|Clivio \(€?240/, 'esempio Como-Clivio da 80 euro');
-    assert.doesNotMatch(
-      source,
-      /31 dicembre|December 31|31 December|31\. Dezember|31 décembre/,
-      'residenza entro il 31 dicembre',
-    );
+    assert.doesNotMatch(source, OLD_RESIDENCE_DEADLINE[locale], 'vecchia scadenza di residenza al 31 dicembre');
     assert.doesNotMatch(
       source,
       /aliquote indicative|indicative rates|Richtwerte|taux indicatifs/,
