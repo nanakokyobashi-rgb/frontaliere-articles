@@ -47,6 +47,18 @@
     "canton-sz::https://www.marchanzeiger.ch/2026/10/30/herbstsession-im-kinderparlament": {
       "section": "canton-sz",
       "ts": 1793476214895
+    },
+    "canton-sz::https://www.marchanzeiger.ch/2026/10/30/freienbacher-gewinnt-wirtschaftspreis": {
+      "section": "canton-sz",
+      "ts": 1793493632235
+    },
+    "canton-sz::https://www.marchanzeiger.ch/2026/10/30/aus-den-ausserschwyzer-schulen-geplaudert": {
+      "section": "canton-sz",
+      "ts": 1793493642251
+    },
+    "canton-sz::https://www.hoefner.ch/2026/10/30/herbstsession-im-kinderparlament": {
+      "section": "canton-sz",
+      "ts": 1793493652761
     }
   }
 }
