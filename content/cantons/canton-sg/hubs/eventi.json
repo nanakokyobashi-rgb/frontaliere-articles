@@ -4,12 +4,12 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "eventi",
-  "updatedAt": "2026-10-31T06:15:08.747Z",
-  "contentHash": "55da262e70d50dc2d791688ccc38b8134d894164d747cde250ca5b49b1c17b3c",
+  "updatedAt": "2026-11-01T13:11:05.408Z",
+  "contentHash": "c2a26d89840925d20d18ee94711c5ee4bab92a473d3256646b101779afc4de22",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-30T13:23:17.161Z",
+      "updatedAt": "2026-10-31T14:21:36.178Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "65",
+          "value": "66",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Karaoke Night in der Brauerei St. Johann - Halloween Special",
-              "detail": "Brauerei St. Johann, Nesslau",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/karaoke-night-in-der-brauerei-st-johann-halloween-special/"
+              "label": "Flow mit Stimme und Körper | 26.0902",
+              "detail": "Klanghaus Toggenburg",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/wildhaus/flow-mit-stimme-und-koerper-260902_A5itTHm"
             },
             {
-              "label": "Art for Tea",
-              "detail": "Forum Würth Rorschach, Rorschach",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/art-for-tea-2/"
-            },
-            {
-              "label": "klanghalt - im Oktober",
-              "detail": "Evang.-ref. Kirche St. Mangen",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/klanghalt-im-oktober_AQCvqQu"
-            },
-            {
-              "label": "Ratzliedli und Jassen",
-              "detail": "Wildhaus",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ratzliedli-und-jassen/"
-            },
-            {
-              "label": "Die Brahmskommode – ein literarisch-musikalischer Abend",
-              "detail": "opus278",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/die-brahmskommode_AYDHSfm"
-            },
-            {
-              "label": "Krimidinner mit Florian Rexer",
-              "detail": "Stump's Alpenrose AG, Wildhaus-Alt St. Johann",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/krimidinner-mit-florian-rexer/"
-            },
-            {
-              "label": "Streusel on Top",
+              "label": "JAZZ BRUNCH mit Jazzafinado 2026",
               "detail": "Verrucano Mels - Kultur und Kongresshaus, Mels",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/streusel-on-top/"
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/mels/jazz-brunch-mit-jazzafinado-2026_A38MPTv"
             },
             {
-              "label": "Hart auf Hart - Sie sagen Stopp",
-              "detail": "Mogelsberg",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hart-auf-hart-sie-sagen-stopp-1/"
+              "label": "Drop-in-Basteln: Steinzeit Farbwerkstatt",
+              "detail": "Kulturmuseum, St. Gallen",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/drop-in-basteln-steinzeit-farbwerkstatt/"
             },
             {
-              "label": "Allstar Poetry Slam St.Gallen",
-              "detail": "Lokremise St.Gallen, St. Gallen",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/allstar-poetry-slam-stgallen/"
+              "label": "Die Brahmskommode",
+              "detail": "opus278",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/die-brahmskommode_AyGiRuC"
             },
             {
-              "label": "LUNIK",
-              "detail": "Restaurant Eintracht",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/kirchberg-sg/lunik_Av9XdZZ"
+              "label": "Die Brahmskommode",
+              "detail": "St. Gallen",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-brahmskommode-1/"
+            },
+            {
+              "label": "It's Different for Girls - Dokumentarfilm & Talk",
+              "detail": "St. Gallen",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/its-different-for-girls-dokumentarfilm-talk/"
+            },
+            {
+              "label": "GEROLD SPÄTH - Künstlerbücher",
+              "detail": "Alte Fabrik Rapperswil, Rapperswil-Jona — in corso, ultimo giorno: 1 novembre 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gerold-spaeth-kuenstlerbuecher/"
+            },
+            {
+              "label": "Claudia Valer, Werkschau",
+              "detail": "Pflegeheim Heiligkreuz, St. Gallen — in corso, ultimo giorno: 8 novembre 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/claudia-valer-werkschau/"
+            },
+            {
+              "label": "Fokusmodul – Meisner-Workout",
+              "detail": "Switzerland Innovation Park Ost — in corso, ultimo giorno: 12 novembre 2026",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
+            },
+            {
+              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
+              "detail": "Verein Klangwald, Kirchberg (SG) — in corso, ultimo giorno: 2 novembre 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/san-gallo/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/san-gallo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "en": {
       "canton": "SG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "65",
+          "value": "66",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Karaoke Night in der Brauerei St. Johann - Halloween Special",
-              "detail": "Brauerei St. Johann, Nesslau",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/karaoke-night-in-der-brauerei-st-johann-halloween-special/"
+              "label": "Flow mit Stimme und Körper | 26.0902",
+              "detail": "Klanghaus Toggenburg",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/wildhaus/flow-mit-stimme-und-koerper-260902_A5itTHm"
             },
             {
-              "label": "Art for Tea",
-              "detail": "Forum Würth Rorschach, Rorschach",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/art-for-tea-2/"
-            },
-            {
-              "label": "klanghalt - im Oktober",
-              "detail": "Evang.-ref. Kirche St. Mangen",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/klanghalt-im-oktober_AQCvqQu"
-            },
-            {
-              "label": "Ratzliedli und Jassen",
-              "detail": "Wildhaus",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ratzliedli-und-jassen/"
-            },
-            {
-              "label": "Die Brahmskommode – ein literarisch-musikalischer Abend",
-              "detail": "opus278",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/die-brahmskommode_AYDHSfm"
-            },
-            {
-              "label": "Krimidinner mit Florian Rexer",
-              "detail": "Stump's Alpenrose AG, Wildhaus-Alt St. Johann",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/krimidinner-mit-florian-rexer/"
-            },
-            {
-              "label": "Streusel on Top",
+              "label": "JAZZ BRUNCH mit Jazzafinado 2026",
               "detail": "Verrucano Mels - Kultur und Kongresshaus, Mels",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/streusel-on-top/"
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/mels/jazz-brunch-mit-jazzafinado-2026_A38MPTv"
             },
             {
-              "label": "Hart auf Hart - Sie sagen Stopp",
-              "detail": "Mogelsberg",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hart-auf-hart-sie-sagen-stopp-1/"
+              "label": "Drop-in-Basteln: Steinzeit Farbwerkstatt",
+              "detail": "Kulturmuseum, St. Gallen",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/drop-in-basteln-steinzeit-farbwerkstatt/"
             },
             {
-              "label": "Allstar Poetry Slam St.Gallen",
-              "detail": "Lokremise St.Gallen, St. Gallen",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/allstar-poetry-slam-stgallen/"
+              "label": "Die Brahmskommode",
+              "detail": "opus278",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/die-brahmskommode_AyGiRuC"
             },
             {
-              "label": "LUNIK",
-              "detail": "Restaurant Eintracht",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/kirchberg-sg/lunik_Av9XdZZ"
+              "label": "Die Brahmskommode",
+              "detail": "St. Gallen",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-brahmskommode-1/"
+            },
+            {
+              "label": "It's Different for Girls - Dokumentarfilm & Talk",
+              "detail": "St. Gallen",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/its-different-for-girls-dokumentarfilm-talk/"
+            },
+            {
+              "label": "GEROLD SPÄTH - Künstlerbücher",
+              "detail": "Alte Fabrik Rapperswil, Rapperswil-Jona — ongoing, last day: 1 November 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gerold-spaeth-kuenstlerbuecher/"
+            },
+            {
+              "label": "Claudia Valer, Werkschau",
+              "detail": "Pflegeheim Heiligkreuz, St. Gallen — ongoing, last day: 8 November 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/claudia-valer-werkschau/"
+            },
+            {
+              "label": "Fokusmodul-Meisner -ork",
+              "detail": "Switzerland Innovation Park Ost — ongoing, last day: 12 November 2026",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
+            },
+            {
+              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
+              "detail": "Verein Klangwald, Kirchberg (SG) — ongoing, last day: 2 November 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/st-gallen/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/st-gallen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "de": {
       "canton": "SG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "65",
+          "value": "66",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Karaoke Night in der Brauerei St. Johann - Halloween Special",
-              "detail": "Brauerei St. Johann, Nesslau",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/karaoke-night-in-der-brauerei-st-johann-halloween-special/"
+              "label": "Flow mit Stimme und Körper | 26.0902",
+              "detail": "Klanghaus Toggenburg",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/wildhaus/flow-mit-stimme-und-koerper-260902_A5itTHm"
             },
             {
-              "label": "Art for Tea",
-              "detail": "Forum Würth Rorschach, Rorschach",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/art-for-tea-2/"
-            },
-            {
-              "label": "klanghalt - im Oktober",
-              "detail": "Evang.-ref. Kirche St. Mangen",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/klanghalt-im-oktober_AQCvqQu"
-            },
-            {
-              "label": "Ratzliedli und Jassen",
-              "detail": "Wildhaus",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ratzliedli-und-jassen/"
-            },
-            {
-              "label": "Die Brahmskommode – ein literarisch-musikalischer Abend",
-              "detail": "opus278",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/die-brahmskommode_AYDHSfm"
-            },
-            {
-              "label": "Krimidinner mit Florian Rexer",
-              "detail": "Stump's Alpenrose AG, Wildhaus-Alt St. Johann",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/krimidinner-mit-florian-rexer/"
-            },
-            {
-              "label": "Streusel on Top",
+              "label": "JAZZ BRUNCH mit Jazzafinado 2026",
               "detail": "Verrucano Mels - Kultur und Kongresshaus, Mels",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/streusel-on-top/"
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/mels/jazz-brunch-mit-jazzafinado-2026_A38MPTv"
             },
             {
-              "label": "Hart auf Hart - Sie sagen Stopp",
-              "detail": "Mogelsberg",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hart-auf-hart-sie-sagen-stopp-1/"
+              "label": "Drop-in-Basteln: Steinzeit Farbwerkstatt",
+              "detail": "Kulturmuseum, St. Gallen",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/drop-in-basteln-steinzeit-farbwerkstatt/"
             },
             {
-              "label": "Allstar Poetry Slam St.Gallen",
-              "detail": "Lokremise St.Gallen, St. Gallen",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/allstar-poetry-slam-stgallen/"
+              "label": "Die Brahmskommode",
+              "detail": "opus278",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/die-brahmskommode_AyGiRuC"
             },
             {
-              "label": "LUNIK",
-              "detail": "Restaurant Eintracht",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/kirchberg-sg/lunik_Av9XdZZ"
+              "label": "Die Brahmskommode",
+              "detail": "St. Gallen",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-brahmskommode-1/"
+            },
+            {
+              "label": "It's Different for Girls - Dokumentarfilm & Talk",
+              "detail": "St. Gallen",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/its-different-for-girls-dokumentarfilm-talk/"
+            },
+            {
+              "label": "GEROLD SPÄTH - Künstlerbücher",
+              "detail": "Alte Fabrik Rapperswil, Rapperswil-Jona — läuft, letzter Tag: 1. November 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gerold-spaeth-kuenstlerbuecher/"
+            },
+            {
+              "label": "Claudia Valer, Werkschau",
+              "detail": "Pflegeheim Heiligkreuz, St. Gallen — läuft, letzter Tag: 8. November 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/claudia-valer-werkschau/"
+            },
+            {
+              "label": "Fokusmodul-Meisner-Grafforkout",
+              "detail": "Switzerland Innovation Park Ost — läuft, letzter Tag: 12. November 2026",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
+            },
+            {
+              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
+              "detail": "Verein Klangwald, Kirchberg (SG) — läuft, letzter Tag: 2. November 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/st-gallen/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/st-gallen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "fr": {
       "canton": "SG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "65",
+          "value": "66",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Karaoke Night in der Brauerei St. Johann - Halloween Special",
-              "detail": "Brauerei St. Johann, Nesslau",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/karaoke-night-in-der-brauerei-st-johann-halloween-special/"
+              "label": "Flow mit Stimme und Körper | 26.0902",
+              "detail": "Klanghaus Toggenburg",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/wildhaus/flow-mit-stimme-und-koerper-260902_A5itTHm"
             },
             {
-              "label": "Art for Tea",
-              "detail": "Forum Würth Rorschach, Rorschach",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/art-for-tea-2/"
-            },
-            {
-              "label": "klanghalt - im Oktober",
-              "detail": "Evang.-ref. Kirche St. Mangen",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/klanghalt-im-oktober_AQCvqQu"
-            },
-            {
-              "label": "Ratzliedli und Jassen",
-              "detail": "Wildhaus",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ratzliedli-und-jassen/"
-            },
-            {
-              "label": "Die Brahmskommode – ein literarisch-musikalischer Abend",
-              "detail": "opus278",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/die-brahmskommode_AYDHSfm"
-            },
-            {
-              "label": "Krimidinner mit Florian Rexer",
-              "detail": "Stump's Alpenrose AG, Wildhaus-Alt St. Johann",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/krimidinner-mit-florian-rexer/"
-            },
-            {
-              "label": "Streusel on Top",
+              "label": "JAZZ BRUNCH mit Jazzafinado 2026",
               "detail": "Verrucano Mels - Kultur und Kongresshaus, Mels",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/streusel-on-top/"
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/mels/jazz-brunch-mit-jazzafinado-2026_A38MPTv"
             },
             {
-              "label": "Hart auf Hart - Sie sagen Stopp",
-              "detail": "Mogelsberg",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hart-auf-hart-sie-sagen-stopp-1/"
+              "label": "Drop-in-Basteln: Steinzeit Farbwerkstatt",
+              "detail": "Kulturmuseum, St. Gallen",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/drop-in-basteln-steinzeit-farbwerkstatt/"
             },
             {
-              "label": "Allstar Poetry Slam St.Gallen",
-              "detail": "Lokremise St.Gallen, St. Gallen",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/allstar-poetry-slam-stgallen/"
+              "label": "Die Brahmskommode",
+              "detail": "opus278",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/die-brahmskommode_AyGiRuC"
             },
             {
-              "label": "LUNIK",
-              "detail": "Restaurant Eintracht",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/kirchberg-sg/lunik_Av9XdZZ"
+              "label": "Die Brahmskommode",
+              "detail": "St. Gallen",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-brahmskommode-1/"
+            },
+            {
+              "label": "It's Different for Girls - Dokumentarfilm & Talk",
+              "detail": "St. Gallen",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/its-different-for-girls-dokumentarfilm-talk/"
+            },
+            {
+              "label": "GEROLD SPÄTH - Künstlerbücher",
+              "detail": "Alte Fabrik Rapperswil, Rapperswil-Jona — en cours, dernier jour : 1er novembre 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gerold-spaeth-kuenstlerbuecher/"
+            },
+            {
+              "label": "Claudia Valer, Werkschau",
+              "detail": "Pflegeheim Heiligkreuz, St. Gallen — en cours, dernier jour : 8 novembre 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/claudia-valer-werkschau/"
+            },
+            {
+              "label": "Module d'alimentation-Meisner-ork",
+              "detail": "Switzerland Innovation Park Ost — en cours, dernier jour : 12 novembre 2026",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
+            },
+            {
+              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
+              "detail": "Verein Klangwald, Kirchberg (SG) — en cours, dernier jour : 2 novembre 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/saint-gall/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/saint-gall/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     }
   }
 }
