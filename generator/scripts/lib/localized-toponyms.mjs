@@ -538,6 +538,7 @@ function localizedToponymHits(value, {
   protectNames = false,
   sourceText = '',
   sourceSearchText = null,
+  locale = null,
   slug = false,
 } = {}) {
   const normalizedText = normalizeToponymMatchText(value);
@@ -558,7 +559,12 @@ function localizedToponymHits(value, {
   // re-normalizes the source. Most fields contain no localized toponym at all,
   // so defer that work until the cheap candidate scan has found something to
   // filter. The returned hits and protection semantics remain unchanged.
-  const protectedNameRanges = protectNames
+  // A protection scan can only remove a hit; when every descriptor already
+  // belongs to the target locale, none of those hits can become a mismatch.
+  // Keep the full protection path for ambiguous forms and foreign exonyms.
+  const needsProtection = protectNames && matches.some(({ descriptors }) =>
+    !locale || descriptors.some((descriptor) => descriptor.locale !== locale));
+  const protectedNameRanges = needsProtection
     ? protectedRanges(normalizedText, sourceText, sourceSearchText)
     : [];
   return matches.flatMap(({ start, end, descriptors, observedForm }) => {
@@ -597,6 +603,7 @@ export function findLocalizedToponymMismatches({
     protectNames: true,
     sourceText: profile.sourceText,
     sourceSearchText: profile.sourceSearchText,
+    locale,
     slug,
   });
   const issues = [];
