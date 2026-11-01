@@ -8,6 +8,7 @@ import {
   LOCALIZED_TOPONYM_LOCALES,
   LOCALIZED_TOPONYMS,
   OFFICIAL_NAME_MARKERS,
+  createLocalizedToponymSourceProfile,
   extractArticleProjectionText,
   findArticleLocalizedToponymMismatches,
   findLocalizedToponymMismatches,
@@ -17,6 +18,7 @@ import {
   validateLocalizedToponymTable,
 } from '../scripts/lib/localized-toponyms.mjs';
 import { extractSlugFallbackLocales } from '../scripts/lib/slug-fallback-provenance.mjs';
+import { scanStaticArticleFieldEntries } from '../scripts/lib/static-article-field-scanner.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -59,6 +61,7 @@ test('la tabella canonica conserva gli esonimi richiesti', () => {
   assert.deepEqual(byCode.get('SG').canton, {
     it: ['San Gallo'], en: ['St. Gallen'], de: ['St. Gallen'], fr: ['Saint-Gall'],
   });
+  assert.deepEqual(byCode.get('SZ').canton.fr, ['Schwytz', 'Schwyz']);
 });
 
 test('i marcatori coprono i nomi ufficiali usati dalle label nav', () => {
@@ -371,6 +374,19 @@ test('protegge i nomi ufficiali identici senza assolvere il cantone in prosa', (
   );
 });
 
+test('il controllo candidato senza protezione resta un superset del gate esatto', () => {
+  const sourceText = 'Il servizio è gestito da Caisse Santé Genève.';
+  const targetText = 'Der Dienst wird von Caisse Santé Genève betrieben.';
+  assert.deepEqual(
+    findLocalizedToponymMismatches({ sourceText, targetText, locale: 'de' }),
+    [],
+  );
+  assert.deepEqual(
+    findLocalizedToponymMismatches({ sourceText, targetText, locale: 'de', protectNames: false }),
+    [{ code: 'GE', type: 'canton', locale: 'de', form: 'Genève', expected: 'Genf' }],
+  );
+});
+
 test('non protegge una frase ordinaria con un toponimo identico alla fonte', () => {
   const source = 'In Ticino si lavora ogni giorno.';
   const target = 'In Ticino wird jeden Tag gearbeitet.';
@@ -486,8 +502,6 @@ test('ripara il cantone Ticino solo fuori dai nomi ufficiali e solo dove serve',
   );
 });
 
-const ENTRY_RE = /['"]blog\.article\.([^'"]+)\.([^'"]+)['"]\s*:\s*(['"])((?:\\.|(?!\3)[^\r\n])*?)\3\s*(?=[,}])/gu;
-
 function unescapeTsValue(value) {
   return value.replace(/\\([\\'"\\\\])/gu, '$1');
 }
@@ -523,14 +537,31 @@ function collectCorpusEntries() {
     const locale = corpusLocale(file);
     if (!locale) continue;
     const source = readFileSync(file, 'utf8');
-    for (const match of source.matchAll(ENTRY_RE)) {
-      const articleId = match[1];
+    for (const match of scanStaticArticleFieldEntries(source)) {
+      const articleId = match.articleId;
       const entries = byLocale.get(locale).get(articleId) || [];
-      entries.push({ key: `${articleId}|${match[2]}`, field: match[2], value: unescapeTsValue(match[4]), file });
+      entries.push({
+        key: `${articleId}|${match.field}`,
+        field: match.field,
+        value: unescapeTsValue(match.rawValue),
+        file,
+      });
       byLocale.get(locale).set(articleId, entries);
     }
   }
   return byLocale;
+}
+
+// Keep fields separate for matching: the sentinel cannot form a word boundary
+// that was not present inside a field, while one article-wide pass avoids
+// rebuilding the same Italian source analysis for every translated field.
+const CORPUS_FIELD_SEPARATOR = '\u0000';
+
+function uniqueLocalizedToponymIssues(issues) {
+  return new Map(issues.map((issue) => [
+    `${issue.code}|${issue.locale}|${issue.form}|${issue.expected}`,
+    issue,
+  ]));
 }
 
 test('il corpus storico e le 24 sezioni cantonali non copiano esonimi fra lingue', () => {
@@ -547,17 +578,31 @@ test('il corpus storico e le 24 sezioni cantonali non copiano esonimi fra lingue
   const sampleOffenders = [];
   for (const [articleId, sourceEntries] of italian) {
     const sourceText = [...new Set(sourceEntries.map((entry) => entry.value))].join('\n');
+    const sourceProfile = createLocalizedToponymSourceProfile(sourceText);
     for (const locale of ['en', 'de', 'fr']) {
-      for (const targetEntry of byLocale.get(locale).get(articleId) || []) {
-        const issues = findLocalizedToponymMismatches({
+      const targetEntries = byLocale.get(locale).get(articleId) || [];
+      if (targetEntries.length === 0) continue;
+
+      // The unprotected combined call is a conservative candidate check:
+      // protection can only remove hits. If it finds anything, rerun each
+      // field with the exact gate so diagnostics and the zero-offender
+      // invariant remain unchanged.
+      const candidateIssues = findLocalizedToponymMismatches({
+        sourceText,
+        targetText: targetEntries.map((entry) => entry.value).join(CORPUS_FIELD_SEPARATOR),
+        locale,
+        sourceProfile,
+        protectNames: false,
+      });
+      if (candidateIssues.length === 0) continue;
+
+      for (const targetEntry of targetEntries) {
+        const uniqueIssues = uniqueLocalizedToponymIssues(findLocalizedToponymMismatches({
           sourceText,
           targetText: targetEntry.value,
           locale,
-        });
-        const uniqueIssues = new Map(issues.map((issue) => [
-          `${issue.code}|${issue.locale}|${issue.form}|${issue.expected}`,
-          issue,
-        ]));
+          sourceProfile,
+        }));
         for (const issue of uniqueIssues.values()) {
           offenderCount += 1;
           if (sampleOffenders.length < 80) {
