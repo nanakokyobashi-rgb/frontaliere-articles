@@ -5,9 +5,11 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import {
+  ARTICLE_ENTRY_RE,
   LOCALIZED_TOPONYM_LOCALES,
   LOCALIZED_TOPONYMS,
   OFFICIAL_NAME_MARKERS,
+  articleEntryValue,
   createLocalizedToponymSourceProfile,
   extractArticleProjectionText,
   findArticleLocalizedToponymMismatches,
@@ -487,8 +489,6 @@ test('ripara il cantone Ticino solo fuori dai nomi ufficiali e solo dove serve',
   );
 });
 
-const ENTRY_RE = /['"]blog\.article\.([^'"]+)\.([^'"]+)['"]\s*:\s*(['"])((?:\\.|(?!\3)[^\r\n])*?)\3\s*(?=[,}])/gu;
-
 function unescapeTsValue(value) {
   return value.replace(/\\([\\'"\\\\])/gu, '$1');
 }
@@ -524,10 +524,10 @@ function collectCorpusEntries() {
     const locale = corpusLocale(file);
     if (!locale) continue;
     const source = readFileSync(file, 'utf8');
-    for (const match of source.matchAll(ENTRY_RE)) {
+    for (const match of source.matchAll(ARTICLE_ENTRY_RE)) {
       const articleId = match[1];
       const entries = byLocale.get(locale).get(articleId) || [];
-      entries.push({ key: `${articleId}|${match[2]}`, field: match[2], value: unescapeTsValue(match[4]), file });
+      entries.push({ key: `${articleId}|${match[2]}`, field: match[2], value: unescapeTsValue(articleEntryValue(match)), file });
       byLocale.get(locale).set(articleId, entries);
     }
   }

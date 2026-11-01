@@ -54,7 +54,7 @@ export function unescapeTs(value) {
 // Support all static TS string delimiters. The value is still ignored when it
 // contains `${...}` because evaluating an interpolated template would require
 // executing corpus code; the scanner must remain read-only and deterministic.
-const BODY_LITERAL_RX = /(['"`])blog\.article\.([^'"`]+)\.(body\d+)\1\s*:\s*(['"`])((?:\\[\s\S]|(?!\4)[\s\S])*)\4/gu;
+const BODY_LITERAL_RX = /(['"`])blog\.article\.([^'"`]+)\.(body\d+)\1\s*:\s*(?:(")((?:\\[\s\S]|[^"\\])*)"|(')((?:\\[\s\S]|[^'\\])*)'|(`)((?:\\[\s\S]|[^`\\])*)`)/gu;
 
 function* iterateBodies(root) {
   for (const directory of BODY_DIRS) {
@@ -66,13 +66,14 @@ function* iterateBodies(root) {
         const absoluteFile = path.join(absoluteDirectory, file);
         const source = fs.readFileSync(absoluteFile, 'utf8');
         for (const match of source.matchAll(BODY_LITERAL_RX)) {
-          if (match[5].includes('${')) continue;
+          const value = match[5] ?? match[7] ?? match[9] ?? '';
+          if (value.includes('${')) continue;
           yield {
             rel: path.join('content', directory, locale, file),
             id: match[2],
             field: match[3],
             locale,
-            value: unescapeTs(match[5]),
+            value: unescapeTs(value),
           };
         }
       }

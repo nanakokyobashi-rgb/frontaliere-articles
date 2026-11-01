@@ -16,7 +16,9 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import {
+  ARTICLE_ENTRY_RE,
   LOCALIZED_TOPONYM_LOCALES,
+  articleEntryValue,
   replaceLocalizedToponymMismatches,
 } from './lib/localized-toponyms.mjs';
 import { extractSlugFallbackLocales } from './lib/slug-fallback-provenance.mjs';
@@ -25,9 +27,8 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const CONTENT_ROOT = path.join(ROOT, 'content');
 const WRITE = process.argv.includes('--write');
 let writeTmpSeq = 0;
-const ENTRY_RE = /['"]blog\.article\.([^'"]+)\.([^'"]+)['"]\s*:\s*(['"])((?:\\.|(?!\3)[^\r\n])*?)\3\s*(?=[,}])/gu;
 const SLUG_ENTRY_RE = /['"]([^'"]+)['"]\s*:\s*\{([^{}]*)\}/gu;
-const SLUG_PROPERTY_RE = /\b(it|en|de|fr)\s*:\s*(['"])((?:\\.|(?!\2)[^\r\n])*?)\2/gu;
+const SLUG_PROPERTY_RE = /\b(it|en|de|fr)\s*:\s*(?:(["])((?:\\[^\r\n]|[^"\\\r\n])*)"|(')((?:\\[^\r\n]|[^'\\\r\n])*)')/gu;
 
 function walk(directory, output = []) {
   for (const entry of readdirSync(directory, { withFileTypes: true })) {
@@ -60,18 +61,19 @@ function localeForFile(file) {
 
 function rawValuePosition(match) {
   const colon = match[0].indexOf(':');
-  const quote = match[3];
+  const quote = match[3] ?? match[5];
   const quotePosition = match[0].indexOf(quote, colon);
   const start = (match.index ?? 0) + quotePosition + 1;
-  return { start, end: start + match[4].length };
+  return { start, end: start + articleEntryValue(match).length };
 }
 
 function rawSlugValuePosition(entryStart, propertyMatch) {
   const colon = propertyMatch[0].indexOf(':');
-  const quote = propertyMatch[2];
+  const quote = propertyMatch[2] ?? propertyMatch[4];
   const quotePosition = propertyMatch[0].indexOf(quote, colon);
   const start = entryStart + (propertyMatch.index ?? 0) + quotePosition + 1;
-  return { start, end: start + propertyMatch[3].length };
+  const value = propertyMatch[3] ?? propertyMatch[5] ?? '';
+  return { start, end: start + value.length };
 }
 
 const files = walk(CONTENT_ROOT).filter((file) => isCorpusFile(file) || isSlugFile(file));
@@ -96,12 +98,12 @@ for (const file of files) {
   const source = readFileSync(file, 'utf8');
   fileSources.set(file, source);
   if (locale) {
-    for (const match of source.matchAll(ENTRY_RE)) {
+    for (const match of source.matchAll(ARTICLE_ENTRY_RE)) {
       const key = `${match[1]}|${match[2]}`;
       if (locale === 'it') {
-        addSourceValue(match[1], match[4]);
+        addSourceValue(match[1], articleEntryValue(match));
       } else {
-        targets.push({ file, locale, articleId: match[1], key, raw: match[4], ...rawValuePosition(match) });
+        targets.push({ file, locale, articleId: match[1], key, raw: articleEntryValue(match), ...rawValuePosition(match) });
       }
     }
   }
@@ -110,7 +112,10 @@ for (const file of files) {
       const properties = new Map();
       const bodyOffset = (entry.index ?? 0) + entry[0].indexOf(entry[2]);
       for (const property of entry[2].matchAll(SLUG_PROPERTY_RE)) {
-        properties.set(property[1], { value: property[3], ...rawSlugValuePosition(bodyOffset, property) });
+        properties.set(property[1], {
+          value: property[3] ?? property[5] ?? '',
+          ...rawSlugValuePosition(bodyOffset, property),
+        });
       }
       if (properties.size !== LOCALIZED_TOPONYM_LOCALES.length) continue;
       addSourceValue(entry[1], properties.get('it').value);

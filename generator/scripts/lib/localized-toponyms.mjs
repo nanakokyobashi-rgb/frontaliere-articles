@@ -181,6 +181,18 @@ const ARTICLE_PROJECTION_ESCAPES = Object.freeze({
 });
 
 /**
+ * Match one static article field without putting a backreference inside a
+ * repeated character class. The old quote-generic expression was
+ * catastrophically slow on long single-quoted fields containing escaped
+ * apostrophes; this alternation is linear in the literal value.
+ */
+export const ARTICLE_ENTRY_RE = /['"]blog\.article\.([^'"]+)\.([^'"]+)['"]\s*:\s*(?:(["])((?:\\[^\r\n]|[^"\\\r\n])*)"|(')((?:\\[^\r\n]|[^'\\\r\n])*)')\s*(?=[,}])/gu;
+
+export function articleEntryValue(match) {
+  return match?.[4] ?? match?.[6] ?? '';
+}
+
+/**
  * Extract every published field for one article from a body or meta TS file.
  * The writer stores body, FAQ and metadata in the same article-key namespace;
  * callers can therefore combine the result from both files into one
@@ -190,7 +202,7 @@ export function extractArticleProjectionText(fileContent, articleId, { excludeFa
   if (!fileContent || !articleId) return '';
   const allowedFields = fields ? new Set(fields) : null;
   const fieldRe = new RegExp(
-    "'blog\\.article\\." + escapeRegExp(String(articleId)) + "\\.([^']+)'\\s*:\\s*(['`])((?:\\\\.|(?!\\2)[\\s\\S])*?)\\2",
+    "'blog\\.article\\." + escapeRegExp(String(articleId)) + "\\.([^']+)'\\s*:\\s*(?:\\x60((?:\\\\[\\s\\S]|[^\\x60\\\\])*)\\x60|'((?:\\\\[\\s\\S]|[^'\\\\])*)')",
     'g',
   );
   const prefix = `'blog.article.${articleId}.`;
@@ -202,7 +214,7 @@ export function extractArticleProjectionText(fileContent, articleId, { excludeFa
       return match[0].startsWith(`${prefix}${field}'`);
     })
     .map((match) => normalizeLocalizedToponymText(
-      unescapeTsString(match[3], ARTICLE_PROJECTION_ESCAPES, {
+      unescapeTsString(match[2] ?? match[3] ?? '', ARTICLE_PROJECTION_ESCAPES, {
         decodeControlEscapes: match[1] !== 'faq',
       }),
     ))
@@ -257,6 +269,25 @@ const TOPONYM_SLUG_PATTERN = new RegExp(
     .join('|')})(?![\\p{L}\\p{N}])`,
   'giu',
 );
+
+// Expected forms are stable for the lifetime of this module. Keeping the
+// normalized sets out of `findLocalizedToponymMismatches` matters for corpus
+// scans, which call that function once per article and locale.
+const EXPECTED_FORM_INDEX = new Map();
+for (const entity of LOCALIZED_TOPONYMS) {
+  for (const type of ENTITY_TYPES) {
+    for (const locale of LOCALIZED_TOPONYM_LOCALES) {
+      const key = `${entity.code}|${type}|${locale}`;
+      EXPECTED_FORM_INDEX.set(key, {
+        text: new Set(entity[type][locale].map((form) => normalizeForm(form))),
+        slug: new Set(entity[type][locale].flatMap((form) => [
+          normalizeForm(form),
+          normalizeForm(localizedSlugForm(form)),
+        ])),
+      });
+    }
+  }
+}
 
 const PROTECTED_NAME_PATTERNS = Object.freeze([
   /\bfrontali(?:ere|er|ère)\s+(?:ticino|tessin)\b/giu,
@@ -585,6 +616,25 @@ export function findLocalizedToponymMismatches({
   const profile = sourceProfile || createLocalizedToponymSourceProfile(sourceText);
   const sourceEntities = profile.sourceEntities;
   if (sourceEntities.size === 0) return [];
+
+  // Most published fields contain no source-relevant foreign form. Avoid the
+  // expensive official-name scan in that common case. Any raw candidate is
+  // still rerun through the exact protected-name path below before it can be
+  // reported, so this is only an execution shortcut, not a relaxed rule.
+  const candidateHits = localizedToponymHits(targetText, { slug });
+  const hasCandidate = [...sourceEntities].some((code) => {
+    const entity = LOCALIZED_TOPONYMS.find((item) => item.code === code);
+    if (!entity) return false;
+    return ENTITY_TYPES.some((type) => {
+      const expected = EXPECTED_FORM_INDEX.get(`${code}|${type}|${locale}`)[slug ? 'slug' : 'text'];
+      return candidateHits.some((hit) => hit.entity.code === code
+        && hit.type === type
+        && hit.locale !== locale
+        && !expected.has(hit.observedForm || (slug ? normalizeForm(localizedSlugForm(hit.form)) : normalizeForm(hit.form))));
+    });
+  });
+  if (!hasCandidate) return [];
+
   const targetHits = localizedToponymHits(targetText, {
     protectNames: true,
     sourceText: profile.sourceText,
@@ -595,10 +645,7 @@ export function findLocalizedToponymMismatches({
   for (const entity of LOCALIZED_TOPONYMS) {
     if (!sourceEntities.has(entity.code)) continue;
     for (const type of ENTITY_TYPES) {
-      const expected = new Set(entity[type][locale].flatMap((form) => [
-        normalizeForm(form),
-        ...(slug ? [normalizeForm(localizedSlugForm(form))] : []),
-      ]));
+      const expected = EXPECTED_FORM_INDEX.get(`${entity.code}|${type}|${locale}`)[slug ? 'slug' : 'text'];
       for (const hit of targetHits) {
         if (hit.entity.code !== entity.code || hit.type !== type || hit.locale === locale) continue;
         if (expected.has(hit.observedForm || normalizeForm(hit.form))) continue;
@@ -1315,6 +1362,8 @@ export function localizedToponymInstruction(locale) {
 export default {
   LOCALIZED_TOPONYM_LOCALES,
   LOCALIZED_TOPONYMS,
+  ARTICLE_ENTRY_RE,
+  articleEntryValue,
   findLocalizedToponymMismatches,
   extractArticleProjectionText,
   normalizeLocalizedToponymText,

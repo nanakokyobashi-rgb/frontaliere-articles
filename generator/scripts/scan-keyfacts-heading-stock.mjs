@@ -32,7 +32,7 @@ export const STOCK_BASELINE = Object.freeze({
   }),
 });
 
-const BODY_LITERAL_RX = /(['"`])blog\.article\.([^'"`]+)\.(body\d+)\1\s*:\s*(['"`])((?:\\[\s\S]|(?!\4)[\s\S])*)\4/gu;
+const BODY_LITERAL_RX = /(['"`])blog\.article\.([^'"`]+)\.(body\d+)\1\s*:\s*(?:(")((?:\\[\s\S]|[^"\\])*)"|(')((?:\\[\s\S]|[^'\\])*)'|(`)((?:\\[\s\S]|[^`\\])*)`)/gu;
 
 function normalizedRelativePath(root, absolutePath) {
   return path.relative(root, absolutePath).split(path.sep).join('/');
@@ -89,8 +89,9 @@ export function planKeyFactsHeadingInsertion(body1, locale = 'it') {
 
 function body1FromSource(source) {
   for (const match of source.matchAll(BODY_LITERAL_RX)) {
-    if (match[3] !== 'body1' || match[5].includes('${')) continue;
-    return unescapeTs(match[5]);
+    const value = match[5] ?? match[7] ?? match[9] ?? '';
+    if (match[3] !== 'body1' || value.includes('${')) continue;
+    return unescapeTs(value);
   }
   return null;
 }
