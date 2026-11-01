@@ -37,7 +37,7 @@ export const AMOUNT_7500 = String.raw`7(?:\\?['’]|[.,\u00a0 ])?500`;
 const AMOUNT_7500_STANDALONE_RE = new RegExp(String.raw`(?<![\d.,'’])${AMOUNT_7500}(?!\d|[.,'’\u00a0 ]\d)`, 'g');
 
 const EXEMPTION_WORD_RE = /(esenzion|esent|esonero|franchig|exempt|allowance|deductible|tax[- ]free|befrei|freibetrag|freigrenze|selbstbeteilig|entlastung|exon[eé]r|exempt|franchise|abbatt)/i;
-const OLD_WORKER_RE = /(vecchi frontalieri|vecchio frontaliere|old (?:frontier|cross|border)|alte[nr]? grenz|bisherige grenz|anciens? frontalier)/i;
+const OLD_WORKER_RE = /(vecchi frontalieri|vecchio frontaliere|old (?:frontier|cross|border)|(?:alte[nr]?|bisherige[nr]?)\s+grenzg(?:ä|ae)nger|alt[- ]?grenzg(?:ä|ae)nger|anciens? frontalier)/iu;
 const EURO_RE = /(€|\beuro|\beur\b)/i;
 const MONTHLY_RE = /(al mese|mensil|\/mese|per month|a month|monthly|pro monat|monatlich|par mois|mensuel)/i;
 const HISTORIC_RE = /(fino al 2023|prima del 2024|until 2023|before 2024|bis 2023|vor 2024|jusqu.en 2023|avant 2024)/i;

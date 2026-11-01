@@ -187,6 +187,7 @@ import {
   sanitizeCodexDiagnostic,
 } from './lib/codex-exec-call.mjs';
 import { runFactualityGates } from './lib/article-factuality-gates.mjs';
+import { assertNoFiscalErrorsInLocales } from './lib/article-ymyl-gate.mjs';
 import { escapeRegExpLiteral } from './lib/escape-regexp.mjs';
 import {
   MIN_FACTS_PER_SECTION,
@@ -3006,6 +3007,18 @@ export async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeT
   const newCodes = missingField
     ? []
     : criticalCodes(runFactualityGates({ sections: checkedSections, locale: pair.locale, italianSections }));
+  // Questo writer non passa da `registerArticleFiles()`: deve quindi usare lo
+  // stesso guard fiscale del percorso di produzione prima di `writeAtomic`.
+  // Il guard condiviso lancia per il primo rilievo; trasformiamo il rifiuto in
+  // `qualityIssue`, così il report resta per-coppia e la pagina resta intatta.
+  let fiscalIssue = null;
+  if (!missingField) {
+    try {
+      assertNoFiscalErrorsInLocales({ [pair.locale]: checkedSections });
+    } catch (error) {
+      fiscalIssue = error instanceof Error ? error.message : `[fiscal-claims] ${String(error)}`;
+    }
+  }
 
   // Prima del motivo generico della guardia dei fatti chiave: un sinonimo del
   // titolo e' la causa, «sezione non riconosciuta» solo la sua conseguenza.
@@ -3043,7 +3056,7 @@ export async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeT
     newCodes,
     missingField,
     sanity,
-    qualityIssue: titleMarkerPlan?.issue || templateIssue || keyFactsGuard.issue,
+    qualityIssue: titleMarkerPlan?.issue || templateIssue || fiscalIssue || keyFactsGuard.issue,
     structuralDefect: Boolean(pair.structural),
   });
   let localizedToponymError = null;
