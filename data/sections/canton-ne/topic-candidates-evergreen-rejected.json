@@ -15,6 +15,14 @@
     "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261030-benefice-net-de-19-07-milliards-pour-la-bns-au-3e-trimestre.html": {
       "section": "canton-ne",
       "ts": 1793472779232
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261030-le-patron-de-micasa-demissionne.html": {
+      "section": "canton-ne",
+      "ts": 1793527522712
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261101-bhoutan-40-000-volontaires-batissent-108-stupas-pour-une-cite.html": {
+      "section": "canton-ne",
+      "ts": 1793527528686
     }
   }
 }
