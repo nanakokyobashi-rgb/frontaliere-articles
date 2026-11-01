@@ -872,10 +872,12 @@ export function shouldWrite({
   missingField,
   sanity = null,
   qualityIssue = null,
+  fiscalIssue = null,
   structuralDefect = false,
 }) {
   if (missingField) return { write: false, reason: 'campo-vuoto-dalla-cascata' };
   if (qualityIssue) return { write: false, reason: qualityIssue };
+  if (fiscalIssue) return { write: false, reason: fiscalIssue };
   if (oldCodes.length === 0 && !structuralDefect) return { write: false, reason: 'vecchia-gia-pulita' };
   if (newCodes.length > 0) return { write: false, reason: `ri-fallita: ${newCodes.join(',')}` };
   if (sanity) return { write: false, reason: sanity };
@@ -3010,7 +3012,7 @@ export async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeT
   // Questo writer non passa da `registerArticleFiles()`: deve quindi usare lo
   // stesso guard fiscale del percorso di produzione prima di `writeAtomic`.
   // Il guard condiviso lancia per il primo rilievo; trasformiamo il rifiuto in
-  // `qualityIssue`, così il report resta per-coppia e la pagina resta intatta.
+  // un motivo di rifiuto, così il report resta per-coppia e la pagina resta intatta.
   let fiscalIssue = null;
   if (!missingField) {
     try {
@@ -3056,7 +3058,8 @@ export async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeT
     newCodes,
     missingField,
     sanity,
-    qualityIssue: titleMarkerPlan?.issue || templateIssue || fiscalIssue || keyFactsGuard.issue,
+    qualityIssue: titleMarkerPlan?.issue || templateIssue || keyFactsGuard.issue,
+    fiscalIssue,
     structuralDefect: Boolean(pair.structural),
   });
   let localizedToponymError = null;
