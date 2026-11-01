@@ -833,7 +833,8 @@ async function resolveFormalReviewContext(body, { repo, pr, prUrl } = {}) {
       const headFingerprint = prContributionFingerprint(headSha);
       const reviewFingerprint = prContributionFingerprint(reviewCommit);
       reviewCarryForwardValidated = Boolean(
-        headFingerprint && reviewFingerprint && headFingerprint === reviewFingerprint,
+        headFingerprint !== null && reviewFingerprint !== null
+          && headFingerprint === reviewFingerprint,
       );
     }
     return {
