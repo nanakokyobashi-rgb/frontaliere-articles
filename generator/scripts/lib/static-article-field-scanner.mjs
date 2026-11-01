@@ -5,8 +5,9 @@
  * properties are separated only by a newline. A lazy RegExp with a
  * backreference has pathological backtracking on those values and can keep a
  * CI guard alive until the job timeout. This scanner consumes each quote and
- * escape once, preserves raw value offsets for repair tools, and deliberately
- * does not require a comma between adjacent static properties.
+ * escape once, preserves raw value offsets for repair tools, and keeps the old
+ * delimiter requirement so malformed adjacent properties are not admitted by
+ * the guard.
  */
 
 const ARTICLE_KEY_PREFIX = 'blog.article.';
@@ -107,15 +108,18 @@ export function scanStaticArticleFieldEntries(source) {
         const valueStart = skipTrivia(text, colon + 1);
         const valueLiteral = readRawStringLiteral(text, valueStart);
         if (valueLiteral) {
-          entries.push({
-            ...field,
-            rawValue: valueLiteral.rawValue,
-            quote: valueLiteral.quote,
-            keyStart: cursor,
-            valueStart: valueLiteral.rawStart,
-            valueEnd: valueLiteral.rawEnd,
-            end: valueLiteral.end,
-          });
+          const delimiter = skipTrivia(text, valueLiteral.end);
+          if (text[delimiter] === ',' || text[delimiter] === '}') {
+            entries.push({
+              ...field,
+              rawValue: valueLiteral.rawValue,
+              quote: valueLiteral.quote,
+              keyStart: cursor,
+              valueStart: valueLiteral.rawStart,
+              valueEnd: valueLiteral.rawEnd,
+              end: valueLiteral.end,
+            });
+          }
           cursor = valueLiteral.end;
           continue;
         }
