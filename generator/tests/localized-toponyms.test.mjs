@@ -8,6 +8,7 @@ import {
   LOCALIZED_TOPONYM_LOCALES,
   LOCALIZED_TOPONYMS,
   OFFICIAL_NAME_MARKERS,
+  createLocalizedToponymSourceProfile,
   extractArticleProjectionText,
   findArticleLocalizedToponymMismatches,
   findLocalizedToponymMismatches,
@@ -559,6 +560,7 @@ test('il corpus storico e le 24 sezioni cantonali non copiano esonimi fra lingue
   const sampleOffenders = [];
   for (const [articleId, sourceEntries] of italian) {
     const sourceText = [...new Set(sourceEntries.map((entry) => entry.value))].join('\n');
+    const sourceProfile = createLocalizedToponymSourceProfile(sourceText);
     for (const locale of ['en', 'de', 'fr']) {
       const targetEntries = byLocale.get(locale).get(articleId) || [];
       if (targetEntries.length === 0) continue;
@@ -570,6 +572,7 @@ test('il corpus storico e le 24 sezioni cantonali non copiano esonimi fra lingue
         sourceText,
         targetText: targetEntries.map((entry) => entry.value).join(CORPUS_FIELD_SEPARATOR),
         locale,
+        sourceProfile,
       });
       if (candidateIssues.length === 0) continue;
 
@@ -578,6 +581,7 @@ test('il corpus storico e le 24 sezioni cantonali non copiano esonimi fra lingue
           sourceText,
           targetText: targetEntry.value,
           locale,
+          sourceProfile,
         }));
         for (const issue of uniqueIssues.values()) {
           offenderCount += 1;
