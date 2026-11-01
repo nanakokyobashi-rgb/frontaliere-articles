@@ -339,7 +339,7 @@ export function buildObserverTargets({
       coverageBlocker: Boolean(change.coverageBlocker),
     });
   }
-  return { targets, skipped, missingLedgerKeys };
+  return { targets, skipped, missingLedgerKeys, coverageBlockers: activeCoverageBlockers };
 }
 
 function parseAttrs(tag) {
@@ -926,6 +926,7 @@ export async function runObserver({
     terminalRetentionDays: DEFAULT_TERMINAL_RETENTION_DAYS,
   });
   const prepared = buildObserverTargets({ changedBodies, ledgerItems: ledger, coverageBlockers, ...sources });
+  coverageBlockers = prepared.coverageBlockers;
   const report = await observePublicationLag({
     targets: prepared.targets,
     nowMs,
