@@ -1,9 +1,12 @@
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { CLOSING_LABELS, SOURCES, TOPICS } from './corpus-official-source-map.mjs';
+import { findOrphanedKeyFactsList } from '../generator/scripts/lib/key-facts-specificity.mjs';
 
 const ROOT = process.cwd();
 const APPLY = process.argv.includes('--apply');
+const KEY_FACTS_ONLY = process.argv.includes('--key-facts-only');
+const KEY_FACTS_PATH = process.argv.find((arg) => arg.startsWith('--key-facts-path='))?.slice('--key-facts-path='.length);
 const LANGS = new Set(['it', 'de', 'fr', 'en']);
 const FIELD_RE = /^([ \t]*)(['"])([^'"\n]+\.body\d+)\2([ \t]*:[ \t]*)(['"])((?:\\.|(?!\5)[^\n])*)\5(,?)([ \t]*)$/gm;
 
@@ -363,7 +366,32 @@ function targetedContentRepair(file, key, value) {
   return next;
 }
 
-const files = await listBodyFiles();
+/**
+ * Repairs the exact orphan shape detected by the stock ratchet. This pass is
+ * deliberately separate from the writer's quality gate: create-article still
+ * rejects a newly generated orphan, while this corpus repair tool can add the
+ * one localized heading that the existing body shape proves is missing.
+ */
+function repairOrphanedKeyFactsHeading(value, locale) {
+  const orphan = findOrphanedKeyFactsList(value, locale);
+  if (!orphan) return value;
+  const lines = value.split('\n');
+  const insertAt = orphan.lineIndex - 1;
+  if (insertAt < 0) throw new Error('Posizione di inserimento dei fatti chiave non valida');
+  return [
+    ...lines.slice(0, insertAt),
+    orphan.heading,
+    ...lines.slice(insertAt),
+  ].join('\n');
+}
+
+const files = (await listBodyFiles()).filter((file) => {
+  if (!KEY_FACTS_PATH) return true;
+  return path.relative(ROOT, file).split(path.sep).join('/') === KEY_FACTS_PATH;
+});
+if (KEY_FACTS_PATH && files.length === 0) {
+  throw new Error(`Percorso non trovato nel corpus: ${KEY_FACTS_PATH}`);
+}
 const stats = {
   files: files.length,
   fields: 0,
@@ -379,6 +407,7 @@ const stats = {
   restoredSummaryBlocks: 0,
   targetedContentFields: 0,
   targetedContentExamples: [],
+  keyFactsHeadingsAdded: 0,
   topics: {},
   languages: {},
   examples: {},
@@ -393,6 +422,17 @@ for (const file of files) {
   const fields = getFields(original);
   if (!fields.length) continue;
   stats.fields += fields.length;
+
+  if (KEY_FACTS_ONLY) {
+    const repaired = rewriteFields(original, (key, value) => {
+      if (!/\.body1$/.test(key)) return value;
+      const next = repairOrphanedKeyFactsHeading(value, locale);
+      if (next !== value) stats.keyFactsHeadingsAdded += 1;
+      return next;
+    });
+    if (APPLY && repaired !== original) await writeFile(file, repaired);
+    continue;
+  }
 
   let localDuplicates = 0;
   let deduped = rewriteFields(original, (key, value) => {
