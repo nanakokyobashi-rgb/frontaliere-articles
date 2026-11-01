@@ -4,12 +4,12 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "eventi",
-  "updatedAt": "2026-10-31T06:15:08.747Z",
-  "contentHash": "116e25bc8bb3f00af3f56b43011bcec018bfb11044eb480359ea8b5bc7b1c049",
+  "updatedAt": "2026-11-01T13:11:05.408Z",
+  "contentHash": "36cd94fc36781f4b8e9eab28cc65de4a0e6e6652051b679d2edf2bc68a4311ba",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-30T13:23:17.161Z",
+      "updatedAt": "2026-10-31T14:21:36.178Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "80",
+          "value": "78",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Iscrizioni mercatino di Natale Roveredo",
-              "detail": "Roveredo GR",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/iscrizioni-mercatino-di-natale-roveredo/"
+              "label": "Heididorf Saisonende",
+              "detail": "Heididorf AG, Maienfeld",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/heididorf-saisonende/"
             },
             {
-              "label": "MFM-Projekt: Sexualpädagogisches Präventionsprojekt für Jungs von 10 - 12 Jahren",
-              "detail": "Chur",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mfm-projekt-sexualpaedagogisches-praeventionsprojekt-fuer-jungs-von-10-12-jahren/"
-            },
-            {
-              "label": "Viva la Giiga - Volksmusig zum Loosa und Tanza",
-              "detail": "Saal Nuschpegna, Andeer",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/andeer/viva-la-giiga-volksmusig-zum-loosa-und-tanza_ARGDhe1"
-            },
-            {
-              "label": "Kirchen-Party",
-              "detail": "Chur",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kirchen-party/"
-            },
-            {
-              "label": "VON LUIGI SNOZZI BIS DIOKLETIAN - Vortrag von Prof. Christian Wagner",
-              "detail": "Flims",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/von-luigi-snozzi-bis-diokletian-vortrag-von-prof-christian-wagner/"
-            },
-            {
-              "label": "Matthieu Mazué",
-              "detail": "Casa Hasler, Poschiavo",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/events/music/poschiavo/matthieu-mazue_AGisasU"
-            },
-            {
-              "label": "Presentazione di Credici Iris e il mondo ti sorriderà",
-              "detail": "Poschiavo",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/presentazione-di-credici-iris-e-il-mondo-ti-sorridera/"
-            },
-            {
-              "label": "Resident Evil",
-              "detail": "Davos",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/resident-evil/"
+              "label": "\"Music and Story\" Church St. Peter 2026",
+              "detail": "Evang.-ref. Kirche St. Peter, Arosa",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/music-and-story-church-st-peter-2026/"
             },
             {
               "label": "Cinema Staziun Lavin - BECAARIA",
               "detail": "Cinema Staziun, Zernez — in corso, ultimo giorno: 7 novembre 2026",
-              "date": "2026-10-31",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/cinema-staziun-lavin-becaaria/"
             },
             {
               "label": "Tematizzare la Valle Riflessioni sulle forme di vita in Valposchiavo",
               "detail": "Casa Torre, Poschiavo — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-10-31",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
+            },
+            {
+              "label": "Waldbaden Alpin",
+              "detail": "Scuol — in corso, ultimo giorno: 6 novembre 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
+            },
+            {
+              "label": "Caffè Rumantsch ad Ardez",
+              "detail": "Ardez, Scuol — in corso, ultimo giorno: 11 novembre 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
+            },
+            {
+              "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
+              "detail": "Ardez, Scuol — in corso, ultimo giorno: 7 novembre 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
+            },
+            {
+              "label": "Alphorn holiday course for beginners",
+              "detail": "Walserhuus Sertig, Davos",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/alphorn-holiday-course-for-beginners-1/"
+            },
+            {
+              "label": "Schöne Dinge",
+              "detail": "Theater Chur, Chur",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schoene-dinge/"
+            },
+            {
+              "label": "Tanz- und Singnachmittag im Center da Sanadad",
+              "detail": "Center da Sanadad Savognin",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/savognin/tanz-und-singnachmittag-im-center-da-sanadad_A6QxCMu"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/grigioni/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -147,7 +147,7 @@
           "url": "/eventi/grigioni/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "en": {
       "canton": "GR",
@@ -157,7 +157,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "80",
+          "value": "78",
           "note": "from the site’s events calendar"
         }
       ],
@@ -168,69 +168,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Iscrizioni mercatino di Natale Roveredo",
-              "detail": "Roveredo GR",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/iscrizioni-mercatino-di-natale-roveredo/"
+              "label": "Heididorf Saisonende",
+              "detail": "Heididorf AG, Maienfeld",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/heididorf-saisonende/"
             },
             {
-              "label": "MFM-Projekt: Sexualpädagogisches Präventionsprojekt für Jungs von 10 - 12 Jahren",
-              "detail": "Chur",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mfm-projekt-sexualpaedagogisches-praeventionsprojekt-fuer-jungs-von-10-12-jahren/"
-            },
-            {
-              "label": "Viva la Giiga - Volksmusig zum Loosa und Tanza",
-              "detail": "Saal Nuschpegna, Andeer",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/andeer/viva-la-giiga-volksmusig-zum-loosa-und-tanza_ARGDhe1"
-            },
-            {
-              "label": "Kirchen-Party",
-              "detail": "Chur",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kirchen-party/"
-            },
-            {
-              "label": "VON LUIGI SNOZZI BIS DIOKLETIAN - Vortrag von Prof. Christian Wagner",
-              "detail": "Flims",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/von-luigi-snozzi-bis-diokletian-vortrag-von-prof-christian-wagner/"
-            },
-            {
-              "label": "Matthieu Mazué",
-              "detail": "Casa Hasler, Poschiavo",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/events/music/poschiavo/matthieu-mazue_AGisasU"
-            },
-            {
-              "label": "Presentazione di Credici Iris e il mondo ti sorriderà",
-              "detail": "Poschiavo",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/presentazione-di-credici-iris-e-il-mondo-ti-sorridera/"
-            },
-            {
-              "label": "Resident Evil",
-              "detail": "Davos",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/resident-evil/"
+              "label": "\"Music and Story\" Church St. Peter 2026",
+              "detail": "Evang.-ref. Kirche St. Peter, Arosa",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/music-and-story-church-st-peter-2026/"
             },
             {
               "label": "Cinema Staziun Lavin - BECAARIA",
               "detail": "Cinema Staziun, Zernez — ongoing, last day: 7 November 2026",
-              "date": "2026-10-31",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/cinema-staziun-lavin-becaaria/"
             },
             {
               "label": "Tematizzare la Valle. Riflessioni sulle forme di vita in Valposchiavo",
               "detail": "Casa Torre, Poschiavo — ongoing, last day: 14 November 2026",
-              "date": "2026-10-31",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
+            },
+            {
+              "label": "Forest Bathing Alpin",
+              "detail": "Scuol — ongoing, last day: 6 November 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
+            },
+            {
+              "label": "Café Rumantsch ad Ardez",
+              "detail": "Ardez, Scuol — ongoing, last day: 11 November 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
+            },
+            {
+              "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
+              "detail": "Ardez, Scuol — ongoing, last day: 7 November 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
+            },
+            {
+              "label": "Alphorn holiday course for beginners",
+              "detail": "Walserhuus Sertig, Davos",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/alphorn-holiday-course-for-beginners-1/"
+            },
+            {
+              "label": "Schöne Dinge",
+              "detail": "Theater Chur, Chur",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schoene-dinge/"
+            },
+            {
+              "label": "Tanz- und Singnachmittag im Center da Sanadad",
+              "detail": "Center da Sanadad Savognin",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/savognin/tanz-und-singnachmittag-im-center-da-sanadad_A6QxCMu"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/graubunden/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -282,7 +282,7 @@
           "url": "/en/events/graubunden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "de": {
       "canton": "GR",
@@ -292,7 +292,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "80",
+          "value": "78",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -303,69 +303,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Iscrizioni mercatino di Natale Roveredo",
-              "detail": "Roveredo GR",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/iscrizioni-mercatino-di-natale-roveredo/"
+              "label": "Heididorf Saisonende",
+              "detail": "Heididorf AG, Maienfeld",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/heididorf-saisonende/"
             },
             {
-              "label": "MFM-Projekt: Sexualpädagogisches Präventionsprojekt für Jungs von 10 - 12 Jahren",
-              "detail": "Chur",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mfm-projekt-sexualpaedagogisches-praeventionsprojekt-fuer-jungs-von-10-12-jahren/"
-            },
-            {
-              "label": "Viva la Giiga - Volksmusig zum Loosa und Tanza",
-              "detail": "Saal Nuschpegna, Andeer",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/andeer/viva-la-giiga-volksmusig-zum-loosa-und-tanza_ARGDhe1"
-            },
-            {
-              "label": "Kirchen-Party",
-              "detail": "Chur",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kirchen-party/"
-            },
-            {
-              "label": "VON LUIGI SNOZZI BIS DIOKLETIAN - Vortrag von Prof. Christian Wagner",
-              "detail": "Flims",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/von-luigi-snozzi-bis-diokletian-vortrag-von-prof-christian-wagner/"
-            },
-            {
-              "label": "SYLVIA BRUCKNER",
-              "detail": "Casa Hasler, Poschiavo",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/events/music/poschiavo/matthieu-mazue_AGisasU"
-            },
-            {
-              "label": "Presentazione di Credici Iris e il mondo ti sorriderà",
-              "detail": "Poschiavo",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/presentazione-di-credici-iris-e-il-mondo-ti-sorridera/"
-            },
-            {
-              "label": "Resident Evil",
-              "detail": "Davos",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/resident-evil/"
+              "label": "«Musig und G’schicht» Kirche St. Peter 2026",
+              "detail": "Evang.-ref. Kirche St. Peter, Arosa",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/music-and-story-church-st-peter-2026/"
             },
             {
               "label": "Cinema Staziun Lavin - BECAARIA",
               "detail": "Cinema Staziun, Zernez — läuft, letzter Tag: 7. November 2026",
-              "date": "2026-10-31",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/cinema-staziun-lavin-becaaria/"
             },
             {
               "label": "Tematizzare la Valle. Riflessioni sulle forme di vita in Valposchiavo",
               "detail": "Casa Torre, Poschiavo — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-10-31",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
+            },
+            {
+              "label": "Waldbaden Alpin",
+              "detail": "Scuol — läuft, letzter Tag: 6. November 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
+            },
+            {
+              "label": "Cafè Rumantsch ad Ardez",
+              "detail": "Ardez, Scuol — läuft, letzter Tag: 11. November 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
+            },
+            {
+              "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
+              "detail": "Ardez, Scuol — läuft, letzter Tag: 7. November 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
+            },
+            {
+              "label": "Alphorn-Ferienkurs für Anfänger und Anfängerinnen",
+              "detail": "Walserhuus Sertig, Davos",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/alphorn-holiday-course-for-beginners-1/"
+            },
+            {
+              "label": "Schöne Dinge",
+              "detail": "Theater Chur, Chur",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schoene-dinge/"
+            },
+            {
+              "label": "Tanz- und Singnachmittag im Center da Sanadad",
+              "detail": "Center da Sanadad Savognin",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/savognin/tanz-und-singnachmittag-im-center-da-sanadad_A6QxCMu"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/graubunden/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -417,7 +417,7 @@
           "url": "/de/veranstaltungen/graubunden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "fr": {
       "canton": "GR",
@@ -427,7 +427,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "80",
+          "value": "78",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -438,69 +438,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Iscrizioni mercatino di Natale Roveredo",
-              "detail": "Roveredo GR",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/iscrizioni-mercatino-di-natale-roveredo/"
+              "label": "Heididorf Saisonende",
+              "detail": "Heididorf AG, Maienfeld",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/heididorf-saisonende/"
             },
             {
-              "label": "MFM-Projekt: Sexualpädagogisches Präventionsprojekt für Jungs von 10 - 12 Jahren",
-              "detail": "Chur",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mfm-projekt-sexualpaedagogisches-praeventionsprojekt-fuer-jungs-von-10-12-jahren/"
-            },
-            {
-              "label": "Viva la Giiga - Volksmusig zum Loosa und Tanza",
-              "detail": "Saal Nuschpegna, Andeer",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/andeer/viva-la-giiga-volksmusig-zum-loosa-und-tanza_ARGDhe1"
-            },
-            {
-              "label": "Kirchen-Party",
-              "detail": "Chur",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kirchen-party/"
-            },
-            {
-              "label": "VON LUIGI SNOZZI BIS DIOKLETIAN - Vortrag von Prof. Christian Wagner",
-              "detail": "Flims",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/von-luigi-snozzi-bis-diokletian-vortrag-von-prof-christian-wagner/"
-            },
-            {
-              "label": "Matthieu Mazué",
-              "detail": "Casa Hasler, Poschiavo",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/events/music/poschiavo/matthieu-mazue_AGisasU"
-            },
-            {
-              "label": "Presentazione di Credici Iris e il mondo ti sorriderà",
-              "detail": "Poschiavo",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/presentazione-di-credici-iris-e-il-mondo-ti-sorridera/"
-            },
-            {
-              "label": "Resident Evil",
-              "detail": "Davos",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/resident-evil/"
+              "label": "«Musique et histoires» Église Saint-Pierre 2026",
+              "detail": "Evang.-ref. Kirche St. Peter, Arosa",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/music-and-story-church-st-peter-2026/"
             },
             {
               "label": "Cinema Staziun Lavin - BECAARIA",
               "detail": "Cinema Staziun, Zernez — en cours, dernier jour : 7 novembre 2026",
-              "date": "2026-10-31",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/cinema-staziun-lavin-becaaria/"
             },
             {
               "label": "Tematizzare la Valle. Riflessioni sulle forme di vita in Valposchiavo",
               "detail": "Casa Torre, Poschiavo — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-10-31",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
+            },
+            {
+              "label": "Waldbaden Alpin",
+              "detail": "Scuol — en cours, dernier jour : 6 novembre 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
+            },
+            {
+              "label": "Café Rumantsch ad Ardez",
+              "detail": "Ardez, Scuol — en cours, dernier jour : 11 novembre 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
+            },
+            {
+              "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
+              "detail": "Ardez, Scuol — en cours, dernier jour : 7 novembre 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
+            },
+            {
+              "label": "Alphorn holiday course for beginners",
+              "detail": "Walserhuus Sertig, Davos",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/alphorn-holiday-course-for-beginners-1/"
+            },
+            {
+              "label": "Schöne Dinge",
+              "detail": "Theater Chur, Chur",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/schoene-dinge/"
+            },
+            {
+              "label": "Tanz- und Singnachmittag im Center da Sanadad",
+              "detail": "Center da Sanadad Savognin",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/savognin/tanz-und-singnachmittag-im-center-da-sanadad_A6QxCMu"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/grisons/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -552,7 +552,7 @@
           "url": "/fr/evenements/grisons/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     }
   }
 }

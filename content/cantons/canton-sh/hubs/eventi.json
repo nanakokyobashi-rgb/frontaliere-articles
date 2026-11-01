@@ -4,17 +4,17 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "eventi",
-  "updatedAt": "2026-10-31T06:15:08.747Z",
-  "contentHash": "d2af350be374c0a7cfa8a6e96c2b0ea3f14fa97bb5416b7702c2e345d32b7f44",
+  "updatedAt": "2026-11-01T13:11:05.408Z",
+  "contentHash": "ed2ebe26e192c5bf5b5163fd4c2bc933b567f5b4f6f8815b4cd7ed44b4979152",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-30T13:23:17.161Z",
+      "updatedAt": "2026-10-31T14:21:36.178Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-30T21:45:03.956Z",
+      "updatedAt": "2026-10-31T20:43:08.728Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "23",
+          "value": "22",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,30 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Viel Lärm um nichts",
-              "detail": "Stadttheater Schaffhausen, Schaffhausen",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/viel-laerm-um-nichts/"
-            },
-            {
-              "label": "DUO ESPI – Saxophon und Piano – ein magisches Gebräu",
-              "detail": "Kunstschür, Stein am Rhein",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/evenements/musique/stein-am-rhein/duo-espi-saxophone-et-piano-un-melange-magique_A8eP3fU"
-            },
-            {
-              "label": "Die Zwillinge – «Voll auf die 2»",
-              "detail": "Ticketino, Neuhausen am Rheinfall",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/die-zwillinge-voll-auf-die-2-2/"
-            },
-            {
-              "label": "Latin Project SchärerBommer",
-              "detail": "Cafe Sabato im Weingut Stoll",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/osterfingen/latin-project-schaererbommer_A4YvxPg"
-            },
             {
               "label": "Auf den Spuren einer vergessenen Kultur: das Landjudentum am Hochrhein",
               "detail": "Bahnhof SBB Schaffhausen, Schaffhausen",
@@ -80,6 +56,12 @@
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/figurentheater-hand-im-glueck-finitopepitto-kindertheater-5/"
             },
             {
+              "label": "Viel Lärm um nichts",
+              "detail": "Stadttheater Schaffhausen, Schaffhausen — in corso, ultimo giorno: 1 novembre 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/viel-laerm-um-nichts/"
+            },
+            {
               "label": "\"Dusha&Cheese\" SPECIAL GUEST Sara Santos, Flamencotänzerin",
               "detail": "Haberhaus Bühne",
               "date": "2026-11-05",
@@ -96,11 +78,29 @@
               "detail": "Schaffhauserland Tourismus, Schaffhausen",
               "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/vibes-im-visitor-centre-ein-first-friday-event/"
+            },
+            {
+              "label": "Jazz for a Good Time with Bird, Bear, and Bee",
+              "detail": "tanneschaffhausen gmbh, Schaffhausen",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jazz-for-a-good-time-with-bird-bear-and-bee/"
+            },
+            {
+              "label": "Jazz für gute Stunden mit Bird, Bear and Bee",
+              "detail": "Restaurant Tanne",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/jazz-fuer-gute-stunden-mit-bird-bear-and-bee_AgyLuPg"
+            },
+            {
+              "label": "Musikanlass: Leave it all Behinders",
+              "detail": "Quartiertreff nik.",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/musikanlass-mit-dem-ensemble-clarobello_AZY2K9x"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/sciaffusa/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -133,7 +133,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-10-31T20:43:08.728Z"
         }
       ],
       "curatedArticles": [
@@ -155,7 +155,7 @@
           "url": "/eventi/sciaffusa/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "en": {
       "canton": "SH",
@@ -165,7 +165,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "23",
+          "value": "22",
           "note": "from the site’s events calendar"
         }
       ],
@@ -175,30 +175,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Viel Lärm um nichts",
-              "detail": "Stadttheater Schaffhausen, Schaffhausen",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/viel-laerm-um-nichts/"
-            },
-            {
-              "label": "DUO ESPI – Saxophone and Piano – a magical blend",
-              "detail": "Kunstschür, Stein am Rhein",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/evenements/musique/stein-am-rhein/duo-espi-saxophone-et-piano-un-melange-magique_A8eP3fU"
-            },
-            {
-              "label": "Die Zwillinge – «Voll auf die 2»",
-              "detail": "Ticketino, Neuhausen am Rheinfall",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/die-zwillinge-voll-auf-die-2-2/"
-            },
-            {
-              "label": "Latin Project SchärerBommer",
-              "detail": "Cafe Sabato im Weingut Stoll",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/osterfingen/latin-project-schaererbommer_A4YvxPg"
-            },
             {
               "label": "Auf den Spuren einer vergessenen Kultur: das Landjudentum am Hochrhein",
               "detail": "Bahnhof SBB Schaffhausen, Schaffhausen",
@@ -218,6 +194,12 @@
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/figurentheater-hand-im-glueck-finitopepitto-kindertheater-5/"
             },
             {
+              "label": "Viel Lärm um nichts",
+              "detail": "Stadttheater Schaffhausen, Schaffhausen — ongoing, last day: 1 November 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/viel-laerm-um-nichts/"
+            },
+            {
               "label": "\"Dusha&Cheese\" SPECIAL GUEST Sara Santos, flamenco dancer",
               "detail": "Haberhaus Bühne",
               "date": "2026-11-05",
@@ -234,11 +216,29 @@
               "detail": "Schaffhauserland Tourismus, Schaffhausen",
               "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/vibes-im-visitor-centre-ein-first-friday-event/"
+            },
+            {
+              "label": "Jazz for a Good Time with Bird, Bear, and Bee",
+              "detail": "tanneschaffhausen gmbh, Schaffhausen",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jazz-for-a-good-time-with-bird-bear-and-bee/"
+            },
+            {
+              "label": "Jazz for a Good Time with Bird, Bear, and Bee",
+              "detail": "Restaurant Tanne",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/jazz-fuer-gute-stunden-mit-bird-bear-and-bee_AgyLuPg"
+            },
+            {
+              "label": "Musikanlass: Leave it all Behinders",
+              "detail": "Quartiertreff nik.",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/musikanlass-mit-dem-ensemble-clarobello_AZY2K9x"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schaffhausen/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -271,7 +271,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-10-31T20:43:08.728Z"
         }
       ],
       "curatedArticles": [
@@ -293,7 +293,7 @@
           "url": "/en/events/schaffhausen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "de": {
       "canton": "SH",
@@ -303,7 +303,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "23",
+          "value": "22",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -313,30 +313,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Viel Lärm um nichts",
-              "detail": "Stadttheater Schaffhausen, Schaffhausen",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/viel-laerm-um-nichts/"
-            },
-            {
-              "label": "DUO ESPI – Saxophon und Piano – ein magisches Gebräu",
-              "detail": "Kunstschür, Stein am Rhein",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/evenements/musique/stein-am-rhein/duo-espi-saxophone-et-piano-un-melange-magique_A8eP3fU"
-            },
-            {
-              "label": "Die Zwillinge – «Voll auf die 2»",
-              "detail": "Ticketino, Neuhausen am Rheinfall",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/die-zwillinge-voll-auf-die-2-2/"
-            },
-            {
-              "label": "Latin Project SchärerBommer",
-              "detail": "Cafe Sabato im Weingut Stoll",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/osterfingen/latin-project-schaererbommer_A4YvxPg"
-            },
             {
               "label": "Auf den Spuren einer vergessenen Kultur: das Landjudentum am Hochrhein",
               "detail": "Bahnhof SBB Schaffhausen, Schaffhausen",
@@ -356,6 +332,12 @@
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/figurentheater-hand-im-glueck-finitopepitto-kindertheater-5/"
             },
             {
+              "label": "Viel Lärm um nichts",
+              "detail": "Stadttheater Schaffhausen, Schaffhausen — läuft, letzter Tag: 1. November 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/viel-laerm-um-nichts/"
+            },
+            {
               "label": "\"Dusha&Cheese\" SPECIAL GUEST Sara Santos, Flamencotänzerin",
               "detail": "Haberhaus Bühne",
               "date": "2026-11-05",
@@ -372,11 +354,29 @@
               "detail": "Schaffhauserland Tourismus, Schaffhausen",
               "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/vibes-im-visitor-centre-ein-first-friday-event/"
+            },
+            {
+              "label": "Jazz für gute Stunden mit Bird, Bear and Bee",
+              "detail": "tanneschaffhausen gmbh, Schaffhausen",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jazz-for-a-good-time-with-bird-bear-and-bee/"
+            },
+            {
+              "label": "Jazz für gute Stunden mit Bird, Bear and Bee",
+              "detail": "Restaurant Tanne",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/jazz-fuer-gute-stunden-mit-bird-bear-and-bee_AgyLuPg"
+            },
+            {
+              "label": "Musikanlass: Leave it all Behinders",
+              "detail": "Quartiertreff nik.",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/musikanlass-mit-dem-ensemble-clarobello_AZY2K9x"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schaffhausen/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -409,7 +409,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-10-31T20:43:08.728Z"
         }
       ],
       "curatedArticles": [
@@ -431,7 +431,7 @@
           "url": "/de/veranstaltungen/schaffhausen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "fr": {
       "canton": "SH",
@@ -441,7 +441,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "23",
+          "value": "22",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -451,30 +451,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Viel Lärm um nichts",
-              "detail": "Stadttheater Schaffhausen, Schaffhausen",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/viel-laerm-um-nichts/"
-            },
-            {
-              "label": "DUO ESPI – saxophone et piano – un mélange magique",
-              "detail": "Kunstschür, Stein am Rhein",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/evenements/musique/stein-am-rhein/duo-espi-saxophone-et-piano-un-melange-magique_A8eP3fU"
-            },
-            {
-              "label": "Die Zwillinge – «Voll auf die 2»",
-              "detail": "Ticketino, Neuhausen am Rheinfall",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/die-zwillinge-voll-auf-die-2-2/"
-            },
-            {
-              "label": "Latin Project SchärerBommer",
-              "detail": "Cafe Sabato im Weingut Stoll",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/osterfingen/latin-project-schaererbommer_A4YvxPg"
-            },
             {
               "label": "Auf den Spuren einer vergessenen Kultur: das Landjudentum am Hochrhein",
               "detail": "Bahnhof SBB Schaffhausen, Schaffhausen",
@@ -494,6 +470,12 @@
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/figurentheater-hand-im-glueck-finitopepitto-kindertheater-5/"
             },
             {
+              "label": "Viel Lärm um nichts",
+              "detail": "Stadttheater Schaffhausen, Schaffhausen — en cours, dernier jour : 1er novembre 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/viel-laerm-um-nichts/"
+            },
+            {
               "label": "« Dusha&Cheese » INVITÉE SPÉCIALE : Sara Santos, danseuse de flamenco",
               "detail": "Haberhaus Bühne",
               "date": "2026-11-05",
@@ -510,11 +492,29 @@
               "detail": "Schaffhauserland Tourismus, Schaffhausen",
               "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/vibes-im-visitor-centre-ein-first-friday-event/"
+            },
+            {
+              "label": "Du jazz pour passer de bons moments avec Bird, Bear and Bee",
+              "detail": "tanneschaffhausen gmbh, Schaffhausen",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jazz-for-a-good-time-with-bird-bear-and-bee/"
+            },
+            {
+              "label": "Du jazz pour passer de bons moments avec Bird, Bear and Bee",
+              "detail": "Restaurant Tanne",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/jazz-fuer-gute-stunden-mit-bird-bear-and-bee_AgyLuPg"
+            },
+            {
+              "label": "Musikanlass: Leave it all Behinders",
+              "detail": "Quartiertreff nik.",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/musikanlass-mit-dem-ensemble-clarobello_AZY2K9x"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schaffhouse/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -547,7 +547,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-10-31T20:43:08.728Z"
         }
       ],
       "curatedArticles": [
@@ -569,7 +569,7 @@
           "url": "/fr/evenements/schaffhouse/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     }
   }
 }
