@@ -61,6 +61,7 @@ test('la tabella canonica conserva gli esonimi richiesti', () => {
   assert.deepEqual(byCode.get('SG').canton, {
     it: ['San Gallo'], en: ['St. Gallen'], de: ['St. Gallen'], fr: ['Saint-Gall'],
   });
+  assert.deepEqual(byCode.get('SZ').canton.fr, ['Schwytz', 'Schwyz']);
 });
 
 test('i marcatori coprono i nomi ufficiali usati dalle label nav', () => {
