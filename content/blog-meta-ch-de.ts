@@ -8660,9 +8660,6 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.startup-innovazione-sociale-open-call.title': 'Open Call 2026: Weiterbildung und Finanzierung für soziale Startups',
     'blog.article.startup-innovazione-sociale-open-call.excerpt': 'Bewerbungen bis zum 15.',
     'blog.article.startup-innovazione-sociale-open-call.imageAlt': 'Illustratives Bild zum Thema des Artikels',
-    'blog.article.sospensione-lavori-muro-anti-migranti-big-bend-texas.title': 'Big Bend: CBP pausiert Bauarbeiten im Nationalpark',
-    'blog.article.sospensione-lavori-muro-anti-migranti-big-bend-texas.excerpt': 'Am 17. August 2026 kündigte CBP-Commissioner Rodney S. Scott eine Pause der Bauarbeiten im Big-Bend-Nationalpark für eine Begutachtung vor Ort an.',
-    'blog.article.sospensione-lavori-muro-anti-migranti-big-bend-texas.imageAlt': 'Big-Bend-Nationalpark in Texas',
 };
 
 export default blogMetaChDe;
