@@ -1996,7 +1996,8 @@ test('il writer autonomo non pubblica una pretesa fiscale nella ri-traduzione', 
   try {
     const paths = writeTranslationPairFixture(root, 'fiscal-bypass');
     const before = fs.readFileSync(paths.target, 'utf8');
-    const badGerman = 'Altgrenzgaenger erhalten 7.500 Euro. '.repeat(12);
+    const badGerman = ('Altgrenzgaenger erhalten 7.500 Euro. '
+      + 'Der Grenzgaenger der im Tessin arbeitet muss das Einkommen in Italien angeben. ').repeat(12);
     const row = await processPair(translationPair('fiscal-bypass'), {
       CONTENT_ROOT: root,
       APPLY: true,
