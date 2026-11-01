@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-31T11:03:15.690Z",
-  "contentHash": "d658383ceb58eb085168ca497172cb220f11ee7d1ae25d799cc9275d156d5ca1",
+  "updatedAt": "2026-11-01T13:11:05.408Z",
+  "contentHash": "c3914f043a3565f062bee76c3b346b1b971bcb485d776baae31ac343b9ddacb9",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-31T01:06:50.670Z",
+      "updatedAt": "2026-10-31T21:55:48.067Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-30T21:45:03.956Z",
+      "updatedAt": "2026-10-31T20:43:08.728Z",
       "keyFacts": 0
     }
   ],
@@ -160,13 +160,18 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-31T01:06:50.670Z"
+          "updatedAt": "2026-10-31T21:55:48.067Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Perturbations de la circulation - dimanche 1er novembre",
+              "date": "2026-10-31",
+              "url": "https://www.ge.ch/node/45382"
+            },
             {
               "label": "Rodéos routiers et excès de vitesse : les conséquences vont bien au-delà de l’amende",
               "date": "2026-10-30",
@@ -191,14 +196,9 @@
               "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 26 octobre 2026",
               "date": "2026-10-22",
               "url": "https://www.ge.ch/node/45273"
-            },
-            {
-              "label": "Portraits croisés",
-              "date": "2026-10-21T07:00:31.000Z",
-              "url": "https://www.lemanexpress.com/2026/10/21/portraits-croises/"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-10-31T20:43:08.728Z"
         }
       ],
       "curatedArticles": [
@@ -258,7 +258,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-31T11:03:15.690Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "en": {
       "canton": "GE",
@@ -396,13 +396,18 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-31T01:06:50.670Z"
+          "updatedAt": "2026-10-31T21:55:48.067Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Perturbations de la circulation - dimanche 1er novembre",
+              "date": "2026-10-31",
+              "url": "https://www.ge.ch/node/45382"
+            },
             {
               "label": "Rodéos routiers et excès de vitesse : les conséquences vont bien au-delà de l’amende",
               "date": "2026-10-30",
@@ -427,14 +432,9 @@
               "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 26 octobre 2026",
               "date": "2026-10-22",
               "url": "https://www.ge.ch/node/45273"
-            },
-            {
-              "label": "Portraits croisés",
-              "date": "2026-10-21T07:00:31.000Z",
-              "url": "https://www.lemanexpress.com/2026/10/21/portraits-croises/"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-10-31T20:43:08.728Z"
         }
       ],
       "curatedArticles": [
@@ -494,7 +494,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-31T11:03:15.690Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "de": {
       "canton": "GE",
@@ -632,13 +632,18 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-31T01:06:50.670Z"
+          "updatedAt": "2026-10-31T21:55:48.067Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Perturbations de la circulation - dimanche 1er novembre",
+              "date": "2026-10-31",
+              "url": "https://www.ge.ch/node/45382"
+            },
             {
               "label": "Rodéos routiers et excès de vitesse : les conséquences vont bien au-delà de l’amende",
               "date": "2026-10-30",
@@ -663,14 +668,9 @@
               "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 26 octobre 2026",
               "date": "2026-10-22",
               "url": "https://www.ge.ch/node/45273"
-            },
-            {
-              "label": "Portraits croisés",
-              "date": "2026-10-21T07:00:31.000Z",
-              "url": "https://www.lemanexpress.com/2026/10/21/portraits-croises/"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-10-31T20:43:08.728Z"
         }
       ],
       "curatedArticles": [
@@ -730,7 +730,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-31T11:03:15.690Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "fr": {
       "canton": "GE",
@@ -868,13 +868,18 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-31T01:06:50.670Z"
+          "updatedAt": "2026-10-31T21:55:48.067Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Perturbations de la circulation - dimanche 1er novembre",
+              "date": "2026-10-31",
+              "url": "https://www.ge.ch/node/45382"
+            },
             {
               "label": "Rodéos routiers et excès de vitesse : les conséquences vont bien au-delà de l’amende",
               "date": "2026-10-30",
@@ -899,14 +904,9 @@
               "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 26 octobre 2026",
               "date": "2026-10-22",
               "url": "https://www.ge.ch/node/45273"
-            },
-            {
-              "label": "Portraits croisés",
-              "date": "2026-10-21T07:00:31.000Z",
-              "url": "https://www.lemanexpress.com/2026/10/21/portraits-croises/"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-10-31T20:43:08.728Z"
         }
       ],
       "curatedArticles": [
@@ -966,7 +966,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-31T11:03:15.690Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     }
   }
 }
