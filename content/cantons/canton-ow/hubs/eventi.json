@@ -4,12 +4,12 @@
   "section": "canton-ow",
   "canton": "OW",
   "topic": "eventi",
-  "updatedAt": "2026-10-31T06:15:08.747Z",
-  "contentHash": "0bc180be2d2ad9a5e01c9b0498a2c28fbaa72cbaee90797bd174a7af31065098",
+  "updatedAt": "2026-11-01T13:11:05.408Z",
+  "contentHash": "6b773a40daacd2d4615e6d2d883a8a5518770e10e001ee358e7eb549d10b5a79",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-30T13:23:17.161Z",
+      "updatedAt": "2026-10-31T14:21:36.178Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "27",
+          "value": "31",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,12 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Die lange Nacht der kurzen Geschichten",
-              "detail": "Hotel Metzgern Sarnen, Sarnen, Sarnen",
-              "date": "2026-10-31",
-              "url": "https://www.ow.ch/anlaesseaktuelles/93313"
-            },
             {
               "label": "Finissage «und jetzt?!» und Saisonabschluss",
               "detail": "Museum Bruder Klaus, Sachseln, Sachseln",
@@ -91,11 +85,17 @@
               "detail": "Dreifachhalle, Sarnen, Sarnen",
               "date": "2026-11-05",
               "url": "https://www.ow.ch/anlaesseaktuelles/88730"
+            },
+            {
+              "label": "FG Sarnen: Qi Gong der Vier Jahreszeiten",
+              "detail": "Pfarreizentrum, Sarnen, Sarnen",
+              "date": "2026-11-06",
+              "url": "https://www.ow.ch/anlaesseaktuelles/88727"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/obvaldo/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/obvaldo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "en": {
       "canton": "OW",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "27",
+          "value": "31",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,12 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Die lange Nacht der kurzen Geschichten",
-              "detail": "Hotel Metzgern Sarnen, Sarnen, Sarnen",
-              "date": "2026-10-31",
-              "url": "https://www.ow.ch/anlaesseaktuelles/93313"
-            },
             {
               "label": "Finissage «und jetzt?!» und Saisonabschluss",
               "detail": "Museum Bruder Klaus, Sachseln, Sachseln",
@@ -196,11 +190,17 @@
               "detail": "Dreifachhalle, Sarnen, Sarnen",
               "date": "2026-11-05",
               "url": "https://www.ow.ch/anlaesseaktuelles/88730"
+            },
+            {
+              "label": "FG Sarnen: Qi Gong der Vier Jahreszeiten",
+              "detail": "Pfarreizentrum, Sarnen, Sarnen",
+              "date": "2026-11-06",
+              "url": "https://www.ow.ch/anlaesseaktuelles/88727"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/obwalden/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/obwalden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "de": {
       "canton": "OW",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "27",
+          "value": "31",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,12 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Die lange Nacht der kurzen Geschichten",
-              "detail": "Hotel Metzgern Sarnen, Sarnen, Sarnen",
-              "date": "2026-10-31",
-              "url": "https://www.ow.ch/anlaesseaktuelles/93313"
-            },
             {
               "label": "Finissage «und jetzt?!» und Saisonabschluss",
               "detail": "Museum Bruder Klaus, Sachseln, Sachseln",
@@ -301,11 +295,17 @@
               "detail": "Dreifachhalle, Sarnen, Sarnen",
               "date": "2026-11-05",
               "url": "https://www.ow.ch/anlaesseaktuelles/88730"
+            },
+            {
+              "label": "FG Sarnen: Qi Gong der Vier Jahreszeiten",
+              "detail": "Pfarreizentrum, Sarnen, Sarnen",
+              "date": "2026-11-06",
+              "url": "https://www.ow.ch/anlaesseaktuelles/88727"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/obwalden/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/obwalden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "fr": {
       "canton": "OW",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "27",
+          "value": "31",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,12 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Die lange Nacht der kurzen Geschichten",
-              "detail": "Hotel Metzgern Sarnen, Sarnen, Sarnen",
-              "date": "2026-10-31",
-              "url": "https://www.ow.ch/anlaesseaktuelles/93313"
-            },
             {
               "label": "Finissage «und jetzt?!» und Saisonabschluss",
               "detail": "Museum Bruder Klaus, Sachseln, Sachseln",
@@ -406,11 +400,17 @@
               "detail": "Dreifachhalle, Sarnen, Sarnen",
               "date": "2026-11-05",
               "url": "https://www.ow.ch/anlaesseaktuelles/88730"
+            },
+            {
+              "label": "FG Sarnen: Qi Gong der Vier Jahreszeiten",
+              "detail": "Pfarreizentrum, Sarnen, Sarnen",
+              "date": "2026-11-06",
+              "url": "https://www.ow.ch/anlaesseaktuelles/88727"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/obwald/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/obwald/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     }
   }
 }
