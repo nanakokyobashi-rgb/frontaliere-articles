@@ -18,6 +18,7 @@ import {
   validateLocalizedToponymTable,
 } from '../scripts/lib/localized-toponyms.mjs';
 import { extractSlugFallbackLocales } from '../scripts/lib/slug-fallback-provenance.mjs';
+import { scanStaticArticleFieldEntries } from '../scripts/lib/static-article-field-scanner.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -87,6 +88,29 @@ test('rileva un esonimo copiato e accetta la forma giusta', () => {
     [
       { code: 'BE', type: 'canton', locale: 'fr', form: 'Bern', expected: 'Berne' },
       { code: 'ZH', type: 'canton', locale: 'fr', form: 'Zurigo', expected: 'Zurich' },
+    ],
+  );
+});
+
+test('lo scanner dei literal articolo è lineare e conserva gli escape', () => {
+  const source = String.raw`
+    // 'blog.article.ignored.title': 'commento';
+    const data = {
+      'blog.article.demo.body1': 'L\'articolo su Lucerna', /* separatore */
+      "blog.article.demo.title": "Titolo",
+      'blog.article.invalid.body1': 'manca il delimitatore';
+    };
+  `;
+  assert.deepEqual(
+    scanStaticArticleFieldEntries(source).map(({ articleId, field, rawValue, valueStart, valueEnd }) => ({
+      articleId, field, rawValue, value: source.slice(valueStart, valueEnd),
+    })),
+    [
+      {
+        articleId: 'demo', field: 'body1', rawValue: String.raw`L\'articolo su Lucerna`,
+        value: String.raw`L\'articolo su Lucerna`,
+      },
+      { articleId: 'demo', field: 'title', rawValue: 'Titolo', value: 'Titolo' },
     ],
   );
 });
@@ -498,8 +522,6 @@ test('ripara il cantone Ticino solo fuori dai nomi ufficiali e solo dove serve',
   );
 });
 
-const ENTRY_RE = /['"]blog\.article\.([^'"]+)\.([^'"]+)['"]\s*:\s*(['"])((?:\\.|(?!\3)[^\r\n])*?)\3\s*(?=[,}])/gu;
-
 function unescapeTsValue(value) {
   return value.replace(/\\([\\'"\\\\])/gu, '$1');
 }
@@ -535,10 +557,15 @@ function collectCorpusEntries() {
     const locale = corpusLocale(file);
     if (!locale) continue;
     const source = readFileSync(file, 'utf8');
-    for (const match of source.matchAll(ENTRY_RE)) {
-      const articleId = match[1];
+    for (const match of scanStaticArticleFieldEntries(source)) {
+      const articleId = match.articleId;
       const entries = byLocale.get(locale).get(articleId) || [];
-      entries.push({ key: `${articleId}|${match[2]}`, field: match[2], value: unescapeTsValue(match[4]), file });
+      entries.push({
+        key: `${articleId}|${match.field}`,
+        field: match.field,
+        value: unescapeTsValue(match.rawValue),
+        file,
+      });
       byLocale.get(locale).set(articleId, entries);
     }
   }
@@ -584,6 +611,7 @@ test('il corpus storico e le 24 sezioni cantonali non copiano esonimi fra lingue
         targetText: targetEntries.map((entry) => entry.value).join(CORPUS_FIELD_SEPARATOR),
         locale,
         sourceProfile,
+        protectNames: false,
       });
       if (candidateIssues.length === 0) continue;
 
