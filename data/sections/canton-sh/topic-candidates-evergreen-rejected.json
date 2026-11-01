@@ -23,6 +23,10 @@
     "canton-sh::https://sh.ch/webseite/kanton-schaffhausen/beh-rde/regierung/staatskanzlei/medienmitteilungen-24272945-de.html": {
       "section": "canton-sh",
       "ts": 1793494498138
+    },
+    "canton-sh::https://www.shn.ch/region/kanton/2026-10-28/jetzt-ist-klar-wer-das-neue-schaffhauser-spital-baut-und-wie-teuer-es": {
+      "section": "canton-sh",
+      "ts": 1793545985707
     }
   }
 }
