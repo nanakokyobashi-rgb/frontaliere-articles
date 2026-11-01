@@ -4,14 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/kantonsrat-zug-plant-hoehere-praemienbeitraege-ab-2028-art-1729375": {
-      "section": "canton-sz",
-      "ts": 1793342474447
-    },
-    "canton-sz::https://www.einsiedeln.ch/verwaltung/mitteilungen/aktuelle-mitteilungen?m=4563": {
-      "section": "canton-sz",
-      "ts": 1793342595978
-    },
     "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/passepartout-praegt-den-oev-in-der-zentralschweiz-seit-40-jahren-art-1729692": {
       "section": "canton-sz",
       "ts": 1793427652903
@@ -59,6 +51,14 @@
     "canton-sz::https://www.hoefner.ch/2026/10/30/herbstsession-im-kinderparlament": {
       "section": "canton-sz",
       "ts": 1793493652761
+    },
+    "canton-sz::https://www.einsiedeln.ch/verwaltung/mitteilungen/aktuelle-mitteilungen?m=4563": {
+      "section": "canton-sz",
+      "ts": 1793548771113
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/schweizundwelt/immobilien-zinsanstieg-wird-gefahr-fuer-hausbesitzer-oder-kommt-alles-anders-art-1729703": {
+      "section": "canton-sz",
+      "ts": 1793564045213
     }
   }
 }

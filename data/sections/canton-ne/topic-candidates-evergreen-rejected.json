@@ -23,6 +23,10 @@
     "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261101-bhoutan-40-000-volontaires-batissent-108-stupas-pour-une-cite.html": {
       "section": "canton-ne",
       "ts": 1793527528686
+    },
+    "canton-ne::https://www.letemps.ch/suisse/neuchatel/comment-le-canton-de-neuchatel-a-transforme-l-echec-du-transrun-en-strategie-multimodale-plebiscitee-par-la-confederation": {
+      "section": "canton-ne",
+      "ts": 1793547082890
     }
   }
 }
