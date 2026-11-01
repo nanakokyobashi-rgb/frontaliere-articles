@@ -36,6 +36,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
+  ARTICLE_BODY_API_SOURCE_FIXTURE,
   CONTENT_GATES,
   NON_SONO_CONTENT_GATES,
   REQUIRED_FILES,
@@ -288,25 +289,25 @@ describe('content-gates-main: niente falso verde', () => {
 
   test('il preflight verifica i fixture fuori da content prima di avviare i gate', () => {
     assert.ok(
-      REQUIRED_SOURCE_FILES.includes('generator/data/localized-toponyms.json'),
+      REQUIRED_SOURCE_FILES.includes(ARTICLE_BODY_API_SOURCE_FIXTURE),
       'la closure del gate article-body-api deve dichiarare il fixture dei toponimi',
     );
 
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'content-gates-source-fixture-'));
     try {
-      const fixture = path.join(dir, 'generator/data/localized-toponyms.json');
+      const fixture = path.join(dir, ARTICLE_BODY_API_SOURCE_FIXTURE);
       const missing = preflight(dir, { previousRevision: null });
       assert.ok(
-        missing.violations.some((message) => message.startsWith('generator/data/localized-toponyms.json:')),
+        missing.violations.some((message) => message.startsWith(`${ARTICLE_BODY_API_SOURCE_FIXTURE}:`)),
         'un fixture assente non deve arrivare fino a node --test',
       );
 
       fs.mkdirSync(path.dirname(fixture), { recursive: true });
       fs.writeFileSync(fixture, '{}\n');
       const present = preflight(dir, { previousRevision: null });
-      assert.doesNotMatch(
-        present.violations.join('\n'),
-        /generator\/data\/localized-toponyms\.json:/u,
+      assert.equal(
+        present.violations.some((message) => message.startsWith(`${ARTICLE_BODY_API_SOURCE_FIXTURE}:`)),
+        false,
         'un fixture materializzato deve superare il controllo di presenza',
       );
     } finally {

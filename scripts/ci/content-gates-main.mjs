@@ -498,9 +498,8 @@ export const REQUIRED_FILES = [
  * `node --test`, altrimenti un blob omesso diventa un generico errore di
  * esecuzione invece di una diagnosi del preflight.
  */
-export const REQUIRED_SOURCE_FILES = Object.freeze([
-  'generator/data/localized-toponyms.json',
-]);
+export const ARTICLE_BODY_API_SOURCE_FIXTURE = 'generator/data/localized-toponyms.json';
+export const REQUIRED_SOURCE_FILES = Object.freeze([ARTICLE_BODY_API_SOURCE_FIXTURE]);
 
 /** Pavimento sulle pagine SEO: `content/seo` ne ha 9 (misurate il 2026-08-18). */
 export const SEO_ROOT = { rel: 'content/seo', minFiles: 4 };
