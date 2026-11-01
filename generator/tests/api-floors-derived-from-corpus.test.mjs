@@ -1181,6 +1181,8 @@ test('build-api usa il parser SEO condiviso, non una terza finestra locale', () 
   const build = readFileSync(join(ROOT, 'scripts/build-api.mjs'), 'utf8');
   assert.match(build, /collectSeoEntryMetadata/);
   assert.match(build, /parsedSeoEntryIds/);
+  assert.match(build, /const registryIds = new Set\(\(SECTION_REGISTRIES\[section\.id\] \?\? \[\]\)\.map\(\(article\) => article\.id\)\)/);
+  assert.match(build, /\[\.\.\.registryIds\]\.every\(\(id\) => parsedIds\.has\(id\)\)/);
   assert.match(build, /\[\.\.\.parsedIds\]\.every\(\(id\) => articleIndexExclusions\.has\(articleIndexExclusionKey\(section\.id, id\)\)\)/);
   assert.doesNotMatch(build, /const ledgerOnly = section\.articleCount === 0 && section\.withdrawnArticleCount > 0;/);
   assert.doesNotMatch(build, /const entryRe = \/'blog-\(\[\^'\]\+\):\\s\*\\{\/g/);
