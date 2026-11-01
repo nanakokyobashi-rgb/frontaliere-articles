@@ -149,3 +149,18 @@ export function assertNoFiscalErrorsInLocales(contentByLocale) {
     throw error;
   }
 }
+
+/**
+ * FAQ-only writers update an already registered article outside the registrar.
+ * Re-run the same locale fiscal gate over the existing projection plus the
+ * candidate FAQ before their atomic rename, so a later FAQ pass cannot reopen
+ * a claim the registration path rejected.
+ */
+export function assertFaqPassesFiscalClaimsGate({ locale, articleText: existingText = '', faq = [] } = {}) {
+  assertNoFiscalErrorsInLocales({
+    [locale || 'unknown']: {
+      body: existingText,
+      faq,
+    },
+  });
+}

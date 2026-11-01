@@ -76,8 +76,8 @@ const WORK = [
   'impieg', 'assunzion', 'assum', 'licenzi', 'pension', 'previdenz', 'fisco', 'fiscal',
   'tassa ', 'tasse', 'impost', 'irpef', 'sindacat',
 ];
-
-const NEXUS_RE = wordStartRe([...CROSS_BORDER, ...SWITZERLAND, ...WORK]);
+const STRONG_NEXUS_RE = wordStartRe([...CROSS_BORDER, ...SWITZERLAND]);
+const GENERIC_NEXUS_RE = wordStartRe(WORK);
 const NEXUS_WORDS_RE = wholeWordRe(SWISS_WORDS);
 const BODY_ANCHOR_RE = wordStartRe([...CROSS_BORDER, ...SWITZERLAND]);
 /**
@@ -93,7 +93,8 @@ const BORDER_PROVINCE_RE = wordStartRe([
 /**
  * Le famiglie senza nesso. Solo termini che in un titolo non hanno un secondo
  * senso economico: niente «partita» nuda (partita IVA), niente «tappa» o «giro»,
- * niente «cina» o «russia» da sole quando sono mercati e non esteri puri.
+ * niente «cina» da sola quando e' un mercato e non un estero puro. `russ*` resta
+ * invece esplicito per coprire i titoli geopolitici russi senza un'ancora locale.
  */
 const SPORT_FAMILY_TERMS = [
   'serie a ', 'serie b ', 'serie c ', 'champions', 'europa league', 'conference league',
@@ -114,7 +115,7 @@ export const OFF_TOPIC_FAMILIES = Object.freeze({
   esteri: wordStartRe([
     'iran', 'teheran', 'hormuz', 'israel', 'gaza', 'hamas', 'hezbollah', 'libano', 'siria',
     'ucraina', 'kiev', 'putin', 'zelensky', 'trump', 'casa bianca', 'texas', 'stati uniti',
-    'messico', 'venezuela', 'corea del nord', 'pyongyang', 'taiwan', 'yemen', 'houthi', 'tajani',
+    'messico', 'venezuela', 'russ', 'corea del nord', 'pyongyang', 'taiwan', 'yemen', 'houthi', 'tajani',
   ]),
 });
 
@@ -123,8 +124,12 @@ function declaredText({ id = '', title = '' }) {
   return ` ${normalizeText(`${id} ${title}`)} `;
 }
 
-function hasNexus(text) {
-  return NEXUS_RE.test(text) || NEXUS_WORDS_RE.test(text);
+function hasStrongNexus(text) {
+  return STRONG_NEXUS_RE.test(text) || NEXUS_WORDS_RE.test(text);
+}
+
+function hasGenericNexus(text) {
+  return GENERIC_NEXUS_RE.test(text);
 }
 
 function offTopicFamily(text) {
@@ -141,20 +146,35 @@ function offTopicFamily(text) {
  */
 export function classifyArticleRelevance({ section = 'frontaliere', id = '', title = '', excerpt = '', body = '' }) {
   const declared = declaredText({ id, title });
-  if (hasNexus(declared)) return { relevant: true };
 
   // Una famiglia «esteri» in un titolo che nomina una provincia di confine e' un
   // presidio o una proiezione a Varese, non una notizia estera: cronaca e cultura
-  // locali restano ammesse. Sport e giochi no.
+  // locali restano ammesse. Sport e giochi no. Un'ancora generica come «lavoro»
+  // non basta a saltare questo deny-list: prima si decide se il titolo e' fuori
+  // tema, poi si valuta il nesso forte con Svizzera/confine.
   const offTopic = offTopicFamily(declared);
-  if (offTopic && !(offTopic.family === 'esteri' && BORDER_PROVINCE_RE.test(declared))) {
+  const declaredHasStrongNexus = hasStrongNexus(declared);
+  const declaredHasGenericNexus = hasGenericNexus(declared);
+  const foreignLocalException = offTopic?.family === 'esteri' && BORDER_PROVINCE_RE.test(declared);
+  if (offTopic && !declaredHasStrongNexus && !foreignLocalException) {
     return { relevant: false, rule: 'fuori-tema', ...offTopic };
   }
 
-  if (section !== 'frontaliere') return { relevant: true };
+  // Le parole generiche di lavoro/fisco descrivono anche notizie interamente
+  // italiane. Nella sezione frontaliere possono contribuire solo insieme a
+  // un'ancora forte (o a una provincia di confine), non da sole.
+  if (declaredHasStrongNexus || BORDER_PROVINCE_RE.test(declared)) return { relevant: true };
+
+  if (section !== 'frontaliere') {
+    // The Swiss/canton sections are Swiss by construction for a neutral title
+    // such as «Herisau». A generic work/fiscal term is different: it must not
+    // turn an otherwise unanchored foreign topic into a Swiss article.
+    if (declaredHasGenericNexus) return { relevant: false, rule: 'senza-ancore' };
+    return { relevant: true };
+  }
 
   const headline = ` ${normalizeText(`${declared} ${excerpt}`)} `;
-  if (hasNexus(headline) || BORDER_PROVINCE_RE.test(headline)) return { relevant: true };
+  if (hasStrongNexus(headline) || BORDER_PROVINCE_RE.test(headline)) return { relevant: true };
   if (isInLocalNewsArea(`${title} ${excerpt}`)) return { relevant: true };
   if (BODY_ANCHOR_RE.test(` ${normalizeText(body)} `)) return { relevant: true };
   return { relevant: false, rule: 'senza-ancore' };

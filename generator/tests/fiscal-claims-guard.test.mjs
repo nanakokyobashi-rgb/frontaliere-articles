@@ -5,12 +5,15 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import path from 'node:path';
+import { tmpdir } from 'node:os';
 import { findFiscalClaims, findFiscalErrors, findTaxHealthParameterErrors } from '../scripts/lib/fiscal-claims-guard.mjs';
 import {
   OFFICIAL_SOURCE_LINKS,
   YMYL_SOURCES_BRIEF,
   YMYL_SOURCES_BRIEF_CH,
+  assertFaqPassesFiscalClaimsGate,
   assertNoFiscalErrorsInLocales,
   assertYmylPublishable,
   checkYmylPublishable,
@@ -18,6 +21,8 @@ import {
   isYmylArticle,
 } from '../scripts/lib/article-ymyl-gate.mjs';
 import { repairFiscalText } from '../scripts/repair-fiscal-claims.mjs';
+import * as batchFaq from '../scripts/batch-add-faq-to-articles.mjs';
+import * as fixFaqLocales from '../scripts/fix-faq-locales.mjs';
 
 const ids = (text) => findFiscalClaims(text).map((claim) => claim.id);
 
@@ -286,6 +291,66 @@ test('le traduzioni non reintroducono un errore che l\'italiano non ha', () => {
     (error) => error.qualityReject === true && /franchigia-7500/.test(error.message),
   );
   assert.doesNotThrow(() => assertNoFiscalErrorsInLocales({ en: { body1: 'The allowance is €10,000.' } }));
+});
+
+test('i writer FAQ riapplicano il fiscal gate prima della scrittura atomica', () => {
+  assert.throws(
+    () => assertFaqPassesFiscalClaimsGate({
+      locale: 'en',
+      articleText: 'The article discusses the cross-border agreement.',
+      faq: [{ q: 'Which exemption applies?', a: 'Old frontier workers benefit from an exemption of €7,500.' }],
+    }),
+    (error) => error.qualityReject === true && /franchigia-7500/.test(error.message),
+  );
+  assert.doesNotThrow(() => assertFaqPassesFiscalClaimsGate({
+    locale: 'en',
+    articleText: 'The article discusses the cross-border agreement.',
+    faq: [{ q: 'Which allowance applies?', a: 'The current allowance is €10,000.' }],
+  }));
+
+  for (const relative of [
+    '../scripts/batch-add-faq-to-articles.mjs',
+    '../scripts/fix-faq-locales.mjs',
+  ]) {
+    const source = readFileSync(new URL(relative, import.meta.url), 'utf8');
+    assert.match(source, /assertFaqPassesFiscalClaimsGate\(/, `${relative}: missing FAQ fiscal gate`);
+    assert.match(source, /articleProjectionText[\s\S]{0,180}excludeFaq: true/,
+      `${relative}: the gate must include the existing article projection`);
+  }
+});
+
+test('i due writer FAQ non pubblicano una coppia fiscale respinta', (t) => {
+  const root = mkdtempSync(path.join(tmpdir(), 'faq-fiscal-gate-'));
+  t.after(() => rmSync(root, { recursive: true, force: true }));
+  const id = 'faq-fiscal-gate';
+  const faq = [{ q: 'Which exemption applies?', a: 'Old frontier workers benefit from an exemption of €7,500.' }];
+  const faqLiteral = JSON.stringify(faq).replaceAll("'", "\\'");
+  const bodyFile = (locale, withFaq) => {
+    const dir = path.join(root, locale);
+    mkdirSync(dir, { recursive: true });
+    const faqLine = withFaq ? `    'blog.article.${id}.faq': '${faqLiteral}',\n` : '';
+    const file = path.join(dir, `${id}.ts`);
+    writeFileSync(file, [
+      'const blogBody: Record<string, string> = {',
+      `    'blog.article.${id}.body1': 'The article discusses the cross-border agreement.',`,
+      faqLine.trimEnd(),
+      '};',
+      '',
+      'export default blogBody;',
+      '',
+    ].filter((line, index) => line || index === 0).join('\n'), 'utf8');
+    return file;
+  };
+
+  const itPath = bodyFile('it', false);
+  const itBefore = readFileSync(itPath, 'utf8');
+  assert.throws(() => batchFaq.insertFaqIntoBodyFile(itPath, id, faq), /franchigia-7500/);
+  assert.equal(readFileSync(itPath, 'utf8'), itBefore, 'il batch non deve rinominare il file dopo il rifiuto');
+
+  const enPath = bodyFile('en', true);
+  const enBefore = readFileSync(enPath, 'utf8');
+  assert.throws(() => fixFaqLocales.replaceFaqInFile(enPath, faq, id), /franchigia-7500/);
+  assert.equal(readFileSync(enPath, 'utf8'), enBefore, 'il fixer non deve rinominare il file dopo il rifiuto');
 });
 
 test('riparazione: la coppia di importi lascia la frase e toglie il falso', () => {

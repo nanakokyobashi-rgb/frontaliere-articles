@@ -30,6 +30,18 @@ for (const [id, title, family] of [
   });
 }
 
+for (const [id, title, section] of [
+  ['lavoro-mortale-giornalisti-messico', 'Il lavoro mortale dei giornalisti in Messico', 'frontaliere'],
+  ['disinformazione-russa-francia', 'Disinformazione russa colpisce in Francia', 'svizzera'],
+]) {
+  test(`il deny-list esteri precede il nexus generico o la sezione: ${id}`, () => {
+    const verdict = classifyArticleRelevance({ section, id, title });
+    assert.equal(verdict.relevant, false);
+    assert.equal(verdict.rule, 'fuori-tema');
+    assert.equal(verdict.family, 'esteri');
+  });
+}
+
 for (const [id, title] of [
   ['nathan-borradori-ambri-2030', 'Nathan Borradori, rinnovo con l\'Ambrì Piotta fino al 2030'],
   ['fc-lugano-pareggio', 'Il Lugano pareggia a Basilea'],
@@ -79,6 +91,17 @@ test('una famiglia fuori tema vale in ogni sezione: il Texas stava nella sezione
     title: 'Texas, sospesi i lavori per il muro anti-migranti a Big Bend',
   });
   assert.equal(verdict.rule, 'fuori-tema');
+});
+
+test('un nexus generico non sostituisce un anchor svizzero o di confine', () => {
+  assert.deepEqual(
+    classifyArticleRelevance({ section: 'svizzera', id: 'lavoro-in-italia', title: 'Lavoro e fisco in Italia' }),
+    { relevant: false, rule: 'senza-ancore' },
+  );
+  assert.deepEqual(
+    classifyArticleRelevance({ section: 'svizzera', id: 'lavoro-in-ticino', title: 'Lavoro e fisco in Ticino' }),
+    { relevant: true },
+  );
 });
 
 test('il rifiuto in generazione e\' un rifiuto del topic-gate: il ranker prosegue', () => {
