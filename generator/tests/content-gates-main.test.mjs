@@ -39,6 +39,7 @@ import {
   CONTENT_GATES,
   NON_SONO_CONTENT_GATES,
   REQUIRED_FILES,
+  REQUIRED_SOURCE_FILES,
   detectCorpusReaders,
   TITLE,
   buildIssueBody,
@@ -283,6 +284,34 @@ describe('content-gates-main: niente falso verde', () => {
   test('ogni file richiesto è dichiarato con un path sotto content/', () => {
     assert.ok(REQUIRED_FILES.length >= 12);
     assert.deepEqual(REQUIRED_FILES.filter((f) => !f.startsWith('content/')), []);
+  });
+
+  test('il preflight verifica i fixture fuori da content prima di avviare i gate', () => {
+    assert.ok(
+      REQUIRED_SOURCE_FILES.includes('generator/data/localized-toponyms.json'),
+      'la closure del gate article-body-api deve dichiarare il fixture dei toponimi',
+    );
+
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'content-gates-source-fixture-'));
+    try {
+      const fixture = path.join(dir, 'generator/data/localized-toponyms.json');
+      const missing = preflight(dir, { previousRevision: null });
+      assert.ok(
+        missing.violations.some((message) => message.startsWith('generator/data/localized-toponyms.json:')),
+        'un fixture assente non deve arrivare fino a node --test',
+      );
+
+      fs.mkdirSync(path.dirname(fixture), { recursive: true });
+      fs.writeFileSync(fixture, '{}\n');
+      const present = preflight(dir, { previousRevision: null });
+      assert.doesNotMatch(
+        present.violations.join('\n'),
+        /generator\/data\/localized-toponyms\.json:/u,
+        'un fixture materializzato deve superare il controllo di presenza',
+      );
+    } finally {
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
   });
 });
 

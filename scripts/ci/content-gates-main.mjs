@@ -491,6 +491,17 @@ export const REQUIRED_FILES = [
   ...['it', 'en', 'de', 'fr'].map((l) => `content/blog-meta-ch-${l}.ts`),
 ];
 
+/**
+ * File fuori da `content/` richiesti dalla closure di un gate che legge il
+ * corpus. `article-body-api.test.mjs` arriva qui tramite `nav-link-labels.mjs`;
+ * in uno sparse checkout l'import deve essere verificato prima di avviare
+ * `node --test`, altrimenti un blob omesso diventa un generico errore di
+ * esecuzione invece di una diagnosi del preflight.
+ */
+export const REQUIRED_SOURCE_FILES = Object.freeze([
+  'generator/data/localized-toponyms.json',
+]);
+
 /** Pavimento sulle pagine SEO: `content/seo` ne ha 9 (misurate il 2026-08-18). */
 export const SEO_ROOT = { rel: 'content/seo', minFiles: 4 };
 
@@ -525,6 +536,14 @@ export function preflight(
       violations.push(
         `${rel}: assente o non è un file regolare leggibile. I gate che lo leggono per nome ` +
           'passerebbero su un registro vuoto senza dire niente.',
+      );
+    }
+  }
+  for (const rel of REQUIRED_SOURCE_FILES) {
+    if (!isRegularFile(root, rel)) {
+      violations.push(
+        `${rel}: fixture della closure dei gate assente o illeggibile. ` +
+          'Il test article-body-api non deve partire con un import incompleto.',
       );
     }
   }
