@@ -10,6 +10,7 @@ on:
     branches: [main]
     paths:
       - 'content/cantons/**'
+      - 'content/article-index-exclusions.json'
       - 'content/blog-body-canton-*/**'
       - 'content/blog-meta-canton-*'
       # Il flip draft -> live cambia solo il registro. Il primo pass carica le

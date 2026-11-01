@@ -472,7 +472,7 @@ test('#11 la seconda corsia Codex rifiuta un body ridotto come il retry di tronc
 });
 
 test('#4 il gate e\' collegato a ENTRAMBI i percorsi di scrittura', () => {
-  const chiamate = src.match(/^\s*assertArticlePassesFactualityGates\(data\);/gm) || [];
+  const chiamate = src.match(/^\s*assertArticlePassesFactualityGates\(data(?:\);|,\s*\{)/gm) || [];
   assert.ok(
     chiamate.length >= 2,
     'il gate deve essere chiamato sia nel flusso AI primario (Step 3a.2) sia in '
@@ -484,9 +484,11 @@ test('#4 il gate e\' collegato a ENTRAMBI i percorsi di scrittura', () => {
   // qualunque scrittura: e' l'unica via dei quattro produttori secondari.
   const reg = src.indexOf('export async function registerArticleFiles(');
   assert.notEqual(reg, -1, 'registerArticleFiles non trovata — aggiornare questo test');
-  const corpo = src.slice(reg, reg + 4000);
+  const end = src.indexOf('\n/** True when an article id is already registered', reg);
+  assert.ok(end > reg, 'fine di registerArticleFiles non trovata — aggiornare questo test');
+  const corpo = src.slice(reg, end);
   assert.ok(
-    corpo.includes('assertArticlePassesFactualityGates(data);'),
+    corpo.includes('assertArticlePassesFactualityGates(data, {'),
     'registerArticleFiles() non chiama il gate: daily-brief, events-digest, '
       + 'border-wait-ranking e journalist tornerebbero a scrivere body tradotti non giudicati',
   );

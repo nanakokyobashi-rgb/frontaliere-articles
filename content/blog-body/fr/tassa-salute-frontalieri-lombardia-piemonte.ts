@@ -3,6 +3,7 @@ const bodyTassaSaluteFrontalieriLombardiaPiemonte: Record<string, string> = {
     'blog.article.tassa-salute-frontalieri-lombardia-piemonte.body2': '## Outils utiles pour protéger votre net\nPour réduire les pertes de change, comparez le [change CHF-EUR](nav:exchange) et les [banques pour frontaliers](nav:banks).',
     'blog.article.tassa-salute-frontalieri-lombardia-piemonte.body3': '*Source: [comozero.it](https://comozero.it/attualita/il-caos-tassa-salute-e-frontalieri-la-lombardia-richiama-allordine-ma-dal-piemonte-un-secco-no/)*',
     'blog.article.tassa-salute-frontalieri-lombardia-piemonte.faq': '[]',
+    'blog.article.tassa-salute-frontalieri-lombardia-piemonte.body4': '### Pourquoi comparer les régions\nLe texte met en regard la position rapportée en Lombardie et le refus exprimé par le Piémont. Il s’agit de positions politiques, non de deux calculs individuels et non d’une preuve d’application uniforme. Pour un travailleur frontalier, la région de résidence reste déterminante avec la loi nationale et les éventuels actes d’exécution. Le désaccord explique l’incertitude, mais ne permet pas de fixer un montant personnel.',
 };
 
 export default bodyTassaSaluteFrontalieriLombardiaPiemonte;

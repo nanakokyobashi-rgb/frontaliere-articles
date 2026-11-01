@@ -613,7 +613,10 @@ test('una sezione di famiglia accesa e VUOTA attraversa tutti i gate di publish-
   // un feed con item senza registro sorgente invece si'.
   const floors = readFileSync(path.join(ROOT, 'scripts/ci/verify-api-floors.mjs'), 'utf8');
   assert.match(floors, /RSS_SECTIONS\.filter\(\(section\) => isNewFamilySection\(root, section\.id\)\)/);
-  assert.match(floors, /if \(newFamily\.has\(owner\) \|\| unpublished\.has\(owner\)\) continue;/);
+  assert.match(
+    floors,
+    /const excludedOnly = expected\.feedSourcesExcludedOnly\?\.\[owner\] === true;\s*if \(newFamily\.has\(owner\) \|\| unpublished\.has\(owner\) \|\| excludedOnly\) continue;/,
+  );
   assert.match(floors, /if \(newFamily\.has\(section\)\) \{[\s\S]*?if \(feed\.items > 0\) violations\.push/);
   const none = { feeds: [], missingFeeds: [], imageErrors: [] };
   assert.deepEqual(
