@@ -372,6 +372,19 @@ test('protegge i nomi ufficiali identici senza assolvere il cantone in prosa', (
   );
 });
 
+test('il controllo candidato senza protezione resta un superset del gate esatto', () => {
+  const sourceText = 'Il servizio è gestito da Caisse Santé Genève.';
+  const targetText = 'Der Dienst wird von Caisse Santé Genève betrieben.';
+  assert.deepEqual(
+    findLocalizedToponymMismatches({ sourceText, targetText, locale: 'de' }),
+    [],
+  );
+  assert.deepEqual(
+    findLocalizedToponymMismatches({ sourceText, targetText, locale: 'de', protectNames: false }),
+    [{ code: 'GE', type: 'canton', locale: 'de', form: 'Genève', expected: 'Genf' }],
+  );
+});
+
 test('non protegge una frase ordinaria con un toponimo identico alla fonte', () => {
   const source = 'In Ticino si lavora ogni giorno.';
   const target = 'In Ticino wird jeden Tag gearbeitet.';
@@ -565,14 +578,16 @@ test('il corpus storico e le 24 sezioni cantonali non copiano esonimi fra lingue
       const targetEntries = byLocale.get(locale).get(articleId) || [];
       if (targetEntries.length === 0) continue;
 
-      // The combined call is only a candidate check. If it finds anything,
-      // rerun each field independently so diagnostics and the zero-offender
-      // invariant remain exactly as precise as before this optimization.
+      // The unprotected combined call is a conservative candidate check:
+      // protection can only remove hits. If it finds anything, rerun each
+      // field with the exact gate so diagnostics and the zero-offender
+      // invariant remain unchanged.
       const candidateIssues = findLocalizedToponymMismatches({
         sourceText,
         targetText: targetEntries.map((entry) => entry.value).join(CORPUS_FIELD_SEPARATOR),
         locale,
         sourceProfile,
+        protectNames: false,
       });
       if (candidateIssues.length === 0) continue;
 

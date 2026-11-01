@@ -580,13 +580,14 @@ export function findLocalizedToponymMismatches({
   locale,
   slug = false,
   sourceProfile = null,
+  protectNames = true,
 } = {}) {
   if (!LOCALE_SET.has(locale)) return [];
   const profile = sourceProfile || createLocalizedToponymSourceProfile(sourceText);
   const sourceEntities = profile.sourceEntities;
   if (sourceEntities.size === 0) return [];
   const targetHits = localizedToponymHits(targetText, {
-    protectNames: true,
+    protectNames,
     sourceText: profile.sourceText,
     sourceSearchText: profile.sourceSearchText,
     slug,
