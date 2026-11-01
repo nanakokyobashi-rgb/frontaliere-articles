@@ -533,6 +533,18 @@ function collectCorpusEntries() {
   return byLocale;
 }
 
+// Keep fields separate for matching: the sentinel cannot form a word boundary
+// that was not present inside a field, while one article-wide pass avoids
+// rebuilding the same Italian source analysis for every translated field.
+const CORPUS_FIELD_SEPARATOR = '\u0000';
+
+function uniqueLocalizedToponymIssues(issues) {
+  return new Map(issues.map((issue) => [
+    `${issue.code}|${issue.locale}|${issue.form}|${issue.expected}`,
+    issue,
+  ]));
+}
+
 test('il corpus storico e le 24 sezioni cantonali non copiano esonimi fra lingue', () => {
   const byLocale = collectCorpusEntries();
   const italian = byLocale.get('it');
@@ -548,16 +560,25 @@ test('il corpus storico e le 24 sezioni cantonali non copiano esonimi fra lingue
   for (const [articleId, sourceEntries] of italian) {
     const sourceText = [...new Set(sourceEntries.map((entry) => entry.value))].join('\n');
     for (const locale of ['en', 'de', 'fr']) {
-      for (const targetEntry of byLocale.get(locale).get(articleId) || []) {
-        const issues = findLocalizedToponymMismatches({
+      const targetEntries = byLocale.get(locale).get(articleId) || [];
+      if (targetEntries.length === 0) continue;
+
+      // The combined call is only a candidate check. If it finds anything,
+      // rerun each field independently so diagnostics and the zero-offender
+      // invariant remain exactly as precise as before this optimization.
+      const candidateIssues = findLocalizedToponymMismatches({
+        sourceText,
+        targetText: targetEntries.map((entry) => entry.value).join(CORPUS_FIELD_SEPARATOR),
+        locale,
+      });
+      if (candidateIssues.length === 0) continue;
+
+      for (const targetEntry of targetEntries) {
+        const uniqueIssues = uniqueLocalizedToponymIssues(findLocalizedToponymMismatches({
           sourceText,
           targetText: targetEntry.value,
           locale,
-        });
-        const uniqueIssues = new Map(issues.map((issue) => [
-          `${issue.code}|${issue.locale}|${issue.form}|${issue.expected}`,
-          issue,
-        ]));
+        }));
         for (const issue of uniqueIssues.values()) {
           offenderCount += 1;
           if (sampleOffenders.length < 80) {
