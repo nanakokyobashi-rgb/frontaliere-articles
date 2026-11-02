@@ -67,6 +67,7 @@ concurrency:
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 25
     env:
       # I test del floor devono usare la base dell'evento: `HEAD^` non è la
       # revisione pubblicata quando un push contiene più commit. Il mirror,

@@ -118,6 +118,20 @@ test('lo scanner dei literal articolo è lineare e conserva gli escape', () => {
   );
 });
 
+test('il controllo interpreta gli esonimi codificati con escape Unicode', () => {
+  const source = String.raw`const data = { 'blog.article.escaped.body1': 'The canton of B\u0065rne' };`;
+  const [entry] = scanStaticArticleFieldEntries(source);
+  assert.equal(entry.value, 'The canton of Berne');
+  assert.deepEqual(
+    findLocalizedToponymMismatches({
+      sourceText: 'Il cantone di Berna.',
+      targetText: entry.value,
+      locale: 'en',
+    }),
+    [{ code: 'BE', type: 'canton', locale: 'en', form: 'Berne', expected: 'Bern' }],
+  );
+});
+
 test('lo scanner AST ignora stringhe, regex, template, commenti, tipi e oggetti annidati', () => {
   const backtick = String.fromCharCode(96);
   const source = [
@@ -593,10 +607,6 @@ test('ripara il cantone Ticino solo fuori dai nomi ufficiali e solo dove serve',
   );
 });
 
-function unescapeTsValue(value) {
-  return value.replace(/\\([\\'"\\\\])/gu, '$1');
-}
-
 function walkTypeScriptFiles(directory, output = []) {
   for (const entry of readdirSync(directory, { withFileTypes: true })) {
     const file = path.join(directory, entry.name);
@@ -634,7 +644,7 @@ function collectCorpusEntries() {
       entries.push({
         key: `${articleId}|${match.field}`,
         field: match.field,
-        value: unescapeTsValue(match.rawValue),
+        value: match.value,
         file,
       });
       byLocale.get(locale).set(articleId, entries);
