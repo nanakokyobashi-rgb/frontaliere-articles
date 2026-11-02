@@ -152,7 +152,7 @@ function articleBlock(source, articleId) {
 function singleQuotedPropertyLocator(block, property) {
   const masked = maskTsComments(block);
   const pattern = new RegExp(
-    "((?:^|\\n)\\s*" + escapeRegex(property) + ":\\s*)'((?:\\\\.|[^'])*)'",
+    "((?:^|\\n)\\s*" + escapeRegex(property) + ":\\s*)'((?:\\\\.|[^'\\\\])*)'",
     'gm',
   );
   const matches = [...masked.matchAll(pattern)];
@@ -169,7 +169,7 @@ function singleQuotedPropertyLocator(block, property) {
 
 function structuredHeadlineLocator(block) {
   const masked = maskTsComments(block);
-  const pattern = /((?:^|\n)\s*"headline":\s*)"((?:\\.|[^"])*)"/gm;
+  const pattern = /((?:^|\n)\s*"headline":\s*)"((?:\\.|[^"\\\r\n])*)"/gm;
   const matches = [...masked.matchAll(pattern)];
   if (matches.length === 0) throw new Error('Structured headline non trovato');
   if (matches.length !== 1) throw new Error('Structured headline duplicato');
@@ -209,7 +209,7 @@ function replaceMetaEntry(source, fix) {
   const key = escapeRegex(fix.metadataKey);
   const masked = maskTsComments(source);
   const pattern = new RegExp(
-    "((?:['\"]" + key + "['\"]):\\s*)'((?:\\\\.|[^'])*)'",
+    "((?:['\"]" + key + "['\"]):\\s*)'((?:\\\\.|[^'\\\\])*)'",
     'g',
   );
   const matches = [...masked.matchAll(pattern)];
@@ -239,7 +239,7 @@ function sourceTitleValue(source, fix) {
   const key = escapeRegex(fix.metadataKey);
   const masked = maskTsComments(source);
   const pattern = new RegExp(
-    "((?:['\"]" + key + "['\"]):\\s*)'((?:\\\\.|[^'])*)'",
+    "((?:['\"]" + key + "['\"]):\\s*)'((?:\\\\.|[^'\\\\])*)'",
     'g',
   );
   const matches = [...masked.matchAll(pattern)];
