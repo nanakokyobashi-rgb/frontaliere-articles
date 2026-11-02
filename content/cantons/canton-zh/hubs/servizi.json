@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "servizi",
-  "updatedAt": "2026-11-02T09:20:10.429Z",
-  "contentHash": "b2cbf4624902e180103fc5b7f425540525da43a955595a51ddef16a097f50b2c",
+  "updatedAt": "2026-11-02T11:33:10.756Z",
+  "contentHash": "ed52041c72898aefb7d316e11594529eba0b05a9d89dab29778c5ca13e573176",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -19,8 +19,13 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-01T22:02:05.721Z",
+      "updatedAt": "2026-11-02T06:00:52.103Z",
       "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-11-02T06:29:41.493Z",
+      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
@@ -142,7 +147,21 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-11-01T22:02:05.721Z"
+          "updatedAt": "2026-11-02T06:00:52.103Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "4 °C",
+              "detail": "oggi da 4 a 7 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-02T06:29:41.493Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -260,7 +279,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-02T11:33:10.756Z"
     },
     "en": {
       "canton": "ZH",
@@ -375,7 +394,21 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-11-01T22:02:05.721Z"
+          "updatedAt": "2026-11-02T06:00:52.103Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "4 °C",
+              "detail": "today from 4 to 7 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-02T06:29:41.493Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -489,7 +522,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-02T11:33:10.756Z"
     },
     "de": {
       "canton": "ZH",
@@ -604,7 +637,21 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-11-01T22:02:05.721Z"
+          "updatedAt": "2026-11-02T06:00:52.103Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "4 °C",
+              "detail": "heute 4 bis 7 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-02T06:29:41.493Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -718,7 +765,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-02T11:33:10.756Z"
     },
     "fr": {
       "canton": "ZH",
@@ -833,7 +880,21 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-11-01T22:02:05.721Z"
+          "updatedAt": "2026-11-02T06:00:52.103Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "4 °C",
+              "detail": "aujourd’hui de 4 à 7 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-02T06:29:41.493Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -943,7 +1004,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-02T11:33:10.756Z"
     }
   }
 }
