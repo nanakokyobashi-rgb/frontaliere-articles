@@ -115,6 +115,22 @@ test('lo scanner dei literal articolo è lineare e conserva gli escape', () => {
   );
 });
 
+test('lo scanner ammette template literal e resta bounded su un valore non chiuso', () => {
+  const source = [
+    "const data = {",
+    "  'blog.article.demo.title': `Titolo`,",
+    `  'blog.article.broken.body1': '${'x'.repeat(100_000)}`,
+    '};',
+  ].join('\n');
+  assert.deepEqual(
+    scanStaticArticleFieldEntries(source).map(({ articleId, field, rawValue, quote }) => ({
+      articleId, field, rawValue, quote,
+    })),
+    [{ articleId: 'demo', field: 'title', rawValue: 'Titolo', quote: '`' }],
+  );
+  assert.equal(extractArticleProjectionText(source, 'broken'), '');
+});
+
 test('il profilo della sorgente riusa l analisi senza cambiare il verdetto', () => {
   const sourceText = 'Notizia sul cantone di Zurigo e sul lavoro a Lucerna.';
   const targetText = 'News from Lucerna and Zurich.';

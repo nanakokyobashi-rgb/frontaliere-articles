@@ -14,7 +14,7 @@ const ARTICLE_KEY_PREFIX = 'blog.article.';
 
 function readRawStringLiteral(source, start) {
   const quote = source[start];
-  if (quote !== "'" && quote !== '"') return null;
+  if (quote !== "'" && quote !== '"' && quote !== '`') return null;
   for (let cursor = start + 1; cursor < source.length; cursor += 1) {
     if (source[cursor] === '\\') {
       cursor += 1;
