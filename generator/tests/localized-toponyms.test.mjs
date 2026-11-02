@@ -18,7 +18,10 @@ import {
   validateLocalizedToponymTable,
 } from '../scripts/lib/localized-toponyms.mjs';
 import { extractSlugFallbackLocales } from '../scripts/lib/slug-fallback-provenance.mjs';
-import { scanStaticArticleFieldEntries } from '../scripts/lib/static-article-field-scanner.mjs';
+import {
+  scanStaticArticleFieldEntries,
+  scanStaticStringProperties,
+} from '../scripts/lib/static-article-field-scanner.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -93,24 +96,68 @@ test('rileva un esonimo copiato e accetta la forma giusta', () => {
 });
 
 test('lo scanner dei literal articolo è lineare e conserva gli escape', () => {
-  const source = String.raw`
-    // 'blog.article.ignored.title': 'commento';
-    const data = {
-      'blog.article.demo.body1': 'L\'articolo su Lucerna', /* separatore */
-      "blog.article.demo.title": "Titolo",
-      'blog.article.invalid.body1': 'manca il delimitatore';
-    };
-  `;
+  const source = [
+    "    // 'blog.article.ignored.title': 'commento';",
+    '    const data = {',
+    String.raw`      'blog.article.demo.body1': 'L\'articolo su Lucerna', /* separatore */`,
+    "      'blog.article.demo.body2': `Corpo",
+    "su Lucerna`,",
+    '      "blog.article.demo.title": "Titolo",',
+    "      'blog.article.invalid.body1': 'manca il delimitatore';",
+    '    };',
+  ].join('\n');
   assert.deepEqual(
-    scanStaticArticleFieldEntries(source).map(({ articleId, field, rawValue, valueStart, valueEnd }) => ({
-      articleId, field, rawValue, value: source.slice(valueStart, valueEnd),
-    })),
+    scanStaticArticleFieldEntries(source, { includeTemplateLiterals: true })
+      .map(({ articleId, field, rawValue, valueStart, valueEnd }) => ({
+        articleId, field, rawValue, value: source.slice(valueStart, valueEnd),
+      })),
     [
       {
         articleId: 'demo', field: 'body1', rawValue: String.raw`L\'articolo su Lucerna`,
         value: String.raw`L\'articolo su Lucerna`,
       },
+      { articleId: 'demo', field: 'body2', rawValue: 'Corpo\nsu Lucerna', value: 'Corpo\nsu Lucerna' },
       { articleId: 'demo', field: 'title', rawValue: 'Titolo', value: 'Titolo' },
+    ],
+  );
+});
+
+test('il reader non attraversa un terminatore fisico in un literal quotato', () => {
+  const source = [
+    'const data = {',
+    "  'blog.article.bad.title': 'valore corrotto",
+    "  'blog.article.good.title': 'Titolo valido',",
+    '};',
+  ].join('\n');
+  assert.deepEqual(
+    scanStaticArticleFieldEntries(source).map(({ articleId, field, rawValue }) => ({ articleId, field, rawValue })),
+    [{ articleId: 'good', field: 'title', rawValue: 'Titolo valido' }],
+  );
+});
+
+test('il reader resta lineare su escape densi e chiusura mancante', () => {
+  const source = [
+    `'blog.article.bad.title': '${'\\'.repeat(20_000)}`,
+    "'blog.article.good.title': 'Titolo valido',",
+  ].join('\n');
+  assert.deepEqual(
+    scanStaticArticleFieldEntries(source).map(({ articleId, field, rawValue }) => ({ articleId, field, rawValue })),
+    [{ articleId: 'good', field: 'title', rawValue: 'Titolo valido' }],
+  );
+});
+
+test('lo scanner delle proprietà statiche resta bounded sui valori malformati', () => {
+  const source = [
+    "it: 'valore corrotto",
+    "en: 'valore valido',",
+    "de: `valore\nmultilinea`,",
+  ].join('\n');
+  assert.deepEqual(
+    scanStaticStringProperties(source, ['it', 'en', 'de'], { includeTemplateLiterals: true })
+      .map(({ name, rawValue }) => ({ name, rawValue })),
+    [
+      { name: 'en', rawValue: 'valore valido' },
+      { name: 'de', rawValue: 'valore\nmultilinea' },
     ],
   );
 });
@@ -342,6 +389,10 @@ test('la proiezione da file raccoglie body, FAQ e meta dello stesso articolo', (
   assert.doesNotMatch(extractArticleProjectionText(body, 'demo', { excludeFaq: true }), /q/);
   assert.equal(extractArticleProjectionText(meta, 'demo'), 'Lucerna sul lago');
   assert.equal(extractArticleProjectionText(body, 'other'), 'Non entra');
+  assert.equal(
+    extractArticleProjectionText("'blog.article.demo.body2': `Corpo su Lucerna`,", 'demo'),
+    'Corpo su Lucerna',
+  );
 });
 
 test('prompt e gate condividono tutte le forme della tabella', () => {

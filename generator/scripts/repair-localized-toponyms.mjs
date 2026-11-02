@@ -20,14 +20,16 @@ import {
   replaceLocalizedToponymMismatches,
 } from './lib/localized-toponyms.mjs';
 import { extractSlugFallbackLocales } from './lib/slug-fallback-provenance.mjs';
-import { scanStaticArticleFieldEntries } from './lib/static-article-field-scanner.mjs';
+import {
+  scanStaticArticleFieldEntries,
+  scanStaticStringProperties,
+} from './lib/static-article-field-scanner.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const CONTENT_ROOT = path.join(ROOT, 'content');
 const WRITE = process.argv.includes('--write');
 let writeTmpSeq = 0;
 const SLUG_ENTRY_RE = /['"]([^'"]+)['"]\s*:\s*\{([^{}]*)\}/gu;
-const SLUG_PROPERTY_RE = /\b(it|en|de|fr)\s*:\s*(['"])((?:\\.|(?!\2)[^\r\n])*?)\2/gu;
 
 function walk(directory, output = []) {
   for (const entry of readdirSync(directory, { withFileTypes: true })) {
@@ -56,14 +58,6 @@ function localeForFile(file) {
   const metaLocale = basename.match(/-(it|en|de|fr)\.ts$/u)?.[1];
   if (metaLocale) return metaLocale;
   return file.split(path.sep).reverse().find((part) => LOCALIZED_TOPONYM_LOCALES.includes(part)) || null;
-}
-
-function rawSlugValuePosition(entryStart, propertyMatch) {
-  const colon = propertyMatch[0].indexOf(':');
-  const quote = propertyMatch[2];
-  const quotePosition = propertyMatch[0].indexOf(quote, colon);
-  const start = entryStart + (propertyMatch.index ?? 0) + quotePosition + 1;
-  return { start, end: start + propertyMatch[3].length };
 }
 
 const files = walk(CONTENT_ROOT).filter((file) => isCorpusFile(file) || isSlugFile(file));
@@ -109,8 +103,12 @@ for (const file of files) {
     for (const entry of source.matchAll(SLUG_ENTRY_RE)) {
       const properties = new Map();
       const bodyOffset = (entry.index ?? 0) + entry[0].indexOf(entry[2]);
-      for (const property of entry[2].matchAll(SLUG_PROPERTY_RE)) {
-        properties.set(property[1], { value: property[3], ...rawSlugValuePosition(bodyOffset, property) });
+      for (const property of scanStaticStringProperties(entry[2], LOCALIZED_TOPONYM_LOCALES)) {
+        properties.set(property.name, {
+          value: property.rawValue,
+          start: bodyOffset + property.valueStart,
+          end: bodyOffset + property.valueEnd,
+        });
       }
       if (properties.size !== LOCALIZED_TOPONYM_LOCALES.length) continue;
       addSourceValue(entry[1], properties.get('it').value);

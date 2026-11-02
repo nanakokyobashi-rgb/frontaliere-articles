@@ -6404,7 +6404,7 @@
     {
       "path": "generator/scripts/lib/static-article-field-scanner.mjs",
       "mode": "corpus-only",
-      "reason": "Scanner lessicale bounded delle proprietà statiche `blog.article.<id>.<field>`, usato da `generator/scripts/repair-localized-toponyms.mjs` e dal relativo test per evitare il backtracking delle regex sui body del corpus. È un helper del repair del generatore: il sito consuma il corpus via JSON HTTP e non esegue questo modulo, quindi non esiste un gemello operativo da trasportare.",
+      "reason": "Scanner lessicale bounded delle proprietà statiche `blog.article.<id>.<field>`, usato da `generator/scripts/lib/localized-toponyms.mjs`, `generator/scripts/repair-localized-toponyms.mjs` e dai relativi test per evitare il backtracking delle regex sui body del corpus. È un helper del repair e della proiezione del generatore: il sito consuma il corpus via JSON HTTP e non esegue questo modulo, quindi non esiste un gemello operativo da trasportare.",
       "baseline": {
         "site": null,
         "corpus": "2ff092013514093a",

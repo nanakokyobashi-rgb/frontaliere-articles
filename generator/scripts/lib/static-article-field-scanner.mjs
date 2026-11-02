@@ -5,32 +5,61 @@
  * properties are separated only by a newline. A lazy RegExp with a
  * backreference has pathological backtracking on those values and can keep a
  * CI guard alive until the job timeout. This scanner consumes each quote and
- * escape once, preserves raw value offsets for repair tools, and keeps the old
- * delimiter requirement so malformed adjacent properties are not admitted by
- * the guard.
+ * escape once, including when a malformed literal is rejected, preserves raw
+ * value offsets for repair tools, and keeps the old delimiter requirement so
+ * malformed adjacent properties are not admitted by the guard.
  */
 
 const ARTICLE_KEY_PREFIX = 'blog.article.';
 
-function readRawStringLiteral(source, start) {
-  const quote = source[start];
-  if (quote !== "'" && quote !== '"') return null;
-  for (let cursor = start + 1; cursor < source.length; cursor += 1) {
-    if (source[cursor] === '\\') {
-      cursor += 1;
+function isSupportedQuote(quote, allowTemplateLiterals) {
+  return quote === "'" || quote === '"' || (allowTemplateLiterals && quote === '`');
+}
+
+function readRawStringLiteralResult(source, start, { allowTemplateLiterals = true } = {}) {
+  const text = String(source ?? '');
+  const quote = text[start];
+  if (!isSupportedQuote(quote, allowTemplateLiterals)) return { literal: null, next: start + 1 };
+  const allowsPhysicalLineTerminators = quote === '`';
+  for (let cursor = start + 1; cursor < text.length; cursor += 1) {
+    if (text[cursor] === '\\') {
+      if (text[cursor + 1] === '\r' && text[cursor + 2] === '\n') cursor += 2;
+      else cursor += 1;
       continue;
     }
-    if (source[cursor] === quote) {
+    if (!allowsPhysicalLineTerminators && (text[cursor] === '\r' || text[cursor] === '\n')) {
       return {
-        quote,
-        rawValue: source.slice(start + 1, cursor),
-        rawStart: start + 1,
-        rawEnd: cursor,
-        end: cursor + 1,
+        literal: null,
+        next: text[cursor] === '\r' && text[cursor + 1] === '\n' ? cursor + 2 : cursor + 1,
+      };
+    }
+    if (text[cursor] === quote) {
+      return {
+        literal: {
+          quote,
+          rawValue: text.slice(start + 1, cursor),
+          rawStart: start + 1,
+          rawEnd: cursor,
+          end: cursor + 1,
+        },
+        next: cursor + 1,
       };
     }
   }
-  return null;
+  return { literal: null, next: text.length };
+}
+
+/**
+ * Read one static string/template literal without backtracking.
+ *
+ * Single- and double-quoted TypeScript literals cannot contain a physical
+ * line terminator. Template literals can, because the corpus uses them for
+ * long Markdown bodies. A backslash escapes the following code unit (or a
+ * CRLF pair), so an escaped line continuation is not mistaken for the end of
+ * a quoted literal.
+ */
+export function readRawStringLiteral(source, start, options = {}) {
+  return readRawStringLiteralResult(source, start, options).literal;
 }
 
 function skipTrivia(source, start) {
@@ -53,6 +82,87 @@ function skipTrivia(source, start) {
     break;
   }
   return cursor;
+}
+
+function isIdentifierStart(character) {
+  return /[$A-Z_a-z]/u.test(character);
+}
+
+function isIdentifierPart(character) {
+  return /[$0-9A-Z_a-z]/u.test(character);
+}
+
+/**
+ * Scan simple object properties whose values are static string/template
+ * literals. The optional allow-list keeps callers from treating unrelated
+ * object properties as data. Both the property walk and literal walk are
+ * linear and skip comments/strings instead of searching through their text.
+ */
+export function scanStaticStringProperties(source, allowedNames = null, { includeTemplateLiterals = false } = {}) {
+  const text = String(source ?? '');
+  const allowed = allowedNames ? new Set(allowedNames) : null;
+  const readLiteral = (start) => readRawStringLiteralResult(text, start, {
+    allowTemplateLiterals: includeTemplateLiterals,
+  });
+  const entries = [];
+  let cursor = 0;
+
+  while (cursor < text.length) {
+    if (text[cursor] === '/' && text[cursor + 1] === '/') {
+      const end = text.indexOf('\n', cursor + 2);
+      cursor = end === -1 ? text.length : end + 1;
+      continue;
+    }
+    if (text[cursor] === '/' && text[cursor + 1] === '*') {
+      const end = text.indexOf('*/', cursor + 2);
+      cursor = end === -1 ? text.length : end + 2;
+      continue;
+    }
+
+    const literalResult = readLiteral(cursor);
+    const literal = literalResult.literal;
+    if (literal) {
+      cursor = literal.end;
+      continue;
+    }
+    if (isSupportedQuote(text[cursor], includeTemplateLiterals)) {
+      cursor = literalResult.next;
+      continue;
+    }
+
+    if (!isIdentifierStart(text[cursor])) {
+      cursor += 1;
+      continue;
+    }
+
+    const nameStart = cursor;
+    cursor += 1;
+    while (cursor < text.length && isIdentifierPart(text[cursor])) cursor += 1;
+    const name = text.slice(nameStart, cursor);
+    const colon = skipTrivia(text, cursor);
+    if (text[colon] !== ':' || (allowed && !allowed.has(name))) continue;
+
+    const valueStart = skipTrivia(text, colon + 1);
+    const valueResult = readLiteral(valueStart);
+    const valueLiteral = valueResult.literal;
+    if (!valueLiteral) {
+      if (isSupportedQuote(text[valueStart], includeTemplateLiterals)) {
+        cursor = valueResult.next;
+      }
+      continue;
+    }
+    entries.push({
+      name,
+      rawValue: valueLiteral.rawValue,
+      quote: valueLiteral.quote,
+      valueStart: valueLiteral.rawStart,
+      valueEnd: valueLiteral.rawEnd,
+      end: valueLiteral.end,
+    });
+    cursor = valueLiteral.end;
+  }
+
+  return entries;
 }
 
 function articleFieldFromKey(key) {
@@ -78,8 +188,11 @@ function articleFieldFromKey(key) {
  *   end: number,
  * }>}
  */
-export function scanStaticArticleFieldEntries(source) {
+export function scanStaticArticleFieldEntries(source, { includeTemplateLiterals = false } = {}) {
   const text = String(source ?? '');
+  const readLiteral = (start) => readRawStringLiteralResult(text, start, {
+    allowTemplateLiterals: includeTemplateLiterals,
+  });
   const entries = [];
   let cursor = 0;
 
@@ -95,8 +208,13 @@ export function scanStaticArticleFieldEntries(source) {
       continue;
     }
 
-    const keyLiteral = readRawStringLiteral(text, cursor);
+    const keyResult = readLiteral(cursor);
+    const keyLiteral = keyResult.literal;
     if (!keyLiteral) {
+      if (isSupportedQuote(text[cursor], includeTemplateLiterals)) {
+        cursor = keyResult.next;
+        continue;
+      }
       cursor += 1;
       continue;
     }
@@ -106,7 +224,8 @@ export function scanStaticArticleFieldEntries(source) {
       const colon = skipTrivia(text, keyLiteral.end);
       if (text[colon] === ':') {
         const valueStart = skipTrivia(text, colon + 1);
-        const valueLiteral = readRawStringLiteral(text, valueStart);
+        const valueResult = readLiteral(valueStart);
+        const valueLiteral = valueResult.literal;
         if (valueLiteral) {
           const delimiter = skipTrivia(text, valueLiteral.end);
           if (text[delimiter] === ',' || text[delimiter] === '}') {
@@ -121,6 +240,10 @@ export function scanStaticArticleFieldEntries(source) {
             });
           }
           cursor = valueLiteral.end;
+          continue;
+        }
+        if (isSupportedQuote(text[valueStart], includeTemplateLiterals)) {
+          cursor = valueResult.next;
           continue;
         }
       }

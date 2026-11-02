@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs';
 import { unescapeTsString } from './unescape-ts-string.mjs';
 import { decodeHtmlEntities } from './decode-html-entities.mjs';
 import { DIGEST_EVENT_MARKER_PATTERN } from './events-digest-marker.mjs';
+import { scanStaticArticleFieldEntries } from './static-article-field-scanner.mjs';
 
 const TABLE = JSON.parse(
   readFileSync(new URL('../../data/localized-toponyms.json', import.meta.url), 'utf8'),
@@ -189,21 +190,15 @@ const ARTICLE_PROJECTION_ESCAPES = Object.freeze({
 export function extractArticleProjectionText(fileContent, articleId, { excludeFaq = false, fields = null } = {}) {
   if (!fileContent || !articleId) return '';
   const allowedFields = fields ? new Set(fields) : null;
-  const fieldRe = new RegExp(
-    "'blog\\.article\\." + escapeRegExp(String(articleId)) + "\\.([^']+)'\\s*:\\s*(['`])((?:\\\\.|(?!\\2)[\\s\\S])*?)\\2",
-    'g',
-  );
-  const prefix = `'blog.article.${articleId}.`;
-  return [...String(fileContent).matchAll(fieldRe)]
-    .filter((match) => {
-      const field = match[1];
-      if (excludeFaq && field === 'faq') return false;
-      if (allowedFields && !allowedFields.has(field)) return false;
-      return match[0].startsWith(`${prefix}${field}'`);
+  return scanStaticArticleFieldEntries(String(fileContent), { includeTemplateLiterals: true })
+    .filter((entry) => {
+      if (entry.articleId !== String(articleId)) return false;
+      if (excludeFaq && entry.field === 'faq') return false;
+      return !allowedFields || allowedFields.has(entry.field);
     })
-    .map((match) => normalizeLocalizedToponymText(
-      unescapeTsString(match[3], ARTICLE_PROJECTION_ESCAPES, {
-        decodeControlEscapes: match[1] !== 'faq',
+    .map((entry) => normalizeLocalizedToponymText(
+      unescapeTsString(entry.rawValue, ARTICLE_PROJECTION_ESCAPES, {
+        decodeControlEscapes: entry.field !== 'faq',
       }),
     ))
     .join('\n');
