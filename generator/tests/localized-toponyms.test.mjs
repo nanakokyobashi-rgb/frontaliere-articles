@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 
 import {
   LOCALIZED_TOPONYM_LOCALES,
+  LOCALIZED_TOPONYM_FIELD_SEPARATOR,
   LOCALIZED_TOPONYMS,
   OFFICIAL_NAME_MARKERS,
   createLocalizedToponymSourceProfile,
@@ -449,17 +450,58 @@ test('la proiezione article-wide copre imageAlt, slug e SEO oltre al body', () =
 });
 
 test('la proiezione da file raccoglie body, FAQ e meta dello stesso articolo', () => {
-  const body = [
+  const body = articleTranslationSource([
     "'blog.article.demo.body1': 'Notizia su Lucerna',",
     "'blog.article.demo.faq': '[{\\\"q\\\":\\\"Lucerna\\\"}]',",
     "'blog.article.other.body1': 'Non entra',",
-  ].join('\n');
-  const meta = "'blog.article.demo.imageAlt': 'Lucerna sul lago',";
+    "'example': \"'blog.article.demo.fake': 'Ignora'\",",
+    "// 'blog.article.demo.comment': 'Ignora',",
+  ].join('\n'));
+  const meta = articleTranslationSource("'blog.article.demo.imageAlt': 'Lucerna sul lago',");
   assert.match(extractArticleProjectionText(body, 'demo'), /Notizia su Lucerna/);
   assert.match(extractArticleProjectionText(body, 'demo'), /Lucerna/);
   assert.doesNotMatch(extractArticleProjectionText(body, 'demo', { excludeFaq: true }), /q/);
   assert.equal(extractArticleProjectionText(meta, 'demo'), 'Lucerna sul lago');
   assert.equal(extractArticleProjectionText(body, 'other'), 'Non entra');
+  assert.equal(extractArticleProjectionText(body, 'demo', { fields: ['fake', 'comment'] }), '');
+});
+
+test('la proiezione da file rifiuta valori articolo dinamici', () => {
+  const source = articleTranslationSource("'blog.article.demo.body1': `Notizia su ${place}`");
+  assert.throws(() => extractArticleProjectionText(source, 'demo'), /static string literal value/);
+});
+
+test('i campi adiacenti non formano un toponimo composito', () => {
+  const sourceText = ['San', 'Gallo'].join(LOCALIZED_TOPONYM_FIELD_SEPARATOR);
+  assert.deepEqual(
+    findLocalizedToponymMismatches({ sourceText, targetText: 'San Gallo', locale: 'en' }),
+    [],
+  );
+  assert.deepEqual(
+    findLocalizedToponymMismatches({ sourceText: 'San Gallo', targetText: 'San Gallo', locale: 'en' }),
+    [{ code: 'SG', type: 'canton', locale: 'en', form: 'San Gallo', expected: 'St. Gallen' }],
+  );
+});
+
+test('il gate pubblico non compone toponimi fra campi e FAQ', () => {
+  const separatedSource = findArticleLocalizedToponymMismatches({
+    content: {
+      it: { title: 'San', faq: [{ q: 'Gallo' }] },
+      en: { title: 'San Gallo' },
+    },
+  });
+  assert.deepEqual(separatedSource, []);
+
+  const contiguousSource = findArticleLocalizedToponymMismatches({
+    content: {
+      it: { title: 'San Gallo' },
+      en: { title: 'San Gallo' },
+    },
+  });
+  assert.deepEqual(
+    contiguousSource,
+    [{ code: 'SG', type: 'canton', locale: 'en', form: 'San Gallo', expected: 'St. Gallen' }],
+  );
 });
 
 test('prompt e gate condividono tutte le forme della tabella', () => {
@@ -708,7 +750,8 @@ test('il corpus storico e le 24 sezioni cantonali non copiano esonimi fra lingue
   let offenderCount = 0;
   const sampleOffenders = [];
   for (const [articleId, sourceEntries] of italian) {
-    const sourceText = [...new Set(sourceEntries.map((entry) => entry.value))].join('\n');
+    const sourceText = [...new Set(sourceEntries.map((entry) => entry.value))]
+      .join(LOCALIZED_TOPONYM_FIELD_SEPARATOR);
     const sourceProfile = createLocalizedToponymSourceProfile(sourceText);
     for (const locale of ['en', 'de', 'fr']) {
       const targetEntries = byLocale.get(locale).get(articleId) || [];

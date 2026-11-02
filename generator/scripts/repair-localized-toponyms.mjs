@@ -17,6 +17,7 @@ import { fileURLToPath } from 'node:url';
 
 import {
   LOCALIZED_TOPONYM_LOCALES,
+  LOCALIZED_TOPONYM_FIELD_SEPARATOR,
   createLocalizedToponymSourceProfileCache,
   replaceLocalizedToponymMismatches,
 } from './lib/localized-toponyms.mjs';
@@ -141,7 +142,10 @@ const editsByFile = new Map();
 const byLocale = new Map(LOCALIZED_TOPONYM_LOCALES.filter((locale) => locale !== 'it').map((locale) => [locale, 0]));
 const byForm = new Map();
 const sourceTextByArticle = new Map(
-  [...sourceValues].map(([articleId, values]) => [articleId, [...values].join('\n')]),
+  [...sourceValues].map(([articleId, values]) => [
+    articleId,
+    [...values].join(LOCALIZED_TOPONYM_FIELD_SEPARATOR),
+  ]),
 );
 const sourceProfileFor = createLocalizedToponymSourceProfileCache();
 let fieldsChanged = 0;

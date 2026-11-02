@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
-import { unescapeTsString } from './unescape-ts-string.mjs';
 import { decodeHtmlEntities } from './decode-html-entities.mjs';
 import { DIGEST_EVENT_MARKER_PATTERN } from './events-digest-marker.mjs';
+import { scanStaticArticleFieldEntries } from './static-article-field-scanner.mjs';
 
 const TABLE = JSON.parse(
   readFileSync(new URL('../../data/localized-toponyms.json', import.meta.url), 'utf8'),
@@ -22,6 +22,9 @@ export const LOCALIZED_TOPONYMS = Object.freeze(
 
 const LOCALE_SET = new Set(LOCALIZED_TOPONYM_LOCALES);
 const ENTITY_TYPES = Object.freeze(['canton', 'capital']);
+// Punctuation keeps separate fields readable in prompts and prevents a
+// multiword toponym from being assembled across adjacent field boundaries.
+export const LOCALIZED_TOPONYM_FIELD_SEPARATOR = '\n;\n';
 
 const ADDITIONAL_HTML_ENTITIES = Object.freeze({
   '&Aacute;': 'Á', '&aacute;': 'á',
@@ -171,15 +174,6 @@ function localizedSlugForm(value) {
     .replace(/^-+|-+$/gu, '');
 }
 
-const ARTICLE_PROJECTION_ESCAPES = Object.freeze({
-  "'": "'",
-  '"': '"',
-  '\\': '\\',
-  n: '\n',
-  r: '\r',
-  t: ' ',
-});
-
 /**
  * Extract every published field for one article from a body or meta TS file.
  * The writer stores body, FAQ and metadata in the same article-key namespace;
@@ -189,24 +183,16 @@ const ARTICLE_PROJECTION_ESCAPES = Object.freeze({
 export function extractArticleProjectionText(fileContent, articleId, { excludeFaq = false, fields = null } = {}) {
   if (!fileContent || !articleId) return '';
   const allowedFields = fields ? new Set(fields) : null;
-  const fieldRe = new RegExp(
-    "'blog\\.article\\." + escapeRegExp(String(articleId)) + "\\.([^']+)'\\s*:\\s*(['`])((?:\\\\.|(?!\\2)[\\s\\S])*?)\\2",
-    'g',
-  );
-  const prefix = `'blog.article.${articleId}.`;
-  return [...String(fileContent).matchAll(fieldRe)]
-    .filter((match) => {
-      const field = match[1];
+  return scanStaticArticleFieldEntries(String(fileContent))
+    .filter((entry) => {
+      if (entry.articleId !== String(articleId)) return false;
+      const field = entry.field;
       if (excludeFaq && field === 'faq') return false;
       if (allowedFields && !allowedFields.has(field)) return false;
-      return match[0].startsWith(`${prefix}${field}'`);
+      return true;
     })
-    .map((match) => normalizeLocalizedToponymText(
-      unescapeTsString(match[3], ARTICLE_PROJECTION_ESCAPES, {
-        decodeControlEscapes: match[1] !== 'faq',
-      }),
-    ))
-    .join('\n');
+    .map((entry) => normalizeLocalizedToponymText(entry.value))
+    .join(LOCALIZED_TOPONYM_FIELD_SEPARATOR);
 }
 
 function slugTermPattern(term) {
@@ -1242,11 +1228,12 @@ function omitEventsDigestBody2(projection) {
 function findEventsDigestArticleLocaleMismatches(data, locale, sourceText, sourceProfileFor) {
   const sourceProjection = articleLocaleProjection(data, 'it');
   const targetProjection = articleLocaleProjection(data, locale);
-  const sourceWithoutBody2 = collectStrings(omitEventsDigestBody2(sourceProjection)).join('\n');
+  const sourceWithoutBody2 = collectStrings(omitEventsDigestBody2(sourceProjection))
+    .join(LOCALIZED_TOPONYM_FIELD_SEPARATOR);
   const targetWithoutBody2 = collectStrings({
     ...omitEventsDigestBody2(targetProjection),
     slug: undefined,
-  }).join('\n');
+  }).join(LOCALIZED_TOPONYM_FIELD_SEPARATOR);
   const issues = findLocalizedToponymMismatches({
     sourceText: sourceWithoutBody2,
     targetText: targetWithoutBody2,
@@ -1297,7 +1284,8 @@ function findEventsDigestArticleLocaleMismatches(data, locale, sourceText, sourc
 
 /** Returns the same deterministic check for the complete pre-write article. */
 export function findArticleLocalizedToponymMismatches(data) {
-  const source = collectStrings(articleLocaleProjection(data, 'it')).join('\n');
+  const source = collectStrings(articleLocaleProjection(data, 'it'))
+    .join(LOCALIZED_TOPONYM_FIELD_SEPARATOR);
   if (!source.trim()) return [];
 
   const sourceProfileFor = createLocalizedToponymSourceProfileCache();
@@ -1310,7 +1298,8 @@ export function findArticleLocalizedToponymMismatches(data) {
       ? findEventsDigestArticleLocaleMismatches(data, locale, source, sourceProfileFor)
       : null;
     if (targetIssues === null) {
-      const target = collectStrings({ ...targetProjection, slug: undefined }).join('\n');
+      const target = collectStrings({ ...targetProjection, slug: undefined })
+        .join(LOCALIZED_TOPONYM_FIELD_SEPARATOR);
       targetIssues = findLocalizedToponymMismatches({
         sourceText: source,
         targetText: target,
