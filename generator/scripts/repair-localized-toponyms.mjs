@@ -32,7 +32,7 @@ const CONTENT_ROOT = path.join(ROOT, 'content');
 const WRITE = process.argv.includes('--write');
 let writeTmpSeq = 0;
 const SLUG_ENTRY_RE = /['"]([^'"]+)['"]\s*:\s*\{([^{}]*)\}/gu;
-const SLUG_PROPERTY_RE = /\b(it|en|de|fr)\s*:\s*(['"])((?:\\.|(?!\2)[^\r\n])*?)\2/gu;
+const SLUG_PROPERTY_RE = /\b(it|en|de|fr)\s*:\s*(['"])((?:\\.|(?!\2)[^\\\r\n])*?)\2/gu;
 
 function walk(directory, output = []) {
   for (const entry of readdirSync(directory, { withFileTypes: true })) {

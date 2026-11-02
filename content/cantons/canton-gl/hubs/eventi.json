@@ -4,12 +4,12 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "eventi",
-  "updatedAt": "2026-11-01T13:11:05.408Z",
-  "contentHash": "d2827d526108c084a29bfb9a2ebcc16e7e5a81e24b6a8fdf41dfe1b067a286de",
+  "updatedAt": "2026-11-02T09:20:10.429Z",
+  "contentHash": "5cf35c74fb920498e029010fa8059226ed84394d0f8810f37396f3de0e4c70ee",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-31T14:21:36.178Z",
+      "updatedAt": "2026-11-02T02:24:34.417Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "19",
+          "value": "20",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -35,13 +35,13 @@
             {
               "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
               "detail": "Schützenhaus Glarus, Glarus — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-11-01",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
             },
             {
               "label": "Balboa Schnupperkurs",
               "detail": "Ennenda, Glarus — in corso, ultimo giorno: 11 novembre 2026",
-              "date": "2026-11-01",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
             },
             {
@@ -95,7 +95,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/glarona/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/glarona/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "en": {
       "canton": "GL",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "19",
+          "value": "20",
           "note": "from the site’s events calendar"
         }
       ],
@@ -140,13 +140,13 @@
             {
               "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
               "detail": "Schützenhaus Glarus, Glarus — ongoing, last day: 14 November 2026",
-              "date": "2026-11-01",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
             },
             {
               "label": "Balboa Schnupperkurs",
               "detail": "Ennenda, Glarus — ongoing, last day: 11 November 2026",
-              "date": "2026-11-01",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
             },
             {
@@ -200,7 +200,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/glarus/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/glarus/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "de": {
       "canton": "GL",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "19",
+          "value": "20",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -245,13 +245,13 @@
             {
               "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
               "detail": "Schützenhaus Glarus, Glarus — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-11-01",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
             },
             {
               "label": "Balboa Schnupperkurs",
               "detail": "Ennenda, Glarus — läuft, letzter Tag: 11. November 2026",
-              "date": "2026-11-01",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
             },
             {
@@ -305,7 +305,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/glarus/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/glarus/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "fr": {
       "canton": "GL",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "19",
+          "value": "20",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -350,13 +350,13 @@
             {
               "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
               "detail": "Schützenhaus Glarus, Glarus — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-11-01",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
             },
             {
               "label": "Schnupperkurs de Balboa",
               "detail": "Ennenda, Glarus — en cours, dernier jour : 11 novembre 2026",
-              "date": "2026-11-01",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
             },
             {
@@ -410,7 +410,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/glaris/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/glaris/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     }
   }
 }

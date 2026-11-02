@@ -4,12 +4,12 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "eventi",
-  "updatedAt": "2026-11-01T13:11:05.408Z",
-  "contentHash": "36cd94fc36781f4b8e9eab28cc65de4a0e6e6652051b679d2edf2bc68a4311ba",
+  "updatedAt": "2026-11-02T09:20:10.429Z",
+  "contentHash": "273de1fb752a1c55dfb23c620d473bb8683f57d462582b0afeb7fe987719d3b2",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-31T14:21:36.178Z",
+      "updatedAt": "2026-11-02T02:24:34.417Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "78",
+          "value": "79",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,52 +33,40 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Heididorf Saisonende",
-              "detail": "Heididorf AG, Maienfeld",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/heididorf-saisonende/"
-            },
-            {
-              "label": "\"Music and Story\" Church St. Peter 2026",
-              "detail": "Evang.-ref. Kirche St. Peter, Arosa",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/music-and-story-church-st-peter-2026/"
+              "label": "Alphorn holiday course for beginners",
+              "detail": "Walserhuus Sertig, Davos",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/alphorn-holiday-course-for-beginners-1/"
             },
             {
               "label": "Cinema Staziun Lavin - BECAARIA",
               "detail": "Cinema Staziun, Zernez — in corso, ultimo giorno: 7 novembre 2026",
-              "date": "2026-11-01",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/cinema-staziun-lavin-becaaria/"
             },
             {
               "label": "Tematizzare la Valle Riflessioni sulle forme di vita in Valposchiavo",
               "detail": "Casa Torre, Poschiavo — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-11-01",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
             },
             {
               "label": "Waldbaden Alpin",
               "detail": "Scuol — in corso, ultimo giorno: 6 novembre 2026",
-              "date": "2026-11-01",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
             },
             {
               "label": "Caffè Rumantsch ad Ardez",
               "detail": "Ardez, Scuol — in corso, ultimo giorno: 11 novembre 2026",
-              "date": "2026-11-01",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
             },
             {
               "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
               "detail": "Ardez, Scuol — in corso, ultimo giorno: 7 novembre 2026",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
-            },
-            {
-              "label": "Alphorn holiday course for beginners",
-              "detail": "Walserhuus Sertig, Davos",
               "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/alphorn-holiday-course-for-beginners-1/"
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
             },
             {
               "label": "Schöne Dinge",
@@ -91,11 +79,23 @@
               "detail": "Center da Sanadad Savognin",
               "date": "2026-11-03",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/savognin/tanz-und-singnachmittag-im-center-da-sanadad_A6QxCMu"
+            },
+            {
+              "label": "BIUTIFUL",
+              "detail": "Chur",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/biutiful/"
+            },
+            {
+              "label": "Geschichten-Kiste: Jakob muss kämpfen",
+              "detail": "Evang.-ref. Kirchgemeindehaus, Arosa",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/geschichten-kiste-jakob-muss-kaempfen/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/grigioni/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         }
       ],
       "curatedArticles": [
@@ -147,7 +147,7 @@
           "url": "/eventi/grigioni/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "en": {
       "canton": "GR",
@@ -157,7 +157,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "78",
+          "value": "79",
           "note": "from the site’s events calendar"
         }
       ],
@@ -168,52 +168,40 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Heididorf Saisonende",
-              "detail": "Heididorf AG, Maienfeld",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/heididorf-saisonende/"
-            },
-            {
-              "label": "\"Music and Story\" Church St. Peter 2026",
-              "detail": "Evang.-ref. Kirche St. Peter, Arosa",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/music-and-story-church-st-peter-2026/"
+              "label": "Alphorn holiday course for beginners",
+              "detail": "Walserhuus Sertig, Davos",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/alphorn-holiday-course-for-beginners-1/"
             },
             {
               "label": "Cinema Staziun Lavin - BECAARIA",
               "detail": "Cinema Staziun, Zernez — ongoing, last day: 7 November 2026",
-              "date": "2026-11-01",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/cinema-staziun-lavin-becaaria/"
             },
             {
               "label": "Tematizzare la Valle. Riflessioni sulle forme di vita in Valposchiavo",
               "detail": "Casa Torre, Poschiavo — ongoing, last day: 14 November 2026",
-              "date": "2026-11-01",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
             },
             {
               "label": "Forest Bathing Alpin",
               "detail": "Scuol — ongoing, last day: 6 November 2026",
-              "date": "2026-11-01",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
             },
             {
               "label": "Café Rumantsch ad Ardez",
               "detail": "Ardez, Scuol — ongoing, last day: 11 November 2026",
-              "date": "2026-11-01",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
             },
             {
               "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
               "detail": "Ardez, Scuol — ongoing, last day: 7 November 2026",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
-            },
-            {
-              "label": "Alphorn holiday course for beginners",
-              "detail": "Walserhuus Sertig, Davos",
               "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/alphorn-holiday-course-for-beginners-1/"
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
             },
             {
               "label": "Schöne Dinge",
@@ -226,11 +214,23 @@
               "detail": "Center da Sanadad Savognin",
               "date": "2026-11-03",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/savognin/tanz-und-singnachmittag-im-center-da-sanadad_A6QxCMu"
+            },
+            {
+              "label": "BIUTIFUL",
+              "detail": "Chur",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/biutiful/"
+            },
+            {
+              "label": "Geschichten-Kiste: Jakob muss kämpfen",
+              "detail": "Evang.-ref. Kirchgemeindehaus, Arosa",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/geschichten-kiste-jakob-muss-kaempfen/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/graubunden/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         }
       ],
       "curatedArticles": [
@@ -282,7 +282,7 @@
           "url": "/en/events/graubunden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "de": {
       "canton": "GR",
@@ -292,7 +292,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "78",
+          "value": "79",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -303,52 +303,40 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Heididorf Saisonende",
-              "detail": "Heididorf AG, Maienfeld",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/heididorf-saisonende/"
-            },
-            {
-              "label": "«Musig und G’schicht» Kirche St. Peter 2026",
-              "detail": "Evang.-ref. Kirche St. Peter, Arosa",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/music-and-story-church-st-peter-2026/"
+              "label": "Alphorn-Ferienkurs für Anfänger und Anfängerinnen",
+              "detail": "Walserhuus Sertig, Davos",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/alphorn-holiday-course-for-beginners-1/"
             },
             {
               "label": "Cinema Staziun Lavin - BECAARIA",
               "detail": "Cinema Staziun, Zernez — läuft, letzter Tag: 7. November 2026",
-              "date": "2026-11-01",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/cinema-staziun-lavin-becaaria/"
             },
             {
               "label": "Tematizzare la Valle. Riflessioni sulle forme di vita in Valposchiavo",
               "detail": "Casa Torre, Poschiavo — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-11-01",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
             },
             {
               "label": "Waldbaden Alpin",
               "detail": "Scuol — läuft, letzter Tag: 6. November 2026",
-              "date": "2026-11-01",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
             },
             {
               "label": "Cafè Rumantsch ad Ardez",
               "detail": "Ardez, Scuol — läuft, letzter Tag: 11. November 2026",
-              "date": "2026-11-01",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
             },
             {
               "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
               "detail": "Ardez, Scuol — läuft, letzter Tag: 7. November 2026",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
-            },
-            {
-              "label": "Alphorn-Ferienkurs für Anfänger und Anfängerinnen",
-              "detail": "Walserhuus Sertig, Davos",
               "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/alphorn-holiday-course-for-beginners-1/"
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
             },
             {
               "label": "Schöne Dinge",
@@ -361,11 +349,23 @@
               "detail": "Center da Sanadad Savognin",
               "date": "2026-11-03",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/savognin/tanz-und-singnachmittag-im-center-da-sanadad_A6QxCMu"
+            },
+            {
+              "label": "BIUTIFUL",
+              "detail": "Chur",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/biutiful/"
+            },
+            {
+              "label": "Geschichten-Kiste: Jakob muss kämpfen",
+              "detail": "Evang.-ref. Kirchgemeindehaus, Arosa",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/geschichten-kiste-jakob-muss-kaempfen/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/graubunden/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         }
       ],
       "curatedArticles": [
@@ -417,7 +417,7 @@
           "url": "/de/veranstaltungen/graubunden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "fr": {
       "canton": "GR",
@@ -427,7 +427,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "78",
+          "value": "79",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -438,52 +438,40 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Heididorf Saisonende",
-              "detail": "Heididorf AG, Maienfeld",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/heididorf-saisonende/"
-            },
-            {
-              "label": "«Musique et histoires» Église Saint-Pierre 2026",
-              "detail": "Evang.-ref. Kirche St. Peter, Arosa",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/music-and-story-church-st-peter-2026/"
+              "label": "Alphorn holiday course for beginners",
+              "detail": "Walserhuus Sertig, Davos",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/alphorn-holiday-course-for-beginners-1/"
             },
             {
               "label": "Cinema Staziun Lavin - BECAARIA",
               "detail": "Cinema Staziun, Zernez — en cours, dernier jour : 7 novembre 2026",
-              "date": "2026-11-01",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/cinema-staziun-lavin-becaaria/"
             },
             {
               "label": "Tematizzare la Valle. Riflessioni sulle forme di vita in Valposchiavo",
               "detail": "Casa Torre, Poschiavo — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-11-01",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
             },
             {
               "label": "Waldbaden Alpin",
               "detail": "Scuol — en cours, dernier jour : 6 novembre 2026",
-              "date": "2026-11-01",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
             },
             {
               "label": "Café Rumantsch ad Ardez",
               "detail": "Ardez, Scuol — en cours, dernier jour : 11 novembre 2026",
-              "date": "2026-11-01",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
             },
             {
               "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
               "detail": "Ardez, Scuol — en cours, dernier jour : 7 novembre 2026",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
-            },
-            {
-              "label": "Alphorn holiday course for beginners",
-              "detail": "Walserhuus Sertig, Davos",
               "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/alphorn-holiday-course-for-beginners-1/"
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
             },
             {
               "label": "Schöne Dinge",
@@ -496,11 +484,23 @@
               "detail": "Center da Sanadad Savognin",
               "date": "2026-11-03",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/savognin/tanz-und-singnachmittag-im-center-da-sanadad_A6QxCMu"
+            },
+            {
+              "label": "BIUTIFUL",
+              "detail": "Chur",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/biutiful/"
+            },
+            {
+              "label": "Geschichten-Kiste: Jakob muss kämpfen",
+              "detail": "Evang.-ref. Kirchgemeindehaus, Arosa",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/geschichten-kiste-jakob-muss-kaempfen/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/grisons/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         }
       ],
       "curatedArticles": [
@@ -552,7 +552,7 @@
           "url": "/fr/evenements/grisons/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     }
   }
 }
