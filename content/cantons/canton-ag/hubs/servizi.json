@@ -4,22 +4,22 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "servizi",
-  "updatedAt": "2026-11-01T13:11:05.408Z",
-  "contentHash": "4ee7ce1c95076747531b4030e973ac4c778119e98747e0c2c51f2ae9b415266b",
+  "updatedAt": "2026-11-02T09:20:10.429Z",
+  "contentHash": "89eb206e14821749d600baaea14dd47c33d26ec597ff3644a73da2fde0e00303",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-10-25T09:11:35.438Z",
+      "updatedAt": "2026-11-01T11:17:34.347Z",
       "keyFacts": 1
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-31T21:33:21.304Z",
+      "updatedAt": "2026-11-01T22:02:05.721Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-31T20:43:08.728Z",
+      "updatedAt": "2026-11-01T21:24:45.283Z",
       "keyFacts": 0
     }
   ],
@@ -56,7 +56,7 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-25T09:11:35.438Z"
+          "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
           "id": "aste-targhe",
@@ -72,22 +72,22 @@
             },
             {
               "label": "AG8843",
-              "value": "2800 CHF",
+              "value": "4400 CHF",
               "detail": "offerta attuale",
               "date": "2026-11-11T20:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58809"
             },
             {
-              "label": "AG10048",
-              "value": "2800 CHF",
+              "label": "AG9184",
+              "value": "3200 CHF",
               "detail": "offerta attuale",
               "date": "2026-11-11T20:00:00.000Z",
-              "url": "https://www.auktion-ag.ch/de/auction/58812"
+              "url": "https://www.auktion-ag.ch/de/auction/58810"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion-ag.ch/de/",
-          "updatedAt": "2026-10-31T21:33:21.304Z"
+          "updatedAt": "2026-11-01T22:02:05.721Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -125,7 +125,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -205,7 +205,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "en": {
       "canton": "AG",
@@ -239,7 +239,7 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-25T09:11:35.438Z"
+          "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
           "id": "aste-targhe",
@@ -255,22 +255,22 @@
             },
             {
               "label": "AG8843",
-              "value": "2,800 CHF",
+              "value": "4,400 CHF",
               "detail": "current bid",
               "date": "2026-11-11T20:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58809"
             },
             {
-              "label": "AG10048",
-              "value": "2,800 CHF",
+              "label": "AG9184",
+              "value": "3,200 CHF",
               "detail": "current bid",
               "date": "2026-11-11T20:00:00.000Z",
-              "url": "https://www.auktion-ag.ch/de/auction/58812"
+              "url": "https://www.auktion-ag.ch/de/auction/58810"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion-ag.ch/de/",
-          "updatedAt": "2026-10-31T21:33:21.304Z"
+          "updatedAt": "2026-11-01T22:02:05.721Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -308,7 +308,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -384,7 +384,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "de": {
       "canton": "AG",
@@ -418,7 +418,7 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-25T09:11:35.438Z"
+          "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
           "id": "aste-targhe",
@@ -434,22 +434,22 @@
             },
             {
               "label": "AG8843",
-              "value": "2’800 CHF",
+              "value": "4’400 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-11-11T20:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58809"
             },
             {
-              "label": "AG10048",
-              "value": "2’800 CHF",
+              "label": "AG9184",
+              "value": "3’200 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-11-11T20:00:00.000Z",
-              "url": "https://www.auktion-ag.ch/de/auction/58812"
+              "url": "https://www.auktion-ag.ch/de/auction/58810"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion-ag.ch/de/",
-          "updatedAt": "2026-10-31T21:33:21.304Z"
+          "updatedAt": "2026-11-01T22:02:05.721Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -487,7 +487,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -563,7 +563,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "fr": {
       "canton": "AG",
@@ -597,7 +597,7 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-25T09:11:35.438Z"
+          "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
           "id": "aste-targhe",
@@ -613,22 +613,22 @@
             },
             {
               "label": "AG8843",
-              "value": "2 800 CHF",
+              "value": "4 400 CHF",
               "detail": "offre actuelle",
               "date": "2026-11-11T20:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58809"
             },
             {
-              "label": "AG10048",
-              "value": "2 800 CHF",
+              "label": "AG9184",
+              "value": "3 200 CHF",
               "detail": "offre actuelle",
               "date": "2026-11-11T20:00:00.000Z",
-              "url": "https://www.auktion-ag.ch/de/auction/58812"
+              "url": "https://www.auktion-ag.ch/de/auction/58810"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion-ag.ch/de/",
-          "updatedAt": "2026-10-31T21:33:21.304Z"
+          "updatedAt": "2026-11-01T22:02:05.721Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -666,7 +666,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -738,7 +738,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     }
   }
 }

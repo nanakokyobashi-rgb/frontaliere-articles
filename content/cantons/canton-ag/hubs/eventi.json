@@ -4,12 +4,12 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "eventi",
-  "updatedAt": "2026-11-01T13:11:05.408Z",
-  "contentHash": "82cea8f2fd465e18375f4bd18afb18d0ae33508eca871b6866fc2f5f412903fa",
+  "updatedAt": "2026-11-02T09:20:10.429Z",
+  "contentHash": "3cff21baeb8a5bcb5c5fc6085bce083ccad9ed7f330bc0b10ac9992df1806137",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-31T14:21:36.178Z",
+      "updatedAt": "2026-11-02T02:24:34.417Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "104",
+          "value": "107",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Publikumstag Schotterplatz",
-              "detail": "Wildegg",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/publikumstag-schotterplatz-2/"
+              "label": "Peter Schärli: «So auch!»",
+              "detail": "Stadtbistro Isebähnli, Baden",
+              "date": "2026-11-02",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/peter-schaerli-so-auch_A6DguYC"
             },
             {
-              "label": "Öffentliche Führung - Kloster Muri",
-              "detail": "Muri AG",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrung-kloster-muri-6/"
+              "label": "EXKLUSIVER BLICK HINTER DIE KULISSEN",
+              "detail": "Strohmuseum im Park — in corso, ultimo giorno: 28 novembre 2026",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/exklusiver-blick-hinter-die-kulissen-1/"
             },
             {
-              "label": "Musikalisches Echo",
-              "detail": "Singisen Forum",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/muri-ag/musikalisches-echo_AqMWhAs"
+              "label": "Schiff über Bord!",
+              "detail": "Gemeindesaal «Breiten», Rothrist — in corso, ultimo giorno: 7 novembre 2026",
+              "date": "2026-11-02",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/rothrist/schiff-ueber-bord_A78Zn5t"
             },
             {
-              "label": "Bachata Sunday Social",
-              "detail": "AHA Aeschbachhalle Aarau, Aarau",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/bachata-sunday-social_AXJF7wG"
+              "label": "Metzgete",
+              "detail": "Kaiseraugst",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/metzgete-4/"
             },
             {
-              "label": "Tanzende Idioten",
-              "detail": "Kurtheater Baden, Baden",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/tanzende-idioten/"
+              "label": "Metzgete im Adler, Kaiseraugst",
+              "detail": "Landgasthof Adler, Kaiseraugst",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/metzgete-im-adler-kaiseraugst/"
             },
             {
-              "label": "Orchesterkonzert mit Solistin auf der Oboe",
-              "detail": "Reformierte Kirche, Zurzach",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/orchesterkonzert-mit-solistin-auf-der-oboe-1/"
+              "label": "Bildklänge 4",
+              "detail": "Aarau",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bildklaenge-4/"
             },
             {
-              "label": "JazzFabrik - Live Jazz in der Braufabrik",
-              "detail": "Braufabrik Baden, Baden",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rieden-ag/jazzfabrik-live-jazz-in-der-braufabrik_AZfV89E"
+              "label": "Energie-Apéros Aargau 2026/2027",
+              "detail": "Berufsschule Lenzburg, Lenzburg",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/lenzburg/energie-aperos-aargau-20262027_ADqZwsC"
             },
             {
-              "label": "Lunik",
-              "detail": "Konservi, Seon",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/seon/lunik_A3PewBU"
+              "label": "«Der kleine Prinz»: Musikalische Lesung mit Charles Brauer & Danny Exnar",
+              "detail": "Hotel Schützen, Rheinfelden",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rheinfelden/der-kleine-prinz-musikalische-lesung-mit-charles-brauer-und-danny-exnar_ArBygAQ"
             },
             {
-              "label": "Mari Jasca",
-              "detail": "Pflegi Muri",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/muri-ag/mari-jasca_AvF2csK"
+              "label": "Auf Bäume klettern – frei nach Leo Tolstois «Der Tod des Iwan Iljitsch»",
+              "detail": "Aarau",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/auf-baeume-klettern-frei-nach-leo-tolstois-der-tod-des-iwan-iljitsch/"
             },
             {
-              "label": "Stilvoll Kreativmarkt",
-              "detail": "Muri AG — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stilvoll-kreativmarkt/"
+              "label": "Aarauer Highlights am Rüeblimärttag",
+              "detail": "Aarau",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aarauer-highlights-am-rueeblimaerttag/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/argovia/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/argovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "en": {
       "canton": "AG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "104",
+          "value": "107",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Publikumstag Schotterplatz",
-              "detail": "Wildegg",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/publikumstag-schotterplatz-2/"
+              "label": "Peter Schärli: «So auch!»",
+              "detail": "Stadtbistro Isebähnli, Baden",
+              "date": "2026-11-02",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/peter-schaerli-so-auch_A6DguYC"
             },
             {
-              "label": "Öffentliche Führung - Kloster Muri",
-              "detail": "Muri AG",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrung-kloster-muri-6/"
+              "label": "EXKLUSIVER BLICK HINTER DIE KULISSEN",
+              "detail": "Strohmuseum im Park — ongoing, last day: 28 November 2026",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/exklusiver-blick-hinter-die-kulissen-1/"
             },
             {
-              "label": "Musikalisches Echo",
-              "detail": "Singisen Forum",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/muri-ag/musikalisches-echo_AqMWhAs"
+              "label": "Schiff über Bord!",
+              "detail": "Gemeindesaal «Breiten», Rothrist — ongoing, last day: 7 November 2026",
+              "date": "2026-11-02",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/rothrist/schiff-ueber-bord_A78Zn5t"
             },
             {
-              "label": "Bachata Sunday Social",
-              "detail": "AHA Aeschbachhalle Aarau, Aarau",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/bachata-sunday-social_AXJF7wG"
+              "label": "Metzgete",
+              "detail": "Kaiseraugst",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/metzgete-4/"
             },
             {
-              "label": "Tanzende Idioten",
-              "detail": "Kurtheater Baden, Baden",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/tanzende-idioten/"
+              "label": "Metzgete im Adler, Kaiseraugst",
+              "detail": "Landgasthof Adler, Kaiseraugst",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/metzgete-im-adler-kaiseraugst/"
             },
             {
-              "label": "Orchesterkonzert mit Solistin auf der Oboe",
-              "detail": "Reformierte Kirche, Zurzach",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/orchesterkonzert-mit-solistin-auf-der-oboe-1/"
+              "label": "Bildklänge 4",
+              "detail": "Aarau",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bildklaenge-4/"
             },
             {
-              "label": "JazzFabrik - Live Jazz in der Braufabrik",
-              "detail": "Braufabrik Baden, Baden",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rieden-ag/jazzfabrik-live-jazz-in-der-braufabrik_AZfV89E"
+              "label": "Energie-Apéros Aargau 2026/2027",
+              "detail": "Berufsschule Lenzburg, Lenzburg",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/lenzburg/energie-aperos-aargau-20262027_ADqZwsC"
             },
             {
-              "label": "Lunik",
-              "detail": "Konservi, Seon",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/seon/lunik_A3PewBU"
+              "label": "«Der kleine Prinz»: Musikalische Lesung mit Charles Brauer & Danny Exnar",
+              "detail": "Hotel Schützen, Rheinfelden",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rheinfelden/der-kleine-prinz-musikalische-lesung-mit-charles-brauer-und-danny-exnar_ArBygAQ"
             },
             {
-              "label": "Mari Jasca",
-              "detail": "Pflegi Muri",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/muri-ag/mari-jasca_AvF2csK"
+              "label": "Auf Bäume klettern – frei nach Leo Tolstois «Der Tod des Iwan Iljitsch»",
+              "detail": "Aarau",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/auf-baeume-klettern-frei-nach-leo-tolstois-der-tod-des-iwan-iljitsch/"
             },
             {
-              "label": "Stilvoll Kreativmarkt",
-              "detail": "Muri AG — ongoing, last day: 1 November 2026",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stilvoll-kreativmarkt/"
+              "label": "Aarauer Highlights am Rüeblimärttag",
+              "detail": "Aarau",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aarauer-highlights-am-rueeblimaerttag/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/aargau/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/aargau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "de": {
       "canton": "AG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "104",
+          "value": "107",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Publikumstag Schotterplatz",
-              "detail": "Wildegg",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/publikumstag-schotterplatz-2/"
+              "label": "Peter Schärli: «So auch!»",
+              "detail": "Stadtbistro Isebähnli, Baden",
+              "date": "2026-11-02",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/peter-schaerli-so-auch_A6DguYC"
             },
             {
-              "label": "Öffentliche Führung - Kloster Muri",
-              "detail": "Muri AG",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrung-kloster-muri-6/"
+              "label": "EXKLUSIVER BLICK HINTER DIE KULISSEN",
+              "detail": "Strohmuseum im Park — läuft, letzter Tag: 28. November 2026",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/exklusiver-blick-hinter-die-kulissen-1/"
             },
             {
-              "label": "Musikalisches Echo",
-              "detail": "Singisen Forum",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/muri-ag/musikalisches-echo_AqMWhAs"
+              "label": "Schiff über Bord!",
+              "detail": "Gemeindesaal «Breiten», Rothrist — läuft, letzter Tag: 7. November 2026",
+              "date": "2026-11-02",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/rothrist/schiff-ueber-bord_A78Zn5t"
             },
             {
-              "label": "Bachata Sunday Social",
-              "detail": "AHA Aeschbachhalle Aarau, Aarau",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/bachata-sunday-social_AXJF7wG"
+              "label": "Metzgete",
+              "detail": "Kaiseraugst",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/metzgete-4/"
             },
             {
-              "label": "Tanzende Idioten",
-              "detail": "Kurtheater Baden, Baden",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/tanzende-idioten/"
+              "label": "Metzgete im Adler, Kaiseraugst",
+              "detail": "Landgasthof Adler, Kaiseraugst",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/metzgete-im-adler-kaiseraugst/"
             },
             {
-              "label": "Orchesterkonzert mit Solistin auf der Oboe",
-              "detail": "Reformierte Kirche, Zurzach",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/orchesterkonzert-mit-solistin-auf-der-oboe-1/"
+              "label": "Bildklänge 4",
+              "detail": "Aarau",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bildklaenge-4/"
             },
             {
-              "label": "JazzFabrik - Live Jazz in der Braufabrik",
-              "detail": "Braufabrik Baden, Baden",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rieden-ag/jazzfabrik-live-jazz-in-der-braufabrik_AZfV89E"
+              "label": "Energie-Apéros Aargau 2026/2027",
+              "detail": "Berufsschule Lenzburg, Lenzburg",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/lenzburg/energie-aperos-aargau-20262027_ADqZwsC"
             },
             {
-              "label": "Lunik",
-              "detail": "Konservi, Seon",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/seon/lunik_A3PewBU"
+              "label": "«Der kleine Prinz»: Musikalische Lesung mit Charles Brauer & Danny Exnar",
+              "detail": "Hotel Schützen, Rheinfelden",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rheinfelden/der-kleine-prinz-musikalische-lesung-mit-charles-brauer-und-danny-exnar_ArBygAQ"
             },
             {
-              "label": "Mari Jasca",
-              "detail": "Pflegi Muri",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/muri-ag/mari-jasca_AvF2csK"
+              "label": "Auf Bäume klettern – frei nach Leo Tolstois «Der Tod des Iwan Iljitsch»",
+              "detail": "Aarau",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/auf-baeume-klettern-frei-nach-leo-tolstois-der-tod-des-iwan-iljitsch/"
             },
             {
-              "label": "Stilvoll Kreativmarkt",
-              "detail": "Muri AG — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stilvoll-kreativmarkt/"
+              "label": "Aarauer Highlights am Rüeblimärttag",
+              "detail": "Aarau",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aarauer-highlights-am-rueeblimaerttag/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/aargau/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/aargau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "fr": {
       "canton": "AG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "104",
+          "value": "107",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Publikumstag Schotterplatz",
-              "detail": "Wildegg",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/publikumstag-schotterplatz-2/"
+              "label": "Peter Schärli: «So auch!»",
+              "detail": "Stadtbistro Isebähnli, Baden",
+              "date": "2026-11-02",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/peter-schaerli-so-auch_A6DguYC"
             },
             {
-              "label": "Öffentliche Führung - Kloster Muri",
-              "detail": "Muri AG",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrung-kloster-muri-6/"
+              "label": "EXKLUSIVER BLICK HINTER DIE KULISSEN",
+              "detail": "Strohmuseum im Park — en cours, dernier jour : 28 novembre 2026",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/exklusiver-blick-hinter-die-kulissen-1/"
             },
             {
-              "label": "Musikalisches Echo",
-              "detail": "Singisen Forum",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/muri-ag/musikalisches-echo_AqMWhAs"
+              "label": "Schiff über Bord!",
+              "detail": "Gemeindesaal «Breiten», Rothrist — en cours, dernier jour : 7 novembre 2026",
+              "date": "2026-11-02",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/rothrist/schiff-ueber-bord_A78Zn5t"
             },
             {
-              "label": "Bachata Sunday Social",
-              "detail": "AHA Aeschbachhalle Aarau, Aarau",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/bachata-sunday-social_AXJF7wG"
+              "label": "Metzgete",
+              "detail": "Kaiseraugst",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/metzgete-4/"
             },
             {
-              "label": "Tanzende Idioten",
-              "detail": "Kurtheater Baden, Baden",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/tanzende-idioten/"
+              "label": "Metzgete im Adler, Kaiseraugst",
+              "detail": "Landgasthof Adler, Kaiseraugst",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/metzgete-im-adler-kaiseraugst/"
             },
             {
-              "label": "Orchesterkonzert mit Solistin auf der Oboe",
-              "detail": "Reformierte Kirche, Zurzach",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/orchesterkonzert-mit-solistin-auf-der-oboe-1/"
+              "label": "Bildklänge 4",
+              "detail": "Aarau",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bildklaenge-4/"
             },
             {
-              "label": "JazzFabrik - Live Jazz in der Braufabrik",
-              "detail": "Braufabrik Baden, Baden",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rieden-ag/jazzfabrik-live-jazz-in-der-braufabrik_AZfV89E"
+              "label": "Energie-Apéros Aargau 2026/2027",
+              "detail": "Berufsschule Lenzburg, Lenzburg",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/lenzburg/energie-aperos-aargau-20262027_ADqZwsC"
             },
             {
-              "label": "Lunik",
-              "detail": "Konservi, Seon",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/seon/lunik_A3PewBU"
+              "label": "«Der kleine Prinz»: Musikalische Lesung mit Charles Brauer & Danny Exnar",
+              "detail": "Hotel Schützen, Rheinfelden",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rheinfelden/der-kleine-prinz-musikalische-lesung-mit-charles-brauer-und-danny-exnar_ArBygAQ"
             },
             {
-              "label": "Mari Jasca",
-              "detail": "Pflegi Muri",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/muri-ag/mari-jasca_AvF2csK"
+              "label": "Auf Bäume klettern – frei nach Leo Tolstois «Der Tod des Iwan Iljitsch»",
+              "detail": "Aarau",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/auf-baeume-klettern-frei-nach-leo-tolstois-der-tod-des-iwan-iljitsch/"
             },
             {
-              "label": "Stilvoll Kreativmarkt",
-              "detail": "Muri AG — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stilvoll-kreativmarkt/"
+              "label": "Aarauer Highlights am Rüeblimärttag",
+              "detail": "Aarau",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aarauer-highlights-am-rueeblimaerttag/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/argovie/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/argovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     }
   }
 }
