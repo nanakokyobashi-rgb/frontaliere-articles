@@ -48,3 +48,11 @@ test('every contract field is populated', async () => {
     assert.notEqual(v, undefined, `contract.${k} is undefined`);
   }
 });
+
+test('loop-sync scalar declaration matches the transported fingerprint', () => {
+  const manifest = JSON.parse(readFileSync(path.join(HERE, '..', '..', 'scripts', 'ci', 'loop-sync-manifest.json'), 'utf8'));
+  const declaration = manifest.files.find((entry) => entry.path === 'host/constants.ts')?.scalarFingerprint;
+  assert.ok(declaration, 'the adapted host constants must declare their scalar contract');
+  assert.equal(declaration.sha256, expected.sha256, 'update the manifest declaration, preserving the historical baseline');
+  assert.equal(declaration.scalarFields, expected.scalarFields);
+});
