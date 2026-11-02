@@ -12297,18 +12297,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://cassa-disoccupazione.unia.ch": {
-      "section": "frontaliere",
-      "ts": 1793451690870
-    },
-    "frontaliere::http://www.cd-ocst.ch": {
-      "section": "frontaliere",
-      "ts": 1793451880991
-    },
-    "frontaliere::https://www.laregione.ch/cantone/ticino/1959681/la-politica-dell-alloggio-sia-orientata-ai-risultati": {
-      "section": "frontaliere",
-      "ts": 1793451905471
-    },
     "frontaliere::https://www.laregione.ch/estero/estero/1960211/sciopero-generale-in-italia-mobilitazione-in-60-citta-con-tensioni-a-roma-e-torino": {
       "section": "frontaliere",
       "ts": 1793622326804
@@ -12320,6 +12308,10 @@
     "frontaliere::https://www.tio.ch/svizzera/economia/1960477/punti-indicatore-imprese-lavoro-prospettive-mercato": {
       "section": "frontaliere",
       "ts": 1793622346073
+    },
+    "frontaliere::https://www.swissinfo.ch/ita/mercato-del-lavoro%3a-le-prospettive-si-offuscano-leggermente/92312143": {
+      "section": "frontaliere",
+      "ts": 1793625970576
     }
   }
 }
