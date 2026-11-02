@@ -4,17 +4,17 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "eventi",
-  "updatedAt": "2026-10-31T06:15:08.747Z",
-  "contentHash": "361a6954af985750c44a8793fe5635b27234e7cdb75fcc634cf8c267e1397853",
+  "updatedAt": "2026-11-01T13:11:05.408Z",
+  "contentHash": "0583bba06eff01d8a1c33719ff827ca143c339925cebbd8bfa261f2eed42cf59",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-30T13:23:17.161Z",
+      "updatedAt": "2026-10-31T14:21:36.178Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-30T21:45:03.956Z",
+      "updatedAt": "2026-10-31T20:43:08.728Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "44",
+          "value": "42",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "“RUNNING DEAD” 2ème édition",
-              "detail": "Running dead",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/running-dead-2eme-edition/"
-            },
-            {
-              "label": "Amor, choisir sans renoncer",
-              "detail": "Treyvaux",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/amor-choisir-sans-renoncer/"
-            },
-            {
-              "label": "Concerts O’pus",
-              "detail": "Temple Réformé, Fribourg",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/concerts-opus/"
-            },
-            {
-              "label": "Marchethon Fribourg",
-              "detail": "Givisiez, Fribourg",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/marchethon-fribourg/"
-            },
-            {
-              "label": "ANNULÉ | Les Rendez-vous nature du Bois de mon Coeur : Arbres",
-              "detail": "Villars-sur-Glâne",
-              "date": "2026-10-31",
-              "url": "https://www.fr.ch/mhnf/evenements/annule-les-rendez-vous-nature-du-bois-de-mon-coeur-arbres"
-            },
-            {
-              "label": "Les Rendez-vous nature du Bois de mon Coeur : Arbres",
-              "detail": "Villars-sur-Glâne",
-              "date": "2026-10-31",
-              "url": "https://www.fr.ch/mhnf/evenements/les-rendez-vous-nature-du-bois-de-mon-coeur-arbres"
-            },
-            {
-              "label": "Circus Knie",
-              "detail": "Fribourg — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/circus-knie-2026-17/"
-            },
-            {
-              "label": "Regards affinés",
-              "detail": "L'Atelier, Fribourg — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
-            },
-            {
-              "label": "Halloween à Moléson",
-              "detail": "Office du Tourisme de Moléson, Gruyères — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
-            },
-            {
               "label": "Les Batteurs de Pavés et les PCGB : Dracula",
               "detail": "Café-Théâtre Le Bilboquet",
               "date": "2026-11-01",
               "url": "https://www.guidle.com/it/events/music/fribourg/les-batteurs-de-paves-et-les-pcgb-dracula_AvvKxMe"
+            },
+            {
+              "label": "Circus Knie",
+              "detail": "Fribourg — in corso, ultimo giorno: 1 novembre 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/circus-knie-2026-17/"
+            },
+            {
+              "label": "Halloween à Moléson",
+              "detail": "Office du Tourisme de Moléson, Gruyères — in corso, ultimo giorno: 1 novembre 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
+            },
+            {
+              "label": "Séance d'information \"Admissions 2027-28\" - en présentiel",
+              "detail": "Fribourg",
+              "date": "2026-11-03",
+              "url": "https://www.fr.ch/eikon/evenements/seance-dinformation-admissions-2027-28-en-presentiel"
+            },
+            {
+              "label": "C’est la fête",
+              "detail": "Villars-sur-Glâne",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cest-la-fete/"
+            },
+            {
+              "label": "Le Bourgeois Gentilhomme",
+              "detail": "Equilibre, Fribourg",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/le-bourgeois-gentilhomme-1/"
+            },
+            {
+              "label": "Midi théâtre : Tavolo Pour Drü",
+              "detail": "Nuithonie, Villars-sur-Glâne",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/midi-theatre-tavolo-pour-drue-1/"
+            },
+            {
+              "label": "Afterwork",
+              "detail": "Fribourg",
+              "date": "2026-11-05",
+              "url": "https://www.fr.ch/mahf/evenements/afterwork-2"
+            },
+            {
+              "label": "Séance d'information \"Admissions 2027-28\" - en visio",
+              "detail": "Fribourg",
+              "date": "2026-11-05",
+              "url": "https://www.fr.ch/eikon/evenements/seance-dinformation-admissions-2027-28-en-visio"
+            },
+            {
+              "label": "BDmania",
+              "detail": "Belfaux",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bdmania/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/friburgo/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -113,7 +113,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-10-31T20:43:08.728Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +135,7 @@
           "url": "/eventi/friburgo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "en": {
       "canton": "FR",
@@ -145,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "44",
+          "value": "42",
           "note": "from the site’s events calendar"
         }
       ],
@@ -156,69 +156,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "“RUNNING DEAD” 2ème édition",
-              "detail": "Running dead",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/running-dead-2eme-edition/"
-            },
-            {
-              "label": "Amor, choisir sans renoncer",
-              "detail": "Treyvaux",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/amor-choisir-sans-renoncer/"
-            },
-            {
-              "label": "Concerts O’pus",
-              "detail": "Temple Réformé, Fribourg",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/concerts-opus/"
-            },
-            {
-              "label": "Marchethon Fribourg",
-              "detail": "Givisiez, Fribourg",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/marchethon-fribourg/"
-            },
-            {
-              "label": "ANNULÉ | Les Rendez-vous nature du Bois de mon Coeur : Arbres",
-              "detail": "Villars-sur-Glâne",
-              "date": "2026-10-31",
-              "url": "https://www.fr.ch/mhnf/evenements/annule-les-rendez-vous-nature-du-bois-de-mon-coeur-arbres"
-            },
-            {
-              "label": "Les Rendez-vous nature du Bois de mon Coeur : Arbres",
-              "detail": "Villars-sur-Glâne",
-              "date": "2026-10-31",
-              "url": "https://www.fr.ch/mhnf/evenements/les-rendez-vous-nature-du-bois-de-mon-coeur-arbres"
-            },
-            {
-              "label": "Circus Knie",
-              "detail": "Fribourg — ongoing, last day: 1 November 2026",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/circus-knie-2026-17/"
-            },
-            {
-              "label": "Regards affinés",
-              "detail": "L'Atelier, Fribourg — ongoing, last day: 31 October 2026",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
-            },
-            {
-              "label": "Halloween à Moléson",
-              "detail": "Office du Tourisme de Moléson, Gruyères — ongoing, last day: 1 November 2026",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
-            },
-            {
               "label": "Les Batteurs de Pavés and the PCGBs: Dracula",
               "detail": "Café-Théâtre Le Bilboquet",
               "date": "2026-11-01",
               "url": "https://www.guidle.com/it/events/music/fribourg/les-batteurs-de-paves-et-les-pcgb-dracula_AvvKxMe"
+            },
+            {
+              "label": "Circus Knie",
+              "detail": "Fribourg — ongoing, last day: 1 November 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/circus-knie-2026-17/"
+            },
+            {
+              "label": "Halloween à Moléson",
+              "detail": "Office du Tourisme de Moléson, Gruyères — ongoing, last day: 1 November 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
+            },
+            {
+              "label": "Séance d'information \"Admissions 2027-28\" - en présentiel",
+              "detail": "Fribourg",
+              "date": "2026-11-03",
+              "url": "https://www.fr.ch/eikon/evenements/seance-dinformation-admissions-2027-28-en-presentiel"
+            },
+            {
+              "label": "C’est la fête",
+              "detail": "Villars-sur-Glâne",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cest-la-fete/"
+            },
+            {
+              "label": "Le Bourgeois Gentilhomme",
+              "detail": "Equilibre, Fribourg",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/le-bourgeois-gentilhomme-1/"
+            },
+            {
+              "label": "Midi théâtre : Tavolo Pour Drü",
+              "detail": "Nuithonie, Villars-sur-Glâne",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/midi-theatre-tavolo-pour-drue-1/"
+            },
+            {
+              "label": "Afterwork",
+              "detail": "Fribourg",
+              "date": "2026-11-05",
+              "url": "https://www.fr.ch/mahf/evenements/afterwork-2"
+            },
+            {
+              "label": "Séance d'information \"Admissions 2027-28\" - en visio",
+              "detail": "Fribourg",
+              "date": "2026-11-05",
+              "url": "https://www.fr.ch/eikon/evenements/seance-dinformation-admissions-2027-28-en-visio"
+            },
+            {
+              "label": "BDmania",
+              "detail": "Belfaux",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bdmania/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/fribourg/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -231,7 +231,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-10-31T20:43:08.728Z"
         }
       ],
       "curatedArticles": [
@@ -253,7 +253,7 @@
           "url": "/en/events/fribourg/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "de": {
       "canton": "FR",
@@ -263,7 +263,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "44",
+          "value": "42",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -274,69 +274,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "“RUNNING DEAD” 2ème édition",
-              "detail": "Running dead",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/running-dead-2eme-edition/"
-            },
-            {
-              "label": "Amor, choisir sans renoncer",
-              "detail": "Treyvaux",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/amor-choisir-sans-renoncer/"
-            },
-            {
-              "label": "Concerts O’pus",
-              "detail": "Temple Réformé, Fribourg",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/concerts-opus/"
-            },
-            {
-              "label": "Marchethon Fribourg",
-              "detail": "Givisiez, Fribourg",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/marchethon-fribourg/"
-            },
-            {
-              "label": "ANNULÉ | Les Rendez-vous nature du Bois de mon Coeur : Arbres",
-              "detail": "Villars-sur-Glâne",
-              "date": "2026-10-31",
-              "url": "https://www.fr.ch/mhnf/evenements/annule-les-rendez-vous-nature-du-bois-de-mon-coeur-arbres"
-            },
-            {
-              "label": "Les Rendez-vous nature du Bois de mon Coeur : Arbres",
-              "detail": "Villars-sur-Glâne",
-              "date": "2026-10-31",
-              "url": "https://www.fr.ch/mhnf/evenements/les-rendez-vous-nature-du-bois-de-mon-coeur-arbres"
-            },
-            {
-              "label": "Circus Knie",
-              "detail": "Fribourg — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/circus-knie-2026-17/"
-            },
-            {
-              "label": "Regards affinés",
-              "detail": "L'Atelier, Fribourg — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
-            },
-            {
-              "label": "Halloween à Moléson",
-              "detail": "Office du Tourisme de Moléson, Gruyères — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
-            },
-            {
               "label": "Les Batteurs de Pavés et les PCGB: Dracula",
               "detail": "Café-Théâtre Le Bilboquet",
               "date": "2026-11-01",
               "url": "https://www.guidle.com/it/events/music/fribourg/les-batteurs-de-paves-et-les-pcgb-dracula_AvvKxMe"
+            },
+            {
+              "label": "Circus Knie",
+              "detail": "Fribourg — läuft, letzter Tag: 1. November 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/circus-knie-2026-17/"
+            },
+            {
+              "label": "Halloween à Moléson",
+              "detail": "Office du Tourisme de Moléson, Gruyères — läuft, letzter Tag: 1. November 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
+            },
+            {
+              "label": "Séance d'information \"Admissions 2027-28\" - en présentiel",
+              "detail": "Fribourg",
+              "date": "2026-11-03",
+              "url": "https://www.fr.ch/eikon/evenements/seance-dinformation-admissions-2027-28-en-presentiel"
+            },
+            {
+              "label": "C’est la fête",
+              "detail": "Villars-sur-Glâne",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cest-la-fete/"
+            },
+            {
+              "label": "Le Bourgeois Gentilhomme",
+              "detail": "Equilibre, Fribourg",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/le-bourgeois-gentilhomme-1/"
+            },
+            {
+              "label": "Midi théâtre : Tavolo Pour Drü",
+              "detail": "Nuithonie, Villars-sur-Glâne",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/midi-theatre-tavolo-pour-drue-1/"
+            },
+            {
+              "label": "Afterwork",
+              "detail": "Fribourg",
+              "date": "2026-11-05",
+              "url": "https://www.fr.ch/mahf/evenements/afterwork-2"
+            },
+            {
+              "label": "Séance d'information \"Admissions 2027-28\" - en visio",
+              "detail": "Fribourg",
+              "date": "2026-11-05",
+              "url": "https://www.fr.ch/eikon/evenements/seance-dinformation-admissions-2027-28-en-visio"
+            },
+            {
+              "label": "BDmania",
+              "detail": "Belfaux",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bdmania/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/freiburg/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -349,7 +349,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-10-31T20:43:08.728Z"
         }
       ],
       "curatedArticles": [
@@ -371,7 +371,7 @@
           "url": "/de/veranstaltungen/freiburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "fr": {
       "canton": "FR",
@@ -381,7 +381,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "44",
+          "value": "42",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -392,69 +392,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "“RUNNING DEAD” 2ème édition",
-              "detail": "Running dead",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/running-dead-2eme-edition/"
-            },
-            {
-              "label": "Amor, choisir sans renoncer",
-              "detail": "Treyvaux",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/amor-choisir-sans-renoncer/"
-            },
-            {
-              "label": "Concerts O’pus",
-              "detail": "Temple Réformé, Fribourg",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/concerts-opus/"
-            },
-            {
-              "label": "Marchethon Fribourg",
-              "detail": "Givisiez, Fribourg",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/marchethon-fribourg/"
-            },
-            {
-              "label": "ANNULÉ | Les Rendez-vous nature du Bois de mon Coeur : Arbres",
-              "detail": "Villars-sur-Glâne",
-              "date": "2026-10-31",
-              "url": "https://www.fr.ch/mhnf/evenements/annule-les-rendez-vous-nature-du-bois-de-mon-coeur-arbres"
-            },
-            {
-              "label": "Les Rendez-vous nature du Bois de mon Coeur : Arbres",
-              "detail": "Villars-sur-Glâne",
-              "date": "2026-10-31",
-              "url": "https://www.fr.ch/mhnf/evenements/les-rendez-vous-nature-du-bois-de-mon-coeur-arbres"
-            },
-            {
-              "label": "Circus Knie",
-              "detail": "Fribourg — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/circus-knie-2026-17/"
-            },
-            {
-              "label": "Regards affinés",
-              "detail": "L'Atelier, Fribourg — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
-            },
-            {
-              "label": "Halloween à Moléson",
-              "detail": "Office du Tourisme de Moléson, Gruyères — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
-            },
-            {
               "label": "Les Batteurs de Pavés et les PCGB: Dracula",
               "detail": "Café-Théâtre Le Bilboquet",
               "date": "2026-11-01",
               "url": "https://www.guidle.com/it/events/music/fribourg/les-batteurs-de-paves-et-les-pcgb-dracula_AvvKxMe"
+            },
+            {
+              "label": "Circus Knie",
+              "detail": "Fribourg — en cours, dernier jour : 1er novembre 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/circus-knie-2026-17/"
+            },
+            {
+              "label": "Halloween à Moléson",
+              "detail": "Office du Tourisme de Moléson, Gruyères — en cours, dernier jour : 1er novembre 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
+            },
+            {
+              "label": "Séance d'information \"Admissions 2027-28\" - en présentiel",
+              "detail": "Fribourg",
+              "date": "2026-11-03",
+              "url": "https://www.fr.ch/eikon/evenements/seance-dinformation-admissions-2027-28-en-presentiel"
+            },
+            {
+              "label": "C’est la fête",
+              "detail": "Villars-sur-Glâne",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cest-la-fete/"
+            },
+            {
+              "label": "Le Bourgeois Gentilhomme",
+              "detail": "Equilibre, Fribourg",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/le-bourgeois-gentilhomme-1/"
+            },
+            {
+              "label": "Midi théâtre : Tavolo Pour Drü",
+              "detail": "Nuithonie, Villars-sur-Glâne",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/midi-theatre-tavolo-pour-drue-1/"
+            },
+            {
+              "label": "Afterwork",
+              "detail": "Fribourg",
+              "date": "2026-11-05",
+              "url": "https://www.fr.ch/mahf/evenements/afterwork-2"
+            },
+            {
+              "label": "Séance d'information \"Admissions 2027-28\" - en visio",
+              "detail": "Fribourg",
+              "date": "2026-11-05",
+              "url": "https://www.fr.ch/eikon/evenements/seance-dinformation-admissions-2027-28-en-visio"
+            },
+            {
+              "label": "BDmania",
+              "detail": "Belfaux",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bdmania/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/fribourg/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -467,7 +467,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-10-31T20:43:08.728Z"
         }
       ],
       "curatedArticles": [
@@ -489,7 +489,7 @@
           "url": "/fr/evenements/fribourg/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     }
   }
 }

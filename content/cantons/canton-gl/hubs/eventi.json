@@ -4,12 +4,12 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "eventi",
-  "updatedAt": "2026-10-31T06:15:08.747Z",
-  "contentHash": "7c83e738cb42e2441504ac292d56fb7ee23eb122102040315eb34511a6537fb1",
+  "updatedAt": "2026-11-01T13:11:05.408Z",
+  "contentHash": "d2827d526108c084a29bfb9a2ebcc16e7e5a81e24b6a8fdf41dfe1b067a286de",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-30T13:23:17.161Z",
+      "updatedAt": "2026-10-31T14:21:36.178Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "21",
+          "value": "19",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,57 +33,15 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Glarner Junioren Turnier 2026",
-              "detail": "Glarus",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/glarner-junioren-turnier-2026/"
-            },
-            {
-              "label": "Flohmarkt im Vereinslokal des MV Wolves",
-              "detail": "Glarus",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/flohmarkt-im-vereinslokal-des-mv-wolves/"
-            },
-            {
-              "label": "Saisonschluss und Finnissage",
-              "detail": "Freulerpalast",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/saisonschluss-und-finnissage/"
-            },
-            {
-              "label": "RISE UP - Singen - Beten - Impuls - Kinderparty",
-              "detail": "Ennenda, Glarus",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rise-up-singen-beten-impuls-kinderparty/"
-            },
-            {
-              "label": "Dance Night Glarnerland",
-              "detail": "Fabriktheater Schwanden",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schwanden-gl/dance-night-glarnerland_AT2H1mr"
-            },
-            {
-              "label": "Soulmarket",
-              "detail": "Glarus",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/soulmarket-2/"
-            },
-            {
-              "label": "Walt's Blues Box Quartett",
-              "detail": "Wortreich Buchhandlung & Antiquariat",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/glarus/walts-blues-box-quartett_Awhd7nQ"
-            },
-            {
               "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
               "detail": "Schützenhaus Glarus, Glarus — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-10-31",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
             },
             {
               "label": "Balboa Schnupperkurs",
               "detail": "Ennenda, Glarus — in corso, ultimo giorno: 11 novembre 2026",
-              "date": "2026-10-31",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
             },
             {
@@ -91,11 +49,53 @@
               "detail": "Glarus",
               "date": "2026-11-03",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/buchstart-fuer-kinder-im-november/"
+            },
+            {
+              "label": "Vino e cucina",
+              "detail": "Braunwald",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/wine-dine-6-november-2026/"
+            },
+            {
+              "label": "Blues Night mit Aynsley Lister",
+              "detail": "LKS Linthkraft Stiftung",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/linthal/blues-night-mit-aynsley-lister_Af8cfm4"
+            },
+            {
+              "label": "Tina Teubner - PROTOKOLLE DER SEHNSUCHT",
+              "detail": "Glarus",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tina-teubner-protokolle-der-sehnsucht/"
+            },
+            {
+              "label": "35. Herbstfest Braunwald, 7. November 2026",
+              "detail": "Braunwald, Glarus Süd",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/35-herbstfest-braunwald-7-november-2026/"
+            },
+            {
+              "label": "☆Star d'Epices - Gewürz-Workshop☆",
+              "detail": "Mühlehorn (Kerenzerberg)",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/star-depices-gewuerzworkshop-9/"
+            },
+            {
+              "label": "Turnerkränzli Matt",
+              "detail": "Matt, Glarus Süd",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turnerkraenzli-matt/"
+            },
+            {
+              "label": "Patrick Sommer Quintett",
+              "detail": "Kunsthaus Glarus, Glarus",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/glarus/patrick-sommer-quintett_AcD8e7k"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/glarona/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/glarona/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "en": {
       "canton": "GL",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "21",
+          "value": "19",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,57 +138,15 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Glarner Junioren Turnier 2026",
-              "detail": "Glarus",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/glarner-junioren-turnier-2026/"
-            },
-            {
-              "label": "Flohmarkt im Vereinslokal des MV Wolves",
-              "detail": "Glarus",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/flohmarkt-im-vereinslokal-des-mv-wolves/"
-            },
-            {
-              "label": "Saisonschluss und Finnissage",
-              "detail": "Freulerpalast",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/saisonschluss-und-finnissage/"
-            },
-            {
-              "label": "RISE UP - Singen - Beten - Impuls - Kinderparty",
-              "detail": "Ennenda, Glarus",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rise-up-singen-beten-impuls-kinderparty/"
-            },
-            {
-              "label": "Dance Night Glarnerland",
-              "detail": "Fabriktheater Schwanden",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schwanden-gl/dance-night-glarnerland_AT2H1mr"
-            },
-            {
-              "label": "Soulmarket",
-              "detail": "Glarus",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/soulmarket-2/"
-            },
-            {
-              "label": "Walt's Blues Box Quartett",
-              "detail": "Wortreich Buchhandlung & Antiquariat",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/glarus/walts-blues-box-quartett_Awhd7nQ"
-            },
-            {
               "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
               "detail": "Schützenhaus Glarus, Glarus — ongoing, last day: 14 November 2026",
-              "date": "2026-10-31",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
             },
             {
               "label": "Balboa Schnupperkurs",
               "detail": "Ennenda, Glarus — ongoing, last day: 11 November 2026",
-              "date": "2026-10-31",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
             },
             {
@@ -196,11 +154,53 @@
               "detail": "Glarus",
               "date": "2026-11-03",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/buchstart-fuer-kinder-im-november/"
+            },
+            {
+              "label": "Wine & Dine",
+              "detail": "Braunwald",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/wine-dine-6-november-2026/"
+            },
+            {
+              "label": "Blues Night mit Aynsley Lister",
+              "detail": "LKS Linthkraft Stiftung",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/linthal/blues-night-mit-aynsley-lister_Af8cfm4"
+            },
+            {
+              "label": "Tina Teubner - PROTOKOLLE DER SEHNSUCHT",
+              "detail": "Glarus",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tina-teubner-protokolle-der-sehnsucht/"
+            },
+            {
+              "label": "35. Herbstfest Braunwald, 7. November 2026",
+              "detail": "Braunwald, Glarus Süd",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/35-herbstfest-braunwald-7-november-2026/"
+            },
+            {
+              "label": "☆Star d'Epices - Gewürz-Workshop☆",
+              "detail": "Mühlehorn (Kerenzerberg)",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/star-depices-gewuerzworkshop-9/"
+            },
+            {
+              "label": "Turnerkränzli Matt",
+              "detail": "Matt, Glarus Süd",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turnerkraenzli-matt/"
+            },
+            {
+              "label": "Patrick Sommer Quintett",
+              "detail": "Kunsthaus Glarus, Glarus",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/glarus/patrick-sommer-quintett_AcD8e7k"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/glarus/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/glarus/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "de": {
       "canton": "GL",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "21",
+          "value": "19",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,57 +243,15 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Glarner Junioren Turnier 2026",
-              "detail": "Glarus",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/glarner-junioren-turnier-2026/"
-            },
-            {
-              "label": "Flohmarkt im Vereinslokal des MV Wolves",
-              "detail": "Glarus",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/flohmarkt-im-vereinslokal-des-mv-wolves/"
-            },
-            {
-              "label": "Saisonschluss und Finnissage",
-              "detail": "Freulerpalast",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/saisonschluss-und-finnissage/"
-            },
-            {
-              "label": "RISE UP - Singen - Beten - Impuls - Kinderparty",
-              "detail": "Ennenda, Glarus",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rise-up-singen-beten-impuls-kinderparty/"
-            },
-            {
-              "label": "Dance Night Glarnerland",
-              "detail": "Fabriktheater Schwanden",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schwanden-gl/dance-night-glarnerland_AT2H1mr"
-            },
-            {
-              "label": "Soulmarket",
-              "detail": "Glarus",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/soulmarket-2/"
-            },
-            {
-              "label": "Walt's Blues Box Quartett",
-              "detail": "Wortreich Buchhandlung & Antiquariat",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/glarus/walts-blues-box-quartett_Awhd7nQ"
-            },
-            {
               "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
               "detail": "Schützenhaus Glarus, Glarus — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-10-31",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
             },
             {
               "label": "Balboa Schnupperkurs",
               "detail": "Ennenda, Glarus — läuft, letzter Tag: 11. November 2026",
-              "date": "2026-10-31",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
             },
             {
@@ -301,11 +259,53 @@
               "detail": "Glarus",
               "date": "2026-11-03",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/buchstart-fuer-kinder-im-november/"
+            },
+            {
+              "label": "Wine & Dine",
+              "detail": "Braunwald",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/wine-dine-6-november-2026/"
+            },
+            {
+              "label": "Blues Night mit Aynsley Lister",
+              "detail": "LKS Linthkraft Stiftung",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/linthal/blues-night-mit-aynsley-lister_Af8cfm4"
+            },
+            {
+              "label": "Tina Teubner - PROTOKOLLE DER SEHNSUCHT",
+              "detail": "Glarus",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tina-teubner-protokolle-der-sehnsucht/"
+            },
+            {
+              "label": "35. Herbstfest Braunwald, 7. November 2026",
+              "detail": "Braunwald, Glarus Süd",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/35-herbstfest-braunwald-7-november-2026/"
+            },
+            {
+              "label": "☆Star d'Epices - Gewürz-Workshop☆",
+              "detail": "Mühlehorn (Kerenzerberg)",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/star-depices-gewuerzworkshop-9/"
+            },
+            {
+              "label": "Turnerkränzli Matt",
+              "detail": "Matt, Glarus Süd",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turnerkraenzli-matt/"
+            },
+            {
+              "label": "Patrick Sommer Quintett",
+              "detail": "Kunsthaus Glarus, Glarus",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/glarus/patrick-sommer-quintett_AcD8e7k"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/glarus/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/glarus/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "fr": {
       "canton": "GL",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "21",
+          "value": "19",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,57 +348,15 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Glarner Junioren Turnier 2026",
-              "detail": "Glarus",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/glarner-junioren-turnier-2026/"
-            },
-            {
-              "label": "Flohmarkt im Vereinslokal des MV Wolves",
-              "detail": "Glarus",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/flohmarkt-im-vereinslokal-des-mv-wolves/"
-            },
-            {
-              "label": "Saisonschluss und Finnissage",
-              "detail": "Freulerpalast",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/saisonschluss-und-finnissage/"
-            },
-            {
-              "label": "RISE UP - Singen - Beten - Impuls - Kinderparty",
-              "detail": "Ennenda, Glarus",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rise-up-singen-beten-impuls-kinderparty/"
-            },
-            {
-              "label": "Dance Night Glarnerland",
-              "detail": "Fabriktheater Schwanden",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schwanden-gl/dance-night-glarnerland_AT2H1mr"
-            },
-            {
-              "label": "Soulmarket",
-              "detail": "Glarus",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/soulmarket-2/"
-            },
-            {
-              "label": "Walt's Blues Box Quartett",
-              "detail": "Wortreich Buchhandlung & Antiquariat",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/glarus/walts-blues-box-quartett_Awhd7nQ"
-            },
-            {
               "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
               "detail": "Schützenhaus Glarus, Glarus — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-10-31",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
             },
             {
               "label": "Schnupperkurs de Balboa",
               "detail": "Ennenda, Glarus — en cours, dernier jour : 11 novembre 2026",
-              "date": "2026-10-31",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
             },
             {
@@ -406,11 +364,53 @@
               "detail": "Glarus",
               "date": "2026-11-03",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/buchstart-fuer-kinder-im-november/"
+            },
+            {
+              "label": "Gastronomie et vins",
+              "detail": "Braunwald",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/wine-dine-6-november-2026/"
+            },
+            {
+              "label": "Blues Night mit Aynsley Lister",
+              "detail": "LKS Linthkraft Stiftung",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/linthal/blues-night-mit-aynsley-lister_Af8cfm4"
+            },
+            {
+              "label": "Tina Teubner - PROTOKOLLE DER SEHNSUCHT",
+              "detail": "Glarus",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tina-teubner-protokolle-der-sehnsucht/"
+            },
+            {
+              "label": "35. Herbstfest Braunwald, 7. November 2026",
+              "detail": "Braunwald, Glarus Süd",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/35-herbstfest-braunwald-7-november-2026/"
+            },
+            {
+              "label": "☆Star d'Epices - Gewürz-Workshop☆",
+              "detail": "Mühlehorn (Kerenzerberg)",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/star-depices-gewuerzworkshop-9/"
+            },
+            {
+              "label": "Turnerkränzli Matt",
+              "detail": "Matt, Glarus Süd",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/turnerkraenzli-matt/"
+            },
+            {
+              "label": "Patrick Sommer Quintett",
+              "detail": "Kunsthaus Glarus, Glarus",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/glarus/patrick-sommer-quintett_AcD8e7k"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/glaris/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/glaris/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     }
   }
 }

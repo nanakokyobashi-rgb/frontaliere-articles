@@ -4,12 +4,12 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "eventi",
-  "updatedAt": "2026-10-31T06:15:08.747Z",
-  "contentHash": "d7def394acaee7f8afb092b422cca96e347ed37857849950360324cafdb5f318",
+  "updatedAt": "2026-11-01T13:11:05.408Z",
+  "contentHash": "f86889709776b934bce84ebc45fee888f3ceb9cbcb2c85e21d068f13872cd950",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-30T13:23:17.161Z",
+      "updatedAt": "2026-10-31T14:21:36.178Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "158",
+          "value": "153",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
+              "label": "Arp, Cahn, Magnelli, Taeuber-Arp. L’arte del dono",
+              "detail": "Fondazione Marguerite Arp, Locarno",
+              "date": "2026-11-01",
+              "url": "https://www.tio.ch/agenda/day/20261101/61586"
+            },
+            {
+              "label": "Gyotaku - Tracce di pesci",
+              "detail": "Museo della pesca, Caslano",
+              "date": "2026-11-01",
+              "url": "https://www.tio.ch/agenda/day/20261101/61721"
+            },
+            {
+              "label": "Morestalgia di Riccardo Benassi",
+              "detail": "Hall del LAC, Lugano",
+              "date": "2026-11-01",
+              "url": "https://www.tio.ch/agenda/day/20261101/64298"
+            },
+            {
+              "label": "Brunch Bellavista",
+              "detail": "Buffet Bellavista, Mendrisio",
+              "date": "2026-11-01",
+              "url": "https://www.tio.ch/agenda/day/20261101/62918"
+            },
+            {
+              "label": "Funerale Casa Azul",
+              "detail": "Casa Azul Gordola, Gordola",
+              "date": "2026-11-01",
+              "url": "https://www.tio.ch/agenda/day/20261101/64794"
+            },
+            {
+              "label": "Il grande lupo bulgaro",
+              "detail": "Teatro Foce, Lugano",
+              "date": "2026-11-01",
+              "url": "https://www.tio.ch/agenda/day/20261101/63714"
+            },
+            {
+              "label": "Incanta l'attimo - Riccardo Tesi e La Scürdara",
+              "detail": "Chiesa S.M in Selva, Locarno",
+              "date": "2026-11-01",
+              "url": "https://www.tio.ch/agenda/day/20261101/64692"
+            },
+            {
+              "label": "Ultima lettura domenicale al Museo Hermann Hesse",
+              "detail": "Museo Hermann Hesse, Lugano",
+              "date": "2026-11-01",
+              "url": "https://www.tio.ch/agenda/day/20261101/64624"
+            },
+            {
+              "label": "Atelier: come muovere le marionette a fili",
+              "detail": "Teatro Foce, Lugano",
+              "date": "2026-11-01",
+              "url": "https://www.tio.ch/agenda/day/20261101/63720"
+            },
+            {
               "label": "Il Regno delle Zucche",
-              "detail": "Serfontana, Mendrisio",
-              "date": "2026-10-31",
+              "detail": "Serfontana, Mendrisio — in corso, ultimo giorno: 4 novembre 2026",
+              "date": "2026-11-01",
               "url": "https://www.tio.ch/agenda/day/20261031/64546"
-            },
-            {
-              "label": "Vivi il giardino",
-              "detail": "GiardinoPiù di Gudo, Bellinzona",
-              "date": "2026-10-31",
-              "url": "https://www.tio.ch/agenda/day/20261031/62880"
-            },
-            {
-              "label": "Halloween Family Day in vetta",
-              "detail": "Fiore di pietra, Mendrisio",
-              "date": "2026-10-31",
-              "url": "https://www.tio.ch/agenda/day/20261031/64063"
-            },
-            {
-              "label": "Fiera Lugano Bimbi e Creativa",
-              "detail": "Centro Esposizioni Lugano, Lugano",
-              "date": "2026-10-31",
-              "url": "https://www.tio.ch/agenda/day/20261031/64766"
-            },
-            {
-              "label": "Mercato autunnale dei contadini e degli artigiani della val Rovana",
-              "detail": "Cerentino",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mercato-autunnale-dei-contadini-e-degli-artigiani-della-val-rovana/"
-            },
-            {
-              "label": "Miao, che spettacolo!!!",
-              "detail": "Mercato Coperto, Bellinzona",
-              "date": "2026-10-31",
-              "url": "https://www.tio.ch/agenda/day/20261031/64754"
-            },
-            {
-              "label": "Passioni: un viaggio dal barocco al tango!",
-              "detail": "Helvetic Music Institute, Bellinzona",
-              "date": "2026-10-31",
-              "url": "https://www.tio.ch/agenda/day/20261031/64763"
-            },
-            {
-              "label": "Autunno alle Isole",
-              "detail": "Isole di Brissago, Brissago",
-              "date": "2026-10-31",
-              "url": "https://www.tio.ch/agenda/day/20261031/64514"
-            },
-            {
-              "label": "Aline d'Auria - Mai più, tra poco, spesso, un tempo.",
-              "detail": "Casa Rotonda",
-              "date": "2026-10-31",
-              "url": "https://www.tio.ch/agenda/day/20261031/64617"
-            },
-            {
-              "label": "Eclissi",
-              "detail": "Spazio polivalente Arte e Valori, Bellinzona",
-              "date": "2026-10-31",
-              "url": "https://www.tio.ch/agenda/day/20261031/64329"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ticino/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -163,7 +163,7 @@
           "url": "/articoli-frontaliere/eventi-weekend-ticino/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "en": {
       "canton": "TI",
@@ -173,7 +173,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "158",
+          "value": "153",
           "note": "from the site’s events calendar"
         }
       ],
@@ -184,69 +184,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
+              "label": "Arp, Cahn, Magnelli, Taeuber-Arp. The Art of the Gift",
+              "detail": "Fondazione Marguerite Arp, Locarno",
+              "date": "2026-11-01",
+              "url": "https://www.tio.ch/agenda/day/20261101/61586"
+            },
+            {
+              "label": "Gyotaku - Fish Trails",
+              "detail": "Museo della pesca, Caslano",
+              "date": "2026-11-01",
+              "url": "https://www.tio.ch/agenda/day/20261101/61721"
+            },
+            {
+              "label": "Morestalgia by Riccardo Benassi",
+              "detail": "Hall del LAC, Lugano",
+              "date": "2026-11-01",
+              "url": "https://www.tio.ch/agenda/day/20261101/64298"
+            },
+            {
+              "label": "Bellavista brunch",
+              "detail": "Buffet Bellavista, Mendrisio",
+              "date": "2026-11-01",
+              "url": "https://www.tio.ch/agenda/day/20261101/62918"
+            },
+            {
+              "label": "Casa Azul Funeral",
+              "detail": "Casa Azul Gordola, Gordola",
+              "date": "2026-11-01",
+              "url": "https://www.tio.ch/agenda/day/20261101/64794"
+            },
+            {
+              "label": "The great Bulgarian wolf",
+              "detail": "Teatro Foce, Lugano",
+              "date": "2026-11-01",
+              "url": "https://www.tio.ch/agenda/day/20261101/63714"
+            },
+            {
+              "label": "Enchants the moment - Riccardo Tesi and La Scürdara",
+              "detail": "Chiesa S.M in Selva, Locarno",
+              "date": "2026-11-01",
+              "url": "https://www.tio.ch/agenda/day/20261101/64692"
+            },
+            {
+              "label": "Last Sunday Reading at the Hermann Hesse Museum",
+              "detail": "Museo Hermann Hesse, Lugano",
+              "date": "2026-11-01",
+              "url": "https://www.tio.ch/agenda/day/20261101/64624"
+            },
+            {
+              "label": "Atelier: how to move puppets with strings",
+              "detail": "Teatro Foce, Lugano",
+              "date": "2026-11-01",
+              "url": "https://www.tio.ch/agenda/day/20261101/63720"
+            },
+            {
               "label": "The Kingdom of Pumpkins",
-              "detail": "Serfontana, Mendrisio",
-              "date": "2026-10-31",
+              "detail": "Serfontana, Mendrisio — ongoing, last day: 4 November 2026",
+              "date": "2026-11-01",
               "url": "https://www.tio.ch/agenda/day/20261031/64546"
-            },
-            {
-              "label": "ENJOY YOUR GARDEN",
-              "detail": "GiardinoPiù di Gudo, Bellinzona",
-              "date": "2026-10-31",
-              "url": "https://www.tio.ch/agenda/day/20261031/62880"
-            },
-            {
-              "label": "Halloween Family Day at the top",
-              "detail": "Fiore di pietra, Mendrisio",
-              "date": "2026-10-31",
-              "url": "https://www.tio.ch/agenda/day/20261031/64063"
-            },
-            {
-              "label": "Lugano Children's and Creative Fair",
-              "detail": "Centro Esposizioni Lugano, Lugano",
-              "date": "2026-10-31",
-              "url": "https://www.tio.ch/agenda/day/20261031/64766"
-            },
-            {
-              "label": "Autumnal market",
-              "detail": "Cerentino",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mercato-autunnale-dei-contadini-e-degli-artigiani-della-val-rovana/"
-            },
-            {
-              "label": "Meow, what a show!!!",
-              "detail": "Mercato Coperto, Bellinzona",
-              "date": "2026-10-31",
-              "url": "https://www.tio.ch/agenda/day/20261031/64754"
-            },
-            {
-              "label": "Passions: a journey from baroque to tango!",
-              "detail": "Helvetic Music Institute, Bellinzona",
-              "date": "2026-10-31",
-              "url": "https://www.tio.ch/agenda/day/20261031/64763"
-            },
-            {
-              "label": "Autumn in the Islands",
-              "detail": "Isole di Brissago, Brissago",
-              "date": "2026-10-31",
-              "url": "https://www.tio.ch/agenda/day/20261031/64514"
-            },
-            {
-              "label": "Aline d 'Auria - Never again, soon, often, once.",
-              "detail": "Casa Rotonda",
-              "date": "2026-10-31",
-              "url": "https://www.tio.ch/agenda/day/20261031/64617"
-            },
-            {
-              "label": "Eclipse",
-              "detail": "Spazio polivalente Arte e Valori, Bellinzona",
-              "date": "2026-10-31",
-              "url": "https://www.tio.ch/agenda/day/20261031/64329"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/ticino/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -314,7 +314,7 @@
           "url": "/en/cross-border-articles/weekend-events-ticino/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "de": {
       "canton": "TI",
@@ -324,7 +324,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "158",
+          "value": "153",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -335,69 +335,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
+              "label": "Arp, Cahn, Magnelli, Taeuber-Arp. Die Kunst des Schenkens",
+              "detail": "Fondazione Marguerite Arp, Locarno",
+              "date": "2026-11-01",
+              "url": "https://www.tio.ch/agenda/day/20261101/61586"
+            },
+            {
+              "label": "Gyotaku - Spuren von Fischen",
+              "detail": "Museo della pesca, Caslano",
+              "date": "2026-11-01",
+              "url": "https://www.tio.ch/agenda/day/20261101/61721"
+            },
+            {
+              "label": "Morestalgie von Riccardo Benassi",
+              "detail": "Hall del LAC, Lugano",
+              "date": "2026-11-01",
+              "url": "https://www.tio.ch/agenda/day/20261101/64298"
+            },
+            {
+              "label": "Bellavista Brunch",
+              "detail": "Buffet Bellavista, Mendrisio",
+              "date": "2026-11-01",
+              "url": "https://www.tio.ch/agenda/day/20261101/62918"
+            },
+            {
+              "label": "Beerdigung im „Casa Azul“",
+              "detail": "Casa Azul Gordola, Gordola",
+              "date": "2026-11-01",
+              "url": "https://www.tio.ch/agenda/day/20261101/64794"
+            },
+            {
+              "label": "Der große bulgarische Wolf",
+              "detail": "Teatro Foce, Lugano",
+              "date": "2026-11-01",
+              "url": "https://www.tio.ch/agenda/day/20261101/63714"
+            },
+            {
+              "label": "Verzaubern Sie den Moment - Riccardo Tesi und La Scürdara",
+              "detail": "Chiesa S.M in Selva, Locarno",
+              "date": "2026-11-01",
+              "url": "https://www.tio.ch/agenda/day/20261101/64692"
+            },
+            {
+              "label": "Letzte Lesung am Sonntag im Hermann-Hesse-Museum",
+              "detail": "Museo Hermann Hesse, Lugano",
+              "date": "2026-11-01",
+              "url": "https://www.tio.ch/agenda/day/20261101/64624"
+            },
+            {
+              "label": "Atelier: wie man die Drahtpuppen bewegt",
+              "detail": "Teatro Foce, Lugano",
+              "date": "2026-11-01",
+              "url": "https://www.tio.ch/agenda/day/20261101/63720"
+            },
+            {
               "label": "Das Königreich der Kürbisse",
-              "detail": "Serfontana, Mendrisio",
-              "date": "2026-10-31",
+              "detail": "Serfontana, Mendrisio — läuft, letzter Tag: 4. November 2026",
+              "date": "2026-11-01",
               "url": "https://www.tio.ch/agenda/day/20261031/64546"
-            },
-            {
-              "label": "Der Garten",
-              "detail": "GiardinoPiù di Gudo, Bellinzona",
-              "date": "2026-10-31",
-              "url": "https://www.tio.ch/agenda/day/20261031/62880"
-            },
-            {
-              "label": "Halloween-Familientag auf dem Gipfel",
-              "detail": "Fiore di pietra, Mendrisio",
-              "date": "2026-10-31",
-              "url": "https://www.tio.ch/agenda/day/20261031/64063"
-            },
-            {
-              "label": "Lugano Kinder- und Kreativmesse",
-              "detail": "Centro Esposizioni Lugano, Lugano",
-              "date": "2026-10-31",
-              "url": "https://www.tio.ch/agenda/day/20261031/64766"
-            },
-            {
-              "label": "Herbstmarkt",
-              "detail": "Cerentino",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mercato-autunnale-dei-contadini-e-degli-artigiani-della-val-rovana/"
-            },
-            {
-              "label": "Miau, was für eine Show!!!",
-              "detail": "Mercato Coperto, Bellinzona",
-              "date": "2026-10-31",
-              "url": "https://www.tio.ch/agenda/day/20261031/64754"
-            },
-            {
-              "label": "Leidenschaften: Eine Reise vom Barock zum Tango!",
-              "detail": "Helvetic Music Institute, Bellinzona",
-              "date": "2026-10-31",
-              "url": "https://www.tio.ch/agenda/day/20261031/64763"
-            },
-            {
-              "label": "Herbst auf den Inseln",
-              "detail": "Isole di Brissago, Brissago",
-              "date": "2026-10-31",
-              "url": "https://www.tio.ch/agenda/day/20261031/64514"
-            },
-            {
-              "label": "Aline d 'Auria - Nie wieder, bald, oft, einst.",
-              "detail": "Casa Rotonda",
-              "date": "2026-10-31",
-              "url": "https://www.tio.ch/agenda/day/20261031/64617"
-            },
-            {
-              "label": "Finsternis",
-              "detail": "Spazio polivalente Arte e Valori, Bellinzona",
-              "date": "2026-10-31",
-              "url": "https://www.tio.ch/agenda/day/20261031/64329"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/tessin/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -465,7 +465,7 @@
           "url": "/de/grenzgaenger-artikel/wochenend-veranstaltungen-tessin/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "fr": {
       "canton": "TI",
@@ -475,7 +475,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "158",
+          "value": "153",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -486,69 +486,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
+              "label": "Arp, Cahn, Magnelli, Taeuber-Arp. L’art du don",
+              "detail": "Fondazione Marguerite Arp, Locarno",
+              "date": "2026-11-01",
+              "url": "https://www.tio.ch/agenda/day/20261101/61586"
+            },
+            {
+              "label": "Gyotaku - Traces de poissons",
+              "detail": "Museo della pesca, Caslano",
+              "date": "2026-11-01",
+              "url": "https://www.tio.ch/agenda/day/20261101/61721"
+            },
+            {
+              "label": "Morestalgia de Riccardo Benassi",
+              "detail": "Hall del LAC, Lugano",
+              "date": "2026-11-01",
+              "url": "https://www.tio.ch/agenda/day/20261101/64298"
+            },
+            {
+              "label": "Brunch à Bellavista",
+              "detail": "Buffet Bellavista, Mendrisio",
+              "date": "2026-11-01",
+              "url": "https://www.tio.ch/agenda/day/20261101/62918"
+            },
+            {
+              "label": "Funérailles à la Casa Azul",
+              "detail": "Casa Azul Gordola, Gordola",
+              "date": "2026-11-01",
+              "url": "https://www.tio.ch/agenda/day/20261101/64794"
+            },
+            {
+              "label": "Le grand loup bulgare",
+              "detail": "Teatro Foce, Lugano",
+              "date": "2026-11-01",
+              "url": "https://www.tio.ch/agenda/day/20261101/63714"
+            },
+            {
+              "label": "Enchante l'instant - Riccardo Tesi et La Scürdara",
+              "detail": "Chiesa S.M in Selva, Locarno",
+              "date": "2026-11-01",
+              "url": "https://www.tio.ch/agenda/day/20261101/64692"
+            },
+            {
+              "label": "Dernière lecture dominicale au Musée Hermann Hesse",
+              "detail": "Museo Hermann Hesse, Lugano",
+              "date": "2026-11-01",
+              "url": "https://www.tio.ch/agenda/day/20261101/64624"
+            },
+            {
+              "label": "Atelier : comment déplacer les marionnettes filaires",
+              "detail": "Teatro Foce, Lugano",
+              "date": "2026-11-01",
+              "url": "https://www.tio.ch/agenda/day/20261101/63720"
+            },
+            {
               "label": "Le Royaume des Citrouilles",
-              "detail": "Serfontana, Mendrisio",
-              "date": "2026-10-31",
+              "detail": "Serfontana, Mendrisio — en cours, dernier jour : 4 novembre 2026",
+              "date": "2026-11-01",
               "url": "https://www.tio.ch/agenda/day/20261031/64546"
-            },
-            {
-              "label": "VIVEZ VOTRE JARDIN",
-              "detail": "GiardinoPiù di Gudo, Bellinzona",
-              "date": "2026-10-31",
-              "url": "https://www.tio.ch/agenda/day/20261031/62880"
-            },
-            {
-              "label": "Halloween Family Day au sommet",
-              "detail": "Fiore di pietra, Mendrisio",
-              "date": "2026-10-31",
-              "url": "https://www.tio.ch/agenda/day/20261031/64063"
-            },
-            {
-              "label": "Foire aux enfants et à la créativité de Lugano",
-              "detail": "Centro Esposizioni Lugano, Lugano",
-              "date": "2026-10-31",
-              "url": "https://www.tio.ch/agenda/day/20261031/64766"
-            },
-            {
-              "label": "Marché d'automne",
-              "detail": "Cerentino",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mercato-autunnale-dei-contadini-e-degli-artigiani-della-val-rovana/"
-            },
-            {
-              "label": "Miaou, quel spectacle !!!",
-              "detail": "Mercato Coperto, Bellinzona",
-              "date": "2026-10-31",
-              "url": "https://www.tio.ch/agenda/day/20261031/64754"
-            },
-            {
-              "label": "Passions : un voyage du baroque au tango !",
-              "detail": "Helvetic Music Institute, Bellinzona",
-              "date": "2026-10-31",
-              "url": "https://www.tio.ch/agenda/day/20261031/64763"
-            },
-            {
-              "label": "Automne aux îles",
-              "detail": "Isole di Brissago, Brissago",
-              "date": "2026-10-31",
-              "url": "https://www.tio.ch/agenda/day/20261031/64514"
-            },
-            {
-              "label": "Aline d'Auria - Plus jamais, bientôt, souvent, depuis longtemps.",
-              "detail": "Casa Rotonda",
-              "date": "2026-10-31",
-              "url": "https://www.tio.ch/agenda/day/20261031/64617"
-            },
-            {
-              "label": "Eclipse",
-              "detail": "Spazio polivalente Arte e Valori, Bellinzona",
-              "date": "2026-10-31",
-              "url": "https://www.tio.ch/agenda/day/20261031/64329"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/tessin/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -616,7 +616,7 @@
           "url": "/fr/articles-frontalier/evenements-week-end-tessin/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     }
   }
 }

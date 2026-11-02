@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-31T14:42:02.554Z",
-  "contentHash": "dd8789f0056dc79d2dececc4f7a8a7ce4415092737261f797e83739f1f5697c6",
+  "updatedAt": "2026-11-01T13:11:05.408Z",
+  "contentHash": "186369a27e52186579c65d50613f87f682e1ef50840c7ac313adb6d0c067b13e",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-31T10:01:09.440Z",
+      "updatedAt": "2026-10-31T21:55:48.067Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-31T11:16:57.003Z",
+      "updatedAt": "2026-10-31T20:43:08.728Z",
       "keyFacts": 0
     }
   ],
@@ -81,11 +81,6 @@
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
             {
-              "label": "Neuchâtel, Neuenburg <-> Rue de la Pierre-à-Mazel, Neuenburg Situazione: chiusa Causa: incidente",
-              "value": "Chiusura",
-              "date": "2026-10-05T02:26:00.000Z"
-            },
-            {
               "label": "A5 Neuchâtel -> Bienne Svincolo autostradale Neuenburg-Monruz Situazione: chiusa cantiere, lunghezza [km] 0.2",
               "value": "Chiusura",
               "detail": "fine prevista: 6 novembre 2026",
@@ -110,9 +105,14 @@
               "date": "2026-10-26T14:40:00.000Z"
             },
             {
+              "label": "Revocato: A5 Neuchâtel -> Yverdon Svincolo autostradale Neuchâtel-Serrières Situazione: uscita chiusa Causa: incendio Limitazione del traffico: corsia di destra chiusa",
+              "value": "Chiusura",
+              "date": "2026-10-31T16:26:00.000Z"
+            },
+            {
               "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
               "value": "Traffico",
-              "date": "2026-10-31T10:01:09.440Z",
+              "date": "2026-10-31T21:55:48.067Z",
               "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             },
             {
@@ -129,7 +129,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-31T10:01:09.440Z"
+          "updatedAt": "2026-10-31T21:55:48.067Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -152,7 +152,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-10-31T11:16:57.003Z"
+          "updatedAt": "2026-10-31T20:43:08.728Z"
         }
       ],
       "curatedArticles": [
@@ -206,7 +206,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-31T14:42:02.554Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "en": {
       "canton": "NE",
@@ -265,11 +265,6 @@
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
             {
-              "label": "Neuchâtel, Neuenburg <-> Rue de la Pierre-à-Mazel, Neuenburg Situazione: chiusa Causa: incidente",
-              "value": "Closure",
-              "date": "2026-10-05T02:26:00.000Z"
-            },
-            {
               "label": "A5 Neuchâtel -> Bienne Svincolo autostradale Neuenburg-Monruz Situazione: chiusa cantiere, lunghezza [km] 0.2",
               "value": "Closure",
               "detail": "until 6 November 2026",
@@ -294,9 +289,14 @@
               "date": "2026-10-26T14:40:00.000Z"
             },
             {
+              "label": "Revocato: A5 Neuchâtel -> Yverdon Svincolo autostradale Neuchâtel-Serrières Situazione: uscita chiusa Causa: incendio Limitazione del traffico: corsia di destra chiusa",
+              "value": "Closure",
+              "date": "2026-10-31T16:26:00.000Z"
+            },
+            {
               "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
               "value": "Traffic",
-              "date": "2026-10-31T10:01:09.440Z",
+              "date": "2026-10-31T21:55:48.067Z",
               "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             },
             {
@@ -313,7 +313,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-31T10:01:09.440Z"
+          "updatedAt": "2026-10-31T21:55:48.067Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -336,7 +336,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-10-31T11:16:57.003Z"
+          "updatedAt": "2026-10-31T20:43:08.728Z"
         }
       ],
       "curatedArticles": [
@@ -390,7 +390,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-31T14:42:02.554Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "de": {
       "canton": "NE",
@@ -449,11 +449,6 @@
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
             {
-              "label": "Neuchâtel, Neuenburg <-> Rue de la Pierre-à-Mazel, Neuenburg Sachlage: Strecke gesperrt Ursache: Unfall",
-              "value": "Sperrung",
-              "date": "2026-10-05T02:26:00.000Z"
-            },
-            {
               "label": "A5 Neuenburg -> Biel Anschluss Neuenburg-Monruz Sachlage: Strecke gesperrt Baustelle, Länge [km] 0.2",
               "value": "Sperrung",
               "detail": "bis 6. November 2026",
@@ -478,9 +473,14 @@
               "date": "2026-10-26T14:40:00.000Z"
             },
             {
+              "label": "Aufgehoben: A5 Neuenburg -> Yverdon Anschluss Neuenburg-Serrières Sachlage: Ausfahrt gesperrt Ursache: Brand Verkehrsführung: rechter Fahrstreifen gesperrt",
+              "value": "Sperrung",
+              "date": "2026-10-31T16:26:00.000Z"
+            },
+            {
               "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
               "value": "Verkehr",
-              "date": "2026-10-31T10:01:09.440Z",
+              "date": "2026-10-31T21:55:48.067Z",
               "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             },
             {
@@ -497,7 +497,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-31T10:01:09.440Z"
+          "updatedAt": "2026-10-31T21:55:48.067Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -520,7 +520,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-10-31T11:16:57.003Z"
+          "updatedAt": "2026-10-31T20:43:08.728Z"
         }
       ],
       "curatedArticles": [
@@ -574,7 +574,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-31T14:42:02.554Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "fr": {
       "canton": "NE",
@@ -633,11 +633,6 @@
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
             {
-              "label": "Neuchâtel, Neuenburg <-> Rue de la Pierre-à-Mazel, Neuenburg Situation: fermé Raison: accident",
-              "value": "Fermeture",
-              "date": "2026-10-05T02:26:00.000Z"
-            },
-            {
               "label": "A5 Neuchâtel -> Bienne Jonction autoroutière Neuenburg-Monruz Situation: fermé travaux, longueur [km] 0.2",
               "value": "Fermeture",
               "detail": "jusqu’au 6 novembre 2026",
@@ -662,9 +657,14 @@
               "date": "2026-10-26T14:40:00.000Z"
             },
             {
+              "label": "Révoqué: A5 Neuchâtel -> Yverdon Jonction autoroutière Neuchâtel-Serrières Situation: sortie fermée Raison: incendie Gestion du trafic: voie de droite fermée",
+              "value": "Fermeture",
+              "date": "2026-10-31T16:26:00.000Z"
+            },
+            {
               "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
               "value": "Trafic",
-              "date": "2026-10-31T10:01:09.440Z",
+              "date": "2026-10-31T21:55:48.067Z",
               "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             },
             {
@@ -681,7 +681,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-31T10:01:09.440Z"
+          "updatedAt": "2026-10-31T21:55:48.067Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -704,7 +704,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-10-31T11:16:57.003Z"
+          "updatedAt": "2026-10-31T20:43:08.728Z"
         }
       ],
       "curatedArticles": [
@@ -758,7 +758,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-31T14:42:02.554Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     }
   }
 }

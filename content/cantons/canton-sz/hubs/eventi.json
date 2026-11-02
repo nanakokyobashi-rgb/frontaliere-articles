@@ -4,12 +4,12 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "eventi",
-  "updatedAt": "2026-10-31T06:15:08.747Z",
-  "contentHash": "58da413760826b0dee994fd72259c0fb4474f4c680de6de7820f2f9f72b6876d",
+  "updatedAt": "2026-11-01T13:11:05.408Z",
+  "contentHash": "cec500d34051bf7051056ad0f8d9fe3997e7a619a30be4eb1cc46c43bdd9f0ef",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-30T13:23:17.161Z",
+      "updatedAt": "2026-10-31T14:21:36.178Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "18",
+          "value": "17",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,22 +33,10 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "GfuG Family-Day – Musikalische Lesung «Für das Auerhuhn»",
-              "detail": "Schwyz",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gfug-family-day-musikalische-lesung-fuer-das-auerhuhn/"
-            },
-            {
               "label": "IKIGAI japanisches Lebenskonzept als kreativer Workshop",
-              "detail": "Schwyz",
-              "date": "2026-10-31",
+              "detail": "Schwyz — in corso, ultimo giorno: 14 novembre 2026",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/ikigai-japanisches-lebenskonzept-als-kreativer-workshop/"
-            },
-            {
-              "label": "The Two - Blues & Dine - DER HERBST 26",
-              "detail": "Restaurant Tübli, Gersau",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/the-two-blues-dine-der-herbst-26-1/"
             },
             {
               "label": "Fondue Chinoise-Abend",
@@ -91,11 +79,23 @@
               "detail": "Rickenbach b. Schwyz, Schwyz",
               "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/2-handgruobichilbi/"
+            },
+            {
+              "label": "Besser Schreiben und Informationen finden mit Hilfe des Computers / Tageskurs",
+              "detail": "Küssnacht am Rigi",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/besser-schreiben-und-informationen-finden-mit-hilfe-des-computers-tageskurs-3/"
+            },
+            {
+              "label": "Hölloch Tages-Expedition Wasserdom",
+              "detail": "Hölloch Center, Muotathal",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/hoelloch-tages-expedition-wasserdom-1/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/svitto/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/svitto/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "en": {
       "canton": "SZ",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "18",
+          "value": "17",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,22 +138,10 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "GfuG Family-Day – Musikalische Lesung «Für das Auerhuhn»",
-              "detail": "Schwyz",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gfug-family-day-musikalische-lesung-fuer-das-auerhuhn/"
-            },
-            {
               "label": "IKIGAI japanisches Lebenskonzept als kreativer Workshop",
-              "detail": "Schwyz",
-              "date": "2026-10-31",
+              "detail": "Schwyz — ongoing, last day: 14 November 2026",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/ikigai-japanisches-lebenskonzept-als-kreativer-workshop/"
-            },
-            {
-              "label": "The Two - Blues & Dine - DER HERBST 26",
-              "detail": "Restaurant Tübli, Gersau",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/the-two-blues-dine-der-herbst-26-1/"
             },
             {
               "label": "Fondue Chinoise-Abend",
@@ -196,11 +184,23 @@
               "detail": "Rickenbach b. Schwyz, Schwyz",
               "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/2-handgruobichilbi/"
+            },
+            {
+              "label": "Besser Schreiben und Informationen finden mit Hilfe des Computers / Tageskurs",
+              "detail": "Küssnacht am Rigi",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/besser-schreiben-und-informationen-finden-mit-hilfe-des-computers-tageskurs-3/"
+            },
+            {
+              "label": "Hölloch Tages-Expedition Wasserdom",
+              "detail": "Hölloch Center, Muotathal",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/hoelloch-tages-expedition-wasserdom-1/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schwyz/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/schwyz/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "de": {
       "canton": "SZ",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "18",
+          "value": "17",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,22 +243,10 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "GfuG Family-Day – Musikalische Lesung «Für das Auerhuhn»",
-              "detail": "Schwyz",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gfug-family-day-musikalische-lesung-fuer-das-auerhuhn/"
-            },
-            {
               "label": "IKIGAI japanisches Lebenskonzept als kreativer Workshop",
-              "detail": "Schwyz",
-              "date": "2026-10-31",
+              "detail": "Schwyz — läuft, letzter Tag: 14. November 2026",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/ikigai-japanisches-lebenskonzept-als-kreativer-workshop/"
-            },
-            {
-              "label": "The Two - Blues & Dine - DER HERBST 26",
-              "detail": "Restaurant Tübli, Gersau",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/the-two-blues-dine-der-herbst-26-1/"
             },
             {
               "label": "Fondue Chinoise-Abend",
@@ -301,11 +289,23 @@
               "detail": "Rickenbach b. Schwyz, Schwyz",
               "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/2-handgruobichilbi/"
+            },
+            {
+              "label": "Besser Schreiben und Informationen finden mit Hilfe des Computers / Tageskurs",
+              "detail": "Küssnacht am Rigi",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/besser-schreiben-und-informationen-finden-mit-hilfe-des-computers-tageskurs-3/"
+            },
+            {
+              "label": "Hölloch Tages-Expedition Wasserdom",
+              "detail": "Hölloch Center, Muotathal",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/hoelloch-tages-expedition-wasserdom-1/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schwyz/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/schwyz/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "fr": {
       "canton": "SZ",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "18",
+          "value": "17",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,22 +348,10 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "GfuG Family-Day – Musikalische Lesung «Für das Auerhuhn»",
-              "detail": "Schwyz",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gfug-family-day-musikalische-lesung-fuer-das-auerhuhn/"
-            },
-            {
               "label": "IKIGAI japanisches Lebenskonzept als kreativer Workshop",
-              "detail": "Schwyz",
-              "date": "2026-10-31",
+              "detail": "Schwyz — en cours, dernier jour : 14 novembre 2026",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/ikigai-japanisches-lebenskonzept-als-kreativer-workshop/"
-            },
-            {
-              "label": "The Two - Blues & Dine - DER HERBST 26",
-              "detail": "Restaurant Tübli, Gersau",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/the-two-blues-dine-der-herbst-26-1/"
             },
             {
               "label": "Fondue Chinoise-Abend",
@@ -406,11 +394,23 @@
               "detail": "Rickenbach b. Schwyz, Schwyz",
               "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/2-handgruobichilbi/"
+            },
+            {
+              "label": "Besser Schreiben und Informationen finden mit Hilfe des Computers / Tageskurs",
+              "detail": "Küssnacht am Rigi",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/besser-schreiben-und-informationen-finden-mit-hilfe-des-computers-tageskurs-3/"
+            },
+            {
+              "label": "Hölloch Tages-Expedition Wasserdom",
+              "detail": "Hölloch Center, Muotathal",
+              "date": "2026-11-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/hoelloch-tages-expedition-wasserdom-1/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schwytz/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/schwytz/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     }
   }
 }

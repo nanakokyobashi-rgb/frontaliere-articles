@@ -4,12 +4,12 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "eventi",
-  "updatedAt": "2026-10-31T06:15:08.747Z",
-  "contentHash": "25669a105b3d882ee876ae9f4b3252a44ef18471b98a7dc12071270e250a735d",
+  "updatedAt": "2026-11-01T13:11:05.408Z",
+  "contentHash": "0fbb54371861b9bab63055ad3e5351b2e92bb191675bcdfe9dcfd26981608bb1",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-30T13:23:17.161Z",
+      "updatedAt": "2026-10-31T14:21:36.178Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "210",
+          "value": "195",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Parknacht - Halloween Party",
-              "detail": "Crémines",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/nuit-du-parc-halloween-party/"
+              "label": "Escort Trips on the DS “Spiez” & MS “Schilthorn”—Noon Departure from Thun",
+              "detail": "Thunersee, Spiez",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/trajets-daccompagnement-en-train-spiez-et-en-bateau-schilthorn-trajet-de-midi-au-depart-de-thou/"
             },
             {
-              "label": "Lake Thun Play Ship",
-              "detail": "Thunersee, Thun",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spieleschiff-thunersee/"
+              "label": "Reformationssonntag mit Abendmahl",
+              "detail": "Beatenberg",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reformationssonntag-mit-abendmahl/"
             },
             {
-              "label": "Onion market Aarberg",
-              "detail": "Zibelemärit Aarbärg, Aarberg",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/onion-market-aarberg/"
+              "label": "moving moments",
+              "detail": "Sporthalle Ebnit, Saanen",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/moving-moments/"
             },
             {
-              "label": "Onion Market",
-              "detail": "Neumarktplatz",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/onion-market/"
+              "label": "Nins und Phoras Reisen in die Erdzeitalter",
+              "detail": "Naturhistorisches Museum Bern, Bern",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/nins-und-phoras-reisen-in-die-erdzeitalter/"
             },
             {
-              "label": "Herbst-Gartenkurs in Kaufdorf",
-              "detail": "Kaufdorf",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbst-gartenkurs-in-kaufdorf/"
+              "label": "Visita guidata pubblica / Stazione climatica di Langnau",
+              "detail": "Langnau i.E.",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/visita-guidata-pubblica-6/"
             },
             {
-              "label": "Herbst-Gartenkurs in Wattenwil",
-              "detail": "3665 Wattenwil, Wattenwil",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbst-gartenkurs-in-wattenwil/"
+              "label": "Der kleine Prinz",
+              "detail": "Nidau",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/der-kleine-prinz-3/"
             },
             {
-              "label": "Zäme fürs Naturparadies – das Bannholz wird eingewintert!",
-              "detail": "Evang.-ref. Kirche Wahlern, Schwarzenburg",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/ensemble-pour-le-paradis-de-la-nature-mis-en-hivernage/"
+              "label": "Eden Tea Time",
+              "detail": "Spiez",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/eden-tea-time/"
             },
             {
-              "label": "Reiki-Kurs 2 im Blockhaus",
-              "detail": "Oey-Diemtigen, Diemtigen",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reiki-kurs-2-im-blockhaus/"
+              "label": "Im Härz",
+              "detail": "Bern",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/im-haerz/"
             },
             {
-              "label": "SAMHAIN Irish Music Pub",
-              "detail": "Schloss Laupen, Laupen",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/laupen-be/samhain-irish-music-pub_An9nydc"
+              "label": "7. Förder-& Gedenk-Konzerte \"Die Schweiz singt\" Mozart: Requiem",
+              "detail": "Bern",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/7-foerder-gedenkkonzerte-2026-die-schweiz-singt-mozart-requiem-2/"
             },
             {
-              "label": "Handpan Schnupperkurs",
-              "detail": "Handpanschule Thun, Thun",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/thun/handpan-schnupperkurs_AatDrck"
+              "label": "Gospelkonzert",
+              "detail": "Kirche Merligen",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/merligen/konzert-weitere/gospelkonzert-mit-den-swiss-mountain-singers-spiez_Ag4gFJV"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/berna/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +135,7 @@
           "url": "/eventi/berna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "en": {
       "canton": "BE",
@@ -145,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "210",
+          "value": "195",
           "note": "from the site’s events calendar"
         }
       ],
@@ -156,69 +156,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Parknacht - Halloween Party",
-              "detail": "Crémines",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/nuit-du-parc-halloween-party/"
+              "label": "Escort Trips on the DS “Spiez” & MS “Schilthorn”—Noon Departure from Thun",
+              "detail": "Thunersee, Spiez",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/trajets-daccompagnement-en-train-spiez-et-en-bateau-schilthorn-trajet-de-midi-au-depart-de-thou/"
             },
             {
-              "label": "Lake Thun Play Ship",
-              "detail": "Thunersee, Thun",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spieleschiff-thunersee/"
+              "label": "Reformationssonntag mit Abendmahl",
+              "detail": "Beatenberg",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reformationssonntag-mit-abendmahl/"
             },
             {
-              "label": "Onion market Aarberg",
-              "detail": "Zibelemärit Aarbärg, Aarberg",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/onion-market-aarberg/"
+              "label": "moving moments",
+              "detail": "Sporthalle Ebnit, Saanen",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/moving-moments/"
             },
             {
-              "label": "Onion Market",
-              "detail": "Neumarktplatz",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/onion-market/"
+              "label": "Nins und Phoras Reisen in die Erdzeitalter",
+              "detail": "Naturhistorisches Museum Bern, Bern",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/nins-und-phoras-reisen-in-die-erdzeitalter/"
             },
             {
-              "label": "Herbst-Gartenkurs in Kaufdorf",
-              "detail": "Kaufdorf",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbst-gartenkurs-in-kaufdorf/"
+              "label": "Public guided tour / Langnau health resort",
+              "detail": "Langnau i.E.",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/visita-guidata-pubblica-6/"
             },
             {
-              "label": "Herbst-Gartenkurs in Wattenwil",
-              "detail": "3665 Wattenwil, Wattenwil",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbst-gartenkurs-in-wattenwil/"
+              "label": "Der kleine Prinz",
+              "detail": "Nidau",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/der-kleine-prinz-3/"
             },
             {
-              "label": "Zäme fürs Naturparadies – das Bannholz wird eingewintert!",
-              "detail": "Evang.-ref. Kirche Wahlern, Schwarzenburg",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/ensemble-pour-le-paradis-de-la-nature-mis-en-hivernage/"
+              "label": "Eden Tea Time",
+              "detail": "Spiez",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/eden-tea-time/"
             },
             {
-              "label": "Reiki-Kurs 2 im Blockhaus",
-              "detail": "Oey-Diemtigen, Diemtigen",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reiki-kurs-2-im-blockhaus/"
+              "label": "Im Härz",
+              "detail": "Bern",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/im-haerz/"
             },
             {
-              "label": "SAMHAIN Irish Music Pub",
-              "detail": "Schloss Laupen, Laupen",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/laupen-be/samhain-irish-music-pub_An9nydc"
+              "label": "7. Förder-& Gedenk-Konzerte \"Die Schweiz singt\" Mozart: Requiem",
+              "detail": "Bern",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/7-foerder-gedenkkonzerte-2026-die-schweiz-singt-mozart-requiem-2/"
             },
             {
-              "label": "Handpan Schnupperkurs",
-              "detail": "Handpanschule Thun, Thun",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/thun/handpan-schnupperkurs_AatDrck"
+              "label": "Gospelkonzert",
+              "detail": "Kirche Merligen",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/merligen/konzert-weitere/gospelkonzert-mit-den-swiss-mountain-singers-spiez_Ag4gFJV"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/bern/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -258,7 +258,7 @@
           "url": "/en/events/bern/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "de": {
       "canton": "BE",
@@ -268,7 +268,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "210",
+          "value": "195",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -279,69 +279,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Parknacht - Halloween Party",
-              "detail": "Crémines",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/nuit-du-parc-halloween-party/"
+              "label": "Begleitfahrten DS «Spiez» & MS «Schilthorn» Mittagsfahrt ab Thun",
+              "detail": "Thunersee, Spiez",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/trajets-daccompagnement-en-train-spiez-et-en-bateau-schilthorn-trajet-de-midi-au-depart-de-thou/"
             },
             {
-              "label": "Spieleschiff Thunersee",
-              "detail": "Thunersee, Thun",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spieleschiff-thunersee/"
+              "label": "Reformationssonntag mit Abendmahl",
+              "detail": "Beatenberg",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reformationssonntag-mit-abendmahl/"
             },
             {
-              "label": "Zibelemärit Aarbärg",
-              "detail": "Zibelemärit Aarbärg, Aarberg",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/onion-market-aarberg/"
+              "label": "BeMo - Bewegte Momente",
+              "detail": "Sporthalle Ebnit, Saanen",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/moving-moments/"
             },
             {
-              "label": "Zwiebelmarkt",
-              "detail": "Neumarktplatz",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/onion-market/"
+              "label": "Nins und Phoras Reisen in die Erdzeitalter",
+              "detail": "Naturhistorisches Museum Bern, Bern",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/nins-und-phoras-reisen-in-die-erdzeitalter/"
             },
             {
-              "label": "Herbst-Gartenkurs in Kaufdorf",
-              "detail": "Kaufdorf",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbst-gartenkurs-in-kaufdorf/"
+              "label": "Öffentliche Führung / Kurort Langnau",
+              "detail": "Langnau i.E.",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/visita-guidata-pubblica-6/"
             },
             {
-              "label": "Herbst-Gartenkurs in Wattenwil",
-              "detail": "3665 Wattenwil, Wattenwil",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbst-gartenkurs-in-wattenwil/"
+              "label": "Der kleine Prinz",
+              "detail": "Nidau",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/der-kleine-prinz-3/"
             },
             {
-              "label": "Zäme fürs Naturparadies – das Bannholz wird eingewintert!",
-              "detail": "Evang.-ref. Kirche Wahlern, Schwarzenburg",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/ensemble-pour-le-paradis-de-la-nature-mis-en-hivernage/"
+              "label": "Eden Tea Time",
+              "detail": "Spiez",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/eden-tea-time/"
             },
             {
-              "label": "Reiki-Kurs 2 im Blockhaus",
-              "detail": "Oey-Diemtigen, Diemtigen",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reiki-kurs-2-im-blockhaus/"
+              "label": "Im Härz",
+              "detail": "Bern",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/im-haerz/"
             },
             {
-              "label": "SAMHAIN Irish Music Pub",
-              "detail": "Schloss Laupen, Laupen",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/laupen-be/samhain-irish-music-pub_An9nydc"
+              "label": "7. Förder-& Gedenk-Konzerte \"Die Schweiz singt\" Mozart: Requiem",
+              "detail": "Bern",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/7-foerder-gedenkkonzerte-2026-die-schweiz-singt-mozart-requiem-2/"
             },
             {
-              "label": "Handpan Schnupperkurs",
-              "detail": "Handpanschule Thun, Thun",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/thun/handpan-schnupperkurs_AatDrck"
+              "label": "Gospelkonzert",
+              "detail": "Kirche Merligen",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/merligen/konzert-weitere/gospelkonzert-mit-den-swiss-mountain-singers-spiez_Ag4gFJV"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/bern/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -381,7 +381,7 @@
           "url": "/de/veranstaltungen/bern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "fr": {
       "canton": "BE",
@@ -391,7 +391,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "210",
+          "value": "195",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -402,69 +402,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Nuit du parc - Halloween Party",
-              "detail": "Crémines",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/nuit-du-parc-halloween-party/"
+              "label": "Trajets d'accompagnement en train « Spiez » et en bateau « Schilthorn » : trajet de midi au départ de Thoune",
+              "detail": "Thunersee, Spiez",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/trajets-daccompagnement-en-train-spiez-et-en-bateau-schilthorn-trajet-de-midi-au-depart-de-thou/"
             },
             {
-              "label": "Bateau ludique du lac de Thoune",
-              "detail": "Thunersee, Thun",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spieleschiff-thunersee/"
+              "label": "Reformationssonntag mit Abendmahl",
+              "detail": "Beatenberg",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reformationssonntag-mit-abendmahl/"
             },
             {
-              "label": "Marché aux oignons d'Aarberg",
-              "detail": "Zibelemärit Aarbärg, Aarberg",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/onion-market-aarberg/"
+              "label": "des moments mouvementés",
+              "detail": "Sporthalle Ebnit, Saanen",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/moving-moments/"
             },
             {
-              "label": "Marché aux oignons",
-              "detail": "Neumarktplatz",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/onion-market/"
+              "label": "Nins und Phoras Reisen in die Erdzeitalter",
+              "detail": "Naturhistorisches Museum Bern, Bern",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/nins-und-phoras-reisen-in-die-erdzeitalter/"
             },
             {
-              "label": "Herbst-Gartenkurs in Kaufdorf",
-              "detail": "Kaufdorf",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbst-gartenkurs-in-kaufdorf/"
+              "label": "Visite guidée publique / Station thermale de Langnau",
+              "detail": "Langnau i.E.",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/visita-guidata-pubblica-6/"
             },
             {
-              "label": "Herbst-Gartenkurs in Wattenwil",
-              "detail": "3665 Wattenwil, Wattenwil",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbst-gartenkurs-in-wattenwil/"
+              "label": "Der kleine Prinz",
+              "detail": "Nidau",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/der-kleine-prinz-3/"
             },
             {
-              "label": "Ensemble pour le paradis de la nature – mis en hivernage!",
-              "detail": "Evang.-ref. Kirche Wahlern, Schwarzenburg",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/ensemble-pour-le-paradis-de-la-nature-mis-en-hivernage/"
+              "label": "Eden Tea Time",
+              "detail": "Spiez",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/eden-tea-time/"
             },
             {
-              "label": "Reiki-Kurs 2 im Blockhaus",
-              "detail": "Oey-Diemtigen, Diemtigen",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reiki-kurs-2-im-blockhaus/"
+              "label": "Im Härz",
+              "detail": "Bern",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/im-haerz/"
             },
             {
-              "label": "SAMHAIN Irish Music Pub",
-              "detail": "Schloss Laupen, Laupen",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/evenements/ceci-cela/laupen-be/samhain-irish-music-pub_An9nydc"
+              "label": "7. Förder-& Gedenk-Konzerte \"Die Schweiz singt\" Mozart: Requiem",
+              "detail": "Bern",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/7-foerder-gedenkkonzerte-2026-die-schweiz-singt-mozart-requiem-2/"
             },
             {
-              "label": "Handpan Schnupperkurs",
-              "detail": "Handpanschule Thun, Thun",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/thun/handpan-schnupperkurs_AatDrck"
+              "label": "Gospelkonzert",
+              "detail": "Kirche Merligen",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/merligen/konzert-weitere/gospelkonzert-mit-den-swiss-mountain-singers-spiez_Ag4gFJV"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/berne/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -504,7 +504,7 @@
           "url": "/fr/evenements/berne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     }
   }
 }

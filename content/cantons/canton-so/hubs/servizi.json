@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "servizi",
-  "updatedAt": "2026-10-31T19:04:20.188Z",
-  "contentHash": "e15ccdee7ab38d6060dc3698d084da44dfa5bf067f0ad1c0f221757fdf37ae7b",
+  "updatedAt": "2026-11-01T13:11:05.408Z",
+  "contentHash": "2302090ca27ae823b6958f2946315b1cb5dd36c69ac1e505e5b071f9e3bc1ca7",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -13,23 +13,13 @@
       "keyFacts": 1
     },
     {
-      "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-31T14:35:00.291Z",
-      "keyFacts": 0
-    },
-    {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-31T12:30:05.151Z",
+      "updatedAt": "2026-10-31T21:33:21.304Z",
       "keyFacts": 1
     },
     {
-      "id": "meteo",
-      "updatedAt": "2026-10-31T14:41:34.173Z",
-      "keyFacts": 0
-    },
-    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-31T11:16:57.003Z",
+      "updatedAt": "2026-10-31T20:43:08.728Z",
       "keyFacts": 0
     }
   ],
@@ -69,31 +59,6 @@
           "updatedAt": "2026-10-25T09:11:35.438Z"
         },
         {
-          "id": "farmacie-di-turno",
-          "title": "Farmacie di turno",
-          "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
-          "items": [
-            {
-              "label": "Saner Apotheke Dornach",
-              "detail": "Dornach, Dorneck-Thierstein",
-              "date": "2026-11-01T08:00:00.000Z"
-            },
-            {
-              "label": "Central-Apotheke Olten",
-              "detail": "Olten, Olten",
-              "date": "2026-11-01T09:00:00.000Z"
-            },
-            {
-              "label": "Medbase Apotheke - Oensingen",
-              "detail": "Oensingen, Solothurn",
-              "date": "2026-11-01T09:00:00.000Z"
-            }
-          ],
-          "sourceName": "Servizio ufficiale dei turni farmacia",
-          "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-10-31T14:35:00.291Z"
-        },
-        {
           "id": "aste-targhe",
           "title": "Aste delle targhe",
           "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
@@ -122,21 +87,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-10-31T12:30:05.151Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Solothurn",
-              "value": "10 °C",
-              "detail": "oggi da 5 a 10 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-31T14:41:34.173Z"
+          "updatedAt": "2026-10-31T21:33:21.304Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -169,7 +120,7 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-sank-im-juni-auf-30-prozent-1/"
             }
           ],
-          "updatedAt": "2026-10-31T11:16:57.003Z"
+          "updatedAt": "2026-10-31T20:43:08.728Z"
         }
       ],
       "curatedArticles": [
@@ -249,7 +200,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-31T19:04:20.188Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "en": {
       "canton": "SO",
@@ -286,31 +237,6 @@
           "updatedAt": "2026-10-25T09:11:35.438Z"
         },
         {
-          "id": "farmacie-di-turno",
-          "title": "On-duty pharmacies",
-          "description": "Upcoming duty shifts published by the canton’s official service.",
-          "items": [
-            {
-              "label": "Saner Apotheke Dornach",
-              "detail": "Dornach, Dorneck-Thierstein",
-              "date": "2026-11-01T08:00:00.000Z"
-            },
-            {
-              "label": "Central-Apotheke Olten",
-              "detail": "Olten, Olten",
-              "date": "2026-11-01T09:00:00.000Z"
-            },
-            {
-              "label": "Medbase Apotheke - Oensingen",
-              "detail": "Oensingen, Solothurn",
-              "date": "2026-11-01T09:00:00.000Z"
-            }
-          ],
-          "sourceName": "Official pharmacy duty service",
-          "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-10-31T14:35:00.291Z"
-        },
-        {
           "id": "aste-targhe",
           "title": "Number plate auctions",
           "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
@@ -339,21 +265,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-10-31T12:30:05.151Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Solothurn",
-              "value": "10 °C",
-              "detail": "today from 5 to 10 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-31T14:41:34.173Z"
+          "updatedAt": "2026-10-31T21:33:21.304Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -386,7 +298,7 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-sank-im-juni-auf-30-prozent-1/"
             }
           ],
-          "updatedAt": "2026-10-31T11:16:57.003Z"
+          "updatedAt": "2026-10-31T20:43:08.728Z"
         }
       ],
       "curatedArticles": [
@@ -462,7 +374,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-31T19:04:20.188Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "de": {
       "canton": "SO",
@@ -499,31 +411,6 @@
           "updatedAt": "2026-10-25T09:11:35.438Z"
         },
         {
-          "id": "farmacie-di-turno",
-          "title": "Notfallapotheken",
-          "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
-          "items": [
-            {
-              "label": "Saner Apotheke Dornach",
-              "detail": "Dornach, Dorneck-Thierstein",
-              "date": "2026-11-01T08:00:00.000Z"
-            },
-            {
-              "label": "Central-Apotheke Olten",
-              "detail": "Olten, Olten",
-              "date": "2026-11-01T09:00:00.000Z"
-            },
-            {
-              "label": "Medbase Apotheke - Oensingen",
-              "detail": "Oensingen, Solothurn",
-              "date": "2026-11-01T09:00:00.000Z"
-            }
-          ],
-          "sourceName": "Offizieller Apotheken-Notfalldienst",
-          "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-10-31T14:35:00.291Z"
-        },
-        {
           "id": "aste-targhe",
           "title": "Kontrollschild-Auktionen",
           "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
@@ -552,21 +439,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-10-31T12:30:05.151Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Solothurn",
-              "value": "10 °C",
-              "detail": "heute 5 bis 10 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-31T14:41:34.173Z"
+          "updatedAt": "2026-10-31T21:33:21.304Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -599,7 +472,7 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-sank-im-juni-auf-30-prozent-1/"
             }
           ],
-          "updatedAt": "2026-10-31T11:16:57.003Z"
+          "updatedAt": "2026-10-31T20:43:08.728Z"
         }
       ],
       "curatedArticles": [
@@ -675,7 +548,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-31T19:04:20.188Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "fr": {
       "canton": "SO",
@@ -712,31 +585,6 @@
           "updatedAt": "2026-10-25T09:11:35.438Z"
         },
         {
-          "id": "farmacie-di-turno",
-          "title": "Pharmacies de garde",
-          "description": "Prochaines gardes publiées par le service officiel du canton.",
-          "items": [
-            {
-              "label": "Saner Apotheke Dornach",
-              "detail": "Dornach, Dorneck-Thierstein",
-              "date": "2026-11-01T08:00:00.000Z"
-            },
-            {
-              "label": "Central-Apotheke Olten",
-              "detail": "Olten, Olten",
-              "date": "2026-11-01T09:00:00.000Z"
-            },
-            {
-              "label": "Medbase Apotheke - Oensingen",
-              "detail": "Oensingen, Solothurn",
-              "date": "2026-11-01T09:00:00.000Z"
-            }
-          ],
-          "sourceName": "Service officiel des pharmacies de garde",
-          "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-10-31T14:35:00.291Z"
-        },
-        {
           "id": "aste-targhe",
           "title": "Enchères de plaques",
           "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
@@ -765,21 +613,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-10-31T12:30:05.151Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Solothurn",
-              "value": "10 °C",
-              "detail": "aujourd’hui de 5 à 10 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-31T14:41:34.173Z"
+          "updatedAt": "2026-10-31T21:33:21.304Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -812,7 +646,7 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-sank-im-juni-auf-30-prozent-1/"
             }
           ],
-          "updatedAt": "2026-10-31T11:16:57.003Z"
+          "updatedAt": "2026-10-31T20:43:08.728Z"
         }
       ],
       "curatedArticles": [
@@ -884,7 +718,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-31T19:04:20.188Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     }
   }
 }

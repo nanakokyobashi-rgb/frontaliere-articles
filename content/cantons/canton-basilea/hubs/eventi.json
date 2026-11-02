@@ -4,12 +4,12 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "eventi",
-  "updatedAt": "2026-10-31T06:15:08.747Z",
-  "contentHash": "05b2d0a3164a4994fa6ed823bea4c2f875521b7e1333cea47befcec89ef9876b",
+  "updatedAt": "2026-11-01T13:11:05.408Z",
+  "contentHash": "fa724427e22e90c5d42aee83294d2a5a53b557242488e179d024e19480ec5b50",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-30T13:23:17.161Z",
+      "updatedAt": "2026-10-31T14:21:36.178Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "80",
+          "value": "69",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "TEXTUR 2026 - Filiae tonitrui",
-              "detail": "Evang.-ref. St. Margarethenkirche, Binningen",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/binningen/textur-2026-filiae-tonitrui_AhsZQut"
+              "label": "Schlusslauf Zwingen der Laufsportgruppe Laufen",
+              "detail": "Zwingen BL, Zwingen",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schlusslauf-zwingen-der-laufsportgruppe-laufen/"
             },
             {
-              "label": "S’GSCHÄNGGLÄÄDELI - Konzert für Theremin und Orchester",
-              "detail": "Allschwil",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sgschaengglaeaedeli-konzert-fuer-theremin-und-orchester/"
+              "label": "Steppin’ Stompers – Spielen was Spazz macht!",
+              "detail": "Kulturzentrum Alts Schlachthuus, Laufen",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/laufen/steppin-stompers-spielen-was-spazz-macht_AbKHFp7"
             },
             {
-              "label": "TEXTUR 2026 - Polia potente",
-              "detail": "Evang.-ref. St. Margarethenkirche, Binningen",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/binningen/textur-2026-polia-potente_APGRBDn"
+              "label": "Benefiz-Jazz-Matinée",
+              "detail": "Wohn- und Bürozentrum für Körperbehinderte (WBZ)",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/reinach-bl/benefiz-jazz-matinee_AY2dPDN"
             },
             {
-              "label": "Fonduta circondata da alpaca",
-              "detail": "Alpakas von Zunzgen, Zunzgen",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fondue-inmitten-alpakas-6/"
+              "label": "TEXTUR 2026 - Ségurant, le chevalier au dragon",
+              "detail": "Historisches Museum Basel: Musikmuseum, Basel",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/textur-2026-segurant-le-chevalier-au-dragon_ACpEGaN"
             },
             {
-              "label": "La nave “Schlager” sul Reno",
-              "detail": "MS Christoph Merian",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/evenements/musique/bale/schlager-croisiere-sur-le-rhin_AVV3HKY"
+              "label": "TEXTUR 2026 - Der Codex Calixtinus",
+              "detail": "Historisches Museum Basel: Musikmuseum, Basel",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/textur-2026-der-codex-calixtinus_AXueQmW"
             },
             {
-              "label": "Martinů Jazz",
-              "detail": "Jazzcampus",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/martin-jazz_AXCR2J8"
-            },
-            {
-              "label": "Claudia Sutter - bin laut bin leise",
-              "detail": "cheesmeyer, Sissach",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/sissach/claudia-sutter-bin-laut-bin-leise_ALbL2nk"
-            },
-            {
-              "label": "Rawhide - Bluegrass im Guggenheim",
-              "detail": "Kulturhotel Guggenheim, Liestal",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/liestal/rawhide-bluegrass-im-guggenheim_A24bj4Q"
-            },
-            {
-              "label": "EDM Global Symphony: Orchestra Rave & Laser show",
-              "detail": "Volkshaus Basel, Basel",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/basel/edm-global-symphony-orchestra-rave-und-laser-show_ALWqaHB"
-            },
-            {
-              "label": "Femme Rebellion South - for gender equality on stage!",
+              "label": "POP-UP CINEMA: HERBSTFEUER - Fire at the Grandhotel Waldhaus Vulpera-Tarasp",
               "detail": "Basel",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/femme-rebellion-south-for-gender-equality-on-stage/"
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pop-up-cinema-herbstfeuer-fire-at-the-grandhotel-waldhaus-vulpera-tarasp-1/"
+            },
+            {
+              "label": "Stewy von Wattenwyl & Alex Hendriksen",
+              "detail": "Kulturscheune, Liestal",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/liestal/stewy-von-wattenwyl-und-alex-hendriksen_AfnD29j"
+            },
+            {
+              "label": "TEXTUR 2026 - Héroïnes",
+              "detail": "Dorfkirche Riehen, Riehen",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/riehen/textur-2026-heroines_ALx9byG"
+            },
+            {
+              "label": "IMAGINE Gospelkonzert",
+              "detail": "Evang.-ref. Christuskirche, Allschwil — in corso, ultimo giorno: 1 novembre 2026",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/allschwil/imagine-gospelkonzert_AARaZAV"
+            },
+            {
+              "label": "Cantuccini - Neues Programm",
+              "detail": "Theater Fauteuil - Tabourettli — in corso, ultimo giorno: 1 novembre 2026",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/cantuccini-neues-programm_AE4hULr"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/basilea/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/basilea/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "80",
+          "value": "69",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "TUR 2026-Filiae tonitrui",
-              "detail": "Evang.-ref. St. Margarethenkirche, Binningen",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/binningen/textur-2026-filiae-tonitrui_AhsZQut"
+              "label": "Schlusslauf Zwingen der Laufsportgruppe Laufen",
+              "detail": "Zwingen BL, Zwingen",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schlusslauf-zwingen-der-laufsportgruppe-laufen/"
             },
             {
-              "label": "S’GSCHÄNGGLÄÄDELI - Konzert für Theremin und Orchester",
-              "detail": "Allschwil",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sgschaengglaeaedeli-konzert-fuer-theremin-und-orchester/"
+              "label": "Steppin’ Stompers – Spielen was Spazz macht!",
+              "detail": "Kulturzentrum Alts Schlachthuus, Laufen",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/laufen/steppin-stompers-spielen-was-spazz-macht_AbKHFp7"
             },
             {
-              "label": "TEXTUR 2026 - Powerful Polia",
-              "detail": "Evang.-ref. St. Margarethenkirche, Binningen",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/binningen/textur-2026-polia-potente_APGRBDn"
+              "label": "Benefiz-Jazz-Matinée",
+              "detail": "Wohn- und Bürozentrum für Körperbehinderte (WBZ)",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/reinach-bl/benefiz-jazz-matinee_AY2dPDN"
             },
             {
-              "label": "Fondue surrounded by alpacas",
-              "detail": "Alpakas von Zunzgen, Zunzgen",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fondue-inmitten-alpakas-6/"
+              "label": "TEXTUR 2026 - Segurant, the dragon knight",
+              "detail": "Historisches Museum Basel: Musikmuseum, Basel",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/textur-2026-segurant-le-chevalier-au-dragon_ACpEGaN"
             },
             {
-              "label": "Schlager Cruise on the Rhine",
-              "detail": "MS Christoph Merian",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/evenements/musique/bale/schlager-croisiere-sur-le-rhin_AVV3HKY"
+              "label": "TEXTUR 2026 - Der Codex Calixtinus",
+              "detail": "Historisches Museum Basel: Musikmuseum, Basel",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/textur-2026-der-codex-calixtinus_AXueQmW"
             },
             {
-              "label": "Martinů Jazz",
-              "detail": "Jazzcampus",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/martin-jazz_AXCR2J8"
-            },
-            {
-              "label": "Claudia Sutter-bin laut bin leise",
-              "detail": "cheesmeyer, Sissach",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/sissach/claudia-sutter-bin-laut-bin-leise_ALbL2nk"
-            },
-            {
-              "label": "Rawhide - Bluegrass im Guggenheim",
-              "detail": "Kulturhotel Guggenheim, Liestal",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/liestal/rawhide-bluegrass-im-guggenheim_A24bj4Q"
-            },
-            {
-              "label": "EDM Global S Orchestra",
-              "detail": "Volkshaus Basel, Basel",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/basel/edm-global-symphony-orchestra-rave-und-laser-show_ALWqaHB"
-            },
-            {
-              "label": "Femme Rebellion South - for gender equality on stage!",
+              "label": "POP-UP CINEMA: HERBSTFEUER - Fire at the Grandhotel Waldhaus Vulpera-Tarasp",
               "detail": "Basel",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/femme-rebellion-south-for-gender-equality-on-stage/"
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pop-up-cinema-herbstfeuer-fire-at-the-grandhotel-waldhaus-vulpera-tarasp-1/"
+            },
+            {
+              "label": "Stewy von Wattenwyl & Alex Hendriksen",
+              "detail": "Kulturscheune, Liestal",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/liestal/stewy-von-wattenwyl-und-alex-hendriksen_AfnD29j"
+            },
+            {
+              "label": "TEXTUR 2026 - Heroes",
+              "detail": "Dorfkirche Riehen, Riehen",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/riehen/textur-2026-heroines_ALx9byG"
+            },
+            {
+              "label": "IMAGINE Gospelkonzert",
+              "detail": "Evang.-ref. Christuskirche, Allschwil — ongoing, last day: 1 November 2026",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/allschwil/imagine-gospelkonzert_AARaZAV"
+            },
+            {
+              "label": "Cantuccini - Neues Programm",
+              "detail": "Theater Fauteuil - Tabourettli — ongoing, last day: 1 November 2026",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/cantuccini-neues-programm_AE4hULr"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/basel/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/basel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "80",
+          "value": "69",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "TE GRAFFTUR 2026-Filiae tonitrui",
-              "detail": "Evang.-ref. St. Margarethenkirche, Binningen",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/binningen/textur-2026-filiae-tonitrui_AhsZQut"
+              "label": "Schlusslauf Zwingen der Laufsportgruppe Laufen",
+              "detail": "Zwingen BL, Zwingen",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schlusslauf-zwingen-der-laufsportgruppe-laufen/"
             },
             {
-              "label": "S’GSCHÄNGGLÄÄDELI - Konzert für Theremin und Orchester",
-              "detail": "Allschwil",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sgschaengglaeaedeli-konzert-fuer-theremin-und-orchester/"
+              "label": "Steppin’ Stompers – Spielen was Spazz macht!",
+              "detail": "Kulturzentrum Alts Schlachthuus, Laufen",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/laufen/steppin-stompers-spielen-was-spazz-macht_AbKHFp7"
             },
             {
-              "label": "Textur 2026 - Leistungsstarkes Polia",
-              "detail": "Evang.-ref. St. Margarethenkirche, Binningen",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/binningen/textur-2026-polia-potente_APGRBDn"
+              "label": "Benefiz-Jazz-Matinée",
+              "detail": "Wohn- und Bürozentrum für Körperbehinderte (WBZ)",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/reinach-bl/benefiz-jazz-matinee_AY2dPDN"
             },
             {
-              "label": "Fondue inmitten Alpakas, Zunzgen BL",
-              "detail": "Alpakas von Zunzgen, Zunzgen",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fondue-inmitten-alpakas-6/"
+              "label": "TEXTUR 2026 – Ségurant, der Chevalier au Dragon",
+              "detail": "Historisches Museum Basel: Musikmuseum, Basel",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/textur-2026-segurant-le-chevalier-au-dragon_ACpEGaN"
             },
             {
-              "label": "Schlager Schiff uff em Rhy",
-              "detail": "MS Christoph Merian",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/evenements/musique/bale/schlager-croisiere-sur-le-rhin_AVV3HKY"
+              "label": "TEXTUR 2026 - Der Codex Calixtinus",
+              "detail": "Historisches Museum Basel: Musikmuseum, Basel",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/textur-2026-der-codex-calixtinus_AXueQmW"
             },
             {
-              "label": "Martinů Jazz",
-              "detail": "Jazzcampus",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/martin-jazz_AXCR2J8"
-            },
-            {
-              "label": "Claudia Sutter – bin laut bin leise",
-              "detail": "cheesmeyer, Sissach",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/sissach/claudia-sutter-bin-laut-bin-leise_ALbL2nk"
-            },
-            {
-              "label": "Rawhide - Bluegrass im Guggenheim",
-              "detail": "Kulturhotel Guggenheim, Liestal",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/liestal/rawhide-bluegrass-im-guggenheim_A24bj4Q"
-            },
-            {
-              "label": "EDM Global Symphony: Orchester-Rave & Laser-Show",
-              "detail": "Volkshaus Basel, Basel",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/basel/edm-global-symphony-orchestra-rave-und-laser-show_ALWqaHB"
-            },
-            {
-              "label": "Femme Rebellion South - for gender equality on stage!",
+              "label": "POP-UP KINO: HERBSTFEUER - Brandfall Grandhotel Waldhaus Vulpera-Tarasp",
               "detail": "Basel",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/femme-rebellion-south-for-gender-equality-on-stage/"
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pop-up-cinema-herbstfeuer-fire-at-the-grandhotel-waldhaus-vulpera-tarasp-1/"
+            },
+            {
+              "label": "Stewy von Wattenwyl & Alex Hendriksen",
+              "detail": "Kulturscheune, Liestal",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/liestal/stewy-von-wattenwyl-und-alex-hendriksen_AfnD29j"
+            },
+            {
+              "label": "Textur 2026 - Helden",
+              "detail": "Dorfkirche Riehen, Riehen",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/riehen/textur-2026-heroines_ALx9byG"
+            },
+            {
+              "label": "IMAGINE Gospelkonzert",
+              "detail": "Evang.-ref. Christuskirche, Allschwil — läuft, letzter Tag: 1. November 2026",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/allschwil/imagine-gospelkonzert_AARaZAV"
+            },
+            {
+              "label": "Cantuccini - Neues Programm",
+              "detail": "Theater Fauteuil - Tabourettli — läuft, letzter Tag: 1. November 2026",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/cantuccini-neues-programm_AE4hULr"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/basel/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/basel/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "80",
+          "value": "69",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "TUR 2026-Filies tonitrui",
-              "detail": "Evang.-ref. St. Margarethenkirche, Binningen",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/binningen/textur-2026-filiae-tonitrui_AhsZQut"
+              "label": "Schlusslauf Zwingen der Laufsportgruppe Laufen",
+              "detail": "Zwingen BL, Zwingen",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schlusslauf-zwingen-der-laufsportgruppe-laufen/"
             },
             {
-              "label": "S’GSCHÄNGGLÄÄDELI - Konzert für Theremin und Orchester",
-              "detail": "Allschwil",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sgschaengglaeaedeli-konzert-fuer-theremin-und-orchester/"
+              "label": "Steppin’ Stompers – Spielen was Spazz macht!",
+              "detail": "Kulturzentrum Alts Schlachthuus, Laufen",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/laufen/steppin-stompers-spielen-was-spazz-macht_AbKHFp7"
             },
             {
-              "label": "TEXTUR 2026 - Polia puissant",
-              "detail": "Evang.-ref. St. Margarethenkirche, Binningen",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/binningen/textur-2026-polia-potente_APGRBDn"
+              "label": "Benefiz-Jazz-Matinée",
+              "detail": "Wohn- und Bürozentrum für Körperbehinderte (WBZ)",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/reinach-bl/benefiz-jazz-matinee_AY2dPDN"
             },
             {
-              "label": "Fondue au milieu des alpagas",
-              "detail": "Alpakas von Zunzgen, Zunzgen",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fondue-inmitten-alpakas-6/"
+              "label": "TET TUR 2026-Segurant, le chevalier au dragon",
+              "detail": "Historisches Museum Basel: Musikmuseum, Basel",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/textur-2026-segurant-le-chevalier-au-dragon_ACpEGaN"
             },
             {
-              "label": "Schlager croisière sur le Rhin",
-              "detail": "MS Christoph Merian",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/evenements/musique/bale/schlager-croisiere-sur-le-rhin_AVV3HKY"
+              "label": "TEXTUR 2026 - Der Codex Calixtinus",
+              "detail": "Historisches Museum Basel: Musikmuseum, Basel",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/textur-2026-der-codex-calixtinus_AXueQmW"
             },
             {
-              "label": "Martinů Jazz",
-              "detail": "Jazzcampus",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/martin-jazz_AXCR2J8"
-            },
-            {
-              "label": "Claudia Sutter pour bin laut bin leise",
-              "detail": "cheesmeyer, Sissach",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/sissach/claudia-sutter-bin-laut-bin-leise_ALbL2nk"
-            },
-            {
-              "label": "Rawhide - Bluegrass im Guggenheim",
-              "detail": "Kulturhotel Guggenheim, Liestal",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/liestal/rawhide-bluegrass-im-guggenheim_A24bj4Q"
-            },
-            {
-              "label": "EDM Global Symphony : Orchestra Rave & Laser show",
-              "detail": "Volkshaus Basel, Basel",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/basel/edm-global-symphony-orchestra-rave-und-laser-show_ALWqaHB"
-            },
-            {
-              "label": "Femme Rebellion South - for gender equality on stage!",
+              "label": "POP-UP CINEMA: HERBSTFEUER - Fire at the Grandhotel Waldhaus Vulpera-Tarasp",
               "detail": "Basel",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/femme-rebellion-south-for-gender-equality-on-stage/"
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pop-up-cinema-herbstfeuer-fire-at-the-grandhotel-waldhaus-vulpera-tarasp-1/"
+            },
+            {
+              "label": "Stewy von Wattenwyl & Alex Hendriksen",
+              "detail": "Kulturscheune, Liestal",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/liestal/stewy-von-wattenwyl-und-alex-hendriksen_AfnD29j"
+            },
+            {
+              "label": "TEX TUR 2026-Héros",
+              "detail": "Dorfkirche Riehen, Riehen",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/riehen/textur-2026-heroines_ALx9byG"
+            },
+            {
+              "label": "IMAGINE Gospelkonzert",
+              "detail": "Evang.-ref. Christuskirche, Allschwil — en cours, dernier jour : 1er novembre 2026",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/allschwil/imagine-gospelkonzert_AARaZAV"
+            },
+            {
+              "label": "Cantuccini - Neues Programm",
+              "detail": "Theater Fauteuil - Tabourettli — en cours, dernier jour : 1er novembre 2026",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/cantuccini-neues-programm_AE4hULr"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/bale/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/bale/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     }
   }
 }

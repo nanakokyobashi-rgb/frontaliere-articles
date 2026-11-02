@@ -4,17 +4,17 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "eventi",
-  "updatedAt": "2026-10-31T06:15:08.747Z",
-  "contentHash": "59a0c0ff5799093cf9f45fd9aa09353644aca4b3ce0b94c3d5f9e0ceee3af9f5",
+  "updatedAt": "2026-11-01T13:11:05.408Z",
+  "contentHash": "1d1a43d37df0c6ced846a4f1eedde337a81a1f70183e003374bdcd0b997e14db",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-30T13:23:17.161Z",
+      "updatedAt": "2026-10-31T14:21:36.178Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-30T21:45:03.956Z",
+      "updatedAt": "2026-10-31T20:43:08.728Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "91",
+          "value": "81",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Ensemble orchestrale \"Les Vents du Vallon\"",
-              "detail": "Église évang.-réf. de La Tour-de-Peilz, La Tour-de-Peilz",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/orchesterensemble-les-vents-du-vallon-1/"
+              "label": "Special Halloween day at Signal de Bougy",
+              "detail": "Bougy-Villars",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/special-halloween-day-at-signal-de-bougy/"
             },
             {
-              "label": "An hour waiting for you",
-              "detail": "Le Reflet – Théâtre de Vevey, Vevey",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/une-heure-a-tattendre/"
+              "label": "Halloween Brunch 2026 at the AFTERWORK Hotel",
+              "detail": "Afterwork Hotel, Etoy",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/halloween-brunch-2026-im-afterwork-hotel/"
             },
             {
-              "label": "Benefizessen – DonnAccord-Konzert",
-              "detail": "Grande Salle Le Grammont",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/evenements/musique/st-legier-la-chiesaz/repas-de-soutien-concert-donnaccord_ABeLpQS"
+              "label": "Visite guidée - Au Potager - Plantes toxiques",
+              "detail": "Prangins",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-guidee-au-potager-plantes-toxiques/"
             },
             {
-              "label": "Guided Tours of the “Relics of the Future” Exhibition",
-              "detail": "Fondation du Château de Chillon, Montreux",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/visites-guidees-de-lexposition-reliques-du-futur/"
+              "label": "DISCO KIDS «HALLOWEEN»",
+              "detail": "Lausanne",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/disco-kids-halloween/"
             },
             {
-              "label": "Halloween at Villeneuve mini-golf course",
-              "detail": "Mini-Golf, Villeneuve (VD)",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/halloween-au-mini-golf-de-villeneuve/"
+              "label": "Visite guidée - Sorcières",
+              "detail": "Musée national suisse, Prangins",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/visite-guidee-sorcieres/"
             },
             {
-              "label": "Have your portrait taken at the 555th Saint-Martin Fair!",
-              "detail": "Vevey",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/have-your-portrait-taken-at-the-555th-saintmartin-fair/"
+              "label": "Paris/ Helsinki. Soirée de trios avec piano",
+              "detail": "Montreux",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/paris-helsinki-soiree-de-trios-avec-piano-1/"
             },
             {
-              "label": "Kumquat / Vernissage",
-              "detail": "Caveau du Coeur d'Or, Chexbres",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/evenements/musique/chexbres/kumquat-vernissage_AAbFC8s"
+              "label": "Walk off the Earth + special guests: Luminati Suns",
+              "detail": "Les Docks",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/events/music/lausanne/walk-off-the-earth-special-guests-luminati-suns_AGe6Ufw"
             },
             {
-              "label": "Orchesterensemble „Les Vents du Vallon“",
-              "detail": "Église évang.-réf. de La Tour-de-Peilz, La Tour-de-Peilz",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/la-tour-de-peilz/orchesterensemble-les-vents-du-vallon_ANx52wd"
-            },
-            {
-              "label": "Recreational Orienteering Race",
-              "detail": "Mont Pèlerin, Chardonne",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/recreational-orienteering-race/"
+              "label": "Ciné-concert - La famille Addams au Rosey Concert Hall",
+              "detail": "Rosey Concert Hall, Rolle",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/events/music/rolle/cine-concert-la-famille-addams-au-rosey-concert-hall_AexKG82"
             },
             {
               "label": "Vacherin Mont d'Or baked at the Terrace",
-              "detail": "Villeneuve VD",
-              "date": "2026-10-31",
+              "detail": "Villeneuve VD — in corso, ultimo giorno: 4 novembre 2026",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/vacherin-mont-dor-baked-at-the-terrace/"
+            },
+            {
+              "label": "\"Dreamscapes\": Print Exhibition",
+              "detail": "Galerie-Atelier Arva, Vevey — in corso, ultimo giorno: 12 novembre 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dreamscapes-print-exhibition/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vaud/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -118,7 +118,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-10-31T20:43:08.728Z"
         }
       ],
       "curatedArticles": [
@@ -140,7 +140,7 @@
           "url": "/eventi/vaud/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "en": {
       "canton": "VD",
@@ -150,7 +150,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "91",
+          "value": "81",
           "note": "from the site’s events calendar"
         }
       ],
@@ -161,69 +161,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Orchestra ensemble \"Les Vents du Vallon\"",
-              "detail": "Église évang.-réf. de La Tour-de-Peilz, La Tour-de-Peilz",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/orchesterensemble-les-vents-du-vallon-1/"
+              "label": "Special Halloween day at Signal de Bougy",
+              "detail": "Bougy-Villars",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/special-halloween-day-at-signal-de-bougy/"
             },
             {
-              "label": "An hour waiting for you",
-              "detail": "Le Reflet – Théâtre de Vevey, Vevey",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/une-heure-a-tattendre/"
+              "label": "Halloween Brunch 2026 at the AFTERWORK Hotel",
+              "detail": "Afterwork Hotel, Etoy",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/halloween-brunch-2026-im-afterwork-hotel/"
             },
             {
-              "label": "Fundraising Dinner and DonnAccord Concert",
-              "detail": "Grande Salle Le Grammont",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/evenements/musique/st-legier-la-chiesaz/repas-de-soutien-concert-donnaccord_ABeLpQS"
+              "label": "Guided tours - Au Potager - Plantes toxiques",
+              "detail": "Prangins",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-guidee-au-potager-plantes-toxiques/"
             },
             {
-              "label": "Guided Tours of the “Relics of the Future” Exhibition",
-              "detail": "Fondation du Château de Chillon, Montreux",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/visites-guidees-de-lexposition-reliques-du-futur/"
+              "label": "DISCO KIDS «HALLOWEEN»",
+              "detail": "Lausanne",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/disco-kids-halloween/"
             },
             {
-              "label": "Halloween at Villeneuve mini-golf course",
-              "detail": "Mini-Golf, Villeneuve (VD)",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/halloween-au-mini-golf-de-villeneuve/"
+              "label": "Visite guidée - Sorcières",
+              "detail": "Musée national suisse, Prangins",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/visite-guidee-sorcieres/"
             },
             {
-              "label": "Have your portrait taken at the 555th Saint-Martin Fair!",
-              "detail": "Vevey",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/have-your-portrait-taken-at-the-555th-saintmartin-fair/"
+              "label": "Paris/ Helsinki. Soirée de trios avec piano",
+              "detail": "Montreux",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/paris-helsinki-soiree-de-trios-avec-piano-1/"
             },
             {
-              "label": "Kumquat / Opening Reception",
-              "detail": "Caveau du Coeur d'Or, Chexbres",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/evenements/musique/chexbres/kumquat-vernissage_AAbFC8s"
+              "label": "Walk off the Earth + special guests: Luminati Suns",
+              "detail": "Les Docks",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/events/music/lausanne/walk-off-the-earth-special-guests-luminati-suns_AGe6Ufw"
             },
             {
-              "label": "\"Les Vents du Vallon\" Orchestra",
-              "detail": "Église évang.-réf. de La Tour-de-Peilz, La Tour-de-Peilz",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/la-tour-de-peilz/orchesterensemble-les-vents-du-vallon_ANx52wd"
-            },
-            {
-              "label": "Recreational Orienteering Race",
-              "detail": "Mont Pèlerin, Chardonne",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/recreational-orienteering-race/"
+              "label": "Ciné-concert - La famille Addams au Rosey Concert Hall",
+              "detail": "Rosey Concert Hall, Rolle",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/events/music/rolle/cine-concert-la-famille-addams-au-rosey-concert-hall_AexKG82"
             },
             {
               "label": "Vacherin Mont d'Or baked at the Terrace",
-              "detail": "Villeneuve VD",
-              "date": "2026-10-31",
+              "detail": "Villeneuve VD — ongoing, last day: 4 November 2026",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/vacherin-mont-dor-baked-at-the-terrace/"
+            },
+            {
+              "label": "\"Dreamscapes\": Print Exhibition",
+              "detail": "Galerie-Atelier Arva, Vevey — ongoing, last day: 12 November 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dreamscapes-print-exhibition/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/vaud/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -241,7 +241,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-10-31T20:43:08.728Z"
         }
       ],
       "curatedArticles": [
@@ -263,7 +263,7 @@
           "url": "/en/events/vaud/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "de": {
       "canton": "VD",
@@ -273,7 +273,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "91",
+          "value": "81",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -284,69 +284,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Orchesterensemble „Les Vents du Vallon“",
-              "detail": "Église évang.-réf. de La Tour-de-Peilz, La Tour-de-Peilz",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/orchesterensemble-les-vents-du-vallon-1/"
+              "label": "Halloween-Sondertag im Signal de Bougy",
+              "detail": "Bougy-Villars",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/special-halloween-day-at-signal-de-bougy/"
             },
             {
-              "label": "Eine Stunde auf dich warten",
-              "detail": "Le Reflet – Théâtre de Vevey, Vevey",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/une-heure-a-tattendre/"
+              "label": "Halloween-Brunch 2026 im AFTERWORK Hotel",
+              "detail": "Afterwork Hotel, Etoy",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/halloween-brunch-2026-im-afterwork-hotel/"
             },
             {
-              "label": "Benefizessen – DonnAccord-Konzert",
-              "detail": "Grande Salle Le Grammont",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/evenements/musique/st-legier-la-chiesaz/repas-de-soutien-concert-donnaccord_ABeLpQS"
+              "label": "Führungen - Au Potager - Plantes toxiques",
+              "detail": "Prangins",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-guidee-au-potager-plantes-toxiques/"
             },
             {
-              "label": "Führungen durch die Ausstellung „Relikte der Zukunft“",
-              "detail": "Fondation du Château de Chillon, Montreux",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/visites-guidees-de-lexposition-reliques-du-futur/"
+              "label": "DISCO KIDS «HALLOWEEN»",
+              "detail": "Lausanne",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/disco-kids-halloween/"
             },
             {
-              "label": "Halloween auf dem Minigolfplatz von Villeneuve",
-              "detail": "Mini-Golf, Villeneuve (VD)",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/halloween-au-mini-golf-de-villeneuve/"
+              "label": "Visite guidée - Sorcières",
+              "detail": "Musée national suisse, Prangins",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/visite-guidee-sorcieres/"
             },
             {
-              "label": "Ihr Porträt auf der 555. Sankt-Martin-Messe!",
-              "detail": "Vevey",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/have-your-portrait-taken-at-the-555th-saintmartin-fair/"
+              "label": "Paris/ Helsinki. Soirée de trios avec piano",
+              "detail": "Montreux",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/paris-helsinki-soiree-de-trios-avec-piano-1/"
             },
             {
-              "label": "Kumquat / Vernissage",
-              "detail": "Caveau du Coeur d'Or, Chexbres",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/evenements/musique/chexbres/kumquat-vernissage_AAbFC8s"
+              "label": "Walk off the Earth + special guests: Luminati Suns",
+              "detail": "Les Docks",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/events/music/lausanne/walk-off-the-earth-special-guests-luminati-suns_AGe6Ufw"
             },
             {
-              "label": "Orchesterensemble „Les Vents du Vallon“",
-              "detail": "Église évang.-réf. de La Tour-de-Peilz, La Tour-de-Peilz",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/la-tour-de-peilz/orchesterensemble-les-vents-du-vallon_ANx52wd"
-            },
-            {
-              "label": "Volksorientierungslauf",
-              "detail": "Mont Pèlerin, Chardonne",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/recreational-orienteering-race/"
+              "label": "Ciné-concert - La famille Addams au Rosey Concert Hall",
+              "detail": "Rosey Concert Hall, Rolle",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/events/music/rolle/cine-concert-la-famille-addams-au-rosey-concert-hall_AexKG82"
             },
             {
               "label": "Vacherin Mont d'Or aus dem Ofen à la Terrasse",
-              "detail": "Villeneuve VD",
-              "date": "2026-10-31",
+              "detail": "Villeneuve VD — läuft, letzter Tag: 4. November 2026",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/vacherin-mont-dor-baked-at-the-terrace/"
+            },
+            {
+              "label": "„Traumlandschaften“: Ausstellung mit Radierungen",
+              "detail": "Galerie-Atelier Arva, Vevey — läuft, letzter Tag: 12. November 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dreamscapes-print-exhibition/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/waadt/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -364,7 +364,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-10-31T20:43:08.728Z"
         }
       ],
       "curatedArticles": [
@@ -386,7 +386,7 @@
           "url": "/de/veranstaltungen/waadt/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "fr": {
       "canton": "VD",
@@ -396,7 +396,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "91",
+          "value": "81",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -407,69 +407,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Ensemble orchestral Les Vents du Vallon",
-              "detail": "Église évang.-réf. de La Tour-de-Peilz, La Tour-de-Peilz",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/orchesterensemble-les-vents-du-vallon-1/"
+              "label": "Journée Spéciale Halloween du Signal de Bougy",
+              "detail": "Bougy-Villars",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/special-halloween-day-at-signal-de-bougy/"
             },
             {
-              "label": "Une heure à t'attendre",
-              "detail": "Le Reflet – Théâtre de Vevey, Vevey",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/une-heure-a-tattendre/"
+              "label": "Brunch Halloween 2026 AFTERWORK Hotel",
+              "detail": "Afterwork Hotel, Etoy",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/halloween-brunch-2026-im-afterwork-hotel/"
             },
             {
-              "label": "Repas de soutien - concert DonnAccord",
-              "detail": "Grande Salle Le Grammont",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/evenements/musique/st-legier-la-chiesaz/repas-de-soutien-concert-donnaccord_ABeLpQS"
+              "label": "Visites guidées - Au Potager - Plantes toxiques",
+              "detail": "Prangins",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-guidee-au-potager-plantes-toxiques/"
             },
             {
-              "label": "Visites guidées de l'exposition \"Reliques du futur\"",
-              "detail": "Fondation du Château de Chillon, Montreux",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/visites-guidees-de-lexposition-reliques-du-futur/"
+              "label": "DISCO KIDS «HALLOWEEN»",
+              "detail": "Lausanne",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/disco-kids-halloween/"
             },
             {
-              "label": "Halloween au Mini-Golf de Villeneuve",
-              "detail": "Mini-Golf, Villeneuve (VD)",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/halloween-au-mini-golf-de-villeneuve/"
+              "label": "Visite guidée - Sorcières",
+              "detail": "Musée national suisse, Prangins",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/visite-guidee-sorcieres/"
             },
             {
-              "label": "Votre portrait à la 555e Foire de la Saint-Martin !",
-              "detail": "Vevey",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/have-your-portrait-taken-at-the-555th-saintmartin-fair/"
+              "label": "Paris/ Helsinki. Soirée de trios avec piano",
+              "detail": "Montreux",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/paris-helsinki-soiree-de-trios-avec-piano-1/"
             },
             {
-              "label": "Kumquat - Vernissage",
-              "detail": "Caveau du Coeur d'Or, Chexbres",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/evenements/musique/chexbres/kumquat-vernissage_AAbFC8s"
+              "label": "Walk off the Earth + special guests: Luminati Suns",
+              "detail": "Les Docks",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/events/music/lausanne/walk-off-the-earth-special-guests-luminati-suns_AGe6Ufw"
             },
             {
-              "label": "Ensemble orchestral Les Vents du Vallon",
-              "detail": "Église évang.-réf. de La Tour-de-Peilz, La Tour-de-Peilz",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/la-tour-de-peilz/orchesterensemble-les-vents-du-vallon_ANx52wd"
-            },
-            {
-              "label": "Course d'orientation populaire",
-              "detail": "Mont Pèlerin, Chardonne",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/recreational-orienteering-race/"
+              "label": "Ciné-concert - La famille Addams au Rosey Concert Hall",
+              "detail": "Rosey Concert Hall, Rolle",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/events/music/rolle/cine-concert-la-famille-addams-au-rosey-concert-hall_AexKG82"
             },
             {
               "label": "Brisolée à la Terrasse",
-              "detail": "Villeneuve VD",
-              "date": "2026-10-31",
+              "detail": "Villeneuve VD — en cours, dernier jour : 4 novembre 2026",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/vacherin-mont-dor-baked-at-the-terrace/"
+            },
+            {
+              "label": "Paysages rêvés - Exposition de gravures",
+              "detail": "Galerie-Atelier Arva, Vevey — en cours, dernier jour : 12 novembre 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dreamscapes-print-exhibition/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/vaud/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -487,7 +487,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-10-31T20:43:08.728Z"
         }
       ],
       "curatedArticles": [
@@ -509,7 +509,7 @@
           "url": "/fr/evenements/vaud/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     }
   }
 }

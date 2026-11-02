@@ -4,12 +4,12 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "eventi",
-  "updatedAt": "2026-10-31T06:15:08.747Z",
-  "contentHash": "b65b78978e3974553eb6f6698eaab729d8b6ae493ebad7e53352b39f01c33a2b",
+  "updatedAt": "2026-11-01T13:11:05.408Z",
+  "contentHash": "100b3aed58adbec27f12991254834fdbb898dab9cf4a99ed3ff2104150c27d18",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-30T13:23:17.161Z",
+      "updatedAt": "2026-10-31T14:21:36.178Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "62",
+          "value": "71",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Maison des Contes et Légendes : Halloween [EN]",
-              "detail": "Dorénaz",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/maison-des-contes-et-legendes-halloween-en/"
+              "label": "Caves du Manoir : The Underground Youth et Basic Partner [EN]",
+              "detail": "Caves du Manoir, Martigny",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/caves-du-manoir-the-underground-youth-et-basic-partner-de/"
             },
             {
-              "label": "A la découverte du patrimoine viticole",
-              "detail": "Martigny-Croix, Martigny",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/a-la-decouverte-du-patrimoine-viticole/"
+              "label": "Delizie per il palato “Autunno”",
+              "detail": "Ferden",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/delizie-per-il-palato-autunno-3/"
             },
             {
-              "label": "Brisolée at the Cave du Chevalier Bayard",
-              "detail": "Cave du Chevalier Bayard, Varen",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/brisolee-at-the-cave-du-chevalier-bayard/"
+              "label": "Blanche-Neige",
+              "detail": "Saint-Maurice",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/blanche-neige/"
             },
             {
-              "label": "The Irish Folk Festival",
-              "detail": "Kultur- und Kongresszentrum La Poste, Visp",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/visp/the-irish-folk-festival_A8QEKG4"
-            },
-            {
-              "label": "Werli and the Melodies",
-              "detail": "Zeughaus Kultur",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/events/music/glis/werli-and-the-melodies_AH5Hy7w"
-            },
-            {
-              "label": "Mawak und Franco [CH-VS] – L'affreux [CH-VS] – Elias D [CH-VS]",
-              "detail": "Hacienda, Sierre",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/siders/mawak-und-franco-ch-vs-laffreux-ch-vs-elias-d-ch-vs_A7bki9Q"
-            },
-            {
-              "label": "ARBRE",
-              "detail": "Sion / Sitten, Sion",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/arbre/"
-            },
-            {
-              "label": "Brisolée",
-              "detail": "Cave du Chevalier Bayard, Varen — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/brisolee/"
+              "label": "Rock tes morts | The Underground Youth – Basic Partner",
+              "detail": "Le Manoir de la Ville de Martigny, Martigny",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/evenements/musique/martigny/rock-tes-morts-the-underground-youth-basic-partner_Ag2kHgy"
             },
             {
               "label": "Helga Zumstein",
               "detail": "Brig, Brig-Glis — in corso, ultimo giorno: 22 novembre 2026",
-              "date": "2026-10-31",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
             },
             {
-              "label": "Rally Internazionale del Vallese [DE]",
-              "detail": "Martigny Expo, Martigny — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/rallye-international-du-valais-en/"
+              "label": "Es ist dies beinahe Unsichtbare",
+              "detail": "Visp — in corso, ultimo giorno: 1 novembre 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/es-ist-dies-beinahe-unsichtbare/"
+            },
+            {
+              "label": "Theater: Aufführungen in Bellwald",
+              "detail": "Mehrzweckhalle Bellwald, Bellwald — in corso, ultimo giorno: 8 novembre 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
+            },
+            {
+              "label": "Schellen-Ursli",
+              "detail": "Kultur- und Kongresszentrum La Poste, Visp",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/schellen-ursli/"
+            },
+            {
+              "label": "martigny expo : Braderie d'automne [EN]",
+              "detail": "Martigny",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/martigny-expo-braderie-dautomne-en/"
+            },
+            {
+              "label": "Art'Mini",
+              "detail": "Sierre",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/artmini/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vallese/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/vallese/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "en": {
       "canton": "VS",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "62",
+          "value": "71",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Maison des Contes et Légendes : Halloween [EN]",
-              "detail": "Dorénaz",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/maison-des-contes-et-legendes-halloween-en/"
+              "label": "Caves du Manoir : The Underground Youth et Basic Partner [EN]",
+              "detail": "Caves du Manoir, Martigny",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/caves-du-manoir-the-underground-youth-et-basic-partner-de/"
             },
             {
-              "label": "A la découverte du patrimoine viticole",
-              "detail": "Martigny-Croix, Martigny",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/a-la-decouverte-du-patrimoine-viticole/"
+              "label": "\"Fall\" Culinary Delights",
+              "detail": "Ferden",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/delizie-per-il-palato-autunno-3/"
             },
             {
-              "label": "Brisolée at the Cave du Chevalier Bayard",
-              "detail": "Cave du Chevalier Bayard, Varen",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/brisolee-at-the-cave-du-chevalier-bayard/"
+              "label": "Blanche-Neige",
+              "detail": "Saint-Maurice",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/blanche-neige/"
             },
             {
-              "label": "The Irish Folk Festival",
-              "detail": "Kultur- und Kongresszentrum La Poste, Visp",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/visp/the-irish-folk-festival_A8QEKG4"
-            },
-            {
-              "label": "Werli and the Melodies",
-              "detail": "Zeughaus Kultur",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/events/music/glis/werli-and-the-melodies_AH5Hy7w"
-            },
-            {
-              "label": "Mawak and Franco [CH-VS] - L'affreux [CH-VS] - Elias D [CH-VS]",
-              "detail": "Hacienda, Sierre",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/siders/mawak-und-franco-ch-vs-laffreux-ch-vs-elias-d-ch-vs_A7bki9Q"
-            },
-            {
-              "label": "ARBRE",
-              "detail": "Sion / Sitten, Sion",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/arbre/"
-            },
-            {
-              "label": "Brisolée",
-              "detail": "Cave du Chevalier Bayard, Varen — ongoing, last day: 31 October 2026",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/brisolee/"
+              "label": "Rock Your Dead | The Underground Youth - Basic Partner",
+              "detail": "Le Manoir de la Ville de Martigny, Martigny",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/evenements/musique/martigny/rock-tes-morts-the-underground-youth-basic-partner_Ag2kHgy"
             },
             {
               "label": "Helga Zumstein",
               "detail": "Brig, Brig-Glis — ongoing, last day: 22 November 2026",
-              "date": "2026-10-31",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
             },
             {
-              "label": "Rallye International du Valais [EN]",
-              "detail": "Martigny Expo, Martigny — ongoing, last day: 31 October 2026",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/rallye-international-du-valais-en/"
+              "label": "It is these days that are unavailable",
+              "detail": "Visp — ongoing, last day: 1 November 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/es-ist-dies-beinahe-unsichtbare/"
+            },
+            {
+              "label": "Theater: Aufführungen in Bellwald",
+              "detail": "Mehrzweckhalle Bellwald, Bellwald — ongoing, last day: 8 November 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
+            },
+            {
+              "label": "Schellen-Ursli",
+              "detail": "Kultur- und Kongresszentrum La Poste, Visp",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/schellen-ursli/"
+            },
+            {
+              "label": "martigny expo : Braderie d'automne [EN]",
+              "detail": "Martigny",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/martigny-expo-braderie-dautomne-en/"
+            },
+            {
+              "label": "Art'Mini",
+              "detail": "Sierre",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/artmini/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/valais/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/valais/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "de": {
       "canton": "VS",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "62",
+          "value": "71",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Maison des Contes et Légendes : Halloween [DE]",
-              "detail": "Dorénaz",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/maison-des-contes-et-legendes-halloween-en/"
+              "label": "Caves du Manoir : The Underground Youth et Basic Partner [DE]",
+              "detail": "Caves du Manoir, Martigny",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/caves-du-manoir-the-underground-youth-et-basic-partner-de/"
             },
             {
-              "label": "A la découverte du patrimoine viticole",
-              "detail": "Martigny-Croix, Martigny",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/a-la-decouverte-du-patrimoine-viticole/"
+              "label": "Gaumenkitzeln „Herbst“",
+              "detail": "Ferden",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/delizie-per-il-palato-autunno-3/"
             },
             {
-              "label": "Brisolée bei der Cave du Chevalier Bayard",
-              "detail": "Cave du Chevalier Bayard, Varen",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/brisolee-at-the-cave-du-chevalier-bayard/"
+              "label": "Blanche-Neige",
+              "detail": "Saint-Maurice",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/blanche-neige/"
             },
             {
-              "label": "The Irish Folk Festival",
-              "detail": "Kultur- und Kongresszentrum La Poste, Visp",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/visp/the-irish-folk-festival_A8QEKG4"
-            },
-            {
-              "label": "Werli and the Melodies",
-              "detail": "Zeughaus Kultur",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/events/music/glis/werli-and-the-melodies_AH5Hy7w"
-            },
-            {
-              "label": "Mawak und Franco [CH-VS] – L'affreux [CH-VS] – Elias D [CH-VS]",
-              "detail": "Hacienda, Sierre",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/siders/mawak-und-franco-ch-vs-laffreux-ch-vs-elias-d-ch-vs_A7bki9Q"
-            },
-            {
-              "label": "ARBRE",
-              "detail": "Sion / Sitten, Sion",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/arbre/"
-            },
-            {
-              "label": "Brisolée",
-              "detail": "Cave du Chevalier Bayard, Varen — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/brisolee/"
+              "label": "Rock tes morts | The Underground Youth – Basic Partner",
+              "detail": "Le Manoir de la Ville de Martigny, Martigny",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/evenements/musique/martigny/rock-tes-morts-the-underground-youth-basic-partner_Ag2kHgy"
             },
             {
               "label": "Helga Zumstein",
               "detail": "Brig, Brig-Glis — läuft, letzter Tag: 22. November 2026",
-              "date": "2026-10-31",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
             },
             {
-              "label": "Rallye International du Valais [DE]",
-              "detail": "Martigny Expo, Martigny — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/rallye-international-du-valais-en/"
+              "label": "Es ist die beinahe Unsichtbare",
+              "detail": "Visp — läuft, letzter Tag: 1. November 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/es-ist-dies-beinahe-unsichtbare/"
+            },
+            {
+              "label": "Theater: Aufführungen in Bellwald",
+              "detail": "Mehrzweckhalle Bellwald, Bellwald — läuft, letzter Tag: 8. November 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
+            },
+            {
+              "label": "Schellen-Ursli",
+              "detail": "Kultur- und Kongresszentrum La Poste, Visp",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/schellen-ursli/"
+            },
+            {
+              "label": "martigny expo : Braderie d'automne [DE]",
+              "detail": "Martigny",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/martigny-expo-braderie-dautomne-en/"
+            },
+            {
+              "label": "Art'Mini",
+              "detail": "Sierre",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/artmini/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/wallis/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/wallis/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     },
     "fr": {
       "canton": "VS",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "62",
+          "value": "71",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Maison des Contes et Légendes : Halloween",
-              "detail": "Dorénaz",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/maison-des-contes-et-legendes-halloween-en/"
+              "label": "Caves du Manoir : The Underground Youth et Basic Partner",
+              "detail": "Caves du Manoir, Martigny",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/caves-du-manoir-the-underground-youth-et-basic-partner-de/"
             },
             {
-              "label": "A la découverte du patrimoine viticole",
-              "detail": "Martigny-Croix, Martigny",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/a-la-decouverte-du-patrimoine-viticole/"
+              "label": "Délices « d'automne »",
+              "detail": "Ferden",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/delizie-per-il-palato-autunno-3/"
             },
             {
-              "label": "Brisolée chez la Cave du Chevalier Bayard",
-              "detail": "Cave du Chevalier Bayard, Varen",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/brisolee-at-the-cave-du-chevalier-bayard/"
+              "label": "Blanche-Neige",
+              "detail": "Saint-Maurice",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/blanche-neige/"
             },
             {
-              "label": "The Irish Folk Festival",
-              "detail": "Kultur- und Kongresszentrum La Poste, Visp",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/visp/the-irish-folk-festival_A8QEKG4"
-            },
-            {
-              "label": "Werli and the Melodies",
-              "detail": "Zeughaus Kultur",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/events/music/glis/werli-and-the-melodies_AH5Hy7w"
-            },
-            {
-              "label": "Mawak et Franco [CH-VS] - L'affreux [CH-VS] - Elias D [CH-VS]",
-              "detail": "Hacienda, Sierre",
-              "date": "2026-10-31",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/siders/mawak-und-franco-ch-vs-laffreux-ch-vs-elias-d-ch-vs_A7bki9Q"
-            },
-            {
-              "label": "ARBRE",
-              "detail": "Sion / Sitten, Sion",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/arbre/"
-            },
-            {
-              "label": "Brisolée",
-              "detail": "Cave du Chevalier Bayard, Varen — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/brisolee/"
+              "label": "Rock tes morts | The Underground Youth - Basic Partner",
+              "detail": "Le Manoir de la Ville de Martigny, Martigny",
+              "date": "2026-11-01",
+              "url": "https://www.guidle.com/it/evenements/musique/martigny/rock-tes-morts-the-underground-youth-basic-partner_Ag2kHgy"
             },
             {
               "label": "Helga Zumstein",
               "detail": "Brig, Brig-Glis — en cours, dernier jour : 22 novembre 2026",
-              "date": "2026-10-31",
+              "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
             },
             {
-              "label": "Rallye International du Valais",
-              "detail": "Martigny Expo, Martigny — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-31",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/rallye-international-du-valais-en/"
+              "label": "Es is dies beinahe Unsichtbare",
+              "detail": "Visp — en cours, dernier jour : 1er novembre 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/es-ist-dies-beinahe-unsichtbare/"
+            },
+            {
+              "label": "Théâtre : représentations à Bellwald",
+              "detail": "Mehrzweckhalle Bellwald, Bellwald — en cours, dernier jour : 8 novembre 2026",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
+            },
+            {
+              "label": "Schellen-Ursli",
+              "detail": "Kultur- und Kongresszentrum La Poste, Visp",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/schellen-ursli/"
+            },
+            {
+              "label": "martigny expo : Braderie d'automne",
+              "detail": "Martigny",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/martigny-expo-braderie-dautomne-en/"
+            },
+            {
+              "label": "Art'Mini",
+              "detail": "Sierre",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/artmini/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/valais/",
-          "updatedAt": "2026-10-30T13:23:17.161Z"
+          "updatedAt": "2026-10-31T14:21:36.178Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/valais/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-31T06:15:08.747Z"
+      "updatedAt": "2026-11-01T13:11:05.408Z"
     }
   }
 }

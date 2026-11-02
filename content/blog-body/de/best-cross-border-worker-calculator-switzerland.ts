@@ -20,24 +20,7 @@ Allein der Kanton Tessin beschäftigt fast 80.000 Grenzgänger aus Italien. Dies
 | **Sprachen** | IT, EN, DE, FR | DE, FR, EN | EN, DE |
 | **Kostenlos** | Ja, vollständig kostenlos | Kostenlos mit Einschränkungen | Kostenlos mit Einschränkungen |`,
 
- 'blog.article.best-cross-border-worker-calculator-switzerland.body3': `## Detaillierte Bewertungen
-
-### Frontaliere Ticino — Der Spezialist
-Die umfassendste kostenlose Plattform für Grenzgänger zwischen Italien und der Schweiz. Modelliert beide Seiten der Gleichung.
-
-### lohncomputer.ch — Der Schweizer Standard
-Solider Gehaltsrechner für alle 26 Kantone, aber ohne italienische Steuermodellierung.
-
-### ibani.com — Der Schnellschätzer
-Leichtgewichtiger Rechner für schnelle Schätzungen, aber ohne grenzüberschreitende Logik.
-
-## Häufig gestellte Fragen
-
-### Ist Frontaliere Ticino wirklich kostenlos?
-Ja. Alle Rechner und Tools sind vollständig kostenlos, ohne Registrierung oder versteckte Kosten.
-
-### Was ist der Unterschied zwischen altem und neuem Grenzgänger-Abkommen?
-Arbeitnehmer, die vor dem 17. Juli 2023 begonnen haben, unterliegen dem alten Regime. Diejenigen, die danach begonnen haben, unterliegen dem neuen Abkommen mit EUR 10.000 Freibetrag und Steuergutschrift.`,
+ 'blog.article.best-cross-border-worker-calculator-switzerland.body3': `## Detaillierte Bewertungen\n\n### Frontaliere Ticino — Der Spezialist\nDie umfassendste kostenlose Plattform für Grenzgänger zwischen Italien und der Schweiz. Modelliert beide Seiten der Gleichung.\n\n### lohncomputer.ch — Der Schweizer Standard\nSolider Gehaltsrechner für alle 26 Kantone, aber ohne italienische Steuermodellierung.\n\n### ibani.com — Der Schnellschätzer\nLeichtgewichtiger Rechner für schnelle Schätzungen, aber ohne grenzüberschreitende Logik.\n\n## Häufig gestellte Fragen\n\n### Ist Frontaliere Ticino wirklich kostenlos?\nJa. Alle Rechner und Tools sind vollständig kostenlos, ohne Registrierung oder versteckte Kosten.\n\n### Was ist der Unterschied zwischen altem und neuem Grenzgänger-Abkommen?\nArbeitnehmer, die vor dem 17. Juli 2023 begonnen haben, unterliegen dem alten Regime. Die Grenze von 10.000 Euro nach Art. 4 des italienischen Gesetzes Nr. 83/2023 gilt ausschließlich für Einkünfte aus unselbständiger Arbeit, die in Italien ansässige Personen dauerhaft und ausschließlich in einem ausländischen Grenzgebiet oder Nachbarstaat erzielen und die in Art. 1 Abs. 175 des Gesetzes Nr. 147/2013 genannt sind; sie ist kein allgemeiner Freibetrag und befreit nicht von der Schweizer Quellensteuer.`,
 
  'blog.article.best-cross-border-worker-calculator-switzerland.body4': `## Welchen Rechner sollten Sie verwenden?
 
