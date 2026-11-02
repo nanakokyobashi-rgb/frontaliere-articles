@@ -34,7 +34,7 @@
  */
 
 export const AMOUNT_7500 = String.raw`7(?:\\?['’]|[.,\u00a0 ])?500`;
-const AMOUNT_7500_STANDALONE_RE = new RegExp(String.raw`(?<![\d.,'’])${AMOUNT_7500}(?!\d|[.,'’\u00a0 ]\d)`, 'g');
+const AMOUNT_7500_STANDALONE_RE = new RegExp(String.raw`(?<![\d.,'’])${AMOUNT_7500}(?:[.,]\d{1,2})?(?!\d|[.,'’\u00a0 ]\d)`, 'g');
 
 const EXEMPTION_WORD_RE = /(esenzion|esent|esonero|franchig|exempt|allowance|deductible|tax[- ]free|befrei|freibetrag|freigrenze|selbstbeteilig|entlastung|exon[eé]r|exempt|franchise|abbatt)/i;
 const OLD_WORKER_RE = /(vecchi frontalieri|vecchio frontaliere|old (?:frontier|cross|border)|(?:alte[nr]?|bisherige[nr]?)\s+grenzg(?:ä|ae)nger|alt[- ]?grenzg(?:ä|ae)nger|anciens? frontalier)/iu;
@@ -174,7 +174,7 @@ export function findFiscalClaims(text) {
 }
 
 /** Una percentuale riferita alla paga: le altre (sondaggi, aumenti) non sono l'aliquota. */
-const RATE_ON_PAY_RE = /(\d{1,2}(?:[.,]\d)?)(?:\s?%?\s?(?:-|–|—|a|al|to|bis|à)\s?(\d{1,2}(?:[.,]\d)?))?\s?%\s+(?:del|dello|della|sul|sullo|sulla|von|vom|auf|auf den|auf das|of|of the|on|on the|des|du|de|de la|sur|sur le|sur la)\s+(?:proprio\s+|their\s+|ihres\s+)?(?:reddit|salari|stipendi|income|salary|wage|einkommen|nettoeinkommen|bruttoeinkommen|lohn|gehalt|brutto|netto|revenu|salaire|gross|net)\w*(?:\s+(?:netto|lordo|net|gross|brut|brutto))?/gi;
+const RATE_ON_PAY_RE = /(\d{1,2}(?:[.,]\d{1,2})?)(?:\s?%?\s?(?:-|–|—|a|al|to|bis|à)\s?(\d{1,2}(?:[.,]\d{1,2})?))?\s?%\s+(?:del|dello|della|sul|sullo|sulla|von|vom|auf|auf den|auf das|of|of the|on|on the|des|du|de|de la|sur|sur le|sur la)\s+(?:proprio\s+|their\s+|ihres\s+)?(?:reddit|salari|stipendi|income|salary|wage|einkommen|nettoeinkommen|bruttoeinkommen|lohn|gehalt|brutto|netto|revenu|salaire|gross|net)\w*(?:\s+(?:netto|lordo|net|gross|brut|brutto))?/gi;
 
 const OTHER_LEVY_RE = /(\bavs\b|\bahv\b|\blpp\b|\bbvg\b|irpef|impost|imp[oô]t|quellensteuer|withholding|pilastr|pilier|s[aä]ule|\binps\b|contribut[io] (?:avs|previdenz))/i;
 
