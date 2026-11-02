@@ -30,7 +30,12 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { initAttestVerdict } from '../../scripts/ci/loop-drift-check.mjs';
+import {
+  gitBlobSha,
+  initAttestVerdict,
+  initInventoryVerdict,
+  sitePathBlobInventory,
+} from '../../scripts/ci/loop-drift-check.mjs';
 
 const SITE_PATH = 'scripts/lib/control-char-publish-gate.mjs';
 const ok = {
@@ -43,6 +48,57 @@ const ok = {
   inventoryPaths: [SITE_PATH],
   checked: true,
 };
+
+test('il path Contents attesta i byte raw al path esatto senza inventario ricorsivo', async () => {
+  const siteBytes = Buffer.from('contenuto del sito');
+  const blobSha = gitBlobSha(siteBytes);
+  const inventory = sitePathBlobInventory({
+    sitePath: SITE_PATH,
+    treeSha: 'b'.repeat(40),
+    entry: { type: 'file', path: SITE_PATH, sha: blobSha },
+  });
+
+  assert.equal(inventory.status, 'ok');
+  assert.deepEqual(
+    await initInventoryVerdict({
+      siteBytes,
+      sitePath: SITE_PATH,
+      inventory,
+      refresh: async () => assert.fail('non deve aggiornare'),
+    }),
+    { paths: [SITE_PATH], status: 'ok' },
+  );
+});
+
+test('la risposta Contents deve attestare lo stesso path e un blob Git valido', () => {
+  for (const entry of [
+    { type: 'file', path: 'scripts/lib/altro.mjs', sha: 'a'.repeat(40) },
+    { type: 'dir', path: SITE_PATH, sha: 'a'.repeat(40) },
+    { type: 'file', path: SITE_PATH, sha: 'not-a-git-blob' },
+  ]) {
+    assert.equal(sitePathBlobInventory({ sitePath: SITE_PATH, treeSha: 'b'.repeat(40), entry }).status, 'unavailable');
+  }
+});
+
+test('un cambio del tree fra lettura e attestazione chiede di rilanciare', async () => {
+  const siteBytes = Buffer.from('raw del ref precedente');
+  const currentBytes = Buffer.from('blob attuale del sito');
+  const inventory = sitePathBlobInventory({
+    sitePath: SITE_PATH,
+    treeSha: 'b'.repeat(40),
+    entry: { type: 'file', path: SITE_PATH, sha: gitBlobSha(currentBytes) },
+  });
+  const fresh = sitePathBlobInventory({
+    sitePath: SITE_PATH,
+    treeSha: 'c'.repeat(40),
+    entry: { type: 'file', path: SITE_PATH, sha: gitBlobSha(currentBytes) },
+  });
+
+  assert.deepEqual(
+    await initInventoryVerdict({ siteBytes, sitePath: SITE_PATH, inventory, refresh: async () => fresh }),
+    { paths: null, status: 'ref-moved' },
+  );
+});
 
 test('attestata: i byte scaricati sono il blob che l’albero dichiara a quel path', () => {
   assert.deepEqual(initAttestVerdict(ok), { blocked: false, why: '' });
@@ -108,7 +164,7 @@ test('un repo del sito non canonico non attesta una baseline', () => {
   assert.match(v.why, /SITE_REPO|canonico|fork\/frontaliere-si-o-no/);
 });
 
-test('un albero troncato ha un rifiuto esplicito e non si confonde con una rete assente', () => {
+test('se il fallback puntuale non è disponibile, il troncamento resta un rifiuto esplicito', () => {
   const v = initAttestVerdict({ ...ok, inventoryPaths: null, inventoryStatus: 'truncated' });
   assert.equal(v.blocked, true);
   assert.match(v.why, /troncato|non ricorsivo/);

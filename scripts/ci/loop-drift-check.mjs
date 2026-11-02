@@ -457,7 +457,7 @@ function initWriteVerdict(entry, now, base, state) {
  * @param {string} a.sitePath           il path atteso sul sito.
  * @param {string} a.siteRef            `SITE_REF` di questa passata.
  * @param {string} a.defaultRef         il ref canonico (`SITE_DEFAULT_REF`).
- * @param {string[]|null} a.inventoryPaths  i path che nell'albero del sito
+ * @param {string[]|null} a.inventoryPaths  i path GitHub autorevoli che
  *   portano il blob dei byte scaricati; `[]` = nessuno, `null` = inventario non
  *   disponibile (rete giu', albero troncato).
  * @param {boolean} a.checked           false con `--no-provenance`.
@@ -512,8 +512,8 @@ function initAttestVerdict({
       blocked: true,
       why:
         `l'albero GitHub del sito e' stato restituito troncato (stato \`truncated\`) mentre si attestava \`${sitePath}\`: ` +
-        'un inventario ricorsivo incompleto non prova la provenienza dei byte. ' +
-        'Riprova con un albero completo oppure usa `--no-provenance` dichiarando il limite.',
+        'un inventario incompleto non prova la provenienza dei byte. ' +
+        'Riprova oppure usa `--no-provenance` dichiarando il limite.',
     };
   }
 
@@ -1374,13 +1374,13 @@ async function siteCommitReachable(ref) {
   return payload.behind_by === 0;
 }
 
-/** Rilegge il blob autorevole del tree, non la risposta raw/CDN. */
-let siteCommitShaPromise;
+/** Cache del ref del sito per le attestazioni e i fallback dei blob grandi. */
+let siteCommitInfoPromise;
 
-/** SHA del commit risolto dal ref, necessario per il fallback dei blob grandi. */
-async function siteRefCommitSha() {
-  if (!siteCommitShaPromise) {
-    siteCommitShaPromise = (async () => {
+/** SHA del commit e del suo tree, risolti insieme per attestazioni sul ref. */
+async function siteRefCommitInfo({ refresh = false } = {}) {
+  if (refresh || !siteCommitInfoPromise) {
+    siteCommitInfoPromise = (async () => {
       try {
         const res = await rawFetch(
           `https://api.github.com/repos/${SITE_REPO}/commits/${encodeURIComponent(SITE_REF)}`,
@@ -1388,13 +1388,64 @@ async function siteRefCommitSha() {
         );
         if (!res.ok) return null;
         const payload = await res.json();
-        return typeof payload?.sha === 'string' ? payload.sha : null;
+        const sha = typeof payload?.sha === 'string' ? payload.sha : null;
+        const treeSha = typeof payload?.commit?.tree?.sha === 'string' ? payload.commit.tree.sha : null;
+        return sha ? { sha, treeSha } : null;
       } catch {
         return null;
       }
     })();
   }
-  return siteCommitShaPromise;
+  return siteCommitInfoPromise;
+}
+
+/** SHA del commit risolto dal ref, necessario per il fallback dei blob grandi. */
+async function siteRefCommitSha(options) {
+  return (await siteRefCommitInfo(options))?.sha || null;
+}
+
+/** Un solo blob GitHub attestato al path richiesto, senza inventario ricorsivo. */
+function sitePathBlobInventory({ sitePath, treeSha, entry }) {
+  if (
+    typeof sitePath !== 'string' ||
+    !sitePath ||
+    typeof treeSha !== 'string' ||
+    !/^[a-f0-9]{40}$/iu.test(treeSha) ||
+    entry?.type !== 'file' ||
+    entry.path !== sitePath ||
+    typeof entry.sha !== 'string' ||
+    !/^[a-f0-9]{40}$/iu.test(entry.sha)
+  ) {
+    return {
+      status: 'unavailable',
+      reason: 'risposta GitHub contents incompleta o non corrispondente al path',
+      pathScoped: true,
+    };
+  }
+  const index = new Map([[entry.sha, [sitePath]]]);
+  index.paths = new Set([sitePath]);
+  return {
+    status: 'ok',
+    index,
+    shaByPath: new Map([[sitePath, entry.sha]]),
+    treeSha,
+    pathScoped: true,
+  };
+}
+
+async function sitePathBlobIndex(sitePath, { refresh = false } = {}) {
+  try {
+    const ref = await siteRefCommitInfo({ refresh });
+    if (!ref) return { status: 'unavailable', reason: 'commit del sito non leggibile', pathScoped: true };
+    const encodedPath = sitePath.split('/').map((part) => encodeURIComponent(part)).join('/');
+    const url = `https://api.github.com/repos/${SITE_REPO}/contents/${encodedPath}?ref=${encodeURIComponent(ref.sha)}`;
+    const res = await rawFetch(url, { Accept: 'application/vnd.github+json' });
+    if (!res.ok) return { status: 'unavailable', reason: `contents HTTP ${res.status}`, pathScoped: true };
+    const entry = await res.json();
+    return sitePathBlobInventory({ sitePath, treeSha: ref.treeSha, entry });
+  } catch {
+    return { status: 'unavailable', reason: 'errore di rete su GitHub contents', pathScoped: true };
+  }
 }
 
 async function siteGitBlob(blobSha, { sitePath } = {}) {
@@ -2007,19 +2058,26 @@ async function main() {
   const provenancePass = { rateLimited: false, detail: '' };
   // Inventario dell'albero del sito, chiesto UNA volta sola e solo se una voce
   // ha davvero un lato sito da attestare: `--init --only` su una `corpus-only`
-  // non deve pagare una richiesta. `undefined` = mai chiesto, `null` = chiesto
-  // e non disponibile (che per `initAttestVerdict` e' un rifiuto, non un
-  // fail-open: e' una baseline che si sta SCRIVENDO).
+  // non deve pagare una richiesta. Se l'albero ricorsivo e' troncato, si
+  // attesta il singolo path con la Contents API puntata a un commit immutabile.
   let initInventory;
   let initInventoryRefresh;
-  const initSiteBlobIndex = async ({ refresh = false } = {}) => {
-    if (!refresh && initInventory !== undefined) return initInventory;
+  const initSiteBlobIndex = async ({ refresh = false, sitePath } = {}) => {
+    if (!refresh && initInventory?.status === 'ok') return initInventory;
+    if (!refresh && initInventory && initInventory.status !== 'truncated') return initInventory;
+    if (!refresh && initInventory?.status === 'truncated') return sitePathBlobIndex(sitePath);
+    if (refresh && initInventory?.status === 'truncated') {
+      return sitePathBlobIndex(sitePath, { refresh: true });
+    }
     if (refresh && initInventoryRefresh?.fromTreeSha === initInventory?.treeSha) {
       return initInventoryRefresh.promise;
     }
     const fetchInventory = (async () => {
       try {
-        return await siteBlobIndex();
+        const inventory = await siteBlobIndex();
+        if (inventory.status !== 'truncated') return inventory;
+        initInventory = inventory;
+        return sitePathBlobIndex(sitePath, { refresh });
       } catch {
         return { status: 'unavailable', reason: 'errore di rete' };
       }
@@ -2031,7 +2089,7 @@ async function main() {
         // Un refresh fallito non deve cancellare l'inventario valido: il
         // verdetto corrente può ancora leggere il blob autorevole del tree
         // precedente, e le voci successive non devono ereditare un falso buio.
-        if (fresh?.status === 'ok') initInventory = fresh;
+        if (fresh?.status === 'ok' && !fresh.pathScoped) initInventory = fresh;
         else if (initInventoryRefresh === refreshRecord) initInventoryRefresh = null;
         return fresh;
       });
@@ -2039,8 +2097,10 @@ async function main() {
       initInventoryRefresh = refreshRecord;
       return promise;
     }
-    initInventory = await fetchInventory;
-    return initInventory;
+    const fresh = await fetchInventory;
+    if (fresh?.status === 'ok' && !fresh.pathScoped) initInventory = fresh;
+    else if (fresh?.status !== 'ok' && fresh?.status !== 'truncated' && !fresh?.pathScoped) initInventory = fresh;
+    return fresh;
   };
 
   for (const entry of manifest.files) {
@@ -2104,12 +2164,12 @@ async function main() {
       let inventoryPaths = null;
       let inventoryStatus = 'ok';
       if (!NO_PROVENANCE && siteBaseline !== null && siteBytes !== null) {
-        const inventory = await initSiteBlobIndex();
+        const inventory = await initSiteBlobIndex({ sitePath });
         const attested = await initInventoryVerdict({
           siteBytes,
           sitePath,
           inventory,
-          refresh: () => initSiteBlobIndex({ refresh: true }),
+          refresh: () => initSiteBlobIndex({ refresh: true, sitePath }),
         });
         inventoryPaths = attested.paths;
         inventoryStatus = attested.status;
@@ -2541,5 +2601,5 @@ if (process.argv[1] && process.argv[1].endsWith('loop-drift-check.mjs')) {
 // baseline con LA STESSA regola con cui la pesa il cron, altrimenti una voce
 // accettata in PR verrebbe dichiarata fantasma il mattino dopo — o peggio, il
 // contrario. Una seconda copia della regola lo renderebbe inevitabile.
-export { classify, parseOnly, onlyArgError, forceArgError, resolveInitTargets, initWriteVerdict, initAttestVerdict, initPassOutcome, initBaseline, initOnlyManifestUnchanged, localHash, ghostVerdict, strandedVerdict, provenanceRateLimitVerdict, corpusOnlyTwinVerdict, unmirrorableDepsVerdict, implicitPinnersVerdict, declaredAbsentCiters, crawlerContractIsActive, resetPinnerIndex, DECLARED_ABSENT_REGISTRY_REL, CRAWLER_CONTRACT_REL, DORMANT_WITH_CRAWLER_CONTRACT, resolvedLocalImports, resolveRelativeImport, gitBlobSha, scalarFingerprintVerdict, siteFile, sha256, repoHistoryMatch, checkBaselineProvenance, siteReusablePins, reusablePinVerdict, reusablePinResults, localWorkflowSources, REUSABLE_PIN_STATE, identicalSectionsVerdict, withIdenticalSections, SECTION_DRIFT_STATE };
+export { classify, parseOnly, onlyArgError, forceArgError, resolveInitTargets, initWriteVerdict, initAttestVerdict, sitePathBlobInventory, initInventoryVerdict, initPassOutcome, initBaseline, initOnlyManifestUnchanged, localHash, ghostVerdict, strandedVerdict, provenanceRateLimitVerdict, corpusOnlyTwinVerdict, unmirrorableDepsVerdict, implicitPinnersVerdict, declaredAbsentCiters, crawlerContractIsActive, resetPinnerIndex, DECLARED_ABSENT_REGISTRY_REL, CRAWLER_CONTRACT_REL, DORMANT_WITH_CRAWLER_CONTRACT, resolvedLocalImports, resolveRelativeImport, gitBlobSha, scalarFingerprintVerdict, siteFile, sha256, repoHistoryMatch, checkBaselineProvenance, siteReusablePins, reusablePinVerdict, reusablePinResults, localWorkflowSources, REUSABLE_PIN_STATE, identicalSectionsVerdict, withIdenticalSections, SECTION_DRIFT_STATE };
 export { countCheckFailedPins, noActionableSummary };
