@@ -73,11 +73,21 @@
 #   ARTICLE_PUSH_BATCH_SIZE — maximum destination paths per serialized commit;
 #       defaults to 256. It is a path bound so every caller shares the same
 #       Pages safety limit without duplicating it in workflow YAML.
+#   ARTICLE_PUSH_BATCH_GROUPS_FILE — optional TSV manifest (`group<TAB>path`)
+#       that keeps dependency paths together while the bounded batches are
+#       formed. Each supplied path must occur exactly once; a group may appear
+#       on multiple non-consecutive lines.
 #   ARTICLE_PUSH_STATUS_FILE — optional one-line outcome for the caller:
 #       `pushed`, `clean-no-op`, `remote-newer`, or `failed`.
+#   ARTICLE_PUSH_COMMIT_FILE — optional one-line candidate record
+#       (`parent<TAB>commit`) written before a push. The batch coordinator uses
+#       it to reconcile a commit that was pushed before a later gate failed.
 #   ARTICLE_PUSH_SKIPPED_PATHS_FILE — optional file receiving one relative path
 #       per line when the monotonic guard keeps a newer remote publication;
 #       when set, failure to reset or write this metadata fails the push.
+#   ARTICLE_PUSH_PAGES_WAIT_SECONDS — maximum time to wait for the Pages build
+#       belonging to each pushed commit; defaults to
+#       PAGES_BUILD_WAIT_BUDGET_SECONDS, then 600 when run standalone.
 #
 # Exit codes:
 #   0 — pushed, or a clean no-op (identical content already live, or the
@@ -93,6 +103,15 @@ article_push_batch_size="${ARTICLE_PUSH_BATCH_SIZE:-$DEFAULT_ARTICLE_PUSH_BATCH_
 if ! [[ "$article_push_batch_size" =~ ^[1-9][0-9]*$ ]]; then
   echo "::error::ARTICLE_PUSH_BATCH_SIZE must be a positive integer" >&2
   exit 1
+fi
+article_push_pages_wait_seconds="${ARTICLE_PUSH_PAGES_WAIT_SECONDS:-${PAGES_BUILD_WAIT_BUDGET_SECONDS:-600}}"
+if ! [[ "$article_push_pages_wait_seconds" =~ ^[1-9][0-9]*$ ]]; then
+  echo "::error::ARTICLE_PUSH_PAGES_WAIT_SECONDS must be a positive integer" >&2
+  exit 1
+fi
+article_push_pages_poll_seconds="${ARTICLE_PUSH_PAGES_POLL_SECONDS:-5}"
+if ! [[ "$article_push_pages_poll_seconds" =~ ^[1-9][0-9]*$ ]]; then
+  article_push_pages_poll_seconds=5
 fi
 
 # shard_pat_push — the shared token-push fallback for a refused deploy key.
@@ -238,6 +257,92 @@ if [ -n "$article_content_revision" ] && ! [[ "$article_content_revision" =~ ^[0
 fi
 
 remote_newer_paths=()
+
+pages_build_commit_matches() {
+  local expected="$1" observed="$2"
+  local expected_lc observed_lc
+  expected_lc="$(printf '%s' "$expected" | tr 'A-F' 'a-f')"
+  observed_lc="$(printf '%s' "$observed" | tr 'A-F' 'a-f')"
+  [ -n "$observed_lc" ] || return 1
+  [ "$expected_lc" = "$observed_lc" ] && return 0
+  case "$expected_lc" in
+    "$observed_lc"*) return 0 ;;
+  esac
+  case "$observed_lc" in
+    "$expected_lc"*) return 0 ;;
+  esac
+  return 1
+}
+
+# GitHub Pages starts a deployment for every push to a shard repository. A
+# successful `git push` is therefore only the hand-off, not the end of a
+# serialized batch: starting the next push while this build is queued/building
+# recreates the very race this helper is meant to remove. Local/file remotes
+# have no Pages API and deliberately skip this external wait; production shard
+# remotes are GitHub URLs and fail closed when their build cannot be observed.
+wait_for_pages_build() {
+  local pushed_commit="$1"
+  local pages_url pages_repo token body pages_status pages_commit
+  local deadline remaining
+
+  if ! pages_url="$(shard_https_push_url "$SHARD_REPO")"; then
+    echo "ℹ️ $section-$loc article shard: Pages build wait skipped for non-GitHub remote"
+    return 0
+  fi
+  pages_repo="${pages_url#https://github.com/}"
+  pages_repo="${pages_repo%.git}"
+  if ! [[ "$pages_repo" =~ ^[^/]+/[^/]+$ ]]; then
+    echo "::error::cannot derive the GitHub Pages repository from $SHARD_REPO" >&2
+    return 1
+  fi
+  token="$(shard_push_token_for_repo "$SHARD_REPO")"
+  if [ -z "$token" ]; then
+    echo "::error::cannot wait for Pages build of $pages_repo: owner-aware shard PAT missing" >&2
+    return 1
+  fi
+
+  deadline=$((SECONDS + article_push_pages_wait_seconds))
+  while :; do
+    body=''
+    if ! body="$(curl -sS --max-time 20 \
+      -H "Authorization: Bearer $token" \
+      -H 'Accept: application/vnd.github+json' \
+      "https://api.github.com/repos/$pages_repo/pages/builds/latest" 2>/dev/null)"; then
+      body=''
+    fi
+    pages_status="$(printf '%s' "$body" | jq -r '.status // ""' 2>/dev/null || true)"
+    pages_commit="$(printf '%s' "$body" | jq -r '
+      if (.commit | type) == "object" then (.commit.sha // "")
+      elif (.commit | type) == "string" then .commit
+      else (.sha // "") end
+    ' 2>/dev/null || true)"
+
+    if pages_build_commit_matches "$pushed_commit" "$pages_commit"; then
+      case "$pages_status" in
+        built)
+          echo "✅ $section-$loc article shard: Pages build for $pushed_commit is built"
+          return 0
+          ;;
+        errored|cancelled|failure|failed)
+          echo "::error::Pages build for $pages_repo commit $pushed_commit ended as '$pages_status'" >&2
+          return 1
+          ;;
+      esac
+    fi
+
+    remaining=$((deadline - SECONDS))
+    if [ "$remaining" -le 0 ]; then
+      echo "::error::timed out waiting for Pages build of $pages_repo commit $pushed_commit (latest status='${pages_status:-unknown}', commit='${pages_commit:-unknown}')" >&2
+      return 1
+    fi
+    echo "⏳ $section-$loc article shard: Pages build for $pushed_commit is '${pages_status:-not visible yet}' (waiting ${remaining}s)"
+    if [ "$remaining" -lt "$article_push_pages_poll_seconds" ]; then
+      sleep "$remaining"
+    else
+      sleep "$article_push_pages_poll_seconds"
+    fi
+  done
+}
 
 append_remote_newer_path() {
   local candidate="$1"
@@ -502,14 +607,170 @@ write_push_status() {
   printf '%s\n' "$1" > "$status_file" || true
 }
 
+write_push_commit() {
+  local commit_file="${ARTICLE_PUSH_COMMIT_FILE:-}"
+  [ -n "$commit_file" ] || return 0
+  if ! mkdir -p "$(dirname "$commit_file")" 2>/dev/null; then
+    echo "::error::unable to create commit-record directory for $commit_file" >&2
+    return 1
+  fi
+  if ! printf '%s\t%s\n' "$1" "$2" > "$commit_file"; then
+    echo "::error::unable to write commit record $commit_file" >&2
+    return 1
+  fi
+}
+
+rollback_serialized_publications() {
+  local rollback_root="$1" base_commit="$2"
+  shift 2
+  local -a candidate_commits=("$@")
+  local remote_head rollback_stage base_tree current_tree rollback_tree rollback_commit
+  local candidate candidate_found=0 clone_err
+
+  if [ -z "$base_commit" ] || [ "${#candidate_commits[@]}" -eq 0 ]; then
+    echo "::error::serialized push failed without a complete rollback base" >&2
+    return 1
+  fi
+
+  remote_head="$(git ${GIT_PAT_OPTS[@]+"${GIT_PAT_OPTS[@]}"} ls-remote "$SHARD_REPO" refs/heads/main 2>/dev/null | awk 'NR == 1 { print $1 }')"
+  if ! [[ "$remote_head" =~ ^[0-9a-fA-F]{40}$ ]]; then
+    echo "::error::cannot read $section-$loc shard HEAD for serialized-push rollback" >&2
+    return 1
+  fi
+  if [ "$remote_head" = "$base_commit" ]; then
+    echo "ℹ️ $section-$loc article shard: failed batch left the pre-batch tree live"
+    return 0
+  fi
+  for candidate in "${candidate_commits[@]}"; do
+    if [ "$candidate" = "$remote_head" ]; then
+      candidate_found=1
+      break
+    fi
+  done
+  if [ "$candidate_found" != 1 ]; then
+    echo "::error::refusing serialized-push rollback: shard HEAD $remote_head is not one of our batch commits" >&2
+    return 1
+  fi
+
+  rollback_stage="$rollback_root/rollback-stage"
+  rm -rf "$rollback_stage"
+  clone_err="$(mktemp)"
+  if ! git ${GIT_PAT_OPTS[@]+"${GIT_PAT_OPTS[@]}"} clone -q --depth 1 --filter=blob:none --no-checkout "$SHARD_REPO" "$rollback_stage" 2>"$clone_err"; then
+    echo "::error::serialized-push rollback clone failed: $(cat "$clone_err")" >&2
+    rm -f "$clone_err"
+    return 1
+  fi
+  rm -f "$clone_err"
+  if [ "$(git -C "$rollback_stage" rev-parse HEAD 2>/dev/null)" != "$remote_head" ]; then
+    echo "::error::refusing serialized-push rollback: shard moved during reconciliation clone" >&2
+    return 1
+  fi
+  if ! git ${GIT_PAT_OPTS[@]+"${GIT_PAT_OPTS[@]}"} -C "$rollback_stage" fetch --quiet --filter=blob:none --no-tags origin "$base_commit" >/dev/null 2>&1; then
+    echo "::error::serialized-push rollback could not fetch the pre-batch commit $base_commit" >&2
+    return 1
+  fi
+  if ! git -C "$rollback_stage" cat-file -e "$base_commit^{commit}" >/dev/null 2>&1 || \
+     ! git -C "$rollback_stage" merge-base --is-ancestor "$base_commit" "$remote_head" >/dev/null 2>&1; then
+    echo "::error::refusing serialized-push rollback: pre-batch commit $base_commit is not an ancestor of shard HEAD" >&2
+    return 1
+  fi
+
+  git -C "$rollback_stage" config user.email "${GIT_AUTHOR_EMAIL:-actions@users.noreply.github.com}" || return 1
+  git -C "$rollback_stage" config user.name "${GIT_AUTHOR_NAME:-GitHub Actions}" || return 1
+  base_tree="$(git -C "$rollback_stage" rev-parse "$base_commit^{tree}")" || return 1
+  current_tree="$(git -C "$rollback_stage" rev-parse "$remote_head^{tree}")" || return 1
+  if [ "$base_tree" = "$current_tree" ]; then
+    echo "ℹ️ $section-$loc article shard: batch commits changed history but not the published tree; no rollback commit needed"
+    return 0
+  fi
+  git -C "$rollback_stage" read-tree "$base_commit" || return 1
+  rollback_tree="$(git -C "$rollback_stage" write-tree --missing-ok)" || return 1
+  rollback_commit="$(git -C "$rollback_stage" commit-tree "$rollback_tree" -p "$remote_head" \
+    -m "$section-$loc article shard serialized-push reconciliation" \
+    -m "Restore the pre-batch tree after a later serialized batch failed.")" || return 1
+  if ! git ${GIT_PAT_OPTS[@]+"${GIT_PAT_OPTS[@]}"} -C "$rollback_stage" push "$SHARD_REPO" "$rollback_commit":main; then
+    echo "::error::serialized-push rollback push failed; the shard may need manual reconciliation" >&2
+    return 1
+  fi
+  if ! wait_for_pages_build "$rollback_commit"; then
+    echo "::error::serialized-push rollback reached git but its Pages build did not complete" >&2
+    return 1
+  fi
+  echo "✅ $section-$loc article shard: reconciled failed serialized push with rollback commit $rollback_commit"
+}
+
+load_serialized_batch_groups() {
+  local group_file="${ARTICLE_PUSH_BATCH_GROUPS_FILE:-}"
+  local key path found_index index
+  local expected_sorted actual_sorted
+  serialized_group_keys=()
+  serialized_group_paths=()
+
+  if [ -z "$group_file" ]; then
+    for index in "${!relpaths[@]}"; do
+      serialized_group_keys+=("path-$index")
+      serialized_group_paths+=("${relpaths[$index]}")
+    done
+    return 0
+  fi
+  if [ ! -f "$group_file" ]; then
+    echo "::error::ARTICLE_PUSH_BATCH_GROUPS_FILE is missing: $group_file" >&2
+    return 1
+  fi
+
+  while IFS=$'\t' read -r key path; do
+    [ -z "$key" ] && [ -z "$path" ] && continue
+    if [ -z "$key" ] || [ -z "$path" ] || [[ "$path" == *$'\n'* ]] || [[ "$path" == *$'\t'* ]]; then
+      echo "::error::invalid serialized batch group row in $group_file" >&2
+      return 1
+    fi
+    found_index=-1
+    for index in "${!serialized_group_keys[@]}"; do
+      if [ "${serialized_group_keys[$index]}" = "$key" ]; then
+        found_index="$index"
+        break
+      fi
+    done
+    if [ "$found_index" -lt 0 ]; then
+      serialized_group_keys+=("$key")
+      serialized_group_paths+=("$path")
+    else
+      serialized_group_paths[found_index]+=$'\n'"$path"
+    fi
+  done < "$group_file"
+
+  if [ "${#serialized_group_keys[@]}" -eq 0 ]; then
+    echo "::error::ARTICLE_PUSH_BATCH_GROUPS_FILE is empty" >&2
+    return 1
+  fi
+  expected_sorted="$(printf '%s\n' "${relpaths[@]}" | LC_ALL=C sort)"
+  actual_sorted=""
+  for index in "${!serialized_group_paths[@]}"; do
+    while IFS= read -r path; do
+      [ -n "$path" ] || continue
+      actual_sorted+="$path"$'\n'
+    done <<< "${serialized_group_paths[$index]}"
+  done
+  actual_sorted="$(printf '%s' "$actual_sorted" | LC_ALL=C sort)"
+  if [ "$expected_sorted" != "$actual_sorted" ]; then
+    echo "::error::serialized batch group manifest does not contain exactly the supplied paths" >&2
+    return 1
+  fi
+}
+
 run_serialized_batches() {
-  local batch_root batch_status batch_skipped batch_summary
+  local batch_root
   local aggregate_status='clean-no-op'
   local aggregate_warning_count=0
-  local status batch_warning_count skipped_path shown_count aggregate_names=''
-  local batch_size
-  local offset=0 batch_number=0
+  local skipped_path shown_count aggregate_names=''
+  local group_size group_path group_index batch_rc
+  local batch_number=0 current_batch_count=0
   local -a aggregate_skipped=()
+  local -a current_batch=()
+  local -a serialized_group_keys=()
+  local -a serialized_group_paths=()
+  local -a serialized_commits=()
+  local serialized_base_commit='' serialized_metadata_ok=1 serialized_chain_ok=1
 
   batch_root="$(mktemp -d "$RUNNER_TEMP/article-shard-batches.XXXXXX")" || {
     echo "::error::unable to create the serialized article-push batch directory" >&2
@@ -518,38 +779,72 @@ run_serialized_batches() {
   }
 
   echo "$section-$loc article shard: serializing ${#relpaths[@]} path(s) in batches of $article_push_batch_size"
-  while [ "$offset" -lt "${#relpaths[@]}" ]; do
-    batch_status="$batch_root/status-$batch_number"
-    batch_skipped="$batch_root/skipped-$batch_number"
-    batch_summary="$batch_root/summary-$batch_number"
-    batch_size="$article_push_batch_size"
-    if [ $((offset + batch_size)) -gt "${#relpaths[@]}" ]; then
-      batch_size=$((${#relpaths[@]} - offset))
+  if ! load_serialized_batch_groups; then
+    write_push_status 'failed'
+    rm -rf "$batch_root"
+    return 1
+  fi
+
+  record_serialized_commit() {
+    local record_file="$1" record parent commit
+    [ -s "$record_file" ] || return 0
+    record="$(head -n 1 "$record_file")"
+    IFS=$'\t' read -r parent commit <<< "$record"
+    if ! [[ "$parent" =~ ^[0-9a-fA-F]{40}$ && "$commit" =~ ^[0-9a-fA-F]{40}$ ]] || [ "$parent" = "$commit" ]; then
+      echo "::error::invalid serialized batch commit record: $record_file" >&2
+      serialized_metadata_ok=0
+      return 1
     fi
+    if [ -z "$serialized_base_commit" ]; then
+      serialized_base_commit="$parent"
+    elif [ "${serialized_commits[${#serialized_commits[@]}-1]:-}" != "$parent" ]; then
+      echo "::error::serialized batch chain moved outside this invocation; rollback is not safe" >&2
+      serialized_chain_ok=0
+    fi
+    serialized_commits+=("$commit")
+  }
+
+  serialized_batch_failure() {
+    local reason="$1"
+    echo "::error::$reason" >&2
+    if [ "${#serialized_commits[@]}" -gt 0 ]; then
+      if [ "$serialized_metadata_ok" != 1 ] || [ "$serialized_chain_ok" != 1 ]; then
+        echo "::error::serialized-push rollback skipped because its commit chain could not be proven" >&2
+      elif ! rollback_serialized_publications "$batch_root" "$serialized_base_commit" "${serialized_commits[@]}"; then
+        echo "::error::serialized-push rollback failed; no complete publication can be claimed" >&2
+      fi
+    fi
+    write_push_status 'failed'
+    rm -rf "$batch_root"
+    return 1
+  }
+
+  run_one_serialized_batch() {
+    local batch_status_file batch_skipped_file batch_summary_file batch_commit_file
+    local batch_status_value batch_warning_value
+    local -a batch_paths=("$@")
+    batch_status_file="$batch_root/status-$batch_number"
+    batch_skipped_file="$batch_root/skipped-$batch_number"
+    batch_summary_file="$batch_root/summary-$batch_number"
+    batch_commit_file="$batch_root/commit-$batch_number"
+    rm -f "$batch_status_file" "$batch_skipped_file" "$batch_summary_file" "$batch_commit_file"
 
     if ! ARTICLE_PUSH_BATCHED=1 \
-      ARTICLE_PUSH_STATUS_FILE="$batch_status" \
-      ARTICLE_PUSH_SKIPPED_PATHS_FILE="$batch_skipped" \
-      ARTICLE_PUSH_SUMMARY_FILE="$batch_summary" \
-      bash "$0" "$section" "$loc" "$scratch_dist_dir" "${relpaths[@]:offset:batch_size}"; then
-      echo "::error::serialized article-push batch $((batch_number + 1)) failed for $section-$loc" >&2
-      if [ -n "${ARTICLE_PUSH_SKIPPED_PATHS_FILE:-}" ] && [ -s "$batch_skipped" ]; then
-        mkdir -p "$(dirname "$ARTICLE_PUSH_SKIPPED_PATHS_FILE")" || true
-        cat "$batch_skipped" > "$ARTICLE_PUSH_SKIPPED_PATHS_FILE" || true
-      fi
-      write_push_status 'failed'
-      rm -rf "$batch_root"
+      ARTICLE_PUSH_STATUS_FILE="$batch_status_file" \
+      ARTICLE_PUSH_SKIPPED_PATHS_FILE="$batch_skipped_file" \
+      ARTICLE_PUSH_SUMMARY_FILE="$batch_summary_file" \
+      ARTICLE_PUSH_COMMIT_FILE="$batch_commit_file" \
+      bash "$0" "$section" "$loc" "$scratch_dist_dir" "${batch_paths[@]}"; then
+      record_serialized_commit "$batch_commit_file" || true
       return 1
     fi
+    record_serialized_commit "$batch_commit_file" || return 1
 
-    if [ ! -s "$batch_status" ]; then
-      echo "::error::serialized article-push batch $((batch_number + 1)) finished without a status" >&2
-      write_push_status 'failed'
-      rm -rf "$batch_root"
-      return 1
+    if [ ! -s "$batch_status_file" ]; then
+      return 2
     fi
-    status="$(tr -d '\r\n' < "$batch_status")"
-    case "$status" in
+    batch_status_value="$(tr -d '\r\n' < "$batch_status_file")"
+    case "$batch_status_value" in
       pushed)
         aggregate_status='pushed'
         ;;
@@ -559,49 +854,103 @@ run_serialized_batches() {
       clean-no-op)
         ;;
       *)
-        echo "::error::serialized article-push batch $((batch_number + 1)) returned invalid status '$status'" >&2
-        write_push_status 'failed'
-        rm -rf "$batch_root"
-        return 1
+        return 3
         ;;
     esac
 
-    if [ -s "$batch_skipped" ]; then
+    if [ -s "$batch_skipped_file" ]; then
       while IFS= read -r skipped_path; do
         [ -n "$skipped_path" ] || continue
         aggregate_skipped+=("$skipped_path")
-      done < "$batch_skipped"
+      done < "$batch_skipped_file"
     fi
-    if [ -s "$batch_summary" ]; then
-      batch_warning_count="$(cut -f4 "$batch_summary")"
-      if [[ "$batch_warning_count" =~ ^[0-9]+$ ]]; then
-        aggregate_warning_count=$((aggregate_warning_count + batch_warning_count))
+    if [ -s "$batch_summary_file" ]; then
+      batch_warning_value="$(cut -f4 "$batch_summary_file")"
+      if [[ "$batch_warning_value" =~ ^[0-9]+$ ]]; then
+        aggregate_warning_count=$((aggregate_warning_count + batch_warning_value))
       fi
     fi
-
-    offset=$((offset + batch_size))
     batch_number=$((batch_number + 1))
+    return 0
+  }
+
+  for group_index in "${!serialized_group_paths[@]}"; do
+    group_size=0
+    while IFS= read -r group_path; do
+      [ -n "$group_path" ] || continue
+      group_size=$((group_size + 1))
+    done <<< "${serialized_group_paths[$group_index]}"
+    if [ "$group_size" -gt "$article_push_batch_size" ]; then
+      serialized_batch_failure "dependency group '${serialized_group_keys[$group_index]}' has $group_size path(s), above ARTICLE_PUSH_BATCH_SIZE=$article_push_batch_size"
+      return $?
+    fi
+    if [ "$current_batch_count" -gt 0 ] && [ $((current_batch_count + group_size)) -gt "$article_push_batch_size" ]; then
+      run_one_serialized_batch "${current_batch[@]}"
+      batch_rc=$?
+      if [ "$batch_rc" -ne 0 ]; then
+        case "$batch_rc" in
+          2) serialized_batch_failure "serialized article-push batch $((batch_number + 1)) finished without a status" ;;
+          3) serialized_batch_failure "serialized article-push batch $((batch_number + 1)) returned an invalid status" ;;
+          *) serialized_batch_failure "serialized article-push batch $((batch_number + 1)) failed for $section-$loc" ;;
+        esac
+        return $?
+      fi
+      current_batch=()
+      current_batch_count=0
+    fi
+    while IFS= read -r group_path; do
+      [ -n "$group_path" ] || continue
+      current_batch+=("$group_path")
+    done <<< "${serialized_group_paths[$group_index]}"
+    current_batch_count=$((current_batch_count + group_size))
+    if [ "$current_batch_count" -ge "$article_push_batch_size" ]; then
+      run_one_serialized_batch "${current_batch[@]}"
+      batch_rc=$?
+      if [ "$batch_rc" -ne 0 ]; then
+        case "$batch_rc" in
+          2) serialized_batch_failure "serialized article-push batch $((batch_number + 1)) finished without a status" ;;
+          3) serialized_batch_failure "serialized article-push batch $((batch_number + 1)) returned an invalid status" ;;
+          *) serialized_batch_failure "serialized article-push batch $((batch_number + 1)) failed for $section-$loc" ;;
+        esac
+        return $?
+      fi
+      current_batch=()
+      current_batch_count=0
+    fi
   done
+  if [ "$current_batch_count" -gt 0 ]; then
+    run_one_serialized_batch "${current_batch[@]}"
+    batch_rc=$?
+    if [ "$batch_rc" -ne 0 ]; then
+      case "$batch_rc" in
+        2) serialized_batch_failure "serialized article-push batch $((batch_number + 1)) finished without a status" ;;
+        3) serialized_batch_failure "serialized article-push batch $((batch_number + 1)) returned an invalid status" ;;
+        *) serialized_batch_failure "serialized article-push batch $((batch_number + 1)) failed for $section-$loc" ;;
+      esac
+      return $?
+    fi
+    current_batch=()
+    current_batch_count=0
+  fi
+
+  if [ "${#current_batch[@]}" -gt 0 ]; then
+    serialized_batch_failure "serialized article-push batch planning left paths unprocessed"
+    return $?
+  fi
 
   if [ -n "${ARTICLE_PUSH_SKIPPED_PATHS_FILE:-}" ]; then
     mkdir -p "$(dirname "$ARTICLE_PUSH_SKIPPED_PATHS_FILE")" || {
-      echo "::error::unable to create skipped-path directory for $ARTICLE_PUSH_SKIPPED_PATHS_FILE" >&2
-      write_push_status 'failed'
-      rm -rf "$batch_root"
-      return 1
+      serialized_batch_failure "unable to create skipped-path directory for $ARTICLE_PUSH_SKIPPED_PATHS_FILE"
+      return $?
     }
     : > "$ARTICLE_PUSH_SKIPPED_PATHS_FILE" || {
-      echo "::error::unable to reset skipped-path file $ARTICLE_PUSH_SKIPPED_PATHS_FILE" >&2
-      write_push_status 'failed'
-      rm -rf "$batch_root"
-      return 1
+      serialized_batch_failure "unable to reset skipped-path file $ARTICLE_PUSH_SKIPPED_PATHS_FILE"
+      return $?
     }
     if [ "${#aggregate_skipped[@]}" -gt 0 ]; then
       printf '%s\n' "${aggregate_skipped[@]}" > "$ARTICLE_PUSH_SKIPPED_PATHS_FILE" || {
-        echo "::error::unable to write skipped-path file $ARTICLE_PUSH_SKIPPED_PATHS_FILE" >&2
-        write_push_status 'failed'
-        rm -rf "$batch_root"
-        return 1
+        serialized_batch_failure "unable to write skipped-path file $ARTICLE_PUSH_SKIPPED_PATHS_FILE"
+        return $?
       }
     fi
   fi
@@ -768,7 +1117,8 @@ _attempt() {
     return 0
   fi
 
-  local commit
+  local commit commit_parent
+  commit_parent="$(git -C "$stage" rev-parse HEAD)" || return 1
   if [ -n "$article_content_revision" ]; then
     commit="$(git -C "$stage" commit-tree "$new_tree" -p HEAD \
       -m "$section-$loc article fast-push (${GITHUB_SHA:-local}) — +$new_count new, ${#eligible_relpaths[@]} path(s) touched" \
@@ -785,11 +1135,19 @@ _attempt() {
   last_commit_skipped_newer_count="$last_skipped_newer_count"
   last_commit_skipped_newer_names="$last_skipped_newer_names"
   last_commit_skipped_newer_paths=("${last_skipped_newer_paths[@]}")
+  if ! write_push_commit "$commit_parent" "$commit"; then
+    return 1
+  fi
 
   # Never `push -f`: a non-fast-forward here means someone else (the periodic
   # full deploy's push-section-shard.sh, or another fast-path publish) pushed
   # in the meantime. Re-clone onto the new tip and rebuild, don't overwrite it.
   if git ${GIT_PAT_OPTS[@]+"${GIT_PAT_OPTS[@]}"} -C "$stage" push "$SHARD_REPO" "$commit":main; then
+    if ! wait_for_pages_build "$commit"; then
+      echo "::error::$section-$loc article shard: Pages did not complete for pushed commit $commit; refusing a concurrent retry" >&2
+      permanent_fail=1
+      return 1
+    fi
     echo "✅ $section-$loc article shard: pushed $commit ($new_count new file(s), filecount $prev_n -> $new_total)"
     last_push_status='pushed'
     return 0
@@ -816,8 +1174,13 @@ if [ "$ok" != 1 ] && [ "$permanent_fail" != 1 ] && [ -n "$last_commit" ]; then
   # non-fast-forward here still has to FAIL (a concurrent full deploy moved the
   # tip; the tree must be rebuilt on it, never overwritten).
   if restore_last_commit_skipped_newer_paths && shard_pat_push "$stage" "$SHARD_REPO" "$last_commit":main "$section-$loc article shard" 0; then
-    ok=1
-    last_push_status='pushed'
+    if wait_for_pages_build "$last_commit"; then
+      ok=1
+      last_push_status='pushed'
+    else
+      echo "::error::$section-$loc article shard: Pages did not complete for PAT-fallback commit $last_commit" >&2
+      permanent_fail=1
+    fi
   fi
 fi
 

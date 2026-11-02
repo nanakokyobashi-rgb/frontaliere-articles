@@ -985,8 +985,62 @@ jobs:
           # one slow GitHub Pages/shard operation cannot consume the whole job
           # before the other locales even start (#3115). Each child writes one
           # outcome file; the parent waits for every child and only then updates
-          # the shared state files, so a partial result can never be mistaken for
-          # a complete publish.
+          # the shared state files. Inside a locale the writer waits for the
+          # matching Pages build after every commit, and reconciles the pre-batch
+          # tree if a later dependency group cannot be published.
+          # The TSV pairs each article index with its bridge; legacy redirects
+          # are assigned by their canonical target, while archive/landing pages
+          # share one aggregate group so no dependency boundary is arbitrary.
+          write_article_push_groups() {
+            local output="$1" include_landing="$2" locale="$3" urls_file target group rel candidate url
+            urls_file="$RUNNER_TEMP/article-shard-push-$locale.urls"
+            : > "$output"
+            jq -r --arg l "$locale" '
+              .shards[] | select(.locale == $l) |
+              .articlePaths as $articles |
+              [range(0; ($articles | length)) as $i | ["article-\($i)", $articles[$i]]] |
+              .[] | @tsv
+            ' "$summary" >> "$output"
+            jq -r --arg l "$locale" '
+              .shards[] | select(.locale == $l) |
+              .articlePaths as $articles | .urls as $urls |
+              [range(0; ($articles | length)) as $i | [$urls[$i], "article-\($i)"]] |
+              .[] | @tsv
+            ' "$summary" > "$urls_file"
+            jq -r --arg l "$locale" '
+              .shards[] | select(.locale == $l) |
+              .bridgePaths as $bridges |
+              [range(0; ($bridges | length)) as $i | ["article-\($i)", $bridges[$i]]] |
+              .[] | @tsv
+            ' "$summary" >> "$output"
+
+            while IFS= read -r rel; do
+              [ -n "$rel" ] || continue
+              target="$(sed -n 's/.*<link rel="canonical" href="\([^"]*\)".*/\1/p' "$dist/$rel" | head -n 1)"
+              group=''
+              while IFS=$'\t' read -r url candidate; do
+                if [ "$url" = "$target" ]; then
+                  group="$candidate"
+                  break
+                fi
+              done < "$urls_file"
+              if [ -z "$group" ]; then
+                echo "::error::cannot associate legacy redirect $rel with its current article dependency group"
+                return 1
+              fi
+              printf '%s\t%s\n' "$group" "$rel" >> "$output"
+            done < <(jq -r --arg l "$locale" '.shards[] | select(.locale == $l) | .redirectPaths[]?' "$summary")
+
+            jq -r --arg l "$locale" '
+              .shards[] | select(.locale == $l) |
+              (.hubPaths // [])[] | ["aggregate", .] | @tsv
+            ' "$summary" >> "$output"
+            if [ "$include_landing" = true ] && [ -s "$RUNNER_TEMP/hub-landing.json" ]; then
+              jq -r --arg l "$locale" '
+                .pages[]? | select(.locale == $l) | ["aggregate", .path] | @tsv
+              ' "$RUNNER_TEMP/hub-landing.json" >> "$output"
+            fi
+          }
           locale_push_pids=()
           locale_push_locales=()
           for loc in it en de fr; do
@@ -1011,12 +1065,18 @@ jobs:
               locale_status="$RUNNER_TEMP/article-shard-push-$loc.status"
               locale_skipped="$RUNNER_TEMP/article-shard-push-$loc.skipped"
               locale_outcome="$RUNNER_TEMP/article-shard-push-$loc.outcome"
+              combined_groups="$RUNNER_TEMP/article-shard-push-$loc.groups"
+              fallback_groups="$RUNNER_TEMP/article-shard-push-$loc.article-groups"
               rm -f "$locale_status" "$locale_skipped" "$locale_outcome"
               export ARTICLE_PUSH_STATUS_FILE="$locale_status"
               export ARTICLE_PUSH_SKIPPED_PATHS_FILE="$locale_skipped"
+              write_article_push_groups "$combined_groups" true "$loc"
+              write_article_push_groups "$fallback_groups" false "$loc"
+              export ARTICLE_PUSH_BATCH_GROUPS_FILE="$combined_groups"
               combined_pushed=true
               if ! bash scripts/lib/push-article-shard-incremental.sh \
                    "$shard" "$loc" "$dist" "${paths[@]}" ${hpaths[@]+"${hpaths[@]}"}; then
+                export ARTICLE_PUSH_BATCH_GROUPS_FILE="$fallback_groups"
                 echo "::warning::combined push failed for $shard/$loc — retrying with the article alone (the hub stays stale)"
                 combined_pushed=false
                 rm -f "$locale_status" "$locale_skipped"

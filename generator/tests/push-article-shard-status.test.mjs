@@ -13,6 +13,7 @@ import { test } from 'node:test';
 
 const ROOT = resolve('.');
 const PUSHER = join(ROOT, 'scripts/lib/push-article-shard-incremental.sh');
+const WORKFLOW = join(ROOT, '.github/workflows/fast-publish-article.yml');
 const RELPATH = 'articolifrontaliere/status-no-op/index.html';
 
 function git(cwd, args, options = {}) {
@@ -139,4 +140,20 @@ test('il metadata remote-newer è obbligatorio e resta associato al commit del f
   assert.match(source, /if ! write_skipped_newer_paths; then\s+return 1/u);
   assert.match(source, /last_commit_skipped_newer_paths=\("\$\{last_skipped_newer_paths\[@\]\}"\)/u);
   assert.match(source, /restore_last_commit_skipped_newer_paths && shard_pat_push/u);
+});
+
+test('i batch Pages sono seriali, raggruppati e riconciliabili', () => {
+  const source = readFileSync(PUSHER, 'utf8');
+  const workflow = readFileSync(WORKFLOW, 'utf8');
+  assert.match(source, /wait_for_pages_build\s+"\$commit"/u);
+  assert.match(source, /shard_pat_push[\s\S]{0,240}wait_for_pages_build\s+"\$last_commit"/u);
+  assert.match(source, /pages\/builds\/latest/u);
+  assert.match(source, /ARTICLE_PUSH_COMMIT_FILE/u);
+  assert.match(source, /rollback_serialized_publications/u);
+  assert.match(source, /ARTICLE_PUSH_BATCH_GROUPS_FILE/u);
+  assert.match(source, /dependency group/u);
+  assert.match(workflow, /write_article_push_groups\(\)/u);
+  assert.match(workflow, /\.redirectPaths\[\]\?/u);
+  assert.match(workflow, /export ARTICLE_PUSH_BATCH_GROUPS_FILE="\$combined_groups"/u);
+  assert.match(workflow, /export ARTICLE_PUSH_BATCH_GROUPS_FILE="\$fallback_groups"/u);
 });
