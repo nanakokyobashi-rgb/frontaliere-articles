@@ -4,14 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vs::https://www.pomona.ch/story/821148/neue-zahlen-zu-den-bilateralen-iii-die-h%c3%bcrde-liegt-h%c3%b6her-als-bisher-gedacht": {
-      "section": "canton-vs",
-      "ts": 1793463665760
-    },
-    "canton-vs::https://www.pomona.ch/story/820945/wie-der-klimawandel-unsere-krankenkassenpr%c3%a4mien-in-die-h%c3%b6he-treibt": {
-      "section": "canton-vs",
-      "ts": 1793479426411
-    },
     "canton-vs::https://www.pomona.ch/story/820874/so-wohnen-zu-m%c3%bcssen-ist-unmenschlich-pensionierte-ukrainer-leben-in-der-schweiz-auf-engstem-raum": {
       "section": "canton-vs",
       "ts": 1793535616477
@@ -71,6 +63,10 @@
     "canton-vs::https://www.pomona.ch/story/821180/heftiger-machtkampf-um-polens-verfassungsgericht-entbrannt": {
       "section": "canton-vs",
       "ts": 1793634630195
+    },
+    "canton-vs::https://canal9.ch/de/der-neue-polizeijahrgang-beginnt-heute-mit-der-schule": {
+      "section": "canton-vs",
+      "ts": 1793663294821
     }
   }
 }
