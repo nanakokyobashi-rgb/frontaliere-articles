@@ -4,27 +4,27 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "servizi",
-  "updatedAt": "2026-11-01T13:11:05.408Z",
-  "contentHash": "84f848ca236a561aa3d215f548c4d62d17c7709dc33d3112625f7c5160533b73",
+  "updatedAt": "2026-11-02T09:20:10.429Z",
+  "contentHash": "b2cbf4624902e180103fc5b7f425540525da43a955595a51ddef16a097f50b2c",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-10-25T09:11:35.438Z",
+      "updatedAt": "2026-11-01T11:17:34.347Z",
       "keyFacts": 1
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-31T21:59:02.726Z",
+      "updatedAt": "2026-11-02T01:54:40.327Z",
       "keyFacts": 0
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-31T21:33:21.304Z",
+      "updatedAt": "2026-11-01T22:02:05.721Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-31T20:43:08.728Z",
+      "updatedAt": "2026-11-01T21:24:45.283Z",
       "keyFacts": 0
     }
   ],
@@ -44,7 +44,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "31",
-          "note": "offerta mediana 510 CHF"
+          "note": "offerta mediana 570 CHF"
         }
       ],
       "dataBlocks": [
@@ -71,18 +71,13 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-25T09:11:35.438Z"
+          "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
           "id": "farmacie-di-turno",
           "title": "Farmacie di turno",
           "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
           "items": [
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
-              "date": "2026-10-31T23:00:00.000Z"
-            },
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
@@ -107,11 +102,16 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-11-05T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-06T23:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-31T21:59:02.726Z"
+          "updatedAt": "2026-11-02T01:54:40.327Z"
         },
         {
           "id": "aste-targhe",
@@ -127,14 +127,14 @@
             },
             {
               "label": "ZH8050",
-              "value": "7200 CHF",
+              "value": "8400 CHF",
               "detail": "offerta attuale",
               "date": "2026-11-04T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43696"
             },
             {
               "label": "ZH10553",
-              "value": "1000 CHF",
+              "value": "1050 CHF",
               "detail": "offerta attuale",
               "date": "2026-11-04T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43697"
@@ -142,7 +142,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-31T21:33:21.304Z"
+          "updatedAt": "2026-11-01T22:02:05.721Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -180,7 +180,7 @@
               "url": "https://www.usz.ch/ein-schlaganfall-kennt-kein-alter/"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -260,7 +260,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "en": {
       "canton": "ZH",
@@ -277,7 +277,7 @@
         {
           "label": "Plate auctions running",
           "value": "31",
-          "note": "typical bid 510 CHF"
+          "note": "typical bid 570 CHF"
         }
       ],
       "dataBlocks": [
@@ -304,18 +304,13 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-25T09:11:35.438Z"
+          "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
           "id": "farmacie-di-turno",
           "title": "On-duty pharmacies",
           "description": "Upcoming duty shifts published by the canton’s official service.",
           "items": [
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
-              "date": "2026-10-31T23:00:00.000Z"
-            },
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
@@ -340,11 +335,16 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-11-05T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-06T23:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-31T21:59:02.726Z"
+          "updatedAt": "2026-11-02T01:54:40.327Z"
         },
         {
           "id": "aste-targhe",
@@ -360,14 +360,14 @@
             },
             {
               "label": "ZH8050",
-              "value": "7,200 CHF",
+              "value": "8,400 CHF",
               "detail": "current bid",
               "date": "2026-11-04T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43696"
             },
             {
               "label": "ZH10553",
-              "value": "1,000 CHF",
+              "value": "1,050 CHF",
               "detail": "current bid",
               "date": "2026-11-04T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43697"
@@ -375,7 +375,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-31T21:33:21.304Z"
+          "updatedAt": "2026-11-01T22:02:05.721Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -413,7 +413,7 @@
               "url": "https://www.usz.ch/ein-schlaganfall-kennt-kein-alter/"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -489,7 +489,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "de": {
       "canton": "ZH",
@@ -506,7 +506,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "31",
-          "note": "mittleres Gebot 510 CHF"
+          "note": "mittleres Gebot 570 CHF"
         }
       ],
       "dataBlocks": [
@@ -533,18 +533,13 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-25T09:11:35.438Z"
+          "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
           "id": "farmacie-di-turno",
           "title": "Notfallapotheken",
           "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
           "items": [
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
-              "date": "2026-10-31T23:00:00.000Z"
-            },
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
@@ -569,11 +564,16 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-11-05T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-06T23:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-31T21:59:02.726Z"
+          "updatedAt": "2026-11-02T01:54:40.327Z"
         },
         {
           "id": "aste-targhe",
@@ -589,14 +589,14 @@
             },
             {
               "label": "ZH8050",
-              "value": "7’200 CHF",
+              "value": "8’400 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-11-04T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43696"
             },
             {
               "label": "ZH10553",
-              "value": "1’000 CHF",
+              "value": "1’050 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-11-04T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43697"
@@ -604,7 +604,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-31T21:33:21.304Z"
+          "updatedAt": "2026-11-01T22:02:05.721Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -642,7 +642,7 @@
               "url": "https://www.usz.ch/ein-schlaganfall-kennt-kein-alter/"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -718,7 +718,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "fr": {
       "canton": "ZH",
@@ -735,7 +735,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "31",
-          "note": "offre centrale 510 CHF"
+          "note": "offre centrale 570 CHF"
         }
       ],
       "dataBlocks": [
@@ -762,18 +762,13 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-25T09:11:35.438Z"
+          "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
           "id": "farmacie-di-turno",
           "title": "Pharmacies de garde",
           "description": "Prochaines gardes publiées par le service officiel du canton.",
           "items": [
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
-              "date": "2026-10-31T23:00:00.000Z"
-            },
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
@@ -798,11 +793,16 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-11-05T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-11-06T23:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-31T21:59:02.726Z"
+          "updatedAt": "2026-11-02T01:54:40.327Z"
         },
         {
           "id": "aste-targhe",
@@ -818,14 +818,14 @@
             },
             {
               "label": "ZH8050",
-              "value": "7 200 CHF",
+              "value": "8 400 CHF",
               "detail": "offre actuelle",
               "date": "2026-11-04T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43696"
             },
             {
               "label": "ZH10553",
-              "value": "1 000 CHF",
+              "value": "1 050 CHF",
               "detail": "offre actuelle",
               "date": "2026-11-04T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43697"
@@ -833,7 +833,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-31T21:33:21.304Z"
+          "updatedAt": "2026-11-01T22:02:05.721Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -871,7 +871,7 @@
               "url": "https://www.usz.ch/ein-schlaganfall-kennt-kein-alter/"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -943,7 +943,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     }
   }
 }

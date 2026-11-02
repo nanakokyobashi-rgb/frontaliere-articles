@@ -4,12 +4,12 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "eventi",
-  "updatedAt": "2026-11-01T13:11:05.408Z",
-  "contentHash": "9c7168e1289e2763fe141d79c40df1b936b7043446d76bec57f54afe6a417bc8",
+  "updatedAt": "2026-11-02T09:20:10.429Z",
+  "contentHash": "428c03ab01fae8e310b4a73879630528a40929c64301f6339365e73fe5512063",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-31T14:21:36.178Z",
+      "updatedAt": "2026-11-02T02:24:34.417Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "16",
+          "value": "14",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,18 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Allerheiligen",
-              "detail": "Appenzell",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/allerheiligen/"
-            },
-            {
-              "label": "II. Kammermusikwettbewerb Paul Juon",
-              "detail": "Kunsthalle Appenzell, Appenzell — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/appenzell/ii-kammermusikwettbewerb-paul-juon_AHAjDqp"
-            },
             {
               "label": "Cuarteto Quiroga",
               "detail": "Casino Herisau, Herisau",
@@ -91,11 +79,23 @@
               "detail": "Haus zur Stickerei, Heiden",
               "date": "2026-11-08",
               "url": "https://www.guidle.com/it/events/music/heiden/art-und-music-louis-christ-also-known-as-louis-de-saint-gall_AQYBd2s"
+            },
+            {
+              "label": "Giovedì conferenza Museo Heiden / Hüben und Drüben",
+              "detail": "Museum Heiden, Heiden",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/heiden/donnerstagsvortrag-museum-heiden-hueben-und-drueben_AyuRZ9j"
+            },
+            {
+              "label": "Fiera \"A26",
+              "detail": "Appenzello",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fiera-a26/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/appenzello/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/appenzello/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "16",
+          "value": "14",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,18 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Allerheiligen",
-              "detail": "Appenzell",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/allerheiligen/"
-            },
-            {
-              "label": "II. Kammermusikwettbewerb Paul Juon",
-              "detail": "Kunsthalle Appenzell, Appenzell — ongoing, last day: 1 November 2026",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/appenzell/ii-kammermusikwettbewerb-paul-juon_AHAjDqp"
-            },
             {
               "label": "Cuarteto Quiroga",
               "detail": "Casino Herisau, Herisau",
@@ -196,11 +184,23 @@
               "detail": "Haus zur Stickerei, Heiden",
               "date": "2026-11-08",
               "url": "https://www.guidle.com/it/events/music/heiden/art-und-music-louis-christ-also-known-as-louis-de-saint-gall_AQYBd2s"
+            },
+            {
+              "label": "Thursday lecture Museum Heiden / Hüben und Drüben",
+              "detail": "Museum Heiden, Heiden",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/heiden/donnerstagsvortrag-museum-heiden-hueben-und-drueben_AyuRZ9j"
+            },
+            {
+              "label": "Trade fair \"A26\"",
+              "detail": "Appenzello",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fiera-a26/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/appenzell/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/appenzell/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "16",
+          "value": "14",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,18 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Allerheiligen",
-              "detail": "Appenzell",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/allerheiligen/"
-            },
-            {
-              "label": "II. Kammermusikwettbewerb Paul Juon",
-              "detail": "Kunsthalle Appenzell, Appenzell — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/appenzell/ii-kammermusikwettbewerb-paul-juon_AHAjDqp"
-            },
             {
               "label": "Cuarteto Quiroga",
               "detail": "Casino Herisau, Herisau",
@@ -301,11 +289,23 @@
               "detail": "Haus zur Stickerei, Heiden",
               "date": "2026-11-08",
               "url": "https://www.guidle.com/it/events/music/heiden/art-und-music-louis-christ-also-known-as-louis-de-saint-gall_AQYBd2s"
+            },
+            {
+              "label": "Donnerstagsvortrag Museum Heiden / Hüben und Drüben",
+              "detail": "Museum Heiden, Heiden",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/heiden/donnerstagsvortrag-museum-heiden-hueben-und-drueben_AyuRZ9j"
+            },
+            {
+              "label": "Gewerbemesse «A26»",
+              "detail": "Appenzello",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fiera-a26/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/appenzell/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/appenzell/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "16",
+          "value": "14",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,18 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Allerheiligen",
-              "detail": "Appenzell",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/allerheiligen/"
-            },
-            {
-              "label": "II. Kammermusikwettbewerb Paul Juon",
-              "detail": "Kunsthalle Appenzell, Appenzell — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/appenzell/ii-kammermusikwettbewerb-paul-juon_AHAjDqp"
-            },
             {
               "label": "Cuarteto Quiroga",
               "detail": "Casino Herisau, Herisau",
@@ -406,11 +394,23 @@
               "detail": "Haus zur Stickerei, Heiden",
               "date": "2026-11-08",
               "url": "https://www.guidle.com/it/events/music/heiden/art-und-music-louis-christ-also-known-as-louis-de-saint-gall_AQYBd2s"
+            },
+            {
+              "label": "Conférence du jeudi au musée de Heiden / Hüben und Drüben",
+              "detail": "Museum Heiden, Heiden",
+              "date": "2026-11-12",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/heiden/donnerstagsvortrag-museum-heiden-hueben-und-drueben_AyuRZ9j"
+            },
+            {
+              "label": "Foire commerciale \"A26",
+              "detail": "Appenzello",
+              "date": "2026-11-13",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/fiera-a26/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/appenzell/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/appenzell/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     }
   }
 }

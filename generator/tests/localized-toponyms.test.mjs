@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 
 import {
   LOCALIZED_TOPONYM_LOCALES,
+  LOCALIZED_TOPONYM_FIELD_SEPARATOR,
   LOCALIZED_TOPONYMS,
   OFFICIAL_NAME_MARKERS,
   createLocalizedToponymSourceProfile,
@@ -18,7 +19,10 @@ import {
   validateLocalizedToponymTable,
 } from '../scripts/lib/localized-toponyms.mjs';
 import { extractSlugFallbackLocales } from '../scripts/lib/slug-fallback-provenance.mjs';
-import { scanStaticArticleFieldEntries } from '../scripts/lib/static-article-field-scanner.mjs';
+import {
+  encodeStaticArticleFieldValue,
+  scanStaticArticleFieldEntries,
+} from '../scripts/lib/static-article-field-scanner.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -92,27 +96,133 @@ test('rileva un esonimo copiato e accetta la forma giusta', () => {
   );
 });
 
-test('lo scanner dei literal articolo è lineare e conserva gli escape', () => {
-  const source = String.raw`
+function articleTranslationSource(properties) {
+  return `const data: Record<string, string> = {\n${properties}\n};\nexport default data;\n`;
+}
+
+test('lo scanner dei literal articolo conserva offset, raw e valore decodificato', () => {
+  const source = articleTranslationSource(String.raw`
     // 'blog.article.ignored.title': 'commento';
-    const data = {
-      'blog.article.demo.body1': 'L\'articolo su Lucerna', /* separatore */
-      "blog.article.demo.title": "Titolo",
-      'blog.article.invalid.body1': 'manca il delimitatore';
-    };
-  `;
+    'blog.article.demo.body1': 'L\'articolo su Lucerna', /* separatore */
+    "blog.article.demo.title": "Titolo",
+  `);
   assert.deepEqual(
-    scanStaticArticleFieldEntries(source).map(({ articleId, field, rawValue, valueStart, valueEnd }) => ({
-      articleId, field, rawValue, value: source.slice(valueStart, valueEnd),
+    scanStaticArticleFieldEntries(source).map(({ articleId, field, rawValue, value, valueStart, valueEnd }) => ({
+      articleId, field, rawValue, value, raw: source.slice(valueStart, valueEnd),
     })),
     [
       {
         articleId: 'demo', field: 'body1', rawValue: String.raw`L\'articolo su Lucerna`,
-        value: String.raw`L\'articolo su Lucerna`,
+        value: "L'articolo su Lucerna",
+        raw: String.raw`L\'articolo su Lucerna`,
       },
-      { articleId: 'demo', field: 'title', rawValue: 'Titolo', value: 'Titolo' },
+      { articleId: 'demo', field: 'title', rawValue: 'Titolo', value: 'Titolo', raw: 'Titolo' },
     ],
   );
+});
+
+test('il controllo interpreta gli esonimi codificati con escape Unicode', () => {
+  const source = articleTranslationSource(String.raw`'blog.article.escaped.body1': 'The canton of B\u0065rne'`);
+  const [entry] = scanStaticArticleFieldEntries(source);
+  assert.equal(entry.value, 'The canton of Berne');
+  assert.deepEqual(
+    findLocalizedToponymMismatches({
+      sourceText: 'Il cantone di Berna.',
+      targetText: entry.value,
+      locale: 'en',
+    }),
+    [{ code: 'BE', type: 'canton', locale: 'en', form: 'Berne', expected: 'Bern' }],
+  );
+});
+
+test('lo scanner AST ignora testo a chiave nei valori e nei commenti', () => {
+  const source = articleTranslationSource([
+    "  'blog.article.valid.title': 'Titolo',",
+    "  'note': \"'blog.article.quoted.title': 'Ignora',\",",
+    "  'pattern': \"/'blog.article.regex.title':\\\\s*'Ignora'/\",",
+    "  'example': `{'blog.article.template.title': 'Ignora'}`,",
+    "  'blog.article.template-value.body1': `Testo statico`,",
+    "  // 'blog.article.line-comment.title': 'Ignora',",
+    "  /* 'blog.article.block-comment.title': 'Ignora', */",
+  ].join('\n'));
+
+  assert.deepEqual(
+    scanStaticArticleFieldEntries(source).map(({ articleId, field, rawValue, value }) => ({
+      articleId, field, rawValue, value,
+    })),
+    [
+      { articleId: 'valid', field: 'title', rawValue: 'Titolo', value: 'Titolo' },
+      {
+        articleId: 'template-value', field: 'body1', rawValue: 'Testo statico', value: 'Testo statico',
+      },
+    ],
+  );
+  assert.throws(
+    () => scanStaticArticleFieldEntries(articleTranslationSource("'blog.article.nested.title': { value: 'non statico' }")),
+    /must have a static string literal value/,
+  );
+});
+
+test('lo scanner fallisce chiuso sulle diagnostiche sintattiche e sui valori dinamici', () => {
+  assert.throws(
+    () => scanStaticArticleFieldEntries(articleTranslationSource("'blog.article.bad.title': 'non chiuso")),
+    /Unresolved TypeScript syntax diagnostic in article-source\.ts/,
+  );
+  assert.deepEqual(
+    scanStaticArticleFieldEntries(articleTranslationSource(
+      "'blog.article.bad.title': 'valore' 'blog.article.hidden.title': 'Titolo',",
+    )).map(({ articleId, field, rawValue }) => ({ articleId, field, rawValue })),
+    [
+      { articleId: 'bad', field: 'title', rawValue: 'valore' },
+      { articleId: 'hidden', field: 'title', rawValue: 'Titolo' },
+    ],
+  );
+  assert.throws(
+    () => scanStaticArticleFieldEntries(articleTranslationSource("'blog.article.bad.title': makeValue()")),
+    /must have a static string literal value/,
+  );
+  assert.throws(
+    () => scanStaticArticleFieldEntries(articleTranslationSource("'blog.article.bad.title': `value ${dynamic}`")),
+    /must have a static string literal value/,
+  );
+});
+
+test('lo scanner rifiuta membri dinamici e chiavi computed nella mappa articolo', () => {
+  const sourceWithArticleField = "'blog.article.demo.title': 'Titolo'";
+  for (const member of [
+    '...localizedFields',
+    '[getArticleKey()]: \'Valore dinamico\'',
+    "'blog.article.dynamic.title'() { return 'Titolo'; }",
+  ]) {
+    assert.throws(
+      () => scanStaticArticleFieldEntries(articleTranslationSource(`${sourceWithArticleField}, ${member}`)),
+      /article translation records must contain only static property assignments|computed article translation keys are not supported/,
+    );
+  }
+
+  assert.throws(
+    () => scanStaticArticleFieldEntries(articleTranslationSource("['blog.article.computed.title']: 'Titolo'")),
+    /computed article translation keys are not supported/,
+  );
+});
+
+test('lo scanner usa il decoder canonico e preserva gli escape legacy quando ripara', () => {
+  const source = articleTranslationSource(String.raw`'blog.article.demo.body1': 'Notizia \q su Berna'`);
+  const [entry] = scanStaticArticleFieldEntries(source);
+  assert.equal(entry.value, String.raw`Notizia \q su Berna`);
+
+  const next = entry.value.replace('Berna', 'Bern');
+  const encoded = encodeStaticArticleFieldValue(next, entry.quote);
+  const rewritten = articleTranslationSource(`'blog.article.demo.body1': ${entry.quote}${encoded}${entry.quote}`);
+  assert.equal(scanStaticArticleFieldEntries(rewritten)[0].value, String.raw`Notizia \q su Bern`);
+});
+
+test('la codifica conserva il valore cooked dei template statici', () => {
+  const original = "Line one\nD\u00e9tail `quoted` \\ path ${literal}";
+  const quote = String.fromCharCode(96);
+  const encoded = encodeStaticArticleFieldValue(original, quote);
+  const source = articleTranslationSource(`'blog.article.template.body1': ${quote}${encoded}${quote}`);
+  assert.equal(scanStaticArticleFieldEntries(source)[0].value, original);
 });
 
 test('il profilo della sorgente riusa l analisi senza cambiare il verdetto', () => {
@@ -123,6 +233,15 @@ test('il profilo della sorgente riusa l analisi senza cambiare il verdetto', () 
   assert.deepEqual(
     findLocalizedToponymMismatches({ sourceText, targetText, locale: 'en', sourceProfile }),
     expected,
+  );
+  assert.throws(
+    () => findLocalizedToponymMismatches({
+      sourceText: 'Notizia sul cantone di Basilea.',
+      targetText,
+      locale: 'en',
+      sourceProfile,
+    }),
+    /sourceProfile deve appartenere allo stesso sourceText/,
   );
 });
 
@@ -331,17 +450,58 @@ test('la proiezione article-wide copre imageAlt, slug e SEO oltre al body', () =
 });
 
 test('la proiezione da file raccoglie body, FAQ e meta dello stesso articolo', () => {
-  const body = [
+  const body = articleTranslationSource([
     "'blog.article.demo.body1': 'Notizia su Lucerna',",
     "'blog.article.demo.faq': '[{\\\"q\\\":\\\"Lucerna\\\"}]',",
     "'blog.article.other.body1': 'Non entra',",
-  ].join('\n');
-  const meta = "'blog.article.demo.imageAlt': 'Lucerna sul lago',";
+    "'example': \"'blog.article.demo.fake': 'Ignora'\",",
+    "// 'blog.article.demo.comment': 'Ignora',",
+  ].join('\n'));
+  const meta = articleTranslationSource("'blog.article.demo.imageAlt': 'Lucerna sul lago',");
   assert.match(extractArticleProjectionText(body, 'demo'), /Notizia su Lucerna/);
   assert.match(extractArticleProjectionText(body, 'demo'), /Lucerna/);
   assert.doesNotMatch(extractArticleProjectionText(body, 'demo', { excludeFaq: true }), /q/);
   assert.equal(extractArticleProjectionText(meta, 'demo'), 'Lucerna sul lago');
   assert.equal(extractArticleProjectionText(body, 'other'), 'Non entra');
+  assert.equal(extractArticleProjectionText(body, 'demo', { fields: ['fake', 'comment'] }), '');
+});
+
+test('la proiezione da file rifiuta valori articolo dinamici', () => {
+  const source = articleTranslationSource("'blog.article.demo.body1': `Notizia su ${place}`");
+  assert.throws(() => extractArticleProjectionText(source, 'demo'), /static string literal value/);
+});
+
+test('i campi adiacenti non formano un toponimo composito', () => {
+  const sourceText = ['San', 'Gallo'].join(LOCALIZED_TOPONYM_FIELD_SEPARATOR);
+  assert.deepEqual(
+    findLocalizedToponymMismatches({ sourceText, targetText: 'San Gallo', locale: 'en' }),
+    [],
+  );
+  assert.deepEqual(
+    findLocalizedToponymMismatches({ sourceText: 'San Gallo', targetText: 'San Gallo', locale: 'en' }),
+    [{ code: 'SG', type: 'canton', locale: 'en', form: 'San Gallo', expected: 'St. Gallen' }],
+  );
+});
+
+test('il gate pubblico non compone toponimi fra campi e FAQ', () => {
+  const separatedSource = findArticleLocalizedToponymMismatches({
+    content: {
+      it: { title: 'San', faq: [{ q: 'Gallo' }] },
+      en: { title: 'San Gallo' },
+    },
+  });
+  assert.deepEqual(separatedSource, []);
+
+  const contiguousSource = findArticleLocalizedToponymMismatches({
+    content: {
+      it: { title: 'San Gallo' },
+      en: { title: 'San Gallo' },
+    },
+  });
+  assert.deepEqual(
+    contiguousSource,
+    [{ code: 'SG', type: 'canton', locale: 'en', form: 'San Gallo', expected: 'St. Gallen' }],
+  );
 });
 
 test('prompt e gate condividono tutte le forme della tabella', () => {
@@ -522,10 +682,6 @@ test('ripara il cantone Ticino solo fuori dai nomi ufficiali e solo dove serve',
   );
 });
 
-function unescapeTsValue(value) {
-  return value.replace(/\\([\\'"\\\\])/gu, '$1');
-}
-
 function walkTypeScriptFiles(directory, output = []) {
   for (const entry of readdirSync(directory, { withFileTypes: true })) {
     const file = path.join(directory, entry.name);
@@ -557,13 +713,13 @@ function collectCorpusEntries() {
     const locale = corpusLocale(file);
     if (!locale) continue;
     const source = readFileSync(file, 'utf8');
-    for (const match of scanStaticArticleFieldEntries(source)) {
+    for (const match of scanStaticArticleFieldEntries(source, path.relative(ROOT, file))) {
       const articleId = match.articleId;
       const entries = byLocale.get(locale).get(articleId) || [];
       entries.push({
         key: `${articleId}|${match.field}`,
         field: match.field,
-        value: unescapeTsValue(match.rawValue),
+        value: match.value,
         file,
       });
       byLocale.get(locale).set(articleId, entries);
@@ -594,7 +750,8 @@ test('il corpus storico e le 24 sezioni cantonali non copiano esonimi fra lingue
   let offenderCount = 0;
   const sampleOffenders = [];
   for (const [articleId, sourceEntries] of italian) {
-    const sourceText = [...new Set(sourceEntries.map((entry) => entry.value))].join('\n');
+    const sourceText = [...new Set(sourceEntries.map((entry) => entry.value))]
+      .join(LOCALIZED_TOPONYM_FIELD_SEPARATOR);
     const sourceProfile = createLocalizedToponymSourceProfile(sourceText);
     for (const locale of ['en', 'de', 'fr']) {
       const targetEntries = byLocale.get(locale).get(articleId) || [];
@@ -635,7 +792,7 @@ test('il corpus storico e le 24 sezioni cantonali non copiano esonimi fra lingue
   ].join('\n'));
 });
 
-test('il gate di generazione importa e invoca il controllo prima della scrittura', () => {
+test('il gate bounded invoca il controllo prima della scrittura e mantiene attivo l audit globale', () => {
   const source = readFileSync(path.join(ROOT, 'generator/scripts/create-article.mjs'), 'utf8');
   assert.match(source, /findArticleLocalizedToponymMismatches/);
   assert.match(source, /assertArticlePassesFactualityGates\(data, options = \{\}\)/);
@@ -662,7 +819,13 @@ test('il gate di generazione importa e invoca il controllo prima della scrittura
 
   const workflow = readFileSync(path.join(ROOT, '.github/workflows/generate-article.yml'), 'utf8');
   assert.match(workflow, /generator\/tests\/wrong-latin-language-adoption\.test\.mjs/);
-  assert.doesNotMatch(workflow, /generator\/tests\/localized-toponyms\.test\.mjs/);
+  assert.doesNotMatch(
+    workflow.split('\n').filter((line) => !line.trim().startsWith('#')).join('\n'),
+    /generator\/tests\/localized-toponyms\.test\.mjs/,
+    'l audit storico non deve essere eseguito nel gate per-articolo',
+  );
+  const generatorCi = readFileSync(path.join(ROOT, '.github/workflows/generator-ci.yml'), 'utf8');
+  assert.match(generatorCi, /node --test 'generator\/tests\/\*\.test\.mjs'/);
   const contentGate = readFileSync(path.join(ROOT, 'scripts/ci/content-gates-main.mjs'), 'utf8');
   assert.match(contentGate, /["']generator\/tests\/localized-toponyms\.test\.mjs["']/);
 });

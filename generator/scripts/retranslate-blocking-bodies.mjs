@@ -202,7 +202,9 @@ import { stripLeakedTitleMarkerLine, diffIsExactlyRemovedLines } from './lib/str
 import { normalizePromptSectionHeadings, applyConvertedHeadings } from './lib/normalize-prompt-section-headings.mjs';
 import { detectLanguage, detectLanguageWithConfidence } from './lib/detect-language.mjs';
 import {
+  LOCALIZED_TOPONYM_FIELD_SEPARATOR,
   assertLocalizedToponymPair,
+  createLocalizedToponymSourceProfile,
   extractArticleProjectionText,
   LOCALIZED_TOPONYM_LOCALES,
   LOCALIZED_TOPONYMS,
@@ -245,7 +247,7 @@ function articleSourceProjection(filePath, source, articleId) {
   return [
     extractArticleProjectionText(source, articleId),
     articleMetaProjection(filePath, articleId),
-  ].filter(Boolean).join('\n');
+  ].filter(Boolean).join(LOCALIZED_TOPONYM_FIELD_SEPARATOR);
 }
 
 /** Campi body effettivamente emessi per questo articolo dal writer. */
@@ -2853,6 +2855,7 @@ export async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeT
   const itSrc = readFileSync(itPath, 'utf8');
   let trSrc = readFileSync(trPath, 'utf8');
   const sourceProjection = articleSourceProjection(itPath, itSrc, pair.id);
+  const sourceProfile = createLocalizedToponymSourceProfile(sourceProjection);
 
   const availableBodyFields = bodyFieldsForSource(itSrc, pair.id);
   const repairFields = pair.structural && Array.isArray(pair.fields) && pair.fields.length > 0
@@ -2983,6 +2986,7 @@ export async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeT
         sourceText: sourceProjection,
         targetText: sanitized,
         locale: pair.locale,
+        sourceProfile,
       }).text;
       translationFieldResults.push({ field: f, status: 'translated' });
     }
@@ -3052,16 +3056,17 @@ export async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeT
       const targetBodyProjection = BODY_FIELDS
         .map((field) => checkedSections[field] ?? extractArticleProjectionText(trSrc, pair.id, { fields: [field] }))
         .filter(Boolean)
-        .join('\n');
+        .join(LOCALIZED_TOPONYM_FIELD_SEPARATOR);
       assertLocalizedToponymPair({
         sourceText: sourceProjection,
         targetText: [
           targetBodyProjection,
           extractArticleProjectionText(trSrc, pair.id, { fields: ['faq'] }),
           articleMetaProjection(trPath, pair.id),
-        ].filter(Boolean).join('\n'),
+        ].filter(Boolean).join(LOCALIZED_TOPONYM_FIELD_SEPARATOR),
         locale: pair.locale,
         context: `${pair.id}/${pair.locale}`,
+        sourceProfile,
       });
     } catch (error) {
       localizedToponymError = error;

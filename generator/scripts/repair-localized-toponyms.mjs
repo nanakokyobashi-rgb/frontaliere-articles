@@ -17,18 +17,22 @@ import { fileURLToPath } from 'node:url';
 
 import {
   LOCALIZED_TOPONYM_LOCALES,
-  createLocalizedToponymSourceProfile,
+  LOCALIZED_TOPONYM_FIELD_SEPARATOR,
+  createLocalizedToponymSourceProfileCache,
   replaceLocalizedToponymMismatches,
 } from './lib/localized-toponyms.mjs';
 import { extractSlugFallbackLocales } from './lib/slug-fallback-provenance.mjs';
-import { scanStaticArticleFieldEntries } from './lib/static-article-field-scanner.mjs';
+import {
+  encodeStaticArticleFieldValue,
+  scanStaticArticleFieldEntries,
+} from './lib/static-article-field-scanner.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const CONTENT_ROOT = path.join(ROOT, 'content');
 const WRITE = process.argv.includes('--write');
 let writeTmpSeq = 0;
 const SLUG_ENTRY_RE = /['"]([^'"]+)['"]\s*:\s*\{([^{}]*)\}/gu;
-const SLUG_PROPERTY_RE = /\b(it|en|de|fr)\s*:\s*(['"])((?:\\.|(?!\2)[^\r\n])*?)\2/gu;
+const SLUG_PROPERTY_RE = /\b(it|en|de|fr)\s*:\s*(['"])((?:\\.|(?!\2)[^\\\r\n])*?)\2/gu;
 
 function walk(directory, output = []) {
   for (const entry of readdirSync(directory, { withFileTypes: true })) {
@@ -72,7 +76,6 @@ const fileSources = new Map();
 const sourceValues = new Map();
 const targets = [];
 const fallbackLocalesBySlugFile = new Map();
-const sourceProfilesByArticle = new Map();
 
 for (const file of files.filter(isSlugFile)) {
   const fallbackLocales = extractSlugFallbackLocales(readFileSync(file, 'utf8'));
@@ -85,32 +88,24 @@ function addSourceValue(articleId, value) {
   sourceValues.set(articleId, values);
 }
 
-function sourceProfilesForArticle(articleId) {
-  if (sourceProfilesByArticle.has(articleId)) return sourceProfilesByArticle.get(articleId);
-  const profiles = [...(sourceValues.get(articleId) || [])].map((sourceText) => ({
-    sourceText,
-    sourceProfile: createLocalizedToponymSourceProfile(sourceText),
-  }));
-  sourceProfilesByArticle.set(articleId, profiles);
-  return profiles;
-}
-
 for (const file of files) {
   const locale = localeForFile(file);
   const source = readFileSync(file, 'utf8');
   fileSources.set(file, source);
   if (locale) {
-    for (const match of scanStaticArticleFieldEntries(source)) {
+    for (const match of scanStaticArticleFieldEntries(source, path.relative(ROOT, file))) {
       const key = `${match.articleId}|${match.field}`;
       if (locale === 'it') {
-        addSourceValue(match.articleId, match.rawValue);
+        addSourceValue(match.articleId, match.value);
       } else {
         targets.push({
           file,
           locale,
           articleId: match.articleId,
           key,
-          raw: match.rawValue,
+          raw: match.value,
+          quote: match.quote,
+          kind: 'article',
           start: match.valueStart,
           end: match.valueEnd,
         });
@@ -146,6 +141,13 @@ for (const file of files) {
 const editsByFile = new Map();
 const byLocale = new Map(LOCALIZED_TOPONYM_LOCALES.filter((locale) => locale !== 'it').map((locale) => [locale, 0]));
 const byForm = new Map();
+const sourceTextByArticle = new Map(
+  [...sourceValues].map(([articleId, values]) => [
+    articleId,
+    [...values].join(LOCALIZED_TOPONYM_FIELD_SEPARATOR),
+  ]),
+);
+const sourceProfileFor = createLocalizedToponymSourceProfileCache();
 let fieldsChanged = 0;
 let replacements = 0;
 let skippedProvisionalSlugs = 0;
@@ -159,32 +161,31 @@ for (const target of targets) {
     skippedProvisionalSlugs += 1;
     continue;
   }
-  const references = sourceProfilesForArticle(target.articleId);
-  if (references.length === 0) continue;
-  let next = target.raw;
-  const issues = new Map();
-  for (const { sourceText, sourceProfile } of references) {
-    const result = replaceLocalizedToponymMismatches({
-      sourceText,
-      targetText: next,
-      locale: target.locale,
-      slug: target.kind === 'slug',
-      sourceProfile,
-    });
-    next = result.text;
-    replacements += result.replacements;
-    for (const issue of result.issues) {
-      const issueKey = `${issue.code}|${issue.locale}|${issue.form}|${issue.expected}`;
-      issues.set(issueKey, issue);
-      const count = result.replacementCounts.get(issueKey) || 0;
-      byLocale.set(target.locale, (byLocale.get(target.locale) || 0) + count);
-      const formKey = `${target.locale}|${issue.form}|${issue.expected}`;
-      byForm.set(formKey, (byForm.get(formKey) || 0) + count);
-    }
+  const sourceText = sourceTextByArticle.get(target.articleId);
+  if (!sourceText) continue;
+  const result = replaceLocalizedToponymMismatches({
+    sourceText,
+    targetText: target.raw,
+    locale: target.locale,
+    slug: target.kind === 'slug',
+    sourceProfile: sourceProfileFor(sourceText),
+  });
+  const next = result.text;
+  replacements += result.replacements;
+  for (const issue of result.issues) {
+    const issueKey = `${issue.code}|${issue.locale}|${issue.form}|${issue.expected}`;
+    const count = result.replacementCounts.get(issueKey) || 0;
+    byLocale.set(target.locale, (byLocale.get(target.locale) || 0) + count);
+    const formKey = `${target.locale}|${issue.form}|${issue.expected}`;
+    byForm.set(formKey, (byForm.get(formKey) || 0) + count);
   }
   if (next === target.raw) continue;
   const edits = editsByFile.get(target.file) || [];
-  edits.push({ start: target.start, end: target.end, value: next });
+  edits.push({
+    start: target.start,
+    end: target.end,
+    value: target.kind === 'article' ? encodeStaticArticleFieldValue(next, target.quote) : next,
+  });
   editsByFile.set(target.file, edits);
   fieldsChanged += 1;
 }
