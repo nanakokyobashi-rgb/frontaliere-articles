@@ -13,6 +13,7 @@
  * importa il parser TypeScript. Legge soltanto la forma emessa dagli writer
  * del corpus (chiavi quoted e stringhe single/double-quoted/static template literals).
  */
+import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -51,6 +52,50 @@ function registryEntryCount(root, rel) {
 }
 export const LOCALES = Object.freeze(['it', 'en', 'de', 'fr']);
 export const TARGET_LOCALES = Object.freeze(['en', 'de', 'fr']);
+
+/**
+ * Decode `git status --porcelain=v1 -z` without losing paths that contain
+ * whitespace. Rename/copy records carry a second NUL-delimited path; keeping
+ * both is harmless for the body-file selector and preserves fail-closed
+ * behaviour if a writer ever renames a generated body.
+ */
+export function parseGitStatusPaths(raw) {
+  const fields = String(raw ?? '').split('\0');
+  const paths = [];
+  for (let index = 0; index < fields.length; index += 1) {
+    const record = fields[index];
+    if (!record || record.length < 4) continue;
+    const status = record.slice(0, 2);
+    const file = record.slice(3);
+    if (file) paths.push(file);
+    if (/[RC]/u.test(status) && fields[index + 1]) {
+      paths.push(fields[index + 1]);
+      index += 1;
+    }
+  }
+  return paths;
+}
+
+/**
+ * Read the body paths changed in the current writer worktree. A scoped writer
+ * gate must fail if this read fails; an empty result is the safe no-op for a
+ * run that did not write a body.
+ */
+export function changedPathsFromGit(root = ROOT) {
+  const raw = execFileSync(
+    'git',
+    [
+      'status',
+      '--porcelain=v1',
+      '--untracked-files=all',
+      '-z',
+      '--',
+      ...BODY_ROOTS.map(({ rel }) => rel),
+    ],
+    { cwd: root, encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 },
+  );
+  return parseGitStatusPaths(raw);
+}
 // Keep this in lockstep with buildBodyFile() in
 // generator/scripts/create-article.mjs: body1..body3 are required by the
 // historical schema; body4..body20 are optional per article and must still be
@@ -84,11 +129,24 @@ function addViolation(violations, violation) {
   violations.push({ ...violation, path: violation.path || null });
 }
 
-function inspectLocale({ root, bodyRoot, locale, expectedByFile, sourceByFile, violations, checkLanguage }) {
+function inspectLocale({
+  root,
+  bodyRoot,
+  locale,
+  expectedByFile,
+  sourceByFile,
+  violations,
+  checkLanguage,
+  selectedFiles = null,
+}) {
   const localeDir = path.join(root, bodyRoot.rel, locale);
   const localeFiles = new Set(listTsFiles(localeDir));
 
-  for (const [file, expected] of expectedByFile) {
+  const files = selectedFiles === null
+    ? [...expectedByFile.keys()]
+    : [...selectedFiles].filter((file) => expectedByFile.has(file)).sort();
+  for (const file of files) {
+    const expected = expectedByFile.get(file);
     const relativePath = path.join(bodyRoot.rel, locale, file);
     const filePath = path.join(root, relativePath);
     if (!localeFiles.has(file)) {
@@ -204,16 +262,18 @@ function inspectLocale({ root, bodyRoot, locale, expectedByFile, sourceByFile, v
     }
   }
 
-  for (const file of localeFiles) {
-    if (!expectedByFile.has(file)) {
-      addViolation(violations, {
-        code: 'unexpected-file',
-        section: bodyRoot.name,
-        locale,
-        file,
-        path: path.join(bodyRoot.rel, locale, file),
-        message: `${bodyRoot.rel}/${locale}/${file}: file senza sorgente italiana`,
-      });
+  if (selectedFiles === null) {
+    for (const file of localeFiles) {
+      if (!expectedByFile.has(file)) {
+        addViolation(violations, {
+          code: 'unexpected-file',
+          section: bodyRoot.name,
+          locale,
+          file,
+          path: path.join(bodyRoot.rel, locale, file),
+          message: `${bodyRoot.rel}/${locale}/${file}: file senza sorgente italiana`,
+        });
+      }
     }
   }
 }
@@ -221,7 +281,8 @@ function inspectLocale({ root, bodyRoot, locale, expectedByFile, sourceByFile, v
 /**
  * Scans both corpus roots.
  *
- * @param {{root?: string, minItalianFiles?: number, minItalianFields?: number}} options
+ * @param {{root?: string, minItalianFiles?: number, minItalianFields?: number,
+ *   checkLanguage?: boolean, bodyRoots?: Array<object>, changedPaths?: string[]|null}} options
  */
 export function inspectBlogLocaleCompleteness({
   root = ROOT,
@@ -229,7 +290,9 @@ export function inspectBlogLocaleCompleteness({
   minItalianFields = MIN_ITALIAN_FIELDS,
   checkLanguage = false,
   bodyRoots = BODY_ROOTS,
+  changedPaths = null,
 } = {}) {
+  const scoped = Array.isArray(changedPaths);
   const violations = [];
   const sections = [];
   // I pavimenti ASSOLUTI (anti-checkout-sparse) valgono per le radici con
@@ -241,11 +304,28 @@ export function inspectBlogLocaleCompleteness({
   for (const bodyRoot of bodyRoots) {
     const italianDir = path.join(root, bodyRoot.rel, 'it');
     const italianFiles = listTsFiles(italianDir);
+    const selectedFiles = scoped
+      ? new Set(
+        (changedPaths ?? [])
+          .map((changedPath) => String(changedPath).replaceAll('\\', '/'))
+          .flatMap((changedPath) => {
+            const prefix = `${String(bodyRoot.rel).replaceAll('\\', '/')}/`;
+            if (!changedPath.startsWith(prefix)) return [];
+            const parts = changedPath.slice(prefix.length).split('/');
+            if (parts.length !== 2 || !LOCALES.includes(parts[0]) || !parts[1].endsWith('.ts')) {
+              return [];
+            }
+            return [parts[1]];
+          }),
+      )
+      : null;
+    const filesToCheck = scoped ? [...selectedFiles].sort() : italianFiles;
+    const italianFileSet = new Set(italianFiles);
     const expectedByFile = new Map();
     const sourceByFile = new Map();
     let italianFields = 0;
     const familyRoot = bodyRoot.floorPolicy === 'family';
-    if (familyRoot) {
+    if (!scoped && familyRoot) {
       familyRows.push({
         section: bodyRoot.name,
         rel: bodyRoot.rel,
@@ -254,7 +334,7 @@ export function inspectBlogLocaleCompleteness({
       });
     }
 
-    if (!familyRoot && italianFiles.length < minItalianFiles) {
+    if (!scoped && !familyRoot && italianFiles.length < minItalianFiles) {
       addViolation(violations, {
         code: 'source-floor',
         section: bodyRoot.name,
@@ -264,8 +344,19 @@ export function inspectBlogLocaleCompleteness({
           + `(floor ${minItalianFiles})`,
       });
     }
-    for (const file of italianFiles) {
+    for (const file of filesToCheck) {
       const relativePath = path.join(bodyRoot.rel, 'it', file);
+      if (!italianFileSet.has(file)) {
+        addViolation(violations, {
+          code: 'missing-source-file',
+          section: bodyRoot.name,
+          locale: 'it',
+          file,
+          path: relativePath,
+          message: `${relativePath}: file sorgente italiana assente`,
+        });
+        continue;
+      }
       const entries = extractBodyFields(fs.readFileSync(path.join(root, relativePath), 'utf8'));
       const expected = new Map();
       for (const entry of entries) {
@@ -312,7 +403,7 @@ export function inspectBlogLocaleCompleteness({
         });
       }
     }
-    if (!familyRoot && italianFields < minItalianFields) {
+    if (!scoped && !familyRoot && italianFields < minItalianFields) {
       addViolation(violations, {
         code: 'source-field-floor',
         section: bodyRoot.name,
@@ -324,7 +415,16 @@ export function inspectBlogLocaleCompleteness({
     }
 
     for (const locale of TARGET_LOCALES) {
-      inspectLocale({ root, bodyRoot, locale, expectedByFile, sourceByFile, violations, checkLanguage });
+      inspectLocale({
+        root,
+        bodyRoot,
+        locale,
+        expectedByFile,
+        sourceByFile,
+        violations,
+        checkLanguage,
+        selectedFiles,
+      });
     }
     sections.push({
       section: bodyRoot.name,
@@ -332,38 +432,43 @@ export function inspectBlogLocaleCompleteness({
       italianFiles: italianFiles.length,
       italianFields,
       expectedFiles: expectedByFile.size,
+      checkedFiles: filesToCheck.length,
     });
   }
 
-  const familyRegistry = familyRows.reduce((total, row) => total + row.registry, 0);
-  const familyFiles = familyRows.reduce((total, row) => total + row.files, 0);
-  const familyFloor = floorFrom(familyRegistry);
-  for (const row of familyRows) {
-    if (row.registry > 0 && row.files === 0) {
+  if (!scoped) {
+    const familyRegistry = familyRows.reduce((total, row) => total + row.registry, 0);
+    const familyFiles = familyRows.reduce((total, row) => total + row.files, 0);
+    const familyFloor = floorFrom(familyRegistry);
+    for (const row of familyRows) {
+      if (row.registry > 0 && row.files === 0) {
+        addViolation(violations, {
+          code: 'family-source-floor',
+          section: row.section,
+          locale: 'it',
+          path: path.join(row.rel, 'it'),
+          message: `${row.rel}/it: 0 file italiani contro ${row.registry} voci del registro`,
+        });
+      }
+    }
+    if (familyRows.length > 0 && familyFiles < familyFloor) {
       addViolation(violations, {
         code: 'family-source-floor',
-        section: row.section,
+        section: familyRows.map((row) => row.section).join(','),
         locale: 'it',
-        path: path.join(row.rel, 'it'),
-        message: `${row.rel}/it: 0 file italiani contro ${row.registry} voci del registro`,
+        path: familyRows.map((row) => `${row.rel}/it`).join(', '),
+        message: `famiglia ${familyRows.map((row) => row.section).join(', ')}: ${familyFiles} file italiani `
+          + `contro ${familyRegistry} voci dei registri (floor ${familyFloor})`,
       });
     }
-  }
-  if (familyRows.length > 0 && familyFiles < familyFloor) {
-    addViolation(violations, {
-      code: 'family-source-floor',
-      section: familyRows.map((row) => row.section).join(','),
-      locale: 'it',
-      path: familyRows.map((row) => `${row.rel}/it`).join(', '),
-      message: `famiglia ${familyRows.map((row) => row.section).join(', ')}: ${familyFiles} file italiani `
-        + `contro ${familyRegistry} voci dei registri (floor ${familyFloor})`,
-    });
   }
 
   const byCode = {};
   for (const violation of violations) byCode[violation.code] = (byCode[violation.code] || 0) + 1;
   return {
     ok: violations.length === 0,
+    scoped,
+    changedPaths: scoped ? [...(changedPaths ?? [])] : null,
     sections,
     violations,
     counts: byCode,
@@ -373,12 +478,29 @@ export function inspectBlogLocaleCompleteness({
 
 function main() {
   const args = new Set(process.argv.slice(2));
-  const report = inspectBlogLocaleCompleteness({ checkLanguage: args.has('--language') });
+  let changedPaths = null;
+  if (args.has('--changed-paths')) {
+    try {
+      changedPaths = changedPathsFromGit(ROOT);
+    } catch (error) {
+      console.error(`::error::impossibile leggere i path cambiati del worktree: ${String(error)}`);
+      process.exitCode = 1;
+      return;
+    }
+  }
+  const report = inspectBlogLocaleCompleteness({
+    checkLanguage: args.has('--language'),
+    changedPaths,
+  });
   if (args.has('--json')) {
     console.log(JSON.stringify(report, null, 2));
   } else {
+    if (report.scoped) {
+      console.log(`Scope: ${report.changedPaths.length} path cambiati, solo body localizzati`);
+    }
     for (const section of report.sections) {
-      console.log(`${section.section}: ${section.italianFiles} file IT, ${section.italianFields} body fields attesi`);
+      const checked = report.scoped ? `, ${section.checkedFiles} file verificati` : '';
+      console.log(`${section.section}: ${section.italianFiles} file IT, ${section.italianFields} body fields attesi${checked}`);
     }
     console.log(`Violazioni: ${report.totalViolations}`);
     for (const [code, count] of Object.entries(report.counts)) console.log(`  ${code}: ${count}`);

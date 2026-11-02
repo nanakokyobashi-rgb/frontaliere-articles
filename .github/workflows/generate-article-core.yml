@@ -1140,7 +1140,9 @@ jobs:
         if: steps.mode.outputs.dry != 'true' && steps.generate.outputs.article == 'true'
         run: |
           set -uo pipefail
-          if node scripts/ci/check-blog-locale-completeness.mjs; then
+          # The writer gate checks every locale of the body files changed by
+          # this generation. publish-api.yml remains the corpus-wide gate.
+          if node scripts/ci/check-blog-locale-completeness.mjs --changed-paths; then
             exit 0
           fi
           {

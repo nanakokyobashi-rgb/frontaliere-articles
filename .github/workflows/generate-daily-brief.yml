@@ -241,8 +241,10 @@ jobs:
 
           # FU-009: this writer refreshes the four localized body files directly.
           # Keep the completeness gate in this fail-closed step: the commit below
-          # runs with `always()` and consumes `steps.guard.outcome`.
-          if ! node scripts/ci/check-blog-locale-completeness.mjs; then
+          # runs with `always()` and consumes `steps.guard.outcome`. The scoped
+          # mode checks every locale of the body files changed by this run; the
+          # corpus-wide gate remains in publish-api.yml.
+          if ! node scripts/ci/check-blog-locale-completeness.mjs --changed-paths; then
             {
               echo "### ✖ Scrittura RIFIUTATA prima del commit — localizzazione incompleta"
               echo
