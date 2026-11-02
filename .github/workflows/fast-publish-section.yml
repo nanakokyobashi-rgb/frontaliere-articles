@@ -1,9 +1,8 @@
 name: fast-publish-section
 run-name: cover-publish-section / ${{ inputs.section || 'auto' }} / nonce=${{ inputs.dispatch_nonce || 'none' }} / dry=${{ inputs.dry_run }} / c=${{ inputs.dispatch_cohort || 'none' }}
 
-# Pubblica le pagine delle sezioni cantonali su R2; il piano del core seleziona
-# le sezioni attive e il registro le rende servibili. Bootstrap carica l'intera
-# superficie prima del flip draft/live; la concorrenza resta per sezione.
+# Pubblica su R2 le sezioni attive del piano/registro, con concorrenza per sezione.
+# Bootstrap carica tutta la superficie prima del flip draft/live.
 
 on:
   push:
@@ -196,9 +195,7 @@ jobs:
         github.event.workflow_run.event == 'workflow_dispatch') &&
        github.event.workflow_run.head_branch == 'main')
     runs-on: ubuntu-latest
-    # Checkout plus runner teardown occasionally outlive the normal fast path;
-    # keep a successful resolution from being cancelled by transient runner
-    # overhead while still bounding a genuinely stuck resolver.
+    # Include checkout/teardown overhead while bounding a stalled resolver.
     timeout-minutes: 10
     outputs:
       matrix: ${{ steps.plan.outputs.matrix }}
@@ -220,14 +217,10 @@ jobs:
           # a source commit: resolve the live dispatch ref. workflow_run,
           # bounded replays, and bootstrap keep their exact source revision.
           ref: ${{ github.event.workflow_run.head_sha || inputs.source_commit || (github.event_name == 'workflow_dispatch' && inputs.bootstrap != true && github.ref) || github.sha }}
-          # Il preflight dei body confronta il registro corrente con l'high-water
-          # della revisione precedente. Un checkout shallow rende quella storia
-          # non verificabile e blocca ogni replay prima del render.
+          # Il floor richiede la storia precedente: un checkout shallow blocca il render.
           fetch-depth: 0
-          # The resolve gate reads the source corpus and publisher code, but
-          # never generated `data/`, `dist/`, or `public/`. Keep those large
-          # trees out of the sparse checkout so an intermittent GitHub transfer
-          # cannot consume the whole resolve budget before the gate starts.
+          # Resolve needs source corpus/code, not generated data/dist/public.
+          # Exclude those trees so transfers cannot consume the resolve budget.
           filter: blob:none
           sparse-checkout: |
             /*
@@ -287,10 +280,7 @@ jobs:
             echo "::error::helper di preflight non presente nel checkout della revisione del workflow"
             exit 1
           fi
-          # workflow_run puo' aver effettuato il checkout del corpus a una
-          # revisione precedente all'estrazione del resolver. Il codice del
-          # resolver deve pero' sempre provenire dalla revisione che contiene
-          # il workflow; le sorgenti e i dati restano quelli del run pinnato.
+          # Resolver dalla revisione del workflow; sorgenti/dati dal run pinnato.
           install -m 0755 "$resolver_source" "$resolver_target"
           test -f .replay-dispatcher-source/scripts/ci/fetch-push-base-if-missing.sh
           ln -sfn "$PWD/.replay-dispatcher-source/scripts/ci/fetch-push-base-if-missing.sh" scripts/ci/fetch-push-base-if-missing.sh
