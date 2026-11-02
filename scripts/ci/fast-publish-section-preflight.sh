@@ -47,6 +47,7 @@ gate_input_paths=(
   generator/scripts/lib/daily-brief-data.mjs
   generator/scripts/lib/daily-brief-insights.mjs
   generator/scripts/lib/localized-toponyms.mjs
+  generator/scripts/lib/static-article-field-scanner.mjs
 )
 # A bounded workflow_dispatch can carry an explicit article scope
 # together with a push range; only push events may derive changed

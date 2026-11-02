@@ -47,6 +47,7 @@ on:
       - 'generator/scripts/lib/events-digest-marker.mjs'
       - 'generator/scripts/lib/events-digest-localization.mjs'
       - 'generator/scripts/lib/localized-toponyms.mjs'
+      - 'generator/scripts/lib/static-article-field-scanner.mjs'
       - 'generator/data/localized-toponyms.json'
       - 'generator/scripts/lib/decode-html-entities.mjs'
       - 'generator/scripts/lib/unescape-ts-string.mjs'

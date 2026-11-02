@@ -125,6 +125,7 @@ on:
       # Dynamic crossing localization imports these helpers and reads this
       # committed table; each is a publisher input, including the data file.
       - 'generator/scripts/lib/localized-toponyms.mjs'
+      - 'generator/scripts/lib/static-article-field-scanner.mjs'
       - 'generator/scripts/lib/events-digest-marker.mjs'
       - 'generator/scripts/lib/decode-html-entities.mjs'
       - 'generator/data/localized-toponyms.json'
@@ -510,6 +511,7 @@ jobs:
               generator/scripts/lib/daily-brief-data.mjs
               generator/scripts/lib/daily-brief-insights.mjs
               generator/scripts/lib/localized-toponyms.mjs
+              generator/scripts/lib/static-article-field-scanner.mjs
             )
             if git diff --quiet "$BEFORE" HEAD -- "${gate_input_paths[@]}" 2>/dev/null; then
               if git diff --name-only "$BEFORE" HEAD -- "${body_dir_list[@]}" > "$changed_files_path" 2>/dev/null; then
