@@ -4,9 +4,13 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-basilea::https://www.nau.ch/news/wirtschaft/syngenta-steigert-operativen-gewinn-trotz-tieferem-umsatz-67195725": {
+    "canton-basilea::https://www.schwarzwaelder-bote.de/lokales/loerrach/steuer-im-fokus-damit-keine-steuerschulden-entstehen-79653902.html": {
       "section": "canton-basilea",
-      "ts": 1793445493346
+      "ts": 1793633341246
+    },
+    "canton-basilea::https://www.bs.ch/medienmitteilungen/2026-pensionskassengesetz-punktuelle-anpassungen-bewaehrtem-gesetz": {
+      "section": "canton-basilea",
+      "ts": 1793634079849
     }
   }
 }

@@ -191,26 +191,34 @@ export function parseConvergedBullets(body) {
  * Lista dei path da riallineare dopo il merge. Lancia se la PR tocca file non
  * dichiarati, se il body cita un path assente dai file della PR, se cita lo
  * stesso path con hash diverse o se manca un file `identical` modificato.
+ * Se altri merge hanno assorbito tutto il trasporto e il body non dichiara
+ * più copie, il piano vuoto non scrive alcuna baseline.
  */
 export function planTransportRealign({ body, changedFiles, manifest, manifestPath = MANIFEST_PATH }) {
   const changed = new Set(changedFiles.filter(Boolean));
   const files = (manifest && manifest.files) || [];
   const declared = new Set(files.map((entry) => entry.path));
   const identical = new Set(files.filter((entry) => entry.mode === 'identical').map((entry) => entry.path));
+  const expected = [...changed]
+    .filter((filename) => filename !== manifestPath && identical.has(filename))
+    .sort();
+  const bullets = parseTransportBullets(body);
+  if (expected.length === 0 && bullets.length === 0) {
+    // Il prefisso del branch sopravvive anche quando il diff finale contiene
+    // solo fix adapted o test locali: non sono attestazioni di trasporto.
+    return { rows: [], expected, excluded: [...changed].filter((filename) => filename !== manifestPath).sort() };
+  }
   const unknown = [...changed]
     .filter((filename) => filename !== manifestPath && !declared.has(filename))
     .sort();
   if (unknown.length) {
     throw new Error('file modificati dalla PR non dichiarati nel manifest: ' + unknown.join(', '));
   }
-  const expected = [...changed]
-    .filter((filename) => filename !== manifestPath && identical.has(filename))
-    .sort();
   const excluded = [...changed]
     .filter((filename) => filename !== manifestPath && declared.has(filename) && !identical.has(filename))
     .sort();
   const found = new Map();
-  for (const bullet of parseTransportBullets(body)) {
+  for (const bullet of bullets) {
     if (!changed.has(bullet.path)) {
       throw new Error('il body cita un path non presente nei file della PR: ' + bullet.path);
     }

@@ -175,6 +175,40 @@ test('la CLI scrive il TSV letto dallo step di realign', () => {
   }
 });
 
+test('un trasporto svuotato da altri merge non riallinea codice adapted o test locali', () => {
+  const adaptedPath = 'generator/scripts/create-article.mjs';
+  const localTest = 'generator/tests/editorial-originality-pipeline.test.mjs';
+  const identicalPath = 'scripts/ci/transported.mjs';
+  const manifest = { files: [
+    { path: adaptedPath, mode: 'adapted' },
+    { path: identicalPath, mode: 'identical' },
+  ] };
+  const body = '## Implementato\n- Collega le evidenze ai retry e aggiunge regressioni.\n';
+  const changedFiles = [adaptedPath, localTest, MANIFEST_PATH];
+  const plan = planTransportRealign({ body, changedFiles, manifest });
+  assert.deepEqual(plan, { rows: [], expected: [], excluded: [localTest, adaptedPath].sort() });
+
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'transport-empty-plan-'));
+  try {
+    fs.mkdirSync(path.join(dir, 'scripts/ci'), { recursive: true });
+    const manifestText = JSON.stringify(manifest);
+    fs.writeFileSync(path.join(dir, MANIFEST_PATH), manifestText);
+    fs.writeFileSync(path.join(dir, 'body.md'), body);
+    fs.writeFileSync(path.join(dir, 'files.txt'), changedFiles.join('\n'));
+    execFileSync(process.execPath, [SCRIPT, 'body.md', 'files.txt', 'out.tsv'], { cwd: dir, encoding: 'utf8' });
+    assert.equal(fs.readFileSync(path.join(dir, 'out.tsv'), 'utf8'), '');
+    assert.equal(fs.readFileSync(path.join(dir, MANIFEST_PATH), 'utf8'), manifestText);
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+
+  // Un vero trasporto continua a richiedere tutte le prove, anche se il body
+  // non dichiara nessuna riga o conserva una riga ormai estranea al diff.
+  assert.throws(() => planTransportRealign({ body, changedFiles: [identicalPath], manifest }), /non cita tutti/);
+  const staleBody = transportBulletLine({ path: identicalPath, sitePath: identicalPath, to: HASH16 });
+  assert.throws(() => planTransportRealign({ body: staleBody, changedFiles: [adaptedPath], manifest }), /path non presente/);
+});
+
 test('produttore e consumatore importano lo stesso modulo', () => {
   const producer = fs.readFileSync(path.join(ROOT, '.github/workflows/transport-identical-twins.yml'), 'utf8');
   const consumer = fs.readFileSync(path.join(ROOT, '.github/workflows/transport-identical-twins-realign.yml'), 'utf8');

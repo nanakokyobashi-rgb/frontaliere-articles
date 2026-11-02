@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-fr::https://www.freiburger-nachrichten.ch/story/301498/kantonale-wahlen-und-eidgen%c3%b6ssische-abstimmungen-verwechslungen-bei-den-stimmunterlagen-vermeiden": {
-      "section": "canton-fr",
-      "ts": 1793386806292
-    },
     "canton-fr::https://www.freiburger-nachrichten.ch/story/301640/strassensperrung-in-givisiez": {
       "section": "canton-fr",
       "ts": 1793552375409
@@ -15,6 +11,14 @@
     "canton-fr::https://www.laliberte.ch/articles/regions/broye/l-arpeje-voit-ses-charges-augmenter-pour-lannee-2027-1475816": {
       "section": "canton-fr",
       "ts": 1793558194434
+    },
+    "canton-fr::https://www.freiburger-nachrichten.ch/story/302160/wer-f%c3%bcrs-parkieren-digital-zahlt-sollte-zweimal-hinschauen": {
+      "section": "canton-fr",
+      "ts": 1793633628465
+    },
+    "canton-fr::https://www.freiburger-nachrichten.ch/story/300760/wie-freiburger-startups-vom-wissen-der-universit%c3%a4t-und-der-hochschulen-profitieren": {
+      "section": "canton-fr",
+      "ts": 1793635887279
     }
   }
 }
