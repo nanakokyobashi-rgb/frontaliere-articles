@@ -4,12 +4,12 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "mobilita",
-  "updatedAt": "2026-11-02T09:20:10.429Z",
-  "contentHash": "3eaf6944ff18d331464cb2f1cd16677947fbc57116e57737f94b17318e5814b5",
+  "updatedAt": "2026-11-02T11:33:10.756Z",
+  "contentHash": "e48bd36c3dbe629742e41881ea864a6113e0228859c4ddf21c6d85a02d32ea30",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-01T22:29:16.511Z",
+      "updatedAt": "2026-11-02T06:54:25.899Z",
       "keyFacts": 2
     },
     {
@@ -27,13 +27,13 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "15",
-          "note": "segnalazioni aggiornate: 1 novembre 2026"
+          "value": "14",
+          "note": "segnalazioni aggiornate: 2 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "8",
-          "note": "segnalazioni aggiornate: 1 novembre 2026"
+          "value": "10",
+          "note": "segnalazioni aggiornate: 2 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -92,7 +92,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-01T22:29:16.511Z"
+          "updatedAt": "2026-11-02T06:54:25.899Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -194,7 +194,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-02T11:33:10.756Z"
     },
     "en": {
       "canton": "FR",
@@ -204,13 +204,13 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "15",
-          "note": "reports as of 1 November 2026"
+          "value": "14",
+          "note": "reports as of 2 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "8",
-          "note": "reports as of 1 November 2026"
+          "value": "10",
+          "note": "reports as of 2 November 2026"
         }
       ],
       "dataBlocks": [
@@ -269,7 +269,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-01T22:29:16.511Z"
+          "updatedAt": "2026-11-02T06:54:25.899Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -371,7 +371,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-02T11:33:10.756Z"
     },
     "de": {
       "canton": "FR",
@@ -381,13 +381,13 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "15",
-          "note": "Meldungen vom 1. November 2026"
+          "value": "14",
+          "note": "Meldungen vom 2. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "8",
-          "note": "Meldungen vom 1. November 2026"
+          "value": "10",
+          "note": "Meldungen vom 2. November 2026"
         }
       ],
       "dataBlocks": [
@@ -446,7 +446,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-01T22:29:16.511Z"
+          "updatedAt": "2026-11-02T06:54:25.899Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -548,7 +548,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-02T11:33:10.756Z"
     },
     "fr": {
       "canton": "FR",
@@ -558,13 +558,13 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "15",
-          "note": "signalements au 1er novembre 2026"
+          "value": "14",
+          "note": "signalements au 2 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "8",
-          "note": "signalements au 1er novembre 2026"
+          "value": "10",
+          "note": "signalements au 2 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -623,7 +623,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-01T22:29:16.511Z"
+          "updatedAt": "2026-11-02T06:54:25.899Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -725,7 +725,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-02T11:33:10.756Z"
     }
   }
 }

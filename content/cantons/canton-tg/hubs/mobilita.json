@@ -4,17 +4,17 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "mobilita",
-  "updatedAt": "2026-11-02T09:20:10.429Z",
-  "contentHash": "67619ac18ea64753359c8fc62a6a60cfde221f720f20182d5a10011eb854b6c3",
+  "updatedAt": "2026-11-02T11:33:10.756Z",
+  "contentHash": "9b5784b186619e6b30b5a8a00a3b52ef6c843ab43b023086a071826e34891fdb",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-31T23:59:59.000Z",
+      "updatedAt": "2026-11-01T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-01T22:29:16.511Z",
+      "updatedAt": "2026-11-02T06:54:25.899Z",
       "keyFacts": 1
     },
     {
@@ -33,19 +33,19 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Diessenhofen – Gailingen am Hochrhein, settimana conclusa: 31 ottobre 2026"
+          "note": "Diessenhofen – Gailingen am Hochrhein, settimana conclusa: 1 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "2",
-          "note": "segnalazioni aggiornate: 1 novembre 2026"
+          "note": "segnalazioni aggiornate: 2 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 25 ottobre 2026 – 31 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 26 ottobre 2026 – 1 novembre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Diessenhofen – Gailingen am Hochrhein",
@@ -54,27 +54,27 @@
               "url": "/traffico-dogane/diessenhofen-gailingen-am-hochrhein/oggi/"
             },
             {
-              "label": "Konstanz – Kreuzlingen",
-              "value": "0 min",
-              "detail": "48 rilevazioni",
-              "url": "/traffico-dogane/konstanz-kreuzlingen/oggi/"
-            },
-            {
               "label": "Konstanz – Tägerwilen, Autostrada B33n/A7",
               "value": "0 min",
               "detail": "48 rilevazioni",
               "url": "/traffico-dogane/konstanz-tagerwilen-autostrada-b33n-a7/oggi/"
             },
             {
-              "label": "Konstanz – Tägerwilen, Gottlieber Strasse",
+              "label": "Konstanz – Kreuzlingen",
               "value": "0 min",
+              "detail": "48 rilevazioni",
+              "url": "/traffico-dogane/konstanz-kreuzlingen/oggi/"
+            },
+            {
+              "label": "Konstanz – Tägerwilen, Gottlieber Strasse",
+              "value": "0,1 min",
               "detail": "48 rilevazioni",
               "url": "/traffico-dogane/konstanz-tagerwilen-gottlieber-strasse/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-31T23:59:59.000Z"
+          "updatedAt": "2026-11-01T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -95,7 +95,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-01T22:29:16.511Z"
+          "updatedAt": "2026-11-02T06:54:25.899Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -199,7 +199,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-02T11:33:10.756Z"
     },
     "en": {
       "canton": "TG",
@@ -210,19 +210,19 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Diessenhofen – Gailingen am Hochrhein, week ending 31 October 2026"
+          "note": "Diessenhofen – Gailingen am Hochrhein, week ending 1 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "2",
-          "note": "reports as of 1 November 2026"
+          "note": "reports as of 2 November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 25 October 2026 to 31 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 26 October 2026 to 1 November 2026, fastest first.",
           "items": [
             {
               "label": "Diessenhofen – Gailingen am Hochrhein",
@@ -231,27 +231,27 @@
               "url": "/en/border-wait/diessenhofen-gailingen-am-hochrhein/today/"
             },
             {
-              "label": "Konstanz – Kreuzlingen",
-              "value": "0 min",
-              "detail": "48 readings",
-              "url": "/en/border-wait/konstanz-kreuzlingen/today/"
-            },
-            {
               "label": "Konstanz – Tägerwilen, Autostrada B33n/A7",
               "value": "0 min",
               "detail": "48 readings",
               "url": "/en/border-wait/konstanz-tagerwilen-autostrada-b33n-a7/today/"
             },
             {
-              "label": "Konstanz – Tägerwilen, Gottlieber Strasse",
+              "label": "Konstanz – Kreuzlingen",
               "value": "0 min",
+              "detail": "48 readings",
+              "url": "/en/border-wait/konstanz-kreuzlingen/today/"
+            },
+            {
+              "label": "Konstanz – Tägerwilen, Gottlieber Strasse",
+              "value": "0.1 min",
               "detail": "48 readings",
               "url": "/en/border-wait/konstanz-tagerwilen-gottlieber-strasse/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-31T23:59:59.000Z"
+          "updatedAt": "2026-11-01T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -272,7 +272,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-01T22:29:16.511Z"
+          "updatedAt": "2026-11-02T06:54:25.899Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -376,7 +376,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-02T11:33:10.756Z"
     },
     "de": {
       "canton": "TG",
@@ -387,19 +387,19 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Diessenhofen – Gailingen am Hochrhein, Woche bis 31. Oktober 2026"
+          "note": "Diessenhofen – Gailingen am Hochrhein, Woche bis 1. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "2",
-          "note": "Meldungen vom 1. November 2026"
+          "note": "Meldungen vom 2. November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 25. Oktober 2026 bis 31. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 26. Oktober 2026 bis 1. November 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Diessenhofen – Gailingen am Hochrhein",
@@ -408,27 +408,27 @@
               "url": "/de/wartezeit-grenze/diessenhofen-gailingen-am-hochrhein/heute/"
             },
             {
-              "label": "Konstanz – Kreuzlingen",
-              "value": "0 Min.",
-              "detail": "48 Messungen",
-              "url": "/de/wartezeit-grenze/konstanz-kreuzlingen/heute/"
-            },
-            {
               "label": "Konstanz – Tägerwilen, Autostrada B33n/A7",
               "value": "0 Min.",
               "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/konstanz-tagerwilen-autostrada-b33n-a7/heute/"
             },
             {
-              "label": "Konstanz – Tägerwilen, Gottlieber Strasse",
+              "label": "Konstanz – Kreuzlingen",
               "value": "0 Min.",
+              "detail": "48 Messungen",
+              "url": "/de/wartezeit-grenze/konstanz-kreuzlingen/heute/"
+            },
+            {
+              "label": "Konstanz – Tägerwilen, Gottlieber Strasse",
+              "value": "0.1 Min.",
               "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/konstanz-tagerwilen-gottlieber-strasse/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-31T23:59:59.000Z"
+          "updatedAt": "2026-11-01T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -449,7 +449,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-01T22:29:16.511Z"
+          "updatedAt": "2026-11-02T06:54:25.899Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -553,7 +553,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-02T11:33:10.756Z"
     },
     "fr": {
       "canton": "TG",
@@ -564,19 +564,19 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Diessenhofen – Gailingen am Hochrhein, semaine jusqu’au 31 octobre 2026"
+          "note": "Diessenhofen – Gailingen am Hochrhein, semaine jusqu’au 1er novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "2",
-          "note": "signalements au 1er novembre 2026"
+          "note": "signalements au 2 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 25 octobre 2026 au 31 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 26 octobre 2026 au 1er novembre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Diessenhofen – Gailingen am Hochrhein",
@@ -585,27 +585,27 @@
               "url": "/fr/temps-attente-douane/diessenhofen-gailingen-am-hochrhein/aujourd-hui/"
             },
             {
-              "label": "Konstanz – Kreuzlingen",
-              "value": "0 min",
-              "detail": "48 relevés",
-              "url": "/fr/temps-attente-douane/konstanz-kreuzlingen/aujourd-hui/"
-            },
-            {
               "label": "Konstanz – Tägerwilen, Autostrada B33n/A7",
               "value": "0 min",
               "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/konstanz-tagerwilen-autostrada-b33n-a7/aujourd-hui/"
             },
             {
-              "label": "Konstanz – Tägerwilen, Gottlieber Strasse",
+              "label": "Konstanz – Kreuzlingen",
               "value": "0 min",
+              "detail": "48 relevés",
+              "url": "/fr/temps-attente-douane/konstanz-kreuzlingen/aujourd-hui/"
+            },
+            {
+              "label": "Konstanz – Tägerwilen, Gottlieber Strasse",
+              "value": "0,1 min",
               "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/konstanz-tagerwilen-gottlieber-strasse/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-31T23:59:59.000Z"
+          "updatedAt": "2026-11-01T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -626,7 +626,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-01T22:29:16.511Z"
+          "updatedAt": "2026-11-02T06:54:25.899Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -730,7 +730,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-02T11:33:10.756Z"
     }
   }
 }
