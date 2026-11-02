@@ -139,7 +139,7 @@ test('il metadata remote-newer è obbligatorio e resta associato al commit del f
   assert.match(source, /if ! reset_skipped_newer_paths; then\s+return 1/u);
   assert.match(source, /if ! write_skipped_newer_paths; then\s+return 1/u);
   assert.match(source, /last_commit_skipped_newer_paths=\("\$\{last_skipped_newer_paths\[@\]\}"\)/u);
-  assert.match(source, /restore_last_commit_skipped_newer_paths && shard_pat_push/u);
+  assert.match(source, /restore_last_commit_skipped_newer_paths[\s\S]{0,120}shard_pat_push/u);
 });
 
 test('i batch Pages sono seriali, raggruppati e riconciliabili', () => {
@@ -149,11 +149,18 @@ test('i batch Pages sono seriali, raggruppati e riconciliabili', () => {
   assert.match(source, /shard_pat_push[\s\S]{0,240}wait_for_pages_build\s+"\$last_commit"/u);
   assert.match(source, /pages\/builds\/latest/u);
   assert.match(source, /ARTICLE_PUSH_COMMIT_FILE/u);
+  assert.match(source, /ARTICLE_PUSH_FALLBACK_STATE_FILE/u);
   assert.match(source, /rollback_serialized_publications/u);
+  assert.match(source, /reconcile_failed_publication\s+"\$commit_parent"\s+"\$commit"/u);
+  assert.match(source, /reconcile_failed_publication\s+"\$last_commit_parent"\s+"\$last_commit"/u);
+  assert.match(source, /write_fallback_state unsafe/u);
+  assert.match(source, /write_fallback_state safe/u);
   assert.match(source, /ARTICLE_PUSH_BATCH_GROUPS_FILE/u);
   assert.match(source, /dependency group/u);
   assert.match(workflow, /write_article_push_groups\(\)/u);
   assert.match(workflow, /\.redirectPaths\[\]\?/u);
   assert.match(workflow, /export ARTICLE_PUSH_BATCH_GROUPS_FILE="\$combined_groups"/u);
   assert.match(workflow, /export ARTICLE_PUSH_BATCH_GROUPS_FILE="\$fallback_groups"/u);
+  assert.match(workflow, /export ARTICLE_PUSH_FALLBACK_STATE_FILE="\$fallback_state"/u);
+  assert.match(workflow, /without a reconciled tree; refusing the article-only fallback/u);
 });

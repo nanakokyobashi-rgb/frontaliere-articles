@@ -79,6 +79,9 @@
 #       on multiple non-consecutive lines.
 #   ARTICLE_PUSH_STATUS_FILE — optional one-line outcome for the caller:
 #       `pushed`, `clean-no-op`, `remote-newer`, or `failed`.
+#   ARTICLE_PUSH_FALLBACK_STATE_FILE — optional one-line state for a caller
+#       fallback: `safe` means no commit was published, or a published commit
+#       was reconciled to its pre-push tree before this invocation failed.
 #   ARTICLE_PUSH_COMMIT_FILE — optional one-line candidate record
 #       (`parent<TAB>commit`) written before a push. The batch coordinator uses
 #       it to reconcile a commit that was pushed before a later gate failed.
@@ -97,6 +100,27 @@
 #       the push failed after 3 retries
 # ─────────────────────────────────────────────────────────────────────────────
 set -uo pipefail
+
+fallback_state_file="${ARTICLE_PUSH_FALLBACK_STATE_FILE:-}"
+write_fallback_state() {
+  [ -n "$fallback_state_file" ] || return 0
+  if ! mkdir -p "$(dirname "$fallback_state_file")" 2>/dev/null; then
+    echo "::error::unable to create fallback-state directory for $fallback_state_file" >&2
+    return 1
+  fi
+  if ! printf '%s\n' "$1" > "$fallback_state_file"; then
+    echo "::error::unable to write fallback state $fallback_state_file" >&2
+    return 1
+  fi
+}
+
+# A failed combined push may be retried with article paths only, but only when
+# the combined writer proves that no commit was published or has reconciled its
+# published tree to the pre-push parent. Nested bounded invocations inherit
+# this marker from their coordinator and must not reset it between batches.
+if [ "${ARTICLE_PUSH_BATCHED:-0}" != '1' ] && ! write_fallback_state safe; then
+  exit 1
+fi
 
 DEFAULT_ARTICLE_PUSH_BATCH_SIZE=256
 article_push_batch_size="${ARTICLE_PUSH_BATCH_SIZE:-$DEFAULT_ARTICLE_PUSH_BATCH_SIZE}"
@@ -241,6 +265,7 @@ permanent_fail=0
 # Set by _attempt once it has a commit to push; read by the PAT fallback after
 # the retry loop. Declared here because `set -u` is on.
 last_commit=''
+last_commit_parent=''
 last_push_status=''
 last_skipped_newer_count=0
 last_skipped_newer_names=''
@@ -686,8 +711,8 @@ rollback_serialized_publications() {
   git -C "$rollback_stage" read-tree "$base_commit" || return 1
   rollback_tree="$(git -C "$rollback_stage" write-tree --missing-ok)" || return 1
   rollback_commit="$(git -C "$rollback_stage" commit-tree "$rollback_tree" -p "$remote_head" \
-    -m "$section-$loc article shard serialized-push reconciliation" \
-    -m "Restore the pre-batch tree after a later serialized batch failed.")" || return 1
+    -m "$section-$loc article shard publication reconciliation" \
+    -m "Restore the pre-push tree after the Pages gate for a published commit failed.")" || return 1
   if ! git ${GIT_PAT_OPTS[@]+"${GIT_PAT_OPTS[@]}"} -C "$rollback_stage" push "$SHARD_REPO" "$rollback_commit":main; then
     echo "::error::serialized-push rollback push failed; the shard may need manual reconciliation" >&2
     return 1
@@ -697,6 +722,20 @@ rollback_serialized_publications() {
     return 1
   fi
   echo "✅ $section-$loc article shard: reconciled failed serialized push with rollback commit $rollback_commit"
+}
+
+reconcile_failed_publication() {
+  local base_commit="$1" failed_commit="$2" rollback_root
+  rollback_root="$(mktemp -d "$RUNNER_TEMP/article-shard-reconcile.XXXXXX")" || {
+    echo "::error::unable to create the article-shard reconciliation directory" >&2
+    return 1
+  }
+  if rollback_serialized_publications "$rollback_root" "$base_commit" "$failed_commit"; then
+    rm -rf "$rollback_root"
+    return 0
+  fi
+  rm -rf "$rollback_root"
+  return 1
 }
 
 load_serialized_batch_groups() {
@@ -810,7 +849,11 @@ run_serialized_batches() {
     if [ "${#serialized_commits[@]}" -gt 0 ]; then
       if [ "$serialized_metadata_ok" != 1 ] || [ "$serialized_chain_ok" != 1 ]; then
         echo "::error::serialized-push rollback skipped because its commit chain could not be proven" >&2
-      elif ! rollback_serialized_publications "$batch_root" "$serialized_base_commit" "${serialized_commits[@]}"; then
+      elif rollback_serialized_publications "$batch_root" "$serialized_base_commit" "${serialized_commits[@]}"; then
+        if ! write_fallback_state safe; then
+          echo "::error::serialized-push rollback completed but the fallback safety marker could not be written" >&2
+        fi
+      else
         echo "::error::serialized-push rollback failed; no complete publication can be claimed" >&2
       fi
     fi
@@ -1132,10 +1175,15 @@ _attempt() {
   # later retry resets the shared metadata file before cloning, and a fallback
   # must restore the set belonging to this commit rather than the later try.
   last_commit="$commit"
+  last_commit_parent="$commit_parent"
   last_commit_skipped_newer_count="$last_skipped_newer_count"
   last_commit_skipped_newer_names="$last_skipped_newer_names"
   last_commit_skipped_newer_paths=("${last_skipped_newer_paths[@]}")
   if ! write_push_commit "$commit_parent" "$commit"; then
+    return 1
+  fi
+  if ! write_fallback_state unsafe; then
+    permanent_fail=1
     return 1
   fi
 
@@ -1145,6 +1193,13 @@ _attempt() {
   if git ${GIT_PAT_OPTS[@]+"${GIT_PAT_OPTS[@]}"} -C "$stage" push "$SHARD_REPO" "$commit":main; then
     if ! wait_for_pages_build "$commit"; then
       echo "::error::$section-$loc article shard: Pages did not complete for pushed commit $commit; refusing a concurrent retry" >&2
+      if [ "${ARTICLE_PUSH_BATCHED:-0}" != '1' ]; then
+        if reconcile_failed_publication "$commit_parent" "$commit" && write_fallback_state safe; then
+          echo "ℹ️ $section-$loc article shard: reconciled the failed combined push before the caller fallback" >&2
+        else
+          echo "::error::$section-$loc article shard: could not reconcile the failed combined push; refusing an article-only fallback" >&2
+        fi
+      fi
       permanent_fail=1
       return 1
     fi
@@ -1173,12 +1228,20 @@ if [ "$ok" != 1 ] && [ "$permanent_fail" != 1 ] && [ -n "$last_commit" ]; then
   # that misses the fast path waits for the next full deploy. force=0 — a
   # non-fast-forward here still has to FAIL (a concurrent full deploy moved the
   # tip; the tree must be rebuilt on it, never overwritten).
-  if restore_last_commit_skipped_newer_paths && shard_pat_push "$stage" "$SHARD_REPO" "$last_commit":main "$section-$loc article shard" 0; then
+  if restore_last_commit_skipped_newer_paths && write_fallback_state unsafe && \
+     shard_pat_push "$stage" "$SHARD_REPO" "$last_commit":main "$section-$loc article shard" 0; then
     if wait_for_pages_build "$last_commit"; then
       ok=1
       last_push_status='pushed'
     else
       echo "::error::$section-$loc article shard: Pages did not complete for PAT-fallback commit $last_commit" >&2
+      if [ "${ARTICLE_PUSH_BATCHED:-0}" != '1' ]; then
+        if reconcile_failed_publication "$last_commit_parent" "$last_commit" && write_fallback_state safe; then
+          echo "ℹ️ $section-$loc article shard: reconciled the failed PAT fallback before the caller fallback" >&2
+        else
+          echo "::error::$section-$loc article shard: could not reconcile the failed PAT fallback; refusing an article-only fallback" >&2
+        fi
+      fi
       permanent_fail=1
     fi
   fi

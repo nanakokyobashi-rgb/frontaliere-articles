@@ -986,8 +986,8 @@ jobs:
           # before the other locales even start (#3115). Each child writes one
           # outcome file; the parent waits for every child and only then updates
           # the shared state files. Inside a locale the writer waits for the
-          # matching Pages build after every commit, and reconciles the pre-batch
-          # tree if a later dependency group cannot be published.
+          # matching Pages build after every commit, and reconciles the pre-push
+          # tree if a Pages-gated commit cannot be published.
           # The TSV pairs each article index with its bridge; legacy redirects
           # are assigned by their canonical target, while archive/landing pages
           # share one aggregate group so no dependency boundary is arbitrary.
@@ -1060,22 +1060,30 @@ jobs:
               echo "── pushing ${#paths[@]} article + ${#hpaths[@]} landing file(s) to $shard/$loc"
               # Il fallback conserva la differenza di severità che le due chiamate separate
               # esprimevano: l'articolo è duro, l'hub è morbido («the hub stays stale, the
-              # article is unaffected»). Se il push combinato fallisce si riprova col solo
-              # articolo, così una pagina hub malformata non può impedire la pubblicazione.
+              # article is unaffected»). Il writer riconcilia prima il tree se ha già
+              # pubblicato il commit combinato; solo un marker `safe` consente di riprovare
+              # col solo articolo, così una pagina hub malformata non può restare nel tree
+              # del fallback né impedire la pubblicazione.
               locale_status="$RUNNER_TEMP/article-shard-push-$loc.status"
               locale_skipped="$RUNNER_TEMP/article-shard-push-$loc.skipped"
               locale_outcome="$RUNNER_TEMP/article-shard-push-$loc.outcome"
+              fallback_state="$RUNNER_TEMP/article-shard-push-$loc.fallback-state"
               combined_groups="$RUNNER_TEMP/article-shard-push-$loc.groups"
               fallback_groups="$RUNNER_TEMP/article-shard-push-$loc.article-groups"
-              rm -f "$locale_status" "$locale_skipped" "$locale_outcome"
+              rm -f "$locale_status" "$locale_skipped" "$locale_outcome" "$fallback_state"
               export ARTICLE_PUSH_STATUS_FILE="$locale_status"
               export ARTICLE_PUSH_SKIPPED_PATHS_FILE="$locale_skipped"
+              export ARTICLE_PUSH_FALLBACK_STATE_FILE="$fallback_state"
               write_article_push_groups "$combined_groups" true "$loc"
               write_article_push_groups "$fallback_groups" false "$loc"
               export ARTICLE_PUSH_BATCH_GROUPS_FILE="$combined_groups"
               combined_pushed=true
               if ! bash scripts/lib/push-article-shard-incremental.sh \
                    "$shard" "$loc" "$dist" "${paths[@]}" ${hpaths[@]+"${hpaths[@]}"}; then
+                if [ ! -s "$fallback_state" ] || [ "$(tr -d '\r\n' < "$fallback_state")" != safe ]; then
+                  echo "::error::combined push failed for $shard/$loc without a reconciled tree; refusing the article-only fallback"
+                  exit 1
+                fi
                 export ARTICLE_PUSH_BATCH_GROUPS_FILE="$fallback_groups"
                 echo "::warning::combined push failed for $shard/$loc — retrying with the article alone (the hub stays stale)"
                 combined_pushed=false
