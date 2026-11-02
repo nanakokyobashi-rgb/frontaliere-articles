@@ -283,9 +283,9 @@ test('#393 extractArticleId decide per NOME, non per posizione', () => {
 // decodifica in `extractFaqFromContent` → rosso su ogni round-trip qui sotto
 // che contiene una virgoletta o un backslash.
 
-/** Testo che esercita tutte le sequenze che lo scrittore deve saper riportare. */
+/** FAQ che esercita gli escape dello scrittore e contiene una fonte per il claim YMYL. */
 const FAQ_OSTILE = [
-  { q: 'Che cosa dice la "circolare" del 2026?', a: 'Dice che l\'imposta si calcola cosi\': prima la base, poi l\'aliquota.' },
+  { q: 'Che cosa dice la "circolare" del 2026?', a: 'Dice che l\'imposta si calcola cosi\': prima la base, poi l\'aliquota. [Fonte ufficiale](https://www.admin.ch).' },
   { q: 'Come si scrive un percorso Windows?', a: 'Per esempio C:\\Users\\frontaliere\\documenti — con i backslash.' },
   { q: 'La risposta puo andare a capo?', a: 'Si\':\nprima riga\nseconda riga, e un tab\tin mezzo.' },
 ];
