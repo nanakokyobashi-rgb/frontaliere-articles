@@ -8660,6 +8660,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.startup-innovazione-sociale-open-call.title': 'Open Call 2026: training and funding for social startups',
     'blog.article.startup-innovazione-sociale-open-call.excerpt': 'Applications open until January 15, 2027 20.000 francs at stake for five selected startups Social Business Conference 2027 in Lugano on May 19',
     'blog.article.startup-innovazione-sociale-open-call.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.premi-mercato-idroelettrico-2026.title': '21,4 million francs for large hydroelectric plants',
+    'blog.article.premi-mercato-idroelettrico-2026.excerpt': '21.4 million francs to three applicants The 2026 award concerns the 2025 financial year Applications were submitted by the end of May 2026 The resources',
+    'blog.article.premi-mercato-idroelettrico-2026.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaChEn;

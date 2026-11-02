@@ -8660,6 +8660,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.startup-innovazione-sociale-open-call.title': 'Open Call 2026: formazione e finanziamenti per startup sociali',
     'blog.article.startup-innovazione-sociale-open-call.excerpt': 'Candidature aperte fino al 15 gennaio 2027 20.000 franchi in palio per cinque startup selezionate Social Business Conference 2027 a Lugano il 19 maggio',
     'blog.article.startup-innovazione-sociale-open-call.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.premi-mercato-idroelettrico-2026.title': '21,4 milioni di franchi ai grandi impianti idroelettrici',
+    'blog.article.premi-mercato-idroelettrico-2026.excerpt': '21,4 milioni di franchi a tre richiedenti Il premio 2026 riguarda l\'esercizio 2025 Le domande sono state presentate entro fine maggio 2026 Le risorse',
+    'blog.article.premi-mercato-idroelettrico-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaChIt;
