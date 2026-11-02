@@ -90,12 +90,13 @@ export function linksIn(text) {
   return [...String(text ?? '').matchAll(/https?:\/\/[^\s)\]"'<>]+/g)].map((match) => match[0]);
 }
 
-/** Ogni testo pubblicato: corpo, FAQ, excerpt e i campi SEO. Gli URL non sono testo. */
+/** Ogni testo pubblicato: corpo, FAQ, excerpt e i campi SEO. Rimuove gli URL e conserva la prosa circostante. */
 function articleText(...sources) {
   const texts = [];
   const visit = (value) => {
     if (typeof value === 'string') {
-      if (!/^https?:\/\//.test(value)) texts.push(value);
+      const prose = value.replace(/https?:\/\/[^\s)\]"'<>]+/g, ' ');
+      if (prose.trim()) texts.push(prose);
     } else if (Array.isArray(value)) {
       value.forEach(visit);
     } else if (value && typeof value === 'object') {

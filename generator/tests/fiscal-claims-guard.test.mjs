@@ -338,6 +338,31 @@ test('i writer FAQ riapplicano il fiscal gate prima della scrittura atomica', ()
   }
 });
 
+test('un URL iniziale nella risposta FAQ non nasconde la prosa fiscale o YMYL successiva', () => {
+  assert.throws(
+    () => assertFaqPassesFiscalClaimsGate({
+      locale: 'en',
+      articleText: 'The article discusses the cross-border agreement.',
+      faq: [{
+        q: 'Which exemption applies?',
+        a: 'https://example.com/source Old frontier workers benefit from an exemption of €7,500.',
+      }],
+    }),
+    (error) => error.qualityReject === true && /franchigia-7500/.test(error.message),
+  );
+  assert.throws(
+    () => assertFaqPassesFiscalClaimsGate({
+      locale: 'en',
+      articleText: 'The article discusses the cross-border agreement.',
+      faq: [{
+        q: 'What does the linked information cover?',
+        a: 'https://example.com/source Healthcare coverage depends on the policy.',
+      }],
+    }),
+    (error) => error.qualityReject === true && /ymyl-source/.test(error.message),
+  );
+});
+
 test('i due writer FAQ non pubblicano una coppia fiscale respinta', (t) => {
   const root = mkdtempSync(path.join(tmpdir(), 'faq-fiscal-gate-'));
   t.after(() => rmSync(root, { recursive: true, force: true }));
