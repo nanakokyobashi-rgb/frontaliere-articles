@@ -19,6 +19,7 @@ import {
   findReferenceVacuousFacts,
   SUPPORTED_LOCALES,
 } from './lib/key-facts-specificity.mjs';
+import { scanStaticArticleFieldEntries } from './lib/static-article-field-scanner.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const BODY_DIRS = ['blog-body', 'blog-body-ch'];
@@ -52,10 +53,8 @@ export function unescapeTs(value) {
 }
 
 // Support all static TS string delimiters. The value is still ignored when it
-// contains `${...}` because evaluating an interpolated template would require
+// contains interpolation syntax because evaluating a template would require
 // executing corpus code; the scanner must remain read-only and deterministic.
-const BODY_LITERAL_RX = /(['"`])blog\.article\.([^'"`]+)\.(body\d+)\1\s*:\s*(['"`])((?:\\[\s\S]|(?!\4)[\s\S])*)\4/gu;
-
 function* iterateBodies(root) {
   for (const directory of BODY_DIRS) {
     for (const locale of SUPPORTED_LOCALES) {
@@ -65,14 +64,15 @@ function* iterateBodies(root) {
         if (!file.endsWith('.ts')) continue;
         const absoluteFile = path.join(absoluteDirectory, file);
         const source = fs.readFileSync(absoluteFile, 'utf8');
-        for (const match of source.matchAll(BODY_LITERAL_RX)) {
-          if (match[5].includes('${')) continue;
+        for (const entry of scanStaticArticleFieldEntries(source)) {
+          if (!/^body\d+$/u.test(entry.field)) continue;
+          if (typeof entry.value !== 'string' && entry.rawValue.includes('$' + '{')) continue;
           yield {
             rel: path.join('content', directory, locale, file),
-            id: match[2],
-            field: match[3],
+            id: entry.articleId,
+            field: entry.field,
             locale,
-            value: unescapeTs(match[5]),
+            value: typeof entry.value === 'string' ? entry.value : unescapeTs(entry.rawValue),
           };
         }
       }

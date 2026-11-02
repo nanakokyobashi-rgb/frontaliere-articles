@@ -56,6 +56,7 @@ import { escapeForSingleQuoteTS } from './lib/article-meta-block.mjs';
 import { unescapeTsString } from './lib/unescape-ts-string.mjs';
 import { escapeRegExpLiteral } from './lib/escape-regexp.mjs';
 import { assertLocalizedToponymPair, extractArticleProjectionText } from './lib/localized-toponyms.mjs';
+import { scanStaticArticleFieldEntries } from './lib/static-article-field-scanner.mjs';
 import { sanitizeArticleFaqMarkdown } from '../../scripts/lib/article-link-contract.mjs';
 import {
   assertFaqPairsHaveNoRejectedControls,
@@ -639,24 +640,21 @@ export function extractBodyContent(fileContent, articleId) {
   // fermarsi: vedi `hasBodyKey`, che i due chiamanti usano per non arrivarci.
   if (!articleId) throw new Error('extractBodyContent: articleId obbligatorio (issue #393)');
   const bodies = [];
-  // Match `'blog.article.<id>.bodyN':` followed by either a single-quoted or
-  // backtick-quoted value. `bodyKeyRx` ancora la chiave all'id (vedi il blocco
-  // sopra); il gruppo di cattura \1 pinza la virgoletta di apertura alla sua
-  // chiusura. L'id e' gia' escapato e non introduce gruppi, quindi \1 continua
-  // a riferirsi alla virgoletta.
-  const re = new RegExp(`${bodyKeyRx(articleId)}\\s*:\\s*(['\`])((?:\\\\.|(?!\\1)[\\s\\S])*?)\\1`, 'g');
-  let m;
-  while ((m = re.exec(fileContent)) !== null) {
-    const quoteChar = m[1];
-    let content = m[2];
-    if (quoteChar === "'") {
-      // Single-quoted TS string: unescape \' \n \\
-      content = unescapeTsString(content, { "'": "'", n: '\n', '\\': '\\' }, { decodeControlEscapes: true });
-    } else {
-      // Backtick (template literal): unescape \` \$ \\
-      content = unescapeTsString(content, { '`': '`', $: '$', '\\': '\\' }, { decodeControlEscapes: true });
+  const backtick = String.fromCharCode(96);
+  for (const entry of scanStaticArticleFieldEntries(fileContent)) {
+    if (entry.articleId !== articleId || !/^body\d+$/u.test(entry.field)) continue;
+    let content = entry.value;
+    if (typeof content !== 'string') {
+      // Older scanner revisions expose rawValue only; keep their delimiter-aware decoder.
+      const escapes = entry.quote === backtick
+        ? { [backtick]: backtick, $: '$', '\\': '\\' }
+        : { [entry.quote]: entry.quote, n: '\n', '\\': '\\' };
+      content = unescapeTsString(entry.rawValue, escapes, { decodeControlEscapes: true });
     }
     bodies.push(content);
+  }
+  if (bodies.length === 0 && hasBodyKey(fileContent, articleId)) {
+    throw new SyntaxError(`extractBodyContent: nessun body statico valido per ${articleId}`);
   }
   return bodies.join('\n\n');
 }

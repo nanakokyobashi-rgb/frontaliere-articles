@@ -20,6 +20,7 @@ import { fileURLToPath } from 'node:url';
 
 import { getKeyFactsHeading } from './lib/ai-search-template.mjs';
 import { findOrphanedKeyFactsList } from './lib/key-facts-specificity.mjs';
+import { scanStaticArticleFieldEntries } from './lib/static-article-field-scanner.mjs';
 import { unescapeTs } from './scan-vacuous-key-facts.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
@@ -31,8 +32,6 @@ export const STOCK_BASELINE = Object.freeze({
     'blog-body-ch': 0,
   }),
 });
-
-const BODY_LITERAL_RX = /(['"`])blog\.article\.([^'"`]+)\.(body\d+)\1\s*:\s*(['"`])((?:\\[\s\S]|(?!\4)[\s\S])*)\4/gu;
 
 function normalizedRelativePath(root, absolutePath) {
   return path.relative(root, absolutePath).split(path.sep).join('/');
@@ -88,9 +87,11 @@ export function planKeyFactsHeadingInsertion(body1, locale = 'it') {
 }
 
 function body1FromSource(source) {
-  for (const match of source.matchAll(BODY_LITERAL_RX)) {
-    if (match[3] !== 'body1' || match[5].includes('${')) continue;
-    return unescapeTs(match[5]);
+  for (const entry of scanStaticArticleFieldEntries(source)) {
+    if (entry.field !== 'body1') continue;
+    if (typeof entry.value === 'string') return entry.value;
+    if (entry.rawValue.includes('$' + '{')) continue;
+    return unescapeTs(entry.rawValue);
   }
   return null;
 }
