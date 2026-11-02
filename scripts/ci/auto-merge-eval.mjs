@@ -5,16 +5,17 @@
  *
  * Non e' piu' il DECISORE del merge: quella decisione e' passata all'auto-merge
  * NATIVO di GitHub, che aspetta il check richiesto dal ruleset su `main`.
- * Questo file resta la LIBRERIA dei suoi gate — il fingerprint del contributo,
- * il riconoscimento dell'autore fidato, il completeness contract del body, il
- * path-filter di `generator-ci` — importati da `review-gate.mjs`,
- * `generator-ci-gate.mjs` e `pr-contribution-fingerprint.mjs`, cioe' dagli step
- * che PRODUCONO quel check. Il `main()` in fondo sopravvive come CLI di
- * diagnosi: stampa la valutazione completa di una PR senza mergiare niente.
+ * Questo file resta la LIBRERIA dei suoi gate — il fingerprint del contributo
+ * (ri-esposto dal modulo condiviso aciclico), il riconoscimento dell'autore
+ * fidato, il completeness contract del body, il path-filter di `generator-ci`
+ * — importati da `review-gate.mjs`, `generator-ci-gate.mjs` e
+ * `pr-contribution-fingerprint.mjs`, cioe' dagli step che PRODUCONO quel
+ * check. Il `main()` in fondo sopravvive come CLI di diagnosi: stampa la
+ * valutazione completa di una PR senza mergiare niente.
  *
- * Tenere le funzioni qui e non riscriverle nei tre chiamanti e' il punto: sono
- * gia' coperte dai test di questo repo, e due copie della stessa semantica di
- * «contributo invariato» sarebbero un drift garantito.
+ * Tenere una sola implementazione del fingerprint, nel modulo aciclico
+ * condiviso, e ri-esportarla qui evita sia il drift fra i chiamanti sia il
+ * ciclo `review-scope` → `auto-merge-eval`.
  *
  * Dato un PR number, `main()` valuta (e logga ogni gate):
  *   1. PR aperta e NON draft.
@@ -70,9 +71,7 @@
  * Exit 0 sempre (anche quando NON mergia): un gate non soddisfatto è un esito
  * atteso (l'altro trigger ri-valuterà), non un errore di workflow.
  */
-import { createHash } from 'node:crypto';
 import {
-  isReviewTestPath,
   findTestOnlyApproval,
   reviewInputContextFromPullRequest,
   reviewInputContextMatches,
@@ -90,7 +89,22 @@ import {
 import { latestCompletedVitestConclusion, latestCompletedConclusionByName } from './lib/vitestCheck.mjs';
 import { checkClosesLines } from '../lib/pr-body-closes-check.mjs';
 import { checkMergePreviewDuplicates } from './lib/mergePreviewCheck.mjs';
-import { classifyAndMintReview } from './review-scope.mjs';
+import {
+  classifyAndMintReview,
+  codeContributionFingerprint,
+  GENERATED_CRAWLER_WORKFLOW_RE,
+  NON_REVIEWABLE_FINGERPRINT_RE,
+  prContributionFingerprint,
+} from './review-scope.mjs';
+
+// Keep the historical exports stable for the gate, the fingerprint CLI and
+// their tests while the implementation lives in the acyclic shared module.
+export {
+  codeContributionFingerprint,
+  GENERATED_CRAWLER_WORKFLOW_RE,
+  NON_REVIEWABLE_FINGERPRINT_RE,
+  prContributionFingerprint,
+};
 
 const REPO = process.env.GITHUB_REPOSITORY || '';
 const PR = process.argv[2];
@@ -154,90 +168,6 @@ function notifyAwaitingVitest(pr) {
   } catch (e) {
     console.log(`notifyAwaitingVitest best-effort fallito: ${String(e).slice(0, 120)}`);
   }
-}
-
-/**
- * Fingerprint del CONTRIBUTO PROPRIO della PR a un dato commit `sha` =
- * il diff vs il merge-base con main (3-dot), indipendente dalla churn di main.
- * Usato per il carry-forward dell'LGTM su un rebase di solo-merge-di-main:
- * se il contributo a `sha` è byte-identico a quello su cui claude[bot] aveva
- * dato `## LGTM`, il codice approvato non è cambiato → l'approvazione regge,
- * SENZA ri-eseguire la review (zero Claude). Tutto via compare API (nessun
- * git locale → il chiamante non ha bisogno di un checkout).
- * Conservativo: qualunque incertezza (compare troncato, patch mancanti su file
- * grossi, errore API) → ritorna null → niente carry-forward (stale come prima).
- */
-export function prContributionFingerprint(sha) {
-  let mb;
-  try {
-    mb = gh(['api', `repos/${REPO}/compare/main...${sha}`, '--jq', '.merge_base_commit.sha'],
-      { json: false }).trim();
-  } catch { return null; }
-  if (!mb) return null;
-  let cmp;
-  try {
-    cmp = gh(['api', `repos/${REPO}/compare/${mb}...${sha}`]);
-  } catch { return null; }
-  if (!cmp || !Array.isArray(cmp.files)) return null;
-  // compare API tronca a 300 file e omette `.patch` su file molto grandi: in
-  // entrambi i casi non posso garantire l'identita' -> bail conservativo.
-  if (cmp.files.length >= 300) return null;
-  return codeContributionFingerprint(cmp.files);
-}
-
-// File NON reviewabili come code (dati/static rigenerati): esclusi dal
-// fingerprint del contributo. Stessa lista del tier-gate della review in tests.yml
-// e degli exclude del diff reviewer. Così un push che tocca SOLO questi NON
-// cambia il fingerprint CODE → il carry-forward dell'LGTM regge senza
-// ri-eseguire la review (zero Claude), mentre il gate dei test resta sull'head
-// fresco. Prima il carry-forward valeva SOLO per i rebase di puro main-merge;
-// ora anche per i push di solo corpus.
-//
-// ── L'ALBERO E' QUELLO DI QUESTO REPO, e fino al 2026-09-03 non lo era ──────
-// La lista era arrivata dal sito PAROLA PER PAROLA (`data|public|reports|
-// _newsletter_variants|docs`), cioè nominando due cartelle che qui non esistono
-// e OMETTENDO `content/` e `dist/` — le uniche due che qui cambiano da sole. Il
-// risultato è che il carry-forward, la cui ragione d'essere su questo repo è
-// proprio la churn del corpus (~90 push al giorno su `main` che riscrivono
-// `content/`), non scattava MAI sul caso per cui esiste: ogni rigenerazione
-// cambiava il fingerprint e faceva ripartire una review a vuoto. La stessa
-// lista, nella forma corpus, sta in `NONCODE_RE` dentro `tests.yml`.
-export const NON_REVIEWABLE_FINGERPRINT_RE = /^(content|data|dist|public)\//;
-// I workflow crawler sono proiezioni generate dal sito: la compare API di
-// GitHub puo' elencarli senza `.patch` quando la PR contiene il batch completo.
-// Il generatore, il contratto e la logica restano code reviewabili; qui si
-// escludono solo gli artefatti YAML per non trasformare l'assenza di patch in
-// un falso `UNKNOWN` durante un rebase su main.
-export const GENERATED_CRAWLER_WORKFLOW_RE = /^\.github\/workflows\/crawler-group-\d+\.yml$/;
-
-/**
- * Costruisce il fingerprint del contributo CODE da `files` (l'array `.files`
- * della compare API). Puro (niente gh) → testabile. Esclude i file non-code; un
- * file dati con `.patch` omesso (troppo grande) viene scartato PRIMA del bail,
- * così la churn dati non forza un bail conservativo. Bail (null) solo se un file
- * CODE modificato non ha patch (binario/troppo grande → identità non garantita).
- */
-export function codeContributionFingerprint(files) {
-  if (!Array.isArray(files)) return null;
-  const parts = [];
-  for (const f of files) {
-    if ((isReviewTestPath(f.filename) && (!f.previous_filename || isReviewTestPath(f.previous_filename)))
-      || NON_REVIEWABLE_FINGERPRINT_RE.test(f.filename || '')
-      || GENERATED_CRAWLER_WORKFLOW_RE.test(f.filename || '')) continue; // dati/static/generated: non è contributo CODE
-    // `patch` assente (binario/troppo grande) su un file CODE modificato -> bail.
-    if (f.patch === undefined && f.status !== 'removed' && f.status !== 'added') return null;
-    // Tieni SOLO le righe di contenuto +/- (escludi header +++/--- e hunk @@):
-    // il fingerprint resta invariante allo shift di contesto/numero-riga indotto
-    // dalla churn di main attorno al diff della PR (un merge pulito di main NON
-    // cambia il contenuto proprio +/- della PR).
-    const changed = (f.patch || '')
-      .split('\n')
-      .filter((l) => (l.startsWith('+') || l.startsWith('-')) && !l.startsWith('+++') && !l.startsWith('---'))
-      .join('\n');
-    parts.push([f.filename, f.status, changed].join('\t'));
-  }
-  parts.sort();
-  return parts.join('\n--FILE--\n');
 }
 
 /**

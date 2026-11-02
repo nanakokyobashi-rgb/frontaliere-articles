@@ -259,7 +259,7 @@ test('una reiezione non interrompe la raccolta dei campi successivi', async () =
   mkdirSync(itDir, { recursive: true });
   mkdirSync(frDir, { recursive: true });
   const article = (fields) => [
-    'const b = {',
+    'const b: Record<string, string> = {',
     ...Object.entries(fields).map(([field, value]) => `  'blog.article.multi.${field}': '${escapeForSingleQuoteTS(value)}',`),
     '};',
     'export default b;',
