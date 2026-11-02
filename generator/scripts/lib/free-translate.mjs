@@ -1082,9 +1082,15 @@ function _splitLongLine(line, lineSeparator, maxChars) {
   // Keep the boundary whitespace with the segment that precedes it. The
   // separator becomes metadata only when the segment has to cross a request
   // boundary; otherwise it remains inside the translated chunk.
-  const boundary = /(?<=[.!?]\s)|(?=##\s)|(?=[-*]\s)/g;
+  const boundary = /([.!?])(\s+)|(?=##\s)|(?=[-*]\s)/g;
   for (const match of line.matchAll(boundary)) {
     const end = match.index;
+    if (match[1]) {
+      const text = `${line.slice(start, end)}${match[1]}`;
+      if (text) sentenceSegments.push({ text, separatorAfter: match[2] || '' });
+      start = end + match[0].length;
+      continue;
+    }
     if (end <= start) continue;
     const raw = line.slice(start, end);
     const separator = raw.match(/\s+$/)?.[0] || '';
