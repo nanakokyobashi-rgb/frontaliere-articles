@@ -4,12 +4,12 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "eventi",
-  "updatedAt": "2026-11-01T13:11:05.408Z",
-  "contentHash": "0fbb54371861b9bab63055ad3e5351b2e92bb191675bcdfe9dcfd26981608bb1",
+  "updatedAt": "2026-11-02T09:20:10.429Z",
+  "contentHash": "6a37cf25b2cd3d349b98480d5d74137bf08188e2dfccaa433aedab4b20ccfa89",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-31T14:21:36.178Z",
+      "updatedAt": "2026-11-02T02:24:34.417Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "195",
+          "value": "193",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
+              "label": "Fondue Gondola Thun",
+              "detail": "Quartierbeiz 13, Thun",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fondue-gondola-thun/"
+            },
+            {
+              "label": "Bonaparte",
+              "detail": "Bierhübeli",
+              "date": "2026-11-02",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/bern/bonaparte_ArSUgrZ"
+            },
+            {
+              "label": "Eagles of Death Metal",
+              "detail": "Kursaal Bern, Bern",
+              "date": "2026-11-02",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/bern/eagles-of-death-metal_A4a5BiF"
+            },
+            {
+              "label": "Mother's Finest",
+              "detail": "OldCapitol, Langenthal",
+              "date": "2026-11-02",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/langenthal/mothers-finest_ATJaPtL"
+            },
+            {
               "label": "Escort Trips on the DS “Spiez” & MS “Schilthorn”—Noon Departure from Thun",
-              "detail": "Thunersee, Spiez",
-              "date": "2026-11-01",
+              "detail": "Thunersee, Spiez — in corso, ultimo giorno: 8 novembre 2026",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/trajets-daccompagnement-en-train-spiez-et-en-bateau-schilthorn-trajet-de-midi-au-depart-de-thou/"
             },
             {
-              "label": "Reformationssonntag mit Abendmahl",
-              "detail": "Beatenberg",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reformationssonntag-mit-abendmahl/"
-            },
-            {
               "label": "moving moments",
-              "detail": "Sporthalle Ebnit, Saanen",
-              "date": "2026-11-01",
+              "detail": "Sporthalle Ebnit, Saanen — in corso, ultimo giorno: 29 novembre 2026",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/moving-moments/"
             },
             {
-              "label": "Nins und Phoras Reisen in die Erdzeitalter",
-              "detail": "Naturhistorisches Museum Bern, Bern",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/nins-und-phoras-reisen-in-die-erdzeitalter/"
-            },
-            {
-              "label": "Visita guidata pubblica / Stazione climatica di Langnau",
-              "detail": "Langnau i.E.",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/visita-guidata-pubblica-6/"
-            },
-            {
-              "label": "Der kleine Prinz",
-              "detail": "Nidau",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/der-kleine-prinz-3/"
-            },
-            {
-              "label": "Eden Tea Time",
-              "detail": "Spiez",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/eden-tea-time/"
-            },
-            {
               "label": "Im Härz",
-              "detail": "Bern",
-              "date": "2026-11-01",
+              "detail": "Bern — in corso, ultimo giorno: 8 novembre 2026",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/im-haerz/"
             },
             {
-              "label": "7. Förder-& Gedenk-Konzerte \"Die Schweiz singt\" Mozart: Requiem",
-              "detail": "Bern",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/7-foerder-gedenkkonzerte-2026-die-schweiz-singt-mozart-requiem-2/"
+              "label": "Lake Thun Play Ship",
+              "detail": "Thunersee, Thun — in corso, ultimo giorno: 14 novembre 2026",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spieleschiff-thunersee/"
             },
             {
-              "label": "Gospelkonzert",
-              "detail": "Kirche Merligen",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/merligen/konzert-weitere/gospelkonzert-mit-den-swiss-mountain-singers-spiez_Ag4gFJV"
+              "label": "solo exhibition by Andrea Cindy Raemy",
+              "detail": "Biel, Biel/Bienne — in corso, ultimo giorno: 27 novembre 2026",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/solo-exhibition-by-andrea-cindy-raemy/"
+            },
+            {
+              "label": "Selbstplanerkurs PV-Anlage e-wende",
+              "detail": "Bern — in corso, ultimo giorno: 5 novembre 2026",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/selbstplanerkurs-pv-anlage-e-wende-2/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/berna/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +135,7 @@
           "url": "/eventi/berna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "en": {
       "canton": "BE",
@@ -145,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "195",
+          "value": "193",
           "note": "from the site’s events calendar"
         }
       ],
@@ -156,69 +156,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
+              "label": "Fondue Gondola Thun",
+              "detail": "Quartierbeiz 13, Thun",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fondue-gondola-thun/"
+            },
+            {
+              "label": "Bonaparte",
+              "detail": "Bierhübeli",
+              "date": "2026-11-02",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/bern/bonaparte_ArSUgrZ"
+            },
+            {
+              "label": "Eagles of Death Metal",
+              "detail": "Kursaal Bern, Bern",
+              "date": "2026-11-02",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/bern/eagles-of-death-metal_A4a5BiF"
+            },
+            {
+              "label": "Mother's Finest",
+              "detail": "OldCapitol, Langenthal",
+              "date": "2026-11-02",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/langenthal/mothers-finest_ATJaPtL"
+            },
+            {
               "label": "Escort Trips on the DS “Spiez” & MS “Schilthorn”—Noon Departure from Thun",
-              "detail": "Thunersee, Spiez",
-              "date": "2026-11-01",
+              "detail": "Thunersee, Spiez — ongoing, last day: 8 November 2026",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/trajets-daccompagnement-en-train-spiez-et-en-bateau-schilthorn-trajet-de-midi-au-depart-de-thou/"
             },
             {
-              "label": "Reformationssonntag mit Abendmahl",
-              "detail": "Beatenberg",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reformationssonntag-mit-abendmahl/"
-            },
-            {
               "label": "moving moments",
-              "detail": "Sporthalle Ebnit, Saanen",
-              "date": "2026-11-01",
+              "detail": "Sporthalle Ebnit, Saanen — ongoing, last day: 29 November 2026",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/moving-moments/"
             },
             {
-              "label": "Nins und Phoras Reisen in die Erdzeitalter",
-              "detail": "Naturhistorisches Museum Bern, Bern",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/nins-und-phoras-reisen-in-die-erdzeitalter/"
-            },
-            {
-              "label": "Public guided tour / Langnau health resort",
-              "detail": "Langnau i.E.",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/visita-guidata-pubblica-6/"
-            },
-            {
-              "label": "Der kleine Prinz",
-              "detail": "Nidau",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/der-kleine-prinz-3/"
-            },
-            {
-              "label": "Eden Tea Time",
-              "detail": "Spiez",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/eden-tea-time/"
-            },
-            {
               "label": "Im Härz",
-              "detail": "Bern",
-              "date": "2026-11-01",
+              "detail": "Bern — ongoing, last day: 8 November 2026",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/im-haerz/"
             },
             {
-              "label": "7. Förder-& Gedenk-Konzerte \"Die Schweiz singt\" Mozart: Requiem",
-              "detail": "Bern",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/7-foerder-gedenkkonzerte-2026-die-schweiz-singt-mozart-requiem-2/"
+              "label": "Lake Thun Play Ship",
+              "detail": "Thunersee, Thun — ongoing, last day: 14 November 2026",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spieleschiff-thunersee/"
             },
             {
-              "label": "Gospelkonzert",
-              "detail": "Kirche Merligen",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/merligen/konzert-weitere/gospelkonzert-mit-den-swiss-mountain-singers-spiez_Ag4gFJV"
+              "label": "solo exhibition by Andrea Cindy Raemy",
+              "detail": "Biel, Biel/Bienne — ongoing, last day: 27 November 2026",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/solo-exhibition-by-andrea-cindy-raemy/"
+            },
+            {
+              "label": "Selbstplanerkurs PV-Anlage e-wende",
+              "detail": "Bern — ongoing, last day: 5 November 2026",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/selbstplanerkurs-pv-anlage-e-wende-2/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/bern/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         }
       ],
       "curatedArticles": [
@@ -258,7 +258,7 @@
           "url": "/en/events/bern/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "de": {
       "canton": "BE",
@@ -268,7 +268,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "195",
+          "value": "193",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -279,69 +279,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
+              "label": "Fondue Gondel Thun",
+              "detail": "Quartierbeiz 13, Thun",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fondue-gondola-thun/"
+            },
+            {
+              "label": "Bonaparte",
+              "detail": "Bierhübeli",
+              "date": "2026-11-02",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/bern/bonaparte_ArSUgrZ"
+            },
+            {
+              "label": "Eagles of Death Metal",
+              "detail": "Kursaal Bern, Bern",
+              "date": "2026-11-02",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/bern/eagles-of-death-metal_A4a5BiF"
+            },
+            {
+              "label": "Das Beste der Mutter",
+              "detail": "OldCapitol, Langenthal",
+              "date": "2026-11-02",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/langenthal/mothers-finest_ATJaPtL"
+            },
+            {
               "label": "Begleitfahrten DS «Spiez» & MS «Schilthorn» Mittagsfahrt ab Thun",
-              "detail": "Thunersee, Spiez",
-              "date": "2026-11-01",
+              "detail": "Thunersee, Spiez — läuft, letzter Tag: 8. November 2026",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/trajets-daccompagnement-en-train-spiez-et-en-bateau-schilthorn-trajet-de-midi-au-depart-de-thou/"
             },
             {
-              "label": "Reformationssonntag mit Abendmahl",
-              "detail": "Beatenberg",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reformationssonntag-mit-abendmahl/"
-            },
-            {
               "label": "BeMo - Bewegte Momente",
-              "detail": "Sporthalle Ebnit, Saanen",
-              "date": "2026-11-01",
+              "detail": "Sporthalle Ebnit, Saanen — läuft, letzter Tag: 29. November 2026",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/moving-moments/"
             },
             {
-              "label": "Nins und Phoras Reisen in die Erdzeitalter",
-              "detail": "Naturhistorisches Museum Bern, Bern",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/nins-und-phoras-reisen-in-die-erdzeitalter/"
-            },
-            {
-              "label": "Öffentliche Führung / Kurort Langnau",
-              "detail": "Langnau i.E.",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/visita-guidata-pubblica-6/"
-            },
-            {
-              "label": "Der kleine Prinz",
-              "detail": "Nidau",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/der-kleine-prinz-3/"
-            },
-            {
-              "label": "Eden Tea Time",
-              "detail": "Spiez",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/eden-tea-time/"
-            },
-            {
               "label": "Im Härz",
-              "detail": "Bern",
-              "date": "2026-11-01",
+              "detail": "Bern — läuft, letzter Tag: 8. November 2026",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/im-haerz/"
             },
             {
-              "label": "7. Förder-& Gedenk-Konzerte \"Die Schweiz singt\" Mozart: Requiem",
-              "detail": "Bern",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/7-foerder-gedenkkonzerte-2026-die-schweiz-singt-mozart-requiem-2/"
+              "label": "Spieleschiff Thunersee",
+              "detail": "Thunersee, Thun — läuft, letzter Tag: 14. November 2026",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spieleschiff-thunersee/"
             },
             {
-              "label": "Gospelkonzert",
-              "detail": "Kirche Merligen",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/merligen/konzert-weitere/gospelkonzert-mit-den-swiss-mountain-singers-spiez_Ag4gFJV"
+              "label": "solo exhibition by Andrea Cindy Raemy",
+              "detail": "Biel, Biel/Bienne — läuft, letzter Tag: 27. November 2026",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/solo-exhibition-by-andrea-cindy-raemy/"
+            },
+            {
+              "label": "Selbstplanerkurs PV-Anlage e-wende",
+              "detail": "Bern — läuft, letzter Tag: 5. November 2026",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/selbstplanerkurs-pv-anlage-e-wende-2/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/bern/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         }
       ],
       "curatedArticles": [
@@ -381,7 +381,7 @@
           "url": "/de/veranstaltungen/bern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "fr": {
       "canton": "BE",
@@ -391,7 +391,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "195",
+          "value": "193",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -402,69 +402,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
+              "label": "Fondue Gondel à Thoune",
+              "detail": "Quartierbeiz 13, Thun",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fondue-gondola-thun/"
+            },
+            {
+              "label": "Bonaparte",
+              "detail": "Bierhübeli",
+              "date": "2026-11-02",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/bern/bonaparte_ArSUgrZ"
+            },
+            {
+              "label": "Eagles of Death Metal",
+              "detail": "Kursaal Bern, Bern",
+              "date": "2026-11-02",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/bern/eagles-of-death-metal_A4a5BiF"
+            },
+            {
+              "label": "Le meilleur de la mère",
+              "detail": "OldCapitol, Langenthal",
+              "date": "2026-11-02",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/langenthal/mothers-finest_ATJaPtL"
+            },
+            {
               "label": "Trajets d'accompagnement en train « Spiez » et en bateau « Schilthorn » : trajet de midi au départ de Thoune",
-              "detail": "Thunersee, Spiez",
-              "date": "2026-11-01",
+              "detail": "Thunersee, Spiez — en cours, dernier jour : 8 novembre 2026",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/trajets-daccompagnement-en-train-spiez-et-en-bateau-schilthorn-trajet-de-midi-au-depart-de-thou/"
             },
             {
-              "label": "Reformationssonntag mit Abendmahl",
-              "detail": "Beatenberg",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reformationssonntag-mit-abendmahl/"
-            },
-            {
               "label": "des moments mouvementés",
-              "detail": "Sporthalle Ebnit, Saanen",
-              "date": "2026-11-01",
+              "detail": "Sporthalle Ebnit, Saanen — en cours, dernier jour : 29 novembre 2026",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/moving-moments/"
             },
             {
-              "label": "Nins und Phoras Reisen in die Erdzeitalter",
-              "detail": "Naturhistorisches Museum Bern, Bern",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/nins-und-phoras-reisen-in-die-erdzeitalter/"
-            },
-            {
-              "label": "Visite guidée publique / Station thermale de Langnau",
-              "detail": "Langnau i.E.",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/visita-guidata-pubblica-6/"
-            },
-            {
-              "label": "Der kleine Prinz",
-              "detail": "Nidau",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/der-kleine-prinz-3/"
-            },
-            {
-              "label": "Eden Tea Time",
-              "detail": "Spiez",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/eden-tea-time/"
-            },
-            {
               "label": "Im Härz",
-              "detail": "Bern",
-              "date": "2026-11-01",
+              "detail": "Bern — en cours, dernier jour : 8 novembre 2026",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/im-haerz/"
             },
             {
-              "label": "7. Förder-& Gedenk-Konzerte \"Die Schweiz singt\" Mozart: Requiem",
-              "detail": "Bern",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/7-foerder-gedenkkonzerte-2026-die-schweiz-singt-mozart-requiem-2/"
+              "label": "Bateau ludique du lac de Thoune",
+              "detail": "Thunersee, Thun — en cours, dernier jour : 14 novembre 2026",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spieleschiff-thunersee/"
             },
             {
-              "label": "Gospelkonzert",
-              "detail": "Kirche Merligen",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/merligen/konzert-weitere/gospelkonzert-mit-den-swiss-mountain-singers-spiez_Ag4gFJV"
+              "label": "solo exhibition by Andrea Cindy Raemy",
+              "detail": "Biel, Biel/Bienne — en cours, dernier jour : 27 novembre 2026",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/solo-exhibition-by-andrea-cindy-raemy/"
+            },
+            {
+              "label": "Selbstplanerkurs PV-Anlage e-wende",
+              "detail": "Bern — en cours, dernier jour : 5 novembre 2026",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/selbstplanerkurs-pv-anlage-e-wende-2/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/berne/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         }
       ],
       "curatedArticles": [
@@ -504,7 +504,7 @@
           "url": "/fr/evenements/berne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     }
   }
 }

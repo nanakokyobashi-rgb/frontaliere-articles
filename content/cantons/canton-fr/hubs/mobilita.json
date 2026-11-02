@@ -4,17 +4,17 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-31T06:45:46.687Z",
-  "contentHash": "a1e67c90d29dec38c7373ef525d7bc82b6acb8684f89c61e375cbf5c70160d1f",
+  "updatedAt": "2026-11-02T09:20:10.429Z",
+  "contentHash": "3eaf6944ff18d331464cb2f1cd16677947fbc57116e57737f94b17318e5814b5",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-31T01:06:50.670Z",
+      "updatedAt": "2026-11-01T22:29:16.511Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-30T21:45:03.956Z",
+      "updatedAt": "2026-11-01T21:24:45.283Z",
       "keyFacts": 0
     }
   ],
@@ -27,13 +27,13 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "14",
-          "note": "segnalazioni aggiornate: 31 ottobre 2026"
+          "value": "15",
+          "note": "segnalazioni aggiornate: 1 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "8",
-          "note": "segnalazioni aggiornate: 31 ottobre 2026"
+          "note": "segnalazioni aggiornate: 1 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -92,13 +92,18 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-31T01:06:50.670Z"
+          "updatedAt": "2026-11-01T22:29:16.511Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Einige Zwischenfälle und mehrere Verkehrsunfälle",
+              "date": "2026-11-01T09:10:00.000Z",
+              "url": "https://www.fr.ch/de/sjsd/pol/news/einige-zwischenfaelle-und-mehrere-verkehrsunfaelle"
+            },
             {
               "label": "Mise en œuvre de la stratégie cantonale de développement durable 2021-2031 : état d’avancement 2025",
               "date": "2026-10-28T13:30:52.000Z",
@@ -123,14 +128,9 @@
               "label": "Ein Meilenstein für das Velofahren im Alltag: Der neue kantonale Velowegnetzplan liegt vor",
               "date": "2026-10-07T13:45:16.000Z",
               "url": "https://www.fr.ch/de/rimu/news/ein-meilenstein-fuer-das-velofahren-im-alltag-der-neue-kantonale-velowegnetzplan-liegt-vor"
-            },
-            {
-              "label": "Restriction de circulation - Route de Champriond - du 12 octobre au 27 novembre 2026",
-              "date": "2026-10-05T13:37:46.000Z",
-              "url": "https://www.ville-fribourg.ch/actualites/restriction-de-circulation-route-de-champriond-du-12-octobre-au-27-novembre-2026"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -194,7 +194,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-31T06:45:46.687Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "en": {
       "canton": "FR",
@@ -204,13 +204,13 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "14",
-          "note": "reports as of 31 October 2026"
+          "value": "15",
+          "note": "reports as of 1 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "8",
-          "note": "reports as of 31 October 2026"
+          "note": "reports as of 1 November 2026"
         }
       ],
       "dataBlocks": [
@@ -269,13 +269,18 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-31T01:06:50.670Z"
+          "updatedAt": "2026-11-01T22:29:16.511Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Einige Zwischenfälle und mehrere Verkehrsunfälle",
+              "date": "2026-11-01T09:10:00.000Z",
+              "url": "https://www.fr.ch/de/sjsd/pol/news/einige-zwischenfaelle-und-mehrere-verkehrsunfaelle"
+            },
             {
               "label": "Mise en œuvre de la stratégie cantonale de développement durable 2021-2031 : état d’avancement 2025",
               "date": "2026-10-28T13:30:52.000Z",
@@ -300,14 +305,9 @@
               "label": "Ein Meilenstein für das Velofahren im Alltag: Der neue kantonale Velowegnetzplan liegt vor",
               "date": "2026-10-07T13:45:16.000Z",
               "url": "https://www.fr.ch/de/rimu/news/ein-meilenstein-fuer-das-velofahren-im-alltag-der-neue-kantonale-velowegnetzplan-liegt-vor"
-            },
-            {
-              "label": "Restriction de circulation - Route de Champriond - du 12 octobre au 27 novembre 2026",
-              "date": "2026-10-05T13:37:46.000Z",
-              "url": "https://www.ville-fribourg.ch/actualites/restriction-de-circulation-route-de-champriond-du-12-octobre-au-27-novembre-2026"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -371,7 +371,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-31T06:45:46.687Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "de": {
       "canton": "FR",
@@ -381,13 +381,13 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "14",
-          "note": "Meldungen vom 31. Oktober 2026"
+          "value": "15",
+          "note": "Meldungen vom 1. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "8",
-          "note": "Meldungen vom 31. Oktober 2026"
+          "note": "Meldungen vom 1. November 2026"
         }
       ],
       "dataBlocks": [
@@ -446,13 +446,18 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-31T01:06:50.670Z"
+          "updatedAt": "2026-11-01T22:29:16.511Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Einige Zwischenfälle und mehrere Verkehrsunfälle",
+              "date": "2026-11-01T09:10:00.000Z",
+              "url": "https://www.fr.ch/de/sjsd/pol/news/einige-zwischenfaelle-und-mehrere-verkehrsunfaelle"
+            },
             {
               "label": "Mise en œuvre de la stratégie cantonale de développement durable 2021-2031 : état d’avancement 2025",
               "date": "2026-10-28T13:30:52.000Z",
@@ -477,14 +482,9 @@
               "label": "Ein Meilenstein für das Velofahren im Alltag: Der neue kantonale Velowegnetzplan liegt vor",
               "date": "2026-10-07T13:45:16.000Z",
               "url": "https://www.fr.ch/de/rimu/news/ein-meilenstein-fuer-das-velofahren-im-alltag-der-neue-kantonale-velowegnetzplan-liegt-vor"
-            },
-            {
-              "label": "Restriction de circulation - Route de Champriond - du 12 octobre au 27 novembre 2026",
-              "date": "2026-10-05T13:37:46.000Z",
-              "url": "https://www.ville-fribourg.ch/actualites/restriction-de-circulation-route-de-champriond-du-12-octobre-au-27-novembre-2026"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -548,7 +548,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-31T06:45:46.687Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "fr": {
       "canton": "FR",
@@ -558,13 +558,13 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "14",
-          "note": "signalements au 31 octobre 2026"
+          "value": "15",
+          "note": "signalements au 1er novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "8",
-          "note": "signalements au 31 octobre 2026"
+          "note": "signalements au 1er novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -623,13 +623,18 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-31T01:06:50.670Z"
+          "updatedAt": "2026-11-01T22:29:16.511Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Einige Zwischenfälle und mehrere Verkehrsunfälle",
+              "date": "2026-11-01T09:10:00.000Z",
+              "url": "https://www.fr.ch/de/sjsd/pol/news/einige-zwischenfaelle-und-mehrere-verkehrsunfaelle"
+            },
             {
               "label": "Mise en œuvre de la stratégie cantonale de développement durable 2021-2031 : état d’avancement 2025",
               "date": "2026-10-28T13:30:52.000Z",
@@ -654,14 +659,9 @@
               "label": "Ein Meilenstein für das Velofahren im Alltag: Der neue kantonale Velowegnetzplan liegt vor",
               "date": "2026-10-07T13:45:16.000Z",
               "url": "https://www.fr.ch/de/rimu/news/ein-meilenstein-fuer-das-velofahren-im-alltag-der-neue-kantonale-velowegnetzplan-liegt-vor"
-            },
-            {
-              "label": "Restriction de circulation - Route de Champriond - du 12 octobre au 27 novembre 2026",
-              "date": "2026-10-05T13:37:46.000Z",
-              "url": "https://www.ville-fribourg.ch/actualites/restriction-de-circulation-route-de-champriond-du-12-octobre-au-27-novembre-2026"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -725,7 +725,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-31T06:45:46.687Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     }
   }
 }
