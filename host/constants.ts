@@ -191,9 +191,9 @@ export const PARTNERIZE_TAG_SNIPPET = `<script>${initialDocumentGuard.content}</
  */
 export const ADSENSE_CLIENT_ID = 'ca-pub-8628054934855353';
 
-export const ADSENSE_LOADER_FILENAME = 'adsense-loader-a83e909821b0.js';
+export const ADSENSE_LOADER_FILENAME = 'adsense-loader-e51c01d927f0.js';
 
-export const AD_RECOVERY_FILENAME = 'site-support-ab46f26db993.js';
+export const AD_RECOVERY_FILENAME = 'site-support-887e467e9348.js';
 export const AD_RECOVERY_SNIPPET = `<script defer data-cfasync="false" src="/assets/${AD_RECOVERY_FILENAME}"></script>`;
 
 export const ADSENSE_LAZY_LOADER = `<script defer src="/assets/${ADSENSE_LOADER_FILENAME}"></script>`;
