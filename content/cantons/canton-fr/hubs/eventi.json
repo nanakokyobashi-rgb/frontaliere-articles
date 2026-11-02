@@ -4,17 +4,17 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "eventi",
-  "updatedAt": "2026-11-01T13:11:05.408Z",
-  "contentHash": "0583bba06eff01d8a1c33719ff827ca143c339925cebbd8bfa261f2eed42cf59",
+  "updatedAt": "2026-11-02T09:20:10.429Z",
+  "contentHash": "2201d1fb3b0c78da81397fdcdd4da99d1cef1ccdd42e508097d375626ee2050e",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-31T14:21:36.178Z",
+      "updatedAt": "2026-11-02T02:24:34.417Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-31T20:43:08.728Z",
+      "updatedAt": "2026-11-01T21:24:45.283Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "42",
+          "value": "39",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,24 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Les Batteurs de Pavés et les PCGB : Dracula",
-              "detail": "Café-Théâtre Le Bilboquet",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/events/music/fribourg/les-batteurs-de-paves-et-les-pcgb-dracula_AvvKxMe"
-            },
-            {
-              "label": "Circus Knie",
-              "detail": "Fribourg — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/circus-knie-2026-17/"
-            },
-            {
-              "label": "Halloween à Moléson",
-              "detail": "Office du Tourisme de Moléson, Gruyères — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
-            },
             {
               "label": "Séance d'information \"Admissions 2027-28\" - en présentiel",
               "detail": "Fribourg",
@@ -96,11 +78,29 @@
               "detail": "Belfaux",
               "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/bdmania/"
+            },
+            {
+              "label": "Bellarena Indoor Festival | Rock Monsters of Switzerland",
+              "detail": "BCF-Arena",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/fribourg/bellarena-indoor-festival-rock-monsters-of-switzerland_AeCMyVG"
+            },
+            {
+              "label": "Bellarena Winter Edition 2026",
+              "detail": "BCF - Arena, Fribourg",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/bellarena-winter-edition-2026/"
+            },
+            {
+              "label": "Vully Blues Festival",
+              "detail": "Vully Blues Club",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/musees/enfants/evenements/cudrefin/vully-blues-festival_AQdXDbU"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/friburgo/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -113,7 +113,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +135,7 @@
           "url": "/eventi/friburgo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "en": {
       "canton": "FR",
@@ -145,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "42",
+          "value": "39",
           "note": "from the site’s events calendar"
         }
       ],
@@ -155,24 +155,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Les Batteurs de Pavés and the PCGBs: Dracula",
-              "detail": "Café-Théâtre Le Bilboquet",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/events/music/fribourg/les-batteurs-de-paves-et-les-pcgb-dracula_AvvKxMe"
-            },
-            {
-              "label": "Circus Knie",
-              "detail": "Fribourg — ongoing, last day: 1 November 2026",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/circus-knie-2026-17/"
-            },
-            {
-              "label": "Halloween à Moléson",
-              "detail": "Office du Tourisme de Moléson, Gruyères — ongoing, last day: 1 November 2026",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
-            },
             {
               "label": "Séance d'information \"Admissions 2027-28\" - en présentiel",
               "detail": "Fribourg",
@@ -214,11 +196,29 @@
               "detail": "Belfaux",
               "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/bdmania/"
+            },
+            {
+              "label": "Bellarena Indoor Festival | Rock Monsters of Switzerland",
+              "detail": "BCF-Arena",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/fribourg/bellarena-indoor-festival-rock-monsters-of-switzerland_AeCMyVG"
+            },
+            {
+              "label": "Bellarena Winter Edition 2026",
+              "detail": "BCF - Arena, Fribourg",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/bellarena-winter-edition-2026/"
+            },
+            {
+              "label": "Vully Blues Festival",
+              "detail": "Vully Blues Club",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/musees/enfants/evenements/cudrefin/vully-blues-festival_AQdXDbU"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/fribourg/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -231,7 +231,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -253,7 +253,7 @@
           "url": "/en/events/fribourg/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "de": {
       "canton": "FR",
@@ -263,7 +263,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "42",
+          "value": "39",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -273,24 +273,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Les Batteurs de Pavés et les PCGB: Dracula",
-              "detail": "Café-Théâtre Le Bilboquet",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/events/music/fribourg/les-batteurs-de-paves-et-les-pcgb-dracula_AvvKxMe"
-            },
-            {
-              "label": "Circus Knie",
-              "detail": "Fribourg — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/circus-knie-2026-17/"
-            },
-            {
-              "label": "Halloween à Moléson",
-              "detail": "Office du Tourisme de Moléson, Gruyères — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
-            },
             {
               "label": "Séance d'information \"Admissions 2027-28\" - en présentiel",
               "detail": "Fribourg",
@@ -332,11 +314,29 @@
               "detail": "Belfaux",
               "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/bdmania/"
+            },
+            {
+              "label": "Bellarena Indoor Festival | Rock Monsters of Switzerland",
+              "detail": "BCF-Arena",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/fribourg/bellarena-indoor-festival-rock-monsters-of-switzerland_AeCMyVG"
+            },
+            {
+              "label": "Bellarena Winter Edition 2026",
+              "detail": "BCF - Arena, Fribourg",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/bellarena-winter-edition-2026/"
+            },
+            {
+              "label": "Vully Blues Festival",
+              "detail": "Vully Blues Club",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/musees/enfants/evenements/cudrefin/vully-blues-festival_AQdXDbU"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/freiburg/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -349,7 +349,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -371,7 +371,7 @@
           "url": "/de/veranstaltungen/freiburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "fr": {
       "canton": "FR",
@@ -381,7 +381,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "42",
+          "value": "39",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -391,24 +391,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Les Batteurs de Pavés et les PCGB: Dracula",
-              "detail": "Café-Théâtre Le Bilboquet",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/events/music/fribourg/les-batteurs-de-paves-et-les-pcgb-dracula_AvvKxMe"
-            },
-            {
-              "label": "Circus Knie",
-              "detail": "Fribourg — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/circus-knie-2026-17/"
-            },
-            {
-              "label": "Halloween à Moléson",
-              "detail": "Office du Tourisme de Moléson, Gruyères — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
-            },
             {
               "label": "Séance d'information \"Admissions 2027-28\" - en présentiel",
               "detail": "Fribourg",
@@ -450,11 +432,29 @@
               "detail": "Belfaux",
               "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/bdmania/"
+            },
+            {
+              "label": "Bellarena Indoor Festival | Rock Monsters of Switzerland",
+              "detail": "BCF-Arena",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/fribourg/bellarena-indoor-festival-rock-monsters-of-switzerland_AeCMyVG"
+            },
+            {
+              "label": "Bellarena Winter Edition 2026",
+              "detail": "BCF - Arena, Fribourg",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/bellarena-winter-edition-2026/"
+            },
+            {
+              "label": "Vully Blues Festival",
+              "detail": "Vully Blues Club",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/musees/enfants/evenements/cudrefin/vully-blues-festival_AQdXDbU"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/fribourg/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -467,7 +467,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -489,7 +489,7 @@
           "url": "/fr/evenements/fribourg/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     }
   }
 }

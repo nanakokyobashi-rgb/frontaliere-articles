@@ -4,27 +4,22 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-11-01T13:11:05.408Z",
-  "contentHash": "533112df858b7edf08a30770bf0289d8298d564b3802658fadac951d03c61157",
+  "updatedAt": "2026-11-02T09:20:10.429Z",
+  "contentHash": "2149f2afe537aef1f6517abf8714fb4d120ef555f9769776229b6bf6a0f6b84c",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-10-25T09:11:35.438Z",
+      "updatedAt": "2026-11-01T11:17:34.347Z",
       "keyFacts": 1
     },
     {
-      "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-31T21:58:14.437Z",
-      "keyFacts": 0
-    },
-    {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-31T21:33:21.304Z",
+      "updatedAt": "2026-11-01T22:02:05.721Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-31T20:43:08.728Z",
+      "updatedAt": "2026-11-01T21:24:45.283Z",
       "keyFacts": 0
     }
   ],
@@ -44,7 +39,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "2",
-          "note": "offerta mediana 2700 CHF"
+          "note": "offerta mediana 2750 CHF"
         }
       ],
       "dataBlocks": [
@@ -66,47 +61,7 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-25T09:11:35.438Z"
-        },
-        {
-          "id": "farmacie-di-turno",
-          "title": "Farmacie di turno",
-          "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
-          "items": [
-            {
-              "label": "Boscolo",
-              "detail": "Airolo, Biasca e Valli",
-              "date": "2026-10-30T17:00:00.000Z"
-            },
-            {
-              "label": "Pedrazzetti",
-              "detail": "Giubiasco, Bellinzonese",
-              "date": "2026-10-30T17:30:00.000Z"
-            },
-            {
-              "label": "Generoso",
-              "detail": "Melano, Mendrisiotto",
-              "date": "2026-10-31T07:00:00.000Z"
-            },
-            {
-              "label": "Farmacia Contrada dei Patrizi Molino Nuovo",
-              "detail": "Lugano, Luganese",
-              "date": "2026-10-31T07:00:00.000Z"
-            },
-            {
-              "label": "Internazionale La Rinascente",
-              "detail": "Ligornetto, Mendrisiotto",
-              "date": "2026-11-03T07:00:00.000Z"
-            },
-            {
-              "label": "Martinoli",
-              "detail": "Dongio, Biasca e Valli",
-              "date": "2026-11-06T17:00:00.000Z"
-            }
-          ],
-          "sourceName": "Servizio ufficiale dei turni farmacia",
-          "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-31T21:58:14.437Z"
+          "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
           "id": "aste-targhe",
@@ -122,7 +77,7 @@
             },
             {
               "label": "TI335355",
-              "value": "600 CHF",
+              "value": "700 CHF",
               "detail": "offerta attuale",
               "date": "2026-11-04T19:00:00.000Z",
               "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1542"
@@ -130,7 +85,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-31T21:33:21.304Z"
+          "updatedAt": "2026-11-01T22:02:05.721Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -168,7 +123,7 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/CS-osg-ambulatoriale.html"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -256,7 +211,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "en": {
       "canton": "TI",
@@ -273,7 +228,7 @@
         {
           "label": "Plate auctions running",
           "value": "2",
-          "note": "typical bid 2,700 CHF"
+          "note": "typical bid 2,750 CHF"
         }
       ],
       "dataBlocks": [
@@ -295,47 +250,7 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-25T09:11:35.438Z"
-        },
-        {
-          "id": "farmacie-di-turno",
-          "title": "On-duty pharmacies",
-          "description": "Upcoming duty shifts published by the canton’s official service.",
-          "items": [
-            {
-              "label": "Boscolo",
-              "detail": "Airolo, Biasca e Valli",
-              "date": "2026-10-30T17:00:00.000Z"
-            },
-            {
-              "label": "Pedrazzetti",
-              "detail": "Giubiasco, Bellinzonese",
-              "date": "2026-10-30T17:30:00.000Z"
-            },
-            {
-              "label": "Generoso",
-              "detail": "Melano, Mendrisiotto",
-              "date": "2026-10-31T07:00:00.000Z"
-            },
-            {
-              "label": "Farmacia Contrada dei Patrizi Molino Nuovo",
-              "detail": "Lugano, Luganese",
-              "date": "2026-10-31T07:00:00.000Z"
-            },
-            {
-              "label": "Internazionale La Rinascente",
-              "detail": "Ligornetto, Mendrisiotto",
-              "date": "2026-11-03T07:00:00.000Z"
-            },
-            {
-              "label": "Martinoli",
-              "detail": "Dongio, Biasca e Valli",
-              "date": "2026-11-06T17:00:00.000Z"
-            }
-          ],
-          "sourceName": "Official pharmacy duty service",
-          "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-31T21:58:14.437Z"
+          "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
           "id": "aste-targhe",
@@ -351,7 +266,7 @@
             },
             {
               "label": "TI335355",
-              "value": "600 CHF",
+              "value": "700 CHF",
               "detail": "current bid",
               "date": "2026-11-04T19:00:00.000Z",
               "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1542"
@@ -359,7 +274,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-31T21:33:21.304Z"
+          "updatedAt": "2026-11-01T22:02:05.721Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -397,7 +312,7 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/CS-osg-ambulatoriale.html"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -480,7 +395,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "de": {
       "canton": "TI",
@@ -497,7 +412,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "2",
-          "note": "mittleres Gebot 2’700 CHF"
+          "note": "mittleres Gebot 2’750 CHF"
         }
       ],
       "dataBlocks": [
@@ -519,47 +434,7 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-25T09:11:35.438Z"
-        },
-        {
-          "id": "farmacie-di-turno",
-          "title": "Notfallapotheken",
-          "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
-          "items": [
-            {
-              "label": "Boscolo",
-              "detail": "Airolo, Biasca e Valli",
-              "date": "2026-10-30T17:00:00.000Z"
-            },
-            {
-              "label": "Pedrazzetti",
-              "detail": "Giubiasco, Bellinzonese",
-              "date": "2026-10-30T17:30:00.000Z"
-            },
-            {
-              "label": "Generoso",
-              "detail": "Melano, Mendrisiotto",
-              "date": "2026-10-31T07:00:00.000Z"
-            },
-            {
-              "label": "Farmacia Contrada dei Patrizi Molino Nuovo",
-              "detail": "Lugano, Luganese",
-              "date": "2026-10-31T07:00:00.000Z"
-            },
-            {
-              "label": "Internazionale La Rinascente",
-              "detail": "Ligornetto, Mendrisiotto",
-              "date": "2026-11-03T07:00:00.000Z"
-            },
-            {
-              "label": "Martinoli",
-              "detail": "Dongio, Biasca e Valli",
-              "date": "2026-11-06T17:00:00.000Z"
-            }
-          ],
-          "sourceName": "Offizieller Apotheken-Notfalldienst",
-          "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-31T21:58:14.437Z"
+          "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
           "id": "aste-targhe",
@@ -575,7 +450,7 @@
             },
             {
               "label": "TI335355",
-              "value": "600 CHF",
+              "value": "700 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-11-04T19:00:00.000Z",
               "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1542"
@@ -583,7 +458,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-31T21:33:21.304Z"
+          "updatedAt": "2026-11-01T22:02:05.721Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -621,7 +496,7 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/CS-osg-ambulatoriale.html"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -704,7 +579,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "fr": {
       "canton": "TI",
@@ -721,7 +596,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "2",
-          "note": "offre centrale 2 700 CHF"
+          "note": "offre centrale 2 750 CHF"
         }
       ],
       "dataBlocks": [
@@ -743,47 +618,7 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-25T09:11:35.438Z"
-        },
-        {
-          "id": "farmacie-di-turno",
-          "title": "Pharmacies de garde",
-          "description": "Prochaines gardes publiées par le service officiel du canton.",
-          "items": [
-            {
-              "label": "Boscolo",
-              "detail": "Airolo, Biasca e Valli",
-              "date": "2026-10-30T17:00:00.000Z"
-            },
-            {
-              "label": "Pedrazzetti",
-              "detail": "Giubiasco, Bellinzonese",
-              "date": "2026-10-30T17:30:00.000Z"
-            },
-            {
-              "label": "Generoso",
-              "detail": "Melano, Mendrisiotto",
-              "date": "2026-10-31T07:00:00.000Z"
-            },
-            {
-              "label": "Farmacia Contrada dei Patrizi Molino Nuovo",
-              "detail": "Lugano, Luganese",
-              "date": "2026-10-31T07:00:00.000Z"
-            },
-            {
-              "label": "Internazionale La Rinascente",
-              "detail": "Ligornetto, Mendrisiotto",
-              "date": "2026-11-03T07:00:00.000Z"
-            },
-            {
-              "label": "Martinoli",
-              "detail": "Dongio, Biasca e Valli",
-              "date": "2026-11-06T17:00:00.000Z"
-            }
-          ],
-          "sourceName": "Service officiel des pharmacies de garde",
-          "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-31T21:58:14.437Z"
+          "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
           "id": "aste-targhe",
@@ -799,7 +634,7 @@
             },
             {
               "label": "TI335355",
-              "value": "600 CHF",
+              "value": "700 CHF",
               "detail": "offre actuelle",
               "date": "2026-11-04T19:00:00.000Z",
               "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1542"
@@ -807,7 +642,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-31T21:33:21.304Z"
+          "updatedAt": "2026-11-01T22:02:05.721Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -845,7 +680,7 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/CS-osg-ambulatoriale.html"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -925,7 +760,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     }
   }
 }

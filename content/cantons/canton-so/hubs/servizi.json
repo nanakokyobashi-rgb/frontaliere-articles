@@ -4,22 +4,27 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "servizi",
-  "updatedAt": "2026-11-01T13:11:05.408Z",
-  "contentHash": "2302090ca27ae823b6958f2946315b1cb5dd36c69ac1e505e5b071f9e3bc1ca7",
+  "updatedAt": "2026-11-02T09:20:10.429Z",
+  "contentHash": "13e69830108dddf1570dc72a2ed0f2eebb30bf8c4a8ac53164d869b42189fff1",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-10-25T09:11:35.438Z",
+      "updatedAt": "2026-11-01T11:17:34.347Z",
       "keyFacts": 1
     },
     {
+      "id": "farmacie-di-turno",
+      "updatedAt": "2026-11-02T01:54:40.327Z",
+      "keyFacts": 0
+    },
+    {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-31T21:33:21.304Z",
+      "updatedAt": "2026-11-01T22:02:05.721Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-31T20:43:08.728Z",
+      "updatedAt": "2026-11-01T21:24:45.283Z",
       "keyFacts": 0
     }
   ],
@@ -56,7 +61,32 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-25T09:11:35.438Z"
+          "updatedAt": "2026-11-01T11:17:34.347Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "Farmacie di turno",
+          "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
+          "items": [
+            {
+              "label": "Saner Apotheke Dornach",
+              "detail": "Dornach, Dorneck-Thierstein",
+              "date": "2026-11-08T08:00:00.000Z"
+            },
+            {
+              "label": "Ambassador Apotheke",
+              "detail": "Solothurn, Solothurn",
+              "date": "2026-11-08T09:00:00.000Z"
+            },
+            {
+              "label": "Jura Apotheke Eichenberger",
+              "detail": "Dulliken, Olten",
+              "date": "2026-11-08T09:00:00.000Z"
+            }
+          ],
+          "sourceName": "Servizio ufficiale dei turni farmacia",
+          "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
+          "updatedAt": "2026-11-02T01:54:40.327Z"
         },
         {
           "id": "aste-targhe",
@@ -72,7 +102,7 @@
             },
             {
               "label": "SO4474",
-              "value": "1500 CHF",
+              "value": "1550 CHF",
               "detail": "offerta attuale",
               "date": "2026-11-04T16:00:00.000Z",
               "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3383&locale=de_CH"
@@ -87,7 +117,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-10-31T21:33:21.304Z"
+          "updatedAt": "2026-11-01T22:02:05.721Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -120,7 +150,7 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-sank-im-juni-auf-30-prozent-1/"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -200,7 +230,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "en": {
       "canton": "SO",
@@ -234,7 +264,32 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-25T09:11:35.438Z"
+          "updatedAt": "2026-11-01T11:17:34.347Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "On-duty pharmacies",
+          "description": "Upcoming duty shifts published by the canton’s official service.",
+          "items": [
+            {
+              "label": "Saner Apotheke Dornach",
+              "detail": "Dornach, Dorneck-Thierstein",
+              "date": "2026-11-08T08:00:00.000Z"
+            },
+            {
+              "label": "Ambassador Apotheke",
+              "detail": "Solothurn, Solothurn",
+              "date": "2026-11-08T09:00:00.000Z"
+            },
+            {
+              "label": "Jura Apotheke Eichenberger",
+              "detail": "Dulliken, Olten",
+              "date": "2026-11-08T09:00:00.000Z"
+            }
+          ],
+          "sourceName": "Official pharmacy duty service",
+          "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
+          "updatedAt": "2026-11-02T01:54:40.327Z"
         },
         {
           "id": "aste-targhe",
@@ -250,7 +305,7 @@
             },
             {
               "label": "SO4474",
-              "value": "1,500 CHF",
+              "value": "1,550 CHF",
               "detail": "current bid",
               "date": "2026-11-04T16:00:00.000Z",
               "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3383&locale=de_CH"
@@ -265,7 +320,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-10-31T21:33:21.304Z"
+          "updatedAt": "2026-11-01T22:02:05.721Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -298,7 +353,7 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-sank-im-juni-auf-30-prozent-1/"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -374,7 +429,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "de": {
       "canton": "SO",
@@ -408,7 +463,32 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-25T09:11:35.438Z"
+          "updatedAt": "2026-11-01T11:17:34.347Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "Notfallapotheken",
+          "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
+          "items": [
+            {
+              "label": "Saner Apotheke Dornach",
+              "detail": "Dornach, Dorneck-Thierstein",
+              "date": "2026-11-08T08:00:00.000Z"
+            },
+            {
+              "label": "Ambassador Apotheke",
+              "detail": "Solothurn, Solothurn",
+              "date": "2026-11-08T09:00:00.000Z"
+            },
+            {
+              "label": "Jura Apotheke Eichenberger",
+              "detail": "Dulliken, Olten",
+              "date": "2026-11-08T09:00:00.000Z"
+            }
+          ],
+          "sourceName": "Offizieller Apotheken-Notfalldienst",
+          "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
+          "updatedAt": "2026-11-02T01:54:40.327Z"
         },
         {
           "id": "aste-targhe",
@@ -424,7 +504,7 @@
             },
             {
               "label": "SO4474",
-              "value": "1’500 CHF",
+              "value": "1’550 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-11-04T16:00:00.000Z",
               "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3383&locale=de_CH"
@@ -439,7 +519,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-10-31T21:33:21.304Z"
+          "updatedAt": "2026-11-01T22:02:05.721Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -472,7 +552,7 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-sank-im-juni-auf-30-prozent-1/"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -548,7 +628,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "fr": {
       "canton": "SO",
@@ -582,7 +662,32 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-25T09:11:35.438Z"
+          "updatedAt": "2026-11-01T11:17:34.347Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "Pharmacies de garde",
+          "description": "Prochaines gardes publiées par le service officiel du canton.",
+          "items": [
+            {
+              "label": "Saner Apotheke Dornach",
+              "detail": "Dornach, Dorneck-Thierstein",
+              "date": "2026-11-08T08:00:00.000Z"
+            },
+            {
+              "label": "Ambassador Apotheke",
+              "detail": "Solothurn, Solothurn",
+              "date": "2026-11-08T09:00:00.000Z"
+            },
+            {
+              "label": "Jura Apotheke Eichenberger",
+              "detail": "Dulliken, Olten",
+              "date": "2026-11-08T09:00:00.000Z"
+            }
+          ],
+          "sourceName": "Service officiel des pharmacies de garde",
+          "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
+          "updatedAt": "2026-11-02T01:54:40.327Z"
         },
         {
           "id": "aste-targhe",
@@ -598,7 +703,7 @@
             },
             {
               "label": "SO4474",
-              "value": "1 500 CHF",
+              "value": "1 550 CHF",
               "detail": "offre actuelle",
               "date": "2026-11-04T16:00:00.000Z",
               "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3383&locale=de_CH"
@@ -613,7 +718,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-10-31T21:33:21.304Z"
+          "updatedAt": "2026-11-01T22:02:05.721Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -646,7 +751,7 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-sank-im-juni-auf-30-prozent-1/"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -718,7 +823,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     }
   }
 }

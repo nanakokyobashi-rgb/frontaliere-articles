@@ -2056,9 +2056,11 @@ jobs:
       # doppione, rigeneralo su altro», e va letto cosi' prima di cercare il
       # difetto nel gate.
       #
-      # NON aggiungere qui `localized-toponyms.test.mjs`: il suo controllo sul
+      # NON aggiungere qui `localized-toponyms.test.mjs`: il suo audit sul
       # corpus storico confronta ogni campo italiano con le tre lingue e non e'
-      # un gate bounded dell'articolo appena scritto. Il payload nuovo passa
+      # un controllo bounded dell'articolo appena scritto. Misurato sulla
+      # superficie reale, resta pendente oltre 90s e nella run #3514 ha
+      # consumato i 25m finali fino al timeout del job. Il payload nuovo passa
       # gia' da `assertLocalizedToponyms(data)` dentro create-article prima
       # della scrittura; l'audit globale resta nel content-gate su main, che
       # registra esplicitamente questa suite in `content-gates-main.mjs`.

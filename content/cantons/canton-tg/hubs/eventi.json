@@ -4,17 +4,17 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "eventi",
-  "updatedAt": "2026-11-01T13:11:05.408Z",
-  "contentHash": "6f1cb81138c1993aea23051b2273101129c413cc5c120842f6f911b6afd719ae",
+  "updatedAt": "2026-11-02T09:20:10.429Z",
+  "contentHash": "5e9f19440fbb1493d6c5d816ebbb8ac98f4746bb2ab31edf91e2bfe6faf507c2",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-31T14:21:36.178Z",
+      "updatedAt": "2026-11-02T02:24:34.417Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-31T20:43:08.728Z",
+      "updatedAt": "2026-11-01T21:24:45.283Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "42",
+          "value": "50",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,27 +38,15 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Circle-Songs – Tageskurs",
-              "detail": "Eisenwerk, Frauenfeld",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/frauenfeld/circle-songs-tageskurs_AiX5sKd"
-            },
-            {
-              "label": "Ittinger Sonntagskonzert – Ensemble Orion",
-              "detail": "Warth-Weiningen",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ittinger-sonntagskonzert-ensemble-orion/"
-            },
-            {
               "label": "La Table d'Amis | Tavolata",
               "detail": "Restaurant Seegarten, Kreuzlingen — in corso, ultimo giorno: 13 novembre 2026",
-              "date": "2026-11-01",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
             },
             {
               "label": "Philosophie im Löchlgaischt",
               "detail": "Eschenz — in corso, ultimo giorno: 24 novembre 2026",
-              "date": "2026-11-01",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
             },
             {
@@ -96,11 +84,23 @@
               "detail": "See & Park Hotel Feldbach, Steckborn",
               "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/inbalanceleben-am-bodensee-qigong-meditation-achtsamkeit/"
+            },
+            {
+              "label": "Info - Anlass Pranic Healing",
+              "detail": "Kreuzlingen",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/info-anlass-pranic-healing/"
+            },
+            {
+              "label": "Laternenbasteln und Laternenumzug im Familienzentrum",
+              "detail": "Familienzentrum Region Weinfelden, Weinfelden",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/laternenbasteln-und-laternenumzug-im-familienzentrum/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/turgovia/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -123,7 +123,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -151,7 +151,7 @@
           "url": "/eventi/turgovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "en": {
       "canton": "TG",
@@ -161,7 +161,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "42",
+          "value": "50",
           "note": "from the site’s events calendar"
         }
       ],
@@ -172,27 +172,15 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Circle-Songs – Tageskurs",
-              "detail": "Eisenwerk, Frauenfeld",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/frauenfeld/circle-songs-tageskurs_AiX5sKd"
-            },
-            {
-              "label": "Ittinger Sonntagskonzert – Ensemble Orion",
-              "detail": "Warth-Weiningen",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ittinger-sonntagskonzert-ensemble-orion/"
-            },
-            {
               "label": "La Table d'Amis | Tavolata",
               "detail": "Restaurant Seegarten, Kreuzlingen — ongoing, last day: 13 November 2026",
-              "date": "2026-11-01",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
             },
             {
               "label": "Philosophie im Löchlgaischt",
               "detail": "Eschenz — ongoing, last day: 24 November 2026",
-              "date": "2026-11-01",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
             },
             {
@@ -230,11 +218,23 @@
               "detail": "See & Park Hotel Feldbach, Steckborn",
               "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/inbalanceleben-am-bodensee-qigong-meditation-achtsamkeit/"
+            },
+            {
+              "label": "Info - Anlass Pranic Healing",
+              "detail": "Kreuzlingen",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/info-anlass-pranic-healing/"
+            },
+            {
+              "label": "Laternenbasteln und Laternenumzug im Familienzentrum",
+              "detail": "Familienzentrum Region Weinfelden, Weinfelden",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/laternenbasteln-und-laternenumzug-im-familienzentrum/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/thurgau/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -257,7 +257,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -285,7 +285,7 @@
           "url": "/en/events/thurgau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "de": {
       "canton": "TG",
@@ -295,7 +295,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "42",
+          "value": "50",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -306,27 +306,15 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Circle-Songs – Tageskurs",
-              "detail": "Eisenwerk, Frauenfeld",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/frauenfeld/circle-songs-tageskurs_AiX5sKd"
-            },
-            {
-              "label": "Ittinger Sonntagskonzert – Ensemble Orion",
-              "detail": "Warth-Weiningen",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ittinger-sonntagskonzert-ensemble-orion/"
-            },
-            {
               "label": "La Table d'Amis | Tavolata",
               "detail": "Restaurant Seegarten, Kreuzlingen — läuft, letzter Tag: 13. November 2026",
-              "date": "2026-11-01",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
             },
             {
               "label": "Philosophie im Löchlgaischt",
               "detail": "Eschenz — läuft, letzter Tag: 24. November 2026",
-              "date": "2026-11-01",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
             },
             {
@@ -364,11 +352,23 @@
               "detail": "See & Park Hotel Feldbach, Steckborn",
               "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/inbalanceleben-am-bodensee-qigong-meditation-achtsamkeit/"
+            },
+            {
+              "label": "Info - Anlass Pranic Healing",
+              "detail": "Kreuzlingen",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/info-anlass-pranic-healing/"
+            },
+            {
+              "label": "Laternenbasteln und Laternenumzug im Familienzentrum",
+              "detail": "Familienzentrum Region Weinfelden, Weinfelden",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/laternenbasteln-und-laternenumzug-im-familienzentrum/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/thurgau/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -391,7 +391,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -419,7 +419,7 @@
           "url": "/de/veranstaltungen/thurgau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "fr": {
       "canton": "TG",
@@ -429,7 +429,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "42",
+          "value": "50",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -440,27 +440,15 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Circle-Songs – Tageskurs",
-              "detail": "Eisenwerk, Frauenfeld",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/frauenfeld/circle-songs-tageskurs_AiX5sKd"
-            },
-            {
-              "label": "Ittinger Sonntagskonzert – Ensemble Orion",
-              "detail": "Warth-Weiningen",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ittinger-sonntagskonzert-ensemble-orion/"
-            },
-            {
               "label": "La Table d'Amis | Tavolata",
               "detail": "Restaurant Seegarten, Kreuzlingen — en cours, dernier jour : 13 novembre 2026",
-              "date": "2026-11-01",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/la-table-dami-tavolata/"
             },
             {
               "label": "Philosophie im Löchlgaischt",
               "detail": "Eschenz — en cours, dernier jour : 24 novembre 2026",
-              "date": "2026-11-01",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/philosophie-im-loechlgaischt/"
             },
             {
@@ -498,11 +486,23 @@
               "detail": "See & Park Hotel Feldbach, Steckborn",
               "date": "2026-11-05",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/inbalanceleben-am-bodensee-qigong-meditation-achtsamkeit/"
+            },
+            {
+              "label": "Info - Anlass Pranic Healing",
+              "detail": "Kreuzlingen",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/info-anlass-pranic-healing/"
+            },
+            {
+              "label": "Laternenbasteln und Laternenumzug im Familienzentrum",
+              "detail": "Familienzentrum Region Weinfelden, Weinfelden",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/laternenbasteln-und-laternenumzug-im-familienzentrum/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/thurgovie/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -525,7 +525,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -553,7 +553,7 @@
           "url": "/fr/evenements/thurgovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     }
   }
 }
