@@ -32,7 +32,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const SLUG = 'telelavoro-accordo-definitivo-italia';
 const LOCALES = ['it', 'en', 'de', 'fr'];
-const REFRESHED_ON = '2026-09-25';
+const REFRESHED_ON = '2026-10-31';
 
 const IN_FORCE = /9\.? (?:febbraio|Februar|février|February) 2026/;
 const APPLIES_FROM = /1(?:°|er|\.)? (?:gennaio|Januar|janvier|January) 2024/;

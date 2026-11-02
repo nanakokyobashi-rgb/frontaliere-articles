@@ -28,7 +28,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const SLUG = 'comuni-frontalieri-distanza';
 const LOCALES = ['it', 'en', 'de', 'fr'];
-const REFRESHED_ON = '2026-09-25';
+const REFRESHED_ON = '2026-10-31';
 
 const DL113_ART6_URL = 'https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legge:2024-08-09;113~art6!vig=2026-09-25';
 const TU_ART221_URL = 'https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2026-06-19;117~art221';

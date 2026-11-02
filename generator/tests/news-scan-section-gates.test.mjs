@@ -51,6 +51,7 @@ import { fileURLToPath } from 'node:url';
 
 import { hasDomainAnchor } from '../scripts/lib/discovery/domainAnchor.mjs';
 import { countLocalNewsHits, isLocalNews } from '../scripts/lib/local-news.mjs';
+import { isOffTopicHeadline } from '../scripts/lib/article-relevance-gate.mjs';
 import { buildCantonProfile, cantonPromptLines } from '../scripts/lib/canton-section-profile.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -115,6 +116,7 @@ function loadGates(section, cantonProfile = null) {
     'console',
     'isLocalNews',
     'countLocalNewsHits',
+    'isOffTopicHeadline',
     `${LEXICON_SRC}\n${FILTER_SRC}\n${PRIORITIZE_SRC}\nreturn {
        TOPICAL_KEYWORDS, SVIZZERA_TOPICAL_KEYWORDS, FRONTALIERI_KEYWORDS,
        FRONTALIERE_ADMISSION_KEYWORDS, FRONTALIERE_EVENTS_CULTURE_KEYWORDS,
@@ -133,6 +135,7 @@ function loadGates(section, cantonProfile = null) {
     { error: (...a) => logs.push(a.join(' ')) },
     isLocalNews,
     countLocalNewsHits,
+    isOffTopicHeadline,
   );
   return { ...api, logs, runReport };
 }

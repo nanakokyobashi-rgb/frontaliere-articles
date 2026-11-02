@@ -40,6 +40,7 @@ import { fileURLToPath } from 'node:url';
 import { runFactualityGates, formatIssues } from '../scripts/lib/article-factuality-gates.mjs';
 import { checkCorpusFabricatedInstitutionNames } from '../scripts/lib/corpus-fabricated-institution-names.mjs';
 import { findArticleLocalizedToponymMismatches } from '../scripts/lib/localized-toponyms.mjs';
+import { assertNoFiscalErrorsInLocales } from '../scripts/lib/article-ymyl-gate.mjs';
 import {
   CLAIM_LOCALES,
   HEALTH_TAX_SUMMARY,
@@ -113,6 +114,9 @@ function makeGate() {
     'HEALTH_TAX_SUMMARY',
     'repairEditorialClaims',
     'assertNoEditorialClaims',
+    'assertNoFiscalErrorsInLocales',
+    'assertArticleRelevance',
+    'assertYmylPublishable',
     'checkCorpusFabricatedInstitutionNames',
     'findArticleLocalizedToponymMismatches',
     `${GATE_SRC}\nreturn assertArticlePassesFactualityGates;`,
@@ -130,6 +134,9 @@ function makeGate() {
     HEALTH_TAX_SUMMARY,
     repairEditorialClaims,
     assertNoEditorialClaims,
+    assertNoFiscalErrorsInLocales,
+    () => {},
+    () => {},
     checkCorpusFabricatedInstitutionNames,
     findArticleLocalizedToponymMismatches,
   );

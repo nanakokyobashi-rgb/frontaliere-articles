@@ -556,8 +556,10 @@ async function processDoc(db, FieldValue, docSnap) {
     try {
       // Explicit source context closes the journalist-only gap before the
       // shared registrar repeats the same gate on its write path.
-      assertArticlePassesFactualityGates(data, { sourceUrl, sourceText });
-      registration = await registerArticleFiles(data);
+      assertArticlePassesFactualityGates(data, { writer: 'journalist', sourceUrl, sourceText });
+      // Human editorial approval is the explicit, narrowly-scoped opt-out from
+      // the automatic relevance/YMYL topic gates in the shared writer.
+      registration = await registerArticleFiles(data, { writer: 'journalist' });
     } finally {
       delete data._sourceUrl;
       delete data._sourceText;

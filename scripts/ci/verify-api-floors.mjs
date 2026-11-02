@@ -65,12 +65,25 @@ import { countXmlTags } from '../lib/count-xml-tags.mjs';
 import { seoChunkSources } from '../lib/engine-corpus-view.mjs';
 import { EDGE_SECTION_REGISTRY_FILE } from '../lib/section-registry.mjs';
 import { stripNonMarkup } from '../lib/count-xml-tags.mjs';
+import {
+  ARTICLE_INDEX_EXCLUSIONS_FILES,
+  loadArticleIndexExclusions,
+} from '../../engine/shared/articleIndexExclusions.mjs';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 
 // Re-export per i consumer del verifier: la definizione condivisa vive nel
 // modulo dei floor, così writer e gate non possono divergere sui nomi.
 export { SECTION_COUNTERS, SECTION_SITEMAPS, ARCHIVE_SITEMAP };
+
+function indexExcludedArticleIds(indexExclusions, section) {
+  const prefix = `${section}|`;
+  return new Set(
+    [...indexExclusions]
+      .filter((key) => key.startsWith(prefix))
+      .map((key) => key.slice(prefix.length)),
+  );
+}
 
 const IMAGE_SOURCE_LABEL = IMAGE_SOURCE_DIRS.join(' or ');
 
@@ -198,15 +211,18 @@ function historicalSeoFilesAtRevision(root, revision, sectionId) {
   return declaration ? parseStringArray(declaration) : [];
 }
 
-function countSeoEntriesAtRevision(root, revision, seoFiles) {
+function countSeoEntriesAtRevision(root, revision, seoFiles, excludedIds = []) {
   assertGitRevision(root, revision);
+  const excluded = new Set(excludedIds);
   const ids = new Set();
   for (const file of seoFiles) {
     const rel = path.posix.join(SEO_CHUNK_DIR.split(path.sep).join('/'), file);
     const source = readGitFileAtRevision(root, revision, rel);
     // Un chunk aggiunto dopo la revisione storica non aveva popolazione allora.
     if (source === null) continue;
-    collectSeoEntryIds(source, ids);
+    for (const id of collectSeoEntryIds(source)) {
+      if (!excluded.has(id)) ids.add(id);
+    }
   }
   return ids.size;
 }
@@ -275,7 +291,8 @@ export function floorViolations(measured, expected, retention = undefined) {
   const rssSections = expected.rssSections ?? RSS_SECTIONS;
   for (const feedName of measured.missingFeeds ?? []) {
     const owner = feedSection(feedName, rssSections);
-    if (newFamily.has(owner) || unpublished.has(owner)) continue;
+    const excludedOnly = expected.feedSourcesExcludedOnly?.[owner] === true;
+    if (newFamily.has(owner) || unpublished.has(owner) || excludedOnly) continue;
     violations.push(`${feedName}: feed RSS atteso da RSS_SECTIONS assente o non è un documento RSS`);
   }
 
@@ -398,12 +415,22 @@ export function floorViolations(measured, expected, retention = undefined) {
       continue;
     }
     const current = expected.feedSources?.[section] ?? 0;
+    const excludedOnly = expected.feedSourcesExcludedOnly?.[section] === true;
     // Stessa regola dei corpi, un riferimento diverso: zero voci nei chunk non
     // e' «feed legittimamente vuoto», e' la lista dei chunk che non risolve —
     // il modo esatto in cui un feed e' gia' rimasto fermo tre mesi. Una riga
     // per sezione, non una per feed: i cinque feed di una sezione condividono
     // il riferimento, e ripeterlo cinque volte non aggiunge niente.
     if (current === 0) {
+      if (excludedOnly) {
+        if (feed.items > 0) {
+          violations.push(
+            `${feed.name}: ${feed.items} <item> nonostante tutte le voci SEO di ${section} `
+              + 'siano ritirate dal ledger article-index-exclusions — filtro RSS divergente',
+          );
+        }
+        continue;
+      }
       if (!missingSeo.has(section)) {
         missingSeo.add(section);
         violations.push(
@@ -693,14 +720,20 @@ export async function expectFromCorpus(root) {
   // Una seconda lista qui sarebbe il difetto che ha congelato rss.xml per tre
   // mesi, spostato di un file (AGENTS.md #6).
   const feedSources = {};
+  const feedSourcesExcludedOnly = {};
   const previousFeedSources = {};
   const latestSeoPublications = {};
   const revision = previousRevision(root);
   const newFamilySections = RSS_SECTIONS.filter((section) => isNewFamilySection(root, section.id)).map((section) => section.id);
+  const indexExclusions = loadArticleIndexExclusions(
+    fs,
+    ARTICLE_INDEX_EXCLUSIONS_FILES.map((candidate) => path.join(root, candidate)),
+  );
   for (const section of RSS_SECTIONS) {
     if (newFamilySections.includes(section.id)) {
       // Nessun registro, nessun chunk SEO: niente da contare ne' da datare.
       feedSources[section.id] = 0;
+      feedSourcesExcludedOnly[section.id] = false;
       latestSeoPublications[section.id] = null;
       previousFeedSources[section.id] = null;
       continue;
@@ -708,15 +741,29 @@ export async function expectFromCorpus(root) {
     // I chunk SEO dove stanno nel corpus: per una sezione cantonale non sono in
     // content/seo col nome dell'engine ma nella cartella della sezione.
     const seo = seoChunkSources(section);
-    feedSources[section.id] = countSeoEntries(root, seo.files, seo.seoDir);
-    latestSeoPublications[section.id] = latestSeoPublication(root, seo.files, seo.seoDir);
+    const excludedIds = indexExcludedArticleIds(indexExclusions, section.id);
+    const unfilteredFeedSources = countSeoEntries(root, seo.files, seo.seoDir);
+    feedSources[section.id] = countSeoEntries(root, seo.files, seo.seoDir, { excludedIds });
+    // A zero caused solely by the noindex ledger is intentional: the publisher
+    // must be allowed to emit no RSS file for that section, while an absent SEO
+    // chunk must still fail closed below. Keep this fact explicit so the floor
+    // does not confuse a deliberate retirement with a truncated corpus.
+    feedSourcesExcludedOnly[section.id] = unfilteredFeedSources > 0
+      && feedSources[section.id] === 0
+      && excludedIds.size >= unfilteredFeedSources;
+    latestSeoPublications[section.id] = latestSeoPublication(root, seo.files, seo.seoDir, { excludedIds });
     if (revision === null || !seo.historyComparable) {
       previousFeedSources[section.id] = null;
       continue;
     }
     const previousSeoFiles = historicalSeoFilesAtRevision(root, revision, section.id);
     const historicalPopulationFiles = [...new Set([...section.seoFiles, ...previousSeoFiles])];
-    previousFeedSources[section.id] = countSeoEntriesAtRevision(root, revision, historicalPopulationFiles);
+    previousFeedSources[section.id] = countSeoEntriesAtRevision(
+      root,
+      revision,
+      historicalPopulationFiles,
+      excludedIds,
+    );
   }
   const sourceSitemaps = {};
   const sourceArchiveSitemapUrls = {};
@@ -725,7 +772,9 @@ export async function expectFromCorpus(root) {
   const sourceArchiveHtmlPageErrors = {};
   for (const section of Object.keys(SECTION_COUNTERS)) {
     try {
-      sourceSitemaps[section] = countSourceSitemapEntries(root, section);
+      sourceSitemaps[section] = countSourceSitemapEntries(root, section, {
+        excludedIds: indexExcludedArticleIds(indexExclusions, section),
+      });
     } catch (error) {
       // Some unit fixtures model only the body/SEO corpus because they never
       // invoke the sitemap writer. A real publish checkout has these inputs —
@@ -757,6 +806,7 @@ export async function expectFromCorpus(root) {
     ...(Object.keys(sourceArchiveHtmlPages).length ? { sourceArchiveHtmlPages } : {}),
     ...(Object.keys(sourceArchiveHtmlPageErrors).length ? { sourceArchiveHtmlPageErrors } : {}),
     feedSources,
+    feedSourcesExcludedOnly,
     previousFeedSources,
     latestSeoPublications,
     newFamilySections,

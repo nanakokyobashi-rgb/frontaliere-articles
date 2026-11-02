@@ -73,6 +73,7 @@ import { coverKey } from '../engine/shared/imageCredits.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const RETIREMENT_JOURNAL = 'data/retirement-journal.json';
+const ARTICLE_INDEX_EXCLUSIONS_FILE = 'content/article-index-exclusions.json';
 
 const rel = (p) => path.join(ROOT, p);
 const read = (p) => readFileSync(rel(p), 'utf-8');
@@ -543,6 +544,25 @@ function main() {
     retiredSourceUrls = led.hits;
     queueWriteTarget(writes, cfg.sourceLedger, led.text, 'ledger URL');
     planned.push({ file: cfg.sourceLedger, what: `${led.hits.length} URL di fonte` });
+  }
+
+  // 7-bis. Una riga del ledger senza articolo ferma il publisher: va via con lui.
+  const indexExclusionsPresent = assertRegularFileIfPresent(
+    ROOT,
+    ARTICLE_INDEX_EXCLUSIONS_FILE,
+    'target da scrivere (ledger esclusioni)',
+  );
+  if (indexExclusionsPresent) {
+    const exclusions = JSON.parse(read(ARTICLE_INDEX_EXCLUSIONS_FILE));
+    const lists = ['excluded', 'manualExclusions', 'manualKeeps'];
+    const before = lists.map((key) => exclusions[key]?.length ?? 0);
+    for (const key of lists) {
+      if (Array.isArray(exclusions[key])) exclusions[key] = exclusions[key].filter((row) => row?.id !== id);
+    }
+    if (lists.some((key, index) => (exclusions[key]?.length ?? 0) !== before[index])) {
+      queueWriteTarget(writes, ARTICLE_INDEX_EXCLUSIONS_FILE, `${JSON.stringify(exclusions, null, 2)}\n`, 'ledger esclusioni');
+      planned.push({ file: ARTICLE_INDEX_EXCLUSIONS_FILE, what: 'riga del ledger esclusioni' });
+    }
   }
 
   // 8. provenienza immagine

@@ -118,7 +118,9 @@ export function publishedArticleLocales(article, paths, slugMap, shadowed = new 
  * @param meta per-locale meta object, keyed `blog.article.<id>.<field>`
  * @param shadowed set of IT slugs to de-list from the sitemap without
  *   removing or noindexing the page itself (canonical-override winners, plus
- *   — for the frontaliere caller — retired daily editions). A `<loc>` whose
+ *   — for the frontaliere caller — retired daily editions), and the articles
+ *   withdrawn from the index, whose page does carry `noindex,follow`
+ *   (content/article-index-exclusions.json). A `<loc>` whose
  *   own page canonicalises elsewhere is a hard CI gate failure downstream
  *   ("Sitemap <loc> URLs MUST self-canonicalize"), so this is the one place
  *   that failure is preventable before it is published.

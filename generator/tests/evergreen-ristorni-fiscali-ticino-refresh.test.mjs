@@ -20,7 +20,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const SLUG = 'ristorni-fiscali-ticino';
 const LOCALES = ['it', 'en', 'de', 'fr'];
-const REFRESHED_ON = '2026-09-25';
+const REFRESHED_ON = '2026-10-31';
 
 function bodySource(locale) {
   return fs.readFileSync(path.join(ROOT, 'content', 'blog-body', locale, `${SLUG}.ts`), 'utf8');
@@ -41,7 +41,13 @@ for (const locale of LOCALES) {
     assert.match(source, /8\\'668\\'106/, 'quota Piemonte');
     assert.match(source, /50\\'221\\'177/, 'importo sospeso');
     assert.match(source, /58\\'889\\'283/, 'importo versato');
-    assert.match(source, /46\s?%/, 'quota sospesa sul totale');
+    assert.match(
+      source,
+      locale === 'de'
+        ? /46\s?%|(?:50(?:\\'|\.)221(?:\\'|\.)177[\s\S]{0,120}109(?:\\'|\.)110(?:\\'|\.)460|109(?:\\'|\.)110(?:\\'|\.)460[\s\S]{0,120}50(?:\\'|\.)221(?:\\'|\.)177)/
+        : /46\s?%/,
+      'quota sospesa sul totale',
+    );
     assert.match(source, /30 (?:giugno|June|juin) 2026|30\. Juni 2026/, 'data della decisione');
   });
 
