@@ -29,7 +29,11 @@ import { reportStrippedControlChars } from './lib/control-char-write-report.mjs'
 import { escapeForSingleQuoteTS, unescapeForSingleQuoteTS } from './lib/article-meta-block.mjs';
 import { exitAfterDrain } from './lib/drain-stdio.mjs';
 import { escapeRegExpLiteral } from './lib/escape-regexp.mjs';
-import { assertLocalizedToponymPair, extractArticleProjectionText } from './lib/localized-toponyms.mjs';
+import {
+  LOCALIZED_TOPONYM_FIELD_SEPARATOR,
+  assertLocalizedToponymPair,
+  extractArticleProjectionText,
+} from './lib/localized-toponyms.mjs';
 import { sanitizeArticleFaqMarkdown } from '../../scripts/lib/article-link-contract.mjs';
 import { assertFaqPairsHaveNoRejectedControls } from '../../scripts/lib/faq-control-contract.mjs';
 
@@ -261,7 +265,7 @@ function articleProjectionText(filePath, articleId, { excludeFaq = false } = {})
   const metaProjection = existsSync(metaPath)
     ? extractArticleProjectionText(readFileSync(metaPath, 'utf-8'), articleId, { excludeFaq })
     : '';
-  return [bodyProjection, metaProjection].filter(Boolean).join('\n');
+  return [bodyProjection, metaProjection].filter(Boolean).join(LOCALIZED_TOPONYM_FIELD_SEPARATOR);
 }
 
 function passesLocalizedToponymGate(filePath, articleId, locale, faqArray) {
@@ -277,8 +281,8 @@ function passesLocalizedToponymGate(filePath, articleId, locale, faqArray) {
     const targetProjectionWithoutOldFaq = articleProjectionText(targetPath, articleId, { excludeFaq: true });
     const candidateFaq = JSON.stringify(faqArray || []);
     assertLocalizedToponymPair({
-      sourceText: `${sourceProjection}\n${candidateFaq}`,
-      targetText: `${targetProjectionWithoutOldFaq}\n${candidateFaq}`,
+      sourceText: [sourceProjection, candidateFaq].join(LOCALIZED_TOPONYM_FIELD_SEPARATOR),
+      targetText: [targetProjectionWithoutOldFaq, candidateFaq].join(LOCALIZED_TOPONYM_FIELD_SEPARATOR),
       locale,
       context: `${articleId}/${locale} FAQ repair`,
     });
