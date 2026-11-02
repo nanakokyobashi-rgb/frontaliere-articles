@@ -15,7 +15,23 @@ for (const [file, constant, prefix, suffix, expected] of [
   test(`${file} ${constant}: escaped text and missing terminator finish in bounded time`, () => {
     const source = readFileSync(new URL(file, root), 'utf8');
     const declaration = source.split('\n').find((line) => line.startsWith(`const ${constant} = `));
-    assert.ok(declaration);
+    if (!declaration) {
+      assert.match(source, /scanStaticArticleFieldEntries\(source(?:,|\))/);
+      const scanner = new URL('generator/scripts/lib/static-article-field-scanner.mjs', root).href;
+      const value = String.raw`L\'articolo \n \"test\" `.repeat(100);
+      const literal = "const data: Record<string, string> = { 'blog.article.demo.body1': '" + value;
+      const result = spawnSync(process.execPath, ['--input-type=module', '-e', `
+        import assert from 'node:assert/strict';
+        import { scanStaticArticleFieldEntries } from ${JSON.stringify(scanner)};
+        const entries = scanStaticArticleFieldEntries(${JSON.stringify(literal + "' }; export default data;")});
+        assert.equal(entries.length, 1);
+        assert.equal(entries[0].articleId, 'demo');
+        assert.throws(() => scanStaticArticleFieldEntries(${JSON.stringify(literal)}), SyntaxError);
+      `], { encoding: 'utf8', timeout: 3000 });
+      assert.ifError(result.error);
+      assert.equal(result.status, 0, result.stderr);
+      return;
+    }
     const raw = String.raw`L\'articolo \n \"test\" `.repeat(100);
     const script = `
       const assert = require('node:assert/strict');
@@ -36,12 +52,12 @@ for (const [file, constant, prefix, suffix, expected] of [
 test('article projection rejects an unterminated escaped field without hanging', () => {
   const module = new URL('generator/scripts/lib/localized-toponyms.mjs', root).href;
   const raw = String.raw`L\'articolo \n \"test\" `.repeat(100);
-  const source = "'blog.article.demo.body1': '" + raw;
+  const source = "const data: Record<string, string> = { 'blog.article.demo.body1': '" + raw;
   const result = spawnSync(process.execPath, ['--input-type=module', '-e', `
     import assert from 'node:assert/strict';
     import { extractArticleProjectionText } from ${JSON.stringify(module)};
-    assert.equal(extractArticleProjectionText(${JSON.stringify(source)}, 'demo'), '');
-    assert.match(extractArticleProjectionText(${JSON.stringify(source + "'")}, 'demo'), /articolo/);
+    assert.throws(() => extractArticleProjectionText(${JSON.stringify(source)}, 'demo'), SyntaxError);
+    assert.match(extractArticleProjectionText(${JSON.stringify(source + "' }; export default data;")}, 'demo'), /articolo/);
   `], { encoding: 'utf8', timeout: 3000 });
   assert.ifError(result.error);
   assert.equal(result.status, 0, result.stderr);
