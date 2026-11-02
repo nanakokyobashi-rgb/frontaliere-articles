@@ -68,6 +68,7 @@ on:
       - 'generator/scripts/lib/daily-brief-data.mjs'
       - 'generator/scripts/lib/daily-brief-insights.mjs'
       - 'generator/scripts/lib/localized-toponyms.mjs'
+      - 'generator/scripts/lib/static-article-field-scanner.mjs'
       - 'scripts/lib/engine-corpus-view.mjs'
       - 'scripts/lib/sanitize-control-chars.mjs'
       - 'scripts/lib/section-registry.mjs'

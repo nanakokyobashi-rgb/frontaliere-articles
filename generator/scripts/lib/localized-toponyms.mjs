@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs';
 import { unescapeTsString } from './unescape-ts-string.mjs';
 import { decodeHtmlEntities } from './decode-html-entities.mjs';
 import { DIGEST_EVENT_MARKER_PATTERN } from './events-digest-marker.mjs';
+import { scanStaticArticleFieldEntries } from './static-article-field-scanner.mjs';
 
 const TABLE = JSON.parse(
   readFileSync(new URL('../../data/localized-toponyms.json', import.meta.url), 'utf8'),
@@ -189,21 +190,15 @@ const ARTICLE_PROJECTION_ESCAPES = Object.freeze({
 export function extractArticleProjectionText(fileContent, articleId, { excludeFaq = false, fields = null } = {}) {
   if (!fileContent || !articleId) return '';
   const allowedFields = fields ? new Set(fields) : null;
-  const fieldRe = new RegExp(
-    "'blog\\.article\\." + escapeRegExp(String(articleId)) + "\\.([^']+)'\\s*:\\s*(['`])((?:\\\\.|(?!\\2)[\\s\\S])*?)\\2",
-    'g',
-  );
-  const prefix = `'blog.article.${articleId}.`;
-  return [...String(fileContent).matchAll(fieldRe)]
-    .filter((match) => {
-      const field = match[1];
-      if (excludeFaq && field === 'faq') return false;
-      if (allowedFields && !allowedFields.has(field)) return false;
-      return match[0].startsWith(`${prefix}${field}'`);
+  return scanStaticArticleFieldEntries(String(fileContent), { includeTemplateLiterals: true })
+    .filter((entry) => {
+      if (entry.articleId !== String(articleId)) return false;
+      if (excludeFaq && entry.field === 'faq') return false;
+      return !allowedFields || allowedFields.has(entry.field);
     })
-    .map((match) => normalizeLocalizedToponymText(
-      unescapeTsString(match[3], ARTICLE_PROJECTION_ESCAPES, {
-        decodeControlEscapes: match[1] !== 'faq',
+    .map((entry) => normalizeLocalizedToponymText(
+      unescapeTsString(entry.rawValue, ARTICLE_PROJECTION_ESCAPES, {
+        decodeControlEscapes: entry.field !== 'faq',
       }),
     ))
     .join('\n');
@@ -404,10 +399,10 @@ function containsTokenBoundedText(text, candidate) {
  * is protected only when the same marker-anchored span exists in the Italian
  * source, with a translated leading article or preposition removed.
  */
-function sourceIdenticalNameRanges(value, sourceText) {
+function sourceIdenticalNameRanges(value, sourceText, sourceSearchText = null) {
   if (!sourceText) return [];
   const text = normalizeToponymMatchText(value);
-  const sourceSearchText = normalizeNameSearchText(sourceText);
+  const sourceSearchValue = sourceSearchText ?? normalizeNameSearchText(sourceText);
   const knownToponymRanges = [];
   TOPONYM_PATTERN.lastIndex = 0;
   for (const match of withoutUrls(text).matchAll(TOPONYM_PATTERN)) {
@@ -420,7 +415,7 @@ function sourceIdenticalNameRanges(value, sourceText) {
     if (!knownToponymRanges.some(([toponymStart, toponymEnd]) => toponymStart >= start && toponymEnd <= end)) return;
     if (!isLikelyProperNameSpan(candidate)) return;
     const candidateSearchText = normalizeNameSearchText(candidate);
-    if (!candidateSearchText || !containsTokenBoundedText(sourceSearchText, candidateSearchText)) return;
+    if (!candidateSearchText || !containsTokenBoundedText(sourceSearchValue, candidateSearchText)) return;
     ranges.push([start, end]);
   };
   const addMarkerAnchoredSubspans = (start, end) => {
@@ -503,7 +498,7 @@ function mapNormalizedRangesToRaw(value, ranges) {
   ]);
 }
 
-function protectedRanges(value, sourceText = '') {
+function protectedRanges(value, sourceText = '', sourceSearchText = null) {
   const ranges = [];
   const rawText = String(value);
   const text = normalizeToponymMatchText(rawText);
@@ -513,7 +508,7 @@ function protectedRanges(value, sourceText = '') {
       ranges.push([match.index ?? 0, (match.index ?? 0) + match[0].length]);
     }
   }
-  ranges.push(...sourceIdenticalNameRanges(text, sourceText));
+  ranges.push(...sourceIdenticalNameRanges(text, sourceText, sourceSearchText));
   return mapNormalizedRangesToRaw(rawText, ranges);
 }
 
@@ -534,22 +529,53 @@ function replaceOutsideUrls(value, pattern, replacer) {
   return result + replaceSegment(text.slice(cursor), cursor);
 }
 
-function localizedToponymHits(value, { protectNames = false, sourceText = '', slug = false } = {}) {
+function localizedToponymHits(value, {
+  protectNames = false,
+  sourceText = '',
+  sourceSearchText = null,
+  locale = null,
+  slug = false,
+} = {}) {
   const normalizedText = normalizeToponymMatchText(value);
   const text = withoutUrls(normalizedText);
-  const protectedNameRanges = protectNames ? protectedRanges(normalizedText, sourceText) : [];
-  const hits = [];
+  const matches = [];
   const pattern = slug ? TOPONYM_SLUG_PATTERN : TOPONYM_PATTERN;
   for (const match of text.matchAll(pattern)) {
     const start = match.index ?? 0;
     const end = start + match[0].length;
-    if (protectedNameRanges.some(([rangeStart, rangeEnd]) => start >= rangeStart && end <= rangeEnd)) continue;
     const indexKey = slug ? localizedSlugForm(match[0]) : normalizeForm(match[0]);
     const descriptors = (slug ? SLUG_FORM_INDEX : FORM_INDEX).get(indexKey) || [];
     const observedForm = slug ? localizedSlugForm(match[0]) : normalizeForm(match[0]);
-    hits.push(...descriptors.map((descriptor) => ({ ...descriptor, observedForm })));
+    if (descriptors.length > 0) matches.push({ start, end, descriptors, observedForm });
   }
-  return hits;
+  if (matches.length === 0) return [];
+
+  // Protecting official names runs several broad name-span expressions and
+  // re-normalizes the source. Most fields contain no localized toponym at all,
+  // so defer that work until the cheap candidate scan has found something to
+  // filter. The returned hits and protection semantics remain unchanged.
+  // A protection scan can only remove a hit; when every descriptor already
+  // belongs to the target locale, none of those hits can become a mismatch.
+  // Keep the full protection path for ambiguous forms and foreign exonyms.
+  const needsProtection = protectNames && matches.some(({ descriptors }) =>
+    !locale || descriptors.some((descriptor) => descriptor.locale !== locale));
+  const protectedNameRanges = needsProtection
+    ? protectedRanges(normalizedText, sourceText, sourceSearchText)
+    : [];
+  return matches.flatMap(({ start, end, descriptors, observedForm }) => {
+    if (protectedNameRanges.some(([rangeStart, rangeEnd]) => start >= rangeStart && end <= rangeEnd)) return [];
+    return descriptors.map((descriptor) => ({ ...descriptor, observedForm }));
+  });
+}
+
+/** Reuse the expensive source-language analysis across translated fields. */
+export function createLocalizedToponymSourceProfile(sourceText = '') {
+  const text = String(sourceText ?? '');
+  return {
+    sourceText: text,
+    sourceEntities: new Set(localizedToponymHits(text).map((hit) => hit.entity.code)),
+    sourceSearchText: normalizeNameSearchText(text),
+  };
 }
 
 /**
@@ -557,11 +583,24 @@ function localizedToponymHits(value, { protectNames = false, sourceText = '', sl
  * used only to establish which Swiss place the article is about; a foreign
  * place name mentioned in an unrelated article is never judged.
  */
-export function findLocalizedToponymMismatches({ sourceText = '', targetText = '', locale, slug = false } = {}) {
+export function findLocalizedToponymMismatches({
+  sourceText = '',
+  targetText = '',
+  locale,
+  slug = false,
+  sourceProfile = null,
+} = {}) {
   if (!LOCALE_SET.has(locale)) return [];
-  const sourceEntities = new Set(localizedToponymHits(sourceText).map((hit) => hit.entity.code));
+  const profile = sourceProfile || createLocalizedToponymSourceProfile(sourceText);
+  const sourceEntities = profile.sourceEntities;
   if (sourceEntities.size === 0) return [];
-  const targetHits = localizedToponymHits(targetText, { protectNames: true, sourceText, slug });
+  const targetHits = localizedToponymHits(targetText, {
+    protectNames: true,
+    sourceText: profile.sourceText,
+    sourceSearchText: profile.sourceSearchText,
+    locale,
+    slug,
+  });
   const issues = [];
   for (const entity of LOCALIZED_TOPONYMS) {
     if (!sourceEntities.has(entity.code)) continue;

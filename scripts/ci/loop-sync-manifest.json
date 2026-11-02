@@ -6402,6 +6402,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/static-article-field-scanner.mjs",
+      "mode": "corpus-only",
+      "reason": "Scanner lessicale bounded delle proprietà statiche `blog.article.<id>.<field>`, usato da `generator/scripts/lib/localized-toponyms.mjs`, `generator/scripts/repair-localized-toponyms.mjs` e dai relativi test per evitare il backtracking delle regex sui body del corpus. È un helper del repair e della proiezione del generatore: il sito consuma il corpus via JSON HTTP e non esegue questo modulo, quindi non esiste un gemello operativo da trasportare.",
+      "baseline": {
+        "site": null,
+        "corpus": "2ff092013514093a",
+        "alignedAt": "2026-11-01"
+      }
+    },
+    {
       "path": "generator/scripts/lib/events-digest-marker.mjs",
       "mode": "corpus-only",
       "reason": "Contratto leggero per codificare e riconoscere i marker invisibili che abbinano gli eventi duplicati tra lingue. Il sito consuma il digest pubblicato via JSON HTTP e non esegue il generatore né il repair localizzato del corpus.",

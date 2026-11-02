@@ -94,6 +94,7 @@ on:
       - 'generator/scripts/lib/daily-brief-data.mjs'
       - 'generator/scripts/lib/daily-brief-insights.mjs'
       - 'generator/scripts/lib/localized-toponyms.mjs'
+      - 'generator/scripts/lib/static-article-field-scanner.mjs'
       - 'generator/scripts/lib/article-meta-block.mjs'
       - 'generator/scripts/lib/article-excerpt.mjs'
       - 'scripts/ci/retry-cmd.sh'
@@ -539,6 +540,7 @@ jobs:
             generator/scripts/lib/daily-brief-data.mjs
             generator/scripts/lib/daily-brief-insights.mjs
             generator/scripts/lib/localized-toponyms.mjs
+            generator/scripts/lib/static-article-field-scanner.mjs
           )
           if [ "$EVENT_NAME" = 'push' ] \
             && [[ "${BEFORE:-}" =~ ^[a-f0-9]{40}$ ]] \

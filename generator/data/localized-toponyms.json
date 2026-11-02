@@ -94,8 +94,8 @@
     },
     {
       "code": "SZ",
-      "canton": {"it": ["Svitto"], "en": ["Schwyz"], "de": ["Schwyz"], "fr": ["Schwytz"]},
-      "capital": {"it": ["Svitto"], "en": ["Schwyz"], "de": ["Schwyz"], "fr": ["Schwytz"]}
+      "canton": {"it": ["Svitto"], "en": ["Schwyz"], "de": ["Schwyz"], "fr": ["Schwytz", "Schwyz"]},
+      "capital": {"it": ["Svitto"], "en": ["Schwyz"], "de": ["Schwyz"], "fr": ["Schwytz", "Schwyz"]}
     },
     {
       "code": "TG",

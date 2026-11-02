@@ -8,6 +8,7 @@ import {
   LOCALIZED_TOPONYM_LOCALES,
   LOCALIZED_TOPONYMS,
   OFFICIAL_NAME_MARKERS,
+  createLocalizedToponymSourceProfile,
   extractArticleProjectionText,
   findArticleLocalizedToponymMismatches,
   findLocalizedToponymMismatches,
@@ -17,6 +18,10 @@ import {
   validateLocalizedToponymTable,
 } from '../scripts/lib/localized-toponyms.mjs';
 import { extractSlugFallbackLocales } from '../scripts/lib/slug-fallback-provenance.mjs';
+import {
+  scanStaticArticleFieldEntries,
+  scanStaticStringProperties,
+} from '../scripts/lib/static-article-field-scanner.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -87,6 +92,84 @@ test('rileva un esonimo copiato e accetta la forma giusta', () => {
       { code: 'BE', type: 'canton', locale: 'fr', form: 'Bern', expected: 'Berne' },
       { code: 'ZH', type: 'canton', locale: 'fr', form: 'Zurigo', expected: 'Zurich' },
     ],
+  );
+});
+
+test('lo scanner dei literal articolo è lineare e conserva gli escape', () => {
+  const source = [
+    "    // 'blog.article.ignored.title': 'commento';",
+    '    const data = {',
+    String.raw`      'blog.article.demo.body1': 'L\'articolo su Lucerna', /* separatore */`,
+    "      'blog.article.demo.body2': `Corpo",
+    "su Lucerna`,",
+    '      "blog.article.demo.title": "Titolo",',
+    "      'blog.article.invalid.body1': 'manca il delimitatore';",
+    '    };',
+  ].join('\n');
+  assert.deepEqual(
+    scanStaticArticleFieldEntries(source, { includeTemplateLiterals: true })
+      .map(({ articleId, field, rawValue, valueStart, valueEnd }) => ({
+        articleId, field, rawValue, value: source.slice(valueStart, valueEnd),
+      })),
+    [
+      {
+        articleId: 'demo', field: 'body1', rawValue: String.raw`L\'articolo su Lucerna`,
+        value: String.raw`L\'articolo su Lucerna`,
+      },
+      { articleId: 'demo', field: 'body2', rawValue: 'Corpo\nsu Lucerna', value: 'Corpo\nsu Lucerna' },
+      { articleId: 'demo', field: 'title', rawValue: 'Titolo', value: 'Titolo' },
+    ],
+  );
+});
+
+test('il reader non attraversa un terminatore fisico in un literal quotato', () => {
+  const source = [
+    'const data = {',
+    "  'blog.article.bad.title': 'valore corrotto",
+    "  'blog.article.good.title': 'Titolo valido',",
+    '};',
+  ].join('\n');
+  assert.deepEqual(
+    scanStaticArticleFieldEntries(source).map(({ articleId, field, rawValue }) => ({ articleId, field, rawValue })),
+    [{ articleId: 'good', field: 'title', rawValue: 'Titolo valido' }],
+  );
+});
+
+test('il reader resta lineare su escape densi e chiusura mancante', () => {
+  const source = [
+    `'blog.article.bad.title': '${'\\'.repeat(20_000)}`,
+    "'blog.article.good.title': 'Titolo valido',",
+  ].join('\n');
+  assert.deepEqual(
+    scanStaticArticleFieldEntries(source).map(({ articleId, field, rawValue }) => ({ articleId, field, rawValue })),
+    [{ articleId: 'good', field: 'title', rawValue: 'Titolo valido' }],
+  );
+});
+
+test('lo scanner delle proprietà statiche resta bounded sui valori malformati', () => {
+  const source = [
+    "it: 'valore corrotto",
+    "en: 'valore valido',",
+    "de: `valore\nmultilinea`,",
+  ].join('\n');
+  assert.deepEqual(
+    scanStaticStringProperties(source, ['it', 'en', 'de'], { includeTemplateLiterals: true })
+      .map(({ name, rawValue }) => ({ name, rawValue })),
+    [
+      { name: 'en', rawValue: 'valore valido' },
+      { name: 'de', rawValue: 'valore\nmultilinea' },
+    ],
+  );
+});
+
+test('il profilo della sorgente riusa l analisi senza cambiare il verdetto', () => {
+  const sourceText = 'Notizia sul cantone di Zurigo e sul lavoro a Lucerna.';
+  const targetText = 'News from Lucerna and Zurich.';
+  const expected = findLocalizedToponymMismatches({ sourceText, targetText, locale: 'en' });
+  const sourceProfile = createLocalizedToponymSourceProfile(sourceText);
+  assert.deepEqual(
+    findLocalizedToponymMismatches({ sourceText, targetText, locale: 'en', sourceProfile }),
+    expected,
   );
 });
 
@@ -306,6 +389,10 @@ test('la proiezione da file raccoglie body, FAQ e meta dello stesso articolo', (
   assert.doesNotMatch(extractArticleProjectionText(body, 'demo', { excludeFaq: true }), /q/);
   assert.equal(extractArticleProjectionText(meta, 'demo'), 'Lucerna sul lago');
   assert.equal(extractArticleProjectionText(body, 'other'), 'Non entra');
+  assert.equal(
+    extractArticleProjectionText("'blog.article.demo.body2': `Corpo su Lucerna`,", 'demo'),
+    'Corpo su Lucerna',
+  );
 });
 
 test('prompt e gate condividono tutte le forme della tabella', () => {
@@ -486,8 +573,6 @@ test('ripara il cantone Ticino solo fuori dai nomi ufficiali e solo dove serve',
   );
 });
 
-const ENTRY_RE = /['"]blog\.article\.([^'"]+)\.([^'"]+)['"]\s*:\s*(['"])((?:\\.|(?!\3)[^\r\n])*?)\3\s*(?=[,}])/gu;
-
 function unescapeTsValue(value) {
   return value.replace(/\\([\\'"\\\\])/gu, '$1');
 }
@@ -523,14 +608,31 @@ function collectCorpusEntries() {
     const locale = corpusLocale(file);
     if (!locale) continue;
     const source = readFileSync(file, 'utf8');
-    for (const match of source.matchAll(ENTRY_RE)) {
-      const articleId = match[1];
+    for (const match of scanStaticArticleFieldEntries(source)) {
+      const articleId = match.articleId;
       const entries = byLocale.get(locale).get(articleId) || [];
-      entries.push({ key: `${articleId}|${match[2]}`, field: match[2], value: unescapeTsValue(match[4]), file });
+      entries.push({
+        key: `${articleId}|${match.field}`,
+        field: match.field,
+        value: unescapeTsValue(match.rawValue),
+        file,
+      });
       byLocale.get(locale).set(articleId, entries);
     }
   }
   return byLocale;
+}
+
+// Keep fields separate for matching: the sentinel cannot form a word boundary
+// that was not present inside a field, while one article-wide pass avoids
+// rebuilding the same Italian source analysis for every translated field.
+const CORPUS_FIELD_SEPARATOR = '\u0000';
+
+function uniqueLocalizedToponymIssues(issues) {
+  return new Map(issues.map((issue) => [
+    `${issue.code}|${issue.locale}|${issue.form}|${issue.expected}`,
+    issue,
+  ]));
 }
 
 test('il corpus storico e le 24 sezioni cantonali non copiano esonimi fra lingue', () => {
@@ -547,17 +649,30 @@ test('il corpus storico e le 24 sezioni cantonali non copiano esonimi fra lingue
   const sampleOffenders = [];
   for (const [articleId, sourceEntries] of italian) {
     const sourceText = [...new Set(sourceEntries.map((entry) => entry.value))].join('\n');
+    const sourceProfile = createLocalizedToponymSourceProfile(sourceText);
     for (const locale of ['en', 'de', 'fr']) {
-      for (const targetEntry of byLocale.get(locale).get(articleId) || []) {
-        const issues = findLocalizedToponymMismatches({
+      const targetEntries = byLocale.get(locale).get(articleId) || [];
+      if (targetEntries.length === 0) continue;
+
+      // The combined call is only a candidate check. If it finds anything,
+      // rerun each field independently so diagnostics and the zero-offender
+      // invariant remain exactly as precise as before this optimization.
+      const candidateIssues = findLocalizedToponymMismatches({
+        sourceText,
+        targetText: targetEntries.map((entry) => entry.value).join(CORPUS_FIELD_SEPARATOR),
+        locale,
+        sourceProfile,
+        protectNames: false,
+      });
+      if (candidateIssues.length === 0) continue;
+
+      for (const targetEntry of targetEntries) {
+        const uniqueIssues = uniqueLocalizedToponymIssues(findLocalizedToponymMismatches({
           sourceText,
           targetText: targetEntry.value,
           locale,
-        });
-        const uniqueIssues = new Map(issues.map((issue) => [
-          `${issue.code}|${issue.locale}|${issue.form}|${issue.expected}`,
-          issue,
-        ]));
+          sourceProfile,
+        }));
         for (const issue of uniqueIssues.values()) {
           offenderCount += 1;
           if (sampleOffenders.length < 80) {

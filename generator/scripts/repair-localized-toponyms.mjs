@@ -20,14 +20,16 @@ import {
   replaceLocalizedToponymMismatches,
 } from './lib/localized-toponyms.mjs';
 import { extractSlugFallbackLocales } from './lib/slug-fallback-provenance.mjs';
+import {
+  scanStaticArticleFieldEntries,
+  scanStaticStringProperties,
+} from './lib/static-article-field-scanner.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const CONTENT_ROOT = path.join(ROOT, 'content');
 const WRITE = process.argv.includes('--write');
 let writeTmpSeq = 0;
-const ENTRY_RE = /['"]blog\.article\.([^'"]+)\.([^'"]+)['"]\s*:\s*(['"])((?:\\.|(?!\3)[^\r\n])*?)\3\s*(?=[,}])/gu;
 const SLUG_ENTRY_RE = /['"]([^'"]+)['"]\s*:\s*\{([^{}]*)\}/gu;
-const SLUG_PROPERTY_RE = /\b(it|en|de|fr)\s*:\s*(['"])((?:\\.|(?!\2)[^\r\n])*?)\2/gu;
 
 function walk(directory, output = []) {
   for (const entry of readdirSync(directory, { withFileTypes: true })) {
@@ -58,22 +60,6 @@ function localeForFile(file) {
   return file.split(path.sep).reverse().find((part) => LOCALIZED_TOPONYM_LOCALES.includes(part)) || null;
 }
 
-function rawValuePosition(match) {
-  const colon = match[0].indexOf(':');
-  const quote = match[3];
-  const quotePosition = match[0].indexOf(quote, colon);
-  const start = (match.index ?? 0) + quotePosition + 1;
-  return { start, end: start + match[4].length };
-}
-
-function rawSlugValuePosition(entryStart, propertyMatch) {
-  const colon = propertyMatch[0].indexOf(':');
-  const quote = propertyMatch[2];
-  const quotePosition = propertyMatch[0].indexOf(quote, colon);
-  const start = entryStart + (propertyMatch.index ?? 0) + quotePosition + 1;
-  return { start, end: start + propertyMatch[3].length };
-}
-
 const files = walk(CONTENT_ROOT).filter((file) => isCorpusFile(file) || isSlugFile(file));
 const fileSources = new Map();
 const sourceValues = new Map();
@@ -96,12 +82,20 @@ for (const file of files) {
   const source = readFileSync(file, 'utf8');
   fileSources.set(file, source);
   if (locale) {
-    for (const match of source.matchAll(ENTRY_RE)) {
-      const key = `${match[1]}|${match[2]}`;
+    for (const match of scanStaticArticleFieldEntries(source)) {
+      const key = `${match.articleId}|${match.field}`;
       if (locale === 'it') {
-        addSourceValue(match[1], match[4]);
+        addSourceValue(match.articleId, match.rawValue);
       } else {
-        targets.push({ file, locale, articleId: match[1], key, raw: match[4], ...rawValuePosition(match) });
+        targets.push({
+          file,
+          locale,
+          articleId: match.articleId,
+          key,
+          raw: match.rawValue,
+          start: match.valueStart,
+          end: match.valueEnd,
+        });
       }
     }
   }
@@ -109,8 +103,12 @@ for (const file of files) {
     for (const entry of source.matchAll(SLUG_ENTRY_RE)) {
       const properties = new Map();
       const bodyOffset = (entry.index ?? 0) + entry[0].indexOf(entry[2]);
-      for (const property of entry[2].matchAll(SLUG_PROPERTY_RE)) {
-        properties.set(property[1], { value: property[3], ...rawSlugValuePosition(bodyOffset, property) });
+      for (const property of scanStaticStringProperties(entry[2], LOCALIZED_TOPONYM_LOCALES)) {
+        properties.set(property.name, {
+          value: property.rawValue,
+          start: bodyOffset + property.valueStart,
+          end: bodyOffset + property.valueEnd,
+        });
       }
       if (properties.size !== LOCALIZED_TOPONYM_LOCALES.length) continue;
       addSourceValue(entry[1], properties.get('it').value);
