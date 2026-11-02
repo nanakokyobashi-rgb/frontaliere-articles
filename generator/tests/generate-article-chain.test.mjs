@@ -988,6 +988,24 @@ test('lo step di guardia esiste, e invoca ENTRAMBE le suite dependency-free', ()
   );
 });
 
+test('la guardia per-articolo non esegue l audit globale dei toponimi', () => {
+  const guard = extractRun('Guard — l\'articolo generato non raggiunge main se viola le guardie');
+  assert.doesNotMatch(
+    guard,
+    /generator\/tests\/localized-toponyms\.test\.mjs/,
+    'la scansione storica del corpus appartiene al content-gate su main: nel percorso bounded si usa il controllo del payload generato',
+  );
+  const contentGate = readFileSync(
+    path.resolve(HERE, '../../scripts/ci/content-gates-main.mjs'),
+    'utf8',
+  );
+  assert.match(
+    contentGate,
+    /["']generator\/tests\/localized-toponyms\.test\.mjs["']/,
+    'rimuovere la suite dal writer non deve rimuoverla dall audit globale su main',
+  );
+});
+
 test('la guardia gira PRIMA del commit, non dopo', () => {
   const guardAt = WF.indexOf('      - name: Guard — l\'articolo generato non raggiunge main');
   const commitAt = WF.indexOf('      - name: Commit and push');
