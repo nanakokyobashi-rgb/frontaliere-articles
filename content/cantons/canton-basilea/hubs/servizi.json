@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "servizi",
-  "updatedAt": "2026-11-02T11:33:10.756Z",
-  "contentHash": "c518c04f17899f6085bb842b087a9c6706fb4bf902682bd4ab761866cb30f7a4",
+  "updatedAt": "2026-11-02T18:34:35.378Z",
+  "contentHash": "4ad3bc7b2c2827909359cd84ec70797fdc4067c155ed48781873b16cca981bca",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,7 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-02T01:54:40.327Z",
-      "keyFacts": 0
-    },
-    {
-      "id": "meteo",
-      "updatedAt": "2026-11-02T06:29:41.493Z",
+      "updatedAt": "2026-11-02T08:57:41.707Z",
       "keyFacts": 0
     }
   ],
@@ -101,26 +96,7 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt",
-          "updatedAt": "2026-11-02T01:54:40.327Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Basel",
-              "value": "0 °C",
-              "detail": "oggi da 0 a 9 °C"
-            },
-            {
-              "label": "Liestal",
-              "value": "1 °C",
-              "detail": "oggi da 1 a 8 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-02T06:29:41.493Z"
+          "updatedAt": "2026-11-02T08:57:41.707Z"
         }
       ],
       "curatedArticles": [
@@ -208,7 +184,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-02T11:33:10.756Z"
+      "updatedAt": "2026-11-02T18:34:35.378Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -287,26 +263,7 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt",
-          "updatedAt": "2026-11-02T01:54:40.327Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Basel",
-              "value": "0 °C",
-              "detail": "today from 0 to 9 °C"
-            },
-            {
-              "label": "Liestal",
-              "value": "1 °C",
-              "detail": "today from 1 to 8 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-02T06:29:41.493Z"
+          "updatedAt": "2026-11-02T08:57:41.707Z"
         }
       ],
       "curatedArticles": [
@@ -386,7 +343,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-02T11:33:10.756Z"
+      "updatedAt": "2026-11-02T18:34:35.378Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -465,26 +422,7 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt",
-          "updatedAt": "2026-11-02T01:54:40.327Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Basel",
-              "value": "0 °C",
-              "detail": "heute 0 bis 9 °C"
-            },
-            {
-              "label": "Liestal",
-              "value": "1 °C",
-              "detail": "heute 1 bis 8 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-02T06:29:41.493Z"
+          "updatedAt": "2026-11-02T08:57:41.707Z"
         }
       ],
       "curatedArticles": [
@@ -564,7 +502,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-02T11:33:10.756Z"
+      "updatedAt": "2026-11-02T18:34:35.378Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -643,26 +581,7 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt",
-          "updatedAt": "2026-11-02T01:54:40.327Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Basel",
-              "value": "0 °C",
-              "detail": "aujourd’hui de 0 à 9 °C"
-            },
-            {
-              "label": "Liestal",
-              "value": "1 °C",
-              "detail": "aujourd’hui de 1 à 8 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-02T06:29:41.493Z"
+          "updatedAt": "2026-11-02T08:57:41.707Z"
         }
       ],
       "curatedArticles": [
@@ -734,7 +653,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-02T11:33:10.756Z"
+      "updatedAt": "2026-11-02T18:34:35.378Z"
     }
   }
 }
