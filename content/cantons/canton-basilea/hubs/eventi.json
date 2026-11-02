@@ -4,12 +4,12 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "eventi",
-  "updatedAt": "2026-11-01T13:11:05.408Z",
-  "contentHash": "fa724427e22e90c5d42aee83294d2a5a53b557242488e179d024e19480ec5b50",
+  "updatedAt": "2026-11-02T09:20:10.429Z",
+  "contentHash": "2da69cde263132a04d483760634a34e608d1f5a74f13c2ae95e448b761f40ab1",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-31T14:21:36.178Z",
+      "updatedAt": "2026-11-02T02:24:34.417Z",
       "keyFacts": 1
     }
   ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Schlusslauf Zwingen der Laufsportgruppe Laufen",
-              "detail": "Zwingen BL, Zwingen",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schlusslauf-zwingen-der-laufsportgruppe-laufen/"
+              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX LIKE A PRO",
+              "detail": "Basilea, Basel — in corso, ultimo giorno: 25 novembre 2026",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
             },
             {
-              "label": "Steppin’ Stompers – Spielen was Spazz macht!",
-              "detail": "Kulturzentrum Alts Schlachthuus, Laufen",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/laufen/steppin-stompers-spielen-was-spazz-macht_AbKHFp7"
+              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
+              "detail": "Universitätsbibliothek (UB) — in corso, ultimo giorno: 5 novembre 2026",
+              "date": "2026-11-02",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
             },
             {
-              "label": "Benefiz-Jazz-Matinée",
-              "detail": "Wohn- und Bürozentrum für Körperbehinderte (WBZ)",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/reinach-bl/benefiz-jazz-matinee_AY2dPDN"
+              "label": "Porrum Pub Quiz – hosted by Silvan",
+              "detail": "Porrum Cocktailbar @ Markthalle, Basel",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/porrum-pub-quiz-hosted-by-silvan-2/"
             },
             {
-              "label": "TEXTUR 2026 - Ségurant, le chevalier au dragon",
-              "detail": "Historisches Museum Basel: Musikmuseum, Basel",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/textur-2026-segurant-le-chevalier-au-dragon_ACpEGaN"
+              "label": "Baloise Session: JOE BONAMASSA | BRANDY CLARK",
+              "detail": "Messe Basel, Basel",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/evenements/musique/bale/baloise-session-joe-bonamassa-brandy-clark_A2wU1ZU"
             },
             {
-              "label": "TEXTUR 2026 - Der Codex Calixtinus",
-              "detail": "Historisches Museum Basel: Musikmuseum, Basel",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/textur-2026-der-codex-calixtinus_AXueQmW"
+              "label": "Aroma-Massage",
+              "detail": "Bio-Medica Fachschule, Basel",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/aroma-massage/"
             },
             {
-              "label": "POP-UP CINEMA: HERBSTFEUER - Fire at the Grandhotel Waldhaus Vulpera-Tarasp",
+              "label": "Der «Blüthner» auf Reisen",
+              "detail": "Museum Kleines Klingental",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/basel/der-bluethner-auf-reisen_ApBTcQT"
+            },
+            {
+              "label": "Öffentliche Führungen im Hanro-Depot",
+              "detail": "Liestal",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrungen-im-hanro-depot/"
+            },
+            {
+              "label": "Basel komponiert: Leopold van der Pals – Streichquartette als Spiegel des Lebens",
               "detail": "Basel",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pop-up-cinema-herbstfeuer-fire-at-the-grandhotel-waldhaus-vulpera-tarasp-1/"
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/basel-komponiert-leopold-van-der-pals-streichquartette-als-spiegel-des-lebens/"
             },
             {
-              "label": "Stewy von Wattenwyl & Alex Hendriksen",
-              "detail": "Kulturscheune, Liestal",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/liestal/stewy-von-wattenwyl-und-alex-hendriksen_AfnD29j"
+              "label": "Lara Stoll - Volume 5 - Die Rückkehr!",
+              "detail": "Theater Fauteuil, Basel",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lara-stoll-volume-5-die-rueckkehr/"
             },
             {
-              "label": "TEXTUR 2026 - Héroïnes",
-              "detail": "Dorfkirche Riehen, Riehen",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/riehen/textur-2026-heroines_ALx9byG"
-            },
-            {
-              "label": "IMAGINE Gospelkonzert",
-              "detail": "Evang.-ref. Christuskirche, Allschwil — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/allschwil/imagine-gospelkonzert_AARaZAV"
-            },
-            {
-              "label": "Cantuccini - Neues Programm",
-              "detail": "Theater Fauteuil - Tabourettli — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/cantuccini-neues-programm_AE4hULr"
+              "label": "Inaugurazione della mostra “Figure per l’eternità” di Peter Moilliet",
+              "detail": "Allschwil",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/inaugurazione-della-mostra-figure-per-leternita-di-peter-moilliet/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/basilea/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/basilea/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Schlusslauf Zwingen der Laufsportgruppe Laufen",
-              "detail": "Zwingen BL, Zwingen",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schlusslauf-zwingen-der-laufsportgruppe-laufen/"
+              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
+              "detail": "Basilea, Basel — ongoing, last day: 25 November 2026",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
             },
             {
-              "label": "Steppin’ Stompers – Spielen was Spazz macht!",
-              "detail": "Kulturzentrum Alts Schlachthuus, Laufen",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/laufen/steppin-stompers-spielen-was-spazz-macht_AbKHFp7"
+              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
+              "detail": "Universitätsbibliothek (UB) — ongoing, last day: 5 November 2026",
+              "date": "2026-11-02",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
             },
             {
-              "label": "Benefiz-Jazz-Matinée",
-              "detail": "Wohn- und Bürozentrum für Körperbehinderte (WBZ)",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/reinach-bl/benefiz-jazz-matinee_AY2dPDN"
+              "label": "Porrum Pub Quiz – hosted by Silvan",
+              "detail": "Porrum Cocktailbar @ Markthalle, Basel",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/porrum-pub-quiz-hosted-by-silvan-2/"
             },
             {
-              "label": "TEXTUR 2026 - Segurant, the dragon knight",
-              "detail": "Historisches Museum Basel: Musikmuseum, Basel",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/textur-2026-segurant-le-chevalier-au-dragon_ACpEGaN"
+              "label": "Baloise Session: JOE BONAMASSA | BRANDY CLARK",
+              "detail": "Messe Basel, Basel",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/evenements/musique/bale/baloise-session-joe-bonamassa-brandy-clark_A2wU1ZU"
             },
             {
-              "label": "TEXTUR 2026 - Der Codex Calixtinus",
-              "detail": "Historisches Museum Basel: Musikmuseum, Basel",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/textur-2026-der-codex-calixtinus_AXueQmW"
+              "label": "Aroma-Massage",
+              "detail": "Bio-Medica Fachschule, Basel",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/aroma-massage/"
             },
             {
-              "label": "POP-UP CINEMA: HERBSTFEUER - Fire at the Grandhotel Waldhaus Vulpera-Tarasp",
+              "label": "Der «Blüthner» auf Reisen",
+              "detail": "Museum Kleines Klingental",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/basel/der-bluethner-auf-reisen_ApBTcQT"
+            },
+            {
+              "label": "Öffentliche Führungen im Hanro-Depot",
+              "detail": "Liestal",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrungen-im-hanro-depot/"
+            },
+            {
+              "label": "Basel komponiert: Leopold van der Pals – Streichquartette als Spiegel des Lebens",
               "detail": "Basel",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pop-up-cinema-herbstfeuer-fire-at-the-grandhotel-waldhaus-vulpera-tarasp-1/"
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/basel-komponiert-leopold-van-der-pals-streichquartette-als-spiegel-des-lebens/"
             },
             {
-              "label": "Stewy von Wattenwyl & Alex Hendriksen",
-              "detail": "Kulturscheune, Liestal",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/liestal/stewy-von-wattenwyl-und-alex-hendriksen_AfnD29j"
+              "label": "Lara Stoll - Volume 5 - Die Rückkehr!",
+              "detail": "Theater Fauteuil, Basel",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lara-stoll-volume-5-die-rueckkehr/"
             },
             {
-              "label": "TEXTUR 2026 - Heroes",
-              "detail": "Dorfkirche Riehen, Riehen",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/riehen/textur-2026-heroines_ALx9byG"
-            },
-            {
-              "label": "IMAGINE Gospelkonzert",
-              "detail": "Evang.-ref. Christuskirche, Allschwil — ongoing, last day: 1 November 2026",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/allschwil/imagine-gospelkonzert_AARaZAV"
-            },
-            {
-              "label": "Cantuccini - Neues Programm",
-              "detail": "Theater Fauteuil - Tabourettli — ongoing, last day: 1 November 2026",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/cantuccini-neues-programm_AE4hULr"
+              "label": "Opening of the exhibition ‘Figures for Eternity’ by Peter Moilliet",
+              "detail": "Allschwil",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/inaugurazione-della-mostra-figure-per-leternita-di-peter-moilliet/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/basel/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/basel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Schlusslauf Zwingen der Laufsportgruppe Laufen",
-              "detail": "Zwingen BL, Zwingen",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schlusslauf-zwingen-der-laufsportgruppe-laufen/"
+              "label": "B1 Rooftop Bistro – COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
+              "detail": "Basilea, Basel — läuft, letzter Tag: 25. November 2026",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
             },
             {
-              "label": "Steppin’ Stompers – Spielen was Spazz macht!",
-              "detail": "Kulturzentrum Alts Schlachthuus, Laufen",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/laufen/steppin-stompers-spielen-was-spazz-macht_AbKHFp7"
+              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
+              "detail": "Universitätsbibliothek (UB) — läuft, letzter Tag: 5. November 2026",
+              "date": "2026-11-02",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
             },
             {
-              "label": "Benefiz-Jazz-Matinée",
-              "detail": "Wohn- und Bürozentrum für Körperbehinderte (WBZ)",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/reinach-bl/benefiz-jazz-matinee_AY2dPDN"
+              "label": "Porrum Pub Quiz – hosted by Silvan",
+              "detail": "Porrum Cocktailbar @ Markthalle, Basel",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/porrum-pub-quiz-hosted-by-silvan-2/"
             },
             {
-              "label": "TEXTUR 2026 – Ségurant, der Chevalier au Dragon",
-              "detail": "Historisches Museum Basel: Musikmuseum, Basel",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/textur-2026-segurant-le-chevalier-au-dragon_ACpEGaN"
+              "label": "Baloise Session: JOE BONAMASSA | BRANDY CLARK",
+              "detail": "Messe Basel, Basel",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/evenements/musique/bale/baloise-session-joe-bonamassa-brandy-clark_A2wU1ZU"
             },
             {
-              "label": "TEXTUR 2026 - Der Codex Calixtinus",
-              "detail": "Historisches Museum Basel: Musikmuseum, Basel",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/textur-2026-der-codex-calixtinus_AXueQmW"
+              "label": "Aroma-Massage",
+              "detail": "Bio-Medica Fachschule, Basel",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/aroma-massage/"
             },
             {
-              "label": "POP-UP KINO: HERBSTFEUER - Brandfall Grandhotel Waldhaus Vulpera-Tarasp",
+              "label": "Der «Blüthner» auf Reisen",
+              "detail": "Museum Kleines Klingental",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/basel/der-bluethner-auf-reisen_ApBTcQT"
+            },
+            {
+              "label": "Öffentliche Führungen im Hanro-Depot",
+              "detail": "Liestal",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrungen-im-hanro-depot/"
+            },
+            {
+              "label": "Basel komponiert: Leopold van der Pals – Streichquartette als Spiegel des Lebens",
               "detail": "Basel",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pop-up-cinema-herbstfeuer-fire-at-the-grandhotel-waldhaus-vulpera-tarasp-1/"
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/basel-komponiert-leopold-van-der-pals-streichquartette-als-spiegel-des-lebens/"
             },
             {
-              "label": "Stewy von Wattenwyl & Alex Hendriksen",
-              "detail": "Kulturscheune, Liestal",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/liestal/stewy-von-wattenwyl-und-alex-hendriksen_AfnD29j"
+              "label": "Lara Stoll - Volume 5 - Die Rückkehr!",
+              "detail": "Theater Fauteuil, Basel",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lara-stoll-volume-5-die-rueckkehr/"
             },
             {
-              "label": "Textur 2026 - Helden",
-              "detail": "Dorfkirche Riehen, Riehen",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/riehen/textur-2026-heroines_ALx9byG"
-            },
-            {
-              "label": "IMAGINE Gospelkonzert",
-              "detail": "Evang.-ref. Christuskirche, Allschwil — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/allschwil/imagine-gospelkonzert_AARaZAV"
-            },
-            {
-              "label": "Cantuccini - Neues Programm",
-              "detail": "Theater Fauteuil - Tabourettli — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/cantuccini-neues-programm_AE4hULr"
+              "label": "Vernissage \"Figuren für die Ewigkeit\" Peter Moilliet",
+              "detail": "Allschwil",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/inaugurazione-della-mostra-figure-per-leternita-di-peter-moilliet/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/basel/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/basel/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Schlusslauf Zwingen der Laufsportgruppe Laufen",
-              "detail": "Zwingen BL, Zwingen",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schlusslauf-zwingen-der-laufsportgruppe-laufen/"
+              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
+              "detail": "Basilea, Basel — en cours, dernier jour : 25 novembre 2026",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
             },
             {
-              "label": "Steppin’ Stompers – Spielen was Spazz macht!",
-              "detail": "Kulturzentrum Alts Schlachthuus, Laufen",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/laufen/steppin-stompers-spielen-was-spazz-macht_AbKHFp7"
+              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
+              "detail": "Universitätsbibliothek (UB) — en cours, dernier jour : 5 novembre 2026",
+              "date": "2026-11-02",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
             },
             {
-              "label": "Benefiz-Jazz-Matinée",
-              "detail": "Wohn- und Bürozentrum für Körperbehinderte (WBZ)",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/reinach-bl/benefiz-jazz-matinee_AY2dPDN"
+              "label": "Porrum Pub Quiz – hosted by Silvan",
+              "detail": "Porrum Cocktailbar @ Markthalle, Basel",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/porrum-pub-quiz-hosted-by-silvan-2/"
             },
             {
-              "label": "TET TUR 2026-Segurant, le chevalier au dragon",
-              "detail": "Historisches Museum Basel: Musikmuseum, Basel",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/textur-2026-segurant-le-chevalier-au-dragon_ACpEGaN"
+              "label": "Baloise Session: JOE BONAMASSA | BRANDY CLARK",
+              "detail": "Messe Basel, Basel",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/evenements/musique/bale/baloise-session-joe-bonamassa-brandy-clark_A2wU1ZU"
             },
             {
-              "label": "TEXTUR 2026 - Der Codex Calixtinus",
-              "detail": "Historisches Museum Basel: Musikmuseum, Basel",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/textur-2026-der-codex-calixtinus_AXueQmW"
+              "label": "Aroma-Massage",
+              "detail": "Bio-Medica Fachschule, Basel",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/aroma-massage/"
             },
             {
-              "label": "POP-UP CINEMA: HERBSTFEUER - Fire at the Grandhotel Waldhaus Vulpera-Tarasp",
+              "label": "Der «Blüthner» auf Reisen",
+              "detail": "Museum Kleines Klingental",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/basel/der-bluethner-auf-reisen_ApBTcQT"
+            },
+            {
+              "label": "Öffentliche Führungen im Hanro-Depot",
+              "detail": "Liestal",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrungen-im-hanro-depot/"
+            },
+            {
+              "label": "Basel komponiert: Leopold van der Pals – Streichquartette als Spiegel des Lebens",
               "detail": "Basel",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pop-up-cinema-herbstfeuer-fire-at-the-grandhotel-waldhaus-vulpera-tarasp-1/"
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/basel-komponiert-leopold-van-der-pals-streichquartette-als-spiegel-des-lebens/"
             },
             {
-              "label": "Stewy von Wattenwyl & Alex Hendriksen",
-              "detail": "Kulturscheune, Liestal",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/liestal/stewy-von-wattenwyl-und-alex-hendriksen_AfnD29j"
+              "label": "Lara Stoll - Volume 5 - Die Rückkehr!",
+              "detail": "Theater Fauteuil, Basel",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lara-stoll-volume-5-die-rueckkehr/"
             },
             {
-              "label": "TEX TUR 2026-Héros",
-              "detail": "Dorfkirche Riehen, Riehen",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/riehen/textur-2026-heroines_ALx9byG"
-            },
-            {
-              "label": "IMAGINE Gospelkonzert",
-              "detail": "Evang.-ref. Christuskirche, Allschwil — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/allschwil/imagine-gospelkonzert_AARaZAV"
-            },
-            {
-              "label": "Cantuccini - Neues Programm",
-              "detail": "Theater Fauteuil - Tabourettli — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/cantuccini-neues-programm_AE4hULr"
+              "label": "Vernissage « Des figures pour l'éternité » de Peter Moilliet",
+              "detail": "Allschwil",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/inaugurazione-della-mostra-figure-per-leternita-di-peter-moilliet/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/bale/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/bale/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     }
   }
 }

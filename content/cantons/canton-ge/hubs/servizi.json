@@ -4,22 +4,22 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "servizi",
-  "updatedAt": "2026-11-01T13:11:05.408Z",
-  "contentHash": "f49fadceaf8dedce4ade074c67bc1462092480296b530ce6d4d2e8cf31d3cd65",
+  "updatedAt": "2026-11-02T09:20:10.429Z",
+  "contentHash": "81de7e40a027573a1b4145ca44316db0e270f785d4a0132b507c7b4e5eb30a75",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-10-25T09:11:35.438Z",
+      "updatedAt": "2026-11-01T11:17:34.347Z",
       "keyFacts": 1
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-31T21:59:01.497Z",
+      "updatedAt": "2026-11-02T01:54:38.997Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-31T20:43:08.728Z",
+      "updatedAt": "2026-11-01T21:24:45.283Z",
       "keyFacts": 0
     }
   ],
@@ -51,23 +51,13 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-25T09:11:35.438Z"
+          "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
           "id": "farmacie-di-turno",
           "title": "Farmacie di turno",
           "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
           "items": [
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
-              "date": "2026-10-31T23:00:00.000Z"
-            },
-            {
-              "label": "Pharmacie du Museum",
-              "detail": "Genève, Genève",
-              "date": "2026-11-01T07:00:00.000Z"
-            },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
@@ -87,11 +77,21 @@
               "label": "Pharmacie du Museum",
               "detail": "Genève, Genève",
               "date": "2026-11-03T07:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-11-03T23:00:00.000Z"
+            },
+            {
+              "label": "Pharmacie du Museum",
+              "detail": "Genève, Genève",
+              "date": "2026-11-04T07:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-31T21:59:01.497Z"
+          "updatedAt": "2026-11-02T01:54:38.997Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -129,7 +129,7 @@
               "url": "https://www.ge.ch/node/45339"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -209,7 +209,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "en": {
       "canton": "GE",
@@ -238,23 +238,13 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-25T09:11:35.438Z"
+          "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
           "id": "farmacie-di-turno",
           "title": "On-duty pharmacies",
           "description": "Upcoming duty shifts published by the canton’s official service.",
           "items": [
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
-              "date": "2026-10-31T23:00:00.000Z"
-            },
-            {
-              "label": "Pharmacie du Museum",
-              "detail": "Genève, Genève",
-              "date": "2026-11-01T07:00:00.000Z"
-            },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
@@ -274,11 +264,21 @@
               "label": "Pharmacie du Museum",
               "detail": "Genève, Genève",
               "date": "2026-11-03T07:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-11-03T23:00:00.000Z"
+            },
+            {
+              "label": "Pharmacie du Museum",
+              "detail": "Genève, Genève",
+              "date": "2026-11-04T07:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-31T21:59:01.497Z"
+          "updatedAt": "2026-11-02T01:54:38.997Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -316,7 +316,7 @@
               "url": "https://www.ge.ch/node/45339"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -391,7 +391,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "de": {
       "canton": "GE",
@@ -420,23 +420,13 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-25T09:11:35.438Z"
+          "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
           "id": "farmacie-di-turno",
           "title": "Notfallapotheken",
           "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
           "items": [
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
-              "date": "2026-10-31T23:00:00.000Z"
-            },
-            {
-              "label": "Pharmacie du Museum",
-              "detail": "Genève, Genève",
-              "date": "2026-11-01T07:00:00.000Z"
-            },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
@@ -456,11 +446,21 @@
               "label": "Pharmacie du Museum",
               "detail": "Genève, Genève",
               "date": "2026-11-03T07:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-11-03T23:00:00.000Z"
+            },
+            {
+              "label": "Pharmacie du Museum",
+              "detail": "Genève, Genève",
+              "date": "2026-11-04T07:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-31T21:59:01.497Z"
+          "updatedAt": "2026-11-02T01:54:38.997Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -498,7 +498,7 @@
               "url": "https://www.ge.ch/node/45339"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -573,7 +573,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "fr": {
       "canton": "GE",
@@ -602,23 +602,13 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-25T09:11:35.438Z"
+          "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
           "id": "farmacie-di-turno",
           "title": "Pharmacies de garde",
           "description": "Prochaines gardes publiées par le service officiel du canton.",
           "items": [
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
-              "date": "2026-10-31T23:00:00.000Z"
-            },
-            {
-              "label": "Pharmacie du Museum",
-              "detail": "Genève, Genève",
-              "date": "2026-11-01T07:00:00.000Z"
-            },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
@@ -638,11 +628,21 @@
               "label": "Pharmacie du Museum",
               "detail": "Genève, Genève",
               "date": "2026-11-03T07:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-11-03T23:00:00.000Z"
+            },
+            {
+              "label": "Pharmacie du Museum",
+              "detail": "Genève, Genève",
+              "date": "2026-11-04T07:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-31T21:59:01.497Z"
+          "updatedAt": "2026-11-02T01:54:38.997Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -680,7 +680,7 @@
               "url": "https://www.ge.ch/node/45339"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -752,7 +752,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     }
   }
 }
