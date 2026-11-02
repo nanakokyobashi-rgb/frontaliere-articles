@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "mobilita",
-  "updatedAt": "2026-11-02T18:34:35.378Z",
-  "contentHash": "24f37a0f2aa1fa0e234866e12e77d9cdcce6263ca45f4c47fc741cca02f3c261",
+  "updatedAt": "2026-11-02T22:49:37.019Z",
+  "contentHash": "a0f6e924189383f3ecff37b628e16e8600ad95d27eb794a76c28ffc0e0090e74",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-01T21:24:45.283Z",
+      "updatedAt": "2026-11-02T13:52:53.767Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "14",
+          "value": "13",
           "note": "segnalazioni aggiornate: 2 novembre 2026"
         },
         {
@@ -130,7 +130,7 @@
               "url": "https://www.fr.ch/de/rimu/news/ein-meilenstein-fuer-das-velofahren-im-alltag-der-neue-kantonale-velowegnetzplan-liegt-vor"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -194,7 +194,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-02T18:34:35.378Z"
+      "updatedAt": "2026-11-02T22:49:37.019Z"
     },
     "en": {
       "canton": "FR",
@@ -204,7 +204,7 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "14",
+          "value": "13",
           "note": "reports as of 2 November 2026"
         },
         {
@@ -307,7 +307,7 @@
               "url": "https://www.fr.ch/de/rimu/news/ein-meilenstein-fuer-das-velofahren-im-alltag-der-neue-kantonale-velowegnetzplan-liegt-vor"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -371,7 +371,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-02T18:34:35.378Z"
+      "updatedAt": "2026-11-02T22:49:37.019Z"
     },
     "de": {
       "canton": "FR",
@@ -381,7 +381,7 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "14",
+          "value": "13",
           "note": "Meldungen vom 2. November 2026"
         },
         {
@@ -484,7 +484,7 @@
               "url": "https://www.fr.ch/de/rimu/news/ein-meilenstein-fuer-das-velofahren-im-alltag-der-neue-kantonale-velowegnetzplan-liegt-vor"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -548,7 +548,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-02T18:34:35.378Z"
+      "updatedAt": "2026-11-02T22:49:37.019Z"
     },
     "fr": {
       "canton": "FR",
@@ -558,7 +558,7 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "14",
+          "value": "13",
           "note": "signalements au 2 novembre 2026"
         },
         {
@@ -661,7 +661,7 @@
               "url": "https://www.fr.ch/de/rimu/news/ein-meilenstein-fuer-das-velofahren-im-alltag-der-neue-kantonale-velowegnetzplan-liegt-vor"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -725,7 +725,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-02T18:34:35.378Z"
+      "updatedAt": "2026-11-02T22:49:37.019Z"
     }
   }
 }
