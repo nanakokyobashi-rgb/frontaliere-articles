@@ -203,6 +203,13 @@ import {
 } from '../../scripts/lib/published-slug-guard.mjs';
 import { AI_SEARCH_PROMPT_BLOCK_IT } from './lib/ai-search-template.mjs';
 import { findOrphanedKeyFactsList } from './lib/key-facts-specificity.mjs';
+import { assertArticleRelevance, isOffTopicHeadline } from './lib/article-relevance-gate.mjs';
+import {
+  assertNoFiscalErrorsInLocales,
+  assertYmylPublishable,
+  YMYL_SOURCES_BRIEF,
+  YMYL_SOURCES_BRIEF_CH,
+} from './lib/article-ymyl-gate.mjs';
 import { stripVacuousFacts } from './lib/key-facts-specificity.mjs';
 import { checkCantonToponymConsistency } from './lib/cantone-toponimi-coerenza.mjs';
 import {
@@ -2627,7 +2634,7 @@ const PRIORITY_EVERGREEN_TOPICS = [
   { keyword: 'quanto costa vivere a Lugano da frontaliere', angle: 'Analisi costi reali: affitto, trasporti, assicurazione, spesa alimentare per un frontaliere che valuta il trasferimento' },
   { keyword: 'frontaliere permesso G vantaggi svantaggi', angle: 'Pro e contro completi del permesso G: fisco, previdenza, sanità, mobilità lavorativa. Quando conviene e quando no' },
   { keyword: 'calcolo pensione frontaliere AVS italiana', angle: 'Come funziona la pensione da frontaliere: contributi AVS svizzeri + INPS italiana, totalizzazione, tempistica' },
-  { keyword: 'frontaliere tassazione 2026 dopo nuovo accordo fiscale', angle: 'Regole operative 2026 dopo l’Accordo frontalieri in vigore dal 1 gennaio 2024: differenze tra vecchi e nuovi frontalieri, franchigia e credito d’imposta con scenari ipotetici' },
+  { keyword: 'frontaliere tassazione 2026 dopo nuovo accordo fiscale', angle: 'Regole operative 2026 dopo l’Accordo frontalieri applicato dal 1 gennaio 2024: differenze tra vecchi e nuovi frontalieri, franchigia e credito d’imposta con scenari ipotetici' },
   { keyword: 'LAMal o CMI frontaliere quale conviene 2026', angle: 'Confronto aggiornato LAMal vs CMI: premi, coperture, franchigia, casi pratici per famiglie e single' },
   { keyword: 'frontaliere doppia imposizione credito imposta come funziona', angle: 'Come evitare la doppia tassazione: meccanismo del credito d\'imposta per frontalieri, quadro CE del 730, esempi pratici con cifre reali' },
   { keyword: 'costo auto pendolare frontaliere Ticino', angle: 'Tutti i costi dell\'auto per il pendolare: benzina, vignette, parcheggio, usura, confronto con treno e bus' },
@@ -5839,8 +5846,17 @@ export function assertArticlePassesFactualityGates(data, options = {}) {
   repairArticleEditorialClaims(data);
   assertItalianArticlePassesFactualityGates(data, options);
   assertTranslationsPassFactualityGates(data);
+  assertNoFiscalErrorsInLocales(data?.content || {});
   assertNoCorpusFabricatedInstitutionNames(data);
   assertLocalizedToponyms(data);
+  if (options.writer !== 'journalist') {
+    const sectionName = options.sectionName
+      || (typeof SECTION_NAME === 'string' ? SECTION_NAME : 'frontaliere');
+    assertArticleRelevance(data, sectionName);
+    assertYmylPublishable(data, {
+      sourceUrl: options.sourceUrl ?? data?._sourceUrl ?? data?.sourceUrl ?? '',
+    });
+  }
   // Run after all repairs and translation mutations, immediately before the
   // common registrar/writer boundary, so a prohibited claim cannot reach
   // content/** or content/seo/** even when a direct producer skips the main
@@ -6303,7 +6319,15 @@ ASSICURAZIONI:
 // and L. 213/2023. VERIFIED_DOMAIN_FACTS alone measures about 3320 chars of
 // template source; news-prompt-token-budget.test.mjs keeps the assembled prompts
 // under the cap.
-const EVERGREEN_FACTS_BRIEF = `FATTI VERIFICATI (ground truth — il fact-checker blocca l'articolo se diverghi da questi valori):
+const EVERGREEN_FACTS_BRIEF = `FONTI UFFICIALI (per fisco, previdenza e tassa salute l'articolo non esce senza almeno un link a una di queste, in formato [etichetta](url)):
+- imposte dei frontalieri: [Foglio informativo AFC](https://m4.ti.ch/fileadmin/DFE/DC/DOC-IF/nuovo_accordo/nuovo_accordo_foglio_informativo_FAQ.pdf)
+- franchigia e credito in Italia: [Agenzia delle Entrate](https://www.agenziaentrate.gov.it/portale/norme-per-i-pendolari-transfrontalieri-dei-paesi-confinanti)
+- Accordo sui frontalieri: [L. 83/2023](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2023-06-13;83)
+- AVS, AI e IPG: [Tabella sinottica AVS 2026](https://www.ahv-iv.ch/p/2.01.i)
+- previdenza: [UFAS](https://www.bsv.admin.ch/it/telelavoro)
+- quota SSN, detta tassa salute: [DM Salute 14/11/2025](https://www.gazzettaufficiale.it/eli/gu/2025/12/18/293/sg/pdf)
+
+FATTI VERIFICATI (ground truth — il fact-checker blocca l'articolo se diverghi da questi valori):
 - Imposta alla fonte sul reddito da lavoro: trattenuta in Svizzera. Nuovi frontalieri: la Svizzera preleva fino all'80% e l'Italia tassa il reddito, eliminando la doppia imposizione con il credito d'imposta (quadro CE del 730). Vecchi frontalieri (Accordo art. 9): tassati solo in Svizzera. Nuovi e vecchi frontalieri sono solo i lavoratori dell'art. 2: Comune entro 20 km, lavoro in Ticino, Grigioni o Vallese, rientro quotidiano. Fuori da questi requisiti non si applica l'Accordo: valgono la Convenzione del 1976 e la tassazione in Italia con credito d'imposta.
 - Nuovo Accordo Frontalieri: firmato 23/12/2020, in vigore dal 17/7/2023, applicabile dal 1° GENNAIO 2024. Ratifica IT: Legge 83 del 13/6/2023.
 - Nuovi frontalieri: franchigia IRPEF €10'000. Vecchi frontalieri (art. 9: frontalieri ai sensi dell'art. 2 attivi in Ticino, Grigioni o Vallese tra il 31/12/2018 e il 17/7/2023): tassati solo in Svizzera; il 2033 riguarda solo i ristorni ai Comuni.
@@ -6343,7 +6367,11 @@ const EVERGREEN_FACTS_BRIEF = `FATTI VERIFICATI (ground truth — il fact-checke
 // deliberatamente ASSENTI: l'istruzione esplicita e' di ometterle, non di
 // ricostruirle a memoria, che e' il modo in cui nascono le allucinazioni che
 // checkFabricatedInstitutionAcronyms poi blocca.
-const EVERGREEN_FACTS_BRIEF_CH = `FATTI VERIFICATI (ground truth — il fact-checker blocca l'articolo se diverghi da questi valori):
+const EVERGREEN_FACTS_BRIEF_CH = `FONTI UFFICIALI (per fisco, previdenza e tassa salute l'articolo non esce senza almeno un link a una di queste, in formato [etichetta](url)):
+- AVS, AI e IPG: [Tabella sinottica AVS 2026](https://www.ahv-iv.ch/p/2.01.i)
+- previdenza: [UFAS](https://www.bsv.admin.ch/it/telelavoro)
+
+FATTI VERIFICATI (ground truth — il fact-checker blocca l'articolo se diverghi da questi valori):
 - Fisco: 3 livelli (IFD federale + cantonale + comunale); ogni cantone ha legge/moltiplicatore propri (comuni: moltiplicatore sul cantonale).
 - Competenze (MAI confonderle): AFC/ESTV = IFD + IVA; amministrazioni CANTONALI = cantonale/comunale; UFAS/BSV = previdenza sociale (AVS/AI/LPP), NON fissa imposte; UST/BFS = statistiche, NON fissa aliquote.
 - Contributi su salario: AVS/AI/IPG 5.3% dipendente (10.6% tot. con datore), AD/AC 1.1% fino a massimale annuo, LAINF/LAA 0.7–1.5% secondo settore; LPP (salario coordinato): 7% (25–34), 10% (35–44), 15% (45–54), 18% (55+ fino a eta' di riferimento).
@@ -10818,7 +10846,7 @@ async function scanNewsSources() {
         droppedAnchor += 1;
         continue;
       }
-      if (dropNonTopical && !hasAdmissionSignal(gateText)) {
+      if (dropNonTopical && (!hasAdmissionSignal(gateText) || isOffTopicHeadline(h.headline || ''))) {
         droppedTopic += 1;
         continue;
       }
@@ -11787,9 +11815,27 @@ La fonte è cronaca locale (cronaca nera, incidente, sport, cultura o evento) in
   // testo nazionale, cosi' il limite conserva prima fisco e previdenza locali.
   const MAX_DOMAIN_FACTS_CHARS = 1600;
   const domainFactsBrief = evergreenFactsBriefFor(SECTION_NAME, CANTON_FACTS_BRIEF);
-  const truncatedDomainFactsBrief = domainFactsBrief.length > MAX_DOMAIN_FACTS_CHARS
-    ? domainFactsBrief.slice(0, MAX_DOMAIN_FACTS_CHARS).replace(/\n-[^\n]*$/, '') + '\n[...altri fatti di dominio omessi per brevità]'
+  // Keep the official-source block used by the news prompt on the same source
+  // of truth as the final YMYL gate. The evergreen constants predate the gate
+  // module and carry the same text; replace only that prefix so the prompt
+  // length and the verified-facts payload remain unchanged. For canton briefs
+  // the CH block is embedded after the annual dataset and is replaced there.
+  // `typeof` keeps the dependency-free prompt extraction tests valid: they
+  // execute this block without importing the module that owns the canonical
+  // brief, while production always has both exports available.
+  const ymylSourcesBrief = IS_FRONTALIERE
+    ? (typeof YMYL_SOURCES_BRIEF === 'string' ? YMYL_SOURCES_BRIEF : '')
+    : (typeof YMYL_SOURCES_BRIEF_CH === 'string' ? YMYL_SOURCES_BRIEF_CH : '');
+  const legacySourcesPrefix = domainFactsBrief.match(
+    /FONTI UFFICIALI [\s\S]*?(?=\n\nFATTI VERIFICATI)/,
+  )?.[0] || '';
+  const canonicalSourcesPrefix = ymylSourcesBrief || legacySourcesPrefix;
+  const canonicalDomainFactsBrief = legacySourcesPrefix && domainFactsBrief.includes(legacySourcesPrefix)
+    ? domainFactsBrief.replace(legacySourcesPrefix, canonicalSourcesPrefix)
     : domainFactsBrief;
+  const truncatedDomainFactsBrief = canonicalDomainFactsBrief.length > MAX_DOMAIN_FACTS_CHARS
+    ? canonicalDomainFactsBrief.slice(0, MAX_DOMAIN_FACTS_CHARS).replace(/\n-[^\n]*$/, '') + '\n[...altri fatti di dominio omessi per brevità]'
+    : canonicalDomainFactsBrief;
   const domainFactsBlock = isSyntheticSource ? '' : `\nFATTI DI DOMINIO VERIFICATI (riferimento facoltativo, separato dalla notizia sopra — attribuiscili al riferimento, non alla fonte, e usali solo se direttamente pertinenti al fatto; non inserirli per creare un nesso o allungare il testo):\n${truncatedDomainFactsBrief}\n`;
 
   // Il template e' una FUNZIONE dei due blocchi elastici invece di una
@@ -19337,6 +19383,13 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
       }
     }
 
+    // Step 3a.0-rel: nesso editoriale deterministico. Il corpo generato si piega
+    // all'angolo chiesto dal prompt, quindi il gate di densita' qui sopra non
+    // vede l'articolo sull'Iran che dice «frontalieri» dieci volte: decide cio'
+    // di cui l'articolo dichiara di parlare (lib/article-relevance-gate.mjs).
+    // Stesso rifiuto del topic-gate: niente pubblicazione, il ranker prosegue.
+    assertArticleRelevance(data, SECTION_NAME);
+
     // Step 3a.0-headline: Google News compliance — A5
     //
     // Validate the IT title (which becomes both the JSON-LD `headline` and
@@ -19448,6 +19501,21 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
         continue;
       }
       throw consistencyErr;
+    }
+
+    // Step 3a.0a-bis: fisco, previdenza e tassa salute non escono in automatico
+    // senza una fonte ufficiale e senza il controllo dei parametri fiscali
+    // (lib/article-ymyl-gate.mjs). Rigenera finche' ci sono tentativi; poi e' un
+    // rifiuto del topic-gate: l'articolo non esce e il ranker prosegue.
+    try {
+      assertYmylPublishable(data, { sourceUrl: url });
+    } catch (ymylErr) {
+      console.error(`  ⚠️  ${ymylErr.message}`);
+      if (attempt < maxAttempts) {
+        console.error(`  🔄 Rigenero contenuto IT per il gate YMYL (${attempt}/${maxAttempts})...`);
+        continue;
+      }
+      throw ymylErr;
     }
 
     // Step 3a.0b: Fabricated references check — BLOCKING (fast regex pre-filter)
@@ -20016,6 +20084,8 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // unchanged (it did, byte-identical, for apprendistato-urie-2024-2025)
   // was never re-checked on the en/de/fr output.
   assertNoFabricatedNormAcronyms({ en: data.content.en, de: data.content.de, fr: data.content.fr });
+  // La traduzione puo' reintrodurre un'affermazione che l'italiano non ha.
+  assertNoFiscalErrorsInLocales({ en: data.content.en, de: data.content.de, fr: data.content.fr });
 
   // Step 3c: Sanitize bold + URLs + nav links on translated content
   console.error('✂️  Sanitizzazione grassetto (traduzioni):');
@@ -20213,6 +20283,18 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // `Zürich` to the localized-exonym detector and can be published in place
   // of the required English `Zurich`.
   decodeArticleEntities(data);
+  // Entity decoding is the last content normalization before the write path.
+  // Re-run the fiscal guard on every locale here: the earlier check ran before
+  // the final source-copy repair and deterministic postconditions.
+  assertNoFiscalErrorsInLocales({
+    it: data.content.it,
+    en: data.content.en,
+    de: data.content.de,
+    fr: data.content.fr,
+  });
+  // YMYL also inspects SEO fields and must run after every final metadata/body
+  // mutation, immediately before the primary write path.
+  assertYmylPublishable(data, { sourceUrl: url });
   Object.defineProperties(data, {
     _sourceUrl: { value: url, configurable: true },
     _sourceText: { value: factualityGateSourceText(url, pageContent), configurable: true },
@@ -21375,7 +21457,19 @@ export async function registerArticleFiles(data, opts = {}) {
   // flusso primario. Il controllo arriva dopo la derivazione definitiva degli
   // slug, così copre anche l'identita' pubblicata senza rifiutare un valore
   // provvisorio ancora non sanitizzato.
-  assertArticlePassesFactualityGates(data);
+  // The registrar is the shared publication boundary for every producer. Keep
+  // relevance, YMYL and every-locale fiscal checks in this one final call so
+  // refresh writers cannot bypass a guard that only the AI path happens to run.
+  // FAQ-only refresh writers are a separate post-registration path; their
+  // atomic body writers re-run the same locale fiscal gate over the existing
+  // projection plus the candidate FAQ before committing the rename.
+  // The only exception is the explicitly identified human journalist path,
+  // whose editorial approval is the source of truth for the two topic gates.
+  assertArticlePassesFactualityGates(data, {
+    writer: opts.writer,
+    sourceUrl: data._sourceUrl || data.sourceUrl || '',
+    sectionName: SECTION_NAME,
+  });
   // Every deterministic producer enters this shared writer directly. Apply
   // the Markdown-link contract before registration writes, so invalid nav
   // actions cannot reach the published body files.

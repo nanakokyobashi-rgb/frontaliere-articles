@@ -2303,6 +2303,16 @@ test('publisher: una pagina con noindex, senza meta di proprieta\', con asset sa
   assert.match(pageDefects(page, good.replace('https://cdn.frontaliereticino.ch/assets/', '/assets/')).join('|'), /same-origin/);
   assert.match(pageDefects(page, good.replace(page.apexUrl, 'https://frontaliereticino.ch/articoli-svizzera/')).join('|'), /canonical/);
   assert.match(pageDefects(page, '').join('|'), /vuota/);
+
+  const article = pageEntry('canton-ti', 'articoli-ticino/carburanti/premi/index.html', 'article');
+  const articleNoindex = good
+    .replace(page.apexUrl, article.apexUrl)
+    .replace('index, follow', 'noindex, follow');
+  assert.match(
+    pageDefects(article, articleNoindex).join('|'),
+    /noindex/,
+    'anche un articolo cantonale deve restare indexable',
+  );
 });
 
 test('publisher: le landing live annunciano il feed edge della propria locale', () => {
