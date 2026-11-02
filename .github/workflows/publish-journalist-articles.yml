@@ -243,10 +243,11 @@ jobs:
 
           # FU-009: this writer bypasses generate-article.yml, but it still
           # registers the same localized body files. Reject the write before
-          # the commit if any EN/DE/FR body key is missing or empty. Keep this
-          # after the corpus guards, matching generate-article.yml: the node
-          # test contract must exercise both corpus suites when they are red.
-          if ! node scripts/ci/check-blog-locale-completeness.mjs; then
+          # the commit if any EN/DE/FR body key is missing or empty. Scope the
+          # check to body files changed by this run: publish-api.yml retains the
+          # corpus-wide gate, while this writer must not discard a valid article
+          # because an unrelated pre-existing article is incomplete.
+          if ! node scripts/ci/check-blog-locale-completeness.mjs --changed-paths; then
             {
               echo "### ✖ Scrittura RIFIUTATA prima del commit — localizzazione incompleta"
               echo
