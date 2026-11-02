@@ -4,25 +4,25 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261028-le-commerce-de-detail-en-territoire-positif-sur-neuf-mois.html": {
+    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261102-la-propension-a-l-embauche-s-erode-en-fin-d-annee.html": {
       "section": "canton-ju",
-      "ts": 1793188912796
+      "ts": 1793634752857
     },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261028-straumann-progresse-au-troisieme-trimestre-1.html": {
+    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261102-les-perspectives-des-pme-se-sont-embrumees-en-octobre.html": {
       "section": "canton-ju",
-      "ts": 1793188924934
+      "ts": 1793635981232
     },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261028-une-commission-veut-completer-les-mesures-contre-les-loups.html": {
+    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261102-les-revenus-dans-les-services-progressent-en-aout.html": {
       "section": "canton-ju",
-      "ts": 1793188936940
+      "ts": 1793635989044
     },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261028-ubs-signe-un-solide-3e-trimestre.html": {
+    "canton-ju::https://www.lejdj.ch/articles/incendie-dans-une-ferme-a-moutier-cinq-vehicules-mobilises-pour-maitriser-un-feu-de-cheminee-105414": {
       "section": "canton-ju",
-      "ts": 1793188946436
+      "ts": 1793635992573
     },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261029-le-trafic-ferroviaire-restreint-sur-la-ligne-du-pied-du-jura.html": {
+    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261102-echec-des-negociations-pour-la-cct-de-swissport-a-zurich.html": {
       "section": "canton-ju",
-      "ts": 1793342636803
+      "ts": 1793635999344
     }
   }
 }
