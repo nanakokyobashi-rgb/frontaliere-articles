@@ -21460,6 +21460,9 @@ export async function registerArticleFiles(data, opts = {}) {
   // The registrar is the shared publication boundary for every producer. Keep
   // relevance, YMYL and every-locale fiscal checks in this one final call so
   // refresh writers cannot bypass a guard that only the AI path happens to run.
+  // FAQ-only refresh writers are a separate post-registration path; their
+  // atomic body writers re-run the same locale fiscal gate over the existing
+  // projection plus the candidate FAQ before committing the rename.
   // The only exception is the explicitly identified human journalist path,
   // whose editorial approval is the source of truth for the two topic gates.
   assertArticlePassesFactualityGates(data, {

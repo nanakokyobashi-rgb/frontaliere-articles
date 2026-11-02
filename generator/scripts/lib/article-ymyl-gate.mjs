@@ -60,7 +60,7 @@ export const YMYL_SOURCES_BRIEF_CH = sourcesBrief([
   OFFICIAL_SOURCE_LINKS.find(({ label }) => label === 'UFAS'),
 ]);
 
-const YMYL_RE = /(?:^| )(?:tasse(?: |$)|tassazion|tassa salute|tassa sulla salute|tassa sanitaria|imposta(?: |$)|imposte(?: |$)|irpef|dichiarazione dei redditi|franchigia|detrazion|deduzion|avs|lpp|pilastro|previdenz|pension|inps|naspi|ristorn|lamal|cassa malati|casse malati|assicurazione malattia|premi malattia|servizio sanitario|ssn(?: |$)|accordo fiscale|doppia imposizione|fisco|fiscal)/;
+const YMYL_RE = /(?:^| )(?:tasse(?: |$)|tassazion|tassa salute|tassa sulla salute|tassa sanitaria|imposta(?: |$)|imposte(?: |$)|irpef|dichiarazione dei redditi|franchigia|detrazion|deduzion|avs|lpp|pilastro|previdenz|pension|inps|naspi|ristorn|lamal|cassa malati|casse malati|assicurazione malattia|premi malattia|sanita|salute|malattia|servizio sanitario|ssn(?: |$)|accordo fiscale|doppia imposizione|fisco|fiscal)/;
 
 /**
  * @param {{id?: string, title?: string, excerpt?: string}} article testi italiani
@@ -148,4 +148,19 @@ export function assertNoFiscalErrorsInLocales(contentByLocale) {
     error.qualityReject = true;
     throw error;
   }
+}
+
+/**
+ * FAQ-only writers update an already registered article outside the registrar.
+ * Re-run the same locale fiscal gate over the existing projection plus the
+ * candidate FAQ before their atomic rename, so a later FAQ pass cannot reopen
+ * a claim the registration path rejected.
+ */
+export function assertFaqPassesFiscalClaimsGate({ locale, articleText: existingText = '', faq = [] } = {}) {
+  assertNoFiscalErrorsInLocales({
+    [locale || 'unknown']: {
+      body: existingText,
+      faq,
+    },
+  });
 }

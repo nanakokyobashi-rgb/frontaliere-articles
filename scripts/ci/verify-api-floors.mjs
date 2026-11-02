@@ -41,6 +41,7 @@ import {
   FLOOR_RETENTION,
   FLOOR_WARN_RETENTION,
   countSourceArticles,
+  sourceRegistryIds,
   countSourceImages,
   missingCorpusMessage,
   countSeoEntries,
@@ -83,6 +84,46 @@ function indexExcludedArticleIds(indexExclusions, section) {
       .filter((key) => key.startsWith(prefix))
       .map((key) => key.slice(prefix.length)),
   );
+}
+
+/**
+ * Identita' lette dai chunk che alimentano il feed, con la stessa sorgente
+ * della cardinalita' `countSeoEntries`. Il ledger-only gate deve confrontare
+ * gli insiemi: due cardinalita' uguali possono comunque essere un id attivo
+ * mancante e un id ritirato estraneo.
+ */
+export function collectSeoEntryIdsFromChunks(root, seoFiles, seoDir = SEO_CHUNK_DIR) {
+  const ids = new Set();
+  for (const file of seoFiles) {
+    const filePath = path.join(root, seoDir, file);
+    if (!fs.existsSync(filePath)) continue;
+    for (const id of collectSeoEntryIds(fs.readFileSync(filePath, 'utf-8'))) ids.add(id);
+  }
+  return ids;
+}
+
+/**
+ * True only when the chunks contain every registry identity and every such
+ * chunk identity is explicitly excluded by the ledger.
+ */
+export function allSeoEntryIdsExcluded(ids, excludedIds, expectedRegistryIds = []) {
+  const sourceIds = new Set(ids);
+  const excluded = new Set(excludedIds);
+  const registryIds = new Set(expectedRegistryIds);
+  return sourceIds.size > 0
+    && [...registryIds].every((id) => sourceIds.has(id))
+    && [...sourceIds].every((id) => excluded.has(id));
+}
+
+/**
+ * Conta la popolazione SEO con la stessa chiamata del percorso senza ledger.
+ * Il quarto argomento serve solo quando il ledger deve togliere delle identita'
+ * dal conteggio; mantenerla come chiamata distinta evita che il percorso
+ * ordinario perda la forma condivisa con il writer RSS.
+ */
+function countSectionSeoEntries(root, seo, excludedIds) {
+  if (excludedIds.size === 0) return countSeoEntries(root, seo.files, seo.seoDir);
+  return countSeoEntries(root, seo.files, seo.seoDir, { excludedIds });
 }
 
 const IMAGE_SOURCE_LABEL = IMAGE_SOURCE_DIRS.join(' or ');
@@ -742,15 +783,26 @@ export async function expectFromCorpus(root) {
     // content/seo col nome dell'engine ma nella cartella della sezione.
     const seo = seoChunkSources(section);
     const excludedIds = indexExcludedArticleIds(indexExclusions, section.id);
-    const unfilteredFeedSources = countSeoEntries(root, seo.files, seo.seoDir);
-    feedSources[section.id] = countSeoEntries(root, seo.files, seo.seoDir, { excludedIds });
+    const unfilteredFeedIds = collectSeoEntryIdsFromChunks(root, seo.files, seo.seoDir);
+    const unfilteredFeedSources = unfilteredFeedIds.size;
+    feedSources[section.id] = countSectionSeoEntries(root, seo, excludedIds);
     // A zero caused solely by the noindex ledger is intentional: the publisher
     // must be allowed to emit no RSS file for that section, while an absent SEO
-    // chunk must still fail closed below. Keep this fact explicit so the floor
-    // does not confuse a deliberate retirement with a truncated corpus.
-    feedSourcesExcludedOnly[section.id] = unfilteredFeedSources > 0
-      && feedSources[section.id] === 0
-      && excludedIds.size >= unfilteredFeedSources;
+    // chunk or an active id must still fail closed below. Keep this fact
+    // explicit so the floor does not confuse a deliberate retirement with a
+    // truncated corpus; matching cardinalities are not sufficient evidence.
+    feedSourcesExcludedOnly[section.id] = false;
+    if (unfilteredFeedSources > 0 && feedSources[section.id] === 0) {
+      // Il registry e' necessario solo per provare il bypass ledger-only; un
+      // feed gia' popolato non deve imporre una superficie che il suo percorso
+      // di conteggio non usa (in particolare nei root fixture minimali).
+      const registryIds = sourceRegistryIds(root, section.id);
+      feedSourcesExcludedOnly[section.id] = allSeoEntryIdsExcluded(
+        unfilteredFeedIds,
+        excludedIds,
+        registryIds,
+      );
+    }
     latestSeoPublications[section.id] = latestSeoPublication(root, seo.files, seo.seoDir, { excludedIds });
     if (revision === null || !seo.historyComparable) {
       previousFeedSources[section.id] = null;

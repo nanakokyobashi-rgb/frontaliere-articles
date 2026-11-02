@@ -34,6 +34,7 @@ import {
   assertLocalizedToponymPair,
   extractArticleProjectionText,
 } from './lib/localized-toponyms.mjs';
+import { assertFaqPassesFiscalClaimsGate } from './lib/article-ymyl-gate.mjs';
 import { sanitizeArticleFaqMarkdown } from '../../scripts/lib/article-link-contract.mjs';
 import { assertFaqPairsHaveNoRejectedControls } from '../../scripts/lib/faq-control-contract.mjs';
 
@@ -293,6 +294,14 @@ function passesLocalizedToponymGate(filePath, articleId, locale, faqArray) {
   }
 }
 
+function assertFaqWritePassesFiscalGate(filePath, articleId, locale, faqArray) {
+  assertFaqPassesFiscalClaimsGate({
+    locale,
+    articleText: articleProjectionText(filePath, articleId, { excludeFaq: true }),
+    faq: faqArray,
+  });
+}
+
 /** Il literal `.faq` vivo di un file, ancora escapato. `null` se non c'e'. */
 function rawFaqLiteral(filePath, id = idOfBodyPath(filePath)) {
   if (!existsSync(filePath)) return null;
@@ -320,6 +329,7 @@ export function replaceFaqInFile(filePath, newFaqArray, id = idOfBodyPath(filePa
   const locale = basename(dirname(resolve(filePath)));
   const safeFaq = assertFaqPairsHaveNoRejectedControls(newFaqArray, `FAQ replacement ${id}`);
   if (!passesLocalizedToponymGate(filePath, id, locale, safeFaq)) return false;
+  assertFaqWritePassesFiscalGate(filePath, id, locale, safeFaq);
   let content = readFileSync(filePath, 'utf-8');
   const jsonStr = serializeFaqLiteral(sanitizeArticleFaqMarkdown(safeFaq, locale));
   // Escape-aware regex + function replacer to avoid $-pattern issues.
@@ -342,6 +352,7 @@ function insertFaqKey(filePath, articleId, faqArray) {
   const locale = basename(dirname(resolve(filePath)));
   const safeFaq = assertFaqPairsHaveNoRejectedControls(faqArray, `FAQ insertion ${articleId}`);
   if (!passesLocalizedToponymGate(filePath, articleId, locale, safeFaq)) return false;
+  assertFaqWritePassesFiscalGate(filePath, articleId, locale, safeFaq);
   let content = readFileSync(filePath, 'utf-8');
   const jsonStr = serializeFaqLiteral(sanitizeArticleFaqMarkdown(safeFaq, locale));
   const closingIdx = content.lastIndexOf('};');
