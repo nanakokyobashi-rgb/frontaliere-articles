@@ -4,12 +4,12 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "mobilita",
-  "updatedAt": "2026-11-02T09:20:10.429Z",
-  "contentHash": "efd99d6e3dd177a637d2a4d50726cbfa0592570b17ecd3517940d3dd4f196dd3",
+  "updatedAt": "2026-11-02T11:33:10.756Z",
+  "contentHash": "37a1b61b3e9717f9bb237deee9905d41da70cecebec9c57b5aac7ec5e851f695",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-01T22:29:16.511Z",
+      "updatedAt": "2026-11-02T06:54:25.899Z",
       "keyFacts": 2
     },
     {
@@ -28,12 +28,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "5",
-          "note": "segnalazioni aggiornate: 1 novembre 2026"
+          "note": "segnalazioni aggiornate: 2 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "13",
-          "note": "segnalazioni aggiornate: 1 novembre 2026"
+          "note": "segnalazioni aggiornate: 2 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -73,6 +73,11 @@
               "date": "2026-10-22T06:00:00.000Z"
             },
             {
+              "label": "A2 Basel -> Luzern tra Svincolo autostradale Egerkingen E Raccordo autostradale Diramazione Härkingen Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffico",
+              "date": "2026-11-02T06:05:00.000Z"
+            },
+            {
               "label": "Balsthal <-> Laufen tra Luogo Oberbeinwil E Passo Passwang Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette",
               "value": "Cantiere",
               "detail": "fine prevista: 31 dicembre 2028",
@@ -83,16 +88,10 @@
               "value": "Cantiere",
               "detail": "fine prevista: 31 dicembre 2029",
               "date": "2024-12-30T05:49:00.000Z"
-            },
-            {
-              "label": "A2 Lucerna <-> Basilea Svincolo autostradale Egerkingen Situazione: problemi di traffico cantiere, lunghezza [km] 0.6 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.5",
-              "value": "Cantiere",
-              "detail": "fine prevista: 30 luglio 2027",
-              "date": "2025-04-11T05:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-01T22:29:16.511Z"
+          "updatedAt": "2026-11-02T06:54:25.899Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -161,7 +160,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-02T11:33:10.756Z"
     },
     "en": {
       "canton": "SO",
@@ -172,12 +171,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "5",
-          "note": "reports as of 1 November 2026"
+          "note": "reports as of 2 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "13",
-          "note": "reports as of 1 November 2026"
+          "note": "reports as of 2 November 2026"
         }
       ],
       "dataBlocks": [
@@ -217,6 +216,11 @@
               "date": "2026-10-22T06:00:00.000Z"
             },
             {
+              "label": "A2 Basel -> Luzern tra Svincolo autostradale Egerkingen E Raccordo autostradale Diramazione Härkingen Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffic",
+              "date": "2026-11-02T06:05:00.000Z"
+            },
+            {
               "label": "Balsthal <-> Laufen tra Luogo Oberbeinwil E Passo Passwang Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette",
               "value": "Roadworks",
               "detail": "until 31 December 2028",
@@ -227,16 +231,10 @@
               "value": "Roadworks",
               "detail": "until 31 December 2029",
               "date": "2024-12-30T05:49:00.000Z"
-            },
-            {
-              "label": "A2 Lucerna <-> Basilea Svincolo autostradale Egerkingen Situazione: problemi di traffico cantiere, lunghezza [km] 0.6 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.5",
-              "value": "Roadworks",
-              "detail": "until 30 July 2027",
-              "date": "2025-04-11T05:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-01T22:29:16.511Z"
+          "updatedAt": "2026-11-02T06:54:25.899Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -304,7 +302,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-02T11:33:10.756Z"
     },
     "de": {
       "canton": "SO",
@@ -315,12 +313,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "5",
-          "note": "Meldungen vom 1. November 2026"
+          "note": "Meldungen vom 2. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "13",
-          "note": "Meldungen vom 1. November 2026"
+          "note": "Meldungen vom 2. November 2026"
         }
       ],
       "dataBlocks": [
@@ -360,6 +358,11 @@
               "date": "2026-10-22T06:00:00.000Z"
             },
             {
+              "label": "A2 Basel -> Luzern zwischen Anschluss Egerkingen und Autobahndreieck Verzweigung Härkingen Sachlage: Stau Ursache: Verkehrsüberlastung",
+              "value": "Verkehr",
+              "date": "2026-11-02T06:05:00.000Z"
+            },
+            {
               "label": "Balsthal <-> Laufen zwischen Ortschaft Oberbeinwil und Pass Passwang Sachlage: Verkehrsbehinderung Baustelle Verkehrsführung: Fahrbahnverengung",
               "value": "Baustelle",
               "detail": "bis 31. Dezember 2028",
@@ -370,16 +373,10 @@
               "value": "Baustelle",
               "detail": "bis 31. Dezember 2029",
               "date": "2024-12-30T05:49:00.000Z"
-            },
-            {
-              "label": "A2 Luzern <-> Basel Anschluss Egerkingen Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.6 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.5",
-              "value": "Baustelle",
-              "detail": "bis 30. Juli 2027",
-              "date": "2025-04-11T05:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-01T22:29:16.511Z"
+          "updatedAt": "2026-11-02T06:54:25.899Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -447,7 +444,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-02T11:33:10.756Z"
     },
     "fr": {
       "canton": "SO",
@@ -458,12 +455,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "5",
-          "note": "signalements au 1er novembre 2026"
+          "note": "signalements au 2 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "13",
-          "note": "signalements au 1er novembre 2026"
+          "note": "signalements au 2 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -503,6 +500,11 @@
               "date": "2026-10-22T06:00:00.000Z"
             },
             {
+              "label": "A2 Bâle -> Lucerne entre Jonction autoroutière Egerkingen et Echangeur Echangeur de Härkingen Situation: bouchon Raison: surcharge de trafic",
+              "value": "Trafic",
+              "date": "2026-11-02T06:05:00.000Z"
+            },
+            {
               "label": "Balsthal <-> Laufon entre Localité Oberbeinwil et Col Passwang Situation: trafic perturbé travaux Gestion du trafic: rétrécissement des voies",
               "value": "Chantier",
               "detail": "jusqu’au 31 décembre 2028",
@@ -513,16 +515,10 @@
               "value": "Chantier",
               "detail": "jusqu’au 31 décembre 2029",
               "date": "2024-12-30T05:49:00.000Z"
-            },
-            {
-              "label": "A2 Lucerne <-> Bâle Jonction autoroutière Egerkingen Situation: trafic perturbé travaux, longueur [km] 0.6 Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.5",
-              "value": "Chantier",
-              "detail": "jusqu’au 30 juillet 2027",
-              "date": "2025-04-11T05:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-01T22:29:16.511Z"
+          "updatedAt": "2026-11-02T06:54:25.899Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -591,7 +587,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-02T11:33:10.756Z"
     }
   }
 }
