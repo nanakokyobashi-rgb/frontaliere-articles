@@ -3,6 +3,9 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import vm from 'node:vm';
+import { extractSyntheticReferenceEvidence } from '../scripts/lib/editorial-originality.mjs';
+import { formatRemediation } from '../scripts/lib/article-factuality-gates.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const SOURCE = fs.readFileSync(path.join(HERE, '..', 'scripts', 'create-article.mjs'), 'utf8');
@@ -71,7 +74,7 @@ test('a substantiated restatement or inference failure bypasses weighted issue d
   const gate = verification.slice(gateStart, gateEnd);
   assert.ok(gateStart >= 0 && gateEnd > gateStart, 'il gate originale deve precedere la logica di consenso ordinaria');
   assert.match(gate, /filter\(result => !result\.editorialAssessment\?\.passed\)/);
-  assert.match(gate, /return \{ passed: false, issues: \[\.\.\.originalityIssues, \.\.\.factualIssues\] \};/);
+  assert.match(gate, /return \{ passed: false, remediationSourceText, issues: \[\.\.\.originalityIssues, \.\.\.factualIssues\] \};/);
   assert.ok(gate.indexOf('return { passed: false') < gateEnd);
   assert.ok(gateEnd < verification.indexOf('const HIGH_TRUST_CRITICAL_CATEGORIES'),
     'il rigetto di qualità non deve essere declassato dal punteggio weighted-major');
@@ -87,4 +90,46 @@ test('generation asks for a traceable contribution without forced implications',
   assert.match(rule, /Non inventare reportage, interviste, fonti proprie/);
   assert.doesNotMatch(SOURCE, /ALMENO il 50% del testo dei campi body1, body2, body3/);
   assert.doesNotMatch(SOURCE, /body3 = AZIONE: cosa fare concretamente/);
+});
+
+test('retry quotes use the checker evidence window, never raw editorial instructions or unseen tails', async () => {
+  // Execute the real evidence preparation without importing the generator's
+  // module-scope network operations or invoking a model.
+  const evidenceEnd = verification.indexOf('  const editorialContext = {');
+  assert.ok(evidenceEnd > 0);
+  const evidenceFor = vm.runInNewContext(`(${verification.slice(0, evidenceEnd)}
+    return remediationSourceText;
+  })`, {
+    MAX_FACTCHECK_ARTICLE_CHARS: 10000,
+    SECTION_NAME: 'test',
+    CANTON_FACTS_BRIEF: '',
+    evergreenFactsBriefFor: () => 'Fatti di dominio verificati. '.repeat(10),
+    extractSyntheticReferenceEvidence,
+  });
+  const quote = 'Il Comune ha registrato 120 domande nel 2025.';
+  const issue = { claim: 'claim', reason: 'reason', category: 'statistiche', sourceQuote: quote };
+  const rendersQuote = (sourceText) => formatRemediation([issue], { sourceText }).includes('ESTRATTO FONTE');
+  const real = `${'Fonte originale verificata. '.repeat(10)}${quote}`;
+  assert.equal(rendersQuote(await evidenceFor({}, real, 'https://example.test/news')), true);
+  assert.equal(rendersQuote(await evidenceFor({}, `${'x'.repeat(6000)}${quote}`, 'https://example.test/news')), false);
+  assert.equal(await evidenceFor({}, quote, 'https://example.test/short'), '');
+  for (const scheme of ['stats-bfs', 'stats-astra']) {
+    const dataset = `${real}\n=== ANGOLO EDITORIALE RICHIESTO ===\nIstruzione priva di prova.`;
+    const evidence = await evidenceFor({}, dataset, `${scheme}://dataset`);
+    assert.equal(evidence, real);
+    assert.equal(rendersQuote(evidence), true);
+    const instructionsOnly = `${'Dati verificati. '.repeat(10)}\n=== ANGOLO EDITORIALE RICHIESTO ===\n${quote}`;
+    assert.equal(rendersQuote(await evidenceFor({}, instructionsOnly, `${scheme}://dataset`)), false);
+    assert.equal(await evidenceFor({}, real, `${scheme}://without-marker`), '');
+  }
+  assert.equal(await evidenceFor({}, real, 'evergreen://guide'), '');
+});
+
+test('every checker verdict carries evidence to both retry consumers without changing issue shape', () => {
+  const verdicts = [...verification.matchAll(/return \{\s*passed: (?:true|false),\s*(\w+)/g)];
+  assert.equal(verdicts.length, 7);
+  for (const verdict of verdicts) assert.equal(verdict[1], 'remediationSourceText');
+  assert.match(SOURCE, /formatRemediation\(factResult\.issues, \{\s*cap: FACTCHECK_FEEDBACK_CAP,\s*sourceText: factResult\.remediationSourceText/);
+  assert.match(SOURCE, /expandFactIssues = expandFactResult\.issues \|\| \[\];\s*expandFactSourceText = expandFactResult\.remediationSourceText;/);
+  assert.match(SOURCE, /formatRemediation\(expandFactIssues, \{\s*cap: EXPAND_FACTCHECK_FEEDBACK_CAP,\s*sourceText: expandFactSourceText/);
 });
