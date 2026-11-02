@@ -549,9 +549,10 @@ ${itemsXml}
 /**
  * Build every RSS feed for one section.
  *
- * Returns `{ id, articleCount, slugCount, feeds }` where `feeds` is an ordered
- * `[filename, xml]` list — the caller decides where the bytes land (public/ in
- * the site, dist/api/ in the publisher). Nothing is written here.
+ * Returns `{ id, articleCount, withdrawnArticleCount, slugCount, feeds }` where
+ * `feeds` is an ordered `[filename, xml]` list — the caller decides where the
+ * bytes land (public/ in the site, dist/api/ in the publisher). Nothing is
+ * written here.
  *
  * `registry` is the section's article array; `id` and `image` are read to
  * resolve `media:content` without touching the filesystem, and `date === ''`
@@ -585,7 +586,7 @@ export function buildSectionFeeds({ fs, path, rootDir, section, registry = [], l
     section.slugConst,
   );
   if (articles.size === 0) {
-    return { id: section.id, articleCount: 0, slugCount: slugs.size, feeds: [] };
+    return { id: section.id, articleCount: 0, withdrawnArticleCount: 0, slugCount: slugs.size, feeds: [] };
   }
 
   // `Article.image` is already absolute for blog heroes (the registry maps them
@@ -627,6 +628,9 @@ export function buildSectionFeeds({ fs, path, rootDir, section, registry = [], l
     fs,
     ARTICLE_INDEX_EXCLUSIONS_FILES.map((candidate) => path.join(rootDir, candidate)),
   );
+  const withdrawnArticleCount = [...articles.keys()].filter((id) =>
+    withdrawn.has(articleIndexExclusionKey(section.id, id)),
+  ).length;
   const feedArticles = unknownDateIds.size || withdrawn.size
     ? new Map([...articles].filter(([id]) => (
       !unknownDateIds.has(id) && !withdrawn.has(articleIndexExclusionKey(section.id, id))
@@ -648,7 +652,13 @@ export function buildSectionFeeds({ fs, path, rootDir, section, registry = [], l
     if (locale === 'it') feeds.push([section.mainFeed, xml]);
   }
 
-  return { id: section.id, articleCount: articles.size, slugCount: slugs.size, feeds };
+  return {
+    id: section.id,
+    articleCount: feedArticles.size,
+    withdrawnArticleCount,
+    slugCount: slugs.size,
+    feeds,
+  };
 }
 
 /**
