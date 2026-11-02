@@ -40365,39 +40365,6 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
   },
 
 
-  'blog-sospensione-lavori-muro-anti-migranti-big-bend-texas': {
-    title: 'Big Bend: CBP mette in pausa i lavori nel parco nazionale | Frontaliere Ticino',
-    description: 'Il 17 agosto 2026 il commissario CBP Rodney S. Scott annuncia una pausa delle attività di costruzione nel Big Bend National Park durante una valutazione sul posto.',
-    keywords: 'Texas, Big Bend National Park, CBP, lavori di costruzione, pausa',
-    ogTitle: 'Big Bend: CBP mette in pausa i lavori nel parco nazionale',
-    ogDescription: 'Il 17 agosto 2026 CBP annuncia una pausa delle attività di costruzione nel Big Bend National Park per una valutazione sul posto.',
-    canonicalPath: '/articoli-svizzera/sospensione-lavori-muro-anti-migranti-big-bend-texas/',
-    structuredData: {
-      "@context": "https://schema.org",
-      "@type": "NewsArticle",
-      "headline": "Big Bend: CBP mette in pausa i lavori nel parco nazionale",
-      "description": "Il 17 agosto 2026 il commissario CBP Rodney S. Scott annuncia una pausa delle attività di costruzione nel Big Bend National Park durante una valutazione sul posto.",
-      "image": {
-        "@type": "ImageObject",
-        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
-        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
-        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
-        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
-        "creditText": "Frontaliere Ticino",
-        "url": `${BASE_URL}/images/blog/sospensione-lavori-muro-anti-migranti-big-bend-texas.webp`,
-        "width": 1200,
-        "height": 675,
-        "caption": "Big Bend National Park, Texas"
-      },
-      "datePublished": "2026-08-17T21:50:58+00:00",
-      "dateModified": "2026-08-17T21:50:58+00:00",
-      "inLanguage": "it",
-      "author": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
-      "publisher": { "@id": "https://frontaliereticino.ch/#organization" },
-      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/sospensione-lavori-muro-anti-migranti-big-bend-texas/`,
-      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
-    }
-  },
   'blog-infantino-fifa-lamour-licenziato': {
     title: 'Accusò Infantino di tradimento: licenziato | Frontaliere Ticino',
     description: 'La FIFA ha licenziato Kevin Lamour, alto funzionario franco-svizzero, dopo le sue critiche pubbliche rivolte a Infantino e ai suoi piani di investimento',
