@@ -8660,6 +8660,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.startup-innovazione-sociale-open-call.title': 'Open Call 2026 : formation et financements pour les startups sociales',
     'blog.article.startup-innovazione-sociale-open-call.excerpt': 'Candidatures ouvertes jusqu’au 15 janvier 2027 20.000 francs en jeu pour cinq startups sélectionnées Social Business Conference 2027 à Lugano le 19 mai',
     'blog.article.startup-innovazione-sociale-open-call.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.premi-mercato-idroelettrico-2026.title': '21,4 millions de francs aux grandes installations hydroélectriques',
+    'blog.article.premi-mercato-idroelettrico-2026.excerpt': '21,4 millions de francs à trois demandeurs La prime 2026 concerne l\'exercice 2025 Les demandes ont été déposées d\'ici fin mai 2026 Les ressources',
+    'blog.article.premi-mercato-idroelettrico-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaChFr;

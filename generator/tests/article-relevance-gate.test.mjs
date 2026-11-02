@@ -10,6 +10,8 @@ import {
   classifyArticleRelevance,
   isOffTopicHeadline,
 } from '../scripts/lib/article-relevance-gate.mjs';
+import { isInCantonArea } from '../scripts/lib/canton-classifier.mjs';
+import { AUDITED_ARTICLE_SECTIONS } from '../../scripts/audit-article-relevance.mjs';
 
 const FILLER_FRONTALIERI = 'I frontalieri del Ticino e la Svizzera seguono il tema. '.repeat(10);
 
@@ -26,6 +28,18 @@ for (const [id, title, family] of [
     assert.equal(verdict.relevant, false);
     assert.equal(verdict.rule, 'fuori-tema');
     assert.equal(verdict.family, family);
+  });
+}
+
+for (const [id, title, section] of [
+  ['lavoro-mortale-giornalisti-messico', 'Il lavoro mortale dei giornalisti in Messico', 'frontaliere'],
+  ['disinformazione-russa-francia', 'Disinformazione russa colpisce in Francia', 'svizzera'],
+]) {
+  test(`il deny-list esteri precede il nexus generico o la sezione: ${id}`, () => {
+    const verdict = classifyArticleRelevance({ section, id, title });
+    assert.equal(verdict.relevant, false);
+    assert.equal(verdict.rule, 'fuori-tema');
+    assert.equal(verdict.family, 'esteri');
   });
 }
 
@@ -71,6 +85,31 @@ test('senza ancore vale solo per la sezione frontaliere: svizzera e cantoni lo s
   assert.equal(classifyArticleRelevance({ ...article, section: 'svizzera' }).relevant, true);
 });
 
+test('un nesso generico cantonale usa l\'ancora locale della sezione', () => {
+  assert.deepEqual(
+    classifyArticleRelevance({
+      section: 'canton-ar',
+      id: 'lavoro-herisau',
+      title: 'Lavoro a Herisau',
+      excerpt: 'Herisau aggiorna il mercato del lavoro locale.',
+      body: 'Le misure riguardano Herisau.',
+      isInCantonArea,
+    }),
+    { relevant: true },
+  );
+  assert.deepEqual(
+    classifyArticleRelevance({
+      section: 'canton-ar',
+      id: 'lavoro-italia',
+      title: 'Lavoro in Italia',
+      excerpt: 'Misure per il lavoro italiano.',
+      body: 'Il provvedimento riguarda l\'Italia.',
+      isInCantonArea,
+    }),
+    { relevant: false, rule: 'senza-ancore' },
+  );
+});
+
 test('una famiglia fuori tema vale in ogni sezione: il Texas stava nella sezione svizzera', () => {
   const verdict = classifyArticleRelevance({
     section: 'svizzera',
@@ -78,6 +117,17 @@ test('una famiglia fuori tema vale in ogni sezione: il Texas stava nella sezione
     title: 'Texas, sospesi i lavori per il muro anti-migranti a Big Bend',
   });
   assert.equal(verdict.rule, 'fuori-tema');
+});
+
+test('un nexus generico non sostituisce un anchor svizzero o di confine', () => {
+  assert.deepEqual(
+    classifyArticleRelevance({ section: 'svizzera', id: 'lavoro-in-italia', title: 'Lavoro e fisco in Italia' }),
+    { relevant: false, rule: 'senza-ancore' },
+  );
+  assert.deepEqual(
+    classifyArticleRelevance({ section: 'svizzera', id: 'lavoro-in-ticino', title: 'Lavoro e fisco in Ticino' }),
+    { relevant: true },
+  );
 });
 
 test('il rifiuto in generazione e\' un rifiuto del topic-gate: il ranker prosegue', () => {
@@ -100,4 +150,14 @@ test('filtro prima della spesa: decide solo sulla headline, senza guardare la se
   assert.equal(isOffTopicHeadline('Sport a Lugano'), false);
   assert.equal(isOffTopicHeadline('Partita IVA per frontalieri: cosa cambia'), false);
   assert.equal(isOffTopicHeadline('Consiglio federale: nuove regole sul lavoro'), false);
+  assert.equal(isOffTopicHeadline('Lavoro'), false);
+  assert.equal(isOffTopicHeadline('Tasse'), false);
+});
+
+test('l audit del ledger usa solo le sezioni supportate: i cantoni restano indexable', () => {
+  assert.deepEqual(
+    AUDITED_ARTICLE_SECTIONS.map(({ section }) => section),
+    ['frontaliere', 'svizzera'],
+  );
+  assert.equal(AUDITED_ARTICLE_SECTIONS.some(({ kind }) => kind === 'canton'), false);
 });

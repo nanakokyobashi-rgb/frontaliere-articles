@@ -200,8 +200,12 @@ export const TRANSLATION_GLOSSARY = [
       it: [[/\bmogli(?:e)?\b/gi, 'specialista', TITLE_ONLY]],
       en: [[/\bwife\b/gi, 'specialist', TITLE_ONLY]],
       // NB: `\b` is ASCII-only in JS, so "Épouse" at the start of a title has
-      // no word boundary before it — Unicode letter lookarounds instead.
-      fr: [[/(?<![\p{L}\p{N}])[eé]pouse(?![\p{L}\p{N}])/giu, 'spécialiste', TITLE_ONLY]],
+      // no word boundary before it; capture and preserve its Unicode left boundary.
+      fr: [[
+        /(^|[^\p{L}\p{M}\p{N}])([eé]pouse)(?![\p{L}\p{M}\p{N}])/giu,
+        (_match, boundary, term) => `${boundary}${matchCase(term, 'spécialiste')}`,
+        TITLE_ONLY,
+      ]],
     },
   },
   {
@@ -308,7 +312,12 @@ export function applyGlossaryCorrections({ sourceText, translatedText, targetLan
         if (matchesRule(out, pattern)) reportGlossaryVeto({ entry, pattern, targetLang, fieldType, sourceText });
         continue;
       }
-      out = out.replace(pattern, (m) => matchCase(m, replacement));
+      out = out.replace(
+        pattern,
+        typeof replacement === 'function'
+          ? replacement
+          : (m) => matchCase(m, replacement),
+      );
     }
   }
   return out;
@@ -408,11 +417,14 @@ const GENDER_TRIGRAPH_BRACKETED_SRC =
 // d/x/g makes it unambiguous. The bracketed form is byte-identical to
 // canonicalize's, since brackets already disambiguate.
 const GENDER_TRIGRAPH_BARE_SRC =
-  String.raw`(?<=^|[\s\-–—|,./])(?:([mwfhlp])\s*\/\s*([mwfhlp])\s*\/\s*([dxg])`
-  + String.raw`|m\s*\/\s*w|w\s*\/\s*m|m\s*\/\s*f|f\s*\/\s*m|h\s*\/\s*f|f\s*\/\s*h)(?=$|[\s\-–—|,./])`;
+  // Keep control whitespace (notably newline and tab) as delimiters, while
+  // enumerating punctuation categories without Pc so underscores remain part
+  // of identifiers such as foo_m/w_bar rather than exposing a trigraph.
+  String.raw`(^|[\s\p{Ps}\p{Pe}\p{Pi}\p{Pf}\p{Po}\p{Pd}\p{Z}])(?:([mwfhlp])\s*\/\s*([mwfhlp])\s*\/\s*([dxg])`
+  + String.raw`|m\s*\/\s*w|w\s*\/\s*m|m\s*\/\s*f|f\s*\/\s*m|h\s*\/\s*f|f\s*\/\s*h)(?=$|[\s\p{Ps}\p{Pe}\p{Pi}\p{Pf}\p{Po}\p{Pd}\p{Z}])`;
 
 const bracketedTrigraphRe = () => new RegExp(GENDER_TRIGRAPH_BRACKETED_SRC, 'gi');
-const bareTrigraphRe = () => new RegExp(GENDER_TRIGRAPH_BARE_SRC, 'gi');
+const bareTrigraphRe = () => new RegExp(GENDER_TRIGRAPH_BARE_SRC, 'giu');
 
 /**
  * The gender pair to DISPLAY per locale. `d`/`x` (divers / non-binary) is
@@ -540,7 +552,14 @@ export function localizeGenderTrigraphs(text = '', locale = '') {
   if (!s) return s;
   return s
     .replace(bracketedTrigraphRe(), (m) => genderTrigraphForLocale(locale, { ...parseGenderTrigraph(m), bracketed: true }))
-    .replace(bareTrigraphRe(), (m) => genderTrigraphForLocale(locale, { ...parseGenderTrigraph(m), bracketed: false }));
+    .replace(bareTrigraphRe(), (m, boundary = '') => {
+      const raw = m.slice(boundary.length);
+      const localized = genderTrigraphForLocale(
+        locale,
+        { ...parseGenderTrigraph(raw), bracketed: false },
+      );
+      return `${boundary}${localized}`;
+    });
 }
 
 /**
@@ -567,7 +586,10 @@ export function maskProtectedTokens(text = '') {
   // re-match what the bracketed pass already replaced.
   const masked = input
     .replace(bracketedTrigraphRe(), (m) => capture(m, true))
-    .replace(bareTrigraphRe(), (m) => capture(m, false));
+    .replace(bareTrigraphRe(), (m, boundary = '') => {
+      const raw = m.slice(boundary.length);
+      return `${boundary}${capture(raw, false)}`;
+    });
   return { text: masked, tokens };
 }
 
