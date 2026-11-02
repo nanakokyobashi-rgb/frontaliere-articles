@@ -254,9 +254,11 @@ test('la guardia dei fatti chiave sta prima del gate e della scrittura atomica',
   );
   const guard = source.indexOf('guardTranslatedKeyFacts(newSections,');
   const gate = source.indexOf('runFactualityGates({ sections: checkedSections');
+  const fiscal = source.indexOf('assertNoFiscalErrorsInLocales({ [pair.locale]: checkedSections });');
   const filteredWrite = source.indexOf('rewriteExistingLocaleBody(trSrc, pair.id, checkedSections, {');
   const write = source.indexOf('writeAtomic(trPath, rewritten.src)');
   assert.ok(guard >= 0 && guard < gate, 'la factuality gate deve ricevere il payload gia\' guardato');
+  assert.ok(gate < fiscal && fiscal < filteredWrite, 'il guard fiscale condiviso deve precedere la scrittura');
   assert.ok(gate < filteredWrite && filteredWrite < write, 'la scrittura deve persistere il payload gia\' guardato dopo tutti i gate');
 });
 
@@ -1988,6 +1990,27 @@ function translationPair(id) {
     fields: ['body1'],
   };
 }
+
+test('il writer autonomo non pubblica una pretesa fiscale nella ri-traduzione', async () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'retranslate-fiscal-guard-'));
+  try {
+    const paths = writeTranslationPairFixture(root, 'fiscal-bypass');
+    const before = fs.readFileSync(paths.target, 'utf8');
+    const badGerman = ('Altgrenzgaenger erhalten 7.500 Euro. '
+      + 'Der Grenzgaenger der im Tessin arbeitet muss das Einkommen in Italien angeben. ').repeat(12);
+    const row = await processPair(translationPair('fiscal-bypass'), {
+      CONTENT_ROOT: root,
+      APPLY: true,
+      translate: async () => badGerman,
+    });
+
+    assert.equal(row.written, false);
+    assert.match(row.reason, /\[fiscal-claims\].*franchigia-7500/);
+    assert.equal(fs.readFileSync(paths.target, 'utf8'), before);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
 
 test('il report per campo elenca ogni provider con classe e messaggio bounded', async () => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'retranslate-provider-report-'));
