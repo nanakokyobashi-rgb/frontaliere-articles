@@ -26,6 +26,7 @@
  */
 import { normalizeText } from './profession-taxonomy.mjs';
 import { findFiscalErrors } from './fiscal-claims-guard.mjs';
+import { sanitizeArticleFaqMarkdown } from '../../../scripts/lib/article-link-contract.mjs';
 
 /** Domini delle fonti primarie, sottodomini compresi. */
 export const OFFICIAL_SOURCE_DOMAINS = Object.freeze([
@@ -61,7 +62,7 @@ export const YMYL_SOURCES_BRIEF_CH = sourcesBrief([
 ]);
 
 const YMYL_RE = /(?:^| )(?:tasse(?: |$)|tassazion|tassa salute|tassa sulla salute|tassa sanitaria|imposta(?: |$)|imposte(?: |$)|irpef|dichiarazione dei redditi|franchigia|detrazion|deduzion|avs|lpp|pilastro|previdenz|pension|inps|naspi|ristorn|lamal|cassa malati|casse malati|assicurazione malattia|premi malattia|sanita|salute(?: |$)|malatti(?:a|e)(?: |$)|servizio sanitario|ssn(?: |$)|accordo fiscale|doppia imposizione|fisco|fiscal)/;
-const FAQ_YMYL_RE = /(?:^| )(?:tax(?:es|ation)?|income tax|tax return|deduction(?:s)?|health(?: insurance)?|illness|pension|retirement|social security|steuer(?:n|pflicht|erklarung)?|einkommensteuer|gesundheit|krankheit|krankenversicherung|rente|pensionskasse|ahv|bvg|impots?|fiscalite|declaration des revenus|sante|maladie|assurance maladie|retraite|cotisations?)(?: |$)/;
+const FAQ_YMYL_RE = /(?:^| )(?:tax(?:es|ation)?|income tax(?:es)?|tax return(?:s)?|deduction(?:s)?|health(?: insurance)?|illness(?:es)?|pension(?:s)?|retirement(?:s)?|social security|steuer(?:n|pflicht|erklarung)?|einkommensteuer(?:n)?|gesundheit|krankheit(?:en)?|krankenversicherung(?:en)?|rente(?:n)?|pensionskasse(?:n)?|ahv|bvg|impots?|fiscalite|declaration des revenus|sante|maladie(?:s)?|assurances? maladie(?:s)?|retraite(?:s)?|cotisations?)(?: |$)/;
 
 /**
  * @param {{id?: string, title?: string, excerpt?: string}} article testi italiani
@@ -173,17 +174,26 @@ export function assertNoFiscalErrorsInLocales(contentByLocale) {
  * official source link in that FAQ.
  */
 export function assertFaqPassesFiscalClaimsGate({ locale, articleText: existingText = '', faq = [] } = {}) {
+  const publicFaq = sanitizeArticleFaqMarkdown(
+    Array.isArray(faq)
+      ? faq.map((pair) => pair && typeof pair === 'object' && !Array.isArray(pair)
+        ? { q: pair.q, a: pair.a }
+        : pair)
+      : faq,
+    locale || 'it',
+  );
+
   assertNoFiscalErrorsInLocales({
     [locale || 'unknown']: {
       body: existingText,
-      faq,
+      faq: publicFaq,
     },
   });
 
-  const faqText = articleText(faq);
+  const faqText = articleText(publicFaq);
   const normalizedFaqText = ` ${normalizeText(faqText)} `;
   if (!YMYL_RE.test(normalizedFaqText) && !FAQ_YMYL_RE.test(normalizedFaqText)) return;
-  if (linksInValues(faq).some(isOfficialSourceUrl)) return;
+  if (linksInValues(publicFaq).some(isOfficialSourceUrl)) return;
 
   const error = new Error(`[ymyl-source] ${locale || 'unknown'} FAQ introduces YMYL content without an official source link`);
   error.qualityReject = true;

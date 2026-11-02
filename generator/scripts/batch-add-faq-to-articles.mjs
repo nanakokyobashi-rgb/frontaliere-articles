@@ -1694,6 +1694,9 @@ async function processTopUp(articleId, file, itContent, existingFaq, options) {
         if (written) {
           console.error(`${label} ⚠️  ${locale.toUpperCase()} error after the translation was written: `
             + `${err.message}; keeping the translation`);
+        } else if (err?.qualityReject) {
+          console.error(`${label} ⚠️  ${locale.toUpperCase()} translation rejected by the quality gate: `
+            + `${err.message}; leaving the locale unchanged`);
         } else {
           insertFaqIntoBodyFile(localePath, articleId, validMerged, {
             locale,
