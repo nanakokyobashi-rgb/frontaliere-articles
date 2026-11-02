@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "note": "SHA-256 of SiteShellContract scalars. Conservative boolean-only initial capture, deferred Ads/Partnerize and canonical semantic-URL restoration; both repos assert identical bytes.",
+  "note": "SHA-256 of SiteShellContract scalars. Independent first-party recovery, consent memory fallback and bounded Google loaders; both repos assert identical bytes.",
   "scalarFields": 22,
-  "sha256": "aa8af3a66d51ca2fbe172f10d29eaa4d47502eb4c0587cd9d8741cb0120958de"
+  "sha256": "89665e0fb3e8c07eacff9cd68dcdb569a78b0fe47c5d3cf11bd0a07fe4321a25"
 }
