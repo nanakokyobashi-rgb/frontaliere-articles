@@ -109,6 +109,22 @@ describe('content-gates-main: il workflow', () => {
     for (const path of required) {
       assert.ok(checkout.includes(path), `percorso richiesto non materializzato: ${path}`);
     }
+
+    // `content-updated-at.test.mjs` reads every body-writing workflow to keep
+    // the backfill contract aligned with the sparse checkout used by this gate.
+    // Derive the dependency list from that test instead of maintaining a second
+    // hand-written list that can silently drift.
+    const updatedAtTest = read('generator/tests/content-updated-at.test.mjs');
+    const updatedAtWorkflowDependencies = new Set(
+      [...updatedAtTest.matchAll(/['"](\.github\/workflows\/[^'"]+\.yml)['"]/gu)]
+        .map(([, file]) => `/${file}`),
+    );
+    for (const workflowPath of updatedAtWorkflowDependencies) {
+      assert.ok(
+        checkout.includes(workflowPath),
+        `workflow letto dal gate updatedAt non materializzato: ${workflowPath}`,
+      );
+    }
     assert.doesNotMatch(checkout, /^\s+\/(?:data|public)\/$/mu,
       'il checkout del content gate non deve materializzare intere directory pesanti');
     assert.match(checkout, /sparse-checkout-cone-mode:\s*false/);
