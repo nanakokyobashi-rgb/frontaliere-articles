@@ -17,6 +17,7 @@ import { fileURLToPath } from 'node:url';
 
 import {
   LOCALIZED_TOPONYM_LOCALES,
+  createLocalizedToponymSourceProfile,
   replaceLocalizedToponymMismatches,
 } from './lib/localized-toponyms.mjs';
 import { extractSlugFallbackLocales } from './lib/slug-fallback-provenance.mjs';
@@ -71,6 +72,7 @@ const fileSources = new Map();
 const sourceValues = new Map();
 const targets = [];
 const fallbackLocalesBySlugFile = new Map();
+const sourceProfilesByArticle = new Map();
 
 for (const file of files.filter(isSlugFile)) {
   const fallbackLocales = extractSlugFallbackLocales(readFileSync(file, 'utf8'));
@@ -81,6 +83,16 @@ function addSourceValue(articleId, value) {
   const values = sourceValues.get(articleId) || new Set();
   values.add(value);
   sourceValues.set(articleId, values);
+}
+
+function sourceProfilesForArticle(articleId) {
+  if (sourceProfilesByArticle.has(articleId)) return sourceProfilesByArticle.get(articleId);
+  const profiles = [...(sourceValues.get(articleId) || [])].map((sourceText) => ({
+    sourceText,
+    sourceProfile: createLocalizedToponymSourceProfile(sourceText),
+  }));
+  sourceProfilesByArticle.set(articleId, profiles);
+  return profiles;
 }
 
 for (const file of files) {
@@ -147,16 +159,17 @@ for (const target of targets) {
     skippedProvisionalSlugs += 1;
     continue;
   }
-  const references = sourceValues.get(target.articleId);
-  if (!references) continue;
+  const references = sourceProfilesForArticle(target.articleId);
+  if (references.length === 0) continue;
   let next = target.raw;
   const issues = new Map();
-  for (const sourceText of references) {
+  for (const { sourceText, sourceProfile } of references) {
     const result = replaceLocalizedToponymMismatches({
       sourceText,
       targetText: next,
       locale: target.locale,
       slug: target.kind === 'slug',
+      sourceProfile,
     });
     next = result.text;
     replacements += result.replacements;

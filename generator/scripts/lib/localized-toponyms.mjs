@@ -650,8 +650,14 @@ export function assertLocalizedToponymPair({ sourceText = '', targetText = '', l
  * source-language article. URLs are opaque: slugs and source links are never
  * rewritten by this function.
  */
-export function replaceLocalizedToponymMismatches({ sourceText = '', targetText = '', locale, slug = false } = {}) {
-  const issues = findLocalizedToponymMismatches({ sourceText, targetText, locale, slug });
+export function replaceLocalizedToponymMismatches({
+  sourceText = '',
+  targetText = '',
+  locale,
+  slug = false,
+  sourceProfile = null,
+} = {}) {
+  const issues = findLocalizedToponymMismatches({ sourceText, targetText, locale, slug, sourceProfile });
   let text = String(targetText ?? '');
   if (issues.length === 0) {
     return {
@@ -685,7 +691,7 @@ export function replaceLocalizedToponymMismatches({ sourceText = '', targetText 
   );
   // These are raw coordinates on the complete target. URL splitting below
   // must not recalculate them on partial segments.
-  const protectedNameRanges = protectedRanges(text, sourceText);
+  const protectedNameRanges = protectedRanges(text, sourceProfile?.sourceText ?? sourceText);
   text = replaceOutsideUrls(text, pattern, (match, offset) => {
     const matchedIssue = issuePatterns.find(({ matcher }) => matcher.test(match));
     if (!matchedIssue) return match;
@@ -711,9 +717,9 @@ export function replaceLocalizedToponymMismatches({ sourceText = '', targetText 
  * shape. A title that would require a cross-line match is left untouched so
  * the caller can keep the whole digest fail-closed.
  */
-export function preserveEventTitleSyntax({ sourceText = '', targetText = '', locale } = {}) {
+export function preserveEventTitleSyntax({ sourceText = '', targetText = '', locale, sourceProfile = null } = {}) {
   const original = String(targetText ?? '');
-  const result = replaceLocalizedToponymMismatches({ sourceText, targetText: original, locale });
+  const result = replaceLocalizedToponymMismatches({ sourceText, targetText: original, locale, sourceProfile });
   if (result.text.split('\n').length === original.split('\n').length) return result;
   return {
     ...result,
@@ -1079,7 +1085,7 @@ export function parseEventsDigestBody2Safe(text) {
   };
 }
 
-function transformEventsDigestBody2({ sourceText = '', targetText = '', locale } = {}) {
+function transformEventsDigestBody2({ sourceText = '', targetText = '', locale, sourceProfileCache = null } = {}) {
   const source = parseEventsDigestBody2Safe(sourceText);
   const target = parseEventsDigestBody2Safe(targetText);
   if (!source || !target) return null;
@@ -1105,11 +1111,29 @@ function transformEventsDigestBody2({ sourceText = '', targetText = '', locale }
     }
     return result.text;
   };
+  const profileFor = (sourceValue) => {
+    if (!(sourceProfileCache instanceof Map)) return null;
+    const text = String(sourceValue ?? '');
+    if (!sourceProfileCache.has(text)) {
+      sourceProfileCache.set(text, createLocalizedToponymSourceProfile(text));
+    }
+    return sourceProfileCache.get(text);
+  };
   const applyPair = (sourceValue, targetValue) => collectPairResult(
-    replaceLocalizedToponymMismatches({ sourceText: sourceValue, targetText: targetValue, locale }),
+    replaceLocalizedToponymMismatches({
+      sourceText: sourceValue,
+      targetText: targetValue,
+      locale,
+      sourceProfile: profileFor(sourceValue),
+    }),
   );
   const applyTitlePair = (sourceValue, targetValue) => collectPairResult(
-    preserveEventTitleSyntax({ sourceText: sourceValue, targetText: targetValue, locale }),
+    preserveEventTitleSyntax({
+      sourceText: sourceValue,
+      targetText: targetValue,
+      locale,
+      sourceProfile: profileFor(sourceValue),
+    }),
   );
 
   for (const { sourceHeading, targetHeading } of headingPairs) {
@@ -1183,7 +1207,12 @@ function omitEventsDigestBody2(projection) {
   };
 }
 
-function findEventsDigestArticleLocaleMismatches(data, locale, sourceText) {
+function findEventsDigestArticleLocaleMismatches(
+  data,
+  locale,
+  sourceText,
+  { sourceProfile = null, sourceWithoutBody2Profile = null, sourceProfileCache = null } = {},
+) {
   const sourceProjection = articleLocaleProjection(data, 'it');
   const targetProjection = articleLocaleProjection(data, locale);
   const sourceWithoutBody2 = collectStrings(omitEventsDigestBody2(sourceProjection)).join('\n');
@@ -1195,11 +1224,13 @@ function findEventsDigestArticleLocaleMismatches(data, locale, sourceText) {
     sourceText: sourceWithoutBody2,
     targetText: targetWithoutBody2,
     locale,
+    sourceProfile: sourceWithoutBody2Profile,
   });
   const body2Issues = findEventsDigestBody2LocalizedToponymMismatches({
     sourceText: sourceProjection.content?.body2,
     targetText: targetProjection.content?.body2,
     locale,
+    sourceProfileCache,
   });
   if (body2Issues === null) {
     return [{
@@ -1228,6 +1259,7 @@ function findEventsDigestArticleLocaleMismatches(data, locale, sourceText) {
       targetText: targetProjection.slug,
       locale,
       slug: true,
+      sourceProfile,
     });
     for (const issue of slugIssues) {
       if (!issues.some((candidate) => issueKey(candidate) === issueKey(issue))) issues.push(issue);
@@ -1238,17 +1270,36 @@ function findEventsDigestArticleLocaleMismatches(data, locale, sourceText) {
 
 /** Returns the same deterministic check for the complete pre-write article. */
 export function findArticleLocalizedToponymMismatches(data) {
-  const source = collectStrings(articleLocaleProjection(data, 'it')).join('\n');
+  const sourceProjection = articleLocaleProjection(data, 'it');
+  const source = collectStrings(sourceProjection).join('\n');
   if (!source.trim()) return [];
 
   const issues = [];
   const isEventsDigest = typeof data?.id === 'string' && data.id.startsWith('eventi-weekend-');
+  const sourceProfile = createLocalizedToponymSourceProfile(source);
+  const sourceProfileCache = new Map([[source, sourceProfile]]);
+  const sourceWithoutBody2Profile = isEventsDigest
+    ? createLocalizedToponymSourceProfile(
+      collectStrings(omitEventsDigestBody2(sourceProjection)).join('\n'),
+    )
+    : null;
   for (const locale of LOCALIZED_TOPONYM_LOCALES.filter((item) => item !== 'it')) {
     const targetProjection = articleLocaleProjection(data, locale);
-    let targetIssues = isEventsDigest ? findEventsDigestArticleLocaleMismatches(data, locale, source) : null;
+    let targetIssues = isEventsDigest
+      ? findEventsDigestArticleLocaleMismatches(data, locale, source, {
+        sourceProfile,
+        sourceWithoutBody2Profile,
+        sourceProfileCache,
+      })
+      : null;
     if (targetIssues === null) {
       const target = collectStrings({ ...targetProjection, slug: undefined }).join('\n');
-      targetIssues = findLocalizedToponymMismatches({ sourceText: source, targetText: target, locale });
+      targetIssues = findLocalizedToponymMismatches({
+        sourceText: source,
+        targetText: target,
+        locale,
+        sourceProfile,
+      });
       const provisionalSlugs = new Set([
         ...(Array.isArray(data?._slugsProvisionalFromIt) ? data._slugsProvisionalFromIt : []),
         ...(Array.isArray(data?._slugI18nFallbacks)
@@ -1263,6 +1314,7 @@ export function findArticleLocalizedToponymMismatches(data) {
           targetText: targetProjection.slug,
           locale,
           slug: true,
+          sourceProfile,
         }));
       }
     }
