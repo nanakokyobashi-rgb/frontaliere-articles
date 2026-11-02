@@ -3934,10 +3934,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 2,
+      "count": 3,
       "firstStrikeAt": "2026-10-31T21:46:44.864Z",
-      "lastStrikeAt": "2026-11-01T00:13:58.671Z",
-      "expiresAt": "2026-12-01T00:13:58.671Z"
+      "lastStrikeAt": "2026-11-02T12:40:43.665Z",
+      "expiresAt": "2026-12-02T12:40:43.665Z"
     },
     {
       "keyword": "vivere a Curiglia con Monteviasco e lavorare in Ticino da frontaliere",
@@ -3946,10 +3946,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 2,
+      "count": 3,
       "firstStrikeAt": "2026-10-31T21:48:45.541Z",
-      "lastStrikeAt": "2026-11-01T00:18:18.493Z",
-      "expiresAt": "2026-12-01T00:18:18.493Z"
+      "lastStrikeAt": "2026-11-02T12:41:32.455Z",
+      "expiresAt": "2026-12-02T12:41:32.455Z"
     },
     {
       "keyword": "vivere a Trarego Viggiona e lavorare in Ticino da frontaliere",
@@ -3958,10 +3958,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 2,
+      "count": 3,
       "firstStrikeAt": "2026-10-31T21:52:18.762Z",
-      "lastStrikeAt": "2026-11-01T00:21:18.674Z",
-      "expiresAt": "2026-12-01T00:21:18.674Z"
+      "lastStrikeAt": "2026-11-02T12:42:33.581Z",
+      "expiresAt": "2026-12-02T12:42:33.581Z"
     },
     {
       "keyword": "vivere a Albiolo e lavorare in Ticino da frontaliere",
@@ -12297,66 +12297,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.tio.ch/ticino/politica/1959806/conti-ancora-in-rosso-e-il-municipio-propone-di-aumentare-le-imposte": {
-      "section": "frontaliere",
-      "ts": 1793294426271
-    },
-    "frontaliere::https://www.tio.ch/rubriche/ospite/1959945/bellinzona-biaggio-risparmiare-elio-puo": {
-      "section": "frontaliere",
-      "ts": 1793342042429
-    },
-    "frontaliere::https://comozero.it/attualita/como-quei-cinque-minuti-scarsi-sono-un-salasso-io-ho-sbagliato-ma-la-multa-da-101-euro-e-violenza-economica": {
-      "section": "frontaliere",
-      "ts": 1793346069593
-    },
-    "frontaliere::https://www.laregione.ch/cantone/bellinzonese/1959617/a-castione-verso-nuove-realta-lavorative-che-generano-impieghi": {
-      "section": "frontaliere",
-      "ts": 1793346268586
-    },
-    "frontaliere::https://www.laregione.ch/cantone/luganese/1959907/dai-piani-alle-ruspe-posata-la-prima-pietra-del-tram-treno": {
-      "section": "frontaliere",
-      "ts": 1793374105622
-    },
-    "frontaliere::https://www.rsi.ch/s/4203495": {
-      "section": "frontaliere",
-      "ts": 1793374305996
-    },
-    "frontaliere::https://comozero.it/attualita/tram-treno-luganese-posa-prima-pietra-manno-lavori": {
-      "section": "frontaliere",
-      "ts": 1793387909024
-    },
-    "frontaliere::https://www.laregione.ch/cantone/ticino/1960169/sale-il-numero-di-imprese-iscritte-in-ticino-la-crescita-marcata-in-svizzera": {
-      "section": "frontaliere",
-      "ts": 1793396236174
-    },
-    "frontaliere::https://www.laregione.ch/estero/estero/1960211/sciopero-generale-in-italia-mobilitazione-in-60-citta-con-tensioni-a-roma-e-torino": {
-      "section": "frontaliere",
-      "ts": 1793396246011
-    },
-    "frontaliere::https://comozero.it/attualita/sciopero-generale-30-ottobre-trasporti-treni-bus-cortei-lombardia": {
-      "section": "frontaliere",
-      "ts": 1793396404720
-    },
-    "frontaliere::https://www.laregione.ch/cantone/bellinzonese/1959831/inaugurata-a-bodio-la-nuova-piattaforma-industria-4-0": {
-      "section": "frontaliere",
-      "ts": 1793396421245
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/assunzioni-stipendi-e-merito-come-cambia-il-lavoro-nei-comuni-se-ne-parla-in-un-convegno-a-milano/2723935": {
-      "section": "frontaliere",
-      "ts": 1793397888364
-    },
-    "frontaliere::https://www.tio.ch/ticino/attualita/1960126/lostallo-sorte-cantiere-protezione-vallo": {
-      "section": "frontaliere",
-      "ts": 1793436255622
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/imprese-varesine-in-svizzera-in-cerca-di-nuovi-partner-sei-aziende-al-forum-industriale-italo-svizzero/2724208": {
-      "section": "frontaliere",
-      "ts": 1793443073690
-    },
-    "frontaliere::https://www.varesenoi.it/2026/10/30/leggi-notizia/argomenti/economia-13/articolo/imprese-varesine-oltre-confine-alla-ricerca-di-nuovi-partner-in-svizzera.html": {
-      "section": "frontaliere",
-      "ts": 1793443088162
-    },
     "frontaliere::https://cassa-disoccupazione.unia.ch": {
       "section": "frontaliere",
       "ts": 1793451690870
@@ -12368,6 +12308,18 @@
     "frontaliere::https://www.laregione.ch/cantone/ticino/1959681/la-politica-dell-alloggio-sia-orientata-ai-risultati": {
       "section": "frontaliere",
       "ts": 1793451905471
+    },
+    "frontaliere::https://www.laregione.ch/estero/estero/1960211/sciopero-generale-in-italia-mobilitazione-in-60-citta-con-tensioni-a-roma-e-torino": {
+      "section": "frontaliere",
+      "ts": 1793622326804
+    },
+    "frontaliere::https://www.varesenews.it/2026/11/due-operai-in-nero-e-ponteggi-senza-protezioni-i-carabinieri-sospendono-unimpresa-edile-a-novara/2726011": {
+      "section": "frontaliere",
+      "ts": 1793622335592
+    },
+    "frontaliere::https://www.tio.ch/svizzera/economia/1960477/punti-indicatore-imprese-lavoro-prospettive-mercato": {
+      "section": "frontaliere",
+      "ts": 1793622346073
     }
   }
 }
