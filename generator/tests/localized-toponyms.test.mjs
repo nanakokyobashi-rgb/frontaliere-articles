@@ -8,6 +8,7 @@ import {
   LOCALIZED_TOPONYM_LOCALES,
   LOCALIZED_TOPONYMS,
   OFFICIAL_NAME_MARKERS,
+  createLocalizedToponymSourceProfile,
   extractArticleProjectionText,
   findArticleLocalizedToponymMismatches,
   findLocalizedToponymMismatches,
@@ -17,6 +18,7 @@ import {
   validateLocalizedToponymTable,
 } from '../scripts/lib/localized-toponyms.mjs';
 import { extractSlugFallbackLocales } from '../scripts/lib/slug-fallback-provenance.mjs';
+import { scanStaticArticleFieldEntries } from '../scripts/lib/static-article-field-scanner.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -59,6 +61,7 @@ test('la tabella canonica conserva gli esonimi richiesti', () => {
   assert.deepEqual(byCode.get('SG').canton, {
     it: ['San Gallo'], en: ['St. Gallen'], de: ['St. Gallen'], fr: ['Saint-Gall'],
   });
+  assert.deepEqual(byCode.get('SZ').canton.fr, ['Schwytz', 'Schwyz']);
 });
 
 test('i marcatori coprono i nomi ufficiali usati dalle label nav', () => {
@@ -308,6 +311,26 @@ test('la proiezione da file raccoglie body, FAQ e meta dello stesso articolo', (
   assert.equal(extractArticleProjectionText(body, 'other'), 'Non entra');
 });
 
+test('lo scanner dei campi statici è lineare e ignora commenti, dinamiche e stringhe troncate', () => {
+  const source = [
+    "// 'blog.article.ignored.body1': 'commento',",
+    "'blog.article.demo.body1': 'L\\'articolo', /* separatore */",
+    '"blog.article.demo.body2": "secondo",',
+    "'blog.article.demo.dynamic': `valore ${name}`,",
+    "'blog.article.demo.truncated': 'senza chiusura",
+    "'blog.article.demo.body3': 'dopo', }",
+  ].join('\n');
+
+  assert.deepEqual(
+    scanStaticArticleFieldEntries(source).map((entry) => [entry.articleId, entry.field, entry.rawValue]),
+    [
+      ['demo', 'body1', "L\\'articolo"],
+      ['demo', 'body2', 'secondo'],
+      ['demo', 'body3', 'dopo'],
+    ],
+  );
+});
+
 test('prompt e gate condividono tutte le forme della tabella', () => {
   const instruction = localizedToponymInstruction('en');
   assert.match(instruction, /Lucerna \(LU, canton\) → Lucerne/);
@@ -486,8 +509,6 @@ test('ripara il cantone Ticino solo fuori dai nomi ufficiali e solo dove serve',
   );
 });
 
-const ENTRY_RE = /['"]blog\.article\.([^'"]+)\.([^'"]+)['"]\s*:\s*(['"])((?:\\.|(?!\3)[^\r\n])*?)\3\s*(?=[,}])/gu;
-
 function unescapeTsValue(value) {
   return value.replace(/\\([\\'"\\\\])/gu, '$1');
 }
@@ -523,14 +544,31 @@ function collectCorpusEntries() {
     const locale = corpusLocale(file);
     if (!locale) continue;
     const source = readFileSync(file, 'utf8');
-    for (const match of source.matchAll(ENTRY_RE)) {
-      const articleId = match[1];
+    for (const match of scanStaticArticleFieldEntries(source)) {
+      const articleId = match.articleId;
       const entries = byLocale.get(locale).get(articleId) || [];
-      entries.push({ key: `${articleId}|${match[2]}`, field: match[2], value: unescapeTsValue(match[4]), file });
+      entries.push({
+        key: `${articleId}|${match.field}`,
+        field: match.field,
+        value: unescapeTsValue(match.rawValue),
+        file,
+      });
       byLocale.get(locale).set(articleId, entries);
     }
   }
   return byLocale;
+}
+
+// Keep fields separate for matching: the sentinel cannot create a word
+// boundary that was not present inside a field, while one article-wide pass
+// avoids rebuilding the same Italian source analysis for every translation.
+const CORPUS_FIELD_SEPARATOR = '\u0000';
+
+function uniqueLocalizedToponymIssues(issues) {
+  return new Map(issues.map((issue) => [
+    `${issue.code}|${issue.locale}|${issue.form}|${issue.expected}`,
+    issue,
+  ]));
 }
 
 test('il corpus storico e le 24 sezioni cantonali non copiano esonimi fra lingue', () => {
@@ -547,17 +585,30 @@ test('il corpus storico e le 24 sezioni cantonali non copiano esonimi fra lingue
   const sampleOffenders = [];
   for (const [articleId, sourceEntries] of italian) {
     const sourceText = [...new Set(sourceEntries.map((entry) => entry.value))].join('\n');
+    const sourceProfile = createLocalizedToponymSourceProfile(sourceText);
     for (const locale of ['en', 'de', 'fr']) {
-      for (const targetEntry of byLocale.get(locale).get(articleId) || []) {
-        const issues = findLocalizedToponymMismatches({
+      const targetEntries = byLocale.get(locale).get(articleId) || [];
+      if (targetEntries.length === 0) continue;
+
+      // Protection can only remove hits, so an unprotected combined call is a
+      // conservative candidate check. Re-run each field with the exact gate
+      // only when there is something to investigate.
+      const candidateIssues = findLocalizedToponymMismatches({
+        sourceText,
+        targetText: targetEntries.map((entry) => entry.value).join(CORPUS_FIELD_SEPARATOR),
+        locale,
+        sourceProfile,
+        protectNames: false,
+      });
+      if (candidateIssues.length === 0) continue;
+
+      for (const targetEntry of targetEntries) {
+        const uniqueIssues = uniqueLocalizedToponymIssues(findLocalizedToponymMismatches({
           sourceText,
           targetText: targetEntry.value,
           locale,
-        });
-        const uniqueIssues = new Map(issues.map((issue) => [
-          `${issue.code}|${issue.locale}|${issue.form}|${issue.expected}`,
-          issue,
-        ]));
+          sourceProfile,
+        }));
         for (const issue of uniqueIssues.values()) {
           offenderCount += 1;
           if (sampleOffenders.length < 80) {

@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs';
 import { unescapeTsString } from './unescape-ts-string.mjs';
 import { decodeHtmlEntities } from './decode-html-entities.mjs';
 import { DIGEST_EVENT_MARKER_PATTERN } from './events-digest-marker.mjs';
+import { scanStaticArticleFieldEntries } from './static-article-field-scanner.mjs';
 
 const TABLE = JSON.parse(
   readFileSync(new URL('../../data/localized-toponyms.json', import.meta.url), 'utf8'),
@@ -189,21 +190,15 @@ const ARTICLE_PROJECTION_ESCAPES = Object.freeze({
 export function extractArticleProjectionText(fileContent, articleId, { excludeFaq = false, fields = null } = {}) {
   if (!fileContent || !articleId) return '';
   const allowedFields = fields ? new Set(fields) : null;
-  const fieldRe = new RegExp(
-    "'blog\\.article\\." + escapeRegExp(String(articleId)) + "\\.([^']+)'\\s*:\\s*(['`])((?:\\\\.|(?!\\2)[\\s\\S])*?)\\2",
-    'g',
-  );
-  const prefix = `'blog.article.${articleId}.`;
-  return [...String(fileContent).matchAll(fieldRe)]
-    .filter((match) => {
-      const field = match[1];
-      if (excludeFaq && field === 'faq') return false;
-      if (allowedFields && !allowedFields.has(field)) return false;
-      return match[0].startsWith(`${prefix}${field}'`);
+  return scanStaticArticleFieldEntries(fileContent)
+    .filter((entry) => {
+      if (entry.articleId !== String(articleId)) return false;
+      if (excludeFaq && entry.field === 'faq') return false;
+      return !allowedFields || allowedFields.has(entry.field);
     })
-    .map((match) => normalizeLocalizedToponymText(
-      unescapeTsString(match[3], ARTICLE_PROJECTION_ESCAPES, {
-        decodeControlEscapes: match[1] !== 'faq',
+    .map((entry) => normalizeLocalizedToponymText(
+      unescapeTsString(entry.rawValue, ARTICLE_PROJECTION_ESCAPES, {
+        decodeControlEscapes: entry.field !== 'faq',
       }),
     ))
     .join('\n');
@@ -404,10 +399,10 @@ function containsTokenBoundedText(text, candidate) {
  * is protected only when the same marker-anchored span exists in the Italian
  * source, with a translated leading article or preposition removed.
  */
-function sourceIdenticalNameRanges(value, sourceText) {
+function sourceIdenticalNameRanges(value, sourceText, sourceSearchText = null) {
   if (!sourceText) return [];
   const text = normalizeToponymMatchText(value);
-  const sourceSearchText = normalizeNameSearchText(sourceText);
+  const sourceSearchValue = sourceSearchText ?? normalizeNameSearchText(sourceText);
   const knownToponymRanges = [];
   TOPONYM_PATTERN.lastIndex = 0;
   for (const match of withoutUrls(text).matchAll(TOPONYM_PATTERN)) {
@@ -420,7 +415,7 @@ function sourceIdenticalNameRanges(value, sourceText) {
     if (!knownToponymRanges.some(([toponymStart, toponymEnd]) => toponymStart >= start && toponymEnd <= end)) return;
     if (!isLikelyProperNameSpan(candidate)) return;
     const candidateSearchText = normalizeNameSearchText(candidate);
-    if (!candidateSearchText || !containsTokenBoundedText(sourceSearchText, candidateSearchText)) return;
+    if (!candidateSearchText || !containsTokenBoundedText(sourceSearchValue, candidateSearchText)) return;
     ranges.push([start, end]);
   };
   const addMarkerAnchoredSubspans = (start, end) => {
@@ -503,7 +498,7 @@ function mapNormalizedRangesToRaw(value, ranges) {
   ]);
 }
 
-function protectedRanges(value, sourceText = '') {
+function protectedRanges(value, sourceText = '', sourceSearchText = null) {
   const ranges = [];
   const rawText = String(value);
   const text = normalizeToponymMatchText(rawText);
@@ -513,7 +508,7 @@ function protectedRanges(value, sourceText = '') {
       ranges.push([match.index ?? 0, (match.index ?? 0) + match[0].length]);
     }
   }
-  ranges.push(...sourceIdenticalNameRanges(text, sourceText));
+  ranges.push(...sourceIdenticalNameRanges(text, sourceText, sourceSearchText));
   return mapNormalizedRangesToRaw(rawText, ranges);
 }
 
@@ -534,10 +529,17 @@ function replaceOutsideUrls(value, pattern, replacer) {
   return result + replaceSegment(text.slice(cursor), cursor);
 }
 
-function localizedToponymHits(value, { protectNames = false, sourceText = '', slug = false } = {}) {
+function localizedToponymHits(value, {
+  protectNames = false,
+  sourceText = '',
+  sourceSearchText = null,
+  slug = false,
+} = {}) {
   const normalizedText = normalizeToponymMatchText(value);
   const text = withoutUrls(normalizedText);
-  const protectedNameRanges = protectNames ? protectedRanges(normalizedText, sourceText) : [];
+  const protectedNameRanges = protectNames
+    ? protectedRanges(normalizedText, sourceText, sourceSearchText)
+    : [];
   const hits = [];
   const pattern = slug ? TOPONYM_SLUG_PATTERN : TOPONYM_PATTERN;
   for (const match of text.matchAll(pattern)) {
@@ -557,11 +559,34 @@ function localizedToponymHits(value, { protectNames = false, sourceText = '', sl
  * used only to establish which Swiss place the article is about; a foreign
  * place name mentioned in an unrelated article is never judged.
  */
-export function findLocalizedToponymMismatches({ sourceText = '', targetText = '', locale, slug = false } = {}) {
+/** Reuse the expensive source-language analysis across translated fields. */
+export function createLocalizedToponymSourceProfile(sourceText = '') {
+  const text = String(sourceText ?? '');
+  return {
+    sourceText: text,
+    sourceEntities: new Set(localizedToponymHits(text).map((hit) => hit.entity.code)),
+    sourceSearchText: normalizeNameSearchText(text),
+  };
+}
+
+export function findLocalizedToponymMismatches({
+  sourceText = '',
+  targetText = '',
+  locale,
+  slug = false,
+  sourceProfile = null,
+  protectNames = true,
+} = {}) {
   if (!LOCALE_SET.has(locale)) return [];
-  const sourceEntities = new Set(localizedToponymHits(sourceText).map((hit) => hit.entity.code));
+  const profile = sourceProfile || createLocalizedToponymSourceProfile(sourceText);
+  const sourceEntities = profile.sourceEntities;
   if (sourceEntities.size === 0) return [];
-  const targetHits = localizedToponymHits(targetText, { protectNames: true, sourceText, slug });
+  const targetHits = localizedToponymHits(targetText, {
+    protectNames,
+    sourceText: profile.sourceText,
+    sourceSearchText: profile.sourceSearchText,
+    slug,
+  });
   const issues = [];
   for (const entity of LOCALIZED_TOPONYMS) {
     if (!sourceEntities.has(entity.code)) continue;
@@ -1197,6 +1222,7 @@ function findEventsDigestArticleLocaleMismatches(data, locale, sourceText) {
 export function findArticleLocalizedToponymMismatches(data) {
   const source = collectStrings(articleLocaleProjection(data, 'it')).join('\n');
   if (!source.trim()) return [];
+  const sourceProfile = createLocalizedToponymSourceProfile(source);
 
   const issues = [];
   const isEventsDigest = typeof data?.id === 'string' && data.id.startsWith('eventi-weekend-');
@@ -1205,7 +1231,12 @@ export function findArticleLocalizedToponymMismatches(data) {
     let targetIssues = isEventsDigest ? findEventsDigestArticleLocaleMismatches(data, locale, source) : null;
     if (targetIssues === null) {
       const target = collectStrings({ ...targetProjection, slug: undefined }).join('\n');
-      targetIssues = findLocalizedToponymMismatches({ sourceText: source, targetText: target, locale });
+      targetIssues = findLocalizedToponymMismatches({
+        sourceText: source,
+        targetText: target,
+        locale,
+        sourceProfile,
+      });
       const provisionalSlugs = new Set([
         ...(Array.isArray(data?._slugsProvisionalFromIt) ? data._slugsProvisionalFromIt : []),
         ...(Array.isArray(data?._slugI18nFallbacks)
@@ -1220,6 +1251,7 @@ export function findArticleLocalizedToponymMismatches(data) {
           targetText: targetProjection.slug,
           locale,
           slug: true,
+          sourceProfile,
         }));
       }
     }
