@@ -48011,6 +48011,16 @@ const RAW_ARTICLES = [
  authorSlug: 'laura-bianchi',
  authorName: 'Laura Bianchi',
  },
+ {
+ id: 'cascata-oro-comune-como',
+ category: 'fiscale',
+ date: '2026-11-02T23:10:51.096Z',
+ image: '/images/blog/article-cascata-oro-comune-como.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

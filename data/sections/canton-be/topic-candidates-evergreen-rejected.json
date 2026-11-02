@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-be::https://ajour.ch/story/704319/die-sbbapp-wird-noch-viel-praktischer-das-sind-die-wichtigsten-neuerungen": {
-      "section": "canton-be",
-      "ts": 1793484934245
-    },
     "canton-be::https://ajour.ch/story/704325/wird-lautes-feuerwerk-bald-verboten-das-m%c3%bcssen-sie-zur-abstimmung-wissen": {
       "section": "canton-be",
       "ts": 1793512823828
@@ -99,6 +95,14 @@
     "canton-be::https://ajour.ch/story/704778/heftiger-machtkampf-um-polens-verfassungsgericht-entbrannt": {
       "section": "canton-be",
       "ts": 1793645360763
+    },
+    "canton-be::https://www.api.news.apps.be.ch/api/atom/news/86944c5e-a011-4445-b2d0-a8991ac59884": {
+      "section": "canton-be",
+      "ts": 1793661830823
+    },
+    "canton-be::https://www.nau.ch/politik/bundeshaus/finanzkontrolle-kritisiert-harzende-planung-bei-vbs-immobilien-67196806": {
+      "section": "canton-be",
+      "ts": 1793662000011
     }
   }
 }

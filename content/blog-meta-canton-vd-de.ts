@@ -81,6 +81,9 @@ const blogMetaCantonVdDe: Record<string, string> = {
     'blog.article.cantiere-stazione-morges-2026.title': 'Baustelle für das neue Empfangsgebäude des Bahnhofs Morges ab Dezember 2026',
     'blog.article.cantiere-stazione-morges-2026.excerpt': 'Im Dezember 2026 beginnen die Arbeiten der CFF Die Baustelle wird einen grossen Teil des Platzes beanspruchen Haltestellen der Regionalbusse und Taxistandplätze',
     'blog.article.cantiere-stazione-morges-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.ctmg-diventa-centrale-sante.title': 'CTMG wird zur Centrale santé und ist unter 058 6 116 116 erreichbar',
+    'blog.article.ctmg-diventa-centrale-sante.excerpt': 'Die Centrale santé ist für Waadt und Neuenburg 24/24, 7/7 unter der neuen Nummer 058 6 116 116 erreichbar; die alten Nummern werden weiterhin umgeleitet.',
+    'blog.article.ctmg-diventa-centrale-sante.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonVdDe;

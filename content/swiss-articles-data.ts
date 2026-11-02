@@ -30101,6 +30101,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'mercato-lavoro-prospettive-offuscate',
+    category: 'novita',
+    date: '2026-11-02T23:28:53.687Z',
+    image: '/images/blog/article-mercato-lavoro-prospettive-offuscate.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

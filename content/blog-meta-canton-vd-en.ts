@@ -81,6 +81,9 @@ const blogMetaCantonVdEn: Record<string, string> = {
     'blog.article.cantiere-stazione-morges-2026.title': 'Construction of the new passenger building at Morges station from December 2026',
     'blog.article.cantiere-stazione-morges-2026.excerpt': 'CFF construction work begins in December 2026 The construction site will occupy much of the square Regional bus stops and taxi spaces remain Access',
     'blog.article.cantiere-stazione-morges-2026.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.ctmg-diventa-centrale-sante.title': 'CTMG becomes Centrale santé and can be reached at 058 6 116 116',
+    'blog.article.ctmg-diventa-centrale-sante.excerpt': 'Centrale santé serves Vaud and Neuchâtel 24/24, 7/7 via the new number 058 6 116 116; the old numbers remain redirected.',
+    'blog.article.ctmg-diventa-centrale-sante.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonVdEn;

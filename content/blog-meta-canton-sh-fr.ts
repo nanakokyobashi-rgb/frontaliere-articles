@@ -90,6 +90,9 @@ const blogMetaCantonShFr: Record<string, string> = {
     'blog.article.frick-volksmotion-kantonsrat.title': 'Motion Frick: débat sur compétences communales au Conseil cantonal',
     'blog.article.frick-volksmotion-kantonsrat.excerpt': 'Le Conseil cantonal examinera la motion populaire de Matthias Frick, qui demande aux communes de disposer de compétences accrues en matière de circulation.',
     'blog.article.frick-volksmotion-kantonsrat.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.calore-residuo-sciaffusa-mozione.title': 'Motion sur la chaleur résiduelle pour les installations de Schaffhouse',
+    'blog.article.calore-residuo-sciaffusa-mozione.excerpt': 'Proposition de règles communales contraignantes concernant la chaleur inutilisée de plus de 20 GWh par an, avec une reprise garantie de plus de 50% dans un rayon de 2 km.',
+    'blog.article.calore-residuo-sciaffusa-mozione.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonShFr;

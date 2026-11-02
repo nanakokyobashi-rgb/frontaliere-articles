@@ -78,6 +78,9 @@ const blogMetaCantonTiIt: Record<string, string> = {
     'blog.article.frontalieri-riforma-disoccupazione-ue.title': 'Frontalieri e disoccupazione: l\'UE cambia le regole',
     'blog.article.frontalieri-riforma-disoccupazione-ue.excerpt': 'Bruxelles approva la riforma della disoccupazione Il criterio passa dalla residenza allo Stato di lavoro Per la Svizzera l\'orizzonte è attorno al 2029 Berna',
     'blog.article.frontalieri-riforma-disoccupazione-ue.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.guasto-camerlata-linea-chiasso.title': 'Guasto nei pressi di Como-Camerlata: ritardi verso Chiasso',
+    'blog.article.guasto-camerlata-linea-chiasso.excerpt': 'La fonte segnala un guasto nei pressi di Como-Camerlata e ritardi sulla circolazione ferroviaria della linea Milano-Como-Chiasso.',
+    'blog.article.guasto-camerlata-linea-chiasso.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonTiIt;

@@ -8663,6 +8663,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.premi-mercato-idroelettrico-2026.title': '21,4 millions de francs aux grandes installations hydroélectriques',
     'blog.article.premi-mercato-idroelettrico-2026.excerpt': '21,4 millions de francs à trois demandeurs La prime 2026 concerne l\'exercice 2025 Les demandes ont été déposées d\'ici fin mai 2026 Les ressources',
     'blog.article.premi-mercato-idroelettrico-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.mercato-lavoro-prospettive-offuscate.title': 'Marché du travail : léger recul au 4e trimestre 2026',
+    'blog.article.mercato-lavoro-prospettive-offuscate.excerpt': 'Indicateur KOF à 2,0 points au quatrième trimestre 2026 Était à 2,3 points au trimestre précédent Environ 4\'500 entreprises interrogées en octobre Construction positive',
+    'blog.article.mercato-lavoro-prospettive-offuscate.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaChFr;

@@ -972,6 +972,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-guasto-camerlata-linea-chiasso': {
+    title: 'Guasto nei pressi di Como-Camerlata: ritardi verso Chiasso',
+    description: 'La fonte segnala un guasto nei pressi di Como-Camerlata e ritardi sulla circolazione ferroviaria della linea Milano-Como-Chiasso.',
+    keywords: 'frontalieri, ticino, svizzera, italia, guasto, pressi, como-camerlata, ritardi',
+    ogTitle: 'Guasto nei pressi di Como-Camerlata: ritardi verso Chiasso',
+    ogDescription: 'Un guasto nei pressi di Como-Camerlata è associato a ritardi sulla linea Milano-Como-Chiasso. La fonte pubblica è parziale e non riporta, nel materiale disponibile, durata, treni coinvolti o causa tecnica.',
+    canonicalPath: '/articoli-ticino/guasto-camerlata-linea-chiasso/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Guasto nei pressi di Como-Camerlata: ritardi verso Chiasso",
+      "description": "La fonte segnala un guasto nei pressi di Como-Camerlata e ritardi sulla circolazione ferroviaria della linea Milano-Como-Chiasso.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-guasto-camerlata-linea-chiasso.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-02T23:32:30+00:00",
+      "dateModified": "2026-11-02T23:32:30+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-ticino/guasto-camerlata-linea-chiasso/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

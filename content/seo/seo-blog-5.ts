@@ -114186,6 +114186,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-cascata-oro-comune-como': {
+    title: 'Milioni per Como: i fondi per frontalieri si sono triplicati',
+    description: 'Oltre 9 milioni nelle casse del Comune di Como 6.492 frontalieri residenti al 31 dicembre 2024 7,81% di frontalieri su 83.135 abitanti 9.058.370,70',
+    keywords: 'frontalieri, ticino, svizzera, italia, milioni, como, fondi, sono',
+    ogTitle: 'Como incassa 9 milioni dai frontalieri',
+    ogDescription: 'Oltre 9 milioni nelle casse del Comune di Como 6.492 frontalieri residenti al 31 dicembre 2024 7,81% di frontalieri su 83.135 abitanti 9.058.370,70 euro',
+    canonicalPath: '/articoli-frontaliere/cascata-oro-comune-como/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Milioni per Como: i fondi per frontalieri si sono triplicati",
+      "description": "Oltre 9 milioni nelle casse del Comune di Como 6.492 frontalieri residenti al 31 dicembre 2024 7,81% di frontalieri su 83.135 abitanti 9.058.370,70",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-cascata-oro-comune-como.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-02T23:10:51+00:00",
+      "dateModified": "2026-11-02T23:10:51+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/cascata-oro-comune-como/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

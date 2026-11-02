@@ -4,22 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-07/georg-fischer-schlaegt-ton-buechner-als-neuen-praesidenten": {
-      "section": "canton-sh",
-      "ts": 1793447783183
-    },
-    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-20/jestetter-erfindung-soll-den-zahnarztbesuch-komfortabler": {
-      "section": "canton-sh",
-      "ts": 1793447784530
-    },
-    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-12/gf-vizepraesidentin-gehoert-zu-den-top-100-women-in-business": {
-      "section": "canton-sh",
-      "ts": 1793447785778
-    },
-    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-19/transport-fever-3-im-test-erfahren-sie-ob-dieses": {
-      "section": "canton-sh",
-      "ts": 1793447873852
-    },
     "canton-sh::https://sh.ch/webseite/kanton-schaffhausen/beh-rde/regierung/staatskanzlei/medienmitteilungen-24272945-de.html": {
       "section": "canton-sh",
       "ts": 1793494498138
@@ -31,6 +15,10 @@
     "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-27/sig-erzielt-gutes-ergebnis-im-dritten-quartal-und-will-fuer": {
       "section": "canton-sh",
       "ts": 1793584067634
+    },
+    "canton-sh::https://www.schaffhausen24.ch/articles/416440-marthalen-plant-ausbau-des-gesundheitszentrums": {
+      "section": "canton-sh",
+      "ts": 1793662369285
     }
   }
 }
