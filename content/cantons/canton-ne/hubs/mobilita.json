@@ -4,22 +4,22 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "mobilita",
-  "updatedAt": "2026-11-01T13:11:05.408Z",
-  "contentHash": "186369a27e52186579c65d50613f87f682e1ef50840c7ac313adb6d0c067b13e",
+  "updatedAt": "2026-11-02T09:20:10.429Z",
+  "contentHash": "6f2bde18d92affbccc3b3fb4f8afdfbec272e17813d6faf00d9121c2ab305ee4",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-30T23:59:59.000Z",
+      "updatedAt": "2026-10-31T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-31T21:55:48.067Z",
+      "updatedAt": "2026-11-01T22:29:16.511Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-31T20:43:08.728Z",
+      "updatedAt": "2026-11-01T21:24:45.283Z",
       "keyFacts": 0
     }
   ],
@@ -33,24 +33,24 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Biaufond, settimana conclusa: 30 ottobre 2026"
+          "note": "Biaufond, settimana conclusa: 31 ottobre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "5",
-          "note": "segnalazioni aggiornate: 31 ottobre 2026"
+          "value": "4",
+          "note": "segnalazioni aggiornate: 1 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "5",
-          "note": "segnalazioni aggiornate: 31 ottobre 2026"
+          "note": "segnalazioni aggiornate: 1 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 24 ottobre 2026 – 30 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 25 ottobre 2026 – 31 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Biaufond",
@@ -73,7 +73,7 @@
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-30T23:59:59.000Z"
+          "updatedAt": "2026-10-31T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -105,14 +105,9 @@
               "date": "2026-10-26T14:40:00.000Z"
             },
             {
-              "label": "Revocato: A5 Neuchâtel -> Yverdon Svincolo autostradale Neuchâtel-Serrières Situazione: uscita chiusa Causa: incendio Limitazione del traffico: corsia di destra chiusa",
-              "value": "Chiusura",
-              "date": "2026-10-31T16:26:00.000Z"
-            },
-            {
               "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
               "value": "Traffico",
-              "date": "2026-10-31T21:55:48.067Z",
+              "date": "2026-11-01T22:29:16.511Z",
               "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             },
             {
@@ -126,10 +121,16 @@
               "value": "Cantiere",
               "detail": "fine prevista: 30 aprile 2027",
               "date": "2025-04-08T11:07:00.000Z"
+            },
+            {
+              "label": "A20 Diramazione Neuchâtel-Vauseyon <-> La Chaux-de-Fonds Svincolo autostradale Convers Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Aggiunta 1: limite temporaneo peso lordo Peso…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 31 maggio 2027",
+              "date": "2026-10-06T22:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-31T21:55:48.067Z"
+          "updatedAt": "2026-11-01T22:29:16.511Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -152,7 +153,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -206,7 +207,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "en": {
       "canton": "NE",
@@ -217,24 +218,24 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Biaufond, week ending 30 October 2026"
+          "note": "Biaufond, week ending 31 October 2026"
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "5",
-          "note": "reports as of 31 October 2026"
+          "value": "4",
+          "note": "reports as of 1 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "5",
-          "note": "reports as of 31 October 2026"
+          "note": "reports as of 1 November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 24 October 2026 to 30 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 25 October 2026 to 31 October 2026, fastest first.",
           "items": [
             {
               "label": "Biaufond",
@@ -257,7 +258,7 @@
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-30T23:59:59.000Z"
+          "updatedAt": "2026-10-31T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -289,14 +290,9 @@
               "date": "2026-10-26T14:40:00.000Z"
             },
             {
-              "label": "Revocato: A5 Neuchâtel -> Yverdon Svincolo autostradale Neuchâtel-Serrières Situazione: uscita chiusa Causa: incendio Limitazione del traffico: corsia di destra chiusa",
-              "value": "Closure",
-              "date": "2026-10-31T16:26:00.000Z"
-            },
-            {
               "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
               "value": "Traffic",
-              "date": "2026-10-31T21:55:48.067Z",
+              "date": "2026-11-01T22:29:16.511Z",
               "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             },
             {
@@ -310,10 +306,16 @@
               "value": "Roadworks",
               "detail": "until 30 April 2027",
               "date": "2025-04-08T11:07:00.000Z"
+            },
+            {
+              "label": "A20 Diramazione Neuchâtel-Vauseyon <-> La Chaux-de-Fonds Svincolo autostradale Convers Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Aggiunta 1: limite temporaneo peso lordo Peso…",
+              "value": "Roadworks",
+              "detail": "until 31 May 2027",
+              "date": "2026-10-06T22:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-31T21:55:48.067Z"
+          "updatedAt": "2026-11-01T22:29:16.511Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -336,7 +338,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -390,7 +392,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "de": {
       "canton": "NE",
@@ -401,24 +403,24 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Biaufond, Woche bis 30. Oktober 2026"
+          "note": "Biaufond, Woche bis 31. Oktober 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "5",
-          "note": "Meldungen vom 31. Oktober 2026"
+          "value": "4",
+          "note": "Meldungen vom 1. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "5",
-          "note": "Meldungen vom 31. Oktober 2026"
+          "note": "Meldungen vom 1. November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 24. Oktober 2026 bis 30. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 25. Oktober 2026 bis 31. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Biaufond",
@@ -441,7 +443,7 @@
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-30T23:59:59.000Z"
+          "updatedAt": "2026-10-31T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -473,14 +475,9 @@
               "date": "2026-10-26T14:40:00.000Z"
             },
             {
-              "label": "Aufgehoben: A5 Neuenburg -> Yverdon Anschluss Neuenburg-Serrières Sachlage: Ausfahrt gesperrt Ursache: Brand Verkehrsführung: rechter Fahrstreifen gesperrt",
-              "value": "Sperrung",
-              "date": "2026-10-31T16:26:00.000Z"
-            },
-            {
               "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
               "value": "Verkehr",
-              "date": "2026-10-31T21:55:48.067Z",
+              "date": "2026-11-01T22:29:16.511Z",
               "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             },
             {
@@ -494,10 +491,16 @@
               "value": "Baustelle",
               "detail": "bis 30. April 2027",
               "date": "2025-04-08T11:07:00.000Z"
+            },
+            {
+              "label": "A20 Verzweigung Neuenburg-Vauseyon <-> La Chaux-de-Fonds Anschluss Convers Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.2 Zusatz 1: vorübergehende Beschränkung des zulässigen Gesamtgewichts…",
+              "value": "Baustelle",
+              "detail": "bis 31. Mai 2027",
+              "date": "2026-10-06T22:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-31T21:55:48.067Z"
+          "updatedAt": "2026-11-01T22:29:16.511Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -520,7 +523,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -574,7 +577,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "fr": {
       "canton": "NE",
@@ -585,24 +588,24 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Biaufond, semaine jusqu’au 30 octobre 2026"
+          "note": "Biaufond, semaine jusqu’au 31 octobre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "5",
-          "note": "signalements au 31 octobre 2026"
+          "value": "4",
+          "note": "signalements au 1er novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "5",
-          "note": "signalements au 31 octobre 2026"
+          "note": "signalements au 1er novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 24 octobre 2026 au 30 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 25 octobre 2026 au 31 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Biaufond",
@@ -625,7 +628,7 @@
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-30T23:59:59.000Z"
+          "updatedAt": "2026-10-31T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -657,14 +660,9 @@
               "date": "2026-10-26T14:40:00.000Z"
             },
             {
-              "label": "Révoqué: A5 Neuchâtel -> Yverdon Jonction autoroutière Neuchâtel-Serrières Situation: sortie fermée Raison: incendie Gestion du trafic: voie de droite fermée",
-              "value": "Fermeture",
-              "date": "2026-10-31T16:26:00.000Z"
-            },
-            {
               "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
               "value": "Trafic",
-              "date": "2026-10-31T21:55:48.067Z",
+              "date": "2026-11-01T22:29:16.511Z",
               "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             },
             {
@@ -678,10 +676,16 @@
               "value": "Chantier",
               "detail": "jusqu’au 30 avril 2027",
               "date": "2025-04-08T11:07:00.000Z"
+            },
+            {
+              "label": "A20 Echangeur de Neuchâtel-Vauseyon <-> La Chaux-de-Fonds Jonction autoroutière Convers Situation: trafic perturbé travaux, longueur [km] 0.2 Complément 1: limite temporaire du poids total autorisé…",
+              "value": "Chantier",
+              "detail": "jusqu’au 31 mai 2027",
+              "date": "2026-10-06T22:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-31T21:55:48.067Z"
+          "updatedAt": "2026-11-01T22:29:16.511Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -704,7 +708,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -758,7 +762,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     }
   }
 }
