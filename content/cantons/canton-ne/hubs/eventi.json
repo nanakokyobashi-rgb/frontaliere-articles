@@ -4,17 +4,17 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "eventi",
-  "updatedAt": "2026-11-01T13:11:05.408Z",
-  "contentHash": "76e03d84998174cc2792ff2fad7cbcf6e36aaf3088f9b7a8e12e8d1f096bcd54",
+  "updatedAt": "2026-11-02T09:20:10.429Z",
+  "contentHash": "1db8a940517ab6eb1a6e9388eec17c7d753747879cd5648064196f2ed2c149ae",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-31T14:21:36.178Z",
+      "updatedAt": "2026-11-02T02:24:34.417Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-31T20:43:08.728Z",
+      "updatedAt": "2026-11-01T21:24:45.283Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "24",
+          "value": "19",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Swiss Watchmaking Fair",
-              "detail": "Musée international d'horlogerie, La Chaux-de-Fonds",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/swiss-watchmaking-fair/"
-            },
-            {
               "label": "Brunch + visite guidée",
-              "detail": "Musée d'ethnographie, Neuchâtel",
-              "date": "2026-11-01",
+              "detail": "Musée d'ethnographie, Neuchâtel — in corso, ultimo giorno: 15 novembre 2026",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/brunch-visite-guidee-2/"
-            },
-            {
-              "label": "ATELIER CÉRAMIQUE ALTARY",
-              "detail": "Môtiers, Val-de-Travers",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-ceramique-altary/"
-            },
-            {
-              "label": "Halloween Trains",
-              "detail": "St-Sulpice NE, Val-de-Travers — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/halloween-trains/"
-            },
-            {
-              "label": "Méli-Mélo",
-              "detail": "La Turlutaine - Theâtre Atelier de Marionnettes, La Chaux-de-Fonds — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/evenements/musique/la-chaux-de-fonds/meli-melo_AeQ7Jdv"
             },
             {
               "label": "Apéro Contes",
               "detail": "La Chaux-de-Fonds — in corso, ultimo giorno: 28 novembre 2026",
-              "date": "2026-11-01",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/apero-contes/"
             },
             {
               "label": "Chocolatissimo",
               "detail": "Chocolatissimo, Neuchâtel — in corso, ultimo giorno: 7 novembre 2026",
-              "date": "2026-11-01",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/chocolatissimo/"
             },
             {
-              "label": "La pêche du jour",
-              "detail": "Neuchâtel — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/la-peche-du-jour/"
+              "label": "Absolute beginning",
+              "detail": "Neuchâtel",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/absolute-beginning/"
             },
             {
-              "label": "12th biennal of watchmaker's heritage day",
-              "detail": "Tourisme neuchâtelois - Montagnes, La Chaux-de-Fonds — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/11e-biennale-du-patrimoine-horloger/"
+              "label": "SAMUEL BLASER QUARTET",
+              "detail": "Centre de culture ABC, La Chaux-de-Fonds",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/evenements/musique/la-chaux-de-fonds/samuel-blaser-quartet_AyhmTLJ"
             },
             {
-              "label": "Atelier de gravure pour tous",
-              "detail": "Musée d'art et d'histoire, Neuchâtel — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
+              "label": "Un parfum de Chocolat",
+              "detail": "Boudry",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/un-parfum-de-chocolat-2/"
+            },
+            {
+              "label": "Visite guidée de Skate of Mind",
+              "detail": "Neuchâtel",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-guidee-de-skate-of-mind/"
+            },
+            {
+              "label": "Secrets of the Abyss",
+              "detail": "Secrets des Abysses, Neuchâtel",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/secrets-des-abysses/"
+            },
+            {
+              "label": "Sacred Concerts - Duke Ellington",
+              "detail": "La Chaux-de-Fonds",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sacred-concerts-duke-ellington/"
+            },
+            {
+              "label": "Session DIY",
+              "detail": "Musée d'ethnographie, Neuchâtel",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/session-diy-1/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/neuchatel/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -128,7 +128,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -150,7 +150,7 @@
           "url": "/eventi/neuchatel/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "en": {
       "canton": "NE",
@@ -160,7 +160,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "24",
+          "value": "19",
           "note": "from the site’s events calendar"
         }
       ],
@@ -171,69 +171,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Swiss Watchmaking Fair",
-              "detail": "Musée international d'horlogerie, La Chaux-de-Fonds",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/swiss-watchmaking-fair/"
-            },
-            {
               "label": "Brunch + visite guidée",
-              "detail": "Musée d'ethnographie, Neuchâtel",
-              "date": "2026-11-01",
+              "detail": "Musée d'ethnographie, Neuchâtel — ongoing, last day: 15 November 2026",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/brunch-visite-guidee-2/"
-            },
-            {
-              "label": "ATELIER CÉRAMIQUE ALTARY",
-              "detail": "Môtiers, Val-de-Travers",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-ceramique-altary/"
-            },
-            {
-              "label": "Halloween Trains",
-              "detail": "St-Sulpice NE, Val-de-Travers — ongoing, last day: 1 November 2026",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/halloween-trains/"
-            },
-            {
-              "label": "Méli-Mélo",
-              "detail": "La Turlutaine - Theâtre Atelier de Marionnettes, La Chaux-de-Fonds — ongoing, last day: 1 November 2026",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/evenements/musique/la-chaux-de-fonds/meli-melo_AeQ7Jdv"
             },
             {
               "label": "Apéro Contes",
               "detail": "La Chaux-de-Fonds — ongoing, last day: 28 November 2026",
-              "date": "2026-11-01",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/apero-contes/"
             },
             {
               "label": "Chocolatissimo",
               "detail": "Chocolatissimo, Neuchâtel — ongoing, last day: 7 November 2026",
-              "date": "2026-11-01",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/chocolatissimo/"
             },
             {
-              "label": "La pêche du jour",
-              "detail": "Neuchâtel — ongoing, last day: 1 November 2026",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/la-peche-du-jour/"
+              "label": "Absolute beginning",
+              "detail": "Neuchâtel",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/absolute-beginning/"
             },
             {
-              "label": "12th biennal of watchmaker's heritage day",
-              "detail": "Tourisme neuchâtelois - Montagnes, La Chaux-de-Fonds — ongoing, last day: 1 November 2026",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/11e-biennale-du-patrimoine-horloger/"
+              "label": "SAMUEL BLASER QUARTET",
+              "detail": "Centre de culture ABC, La Chaux-de-Fonds",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/evenements/musique/la-chaux-de-fonds/samuel-blaser-quartet_AyhmTLJ"
             },
             {
-              "label": "Atelier de gravure pour tous",
-              "detail": "Musée d'art et d'histoire, Neuchâtel — ongoing, last day: 1 November 2026",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
+              "label": "Un parfum de Chocolat",
+              "detail": "Boudry",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/un-parfum-de-chocolat-2/"
+            },
+            {
+              "label": "Visit Skate of Mind guide",
+              "detail": "Neuchâtel",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-guidee-de-skate-of-mind/"
+            },
+            {
+              "label": "Secrets of the Abyss",
+              "detail": "Secrets des Abysses, Neuchâtel",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/secrets-des-abysses/"
+            },
+            {
+              "label": "Sacred Concerts - Duke Ellington",
+              "detail": "La Chaux-de-Fonds",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sacred-concerts-duke-ellington/"
+            },
+            {
+              "label": "Session DIY",
+              "detail": "Musée d'ethnographie, Neuchâtel",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/session-diy-1/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/neuchatel/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -261,7 +261,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -283,7 +283,7 @@
           "url": "/en/events/neuchatel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "de": {
       "canton": "NE",
@@ -293,7 +293,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "24",
+          "value": "19",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -304,69 +304,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Schweizer Uhrenbörse",
-              "detail": "Musée international d'horlogerie, La Chaux-de-Fonds",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/swiss-watchmaking-fair/"
-            },
-            {
               "label": "Brunch + visite guidée",
-              "detail": "Musée d'ethnographie, Neuchâtel",
-              "date": "2026-11-01",
+              "detail": "Musée d'ethnographie, Neuchâtel — läuft, letzter Tag: 15. November 2026",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/brunch-visite-guidee-2/"
-            },
-            {
-              "label": "ATELIER CÉRAMIQUE ALTARY",
-              "detail": "Môtiers, Val-de-Travers",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-ceramique-altary/"
-            },
-            {
-              "label": "Halloween-Züge",
-              "detail": "St-Sulpice NE, Val-de-Travers — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/halloween-trains/"
-            },
-            {
-              "label": "Méli-Mélo",
-              "detail": "La Turlutaine - Theâtre Atelier de Marionnettes, La Chaux-de-Fonds — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/evenements/musique/la-chaux-de-fonds/meli-melo_AeQ7Jdv"
             },
             {
               "label": "Apéro Contes",
               "detail": "La Chaux-de-Fonds — läuft, letzter Tag: 28. November 2026",
-              "date": "2026-11-01",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/apero-contes/"
             },
             {
               "label": "Chocolatissimo",
               "detail": "Chocolatissimo, Neuchâtel — läuft, letzter Tag: 7. November 2026",
-              "date": "2026-11-01",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/chocolatissimo/"
             },
             {
-              "label": "La pêche du jour",
-              "detail": "Neuchâtel — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/la-peche-du-jour/"
+              "label": "Absolute beginning",
+              "detail": "Neuchâtel",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/absolute-beginning/"
             },
             {
-              "label": "12. Biennale des Uhrmacher-Patrimoniums",
-              "detail": "Tourisme neuchâtelois - Montagnes, La Chaux-de-Fonds — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/11e-biennale-du-patrimoine-horloger/"
+              "label": "SAMUEL BLASER QUARTET",
+              "detail": "Centre de culture ABC, La Chaux-de-Fonds",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/evenements/musique/la-chaux-de-fonds/samuel-blaser-quartet_AyhmTLJ"
             },
             {
-              "label": "Atelier de gravure pour tous",
-              "detail": "Musée d'art et d'histoire, Neuchâtel — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
+              "label": "Un parfum de Chocolat",
+              "detail": "Boudry",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/un-parfum-de-chocolat-2/"
+            },
+            {
+              "label": "Geführte Touren von Skate of Mind",
+              "detail": "Neuchâtel",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-guidee-de-skate-of-mind/"
+            },
+            {
+              "label": "Geheimnisse der Tiefsee",
+              "detail": "Secrets des Abysses, Neuchâtel",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/secrets-des-abysses/"
+            },
+            {
+              "label": "Sacred Concerts - Duke Ellington",
+              "detail": "La Chaux-de-Fonds",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sacred-concerts-duke-ellington/"
+            },
+            {
+              "label": "Session DIY",
+              "detail": "Musée d'ethnographie, Neuchâtel",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/session-diy-1/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/neuenburg/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -394,7 +394,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -416,7 +416,7 @@
           "url": "/de/veranstaltungen/neuenburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "fr": {
       "canton": "NE",
@@ -426,7 +426,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "24",
+          "value": "19",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -437,69 +437,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Bourse suisse d'horlogerie",
-              "detail": "Musée international d'horlogerie, La Chaux-de-Fonds",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/swiss-watchmaking-fair/"
-            },
-            {
               "label": "Brunch + visite guidée",
-              "detail": "Musée d'ethnographie, Neuchâtel",
-              "date": "2026-11-01",
+              "detail": "Musée d'ethnographie, Neuchâtel — en cours, dernier jour : 15 novembre 2026",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/brunch-visite-guidee-2/"
-            },
-            {
-              "label": "ATELIER CÉRAMIQUE ALTARY",
-              "detail": "Môtiers, Val-de-Travers",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-ceramique-altary/"
-            },
-            {
-              "label": "Trains Halloween",
-              "detail": "St-Sulpice NE, Val-de-Travers — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/halloween-trains/"
-            },
-            {
-              "label": "Méli-Mélo",
-              "detail": "La Turlutaine - Theâtre Atelier de Marionnettes, La Chaux-de-Fonds — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/evenements/musique/la-chaux-de-fonds/meli-melo_AeQ7Jdv"
             },
             {
               "label": "Apéro Contes",
               "detail": "La Chaux-de-Fonds — en cours, dernier jour : 28 novembre 2026",
-              "date": "2026-11-01",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/apero-contes/"
             },
             {
               "label": "Chocolatissimo",
               "detail": "Chocolatissimo, Neuchâtel — en cours, dernier jour : 7 novembre 2026",
-              "date": "2026-11-01",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/chocolatissimo/"
             },
             {
-              "label": "La pêche du jour",
-              "detail": "Neuchâtel — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/la-peche-du-jour/"
+              "label": "Absolute beginning",
+              "detail": "Neuchâtel",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/absolute-beginning/"
             },
             {
-              "label": "12e biennale du patrimoine horloger",
-              "detail": "Tourisme neuchâtelois - Montagnes, La Chaux-de-Fonds — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/11e-biennale-du-patrimoine-horloger/"
+              "label": "SAMUEL BLASER QUARTET",
+              "detail": "Centre de culture ABC, La Chaux-de-Fonds",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/evenements/musique/la-chaux-de-fonds/samuel-blaser-quartet_AyhmTLJ"
             },
             {
-              "label": "Atelier de gravure pour tous",
-              "detail": "Musée d'art et d'histoire, Neuchâtel — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
+              "label": "Un parfum de Chocolat",
+              "detail": "Boudry",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/un-parfum-de-chocolat-2/"
+            },
+            {
+              "label": "Visites guidées de Skate of Mind",
+              "detail": "Neuchâtel",
+              "date": "2026-11-05",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-guidee-de-skate-of-mind/"
+            },
+            {
+              "label": "Secrets des Abysses",
+              "detail": "Secrets des Abysses, Neuchâtel",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/secrets-des-abysses/"
+            },
+            {
+              "label": "Sacred Concerts - Duke Ellington",
+              "detail": "La Chaux-de-Fonds",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sacred-concerts-duke-ellington/"
+            },
+            {
+              "label": "Session DIY",
+              "detail": "Musée d'ethnographie, Neuchâtel",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/session-diy-1/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/neuchatel/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -527,7 +527,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -549,7 +549,7 @@
           "url": "/fr/evenements/neuchatel/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     }
   }
 }

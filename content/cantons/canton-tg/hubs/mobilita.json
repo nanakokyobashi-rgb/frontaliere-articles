@@ -4,22 +4,22 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-31T11:25:56.230Z",
-  "contentHash": "5f249692e22d9adcbc21f4df00743210e85fdcdaef266f3642da2a846075a9d2",
+  "updatedAt": "2026-11-02T09:20:10.429Z",
+  "contentHash": "67619ac18ea64753359c8fc62a6a60cfde221f720f20182d5a10011eb854b6c3",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-30T23:59:59.000Z",
+      "updatedAt": "2026-10-31T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-31T01:06:50.670Z",
+      "updatedAt": "2026-11-01T22:29:16.511Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-30T21:45:03.956Z",
+      "updatedAt": "2026-11-01T21:24:45.283Z",
       "keyFacts": 0
     }
   ],
@@ -33,19 +33,19 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Diessenhofen – Gailingen am Hochrhein, settimana conclusa: 30 ottobre 2026"
+          "note": "Diessenhofen – Gailingen am Hochrhein, settimana conclusa: 31 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "2",
-          "note": "segnalazioni aggiornate: 31 ottobre 2026"
+          "note": "segnalazioni aggiornate: 1 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 24 ottobre 2026 – 30 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 25 ottobre 2026 – 31 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Diessenhofen – Gailingen am Hochrhein",
@@ -74,7 +74,7 @@
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-30T23:59:59.000Z"
+          "updatedAt": "2026-10-31T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -95,7 +95,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-31T01:06:50.670Z"
+          "updatedAt": "2026-11-01T22:29:16.511Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -133,7 +133,7 @@
               "url": "https://www.tg.ch/news.html/485/news/80385"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -199,7 +199,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-31T11:25:56.230Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "en": {
       "canton": "TG",
@@ -210,19 +210,19 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Diessenhofen – Gailingen am Hochrhein, week ending 30 October 2026"
+          "note": "Diessenhofen – Gailingen am Hochrhein, week ending 31 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "2",
-          "note": "reports as of 31 October 2026"
+          "note": "reports as of 1 November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 24 October 2026 to 30 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 25 October 2026 to 31 October 2026, fastest first.",
           "items": [
             {
               "label": "Diessenhofen – Gailingen am Hochrhein",
@@ -251,7 +251,7 @@
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-30T23:59:59.000Z"
+          "updatedAt": "2026-10-31T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -272,7 +272,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-31T01:06:50.670Z"
+          "updatedAt": "2026-11-01T22:29:16.511Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -310,7 +310,7 @@
               "url": "https://www.tg.ch/news.html/485/news/80385"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -376,7 +376,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-31T11:25:56.230Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "de": {
       "canton": "TG",
@@ -387,19 +387,19 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Diessenhofen – Gailingen am Hochrhein, Woche bis 30. Oktober 2026"
+          "note": "Diessenhofen – Gailingen am Hochrhein, Woche bis 31. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "2",
-          "note": "Meldungen vom 31. Oktober 2026"
+          "note": "Meldungen vom 1. November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 24. Oktober 2026 bis 30. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 25. Oktober 2026 bis 31. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Diessenhofen – Gailingen am Hochrhein",
@@ -428,7 +428,7 @@
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-30T23:59:59.000Z"
+          "updatedAt": "2026-10-31T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -449,7 +449,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-31T01:06:50.670Z"
+          "updatedAt": "2026-11-01T22:29:16.511Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -487,7 +487,7 @@
               "url": "https://www.tg.ch/news.html/485/news/80385"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -553,7 +553,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-31T11:25:56.230Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "fr": {
       "canton": "TG",
@@ -564,19 +564,19 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Diessenhofen – Gailingen am Hochrhein, semaine jusqu’au 30 octobre 2026"
+          "note": "Diessenhofen – Gailingen am Hochrhein, semaine jusqu’au 31 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "2",
-          "note": "signalements au 31 octobre 2026"
+          "note": "signalements au 1er novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 24 octobre 2026 au 30 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 25 octobre 2026 au 31 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Diessenhofen – Gailingen am Hochrhein",
@@ -605,7 +605,7 @@
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-30T23:59:59.000Z"
+          "updatedAt": "2026-10-31T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -626,7 +626,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-31T01:06:50.670Z"
+          "updatedAt": "2026-11-01T22:29:16.511Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -664,7 +664,7 @@
               "url": "https://www.tg.ch/news.html/485/news/80385"
             }
           ],
-          "updatedAt": "2026-10-30T21:45:03.956Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -730,7 +730,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-31T11:25:56.230Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     }
   }
 }
