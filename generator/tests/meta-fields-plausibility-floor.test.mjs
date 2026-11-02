@@ -219,10 +219,11 @@ function raccogliCampoLocale(locale, suffix) {
   return valori.map((v) => v.trim()).filter(Boolean);
 }
 
-test('il floor prende i meta tradotti degeneri REALMENTE pubblicati', () => {
-  // Misura al 2026-09-05: `de` porta due `title` e un `excerpt` uguali a `...`.
-  // Se questo assert cade perche' non ci sono piu' offender, il corpus e' stato
-  // ripulito — va bene, ma allora va aggiornata la misura, non tolto il floor.
+test('il floor scansiona i meta tradotti e non pubblica ellissi', () => {
+  // La misura storica del 2026-09-05 conteneva meta DE uguali a `...`.
+  // La bonifica della PR #3537 li ha rimossi: il corpus pulito e' ora
+  // l'invariante, mentre il comportamento del floor resta provato su input
+  // sintetici qui sotto e nei test di classifyBody2Payload.
   const degeneri = [];
   for (const locale of LOCALI_TRADOTTI) {
     for (const field of META_ONLY_FIELDS) {
@@ -231,10 +232,13 @@ test('il floor prende i meta tradotti degeneri REALMENTE pubblicati', () => {
       for (const v of valori) if (metaFieldPlausibilityMiss(field, v)) degeneri.push([locale, field, v]);
     }
   }
-  assert.ok(
-    degeneri.some(([, , v]) => v === '...'),
-    `atteso almeno un meta tradotto degenere ('...') nel corpus, trovati: ${JSON.stringify(degeneri)}`,
+  assert.deepEqual(
+    degeneri.filter(([, , v]) => v === '...'),
+    [],
+    `meta tradotti con ellissi pubblicate: ${JSON.stringify(degeneri)}`,
   );
+  assert.match(metaFieldPlausibilityMiss('title', '...') ?? '', /^title</u);
+  assert.match(metaFieldPlausibilityMiss('excerpt', '...') ?? '', /^excerpt</u);
 });
 
 test('il budget dei falsi positivi scala con il corpus tradotto', () => {

@@ -112,19 +112,20 @@ describe('content-gates-main: il workflow', () => {
       assert.ok(checkout.includes(path), `percorso richiesto non materializzato: ${path}`);
     }
 
-    // `content-updated-at.test.mjs` reads every body-writing workflow to keep
-    // the backfill contract aligned with the sparse checkout used by this gate.
-    // Derive the dependency list from that test instead of maintaining a second
-    // hand-written list that can silently drift.
-    const updatedAtTest = read('generator/tests/content-updated-at.test.mjs');
-    const updatedAtWorkflowDependencies = new Set(
-      [...updatedAtTest.matchAll(/['"](\.github\/workflows\/[^'"]+\.yml)['"]/gu)]
-        .map(([, file]) => `/${file}`),
-    );
-    for (const workflowPath of updatedAtWorkflowDependencies) {
+    // Workflow files are dependencies of individual content gates, not only of
+    // the updatedAt test. Derive the union from every CONTENT_GATES source so
+    // a new gate cannot silently read a workflow omitted from this checkout.
+    const workflowDependencies = new Set();
+    for (const gate of CONTENT_GATES) {
+      const source = read(gate);
+      for (const [, file] of source.matchAll(/['"`](\.github\/workflows\/[^'"`]+\.yml)['"`]/gu)) {
+        workflowDependencies.add(`/${file}`);
+      }
+    }
+    for (const workflowPath of workflowDependencies) {
       assert.ok(
         checkout.includes(workflowPath),
-        `workflow letto dal gate updatedAt non materializzato: ${workflowPath}`,
+        `workflow letto da un content gate non materializzato: ${workflowPath}`,
       );
     }
     assert.doesNotMatch(checkout, /^\s+\/(?:data|public)\/$/mu,

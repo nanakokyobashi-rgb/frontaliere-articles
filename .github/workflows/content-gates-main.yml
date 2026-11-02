@@ -81,6 +81,7 @@ jobs:
             /.github/workflows/generate-article-core.yml
             /.github/workflows/generate-border-wait-ranking-weekly.yml
             /.github/workflows/generate-daily-brief.yml
+            /.github/workflows/generator-ci.yml
             /.github/workflows/publish-api.yml
             /.github/workflows/publish-journalist-articles.yml
             /.github/workflows/refresh-canton-hubs.yml
