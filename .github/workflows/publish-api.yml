@@ -125,6 +125,8 @@ on:
       # Dynamic crossing localization imports these helpers and reads this
       # committed table; each is a publisher input, including the data file.
       - 'generator/scripts/lib/localized-toponyms.mjs'
+      # The localized-toponym field reader is a transitive publisher input too.
+      - 'generator/scripts/lib/static-article-field-scanner.mjs'
       - 'generator/scripts/lib/events-digest-marker.mjs'
       - 'generator/scripts/lib/decode-html-entities.mjs'
       - 'generator/data/localized-toponyms.json'
