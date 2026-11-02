@@ -4,22 +4,22 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-31T14:42:02.554Z",
-  "contentHash": "8db8877b21a50636a96279646c794dc9d06a01b71d253b6af9a15268a843d16e",
+  "updatedAt": "2026-11-02T09:20:10.429Z",
+  "contentHash": "98b7a81212ecb8c822a3d3e40b98a8796c14952ce3fef8ea794c3f6c5ca0442c",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-30T23:59:59.000Z",
+      "updatedAt": "2026-10-31T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-31T10:01:09.440Z",
+      "updatedAt": "2026-11-01T22:29:16.511Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-31T11:16:57.003Z",
+      "updatedAt": "2026-11-01T21:24:45.283Z",
       "keyFacts": 0
     }
   ],
@@ -33,24 +33,24 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Au-Lustenau, settimana conclusa: 30 ottobre 2026"
+          "note": "Au-Lustenau, settimana conclusa: 31 ottobre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "8",
-          "note": "segnalazioni aggiornate: 31 ottobre 2026"
+          "note": "segnalazioni aggiornate: 1 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "15",
-          "note": "segnalazioni aggiornate: 31 ottobre 2026"
+          "value": "14",
+          "note": "segnalazioni aggiornate: 1 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 24 ottobre 2026 – 30 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 25 ottobre 2026 – 31 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Au-Lustenau",
@@ -103,7 +103,7 @@
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-30T23:59:59.000Z"
+          "updatedAt": "2026-10-31T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -160,13 +160,33 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-31T10:01:09.440Z"
+          "updatedAt": "2026-11-01T22:29:16.511Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Oberuzwil: Brand in Mehrfamilienhaus",
+              "date": "2026-11-01",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/oberuzwil--brand-in-mehrfamilienhaus.html"
+            },
+            {
+              "label": "Kanton St. Gallen: Halloween-Nacht",
+              "date": "2026-11-01",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/kanton-st--gallen--halloween-nacht.html"
+            },
+            {
+              "label": "Kanton St.Gallen: Fahrunfähige und alkoholisierte Verkehrsteilnehmende",
+              "date": "2026-11-01",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/kanton-st-gallen--fahrunfaehige-und-alkoholisierte-verkehrsteiln.html"
+            },
+            {
+              "label": "Bad Ragaz: Brennender Balkon bei Mehrfamilienhaus",
+              "date": "2026-11-01",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/bad-ragaz--brennender-balkon-bei-mehrfamilienhaus.html"
+            },
             {
               "label": "Mels: Festnahme nach versuchtem Telefonbetrug",
               "date": "2026-10-31",
@@ -176,29 +196,9 @@
               "label": "Kanton St. Gallen: Mehrere Einbrüche",
               "date": "2026-10-31",
               "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/kanton-st--gallen--mehrere-einbrueche.html"
-            },
-            {
-              "label": "Weesen: Fahrunfähig Selbstunfall verursacht",
-              "date": "2026-10-31",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/weesen--fahrunfaehig-selbstunfall-verursacht.html"
-            },
-            {
-              "label": "Abstimmungsvorlagen: Mehr Selbstbestimmung für Menschen mit Behinderung",
-              "date": "2026-10-30",
-              "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/abstimmungsvorlagen--mehr-selbstbestimmung--fuer-menschen-mit-be.html"
-            },
-            {
-              "label": "Gossau: Unfall auf A1",
-              "date": "2026-10-30",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/gossau--unfall-auf-a1.html"
-            },
-            {
-              "label": "Lichtensteig: Gewässerverschmutzung des Lederbachs",
-              "date": "2026-10-30",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/lichtensteig--gewaesserverschmutzung-des-lederbachs.html"
             }
           ],
-          "updatedAt": "2026-10-31T11:16:57.003Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -286,7 +286,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-31T14:42:02.554Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "en": {
       "canton": "SG",
@@ -297,24 +297,24 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Au-Lustenau, week ending 30 October 2026"
+          "note": "Au-Lustenau, week ending 31 October 2026"
         },
         {
           "label": "Road closures in force or imminent",
           "value": "8",
-          "note": "reports as of 31 October 2026"
+          "note": "reports as of 1 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "15",
-          "note": "reports as of 31 October 2026"
+          "value": "14",
+          "note": "reports as of 1 November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 24 October 2026 to 30 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 25 October 2026 to 31 October 2026, fastest first.",
           "items": [
             {
               "label": "Au-Lustenau",
@@ -367,7 +367,7 @@
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-30T23:59:59.000Z"
+          "updatedAt": "2026-10-31T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -424,13 +424,33 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-31T10:01:09.440Z"
+          "updatedAt": "2026-11-01T22:29:16.511Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Oberuzwil: Brand in Mehrfamilienhaus",
+              "date": "2026-11-01",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/oberuzwil--brand-in-mehrfamilienhaus.html"
+            },
+            {
+              "label": "Kanton St. Gallen: Halloween-Nacht",
+              "date": "2026-11-01",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/kanton-st--gallen--halloween-nacht.html"
+            },
+            {
+              "label": "Kanton St.Gallen: Fahrunfähige und alkoholisierte Verkehrsteilnehmende",
+              "date": "2026-11-01",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/kanton-st-gallen--fahrunfaehige-und-alkoholisierte-verkehrsteiln.html"
+            },
+            {
+              "label": "Bad Ragaz: Brennender Balkon bei Mehrfamilienhaus",
+              "date": "2026-11-01",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/bad-ragaz--brennender-balkon-bei-mehrfamilienhaus.html"
+            },
             {
               "label": "Mels: Festnahme nach versuchtem Telefonbetrug",
               "date": "2026-10-31",
@@ -440,29 +460,9 @@
               "label": "Kanton St. Gallen: Mehrere Einbrüche",
               "date": "2026-10-31",
               "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/kanton-st--gallen--mehrere-einbrueche.html"
-            },
-            {
-              "label": "Weesen: Fahrunfähig Selbstunfall verursacht",
-              "date": "2026-10-31",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/weesen--fahrunfaehig-selbstunfall-verursacht.html"
-            },
-            {
-              "label": "Abstimmungsvorlagen: Mehr Selbstbestimmung für Menschen mit Behinderung",
-              "date": "2026-10-30",
-              "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/abstimmungsvorlagen--mehr-selbstbestimmung--fuer-menschen-mit-be.html"
-            },
-            {
-              "label": "Gossau: Unfall auf A1",
-              "date": "2026-10-30",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/gossau--unfall-auf-a1.html"
-            },
-            {
-              "label": "Lichtensteig: Gewässerverschmutzung des Lederbachs",
-              "date": "2026-10-30",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/lichtensteig--gewaesserverschmutzung-des-lederbachs.html"
             }
           ],
-          "updatedAt": "2026-10-31T11:16:57.003Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -549,7 +549,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-31T14:42:02.554Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "de": {
       "canton": "SG",
@@ -560,24 +560,24 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Au-Lustenau, Woche bis 30. Oktober 2026"
+          "note": "Au-Lustenau, Woche bis 31. Oktober 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "8",
-          "note": "Meldungen vom 31. Oktober 2026"
+          "note": "Meldungen vom 1. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "15",
-          "note": "Meldungen vom 31. Oktober 2026"
+          "value": "14",
+          "note": "Meldungen vom 1. November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 24. Oktober 2026 bis 30. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 25. Oktober 2026 bis 31. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Au-Lustenau",
@@ -630,7 +630,7 @@
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-30T23:59:59.000Z"
+          "updatedAt": "2026-10-31T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -687,13 +687,33 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-31T10:01:09.440Z"
+          "updatedAt": "2026-11-01T22:29:16.511Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Oberuzwil: Brand in Mehrfamilienhaus",
+              "date": "2026-11-01",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/oberuzwil--brand-in-mehrfamilienhaus.html"
+            },
+            {
+              "label": "Kanton St. Gallen: Halloween-Nacht",
+              "date": "2026-11-01",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/kanton-st--gallen--halloween-nacht.html"
+            },
+            {
+              "label": "Kanton St.Gallen: Fahrunfähige und alkoholisierte Verkehrsteilnehmende",
+              "date": "2026-11-01",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/kanton-st-gallen--fahrunfaehige-und-alkoholisierte-verkehrsteiln.html"
+            },
+            {
+              "label": "Bad Ragaz: Brennender Balkon bei Mehrfamilienhaus",
+              "date": "2026-11-01",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/bad-ragaz--brennender-balkon-bei-mehrfamilienhaus.html"
+            },
             {
               "label": "Mels: Festnahme nach versuchtem Telefonbetrug",
               "date": "2026-10-31",
@@ -703,29 +723,9 @@
               "label": "Kanton St. Gallen: Mehrere Einbrüche",
               "date": "2026-10-31",
               "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/kanton-st--gallen--mehrere-einbrueche.html"
-            },
-            {
-              "label": "Weesen: Fahrunfähig Selbstunfall verursacht",
-              "date": "2026-10-31",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/weesen--fahrunfaehig-selbstunfall-verursacht.html"
-            },
-            {
-              "label": "Abstimmungsvorlagen: Mehr Selbstbestimmung für Menschen mit Behinderung",
-              "date": "2026-10-30",
-              "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/abstimmungsvorlagen--mehr-selbstbestimmung--fuer-menschen-mit-be.html"
-            },
-            {
-              "label": "Gossau: Unfall auf A1",
-              "date": "2026-10-30",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/gossau--unfall-auf-a1.html"
-            },
-            {
-              "label": "Lichtensteig: Gewässerverschmutzung des Lederbachs",
-              "date": "2026-10-30",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/lichtensteig--gewaesserverschmutzung-des-lederbachs.html"
             }
           ],
-          "updatedAt": "2026-10-31T11:16:57.003Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -812,7 +812,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-31T14:42:02.554Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "fr": {
       "canton": "SG",
@@ -823,24 +823,24 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Au-Lustenau, semaine jusqu’au 30 octobre 2026"
+          "note": "Au-Lustenau, semaine jusqu’au 31 octobre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "8",
-          "note": "signalements au 31 octobre 2026"
+          "note": "signalements au 1er novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "15",
-          "note": "signalements au 31 octobre 2026"
+          "value": "14",
+          "note": "signalements au 1er novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 24 octobre 2026 au 30 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 25 octobre 2026 au 31 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Au-Lustenau",
@@ -893,7 +893,7 @@
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-30T23:59:59.000Z"
+          "updatedAt": "2026-10-31T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -950,13 +950,33 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-31T10:01:09.440Z"
+          "updatedAt": "2026-11-01T22:29:16.511Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Oberuzwil: Brand in Mehrfamilienhaus",
+              "date": "2026-11-01",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/oberuzwil--brand-in-mehrfamilienhaus.html"
+            },
+            {
+              "label": "Kanton St. Gallen: Halloween-Nacht",
+              "date": "2026-11-01",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/kanton-st--gallen--halloween-nacht.html"
+            },
+            {
+              "label": "Kanton St.Gallen: Fahrunfähige und alkoholisierte Verkehrsteilnehmende",
+              "date": "2026-11-01",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/kanton-st-gallen--fahrunfaehige-und-alkoholisierte-verkehrsteiln.html"
+            },
+            {
+              "label": "Bad Ragaz: Brennender Balkon bei Mehrfamilienhaus",
+              "date": "2026-11-01",
+              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/bad-ragaz--brennender-balkon-bei-mehrfamilienhaus.html"
+            },
             {
               "label": "Mels: Festnahme nach versuchtem Telefonbetrug",
               "date": "2026-10-31",
@@ -966,29 +986,9 @@
               "label": "Kanton St. Gallen: Mehrere Einbrüche",
               "date": "2026-10-31",
               "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/kanton-st--gallen--mehrere-einbrueche.html"
-            },
-            {
-              "label": "Weesen: Fahrunfähig Selbstunfall verursacht",
-              "date": "2026-10-31",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/weesen--fahrunfaehig-selbstunfall-verursacht.html"
-            },
-            {
-              "label": "Abstimmungsvorlagen: Mehr Selbstbestimmung für Menschen mit Behinderung",
-              "date": "2026-10-30",
-              "url": "https://www.sg.ch/news/sgch_allgemein/2026/11/abstimmungsvorlagen--mehr-selbstbestimmung--fuer-menschen-mit-be.html"
-            },
-            {
-              "label": "Gossau: Unfall auf A1",
-              "date": "2026-10-30",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/gossau--unfall-auf-a1.html"
-            },
-            {
-              "label": "Lichtensteig: Gewässerverschmutzung des Lederbachs",
-              "date": "2026-10-30",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/lichtensteig--gewaesserverschmutzung-des-lederbachs.html"
             }
           ],
-          "updatedAt": "2026-10-31T11:16:57.003Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -1076,7 +1076,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-31T14:42:02.554Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     }
   }
 }

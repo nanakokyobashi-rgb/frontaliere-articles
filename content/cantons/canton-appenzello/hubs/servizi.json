@@ -4,22 +4,22 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "servizi",
-  "updatedAt": "2026-11-01T13:11:05.408Z",
-  "contentHash": "6a052546a178f8034cfe2597dfdbe5171eb15b58aa038be24b8d434f0bfc895c",
+  "updatedAt": "2026-11-02T09:20:10.429Z",
+  "contentHash": "3a8397c0d60477d1c7e513adca6cdcce9279f27f1be131198f5d9adabb2c4967",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-10-25T09:11:35.438Z",
+      "updatedAt": "2026-11-01T11:17:34.347Z",
       "keyFacts": 1
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-31T21:33:21.304Z",
+      "updatedAt": "2026-11-01T22:02:05.721Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-31T20:43:08.728Z",
+      "updatedAt": "2026-11-01T21:24:45.283Z",
       "keyFacts": 0
     }
   ],
@@ -61,7 +61,7 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-25T09:11:35.438Z"
+          "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
           "id": "aste-targhe",
@@ -69,30 +69,30 @@
           "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
           "items": [
             {
-              "label": "AR2512",
-              "value": "800 CHF",
+              "label": "AR399",
+              "value": "3000 CHF",
               "detail": "offerta attuale",
-              "date": "2026-11-01T17:00:00.000Z",
-              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1790"
+              "date": "2026-11-15T17:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1796"
             },
             {
-              "label": "AR3669",
+              "label": "AR2490",
               "value": "750 CHF",
               "detail": "offerta attuale",
-              "date": "2026-11-01T17:00:00.000Z",
-              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1791"
+              "date": "2026-11-15T17:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1797"
             },
             {
-              "label": "AR5527",
+              "label": "AR4881",
               "value": "750 CHF",
               "detail": "offerta attuale",
-              "date": "2026-11-01T17:00:00.000Z",
-              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1792"
+              "date": "2026-11-15T17:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1798"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder#liste-freie-kontrollschilder",
-          "updatedAt": "2026-10-31T21:33:21.304Z"
+          "updatedAt": "2026-11-01T22:02:05.721Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -125,7 +125,7 @@
               "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/bruno-streule-wird-neuer-leiter-des-amts-fuer-gesundheit/"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -213,7 +213,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -252,7 +252,7 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-25T09:11:35.438Z"
+          "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
           "id": "aste-targhe",
@@ -260,30 +260,30 @@
           "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
           "items": [
             {
-              "label": "AR2512",
-              "value": "800 CHF",
+              "label": "AR399",
+              "value": "3,000 CHF",
               "detail": "current bid",
-              "date": "2026-11-01T17:00:00.000Z",
-              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1790"
+              "date": "2026-11-15T17:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1796"
             },
             {
-              "label": "AR3669",
+              "label": "AR2490",
               "value": "750 CHF",
               "detail": "current bid",
-              "date": "2026-11-01T17:00:00.000Z",
-              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1791"
+              "date": "2026-11-15T17:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1797"
             },
             {
-              "label": "AR5527",
+              "label": "AR4881",
               "value": "750 CHF",
               "detail": "current bid",
-              "date": "2026-11-01T17:00:00.000Z",
-              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1792"
+              "date": "2026-11-15T17:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1798"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder#liste-freie-kontrollschilder",
-          "updatedAt": "2026-10-31T21:33:21.304Z"
+          "updatedAt": "2026-11-01T22:02:05.721Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -316,7 +316,7 @@
               "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/bruno-streule-wird-neuer-leiter-des-amts-fuer-gesundheit/"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -396,7 +396,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -435,7 +435,7 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-25T09:11:35.438Z"
+          "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
           "id": "aste-targhe",
@@ -443,30 +443,30 @@
           "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
           "items": [
             {
-              "label": "AR2512",
-              "value": "800 CHF",
+              "label": "AR399",
+              "value": "3’000 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-11-01T17:00:00.000Z",
-              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1790"
+              "date": "2026-11-15T17:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1796"
             },
             {
-              "label": "AR3669",
+              "label": "AR2490",
               "value": "750 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-11-01T17:00:00.000Z",
-              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1791"
+              "date": "2026-11-15T17:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1797"
             },
             {
-              "label": "AR5527",
+              "label": "AR4881",
               "value": "750 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-11-01T17:00:00.000Z",
-              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1792"
+              "date": "2026-11-15T17:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1798"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder#liste-freie-kontrollschilder",
-          "updatedAt": "2026-10-31T21:33:21.304Z"
+          "updatedAt": "2026-11-01T22:02:05.721Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -499,7 +499,7 @@
               "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/bruno-streule-wird-neuer-leiter-des-amts-fuer-gesundheit/"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -579,7 +579,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -618,7 +618,7 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-25T09:11:35.438Z"
+          "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
           "id": "aste-targhe",
@@ -626,30 +626,30 @@
           "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
           "items": [
             {
-              "label": "AR2512",
-              "value": "800 CHF",
+              "label": "AR399",
+              "value": "3 000 CHF",
               "detail": "offre actuelle",
-              "date": "2026-11-01T17:00:00.000Z",
-              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1790"
+              "date": "2026-11-15T17:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1796"
             },
             {
-              "label": "AR3669",
+              "label": "AR2490",
               "value": "750 CHF",
               "detail": "offre actuelle",
-              "date": "2026-11-01T17:00:00.000Z",
-              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1791"
+              "date": "2026-11-15T17:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1797"
             },
             {
-              "label": "AR5527",
+              "label": "AR4881",
               "value": "750 CHF",
               "detail": "offre actuelle",
-              "date": "2026-11-01T17:00:00.000Z",
-              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1792"
+              "date": "2026-11-15T17:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1798"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder#liste-freie-kontrollschilder",
-          "updatedAt": "2026-10-31T21:33:21.304Z"
+          "updatedAt": "2026-11-01T22:02:05.721Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -682,7 +682,7 @@
               "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/bruno-streule-wird-neuer-leiter-des-amts-fuer-gesundheit/"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -754,7 +754,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     }
   }
 }
