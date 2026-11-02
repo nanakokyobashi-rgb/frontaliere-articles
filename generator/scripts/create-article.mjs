@@ -6542,6 +6542,9 @@ async function llmFactCheck(contentIt, sourceContent = '', sourceUrl = '', verif
     ? `\n${syntheticReferenceType}\n"""\n${syntheticReferenceText}\n"""\n`
     : '';
   const sourceEvidenceContent = isSyntheticDataset ? syntheticReferenceText : sourceContent;
+  // Retry quotes must come from the citable source actually shown above.
+  // Evergreen briefs remain domain references, not an original news source.
+  const remediationSourceText = isEvergreenArticle ? '' : sourceEvidenceContent.slice(0, 6000);
   const editorialContext = {
     articleBody: checkerArticleText.slice(articleBodyStart),
     evidenceText: [
@@ -6917,6 +6920,7 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     }
     return {
       passed: false,
+      remediationSourceText,
       issues: [{
         claim: '(verifica non eseguita)',
         reason: (lacksSecondOpinion
@@ -6956,7 +6960,7 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     const factualIssues = modelResults.flatMap(result => result.issues)
       .filter(issue => issue.severity === 'critical' || issue.severity === 'major')
       .slice(0, 6);
-    return { passed: false, issues: [...originalityIssues, ...factualIssues] };
+    return { passed: false, remediationSourceText, issues: [...originalityIssues, ...factualIssues] };
   }
 
   // ── Drop verdicts the source itself refutes ──
@@ -7061,7 +7065,7 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
   );
   if (consensusCriticals.length > 0) {
     console.error(`  🚨 Consensus criticals (≥2 modelli): ${consensusCriticals.length} — BLOCCATO`);
-    return { passed: false, issues: consensusCriticals };
+    return { passed: false, remediationSourceText, issues: consensusCriticals };
   }
 
   // BLOCKING rule 2: 2+ critical from any single model in HIGH-TRUST categories.
@@ -7071,7 +7075,7 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     );
     if (highTrustCritsFromThisModel.length >= 2) {
       console.error(`  🚨 ${highTrustCritsFromThisModel.length} critical high-trust da ${r.model} — BLOCCATO`);
-      return { passed: false, issues: highTrustCritsFromThisModel };
+      return { passed: false, remediationSourceText, issues: highTrustCritsFromThisModel };
     }
   }
 
@@ -7086,7 +7090,7 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
   const majorScore = totalMajorWeight(allMajor);
   if (majorScore >= MAJOR_BLOCK_WEIGHT_THRESHOLD) {
     console.error(`  🚨 Consensus: ${allMajor.length} major issues (peso=${majorScore.toFixed(1)} ≥ ${MAJOR_BLOCK_WEIGHT_THRESHOLD.toFixed(1)}) — BLOCCATO`);
-    return { passed: false, issues: allMajor };
+    return { passed: false, remediationSourceText, issues: allMajor };
   }
 
   // A single vote here is Codex Luna Max verifying alone (a lone free vote is
@@ -7096,7 +7100,7 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     const r = modelResults[0];
     if (r.confidence >= 0.5 && (r.issues.filter(i => i.severity !== 'minor').length > 0)) {
       console.error(`  ⚠️  Single-model FAIL (${r.model}, confidence=${r.confidence.toFixed(2)}) — BLOCCATO per precauzione`);
-      return { passed: false, issues: r.issues.filter(i => i.severity !== 'minor') };
+      return { passed: false, remediationSourceText, issues: r.issues.filter(i => i.severity !== 'minor') };
     }
   }
 
@@ -7105,7 +7109,7 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     console.error(`  ⚠️  Consensus: ${allMajor.length} major issue(s) (peso=${majorScore.toFixed(1)}) — accettato con warning`);
   }
 
-  return { passed: true, issues: [...allCritical, ...allMajor] };
+  return { passed: true, remediationSourceText, issues: [...allCritical, ...allMajor] };
 }
 
 /**
@@ -19692,7 +19696,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
           const FACTCHECK_FEEDBACK_CAP = 8;
           lastFactCheckErrors = formatRemediation(factResult.issues, {
             cap: FACTCHECK_FEEDBACK_CAP,
-            sourceText: pageContent,
+            sourceText: factResult.remediationSourceText,
           });
           console.error(`  🔄 Rigenero contenuto IT per fact-check fallito (${attempt}/${maxAttempts})...`);
           continue;
@@ -19832,6 +19836,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
       if ((!isLastAttempt || localNewsExpansion) && expandGateResult.passed) {
         let expandFactOk = true;
         let expandFactIssues = null;
+        let expandFactSourceText = '';
         try {
           const expandFactResult = await llmFactCheck(data.content.it, pageContent, url, CANTON_FACTS_BRIEF);
           if (expandFactResult.unverified === true) {
@@ -19845,6 +19850,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
             }
             console.error(`  🚫 Espansione anticipata rigettata dal fact-check: ${(expandFactResult.issues || []).length} problemi`);
             expandFactIssues = expandFactResult.issues || [];
+            expandFactSourceText = expandFactResult.remediationSourceText;
             expandFactOk = false;
           }
         } catch (expandFcErr) {
@@ -19869,7 +19875,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
             const EXPAND_FACTCHECK_FEEDBACK_CAP = 8; // = FACTCHECK_FEEDBACK_CAP di Step 3a.0c
             lastFactCheckErrors = formatRemediation(expandFactIssues, {
               cap: EXPAND_FACTCHECK_FEEDBACK_CAP,
-              sourceText: pageContent,
+              sourceText: expandFactSourceText,
             });
           }
         }
