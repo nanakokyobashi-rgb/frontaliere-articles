@@ -48001,6 +48001,16 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'quota-regionale-salute-2027',
+ category: 'fiscale',
+ date: '2026-11-02T22:45:17.131Z',
+ image: '/images/blog/article-quota-regionale-salute-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'laura-bianchi',
+ authorName: 'Laura Bianchi',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

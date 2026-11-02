@@ -13665,6 +13665,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.tassa-salute-ristorni-tavolo-lavoro.title': 'Gesundheitsabgabe und Rückvergütungen, baldige Arbeitsrunde',
     'blog.article.tassa-salute-ristorni-tavolo-lavoro.excerpt': 'Arbeitsrunde in Kürze zu Gesundheitsabgabe und Rückvergütungen Bern, Rom, Tessin und Lombardei am Verhandlungstisch Treffen in Bern mit Guy Parmelin Delegation aus drei Vertretern',
     'blog.article.tassa-salute-ristorni-tavolo-lavoro.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.quota-regionale-salute-2027.title': 'Grenzgänger, vorgeschlagene Gesundheitsabgabe: 30-150 Euro ab 2027',
+    'blog.article.quota-regionale-salute-2027.excerpt': 'Der Text sieht einen festen Betrag vor: 30-150 Euro ab 2027 Die Höhe wird jedes Jahr von der Wohnsitzregion festgelegt Das alte Kriterium reichte von 3% bis 6%',
+    'blog.article.quota-regionale-salute-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaDe;

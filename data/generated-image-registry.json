@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "assetCount": 1082,
+  "assetCount": 1083,
   "assets": [
     {
       "schema": 1,
@@ -44690,6 +44690,49 @@
         "is_photograph": false,
         "is_topic_relevant": true,
         "notes": "Generic synthetic illustration of a hydroelectric dam in the Swiss Alps; no people, text, logos, or identifiable event."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-quota-regionale-salute-2027",
+      "kind": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2.5",
+      "executorModel": "gpt-5.6-luna",
+      "promptVersion": "frontaliereticino.generated-image-policy.v1",
+      "promptHash": "38204629b66b3eb3c6d2a140c8f8adae980963fa6b88a577c505ac8e61b827c9",
+      "license": "generated-provider",
+      "licenseUrl": "https://openai.com/policies/terms-of-use/",
+      "credit": "frontaliereticino.ch",
+      "sha256": "d4896fe07103dda6a3451521a13b23155bc268923425dd69c7589f368b7b9ffb",
+      "bytes": 180176,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-11-02T22:45:05.432Z",
+      "verifiedAt": "2026-11-02T22:45:16.336Z",
+      "restrictions": [
+        "illustrative-only",
+        "no-real-recognizable-foreground-person",
+        "no-public-figure-face",
+        "no-logo-brand-or-text",
+        "no-specific-real-event-photojournalism"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-quota-regionale-salute-2027.webp",
+      "area": "Ticino e pendolarismo transfrontaliero",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "contains_recognizable_foreground_person": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": false,
+        "is_topic_relevant": true,
+        "notes": "Original generic synthetic editorial scene with a car on a quiet road in green foothills; no text, logos, or people."
       }
     }
   ]
