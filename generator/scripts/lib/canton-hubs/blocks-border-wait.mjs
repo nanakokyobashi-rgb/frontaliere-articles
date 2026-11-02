@@ -144,7 +144,7 @@ export function shapeBorderWaitBlock(window, { canton, nowMs, crossingNames = ne
  */
 export function parseCrossingNames(source) {
   const out = new Map();
-  const rx = /\bname:\s*(['"])((?:\\.|(?!\1).)*)\1/g;
+  const rx = /\bname:\s*(['"])((?:\\.|(?!\\|\1).)*)\1/g;
   let m;
   while ((m = rx.exec(String(source ?? ''))) !== null) {
     const name = m[2].replace(/\\(['"])/g, '$1');

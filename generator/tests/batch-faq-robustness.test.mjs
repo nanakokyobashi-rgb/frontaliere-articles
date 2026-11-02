@@ -175,7 +175,7 @@ test('la configurazione CLI resta import-safe e section usa first-wins', () => {
 
 // ── #393 — il corpo che entra nel prompt e' quello del proprio id ────────────
 //
-// MUTAZIONE: rimettere `const re = /\.body\d+'\s*:\s*(['`])((?:\\.|(?!\1)[\s\S])*?)\1/g`
+// MUTAZIONE: rimettere `const re = /\.body\d+'\s*:\s*(['`])((?:\\.|(?!\\|\1)[\s\S])*?)\1/g`
 // al posto di `bodyKeyRx(articleId)` in `extractBodyContent` → rosso (il corpo
 // di beta-due entra nel testo di alpha-uno).
 

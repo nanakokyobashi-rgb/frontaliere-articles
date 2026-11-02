@@ -50,6 +50,8 @@ jobs:
           sparse-checkout: |
             /content/blog-articles-data.ts
             /content/swiss-articles-data.ts
+            /content/blog-meta-it.ts
+            /content/blog-meta-ch-it.ts
             /content/routerBlogData.ts
             /content/routerSwissData.ts
             /public/images/**
@@ -59,6 +61,7 @@ jobs:
             /generator/scripts/lib/source-copy-guard.mjs
             /scripts/ci/article-publication-observer.mjs
             /scripts/lib/article-registry-reader.mjs
+            /scripts/lib/article-meta-ids.mjs
             /scripts/lib/ts-literals.mjs
             /engine/shared/ts-literals.mjs
             /engine/shared/tsStringEscapes.ts

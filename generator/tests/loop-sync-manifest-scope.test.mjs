@@ -207,6 +207,18 @@ test('mint-app-token: il gemello adattato non rientra nel trasporto isolato (#30
   assert.match(entry.reason, /APP_TOKEN_REQUEST_DEPLOYMENTS_READ|APP_TOKEN_DEPLOYMENTS_READ/);
 });
 
+test('pr-delivery-evidence: il coupling adattato non rientra nel trasporto isolato (#3504)', () => {
+  const entry = byPath.get('scripts/ci/lib/pr-delivery-evidence.mjs');
+  assert.ok(entry, 'pr-delivery-evidence.mjs deve restare censito');
+  assert.equal(entry.mode, 'adapted');
+  assert.equal(
+    entry.adaptationIssue,
+    'https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/3504',
+  );
+  assert.match(entry.reason, /close-recovered-failure-issues/);
+  assert.match(entry.reason, /publish-api/);
+});
+
 test('mark-claude-terminal-outcome: la divergenza corpus e\' dichiarata adapted (#1084)', () => {
   const entry = byPath.get('scripts/ci/mark-claude-terminal-outcome.mjs');
   assert.ok(entry, 'mark-claude-terminal-outcome.mjs deve restare censito');
