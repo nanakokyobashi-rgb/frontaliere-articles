@@ -648,7 +648,7 @@ export function extractBodyContent(fileContent, articleId) {
   // sopra); il gruppo di cattura \1 pinza la virgoletta di apertura alla sua
   // chiusura. L'id e' gia' escapato e non introduce gruppi, quindi \1 continua
   // a riferirsi alla virgoletta.
-  const re = new RegExp(`${bodyKeyRx(articleId)}\\s*:\\s*(['\`])((?:\\\\.|(?!\\1)[\\s\\S])*?)\\1`, 'g');
+  const re = new RegExp(`${bodyKeyRx(articleId)}\\s*:\\s*(['\`])((?:\\\\.|(?!\\\\|\\1)[\\s\\S])*?)\\1`, 'g');
   let m;
   while ((m = re.exec(fileContent)) !== null) {
     const quoteChar = m[1];
