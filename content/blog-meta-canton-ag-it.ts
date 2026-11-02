@@ -78,6 +78,9 @@ const blogMetaCantonAgIt: Record<string, string> = {
     'blog.article.fislisbach-sondaggio-leematten.title': 'Fislisbach: il 5 novembre incontro sulla scuola Leematten',
     'blog.article.fislisbach-sondaggio-leematten.excerpt': 'Il Comune di Fislisbach presenta il 5 novembre i risultati del sondaggio dopo il voto che ha respinto un credito da CHF 5,28 milioni.',
     'blog.article.fislisbach-sondaggio-leematten.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.blackout-brugg-guasto-alta-tensione.title': 'Blackout a Brugg: guasto ad alta tensione',
+    'blog.article.blackout-brugg-guasto-alta-tensione.excerpt': 'Il Canton Argovia ha avvertito su Alertswiss per un blackout nella regione di Brugg.',
+    'blog.article.blackout-brugg-guasto-alta-tensione.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonAgIt;

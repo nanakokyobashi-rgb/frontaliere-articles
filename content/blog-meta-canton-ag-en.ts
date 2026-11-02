@@ -78,6 +78,9 @@ const blogMetaCantonAgEn: Record<string, string> = {
     'blog.article.fislisbach-sondaggio-leematten.title': 'Fislisbach: November 5 meeting about Leematten school',
     'blog.article.fislisbach-sondaggio-leematten.excerpt': 'The Municipality of Fislisbach presents the survey results on November 5 following the vote that rejected a credit of CHF 5,28 million.',
     'blog.article.fislisbach-sondaggio-leematten.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.blackout-brugg-guasto-alta-tensione.title': 'Blackout in Brugg: high-voltage fault',
+    'blog.article.blackout-brugg-guasto-alta-tensione.excerpt': 'The Canton of Aargau issued a warning on Alertswiss about a blackout in the Brugg region.',
+    'blog.article.blackout-brugg-guasto-alta-tensione.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonAgEn;

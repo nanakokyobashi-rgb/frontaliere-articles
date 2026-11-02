@@ -972,6 +972,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-blackout-brugg-guasto-alta-tensione': {
+    title: 'Blackout a Brugg: guasto ad alta tensione | Frontaliere Ticino',
+    description: 'Il Canton Argovia ha avvertito su Alertswiss per un blackout nella regione di Brugg. IBB indica un guasto ad alta tensione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, blackout, brugg, guasto, alta',
+    ogTitle: 'Blackout a Brugg: guasto ad alta tensione',
+    ogDescription: 'L\'allerta del Canton Argovia riguardava un\'interruzione prolungata nella regione di Brugg. IBB Energie AG ha indicato la sponda sinistra dell\'Aare, Lauffohr e parti di Umiken, con una stima iniziale di quattro-sei ore.',
+    canonicalPath: '/articoli-argovia/blackout-brugg-guasto-alta-tensione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Blackout a Brugg: guasto ad alta tensione",
+      "description": "Il Canton Argovia ha avvertito su Alertswiss per un blackout nella regione di Brugg. IBB indica un guasto ad alta tensione.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-blackout-brugg-guasto-alta-tensione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-02T23:55:33+00:00",
+      "dateModified": "2026-11-02T23:55:33+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-argovia/blackout-brugg-guasto-alta-tensione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

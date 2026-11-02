@@ -28,6 +28,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'fislisbach-acqua-potabile': { it: 'fislisbach-acqua-potabile', en: 'fislisbach-drinking-water', de: 'fislisbach-trinkwasser', fr: 'fislisbach-eau-potable' },
  'saphir-idrogeno-verde-axpo': { it: 'saphir-idrogeno-verde-axpo', en: 'saphir-green-hydrogen-axpo', de: 'saphir-gruener-wasserstoff-axpo', fr: 'saphir-hydrogene-vert-axpo' },
  'fislisbach-sondaggio-leematten': { it: 'fislisbach-sondaggio-leematten', en: 'fislisbach-leematten-survey', de: 'fislisbach-leematten-umfrage', fr: 'fislisbach-sondage-leematten' },
+ 'blackout-brugg-guasto-alta-tensione': { it: 'blackout-brugg-guasto-alta-tensione', en: 'brugg-power-outage-high-voltage-fault', de: 'brugg-stromausfall-hochspannungsstoerung', fr: 'panne-courant-brugg-haute-tension' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

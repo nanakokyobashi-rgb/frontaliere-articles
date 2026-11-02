@@ -282,4 +282,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'blackout-brugg-guasto-alta-tensione',
+ category: 'pratico',
+ date: '2026-11-02T23:55:33.810Z',
+ image: '/images/blog/article-blackout-brugg-guasto-alta-tensione.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['AG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

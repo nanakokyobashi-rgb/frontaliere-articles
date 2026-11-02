@@ -78,6 +78,9 @@ const blogMetaCantonAgDe: Record<string, string> = {
     'blog.article.fislisbach-sondaggio-leematten.title': 'Fislisbach: Am 5. November Treffen zur Schule Leematten',
     'blog.article.fislisbach-sondaggio-leematten.excerpt': 'Die Gemeinde Fislisbach stellt am 5.',
     'blog.article.fislisbach-sondaggio-leematten.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.blackout-brugg-guasto-alta-tensione.title': 'Stromausfall in Brugg: Störung im Hochspannungsnetz',
+    'blog.article.blackout-brugg-guasto-alta-tensione.excerpt': 'Der Kanton Aargau hat auf Alertswiss vor einem Stromausfall in der Region Brugg gewarnt.',
+    'blog.article.blackout-brugg-guasto-alta-tensione.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonAgDe;
