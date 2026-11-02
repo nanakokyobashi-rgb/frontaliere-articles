@@ -46,6 +46,7 @@ import {
   missingCorpusMessage,
   countSeoEntries,
   collectSeoEntryIds,
+  collectSeoEntryMetadata,
   latestSeoPublication,
   SECTION_BODY_DIRS,
   SECTION_COUNTERS,
@@ -87,17 +88,17 @@ function indexExcludedArticleIds(indexExclusions, section) {
 }
 
 /**
- * Identita' lette dai chunk che alimentano il feed, con la stessa sorgente
- * della cardinalita' `countSeoEntries`. Il ledger-only gate deve confrontare
- * gli insiemi: due cardinalita' uguali possono comunque essere un id attivo
- * mancante e un id ritirato estraneo.
+ * Identita' di tutte le entry SEO, comprese quelle senza `headline` o
+ * `datePublished`. Il bypass ledger-only deve usare la stessa popolazione del
+ * builder (`collectSeoEntryMetadata`): `collectSeoEntryIds` conta invece le
+ * sole entry eleggibili al feed e scarterebbe quelle incomplete.
  */
 export function collectSeoEntryIdsFromChunks(root, seoFiles, seoDir = SEO_CHUNK_DIR) {
   const ids = new Set();
   for (const file of seoFiles) {
     const filePath = path.join(root, seoDir, file);
     if (!fs.existsSync(filePath)) continue;
-    for (const id of collectSeoEntryIds(fs.readFileSync(filePath, 'utf-8'))) ids.add(id);
+    for (const id of collectSeoEntryMetadata(fs.readFileSync(filePath, 'utf-8')).keys()) ids.add(id);
   }
   return ids;
 }
