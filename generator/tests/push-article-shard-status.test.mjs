@@ -164,3 +164,14 @@ test('i batch Pages sono seriali, raggruppati e riconciliabili', () => {
   assert.match(workflow, /export ARTICLE_PUSH_FALLBACK_STATE_FILE="\$fallback_state"/u);
   assert.match(workflow, /without a reconciled tree; refusing the article-only fallback/u);
 });
+
+test('il rollback mantiene la revisione e condivide il budget Pages fra i batch', () => {
+  const source = readFileSync(PUSHER, 'utf8');
+
+  assert.match(source, /rollback_content_revision[\s\S]{0,700}Content-Rev: \$rollback_content_revision/u);
+  assert.match(source, /export ARTICLE_PUSH_PAGES_DEADLINE="\$article_push_pages_deadline"/u);
+  assert.match(source, /ARTICLE_PUSH_PAGES_DEADLINE="\$article_push_pages_deadline"[\s\\\n]+ARTICLE_PUSH_STATUS_FILE/u);
+  assert.match(source, /serialized_batch_deadline_available[\s\S]{0,700}reconciling published batches/u);
+  assert.match(source, /wait_for_pages_build "\$rollback_commit" "\$rollback_deadline"/u);
+  assert.doesNotMatch(source, /deadline=\$\(\(SECONDS \+ article_push_pages_wait_seconds\)\)/u);
+});

@@ -88,9 +88,11 @@
 #   ARTICLE_PUSH_SKIPPED_PATHS_FILE — optional file receiving one relative path
 #       per line when the monotonic guard keeps a newer remote publication;
 #       when set, failure to reset or write this metadata fails the push.
-#   ARTICLE_PUSH_PAGES_WAIT_SECONDS — maximum time to wait for the Pages build
-#       belonging to each pushed commit; defaults to
-#       PAGES_BUILD_WAIT_BUDGET_SECONDS, then 600 when run standalone.
+#   ARTICLE_PUSH_PAGES_WAIT_SECONDS — total Pages-wait budget shared by the
+#       serialized batches in this invocation; defaults to
+#       PAGES_BUILD_WAIT_BUDGET_SECONDS, then 600 when run standalone. A
+#       reconciliation gets one bounded wait of its own so the safety rollback
+#       is not prevented by an exhausted publication budget.
 #
 # Exit codes:
 #   0 — pushed, or a clean no-op (identical content already live, or the
@@ -133,6 +135,25 @@ if ! [[ "$article_push_pages_wait_seconds" =~ ^[1-9][0-9]*$ ]]; then
   echo "::error::ARTICLE_PUSH_PAGES_WAIT_SECONDS must be a positive integer" >&2
   exit 1
 fi
+article_push_pages_deadline="${ARTICLE_PUSH_PAGES_DEADLINE:-}"
+if [ -z "$article_push_pages_deadline" ]; then
+  article_push_pages_now="$(date +%s)" || {
+    echo "::error::cannot establish the shared Pages-wait deadline" >&2
+    exit 1
+  }
+  if ! [[ "$article_push_pages_now" =~ ^[0-9]+$ ]]; then
+    echo "::error::the shared Pages-wait clock is unreadable" >&2
+    exit 1
+  fi
+  article_push_pages_deadline=$((article_push_pages_now + article_push_pages_wait_seconds))
+elif ! [[ "$article_push_pages_deadline" =~ ^[0-9]+$ ]]; then
+  echo "::error::ARTICLE_PUSH_PAGES_DEADLINE must be a Unix timestamp" >&2
+  exit 1
+fi
+# Nested bounded invocations are separate Bash processes: exporting an absolute
+# wall-clock deadline, rather than `SECONDS`, keeps every child on the same
+# budget instead of starting a fresh wait window for every batch.
+export ARTICLE_PUSH_PAGES_DEADLINE="$article_push_pages_deadline"
 article_push_pages_poll_seconds="${ARTICLE_PUSH_PAGES_POLL_SECONDS:-5}"
 if ! [[ "$article_push_pages_poll_seconds" =~ ^[1-9][0-9]*$ ]]; then
   article_push_pages_poll_seconds=5
@@ -306,9 +327,15 @@ pages_build_commit_matches() {
 # have no Pages API and deliberately skip this external wait; production shard
 # remotes are GitHub URLs and fail closed when their build cannot be observed.
 wait_for_pages_build() {
-  local pushed_commit="$1"
+  local pushed_commit="$1" requested_deadline="${2:-$article_push_pages_deadline}"
   local pages_url pages_repo token body pages_status pages_commit
-  local deadline remaining
+  local deadline remaining current_epoch request_timeout
+
+  if ! [[ "$requested_deadline" =~ ^[0-9]+$ ]]; then
+    echo "::error::cannot wait for Pages build of $pushed_commit: invalid deadline" >&2
+    return 1
+  fi
+  deadline="$requested_deadline"
 
   if ! pages_url="$(shard_https_push_url "$SHARD_REPO")"; then
     echo "ℹ️ $section-$loc article shard: Pages build wait skipped for non-GitHub remote"
@@ -326,10 +353,26 @@ wait_for_pages_build() {
     return 1
   fi
 
-  deadline=$((SECONDS + article_push_pages_wait_seconds))
   while :; do
+    current_epoch="$(date +%s)" || {
+      echo "::error::cannot read the shared Pages-wait clock for $pages_repo commit $pushed_commit" >&2
+      return 1
+    }
+    if ! [[ "$current_epoch" =~ ^[0-9]+$ ]]; then
+      echo "::error::the shared Pages-wait clock is unreadable for $pages_repo commit $pushed_commit" >&2
+      return 1
+    fi
+    remaining=$((deadline - current_epoch))
+    if [ "$remaining" -le 0 ]; then
+      echo "::error::timed out waiting for Pages build of $pages_repo commit $pushed_commit before the shared deadline" >&2
+      return 1
+    fi
+    request_timeout=20
+    if [ "$remaining" -lt "$request_timeout" ]; then
+      request_timeout="$remaining"
+    fi
     body=''
-    if ! body="$(curl -sS --max-time 20 \
+    if ! body="$(curl -sS --max-time "$request_timeout" \
       -H "Authorization: Bearer $token" \
       -H 'Accept: application/vnd.github+json' \
       "https://api.github.com/repos/$pages_repo/pages/builds/latest" 2>/dev/null)"; then
@@ -342,6 +385,19 @@ wait_for_pages_build() {
       else (.sha // "") end
     ' 2>/dev/null || true)"
 
+    current_epoch="$(date +%s)" || {
+      echo "::error::cannot read the shared Pages-wait clock for $pages_repo commit $pushed_commit" >&2
+      return 1
+    }
+    if ! [[ "$current_epoch" =~ ^[0-9]+$ ]]; then
+      echo "::error::the shared Pages-wait clock is unreadable for $pages_repo commit $pushed_commit" >&2
+      return 1
+    fi
+    remaining=$((deadline - current_epoch))
+    if [ "$remaining" -le 0 ]; then
+      echo "::error::timed out waiting for Pages build of $pages_repo commit $pushed_commit before the shared deadline" >&2
+      return 1
+    fi
     if pages_build_commit_matches "$pushed_commit" "$pages_commit"; then
       case "$pages_status" in
         built)
@@ -355,11 +411,6 @@ wait_for_pages_build() {
       esac
     fi
 
-    remaining=$((deadline - SECONDS))
-    if [ "$remaining" -le 0 ]; then
-      echo "::error::timed out waiting for Pages build of $pages_repo commit $pushed_commit (latest status='${pages_status:-unknown}', commit='${pages_commit:-unknown}')" >&2
-      return 1
-    fi
     echo "⏳ $section-$loc article shard: Pages build for $pushed_commit is '${pages_status:-not visible yet}' (waiting ${remaining}s)"
     if [ "$remaining" -lt "$article_push_pages_poll_seconds" ]; then
       sleep "$remaining"
@@ -650,6 +701,7 @@ rollback_serialized_publications() {
   shift 2
   local -a candidate_commits=("$@")
   local remote_head rollback_stage base_tree current_tree rollback_tree rollback_commit
+  local rollback_content_revision rollback_deadline
   local candidate candidate_found=0 clone_err
 
   if [ -z "$base_commit" ] || [ "${#candidate_commits[@]}" -eq 0 ]; then
@@ -710,14 +762,39 @@ rollback_serialized_publications() {
   fi
   git -C "$rollback_stage" read-tree "$base_commit" || return 1
   rollback_tree="$(git -C "$rollback_stage" write-tree --missing-ok)" || return 1
-  rollback_commit="$(git -C "$rollback_stage" commit-tree "$rollback_tree" -p "$remote_head" \
-    -m "$section-$loc article shard publication reconciliation" \
-    -m "Restore the pre-push tree after the Pages gate for a published commit failed.")" || return 1
+  rollback_content_revision="$(git -C "$rollback_stage" show -s --format='%(trailers:key=Content-Rev,valueonly)' "$base_commit" 2>/dev/null || true)"
+  if ! [[ "$rollback_content_revision" =~ ^[0-9]+\.[0-9A-Fa-f]{7,40}$ ]]; then
+    # A legacy base can have no trailer. The current publication revision is
+    # still coherent for the monotonic guard: the restored tree is explicitly
+    # the pre-push state of this same publication attempt, so the article-only
+    # fallback may replace it instead of treating reconciliation as newer.
+    rollback_content_revision="$article_content_revision"
+  fi
+  if [ -n "$rollback_content_revision" ]; then
+    rollback_commit="$(git -C "$rollback_stage" commit-tree "$rollback_tree" -p "$remote_head" \
+      -m "$section-$loc article shard publication reconciliation" \
+      -m "Restore the pre-push tree after the Pages gate for a published commit failed." \
+      -m "Content-Rev: $rollback_content_revision")" || return 1
+  else
+    rollback_commit="$(git -C "$rollback_stage" commit-tree "$rollback_tree" -p "$remote_head" \
+      -m "$section-$loc article shard publication reconciliation" \
+      -m "Restore the pre-push tree after the Pages gate for a published commit failed.")" || return 1
+  fi
   if ! git ${GIT_PAT_OPTS[@]+"${GIT_PAT_OPTS[@]}"} -C "$rollback_stage" push "$SHARD_REPO" "$rollback_commit":main; then
     echo "::error::serialized-push rollback push failed; the shard may need manual reconciliation" >&2
     return 1
   fi
-  if ! wait_for_pages_build "$rollback_commit"; then
+  # The publication chain may have consumed the shared deadline. Reconciliation
+  # is the safety action that restores the complete tree, so give its Pages gate
+  # one fresh bounded window instead of letting the expired batch budget make a
+  # successful rollback look failed.
+  rollback_deadline="$(date +%s)" || return 1
+  if ! [[ "$rollback_deadline" =~ ^[0-9]+$ ]]; then
+    echo "::error::the reconciliation Pages-wait clock is unreadable" >&2
+    return 1
+  fi
+  rollback_deadline=$((rollback_deadline + article_push_pages_wait_seconds))
+  if ! wait_for_pages_build "$rollback_commit" "$rollback_deadline"; then
     echo "::error::serialized-push rollback reached git but its Pages build did not complete" >&2
     return 1
   fi
@@ -862,6 +939,24 @@ run_serialized_batches() {
     return 1
   }
 
+  serialized_batch_deadline_available() {
+    local current_epoch remaining
+    current_epoch="$(date +%s)" || {
+      serialized_batch_failure "cannot read the shared Pages-wait clock before serialized batch $((batch_number + 1))"
+      return $?
+    }
+    if ! [[ "$current_epoch" =~ ^[0-9]+$ ]]; then
+      serialized_batch_failure "the shared Pages-wait clock is unreadable before serialized batch $((batch_number + 1))"
+      return $?
+    fi
+    remaining=$((article_push_pages_deadline - current_epoch))
+    if [ "$remaining" -le 0 ]; then
+      serialized_batch_failure "shared Pages-wait deadline exhausted before serialized batch $((batch_number + 1)); reconciling published batches"
+      return $?
+    fi
+    return 0
+  }
+
   run_one_serialized_batch() {
     local batch_status_file batch_skipped_file batch_summary_file batch_commit_file
     local batch_status_value batch_warning_value
@@ -873,6 +968,7 @@ run_serialized_batches() {
     rm -f "$batch_status_file" "$batch_skipped_file" "$batch_summary_file" "$batch_commit_file"
 
     if ! ARTICLE_PUSH_BATCHED=1 \
+      ARTICLE_PUSH_PAGES_DEADLINE="$article_push_pages_deadline" \
       ARTICLE_PUSH_STATUS_FILE="$batch_status_file" \
       ARTICLE_PUSH_SKIPPED_PATHS_FILE="$batch_skipped_file" \
       ARTICLE_PUSH_SUMMARY_FILE="$batch_summary_file" \
@@ -928,6 +1024,7 @@ run_serialized_batches() {
       return $?
     fi
     if [ "$current_batch_count" -gt 0 ] && [ $((current_batch_count + group_size)) -gt "$article_push_batch_size" ]; then
+      if ! serialized_batch_deadline_available; then return 1; fi
       run_one_serialized_batch "${current_batch[@]}"
       batch_rc=$?
       if [ "$batch_rc" -ne 0 ]; then
@@ -947,6 +1044,7 @@ run_serialized_batches() {
     done <<< "${serialized_group_paths[$group_index]}"
     current_batch_count=$((current_batch_count + group_size))
     if [ "$current_batch_count" -ge "$article_push_batch_size" ]; then
+      if ! serialized_batch_deadline_available; then return 1; fi
       run_one_serialized_batch "${current_batch[@]}"
       batch_rc=$?
       if [ "$batch_rc" -ne 0 ]; then
@@ -962,6 +1060,7 @@ run_serialized_batches() {
     fi
   done
   if [ "$current_batch_count" -gt 0 ]; then
+    if ! serialized_batch_deadline_available; then return 1; fi
     run_one_serialized_batch "${current_batch[@]}"
     batch_rc=$?
     if [ "$batch_rc" -ne 0 ]; then
