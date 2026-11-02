@@ -19,6 +19,7 @@
  */
 import { formatCodexFallbackEvidence } from '../../scripts/ci/claude-codex-fallback.mjs';
 import { codeContributionFingerprint } from '../../scripts/ci/auto-merge-eval.mjs';
+import { classifyAndMintReview } from '../../scripts/ci/review-scope.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
@@ -184,6 +185,7 @@ exit 0
 }
 
 const botReview = (commit, body, { reviewRevision = BODY_REVISION, ...overrides } = {}) => ({
+  id: 1,
   user: { type: 'Bot', login: 'claude[bot]' },
   state: 'COMMENTED',
   commit_id: commit,
@@ -371,6 +373,78 @@ test('Important fuori dal diff → il gate e\' verde e il finding diventa follow
   });
   assert.equal(r.status, 0, `Un finding solo fuori dal diff non deve bloccare.\n${r.stdout}`);
   assert.match(r.stdout, /follow-up|fuori dal diff/i, r.stdout);
+});
+
+test('la review corrente conserva il commit selezionato quando classifica un finding storico', () => {
+  const finding = '`generator/scripts/outside.mjs:10`: 🔴 Important: il controllo condiviso manca.';
+  const r = runGate({
+    reviews: [
+      botReview(OLD, finding, {
+        id: 10,
+        submitted_at: '2026-09-18T09:00:00Z',
+      }),
+      botReview(HEAD, `${finding}\n\n## LGTM`, {
+        id: 11,
+        submitted_at: '2026-09-18T09:01:00Z',
+      }),
+    ],
+    files: ['generator/scripts/in-scope.mjs'],
+    meta: { base: { sha: 'c'.repeat(40) }, head: { sha: HEAD } },
+  });
+  assert.equal(r.status, 0, `La review sulla HEAD esatta deve classificare il finding storico.\n${r.stdout}`);
+  assert.doesNotMatch(r.stdout, /review non applicabile alla HEAD corrente/i, r.stdout);
+  assert.match(r.stdout, /follow-up|fuori dal diff/i, r.stdout);
+});
+
+test('carry-forward validato conserva la classificazione di un finding storico fuori dal diff', () => {
+  const finding = '`generator/scripts/outside.mjs:10`: 🔴 Important: il controllo condiviso manca.';
+  const r = runGate({
+    reviews: [botReview(OLD, `${finding}\n\n## LGTM`, { id: 12 })],
+    files: ['generator/scripts/in-scope.mjs'],
+    compare: COMPARE_SAME,
+  });
+  assert.equal(r.status, 0, `Il carry-forward validato deve riusare la classificazione fuori diff.\n${r.stdout}`);
+  assert.doesNotMatch(r.stdout, /review non applicabile alla HEAD corrente/i, r.stdout);
+  assert.match(r.stdout, /carry-forward|follow-up|fuori dal diff/i, r.stdout);
+});
+
+test('reviewCommit mancante o stantio resta fail-closed prima della classificazione', async () => {
+  const body = '`generator/scripts/outside.mjs:10`: 🔴 Important: il controllo condiviso manca.';
+  const formalBody = `${body}\n<!-- REVIEW_INPUT_REVISION: body:${'a'.repeat(64)} -->`;
+  const missingContext = await classifyAndMintReview(formalBody, {
+    repo: 'o/r',
+    pr: 901,
+    mutate: false,
+  });
+  assert.equal(missingContext.blocking, true, 'il contesto completamente assente deve bloccare');
+  assert.equal(missingContext.outsideOnly, false, 'il contesto completamente assente non può approvare');
+  assert.equal(missingContext.unresolved.length, 1, 'il finding resta irrisolto senza provenienza');
+  assert.equal(missingContext.unresolved[0].reason, 'review non applicabile alla HEAD corrente');
+  for (const reviewCommit of ['', OLD]) {
+    const result = await classifyAndMintReview(body, {
+      repo: 'o/r',
+      pr: 901,
+      mutate: false,
+      headSha: HEAD,
+      reviewCommit,
+      reviewId: 11,
+    });
+    assert.equal(result.blocking, true, `reviewCommit=${reviewCommit || '<missing>'}`);
+    assert.equal(result.outsideOnly, false, `reviewCommit=${reviewCommit || '<missing>'}`);
+    assert.equal(result.unresolved.length, 1, `reviewCommit=${reviewCommit || '<missing>'}`);
+    assert.equal(result.unresolved[0].reason, 'review non applicabile alla HEAD corrente');
+  }
+});
+
+test('la CLI di review-scope non reimporta il consumer nel carry-forward stale', () => {
+  const scope = readFileSync(path.join(ROOT, 'scripts/ci/review-scope.mjs'), 'utf8');
+  const autoMerge = readFileSync(path.join(ROOT, 'scripts/ci/auto-merge-eval.mjs'), 'utf8');
+  assert.match(scope, /export function prContributionFingerprint\(sha\)/u);
+  assert.match(scope, /const headFingerprint = prContributionFingerprint\(headSha\)/u);
+  assert.doesNotMatch(scope, /import\(['"]\.\/auto-merge-eval\.mjs['"]\)/u,
+    'il percorso CLI non deve reimportare il consumer mentre il top-level await è sospeso');
+  assert.match(autoMerge, /prContributionFingerprint,\s*\n\}\s*from ['"]\.\/review-scope\.mjs['"]/u,
+    'auto-merge-eval deve consumare la stessa implementazione aciclica');
 });
 
 test('Important che inizia con nessuno resta rosso se cita un file nel diff', () => {
