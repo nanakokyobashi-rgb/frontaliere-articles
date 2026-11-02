@@ -1,58 +1,45 @@
 /**
- * Linear reader for static `blog.article.<id>.<field>` string properties.
+ * Finds static article fields in top-level TypeScript object literals.
  *
- * The corpus contains very large literals and a few historical modules whose
- * properties are separated only by a newline. A lazy RegExp with a
- * backreference has pathological backtracking on those values and can keep a
- * CI guard alive until the job timeout. This scanner consumes each quote and
- * escape once, preserves raw value offsets for repair tools, and keeps the old
- * delimiter requirement so malformed adjacent properties are not admitted by
- * the guard.
+ * The corpus uses flat object literals with quoted keys and static string
+ * values, including template literals without substitutions.
+ * Parsing the module with the pinned TypeScript compiler keeps strings,
+ * comments, regular expressions, templates, type members, and nested examples
+ * out of repair targets while preserving offsets into the original source.
+ * The historical corpus has some syntax diagnostics; use parser recovery so
+ * one malformed separator does not hide later static fields.
  */
 
+import { createRequire } from 'node:module';
+import { isAbsolute, resolve } from 'node:path';
+
 const ARTICLE_KEY_PREFIX = 'blog.article.';
+const require = createRequire(import.meta.url);
+let cachedTypeScript;
 
-function readRawStringLiteral(source, start) {
-  const quote = source[start];
-  if (quote !== "'" && quote !== '"') return null;
-  for (let cursor = start + 1; cursor < source.length; cursor += 1) {
-    if (source[cursor] === '\\') {
-      cursor += 1;
-      continue;
+function loadTypeScript() {
+  if (cachedTypeScript) return cachedTypeScript;
+
+  const configuredEntry = process.env.ARTICLE_SOURCE_TYPESCRIPT;
+  if (configuredEntry !== undefined) {
+    if (!isAbsolute(configuredEntry)) {
+      throw new Error('ARTICLE_SOURCE_TYPESCRIPT must be an absolute path to the TypeScript compiler entry.');
     }
-    if (source[cursor] === quote) {
-      return {
-        quote,
-        rawValue: source.slice(start + 1, cursor),
-        rawStart: start + 1,
-        rawEnd: cursor,
-        end: cursor + 1,
-      };
+    cachedTypeScript = require(resolve(configuredEntry));
+  } else {
+    try {
+      cachedTypeScript = require('typescript');
+    } catch {
+      throw new Error(
+        'The static article field scanner requires TypeScript. Set ARTICLE_SOURCE_TYPESCRIPT using scripts/ci/article-source-runtime/README.md.',
+      );
     }
   }
-  return null;
-}
 
-function skipTrivia(source, start) {
-  let cursor = start;
-  while (cursor < source.length) {
-    if (/\s/u.test(source[cursor])) {
-      cursor += 1;
-      continue;
-    }
-    if (source[cursor] === '/' && source[cursor + 1] === '/') {
-      const end = source.indexOf('\n', cursor + 2);
-      cursor = end === -1 ? source.length : end + 1;
-      continue;
-    }
-    if (source[cursor] === '/' && source[cursor + 1] === '*') {
-      const end = source.indexOf('*/', cursor + 2);
-      cursor = end === -1 ? source.length : end + 2;
-      continue;
-    }
-    break;
+  if (typeof cachedTypeScript.createSourceFile !== 'function') {
+    throw new Error('The configured TypeScript runtime does not expose createSourceFile().');
   }
-  return cursor;
+  return cachedTypeScript;
 }
 
 function articleFieldFromKey(key) {
@@ -66,11 +53,59 @@ function articleFieldFromKey(key) {
   };
 }
 
+function unwrapExpression(ts, expression) {
+  let current = expression;
+  while (
+    ts.isParenthesizedExpression(current)
+    || ts.isAsExpression(current)
+    || ts.isTypeAssertionExpression(current)
+    || ts.isNonNullExpression(current)
+    || ts.isSatisfiesExpression(current)
+  ) {
+    current = current.expression;
+  }
+  return current;
+}
+
+function sourceLocation(sourceFile, offset) {
+  const { line, character } = sourceFile.getLineAndCharacterOfPosition(offset);
+  return `line ${line + 1}, column ${character + 1}`;
+}
+
+function parseSource(ts, text) {
+  return ts.createSourceFile(
+    'article-source.ts',
+    text,
+    ts.ScriptTarget.Latest,
+    true,
+    ts.ScriptKind.TS,
+  );
+}
+
+function topLevelObjectLiterals(ts, sourceFile) {
+  const objects = [];
+  for (const statement of sourceFile.statements) {
+    if (ts.isVariableStatement(statement)) {
+      for (const declaration of statement.declarationList.declarations) {
+        if (declaration.initializer) {
+          const initializer = unwrapExpression(ts, declaration.initializer);
+          if (ts.isObjectLiteralExpression(initializer)) objects.push(initializer);
+        }
+      }
+    } else if (ts.isExportAssignment(statement) && !statement.isExportEquals) {
+      const expression = unwrapExpression(ts, statement.expression);
+      if (ts.isObjectLiteralExpression(expression)) objects.push(expression);
+    }
+  }
+  return objects;
+}
+
 /**
  * @returns {Array<{
  *   articleId: string,
  *   field: string,
  *   rawValue: string,
+ *   value: string,
  *   quote: string,
  *   keyStart: number,
  *   valueStart: number,
@@ -80,54 +115,66 @@ function articleFieldFromKey(key) {
  */
 export function scanStaticArticleFieldEntries(source) {
   const text = String(source ?? '');
+  const ts = loadTypeScript();
+  const sourceFile = parseSource(ts, text);
   const entries = [];
-  let cursor = 0;
 
-  while (cursor < text.length) {
-    if (text[cursor] === '/' && text[cursor + 1] === '/') {
-      const end = text.indexOf('\n', cursor + 2);
-      cursor = end === -1 ? text.length : end + 1;
-      continue;
-    }
-    if (text[cursor] === '/' && text[cursor + 1] === '*') {
-      const end = text.indexOf('*/', cursor + 2);
-      cursor = end === -1 ? text.length : end + 2;
-      continue;
-    }
+  for (const object of topLevelObjectLiterals(ts, sourceFile)) {
+    for (const property of object.properties) {
+      if (!ts.isPropertyAssignment(property) || !ts.isStringLiteral(property.name)) continue;
+      const field = articleFieldFromKey(property.name.text);
+      if (!field) continue;
 
-    const keyLiteral = readRawStringLiteral(text, cursor);
-    if (!keyLiteral) {
-      cursor += 1;
-      continue;
-    }
-
-    const field = articleFieldFromKey(keyLiteral.rawValue);
-    if (field) {
-      const colon = skipTrivia(text, keyLiteral.end);
-      if (text[colon] === ':') {
-        const valueStart = skipTrivia(text, colon + 1);
-        const valueLiteral = readRawStringLiteral(text, valueStart);
-        if (valueLiteral) {
-          const delimiter = skipTrivia(text, valueLiteral.end);
-          if (text[delimiter] === ',' || text[delimiter] === '}') {
-            entries.push({
-              ...field,
-              rawValue: valueLiteral.rawValue,
-              quote: valueLiteral.quote,
-              keyStart: cursor,
-              valueStart: valueLiteral.rawStart,
-              valueEnd: valueLiteral.rawEnd,
-              end: valueLiteral.end,
-            });
-          }
-          cursor = valueLiteral.end;
-          continue;
-        }
+      if (
+        !ts.isStringLiteral(property.initializer)
+        && !ts.isNoSubstitutionTemplateLiteral(property.initializer)
+      ) {
+        const location = sourceLocation(sourceFile, property.initializer.getStart(sourceFile));
+        throw new SyntaxError(
+          `Static article field ${property.name.text} must have a quoted string value at ${location}.`,
+        );
       }
-    }
 
-    cursor = keyLiteral.end;
+      const literalStart = property.initializer.getStart(sourceFile);
+      const literalEnd = property.initializer.getEnd();
+      const quote = text[literalStart];
+      if (text[literalEnd - 1] !== quote) continue;
+      const valueStart = literalStart + 1;
+      const valueEnd = literalEnd - 1;
+      entries.push({
+        ...field,
+        rawValue: text.slice(valueStart, valueEnd),
+        value: property.initializer.text,
+        quote,
+        keyStart: property.name.getStart(sourceFile),
+        valueStart,
+        valueEnd,
+        end: property.initializer.getEnd(),
+      });
+    }
   }
 
   return entries;
+}
+
+/** Encode a cooked string as a static TypeScript string with its source delimiter. */
+export function encodeStaticArticleFieldValue(value, quote) {
+  const text = String(value ?? '');
+  if (quote === '`') {
+    return text
+      .replaceAll('\\', '\\\\')
+      .replaceAll('`', '\\`')
+      .replaceAll('${', '\\${');
+  }
+  if (quote !== "'" && quote !== '"') {
+    throw new TypeError(`Unsupported TypeScript string delimiter: ${String(quote)}`);
+  }
+  const escapedQuote = quote === "'" ? /'/gu : /"/gu;
+  return text
+    .replaceAll('\\', '\\\\')
+    .replace(escapedQuote, '\\$&')
+    .replaceAll('\r', '\\r')
+    .replaceAll('\n', '\\n')
+    .replaceAll('\u2028', '\\u2028')
+    .replaceAll('\u2029', '\\u2029');
 }

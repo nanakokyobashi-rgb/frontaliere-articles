@@ -203,6 +203,7 @@ import { normalizePromptSectionHeadings, applyConvertedHeadings } from './lib/no
 import { detectLanguage, detectLanguageWithConfidence } from './lib/detect-language.mjs';
 import {
   assertLocalizedToponymPair,
+  createLocalizedToponymSourceProfile,
   extractArticleProjectionText,
   LOCALIZED_TOPONYM_LOCALES,
   LOCALIZED_TOPONYMS,
@@ -2853,6 +2854,7 @@ export async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeT
   const itSrc = readFileSync(itPath, 'utf8');
   let trSrc = readFileSync(trPath, 'utf8');
   const sourceProjection = articleSourceProjection(itPath, itSrc, pair.id);
+  const sourceProfile = createLocalizedToponymSourceProfile(sourceProjection);
 
   const availableBodyFields = bodyFieldsForSource(itSrc, pair.id);
   const repairFields = pair.structural && Array.isArray(pair.fields) && pair.fields.length > 0
@@ -2983,6 +2985,7 @@ export async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeT
         sourceText: sourceProjection,
         targetText: sanitized,
         locale: pair.locale,
+        sourceProfile,
       }).text;
       translationFieldResults.push({ field: f, status: 'translated' });
     }
@@ -3062,6 +3065,7 @@ export async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeT
         ].filter(Boolean).join('\n'),
         locale: pair.locale,
         context: `${pair.id}/${pair.locale}`,
+        sourceProfile,
       });
     } catch (error) {
       localizedToponymError = error;

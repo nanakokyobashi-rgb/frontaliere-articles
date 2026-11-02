@@ -18,7 +18,10 @@ import {
   validateLocalizedToponymTable,
 } from '../scripts/lib/localized-toponyms.mjs';
 import { extractSlugFallbackLocales } from '../scripts/lib/slug-fallback-provenance.mjs';
-import { scanStaticArticleFieldEntries } from '../scripts/lib/static-article-field-scanner.mjs';
+import {
+  encodeStaticArticleFieldValue,
+  scanStaticArticleFieldEntries,
+} from '../scripts/lib/static-article-field-scanner.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -98,21 +101,80 @@ test('lo scanner dei literal articolo è lineare e conserva gli escape', () => {
     const data = {
       'blog.article.demo.body1': 'L\'articolo su Lucerna', /* separatore */
       "blog.article.demo.title": "Titolo",
-      'blog.article.invalid.body1': 'manca il delimitatore';
     };
   `;
   assert.deepEqual(
-    scanStaticArticleFieldEntries(source).map(({ articleId, field, rawValue, valueStart, valueEnd }) => ({
-      articleId, field, rawValue, value: source.slice(valueStart, valueEnd),
+    scanStaticArticleFieldEntries(source).map(({ articleId, field, rawValue, value, valueStart, valueEnd }) => ({
+      articleId, field, rawValue, value, raw: source.slice(valueStart, valueEnd),
     })),
     [
       {
         articleId: 'demo', field: 'body1', rawValue: String.raw`L\'articolo su Lucerna`,
-        value: String.raw`L\'articolo su Lucerna`,
+        value: "L'articolo su Lucerna",
+        raw: String.raw`L\'articolo su Lucerna`,
       },
-      { articleId: 'demo', field: 'title', rawValue: 'Titolo', value: 'Titolo' },
+      { articleId: 'demo', field: 'title', rawValue: 'Titolo', value: 'Titolo', raw: 'Titolo' },
     ],
   );
+});
+
+test('lo scanner AST ignora stringhe, regex, template, commenti, tipi e oggetti annidati', () => {
+  const backtick = String.fromCharCode(96);
+  const source = [
+    "const data = { 'blog.article.valid.title': 'Titolo' };",
+    "const quoted = \"'blog.article.quoted.title': 'Ignora',\";",
+    "const pattern = /'blog.article.regex.title':\\s*'Ignora'/;",
+    'const template = ' + backtick + "{'blog.article.template.title': 'Ignora'}" + backtick + ';',
+    "const templateValue = { 'blog.article.template-value.body1': " + backtick + 'Testo statico' + backtick + ' };',
+    "// 'blog.article.line-comment.title': 'Ignora',",
+    "/* 'blog.article.block-comment.title': 'Ignora', */",
+    "type Example = { 'blog.article.type.title': 'Ignora' };",
+    "const nested = { example: { 'blog.article.nested.title': 'Ignora' } };",
+    "function example() { return { 'blog.article.function.title': 'Ignora' }; }",
+  ].join('\n');
+
+  assert.deepEqual(
+    scanStaticArticleFieldEntries(source).map(({ articleId, field, rawValue, value }) => ({
+      articleId, field, rawValue, value,
+    })),
+    [
+      { articleId: 'valid', field: 'title', rawValue: 'Titolo', value: 'Titolo' },
+      {
+        articleId: 'template-value', field: 'body1', rawValue: 'Testo statico', value: 'Testo statico',
+      },
+    ],
+  );
+});
+
+test('lo scanner recupera i campi statici dopo una proprietà malformata e rifiuta valori dinamici', () => {
+  assert.deepEqual(
+    scanStaticArticleFieldEntries("const data = { 'blog.article.bad.title': 'non chiuso"),
+    [],
+  );
+  assert.deepEqual(
+    scanStaticArticleFieldEntries("const data = { 'blog.article.bad.title': 'valore' 'blog.article.hidden.title': 'Titolo' };")
+      .map(({ articleId, field, rawValue }) => ({ articleId, field, rawValue })),
+    [
+      { articleId: 'bad', field: 'title', rawValue: 'valore' },
+      { articleId: 'hidden', field: 'title', rawValue: 'Titolo' },
+    ],
+  );
+  assert.throws(
+    () => scanStaticArticleFieldEntries("const data = { 'blog.article.bad.title': makeValue() };"),
+    /must have a quoted string value/,
+  );
+  assert.throws(
+    () => scanStaticArticleFieldEntries("const data = { 'blog.article.bad.title': `value ${dynamic}` } ;"),
+    /must have a quoted string value/,
+  );
+});
+
+test('la codifica conserva il valore cooked dei template statici', () => {
+  const original = "Line one\nD\u00e9tail `quoted` \\ path ${literal}";
+  const quote = String.fromCharCode(96);
+  const encoded = encodeStaticArticleFieldValue(original, quote);
+  const source = `const data = { 'blog.article.template.body1': ${quote}${encoded}${quote} };`;
+  assert.equal(scanStaticArticleFieldEntries(source)[0].value, original);
 });
 
 test('il profilo della sorgente riusa l analisi senza cambiare il verdetto', () => {
@@ -123,6 +185,15 @@ test('il profilo della sorgente riusa l analisi senza cambiare il verdetto', () 
   assert.deepEqual(
     findLocalizedToponymMismatches({ sourceText, targetText, locale: 'en', sourceProfile }),
     expected,
+  );
+  assert.throws(
+    () => findLocalizedToponymMismatches({
+      sourceText: 'Notizia sul cantone di Basilea.',
+      targetText,
+      locale: 'en',
+      sourceProfile,
+    }),
+    /sourceProfile deve appartenere allo stesso sourceText/,
   );
 });
 
