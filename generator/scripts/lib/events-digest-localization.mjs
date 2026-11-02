@@ -1,10 +1,11 @@
 import {
   LOCALIZED_TOPONYM_LOCALES,
+  createLocalizedToponymSourceProfileCache,
   replaceEventsDigestBody2LocalizedToponymMismatches,
   replaceLocalizedToponymMismatches,
 } from './localized-toponyms.mjs';
 
-function repairParallelLocaleValue(source, target, locale, key = '') {
+function repairParallelLocaleValue(source, target, locale, sourceProfileFor, key = '') {
   if (typeof target === 'string') {
     if (typeof source !== 'string') return target;
     if (key === 'body2') {
@@ -12,9 +13,15 @@ function repairParallelLocaleValue(source, target, locale, key = '') {
         sourceText: source,
         targetText: target,
         locale,
+        sourceProfileFor,
       })?.text ?? target;
     }
-    return replaceLocalizedToponymMismatches({ sourceText: source, targetText: target, locale }).text;
+    return replaceLocalizedToponymMismatches({
+      sourceText: source,
+      targetText: target,
+      locale,
+      sourceProfile: sourceProfileFor(source),
+    }).text;
   }
 
   if (Array.isArray(target)) {
@@ -22,6 +29,7 @@ function repairParallelLocaleValue(source, target, locale, key = '') {
       Array.isArray(source) ? source[index] : undefined,
       value,
       locale,
+      sourceProfileFor,
       key,
     ));
   }
@@ -33,6 +41,7 @@ function repairParallelLocaleValue(source, target, locale, key = '') {
         source && typeof source === 'object' && !Array.isArray(source) ? source[childKey] : undefined,
         value,
         locale,
+        sourceProfileFor,
         childKey,
       ),
     ]));
@@ -49,13 +58,19 @@ function repairParallelLocaleValue(source, target, locale, key = '') {
 export function repairEventsDigestLocalizedToponyms(data) {
   if (!data || typeof data !== 'object' || Array.isArray(data)) return data;
 
+  const sourceProfileFor = createLocalizedToponymSourceProfileCache();
   const repaired = { ...data };
   if (data.content && typeof data.content === 'object' && !Array.isArray(data.content)
       && Object.hasOwn(data.content, 'it')) {
     repaired.content = { ...data.content };
     for (const locale of LOCALIZED_TOPONYM_LOCALES) {
       if (locale === 'it' || !Object.hasOwn(repaired.content, locale)) continue;
-      repaired.content[locale] = repairParallelLocaleValue(data.content.it, data.content[locale], locale);
+      repaired.content[locale] = repairParallelLocaleValue(
+        data.content.it,
+        data.content[locale],
+        locale,
+        sourceProfileFor,
+      );
     }
   }
 
@@ -68,6 +83,7 @@ export function repairEventsDigestLocalizedToponyms(data) {
         sourceText: data.imageAlt.it,
         targetText: repaired.imageAlt[locale],
         locale,
+        sourceProfile: sourceProfileFor(data.imageAlt.it),
       }).text;
     }
   }

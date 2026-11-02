@@ -828,6 +828,8 @@ test('i publisher rapidi eseguono il link gate prima di ogni pubblicazione', () 
       'scripts/lib/typescript-expression-scanner.mjs',
       'generator/scripts/lib/article-meta-block.mjs',
       'generator/scripts/lib/article-excerpt.mjs',
+      'generator/scripts/lib/static-article-field-scanner.mjs',
+      'generator/data/localized-toponyms.json',
     ]) {
       assert.ok(pushPaths.includes(`'${dependency}'`), `${file} deve ripartire quando cambia ${dependency}`);
     }
@@ -844,6 +846,8 @@ test('i publisher rapidi usano la stessa chiusura delle dipendenze del gate di p
     .map((match) => match[1]);
   assert.ok(apiPaths.length > 0, 'publish-api.yml deve dichiarare le dipendenze del gate');
   for (const dependency of [
+    'generator/data/localized-toponyms.json',
+    'generator/scripts/lib/static-article-field-scanner.mjs',
     'engine/articleSeoFallback.ts',
     'engine/ogPagesPlugin.ts',
     'engine/rssFeeds.mjs',
