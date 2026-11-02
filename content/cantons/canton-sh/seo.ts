@@ -1138,6 +1138,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-calore-residuo-sciaffusa-mozione': {
+    title: 'Mozione sul calore residuo per impianti a Sciaffusa',
+    description: 'Mozione trasversale a Sciaffusa per regole comunali sul calore residuo: soglia oltre 20 GWh e ritiro garantito oltre il 50% entro 2 km.',
+    keywords: 'frontalieri, ticino, svizzera, italia, mozione, calore, residuo, impianti',
+    ogTitle: 'Mozione calore residuo Sciaffusa oltre 20 GWh',
+    ogDescription: 'Mozione trasversale nel Grande Consiglio di Sciaffusa che chiede regole vincolanti per imprese con grandi quantità di calore residuo, fissando la soglia oltre 20 GWh annui.',
+    canonicalPath: '/articoli-sciaffusa/calore-residuo-sciaffusa-mozione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Mozione sul calore residuo per impianti a Sciaffusa",
+      "description": "Mozione trasversale a Sciaffusa per regole comunali sul calore residuo: soglia oltre 20 GWh e ritiro garantito oltre il 50% entro 2 km.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-calore-residuo-sciaffusa-mozione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-02T23:39:15+00:00",
+      "dateModified": "2026-11-02T23:39:15+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-sciaffusa/calore-residuo-sciaffusa-mozione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

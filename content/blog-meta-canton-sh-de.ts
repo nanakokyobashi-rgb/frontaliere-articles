@@ -90,6 +90,9 @@ const blogMetaCantonShDe: Record<string, string> = {
     'blog.article.frick-volksmotion-kantonsrat.title': 'Volksmotion Frick: Debatte im Kantonsrat über kommunale Zuständigkeiten',
     'blog.article.frick-volksmotion-kantonsrat.excerpt': 'Der Kantonsrat wird die Volksmotion von Matthias Frick behandeln, in der mehr Kompetenzen für die Gemeinden im Verkehrsbereich gefordert werden.',
     'blog.article.frick-volksmotion-kantonsrat.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.calore-residuo-sciaffusa-mozione.title': 'Motion zur Abwärme für Anlagen in Schaffhausen',
+    'blog.article.calore-residuo-sciaffusa-mozione.excerpt': 'Vorschlag für verbindliche kommunale Regeln für ungenutzte Wärme von mehr als 20 GWh pro Jahr, mit garantierter Abnahme von mehr als 50% innerhalb von 2 km.',
+    'blog.article.calore-residuo-sciaffusa-mozione.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonShDe;

@@ -90,6 +90,9 @@ const blogMetaCantonShIt: Record<string, string> = {
     'blog.article.frick-volksmotion-kantonsrat.title': 'Volksmotion Frick: discussione in Kantonsrat su competenze comunali',
     'blog.article.frick-volksmotion-kantonsrat.excerpt': 'Il Kantonsrat tratterà la Volksmotion di Matthias Frick, che chiede ai Comuni maggiori competenze sulla circolazione.',
     'blog.article.frick-volksmotion-kantonsrat.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.calore-residuo-sciaffusa-mozione.title': 'Mozione sul calore residuo per impianti a Sciaffusa',
+    'blog.article.calore-residuo-sciaffusa-mozione.excerpt': 'Proposta per regole comunali vincolanti su calore inutilizzato oltre 20 GWh annui, con ritiro garantito oltre il 50% entro 2 km.',
+    'blog.article.calore-residuo-sciaffusa-mozione.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonShIt;
