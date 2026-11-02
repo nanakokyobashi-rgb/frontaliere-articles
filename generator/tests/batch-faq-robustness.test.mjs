@@ -56,6 +56,17 @@ test('FAQ: i control escape non vengono accettati per poi essere cancellati dal 
   assert.equal(batch.rejectRawFaqControlEscape(`testo${String.fromCharCode(8)}`), true);
 });
 
+test('FAQ IT qualityReject diventa un fallimento per-articolo, gli altri errori risalgono', () => {
+  const rejection = Object.assign(new Error('source facts missing'), { qualityReject: true });
+  const captured = batch.captureItalianFaqWrite(() => { throw rejection; });
+  assert.equal(captured.written, false);
+  assert.strictEqual(captured.rejection, rejection);
+
+  assert.deepEqual(batch.captureItalianFaqWrite(() => false), { written: false, rejection: null });
+  const writeError = new Error('disk write failed');
+  assert.throws(() => batch.captureItalianFaqWrite(() => { throw writeError; }), (error) => error === writeError);
+});
+
 const bodyLine = (id, n, testo) => `    'blog.article.${id}.body${n}': '${testo}',`;
 const faqLine = (id, pairs) => `    'blog.article.${id}.faq': '${JSON.stringify(pairs)}',`;
 

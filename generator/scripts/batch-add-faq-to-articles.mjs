@@ -1488,6 +1488,16 @@ function recordQualityRejectedTranslation(options, articleId, locale, sourceFaq,
   });
 }
 
+/** A deterministic Italian FAQ rejection fails this article without aborting the batch. */
+export function captureItalianFaqWrite(write) {
+  try {
+    return { written: write() === true, rejection: null };
+  } catch (error) {
+    if (!error?.qualityReject) throw error;
+    return { written: false, rejection: error };
+  }
+}
+
 // ── Process single article ───────────────────────────────────
 
 async function processArticle(articleId, file, itBodyContent, options) {
@@ -1553,7 +1563,13 @@ async function processArticle(articleId, file, itBodyContent, options) {
 
   // 4. Write Italian FAQ
   const itPath = `${bodyDir}/it/${file}`;
-  if (!insertFaqIntoBodyFile(itPath, articleId, validFaq)) {
+  const italianWrite = captureItalianFaqWrite(() => insertFaqIntoBodyFile(itPath, articleId, validFaq));
+  if (italianWrite.rejection) {
+    const reason = italianWrite.rejection.message || 'FAQ rejected by quality gate';
+    console.error(`${label} ⚠️  IT FAQ rejected by the quality gate: ${reason}; leaving the article unchanged`);
+    return { success: false, error: `IT FAQ rejected: ${reason}` };
+  }
+  if (!italianWrite.written) {
     return { success: false, error: 'Failed to write IT FAQ' };
   }
 
@@ -1674,7 +1690,13 @@ async function processTopUp(articleId, file, itContent, existingFaq, options) {
 
   // 3. Write updated IT FAQ
   const itPath = `${bodyDir}/it/${file}`;
-  if (!replaceFaqInBodyFile(itPath, validMerged, articleId)) {
+  const italianWrite = captureItalianFaqWrite(() => replaceFaqInBodyFile(itPath, validMerged, articleId));
+  if (italianWrite.rejection) {
+    const reason = italianWrite.rejection.message || 'FAQ rejected by quality gate';
+    console.error(`${label} ⚠️  IT FAQ rejected by the quality gate: ${reason}; keeping the existing FAQ`);
+    return { success: false, error: `IT FAQ rejected: ${reason}` };
+  }
+  if (!italianWrite.written) {
     return { success: false, error: 'Failed to write updated IT FAQ' };
   }
 
