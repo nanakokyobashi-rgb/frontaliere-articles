@@ -432,14 +432,16 @@ test('#395 un $1/$&/$` nel testo FAQ finisce su disco VERBATIM (insert)', (t) =>
 });
 
 test('#395 lo stesso vale sul percorso di FALLBACK (quello via body3)', (t) => {
-  // Il fallback scatta quando la prima regex non matcha: qui il file non ha
-  // `export default` sulla riga dopo `};`, che e' cio' che la prima pretende.
+  // Il fallback scatta quando la prima regex non matcha: il commento separa
+  // `export default` da `};`, che la prima regex pretende sulla riga dopo.
   const src = [
     'const blogBody: Record<string, string> = {',
     bodyLine(ALPHA, 1, 'Primo.'),
     bodyLine(ALPHA, 2, 'Secondo.'),
     bodyLine(ALPHA, 3, 'Terzo.'),
     '};',
+    '// Il commento forza il fallback senza rendere invalido il modulo TypeScript.',
+    'export default blogBody;',
     '',
   ].join('\n');
   const p = fileTemporaneo(t, `${ALPHA}.ts`, src);
