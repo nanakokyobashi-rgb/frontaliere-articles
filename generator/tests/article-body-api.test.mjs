@@ -105,6 +105,84 @@ test('the repaired FAQ sources have valid JSON, unchanged Q/A text, and canonica
       count: 5,
       qaHash: '93d074412543b89a687fd1ac51dfad3421e66eb13df95305a1ef342d3aa69ba5',
     },
+    {
+      locale: 'en',
+      id: 'pasticcio-dati-tasse-vecchi-frontalieri',
+      count: 5,
+      qaHash: 'b22def521e58942328a9ec59fb822f6a8552242a2d1a1fb7947eab1fc34c0df5',
+    },
+    {
+      locale: 'de',
+      id: 'pasticcio-dati-tasse-vecchi-frontalieri',
+      count: 5,
+      qaHash: '716d3c77b26459854cd35911afbd5f0a47acb84c7d2747dfb16ebc3fd242074c',
+    },
+    {
+      locale: 'en',
+      id: 'trasferirsi-a-viggiu-da-frontaliere-pro-e-contro',
+      count: 3,
+      qaHash: '8c920d9e458ee621be2ea0acb621153b8afd2f68b14ec08334aaab0e4a0410af',
+    },
+    {
+      locale: 'de',
+      id: 'trasferirsi-a-viggiu-da-frontaliere-pro-e-contro',
+      count: 3,
+      qaHash: '4c6354afa9ca13f26a54e237ac30759d9ffaeb10693811b0d1a16e4db909b4f2',
+    },
+    {
+      locale: 'fr',
+      id: 'trasferirsi-a-viggiu-da-frontaliere-pro-e-contro',
+      count: 3,
+      qaHash: '00092f94d7d84225d2570876d64c12e08f7643c09612d462c0ac0b80dbb42800',
+    },
+    {
+      locale: 'it',
+      id: 'vivere-casnate-bernate-frontaliere-ticino',
+      count: 5,
+      qaHash: 'a6a34afd0b8ca2084ae3cc0ab37ff45aefa618ac231e453a7141cd993befd1a7',
+    },
+    {
+      locale: 'en',
+      id: 'vivere-casnate-bernate-frontaliere-ticino',
+      count: 5,
+      qaHash: 'dac28b14c804f31b2d0ed813b888a3b193663665c114447ae4b634a0ee909058',
+    },
+    {
+      locale: 'de',
+      id: 'vivere-casnate-bernate-frontaliere-ticino',
+      count: 5,
+      qaHash: '39a6b9b198506c94f2cd2d79bc38a4000e6927e4260aa1b45bb02dc85b466c72',
+    },
+    {
+      locale: 'fr',
+      id: 'vivere-casnate-bernate-frontaliere-ticino',
+      count: 5,
+      qaHash: '10471fbf966376246a965cef30744de5c6c1d602598dc90b4dfac51cba1d4e7d',
+    },
+    {
+      locale: 'it',
+      id: 'credito-2026-famiglia-calcolo-limiti',
+      count: 5,
+      qaHash: '92ddd60762a9df78839f1cd7c221409a9c0b86c317274e7616bf4e48dc8f9991',
+    },
+    {
+      locale: 'en',
+      id: 'credito-2026-famiglia-calcolo-limiti',
+      count: 5,
+      qaHash: 'b138f73224d81d3f717a2b828a78d19d5cdd0da252996c4cbb953d7c25290aec',
+    },
+    {
+      locale: 'de',
+      id: 'credito-2026-famiglia-calcolo-limiti',
+      count: 5,
+      qaHash: 'cb27fca5288a7f5eeb12df5a7206b64092259c5fba5d6af376a5af4ee25261a7',
+    },
+    {
+      locale: 'fr',
+      id: 'credito-2026-famiglia-calcolo-limiti',
+      count: 5,
+      qaHash: 'a2179a9762b365a7074279a0b538a0396d6034b90f13740cdf6c627980040b5d',
+    },
   ];
 
   for (const { locale, id, count, qaHash } of repairedFaqs) {
