@@ -3206,8 +3206,8 @@
       "reason": "Gate deterministico del nesso editoriale degli articoli generati: vive col generatore, che esiste solo qui.",
       "baseline": {
         "site": null,
-        "corpus": "2533c6a501811368",
-        "alignedAt": "2026-10-31"
+        "corpus": null,
+        "alignedAt": "2026-11-02"
       }
     },
     {
@@ -3216,8 +3216,8 @@
       "reason": "Gate YMYL della pubblicazione automatica: vive col generatore, che esiste solo qui.",
       "baseline": {
         "site": null,
-        "corpus": "89997b0be8140cce",
-        "alignedAt": "2026-10-31"
+        "corpus": null,
+        "alignedAt": "2026-11-02"
       }
     },
     {
@@ -3226,8 +3226,8 @@
       "reason": "Affermazioni fiscali smentite dalle fonti primarie, usate dal generatore e dal test sul corpus.",
       "baseline": {
         "site": null,
-        "corpus": "150ce9c14a06b1b2",
-        "alignedAt": "2026-10-31"
+        "corpus": "ad0acffcc9fe2540",
+        "alignedAt": "2026-11-02"
       }
     },
     {
@@ -4525,8 +4525,8 @@
       "reason": "Il gate di magnitudine di publish-api.yml: confronta manifest.counts, i feed e le immagini del catalogo/generated contro il CORPUS sorgente su disco. Non ha gemello sul sito, e non deve averlo: il corpus e la superficie dati vivono qui, e il sito li consuma come JSON su HTTP.",
       "baseline": {
         "site": null,
-        "corpus": "1ad3e5591be93b55",
-        "alignedAt": "2026-10-06"
+        "corpus": "eb270f5a5b17cae3",
+        "alignedAt": "2026-11-02"
       }
     },
     {

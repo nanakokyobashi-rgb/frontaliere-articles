@@ -37,7 +37,7 @@ const MARKER_INLINE_RE = new RegExp(`[^\\S\\n]*(?<![\\p{L}\\p{N}])${TITLE_MARKER
 const FACT_LINE_RE = /^\s*(?:[-*•]\s+|\*\*)[^\n]{1,90}$|^[^\s#|][^:\n]{1,60}:\s*\S[^\n]{0,40}$/;
 
 /** «Importo: Non specificato, ma stimato in 2 milioni»: il valore e' cio' che segue. */
-const QUALIFIED_EMPTY_RE = /^(\s*(?:[-*•]\s+)?(?:\*\*)?[^:\n]{1,40}(?:\*\*)?:(?:\*\*)?\s*)(?:Non specificat[oa]|Not specified|Nicht angegeben|Non spécifiée?),?\s+(?:ma|but|aber|mais)\s+(\S)/gmu;
+const QUALIFIED_EMPTY_RE = /^(\s*(?:[-*•]\s+)?(?:\*\*)?[^:\n]{1,40}(?:\*\*)?:(?:\*\*)?\s*)(?:Non specificat[oa]|Not specified|Nicht angegeben|Non spécifiée?)(?:,)?[^\S\n]+(?:ma|but|aber|mais)[^\S\n]+(\S[^\n]*)$/gmu;
 const TRAILING_EMPTY_RE = /^\s*(?:[-*•]\s+)?(?:\*\*)?[^:\n]{1,40}(?:\*\*)?:(?:\*\*)?\s*(?:Non specificat[oa] (?:nella fonte|nell['’]articolo)|Not specified in the (?:source|article)|In der Quelle nicht angegeben|Non précisée? dans la source)\.?[^\S\n]*\n?/gimu;
 /** I corpi su una riga sola: «- Betrag: Nicht angegeben. Im Mai 2026 ...». */
 const INLINE_EMPTY_RE = /[^\S\n]+[-*•][^\S\n]+(?:\*\*)?(?:Importo|Amount|Betrag|Montant)(?:\*\*)?:(?:\*\*)?[^\S\n]*(?:Non specificat[oa]|Not specified|Nicht angegeben|Non spécifiée?)(?: nella fonte| nell['’]articolo| in the source| in the article)?\.?(?=\s|$)/gu;
@@ -47,7 +47,8 @@ function removeEmptyFacts(input) {
   let value = input
     .replace(QUALIFIED_EMPTY_RE, (all, label, first) => {
       removed += 1;
-      return `${label}${first.toLocaleUpperCase('it')}`;
+      const initial = [...first][0];
+      return label + initial.toLocaleUpperCase('it') + first.slice(initial.length);
     })
     .replace(TRAILING_EMPTY_RE, () => {
       removed += 1;

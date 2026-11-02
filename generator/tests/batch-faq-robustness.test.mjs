@@ -56,6 +56,17 @@ test('FAQ: i control escape non vengono accettati per poi essere cancellati dal 
   assert.equal(batch.rejectRawFaqControlEscape(`testo${String.fromCharCode(8)}`), true);
 });
 
+test('FAQ IT qualityReject diventa un fallimento per-articolo, gli altri errori risalgono', () => {
+  const rejection = Object.assign(new Error('source facts missing'), { qualityReject: true });
+  const captured = batch.captureItalianFaqWrite(() => { throw rejection; });
+  assert.equal(captured.written, false);
+  assert.strictEqual(captured.rejection, rejection);
+
+  assert.deepEqual(batch.captureItalianFaqWrite(() => false), { written: false, rejection: null });
+  const writeError = new Error('disk write failed');
+  assert.throws(() => batch.captureItalianFaqWrite(() => { throw writeError; }), (error) => error === writeError);
+});
+
 const bodyLine = (id, n, testo) => `    'blog.article.${id}.body${n}': '${testo}',`;
 const faqLine = (id, pairs) => `    'blog.article.${id}.faq': '${JSON.stringify(pairs)}',`;
 
@@ -283,9 +294,9 @@ test('#393 extractArticleId decide per NOME, non per posizione', () => {
 // decodifica in `extractFaqFromContent` → rosso su ogni round-trip qui sotto
 // che contiene una virgoletta o un backslash.
 
-/** Testo che esercita tutte le sequenze che lo scrittore deve saper riportare. */
+/** FAQ che esercita gli escape dello scrittore e contiene una fonte per il claim YMYL. */
 const FAQ_OSTILE = [
-  { q: 'Che cosa dice la "circolare" del 2026?', a: 'Dice che l\'imposta si calcola cosi\': prima la base, poi l\'aliquota.' },
+  { q: 'Che cosa dice la "circolare" del 2026?', a: 'Dice che l\'imposta si calcola cosi\': prima la base, poi l\'aliquota. [Fonte ufficiale](https://www.admin.ch).' },
   { q: 'Come si scrive un percorso Windows?', a: 'Per esempio C:\\Users\\frontaliere\\documenti — con i backslash.' },
   { q: 'La risposta puo andare a capo?', a: 'Si\':\nprima riga\nseconda riga, e un tab\tin mezzo.' },
 ];
@@ -432,14 +443,16 @@ test('#395 un $1/$&/$` nel testo FAQ finisce su disco VERBATIM (insert)', (t) =>
 });
 
 test('#395 lo stesso vale sul percorso di FALLBACK (quello via body3)', (t) => {
-  // Il fallback scatta quando la prima regex non matcha: qui il file non ha
-  // `export default` sulla riga dopo `};`, che e' cio' che la prima pretende.
+  // Il fallback scatta quando la prima regex non matcha: il commento separa
+  // `export default` da `};`, che la prima regex pretende sulla riga dopo.
   const src = [
     'const blogBody: Record<string, string> = {',
     bodyLine(ALPHA, 1, 'Primo.'),
     bodyLine(ALPHA, 2, 'Secondo.'),
     bodyLine(ALPHA, 3, 'Terzo.'),
     '};',
+    '// Il commento forza il fallback senza rendere invalido il modulo TypeScript.',
+    'export default blogBody;',
     '',
   ].join('\n');
   const p = fileTemporaneo(t, `${ALPHA}.ts`, src);

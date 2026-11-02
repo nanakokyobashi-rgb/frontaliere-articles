@@ -60,6 +60,7 @@ import {
   assertLocalizedToponymPair,
   extractArticleProjectionText,
 } from './lib/localized-toponyms.mjs';
+import { assertFaqPassesFiscalClaimsGate } from './lib/article-ymyl-gate.mjs';
 import { sanitizeArticleFaqMarkdown } from '../../scripts/lib/article-link-contract.mjs';
 import {
   assertFaqPairsHaveNoRejectedControls,
@@ -686,6 +687,14 @@ function articleProjectionText(filePath, articleId, { excludeFaq = false } = {})
   return [bodyProjection, metaProjection].filter(Boolean).join(LOCALIZED_TOPONYM_FIELD_SEPARATOR);
 }
 
+function assertFaqWritePassesFiscalGate(filePath, articleId, locale, faqArray) {
+  assertFaqPassesFiscalClaimsGate({
+    locale,
+    articleText: articleProjectionText(filePath, articleId, { excludeFaq: true }),
+    faq: faqArray,
+  });
+}
+
 function passesLocalizedToponymGate({ filePath, articleId, locale, sourceFaq, targetFaq }) {
   if (!locale || locale === 'it') return true;
   const targetPath = resolve(filePath);
@@ -1220,14 +1229,16 @@ function validateFaq(faq) {
 
 /** Replace existing FAQ value in a body file */
 export function replaceFaqInBodyFile(filePath, faqArray, articleId, gate = {}) {
-  assertFaqPairsHaveNoRejectedControls(faqArray, 'FAQ writer');
+  const safeFaq = assertFaqPairsHaveNoRejectedControls(faqArray, 'FAQ writer');
+  const locale = gate.locale || basename(dirname(resolve(filePath)));
   if (!passesLocalizedToponymGate({
     filePath,
     articleId,
-    locale: gate.locale,
+    locale,
     sourceFaq: gate.sourceFaq,
-    targetFaq: gate.targetFaq || faqArray,
+    targetFaq: gate.targetFaq || safeFaq,
   })) return false;
+  assertFaqWritePassesFiscalGate(filePath, articleId, locale, safeFaq);
   let content = read(filePath);
   // `escapeForSingleQuoteTS`, non una `.replace()` a mano: quella escapava
   // l'apostrofo e NON il backslash, quindi il `\"` che JSON.stringify produce
@@ -1239,7 +1250,7 @@ export function replaceFaqInBodyFile(filePath, faqArray, articleId, gate = {}) {
   // controlla la sintassi JS del file, e un literal TS con un backslash di
   // troppo e' sintatticamente perfetto. Il difetto e' nel LIVELLO ANNIDATO, e
   // si manifesta solo quando qualcun altro fa JSON.parse del valore.
-  const safeFaqArray = sanitizeArticleFaqMarkdown(faqArray, gate.locale);
+  const safeFaqArray = sanitizeArticleFaqMarkdown(safeFaq, locale);
   const jsonStr = escapeForSingleQuoteTS(JSON.stringify(safeFaqArray));
   // Use escape-aware regex: (?:[^'\\]|\\.)* correctly skips \' sequences.
   // `g` + last match: write the occurrence that is actually LIVE at
@@ -1269,7 +1280,8 @@ export function replaceFaqInBodyFile(filePath, faqArray, articleId, gate = {}) {
  * Finds the last body key line and appends the FAQ key after it, before `};`
  */
 export function insertFaqIntoBodyFile(filePath, articleId, faqArray, gate = {}) {
-  assertFaqPairsHaveNoRejectedControls(faqArray, 'FAQ writer');
+  const safeFaq = assertFaqPairsHaveNoRejectedControls(faqArray, 'FAQ writer');
+  const locale = gate.locale || basename(dirname(resolve(filePath)));
   let content = read(filePath);
 
   // Already has FAQ? Replace instead of insert.
@@ -1280,12 +1292,13 @@ export function insertFaqIntoBodyFile(filePath, articleId, faqArray, gate = {}) 
   if (!passesLocalizedToponymGate({
     filePath,
     articleId,
-    locale: gate.locale,
+    locale,
     sourceFaq: gate.sourceFaq,
-    targetFaq: gate.targetFaq || faqArray,
+    targetFaq: gate.targetFaq || safeFaq,
   })) return false;
 
-  const faqJsonStr = JSON.stringify(sanitizeArticleFaqMarkdown(faqArray, gate.locale));
+  assertFaqWritePassesFiscalGate(filePath, articleId, locale, safeFaq);
+  const faqJsonStr = JSON.stringify(sanitizeArticleFaqMarkdown(safeFaq, locale));
   const escapedFaq = escapeForSingleQuoteTS(faqJsonStr);
   const faqLine = `    'blog.article.${articleId}.faq': '${escapedFaq}',`;
 
@@ -1466,6 +1479,25 @@ export function writeTranslatedFaq(options, { localePath, articleId, locale, sou
   return written;
 }
 
+function recordQualityRejectedTranslation(options, articleId, locale, sourceFaq, res, error) {
+  if (!res?.faq) return;
+  recordTranslation(options, articleId, locale, sourceFaq, {
+    ...res,
+    rejected: true,
+    reason: error?.message || 'FAQ content rejected by quality gate',
+  });
+}
+
+/** A deterministic Italian FAQ rejection fails this article without aborting the batch. */
+export function captureItalianFaqWrite(write) {
+  try {
+    return { written: write() === true, rejection: null };
+  } catch (error) {
+    if (!error?.qualityReject) throw error;
+    return { written: false, rejection: error };
+  }
+}
+
 // ── Process single article ───────────────────────────────────
 
 async function processArticle(articleId, file, itBodyContent, options) {
@@ -1531,7 +1563,13 @@ async function processArticle(articleId, file, itBodyContent, options) {
 
   // 4. Write Italian FAQ
   const itPath = `${bodyDir}/it/${file}`;
-  if (!insertFaqIntoBodyFile(itPath, articleId, validFaq)) {
+  const italianWrite = captureItalianFaqWrite(() => insertFaqIntoBodyFile(itPath, articleId, validFaq));
+  if (italianWrite.rejection) {
+    const reason = italianWrite.rejection.message || 'FAQ rejected by quality gate';
+    console.error(`${label} ⚠️  IT FAQ rejected by the quality gate: ${reason}; leaving the article unchanged`);
+    return { success: false, error: `IT FAQ rejected: ${reason}` };
+  }
+  if (!italianWrite.written) {
     return { success: false, error: 'Failed to write IT FAQ' };
   }
 
@@ -1576,7 +1614,14 @@ async function processArticle(articleId, file, itBodyContent, options) {
 
       // Il registro si aggiorna DOPO lo scrittore, e solo se ha scritto.
       if (res?.faq) {
-        writeTranslatedFaq(options, { localePath, articleId, locale, sourceFaq: validFaq, res });
+        try {
+          writeTranslatedFaq(options, { localePath, articleId, locale, sourceFaq: validFaq, res });
+        } catch (err) {
+          if (!err?.qualityReject) throw err;
+          recordQualityRejectedTranslation(options, articleId, locale, validFaq, res, err);
+          console.error(`${label} ⚠️  ${locale.toUpperCase()} translation rejected by the quality gate: `
+            + `${err.message}; leaving the locale unchanged`);
+        }
       } else {
         insertFaqIntoBodyFile(localePath, articleId, faqForLocale, {
           locale,
@@ -1645,7 +1690,13 @@ async function processTopUp(articleId, file, itContent, existingFaq, options) {
 
   // 3. Write updated IT FAQ
   const itPath = `${bodyDir}/it/${file}`;
-  if (!replaceFaqInBodyFile(itPath, validMerged, articleId)) {
+  const italianWrite = captureItalianFaqWrite(() => replaceFaqInBodyFile(itPath, validMerged, articleId));
+  if (italianWrite.rejection) {
+    const reason = italianWrite.rejection.message || 'FAQ rejected by quality gate';
+    console.error(`${label} ⚠️  IT FAQ rejected by the quality gate: ${reason}; keeping the existing FAQ`);
+    return { success: false, error: `IT FAQ rejected: ${reason}` };
+  }
+  if (!italianWrite.written) {
     return { success: false, error: 'Failed to write updated IT FAQ' };
   }
 
@@ -1658,8 +1709,10 @@ async function processTopUp(articleId, file, itContent, existingFaq, options) {
       // Il fallback italiano vale solo finche' la traduzione NON e' scritta:
       // dopo, un errore qualunque non deve sovrascriverla con l'italiano.
       let written = false;
+      let translationResult = null;
       try {
         const res = await translateFaq(validMerged, locale);
+        translationResult = res;
         if (res.faq) {
           written = writeTranslatedFaq(options, { localePath, articleId, locale, sourceFaq: validMerged, res });
           console.error(`${label} ✅ ${locale.toUpperCase()} translated (${res.faq.length} pairs)`);
@@ -1681,6 +1734,10 @@ async function processTopUp(articleId, file, itContent, existingFaq, options) {
         if (written) {
           console.error(`${label} ⚠️  ${locale.toUpperCase()} error after the translation was written: `
             + `${err.message}; keeping the translation`);
+        } else if (err?.qualityReject) {
+          recordQualityRejectedTranslation(options, articleId, locale, validMerged, translationResult, err);
+          console.error(`${label} ⚠️  ${locale.toUpperCase()} translation rejected by the quality gate: `
+            + `${err.message}; leaving the locale unchanged`);
         } else {
           insertFaqIntoBodyFile(localePath, articleId, validMerged, {
             locale,
@@ -1707,8 +1764,10 @@ async function processTranslation(articleId, file, itFaq, missingLocales, option
     const localePath = `${bodyDir}/${locale}/${file}`;
     if (!existsSync(resolve(localePath))) continue;
 
+    let translationResult = null;
     try {
       const res = await translateFaq(itFaq, locale);
+      translationResult = res;
       if (res.faq) {
         // Nessun controllo di lingua qui: la guardia sta in `translateFaq()`,
         // l'unico punto da cui esce una FAQ tradotta.
@@ -1727,6 +1786,9 @@ async function processTranslation(articleId, file, itFaq, missingLocales, option
           + (res.rejected ? 'traduzione rifiutata (lingua sbagliata)' : 'translation null'));
       }
     } catch (err) {
+      if (err?.qualityReject) {
+        recordQualityRejectedTranslation(options, articleId, locale, itFaq, translationResult, err);
+      }
       console.error(`${label} ❌ ${locale.toUpperCase()}: ${err.message}`);
     }
   }

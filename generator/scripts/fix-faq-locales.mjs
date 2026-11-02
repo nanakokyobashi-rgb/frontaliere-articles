@@ -34,6 +34,7 @@ import {
   assertLocalizedToponymPair,
   extractArticleProjectionText,
 } from './lib/localized-toponyms.mjs';
+import { assertFaqPassesFiscalClaimsGate } from './lib/article-ymyl-gate.mjs';
 import { sanitizeArticleFaqMarkdown } from '../../scripts/lib/article-link-contract.mjs';
 import { assertFaqPairsHaveNoRejectedControls } from '../../scripts/lib/faq-control-contract.mjs';
 
@@ -293,6 +294,14 @@ function passesLocalizedToponymGate(filePath, articleId, locale, faqArray) {
   }
 }
 
+function assertFaqWritePassesFiscalGate(filePath, articleId, locale, faqArray) {
+  assertFaqPassesFiscalClaimsGate({
+    locale,
+    articleText: articleProjectionText(filePath, articleId, { excludeFaq: true }),
+    faq: faqArray,
+  });
+}
+
 /** Il literal `.faq` vivo di un file, ancora escapato. `null` se non c'e'. */
 function rawFaqLiteral(filePath, id = idOfBodyPath(filePath)) {
   if (!existsSync(filePath)) return null;
@@ -316,12 +325,18 @@ export function hasFaqKey(filePath, id = idOfBodyPath(filePath)) {
   return new RegExp(`${faqKeyRx(id)}\\s*:`).test(readFileSync(filePath, 'utf-8'));
 }
 
-export function replaceFaqInFile(filePath, newFaqArray, id = idOfBodyPath(filePath)) {
+function replaceFaqInFileInternal(filePath, newFaqArray, id, { contentPreserving = false } = {}) {
   const locale = basename(dirname(resolve(filePath)));
-  const safeFaq = assertFaqPairsHaveNoRejectedControls(newFaqArray, `FAQ replacement ${id}`);
-  if (!passesLocalizedToponymGate(filePath, id, locale, safeFaq)) return false;
+  const safeFaq = contentPreserving
+    ? newFaqArray
+    : assertFaqPairsHaveNoRejectedControls(newFaqArray, `FAQ replacement ${id}`);
+  if (!contentPreserving) {
+    if (!passesLocalizedToponymGate(filePath, id, locale, safeFaq)) return false;
+    assertFaqWritePassesFiscalGate(filePath, id, locale, safeFaq);
+  }
   let content = readFileSync(filePath, 'utf-8');
-  const jsonStr = serializeFaqLiteral(sanitizeArticleFaqMarkdown(safeFaq, locale));
+  const faqToWrite = contentPreserving ? safeFaq : sanitizeArticleFaqMarkdown(safeFaq, locale);
+  const jsonStr = serializeFaqLiteral(faqToWrite);
   // Escape-aware regex + function replacer to avoid $-pattern issues.
   // `g` + last match: write the occurrence that is actually LIVE at
   // runtime, same reasoning as extractFaqFromFile above. Ancorata all'id:
@@ -338,10 +353,23 @@ export function replaceFaqInFile(filePath, newFaqArray, id = idOfBodyPath(filePa
   return true;
 }
 
+export function replaceFaqInFile(filePath, newFaqArray, id = idOfBodyPath(filePath)) {
+  return replaceFaqInFileInternal(filePath, newFaqArray, id);
+}
+
+function replaceFaqInFileForReescape(filePath, faqArray, id = idOfBodyPath(filePath)) {
+  // The caller has already proved an exact parse/serialize round-trip. This
+  // repair changes only the TypeScript encoding of the existing FAQ, so it
+  // must preserve the legacy content byte-for-byte at the value level and
+  // must not reapply admission gates intended for new FAQ content.
+  return replaceFaqInFileInternal(filePath, faqArray, id, { contentPreserving: true });
+}
+
 function insertFaqKey(filePath, articleId, faqArray) {
   const locale = basename(dirname(resolve(filePath)));
   const safeFaq = assertFaqPairsHaveNoRejectedControls(faqArray, `FAQ insertion ${articleId}`);
   if (!passesLocalizedToponymGate(filePath, articleId, locale, safeFaq)) return false;
+  assertFaqWritePassesFiscalGate(filePath, articleId, locale, safeFaq);
   let content = readFileSync(filePath, 'utf-8');
   const jsonStr = serializeFaqLiteral(sanitizeArticleFaqMarkdown(safeFaq, locale));
   const closingIdx = content.lastIndexOf('};');
@@ -878,7 +906,7 @@ function reescapeBroken(bodyDir, limit) {
         continue;
       }
       repaired.push(`${locale}/${file}`);
-      if (!DRY_RUN && !replaceFaqInFile(filePath, pairs)) repaired.pop();
+      if (!DRY_RUN && !replaceFaqInFileForReescape(filePath, pairs)) repaired.pop();
     }
   }
   console.log(`\n📊 ${DRY_RUN ? 'Da riparare' : 'Riparati'}: ${repaired.length} file`);

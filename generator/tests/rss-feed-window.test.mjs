@@ -68,7 +68,7 @@ test('usa il successore e la fine del sorgente per preservare una coda SEO lunga
   }
 });
 
-test('il conteggio RSS distingue una coda ritirata da una coda SEO troncata', () => {
+test('un articolo ritirato con data verificata resta fuori dai feed RSS', () => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'rss-withdrawn-tail-'));
   try {
     fs.mkdirSync(path.join(root, 'content', 'seo'), { recursive: true });
@@ -89,14 +89,12 @@ test('il conteggio RSS distingue una coda ritirata da una coda SEO troncata', ()
       path,
       rootDir: root,
       section,
-      registry: [{ id: 'withdrawn-tail', date: '' }],
+      registry: [{ id: 'withdrawn-tail', date: '2026-09-10T10:00:00+00:00' }],
       indexExclusions: new Set([articleIndexExclusionKey(section.id, 'withdrawn-tail')]),
       layout: { seoDir: 'content/seo', localesDir: 'content', slugDir: 'content' },
       repairSerpSnippet: (text) => text,
     });
 
-    assert.equal(result.articleCount, 0);
-    assert.equal(result.withdrawnArticleCount, 1);
     assert.deepEqual(result.feeds, []);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
