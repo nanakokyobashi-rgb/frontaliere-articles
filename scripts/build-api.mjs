@@ -1157,14 +1157,14 @@ for (const section of rssSections) {
   const familyPolicy = floorPolicyOf(section.id) === 'family';
   // A historical section may legitimately have no feed only when every
   // registry identity is represented in the parsed SEO set and every parsed
-  // identity is withdrawn by the index ledger. Compare identities, not the
-  // ledger cardinality: an active entry with an unknown date must keep the
-  // empty-feed guard fail-closed even when an unrelated withdrawn entry exists.
+  // identity is withdrawn by the index ledger. The mirrored engine's
+  // articleCount may describe parsed SEO rows or emitted items across versions,
+  // while feeds describes emitted content; compare identities rather than
+  // relying on that count or an engine-specific withdrawn counter.
   const sourceSection = RSS_SECTIONS.find((candidate) => candidate.id === section.id);
   const parsedIds = sourceSection ? parsedSeoEntryIds(sourceSection) : new Set();
   const registryIds = new Set((SECTION_REGISTRIES[section.id] ?? []).map((article) => article.id));
-  const ledgerOnly = section.articleCount === 0
-    && section.withdrawnArticleCount > 0
+  const ledgerOnly = section.feeds.length === 0
     && parsedIds.size > 0
     && [...registryIds].every((id) => parsedIds.has(id))
     && [...parsedIds].every((id) => articleIndexExclusions.has(articleIndexExclusionKey(section.id, id)));
