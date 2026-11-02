@@ -465,7 +465,7 @@ import {
 } from './lib/registry-article-type.mjs';
 // D13 sezioni cantonali: il campo multi-label `canton` della voce del registry,
 // dal classificatore deterministico (nessun LLM, nessun gate).
-import { registryCantonsForArticle } from './lib/canton-classifier.mjs';
+import { defaultCantonClassifier, registryCantonsForArticle } from './lib/canton-classifier.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { assertFaqPairsHaveNoRejectedControls } from '../../scripts/lib/faq-control-contract.mjs';
 import {
@@ -3204,6 +3204,23 @@ function write(rel, content) {
 // The lock mechanism itself lives in lib/register-lock.mjs, not here — see
 // that module's header for why (this file imports jsdom statically, so
 // nothing inside it is reachable by `node --test` without node_modules).
+let cantonRelevanceDataUnavailableLogged = false;
+
+/** Matcher cantonale gia' caricato, solo per una sezione cantonale. */
+function cantonRelevanceMatcher(section) {
+  if (typeof section !== 'string' || !section.startsWith('canton-')) return undefined;
+  try {
+    return defaultCantonClassifier().isInCantonArea;
+  } catch (error) {
+    if (error?.code !== 'ENOENT') throw error;
+    if (!cantonRelevanceDataUnavailableLogged) {
+      console.error('  ⚠️ topic-gate: dati dei luoghi cantonali non disponibili; senza un nesso esplicito il topic verra\' scartato');
+      cantonRelevanceDataUnavailableLogged = true;
+    }
+    return undefined;
+  }
+}
+
 /**
  * I cantoni della voce del registry (D13). Dato additivo e interno: non
  * decide nulla della generazione e non entra nell'API pubblicata, quindi un
@@ -5852,7 +5869,9 @@ export function assertArticlePassesFactualityGates(data, options = {}) {
   if (options.writer !== 'journalist') {
     const sectionName = options.sectionName
       || (typeof SECTION_NAME === 'string' ? SECTION_NAME : 'frontaliere');
-    assertArticleRelevance(data, sectionName);
+    assertArticleRelevance(data, sectionName, {
+      isInCantonArea: cantonRelevanceMatcher(sectionName),
+    });
     assertYmylPublishable(data, {
       sourceUrl: options.sourceUrl ?? data?._sourceUrl ?? data?.sourceUrl ?? '',
     });
@@ -19392,7 +19411,9 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     // vede l'articolo sull'Iran che dice «frontalieri» dieci volte: decide cio'
     // di cui l'articolo dichiara di parlare (lib/article-relevance-gate.mjs).
     // Stesso rifiuto del topic-gate: niente pubblicazione, il ranker prosegue.
-    assertArticleRelevance(data, SECTION_NAME);
+    assertArticleRelevance(data, SECTION_NAME, {
+      isInCantonArea: cantonRelevanceMatcher(SECTION_NAME),
+    });
 
     // Step 3a.0-headline: Google News compliance — A5
     //

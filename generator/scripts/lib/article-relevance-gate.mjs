@@ -132,6 +132,13 @@ function hasGenericNexus(text) {
   return GENERIC_NEXUS_RE.test(text);
 }
 
+function hasCantonLocalAnchor(section, text, isInCantonArea) {
+  if (typeof section !== 'string' || !section.startsWith('canton-')
+    || typeof isInCantonArea !== 'function') return false;
+  const canton = section.slice('canton-'.length).replaceAll('-', '').toUpperCase();
+  return isInCantonArea(canton, text);
+}
+
 function offTopicFamily(text) {
   for (const [family, re] of Object.entries(OFF_TOPIC_FAMILIES)) {
     const match = re.exec(text);
@@ -141,10 +148,11 @@ function offTopicFamily(text) {
 }
 
 /**
- * @param {{section?: string, id?: string, title?: string, excerpt?: string, body?: string}} article testi italiani
+ * @param {{section?: string, id?: string, title?: string, excerpt?: string, body?: string,
+ *   isInCantonArea?: (canton: string, text: string) => boolean}} article testi italiani e matcher pre-caricato
  * @returns {{relevant: true} | {relevant: false, rule: 'fuori-tema'|'senza-ancore', family?: string, term?: string}}
  */
-export function classifyArticleRelevance({ section = 'frontaliere', id = '', title = '', excerpt = '', body = '' }) {
+export function classifyArticleRelevance({ section = 'frontaliere', id = '', title = '', excerpt = '', body = '', isInCantonArea }) {
   const declared = declaredText({ id, title });
 
   // Una famiglia «esteri» in un titolo che nomina una provincia di confine e' un
@@ -169,10 +177,13 @@ export function classifyArticleRelevance({ section = 'frontaliere', id = '', tit
     // The Swiss/canton sections are Swiss by construction for a neutral title
     // such as «Herisau». A generic work/fiscal term is different: it must not
     // turn an otherwise unanchored foreign topic into a Swiss article. But the
-    // body or excerpt can supply the Swiss anchor that the title lacks.
+    // body or excerpt can supply the Swiss anchor that the title lacks; a
+    // local place can also anchor a generic title to its canton section.
     if (declaredHasGenericNexus) {
-      const supportingText = ` ${normalizeText(`${excerpt} ${body}`)} `;
-      if (hasStrongNexus(supportingText) || BODY_ANCHOR_RE.test(supportingText)) {
+      const supportingText = ` ${normalizeText(`${declared} ${excerpt} ${body}`)} `;
+      if (hasStrongNexus(supportingText)
+        || BODY_ANCHOR_RE.test(supportingText)
+        || hasCantonLocalAnchor(section, supportingText, isInCantonArea)) {
         return { relevant: true };
       }
       return { relevant: false, rule: 'senza-ancore' };
@@ -213,8 +224,9 @@ export function articleBodyText(content = {}) {
  *
  * @param {{id?: string, content?: {it?: Record<string, string>}}} data
  * @param {string} section sezione di pubblicazione
+ * @param {{isInCantonArea?: (canton: string, text: string) => boolean}} [options] matcher cantonale gia' caricato dal generatore
  */
-export function assertArticleRelevance(data, section) {
+export function assertArticleRelevance(data, section, { isInCantonArea } = {}) {
   const it = data?.content?.it ?? {};
   const verdict = classifyArticleRelevance({
     section,
@@ -222,6 +234,7 @@ export function assertArticleRelevance(data, section) {
     title: it.title,
     excerpt: it.excerpt,
     body: articleBodyText(it),
+    isInCantonArea,
   });
   if (verdict.relevant) return verdict;
   const detail = verdict.term ? ` (${verdict.family}: «${verdict.term}»)` : '';
