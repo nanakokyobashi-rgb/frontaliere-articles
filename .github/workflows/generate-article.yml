@@ -2100,12 +2100,14 @@ jobs:
       # Publish-api controlla la completezza dopo il push, quando il nuovo
       # articolo e' gia' su main. Lo stesso gate va eseguito sul percorso di
       # scrittura: una traduzione senza una chiave body non deve bloccare la
-      # superficie HTTP dopo essere entrata nel corpus.
+      # superficie HTTP dopo essere entrata nel corpus. Qui il controllo è
+      # limitato ai body cambiati da questa generazione; publish-api mantiene
+      # il controllo corpus-wide prima di pubblicare la superficie.
       - name: Guard — l'articolo generato ha tutti i body localizzati
         if: steps.mode.outputs.dry != 'true' && steps.generate.outputs.article == 'true'
         run: |
           set -uo pipefail
-          if node scripts/ci/check-blog-locale-completeness.mjs; then
+          if node scripts/ci/check-blog-locale-completeness.mjs --changed-paths; then
             exit 0
           fi
           {

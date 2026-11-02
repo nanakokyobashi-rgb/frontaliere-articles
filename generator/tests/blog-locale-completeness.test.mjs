@@ -7,6 +7,8 @@ import { fileURLToPath } from 'node:url';
 import {
   BODY_FIELDS,
   BODY_ROOTS,
+  TARGET_LOCALES,
+  parseGitStatusPaths,
   extractBodyFields,
   inspectBlogLocaleCompleteness,
 } from '../../scripts/ci/check-blog-locale-completeness.mjs';
@@ -97,6 +99,22 @@ test('extractBodyFields rejects interpolation before returning partial body keys
   assert.throws(() => extractBodyFields(source), /Interpolated template literal/u);
 });
 
+test('parseGitStatusPaths conserva i path modificati anche con spazi e rename', () => {
+  const status = [
+    ' M content/blog-body/en/with spaces.ts',
+    '?? content/blog-body/fr/new-body.ts',
+    'R  content/blog-body/it/old-body.ts',
+    'content/blog-body/it/new-body.ts',
+    '',
+  ].join('\0');
+  assert.deepEqual(parseGitStatusPaths(status), [
+    'content/blog-body/en/with spaces.ts',
+    'content/blog-body/fr/new-body.ts',
+    'content/blog-body/it/old-body.ts',
+    'content/blog-body/it/new-body.ts',
+  ]);
+});
+
 test('FU-009 — il controllo rileva chiavi mancanti e copie italiane', () => {
   const root = fixtureRoot();
   const id = 'demo';
@@ -164,10 +182,74 @@ test('FU-009 — il pavimento impedisce uno scan vuoto', () => {
   assert.equal(report.counts['source-field-floor'], HISTORICAL_BODY_ROOTS.length);
 });
 
+test('FU-009 scoped — una scrittura valida non eredita violazioni di altri articoli', () => {
+  const root = fixtureRoot();
+  const target = 'scoped-target';
+  const unrelated = 'preexisting-incomplete';
+  const source = { body1: 'Testo italiano uno', body2: 'Testo italiano due', body3: 'Testo italiano tre' };
+  const translations = {
+    en: { body1: 'English text one', body2: 'English text two', body3: 'English text three' },
+    de: { body1: 'Deutscher Text eins', body2: 'Deutscher Text zwei', body3: 'Deutscher Text drei' },
+    fr: { body1: 'Texte français un', body2: 'Texte français deux', body3: 'Texte français trois' },
+  };
+
+  for (const { rel } of BODY_ROOTS) {
+    writeArticle(root, rel, 'it', target, source);
+    for (const locale of TARGET_LOCALES) writeArticle(root, rel, locale, target, translations[locale]);
+    writeArticle(root, rel, 'it', unrelated, source);
+    writeArticle(root, rel, 'en', unrelated, { body1: 'Only one translated field' });
+  }
+
+  const full = inspectBlogLocaleCompleteness({ root, minItalianFiles: 1, minItalianFields: 1 });
+  assert.equal(full.ok, false, 'il corpus completo deve vedere il residuo preesistente');
+
+  const changedPaths = BODY_ROOTS.map(({ rel }) => `${rel}/en/${target}.ts`);
+  const scoped = inspectBlogLocaleCompleteness({
+    root,
+    minItalianFiles: 1,
+    minItalianFields: 1,
+    changedPaths,
+  });
+  assert.equal(scoped.ok, true, 'il writer deve verificare il target senza ereditare il residuo');
+  assert.equal(scoped.scoped, true);
+  assert.deepEqual(scoped.violations, []);
+
+  writeArticle(root, BODY_ROOTS[0].rel, 'de', target, { body1: 'Nur ein Feld' });
+  const targetBroken = inspectBlogLocaleCompleteness({
+    root,
+    minItalianFiles: 1,
+    minItalianFields: 1,
+    changedPaths: [changedPaths[0]],
+  });
+  assert.equal(targetBroken.ok, false, 'lo scope non deve nascondere un locale del target rotto');
+  assert.ok(targetBroken.violations.some((violation) => violation.code === 'missing-key'));
+});
+
 test('publish-api espone il gate di completezza prima delle credenziali', () => {
   const workflow = fs.readFileSync(path.join(ROOT, '.github/workflows/publish-api.yml'), 'utf8');
   const gate = workflow.indexOf('check-blog-locale-completeness.mjs');
   const credentials = workflow.indexOf('Prepare Firebase credentials');
   assert.ok(gate >= 0, 'publish-api non richiama il gate FU-009');
   assert.ok(gate < credentials, 'il gate FU-009 deve precedere le credenziali di produzione');
+});
+
+test('i writer scansionano il delta dei body e publish-api conserva il gate globale', () => {
+  const writerFiles = [
+    'generate-article-core.yml',
+    'generate-article.yml',
+    'generate-border-wait-ranking-weekly.yml',
+    'generate-daily-brief.yml',
+    'publish-journalist-articles.yml',
+    'refresh-events-digest.yml',
+  ];
+  for (const file of writerFiles) {
+    const workflow = fs.readFileSync(path.join(ROOT, '.github/workflows', file), 'utf8');
+    const calls = workflow.match(/node scripts\/ci\/check-blog-locale-completeness\.mjs[^\n]*/g) ?? [];
+    assert.ok(calls.length > 0, `${file}: manca la guardia FU-009`);
+    assert.ok(calls.every((call) => call.includes('--changed-paths')), `${file}: guardia non scoped`);
+  }
+
+  const publishApi = fs.readFileSync(path.join(ROOT, '.github/workflows/publish-api.yml'), 'utf8');
+  assert.match(publishApi, /run: node scripts\/ci\/check-blog-locale-completeness\.mjs\n/);
+  assert.doesNotMatch(publishApi, /check-blog-locale-completeness\.mjs --changed-paths/);
 });

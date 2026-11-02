@@ -114147,6 +114147,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-quota-regionale-salute-2027': {
+    title: 'Frontalieri, la tassa salute proposta: 30-150 euro dal 2027',
+    description: 'Il testo prevede una quota fissa: 30-150 euro dal 2027 La cifra sarà decisa ogni anno dalla regione di residenza Il vecchio criterio era dal 3% al 6%',
+    keywords: 'frontalieri, ticino, svizzera, italia, tassa, salute, proposta, 30-150',
+    ogTitle: 'Frontalieri, tassa salute proposta dal 2027',
+    ogDescription: 'Il testo prevede una quota fissa: 30-150 euro dal 2027 La cifra sarà decisa ogni anno dalla regione di residenza Il vecchio criterio era dal 3% al 6%',
+    canonicalPath: '/articoli-frontaliere/quota-regionale-salute-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Frontalieri, la tassa salute proposta: 30-150 euro dal 2027",
+      "description": "Il testo prevede una quota fissa: 30-150 euro dal 2027 La cifra sarà decisa ogni anno dalla regione di residenza Il vecchio criterio era dal 3% al 6%",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-quota-regionale-salute-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-02T22:45:17+00:00",
+      "dateModified": "2026-11-02T22:45:17+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/quota-regionale-salute-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

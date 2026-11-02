@@ -1092,7 +1092,7 @@ test('il writer journalist applica lo stesso preflight prima del commit', () => 
     `      - name: ${guardName}`,
     '      - name: Commit and push registered articles',
   );
-  assert.match(block, /if ! node scripts\/ci\/check-blog-locale-completeness\.mjs; then/);
+  assert.match(block, /if ! node scripts\/ci\/check-blog-locale-completeness\.mjs --changed-paths; then/);
   assert.ok(!/continue-on-error/.test(block), 'il preflight journalist non puo\' essere advisory');
 });
 
@@ -1132,7 +1132,7 @@ test('tutti i writer deterministici dei body bloccano il commit su localizzazion
     const localeGateAt = block.indexOf('node scripts/ci/check-blog-locale-completeness.mjs');
     assert.ok(corpusGuardAt >= 0, `${name}: suite corpus assente`);
     assert.ok(localeGateAt > corpusGuardAt, `${name}: FU-009 deve seguire le suite corpus`);
-    assert.match(block, /if ! node scripts\/ci\/check-blog-locale-completeness\.mjs; then/);
+    assert.match(block, /if ! node scripts\/ci\/check-blog-locale-completeness\.mjs --changed-paths; then/);
     assert.ok(!/continue-on-error/.test(block), `${name}: FU-009 non puo\' essere advisory`);
     assert.ok(
       localeGateAt < block.lastIndexOf('exit 0'),

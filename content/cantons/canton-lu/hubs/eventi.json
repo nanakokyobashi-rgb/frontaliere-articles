@@ -4,17 +4,17 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "eventi",
-  "updatedAt": "2026-11-02T09:20:10.429Z",
-  "contentHash": "3a4c51d7d01b4a02b0b0dba0533f5696c79d7ac2b091a1456e5576aa97721d97",
+  "updatedAt": "2026-11-02T22:49:37.019Z",
+  "contentHash": "f7ec7683c3dc0813c1f79a8b2d7a0923fb9930713253da1e4b9a9df10d4ad994",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-02T02:24:34.417Z",
+      "updatedAt": "2026-11-02T13:10:19.053Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-01T21:24:45.283Z",
+      "updatedAt": "2026-11-02T13:52:53.767Z",
       "keyFacts": 0
     }
   ],
@@ -99,13 +99,18 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/lucerna/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Winter Qi Gong Inseli",
+              "date": "2026-11-02T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694113"
+            },
             {
               "label": "Bewegung und Begegnung - Feldenkrais",
               "date": "2026-11-01T23:00:00.000Z",
@@ -130,14 +135,9 @@
               "label": "Winter Qi Gong Waldfriedhof Staffeln",
               "date": "2026-10-29T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694299"
-            },
-            {
-              "label": "«Trop chaud» - Klimaseniorinnen - Film im Rahmen der «Lebensreise»",
-              "date": "2026-10-27T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7629670"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -171,7 +171,7 @@
           "url": "/eventi/lucerna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-02T22:49:37.019Z"
     },
     "en": {
       "canton": "LU",
@@ -253,13 +253,18 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/lucerne/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Winter Qi Gong Inseli",
+              "date": "2026-11-02T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694113"
+            },
             {
               "label": "Bewegung und Begegnung - Feldenkrais",
               "date": "2026-11-01T23:00:00.000Z",
@@ -284,14 +289,9 @@
               "label": "Winter Qi Gong Waldfriedhof Staffeln",
               "date": "2026-10-29T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694299"
-            },
-            {
-              "label": "«Trop chaud» - Klimaseniorinnen - Film im Rahmen der «Lebensreise»",
-              "date": "2026-10-27T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7629670"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -325,7 +325,7 @@
           "url": "/en/events/lucerne/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-02T22:49:37.019Z"
     },
     "de": {
       "canton": "LU",
@@ -407,13 +407,18 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/luzern/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Winter Qi Gong Inseli",
+              "date": "2026-11-02T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694113"
+            },
             {
               "label": "Bewegung und Begegnung - Feldenkrais",
               "date": "2026-11-01T23:00:00.000Z",
@@ -438,14 +443,9 @@
               "label": "Winter Qi Gong Waldfriedhof Staffeln",
               "date": "2026-10-29T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694299"
-            },
-            {
-              "label": "«Trop chaud» - Klimaseniorinnen - Film im Rahmen der «Lebensreise»",
-              "date": "2026-10-27T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7629670"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -479,7 +479,7 @@
           "url": "/de/veranstaltungen/luzern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-02T22:49:37.019Z"
     },
     "fr": {
       "canton": "LU",
@@ -561,13 +561,18 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/lucerne/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Winter Qi Gong Inseli",
+              "date": "2026-11-02T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694113"
+            },
             {
               "label": "Bewegung und Begegnung - Feldenkrais",
               "date": "2026-11-01T23:00:00.000Z",
@@ -592,14 +597,9 @@
               "label": "Winter Qi Gong Waldfriedhof Staffeln",
               "date": "2026-10-29T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694299"
-            },
-            {
-              "label": "«Trop chaud» - Klimaseniorinnen - Film im Rahmen der «Lebensreise»",
-              "date": "2026-10-27T23:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7629670"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -633,7 +633,7 @@
           "url": "/fr/evenements/lucerne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-02T22:49:37.019Z"
     }
   }
 }

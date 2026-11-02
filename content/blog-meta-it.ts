@@ -13667,6 +13667,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.tassa-salute-ristorni-tavolo-lavoro.title': 'Tassa sulla salute e ristorni, presto tavolo di lavoro',
     'blog.article.tassa-salute-ristorni-tavolo-lavoro.excerpt': 'Tavolo a breve su tassa salute e ristorni Berna, Roma, Ticino e Lombardia al tavolo Incontro a Berna con Guy Parmelin Delegazione composta da tre esponenti',
     'blog.article.tassa-salute-ristorni-tavolo-lavoro.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.quota-regionale-salute-2027.title': 'Frontalieri, la tassa salute proposta: 30-150 euro dal 2027',
+    'blog.article.quota-regionale-salute-2027.excerpt': 'Il testo prevede una quota fissa: 30-150 euro dal 2027 La cifra sarà decisa ogni anno dalla regione di residenza Il vecchio criterio era dal 3% al 6%',
+    'blog.article.quota-regionale-salute-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaIt;

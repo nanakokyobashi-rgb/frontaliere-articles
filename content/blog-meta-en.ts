@@ -13666,6 +13666,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.tassa-salute-ristorni-tavolo-lavoro.title': 'Health tax and rebates, working group soon',
     'blog.article.tassa-salute-ristorni-tavolo-lavoro.excerpt': 'Talks soon on health tax and tax rebates Bern, Rome, Ticino and Lombardy at the table Meeting in Bern with Guy Parmelin Delegation made up of three representatives',
     'blog.article.tassa-salute-ristorni-tavolo-lavoro.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.quota-regionale-salute-2027.title': 'Cross-border workers, proposed healthcare tax: 30-150 euros from 2027',
+    'blog.article.quota-regionale-salute-2027.excerpt': 'The text provides for a fixed fee: 30-150 euro from 2027 The amount will be decided every year by the region of residence The old criterion was from 3% to 6%',
+    'blog.article.quota-regionale-salute-2027.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaEn;

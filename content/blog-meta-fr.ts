@@ -13668,6 +13668,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.tassa-salute-ristorni-tavolo-lavoro.title': 'Taxe sur la santé et ristournes, bientôt un groupe de travail',
     'blog.article.tassa-salute-ristorni-tavolo-lavoro.excerpt': 'Bientôt un groupe de travail sur la taxe santé et les ristournes Berne, Rome, le Tessin et la Lombardie à la table des négociations Rencontre à Berne avec Guy Parmelin Délégation composée de trois représentants',
     'blog.article.tassa-salute-ristorni-tavolo-lavoro.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.quota-regionale-salute-2027.title': 'Frontaliers, la taxe santé proposée : 30-150 euro à partir de 2027',
+    'blog.article.quota-regionale-salute-2027.excerpt': 'Le texte prévoit un montant fixe : 30-150 euro à partir de 2027 Le montant sera fixé chaque année par la région de résidence L\'ancien critère était de 3% à 6%',
+    'blog.article.quota-regionale-salute-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaFr;
