@@ -19599,7 +19599,9 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
           // computed them), so the writer repairs the passage instead of
           // deleting it. Unlike the LLM verifier's issues, each of these is a
           // verified fact about the text, so the feedback cannot mislead.
-          lastFactCheckErrors = formatRemediation(gateResult.blocking);
+          lastFactCheckErrors = formatRemediation(gateResult.blocking, {
+            sourceText: factualityGateSourceText(url, pageContent),
+          });
           console.error(`  🔄 Rigenero contenuto IT per gate deterministici (${attempt}/${maxAttempts})...`);
           continue;
         }
@@ -19688,7 +19690,10 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
           // formatRemediation() reports the overflow instead of dropping the
           // tail silently.
           const FACTCHECK_FEEDBACK_CAP = 8;
-          lastFactCheckErrors = formatRemediation(factResult.issues, { cap: FACTCHECK_FEEDBACK_CAP });
+          lastFactCheckErrors = formatRemediation(factResult.issues, {
+            cap: FACTCHECK_FEEDBACK_CAP,
+            sourceText: pageContent,
+          });
           console.error(`  🔄 Rigenero contenuto IT per fact-check fallito (${attempt}/${maxAttempts})...`);
           continue;
         }
@@ -19862,7 +19867,10 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
           // invece di troncare in silenzio.
           if (attempt < maxAttempts && expandFactIssues && expandFactIssues.length > 0) {
             const EXPAND_FACTCHECK_FEEDBACK_CAP = 8; // = FACTCHECK_FEEDBACK_CAP di Step 3a.0c
-            lastFactCheckErrors = formatRemediation(expandFactIssues, { cap: EXPAND_FACTCHECK_FEEDBACK_CAP });
+            lastFactCheckErrors = formatRemediation(expandFactIssues, {
+              cap: EXPAND_FACTCHECK_FEEDBACK_CAP,
+              sourceText: pageContent,
+            });
           }
         }
       }
