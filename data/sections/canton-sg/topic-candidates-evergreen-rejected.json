@@ -19,6 +19,10 @@
     "canton-sg::https://www.stgallen24.ch/articles/415929-axenstrasse-veloshuttle-faehrt-ab-november-nach-winterfahrplan": {
       "section": "canton-sg",
       "ts": 1793529952152
+    },
+    "canton-sg::https://www.sg.ch/news/sgch_kantonspolizei/2026/11/kanton-st-gallen--fahrunfaehige-und-alkoholisierte-verkehrsteiln.html": {
+      "section": "canton-sg",
+      "ts": 1793583822767
     }
   }
 }
