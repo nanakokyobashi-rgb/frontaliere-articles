@@ -92,7 +92,7 @@ for (const file of files) {
   const source = readFileSync(file, 'utf8');
   fileSources.set(file, source);
   if (locale) {
-    for (const match of scanStaticArticleFieldEntries(source)) {
+    for (const match of scanStaticArticleFieldEntries(source, path.relative(ROOT, file))) {
       const key = `${match.articleId}|${match.field}`;
       if (locale === 'it') {
         addSourceValue(match.articleId, match.value);

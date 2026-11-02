@@ -165,13 +165,16 @@ test('lo scanner AST ignora testo a chiave nei valori e nei commenti', () => {
 test('lo scanner fallisce chiuso sulle diagnostiche sintattiche e sui valori dinamici', () => {
   assert.throws(
     () => scanStaticArticleFieldEntries(articleTranslationSource("'blog.article.bad.title': 'non chiuso")),
-    /Unterminated string literal in article-source\.ts/,
+    /Unresolved TypeScript syntax diagnostic in article-source\.ts/,
   );
-  assert.throws(
-    () => scanStaticArticleFieldEntries(articleTranslationSource(
+  assert.deepEqual(
+    scanStaticArticleFieldEntries(articleTranslationSource(
       "'blog.article.bad.title': 'valore' 'blog.article.hidden.title': 'Titolo',",
-    )),
-    /TypeScript syntax error in article-source\.ts/,
+    )).map(({ articleId, field, rawValue }) => ({ articleId, field, rawValue })),
+    [
+      { articleId: 'bad', field: 'title', rawValue: 'valore' },
+      { articleId: 'hidden', field: 'title', rawValue: 'Titolo' },
+    ],
   );
   assert.throws(
     () => scanStaticArticleFieldEntries(articleTranslationSource("'blog.article.bad.title': makeValue()")),
@@ -668,7 +671,7 @@ function collectCorpusEntries() {
     const locale = corpusLocale(file);
     if (!locale) continue;
     const source = readFileSync(file, 'utf8');
-    for (const match of scanStaticArticleFieldEntries(source)) {
+    for (const match of scanStaticArticleFieldEntries(source, path.relative(ROOT, file))) {
       const articleId = match.articleId;
       const entries = byLocale.get(locale).get(articleId) || [];
       entries.push({
