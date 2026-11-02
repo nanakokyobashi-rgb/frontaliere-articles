@@ -69,6 +69,9 @@ const blogMetaCantonFrDe: Record<string, string> = {
     'blog.article.tpf-nuovi-bus-elettrici-friburgo.title': '24 neue TPF-Elektrobusse für städtische und regionale Linien',
     'blog.article.tpf-nuovi-bus-elettrici-friburgo.excerpt': 'Die schrittweise Einführung von 24 neuen TPF-Elektrobussen wird mit dem Fahrplanwechsel im kommenden Dezember auf den städtischen und regionalen Linien beginnen.',
     'blog.article.tpf-nuovi-bus-elettrici-friburgo.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.berra-2030-progetto-canton.title': 'Kanton schlägt 3,54 Millionen für die Mittelstation Berra 2030 vor',
+    'blog.article.berra-2030-progetto-canton.excerpt': 'Der Kanton schlägt CHF 3,54 Millionen für Berra 2030 vor Die Abgeordneten werden in der Novembersession abstimmen Das Dekret sieht CHF 9,06 Millionen',
+    'blog.article.berra-2030-progetto-canton.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonFrDe;

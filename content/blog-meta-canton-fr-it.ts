@@ -69,6 +69,9 @@ const blogMetaCantonFrIt: Record<string, string> = {
     'blog.article.tpf-nuovi-bus-elettrici-friburgo.title': '24 nuovi autobus elettrici TPF per linee urbane e regionali',
     'blog.article.tpf-nuovi-bus-elettrici-friburgo.excerpt': 'L\'inserimento progressivo di 24 nuovi autobus elettrici TPF inizierà con il cambio d\'orario di dicembre prossimo sulle linee urbane e regionali.',
     'blog.article.tpf-nuovi-bus-elettrici-friburgo.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.berra-2030-progetto-canton.title': 'Cantone propone 3,54 milioni per stazione intermedia Berra 2030',
+    'blog.article.berra-2030-progetto-canton.excerpt': 'Il Cantone propone CHF 3,54 milioni per Berra 2030 I deputati voteranno nella sessione di novembre Il decreto prevede CHF 9,06 milioni per il Lac-Noir Berra',
+    'blog.article.berra-2030-progetto-canton.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonFrIt;

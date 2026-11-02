@@ -69,6 +69,9 @@ const blogMetaCantonFrEn: Record<string, string> = {
     'blog.article.tpf-nuovi-bus-elettrici-friburgo.title': '24 new TPF electric buses for urban and regional routes',
     'blog.article.tpf-nuovi-bus-elettrici-friburgo.excerpt': 'The phased introduction of 24 new TPF electric buses will begin with next December’s timetable change on urban and regional routes.',
     'blog.article.tpf-nuovi-bus-elettrici-friburgo.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.berra-2030-progetto-canton.title': 'Canton proposes 3,54 million for Berra 2030 intermediate station',
+    'blog.article.berra-2030-progetto-canton.excerpt': 'The Canton proposes CHF 3,54 million for Berra 2030 The deputies will vote in the November session The decree provides CHF 9,06 million for Lac-Noir Berra 2030',
+    'blog.article.berra-2030-progetto-canton.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonFrEn;

@@ -25,6 +25,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'elezione-consiglio-prefetture-lista-unica': { it: 'elezione-consiglio-prefetture-lista-unica', en: 'election-state-council-prefectures-single-list', de: 'wahl-staatsrat-prefekturen-einzelliste', fr: 'election-conseil-etat-prefectures-liste-unique' },
  'tpf-bus-elettrici-friburgo': { it: 'tpf-bus-elettrici-friburgo', en: 'fribourg-24-new-electric-buses', de: 'freiburg-24-neue-elektrobusse', fr: 'fribourg-24-nouveaux-bus-electriques' },
  'tpf-nuovi-bus-elettrici-friburgo': { it: 'tpf-nuovi-bus-elettrici-friburgo', en: 'tpf-new-electric-buses-fribourg', de: 'tpf-neue-elektrobusse-friburg', fr: 'tpf-nouveaux-bus-electriques-fribourg' },
+ 'berra-2030-progetto-canton': { it: 'berra-2030-progetto-canton', en: 'berra-2030-canton-project', de: 'berra-2030-kanton-projekt', fr: 'berra-2030-projet-canton' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

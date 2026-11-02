@@ -855,6 +855,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-berra-2030-progetto-canton': {
+    title: 'Cantone propone 3,54 milioni per stazione intermedia Berra 2030',
+    description: 'Il Cantone propone CHF 3,54 milioni per Berra 2030 I deputati voteranno nella sessione di novembre Il decreto prevede CHF 9,06 milioni per il Lac-Noir',
+    keywords: 'frontalieri, ticino, svizzera, italia, cantone, propone, milioni, stazione',
+    ogTitle: 'Cantone propone 3,54 milioni per Berra 2030',
+    ogDescription: 'Il Cantone propone CHF 3,54 milioni per Berra 2030 I deputati voteranno nella sessione di novembre Il decreto prevede CHF 9,06 milioni per il Lac-Noir Berra',
+    canonicalPath: '/articoli-friburgo/berra-2030-progetto-canton/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cantone propone 3,54 milioni per stazione intermedia Berra 2030",
+      "description": "Il Cantone propone CHF 3,54 milioni per Berra 2030 I deputati voteranno nella sessione di novembre Il decreto prevede CHF 9,06 milioni per il Lac-Noir",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-berra-2030-progetto-canton.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-02T23:54:02+00:00",
+      "dateModified": "2026-11-02T23:54:02+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-friburgo/berra-2030-progetto-canton/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
