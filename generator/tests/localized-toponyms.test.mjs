@@ -20,6 +20,7 @@ import {
 } from '../scripts/lib/localized-toponyms.mjs';
 import { extractSlugFallbackLocales } from '../scripts/lib/slug-fallback-provenance.mjs';
 import {
+  assertStaticSourceComplete,
   encodeStaticArticleFieldValue,
   scanStaticArticleFieldEntries,
 } from '../scripts/lib/static-article-field-scanner.mjs';
@@ -184,6 +185,49 @@ test('lo scanner fallisce chiuso sulle diagnostiche sintattiche e sui valori din
   assert.throws(
     () => scanStaticArticleFieldEntries(articleTranslationSource("'blog.article.bad.title': `value ${dynamic}`")),
     /must have a static string literal value/,
+  );
+});
+
+test('lo scanner conserva la sorgente completa con diagnostiche intercalate', () => {
+  const source = articleTranslationSource([
+    "  'blog.article.first.title': 'Primo' /* commento senza virgola */",
+    "  // commento tra due diagnostiche 1005",
+    "  'blog.article.second.title': 'Secondo',",
+    "  'note': 'proprietà non-articolo', /* proprietà intercalata */",
+    "  'blog.article.third.title': 'Terzo' /* seconda virgola mancante */",
+    "  /* altro commento */",
+    "  'blog.article.fourth.title': 'Quarto',",
+  ].join('\n'));
+
+  const entries = scanStaticArticleFieldEntries(source, 'intercalated.ts');
+  assert.deepEqual(
+    entries.map(({ articleId, field, keyStart }) => ({
+      articleId,
+      field,
+      keyStart,
+    })),
+    [
+      { articleId: 'first', field: 'title', keyStart: source.indexOf("'blog.article.first.title'") },
+      { articleId: 'second', field: 'title', keyStart: source.indexOf("'blog.article.second.title'") },
+      { articleId: 'third', field: 'title', keyStart: source.indexOf("'blog.article.third.title'") },
+      { articleId: 'fourth', field: 'title', keyStart: source.indexOf("'blog.article.fourth.title'") },
+    ],
+  );
+  assert.throws(
+    () => assertStaticSourceComplete(source, entries.slice(0, -1), 'intercalated.ts'),
+    /Incomplete static article source scan in intercalated\.ts/,
+  );
+});
+
+test('lo scanner rifiuta una diagnostica non riparabile prima di restituire dati parziali', () => {
+  assert.throws(
+    () => scanStaticArticleFieldEntries(articleTranslationSource([
+      "  'blog.article.first.title': 'Primo'",
+      "  /* la proprietà non-articolo interrompe il repair */",
+      "  'note': 'proprietà non-articolo'",
+      "  'blog.article.second.title': 'Secondo',",
+    ].join('\n'))),
+    /Unresolved TypeScript syntax diagnostic in article-source\.ts/,
   );
 });
 

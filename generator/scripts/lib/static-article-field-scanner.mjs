@@ -3,6 +3,7 @@
 import {
   parseStaticArticleTranslationEntries,
 } from '../../../engine/shared/articleStaticSource.mjs';
+import { decodeStaticString } from '../../../engine/shared/staticSourceAst.mjs';
 import { loadArticleSourceTypeScript } from '../../../engine/shared/typescriptRuntime.mjs';
 
 const ts = loadArticleSourceTypeScript();
@@ -22,6 +23,40 @@ function staticArticleProperty(property) {
     || (!ts.isStringLiteral(property.name) && !ts.isNoSubstitutionTemplateLiteral(property.name))
   ) return false;
   return articleFieldFromKey(property.name.text) !== null;
+}
+
+function sourceArticleKeyInventory(source) {
+  const scanner = ts.createScanner(
+    ts.ScriptTarget.Latest,
+    true,
+    ts.LanguageVariant.Standard,
+    source,
+  );
+  const inventory = [];
+  let token = scanner.scan();
+
+  while (token !== ts.SyntaxKind.EndOfFileToken) {
+    if (
+      token !== ts.SyntaxKind.StringLiteral
+      && token !== ts.SyntaxKind.NoSubstitutionTemplateLiteral
+    ) {
+      token = scanner.scan();
+      continue;
+    }
+
+    const start = scanner.getTokenPos();
+    const end = scanner.getTextPos();
+    const next = scanner.scan();
+    if (next === ts.SyntaxKind.ColonToken) {
+      const literal = source.slice(start, end);
+      const quote = literal[0];
+      const key = decodeStaticString(literal.slice(1, -1), quote, { tabAs: '\t' });
+      if (articleFieldFromKey(key) !== null) inventory.push({ key, start });
+    }
+    token = next;
+  }
+
+  return inventory;
 }
 
 function topLevelObjectLiterals(sourceFile) {
@@ -131,7 +166,7 @@ export function scanStaticArticleFieldEntries(source, sourcePath = 'article-sour
     toOriginalOffset = recovered.toOriginalOffset;
   }
 
-  return entries.map((entry) => {
+  const scannedEntries = entries.map((entry) => {
     const keyStart = toOriginalOffset(entry.index);
     const valueStart = toOriginalOffset(entry.valueStart);
     const valueEnd = toOriginalOffset(entry.valueEnd);
@@ -147,6 +182,43 @@ export function scanStaticArticleFieldEntries(source, sourcePath = 'article-sour
       end: valueEnd + 1,
     };
   });
+
+  assertStaticSourceComplete(text, scannedEntries, sourcePath);
+  return scannedEntries;
+}
+
+/**
+ * Ensure recovery never turns a partial AST into a successful scan.
+ *
+ * The parser is deliberately allowed to repair only missing separators between
+ * adjacent article properties. The independent token inventory below keeps
+ * that recovery fail-closed: comments and prose that merely contain article
+ * keys are ignored, while every real static article key must still be present
+ * exactly once in the returned entries and retain its original offset.
+ */
+export function assertStaticSourceComplete(source, entries, sourcePath = 'article-source.ts') {
+  if (!Array.isArray(entries)) {
+    throw new TypeError('static article entries must be an array');
+  }
+
+  const expected = sourceArticleKeyInventory(String(source ?? ''));
+  const actual = entries.map(({ articleId, field, keyStart }) => ({
+    key: `blog.article.${articleId}.${field}`,
+    start: keyStart,
+  }));
+  const mismatch = expected.findIndex((entry, index) => {
+    const candidate = actual[index];
+    return !candidate || candidate.key !== entry.key || candidate.start !== entry.start;
+  });
+
+  if (mismatch !== -1 || expected.length !== actual.length) {
+    const position = mismatch === -1 ? expected.length : mismatch;
+    throw new SyntaxError(
+      `Incomplete static article source scan in ${sourcePath}: `
+      + `expected ${expected.length} article fields, scanned ${actual.length} `
+      + `at entry ${position + 1}`,
+    );
+  }
 }
 
 /** Encode a cooked string as a static TypeScript string with its source delimiter. */
