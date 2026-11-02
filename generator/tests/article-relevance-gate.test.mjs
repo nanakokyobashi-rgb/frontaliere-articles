@@ -10,6 +10,7 @@ import {
   classifyArticleRelevance,
   isOffTopicHeadline,
 } from '../scripts/lib/article-relevance-gate.mjs';
+import { isInCantonArea } from '../scripts/lib/canton-classifier.mjs';
 import { AUDITED_ARTICLE_SECTIONS } from '../../scripts/audit-article-relevance.mjs';
 
 const FILLER_FRONTALIERI = 'I frontalieri del Ticino e la Svizzera seguono il tema. '.repeat(10);
@@ -92,6 +93,7 @@ test('un nesso generico cantonale usa l\'ancora locale della sezione', () => {
       title: 'Lavoro a Herisau',
       excerpt: 'Herisau aggiorna il mercato del lavoro locale.',
       body: 'Le misure riguardano Herisau.',
+      isInCantonArea,
     }),
     { relevant: true },
   );
@@ -102,6 +104,7 @@ test('un nesso generico cantonale usa l\'ancora locale della sezione', () => {
       title: 'Lavoro in Italia',
       excerpt: 'Misure per il lavoro italiano.',
       body: 'Il provvedimento riguarda l\'Italia.',
+      isInCantonArea,
     }),
     { relevant: false, rule: 'senza-ancore' },
   );
