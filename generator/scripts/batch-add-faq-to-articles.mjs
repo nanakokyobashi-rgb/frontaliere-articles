@@ -1479,6 +1479,15 @@ export function writeTranslatedFaq(options, { localePath, articleId, locale, sou
   return written;
 }
 
+function recordQualityRejectedTranslation(options, articleId, locale, sourceFaq, res, error) {
+  if (!res?.faq) return;
+  recordTranslation(options, articleId, locale, sourceFaq, {
+    ...res,
+    rejected: true,
+    reason: error?.message || 'FAQ content rejected by quality gate',
+  });
+}
+
 // ── Process single article ───────────────────────────────────
 
 async function processArticle(articleId, file, itBodyContent, options) {
@@ -1589,7 +1598,14 @@ async function processArticle(articleId, file, itBodyContent, options) {
 
       // Il registro si aggiorna DOPO lo scrittore, e solo se ha scritto.
       if (res?.faq) {
-        writeTranslatedFaq(options, { localePath, articleId, locale, sourceFaq: validFaq, res });
+        try {
+          writeTranslatedFaq(options, { localePath, articleId, locale, sourceFaq: validFaq, res });
+        } catch (err) {
+          if (!err?.qualityReject) throw err;
+          recordQualityRejectedTranslation(options, articleId, locale, validFaq, res, err);
+          console.error(`${label} ⚠️  ${locale.toUpperCase()} translation rejected by the quality gate: `
+            + `${err.message}; leaving the locale unchanged`);
+        }
       } else {
         insertFaqIntoBodyFile(localePath, articleId, faqForLocale, {
           locale,
@@ -1671,8 +1687,10 @@ async function processTopUp(articleId, file, itContent, existingFaq, options) {
       // Il fallback italiano vale solo finche' la traduzione NON e' scritta:
       // dopo, un errore qualunque non deve sovrascriverla con l'italiano.
       let written = false;
+      let translationResult = null;
       try {
         const res = await translateFaq(validMerged, locale);
+        translationResult = res;
         if (res.faq) {
           written = writeTranslatedFaq(options, { localePath, articleId, locale, sourceFaq: validMerged, res });
           console.error(`${label} ✅ ${locale.toUpperCase()} translated (${res.faq.length} pairs)`);
@@ -1695,6 +1713,7 @@ async function processTopUp(articleId, file, itContent, existingFaq, options) {
           console.error(`${label} ⚠️  ${locale.toUpperCase()} error after the translation was written: `
             + `${err.message}; keeping the translation`);
         } else if (err?.qualityReject) {
+          recordQualityRejectedTranslation(options, articleId, locale, validMerged, translationResult, err);
           console.error(`${label} ⚠️  ${locale.toUpperCase()} translation rejected by the quality gate: `
             + `${err.message}; leaving the locale unchanged`);
         } else {
@@ -1723,8 +1742,10 @@ async function processTranslation(articleId, file, itFaq, missingLocales, option
     const localePath = `${bodyDir}/${locale}/${file}`;
     if (!existsSync(resolve(localePath))) continue;
 
+    let translationResult = null;
     try {
       const res = await translateFaq(itFaq, locale);
+      translationResult = res;
       if (res.faq) {
         // Nessun controllo di lingua qui: la guardia sta in `translateFaq()`,
         // l'unico punto da cui esce una FAQ tradotta.
@@ -1743,6 +1764,9 @@ async function processTranslation(articleId, file, itFaq, missingLocales, option
           + (res.rejected ? 'traduzione rifiutata (lingua sbagliata)' : 'translation null'));
       }
     } catch (err) {
+      if (err?.qualityReject) {
+        recordQualityRejectedTranslation(options, articleId, locale, itFaq, translationResult, err);
+      }
       console.error(`${label} ❌ ${locale.toUpperCase()}: ${err.message}`);
     }
   }

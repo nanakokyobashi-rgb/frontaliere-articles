@@ -325,13 +325,18 @@ export function hasFaqKey(filePath, id = idOfBodyPath(filePath)) {
   return new RegExp(`${faqKeyRx(id)}\\s*:`).test(readFileSync(filePath, 'utf-8'));
 }
 
-export function replaceFaqInFile(filePath, newFaqArray, id = idOfBodyPath(filePath)) {
+function replaceFaqInFileInternal(filePath, newFaqArray, id, { contentPreserving = false } = {}) {
   const locale = basename(dirname(resolve(filePath)));
-  const safeFaq = assertFaqPairsHaveNoRejectedControls(newFaqArray, `FAQ replacement ${id}`);
-  if (!passesLocalizedToponymGate(filePath, id, locale, safeFaq)) return false;
-  assertFaqWritePassesFiscalGate(filePath, id, locale, safeFaq);
+  const safeFaq = contentPreserving
+    ? newFaqArray
+    : assertFaqPairsHaveNoRejectedControls(newFaqArray, `FAQ replacement ${id}`);
+  if (!contentPreserving) {
+    if (!passesLocalizedToponymGate(filePath, id, locale, safeFaq)) return false;
+    assertFaqWritePassesFiscalGate(filePath, id, locale, safeFaq);
+  }
   let content = readFileSync(filePath, 'utf-8');
-  const jsonStr = serializeFaqLiteral(sanitizeArticleFaqMarkdown(safeFaq, locale));
+  const faqToWrite = contentPreserving ? safeFaq : sanitizeArticleFaqMarkdown(safeFaq, locale);
+  const jsonStr = serializeFaqLiteral(faqToWrite);
   // Escape-aware regex + function replacer to avoid $-pattern issues.
   // `g` + last match: write the occurrence that is actually LIVE at
   // runtime, same reasoning as extractFaqFromFile above. Ancorata all'id:
@@ -346,6 +351,18 @@ export function replaceFaqInFile(filePath, newFaqArray, id = idOfBodyPath(filePa
   }
   writeCorpusFile(filePath, content);
   return true;
+}
+
+export function replaceFaqInFile(filePath, newFaqArray, id = idOfBodyPath(filePath)) {
+  return replaceFaqInFileInternal(filePath, newFaqArray, id);
+}
+
+function replaceFaqInFileForReescape(filePath, faqArray, id = idOfBodyPath(filePath)) {
+  // The caller has already proved an exact parse/serialize round-trip. This
+  // repair changes only the TypeScript encoding of the existing FAQ, so it
+  // must preserve the legacy content byte-for-byte at the value level and
+  // must not reapply admission gates intended for new FAQ content.
+  return replaceFaqInFileInternal(filePath, faqArray, id, { contentPreserving: true });
 }
 
 function insertFaqKey(filePath, articleId, faqArray) {
@@ -889,7 +906,7 @@ function reescapeBroken(bodyDir, limit) {
         continue;
       }
       repaired.push(`${locale}/${file}`);
-      if (!DRY_RUN && !replaceFaqInFile(filePath, pairs)) repaired.pop();
+      if (!DRY_RUN && !replaceFaqInFileForReescape(filePath, pairs)) repaired.pop();
     }
   }
   console.log(`\n📊 ${DRY_RUN ? 'Da riparare' : 'Riparati'}: ${repaired.length} file`);

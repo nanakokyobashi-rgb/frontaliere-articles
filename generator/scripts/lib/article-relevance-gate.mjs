@@ -168,8 +168,15 @@ export function classifyArticleRelevance({ section = 'frontaliere', id = '', tit
   if (section !== 'frontaliere') {
     // The Swiss/canton sections are Swiss by construction for a neutral title
     // such as «Herisau». A generic work/fiscal term is different: it must not
-    // turn an otherwise unanchored foreign topic into a Swiss article.
-    if (declaredHasGenericNexus) return { relevant: false, rule: 'senza-ancore' };
+    // turn an otherwise unanchored foreign topic into a Swiss article. But the
+    // body or excerpt can supply the Swiss anchor that the title lacks.
+    if (declaredHasGenericNexus) {
+      const supportingText = ` ${normalizeText(`${excerpt} ${body}`)} `;
+      if (hasStrongNexus(supportingText) || BODY_ANCHOR_RE.test(supportingText)) {
+        return { relevant: true };
+      }
+      return { relevant: false, rule: 'senza-ancore' };
+    }
     return { relevant: true };
   }
 
