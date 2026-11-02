@@ -53,6 +53,26 @@ function articleFieldFromKey(key) {
   };
 }
 
+function staticPropertyName(ts, name) {
+  if (
+    ts.isStringLiteral(name)
+    || ts.isNoSubstitutionTemplateLiteral(name)
+    || ts.isIdentifier(name)
+    || ts.isNumericLiteral(name)
+  ) {
+    return name.text;
+  }
+
+  if (ts.isComputedPropertyName(name)) {
+    const expression = unwrapExpression(ts, name.expression);
+    if (ts.isStringLiteral(expression) || ts.isNoSubstitutionTemplateLiteral(expression)) {
+      return expression.text;
+    }
+  }
+
+  return null;
+}
+
 function unwrapExpression(ts, expression) {
   let current = expression;
   while (
@@ -120,10 +140,37 @@ export function scanStaticArticleFieldEntries(source) {
   const entries = [];
 
   for (const object of topLevelObjectLiterals(ts, sourceFile)) {
+    const isArticleMap = object.properties.some((property) => {
+      if (!property.name) return false;
+      const key = staticPropertyName(ts, property.name);
+      return key !== null && articleFieldFromKey(key) !== null;
+    });
+    if (!isArticleMap) continue;
+
     for (const property of object.properties) {
-      if (!ts.isPropertyAssignment(property) || !ts.isStringLiteral(property.name)) continue;
-      const field = articleFieldFromKey(property.name.text);
+      if (ts.isSpreadAssignment(property)) {
+        const location = sourceLocation(sourceFile, property.getStart(sourceFile));
+        throw new SyntaxError(`Top-level article map has a spread member at ${location}.`);
+      }
+
+      if (!property.name) {
+        const location = sourceLocation(sourceFile, property.getStart(sourceFile));
+        throw new SyntaxError(`Top-level article map has a member without a static name at ${location}.`);
+      }
+
+      const key = staticPropertyName(ts, property.name);
+      if (key === null) {
+        const location = sourceLocation(sourceFile, property.name.getStart(sourceFile));
+        throw new SyntaxError(`Top-level article map has a dynamic member name at ${location}.`);
+      }
+
+      const field = articleFieldFromKey(key);
       if (!field) continue;
+
+      if (!ts.isPropertyAssignment(property)) {
+        const location = sourceLocation(sourceFile, property.name.getStart(sourceFile));
+        throw new SyntaxError(`Static article field ${key} must be a property assignment at ${location}.`);
+      }
 
       if (
         !ts.isStringLiteral(property.initializer)
@@ -131,14 +178,17 @@ export function scanStaticArticleFieldEntries(source) {
       ) {
         const location = sourceLocation(sourceFile, property.initializer.getStart(sourceFile));
         throw new SyntaxError(
-          `Static article field ${property.name.text} must have a quoted string value at ${location}.`,
+          `Static article field ${key} must have a quoted string value at ${location}.`,
         );
       }
 
       const literalStart = property.initializer.getStart(sourceFile);
       const literalEnd = property.initializer.getEnd();
       const quote = text[literalStart];
-      if (text[literalEnd - 1] !== quote) continue;
+      if (text[literalEnd - 1] !== quote) {
+        const location = sourceLocation(sourceFile, literalStart);
+        throw new SyntaxError(`Static article field ${key} has a malformed string literal at ${location}.`);
+      }
       const valueStart = literalStart + 1;
       const valueEnd = literalEnd - 1;
       entries.push({

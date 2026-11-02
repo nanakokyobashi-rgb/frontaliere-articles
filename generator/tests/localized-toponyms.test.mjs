@@ -160,10 +160,10 @@ test('lo scanner AST ignora stringhe, regex, template, commenti, tipi e oggetti 
   );
 });
 
-test('lo scanner recupera i campi statici dopo una proprietà malformata e rifiuta valori dinamici', () => {
-  assert.deepEqual(
-    scanStaticArticleFieldEntries("const data = { 'blog.article.bad.title': 'non chiuso"),
-    [],
+test('lo scanner recupera i campi statici dopo un separatore malformato e rifiuta valori dinamici', () => {
+  assert.throws(
+    () => scanStaticArticleFieldEntries("const data = { 'blog.article.bad.title': 'non chiuso"),
+    /malformed string literal at line 1, column 42/,
   );
   assert.deepEqual(
     scanStaticArticleFieldEntries("const data = { 'blog.article.bad.title': 'valore' 'blog.article.hidden.title': 'Titolo' };")
@@ -180,6 +180,26 @@ test('lo scanner recupera i campi statici dopo una proprietà malformata e rifiu
   assert.throws(
     () => scanStaticArticleFieldEntries("const data = { 'blog.article.bad.title': `value ${dynamic}` } ;"),
     /must have a quoted string value/,
+  );
+});
+
+test('lo scanner rifiuta membri dinamici nella mappa articolo e accetta chiavi computed statiche', () => {
+  const sourceWithArticleField = "'blog.article.demo.title': 'Titolo'";
+  for (const member of [
+    '...localizedFields',
+    '[getArticleKey()]: \'Valore dinamico\'',
+    "'blog.article.dynamic.title'() { return 'Titolo'; }",
+  ]) {
+    assert.throws(
+      () => scanStaticArticleFieldEntries(`const data = { ${sourceWithArticleField}, ${member} };`),
+      /Top-level article map has (a spread member|a dynamic member name)|Static article field .* must be a property assignment/,
+    );
+  }
+
+  assert.deepEqual(
+    scanStaticArticleFieldEntries("const data = { ['blog.article.computed.title']: 'Titolo' };")
+      .map(({ articleId, field, value }) => ({ articleId, field, value })),
+    [{ articleId: 'computed', field: 'title', value: 'Titolo' }],
   );
 });
 
@@ -716,7 +736,7 @@ test('il corpus storico e le 24 sezioni cantonali non copiano esonimi fra lingue
   ].join('\n'));
 });
 
-test('il gate di generazione importa e invoca il controllo prima della scrittura', () => {
+test('il gate bounded invoca il controllo prima della scrittura e mantiene attivo l audit globale', () => {
   const source = readFileSync(path.join(ROOT, 'generator/scripts/create-article.mjs'), 'utf8');
   assert.match(source, /findArticleLocalizedToponymMismatches/);
   assert.match(source, /assertArticlePassesFactualityGates\(data, options = \{\}\)/);
@@ -743,5 +763,13 @@ test('il gate di generazione importa e invoca il controllo prima della scrittura
 
   const workflow = readFileSync(path.join(ROOT, '.github/workflows/generate-article.yml'), 'utf8');
   assert.match(workflow, /generator\/tests\/wrong-latin-language-adoption\.test\.mjs/);
-  assert.match(workflow, /generator\/tests\/localized-toponyms\.test\.mjs/);
+  assert.doesNotMatch(
+    workflow.split('\n').filter((line) => !line.trim().startsWith('#')).join('\n'),
+    /generator\/tests\/localized-toponyms\.test\.mjs/,
+    'l audit storico non deve essere eseguito nel gate per-articolo',
+  );
+  const generatorCi = readFileSync(path.join(ROOT, '.github/workflows/generator-ci.yml'), 'utf8');
+  assert.match(generatorCi, /node --test 'generator\/tests\/\*\.test\.mjs'/);
+  const contentGate = readFileSync(path.join(ROOT, 'scripts/ci/content-gates-main.mjs'), 'utf8');
+  assert.match(contentGate, /["']generator\/tests\/localized-toponyms\.test\.mjs["']/);
 });
