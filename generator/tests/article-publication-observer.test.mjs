@@ -841,6 +841,43 @@ test('ignora il body orfano senza evidenza di pubblicazione e rimuove il blocker
   }
 });
 
+test('ritira il degradation ledger quando resta solo il body orfano', async () => {
+  const rootDir = observerRoot();
+  const github = issueClient({
+    issue: {
+      number: 2556,
+      body: renderDegradationLedger([{
+        section: 'frontaliere',
+        articleId: 'body-orfano',
+        firstSeenAt: '2026-10-05T00:00:00.000Z',
+        lastSeenAt: '2026-10-07T00:00:00.000Z',
+        status: 'pending',
+        absenceAttempts: 2,
+      }]),
+    },
+  });
+  try {
+    const result = await runObserver({
+      rootDir,
+      days: 1,
+      nowMs: Date.parse('2026-10-08T00:00:00Z'),
+      githubClient: github.client,
+      gitLogImpl: () => '',
+      minIntervalMs: 0,
+      fetchImpl: async () => { throw new Error('un residuo non deve essere letto'); },
+    });
+    assert.deepEqual(result.skipped, []);
+    assert.equal(result.coverageIncomplete, false);
+    assert.equal(result.ledger.length, 1);
+    assert.equal(result.ledger[0].articleId, 'body-orfano');
+    assert.equal(result.ledger[0].status, 'retired');
+    assert.equal(result.ledger[0].absenceAttempts, 3);
+    assert.equal(github.calls.some((call) => call.type === 'resolve'), false);
+  } finally {
+    fs.rmSync(rootDir, { recursive: true, force: true });
+  }
+});
+
 test('un coverage blocker storico con slug viene rimosso dopo la risoluzione canonica', async () => {
   const rootDir = observerRoot();
   const slug = 'carnevale-2026-lugano-laboratori-creativi-figli-frontalieri';

@@ -318,7 +318,10 @@ export function buildObserverTargets({
     seen.add(key);
     const resolved = resolveChange(change);
     const { canonicalArticleId, registry, slug } = resolved;
-    if (isBodyOnlyResidue(resolved)) continue;
+    if (isBodyOnlyResidue(resolved)) {
+      if (change.durable && !change.coverageBlocker) missingLedgerKeys.push(key);
+      continue;
+    }
     if (!registry || !slug) {
       skipped.push({ ...change, reason: !registry ? 'registro non trovato' : 'slug italiano non trovato' });
       if (change.durable && !change.coverageBlocker) missingLedgerKeys.push(key);
