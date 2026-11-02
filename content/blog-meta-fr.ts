@@ -13665,6 +13665,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.montano-lucino-via-roma.title': 'Voiture sortie de route à Montano Lucino : le conducteur blessé',
     'blog.article.montano-lucino-via-roma.excerpt': 'Mercredi soir, accident à Montano Lucino Voiture sortie de route dans la rue Roma à 23:45 Un seul véhicule impliqué Conducteur blessé ; le 118 et les pompiers sont intervenus',
     'blog.article.montano-lucino-via-roma.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.tassa-salute-ristorni-tavolo-lavoro.title': 'Taxe sur la santé et ristournes, bientôt un groupe de travail',
+    'blog.article.tassa-salute-ristorni-tavolo-lavoro.excerpt': 'Bientôt un groupe de travail sur la taxe santé et les ristournes Berne, Rome, le Tessin et la Lombardie à la table des négociations Rencontre à Berne avec Guy Parmelin Délégation composée de trois représentants',
+    'blog.article.tassa-salute-ristorni-tavolo-lavoro.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaFr;

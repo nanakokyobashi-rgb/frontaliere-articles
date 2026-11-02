@@ -114108,6 +114108,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tassa-salute-ristorni-tavolo-lavoro': {
+    title: 'Tassa sulla salute e ristorni, presto tavolo di lavoro',
+    description: 'Tavolo a breve su tassa salute e ristorni Berna, Roma, Ticino e Lombardia al tavolo Incontro a Berna con Guy Parmelin Delegazione composta da tre',
+    keywords: 'frontalieri, ticino, svizzera, italia, tassa, sulla, salute, ristorni',
+    ogTitle: 'Tassa salute e ristorni tavolo di lavoro',
+    ogDescription: 'Tavolo a breve su tassa salute e ristorni Berna, Roma, Ticino e Lombardia al tavolo Incontro a Berna con Guy Parmelin Delegazione composta da tre esponenti',
+    canonicalPath: '/articoli-frontaliere/tassa-salute-ristorni-tavolo-lavoro/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Tassa sulla salute e ristorni, presto tavolo di lavoro",
+      "description": "Tavolo a breve su tassa salute e ristorni Berna, Roma, Ticino e Lombardia al tavolo Incontro a Berna con Guy Parmelin Delegazione composta da tre",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-tassa-salute-ristorni-tavolo-lavoro.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-02T20:43:00+00:00",
+      "dateModified": "2026-11-02T20:43:00+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/tassa-salute-ristorni-tavolo-lavoro/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

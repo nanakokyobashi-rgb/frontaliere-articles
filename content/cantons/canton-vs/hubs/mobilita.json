@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "mobilita",
-  "updatedAt": "2026-11-02T11:33:10.756Z",
-  "contentHash": "19f6e311fd2641af83b205a505cd24c7f64d4d393528daf867a1616dd0051988",
+  "updatedAt": "2026-11-02T21:01:35.908Z",
+  "contentHash": "4dc13592d955762cfdcff312e908dd9b16f0e4576edc8a386330c5a69d7269de",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-01T21:24:45.283Z",
+      "updatedAt": "2026-11-02T13:52:53.767Z",
       "keyFacts": 0
     }
   ],
@@ -148,6 +148,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Radar in Ticino, i controlli della velocità dal 2 all'8 novembre: ecco dove saranno effettuati",
+              "date": "2026-11-02T08:10:49.000Z",
+              "url": "https://www.ossolanews.it/2026/11/02/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/radar-in-ticino-i-controlli-della-velocita-dal-2-all8-novembre-ecco-dove-saranno-effettuati.html"
+            },
+            {
               "label": "Ponte sull’Anza, prende forma il nuovo collegamento tra Piedimulera e Pieve Vergonte",
               "date": "2026-10-31T18:08:00.000Z",
               "url": "https://www.ossolanews.it/2026/10/31/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/ponte-sullanza-prende-forma-il-nuovo-collegamento-tra-piedimulera-e-pieve-vergonte.html"
@@ -171,14 +176,9 @@
               "label": "Statale 337 della Valle Vigezzo, lavori sull'asfalto: chiusura tra Re e Ribellasca dal 29 ottobre",
               "date": "2026-10-27T17:05:00.000Z",
               "url": "https://www.ossolanews.it/2026/10/27/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/statale-337-della-valle-vigezzo-lavori-sullasfalto-chiusura-tra-re-e-ribellasca-dal-29-ottobre.html"
-            },
-            {
-              "label": "Cento anni fa il primo trasporto auto sui treni navetta al Lötschberg",
-              "date": "2026-10-27T14:50:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/27/leggi-notizia/argomenti/confine/articolo/cento-anni-fa-il-primo-trasporto-auto-sui-treni-navetta-al-loetschberg.html"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -248,7 +248,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-02T11:33:10.756Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     },
     "en": {
       "canton": "VS",
@@ -374,6 +374,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Radar in Ticino, i controlli della velocità dal 2 all'8 novembre: ecco dove saranno effettuati",
+              "date": "2026-11-02T08:10:49.000Z",
+              "url": "https://www.ossolanews.it/2026/11/02/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/radar-in-ticino-i-controlli-della-velocita-dal-2-all8-novembre-ecco-dove-saranno-effettuati.html"
+            },
+            {
               "label": "Ponte sull’Anza, prende forma il nuovo collegamento tra Piedimulera e Pieve Vergonte",
               "date": "2026-10-31T18:08:00.000Z",
               "url": "https://www.ossolanews.it/2026/10/31/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/ponte-sullanza-prende-forma-il-nuovo-collegamento-tra-piedimulera-e-pieve-vergonte.html"
@@ -397,14 +402,9 @@
               "label": "Statale 337 della Valle Vigezzo, lavori sull'asfalto: chiusura tra Re e Ribellasca dal 29 ottobre",
               "date": "2026-10-27T17:05:00.000Z",
               "url": "https://www.ossolanews.it/2026/10/27/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/statale-337-della-valle-vigezzo-lavori-sullasfalto-chiusura-tra-re-e-ribellasca-dal-29-ottobre.html"
-            },
-            {
-              "label": "Cento anni fa il primo trasporto auto sui treni navetta al Lötschberg",
-              "date": "2026-10-27T14:50:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/27/leggi-notizia/argomenti/confine/articolo/cento-anni-fa-il-primo-trasporto-auto-sui-treni-navetta-al-loetschberg.html"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -474,7 +474,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-02T11:33:10.756Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     },
     "de": {
       "canton": "VS",
@@ -600,6 +600,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Radar in Ticino, i controlli della velocità dal 2 all'8 novembre: ecco dove saranno effettuati",
+              "date": "2026-11-02T08:10:49.000Z",
+              "url": "https://www.ossolanews.it/2026/11/02/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/radar-in-ticino-i-controlli-della-velocita-dal-2-all8-novembre-ecco-dove-saranno-effettuati.html"
+            },
+            {
               "label": "Ponte sull’Anza, prende forma il nuovo collegamento tra Piedimulera e Pieve Vergonte",
               "date": "2026-10-31T18:08:00.000Z",
               "url": "https://www.ossolanews.it/2026/10/31/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/ponte-sullanza-prende-forma-il-nuovo-collegamento-tra-piedimulera-e-pieve-vergonte.html"
@@ -623,14 +628,9 @@
               "label": "Statale 337 della Valle Vigezzo, lavori sull'asfalto: chiusura tra Re e Ribellasca dal 29 ottobre",
               "date": "2026-10-27T17:05:00.000Z",
               "url": "https://www.ossolanews.it/2026/10/27/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/statale-337-della-valle-vigezzo-lavori-sullasfalto-chiusura-tra-re-e-ribellasca-dal-29-ottobre.html"
-            },
-            {
-              "label": "Cento anni fa il primo trasporto auto sui treni navetta al Lötschberg",
-              "date": "2026-10-27T14:50:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/27/leggi-notizia/argomenti/confine/articolo/cento-anni-fa-il-primo-trasporto-auto-sui-treni-navetta-al-loetschberg.html"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -700,7 +700,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-02T11:33:10.756Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     },
     "fr": {
       "canton": "VS",
@@ -826,6 +826,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Radar in Ticino, i controlli della velocità dal 2 all'8 novembre: ecco dove saranno effettuati",
+              "date": "2026-11-02T08:10:49.000Z",
+              "url": "https://www.ossolanews.it/2026/11/02/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/radar-in-ticino-i-controlli-della-velocita-dal-2-all8-novembre-ecco-dove-saranno-effettuati.html"
+            },
+            {
               "label": "Ponte sull’Anza, prende forma il nuovo collegamento tra Piedimulera e Pieve Vergonte",
               "date": "2026-10-31T18:08:00.000Z",
               "url": "https://www.ossolanews.it/2026/10/31/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/ponte-sullanza-prende-forma-il-nuovo-collegamento-tra-piedimulera-e-pieve-vergonte.html"
@@ -849,14 +854,9 @@
               "label": "Statale 337 della Valle Vigezzo, lavori sull'asfalto: chiusura tra Re e Ribellasca dal 29 ottobre",
               "date": "2026-10-27T17:05:00.000Z",
               "url": "https://www.ossolanews.it/2026/10/27/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/statale-337-della-valle-vigezzo-lavori-sullasfalto-chiusura-tra-re-e-ribellasca-dal-29-ottobre.html"
-            },
-            {
-              "label": "Cento anni fa il primo trasporto auto sui treni navetta al Lötschberg",
-              "date": "2026-10-27T14:50:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/27/leggi-notizia/argomenti/confine/articolo/cento-anni-fa-il-primo-trasporto-auto-sui-treni-navetta-al-loetschberg.html"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -926,7 +926,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-02T11:33:10.756Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     }
   }
 }

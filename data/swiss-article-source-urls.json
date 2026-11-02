@@ -1,9 +1,4 @@
 {
-  "stats-astra://monthly/2026-09/svizzera": {
-    "articleId": "parco-veicoli-svizzera-2026",
-    "ts": "2026-09-23T12:36:37.366Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4104265": {
     "articleId": "parlamento-nega-naturalizzazione-dopo-5-anni",
     "ts": "2026-09-24T10:23:44.778Z",
@@ -2497,6 +2492,11 @@
   "https://www.cdt.ch/news/economia/startup-e-innovazione-sociale-la-open-call-2026-mette-a-disposizione-formazione-e-finanziamenti-442875": {
     "articleId": "startup-innovazione-sociale-open-call",
     "ts": "2026-10-31T14:07:58.997Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/7g6bepjb5cxm": {
+    "articleId": "premi-mercato-idroelettrico-2026",
+    "ts": "2026-11-02T22:26:53.394Z",
     "keyForm": 2
   }
 }

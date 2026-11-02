@@ -13662,6 +13662,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.montano-lucino-via-roma.title': 'Auto in Montano Lucino von der Straße abgekommen: Fahrer verletzt',
     'blog.article.montano-lucino-via-roma.excerpt': 'Unfall am Mittwochabend in Montano Lucino Auto in der Via Roma um 23:45 von der Straße abgekommen Nur ein Fahrzeug beteiligt Fahrer verletzt; 118 und Feuerwehr im Einsatz',
     'blog.article.montano-lucino-via-roma.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.tassa-salute-ristorni-tavolo-lavoro.title': 'Gesundheitsabgabe und Rückvergütungen, baldige Arbeitsrunde',
+    'blog.article.tassa-salute-ristorni-tavolo-lavoro.excerpt': 'Arbeitsrunde in Kürze zu Gesundheitsabgabe und Rückvergütungen Bern, Rom, Tessin und Lombardei am Verhandlungstisch Treffen in Bern mit Guy Parmelin Delegation aus drei Vertretern',
+    'blog.article.tassa-salute-ristorni-tavolo-lavoro.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaDe;

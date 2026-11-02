@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-11-02T18:34:35.378Z",
-  "contentHash": "1559e3bc9f3655d1d33d715636cf08901b4ce3ffd113f307f3796022ed393d3e",
+  "updatedAt": "2026-11-02T21:01:35.908Z",
+  "contentHash": "6bd471a18a487176f0ac6512182521dd54862b3c15838c5f35f0883f4547c7ff",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-02T08:56:51.710Z",
+      "updatedAt": "2026-11-02T12:35:55.606Z",
       "keyFacts": 0
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-02T06:00:52.103Z",
+      "updatedAt": "2026-11-02T15:47:08.669Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-01T21:24:45.283Z",
+      "updatedAt": "2026-11-02T13:52:53.767Z",
       "keyFacts": 0
     }
   ],
@@ -106,7 +106,7 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-11-02T08:56:51.710Z"
+          "updatedAt": "2026-11-02T12:35:55.606Z"
         },
         {
           "id": "aste-targhe",
@@ -130,7 +130,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-11-02T06:00:52.103Z"
+          "updatedAt": "2026-11-02T15:47:08.669Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -168,7 +168,7 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/CS-osg-ambulatoriale.html"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -215,10 +215,10 @@
           "date": "2026-10-14T08:06:11.860Z"
         },
         {
-          "title": "Mozione in Ticino contro la tassa sulla salute",
-          "url": "/articoli-frontaliere/mozione-ticino-ristorni-salute/",
-          "excerpt": "Mozione interpartitica presentata in Gran Consiglio La misura italiana è contestata sull'articolo 9 Il Ticino minaccia il blocco dei ristorni Oggetto",
-          "date": "2026-10-28T12:47:07.552Z"
+          "title": "Tassa sulla salute e ristorni, presto tavolo di lavoro",
+          "url": "/articoli-frontaliere/tassa-salute-ristorni-tavolo-lavoro/",
+          "excerpt": "Tavolo a breve su tassa salute e ristorni Berna, Roma, Ticino e Lombardia al tavolo Incontro a Berna con Guy Parmelin Delegazione composta da tre esponenti",
+          "date": "2026-11-02T20:43:00.383Z"
         }
       ],
       "latestCantonArticles": [],
@@ -256,7 +256,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-11-02T18:34:35.378Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     },
     "en": {
       "canton": "TI",
@@ -335,7 +335,7 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-11-02T08:56:51.710Z"
+          "updatedAt": "2026-11-02T12:35:55.606Z"
         },
         {
           "id": "aste-targhe",
@@ -359,7 +359,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-11-02T06:00:52.103Z"
+          "updatedAt": "2026-11-02T15:47:08.669Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -397,7 +397,7 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/CS-osg-ambulatoriale.html"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -443,10 +443,10 @@
           "date": "2026-10-14T08:06:11.860Z"
         },
         {
-          "title": "Motion in Ticino against the health tax",
-          "url": "/en/cross-border-articles/ticino-motion-health-tax/",
-          "excerpt": "Interparty motion submitted to the Grand Council The Italian measure is challenged over Article 9 Ticino threatens to block the tax revenue transfers Subject",
-          "date": "2026-10-28T12:47:07.552Z"
+          "title": "Health tax and rebates, working group soon",
+          "url": "/en/cross-border-articles/health-tax-refunds-working-table/",
+          "excerpt": "Talks soon on health tax and tax rebates Bern, Rome, Ticino and Lombardy at the table Meeting in Bern with Guy Parmelin Delegation made up of three representatives",
+          "date": "2026-11-02T20:43:00.383Z"
         }
       ],
       "latestCantonArticles": [],
@@ -480,7 +480,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-11-02T18:34:35.378Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     },
     "de": {
       "canton": "TI",
@@ -559,7 +559,7 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-11-02T08:56:51.710Z"
+          "updatedAt": "2026-11-02T12:35:55.606Z"
         },
         {
           "id": "aste-targhe",
@@ -583,7 +583,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-11-02T06:00:52.103Z"
+          "updatedAt": "2026-11-02T15:47:08.669Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -621,7 +621,7 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/CS-osg-ambulatoriale.html"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -667,10 +667,10 @@
           "date": "2026-10-14T08:06:11.860Z"
         },
         {
-          "title": "Motion im Tessin gegen die Gesundheitssteuer",
-          "url": "/de/grenzgaenger-artikel/tessin-motion-gesundheitsabgabe/",
-          "excerpt": "Interparteiliche Motion im Grossen Rat eingereicht Die italienische Massnahme wird im Hinblick auf Artikel 9 beanstandet Das Tessin droht mit der Blockierung der Rückvergütungen Gegenstand",
-          "date": "2026-10-28T12:47:07.552Z"
+          "title": "Gesundheitsabgabe und Rückvergütungen, baldige Arbeitsrunde",
+          "url": "/de/grenzgaenger-artikel/tasse-gesundheit-erstattungen-arbeitsgruppe/",
+          "excerpt": "Arbeitsrunde in Kürze zu Gesundheitsabgabe und Rückvergütungen Bern, Rom, Tessin und Lombardei am Verhandlungstisch Treffen in Bern mit Guy Parmelin Delegation aus drei Vertretern",
+          "date": "2026-11-02T20:43:00.383Z"
         }
       ],
       "latestCantonArticles": [],
@@ -704,7 +704,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-11-02T18:34:35.378Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     },
     "fr": {
       "canton": "TI",
@@ -783,7 +783,7 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-11-02T08:56:51.710Z"
+          "updatedAt": "2026-11-02T12:35:55.606Z"
         },
         {
           "id": "aste-targhe",
@@ -807,7 +807,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-11-02T06:00:52.103Z"
+          "updatedAt": "2026-11-02T15:47:08.669Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -845,7 +845,7 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/CS-osg-ambulatoriale.html"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -892,10 +892,10 @@
           "date": "2026-10-14T08:06:11.860Z"
         },
         {
-          "title": "Motion au Tessin contre la taxe sur la santé",
-          "url": "/fr/articles-frontalier/tessin-motion-taxe-sante/",
-          "excerpt": "Motion interpartite déposée au Grand Conseil La mesure italienne est contestée sur l'article 9 Le Tessin menace le blocage des restaurants Objet",
-          "date": "2026-10-28T12:47:07.552Z"
+          "title": "Taxe sur la santé et ristournes, bientôt un groupe de travail",
+          "url": "/fr/articles-frontalier/taxe-sante-remboursements-table-travail/",
+          "excerpt": "Bientôt un groupe de travail sur la taxe santé et les ristournes Berne, Rome, le Tessin et la Lombardie à la table des négociations Rencontre à Berne avec Guy Parmelin Délégation composée de trois représentants",
+          "date": "2026-11-02T20:43:00.383Z"
         }
       ],
       "latestCantonArticles": [],
@@ -925,7 +925,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-11-02T18:34:35.378Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     }
   }
 }

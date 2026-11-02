@@ -618,7 +618,7 @@ describe('campo canton nel registry', () => {
       const beforeLock = src.slice(index, lockIndex + 'beginRegisterLock(data.id);'.length);
       assert.match(beforeLock, /assertNoArticleIdentityServiceMarkers\(data, \{ qualityReject: true \}\);\s*beginRegisterLock\(data\.id\);/u);
     }
-    assert.match(src, /import \{ registryCantonsForArticle \} from '\.\/lib\/canton-classifier\.mjs';/u);
+    assert.match(src, /import \{[^}]*\bregistryCantonsForArticle\b[^}]*\} from '\.\/lib\/canton-classifier\.mjs';/u);
   });
 
   test('registryCantonsForArticle legge data.content.it', () => {
