@@ -191,9 +191,9 @@ export const PARTNERIZE_TAG_SNIPPET = `<script>${initialDocumentGuard.content}</
  */
 export const ADSENSE_CLIENT_ID = 'ca-pub-8628054934855353';
 
-export const ADSENSE_LOADER_FILENAME = 'adsense-loader-955d945a53c9.js';
+export const ADSENSE_LOADER_FILENAME = 'adsense-loader-42c19e9809e8.js';
 
-export const AD_RECOVERY_FILENAME = 'site-support-683ed26bb0ae.js';
+export const AD_RECOVERY_FILENAME = 'site-support-215e6daa33d9.js';
 export const AD_RECOVERY_SNIPPET = `<script defer data-cfasync="false" src="/assets/${AD_RECOVERY_FILENAME}"></script>`;
 
 export const ADSENSE_LAZY_LOADER = `<script defer src="/assets/${ADSENSE_LOADER_FILENAME}"></script>`;
@@ -294,7 +294,6 @@ export const OFFERWALL_FC_SNIPPET = `<script>${FC_JOBBOARD_OFFERWALL_GATE_JS}(fu
 
 export const ADSENSE_SNIPPET = `<meta name="google-adsense-account" content="${ADSENSE_CLIENT_ID}">
  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
- <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
  ${AD_RECOVERY_SNIPPET}
  ${ADSENSE_LAZY_LOADER}`;
 

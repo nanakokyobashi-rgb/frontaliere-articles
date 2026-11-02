@@ -219,6 +219,22 @@ test('pr-delivery-evidence: il coupling adattato non rientra nel trasporto isola
   assert.match(entry.reason, /publish-api/);
 });
 
+test('topic sources: i gemelli che importano gscOrphans non rientrano nel trasporto isolato (#3504)', () => {
+  for (const rel of [
+    'generator/scripts/lib/topic-sources/googleSuggest.mjs',
+    'generator/scripts/lib/topic-sources/googleTrends.mjs',
+  ]) {
+    const entry = byPath.get(rel);
+    assert.ok(entry, `${rel} deve restare censito`);
+    assert.equal(entry.mode, 'adapted');
+    assert.equal(
+      entry.adaptationIssue,
+      'https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/3504',
+    );
+    assert.match(entry.reason, /gscOrphans/);
+  }
+});
+
 test('mark-claude-terminal-outcome: la divergenza corpus e\' dichiarata adapted (#1084)', () => {
   const entry = byPath.get('scripts/ci/mark-claude-terminal-outcome.mjs');
   assert.ok(entry, 'mark-claude-terminal-outcome.mjs deve restare censito');
