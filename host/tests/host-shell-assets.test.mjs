@@ -114,7 +114,7 @@ test('the publisher rejects incomplete, renamed, duplicate or malformed snapshot
   assert.equal(ensures, 0, 'invalid input must stop before network availability/upload checks');
 });
 
-test('the exact two required assets are accepted in either order', () => {
+test('the exact three required assets are accepted in either order', () => {
   const snapshot = JSON.parse(read('host/third-party-shell-assets.json'));
   const expected = hostShellFiles().map(([name]) => name).sort();
   for (const assets of [snapshot.assets, [...snapshot.assets].reverse()]) {
@@ -351,7 +351,7 @@ test('ogni job che rende pagine carica i secret di Remote Config prima del passo
 });
 
 // The implicit producer/helper dependency must invalidate the transported bytes.
-test('Ads/Partnerize snapshots match the shared source fingerprint and reject signed startup', () => {
+test('recovery/Ads/Partnerize snapshots match the shared source fingerprint and reject signed startup', () => {
   const snapshot = JSON.parse(read('host/third-party-shell-assets.json'));
   const fingerprint = JSON.parse(read('host/third-party-shell-assets-fingerprint.json'));
   assert.deepEqual({ ...snapshot, initialDocumentGuard: { sha256: snapshot.initialDocumentGuard.sha256 }, assets: snapshot.assets.map(({ content: _content, ...asset }) => asset) }, fingerprint);
