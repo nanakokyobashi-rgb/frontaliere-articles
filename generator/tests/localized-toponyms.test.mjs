@@ -486,7 +486,8 @@ test('ripara il cantone Ticino solo fuori dai nomi ufficiali e solo dove serve',
   );
 });
 
-const ENTRY_RE = /['"]blog\.article\.([^'"]+)\.([^'"]+)['"]\s*:\s*(['"])((?:\\.|(?!\3)[^\r\n])*?)\3\s*(?=[,}])/gu;
+// Escape and plain-character branches must be disjoint to avoid exponential backtracking.
+const ENTRY_RE = /['"]blog\.article\.([^'"]+)\.([^'"]+)['"]\s*:\s*(['"])((?:\\.|(?!\3)[^\\\r\n])*?)\3\s*(?=[,}])/gu;
 
 function unescapeTsValue(value) {
   return value.replace(/\\([\\'"\\\\])/gu, '$1');
