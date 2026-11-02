@@ -87,6 +87,18 @@
     "canton-be::https://ajour.ch/story/704819/gesetz-des-dschungels-tusk-greift-pr%c3%a4sident-nawrocki-nach-gerichtseklat-an": {
       "section": "canton-be",
       "ts": 1793634249210
+    },
+    "canton-be::https://www.be.ch/de/start.html?newsid=86944c5e-a011-4445-b2d0-a8991ac59884": {
+      "section": "canton-be",
+      "ts": 1793645185549
+    },
+    "canton-be::https://www.nau.ch/news/schweiz/firma-verschenkt-zahlgerate-so-macht-sie-geld-67195717": {
+      "section": "canton-be",
+      "ts": 1793645358398
+    },
+    "canton-be::https://ajour.ch/story/704778/heftiger-machtkampf-um-polens-verfassungsgericht-entbrannt": {
+      "section": "canton-be",
+      "ts": 1793645360763
     }
   }
 }
