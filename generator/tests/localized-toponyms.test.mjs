@@ -662,5 +662,7 @@ test('il gate di generazione importa e invoca il controllo prima della scrittura
 
   const workflow = readFileSync(path.join(ROOT, '.github/workflows/generate-article.yml'), 'utf8');
   assert.match(workflow, /generator\/tests\/wrong-latin-language-adoption\.test\.mjs/);
-  assert.match(workflow, /generator\/tests\/localized-toponyms\.test\.mjs/);
+  assert.doesNotMatch(workflow, /generator\/tests\/localized-toponyms\.test\.mjs/);
+  const contentGate = readFileSync(path.join(ROOT, 'scripts/ci/content-gates-main.mjs'), 'utf8');
+  assert.match(contentGate, /["']generator\/tests\/localized-toponyms\.test\.mjs["']/);
 });
