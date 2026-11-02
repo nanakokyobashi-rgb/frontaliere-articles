@@ -2055,6 +2055,12 @@ jobs:
       # il corpus — quindi il suo rosso corretto e' «questo articolo e' un
       # doppione, rigeneralo su altro», e va letto cosi' prima di cercare il
       # difetto nel gate.
+      #
+      # NON aggiungere qui `localized-toponyms.test.mjs`: il suo test sul
+      # corpus storico confronta ogni campo italiano con le tre lingue e non e'
+      # un controllo bounded dell'articolo appena scritto. Il payload nuovo
+      # passa gia' da `assertLocalizedToponyms(data)` dentro create-article
+      # prima della scrittura; l'audit globale resta nel content-gate su main.
       - name: Stamp updatedAt for changed article bodies
         if: steps.mode.outputs.dry != 'true' && steps.generate.outputs.article == 'true'
         run: node scripts/ci/stamp-content-updated-at.mjs
@@ -2072,14 +2078,13 @@ jobs:
             generator/tests/article-slug-i18n.test.mjs \
             generator/tests/article-source-echo.test.mjs \
             generator/tests/article-topic-coverage-guard.test.mjs \
-            generator/tests/wrong-latin-language-adoption.test.mjs \
-            generator/tests/localized-toponyms.test.mjs; then
+            generator/tests/wrong-latin-language-adoption.test.mjs; then
             exit 0
           fi
           {
             echo "### ✖ Articolo RIFIUTATO prima del commit — sezione \`${SECTION:-?}\`"
             echo
-            echo "\`article-fabrication-guard\` / \`prompt-placeholder-guard\` / \`article-slug-i18n\` / \`article-source-echo\` / \`wrong-latin-language-adoption\` / \`localized-toponyms\` hanno trovato offender nel corpus dopo la generazione."
+            echo "\`article-fabrication-guard\` / \`prompt-placeholder-guard\` / \`article-slug-i18n\` / \`article-source-echo\` / \`wrong-latin-language-adoption\` hanno trovato offender nel corpus dopo la generazione."
             echo "**Niente e' stato committato**: il corpo resta sul runner e sparisce con lui, \`main\` non lo vede."
             echo
             echo "Gli offender sono elencati per path nel log di questo step. Confrontali con la riga \`article body added:\` dello step «Generate the article»:"
