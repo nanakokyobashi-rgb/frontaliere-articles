@@ -95,14 +95,16 @@ test('rileva un esonimo copiato e accetta la forma giusta', () => {
   );
 });
 
-test('lo scanner dei literal articolo è lineare e conserva gli escape', () => {
-  const source = String.raw`
+function articleTranslationSource(properties) {
+  return `const data: Record<string, string> = {\n${properties}\n};\nexport default data;\n`;
+}
+
+test('lo scanner dei literal articolo conserva offset, raw e valore decodificato', () => {
+  const source = articleTranslationSource(String.raw`
     // 'blog.article.ignored.title': 'commento';
-    const data = {
-      'blog.article.demo.body1': 'L\'articolo su Lucerna', /* separatore */
-      "blog.article.demo.title": "Titolo",
-    };
-  `;
+    'blog.article.demo.body1': 'L\'articolo su Lucerna', /* separatore */
+    "blog.article.demo.title": "Titolo",
+  `);
   assert.deepEqual(
     scanStaticArticleFieldEntries(source).map(({ articleId, field, rawValue, value, valueStart, valueEnd }) => ({
       articleId, field, rawValue, value, raw: source.slice(valueStart, valueEnd),
@@ -119,7 +121,7 @@ test('lo scanner dei literal articolo è lineare e conserva gli escape', () => {
 });
 
 test('il controllo interpreta gli esonimi codificati con escape Unicode', () => {
-  const source = String.raw`const data = { 'blog.article.escaped.body1': 'The canton of B\u0065rne' };`;
+  const source = articleTranslationSource(String.raw`'blog.article.escaped.body1': 'The canton of B\u0065rne'`);
   const [entry] = scanStaticArticleFieldEntries(source);
   assert.equal(entry.value, 'The canton of Berne');
   assert.deepEqual(
@@ -132,20 +134,16 @@ test('il controllo interpreta gli esonimi codificati con escape Unicode', () => 
   );
 });
 
-test('lo scanner AST ignora stringhe, regex, template, commenti, tipi e oggetti annidati', () => {
-  const backtick = String.fromCharCode(96);
-  const source = [
-    "const data = { 'blog.article.valid.title': 'Titolo' };",
-    "const quoted = \"'blog.article.quoted.title': 'Ignora',\";",
-    "const pattern = /'blog.article.regex.title':\\s*'Ignora'/;",
-    'const template = ' + backtick + "{'blog.article.template.title': 'Ignora'}" + backtick + ';',
-    "const templateValue = { 'blog.article.template-value.body1': " + backtick + 'Testo statico' + backtick + ' };',
-    "// 'blog.article.line-comment.title': 'Ignora',",
-    "/* 'blog.article.block-comment.title': 'Ignora', */",
-    "type Example = { 'blog.article.type.title': 'Ignora' };",
-    "const nested = { example: { 'blog.article.nested.title': 'Ignora' } };",
-    "function example() { return { 'blog.article.function.title': 'Ignora' }; }",
-  ].join('\n');
+test('lo scanner AST ignora testo a chiave nei valori e nei commenti', () => {
+  const source = articleTranslationSource([
+    "  'blog.article.valid.title': 'Titolo',",
+    "  'note': \"'blog.article.quoted.title': 'Ignora',\",",
+    "  'pattern': \"/'blog.article.regex.title':\\\\s*'Ignora'/\",",
+    "  'example': `{'blog.article.template.title': 'Ignora'}`,",
+    "  'blog.article.template-value.body1': `Testo statico`,",
+    "  // 'blog.article.line-comment.title': 'Ignora',",
+    "  /* 'blog.article.block-comment.title': 'Ignora', */",
+  ].join('\n'));
 
   assert.deepEqual(
     scanStaticArticleFieldEntries(source).map(({ articleId, field, rawValue, value }) => ({
@@ -158,32 +156,34 @@ test('lo scanner AST ignora stringhe, regex, template, commenti, tipi e oggetti 
       },
     ],
   );
-});
-
-test('lo scanner recupera i campi statici dopo un separatore malformato e rifiuta valori dinamici', () => {
   assert.throws(
-    () => scanStaticArticleFieldEntries("const data = { 'blog.article.bad.title': 'non chiuso"),
-    /malformed string literal at line 1, column 42/,
-  );
-  assert.deepEqual(
-    scanStaticArticleFieldEntries("const data = { 'blog.article.bad.title': 'valore' 'blog.article.hidden.title': 'Titolo' };")
-      .map(({ articleId, field, rawValue }) => ({ articleId, field, rawValue })),
-    [
-      { articleId: 'bad', field: 'title', rawValue: 'valore' },
-      { articleId: 'hidden', field: 'title', rawValue: 'Titolo' },
-    ],
-  );
-  assert.throws(
-    () => scanStaticArticleFieldEntries("const data = { 'blog.article.bad.title': makeValue() };"),
-    /must have a quoted string value/,
-  );
-  assert.throws(
-    () => scanStaticArticleFieldEntries("const data = { 'blog.article.bad.title': `value ${dynamic}` } ;"),
-    /must have a quoted string value/,
+    () => scanStaticArticleFieldEntries(articleTranslationSource("'blog.article.nested.title': { value: 'non statico' }")),
+    /must have a static string literal value/,
   );
 });
 
-test('lo scanner rifiuta membri dinamici nella mappa articolo e accetta chiavi computed statiche', () => {
+test('lo scanner fallisce chiuso sulle diagnostiche sintattiche e sui valori dinamici', () => {
+  assert.throws(
+    () => scanStaticArticleFieldEntries(articleTranslationSource("'blog.article.bad.title': 'non chiuso")),
+    /Unterminated string literal in article-source\.ts/,
+  );
+  assert.throws(
+    () => scanStaticArticleFieldEntries(articleTranslationSource(
+      "'blog.article.bad.title': 'valore' 'blog.article.hidden.title': 'Titolo',",
+    )),
+    /TypeScript syntax error in article-source\.ts/,
+  );
+  assert.throws(
+    () => scanStaticArticleFieldEntries(articleTranslationSource("'blog.article.bad.title': makeValue()")),
+    /must have a static string literal value/,
+  );
+  assert.throws(
+    () => scanStaticArticleFieldEntries(articleTranslationSource("'blog.article.bad.title': `value ${dynamic}`")),
+    /must have a static string literal value/,
+  );
+});
+
+test('lo scanner rifiuta membri dinamici e chiavi computed nella mappa articolo', () => {
   const sourceWithArticleField = "'blog.article.demo.title': 'Titolo'";
   for (const member of [
     '...localizedFields',
@@ -191,23 +191,33 @@ test('lo scanner rifiuta membri dinamici nella mappa articolo e accetta chiavi c
     "'blog.article.dynamic.title'() { return 'Titolo'; }",
   ]) {
     assert.throws(
-      () => scanStaticArticleFieldEntries(`const data = { ${sourceWithArticleField}, ${member} };`),
-      /Top-level article map has (a spread member|a dynamic member name)|Static article field .* must be a property assignment/,
+      () => scanStaticArticleFieldEntries(articleTranslationSource(`${sourceWithArticleField}, ${member}`)),
+      /article translation records must contain only static property assignments|computed article translation keys are not supported/,
     );
   }
 
-  assert.deepEqual(
-    scanStaticArticleFieldEntries("const data = { ['blog.article.computed.title']: 'Titolo' };")
-      .map(({ articleId, field, value }) => ({ articleId, field, value })),
-    [{ articleId: 'computed', field: 'title', value: 'Titolo' }],
+  assert.throws(
+    () => scanStaticArticleFieldEntries(articleTranslationSource("['blog.article.computed.title']: 'Titolo'")),
+    /computed article translation keys are not supported/,
   );
+});
+
+test('lo scanner usa il decoder canonico e preserva gli escape legacy quando ripara', () => {
+  const source = articleTranslationSource(String.raw`'blog.article.demo.body1': 'Notizia \q su Berna'`);
+  const [entry] = scanStaticArticleFieldEntries(source);
+  assert.equal(entry.value, String.raw`Notizia \q su Berna`);
+
+  const next = entry.value.replace('Berna', 'Bern');
+  const encoded = encodeStaticArticleFieldValue(next, entry.quote);
+  const rewritten = articleTranslationSource(`'blog.article.demo.body1': ${entry.quote}${encoded}${entry.quote}`);
+  assert.equal(scanStaticArticleFieldEntries(rewritten)[0].value, String.raw`Notizia \q su Bern`);
 });
 
 test('la codifica conserva il valore cooked dei template statici', () => {
   const original = "Line one\nD\u00e9tail `quoted` \\ path ${literal}";
   const quote = String.fromCharCode(96);
   const encoded = encodeStaticArticleFieldValue(original, quote);
-  const source = `const data = { 'blog.article.template.body1': ${quote}${encoded}${quote} };`;
+  const source = articleTranslationSource(`'blog.article.template.body1': ${quote}${encoded}${quote}`);
   assert.equal(scanStaticArticleFieldEntries(source)[0].value, original);
 });
 
