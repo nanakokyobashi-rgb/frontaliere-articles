@@ -4,8 +4,8 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "mobilita",
-  "updatedAt": "2026-11-02T11:33:10.756Z",
-  "contentHash": "9f9e9cc88285120f6931f7d00d98b45aa697f5bccddad5ccb0846fb3d134a6aa",
+  "updatedAt": "2026-11-02T21:01:35.908Z",
+  "contentHash": "5ce1fc4f27e62a3c2bfa4de1595b2caa09cfb06f97d253511c6e0adba76d7e51",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-01T21:24:45.283Z",
+      "updatedAt": "2026-11-02T13:52:53.767Z",
       "keyFacts": 0
     }
   ],
@@ -88,6 +88,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Bergstrasse 4: Strassensperrung am 25.11.2026 infolge Krandemontage",
+              "date": "2026-11-02",
+              "url": "https://www.hergiswil.ch/_rte/information/3037699"
+            },
+            {
               "label": "Sperrung der Brücke über den Scheidgraben",
               "date": "2026-10-29",
               "url": "https://www.ennetbuergen.ch/_rte/information/3035194"
@@ -111,14 +116,9 @@
               "label": "Fahrplanwechsel ab 13. Dezember 2026",
               "date": "2026-10-14",
               "url": "https://www.ennetbuergen.ch/_rte/information/3010693"
-            },
-            {
-              "label": "Älperchilbi: Einschränkungen im Verkehr",
-              "date": "2026-10-13",
-              "url": "https://www.stans.ch/_rte/information/2992174"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -152,7 +152,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-02T11:33:10.756Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     },
     "en": {
       "canton": "NW",
@@ -223,6 +223,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Bergstrasse 4: Strassensperrung am 25.11.2026 infolge Krandemontage",
+              "date": "2026-11-02",
+              "url": "https://www.hergiswil.ch/_rte/information/3037699"
+            },
+            {
               "label": "Sperrung der Brücke über den Scheidgraben",
               "date": "2026-10-29",
               "url": "https://www.ennetbuergen.ch/_rte/information/3035194"
@@ -246,14 +251,9 @@
               "label": "Fahrplanwechsel ab 13. Dezember 2026",
               "date": "2026-10-14",
               "url": "https://www.ennetbuergen.ch/_rte/information/3010693"
-            },
-            {
-              "label": "Älperchilbi: Einschränkungen im Verkehr",
-              "date": "2026-10-13",
-              "url": "https://www.stans.ch/_rte/information/2992174"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -287,7 +287,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-02T11:33:10.756Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     },
     "de": {
       "canton": "NW",
@@ -358,6 +358,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Bergstrasse 4: Strassensperrung am 25.11.2026 infolge Krandemontage",
+              "date": "2026-11-02",
+              "url": "https://www.hergiswil.ch/_rte/information/3037699"
+            },
+            {
               "label": "Sperrung der Brücke über den Scheidgraben",
               "date": "2026-10-29",
               "url": "https://www.ennetbuergen.ch/_rte/information/3035194"
@@ -381,14 +386,9 @@
               "label": "Fahrplanwechsel ab 13. Dezember 2026",
               "date": "2026-10-14",
               "url": "https://www.ennetbuergen.ch/_rte/information/3010693"
-            },
-            {
-              "label": "Älperchilbi: Einschränkungen im Verkehr",
-              "date": "2026-10-13",
-              "url": "https://www.stans.ch/_rte/information/2992174"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -422,7 +422,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-02T11:33:10.756Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     },
     "fr": {
       "canton": "NW",
@@ -493,6 +493,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Bergstrasse 4: Strassensperrung am 25.11.2026 infolge Krandemontage",
+              "date": "2026-11-02",
+              "url": "https://www.hergiswil.ch/_rte/information/3037699"
+            },
+            {
               "label": "Sperrung der Brücke über den Scheidgraben",
               "date": "2026-10-29",
               "url": "https://www.ennetbuergen.ch/_rte/information/3035194"
@@ -516,14 +521,9 @@
               "label": "Fahrplanwechsel ab 13. Dezember 2026",
               "date": "2026-10-14",
               "url": "https://www.ennetbuergen.ch/_rte/information/3010693"
-            },
-            {
-              "label": "Älperchilbi: Einschränkungen im Verkehr",
-              "date": "2026-10-13",
-              "url": "https://www.stans.ch/_rte/information/2992174"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -557,7 +557,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-02T11:33:10.756Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     }
   }
 }

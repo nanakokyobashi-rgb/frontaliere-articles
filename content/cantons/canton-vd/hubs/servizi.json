@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "servizi",
-  "updatedAt": "2026-11-02T18:34:35.378Z",
-  "contentHash": "216b4ddd7cf0e19e69f7d689181b6cd04aebdcacfebc51a79cd1c0e7a05bf0f9",
+  "updatedAt": "2026-11-02T21:01:35.908Z",
+  "contentHash": "65c82cfa974f331eb040f35aac5329c7ab6532ef3f870337a8611bc144fa2357",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-01T21:24:45.283Z",
+      "updatedAt": "2026-11-02T13:52:53.767Z",
       "keyFacts": 0
     }
   ],
@@ -59,6 +59,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "La Centrale téléphonique des médecins de garde (CTMG) devient la Centrale santé et répond au 058 6 116 116",
+              "date": "2026-11-02T08:49:43.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26751-la-centrale-telephonique-des-medecins-de-garde-ctmg-devient-la-centrale-sante-et-repond-au-058-6-116-116"
+            },
+            {
               "label": "Le Canton de Vaud recommande la vaccination contre la grippe, le Covid-19 et le VRS aux personnes à risque",
               "date": "2026-10-28T17:02:30.000Z",
               "url": "https://www.vd.ch/actualites/actualite/news/26734-le-canton-de-vaud-recommande-la-vaccination-contre-la-grippe-le-covid-19-et-le-vrs-aux-personnes-a-risque"
@@ -82,14 +87,9 @@
               "label": "Une loi sur le service des habitants adaptée aux enjeux d’aujourd’hui et de demain",
               "date": "2026-09-01T11:00:00.000Z",
               "url": "https://www.vd.ch/actualites/actualite/news/26576-default-4eccc336cd"
-            },
-            {
-              "label": "Ouverture du Campus Santé : le Canton de Vaud concrétise l’un de ses projets les plus stratégiques pour l’avenir",
-              "date": "2026-08-20T13:16:18.000Z",
-              "url": "https://www.vd.ch/actualites/actualite/news/26535-default-9c3c25a081"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -169,7 +169,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-02T18:34:35.378Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     },
     "en": {
       "canton": "VD",
@@ -211,6 +211,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "La Centrale téléphonique des médecins de garde (CTMG) devient la Centrale santé et répond au 058 6 116 116",
+              "date": "2026-11-02T08:49:43.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26751-la-centrale-telephonique-des-medecins-de-garde-ctmg-devient-la-centrale-sante-et-repond-au-058-6-116-116"
+            },
+            {
               "label": "Le Canton de Vaud recommande la vaccination contre la grippe, le Covid-19 et le VRS aux personnes à risque",
               "date": "2026-10-28T17:02:30.000Z",
               "url": "https://www.vd.ch/actualites/actualite/news/26734-le-canton-de-vaud-recommande-la-vaccination-contre-la-grippe-le-covid-19-et-le-vrs-aux-personnes-a-risque"
@@ -234,14 +239,9 @@
               "label": "Une loi sur le service des habitants adaptée aux enjeux d’aujourd’hui et de demain",
               "date": "2026-09-01T11:00:00.000Z",
               "url": "https://www.vd.ch/actualites/actualite/news/26576-default-4eccc336cd"
-            },
-            {
-              "label": "Ouverture du Campus Santé : le Canton de Vaud concrétise l’un de ses projets les plus stratégiques pour l’avenir",
-              "date": "2026-08-20T13:16:18.000Z",
-              "url": "https://www.vd.ch/actualites/actualite/news/26535-default-9c3c25a081"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -317,7 +317,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-02T18:34:35.378Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     },
     "de": {
       "canton": "VD",
@@ -359,6 +359,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "La Centrale téléphonique des médecins de garde (CTMG) devient la Centrale santé et répond au 058 6 116 116",
+              "date": "2026-11-02T08:49:43.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26751-la-centrale-telephonique-des-medecins-de-garde-ctmg-devient-la-centrale-sante-et-repond-au-058-6-116-116"
+            },
+            {
               "label": "Le Canton de Vaud recommande la vaccination contre la grippe, le Covid-19 et le VRS aux personnes à risque",
               "date": "2026-10-28T17:02:30.000Z",
               "url": "https://www.vd.ch/actualites/actualite/news/26734-le-canton-de-vaud-recommande-la-vaccination-contre-la-grippe-le-covid-19-et-le-vrs-aux-personnes-a-risque"
@@ -382,14 +387,9 @@
               "label": "Une loi sur le service des habitants adaptée aux enjeux d’aujourd’hui et de demain",
               "date": "2026-09-01T11:00:00.000Z",
               "url": "https://www.vd.ch/actualites/actualite/news/26576-default-4eccc336cd"
-            },
-            {
-              "label": "Ouverture du Campus Santé : le Canton de Vaud concrétise l’un de ses projets les plus stratégiques pour l’avenir",
-              "date": "2026-08-20T13:16:18.000Z",
-              "url": "https://www.vd.ch/actualites/actualite/news/26535-default-9c3c25a081"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -465,7 +465,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-02T18:34:35.378Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     },
     "fr": {
       "canton": "VD",
@@ -507,6 +507,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "La Centrale téléphonique des médecins de garde (CTMG) devient la Centrale santé et répond au 058 6 116 116",
+              "date": "2026-11-02T08:49:43.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26751-la-centrale-telephonique-des-medecins-de-garde-ctmg-devient-la-centrale-sante-et-repond-au-058-6-116-116"
+            },
+            {
               "label": "Le Canton de Vaud recommande la vaccination contre la grippe, le Covid-19 et le VRS aux personnes à risque",
               "date": "2026-10-28T17:02:30.000Z",
               "url": "https://www.vd.ch/actualites/actualite/news/26734-le-canton-de-vaud-recommande-la-vaccination-contre-la-grippe-le-covid-19-et-le-vrs-aux-personnes-a-risque"
@@ -530,14 +535,9 @@
               "label": "Une loi sur le service des habitants adaptée aux enjeux d’aujourd’hui et de demain",
               "date": "2026-09-01T11:00:00.000Z",
               "url": "https://www.vd.ch/actualites/actualite/news/26576-default-4eccc336cd"
-            },
-            {
-              "label": "Ouverture du Campus Santé : le Canton de Vaud concrétise l’un de ses projets les plus stratégiques pour l’avenir",
-              "date": "2026-08-20T13:16:18.000Z",
-              "url": "https://www.vd.ch/actualites/actualite/news/26535-default-9c3c25a081"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -609,7 +609,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-02T18:34:35.378Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "mobilita",
-  "updatedAt": "2026-11-02T18:34:35.378Z",
-  "contentHash": "c84a341a18ede063d6e1173a4b8aae62b2e6742e976508229d5a2c7db789b8ef",
+  "updatedAt": "2026-11-02T21:01:35.908Z",
+  "contentHash": "5e648c4b68f61b05967cd8f9d99386ba1b4b8a8a7f4d93c869ab8c9435485d3e",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-01T21:24:45.283Z",
+      "updatedAt": "2026-11-02T13:52:53.767Z",
       "keyFacts": 0
     }
   ],
@@ -99,6 +99,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Neue Haltestellenanzeigen",
+              "date": "2026-11-02",
+              "url": "https://www.bernmobil.ch/de/neue-haltestellenanzeigen"
+            },
+            {
               "label": "Start der Bauarbeiten für den historischen Rathausgasse-Brunnen",
               "date": "2026-10-30T10:00:00.000Z",
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/start-der-bauarbeiten-fuer-den-historischen-rathausgasse-brunnen"
@@ -122,14 +127,9 @@
               "label": "BLS hat Bauarbeiten am Bahnhof Kandersteg abgeschlossen",
               "date": "2026-10-19",
               "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-19-mm-bahnhof-kandersteg"
-            },
-            {
-              "label": "Neue Veloverbindung von Schauplatzgasse auf Bubenbergplatz",
-              "date": "2026-10-15T05:00:00.000Z",
-              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/neue-veloverbindung-von-schauplatzgasse-auf-bubenberg-platz"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -181,7 +181,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-02T18:34:35.378Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     },
     "en": {
       "canton": "BE",
@@ -263,6 +263,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Neue Haltestellenanzeigen",
+              "date": "2026-11-02",
+              "url": "https://www.bernmobil.ch/de/neue-haltestellenanzeigen"
+            },
+            {
               "label": "Start der Bauarbeiten für den historischen Rathausgasse-Brunnen",
               "date": "2026-10-30T10:00:00.000Z",
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/start-der-bauarbeiten-fuer-den-historischen-rathausgasse-brunnen"
@@ -286,14 +291,9 @@
               "label": "BLS hat Bauarbeiten am Bahnhof Kandersteg abgeschlossen",
               "date": "2026-10-19",
               "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-19-mm-bahnhof-kandersteg"
-            },
-            {
-              "label": "Neue Veloverbindung von Schauplatzgasse auf Bubenbergplatz",
-              "date": "2026-10-15T05:00:00.000Z",
-              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/neue-veloverbindung-von-schauplatzgasse-auf-bubenberg-platz"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-02T18:34:35.378Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     },
     "de": {
       "canton": "BE",
@@ -427,6 +427,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Neue Haltestellenanzeigen",
+              "date": "2026-11-02",
+              "url": "https://www.bernmobil.ch/de/neue-haltestellenanzeigen"
+            },
+            {
               "label": "Start der Bauarbeiten für den historischen Rathausgasse-Brunnen",
               "date": "2026-10-30T10:00:00.000Z",
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/start-der-bauarbeiten-fuer-den-historischen-rathausgasse-brunnen"
@@ -450,14 +455,9 @@
               "label": "BLS hat Bauarbeiten am Bahnhof Kandersteg abgeschlossen",
               "date": "2026-10-19",
               "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-19-mm-bahnhof-kandersteg"
-            },
-            {
-              "label": "Neue Veloverbindung von Schauplatzgasse auf Bubenbergplatz",
-              "date": "2026-10-15T05:00:00.000Z",
-              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/neue-veloverbindung-von-schauplatzgasse-auf-bubenberg-platz"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -509,7 +509,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-02T18:34:35.378Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     },
     "fr": {
       "canton": "BE",
@@ -591,6 +591,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Neue Haltestellenanzeigen",
+              "date": "2026-11-02",
+              "url": "https://www.bernmobil.ch/de/neue-haltestellenanzeigen"
+            },
+            {
               "label": "Start der Bauarbeiten für den historischen Rathausgasse-Brunnen",
               "date": "2026-10-30T10:00:00.000Z",
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/start-der-bauarbeiten-fuer-den-historischen-rathausgasse-brunnen"
@@ -614,14 +619,9 @@
               "label": "BLS hat Bauarbeiten am Bahnhof Kandersteg abgeschlossen",
               "date": "2026-10-19",
               "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-19-mm-bahnhof-kandersteg"
-            },
-            {
-              "label": "Neue Veloverbindung von Schauplatzgasse auf Bubenbergplatz",
-              "date": "2026-10-15T05:00:00.000Z",
-              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/neue-veloverbindung-von-schauplatzgasse-auf-bubenberg-platz"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -673,7 +673,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-02T18:34:35.378Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     }
   }
 }

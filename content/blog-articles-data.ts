@@ -47990,6 +47990,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'tassa-salute-ristorni-tavolo-lavoro',
+ category: 'fiscale',
+ date: '2026-11-02T20:43:00.383Z',
+ image: '/images/blog/article-tassa-salute-ristorni-tavolo-lavoro.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

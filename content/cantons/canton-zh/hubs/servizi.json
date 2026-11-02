@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "servizi",
-  "updatedAt": "2026-11-02T18:34:35.378Z",
-  "contentHash": "b2cbf4624902e180103fc5b7f425540525da43a955595a51ddef16a097f50b2c",
+  "updatedAt": "2026-11-02T21:01:35.908Z",
+  "contentHash": "4c4fc839699b45b47b6fa63ca8ebcfab8c349fad1c1e3d7eae192c4b789d8bb2",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-02T08:57:41.707Z",
+      "updatedAt": "2026-11-02T12:36:46.770Z",
       "keyFacts": 0
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-02T06:00:52.103Z",
+      "updatedAt": "2026-11-02T15:47:08.669Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-01T21:24:45.283Z",
+      "updatedAt": "2026-11-02T13:52:53.767Z",
       "keyFacts": 0
     }
   ],
@@ -44,7 +44,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "31",
-          "note": "offerta mediana 570 CHF"
+          "note": "offerta mediana 660 CHF"
         }
       ],
       "dataBlocks": [
@@ -111,7 +111,7 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-02T08:57:41.707Z"
+          "updatedAt": "2026-11-02T12:36:46.770Z"
         },
         {
           "id": "aste-targhe",
@@ -120,7 +120,7 @@
           "items": [
             {
               "label": "ZH597",
-              "value": "14.400 CHF",
+              "value": "14.800 CHF",
               "detail": "offerta attuale",
               "date": "2026-11-04T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43695"
@@ -142,13 +142,18 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-11-02T06:00:52.103Z"
+          "updatedAt": "2026-11-02T15:47:08.669Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "25 Jahre PET/CT am USZ: Von der Weltneuheit zum medizinischen Standard",
+              "date": "2026-11-02T09:00:04.000Z",
+              "url": "https://www.usz.ch/25-jahre-pet-ct-am-usz-von-der-weltneuheit-zum-medizinischen-standard/"
+            },
             {
               "label": "Präzision für Diagnose und Therapie: Wann die molekulare Diagnostik entscheidend ist",
               "date": "2026-10-30T13:25:55.000Z",
@@ -173,14 +178,9 @@
               "label": "„Interessanter als hier kann es nicht werden.“",
               "date": "2026-10-29T14:07:20.000Z",
               "url": "https://www.usz.ch/interessanter-als-hier-kann-es-nicht-werden/"
-            },
-            {
-              "label": "Ein Schlaganfall kennt kein Alter",
-              "date": "2026-10-29T10:21:38.000Z",
-              "url": "https://www.usz.ch/ein-schlaganfall-kennt-kein-alter/"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -260,7 +260,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-02T18:34:35.378Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     },
     "en": {
       "canton": "ZH",
@@ -277,7 +277,7 @@
         {
           "label": "Plate auctions running",
           "value": "31",
-          "note": "typical bid 570 CHF"
+          "note": "typical bid 660 CHF"
         }
       ],
       "dataBlocks": [
@@ -344,7 +344,7 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-02T08:57:41.707Z"
+          "updatedAt": "2026-11-02T12:36:46.770Z"
         },
         {
           "id": "aste-targhe",
@@ -353,7 +353,7 @@
           "items": [
             {
               "label": "ZH597",
-              "value": "14,400 CHF",
+              "value": "14,800 CHF",
               "detail": "current bid",
               "date": "2026-11-04T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43695"
@@ -375,13 +375,18 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-11-02T06:00:52.103Z"
+          "updatedAt": "2026-11-02T15:47:08.669Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "25 Jahre PET/CT am USZ: Von der Weltneuheit zum medizinischen Standard",
+              "date": "2026-11-02T09:00:04.000Z",
+              "url": "https://www.usz.ch/25-jahre-pet-ct-am-usz-von-der-weltneuheit-zum-medizinischen-standard/"
+            },
             {
               "label": "Präzision für Diagnose und Therapie: Wann die molekulare Diagnostik entscheidend ist",
               "date": "2026-10-30T13:25:55.000Z",
@@ -406,14 +411,9 @@
               "label": "„Interessanter als hier kann es nicht werden.“",
               "date": "2026-10-29T14:07:20.000Z",
               "url": "https://www.usz.ch/interessanter-als-hier-kann-es-nicht-werden/"
-            },
-            {
-              "label": "Ein Schlaganfall kennt kein Alter",
-              "date": "2026-10-29T10:21:38.000Z",
-              "url": "https://www.usz.ch/ein-schlaganfall-kennt-kein-alter/"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -489,7 +489,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-02T18:34:35.378Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     },
     "de": {
       "canton": "ZH",
@@ -506,7 +506,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "31",
-          "note": "mittleres Gebot 570 CHF"
+          "note": "mittleres Gebot 660 CHF"
         }
       ],
       "dataBlocks": [
@@ -573,7 +573,7 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-02T08:57:41.707Z"
+          "updatedAt": "2026-11-02T12:36:46.770Z"
         },
         {
           "id": "aste-targhe",
@@ -582,7 +582,7 @@
           "items": [
             {
               "label": "ZH597",
-              "value": "14’400 CHF",
+              "value": "14’800 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-11-04T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43695"
@@ -604,13 +604,18 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-11-02T06:00:52.103Z"
+          "updatedAt": "2026-11-02T15:47:08.669Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "25 Jahre PET/CT am USZ: Von der Weltneuheit zum medizinischen Standard",
+              "date": "2026-11-02T09:00:04.000Z",
+              "url": "https://www.usz.ch/25-jahre-pet-ct-am-usz-von-der-weltneuheit-zum-medizinischen-standard/"
+            },
             {
               "label": "Präzision für Diagnose und Therapie: Wann die molekulare Diagnostik entscheidend ist",
               "date": "2026-10-30T13:25:55.000Z",
@@ -635,14 +640,9 @@
               "label": "„Interessanter als hier kann es nicht werden.“",
               "date": "2026-10-29T14:07:20.000Z",
               "url": "https://www.usz.ch/interessanter-als-hier-kann-es-nicht-werden/"
-            },
-            {
-              "label": "Ein Schlaganfall kennt kein Alter",
-              "date": "2026-10-29T10:21:38.000Z",
-              "url": "https://www.usz.ch/ein-schlaganfall-kennt-kein-alter/"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -718,7 +718,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-02T18:34:35.378Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     },
     "fr": {
       "canton": "ZH",
@@ -735,7 +735,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "31",
-          "note": "offre centrale 570 CHF"
+          "note": "offre centrale 660 CHF"
         }
       ],
       "dataBlocks": [
@@ -802,7 +802,7 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-11-02T08:57:41.707Z"
+          "updatedAt": "2026-11-02T12:36:46.770Z"
         },
         {
           "id": "aste-targhe",
@@ -811,7 +811,7 @@
           "items": [
             {
               "label": "ZH597",
-              "value": "14 400 CHF",
+              "value": "14 800 CHF",
               "detail": "offre actuelle",
               "date": "2026-11-04T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43695"
@@ -833,13 +833,18 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-11-02T06:00:52.103Z"
+          "updatedAt": "2026-11-02T15:47:08.669Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "25 Jahre PET/CT am USZ: Von der Weltneuheit zum medizinischen Standard",
+              "date": "2026-11-02T09:00:04.000Z",
+              "url": "https://www.usz.ch/25-jahre-pet-ct-am-usz-von-der-weltneuheit-zum-medizinischen-standard/"
+            },
             {
               "label": "Präzision für Diagnose und Therapie: Wann die molekulare Diagnostik entscheidend ist",
               "date": "2026-10-30T13:25:55.000Z",
@@ -864,14 +869,9 @@
               "label": "„Interessanter als hier kann es nicht werden.“",
               "date": "2026-10-29T14:07:20.000Z",
               "url": "https://www.usz.ch/interessanter-als-hier-kann-es-nicht-werden/"
-            },
-            {
-              "label": "Ein Schlaganfall kennt kein Alter",
-              "date": "2026-10-29T10:21:38.000Z",
-              "url": "https://www.usz.ch/ein-schlaganfall-kennt-kein-alter/"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -943,7 +943,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-02T18:34:35.378Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     }
   }
 }

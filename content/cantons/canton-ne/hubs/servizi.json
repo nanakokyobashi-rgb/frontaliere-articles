@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "servizi",
-  "updatedAt": "2026-11-02T18:34:35.378Z",
-  "contentHash": "fdecc4108522a2dd61f2f0f6ed93a3dc5e97b388395570ae350df83a41009323",
+  "updatedAt": "2026-11-02T21:01:35.908Z",
+  "contentHash": "1de5fcad6b06c02606adcf70b7ee97cef2923849a946640aa2092921bafa916f",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-01T21:24:45.283Z",
+      "updatedAt": "2026-11-02T13:52:53.767Z",
       "keyFacts": 0
     }
   ],
@@ -54,12 +54,27 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Un nouveau numéro de téléphone pour atteindre les urgences médicales non vitales : il faudra composer le 058 6 116 116",
+              "date": "2026-11-02T09:35:40.000Z",
+              "url": "https://www.ne.ch/communiques-de-presse/un-nouveau-numero-de-telephone-pour-atteindre-les-urgences-medicales-non-vitales-il-faudra-composer-le-058-6-116-116"
+            },
+            {
+              "label": "Assurance-chômage : Neuchâtel et Vaud s’unissent pour sensibiliser sur l’importance d’anticiper les recherches d’emploi avant l’inscription à l’ORP",
+              "date": "2026-11-02T07:26:58.000Z",
+              "url": "https://www.ne.ch/communiques-de-presse/assurance-chomage-neuchatel-et-vaud-sunissent-pour-sensibiliser-sur-limportance-danticiper-les-recherches-demploi-avant-linscription-lorp"
+            },
+            {
+              "label": "La vaccination contre les virus respiratoires hivernaux est recommandée aux personnes vulnérables",
+              "date": "2026-10-30T12:55:52.000Z",
+              "url": "https://www.ne.ch/communiques-de-presse/la-vaccination-contre-les-virus-respiratoires-hivernaux-est-recommandee-aux-personnes-vulnerables"
+            },
+            {
               "label": "Stabilité du taux de chômage au mois de septembre 2026",
               "date": "2026-10-06T06:56:52.000Z",
               "url": "https://www.ne.ch/communiques-de-presse/stabilite-du-taux-de-chomage-au-mois-de-septembre-2026"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -121,7 +136,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-02T18:34:35.378Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     },
     "en": {
       "canton": "NE",
@@ -158,12 +173,27 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Un nouveau numéro de téléphone pour atteindre les urgences médicales non vitales : il faudra composer le 058 6 116 116",
+              "date": "2026-11-02T09:35:40.000Z",
+              "url": "https://www.ne.ch/communiques-de-presse/un-nouveau-numero-de-telephone-pour-atteindre-les-urgences-medicales-non-vitales-il-faudra-composer-le-058-6-116-116"
+            },
+            {
+              "label": "Assurance-chômage : Neuchâtel et Vaud s’unissent pour sensibiliser sur l’importance d’anticiper les recherches d’emploi avant l’inscription à l’ORP",
+              "date": "2026-11-02T07:26:58.000Z",
+              "url": "https://www.ne.ch/communiques-de-presse/assurance-chomage-neuchatel-et-vaud-sunissent-pour-sensibiliser-sur-limportance-danticiper-les-recherches-demploi-avant-linscription-lorp"
+            },
+            {
+              "label": "La vaccination contre les virus respiratoires hivernaux est recommandée aux personnes vulnérables",
+              "date": "2026-10-30T12:55:52.000Z",
+              "url": "https://www.ne.ch/communiques-de-presse/la-vaccination-contre-les-virus-respiratoires-hivernaux-est-recommandee-aux-personnes-vulnerables"
+            },
+            {
               "label": "Stabilité du taux de chômage au mois de septembre 2026",
               "date": "2026-10-06T06:56:52.000Z",
               "url": "https://www.ne.ch/communiques-de-presse/stabilite-du-taux-de-chomage-au-mois-de-septembre-2026"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -221,7 +251,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-02T18:34:35.378Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     },
     "de": {
       "canton": "NE",
@@ -258,12 +288,27 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Un nouveau numéro de téléphone pour atteindre les urgences médicales non vitales : il faudra composer le 058 6 116 116",
+              "date": "2026-11-02T09:35:40.000Z",
+              "url": "https://www.ne.ch/communiques-de-presse/un-nouveau-numero-de-telephone-pour-atteindre-les-urgences-medicales-non-vitales-il-faudra-composer-le-058-6-116-116"
+            },
+            {
+              "label": "Assurance-chômage : Neuchâtel et Vaud s’unissent pour sensibiliser sur l’importance d’anticiper les recherches d’emploi avant l’inscription à l’ORP",
+              "date": "2026-11-02T07:26:58.000Z",
+              "url": "https://www.ne.ch/communiques-de-presse/assurance-chomage-neuchatel-et-vaud-sunissent-pour-sensibiliser-sur-limportance-danticiper-les-recherches-demploi-avant-linscription-lorp"
+            },
+            {
+              "label": "La vaccination contre les virus respiratoires hivernaux est recommandée aux personnes vulnérables",
+              "date": "2026-10-30T12:55:52.000Z",
+              "url": "https://www.ne.ch/communiques-de-presse/la-vaccination-contre-les-virus-respiratoires-hivernaux-est-recommandee-aux-personnes-vulnerables"
+            },
+            {
               "label": "Stabilité du taux de chômage au mois de septembre 2026",
               "date": "2026-10-06T06:56:52.000Z",
               "url": "https://www.ne.ch/communiques-de-presse/stabilite-du-taux-de-chomage-au-mois-de-septembre-2026"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -321,7 +366,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-02T18:34:35.378Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     },
     "fr": {
       "canton": "NE",
@@ -358,12 +403,27 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Un nouveau numéro de téléphone pour atteindre les urgences médicales non vitales : il faudra composer le 058 6 116 116",
+              "date": "2026-11-02T09:35:40.000Z",
+              "url": "https://www.ne.ch/communiques-de-presse/un-nouveau-numero-de-telephone-pour-atteindre-les-urgences-medicales-non-vitales-il-faudra-composer-le-058-6-116-116"
+            },
+            {
+              "label": "Assurance-chômage : Neuchâtel et Vaud s’unissent pour sensibiliser sur l’importance d’anticiper les recherches d’emploi avant l’inscription à l’ORP",
+              "date": "2026-11-02T07:26:58.000Z",
+              "url": "https://www.ne.ch/communiques-de-presse/assurance-chomage-neuchatel-et-vaud-sunissent-pour-sensibiliser-sur-limportance-danticiper-les-recherches-demploi-avant-linscription-lorp"
+            },
+            {
+              "label": "La vaccination contre les virus respiratoires hivernaux est recommandée aux personnes vulnérables",
+              "date": "2026-10-30T12:55:52.000Z",
+              "url": "https://www.ne.ch/communiques-de-presse/la-vaccination-contre-les-virus-respiratoires-hivernaux-est-recommandee-aux-personnes-vulnerables"
+            },
+            {
               "label": "Stabilité du taux de chômage au mois de septembre 2026",
               "date": "2026-10-06T06:56:52.000Z",
               "url": "https://www.ne.ch/communiques-de-presse/stabilite-du-taux-de-chomage-au-mois-de-septembre-2026"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -417,7 +477,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-02T18:34:35.378Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     }
   }
 }
