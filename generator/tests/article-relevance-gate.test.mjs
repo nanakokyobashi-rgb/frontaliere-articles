@@ -124,6 +124,8 @@ test('filtro prima della spesa: decide solo sulla headline, senza guardare la se
   assert.equal(isOffTopicHeadline('Sport a Lugano'), false);
   assert.equal(isOffTopicHeadline('Partita IVA per frontalieri: cosa cambia'), false);
   assert.equal(isOffTopicHeadline('Consiglio federale: nuove regole sul lavoro'), false);
+  assert.equal(isOffTopicHeadline('Lavoro'), false);
+  assert.equal(isOffTopicHeadline('Tasse'), false);
 });
 
 test('l audit del ledger usa solo le sezioni supportate: i cantoni restano indexable', () => {

@@ -188,7 +188,7 @@ export function classifyArticleRelevance({ section = 'frontaliere', id = '', tit
  * @returns {boolean}
  */
 export function isOffTopicHeadline(headline) {
-  return classifyArticleRelevance({ section: 'svizzera', title: headline }).relevant === false;
+  return classifyArticleRelevance({ section: 'svizzera', title: headline }).rule === 'fuori-tema';
 }
 
 /** Il corpo testuale di un articolo: la concatenazione dei suoi `bodyN`. */
