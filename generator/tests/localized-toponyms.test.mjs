@@ -316,7 +316,7 @@ test('lo scanner dei campi statici è lineare e ignora commenti, dinamiche e str
     "// 'blog.article.ignored.body1': 'commento',",
     "'blog.article.demo.body1': 'L\\'articolo', /* separatore */",
     '"blog.article.demo.body2": "secondo",',
-    "'blog.article.demo.dynamic': `valore ${name}`,",
+    "'blog.article.demo.dynamic': `valore ${{ ({ 'blog.article.fake.body': 'falso' }).x }}`,",
     "'blog.article.demo.truncated': 'senza chiusura",
     "'blog.article.demo.body3': 'dopo', }",
   ].join('\n');

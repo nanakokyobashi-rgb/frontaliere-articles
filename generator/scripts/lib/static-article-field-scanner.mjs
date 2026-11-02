@@ -12,6 +12,46 @@
 const ARTICLE_KEY_PREFIX = 'blog.article.';
 const STATIC_QUOTES = new Set(["'", '"', '`']);
 
+function skipTemplateExpression(source, start) {
+  let depth = 1;
+  let cursor = start;
+  while (cursor < source.length) {
+    const character = source[cursor];
+    if (character === '\\') {
+      cursor += 2;
+      continue;
+    }
+    if (character === '/' && source[cursor + 1] === '/') {
+      const end = source.indexOf('\n', cursor + 2);
+      cursor = end === -1 ? source.length : end + 1;
+      continue;
+    }
+    if (character === '/' && source[cursor + 1] === '*') {
+      const end = source.indexOf('*/', cursor + 2);
+      cursor = end === -1 ? source.length : end + 2;
+      continue;
+    }
+    if (character === "'" || character === '"') {
+      const literal = readRawStringLiteral(source, cursor);
+      cursor = literal?.end ?? cursor + 1;
+      continue;
+    }
+    if (character === '`') {
+      const literal = readRawStringLiteral(source, cursor);
+      cursor = literal?.end ?? cursor + 1;
+      continue;
+    }
+    if (character === '{') {
+      depth += 1;
+    } else if (character === '}') {
+      depth -= 1;
+      if (depth === 0) return cursor + 1;
+    }
+    cursor += 1;
+  }
+  return source.length;
+}
+
 function readRawStringLiteral(source, start) {
   const quote = source[start];
   if (!STATIC_QUOTES.has(quote)) return null;
@@ -21,7 +61,9 @@ function readRawStringLiteral(source, start) {
       cursor += 1;
       continue;
     }
-    if (quote === '`' && source[cursor] === '$' && source[cursor + 1] === '{') return null;
+    if (quote === '`' && source[cursor] === '$' && source[cursor + 1] === '{') {
+      return { quote, dynamic: true, end: skipTemplateExpression(source, cursor + 2) };
+    }
     if (quote !== '`' && /[\r\n\u2028\u2029]/u.test(source[cursor])) return null;
     if (source[cursor] === quote) {
       return {
@@ -103,6 +145,10 @@ export function scanStaticArticleFieldEntries(source) {
       cursor += 1;
       continue;
     }
+    if (keyLiteral.dynamic) {
+      cursor = keyLiteral.end;
+      continue;
+    }
 
     const field = articleFieldFromKey(keyLiteral.rawValue);
     if (field) {
@@ -111,6 +157,10 @@ export function scanStaticArticleFieldEntries(source) {
         const valueStart = skipTrivia(text, colon + 1);
         const valueLiteral = readRawStringLiteral(text, valueStart);
         if (valueLiteral) {
+          if (valueLiteral.dynamic) {
+            cursor = valueLiteral.end;
+            continue;
+          }
           const delimiter = skipTrivia(text, valueLiteral.end);
           if (text[delimiter] === ',' || text[delimiter] === '}') {
             entries.push({
