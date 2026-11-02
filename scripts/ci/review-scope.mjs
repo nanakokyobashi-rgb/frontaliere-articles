@@ -15,6 +15,7 @@ import { readFileSync } from 'node:fs';
 import { isManagedReview, REDFLAG_IMPORTANT_RE } from './lib/constants.mjs';
 import { fetchPrFiles } from './lib/fetchPrFiles.mjs';
 import { isTerminalReviewState } from './lib/review-states.mjs';
+import { isReviewTestPath, REVIEW_INPUT_REVISION_MARKER_RE } from './review-test-policy.mjs';
 import { createGithubIssue } from '../lib/github-issue-creator.mjs';
 import { evaluateBodyContract } from '../lib/pr-body-contract-eval.mjs';
 import {
@@ -543,6 +544,96 @@ function gh(args, { json = true } = {}) {
   return json ? JSON.parse(output) : output;
 }
 
+const FINGERPRINT_REPO = process.env.GITHUB_REPOSITORY || process.env.REPO || '';
+
+/**
+ * Fingerprint del CONTRIBUTO PROPRIO della PR a un dato commit `sha` =
+ * il diff vs il merge-base con main (3-dot), indipendente dalla churn di main.
+ * Usato per il carry-forward dell'LGTM su un rebase di solo-merge-di-main:
+ * se il contributo a `sha` è byte-identico a quello su cui claude[bot] aveva
+ * dato `## LGTM`, il codice approvato non è cambiato → l'approvazione regge,
+ * SENZA ri-eseguire la review (zero Claude). Tutto via compare API (nessun
+ * git locale → il chiamante non ha bisogno di un checkout).
+ * Conservativo: qualunque incertezza (compare troncato, patch mancanti su file
+ * grossi, errore API) → ritorna null → niente carry-forward (stale come prima).
+ *
+ * Questo helper vive nel modulo condiviso del classificatore. `auto-merge-eval`
+ * lo consuma, ma non può essere il provider: la CLI di questo modulo usa un
+ * top-level `await` e non deve importare il proprio consumer.
+ */
+export function prContributionFingerprint(sha) {
+  let mb;
+  try {
+    mb = gh(['api', `repos/${FINGERPRINT_REPO}/compare/main...${sha}`, '--jq', '.merge_base_commit.sha'],
+      { json: false }).trim();
+  } catch { return null; }
+  if (!mb) return null;
+  let cmp;
+  try {
+    cmp = gh(['api', `repos/${FINGERPRINT_REPO}/compare/${mb}...${sha}`]);
+  } catch { return null; }
+  if (!cmp || !Array.isArray(cmp.files)) return null;
+  // compare API tronca a 300 file e omette `.patch` su file molto grandi: in
+  // entrambi i casi non posso garantire l'identita' -> bail conservativo.
+  if (cmp.files.length >= 300) return null;
+  return codeContributionFingerprint(cmp.files);
+}
+
+// File NON reviewabili come code (dati/static rigenerati): esclusi dal
+// fingerprint del contributo. Stessa lista del tier-gate della review in tests.yml
+// e degli exclude del diff reviewer. Così un push che tocca SOLO questi NON
+// cambia il fingerprint CODE → il carry-forward dell'LGTM regge senza
+// ri-eseguire la review (zero Claude), mentre il gate dei test resta sull'head
+// fresco. Prima il carry-forward valeva SOLO per i rebase di puro main-merge;
+// ora anche per i push di solo corpus.
+//
+// ── L'ALBERO E' QUELLO DI QUESTO REPO, e fino al 2026-09-03 non lo era ──────
+// La lista era arrivata dal sito PAROLA PER PAROLA (`data|public|reports|
+// _newsletter_variants|docs`), cioè nominando due cartelle che qui non esistono
+// e OMETTENDO `content/` e `dist/` — le uniche due che qui cambiano da sole. Il
+// risultato è che il carry-forward, la cui ragione d'essere su questo repo è
+// proprio la churn del corpus (~90 push al giorno su `main` che riscrivono
+// `content/`), non scattava MAI sul caso per cui esiste: ogni rigenerazione
+// cambiava il fingerprint e faceva ripartire una review a vuoto. La stessa
+// lista, nella forma corpus, sta in `NONCODE_RE` dentro `tests.yml`.
+export const NON_REVIEWABLE_FINGERPRINT_RE = /^(content|data|dist|public)\//;
+// I workflow crawler sono proiezioni generate dal sito: la compare API di
+// GitHub puo' elencarli senza `.patch` quando la PR contiene il batch completo.
+// Il generatore, il contratto e la logica restano code reviewabili; qui si
+// escludono solo gli artefatti YAML per non trasformare l'assenza di patch in
+// un falso `UNKNOWN` durante un rebase su main.
+export const GENERATED_CRAWLER_WORKFLOW_RE = /^\.github\/workflows\/crawler-group-\d+\.yml$/;
+
+/**
+ * Costruisce il fingerprint del contributo CODE da `files` (l'array `.files`
+ * della compare API). Puro (niente gh) → testabile. Esclude i file non-code; un
+ * file dati con `.patch` omesso (troppo grande) viene scartato PRIMA del bail,
+ * così la churn dati non forza un bail conservativo. Bail (null) solo se un file
+ * CODE modificato non ha patch (binario/troppo grande → identità non garantita).
+ */
+export function codeContributionFingerprint(files) {
+  if (!Array.isArray(files)) return null;
+  const parts = [];
+  for (const f of files) {
+    if ((isReviewTestPath(f.filename) && (!f.previous_filename || isReviewTestPath(f.previous_filename)))
+      || NON_REVIEWABLE_FINGERPRINT_RE.test(f.filename || '')
+      || GENERATED_CRAWLER_WORKFLOW_RE.test(f.filename || '')) continue; // dati/static/generated: non è contributo CODE
+    // `patch` assente (binario/troppo grande) su un file CODE modificato -> bail.
+    if (f.patch === undefined && f.status !== 'removed' && f.status !== 'added') return null;
+    // Tieni SOLO le righe di contenuto +/- (escludi header +++/--- e hunk @@):
+    // il fingerprint resta invariante allo shift di contesto/numero-riga indotto
+    // dalla churn di main attorno al diff della PR (un merge pulito di main NON
+    // cambia il contenuto proprio +/- della PR).
+    const changed = (f.patch || '')
+      .split('\n')
+      .filter((l) => (l.startsWith('+') || l.startsWith('-')) && !l.startsWith('+++') && !l.startsWith('---'))
+      .join('\n');
+    parts.push([f.filename, f.status, changed].join('\t'));
+  }
+  parts.sort();
+  return parts.join('\n--FILE--\n');
+}
+
 function fetchChangedFiles(repo, pr) {
   return fetchPrFiles(Number(pr), gh, repo);
 }
@@ -764,6 +855,113 @@ function readPrBody(repo, pr) {
     console.log(`review-scope: body della PR non leggibile (${String(error).slice(0, 160)}) → nessun declassamento.`);
     return null;
   }
+}
+
+/**
+ * Un contesto di applicabilità esplicito deve legare la review al commit che
+ * il gate ha selezionato. Un reviewCommit mancante o stantio non può diventare
+ * un pretesto per classificare finding recuperati dalla cronologia.
+ */
+function reviewAppliesToHead(reviewCommit, headSha) {
+  return Boolean(reviewCommit && headSha
+    && String(reviewCommit).toLowerCase() === String(headSha).toLowerCase());
+}
+
+const REVIEW_INPUT_MARKER_LINE_RE = new RegExp(
+  REVIEW_INPUT_REVISION_MARKER_RE.source,
+  REVIEW_INPUT_REVISION_MARKER_RE.flags.replace('g', ''),
+);
+
+function hasFormalReviewInput(body) {
+  return String(body || '').split(/\r?\n/u).some((line) => REVIEW_INPUT_MARKER_LINE_RE.test(line));
+}
+
+function reviewOrderTimestamp(review) {
+  const timestamps = [review?.submitted_at, review?.submittedAt, review?.created_at, review?.createdAt]
+    .map((value) => Date.parse(value || ''))
+    .filter(Number.isFinite);
+  return timestamps.length > 0 ? Math.max(...timestamps) : Number.NEGATIVE_INFINITY;
+}
+
+function compareReviewOrder(left, right) {
+  return reviewOrderTimestamp(left) - reviewOrderTimestamp(right)
+    || (Number(left?.id || 0) || 0) - (Number(right?.id || 0) || 0);
+}
+
+/**
+ * Recupera il contesto che i consumer legacy non inoltrano ancora. La
+ * selezione è ammessa solo sul target GitHub canonico e sul body esatto della
+ * review: una risposta mancante, ambigua o non confrontabile torna null e il
+ * chiamante resta fail-closed.
+ */
+async function resolveFormalReviewContext(body, { repo, pr, prUrl } = {}) {
+  const canonicalUrl = `https://github.com/${repo}/pull/${pr}`;
+  if (String(prUrl || '').replace(/\/+$/u, '') !== canonicalUrl) return null;
+  try {
+    const metadata = gh(['api', `repos/${repo}/pulls/${pr}`]);
+    const headSha = String(metadata?.head?.sha || '');
+    if (!/^[0-9a-f]{40}$/iu.test(headSha)) return null;
+    const reviewPages = gh(['api', `repos/${repo}/pulls/${pr}/reviews`, '--paginate', '--slurp']);
+    if (!Array.isArray(reviewPages) || !reviewPages.every(Array.isArray)) return null;
+    const reviews = reviewPages.flat();
+    const candidates = reviews
+      .filter((review) => isManagedReview(review)
+        && isTerminalReviewState(review?.state)
+        && String(review?.body || '') === String(body || ''))
+      .sort(compareReviewOrder);
+    const selected = candidates.at(-1);
+    const reviewCommit = String(selected?.commit_id || '');
+    if (!selected || !/^[0-9a-f]{40}$/iu.test(reviewCommit)
+        || selected.id === null || selected.id === undefined
+        || String(selected.id).trim() === '') return null;
+    let reviewCarryForwardValidated = false;
+    if (reviewCommit.toLowerCase() !== headSha.toLowerCase()) {
+      // Keep this recovery path on the acyclic shared helper above. In
+      // particular, do not import auto-merge-eval here: its static import of
+      // this module would deadlock the CLI's top-level await.
+      const headFingerprint = prContributionFingerprint(headSha);
+      const reviewFingerprint = prContributionFingerprint(reviewCommit);
+      reviewCarryForwardValidated = Boolean(
+        headFingerprint !== null && reviewFingerprint !== null
+          && headFingerprint === reviewFingerprint,
+      );
+    }
+    return {
+      headSha,
+      reviewCommit,
+      reviewId: selected.id,
+      reviewCarryForwardValidated,
+    };
+  } catch (error) {
+    console.error(`review-scope: provenienza della review non verificabile (${String(error).slice(0, 160)}).`);
+    return null;
+  }
+}
+
+function canResolveLegacyReviewContext() {
+  const entrypoint = String(process.argv[1] || '');
+  return entrypoint.endsWith('/auto-merge-eval.mjs')
+    || entrypoint.endsWith('/review-scope.mjs');
+}
+
+function nonApplicableClassification(findings) {
+  return {
+    findings,
+    outside: [],
+    inScope: [],
+    unresolved: findings.map((finding) => ({
+      ...finding,
+      reason: 'review non applicabile alla HEAD corrente',
+    })),
+    bodyDeclassified: [],
+    staleBodyDeclassified: [],
+    staleDeclassified: [],
+    bodyOnly: false,
+    outsideOnly: false,
+    blocking: true,
+    minted: false,
+    error: 'review non applicabile alla HEAD corrente',
+  };
 }
 
 /**
@@ -1204,7 +1402,8 @@ async function mintFollowup({ repo, pr, prUrl, body, findings }) {
  */
 export async function classifyAndMintReview(body, {
   repo, pr, prUrl, mutate = true, headSha = null,
-  reviewId = null,
+  reviewCommit = null, reviewId = null,
+  reviewCarryForwardValidated = false,
   priorFindingIds = null, changedLinesSince = null,
   // `null`/assente = «non lo so»: il verdetto si RICALCOLA dal body con gli
   // stessi moduli del gate. Un booleano esplicito lo impone (il review gate
@@ -1214,6 +1413,40 @@ export async function classifyAndMintReview(body, {
   bodyContractPassed = null, prBody = null,
 } = {}) {
   if (!repo || !pr) throw new Error('repo e pr sono obbligatori');
+  const findings = importantFindings(body);
+  let selectedHeadSha = headSha;
+  let selectedReviewCommit = reviewCommit;
+  let selectedReviewId = reviewId;
+  let selectedCarryForwardValidated = reviewCarryForwardValidated;
+  const hasAnyApplicabilityContext = reviewCommit !== null || headSha !== null || reviewId !== null;
+  if (findings.length > 0 && hasFormalReviewInput(body) && !hasAnyApplicabilityContext
+      && canResolveLegacyReviewContext()) {
+    const resolved = await resolveFormalReviewContext(body, { repo, pr, prUrl });
+    if (resolved) {
+      selectedHeadSha = resolved.headSha;
+      selectedReviewCommit = resolved.reviewCommit;
+      selectedReviewId = resolved.reviewId;
+      selectedCarryForwardValidated = resolved.reviewCarryForwardValidated;
+    }
+  }
+  // Il gate può autorizzare esplicitamente il carry-forward solo dopo aver
+  // verificato il fingerprint code-only; un commit stantio da solo resta
+  // contesto non applicabile e quindi fail-closed.
+  const hasValidatedCarryForward = selectedCarryForwardValidated
+    && Boolean(selectedReviewCommit && selectedHeadSha && selectedReviewId !== null
+      && String(selectedReviewId).trim() !== '');
+  const requiresApplicabilityContext = hasFormalReviewInput(body) || hasAnyApplicabilityContext;
+  const hasCompleteApplicabilityContext = Boolean(
+    selectedReviewCommit && selectedHeadSha && selectedReviewId !== null
+      && String(selectedReviewId).trim() !== '',
+  );
+  if (findings.length > 0 && requiresApplicabilityContext
+      && (!hasCompleteApplicabilityContext
+        || (!reviewAppliesToHead(selectedReviewCommit, selectedHeadSha)
+          && !hasValidatedCarryForward))) {
+    console.error('review-scope: review non applicabile alla HEAD corrente → classificazione bloccata.');
+    return nonApplicableClassification(findings);
+  }
   const effectivePrBody = prBody === null && bodyContractPassed !== false
     ? readPrBody(repo, pr)
     : prBody;
@@ -1223,7 +1456,6 @@ export async function classifyAndMintReview(body, {
   const changed = fetchChangedFiles(repo, pr);
   const diffUnavailable = changed.complete !== true || changed.files.length === 0;
   if (diffUnavailable) {
-    const findings = importantFindings(body);
     const reason = changed.files.length === 0 ? 'empty' : changed.reason;
     // Un finding sul body non dipende dal diff: la sola prova ammessa è che la
     // citazione testuale non compaia più nel body corrente. Un diff illeggibile
@@ -1277,8 +1509,8 @@ export async function classifyAndMintReview(body, {
       pr,
       prUrl,
       mutate,
-      headSha: headSha || resolveHeadSha(repo, pr),
-      reviewId,
+      headSha: selectedHeadSha || resolveHeadSha(repo, pr),
+      reviewId: selectedReviewId,
     });
     if (routedResult.identicalRouting?.routed?.length) {
       console.log(`review-scope: instradati ${routedResult.identicalRouting.routed.length} rilievi/path identical al sito`);
@@ -1292,7 +1524,7 @@ export async function classifyAndMintReview(body, {
   // `null` = «non lo so» e si deriva; passarli esplicitamente resta possibile
   // (i test lo fanno) e disattiva la rete.
   const history = (priorFindingIds === null && changedLinesSince === null)
-    ? reviewHistoryContext(repo, pr, headSha || resolveHeadSha(repo, pr))
+    ? reviewHistoryContext(repo, pr, selectedHeadSha || resolveHeadSha(repo, pr))
     : { priorFindingIds, changedLinesSince };
   const result = classifyImportantFindings(body, changed.files, repositoryPaths, {
     bodyContractPassed: contractPassed,
@@ -1318,8 +1550,8 @@ export async function classifyAndMintReview(body, {
     pr,
     prUrl,
     mutate,
-    headSha: headSha || resolveHeadSha(repo, pr),
-    reviewId,
+    headSha: selectedHeadSha || resolveHeadSha(repo, pr),
+    reviewId: selectedReviewId,
   });
   if (routedResult.identicalRouting?.routed?.length) {
     console.log(`review-scope: instradati ${routedResult.identicalRouting.routed.length} rilievi/path identical al sito`);
