@@ -4,17 +4,17 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "mobilita",
-  "updatedAt": "2026-11-02T09:20:10.429Z",
-  "contentHash": "6f2bde18d92affbccc3b3fb4f8afdfbec272e17813d6faf00d9121c2ab305ee4",
+  "updatedAt": "2026-11-02T11:33:10.756Z",
+  "contentHash": "498b0fa6665d4e781ff33147b2ae1b1c23ce594186278519b0487077e45a4597",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-31T23:59:59.000Z",
+      "updatedAt": "2026-11-01T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-01T22:29:16.511Z",
+      "updatedAt": "2026-11-02T06:54:25.899Z",
       "keyFacts": 2
     },
     {
@@ -33,24 +33,24 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Biaufond, settimana conclusa: 31 ottobre 2026"
+          "note": "Biaufond, settimana conclusa: 1 novembre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "4",
-          "note": "segnalazioni aggiornate: 1 novembre 2026"
+          "note": "segnalazioni aggiornate: 2 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "5",
-          "note": "segnalazioni aggiornate: 1 novembre 2026"
+          "note": "segnalazioni aggiornate: 2 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 25 ottobre 2026 – 31 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 26 ottobre 2026 – 1 novembre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Biaufond",
@@ -73,7 +73,7 @@
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-31T23:59:59.000Z"
+          "updatedAt": "2026-11-01T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -105,9 +105,19 @@
               "date": "2026-10-26T14:40:00.000Z"
             },
             {
+              "label": "A5 Neuchâtel <-> Solothurn tra Raccordo autostradale Diramazione Brüggmoos E Luogo Vingelz Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffico",
+              "date": "2026-11-02T05:44:00.000Z"
+            },
+            {
+              "label": "A20 Diramazione Neuchâtel-Vauseyon -> La Chaux-de-Fonds tra Svincolo autostradale Hauts-Geneveys E Svincolo autostradale Bas-du-Reymond Situazione: traffico fortemente rallentato Causa: traffico…",
+              "value": "Traffico",
+              "date": "2026-11-02T06:46:00.000Z"
+            },
+            {
               "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
               "value": "Traffico",
-              "date": "2026-11-01T22:29:16.511Z",
+              "date": "2026-11-02T06:54:25.899Z",
               "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             },
             {
@@ -115,22 +125,10 @@
               "value": "Cantiere",
               "detail": "fine prevista: 31 dicembre 2026",
               "date": "2024-09-06T05:22:00.000Z"
-            },
-            {
-              "label": "H5 Neuchâtel <-> Bienne Luogo St-Blaise Situazione: problemi di traffico cantiere",
-              "value": "Cantiere",
-              "detail": "fine prevista: 30 aprile 2027",
-              "date": "2025-04-08T11:07:00.000Z"
-            },
-            {
-              "label": "A20 Diramazione Neuchâtel-Vauseyon <-> La Chaux-de-Fonds Svincolo autostradale Convers Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Aggiunta 1: limite temporaneo peso lordo Peso…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 31 maggio 2027",
-              "date": "2026-10-06T22:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-01T22:29:16.511Z"
+          "updatedAt": "2026-11-02T06:54:25.899Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -207,7 +205,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-02T11:33:10.756Z"
     },
     "en": {
       "canton": "NE",
@@ -218,24 +216,24 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Biaufond, week ending 31 October 2026"
+          "note": "Biaufond, week ending 1 November 2026"
         },
         {
           "label": "Road closures in force or imminent",
           "value": "4",
-          "note": "reports as of 1 November 2026"
+          "note": "reports as of 2 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "5",
-          "note": "reports as of 1 November 2026"
+          "note": "reports as of 2 November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 25 October 2026 to 31 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 26 October 2026 to 1 November 2026, fastest first.",
           "items": [
             {
               "label": "Biaufond",
@@ -258,7 +256,7 @@
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-31T23:59:59.000Z"
+          "updatedAt": "2026-11-01T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -290,9 +288,19 @@
               "date": "2026-10-26T14:40:00.000Z"
             },
             {
+              "label": "A5 Neuchâtel <-> Solothurn tra Raccordo autostradale Diramazione Brüggmoos E Luogo Vingelz Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffic",
+              "date": "2026-11-02T05:44:00.000Z"
+            },
+            {
+              "label": "A20 Diramazione Neuchâtel-Vauseyon -> La Chaux-de-Fonds tra Svincolo autostradale Hauts-Geneveys E Svincolo autostradale Bas-du-Reymond Situazione: traffico fortemente rallentato Causa: traffico…",
+              "value": "Traffic",
+              "date": "2026-11-02T06:46:00.000Z"
+            },
+            {
               "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
               "value": "Traffic",
-              "date": "2026-11-01T22:29:16.511Z",
+              "date": "2026-11-02T06:54:25.899Z",
               "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             },
             {
@@ -300,22 +308,10 @@
               "value": "Roadworks",
               "detail": "until 31 December 2026",
               "date": "2024-09-06T05:22:00.000Z"
-            },
-            {
-              "label": "H5 Neuchâtel <-> Bienne Luogo St-Blaise Situazione: problemi di traffico cantiere",
-              "value": "Roadworks",
-              "detail": "until 30 April 2027",
-              "date": "2025-04-08T11:07:00.000Z"
-            },
-            {
-              "label": "A20 Diramazione Neuchâtel-Vauseyon <-> La Chaux-de-Fonds Svincolo autostradale Convers Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Aggiunta 1: limite temporaneo peso lordo Peso…",
-              "value": "Roadworks",
-              "detail": "until 31 May 2027",
-              "date": "2026-10-06T22:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-01T22:29:16.511Z"
+          "updatedAt": "2026-11-02T06:54:25.899Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -392,7 +388,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-02T11:33:10.756Z"
     },
     "de": {
       "canton": "NE",
@@ -403,24 +399,24 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Biaufond, Woche bis 31. Oktober 2026"
+          "note": "Biaufond, Woche bis 1. November 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "4",
-          "note": "Meldungen vom 1. November 2026"
+          "note": "Meldungen vom 2. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "5",
-          "note": "Meldungen vom 1. November 2026"
+          "note": "Meldungen vom 2. November 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 25. Oktober 2026 bis 31. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 26. Oktober 2026 bis 1. November 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Biaufond",
@@ -443,7 +439,7 @@
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-31T23:59:59.000Z"
+          "updatedAt": "2026-11-01T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -475,9 +471,19 @@
               "date": "2026-10-26T14:40:00.000Z"
             },
             {
+              "label": "A5 Neuenburg <-> Solothurn zwischen Autobahndreieck Verzweigung Brüggmoos und Ortschaft Vingelz Sachlage: Stau Ursache: Verkehrsüberlastung",
+              "value": "Verkehr",
+              "date": "2026-11-02T05:44:00.000Z"
+            },
+            {
+              "label": "A20 Verzweigung Neuenburg-Vauseyon -> La Chaux-de-Fonds zwischen Anschluss Hauts-Geneveys und Anschluss Bas-du-Reymond Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
+              "value": "Verkehr",
+              "date": "2026-11-02T06:46:00.000Z"
+            },
+            {
               "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
               "value": "Verkehr",
-              "date": "2026-11-01T22:29:16.511Z",
+              "date": "2026-11-02T06:54:25.899Z",
               "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             },
             {
@@ -485,22 +491,10 @@
               "value": "Baustelle",
               "detail": "bis 31. Dezember 2026",
               "date": "2024-09-06T05:22:00.000Z"
-            },
-            {
-              "label": "H5 Neuenburg <-> Biel Ortschaft St-Blaise Sachlage: Verkehrsbehinderung Baustelle",
-              "value": "Baustelle",
-              "detail": "bis 30. April 2027",
-              "date": "2025-04-08T11:07:00.000Z"
-            },
-            {
-              "label": "A20 Verzweigung Neuenburg-Vauseyon <-> La Chaux-de-Fonds Anschluss Convers Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.2 Zusatz 1: vorübergehende Beschränkung des zulässigen Gesamtgewichts…",
-              "value": "Baustelle",
-              "detail": "bis 31. Mai 2027",
-              "date": "2026-10-06T22:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-01T22:29:16.511Z"
+          "updatedAt": "2026-11-02T06:54:25.899Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -577,7 +571,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-02T11:33:10.756Z"
     },
     "fr": {
       "canton": "NE",
@@ -588,24 +582,24 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Biaufond, semaine jusqu’au 31 octobre 2026"
+          "note": "Biaufond, semaine jusqu’au 1er novembre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "4",
-          "note": "signalements au 1er novembre 2026"
+          "note": "signalements au 2 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "5",
-          "note": "signalements au 1er novembre 2026"
+          "note": "signalements au 2 novembre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 25 octobre 2026 au 31 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 26 octobre 2026 au 1er novembre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Biaufond",
@@ -628,7 +622,7 @@
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-31T23:59:59.000Z"
+          "updatedAt": "2026-11-01T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -660,9 +654,19 @@
               "date": "2026-10-26T14:40:00.000Z"
             },
             {
+              "label": "A5 Neuchâtel <-> Soleure entre Echangeur Echangeur de Brüggmoos et Localité Vingelz Situation: bouchon Raison: surcharge de trafic",
+              "value": "Trafic",
+              "date": "2026-11-02T05:44:00.000Z"
+            },
+            {
+              "label": "A20 Echangeur de Neuchâtel-Vauseyon -> La Chaux-de-Fonds entre Jonction autoroutière Hauts-Geneveys et Jonction autoroutière Bas-du-Reymond Situation: trafic en accordéon Raison: surcharge de trafic",
+              "value": "Trafic",
+              "date": "2026-11-02T06:46:00.000Z"
+            },
+            {
               "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
               "value": "Trafic",
-              "date": "2026-11-01T22:29:16.511Z",
+              "date": "2026-11-02T06:54:25.899Z",
               "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             },
             {
@@ -670,22 +674,10 @@
               "value": "Chantier",
               "detail": "jusqu’au 31 décembre 2026",
               "date": "2024-09-06T05:22:00.000Z"
-            },
-            {
-              "label": "H5 Neuchâtel <-> Bienne Localité St-Blaise Situation: trafic perturbé travaux",
-              "value": "Chantier",
-              "detail": "jusqu’au 30 avril 2027",
-              "date": "2025-04-08T11:07:00.000Z"
-            },
-            {
-              "label": "A20 Echangeur de Neuchâtel-Vauseyon <-> La Chaux-de-Fonds Jonction autoroutière Convers Situation: trafic perturbé travaux, longueur [km] 0.2 Complément 1: limite temporaire du poids total autorisé…",
-              "value": "Chantier",
-              "detail": "jusqu’au 31 mai 2027",
-              "date": "2026-10-06T22:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-01T22:29:16.511Z"
+          "updatedAt": "2026-11-02T06:54:25.899Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -762,7 +754,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-02T11:33:10.756Z"
     }
   }
 }
