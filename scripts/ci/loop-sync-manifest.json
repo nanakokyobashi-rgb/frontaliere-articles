@@ -6407,8 +6407,8 @@
       "reason": "Scanner lessicale bounded delle proprietà statiche `blog.article.<id>.<field>`, usato da `generator/scripts/repair-localized-toponyms.mjs` e dal relativo test per evitare il backtracking delle regex sui body del corpus. È un helper del repair del generatore: il sito consuma il corpus via JSON HTTP e non esegue questo modulo, quindi non esiste un gemello operativo da trasportare.",
       "baseline": {
         "site": null,
-        "corpus": "2ff092013514093a",
-        "alignedAt": "2026-11-01"
+        "corpus": "896377a24be917ee",
+        "alignedAt": "2026-11-02"
       }
     },
     {
