@@ -13664,6 +13664,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.montano-lucino-via-roma.title': 'Auto fuori strada a Montano Lucino: ferito il conducente',
     'blog.article.montano-lucino-via-roma.excerpt': 'Mercoledì sera incidente a Montano Lucino Auto fuori strada in via Roma alle 23:45 Coinvolto un solo veicolo Ferito il conducente; intervenuti 118 e Vigili',
     'blog.article.montano-lucino-via-roma.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.tassa-salute-ristorni-tavolo-lavoro.title': 'Tassa sulla salute e ristorni, presto tavolo di lavoro',
+    'blog.article.tassa-salute-ristorni-tavolo-lavoro.excerpt': 'Tavolo a breve su tassa salute e ristorni Berna, Roma, Ticino e Lombardia al tavolo Incontro a Berna con Guy Parmelin Delegazione composta da tre esponenti',
+    'blog.article.tassa-salute-ristorni-tavolo-lavoro.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaIt;
