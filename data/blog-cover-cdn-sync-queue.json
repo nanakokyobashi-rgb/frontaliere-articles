@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-calore-residuo-sciaffusa-mozione.webp",
-      "sha256": "d4f1ec3c7a8e0f0bf32836dd4b067c0ded8cf7bf789fd5168f9a2addc0bc6a6d"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-calore-residuo-sciaffusa-mozione-480w.webp",
-      "sha256": "2a393ea8428aff456087ccbe83b4161ea76c7da2b889cc95bd767e2abd098650"
-    }
-  ]
+  "items": []
 }
