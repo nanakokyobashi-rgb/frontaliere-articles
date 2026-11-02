@@ -4,12 +4,12 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-11-01T13:11:05.408Z",
-  "contentHash": "338dca408df75b64d5d4538c93d682d019b0982a5f08ffae67ca42e2d7d69721",
+  "updatedAt": "2026-11-02T09:20:10.429Z",
+  "contentHash": "73c5d3647d59dafbb7670018928f27167b36ee11890774f1d4ef878a9b3f350c",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-31T14:21:36.178Z",
+      "updatedAt": "2026-11-02T02:24:34.417Z",
       "keyFacts": 1
     }
   ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Kinder-Exkursion – Pilze entdecken im Kemptner Tobel",
-              "detail": "Vor der Nagelfabrik Kemptner Tobel",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kinder-exkursion-pilze-entdecken-im-kemptner-tobel/"
+              "label": "Einfach Gesund Bleiben 60+: SturzPraxis",
+              "detail": "Uitikon-Waldegg, Uitikon",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einfach-gesund-bleiben-60-sturzpraxis/"
             },
             {
-              "label": "Allerheiligen",
-              "detail": "Röm.-kath. Kirche Oberengstringen, Oberengstringen",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/eventi/musica/oberengstringen/allerheiligen_AXNmiJE"
+              "label": "CCCZ Oncology Symposium: Lung Cancer",
+              "detail": "Universitätsspital Zürich, Zürich",
+              "date": "2026-11-02",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/cccz-oncology-symposium-lung-cancer_ABwsLHx"
             },
             {
-              "label": "Babykonzert \"Unterwegs in Europa\"",
-              "detail": "Gemeinschaftszentrum Stürmeierhuus, Schlieren",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/babykonzert-unterwegs-in-europa/"
+              "label": "Vernissage Ausstellung \"was ihr nicht seht\"",
+              "detail": "Pfäffikon ZH, Pfäffikon",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vernissage-ausstellung-was-ihr-nicht-seht/"
             },
             {
-              "label": "Musikalische und interaktive Lesung \"Räbelichtli\"",
-              "detail": "Uster",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/musikalische-und-interaktive-lesung-raebelichtli/"
+              "label": "The Sisters of Mercy (UK)",
+              "detail": "X-TRA",
+              "date": "2026-11-02",
+              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/zuerich/the-sisters-of-mercy-uk_A7fSLqR"
             },
             {
-              "label": "Kammermusik@ZKO — Elegien der Stille",
+              "label": "The Sisters of Mercy (UK)",
+              "detail": "X-TRA, Zürich",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/the-sisters-of-mercy-uk/"
+            },
+            {
+              "label": "Amistat",
+              "detail": "Kaufleuten",
+              "date": "2026-11-02",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/amistat_AeTNTLg"
+            },
+            {
+              "label": "Amistat",
               "detail": "Zurich, Zürich",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kammermusikzko-elegien-der-stille/"
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/amistat-2/"
             },
             {
               "label": "3. Kammerkonzert",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-01",
+              "detail": "Zurich, Zürich — in corso, ultimo giorno: 2 novembre 2026",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/3-kammerkonzert/"
             },
             {
-              "label": "Pokerkurs für Beginner",
-              "detail": "Urdorf",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pokerkurs-fuer-beginner-3/"
+              "label": "Kochkurs für Seniorinnen und Senioren - OV Rüti",
+              "detail": "Rüti ZH, Rüti (ZH) — in corso, ultimo giorno: 21 novembre 2026",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kochkurs-fuer-seniorinnen-und-senioren-ov-rueti/"
             },
             {
-              "label": "Offenes Atelier für Alle",
-              "detail": "Museum für Gestaltung Zürich, Zürich",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/offenes-atelier-fuer-alle-2/"
-            },
-            {
-              "label": "Abenteuer im Museum",
-              "detail": "Küsnacht ZH",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/abenteuer-im-museum/"
-            },
-            {
-              "label": "Das Dschungel­buch",
-              "detail": "Winterthur",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/das-dschungelbuch/"
+              "label": "Meditative Nachtführung im Grossmünster",
+              "detail": "Zurich, Zürich — in corso, ultimo giorno: 27 novembre 2026",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/meditative-nachtfuehrung-im-grossmuenster/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zurigo/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "en": {
       "canton": "ZH",
@@ -144,69 +144,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Kinder-Exkursion – Pilze entdecken im Kemptner Tobel",
-              "detail": "Vor der Nagelfabrik Kemptner Tobel",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kinder-exkursion-pilze-entdecken-im-kemptner-tobel/"
+              "label": "Einfach Gesund Bleiben 60+: SturzPraxis",
+              "detail": "Uitikon-Waldegg, Uitikon",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einfach-gesund-bleiben-60-sturzpraxis/"
             },
             {
-              "label": "Allerheiligen",
-              "detail": "Röm.-kath. Kirche Oberengstringen, Oberengstringen",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/eventi/musica/oberengstringen/allerheiligen_AXNmiJE"
+              "label": "CCCZ Oncology Symposium: Lung Cancer",
+              "detail": "Universitätsspital Zürich, Zürich",
+              "date": "2026-11-02",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/cccz-oncology-symposium-lung-cancer_ABwsLHx"
             },
             {
-              "label": "Babykonzert \"Unterwegs in Europa\"",
-              "detail": "Gemeinschaftszentrum Stürmeierhuus, Schlieren",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/babykonzert-unterwegs-in-europa/"
+              "label": "Vernissage Ausstellung \"was ihr nicht seht\"",
+              "detail": "Pfäffikon ZH, Pfäffikon",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vernissage-ausstellung-was-ihr-nicht-seht/"
             },
             {
-              "label": "Musikalische und interaktive Lesung \"Räbelichtli\"",
-              "detail": "Uster",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/musikalische-und-interaktive-lesung-raebelichtli/"
+              "label": "The Sisters of Mercy (UK)",
+              "detail": "X-TRA",
+              "date": "2026-11-02",
+              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/zuerich/the-sisters-of-mercy-uk_A7fSLqR"
             },
             {
-              "label": "Kammermusik@ZKO — Elegien der Stille",
+              "label": "The Sisters of Mercy (UK)",
+              "detail": "X-TRA, Zürich",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/the-sisters-of-mercy-uk/"
+            },
+            {
+              "label": "Amistat",
+              "detail": "Kaufleuten",
+              "date": "2026-11-02",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/amistat_AeTNTLg"
+            },
+            {
+              "label": "Amistat",
               "detail": "Zurich, Zürich",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kammermusikzko-elegien-der-stille/"
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/amistat-2/"
             },
             {
               "label": "3. Kammerkonzert",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-01",
+              "detail": "Zurich, Zürich — ongoing, last day: 2 November 2026",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/3-kammerkonzert/"
             },
             {
-              "label": "Pokerkurs für Beginner",
-              "detail": "Urdorf",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pokerkurs-fuer-beginner-3/"
+              "label": "Kochkurs für Seniorinnen und Senioren - OV Rüti",
+              "detail": "Rüti ZH, Rüti (ZH) — ongoing, last day: 21 November 2026",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kochkurs-fuer-seniorinnen-und-senioren-ov-rueti/"
             },
             {
-              "label": "Offenes Atelier für Alle",
-              "detail": "Museum für Gestaltung Zürich, Zürich",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/offenes-atelier-fuer-alle-2/"
-            },
-            {
-              "label": "Abenteuer im Museum",
-              "detail": "Küsnacht ZH",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/abenteuer-im-museum/"
-            },
-            {
-              "label": "Das Dschungel­buch",
-              "detail": "Winterthur",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/das-dschungelbuch/"
+              "label": "Meditative Nachtführung im Grossmünster",
+              "detail": "Zurich, Zürich — ongoing, last day: 27 November 2026",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/meditative-nachtfuehrung-im-grossmuenster/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zurich/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "de": {
       "canton": "ZH",
@@ -255,69 +255,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Kinder-Exkursion – Pilze entdecken im Kemptner Tobel",
-              "detail": "Vor der Nagelfabrik Kemptner Tobel",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kinder-exkursion-pilze-entdecken-im-kemptner-tobel/"
+              "label": "Einfach Gesund Bleiben 60+: SturzPraxis",
+              "detail": "Uitikon-Waldegg, Uitikon",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einfach-gesund-bleiben-60-sturzpraxis/"
             },
             {
-              "label": "Allerheiligen",
-              "detail": "Röm.-kath. Kirche Oberengstringen, Oberengstringen",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/eventi/musica/oberengstringen/allerheiligen_AXNmiJE"
+              "label": "CCCZ Oncology Symposium: Lung Cancer",
+              "detail": "Universitätsspital Zürich, Zürich",
+              "date": "2026-11-02",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/cccz-oncology-symposium-lung-cancer_ABwsLHx"
             },
             {
-              "label": "Babykonzert \"Unterwegs in Europa\"",
-              "detail": "Gemeinschaftszentrum Stürmeierhuus, Schlieren",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/babykonzert-unterwegs-in-europa/"
+              "label": "Vernissage Ausstellung \"was ihr nicht seht\"",
+              "detail": "Pfäffikon ZH, Pfäffikon",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vernissage-ausstellung-was-ihr-nicht-seht/"
             },
             {
-              "label": "Musikalische und interaktive Lesung \"Räbelichtli\"",
-              "detail": "Uster",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/musikalische-und-interaktive-lesung-raebelichtli/"
+              "label": "The Sisters of Mercy (UK)",
+              "detail": "X-TRA",
+              "date": "2026-11-02",
+              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/zuerich/the-sisters-of-mercy-uk_A7fSLqR"
             },
             {
-              "label": "Kammermusik@ZKO — Elegien der Stille",
+              "label": "The Sisters of Mercy (UK)",
+              "detail": "X-TRA, Zürich",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/the-sisters-of-mercy-uk/"
+            },
+            {
+              "label": "Amistat",
+              "detail": "Kaufleuten",
+              "date": "2026-11-02",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/amistat_AeTNTLg"
+            },
+            {
+              "label": "Amistat",
               "detail": "Zurich, Zürich",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kammermusikzko-elegien-der-stille/"
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/amistat-2/"
             },
             {
               "label": "3. Kammerkonzert",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-01",
+              "detail": "Zurich, Zürich — läuft, letzter Tag: 2. November 2026",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/3-kammerkonzert/"
             },
             {
-              "label": "Pokerkurs für Beginner",
-              "detail": "Urdorf",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pokerkurs-fuer-beginner-3/"
+              "label": "Kochkurs für Seniorinnen und Senioren - OV Rüti",
+              "detail": "Rüti ZH, Rüti (ZH) — läuft, letzter Tag: 21. November 2026",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kochkurs-fuer-seniorinnen-und-senioren-ov-rueti/"
             },
             {
-              "label": "Offenes Atelier für Alle",
-              "detail": "Museum für Gestaltung Zürich, Zürich",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/offenes-atelier-fuer-alle-2/"
-            },
-            {
-              "label": "Abenteuer im Museum",
-              "detail": "Küsnacht ZH",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/abenteuer-im-museum/"
-            },
-            {
-              "label": "Das Dschungel­buch",
-              "detail": "Winterthur",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/das-dschungelbuch/"
+              "label": "Meditative Nachtführung im Grossmünster",
+              "detail": "Zurich, Zürich — läuft, letzter Tag: 27. November 2026",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/meditative-nachtfuehrung-im-grossmuenster/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zurich/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "fr": {
       "canton": "ZH",
@@ -366,69 +366,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Kinder-Exkursion – Pilze entdecken im Kemptner Tobel",
-              "detail": "Vor der Nagelfabrik Kemptner Tobel",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kinder-exkursion-pilze-entdecken-im-kemptner-tobel/"
+              "label": "Einfach Gesund Bleiben 60+: SturzPraxis",
+              "detail": "Uitikon-Waldegg, Uitikon",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einfach-gesund-bleiben-60-sturzpraxis/"
             },
             {
-              "label": "Allerheiligen",
-              "detail": "Röm.-kath. Kirche Oberengstringen, Oberengstringen",
-              "date": "2026-11-01",
-              "url": "https://www.guidle.com/it/eventi/musica/oberengstringen/allerheiligen_AXNmiJE"
+              "label": "CCCZ Oncology Symposium: Lung Cancer",
+              "detail": "Universitätsspital Zürich, Zürich",
+              "date": "2026-11-02",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/cccz-oncology-symposium-lung-cancer_ABwsLHx"
             },
             {
-              "label": "Babykonzert \"Unterwegs in Europa\"",
-              "detail": "Gemeinschaftszentrum Stürmeierhuus, Schlieren",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/babykonzert-unterwegs-in-europa/"
+              "label": "Vernissage Ausstellung \"was ihr nicht seht\"",
+              "detail": "Pfäffikon ZH, Pfäffikon",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vernissage-ausstellung-was-ihr-nicht-seht/"
             },
             {
-              "label": "Musikalische und interaktive Lesung \"Räbelichtli\"",
-              "detail": "Uster",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/musikalische-und-interaktive-lesung-raebelichtli/"
+              "label": "The Sisters of Mercy (UK)",
+              "detail": "X-TRA",
+              "date": "2026-11-02",
+              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/zuerich/the-sisters-of-mercy-uk_A7fSLqR"
             },
             {
-              "label": "Kammermusik@ZKO — Elegien der Stille",
+              "label": "The Sisters of Mercy (UK)",
+              "detail": "X-TRA, Zürich",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/the-sisters-of-mercy-uk/"
+            },
+            {
+              "label": "Amistat",
+              "detail": "Kaufleuten",
+              "date": "2026-11-02",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/amistat_AeTNTLg"
+            },
+            {
+              "label": "Amistat",
               "detail": "Zurich, Zürich",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kammermusikzko-elegien-der-stille/"
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/amistat-2/"
             },
             {
               "label": "3. Kammerkonzert",
-              "detail": "Zurich, Zürich",
-              "date": "2026-11-01",
+              "detail": "Zurich, Zürich — en cours, dernier jour : 2 novembre 2026",
+              "date": "2026-11-02",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/3-kammerkonzert/"
             },
             {
-              "label": "Pokerkurs für Beginner",
-              "detail": "Urdorf",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pokerkurs-fuer-beginner-3/"
+              "label": "Kochkurs für Seniorinnen und Senioren - OV Rüti",
+              "detail": "Rüti ZH, Rüti (ZH) — en cours, dernier jour : 21 novembre 2026",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kochkurs-fuer-seniorinnen-und-senioren-ov-rueti/"
             },
             {
-              "label": "Offenes Atelier für Alle",
-              "detail": "Museum für Gestaltung Zürich, Zürich",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/offenes-atelier-fuer-alle-2/"
-            },
-            {
-              "label": "Abenteuer im Museum",
-              "detail": "Küsnacht ZH",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/abenteuer-im-museum/"
-            },
-            {
-              "label": "Das Dschungel­buch",
-              "detail": "Winterthur",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/das-dschungelbuch/"
+              "label": "Meditative Nachtführung im Grossmünster",
+              "detail": "Zurich, Zürich — en cours, dernier jour : 27 novembre 2026",
+              "date": "2026-11-02",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/meditative-nachtfuehrung-im-grossmuenster/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zurich/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     }
   }
 }
