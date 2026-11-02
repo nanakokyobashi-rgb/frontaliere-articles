@@ -702,14 +702,32 @@ rollback_serialized_publications() {
   local -a candidate_commits=("$@")
   local remote_head rollback_stage base_tree current_tree rollback_tree rollback_commit
   local rollback_content_revision rollback_deadline
-  local candidate candidate_found=0 clone_err
+  local rollback_repo rollback_pat_token candidate_parent expected_parent clone_err
+  local candidate
+  local -a rollback_git_opts=()
 
   if [ -z "$base_commit" ] || [ "${#candidate_commits[@]}" -eq 0 ]; then
     echo "::error::serialized push failed without a complete rollback base" >&2
     return 1
   fi
 
-  remote_head="$(git ${GIT_PAT_OPTS[@]+"${GIT_PAT_OPTS[@]}"} ls-remote "$SHARD_REPO" refs/heads/main 2>/dev/null | awk 'NR == 1 { print $1 }')"
+  # A Pages failure can arrive after shard_pat_push has successfully published
+  # through HTTPS and unset SHARD_PUSH_TOKEN. Resolve the owner-aware PAT again
+  # and use an explicit HTTPS remote for every reconciliation operation; the
+  # deploy key is only the fallback when no PAT-backed GitHub remote is usable.
+  rollback_repo="$SHARD_REPO"
+  rollback_pat_token="$(shard_push_token_for_repo "$SHARD_REPO")"
+  if [ -n "$rollback_pat_token" ] && rollback_repo="$(shard_https_push_url "$SHARD_REPO")"; then
+    SHARD_PUSH_TOKEN="$rollback_pat_token"
+    export SHARD_PUSH_TOKEN
+    echo "::add-mask::$SHARD_PUSH_TOKEN"
+    rollback_git_opts=(-c credential.helper= -c "credential.helper=$_SHARD_CRED_HELPER")
+  else
+    rollback_repo="$SHARD_REPO"
+    rollback_git_opts=("${GIT_PAT_OPTS[@]+"${GIT_PAT_OPTS[@]}"}")
+  fi
+
+  remote_head="$(git ${rollback_git_opts[@]+"${rollback_git_opts[@]}"} ls-remote "$rollback_repo" refs/heads/main 2>/dev/null | awk 'NR == 1 { print $1 }')"
   if ! [[ "$remote_head" =~ ^[0-9a-fA-F]{40}$ ]]; then
     echo "::error::cannot read $section-$loc shard HEAD for serialized-push rollback" >&2
     return 1
@@ -718,21 +736,11 @@ rollback_serialized_publications() {
     echo "ℹ️ $section-$loc article shard: failed batch left the pre-batch tree live"
     return 0
   fi
-  for candidate in "${candidate_commits[@]}"; do
-    if [ "$candidate" = "$remote_head" ]; then
-      candidate_found=1
-      break
-    fi
-  done
-  if [ "$candidate_found" != 1 ]; then
-    echo "::error::refusing serialized-push rollback: shard HEAD $remote_head is not one of our batch commits" >&2
-    return 1
-  fi
 
   rollback_stage="$rollback_root/rollback-stage"
   rm -rf "$rollback_stage"
   clone_err="$(mktemp)"
-  if ! git ${GIT_PAT_OPTS[@]+"${GIT_PAT_OPTS[@]}"} clone -q --depth 1 --filter=blob:none --no-checkout "$SHARD_REPO" "$rollback_stage" 2>"$clone_err"; then
+  if ! git ${rollback_git_opts[@]+"${rollback_git_opts[@]}"} clone -q --depth 1 --filter=blob:none --no-checkout "$rollback_repo" "$rollback_stage" 2>"$clone_err"; then
     echo "::error::serialized-push rollback clone failed: $(cat "$clone_err")" >&2
     rm -f "$clone_err"
     return 1
@@ -742,13 +750,42 @@ rollback_serialized_publications() {
     echo "::error::refusing serialized-push rollback: shard moved during reconciliation clone" >&2
     return 1
   fi
-  if ! git ${GIT_PAT_OPTS[@]+"${GIT_PAT_OPTS[@]}"} -C "$rollback_stage" fetch --quiet --filter=blob:none --no-tags origin "$base_commit" >/dev/null 2>&1; then
+  if ! git ${rollback_git_opts[@]+"${rollback_git_opts[@]}"} -C "$rollback_stage" fetch --quiet --filter=blob:none --no-tags origin "$base_commit" >/dev/null 2>&1; then
     echo "::error::serialized-push rollback could not fetch the pre-batch commit $base_commit" >&2
     return 1
   fi
-  if ! git -C "$rollback_stage" cat-file -e "$base_commit^{commit}" >/dev/null 2>&1 || \
-     ! git -C "$rollback_stage" merge-base --is-ancestor "$base_commit" "$remote_head" >/dev/null 2>&1; then
-    echo "::error::refusing serialized-push rollback: pre-batch commit $base_commit is not an ancestor of shard HEAD" >&2
+  if ! git -C "$rollback_stage" cat-file -e "$base_commit^{commit}" >/dev/null 2>&1; then
+    echo "::error::refusing serialized-push rollback: pre-batch commit $base_commit is unavailable after fetch" >&2
+    return 1
+  fi
+
+  # The rollback clone is intentionally shallow: walk the commits recorded by
+  # this invocation and compare each registered parent directly. This proves
+  # the exact base -> batch chain without asking merge-base to cross the
+  # shallow boundary at remote_head.
+  expected_parent="$base_commit"
+  for candidate in "${candidate_commits[@]}"; do
+    if ! [[ "$candidate" =~ ^[0-9a-fA-F]{40}$ ]]; then
+      echo "::error::refusing serialized-push rollback: invalid batch commit $candidate" >&2
+      return 1
+    fi
+    if ! git -C "$rollback_stage" cat-file -e "$candidate^{commit}" >/dev/null 2>&1 && \
+       ! git ${rollback_git_opts[@]+"${rollback_git_opts[@]}"} -C "$rollback_stage" fetch --quiet --filter=blob:none --no-tags origin "$candidate" >/dev/null 2>&1; then
+      echo "::error::serialized-push rollback could not fetch batch commit $candidate" >&2
+      return 1
+    fi
+    candidate_parent="$(git -C "$rollback_stage" show -s --format='%P' "$candidate" 2>/dev/null)" || {
+      echo "::error::refusing serialized-push rollback: batch commit $candidate is unreadable" >&2
+      return 1
+    }
+    if [ "$candidate_parent" != "$expected_parent" ]; then
+      echo "::error::refusing serialized-push rollback: batch commit $candidate does not directly follow $expected_parent" >&2
+      return 1
+    fi
+    expected_parent="$candidate"
+  done
+  if [ "$expected_parent" != "$remote_head" ]; then
+    echo "::error::refusing serialized-push rollback: shard HEAD $remote_head is outside the recorded batch commit chain" >&2
     return 1
   fi
 
@@ -780,7 +817,7 @@ rollback_serialized_publications() {
       -m "$section-$loc article shard publication reconciliation" \
       -m "Restore the pre-push tree after the Pages gate for a published commit failed.")" || return 1
   fi
-  if ! git ${GIT_PAT_OPTS[@]+"${GIT_PAT_OPTS[@]}"} -C "$rollback_stage" push "$SHARD_REPO" "$rollback_commit":main; then
+  if ! git ${rollback_git_opts[@]+"${rollback_git_opts[@]}"} -C "$rollback_stage" push "$rollback_repo" "$rollback_commit":main; then
     echo "::error::serialized-push rollback push failed; the shard may need manual reconciliation" >&2
     return 1
   fi

@@ -168,6 +168,15 @@ test('i batch Pages sono seriali, raggruppati e riconciliabili', () => {
 test('il rollback mantiene la revisione e condivide il budget Pages fra i batch', () => {
   const source = readFileSync(PUSHER, 'utf8');
 
+  assert.match(source, /rollback_pat_token=.*shard_push_token_for_repo\s+"\$SHARD_REPO"/u);
+  assert.match(source, /rollback_repo=.*shard_https_push_url\s+"\$SHARD_REPO"/u);
+  assert.match(source, /rollback_git_opts=\(-c credential\.helper=/u);
+  assert.match(source, /\$\{rollback_git_opts\[@/u);
+  assert.match(source, /candidate_parent=.*show -s --format='%P'\s+"\$candidate"/u);
+  assert.match(source, /candidate_parent.*expected_parent/u);
+  assert.match(source, /expected_parent="\$candidate"/u);
+  assert.match(source, /expected_parent.*remote_head/u);
+  assert.doesNotMatch(source, /merge-base --is-ancestor/u);
   assert.match(source, /rollback_content_revision[\s\S]{0,700}Content-Rev: \$rollback_content_revision/u);
   assert.match(source, /export ARTICLE_PUSH_PAGES_DEADLINE="\$article_push_pages_deadline"/u);
   assert.match(source, /ARTICLE_PUSH_PAGES_DEADLINE="\$article_push_pages_deadline"[\s\\\n]+ARTICLE_PUSH_STATUS_FILE/u);
