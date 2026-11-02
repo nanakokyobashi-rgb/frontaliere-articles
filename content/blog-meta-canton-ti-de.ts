@@ -78,6 +78,9 @@ const blogMetaCantonTiDe: Record<string, string> = {
     'blog.article.frontalieri-riforma-disoccupazione-ue.title': 'Grenzüberschreitende Pendler und Arbeitslosigkeit: Die EU ändert die Regeln',
     'blog.article.frontalieri-riforma-disoccupazione-ue.excerpt': 'Brüssel genehmigt Arbeitslosenreform.',
     'blog.article.frontalieri-riforma-disoccupazione-ue.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.guasto-camerlata-linea-chiasso.title': 'Störung in der Nähe von Como-Camerlata: Verspätungen in Richtung Chiasso',
+    'blog.article.guasto-camerlata-linea-chiasso.excerpt': 'Die Quelle meldet eine Störung in der Nähe von Como-Camerlata sowie Verspätungen im Zugverkehr auf der Strecke Milano-Como-Chiasso.',
+    'blog.article.guasto-camerlata-linea-chiasso.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonTiDe;

@@ -282,4 +282,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'guasto-camerlata-linea-chiasso',
+ category: 'pratico',
+ date: '2026-11-02T23:32:30.686Z',
+ image: '/images/blog/article-guasto-camerlata-linea-chiasso.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

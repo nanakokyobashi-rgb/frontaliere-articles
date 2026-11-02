@@ -78,6 +78,9 @@ const blogMetaCantonTiEn: Record<string, string> = {
     'blog.article.frontalieri-riforma-disoccupazione-ue.title': 'Cross-border commuters and unemployment: EU changes the rules',
     'blog.article.frontalieri-riforma-disoccupazione-ue.excerpt': 'Brussels approves unemployment reform The criterion shifts from residence to employment status For Switzerland, the horizon is around 2029 Bern',
     'blog.article.frontalieri-riforma-disoccupazione-ue.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.guasto-camerlata-linea-chiasso.title': 'Fault near Como-Camerlata: delays towards Chiasso',
+    'blog.article.guasto-camerlata-linea-chiasso.excerpt': 'The source reports a fault near Como-Camerlata and delays to rail traffic on the Milan-Como-Chiasso line.',
+    'blog.article.guasto-camerlata-linea-chiasso.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonTiEn;

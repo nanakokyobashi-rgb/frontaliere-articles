@@ -78,6 +78,9 @@ const blogMetaCantonTiFr: Record<string, string> = {
     'blog.article.frontalieri-riforma-disoccupazione-ue.title': 'Les navetteurs transfrontaliers et le chômage : l\'UE modifie les règles',
     'blog.article.frontalieri-riforma-disoccupazione-ue.excerpt': 'Bruxelles approuve la réforme du chômage Le critère passe du statut de résidence au statut d\'emploi Pour la Suisse, l\'horizon est autour de 2029 Berne',
     'blog.article.frontalieri-riforma-disoccupazione-ue.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.guasto-camerlata-linea-chiasso.title': 'Panne près de Como-Camerlata : retards en direction de Chiasso',
+    'blog.article.guasto-camerlata-linea-chiasso.excerpt': 'La source signale une panne près de Como-Camerlata et des retards sur la circulation ferroviaire de la ligne Milano-Como-Chiasso.',
+    'blog.article.guasto-camerlata-linea-chiasso.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonTiFr;

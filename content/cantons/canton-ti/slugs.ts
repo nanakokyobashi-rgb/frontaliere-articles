@@ -28,6 +28,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'sistema-ferroviario-accordo-ue': { it: 'sistema-ferroviario-accordo-ue', en: 'railway-system-eu-agreement', de: 'schienennetz-eu-abkommen', fr: 'systeme-ferroviaire-accord-ue' },
  'attrattivita-economica-zurigo-ticino': { it: 'attrattivita-economica-zurigo-ticino', en: 'economic-attractiveness-zurich-ticino', de: 'wirtschaftliche-atraktivitaet-zuerich-tessin', fr: 'attractivite-economique-zurich-tessin' },
  'frontalieri-riforma-disoccupazione-ue': { it: 'frontalieri-riforma-disoccupazione-ue', en: 'cross-border-unemployment-reform-eu', de: 'frontalieri-arbeitslosigkeit-reform-eu', fr: 'frontaliers-reforme-chomage-ue' },
+ 'guasto-camerlata-linea-chiasso': { it: 'guasto-camerlata-linea-chiasso', en: 'camerlata-rail-delay-chiasso', de: 'bahnstoerung-camerlata-chiasso', fr: 'retards-rail-camerlata-chiasso' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
