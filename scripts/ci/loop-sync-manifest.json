@@ -3206,8 +3206,8 @@
       "reason": "Gate deterministico del nesso editoriale degli articoli generati: vive col generatore, che esiste solo qui.",
       "baseline": {
         "site": null,
-        "corpus": "70890a47f34f4099",
-        "alignedAt": "2026-11-01"
+        "corpus": "9b3debf591c5d96f",
+        "alignedAt": "2026-11-02"
       }
     },
     {
@@ -3226,7 +3226,7 @@
       "reason": "Affermazioni fiscali smentite dalle fonti primarie, usate dal generatore e dal test sul corpus.",
       "baseline": {
         "site": null,
-        "corpus": "c283795ab0aa1559",
+        "corpus": "ad0acffcc9fe2540",
         "alignedAt": "2026-11-02"
       }
     },
