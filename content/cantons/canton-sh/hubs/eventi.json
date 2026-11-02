@@ -4,17 +4,17 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "eventi",
-  "updatedAt": "2026-11-01T13:11:05.408Z",
-  "contentHash": "ed2ebe26e192c5bf5b5163fd4c2bc933b567f5b4f6f8815b4cd7ed44b4979152",
+  "updatedAt": "2026-11-02T09:20:10.429Z",
+  "contentHash": "4db4bfe846a637090c1f47eb0d7f2e98fea860f241c8c23fbab2e0fc0d6737c0",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-31T14:21:36.178Z",
+      "updatedAt": "2026-11-02T02:24:34.417Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-31T20:43:08.728Z",
+      "updatedAt": "2026-11-01T21:24:45.283Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "22",
+          "value": "23",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,30 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Auf den Spuren einer vergessenen Kultur: das Landjudentum am Hochrhein",
-              "detail": "Bahnhof SBB Schaffhausen, Schaffhausen",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/auf-den-spuren-einer-vergessenen-kultur-das-landjudentum-am-hochrhein/"
-            },
-            {
-              "label": "Sonntags um 11: Kulturelle Begegnung 2 «ADVENTSKONZERT»",
-              "detail": "Schaffhausen",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sonntags-um-11-kulturelle-begegnung-2-adventskonzert/"
-            },
-            {
-              "label": "Hand im Glück Puppet Theater - Finitopepitto! (Children's Theater, ages 5+)",
-              "detail": "Theater Bachturnhalle, Schaffhausen",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/figurentheater-hand-im-glueck-finitopepitto-kindertheater-5/"
-            },
-            {
-              "label": "Viel Lärm um nichts",
-              "detail": "Stadttheater Schaffhausen, Schaffhausen — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/viel-laerm-um-nichts/"
-            },
             {
               "label": "\"Dusha&Cheese\" SPECIAL GUEST Sara Santos, Flamencotänzerin",
               "detail": "Haberhaus Bühne",
@@ -96,11 +72,35 @@
               "detail": "Quartiertreff nik.",
               "date": "2026-11-06",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/musikanlass-mit-dem-ensemble-clarobello_AZY2K9x"
+            },
+            {
+              "label": "Bubble Beatz – schlagZEUGS",
+              "detail": "Schwanen Kino & Theater, Stein am Rhein",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/events/music/stein-am-rhein/bubble-beatz-beats_A8p3TyH"
+            },
+            {
+              "label": "Noah Parks [CH]",
+              "detail": "Kulturzentrum Kammgarn",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/noah-parks-ch_AT9dqTk"
+            },
+            {
+              "label": "Razorlight [UK]",
+              "detail": "Kulturzentrum Kammgarn",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/razorlight-uk_ARnKZkM"
+            },
+            {
+              "label": "Salonorchester Schaffhausen - «MEMORIES»",
+              "detail": "Gemeindekanzlei Neuhausen am Rheinfall, Neuhausen am Rheinfall",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/salonorchester-schaffhausen-memories/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/sciaffusa/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -133,7 +133,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -155,7 +155,7 @@
           "url": "/eventi/sciaffusa/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "en": {
       "canton": "SH",
@@ -165,7 +165,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "22",
+          "value": "23",
           "note": "from the site’s events calendar"
         }
       ],
@@ -175,30 +175,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Auf den Spuren einer vergessenen Kultur: das Landjudentum am Hochrhein",
-              "detail": "Bahnhof SBB Schaffhausen, Schaffhausen",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/auf-den-spuren-einer-vergessenen-kultur-das-landjudentum-am-hochrhein/"
-            },
-            {
-              "label": "Sonntags um 11: Kulturelle Begegnung 2 «ADVENTSKONZERT»",
-              "detail": "Schaffhausen",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sonntags-um-11-kulturelle-begegnung-2-adventskonzert/"
-            },
-            {
-              "label": "Hand im Glück Puppet Theater - Finitopepitto! (Children's Theater, ages 5+)",
-              "detail": "Theater Bachturnhalle, Schaffhausen",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/figurentheater-hand-im-glueck-finitopepitto-kindertheater-5/"
-            },
-            {
-              "label": "Viel Lärm um nichts",
-              "detail": "Stadttheater Schaffhausen, Schaffhausen — ongoing, last day: 1 November 2026",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/viel-laerm-um-nichts/"
-            },
             {
               "label": "\"Dusha&Cheese\" SPECIAL GUEST Sara Santos, flamenco dancer",
               "detail": "Haberhaus Bühne",
@@ -234,11 +210,35 @@
               "detail": "Quartiertreff nik.",
               "date": "2026-11-06",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/musikanlass-mit-dem-ensemble-clarobello_AZY2K9x"
+            },
+            {
+              "label": "Bubble Beatz – Beats",
+              "detail": "Schwanen Kino & Theater, Stein am Rhein",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/events/music/stein-am-rhein/bubble-beatz-beats_A8p3TyH"
+            },
+            {
+              "label": "Noah Parks [CH]",
+              "detail": "Kulturzentrum Kammgarn",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/noah-parks-ch_AT9dqTk"
+            },
+            {
+              "label": "Razorlight [UK]",
+              "detail": "Kulturzentrum Kammgarn",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/razorlight-uk_ARnKZkM"
+            },
+            {
+              "label": "Salonorchester Schaffhausen - «MEMORIES»",
+              "detail": "Gemeindekanzlei Neuhausen am Rheinfall, Neuhausen am Rheinfall",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/salonorchester-schaffhausen-memories/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schaffhausen/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -271,7 +271,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -293,7 +293,7 @@
           "url": "/en/events/schaffhausen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "de": {
       "canton": "SH",
@@ -303,7 +303,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "22",
+          "value": "23",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -313,30 +313,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Auf den Spuren einer vergessenen Kultur: das Landjudentum am Hochrhein",
-              "detail": "Bahnhof SBB Schaffhausen, Schaffhausen",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/auf-den-spuren-einer-vergessenen-kultur-das-landjudentum-am-hochrhein/"
-            },
-            {
-              "label": "Sonntags um 11: Kulturelle Begegnung 2 «ADVENTSKONZERT»",
-              "detail": "Schaffhausen",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sonntags-um-11-kulturelle-begegnung-2-adventskonzert/"
-            },
-            {
-              "label": "Figurentheater Hand im Glück - Finitopepitto! (Kindertheater 5+)",
-              "detail": "Theater Bachturnhalle, Schaffhausen",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/figurentheater-hand-im-glueck-finitopepitto-kindertheater-5/"
-            },
-            {
-              "label": "Viel Lärm um nichts",
-              "detail": "Stadttheater Schaffhausen, Schaffhausen — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/viel-laerm-um-nichts/"
-            },
             {
               "label": "\"Dusha&Cheese\" SPECIAL GUEST Sara Santos, Flamencotänzerin",
               "detail": "Haberhaus Bühne",
@@ -372,11 +348,35 @@
               "detail": "Quartiertreff nik.",
               "date": "2026-11-06",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/musikanlass-mit-dem-ensemble-clarobello_AZY2K9x"
+            },
+            {
+              "label": "Bubble Beatz – schlagZEUGS",
+              "detail": "Schwanen Kino & Theater, Stein am Rhein",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/events/music/stein-am-rhein/bubble-beatz-beats_A8p3TyH"
+            },
+            {
+              "label": "Noah Parks [CH]",
+              "detail": "Kulturzentrum Kammgarn",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/noah-parks-ch_AT9dqTk"
+            },
+            {
+              "label": "Razorlight [UK]",
+              "detail": "Kulturzentrum Kammgarn",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/razorlight-uk_ARnKZkM"
+            },
+            {
+              "label": "Salonorchester Schaffhausen - «MEMORIES»",
+              "detail": "Gemeindekanzlei Neuhausen am Rheinfall, Neuhausen am Rheinfall",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/salonorchester-schaffhausen-memories/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schaffhausen/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -409,7 +409,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -431,7 +431,7 @@
           "url": "/de/veranstaltungen/schaffhausen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "fr": {
       "canton": "SH",
@@ -441,7 +441,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "22",
+          "value": "23",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -451,30 +451,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Auf den Spuren einer vergessenen Kultur: das Landjudentum am Hochrhein",
-              "detail": "Bahnhof SBB Schaffhausen, Schaffhausen",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/auf-den-spuren-einer-vergessenen-kultur-das-landjudentum-am-hochrhein/"
-            },
-            {
-              "label": "Sonntags um 11: Kulturelle Begegnung 2 «ADVENTSKONZERT»",
-              "detail": "Schaffhausen",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sonntags-um-11-kulturelle-begegnung-2-adventskonzert/"
-            },
-            {
-              "label": "Théâtre de marionnettes « Hand im Glück » - Finitopepitto ! (Théâtre pour enfants à partir de 5 ans)",
-              "detail": "Theater Bachturnhalle, Schaffhausen",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/figurentheater-hand-im-glueck-finitopepitto-kindertheater-5/"
-            },
-            {
-              "label": "Viel Lärm um nichts",
-              "detail": "Stadttheater Schaffhausen, Schaffhausen — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-11-01",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/viel-laerm-um-nichts/"
-            },
             {
               "label": "« Dusha&Cheese » INVITÉE SPÉCIALE : Sara Santos, danseuse de flamenco",
               "detail": "Haberhaus Bühne",
@@ -510,11 +486,35 @@
               "detail": "Quartiertreff nik.",
               "date": "2026-11-06",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/musikanlass-mit-dem-ensemble-clarobello_AZY2K9x"
+            },
+            {
+              "label": "Bubble Beatz – percussions",
+              "detail": "Schwanen Kino & Theater, Stein am Rhein",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/events/music/stein-am-rhein/bubble-beatz-beats_A8p3TyH"
+            },
+            {
+              "label": "Noah Parks [CH]",
+              "detail": "Kulturzentrum Kammgarn",
+              "date": "2026-11-06",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/noah-parks-ch_AT9dqTk"
+            },
+            {
+              "label": "Razorlight [Royaume-Uni]",
+              "detail": "Kulturzentrum Kammgarn",
+              "date": "2026-11-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/razorlight-uk_ARnKZkM"
+            },
+            {
+              "label": "Salonorchester Schaffhausen - «MEMORIES»",
+              "detail": "Gemeindekanzlei Neuhausen am Rheinfall, Neuhausen am Rheinfall",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/salonorchester-schaffhausen-memories/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schaffhouse/",
-          "updatedAt": "2026-10-31T14:21:36.178Z"
+          "updatedAt": "2026-11-02T02:24:34.417Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -547,7 +547,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -569,7 +569,7 @@
           "url": "/fr/evenements/schaffhouse/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     }
   }
 }

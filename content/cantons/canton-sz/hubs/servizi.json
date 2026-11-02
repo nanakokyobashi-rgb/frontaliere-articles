@@ -4,22 +4,22 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "servizi",
-  "updatedAt": "2026-11-01T13:11:05.408Z",
-  "contentHash": "735aca6a84f690a5e02e1ac0fd66782ac93b2400efde2b040df7c9ccef78569b",
+  "updatedAt": "2026-11-02T09:20:10.429Z",
+  "contentHash": "8d356ef499fe3f26efe4eb69da4c46ed17d8cbef979289d5f20f71c1eb82a6b0",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-10-25T09:11:35.438Z",
+      "updatedAt": "2026-11-01T11:17:34.347Z",
       "keyFacts": 1
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-31T21:33:21.304Z",
+      "updatedAt": "2026-11-01T22:02:05.721Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-31T20:43:08.728Z",
+      "updatedAt": "2026-11-01T21:24:45.283Z",
       "keyFacts": 0
     }
   ],
@@ -56,7 +56,7 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-25T09:11:35.438Z"
+          "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
           "id": "aste-targhe",
@@ -87,7 +87,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-31T21:33:21.304Z"
+          "updatedAt": "2026-11-01T22:02:05.721Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -110,7 +110,7 @@
               "url": "https://www.spital-schwyz.ch/de/ueber-uns/aktuelles/news/zusammenarbeit-rettungsdienst-schwyz.html"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -157,10 +157,10 @@
           "date": "2026-08-23T00:29:38.108Z"
         },
         {
-          "title": "Cantone Svitto: cicli scolastici e iscrizione",
-          "url": "/articoli-svizzera/scuola-svitto-cicli-e-iscrizione/",
-          "excerpt": "L'obbligo scolastico nel cantone Svitto inizia a 6 anni. Scopri cicli, iscrizioni, calendario e transizione alle scuole superiori.",
-          "date": "2026-09-04T00:44:02.678Z"
+          "title": "Premi cassa malati Svitto: fasce, franchigie e sussidi",
+          "url": "/articoli-svizzera/premi-cassa-malati-svitto/",
+          "excerpt": "Analisi dei premi dell'assicurazione malattia obbligatoria nel Cantone di Svitto: fasce di premio, franchigie, modelli e requisiti per la riduzione.",
+          "date": "2026-08-16T11:05:05.342Z"
         }
       ],
       "latestCantonArticles": [],
@@ -190,7 +190,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "en": {
       "canton": "SZ",
@@ -224,7 +224,7 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-25T09:11:35.438Z"
+          "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
           "id": "aste-targhe",
@@ -255,7 +255,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-31T21:33:21.304Z"
+          "updatedAt": "2026-11-01T22:02:05.721Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -278,7 +278,7 @@
               "url": "https://www.spital-schwyz.ch/de/ueber-uns/aktuelles/news/zusammenarbeit-rettungsdienst-schwyz.html"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -325,10 +325,10 @@
           "date": "2026-08-23T00:29:38.108Z"
         },
         {
-          "title": "Canton of Schwyz: schooling and enrolment",
-          "url": "/en/swiss-articles/school-canton-schwyz-cycles-and-enrollment/",
-          "excerpt": "Compulsory schooling in the canton of Schwyz begins at the age of 6. Learn about cycles, enrollment, calendar, and high school transition.",
-          "date": "2026-09-04T00:44:02.678Z"
+          "title": "Schwyz sick pay premiums: bands, deductibles and subsidies",
+          "url": "/en/swiss-articles/schwyz-health-insurance-premiums/",
+          "excerpt": "Analysis of compulsory health insurance premiums in the Canton of Schwyz: premium brackets, deductibles, models and requirements for reduction.",
+          "date": "2026-08-16T11:05:05.342Z"
         }
       ],
       "latestCantonArticles": [],
@@ -354,7 +354,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "de": {
       "canton": "SZ",
@@ -388,7 +388,7 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-25T09:11:35.438Z"
+          "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
           "id": "aste-targhe",
@@ -419,7 +419,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-31T21:33:21.304Z"
+          "updatedAt": "2026-11-01T22:02:05.721Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -442,7 +442,7 @@
               "url": "https://www.spital-schwyz.ch/de/ueber-uns/aktuelles/news/zusammenarbeit-rettungsdienst-schwyz.html"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -489,10 +489,10 @@
           "date": "2026-08-23T00:29:38.108Z"
         },
         {
-          "title": "Kanton Schwyz: Schulzyklen und Einschreibung",
-          "url": "/de/schweiz-artikel/schulen-kanton-schwyz-zyklus-und-anmeldung/",
-          "excerpt": "Die Schulpflicht im Kanton Schwyz beginnt mit 6 Jahren. Entdecken Sie Zyklen, Einschreibungen, Kalender und den Übergang in die weiterführende Schule.",
-          "date": "2026-09-04T00:44:02.678Z"
+          "title": "Krankenkassenprämien Schwyz: Zeitabschnitte, Franchisen und Zuschüsse",
+          "url": "/de/schweiz-artikel/krankenkassenpraemien-schwyz/",
+          "excerpt": "Prämienanalyse der obligatorischen Krankenversicherung im Kanton Schwyz: Prämienspannen, Franchisen, Modelle und Reduktionsvoraussetzungen.",
+          "date": "2026-08-16T11:05:05.342Z"
         }
       ],
       "latestCantonArticles": [],
@@ -518,7 +518,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     },
     "fr": {
       "canton": "SZ",
@@ -552,7 +552,7 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-25T09:11:35.438Z"
+          "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
           "id": "aste-targhe",
@@ -583,7 +583,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-31T21:33:21.304Z"
+          "updatedAt": "2026-11-01T22:02:05.721Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -606,7 +606,7 @@
               "url": "https://www.spital-schwyz.ch/de/ueber-uns/aktuelles/news/zusammenarbeit-rettungsdienst-schwyz.html"
             }
           ],
-          "updatedAt": "2026-10-31T20:43:08.728Z"
+          "updatedAt": "2026-11-01T21:24:45.283Z"
         }
       ],
       "curatedArticles": [
@@ -653,10 +653,10 @@
           "date": "2026-08-23T00:29:38.108Z"
         },
         {
-          "title": "Canton de Schwytz : cycles scolaires et inscription",
-          "url": "/fr/articles-suisse/ecole-canton-schwytz-cycles-et-inscription/",
-          "excerpt": "L'obligation scolaire dans le canton de Schwytz commence à 6 ans. Découvrez les cycles, les inscriptions, le calendrier et la transition vers les lycées.",
-          "date": "2026-09-04T00:44:02.678Z"
+          "title": "Primes caisse-maladie Schwytz : tranches, franchises et subventions",
+          "url": "/fr/articles-suisse/primes-assurance-maladie-schwytz/",
+          "excerpt": "Analyse des primes de l'assurance maladie obligatoire dans le canton de Schwytz : fourchettes de primes, franchises, modèles et conditions de réduction.",
+          "date": "2026-08-16T11:05:05.342Z"
         }
       ],
       "latestCantonArticles": [],
@@ -678,7 +678,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-01T13:11:05.408Z"
+      "updatedAt": "2026-11-02T09:20:10.429Z"
     }
   }
 }
