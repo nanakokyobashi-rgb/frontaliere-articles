@@ -202,7 +202,7 @@ export const TRANSLATION_GLOSSARY = [
       // NB: `\b` is ASCII-only in JS, so "Épouse" at the start of a title has
       // no word boundary before it; capture and preserve its Unicode left boundary.
       fr: [[
-        /(^|[^\p{L}\p{N}])([eé]pouse)(?![\p{L}\p{N}])/giu,
+        /(^|[^\p{L}\p{M}\p{N}])([eé]pouse)(?![\p{L}\p{M}\p{N}])/giu,
         (_match, boundary, term) => `${boundary}${matchCase(term, 'spécialiste')}`,
         TITLE_ONLY,
       ]],
@@ -417,11 +417,11 @@ const GENDER_TRIGRAPH_BRACKETED_SRC =
 // d/x/g makes it unambiguous. The bracketed form is byte-identical to
 // canonicalize's, since brackets already disambiguate.
 const GENDER_TRIGRAPH_BARE_SRC =
-  String.raw`(^|[\s\-–—|,./])(?:([mwfhlp])\s*\/\s*([mwfhlp])\s*\/\s*([dxg])`
-  + String.raw`|m\s*\/\s*w|w\s*\/\s*m|m\s*\/\s*f|f\s*\/\s*m|h\s*\/\s*f|f\s*\/\s*h)(?=$|[\s\-–—|,./])`;
+  String.raw`(^|[\p{P}\p{Z}])(?:([mwfhlp])\s*\/\s*([mwfhlp])\s*\/\s*([dxg])`
+  + String.raw`|m\s*\/\s*w|w\s*\/\s*m|m\s*\/\s*f|f\s*\/\s*m|h\s*\/\s*f|f\s*\/\s*h)(?=$|[\p{P}\p{Z}])`;
 
 const bracketedTrigraphRe = () => new RegExp(GENDER_TRIGRAPH_BRACKETED_SRC, 'gi');
-const bareTrigraphRe = () => new RegExp(GENDER_TRIGRAPH_BARE_SRC, 'gi');
+const bareTrigraphRe = () => new RegExp(GENDER_TRIGRAPH_BARE_SRC, 'giu');
 
 /**
  * The gender pair to DISPLAY per locale. `d`/`x` (divers / non-binary) is
