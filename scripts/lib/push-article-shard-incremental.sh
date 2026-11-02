@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ─────────────────────────────────────────────────────────────────────────────
-# scripts/lib/push-article-shard-incremental.sh — MERGE-aware single-article
+# scripts/lib/push-article-shard-incremental.sh — MERGE-aware bounded article
 # push into an existing (section, locale) article shard repo.
 #
 # Sibling of scripts/lib/push-section-shard.sh, NOT a modification of it.
@@ -41,6 +41,12 @@
 # `write-tree` runs. No existing path can ever be dropped, so the 50%-shrink
 # guard push-section-shard.sh needs does not apply here.
 #
+# A fast render can legitimately hand this helper thousands of article and
+# archive paths. They are published as serialized bounded commits in one
+# invocation, rather than one Pages build-sized commit. The bound is expressed
+# in destination paths (not article IDs), because the shard push receives the
+# paths after one article can expand to an index, bridge and redirect.
+#
 # `.shard-deploys` is intentionally NEVER incremented by this script. That
 # counter drives push-section-shard.sh's 50-deploy flatten-to-orphan history
 # cap (SHARD_HISTORY_CAP) — a fast single-article push runs far more often
@@ -64,6 +70,9 @@
 #     Missing → notice + exit 0 (silent no-op, matches the sibling).
 # Optional env:
 #   RUNNER_TEMP — scratch dir; falls back to a mktemp dir if unset (logged).
+#   ARTICLE_PUSH_BATCH_SIZE — maximum destination paths per serialized commit;
+#       defaults to 256. It is a path bound so every caller shares the same
+#       Pages safety limit without duplicating it in workflow YAML.
 #   ARTICLE_PUSH_STATUS_FILE — optional one-line outcome for the caller:
 #       `pushed`, `clean-no-op`, `remote-newer`, or `failed`.
 #   ARTICLE_PUSH_SKIPPED_PATHS_FILE — optional file receiving one relative path
@@ -78,6 +87,13 @@
 #       the push failed after 3 retries
 # ─────────────────────────────────────────────────────────────────────────────
 set -uo pipefail
+
+DEFAULT_ARTICLE_PUSH_BATCH_SIZE=256
+article_push_batch_size="${ARTICLE_PUSH_BATCH_SIZE:-$DEFAULT_ARTICLE_PUSH_BATCH_SIZE}"
+if ! [[ "$article_push_batch_size" =~ ^[1-9][0-9]*$ ]]; then
+  echo "::error::ARTICLE_PUSH_BATCH_SIZE must be a positive integer" >&2
+  exit 1
+fi
 
 # shard_pat_push — the shared token-push fallback for a refused deploy key.
 source "$(dirname "${BASH_SOURCE[0]}")/shard-git-helpers.sh"
@@ -485,6 +501,140 @@ write_push_status() {
   fi
   printf '%s\n' "$1" > "$status_file" || true
 }
+
+run_serialized_batches() {
+  local batch_root batch_status batch_skipped batch_summary
+  local aggregate_status='clean-no-op'
+  local aggregate_warning_count=0
+  local status batch_warning_count skipped_path shown_count aggregate_names=''
+  local batch_size
+  local offset=0 batch_number=0
+  local -a aggregate_skipped=()
+
+  batch_root="$(mktemp -d "$RUNNER_TEMP/article-shard-batches.XXXXXX")" || {
+    echo "::error::unable to create the serialized article-push batch directory" >&2
+    write_push_status 'failed'
+    return 1
+  }
+
+  echo "$section-$loc article shard: serializing ${#relpaths[@]} path(s) in batches of $article_push_batch_size"
+  while [ "$offset" -lt "${#relpaths[@]}" ]; do
+    batch_status="$batch_root/status-$batch_number"
+    batch_skipped="$batch_root/skipped-$batch_number"
+    batch_summary="$batch_root/summary-$batch_number"
+    batch_size="$article_push_batch_size"
+    if [ $((offset + batch_size)) -gt "${#relpaths[@]}" ]; then
+      batch_size=$((${#relpaths[@]} - offset))
+    fi
+
+    if ! ARTICLE_PUSH_BATCHED=1 \
+      ARTICLE_PUSH_STATUS_FILE="$batch_status" \
+      ARTICLE_PUSH_SKIPPED_PATHS_FILE="$batch_skipped" \
+      ARTICLE_PUSH_SUMMARY_FILE="$batch_summary" \
+      bash "$0" "$section" "$loc" "$scratch_dist_dir" "${relpaths[@]:offset:batch_size}"; then
+      echo "::error::serialized article-push batch $((batch_number + 1)) failed for $section-$loc" >&2
+      if [ -n "${ARTICLE_PUSH_SKIPPED_PATHS_FILE:-}" ] && [ -s "$batch_skipped" ]; then
+        mkdir -p "$(dirname "$ARTICLE_PUSH_SKIPPED_PATHS_FILE")" || true
+        cat "$batch_skipped" > "$ARTICLE_PUSH_SKIPPED_PATHS_FILE" || true
+      fi
+      write_push_status 'failed'
+      rm -rf "$batch_root"
+      return 1
+    fi
+
+    if [ ! -s "$batch_status" ]; then
+      echo "::error::serialized article-push batch $((batch_number + 1)) finished without a status" >&2
+      write_push_status 'failed'
+      rm -rf "$batch_root"
+      return 1
+    fi
+    status="$(tr -d '\r\n' < "$batch_status")"
+    case "$status" in
+      pushed)
+        aggregate_status='pushed'
+        ;;
+      remote-newer)
+        if [ "$aggregate_status" = 'clean-no-op' ]; then aggregate_status='remote-newer'; fi
+        ;;
+      clean-no-op)
+        ;;
+      *)
+        echo "::error::serialized article-push batch $((batch_number + 1)) returned invalid status '$status'" >&2
+        write_push_status 'failed'
+        rm -rf "$batch_root"
+        return 1
+        ;;
+    esac
+
+    if [ -s "$batch_skipped" ]; then
+      while IFS= read -r skipped_path; do
+        [ -n "$skipped_path" ] || continue
+        aggregate_skipped+=("$skipped_path")
+      done < "$batch_skipped"
+    fi
+    if [ -s "$batch_summary" ]; then
+      batch_warning_count="$(cut -f4 "$batch_summary")"
+      if [[ "$batch_warning_count" =~ ^[0-9]+$ ]]; then
+        aggregate_warning_count=$((aggregate_warning_count + batch_warning_count))
+      fi
+    fi
+
+    offset=$((offset + batch_size))
+    batch_number=$((batch_number + 1))
+  done
+
+  if [ -n "${ARTICLE_PUSH_SKIPPED_PATHS_FILE:-}" ]; then
+    mkdir -p "$(dirname "$ARTICLE_PUSH_SKIPPED_PATHS_FILE")" || {
+      echo "::error::unable to create skipped-path directory for $ARTICLE_PUSH_SKIPPED_PATHS_FILE" >&2
+      write_push_status 'failed'
+      rm -rf "$batch_root"
+      return 1
+    }
+    : > "$ARTICLE_PUSH_SKIPPED_PATHS_FILE" || {
+      echo "::error::unable to reset skipped-path file $ARTICLE_PUSH_SKIPPED_PATHS_FILE" >&2
+      write_push_status 'failed'
+      rm -rf "$batch_root"
+      return 1
+    }
+    if [ "${#aggregate_skipped[@]}" -gt 0 ]; then
+      printf '%s\n' "${aggregate_skipped[@]}" > "$ARTICLE_PUSH_SKIPPED_PATHS_FILE" || {
+        echo "::error::unable to write skipped-path file $ARTICLE_PUSH_SKIPPED_PATHS_FILE" >&2
+        write_push_status 'failed'
+        rm -rf "$batch_root"
+        return 1
+      }
+    fi
+  fi
+
+  if [ "${#aggregate_skipped[@]}" -gt 0 ]; then
+    shown_count=0
+    for skipped_path in "${aggregate_skipped[@]}"; do
+      [ "$shown_count" -ge 5 ] && break
+      if [ -n "$aggregate_names" ]; then
+        aggregate_names="$aggregate_names,$skipped_path"
+      else
+        aggregate_names="$skipped_path"
+      fi
+      shown_count=$((shown_count + 1))
+    done
+  fi
+  if [ -n "${ARTICLE_PUSH_SUMMARY_FILE:-}" ]; then
+    mkdir -p "$(dirname "$ARTICLE_PUSH_SUMMARY_FILE")" || true
+    printf '%s\t%s\t%s\t%s\n' \
+      "$section-$loc" \
+      "${#aggregate_skipped[@]}" \
+      "$aggregate_names" \
+      "$aggregate_warning_count" > "$ARTICLE_PUSH_SUMMARY_FILE" || true
+  fi
+  write_push_status "$aggregate_status"
+  rm -rf "$batch_root"
+  return 0
+}
+
+if [ "${ARTICLE_PUSH_BATCHED:-0}" != '1' ] && [ "${#relpaths[@]}" -gt "$article_push_batch_size" ]; then
+  run_serialized_batches
+  exit $?
+fi
 
 _attempt() {
   rm -rf "$stage"

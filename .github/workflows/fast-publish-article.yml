@@ -961,7 +961,10 @@ jobs:
           : > "$pushed_hub_paths"
           exec > >(tee -a "$push_log") 2>&1
 
-          # UN SOLO push per locale, articolo + hub insieme.
+          # Una sequenza bounded di push per locale, articolo + hub insieme.
+          # push-article-shard-incremental.sh serializza i chunk quando il
+          # render copre un corpus grande, così nessun commit Pages diventa
+          # grande quanto l'intero shard.
           #
           # Prima erano due — l'articolo qui, la griglia dell'hub più in basso in questo
           # stesso step — verso LO STESSO repo shard, a pochi secondi di distanza. Ogni push
@@ -976,8 +979,9 @@ jobs:
           # build riuscita. Il gate «Verify the article is actually readable» ha fatto il suo
           # lavoro e ha reso rosso il run — 5 run su 20 in due giorni, su articoli diversi.
           #
-          # Con un push solo la corsa non esiste: una build per pubblicazione.
-          # Locale repositories are independent. Run their pushes concurrently so
+          # La corsa fra articolo e hub non esiste più: il writer per locale è
+          # uno solo e i chunk interni restano seriali. Locale repositories are
+          # independent. Run their pushes concurrently so
           # one slow GitHub Pages/shard operation cannot consume the whole job
           # before the other locales even start (#3115). Each child writes one
           # outcome file; the parent waits for every child and only then updates
