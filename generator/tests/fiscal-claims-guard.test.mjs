@@ -312,6 +312,21 @@ test('i writer FAQ riapplicano il fiscal gate prima della scrittura atomica', ()
     faq: [{ q: 'Which allowance applies?', a: 'The current allowance is €10,000.' }],
   }));
 
+  for (const [locale, q, a] of [
+    ['de', 'Welche Steuererklärungen sind erforderlich?', 'Die Steuererklärungen richten sich nach dem Einkommen.'],
+    ['en', 'What does healthcare cover?', 'Healthcare coverage depends on the policy.'],
+  ]) {
+    assert.throws(
+      () => assertFaqPassesFiscalClaimsGate({
+        locale,
+        articleText: 'The article discusses the cross-border agreement.',
+        faq: [{ q, a }],
+      }),
+      (error) => error.qualityReject === true && /ymyl-source/.test(error.message),
+      `${locale}: localized YMYL FAQ without official source must be rejected`,
+    );
+  }
+
   for (const relative of [
     '../scripts/batch-add-faq-to-articles.mjs',
     '../scripts/fix-faq-locales.mjs',

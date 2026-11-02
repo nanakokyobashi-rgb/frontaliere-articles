@@ -41,10 +41,13 @@
  * delle province di confine: questa regola restringe solo sport e giochi delle
  * province italiane, come chiesto dall'audit del 2026-10-31.
  *
- * Modulo puro: niente I/O. Lo usano il generatore prima di pubblicare e
- * `scripts/audit-article-relevance.mjs` per il ledger degli articoli esistenti.
+ * Modulo senza rete: per le sezioni cantonali l'ancora locale usa il
+ * classificatore sui dati committati. Lo usano il generatore prima di
+ * pubblicare e `scripts/audit-article-relevance.mjs` per il ledger degli
+ * articoli esistenti.
  */
 import { normalizeText } from './profession-taxonomy.mjs';
+import { isInCantonArea } from './canton-classifier.mjs';
 import { isInLocalNewsArea } from './local-news.mjs';
 
 /** Radici a inizio parola sul testo di `normalizeText` (minuscolo, senza accenti). */
@@ -124,6 +127,16 @@ function declaredText({ id = '', title = '' }) {
   return ` ${normalizeText(`${id} ${title}`)} `;
 }
 
+/**
+ * Le sezioni cantonali possono usare un codice di gruppo (`canton-appenzello`)
+ * o un codice membro (`canton-ar`): `isInCantonArea` risolve entrambi tramite
+ * la tabella cantonale condivisa, senza copiare nomi di comuni qui.
+ */
+function hasCantonSectionAnchor(section, text) {
+  const canton = /^canton-([a-z]+)$/u.exec(String(section || ''))?.[1];
+  return Boolean(canton && isInCantonArea(canton, text));
+}
+
 function hasStrongNexus(text) {
   return STRONG_NEXUS_RE.test(text) || NEXUS_WORDS_RE.test(text);
 }
@@ -169,10 +182,14 @@ export function classifyArticleRelevance({ section = 'frontaliere', id = '', tit
     // The Swiss/canton sections are Swiss by construction for a neutral title
     // such as «Herisau». A generic work/fiscal term is different: it must not
     // turn an otherwise unanchored foreign topic into a Swiss article. But the
-    // body or excerpt can supply the Swiss anchor that the title lacks.
+    // body, excerpt or canton-local place can supply the Swiss anchor that the
+    // title lacks.
     if (declaredHasGenericNexus) {
-      const supportingText = ` ${normalizeText(`${excerpt} ${body}`)} `;
-      if (hasStrongNexus(supportingText) || BODY_ANCHOR_RE.test(supportingText)) {
+      const supportingSource = `${title} ${excerpt} ${body}`;
+      const supportingText = ` ${normalizeText(supportingSource)} `;
+      if (hasStrongNexus(supportingText)
+        || BODY_ANCHOR_RE.test(supportingText)
+        || hasCantonSectionAnchor(section, supportingSource)) {
         return { relevant: true };
       }
       return { relevant: false, rule: 'senza-ancore' };

@@ -62,7 +62,7 @@ export const YMYL_SOURCES_BRIEF_CH = sourcesBrief([
 ]);
 
 const YMYL_RE = /(?:^| )(?:tasse(?: |$)|tassazion|tassa salute|tassa sulla salute|tassa sanitaria|imposta(?: |$)|imposte(?: |$)|irpef|dichiarazione dei redditi|franchigia|detrazion|deduzion|avs|lpp|pilastro|previdenz|pension|inps|naspi|ristorn|lamal|cassa malati|casse malati|assicurazione malattia|premi malattia|sanita|salute(?: |$)|malatti(?:a|e)(?: |$)|servizio sanitario|ssn(?: |$)|accordo fiscale|doppia imposizione|fisco|fiscal)/;
-const FAQ_YMYL_RE = /(?:^| )(?:tax(?:es|ation)?|income tax(?:es)?|tax return(?:s)?|deduction(?:s)?|health(?: insurance)?|illness(?:es)?|pension(?:s)?|retirement(?:s)?|social security|steuer(?:n|pflicht|erklarung)?|einkommensteuer(?:n)?|gesundheit|krankheit(?:en)?|krankenversicherung(?:en)?|rente(?:n)?|pensionskasse(?:n)?|ahv|bvg|impots?|fiscalite|declaration des revenus|sante|maladie(?:s)?|assurances? maladie(?:s)?|retraite(?:s)?|cotisations?)(?: |$)/;
+const FAQ_YMYL_RE = /(?:^| )(?:tax(?:es|ation)?|income tax(?:es)?|tax return(?:s)?|deduction(?:s)?|health(?:care| insurance)?|illness(?:es)?|pension(?:s)?|retirement(?:s)?|social security|steuer(?:n|pflicht|erklarung(?:en)?)?|einkommensteuer(?:n)?|gesundheit|krankheit(?:en)?|krankenversicherung(?:en)?|rente(?:n)?|pensionskasse(?:n)?|ahv|bvg|impots?|fiscalite|declaration des revenus|sante|maladie(?:s)?|assurances? maladie(?:s)?|retraite(?:s)?|cotisations?)(?: |$)/;
 
 /**
  * @param {{id?: string, title?: string, excerpt?: string}} article testi italiani

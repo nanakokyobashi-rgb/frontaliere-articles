@@ -84,6 +84,29 @@ test('senza ancore vale solo per la sezione frontaliere: svizzera e cantoni lo s
   assert.equal(classifyArticleRelevance({ ...article, section: 'svizzera' }).relevant, true);
 });
 
+test('un nesso generico cantonale usa l\'ancora locale della sezione', () => {
+  assert.deepEqual(
+    classifyArticleRelevance({
+      section: 'canton-ar',
+      id: 'lavoro-herisau',
+      title: 'Lavoro a Herisau',
+      excerpt: 'Herisau aggiorna il mercato del lavoro locale.',
+      body: 'Le misure riguardano Herisau.',
+    }),
+    { relevant: true },
+  );
+  assert.deepEqual(
+    classifyArticleRelevance({
+      section: 'canton-ar',
+      id: 'lavoro-italia',
+      title: 'Lavoro in Italia',
+      excerpt: 'Misure per il lavoro italiano.',
+      body: 'Il provvedimento riguarda l\'Italia.',
+    }),
+    { relevant: false, rule: 'senza-ancore' },
+  );
+});
+
 test('una famiglia fuori tema vale in ogni sezione: il Texas stava nella sezione svizzera', () => {
   const verdict = classifyArticleRelevance({
     section: 'svizzera',
