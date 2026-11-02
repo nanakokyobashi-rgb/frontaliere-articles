@@ -60,7 +60,8 @@ export const YMYL_SOURCES_BRIEF_CH = sourcesBrief([
   OFFICIAL_SOURCE_LINKS.find(({ label }) => label === 'UFAS'),
 ]);
 
-const YMYL_RE = /(?:^| )(?:tasse(?: |$)|tassazion|tassa salute|tassa sulla salute|tassa sanitaria|imposta(?: |$)|imposte(?: |$)|irpef|dichiarazione dei redditi|franchigia|detrazion|deduzion|avs|lpp|pilastro|previdenz|pension|inps|naspi|ristorn|lamal|cassa malati|casse malati|assicurazione malattia|premi malattia|sanita|salute|malattia|servizio sanitario|ssn(?: |$)|accordo fiscale|doppia imposizione|fisco|fiscal)/;
+const YMYL_RE = /(?:^| )(?:tasse(?: |$)|tassazion|tassa salute|tassa sulla salute|tassa sanitaria|imposta(?: |$)|imposte(?: |$)|irpef|dichiarazione dei redditi|franchigia|detrazion|deduzion|avs|lpp|pilastro|previdenz|pension|inps|naspi|ristorn|lamal|cassa malati|casse malati|assicurazione malattia|premi malattia|sanita|salute(?: |$)|malatti(?:a|e)(?: |$)|servizio sanitario|ssn(?: |$)|accordo fiscale|doppia imposizione|fisco|fiscal)/;
+const FAQ_YMYL_RE = /(?:^| )(?:tax(?:es|ation)?|income tax|tax return|deduction(?:s)?|health(?: insurance)?|illness|pension|retirement|social security|steuer(?:n|pflicht|erklarung)?|einkommensteuer|gesundheit|krankheit|krankenversicherung|rente|pensionskasse|ahv|bvg|impots?|fiscalite|declaration des revenus|sante|maladie|assurance maladie|retraite|cotisations?)(?: |$)/;
 
 /**
  * @param {{id?: string, title?: string, excerpt?: string}} article testi italiani
@@ -102,6 +103,21 @@ function articleText(...sources) {
   };
   sources.forEach(visit);
   return texts.join('\n');
+}
+
+function linksInValues(...sources) {
+  const links = [];
+  const visit = (value) => {
+    if (typeof value === 'string') {
+      links.push(...linksIn(value));
+    } else if (Array.isArray(value)) {
+      value.forEach(visit);
+    } else if (value && typeof value === 'object') {
+      Object.values(value).forEach(visit);
+    }
+  };
+  sources.forEach(visit);
+  return links;
 }
 
 /**
@@ -152,9 +168,9 @@ export function assertNoFiscalErrorsInLocales(contentByLocale) {
 
 /**
  * FAQ-only writers update an already registered article outside the registrar.
- * Re-run the same locale fiscal gate over the existing projection plus the
- * candidate FAQ before their atomic rename, so a later FAQ pass cannot reopen
- * a claim the registration path rejected.
+ * Re-run the locale fiscal gate over the existing projection plus the candidate
+ * FAQ before atomic rename. YMYL content introduced by the FAQ also needs an
+ * official source link in that FAQ.
  */
 export function assertFaqPassesFiscalClaimsGate({ locale, articleText: existingText = '', faq = [] } = {}) {
   assertNoFiscalErrorsInLocales({
@@ -163,4 +179,13 @@ export function assertFaqPassesFiscalClaimsGate({ locale, articleText: existingT
       faq,
     },
   });
+
+  const faqText = articleText(faq);
+  const normalizedFaqText = ` ${normalizeText(faqText)} `;
+  if (!YMYL_RE.test(normalizedFaqText) && !FAQ_YMYL_RE.test(normalizedFaqText)) return;
+  if (linksInValues(faq).some(isOfficialSourceUrl)) return;
+
+  const error = new Error(`[ymyl-source] ${locale || 'unknown'} FAQ introduces YMYL content without an official source link`);
+  error.qualityReject = true;
+  throw error;
 }
