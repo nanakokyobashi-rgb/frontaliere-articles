@@ -8663,6 +8663,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.premi-mercato-idroelettrico-2026.title': '21,4 Millionen Franken für die grossen Wasserkraftanlagen',
     'blog.article.premi-mercato-idroelettrico-2026.excerpt': '21,4 Millionen Franken an drei Antragstellende Die Prämie 2026 betrifft das Geschäftsjahr 2025 Die Gesuche wurden bis Ende Mai 2026 eingereicht Die verfügbaren Mittel',
     'blog.article.premi-mercato-idroelettrico-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.mercato-lavoro-prospettive-offuscate.title': 'Perspektiven auf dem Arbeitsmarkt: leichte Abschwächung im vierten Quartal 2026',
+    'blog.article.mercato-lavoro-prospettive-offuscate.excerpt': 'KOF-Indikator bei 2,0 Punkten im vierten Quartal 2026 Lag im vorherigen Quartal bei 2,3 Punkten Rund 4\'500 im Oktober befragte Unternehmen Baugewerbe positiv',
+    'blog.article.mercato-lavoro-prospettive-offuscate.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaChDe;

@@ -2910,6 +2910,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'scontro-fiscale-coppie-atto': { it: 'scontro-fiscale-coppie-atto', en: 'tax-conflict-couples-act', de: 'steuerkonflikt-paare-akt', fr: 'conflit-fiscal-couples-acte' },
  'startup-innovazione-sociale-open-call': { it: 'startup-innovazione-sociale-open-call', en: 'startup-social-innovation-open-call', de: 'startup-soziales-innovations-open-call', fr: 'startup-innovation-sociale-open-call' },
  'premi-mercato-idroelettrico-2026': { it: 'premi-mercato-idroelettrico-2026', en: 'hydroelectric-market-premiums-2026', de: 'marktpraemien-wasserkraft-2026', fr: 'primes-marche-hydroelectrique-2026' },
+ 'mercato-lavoro-prospettive-offuscate': { it: 'mercato-lavoro-prospettive-offuscate', en: 'labor-market-prospects-clouding', de: 'arbeitsmarkt-prospekte-truben', fr: 'perspectives-marche-travail-nuageants' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

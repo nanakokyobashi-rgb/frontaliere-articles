@@ -8663,6 +8663,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.premi-mercato-idroelettrico-2026.title': '21,4 milioni di franchi ai grandi impianti idroelettrici',
     'blog.article.premi-mercato-idroelettrico-2026.excerpt': '21,4 milioni di franchi a tre richiedenti Il premio 2026 riguarda l\'esercizio 2025 Le domande sono state presentate entro fine maggio 2026 Le risorse',
     'blog.article.premi-mercato-idroelettrico-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.mercato-lavoro-prospettive-offuscate.title': 'Prospettive mercato del lavoro: lieve indebolimento nel quarto trimestre 2026',
+    'blog.article.mercato-lavoro-prospettive-offuscate.excerpt': 'Indicatore KOF a 2,0 punti nel quarto trimestre 2026 Era a 2,3 punti nel trimestre precedente Circa 4\'500 aziende intervistate a ottobre Edilizia positiva',
+    'blog.article.mercato-lavoro-prospettive-offuscate.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaChIt;

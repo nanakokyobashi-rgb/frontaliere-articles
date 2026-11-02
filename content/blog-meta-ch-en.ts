@@ -8663,6 +8663,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.premi-mercato-idroelettrico-2026.title': '21,4 million francs for large hydroelectric plants',
     'blog.article.premi-mercato-idroelettrico-2026.excerpt': '21.4 million francs to three applicants The 2026 award concerns the 2025 financial year Applications were submitted by the end of May 2026 The resources',
     'blog.article.premi-mercato-idroelettrico-2026.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.mercato-lavoro-prospettive-offuscate.title': 'Labor market outlook: slight weakening in the fourth quarter of 2026',
+    'blog.article.mercato-lavoro-prospettive-offuscate.excerpt': 'KOF indicator at 2,0 points in the fourth quarter of 2026 It was at 2,3 points in the previous quarter Approximately 4\'500 companies surveyed in October Construction positive',
+    'blog.article.mercato-lavoro-prospettive-offuscate.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaChEn;
