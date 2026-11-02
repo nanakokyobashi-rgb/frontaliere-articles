@@ -14,7 +14,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const SLUG = 'guida-dichiarazione-redditi-frontalieri';
 const LOCALES = ['it', 'en', 'de', 'fr'];
-const REFRESHED_ON = '2026-09-26';
+const REFRESHED_ON = '2026-10-31';
 
 const read = (...parts) => fs.readFileSync(path.join(ROOT, ...parts), 'utf8');
 const body = (locale) => read('content', 'blog-body', locale, `${SLUG}.ts`);

@@ -24,7 +24,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const SLUG = 'calcolo-tasse-entro-confine';
 const LOCALES = ['it', 'en', 'de', 'fr'];
-const REFRESHED_ON = '2026-09-25';
+const REFRESHED_ON = '2026-10-31';
 
 // Separatore delle migliaia come compare nel sorgente: `.` (it/de), `,` (en), spazio (fr).
 const THOUSANDS = { it: '.', de: '.', en: ',', fr: ' ' };

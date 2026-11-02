@@ -10,6 +10,7 @@ import {
   buildSectionFeeds,
   RSS_SECTIONS,
 } from '../../engine/rssFeeds.mjs';
+import { articleIndexExclusionKey } from '../../engine/shared/articleIndexExclusions.mjs';
 import {
   collectSeoEntryIds,
   collectSeoEntryMetadata,
@@ -62,6 +63,41 @@ test('usa il successore e la fine del sorgente per preservare una coda SEO lunga
       '2026-09-10T10:00:00+00:00',
       'the floor must read fields after the former fixed window as well',
     );
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('il conteggio RSS distingue una coda ritirata da una coda SEO troncata', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'rss-withdrawn-tail-'));
+  try {
+    fs.mkdirSync(path.join(root, 'content', 'seo'), { recursive: true });
+    fs.writeFileSync(path.join(root, 'content', 'seo', 'seo-blog.ts'), [
+      'export const SEO = {',
+      "  'blog-withdrawn-tail': {",
+      '    "headline": "Articolo ritirato",',
+      '    "description": "Descrizione",',
+      '    "datePublished": "2026-09-10T10:00:00+00:00",',
+      '  },',
+      '};',
+      '',
+    ].join('\n'));
+
+    const section = { ...RSS_SECTIONS[0], seoFiles: ['seo-blog.ts'] };
+    const result = buildSectionFeeds({
+      fs,
+      path,
+      rootDir: root,
+      section,
+      registry: [{ id: 'withdrawn-tail', date: '' }],
+      indexExclusions: new Set([articleIndexExclusionKey(section.id, 'withdrawn-tail')]),
+      layout: { seoDir: 'content/seo', localesDir: 'content', slugDir: 'content' },
+      repairSerpSnippet: (text) => text,
+    });
+
+    assert.equal(result.articleCount, 0);
+    assert.equal(result.withdrawnArticleCount, 1);
+    assert.deepEqual(result.feeds, []);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }

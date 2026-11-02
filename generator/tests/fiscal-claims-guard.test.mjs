@@ -1,0 +1,343 @@
+/**
+ * Le affermazioni fiscali smentite dalle fonti primarie (scheda del 2026-10-31) e il
+ * gate YMYL che le usa. Ogni caso negativo e' una frase vera del corpus: un guard
+ * che scattasse su queste fermerebbe articoli corretti.
+ */
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import { findFiscalClaims, findFiscalErrors, findTaxHealthParameterErrors } from '../scripts/lib/fiscal-claims-guard.mjs';
+import {
+  OFFICIAL_SOURCE_LINKS,
+  YMYL_SOURCES_BRIEF,
+  YMYL_SOURCES_BRIEF_CH,
+  assertNoFiscalErrorsInLocales,
+  assertYmylPublishable,
+  checkYmylPublishable,
+  isOfficialSourceUrl,
+  isYmylArticle,
+} from '../scripts/lib/article-ymyl-gate.mjs';
+import { repairFiscalText } from '../scripts/repair-fiscal-claims.mjs';
+
+const ids = (text) => findFiscalClaims(text).map((claim) => claim.id);
+
+test('franchigia 7.500: in ogni lingua, grafia e valuta', () => {
+  for (const sentence of [
+    'I vecchi frontalieri beneficiano di un\'esenzione di 7.500 euro nel regime transitorio.',
+    'Old frontier workers benefit from an exemption of €7,500.',
+    'Alte Grenzgänger profitieren von einer Befreiung von 7.500 Euro.',
+    'Les anciens frontaliers ont droit à une franchise de 7 500 € par an.',
+    'Franchigia: CHF 7.500 per i vecchi frontalieri.',
+    "Neues Abkommen: Freibeträge €7\\'500 (alte Grenzgänger).",
+  ]) {
+    assert.deepEqual(ids(sentence), ['franchigia-7500'], sentence);
+  }
+});
+
+test('franchigia 7.500: il valore storico e gli importi qualunque non scattano', () => {
+  for (const sentence of [
+    'Fino al 2023 la franchigia era di 7.500 euro, dal 2024 e\' di 10.000 euro.',
+    'Prima del 2024 la franchigia era di 7.500 euro.',
+    'Lo stipendio medio e\' di CHF 7.500 al mese.',
+    'La Finanza ha sequestrato 7500 euro a un 62enne.',
+    'Il contributo vale 47.500 euro.',
+  ]) {
+    assert.deepEqual(ids(sentence), [], sentence);
+  }
+});
+
+test('gli altri falsi: forfait sanitario, 38,8%, credito 80%, retrocessione, entrambi i Paesi, data', () => {
+  assert.deepEqual(ids('Si aggiunge la deduzione forfetaria sanitaria di 3.000 €.'), ['deduzione-forfetaria-sanitaria']);
+  assert.deepEqual(ids('L\'Italia riceve il 38,8% dell\'imposta alla fonte come ristorno.'), ['ristorni-38-8']);
+  assert.deepEqual(ids('Dichiarano in Italia con credito d\'imposta fino all\'80% del prelievo svizzero.'), ['credito-80']);
+  assert.deepEqual(ids('L\'80% resta in Svizzera e il 20% viene retrocesso al comune italiano di residenza.'), ['retrocessione-20']);
+  assert.deepEqual(ids('Imposta trattenuta SOLO in Svizzera, mai in entrambi i Paesi.'), ['mai-in-entrambi']);
+  assert.deepEqual(ids('Il Nuovo Accordo Frontalieri, in vigore dal 1° gennaio 2024, cambia le regole.'), ['accordo-in-vigore-2024']);
+});
+
+test('le stesse affermazioni nelle traduzioni, in ogni ordine naturale', () => {
+  assert.deepEqual(ids('They also get a flat-rate health deduction of €3,000.'), ['deduzione-forfetaria-sanitaria']);
+  assert.deepEqual(ids('Dazu kommt ein pauschaler Gesundheitsabzug von 3.000 €.'), ['deduzione-forfetaria-sanitaria']);
+  assert.deepEqual(ids('The remaining 20% is returned to Italian municipalities.'), ['retrocessione-20']);
+  assert.deepEqual(ids('20 % wird an die Gemeinden zurückerstattet.'), ['retrocessione-20']);
+  assert.deepEqual(ids('Das Abkommen ist seit dem 1. Januar 2024 in Kraft.'), ['accordo-in-vigore-2024']);
+});
+
+test('la negazione vale solo dentro la stessa affermazione', () => {
+  assert.deepEqual(ids('Il 20% viene retrocesso ai comuni, ma non viene restituito ai lavoratori.'), ['retrocessione-20']);
+  assert.deepEqual(ids('Il 20% non viene retrocesso ai comuni.'), []);
+});
+
+test('data di vigore: forme ordinali e ogni verbo', () => {
+  for (const sentence of [
+    'L\'Accordo è in vigore dal primo gennaio 2024.',
+    'Il Nuovo Accordo è entrato in vigore il 1° gennaio 2024.',
+    'The Agreement came into force on 1 January 2024.',
+    'The Agreement took effect on January 1st, 2024.',
+    'L\'accord est entré en vigueur le 1er janvier 2024.',
+    'Das Abkommen ist am 1. Januar 2024 in Kraft getreten.',
+  ]) {
+    assert.deepEqual(ids(sentence), ['accordo-in-vigore-2024'], sentence);
+    assert.deepEqual(ids(repairFiscalText(sentence, 'blog-body/it/x.ts').text), [], sentence);
+  }
+  assert.deepEqual(ids('L\'Accordo è in vigore dal 17 luglio 2023 e si applica dal 1° gennaio 2024.'), []);
+});
+
+test('quota SSN: ogni forma dell\'importo mensile', () => {
+  for (const sentence of ['La tassa salute costa 250 € mensili.', 'Die Gesundheitssteuer kostet 250 € monatlich.', 'La taxe santé coûte 250 € mensuel.']) {
+    assert.equal(findTaxHealthParameterErrors(sentence).length, 1, sentence);
+  }
+});
+
+test('quota SSN: gli intervalli mensili si giudicano su entrambi gli estremi', () => {
+  assert.equal(findTaxHealthParameterErrors('La tassa salute costa 20–30 € al mese.').length, 1);
+  assert.equal(findTaxHealthParameterErrors('La tassa salute costa da 100 a 300 euro al mese.').length, 1);
+  assert.equal(findTaxHealthParameterErrors('La tassa salute costa da 30 a 200 euro al mese.').length, 0);
+});
+
+test('quota SSN: gli importi mensili con decimali locali si normalizzano prima del confronto', () => {
+  assert.equal(findTaxHealthParameterErrors('La tassa salute costa €20,50 al mese.').length, 1);
+  assert.equal(findTaxHealthParameterErrors('La tassa salute costa €30,00 al mese.').length, 0);
+  assert.equal(findTaxHealthParameterErrors('La tassa salute costa €200,00 al mese.').length, 0);
+});
+
+test('riparazione: una coppia dentro un calcolo non diventa un risultato falso', () => {
+  const source = 'La franchigia: 7.500 € - 10.000 € = 17.500 € totali.';
+  const { text, arith } = repairFiscalText(source, 'blog-body/it/x.ts');
+  assert.equal(text, source);
+  assert.equal(arith.length, 1);
+});
+
+test('quota SSN: la cifra nella frase dopo, ma non quella di un altro prelievo', () => {
+  assert.equal(findTaxHealthParameterErrors('La tassa salute riguarda i frontalieri. Vale il 2% del salario netto.').length, 1);
+  assert.equal(findTaxHealthParameterErrors('La tassa salute riguarda i frontalieri. Vale il 4% del salario netto.').length, 0);
+  assert.equal(findTaxHealthParameterErrors('La tassa salute riguarda i frontalieri. L\'AVS vale il 5,3% del salario.').length, 0);
+});
+
+test('riparazione: una fascia salariale o una legge qualunque restano come sono', () => {
+  for (const source of [
+    'Lo stipendio va da CHF 7.500 a CHF 10.000 al mese.',
+    'Salario lordo: 7.500-10.000 CHF.',
+    'La nuova legge sul lavoro è in vigore dal 1° gennaio 2024.',
+    'The new regulation has been in force since 1 January 2024.',
+  ]) {
+    assert.equal(repairFiscalText(source, 'blog-body/it/x.ts').text, source);
+  }
+});
+
+test('forme dirette: anno nudo, credito dell\'80%, 20% versato', () => {
+  assert.deepEqual(ids('L\'Accordo è in vigore dal 2024.'), ['accordo-in-vigore-2024']);
+  assert.deepEqual(ids('Il credito d\'imposta dell\'80% vale per tutti.'), ['credito-80']);
+  assert.deepEqual(ids('The tax credit of 80% applies.'), ['credito-80']);
+  assert.deepEqual(ids('Il 20% viene versato ai comuni italiani.'), ['retrocessione-20']);
+  assert.deepEqual(ids('Il 20% non viene trasferito ai comuni.'), []);
+  assert.deepEqual(ids('L\'Accordo è in vigore dal 17 luglio 2023.'), []);
+});
+
+test('i falsi amici non scattano', () => {
+  assert.deepEqual(ids('Health insurance premiums count only for the share above the flat-rate deduction.'), []);
+  assert.deepEqual(ids('The 20% is not returned to municipalities.'), []);
+  assert.deepEqual(ids('Das Abkommen ist seit dem 17. Juli 2023 in Kraft.'), []);
+});
+
+test('le frasi corrette passano', () => {
+  for (const sentence of [
+    'La Svizzera preleva al massimo l\'80% dell\'imposta ordinaria e l\'Italia riconosce il credito entro la quota IRPEF.',
+    'La quota secondo l\'accordo del 1974 era il 38,8% (40% ridotto nel 1985).',
+    'L\'utile netto e\' sceso a 138,8 milioni di franchi.',
+    'L\'Accordo e\' in vigore dal 17 luglio 2023 e si applica dal 1° gennaio 2024.',
+    'Il fatturato e\' calato del 20% e la retrocessione delle azioni e\' sospesa.',
+  ]) {
+    assert.deepEqual(ids(sentence), [], sentence);
+  }
+});
+
+test('quota SSN: base lorda o aliquota fuori forchetta, non un sondaggio o un aumento', () => {
+  assert.equal(findTaxHealthParameterErrors('La tassa sulla salute è fissata al 5% del reddito lordo.').length, 1);
+  assert.equal(findTaxHealthParameterErrors('La tassa salute è pari a 0,8% del reddito annuo.').length, 1);
+  assert.equal(findTaxHealthParameterErrors('La tassa salute vale il 4% del salario netto.').length, 0);
+  assert.equal(findTaxHealthParameterErrors('L\'87,8% dei frontalieri giudica negativa la tassa salute.').length, 0);
+  assert.equal(findTaxHealthParameterErrors('La tassa salute rappresenta il 10% del salario lordo.').length, 1);
+});
+
+test('quota SSN: gli intervalli si giudicano su entrambi gli estremi', () => {
+  assert.equal(findTaxHealthParameterErrors('La tassa salute vale 3-6% del salario netto.').length, 0);
+  assert.equal(findTaxHealthParameterErrors('La tassa salute vale il 7–8% del salario netto.').length, 1);
+  assert.equal(findTaxHealthParameterErrors('La tassa salute vale 1-2% del salario netto.').length, 1);
+  assert.equal(findTaxHealthParameterErrors('La tassa salute vale 2-5% del salario netto.').length, 1);
+});
+
+test('quota SSN: anche con sul/sulla/vom/on, e un errore solo per frase', () => {
+  assert.equal(findTaxHealthParameterErrors('La tassa salute è del 2% sul salario netto.').length, 1);
+  assert.equal(findTaxHealthParameterErrors('Die Gesundheitssteuer beträgt 8 % vom Nettolohn.').length, 1);
+  assert.equal(findTaxHealthParameterErrors('The health tax is 2% on net salary.').length, 1);
+  assert.equal(findTaxHealthParameterErrors('La tassa salute, cioe\' la quota SSN, vale il 9% del salario netto.').length, 1);
+  assert.equal(findTaxHealthParameterErrors('La tassa salute è del 5% sul salario netto.').length, 0);
+});
+
+test('quota SSN: tutti i nomi della quota e il limite mensile', () => {
+  assert.equal(findTaxHealthParameterErrors('La quota di compartecipazione al Servizio sanitario nazionale vale il 10% del salario lordo.').length, 1);
+  assert.equal(findTaxHealthParameterErrors('Der SSN-Beitrag beträgt 10 % vom Nettolohn.').length, 1);
+  assert.equal(findTaxHealthParameterErrors('La tassa salute vale il 3% del salario netto, fino a 2.000 euro al mese.').length, 1);
+  assert.equal(findTaxHealthParameterErrors('The health tax is €500 per month.').length, 1);
+  assert.equal(findTaxHealthParameterErrors('La tassa salute costa 10 euro al mese.').length, 1);
+  assert.equal(findTaxHealthParameterErrors('La tassa salute va da 30 a 200 euro per mese lavorato.').length, 0);
+  assert.equal(findTaxHealthParameterErrors('La tassa salute vale il 4% del salario netto, circa 150 euro al mese.').length, 0);
+});
+
+test('data di vigore: anche in forma numerica', () => {
+  assert.deepEqual(ids('L\'Accordo è in vigore dal 1/1/2024 per i frontalieri.'), ['accordo-in-vigore-2024']);
+  assert.deepEqual(ids('Il Nuovo Accordo, in vigore dal 01.01.2024, cambia le regole.'), ['accordo-in-vigore-2024']);
+});
+
+test('retrocessione: la negazione e\' la frase corretta, nelle quattro lingue', () => {
+  for (const sentence of [
+    'Il 20% non viene retrocesso ai comuni.',
+    'Il restante 20% del prelievo non è retrocesso ai comuni italiani.',
+    'The other 20% is not retroceded to municipalities.',
+    'Les 20 % ne sont pas rétrocédés aux communes.',
+  ]) {
+    assert.deepEqual(ids(sentence), [], sentence);
+  }
+});
+
+test('riparazione: ogni regola del guard ha un esito, non solo la franchigia', () => {
+  const { text } = repairFiscalText('Primo fatto. Si aggiunge la deduzione forfetaria sanitaria di 3.000 €. Ultimo fatto.', 'blog-body/it/x.ts');
+  assert.deepEqual(findFiscalClaims(text), []);
+  assert.match(text, /^Primo fatto\./);
+  assert.match(text, /Ultimo fatto\.$/);
+});
+
+test('YMYL: tasse e sanita\' generiche rientrano, e i campi SEO sono testo pubblicato', () => {
+  assert.equal(isYmylArticle({ title: 'Calcolo tasse frontalieri' }), true);
+  assert.equal(isYmylArticle({ title: 'Imposte e tassazione del reddito' }), true);
+  assert.equal(isYmylArticle({ title: 'Quanto costa il Servizio sanitario' }), true);
+  assert.equal(isYmylArticle({ title: 'Il tassista di Lugano' }), false);
+  const data = {
+    id: 'calcolo-tasse-frontalieri',
+    content: { it: { title: 'Calcolo tasse frontalieri', excerpt: '', body1: 'Testo.', seoDescription: 'Esenzione di 7.500 euro per i vecchi frontalieri.' } },
+    seo: { ogDescription: 'Credito d’imposta fino all’80% del prelievo svizzero.' },
+  };
+  const { problems } = checkYmylPublishable(data, { sourceUrl: 'https://www.admin.ch/x' });
+  assert.ok(problems.some((problem) => /franchigia-7500/.test(problem)));
+  assert.ok(problems.some((problem) => /credito-80/.test(problem)));
+  assert.throws(
+    () => assertNoFiscalErrorsInLocales({ en: { ogDescription: 'Old frontier workers: exemption of €7,500.' } }),
+    /franchigia-7500/,
+  );
+});
+
+test('il prompt non insegna piu\' cio\' che il guard rifiuta', () => {
+  const source = readFileSync(new URL('../scripts/create-article.mjs', import.meta.url), 'utf8');
+  assert.doesNotMatch(source, /Accordo[^\n]{0,40}in vigore dal 1°? gennaio 2024/i);
+  const start = source.indexOf('const VERIFIED_DOMAIN_FACTS = `');
+  const end = source.indexOf('const EVERGREEN_FACTS_BRIEF_CH = `');
+  assert.ok(start !== -1 && end > start);
+  assert.deepEqual(findFiscalErrors(source.slice(start, end)).map((error) => error.sentence), []);
+});
+
+test('i brief del prompt riportano le stesse fonti del gate', () => {
+  const source = readFileSync(new URL('../scripts/create-article.mjs', import.meta.url), 'utf8');
+  assert.ok(source.includes(YMYL_SOURCES_BRIEF), 'brief frontaliere: fonti diverse da OFFICIAL_SOURCE_LINKS');
+  assert.ok(source.includes(YMYL_SOURCES_BRIEF_CH), 'brief svizzera: fonti diverse da OFFICIAL_SOURCE_LINKS');
+});
+
+test('YMYL: fonte ufficiale obbligatoria, nel testo o come fonte dell\'articolo', () => {
+  const data = { id: 'franchigia-frontalieri-2026', content: { it: { title: 'Franchigia IRPEF per i frontalieri', excerpt: '', body1: 'La franchigia vale 10.000 euro dal 2024.' } } };
+  assert.deepEqual(checkYmylPublishable(data).problems, ['nessun link a una fonte ufficiale']);
+  assert.throws(() => assertYmylPublishable(data), (error) => error.topicGateAbort === true);
+
+  assert.deepEqual(checkYmylPublishable(data, { sourceUrl: 'https://www.news.admin.ch/it/nsb' }).problems, []);
+  const linked = structuredClone(data);
+  linked.content.it.body2 = 'Vedi [Agenzia delle Entrate](https://www.agenziaentrate.gov.it/portale/norme-per-i-pendolari-transfrontalieri-dei-paesi-confinanti).';
+  assert.deepEqual(checkYmylPublishable(linked).problems, []);
+});
+
+test('YMYL: il controllo dei parametri blocca anche con la fonte ufficiale', () => {
+  const data = { id: 'tassa-salute-2026', content: { it: { title: 'Tassa salute: la guida', excerpt: '', body1: 'La franchigia per i vecchi frontalieri è di 7.500 euro.' } } };
+  const { ymyl, problems } = checkYmylPublishable(data, { sourceUrl: 'https://www.admin.ch/x' });
+  assert.equal(ymyl, true);
+  assert.equal(problems.length, 1);
+  assert.match(problems[0], /franchigia-7500/);
+});
+
+test('YMYL: un articolo fuori tema fiscale non passa da qui', () => {
+  const data = { id: 'lugano-festival-2026', content: { it: { title: 'Il festival di Lugano', excerpt: '', body1: 'Musica in piazza.' } } };
+  assert.deepEqual(checkYmylPublishable(data), { ymyl: false, problems: [] });
+  assert.equal(isYmylArticle({ id: 'ristorni-congelati-gobbi-2026', title: 'Ristorni congelati' }), true);
+});
+
+test('domini ufficiali: sottodomini si, omonimi no', () => {
+  assert.equal(isOfficialSourceUrl('https://www.estv.admin.ch/dam/x.pdf'), true);
+  assert.equal(isOfficialSourceUrl('https://m4.ti.ch/fileadmin/x.pdf'), true);
+  assert.equal(isOfficialSourceUrl('https://admin.ch.evil.example/x'), false);
+  assert.equal(isOfficialSourceUrl('https://www.fakeadmin.ch/x'), false);
+  assert.equal(isOfficialSourceUrl('non un url'), false);
+  for (const { url } of OFFICIAL_SOURCE_LINKS) assert.equal(isOfficialSourceUrl(url), true, url);
+});
+
+test('le traduzioni non reintroducono un errore che l\'italiano non ha', () => {
+  assert.throws(
+    () => assertNoFiscalErrorsInLocales({ en: { body1: 'Old frontier workers benefit from an exemption of €7,500.' } }),
+    (error) => error.qualityReject === true && /franchigia-7500/.test(error.message),
+  );
+  assert.doesNotThrow(() => assertNoFiscalErrorsInLocales({ en: { body1: 'The allowance is €10,000.' } }));
+});
+
+test('riparazione: la coppia di importi lascia la frase e toglie il falso', () => {
+  const { text } = repairFiscalText('La franchigia (€7.500 o €10.000) incide sul reddito. Altro.', 'blog-body/it/x.ts');
+  assert.equal(text, 'La franchigia (10.000 €) incide sul reddito. Altro.');
+  const plural = repairFiscalText('Guida con franchigie 7.500/10.000 € e credito.', 'seo/seo-blog-5.ts').text;
+  assert.equal(plural, 'Guida con franchigia 10.000 € e credito.');
+});
+
+test('riparazione: la frase falsa diventa quella corretta una volta, e la seconda esce', () => {
+  const source = 'Primo paragrafo. I vecchi frontalieri hanno un\'esenzione di 7.500 euro. Altro fatto. I vecchi hanno esenzione di €7.500 fino al 2033. Fine.';
+  const { text } = repairFiscalText(source, 'blog-body/it/x.ts');
+  assert.equal(findFiscalClaims(text).length, 0);
+  assert.equal(text.split('art. 9').length - 1, 1);
+  assert.match(text, /^Primo paragrafo\. I vecchi frontalieri \(art\. 9/);
+  assert.match(text, /Altro fatto\. Fine\.$/);
+});
+
+test('riparazione: bullet, cella e domanda conservano la struttura', () => {
+  const bullet = repairFiscalText('- **Regime**: esenzione €7.500 fino al 2033\\n- Altro: x', 'blog-body/it/x.ts').text;
+  assert.match(bullet, /^- \*\*Regime\*\*: I vecchi frontalieri/);
+  assert.match(bullet, /\\n- Altro: x$/);
+  const cell = repairFiscalText('| Alte Grenzgänger | Befreiung 7.500 € | x |', 'blog-body/de/x.ts').text;
+  assert.equal(cell, '| Alte Grenzgänger | nur in der Schweiz besteuert (Art. 9) | x |');
+  const question = repairFiscalText('{"q":"Qual è la differenza tra esenzione €7.500 ed esenzione maggiore?","a":"Testo."}', 'blog-body/it/x.ts').text;
+  assert.match(question, /"q":"Quale franchigia IRPEF si applica ai frontalieri\?"/);
+});
+
+test('riparazione: un calcolo non si tocca, perche\' le righe dopo ne dipendono', () => {
+  const source = 'Passo 1: franchigia €50.000 − €7.500 = €42.500 imponibile.';
+  const { text, arith } = repairFiscalText(source, 'blog-body/it/x.ts');
+  assert.equal(text, source);
+  assert.equal(arith.length, 1);
+});
+
+test('riparazione: due nomi della quota nella stessa frase non tagliano la frase dopo', () => {
+  const { text } = repairFiscalText('Primo. La tassa salute, cioe la quota SSN, vale il 9% del salario netto. Ultimo fatto intatto.', 'blog-body/it/x.ts');
+  assert.match(text, /Ultimo fatto intatto\.$/);
+  assert.doesNotMatch(text, /9%/);
+});
+
+test('riparazione: span fiscali sovrapposti rimuovono la frase una volta sola', () => {
+  const source = "Il credito d'imposta fino all'80% del prelievo "
+    + 'x'.repeat(700)
+    + ' 20% viene retrocesso ai comuni. TAIL intatto.';
+  const { text } = repairFiscalText(source, 'blog-body/it/x.ts');
+  assert.equal(text, ' TAIL intatto.');
+});
+
+test('riparazione: «mai in entrambi» e data di vigore cambiano solo l\'inciso', () => {
+  assert.equal(
+    repairFiscalText('Trattenuta SOLO in Svizzera, mai in entrambi i paesi.', 'blog-body/it/x.ts').text,
+    'Trattenuta SOLO in Svizzera.',
+  );
+  assert.equal(
+    repairFiscalText('Il Nuovo Accordo, in vigore dal 1° gennaio 2024, vale.', 'blog-body/it/x.ts').text,
+    'Il Nuovo Accordo, applicato dal 1° gennaio 2024, vale.',
+  );
+});
