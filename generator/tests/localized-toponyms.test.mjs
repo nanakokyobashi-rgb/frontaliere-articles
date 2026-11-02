@@ -575,7 +575,7 @@ test('il corpus storico e le 24 sezioni cantonali non copiano esonimi fra lingue
   ].join('\n'));
 });
 
-test('il gate di generazione importa e invoca il controllo prima della scrittura', () => {
+test('il gate bounded protegge la scrittura e conserva l audit globale', () => {
   const source = readFileSync(path.join(ROOT, 'generator/scripts/create-article.mjs'), 'utf8');
   assert.match(source, /findArticleLocalizedToponymMismatches/);
   assert.match(source, /assertArticlePassesFactualityGates\(data, options = \{\}\)/);
@@ -602,5 +602,13 @@ test('il gate di generazione importa e invoca il controllo prima della scrittura
 
   const workflow = readFileSync(path.join(ROOT, '.github/workflows/generate-article.yml'), 'utf8');
   assert.match(workflow, /generator\/tests\/wrong-latin-language-adoption\.test\.mjs/);
-  assert.match(workflow, /generator\/tests\/localized-toponyms\.test\.mjs/);
+  assert.doesNotMatch(
+    workflow.split('\n').filter((line) => !line.trim().startsWith('#')).join('\n'),
+    /generator\/tests\/localized-toponyms\.test\.mjs/,
+    'l audit storico non deve essere eseguito nel gate per-articolo',
+  );
+  const generatorCi = readFileSync(path.join(ROOT, '.github/workflows/generator-ci.yml'), 'utf8');
+  assert.match(generatorCi, /node --test 'generator\/tests\/\*\.test\.mjs'/);
+  const contentGate = readFileSync(path.join(ROOT, 'scripts/ci/content-gates-main.mjs'), 'utf8');
+  assert.match(contentGate, /["']generator\/tests\/localized-toponyms\.test\.mjs["']/);
 });
