@@ -4,26 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-be::https://ajour.ch/story/704545/sbb-muss-verkehr-zwischen-biel-und-grenchen-wegen-trockenen-sommers-notfallm%c3%a4ssig-einschr%c3%a4nken": {
-      "section": "canton-be",
-      "ts": 1793397190683
-    },
-    "canton-be::https://ajour.ch/story/704441/19000-personen-erhalten-im-kanton-bern-neu-pr%c3%a4mienverbilligung": {
-      "section": "canton-be",
-      "ts": 1793397192898
-    },
-    "canton-be::https://ajour.ch/story/704417/rduction-des-primes-plus-gnreuse-dans-le-canton-de-berne": {
-      "section": "canton-be",
-      "ts": 1793397194920
-    },
-    "canton-be::https://ajour.ch/story/704661/virtueller-polizeischalter-steht-ganzem-kanton-bern-zur-verf%c3%bcgung": {
-      "section": "canton-be",
-      "ts": 1793397274376
-    },
-    "canton-be::https://ajour.ch/story/704403/regierungsrat-beantragt-millionenkredit-f%c3%bcr-lift-berner-rathaus-soll-barrierefrei-werden": {
-      "section": "canton-be",
-      "ts": 1793398372659
-    },
     "canton-be::https://ajour.ch/story/704319/die-sbbapp-wird-noch-viel-praktischer-das-sind-die-wichtigsten-neuerungen": {
       "section": "canton-be",
       "ts": 1793484934245
@@ -51,6 +31,38 @@
     "canton-be::https://ajour.ch/story/704576/politpoker-um-die-bilateralen-schiessen-die-eugegner-ein-eigentor": {
       "section": "canton-be",
       "ts": 1793544465324
+    },
+    "canton-be::https://ajour.ch/story/704834/guichet-virtuel-de-police-disponible-dans-tout-le-canton-de-berne": {
+      "section": "canton-be",
+      "ts": 1793550238308
+    },
+    "canton-be::https://www.nau.ch/blog/paid_post/digitaler-nachlass-in-der-schweiz-was-sie-unbedingt-regeln-sollten-67170397": {
+      "section": "canton-be",
+      "ts": 1793551139247
+    },
+    "canton-be::https://www.api.news.apps.be.ch/api/atom/news/841d3244-9a78-4c75-acb6-ca73ef55cb46": {
+      "section": "canton-be",
+      "ts": 1793551152884
+    },
+    "canton-be::https://ajour.ch/story/704644/automobilist-wird-nach-unfall-in-walterswil-ins-spital-geflogen": {
+      "section": "canton-be",
+      "ts": 1793551168185
+    },
+    "canton-be::https://ajour.ch/story/703443/ein-letztes-mal-mit-85-darf-ich-mir-erlauben-in-pension-zu-gehen": {
+      "section": "canton-be",
+      "ts": 1793551175517
+    },
+    "canton-be::https://ajour.ch/story/704586/kryptob%c3%b6rse-binance-meldet-grossen-cyberangriff-schaden-in-milliardenh%c3%b6he": {
+      "section": "canton-be",
+      "ts": 1793551182965
+    },
+    "canton-be::https://www.nau.ch/news/wirtschaft/binance-gibt-kundenauszahlungen-nach-hackerangriff-frei-67196350": {
+      "section": "canton-be",
+      "ts": 1793551201326
+    },
+    "canton-be::https://ajour.ch/story/704661/virtueller-polizeischalter-steht-ganzem-kanton-bern-zur-verf%c3%bcgung": {
+      "section": "canton-be",
+      "ts": 1793576850911
     }
   }
 }
