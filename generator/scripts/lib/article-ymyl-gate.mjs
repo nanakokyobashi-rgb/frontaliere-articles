@@ -134,7 +134,7 @@ export function checkYmylPublishable(data, { sourceUrl = '' } = {}) {
   }
   const text = articleText(it, data?.seo);
   const problems = findFiscalErrors(text).map((error) => `${error.id} (${error.source}): ${error.sentence.trim().slice(0, 120)}`);
-  if (![sourceUrl, ...linksIn(text)].some(isOfficialSourceUrl)) {
+  if (![sourceUrl, ...linksInValues(it, data?.seo)].some(isOfficialSourceUrl)) {
     problems.unshift('nessun link a una fonte ufficiale');
   }
   return { ymyl: true, problems };
