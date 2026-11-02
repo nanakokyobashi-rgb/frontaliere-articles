@@ -13671,6 +13671,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.quota-regionale-salute-2027.title': 'Frontaliers, la taxe santé proposée : 30-150 euro à partir de 2027',
     'blog.article.quota-regionale-salute-2027.excerpt': 'Le texte prévoit un montant fixe : 30-150 euro à partir de 2027 Le montant sera fixé chaque année par la région de résidence L\'ancien critère était de 3% à 6%',
     'blog.article.quota-regionale-salute-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.cascata-oro-comune-como.title': 'Des millions pour Como : les fonds pour les travailleurs frontaliers ont triplé',
+    'blog.article.cascata-oro-comune-como.excerpt': 'Plus de 9 millions dans les caisses de la commune de Como 6.492 travailleurs frontaliers résidents au 31 décembre 2024 7,81% de travailleurs frontaliers sur 83.135 habitants 9.058.370,70 euros',
+    'blog.article.cascata-oro-comune-como.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaFr;

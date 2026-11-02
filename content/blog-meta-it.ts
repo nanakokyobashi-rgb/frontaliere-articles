@@ -13670,6 +13670,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.quota-regionale-salute-2027.title': 'Frontalieri, la tassa salute proposta: 30-150 euro dal 2027',
     'blog.article.quota-regionale-salute-2027.excerpt': 'Il testo prevede una quota fissa: 30-150 euro dal 2027 La cifra sarà decisa ogni anno dalla regione di residenza Il vecchio criterio era dal 3% al 6%',
     'blog.article.quota-regionale-salute-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.cascata-oro-comune-como.title': 'Milioni per Como: i fondi per frontalieri si sono triplicati',
+    'blog.article.cascata-oro-comune-como.excerpt': 'Oltre 9 milioni nelle casse del Comune di Como 6.492 frontalieri residenti al 31 dicembre 2024 7,81% di frontalieri su 83.135 abitanti 9.058.370,70 euro',
+    'blog.article.cascata-oro-comune-como.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaIt;

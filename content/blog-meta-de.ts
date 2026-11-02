@@ -13668,6 +13668,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.quota-regionale-salute-2027.title': 'Grenzgänger, vorgeschlagene Gesundheitsabgabe: 30-150 Euro ab 2027',
     'blog.article.quota-regionale-salute-2027.excerpt': 'Der Text sieht einen festen Betrag vor: 30-150 Euro ab 2027 Die Höhe wird jedes Jahr von der Wohnsitzregion festgelegt Das alte Kriterium reichte von 3% bis 6%',
     'blog.article.quota-regionale-salute-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.cascata-oro-comune-como.title': 'Millionen für Como: Die Mittel für Grenzgänger haben sich verdreifacht',
+    'blog.article.cascata-oro-comune-como.excerpt': 'Über 9 Millionen in den Kassen der Gemeinde Como 6.492 ansässige Grenzgänger am 31.',
+    'blog.article.cascata-oro-comune-como.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaDe;

@@ -1,9 +1,4 @@
 {
-  "https://www.laregione.ch/cantone/ticino/1951661/con-prezzi-cosi-alti-la-confederazione-deve-alleggerire-il-carico-fiscale-sui-carburanti": {
-    "articleId": "carburanti-prezzi-tasse-ticino",
-    "ts": "2026-09-23T00:36:17.968Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4099507": {
     "articleId": "sunrise-tagli-posti-lavoro-ristrutturazione",
     "ts": "2026-09-23T00:45:15.398Z",
@@ -2497,6 +2492,11 @@
   "https://comozero.it/attualita/sorpresa-cambia-la-tassa-sulla-salute-per-i-frontalieri-ecco-le-cifre-saranno-fisse-e-decise-dalle-regioni": {
     "articleId": "quota-regionale-salute-2027",
     "ts": "2026-11-02T22:45:18.586Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/attualita/dai-frontalieri-una-cascata-doro-per-il-comune-di-como-i-3-milioni-previsti-si-sono-triplicati": {
+    "articleId": "cascata-oro-comune-como",
+    "ts": "2026-11-02T23:10:52.560Z",
     "keyForm": 2
   }
 }

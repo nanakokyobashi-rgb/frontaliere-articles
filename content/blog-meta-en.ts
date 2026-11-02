@@ -13669,6 +13669,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.quota-regionale-salute-2027.title': 'Cross-border workers, proposed healthcare tax: 30-150 euros from 2027',
     'blog.article.quota-regionale-salute-2027.excerpt': 'The text provides for a fixed fee: 30-150 euro from 2027 The amount will be decided every year by the region of residence The old criterion was from 3% to 6%',
     'blog.article.quota-regionale-salute-2027.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.cascata-oro-comune-como.title': 'Millions for Como: funds for cross-border workers have tripled',
+    'blog.article.cascata-oro-comune-como.excerpt': 'Over 9 million in the coffers of the Municipality of Como 6.492 cross-border workers residing as of December 31, 2024 7,81% of cross-border workers out of 83.135 inhabitants 9.058.370,70 euro',
+    'blog.article.cascata-oro-comune-como.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaEn;
