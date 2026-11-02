@@ -293,4 +293,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'ctmg-diventa-centrale-sante',
+ category: 'novita',
+ date: '2026-11-02T23:34:15.863Z',
+ image: '/images/blog/article-ctmg-diventa-centrale-sante.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['VD'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
