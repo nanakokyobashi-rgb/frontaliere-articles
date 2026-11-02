@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "mobilita",
-  "updatedAt": "2026-11-02T11:33:10.756Z",
-  "contentHash": "8ad1e372d9ac6bd349b9f7892721c376d808397942e3c050da9c3827d35222a8",
+  "updatedAt": "2026-11-02T21:01:35.908Z",
+  "contentHash": "f26f546e16da2b48276a72756627a3931dfec2ec6150085d095b7f2481874ddd",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-01T21:24:45.283Z",
+      "updatedAt": "2026-11-02T13:52:53.767Z",
       "keyFacts": 0
     }
   ],
@@ -168,6 +168,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Direktverbindung Weinfelden-St.Gallen-Bregenz mit der S3 - Einführungsangebot für Kombiabos OTV-VVV",
+              "date": "2026-11-02",
+              "url": "https://www.ostwind.ch/about/unternehmen/news/uebersicht/einf%C3%BChrungsangebot-direktverbindung-s3-weinfelden-via-st.-gallen-nach-bregenz.html"
+            },
+            {
               "label": "Oberuzwil: Brand in Mehrfamilienhaus",
               "date": "2026-11-01",
               "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/oberuzwil--brand-in-mehrfamilienhaus.html"
@@ -191,14 +196,9 @@
               "label": "Mels: Festnahme nach versuchtem Telefonbetrug",
               "date": "2026-10-31",
               "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/mels--festnahme-nach-versuchtem-telefonbetrug.html"
-            },
-            {
-              "label": "Kanton St. Gallen: Mehrere Einbrüche",
-              "date": "2026-10-31",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/kanton-st--gallen--mehrere-einbrueche.html"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -286,7 +286,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-02T11:33:10.756Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     },
     "en": {
       "canton": "SG",
@@ -432,6 +432,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Direktverbindung Weinfelden-St.Gallen-Bregenz mit der S3 - Einführungsangebot für Kombiabos OTV-VVV",
+              "date": "2026-11-02",
+              "url": "https://www.ostwind.ch/about/unternehmen/news/uebersicht/einf%C3%BChrungsangebot-direktverbindung-s3-weinfelden-via-st.-gallen-nach-bregenz.html"
+            },
+            {
               "label": "Oberuzwil: Brand in Mehrfamilienhaus",
               "date": "2026-11-01",
               "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/oberuzwil--brand-in-mehrfamilienhaus.html"
@@ -455,14 +460,9 @@
               "label": "Mels: Festnahme nach versuchtem Telefonbetrug",
               "date": "2026-10-31",
               "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/mels--festnahme-nach-versuchtem-telefonbetrug.html"
-            },
-            {
-              "label": "Kanton St. Gallen: Mehrere Einbrüche",
-              "date": "2026-10-31",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/kanton-st--gallen--mehrere-einbrueche.html"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -549,7 +549,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-02T11:33:10.756Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     },
     "de": {
       "canton": "SG",
@@ -695,6 +695,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Direktverbindung Weinfelden-St.Gallen-Bregenz mit der S3 - Einführungsangebot für Kombiabos OTV-VVV",
+              "date": "2026-11-02",
+              "url": "https://www.ostwind.ch/about/unternehmen/news/uebersicht/einf%C3%BChrungsangebot-direktverbindung-s3-weinfelden-via-st.-gallen-nach-bregenz.html"
+            },
+            {
               "label": "Oberuzwil: Brand in Mehrfamilienhaus",
               "date": "2026-11-01",
               "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/oberuzwil--brand-in-mehrfamilienhaus.html"
@@ -718,14 +723,9 @@
               "label": "Mels: Festnahme nach versuchtem Telefonbetrug",
               "date": "2026-10-31",
               "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/mels--festnahme-nach-versuchtem-telefonbetrug.html"
-            },
-            {
-              "label": "Kanton St. Gallen: Mehrere Einbrüche",
-              "date": "2026-10-31",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/kanton-st--gallen--mehrere-einbrueche.html"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -812,7 +812,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-02T11:33:10.756Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     },
     "fr": {
       "canton": "SG",
@@ -958,6 +958,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Direktverbindung Weinfelden-St.Gallen-Bregenz mit der S3 - Einführungsangebot für Kombiabos OTV-VVV",
+              "date": "2026-11-02",
+              "url": "https://www.ostwind.ch/about/unternehmen/news/uebersicht/einf%C3%BChrungsangebot-direktverbindung-s3-weinfelden-via-st.-gallen-nach-bregenz.html"
+            },
+            {
               "label": "Oberuzwil: Brand in Mehrfamilienhaus",
               "date": "2026-11-01",
               "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/11/oberuzwil--brand-in-mehrfamilienhaus.html"
@@ -981,14 +986,9 @@
               "label": "Mels: Festnahme nach versuchtem Telefonbetrug",
               "date": "2026-10-31",
               "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/mels--festnahme-nach-versuchtem-telefonbetrug.html"
-            },
-            {
-              "label": "Kanton St. Gallen: Mehrere Einbrüche",
-              "date": "2026-10-31",
-              "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/kanton-st--gallen--mehrere-einbrueche.html"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -1076,7 +1076,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-02T11:33:10.756Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     }
   }
 }

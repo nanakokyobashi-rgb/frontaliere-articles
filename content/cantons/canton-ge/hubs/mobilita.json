@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "mobilita",
-  "updatedAt": "2026-11-02T11:33:10.756Z",
-  "contentHash": "f2a6bad2b3b61fdf61d85cf4d8087b806f415762b2fd9c9eeea8e90199da8a78",
+  "updatedAt": "2026-11-02T21:01:35.908Z",
+  "contentHash": "7f857bed5d037fb048bb8163e9c6051cdb06c638880b8aed9a7c5b1825707e61",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-01T21:24:45.283Z",
+      "updatedAt": "2026-11-02T13:52:53.767Z",
       "keyFacts": 0
     }
   ],
@@ -168,6 +168,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Réouverture de l’établissement pénitentiaire de Villars après travaux",
+              "date": "2026-11-02",
+              "url": "https://www.ge.ch/node/45383"
+            },
+            {
               "label": "Perturbations de la circulation - dimanche 1er novembre",
               "date": "2026-10-31",
               "url": "https://www.ge.ch/node/45382"
@@ -191,14 +196,9 @@
               "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 2 novembre 2026",
               "date": "2026-10-29",
               "url": "https://www.ge.ch/node/45356"
-            },
-            {
-              "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 26 octobre 2026",
-              "date": "2026-10-22",
-              "url": "https://www.ge.ch/node/45273"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -258,7 +258,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-02T11:33:10.756Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     },
     "en": {
       "canton": "GE",
@@ -404,6 +404,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Réouverture de l’établissement pénitentiaire de Villars après travaux",
+              "date": "2026-11-02",
+              "url": "https://www.ge.ch/node/45383"
+            },
+            {
               "label": "Perturbations de la circulation - dimanche 1er novembre",
               "date": "2026-10-31",
               "url": "https://www.ge.ch/node/45382"
@@ -427,14 +432,9 @@
               "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 2 novembre 2026",
               "date": "2026-10-29",
               "url": "https://www.ge.ch/node/45356"
-            },
-            {
-              "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 26 octobre 2026",
-              "date": "2026-10-22",
-              "url": "https://www.ge.ch/node/45273"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -494,7 +494,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-02T11:33:10.756Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     },
     "de": {
       "canton": "GE",
@@ -640,6 +640,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Réouverture de l’établissement pénitentiaire de Villars après travaux",
+              "date": "2026-11-02",
+              "url": "https://www.ge.ch/node/45383"
+            },
+            {
               "label": "Perturbations de la circulation - dimanche 1er novembre",
               "date": "2026-10-31",
               "url": "https://www.ge.ch/node/45382"
@@ -663,14 +668,9 @@
               "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 2 novembre 2026",
               "date": "2026-10-29",
               "url": "https://www.ge.ch/node/45356"
-            },
-            {
-              "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 26 octobre 2026",
-              "date": "2026-10-22",
-              "url": "https://www.ge.ch/node/45273"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -730,7 +730,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-02T11:33:10.756Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     },
     "fr": {
       "canton": "GE",
@@ -876,6 +876,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Réouverture de l’établissement pénitentiaire de Villars après travaux",
+              "date": "2026-11-02",
+              "url": "https://www.ge.ch/node/45383"
+            },
+            {
               "label": "Perturbations de la circulation - dimanche 1er novembre",
               "date": "2026-10-31",
               "url": "https://www.ge.ch/node/45382"
@@ -899,14 +904,9 @@
               "label": "Impacts Mobilités: démarrage de nouveaux chantiers impactant les déplacements dès le 2 novembre 2026",
               "date": "2026-10-29",
               "url": "https://www.ge.ch/node/45356"
-            },
-            {
-              "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 26 octobre 2026",
-              "date": "2026-10-22",
-              "url": "https://www.ge.ch/node/45273"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -966,7 +966,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-02T11:33:10.756Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     }
   }
 }

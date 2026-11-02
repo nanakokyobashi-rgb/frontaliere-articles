@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "servizi",
-  "updatedAt": "2026-11-02T18:34:35.378Z",
-  "contentHash": "3683f8616cbd75dc66e8d0ae0e924b4a58103b7b6d706a5d857e820ed3a83edc",
+  "updatedAt": "2026-11-02T21:01:35.908Z",
+  "contentHash": "9956c85b9c65469d88cb6d076666d4db0d639cd55d317a4c879307bf21d2413d",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-02T06:00:52.103Z",
+      "updatedAt": "2026-11-02T15:47:08.669Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-01T21:24:45.283Z",
+      "updatedAt": "2026-11-02T13:52:53.767Z",
       "keyFacts": 0
     }
   ],
@@ -38,7 +38,7 @@
         },
         {
           "label": "Aste di targhe in corso",
-          "value": "72",
+          "value": "59",
           "note": "offerta mediana 600 CHF"
         }
       ],
@@ -78,16 +78,16 @@
               "url": "https://auktion.tg.ch/de/auction/109874"
             },
             {
-              "label": "TG997997",
-              "value": "1150 CHF",
+              "label": "TG23238",
+              "value": "900 CHF",
               "detail": "offerta attuale",
               "date": "2026-11-04T18:00:00.000Z",
-              "url": "https://auktion.tg.ch/de/auction/109871"
+              "url": "https://auktion.tg.ch/de/auction/109867"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://auktion.tg.ch/de/",
-          "updatedAt": "2026-11-02T06:00:52.103Z"
+          "updatedAt": "2026-11-02T15:47:08.669Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -125,7 +125,7 @@
               "url": "https://awa.tg.ch/im-fokus.html/3696/news/79974"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -205,7 +205,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-02T18:34:35.378Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     },
     "en": {
       "canton": "TG",
@@ -221,7 +221,7 @@
         },
         {
           "label": "Plate auctions running",
-          "value": "72",
+          "value": "59",
           "note": "typical bid 600 CHF"
         }
       ],
@@ -261,16 +261,16 @@
               "url": "https://auktion.tg.ch/de/auction/109874"
             },
             {
-              "label": "TG997997",
-              "value": "1,150 CHF",
+              "label": "TG23238",
+              "value": "900 CHF",
               "detail": "current bid",
               "date": "2026-11-04T18:00:00.000Z",
-              "url": "https://auktion.tg.ch/de/auction/109871"
+              "url": "https://auktion.tg.ch/de/auction/109867"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://auktion.tg.ch/de/",
-          "updatedAt": "2026-11-02T06:00:52.103Z"
+          "updatedAt": "2026-11-02T15:47:08.669Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -308,7 +308,7 @@
               "url": "https://awa.tg.ch/im-fokus.html/3696/news/79974"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -384,7 +384,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-02T18:34:35.378Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     },
     "de": {
       "canton": "TG",
@@ -400,7 +400,7 @@
         },
         {
           "label": "Laufende Kontrollschild-Auktionen",
-          "value": "72",
+          "value": "59",
           "note": "mittleres Gebot 600 CHF"
         }
       ],
@@ -440,16 +440,16 @@
               "url": "https://auktion.tg.ch/de/auction/109874"
             },
             {
-              "label": "TG997997",
-              "value": "1’150 CHF",
+              "label": "TG23238",
+              "value": "900 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-11-04T18:00:00.000Z",
-              "url": "https://auktion.tg.ch/de/auction/109871"
+              "url": "https://auktion.tg.ch/de/auction/109867"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://auktion.tg.ch/de/",
-          "updatedAt": "2026-11-02T06:00:52.103Z"
+          "updatedAt": "2026-11-02T15:47:08.669Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -487,7 +487,7 @@
               "url": "https://awa.tg.ch/im-fokus.html/3696/news/79974"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -563,7 +563,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-02T18:34:35.378Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     },
     "fr": {
       "canton": "TG",
@@ -579,7 +579,7 @@
         },
         {
           "label": "Enchères de plaques en cours",
-          "value": "72",
+          "value": "59",
           "note": "offre centrale 600 CHF"
         }
       ],
@@ -619,16 +619,16 @@
               "url": "https://auktion.tg.ch/de/auction/109874"
             },
             {
-              "label": "TG997997",
-              "value": "1 150 CHF",
+              "label": "TG23238",
+              "value": "900 CHF",
               "detail": "offre actuelle",
               "date": "2026-11-04T18:00:00.000Z",
-              "url": "https://auktion.tg.ch/de/auction/109871"
+              "url": "https://auktion.tg.ch/de/auction/109867"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://auktion.tg.ch/de/",
-          "updatedAt": "2026-11-02T06:00:52.103Z"
+          "updatedAt": "2026-11-02T15:47:08.669Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -666,7 +666,7 @@
               "url": "https://awa.tg.ch/im-fokus.html/3696/news/79974"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -738,7 +738,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-02T18:34:35.378Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     }
   }
 }

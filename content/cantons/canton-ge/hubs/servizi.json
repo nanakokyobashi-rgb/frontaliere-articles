@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "servizi",
-  "updatedAt": "2026-11-02T18:34:35.378Z",
-  "contentHash": "81de7e40a027573a1b4145ca44316db0e270f785d4a0132b507c7b4e5eb30a75",
+  "updatedAt": "2026-11-02T21:01:35.908Z",
+  "contentHash": "79ba302a7744d38c9b0ab5d5263d50e06d2fafa6c480b1a7e3a6634c24b8320a",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-02T08:57:40.244Z",
+      "updatedAt": "2026-11-02T12:36:45.444Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-01T21:24:45.283Z",
+      "updatedAt": "2026-11-02T13:52:53.767Z",
       "keyFacts": 0
     }
   ],
@@ -91,13 +91,23 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-02T08:57:40.244Z"
+          "updatedAt": "2026-11-02T12:36:45.444Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Recherche en thérapie cellulaire innovante pour traiter l’insuffisance cardiaque",
+              "date": "2026-11-02",
+              "url": "https://www.hug.ch/actualite/recherche-therapie-cellulaire-innovante-pour-traiter-insuffisance-cardiaque"
+            },
+            {
+              "label": "Tentatives d'escroquerie téléphoniques : usurpation de l'identité d'un médecin des HUG",
+              "date": "2026-11-02",
+              "url": "https://www.hug.ch/actualite/tentatives-escroquerie-telephoniques-usurpation-identite-medecin-hug"
+            },
             {
               "label": "Deux projets de recherche et un poster distingués lors de la Journée de la recherche clinique 2026",
               "date": "2026-10-30",
@@ -117,19 +127,9 @@
               "label": "Rapport sur l'état de santé des cours d'eau genevois: le secteur de La Laire - Champagne",
               "date": "2026-10-29",
               "url": "https://www.ge.ch/node/45376"
-            },
-            {
-              "label": "OCIRT-Formation 200-26 - Stockage des produits chimiques dans les entreprises",
-              "date": "2026-10-29",
-              "url": "https://www.ge.ch/node/44023"
-            },
-            {
-              "label": "Formulaires pour les demandes de subsides 2027",
-              "date": "2026-10-27",
-              "url": "https://www.ge.ch/node/45339"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -209,7 +209,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-02T18:34:35.378Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     },
     "en": {
       "canton": "GE",
@@ -278,13 +278,23 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-02T08:57:40.244Z"
+          "updatedAt": "2026-11-02T12:36:45.444Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Recherche en thérapie cellulaire innovante pour traiter l’insuffisance cardiaque",
+              "date": "2026-11-02",
+              "url": "https://www.hug.ch/actualite/recherche-therapie-cellulaire-innovante-pour-traiter-insuffisance-cardiaque"
+            },
+            {
+              "label": "Tentatives d'escroquerie téléphoniques : usurpation de l'identité d'un médecin des HUG",
+              "date": "2026-11-02",
+              "url": "https://www.hug.ch/actualite/tentatives-escroquerie-telephoniques-usurpation-identite-medecin-hug"
+            },
             {
               "label": "Deux projets de recherche et un poster distingués lors de la Journée de la recherche clinique 2026",
               "date": "2026-10-30",
@@ -304,19 +314,9 @@
               "label": "Rapport sur l'état de santé des cours d'eau genevois: le secteur de La Laire - Champagne",
               "date": "2026-10-29",
               "url": "https://www.ge.ch/node/45376"
-            },
-            {
-              "label": "OCIRT-Formation 200-26 - Stockage des produits chimiques dans les entreprises",
-              "date": "2026-10-29",
-              "url": "https://www.ge.ch/node/44023"
-            },
-            {
-              "label": "Formulaires pour les demandes de subsides 2027",
-              "date": "2026-10-27",
-              "url": "https://www.ge.ch/node/45339"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -391,7 +391,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-02T18:34:35.378Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     },
     "de": {
       "canton": "GE",
@@ -460,13 +460,23 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-02T08:57:40.244Z"
+          "updatedAt": "2026-11-02T12:36:45.444Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Recherche en thérapie cellulaire innovante pour traiter l’insuffisance cardiaque",
+              "date": "2026-11-02",
+              "url": "https://www.hug.ch/actualite/recherche-therapie-cellulaire-innovante-pour-traiter-insuffisance-cardiaque"
+            },
+            {
+              "label": "Tentatives d'escroquerie téléphoniques : usurpation de l'identité d'un médecin des HUG",
+              "date": "2026-11-02",
+              "url": "https://www.hug.ch/actualite/tentatives-escroquerie-telephoniques-usurpation-identite-medecin-hug"
+            },
             {
               "label": "Deux projets de recherche et un poster distingués lors de la Journée de la recherche clinique 2026",
               "date": "2026-10-30",
@@ -486,19 +496,9 @@
               "label": "Rapport sur l'état de santé des cours d'eau genevois: le secteur de La Laire - Champagne",
               "date": "2026-10-29",
               "url": "https://www.ge.ch/node/45376"
-            },
-            {
-              "label": "OCIRT-Formation 200-26 - Stockage des produits chimiques dans les entreprises",
-              "date": "2026-10-29",
-              "url": "https://www.ge.ch/node/44023"
-            },
-            {
-              "label": "Formulaires pour les demandes de subsides 2027",
-              "date": "2026-10-27",
-              "url": "https://www.ge.ch/node/45339"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -573,7 +573,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-02T18:34:35.378Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     },
     "fr": {
       "canton": "GE",
@@ -642,13 +642,23 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-02T08:57:40.244Z"
+          "updatedAt": "2026-11-02T12:36:45.444Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Recherche en thérapie cellulaire innovante pour traiter l’insuffisance cardiaque",
+              "date": "2026-11-02",
+              "url": "https://www.hug.ch/actualite/recherche-therapie-cellulaire-innovante-pour-traiter-insuffisance-cardiaque"
+            },
+            {
+              "label": "Tentatives d'escroquerie téléphoniques : usurpation de l'identité d'un médecin des HUG",
+              "date": "2026-11-02",
+              "url": "https://www.hug.ch/actualite/tentatives-escroquerie-telephoniques-usurpation-identite-medecin-hug"
+            },
             {
               "label": "Deux projets de recherche et un poster distingués lors de la Journée de la recherche clinique 2026",
               "date": "2026-10-30",
@@ -668,19 +678,9 @@
               "label": "Rapport sur l'état de santé des cours d'eau genevois: le secteur de La Laire - Champagne",
               "date": "2026-10-29",
               "url": "https://www.ge.ch/node/45376"
-            },
-            {
-              "label": "OCIRT-Formation 200-26 - Stockage des produits chimiques dans les entreprises",
-              "date": "2026-10-29",
-              "url": "https://www.ge.ch/node/44023"
-            },
-            {
-              "label": "Formulaires pour les demandes de subsides 2027",
-              "date": "2026-10-27",
-              "url": "https://www.ge.ch/node/45339"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -752,7 +752,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-02T18:34:35.378Z"
+      "updatedAt": "2026-11-02T21:01:35.908Z"
     }
   }
 }
