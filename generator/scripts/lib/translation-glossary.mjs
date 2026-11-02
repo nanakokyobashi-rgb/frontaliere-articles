@@ -417,8 +417,11 @@ const GENDER_TRIGRAPH_BRACKETED_SRC =
 // d/x/g makes it unambiguous. The bracketed form is byte-identical to
 // canonicalize's, since brackets already disambiguate.
 const GENDER_TRIGRAPH_BARE_SRC =
-  String.raw`(^|[\p{P}\p{Z}])(?:([mwfhlp])\s*\/\s*([mwfhlp])\s*\/\s*([dxg])`
-  + String.raw`|m\s*\/\s*w|w\s*\/\s*m|m\s*\/\s*f|f\s*\/\s*m|h\s*\/\s*f|f\s*\/\s*h)(?=$|[\p{P}\p{Z}])`;
+  // Keep control whitespace (notably newline and tab) as delimiters, while
+  // enumerating punctuation categories without Pc so underscores remain part
+  // of identifiers such as foo_m/w_bar rather than exposing a trigraph.
+  String.raw`(^|[\s\p{Ps}\p{Pe}\p{Pi}\p{Pf}\p{Po}\p{Pd}\p{Z}])(?:([mwfhlp])\s*\/\s*([mwfhlp])\s*\/\s*([dxg])`
+  + String.raw`|m\s*\/\s*w|w\s*\/\s*m|m\s*\/\s*f|f\s*\/\s*m|h\s*\/\s*f|f\s*\/\s*h)(?=$|[\s\p{Ps}\p{Pe}\p{Pi}\p{Pf}\p{Po}\p{Pd}\p{Z}])`;
 
 const bracketedTrigraphRe = () => new RegExp(GENDER_TRIGRAPH_BRACKETED_SRC, 'gi');
 const bareTrigraphRe = () => new RegExp(GENDER_TRIGRAPH_BARE_SRC, 'giu');
