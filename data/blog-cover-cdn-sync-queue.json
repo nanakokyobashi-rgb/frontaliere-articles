@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-blackout-brugg-guasto-alta-tensione.webp",
+      "sha256": "bb9ca13302fc3ac2ed7ae76a432146ddb261d7c5e34ba97a83e1909b2b9b696d"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-blackout-brugg-guasto-alta-tensione-480w.webp",
+      "sha256": "a4d136210c1adb24c80b8371296717d2205d245a4b4c79859a1f3508309eeb38"
+    }
+  ]
 }
