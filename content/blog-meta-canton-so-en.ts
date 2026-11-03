@@ -72,6 +72,9 @@ const blogMetaCantonSoEn: Record<string, string> = {
     'blog.article.aumento-salari-soletta-2027.title': 'Canton Solothurn: 1% salary increase from 2027',
     'blog.article.aumento-salari-soletta-2027.excerpt': 'From 2027, state employees, teachers and employees of Solothurner Spitäler AG will receive a 1.0% salary adjustment.',
     'blog.article.aumento-salari-soletta-2027.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.solothurn-riduzione-premi-2027.title': 'Insurance premium reductions in 2027: CHF 221 million in Solothurn',
+    'blog.article.solothurn-riduzione-premi-2027.excerpt': 'In 2027, around CHF 221 million are planned for Solothurn.',
+    'blog.article.solothurn-riduzione-premi-2027.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSoEn;

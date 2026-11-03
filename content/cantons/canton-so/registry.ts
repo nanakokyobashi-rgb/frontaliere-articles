@@ -259,4 +259,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'solothurn-riduzione-premi-2027',
+ category: 'fiscale',
+ date: '2026-11-03T11:10:06.361Z',
+ image: '/images/blog/article-solothurn-riduzione-premi-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SO'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];
