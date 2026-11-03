@@ -78,7 +78,7 @@ export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '
 // modulo dei floor, così writer e gate non possono divergere sui nomi.
 export { SECTION_COUNTERS, SECTION_SITEMAPS, ARCHIVE_SITEMAP };
 
-function indexExcludedArticleIds(indexExclusions, section) {
+export function indexExcludedArticleIds(indexExclusions, section) {
   const prefix = `${section}|`;
   return new Set(
     [...indexExclusions]
