@@ -2154,7 +2154,7 @@
     {
       "path": "host/staticAdSlotHtml.ts",
       "mode": "corpus-only",
-      "reason": "Provider host-side dei due slot pubblicitari delle pagine hub cantonali: il sito espone il callback nel contratto dell'engine e qui lo concretizza con client, slot, formato, altezza riservata e placement del corpus. Non e' un gemello da mirrorare: il sito possiede solo il bootstrap che collega il provider, mentre il markup resta dipendente dalla configurazione host del corpus.",
+      "reason": "Provider host-side degli slot pubblicitari statici degli hub cantonali e degli articoli: il sito espone il callback nel contratto dell'engine e qui lo concretizza con client, slot, formato, altezza riservata e placement del corpus. Non e' un gemello da mirrorare: il sito possiede solo il bootstrap che collega il provider, mentre il markup resta dipendente dalla configurazione host del corpus. Il provider conserva ora un frame first-party esterno al nodo Google per il fallback grafico per-slot; attributi, richieste e riserve Google restano invariati.",
       "baseline": {
         "site": null,
         "corpus": "9cc7f520f28c72bb",
@@ -4161,7 +4161,7 @@
       "path": "host/constants.ts",
       "sitePath": "build-plugins/constants.ts",
       "mode": "adapted",
-      "reason": "Costanti del sito lette dall'engine via SiteShellContract, estratte per chiusura. scalarFingerprint confronta i 23 scalari authoritative; il digest adb1a692… include lo snippet Meta Pixel content-addressed, il cui loader contatta Meta solo dopo consenso pubblicitario esplicito e si blocca sui documenti sensibili, senza fallback noscript. AD_RECOVERY_FILENAME resta allineato al sorgente; sono preservati gli altri comportamenti di recovery, CMP, analytics e SEO gia' trasportati.",
+      "reason": "Costanti del sito lette dall'engine via SiteShellContract, estratte per chiusura. scalarFingerprint confronta i 23 scalari authoritative; il digest adb1a692… include lo snippet Meta Pixel content-addressed, il cui loader contatta Meta solo dopo consenso pubblicitario esplicito e si blocca sui documenti sensibili, senza fallback noscript. AD_RECOVERY_FILENAME resta allineato al sorgente; sono preservati gli altri comportamenti di recovery, CMP, analytics e SEO gia' trasportati. Gli slot statici avvolgono l'elemento Google in un host first-party per il fallback creativo Firebase, senza cambiare il nodo AdSense o Auto Ads.",
       "baseline": {
         "site": "c9f803f4645a9ab0",
         "corpus": "598612b34529c6c5",
