@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-val-de-bagnes-sostenibilita-2024.webp",
+      "sha256": "325491e069d9aa1058e20b0f70fed838e90f2d3198b7f7dba5201a59332ba4c2"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-val-de-bagnes-sostenibilita-2024-480w.webp",
+      "sha256": "cccf3563c3f5b371dad03fcceff44d946d54acaae881ab7ae51920bbbee44bfd"
+    }
+  ]
 }
