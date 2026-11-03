@@ -260,4 +260,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'decima-fiera-apprendistati-innerrhoden',
+ category: 'novita',
+ date: '2026-11-03T07:41:05.610Z',
+ image: '/images/blog/article-decima-fiera-apprendistati-innerrhoden.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['APPENZELLO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

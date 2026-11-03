@@ -72,6 +72,9 @@ const blogMetaCantonAppenzelloIt: Record<string, string> = {
     'blog.article.45-residenti-richiesta-rumore.title': '45 residenti chiedono misure contro il rumore sulla Langgasse',
     'blog.article.45-residenti-richiesta-rumore.excerpt': '45 residenti hanno depositato al comune il mercoledì 28 ottobre una richiesta per l\'esame urgente di Tempo 30 e misure di moderazione del traffico.',
     'blog.article.45-residenti-richiesta-rumore.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.decima-fiera-apprendistati-innerrhoden.title': 'Decima fiera posti apprendistato Appenzell 7 novembre 2026',
+    'blog.article.decima-fiera-apprendistati-innerrhoden.excerpt': '62 aziende dell\'Innerrhoden presenteranno offerte di apprendistato sabato 7 novembre 2026 all\'Aula Gringel, ingresso gratuito dalle 9.00 alle 15.00.',
+    'blog.article.decima-fiera-apprendistati-innerrhoden.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonAppenzelloIt;

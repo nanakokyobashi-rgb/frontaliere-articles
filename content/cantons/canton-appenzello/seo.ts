@@ -899,6 +899,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-decima-fiera-apprendistati-innerrhoden': {
+    title: 'Decima fiera posti apprendistato Appenzell 7 novembre 2026',
+    description: 'La decima fiera dei posti di apprendistato di Appenzell riunisce 62 aziende dell\'Innerrhoden il 7 novembre 2026. Ingresso gratuito dalle 9.00',
+    keywords: 'frontalieri, ticino, svizzera, italia, decima, fiera, posti, apprendistato',
+    ogTitle: 'Fiera apprendistato Appenzell 7 novembre 2026',
+    ogDescription: 'Sabato 7 novembre 2026, l\'Aula Gringel ospiterà la decima Lehrstellen-Tischmesse Appenzell con 62 aziende dell\'Innerrhoden. Un\'opportunità gratuita per studenti e genitori.',
+    canonicalPath: '/articoli-appenzello/decima-fiera-apprendistati-innerrhoden/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Decima fiera posti apprendistato Appenzell 7 novembre 2026",
+      "description": "La decima fiera dei posti di apprendistato di Appenzell riunisce 62 aziende dell'Innerrhoden il 7 novembre 2026. Ingresso gratuito dalle 9.00",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-decima-fiera-apprendistati-innerrhoden.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-03T07:41:05+00:00",
+      "dateModified": "2026-11-03T07:41:05+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-appenzello/decima-fiera-apprendistati-innerrhoden/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

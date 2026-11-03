@@ -72,6 +72,9 @@ const blogMetaCantonAppenzelloEn: Record<string, string> = {
     'blog.article.45-residenti-richiesta-rumore.title': '45 residents call for measures against noise on Langgasse',
     'blog.article.45-residenti-richiesta-rumore.excerpt': '45 residents filed a request with the municipality on Wednesday, October 28, for the urgent review of Tempo 30 and traffic-calming measures.',
     'blog.article.45-residenti-richiesta-rumore.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.decima-fiera-apprendistati-innerrhoden.title': 'Tenth Apprenticeship Positions Fair Appenzell November 7, 2026',
+    'blog.article.decima-fiera-apprendistati-innerrhoden.excerpt': '62 companies from Innerrhoden will present apprenticeship opportunities on Saturday, 7 November 2026, at Aula Gringel, with free admission from 9.00 to 15.00.',
+    'blog.article.decima-fiera-apprendistati-innerrhoden.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonAppenzelloEn;

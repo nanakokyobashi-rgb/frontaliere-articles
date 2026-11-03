@@ -72,6 +72,9 @@ const blogMetaCantonAppenzelloDe: Record<string, string> = {
     'blog.article.45-residenti-richiesta-rumore.title': '45 Anwohner fordern Maßnahmen gegen den Lärm auf der Langgasse',
     'blog.article.45-residenti-richiesta-rumore.excerpt': '45 Anwohner haben am Mittwoch, dem 28.',
     'blog.article.45-residenti-richiesta-rumore.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.decima-fiera-apprendistati-innerrhoden.title': 'Zehnte Lehrstellenmesse Appenzell 7. November 2026',
+    'blog.article.decima-fiera-apprendistati-innerrhoden.excerpt': '62 Unternehmen aus Innerrhoden präsentieren am Samstag, 7.',
+    'blog.article.decima-fiera-apprendistati-innerrhoden.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonAppenzelloDe;
