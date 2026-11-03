@@ -76,6 +76,7 @@ import {
   retentionLines,
   measureDist,
   expectFromCorpus,
+  indexExcludedArticleIds,
   allSeoEntryIdsExcluded,
   collectSeoEntryIdsFromChunks,
   FEED_POPULATION_WARN_RETENTION,
@@ -85,10 +86,18 @@ import {
 } from '../../scripts/ci/verify-api-floors.mjs';
 import { RSS_SECTIONS } from '../../engine/rssFeeds.mjs';
 import { seoChunkSources } from '../../scripts/lib/engine-corpus-view.mjs';
+import {
+  ARTICLE_INDEX_EXCLUSIONS_FILES,
+  loadArticleIndexExclusions,
+} from '../../engine/shared/articleIndexExclusions.mjs';
 import { parseArticleUrlSlugs } from '../../engine/shared/articleReaderSource.mjs';
 import { scanTopLevelArticleRecords } from '../../scripts/lib/article-registry-reader.mjs';
 import { selectRetiredDailyEditions } from '../../generator/scripts/lib/daily-brief-content.mjs';
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
+const INDEX_EXCLUSIONS = loadArticleIndexExclusions(
+  fs,
+  ARTICLE_INDEX_EXCLUSIONS_FILES.map((candidate) => join(ROOT, candidate)),
+);
 const WORKFLOW = fs.readFileSync(join(ROOT, '.github/workflows/publish-api.yml'), 'utf-8');
 const BLOG_INDEX = fs.readFileSync(join(ROOT, 'scripts/build-blog-index.mjs'), 'utf-8');
 const HOST_SEO_HUBS = fs.readFileSync(join(ROOT, 'host/seoHubsData.ts'), 'utf-8');
@@ -865,9 +874,15 @@ test('i feed di questo checkout sono gatati contro i chunk che li generano', asy
   const expected = await expectFromCorpus(ROOT);
   for (const section of RSS_SECTIONS) {
     const seo = seoChunkSources(section);
+    // `expectFromCorpus` and `buildSectionFeeds` both remove the identities
+    // withdrawn by article-index-exclusions. Comparing their filtered
+    // population with raw chunks would reject a legitimate noindex article
+    // and make this guard disagree with the producer it is meant to verify.
     assert.equal(
       expected.feedSources[section.id],
-      countSeoEntries(ROOT, seo.files, seo.seoDir),
+      countSeoEntries(ROOT, seo.files, seo.seoDir, {
+        excludedIds: indexExcludedArticleIds(INDEX_EXCLUSIONS, section.id),
+      }),
       `${section.id}: la lista dei chunk arriva da RSS_SECTIONS, non da una seconda copia`,
     );
     if (expected.newFamilySections?.includes(section.id)) {

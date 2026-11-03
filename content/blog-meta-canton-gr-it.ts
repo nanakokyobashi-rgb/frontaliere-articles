@@ -60,6 +60,9 @@ const blogMetaCantonGrIt: Record<string, string> = {
     'blog.article.innhub-la-punt-rinvio-apertura.title': 'Innhub La Punt: apertura rimandata all\'estate 2029',
     'blog.article.innhub-la-punt-rinvio-apertura.excerpt': 'Apertura nell\'estate 2029, sei mesi dopo il piano iniziale.',
     'blog.article.innhub-la-punt-rinvio-apertura.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.vallo-protezione-sorte-lostallo.title': 'Lostallo, al via il vallo di protezione a Sorte',
+    'blog.article.vallo-protezione-sorte-lostallo.excerpt': 'Nei prossimi giorni parte il vallo di protezione Credito comunale: 6,2 milioni di franchi Lavori principali previsti nell\'autunno 2027 L\'alluvione del 21 giugno',
+    'blog.article.vallo-protezione-sorte-lostallo.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonGrIt;

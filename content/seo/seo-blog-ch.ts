@@ -109544,6 +109544,162 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-inflazione-ottobre-1-5-percento': {
+    title: 'Inflazione ottobre sale all\'1,5% spinta dall\'energia',
+    description: 'L\'inflazione annua di ottobre è salita dell\'1,5% A settembre l\'aumento annuo era dell\'1% L\'IPC mensile è cresciuto dello 0,2% Energia: gasolio',
+    keywords: 'frontalieri, ticino, svizzera, italia, inflazione, ottobre, sale, spinta',
+    ogTitle: 'Inflazione ottobre Svizzera sale all\'1,5%',
+    ogDescription: 'L\'inflazione annua di ottobre è salita dell\'1,5% A settembre l\'aumento annuo era dell\'1% L\'IPC mensile è cresciuto dello 0,2% Energia: gasolio, benzina e diesel',
+    canonicalPath: '/articoli-svizzera/inflazione-ottobre-1-5-percento/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Inflazione ottobre sale all'1,5% spinta dall'energia",
+      "description": "L'inflazione annua di ottobre è salita dell'1,5% A settembre l'aumento annuo era dell'1% L'IPC mensile è cresciuto dello 0,2% Energia: gasolio",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-inflazione-ottobre-1-5-percento.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-03T11:31:33+00:00",
+      "dateModified": "2026-11-03T11:31:33+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/inflazione-ottobre-1-5-percento/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-swissport-zurigo-trattative-ccl': {
+    title: 'Swissport Zurigo: trattative fallite per il personale',
+    description: 'CCL Swissport a Zurigo: trattative fallite Il contratto riguarda circa 2’000 persone Chiesti aumenti salariali fino al 7% Possibile sciopero già',
+    keywords: 'frontalieri, ticino, svizzera, italia, swissport, zurigo, trattative, fallite',
+    ogTitle: 'Swissport Zurigo: trattative fallite per il personale',
+    ogDescription: 'CCL Swissport a Zurigo: trattative fallite Il contratto riguarda circa 2’000 persone Chiesti aumenti salariali fino al 7% Possibile sciopero già a gennaio 2027',
+    canonicalPath: '/articoli-svizzera/swissport-zurigo-trattative-ccl/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Swissport Zurigo: trattative fallite per il personale",
+      "description": "CCL Swissport a Zurigo: trattative fallite Il contratto riguarda circa 2’000 persone Chiesti aumenti salariali fino al 7% Possibile sciopero già",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-swissport-zurigo-trattative-ccl.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-03T12:59:15+00:00",
+      "dateModified": "2026-11-03T12:59:15+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/swissport-zurigo-trattative-ccl/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-voto-iva-13esima-avs-novembre': {
+    title: '13esima AVS: il 29 novembre si vota sull\'aumento IVA',
+    description: 'Il 29 novembre si vota sul finanziamento della 13esima AVS L\'IVA ordinaria salirebbe dall\'8,1% all\'8,5% L\'aliquota alberghiera passerebbe dal 3,8%',
+    keywords: 'frontalieri, ticino, svizzera, italia, 13esima, novembre, vota, sull',
+    ogTitle: 'Voto 29 novembre: IVA per la 13esima AVS, cosa cambia',
+    ogDescription: 'Il 29 novembre si vota sul finanziamento della 13esima AVS L\'IVA ordinaria salirebbe dall\'8,1% all\'8,5% L\'aliquota alberghiera passerebbe dal 3,8% al 4%',
+    canonicalPath: '/articoli-svizzera/voto-iva-13esima-avs-novembre/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "13esima AVS: il 29 novembre si vota sull'aumento IVA",
+      "description": "Il 29 novembre si vota sul finanziamento della 13esima AVS L'IVA ordinaria salirebbe dall'8,1% all'8,5% L'aliquota alberghiera passerebbe dal 3,8%",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-voto-iva-13esima-avs-novembre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-03T15:04:37+00:00",
+      "dateModified": "2026-11-03T15:04:37+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/voto-iva-13esima-avs-novembre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-cdf-critica-armasuisse-immobili': {
+    title: 'CDF critica Armasuisse Immobili per ritardi nei risanamenti',
+    description: 'Il CDF critica la gestione di Armasuisse Immobili Oltre 34% dei costi di risanamento a fine 2025 Arretrati al 40% entro il 2030 secondo proiezioni',
+    keywords: 'frontalieri, ticino, svizzera, italia, critica, armasuisse, immobili, ritardi',
+    ogTitle: 'CDF critica gestione immobiliare Armasuisse Immobili',
+    ogDescription: 'Il CDF critica la gestione di Armasuisse Immobili Oltre 34% dei costi di risanamento a fine 2025 Arretrati al 40% entro il 2030 secondo proiezioni interne',
+    canonicalPath: '/articoli-svizzera/cdf-critica-armasuisse-immobili/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "CDF critica Armasuisse Immobili per ritardi nei risanamenti",
+      "description": "Il CDF critica la gestione di Armasuisse Immobili Oltre 34% dei costi di risanamento a fine 2025 Arretrati al 40% entro il 2030 secondo proiezioni",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-cdf-critica-armasuisse-immobili.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-03T20:13:29+00:00",
+      "dateModified": "2026-11-03T20:13:29+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/cdf-critica-armasuisse-immobili/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

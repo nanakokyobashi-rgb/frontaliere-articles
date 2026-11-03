@@ -26,6 +26,10 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'appenzello-deficit-budget': { it: 'appenzello-deficit-budget', en: 'appenzell-budget-deficit', de: 'appenzell-budget-defizit', fr: 'deficit-budget-appenzell' },
  'costi-sanita-meno-entrate': { it: 'costi-sanita-meno-entrate', en: 'health-costs-less-revenue', de: 'kosten-sanita-weniger-einnahmen', fr: 'couts-sante-moins-revenus' },
  '45-residenti-richiesta-rumore': { it: '45-residenti-richiesta-rumore', en: '45-residents-noise-request', de: '45-einwohner-laerm-forderung', fr: '45-residents-demande-bruit' },
+ 'decima-fiera-apprendistati-innerrhoden': { it: 'decima-fiera-apprendistati-innerrhoden', en: 'tenth-apprenticeship-fair-innerrhoden', de: 'zehnte-lehrstellenmesse-innerrhoden', fr: 'dixieme-foire-apprentissage-innerrhoden' },
+ 'caldo-appenzello-esterno-2026': { it: 'caldo-appenzello-esterno-2026', en: 'heat-appenzell-ausserrhoden-2026', de: 'hitzebelastung-appenzell-ausserrhoden-2026', fr: 'chaleur-appenzell-rhodes-exterieures-2026' },
+ 'tariffe-mediche-appenzello-2026': { it: 'tariffe-mediche-appenzello-2026', en: 'medical-tariffs-appenzell-2026', de: 'arzttarife-appenzell-2026', fr: 'tarifs-medicaux-appenzell-2026' },
+ 'ulmann-incarico-appenzello': { it: 'ulmann-incarico-appenzello', en: 'ulmann-appenzell-appointment', de: 'ulmann-anstellung-appenzell', fr: 'ulmann-nomination-appenzell' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

@@ -72,6 +72,18 @@ const blogMetaCantonAppenzelloDe: Record<string, string> = {
     'blog.article.45-residenti-richiesta-rumore.title': '45 Anwohner fordern Maßnahmen gegen den Lärm auf der Langgasse',
     'blog.article.45-residenti-richiesta-rumore.excerpt': '45 Anwohner haben am Mittwoch, dem 28.',
     'blog.article.45-residenti-richiesta-rumore.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.decima-fiera-apprendistati-innerrhoden.title': 'Zehnte Lehrstellenmesse Appenzell 7. November 2026',
+    'blog.article.decima-fiera-apprendistati-innerrhoden.excerpt': '62 Unternehmen aus Innerrhoden präsentieren am Samstag, 7.',
+    'blog.article.decima-fiera-apprendistati-innerrhoden.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.caldo-appenzello-esterno-2026.title': 'Appenzell Ausserrhoden: mehr heiße Tage im Jahr 2026',
+    'blog.article.caldo-appenzello-esterno-2026.excerpt': 'Sommer 2026: mehr heiße Tage an den untersuchten Standorten Im Jahr 2026 wurden mehr Tropennächte festgestellt Höhenlage und nächtliche Abkühlung verringern',
+    'blog.article.caldo-appenzello-esterno-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.tariffe-mediche-appenzello-2026.title': 'Appenzell: Medizinische Tarife für 2026 genehmigt',
+    'blog.article.tariffe-mediche-appenzello-2026.excerpt': 'Die Standeskommission legt den Wert des Tarifpunktes für ambulante Leistungen rückwirkend ab dem 1.',
+    'blog.article.tariffe-mediche-appenzello-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.ulmann-incarico-appenzello.title': 'Appenzell, Manuel Ulmann beim Bezirksbauamt angestellt',
+    'blog.article.ulmann-incarico-appenzello.excerpt': 'Der Bezirksrat von Appenzell hat Manuel Ulmann mit einem Beschäftigungsgrad von 100 Prozent angestellt: Die Tätigkeit beim Bezirksbauamt beginnt Anfang Februar.',
+    'blog.article.ulmann-incarico-appenzello.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonAppenzelloDe;

@@ -16,6 +16,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'salute-vallese-2026-ovs': { it: 'salute-vallese-2026-ovs', en: 'valais-health-2026-ovs', de: 'wallis-gesundheit-2026-ovs', fr: 'valais-sante-2026-ovs' },
  'salario-minimo-valese-voto': { it: 'salario-minimo-valese-voto', en: 'valais-minimum-wage-vote', de: 'wallis-mindestlohn-abstimmung', fr: 'salaire-minimum-valais-vote' },
  'bains-ovronnaz-nuovo-sursis': { it: 'bains-ovronnaz-nuovo-sursis', en: 'bains-ovronnaz-new-sursis', de: 'bains-ovronnaz-neuer-sursis', fr: 'bains-ovronnaz-nouveau-sursis' },
+ 'val-de-bagnes-sostenibilita-2024': { it: 'val-de-bagnes-sostenibilita-2024', en: 'val-de-bagnes-sustainability', de: 'val-de-bagnes-nachhaltigkeit', fr: 'val-de-bagnes-durable' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

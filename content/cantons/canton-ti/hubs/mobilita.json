@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "mobilita",
-  "updatedAt": "2026-11-03T02:14:08.370Z",
-  "contentHash": "65f45c0fb5a7bb8d464ccc63cd898a3287b2ecee87495bc3901729d74a082f8c",
+  "updatedAt": "2026-11-03T11:09:08.199Z",
+  "contentHash": "71a28b36ae2c76bc06507fc6784aae21442e2ee9082a9cb0f5b8636c4f90e456",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-02T19:51:36.134Z",
+      "updatedAt": "2026-11-03T03:07:39.455Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-02T13:52:53.767Z",
+      "updatedAt": "2026-11-03T00:04:45.487Z",
       "keyFacts": 0
     }
   ],
@@ -37,13 +37,13 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "3",
-          "note": "segnalazioni aggiornate: 2 novembre 2026"
+          "value": "2",
+          "note": "segnalazioni aggiornate: 3 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "28",
-          "note": "segnalazioni aggiornate: 2 novembre 2026"
+          "value": "26",
+          "note": "segnalazioni aggiornate: 3 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -116,12 +116,6 @@
               "date": "2026-10-29T11:08:00.000Z"
             },
             {
-              "label": "Bretella autostradale Lugano-Centro Lugano Centro -> Diramazione Lugano Nord tra Svincolo autostradale Lugano Nord E Raccordo autostradale Diramazione Lugano Nord Situazione: chiusa cantiere",
-              "value": "Chiusura",
-              "detail": "fine prevista: 3 novembre 2026",
-              "date": "2026-10-29T14:27:00.000Z"
-            },
-            {
               "label": "A2 Chiasso <-> S. Gottardo tra Svincolo autostradale Airolo E Svincolo autostradale Quinto Situazione: problemi di traffico cantiere, lunghezza [km] 3.0 Limitazione del traffico: corsia d'emergenza…",
               "value": "Chiusura",
               "detail": "fine prevista: 9 dicembre 2026",
@@ -156,10 +150,16 @@
               "value": "Cantiere",
               "detail": "fine prevista: 27 novembre 2026",
               "date": "2026-05-22T05:00:00.000Z"
+            },
+            {
+              "label": "H2 Airolo <-> Göschenen tra Passo Passo del S. Gottardo E Luogo Motto Bartola Situazione: problemi di traffico cantiere, lunghezza [km] 0.37 Limitazione del traffico: nuova viabilità Aggiunta 1…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 20 novembre 2026",
+              "date": "2026-08-27T05:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-02T19:51:36.134Z"
+          "updatedAt": "2026-11-03T03:07:39.455Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -197,10 +197,16 @@
               "url": "https://www.tilo.ch/avvisi/261019_ZEB-Vezia-Capolago.html"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Uscita Svizzera da Schengen: rischio controlli e attese ai confini",
+          "url": "/articoli-ticino/svizzera-uscita-schengen-controlli/",
+          "excerpt": "Rapporto federale pubblicato il 18 settembre 2026 Ipotesi: uscita della Svizzera da Schengen e Dublino Controlli sistematici e attese più lunghe ai confini",
+          "date": "2026-11-03T11:01:16.866Z"
+        },
         {
           "title": "Frontalieri, cosa succederebbe senza Schengen?",
           "url": "/articoli-ticino/rapporto-consiglio-federale-schengen/",
@@ -242,12 +248,6 @@
           "url": "/articoli-frontaliere/semafori-cadenazzo-traffico/",
           "excerpt": "Il Consiglio federale risponde sui semafori a Cadenazzo: efficacia del traffico tra Bellinzona e Locarno attesa a fine 2027.",
           "date": "2026-09-23T01:21:51.666Z"
-        },
-        {
-          "title": "Mendrisio-Melano, progetto MeMe per ridurre il rumore dell'autostrada",
-          "url": "/articoli-frontaliere/mendrisio-melano-progetto-meme-risanamento-fonico/",
-          "excerpt": "L'Ufficio federale delle strade (USTRA) ha pubblicato il disegno per il progetto MeMe, un piano di risanamento globale per il tratto dell'autostrada A2 tra Mendrisio e Melano.",
-          "date": "2026-09-15T02:42:05.181Z"
         }
       ],
       "latestCantonArticles": [],
@@ -293,7 +293,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-03T02:14:08.370Z"
+      "updatedAt": "2026-11-03T11:09:08.199Z"
     },
     "en": {
       "canton": "TI",
@@ -308,13 +308,13 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "3",
-          "note": "reports as of 2 November 2026"
+          "value": "2",
+          "note": "reports as of 3 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "28",
-          "note": "reports as of 2 November 2026"
+          "value": "26",
+          "note": "reports as of 3 November 2026"
         }
       ],
       "dataBlocks": [
@@ -387,12 +387,6 @@
               "date": "2026-10-29T11:08:00.000Z"
             },
             {
-              "label": "Bretella autostradale Lugano-Centro Lugano Centro -> Diramazione Lugano Nord tra Svincolo autostradale Lugano Nord E Raccordo autostradale Diramazione Lugano Nord Situazione: chiusa cantiere",
-              "value": "Closure",
-              "detail": "until 3 November 2026",
-              "date": "2026-10-29T14:27:00.000Z"
-            },
-            {
               "label": "A2 Chiasso <-> S. Gottardo tra Svincolo autostradale Airolo E Svincolo autostradale Quinto Situazione: problemi di traffico cantiere, lunghezza [km] 3.0 Limitazione del traffico: corsia d'emergenza…",
               "value": "Closure",
               "detail": "until 9 December 2026",
@@ -427,10 +421,16 @@
               "value": "Roadworks",
               "detail": "until 27 November 2026",
               "date": "2026-05-22T05:00:00.000Z"
+            },
+            {
+              "label": "H2 Airolo <-> Göschenen tra Passo Passo del S. Gottardo E Luogo Motto Bartola Situazione: problemi di traffico cantiere, lunghezza [km] 0.37 Limitazione del traffico: nuova viabilità Aggiunta 1…",
+              "value": "Roadworks",
+              "detail": "until 20 November 2026",
+              "date": "2026-08-27T05:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-02T19:51:36.134Z"
+          "updatedAt": "2026-11-03T03:07:39.455Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -468,10 +468,16 @@
               "url": "https://www.tilo.ch/avvisi/261019_ZEB-Vezia-Capolago.html"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Switzerland’s exit from Schengen: risk of checks and delays at the borders",
+          "url": "/en/ticino-articles/switzerland-schengen-exit-controls/",
+          "excerpt": "Federal report published on 18 September 2026 Hypothesis: Switzerland’s withdrawal from Schengen and Dublin Systematic checks and longer waits at the borders",
+          "date": "2026-11-03T11:01:16.866Z"
+        },
         {
           "title": "Cross-border workers, what would happen without Schengen?",
           "url": "/en/ticino-articles/federal-council-schengen-report/",
@@ -512,12 +518,6 @@
           "url": "/en/cross-border-articles/cadenazzo-traffic-lights/",
           "excerpt": "The Federal Council responds to the traffic lights in Cadenazzo: effective traffic between Bellinzona and Locarno expected at the end of 2027.",
           "date": "2026-09-23T01:21:51.666Z"
-        },
-        {
-          "title": "Mendrisio-Melano, MeMe project to reduce highway noise",
-          "url": "/en/cross-border-articles/mendrisio-melano-meme-project-noise-reduction/",
-          "excerpt": "The Federal Office of Roads (USTRA) has published the design for the MeMe project, a comprehensive rehabilitation plan for the stretch of the A2 motorway between Mendrisio and Melano.",
-          "date": "2026-09-15T02:42:05.181Z"
         }
       ],
       "latestCantonArticles": [],
@@ -563,7 +563,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-03T02:14:08.370Z"
+      "updatedAt": "2026-11-03T11:09:08.199Z"
     },
     "de": {
       "canton": "TI",
@@ -578,13 +578,13 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "3",
-          "note": "Meldungen vom 2. November 2026"
+          "value": "2",
+          "note": "Meldungen vom 3. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "28",
-          "note": "Meldungen vom 2. November 2026"
+          "value": "26",
+          "note": "Meldungen vom 3. November 2026"
         }
       ],
       "dataBlocks": [
@@ -657,12 +657,6 @@
               "date": "2026-10-29T11:08:00.000Z"
             },
             {
-              "label": "Bretella autostradale Lugano-Centro Lugano-Zentrum -> Verzweigung Lugano-Nord zwischen Anschluss Lugano-Nord und Autobahndreieck Verzweigung Lugano-Nord Sachlage: Strecke gesperrt Baustelle",
-              "value": "Sperrung",
-              "detail": "bis 3. November 2026",
-              "date": "2026-10-29T14:27:00.000Z"
-            },
-            {
               "label": "A2 Chiasso <-> Gotthard zwischen Anschluss Airolo und Anschluss Quinto Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 3.0 Verkehrsführung: Pannenstreifen gesperrt Zusatz 1: vorübergehende…",
               "value": "Sperrung",
               "detail": "bis 9. Dezember 2026",
@@ -697,10 +691,16 @@
               "value": "Baustelle",
               "detail": "bis 27. November 2026",
               "date": "2026-05-22T05:00:00.000Z"
+            },
+            {
+              "label": "H2 Airolo <-> Göschenen zwischen Pass Gotthard-Pass und Ortschaft Motto Bartola Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.37 Verkehrsführung: veränderte Verkehrsführung Zusatz 1…",
+              "value": "Baustelle",
+              "detail": "bis 20. November 2026",
+              "date": "2026-08-27T05:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-02T19:51:36.134Z"
+          "updatedAt": "2026-11-03T03:07:39.455Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -738,10 +738,16 @@
               "url": "https://www.tilo.ch/avvisi/261019_ZEB-Vezia-Capolago.html"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Austritt der Schweiz aus Schengen: Risiko von Kontrollen und Wartezeiten an den Grenzen",
+          "url": "/de/tessin-artikel/schweiz-schengen-ausstieg-kontrollen/",
+          "excerpt": "Am 18. September 2026 veröffentlichter Bundesbericht Hypothese: Austritt der Schweiz aus Schengen und Dublin Systematische Kontrollen und längere Wartezeiten an den Grenzen",
+          "date": "2026-11-03T11:01:16.866Z"
+        },
         {
           "title": "Grenzgänger, was würde ohne Schengen geschehen?",
           "url": "/de/tessin-artikel/bundesrat-schengen-bericht/",
@@ -782,12 +788,6 @@
           "url": "/de/grenzgaenger-artikel/cadenazzo-ampeln-verkehr/",
           "excerpt": "Der Bundesrat antwortet an den Ampeln in Cadenazzo: Ende 2027 erwartete Verkehrseffizienz zwischen Bellinzona und Locarno.",
           "date": "2026-09-23T01:21:51.666Z"
-        },
-        {
-          "title": "Mendrisio-Melano, MeMe-Projekt zur Reduzierung des Autobahnlärms",
-          "url": "/de/grenzgaenger-artikel/mendrisio-melano-meme-projekt-larmreduzierung/",
-          "excerpt": "Das Bundesamt für Strassen (Astra) hat den Entwurf für das Projekt MeMe, einen umfassenden Sanierungsplan für den Autobahnabschnitt A2 zwischen Mendrisio und Melano, veröffentlicht.",
-          "date": "2026-09-15T02:42:05.181Z"
         }
       ],
       "latestCantonArticles": [],
@@ -833,7 +833,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-03T02:14:08.370Z"
+      "updatedAt": "2026-11-03T11:09:08.199Z"
     },
     "fr": {
       "canton": "TI",
@@ -848,13 +848,13 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "3",
-          "note": "signalements au 2 novembre 2026"
+          "value": "2",
+          "note": "signalements au 3 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "28",
-          "note": "signalements au 2 novembre 2026"
+          "value": "26",
+          "note": "signalements au 3 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -927,12 +927,6 @@
               "date": "2026-10-29T11:08:00.000Z"
             },
             {
-              "label": "Bretella autostradale Lugano-Centro Lugano-Centre -> Echangeur de Lugano-Nord entre Jonction autoroutière Lugano-Nord et Echangeur Echangeur de Lugano-Nord Situation: fermé travaux",
-              "value": "Fermeture",
-              "detail": "jusqu’au 3 novembre 2026",
-              "date": "2026-10-29T14:27:00.000Z"
-            },
-            {
               "label": "A2 Chiasso <-> St-Gothard entre Jonction autoroutière Airolo et Jonction autoroutière Quinto Situation: trafic perturbé travaux, longueur [km] 3.0 Gestion du trafic: bande d'arrêt d'urgence fermée…",
               "value": "Fermeture",
               "detail": "jusqu’au 9 décembre 2026",
@@ -967,10 +961,16 @@
               "value": "Chantier",
               "detail": "jusqu’au 27 novembre 2026",
               "date": "2026-05-22T05:00:00.000Z"
+            },
+            {
+              "label": "H2 Airolo <-> Göschenen entre Col Col du St-Gothard et Localité Motto Bartola Situation: trafic perturbé travaux, longueur [km] 0.37 Gestion du trafic: nouveau plan de circulation Complément 1…",
+              "value": "Chantier",
+              "detail": "jusqu’au 20 novembre 2026",
+              "date": "2026-08-27T05:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-02T19:51:36.134Z"
+          "updatedAt": "2026-11-03T03:07:39.455Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -1008,10 +1008,16 @@
               "url": "https://www.tilo.ch/avvisi/261019_ZEB-Vezia-Capolago.html"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Sortie Suisse de Schengen: risques de contrôles aux frontières",
+          "url": "/fr/articles-tessin/suisse-sortie-schengen-controles/",
+          "excerpt": "Rapport fédéral publié le 18 septembre 2026 Hypothèse : sortie de la Suisse de Schengen et de Dublin Contrôles systématiques et attentes plus longues aux frontières",
+          "date": "2026-11-03T11:01:16.866Z"
+        },
         {
           "title": "Frontaliers, que se passerait-il sans Schengen ?",
           "url": "/fr/articles-tessin/rapport-conseil-federal-schengen/",
@@ -1053,12 +1059,6 @@
           "url": "/fr/articles-frontalier/feux-cadenazzo-trafic/",
           "excerpt": "Le Conseil fédéral répond aux feux à Cadenazzo : efficacité du trafic entre Bellinzone et Locarno attendue fin 2027.",
           "date": "2026-09-23T01:21:51.666Z"
-        },
-        {
-          "title": "Mendrisio-Melano, projet MeMe pour réduire le bruit de l'autoroute",
-          "url": "/fr/articles-frontalier/mendrisio-melano-projet-meme-reduction-bruit/",
-          "excerpt": "L'Office fédéral des routes (OFROU) a publié le dessin pour le projet MeMe, un plan d'assainissement global pour le tronçon de l'autoroute A2 entre Mendrisio et Melano.",
-          "date": "2026-09-15T02:42:05.181Z"
         }
       ],
       "latestCantonArticles": [],
@@ -1104,7 +1104,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-03T02:14:08.370Z"
+      "updatedAt": "2026-11-03T11:09:08.199Z"
     }
   }
 }

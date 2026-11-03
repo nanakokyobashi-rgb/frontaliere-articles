@@ -8666,6 +8666,18 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.mercato-lavoro-prospettive-offuscate.title': 'Perspektiven auf dem Arbeitsmarkt: leichte Abschwächung im vierten Quartal 2026',
     'blog.article.mercato-lavoro-prospettive-offuscate.excerpt': 'KOF-Indikator bei 2,0 Punkten im vierten Quartal 2026 Lag im vorherigen Quartal bei 2,3 Punkten Rund 4\'500 im Oktober befragte Unternehmen Baugewerbe positiv',
     'blog.article.mercato-lavoro-prospettive-offuscate.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.inflazione-ottobre-1-5-percento.title': 'Inflation im Oktober steigt energiegetrieben auf 1,5%',
+    'blog.article.inflazione-ottobre-1-5-percento.excerpt': 'Die Jahresinflation im Oktober ist um 1,5% gestiegen Im September betrug der jährliche Anstieg 1% Der monatliche VPI stieg um 0,2% Energie: Heizöl, Benzin und Diesel',
+    'blog.article.inflazione-ottobre-1-5-percento.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.swissport-zurigo-trattative-ccl.title': 'Swissport Zürich: Verhandlungen für das Personal gescheitert',
+    'blog.article.swissport-zurigo-trattative-ccl.excerpt': 'GAV Swissport in Zürich: Verhandlungen gescheitert Der Vertrag betrifft rund 2’000 Personen Lohnerhöhungen bis zu 7% gefordert Möglicher Streik bereits im Januar 2027',
+    'blog.article.swissport-zurigo-trattative-ccl.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.voto-iva-13esima-avs-novembre.title': '13. AVS: Am 29. November wird über die Mehrwertsteuererhöhung abgestimmt',
+    'blog.article.voto-iva-13esima-avs-novembre.excerpt': 'Am 29. November wird über die Finanzierung der 13. AHV-Rente abgestimmt Die ordentliche Mehrwertsteuer würde von 8,1% auf 8,5% steigen Der Beherbergungssatz würde von 3,8% auf 4% steigen',
+    'blog.article.voto-iva-13esima-avs-novembre.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.cdf-critica-armasuisse-immobili.title': 'SFAO kritisiert Armasuisse wegen Umstrukturierungsverzögerungen',
+    'blog.article.cdf-critica-armasuisse-immobili.excerpt': 'SFAO kritisiert das Management von Armasuisse Immobilien.',
+    'blog.article.cdf-critica-armasuisse-immobili.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaChDe;

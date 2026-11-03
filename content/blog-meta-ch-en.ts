@@ -8666,6 +8666,18 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.mercato-lavoro-prospettive-offuscate.title': 'Labor market outlook: slight weakening in the fourth quarter of 2026',
     'blog.article.mercato-lavoro-prospettive-offuscate.excerpt': 'KOF indicator at 2,0 points in the fourth quarter of 2026 It was at 2,3 points in the previous quarter Approximately 4\'500 companies surveyed in October Construction positive',
     'blog.article.mercato-lavoro-prospettive-offuscate.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.inflazione-ottobre-1-5-percento.title': 'October inflation rises to 1,5%, driven by energy',
+    'blog.article.inflazione-ottobre-1-5-percento.excerpt': 'October’s annual inflation rose by 1.5% In September, the annual increase was 1% Monthly CPI increased by 0.2% Energy: diesel fuel, gasoline and diesel',
+    'blog.article.inflazione-ottobre-1-5-percento.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.swissport-zurigo-trattative-ccl.title': 'Swissport Zurich: failed negotiations for staff',
+    'blog.article.swissport-zurigo-trattative-ccl.excerpt': 'CCL Swissport in Zurich: negotiations failed The contract covers around 2’000 people Wage increases of up to 7% demanded Strike possible as early as January 2027',
+    'blog.article.swissport-zurigo-trattative-ccl.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.voto-iva-13esima-avs-novembre.title': '13th AVS pension: VAT increase put to a vote on November 29',
+    'blog.article.voto-iva-13esima-avs-novembre.excerpt': 'On November 29, the vote will be held on financing the 13th AHV pension payment The standard VAT rate would rise from 8.1% to 8.5% The hotel rate would increase from 3.8% to 4%',
+    'blog.article.voto-iva-13esima-avs-novembre.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.cdf-critica-armasuisse-immobili.title': 'CDF criticizes Armasuisse Immobili for delays in renovations',
+    'blog.article.cdf-critica-armasuisse-immobili.excerpt': 'The SFAO criticizes the management of Armasuisse Immobili More than 34% of remediation costs by the end of 2025 Backlog at 40% by 2030 according to internal projections',
+    'blog.article.cdf-critica-armasuisse-immobili.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaChEn;

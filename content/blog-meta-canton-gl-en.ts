@@ -42,6 +42,9 @@ const blogMetaCantonGlEn: Record<string, string> = {
     'blog.article.glarona-detrazioni-energia.title': 'Glarus: government takes a position on energy deductions',
     'blog.article.glarona-detrazioni-energia.excerpt': 'The government of Glarus takes a position on tax deductions for energy-saving measures.',
     'blog.article.glarona-detrazioni-energia.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.glarona-detrazioni-energia-2029.title': 'Glarus: Government opposes energy-saving tax deductions',
+    'blog.article.glarona-detrazioni-energia-2029.excerpt': 'The Glarus cantonal government recommends rejecting the postulate Markus Schnyder (SVP) calls for retaining the deductions The reform enters into force',
+    'blog.article.glarona-detrazioni-energia-2029.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonGlEn;

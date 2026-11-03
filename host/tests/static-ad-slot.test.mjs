@@ -13,6 +13,10 @@ test('canton hub ad placements keep the reserved formats and slots', () => {
     experimentId: 'article-detail-atf-ad-v1',
     experimentVariant: 'atf',
   });
+  for (const markup of [top, inlineOne, inlineTwo, end, articleAtf]) {
+    // The runtime owns the outer frame; Google keeps an empty, separate ins.
+    assert.match(markup, /^<div data-house><ins\b[^>]*><\/ins><\/div>$/);
+  }
 
   assert.match(top, /<ins class="adsbygoogle" style="display:block;min-height:100px"/);
   assert.match(top, /data-ad-slot="3205029282"/);

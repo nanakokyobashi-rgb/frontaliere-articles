@@ -60,6 +60,9 @@ const blogMetaCantonGrDe: Record<string, string> = {
     'blog.article.innhub-la-punt-rinvio-apertura.title': 'Innhub La Punt: Eröffnung auf den Sommer 2029 verschoben',
     'blog.article.innhub-la-punt-rinvio-apertura.excerpt': 'Eröffnung im Sommer 2029, sechs Monate später als ursprünglich geplant.',
     'blog.article.innhub-la-punt-rinvio-apertura.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.vallo-protezione-sorte-lostallo.title': 'Lostallo, die Schutzmauer in Sorte ist im Bau',
+    'blog.article.vallo-protezione-sorte-lostallo.excerpt': 'Die Schutzmauer beginnt in den nächsten Tagen Kommunalkredit: 6,2 Millionen Francs Hauptarbeiten geplant für den Herbst 2027 Die Flut vom 21.',
+    'blog.article.vallo-protezione-sorte-lostallo.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonGrDe;

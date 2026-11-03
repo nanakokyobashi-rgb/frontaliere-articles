@@ -72,6 +72,18 @@ const blogMetaCantonAppenzelloEn: Record<string, string> = {
     'blog.article.45-residenti-richiesta-rumore.title': '45 residents call for measures against noise on Langgasse',
     'blog.article.45-residenti-richiesta-rumore.excerpt': '45 residents filed a request with the municipality on Wednesday, October 28, for the urgent review of Tempo 30 and traffic-calming measures.',
     'blog.article.45-residenti-richiesta-rumore.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.decima-fiera-apprendistati-innerrhoden.title': 'Tenth Apprenticeship Positions Fair Appenzell November 7, 2026',
+    'blog.article.decima-fiera-apprendistati-innerrhoden.excerpt': '62 companies from Innerrhoden will present apprenticeship opportunities on Saturday, 7 November 2026, at Aula Gringel, with free admission from 9.00 to 15.00.',
+    'blog.article.decima-fiera-apprendistati-innerrhoden.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.caldo-appenzello-esterno-2026.title': 'Appenzell Ausserrhoden: more hot days in 2026',
+    'blog.article.caldo-appenzello-esterno-2026.excerpt': 'Summer 2026: more hot days at the sites examined More tropical nights were recorded in 2026 Altitude and nighttime cooling reduce prolonged heat The Health',
+    'blog.article.caldo-appenzello-esterno-2026.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.tariffe-mediche-appenzello-2026.title': 'Appenzell: medical fees approved for 2026',
+    'blog.article.tariffe-mediche-appenzello-2026.excerpt': 'The Standeskommission sets the tariff point value at 0,86 CHF for outpatient services, retroactive to January 1, 2026.',
+    'blog.article.tariffe-mediche-appenzello-2026.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.ulmann-incarico-appenzello.title': 'Appenzell, Manuel Ulmann hired at the Bezirksbauamt',
+    'blog.article.ulmann-incarico-appenzello.excerpt': 'The Appenzell District Council has hired Manuel Ulmann on a 100 percent basis: he will start at the Bezirksbauamt at the beginning of February.',
+    'blog.article.ulmann-incarico-appenzello.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonAppenzelloEn;

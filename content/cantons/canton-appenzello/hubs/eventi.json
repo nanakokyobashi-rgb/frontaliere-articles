@@ -4,12 +4,12 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "eventi",
-  "updatedAt": "2026-11-02T09:20:10.429Z",
-  "contentHash": "428c03ab01fae8e310b4a73879630528a40929c64301f6339365e73fe5512063",
+  "updatedAt": "2026-11-03T07:44:37.207Z",
+  "contentHash": "baa1a395d73d68fdc15dec2d81f6f24fcebf0cd48cbbcfe2757a5a9af6afada6",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-02T02:24:34.417Z",
+      "updatedAt": "2026-11-02T13:10:19.053Z",
       "keyFacts": 1
     }
   ],
@@ -95,7 +95,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/appenzello/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -104,6 +104,12 @@
           "url": "/articoli-appenzello/eventi-weekend-appenzello/",
           "excerpt": "Eventi in Appenzello ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
           "date": "2026-10-17T11:26:40.822Z"
+        },
+        {
+          "title": "Decima fiera posti apprendistato Appenzell 7 novembre 2026",
+          "url": "/articoli-appenzello/decima-fiera-apprendistati-innerrhoden/",
+          "excerpt": "62 aziende dell'Innerrhoden presenteranno offerte di apprendistato sabato 7 novembre 2026 all'Aula Gringel, ingresso gratuito dalle 9.00 alle 15.00.",
+          "date": "2026-11-03T07:41:05.610Z"
         }
       ],
       "latestCantonArticles": [],
@@ -117,7 +123,7 @@
           "url": "/eventi/appenzello/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T07:44:37.207Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -200,7 +206,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/appenzell/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -209,6 +215,12 @@
           "url": "/en/appenzell-articles/weekend-events-appenzell/",
           "excerpt": "Events in Appenzell every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
           "date": "2026-10-17T11:26:40.822Z"
+        },
+        {
+          "title": "Tenth Apprenticeship Positions Fair Appenzell November 7, 2026",
+          "url": "/en/appenzell-articles/tenth-apprenticeship-fair-innerrhoden/",
+          "excerpt": "62 companies from Innerrhoden will present apprenticeship opportunities on Saturday, 7 November 2026, at Aula Gringel, with free admission from 9.00 to 15.00.",
+          "date": "2026-11-03T07:41:05.610Z"
         }
       ],
       "latestCantonArticles": [],
@@ -222,7 +234,7 @@
           "url": "/en/events/appenzell/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T07:44:37.207Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -305,7 +317,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/appenzell/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -314,6 +326,12 @@
           "url": "/de/appenzell-artikel/wochenend-veranstaltungen-appenzell/",
           "excerpt": "Veranstaltungen im Appenzellerland an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
           "date": "2026-10-17T11:26:40.822Z"
+        },
+        {
+          "title": "Zehnte Lehrstellenmesse Appenzell 7. November 2026",
+          "url": "/de/appenzell-artikel/zehnte-lehrstellenmesse-innerrhoden/",
+          "excerpt": "62 Unternehmen aus Innerrhoden präsentieren am Samstag, 7.",
+          "date": "2026-11-03T07:41:05.610Z"
         }
       ],
       "latestCantonArticles": [],
@@ -327,7 +345,7 @@
           "url": "/de/veranstaltungen/appenzell/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T07:44:37.207Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -410,7 +428,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/appenzell/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -419,6 +437,12 @@
           "url": "/fr/articles-appenzell/evenements-week-end-appenzell/",
           "excerpt": "Événements en Appenzell chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
           "date": "2026-10-17T11:26:40.822Z"
+        },
+        {
+          "title": "Dixième salon des places d'apprentissage d'Appenzell 7 novembre 2026",
+          "url": "/fr/articles-appenzell/dixieme-foire-apprentissage-innerrhoden/",
+          "excerpt": "62 entreprises de l'Innerrhoden présenteront des offres d'apprentissage le samedi 7 novembre 2026 à l'Aula Gringel, entrée gratuite de 9.00 à 15.00.",
+          "date": "2026-11-03T07:41:05.610Z"
         }
       ],
       "latestCantonArticles": [],
@@ -432,7 +456,7 @@
           "url": "/fr/evenements/appenzell/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T07:44:37.207Z"
     }
   }
 }

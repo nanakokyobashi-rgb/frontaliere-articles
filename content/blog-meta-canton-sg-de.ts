@@ -81,6 +81,9 @@ const blogMetaCantonSgDe: Record<string, string> = {
     'blog.article.tamponamento-a1-gossau.title': 'Kollision auf der A1 bei Gossau: vier Verletzte',
     'blog.article.tamponamento-a1-gossau.excerpt': 'Unfall zwischen zwei Autos auf der A1 bei Gossau am 29.',
     'blog.article.tamponamento-a1-gossau.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.cambiamento-orari-st-gallen.title': 'Busfahrplan in St.Gallen: Änderungen in drei Quartieren',
+    'blog.article.cambiamento-orari-st-gallen.excerpt': 'Der Entwurf betrifft Rosenberg, Schuppis, Grossacker und Winkeln.',
+    'blog.article.cambiamento-orari-st-gallen.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSgDe;

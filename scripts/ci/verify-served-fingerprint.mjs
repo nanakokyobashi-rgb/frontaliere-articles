@@ -551,8 +551,12 @@ function matches(record, observation) {
   return observation.status === 200 && observation.sha === record.sha;
 }
 
-function isCacheHitMismatch(observation) {
-  return observation.status === 200 && observation.cfCacheStatus.toUpperCase() === 'HIT';
+function isConfirmableApexMismatch(record, observation) {
+  // Cloudflare's public `cf-cache-status` describes only the layer that
+  // produced the response seen by this probe. A Worker can still serve an
+  // older cached origin response while the outer request is reported as
+  // MISS, so the header is not a safe reason to skip the cache-busted check.
+  return observation.status === 200 && !matches(record, observation);
 }
 
 function defaultSleep(ms) {
@@ -768,7 +772,7 @@ export async function verifyApex({
     if (onObservation) onObservation({ record, observation, checked });
     if (!matches(record, observation)) {
       let freshProbe;
-      if (isCacheHitMismatch(observation)) {
+      if (isConfirmableApexMismatch(record, observation)) {
         const remainingBeforeConfirmation = timeoutMs - elapsedSince(startedAt, wallStartedAt, now);
         const freshObservation = remainingBeforeConfirmation > 0
           ? await fetchFingerprint(record, {

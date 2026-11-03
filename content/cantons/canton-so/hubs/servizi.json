@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "servizi",
-  "updatedAt": "2026-11-03T02:14:08.370Z",
-  "contentHash": "2e6c2cdefb8d2b88ff993e10b0e4bcfff33760140ea7fbfc1f3b62d6bf0800d6",
+  "updatedAt": "2026-11-03T14:36:40.036Z",
+  "contentHash": "9e5a8b7b48489398b042724c2b98ab524a52a44d0f00ac0df4053b5b66883864",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,22 +14,17 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-02T19:17:06.192Z",
+      "updatedAt": "2026-11-03T01:41:41.208Z",
       "keyFacts": 0
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-02T15:47:08.669Z",
+      "updatedAt": "2026-11-03T00:59:08.019Z",
       "keyFacts": 1
     },
     {
-      "id": "meteo",
-      "updatedAt": "2026-11-02T18:38:16.906Z",
-      "keyFacts": 0
-    },
-    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-02T13:52:53.767Z",
+      "updatedAt": "2026-11-03T00:04:45.487Z",
       "keyFacts": 0
     }
   ],
@@ -49,7 +44,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "6",
-          "note": "offerta mediana 1050 CHF"
+          "note": "offerta mediana 1060 CHF"
         }
       ],
       "dataBlocks": [
@@ -91,7 +86,7 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-11-02T19:17:06.192Z"
+          "updatedAt": "2026-11-03T01:41:41.208Z"
         },
         {
           "id": "aste-targhe",
@@ -100,7 +95,7 @@
           "items": [
             {
               "label": "SO2030",
-              "value": "1850 CHF",
+              "value": "1900 CHF",
               "detail": "offerta attuale",
               "date": "2026-11-04T16:00:00.000Z",
               "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3382&locale=de_CH"
@@ -122,21 +117,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-11-02T15:47:08.669Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Solothurn",
-              "value": "6 °C",
-              "detail": "oggi da 5 a 7 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-02T18:38:16.906Z"
+          "updatedAt": "2026-11-03T00:59:08.019Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -164,7 +145,7 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-stieg-im-juli-2026-auf-31-prozent/"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -173,6 +154,12 @@
           "url": "/articoli-soletta/proposta-premi-assicurazione-2027/",
           "excerpt": "Proposta 2027 trasmessa al Parlamento cantonale Circa 221 milioni di franchi per ridurre i premi Contributo cantonale di 98 milioni Aumento di 9 milioni (+4,3%)",
           "date": "2026-10-27T12:21:54.555Z"
+        },
+        {
+          "title": "Riduzione premi assicurativi 2027: CHF 221 milioni a Soletta",
+          "url": "/articoli-soletta/solothurn-riduzione-premi-2027/",
+          "excerpt": "Nel 2027 a Soletta sono previsti circa CHF 221 milioni.",
+          "date": "2026-11-03T11:10:06.361Z"
         },
         {
           "title": "Soletta: la Ratsleitung contro la PUK sugli ospedali",
@@ -209,12 +196,6 @@
           "url": "/articoli-svizzera/premi-cassa-malati-canton-soletta-riduzione/",
           "excerpt": "Fatti chiave sulla riduzione dei premi cassa malati nel Cantone di Soletta",
           "date": "2026-08-18T01:51:08.948Z"
-        },
-        {
-          "title": "Permesso di dimora B in Soletta: requisiti e procedura",
-          "url": "/articoli-svizzera/permesso-di-dimora-b-canton-soletta/",
-          "excerpt": "I requisiti per ottenere un permesso di dimora B nel Canton Soletta sono specificati nella legge cantonale.",
-          "date": "2026-08-18T01:22:42.942Z"
         }
       ],
       "latestCantonArticles": [],
@@ -244,7 +225,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-03T02:14:08.370Z"
+      "updatedAt": "2026-11-03T14:36:40.036Z"
     },
     "en": {
       "canton": "SO",
@@ -261,7 +242,7 @@
         {
           "label": "Plate auctions running",
           "value": "6",
-          "note": "typical bid 1,050 CHF"
+          "note": "typical bid 1,060 CHF"
         }
       ],
       "dataBlocks": [
@@ -303,7 +284,7 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-11-02T19:17:06.192Z"
+          "updatedAt": "2026-11-03T01:41:41.208Z"
         },
         {
           "id": "aste-targhe",
@@ -312,7 +293,7 @@
           "items": [
             {
               "label": "SO2030",
-              "value": "1,850 CHF",
+              "value": "1,900 CHF",
               "detail": "current bid",
               "date": "2026-11-04T16:00:00.000Z",
               "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3382&locale=de_CH"
@@ -334,21 +315,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-11-02T15:47:08.669Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Solothurn",
-              "value": "6 °C",
-              "detail": "today from 5 to 7 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-02T18:38:16.906Z"
+          "updatedAt": "2026-11-03T00:59:08.019Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -376,7 +343,7 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-stieg-im-juli-2026-auf-31-prozent/"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -385,6 +352,12 @@
           "url": "/en/solothurn-articles/2027-insurance-premium-proposal/",
           "excerpt": "2027 proposal submitted to the Cantonal Parliament Approximately 221 million francs to reduce premiums Cantonal contribution of 98 million Increase of 9 million",
           "date": "2026-10-27T12:21:54.555Z"
+        },
+        {
+          "title": "Insurance premium reductions in 2027: CHF 221 million in Solothurn",
+          "url": "/en/solothurn-articles/solothurn-premium-reduction-2027/",
+          "excerpt": "In 2027, around CHF 221 million are planned for Solothurn.",
+          "date": "2026-11-03T11:10:06.361Z"
         },
         {
           "title": "Solothurn: Council leadership opposes the hospital PUK",
@@ -421,12 +394,6 @@
           "url": "/en/swiss-articles/canton-health-insurance-premiums-slab-and-premium-reduction/",
           "excerpt": "Key facts about the reduction of sick pay premiums in the Canton of Solothurn",
           "date": "2026-08-18T01:51:08.948Z"
-        },
-        {
-          "title": "Residence permit B in Soleta: requirements and procedure",
-          "url": "/en/swiss-articles/residence-permit-b-in-soleta-requirements-and-procedure/",
-          "excerpt": "The requirements for obtaining a B residence permit in the Canton of Solothurn are specified in the cantonal law.",
-          "date": "2026-08-18T01:22:42.942Z"
         }
       ],
       "latestCantonArticles": [],
@@ -452,7 +419,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-03T02:14:08.370Z"
+      "updatedAt": "2026-11-03T14:36:40.036Z"
     },
     "de": {
       "canton": "SO",
@@ -469,7 +436,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "6",
-          "note": "mittleres Gebot 1’050 CHF"
+          "note": "mittleres Gebot 1’060 CHF"
         }
       ],
       "dataBlocks": [
@@ -511,7 +478,7 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-11-02T19:17:06.192Z"
+          "updatedAt": "2026-11-03T01:41:41.208Z"
         },
         {
           "id": "aste-targhe",
@@ -520,7 +487,7 @@
           "items": [
             {
               "label": "SO2030",
-              "value": "1’850 CHF",
+              "value": "1’900 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-11-04T16:00:00.000Z",
               "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3382&locale=de_CH"
@@ -542,21 +509,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-11-02T15:47:08.669Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Solothurn",
-              "value": "6 °C",
-              "detail": "heute 5 bis 7 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-02T18:38:16.906Z"
+          "updatedAt": "2026-11-03T00:59:08.019Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -584,7 +537,7 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-stieg-im-juli-2026-auf-31-prozent/"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -593,6 +546,12 @@
           "url": "/de/solothurn-artikel/praemienverbilligung-2027/",
           "excerpt": "Vorschlag 2027 dem Kantonsparlament übermittelt Rund 221 Millionen Franken zur Senkung der Prämien Kantonsbeitrag von 98 Millionen Erhöhung um 9 Millionen",
           "date": "2026-10-27T12:21:54.555Z"
+        },
+        {
+          "title": "Prämienverbilligung 2027: CHF 221 Millionen in Solothurn",
+          "url": "/de/solothurn-artikel/solothurn-pramienreduktion-2027/",
+          "excerpt": "2027 sind in Solothurn rund CHF 221 Millionen vorgesehen.",
+          "date": "2026-11-03T11:10:06.361Z"
         },
         {
           "title": "Solothurn: Die Ratsleitung gegen die PUK zu den Spitälern",
@@ -629,12 +588,6 @@
           "url": "/de/schweiz-artikel/krankenkassenpramien-kanton-solothurn-und-pramienverbilligung/",
           "excerpt": "Wichtige Fakten zur Reduzierung der Krankenversicherungsprämien im Kanton Solothurn",
           "date": "2026-08-18T01:51:08.948Z"
-        },
-        {
-          "title": "Aufenthaltsbewilligung B in Solothurn: Voraussetzungen und Verfahren",
-          "url": "/de/schweiz-artikel/permesso-di-dimora-b-kanton-solothurn/",
-          "excerpt": "Die Voraussetzungen für eine Aufenthaltsbewilligung B im Kanton Solothurn sind im kantonalen Gesetz festgelegt.",
-          "date": "2026-08-18T01:22:42.942Z"
         }
       ],
       "latestCantonArticles": [],
@@ -660,7 +613,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-03T02:14:08.370Z"
+      "updatedAt": "2026-11-03T14:36:40.036Z"
     },
     "fr": {
       "canton": "SO",
@@ -677,7 +630,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "6",
-          "note": "offre centrale 1 050 CHF"
+          "note": "offre centrale 1 060 CHF"
         }
       ],
       "dataBlocks": [
@@ -719,7 +672,7 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-11-02T19:17:06.192Z"
+          "updatedAt": "2026-11-03T01:41:41.208Z"
         },
         {
           "id": "aste-targhe",
@@ -728,7 +681,7 @@
           "items": [
             {
               "label": "SO2030",
-              "value": "1 850 CHF",
+              "value": "1 900 CHF",
               "detail": "offre actuelle",
               "date": "2026-11-04T16:00:00.000Z",
               "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3382&locale=de_CH"
@@ -750,21 +703,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction/ui/app/init?locale=de_CH",
-          "updatedAt": "2026-11-02T15:47:08.669Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Solothurn",
-              "value": "6 °C",
-              "detail": "aujourd’hui de 5 à 7 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-02T18:38:16.906Z"
+          "updatedAt": "2026-11-03T00:59:08.019Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -792,7 +731,7 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-stieg-im-juli-2026-auf-31-prozent/"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -801,6 +740,12 @@
           "url": "/fr/articles-soleure/proposition-primes-2027/",
           "excerpt": "Proposition 2027 transmise au Parlement cantonal Environ 221 millions de francs pour réduire les primes Contribution cantonale de 98 millions Augmentation de 9",
           "date": "2026-10-27T12:21:54.555Z"
+        },
+        {
+          "title": "Réduction des primes d'assurance 2027 : CHF 221 millions à Soleure",
+          "url": "/fr/articles-soleure/soleure-reduction-primes-2027/",
+          "excerpt": "En 2027, à Soleure, environ CHF 221 millions sont prévus.",
+          "date": "2026-11-03T11:10:06.361Z"
         },
         {
           "title": "Soleure : la direction du Conseil contre la PUK sur les hôpitaux",
@@ -837,12 +782,6 @@
           "url": "/fr/articles-suisse/primes-d-assurance-maladie-dans-le-canton-de-soleure-et-reductions-de-primes/",
           "excerpt": "Faits clés sur la réduction des primes de caisse-maladie dans le canton de Soleure",
           "date": "2026-08-18T01:51:08.948Z"
-        },
-        {
-          "title": "Permis de séjour B à Soleure : exigences et procédure",
-          "url": "/fr/articles-suisse/permesso-di-dimora-b-canton-de-soleure/",
-          "excerpt": "Les conditions d'obtention d'un permis de séjour B dans le canton de Soleure sont précisées dans la loi cantonale.",
-          "date": "2026-08-18T01:22:42.942Z"
         }
       ],
       "latestCantonArticles": [],
@@ -864,7 +803,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-03T02:14:08.370Z"
+      "updatedAt": "2026-11-03T14:36:40.036Z"
     }
   }
 }

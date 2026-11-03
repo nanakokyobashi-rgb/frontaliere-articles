@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-be::https://ajour.ch/story/704325/wird-lautes-feuerwerk-bald-verboten-das-m%c3%bcssen-sie-zur-abstimmung-wissen": {
-      "section": "canton-be",
-      "ts": 1793512823828
-    },
     "canton-be::https://ajour.ch/story/704360/die-nachfrage-nach-der-bilinguen-bieler-schule-ist-gross-nun-will-die-stadt-das-angebot-ausbauen": {
       "section": "canton-be",
       "ts": 1793544429532
@@ -115,6 +111,18 @@
     "canton-be::https://www.be.ch/de/start.html?newsid=8d70ba9d-8dd7-40d1-ac0c-e5138c08d8de": {
       "section": "canton-be",
       "ts": 1793675085808
+    },
+    "canton-be::https://ajour.ch/story/705070/die-neuen-verkehrsregeln-in-nidau-dort-d%c3%bcrfen-autos-ab-jetzt-nicht-mehr-durch": {
+      "section": "canton-be",
+      "ts": 1793715046404
+    },
+    "canton-be::https://ajour.ch/story/704729/warum-die-neuen-berner-%c3%b6vanzeigen-gleich-aussehen-wie-die-in-biel": {
+      "section": "canton-be",
+      "ts": 1793715051866
+    },
+    "canton-be::https://ajour.ch/story/705156/sperrung-der-a6br%c3%bccke-%c3%bcber-den-nidaub%c3%bcrenkanal": {
+      "section": "canton-be",
+      "ts": 1793715056062
     }
   }
 }

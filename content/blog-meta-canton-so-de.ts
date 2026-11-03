@@ -69,6 +69,12 @@ const blogMetaCantonSoDe: Record<string, string> = {
     'blog.article.soletta-stipendi-pubblici-2027.title': 'Löhne im öffentlichen Dienst in Solothurn: +1,0% ab 2027',
     'blog.article.soletta-stipendi-pubblici-2027.excerpt': 'In Solothurn erhalten das Staatspersonal, die Lehrpersonen und die Spitalangestellten ab 2027 nach der Einigung über die Inflation 1,0% mehr.',
     'blog.article.soletta-stipendi-pubblici-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.aumento-salari-soletta-2027.title': 'Kanton Solothurn: Lohnerhöhung von 1% ab 2027',
+    'blog.article.aumento-salari-soletta-2027.excerpt': 'Ab 2027 erhalten das Staatspersonal, die Lehrpersonen und die Angestellten der Solothurner Spitäler AG eine Lohnanpassung von 1,0%.',
+    'blog.article.aumento-salari-soletta-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.solothurn-riduzione-premi-2027.title': 'Prämienverbilligung 2027: CHF 221 Millionen in Solothurn',
+    'blog.article.solothurn-riduzione-premi-2027.excerpt': '2027 sind in Solothurn rund CHF 221 Millionen vorgesehen.',
+    'blog.article.solothurn-riduzione-premi-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSoDe;

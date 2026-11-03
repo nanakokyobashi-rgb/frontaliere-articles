@@ -4,18 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-sg::https://www.unisg.ch/de/newsroom/themenschwerpunkt-kuenstliche-intelligenz": {
-      "section": "canton-sg",
-      "ts": 1793447595456
-    },
-    "canton-sg::https://www.stgallen24.ch/articles/416010-jekyll-hyde-besetzung-fuer-st-gallen-steht-fest": {
-      "section": "canton-sg",
-      "ts": 1793447602536
-    },
-    "canton-sg::https://www.unisg.ch/de/newsroom/themenschwerpunkt-nachhaltigkeit": {
-      "section": "canton-sg",
-      "ts": 1793476490369
-    },
     "canton-sg::https://www.stgallen24.ch/articles/415929-axenstrasse-veloshuttle-faehrt-ab-november-nach-winterfahrplan": {
       "section": "canton-sg",
       "ts": 1793529952152
@@ -23,6 +11,14 @@
     "canton-sg::https://www.sg.ch/news/sgch_kantonspolizei/2026/11/kanton-st-gallen--fahrunfaehige-und-alkoholisierte-verkehrsteiln.html": {
       "section": "canton-sg",
       "ts": 1793583822767
+    },
+    "canton-sg::https://www.sg.ch/news/sgch_kantonspolizei/2026/11/kanton-st--gallen--halloween-nacht.html": {
+      "section": "canton-sg",
+      "ts": 1793697695473
+    },
+    "canton-sg::https://www.20min.ch/story/stadt-st-gallen-revolver-verdacht-loest-grosseinsatz-aus-bars-evakuiert-103658754": {
+      "section": "canton-sg",
+      "ts": 1793701698579
     }
   }
 }

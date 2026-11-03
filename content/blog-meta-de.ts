@@ -13671,6 +13671,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.cascata-oro-comune-como.title': 'Millionen für Como: Die Mittel für Grenzgänger haben sich verdreifacht',
     'blog.article.cascata-oro-comune-como.excerpt': 'Über 9 Millionen in den Kassen der Gemeinde Como 6.492 ansässige Grenzgänger am 31.',
     'blog.article.cascata-oro-comune-como.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.versamento-avs-dicembre-importi.title': 'Dreizehnter AHV, bei manchen wird es niedriger sein',
+    'blog.article.versamento-avs-dicembre-importi.excerpt': 'Erste 13. AHV im Dezember Rente ab dem 1. Juli: halbe Rente Fast 2,7 Millionen Begünstigte Ende 2026 830.000 Begünstigte im Ausland',
+    'blog.article.versamento-avs-dicembre-importi.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaDe;

@@ -42,6 +42,9 @@ const blogMetaCantonVsEn: Record<string, string> = {
     'blog.article.bains-ovronnaz-nuovo-sursis.title': 'Bains d\'Ovronnaz: composition moratorium until March 31, 2027',
     'blog.article.bains-ovronnaz-nuovo-sursis.excerpt': 'The Martigny court extends the moratorium until March 31, 2027 Employees retain their jobs throughout the winter season Visitor numbers increase by 20-30%',
     'blog.article.bains-ovronnaz-nuovo-sursis.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.val-de-bagnes-sostenibilita-2024.title': 'Val de Bagnes: 175 people for Sustainability Week',
+    'blog.article.val-de-bagnes-sostenibilita-2024.excerpt': '175 people in Val de Bagnes Six events from October 24 to 31 The municipality\'s first Climate Plan was presented The plan comprises 26 measures and 75 actions',
+    'blog.article.val-de-bagnes-sostenibilita-2024.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonVsEn;

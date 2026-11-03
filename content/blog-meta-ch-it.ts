@@ -8666,6 +8666,18 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.mercato-lavoro-prospettive-offuscate.title': 'Prospettive mercato del lavoro: lieve indebolimento nel quarto trimestre 2026',
     'blog.article.mercato-lavoro-prospettive-offuscate.excerpt': 'Indicatore KOF a 2,0 punti nel quarto trimestre 2026 Era a 2,3 punti nel trimestre precedente Circa 4\'500 aziende intervistate a ottobre Edilizia positiva',
     'blog.article.mercato-lavoro-prospettive-offuscate.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.inflazione-ottobre-1-5-percento.title': 'Inflazione ottobre sale all\'1,5% spinta dall\'energia',
+    'blog.article.inflazione-ottobre-1-5-percento.excerpt': 'L\'inflazione annua di ottobre è salita dell\'1,5% A settembre l\'aumento annuo era dell\'1% L\'IPC mensile è cresciuto dello 0,2% Energia: gasolio, benzina e diesel',
+    'blog.article.inflazione-ottobre-1-5-percento.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.swissport-zurigo-trattative-ccl.title': 'Swissport Zurigo: trattative fallite per il personale',
+    'blog.article.swissport-zurigo-trattative-ccl.excerpt': 'CCL Swissport a Zurigo: trattative fallite Il contratto riguarda circa 2’000 persone Chiesti aumenti salariali fino al 7% Possibile sciopero già a gennaio 2027',
+    'blog.article.swissport-zurigo-trattative-ccl.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.voto-iva-13esima-avs-novembre.title': '13esima AVS: il 29 novembre si vota sull\'aumento IVA',
+    'blog.article.voto-iva-13esima-avs-novembre.excerpt': 'Il 29 novembre si vota sul finanziamento della 13esima AVS L\'IVA ordinaria salirebbe dall\'8,1% all\'8,5% L\'aliquota alberghiera passerebbe dal 3,8% al 4%',
+    'blog.article.voto-iva-13esima-avs-novembre.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.cdf-critica-armasuisse-immobili.title': 'CDF critica Armasuisse Immobili per ritardi nei risanamenti',
+    'blog.article.cdf-critica-armasuisse-immobili.excerpt': 'Il CDF critica la gestione di Armasuisse Immobili Oltre 34% dei costi di risanamento a fine 2025 Arretrati al 40% entro il 2030 secondo proiezioni interne',
+    'blog.article.cdf-critica-armasuisse-immobili.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaChIt;

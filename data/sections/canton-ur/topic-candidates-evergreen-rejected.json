@@ -4,25 +4,25 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ur::https://www.ur.ch/_rte/information/138976": {
-      "section": "canton-ur",
-      "ts": 1793447976051
-    },
-    "canton-ur::http://www.urnerwochenblatt.ch/artikel/2028-findet-wieder-eine-urner-wirtschaftsmesse-statt": {
-      "section": "canton-ur",
-      "ts": 1793450011337
-    },
-    "canton-ur::https://www.ur.ch/_rte/information/138973": {
-      "section": "canton-ur",
-      "ts": 1793450214107
-    },
-    "canton-ur::https://www.ur.ch/_rte/information/139192": {
-      "section": "canton-ur",
-      "ts": 1793450233115
-    },
     "canton-ur::http://www.urnerwochenblatt.ch/artikel/auto-brennt-am-oberalppass-vollstaendig-aus": {
       "section": "canton-ur",
       "ts": 1793567739866
+    },
+    "canton-ur::https://www.nau.ch/politik/regional/uri-stimmt-uber-hohere-strassenverkehrssteuern-ab-67196979": {
+      "section": "canton-ur",
+      "ts": 1793703697413
+    },
+    "canton-ur::https://www.ur.ch/_rte/information/139240": {
+      "section": "canton-ur",
+      "ts": 1793709197522
+    },
+    "canton-ur::http://www.urnerwochenblatt.ch/artikel/goldener-uristier-geht-an-fredy-burkart-und-fredy-schoen": {
+      "section": "canton-ur",
+      "ts": 1793709206740
+    },
+    "canton-ur::https://www.ur.ch/_rte/information/139267": {
+      "section": "canton-ur",
+      "ts": 1793709239628
     }
   }
 }

@@ -4,17 +4,17 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "mobilita",
-  "updatedAt": "2026-11-02T11:33:10.756Z",
-  "contentHash": "a3890be58a57d5d3ff66e500e5e4d64dc3a4be2d1b600f1121de14725c7efd21",
+  "updatedAt": "2026-11-03T12:29:43.135Z",
+  "contentHash": "821e2dd0a23e3cebc7d8dc1b620a5382302b7bf7f240589e74ef67d8b4e7447c",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-02T06:54:25.899Z",
+      "updatedAt": "2026-11-03T03:07:39.455Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-01T21:24:45.283Z",
+      "updatedAt": "2026-11-03T00:04:45.487Z",
       "keyFacts": 0
     }
   ],
@@ -28,12 +28,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "4",
-          "note": "segnalazioni aggiornate: 2 novembre 2026"
+          "note": "segnalazioni aggiornate: 3 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "9",
-          "note": "segnalazioni aggiornate: 2 novembre 2026"
+          "note": "segnalazioni aggiornate: 3 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -91,7 +91,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-02T06:54:25.899Z"
+          "updatedAt": "2026-11-03T03:07:39.455Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -129,7 +129,7 @@
               "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -144,6 +144,18 @@
           "url": "/articoli-uri/conteggio-traffico-uri-novembre/",
           "excerpt": "Nel fondovalle urano, il 5 novembre 2026, 31 punti rileveranno veicoli e direzioni tra le 06:00 e le 22:00 per rivedere il modello cantonale.",
           "date": "2026-10-27T11:34:34.578Z"
+        },
+        {
+          "title": "Seedorf: Reussstrasse chiusa per lavori di innesto",
+          "url": "/articoli-uri/seedorf-reussstrasse-lavori-innesto/",
+          "excerpt": "La Reussstrasse a Seedorf sarà chiusa per lavori all'innesto verso sud, direzione Attinghausen, in vista della pista ciclabile Altdorf-Seedorf.",
+          "date": "2026-11-03T12:26:50.675Z"
+        },
+        {
+          "title": "Passo del Gottardo: chiusura invernale da giovedì",
+          "url": "/articoli-uri/chiusura-invernale-gottardo/",
+          "excerpt": "Da giovedì scatta la chiusura invernale del passo del Gottardo: tre dei cinque passi alpini urani saranno chiusi, mentre Oberalp e Klausenpass restano aperti.",
+          "date": "2026-11-03T09:00:46.783Z"
         },
         {
           "title": "Susten e Furka chiusi, San Gottardo percorribile di giorno",
@@ -168,18 +180,6 @@
           "url": "/articoli-uri/uri-chiusura-passhoehe/",
           "excerpt": "Strada cantonale chiusa di notte tra Passhöhe e Urnerboden dal 14 al 15 ottobre per lavori di pavimentazione; con maltempo, i lavori slittano.",
           "date": "2026-10-08T23:39:16.200Z"
-        },
-        {
-          "title": "Bristenstrasse: chiusure e orari fino a novembre 2026",
-          "url": "/articoli-uri/bristenstrasse-regimi-traffico-2026/",
-          "excerpt": "Tra Amsteg e St.",
-          "date": "2026-10-23T12:29:59.834Z"
-        },
-        {
-          "title": "Trasporti pubblici nel Cantone Uri: zone e abbonamenti",
-          "url": "/articoli-svizzera/abbonamenti-trasporti-uri-zone/",
-          "excerpt": "Sistema Passepartout nel Cantone Uri: come funzionano le zone, gli abbonamenti annuali e mensili, la metà-prezzo e l'AG delle FFS.",
-          "date": "2026-08-29T14:34:47.928Z"
         }
       ],
       "latestCantonArticles": [],
@@ -193,7 +193,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-02T11:33:10.756Z"
+      "updatedAt": "2026-11-03T12:29:43.135Z"
     },
     "en": {
       "canton": "UR",
@@ -204,12 +204,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "4",
-          "note": "reports as of 2 November 2026"
+          "note": "reports as of 3 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "9",
-          "note": "reports as of 2 November 2026"
+          "note": "reports as of 3 November 2026"
         }
       ],
       "dataBlocks": [
@@ -267,7 +267,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-02T06:54:25.899Z"
+          "updatedAt": "2026-11-03T03:07:39.455Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -305,7 +305,7 @@
               "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -320,6 +320,18 @@
           "url": "/en/uri-articles/uri-traffic-count-november/",
           "excerpt": "In the Uranian valley floor, on November 5, 2026, 31 points will record vehicles and directions between 06:00 and 22:00 to review the cantonal model.",
           "date": "2026-10-27T11:34:34.578Z"
+        },
+        {
+          "title": "Seedorf: Reussstrasse closed for connection works",
+          "url": "/en/uri-articles/seedorf-reussstrasse-works-inlet/",
+          "excerpt": "Reussstrasse in Seedorf will be closed for construction work at the southern junction, toward Attinghausen, in preparation for the Altdorf-Seedorf cycle path.",
+          "date": "2026-11-03T12:26:50.675Z"
+        },
+        {
+          "title": "Gotthard Pass: winter closure from Thursday",
+          "url": "/en/uri-articles/gotthard-winter-closure/",
+          "excerpt": "Starting Thursday, the winter closure of the Gotthard Pass takes effect: three of the five Alpine passes in Uri will be closed, while Oberalp and Klausenpass remain open.",
+          "date": "2026-11-03T09:00:46.783Z"
         },
         {
           "title": "Susten and Furka closed, Gotthard passable during the day",
@@ -344,18 +356,6 @@
           "url": "/en/uri-articles/uri-night-road-closure/",
           "excerpt": "Cantonal road closed at night between Passhöhe and Urnerboden from October 14 to 15 for paving work; in bad weather, the work will be postponed.",
           "date": "2026-10-08T23:39:16.200Z"
-        },
-        {
-          "title": "Bristenstrasse: closures and schedules through November 2026",
-          "url": "/en/uri-articles/bristenstrasse-traffic-rules-2026/",
-          "excerpt": "Between Amsteg and St.",
-          "date": "2026-10-23T12:29:59.834Z"
-        },
-        {
-          "title": "Public transport in Canton Uri: zones and season tickets",
-          "url": "/en/swiss-articles/uri-canton-transport-zones/",
-          "excerpt": "Passepartout system in Canton Uri: how the SBB zones, annual and monthly subscriptions, half-price and AG work.",
-          "date": "2026-08-29T14:34:47.928Z"
         }
       ],
       "latestCantonArticles": [],
@@ -369,7 +369,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-02T11:33:10.756Z"
+      "updatedAt": "2026-11-03T12:29:43.135Z"
     },
     "de": {
       "canton": "UR",
@@ -380,12 +380,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "4",
-          "note": "Meldungen vom 2. November 2026"
+          "note": "Meldungen vom 3. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "9",
-          "note": "Meldungen vom 2. November 2026"
+          "note": "Meldungen vom 3. November 2026"
         }
       ],
       "dataBlocks": [
@@ -443,7 +443,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-02T06:54:25.899Z"
+          "updatedAt": "2026-11-03T03:07:39.455Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -481,7 +481,7 @@
               "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -496,6 +496,18 @@
           "url": "/de/uri-artikel/verkehrszaehlung-uri-november/",
           "excerpt": "Im Urner Talboden werden am 5.",
           "date": "2026-10-27T11:34:34.578Z"
+        },
+        {
+          "title": "Seedorf: Reussstrasse wegen Arbeiten an der Einmündung gesperrt",
+          "url": "/de/uri-artikel/seedorf-reussstrasse-arbeiten-innesto/",
+          "excerpt": "Die Reussstrasse in Seedorf wird wegen Arbeiten an der Einmündung Richtung Süden, in Richtung Attinghausen, im Hinblick auf den Radweg Altdorf-Seedorf gesperrt.",
+          "date": "2026-11-03T12:26:50.675Z"
+        },
+        {
+          "title": "Gotthardpass: Wintersperre ab Donnerstag",
+          "url": "/de/uri-artikel/gotthard-wintersperre/",
+          "excerpt": "Ab Donnerstag tritt die Wintersperre des Gotthardpasses in Kraft: Drei der fünf Urner Alpenpässe werden geschlossen sein, während Oberalp und Klausenpass vorerst offen bleiben.",
+          "date": "2026-11-03T09:00:46.783Z"
         },
         {
           "title": "Susten und Furka gesperrt, Gotthard tagsüber befahrbar",
@@ -520,18 +532,6 @@
           "url": "/de/uri-artikel/uri-nachtsperrung-passhoehe/",
           "excerpt": "Kantonsstraße zwischen Passhöhe und Urnerboden in der Nacht vom 14.",
           "date": "2026-10-08T23:39:16.200Z"
-        },
-        {
-          "title": "Bristenstrasse: Sperrungen und Zeitfenster bis November 2026",
-          "url": "/de/uri-artikel/bristenstrasse-verkehrsregime-2026/",
-          "excerpt": "Zwischen Amsteg und St.",
-          "date": "2026-10-23T12:29:59.834Z"
-        },
-        {
-          "title": "Öffentlicher Verkehr im Kanton Uri: Zonen und Abos",
-          "url": "/de/schweiz-artikel/abos-nahverkehr-kanton-uri-zonen/",
-          "excerpt": "Passepartout-System im Kanton Uri: Funktionsweise der Zonen, Jahres- und Monatsabos, Halbtax und GA der SBB.",
-          "date": "2026-08-29T14:34:47.928Z"
         }
       ],
       "latestCantonArticles": [],
@@ -545,7 +545,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-02T11:33:10.756Z"
+      "updatedAt": "2026-11-03T12:29:43.135Z"
     },
     "fr": {
       "canton": "UR",
@@ -556,12 +556,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "4",
-          "note": "signalements au 2 novembre 2026"
+          "note": "signalements au 3 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "9",
-          "note": "signalements au 2 novembre 2026"
+          "note": "signalements au 3 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -619,7 +619,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-02T06:54:25.899Z"
+          "updatedAt": "2026-11-03T03:07:39.455Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -657,7 +657,7 @@
               "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -672,6 +672,18 @@
           "url": "/fr/articles-uri/comptage-trafic-uri-novembre/",
           "excerpt": "Dans la vallée uranaise, le 5 novembre 2026, 31 points recenseront les véhicules et leur direction entre les 06:00 et les 22:00 afin de revoir le modèle cantonal.",
           "date": "2026-10-27T11:34:34.578Z"
+        },
+        {
+          "title": "Seedorf : Reussstrasse fermée pour des travaux de raccordement",
+          "url": "/fr/articles-uri/seedorf-reussstrasse-travaux-injection/",
+          "excerpt": "La Reussstrasse à Seedorf sera fermée pour des travaux de raccordement vers le sud, en direction d’Attinghausen, dans le cadre de la piste cyclable Altdorf-Seedorf.",
+          "date": "2026-11-03T12:26:50.675Z"
+        },
+        {
+          "title": "Col du Gothard : fermeture hivernale dès jeudi",
+          "url": "/fr/articles-uri/fermeture-hivernale-gothard/",
+          "excerpt": "À partir de jeudi, la fermeture hivernale du col du Gothard entre en vigueur : trois des cinq cols alpins uranais seront fermés, tandis que l’Oberalp et le Klausenpass restent ouverts.",
+          "date": "2026-11-03T09:00:46.783Z"
         },
         {
           "title": "Susten et Furka fermés, Saint-Gothard praticable de jour",
@@ -696,18 +708,6 @@
           "url": "/fr/articles-uri/uri-fermeture-nocturne-route/",
           "excerpt": "Route cantonale fermée de nuit entre Passhöhe et Urnerboden du 14 au 15 octobre pour des travaux de revêtement ; en cas de mauvais temps, les travaux sont reportés.",
           "date": "2026-10-08T23:39:16.200Z"
-        },
-        {
-          "title": "Bristenstrasse : fermetures et horaires jusqu’en novembre 2026",
-          "url": "/fr/articles-uri/bristenstrasse-regimes-circulation-2026/",
-          "excerpt": "Entre Amsteg et St.",
-          "date": "2026-10-23T12:29:59.834Z"
-        },
-        {
-          "title": "Transports publics dans le canton d'Uri : zones et abonnements",
-          "url": "/fr/articles-suisse/abonnements-transports-uri-zones/",
-          "excerpt": "Système Passepartout dans le canton d'Uri : fonctionnement des zones, abonnements annuels et mensuels, demi-tarif et AG des CFF.",
-          "date": "2026-08-29T14:34:47.928Z"
         }
       ],
       "latestCantonArticles": [],
@@ -721,7 +721,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-02T11:33:10.756Z"
+      "updatedAt": "2026-11-03T12:29:43.135Z"
     }
   }
 }

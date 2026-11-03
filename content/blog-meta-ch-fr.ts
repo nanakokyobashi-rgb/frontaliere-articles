@@ -8666,6 +8666,18 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.mercato-lavoro-prospettive-offuscate.title': 'Marché du travail : léger recul au 4e trimestre 2026',
     'blog.article.mercato-lavoro-prospettive-offuscate.excerpt': 'Indicateur KOF à 2,0 points au quatrième trimestre 2026 Était à 2,3 points au trimestre précédent Environ 4\'500 entreprises interrogées en octobre Construction positive',
     'blog.article.mercato-lavoro-prospettive-offuscate.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.inflazione-ottobre-1-5-percento.title': 'L\'inflation d\'octobre monte à 1,5 %, portée par l\'énergie',
+    'blog.article.inflazione-ottobre-1-5-percento.excerpt': 'L\'inflation annuelle d\'octobre a augmenté de 1,5 % En septembre, la hausse annuelle était de 1 % L\'IPC mensuel a augmenté de 0,2 % Énergie : gazole, essence et diesel',
+    'blog.article.inflazione-ottobre-1-5-percento.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.swissport-zurigo-trattative-ccl.title': 'Swissport Zurich : échec des négociations pour le personnel',
+    'blog.article.swissport-zurigo-trattative-ccl.excerpt': 'CCL Swissport à Zurich : échec des négociations Le contrat concerne environ 2’000 personnes Des augmentations salariales allant jusqu’à 7% sont demandées Grève possible dès janvier 2027',
+    'blog.article.swissport-zurigo-trattative-ccl.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.voto-iva-13esima-avs-novembre.title': '13e rente AVS : le 29 novembre, on vote sur la hausse de la TVA',
+    'blog.article.voto-iva-13esima-avs-novembre.excerpt': 'Le 29 novembre, on vote sur le financement de la 13e rente AVS La TVA ordinaire passerait de 8,1% à 8,5% Le taux hôtelier passerait de 3,8% à 4%',
+    'blog.article.voto-iva-13esima-avs-novembre.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.cdf-critica-armasuisse-immobili.title': 'Le CDF critique Armasuisse Immobili pour ses retards dans les assainissements',
+    'blog.article.cdf-critica-armasuisse-immobili.excerpt': 'Le CDF critique la gestion d’Armasuisse Immobili Plus de 34 % des coûts d’assainissement à fin 2025 Arriérés à 40 % d’ici 2030 selon des projections internes',
+    'blog.article.cdf-critica-armasuisse-immobili.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaChFr;

@@ -743,6 +743,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-vallo-protezione-sorte-lostallo': {
+    title: 'Lostallo, al via il vallo di protezione a Sorte',
+    description: 'Nei prossimi giorni parte il vallo di protezione Credito comunale: 6,2 milioni di franchi Lavori principali previsti nell\'autunno 2027 L\'alluvione',
+    keywords: 'frontalieri, ticino, svizzera, italia, lostallo, vallo, protezione, sorte',
+    ogTitle: 'Lostallo: al via il vallo di protezione a Sorte',
+    ogDescription: 'Nei prossimi giorni parte il vallo di protezione Credito comunale: 6,2 milioni di franchi Lavori principali previsti nell\'autunno 2027 L\'alluvione del 21 giugno',
+    canonicalPath: '/articoli-grigioni/vallo-protezione-sorte-lostallo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lostallo, al via il vallo di protezione a Sorte",
+      "description": "Nei prossimi giorni parte il vallo di protezione Credito comunale: 6,2 milioni di franchi Lavori principali previsti nell'autunno 2027 L'alluvione",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-vallo-protezione-sorte-lostallo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-03T08:59:26+00:00",
+      "dateModified": "2026-11-03T08:59:26+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-grigioni/vallo-protezione-sorte-lostallo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

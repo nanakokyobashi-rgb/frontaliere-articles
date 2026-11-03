@@ -25,6 +25,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'seconda-fattura-goldkueste': { it: 'seconda-fattura-goldkueste', en: 'gold-coast-second-tax-bill', de: 'goldkueste-zweite-steuerrechnung', fr: 'goldcoast-deuxieme-facture-fiscale' },
  'spital-wetzikon-decisione-mercoled': { it: 'spital-wetzikon-decisione-mercoled', en: 'spital-wetzikon-decision-wednesday', de: 'spital-wetzikon-entscheidung-mittwoch', fr: 'spital-wetzikon-decision-mercredi' },
  'forchstrasse-sicurezza-zollikon': { it: 'forchstrasse-sicurezza-zollikon', en: 'forchstrasse-safety-zollikon', de: 'forchstrasse-sicherheit-zollikon', fr: 'forchstrasse-securite-zollikon' },
+ 'zurigo-strategia-energetica-2026': { it: 'zurigo-strategia-energetica-2026', en: 'zurich-energy-strategy-2026', de: 'zuerich-energiestrategie-2026', fr: 'zurich-strategie-energetique-2026' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

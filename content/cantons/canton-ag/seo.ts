@@ -1011,6 +1011,84 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-siccita-fislisbach-forniture': {
+    title: 'Fislisbach: Baden deve ancora fornire acqua potabile',
+    description: 'A metà ottobre 2026 il prelievo settimanale è sceso a 7\'136 m3, ma le forniture di Regionalwerke Baden AG restano necessarie.',
+    keywords: 'frontalieri, ticino, svizzera, italia, fislisbach, baden, deve, ancora',
+    ogTitle: 'Siccità a Fislisbach: Baden continua le forniture',
+    ogDescription: 'La rete di Fislisbach non può ancora contare soltanto sul pumpwerk Moos, sull\'arricchimento dal pumpwerk Rosenmatte e sulle fonti Möösli. Dopo le piogge recenti, la popolazione è invitata a usare comunque l\'acqua potabile con parsimonia.',
+    canonicalPath: '/articoli-argovia/siccita-fislisbach-forniture/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Fislisbach: Baden deve ancora fornire acqua potabile",
+      "description": "A metà ottobre 2026 il prelievo settimanale è sceso a 7'136 m3, ma le forniture di Regionalwerke Baden AG restano necessarie.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-siccita-fislisbach-forniture.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-03T10:33:15+00:00",
+      "dateModified": "2026-11-03T10:33:15+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-argovia/siccita-fislisbach-forniture/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-aarau-rinnovo-tigli-zollrain': {
+    title: 'Aarau sostituirà i tigli rimasti al Zollrain | Frontaliere Ticino',
+    description: 'Aarau sostituirà i tigli rimasti al Zollrain e rinnoverà l’area verde. Prime opere preparatorie nella settimana del 16 novembre 2026.',
+    keywords: 'frontalieri, ticino, svizzera, italia, aarau, sostituirà, tigli, rimasti',
+    ogTitle: 'Zollrain ad Aarau: rinnovo dei tigli nel 2026',
+    ogDescription: 'I vecchi tigli dello Zollrain presentano rischi per il traffico e i pedoni. La città di Aarau prevede il risanamento complessivo dell’area, con una fossa arborea continua, sistemi di ventilazione e irrigazione e una piantumazione sottostante.',
+    canonicalPath: '/articoli-argovia/aarau-rinnovo-tigli-zollrain/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Aarau sostituirà i tigli rimasti al Zollrain",
+      "description": "Aarau sostituirà i tigli rimasti al Zollrain e rinnoverà l’area verde. Prime opere preparatorie nella settimana del 16 novembre 2026.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-aarau-rinnovo-tigli-zollrain.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-03T19:57:16+00:00",
+      "dateModified": "2026-11-03T19:57:16+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-argovia/aarau-rinnovo-tigli-zollrain/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

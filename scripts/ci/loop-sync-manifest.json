@@ -1608,7 +1608,7 @@
     {
       "path": "scripts/ci/ensure-host-shell-assets.mjs",
       "mode": "corpus-only",
-      "reason": "Passo dei workflow di pubblicazione (fast-publish-article.yml, fast-publish-section.yml): prima di rendere e pubblicare, garantisce sulla CDN i file della shell di cui host/ porta il contenuto, i produttori GA4, recupero first-party, Ads e Partnerize con il nome derivato dal contenuto (`gtag-init-<hash>.js`). L'omologo del sito e' scripts/ci/ensure-cdn-shell-assets.mjs, che legge la lista da build-plugins/staticScriptsPlugin.ts: quel plugin qui non esiste, quindi lo script d'ingresso e' proprio di questo repo e la logica condivisa sta nel gemello identical scripts/lib/cdn-shell-assets.mjs.",
+      "reason": "Passo dei workflow di pubblicazione che garantisce sulla CDN i file della shell i cui byte sono trasportati in host/, inclusi GA4, recovery, Ads, Partnerize e Meta Pixel. Il loader Pixel contatta Meta solo dopo consenso esplicito; lo script host-only usa la libreria identical scripts/lib/cdn-shell-assets.mjs.",
       "baseline": {
         "site": null,
         "corpus": "376823114717a68d",
@@ -2154,7 +2154,7 @@
     {
       "path": "host/staticAdSlotHtml.ts",
       "mode": "corpus-only",
-      "reason": "Provider host-side dei due slot pubblicitari delle pagine hub cantonali: il sito espone il callback nel contratto dell'engine e qui lo concretizza con client, slot, formato, altezza riservata e placement del corpus. Non e' un gemello da mirrorare: il sito possiede solo il bootstrap che collega il provider, mentre il markup resta dipendente dalla configurazione host del corpus.",
+      "reason": "Provider host-side degli slot pubblicitari statici degli hub cantonali e degli articoli: il sito espone il callback nel contratto dell'engine e qui lo concretizza con client, slot, formato, altezza riservata e placement del corpus. Non e' un gemello da mirrorare: il sito possiede solo il bootstrap che collega il provider, mentre il markup resta dipendente dalla configurazione host del corpus. Il provider conserva ora un frame first-party esterno al nodo Google per il fallback grafico per-slot; attributi, richieste e riserve Google restano invariati.",
       "baseline": {
         "site": null,
         "corpus": "9cc7f520f28c72bb",
@@ -2703,9 +2703,9 @@
       "path": "scripts/lib/shard-git-helpers.sh",
       "mode": "identical",
       "baseline": {
-        "site": "c24cdde08b656383",
-        "corpus": "c24cdde08b656383",
-        "alignedAt": "2026-10-08"
+        "site": "e2cbdcdee8c16e5d",
+        "corpus": "e2cbdcdee8c16e5d",
+        "alignedAt": "2026-11-03"
       }
     },
     {
@@ -2784,9 +2784,9 @@
       "mode": "identical",
       "reason": "Garanzia che gli script statici della shell siano serviti dalla CDN prima che un emettitore pubblichi l'HTML che li referenzia (sito issue 12270, sito PR #12275, #12299 e #12305): chiede alla CDN, legge R2 solo per un file non servito, carica cio' che R2 non ha e non sostituisce mai un oggetto; poi chiede l'URL delle pagine nelle due varianti di cache per ogni file, anche per quelli che la sonda mostra (la HEAD della sonda legge R2 e non vede un 404 tenuto dall'edge): un file che la sonda non ha mostrato, o che a quell'URL non risponde, viene invalidato all'edge e riconfermato, e se non puo' stabilirlo si ferma. Usa solo i moduli di Node e due comandi, proprio per poter restare byte-identico: scripts/lib/upload-cdn-file.sh (anch'esso identical) e scripts/cf-purge-cache.mjs, che qui e' la copia di questo repo con la stessa modalita' `--files=` e la stessa riga di successo (lo verifica host/tests/host-shell-assets.test.mjs). Il sito lo chiama da scripts/ci/ensure-cdn-shell-assets.mjs con tutti i file di staticScriptsPlugin; qui lo chiama scripts/ci/ensure-host-shell-assets.mjs con i file di cui host/ porta il contenuto.",
       "baseline": {
-        "site": "7ab4d979569a23e6",
-        "corpus": "7ab4d979569a23e6",
-        "alignedAt": "2026-10-26"
+        "site": "680753badffef6c4",
+        "corpus": "680753badffef6c4",
+        "alignedAt": "2026-11-03"
       }
     },
     {
@@ -2838,9 +2838,9 @@
       "mode": "identical",
       "reason": "Gemello identico del rilevatore delle meta-risposte dei modelli usato in `tryTier`.",
       "baseline": {
-        "site": "0162e079d566499d",
-        "corpus": "0162e079d566499d",
-        "alignedAt": "2026-10-05"
+        "site": "6195d071585e2f71",
+        "corpus": "6195d071585e2f71",
+        "alignedAt": "2026-11-03"
       }
     },
     {
@@ -3778,9 +3778,9 @@
       "sitePath": "scripts/lib/local-opus-mt.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "615ec4aee4ff9a9d",
-        "corpus": "615ec4aee4ff9a9d",
-        "alignedAt": "2026-09-20"
+        "site": "675ab47baf51919a",
+        "corpus": "675ab47baf51919a",
+        "alignedAt": "2026-11-03"
       }
     },
     {
@@ -4161,7 +4161,7 @@
       "path": "host/constants.ts",
       "sitePath": "build-plugins/constants.ts",
       "mode": "adapted",
-      "reason": "Costanti del sito lette dall'engine via SiteShellContract, estratte per chiusura: adapted per costruzione, non byte-identiche al sorgente completo. scalarFingerprint confronta i 22 scalari authoritative, mentre i test runtime verificano i comportamenti del contratto. Il digest c6b310ae… include il recupero indipendente, lo stato CMP e i loader con retry limitati; preserva i payload gzip del replay e trasporta anche i riferimenti recovery/Ads/Partnerize content-addressed e la cattura strutturale conservativa inline prima di React e producer differiti con ripristino solo a contesto/DOM puliti; estende il riconoscimento ai crawler Google-InspectionTool e GoogleOther, rimuove anche userinfo e credenziali dalle rappresentazioni URL della telemetria e incorpora il gate GA4 del sito, il budget SERP a 150 caratteri, la canonicalizzazione Organization.sameAs, l'aggiunta del profilo Facebook canonico, il riferimento content-addressed a gtag-init e le due regole contestuali trasportate per Chiasso e concorsi pubblici; la specializzazione editoriale resta in additionalType e il runtime Firebase conserva il match sulla chiave esatta, senza segreti nei fingerprint. Aggiornato 2026-11-03: il supporto display trasporta creatività first-party per-slot, senza popup promozionale, e assegnazione Firebase Remote Config fail-safe; loader Google e Auto Ads restano invariati.",
+      "reason": "Costanti del sito lette dall'engine via SiteShellContract, estratte per chiusura. scalarFingerprint confronta i 23 scalari authoritative; il digest adb1a692… include lo snippet Meta Pixel content-addressed, il cui loader contatta Meta solo dopo consenso pubblicitario esplicito e si blocca sui documenti sensibili, senza fallback noscript. AD_RECOVERY_FILENAME resta allineato al sorgente; sono preservati gli altri comportamenti di recovery, CMP, analytics e SEO gia' trasportati.",
       "baseline": {
         "site": "c9f803f4645a9ab0",
         "corpus": "598612b34529c6c5",
@@ -4170,8 +4170,8 @@
       "scalarFingerprint": {
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
         "corpusPath": "host/shell-contract-fingerprint.json",
-        "scalarFields": 22,
-        "sha256": "ded03d05d6ebbf7e7267d143d8e98dc88362b97cb7e3ab0a257f043a40cd16d1"
+        "scalarFields": 23,
+        "sha256": "adb1a6923bea1285c19969b8acb6678d728b68147b20439b51bc3c83b1e39354"
       }
     },
     {
@@ -4377,16 +4377,16 @@
       "sitePath": "build-plugins/sharedWriteRegistry.ts",
       "mode": "identical",
       "baseline": {
-        "site": "e4705ac1b47ba149",
-        "corpus": "e4705ac1b47ba149",
-        "alignedAt": "2026-10-25"
+        "site": "b2c578bda693f1f5",
+        "corpus": "b2c578bda693f1f5",
+        "alignedAt": "2026-11-03"
       }
     },
     {
       "path": "host/shell-contract-fingerprint.json",
       "sitePath": "tests/articles-shell-contract-fingerprint.json",
       "mode": "identical",
-      "reason": "Impronta SHA-256 dei 22 campi scalari di SiteShellContract, prodotta e verificata da `host/tests/shell-contract-fingerprint.test.mjs`. Il gemello del sito vive in `tests/articles-shell-contract-fingerprint.json` con lo stesso contenuto; i due artefatti restano `identical` e la baseline ne sorveglia il drift. E' il gate runtime che impedisce di spedire l'engine senza la sua meta' `host/`.",
+      "reason": "Impronta SHA-256 dei 23 campi scalari di SiteShellContract, prodotta e verificata da host/tests/shell-contract-fingerprint.test.mjs. Il gemello del sito e' tests/articles-shell-contract-fingerprint.json con gli stessi valori, incluso lo snippet Meta Pixel content-addressed e consent-gated; i due artefatti restano identical e il gate runtime impedisce di spedire l'engine senza la sua meta' host/.",
       "baseline": {
         "site": "18e683c9406ca2e8",
         "corpus": "18e683c9406ca2e8",
@@ -4436,7 +4436,7 @@
     {
       "path": "host/tests/host-shell-assets.test.mjs",
       "mode": "corpus-only",
-      "reason": "Test node:test (sotto tsx, come gli altri di host/tests/) della garanzia sugli asset della shell: ogni riferimento con nome derivato dal contenuto nel contratto deve essere un file di cui host/ porta i byte, lo script d'ingresso passa quei file alla libreria, e ogni job che rende pagine con la shell esegue il passo prima del primo emettitore. Il sito copre la libreria con tests/cdn-shell-assets.test.ts (Vitest); questo harness legge host/ e i workflow di questo repo.",
+      "reason": "Test node:test della garanzia sugli asset trasportati: ogni riferimento content-addressed del contratto, incluso il loader Meta Pixel gated dal consenso, deve avere i byte in host/; il publisher verifica hash e set esatto prima della pubblicazione.",
       "baseline": {
         "site": null,
         "corpus": "434d61541d4037c6",
@@ -6838,18 +6838,18 @@
       "path": "host/third-party-shell-assets-fingerprint.json",
       "sitePath": "tests/third-party-shell-assets-fingerprint.json",
       "mode": "identical",
-      "reason": "Derived recovery/Ads/Partnerize producer and canonical-helper SHA fingerprints bind the transported byte snapshots to the source. Source tests regenerate the projection, host tests verify snapshot hashes and the complete SiteShellContract before publishing.",
+      "reason": "Fingerprint di recovery, Ads, Partnerize e Meta Pixel che lega gli snapshot byte-exact alle sorgenti. La proiezione esclude i contenuti ma verifica nomi e SHA-256; i test host confrontano i byte trasportati e il contratto prima della pubblicazione.",
       "baseline": {
-        "site": "2a96d3934487a51d",
-        "corpus": "2a96d3934487a51d",
-        "alignedAt": "2026-10-31"
+        "site": "85e0a9bf6b629f74",
+        "corpus": "85e0a9bf6b629f74",
+        "alignedAt": "2026-11-03"
       }
     },
     {
       "path": "host/third-party-shell-assets.json",
       "sitePath": "scripts/ci/export-third-party-shell-assets.ts",
       "mode": "adapted",
-      "reason": "Byte-exact public assets and canonical inline guard snapshot derived from the source exporter; hostShellFiles consumes these bytes without a cross-repository import. The shared identical producer fingerprint and both SiteShellContract scalar fingerprints invalidate changes in constants, canonical helpers or raw static controllers before publication. Regenerate through the source exporter, update both fingerprint projections, then verify all names and SHA-256 values.",
+      "reason": "Snapshot byte-exact delle risorse pubbliche e del guard inline derivate dall'exporter del sito, inclusi i byte del loader Meta Pixel consent-gated; hostShellFiles pubblica questi byte senza import fra repository.",
       "baseline": {
         "site": "b18653746619d369",
         "corpus": "30ee6bcb409a26f3",

@@ -6,10 +6,10 @@
 
 # The first purge ran before this step. Check the canonical apex URL against
 # the bytes recorded after the push; a 200 with old HTML is not proof that the
-# edge is fresh. A cache mismatch is classified as lag only when the canonical
-# response was a cache HIT and a second cache-busted request to the same URL
-# serves the expected hash. A route/fallback response, operational failure, or
-# edge-blocked probe remains fail-closed.
+# edge is fresh. A cache mismatch is classified as lag only when a second
+# cache-busted request to the same URL serves the expected hash, regardless of
+# whether the canonical response says HIT or MISS. A route/fallback response,
+# operational failure, or edge-blocked probe remains fail-closed.
 # Edge-blocked probes also skip the post-verification backstop purge below
 # because the transport result is not evidence of stale cache.
 apex_verify_log="$RUNNER_TEMP/fast-publish-apex-verification.log"

@@ -81,6 +81,12 @@ const blogMetaCantonAgEn: Record<string, string> = {
     'blog.article.blackout-brugg-guasto-alta-tensione.title': 'Blackout in Brugg: high-voltage fault',
     'blog.article.blackout-brugg-guasto-alta-tensione.excerpt': 'The Canton of Aargau issued a warning on Alertswiss about a blackout in the Brugg region.',
     'blog.article.blackout-brugg-guasto-alta-tensione.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.siccita-fislisbach-forniture.title': 'Fislisbach: Baden still has to provide drinking water',
+    'blog.article.siccita-fislisbach-forniture.excerpt': 'In mid-October 2026 the weekly withdrawal fell to 7\'136 m3, but supplies from Regionalwerke Baden AG remain necessary.',
+    'blog.article.siccita-fislisbach-forniture.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.aarau-rinnovo-tigli-zollrain.title': 'Aarau will replace the remaining lime trees at Zollrain',
+    'blog.article.aarau-rinnovo-tigli-zollrain.excerpt': 'Aarau will replace the remaining linden trees at Zollrain and renovate the green space.',
+    'blog.article.aarau-rinnovo-tigli-zollrain.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonAgEn;

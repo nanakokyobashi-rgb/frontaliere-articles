@@ -19,6 +19,8 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'basilea-stop-sconto-elettriche': { it: 'basilea-stop-sconto-elettriche', en: 'basel-electric-car-discount', de: 'basel-elektroauto-steuerrabatt', fr: 'bale-rabais-voitures-electriques' },
  'bvb-rasatura-tram-episodio': { it: 'bvb-rasatura-tram-episodio', en: 'bvb-tram-shaving-incident', de: 'bvb-tram-rasurungsfall', fr: 'bvb-incident-rasage-tram' },
  'salario-minimo-basilea-aumento': { it: 'salario-minimo-basilea-aumento', en: 'basel-minimum-wage-increase', de: 'basel-mindestlohn-erhoehung', fr: 'augmentation-salaire-minimum-basle' },
+ 'baselland-maiali-enzootica': { it: 'baselland-maiali-enzootica', en: 'basel-landschaft-750-pigs-pneumonia', de: 'baselland-750-schweine-pneumonie', fr: 'bale-campagne-750-porcs-pneumonie' },
+ 'sussidi-premi-basel-2027': { it: 'sussidi-premi-basel-2027', en: 'basel-2027-health-premium-subsidies', de: 'basel-2027-praemienverbilligung', fr: 'bale-2027-reduction-primes-maladie' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

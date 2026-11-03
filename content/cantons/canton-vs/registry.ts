@@ -150,4 +150,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'val-de-bagnes-sostenibilita-2024',
+ category: 'novita',
+ date: '2026-11-03T09:11:19.910Z',
+ image: '/images/blog/article-val-de-bagnes-sostenibilita-2024.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['VS'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

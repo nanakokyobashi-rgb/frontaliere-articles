@@ -899,6 +899,162 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-decima-fiera-apprendistati-innerrhoden': {
+    title: 'Decima fiera posti apprendistato Appenzell 7 novembre 2026',
+    description: 'La decima fiera dei posti di apprendistato di Appenzell riunisce 62 aziende dell\'Innerrhoden il 7 novembre 2026. Ingresso gratuito dalle 9.00',
+    keywords: 'frontalieri, ticino, svizzera, italia, decima, fiera, posti, apprendistato',
+    ogTitle: 'Fiera apprendistato Appenzell 7 novembre 2026',
+    ogDescription: 'Sabato 7 novembre 2026, l\'Aula Gringel ospiterà la decima Lehrstellen-Tischmesse Appenzell con 62 aziende dell\'Innerrhoden. Un\'opportunità gratuita per studenti e genitori.',
+    canonicalPath: '/articoli-appenzello/decima-fiera-apprendistati-innerrhoden/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Decima fiera posti apprendistato Appenzell 7 novembre 2026",
+      "description": "La decima fiera dei posti di apprendistato di Appenzell riunisce 62 aziende dell'Innerrhoden il 7 novembre 2026. Ingresso gratuito dalle 9.00",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-decima-fiera-apprendistati-innerrhoden.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-03T07:41:05+00:00",
+      "dateModified": "2026-11-03T07:41:05+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-appenzello/decima-fiera-apprendistati-innerrhoden/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-caldo-appenzello-esterno-2026': {
+    title: 'Appenzello Esterno: più giorni caldi nel 2026 | Frontaliere Ticino',
+    description: 'Estate 2026: più giorni caldi nei siti esaminati Nel 2026 sono state rilevate più notti tropicali Altitudine e raffrescamento notturno riducono',
+    keywords: 'frontalieri, ticino, svizzera, italia, appenzello, esterno, giorni, caldi',
+    ogTitle: 'Appenzello Esterno: più giorni caldi nel 2026',
+    ogDescription: 'Estate 2026: più giorni caldi nei siti esaminati Nel 2026 sono state rilevate più notti tropicali Altitudine e raffrescamento notturno riducono il caldo',
+    canonicalPath: '/articoli-appenzello/caldo-appenzello-esterno-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Appenzello Esterno: più giorni caldi nel 2026",
+      "description": "Estate 2026: più giorni caldi nei siti esaminati Nel 2026 sono state rilevate più notti tropicali Altitudine e raffrescamento notturno riducono",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-caldo-appenzello-esterno-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-03T08:54:47+00:00",
+      "dateModified": "2026-11-03T08:54:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-appenzello/caldo-appenzello-esterno-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-tariffe-mediche-appenzello-2026': {
+    title: 'Appenzello: approvate le tariffe mediche per il 2026',
+    description: 'Approvati tre contratti tariffari in Appenzello per cure ambulatoriali. Valore punto a 0,86 CHF con effetto retroattivo dal 1° gennaio 2026.',
+    keywords: 'frontalieri, ticino, svizzera, italia, appenzello, approvate, tariffe, mediche',
+    ogTitle: 'Appenzello: nuove tariffe mediche ambulatoriali per il 2026',
+    ogDescription: 'La Standeskommission approva i contratti con CSS, Santéservices e HSK: valore del punto a 0,86 CHF retroattivo dal 1° gennaio 2026 per le cure ambulatoriali.',
+    canonicalPath: '/articoli-appenzello/tariffe-mediche-appenzello-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Appenzello: approvate le tariffe mediche per il 2026",
+      "description": "Approvati tre contratti tariffari in Appenzello per cure ambulatoriali. Valore punto a 0,86 CHF con effetto retroattivo dal 1° gennaio 2026.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-tariffe-mediche-appenzello-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-03T10:02:49+00:00",
+      "dateModified": "2026-11-03T10:02:49+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-appenzello/tariffe-mediche-appenzello-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-ulmann-incarico-appenzello': {
+    title: 'Appenzello, manuel ulmann assunto al bezirksbauamt',
+    description: 'Il Consiglio distrettuale di Appenzell ha assunto Manuel Ulmann al 100 per cento nel Bezirksbauamt: l\'attività inizierà all\'inizio di febbraio.',
+    keywords: 'frontalieri, ticino, svizzera, italia, appenzello, manuel, ulmann, assunto',
+    ogTitle: 'Manuel Ulmann assunto nel Bezirksbauamt di Appenzello',
+    ogDescription: 'La comunicazione del distretto di Appenzell annuncia l\'assunzione di Manuel Ulmann con un grado d\'impiego del 100 per cento nel Bezirksbauamt. L\'attività inizierà all\'inizio di febbraio, in vista del pensionamento imminente.',
+    canonicalPath: '/articoli-appenzello/ulmann-incarico-appenzello/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Appenzello, manuel ulmann assunto al bezirksbauamt",
+      "description": "Il Consiglio distrettuale di Appenzell ha assunto Manuel Ulmann al 100 per cento nel Bezirksbauamt: l'attività inizierà all'inizio di febbraio.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-ulmann-incarico-appenzello.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-03T15:45:25+00:00",
+      "dateModified": "2026-11-03T15:45:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-appenzello/ulmann-incarico-appenzello/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

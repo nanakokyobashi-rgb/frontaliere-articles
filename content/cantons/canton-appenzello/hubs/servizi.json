@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "servizi",
-  "updatedAt": "2026-11-03T02:14:08.370Z",
-  "contentHash": "68c2111c075182652f67552216982fa3a0ea033208c56d667dfa83c366bc43fb",
+  "updatedAt": "2026-11-03T14:36:40.036Z",
+  "contentHash": "8f86c5ec3c2830973c43c49ccbc61f3bc631a81d6d7f9ee431a655f01e9c432e",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,12 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-02T15:47:08.669Z",
+      "updatedAt": "2026-11-03T00:59:08.019Z",
       "keyFacts": 1
     },
     {
-      "id": "meteo",
-      "updatedAt": "2026-11-02T18:38:16.906Z",
-      "keyFacts": 0
-    },
-    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-02T13:52:53.767Z",
+      "updatedAt": "2026-11-03T00:04:45.487Z",
       "keyFacts": 0
     }
   ],
@@ -44,7 +39,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "5",
-          "note": "offerta mediana 750 CHF"
+          "note": "offerta mediana 800 CHF"
         }
       ],
       "dataBlocks": [
@@ -75,7 +70,7 @@
           "items": [
             {
               "label": "AR399",
-              "value": "3500 CHF",
+              "value": "4500 CHF",
               "detail": "offerta attuale",
               "date": "2026-11-15T17:00:00.000Z",
               "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1796"
@@ -89,7 +84,7 @@
             },
             {
               "label": "AR4881",
-              "value": "750 CHF",
+              "value": "800 CHF",
               "detail": "offerta attuale",
               "date": "2026-11-15T17:00:00.000Z",
               "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1798"
@@ -97,26 +92,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder#liste-freie-kontrollschilder",
-          "updatedAt": "2026-11-02T15:47:08.669Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Appenzell",
-              "value": "4 °C",
-              "detail": "oggi da 0 a 4 °C"
-            },
-            {
-              "label": "Herisau",
-              "value": "3 °C",
-              "detail": "oggi da 1 a 4 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-02T18:38:16.906Z"
+          "updatedAt": "2026-11-03T00:59:08.019Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -149,7 +125,7 @@
               "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/bruno-streule-wird-neuer-leiter-des-amts-fuer-gesundheit/"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -237,7 +213,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-03T02:14:08.370Z"
+      "updatedAt": "2026-11-03T14:36:40.036Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -254,7 +230,7 @@
         {
           "label": "Plate auctions running",
           "value": "5",
-          "note": "typical bid 750 CHF"
+          "note": "typical bid 800 CHF"
         }
       ],
       "dataBlocks": [
@@ -285,7 +261,7 @@
           "items": [
             {
               "label": "AR399",
-              "value": "3,500 CHF",
+              "value": "4,500 CHF",
               "detail": "current bid",
               "date": "2026-11-15T17:00:00.000Z",
               "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1796"
@@ -299,7 +275,7 @@
             },
             {
               "label": "AR4881",
-              "value": "750 CHF",
+              "value": "800 CHF",
               "detail": "current bid",
               "date": "2026-11-15T17:00:00.000Z",
               "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1798"
@@ -307,26 +283,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder#liste-freie-kontrollschilder",
-          "updatedAt": "2026-11-02T15:47:08.669Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Appenzell",
-              "value": "4 °C",
-              "detail": "today from 0 to 4 °C"
-            },
-            {
-              "label": "Herisau",
-              "value": "3 °C",
-              "detail": "today from 1 to 4 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-02T18:38:16.906Z"
+          "updatedAt": "2026-11-03T00:59:08.019Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -359,7 +316,7 @@
               "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/bruno-streule-wird-neuer-leiter-des-amts-fuer-gesundheit/"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -439,7 +396,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-03T02:14:08.370Z"
+      "updatedAt": "2026-11-03T14:36:40.036Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -456,7 +413,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "5",
-          "note": "mittleres Gebot 750 CHF"
+          "note": "mittleres Gebot 800 CHF"
         }
       ],
       "dataBlocks": [
@@ -487,7 +444,7 @@
           "items": [
             {
               "label": "AR399",
-              "value": "3’500 CHF",
+              "value": "4’500 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-11-15T17:00:00.000Z",
               "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1796"
@@ -501,7 +458,7 @@
             },
             {
               "label": "AR4881",
-              "value": "750 CHF",
+              "value": "800 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-11-15T17:00:00.000Z",
               "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1798"
@@ -509,26 +466,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder#liste-freie-kontrollschilder",
-          "updatedAt": "2026-11-02T15:47:08.669Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Appenzell",
-              "value": "4 °C",
-              "detail": "heute 0 bis 4 °C"
-            },
-            {
-              "label": "Herisau",
-              "value": "3 °C",
-              "detail": "heute 1 bis 4 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-02T18:38:16.906Z"
+          "updatedAt": "2026-11-03T00:59:08.019Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -561,7 +499,7 @@
               "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/bruno-streule-wird-neuer-leiter-des-amts-fuer-gesundheit/"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -641,7 +579,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-03T02:14:08.370Z"
+      "updatedAt": "2026-11-03T14:36:40.036Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -658,7 +596,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "5",
-          "note": "offre centrale 750 CHF"
+          "note": "offre centrale 800 CHF"
         }
       ],
       "dataBlocks": [
@@ -689,7 +627,7 @@
           "items": [
             {
               "label": "AR399",
-              "value": "3 500 CHF",
+              "value": "4 500 CHF",
               "detail": "offre actuelle",
               "date": "2026-11-15T17:00:00.000Z",
               "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1796"
@@ -703,7 +641,7 @@
             },
             {
               "label": "AR4881",
-              "value": "750 CHF",
+              "value": "800 CHF",
               "detail": "offre actuelle",
               "date": "2026-11-15T17:00:00.000Z",
               "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1798"
@@ -711,26 +649,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder#liste-freie-kontrollschilder",
-          "updatedAt": "2026-11-02T15:47:08.669Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Appenzell",
-              "value": "4 °C",
-              "detail": "aujourd’hui de 0 à 4 °C"
-            },
-            {
-              "label": "Herisau",
-              "value": "3 °C",
-              "detail": "aujourd’hui de 1 à 4 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-02T18:38:16.906Z"
+          "updatedAt": "2026-11-03T00:59:08.019Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -763,7 +682,7 @@
               "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/bruno-streule-wird-neuer-leiter-des-amts-fuer-gesundheit/"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -835,7 +754,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-03T02:14:08.370Z"
+      "updatedAt": "2026-11-03T14:36:40.036Z"
     }
   }
 }

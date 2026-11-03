@@ -4,17 +4,17 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "mobilita",
-  "updatedAt": "2026-11-03T02:14:08.370Z",
-  "contentHash": "cbe0404aec76e1f46e74a1674e4cfede22881e198b5ed491f4e9cd325ffdf6d4",
+  "updatedAt": "2026-11-03T10:06:57.473Z",
+  "contentHash": "540b5ae54e804a43540b8df289b1004e3977b4909336d481fc6eaf8d5042890f",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-02T19:51:36.134Z",
+      "updatedAt": "2026-11-03T03:07:39.455Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-02T13:52:53.767Z",
+      "updatedAt": "2026-11-03T00:04:45.487Z",
       "keyFacts": 0
     }
   ],
@@ -27,13 +27,13 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "4",
-          "note": "segnalazioni aggiornate: 2 novembre 2026"
+          "value": "3",
+          "note": "segnalazioni aggiornate: 3 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "26",
-          "note": "segnalazioni aggiornate: 2 novembre 2026"
+          "value": "25",
+          "note": "segnalazioni aggiornate: 3 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -53,11 +53,6 @@
               "value": "Chiusura",
               "detail": "fine prevista: 6 novembre 2026",
               "date": "2026-10-28T06:55:00.000Z"
-            },
-            {
-              "label": "Revocato: A2 S. Gottardo -> Luzern tra Svincolo autostradale Luzern-Horw E Galleria Galleria Sonnenberg Situazione: colonna Causa: incidente Limitazione del traffico: corsia di sinistra chiusa",
-              "value": "Chiusura",
-              "date": "2026-11-02T17:23:00.000Z"
             },
             {
               "label": "H10 Berna <-> Lucerna Luogo Schüpfheim Situazione: divieto di transito Causa: evento importante",
@@ -88,10 +83,16 @@
               "value": "Cantiere",
               "detail": "fine prevista: 11 dicembre 2026",
               "date": "2025-12-04T19:00:00.000Z"
+            },
+            {
+              "label": "A2 Lucerna -> Basilea Parcheggio Eggberg Situazione: parcheggio chiuso cantiere, lunghezza [km] 0.4",
+              "value": "Cantiere",
+              "detail": "fine prevista: 12 novembre 2026",
+              "date": "2026-02-02T07:02:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-02T19:51:36.134Z"
+          "updatedAt": "2026-11-03T03:07:39.455Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -114,7 +115,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -172,7 +173,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-03T02:14:08.370Z"
+      "updatedAt": "2026-11-03T10:06:57.473Z"
     },
     "en": {
       "canton": "LU",
@@ -182,13 +183,13 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "4",
-          "note": "reports as of 2 November 2026"
+          "value": "3",
+          "note": "reports as of 3 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "26",
-          "note": "reports as of 2 November 2026"
+          "value": "25",
+          "note": "reports as of 3 November 2026"
         }
       ],
       "dataBlocks": [
@@ -208,11 +209,6 @@
               "value": "Closure",
               "detail": "until 6 November 2026",
               "date": "2026-10-28T06:55:00.000Z"
-            },
-            {
-              "label": "Revocato: A2 S. Gottardo -> Luzern tra Svincolo autostradale Luzern-Horw E Galleria Galleria Sonnenberg Situazione: colonna Causa: incidente Limitazione del traffico: corsia di sinistra chiusa",
-              "value": "Closure",
-              "date": "2026-11-02T17:23:00.000Z"
             },
             {
               "label": "H10 Berna <-> Lucerna Luogo Schüpfheim Situazione: divieto di transito Causa: evento importante",
@@ -243,10 +239,16 @@
               "value": "Roadworks",
               "detail": "until 11 December 2026",
               "date": "2025-12-04T19:00:00.000Z"
+            },
+            {
+              "label": "A2 Lucerna -> Basilea Parcheggio Eggberg Situazione: parcheggio chiuso cantiere, lunghezza [km] 0.4",
+              "value": "Roadworks",
+              "detail": "until 12 November 2026",
+              "date": "2026-02-02T07:02:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-02T19:51:36.134Z"
+          "updatedAt": "2026-11-03T03:07:39.455Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -269,7 +271,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -325,7 +327,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-03T02:14:08.370Z"
+      "updatedAt": "2026-11-03T10:06:57.473Z"
     },
     "de": {
       "canton": "LU",
@@ -335,13 +337,13 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "4",
-          "note": "Meldungen vom 2. November 2026"
+          "value": "3",
+          "note": "Meldungen vom 3. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "26",
-          "note": "Meldungen vom 2. November 2026"
+          "value": "25",
+          "note": "Meldungen vom 3. November 2026"
         }
       ],
       "dataBlocks": [
@@ -361,11 +363,6 @@
               "value": "Sperrung",
               "detail": "bis 6. November 2026",
               "date": "2026-10-28T06:55:00.000Z"
-            },
-            {
-              "label": "Aufgehoben: A2 Gotthard -> Luzern zwischen Anschluss Luzern-Horw und Tunnel Sonnenberg-Tunnel Sachlage: Stau Ursache: Unfall Verkehrsführung: linker Fahrstreifen gesperrt",
-              "value": "Sperrung",
-              "date": "2026-11-02T17:23:00.000Z"
             },
             {
               "label": "H10 Bern <-> Luzern Ortschaft Schüpfheim Sachlage: gesperrt für Durchgangsverkehr Ursache: Veranstaltung",
@@ -396,10 +393,16 @@
               "value": "Baustelle",
               "detail": "bis 11. Dezember 2026",
               "date": "2025-12-04T19:00:00.000Z"
+            },
+            {
+              "label": "A2 Luzern -> Basel Parkplatz Eggberg Sachlage: Parkplatz geschlossen Baustelle, Länge [km] 0.4",
+              "value": "Baustelle",
+              "detail": "bis 12. November 2026",
+              "date": "2026-02-02T07:02:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-02T19:51:36.134Z"
+          "updatedAt": "2026-11-03T03:07:39.455Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -422,7 +425,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -478,7 +481,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-03T02:14:08.370Z"
+      "updatedAt": "2026-11-03T10:06:57.473Z"
     },
     "fr": {
       "canton": "LU",
@@ -488,13 +491,13 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "4",
-          "note": "signalements au 2 novembre 2026"
+          "value": "3",
+          "note": "signalements au 3 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "26",
-          "note": "signalements au 2 novembre 2026"
+          "value": "25",
+          "note": "signalements au 3 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -514,11 +517,6 @@
               "value": "Fermeture",
               "detail": "jusqu’au 6 novembre 2026",
               "date": "2026-10-28T06:55:00.000Z"
-            },
-            {
-              "label": "Révoqué: A2 St-Gothard -> Lucerne entre Jonction autoroutière Lucerne-Horw et Tunnel Tunnel du Sonnenberg Situation: bouchon Raison: accident Gestion du trafic: voie de gauche fermée",
-              "value": "Fermeture",
-              "date": "2026-11-02T17:23:00.000Z"
             },
             {
               "label": "H10 Berne <-> Lucerne Localité Schüpfheim Situation: circulation de transit interdite Raison: événement majeur",
@@ -549,10 +547,16 @@
               "value": "Chantier",
               "detail": "jusqu’au 11 décembre 2026",
               "date": "2025-12-04T19:00:00.000Z"
+            },
+            {
+              "label": "A2 Lucerne -> Bâle Parking Eggberg Situation: parking fermé travaux, longueur [km] 0.4",
+              "value": "Chantier",
+              "detail": "jusqu’au 12 novembre 2026",
+              "date": "2026-02-02T07:02:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-02T19:51:36.134Z"
+          "updatedAt": "2026-11-03T03:07:39.455Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -575,7 +579,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -633,7 +637,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-03T02:14:08.370Z"
+      "updatedAt": "2026-11-03T10:06:57.473Z"
     }
   }
 }

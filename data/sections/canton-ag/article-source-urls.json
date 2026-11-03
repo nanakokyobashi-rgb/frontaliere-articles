@@ -100,8 +100,8 @@
     "keyForm": 2
   },
   "https://www.nau.ch/ort/baden/fislisbach-ag-trinkwasser-bleibt-knapp-baden-muss-weiter-liefern-67194211": {
-    "articleId": "fislisbach-acqua-potabile",
-    "ts": "2026-10-28T11:31:41.273Z",
+    "articleId": "siccita-fislisbach-forniture",
+    "ts": "2026-11-03T10:33:15.442Z",
     "keyForm": 2
   },
   "https://www.baden.ch/de/home/wirtschaft/baden-40/wirtschafts-news-baden-40.html/3258/news/19675": {
@@ -117,6 +117,11 @@
   "https://www.watson.ch/schweiz/energie/188579666-fuer-mindestens-4-stunden-behoerden-warnen-wegen-stromausfall-in-brugg-ag": {
     "articleId": "blackout-brugg-guasto-alta-tensione",
     "ts": "2026-11-02T23:55:33.890Z",
+    "keyForm": 2
+  },
+  "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11934": {
+    "articleId": "aarau-rinnovo-tigli-zollrain",
+    "ts": "2026-11-03T19:57:16.048Z",
     "keyForm": 2
   }
 }

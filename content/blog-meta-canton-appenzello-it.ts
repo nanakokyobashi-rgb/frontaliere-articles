@@ -72,6 +72,18 @@ const blogMetaCantonAppenzelloIt: Record<string, string> = {
     'blog.article.45-residenti-richiesta-rumore.title': '45 residenti chiedono misure contro il rumore sulla Langgasse',
     'blog.article.45-residenti-richiesta-rumore.excerpt': '45 residenti hanno depositato al comune il mercoledì 28 ottobre una richiesta per l\'esame urgente di Tempo 30 e misure di moderazione del traffico.',
     'blog.article.45-residenti-richiesta-rumore.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.decima-fiera-apprendistati-innerrhoden.title': 'Decima fiera posti apprendistato Appenzell 7 novembre 2026',
+    'blog.article.decima-fiera-apprendistati-innerrhoden.excerpt': '62 aziende dell\'Innerrhoden presenteranno offerte di apprendistato sabato 7 novembre 2026 all\'Aula Gringel, ingresso gratuito dalle 9.00 alle 15.00.',
+    'blog.article.decima-fiera-apprendistati-innerrhoden.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.caldo-appenzello-esterno-2026.title': 'Appenzello Esterno: più giorni caldi nel 2026',
+    'blog.article.caldo-appenzello-esterno-2026.excerpt': 'Estate 2026: più giorni caldi nei siti esaminati Nel 2026 sono state rilevate più notti tropicali Altitudine e raffrescamento notturno riducono il caldo',
+    'blog.article.caldo-appenzello-esterno-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.tariffe-mediche-appenzello-2026.title': 'Appenzello: approvate le tariffe mediche per il 2026',
+    'blog.article.tariffe-mediche-appenzello-2026.excerpt': 'La Standeskommission fissa il valore del punto tariffario a 0,86 CHF per le prestazioni ambulatoriali con effetto retroattivo dal 1° gennaio 2026.',
+    'blog.article.tariffe-mediche-appenzello-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.ulmann-incarico-appenzello.title': 'Appenzello, manuel ulmann assunto al bezirksbauamt',
+    'blog.article.ulmann-incarico-appenzello.excerpt': 'Il Consiglio distrettuale di Appenzell ha assunto Manuel Ulmann al 100 per cento: inizierà al Bezirksbauamt all\'inizio di febbraio.',
+    'blog.article.ulmann-incarico-appenzello.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonAppenzelloIt;

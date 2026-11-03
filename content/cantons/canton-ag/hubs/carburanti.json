@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "carburanti",
-  "updatedAt": "2026-11-03T00:06:00.232Z",
-  "contentHash": "8020bc178f2c62c33b75680786db2bc86ec409fee3d2525a00677e88715a6b21",
+  "updatedAt": "2026-11-03T10:53:02.746Z",
+  "contentHash": "478e71bf5615d859da02483011ba03e9be1b8b737cfd9ea624fea8f2ea9257c5",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -60,6 +60,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Fislisbach: Baden deve ancora fornire acqua potabile",
+          "url": "/articoli-argovia/siccita-fislisbach-forniture/",
+          "excerpt": "A metà ottobre 2026 il prelievo settimanale è sceso a 7'136 m3, ma le forniture di Regionalwerke Baden AG restano necessarie.",
+          "date": "2026-11-03T10:33:15.362Z"
+        },
+        {
           "title": "Blackout a Brugg: guasto ad alta tensione",
           "url": "/articoli-argovia/blackout-brugg-guasto-alta-tensione/",
           "excerpt": "Il Canton Argovia ha avvertito su Alertswiss per un blackout nella regione di Brugg.",
@@ -82,12 +88,6 @@
           "url": "/articoli-argovia/fislisbach-acqua-potabile/",
           "excerpt": "A metà ottobre 2026 il prelievo settimanale era sceso a 7'136 m³, il 60,4% in meno rispetto ai 18'035 m³ di fine luglio.",
           "date": "2026-10-28T11:31:41.205Z"
-        },
-        {
-          "title": "Restrizioni traffico Rüeblimärt Aarau mercoledì 4 novembre 2026",
-          "url": "/articoli-argovia/ristrizioni-rueeblimart-aarau/",
-          "excerpt": "Il Rüeblimärt attira circa 35.000 visitatori; Graben, Schlossplatz e Laurenzentorgasse saranno chiusi al traffico.",
-          "date": "2026-10-26T23:06:58.843Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-03T10:53:02.746Z"
     },
     "en": {
       "canton": "AG",
@@ -147,6 +147,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Fislisbach: Baden still has to provide drinking water",
+          "url": "/en/aargau-articles/fislisbach-drought-water-supply/",
+          "excerpt": "In mid-October 2026 the weekly withdrawal fell to 7'136 m3, but supplies from Regionalwerke Baden AG remain necessary.",
+          "date": "2026-11-03T10:33:15.362Z"
+        },
+        {
           "title": "Blackout in Brugg: high-voltage fault",
           "url": "/en/aargau-articles/brugg-power-outage-high-voltage-fault/",
           "excerpt": "The Canton of Aargau issued a warning on Alertswiss about a blackout in the Brugg region.",
@@ -169,12 +175,6 @@
           "url": "/en/aargau-articles/fislisbach-drinking-water/",
           "excerpt": "By mid-October 2026, weekly withdrawal had fallen to 7'136 m³, 60,4% less than the 18'035 m³ at the end of July.",
           "date": "2026-10-28T11:31:41.205Z"
-        },
-        {
-          "title": "Traffic restrictions Rüeblimärt Aarau Wednesday, November 4, 2026",
-          "url": "/en/aargau-articles/aarau-rueeblimart-restrictions/",
-          "excerpt": "Rüeblimärt attracts approximately 35.000 visitors; Graben, Schlossplatz and Laurenzentorgasse will be closed to traffic.",
-          "date": "2026-10-26T23:06:58.843Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-03T10:53:02.746Z"
     },
     "de": {
       "canton": "AG",
@@ -234,6 +234,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Fislisbach: Baden muss weiterhin Trinkwasser liefern",
+          "url": "/de/aargau-artikel/fislisbach-trinkwasser-lieferungen/",
+          "excerpt": "Mitte Oktober 2026 sank die wöchentliche Wasserentnahme auf 7'136 m3, doch die Lieferungen von Regionalwerke Baden AG bleiben notwendig.",
+          "date": "2026-11-03T10:33:15.362Z"
+        },
+        {
           "title": "Stromausfall in Brugg: Störung im Hochspannungsnetz",
           "url": "/de/aargau-artikel/brugg-stromausfall-hochspannungsstoerung/",
           "excerpt": "Der Kanton Aargau hat auf Alertswiss vor einem Stromausfall in der Region Brugg gewarnt.",
@@ -256,12 +262,6 @@
           "url": "/de/aargau-artikel/fislisbach-trinkwasser/",
           "excerpt": "Mitte Oktober 2026 war die wöchentliche Entnahme auf 7'136 m³ gesunken, 60,4% weniger als die 18'035 m³ von Ende Juli.",
           "date": "2026-10-28T11:31:41.205Z"
-        },
-        {
-          "title": "Verkehrsbeschränkungen Rüeblimärt Aarau am Mittwoch, 4. November 2026",
-          "url": "/de/aargau-artikel/aarau-rueeblimart-einschrankungen/",
-          "excerpt": "Der Rüeblimärt zieht etwa 35.000 Besucher an; Graben, Schlossplatz und Laurenzentorgasse werden für den Verkehr gesperrt.",
-          "date": "2026-10-26T23:06:58.843Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-03T10:53:02.746Z"
     },
     "fr": {
       "canton": "AG",
@@ -321,6 +321,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Fislisbach : Baden doit encore fournir de l’eau potable",
+          "url": "/fr/articles-argovie/fislisbach-eau-potable-livraisons/",
+          "excerpt": "À la mi-octobre 2026, le prélèvement hebdomadaire est descendu à 7'136 m3, mais les approvisionnements de Regionalwerke Baden AG restent nécessaires.",
+          "date": "2026-11-03T10:33:15.362Z"
+        },
+        {
           "title": "Panne de courant à Brugg : panne de haute tension",
           "url": "/fr/articles-argovie/panne-courant-brugg-haute-tension/",
           "excerpt": "Le canton d'Argovie a averti sur Alertswiss d'une panne de courant dans la région de Brugg.",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-argovie/fislisbach-eau-potable/",
           "excerpt": "À la mi-octobre 2026, le prélèvement hebdomadaire était tombé à 7'136 m³, soit 60,4% de moins que les 18'035 m³ de fin juillet.",
           "date": "2026-10-28T11:31:41.205Z"
-        },
-        {
-          "title": "Restrictions de circulation du Rüeblimärt à Aarau le mercredi 4 novembre 2026",
-          "url": "/fr/articles-argovie/restrictions-rueeblimart-aarau/",
-          "excerpt": "Le Rüeblimärt attire environ 35.000 visiteurs ; Graben, Schlossplatz et Laurenzentorgasse seront fermés à la circulation.",
-          "date": "2026-10-26T23:06:58.843Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-03T10:53:02.746Z"
     }
   }
 }

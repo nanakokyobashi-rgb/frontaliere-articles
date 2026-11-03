@@ -68,5 +68,15 @@
     "articleId": "bvb-rasatura-tram-episodio",
     "ts": "2026-10-27T00:34:47.707Z",
     "keyForm": 2
+  },
+  "https://www.schwarzwaelder-bote.de/lokales/loerrach/tierseuche-in-baselland-750-schweine-wegen-krankheit-in-baselbieter-mastbetrieb-getoetet-79654721.html": {
+    "articleId": "baselland-maiali-enzootica",
+    "ts": "2026-11-03T08:17:35.854Z",
+    "keyForm": 2
+  },
+  "https://www.bs.ch/medienmitteilungen/2026-der-regierungsrat-erhoeht-die-praemienverbilligungen-fuers-kommende-jahr-2027": {
+    "articleId": "sussidi-premi-basel-2027",
+    "ts": "2026-11-03T14:31:24.324Z",
+    "keyForm": 2
   }
 }

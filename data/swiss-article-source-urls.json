@@ -1,24 +1,4 @@
 {
-  "https://www.cdt.ch/news/casi-di-tubercolosi-in-svizzera-al-livello-piu-alto-dal-2018-440025": {
-    "articleId": "tubercolosi-svizzera-aumento-2025",
-    "ts": "2026-09-24T17:43:40.366Z",
-    "keyForm": 2
-  },
-  "https://www.swissinfo.ch/ita/cn%3a-lavoratori-interinali-meglio-protetti-in-caso-di-intemperie/92112898": {
-    "articleId": "indennita-maltempo-sei-mesi",
-    "ts": "2026-09-24T19:15:47.751Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/economia/1952414/capitale-approva-bns-requisiti-ubs": {
-    "articleId": "ubs-capitale-90-bns",
-    "ts": "2026-09-24T20:09:09.369Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/politica/1952411/mozione-manifestazioni-nazionale-organizzatori-disordini-stati": {
-    "articleId": "mozione-costi-manifestazioni-stati",
-    "ts": "2026-09-24T21:22:12.848Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/bns-lascia-tasso-guida-allo-0%2c0%25/92111318": {
     "articleId": "bns-tasso-guida-zero-2026",
     "ts": "2026-09-24T22:00:36.109Z",
@@ -2497,6 +2477,26 @@
   "https://www.swissinfo.ch/ita/mercato-del-lavoro%3a-le-prospettive-si-offuscano-leggermente/92312143": {
     "articleId": "mercato-lavoro-prospettive-offuscate",
     "ts": "2026-11-02T23:28:54.901Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4213365": {
+    "articleId": "inflazione-ottobre-1-5-percento",
+    "ts": "2026-11-03T11:31:34.020Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4211670": {
+    "articleId": "swissport-zurigo-trattative-ccl",
+    "ts": "2026-11-03T12:59:16.165Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4142153": {
+    "articleId": "voto-iva-13esima-avs-novembre",
+    "ts": "2026-11-03T15:04:38.261Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4212855": {
+    "articleId": "cdf-critica-armasuisse-immobili",
+    "ts": "2026-11-03T20:13:29.950Z",
     "keyForm": 2
   }
 }

@@ -69,6 +69,9 @@ const blogMetaCantonZhFr: Record<string, string> = {
     'blog.article.forchstrasse-sicurezza-zollikon.title': 'Forchstrasse : plus de sécurité entre Zollikerberg et Zumikon',
     'blog.article.forchstrasse-sicurezza-zollikon.excerpt': 'Le canton de Zurich planifie près de 1,7 km entre Zumikon et Zollikerberg : CHF 24,2 millions, trois passages souterrains sans barrières et un début des travaux fin 2028 si le Kantonsrat approuve.',
     'blog.article.forchstrasse-sicurezza-zollikon.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.zurigo-strategia-energetica-2026.title': 'Zurich adopte la Stratégie énergétique 2026',
+    'blog.article.zurigo-strategia-energetica-2026.excerpt': 'Stratégie et planification énergétiques 2026 adoptées par le Regierungsrat Chaleur : abandon complet possible des combustibles fossiles d’ici 2050 Été 2050',
+    'blog.article.zurigo-strategia-energetica-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonZhFr;

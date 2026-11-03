@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "carburanti",
-  "updatedAt": "2026-11-02T09:20:10.429Z",
-  "contentHash": "80d448dfa19a29625642f805c15a191ddf2ec38ae10137f55f9682be57619a4f",
+  "updatedAt": "2026-11-03T14:36:40.036Z",
+  "contentHash": "1011921ae941d659f27474eed1b21ada2a7da0e29bf98d1e38bcc1c76a629dc2",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,18 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Basilea Città aumenta i sussidi ai premi per il 2027",
+          "url": "/articoli-basilea/sussidi-premi-basel-2027/",
+          "excerpt": "Il Governo di Basilea Città adegua i contributi ai premi: +4,4% adulti, +4,9% bambini, +3,6% giovani adulti e circa CHF 243 milioni di spesa.",
+          "date": "2026-11-03T14:31:24.255Z"
+        },
+        {
+          "title": "Baselland: 750 maiali abbattuti per polmonite enzootica",
+          "url": "/articoli-basilea/baselland-maiali-enzootica/",
+          "excerpt": "In un allevamento da ingrasso di Baselland 750 maiali sono stati abbattuti.",
+          "date": "2026-11-03T08:17:35.802Z"
+        },
+        {
           "title": "Salario minimo Basilea Città sale a CHF 22,50 lordi/ora dal 2027",
           "url": "/articoli-basilea/salario-minimo-basilea-aumento/",
           "excerpt": "Dal 1° gennaio 2027, il minimo lordo orario a Basilea Città passerà da CHF 22,20 a CHF 22,50, in base all'indice misto svizzero.",
@@ -88,18 +100,6 @@
           "url": "/articoli-basilea/basilea-stop-sconto-elettriche/",
           "excerpt": "A Basilea Città, dal 2027 le auto elettriche pagheranno la tassa piena: termina lo sconto del 50% dopo il superamento della soglia del 5%.",
           "date": "2026-10-26T23:14:00.134Z"
-        },
-        {
-          "title": "Sissach: nuove fasce di quiete per il parco giochi",
-          "url": "/articoli-basilea/sissach-parco-giochi-fasce-quiete/",
-          "excerpt": "Nei giorni feriali è richiesta pausa quiete 12-13 e silenzio dalle 20; sabato quiete dalle 18 e domenica vietate attività rumorose.",
-          "date": "2026-10-26T17:38:07.309Z"
-        },
-        {
-          "title": "Salario minimo Basilea aumenta a 22.50 CHF lordi dal 2027",
-          "url": "/articoli-basilea/salario-minimo-basilea-2027/",
-          "excerpt": "Dal 1° gennaio 2027 il minimo sarà 22,50 CHF lordi L’aumento previsto è di 30 centesimi per ora L’adeguamento segue l’indice misto svizzero Cantone →",
-          "date": "2026-10-26T11:06:00.747Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T14:36:40.036Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -171,6 +171,18 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Basel-Stadt increases premium subsidies for 2027",
+          "url": "/en/basel-articles/basel-2027-health-premium-subsidies/",
+          "excerpt": "The Government of Basel-Stadt adjusts premium subsidies: +4.4% for adults, +4.9% for children, +3.6% for young adults and approximately CHF 243 million in expenditure.",
+          "date": "2026-11-03T14:31:24.255Z"
+        },
+        {
+          "title": "Baselland: 750 pigs culled due to enzootic pneumonia",
+          "url": "/en/basel-articles/basel-landschaft-750-pigs-pneumonia/",
+          "excerpt": "At a pig-fattening farm in Baselland, 750 pigs were culled.",
+          "date": "2026-11-03T08:17:35.802Z"
+        },
+        {
           "title": "Basel City minimum wage rises to CHF 22.50 gross per hour from 2027",
           "url": "/en/basel-articles/basel-minimum-wage-increase/",
           "excerpt": "From January 1, 2027, the gross hourly minimum wage in Basel-Stadt will increase from CHF 22,20 to CHF 22,50, based on the Swiss mixed index.",
@@ -187,18 +199,6 @@
           "url": "/en/basel-articles/basel-electric-car-discount/",
           "excerpt": "In Basel-Stadt, from 2027, electric cars will pay the full tax: the 50% discount ends once the 5% threshold is exceeded.",
           "date": "2026-10-26T23:14:00.134Z"
-        },
-        {
-          "title": "Sissach: new quiet hours for the playground",
-          "url": "/en/basel-articles/sissach-playground-quiet-times/",
-          "excerpt": "On weekdays, quiet hours from 12-13 and silence from 20 onward are required; on Saturdays, quiet from 18 onward is required, and on Sundays, noisy activities are prohibited.",
-          "date": "2026-10-26T17:38:07.309Z"
-        },
-        {
-          "title": "Basel minimum wage increases to 22.50 CHF gross from 2027",
-          "url": "/en/basel-articles/basel-minimum-wage-2027/",
-          "excerpt": "From January 1st, 2027, the minimum wage will be 22,50 CHF gross The planned increase is 30 cents per hour The adjustment follows the Swiss mixed index Canton →",
-          "date": "2026-10-26T11:06:00.747Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T14:36:40.036Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -270,6 +270,18 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Basel-Stadt erhöht die Prämienverbilligungen für 2027",
+          "url": "/de/basel-artikel/basel-2027-praemienverbilligung/",
+          "excerpt": "Die Regierung von Basel-Stadt passt die Prämienbeiträge an: +4,4% für Erwachsene, +4,9% für Kinder, +3,6% für junge Erwachsene und rund CHF 243 Millionen Ausgaben.",
+          "date": "2026-11-03T14:31:24.255Z"
+        },
+        {
+          "title": "Baselland: 750 Schweine wegen enzootischer Pneumonie gekeult",
+          "url": "/de/basel-artikel/baselland-750-schweine-pneumonie/",
+          "excerpt": "In einem Mastbetrieb in Baselland wurden 750 Schweine gekeult.",
+          "date": "2026-11-03T08:17:35.802Z"
+        },
+        {
           "title": "Mindestlohn in Basel-Stadt steigt ab 2027 auf CHF 22,50 brutto pro Stunde",
           "url": "/de/basel-artikel/basel-mindestlohn-erhoehung/",
           "excerpt": "Ab dem 1. Januar 2027 wird der Bruttomindestlohn pro Stunde in Basel-Stadt auf Grundlage des Schweizer Mischindexes von CHF 22,20 auf CHF 22,50 steigen.",
@@ -286,18 +298,6 @@
           "url": "/de/basel-artikel/basel-elektroauto-steuerrabatt/",
           "excerpt": "In Basel-Stadt zahlen Elektroautos ab 2027 die volle Steuer: Der Rabatt von 50% endet, nachdem der Schwellenwert von 5% überschritten wurde.",
           "date": "2026-10-26T23:14:00.134Z"
-        },
-        {
-          "title": "Sissach: neue Ruhezeiten für den Spielplatz",
-          "url": "/de/basel-artikel/sissach-spielplatz-ruhezeiten/",
-          "excerpt": "An Werktagen gilt eine Ruhepause von 12-13 Uhr und ab 20 Uhr Ruhe; samstags gilt Ruhe ab 18 Uhr und sonntags sind lärmende Aktivitäten verboten.",
-          "date": "2026-10-26T17:38:07.309Z"
-        },
-        {
-          "title": "Mindestlohn in Basel steigt ab 2027 auf 22.50 CHF brutto",
-          "url": "/de/basel-artikel/basel-mindestlohn-2027/",
-          "excerpt": "Ab dem 1. Januar 2027 beträgt der Mindestlohn 22,50 CHF brutto Die vorgesehene Erhöhung beträgt 30 Rappen pro Stunde Die Anpassung folgt dem Schweizer",
-          "date": "2026-10-26T11:06:00.747Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T14:36:40.036Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -369,6 +369,18 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Bâle-Ville augmente les subventions aux primes pour 2027",
+          "url": "/fr/articles-bale/bale-2027-reduction-primes-maladie/",
+          "excerpt": "Le Gouvernement de Bâle-Ville adapte les contributions aux primes : +4,4% pour les adultes, +4,9% pour les enfants, +3,6% pour les jeunes adultes et environ CHF 243 millions de dépenses.",
+          "date": "2026-11-03T14:31:24.255Z"
+        },
+        {
+          "title": "Baselland : 750 porcs abattus pour cause de pneumonie enzootique",
+          "url": "/fr/articles-bale/bale-campagne-750-porcs-pneumonie/",
+          "excerpt": "Dans un élevage d’engraissement de Baselland, 750 porcs ont été abattus.",
+          "date": "2026-11-03T08:17:35.802Z"
+        },
+        {
           "title": "Le salaire minimum à Bâle-Ville passe à CHF 22,50 bruts/heure dès 2027",
           "url": "/fr/articles-bale/augmentation-salaire-minimum-basle/",
           "excerpt": "À partir du 1er janvier 2027, le minimum brut horaire à Bâle-Ville passera de CHF 22,20 à CHF 22,50, sur la base de l’indice mixte suisse.",
@@ -385,18 +397,6 @@
           "url": "/fr/articles-bale/bale-rabais-voitures-electriques/",
           "excerpt": "À Bâle-Ville, à partir de 2027, les voitures électriques paieront la taxe pleine : la réduction de 50% prend fin après le dépassement du seuil de 5%.",
           "date": "2026-10-26T23:14:00.134Z"
-        },
-        {
-          "title": "Sissach : nouvelles plages de calme pour l’aire de jeux",
-          "url": "/fr/articles-bale/sissach-aire-jeux-calme/",
-          "excerpt": "En semaine, une pause de tranquillité 12-13 est requise et le silence est exigé à partir de 20 ; le samedi, le calme est exigé à partir de 18 et, le dimanche, les activités bruyantes sont interdites.",
-          "date": "2026-10-26T17:38:07.309Z"
-        },
-        {
-          "title": "Le salaire minimum à Bâle passe à 22.50 CHF bruts à partir de 2027",
-          "url": "/fr/articles-bale/salaire-minimum-basle-2027/",
-          "excerpt": "À partir du 1er janvier 2027, le minimum sera de 22,50 CHF bruts L’augmentation prévue est de 30 centimes par heure L’ajustement suit l’indice mixte suisse",
-          "date": "2026-10-26T11:06:00.747Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T14:36:40.036Z"
     }
   }
 }

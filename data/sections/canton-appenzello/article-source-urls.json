@@ -108,5 +108,25 @@
     "articleId": "45-residenti-richiesta-rumore",
     "ts": "2026-10-31T13:30:50.150Z",
     "keyForm": 2
+  },
+  "https://www.ai.ch/themen/wirtschaft-und-arbeit/wirtschaftsfoerderung/neuigkeiten-wirtschaftsfoerderung/einblicke-in-verschiedene-lehrberufe": {
+    "articleId": "decima-fiera-apprendistati-innerrhoden",
+    "ts": "2026-11-03T07:41:05.652Z",
+    "keyForm": 2
+  },
+  "https://www.ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/hitzebelastung-in-appenzell-ausserrhoden": {
+    "articleId": "caldo-appenzello-esterno-2026",
+    "ts": "2026-11-03T08:54:47.661Z",
+    "keyForm": 2
+  },
+  "https://appenzell24.ch/news/tarifvertraege-fuer-ambulante-aerztliche-leistungen-gebilligt": {
+    "articleId": "tariffe-mediche-appenzello-2026",
+    "ts": "2026-11-03T10:02:49.211Z",
+    "keyForm": 2
+  },
+  "https://appenzell24.ch/news/neuanstellung-im-bezirksbauamt": {
+    "articleId": "ulmann-incarico-appenzello",
+    "ts": "2026-11-03T15:45:25.424Z",
+    "keyForm": 2
   }
 }

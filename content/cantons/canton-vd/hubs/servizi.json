@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "servizi",
-  "updatedAt": "2026-11-03T02:14:08.370Z",
-  "contentHash": "a4768db6d2cc0bb5b6c7ed4ce089c694789ae1b41aa6dc7fe9e6c048ebd186c6",
+  "updatedAt": "2026-11-03T14:36:40.036Z",
+  "contentHash": "d522e082136dce8da81b18dc3920e98bd7cd539eda6aa30b8bab990d1dbd44ef",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -13,13 +13,8 @@
       "keyFacts": 1
     },
     {
-      "id": "meteo",
-      "updatedAt": "2026-11-02T18:38:16.906Z",
-      "keyFacts": 0
-    },
-    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-02T13:52:53.767Z",
+      "updatedAt": "2026-11-03T00:04:45.487Z",
       "keyFacts": 0
     }
   ],
@@ -59,24 +54,15 @@
           "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Lausanne",
-              "value": "6 °C",
-              "detail": "oggi da 5 a 7 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-02T18:38:16.906Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "La Centrale téléphonique des médecins de garde (CTMG) devient la Centrale santé et répond au 058 6 116 116",
+              "date": "2026-11-02T16:26:27.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26756-la-centrale-telephonique-des-medecins-de-garde-ctmg-devient-la-centrale-sante-et-repond-au-058-6-116-116"
+            },
             {
               "label": "La Centrale téléphonique des médecins de garde (CTMG) devient la Centrale santé et répond au 058 6 116 116",
               "date": "2026-11-02T08:49:43.000Z",
@@ -101,14 +87,9 @@
               "label": "Les primes d’assurance-maladie vont augmenter de 3.5% en moyenne en 2027",
               "date": "2026-09-29T13:02:12.000Z",
               "url": "https://www.vd.ch/actualites/actualite/news/26662-les-primes-dassurance-maladie-vont-augmenter-de-35-en-moyenne-en-2027"
-            },
-            {
-              "label": "Une loi sur le service des habitants adaptée aux enjeux d’aujourd’hui et de demain",
-              "date": "2026-09-01T11:00:00.000Z",
-              "url": "https://www.vd.ch/actualites/actualite/news/26576-default-4eccc336cd"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -188,7 +169,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-03T02:14:08.370Z"
+      "updatedAt": "2026-11-03T14:36:40.036Z"
     },
     "en": {
       "canton": "VD",
@@ -225,24 +206,15 @@
           "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Lausanne",
-              "value": "6 °C",
-              "detail": "today from 5 to 7 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-02T18:38:16.906Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "La Centrale téléphonique des médecins de garde (CTMG) devient la Centrale santé et répond au 058 6 116 116",
+              "date": "2026-11-02T16:26:27.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26756-la-centrale-telephonique-des-medecins-de-garde-ctmg-devient-la-centrale-sante-et-repond-au-058-6-116-116"
+            },
             {
               "label": "La Centrale téléphonique des médecins de garde (CTMG) devient la Centrale santé et répond au 058 6 116 116",
               "date": "2026-11-02T08:49:43.000Z",
@@ -267,14 +239,9 @@
               "label": "Les primes d’assurance-maladie vont augmenter de 3.5% en moyenne en 2027",
               "date": "2026-09-29T13:02:12.000Z",
               "url": "https://www.vd.ch/actualites/actualite/news/26662-les-primes-dassurance-maladie-vont-augmenter-de-35-en-moyenne-en-2027"
-            },
-            {
-              "label": "Une loi sur le service des habitants adaptée aux enjeux d’aujourd’hui et de demain",
-              "date": "2026-09-01T11:00:00.000Z",
-              "url": "https://www.vd.ch/actualites/actualite/news/26576-default-4eccc336cd"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -350,7 +317,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-03T02:14:08.370Z"
+      "updatedAt": "2026-11-03T14:36:40.036Z"
     },
     "de": {
       "canton": "VD",
@@ -387,24 +354,15 @@
           "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Lausanne",
-              "value": "6 °C",
-              "detail": "heute 5 bis 7 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-02T18:38:16.906Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "La Centrale téléphonique des médecins de garde (CTMG) devient la Centrale santé et répond au 058 6 116 116",
+              "date": "2026-11-02T16:26:27.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26756-la-centrale-telephonique-des-medecins-de-garde-ctmg-devient-la-centrale-sante-et-repond-au-058-6-116-116"
+            },
             {
               "label": "La Centrale téléphonique des médecins de garde (CTMG) devient la Centrale santé et répond au 058 6 116 116",
               "date": "2026-11-02T08:49:43.000Z",
@@ -429,14 +387,9 @@
               "label": "Les primes d’assurance-maladie vont augmenter de 3.5% en moyenne en 2027",
               "date": "2026-09-29T13:02:12.000Z",
               "url": "https://www.vd.ch/actualites/actualite/news/26662-les-primes-dassurance-maladie-vont-augmenter-de-35-en-moyenne-en-2027"
-            },
-            {
-              "label": "Une loi sur le service des habitants adaptée aux enjeux d’aujourd’hui et de demain",
-              "date": "2026-09-01T11:00:00.000Z",
-              "url": "https://www.vd.ch/actualites/actualite/news/26576-default-4eccc336cd"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -512,7 +465,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-03T02:14:08.370Z"
+      "updatedAt": "2026-11-03T14:36:40.036Z"
     },
     "fr": {
       "canton": "VD",
@@ -549,24 +502,15 @@
           "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Lausanne",
-              "value": "6 °C",
-              "detail": "aujourd’hui de 5 à 7 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-02T18:38:16.906Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "La Centrale téléphonique des médecins de garde (CTMG) devient la Centrale santé et répond au 058 6 116 116",
+              "date": "2026-11-02T16:26:27.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26756-la-centrale-telephonique-des-medecins-de-garde-ctmg-devient-la-centrale-sante-et-repond-au-058-6-116-116"
+            },
             {
               "label": "La Centrale téléphonique des médecins de garde (CTMG) devient la Centrale santé et répond au 058 6 116 116",
               "date": "2026-11-02T08:49:43.000Z",
@@ -591,14 +535,9 @@
               "label": "Les primes d’assurance-maladie vont augmenter de 3.5% en moyenne en 2027",
               "date": "2026-09-29T13:02:12.000Z",
               "url": "https://www.vd.ch/actualites/actualite/news/26662-les-primes-dassurance-maladie-vont-augmenter-de-35-en-moyenne-en-2027"
-            },
-            {
-              "label": "Une loi sur le service des habitants adaptée aux enjeux d’aujourd’hui et de demain",
-              "date": "2026-09-01T11:00:00.000Z",
-              "url": "https://www.vd.ch/actualites/actualite/news/26576-default-4eccc336cd"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -670,7 +609,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-03T02:14:08.370Z"
+      "updatedAt": "2026-11-03T14:36:40.036Z"
     }
   }
 }

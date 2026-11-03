@@ -198,6 +198,11 @@ export const AD_RECOVERY_SNIPPET = `<script defer data-cfasync="false" src="/ass
 
 export const ADSENSE_LAZY_LOADER = `<script defer src="/assets/${ADSENSE_LOADER_FILENAME}"></script>`;
 
+export const META_PIXEL_LOADER_FILENAME = 'meta-pixel-base-code-b5078da79aec.js';
+export const META_PIXEL_SNIPPET = `<!-- Meta Pixel Code -->
+<script defer src="/assets/${META_PIXEL_LOADER_FILENAME}"></script>
+<!-- End Meta Pixel Code -->`;
+
 /**
  * Publisher id (no `ca-` prefix) for the Funding Choices endpoints, derived
  * from {@link ADSENSE_CLIENT_ID} so it never drifts from the AdSense account.
