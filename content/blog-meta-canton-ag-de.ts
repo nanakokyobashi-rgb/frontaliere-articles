@@ -81,6 +81,9 @@ const blogMetaCantonAgDe: Record<string, string> = {
     'blog.article.blackout-brugg-guasto-alta-tensione.title': 'Stromausfall in Brugg: Störung im Hochspannungsnetz',
     'blog.article.blackout-brugg-guasto-alta-tensione.excerpt': 'Der Kanton Aargau hat auf Alertswiss vor einem Stromausfall in der Region Brugg gewarnt.',
     'blog.article.blackout-brugg-guasto-alta-tensione.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.siccita-fislisbach-forniture.title': 'Fislisbach: Baden muss weiterhin Trinkwasser liefern',
+    'blog.article.siccita-fislisbach-forniture.excerpt': 'Mitte Oktober 2026 sank die wöchentliche Wasserentnahme auf 7\'136 m3, doch die Lieferungen von Regionalwerke Baden AG bleiben notwendig.',
+    'blog.article.siccita-fislisbach-forniture.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonAgDe;
