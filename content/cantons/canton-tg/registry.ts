@@ -272,4 +272,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'turgovia-piano-risparmio-60-milioni',
+ category: 'novita',
+ date: '2026-11-03T03:53:14.620Z',
+ image: '/images/blog/article-turgovia-piano-risparmio-60-milioni.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

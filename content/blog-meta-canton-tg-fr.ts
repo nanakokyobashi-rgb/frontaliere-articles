@@ -75,6 +75,9 @@ const blogMetaCantonTgFr: Record<string, string> = {
     'blog.article.supporto-datori-lavoro-turgovia.title': 'Soutien aux employeurs : les services en Thurgovie',
     'blog.article.supporto-datori-lavoro-turgovia.excerpt': 'Les offices ORP d’Amriswil, Frauenfeld et Kreuzlingen offrent une assistance pour la recherche de personnel et la gestion des postes vacants.',
     'blog.article.supporto-datori-lavoro-turgovia.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.turgovia-piano-risparmio-60-milioni.title': 'Thurgovie : plan d’économies de 60 millions d’ici 2030',
+    'blog.article.turgovia-piano-risparmio-60-milioni.excerpt': 'Le Gouvernement propose 37 mesures pour stabiliser les finances cantonales.',
+    'blog.article.turgovia-piano-risparmio-60-milioni.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonTgFr;

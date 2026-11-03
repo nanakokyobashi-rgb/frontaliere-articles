@@ -933,6 +933,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-turgovia-piano-risparmio-60-milioni': {
+    title: 'Turgovia: piano di risparmio da 60 milioni entro il 2030',
+    description: 'Il Cantone Turgovia presenta un piano da 60 milioni di CHF annui entro il 2030: tagli all\'istruzione, cure ambulatoriali e Gran Consiglio ridotto.',
+    keywords: 'frontalieri, ticino, svizzera, italia, turgovia, piano, risparmio, milioni',
+    ogTitle: 'Turgovia: piano di risparmio da 60 milioni entro il 2030',
+    ogDescription: 'Il Governo del Canton Turgovia vara un pacchetto di 37 misure per risparmiare 60 milioni di CHF l\'anno dal 2030. Coinvolti istruzione, comuni e istituzioni.',
+    canonicalPath: '/articoli-turgovia/turgovia-piano-risparmio-60-milioni/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Turgovia: piano di risparmio da 60 milioni entro il 2030",
+      "description": "Il Cantone Turgovia presenta un piano da 60 milioni di CHF annui entro il 2030: tagli all'istruzione, cure ambulatoriali e Gran Consiglio ridotto.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-turgovia-piano-risparmio-60-milioni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-03T03:53:14+00:00",
+      "dateModified": "2026-11-03T03:53:14+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-turgovia/turgovia-piano-risparmio-60-milioni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

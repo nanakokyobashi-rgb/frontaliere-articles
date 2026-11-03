@@ -75,6 +75,9 @@ const blogMetaCantonTgEn: Record<string, string> = {
     'blog.article.supporto-datori-lavoro-turgovia.title': 'Support for employers: services in Thurgau',
     'blog.article.supporto-datori-lavoro-turgovia.excerpt': 'The RAV offices in Amriswil, Frauenfeld and Kreuzlingen offer assistance with staff recruitment and the management of vacant positions.',
     'blog.article.supporto-datori-lavoro-turgovia.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.turgovia-piano-risparmio-60-milioni.title': 'Thurgau: savings plan of 60 million by 2030',
+    'blog.article.turgovia-piano-risparmio-60-milioni.excerpt': 'The Government proposes 37 measures to stabilize cantonal finances.',
+    'blog.article.turgovia-piano-risparmio-60-milioni.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonTgEn;

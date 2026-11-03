@@ -75,6 +75,9 @@ const blogMetaCantonTgIt: Record<string, string> = {
     'blog.article.supporto-datori-lavoro-turgovia.title': 'Supporto ai datori di lavoro: i servizi nel Turgovia',
     'blog.article.supporto-datori-lavoro-turgovia.excerpt': 'Le sedi RAV di Amriswil, Frauenfeld e Kreuzlingen offrono assistenza per la ricerca di personale e la gestione delle posizioni vacanti.',
     'blog.article.supporto-datori-lavoro-turgovia.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.turgovia-piano-risparmio-60-milioni.title': 'Turgovia: piano di risparmio da 60 milioni entro il 2030',
+    'blog.article.turgovia-piano-risparmio-60-milioni.excerpt': 'Il Governo propone 37 misure per stabilizzare le finanze cantonali.',
+    'blog.article.turgovia-piano-risparmio-60-milioni.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonTgIt;

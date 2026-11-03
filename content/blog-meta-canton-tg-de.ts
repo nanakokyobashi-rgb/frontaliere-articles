@@ -75,6 +75,9 @@ const blogMetaCantonTgDe: Record<string, string> = {
     'blog.article.supporto-datori-lavoro-turgovia.title': 'Unterstützung für Arbeitgeber: die Dienstleistungen im Thurgau',
     'blog.article.supporto-datori-lavoro-turgovia.excerpt': 'Die RAV-Standorte in Amriswil, Frauenfeld und Kreuzlingen bieten Unterstützung bei der Personalsuche und der Verwaltung offener Stellen.',
     'blog.article.supporto-datori-lavoro-turgovia.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.turgovia-piano-risparmio-60-milioni.title': 'Thurgau: Sparplan über 60 Millionen bis 2030',
+    'blog.article.turgovia-piano-risparmio-60-milioni.excerpt': 'Die Regierung schlägt 37 Massnahmen zur Stabilisierung der Kantonsfinanzen vor.',
+    'blog.article.turgovia-piano-risparmio-60-milioni.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonTgDe;
