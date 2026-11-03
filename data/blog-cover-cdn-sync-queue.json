@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-ulmann-incarico-appenzello.webp",
+      "sha256": "9437afd529a1ee945fe0be32d3aed43ab801823d6bf88e9c709c8edcfee7a611"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-ulmann-incarico-appenzello-480w.webp",
+      "sha256": "7ecaef5b38082cfb32d28fc4db6c7653776ada2ce720613f62f554a3d204c311"
+    }
+  ]
 }
