@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-swissport-zurigo-trattative-ccl.webp",
-      "sha256": "c870c51d1e0bd456aa8cf90d2e5b6eb5e1891ca4c72fcd24b3e5f999a87d723f"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-swissport-zurigo-trattative-ccl-480w.webp",
-      "sha256": "e28f9a502140d2ebcb4edc32f37b7e8dc91b495ca2101a53cb621ceef85628b7"
-    }
-  ]
+  "items": []
 }
