@@ -93,6 +93,9 @@ const blogMetaCantonShIt: Record<string, string> = {
     'blog.article.calore-residuo-sciaffusa-mozione.title': 'Mozione sul calore residuo per impianti a Sciaffusa',
     'blog.article.calore-residuo-sciaffusa-mozione.excerpt': 'Proposta per regole comunali vincolanti su calore inutilizzato oltre 20 GWh annui, con ritiro garantito oltre il 50% entro 2 km.',
     'blog.article.calore-residuo-sciaffusa-mozione.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.rheinfall-management-2026.title': 'Kantonsrat discute gestione Rheinfall, si profila votazione',
+    'blog.article.rheinfall-management-2026.excerpt': 'Il Kantonsrat ha interrotto la prima lettura sul progetto Rheinfall-Management-Gesellschaft; i Verdi chiedono norme più severe per i datacenter.',
+    'blog.article.rheinfall-management-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonShIt;

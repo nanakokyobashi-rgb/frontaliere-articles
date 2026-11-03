@@ -93,6 +93,9 @@ const blogMetaCantonShDe: Record<string, string> = {
     'blog.article.calore-residuo-sciaffusa-mozione.title': 'Motion zur Abwärme für Anlagen in Schaffhausen',
     'blog.article.calore-residuo-sciaffusa-mozione.excerpt': 'Vorschlag für verbindliche kommunale Regeln für ungenutzte Wärme von mehr als 20 GWh pro Jahr, mit garantierter Abnahme von mehr als 50% innerhalb von 2 km.',
     'blog.article.calore-residuo-sciaffusa-mozione.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.rheinfall-management-2026.title': 'Kantonsrat berät Rheinfall-Bewirtschaftung; Abstimmung droht',
+    'blog.article.rheinfall-management-2026.excerpt': 'Der Kantonsrat hat die erste Lesung zum Entwurf der Rheinfall-Management-Gesellschaft unterbrochen; die Grünen fordern strengere Vorschriften für Rechenzentren.',
+    'blog.article.rheinfall-management-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonShDe;

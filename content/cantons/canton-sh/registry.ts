@@ -337,4 +337,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'rheinfall-management-2026',
+ category: 'novita',
+ date: '2026-11-03T01:20:15.828Z',
+ image: '/images/blog/article-rheinfall-management-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

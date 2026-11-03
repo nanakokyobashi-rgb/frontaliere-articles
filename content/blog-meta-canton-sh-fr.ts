@@ -93,6 +93,9 @@ const blogMetaCantonShFr: Record<string, string> = {
     'blog.article.calore-residuo-sciaffusa-mozione.title': 'Motion sur la chaleur résiduelle pour les installations de Schaffhouse',
     'blog.article.calore-residuo-sciaffusa-mozione.excerpt': 'Proposition de règles communales contraignantes concernant la chaleur inutilisée de plus de 20 GWh par an, avec une reprise garantie de plus de 50% dans un rayon de 2 km.',
     'blog.article.calore-residuo-sciaffusa-mozione.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.rheinfall-management-2026.title': 'Le Conseil cantonal débat de la gestion des chutes du Rhin ; un vote se profile',
+    'blog.article.rheinfall-management-2026.excerpt': 'Le Conseil cantonal a suspendu la première lecture du projet de loi sur la « Rheinfall-Management-Gesellschaft » ; les Verts réclament des règles plus strictes pour les centres de données.',
+    'blog.article.rheinfall-management-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonShFr;

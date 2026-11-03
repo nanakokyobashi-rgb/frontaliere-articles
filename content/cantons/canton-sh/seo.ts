@@ -1177,6 +1177,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-rheinfall-management-2026': {
+    title: 'Kantonsrat discute gestione Rheinfall, si profila votazione',
+    description: 'Il Kantonsrat discute la Rheinfall-Management-Gesellschaft; i Verdi chiedono norme più severe sui datacenter a Beringen. Votazione popolare',
+    keywords: 'frontalieri, ticino, svizzera, italia, kantonsrat, discute, gestione, rheinfall',
+    ogTitle: 'Rheinfall: discussione gestione e votazione 2026',
+    ogDescription: 'Il Kantonsrat di Sciaffusa ha ripreso il dossier sulla Rheinfall-Management-Gesellschaft il 2 novembre 2026. I Verdi presentano petizione per datacenter a Beringen.',
+    canonicalPath: '/articoli-sciaffusa/rheinfall-management-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Kantonsrat discute gestione Rheinfall, si profila votazione",
+      "description": "Il Kantonsrat discute la Rheinfall-Management-Gesellschaft; i Verdi chiedono norme più severe sui datacenter a Beringen. Votazione popolare",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-rheinfall-management-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-03T01:20:15+00:00",
+      "dateModified": "2026-11-03T01:20:15+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-sciaffusa/rheinfall-management-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

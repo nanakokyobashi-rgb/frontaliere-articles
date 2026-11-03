@@ -93,6 +93,9 @@ const blogMetaCantonShEn: Record<string, string> = {
     'blog.article.calore-residuo-sciaffusa-mozione.title': 'Motion on waste heat for facilities in Schaffhausen',
     'blog.article.calore-residuo-sciaffusa-mozione.excerpt': 'Proposal for binding municipal rules on unused heat exceeding 20 GWh annually, with guaranteed uptake of over 50% within 2 km.',
     'blog.article.calore-residuo-sciaffusa-mozione.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.rheinfall-management-2026.title': 'Cantonal Council Discusses Management of the Rhine Falls; Vote Looms',
+    'blog.article.rheinfall-management-2026.excerpt': 'The Kantonsrat has suspended the first reading of the Rheinfall-Management-Gesellschaft bill; the Greens are calling for stricter regulations for data centers.',
+    'blog.article.rheinfall-management-2026.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonShEn;

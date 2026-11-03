@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-sh::https://sh.ch/webseite/kanton-schaffhausen/beh-rde/regierung/staatskanzlei/medienmitteilungen-24272945-de.html": {
-      "section": "canton-sh",
-      "ts": 1793494498138
-    },
     "canton-sh::https://www.shn.ch/region/kanton/2026-10-28/jetzt-ist-klar-wer-das-neue-schaffhauser-spital-baut-und-wie-teuer-es": {
       "section": "canton-sh",
       "ts": 1793545985707
@@ -19,6 +15,10 @@
     "canton-sh::https://www.schaffhausen24.ch/articles/416440-marthalen-plant-ausbau-des-gesundheitszentrums": {
       "section": "canton-sh",
       "ts": 1793662369285
+    },
+    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-02/bei-der-wefa-in-thayngen-kommt-es-zu-einem-wechsel": {
+      "section": "canton-sh",
+      "ts": 1793667978329
     }
   }
 }
