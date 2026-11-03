@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-sp-uri-no-finanziamento-avs.webp",
-      "sha256": "64c93b0a4e9576f133b23ca8e11c1627fc2884e1d4aaa7c6b219f07681c4ad63"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-sp-uri-no-finanziamento-avs-480w.webp",
-      "sha256": "851e9721068cca1484927791bc0acae266221e101dc4b7c6ee7527f5d4338d72"
-    }
-  ]
+  "items": []
 }
