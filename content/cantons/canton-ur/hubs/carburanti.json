@@ -4,8 +4,8 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "carburanti",
-  "updatedAt": "2026-11-03T09:09:02.940Z",
-  "contentHash": "714fd6571122cbd090512d0154fcf0b6aa63d9e3ba225359323fe7f4580b467f",
+  "updatedAt": "2026-11-03T12:29:43.135Z",
+  "contentHash": "eac4ac6959d50e539df5e1fd210b6f09c6a2ee1e6097be61fdf8310f409cb850",
   "blocks": [],
   "locales": {
     "it": {
@@ -17,6 +17,12 @@
       "dataBlocks": [],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Seedorf: Reussstrasse chiusa per lavori di innesto",
+          "url": "/articoli-uri/seedorf-reussstrasse-lavori-innesto/",
+          "excerpt": "La Reussstrasse a Seedorf sarà chiusa per lavori all'innesto verso sud, direzione Attinghausen, in vista della pista ciclabile Altdorf-Seedorf.",
+          "date": "2026-11-03T12:26:50.675Z"
+        },
         {
           "title": "Passo del Gottardo: chiusura invernale da giovedì",
           "url": "/articoli-uri/chiusura-invernale-gottardo/",
@@ -40,12 +46,6 @@
           "url": "/articoli-uri/conteggio-traffico-uri-novembre/",
           "excerpt": "Nel fondovalle urano, il 5 novembre 2026, 31 punti rileveranno veicoli e direzioni tra le 06:00 e le 22:00 per rivedere il modello cantonale.",
           "date": "2026-10-27T11:34:34.578Z"
-        },
-        {
-          "title": "Axenstrasse chiusa di notte per lavori di manutenzione nel Canton Uri",
-          "url": "/articoli-uri/axenstrasse-chiusa-novembre-2026/",
-          "excerpt": "Dal 2 al 6 novembre 2026, l'Axenstrasse sarà chiusa dalle 22.00 alle 05.00; il traffico viene deviato sull'autostrada A2.",
-          "date": "2026-10-27T10:48:04.296Z"
         }
       ],
       "links": [
@@ -58,7 +58,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-03T09:09:02.940Z"
+      "updatedAt": "2026-11-03T12:29:43.135Z"
     },
     "en": {
       "canton": "UR",
@@ -69,6 +69,12 @@
       "dataBlocks": [],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Seedorf: Reussstrasse closed for connection works",
+          "url": "/en/uri-articles/seedorf-reussstrasse-works-inlet/",
+          "excerpt": "Reussstrasse in Seedorf will be closed for construction work at the southern junction, toward Attinghausen, in preparation for the Altdorf-Seedorf cycle path.",
+          "date": "2026-11-03T12:26:50.675Z"
+        },
         {
           "title": "Gotthard Pass: winter closure from Thursday",
           "url": "/en/uri-articles/gotthard-winter-closure/",
@@ -92,12 +98,6 @@
           "url": "/en/uri-articles/uri-traffic-count-november/",
           "excerpt": "In the Uranian valley floor, on November 5, 2026, 31 points will record vehicles and directions between 06:00 and 22:00 to review the cantonal model.",
           "date": "2026-10-27T11:34:34.578Z"
-        },
-        {
-          "title": "Axenstrasse closed at night for maintenance work in the Canton of Uri",
-          "url": "/en/uri-articles/axenstrasse-closed-november-2026/",
-          "excerpt": "From November 2 to 6, 2026, Axenstrasse will be closed from 22.00 to 05.00; traffic is diverted onto the A2 motorway.",
-          "date": "2026-10-27T10:48:04.296Z"
         }
       ],
       "links": [
@@ -110,7 +110,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-03T09:09:02.940Z"
+      "updatedAt": "2026-11-03T12:29:43.135Z"
     },
     "de": {
       "canton": "UR",
@@ -121,6 +121,12 @@
       "dataBlocks": [],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Seedorf: Reussstrasse wegen Arbeiten an der Einmündung gesperrt",
+          "url": "/de/uri-artikel/seedorf-reussstrasse-arbeiten-innesto/",
+          "excerpt": "Die Reussstrasse in Seedorf wird wegen Arbeiten an der Einmündung Richtung Süden, in Richtung Attinghausen, im Hinblick auf den Radweg Altdorf-Seedorf gesperrt.",
+          "date": "2026-11-03T12:26:50.675Z"
+        },
         {
           "title": "Gotthardpass: Wintersperre ab Donnerstag",
           "url": "/de/uri-artikel/gotthard-wintersperre/",
@@ -144,12 +150,6 @@
           "url": "/de/uri-artikel/verkehrszaehlung-uri-november/",
           "excerpt": "Im Urner Talboden werden am 5.",
           "date": "2026-10-27T11:34:34.578Z"
-        },
-        {
-          "title": "Axenstrasse nachts wegen Wartungsarbeiten im Kanton Uri gesperrt",
-          "url": "/de/uri-artikel/axenstrasse-geschlossen-november-2026/",
-          "excerpt": "Vom 2. bis 6. November 2026 wird die Axenstrasse von 22.00 bis 05.00 gesperrt; der Verkehr wird über die Autobahn A2 umgeleitet.",
-          "date": "2026-10-27T10:48:04.296Z"
         }
       ],
       "links": [
@@ -162,7 +162,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-03T09:09:02.940Z"
+      "updatedAt": "2026-11-03T12:29:43.135Z"
     },
     "fr": {
       "canton": "UR",
@@ -173,6 +173,12 @@
       "dataBlocks": [],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Seedorf : Reussstrasse fermée pour des travaux de raccordement",
+          "url": "/fr/articles-uri/seedorf-reussstrasse-travaux-injection/",
+          "excerpt": "La Reussstrasse à Seedorf sera fermée pour des travaux de raccordement vers le sud, en direction d’Attinghausen, dans le cadre de la piste cyclable Altdorf-Seedorf.",
+          "date": "2026-11-03T12:26:50.675Z"
+        },
         {
           "title": "Col du Gothard : fermeture hivernale dès jeudi",
           "url": "/fr/articles-uri/fermeture-hivernale-gothard/",
@@ -196,12 +202,6 @@
           "url": "/fr/articles-uri/comptage-trafic-uri-novembre/",
           "excerpt": "Dans la vallée uranaise, le 5 novembre 2026, 31 points recenseront les véhicules et leur direction entre les 06:00 et les 22:00 afin de revoir le modèle cantonal.",
           "date": "2026-10-27T11:34:34.578Z"
-        },
-        {
-          "title": "Axenstrasse fermée de nuit pour travaux d'entretien dans le canton d'Uri",
-          "url": "/fr/articles-uri/axenstrasse-fermee-novembre-2026/",
-          "excerpt": "Du 2 au 6 novembre 2026, l'Axenstrasse sera fermée de 22.00 à 05.00 ; le trafic est dévié sur l'autoroute A2.",
-          "date": "2026-10-27T10:48:04.296Z"
         }
       ],
       "links": [
@@ -214,7 +214,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-03T09:09:02.940Z"
+      "updatedAt": "2026-11-03T12:29:43.135Z"
     }
   }
 }

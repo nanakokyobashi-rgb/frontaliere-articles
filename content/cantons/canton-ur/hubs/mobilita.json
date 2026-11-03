@@ -4,8 +4,8 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "mobilita",
-  "updatedAt": "2026-11-03T10:06:57.473Z",
-  "contentHash": "e64cd4ad2cc973672891ce023dba9f75ce0ee22c00c1669f183f958fc02d7c75",
+  "updatedAt": "2026-11-03T12:29:43.135Z",
+  "contentHash": "821e2dd0a23e3cebc7d8dc1b620a5382302b7bf7f240589e74ef67d8b4e7447c",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -146,6 +146,12 @@
           "date": "2026-10-27T11:34:34.578Z"
         },
         {
+          "title": "Seedorf: Reussstrasse chiusa per lavori di innesto",
+          "url": "/articoli-uri/seedorf-reussstrasse-lavori-innesto/",
+          "excerpt": "La Reussstrasse a Seedorf sarà chiusa per lavori all'innesto verso sud, direzione Attinghausen, in vista della pista ciclabile Altdorf-Seedorf.",
+          "date": "2026-11-03T12:26:50.675Z"
+        },
+        {
           "title": "Passo del Gottardo: chiusura invernale da giovedì",
           "url": "/articoli-uri/chiusura-invernale-gottardo/",
           "excerpt": "Da giovedì scatta la chiusura invernale del passo del Gottardo: tre dei cinque passi alpini urani saranno chiusi, mentre Oberalp e Klausenpass restano aperti.",
@@ -174,12 +180,6 @@
           "url": "/articoli-uri/uri-chiusura-passhoehe/",
           "excerpt": "Strada cantonale chiusa di notte tra Passhöhe e Urnerboden dal 14 al 15 ottobre per lavori di pavimentazione; con maltempo, i lavori slittano.",
           "date": "2026-10-08T23:39:16.200Z"
-        },
-        {
-          "title": "Bristenstrasse: chiusure e orari fino a novembre 2026",
-          "url": "/articoli-uri/bristenstrasse-regimi-traffico-2026/",
-          "excerpt": "Tra Amsteg e St.",
-          "date": "2026-10-23T12:29:59.834Z"
         }
       ],
       "latestCantonArticles": [],
@@ -193,7 +193,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-03T12:29:43.135Z"
     },
     "en": {
       "canton": "UR",
@@ -322,6 +322,12 @@
           "date": "2026-10-27T11:34:34.578Z"
         },
         {
+          "title": "Seedorf: Reussstrasse closed for connection works",
+          "url": "/en/uri-articles/seedorf-reussstrasse-works-inlet/",
+          "excerpt": "Reussstrasse in Seedorf will be closed for construction work at the southern junction, toward Attinghausen, in preparation for the Altdorf-Seedorf cycle path.",
+          "date": "2026-11-03T12:26:50.675Z"
+        },
+        {
           "title": "Gotthard Pass: winter closure from Thursday",
           "url": "/en/uri-articles/gotthard-winter-closure/",
           "excerpt": "Starting Thursday, the winter closure of the Gotthard Pass takes effect: three of the five Alpine passes in Uri will be closed, while Oberalp and Klausenpass remain open.",
@@ -350,12 +356,6 @@
           "url": "/en/uri-articles/uri-night-road-closure/",
           "excerpt": "Cantonal road closed at night between Passhöhe and Urnerboden from October 14 to 15 for paving work; in bad weather, the work will be postponed.",
           "date": "2026-10-08T23:39:16.200Z"
-        },
-        {
-          "title": "Bristenstrasse: closures and schedules through November 2026",
-          "url": "/en/uri-articles/bristenstrasse-traffic-rules-2026/",
-          "excerpt": "Between Amsteg and St.",
-          "date": "2026-10-23T12:29:59.834Z"
         }
       ],
       "latestCantonArticles": [],
@@ -369,7 +369,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-03T12:29:43.135Z"
     },
     "de": {
       "canton": "UR",
@@ -498,6 +498,12 @@
           "date": "2026-10-27T11:34:34.578Z"
         },
         {
+          "title": "Seedorf: Reussstrasse wegen Arbeiten an der Einmündung gesperrt",
+          "url": "/de/uri-artikel/seedorf-reussstrasse-arbeiten-innesto/",
+          "excerpt": "Die Reussstrasse in Seedorf wird wegen Arbeiten an der Einmündung Richtung Süden, in Richtung Attinghausen, im Hinblick auf den Radweg Altdorf-Seedorf gesperrt.",
+          "date": "2026-11-03T12:26:50.675Z"
+        },
+        {
           "title": "Gotthardpass: Wintersperre ab Donnerstag",
           "url": "/de/uri-artikel/gotthard-wintersperre/",
           "excerpt": "Ab Donnerstag tritt die Wintersperre des Gotthardpasses in Kraft: Drei der fünf Urner Alpenpässe werden geschlossen sein, während Oberalp und Klausenpass vorerst offen bleiben.",
@@ -526,12 +532,6 @@
           "url": "/de/uri-artikel/uri-nachtsperrung-passhoehe/",
           "excerpt": "Kantonsstraße zwischen Passhöhe und Urnerboden in der Nacht vom 14.",
           "date": "2026-10-08T23:39:16.200Z"
-        },
-        {
-          "title": "Bristenstrasse: Sperrungen und Zeitfenster bis November 2026",
-          "url": "/de/uri-artikel/bristenstrasse-verkehrsregime-2026/",
-          "excerpt": "Zwischen Amsteg und St.",
-          "date": "2026-10-23T12:29:59.834Z"
         }
       ],
       "latestCantonArticles": [],
@@ -545,7 +545,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-03T12:29:43.135Z"
     },
     "fr": {
       "canton": "UR",
@@ -674,6 +674,12 @@
           "date": "2026-10-27T11:34:34.578Z"
         },
         {
+          "title": "Seedorf : Reussstrasse fermée pour des travaux de raccordement",
+          "url": "/fr/articles-uri/seedorf-reussstrasse-travaux-injection/",
+          "excerpt": "La Reussstrasse à Seedorf sera fermée pour des travaux de raccordement vers le sud, en direction d’Attinghausen, dans le cadre de la piste cyclable Altdorf-Seedorf.",
+          "date": "2026-11-03T12:26:50.675Z"
+        },
+        {
           "title": "Col du Gothard : fermeture hivernale dès jeudi",
           "url": "/fr/articles-uri/fermeture-hivernale-gothard/",
           "excerpt": "À partir de jeudi, la fermeture hivernale du col du Gothard entre en vigueur : trois des cinq cols alpins uranais seront fermés, tandis que l’Oberalp et le Klausenpass restent ouverts.",
@@ -702,12 +708,6 @@
           "url": "/fr/articles-uri/uri-fermeture-nocturne-route/",
           "excerpt": "Route cantonale fermée de nuit entre Passhöhe et Urnerboden du 14 au 15 octobre pour des travaux de revêtement ; en cas de mauvais temps, les travaux sont reportés.",
           "date": "2026-10-08T23:39:16.200Z"
-        },
-        {
-          "title": "Bristenstrasse : fermetures et horaires jusqu’en novembre 2026",
-          "url": "/fr/articles-uri/bristenstrasse-regimes-circulation-2026/",
-          "excerpt": "Entre Amsteg et St.",
-          "date": "2026-10-23T12:29:59.834Z"
         }
       ],
       "latestCantonArticles": [],
@@ -721,7 +721,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-03T12:29:43.135Z"
     }
   }
 }
