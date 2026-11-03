@@ -27,6 +27,9 @@ const blogMetaCantonSzFr: Record<string, string> = {
     'blog.article.pfaeffikon-apero-imprese.title': 'Pfäffikon : apéritif pour les entreprises, 93 invités à la KSA',
     'blog.article.pfaeffikon-apero-imprese.excerpt': 'La Wirtschaftsförderung Höfe a réuni 93 invités à la KSA de Pfäffikon : la rencontre mise sur l’échange, la coopération et les contacts entre entreprises.',
     'blog.article.pfaeffikon-apero-imprese.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.schuebelbach-aliquote-2027.title': 'Schübelbach confirme les taux d’imposition pour 2027',
+    'blog.article.schuebelbach-aliquote-2027.excerpt': 'Le budget 2027 de Schübelbach prévoit 42,97 millions de dépenses, 42,69 millions de recettes et un déficit de 285.200 francs.',
+    'blog.article.schuebelbach-aliquote-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSzFr;

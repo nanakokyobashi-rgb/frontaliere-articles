@@ -314,6 +314,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-schuebelbach-aliquote-2027': {
+    title: 'Schübelbach conferma le aliquote fiscali per il 2027',
+    description: 'Schübelbach presenta il preventivo 2027: 42,97 milioni di spese, 42,69 milioni di entrate, disavanzo di 285.200 franchi e aliquote invariate.',
+    keywords: 'frontalieri, ticino, svizzera, italia, schübelbach, conferma, aliquote, fiscali',
+    ogTitle: 'Schübelbach conferma le aliquote per il 2027',
+    ogDescription: 'Il Comune di Schübelbach prevede per il 2027 42,97 milioni di franchi di spese e 42,69 milioni di entrate. Il disavanzo indicato è di 285.200 franchi: il Consiglio comunale mantiene il 150% per le persone fisiche e il 100% per le persone giuridiche.',
+    canonicalPath: '/articoli-svitto/schuebelbach-aliquote-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Schübelbach conferma le aliquote fiscali per il 2027",
+      "description": "Schübelbach presenta il preventivo 2027: 42,97 milioni di spese, 42,69 milioni di entrate, disavanzo di 285.200 franchi e aliquote invariate.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-schuebelbach-aliquote-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-03T00:58:45+00:00",
+      "dateModified": "2026-11-03T00:58:45+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svitto/schuebelbach-aliquote-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

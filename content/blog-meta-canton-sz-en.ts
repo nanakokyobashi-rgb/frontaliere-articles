@@ -27,6 +27,9 @@ const blogMetaCantonSzEn: Record<string, string> = {
     'blog.article.pfaeffikon-apero-imprese.title': 'Pfäffikon: business aperitif, 93 guests at KSA',
     'blog.article.pfaeffikon-apero-imprese.excerpt': 'Wirtschaftsförderung Höfe brought together 93 guests at KSA in Pfäffikon: the meeting focuses on exchange, cooperation and contacts between companies.',
     'blog.article.pfaeffikon-apero-imprese.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.schuebelbach-aliquote-2027.title': 'Schübelbach confirms tax rates for 2027',
+    'blog.article.schuebelbach-aliquote-2027.excerpt': 'Schübelbach\'s 2027 budget provides for 42,97 million in expenditure, 42,69 million in revenue and a deficit of 285.200 francs.',
+    'blog.article.schuebelbach-aliquote-2027.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSzEn;

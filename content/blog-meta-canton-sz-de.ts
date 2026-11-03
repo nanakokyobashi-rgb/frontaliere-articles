@@ -27,6 +27,9 @@ const blogMetaCantonSzDe: Record<string, string> = {
     'blog.article.pfaeffikon-apero-imprese.title': 'Pfäffikon: Apéro für Unternehmen, 93 Gäste an der KSA',
     'blog.article.pfaeffikon-apero-imprese.excerpt': 'Die Wirtschaftsförderung Höfe hat an der KSA in Pfäffikon 93 Gäste zusammengebracht: Das Treffen setzt auf Austausch, Kooperation und Kontakte zwischen Unternehmen.',
     'blog.article.pfaeffikon-apero-imprese.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.schuebelbach-aliquote-2027.title': 'Schübelbach bestätigt die Steuersätze für 2027',
+    'blog.article.schuebelbach-aliquote-2027.excerpt': 'Der Voranschlag 2027 von Schübelbach sieht Ausgaben von 42,97 Millionen, Einnahmen von 42,69 Millionen und ein Defizit von 285.200 Franken vor.',
+    'blog.article.schuebelbach-aliquote-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSzDe;

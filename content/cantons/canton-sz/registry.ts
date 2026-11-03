@@ -94,4 +94,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'schuebelbach-aliquote-2027',
+ category: 'fiscale',
+ date: '2026-11-03T00:58:45.494Z',
+ image: '/images/blog/article-schuebelbach-aliquote-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SZ'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];
