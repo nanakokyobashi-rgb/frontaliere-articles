@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "mobilita",
-  "updatedAt": "2026-11-02T11:33:10.756Z",
-  "contentHash": "498b0fa6665d4e781ff33147b2ae1b1c23ce594186278519b0487077e45a4597",
+  "updatedAt": "2026-11-03T02:14:08.370Z",
+  "contentHash": "ee9e81f68c4cf4b7655d88f3124b92bb6133f2a366036b618bca18779c35c100",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-02T06:54:25.899Z",
+      "updatedAt": "2026-11-02T19:51:36.134Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-01T21:24:45.283Z",
+      "updatedAt": "2026-11-02T13:52:53.767Z",
       "keyFacts": 0
     }
   ],
@@ -37,7 +37,7 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "4",
+          "value": "5",
           "note": "segnalazioni aggiornate: 2 novembre 2026"
         },
         {
@@ -105,19 +105,14 @@
               "date": "2026-10-26T14:40:00.000Z"
             },
             {
-              "label": "A5 Neuchâtel <-> Solothurn tra Raccordo autostradale Diramazione Brüggmoos E Luogo Vingelz Situazione: colonna Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-11-02T05:44:00.000Z"
-            },
-            {
-              "label": "A20 Diramazione Neuchâtel-Vauseyon -> La Chaux-de-Fonds tra Svincolo autostradale Hauts-Geneveys E Svincolo autostradale Bas-du-Reymond Situazione: traffico fortemente rallentato Causa: traffico…",
-              "value": "Traffico",
-              "date": "2026-11-02T06:46:00.000Z"
+              "label": "A5 Neuchâtel -> Yverdon tra Svincolo autostradale Yverdon Ouest E Raccordo autostradale Diramazione Yverdon Situazione: chiusa Causa: operazione di spegnimento in corso",
+              "value": "Chiusura",
+              "date": "2026-11-02T17:49:00.000Z"
             },
             {
               "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
               "value": "Traffico",
-              "date": "2026-11-02T06:54:25.899Z",
+              "date": "2026-11-02T19:51:36.134Z",
               "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             },
             {
@@ -125,10 +120,16 @@
               "value": "Cantiere",
               "detail": "fine prevista: 31 dicembre 2026",
               "date": "2024-09-06T05:22:00.000Z"
+            },
+            {
+              "label": "H5 Neuchâtel <-> Bienne Luogo St-Blaise Situazione: problemi di traffico cantiere",
+              "value": "Cantiere",
+              "detail": "fine prevista: 30 aprile 2027",
+              "date": "2025-04-08T11:07:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-02T06:54:25.899Z"
+          "updatedAt": "2026-11-02T19:51:36.134Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -151,7 +152,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -205,7 +206,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-02T11:33:10.756Z"
+      "updatedAt": "2026-11-03T02:14:08.370Z"
     },
     "en": {
       "canton": "NE",
@@ -220,7 +221,7 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "4",
+          "value": "5",
           "note": "reports as of 2 November 2026"
         },
         {
@@ -288,19 +289,14 @@
               "date": "2026-10-26T14:40:00.000Z"
             },
             {
-              "label": "A5 Neuchâtel <-> Solothurn tra Raccordo autostradale Diramazione Brüggmoos E Luogo Vingelz Situazione: colonna Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-11-02T05:44:00.000Z"
-            },
-            {
-              "label": "A20 Diramazione Neuchâtel-Vauseyon -> La Chaux-de-Fonds tra Svincolo autostradale Hauts-Geneveys E Svincolo autostradale Bas-du-Reymond Situazione: traffico fortemente rallentato Causa: traffico…",
-              "value": "Traffic",
-              "date": "2026-11-02T06:46:00.000Z"
+              "label": "A5 Neuchâtel -> Yverdon tra Svincolo autostradale Yverdon Ouest E Raccordo autostradale Diramazione Yverdon Situazione: chiusa Causa: operazione di spegnimento in corso",
+              "value": "Closure",
+              "date": "2026-11-02T17:49:00.000Z"
             },
             {
               "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
               "value": "Traffic",
-              "date": "2026-11-02T06:54:25.899Z",
+              "date": "2026-11-02T19:51:36.134Z",
               "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             },
             {
@@ -308,10 +304,16 @@
               "value": "Roadworks",
               "detail": "until 31 December 2026",
               "date": "2024-09-06T05:22:00.000Z"
+            },
+            {
+              "label": "H5 Neuchâtel <-> Bienne Luogo St-Blaise Situazione: problemi di traffico cantiere",
+              "value": "Roadworks",
+              "detail": "until 30 April 2027",
+              "date": "2025-04-08T11:07:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-02T06:54:25.899Z"
+          "updatedAt": "2026-11-02T19:51:36.134Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -334,7 +336,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -388,7 +390,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-02T11:33:10.756Z"
+      "updatedAt": "2026-11-03T02:14:08.370Z"
     },
     "de": {
       "canton": "NE",
@@ -403,7 +405,7 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "4",
+          "value": "5",
           "note": "Meldungen vom 2. November 2026"
         },
         {
@@ -471,19 +473,14 @@
               "date": "2026-10-26T14:40:00.000Z"
             },
             {
-              "label": "A5 Neuenburg <-> Solothurn zwischen Autobahndreieck Verzweigung Brüggmoos und Ortschaft Vingelz Sachlage: Stau Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-11-02T05:44:00.000Z"
-            },
-            {
-              "label": "A20 Verzweigung Neuenburg-Vauseyon -> La Chaux-de-Fonds zwischen Anschluss Hauts-Geneveys und Anschluss Bas-du-Reymond Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-11-02T06:46:00.000Z"
+              "label": "A5 Neuenburg -> Yverdon zwischen Anschluss Yverdon-West und Autobahndreieck Verzweigung Yverdon Sachlage: Strecke gesperrt Ursache: Feuerwehreinsatz",
+              "value": "Sperrung",
+              "date": "2026-11-02T17:49:00.000Z"
             },
             {
               "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
               "value": "Verkehr",
-              "date": "2026-11-02T06:54:25.899Z",
+              "date": "2026-11-02T19:51:36.134Z",
               "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             },
             {
@@ -491,10 +488,16 @@
               "value": "Baustelle",
               "detail": "bis 31. Dezember 2026",
               "date": "2024-09-06T05:22:00.000Z"
+            },
+            {
+              "label": "H5 Neuenburg <-> Biel Ortschaft St-Blaise Sachlage: Verkehrsbehinderung Baustelle",
+              "value": "Baustelle",
+              "detail": "bis 30. April 2027",
+              "date": "2025-04-08T11:07:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-02T06:54:25.899Z"
+          "updatedAt": "2026-11-02T19:51:36.134Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -517,7 +520,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -571,7 +574,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-02T11:33:10.756Z"
+      "updatedAt": "2026-11-03T02:14:08.370Z"
     },
     "fr": {
       "canton": "NE",
@@ -586,7 +589,7 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "4",
+          "value": "5",
           "note": "signalements au 2 novembre 2026"
         },
         {
@@ -654,19 +657,14 @@
               "date": "2026-10-26T14:40:00.000Z"
             },
             {
-              "label": "A5 Neuchâtel <-> Soleure entre Echangeur Echangeur de Brüggmoos et Localité Vingelz Situation: bouchon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-11-02T05:44:00.000Z"
-            },
-            {
-              "label": "A20 Echangeur de Neuchâtel-Vauseyon -> La Chaux-de-Fonds entre Jonction autoroutière Hauts-Geneveys et Jonction autoroutière Bas-du-Reymond Situation: trafic en accordéon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-11-02T06:46:00.000Z"
+              "label": "A5 Neuchâtel -> Yverdon entre Jonction autoroutière Yverdon-Ouest et Echangeur Echangeur d'Yverdon Situation: fermé Raison: les pompiers sont à l'oeuvre",
+              "value": "Fermeture",
+              "date": "2026-11-02T17:49:00.000Z"
             },
             {
               "label": "Rabais jeunes sur les transports publics : un premier bilan très encourageant",
               "value": "Trafic",
-              "date": "2026-11-02T06:54:25.899Z",
+              "date": "2026-11-02T19:51:36.134Z",
               "url": "https://www.ne.ch/communiques-de-presse/rabais-jeunes-sur-les-transports-publics-un-premier-bilan-tres-encourageant"
             },
             {
@@ -674,10 +672,16 @@
               "value": "Chantier",
               "detail": "jusqu’au 31 décembre 2026",
               "date": "2024-09-06T05:22:00.000Z"
+            },
+            {
+              "label": "H5 Neuchâtel <-> Bienne Localité St-Blaise Situation: trafic perturbé travaux",
+              "value": "Chantier",
+              "detail": "jusqu’au 30 avril 2027",
+              "date": "2025-04-08T11:07:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-02T06:54:25.899Z"
+          "updatedAt": "2026-11-02T19:51:36.134Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -700,7 +704,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -754,7 +758,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-02T11:33:10.756Z"
+      "updatedAt": "2026-11-03T02:14:08.370Z"
     }
   }
 }

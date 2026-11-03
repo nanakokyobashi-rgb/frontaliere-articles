@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "mobilita",
-  "updatedAt": "2026-11-02T11:33:10.756Z",
-  "contentHash": "886eb4b06d8dd423d9a9e2ab7450eabccabddc9a205998a0dc62b91aa6196bfb",
+  "updatedAt": "2026-11-03T02:14:08.370Z",
+  "contentHash": "65f45c0fb5a7bb8d464ccc63cd898a3287b2ecee87495bc3901729d74a082f8c",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-02T06:54:25.899Z",
+      "updatedAt": "2026-11-02T19:51:36.134Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-01T21:24:45.283Z",
+      "updatedAt": "2026-11-02T13:52:53.767Z",
       "keyFacts": 0
     }
   ],
@@ -42,7 +42,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "27",
+          "value": "28",
           "note": "segnalazioni aggiornate: 2 novembre 2026"
         }
       ],
@@ -128,21 +128,6 @@
               "date": "2026-10-30T06:00:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> S. Gottardo tra Raccordo autostradale Diramazione Mendrisio E Galleria Galleria San Nicolao Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-11-02T04:50:00.000Z"
-            },
-            {
-              "label": "406 Riazzino -> Cadenazzo tra Luogo Quartino E Luogo Cadenazzo Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-11-02T05:36:00.000Z"
-            },
-            {
-              "label": "Revocato: 406 Cadenazzo -> Riazzino tra Luogo Quartino E Svincolo autostradale Aeroporto di Locarno Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-11-02T06:19:00.000Z"
-            },
-            {
               "label": "A2 Chiasso <-> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 5.2",
               "value": "Cantiere",
               "detail": "fine prevista: 29 dicembre 2028",
@@ -153,10 +138,28 @@
               "value": "Cantiere",
               "detail": "fine prevista: 29 dicembre 2028",
               "date": "2022-04-20T03:00:00.000Z"
+            },
+            {
+              "label": "A2 S. Gottardo -> Chiasso tra Parcheggio Area di dosaggio Airolo E Svincolo autostradale Airolo Situazione: problemi di traffico cantiere, lunghezza [km] 0.1 Causa: lavori stradali sulla banchina",
+              "value": "Cantiere",
+              "detail": "fine prevista: 28 giugno 2028",
+              "date": "2024-11-14T15:24:00.000Z"
+            },
+            {
+              "label": "A2 Chiasso <-> S. Gottardo Parcheggio Chiasso-Dogana commerciale Situazione: problemi di traffico cantiere, lunghezza [km] 0.1",
+              "value": "Cantiere",
+              "detail": "fine prevista: 24 marzo 2027",
+              "date": "2025-04-01T03:00:00.000Z"
+            },
+            {
+              "label": "H2 Airolo <-> Göschenen tra Passo Passo del S. Gottardo E Luogo Motto Bartola Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette Aggiunta 1: limite temporaneo…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 27 novembre 2026",
+              "date": "2026-05-22T05:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-02T06:54:25.899Z"
+          "updatedAt": "2026-11-02T19:51:36.134Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -194,7 +197,7 @@
               "url": "https://www.tilo.ch/avvisi/261019_ZEB-Vezia-Capolago.html"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -290,7 +293,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-02T11:33:10.756Z"
+      "updatedAt": "2026-11-03T02:14:08.370Z"
     },
     "en": {
       "canton": "TI",
@@ -310,7 +313,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "27",
+          "value": "28",
           "note": "reports as of 2 November 2026"
         }
       ],
@@ -396,21 +399,6 @@
               "date": "2026-10-30T06:00:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> S. Gottardo tra Raccordo autostradale Diramazione Mendrisio E Galleria Galleria San Nicolao Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-11-02T04:50:00.000Z"
-            },
-            {
-              "label": "406 Riazzino -> Cadenazzo tra Luogo Quartino E Luogo Cadenazzo Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-11-02T05:36:00.000Z"
-            },
-            {
-              "label": "Revocato: 406 Cadenazzo -> Riazzino tra Luogo Quartino E Svincolo autostradale Aeroporto di Locarno Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-11-02T06:19:00.000Z"
-            },
-            {
               "label": "A2 Chiasso <-> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 5.2",
               "value": "Roadworks",
               "detail": "until 29 December 2028",
@@ -421,10 +409,28 @@
               "value": "Roadworks",
               "detail": "until 29 December 2028",
               "date": "2022-04-20T03:00:00.000Z"
+            },
+            {
+              "label": "A2 S. Gottardo -> Chiasso tra Parcheggio Area di dosaggio Airolo E Svincolo autostradale Airolo Situazione: problemi di traffico cantiere, lunghezza [km] 0.1 Causa: lavori stradali sulla banchina",
+              "value": "Roadworks",
+              "detail": "until 28 June 2028",
+              "date": "2024-11-14T15:24:00.000Z"
+            },
+            {
+              "label": "A2 Chiasso <-> S. Gottardo Parcheggio Chiasso-Dogana commerciale Situazione: problemi di traffico cantiere, lunghezza [km] 0.1",
+              "value": "Roadworks",
+              "detail": "until 24 March 2027",
+              "date": "2025-04-01T03:00:00.000Z"
+            },
+            {
+              "label": "H2 Airolo <-> Göschenen tra Passo Passo del S. Gottardo E Luogo Motto Bartola Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette Aggiunta 1: limite temporaneo…",
+              "value": "Roadworks",
+              "detail": "until 27 November 2026",
+              "date": "2026-05-22T05:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-02T06:54:25.899Z"
+          "updatedAt": "2026-11-02T19:51:36.134Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -462,7 +468,7 @@
               "url": "https://www.tilo.ch/avvisi/261019_ZEB-Vezia-Capolago.html"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -557,7 +563,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-02T11:33:10.756Z"
+      "updatedAt": "2026-11-03T02:14:08.370Z"
     },
     "de": {
       "canton": "TI",
@@ -577,7 +583,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "27",
+          "value": "28",
           "note": "Meldungen vom 2. November 2026"
         }
       ],
@@ -663,21 +669,6 @@
               "date": "2026-10-30T06:00:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> Gotthard zwischen Autobahndreieck Verzweigung Mendrisio und Tunnel S. Nicolao-Tunnel Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-11-02T04:50:00.000Z"
-            },
-            {
-              "label": "406 Riazzino -> Cadenazzo zwischen Ortschaft Quartino und Ortschaft Cadenazzo Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-11-02T05:36:00.000Z"
-            },
-            {
-              "label": "Aufgehoben: 406 Cadenazzo -> Riazzino zwischen Ortschaft Quartino und Anschluss Flughafen Locarno Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-11-02T06:19:00.000Z"
-            },
-            {
               "label": "A2 Chiasso <-> Gotthard Tunnel Gotthard-Tunnel Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.3 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 5.2",
               "value": "Baustelle",
               "detail": "bis 29. Dezember 2028",
@@ -688,10 +679,28 @@
               "value": "Baustelle",
               "detail": "bis 29. Dezember 2028",
               "date": "2022-04-20T03:00:00.000Z"
+            },
+            {
+              "label": "A2 Gotthard -> Chiasso zwischen Parkplatz Dosierstelle Airolo und Anschluss Airolo Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.1 Ursache: Arbeiten am Pannenstreifen",
+              "value": "Baustelle",
+              "detail": "bis 28. Juni 2028",
+              "date": "2024-11-14T15:24:00.000Z"
+            },
+            {
+              "label": "A2 Chiasso <-> Gotthard Parkplatz Chiasso-Warenzoll Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.1",
+              "value": "Baustelle",
+              "detail": "bis 24. März 2027",
+              "date": "2025-04-01T03:00:00.000Z"
+            },
+            {
+              "label": "H2 Airolo <-> Göschenen zwischen Pass Gotthard-Pass und Ortschaft Motto Bartola Sachlage: Verkehrsbehinderung Baustelle Verkehrsführung: Fahrbahnverengung Zusatz 1: vorübergehende Begrenzung der…",
+              "value": "Baustelle",
+              "detail": "bis 27. November 2026",
+              "date": "2026-05-22T05:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-02T06:54:25.899Z"
+          "updatedAt": "2026-11-02T19:51:36.134Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -729,7 +738,7 @@
               "url": "https://www.tilo.ch/avvisi/261019_ZEB-Vezia-Capolago.html"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -824,7 +833,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-02T11:33:10.756Z"
+      "updatedAt": "2026-11-03T02:14:08.370Z"
     },
     "fr": {
       "canton": "TI",
@@ -844,7 +853,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "27",
+          "value": "28",
           "note": "signalements au 2 novembre 2026"
         }
       ],
@@ -930,21 +939,6 @@
               "date": "2026-10-30T06:00:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> St-Gothard entre Echangeur Echangeur de Mendrisio et Tunnel Tunnel de S. Nicolao Situation: trafic en accordéon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-11-02T04:50:00.000Z"
-            },
-            {
-              "label": "406 Riazzino -> Cadenazzo entre Localité Quartino et Localité Cadenazzo Situation: trafic en accordéon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-11-02T05:36:00.000Z"
-            },
-            {
-              "label": "Révoqué: 406 Cadenazzo -> Riazzino entre Localité Quartino et Jonction autoroutière Aeroprt de Locarno Situation: trafic en accordéon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-11-02T06:19:00.000Z"
-            },
-            {
               "label": "A2 Chiasso <-> St-Gothard Tunnel Tunnel du St-Gothard Situation: trafic perturbé travaux, longueur [km] 0.3 Complément 1: limitation temporaire de largeur largeur de la voie [m] 5.2",
               "value": "Chantier",
               "detail": "jusqu’au 29 décembre 2028",
@@ -955,10 +949,28 @@
               "value": "Chantier",
               "detail": "jusqu’au 29 décembre 2028",
               "date": "2022-04-20T03:00:00.000Z"
+            },
+            {
+              "label": "A2 St-Gothard -> Chiasso entre Parking Aire de dosage Airolo et Jonction autoroutière Airolo Situation: trafic perturbé travaux, longueur [km] 0.1 Raison: travaux sur la bande d'arrêt d'urgence",
+              "value": "Chantier",
+              "detail": "jusqu’au 28 juin 2028",
+              "date": "2024-11-14T15:24:00.000Z"
+            },
+            {
+              "label": "A2 Chiasso <-> St-Gothard Parking Chiasso-Douane commercial Situation: trafic perturbé travaux, longueur [km] 0.1",
+              "value": "Chantier",
+              "detail": "jusqu’au 24 mars 2027",
+              "date": "2025-04-01T03:00:00.000Z"
+            },
+            {
+              "label": "H2 Airolo <-> Göschenen entre Col Col du St-Gothard et Localité Motto Bartola Situation: trafic perturbé travaux Gestion du trafic: rétrécissement des voies Complément 1: limitation temporaire de…",
+              "value": "Chantier",
+              "detail": "jusqu’au 27 novembre 2026",
+              "date": "2026-05-22T05:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-02T06:54:25.899Z"
+          "updatedAt": "2026-11-02T19:51:36.134Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -996,7 +1008,7 @@
               "url": "https://www.tilo.ch/avvisi/261019_ZEB-Vezia-Capolago.html"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -1092,7 +1104,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-02T11:33:10.756Z"
+      "updatedAt": "2026-11-03T02:14:08.370Z"
     }
   }
 }

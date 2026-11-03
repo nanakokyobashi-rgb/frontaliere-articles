@@ -4,17 +4,17 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "mobilita",
-  "updatedAt": "2026-11-02T11:33:10.756Z",
-  "contentHash": "6dab523333c4fe5e7cbe1ccd0e2395e80b32f864b14bf93451765463eb09b787",
+  "updatedAt": "2026-11-03T02:14:08.370Z",
+  "contentHash": "0a6e81f0749066d0072cd5dca8a61d8343619e1952921b8e4f95464c0c6ad2e8",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-02T06:54:25.899Z",
+      "updatedAt": "2026-11-02T19:51:36.134Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-01T21:24:45.283Z",
+      "updatedAt": "2026-11-02T13:52:53.767Z",
       "keyFacts": 0
     }
   ],
@@ -40,7 +40,7 @@
             {
               "label": "Haslen - Selbstunfall mit Personenwagen",
               "value": "Traffico",
-              "date": "2026-11-02T06:54:25.899Z",
+              "date": "2026-11-02T19:51:36.134Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/selbstunfall-personenwagen-1"
             },
             {
@@ -51,7 +51,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-02T06:54:25.899Z"
+          "updatedAt": "2026-11-02T19:51:36.134Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -89,7 +89,7 @@
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-02T11:33:10.756Z"
+      "updatedAt": "2026-11-03T02:14:08.370Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -140,7 +140,7 @@
             {
               "label": "Haslen - Selbstunfall mit Personenwagen",
               "value": "Traffic",
-              "date": "2026-11-02T06:54:25.899Z",
+              "date": "2026-11-02T19:51:36.134Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/selbstunfall-personenwagen-1"
             },
             {
@@ -151,7 +151,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-02T06:54:25.899Z"
+          "updatedAt": "2026-11-02T19:51:36.134Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -189,7 +189,7 @@
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -217,7 +217,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-02T11:33:10.756Z"
+      "updatedAt": "2026-11-03T02:14:08.370Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -240,7 +240,7 @@
             {
               "label": "Haslen - Selbstunfall mit Personenwagen",
               "value": "Verkehr",
-              "date": "2026-11-02T06:54:25.899Z",
+              "date": "2026-11-02T19:51:36.134Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/selbstunfall-personenwagen-1"
             },
             {
@@ -251,7 +251,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-02T06:54:25.899Z"
+          "updatedAt": "2026-11-02T19:51:36.134Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -289,7 +289,7 @@
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -317,7 +317,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-02T11:33:10.756Z"
+      "updatedAt": "2026-11-03T02:14:08.370Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -340,7 +340,7 @@
             {
               "label": "Haslen - Selbstunfall mit Personenwagen",
               "value": "Trafic",
-              "date": "2026-11-02T06:54:25.899Z",
+              "date": "2026-11-02T19:51:36.134Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/selbstunfall-personenwagen-1"
             },
             {
@@ -351,7 +351,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-02T06:54:25.899Z"
+          "updatedAt": "2026-11-02T19:51:36.134Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -389,7 +389,7 @@
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -417,7 +417,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-02T11:33:10.756Z"
+      "updatedAt": "2026-11-03T02:14:08.370Z"
     }
   }
 }

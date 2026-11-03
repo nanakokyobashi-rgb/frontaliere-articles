@@ -4,12 +4,12 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "mobilita",
-  "updatedAt": "2026-11-02T11:33:10.756Z",
-  "contentHash": "10ceed84eab8f49319c5f86641df32efabfaa94a90ba202cfc852d28be042df6",
+  "updatedAt": "2026-11-03T02:14:08.370Z",
+  "contentHash": "f437eb9d632130a24813bef09fb0c47d8c81239669045cc49cbfb188c7fdbf7d",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-02T06:54:25.899Z",
+      "updatedAt": "2026-11-02T19:51:36.134Z",
       "keyFacts": 2
     }
   ],
@@ -27,7 +27,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "1",
+          "value": "2",
           "note": "segnalazioni aggiornate: 2 novembre 2026"
         }
       ],
@@ -50,19 +50,20 @@
               "date": "2026-10-23T12:31:00.000Z"
             },
             {
-              "label": "A4 Zürich -> Brunnen Svincolo autostradale Küssnacht Situazione: colonna in uscita Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-11-02T06:16:00.000Z"
-            },
-            {
               "label": "A4 Altdorf <-> Brunnen Svincolo autostradale Brunnen Süd Situazione: problemi di traffico cantiere, lunghezza [km] 0.12 Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo…",
               "value": "Cantiere",
               "detail": "fine prevista: 11 novembre 2026",
               "date": "2026-10-23T08:00:00.000Z"
+            },
+            {
+              "label": "A4 Brunnen -> Zürich Raccordo autostradale Diramazione Blegi Situazione: problemi di traffico cantiere, lunghezza [km] 0.1 Limitazione del traffico: corsie strette ridotta su una corsia Aggiunta 1…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 10 dicembre 2026",
+              "date": "2026-11-02T08:35:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-02T06:54:25.899Z"
+          "updatedAt": "2026-11-02T19:51:36.134Z"
         }
       ],
       "curatedArticles": [
@@ -96,7 +97,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-02T11:33:10.756Z"
+      "updatedAt": "2026-11-03T02:14:08.370Z"
     },
     "en": {
       "canton": "SZ",
@@ -111,7 +112,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "1",
+          "value": "2",
           "note": "reports as of 2 November 2026"
         }
       ],
@@ -134,19 +135,20 @@
               "date": "2026-10-23T12:31:00.000Z"
             },
             {
-              "label": "A4 Zürich -> Brunnen Svincolo autostradale Küssnacht Situazione: colonna in uscita Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-11-02T06:16:00.000Z"
-            },
-            {
               "label": "A4 Altdorf <-> Brunnen Svincolo autostradale Brunnen Süd Situazione: problemi di traffico cantiere, lunghezza [km] 0.12 Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo…",
               "value": "Roadworks",
               "detail": "until 11 November 2026",
               "date": "2026-10-23T08:00:00.000Z"
+            },
+            {
+              "label": "A4 Brunnen -> Zürich Raccordo autostradale Diramazione Blegi Situazione: problemi di traffico cantiere, lunghezza [km] 0.1 Limitazione del traffico: corsie strette ridotta su una corsia Aggiunta 1…",
+              "value": "Roadworks",
+              "detail": "until 10 December 2026",
+              "date": "2026-11-02T08:35:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-02T06:54:25.899Z"
+          "updatedAt": "2026-11-02T19:51:36.134Z"
         }
       ],
       "curatedArticles": [
@@ -180,7 +182,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-02T11:33:10.756Z"
+      "updatedAt": "2026-11-03T02:14:08.370Z"
     },
     "de": {
       "canton": "SZ",
@@ -195,7 +197,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "1",
+          "value": "2",
           "note": "Meldungen vom 2. November 2026"
         }
       ],
@@ -218,19 +220,20 @@
               "date": "2026-10-23T12:31:00.000Z"
             },
             {
-              "label": "A4 Zürich -> Brunnen Anschluss Küssnacht Sachlage: Stau in der Ausfahrt Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-11-02T06:16:00.000Z"
-            },
-            {
               "label": "A4 Altdorf <-> Brunnen Anschluss Brunnen-Süd Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.12 Verkehrsführung: veränderte Verkehrsführung Zusatz 1: vorübergehende Begrenzung der Breite…",
               "value": "Baustelle",
               "detail": "bis 11. November 2026",
               "date": "2026-10-23T08:00:00.000Z"
+            },
+            {
+              "label": "A4 Brunnen -> Zürich Autobahndreieck Verzweigung Blegi Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.1 Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen verengt Zusatz 1…",
+              "value": "Baustelle",
+              "detail": "bis 10. Dezember 2026",
+              "date": "2026-11-02T08:35:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-02T06:54:25.899Z"
+          "updatedAt": "2026-11-02T19:51:36.134Z"
         }
       ],
       "curatedArticles": [
@@ -264,7 +267,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-02T11:33:10.756Z"
+      "updatedAt": "2026-11-03T02:14:08.370Z"
     },
     "fr": {
       "canton": "SZ",
@@ -279,7 +282,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "1",
+          "value": "2",
           "note": "signalements au 2 novembre 2026"
         }
       ],
@@ -302,19 +305,20 @@
               "date": "2026-10-23T12:31:00.000Z"
             },
             {
-              "label": "A4 Zurich -> Brunnen Jonction autoroutière Küssnacht Situation: bouchon dans la sortie Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-11-02T06:16:00.000Z"
-            },
-            {
               "label": "A4 Altdorf <-> Brunnen Jonction autoroutière Brunnen-Sud Situation: trafic perturbé travaux, longueur [km] 0.12 Gestion du trafic: nouveau plan de circulation Complément 1: limitation temporaire de…",
               "value": "Chantier",
               "detail": "jusqu’au 11 novembre 2026",
               "date": "2026-10-23T08:00:00.000Z"
+            },
+            {
+              "label": "A4 Brunnen -> Zurich Echangeur Echangeur de Blegi Situation: trafic perturbé travaux, longueur [km] 0.1 Gestion du trafic: rétrécissement des voies sur une voie de circulation Complément 1…",
+              "value": "Chantier",
+              "detail": "jusqu’au 10 décembre 2026",
+              "date": "2026-11-02T08:35:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-02T06:54:25.899Z"
+          "updatedAt": "2026-11-02T19:51:36.134Z"
         }
       ],
       "curatedArticles": [
@@ -348,7 +352,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-02T11:33:10.756Z"
+      "updatedAt": "2026-11-03T02:14:08.370Z"
     }
   }
 }

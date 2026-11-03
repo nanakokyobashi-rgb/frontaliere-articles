@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "servizi",
-  "updatedAt": "2026-11-02T18:34:35.378Z",
-  "contentHash": "276794d036d2e58eab5cf64e55b501f50230e677a8cb7f4b7e8a81fb22715856",
+  "updatedAt": "2026-11-03T02:14:08.370Z",
+  "contentHash": "1d01ebae875de077cfde8ef5933d383aae4c041af0c20993ebb30803e063da4a",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -13,8 +13,13 @@
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-11-02T18:38:16.906Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-01T21:24:45.283Z",
+      "updatedAt": "2026-11-02T13:52:53.767Z",
       "keyFacts": 0
     }
   ],
@@ -59,6 +64,20 @@
           "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Luzern",
+              "value": "7 °C",
+              "detail": "oggi da 5 a 7 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-02T18:38:16.906Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
@@ -94,10 +113,16 @@
               "url": "https://www.lups.ch/2026/07/20/abschluss-der-standorttour-in-st-urban-einblicke-in-apotheke-und-stationaere-dienste/"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Canton Lucerna: meno certificati medici per le assenze scolastiche",
+          "url": "/articoli-lucerna/lucerna-scuole-certificati-medici/",
+          "excerpt": "Durante la stagione influenzale, le direzioni scolastiche richiederanno il certificato medico solo in presenza di dubbi fondati sulle assenze degli alunni.",
+          "date": "2026-11-03T01:05:01.707Z"
+        },
         {
           "title": "Lucerna, qualità e sviluppo scolastico più vicini",
           "url": "/articoli-lucerna/lucerna-qualita-sviluppo-scuole/",
@@ -139,12 +164,6 @@
           "url": "/articoli-svizzera/patente-estera-lucerna-procedura/",
           "excerpt": "Procedura di conversione della patente estera nel Cantone Lucerna: esame teorico e pratico, corsi obbligatori, ufficio della circolazione.",
           "date": "2026-09-03T19:12:14.541Z"
-        },
-        {
-          "title": "Permesso di dimora B Lucerna: requisiti e rinnovo",
-          "url": "/articoli-svizzera/permesso-dimora-b-lucerna-rinnovo-procedura/",
-          "excerpt": "Guida pratica al permesso di dimora B nel cantone di Lucerna: durata, requisiti, documenti necessari, procedura di rinnovo e contatti dell'ufficio cantonale della migrazione.",
-          "date": "2026-08-22T06:02:17.642Z"
         }
       ],
       "latestCantonArticles": [],
@@ -174,7 +193,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-02T18:34:35.378Z"
+      "updatedAt": "2026-11-03T02:14:08.370Z"
     },
     "en": {
       "canton": "LU",
@@ -216,6 +235,20 @@
           "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Luzern",
+              "value": "7 °C",
+              "detail": "today from 5 to 7 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-02T18:38:16.906Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
@@ -251,10 +284,16 @@
               "url": "https://www.lups.ch/2026/07/20/abschluss-der-standorttour-in-st-urban-einblicke-in-apotheke-und-stationaere-dienste/"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Canton Lucerne: fewer medical certificates for school absences",
+          "url": "/en/lucerne-articles/lucerne-schools-medical-certificates/",
+          "excerpt": "During flu season, school administrations will require a medical certificate only when there are well-founded doubts about students' absences.",
+          "date": "2026-11-03T01:05:01.707Z"
+        },
         {
           "title": "Lucerne, quality and school development closer together",
           "url": "/en/lucerne-articles/lucerne-school-quality-development/",
@@ -295,12 +334,6 @@
           "url": "/en/swiss-articles/driving-licence-lucerne-conversion-procedure/",
           "excerpt": "Procedure for converting the foreign licence in the Canton of Lucerne: theoretical and practical examination, compulsory courses, traffic office.",
           "date": "2026-09-03T19:12:14.541Z"
-        },
-        {
-          "title": "Residence permit B Lucerne: requirements and renewal",
-          "url": "/en/swiss-articles/residence-permit-b-lucerne-renewal-procedure/",
-          "excerpt": "Practical guide to residence permit B in the canton of Lucerne: duration, requirements, necessary documents, renewal procedure and contacts of the cantonal migration office.",
-          "date": "2026-08-22T06:02:17.642Z"
         }
       ],
       "latestCantonArticles": [],
@@ -326,7 +359,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-02T18:34:35.378Z"
+      "updatedAt": "2026-11-03T02:14:08.370Z"
     },
     "de": {
       "canton": "LU",
@@ -368,6 +401,20 @@
           "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Luzern",
+              "value": "7 °C",
+              "detail": "heute 5 bis 7 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-02T18:38:16.906Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
@@ -403,10 +450,16 @@
               "url": "https://www.lups.ch/2026/07/20/abschluss-der-standorttour-in-st-urban-einblicke-in-apotheke-und-stationaere-dienste/"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Kanton Luzern: weniger ärztliche Atteste für Schulabsenzen",
+          "url": "/de/luzern-artikel/luzern-schulen-arztzeugnisse/",
+          "excerpt": "Während der Grippesaison werden die Schulleitungen ein ärztliches Attest nur verlangen, wenn begründete Zweifel an den Absenzen der Schülerinnen und Schüler bestehen.",
+          "date": "2026-11-03T01:05:01.707Z"
+        },
         {
           "title": "Luzern, Qualität und Schulentwicklung rücken näher zusammen",
           "url": "/de/luzern-artikel/luzern-schulqualitaet-entwicklung/",
@@ -447,12 +500,6 @@
           "url": "/de/schweiz-artikel/fahrerausweis-luzern-umschreibung-verfahren/",
           "excerpt": "Umwandlungsverfahren des ausländischen Führerscheins im Kanton Luzern: Theorie- und Praxisprüfung, Pflichtkurse, Strassenverkehrsamt.",
           "date": "2026-09-03T19:12:14.541Z"
-        },
-        {
-          "title": "Aufenthaltsbewilligung B Luzern: Voraussetzungen und Verlängerung",
-          "url": "/de/schweiz-artikel/aufenthaltserlaubnis-b-luzern-verlaengerung-verfahren/",
-          "excerpt": "Praktischer Leitfaden zur Aufenthaltsbewilligung B im Kanton Luzern: Dauer, Voraussetzungen, erforderliche Unterlagen, Erneuerungsverfahren und Kontakte der kantonalen Migrationsstelle.",
-          "date": "2026-08-22T06:02:17.642Z"
         }
       ],
       "latestCantonArticles": [],
@@ -478,7 +525,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-02T18:34:35.378Z"
+      "updatedAt": "2026-11-03T02:14:08.370Z"
     },
     "fr": {
       "canton": "LU",
@@ -520,6 +567,20 @@
           "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Luzern",
+              "value": "7 °C",
+              "detail": "aujourd’hui de 5 à 7 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-02T18:38:16.906Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
@@ -555,10 +616,16 @@
               "url": "https://www.lups.ch/2026/07/20/abschluss-der-standorttour-in-st-urban-einblicke-in-apotheke-und-stationaere-dienste/"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Canton de Lucerne : moins de certificats médicaux pour les absences scolaires",
+          "url": "/fr/articles-lucerne/lucerne-ecoles-certificats-medicaux/",
+          "excerpt": "Durant la saison grippale, les directions des écoles ne demanderont un certificat médical qu'en présence de doutes fondés concernant les absences des élèves.",
+          "date": "2026-11-03T01:05:01.707Z"
+        },
         {
           "title": "Lucerne, qualité et développement scolaire plus proches",
           "url": "/fr/articles-lucerne/lucerne-qualite-developpement-scolaire/",
@@ -600,12 +667,6 @@
           "url": "/fr/articles-suisse/permis-lucerne-conversion-procedure/",
           "excerpt": "Procédure de conversion du permis étranger dans le canton de Lucerne : examen théorique et pratique, cours obligatoires, bureau de la circulation.",
           "date": "2026-09-03T19:12:14.541Z"
-        },
-        {
-          "title": "Permis de séjour B Lucerne : exigences et renouvellement",
-          "url": "/fr/articles-suisse/permis-sejour-b-lucerne-renouvellement-procedure/",
-          "excerpt": "Guide pratique du permis de séjour B dans le canton de Lucerne : durée, exigences, documents nécessaires, procédure de renouvellement et contacts de l'office cantonal des migrations.",
-          "date": "2026-08-22T06:02:17.642Z"
         }
       ],
       "latestCantonArticles": [],
@@ -627,7 +688,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-02T18:34:35.378Z"
+      "updatedAt": "2026-11-03T02:14:08.370Z"
     }
   }
 }

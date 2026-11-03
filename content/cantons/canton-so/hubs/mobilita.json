@@ -4,17 +4,17 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "mobilita",
-  "updatedAt": "2026-11-02T18:34:35.378Z",
-  "contentHash": "f346a6c6435a30732445a2d5de441d009acb22f4a6f303f5352f391889aaf64d",
+  "updatedAt": "2026-11-03T02:14:08.370Z",
+  "contentHash": "b2080564295bff80cc28a586887a06ef02025b6ae287de1dd5942d2b529a9b1c",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-02T06:54:25.899Z",
+      "updatedAt": "2026-11-02T19:51:36.134Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-01T21:24:45.283Z",
+      "updatedAt": "2026-11-02T13:52:53.767Z",
       "keyFacts": 0
     }
   ],
@@ -73,9 +73,9 @@
               "date": "2026-10-22T06:00:00.000Z"
             },
             {
-              "label": "A2 Basel -> Luzern tra Svincolo autostradale Egerkingen E Raccordo autostradale Diramazione Härkingen Situazione: colonna Causa: traffico congestionato",
+              "label": "A2 Luzern <-> Basel tra Svincolo autostradale Egerkingen E Raccordo autostradale Diramazione Härkingen Situazione: pericolo Causa: persone sulla strada ciclisti",
               "value": "Traffico",
-              "date": "2026-11-02T06:05:00.000Z"
+              "date": "2026-11-02T19:46:00.000Z"
             },
             {
               "label": "Balsthal <-> Laufen tra Luogo Oberbeinwil E Passo Passwang Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette",
@@ -91,7 +91,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-02T06:54:25.899Z"
+          "updatedAt": "2026-11-02T19:51:36.134Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -114,7 +114,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -160,7 +160,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-02T18:34:35.378Z"
+      "updatedAt": "2026-11-03T02:14:08.370Z"
     },
     "en": {
       "canton": "SO",
@@ -216,9 +216,9 @@
               "date": "2026-10-22T06:00:00.000Z"
             },
             {
-              "label": "A2 Basel -> Luzern tra Svincolo autostradale Egerkingen E Raccordo autostradale Diramazione Härkingen Situazione: colonna Causa: traffico congestionato",
+              "label": "A2 Luzern <-> Basel tra Svincolo autostradale Egerkingen E Raccordo autostradale Diramazione Härkingen Situazione: pericolo Causa: persone sulla strada ciclisti",
               "value": "Traffic",
-              "date": "2026-11-02T06:05:00.000Z"
+              "date": "2026-11-02T19:46:00.000Z"
             },
             {
               "label": "Balsthal <-> Laufen tra Luogo Oberbeinwil E Passo Passwang Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette",
@@ -234,7 +234,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-02T06:54:25.899Z"
+          "updatedAt": "2026-11-02T19:51:36.134Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -257,7 +257,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -302,7 +302,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-02T18:34:35.378Z"
+      "updatedAt": "2026-11-03T02:14:08.370Z"
     },
     "de": {
       "canton": "SO",
@@ -358,9 +358,9 @@
               "date": "2026-10-22T06:00:00.000Z"
             },
             {
-              "label": "A2 Basel -> Luzern zwischen Anschluss Egerkingen und Autobahndreieck Verzweigung Härkingen Sachlage: Stau Ursache: Verkehrsüberlastung",
+              "label": "A2 Luzern <-> Basel zwischen Anschluss Egerkingen und Autobahndreieck Verzweigung Härkingen Sachlage: Gefahr Ursache: Personen auf der Fahrbahn Fahrradfahrer",
               "value": "Verkehr",
-              "date": "2026-11-02T06:05:00.000Z"
+              "date": "2026-11-02T19:46:00.000Z"
             },
             {
               "label": "Balsthal <-> Laufen zwischen Ortschaft Oberbeinwil und Pass Passwang Sachlage: Verkehrsbehinderung Baustelle Verkehrsführung: Fahrbahnverengung",
@@ -376,7 +376,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-02T06:54:25.899Z"
+          "updatedAt": "2026-11-02T19:51:36.134Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -399,7 +399,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -444,7 +444,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-02T18:34:35.378Z"
+      "updatedAt": "2026-11-03T02:14:08.370Z"
     },
     "fr": {
       "canton": "SO",
@@ -500,9 +500,9 @@
               "date": "2026-10-22T06:00:00.000Z"
             },
             {
-              "label": "A2 Bâle -> Lucerne entre Jonction autoroutière Egerkingen et Echangeur Echangeur de Härkingen Situation: bouchon Raison: surcharge de trafic",
+              "label": "A2 Lucerne <-> Bâle entre Jonction autoroutière Egerkingen et Echangeur Echangeur de Härkingen Situation: danger Raison: piétons sur la chaussée cyclistes",
               "value": "Trafic",
-              "date": "2026-11-02T06:05:00.000Z"
+              "date": "2026-11-02T19:46:00.000Z"
             },
             {
               "label": "Balsthal <-> Laufon entre Localité Oberbeinwil et Col Passwang Situation: trafic perturbé travaux Gestion du trafic: rétrécissement des voies",
@@ -518,7 +518,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-02T06:54:25.899Z"
+          "updatedAt": "2026-11-02T19:51:36.134Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -541,7 +541,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-11-01T21:24:45.283Z"
+          "updatedAt": "2026-11-02T13:52:53.767Z"
         }
       ],
       "curatedArticles": [
@@ -587,7 +587,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-02T18:34:35.378Z"
+      "updatedAt": "2026-11-03T02:14:08.370Z"
     }
   }
 }

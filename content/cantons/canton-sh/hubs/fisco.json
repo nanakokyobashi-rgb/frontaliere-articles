@@ -4,8 +4,8 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "fisco",
-  "updatedAt": "2026-10-27T03:06:42.388Z",
-  "contentHash": "ad44470894effcb09cd801c1f03f5f9142860b6edfca04bf0ca1416f88c7b123",
+  "updatedAt": "2026-11-03T02:14:08.370Z",
+  "contentHash": "b5d01c0c851ff5c51ba41436f2e6745f48140adf6904e56cccbbd88a8e1c4e10",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -108,6 +108,12 @@
           "date": "2026-10-27T02:57:10.663Z"
         },
         {
+          "title": "GPK propone modifiche al budget 2027 di Sciaffusa",
+          "url": "/articoli-sciaffusa/gpk-modifiche-budget-2027/",
+          "excerpt": "Il deficit previsto scenderebbe a circa 5 milioni di CHF; la crescita della massa salariale passerebbe allo 0,5%.",
+          "date": "2026-11-03T02:05:33.934Z"
+        },
+        {
           "title": "Governo di Sciaffusa: budget 2027 corretto, conti in rosso",
           "url": "/articoli-sciaffusa/sciaffusa-budget-correzione/",
           "excerpt": "Il Governo di Sciaffusa ha corretto di 2,2 milioni di franchi il budget 2027; i conti dovrebbero comunque chiudere in rosso.",
@@ -159,7 +165,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-27T03:06:42.388Z"
+      "updatedAt": "2026-11-03T02:14:08.370Z"
     },
     "en": {
       "canton": "SH",
@@ -250,6 +256,12 @@
           "date": "2026-10-27T02:57:10.663Z"
         },
         {
+          "title": "GPK proposes changes to Schaffhausen's 2027 budget",
+          "url": "/en/schaffhausen-articles/gpk-schaffhausen-2027-budget-changes/",
+          "excerpt": "The projected deficit would fall to approximately CHF 5 million; growth in the wage bill would drop to 0.5%.",
+          "date": "2026-11-03T02:05:33.934Z"
+        },
+        {
           "title": "Government of Schaffhausen: 2027 budget corrected, accounts in the red",
           "url": "/en/schaffhausen-articles/schaffhausen-budget-correction/",
           "excerpt": "The Government of Schaffhausen revised the 2027 budget by 2,2 million francs; the accounts should nevertheless close in the red.",
@@ -301,7 +313,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-27T03:06:42.388Z"
+      "updatedAt": "2026-11-03T02:14:08.370Z"
     },
     "de": {
       "canton": "SH",
@@ -392,6 +404,12 @@
           "date": "2026-10-27T02:57:10.663Z"
         },
         {
+          "title": "GPK schlägt Änderungen am Budget 2027 von Schaffhausen vor",
+          "url": "/de/schaffhausen-artikel/gpk-schaffhausen-budget-2027-aenderung/",
+          "excerpt": "Das erwartete Defizit würde auf rund 5 Millionen CHF sinken; das Wachstum der Lohnsumme würde auf 0,5% zurückgehen.",
+          "date": "2026-11-03T02:05:33.934Z"
+        },
+        {
           "title": "Regierung von Schaffhausen: Budget 2027 korrigiert, rote Zahlen",
           "url": "/de/schaffhausen-artikel/schaffhausen-budget-korrektur/",
           "excerpt": "Die Regierung von Schaffhausen hat das Budget 2027 um 2,2 Millionen Franken korrigiert; die Rechnung dürfte dennoch mit roten Zahlen abschließen.",
@@ -443,7 +461,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-27T03:06:42.388Z"
+      "updatedAt": "2026-11-03T02:14:08.370Z"
     },
     "fr": {
       "canton": "SH",
@@ -534,6 +552,12 @@
           "date": "2026-10-27T02:57:10.663Z"
         },
         {
+          "title": "GPK propose des modifications au budget 2027 de Schaffhouse",
+          "url": "/fr/articles-schaffhouse/gpk-schaffhouse-budget-2027-modifications/",
+          "excerpt": "Le déficit prévu passerait à environ 5 millions de CHF ; la croissance de la masse salariale passerait à 0,5%.",
+          "date": "2026-11-03T02:05:33.934Z"
+        },
+        {
           "title": "Gouvernement de Schaffhouse : budget 2027 corrigé, comptes dans le rouge",
           "url": "/fr/articles-schaffhouse/schaffhouse-budget-correction/",
           "excerpt": "Le Gouvernement de Schaffhouse a corrigé le budget 2027 de 2,2 millions de francs ; les comptes devraient néanmoins clôturer dans le rouge.",
@@ -585,7 +609,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-27T03:06:42.388Z"
+      "updatedAt": "2026-11-03T02:14:08.370Z"
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "mobilita",
-  "updatedAt": "2026-11-02T21:01:35.908Z",
-  "contentHash": "5e648c4b68f61b05967cd8f9d99386ba1b4b8a8a7f4d93c869ab8c9435485d3e",
+  "updatedAt": "2026-11-03T02:14:08.370Z",
+  "contentHash": "f64d699a59416f046da7c7089df2d1b2a3a6523907501d1f099c395a9a4ba7dc",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-02T06:54:25.899Z",
+      "updatedAt": "2026-11-02T19:51:36.134Z",
       "keyFacts": 2
     },
     {
@@ -27,12 +27,12 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "18",
+          "value": "16",
           "note": "segnalazioni aggiornate: 2 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "85",
+          "value": "88",
           "note": "segnalazioni aggiornate: 2 novembre 2026"
         }
       ],
@@ -73,25 +73,26 @@
               "date": "2026-07-27T05:05:00.000Z"
             },
             {
-              "label": "Revocato: Bützberg <-> Aarwangen Luogo Bützberg Situazione: chiusa Causa: incendio",
-              "value": "Chiusura",
-              "date": "2026-08-12T02:00:00.000Z"
-            },
-            {
               "label": "A6W Diramazione Lattigen -> Port Raccordo autostradale Diramazione Lattigen Situazione: uscita chiusa cantiere, lunghezza [km] 0.3",
               "value": "Chiusura",
               "detail": "fine prevista: 12 novembre 2026",
               "date": "2026-08-28T15:09:00.000Z"
             },
             {
-              "label": "Revocato: Bühl -> Siselen tra Luogo Walperswil E Luogo Siselen Situazione: ponte chiuso Causa: lavori di costruzione Limitazione del traffico: corsia chiusa",
+              "label": "Bühl -> Siselen tra Luogo Walperswil E Luogo Siselen Situazione: ponte chiuso Causa: lavori di costruzione Limitazione del traffico: corsia chiusa",
               "value": "Chiusura",
               "detail": "fine prevista: 30 giugno 2027",
               "date": "2026-09-28T04:00:00.000Z"
+            },
+            {
+              "label": "A1 Zürich -> Bern tra Raccordo autostradale Diramazione Wankdorf E Svincolo autostradale Bern-Neufeld Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: corsia…",
+              "value": "Chiusura",
+              "detail": "fine prevista: 25 novembre 2026",
+              "date": "2026-10-12T08:09:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-02T06:54:25.899Z"
+          "updatedAt": "2026-11-02T19:51:36.134Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -181,7 +182,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-02T21:01:35.908Z"
+      "updatedAt": "2026-11-03T02:14:08.370Z"
     },
     "en": {
       "canton": "BE",
@@ -191,12 +192,12 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "18",
+          "value": "16",
           "note": "reports as of 2 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "85",
+          "value": "88",
           "note": "reports as of 2 November 2026"
         }
       ],
@@ -237,25 +238,26 @@
               "date": "2026-07-27T05:05:00.000Z"
             },
             {
-              "label": "Revocato: Bützberg <-> Aarwangen Luogo Bützberg Situazione: chiusa Causa: incendio",
-              "value": "Closure",
-              "date": "2026-08-12T02:00:00.000Z"
-            },
-            {
               "label": "A6W Diramazione Lattigen -> Port Raccordo autostradale Diramazione Lattigen Situazione: uscita chiusa cantiere, lunghezza [km] 0.3",
               "value": "Closure",
               "detail": "until 12 November 2026",
               "date": "2026-08-28T15:09:00.000Z"
             },
             {
-              "label": "Revocato: Bühl -> Siselen tra Luogo Walperswil E Luogo Siselen Situazione: ponte chiuso Causa: lavori di costruzione Limitazione del traffico: corsia chiusa",
+              "label": "Bühl -> Siselen tra Luogo Walperswil E Luogo Siselen Situazione: ponte chiuso Causa: lavori di costruzione Limitazione del traffico: corsia chiusa",
               "value": "Closure",
               "detail": "until 30 June 2027",
               "date": "2026-09-28T04:00:00.000Z"
+            },
+            {
+              "label": "A1 Zürich -> Bern tra Raccordo autostradale Diramazione Wankdorf E Svincolo autostradale Bern-Neufeld Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: corsia…",
+              "value": "Closure",
+              "detail": "until 25 November 2026",
+              "date": "2026-10-12T08:09:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-02T06:54:25.899Z"
+          "updatedAt": "2026-11-02T19:51:36.134Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -345,7 +347,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-02T21:01:35.908Z"
+      "updatedAt": "2026-11-03T02:14:08.370Z"
     },
     "de": {
       "canton": "BE",
@@ -355,12 +357,12 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "18",
+          "value": "16",
           "note": "Meldungen vom 2. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "85",
+          "value": "88",
           "note": "Meldungen vom 2. November 2026"
         }
       ],
@@ -401,25 +403,26 @@
               "date": "2026-07-27T05:05:00.000Z"
             },
             {
-              "label": "Aufgehoben: Bützberg <-> Aarwangen Ortschaft Bützberg Sachlage: Strecke gesperrt Ursache: Brand",
-              "value": "Sperrung",
-              "date": "2026-08-12T02:00:00.000Z"
-            },
-            {
               "label": "A6W Verzweigung Lattigen -> Port Autobahndreieck Verzweigung Lattigen Sachlage: Ausfahrt gesperrt Baustelle, Länge [km] 0.3",
               "value": "Sperrung",
               "detail": "bis 12. November 2026",
               "date": "2026-08-28T15:09:00.000Z"
             },
             {
-              "label": "Aufgehoben: Bühl -> Siselen zwischen Ortschaft Walperswil und Ortschaft Siselen Sachlage: Brücke gesperrt Ursache: Bauarbeiten Verkehrsführung: Fahrstreifen gesperrt",
+              "label": "Bühl -> Siselen zwischen Ortschaft Walperswil und Ortschaft Siselen Sachlage: Brücke gesperrt Ursache: Bauarbeiten Verkehrsführung: Fahrstreifen gesperrt",
               "value": "Sperrung",
               "detail": "bis 30. Juni 2027",
               "date": "2026-09-28T04:00:00.000Z"
+            },
+            {
+              "label": "A1 Zürich -> Bern zwischen Autobahndreieck Verzweigung Wankdorf und Anschluss Bern-Neufeld Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.2 Verkehrsführung: Pannenstreifen gesperrt",
+              "value": "Sperrung",
+              "detail": "bis 25. November 2026",
+              "date": "2026-10-12T08:09:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-02T06:54:25.899Z"
+          "updatedAt": "2026-11-02T19:51:36.134Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -509,7 +512,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-02T21:01:35.908Z"
+      "updatedAt": "2026-11-03T02:14:08.370Z"
     },
     "fr": {
       "canton": "BE",
@@ -519,12 +522,12 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "18",
+          "value": "16",
           "note": "signalements au 2 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "85",
+          "value": "88",
           "note": "signalements au 2 novembre 2026"
         }
       ],
@@ -565,25 +568,26 @@
               "date": "2026-07-27T05:05:00.000Z"
             },
             {
-              "label": "Révoqué: Bützberg <-> Aarwangen Localité Bützberg Situation: fermé Raison: incendie",
-              "value": "Fermeture",
-              "date": "2026-08-12T02:00:00.000Z"
-            },
-            {
               "label": "A6W Echangeur de Lattigen -> Port Echangeur Echangeur de Lattigen Situation: sortie fermée travaux, longueur [km] 0.3",
               "value": "Fermeture",
               "detail": "jusqu’au 12 novembre 2026",
               "date": "2026-08-28T15:09:00.000Z"
             },
             {
-              "label": "Révoqué: Bühl -> Siselen entre Localité Walperswil et Localité Siselen Situation: pont fermé Raison: travaux de construction Gestion du trafic: voie fermée",
+              "label": "Bühl -> Siselen entre Localité Walperswil et Localité Siselen Situation: pont fermé Raison: travaux de construction Gestion du trafic: voie fermée",
               "value": "Fermeture",
               "detail": "jusqu’au 30 juin 2027",
               "date": "2026-09-28T04:00:00.000Z"
+            },
+            {
+              "label": "A1 Zurich -> Berne entre Echangeur Echangeur du Wankdorf et Jonction autoroutière Berne-Neufeld Situation: trafic perturbé travaux, longueur [km] 0.2 Gestion du trafic: bande d'arrêt d'urgence fermée",
+              "value": "Fermeture",
+              "detail": "jusqu’au 25 novembre 2026",
+              "date": "2026-10-12T08:09:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-02T06:54:25.899Z"
+          "updatedAt": "2026-11-02T19:51:36.134Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -673,7 +677,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-02T21:01:35.908Z"
+      "updatedAt": "2026-11-03T02:14:08.370Z"
     }
   }
 }
