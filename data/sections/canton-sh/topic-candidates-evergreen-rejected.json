@@ -23,6 +23,14 @@
     "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-01/gf-verkauft-luft-und-raumfahrt-sowie-industriegasturbinen": {
       "section": "canton-sh",
       "ts": 1793675867594
+    },
+    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-07/georg-fischer-schlaegt-ton-buechner-als-neuen-praesidenten": {
+      "section": "canton-sh",
+      "ts": 1793694524731
+    },
+    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-09-30/ist-orange-das-neue-schwarz-wie-sich-weidmueller-im-ki": {
+      "section": "canton-sh",
+      "ts": 1793694527538
     }
   }
 }
