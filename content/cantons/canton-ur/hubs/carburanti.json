@@ -4,8 +4,8 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "carburanti",
-  "updatedAt": "2026-11-02T09:20:10.429Z",
-  "contentHash": "58f814c64c286dfdea7b285cf8579a441423693ce7b24462d980ed0ca8792257",
+  "updatedAt": "2026-11-03T09:09:02.940Z",
+  "contentHash": "714fd6571122cbd090512d0154fcf0b6aa63d9e3ba225359323fe7f4580b467f",
   "blocks": [],
   "locales": {
     "it": {
@@ -17,6 +17,12 @@
       "dataBlocks": [],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Passo del Gottardo: chiusura invernale da giovedì",
+          "url": "/articoli-uri/chiusura-invernale-gottardo/",
+          "excerpt": "Da giovedì scatta la chiusura invernale del passo del Gottardo: tre dei cinque passi alpini urani saranno chiusi, mentre Oberalp e Klausenpass restano aperti.",
+          "date": "2026-11-03T09:00:46.783Z"
+        },
         {
           "title": "Incendio di un veicolo, chiuso il tunnel di Flüelen",
           "url": "/articoli-uri/incendio-tunnel-fluelen/",
@@ -40,12 +46,6 @@
           "url": "/articoli-uri/axenstrasse-chiusa-novembre-2026/",
           "excerpt": "Dal 2 al 6 novembre 2026, l'Axenstrasse sarà chiusa dalle 22.00 alle 05.00; il traffico viene deviato sull'autostrada A2.",
           "date": "2026-10-27T10:48:04.296Z"
-        },
-        {
-          "title": "Felix Gisler lascerà l'amministrazione cantonale di Uri",
-          "url": "/articoli-uri/felix-gisler-pensione-uri/",
-          "excerpt": "Dopo circa 37 anni, Felix Gisler lascerà l'amministrazione cantonale di Uri a fine ottobre 2026 per pensionamento ordinario.",
-          "date": "2026-10-25T14:44:59.995Z"
         }
       ],
       "links": [
@@ -58,7 +58,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T09:09:02.940Z"
     },
     "en": {
       "canton": "UR",
@@ -69,6 +69,12 @@
       "dataBlocks": [],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Gotthard Pass: winter closure from Thursday",
+          "url": "/en/uri-articles/gotthard-winter-closure/",
+          "excerpt": "Starting Thursday, the winter closure of the Gotthard Pass takes effect: three of the five Alpine passes in Uri will be closed, while Oberalp and Klausenpass remain open.",
+          "date": "2026-11-03T09:00:46.783Z"
+        },
         {
           "title": "Vehicle fire, Flüelen tunnel closed",
           "url": "/en/uri-articles/vehicle-fire-fluelen-tunnel/",
@@ -92,12 +98,6 @@
           "url": "/en/uri-articles/axenstrasse-closed-november-2026/",
           "excerpt": "From November 2 to 6, 2026, Axenstrasse will be closed from 22.00 to 05.00; traffic is diverted onto the A2 motorway.",
           "date": "2026-10-27T10:48:04.296Z"
-        },
-        {
-          "title": "Felix Gisler will leave the cantonal administration of Uri",
-          "url": "/en/uri-articles/felix-gisler-uri-retirement/",
-          "excerpt": "After approximately 37 years, Felix Gisler will leave the cantonal administration of Uri at the end of October 2026 due to regular retirement.",
-          "date": "2026-10-25T14:44:59.995Z"
         }
       ],
       "links": [
@@ -110,7 +110,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T09:09:02.940Z"
     },
     "de": {
       "canton": "UR",
@@ -121,6 +121,12 @@
       "dataBlocks": [],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Gotthardpass: Wintersperre ab Donnerstag",
+          "url": "/de/uri-artikel/gotthard-wintersperre/",
+          "excerpt": "Ab Donnerstag tritt die Wintersperre des Gotthardpasses in Kraft: Drei der fünf Urner Alpenpässe werden geschlossen sein, während Oberalp und Klausenpass vorerst offen bleiben.",
+          "date": "2026-11-03T09:00:46.783Z"
+        },
         {
           "title": "Brand eines Fahrzeugs, Tunnel von Flüelen geschlossen",
           "url": "/de/uri-artikel/fahrzeugbrand-fluelen-tunnel/",
@@ -144,12 +150,6 @@
           "url": "/de/uri-artikel/axenstrasse-geschlossen-november-2026/",
           "excerpt": "Vom 2. bis 6. November 2026 wird die Axenstrasse von 22.00 bis 05.00 gesperrt; der Verkehr wird über die Autobahn A2 umgeleitet.",
           "date": "2026-10-27T10:48:04.296Z"
-        },
-        {
-          "title": "Felix Gisler wird die Kantonsverwaltung Uri verlassen",
-          "url": "/de/uri-artikel/felix-gisler-uri-pensionierung/",
-          "excerpt": "Nach rund 37 Jahren wird Felix Gisler die Kantonsverwaltung Uri Ende Oktober 2026 infolge ordentlicher Pensionierung verlassen.",
-          "date": "2026-10-25T14:44:59.995Z"
         }
       ],
       "links": [
@@ -162,7 +162,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T09:09:02.940Z"
     },
     "fr": {
       "canton": "UR",
@@ -173,6 +173,12 @@
       "dataBlocks": [],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Col du Gothard : fermeture hivernale dès jeudi",
+          "url": "/fr/articles-uri/fermeture-hivernale-gothard/",
+          "excerpt": "À partir de jeudi, la fermeture hivernale du col du Gothard entre en vigueur : trois des cinq cols alpins uranais seront fermés, tandis que l’Oberalp et le Klausenpass restent ouverts.",
+          "date": "2026-11-03T09:00:46.783Z"
+        },
         {
           "title": "Incendie d’un véhicule, tunnel de Flüelen fermé",
           "url": "/fr/articles-uri/incendie-tunnel-fluelen/",
@@ -196,12 +202,6 @@
           "url": "/fr/articles-uri/axenstrasse-fermee-novembre-2026/",
           "excerpt": "Du 2 au 6 novembre 2026, l'Axenstrasse sera fermée de 22.00 à 05.00 ; le trafic est dévié sur l'autoroute A2.",
           "date": "2026-10-27T10:48:04.296Z"
-        },
-        {
-          "title": "Felix Gisler quittera l’administration cantonale d’Uri",
-          "url": "/fr/articles-uri/felix-gisler-uri-retraite/",
-          "excerpt": "Après environ 37 ans, Felix Gisler quittera l’administration cantonale d’Uri à la fin du mois d’octobre 2026 pour prendre sa retraite ordinaire.",
-          "date": "2026-10-25T14:44:59.995Z"
         }
       ],
       "links": [
@@ -214,7 +214,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T09:09:02.940Z"
     }
   }
 }
