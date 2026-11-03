@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-turgovia-piano-risparmio-60-milioni.webp",
-      "sha256": "993c019be9407dfa1f5ac441635784d6635cdecd535f09c887457a17bf08df00"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-turgovia-piano-risparmio-60-milioni-480w.webp",
-      "sha256": "689f6defe67b4a67fb68725828b3aeeed225baa2d579a7c05f5d2e73d67ffa49"
-    }
-  ]
+  "items": []
 }
