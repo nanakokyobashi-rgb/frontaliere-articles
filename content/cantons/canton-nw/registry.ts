@@ -72,4 +72,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'hergiswil-bergstrasse-gru',
+ category: 'pratico',
+ date: '2026-11-03T00:08:28.441Z',
+ image: '/images/blog/article-hergiswil-bergstrasse-gru.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['NW'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

@@ -21,6 +21,9 @@ const blogMetaCantonNwFr: Record<string, string> = {
     'blog.article.chiusura-ponte-scheidgraben.title': 'Pont sur le Scheidgraben fermé à Ennetbürgen',
     'blog.article.chiusura-ponte-scheidgraben.excerpt': 'Le pont entre Alpenstrasse et Seefeld sera fermé pour des travaux d’assainissement du 3 novembre 2026 à 16.30 au 6 novembre à 08.00.',
     'blog.article.chiusura-ponte-scheidgraben.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.hergiswil-bergstrasse-gru.title': 'Hergiswil : Bergstrasse 4 fermée le 25.11.2026',
+    'blog.article.hergiswil-bergstrasse-gru.excerpt': 'À Hergiswil, le tronçon concerné de la Bergstrasse sera fermé le 25 novembre 2026 pour le démontage d\'une grue.',
+    'blog.article.hergiswil-bergstrasse-gru.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonNwFr;

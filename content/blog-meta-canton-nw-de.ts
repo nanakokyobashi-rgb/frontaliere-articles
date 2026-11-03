@@ -21,6 +21,9 @@ const blogMetaCantonNwDe: Record<string, string> = {
     'blog.article.chiusura-ponte-scheidgraben.title': 'Brücke über den Scheidgraben in Ennetbürgen gesperrt',
     'blog.article.chiusura-ponte-scheidgraben.excerpt': 'Die Brücke zwischen Alpenstrasse und Seefeld wird wegen Sanierungsarbeiten vom 3.',
     'blog.article.chiusura-ponte-scheidgraben.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.hergiswil-bergstrasse-gru.title': 'Hergiswil: Bergstrasse 4 am 25.11.2026 gesperrt',
+    'blog.article.hergiswil-bergstrasse-gru.excerpt': 'In Hergiswil wird der betroffene Abschnitt der Bergstrasse am 25.',
+    'blog.article.hergiswil-bergstrasse-gru.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonNwDe;
