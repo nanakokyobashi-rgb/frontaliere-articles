@@ -3804,6 +3804,90 @@
       "firstSeenAt": "2026-10-31T21:58:56.633Z",
       "lastValidatedAt": "2026-10-31T21:58:56.633Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "vivere a Menaggio e lavorare in Ticino da frontaliere",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-03T10:31:43.863Z",
+      "lastValidatedAt": "2026-11-03T10:31:43.863Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "vivere a Cassano Valcuvia e lavorare in Ticino da frontaliere",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-03T10:35:35.704Z",
+      "lastValidatedAt": "2026-11-03T10:35:35.704Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "vivere a Induno Olona e lavorare in Ticino da frontaliere",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-03T10:35:35.719Z",
+      "lastValidatedAt": "2026-11-03T10:35:35.719Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "vivere a Masciago Primo e lavorare in Ticino da frontaliere",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-03T10:35:35.730Z",
+      "lastValidatedAt": "2026-11-03T10:35:35.730Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "vivere a Porto Valtravaglia e lavorare in Ticino da frontaliere",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-03T10:35:35.742Z",
+      "lastValidatedAt": "2026-11-03T10:35:35.742Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "vivere a Beregazzo con Figliaro e lavorare in Ticino da frontaliere",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-03T10:39:14.018Z",
+      "lastValidatedAt": "2026-11-03T10:39:14.018Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "vivere a Brienno e lavorare in Ticino da frontaliere",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-11-03T10:45:02.247Z",
+      "lastValidatedAt": "2026-11-03T10:45:02.247Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
@@ -3970,10 +4054,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 2,
+      "count": 3,
       "firstStrikeAt": "2026-10-31T21:54:51.776Z",
-      "lastStrikeAt": "2026-11-01T00:26:35.660Z",
-      "expiresAt": "2026-12-01T00:26:35.660Z"
+      "lastStrikeAt": "2026-11-03T10:18:49.748Z",
+      "expiresAt": "2026-12-03T10:18:49.748Z"
     },
     {
       "keyword": "vivere a Argegno e lavorare in Ticino da frontaliere",
@@ -3982,10 +4066,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 2,
+      "count": 3,
       "firstStrikeAt": "2026-10-31T21:58:56.609Z",
-      "lastStrikeAt": "2026-11-01T00:28:39.318Z",
-      "expiresAt": "2026-12-01T00:28:39.318Z"
+      "lastStrikeAt": "2026-11-03T10:22:24.432Z",
+      "expiresAt": "2026-12-03T10:22:24.432Z"
     },
     {
       "keyword": "vivere a Lipomo e lavorare in Ticino da frontaliere",
@@ -3994,10 +4078,70 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 2,
+      "count": 3,
       "firstStrikeAt": "2026-10-31T22:01:30.515Z",
-      "lastStrikeAt": "2026-11-01T00:30:33.015Z",
-      "expiresAt": "2026-12-01T00:30:33.015Z"
+      "lastStrikeAt": "2026-11-03T10:26:10.405Z",
+      "expiresAt": "2026-12-03T10:26:10.405Z"
+    },
+    {
+      "keyword": "vivere a Luisago e lavorare in Ticino da frontaliere",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "quality-strike-ttl",
+      "count": 1,
+      "firstStrikeAt": "2026-11-03T10:31:43.849Z",
+      "lastStrikeAt": "2026-11-03T10:31:43.849Z",
+      "expiresAt": "2026-12-03T10:31:43.849Z"
+    },
+    {
+      "keyword": "vivere a Bedero Valcuvia e lavorare in Ticino da frontaliere",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "quality-strike-ttl",
+      "count": 1,
+      "firstStrikeAt": "2026-11-03T10:35:35.685Z",
+      "lastStrikeAt": "2026-11-03T10:35:35.685Z",
+      "expiresAt": "2026-12-03T10:35:35.685Z"
+    },
+    {
+      "keyword": "vivere a Stresa e lavorare in Ticino da frontaliere",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "quality-strike-ttl",
+      "count": 1,
+      "firstStrikeAt": "2026-11-03T10:39:14.005Z",
+      "lastStrikeAt": "2026-11-03T10:39:14.005Z",
+      "expiresAt": "2026-12-03T10:39:14.005Z"
+    },
+    {
+      "keyword": "vivere a Blessagno e lavorare in Ticino da frontaliere",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "quality-strike-ttl",
+      "count": 1,
+      "firstStrikeAt": "2026-11-03T10:45:02.234Z",
+      "lastStrikeAt": "2026-11-03T10:45:02.234Z",
+      "expiresAt": "2026-12-03T10:45:02.234Z"
+    },
+    {
+      "keyword": "vivere a Bulgarograsso e lavorare in Ticino da frontaliere",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "quality-strike-ttl",
+      "count": 1,
+      "firstStrikeAt": "2026-11-03T10:48:33.349Z",
+      "lastStrikeAt": "2026-11-03T10:48:33.349Z",
+      "expiresAt": "2026-12-03T10:48:33.349Z"
     }
   ],
   "legacy": [
@@ -12316,6 +12460,10 @@
     "frontaliere::https://www.rsi.ch/s/4142153": {
       "section": "frontaliere",
       "ts": 1793693072998
+    },
+    "frontaliere::https://www.tio.ch/ticino/attualita/1957650/merci-dogana-valigie-caccia-camion": {
+      "section": "frontaliere",
+      "ts": 1793700885046
     }
   }
 }
