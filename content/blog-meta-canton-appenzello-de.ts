@@ -81,6 +81,9 @@ const blogMetaCantonAppenzelloDe: Record<string, string> = {
     'blog.article.tariffe-mediche-appenzello-2026.title': 'Appenzell: Medizinische Tarife für 2026 genehmigt',
     'blog.article.tariffe-mediche-appenzello-2026.excerpt': 'Die Vereinbarungen betreffen die Vergütung ambulanter medizinischer Leistungen im Rahmen der Pflichtkrankenversicherung. Für die drei Verträge gilt das angegebene Inkrafttredungsdatum rückwirkend zum 1. Januar 2026 und der Wert des angegebenen Tarifpunkts beträgt 0,86 CHF.',
     'blog.article.tariffe-mediche-appenzello-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.ulmann-incarico-appenzello.title': 'Appenzell, Manuel Ulmann beim Bezirksbauamt angestellt',
+    'blog.article.ulmann-incarico-appenzello.excerpt': 'Der Bezirksrat von Appenzell hat Manuel Ulmann mit einem Beschäftigungsgrad von 100 Prozent angestellt: Die Tätigkeit beim Bezirksbauamt beginnt Anfang Februar.',
+    'blog.article.ulmann-incarico-appenzello.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonAppenzelloDe;

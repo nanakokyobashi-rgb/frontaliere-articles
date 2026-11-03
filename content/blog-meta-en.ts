@@ -13672,6 +13672,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.cascata-oro-comune-como.title': 'Millions for Como: funds for cross-border workers have tripled',
     'blog.article.cascata-oro-comune-como.excerpt': 'Over 9 million in the coffers of the Municipality of Como 6.492 cross-border workers residing as of December 31, 2024 7,81% of cross-border workers out of 83.135 inhabitants 9.058.370,70 euro',
     'blog.article.cascata-oro-comune-como.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.versamento-avs-dicembre-importi.title': 'Thirteenth AVS payment, for some it will be lower',
+    'blog.article.versamento-avs-dicembre-importi.excerpt': 'First 13th AVS pension in December Pension from July 1: half pension Almost 2,7 million beneficiaries by the end of 2026 830\'000 beneficiaries live abroad Deadline',
+    'blog.article.versamento-avs-dicembre-importi.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaEn;

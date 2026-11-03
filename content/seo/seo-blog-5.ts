@@ -114225,6 +114225,45 @@ ogDescription: 'La fonte riferisce che in Gran Consiglio è stata presentata una
     }
   },
 
+  'blog-versamento-avs-dicembre-importi': {
+    title: 'Tredicesima AVS, per alcuni sarà inferiore | Frontaliere Ticino',
+    description: 'Prima 13esima AVS a dicembre Pensione dal 1° luglio: metà rendita Quasi 2,7 milioni di beneficiari a fine 2026 830\'000 beneficiari risiedono',
+    keywords: 'frontalieri, ticino, svizzera, italia, tredicesima, alcuni, sarà, inferiore',
+    ogTitle: 'Tredicesima AVS: per alcuni sarà inferiore',
+    ogDescription: 'Prima 13esima AVS a dicembre Pensione dal 1° luglio: metà rendita Quasi 2,7 milioni di beneficiari a fine 2026 830\'000 beneficiari risiedono all\'estero Termine',
+    canonicalPath: '/articoli-frontaliere/versamento-avs-dicembre-importi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Tredicesima AVS, per alcuni sarà inferiore",
+      "description": "Prima 13esima AVS a dicembre Pensione dal 1° luglio: metà rendita Quasi 2,7 milioni di beneficiari a fine 2026 830'000 beneficiari risiedono",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-referendum-iva-2026-aumento-per-la-tredicesima-pensione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-03T13:45:06+00:00",
+      "dateModified": "2026-11-03T13:45:06+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/versamento-avs-dicembre-importi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

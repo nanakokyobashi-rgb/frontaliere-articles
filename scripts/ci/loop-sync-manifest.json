@@ -1608,7 +1608,7 @@
     {
       "path": "scripts/ci/ensure-host-shell-assets.mjs",
       "mode": "corpus-only",
-      "reason": "Passo dei workflow di pubblicazione (fast-publish-article.yml, fast-publish-section.yml): prima di rendere e pubblicare, garantisce sulla CDN i file della shell di cui host/ porta il contenuto, i produttori GA4, recupero first-party, Ads e Partnerize con il nome derivato dal contenuto (`gtag-init-<hash>.js`). L'omologo del sito e' scripts/ci/ensure-cdn-shell-assets.mjs, che legge la lista da build-plugins/staticScriptsPlugin.ts: quel plugin qui non esiste, quindi lo script d'ingresso e' proprio di questo repo e la logica condivisa sta nel gemello identical scripts/lib/cdn-shell-assets.mjs.",
+      "reason": "Passo dei workflow di pubblicazione che garantisce sulla CDN i file della shell i cui byte sono trasportati in host/, inclusi GA4, recovery, Ads, Partnerize e Meta Pixel. Il loader Pixel contatta Meta solo dopo consenso esplicito; lo script host-only usa la libreria identical scripts/lib/cdn-shell-assets.mjs.",
       "baseline": {
         "site": null,
         "corpus": "376823114717a68d",
@@ -4161,7 +4161,7 @@
       "path": "host/constants.ts",
       "sitePath": "build-plugins/constants.ts",
       "mode": "adapted",
-      "reason": "Costanti del sito lette dall'engine via SiteShellContract, estratte per chiusura: adapted per costruzione, non byte-identiche al sorgente completo. scalarFingerprint confronta i 22 scalari authoritative, mentre i test runtime verificano i comportamenti del contratto. Il digest c6b310ae… include il recupero indipendente, lo stato CMP e i loader con retry limitati; preserva i payload gzip del replay e trasporta anche i riferimenti recovery/Ads/Partnerize content-addressed e la cattura strutturale conservativa inline prima di React e producer differiti con ripristino solo a contesto/DOM puliti; estende il riconoscimento ai crawler Google-InspectionTool e GoogleOther, rimuove anche userinfo e credenziali dalle rappresentazioni URL della telemetria e incorpora il gate GA4 del sito, il budget SERP a 150 caratteri, la canonicalizzazione Organization.sameAs, l'aggiunta del profilo Facebook canonico, il riferimento content-addressed a gtag-init e le due regole contestuali trasportate per Chiasso e concorsi pubblici; la specializzazione editoriale resta in additionalType e il runtime Firebase conserva il match sulla chiave esatta, senza segreti nei fingerprint.",
+      "reason": "Costanti del sito lette dall'engine via SiteShellContract, estratte per chiusura. scalarFingerprint confronta i 23 scalari authoritative; il digest adb1a692… include lo snippet Meta Pixel content-addressed, il cui loader contatta Meta solo dopo consenso pubblicitario esplicito e si blocca sui documenti sensibili, senza fallback noscript. AD_RECOVERY_FILENAME resta allineato al sorgente; sono preservati gli altri comportamenti di recovery, CMP, analytics e SEO gia' trasportati.",
       "baseline": {
         "site": "c9f803f4645a9ab0",
         "corpus": "598612b34529c6c5",
@@ -4170,8 +4170,8 @@
       "scalarFingerprint": {
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
         "corpusPath": "host/shell-contract-fingerprint.json",
-        "scalarFields": 22,
-        "sha256": "c6b310ae62cf51cd37195557fc788bb74431e4908fb3cc5b01c13bc403c0034e"
+        "scalarFields": 23,
+        "sha256": "adb1a6923bea1285c19969b8acb6678d728b68147b20439b51bc3c83b1e39354"
       }
     },
     {
@@ -4386,7 +4386,7 @@
       "path": "host/shell-contract-fingerprint.json",
       "sitePath": "tests/articles-shell-contract-fingerprint.json",
       "mode": "identical",
-      "reason": "Impronta SHA-256 dei 22 campi scalari di SiteShellContract, prodotta e verificata da `host/tests/shell-contract-fingerprint.test.mjs`. Il gemello del sito vive in `tests/articles-shell-contract-fingerprint.json` con lo stesso contenuto; i due artefatti restano `identical` e la baseline ne sorveglia il drift. E' il gate runtime che impedisce di spedire l'engine senza la sua meta' `host/`.",
+      "reason": "Impronta SHA-256 dei 23 campi scalari di SiteShellContract, prodotta e verificata da host/tests/shell-contract-fingerprint.test.mjs. Il gemello del sito e' tests/articles-shell-contract-fingerprint.json con gli stessi valori, incluso lo snippet Meta Pixel content-addressed e consent-gated; i due artefatti restano identical e il gate runtime impedisce di spedire l'engine senza la sua meta' host/.",
       "baseline": {
         "site": "18e683c9406ca2e8",
         "corpus": "18e683c9406ca2e8",
@@ -4436,7 +4436,7 @@
     {
       "path": "host/tests/host-shell-assets.test.mjs",
       "mode": "corpus-only",
-      "reason": "Test node:test (sotto tsx, come gli altri di host/tests/) della garanzia sugli asset della shell: ogni riferimento con nome derivato dal contenuto nel contratto deve essere un file di cui host/ porta i byte, lo script d'ingresso passa quei file alla libreria, e ogni job che rende pagine con la shell esegue il passo prima del primo emettitore. Il sito copre la libreria con tests/cdn-shell-assets.test.ts (Vitest); questo harness legge host/ e i workflow di questo repo.",
+      "reason": "Test node:test della garanzia sugli asset trasportati: ogni riferimento content-addressed del contratto, incluso il loader Meta Pixel gated dal consenso, deve avere i byte in host/; il publisher verifica hash e set esatto prima della pubblicazione.",
       "baseline": {
         "site": null,
         "corpus": "434d61541d4037c6",
@@ -6838,7 +6838,7 @@
       "path": "host/third-party-shell-assets-fingerprint.json",
       "sitePath": "tests/third-party-shell-assets-fingerprint.json",
       "mode": "identical",
-      "reason": "Derived recovery/Ads/Partnerize producer and canonical-helper SHA fingerprints bind the transported byte snapshots to the source. Source tests regenerate the projection, host tests verify snapshot hashes and the complete SiteShellContract before publishing.",
+      "reason": "Fingerprint di recovery, Ads, Partnerize e Meta Pixel che lega gli snapshot byte-exact alle sorgenti. La proiezione esclude i contenuti ma verifica nomi e SHA-256; i test host confrontano i byte trasportati e il contratto prima della pubblicazione.",
       "baseline": {
         "site": "2a96d3934487a51d",
         "corpus": "2a96d3934487a51d",
@@ -6849,7 +6849,7 @@
       "path": "host/third-party-shell-assets.json",
       "sitePath": "scripts/ci/export-third-party-shell-assets.ts",
       "mode": "adapted",
-      "reason": "Byte-exact public assets and canonical inline guard snapshot derived from the source exporter; hostShellFiles consumes these bytes without a cross-repository import. The shared identical producer fingerprint and both SiteShellContract scalar fingerprints invalidate changes in constants, canonical helpers or raw static controllers before publication. Regenerate through the source exporter, update both fingerprint projections, then verify all names and SHA-256 values.",
+      "reason": "Snapshot byte-exact delle risorse pubbliche e del guard inline derivate dall'exporter del sito, inclusi i byte del loader Meta Pixel consent-gated; hostShellFiles pubblica questi byte senza import fra repository.",
       "baseline": {
         "site": "b18653746619d369",
         "corpus": "30ee6bcb409a26f3",

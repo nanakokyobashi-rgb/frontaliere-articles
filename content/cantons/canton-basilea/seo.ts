@@ -665,6 +665,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-sussidi-premi-basel-2027': {
+    title: 'Basilea Città aumenta i sussidi ai premi per il 2027',
+    description: 'Il Governo di Basilea Città aumenta i contributi ai premi 2027: +4,4% per adulti, +4,9% per bambini e +3,6% per giovani adulti.',
+    keywords: 'frontalieri, ticino, svizzera, italia, basilea, città, aumenta, sussidi',
+    ogTitle: 'Basilea Città aumenta i sussidi ai premi nel 2027',
+    ogDescription: 'Il provvedimento del Governo cantonale prevede circa CHF 70,3 milioni per la riduzione individuale dei premi, CHF 243 milioni di spesa complessiva e una consultazione pubblica nel 2027 sul limite del 10% del reddito.',
+    canonicalPath: '/articoli-basilea/sussidi-premi-basel-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Basilea Città aumenta i sussidi ai premi per il 2027",
+      "description": "Il Governo di Basilea Città aumenta i contributi ai premi 2027: +4,4% per adulti, +4,9% per bambini e +3,6% per giovani adulti.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-sussidi-premi-basel-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-03T14:31:24+00:00",
+      "dateModified": "2026-11-03T14:31:24+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-basilea/sussidi-premi-basel-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

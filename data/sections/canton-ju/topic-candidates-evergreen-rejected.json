@@ -83,6 +83,14 @@
     "canton-ju::https://www.rfj.ch/rfj/actualite/suisse/20261103-petit-benefice-au-budget-2027-de-la-ville-de-neuchatel.html": {
       "section": "canton-ju",
       "ts": 1793704061125
+    },
+    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261103-avec-l-outlet-aubonne-le-francais-evoriel-s-installe-en-suisse.html": {
+      "section": "canton-ju",
+      "ts": 1793720214962
+    },
+    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261103-stadler-construit-un-nouveau-centre-et-cree-80-emplois.html": {
+      "section": "canton-ju",
+      "ts": 1793720229394
     }
   }
 }

@@ -54,6 +54,9 @@ const blogMetaCantonBasileaFr: Record<string, string> = {
     'blog.article.baselland-maiali-enzootica.title': 'Baselland : 750 porcs abattus pour cause de pneumonie enzootique',
     'blog.article.baselland-maiali-enzootica.excerpt': 'Dans un élevage d’engraissement de Baselland, 750 porcs ont été abattus.',
     'blog.article.baselland-maiali-enzootica.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.sussidi-premi-basel-2027.title': 'Bâle-Ville augmente les subventions aux primes pour 2027',
+    'blog.article.sussidi-premi-basel-2027.excerpt': 'Le Gouvernement de Bâle-Ville adapte les contributions aux primes : +4,4% pour les adultes, +4,9% pour les enfants, +3,6% pour les jeunes adultes et environ CHF 243 millions de dépenses.',
+    'blog.article.sussidi-premi-basel-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonBasileaFr;

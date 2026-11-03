@@ -48021,6 +48021,16 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'versamento-avs-dicembre-importi',
+ category: 'pensione',
+ date: '2026-11-03T13:45:05.597Z',
+ image: '/images/blog/article-referendum-iva-2026-aumento-per-la-tredicesima-pensione.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'laura-bianchi',
+ authorName: 'Laura Bianchi',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

@@ -194,4 +194,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'sussidi-premi-basel-2027',
+ category: 'novita',
+ date: '2026-11-03T14:31:24.255Z',
+ image: '/images/blog/article-sussidi-premi-basel-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['BASILEA'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
