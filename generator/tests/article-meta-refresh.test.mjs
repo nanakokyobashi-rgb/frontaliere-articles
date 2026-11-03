@@ -398,7 +398,7 @@ test('refreshDescriptiveTexts: entry SEO duplicata — rifiuta prima di scrivere
     assert.throws(
       () => refreshDescriptiveTexts(
         'demo-id',
-        { it: { excerpt: 'Nuovo excerpt' } },
+        { it: { excerpt: 'Nuovo excerpt.' } },
         { description: VALID_SEO_DESCRIPTION },
         { repoRoot: root },
       ),
@@ -536,7 +536,7 @@ test('refreshDescriptiveTexts prende il section lock prima del read-modify-write
     const observed = [];
     refreshDescriptiveTexts(
       'demo-id',
-      { it: { excerpt: 'Estratto sotto lock' } },
+      { it: { excerpt: 'Estratto sotto lock.' } },
       { description: VALID_SEO_DESCRIPTION },
       {
         repoRoot: root,
@@ -561,8 +561,8 @@ test('refreshDescriptiveTexts: writer e reader iniettati permettono lo staging s
     const writes = [];
     const localeFields = {
       excerpt: `it: ${VALID_SEO_DESCRIPTION}`,
-      seoDescription: 'SERP staged',
-      ogDescription: 'Social staged',
+      seoDescription: 'SERP staged.',
+      ogDescription: 'Social staged.',
     };
     const read = (file) => staged.has(file) ? staged.get(file) : fs.readFileSync(file, 'utf8');
     const write = (file, content) => {
@@ -574,7 +574,7 @@ test('refreshDescriptiveTexts: writer e reader iniettati permettono lo staging s
     const result = refreshDescriptiveTexts(
       'demo-id',
       { it: localeFields },
-      { description: VALID_SEO_DESCRIPTION, ogDescription: 'Social staged' },
+      { description: VALID_SEO_DESCRIPTION, ogDescription: 'Social staged.' },
       { repoRoot: root, readFile: read, writeFile: write },
     );
 
@@ -586,7 +586,7 @@ test('refreshDescriptiveTexts: writer e reader iniettati permettono lo staging s
       refreshDescriptiveTexts(
         'demo-id',
         { it: localeFields },
-        { description: VALID_SEO_DESCRIPTION, ogDescription: 'Social staged' },
+        { description: VALID_SEO_DESCRIPTION, ogDescription: 'Social staged.' },
         { repoRoot: root, readFile: read, writeFile: write },
       ).changed,
       false,
@@ -616,7 +616,7 @@ test('refreshDescriptiveTexts: un writer staged che possiede già il lock lo con
     }));
     refreshDescriptiveTexts(
       'demo-id',
-      { it: { excerpt: 'Estratto sotto transazione esterna' } },
+      { it: { excerpt: 'Estratto sotto transazione esterna.' } },
       { description: VALID_SEO_DESCRIPTION },
       {
         repoRoot: root,
@@ -678,9 +678,9 @@ test('refreshDescriptiveTexts: una seoDescription/description fuori budget viene
   try {
     assert.ok(LONG_TEXT.length > SEO_DESCRIPTION_MAX);
     const localeTexts = {
-      it: { excerpt: 'Estratto lungo, non tagliato', seoDescription: LONG_TEXT, ogDescription: 'Social it' },
+      it: { excerpt: 'Estratto lungo, non tagliato.', seoDescription: LONG_TEXT, ogDescription: 'Social it.' },
     };
-    const seoTexts = { description: LONG_TEXT, ogDescription: 'Social it' };
+    const seoTexts = { description: LONG_TEXT, ogDescription: 'Social it.' };
     refreshDescriptiveTexts('demo-id', localeTexts, seoTexts, { repoRoot: root });
 
     const it = fs.readFileSync(path.join(root, 'content', 'blog-meta-it.ts'), 'utf-8');
@@ -689,7 +689,7 @@ test('refreshDescriptiveTexts: una seoDescription/description fuori budget viene
     assert.ok(seoMatch[1].length <= SEO_DESCRIPTION_MAX, `seoDescription scritta fuori budget: ${seoMatch[1].length} chars`);
     assert.ok(LONG_TEXT.startsWith(seoMatch[1]), 'il taglio deve essere un prefisso del testo originale');
     // excerpt non ha budget: deve restare intatto.
-    assert.ok(it.includes("'blog.article.demo-id.excerpt': 'Estratto lungo, non tagliato',"));
+    assert.ok(it.includes("'blog.article.demo-id.excerpt': 'Estratto lungo, non tagliato.',"));
 
     const seo = fs.readFileSync(path.join(root, 'content', 'seo', 'seo-blog-5.ts'), 'utf-8');
     const descMatch = seo.match(/ {4}description: '([^']*)'/);
@@ -748,7 +748,7 @@ test('refreshDescriptiveTexts: rifiuta truncamenti insicuri o sotto il floor pri
     const seoPath = path.join(root, 'content', 'seo', 'seo-blog-5.ts');
     const metaBefore = fs.readFileSync(metaPath, 'utf-8');
     const seoBefore = fs.readFileSync(seoPath, 'utf-8');
-    const tooLongToken = 'x'.repeat(SEO_DESCRIPTION_MAX + 1);
+    const tooLongToken = `${'x'.repeat(SEO_DESCRIPTION_MAX + 1)}.`;
     assert.throws(
       () => refreshDescriptiveTexts(
         'demo-id',
@@ -774,7 +774,7 @@ test('refreshDescriptiveTexts: rifiuta truncamenti insicuri o sotto il floor pri
     assert.equal(fs.readFileSync(metaPath, 'utf-8'), metaBefore, 'la locale non deve essere modificata nel percorso senza SEO entry');
     assert.equal(fs.existsSync(registerLockPath(root, 'frontaliere')), false, 'un rifiuto pre-write deve rilasciare il lock');
 
-    const shortClauseThenLongToken = `Descrizione specifica. ${'x'.repeat(SEO_DESCRIPTION_MAX)}`;
+    const shortClauseThenLongToken = `Descrizione specifica. ${'x'.repeat(SEO_DESCRIPTION_MAX)}.`;
     assert.throws(
       () => refreshDescriptiveTexts(
         'demo-id',
