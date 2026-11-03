@@ -4,8 +4,8 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "fisco",
-  "updatedAt": "2026-10-22T22:21:57.960Z",
-  "contentHash": "c2a134c06ea4e986d84ced33b1e5d8ebbaff07637e0c80232cd5953142f4d1d1",
+  "updatedAt": "2026-11-03T01:04:10.290Z",
+  "contentHash": "97a5929677cd50ae468dbdb33070d85983a69c365d36ccd64ed3a6ef16ad3cb4",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -102,6 +102,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Schübelbach conferma le aliquote fiscali per il 2027",
+          "url": "/articoli-svitto/schuebelbach-aliquote-2027/",
+          "excerpt": "Il preventivo 2027 di Schübelbach prevede 42,97 milioni di spese, 42,69 milioni di entrate e un disavanzo di 285.200 franchi.",
+          "date": "2026-11-03T00:58:45.494Z"
+        },
+        {
           "title": "Unteriberg, budget 2027: avanzo di 13.500 franchi",
           "url": "/articoli-svitto/unteriberg-budget-2027/",
           "excerpt": "La Kirchgemeinde Unteriberg prevede 525.743 franchi di entrate e 512.245 di uscite nel 2027; l'avanzo indicato è di 13.500 franchi.",
@@ -155,7 +161,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-11-03T01:04:10.290Z"
     },
     "en": {
       "canton": "SZ",
@@ -240,6 +246,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Schübelbach confirms tax rates for 2027",
+          "url": "/en/schwyz-articles/schuebelbach-tax-rates-2027/",
+          "excerpt": "Schübelbach's 2027 budget provides for 42,97 million in expenditure, 42,69 million in revenue and a deficit of 285.200 francs.",
+          "date": "2026-11-03T00:58:45.494Z"
+        },
+        {
           "title": "Unteriberg, budget 2027: surplus of 13.500 francs",
           "url": "/en/schwyz-articles/unteriberg-2027-budget/",
           "excerpt": "Kirchgemeinde Unteriberg forecasts revenues of 525.743 francs and expenditures of 512.245 in 2027; the indicated surplus is 13.500 francs.",
@@ -293,7 +305,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-11-03T01:04:10.290Z"
     },
     "de": {
       "canton": "SZ",
@@ -378,6 +390,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Schübelbach bestätigt die Steuersätze für 2027",
+          "url": "/de/schwyz-artikel/schuebelbach-steuerfuss-2027/",
+          "excerpt": "Der Voranschlag 2027 von Schübelbach sieht Ausgaben von 42,97 Millionen, Einnahmen von 42,69 Millionen und ein Defizit von 285.200 Franken vor.",
+          "date": "2026-11-03T00:58:45.494Z"
+        },
+        {
           "title": "Unteriberg, Budget 2027: Überschuss von 13.500 Franken",
           "url": "/de/schwyz-artikel/unteriberg-budget-2027-uberschuss-von-13-500-franken/",
           "excerpt": "Die Kirchgemeinde Unteriberg erwartet für 2027 Einnahmen von 525.743 Franken und Ausgaben von 512.245 Franken; der ausgewiesene Überschuss beträgt 13.500 Franken.",
@@ -431,7 +449,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-11-03T01:04:10.290Z"
     },
     "fr": {
       "canton": "SZ",
@@ -516,6 +534,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Schübelbach confirme les taux d’imposition pour 2027",
+          "url": "/fr/articles-schwytz/schuebelbach-taux-fiscal-2027/",
+          "excerpt": "Le budget 2027 de Schübelbach prévoit 42,97 millions de dépenses, 42,69 millions de recettes et un déficit de 285.200 francs.",
+          "date": "2026-11-03T00:58:45.494Z"
+        },
+        {
           "title": "Unteriberg, budget 2027 : excédent de 13.500 francs",
           "url": "/fr/articles-schwytz/budget-2027-unteriberg/",
           "excerpt": "La Kirchgemeinde Unteriberg prévoit 525.743 francs de recettes et 512.245 de dépenses en 2027 ; l'excédent indiqué est de 13.500 francs.",
@@ -569,7 +593,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-11-03T01:04:10.290Z"
     }
   }
 }
