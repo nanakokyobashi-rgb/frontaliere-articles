@@ -248,4 +248,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'zurigo-strategia-energetica-2026',
+ category: 'novita',
+ date: '2026-11-03T10:47:42.730Z',
+ image: '/images/blog/article-zurigo-strategia-energetica-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['ZH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
