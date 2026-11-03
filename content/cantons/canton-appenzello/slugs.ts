@@ -27,6 +27,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'costi-sanita-meno-entrate': { it: 'costi-sanita-meno-entrate', en: 'health-costs-less-revenue', de: 'kosten-sanita-weniger-einnahmen', fr: 'couts-sante-moins-revenus' },
  '45-residenti-richiesta-rumore': { it: '45-residenti-richiesta-rumore', en: '45-residents-noise-request', de: '45-einwohner-laerm-forderung', fr: '45-residents-demande-bruit' },
  'decima-fiera-apprendistati-innerrhoden': { it: 'decima-fiera-apprendistati-innerrhoden', en: 'tenth-apprenticeship-fair-innerrhoden', de: 'zehnte-lehrstellenmesse-innerrhoden', fr: 'dixieme-foire-apprentissage-innerrhoden' },
+ 'caldo-appenzello-esterno-2026': { it: 'caldo-appenzello-esterno-2026', en: 'heat-appenzell-ausserrhoden-2026', de: 'hitzebelastung-appenzell-ausserrhoden-2026', fr: 'chaleur-appenzell-rhodes-exterieures-2026' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

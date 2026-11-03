@@ -75,6 +75,9 @@ const blogMetaCantonAppenzelloEn: Record<string, string> = {
     'blog.article.decima-fiera-apprendistati-innerrhoden.title': 'Tenth Apprenticeship Positions Fair Appenzell November 7, 2026',
     'blog.article.decima-fiera-apprendistati-innerrhoden.excerpt': '62 companies from Innerrhoden will present apprenticeship opportunities on Saturday, 7 November 2026, at Aula Gringel, with free admission from 9.00 to 15.00.',
     'blog.article.decima-fiera-apprendistati-innerrhoden.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.caldo-appenzello-esterno-2026.title': 'Appenzell Ausserrhoden: more hot days in 2026',
+    'blog.article.caldo-appenzello-esterno-2026.excerpt': 'Summer 2026: more hot days at the sites examined More tropical nights were recorded in 2026 Altitude and nighttime cooling reduce prolonged heat The Health',
+    'blog.article.caldo-appenzello-esterno-2026.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonAppenzelloEn;

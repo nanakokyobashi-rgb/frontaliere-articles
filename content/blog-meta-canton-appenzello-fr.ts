@@ -75,6 +75,9 @@ const blogMetaCantonAppenzelloFr: Record<string, string> = {
     'blog.article.decima-fiera-apprendistati-innerrhoden.title': 'Dixième salon des places d\'apprentissage d\'Appenzell 7 novembre 2026',
     'blog.article.decima-fiera-apprendistati-innerrhoden.excerpt': '62 entreprises de l\'Innerrhoden présenteront des offres d\'apprentissage le samedi 7 novembre 2026 à l\'Aula Gringel, entrée gratuite de 9.00 à 15.00.',
     'blog.article.decima-fiera-apprendistati-innerrhoden.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.caldo-appenzello-esterno-2026.title': 'Appenzell Rhodes-Extérieures : davantage de jours chauds en 2026',
+    'blog.article.caldo-appenzello-esterno-2026.excerpt': 'Été 2026 : davantage de jours chauds sur les sites examinés En 2026, davantage de nuits tropicales ont été relevées L’altitude et le rafraîchissement nocturne',
+    'blog.article.caldo-appenzello-esterno-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonAppenzelloFr;

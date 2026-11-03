@@ -75,6 +75,9 @@ const blogMetaCantonAppenzelloIt: Record<string, string> = {
     'blog.article.decima-fiera-apprendistati-innerrhoden.title': 'Decima fiera posti apprendistato Appenzell 7 novembre 2026',
     'blog.article.decima-fiera-apprendistati-innerrhoden.excerpt': '62 aziende dell\'Innerrhoden presenteranno offerte di apprendistato sabato 7 novembre 2026 all\'Aula Gringel, ingresso gratuito dalle 9.00 alle 15.00.',
     'blog.article.decima-fiera-apprendistati-innerrhoden.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.caldo-appenzello-esterno-2026.title': 'Appenzello Esterno: più giorni caldi nel 2026',
+    'blog.article.caldo-appenzello-esterno-2026.excerpt': 'Estate 2026: più giorni caldi nei siti esaminati Nel 2026 sono state rilevate più notti tropicali Altitudine e raffrescamento notturno riducono il caldo',
+    'blog.article.caldo-appenzello-esterno-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonAppenzelloIt;

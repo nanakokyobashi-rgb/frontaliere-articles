@@ -271,4 +271,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'caldo-appenzello-esterno-2026',
+ category: 'pratico',
+ date: '2026-11-03T08:54:47.590Z',
+ image: '/images/blog/article-caldo-appenzello-esterno-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['APPENZELLO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

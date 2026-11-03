@@ -75,6 +75,9 @@ const blogMetaCantonAppenzelloDe: Record<string, string> = {
     'blog.article.decima-fiera-apprendistati-innerrhoden.title': 'Zehnte Lehrstellenmesse Appenzell 7. November 2026',
     'blog.article.decima-fiera-apprendistati-innerrhoden.excerpt': '62 Unternehmen aus Innerrhoden präsentieren am Samstag, 7.',
     'blog.article.decima-fiera-apprendistati-innerrhoden.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.caldo-appenzello-esterno-2026.title': 'Appenzell Ausserrhoden: mehr heiße Tage im Jahr 2026',
+    'blog.article.caldo-appenzello-esterno-2026.excerpt': 'Sommer 2026: mehr heiße Tage an den untersuchten Standorten Im Jahr 2026 wurden mehr Tropennächte festgestellt Höhenlage und nächtliche Abkühlung verringern',
+    'blog.article.caldo-appenzello-esterno-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonAppenzelloDe;
