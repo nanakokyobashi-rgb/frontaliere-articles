@@ -8669,6 +8669,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.inflazione-ottobre-1-5-percento.title': 'Inflazione ottobre sale all\'1,5% spinta dall\'energia',
     'blog.article.inflazione-ottobre-1-5-percento.excerpt': 'L\'inflazione annua di ottobre è salita dell\'1,5% A settembre l\'aumento annuo era dell\'1% L\'IPC mensile è cresciuto dello 0,2% Energia: gasolio, benzina e diesel',
     'blog.article.inflazione-ottobre-1-5-percento.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.swissport-zurigo-trattative-ccl.title': 'Swissport Zurigo: trattative fallite per il personale',
+    'blog.article.swissport-zurigo-trattative-ccl.excerpt': 'CCL Swissport a Zurigo: trattative fallite Il contratto riguarda circa 2’000 persone Chiesti aumenti salariali fino al 7% Possibile sciopero già a gennaio 2027',
+    'blog.article.swissport-zurigo-trattative-ccl.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaChIt;

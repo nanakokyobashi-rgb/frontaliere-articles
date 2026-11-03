@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/cn%3a-lavoratori-interinali-meglio-protetti-in-caso-di-intemperie/92112898": {
-    "articleId": "indennita-maltempo-sei-mesi",
-    "ts": "2026-09-24T19:15:47.751Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1952414/capitale-approva-bns-requisiti-ubs": {
     "articleId": "ubs-capitale-90-bns",
     "ts": "2026-09-24T20:09:09.369Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4213365": {
     "articleId": "inflazione-ottobre-1-5-percento",
     "ts": "2026-11-03T11:31:34.020Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4211670": {
+    "articleId": "swissport-zurigo-trattative-ccl",
+    "ts": "2026-11-03T12:59:16.165Z",
     "keyForm": 2
   }
 }

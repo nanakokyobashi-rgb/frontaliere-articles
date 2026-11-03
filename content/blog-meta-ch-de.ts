@@ -8669,6 +8669,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.inflazione-ottobre-1-5-percento.title': 'Inflation im Oktober steigt energiegetrieben auf 1,5%',
     'blog.article.inflazione-ottobre-1-5-percento.excerpt': 'Die Jahresinflation im Oktober ist um 1,5% gestiegen Im September betrug der jährliche Anstieg 1% Der monatliche VPI stieg um 0,2% Energie: Heizöl, Benzin und Diesel',
     'blog.article.inflazione-ottobre-1-5-percento.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.swissport-zurigo-trattative-ccl.title': 'Swissport Zürich: Verhandlungen für das Personal gescheitert',
+    'blog.article.swissport-zurigo-trattative-ccl.excerpt': 'GAV Swissport in Zürich: Verhandlungen gescheitert Der Vertrag betrifft rund 2’000 Personen Lohnerhöhungen bis zu 7% gefordert Möglicher Streik bereits im Januar 2027',
+    'blog.article.swissport-zurigo-trattative-ccl.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaChDe;

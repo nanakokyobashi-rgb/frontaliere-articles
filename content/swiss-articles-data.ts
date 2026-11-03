@@ -30121,6 +30121,17 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'swissport-zurigo-trattative-ccl',
+    category: 'novita',
+    date: '2026-11-03T12:59:14.933Z',
+    image: '/images/blog/article-swissport-zurigo-trattative-ccl.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    canton: ['ZH'],
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

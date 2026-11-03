@@ -8669,6 +8669,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.inflazione-ottobre-1-5-percento.title': 'L\'inflation d\'octobre monte à 1,5 %, portée par l\'énergie',
     'blog.article.inflazione-ottobre-1-5-percento.excerpt': 'L\'inflation annuelle d\'octobre a augmenté de 1,5 % En septembre, la hausse annuelle était de 1 % L\'IPC mensuel a augmenté de 0,2 % Énergie : gazole, essence et diesel',
     'blog.article.inflazione-ottobre-1-5-percento.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.swissport-zurigo-trattative-ccl.title': 'Swissport Zurich : échec des négociations pour le personnel',
+    'blog.article.swissport-zurigo-trattative-ccl.excerpt': 'CCL Swissport à Zurich : échec des négociations Le contrat concerne environ 2’000 personnes Des augmentations salariales allant jusqu’à 7% sont demandées Grève possible dès janvier 2027',
+    'blog.article.swissport-zurigo-trattative-ccl.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaChFr;

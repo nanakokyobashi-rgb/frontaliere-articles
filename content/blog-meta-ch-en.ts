@@ -8669,6 +8669,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.inflazione-ottobre-1-5-percento.title': 'October inflation rises to 1,5%, driven by energy',
     'blog.article.inflazione-ottobre-1-5-percento.excerpt': 'October’s annual inflation rose by 1.5% In September, the annual increase was 1% Monthly CPI increased by 0.2% Energy: diesel fuel, gasoline and diesel',
     'blog.article.inflazione-ottobre-1-5-percento.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.swissport-zurigo-trattative-ccl.title': 'Swissport Zurich: failed negotiations for staff',
+    'blog.article.swissport-zurigo-trattative-ccl.excerpt': 'CCL Swissport in Zurich: negotiations failed The contract covers around 2’000 people Wage increases of up to 7% demanded Strike possible as early as January 2027',
+    'blog.article.swissport-zurigo-trattative-ccl.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaChEn;
