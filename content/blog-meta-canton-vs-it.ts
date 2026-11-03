@@ -42,6 +42,9 @@ const blogMetaCantonVsIt: Record<string, string> = {
     'blog.article.bains-ovronnaz-nuovo-sursis.title': 'Bains d\'Ovronnaz: sursis concordatario fino al 31 marzo 2027',
     'blog.article.bains-ovronnaz-nuovo-sursis.excerpt': 'Il tribunale di Martigny prolunga il sursis fino al 31 marzo 2027 I dipendenti conservano il posto per tutta la stagione invernale Le presenze aumentano',
     'blog.article.bains-ovronnaz-nuovo-sursis.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.val-de-bagnes-sostenibilita-2024.title': 'Val de Bagnes: 175 persone per settimana sostenibilità',
+    'blog.article.val-de-bagnes-sostenibilita-2024.excerpt': '175 persone a Val de Bagnes Sei appuntamenti dal 24 al 31 ottobre Presentato il primo Piano climatico del comune Il piano comprende 26 misure e 75 azioni Luogo',
+    'blog.article.val-de-bagnes-sostenibilita-2024.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonVsIt;

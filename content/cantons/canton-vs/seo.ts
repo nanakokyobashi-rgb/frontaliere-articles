@@ -499,6 +499,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-val-de-bagnes-sostenibilita-2024': {
+    title: 'Val de Bagnes: 175 persone per settimana sostenibilità',
+    description: '175 persone a Val de Bagnes Sei appuntamenti dal 24 al 31 ottobre Presentato il primo Piano climatico del comune Il piano comprende 26 misure e 75',
+    keywords: 'frontalieri, ticino, svizzera, italia, bagnes, persone, settimana, sostenibilità',
+    ogTitle: 'Val de Bagnes: 175 persone per sostenibilità',
+    ogDescription: '175 persone a Val de Bagnes Sei appuntamenti dal 24 al 31 ottobre Presentato il primo Piano climatico del comune Il piano comprende 26 misure e 75 azioni Luogo',
+    canonicalPath: '/articoli-vallese/val-de-bagnes-sostenibilita-2024/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Val de Bagnes: 175 persone per settimana sostenibilità",
+      "description": "175 persone a Val de Bagnes Sei appuntamenti dal 24 al 31 ottobre Presentato il primo Piano climatico del comune Il piano comprende 26 misure e 75",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-val-de-bagnes-sostenibilita-2024.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-03T09:11:19+00:00",
+      "dateModified": "2026-11-03T09:11:19+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-vallese/val-de-bagnes-sostenibilita-2024/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

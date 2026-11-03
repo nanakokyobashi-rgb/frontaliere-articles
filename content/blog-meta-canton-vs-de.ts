@@ -42,6 +42,9 @@ const blogMetaCantonVsDe: Record<string, string> = {
     'blog.article.bains-ovronnaz-nuovo-sursis.title': 'Bains d\'Ovronnaz: Nachlassstundung bis zum 31. März 2027',
     'blog.article.bains-ovronnaz-nuovo-sursis.excerpt': 'Das Gericht von Martigny verlängert die Nachlassstundung bis zum 31.',
     'blog.article.bains-ovronnaz-nuovo-sursis.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.val-de-bagnes-sostenibilita-2024.title': 'Val de Bagnes: 175 Personen für die Nachhaltigkeitswoche',
+    'blog.article.val-de-bagnes-sostenibilita-2024.excerpt': '175 Personen in Val de Bagnes Sechs Veranstaltungen vom 24.',
+    'blog.article.val-de-bagnes-sostenibilita-2024.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonVsDe;

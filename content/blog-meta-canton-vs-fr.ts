@@ -42,6 +42,9 @@ const blogMetaCantonVsFr: Record<string, string> = {
     'blog.article.bains-ovronnaz-nuovo-sursis.title': 'Bains d\'Ovronnaz : sursis concordataire jusqu\'au 31 mars 2027',
     'blog.article.bains-ovronnaz-nuovo-sursis.excerpt': 'Le tribunal de Martigny prolonge le sursis jusqu\'au 31 mars 2027 Les employés conservent leur emploi pendant toute la saison hivernale La fréquentation augmente',
     'blog.article.bains-ovronnaz-nuovo-sursis.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.val-de-bagnes-sostenibilita-2024.title': 'Val de Bagnes : 175 personnes pour la semaine de la durabilité',
+    'blog.article.val-de-bagnes-sostenibilita-2024.excerpt': '175 personnes à Val de Bagnes Six rendez-vous du 24 au 31 octobre Présentation du premier Plan climatique de la commune Le plan comprend 26 mesures et 75',
+    'blog.article.val-de-bagnes-sostenibilita-2024.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonVsFr;
