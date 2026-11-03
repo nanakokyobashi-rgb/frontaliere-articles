@@ -8672,6 +8672,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.swissport-zurigo-trattative-ccl.title': 'Swissport Zurigo: trattative fallite per il personale',
     'blog.article.swissport-zurigo-trattative-ccl.excerpt': 'CCL Swissport a Zurigo: trattative fallite Il contratto riguarda circa 2’000 persone Chiesti aumenti salariali fino al 7% Possibile sciopero già a gennaio 2027',
     'blog.article.swissport-zurigo-trattative-ccl.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.voto-iva-13esima-avs-novembre.title': '13esima AVS: il 29 novembre si vota sull\'aumento IVA',
+    'blog.article.voto-iva-13esima-avs-novembre.excerpt': 'Il 29 novembre si vota sul finanziamento della 13esima AVS L\'IVA ordinaria salirebbe dall\'8,1% all\'8,5% L\'aliquota alberghiera passerebbe dal 3,8% al 4%',
+    'blog.article.voto-iva-13esima-avs-novembre.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaChIt;

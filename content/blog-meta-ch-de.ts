@@ -8672,6 +8672,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.swissport-zurigo-trattative-ccl.title': 'Swissport Zürich: Verhandlungen für das Personal gescheitert',
     'blog.article.swissport-zurigo-trattative-ccl.excerpt': 'GAV Swissport in Zürich: Verhandlungen gescheitert Der Vertrag betrifft rund 2’000 Personen Lohnerhöhungen bis zu 7% gefordert Möglicher Streik bereits im Januar 2027',
     'blog.article.swissport-zurigo-trattative-ccl.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.voto-iva-13esima-avs-novembre.title': '13. AVS: Am 29. November wird über die Mehrwertsteuererhöhung abgestimmt',
+    'blog.article.voto-iva-13esima-avs-novembre.excerpt': 'Am 29. November wird über die Finanzierung der 13. AHV-Rente abgestimmt Die ordentliche Mehrwertsteuer würde von 8,1% auf 8,5% steigen Der Beherbergungssatz würde von 3,8% auf 4% steigen',
+    'blog.article.voto-iva-13esima-avs-novembre.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaChDe;
