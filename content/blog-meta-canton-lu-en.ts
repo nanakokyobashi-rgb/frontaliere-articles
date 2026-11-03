@@ -75,6 +75,9 @@ const blogMetaCantonLuEn: Record<string, string> = {
     'blog.article.centro-sicurezza-rothenburg.title': 'Credit vote for new security center in Rothenburg',
     'blog.article.centro-sicurezza-rothenburg.excerpt': 'The Lucerne electorate will vote at the end of the month on the CHF 276 million credit for the security centre.',
     'blog.article.centro-sicurezza-rothenburg.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.lucerna-scuole-certificati-medici.title': 'Canton Lucerne: fewer medical certificates for school absences',
+    'blog.article.lucerna-scuole-certificati-medici.excerpt': 'During flu season, school administrations will require a medical certificate only when there are well-founded doubts about students\' absences.',
+    'blog.article.lucerna-scuole-certificati-medici.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonLuEn;

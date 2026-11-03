@@ -27,6 +27,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'kanti-rektor-draht-universitaet': { it: 'kanti-rektor-draht-universitaet', en: 'kanti-rector-university-link', de: 'kanti-rektor-universitaet-draht', fr: 'kanti-recteur-lien-universite' },
  'lukb-utile-nove-mesi': { it: 'lukb-utile-nove-mesi', en: 'lucerne-cantonal-bank-profit-nine-months', de: 'luzerner-kantonalbank-gewinn-neun-monate', fr: 'banque-cantonale-lucerne-benefice-neuf-mois' },
  'centro-sicurezza-rothenburg': { it: 'centro-sicurezza-rothenburg', en: 'rothenburg-security-center', de: 'sicherheitszentrum-rothenburg', fr: 'centre-securite-rothenburg' },
+ 'lucerna-scuole-certificati-medici': { it: 'lucerna-scuole-certificati-medici', en: 'lucerne-schools-medical-certificates', de: 'luzern-schulen-arztzeugnisse', fr: 'lucerne-ecoles-certificats-medicaux' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

@@ -943,6 +943,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-lucerna-scuole-certificati-medici': {
+    title: 'Canton Lucerna: meno certificati medici per le assenze scolastiche',
+    description: 'Nel Canton Lucerna, le scuole richiederanno il certificato medico solo per dubbi fondati durante la stagione influenzale per alleggerire i medici.',
+    keywords: 'frontalieri, ticino, svizzera, italia, canton, lucerna, meno, certificati',
+    ogTitle: 'Canton Lucerna: meno certificati medici a scuola',
+    ogDescription: 'Durante la stagione influenzale, le scuole del Canton Lucerna limiteranno la richiesta di certificati medici ai soli casi con dubbi fondati, per non gravare sugli studi medici.',
+    canonicalPath: '/articoli-lucerna/lucerna-scuole-certificati-medici/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Canton Lucerna: meno certificati medici per le assenze scolastiche",
+      "description": "Nel Canton Lucerna, le scuole richiederanno il certificato medico solo per dubbi fondati durante la stagione influenzale per alleggerire i medici.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-lucerna-scuole-certificati-medici.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-03T01:05:01+00:00",
+      "dateModified": "2026-11-03T01:05:01+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-lucerna/lucerna-scuole-certificati-medici/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

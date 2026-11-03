@@ -75,6 +75,9 @@ const blogMetaCantonLuIt: Record<string, string> = {
     'blog.article.centro-sicurezza-rothenburg.title': 'Votazione credito per nuovo centro di sicurezza a Rothenburg',
     'blog.article.centro-sicurezza-rothenburg.excerpt': 'L\'elettorato lucernese voterà alla fine del mese sul credito di 276 milioni di CHF per il centro di sicurezza.',
     'blog.article.centro-sicurezza-rothenburg.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.lucerna-scuole-certificati-medici.title': 'Canton Lucerna: meno certificati medici per le assenze scolastiche',
+    'blog.article.lucerna-scuole-certificati-medici.excerpt': 'Durante la stagione influenzale, le direzioni scolastiche richiederanno il certificato medico solo in presenza di dubbi fondati sulle assenze degli alunni.',
+    'blog.article.lucerna-scuole-certificati-medici.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonLuIt;

@@ -75,6 +75,9 @@ const blogMetaCantonLuDe: Record<string, string> = {
     'blog.article.centro-sicurezza-rothenburg.title': 'Abstimmung über den Kredit für ein neues Sicherheitszentrum in Rothenburg',
     'blog.article.centro-sicurezza-rothenburg.excerpt': 'Die Luzerner Stimmberechtigten werden Ende des Monats über den Kredit von 276 Millionen CHF für das Sicherheitszentrum abstimmen.',
     'blog.article.centro-sicurezza-rothenburg.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.lucerna-scuole-certificati-medici.title': 'Kanton Luzern: weniger ärztliche Atteste für Schulabsenzen',
+    'blog.article.lucerna-scuole-certificati-medici.excerpt': 'Während der Grippesaison werden die Schulleitungen ein ärztliches Attest nur verlangen, wenn begründete Zweifel an den Absenzen der Schülerinnen und Schüler bestehen.',
+    'blog.article.lucerna-scuole-certificati-medici.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonLuDe;
