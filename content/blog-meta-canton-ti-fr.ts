@@ -81,6 +81,9 @@ const blogMetaCantonTiFr: Record<string, string> = {
     'blog.article.guasto-camerlata-linea-chiasso.title': 'Panne près de Como-Camerlata : retards en direction de Chiasso',
     'blog.article.guasto-camerlata-linea-chiasso.excerpt': 'La source signale une panne près de Como-Camerlata et des retards sur la circulation ferroviaire de la ligne Milano-Como-Chiasso.',
     'blog.article.guasto-camerlata-linea-chiasso.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.svizzera-uscita-schengen-controlli.title': 'Sortie Suisse de Schengen: risques de contrôles aux frontières',
+    'blog.article.svizzera-uscita-schengen-controlli.excerpt': 'Rapport fédéral publié le 18 septembre 2026 Hypothèse : sortie de la Suisse de Schengen et de Dublin Contrôles systématiques et attentes plus longues aux frontières',
+    'blog.article.svizzera-uscita-schengen-controlli.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonTiFr;

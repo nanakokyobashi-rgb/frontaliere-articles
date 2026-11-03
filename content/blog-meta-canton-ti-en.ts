@@ -81,6 +81,9 @@ const blogMetaCantonTiEn: Record<string, string> = {
     'blog.article.guasto-camerlata-linea-chiasso.title': 'Fault near Como-Camerlata: delays towards Chiasso',
     'blog.article.guasto-camerlata-linea-chiasso.excerpt': 'The source reports a fault near Como-Camerlata and delays to rail traffic on the Milan-Como-Chiasso line.',
     'blog.article.guasto-camerlata-linea-chiasso.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.svizzera-uscita-schengen-controlli.title': 'Switzerland’s exit from Schengen: risk of checks and delays at the borders',
+    'blog.article.svizzera-uscita-schengen-controlli.excerpt': 'Federal report published on 18 September 2026 Hypothesis: Switzerland’s withdrawal from Schengen and Dublin Systematic checks and longer waits at the borders',
+    'blog.article.svizzera-uscita-schengen-controlli.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonTiEn;

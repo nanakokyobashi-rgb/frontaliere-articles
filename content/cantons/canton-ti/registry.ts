@@ -293,4 +293,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'svizzera-uscita-schengen-controlli',
+ category: 'pratico',
+ date: '2026-11-03T11:01:16.866Z',
+ image: '/images/blog/article-svizzera-uscita-schengen-controlli.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
