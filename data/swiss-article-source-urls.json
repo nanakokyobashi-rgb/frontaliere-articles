@@ -1,9 +1,4 @@
 {
-  "https://www.cdt.ch/news/casi-di-tubercolosi-in-svizzera-al-livello-piu-alto-dal-2018-440025": {
-    "articleId": "tubercolosi-svizzera-aumento-2025",
-    "ts": "2026-09-24T17:43:40.366Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/cn%3a-lavoratori-interinali-meglio-protetti-in-caso-di-intemperie/92112898": {
     "articleId": "indennita-maltempo-sei-mesi",
     "ts": "2026-09-24T19:15:47.751Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/mercato-del-lavoro%3a-le-prospettive-si-offuscano-leggermente/92312143": {
     "articleId": "mercato-lavoro-prospettive-offuscate",
     "ts": "2026-11-02T23:28:54.901Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4213365": {
+    "articleId": "inflazione-ottobre-1-5-percento",
+    "ts": "2026-11-03T11:31:34.020Z",
     "keyForm": 2
   }
 }

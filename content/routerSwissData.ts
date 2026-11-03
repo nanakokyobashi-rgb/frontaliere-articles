@@ -2911,6 +2911,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'startup-innovazione-sociale-open-call': { it: 'startup-innovazione-sociale-open-call', en: 'startup-social-innovation-open-call', de: 'startup-soziales-innovations-open-call', fr: 'startup-innovation-sociale-open-call' },
  'premi-mercato-idroelettrico-2026': { it: 'premi-mercato-idroelettrico-2026', en: 'hydroelectric-market-premiums-2026', de: 'marktpraemien-wasserkraft-2026', fr: 'primes-marche-hydroelectrique-2026' },
  'mercato-lavoro-prospettive-offuscate': { it: 'mercato-lavoro-prospettive-offuscate', en: 'labor-market-prospects-clouding', de: 'arbeitsmarkt-prospekte-truben', fr: 'perspectives-marche-travail-nuageants' },
+ 'inflazione-ottobre-1-5-percento': { it: 'inflazione-ottobre-1-5-percento', en: 'october-inflation-1-5-percent', de: 'inflations-oktober-1-5-prozent', fr: 'inflation-octobre-1-5-pourcent' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

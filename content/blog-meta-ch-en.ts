@@ -8666,6 +8666,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.mercato-lavoro-prospettive-offuscate.title': 'Labor market outlook: slight weakening in the fourth quarter of 2026',
     'blog.article.mercato-lavoro-prospettive-offuscate.excerpt': 'KOF indicator at 2,0 points in the fourth quarter of 2026 It was at 2,3 points in the previous quarter Approximately 4\'500 companies surveyed in October Construction positive',
     'blog.article.mercato-lavoro-prospettive-offuscate.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.inflazione-ottobre-1-5-percento.title': 'October inflation rises to 1,5%, driven by energy',
+    'blog.article.inflazione-ottobre-1-5-percento.excerpt': 'October’s annual inflation rose by 1.5% In September, the annual increase was 1% Monthly CPI increased by 0.2% Energy: diesel fuel, gasoline and diesel',
+    'blog.article.inflazione-ottobre-1-5-percento.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaChEn;

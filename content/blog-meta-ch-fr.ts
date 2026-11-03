@@ -8666,6 +8666,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.mercato-lavoro-prospettive-offuscate.title': 'Marché du travail : léger recul au 4e trimestre 2026',
     'blog.article.mercato-lavoro-prospettive-offuscate.excerpt': 'Indicateur KOF à 2,0 points au quatrième trimestre 2026 Était à 2,3 points au trimestre précédent Environ 4\'500 entreprises interrogées en octobre Construction positive',
     'blog.article.mercato-lavoro-prospettive-offuscate.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.inflazione-ottobre-1-5-percento.title': 'L\'inflation d\'octobre monte à 1,5 %, portée par l\'énergie',
+    'blog.article.inflazione-ottobre-1-5-percento.excerpt': 'L\'inflation annuelle d\'octobre a augmenté de 1,5 % En septembre, la hausse annuelle était de 1 % L\'IPC mensuel a augmenté de 0,2 % Énergie : gazole, essence et diesel',
+    'blog.article.inflazione-ottobre-1-5-percento.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaChFr;

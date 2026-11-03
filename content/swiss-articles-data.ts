@@ -30111,6 +30111,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'inflazione-ottobre-1-5-percento',
+    category: 'fiscale',
+    date: '2026-11-03T11:31:32.791Z',
+    image: '/images/blog/article-inflazione-ottobre-1-5-percento.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

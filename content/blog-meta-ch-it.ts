@@ -8666,6 +8666,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.mercato-lavoro-prospettive-offuscate.title': 'Prospettive mercato del lavoro: lieve indebolimento nel quarto trimestre 2026',
     'blog.article.mercato-lavoro-prospettive-offuscate.excerpt': 'Indicatore KOF a 2,0 punti nel quarto trimestre 2026 Era a 2,3 punti nel trimestre precedente Circa 4\'500 aziende intervistate a ottobre Edilizia positiva',
     'blog.article.mercato-lavoro-prospettive-offuscate.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.inflazione-ottobre-1-5-percento.title': 'Inflazione ottobre sale all\'1,5% spinta dall\'energia',
+    'blog.article.inflazione-ottobre-1-5-percento.excerpt': 'L\'inflazione annua di ottobre è salita dell\'1,5% A settembre l\'aumento annuo era dell\'1% L\'IPC mensile è cresciuto dello 0,2% Energia: gasolio, benzina e diesel',
+    'blog.article.inflazione-ottobre-1-5-percento.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaChIt;

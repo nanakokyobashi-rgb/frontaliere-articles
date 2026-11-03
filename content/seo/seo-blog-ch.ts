@@ -109544,6 +109544,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-inflazione-ottobre-1-5-percento': {
+    title: 'Inflazione ottobre sale all\'1,5% spinta dall\'energia',
+    description: 'L\'inflazione annua di ottobre è salita dell\'1,5% A settembre l\'aumento annuo era dell\'1% L\'IPC mensile è cresciuto dello 0,2% Energia: gasolio',
+    keywords: 'frontalieri, ticino, svizzera, italia, inflazione, ottobre, sale, spinta',
+    ogTitle: 'Inflazione ottobre Svizzera sale all\'1,5%',
+    ogDescription: 'L\'inflazione annua di ottobre è salita dell\'1,5% A settembre l\'aumento annuo era dell\'1% L\'IPC mensile è cresciuto dello 0,2% Energia: gasolio, benzina e diesel',
+    canonicalPath: '/articoli-svizzera/inflazione-ottobre-1-5-percento/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Inflazione ottobre sale all'1,5% spinta dall'energia",
+      "description": "L'inflazione annua di ottobre è salita dell'1,5% A settembre l'aumento annuo era dell'1% L'IPC mensile è cresciuto dello 0,2% Energia: gasolio",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-inflazione-ottobre-1-5-percento.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-03T11:31:33+00:00",
+      "dateModified": "2026-11-03T11:31:33+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/inflazione-ottobre-1-5-percento/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
