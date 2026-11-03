@@ -4,8 +4,8 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "carburanti",
-  "updatedAt": "2026-11-02T09:20:10.429Z",
-  "contentHash": "95fd97aab98215d135b27a59f586a1538c6cf6d11786d9323a8cc6c1b01c5191",
+  "updatedAt": "2026-11-03T10:56:52.378Z",
+  "contentHash": "c441fe1b85efc9ae8251bae7d7bd4b7c77e79bcfff5dcb52ef1553809ca700bb",
   "blocks": [],
   "locales": {
     "it": {
@@ -17,6 +17,12 @@
       "dataBlocks": [],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Glarona: Governo contro le detrazioni per risparmio energetico",
+          "url": "/articoli-glarona/glarona-detrazioni-energia-2029/",
+          "excerpt": "Il Governo glaronese raccomanda di respingere il postulato Markus Schnyder (SVP) chiede di mantenere le detrazioni La riforma entra in vigore il 1° gennaio 2029",
+          "date": "2026-11-03T10:48:22.919Z"
+        },
         {
           "title": "Glarona: governo prende posizione su detrazioni energetiche",
           "url": "/articoli-glarona/glarona-detrazioni-energia/",
@@ -40,12 +46,6 @@
           "url": "/articoli-glarona/braunwald-progetto-80-milioni/",
           "excerpt": "La fonte indica 80 milioni di franchi per 266 abitanti a Braunwald e annuncia l'avvio di un grande progetto contro i pericoli naturali.",
           "date": "2026-10-22T02:24:47.943Z"
-        },
-        {
-          "title": "Landrat Glarona: 4 milioni per la perequazione, idro a Rüti",
-          "url": "/articoli-glarona/landrat-ottobre-glarona-2026/",
-          "excerpt": "Il 21 ottobre 2026 il Landrat ha approvato CHF 4 milioni per la perequazione tra Cantone e comuni, respinto due proposte sulla concessione idroelettrica di Rüti e stanziato un credito sportivo di 3 milioni per il…",
-          "date": "2026-10-22T01:24:23.964Z"
         }
       ],
       "links": [
@@ -58,7 +58,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T10:56:52.378Z"
     },
     "en": {
       "canton": "GL",
@@ -69,6 +69,12 @@
       "dataBlocks": [],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Glarus: Government opposes energy-saving tax deductions",
+          "url": "/en/glarus-articles/glarus-energy-deductions-2029/",
+          "excerpt": "The Glarus cantonal government recommends rejecting the postulate Markus Schnyder (SVP) calls for retaining the deductions The reform enters into force",
+          "date": "2026-11-03T10:48:22.919Z"
+        },
         {
           "title": "Glarus: government takes a position on energy deductions",
           "url": "/en/glarus-articles/glarus-energy-tax-deductions/",
@@ -92,12 +98,6 @@
           "url": "/en/glarus-articles/braunwald-project-80-million/",
           "excerpt": "The source indicates 80 million francs for 266 residents in Braunwald and announces the launch of a major project against natural hazards.",
           "date": "2026-10-22T02:24:47.943Z"
-        },
-        {
-          "title": "Glarus Landrat: 4 million for equalization, water in Rüti",
-          "url": "/en/glarus-articles/glarus-council-october-2026/",
-          "excerpt": "On October 21, 2026, the Landrat approved CHF 4 million for the equalization between Canton and municipalities, rejected two proposals on the Rüti hydroelectric concession and allocated a sports credit of 3 million for…",
-          "date": "2026-10-22T01:24:23.964Z"
         }
       ],
       "links": [
@@ -110,7 +110,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T10:56:52.378Z"
     },
     "de": {
       "canton": "GL",
@@ -121,6 +121,12 @@
       "dataBlocks": [],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Glarus: Regierung gegen Abzüge für Energiesparmassnahmen",
+          "url": "/de/glarus-artikel/glarus-energieabzuege-2029/",
+          "excerpt": "Die Glarner Regierung empfiehlt, das Postulat abzulehnen Markus Schnyder (SVP) fordert, die Abzüge beizubehalten Die Reform tritt am 1.",
+          "date": "2026-11-03T10:48:22.919Z"
+        },
         {
           "title": "Glarus: Regierung nimmt Stellung zu Energieabzügen",
           "url": "/de/glarus-artikel/glarus-steuerabzuege-energie/",
@@ -144,12 +150,6 @@
           "url": "/de/glarus-artikel/braunwald-projekt-80-millionen/",
           "excerpt": "Die Quelle nennt 80 Millionen Franken für 266 Einwohner in Braunwald und kündigt den Beginn eines großen Projekts gegen Naturgefahren an.",
           "date": "2026-10-22T02:24:47.943Z"
-        },
-        {
-          "title": "Landrat Glarus: 4 Millionen für den Ausgleich, Hydro in Rüti",
-          "url": "/de/glarus-artikel/glarner-landrat-oktober-2026/",
-          "excerpt": "Am 21. Oktober 2026 genehmigte der Landrat CHF 4 Mio. für den Ausgleich zwischen Kanton und Gemeinden, lehnte zwei Vorschläge zur Wasserkraftkonzession Rüti ab und bewilligte einen Sportkredit von 3 Mio. für den…",
-          "date": "2026-10-22T01:24:23.964Z"
         }
       ],
       "links": [
@@ -162,7 +162,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T10:56:52.378Z"
     },
     "fr": {
       "canton": "GL",
@@ -173,6 +173,12 @@
       "dataBlocks": [],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Glaris : Gouvernement opposé aux déductions pour les économies d’énergie",
+          "url": "/fr/articles-glaris/glaris-deductions-energie-2029/",
+          "excerpt": "Le Gouvernement glaronais recommande de rejeter le postulat Markus Schnyder (SVP) demande le maintien des déductions La réforme entre en vigueur le 1er janvier",
+          "date": "2026-11-03T10:48:22.919Z"
+        },
         {
           "title": "Glaris : le gouvernement prend position sur les déductions énergétiques",
           "url": "/fr/articles-glaris/glaris-deductions-fiscales-energie/",
@@ -196,12 +202,6 @@
           "url": "/fr/articles-glaris/braunwald-projet-80-millions/",
           "excerpt": "La source indique 80 millions de francs pour 266 habitants à Braunwald et annonce le lancement d'un grand projet contre les dangers naturels.",
           "date": "2026-10-22T02:24:47.943Z"
-        },
-        {
-          "title": "Landrat Glaris : 4 millions pour la péréquation, hydro à Rüti",
-          "url": "/fr/articles-glaris/conseil-glaris-octobre-2026/",
-          "excerpt": "Le 21 octobre 2026, le Landrat a approuvé CHF 4 millions pour la péréquation entre le canton et les communes, rejeté deux propositions sur la concession hydroélectrique de Rüti et alloué un crédit sportif de 3 millions…",
-          "date": "2026-10-22T01:24:23.964Z"
         }
       ],
       "links": [
@@ -214,7 +214,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T10:56:52.378Z"
     }
   }
 }
