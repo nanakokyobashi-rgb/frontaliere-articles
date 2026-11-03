@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-inflazione-ottobre-1-5-percento.webp",
-      "sha256": "dc668ab463fd815e193a9e8d5fc486839f9faa76d1676f4b4d9ed38fff9885d7"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-inflazione-ottobre-1-5-percento-480w.webp",
-      "sha256": "cc2e6b728638684b715bee6b7f18a5df8055e8186745b529966cd100f5ba6786"
-    }
-  ]
+  "items": []
 }
