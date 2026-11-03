@@ -4,8 +4,8 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "carburanti",
-  "updatedAt": "2026-11-02T09:20:10.429Z",
-  "contentHash": "0e1710c157b7f92d03444ce928f92847910057d2a51b47ffb865f6b5eac21327",
+  "updatedAt": "2026-11-03T00:19:56.257Z",
+  "contentHash": "1e9e6b18586c6bb0cb4617f5d4d225ef394200a1b847a95874d688d75fd025ff",
   "blocks": [],
   "locales": {
     "it": {
@@ -17,6 +17,12 @@
       "dataBlocks": [],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Hergiswil: Bergstrasse 4 chiusa il 25.11.2026",
+          "url": "/articoli-nidvaldo/hergiswil-bergstrasse-gru/",
+          "excerpt": "A Hergiswil il tratto interessato della Bergstrasse sarà chiuso il 25 novembre 2026 per lo smontaggio di una gru.",
+          "date": "2026-11-03T00:08:28.441Z"
+        },
         {
           "title": "Ponte sullo Scheidgraben chiuso a Ennetbürgen",
           "url": "/articoli-nidvaldo/chiusura-ponte-scheidgraben/",
@@ -40,12 +46,6 @@
           "url": "/articoli-nidvaldo/life-forestry-stans-liquidazione/",
           "excerpt": "Dopo il fallimento del 2025, Life Forestry Switzerland AG di Stans è in liquidazione; circa 800 investitori svizzeri e oltre 6'000 europei temono di non recuperare i circa CHF 200 milioni investiti, con soli CHF 805…",
           "date": "2026-10-17T00:31:27.953Z"
-        },
-        {
-          "title": "PostAuto, nuovo orario in Nidvaldo dal 13 dicembre 2026",
-          "url": "/articoli-nidvaldo/postauto-orario-nidvaldo-2026/",
-          "excerpt": "Dal 13 dicembre 2026 cambia l'orario PostAuto: la comunicazione segnala modifiche all'offerta nei Cantoni Obvaldo e Nidvaldo.",
-          "date": "2026-10-10T17:33:10.930Z"
         }
       ],
       "links": [
@@ -58,7 +58,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:19:56.257Z"
     },
     "en": {
       "canton": "NW",
@@ -69,6 +69,12 @@
       "dataBlocks": [],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Hergiswil: Bergstrasse 4 closed on November 25, 2026",
+          "url": "/en/nidwalden-articles/hergiswil-bergstrasse-crane/",
+          "excerpt": "In Hergiswil, the affected section of Bergstrasse will be closed on November 25, 2026, for the dismantling of a crane.",
+          "date": "2026-11-03T00:08:28.441Z"
+        },
         {
           "title": "Bridge over the Scheidgraben closed in Ennetbürgen",
           "url": "/en/nidwalden-articles/scheidgraben-bridge-closure/",
@@ -92,12 +98,6 @@
           "url": "/en/nidwalden-articles/life-forestry-stans-liquidation/",
           "excerpt": "Following the 2025 bankruptcy, Life Forestry Switzerland AG of Stans is in liquidation; approximately 800 Swiss investors and more than 6'000 Europeans fear they will not recover the approximately CHF 200 million…",
           "date": "2026-10-17T00:31:27.953Z"
-        },
-        {
-          "title": "PostAuto, new timetable in Nidwalden from December 13, 2026",
-          "url": "/en/nidwalden-articles/postauto-timetable-change-nidwalden-2026/",
-          "excerpt": "Starting December 13, 2026, the PostAuto timetable will change: the communication announces changes to the service offering in the cantons of Obwalden and Nidwalden.",
-          "date": "2026-10-10T17:33:10.930Z"
         }
       ],
       "links": [
@@ -110,7 +110,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:19:56.257Z"
     },
     "de": {
       "canton": "NW",
@@ -121,6 +121,12 @@
       "dataBlocks": [],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Hergiswil: Bergstrasse 4 am 25.11.2026 gesperrt",
+          "url": "/de/nidwalden-artikel/hergiswil-bergstrasse-kran/",
+          "excerpt": "In Hergiswil wird der betroffene Abschnitt der Bergstrasse am 25.",
+          "date": "2026-11-03T00:08:28.441Z"
+        },
         {
           "title": "Brücke über den Scheidgraben in Ennetbürgen gesperrt",
           "url": "/de/nidwalden-artikel/sperrung-scheidgraben-bruecke/",
@@ -144,12 +150,6 @@
           "url": "/de/nidwalden-artikel/life-forestry-stans-liquidation/",
           "excerpt": "Nach der Insolvenz im Jahr 2025 befindet sich die Life Forestry Switzerland AG aus Stans in Liquidation; etwa 800 Schweizer Investoren und über 6'000 Europäer befürchten, die investierten rund CHF 200 Millionen nicht…",
           "date": "2026-10-17T00:31:27.953Z"
-        },
-        {
-          "title": "PostAuto, neuer Fahrplan in Nidwalden ab 13. Dezember 2026",
-          "url": "/de/nidwalden-artikel/postauto-fahrplanwechsel-nidwalden-2026/",
-          "excerpt": "Ab dem 13. Dezember 2026 ändert sich der Fahrplan von PostAuto: Die Mitteilung weist auf Änderungen des Angebots in den Kantonen Obwalden und Nidwalden hin.",
-          "date": "2026-10-10T17:33:10.930Z"
         }
       ],
       "links": [
@@ -162,7 +162,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:19:56.257Z"
     },
     "fr": {
       "canton": "NW",
@@ -173,6 +173,12 @@
       "dataBlocks": [],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Hergiswil : Bergstrasse 4 fermée le 25.11.2026",
+          "url": "/fr/articles-nidwald/hergiswil-bergstrasse-grue/",
+          "excerpt": "À Hergiswil, le tronçon concerné de la Bergstrasse sera fermé le 25 novembre 2026 pour le démontage d'une grue.",
+          "date": "2026-11-03T00:08:28.441Z"
+        },
         {
           "title": "Pont sur le Scheidgraben fermé à Ennetbürgen",
           "url": "/fr/articles-nidwald/fermeture-pont-scheidgraben/",
@@ -196,12 +202,6 @@
           "url": "/fr/articles-nidwald/life-forestry-stans-liquidation/",
           "excerpt": "Après la faillite de 2025, Life Forestry Switzerland AG de Stans est en liquidation ; environ 800 investisseurs suisses et plus de 6'000 Européens craignent de ne pas récupérer les quelque CHF 200 millions investis…",
           "date": "2026-10-17T00:31:27.953Z"
-        },
-        {
-          "title": "PostAuto, nouvel horaire dans le canton de Nidwald à partir du 13 décembre 2026",
-          "url": "/fr/articles-nidwald/changement-horaire-postauto-nidwald-2026/",
-          "excerpt": "À partir du 13 décembre 2026, l’horaire de PostAuto change : la communication signale des modifications de l’offre dans les cantons d’Obwald et de Nidwald.",
-          "date": "2026-10-10T17:33:10.930Z"
         }
       ],
       "links": [
@@ -214,7 +214,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:19:56.257Z"
     }
   }
 }

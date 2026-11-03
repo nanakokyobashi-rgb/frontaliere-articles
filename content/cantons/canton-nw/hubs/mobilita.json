@@ -4,8 +4,8 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "mobilita",
-  "updatedAt": "2026-11-02T21:01:35.908Z",
-  "contentHash": "5ce1fc4f27e62a3c2bfa4de1595b2caa09cfb06f97d253511c6e0adba76d7e51",
+  "updatedAt": "2026-11-03T00:19:56.257Z",
+  "contentHash": "87eb80a15c611067110fe95d2d07b5b14cbc87ad2e98ba12355d3af5be7f6922",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -129,6 +129,12 @@
           "date": "2026-10-30T20:11:37.696Z"
         },
         {
+          "title": "Hergiswil: Bergstrasse 4 chiusa il 25.11.2026",
+          "url": "/articoli-nidvaldo/hergiswil-bergstrasse-gru/",
+          "excerpt": "A Hergiswil il tratto interessato della Bergstrasse sarà chiuso il 25 novembre 2026 per lo smontaggio di una gru.",
+          "date": "2026-11-03T00:08:28.441Z"
+        },
+        {
           "title": "Trasporti pubblici a Nidvaldo: zone, tariffe e abbonamenti",
           "url": "/articoli-svizzera/nidvaldo-trasporti-pubblici/",
           "excerpt": "Guida completa ai trasporti pubblici nel Cantone di Nidvaldo, alle comunità tariffarie, alle zone, agli abbonamenti e alle combinazioni con i titoli di viaggio federali.",
@@ -152,7 +158,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-02T21:01:35.908Z"
+      "updatedAt": "2026-11-03T00:19:56.257Z"
     },
     "en": {
       "canton": "NW",
@@ -264,6 +270,12 @@
           "date": "2026-10-30T20:11:37.696Z"
         },
         {
+          "title": "Hergiswil: Bergstrasse 4 closed on November 25, 2026",
+          "url": "/en/nidwalden-articles/hergiswil-bergstrasse-crane/",
+          "excerpt": "In Hergiswil, the affected section of Bergstrasse will be closed on November 25, 2026, for the dismantling of a crane.",
+          "date": "2026-11-03T00:08:28.441Z"
+        },
+        {
           "title": "Public transport in Nidwalden: zones, fares and subscriptions",
           "url": "/en/swiss-articles/nidwalden-public-transport-passes-zones/",
           "excerpt": "Comprehensive guide to public transport in the Canton of Nidwalden, fare communities, zones, season tickets and combinations with federal travel documents.",
@@ -287,7 +299,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-02T21:01:35.908Z"
+      "updatedAt": "2026-11-03T00:19:56.257Z"
     },
     "de": {
       "canton": "NW",
@@ -399,6 +411,12 @@
           "date": "2026-10-30T20:11:37.696Z"
         },
         {
+          "title": "Hergiswil: Bergstrasse 4 am 25.11.2026 gesperrt",
+          "url": "/de/nidwalden-artikel/hergiswil-bergstrasse-kran/",
+          "excerpt": "In Hergiswil wird der betroffene Abschnitt der Bergstrasse am 25.",
+          "date": "2026-11-03T00:08:28.441Z"
+        },
+        {
           "title": "Öffentliche Verkehrsmittel in Nidwalden: Zonen, Tarife und Abonnements",
           "url": "/de/schweiz-artikel/nidwalden-oev-abos-zonen/",
           "excerpt": "Umfassender Leitfaden zum öffentlichen Verkehr im Kanton Nidwalden, zu Tarifgemeinschaften, Zonen, Abos und Kombinationen mit eidgenössischen Fahrausweisen.",
@@ -422,7 +440,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-02T21:01:35.908Z"
+      "updatedAt": "2026-11-03T00:19:56.257Z"
     },
     "fr": {
       "canton": "NW",
@@ -534,6 +552,12 @@
           "date": "2026-10-30T20:11:37.696Z"
         },
         {
+          "title": "Hergiswil : Bergstrasse 4 fermée le 25.11.2026",
+          "url": "/fr/articles-nidwald/hergiswil-bergstrasse-grue/",
+          "excerpt": "À Hergiswil, le tronçon concerné de la Bergstrasse sera fermé le 25 novembre 2026 pour le démontage d'une grue.",
+          "date": "2026-11-03T00:08:28.441Z"
+        },
+        {
           "title": "Transports publics à Nidwald : zones, tarifs et abonnements",
           "url": "/fr/articles-suisse/nidwald-transports-publics-abonnements-zones/",
           "excerpt": "Guide complet des transports publics dans le canton de Nidwald, des communautés tarifaires, des zones, des abonnements et des combinaisons avec les titres de voyage fédéraux.",
@@ -557,7 +581,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-02T21:01:35.908Z"
+      "updatedAt": "2026-11-03T00:19:56.257Z"
     }
   }
 }

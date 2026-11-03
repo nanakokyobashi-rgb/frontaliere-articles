@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "carburanti",
-  "updatedAt": "2026-11-02T09:20:10.429Z",
-  "contentHash": "76a8d68f655a64bd7d81a02aae970b553e72da9c49ee4eed17761df14bc5d9de",
+  "updatedAt": "2026-11-03T00:19:56.257Z",
+  "contentHash": "8683ab996a6fb5f681490af29247350d3ebaf557636cb85a78fc3066de6c48cb",
   "blocks": [],
   "locales": {
     "it": {
@@ -17,6 +17,12 @@
       "dataBlocks": [],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Votazione credito per nuovo centro di sicurezza a Rothenburg",
+          "url": "/articoli-lucerna/centro-sicurezza-rothenburg/",
+          "excerpt": "L'elettorato lucernese voterà alla fine del mese sul credito di 276 milioni di CHF per il centro di sicurezza.",
+          "date": "2026-11-03T00:11:08.711Z"
+        },
         {
           "title": "Banca cantonale di Lucerna: utile +8,7% in nove mesi",
           "url": "/articoli-lucerna/lukb-utile-nove-mesi/",
@@ -40,12 +46,6 @@
           "url": "/articoli-lucerna/passepartout-trasporto-centrale/",
           "excerpt": "Prima del 1986 servivano più biglietti per un viaggio nell'ÖV.",
           "date": "2026-10-31T09:19:08.597Z"
-        },
-        {
-          "title": "Einwohnerrat decide budget 2027 e credito Bahnhof Ost",
-          "url": "/articoli-lucerna/einwohnerrat-budget-bahnhof-ost/",
-          "excerpt": "Il 17 novembre 2026 si riunisce l'Einwohnerrat di Ebikon Il budget 2027 prevede un avanzo di CHF 2,14 milioni Il moltiplicatore resta a 2,05 unità Bahnhof Ost",
-          "date": "2026-10-27T08:22:48.687Z"
         }
       ],
       "links": [
@@ -58,7 +58,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:19:56.257Z"
     },
     "en": {
       "canton": "LU",
@@ -69,6 +69,12 @@
       "dataBlocks": [],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Credit vote for new security center in Rothenburg",
+          "url": "/en/lucerne-articles/rothenburg-security-center/",
+          "excerpt": "The Lucerne electorate will vote at the end of the month on the CHF 276 million credit for the security centre.",
+          "date": "2026-11-03T00:11:08.711Z"
+        },
         {
           "title": "Lucerne Cantonal Bank: profit +8,7% in nine months",
           "url": "/en/lucerne-articles/lucerne-cantonal-bank-profit-nine-months/",
@@ -92,12 +98,6 @@
           "url": "/en/lucerne-articles/passepartout-central-transit/",
           "excerpt": "Before 1986, multiple tickets were required for a journey on public transport.",
           "date": "2026-10-31T09:19:08.597Z"
-        },
-        {
-          "title": "Residents’ Council decides on budget 2027 and Bahnhof Ost credit",
-          "url": "/en/lucerne-articles/residents-council-decides-on-budget-2027-and-bahnhof-ost-credit/",
-          "excerpt": "On 17 November 2026, the Ebikon Residents' Council meets The 2027 budget provides for a surplus of CHF 2,14 million The multiplier remains at 2,05 units Bahnhof",
-          "date": "2026-10-27T08:22:48.687Z"
         }
       ],
       "links": [
@@ -110,7 +110,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:19:56.257Z"
     },
     "de": {
       "canton": "LU",
@@ -121,6 +121,12 @@
       "dataBlocks": [],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Abstimmung über den Kredit für ein neues Sicherheitszentrum in Rothenburg",
+          "url": "/de/luzern-artikel/sicherheitszentrum-rothenburg/",
+          "excerpt": "Die Luzerner Stimmberechtigten werden Ende des Monats über den Kredit von 276 Millionen CHF für das Sicherheitszentrum abstimmen.",
+          "date": "2026-11-03T00:11:08.711Z"
+        },
         {
           "title": "Luzerner Kantonalbank: Gewinn +8,7% in neun Monaten",
           "url": "/de/luzern-artikel/luzerner-kantonalbank-gewinn-neun-monate/",
@@ -144,12 +150,6 @@
           "url": "/de/luzern-artikel/passepartout-zentralschweiz-oev/",
           "excerpt": "Vor 1986 waren für eine Fahrt im ÖV mehrere Billette nötig.",
           "date": "2026-10-31T09:19:08.597Z"
-        },
-        {
-          "title": "Einwohnerrat entscheidet über Budget 2027 und Kredit für Bahnhof Ost",
-          "url": "/de/luzern-artikel/einwohnerrat-entscheidet-uber-budget-2027-und-kredit-fur-bahnhof-ost/",
-          "excerpt": "Am 17. November 2026 tagt der Einwohnerrat von Ebikon Das Budget 2027 sieht einen Überschuss von CHF 2,14 Millionen vor Der Steuerfuss bleibt bei 2,05 Einheiten",
-          "date": "2026-10-27T08:22:48.687Z"
         }
       ],
       "links": [
@@ -162,7 +162,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:19:56.257Z"
     },
     "fr": {
       "canton": "LU",
@@ -173,6 +173,12 @@
       "dataBlocks": [],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Votation sur le crédit pour le nouveau centre de sécurité à Rothenburg",
+          "url": "/fr/articles-lucerne/centre-securite-rothenburg/",
+          "excerpt": "L'électorat lucernois votera à la fin du mois sur le crédit de 276 millions de CHF pour le centre de sécurité.",
+          "date": "2026-11-03T00:11:08.711Z"
+        },
         {
           "title": "Banque cantonale de Lucerne : bénéfice en hausse de 8,7 % sur neuf mois",
           "url": "/fr/articles-lucerne/banque-cantonale-lucerne-benefice-neuf-mois/",
@@ -196,12 +202,6 @@
           "url": "/fr/articles-lucerne/passepartout-transports-centre/",
           "excerpt": "Avant 1986, plusieurs billets étaient nécessaires pour un trajet en transports publics.",
           "date": "2026-10-31T09:19:08.597Z"
-        },
-        {
-          "title": "L'Einwohnerrat décide du budget 2027 et du crédit Bahnhof Ost",
-          "url": "/fr/articles-lucerne/l-einwohnerrat-decide-du-budget-2027-et-du-credit-bahnhof-ost/",
-          "excerpt": "Le 17 novembre 2026, l'Einwohnerrat d'Ebikon se réunit Le budget 2027 prévoit un excédent de CHF 2,14 millions Le multiplicateur reste à 2,05 unités Bahnhof Ost",
-          "date": "2026-10-27T08:22:48.687Z"
         }
       ],
       "links": [
@@ -214,7 +214,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:19:56.257Z"
     }
   }
 }
