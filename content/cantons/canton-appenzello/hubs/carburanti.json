@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "carburanti",
-  "updatedAt": "2026-11-03T07:44:37.207Z",
-  "contentHash": "00d974818ec46f03f8a98847fa7b2cab806b58e0c77dd1dc1c98f46d2d9cdd8b",
+  "updatedAt": "2026-11-03T09:01:29.410Z",
+  "contentHash": "7bd52036399d59af00293c5110db88f81d7c9120a37891b24d3a678c92806f4c",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -60,6 +60,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Appenzello Esterno: più giorni caldi nel 2026",
+          "url": "/articoli-appenzello/caldo-appenzello-esterno-2026/",
+          "excerpt": "Estate 2026: più giorni caldi nei siti esaminati Nel 2026 sono state rilevate più notti tropicali Altitudine e raffrescamento notturno riducono il caldo",
+          "date": "2026-11-03T08:54:47.590Z"
+        },
+        {
           "title": "Decima fiera posti apprendistato Appenzell 7 novembre 2026",
           "url": "/articoli-appenzello/decima-fiera-apprendistati-innerrhoden/",
           "excerpt": "62 aziende dell'Innerrhoden presenteranno offerte di apprendistato sabato 7 novembre 2026 all'Aula Gringel, ingresso gratuito dalle 9.00 alle 15.00.",
@@ -82,12 +88,6 @@
           "url": "/articoli-appenzello/appenzello-deficit-budget/",
           "excerpt": "Il comunicato del 28 ottobre sul budget 2027 dell'Appenzello Esterno indica un deficit di 11,5 milioni; l'eventuale aumento delle imposte resta incerto.",
           "date": "2026-10-28T18:13:37.671Z"
-        },
-        {
-          "title": "Teufen: accolto in parte il ricorso sul progetto Bündt",
-          "url": "/articoli-appenzello/teufen-ricorso-progetto-bundt/",
-          "excerpt": "L'Obergericht dell'Appenzello Esterno ha accolto in parte il ricorso degli abitanti: il progetto stradale Bündt non può essere attuato nella forma attuale.",
-          "date": "2026-10-27T20:08:13.817Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-03T07:44:37.207Z"
+      "updatedAt": "2026-11-03T09:01:29.410Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -147,6 +147,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Appenzell Ausserrhoden: more hot days in 2026",
+          "url": "/en/appenzell-articles/heat-appenzell-ausserrhoden-2026/",
+          "excerpt": "Summer 2026: more hot days at the sites examined More tropical nights were recorded in 2026 Altitude and nighttime cooling reduce prolonged heat The Health",
+          "date": "2026-11-03T08:54:47.590Z"
+        },
+        {
           "title": "Tenth Apprenticeship Positions Fair Appenzell November 7, 2026",
           "url": "/en/appenzell-articles/tenth-apprenticeship-fair-innerrhoden/",
           "excerpt": "62 companies from Innerrhoden will present apprenticeship opportunities on Saturday, 7 November 2026, at Aula Gringel, with free admission from 9.00 to 15.00.",
@@ -169,12 +175,6 @@
           "url": "/en/appenzell-articles/appenzell-budget-deficit/",
           "excerpt": "The October 28 statement on Appenzell Ausserrhoden's 2027 budget indicates a deficit of 11,5 million; any tax increase remains uncertain.",
           "date": "2026-10-28T18:13:37.671Z"
-        },
-        {
-          "title": "Teufen: appeal concerning the Bündt project partially upheld",
-          "url": "/en/appenzell-articles/teufen-bundt-project-appeal/",
-          "excerpt": "The Obergericht of Appenzell Ausserrhoden partially upheld the residents' appeal: the Bündt road project cannot be implemented in its current form.",
-          "date": "2026-10-27T20:08:13.817Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-03T07:44:37.207Z"
+      "updatedAt": "2026-11-03T09:01:29.410Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -234,6 +234,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Appenzell Ausserrhoden: mehr heiße Tage im Jahr 2026",
+          "url": "/de/appenzell-artikel/hitzebelastung-appenzell-ausserrhoden-2026/",
+          "excerpt": "Sommer 2026: mehr heiße Tage an den untersuchten Standorten Im Jahr 2026 wurden mehr Tropennächte festgestellt Höhenlage und nächtliche Abkühlung verringern",
+          "date": "2026-11-03T08:54:47.590Z"
+        },
+        {
           "title": "Zehnte Lehrstellenmesse Appenzell 7. November 2026",
           "url": "/de/appenzell-artikel/zehnte-lehrstellenmesse-innerrhoden/",
           "excerpt": "62 Unternehmen aus Innerrhoden präsentieren am Samstag, 7.",
@@ -256,12 +262,6 @@
           "url": "/de/appenzell-artikel/appenzell-budget-defizit/",
           "excerpt": "Die Mitteilung vom 28.",
           "date": "2026-10-28T18:13:37.671Z"
-        },
-        {
-          "title": "Teufen: Beschwerde gegen das Projekt Bündt teilweise gutgeheissen",
-          "url": "/de/appenzell-artikel/teufen-buendt-projekt-beschwerde/",
-          "excerpt": "Das Obergericht des Kantons Appenzell Ausserrhoden hat die Beschwerde der Anwohner teilweise gutgeheissen: Das Strassenprojekt Bündt kann in seiner aktuellen Form nicht umgesetzt werden.",
-          "date": "2026-10-27T20:08:13.817Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-03T07:44:37.207Z"
+      "updatedAt": "2026-11-03T09:01:29.410Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -321,6 +321,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Appenzell Rhodes-Extérieures : davantage de jours chauds en 2026",
+          "url": "/fr/articles-appenzell/chaleur-appenzell-rhodes-exterieures-2026/",
+          "excerpt": "Été 2026 : davantage de jours chauds sur les sites examinés En 2026, davantage de nuits tropicales ont été relevées L’altitude et le rafraîchissement nocturne",
+          "date": "2026-11-03T08:54:47.590Z"
+        },
+        {
           "title": "Dixième salon des places d'apprentissage d'Appenzell 7 novembre 2026",
           "url": "/fr/articles-appenzell/dixieme-foire-apprentissage-innerrhoden/",
           "excerpt": "62 entreprises de l'Innerrhoden présenteront des offres d'apprentissage le samedi 7 novembre 2026 à l'Aula Gringel, entrée gratuite de 9.00 à 15.00.",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-appenzell/deficit-budget-appenzell/",
           "excerpt": "Le communiqué du 28 octobre sur le budget 2027 d'Appenzell Rhodes-Extérieures indique un déficit de 11,5 millions ; une éventuelle hausse des impôts reste incertaine.",
           "date": "2026-10-28T18:13:37.671Z"
-        },
-        {
-          "title": "Teufen : le recours concernant le projet Bündt est partiellement admis",
-          "url": "/fr/articles-appenzell/teufen-recours-projet-buendt/",
-          "excerpt": "Le Tribunal cantonal d’Appenzell Rhodes-Extérieures a partiellement admis le recours des habitants : le projet routier Bündt ne peut pas être réalisé dans sa forme actuelle.",
-          "date": "2026-10-27T20:08:13.817Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-03T07:44:37.207Z"
+      "updatedAt": "2026-11-03T09:01:29.410Z"
     }
   }
 }
