@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "servizi",
-  "updatedAt": "2026-11-03T10:06:57.473Z",
-  "contentHash": "0f23528499c7969ff4fd066c60c756f0a2d13b10335bf74ad40a1c952ca5ff14",
+  "updatedAt": "2026-11-03T11:14:35.098Z",
+  "contentHash": "3ada8ad7f33dee0c9b8afa6d4c8d19c2db5236b42a0d1e6b994f971b083c7b6e",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -175,6 +175,12 @@
           "date": "2026-10-27T12:21:54.555Z"
         },
         {
+          "title": "Riduzione premi assicurativi 2027: CHF 221 milioni a Soletta",
+          "url": "/articoli-soletta/solothurn-riduzione-premi-2027/",
+          "excerpt": "Nel 2027 a Soletta sono previsti circa CHF 221 milioni.",
+          "date": "2026-11-03T11:10:06.361Z"
+        },
+        {
           "title": "Soletta: la Ratsleitung contro la PUK sugli ospedali",
           "url": "/articoli-soletta/soletta-ratsleitung-puk-ospedali/",
           "excerpt": "La Ratsleitung di Soletta considera non utile una PUK sugli ospedali; il Consiglio cantonale voterà l'11 novembre.",
@@ -209,12 +215,6 @@
           "url": "/articoli-svizzera/premi-cassa-malati-canton-soletta-riduzione/",
           "excerpt": "Fatti chiave sulla riduzione dei premi cassa malati nel Cantone di Soletta",
           "date": "2026-08-18T01:51:08.948Z"
-        },
-        {
-          "title": "Permesso di dimora B in Soletta: requisiti e procedura",
-          "url": "/articoli-svizzera/permesso-di-dimora-b-canton-soletta/",
-          "excerpt": "I requisiti per ottenere un permesso di dimora B nel Canton Soletta sono specificati nella legge cantonale.",
-          "date": "2026-08-18T01:22:42.942Z"
         }
       ],
       "latestCantonArticles": [],
@@ -244,7 +244,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-03T11:14:35.098Z"
     },
     "en": {
       "canton": "SO",
@@ -387,6 +387,12 @@
           "date": "2026-10-27T12:21:54.555Z"
         },
         {
+          "title": "Insurance premium reductions in 2027: CHF 221 million in Solothurn",
+          "url": "/en/solothurn-articles/solothurn-premium-reduction-2027/",
+          "excerpt": "In 2027, around CHF 221 million are planned for Solothurn.",
+          "date": "2026-11-03T11:10:06.361Z"
+        },
+        {
           "title": "Solothurn: Council leadership opposes the hospital PUK",
           "url": "/en/solothurn-articles/solothurn-hospital-puk-opposed/",
           "excerpt": "Solothurn’s council leadership considers a PUK on the hospitals unnecessary; the cantonal council will vote on 11 November.",
@@ -421,12 +427,6 @@
           "url": "/en/swiss-articles/canton-health-insurance-premiums-slab-and-premium-reduction/",
           "excerpt": "Key facts about the reduction of sick pay premiums in the Canton of Solothurn",
           "date": "2026-08-18T01:51:08.948Z"
-        },
-        {
-          "title": "Residence permit B in Soleta: requirements and procedure",
-          "url": "/en/swiss-articles/residence-permit-b-in-soleta-requirements-and-procedure/",
-          "excerpt": "The requirements for obtaining a B residence permit in the Canton of Solothurn are specified in the cantonal law.",
-          "date": "2026-08-18T01:22:42.942Z"
         }
       ],
       "latestCantonArticles": [],
@@ -452,7 +452,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-03T11:14:35.098Z"
     },
     "de": {
       "canton": "SO",
@@ -595,6 +595,12 @@
           "date": "2026-10-27T12:21:54.555Z"
         },
         {
+          "title": "Prämienverbilligung 2027: CHF 221 Millionen in Solothurn",
+          "url": "/de/solothurn-artikel/solothurn-pramienreduktion-2027/",
+          "excerpt": "2027 sind in Solothurn rund CHF 221 Millionen vorgesehen.",
+          "date": "2026-11-03T11:10:06.361Z"
+        },
+        {
           "title": "Solothurn: Die Ratsleitung gegen die PUK zu den Spitälern",
           "url": "/de/solothurn-artikel/solothurn-spitaeler-puk-abgelehnt/",
           "excerpt": "Die Ratsleitung von Solothurn hält eine PUK zu den Spitälern nicht für sinnvoll; der Kantonsrat wird am 11.",
@@ -629,12 +635,6 @@
           "url": "/de/schweiz-artikel/krankenkassenpramien-kanton-solothurn-und-pramienverbilligung/",
           "excerpt": "Wichtige Fakten zur Reduzierung der Krankenversicherungsprämien im Kanton Solothurn",
           "date": "2026-08-18T01:51:08.948Z"
-        },
-        {
-          "title": "Aufenthaltsbewilligung B in Solothurn: Voraussetzungen und Verfahren",
-          "url": "/de/schweiz-artikel/permesso-di-dimora-b-kanton-solothurn/",
-          "excerpt": "Die Voraussetzungen für eine Aufenthaltsbewilligung B im Kanton Solothurn sind im kantonalen Gesetz festgelegt.",
-          "date": "2026-08-18T01:22:42.942Z"
         }
       ],
       "latestCantonArticles": [],
@@ -660,7 +660,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-03T11:14:35.098Z"
     },
     "fr": {
       "canton": "SO",
@@ -803,6 +803,12 @@
           "date": "2026-10-27T12:21:54.555Z"
         },
         {
+          "title": "Réduction des primes d'assurance 2027 : CHF 221 millions à Soleure",
+          "url": "/fr/articles-soleure/soleure-reduction-primes-2027/",
+          "excerpt": "En 2027, à Soleure, environ CHF 221 millions sont prévus.",
+          "date": "2026-11-03T11:10:06.361Z"
+        },
+        {
           "title": "Soleure : la direction du Conseil contre la PUK sur les hôpitaux",
           "url": "/fr/articles-soleure/soleure-puk-hopitaux-refusee/",
           "excerpt": "La direction du Conseil de Soleure considère qu’une PUK sur les hôpitaux n’est pas utile ; le Conseil cantonal votera le 11 novembre.",
@@ -837,12 +843,6 @@
           "url": "/fr/articles-suisse/primes-d-assurance-maladie-dans-le-canton-de-soleure-et-reductions-de-primes/",
           "excerpt": "Faits clés sur la réduction des primes de caisse-maladie dans le canton de Soleure",
           "date": "2026-08-18T01:51:08.948Z"
-        },
-        {
-          "title": "Permis de séjour B à Soleure : exigences et procédure",
-          "url": "/fr/articles-suisse/permesso-di-dimora-b-canton-de-soleure/",
-          "excerpt": "Les conditions d'obtention d'un permis de séjour B dans le canton de Soleure sont précisées dans la loi cantonale.",
-          "date": "2026-08-18T01:22:42.942Z"
         }
       ],
       "latestCantonArticles": [],
@@ -864,7 +864,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-03T11:14:35.098Z"
     }
   }
 }
