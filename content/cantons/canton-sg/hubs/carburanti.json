@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "carburanti",
-  "updatedAt": "2026-11-02T09:20:10.429Z",
-  "contentHash": "8a0bd755d66d8b50b7c3b148b54da09003cddee5bd2f6508243236f1ac1c4c93",
+  "updatedAt": "2026-11-03T08:42:50.601Z",
+  "contentHash": "384db151eafe1aee567d755d1795c6563e2d8eef7c32147e69b5d1d95defe39c",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Cambiamenti orari bus St.Gallen: interessate Rosenberg, Schuppis e Winkeln",
+          "url": "/articoli-san-gallo/cambiamento-orari-st-gallen/",
+          "excerpt": "Il progetto tocca Rosenberg, Schuppis, Grossacker e Winkeln.",
+          "date": "2026-11-03T08:22:04.208Z"
+        },
+        {
           "title": "Scontro sulla A1 a Gossau: quattro feriti",
           "url": "/articoli-san-gallo/tamponamento-a1-gossau/",
           "excerpt": "Incidente tra due auto sulla A1 a Gossau il 29 ottobre 2026: un 55enne ferito in modo significativo, tre feriti lievi e coda verso St.Gallen.",
@@ -94,12 +100,6 @@
           "url": "/articoli-san-gallo/controllo-traffico-san-gallo-ottobre/",
           "excerpt": "105 violazioni accertate nella notte del 24 ottobre Circa 150 veicoli e occupanti controllati 70 veicoli oltre 80 km/h sulla A13 Cosa: controllo mirato",
           "date": "2026-10-27T00:06:31.670Z"
-        },
-        {
-          "title": "40 comuni del Canton San Gallo chiudono il 2025 in positivo",
-          "url": "/articoli-san-gallo/positive-chiusure-2025-sg/",
-          "excerpt": "Su 75 comuni politici, 40 hanno chiuso il 2025 con avanzo; l'eccedenza aggregata è di circa CHF 28 milioni.",
-          "date": "2026-10-26T17:48:42.058Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T08:42:50.601Z"
     },
     "en": {
       "canton": "SG",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "St.Gallen bus schedule changes: Rosenberg, Schuppis and Winkeln affected",
+          "url": "/en/st-gallen-articles/st-gallen-schedule-changes/",
+          "excerpt": "The project affects Rosenberg, Schuppis, Grossacker and Winkeln.",
+          "date": "2026-11-03T08:22:04.208Z"
+        },
+        {
           "title": "Crash on the A1 in Gossau: four injured",
           "url": "/en/st-gallen-articles/gossau-a1-crash/",
           "excerpt": "Accident involving two cars on the A1 in Gossau on October 29, 2026: a 55-year-old seriously injured, three people with minor injuries, and traffic backed up toward St.Gallen.",
@@ -193,12 +199,6 @@
           "url": "/en/st-gallen-articles/st-gallen-traffic-control-october/",
           "excerpt": "105 violations recorded during the night of October 24 Approximately 150 vehicles and occupants checked 70 vehicles traveling at over 80 km/h on the A13",
           "date": "2026-10-27T00:06:31.670Z"
-        },
-        {
-          "title": "40 municipalities in the Canton of St. Gallen end 2025 with a surplus",
-          "url": "/en/st-gallen-articles/positive-closures-2025-sg/",
-          "excerpt": "Of 75 political municipalities, 40 closed 2025 with a surplus; the aggregate surplus is approximately CHF 28 million.",
-          "date": "2026-10-26T17:48:42.058Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T08:42:50.601Z"
     },
     "de": {
       "canton": "SG",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Busfahrplan in St.Gallen: Änderungen in drei Quartieren",
+          "url": "/de/st-gallen-artikel/st-gallen-fahrplanwechsel/",
+          "excerpt": "Der Entwurf betrifft Rosenberg, Schuppis, Grossacker und Winkeln.",
+          "date": "2026-11-03T08:22:04.208Z"
+        },
+        {
           "title": "Kollision auf der A1 bei Gossau: vier Verletzte",
           "url": "/de/st-gallen-artikel/auffahrunfall-a1-gossau/",
           "excerpt": "Unfall zwischen zwei Autos auf der A1 bei Gossau am 29.",
@@ -292,12 +298,6 @@
           "url": "/de/st-gallen-artikel/verkehrskontrolle-st-gallen-oktober/",
           "excerpt": "105 Verstöße in der Nacht vom 24.",
           "date": "2026-10-27T00:06:31.670Z"
-        },
-        {
-          "title": "40 Gemeinden des Kantons St. Gallen schliessen das Jahr 2025 positiv ab",
-          "url": "/de/st-gallen-artikel/40-gemeinden-des-kantons-st-gallen-schliessen-das-jahr-2025-positiv-ab/",
-          "excerpt": "Von 75 politischen Gemeinden schlossen 40 das Jahr 2025 mit einem Überschuss ab; der kumulierte Überschuss beträgt rund CHF 28 Millionen.",
-          "date": "2026-10-26T17:48:42.058Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T08:42:50.601Z"
     },
     "fr": {
       "canton": "SG",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Horaires bus St.Gallen changés : Rosenberg/Schuppis/Winkeln",
+          "url": "/fr/articles-saint-gall/changements-horaires-st-gallen/",
+          "excerpt": "Le projet concerne Rosenberg, Schuppis, Grossacker et Winkeln.",
+          "date": "2026-11-03T08:22:04.208Z"
+        },
+        {
           "title": "Collision sur l’A1 à Gossau : quatre blessés",
           "url": "/fr/articles-saint-gall/accident-a1-gossau/",
           "excerpt": "Accident entre deux voitures sur l’A1 à Gossau le 29 octobre 2026 : un homme de 55 ans grièvement blessé, trois blessés légers et un embouteillage en direction de St.Gallen.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-saint-gall/controle-trafic-st-galle-octobre/",
           "excerpt": "105 infractions constatées dans la nuit du 24 octobre Environ 150 véhicules et occupants contrôlés 70 véhicules à plus de 80 km/h sur l’A13 Quoi : contrôle",
           "date": "2026-10-27T00:06:31.670Z"
-        },
-        {
-          "title": "40 communes du canton de Saint-Gall clôturent l'année 2025 en positif",
-          "url": "/fr/articles-saint-gall/positifs-clotures-2025-sg/",
-          "excerpt": "Sur 75 communes politiques, 40 ont clôturé l'année 2025 avec un excédent ; l'excédent cumulé est d'environ 28 millions de CHF.",
-          "date": "2026-10-26T17:48:42.058Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T08:42:50.601Z"
     }
   }
 }

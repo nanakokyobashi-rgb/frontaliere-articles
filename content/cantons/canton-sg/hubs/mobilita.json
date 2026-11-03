@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "mobilita",
-  "updatedAt": "2026-11-03T07:44:37.207Z",
-  "contentHash": "d510aa2e58725e928f9cc3bc40303825fb789e77ac78acc68ecb084ddebac317",
+  "updatedAt": "2026-11-03T08:42:50.601Z",
+  "contentHash": "acba70e54d9cfc586e5cf23edaff63d4bbf9724d984cbc6af2d4379fe90fb0a0",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -221,6 +221,12 @@
           "date": "2026-10-26T16:46:48.908Z"
         },
         {
+          "title": "Cambiamenti orari bus St.Gallen: interessate Rosenberg, Schuppis e Winkeln",
+          "url": "/articoli-san-gallo/cambiamento-orari-st-gallen/",
+          "excerpt": "Il progetto tocca Rosenberg, Schuppis, Grossacker e Winkeln.",
+          "date": "2026-11-03T08:22:04.208Z"
+        },
+        {
           "title": "Kolumbanstrasse ridisegnata: più verde e fermate bus senza barriere",
           "url": "/articoli-san-gallo/kolumbanstrasse-nuova-velostrasse/",
           "excerpt": "Il 23 ottobre 2026 è stata completata la nuova configurazione della Kolumbanstrasse, che ora include 700 metri di itinerario ciclabile prioritario.",
@@ -243,12 +249,6 @@
           "url": "/articoli-san-gallo/lavori-strada-wartau-plattis/",
           "excerpt": "A Wartau i lavori sulla Hauptstrasse iniziano il 19 ottobre 2026: nel tratto Plattis saranno rinnovate le condotte di drenaggio e il fondo stradale.",
           "date": "2026-10-09T20:23:10.514Z"
-        },
-        {
-          "title": "Abbonamenti trasporti San Gallo: zone e tariffe",
-          "url": "/articoli-svizzera/abbonamenti-trasporti-san-gallo/",
-          "excerpt": "Scopri la struttura tariffaria del Canton San Gallo: comunità tariffaria, zone, abbonamenti annuali e mensili, Metà-prezzo e AG, sconti per studenti.",
-          "date": "2026-08-30T09:09:21.184Z"
         }
       ],
       "latestCantonArticles": [],
@@ -286,7 +286,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-03T07:44:37.207Z"
+      "updatedAt": "2026-11-03T08:42:50.601Z"
     },
     "en": {
       "canton": "SG",
@@ -485,6 +485,12 @@
           "date": "2026-10-26T16:46:48.908Z"
         },
         {
+          "title": "St.Gallen bus schedule changes: Rosenberg, Schuppis and Winkeln affected",
+          "url": "/en/st-gallen-articles/st-gallen-schedule-changes/",
+          "excerpt": "The project affects Rosenberg, Schuppis, Grossacker and Winkeln.",
+          "date": "2026-11-03T08:22:04.208Z"
+        },
+        {
           "title": "Kolumbanstrasse redesigned: greener and barrier-free bus stops",
           "url": "/en/st-gallen-articles/kolumbanstrasse-new-velostrasse/",
           "excerpt": "On October 23, 2026, the new configuration of Kolumbanstrasse was completed, which now includes 700 meters of priority cycling route.",
@@ -506,12 +512,6 @@
           "url": "/en/st-gallen-articles/roadworks-wartau-plattis/",
           "excerpt": "In Wartau, work on Hauptstrasse will begin on October 19, 2026: in the Plattis section, the drainage pipes and road surface will be renewed.",
           "date": "2026-10-09T20:23:10.514Z"
-        },
-        {
-          "title": "St. Gallen Transportation Subscriptions: Zones and Rates",
-          "url": "/en/swiss-articles/st-gallen-public-transport-passes/",
-          "excerpt": "Discover the tariff structure of the Canton of St. Gallen: tariff community, zones, annual and monthly subscriptions, Half-price and AG, discounts for students.",
-          "date": "2026-08-30T09:09:21.184Z"
         }
       ],
       "latestCantonArticles": [],
@@ -549,7 +549,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-03T07:44:37.207Z"
+      "updatedAt": "2026-11-03T08:42:50.601Z"
     },
     "de": {
       "canton": "SG",
@@ -748,6 +748,12 @@
           "date": "2026-10-26T16:46:48.908Z"
         },
         {
+          "title": "Busfahrplan in St.Gallen: Änderungen in drei Quartieren",
+          "url": "/de/st-gallen-artikel/st-gallen-fahrplanwechsel/",
+          "excerpt": "Der Entwurf betrifft Rosenberg, Schuppis, Grossacker und Winkeln.",
+          "date": "2026-11-03T08:22:04.208Z"
+        },
+        {
           "title": "Kolumbanstrasse neu gestaltet: mehr Grün und barrierefreie Bushaltestellen",
           "url": "/de/st-gallen-artikel/kolumbanstrasse-neue-velostrasse/",
           "excerpt": "Am 23. Oktober 2026 wurde die neue Gestaltung der Kolumbanstrasse fertiggestellt, die nun 700 Meter einer prioritären Veloroute umfasst.",
@@ -769,12 +775,6 @@
           "url": "/de/st-gallen-artikel/bauarbeiten-wartau-plattis/",
           "excerpt": "In Wartau beginnen die Arbeiten an der Hauptstrasse am 19.",
           "date": "2026-10-09T20:23:10.514Z"
-        },
-        {
-          "title": "Verkehrstickets St. Gallen: Zonen und Tarife",
-          "url": "/de/schweiz-artikel/san-gallen-abonnementsverkehr/",
-          "excerpt": "Entdecken Sie die Tarifstruktur des Kantons St. Gallen: Tarifgemeinschaft, Zonen, Jahres- und Monatsabonnements, Halbtax und GA, Studentenrabatte.",
-          "date": "2026-08-30T09:09:21.184Z"
         }
       ],
       "latestCantonArticles": [],
@@ -812,7 +812,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-03T07:44:37.207Z"
+      "updatedAt": "2026-11-03T08:42:50.601Z"
     },
     "fr": {
       "canton": "SG",
@@ -1011,6 +1011,12 @@
           "date": "2026-10-26T16:46:48.908Z"
         },
         {
+          "title": "Horaires bus St.Gallen changés : Rosenberg/Schuppis/Winkeln",
+          "url": "/fr/articles-saint-gall/changements-horaires-st-gallen/",
+          "excerpt": "Le projet concerne Rosenberg, Schuppis, Grossacker et Winkeln.",
+          "date": "2026-11-03T08:22:04.208Z"
+        },
+        {
           "title": "Kolumbanstrasse réaménagée : plus de verdure et des arrêts de bus sans barrières",
           "url": "/fr/articles-saint-gall/kolumbanstrasse-nouvelle-velostrasse/",
           "excerpt": "Le 23 octobre 2026, la nouvelle configuration de la Kolumbanstrasse a été achevée, et elle comprend désormais 700 mètres d’itinéraire cyclable prioritaire.",
@@ -1033,12 +1039,6 @@
           "url": "/fr/articles-saint-gall/travaux-routiers-wartau-plattis/",
           "excerpt": "À Wartau, les travaux sur la Hauptstrasse commencent le 19 octobre 2026 : sur le tronçon de Plattis, les conduites de drainage et la chaussée seront rénovées.",
           "date": "2026-10-09T20:23:10.514Z"
-        },
-        {
-          "title": "Abonnements transports Saint-Gall : zones et tarifs",
-          "url": "/fr/articles-suisse/abonnements-transports-saint-gall/",
-          "excerpt": "Découvrez la structure tarifaire du canton de Saint-Gall : communauté tarifaire, zones, abonnements annuels et mensuels, demi-tarif et AG, réductions pour étudiants.",
-          "date": "2026-08-30T09:09:21.184Z"
         }
       ],
       "latestCantonArticles": [],
@@ -1076,7 +1076,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-03T07:44:37.207Z"
+      "updatedAt": "2026-11-03T08:42:50.601Z"
     }
   }
 }
