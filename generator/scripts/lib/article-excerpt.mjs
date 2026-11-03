@@ -16,6 +16,7 @@ import {
   SEO_DESCRIPTION_MIN,
   SEO_OG_DESCRIPTION_MAX,
 } from './seo-description-contract.mjs';
+import { detectWrongLatinLanguageInField } from './itLanguageCheck.mjs';
 
 export const EXCERPT_MAX_LENGTH = 280;
 export const EXCERPT_MIN_LENGTH = 60;
@@ -616,7 +617,7 @@ function crossesBodyLineOrListItem(text) {
   return listItems.slice(1).some((item) => !hasSentenceTerminator(value.slice(0, item.index)));
 }
 
-function sentenceCandidatesFromBody(body, locale) {
+function sentenceCandidatesFromBody(body, locale, field = 'excerpt') {
   if (!sentenceSegmenters.has(locale)) {
     sentenceSegmenters.set(locale, new Intl.Segmenter(locale, { granularity: 'sentence' }));
   }
@@ -649,6 +650,7 @@ function sentenceCandidatesFromBody(body, locale) {
         if (crossesBodyLineOrListItem(candidate)) continue;
         const plainCandidate = stripExcerptMarkdown(candidate);
         if (!plainCandidate || plainCandidate.length > 280) continue;
+        if (detectWrongLatinLanguageInField(plainCandidate, locale, field) !== null) continue;
         if (hasUnpunctuatedSentenceJoin(plainCandidate, locale)) continue;
         if (findExcerptMarkdownDefects(plainCandidate).length > 0) continue;
         if (!/[.!?…]["'’”»)}\]]*$/u.test(plainCandidate)) continue;
@@ -714,7 +716,7 @@ export function repairExcerptFromOriginal(value, {
     return { value: prefix, strategy: 'a', defects };
   }
 
-  const bodyCandidates = sentenceCandidatesFromBody(body, locale)
+  const bodyCandidates = sentenceCandidatesFromBody(body, locale, field)
     .filter((candidate) => candidate.length <= maxLength && candidate.length >= minLength)
     .filter((candidate) => findExcerptCompletenessDefects(candidate, { locale }).length === 0)
     .map((candidate, index) => ({
@@ -757,11 +759,12 @@ export function selectCompleteExcerptSource(value, {
 /** Return the first complete one- or two-sentence excerpt copied from the body. */
 export function firstCompleteBodyExcerpt(body, {
   locale = '',
+  field = 'excerpt',
   maxLength = EXCERPT_MAX_LENGTH,
   minLength = EXCERPT_MIN_LENGTH,
 } = {}) {
   const options = { locale, maxLength, minLength, body };
-  return sentenceCandidatesFromBody(body, locale)
+  return sentenceCandidatesFromBody(body, locale, field)
     .find((candidate) => isCompleteSourceCandidate(candidate, options)) ?? null;
 }
 
@@ -983,12 +986,19 @@ export function normalizeExcerpt(value) {
   return plain.length >= EXCERPT_MIN_LENGTH && !endsWithSentenceAbbreviation(plain) ? plain : '';
 }
 
-/** Throw the publication gate for Markdown in a reader-facing description. */
-export function assertPlainExcerpt(value, { field = 'excerpt', id = 'unknown', locale = 'unknown', body = [] } = {}) {
+/** Throw the publication gate for Markdown and, by default, incomplete descriptions. */
+export function assertPlainExcerpt(value, {
+  field = 'excerpt',
+  id = 'unknown',
+  locale = 'unknown',
+  body = [],
+  checkCompleteness = true,
+} = {}) {
   const markdownDefects = findExcerptMarkdownDefects(value);
   if (markdownDefects.length > 0) {
     throw new Error(`[excerpt-plain] ${locale}/${id}/${field} contiene Markdown (${markdownDefects.join(', ')})`);
   }
+  if (!checkCompleteness) return value;
   const completionDefects = findDescriptionDefects(value, { locale, field, body })
     .filter((defect) => !markdownDefects.includes(defect));
   if (completionDefects.length > 0) {

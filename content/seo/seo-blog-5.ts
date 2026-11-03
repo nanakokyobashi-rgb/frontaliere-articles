@@ -113450,7 +113450,7 @@ ogDescription: 'I lavori tra Vezia e Capolago modificano gli orari Tilo.',
     description: 'Malnate avrà quasi 500 mila euro in meno dai ristorni. Quasi 1.700 residenti attraversano ogni giorno il confine. I fondi arriveranno ai primi',
     keywords: 'frontalieri, ticino, svizzera, italia, malnate, ristorni, meno, quasi',
     ogTitle: 'Malnate ristorni frontalieri in meno di 500 mila euro',
-ogDescription: 'Malnate avrà quasi 500 mila euro in meno dai ristorni.',
+    ogDescription: 'Malnate avrà quasi 500 mila euro in meno dai ristorni.',
     canonicalPath: '/articoli-frontaliere/malnate-ristorni-500-mila-meno/',
     structuredData: {
       "@context": "https://schema.org",
@@ -113486,16 +113486,16 @@ ogDescription: 'Malnate avrà quasi 500 mila euro in meno dai ristorni.',
 
   'blog-mozione-ticino-ristorni-salute': {
     title: 'Mozione in Ticino contro la tassa sulla salute',
-description: 'La fonte riferisce che in Gran Consiglio è stata presentata una mozione interpartitica dedicata alla misura italiana.',
+    description: 'La fonte riferisce che in Gran Consiglio è stata presentata una mozione interpartitica dedicata alla misura italiana.',
     keywords: 'frontalieri, ticino, svizzera, italia, mozione, contro, tassa, sulla',
     ogTitle: 'Ticino: mozione contro la tassa sulla salute',
-ogDescription: 'La fonte riferisce che in Gran Consiglio è stata presentata una mozione interpartitica dedicata alla misura italiana.',
+    ogDescription: 'La fonte riferisce che in Gran Consiglio è stata presentata una mozione interpartitica dedicata alla misura italiana.',
     canonicalPath: '/articoli-frontaliere/mozione-ticino-ristorni-salute/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Mozione in Ticino contro la tassa sulla salute",
-"description": "La fonte riferisce che in Gran Consiglio è stata presentata una mozione interpartitica dedicata alla misura italiana.",
+      "description": "La fonte riferisce che in Gran Consiglio è stata presentata una mozione interpartitica dedicata alla misura italiana.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",

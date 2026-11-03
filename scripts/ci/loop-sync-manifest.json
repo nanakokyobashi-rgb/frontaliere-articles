@@ -188,6 +188,16 @@
       }
     },
     {
+      "path": "scripts/ci/excerpt-completeness-baseline.json",
+      "mode": "corpus-only",
+      "reason": "Baseline monotona dei difetti excerpt/SEO tollerati dal publisher del corpus; governa il preflight prima della scrittura di dist/api. Il sito consuma i JSON pubblicati e non deve importare il registro dei casi legacy del generatore.",
+      "baseline": {
+        "site": null,
+        "corpus": "c70e7863ef2029e8",
+        "alignedAt": "2026-11-03"
+      }
+    },
+    {
       "path": "scripts/ci/article-publication-observer.mjs",
       "mode": "corpus-only",
       "reason": "Osservatore e repairer bounded della pubblicazione articoli: legge la storia dei body nel corpus, confronta le revisioni con le pagine servite dai due publisher, conserva nel body di una issue stabile l elenco durevole delle pagine degradate e dei blocker di preparazione, e dispatcha il publisher solo dopo una prova live + immagine disponibile. Vive solo qui perche' la sorgente delle revisioni e il coordinamento dei publisher appartengono al corpus; il sito consuma la superficie pubblicata e non deve osservare la propria copia del corpus.",
@@ -1103,6 +1113,16 @@
         "site": null,
         "corpus": "1bc5c31e4fcf5f32",
         "alignedAt": "2026-10-10"
+      }
+    },
+    {
+      "path": "scripts/lib/excerpt-completeness-gate.mjs",
+      "mode": "corpus-only",
+      "reason": "Gate del publisher che confronta i difetti excerpt/SEO correnti con la baseline approvata e blocca nuove regressioni prima di cancellare dist/api. Il sito riceve i JSON e non deve importare il controllo del generatore.",
+      "baseline": {
+        "site": null,
+        "corpus": "24cacdf09a2448e5",
+        "alignedAt": "2026-11-03"
       }
     },
     {
@@ -2866,11 +2886,11 @@
     {
       "path": "generator/scripts/lib/article-excerpt.mjs",
       "mode": "corpus-only",
-      "reason": "Validatore e normalizzatore degli excerpt plain usato dal generatore del corpus per impedire Markdown nelle card e nei campi SEO derivati. Non esiste un gemello operativo sul sito: la difesa lato card vive nel repository del sito e resta una protezione distinta.",
+      "reason": "Validatore, normalizzatore e riparatore deterministico di excerpt e descrizioni SEO plain; il writer lo usa prima della registrazione e il publisher prima di cancellare dist/api. Non esiste un gemello operativo sul sito: la difesa lato card vive nel repository del sito e resta una protezione distinta.",
       "baseline": {
         "site": null,
-        "corpus": "5655fc21c1a5546b",
-        "alignedAt": "2026-10-08"
+        "corpus": "46e9fa64a1c87d81",
+        "alignedAt": "2026-11-03"
       }
     },
     {
@@ -3789,8 +3809,8 @@
       "reason": "L'emettitore del blocco meta per-locale, estratto da generator/scripts/create-article.mjs (dove era `buildMetaBlock` + `escapeForSingleQuoteTS`). E' il punto in cui il corpus decide QUALI campi per-locale diventano superficie pubblica: build-api.mjs serializza il default export di blog-meta-<locale>.ts senza filtrare, quindi un campo che non passa di qui non esiste per nessun consumatore. `corpus-only` e non `identical`: il sito ha la sua copia inline dentro scripts/create-article.mjs, che e' gia' registrato `adapted` — un gemello di FILE qui non esiste. La meta' lettrice (metaFieldRegex, la voce qui sotto) e' invece `identical`, ed e' voluto: il lettore e' condiviso, lo scrittore no.",
       "baseline": {
         "site": null,
-        "corpus": "b32967d7a7470176",
-        "alignedAt": "2026-08-09"
+        "corpus": "0691485f60084168",
+        "alignedAt": "2026-11-03"
       }
     },
     {

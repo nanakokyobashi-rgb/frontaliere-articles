@@ -91,6 +91,23 @@ test('la guardia condivisa controlla anche i campi SEO fuori dal meta builder', 
   );
 });
 
+test('la codifica dei meta distingue il testo plain dal preflight di completezza', () => {
+  assert.equal(
+    assertPlainExcerpt('Excerpt EN', { locale: 'en', checkCompleteness: false }),
+    'Excerpt EN',
+  );
+  assert.throws(
+    () => assertPlainExcerpt('Excerpt EN', { locale: 'en' }),
+    /\[excerpt-complete\]/u,
+    'il controllo di completezza resta attivo per default',
+  );
+  assert.throws(
+    () => assertPlainExcerpt('**Short excerpt**', { checkCompleteness: false }),
+    /\[excerpt-plain\]/u,
+    'l’encoder continua a rifiutare Markdown',
+  );
+});
+
 test('la completezza rileva code sintattiche aperte, parentesi e label orfane', () => {
   assert.deepEqual(findExcerptCompletenessDefects('The vote is'), ['dangling-clause']);
   assert.deepEqual(findExcerptCompletenessDefects('A rate applies (starting at'), ['unclosed-parenthesis', 'dangling-clause']);
@@ -558,6 +575,38 @@ test('la strategia b non confonde i pronomi e i nomi propri con l’inizio di un
   });
   assert.equal(germanCompoundRepair.strategy, 'b');
   assert.equal(germanCompoundRepair.value, germanCompoundSentence);
+});
+
+test('la strategia b scarta le frasi del body rilevate in una lingua diversa dal campo', () => {
+  const original = 'Der Bericht zur Gemeindefusion im Basso Mendrisiotto bezieht Chiasso, Mendrisio und Vacallo ein und';
+  const italianCandidate = 'Il progetto di aggregazione del Basso Mendrisiotto, che coinvolge i comuni di Chiasso, Mendrisio e Vacallo, sta facendo progressi, ma non senza difficoltà.';
+  const germanCandidate = 'Das Fusionsprojekt im unteren Mendrisiotto mit den Gemeinden Chiasso, Mendrisio und Vacallo macht Fortschritte, steht aber weiterhin vor finanziellen Schwierigkeiten.';
+  const options = {
+    locale: 'de',
+    title: 'Gemeindefusion Basso Mendrisiotto Chiasso Mendrisio Vacallo',
+    body: [italianCandidate, germanCandidate],
+  };
+
+  const repaired = repairExcerptFromOriginal(original, options);
+  assert.equal(repaired.strategy, 'b');
+  assert.equal(repaired.value, germanCandidate);
+  assert.equal(
+    firstCompleteBodyExcerpt(options.body, { locale: 'de' }),
+    germanCandidate,
+    'anche il selettore condiviso esclude la frase italiana',
+  );
+
+  const withoutGermanCandidate = repairExcerptFromOriginal(original, {
+    ...options,
+    body: [italianCandidate],
+  });
+  assert.equal(withoutGermanCandidate.strategy, 'c');
+  assert.equal(withoutGermanCandidate.value, original);
+  assert.equal(
+    firstCompleteBodyExcerpt([italianCandidate], { locale: 'de' }),
+    null,
+    'il selettore non deve proporre una frase italiana come excerpt tedesco',
+  );
 });
 
 test('il gate accetta testo semplice e rifiuta Markdown nei campi descrittivi', () => {

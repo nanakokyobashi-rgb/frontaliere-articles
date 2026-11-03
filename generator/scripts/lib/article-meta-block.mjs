@@ -246,16 +246,15 @@ export function buildMetaBlockLines(data, locale) {
   if (!data?.content?.[locale]) {
     throw new Error(`buildMetaBlockLines: data.content['${locale}'] mancante per '${id}'`);
   }
-  const body = Object.entries(data.content[locale])
-    .filter(([field, value]) => /^body\d+$/u.test(field) && typeof value === 'string')
-    .sort(([left], [right]) => Number(left.slice(4)) - Number(right.slice(4)))
-    .map(([, value]) => value);
   const lines = [];
   for (const field of META_FIELDS) {
     const value = readLocaleField(data, locale, field);
     if (value === null && !META_ALWAYS_EMITTED.includes(field)) continue;
     if (['excerpt', ...META_SEO_FIELDS].includes(field)) {
-      assertPlainExcerpt(value, { field, id, locale, body });
+      // The generator repairs and validates descriptions before writing. This
+      // low-level encoder retains its historical contract: it rejects Markdown
+      // but can serialize a plain value without rerunning completion policy.
+      assertPlainExcerpt(value, { field, id, locale, checkCompleteness: false });
     }
     lines.push(`    'blog.article.${id}.${field}': '${escapeForSingleQuoteTS(value)}',`);
   }

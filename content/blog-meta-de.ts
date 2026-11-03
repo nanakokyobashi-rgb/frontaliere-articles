@@ -1624,7 +1624,7 @@ const blogMetaDe: Record<string, string> = {
  'blog.article.chiasso-missione-emergenza-luci-blu.excerpt': 'Am 26. April 2026 wird Chiasso zehn Entitäten des ersten Einsatzes für die Missione emergenza aufnehmen, die Agenten und Mitarbeiter direkt mit der Bevölkerung in Kontakt bringen.',
  'blog.article.chiasso-missione-emergenza-luci-blu.imageAlt': 'Chiasso, 26. April 2026: Die Stadt nimmt zehn Ersthelfer-Einheiten für die Notfallmission auf, die Agenten und Mitarbeiter direkt mit der Bevölkerung in Kontakt bringen.',
  'blog.article.aggregazione-basso-mendrisiotto-rizza-chiasso-autocritica.title': 'Fusion Basso Mendrisiotto: Rizza kritisiert Chiasso',
- 'blog.article.aggregazione-basso-mendrisiotto-rizza-chiasso-autocritica.excerpt': 'Il progetto di aggregazione del Basso Mendrisiotto, che coinvolge i comuni di Chiasso, Mendrisio e Vacallo, sta facendo progressi, ma non senza difficoltà.',
+ 'blog.article.aggregazione-basso-mendrisiotto-rizza-chiasso-autocritica.excerpt': 'Das Projekt macht Fortschritte, aber nicht ohne Schwierigkeiten, und es kann zu Abweichungen im Zeitplan kommen.',
  'blog.article.aggregazione-basso-mendrisiotto-rizza-chiasso-autocritica.imageAlt': 'Panorama des Basso Mendrisiotto mit Chiasso, Mendrisio und Vacallo.',
  'blog.article.carburanti-prezzo-rialzo-ticino.title': 'Kraftstoffpreise steigen: Dieselpreis über 2 Euro im Tessin',
  'blog.article.carburanti-prezzo-rialzo-ticino.excerpt': 'Die Preise für Benzin und Diesel steigen, wobei der Diesel die 2-Euro-Marke überschreitet. Hier ist, was Sie wissen müssen.',
