@@ -43,6 +43,14 @@
     "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261103-apple-un-quatrieme-trimestre-superieur-aux-attentes.html": {
       "section": "canton-ju",
       "ts": 1793665025778
+    },
+    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261102-une-cyberattaque-frappe-des-refrigerateurs-a-travers-l-europe.html": {
+      "section": "canton-ju",
+      "ts": 1793675379553
+    },
+    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261102-anthropic-a-augmente-son-chiffre-d-affaires-au-troisieme-trimestre.html": {
+      "section": "canton-ju",
+      "ts": 1793675391660
     }
   }
 }
