@@ -31,6 +31,10 @@
     "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-09-30/ist-orange-das-neue-schwarz-wie-sich-weidmueller-im-ki": {
       "section": "canton-sh",
       "ts": 1793694527538
+    },
+    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-12/gf-vizepraesidentin-gehoert-zu-den-top-100-women-in-business": {
+      "section": "canton-sh",
+      "ts": 1793702235665
     }
   }
 }
