@@ -69,6 +69,9 @@ const blogMetaCantonSoFr: Record<string, string> = {
     'blog.article.soletta-stipendi-pubblici-2027.title': 'Salaires publics à Soleure : +1,0% dès 2027',
     'blog.article.soletta-stipendi-pubblici-2027.excerpt': 'À Soleure, le personnel de l\'État, les enseignants et les employés des hôpitaux recevront 1,0% de plus à partir de 2027 après l\'accord sur l\'inflation.',
     'blog.article.soletta-stipendi-pubblici-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.aumento-salari-soletta-2027.title': 'Canton de Soleure : augmentation salariale de 1 % à partir de 2027',
+    'blog.article.aumento-salari-soletta-2027.excerpt': 'À partir de 2027, le personnel de l\'État, les enseignants et les employés de la Solothurner Spitäler AG bénéficieront d\'une adaptation salariale de 1,0 %.',
+    'blog.article.aumento-salari-soletta-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSoFr;

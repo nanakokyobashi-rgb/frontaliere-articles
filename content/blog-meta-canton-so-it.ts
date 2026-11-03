@@ -69,6 +69,9 @@ const blogMetaCantonSoIt: Record<string, string> = {
     'blog.article.soletta-stipendi-pubblici-2027.title': 'Stipendi pubblici a Soletta: +1,0% dal 2027',
     'blog.article.soletta-stipendi-pubblici-2027.excerpt': 'A Soletta il personale statale, gli insegnanti e i dipendenti degli ospedali riceveranno l\'1,0% in più dal 2027 dopo l\'accordo sull\'inflazione.',
     'blog.article.soletta-stipendi-pubblici-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.aumento-salari-soletta-2027.title': 'Canton Soletta: aumento salariale dell\'1% dal 2027',
+    'blog.article.aumento-salari-soletta-2027.excerpt': 'Dal 2027 il personale statale, i docenti e i dipendenti della Solothurner Spitäler AG riceveranno un adeguamento salariale dell\'1,0%.',
+    'blog.article.aumento-salari-soletta-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSoIt;

@@ -855,6 +855,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-aumento-salari-soletta-2027': {
+    title: 'Canton Soletta: aumento salariale dell\'1% dal 2027',
+    description: 'Accordo nel Canton Soletta: dal 2027 personale statale, docenti e dipendenti della Spitäler AG riceveranno un aumento salariale dell\'1%.',
+    keywords: 'frontalieri, ticino, svizzera, italia, canton, soletta, aumento, salariale',
+    ogTitle: 'Aumento stipendi Canton Soletta: +1% dal 2027',
+    ogDescription: 'Il Regierungsrat del Canton Soletta e le associazioni del personale hanno siglato un accordo per un aumento dell\'1% a partire dal 2027. La misura riguarda dipendenti statali, docenti e il personale della Solothurner Spitäler AG.',
+    canonicalPath: '/articoli-soletta/aumento-salari-soletta-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Canton Soletta: aumento salariale dell'1% dal 2027",
+      "description": "Accordo nel Canton Soletta: dal 2027 personale statale, docenti e dipendenti della Spitäler AG riceveranno un aumento salariale dell'1%.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-aumento-salari-soletta-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-03T09:00:18+00:00",
+      "dateModified": "2026-11-03T09:00:18+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-soletta/aumento-salari-soletta-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

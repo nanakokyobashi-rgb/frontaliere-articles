@@ -248,4 +248,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'aumento-salari-soletta-2027',
+ category: 'novita',
+ date: '2026-11-03T09:00:18.121Z',
+ image: '/images/blog/article-aumento-salari-soletta-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
