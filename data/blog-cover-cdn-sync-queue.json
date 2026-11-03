@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-voto-iva-13esima-avs-novembre.webp",
+      "sha256": "52be39a6f2ed27ce359ad2802b1bd14b23d9db76709799010d0567f6ef077976"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-voto-iva-13esima-avs-novembre-480w.webp",
+      "sha256": "ccce2d20f8e02f81c03bf3e00594693dddf5f57b65b6cda086708eeef40dde8f"
+    }
+  ]
 }
