@@ -79,6 +79,10 @@
     "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261103-aramco-le-benefice-flambe-de-34-6-au-troisieme-trimestre.html": {
       "section": "canton-ju",
       "ts": 1793702215078
+    },
+    "canton-ju::https://www.rfj.ch/rfj/actualite/suisse/20261103-petit-benefice-au-budget-2027-de-la-ville-de-neuchatel.html": {
+      "section": "canton-ju",
+      "ts": 1793704061125
     }
   }
 }
