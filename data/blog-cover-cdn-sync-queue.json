@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-vionnaz-revoca-divieti-acqua.webp",
+      "sha256": "af08721a8b138507bb448fdce6e1ee4dc22ca9c9d6dd6e63e5f37dcc5fe5e6ab"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-vionnaz-revoca-divieti-acqua-480w.webp",
+      "sha256": "602f0a57412b51ac56f52d9ab0c035e6bcf01a15d6b13ea92b7f0d97b90aefb3"
+    }
+  ]
 }
