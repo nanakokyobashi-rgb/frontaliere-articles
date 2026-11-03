@@ -4090,10 +4090,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 1,
+      "count": 2,
       "firstStrikeAt": "2026-11-03T10:31:43.849Z",
-      "lastStrikeAt": "2026-11-03T10:31:43.849Z",
-      "expiresAt": "2026-12-03T10:31:43.849Z"
+      "lastStrikeAt": "2026-11-03T16:45:05.689Z",
+      "expiresAt": "2026-12-03T16:45:05.689Z"
     },
     {
       "keyword": "vivere a Bedero Valcuvia e lavorare in Ticino da frontaliere",
@@ -4102,10 +4102,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 1,
+      "count": 2,
       "firstStrikeAt": "2026-11-03T10:35:35.685Z",
-      "lastStrikeAt": "2026-11-03T10:35:35.685Z",
-      "expiresAt": "2026-12-03T10:35:35.685Z"
+      "lastStrikeAt": "2026-11-03T16:47:47.968Z",
+      "expiresAt": "2026-12-03T16:47:47.968Z"
     },
     {
       "keyword": "vivere a Stresa e lavorare in Ticino da frontaliere",
@@ -4114,10 +4114,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 1,
+      "count": 2,
       "firstStrikeAt": "2026-11-03T10:39:14.005Z",
-      "lastStrikeAt": "2026-11-03T10:39:14.005Z",
-      "expiresAt": "2026-12-03T10:39:14.005Z"
+      "lastStrikeAt": "2026-11-03T16:59:46.578Z",
+      "expiresAt": "2026-12-03T16:59:46.578Z"
     },
     {
       "keyword": "vivere a Blessagno e lavorare in Ticino da frontaliere",
@@ -4126,10 +4126,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 1,
+      "count": 2,
       "firstStrikeAt": "2026-11-03T10:45:02.234Z",
-      "lastStrikeAt": "2026-11-03T10:45:02.234Z",
-      "expiresAt": "2026-12-03T10:45:02.234Z"
+      "lastStrikeAt": "2026-11-03T17:01:44.934Z",
+      "expiresAt": "2026-12-03T17:01:44.934Z"
     },
     {
       "keyword": "vivere a Bulgarograsso e lavorare in Ticino da frontaliere",
@@ -4138,10 +4138,10 @@
       "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
       "status": "active",
       "validityRule": "quality-strike-ttl",
-      "count": 1,
+      "count": 2,
       "firstStrikeAt": "2026-11-03T10:48:33.349Z",
-      "lastStrikeAt": "2026-11-03T10:48:33.349Z",
-      "expiresAt": "2026-12-03T10:48:33.349Z"
+      "lastStrikeAt": "2026-11-03T17:06:08.328Z",
+      "expiresAt": "2026-12-03T17:06:08.328Z"
     }
   ],
   "legacy": [
