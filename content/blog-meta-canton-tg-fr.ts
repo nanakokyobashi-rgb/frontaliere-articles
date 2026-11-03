@@ -72,6 +72,9 @@ const blogMetaCantonTgFr: Record<string, string> = {
     'blog.article.ufficio-imposte-frauenfeld-orari.title': 'Office des impôts : horaires modifiés à Frauenfeld dès 2/11',
     'blog.article.ufficio-imposte-frauenfeld-orari.excerpt': 'À partir du 2 novembre 2026, l’Office des impôts de la ville de Frauenfeld sera fermé les lundis et mercredis après-midi en raison d’un volume de travail élevé.',
     'blog.article.ufficio-imposte-frauenfeld-orari.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.supporto-datori-lavoro-turgovia.title': 'Soutien aux employeurs : les services en Thurgovie',
+    'blog.article.supporto-datori-lavoro-turgovia.excerpt': 'Les offices ORP d’Amriswil, Frauenfeld et Kreuzlingen offrent une assistance pour la recherche de personnel et la gestion des postes vacants.',
+    'blog.article.supporto-datori-lavoro-turgovia.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonTgFr;

@@ -72,6 +72,9 @@ const blogMetaCantonTgDe: Record<string, string> = {
     'blog.article.ufficio-imposte-frauenfeld-orari.title': 'Steueramt Frauenfeld ändert die Öffnungszeiten ab dem 2. November 2026',
     'blog.article.ufficio-imposte-frauenfeld-orari.excerpt': 'Ab dem 2. November 2026 schließt das Steueramt der Stadt Frauenfeld am Montagnachmittag und am Mittwochnachmittag wegen des hohen Arbeitsvolumens.',
     'blog.article.ufficio-imposte-frauenfeld-orari.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.supporto-datori-lavoro-turgovia.title': 'Unterstützung für Arbeitgeber: die Dienstleistungen im Thurgau',
+    'blog.article.supporto-datori-lavoro-turgovia.excerpt': 'Die RAV-Standorte in Amriswil, Frauenfeld und Kreuzlingen bieten Unterstützung bei der Personalsuche und der Verwaltung offener Stellen.',
+    'blog.article.supporto-datori-lavoro-turgovia.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonTgDe;

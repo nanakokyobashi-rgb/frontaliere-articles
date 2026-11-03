@@ -72,6 +72,9 @@ const blogMetaCantonTgIt: Record<string, string> = {
     'blog.article.ufficio-imposte-frauenfeld-orari.title': 'Ufficio imposte Frauenfeld modifica orari dal 2 novembre 2026',
     'blog.article.ufficio-imposte-frauenfeld-orari.excerpt': 'Dal 2 novembre 2026, l\'Ufficio imposte della città di Frauenfeld chiuderà lunedì e mercoledì pomeriggio per elevato volume di lavoro.',
     'blog.article.ufficio-imposte-frauenfeld-orari.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.supporto-datori-lavoro-turgovia.title': 'Supporto ai datori di lavoro: i servizi nel Turgovia',
+    'blog.article.supporto-datori-lavoro-turgovia.excerpt': 'Le sedi RAV di Amriswil, Frauenfeld e Kreuzlingen offrono assistenza per la ricerca di personale e la gestione delle posizioni vacanti.',
+    'blog.article.supporto-datori-lavoro-turgovia.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonTgIt;

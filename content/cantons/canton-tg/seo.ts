@@ -894,6 +894,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-supporto-datori-lavoro-turgovia': {
+    title: 'Supporto ai datori di lavoro: i servizi nel Turgovia',
+    description: 'Scopri come le sedi RAV di Amriswil, Frauenfeld e Kreuzlingen supportano le aziende nella ricerca di personale e nella gestione dei permessi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, supporto, datori, lavoro, servizi',
+    ogTitle: 'Supporto ai datori di lavoro nel Canton Turgovia',
+    ogDescription: 'Le sedi RAV di Amriswil, Frauenfeld e Kreuzlingen offrono servizi per la ricerca di personale, permessi e indennità per lavoro ridotto o maltempo.',
+    canonicalPath: '/articoli-turgovia/supporto-datori-lavoro-turgovia/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Supporto ai datori di lavoro: i servizi nel Turgovia",
+      "description": "Scopri come le sedi RAV di Amriswil, Frauenfeld e Kreuzlingen supportano le aziende nella ricerca di personale e nella gestione dei permessi.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-supporto-datori-lavoro-turgovia.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-03T03:33:21+00:00",
+      "dateModified": "2026-11-03T03:33:21+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-turgovia/supporto-datori-lavoro-turgovia/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

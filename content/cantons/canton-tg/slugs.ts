@@ -26,6 +26,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'messaggio-modifica-legge-strade': { it: 'messaggio-modifica-legge-strade', en: 'law-amendment-roads-thurgau', de: 'gesetz-aenderung-strassen-turgau', fr: 'modification-loi-routes-thurgovie' },
  'turgovia-tariffa-cure-familiare-2026': { it: 'turgovia-tariffa-cure-familiare-2026', en: 'thurgau-family-care-tariff-2026', de: 'turgau-tarif-pflegende-angehoerige-2026', fr: 'thurgovie-tarif-soins-proches-aidants-2026' },
  'ufficio-imposte-frauenfeld-orari': { it: 'ufficio-imposte-frauenfeld-orari', en: 'frauenfeld-tax-office-hours', de: 'steueramt-frauenfeld-zeiten', fr: 'bureau-impots-frauenfeld-horaires' },
+ 'supporto-datori-lavoro-turgovia': { it: 'supporto-datori-lavoro-turgovia', en: 'employer-support-thurgau', de: 'arbeitgeber-unterstuetzung-thurgau', fr: 'soutien-employeurs-thurgovie' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
