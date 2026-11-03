@@ -348,4 +348,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'gpk-modifiche-budget-2027',
+ category: 'fiscale',
+ date: '2026-11-03T02:05:33.934Z',
+ image: '/images/blog/article-gpk-modifiche-budget-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SH'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];

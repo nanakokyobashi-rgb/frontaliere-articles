@@ -96,6 +96,9 @@ const blogMetaCantonShDe: Record<string, string> = {
     'blog.article.rheinfall-management-2026.title': 'Kantonsrat berät Rheinfall-Bewirtschaftung; Abstimmung droht',
     'blog.article.rheinfall-management-2026.excerpt': 'Der Kantonsrat hat die erste Lesung zum Entwurf der Rheinfall-Management-Gesellschaft unterbrochen; die Grünen fordern strengere Vorschriften für Rechenzentren.',
     'blog.article.rheinfall-management-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.gpk-modifiche-budget-2027.title': 'GPK schlägt Änderungen am Budget 2027 von Schaffhausen vor',
+    'blog.article.gpk-modifiche-budget-2027.excerpt': 'Das erwartete Defizit würde auf rund 5 Millionen CHF sinken; das Wachstum der Lohnsumme würde auf 0,5% zurückgehen.',
+    'blog.article.gpk-modifiche-budget-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonShDe;

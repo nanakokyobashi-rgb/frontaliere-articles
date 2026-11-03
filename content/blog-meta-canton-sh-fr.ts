@@ -96,6 +96,9 @@ const blogMetaCantonShFr: Record<string, string> = {
     'blog.article.rheinfall-management-2026.title': 'Le Conseil cantonal débat de la gestion des chutes du Rhin ; un vote se profile',
     'blog.article.rheinfall-management-2026.excerpt': 'Le Conseil cantonal a suspendu la première lecture du projet de loi sur la « Rheinfall-Management-Gesellschaft » ; les Verts réclament des règles plus strictes pour les centres de données.',
     'blog.article.rheinfall-management-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.gpk-modifiche-budget-2027.title': 'GPK propose des modifications au budget 2027 de Schaffhouse',
+    'blog.article.gpk-modifiche-budget-2027.excerpt': 'Le déficit prévu passerait à environ 5 millions de CHF ; la croissance de la masse salariale passerait à 0,5%.',
+    'blog.article.gpk-modifiche-budget-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonShFr;

@@ -96,6 +96,9 @@ const blogMetaCantonShEn: Record<string, string> = {
     'blog.article.rheinfall-management-2026.title': 'Cantonal Council Discusses Management of the Rhine Falls; Vote Looms',
     'blog.article.rheinfall-management-2026.excerpt': 'The Kantonsrat has suspended the first reading of the Rheinfall-Management-Gesellschaft bill; the Greens are calling for stricter regulations for data centers.',
     'blog.article.rheinfall-management-2026.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.gpk-modifiche-budget-2027.title': 'GPK proposes changes to Schaffhausen\'s 2027 budget',
+    'blog.article.gpk-modifiche-budget-2027.excerpt': 'The projected deficit would fall to approximately CHF 5 million; growth in the wage bill would drop to 0.5%.',
+    'blog.article.gpk-modifiche-budget-2027.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonShEn;

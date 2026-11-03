@@ -1216,6 +1216,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-gpk-modifiche-budget-2027': {
+    title: 'GPK propone modifiche al budget 2027 di Sciaffusa',
+    description: 'La GPK propone modifiche al budget 2027 di Sciaffusa: deficit a circa 5 milioni CHF e crescita massa salariale allo 0,5%. Dettagli chiave.',
+    keywords: 'frontalieri, ticino, svizzera, italia, propone, modifiche, budget, sciaffusa',
+    ogTitle: 'GPK modifica budget 2027 Sciaffusa',
+    ogDescription: 'La Commissione della gestione del Grosser Stadtrat (GPK) propone modifiche al budget 2027 di Sciaffusa, riducendo il deficit atteso a circa 5 milioni CHF e la crescita salariale allo 0,5%.',
+    canonicalPath: '/articoli-sciaffusa/gpk-modifiche-budget-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "GPK propone modifiche al budget 2027 di Sciaffusa",
+      "description": "La GPK propone modifiche al budget 2027 di Sciaffusa: deficit a circa 5 milioni CHF e crescita massa salariale allo 0,5%. Dettagli chiave.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-gpk-modifiche-budget-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-03T02:05:33+00:00",
+      "dateModified": "2026-11-03T02:05:33+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-sciaffusa/gpk-modifiche-budget-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

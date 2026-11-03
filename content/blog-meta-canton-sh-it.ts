@@ -96,6 +96,9 @@ const blogMetaCantonShIt: Record<string, string> = {
     'blog.article.rheinfall-management-2026.title': 'Kantonsrat discute gestione Rheinfall, si profila votazione',
     'blog.article.rheinfall-management-2026.excerpt': 'Il Kantonsrat ha interrotto la prima lettura sul progetto Rheinfall-Management-Gesellschaft; i Verdi chiedono norme più severe per i datacenter.',
     'blog.article.rheinfall-management-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.gpk-modifiche-budget-2027.title': 'GPK propone modifiche al budget 2027 di Sciaffusa',
+    'blog.article.gpk-modifiche-budget-2027.excerpt': 'Il deficit previsto scenderebbe a circa 5 milioni di CHF; la crescita della massa salariale passerebbe allo 0,5%.',
+    'blog.article.gpk-modifiche-budget-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonShIt;

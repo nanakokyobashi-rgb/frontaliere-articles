@@ -34,6 +34,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'frick-volksmotion-kantonsrat': { it: 'frick-volksmotion-kantonsrat', en: 'frick-volksmotion-canton-council', de: 'volksmotion-frick-debatte-im-kantonsrat-uber-kommunale-zustandigkeiten', fr: 'frick-volksmotion-conseil-cantonal' },
  'calore-residuo-sciaffusa-mozione': { it: 'calore-residuo-sciaffusa-mozione', en: 'residual-heat-schaffhausen-motion', de: 'restwaerme-schaffhausen-motion', fr: 'chaleur-residuelle-schaffhouse-motion' },
  'rheinfall-management-2026': { it: 'rheinfall-management-2026', en: 'cantonal-council-discusses-management-of-the-rhine-falls-vote-looms', de: 'kantonsrat-berat-rheinfall-bewirtschaftung-abstimmung-droht', fr: 'le-conseil-cantonal-debat-de-la-gestion-des-chutes-du-rhin-un-vote-se-profile' },
+ 'gpk-modifiche-budget-2027': { it: 'gpk-modifiche-budget-2027', en: 'gpk-schaffhausen-2027-budget-changes', de: 'gpk-schaffhausen-budget-2027-aenderung', fr: 'gpk-schaffhouse-budget-2027-modifications' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
