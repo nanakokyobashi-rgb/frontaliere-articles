@@ -81,6 +81,9 @@ const blogMetaCantonAppenzelloIt: Record<string, string> = {
     'blog.article.tariffe-mediche-appenzello-2026.title': 'Appenzello: approvate le tariffe mediche per il 2026',
     'blog.article.tariffe-mediche-appenzello-2026.excerpt': 'La Standeskommission fissa il valore del punto tariffario a 0,86 CHF per le prestazioni ambulatoriali con effetto retroattivo dal 1° gennaio 2026.',
     'blog.article.tariffe-mediche-appenzello-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.ulmann-incarico-appenzello.title': 'Appenzello, manuel ulmann assunto al bezirksbauamt',
+    'blog.article.ulmann-incarico-appenzello.excerpt': 'Il Consiglio distrettuale di Appenzell ha assunto Manuel Ulmann al 100 per cento: inizierà al Bezirksbauamt all\'inizio di febbraio.',
+    'blog.article.ulmann-incarico-appenzello.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonAppenzelloIt;

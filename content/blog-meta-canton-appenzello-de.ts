@@ -81,6 +81,9 @@ const blogMetaCantonAppenzelloDe: Record<string, string> = {
     'blog.article.tariffe-mediche-appenzello-2026.title': 'Appenzell: Medizinische Tarife für 2026 genehmigt',
     'blog.article.tariffe-mediche-appenzello-2026.excerpt': 'Die Standeskommission legt den Wert des Tarifpunktes für ambulante Leistungen rückwirkend ab dem 1.',
     'blog.article.tariffe-mediche-appenzello-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.ulmann-incarico-appenzello.title': 'Appenzell, Manuel Ulmann beim Bezirksbauamt angestellt',
+    'blog.article.ulmann-incarico-appenzello.excerpt': 'Der Bezirksrat von Appenzell hat Manuel Ulmann mit einem Beschäftigungsgrad von 100 Prozent angestellt: Die Tätigkeit beim Bezirksbauamt beginnt Anfang Februar.',
+    'blog.article.ulmann-incarico-appenzello.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonAppenzelloDe;

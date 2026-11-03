@@ -81,6 +81,9 @@ const blogMetaCantonAppenzelloEn: Record<string, string> = {
     'blog.article.tariffe-mediche-appenzello-2026.title': 'Appenzell: medical fees approved for 2026',
     'blog.article.tariffe-mediche-appenzello-2026.excerpt': 'The Standeskommission sets the tariff point value at 0,86 CHF for outpatient services, retroactive to January 1, 2026.',
     'blog.article.tariffe-mediche-appenzello-2026.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.ulmann-incarico-appenzello.title': 'Appenzell, Manuel Ulmann hired at the Bezirksbauamt',
+    'blog.article.ulmann-incarico-appenzello.excerpt': 'The Appenzell District Council has hired Manuel Ulmann on a 100 percent basis: he will start at the Bezirksbauamt at the beginning of February.',
+    'blog.article.ulmann-incarico-appenzello.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonAppenzelloEn;
