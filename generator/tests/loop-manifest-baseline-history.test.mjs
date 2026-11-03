@@ -22,6 +22,7 @@ import {
   parseCatFileBatchStream,
   parseFollowHistory,
 } from '../../scripts/ci/verify-manifest-baseline-history.mjs';
+import { sha256 } from '../../scripts/ci/loop-drift-check.mjs';
 
 const HISTORY_SCRIPT = readFileSync(
   new URL('../../scripts/ci/verify-manifest-baseline-history.mjs', import.meta.url),

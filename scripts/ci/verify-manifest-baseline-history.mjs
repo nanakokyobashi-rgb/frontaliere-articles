@@ -68,7 +68,6 @@ export const CURRENT_HISTORY_REF = 'HEAD';
 // chunk: nessun processo riparte per ogni gruppo e nessun buffer deve
 // contenere l'intera risposta.
 const CAT_FILE_STDERR_MAX_BYTES = 1 << 20;
-const CAT_FILE_STREAM_CHUNK_BYTES = 1 << 20;
 
 /**
  * Il verdetto, PURO: niente disco, niente git, niente rete — e' questo a
@@ -404,7 +403,7 @@ async function catFileBatch(oidToPaths, { cwd, partialClone }) {
  * `main` proprio sulle baseline attestate a meta' PR. Su `main` (HEAD ==
  * origin/main) l'insieme e' identico a prima.
  *
- * @returns {Map<string, Set<string>>|null} null = lettura inconclusiva.
+ * @returns {Promise<Map<string, Set<string>>|null>} null = lettura inconclusiva.
  */
 export async function blobsByPathFromHistory(paths, { cwd = ROOT, partialClone = isPartialClone(cwd) } = {}) {
   if (paths.length === 0) return new Map();
