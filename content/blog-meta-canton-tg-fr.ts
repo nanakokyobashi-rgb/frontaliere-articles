@@ -4,7 +4,7 @@
  */
 const blogMetaCantonTgFr: Record<string, string> = {
     'blog.article.baugesuch-juchstrasse-frauenfeld.title': 'Demande de permis de construire à Frauenfeld : Juchstrasse 22-22b',
-    'blog.article.baugesuch-juchstrasse-frauenfeld.excerpt': 'Demande de permis de construire pour Juchstrasse 22, 22a et 22b : du 7 au 26 octobre 2026, les documents peuvent être consultés au Bankplatz 3.',
+    'blog.article.baugesuch-juchstrasse-frauenfeld.excerpt': 'Le 7 octobre 2026 débute la publication de la demande de permis de construire relative à Juchstrasse 22, 22a et 22b.',
     'blog.article.baugesuch-juchstrasse-frauenfeld.imageAlt': 'Bâtiment commercial et rue urbaine à Frauenfeld liés à une demande de permis de construire',
     'blog.article.rapporti-thurmed-turgovia.title': 'Rapports 2025 de thurmed et Spital Thurgovie',
     'blog.article.rapporti-thurmed-turgovia.excerpt': 'La page répertorie le rapport 2025 de thurmed et Spital Thurgovie AG, le rapport de durabilité et les statistiques de 2021 à 2025.',

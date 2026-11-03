@@ -22,7 +22,7 @@ const blogMetaCantonZgFr: Record<string, string> = {
     'blog.article.zugo-revisione-legge-edilizia-2026.excerpt': 'Le canton de Zoug lance la consultation sur la révision du PBG afin de créer davantage de logements à prix abordables et de simplifier les procédures de construction.',
     'blog.article.zugo-revisione-legge-edilizia-2026.imageAlt': 'Nouvelle revision de la loi sur l\'amenagement et la construction dans le canton de Zoug',
     'blog.article.zugo-piano-direttore-26-1.title': 'Plan directeur 26/1 : Zoug lance la participation',
-    'blog.article.zugo-piano-direttore-26-1.excerpt': 'La modification 26/1 prépare les « zones blanches », coordonne le Plan directeur avec la révision du PBG et met en œuvre RPG 2.',
+    'blog.article.zugo-piano-direttore-26-1.excerpt': 'Le document réunit donc trois exigences explicitement indiquées : soutenir la construction de logements, adapter le Plan directeur à la révision du PBG et mettre en œuvre le mandat de RPG 2 au moyen d\'une stratégie de stabilisation.',
     'blog.article.zugo-piano-direttore-26-1.imageAlt': 'Aménagement urbain et plan directeur dans le canton de Zoug',
     'blog.article.eventi-weekend-zugo.title': 'Événements du week-end dans le canton de Zoug : que faire samedi & dimanche',
     'blog.article.eventi-weekend-zugo.excerpt': 'Événements dans le canton de Zoug chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.',

@@ -22,7 +22,7 @@ const blogMetaCantonBasileaEn: Record<string, string> = {
     'blog.article.barfusserplatz-riqualificazione-urbana.excerpt': 'The redevelopment of Barfüsserplatz puts the quality of urban space at the center: for the head of the Commission, creating a beautiful square is almost impossible.',
     'blog.article.barfusserplatz-riqualificazione-urbana.imageAlt': 'Barfüsserplatz in Basel during an urban redesign project',
     'blog.article.basilea-larvicida-quattro-settimane.title': 'Basel, tiger mosquito: treatments every 4 weeks',
-    'blog.article.basilea-larvicida-quattro-settimane.excerpt': 'A master\'s thesis on 180 loopholes in the St.',
+    'blog.article.basilea-larvicida-quattro-settimane.excerpt': 'Tim Kirrmann examined the effectiveness of the larvicide used against the tiger mosquito in the canton of Basel-Stadt in his master\'s thesis. The University of Basel said on Thursday that the result identifies four weeks as the optimal interval for treatments.',
     'blog.article.basilea-larvicida-quattro-settimane.imageAlt': 'Illustration generated for this article',
     'blog.article.claraplatz-basel-cantieri.title': 'Basel, construction work at Claraplatz: shops struggling',
     'blog.article.claraplatz-basel-cantieri.excerpt': 'At Claraplatz, construction sites hit the shops and the kiosk loses 40% of its turnover.',

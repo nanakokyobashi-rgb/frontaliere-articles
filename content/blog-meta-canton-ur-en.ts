@@ -25,7 +25,7 @@ const blogMetaCantonUrEn: Record<string, string> = {
     'blog.article.axenstrasse-chiusa-quattro-notti.excerpt': 'Axenstrasse will be completely closed from November 2 to 6, every night from 22 to 5, for maintenance work.',
     'blog.article.axenstrasse-chiusa-quattro-notti.imageAlt': 'Illustrative image relevant to the article topic',
     'blog.article.bristenstrasse-regimi-traffico-2026.title': 'Bristenstrasse: closures and schedules through November 2026',
-    'blog.article.bristenstrasse-regimi-traffico-2026.excerpt': 'Between Amsteg and St.',
+    'blog.article.bristenstrasse-regimi-traffico-2026.excerpt': 'On October 26, 2026, the Bristenstrasse between Amsteg and St. Antoni enters the period scheduled for the final works.',
     'blog.article.bristenstrasse-regimi-traffico-2026.imageAlt': 'Illustrative image relevant to the article topic',
     'blog.article.andermatt-fisco-wyden.title': 'Andermatt cuts taxes: Wyden project postponed',
     'blog.article.andermatt-fisco-wyden.excerpt': 'Andermatt reduces the tax multiplier by 5 points, to 94%; the municipal council postpones the controversial Wyden project for now.',

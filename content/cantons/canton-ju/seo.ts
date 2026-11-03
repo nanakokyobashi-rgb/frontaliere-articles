@@ -121,16 +121,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-giura-formazione-postobbligatoria-2026': {
     title: 'Giura: Governo propone revisioni su formazione postobbligatoria e finanziamento',
-    description: 'Due progetti di revisione trasmessi al Parlamento Quattro ambiti: formazione, ristoranti scolastici, lingue, ammissioni La misura n.',
+    description: 'Il Governo del Canton Giura ha trasmesso al Parlamento due progetti di revisione sulla formazione postobbligatoria e sul suo finanziamento.',
     keywords: 'frontalieri, ticino, svizzera, italia, giura, governo, propone, revisioni',
     ogTitle: 'Giura: Governo propone revisioni su formazione postobbligatoria e finanziamento',
-    ogDescription: 'Due progetti di revisione trasmessi al Parlamento Quattro ambiti: formazione, ristoranti scolastici, lingue, ammissioni La misura n.',
+    ogDescription: 'Il Governo del Canton Giura ha trasmesso al Parlamento due progetti di revisione sulla formazione postobbligatoria e sul suo finanziamento.',
     canonicalPath: '/articoli-giura/giura-formazione-postobbligatoria-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Giura: Governo propone revisioni su formazione postobbligatoria e finanziamento",
-      "description": "Due progetti di revisione trasmessi al Parlamento Quattro ambiti: formazione, ristoranti scolastici, lingue, ammissioni La misura n.",
+      "description": "Il Governo del Canton Giura ha trasmesso al Parlamento due progetti di revisione sulla formazione postobbligatoria e sul suo finanziamento.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",

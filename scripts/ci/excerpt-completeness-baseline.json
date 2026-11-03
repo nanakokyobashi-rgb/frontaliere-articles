@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "initialEntries": [
+    {
+      "locale": "de",
+      "id": "schaffhausen-modello-scolastico-inclusivo",
+      "field": "excerpt"
+    },
+    {
+      "locale": "it",
+      "id": "dividenti-italiani-stop-alle-discriminazioni-fiscali-per-gli-enti-esteri",
+      "field": "description"
+    },
+    {
+      "locale": "it",
+      "id": "sospenda-riversamento-allitalia-della-quota-dellimposta-alla-fonte-prelevata-ai-frontalieri",
+      "field": "description"
+    },
+    {
+      "locale": "it",
+      "id": "vpod-direttiva-canicola-scuole",
+      "field": "description"
+    },
+    {
+      "locale": "it",
+      "id": "dividenti-italiani-stop-alle-discriminazioni-fiscali-per-gli-enti-esteri",
+      "field": "structuredData.description"
+    },
+    {
+      "locale": "it",
+      "id": "sospenda-riversamento-allitalia-della-quota-dellimposta-alla-fonte-prelevata-ai-frontalieri",
+      "field": "structuredData.description"
+    },
+    {
+      "locale": "it",
+      "id": "vpod-direttiva-canicola-scuole",
+      "field": "structuredData.description"
+    }
+  ],
+  "entries": [
+    {
+      "locale": "de",
+      "id": "schaffhausen-modello-scolastico-inclusivo",
+      "field": "excerpt"
+    },
+    {
+      "locale": "it",
+      "id": "dividenti-italiani-stop-alle-discriminazioni-fiscali-per-gli-enti-esteri",
+      "field": "description"
+    },
+    {
+      "locale": "it",
+      "id": "sospenda-riversamento-allitalia-della-quota-dellimposta-alla-fonte-prelevata-ai-frontalieri",
+      "field": "description"
+    },
+    {
+      "locale": "it",
+      "id": "vpod-direttiva-canicola-scuole",
+      "field": "description"
+    },
+    {
+      "locale": "it",
+      "id": "dividenti-italiani-stop-alle-discriminazioni-fiscali-per-gli-enti-esteri",
+      "field": "structuredData.description"
+    },
+    {
+      "locale": "it",
+      "id": "sospenda-riversamento-allitalia-della-quota-dellimposta-alla-fonte-prelevata-ai-frontalieri",
+      "field": "structuredData.description"
+    },
+    {
+      "locale": "it",
+      "id": "vpod-direttiva-canicola-scuole",
+      "field": "structuredData.description"
+    }
+  ]
+}

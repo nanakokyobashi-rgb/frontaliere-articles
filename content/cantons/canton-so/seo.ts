@@ -9,7 +9,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-soletta-disoccupazione-settembre': {
     title: 'Soletta: disoccupazione al 3,0% a settembre 2026',
-    description: 'A settembre 2026 il Canton Soletta registra 4\'551 disoccupati, 46 in meno sul mese precedente: il tasso scende dal 3,1% al 3,0% e il calo riguarda gli under 25.',
+    description: 'A settembre 2026 il Canton Soletta ha registrato 4\'551 persone disoccupate iscritte.',
     keywords: 'frontalieri, ticino, svizzera, italia, soletta, disoccupazione, settembre, canton',
     ogTitle: 'Soletta: disoccupazione al 3,0% a settembre 2026',
     ogDescription: 'Settembre 2026 nel Canton Soletta: 4\'551 disoccupati registrati, 46 in meno sul mese precedente e tasso dal 3,1% al 3,0%. L\'Amt für Wirtschaft und Arbeit collega il calo agli under 25; la pagina rinvia alle statistiche federali e cantonali.',
@@ -18,7 +18,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Soletta: disoccupazione al 3,0% a settembre 2026",
-      "description": "A settembre 2026 il Canton Soletta registra 4'551 disoccupati, 46 in meno sul mese precedente: il tasso scende dal 3,1% al 3,0% e il calo riguarda gli under 25.",
+      "description": "A settembre 2026 il Canton Soletta ha registrato 4'551 persone disoccupate iscritte.",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/article-soletta-disoccupazione-settembre.webp`,

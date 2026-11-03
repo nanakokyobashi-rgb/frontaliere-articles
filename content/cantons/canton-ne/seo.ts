@@ -621,7 +621,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     description: '66% di sconto agli under 25 dal 1° luglio 2026 Oltre 15\'000 buoni di riduzione già utilizzati Quasi 2\'300 abbonamenti annuali in più',
     keywords: 'frontalieri, ticino, svizzera, italia, successo, abbonamenti, trasporto, pubblico',
     ogTitle: 'Sconto 66% abbonamenti giovani Neuchâtel',
-    ogDescription: '66% di sconto agli under 25 dal 1° luglio 2026 Oltre 15\'000 buoni di riduzione già utilizzati Quasi 2\'300 abbonamenti annuali in più in luglio-settembre Secondo',
+    ogDescription: 'Da allora, secondo il bilancio del Cantone, sono stati utilizzati più di 15\'000 buoni di riduzione.',
     canonicalPath: '/articoli-neuchatel/successo-abbonamenti-trasporti-ridotti/',
     structuredData: {
       "@context": "https://schema.org",

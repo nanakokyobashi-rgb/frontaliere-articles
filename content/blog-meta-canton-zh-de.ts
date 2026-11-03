@@ -46,7 +46,7 @@ const blogMetaCantonZhDe: Record<string, string> = {
     'blog.article.zurigo-incentivi-e-cargo-velo.excerpt': 'Die Stadt Zürich stellt Hunderttausende Franken zur Verfügung, um den Kauf von E-Cargovelo zu unterstützen, und bietet Fahrkurse zum halben Preis an.',
     'blog.article.zurigo-incentivi-e-cargo-velo.imageAlt': 'Illustratives Bild zum Thema des Artikels',
     'blog.article.controlli-distrazione-zurigo.title': 'Zürich, über 100 Verstösse bei Ablenkungskontrollen',
-    'blog.article.controlli-distrazione-zurigo.excerpt': 'Die Kantonspolizei Zürich stellte am 20.',
+    'blog.article.controlli-distrazione-zurigo.excerpt': 'In rund drei Stunden stellten die Einsatzkräfte insgesamt über 100 Verstösse gegen das Strassenverkehrsgesetz fest.',
     'blog.article.controlli-distrazione-zurigo.imageAlt': 'Illustratives Bild zum Thema des Artikels',
     'blog.article.zurigo-budget-sans-papiers.title': 'Zürich genehmigt 260.000 Franken für Sans-Papiers',
     'blog.article.zurigo-budget-sans-papiers.excerpt': 'Der Zürcher Gemeinderat genehmigt mehr Mittel und erhöht das Budget der Anlaufstelle per Sans-Papiers auf 260.000 Franken.',

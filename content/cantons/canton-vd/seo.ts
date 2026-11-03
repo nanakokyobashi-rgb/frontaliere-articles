@@ -311,16 +311,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-funzione-pubblica-vaud-sciopero-2026': {
     title: 'Funzione pubblica Vaud in piazza il 5 novembre 2026',
-    description: 'Manifestazione sindacale prevista il 5 novembre 2026 Tagli contestati: 165 milioni di franchi Quasi 100 militanti hanno votato a favore Nel 2025 ci sono stati',
+    description: 'L\'importo di 165 milioni di franchi rappresenta la dimensione complessiva delle misure di risparmio contestate dai sindacati.',
     keywords: 'frontalieri, ticino, svizzera, italia, funzione, pubblica, vaud, piazza',
     ogTitle: 'Funzione pubblica Vaud in piazza il 5 novembre 2026',
-    ogDescription: 'Manifestazione sindacale prevista il 5 novembre 2026 Tagli contestati: 165 milioni di franchi Quasi 100 militanti hanno votato a favore Nel 2025 ci sono stati',
+    ogDescription: 'Il 5 novembre 2026 i sindacati vodesi porteranno la funzione pubblica in strada per contestare le misure di risparmio da 165 milioni di franchi volute dal cantone.',
     canonicalPath: '/articoli-vaud/funzione-pubblica-vaud-sciopero-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Funzione pubblica Vaud in piazza il 5 novembre 2026",
-      "description": "Manifestazione sindacale prevista il 5 novembre 2026 Tagli contestati: 165 milioni di franchi Quasi 100 militanti hanno votato a favore Nel 2025 ci sono stati",
+      "description": "L'importo di 165 milioni di franchi rappresenta la dimensione complessiva delle misure di risparmio contestate dai sindacati.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",

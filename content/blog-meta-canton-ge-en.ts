@@ -19,7 +19,7 @@ const blogMetaCantonGeEn: Record<string, string> = {
     'blog.article.comunicato-consiglio-stato-ginevra.excerpt': 'The weekly press release of the Council of State of October 7, 2026: the available material identifies the publication, without further details.',
     'blog.article.comunicato-consiglio-stato-ginevra.imageAlt': 'Institutional scene in Geneva on an October morning.',
     'blog.article.unige-natura-equilibrio-mentale.title': 'UNIGE: mental health, October 5-10, 2026',
-    'blog.article.unige-natura-equilibrio-mentale.excerpt': 'Mental Health Week 2026 runs from October 5 to 10.',
+    'blog.article.unige-natura-equilibrio-mentale.excerpt': 'From October 5 to 10, 2026, UNIGE\'s Mental Health Week places the role of the body, movement and connection to oneself at the center of psychological balance.',
     'blog.article.unige-natura-equilibrio-mentale.imageAlt': 'Illustration generated for this article',
     'blog.article.cantieri-mobilita-ginevra.title': 'Construction work in Geneva: mobility affected from October 12, 2026',
     'blog.article.cantieri-mobilita-ginevra.excerpt': 'New construction projects in the Canton of Geneva will begin on October 12, 2026, and will affect travel.',

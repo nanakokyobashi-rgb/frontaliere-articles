@@ -13,7 +13,7 @@ const blogMetaCantonVsEn: Record<string, string> = {
     'blog.article.a9-chiusure-notturne-sion-sierre.excerpt': 'Three weeks of closures: from October 12 to 30 Work halted over the winter, resumption in March 2027 Nighttime closures from 20 to 5 Route → A9 between Sion',
     'blog.article.a9-chiusure-notturne-sion-sierre.imageAlt': 'Night closure of the A9 motorway between Sion and Sierre for roadworks',
     'blog.article.maison-garde-ospedale-sion.title': 'Sion: the Maison de la garde opens for emergencies',
-    'blog.article.maison-garde-ospedale-sion.excerpt': 'As of September 1st, Sion Hospital has opened a new facility for non-life-threatening cases, open every day from 18 to 22.',
+    'blog.article.maison-garde-ospedale-sion.excerpt': 'Since September 1, Sion Hospital has opened a Maison de la garde to relieve pressure on the emergency department, described as overcrowded. The new facility is intended for non-life-threatening cases and operates every day from 18 to 22, the period identified as the busiest.',
     'blog.article.maison-garde-ospedale-sion.imageAlt': 'Illustration generated for this article',
     'blog.article.vallese-piano-acqua-2035.title': 'Valais: Water Action Plan 2035 approved',
     'blog.article.vallese-piano-acqua-2035.excerpt': 'The Council of State adopts the 2035 Action Plan Gradual implementation from 2027, according to priorities and resources The measures decrease from 39 to 25',

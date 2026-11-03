@@ -22,7 +22,7 @@ const blogMetaCantonTiIt: Record<string, string> = {
     'blog.article.nuovi-spazi-ambulatoriali-bellinzona.excerpt': 'Oggi inaugurati nuovi spazi all\'Ospedale San Giovanni Poliambulatorio Turrita e Dermatologia nella sede di Bellinzona Ambienti pensati per pazienti',
     'blog.article.nuovi-spazi-ambulatoriali-bellinzona.imageAlt': 'Nuovi spazi del Poliambulatorio Turrita e dell\'Ambulatorio di Dermatologia a San Giovanni, Bellinzona.',
     'blog.article.frontalieri-disoccupazione-criterio-lavoro.title': 'Frontalieri e disoccupazione: UE cambia regole, criterio Stato lavoro',
-    'blog.article.frontalieri-disoccupazione-criterio-lavoro.excerpt': 'L\'UE ha approvato nuove regole sulla disoccupazione dei frontalieri Il criterio futuro sarebbe lo Stato in cui si lavora Per la Svizzera l\'entrata non è',
+    'blog.article.frontalieri-disoccupazione-criterio-lavoro.excerpt': 'L\'intervento riguarda soprattutto le norme sul diritto all\'indennità di disoccupazione: in futuro, per i frontalieri l\'indennità dovrebbe essere erogata dal Paese di lavoro, anziché da quello di residenza.',
     'blog.article.frontalieri-disoccupazione-criterio-lavoro.imageAlt': 'Pendolare frontaliero alla stazione di Mendrisio con sfondo delle Alpi svizzere',
     'blog.article.uscita-svizzera-schengen-controlli.title': 'Schengen: possibili controlli sistematici ai confini',
     'blog.article.uscita-svizzera-schengen-controlli.excerpt': 'Rapporto federale pubblicato il 18 settembre 2026 Senza Schengen: controlli sistematici alle frontiere Fino a 422.000 ore al giorno perse negli ingorghi',

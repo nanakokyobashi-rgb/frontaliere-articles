@@ -13,7 +13,7 @@ const blogMetaCantonJuEn: Record<string, string> = {
     'blog.article.casse-pensioni-migliorano-terzo-trimestre.excerpt': 'WTW index rises from 130.2% to 131.9% The discount rate reaches 1.65% Pension commitments fall by 6.5% Plan assets fall by 0.6% Who → Willis Towers Watson (WTW)',
     'blog.article.casse-pensioni-migliorano-terzo-trimestre.imageAlt': 'View of the Jura mountains with a modern office building symbolizing pension fund stability',
     'blog.article.giura-formazione-postobbligatoria-2026.title': 'Jura: Government proposes revisions to post-compulsory education and funding',
-    'blog.article.giura-formazione-postobbligatoria-2026.excerpt': 'Two revision projects submitted to Parliament Four areas: education, school restaurants, languages, admissions Measure No.',
+    'blog.article.giura-formazione-postobbligatoria-2026.excerpt': 'The Government of the Canton of Jura has forwarded to Parliament two revision projects on post-compulsory training and its financing.',
     'blog.article.giura-formazione-postobbligatoria-2026.imageAlt': 'Illustrative image relevant to the article topic',
     'blog.article.stockmar-ritardo-cantiere-2027.title': 'Stockmar site delay: return of students in January 2028',
     'blog.article.stockmar-ritardo-cantiere-2027.excerpt': 'Students are expected to return in January 2028 The construction site is four months late The works will be completed in December 2027 Global budget remains CHF',

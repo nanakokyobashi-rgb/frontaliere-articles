@@ -34,7 +34,7 @@ const blogMetaCantonSoFr: Record<string, string> = {
     'blog.article.a1-lavori-notturni-luterbach.excerpt': 'À partir du 25 octobre 2026, travaux de nuit étendus sur l\'A1 entre Wangen an der Aare et Luterbach : la gestion du trafic sera modifiée jusqu\'à la mi-décembre.',
     'blog.article.a1-lavori-notturni-luterbach.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
     'blog.article.cambio-ora-incidenti-stradali-soletta.title': 'Changement d’heure et risque d’accidents de la route dans le canton de Soleure',
-    'blog.article.cambio-ora-incidenti-stradali-soletta.excerpt': '24-25 octobre 2026 : horloges reculées d’une heure La circulation matinale coïncide avec le crépuscule Les chevreuils, les cerfs élaphes et les sangliers sont',
+    'blog.article.cambio-ora-incidenti-stradali-soletta.excerpt': 'Le premier concerne la nuit du 24 au 25 octobre 2026 : le changement d\'heure fait coïncider la circulation du matin avec le crépuscule et, selon le canton, augmente le risque d\'accidents avec la faune.',
     'blog.article.cambio-ora-incidenti-stradali-soletta.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
     'blog.article.polizia-soletta-comunicazione-media-droni.title': 'Police de Soleure : communication 365 jours et interdiction des drones à 300 m',
     'blog.article.polizia-soletta-comunicazione-media-droni.excerpt': 'Le service médias fonctionne 365 jours par an L’équipe gère X, Facebook et Instagram Lors des grands événements, un membre est présent sur place L’interdiction',

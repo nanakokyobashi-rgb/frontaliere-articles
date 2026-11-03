@@ -428,7 +428,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-zurigo-niente-iniziativa-congedo-parentale': {
     title: 'Zurigo: niente iniziativa congedo parentale, sinistra e centro divisi',
-    description: 'Il Canton Zurigo non presenterà la Standesinitiative sul congedo parentale. Inizialmente sostenuta da sinistra e centro, la proposta è stata',
+    description: 'Secondo il titolo e il lead pubblico dell\'articolo della NZZ, il Canton Zurigo non presenterà un\'iniziativa sul congedo parentale.',
     keywords: 'frontalieri, ticino, svizzera, italia, zurigo, niente, iniziativa, congedo',
     ogTitle: 'Zurigo: niente iniziativa congedo parentale, sinistra e centro divisi',
     ogDescription: 'Il Canton Zurigo ha deciso di non presentare la Standesinitiative per un congedo parentale. Dopo un iniziale sostegno congiunto di sinistra e partiti di centro, le parti non hanno raggiunto un accordo. La proposta non andrà avanti a livello',
@@ -437,7 +437,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Zurigo: niente iniziativa congedo parentale, sinistra e centro divisi",
-      "description": "Il Canton Zurigo non presenterà la Standesinitiative sul congedo parentale. Inizialmente sostenuta da sinistra e centro, la proposta è stata",
+      "description": "Secondo il titolo e il lead pubblico dell'articolo della NZZ, il Canton Zurigo non presenterà un'iniziativa sul congedo parentale.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",

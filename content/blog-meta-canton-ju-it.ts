@@ -13,7 +13,7 @@ const blogMetaCantonJuIt: Record<string, string> = {
     'blog.article.casse-pensioni-migliorano-terzo-trimestre.excerpt': 'L\'indice WTW sale da 130,2% a 131,9% Il tasso di attualizzazione arriva all\'1,65% Gli impegni pensionistici scendono del 6,5% Gli attivi dei piani calano',
     'blog.article.casse-pensioni-migliorano-terzo-trimestre.imageAlt': 'Vista delle montagne del Giura con edificio uffici moderno che simboleggia la stabilità delle casse pensioni',
     'blog.article.giura-formazione-postobbligatoria-2026.title': 'Giura: Governo propone revisioni su formazione postobbligatoria e finanziamento',
-    'blog.article.giura-formazione-postobbligatoria-2026.excerpt': 'Due progetti di revisione trasmessi al Parlamento Quattro ambiti: formazione, ristoranti scolastici, lingue, ammissioni La misura n.',
+    'blog.article.giura-formazione-postobbligatoria-2026.excerpt': 'Il Governo del Canton Giura ha trasmesso al Parlamento due progetti di revisione sulla formazione postobbligatoria e sul suo finanziamento.',
     'blog.article.giura-formazione-postobbligatoria-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
     'blog.article.stockmar-ritardo-cantiere-2027.title': 'Ritardo cantiere Stockmar: rientro alunni a gennaio 2028',
     'blog.article.stockmar-ritardo-cantiere-2027.excerpt': 'Il rientro degli alunni è previsto a gennaio 2028 Il cantiere accumula quattro mesi di ritardo I lavori saranno conclusi nel dicembre 2027 Il budget globale',

@@ -12,7 +12,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'A Frauenfeld il Baugesuch per Juchstrasse 22, 22a e 22b è consultabile al Bankplatz 3 dal 7 al 26 ottobre 2026. Opposizioni scritte motivate allo Stadtrat.',
     keywords: 'frontalieri, ticino, svizzera, italia, domanda, edilizia, frauenfeld, juchstrasse',
     ogTitle: 'Domanda edilizia a Frauenfeld: Juchstrasse 22-22b',
-    ogDescription: 'Il progetto per Juchstrasse 22, 22a e 22b prevede l\'allestimento del primo e secondo piano, il cambio d\'uso di garage e locali commerciali e nuove strutture per biciclette e carrelli. Atti al Bankplatz 3.',
+    ogDescription: 'Il progetto per Juchstrasse 22, 22a e 22b prevede l\'allestimento del primo e secondo piano, il cambio d\'uso di garage e locali commerciali e nuove strutture per biciclette e carrelli.',
     canonicalPath: '/articoli-turgovia/baugesuch-juchstrasse-frauenfeld/',
     structuredData: {
       "@context": "https://schema.org",

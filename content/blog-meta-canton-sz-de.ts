@@ -10,7 +10,7 @@ const blogMetaCantonSzDe: Record<string, string> = {
     'blog.article.svitto-cambio-cassa-malati.excerpt': 'Die Angebote für einen Krankenkassenwechsel sind oft irreführend: Eine lokale Krankenkasse in Schwyz muss sich mit einem Geschäftsmodell auseinandersetzen, das als unlauterer Wettbewerb beschrieben wird.',
     'blog.article.svitto-cambio-cassa-malati.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.esercitazione-militare-sihlsee-ottobre-2026.title': 'Militärübung in Egg und an der Sihlsee-Staumauer vom 9. bis 12. Oktober 2026',
-    'blog.article.esercitazione-militare-sihlsee-ottobre-2026.excerpt': 'Hinweis von \'Schweizer Militär\': Militärübung vom 9.',
+    'blog.article.esercitazione-militare-sihlsee-ottobre-2026.excerpt': 'Vom 9. bis 12. Oktober 2026 ist im Gebiet von Egg und der Sihlsee-Staumauer eine militärische Übung vorgesehen.',
     'blog.article.esercitazione-militare-sihlsee-ottobre-2026.imageAlt': 'Staumauer Sihlsee bei Egg während der Militärübung Oktober 2026',
     'blog.article.kuessnacht-rete-teleriscaldamento.title': 'Küssnacht erweitert das Netz auf Immensee, Fänn und Adligenswil',
     'blog.article.kuessnacht-rete-teleriscaldamento.excerpt': 'Küssnacht strebt an, die fossilen Brennstoffe mit kommunaler Energieplanung und dem Netzausbau bis Immensee, Fänn und Adligenswil schrittweise abzuschaffen.',

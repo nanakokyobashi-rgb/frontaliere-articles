@@ -197,7 +197,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Buchs prevede un disavanzo di 3,1 milioni di franchi nel budget 2027, moltiplicatore fiscale al 118%, aumento dei costi di cura di 600\'000 franchi',
     keywords: 'frontalieri, ticino, svizzera, italia, buchs, prevede, disavanzo, milioni',
     ogTitle: 'Buchs prevede disavanzo 3,1 milioni nel budget 2027',
-    ogDescription: 'Il Comune di Buchs ha approvato il budget 2027 con un disavanzo previsto di circa 3,1 milioni di franchi, mantenendo il moltiplicatore fiscale al 118%. I costi residui di cura aumenteranno di 600\'000 franchi (pari a circa quattro punti',
+    ogDescription: 'Il Comune di Buchs ha approvato il budget 2027 con un disavanzo previsto di circa 3,1 milioni di franchi, mantenendo il moltiplicatore fiscale al 118%.',
     canonicalPath: '/articoli-argovia/buchs-deficit-2027-budget/',
     structuredData: {
       "@context": "https://schema.org",

@@ -13,7 +13,7 @@ const blogMetaCantonVsIt: Record<string, string> = {
     'blog.article.a9-chiusure-notturne-sion-sierre.excerpt': 'Tre settimane di chiusure: dal 12 al 30 ottobre Lavori fermi d\'inverno, ripresa a marzo 2027 Chiusure notturne dalle 20 alle 5 Tratta → A9 tra Sion e Sierre',
     'blog.article.a9-chiusure-notturne-sion-sierre.imageAlt': 'Chiusura notturna dell\'A9 tra Sion e Sierre per lavori stradali',
     'blog.article.maison-garde-ospedale-sion.title': 'Sion: apre la Maison de la garde per le urgenze',
-    'blog.article.maison-garde-ospedale-sion.excerpt': 'Dal 1° settembre l\'ospedale di Sion ha attivato un nuovo presidio per i casi non vitali, attivo ogni giorno dalle 18 alle 22.',
+    'blog.article.maison-garde-ospedale-sion.excerpt': 'Dal 1° settembre l’ospedale di Sion ha aperto una Maison de la garde per alleggerire le urgenze, descritte come sature. Il nuovo presidio è destinato ai casi non vitali e opera ogni giorno dalle 18 alle 22, la fascia indicata come la più carica.',
     'blog.article.maison-garde-ospedale-sion.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.vallese-piano-acqua-2035.title': 'Vallese: approvato il Piano d\'azione acqua 2035',
     'blog.article.vallese-piano-acqua-2035.excerpt': 'Il Consiglio di Stato adotta il Piano d\'azione 2035 Attuazione progressiva dal 2027, secondo priorità e risorse Le misure passano da 39 a 25 dopo la revisione',

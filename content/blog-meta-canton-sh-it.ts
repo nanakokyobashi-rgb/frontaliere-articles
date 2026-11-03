@@ -85,7 +85,7 @@ const blogMetaCantonShIt: Record<string, string> = {
     'blog.article.schaffhausen-pharma-medtech-circolar.excerpt': 'Il progetto be circular a Neuhausen am Rheinfall mira alla circolarità in pharma e medtech, sostenuto dal Cantone con massimo CHF 630\'000 in tre anni.',
     'blog.article.schaffhausen-pharma-medtech-circolar.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
     'blog.article.sciaffusa-ricarica-elettrica.title': 'Benzina cara: Sciaffusa vuole più ricariche elettriche',
-    'blog.article.sciaffusa-ricarica-elettrica.excerpt': 'Prezzi della benzina elevati e obiettivo del Cantone: più stazioni di ricarica per auto elettriche, come quelle già installate a St.',
+    'blog.article.sciaffusa-ricarica-elettrica.excerpt': 'Il titolo della fonte segnala prezzi elevati della benzina e indica che il Cantone di Sciaffusa vuole più «Anschlüsse» per le auto elettriche. Il lead pubblico rende l\'obiettivo in termini di «Ladestationen»: il Cantone punta a più stazioni di ricarica.',
     'blog.article.sciaffusa-ricarica-elettrica.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
     'blog.article.frick-volksmotion-kantonsrat.title': 'Volksmotion Frick: discussione in Kantonsrat su competenze comunali',
     'blog.article.frick-volksmotion-kantonsrat.excerpt': 'Il Kantonsrat tratterà la Volksmotion di Matthias Frick, che chiede ai Comuni maggiori competenze sulla circolazione.',

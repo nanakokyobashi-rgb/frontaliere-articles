@@ -225,6 +225,7 @@ import {
   stripExcerptMarkdown,
   assertPlainExcerpt,
   assertPlainDescriptionFields,
+  repairGeneratedArticleDescriptions,
 } from './lib/article-excerpt.mjs';
 import { DOMAIN_DUP_STOPLIST, filterDistinctive } from './lib/dup-stoplist.mjs';
 import { JSON_QUOTE_SAFETY_RULE_IT, describeJsonParseError, describeRawForDiagnostics, repairLlmJson } from './lib/llm-json-repair.mjs';
@@ -20286,18 +20287,6 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     label: 'Body post-riparazione anti-copia',
   });
 
-  // Metadata refresh can change the excerpt used by both lexical and semantic
-  // duplicate admission. Re-run the same gates on the final candidate instead
-  // of publishing a repaired excerpt that was never admitted.
-  if (sourceCopyFinalChanged) {
-    console.error('🔍 Verifica duplicati post-riparazione:');
-    checkForDuplicates(data);
-    await checkSemanticNearDuplicate(data, {
-      store: loadEmbeddingStore({ binPath: SECTION.embeddingsBinPath }),
-      meta: loadEmbeddingMeta({ metaPath: SECTION.embeddingsMetaPath }),
-    });
-  }
-
   console.error(`\n📝 Articolo generato: "${data.content.it.title}"`);
   console.error(`   ID: ${data.id}`);
   console.error(`   Categoria: ${data.category}`);
@@ -20318,6 +20307,23 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // `Zürich` to the localized-exonym detector and can be published in place
   // of the required English `Zurich`.
   decodeArticleEntities(data);
+  const excerptRepairs = repairGeneratedArticleDescriptions(data);
+  assertArticleDescriptionsArePlain(data);
+  if (excerptRepairs.length > 0) {
+    assertGeneratedArticleQuality(data, {
+      cantonBody: bodyTextForCantonPostcondition(data),
+    });
+  }
+  // Metadata repairs can change duplicate admission; check the exact values
+  // that will be published after all final metadata normalization.
+  if (sourceCopyFinalChanged || excerptRepairs.length > 0) {
+    console.error('🔍 Verifica duplicati post-riparazione:');
+    checkForDuplicates(data);
+    await checkSemanticNearDuplicate(data, {
+      store: loadEmbeddingStore({ binPath: SECTION.embeddingsBinPath }),
+      meta: loadEmbeddingMeta({ metaPath: SECTION.embeddingsMetaPath }),
+    });
+  }
   // Entity decoding is the last content normalization before the write path.
   // Re-run the fiscal guard on every locale here: the earlier check ran before
   // the final source-copy repair and deterministic postconditions.
@@ -21478,6 +21484,7 @@ export async function registerArticleFiles(data, opts = {}) {
   preserveMunicipalityNamesInMetadata(data);
   clampSeoDescriptions(data);
   ensureSeoDescriptionMinimum(data);
+  repairGeneratedArticleDescriptions(data);
   assertArticleDescriptionsArePlain(data);
   const slugs = deriveAndSanitizeArticleSlugs(data);
   assertSlugFallbackRunBudget();

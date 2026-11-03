@@ -52,7 +52,7 @@ const blogMetaCantonAppenzelloEn: Record<string, string> = {
     'blog.article.investimenti-tetto-fotovoltaico-2027.excerpt': 'In 2027, net expenditure of CHF 802\'767 is planned; renovation of the gymnasium roof with photovoltaics is planned.',
     'blog.article.investimenti-tetto-fotovoltaico-2027.imageAlt': 'Illustrative image relevant to the article topic',
     'blog.article.appenzello-cooperazione-strategica-2024.title': 'Strategic cooperation: Appenzell and St. Gallen aligned',
-    'blog.article.appenzello-cooperazione-strategica-2024.excerpt': 'The governments of the two Appenzells, St.',
+    'blog.article.appenzello-cooperazione-strategica-2024.excerpt': 'In 2024, the governments of the two Appenzell cantons, the Canton of St. Gallen and the Canton of Thurgau decided on a strategic collaboration.',
     'blog.article.appenzello-cooperazione-strategica-2024.imageAlt': 'Illustrative image relevant to the article topic',
     'blog.article.rbh-herisau-piu-risorse.title': 'Herisau, more resources for RBH Hinterland',
     'blog.article.rbh-herisau-piu-risorse.excerpt': 'The Municipality of Herisau reports an increase in cases and greater complexity in managing RBH Hinterland; positions have also increased in recent years.',

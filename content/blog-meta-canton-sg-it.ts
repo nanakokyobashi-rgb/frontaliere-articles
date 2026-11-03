@@ -64,7 +64,7 @@ const blogMetaCantonSgIt: Record<string, string> = {
     'blog.article.abstimmung-bahnhof-wil-allee.excerpt': 'Il credito lordo è di 63,662 milioni di franchi; i lavori sono previsti dal 2029 al 2033.',
     'blog.article.abstimmung-bahnhof-wil-allee.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
     'blog.article.unfall-a13-sevelen-2026.title': 'Tamponamento A13 a Sevelen: due feriti il 25 ottobre 2026',
-    'blog.article.unfall-a13-sevelen-2026.excerpt': 'Il 25 ottobre due auto si sono tamponate sulla A13 a Sevelen Feriti un conducente di 79 anni e la passeggera di 86 Il conducente della seconda auto, 53 anni, è',
+    'blog.article.unfall-a13-sevelen-2026.excerpt': 'Il 79enne è indicato come considerevolmente ferito, l’86enne come gravemente ferita e il conducente della seconda auto come illeso. Il servizio di soccorso ha effettuato il trattamento iniziale sul posto e ha poi trasferito i due feriti in ospedale.',
     'blog.article.unfall-a13-sevelen-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
     'blog.article.positive-chiusure-2025-sg.title': '40 comuni del Canton San Gallo chiudono il 2025 in positivo',
     'blog.article.positive-chiusure-2025-sg.excerpt': 'Su 75 comuni politici, 40 hanno chiuso il 2025 con avanzo; l\'eccedenza aggregata è di circa CHF 28 milioni.',

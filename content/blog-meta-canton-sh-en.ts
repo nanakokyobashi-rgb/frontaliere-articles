@@ -85,7 +85,7 @@ const blogMetaCantonShEn: Record<string, string> = {
     'blog.article.schaffhausen-pharma-medtech-circolar.excerpt': 'The be circular project in Neuhausen am Rheinfall aims to promote circularity in pharma and medtech, supported by the canton with a maximum of CHF 630\'000 over three years.',
     'blog.article.schaffhausen-pharma-medtech-circolar.imageAlt': 'Illustrative image relevant to the article topic',
     'blog.article.sciaffusa-ricarica-elettrica.title': 'Expensive petrol: Schaffhausen wants more electric charging stations',
-    'blog.article.sciaffusa-ricarica-elettrica.excerpt': 'High petrol prices and the canton’s goal: more charging stations for electric cars, like those already installed in St.',
+    'blog.article.sciaffusa-ricarica-elettrica.excerpt': 'The source\'s headline points to high petrol prices and indicates that the Canton of Schaffhausen wants more “connections” for electric cars. The public lead expresses the goal in terms of “charging stations”: the canton is aiming for more charging stations.',
     'blog.article.sciaffusa-ricarica-elettrica.imageAlt': 'Illustrative image relevant to the article topic',
     'blog.article.frick-volksmotion-kantonsrat.title': 'Volksmotion Frick: Debate in the Kantonsrat on Municipal Powers',
     'blog.article.frick-volksmotion-kantonsrat.excerpt': 'The Kantonsrat will consider the citizens\' initiative proposed by Matthias Frick, which calls for municipalities to be granted greater authority over traffic matters.',

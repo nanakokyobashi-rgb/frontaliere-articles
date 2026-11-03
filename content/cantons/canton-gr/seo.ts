@@ -358,7 +358,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Il parlamento cantonale dei Grigioni chiede di esaminare prezzi ridotti al Vereina per i residenti. Beneficiari e data restano aperti.',
     keywords: 'frontalieri, ticino, svizzera, italia, vereina, parlamento, chiede, valutare',
     ogTitle: 'Vereina: il parlamento chiede di valutare sconti',
-    ogDescription: 'Il parlamento cantonale dei Grigioni ha dato al governo un mandato per esaminare riduzioni di prezzo per i viaggi attraverso l\'Autoverlad Vereina. La fonte non indica ancora chi beneficerà della misura né da quando.',
+    ogDescription: 'Il parlamento cantonale dei Grigioni ha dato al governo un mandato per esaminare riduzioni di prezzo per i viaggi attraverso l\'Autoverlad Vereina.',
     canonicalPath: '/articoli-grigioni/sconti-vereina-locali-ospiti/',
     structuredData: {
       "@context": "https://schema.org",

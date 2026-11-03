@@ -316,16 +316,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-basilea-cantieri-alle-sei': {
     title: 'Parlamento di Basilea: mozione per iniziare i cantieri alle 6',
-    description: 'Il Gran Consiglio di Basilea ha trasmesso una mozione per consentire lavori edili alle 6 da giugno ad agosto; quelli rumorosi resterebbero dalle 7.',
+    description: 'Mercoledì il Gran Consiglio di Basilea ha trasmesso per la prima volta al governo una mozione di Luca Urgese (FDP) sull\'orario di lavoro nei cantieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, parlamento, basilea, mozione, iniziare',
     ogTitle: 'Basilea: mozione, cantieri alle 6, lavori rumorosi alle 7',
-    ogDescription: 'La mozione di Luca Urgese (FDP) è stata trasmessa con 84 voti contro 8 e 4 astensioni. Chiede di modificare l\'ordinanza sulla protezione dal rumore: lavori edili alle 6 nei giorni feriali da giugno ad agosto, attività rumorose dalle 7.',
+    ogDescription: 'La mozione di Luca Urgese (FDP) è stata trasmessa con 84 voti contro 8 e 4 astensioni.',
     canonicalPath: '/articoli-basilea/basilea-cantieri-alle-sei/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Parlamento di Basilea: mozione per iniziare i cantieri alle 6",
-      "description": "Il Gran Consiglio di Basilea ha trasmesso una mozione per consentire lavori edili alle 6 da giugno ad agosto; quelli rumorosi resterebbero dalle 7.",
+      "description": "Mercoledì il Gran Consiglio di Basilea ha trasmesso per la prima volta al governo una mozione di Luca Urgese (FDP) sull'orario di lavoro nei cantieri.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -394,7 +394,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-basel-stadt-siti-online-di-nuoto': {
     title: 'Canton Basilea Città riattiva siti dopo panne tecnico',
-    description: 'Il Canton Basilea Città riattiva progressivamente i siti e le applicazioni dopo una vulnerabilità PHP. Nessun incidente di sicurezza rilevante è stato',
+    description: 'Il Canton Basilea Città riattiva progressivamente i siti e le applicazioni dopo una vulnerabilità PHP.',
     keywords: 'frontalieri, ticino, svizzera, italia, canton, basilea, città, riattiva',
     ogTitle: 'Basilea Città: siti web riattivati dopo panne tecnico',
     ogDescription: 'Il Canton Basilea Città ripristina i servizi online in modo progressivo dopo un problema tecnico legato a PHP. Confermata l\'assenza di incidenti di sicurezza rilevanti.',
@@ -403,7 +403,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Canton Basilea Città riattiva siti dopo panne tecnico",
-      "description": "Il Canton Basilea Città riattiva progressivamente i siti e le applicazioni dopo una vulnerabilità PHP. Nessun incidente di sicurezza rilevante è stato",
+      "description": "Il Canton Basilea Città riattiva progressivamente i siti e le applicazioni dopo una vulnerabilità PHP.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",

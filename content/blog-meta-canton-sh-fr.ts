@@ -85,7 +85,7 @@ const blogMetaCantonShFr: Record<string, string> = {
     'blog.article.schaffhausen-pharma-medtech-circolar.excerpt': 'Le projet be circular à Neuhausen am Rheinfall vise la circularité dans la pharma et les medtech, soutenu par le Canton à hauteur de CHF 630\'000 au maximum sur trois ans.',
     'blog.article.schaffhausen-pharma-medtech-circolar.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
     'blog.article.sciaffusa-ricarica-elettrica.title': 'Essence chère : Schaffhouse veut davantage de bornes de recharge électrique',
-    'blog.article.sciaffusa-ricarica-elettrica.excerpt': 'Prix de l’essence élevés et objectif du canton : davantage de stations de recharge pour voitures électriques, comme celles déjà installées à St.',
+    'blog.article.sciaffusa-ricarica-elettrica.excerpt': 'Le titre de la source signale des prix élevés de l\'essence et indique que le canton de Schaffhouse veut davantage d\'«Anschlüsse» pour les voitures électriques. Le chapô public formule l\'objectif en termes de «Ladestationen» : le canton vise davantage de stations de recharge.',
     'blog.article.sciaffusa-ricarica-elettrica.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
     'blog.article.frick-volksmotion-kantonsrat.title': 'Motion Frick: débat sur compétences communales au Conseil cantonal',
     'blog.article.frick-volksmotion-kantonsrat.excerpt': 'Le Conseil cantonal examinera la motion populaire de Matthias Frick, qui demande aux communes de disposer de compétences accrues en matière de circulation.',

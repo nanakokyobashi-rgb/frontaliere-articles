@@ -52,7 +52,7 @@ const blogMetaCantonNeIt: Record<string, string> = {
     'blog.article.tagli-orologeria-locle-lvmh.excerpt': 'Zenith sopprime circa 100 posti a Le Locle su 196 dipendenti; 101 persone sono a rischio nella distribuzione internazionale.',
     'blog.article.tagli-orologeria-locle-lvmh.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
     'blog.article.successo-abbonamenti-trasporti-ridotti.title': 'Successo abbonamenti trasporto pubblico a prezzo ridotto',
-    'blog.article.successo-abbonamenti-trasporti-ridotti.excerpt': '66% di sconto agli under 25 dal 1° luglio 2026 Oltre 15\'000 buoni di riduzione già utilizzati Quasi 2\'300 abbonamenti annuali in più in luglio-settembre Secondo',
+    'blog.article.successo-abbonamenti-trasporti-ridotti.excerpt': 'Da allora, secondo il bilancio del Cantone, sono stati utilizzati più di 15\'000 buoni di riduzione.',
     'blog.article.successo-abbonamenti-trasporti-ridotti.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
     'blog.article.abitazioni-svizzere-rincaro-settembre.title': 'Prezzi delle abitazioni in Svizzera: +1,7% nel trimestre',
     'blog.article.abitazioni-svizzere-rincaro-settembre.excerpt': 'Nel terzo trimestre i prezzi residenziali svizzeri sono saliti dell\'1,7% sul trimestre e del 4,4% su base annua, secondo l\'OFS.',

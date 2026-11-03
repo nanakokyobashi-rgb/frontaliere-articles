@@ -204,16 +204,16 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-sussidi-cassa-malati-mendrisio-ritardi-2026': {
     title: 'Ritardi negli assegni cassa malati a Mendrisio: cosa rischiano i frontalieri',
-    description: 'Mendrisio chiede al Canton Ticino di sbloccare i pagamenti dei sussidi cassa malati ritardati da mesi. Frontalieri e residenti rischiano di non pagare i premi a',
+description: 'Mendrisio chiede al Canton Ticino di sbloccare i pagamenti dei sussidi cassa malati ritardati da mesi.',
     keywords: 'frontalieri, ticino, svizzera, italia, ritardi, negli, assegni, cassa',
     ogTitle: 'Ritardi negli assegni cassa malati a Mendrisio',
-    ogDescription: 'Mendrisio chiede al Canton Ticino di sbloccare i pagamenti dei sussidi cassa malati ritardati da mesi. Frontalieri e residenti rischiano di non pagare i premi a',
+ogDescription: 'Mendrisio chiede al Canton Ticino di sbloccare i pagamenti dei sussidi cassa malati ritardati da mesi.',
     canonicalPath: '/articoli-frontaliere/sussidi-cassa-malati-mendrisio-ritardi-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Ritardi negli assegni cassa malati a Mendrisio: cosa rischiano i frontalieri",
-      "description": "Mendrisio chiede al Canton Ticino di sbloccare i pagamenti dei sussidi cassa malati ritardati da mesi. Frontalieri e residenti rischiano di non pagare i premi a",
+"description": "Mendrisio chiede al Canton Ticino di sbloccare i pagamenti dei sussidi cassa malati ritardati da mesi.",
       "image": {
         "@type": "ImageObject", "url": `${BASE_URL}/images/blog/sussidi-cassa-malati-mendrisio-ritardi-2026.webp`,
         "width": 1200,
@@ -400,16 +400,16 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-parmelin-washington-dazi-usa-2026': {
     title: 'Dazi USA: Parmelin a Washington per rilanciare accordo',
-    description: 'Il presidente della Confederazione Guy Parmelin incontra il rappresentante USA per i dazi Jamieson Greer. Volontà di accordo, ma senza certezze su tempistiche e',
+description: 'Il presidente della Confederazione Guy Parmelin incontra il rappresentante USA per i dazi Jamieson Greer.',
     keywords: 'frontalieri, ticino, svizzera, italia, dazi, parmelin, washington, rilanciare',
     ogTitle: 'Dazi USA: Parmelin a Washington per rilanciare accordo',
-    ogDescription: 'Il presidente della Confederazione Guy Parmelin incontra il rappresentante USA per i dazi Jamieson Greer. Volontà di accordo, ma senza certezze su tempistiche e',
+ogDescription: 'Il presidente della Confederazione Guy Parmelin incontra il rappresentante USA per i dazi Jamieson Greer.',
     canonicalPath: '/articoli-frontaliere/parmelin-washington-dazi-usa-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Dazi USA: Parmelin a Washington per rilanciare accordo commerciale",
-      "description": "Il presidente della Confederazione Guy Parmelin incontra il rappresentante USA per i dazi Jamieson Greer. Volontà di accordo, ma senza certezze su tempistiche e",
+"description": "Il presidente della Confederazione Guy Parmelin incontra il rappresentante USA per i dazi Jamieson Greer.",
       "image": {
         "@type": "ImageObject", "url": `${BASE_URL}/images/blog/parmelin-washington-dazi-usa-2026.webp`,
         "width": 1200,
@@ -540,16 +540,16 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-chiusure-autostrada-a9-lombardia-2026': {
     title: 'Nuove chiusure sull\'autostrada A9 | Frontaliere Ticino',
-    description: 'Autostrade per l\'Italia annuncia chiusure notturne sull\'A9 tra Como e Chiasso per lavori di manutenzione. Ecco gli itinerari alternativi e le implicazioni per',
+description: 'Autostrade per l\'Italia annuncia chiusure notturne sull\'A9 tra Como e Chiasso per lavori di manutenzione.',
     keywords: 'frontalieri, ticino, svizzera, italia, nuove, chiusure, sull, autostrada',
     ogTitle: 'Chiusure autostrada A9: cosa cambia per i frontalieri',
-    ogDescription: 'Autostrade per l\'Italia annuncia chiusure notturne sull\'A9 tra Como e Chiasso per lavori di manutenzione. Ecco gli itinerari alternativi e le implicazioni per',
+ogDescription: 'Autostrade per l\'Italia annuncia chiusure notturne sull\'A9 tra Como e Chiasso per lavori di manutenzione.',
     canonicalPath: '/articoli-frontaliere/chiusure-autostrada-a9-lombardia-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Chiusure autostrada A9: cosa cambia per i frontalieri | Frontaliere Ticino",
-      "description": "Autostrade per l'Italia annuncia chiusure notturne sull'A9 tra Como e Chiasso per lavori di manutenzione. Ecco gli itinerari alternativi e le implicazioni per",
+"description": "Autostrade per l'Italia annuncia chiusure notturne sull'A9 tra Como e Chiasso per lavori di manutenzione.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/chiusure-autostrada-a9-lombardia-2026.webp`,
         "width": 1200,
@@ -568,7 +568,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-capre-dogana-gandria-incidenti-2026': {
     title: 'Capre alla dogana di Gandria: rischio | Frontaliere Ticino',
-    description: 'Quattro capre hanno attirato l\'attenzione delle autorità doganali, rischiando di causare due incidenti. Ecco cosa è successo. Dati aggiornati 2026 per',
+description: 'Quattro capre hanno attirato l\'attenzione delle autorità doganali, rischiando di causare due incidenti. Ecco cosa è successo.',
     keywords: 'frontalieri, ticino, svizzera, italia, capre, alla, dogana, gandria',
     ogTitle: 'Capre alla dogana di Gandria: rischio incidente e intervento delle autorità',
     ogDescription: 'Quattro capre hanno attirato l\'attenzione delle autorità doganali, rischiando di causare due incidenti. Ecco cosa è successo.',
@@ -577,7 +577,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Capre alla dogana di Gandria: rischio incidente | Frontaliere Ticino",
-      "description": "Quattro capre hanno attirato l'attenzione delle autorità doganali, rischiando di causare due incidenti. Ecco cosa è successo. Dati aggiornati 2026 per",
+"description": "Quattro capre hanno attirato l'attenzione delle autorità doganali, rischiando di causare due incidenti. Ecco cosa è successo.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/capre-dogana-gandria-incidenti-2026.webp`,
         "width": 1200,
@@ -680,7 +680,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-capre-dogana-gandria-intervento-30-marzo': {
     title: 'Intervento alla dogana di Gandria | Frontaliere Ticino',
-    description: 'L\'Ufficio federale della dogana e della sicurezza dei confini ha salvato quattro capre che mettevano a rischio la circolazione. Dati aggiornati 2026 per',
+description: 'L\'Ufficio federale della dogana e della sicurezza dei confini ha salvato quattro capre che mettevano a rischio la circolazione.',
     keywords: 'frontalieri, ticino, svizzera, italia, intervento, alla, dogana, gandria',
     ogTitle: 'Intervento alla dogana di Gandria: salvate quattro capre',
     ogDescription: 'L\'Ufficio federale della dogana e della sicurezza dei confini ha salvato quattro capre che mettevano a rischio la circolazione.',
@@ -689,7 +689,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Intervento alla dogana di Gandria: salvate quattro capre",
-      "description": "L'Ufficio federale della dogana e della sicurezza dei confini ha salvato quattro capre che mettevano a rischio la circolazione. Dati aggiornati 2026 per",
+"description": "L'Ufficio federale della dogana e della sicurezza dei confini ha salvato quattro capre che mettevano a rischio la circolazione.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/capre-dogana-gandria-intervento-30-marzo.webp`,
         "width": 1200,
@@ -736,7 +736,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-salario-minimo-ticino-2027-2029': {
     title: 'Salario minimo in Ticino: ecco come cambia dal 2027',
-    description: 'Il Gran Consiglio ha approvato il compromesso sul salario minimo in Ticino: da 20,50 a 21,75-22,25 franchi l\'ora entro il 2029. Dati aggiornati 2026 per',
+description: 'Il Gran Consiglio ha approvato il compromesso sul salario minimo in Ticino: da 20,50 a 21,75-22,25 franchi l\'ora entro il 2029.',
     keywords: 'frontalieri, ticino, svizzera, italia, salario, minimo, ecco, cambia',
     ogTitle: 'Salario minimo Ticino 2027-2029 | Frontaliere Ticino',
     ogDescription: 'Il Gran Consiglio ha approvato il compromesso sul salario minimo in Ticino: da 20,50 a 21,75-22,25 franchi l\'ora entro il 2029',
@@ -745,7 +745,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Salario minimo Ticino 2027-2029 | Frontaliere Ticino",
-      "description": "Il Gran Consiglio ha approvato il compromesso sul salario minimo in Ticino: da 20,50 a 21,75-22,25 franchi l'ora entro il 2029. Dati aggiornati 2026 per",
+"description": "Il Gran Consiglio ha approvato il compromesso sul salario minimo in Ticino: da 20,50 a 21,75-22,25 franchi l'ora entro il 2029.",
       "image": {
         "@type": "ImageObject", "url": `${BASE_URL}/images/blog/salario-minimo-ticino-2027-2029.webp`,
         "width": 1200,
@@ -823,7 +823,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
     description: 'Dal 2024, in sette cantoni, tra cui il Ticino, si registra un calo della popolazione under 65. Impatti su economia, previdenza e servizi pubblici.',
     keywords: 'frontalieri, ticino, svizzera, italia, sette, cantoni, stanno, scomparendo',
     ogTitle: 'Giovani in calo in 7 cantoni svizzeri: il caso Ticino',
-    ogDescription: 'Nel 2024, i dati ufficiali mostrano una diminuzione della popolazione under 65 in sette cantoni, con gravi conseguenze per l\'economia e la previdenza nel',
+ogDescription: 'Il 20 aprile 2026, i dati ufficiali federali hanno evidenziato un fenomeno preoccupante: in sette cantoni svizzeri, tra cui il Ticino, la popolazione under 65 ha registrato una diminuzione nel 2024.',
     canonicalPath: '/articoli-frontaliere/giovani-scomparsi-7-cantoni/',
     structuredData: {
       "@context": "https://schema.org",
@@ -848,7 +848,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-svizzeri-italiani-cucina-preferita': {
     title: 'Svizzeri e italiani: la cucina italiana | Frontaliere Ticino',
-    description: 'Un sondaggio rivela che il 79% degli svizzeri preferisce la cucina italiana quando mangia fuori, seguita dalla cucina elvetica al 71%. Dati aggiornati 2026 per',
+description: 'Un sondaggio rivela che il 79% degli svizzeri preferisce la cucina italiana quando mangia fuori, seguita dalla cucina elvetica al 71%.',
     keywords: 'frontalieri, ticino, svizzera, italia, svizzeri, italiani, cucina, italiana',
     ogTitle: 'Cucina italiana preferita dagli svizzeri | Frontaliere',
     ogDescription: 'Un sondaggio rivela che il 79% degli svizzeri preferisce la cucina italiana quando mangia fuori, seguita dalla cucina elvetica al 71%.',
@@ -857,7 +857,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Cucina italiana preferita dagli svizzeri",
-      "description": "Un sondaggio rivela che il 79% degli svizzeri preferisce la cucina italiana quando mangia fuori, seguita dalla cucina elvetica al 71%. Dati aggiornati 2026 per",
+"description": "Un sondaggio rivela che il 79% degli svizzeri preferisce la cucina italiana quando mangia fuori, seguita dalla cucina elvetica al 71%.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/svizzeri-italiani-cucina-preferita.webp`,
         "width": 1200,
@@ -1100,7 +1100,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-bellinzona-calcio-licenza-negata-finanze': {
     title: 'Calcio Dnb: licenza negata al Bellinzona per dubbi',
-    description: 'Il Bellinzona non ottiene la licenza Dnb a causa di dubbi sulle finanze, sollevando nuove preoccupazioni sul futuro del club. Dati aggiornati 2026 per',
+description: 'Il Bellinzona non ottiene la licenza Dnb a causa di dubbi sulle finanze, sollevando nuove preoccupazioni sul futuro del club.',
     keywords: 'frontalieri, ticino, svizzera, italia, calcio, licenza, negata, bellinzona',
     ogTitle: 'Bellinzona: licenza negata, dubbi sulle finanze',
     ogDescription: 'Il Bellinzona non ottiene la licenza Dnb a causa di dubbi sulle finanze, sollevando nuove preoccupazioni sul futuro del club.',
@@ -1109,7 +1109,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Bellinzona: licenza negata, dubbi sulle finanze | Frontaliere Ticino",
-      "description": "Il Bellinzona non ottiene la licenza Dnb a causa di dubbi sulle finanze, sollevando nuove preoccupazioni sul futuro del club. Dati aggiornati 2026 per",
+"description": "Il Bellinzona non ottiene la licenza Dnb a causa di dubbi sulle finanze, sollevando nuove preoccupazioni sul futuro del club.",
       "image": {
         "@type": "ImageObject", "url": `${BASE_URL}/images/blog/bellinzona-calcio-licenza-negata-finanze.webp`,
         "width": 1200,
@@ -1128,7 +1128,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-mozione-salute-vigili-fuoco-lombardia': {
     title: 'Approvata all\'unanimità la mozione per la salute dei vigili',
-    description: 'Regione Lombardia approva mozione per screening e studi epidemiologici sui vigili del fuoco, classificati a rischio cancerogeno. Dati aggiornati 2026 per',
+description: 'Regione Lombardia approva mozione per screening e studi epidemiologici sui vigili del fuoco, classificati a rischio cancerogeno.',
     keywords: 'frontalieri, ticino, svizzera, italia, approvata, unanimità, mozione, salute',
     ogTitle: 'Mozione salute vigili fuoco | Frontaliere Ticino',
     ogDescription: 'Regione Lombardia approva mozione per screening e studi epidemiologici sui vigili del fuoco, classificati a rischio cancerogeno.',
@@ -1137,7 +1137,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Mozione per la salute dei vigili del fuoco approvata all'unanimità in Lombardia",
-      "description": "Regione Lombardia approva mozione per screening e studi epidemiologici sui vigili del fuoco, classificati a rischio cancerogeno. Dati aggiornati 2026 per",
+"description": "Regione Lombardia approva mozione per screening e studi epidemiologici sui vigili del fuoco, classificati a rischio cancerogeno.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/mozione-salute-vigili-fuoco-lombardia.webp`,
         "width": 1200,
@@ -1520,7 +1520,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-aumenti-stipendi-medici-infermieri-lombardia': {
     title: 'Aumenti del 20% per medici e infermieri | Frontaliere Ticino',
-    description: 'Lombardia stanzia 10.000 euro per medici e 5.400 euro per infermieri che operano nelle zone di confine con la Svizzera. Dati aggiornati 2026 per frontalieri in',
+description: 'Lombardia stanzia 10.000 euro per medici e 5.400 euro per infermieri che operano nelle zone di confine con la Svizzera.',
     keywords: 'frontalieri, ticino, svizzera, italia, aumenti, medici, infermieri, confine',
     ogTitle: 'Aumenti del 20% per medici e infermieri al confine',
     ogDescription: 'Lombardia stanzia 10.000 euro per medici e 5.400 euro per infermieri che operano nelle zone di confine con la Svizzera',
@@ -1529,7 +1529,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Aumenti del 20% per medici e infermieri al confine",
-      "description": "Lombardia stanzia 10.000 euro per medici e 5.400 euro per infermieri che operano nelle zone di confine con la Svizzera. Dati aggiornati 2026 per frontalieri in",
+"description": "Lombardia stanzia 10.000 euro per medici e 5.400 euro per infermieri che operano nelle zone di confine con la Svizzera.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/aumenti-stipendi-medici-infermieri-lombardia.webp`,
         "width": 1200,
@@ -1744,7 +1744,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-cantieri-sottoceneri-estate-2024': {
     title: 'Cantieri in Ticino: la situazione nel Sottoceneri',
-    description: '11 cantieri attivi nel Sottoceneri, tra cui il Tunnel di Genzana a Lugano. Lavori notturni e viabilità modificata fino al 2027. Dati aggiornati 2026 per',
+description: '11 cantieri attivi nel Sottoceneri, tra cui il Tunnel di Genzana a Lugano. Lavori notturni e viabilità modificata fino al 2027.',
     keywords: 'frontalieri, ticino, svizzera, italia, cantieri, situazione, sottoceneri, estate',
     ogTitle: 'Cantieri Sottoceneri | Frontaliere Ticino',
     ogDescription: '11 cantieri attivi nel Sottoceneri, tra cui il Tunnel di Genzana a Lugano. Lavori notturni e viabilità modificata fino al 2027',
@@ -1753,7 +1753,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Cantieri Sottoceneri: la situazione nel Sottoceneri per l'estate 2024",
-      "description": "11 cantieri attivi nel Sottoceneri, tra cui il Tunnel di Genzana a Lugano. Lavori notturni e viabilità modificata fino al 2027. Dati aggiornati 2026 per",
+"description": "11 cantieri attivi nel Sottoceneri, tra cui il Tunnel di Genzana a Lugano. Lavori notturni e viabilità modificata fino al 2027.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/cantieri-sottoceneri-estate-2024.webp`,
         "width": 1200,
@@ -1800,7 +1800,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-cena-spring-avsi-libano-castiglione': {
     title: 'Cena di primavera per il Libano: AVSI | Frontaliere Ticino',
-    description: 'Sabato 9 maggio 2026 a Castiglione Olona, la Fondazione AVSI organizza una cena benefica per le comunità libanesi colpite dalla guerra. Dati aggiornati 2026 per',
+description: 'Sabato 9 maggio 2026 a Castiglione Olona, la Fondazione AVSI organizza una cena benefica per le comunità libanesi colpite dalla guerra.',
     keywords: 'frontalieri, ticino, svizzera, italia, cena, primavera, libano, avsi',
     ogTitle: 'Cena di primavera per il Libano | Frontaliere Ticino',
     ogDescription: 'Sabato 9 maggio 2026 a Castiglione Olona, la Fondazione AVSI organizza una cena benefica per le comunità libanesi colpite dalla guerra.',
@@ -1809,7 +1809,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Cena di primavera per il Libano: AVSI organizza evento a Castiglione Olona",
-      "description": "Sabato 9 maggio 2026 a Castiglione Olona, la Fondazione AVSI organizza una cena benefica per le comunità libanesi colpite dalla guerra. Dati aggiornati 2026 per",
+"description": "Sabato 9 maggio 2026 a Castiglione Olona, la Fondazione AVSI organizza una cena benefica per le comunità libanesi colpite dalla guerra.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/cena-spring-avsi-libano-castiglione.webp`,
         "width": 1200,
@@ -1828,7 +1828,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-permessi-dimora-grigioni-cambia-prassi': {
     title: 'Grigioni cambia prassi per i permessi | Frontaliere Ticino',
-    description: 'Nuove regole per i permessi di dimora nel Canton Grigioni: dichiarazione obbligatoria di precedenti penali e procedimenti in corso. Dati aggiornati 2026 per',
+description: 'Nuove regole per i permessi di dimora nel Canton Grigioni: dichiarazione obbligatoria di precedenti penali e procedimenti in corso.',
     keywords: 'frontalieri, ticino, svizzera, italia, grigioni, cambia, prassi, permessi',
     ogTitle: 'Grigioni cambia prassi per i permessi di dimora',
     ogDescription: 'Nuove regole per i permessi di dimora nel Canton Grigioni: dichiarazione obbligatoria di precedenti penali e procedimenti in corso.',
@@ -1837,7 +1837,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Grigioni cambia prassi per i permessi di dimora: nuove regole dopo l'affaire Roveredo",
-      "description": "Nuove regole per i permessi di dimora nel Canton Grigioni: dichiarazione obbligatoria di precedenti penali e procedimenti in corso. Dati aggiornati 2026 per",
+"description": "Nuove regole per i permessi di dimora nel Canton Grigioni: dichiarazione obbligatoria di precedenti penali e procedimenti in corso.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/permessi-dimora-grigioni-cambia-prassi.webp`,
         "width": 1200,
@@ -1884,7 +1884,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-bandecchi-quarti-chiasso-2026': {
     title: 'Bandecchi ai quarti a Chiasso: \'Qui mi | Frontaliere Ticino',
-    description: 'Susan Bandecchi raggiunge i quarti di finale dell\'Axion Open di Chiasso, sconfiggendo la croata Lucija Ciric Bagaric in due set. Dati aggiornati 2026 per',
+description: 'Susan Bandecchi raggiunge i quarti di finale dell\'Axion Open di Chiasso, sconfiggendo la croata Lucija Ciric Bagaric in due set.',
     keywords: 'frontalieri, ticino, svizzera, italia, bandecchi, quarti, chiasso, sento',
     ogTitle: 'Bandecchi ai quarti a Chiasso | Frontaliere Ticino',
     ogDescription: 'Susan Bandecchi raggiunge i quarti di finale dell\'Axion Open di Chiasso, sconfiggendo la croata Lucija Ciric Bagaric in due set.',
@@ -1893,7 +1893,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Susan Bandecchi raggiunge i quarti di finale dell'Axion Open di Chiasso, sconfiggendo la croata",
-      "description": "Susan Bandecchi raggiunge i quarti di finale dell'Axion Open di Chiasso, sconfiggendo la croata Lucija Ciric Bagaric in due set. Dati aggiornati 2026 per",
+"description": "Susan Bandecchi raggiunge i quarti di finale dell'Axion Open di Chiasso, sconfiggendo la croata Lucija Ciric Bagaric in due set.",
       "image": {
         "@type": "ImageObject", "url": `${BASE_URL}/images/blog/bandecchi-quarti-chiasso-2026.webp`,
         "width": 1200,
@@ -1968,7 +1968,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-grigioni-permessi-dimora-2026': {
     title: 'Grigioni: autocertificazione penali per permessi di dimora',
-    description: 'Da maggio 2026, chi richiede un permesso di dimora nei Grigioni dovrà dichiarare eventuali precedenti penali o procedimenti in corso. Dati aggiornati 2026 per',
+description: 'Da maggio 2026, chi richiede un permesso di dimora nei Grigioni dovrà dichiarare eventuali precedenti penali o procedimenti in corso.',
     keywords: 'frontalieri, ticino, svizzera, italia, grigioni, autocertificazione, penali, permessi',
     ogTitle: 'Grigioni: autocertificazione penali per permessi di dimora',
     ogDescription: 'Da maggio 2026, chi richiede un permesso di dimora nei Grigioni dovrà dichiarare eventuali precedenti penali o procedimenti in corso.',
@@ -1977,7 +1977,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Grigioni: autocertificazione penali per permessi di dimora",
-      "description": "Da maggio 2026, chi richiede un permesso di dimora nei Grigioni dovrà dichiarare eventuali precedenti penali o procedimenti in corso. Dati aggiornati 2026 per",
+"description": "Da maggio 2026, chi richiede un permesso di dimora nei Grigioni dovrà dichiarare eventuali precedenti penali o procedimenti in corso.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/grigioni-permessi-dimora-2026.webp`,
         "width": 1200,
@@ -2052,7 +2052,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-lufthansa-bagaglio-gratuito-eliminato': {
     title: 'Lufthansa elimina il bagaglio a mano | Frontaliere Ticino',
-    description: 'Dal 19 maggio 2026, solo un oggetto personale incluso nella tariffa base. Ecco cosa cambia per i passeggeri e i frontalieri. Dati aggiornati 2026 per',
+description: 'Dal 19 maggio 2026, solo un oggetto personale incluso nella tariffa base. Ecco cosa cambia per i passeggeri e i frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, lufthansa, elimina, bagaglio, mano',
     ogTitle: 'Lufthansa elimina il bagaglio a mano gratuito | Frontaliere',
     ogDescription: 'Dal 19 maggio 2026, solo un oggetto personale incluso nella tariffa base. Ecco cosa cambia per i passeggeri e i frontalieri',
@@ -2061,7 +2061,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Lufthansa elimina il bagaglio a mano gratuito, e vale anche per Swiss",
-      "description": "Dal 19 maggio 2026, solo un oggetto personale incluso nella tariffa base. Ecco cosa cambia per i passeggeri e i frontalieri. Dati aggiornati 2026 per",
+"description": "Dal 19 maggio 2026, solo un oggetto personale incluso nella tariffa base. Ecco cosa cambia per i passeggeri e i frontalieri.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/lufthansa-bagaglio-gratuito-eliminato.webp`,
         "width": 1200,
@@ -2080,7 +2080,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-como-frazione-tavernola-banditi-assaltano-gioielleria-e-si-dileguano': {
     title: 'Banditi assaltano gioielleria a Tavernola: l\'assalto',
-    description: 'Rapina a mano armata a Tavernola: tre banditi hanno seminato il panico e hanno prelevato gioielli dal centro commerciale Lario. Dati aggiornati 2026 per',
+description: 'Rapina a mano armata a Tavernola: tre banditi hanno seminato il panico e hanno prelevato gioielli dal centro commerciale Lario.',
     keywords: 'frontalieri, ticino, svizzera, italia, banditi, assaltano, gioielleria, tavernola',
     ogTitle: 'Banditi assaltano gioielleria a Tavernola: l\'assalto',
     ogDescription: 'Rapina a mano armata a Tavernola: tre banditi hanno seminato il panico e hanno prelevato gioielli dal centro commerciale Lario.',
@@ -2089,7 +2089,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Banditi assaltano gioielleria a Tavernola: l'assalto e le ricerche",
-      "description": "Rapina a mano armata a Tavernola: tre banditi hanno seminato il panico e hanno prelevato gioielli dal centro commerciale Lario. Dati aggiornati 2026 per",
+"description": "Rapina a mano armata a Tavernola: tre banditi hanno seminato il panico e hanno prelevato gioielli dal centro commerciale Lario.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/como-frazione-tavernola-banditi-assaltano-gioielleria-e-si-dileguano.webp`,
         "width": 1200,
@@ -2136,16 +2136,16 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-divario-salari-ticino-frontalieri-2026': {
     title: 'Divario salariale in Ticino: residenti | Frontaliere Ticino',
-    description: 'L\'Ufficio cantonale di statistica rivela che i residenti in Ticino guadagnano mediamente 5.957 franchi, mentre i frontalieri 4.800 franchi. Il divario è del',
+description: 'L\'Ufficio cantonale di statistica rivela che i residenti in Ticino guadagnano mediamente 5.957 franchi, mentre i frontalieri 4.800 franchi.',
     keywords: 'frontalieri, ticino, svizzera, italia, divario, salariale, residenti, guadagnano',
     ogTitle: 'Divario salariale in Ticino: residenti guadagnano 1.157',
-    ogDescription: 'L\'Ufficio cantonale di statistica rivela che i residenti in Ticino guadagnano mediamente 5.957 franchi, mentre i frontalieri 4.800 franchi. Il divario è del',
+ogDescription: 'L\'Ufficio cantonale di statistica rivela che i residenti in Ticino guadagnano mediamente 5.957 franchi, mentre i frontalieri 4.800 franchi.',
     canonicalPath: '/articoli-frontaliere/divario-salari-ticino-frontalieri-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Divario salariale in Ticino: residenti guadagnano 1.157 franchi in più",
-      "description": "L'Ufficio cantonale di statistica rivela che i residenti in Ticino guadagnano mediamente 5.957 franchi, mentre i frontalieri 4.800 franchi. Il divario è del",
+"description": "L'Ufficio cantonale di statistica rivela che i residenti in Ticino guadagnano mediamente 5.957 franchi, mentre i frontalieri 4.800 franchi.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/divario-salari-ticino-frontalieri-2026.webp`,
         "width": 1200,
@@ -2224,16 +2224,16 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-aufenthaltsbewilligung-b-quellensteuer-2026': {
     title: 'Permesso B e imposta alla fonte 2026 | Frontaliere Ticino',
-    description: 'Permesso B e imposta alla fonte 2026 in Ticino: tariffe A/B/C/H, deduzioni, soglia TOU 120.000 CHF e confronto con lo status di frontaliere G.',
+description: 'L\'imposta alla fonte 2026 segue uno schema tariffario federale uniforme che i cantoni adottano e moltiplicano per i propri moltiplicatori.',
     keywords: 'permesso b, imposta alla fonte 2026, ticino, tassazione ordinaria ulteriore, tou, nov, frontalieri, svizzera, tasse, pilastro 3a, deduzioni',
     ogTitle: 'Permesso B e imposta alla fonte 2026: guida fiscale completa',
-    ogDescription: 'Guida fiscale completa ai titolari di permesso B in Ticino: aliquote imposta alla fonte 2026, deduzioni, soglia TOU e confronto con il permesso G.',
+ogDescription: 'Guida fiscale completa ai titolari di permesso B in Ticino: aliquote imposta alla fonte 2026, deduzioni, soglia TOU e confronto con il permesso G.',
     canonicalPath: '/articoli-frontaliere/permesso-b-imposta-fonte-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "Article",
       "headline": "Permesso B e imposta alla fonte 2026: guida fiscale completa",
-      "description": "Guida fiscale completa ai titolari di permesso B in Ticino: aliquote imposta alla fonte 2026, tariffe A/B/C/H, deduzioni, soglia TOU 120.000 CHF e confronto con lo status di frontaliere G.",
+"description": "L'imposta alla fonte 2026 segue uno schema tariffario federale uniforme che i cantoni adottano e moltiplicano per i propri moltiplicatori.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/places/bellinzona.webp`,
         "width": 1200,
@@ -2452,7 +2452,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-autista-belga-20-ore-thurgau-intervento': {
     title: 'Autista belga guida 20 ore di fila | Frontaliere Ticino',
-    description: 'Un autista belga è stato fermato dopo aver guidato quasi 20 ore consecutive. La polizia del Canton Thurgau ha preso provvedimenti. Dati aggiornati 2026 per',
+description: 'Un autista belga è stato fermato dopo aver guidato quasi 20 ore consecutive. La polizia del Canton Thurgau ha preso provvedimenti.',
     keywords: 'frontalieri, ticino, svizzera, italia, autista, belga, fila, polizia',
     ogTitle: 'Autista belga guida 20 ore: polizia Thurgau interviene',
     ogDescription: 'Un autista belga è stato fermato dopo aver guidato quasi 20 ore consecutive. La polizia del Canton Thurgau ha preso provvedimenti.',
@@ -2461,7 +2461,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Autista belga guida 20 ore: polizia Thurgau interviene",
-      "description": "Un autista belga è stato fermato dopo aver guidato quasi 20 ore consecutive. La polizia del Canton Thurgau ha preso provvedimenti. Dati aggiornati 2026 per",
+"description": "Un autista belga è stato fermato dopo aver guidato quasi 20 ore consecutive. La polizia del Canton Thurgau ha preso provvedimenti.",
       "image": {
         "@type": "ImageObject", "url": `${BASE_URL}/images/blog/autista-belga-20-ore-thurgau-intervento.webp`,
         "width": 1200,
@@ -2536,7 +2536,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-frode-crediti-covid-ticino-3334-casi': {
     title: 'Frode crediti Covid: 3334 casi aperti | Frontaliere Ticino',
-    description: 'Le autorità svizzere affrontano 3334 procedimenti per frodi sui crediti Covid, per un valore di oltre 406 milioni di franchi. Dati aggiornati 2026 per',
+description: 'Le autorità svizzere affrontano 3334 procedimenti per frodi sui crediti Covid, per un valore di oltre 406 milioni di franchi.',
     keywords: 'frontalieri, ticino, svizzera, italia, frode, crediti, covid, 3334',
     ogTitle: 'Frode crediti Covid: 3334 casi aperti in Ticino e Svizzera',
     ogDescription: 'Le autorità svizzere affrontano 3334 procedimenti per frodi sui crediti Covid, per un valore di oltre 406 milioni di franchi.',
@@ -2545,7 +2545,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Frode crediti Covid: 3334 casi aperti in Ticino e Svizzera",
-      "description": "Le autorità svizzere affrontano 3334 procedimenti per frodi sui crediti Covid, per un valore di oltre 406 milioni di franchi. Dati aggiornati 2026 per",
+"description": "Le autorità svizzere affrontano 3334 procedimenti per frodi sui crediti Covid, per un valore di oltre 406 milioni di franchi.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/frode-crediti-covid-ticino-3334-casi.webp`,
         "width": 1200,
@@ -2564,16 +2564,16 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-frontalieri-tassa-salute-lombardia': {
     title: 'Frontalieri, “tassa sulla salute” al via entro settembre',
-    description: 'Regione Lombardia conferma il cronoprogramma per il contributo economico che servirà a sostenere gli stipendi del personale sanitario nelle zone al confine con',
+description: 'È importante che i frontalieri siano informati su come e quando versare questo contributo.',
     keywords: 'frontalieri, ticino, svizzera, italia, tassa, sulla, salute, entro',
     ogTitle: 'Frontalieri, “tassa sulla salute” al via entro settembre',
-    ogDescription: 'Regione Lombardia conferma il cronoprogramma per il contributo economico che servirà a sostenere gli stipendi del personale sanitario nelle zone al confine con',
+ogDescription: 'Per i frontalieri che lavorano nelle zone di confine con la Svizzera, la nuova normativa introduce un contributo economico che servirà a sostenere gli stipendi del personale sanitario.',
     canonicalPath: '/articoli-frontaliere/frontalieri-tassa-salute-lombardia/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "{\"@context\":\"https://schema.org\",\"@type\":\"Article\",\"mainEntityOfPage\":{\"@type\":\"WebPage\"",
-      "description": "Regione Lombardia conferma il cronoprogramma per il contributo economico che servirà a sostenere gli stipendi del personale sanitario nelle zone al confine con",
+"description": "È importante che i frontalieri siano informati su come e quando versare questo contributo.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/frontalieri-tassa-salute-lombardia.webp`,
         "width": 1200,
@@ -2788,16 +2788,16 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-lavena-ponte-tresa-battesimo-civico-2026': {
     title: 'Lavena Ponte Tresa celebra la Libertà | Frontaliere Ticino',
-    description: 'La comunità di Lavena Ponte Tresa ha festeggiato l\'81° anniversario della Liberazione con una partecipata cerimonia che ha visto protagonisti i giovani del',
+description: 'La comunità di Lavena Ponte Tresa si è riunita il 25 aprile 2026 in Piazza don Attilio Sangiorgio per celebrare l\'81° anniversario della Liberazione.',
     keywords: 'frontalieri, ticino, svizzera, italia, lavena, ponte, tresa, celebra',
     ogTitle: 'Lavena Ponte Tresa celebra la Libertà: successo',
-    ogDescription: 'La comunità di Lavena Ponte Tresa ha festeggiato l\'81° anniversario della Liberazione con una partecipata cerimonia che ha visto protagonisti i giovani del',
+ogDescription: 'La comunità di Lavena Ponte Tresa si è riunita il 25 aprile 2026 in Piazza don Attilio Sangiorgio per celebrare l\'81° anniversario della Liberazione.',
     canonicalPath: '/articoli-frontaliere/lavena-ponte-tresa-battesimo-civico-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Lavena Ponte Tresa celebra la Libertà: successo del Battesimo Civico 2026",
-      "description": "La comunità di Lavena Ponte Tresa ha festeggiato l'81° anniversario della Liberazione con una partecipata cerimonia che ha visto protagonisti i giovani del",
+"description": "La comunità di Lavena Ponte Tresa si è riunita il 25 aprile 2026 in Piazza don Attilio Sangiorgio per celebrare l'81° anniversario della Liberazione.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/lavena-ponte-tresa-battesimo-civico-2026.webp`,
         "width": 1200,
@@ -2956,7 +2956,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-alleanza-clima-ticino-comuni': {
     title: 'Cantone e Comuni uniti contro i cambiamenti climatici',
-    description: 'Cantone e Comuni uniti contro i cambiamenti climatici. Scopri le implicazioni per i frontalieri e come contribuire alla sostenibilità. Dati aggiornati 2026 per',
+description: 'Cantone e Comuni uniti contro i cambiamenti climatici. Scopri le implicazioni per i frontalieri e come contribuire alla sostenibilità.',
     keywords: 'frontalieri, ticino, svizzera, italia, cantone, comuni, uniti, contro',
     ogTitle: 'Alleanza clima Ticino Comuni | Frontaliere Ticino',
     ogDescription: 'Cantone e Comuni uniti contro i cambiamenti climatici. Scopri le implicazioni per i frontalieri e come contribuire alla sostenibilità.',
@@ -2965,7 +2965,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Alleanza tra Cantone e Comuni per affrontare i cambiamenti climatici in Ticino",
-      "description": "Cantone e Comuni uniti contro i cambiamenti climatici. Scopri le implicazioni per i frontalieri e come contribuire alla sostenibilità. Dati aggiornati 2026 per",
+"description": "Cantone e Comuni uniti contro i cambiamenti climatici. Scopri le implicazioni per i frontalieri e come contribuire alla sostenibilità.",
       "image": {
         "@type": "ImageObject", "url": `${BASE_URL}/images/blog/alleanza-clima-ticino-comuni.webp`,
         "width": 1200,
@@ -3012,7 +3012,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-nuova-tassa-frontalieri-2026': {
     title: 'Nuova tassa sui frontalieri: 3% in più | Frontaliere Ticino',
-    description: 'Dal settembre 2026, i frontalieri in Lombardia pagheranno una tassa del 3% per finanziare aumenti salariali per medici e infermieri. Dati aggiornati 2026 per',
+description: 'Dal settembre 2026, i frontalieri in Lombardia pagheranno una tassa del 3% per finanziare aumenti salariali per medici e infermieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, nuova, tassa, finanziare, stipendi',
     ogTitle: 'Nuova tassa sui frontalieri: 3% in più per finanziare',
     ogDescription: 'Dal settembre 2026, i frontalieri in Lombardia pagheranno una tassa del 3% per finanziare aumenti salariali per medici e infermieri',
@@ -3021,7 +3021,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Nuova tassa sui frontalieri: 3% in più per finanziare gli stipendi dei medici",
-      "description": "Dal settembre 2026, i frontalieri in Lombardia pagheranno una tassa del 3% per finanziare aumenti salariali per medici e infermieri. Dati aggiornati 2026 per",
+"description": "Dal settembre 2026, i frontalieri in Lombardia pagheranno una tassa del 3% per finanziare aumenti salariali per medici e infermieri.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/nuova-tassa-frontalieri-2026.webp`,
         "width": 1200,
@@ -3040,7 +3040,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-crans-montana-fatture-cure-italiani-2026': {
     title: 'Crans-Montana: le fatture delle cure ai pazienti italiani',
-    description: 'L\'Italia ribadisce che non pagherà le fatture delle cure per i pazienti italiani ricoverati in Svizzera dopo il rogo di Crans-Montana. Dati aggiornati 2026 per',
+description: 'L\'Italia ribadisce che non pagherà le fatture delle cure per i pazienti italiani ricoverati in Svizzera dopo il rogo di Crans-Montana.',
     keywords: 'frontalieri, ticino, svizzera, italia, crans-montana, fatture, cure, pazienti',
     ogTitle: 'Crans-Montana: fatture cure italiani | Frontaliere Ticino',
     ogDescription: 'L\'Italia ribadisce che non pagherà le fatture delle cure per i pazienti italiani ricoverati in Svizzera dopo il rogo di Crans-Montana.',
@@ -3049,7 +3049,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Crans-Montana: fatture cure italiani | Frontaliere Ticino",
-      "description": "L'Italia ribadisce che non pagherà le fatture delle cure per i pazienti italiani ricoverati in Svizzera dopo il rogo di Crans-Montana. Dati aggiornati 2026 per",
+"description": "L'Italia ribadisce che non pagherà le fatture delle cure per i pazienti italiani ricoverati in Svizzera dopo il rogo di Crans-Montana.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/crans-montana-fatture-cure-italiani-2026.webp`,
         "width": 1200,
@@ -3068,16 +3068,16 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-svizzeri-shopping-como-700-milioni': {
     title: 'Shopping in Italia per 700 milioni | Frontaliere Ticino',
-    description: 'Scopri come gli svizzeri spendono 700 milioni all\'anno in Italia, con il 67% degli acquisti nei supermercati comaschi. Implicazioni per i frontalieri e',
+description: 'Scopri come gli svizzeri spendono 700 milioni all\'anno in Italia, con il 67% degli acquisti nei supermercati comaschi.',
     keywords: 'frontalieri, ticino, svizzera, italia, shopping, milioni, svizzeri, preferiscono',
     ogTitle: 'Shopping in Italia per 700 milioni: svizzeri preferiscono',
-    ogDescription: 'Scopri come gli svizzeri spendono 700 milioni all\'anno in Italia, con il 67% degli acquisti nei supermercati comaschi. Implicazioni per i frontalieri e',
+ogDescription: 'Scopri come gli svizzeri spendono 700 milioni all\'anno in Italia, con il 67% degli acquisti nei supermercati comaschi.',
     canonicalPath: '/articoli-frontaliere/svizzeri-shopping-como-700-milioni/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Shopping in Italia per 700 milioni: svizzeri preferiscono negozi comaschi",
-      "description": "Scopri come gli svizzeri spendono 700 milioni all'anno in Italia, con il 67% degli acquisti nei supermercati comaschi. Implicazioni per i frontalieri e",
+"description": "Scopri come gli svizzeri spendono 700 milioni all'anno in Italia, con il 67% degli acquisti nei supermercati comaschi.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/svizzeri-shopping-como-700-milioni.webp`,
         "width": 1200,
@@ -3096,7 +3096,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-apprendisti-ticino-incidenti-2026': {
     title: 'Apprendisti in Ticino: cifre allarmanti | Frontaliere Ticino',
-    description: 'Quasi 23.000 apprendisti svizzeri sono vittime di incidenti ogni anno, con tre casi mortali in media. Unia chiede misure urgenti. Dati aggiornati 2026 per',
+description: 'Quasi 23.000 apprendisti svizzeri sono vittime di incidenti ogni anno, con tre casi mortali in media. Unia chiede misure urgenti.',
     keywords: 'frontalieri, ticino, svizzera, italia, apprendisti, cifre, allarmanti, sugli',
     ogTitle: 'Apprendisti in Ticino: cifre allarmanti sugli incidenti',
     ogDescription: 'Quasi 23.000 apprendisti svizzeri sono vittime di incidenti ogni anno, con tre casi mortali in media. Unia chiede misure urgenti.',
@@ -3105,7 +3105,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Apprendisti in Ticino: cifre allarmanti sugli incidenti",
-      "description": "Quasi 23.000 apprendisti svizzeri sono vittime di incidenti ogni anno, con tre casi mortali in media. Unia chiede misure urgenti. Dati aggiornati 2026 per",
+"description": "Quasi 23.000 apprendisti svizzeri sono vittime di incidenti ogni anno, con tre casi mortali in media. Unia chiede misure urgenti.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/apprendisti-ticino-incidenti-2026.webp`,
         "width": 1200,
@@ -3152,7 +3152,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-medici-senza-permesso-svizzera-2026': {
     title: 'Medici senza permesso in Svizzera: il fenomeno preoccupante',
-    description: 'Scopri il fenomeno preoccupante dei medici che esercitano senza permesso in Svizzera e le implicazioni per i frontalieri del Ticino. Dati aggiornati 2026 per',
+description: 'Scopri il fenomeno preoccupante dei medici che esercitano senza permesso in Svizzera e le implicazioni per i frontalieri del Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, medici, senza, permesso, fenomeno',
     ogTitle: 'Medici senza permesso in Svizzera | Frontaliere Ticino',
     ogDescription: 'Scopri il fenomeno preoccupante dei medici che esercitano senza permesso in Svizzera e le implicazioni per i frontalieri del Ticino.',
@@ -3161,7 +3161,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Medici senza permesso in Svizzera: il fenomeno preoccupante",
-      "description": "Scopri il fenomeno preoccupante dei medici che esercitano senza permesso in Svizzera e le implicazioni per i frontalieri del Ticino. Dati aggiornati 2026 per",
+"description": "Scopri il fenomeno preoccupante dei medici che esercitano senza permesso in Svizzera e le implicazioni per i frontalieri del Ticino.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/medici-senza-permesso-svizzera-2026.webp`,
         "width": 1200,
@@ -3320,7 +3320,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-supermercati-ticino-2026': {
     title: 'Supermercati Ticino: Migros, Coop e Aldi rassicurano',
-    description: 'Migros, Coop e Aldi rassicurano: con la crisi in Medio Oriente nessun rincaro immediato per i prodotti di largo consumo in Ticino. Dati aggiornati 2026 per',
+description: 'Migros, Coop e Aldi rassicurano: con la crisi in Medio Oriente nessun rincaro immediato per i prodotti di largo consumo in Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, supermercati, migros, coop, aldi',
     ogTitle: 'Supermercati Ticino: Nessun rincaro immediato | Frontaliere',
     ogDescription: 'Migros, Coop e Aldi rassicurano: con la crisi in Medio Oriente nessun rincaro immediato per i prodotti di largo consumo in Ticino',
@@ -3329,7 +3329,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Supermercati Ticino: Migros, Coop e Aldi rassicurano su prezzi",
-      "description": "Migros, Coop e Aldi rassicurano: con la crisi in Medio Oriente nessun rincaro immediato per i prodotti di largo consumo in Ticino. Dati aggiornati 2026 per",
+"description": "Migros, Coop e Aldi rassicurano: con la crisi in Medio Oriente nessun rincaro immediato per i prodotti di largo consumo in Ticino.",
       "image": {
         "@type": "ImageObject", "url": `${BASE_URL}/images/blog/supermercati-ticino-2026.webp`,
         "width": 1200,
@@ -3348,16 +3348,16 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-latte-ticino-crisi-politica-ritardo': {
     title: 'Latte ticinese, la situazione è urgente | Frontaliere Ticino',
-    description: 'Il Partito comunista interpella il governo sul prezzo del latte in Ticino, ai minimi storici. Urge una risposta politica alla crisi della filiera la',
+description: 'Il Partito comunista interpella il governo sul prezzo del latte in Ticino, ai minimi storici.',
     keywords: 'frontalieri, ticino, svizzera, italia, latte, ticinese, situazione, urgente',
     ogTitle: 'Latte ticinese, la situazione è urgente e la politica è già',
-    ogDescription: 'Il Partito comunista interpella il governo sul prezzo del latte in Ticino, ai minimi storici. Urge una risposta politica alla crisi della filiera la',
+ogDescription: 'Il Partito comunista interpella il governo sul prezzo del latte in Ticino, ai minimi storici.',
     canonicalPath: '/articoli-frontaliere/latte-ticino-crisi-politica-ritardo/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Latte ticinese, la situazione è urgente e la politica è già in ritardo",
-      "description": "Il Partito comunista interpella il governo sul prezzo del latte in Ticino, ai minimi storici. Urge una risposta politica alla crisi della filiera la",
+"description": "Il Partito comunista interpella il governo sul prezzo del latte in Ticino, ai minimi storici.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/latte-ticino-crisi-politica-ritardo.webp`,
         "width": 1200,
@@ -3432,16 +3432,16 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-costi-salute-svizzera-frontalieri-2026': {
     title: 'Costi salute Svizzera: esperto avverte | Frontaliere Ticino',
-    description: 'Nel 2025 i costi sanitari svizzeri toccheranno i 100 miliardi, con una spesa pro capite di 900 CHF al mese. L\'esperto Igor Francetic della SUPSI avverte: il',
+description: 'Nel 2025 i costi sanitari svizzeri toccheranno i 100 miliardi, con una spesa pro capite di 900 CHF al mese.',
     keywords: 'frontalieri, ticino, svizzera, italia, costi, salute, esperto, avverte',
     ogTitle: 'Costi salute Svizzera: esperto avverte, «Sistema',
-    ogDescription: 'Nel 2025 i costi sanitari svizzeri toccheranno i 100 miliardi, con una spesa pro capite di 900 CHF al mese. L\'esperto Igor Francetic della SUPSI avverte: il',
+ogDescription: 'Nel 2025 i costi sanitari svizzeri toccheranno i 100 miliardi, con una spesa pro capite di 900 CHF al mese.',
     canonicalPath: '/articoli-frontaliere/costi-salute-svizzera-frontalieri-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "{\"@context\":\"https://schema.org\",\"@type\":\"NewsArticle\",\"headline\":\"Costi salute Svizzera: esperto",
-      "description": "Nel 2025 i costi sanitari svizzeri toccheranno i 100 miliardi, con una spesa pro capite di 900 CHF al mese. L'esperto Igor Francetic della SUPSI avverte: il",
+"description": "Nel 2025 i costi sanitari svizzeri toccheranno i 100 miliardi, con una spesa pro capite di 900 CHF al mese.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/costi-salute-svizzera-frontalieri-2026.webp`,
         "width": 1200,
@@ -3488,7 +3488,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-settimana-corta-svizzera-frontalieri': {
     title: 'Settimana corta in Svizzera: meno ore | Frontaliere Ticino',
-    description: 'Un esperimento svizzero mostra che lavorare meno ore a parità di salario riduce assenze e aumenta la motivazione dei dipendenti. Dati aggiornati 2026 per',
+description: 'Un esperimento svizzero mostra che lavorare meno ore a parità di salario riduce assenze e aumenta la motivazione dei dipendenti.',
     keywords: 'frontalieri, ticino, svizzera, italia, settimana, corta, meno, produttività',
     ogTitle: 'Settimana corta in Svizzera: meno ore, più produttività',
     ogDescription: 'Un esperimento svizzero mostra che lavorare meno ore a parità di salario riduce assenze e aumenta la motivazione dei dipendenti',
@@ -3497,7 +3497,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Settimana corta in Svizzera: meno ore, più produttività",
-      "description": "Un esperimento svizzero mostra che lavorare meno ore a parità di salario riduce assenze e aumenta la motivazione dei dipendenti. Dati aggiornati 2026 per",
+"description": "Un esperimento svizzero mostra che lavorare meno ore a parità di salario riduce assenze e aumenta la motivazione dei dipendenti.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/settimana-corta-svizzera-frontalieri.webp`,
         "width": 1200,
@@ -3516,7 +3516,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-adulti-genitori-sostegno-finanziario-ticino-2026': {
     title: 'Adulti che ricevono soldi dai genitori | Frontaliere Ticino',
-    description: 'Scopri come il sostegno finanziario all’interno delle famiglie sta aumentando in Ticino e le implicazioni per i frontalieri. Dati aggiornati 2026 per',
+description: 'Scopri come il sostegno finanziario all’interno delle famiglie sta aumentando in Ticino e le implicazioni per i frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, adulti, ricevono, soldi, genitori',
     ogTitle: 'Adulti che ricevono soldi dai genitori | Frontaliere Ticino',
     ogDescription: 'Scopri come il sostegno finanziario all’interno delle famiglie sta aumentando in Ticino e le implicazioni per i frontalieri.',
@@ -3525,7 +3525,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Adulti che ricevono soldi dai genitori perché non arrivano a fine mese",
-      "description": "Scopri come il sostegno finanziario all’interno delle famiglie sta aumentando in Ticino e le implicazioni per i frontalieri. Dati aggiornati 2026 per",
+"description": "Scopri come il sostegno finanziario all’interno delle famiglie sta aumentando in Ticino e le implicazioni per i frontalieri.",
       "image": {
         "@type": "ImageObject", "url": `${BASE_URL}/images/blog/adulti-genitori-sostegno-finanziario-ticino-2026.webp`,
         "width": 1200,
@@ -3572,7 +3572,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-twint-account-frode-frontalieri': {
     title: 'Frode TWINT: come proteggere il tuo | Frontaliere Ticino',
-    description: 'Scopri come i criminali rubano gli account TWINT e come proteggere il tuo. Consigli pratici e cosa fare se sei vittima di frode. Dati aggiornati 2026 per',
+description: 'Scopri come i criminali rubano gli account TWINT e come proteggere il tuo. Consigli pratici e cosa fare se sei vittima di frode.',
     keywords: 'frontalieri, ticino, svizzera, italia, frode, twint, proteggere, account',
     ogTitle: 'Frode TWINT: come proteggere il tuo account',
     ogDescription: 'Scopri come i criminali rubano gli account TWINT e come proteggere il tuo. Consigli pratici e cosa fare se sei vittima di frode.',
@@ -3581,7 +3581,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Frode TWINT: come proteggere il tuo account",
-      "description": "Scopri come i criminali rubano gli account TWINT e come proteggere il tuo. Consigli pratici e cosa fare se sei vittima di frode. Dati aggiornati 2026 per",
+"description": "Scopri come i criminali rubano gli account TWINT e come proteggere il tuo. Consigli pratici e cosa fare se sei vittima di frode.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/twint-account-frode-frontalieri.webp`,
         "width": 1200,
@@ -3684,7 +3684,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-chiusure-autostrade-ticino-2026': {
     title: 'Chiusure notturne autostrade: cosa cambia per i frontalieri',
-    description: 'Dalla notte tra il 28 e il 29 aprile, chiusure notturne tra A8, Raccordo Fiera e Diramazione Gallarate-Gattico. Ecco le alternative. Dati aggiornati 2026 per',
+description: 'Dalla notte tra il 28 e il 29 aprile, chiusure notturne tra A8, Raccordo Fiera e Diramazione Gallarate-Gattico. Ecco le alternative.',
     keywords: 'frontalieri, ticino, svizzera, italia, chiusure, notturne, autostrade, cosa',
     ogTitle: 'Chiusure notturne autostrade: cosa cambia per i frontalieri',
     ogDescription: 'Dalla notte tra il 28 e il 29 aprile, chiusure notturne tra A8, Raccordo Fiera e Diramazione Gallarate-Gattico. Ecco le alternative',
@@ -3693,7 +3693,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Chiusure notturne autostrade: cosa cambia per i frontalieri",
-      "description": "Dalla notte tra il 28 e il 29 aprile, chiusure notturne tra A8, Raccordo Fiera e Diramazione Gallarate-Gattico. Ecco le alternative. Dati aggiornati 2026 per",
+"description": "Dalla notte tra il 28 e il 29 aprile, chiusure notturne tra A8, Raccordo Fiera e Diramazione Gallarate-Gattico. Ecco le alternative.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/chiusure-autostrade-ticino-2026.webp`,
         "width": 1200,
@@ -3852,7 +3852,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-tennis-donne-open-di-chiasso-a-marija-glebovna-timofeeva-il-titolo': {
     title: 'Tennis donne / “Open” di Chiasso, a Marija Glebovna',
-    description: 'La russa Marija Glebovna Timofeeva ha vinto il titolo dell\'“Open” di Chiasso, una delle competizioni più prestigiose in Svizzera. Dati aggiornati 2026 per',
+description: 'La russa Marija Glebovna Timofeeva ha vinto il titolo dell\'“Open” di Chiasso, una delle competizioni più prestigiose in Svizzera.',
     keywords: 'frontalieri, ticino, svizzera, italia, tennis, donne, open, chiasso',
     ogTitle: 'Tennis donne / “Open” di Chiasso, a Marija Glebovna',
     ogDescription: 'La russa Marija Glebovna Timofeeva ha vinto il titolo dell\'“Open” di Chiasso, una delle competizioni più prestigiose in Svizzera.',
@@ -3861,7 +3861,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "{\"@context\":\"https://schema.org\",\"@type\":\"Article\",\"mainEntityOfPage\":{\"@type\":\"WebPage\"",
-      "description": "La russa Marija Glebovna Timofeeva ha vinto il titolo dell'“Open” di Chiasso, una delle competizioni più prestigiose in Svizzera. Dati aggiornati 2026 per",
+"description": "La russa Marija Glebovna Timofeeva ha vinto il titolo dell'“Open” di Chiasso, una delle competizioni più prestigiose in Svizzera.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/tennis-donne-open-di-chiasso-a-marija-glebovna-timofeeva-il-titolo.webp`,
         "width": 1200,
@@ -3880,16 +3880,16 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-foreste-sommerse-lago-como-lugano': {
     title: 'Foreste sommerse per salvare i laghi di Como e Lugano',
-    description: 'Scopri come il progetto Echo utilizza piante acquatiche per ripristinare gli ecosistemi lacustri e combattere il cambiamento climatico nei laghi di Como e',
+description: 'Il progetto Echo potrebbe avere un impatto significativo per i frontalieri che vivono e lavorano nella regione del Lago di Lugano.',
     keywords: 'frontalieri, ticino, svizzera, italia, foreste, sommerse, salvare, laghi',
     ogTitle: 'Foreste sommerse per salvare i laghi di Como e Lugano',
-    ogDescription: 'Scopri come il progetto Echo utilizza piante acquatiche per ripristinare gli ecosistemi lacustri e combattere il cambiamento climatico nei laghi di Como e',
+ogDescription: 'Migliaia di piante acquatiche, tra cui Vallisneria spiralis, Myriophyllum spicatum, Potamogeton perfoliatus e Potamogeton lucens, crescono in 18 vasche trasparenti, pronte per essere trapiantate nei laghi di Como e Lugano.',
     canonicalPath: '/articoli-frontaliere/foreste-sommerse-lago-como-lugano/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Foreste sommerse per salvare i laghi di Como e Lugano",
-      "description": "Scopri come il progetto Echo utilizza piante acquatiche per ripristinare gli ecosistemi lacustri e combattere il cambiamento climatico nei laghi di Como e",
+"description": "Il progetto Echo potrebbe avere un impatto significativo per i frontalieri che vivono e lavorano nella regione del Lago di Lugano.",
       "image": {
         "@type": "ImageObject", "url": `${BASE_URL}/images/blog/foreste-sommerse-lago-como-lugano.webp`,
         "width": 1200,
@@ -4020,7 +4020,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-reddito-como-2024-frontalieri': {
     title: 'Provincia di Como più ricca: cresce il reddito ma il comune',
-    description: 'Scopri come il reddito pro capite della provincia di Como è aumentato e le implicazioni per i frontalieri che lavorano in questa zona. Dati aggiornati 2026 per',
+description: 'Scopri come il reddito pro capite della provincia di Como è aumentato e le implicazioni per i frontalieri che lavorano in questa zona.',
     keywords: 'frontalieri, ticino, svizzera, italia, provincia, como, ricca, cresce',
     ogTitle: 'Provincia di Como più ricca: cresce il reddito | Frontaliere',
     ogDescription: 'Scopri come il reddito pro capite della provincia di Como è aumentato e le implicazioni per i frontalieri che lavorano in questa zona.',
@@ -4029,7 +4029,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Provincia di Como più ricca: cresce il reddito ma il comune non è nella top 10",
-      "description": "Scopri come il reddito pro capite della provincia di Como è aumentato e le implicazioni per i frontalieri che lavorano in questa zona. Dati aggiornati 2026 per",
+"description": "Scopri come il reddito pro capite della provincia di Como è aumentato e le implicazioni per i frontalieri che lavorano in questa zona.",
       "image": {
         "@type": "ImageObject", "url": `${BASE_URL}/images/blog/reddito-como-2024-frontalieri.webp`,
         "width": 1200,
@@ -4076,7 +4076,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-ex-gas-macello-residenze-secondarie': {
     title: 'Ex Gas ex Macello: residenze | Frontaliere Ticino',
-    description: 'Locarno non aggiorna il piano per il comparto dopo la decisione dell\'Are. La quota di residenze secondarie risulta inefficace. Dati aggiornati 2026 per',
+description: 'Locarno non aggiorna il piano per il comparto dopo la decisione dell\'Are. La quota di residenze secondarie risulta inefficace.',
     keywords: 'frontalieri, ticino, svizzera, italia, macello, residenze, secondarie, quota',
     ogTitle: 'Ex Gas ex Macello: residenze secondarie, quota inefficace',
     ogDescription: 'Locarno non aggiorna il piano per il comparto dopo la decisione dell\'Are. La quota di residenze secondarie risulta inefficace.',
@@ -4085,7 +4085,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "{\"@context\":\"https://schema.org\",\"@type\":\"NewsArticle\",\"headline\":\"Ex Gas ex Macello: residenze",
-      "description": "Locarno non aggiorna il piano per il comparto dopo la decisione dell'Are. La quota di residenze secondarie risulta inefficace. Dati aggiornati 2026 per",
+"description": "Locarno non aggiorna il piano per il comparto dopo la decisione dell'Are. La quota di residenze secondarie risulta inefficace.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/ex-gas-macello-residenze-secondarie.webp`,
         "width": 1200,
@@ -4132,7 +4132,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-controlli-velocita-ticino-aprile-maggio': {
     title: 'Radar in Ticino: controlli dal 27 | Frontaliere Ticino',
-    description: 'La Polizia cantonale e le polizie comunali annunciano i controlli della velocità in Ticino per la settimana dal 27 aprile al 3 maggio. Dati aggiornati 2026 per',
+description: 'La Polizia cantonale e le polizie comunali annunciano i controlli della velocità in Ticino per la settimana dal 27 aprile al 3 maggio.',
     keywords: 'frontalieri, ticino, svizzera, italia, radar, controlli, aprile, maggio',
     ogTitle: 'Radar in Ticino: controlli dal 27 aprile al 3 maggio',
     ogDescription: 'La Polizia cantonale e le polizie comunali annunciano i controlli della velocità in Ticino per la settimana dal 27 aprile al 3 maggio.',
@@ -4141,7 +4141,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Radar in Ticino: controlli dal 27 aprile al 3 maggio",
-      "description": "La Polizia cantonale e le polizie comunali annunciano i controlli della velocità in Ticino per la settimana dal 27 aprile al 3 maggio. Dati aggiornati 2026 per",
+"description": "La Polizia cantonale e le polizie comunali annunciano i controlli della velocità in Ticino per la settimana dal 27 aprile al 3 maggio.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/controlli-velocita-ticino-aprile-maggio.webp`,
         "width": 1200,
@@ -4160,7 +4160,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-finanze-pubbliche-ticino-2026-preoccupazioni': {
     title: 'Finanze pubbliche Ticino: allarme | Frontaliere Ticino',
-    description: 'L\'Ordine dei commercialisti del Canton Ticino esprime preoccupazione per le finanze pubbliche e il rischio di delocalizzazioni. Dati aggiornati 2026 per',
+description: 'L\'Ordine dei commercialisti del Canton Ticino esprime preoccupazione per le finanze pubbliche e il rischio di delocalizzazioni.',
     keywords: 'frontalieri, ticino, svizzera, italia, finanze, pubbliche, allarme, commercialisti',
     ogTitle: 'Finanze pubbliche Ticino: allarme commercialisti',
     ogDescription: 'L\'Ordine dei commercialisti del Canton Ticino esprime preoccupazione per le finanze pubbliche e il rischio di delocalizzazioni.',
@@ -4169,7 +4169,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Finanze pubbliche Ticino: allarme commercialisti",
-      "description": "L'Ordine dei commercialisti del Canton Ticino esprime preoccupazione per le finanze pubbliche e il rischio di delocalizzazioni. Dati aggiornati 2026 per",
+"description": "L'Ordine dei commercialisti del Canton Ticino esprime preoccupazione per le finanze pubbliche e il rischio di delocalizzazioni.",
       "image": {
         "@type": "ImageObject", "url": `${BASE_URL}/images/blog/finanze-pubbliche-ticino-2026-preoccupazioni.webp`,
         "width": 1200,
@@ -4188,7 +4188,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-premi-non-oltre-10-percento': {
     title: 'Premi non oltre il 10%, il dato che dimezza i costi',
-    description: 'Il governo ticinese riduce i costi dell\'iniziativa a 130 milioni. De Pietro (SUPSI): \'Più impegno nel socio-sanitario\'. Dati aggiornati 2026 per frontalieri in',
+description: 'Il governo ticinese riduce i costi dell\'iniziativa a 130 milioni. De Pietro (SUPSI): \'Più impegno nel socio-sanitario\'.',
     keywords: 'frontalieri, ticino, svizzera, italia, premi, oltre, dato, dimezza',
     ogTitle: 'Premi non oltre il 10%, il dato che dimezza i costi',
     ogDescription: 'Il governo ticinese riduce i costi dell\'iniziativa a 130 milioni. De Pietro (SUPSI): \'Più impegno nel socio-sanitario\'',
@@ -4197,7 +4197,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Premi non oltre il 10%, il dato che dimezza i costi",
-      "description": "Il governo ticinese riduce i costi dell'iniziativa a 130 milioni. De Pietro (SUPSI): 'Più impegno nel socio-sanitario'. Dati aggiornati 2026 per frontalieri in",
+"description": "Il governo ticinese riduce i costi dell'iniziativa a 130 milioni. De Pietro (SUPSI): 'Più impegno nel socio-sanitario'.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/premi-non-oltre-10-percento.webp`,
         "width": 1200,
@@ -4244,16 +4244,16 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-bollini-rossi-traffico-san-gottardo-2026': {
     title: 'Bollini rossi al San Gottardo: caos | Frontaliere Ticino',
-    description: 'Maggio 2026: previsti giorni neri per il traffico al tunnel del San Gottardo, con code fino a 20 km e ritardi fino a 2 ore. Scopri le previsioni del TCS e cosa',
+description: 'Maggio 2026: previsti giorni neri per il traffico al tunnel del San Gottardo, con code fino a 20 km e ritardi fino a 2 ore.',
     keywords: 'frontalieri, ticino, svizzera, italia, bollini, rossi, gottardo, caos',
     ogTitle: 'Bollini rossi al San Gottardo: caos traffico in maggio',
-    ogDescription: 'Maggio 2026: previsti giorni neri per il traffico al tunnel del San Gottardo, con code fino a 20 km e ritardi fino a 2 ore. Scopri le previsioni del TCS e cosa',
+ogDescription: 'Maggio 2026: previsti giorni neri per il traffico al tunnel del San Gottardo, con code fino a 20 km e ritardi fino a 2 ore.',
     canonicalPath: '/articoli-frontaliere/bollini-rossi-traffico-san-gottardo-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "{\"@context\":\"https://schema.org\",\"@type\":\"NewsArticle\",\"headline\":\"Bollini rossi al San Gottardo",
-      "description": "Maggio 2026: previsti giorni neri per il traffico al tunnel del San Gottardo, con code fino a 20 km e ritardi fino a 2 ore. Scopri le previsioni del TCS e cosa",
+"description": "Maggio 2026: previsti giorni neri per il traffico al tunnel del San Gottardo, con code fino a 20 km e ritardi fino a 2 ore.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/bollini-rossi-traffico-san-gottardo-2026.webp`,
         "width": 1200,
@@ -4272,7 +4272,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-treno-guasto-bellinzona-2026': {
     title: 'Treno Lugano-Zurigo in panne | Frontaliere Ticino',
-    description: 'Guasto tecnico sopprime il treno delle 19:00, nessun sostitutivo. Passeggeri in attesa alla stazione di Bellinzona. Dati aggiornati 2026 per frontalieri in',
+description: 'Guasto tecnico sopprime il treno delle 19:00, nessun sostitutivo. Passeggeri in attesa alla stazione di Bellinzona.',
     keywords: 'frontalieri, ticino, svizzera, italia, treno, lugano-zurigo, panne, passeggeri',
     ogTitle: 'Treno Lugano-Zurigo in panne: passeggeri a piedi',
     ogDescription: 'Guasto tecnico sopprime il treno delle 19:00, nessun sostitutivo. Passeggeri in attesa alla stazione di Bellinzona',
@@ -4281,7 +4281,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Treno Lugano-Zurigo in panne: passeggeri a piedi da Bellinzona",
-      "description": "Guasto tecnico sopprime il treno delle 19:00, nessun sostitutivo. Passeggeri in attesa alla stazione di Bellinzona. Dati aggiornati 2026 per frontalieri in",
+"description": "Guasto tecnico sopprime il treno delle 19:00, nessun sostitutivo. Passeggeri in attesa alla stazione di Bellinzona.",
       "image": {
         "@type": "ImageObject", "url": `${BASE_URL}/images/blog/treno-guasto-bellinzona-2026.webp`,
         "width": 1200,
@@ -4328,7 +4328,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-teatro-architettura-mendrisio-stagione-2026': {
     title: 'Teatro dell\'Architettura: stagione | Frontaliere Ticino',
-    description: 'Scopri la stagione espositiva 2026 del Teatro dell\'Architettura di Mendrisio con tre mostre distinte su architettura e design. Dati aggiornati 2026 per',
+description: 'Scopri la stagione espositiva 2026 del Teatro dell\'Architettura di Mendrisio con tre mostre distinte su architettura e design.',
     keywords: 'frontalieri, ticino, svizzera, italia, teatro, dell, architettura, stagione',
     ogTitle: 'Teatro dell\'Architettura: stagione espositiva 2026',
     ogDescription: 'Scopri la stagione espositiva 2026 del Teatro dell\'Architettura di Mendrisio con tre mostre distinte su architettura e design.',
@@ -4337,7 +4337,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "{\"@context\":\"https://schema.org\",\"@type\":\"NewsArticle\",\"headline\":\"Teatro dell'Architettura",
-      "description": "Scopri la stagione espositiva 2026 del Teatro dell'Architettura di Mendrisio con tre mostre distinte su architettura e design. Dati aggiornati 2026 per",
+"description": "Scopri la stagione espositiva 2026 del Teatro dell'Architettura di Mendrisio con tre mostre distinte su architettura e design.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/teatro-architettura-mendrisio-stagione-2026.webp`,
         "width": 1200,
@@ -4356,16 +4356,16 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-frontalieri-arresto-maggia-truffa': {
     title: 'Arrestato truffatore a Maggia: frode | Frontaliere Ticino',
-    description: 'Un truffatore è stato arrestato a Maggia dopo essere stato colto in flagrante durante una frode telefonica. Scopri i dettagli dell\'operazione e come',
+description: 'Un truffatore è stato arrestato a Maggia dopo essere stato colto in flagrante durante una frode telefonica.',
     keywords: 'frontalieri, ticino, svizzera, italia, arrestato, truffatore, maggia, frode',
     ogTitle: 'Arrestato truffatore a Maggia: frode con schockanruf',
-    ogDescription: 'Un truffatore è stato arrestato a Maggia dopo essere stato colto in flagrante durante una frode telefonica. Scopri i dettagli dell\'operazione e come',
+ogDescription: 'Un truffatore è stato arrestato a Maggia dopo essere stato colto in flagrante durante una frode telefonica.',
     canonicalPath: '/articoli-frontaliere/frontalieri-arresto-maggia-truffa/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Arrestato truffatore a Maggia: frode con schockanruf",
-      "description": "Un truffatore è stato arrestato a Maggia dopo essere stato colto in flagrante durante una frode telefonica. Scopri i dettagli dell'operazione e come",
+"description": "Un truffatore è stato arrestato a Maggia dopo essere stato colto in flagrante durante una frode telefonica.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/frontalieri-arresto-maggia-truffa.webp`,
         "width": 1200,
@@ -4496,7 +4496,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-nuove-banconote-euro-restyling-2026': {
     title: 'Nuove banconote in euro: due temi e volti storici in gara',
-    description: 'Scopri i due temi proposti per le nuove banconote in euro: cultura europea e natura. Decisione finale entro fine 2026. Dati aggiornati 2026 per frontalieri in',
+description: 'Scopri i due temi proposti per le nuove banconote in euro: cultura europea e natura. Decisione finale entro fine 2026.',
     keywords: 'frontalieri, ticino, svizzera, italia, nuove, banconote, euro, temi',
     ogTitle: 'Nuove banconote in euro: restyling e temi in gara',
     ogDescription: 'Scopri i due temi proposti per le nuove banconote in euro: cultura europea e natura. Decisione finale entro fine 2026.',
@@ -4505,7 +4505,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Nuove banconote in euro: restyling e temi in gara",
-      "description": "Scopri i due temi proposti per le nuove banconote in euro: cultura europea e natura. Decisione finale entro fine 2026. Dati aggiornati 2026 per frontalieri in",
+"description": "Scopri i due temi proposti per le nuove banconote in euro: cultura europea e natura. Decisione finale entro fine 2026.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/nuove-banconote-euro-restyling-2026.webp`,
         "width": 1200,
@@ -4524,7 +4524,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-amazon-made-in-italy-days-2026-ticino': {
     title: 'Amazon Made in Italy Days 2026: 5.500 | Frontaliere Ticino',
-    description: 'Dal 13 al 19 maggio 2026, Amazon ospita 5.500 prodotti Made in Italy su 11 mercati internazionali. Collaborazione con Agenzia Ice. Dati aggiornati 2026 per',
+description: 'Dal 13 al 19 maggio 2026, Amazon ospita 5.500 prodotti Made in Italy su 11 mercati internazionali. Collaborazione con Agenzia Ice.',
     keywords: 'frontalieri, ticino, svizzera, italia, amazon, made, italy, days',
     ogTitle: 'Amazon Made in Italy Days 2026: 5.500 eccellenze italiane',
     ogDescription: 'Dal 13 al 19 maggio 2026, Amazon ospita 5.500 prodotti Made in Italy su 11 mercati internazionali. Collaborazione con Agenzia Ice.',
@@ -4533,7 +4533,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Amazon Made in Italy Days 2026: 5.500 eccellenze italiane in vetrina globale",
-      "description": "Dal 13 al 19 maggio 2026, Amazon ospita 5.500 prodotti Made in Italy su 11 mercati internazionali. Collaborazione con Agenzia Ice. Dati aggiornati 2026 per",
+"description": "Dal 13 al 19 maggio 2026, Amazon ospita 5.500 prodotti Made in Italy su 11 mercati internazionali. Collaborazione con Agenzia Ice.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/amazon-made-in-italy-days-2026-ticino.webp`,
         "width": 1200,
@@ -4608,7 +4608,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-primo-maggio-varese-2026-lavoro-dignitoso': {
     title: 'Primo Maggio a Varese: sindacati in corteo per un lavoro',
-    description: 'Scopri di più sulla manifestazione del Primo Maggio 2026 a Varese, organizzata dai sindacati CGIL, CISL e UIL per un lavoro dignitoso. Dati aggiornati 2026 per',
+description: 'Scopri di più sulla manifestazione del Primo Maggio 2026 a Varese, organizzata dai sindacati CGIL, CISL e UIL per un lavoro dignitoso.',
     keywords: 'frontalieri, ticino, svizzera, italia, primo, maggio, varese, sindacati',
     ogTitle: 'Primo Maggio Varese 2026: sindacati in corteo per un lavoro',
     ogDescription: 'Scopri di più sulla manifestazione del Primo Maggio 2026 a Varese, organizzata dai sindacati CGIL, CISL e UIL per un lavoro dignitoso.',
@@ -4617,7 +4617,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Primo Maggio Varese 2026: sindacati in corteo per un lavoro dignitoso",
-      "description": "Scopri di più sulla manifestazione del Primo Maggio 2026 a Varese, organizzata dai sindacati CGIL, CISL e UIL per un lavoro dignitoso. Dati aggiornati 2026 per",
+"description": "Scopri di più sulla manifestazione del Primo Maggio 2026 a Varese, organizzata dai sindacati CGIL, CISL e UIL per un lavoro dignitoso.",
       "image": {
         "@type": "ImageObject", "url": `${BASE_URL}/images/blog/primo-maggio-varese-2026-lavoro-dignitoso.webp`,
         "width": 1200,
@@ -4664,7 +4664,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-coop-svizzera-insetti-commestibili-2026': {
     title: 'Coop Svizzera ritira gli insetti | Frontaliere Ticino',
-    description: 'Coop Svizzera ritira insetti commestibili dagli scaffali. Scopri le implicazioni per i frontalieri e le alternative disponibili. Dati aggiornati 2026 per',
+description: 'Coop Svizzera ritira insetti commestibili dagli scaffali. Scopri le implicazioni per i frontalieri e le alternative disponibili.',
     keywords: 'frontalieri, ticino, svizzera, italia, coop, ritira, insetti, commestibili',
     ogTitle: 'Coop Svizzera ritira insetti commestibili | Frontaliere',
     ogDescription: 'Coop Svizzera ritira insetti commestibili dagli scaffali. Scopri le implicazioni per i frontalieri e le alternative disponibili.',
@@ -4673,7 +4673,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Coop Svizzera ritira insetti commestibili dagli scaffali",
-      "description": "Coop Svizzera ritira insetti commestibili dagli scaffali. Scopri le implicazioni per i frontalieri e le alternative disponibili. Dati aggiornati 2026 per",
+"description": "Coop Svizzera ritira insetti commestibili dagli scaffali. Scopri le implicazioni per i frontalieri e le alternative disponibili.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/coop-svizzera-insetti-commestibili-2026.webp`,
         "width": 1200,
@@ -4748,16 +4748,16 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-limite-velocita-30-ticino-inquinamento-acustico': {
     title: 'Limite a 30 km/h per dimezzare | Frontaliere Ticino',
-    description: 'L\'ATA chiede maggiore autonomia per introdurre zone a 30 km/h nelle aree più esposte al rumore, migliorando la qualità della vita e la sicurezza stradale in',
+description: 'La riduzione del rumore migliorerebbe la qualità della vita nelle aree urbane, rendendo le strade più sicure e vivibili.',
     keywords: 'frontalieri, ticino, svizzera, italia, limite, dimezzare, inquinamento, acustico',
     ogTitle: 'Limite a 30 km/h per dimezzare l\'inquinamento acustico',
-    ogDescription: 'L\'ATA chiede maggiore autonomia per introdurre zone a 30 km/h nelle aree più esposte al rumore, migliorando la qualità della vita e la sicurezza stradale in',
+ogDescription: 'La proposta dell\'ATA di introdurre zone a 30 km/h nelle aree urbane rappresenta un\'opportunità per migliorare la qualità della vita e la sicurezza stradale in Ticino.',
     canonicalPath: '/articoli-frontaliere/limite-velocita-30-ticino-inquinamento-acustico/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Limite a 30 km/h per dimezzare l'inquinamento acustico in Ticino",
-      "description": "L'ATA chiede maggiore autonomia per introdurre zone a 30 km/h nelle aree più esposte al rumore, migliorando la qualità della vita e la sicurezza stradale in",
+"description": "La riduzione del rumore migliorerebbe la qualità della vita nelle aree urbane, rendendo le strade più sicure e vivibili.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/limite-velocita-30-ticino-inquinamento-acustico.webp`,
         "width": 1200,
@@ -4804,7 +4804,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-zecche-ticino-2026-18000-punture': {
     title: 'Zecche in Ticino: 18.000 punture nel 2025, ecco cosa sapere',
-    description: 'Nel 2025 in Svizzera sono state registrate 18.000 punture di zecche. La dottoressa Luisa Carnino dell\'EOC spiega sintomi e prevenzione. Dati aggiornati 2026 per',
+description: 'Nel 2025 in Svizzera sono state registrate 18.000 punture di zecche. La dottoressa Luisa Carnino dell\'EOC spiega sintomi e prevenzione.',
     keywords: 'frontalieri, ticino, svizzera, italia, zecche, punture, 2025, ecco',
     ogTitle: 'Zecche in Ticino: 18.000 punture nel 2025 | Frontaliere',
     ogDescription: 'Nel 2025 in Svizzera sono state registrate 18.000 punture di zecche. La dottoressa Luisa Carnino dell\'EOC spiega sintomi e prevenzione',
@@ -4813,7 +4813,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "{\"@context\": \"https://schema.org\", \"@type\": \"NewsArticle\", \"headline\": \"Zecche in Ticino: 18.000",
-      "description": "Nel 2025 in Svizzera sono state registrate 18.000 punture di zecche. La dottoressa Luisa Carnino dell'EOC spiega sintomi e prevenzione. Dati aggiornati 2026 per",
+"description": "Nel 2025 in Svizzera sono state registrate 18.000 punture di zecche. La dottoressa Luisa Carnino dell'EOC spiega sintomi e prevenzione.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/zecche-ticino-2026-18000-punture.webp`,
         "width": 1200,
@@ -4832,7 +4832,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-lavoratori-pensionati-ticino-2026': {
     title: 'Lavoratori over 65: raddoppiati in 20 anni | Frontaliere Ticino',
-    description: 'Nel 2025, 220\'000 persone continuano a lavorare dopo i 65 anni, più del doppio rispetto al 2005. Ecco cosa cambia per i frontalieri. Dati aggiornati 2026 per',
+description: 'Nel 2025, 220\'000 persone continuano a lavorare dopo i 65 anni, più del doppio rispetto al 2005. Ecco cosa cambia per i frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, lavoratori, over, raddoppiati, anni',
     ogTitle: 'Lavoratori over 65: raddoppiati in 20 anni | Frontaliere',
     ogDescription: 'Nel 2025, 220\'000 persone continuano a lavorare dopo i 65 anni, più del doppio rispetto al 2005. Ecco cosa cambia per i frontalieri.',
@@ -4841,7 +4841,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Lavoratori over 65: raddoppiati in 20 anni",
-      "description": "Nel 2025, 220'000 persone continuano a lavorare dopo i 65 anni, più del doppio rispetto al 2005. Ecco cosa cambia per i frontalieri. Dati aggiornati 2026 per",
+"description": "Nel 2025, 220'000 persone continuano a lavorare dopo i 65 anni, più del doppio rispetto al 2005. Ecco cosa cambia per i frontalieri.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/lavoratori-pensionati-ticino-2026.webp`,
         "width": 1200,
@@ -4860,16 +4860,16 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-calcio-dnb-bellinzona-vittoria-stade-nyonnais': {
     title: 'Calcio Dnb: Bellinzona batte Stade | Frontaliere Ticino',
-    description: 'Il Bellinzona ha sconfitto lo Stade Nyonnais negli anticipi del campionato di calcio Dnb, approfittando della vittoria ottenuta grazie agli errori degli',
+description: 'Il Bellinzona ha ottenuto una vittoria significativa negli anticipi del campionato di calcio Dnb, sconfiggendo lo Stade Nyonnais.',
     keywords: 'frontalieri, ticino, svizzera, italia, calcio, bellinzona, batte, stade',
     ogTitle: 'Calcio Dnb: Bellinzona batte Stade Nyonnais | Frontaliere',
-    ogDescription: 'Il Bellinzona ha sconfitto lo Stade Nyonnais negli anticipi del campionato di calcio Dnb, approfittando della vittoria ottenuta grazie agli errori degli',
+ogDescription: 'Il Bellinzona ha ottenuto una vittoria significativa negli anticipi del campionato di calcio Dnb, sconfiggendo lo Stade Nyonnais.',
     canonicalPath: '/articoli-frontaliere/calcio-dnb-bellinzona-vittoria-stade-nyonnais/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Calcio Dnb: Bellinzona batte Stade Nyonnais, approfittando della sconfitta avversaria",
-      "description": "Il Bellinzona ha sconfitto lo Stade Nyonnais negli anticipi del campionato di calcio Dnb, approfittando della vittoria ottenuta grazie agli errori degli",
+"description": "Il Bellinzona ha ottenuto una vittoria significativa negli anticipi del campionato di calcio Dnb, sconfiggendo lo Stade Nyonnais.",
       "image": {
         "@type": "ImageObject", "url": `${BASE_URL}/images/blog/calcio-dnb-bellinzona-vittoria-stade-nyonnais.webp`,
         "width": 1200,
@@ -4888,7 +4888,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-svizzera-indipendenza-energetica-importazioni-2026': {
     title: 'Svizzera senza indipendenza energetica | Frontaliere Ticino',
-    description: 'Dal 27 aprile 2026 la Svizzera non è più autosufficiente energeticamente. Ecco cosa cambia per i frontalieri e il Canton Ticino. Dati aggiornati 2026 per',
+description: 'Dal 27 aprile 2026 la Svizzera non è più autosufficiente energeticamente. Ecco cosa cambia per i frontalieri e il Canton Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, senza, indipendenza, energetica, oggi',
     ogTitle: 'Svizzera senza indipendenza energetica | Frontaliere Ticino',
     ogDescription: 'Dal 27 aprile 2026 la Svizzera non è più autosufficiente energeticamente. Ecco cosa cambia per i frontalieri e il Canton Ticino.',
@@ -4897,7 +4897,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Svizzera senza indipendenza energetica | Frontaliere Ticino",
-      "description": "Dal 27 aprile 2026 la Svizzera non è più autosufficiente energeticamente. Ecco cosa cambia per i frontalieri e il Canton Ticino. Dati aggiornati 2026 per",
+"description": "Dal 27 aprile 2026 la Svizzera non è più autosufficiente energeticamente. Ecco cosa cambia per i frontalieri e il Canton Ticino.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/svizzera-indipendenza-energetica-importazioni-2026.webp`,
         "width": 1200,
@@ -4916,7 +4916,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-nuove-misure-violenza-domestica-svizzera': {
     title: 'Nuove misure contro la violenza | Frontaliere Ticino',
-    description: 'Scopri le nuove misure introdotte dal Dipartimento federale di giustizia e polizia per contrastare la violenza domestica in Svizzera. Dati aggiornati 2026 per',
+description: 'Scopri le nuove misure introdotte dal Dipartimento federale di giustizia e polizia per contrastare la violenza domestica in Svizzera.',
     keywords: 'frontalieri, ticino, svizzera, italia, nuove, misure, contro, violenza',
     ogTitle: 'Nuove misure contro violenza domestica in Svizzera',
     ogDescription: 'Scopri le nuove misure introdotte dal Dipartimento federale di giustizia e polizia per contrastare la violenza domestica in Svizzera.',
@@ -4925,7 +4925,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Nuove misure contro violenza domestica in Svizzera",
-      "description": "Scopri le nuove misure introdotte dal Dipartimento federale di giustizia e polizia per contrastare la violenza domestica in Svizzera. Dati aggiornati 2026 per",
+"description": "Scopri le nuove misure introdotte dal Dipartimento federale di giustizia e polizia per contrastare la violenza domestica in Svizzera.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/nuove-misure-violenza-domestica-svizzera.webp`,
         "width": 1200,
@@ -4972,7 +4972,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-nuove-leggi-violenza-domestica-2027': {
     title: 'Nuove leggi e strategia nazionale | Frontaliere Ticino',
-    description: 'Confederazione e Cantoni annunciano progressi ma servono strumenti più efficaci. Nuove leggi in arrivo per il 2027. Dati aggiornati 2026 per frontalieri in',
+description: 'Confederazione e Cantoni annunciano progressi ma servono strumenti più efficaci. Nuove leggi in arrivo per il 2027.',
     keywords: 'frontalieri, ticino, svizzera, italia, nuove, leggi, strategia, nazionale',
     ogTitle: 'Nuove leggi e strategia nazionale contro la violenza',
     ogDescription: 'Confederazione e Cantoni annunciano progressi ma servono strumenti più efficaci. Nuove leggi in arrivo per il 2027.',
@@ -4981,7 +4981,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Nuove leggi e strategia nazionale contro la violenza domestica",
-      "description": "Confederazione e Cantoni annunciano progressi ma servono strumenti più efficaci. Nuove leggi in arrivo per il 2027. Dati aggiornati 2026 per frontalieri in",
+"description": "Confederazione e Cantoni annunciano progressi ma servono strumenti più efficaci. Nuove leggi in arrivo per il 2027.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/nuove-leggi-violenza-domestica-2027.webp`,
         "width": 1200,
@@ -5028,7 +5028,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-prevenzione-violenza-domestica-san-gallo-2026': {
     title: 'Violenza domestica: a San Gallo la prevenzione passa',
-    description: 'Scopri come la polizia di San Gallo previene la violenza domestica attraverso colloqui preventivi con un tasso di successo del 90%. Dati aggiornati 2026 per',
+description: 'Scopri come la polizia di San Gallo previene la violenza domestica attraverso colloqui preventivi con un tasso di successo del 90%.',
     keywords: 'frontalieri, ticino, svizzera, italia, violenza, domestica, gallo, prevenzione',
     ogTitle: 'Violenza domestica: prevenzione a San Gallo | Frontaliere',
     ogDescription: 'Scopri come la polizia di San Gallo previene la violenza domestica attraverso colloqui preventivi con un tasso di successo del 90%.',
@@ -5037,7 +5037,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Violenza domestica: prevenzione a San Gallo",
-      "description": "Scopri come la polizia di San Gallo previene la violenza domestica attraverso colloqui preventivi con un tasso di successo del 90%. Dati aggiornati 2026 per",
+"description": "Scopri come la polizia di San Gallo previene la violenza domestica attraverso colloqui preventivi con un tasso di successo del 90%.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/prevenzione-violenza-domestica-san-gallo-2026.webp`,
         "width": 1200,
@@ -5112,7 +5112,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-svizzera-istruzioni-uso-2026': {
     title: 'Svizzera, istruzioni per l\'uso: le sfide del 2026',
-    description: 'Dall\'immigrazione alla casa, ecco i temi caldi che stanno cambiando il Paese e le implicazioni per i frontalieri. Dati aggiornati 2026 per frontalieri in',
+description: 'Dall\'immigrazione alla casa, ecco i temi caldi che stanno cambiando il Paese e le implicazioni per i frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, istruzioni, sfide, dall, immigrazione',
     ogTitle: 'Svizzera, istruzioni per l\'uso: le sfide del 2026',
     ogDescription: 'Dall\'immigrazione alla casa, ecco i temi caldi che stanno cambiando il Paese e le implicazioni per i frontalieri',
@@ -5121,7 +5121,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Svizzera, istruzioni per l'uso: le sfide del 2026",
-      "description": "Dall'immigrazione alla casa, ecco i temi caldi che stanno cambiando il Paese e le implicazioni per i frontalieri. Dati aggiornati 2026 per frontalieri in",
+"description": "Dall'immigrazione alla casa, ecco i temi caldi che stanno cambiando il Paese e le implicazioni per i frontalieri.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/svizzera-istruzioni-uso-2026.webp`,
         "width": 1200,
@@ -5168,16 +5168,16 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-nuovo-ccnl-edilizia-ticino-2026-2031': {
     title: 'Edilizia, firmato il nuovo CCL ticinese | Frontaliere Ticino',
-    description: 'Il nuovo contratto collettivo di lavoro per l\'edilizia e il genio civile in Ticino è stato firmato, valido dal 1° maggio 2026 al 2031. Scopri le novità e le',
+description: 'Il nuovo contratto collettivo di lavoro per l\'edilizia e il genio civile in Ticino è stato firmato, valido dal 1° maggio 2026 al 2031.',
     keywords: 'frontalieri, ticino, svizzera, italia, edilizia, firmato, nuovo, ticinese',
     ogTitle: 'Nuovo CCL edilizia Ticino 2026-2031 | Frontaliere Ticino',
-    ogDescription: 'Il nuovo contratto collettivo di lavoro per l\'edilizia e il genio civile in Ticino è stato firmato, valido dal 1° maggio 2026 al 2031. Scopri le novità e le',
+ogDescription: 'Il nuovo contratto collettivo di lavoro per l\'edilizia e il genio civile in Ticino è stato firmato, valido dal 1° maggio 2026 al 2031.',
     canonicalPath: '/articoli-frontaliere/nuovo-ccnl-edilizia-ticino-2026-2031/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Nuovo CCL edilizia Ticino 2026-2031 | Frontaliere Ticino",
-      "description": "Il nuovo contratto collettivo di lavoro per l'edilizia e il genio civile in Ticino è stato firmato, valido dal 1° maggio 2026 al 2031. Scopri le novità e le",
+"description": "Il nuovo contratto collettivo di lavoro per l'edilizia e il genio civile in Ticino è stato firmato, valido dal 1° maggio 2026 al 2031.",
       "image": {
         "@type": "ImageObject", "url": `${BASE_URL}/images/blog/nuovo-ccnl-edilizia-ticino-2026-2031.webp`,
         "width": 1200,
@@ -5196,7 +5196,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-morcote-eventi-2026-scalinata-caccia-tesoro': {
     title: 'Morcote apre la stagione eventi 2026 | Frontaliere Ticino',
-    description: 'Scopri gli eventi di Morcote 2026: la Morcote Scal il 2 maggio e la Caccia al Tesoro il 9 maggio. Iscrizioni aperte fino al 30 aprile. Dati aggiornati 2026 per',
+description: 'Scopri gli eventi di Morcote 2026: la Morcote Scal il 2 maggio e la Caccia al Tesoro il 9 maggio. Iscrizioni aperte fino al 30 aprile.',
     keywords: 'frontalieri, ticino, svizzera, italia, morcote, apre, stagione, eventi',
     ogTitle: 'Morcote 2026: Scalinata di Corsa e Caccia al Tesoro',
     ogDescription: 'Scopri gli eventi di Morcote 2026: la Morcote Scal il 2 maggio e la Caccia al Tesoro il 9 maggio. Iscrizioni aperte fino al 30 aprile.',
@@ -5205,7 +5205,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "{\"@context\":\"https://schema.org\",\"@type\":\"NewsArticle\",\"headline\":\"Morcote 2026: Scalinata di Corsa",
-      "description": "Scopri gli eventi di Morcote 2026: la Morcote Scal il 2 maggio e la Caccia al Tesoro il 9 maggio. Iscrizioni aperte fino al 30 aprile. Dati aggiornati 2026 per",
+"description": "Scopri gli eventi di Morcote 2026: la Morcote Scal il 2 maggio e la Caccia al Tesoro il 9 maggio. Iscrizioni aperte fino al 30 aprile.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/morcote-eventi-2026-scalinata-caccia-tesoro.webp`,
         "width": 1200,
@@ -5252,7 +5252,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-oftalmologi-svizzeri-messico-vista': {
     title: 'Oftalmologi ticinesi in Messico | Frontaliere Ticino',
-    description: 'Un\'équipe di medici svizzeri, in gran parte ticinesi, opera gratuitamente pazienti nel Quintana Roo, Messico, per curare la cataratta. Dati aggiornati 2026 per',
+description: 'Un\'équipe di medici svizzeri, in gran parte ticinesi, opera gratuitamente pazienti nel Quintana Roo, Messico, per curare la cataratta.',
     keywords: 'frontalieri, ticino, svizzera, italia, oftalmologi, ticinesi, messico, operazioni',
     ogTitle: 'Oftalmologi ticinesi in Messico: operazioni gratuite',
     ogDescription: 'Un\'équipe di medici svizzeri, in gran parte ticinesi, opera gratuitamente pazienti nel Quintana Roo, Messico, per curare la cataratta.',
@@ -5261,7 +5261,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Oftalmologi ticinesi in Messico: operazioni gratuite per restituire la vista",
-      "description": "Un'équipe di medici svizzeri, in gran parte ticinesi, opera gratuitamente pazienti nel Quintana Roo, Messico, per curare la cataratta. Dati aggiornati 2026 per",
+"description": "Un'équipe di medici svizzeri, in gran parte ticinesi, opera gratuitamente pazienti nel Quintana Roo, Messico, per curare la cataratta.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/oftalmologi-svizzeri-messico-vista.webp`,
         "width": 1200,
@@ -5280,7 +5280,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-rumore-traffico-svizzera-frontalieri': {
     title: 'Rumore traffico Svizzera: 2.000 morti | Frontaliere Ticino',
-    description: 'Il rumore del traffico stradale causa fino a 2.000 decessi prematuri l\'anno in Svizzera, con 850.000 persone esposte a rumori nocivi. Dati aggiornati 2026 per',
+description: 'Il rumore del traffico stradale causa fino a 2.000 decessi prematuri l\'anno in Svizzera, con 850.000 persone esposte a rumori nocivi.',
     keywords: 'frontalieri, ticino, svizzera, italia, rumore, traffico, morti, anno',
     ogTitle: 'Rumore traffico Svizzera: 2.000 morti l\'anno | Frontaliere',
     ogDescription: 'Il rumore del traffico stradale causa fino a 2.000 decessi prematuri l\'anno in Svizzera, con 850.000 persone esposte a rumori nocivi',
@@ -5289,7 +5289,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Rumore traffico Svizzera: 2.000 morti l'anno | Frontaliere Ticino",
-      "description": "Il rumore del traffico stradale causa fino a 2.000 decessi prematuri l'anno in Svizzera, con 850.000 persone esposte a rumori nocivi. Dati aggiornati 2026 per",
+"description": "Il rumore del traffico stradale causa fino a 2.000 decessi prematuri l'anno in Svizzera, con 850.000 persone esposte a rumori nocivi.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/rumore-traffico-svizzera-frontalieri.webp`,
         "width": 1200,
@@ -5308,7 +5308,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-bandiera-svizzera-scarpe-on-controversia': {
     title: 'Controversia sull\'uso della bandiera | Frontaliere Ticino',
-    description: 'Scopri le polemiche sull\'uso della bandiera svizzera sulle scarpe On prodotte all\'estero e le implicazioni per il mercato elvetico. Dati aggiornati 2026 per',
+description: 'Scopri le polemiche sull\'uso della bandiera svizzera sulle scarpe On prodotte all\'estero e le implicazioni per il mercato elvetico.',
     keywords: 'frontalieri, ticino, svizzera, italia, controversia, sull, bandiera, sulle',
     ogTitle: 'Controversia bandiera svizzera su scarpe On | Frontaliere',
     ogDescription: 'Scopri le polemiche sull\'uso della bandiera svizzera sulle scarpe On prodotte all\'estero e le implicazioni per il mercato elvetico.',
@@ -5317,7 +5317,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Controversia sull'uso della bandiera svizzera sulle scarpe On",
-      "description": "Scopri le polemiche sull'uso della bandiera svizzera sulle scarpe On prodotte all'estero e le implicazioni per il mercato elvetico. Dati aggiornati 2026 per",
+"description": "Scopri le polemiche sull'uso della bandiera svizzera sulle scarpe On prodotte all'estero e le implicazioni per il mercato elvetico.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/bandiera-svizzera-scarpe-on-controversia.webp`,
         "width": 1200,
@@ -5392,7 +5392,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-deepfake-legge-svizzera-2026': {
     title: 'Deepfake pornografici: cosa dice la legge svizzera',
-    description: 'Scopri cosa dice la legge svizzera sui deepfake pornografici e cosa fare se sei vittima di questi contenuti illegali. Dati aggiornati 2026 per frontalieri in',
+description: 'Scopri cosa dice la legge svizzera sui deepfake pornografici e cosa fare se sei vittima di questi contenuti illegali.',
     keywords: 'frontalieri, ticino, svizzera, italia, deepfake, pornografici, cosa, dice',
     ogTitle: 'Deepfake pornografici: cosa dice la legge svizzera',
     ogDescription: 'Scopri cosa dice la legge svizzera sui deepfake pornografici e cosa fare se sei vittima di questi contenuti illegali.',
@@ -5401,7 +5401,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Deepfake pornografici: cosa dice la legge svizzera",
-      "description": "Scopri cosa dice la legge svizzera sui deepfake pornografici e cosa fare se sei vittima di questi contenuti illegali. Dati aggiornati 2026 per frontalieri in",
+"description": "Scopri cosa dice la legge svizzera sui deepfake pornografici e cosa fare se sei vittima di questi contenuti illegali.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/deepfake-legge-svizzera-2026.webp`,
         "width": 1200,
@@ -5504,7 +5504,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-maxi-spiegamento-fiamme-gialle-comasco-2026': {
     title: 'Maxi spiegamento delle Fiamme Gialle | Frontaliere Ticino',
-    description: 'Controlli intensi nel Comasco: scoperti lavoratori in nero e sequestrati stupefacenti. Ecco i dettagli dell\'operazione. Dati aggiornati 2026 per frontalieri in',
+description: 'Controlli intensi nel Comasco: scoperti lavoratori in nero e sequestrati stupefacenti. Ecco i dettagli dell\'operazione.',
     keywords: 'frontalieri, ticino, svizzera, italia, maxi, spiegamento, fiamme, gialle',
     ogTitle: 'Maxi spiegamento Fiamme Gialle Comasco | Frontaliere Ticino',
     ogDescription: 'Controlli intensi nel Comasco: scoperti lavoratori in nero e sequestrati stupefacenti. Ecco i dettagli dell\'operazione.',
@@ -5513,7 +5513,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Maxi spiegamento delle Fiamme Gialle nel Comasco: 36 pattuglie e 77 militari",
-      "description": "Controlli intensi nel Comasco: scoperti lavoratori in nero e sequestrati stupefacenti. Ecco i dettagli dell'operazione. Dati aggiornati 2026 per frontalieri in",
+"description": "Controlli intensi nel Comasco: scoperti lavoratori in nero e sequestrati stupefacenti. Ecco i dettagli dell'operazione.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/maxi-spiegamento-fiamme-gialle-comasco-2026.webp`,
         "width": 1200,
@@ -5532,16 +5532,16 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-riforma-medici-famiglia-sumai-organizzazione': {
     title: 'Riforma medici famiglia: Sumai, il nodo | Frontaliere Ticino',
-    description: 'Antonio Magi, segretario generale del Sumai-Assoprof, contesta l\'idea di dipendenza dei medici di base, evidenziando problemi organizzativi e carenza di',
+description: 'Secondo Magi, il problema principale non è il contratto, ma l\'organizzazione e la carenza di professionisti.',
     keywords: 'frontalieri, ticino, svizzera, italia, riforma, medici, famiglia, sumai',
     ogTitle: 'Riforma medici famiglia: Sumai, il nodo è organizzazione',
-    ogDescription: 'Antonio Magi, segretario generale del Sumai-Assoprof, contesta l\'idea di dipendenza dei medici di base, evidenziando problemi organizzativi e carenza di',
+ogDescription: 'Antonio Magi, segretario generale del Sumai-Assoprof, il sindacato dei medici specialisti ambulatoriali, ha contestato l\'idea che la riforma dei medici di medicina generale debba puntare sulla dipendenza.',
     canonicalPath: '/articoli-frontaliere/riforma-medici-famiglia-sumai-organizzazione/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Riforma medici famiglia: Sumai, il nodo è organizzazione e carenza professionisti",
-      "description": "Antonio Magi, segretario generale del Sumai-Assoprof, contesta l'idea di dipendenza dei medici di base, evidenziando problemi organizzativi e carenza di",
+"description": "Secondo Magi, il problema principale non è il contratto, ma l'organizzazione e la carenza di professionisti.",
       "image": {
         "@type": "ImageObject", "url": `${BASE_URL}/images/blog/riforma-medici-famiglia-sumai-organizzazione.webp`,
         "width": 1200,
@@ -5560,7 +5560,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-lavoratori-pensionati-ticino-2026-2046': {
     title: 'Lavoratori in età pensionabile in Ticino: +220% in 20 anni',
-    description: 'Nel 2025, 220.000 persone in Svizzera lavoravano oltre l\'età pensionabile. Ecco cosa cambia per i frontalieri del Canton Ticino. Dati aggiornati 2026 per',
+description: 'Nel 2025, 220.000 persone in Svizzera lavoravano oltre l\'età pensionabile. Ecco cosa cambia per i frontalieri del Canton Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, lavoratori, pensionabile, anni, 2025',
     ogTitle: 'Lavoratori in età pensionabile in Ticino: +220% in 20 anni',
     ogDescription: 'Nel 2025, 220.000 persone in Svizzera lavoravano oltre l\'età pensionabile. Ecco cosa cambia per i frontalieri del Canton Ticino.',
@@ -5569,7 +5569,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Lavoratori in età pensionabile in Ticino: +220% in 20 anni",
-      "description": "Nel 2025, 220.000 persone in Svizzera lavoravano oltre l'età pensionabile. Ecco cosa cambia per i frontalieri del Canton Ticino. Dati aggiornati 2026 per",
+"description": "Nel 2025, 220.000 persone in Svizzera lavoravano oltre l'età pensionabile. Ecco cosa cambia per i frontalieri del Canton Ticino.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/lavoratori-pensionati-ticino-2026-2046.webp`,
         "width": 1200,
@@ -5588,16 +5588,16 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-universita-varese-intelligenza-artificiale-2026': {
     title: 'Intelligenza artificiale all\'Università | Frontaliere Ticino',
-    description: 'L\'Università dell\'Insubria organizza un evento sull\'intelligenza artificiale il 6 maggio 2026 a Varese, con interventi di esperti e nuove linee guida per',
+description: 'A chiudere l\'incontro sarà nuovamente Davide Tosi, che presenterà ufficialmente le nuove linee guida di Ateneo sull’intelligenza artificiale.',
     keywords: 'frontalieri, ticino, svizzera, italia, intelligenza, artificiale, università, varese',
     ogTitle: 'Intelligenza artificiale all\'Università di Varese',
-    ogDescription: 'L\'Università dell\'Insubria organizza un evento sull\'intelligenza artificiale il 6 maggio 2026 a Varese, con interventi di esperti e nuove linee guida per',
+ogDescription: 'L\'Università dell\'Insubria ha annunciato un evento dedicato all\'intelligenza artificiale, che si terrà il 6 maggio 2026 presso l\'Aula Magna di via Ravasi a Varese.',
     canonicalPath: '/articoli-frontaliere/universita-varese-intelligenza-artificiale-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Intelligenza artificiale all'Università di Varese: una mattinata di studi e confronti",
-      "description": "L'Università dell'Insubria organizza un evento sull'intelligenza artificiale il 6 maggio 2026 a Varese, con interventi di esperti e nuove linee guida per",
+"description": "A chiudere l'incontro sarà nuovamente Davide Tosi, che presenterà ufficialmente le nuove linee guida di Ateneo sull’intelligenza artificiale.",
       "image": {
         "@type": "ImageObject", "url": `${BASE_URL}/images/blog/universita-varese-intelligenza-artificiale-2026.webp`,
         "width": 1200,
@@ -5644,7 +5644,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-frontalieri-mozione-sirica-ticino-2024': {
     title: 'Frontalieri: mozione contro | Frontaliere Ticino',
-    description: 'Fabrizio Sirica presenta mozione per contrastare il dumping salariale e favorire l\'occupazione dei residenti nel Canton Ticino. Dati aggiornati 2026 per',
+description: 'Fabrizio Sirica presenta mozione per contrastare il dumping salariale e favorire l\'occupazione dei residenti nel Canton Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, mozione, contro, discriminazione, lavorativa',
     ogTitle: 'Frontalieri: mozione contro discriminazione lavorativa',
     ogDescription: 'Fabrizio Sirica presenta mozione per contrastare il dumping salariale e favorire l\'occupazione dei residenti nel Canton Ticino.',
@@ -5653,7 +5653,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "{\"@context\":\"https://schema.org\",\"@type\":\"NewsArticle\",\"headline\":\"Frontalieri: mozione contro",
-      "description": "Fabrizio Sirica presenta mozione per contrastare il dumping salariale e favorire l'occupazione dei residenti nel Canton Ticino. Dati aggiornati 2026 per",
+"description": "Fabrizio Sirica presenta mozione per contrastare il dumping salariale e favorire l'occupazione dei residenti nel Canton Ticino.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/frontalieri-mozione-sirica-ticino-2024.webp`,
         "width": 1200,
@@ -5700,7 +5700,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-solaro-rifiuti-differenziata-tariffazione-puntuale': {
     title: 'Solaro: due incontri pubblici su rifiuti e tariffazione',
-    description: 'Il Comune di Solaro organizza due serate informative su raccolta differenziata e tariffazione puntuale per chiarire dubbi ai cittadini. Dati aggiornati 2026 per',
+description: 'Il Comune di Solaro organizza due serate informative su raccolta differenziata e tariffazione puntuale per chiarire dubbi ai cittadini.',
     keywords: 'frontalieri, ticino, svizzera, italia, solaro, incontri, pubblici, rifiuti',
     ogTitle: 'Solaro: incontri su rifiuti e tariffazione puntuale',
     ogDescription: 'Il Comune di Solaro organizza due serate informative su raccolta differenziata e tariffazione puntuale per chiarire dubbi ai cittadini.',
@@ -5709,7 +5709,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Solaro: incontri su rifiuti e tariffazione puntuale | Frontaliere Ticino",
-      "description": "Il Comune di Solaro organizza due serate informative su raccolta differenziata e tariffazione puntuale per chiarire dubbi ai cittadini. Dati aggiornati 2026 per",
+"description": "Il Comune di Solaro organizza due serate informative su raccolta differenziata e tariffazione puntuale per chiarire dubbi ai cittadini.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/solaro-rifiuti-differenziata-tariffazione-puntuale.webp`,
         "width": 1200,
@@ -5840,7 +5840,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-ticino-tedeschi-turismo-2026': {
     title: 'Ticino sempre più amato dai tedeschi | Frontaliere Ticino',
-    description: 'Scopri come il Ticino attira i turisti tedeschi con oltre 450.000 pernottamenti nel 2025 e una crescita dell\'8,2% rispetto al 2024. Dati aggiornati 2026 per',
+description: 'Scopri come il Ticino attira i turisti tedeschi con oltre 450.000 pernottamenti nel 2025 e una crescita dell\'8,2% rispetto al 2024.',
     keywords: 'frontalieri, ticino, svizzera, italia, sempre, amato, tedeschi, record',
     ogTitle: 'Ticino sempre più amato dai tedeschi | Frontaliere Ticino',
     ogDescription: 'Scopri come il Ticino attira i turisti tedeschi con oltre 450.000 pernottamenti nel 2025 e una crescita dell\'8,2% rispetto al 2024.',
@@ -5849,7 +5849,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Ticino sempre più amato dai tedeschi: record di turisti nel 2025",
-      "description": "Scopri come il Ticino attira i turisti tedeschi con oltre 450.000 pernottamenti nel 2025 e una crescita dell'8,2% rispetto al 2024. Dati aggiornati 2026 per",
+"description": "Scopri come il Ticino attira i turisti tedeschi con oltre 450.000 pernottamenti nel 2025 e una crescita dell'8,2% rispetto al 2024.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/ticino-tedeschi-turismo-2026.webp`,
         "width": 1200,
@@ -5868,7 +5868,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-universita-ticino-tagli-contributi-2026': {
     title: 'Tagli ai contributi e numero chiuso | Frontaliere Ticino',
-    description: 'L\'USI taglia i posti per studenti esteri e raddoppia le rette. Dal 2027 tagli federali alle università. Cosa cambia per i frontalieri. Dati aggiornati 2026 per',
+description: 'L\'USI taglia i posti per studenti esteri e raddoppia le rette. Dal 2027 tagli federali alle università. Cosa cambia per i frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, tagli, contributi, numero, chiuso',
     ogTitle: 'Tagli USI 2026: rette raddoppiate e numero chiuso',
     ogDescription: 'L\'USI taglia i posti per studenti esteri e raddoppia le rette. Dal 2027 tagli federali alle università. Cosa cambia per i frontalieri.',
@@ -5877,7 +5877,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "{\"@context\":\"https://schema.org\",\"@type\":\"NewsArticle\",\"headline\":\"Tagli USI 2026: rette raddoppiate",
-      "description": "L'USI taglia i posti per studenti esteri e raddoppia le rette. Dal 2027 tagli federali alle università. Cosa cambia per i frontalieri. Dati aggiornati 2026 per",
+"description": "L'USI taglia i posti per studenti esteri e raddoppia le rette. Dal 2027 tagli federali alle università. Cosa cambia per i frontalieri.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/universita-ticino-tagli-contributi-2026.webp`,
         "width": 1200,
@@ -5952,16 +5952,16 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-furto-biciclette-giubiasco-2026': {
     title: 'Furto di biciclette a Giubiasco | Frontaliere Ticino',
-    description: 'Tre biciclette elettriche rubate a Giubiasco, due arrestati per mancato pagamento del carburante. Scopri i dettagli dell\'operazione e le implicazioni per i',
+description: 'Tre biciclette elettriche rubate a Giubiasco, due arrestati per mancato pagamento del carburante.',
     keywords: 'frontalieri, ticino, svizzera, italia, furto, biciclette, giubiasco, arrestati',
     ogTitle: 'Furto biciclette Giubiasco: arrestati per mancato pagamento',
-    ogDescription: 'Tre biciclette elettriche rubate a Giubiasco, due arrestati per mancato pagamento del carburante. Scopri i dettagli dell\'operazione e le implicazioni per i',
+ogDescription: 'Tre biciclette elettriche rubate a Giubiasco, due arrestati per mancato pagamento del carburante.',
     canonicalPath: '/articoli-frontaliere/furto-biciclette-giubiasco-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Furto di biciclette a Giubiasco: arrestati per mancato pagamento della benzina",
-      "description": "Tre biciclette elettriche rubate a Giubiasco, due arrestati per mancato pagamento del carburante. Scopri i dettagli dell'operazione e le implicazioni per i",
+"description": "Tre biciclette elettriche rubate a Giubiasco, due arrestati per mancato pagamento del carburante.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/furto-biciclette-giubiasco-2026.webp`,
         "width": 1200,
@@ -6148,7 +6148,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-nuovi-esperti-gestione-energia-varese': {
     title: 'Nuovi Esperti in Gestione dell’Energia | Frontaliere Ticino',
-    description: 'Scopri i nuovi Esperti in Gestione dell’Energia certificati a Varese e le opportunità per i frontalieri nel settore energetico. Dati aggiornati 2026 per',
+description: 'Scopri i nuovi Esperti in Gestione dell’Energia certificati a Varese e le opportunità per i frontalieri nel settore energetico.',
     keywords: 'frontalieri, ticino, svizzera, italia, nuovi, esperti, gestione, dell',
     ogTitle: 'Nuovi EGE a Varese | Frontaliere Ticino',
     ogDescription: 'Scopri i nuovi Esperti in Gestione dell’Energia certificati a Varese e le opportunità per i frontalieri nel settore energetico.',
@@ -6157,7 +6157,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Nuovi Esperti in Gestione dell’Energia a Varese: Eccellenza e Competenze",
-      "description": "Scopri i nuovi Esperti in Gestione dell’Energia certificati a Varese e le opportunità per i frontalieri nel settore energetico. Dati aggiornati 2026 per",
+"description": "Scopri i nuovi Esperti in Gestione dell’Energia certificati a Varese e le opportunità per i frontalieri nel settore energetico.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/nuovi-esperti-gestione-energia-varese.webp`,
         "width": 1200,
@@ -6232,7 +6232,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-benessere-integrita-allievi-bellinzona-2026': {
     title: 'Beneessere e integrità degli allievi | Frontaliere Ticino',
-    description: 'Scopri i nuovi programmi educativi per il benessere e l’integrità degli allievi a Bellinzona, in collaborazione con la Fondazione ASPI. Dati aggiornati 2026 per',
+description: 'Scopri i nuovi programmi educativi per il benessere e l’integrità degli allievi a Bellinzona, in collaborazione con la Fondazione ASPI.',
     keywords: 'frontalieri, ticino, svizzera, italia, beneessere, integrità, allievi, nuovi',
     ogTitle: 'Nuovi programmi educativi a Bellinzona | Frontaliere Ticino',
     ogDescription: 'Scopri i nuovi programmi educativi per il benessere e l’integrità degli allievi a Bellinzona, in collaborazione con la Fondazione ASPI.',
@@ -6241,7 +6241,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Nuovi programmi educativi a Bellinzona per il benessere e l’integrità degli allievi",
-      "description": "Scopri i nuovi programmi educativi per il benessere e l’integrità degli allievi a Bellinzona, in collaborazione con la Fondazione ASPI. Dati aggiornati 2026 per",
+"description": "Scopri i nuovi programmi educativi per il benessere e l’integrità degli allievi a Bellinzona, in collaborazione con la Fondazione ASPI.",
       "image": {
         "@type": "ImageObject", "url": `${BASE_URL}/images/blog/benessere-integrita-allievi-bellinzona-2026.webp`,
         "width": 1200,
@@ -6316,7 +6316,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-verdi-ticino-cantonali-2026': {
     title: 'Verdi Ticino: strategia per le cantonali 2026 | Frontaliere Ticino',
-    description: 'I Verdi del Ticino esplorano alleanze per le elezioni cantonali del 2026, puntando a un fronte progressista più ampio con MPS e PS. Dati aggiornati 2026 per',
+description: 'I Verdi del Ticino esplorano alleanze per le elezioni cantonali del 2026, puntando a un fronte progressista più ampio con MPS e PS.',
     keywords: 'frontalieri, ticino, svizzera, italia, verdi, strategia, cantonali, esplorano',
     ogTitle: 'Verdi Ticino: strategia per le cantonali 2026 | Frontaliere',
     ogDescription: 'I Verdi del Ticino esplorano alleanze per le elezioni cantonali del 2026, puntando a un fronte progressista più ampio con MPS e PS.',
@@ -6325,7 +6325,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Verdi Ticino: strategia per le cantonali 2026",
-      "description": "I Verdi del Ticino esplorano alleanze per le elezioni cantonali del 2026, puntando a un fronte progressista più ampio con MPS e PS. Dati aggiornati 2026 per",
+"description": "I Verdi del Ticino esplorano alleanze per le elezioni cantonali del 2026, puntando a un fronte progressista più ampio con MPS e PS.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/verdi-ticino-cantonali-2026.webp`,
         "width": 1200,
@@ -6372,7 +6372,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-sportello-me-te-cunardo-marchirolo-2026': {
     title: 'Sportello e incontri gratuiti a Cunardo | Frontaliere Ticino',
-    description: 'Incontri gratuiti per genitori a Cunardo e Marchirolo con il progetto ME-TE. Scopri come partecipare e le date degli eventi. Dati aggiornati 2026 per',
+description: 'Incontri gratuiti per genitori a Cunardo e Marchirolo con il progetto ME-TE. Scopri come partecipare e le date degli eventi.',
     keywords: 'frontalieri, ticino, svizzera, italia, sportello, incontri, gratuiti, cunardo',
     ogTitle: 'Sportello ME-TE a Cunardo e Marchirolo | Frontaliere Ticino',
     ogDescription: 'Incontri gratuiti per genitori a Cunardo e Marchirolo con il progetto ME-TE. Scopri come partecipare e le date degli eventi.',
@@ -6381,7 +6381,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Sportello e incontri gratuiti a Cunardo e Marchirolo con il progetto ME-TE",
-      "description": "Incontri gratuiti per genitori a Cunardo e Marchirolo con il progetto ME-TE. Scopri come partecipare e le date degli eventi. Dati aggiornati 2026 per",
+"description": "Incontri gratuiti per genitori a Cunardo e Marchirolo con il progetto ME-TE. Scopri come partecipare e le date degli eventi.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/sportello-me-te-cunardo-marchirolo-2026.webp`,
         "width": 1200,
@@ -6428,7 +6428,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-equans-rivera-19-licenziamenti': {
     title: 'Equans Rivera taglia 19 posti di lavoro, rifiuta piano',
-    description: 'La multinazionale Equans di Rivera licenzia 19 dipendenti senza accordo sociale. Jelmini: \'Dispiace per la mancanza di riguardo\'. Dati aggiornati 2026 per',
+description: 'La multinazionale Equans di Rivera licenzia 19 dipendenti senza accordo sociale. Jelmini: \'Dispiace per la mancanza di riguardo\'.',
     keywords: 'frontalieri, ticino, svizzera, italia, equans, rivera, taglia, posti',
     ogTitle: 'Equans Rivera taglia 19 posti di lavoro, rifiuta piano',
     ogDescription: 'La multinazionale Equans di Rivera licenzia 19 dipendenti senza accordo sociale. Jelmini: \'Dispiace per la mancanza di riguardo\'',
@@ -6437,7 +6437,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Equans Rivera taglia 19 posti di lavoro, rifiuta piano sociale",
-      "description": "La multinazionale Equans di Rivera licenzia 19 dipendenti senza accordo sociale. Jelmini: 'Dispiace per la mancanza di riguardo'. Dati aggiornati 2026 per",
+"description": "La multinazionale Equans di Rivera licenzia 19 dipendenti senza accordo sociale. Jelmini: 'Dispiace per la mancanza di riguardo'.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/equans-rivera-19-licenziamenti.webp`,
         "width": 1200,
@@ -6540,7 +6540,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-aprile-secco-siccita-ticino-2026': {
     title: 'Aprile secco: allarme siccità in Ticino | Frontaliere Ticino',
-    description: 'MeteoSvizzera lancia l\'allarme: aprile 2026 è il più secco dalla rilevazione, con gravi carenze di pioggia in Ticino e altre regioni. Dati aggiornati 2026 per',
+description: 'MeteoSvizzera lancia l\'allarme: aprile 2026 è il più secco dalla rilevazione, con gravi carenze di pioggia in Ticino e altre regioni.',
     keywords: 'frontalieri, ticino, svizzera, italia, aprile, secco, allarme, siccità',
     ogTitle: 'Aprile secco: allarme siccità in Ticino e Svizzera',
     ogDescription: 'MeteoSvizzera lancia l\'allarme: aprile 2026 è il più secco dalla rilevazione, con gravi carenze di pioggia in Ticino e altre regioni.',
@@ -6549,7 +6549,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Aprile secco: allarme siccità in Ticino e Svizzera",
-      "description": "MeteoSvizzera lancia l'allarme: aprile 2026 è il più secco dalla rilevazione, con gravi carenze di pioggia in Ticino e altre regioni. Dati aggiornati 2026 per",
+"description": "MeteoSvizzera lancia l'allarme: aprile 2026 è il più secco dalla rilevazione, con gravi carenze di pioggia in Ticino e altre regioni.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/aprile-secco-siccita-ticino-2026.webp`,
         "width": 1200,
@@ -6624,16 +6624,16 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-allerta-gialla-temporali-varese-2026': {
     title: 'Allerta gialla per temporali su tutta | Frontaliere Ticino',
-    description: 'La Protezione Civile della Regione Lombardia ha emesso un\'allerta meteo gialla per temporali su tutta la provincia di Varese. Scopri cosa fare e come',
+description: 'La Protezione Civile della Regione Lombardia ha emesso un\'allerta meteo gialla per temporali su tutta la provincia di Varese.',
     keywords: 'frontalieri, ticino, svizzera, italia, allerta, gialla, temporali, tutta',
     ogTitle: 'Allerta gialla per temporali su Varese | Frontaliere Ticino',
-    ogDescription: 'La Protezione Civile della Regione Lombardia ha emesso un\'allerta meteo gialla per temporali su tutta la provincia di Varese. Scopri cosa fare e come',
+ogDescription: 'La Protezione Civile della Regione Lombardia ha emesso un\'allerta meteo gialla per temporali su tutta la provincia di Varese.',
     canonicalPath: '/articoli-frontaliere/allerta-gialla-temporali-varese-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Allerta gialla per temporali su tutta la provincia di Varese",
-      "description": "La Protezione Civile della Regione Lombardia ha emesso un'allerta meteo gialla per temporali su tutta la provincia di Varese. Scopri cosa fare e come",
+"description": "La Protezione Civile della Regione Lombardia ha emesso un'allerta meteo gialla per temporali su tutta la provincia di Varese.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/allerta-gialla-temporali-varese-2026.webp`,
         "width": 1200,
@@ -6680,16 +6680,16 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-modello-zurigo-violenza-domestica': {
     title: 'Violenza domestica: convince il modello | Frontaliere Ticino',
-    description: 'Il progetto pilota di sorveglianza elettronica in tempo reale per contrastare la violenza domestica ha dato risultati positivi. L\'obiettivo è estenderlo a',
+description: 'Il progetto pilota di sorveglianza elettronica in tempo reale per contrastare la violenza domestica ha dato risultati positivi.',
     keywords: 'frontalieri, ticino, svizzera, italia, violenza, domestica, convince, modello',
     ogTitle: 'Violenza domestica: convince il modello Zurigo',
-    ogDescription: 'Il progetto pilota di sorveglianza elettronica in tempo reale per contrastare la violenza domestica ha dato risultati positivi. L\'obiettivo è estenderlo a',
+ogDescription: 'Il progetto pilota di sorveglianza elettronica in tempo reale per contrastare la violenza domestica ha dato risultati positivi.',
     canonicalPath: '/articoli-frontaliere/modello-zurigo-violenza-domestica/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Violenza domestica: convince il modello Zurigo",
-      "description": "Il progetto pilota di sorveglianza elettronica in tempo reale per contrastare la violenza domestica ha dato risultati positivi. L'obiettivo è estenderlo a",
+"description": "Il progetto pilota di sorveglianza elettronica in tempo reale per contrastare la violenza domestica ha dato risultati positivi.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/modello-zurigo-violenza-domestica.webp`,
         "width": 1200,
@@ -6708,7 +6708,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-sepolti-con-animali-domestici-berna-2026': {
     title: 'Berna approva sepoltura con animali | Frontaliere Ticino',
-    description: 'Dal 2026 a Berna sarà possibile essere sepolti con il proprio animale domestico in aree dedicate. Ecco cosa cambia e come funziona. Dati aggiornati 2026 per',
+description: 'Dal 2026 a Berna sarà possibile essere sepolti con il proprio animale domestico in aree dedicate. Ecco cosa cambia e come funziona.',
     keywords: 'frontalieri, ticino, svizzera, italia, berna, approva, sepoltura, animali',
     ogTitle: 'Berna approva sepoltura con animali domestici | Frontaliere',
     ogDescription: 'Dal 2026 a Berna sarà possibile essere sepolti con il proprio animale domestico in aree dedicate. Ecco cosa cambia e come funziona',
@@ -6717,7 +6717,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Berna approva sepoltura con animali domestici: nuove regole 2026",
-      "description": "Dal 2026 a Berna sarà possibile essere sepolti con il proprio animale domestico in aree dedicate. Ecco cosa cambia e come funziona. Dati aggiornati 2026 per",
+"description": "Dal 2026 a Berna sarà possibile essere sepolti con il proprio animale domestico in aree dedicate. Ecco cosa cambia e come funziona.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/sepolti-con-animali-domestici-berna-2026.webp`,
         "width": 1200,
@@ -6764,7 +6764,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-banca-ditalia-varese-10-anni-dopo': {
     title: 'Banca d\'Italia a Varese: 10 anni dopo | Frontaliere Ticino',
-    description: 'L\'ex sede della Banca d\'Italia a Varese è in vendita dal 2018 ma non trova acquirenti. Scopri perché e cosa fare per acquistarla. Dati aggiornati 2026 per',
+description: 'L\'ex sede della Banca d\'Italia a Varese è in vendita dal 2018 ma non trova acquirenti. Scopri perché e cosa fare per acquistarla.',
     keywords: 'frontalieri, ticino, svizzera, italia, banca, varese, anni, dopo',
     ogTitle: 'Banca d\'Italia Varese: 10 anni dopo | Frontaliere Ticino',
     ogDescription: 'L\'ex sede della Banca d\'Italia a Varese è in vendita dal 2018 ma non trova acquirenti. Scopri perché e cosa fare per acquistarla.',
@@ -6773,7 +6773,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Banca d'Italia Varese: 10 anni dopo | Frontaliere Ticino",
-      "description": "L'ex sede della Banca d'Italia a Varese è in vendita dal 2018 ma non trova acquirenti. Scopri perché e cosa fare per acquistarla. Dati aggiornati 2026 per",
+"description": "L'ex sede della Banca d'Italia a Varese è in vendita dal 2018 ma non trova acquirenti. Scopri perché e cosa fare per acquistarla.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/banca-ditalia-varese-10-anni-dopo.webp`,
         "width": 1200,
@@ -6904,7 +6904,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-gamberetti-torneo-madrid-2026': {
     title: 'Gamberetti avariati al torneo di Madrid: intossicazioni',
-    description: 'Intossicazioni alimentari colpiscono i giocatori al Masters 1000 di Madrid, con Jim Courier che accusa i gamberetti serviti alla mensa. Dati aggiornati 2026 per',
+description: 'Intossicazioni alimentari colpiscono i giocatori al Masters 1000 di Madrid, con Jim Courier che accusa i gamberetti serviti alla mensa.',
     keywords: 'frontalieri, ticino, svizzera, italia, gamberetti, avariati, torneo, madrid',
     ogTitle: 'Gamberetti avariati al torneo di Madrid: intossicazioni e ritiri',
     ogDescription: 'Intossicazioni alimentari colpiscono i giocatori al Masters 1000 di Madrid, con Jim Courier che accusa i gamberetti serviti alla mensa',
@@ -6913,7 +6913,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Gamberetti avariati al torneo di Madrid: intossicazioni e ritiri",
-      "description": "Intossicazioni alimentari colpiscono i giocatori al Masters 1000 di Madrid, con Jim Courier che accusa i gamberetti serviti alla mensa. Dati aggiornati 2026 per",
+"description": "Intossicazioni alimentari colpiscono i giocatori al Masters 1000 di Madrid, con Jim Courier che accusa i gamberetti serviti alla mensa.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/gamberetti-torneo-madrid-2026.webp`,
         "width": 1200,
@@ -6960,7 +6960,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-scoperta-africa-materia-castronno-2026': {
     title: 'Alla scoperta dell’Africa a Materia | Frontaliere Ticino',
-    description: 'Martedì 28 aprile 2026 a Castronno, un incontro con Martino Ghielmi e Alfie Nze per esplorare un nuovo rapporto culturale con l\'Africa. Dati aggiornati 2026 per',
+description: 'Martedì 28 aprile 2026 a Castronno, un incontro con Martino Ghielmi e Alfie Nze per esplorare un nuovo rapporto culturale con l\'Africa.',
     keywords: 'frontalieri, ticino, svizzera, italia, alla, scoperta, dell, africa',
     ogTitle: 'Alla scoperta dell’Africa a Materia: dialogo su opportunità',
     ogDescription: 'Martedì 28 aprile 2026 a Castronno, un incontro con Martino Ghielmi e Alfie Nze per esplorare un nuovo rapporto culturale con l\'Africa.',
@@ -6969,7 +6969,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Alla scoperta dell’Africa a Materia: dialogo su opportunità e nuove narrazioni",
-      "description": "Martedì 28 aprile 2026 a Castronno, un incontro con Martino Ghielmi e Alfie Nze per esplorare un nuovo rapporto culturale con l'Africa. Dati aggiornati 2026 per",
+"description": "Martedì 28 aprile 2026 a Castronno, un incontro con Martino Ghielmi e Alfie Nze per esplorare un nuovo rapporto culturale con l'Africa.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/scoperta-africa-materia-castronno-2026.webp`,
         "width": 1200,
@@ -6988,7 +6988,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-universita-ticino-numero-chiuso-2026': {
     title: 'Università Ticino: numero chiuso e rette in aumento',
-    description: 'Dal 2026 l\'Università della Svizzera italiana introduce il numero chiuso e le rette aumentano, soprattutto per gli studenti stranieri. Dati aggiornati 2026 per',
+description: 'Dal 2026 l\'Università della Svizzera italiana introduce il numero chiuso e le rette aumentano, soprattutto per gli studenti stranieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, università, numero, chiuso, rette',
     ogTitle: 'Università Ticino: numero chiuso e rette in aumento',
     ogDescription: 'Dal 2026 l\'Università della Svizzera italiana introduce il numero chiuso e le rette aumentano, soprattutto per gli studenti stranieri',
@@ -6997,7 +6997,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Università Ticino: numero chiuso e rette in aumento",
-      "description": "Dal 2026 l'Università della Svizzera italiana introduce il numero chiuso e le rette aumentano, soprattutto per gli studenti stranieri. Dati aggiornati 2026 per",
+"description": "Dal 2026 l'Università della Svizzera italiana introduce il numero chiuso e le rette aumentano, soprattutto per gli studenti stranieri.",
       "image": {
         "@type": "ImageObject", "url": `${BASE_URL}/images/blog/universita-ticino-numero-chiuso-2026.webp`,
         "width": 1200,
@@ -7044,7 +7044,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-semaforo-paradiso-melide-2026': {
     title: 'Semaforo Melide: un\'ora e venti per Paradiso-Melide',
-    description: 'Un automobilista racconta di un\'odissea di un\'ora e venti per andare da Paradiso a Melide a causa di un semaforo malfunzionante. Dati aggiornati 2026 per',
+description: 'Un automobilista racconta di un\'odissea di un\'ora e venti per andare da Paradiso a Melide a causa di un semaforo malfunzionante.',
     keywords: 'frontalieri, ticino, svizzera, italia, semaforo, melide, venti, paradiso-melide',
     ogTitle: 'Semaforo Melide: un\'ora e venti per Paradiso-Melide',
     ogDescription: 'Un automobilista racconta di un\'odissea di un\'ora e venti per andare da Paradiso a Melide a causa di un semaforo malfunzionante.',
@@ -7053,7 +7053,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Semaforo Melide: un'ora e venti per Paradiso-Melide",
-      "description": "Un automobilista racconta di un'odissea di un'ora e venti per andare da Paradiso a Melide a causa di un semaforo malfunzionante. Dati aggiornati 2026 per",
+"description": "Un automobilista racconta di un'odissea di un'ora e venti per andare da Paradiso a Melide a causa di un semaforo malfunzionante.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/semaforo-paradiso-melide-2026.webp`,
         "width": 1200,
@@ -7240,7 +7240,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-viabilita-varese-racordo-chiuso-2026': {
     title: 'Chiusura parziale raccordo Varese-A8 lunedì sera | Frontaliere Ticino',
-    description: 'Dalle 22:00 alle 24:00 di lunedì 27 aprile 2026 chiuso il ramo di immissione sulla A8 Milano-Varese, verso Varese. Dati aggiornati 2026 per frontalieri in',
+description: 'Dalle 22:00 alle 24:00 di lunedì 27 aprile 2026 chiuso il ramo di immissione sulla A8 Milano-Varese, verso Varese.',
     keywords: 'frontalieri, ticino, svizzera, italia, chiusura, parziale, raccordo, varese-a8',
     ogTitle: 'Chiusura parziale raccordo Varese-A8 lunedì sera',
     ogDescription: 'Dalle 22:00 alle 24:00 di lunedì 27 aprile 2026 chiuso il ramo di immissione sulla A8 Milano-Varese, verso Varese.',
@@ -7249,7 +7249,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Chiusura parziale raccordo Varese-A8 lunedì sera",
-      "description": "Dalle 22:00 alle 24:00 di lunedì 27 aprile 2026 chiuso il ramo di immissione sulla A8 Milano-Varese, verso Varese. Dati aggiornati 2026 per frontalieri in",
+"description": "Dalle 22:00 alle 24:00 di lunedì 27 aprile 2026 chiuso il ramo di immissione sulla A8 Milano-Varese, verso Varese.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/viabilita-varese-racordo-chiuso-2026.webp`,
         "width": 1200,
@@ -7268,7 +7268,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-furti-biciclette-mendrisiotto-2026': {
     title: 'Due arresti per furti di biciclette nel Mendrisiotto',
-    description: 'Due cittadini rumeni arrestati con tre biciclette smontate e attrezzi da scasso. Polizia ricorda consigli per prevenire furti. Dati aggiornati 2026 per',
+description: 'Due cittadini rumeni arrestati con tre biciclette smontate e attrezzi da scasso. Polizia ricorda consigli per prevenire furti.',
     keywords: 'frontalieri, ticino, svizzera, italia, arresti, furti, biciclette, mendrisiotto',
     ogTitle: 'Due arresti per furti di biciclette nel Mendrisiotto',
     ogDescription: 'Due cittadini rumeni arrestati con tre biciclette smontate e attrezzi da scasso. Polizia ricorda consigli per prevenire furti.',
@@ -7277,7 +7277,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Due arresti per furti di biciclette nel Mendrisiotto",
-      "description": "Due cittadini rumeni arrestati con tre biciclette smontate e attrezzi da scasso. Polizia ricorda consigli per prevenire furti. Dati aggiornati 2026 per",
+"description": "Due cittadini rumeni arrestati con tre biciclette smontate e attrezzi da scasso. Polizia ricorda consigli per prevenire furti.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/furti-biciclette-mendrisiotto-2026.webp`,
         "width": 1200,
@@ -7296,16 +7296,16 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-per-giumai-acquisti-monte-piaroi-2026': {
     title: 'Per Giümai acquista gli ultimi tre edifici del Monte Piaroi',
-    description: 'L\'associazione Per Giümai ha completato l\'acquisto degli ultimi tre edifici sul Monte Piaroi, grazie al contributo di privati e alla collaborazione con la',
+description: 'Per sostenere il progetto di valorizzazione del Monte Piaroi, è possibile aderire alla campagna soci 2026 dell\'associazione Per Giümai.',
     keywords: 'frontalieri, ticino, svizzera, italia, giümai, acquista, ultimi, edifici',
     ogTitle: 'Per Giümai acquista gli ultimi tre edifici del Monte Piaroi',
-    ogDescription: 'L\'associazione Per Giümai ha completato l\'acquisto degli ultimi tre edifici sul Monte Piaroi, grazie al contributo di privati e alla collaborazione con la',
+ogDescription: 'L\'associazione Per Giümai ha raggiunto un importante traguardo con l\'acquisto degli ultimi tre edifici sul Monte Piaroi, completando così l\'acquisizione di sei edifici nella zona.',
     canonicalPath: '/articoli-frontaliere/per-giumai-acquisti-monte-piaroi-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Per Giümai acquista gli ultimi tre edifici del Monte Piaroi",
-      "description": "L'associazione Per Giümai ha completato l'acquisto degli ultimi tre edifici sul Monte Piaroi, grazie al contributo di privati e alla collaborazione con la",
+"description": "Per sostenere il progetto di valorizzazione del Monte Piaroi, è possibile aderire alla campagna soci 2026 dell'associazione Per Giümai.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/per-giumai-acquisti-monte-piaroi-2026.webp`,
         "width": 1200,
@@ -7352,7 +7352,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-bns-ubs-misure-non-estreme-2026': {
     title: 'BNS: Le misure per UBS non sono estreme | Frontaliere Ticino',
-    description: 'Il presidente della BNS, Martin Schlegel, difende le nuove regole per UBS, minimizzando il rischio di una partenza dell\'istituto. Dati aggiornati 2026 per',
+description: 'Il presidente della BNS, Martin Schlegel, difende le nuove regole per UBS, minimizzando il rischio di una partenza dell\'istituto.',
     keywords: 'frontalieri, ticino, svizzera, italia, misure, sono, estreme, presidente',
     ogTitle: 'BNS: Le misure per UBS non sono estreme',
     ogDescription: 'Il presidente della BNS, Martin Schlegel, difende le nuove regole per UBS, minimizzando il rischio di una partenza dell\'istituto.',
@@ -7361,7 +7361,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "BNS: Le misure per UBS non sono estreme",
-      "description": "Il presidente della BNS, Martin Schlegel, difende le nuove regole per UBS, minimizzando il rischio di una partenza dell'istituto. Dati aggiornati 2026 per",
+"description": "Il presidente della BNS, Martin Schlegel, difende le nuove regole per UBS, minimizzando il rischio di una partenza dell'istituto.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/bns-ubs-misure-non-estreme-2026.webp`,
         "width": 1200,
@@ -7576,16 +7576,16 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-sfida-comuni-coop-2026-attivita-fisica': {
     title: 'Sfida tra comuni Coop 2026: chi sarà il più attivo?',
-    description: 'Dal 1° al 31 maggio 2026, oltre 200 comuni svizzeri, tra cui diversi in Ticino, si sfidano per promuovere l\'attività fisica. Scopri come partecipare e',
+description: 'Dal 1° al 31 maggio 2026, oltre 200 comuni svizzeri, tra cui diversi in Ticino, si sfidano per promuovere l\'attività fisica.',
     keywords: 'frontalieri, ticino, svizzera, italia, sfida, comuni, coop, sarà',
     ogTitle: 'Sfida tra comuni Coop 2026: chi sarà il più attivo?',
-    ogDescription: 'Dal 1° al 31 maggio 2026, oltre 200 comuni svizzeri, tra cui diversi in Ticino, si sfidano per promuovere l\'attività fisica. Scopri come partecipare e',
+ogDescription: 'Dal 1° al 31 maggio 2026, oltre 200 comuni svizzeri, tra cui diversi in Ticino, si sfidano per promuovere l\'attività fisica.',
     canonicalPath: '/articoli-frontaliere/sfida-comuni-coop-2026-attivita-fisica/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Sfida tra comuni Coop 2026: chi sarà il più attivo?",
-      "description": "Dal 1° al 31 maggio 2026, oltre 200 comuni svizzeri, tra cui diversi in Ticino, si sfidano per promuovere l'attività fisica. Scopri come partecipare e",
+"description": "Dal 1° al 31 maggio 2026, oltre 200 comuni svizzeri, tra cui diversi in Ticino, si sfidano per promuovere l'attività fisica.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/sfida-comuni-coop-2026-attivita-fisica.webp`,
         "width": 1200,
@@ -7688,7 +7688,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-gioventu-dibatte-500-studenti-gara': {
     title: 'La gioventù dibatte: 500 studenti in gara a Bellinzona',
-    description: '500 studenti si sfidano nella finale de \'La gioventù dibatte\' a Bellinzona, difendendo tesi su temi di attualità davanti a una giuria. Dati aggiornati 2026 per',
+description: '500 studenti si sfidano nella finale de \'La gioventù dibatte\' a Bellinzona, difendendo tesi su temi di attualità davanti a una giuria.',
     keywords: 'frontalieri, ticino, svizzera, italia, gioventù, dibatte, studenti, gara',
     ogTitle: 'La gioventù dibatte: 500 studenti in gara a Bellinzona',
     ogDescription: '500 studenti si sfidano nella finale de \'La gioventù dibatte\' a Bellinzona, difendendo tesi su temi di attualità davanti a una giuria.',
@@ -7697,7 +7697,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "La gioventù dibatte: 500 studenti in gara a Bellinzona",
-      "description": "500 studenti si sfidano nella finale de 'La gioventù dibatte' a Bellinzona, difendendo tesi su temi di attualità davanti a una giuria. Dati aggiornati 2026 per",
+"description": "500 studenti si sfidano nella finale de 'La gioventù dibatte' a Bellinzona, difendendo tesi su temi di attualità davanti a una giuria.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/gioventu-dibatte-500-studenti-gara.webp`,
         "width": 1200,
@@ -7716,7 +7716,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-tallero-doro-80-anni-nuovo-design': {
     title: 'Tallero d\'oro: 80 anni e nuovo design | Frontaliere Ticino',
-    description: 'Il Tallero d\'oro compie 80 anni e si rinnova nel design. Il prezzo aumenta a 8 franchi per la prima volta dal 1998. Dati aggiornati 2026 per frontalieri in',
+description: 'Il Tallero d\'oro compie 80 anni e si rinnova nel design. Il prezzo aumenta a 8 franchi per la prima volta dal 1998.',
     keywords: 'frontalieri, ticino, svizzera, italia, tallero, anni, nuovo, design',
     ogTitle: 'Tallero d\'oro: 80 anni e nuovo design',
     ogDescription: 'Il Tallero d\'oro compie 80 anni e si rinnova nel design. Il prezzo aumenta a 8 franchi per la prima volta dal 1998.',
@@ -7725,7 +7725,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Tallero d'oro: 80 anni e nuovo design",
-      "description": "Il Tallero d'oro compie 80 anni e si rinnova nel design. Il prezzo aumenta a 8 franchi per la prima volta dal 1998. Dati aggiornati 2026 per frontalieri in",
+"description": "Il Tallero d'oro compie 80 anni e si rinnova nel design. Il prezzo aumenta a 8 franchi per la prima volta dal 1998.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/tallero-doro-80-anni-nuovo-design.webp`,
         "width": 1200,
@@ -7772,7 +7772,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-national-geographic-scuola-einaudi-varese': {
     title: 'National Geographic a scuola: Sergio Pitamitz incontra gli studenti dell\'Einaudi',
-    description: 'Il celebre fotografo ha parlato di conservazione ambientale e fotografia naturalistica con gli studenti di Varese. Dati aggiornati 2026 per frontalieri in',
+description: 'Il celebre fotografo ha parlato di conservazione ambientale e fotografia naturalistica con gli studenti di Varese.',
     keywords: 'frontalieri, ticino, svizzera, italia, national, geographic, scuola, sergio',
     ogTitle: 'National Geographic a scuola: Sergio Pitamitz incontra gli studenti dell\'Einaudi',
     ogDescription: 'Il celebre fotografo ha parlato di conservazione ambientale e fotografia naturalistica con gli studenti di Varese.',
@@ -7781,7 +7781,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "National Geographic a scuola: Sergio Pitamitz incontra gli studenti dell'Einaudi",
-      "description": "Il celebre fotografo ha parlato di conservazione ambientale e fotografia naturalistica con gli studenti di Varese. Dati aggiornati 2026 per frontalieri in",
+"description": "Il celebre fotografo ha parlato di conservazione ambientale e fotografia naturalistica con gli studenti di Varese.",
       "image": {
         "@type": "ImageObject", "url": `${BASE_URL}/images/blog/national-geographic-scuola-einaudi-varese.webp`,
         "width": 1200,
@@ -7828,7 +7828,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-mendrisio-capitale-culturale-opportunita': {
     title: 'Mendrisio Capitale Culturale: Opportunità da Cogliere',
-    description: 'La maggioranza della Gestione di Mendrisio rassicura sui costi e allontana il rischio di sudditanza verso Lugano. Dati aggiornati 2026 per frontalieri in',
+description: 'La maggioranza della Gestione di Mendrisio rassicura sui costi e allontana il rischio di sudditanza verso Lugano.',
     keywords: 'frontalieri, ticino, svizzera, italia, mendrisio, capitale, culturale, opportunità',
     ogTitle: 'Mendrisio Capitale Culturale: Opportunità da Cogliere',
     ogDescription: 'La maggioranza della Gestione di Mendrisio rassicura sui costi e allontana il rischio di sudditanza verso Lugano',
@@ -7837,7 +7837,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Mendrisio Capitale Culturale: Opportunità da Cogliere",
-      "description": "La maggioranza della Gestione di Mendrisio rassicura sui costi e allontana il rischio di sudditanza verso Lugano. Dati aggiornati 2026 per frontalieri in",
+"description": "La maggioranza della Gestione di Mendrisio rassicura sui costi e allontana il rischio di sudditanza verso Lugano.",
       "image": {
         "@type": "ImageObject", "url": `${BASE_URL}/images/blog/mendrisio-capitale-culturale-opportunita.webp`,
         "width": 1200,
@@ -7996,7 +7996,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-padroncini-lavoratori-stabili-bassi-2025': {
     title: 'Padroncini e lavoratori distaccati stabili su livelli bassi',
-    description: 'Il numero di ditte notificate in Ticino rimane stabile su livelli bassi, ma l\'AIC avverte: non abbassare la guardia. Dati aggiornati 2026 per frontalieri in',
+description: 'Il numero di ditte notificate in Ticino rimane stabile su livelli bassi, ma l\'AIC avverte: non abbassare la guardia.',
     keywords: 'frontalieri, ticino, svizzera, italia, padroncini, lavoratori, distaccati, stabili',
     ogTitle: 'Padroncini e lavoratori distaccati stabili su livelli bassi',
     ogDescription: 'Il numero di ditte notificate in Ticino rimane stabile su livelli bassi, ma l\'AIC avverte: non abbassare la guardia',
@@ -8005,7 +8005,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Padroncini e lavoratori distaccati stabili su livelli bassi",
-      "description": "Il numero di ditte notificate in Ticino rimane stabile su livelli bassi, ma l'AIC avverte: non abbassare la guardia. Dati aggiornati 2026 per frontalieri in",
+"description": "Il numero di ditte notificate in Ticino rimane stabile su livelli bassi, ma l'AIC avverte: non abbassare la guardia.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/padroncini-lavoratori-stabili-bassi-2025.webp`,
         "width": 1200,
@@ -8024,7 +8024,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-bcc-busto-garolfo-2-milioni-territorio': {
     title: 'Bcc Busto Garolfo: 14,4 milioni di utile e 2 milioni per il territorio',
-    description: 'L\'assemblea dei soci approva il bilancio 2025 con un utile netto di 14,4 milioni e 2 milioni destinati al territorio. Dati aggiornati 2026 per frontalieri in',
+description: 'L\'assemblea dei soci approva il bilancio 2025 con un utile netto di 14,4 milioni e 2 milioni destinati al territorio.',
     keywords: 'frontalieri, ticino, svizzera, italia, busto, garolfo, milioni, utile',
     ogTitle: 'Bcc Busto Garolfo: 14,4 milioni di utile e 2 milioni per il territorio',
     ogDescription: 'L\'assemblea dei soci approva il bilancio 2025 con un utile netto di 14,4 milioni e 2 milioni destinati al territorio',
@@ -8033,7 +8033,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Bcc Busto Garolfo: 14,4 milioni di utile e 2 milioni per il territorio",
-      "description": "L'assemblea dei soci approva il bilancio 2025 con un utile netto di 14,4 milioni e 2 milioni destinati al territorio. Dati aggiornati 2026 per frontalieri in",
+"description": "L'assemblea dei soci approva il bilancio 2025 con un utile netto di 14,4 milioni e 2 milioni destinati al territorio.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/bcc-busto-garolfo-2-milioni-territorio.webp`,
         "width": 1200,
@@ -8136,16 +8136,16 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-colpi-arma-da-fuoco-como-ferito-frontaliere': {
     title: 'Colpi d\'arma da fuoco a Como: ferito giovane straniero',
-    description: 'Un giovane straniero è stato ferito da colpi d\'arma da fuoco sparati da un\'auto a San Fermo della Battaglia, vicino a Como. Scopri di più sull\'incidente e le',
+description: 'Un giovane straniero è stato ferito da colpi d\'arma da fuoco sparati da un\'auto a San Fermo della Battaglia, vicino a Como.',
     keywords: 'frontalieri, ticino, svizzera, italia, colpi, arma, fuoco, como',
     ogTitle: 'Colpi d\'arma da fuoco a Como: ferito giovane straniero',
-    ogDescription: 'Un giovane straniero è stato ferito da colpi d\'arma da fuoco sparati da un\'auto a San Fermo della Battaglia, vicino a Como. Scopri di più sull\'incidente e le',
+ogDescription: 'Un giovane straniero è stato ferito da colpi d\'arma da fuoco sparati da un\'auto a San Fermo della Battaglia, vicino a Como.',
     canonicalPath: '/articoli-frontaliere/colpi-arma-da-fuoco-como-ferito-frontaliere/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Colpi d'arma da fuoco a Como: ferito giovane straniero",
-      "description": "Un giovane straniero è stato ferito da colpi d'arma da fuoco sparati da un'auto a San Fermo della Battaglia, vicino a Como. Scopri di più sull'incidente e le",
+"description": "Un giovane straniero è stato ferito da colpi d'arma da fuoco sparati da un'auto a San Fermo della Battaglia, vicino a Como.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/colpi-arma-da-fuoco-como-ferito-frontaliere.webp`,
         "width": 1200,
@@ -8164,7 +8164,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-disagi-trenord-tilo-s40-25-aprile-2024': {
     title: 'Disagi linea TiLo S40: errore nella programmazione del personale',
-    description: 'Trenord spiega i disagi del 25 aprile: problema nella programmazione dei turni del personale. Ecco cosa è successo. Dati aggiornati 2026 per frontalieri in',
+description: 'Trenord spiega i disagi del 25 aprile: problema nella programmazione dei turni del personale. Ecco cosa è successo.',
     keywords: 'frontalieri, ticino, svizzera, italia, disagi, linea, tilo, errore',
     ogTitle: 'Disagi linea TiLo S40: errore nella programmazione del personale',
     ogDescription: 'Trenord spiega i disagi del 25 aprile: problema nella programmazione dei turni del personale. Ecco cosa è successo.',
@@ -8173,7 +8173,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Disagi linea TiLo S40: errore nella programmazione del personale",
-      "description": "Trenord spiega i disagi del 25 aprile: problema nella programmazione dei turni del personale. Ecco cosa è successo. Dati aggiornati 2026 per frontalieri in",
+"description": "Trenord spiega i disagi del 25 aprile: problema nella programmazione dei turni del personale. Ecco cosa è successo.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/disagi-trenord-tilo-s40-25-aprile-2024.webp`,
         "width": 1200,
@@ -8332,7 +8332,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-tristan-brenn-fischer-decisione': {
     title: 'Tristan Brenn difende la decisione sul caso Fischer',
-    description: 'Tristan Brenn, direttore del DFE, spiega le ragioni della decisione sul caso Fischer e le implicazioni per i frontalieri in Ticino. Dati aggiornati 2026 per',
+description: 'Tristan Brenn, direttore del DFE, spiega le ragioni della decisione sul caso Fischer e le implicazioni per i frontalieri in Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, tristan, brenn, difende, decisione',
     ogTitle: 'Tristan Brenn difende la decisione sul caso Fischer',
     ogDescription: 'Tristan Brenn, direttore del DFE, spiega le ragioni della decisione sul caso Fischer e le implicazioni per i frontalieri in Ticino.',
@@ -8341,7 +8341,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Tristan Brenn difende la decisione sul caso Fischer",
-      "description": "Tristan Brenn, direttore del DFE, spiega le ragioni della decisione sul caso Fischer e le implicazioni per i frontalieri in Ticino. Dati aggiornati 2026 per",
+"description": "Tristan Brenn, direttore del DFE, spiega le ragioni della decisione sul caso Fischer e le implicazioni per i frontalieri in Ticino.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/tristan-brenn-fischer-decisione.webp`,
         "width": 1200,
@@ -8388,7 +8388,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-frontalieri-rega-boglia-intervento': {
     title: 'Intervento Rega sul Boglia: soccorso in montagna | Frontaliere Ticino',
-    description: 'Un elicottero della Rega è intervenuto sul Monte Boglia per soccorrere un escursionista in difficoltà. Ecco cosa è successo. Dati aggiornati 2026 per',
+description: 'Un elicottero della Rega è intervenuto sul Monte Boglia per soccorrere un escursionista in difficoltà. Ecco cosa è successo.',
     keywords: 'frontalieri, ticino, svizzera, italia, intervento, rega, boglia, soccorso',
     ogTitle: 'Intervento Rega sul Boglia: soccorso in montagna',
     ogDescription: 'Un elicottero della Rega è intervenuto sul Monte Boglia per soccorrere un escursionista in difficoltà. Ecco cosa è successo.',
@@ -8397,7 +8397,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Intervento Rega sul Boglia: soccorso in montagna",
-      "description": "Un elicottero della Rega è intervenuto sul Monte Boglia per soccorrere un escursionista in difficoltà. Ecco cosa è successo. Dati aggiornati 2026 per",
+"description": "Un elicottero della Rega è intervenuto sul Monte Boglia per soccorrere un escursionista in difficoltà. Ecco cosa è successo.",
       "image": {
         "@type": "ImageObject", "url": `${BASE_URL}/images/blog/frontalieri-rega-boglia-intervento.webp`,
         "width": 1200,
@@ -8416,16 +8416,16 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-equans-licenziamenti-monteceneri-2026': {
     title: 'Equans, licenziamenti confermati: 19 posti di lavoro in meno',
-    description: 'Equans procederà con 19 licenziamenti presso la sua sede di Monteceneri. I lavoratori interessati sono liberi da subito. Scopri le implicazioni e le',
+description: 'Equans procederà con 19 licenziamenti presso la sua sede di Monteceneri. I lavoratori interessati sono liberi da subito.',
     keywords: 'frontalieri, ticino, svizzera, italia, equans, licenziamenti, confermati, posti',
     ogTitle: 'Equans licenzia 19 dipendenti a Monteceneri',
-    ogDescription: 'Equans procederà con 19 licenziamenti presso la sua sede di Monteceneri. I lavoratori interessati sono liberi da subito. Scopri le implicazioni e le',
+ogDescription: 'Equans procederà con 19 licenziamenti presso la sua sede di Monteceneri. I lavoratori interessati sono liberi da subito.',
     canonicalPath: '/articoli-frontaliere/equans-licenziamenti-monteceneri-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Equans licenzia 19 dipendenti a Monteceneri",
-      "description": "Equans procederà con 19 licenziamenti presso la sua sede di Monteceneri. I lavoratori interessati sono liberi da subito. Scopri le implicazioni e le",
+"description": "Equans procederà con 19 licenziamenti presso la sua sede di Monteceneri. I lavoratori interessati sono liberi da subito.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/equans-licenziamenti-monteceneri-2026.webp`,
         "width": 1200,
@@ -8444,7 +8444,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-momenti-paura-velivolo-swiss-2026': {
     title: 'Momenti di paura su un velivolo Swiss | Frontaliere Ticino',
-    description: 'Un incidente tecnico su un velivolo Swiss ha causato momenti di tensione. Ecco cosa è successo e le implicazioni per i passeggeri. Dati aggiornati 2026 per',
+description: 'Un incidente tecnico su un velivolo Swiss ha causato momenti di tensione. Ecco cosa è successo e le implicazioni per i passeggeri.',
     keywords: 'frontalieri, ticino, svizzera, italia, momenti, paura, velivolo, swiss',
     ogTitle: 'Momenti di paura su un velivolo Swiss',
     ogDescription: 'Un incidente tecnico su un velivolo Swiss ha causato momenti di tensione. Ecco cosa è successo e le implicazioni per i passeggeri.',
@@ -8453,7 +8453,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Momenti di paura su un velivolo Swiss",
-      "description": "Un incidente tecnico su un velivolo Swiss ha causato momenti di tensione. Ecco cosa è successo e le implicazioni per i passeggeri. Dati aggiornati 2026 per",
+"description": "Un incidente tecnico su un velivolo Swiss ha causato momenti di tensione. Ecco cosa è successo e le implicazioni per i passeggeri.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/momenti-paura-velivolo-swiss-2026.webp`,
         "width": 1200,
@@ -8500,16 +8500,16 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-rottamazione-quinquies-scadenza-30-aprile': {
     title: 'Rottamazione-quinquies: domande entro il 30 aprile',
-    description: 'Scade il 30 aprile il termine per aderire alla rottamazione-quinquies. Ecco cosa sapere e come fare la domanda per regolarizzare i debiti senza sanzioni e',
+description: 'La scadenza per aderire alla rottamazione-quinquies è fissata per il 30 aprile 2026.',
     keywords: 'frontalieri, ticino, svizzera, italia, rottamazione-quinquies, domande, entro, aprile',
     ogTitle: 'Rottamazione-quinquies: domande entro il 30 aprile',
-    ogDescription: 'Scade il 30 aprile il termine per aderire alla rottamazione-quinquies. Ecco cosa sapere e come fare la domanda per regolarizzare i debiti senza sanzioni e',
+ogDescription: 'Scade il 30 aprile il termine per aderire alla rottamazione-quinquies.',
     canonicalPath: '/articoli-frontaliere/rottamazione-quinquies-scadenza-30-aprile/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Rottamazione-quinquies: domande entro il 30 aprile",
-      "description": "Scade il 30 aprile il termine per aderire alla rottamazione-quinquies. Ecco cosa sapere e come fare la domanda per regolarizzare i debiti senza sanzioni e",
+"description": "La scadenza per aderire alla rottamazione-quinquies è fissata per il 30 aprile 2026.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/rottamazione-quinquies-scadenza-30-aprile.webp`,
         "width": 1200,
@@ -8584,7 +8584,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-pista-ciclopedonale-bodio-giornico-2026': {
     title: 'Pista ciclopedonale Bodio-Giornico: mobilità lenta e sostenibile',
-    description: 'Scopri la nuova pista ciclopedonale tra Bodio e Giornico, un progetto per la mobilità sostenibile nella regione del Canton Ticino. Dati aggiornati 2026 per',
+description: 'Scopri la nuova pista ciclopedonale tra Bodio e Giornico, un progetto per la mobilità sostenibile nella regione del Canton Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, pista, ciclopedonale, bodio-giornico, mobilità',
     ogTitle: 'Pista ciclopedonale Bodio-Giornico: mobilità lenta e sostenibile',
     ogDescription: 'Scopri la nuova pista ciclopedonale tra Bodio e Giornico, un progetto per la mobilità sostenibile nella regione del Canton Ticino.',
@@ -8593,7 +8593,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Pista ciclopedonale Bodio-Giornico: mobilità lenta e sostenibile",
-      "description": "Scopri la nuova pista ciclopedonale tra Bodio e Giornico, un progetto per la mobilità sostenibile nella regione del Canton Ticino. Dati aggiornati 2026 per",
+"description": "Scopri la nuova pista ciclopedonale tra Bodio e Giornico, un progetto per la mobilità sostenibile nella regione del Canton Ticino.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/pista-ciclopedonale-bodio-giornico-2026.webp`,
         "width": 1200,
@@ -8612,16 +8612,16 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-momoride-carpooling-benefico-ticino-2026': {
     title: 'MomòRide: la sfida di carpooling benefica per Chiasso, Balerna e Novazzano',
-    description: 'Dal 1° maggio parte MomòRide, iniziativa biennale di carpooling per aziende e pendolari di Chiasso, Balerna e Novazzano. Obiettivo: 40.000 punti in un mese per',
+description: 'Dal 1° maggio parte MomòRide, iniziativa biennale di carpooling per aziende e pendolari di Chiasso, Balerna e Novazzano.',
     keywords: 'frontalieri, ticino, svizzera, italia, momòride, sfida, carpooling, benefica',
     ogTitle: 'MomòRide: carpooling benefico Chiasso Balerna Novazzano',
-    ogDescription: 'Dal 1° maggio parte MomòRide, iniziativa biennale di carpooling per aziende e pendolari di Chiasso, Balerna e Novazzano. Obiettivo: 40.000 punti in un mese per',
+ogDescription: 'Dal 1° maggio parte MomòRide, iniziativa biennale di carpooling per aziende e pendolari di Chiasso, Balerna e Novazzano.',
     canonicalPath: '/articoli-frontaliere/momoride-carpooling-benefico-ticino-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "MomòRide: carpooling benefico Chiasso Balerna Novazzano",
-      "description": "Dal 1° maggio parte MomòRide, iniziativa biennale di carpooling per aziende e pendolari di Chiasso, Balerna e Novazzano. Obiettivo: 40.000 punti in un mese per",
+"description": "Dal 1° maggio parte MomòRide, iniziativa biennale di carpooling per aziende e pendolari di Chiasso, Balerna e Novazzano.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/momoride-carpooling-benefico-ticino-2026.webp`,
         "width": 1200,
@@ -8640,7 +8640,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-kit-escursionisti-montagna-pulita': {
     title: 'Kit per escursionisti: come non lasciare traccia in montagna',
-    description: 'Scopri il kit \'Non lascio traccia\' per escursionisti e impara a rispettare l\'ambiente montano con pratiche sostenibili. Dati aggiornati 2026 per frontalieri in',
+description: 'Scopri il kit \'Non lascio traccia\' per escursionisti e impara a rispettare l\'ambiente montano con pratiche sostenibili.',
     keywords: 'frontalieri, ticino, svizzera, italia, escursionisti, lasciare, traccia, montagna',
     ogTitle: 'Kit per escursionisti: come non lasciare traccia in montagna',
     ogDescription: 'Scopri il kit \'Non lascio traccia\' per escursionisti e impara a rispettare l\'ambiente montano con pratiche sostenibili.',
@@ -8649,7 +8649,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Kit per escursionisti: come non lasciare traccia in montagna",
-      "description": "Scopri il kit 'Non lascio traccia' per escursionisti e impara a rispettare l'ambiente montano con pratiche sostenibili. Dati aggiornati 2026 per frontalieri in",
+"description": "Scopri il kit 'Non lascio traccia' per escursionisti e impara a rispettare l'ambiente montano con pratiche sostenibili.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/kit-escursionisti-montagna-pulita.webp`,
         "width": 1200,
@@ -8668,7 +8668,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-moda-sostenibile-bellinzona-9-maggio': {
     title: 'Moda sostenibile a Bellinzona: giornata dedicata al riuso e alla riparazione',
-    description: 'Sabato 9 maggio a Bellinzona laboratori, upcycling e tosatura delle pecore per sensibilizzare contro la fast fashion. Dati aggiornati 2026 per frontalieri in',
+description: 'Sabato 9 maggio a Bellinzona laboratori, upcycling e tosatura delle pecore per sensibilizzare contro la fast fashion.',
     keywords: 'frontalieri, ticino, svizzera, italia, moda, sostenibile, bellinzona, giornata',
     ogTitle: 'Moda sostenibile a Bellinzona: giornata dedicata al riuso e alla riparazione',
     ogDescription: 'Sabato 9 maggio a Bellinzona laboratori, upcycling e tosatura delle pecore per sensibilizzare contro la fast fashion',
@@ -8677,7 +8677,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Moda sostenibile a Bellinzona: giornata dedicata al riuso e alla riparazione",
-      "description": "Sabato 9 maggio a Bellinzona laboratori, upcycling e tosatura delle pecore per sensibilizzare contro la fast fashion. Dati aggiornati 2026 per frontalieri in",
+"description": "Sabato 9 maggio a Bellinzona laboratori, upcycling e tosatura delle pecore per sensibilizzare contro la fast fashion.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/moda-sostenibile-bellinzona-9-maggio.webp`,
         "width": 1200,
@@ -8696,7 +8696,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-fuga-ammoniaca-chiasso-controllo': {
     title: 'Fuga di ammoniaca a Chiasso, situazione sotto controllo',
-    description: 'Incidente alla pista di ghiaccio di Chiasso, tre persone intossicate ma nessuna grave. La popolazione non è in pericolo. Dati aggiornati 2026 per frontalieri in',
+description: 'Incidente alla pista di ghiaccio di Chiasso, tre persone intossicate ma nessuna grave. La popolazione non è in pericolo.',
     keywords: 'frontalieri, ticino, svizzera, italia, fuga, ammoniaca, chiasso, situazione',
     ogTitle: 'Fuga di ammoniaca a Chiasso, situazione sotto controllo',
     ogDescription: 'Incidente alla pista di ghiaccio di Chiasso, tre persone intossicate ma nessuna grave. La popolazione non è in pericolo.',
@@ -8705,7 +8705,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Fuga di ammoniaca a Chiasso, situazione sotto controllo",
-      "description": "Incidente alla pista di ghiaccio di Chiasso, tre persone intossicate ma nessuna grave. La popolazione non è in pericolo. Dati aggiornati 2026 per frontalieri in",
+"description": "Incidente alla pista di ghiaccio di Chiasso, tre persone intossicate ma nessuna grave. La popolazione non è in pericolo.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/fuga-ammoniaca-chiasso-controllo.webp`,
         "width": 1200,
@@ -8780,7 +8780,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-biglietto-trenord-whatsapp-ticino': {
     title: 'Biglietti Trenord su WhatsApp: come funziona | Frontaliere Ticino',
-    description: 'Scopri come acquistare biglietti Trenord su WhatsApp, disponibili alle self-service e ai Digital Gate di Milano e Malpensa T1. Dati aggiornati 2026 per',
+description: 'Scopri come acquistare biglietti Trenord su WhatsApp, disponibili alle self-service e ai Digital Gate di Milano e Malpensa T1.',
     keywords: 'frontalieri, ticino, svizzera, italia, biglietti, trenord, whatsapp, funziona',
     ogTitle: 'Biglietti Trenord su WhatsApp: come funziona',
     ogDescription: 'Scopri come acquistare biglietti Trenord su WhatsApp, disponibili alle self-service e ai Digital Gate di Milano e Malpensa T1',
@@ -8789,7 +8789,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Biglietti Trenord su WhatsApp: come funziona",
-      "description": "Scopri come acquistare biglietti Trenord su WhatsApp, disponibili alle self-service e ai Digital Gate di Milano e Malpensa T1. Dati aggiornati 2026 per",
+"description": "Scopri come acquistare biglietti Trenord su WhatsApp, disponibili alle self-service e ai Digital Gate di Milano e Malpensa T1.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/biglietto-trenord-whatsapp-ticino.webp`,
         "width": 1200,
@@ -8864,16 +8864,16 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-auto-elettriche-ricarica-breganzona': {
     title: 'Auto elettriche: il momento della ricarica è il più delicato',
-    description: 'Un incendio in un\'autorimessa di Breganzona ha riacceso i riflettori sui rischi legati alla ricarica delle auto elettriche. Scopri cosa fare per garantire la',
+description: 'Un incendio in un\'autorimessa di Breganzona ha riacceso i riflettori sui rischi legati alla ricarica delle auto elettriche.',
     keywords: 'frontalieri, ticino, svizzera, italia, auto, elettriche, momento, ricarica',
     ogTitle: 'Auto elettriche: il momento della ricarica è il più delicato',
-    ogDescription: 'Un incendio in un\'autorimessa di Breganzona ha riacceso i riflettori sui rischi legati alla ricarica delle auto elettriche. Scopri cosa fare per garantire la',
+ogDescription: 'Un incendio in un\'autorimessa di Breganzona ha riacceso i riflettori sui rischi legati alla ricarica delle auto elettriche.',
     canonicalPath: '/articoli-frontaliere/auto-elettriche-ricarica-breganzona/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Auto elettriche: il momento della ricarica è il più delicato",
-      "description": "Un incendio in un'autorimessa di Breganzona ha riacceso i riflettori sui rischi legati alla ricarica delle auto elettriche. Scopri cosa fare per garantire la",
+"description": "Un incendio in un'autorimessa di Breganzona ha riacceso i riflettori sui rischi legati alla ricarica delle auto elettriche.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/auto-elettriche-ricarica-breganzona.webp`,
         "width": 1200,
@@ -8892,7 +8892,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-universita-insubria-4-4-milioni-ricerca': {
     title: 'Università Insubria: 4,4 milioni per ricerca a Como e Varese',
-    description: 'Regione Lombardia finanzia progetti IMPACTT e SustAA per potenziare infrastrutture di ricerca e innovazione sostenibile. Dati aggiornati 2026 per frontalieri in',
+description: 'Regione Lombardia finanzia progetti IMPACTT e SustAA per potenziare infrastrutture di ricerca e innovazione sostenibile.',
     keywords: 'frontalieri, ticino, svizzera, italia, università, insubria, milioni, ricerca',
     ogTitle: 'Università Insubria: 4,4 milioni per ricerca a Como e Varese',
     ogDescription: 'Regione Lombardia finanzia progetti IMPACTT e SustAA per potenziare infrastrutture di ricerca e innovazione sostenibile.',
@@ -8901,7 +8901,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Università Insubria: 4,4 milioni per ricerca a Como e Varese",
-      "description": "Regione Lombardia finanzia progetti IMPACTT e SustAA per potenziare infrastrutture di ricerca e innovazione sostenibile. Dati aggiornati 2026 per frontalieri in",
+"description": "Regione Lombardia finanzia progetti IMPACTT e SustAA per potenziare infrastrutture di ricerca e innovazione sostenibile.",
       "image": {
         "@type": "ImageObject", "url": `${BASE_URL}/images/blog/universita-insubria-4-4-milioni-ricerca.webp`,
         "width": 1200,
@@ -8976,7 +8976,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-settimanaprofessionale-ticino-2024': {
     title: 'Settimana della formazione professionale: 30 eventi in Ticino',
-    description: 'Dal 4 all’8 maggio, oltre 30 eventi tra radio, TV e sul territorio per scoprire le professioni in Ticino. Scopri come partecipare. Dati aggiornati 2026 per',
+description: 'Dal 4 all’8 maggio, oltre 30 eventi tra radio, TV e sul territorio per scoprire le professioni in Ticino. Scopri come partecipare.',
     keywords: 'frontalieri, ticino, svizzera, italia, settimana, formazione, professionale, eventi',
     ogTitle: 'Settimana formazione professionale Ticino 2024',
     ogDescription: 'Dal 4 all’8 maggio, oltre 30 eventi tra radio, TV e sul territorio per scoprire le professioni in Ticino. Scopri come partecipare.',
@@ -8985,7 +8985,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Settimana formazione professionale Ticino 2024",
-      "description": "Dal 4 all’8 maggio, oltre 30 eventi tra radio, TV e sul territorio per scoprire le professioni in Ticino. Scopri come partecipare. Dati aggiornati 2026 per",
+"description": "Dal 4 all’8 maggio, oltre 30 eventi tra radio, TV e sul territorio per scoprire le professioni in Ticino. Scopri come partecipare.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/settimanaprofessionale-ticino-2024.webp`,
         "width": 1200,
@@ -9032,7 +9032,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-costo-energia-varese-impatti-frontalieri': {
     title: 'Caro energia in provincia di Varese: impatti su imprese e frontalieri',
-    description: 'Analisi dell\'impatto del caro energia in provincia di Varese, con focus su imprese metalmeccaniche e lavoratori frontalieri. Dati aggiornati 2026 per',
+description: 'Analisi dell\'impatto del caro energia in provincia di Varese, con focus su imprese metalmeccaniche e lavoratori frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, caro, energia, provincia, varese',
     ogTitle: 'Caro energia in provincia di Varese: impatti su imprese e frontalieri',
     ogDescription: 'Analisi dell\'impatto del caro energia in provincia di Varese, con focus su imprese metalmeccaniche e lavoratori frontalieri.',
@@ -9041,7 +9041,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Caro energia in provincia di Varese: impatti su imprese e frontalieri",
-      "description": "Analisi dell'impatto del caro energia in provincia di Varese, con focus su imprese metalmeccaniche e lavoratori frontalieri. Dati aggiornati 2026 per",
+"description": "Analisi dell'impatto del caro energia in provincia di Varese, con focus su imprese metalmeccaniche e lavoratori frontalieri.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/costo-energia-varese-impatti-frontalieri.webp`,
         "width": 1200,
@@ -9144,7 +9144,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
 
   'blog-sorveglianza-telecomunicazioni-ticino-2026': {
     title: 'Sorveglianza telecomunicazioni: +40% in Svizzera, ma rallenta in tempo reale',
-    description: 'Nel 2025, le ricerche tramite antenna sono aumentate del 69%, mentre la sorveglianza in tempo reale è cresciuta solo del 3%. Dati aggiornati 2026 per',
+description: 'Nel 2025, le ricerche tramite antenna sono aumentate del 69%, mentre la sorveglianza in tempo reale è cresciuta solo del 3%.',
     keywords: 'frontalieri, ticino, svizzera, italia, sorveglianza, telecomunicazioni, rallenta, tempo',
     ogTitle: 'Sorveglianza telecomunicazioni: +40% in Svizzera, ma rallenta in tempo reale',
     ogDescription: 'Nel 2025, le ricerche tramite antenna sono aumentate del 69%, mentre la sorveglianza in tempo reale è cresciuta solo del 3%.',
@@ -9153,7 +9153,7 @@ const BLOG_SEO_METADATA_6: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Sorveglianza telecomunicazioni: +40% in Svizzera, ma rallenta in tempo reale",
-      "description": "Nel 2025, le ricerche tramite antenna sono aumentate del 69%, mentre la sorveglianza in tempo reale è cresciuta solo del 3%. Dati aggiornati 2026 per",
+"description": "Nel 2025, le ricerche tramite antenna sono aumentate del 69%, mentre la sorveglianza in tempo reale è cresciuta solo del 3%.",
       "image": {
         "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/sorveglianza-telecomunicazioni-ticino-2026.webp`,
         "width": 1200,

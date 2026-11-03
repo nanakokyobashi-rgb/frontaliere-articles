@@ -782,7 +782,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Il 25 ottobre due auto si sono tamponate sulla A13 a Sevelen Feriti un conducente di 79 anni e la passeggera di 86 Il conducente della seconda auto',
     keywords: 'frontalieri, ticino, svizzera, italia, tamponamento, sevelen, feriti, ottobre',
     ogTitle: 'Tamponamento A13 Sevelen due feriti 25/10/2026',
-    ogDescription: 'Il 25 ottobre due auto si sono tamponate sulla A13 a Sevelen Feriti un conducente di 79 anni e la passeggera di 86 Il conducente della seconda auto, 53 anni, è',
+    ogDescription: 'Il 79enne è indicato come considerevolmente ferito, l’86enne come gravemente ferita e il conducente della seconda auto come illeso. Il servizio di soccorso ha effettuato il trattamento iniziale sul posto e ha poi trasferito i due feriti in ospedale.',
     canonicalPath: '/articoli-san-gallo/unfall-a13-sevelen-2026/',
     structuredData: {
       "@context": "https://schema.org",

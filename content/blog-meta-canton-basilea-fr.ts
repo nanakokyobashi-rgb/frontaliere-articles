@@ -22,7 +22,7 @@ const blogMetaCantonBasileaFr: Record<string, string> = {
     'blog.article.barfusserplatz-riqualificazione-urbana.excerpt': 'La rénovation de Barfüsserplatz place au centre la qualité de l’espace urbain : pour le chef de la Commission, créer une belle place est presque impossible.',
     'blog.article.barfusserplatz-riqualificazione-urbana.imageAlt': 'La Barfüsserplatz à Bâle pendant un projet de réaménagement urbain',
     'blog.article.basilea-larvicida-quattro-settimane.title': 'Bâle, moustique tigre : traitements toutes les 4 semaines',
-    'blog.article.basilea-larvicida-quattro-settimane.excerpt': 'Une thèse de master sur 180 caditoires dans le quartier St.',
+    'blog.article.basilea-larvicida-quattro-settimane.excerpt': 'L\'Université de Bâle a déclaré jeudi que les résultats identifient quatre semaines comme intervalle optimal pour les traitements.',
     'blog.article.basilea-larvicida-quattro-settimane.imageAlt': 'Illustration générée pour cet article',
     'blog.article.claraplatz-basel-cantieri.title': 'Bâle, travaux à Claraplatz : commerces en difficulté',
     'blog.article.claraplatz-basel-cantieri.excerpt': 'À Claraplatz, les travaux touchent les commerces et le kiosque perd 40% de son chiffre d’affaires.',

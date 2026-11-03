@@ -12,7 +12,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Il Governo cantonale di Glarona ha approvato una revisione della legge fiscale che estende a dieci anni la compensazione delle perdite, divide a metà',
     keywords: 'frontalieri, ticino, svizzera, italia, glarona, dieci, anni, compensare',
     ogTitle: 'Glarona: dieci anni per compensare le perdite fiscali',
-    ogDescription: 'Il 29 settembre 2026 il Governo di Glarona ha adottato una proposta di modifica della legge fiscale da sottoporre alla Landsgemeinde. La revisione aumenta da sette a dieci anni il periodo di compensazione delle perdite fiscali (valido dal periodo',
+    ogDescription: 'Il 29 settembre 2026 il Governo di Glarona ha adottato una proposta di modifica della legge fiscale da sottoporre alla Landsgemeinde.',
     canonicalPath: '/articoli-glarona/revisione-fiscale-canton-glarona/',
     structuredData: {
       "@context": "https://schema.org",

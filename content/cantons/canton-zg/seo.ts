@@ -350,7 +350,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-zugo-governo-direzioni-2027': {
     title: 'Zugo: il Governo mantiene le direzioni dal 2027',
-    description: 'Zugo: per il mandato dal 2027, tutti i membri del Governo mantengono le direzioni attuali. Lo ha comunicato la Cancelleria dello Stato.',
+    description: 'Zugo: per il mandato dal 2027, tutti i membri del Governo mantengono le direzioni attuali.',
     keywords: 'frontalieri, ticino, svizzera, italia, zugo, governo, mantiene, direzioni',
     ogTitle: 'Zugo: il Governo mantiene le direzioni dal 2027',
     ogDescription: 'Per il mandato dal 2027, il Governo di Zugo conferma le direzioni già affidate: Andreas Hostettler, Andreas Hausheer, Stephan Schleiss, Silvia Thalmann-Gut, Florian Weber, Laura Dittli e Heinz Tännler restano nei rispettivi incarichi.',
@@ -359,7 +359,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Zugo: il Governo mantiene le direzioni dal 2027",
-      "description": "Zugo: per il mandato dal 2027, tutti i membri del Governo mantengono le direzioni attuali. Lo ha comunicato la Cancelleria dello Stato.",
+      "description": "Zugo: per il mandato dal 2027, tutti i membri del Governo mantengono le direzioni attuali.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -545,16 +545,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-zugo-multa-mancata-dichiarazione-fiscale': {
     title: 'Zugo: multa di CHF 900 per mancata dichiarazione fiscale',
-    description: 'Tribunale di Zugo: multa di CHF 900 Cancellata l\'imposta effettiva di CHF 41.15 Restano CHF 105 di spese per ritardo La dichiarazione 2023 non è stata',
+    description: 'La somma aritmetica degli importi ancora richiesti è di CHF 1\'005, cioè CHF 900 di multa più CHF 105 di spese.',
     keywords: 'frontalieri, ticino, svizzera, italia, zugo, multa, mancata, dichiarazione',
     ogTitle: 'Zugo: multa di CHF 900 per mancata dichiarazione fiscale',
-    ogDescription: 'Tribunale di Zugo: multa di CHF 900 Cancellata l\'imposta effettiva di CHF 41.15 Restano CHF 105 di spese per ritardo La dichiarazione 2023 non è stata',
+    ogDescription: 'Nel Canton Zugo, una titolare di impresa individuale dovrà pagare una multa di CHF 900 e CHF 105 di spese per ritardo, nonostante l\'amministrazione fiscale abbia rinunciato a riscuotere l\'imposta effettiva di CHF 41.15.',
     canonicalPath: '/articoli-zugo/zugo-multa-mancata-dichiarazione-fiscale/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Zugo: multa di CHF 900 per mancata dichiarazione fiscale",
-      "description": "Tribunale di Zugo: multa di CHF 900 Cancellata l'imposta effettiva di CHF 41.15 Restano CHF 105 di spese per ritardo La dichiarazione 2023 non è stata",
+      "description": "La somma aritmetica degli importi ancora richiesti è di CHF 1'005, cioè CHF 900 di multa più CHF 105 di spese.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",

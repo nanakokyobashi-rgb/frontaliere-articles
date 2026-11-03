@@ -233,16 +233,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-frontalieri-disoccupazione-criterio-lavoro': {
     title: 'Frontalieri e disoccupazione: UE cambia regole, criterio Stato lavoro',
-    description: 'L\'UE ha approvato nuove regole sulla disoccupazione dei frontalieri Il criterio futuro sarebbe lo Stato in cui si lavora Per la Svizzera l\'entrata non è',
+    description: 'È la tempistica oggi più realistica indicata dalla fonte, ma non equivale a una data di entrata in vigore già fissata per chi lavora in Svizzera.',
     keywords: 'frontalieri, ticino, svizzera, italia, disoccupazione, cambia, regole, criterio',
     ogTitle: 'Frontalieri e disoccupazione: UE sposta criterio allo Stato di lavoro',
-    ogDescription: 'L\'UE ha approvato nuove regole sulla disoccupazione dei frontalieri Il criterio futuro sarebbe lo Stato in cui si lavora Per la Svizzera l\'entrata non è',
+    ogDescription: 'L\'intervento riguarda soprattutto le norme sul diritto all\'indennità di disoccupazione: in futuro, per i frontalieri l\'indennità dovrebbe essere erogata dal Paese di lavoro, anziché da quello di residenza.',
     canonicalPath: '/articoli-ticino/frontalieri-disoccupazione-criterio-lavoro/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Frontalieri e disoccupazione: UE cambia regole, criterio Stato lavoro",
-      "description": "L'UE ha approvato nuove regole sulla disoccupazione dei frontalieri Il criterio futuro sarebbe lo Stato in cui si lavora Per la Svizzera l'entrata non è",
+      "description": "È la tempistica oggi più realistica indicata dalla fonte, ma non equivale a una data di entrata in vigore già fissata per chi lavora in Svizzera.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",

@@ -321,7 +321,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-pulizie-tunnel-sciaffusa': {
     title: 'Bundesamt für Strassen chiuderà tre tunnel di notte',
-    description: 'Dal 19 al 23 ottobre il Bundesamt für Strassen chiude ogni notte i tunnel Fäsenstaub, Cholfirst e Galgenbuck per lavori di pulizia, dalle 20 fino alle 5.',
+    description: 'Il Bundesamt für Strassen chiuderà i tunnel Fäsenstaub, Cholfirst e Galgenbuck per lavori di pulizia.',
     keywords: 'frontalieri, ticino, svizzera, italia, bundesamt, strassen, chiuderà, tunnel',
     ogTitle: 'Tre tunnel chiusi di notte per lavori di pulizia',
     ogDescription: 'Il Bundesamt für Strassen fermerà ogni notte i tunnel Fäsenstaub, Cholfirst e Galgenbuck per lavori di pulizia. La finestra indicata va dal 19 al 23 ottobre, con chiusura dalle 20 fino alle 5 del giorno successivo.',
@@ -330,7 +330,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Bundesamt für Strassen chiuderà tre tunnel di notte",
-      "description": "Dal 19 al 23 ottobre il Bundesamt für Strassen chiude ogni notte i tunnel Fäsenstaub, Cholfirst e Galgenbuck per lavori di pulizia, dalle 20 fino alle 5.",
+      "description": "Il Bundesamt für Strassen chiuderà i tunnel Fäsenstaub, Cholfirst e Galgenbuck per lavori di pulizia.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
