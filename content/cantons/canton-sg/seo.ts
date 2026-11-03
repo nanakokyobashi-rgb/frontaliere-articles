@@ -1011,6 +1011,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-cambiamento-orari-st-gallen': {
+    title: 'Cambiamenti orari bus St.Gallen: interessate Rosenberg, Schuppis e Winkeln',
+    description: 'Il progetto tocca Rosenberg, Schuppis, Grossacker e Winkeln. Dierauerstrasse: la città ne chiede la soppressione per risparmiare. La linea 9 termina',
+    keywords: 'frontalieri, ticino, svizzera, italia, cambiamenti, orari, gallen, interessate',
+    ogTitle: 'Cambiamenti orari bus St.Gallen progetto 2027',
+    ogDescription: 'Il progetto tocca Rosenberg, Schuppis, Grossacker e Winkeln.',
+    canonicalPath: '/articoli-san-gallo/cambiamento-orari-st-gallen/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cambiamenti orari bus St.Gallen: interessate Rosenberg, Schuppis e Winkeln",
+      "description": "Il progetto tocca Rosenberg, Schuppis, Grossacker e Winkeln. Dierauerstrasse: la città ne chiede la soppressione per risparmiare. La linea 9 termina",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-cambiamento-orari-st-gallen.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-03T08:22:04+00:00",
+      "dateModified": "2026-11-03T08:22:04+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-san-gallo/cambiamento-orari-st-gallen/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

@@ -81,6 +81,9 @@ const blogMetaCantonSgEn: Record<string, string> = {
     'blog.article.tamponamento-a1-gossau.title': 'Crash on the A1 in Gossau: four injured',
     'blog.article.tamponamento-a1-gossau.excerpt': 'Accident involving two cars on the A1 in Gossau on October 29, 2026: a 55-year-old seriously injured, three people with minor injuries, and traffic backed up toward St.Gallen.',
     'blog.article.tamponamento-a1-gossau.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.cambiamento-orari-st-gallen.title': 'St.Gallen bus schedule changes: Rosenberg, Schuppis and Winkeln affected',
+    'blog.article.cambiamento-orari-st-gallen.excerpt': 'The project affects Rosenberg, Schuppis, Grossacker and Winkeln.',
+    'blog.article.cambiamento-orari-st-gallen.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSgEn;

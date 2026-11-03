@@ -292,4 +292,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'cambiamento-orari-st-gallen',
+ category: 'pratico',
+ date: '2026-11-03T08:22:04.208Z',
+ image: '/images/blog/article-cambiamento-orari-st-gallen.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

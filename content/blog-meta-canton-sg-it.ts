@@ -81,6 +81,9 @@ const blogMetaCantonSgIt: Record<string, string> = {
     'blog.article.tamponamento-a1-gossau.title': 'Scontro sulla A1 a Gossau: quattro feriti',
     'blog.article.tamponamento-a1-gossau.excerpt': 'Incidente tra due auto sulla A1 a Gossau il 29 ottobre 2026: un 55enne ferito in modo significativo, tre feriti lievi e coda verso St.Gallen.',
     'blog.article.tamponamento-a1-gossau.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.cambiamento-orari-st-gallen.title': 'Cambiamenti orari bus St.Gallen: interessate Rosenberg, Schuppis e Winkeln',
+    'blog.article.cambiamento-orari-st-gallen.excerpt': 'Il progetto tocca Rosenberg, Schuppis, Grossacker e Winkeln.',
+    'blog.article.cambiamento-orari-st-gallen.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSgIt;
