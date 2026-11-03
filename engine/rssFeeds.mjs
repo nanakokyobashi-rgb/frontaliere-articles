@@ -293,9 +293,14 @@ function parseSeoBlogs(fs, path, rootDir, seoDir, seoFiles) {
         : authorType === 'Person'
           ? Boolean(authorId?.includes('#person') || authorUrl?.includes('/autori/'))
           : false;
-      const authorName = isNamedAuthor
+      const namedAuthor = isNamedAuthor
         ? lastStaticPropertyValue(authorBlock ?? '', 'name') ?? ''
         : '';
+      // A profile Organization is a newsroom signature, not a person: the feed
+      // reader has no profile page to open, so the attribution has to say so.
+      const authorName = authorType === 'Organization' && namedAuthor && !namedAuthor.startsWith('Redazione')
+        ? `${namedAuthor} (Redazione Frontaliere Ticino)`
+        : namedAuthor;
 
       // An item needs a REAL date: `<pubDate>` and the newest-first sort are
       // built from it, and `new Date('garbage').toUTCString()` is the literal
@@ -544,9 +549,10 @@ ${itemsXml}
 /**
  * Build every RSS feed for one section.
  *
- * Returns `{ id, articleCount, withdrawnArticleCount, slugCount, feeds }` where `feeds` is an ordered
- * `[filename, xml]` list — the caller decides where the bytes land (public/ in
- * the site, dist/api/ in the publisher). Nothing is written here.
+ * Returns `{ id, articleCount, withdrawnArticleCount, slugCount, feeds }` where
+ * `feeds` is an ordered `[filename, xml]` list — the caller decides where the
+ * bytes land (public/ in the site, dist/api/ in the publisher). Nothing is
+ * written here.
  *
  * `registry` is the section's article array; `id` and `image` are read to
  * resolve `media:content` without touching the filesystem, and `date === ''`
