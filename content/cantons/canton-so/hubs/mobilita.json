@@ -4,17 +4,17 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "mobilita",
-  "updatedAt": "2026-11-03T07:44:37.207Z",
-  "contentHash": "934313f01ef621151ddf1a7af01812b4f748a8d4a35bc04afdc9bfd489db9f79",
+  "updatedAt": "2026-11-03T10:06:57.473Z",
+  "contentHash": "89fd72be2a4e7fae087f30d98042a27d99864c5700811c5fe23e7a2f28593acd",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-11-02T19:51:36.134Z",
+      "updatedAt": "2026-11-03T03:07:39.455Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-02T13:52:53.767Z",
+      "updatedAt": "2026-11-03T00:04:45.487Z",
       "keyFacts": 0
     }
   ],
@@ -28,12 +28,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "4",
-          "note": "segnalazioni aggiornate: 2 novembre 2026"
+          "note": "segnalazioni aggiornate: 3 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "12",
-          "note": "segnalazioni aggiornate: 2 novembre 2026"
+          "note": "segnalazioni aggiornate: 3 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -67,11 +67,6 @@
               "date": "2026-10-22T06:00:00.000Z"
             },
             {
-              "label": "A2 Luzern <-> Basel tra Svincolo autostradale Egerkingen E Raccordo autostradale Diramazione Härkingen Situazione: pericolo Causa: persone sulla strada ciclisti",
-              "value": "Traffico",
-              "date": "2026-11-02T19:46:00.000Z"
-            },
-            {
               "label": "Balsthal <-> Laufen tra Luogo Oberbeinwil E Passo Passwang Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette",
               "value": "Cantiere",
               "detail": "fine prevista: 31 dicembre 2028",
@@ -88,10 +83,16 @@
               "value": "Cantiere",
               "detail": "fine prevista: 30 luglio 2027",
               "date": "2025-04-11T05:00:00.000Z"
+            },
+            {
+              "label": "A1 Bern <-> Zürich tra Raccordo autostradale Diramazione Luterbach E Svincolo autostradale Kirchberg Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: corsie…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 6 novembre 2026",
+              "date": "2026-08-19T18:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-11-02T19:51:36.134Z"
+          "updatedAt": "2026-11-03T03:07:39.455Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -114,7 +115,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -160,7 +161,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-03T07:44:37.207Z"
+      "updatedAt": "2026-11-03T10:06:57.473Z"
     },
     "en": {
       "canton": "SO",
@@ -171,12 +172,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "4",
-          "note": "reports as of 2 November 2026"
+          "note": "reports as of 3 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "12",
-          "note": "reports as of 2 November 2026"
+          "note": "reports as of 3 November 2026"
         }
       ],
       "dataBlocks": [
@@ -210,11 +211,6 @@
               "date": "2026-10-22T06:00:00.000Z"
             },
             {
-              "label": "A2 Luzern <-> Basel tra Svincolo autostradale Egerkingen E Raccordo autostradale Diramazione Härkingen Situazione: pericolo Causa: persone sulla strada ciclisti",
-              "value": "Traffic",
-              "date": "2026-11-02T19:46:00.000Z"
-            },
-            {
               "label": "Balsthal <-> Laufen tra Luogo Oberbeinwil E Passo Passwang Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette",
               "value": "Roadworks",
               "detail": "until 31 December 2028",
@@ -231,10 +227,16 @@
               "value": "Roadworks",
               "detail": "until 30 July 2027",
               "date": "2025-04-11T05:00:00.000Z"
+            },
+            {
+              "label": "A1 Bern <-> Zürich tra Raccordo autostradale Diramazione Luterbach E Svincolo autostradale Kirchberg Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: corsie…",
+              "value": "Roadworks",
+              "detail": "until 6 November 2026",
+              "date": "2026-08-19T18:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-11-02T19:51:36.134Z"
+          "updatedAt": "2026-11-03T03:07:39.455Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -257,7 +259,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -302,7 +304,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-03T07:44:37.207Z"
+      "updatedAt": "2026-11-03T10:06:57.473Z"
     },
     "de": {
       "canton": "SO",
@@ -313,12 +315,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "4",
-          "note": "Meldungen vom 2. November 2026"
+          "note": "Meldungen vom 3. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "12",
-          "note": "Meldungen vom 2. November 2026"
+          "note": "Meldungen vom 3. November 2026"
         }
       ],
       "dataBlocks": [
@@ -352,11 +354,6 @@
               "date": "2026-10-22T06:00:00.000Z"
             },
             {
-              "label": "A2 Luzern <-> Basel zwischen Anschluss Egerkingen und Autobahndreieck Verzweigung Härkingen Sachlage: Gefahr Ursache: Personen auf der Fahrbahn Fahrradfahrer",
-              "value": "Verkehr",
-              "date": "2026-11-02T19:46:00.000Z"
-            },
-            {
               "label": "Balsthal <-> Laufen zwischen Ortschaft Oberbeinwil und Pass Passwang Sachlage: Verkehrsbehinderung Baustelle Verkehrsführung: Fahrbahnverengung",
               "value": "Baustelle",
               "detail": "bis 31. Dezember 2028",
@@ -373,10 +370,16 @@
               "value": "Baustelle",
               "detail": "bis 30. Juli 2027",
               "date": "2025-04-11T05:00:00.000Z"
+            },
+            {
+              "label": "A1 Bern <-> Zürich zwischen Autobahndreieck Verzweigung Luterbach und Anschluss Kirchberg Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.2 Verkehrsführung: Fahrbahnverengung auf einen…",
+              "value": "Baustelle",
+              "detail": "bis 6. November 2026",
+              "date": "2026-08-19T18:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-11-02T19:51:36.134Z"
+          "updatedAt": "2026-11-03T03:07:39.455Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -399,7 +402,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -444,7 +447,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-03T07:44:37.207Z"
+      "updatedAt": "2026-11-03T10:06:57.473Z"
     },
     "fr": {
       "canton": "SO",
@@ -455,12 +458,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "4",
-          "note": "signalements au 2 novembre 2026"
+          "note": "signalements au 3 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "12",
-          "note": "signalements au 2 novembre 2026"
+          "note": "signalements au 3 novembre 2026"
         }
       ],
       "dataBlocks": [
@@ -494,11 +497,6 @@
               "date": "2026-10-22T06:00:00.000Z"
             },
             {
-              "label": "A2 Lucerne <-> Bâle entre Jonction autoroutière Egerkingen et Echangeur Echangeur de Härkingen Situation: danger Raison: piétons sur la chaussée cyclistes",
-              "value": "Trafic",
-              "date": "2026-11-02T19:46:00.000Z"
-            },
-            {
               "label": "Balsthal <-> Laufon entre Localité Oberbeinwil et Col Passwang Situation: trafic perturbé travaux Gestion du trafic: rétrécissement des voies",
               "value": "Chantier",
               "detail": "jusqu’au 31 décembre 2028",
@@ -515,10 +513,16 @@
               "value": "Chantier",
               "detail": "jusqu’au 30 juillet 2027",
               "date": "2025-04-11T05:00:00.000Z"
+            },
+            {
+              "label": "A1 Berne <-> Zurich entre Echangeur Echangeur de Luterbach et Jonction autoroutière Kirchberg Situation: trafic perturbé travaux, longueur [km] 0.2 Gestion du trafic: rétrécissement des voies sur…",
+              "value": "Chantier",
+              "detail": "jusqu’au 6 novembre 2026",
+              "date": "2026-08-19T18:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-11-02T19:51:36.134Z"
+          "updatedAt": "2026-11-03T03:07:39.455Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -541,7 +545,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -587,7 +591,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-03T07:44:37.207Z"
+      "updatedAt": "2026-11-03T10:06:57.473Z"
     }
   }
 }

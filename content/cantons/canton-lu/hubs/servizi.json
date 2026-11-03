@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "servizi",
-  "updatedAt": "2026-11-03T07:44:37.207Z",
-  "contentHash": "f6a11683a0253e6c82d9743869165bdab4915e5f548128836be5fce591ab7353",
+  "updatedAt": "2026-11-03T10:06:57.473Z",
+  "contentHash": "8da9f73128efa4bc322049a164bf9e7050f2102600ab84b47ed9f1307e675525",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -13,8 +13,13 @@
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-11-03T02:32:09.119Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-02T13:52:53.767Z",
+      "updatedAt": "2026-11-03T00:04:45.487Z",
       "keyFacts": 0
     }
   ],
@@ -59,6 +64,20 @@
           "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Luzern",
+              "value": "6 °C",
+              "detail": "oggi da 5 a 8 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-03T02:32:09.119Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
@@ -94,7 +113,7 @@
               "url": "https://www.lups.ch/2026/07/20/abschluss-der-standorttour-in-st-urban-einblicke-in-apotheke-und-stationaere-dienste/"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -174,7 +193,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-03T07:44:37.207Z"
+      "updatedAt": "2026-11-03T10:06:57.473Z"
     },
     "en": {
       "canton": "LU",
@@ -216,6 +235,20 @@
           "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Luzern",
+              "value": "6 °C",
+              "detail": "today from 5 to 8 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-03T02:32:09.119Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
@@ -251,7 +284,7 @@
               "url": "https://www.lups.ch/2026/07/20/abschluss-der-standorttour-in-st-urban-einblicke-in-apotheke-und-stationaere-dienste/"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -326,7 +359,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-03T07:44:37.207Z"
+      "updatedAt": "2026-11-03T10:06:57.473Z"
     },
     "de": {
       "canton": "LU",
@@ -368,6 +401,20 @@
           "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Luzern",
+              "value": "6 °C",
+              "detail": "heute 5 bis 8 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-03T02:32:09.119Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
@@ -403,7 +450,7 @@
               "url": "https://www.lups.ch/2026/07/20/abschluss-der-standorttour-in-st-urban-einblicke-in-apotheke-und-stationaere-dienste/"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -478,7 +525,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-03T07:44:37.207Z"
+      "updatedAt": "2026-11-03T10:06:57.473Z"
     },
     "fr": {
       "canton": "LU",
@@ -520,6 +567,20 @@
           "updatedAt": "2026-11-01T11:17:34.347Z"
         },
         {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Luzern",
+              "value": "6 °C",
+              "detail": "aujourd’hui de 5 à 8 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-03T02:32:09.119Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
@@ -555,7 +616,7 @@
               "url": "https://www.lups.ch/2026/07/20/abschluss-der-standorttour-in-st-urban-einblicke-in-apotheke-und-stationaere-dienste/"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -627,7 +688,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-03T07:44:37.207Z"
+      "updatedAt": "2026-11-03T10:06:57.473Z"
     }
   }
 }

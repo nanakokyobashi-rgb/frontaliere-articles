@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "carburanti",
-  "updatedAt": "2026-11-03T09:01:29.410Z",
-  "contentHash": "7bd52036399d59af00293c5110db88f81d7c9120a37891b24d3a678c92806f4c",
+  "updatedAt": "2026-11-03T10:06:57.473Z",
+  "contentHash": "0a979fce1db3ffed4fa8761cff71a1f3264ea30534a8b162d83d486c1ba97961",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -60,6 +60,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Appenzello: approvate le tariffe mediche per il 2026",
+          "url": "/articoli-appenzello/tariffe-mediche-appenzello-2026/",
+          "excerpt": "La Standeskommission fissa il valore del punto tariffario a 0,86 CHF per le prestazioni ambulatoriali con effetto retroattivo dal 1° gennaio 2026.",
+          "date": "2026-11-03T10:02:49.152Z"
+        },
+        {
           "title": "Appenzello Esterno: più giorni caldi nel 2026",
           "url": "/articoli-appenzello/caldo-appenzello-esterno-2026/",
           "excerpt": "Estate 2026: più giorni caldi nei siti esaminati Nel 2026 sono state rilevate più notti tropicali Altitudine e raffrescamento notturno riducono il caldo",
@@ -82,12 +88,6 @@
           "url": "/articoli-appenzello/costi-sanita-meno-entrate/",
           "excerpt": "Il preventivo 2027 prevede una perdita complessiva di 12,4 milioni di CHF, a causa di costi sanitari crescenti e minori entrate fiscali.",
           "date": "2026-10-28T19:28:05.243Z"
-        },
-        {
-          "title": "Appenzello Esterno verso un deficit di 11,5 milioni",
-          "url": "/articoli-appenzello/appenzello-deficit-budget/",
-          "excerpt": "Il comunicato del 28 ottobre sul budget 2027 dell'Appenzello Esterno indica un deficit di 11,5 milioni; l'eventuale aumento delle imposte resta incerto.",
-          "date": "2026-10-28T18:13:37.671Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-03T09:01:29.410Z"
+      "updatedAt": "2026-11-03T10:06:57.473Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -147,6 +147,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Appenzell: medical fees approved for 2026",
+          "url": "/en/appenzell-articles/medical-tariffs-appenzell-2026/",
+          "excerpt": "The Standeskommission sets the tariff point value at 0,86 CHF for outpatient services, retroactive to January 1, 2026.",
+          "date": "2026-11-03T10:02:49.152Z"
+        },
+        {
           "title": "Appenzell Ausserrhoden: more hot days in 2026",
           "url": "/en/appenzell-articles/heat-appenzell-ausserrhoden-2026/",
           "excerpt": "Summer 2026: more hot days at the sites examined More tropical nights were recorded in 2026 Altitude and nighttime cooling reduce prolonged heat The Health",
@@ -169,12 +175,6 @@
           "url": "/en/appenzell-articles/health-costs-less-revenue/",
           "excerpt": "The 2027 budget projects a total loss of 12,4 million CHF due to rising healthcare costs and lower tax revenues.",
           "date": "2026-10-28T19:28:05.243Z"
-        },
-        {
-          "title": "Appenzell Ausserrhoden heading toward a deficit of 11,5 million",
-          "url": "/en/appenzell-articles/appenzell-budget-deficit/",
-          "excerpt": "The October 28 statement on Appenzell Ausserrhoden's 2027 budget indicates a deficit of 11,5 million; any tax increase remains uncertain.",
-          "date": "2026-10-28T18:13:37.671Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-03T09:01:29.410Z"
+      "updatedAt": "2026-11-03T10:06:57.473Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -234,6 +234,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Appenzell: Medizinische Tarife für 2026 genehmigt",
+          "url": "/de/appenzell-artikel/arzttarife-appenzell-2026/",
+          "excerpt": "Die Standeskommission legt den Wert des Tarifpunktes für ambulante Leistungen rückwirkend ab dem 1.",
+          "date": "2026-11-03T10:02:49.152Z"
+        },
+        {
           "title": "Appenzell Ausserrhoden: mehr heiße Tage im Jahr 2026",
           "url": "/de/appenzell-artikel/hitzebelastung-appenzell-ausserrhoden-2026/",
           "excerpt": "Sommer 2026: mehr heiße Tage an den untersuchten Standorten Im Jahr 2026 wurden mehr Tropennächte festgestellt Höhenlage und nächtliche Abkühlung verringern",
@@ -256,12 +262,6 @@
           "url": "/de/appenzell-artikel/kosten-sanita-weniger-einnahmen/",
           "excerpt": "Der Voranschlag 2027 sieht aufgrund steigender Gesundheitskosten und geringerer Steuereinnahmen einen Gesamtverlust von 12,4 Millionen CHF vor.",
           "date": "2026-10-28T19:28:05.243Z"
-        },
-        {
-          "title": "Appenzell Ausserrhoden steuert auf ein Defizit von 11,5 Millionen zu",
-          "url": "/de/appenzell-artikel/appenzell-budget-defizit/",
-          "excerpt": "Die Mitteilung vom 28.",
-          "date": "2026-10-28T18:13:37.671Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-03T09:01:29.410Z"
+      "updatedAt": "2026-11-03T10:06:57.473Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -321,6 +321,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Appenzell : tarifs médicaux approuvés pour 2026",
+          "url": "/fr/articles-appenzell/tarifs-medicaux-appenzell-2026/",
+          "excerpt": "La Standeskommission fixe la valeur en points tarifaires à 0,86 CHF pour les services ambulatoires avec effet rétroactif à compter du 1er janvier 2026.",
+          "date": "2026-11-03T10:02:49.152Z"
+        },
+        {
           "title": "Appenzell Rhodes-Extérieures : davantage de jours chauds en 2026",
           "url": "/fr/articles-appenzell/chaleur-appenzell-rhodes-exterieures-2026/",
           "excerpt": "Été 2026 : davantage de jours chauds sur les sites examinés En 2026, davantage de nuits tropicales ont été relevées L’altitude et le rafraîchissement nocturne",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-appenzell/couts-sante-moins-revenus/",
           "excerpt": "Le budget 2027 prévoit une perte globale de 12,4 millions de CHF, en raison de la hausse des coûts de santé et de la baisse des recettes fiscales.",
           "date": "2026-10-28T19:28:05.243Z"
-        },
-        {
-          "title": "Appenzell Rhodes-Extérieures se dirige vers un déficit de 11,5 millions",
-          "url": "/fr/articles-appenzell/deficit-budget-appenzell/",
-          "excerpt": "Le communiqué du 28 octobre sur le budget 2027 d'Appenzell Rhodes-Extérieures indique un déficit de 11,5 millions ; une éventuelle hausse des impôts reste incertaine.",
-          "date": "2026-10-28T18:13:37.671Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-03T09:01:29.410Z"
+      "updatedAt": "2026-11-03T10:06:57.473Z"
     }
   }
 }

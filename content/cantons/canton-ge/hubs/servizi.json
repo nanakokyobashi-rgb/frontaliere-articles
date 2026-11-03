@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "servizi",
-  "updatedAt": "2026-11-03T07:44:37.207Z",
-  "contentHash": "101e5d423efc4e8abd1f8a4e0764c491436883212d53d20b02dd52640155c43b",
+  "updatedAt": "2026-11-03T10:06:57.473Z",
+  "contentHash": "5b5be2dfa811c7b6017a7c2831639538ffca1278a710e23079c2e1034dd6f282",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,17 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-02T19:17:00.783Z",
+      "updatedAt": "2026-11-03T01:41:39.720Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-11-03T02:32:09.119Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-02T13:52:53.767Z",
+      "updatedAt": "2026-11-03T00:04:45.487Z",
       "keyFacts": 0
     }
   ],
@@ -91,13 +96,32 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-02T19:17:00.783Z"
+          "updatedAt": "2026-11-03T01:41:39.720Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "6 °C",
+              "detail": "oggi da 5 a 9 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-03T02:32:09.119Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Tentatives d'escroqueries téléphoniques : usurpation de l'identité d'un médecin des HUG",
+              "date": "2026-11-02",
+              "url": "https://www.hug.ch/actualite/tentatives-escroqueries-telephoniques-usurpation-identite-medecin-hug"
+            },
             {
               "label": "Recherche en thérapie cellulaire innovante pour traiter l’insuffisance cardiaque",
               "date": "2026-11-02",
@@ -122,14 +146,9 @@
               "label": "Appel à projets - Santé mentale des jeunes",
               "date": "2026-10-29",
               "url": "https://www.ge.ch/node/45359"
-            },
-            {
-              "label": "Rapport sur l'état de santé des cours d'eau genevois: le secteur de La Laire - Champagne",
-              "date": "2026-10-29",
-              "url": "https://www.ge.ch/node/45376"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -209,7 +228,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-03T07:44:37.207Z"
+      "updatedAt": "2026-11-03T10:06:57.473Z"
     },
     "en": {
       "canton": "GE",
@@ -278,13 +297,32 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-02T19:17:00.783Z"
+          "updatedAt": "2026-11-03T01:41:39.720Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "6 °C",
+              "detail": "today from 5 to 9 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-03T02:32:09.119Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Tentatives d'escroqueries téléphoniques : usurpation de l'identité d'un médecin des HUG",
+              "date": "2026-11-02",
+              "url": "https://www.hug.ch/actualite/tentatives-escroqueries-telephoniques-usurpation-identite-medecin-hug"
+            },
             {
               "label": "Recherche en thérapie cellulaire innovante pour traiter l’insuffisance cardiaque",
               "date": "2026-11-02",
@@ -309,14 +347,9 @@
               "label": "Appel à projets - Santé mentale des jeunes",
               "date": "2026-10-29",
               "url": "https://www.ge.ch/node/45359"
-            },
-            {
-              "label": "Rapport sur l'état de santé des cours d'eau genevois: le secteur de La Laire - Champagne",
-              "date": "2026-10-29",
-              "url": "https://www.ge.ch/node/45376"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -391,7 +424,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-03T07:44:37.207Z"
+      "updatedAt": "2026-11-03T10:06:57.473Z"
     },
     "de": {
       "canton": "GE",
@@ -460,13 +493,32 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-02T19:17:00.783Z"
+          "updatedAt": "2026-11-03T01:41:39.720Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "6 °C",
+              "detail": "heute 5 bis 9 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-03T02:32:09.119Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Tentatives d'escroqueries téléphoniques : usurpation de l'identité d'un médecin des HUG",
+              "date": "2026-11-02",
+              "url": "https://www.hug.ch/actualite/tentatives-escroqueries-telephoniques-usurpation-identite-medecin-hug"
+            },
             {
               "label": "Recherche en thérapie cellulaire innovante pour traiter l’insuffisance cardiaque",
               "date": "2026-11-02",
@@ -491,14 +543,9 @@
               "label": "Appel à projets - Santé mentale des jeunes",
               "date": "2026-10-29",
               "url": "https://www.ge.ch/node/45359"
-            },
-            {
-              "label": "Rapport sur l'état de santé des cours d'eau genevois: le secteur de La Laire - Champagne",
-              "date": "2026-10-29",
-              "url": "https://www.ge.ch/node/45376"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -573,7 +620,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-03T07:44:37.207Z"
+      "updatedAt": "2026-11-03T10:06:57.473Z"
     },
     "fr": {
       "canton": "GE",
@@ -642,13 +689,32 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-11-02T19:17:00.783Z"
+          "updatedAt": "2026-11-03T01:41:39.720Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "6 °C",
+              "detail": "aujourd’hui de 5 à 9 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-03T02:32:09.119Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Tentatives d'escroqueries téléphoniques : usurpation de l'identité d'un médecin des HUG",
+              "date": "2026-11-02",
+              "url": "https://www.hug.ch/actualite/tentatives-escroqueries-telephoniques-usurpation-identite-medecin-hug"
+            },
             {
               "label": "Recherche en thérapie cellulaire innovante pour traiter l’insuffisance cardiaque",
               "date": "2026-11-02",
@@ -673,14 +739,9 @@
               "label": "Appel à projets - Santé mentale des jeunes",
               "date": "2026-10-29",
               "url": "https://www.ge.ch/node/45359"
-            },
-            {
-              "label": "Rapport sur l'état de santé des cours d'eau genevois: le secteur de La Laire - Champagne",
-              "date": "2026-10-29",
-              "url": "https://www.ge.ch/node/45376"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -752,7 +813,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-03T07:44:37.207Z"
+      "updatedAt": "2026-11-03T10:06:57.473Z"
     }
   }
 }

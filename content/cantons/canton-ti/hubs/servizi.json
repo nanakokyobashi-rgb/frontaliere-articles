@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-11-03T07:44:37.207Z",
-  "contentHash": "a602ee314d247252b0b99fa5240b9ed51120e215b9a5d0b2a6072bbf397271bd",
+  "updatedAt": "2026-11-03T10:06:57.473Z",
+  "contentHash": "a0dfefa0734bce804b0a3bc4d75fa7321fd5363911a2e7e8b6317f0aa82c27ed",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,22 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-02T19:16:10.225Z",
+      "updatedAt": "2026-11-03T01:40:51.387Z",
       "keyFacts": 0
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-02T15:47:08.669Z",
+      "updatedAt": "2026-11-03T00:59:08.019Z",
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-11-03T02:32:09.119Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-02T13:52:53.767Z",
+      "updatedAt": "2026-11-03T00:04:45.487Z",
       "keyFacts": 0
     }
   ],
@@ -106,7 +111,7 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-11-02T19:16:10.225Z"
+          "updatedAt": "2026-11-03T01:40:51.387Z"
         },
         {
           "id": "aste-targhe",
@@ -130,7 +135,41 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-11-02T15:47:08.669Z"
+          "updatedAt": "2026-11-03T00:59:08.019Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Bellinzona",
+              "value": "6 °C",
+              "detail": "oggi da 5 a 13 °C"
+            },
+            {
+              "label": "Chiasso",
+              "value": "3 °C",
+              "detail": "oggi da 4 a 13 °C"
+            },
+            {
+              "label": "Locarno",
+              "value": "6 °C",
+              "detail": "oggi da 6 a 14 °C"
+            },
+            {
+              "label": "Lugano",
+              "value": "6 °C",
+              "detail": "oggi da 5 a 13 °C"
+            },
+            {
+              "label": "Mendrisio",
+              "value": "5 °C",
+              "detail": "oggi da 5 a 12 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-03T02:32:09.119Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -168,7 +207,7 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/CS-osg-ambulatoriale.html"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -256,7 +295,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-11-03T07:44:37.207Z"
+      "updatedAt": "2026-11-03T10:06:57.473Z"
     },
     "en": {
       "canton": "TI",
@@ -335,7 +374,7 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-11-02T19:16:10.225Z"
+          "updatedAt": "2026-11-03T01:40:51.387Z"
         },
         {
           "id": "aste-targhe",
@@ -359,7 +398,41 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-11-02T15:47:08.669Z"
+          "updatedAt": "2026-11-03T00:59:08.019Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Bellinzona",
+              "value": "6 °C",
+              "detail": "today from 5 to 13 °C"
+            },
+            {
+              "label": "Chiasso",
+              "value": "3 °C",
+              "detail": "today from 4 to 13 °C"
+            },
+            {
+              "label": "Locarno",
+              "value": "6 °C",
+              "detail": "today from 6 to 14 °C"
+            },
+            {
+              "label": "Lugano",
+              "value": "6 °C",
+              "detail": "today from 5 to 13 °C"
+            },
+            {
+              "label": "Mendrisio",
+              "value": "5 °C",
+              "detail": "today from 5 to 12 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-03T02:32:09.119Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -397,7 +470,7 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/CS-osg-ambulatoriale.html"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -480,7 +553,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-11-03T07:44:37.207Z"
+      "updatedAt": "2026-11-03T10:06:57.473Z"
     },
     "de": {
       "canton": "TI",
@@ -559,7 +632,7 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-11-02T19:16:10.225Z"
+          "updatedAt": "2026-11-03T01:40:51.387Z"
         },
         {
           "id": "aste-targhe",
@@ -583,7 +656,41 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-11-02T15:47:08.669Z"
+          "updatedAt": "2026-11-03T00:59:08.019Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Bellinzona",
+              "value": "6 °C",
+              "detail": "heute 5 bis 13 °C"
+            },
+            {
+              "label": "Chiasso",
+              "value": "3 °C",
+              "detail": "heute 4 bis 13 °C"
+            },
+            {
+              "label": "Locarno",
+              "value": "6 °C",
+              "detail": "heute 6 bis 14 °C"
+            },
+            {
+              "label": "Lugano",
+              "value": "6 °C",
+              "detail": "heute 5 bis 13 °C"
+            },
+            {
+              "label": "Mendrisio",
+              "value": "5 °C",
+              "detail": "heute 5 bis 12 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-03T02:32:09.119Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -621,7 +728,7 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/CS-osg-ambulatoriale.html"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -704,7 +811,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-11-03T07:44:37.207Z"
+      "updatedAt": "2026-11-03T10:06:57.473Z"
     },
     "fr": {
       "canton": "TI",
@@ -783,7 +890,7 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-11-02T19:16:10.225Z"
+          "updatedAt": "2026-11-03T01:40:51.387Z"
         },
         {
           "id": "aste-targhe",
@@ -807,7 +914,41 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-11-02T15:47:08.669Z"
+          "updatedAt": "2026-11-03T00:59:08.019Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Bellinzona",
+              "value": "6 °C",
+              "detail": "aujourd’hui de 5 à 13 °C"
+            },
+            {
+              "label": "Chiasso",
+              "value": "3 °C",
+              "detail": "aujourd’hui de 4 à 13 °C"
+            },
+            {
+              "label": "Locarno",
+              "value": "6 °C",
+              "detail": "aujourd’hui de 6 à 14 °C"
+            },
+            {
+              "label": "Lugano",
+              "value": "6 °C",
+              "detail": "aujourd’hui de 5 à 13 °C"
+            },
+            {
+              "label": "Mendrisio",
+              "value": "5 °C",
+              "detail": "aujourd’hui de 5 à 12 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-03T02:32:09.119Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -845,7 +986,7 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/CS-osg-ambulatoriale.html"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -925,7 +1066,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-11-03T07:44:37.207Z"
+      "updatedAt": "2026-11-03T10:06:57.473Z"
     }
   }
 }

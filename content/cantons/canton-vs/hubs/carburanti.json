@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "carburanti",
-  "updatedAt": "2026-11-02T09:20:10.429Z",
-  "contentHash": "bc68fddcc235632045d09d3f18c9f8e2b4f222d8a511a0b1fe1fb877bcc55a1d",
+  "updatedAt": "2026-11-03T10:06:57.473Z",
+  "contentHash": "1718c48c8c28fdbef69ab3fce772a5d3769a338bd061265d581bc67439e41e8d",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -60,6 +60,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Val de Bagnes: 175 persone per settimana sostenibilità",
+          "url": "/articoli-vallese/val-de-bagnes-sostenibilita-2024/",
+          "excerpt": "175 persone a Val de Bagnes Sei appuntamenti dal 24 al 31 ottobre Presentato il primo Piano climatico del comune Il piano comprende 26 misure e 75 azioni Luogo",
+          "date": "2026-11-03T09:11:19.910Z"
+        },
+        {
           "title": "Bains d'Ovronnaz: sursis concordatario fino al 31 marzo 2027",
           "url": "/articoli-vallese/bains-ovronnaz-nuovo-sursis/",
           "excerpt": "Il tribunale di Martigny prolunga il sursis fino al 31 marzo 2027 I dipendenti conservano il posto per tutta la stagione invernale Le presenze aumentano",
@@ -82,12 +88,6 @@
           "url": "/articoli-vallese/iselle-parcheggio-frontalieri/",
           "excerpt": "Il parcheggio di Iselle per frontalieri diventa a pagamento: l'abbonamento mensile è di 50 euro.",
           "date": "2026-10-18T06:55:42.164Z"
-        },
-        {
-          "title": "Eventi del weekend in Vallese: cosa fare sabato e domenica",
-          "url": "/articoli-vallese/eventi-weekend-vallese/",
-          "excerpt": "Eventi in Vallese ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
-          "date": "2026-10-17T11:33:34.787Z"
         }
       ],
       "links": [
@@ -116,7 +116,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T10:06:57.473Z"
     },
     "en": {
       "canton": "VS",
@@ -163,6 +163,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Val de Bagnes: 175 people for Sustainability Week",
+          "url": "/en/valais-articles/val-de-bagnes-sustainability/",
+          "excerpt": "175 people in Val de Bagnes Six events from October 24 to 31 The municipality's first Climate Plan was presented The plan comprises 26 measures and 75 actions",
+          "date": "2026-11-03T09:11:19.910Z"
+        },
+        {
           "title": "Bains d'Ovronnaz: composition moratorium until March 31, 2027",
           "url": "/en/valais-articles/bains-ovronnaz-new-sursis/",
           "excerpt": "The Martigny court extends the moratorium until March 31, 2027 Employees retain their jobs throughout the winter season Visitor numbers increase by 20-30%",
@@ -185,12 +191,6 @@
           "url": "/en/valais-articles/iselle-frontier-parking/",
           "excerpt": "The Iselle car park for cross-border commuters is becoming paid parking: the monthly subscription is 50 euros.",
           "date": "2026-10-18T06:55:42.164Z"
-        },
-        {
-          "title": "Weekend events in Valais: what to do Saturday & Sunday",
-          "url": "/en/valais-articles/weekend-events-valais/",
-          "excerpt": "Events in Valais every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
-          "date": "2026-10-17T11:33:34.787Z"
         }
       ],
       "links": [
@@ -219,7 +219,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T10:06:57.473Z"
     },
     "de": {
       "canton": "VS",
@@ -266,6 +266,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Val de Bagnes: 175 Personen für die Nachhaltigkeitswoche",
+          "url": "/de/wallis-artikel/val-de-bagnes-nachhaltigkeit/",
+          "excerpt": "175 Personen in Val de Bagnes Sechs Veranstaltungen vom 24.",
+          "date": "2026-11-03T09:11:19.910Z"
+        },
+        {
           "title": "Bains d'Ovronnaz: Nachlassstundung bis zum 31. März 2027",
           "url": "/de/wallis-artikel/bains-ovronnaz-neuer-sursis/",
           "excerpt": "Das Gericht von Martigny verlängert die Nachlassstundung bis zum 31.",
@@ -288,12 +294,6 @@
           "url": "/de/wallis-artikel/iselle-grenzgaengerparkplatz/",
           "excerpt": "Der Parkplatz für Grenzgänger in Iselle wird kostenpflichtig: Das Monatsabonnement beträgt 50 euro.",
           "date": "2026-10-18T06:55:42.164Z"
-        },
-        {
-          "title": "Veranstaltungen am Wochenende im Wallis: was tun Sa & So",
-          "url": "/de/wallis-artikel/wochenend-veranstaltungen-wallis/",
-          "excerpt": "Veranstaltungen im Wallis an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
-          "date": "2026-10-17T11:33:34.787Z"
         }
       ],
       "links": [
@@ -318,7 +318,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T10:06:57.473Z"
     },
     "fr": {
       "canton": "VS",
@@ -365,6 +365,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Val de Bagnes : 175 personnes pour la semaine de la durabilité",
+          "url": "/fr/articles-valais/val-de-bagnes-durable/",
+          "excerpt": "175 personnes à Val de Bagnes Six rendez-vous du 24 au 31 octobre Présentation du premier Plan climatique de la commune Le plan comprend 26 mesures et 75",
+          "date": "2026-11-03T09:11:19.910Z"
+        },
+        {
           "title": "Bains d'Ovronnaz : sursis concordataire jusqu'au 31 mars 2027",
           "url": "/fr/articles-valais/bains-ovronnaz-nouveau-sursis/",
           "excerpt": "Le tribunal de Martigny prolonge le sursis jusqu'au 31 mars 2027 Les employés conservent leur emploi pendant toute la saison hivernale La fréquentation augmente",
@@ -387,12 +393,6 @@
           "url": "/fr/articles-valais/iselle-parking-frontaliers/",
           "excerpt": "Le parking d'Iselle pour frontaliers devient payant : l'abonnement mensuel est de 50 euro.",
           "date": "2026-10-18T06:55:42.164Z"
-        },
-        {
-          "title": "Événements du week-end en Valais : que faire samedi & dimanche",
-          "url": "/fr/articles-valais/evenements-week-end-valais/",
-          "excerpt": "Événements en Valais chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
-          "date": "2026-10-17T11:33:34.787Z"
         }
       ],
       "links": [
@@ -421,7 +421,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T10:06:57.473Z"
     }
   }
 }

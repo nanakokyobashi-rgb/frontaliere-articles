@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "servizi",
-  "updatedAt": "2026-11-03T07:44:37.207Z",
-  "contentHash": "9956c85b9c65469d88cb6d076666d4db0d639cd55d317a4c879307bf21d2413d",
+  "updatedAt": "2026-11-03T10:06:57.473Z",
+  "contentHash": "de0ab581785a2a036f4ce2ade140abe5f89ccd09c519e762202b1d06b8a3aacf",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-02T15:47:08.669Z",
+      "updatedAt": "2026-11-03T00:59:08.019Z",
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-11-03T02:32:09.119Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-02T13:52:53.767Z",
+      "updatedAt": "2026-11-03T00:04:45.487Z",
       "keyFacts": 0
     }
   ],
@@ -38,7 +43,7 @@
         },
         {
           "label": "Aste di targhe in corso",
-          "value": "59",
+          "value": "56",
           "note": "offerta mediana 600 CHF"
         }
       ],
@@ -87,7 +92,21 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://auktion.tg.ch/de/",
-          "updatedAt": "2026-11-02T15:47:08.669Z"
+          "updatedAt": "2026-11-03T00:59:08.019Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Frauenfeld",
+              "value": "5 °C",
+              "detail": "oggi da 5 a 7 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-03T02:32:09.119Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -125,7 +144,7 @@
               "url": "https://awa.tg.ch/im-fokus.html/3696/news/79974"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -205,7 +224,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-03T07:44:37.207Z"
+      "updatedAt": "2026-11-03T10:06:57.473Z"
     },
     "en": {
       "canton": "TG",
@@ -221,7 +240,7 @@
         },
         {
           "label": "Plate auctions running",
-          "value": "59",
+          "value": "56",
           "note": "typical bid 600 CHF"
         }
       ],
@@ -270,7 +289,21 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://auktion.tg.ch/de/",
-          "updatedAt": "2026-11-02T15:47:08.669Z"
+          "updatedAt": "2026-11-03T00:59:08.019Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Frauenfeld",
+              "value": "5 °C",
+              "detail": "today from 5 to 7 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-03T02:32:09.119Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -308,7 +341,7 @@
               "url": "https://awa.tg.ch/im-fokus.html/3696/news/79974"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -384,7 +417,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-03T07:44:37.207Z"
+      "updatedAt": "2026-11-03T10:06:57.473Z"
     },
     "de": {
       "canton": "TG",
@@ -400,7 +433,7 @@
         },
         {
           "label": "Laufende Kontrollschild-Auktionen",
-          "value": "59",
+          "value": "56",
           "note": "mittleres Gebot 600 CHF"
         }
       ],
@@ -449,7 +482,21 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://auktion.tg.ch/de/",
-          "updatedAt": "2026-11-02T15:47:08.669Z"
+          "updatedAt": "2026-11-03T00:59:08.019Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Frauenfeld",
+              "value": "5 °C",
+              "detail": "heute 5 bis 7 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-03T02:32:09.119Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -487,7 +534,7 @@
               "url": "https://awa.tg.ch/im-fokus.html/3696/news/79974"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -563,7 +610,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-03T07:44:37.207Z"
+      "updatedAt": "2026-11-03T10:06:57.473Z"
     },
     "fr": {
       "canton": "TG",
@@ -579,7 +626,7 @@
         },
         {
           "label": "Enchères de plaques en cours",
-          "value": "59",
+          "value": "56",
           "note": "offre centrale 600 CHF"
         }
       ],
@@ -628,7 +675,21 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://auktion.tg.ch/de/",
-          "updatedAt": "2026-11-02T15:47:08.669Z"
+          "updatedAt": "2026-11-03T00:59:08.019Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Frauenfeld",
+              "value": "5 °C",
+              "detail": "aujourd’hui de 5 à 7 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-03T02:32:09.119Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -666,7 +727,7 @@
               "url": "https://awa.tg.ch/im-fokus.html/3696/news/79974"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -738,7 +799,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-03T07:44:37.207Z"
+      "updatedAt": "2026-11-03T10:06:57.473Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "servizi",
-  "updatedAt": "2026-11-03T07:44:37.207Z",
-  "contentHash": "9c0b0190d85d0e1b180d9008ac389c49b4d936c36a4b9ff6393764a90ed98589",
+  "updatedAt": "2026-11-03T10:06:57.473Z",
+  "contentHash": "6b6cfa3ca70f92ff23138d8ce9a1558473922c40b768a9de15d38cb66d0aac49",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-02T15:47:08.669Z",
+      "updatedAt": "2026-11-03T00:59:08.019Z",
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-11-03T02:32:09.119Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-02T13:52:53.767Z",
+      "updatedAt": "2026-11-03T00:04:45.487Z",
       "keyFacts": 0
     }
   ],
@@ -92,7 +97,21 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://ecari.vs.ch/ecari-auction/ui/app/init?locale=fr_CH",
-          "updatedAt": "2026-11-02T15:47:08.669Z"
+          "updatedAt": "2026-11-03T00:59:08.019Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Sion",
+              "value": "3 °C",
+              "detail": "oggi da 1 a 12 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-03T02:32:09.119Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -130,7 +149,7 @@
               "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/12/journee-des-proches-aidants-du-vendredi-30-octobre-2026-a-lhopital-de-sion"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -210,7 +229,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-03T07:44:37.207Z"
+      "updatedAt": "2026-11-03T10:06:57.473Z"
     },
     "en": {
       "canton": "VS",
@@ -280,7 +299,21 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://ecari.vs.ch/ecari-auction/ui/app/init?locale=fr_CH",
-          "updatedAt": "2026-11-02T15:47:08.669Z"
+          "updatedAt": "2026-11-03T00:59:08.019Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Sion",
+              "value": "3 °C",
+              "detail": "today from 1 to 12 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-03T02:32:09.119Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -318,7 +351,7 @@
               "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/12/journee-des-proches-aidants-du-vendredi-30-octobre-2026-a-lhopital-de-sion"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -394,7 +427,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-03T07:44:37.207Z"
+      "updatedAt": "2026-11-03T10:06:57.473Z"
     },
     "de": {
       "canton": "VS",
@@ -464,7 +497,21 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://ecari.vs.ch/ecari-auction/ui/app/init?locale=fr_CH",
-          "updatedAt": "2026-11-02T15:47:08.669Z"
+          "updatedAt": "2026-11-03T00:59:08.019Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Sion",
+              "value": "3 °C",
+              "detail": "heute 1 bis 12 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-03T02:32:09.119Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -502,7 +549,7 @@
               "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/12/journee-des-proches-aidants-du-vendredi-30-octobre-2026-a-lhopital-de-sion"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -578,7 +625,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-03T07:44:37.207Z"
+      "updatedAt": "2026-11-03T10:06:57.473Z"
     },
     "fr": {
       "canton": "VS",
@@ -648,7 +695,21 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://ecari.vs.ch/ecari-auction/ui/app/init?locale=fr_CH",
-          "updatedAt": "2026-11-02T15:47:08.669Z"
+          "updatedAt": "2026-11-03T00:59:08.019Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Sion",
+              "value": "3 °C",
+              "detail": "aujourd’hui de 1 à 12 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-03T02:32:09.119Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -686,7 +747,7 @@
               "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/12/journee-des-proches-aidants-du-vendredi-30-octobre-2026-a-lhopital-de-sion"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T00:04:45.487Z"
         }
       ],
       "curatedArticles": [
@@ -758,7 +819,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-03T07:44:37.207Z"
+      "updatedAt": "2026-11-03T10:06:57.473Z"
     }
   }
 }
