@@ -19,6 +19,7 @@ import {
   isExpectedMissingHistoricalPath,
   isLazyFetchFailure,
   parseCatFileBatchOutput,
+  parseCatFileBatchStream,
   parseFollowHistory,
 } from '../../scripts/ci/verify-manifest-baseline-history.mjs';
 
@@ -138,7 +139,7 @@ test('la passata sui rinomini usa il path storico associato a ogni commit', () =
     /parseFollowHistory\(\s*git\(\['-c', 'core\.quotePath=false', 'log', '--follow'[\s\S]+--name-only[\s\S]+(?:ref|CURRENT_HISTORY_REF)/,
   );
   assert.match(HISTORY_SCRIPT, /new Set\(\[CURRENT_HISTORY_REF, CANONICAL_HISTORY_REF\]\)/);
-  assert.match(HISTORY_SCRIPT, /spawnSync\(\s*'git',\s*\['-c', 'core\.quotePath=false', 'cat-file', '--batch'/);
+  assert.match(HISTORY_SCRIPT, /spawn\(\s*'git',\s*\['-c', 'core\.quotePath=false', 'cat-file', '--batch'/);
   assert.match(HISTORY_SCRIPT, /spawnSync\(\s*'git',\s*\['-c', 'core\.quotePath=false', 'cat-file', 'blob'/);
   assert.match(HISTORY_SCRIPT, /`\$\{sha\}:\$\{historicalPath\}`/);
 });
@@ -183,6 +184,37 @@ test('cat-file non maschera missing, ambiguous o stdout troncato come ghost di m
     ])),
     /stdout troncato.*another-oid/,
   );
+});
+
+test('cat-file streaming conserva i record quando header, blob e separatore attraversano i chunk', async () => {
+  const first = 'a'.repeat(40);
+  const second = 'b'.repeat(40);
+  const output = Buffer.from(`${first} blob 5\nhello\n${second} blob 0\n\n`);
+  async function* chunks() {
+    yield output.subarray(0, 7);
+    yield output.subarray(7, 14);
+    yield output.subarray(14, 22);
+    yield output.subarray(22);
+  }
+  const parsed = await parseCatFileBatchStream(
+    chunks(),
+    new Map([[first, new Set(['a.mjs'])], [second, new Set(['b.mjs'])]]),
+  );
+  assert.deepEqual(parsed.get('a.mjs'), new Set([sha256(Buffer.from('hello'))]));
+  assert.deepEqual(parsed.get('b.mjs'), new Set([sha256(Buffer.alloc(0))]));
+});
+
+test('cat-file streaming mantiene la lettura inconclusiva dei missing in un clone partial', async () => {
+  const missing = 'c'.repeat(40);
+  async function* chunks() {
+    yield Buffer.from(`${missing} missing\n`);
+  }
+  const parsed = await parseCatFileBatchStream(
+    chunks(),
+    new Map([[missing, new Set(['missing.mjs'])]]),
+    { allowMissing: true },
+  );
+  assert.equal(parsed, null);
 });
 
 test('un lazy-fetch inconclusivo resta rosso anche nel report JSON', () => {

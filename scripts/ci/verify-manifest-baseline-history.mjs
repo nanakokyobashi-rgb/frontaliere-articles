@@ -53,7 +53,8 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { execFileSync, spawnSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
+import { execFileSync, spawn, spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { sha256 } from './loop-drift-check.mjs';
 
@@ -62,12 +63,12 @@ const MANIFEST_REL = 'scripts/ci/loop-sync-manifest.json';
 const JSON_OUT = process.argv.includes('--json');
 export const CANONICAL_HISTORY_REF = 'origin/main';
 export const CURRENT_HISTORY_REF = 'HEAD';
-// Un batch unico può contenere tutte le revisioni storiche dei path del
-// manifest: su un runner completo il buffer stdout e il processo git possono
-// superare il limite di memoria e `spawnSync` torna con `status: null`. I
-// chunk mantengono la verifica integrale ma limitano la memoria per passata.
-const CAT_FILE_BATCH_SIZE = 128;
-const CAT_FILE_MAX_BUFFER = 1 << 28;
+// La storia dei path produce oltre un gigabyte di blob nel checkout completo.
+// Il protocollo batch resta un'unica sessione Git e il parser consuma stdout a
+// chunk: nessun processo riparte per ogni gruppo e nessun buffer deve
+// contenere l'intera risposta.
+const CAT_FILE_STDERR_MAX_BYTES = 1 << 20;
+const CAT_FILE_STREAM_CHUNK_BYTES = 1 << 20;
 
 /**
  * Il verdetto, PURO: niente disco, niente git, niente rete — e' questo a
@@ -175,6 +176,35 @@ export function isLazyFetchFailure(stderr) {
  * @param {{allowMissing?: boolean}} [options]
  * @returns {Map<string, Set<string>>|null} null = lettura inconclusiva.
  */
+function parseCatFileBatchHeader(header, oidToPaths, allowMissing) {
+  const [oid, type, sizeStr] = header.split(' ');
+  if (type === 'missing') {
+    if (allowMissing) return null;
+    throw new Error(`git cat-file --batch: ${header}`);
+  }
+  if (type === 'ambiguous') {
+    throw new Error(`git cat-file --batch: ${header}`);
+  }
+  if (type !== 'blob' || !/^\d+$/.test(sizeStr || '')) {
+    throw new Error(`git cat-file --batch: header non parsabile: ${header || '(vuoto)'}`);
+  }
+  if (!oidToPaths.has(oid)) {
+    throw new Error(`git cat-file --batch: oid inatteso: ${oid}`);
+  }
+  const size = Number(sizeStr);
+  if (!Number.isSafeInteger(size)) {
+    throw new Error(`git cat-file --batch: dimensione non parsabile per ${oid}: ${sizeStr}`);
+  }
+  return { oid, size };
+}
+
+function addCatFileHash(byPath, oidToPaths, oid, hash) {
+  for (const rel of oidToPaths.get(oid) || []) {
+    if (!byPath.has(rel)) byPath.set(rel, new Set());
+    byPath.get(rel).add(hash);
+  }
+}
+
 export function parseCatFileBatchOutput(buf, oidToPaths, { allowMissing = false } = {}) {
   const byPath = new Map();
   if (!oidToPaths || oidToPaths.size === 0) return byPath;
@@ -188,36 +218,98 @@ export function parseCatFileBatchOutput(buf, oidToPaths, { allowMissing = false 
     const nl = buf.indexOf(10, off);
     if (nl < 0) throw new Error('git cat-file --batch: stdout troncato (header senza newline)');
     const header = buf.slice(off, nl).toString();
-    const [oid, type, sizeStr] = header.split(' ');
-    if (type === 'missing') {
-      if (allowMissing) return null;
-      throw new Error(`git cat-file --batch: ${header}`);
-    }
-    if (type === 'ambiguous') {
-      throw new Error(`git cat-file --batch: ${header}`);
-    }
-    if (type !== 'blob' || !/^\d+$/.test(sizeStr || '')) {
-      throw new Error(`git cat-file --batch: header non parsabile: ${header || '(vuoto)'}`);
-    }
-    if (!oidToPaths.has(oid)) {
-      throw new Error(`git cat-file --batch: oid inatteso: ${oid}`);
-    }
-    const size = Number(sizeStr);
-    if (!Number.isSafeInteger(size)) {
-      throw new Error(`git cat-file --batch: dimensione non parsabile per ${oid}: ${sizeStr}`);
-    }
+    const parsed = parseCatFileBatchHeader(header, oidToPaths, allowMissing);
+    if (parsed === null) return null;
+    const { oid, size } = parsed;
     const contentStart = nl + 1;
     const contentEnd = contentStart + size;
     if (contentEnd >= buf.length || buf[contentEnd] !== 10) {
       throw new Error(`git cat-file --batch: contenuto troncato per ${oid}`);
     }
     seenOids.add(oid);
-    const hash = sha256(buf.slice(contentStart, contentEnd));
-    for (const rel of oidToPaths.get(oid) || []) {
-      if (!byPath.has(rel)) byPath.set(rel, new Set());
-      byPath.get(rel).add(hash);
-    }
+    addCatFileHash(byPath, oidToPaths, oid, sha256(buf.slice(contentStart, contentEnd)));
     off = contentEnd + 1;
+  }
+  if (seenOids.size !== oidToPaths.size) {
+    const missing = [...oidToPaths.keys()].filter((oid) => !seenOids.has(oid));
+    throw new Error(`git cat-file --batch: stdout troncato; nessuna risposta per ${missing.join(', ')}`);
+  }
+  return byPath;
+}
+
+/**
+ * La stessa decodifica, ma senza pretendere che stdout sia contenibile in un
+ * Buffer. `git cat-file --batch` può restituire oltre un gigabyte per questo
+ * manifest; il parser incrementale conserva i confini del protocollo e fa
+ * l'hash di ogni blob mentre arriva.
+ *
+ * @param {AsyncIterable<Buffer|string>} chunks stdout del processo Git.
+ * @param {Map<string, Set<string>>} oidToPaths
+ * @param {{allowMissing?: boolean}} [options]
+ * @returns {Promise<Map<string, Set<string>>|null>} null = lettura inconclusiva.
+ */
+export async function parseCatFileBatchStream(chunks, oidToPaths, { allowMissing = false } = {}) {
+  const byPath = new Map();
+  if (!oidToPaths || oidToPaths.size === 0) return byPath;
+
+  const seenOids = new Set();
+  let mode = 'header';
+  let header = '';
+  let currentOid = null;
+  let remaining = 0;
+  let hash = null;
+
+  for await (const rawChunk of chunks) {
+    const chunk = Buffer.isBuffer(rawChunk) ? rawChunk : Buffer.from(rawChunk);
+    let off = 0;
+    while (off < chunk.length) {
+      if (mode === 'header') {
+        const nl = chunk.indexOf(10, off);
+        if (nl < 0) {
+          header += chunk.subarray(off).toString();
+          if (header.length > 4096) {
+            throw new Error('git cat-file --batch: header senza newline');
+          }
+          break;
+        }
+        header += chunk.subarray(off, nl).toString();
+        off = nl + 1;
+        const parsed = parseCatFileBatchHeader(header, oidToPaths, allowMissing);
+        if (parsed === null) return null;
+        currentOid = parsed.oid;
+        remaining = parsed.size;
+        hash = createHash('sha256');
+        header = '';
+        mode = remaining === 0 ? 'separator' : 'content';
+        continue;
+      }
+
+      if (mode === 'content') {
+        const take = Math.min(remaining, chunk.length - off);
+        hash.update(chunk.subarray(off, off + take));
+        off += take;
+        remaining -= take;
+        if (remaining === 0) mode = 'separator';
+        continue;
+      }
+
+      if (chunk[off] !== 10) {
+        throw new Error(`git cat-file --batch: contenuto troncato per ${currentOid}`);
+      }
+      off += 1;
+      seenOids.add(currentOid);
+      addCatFileHash(byPath, oidToPaths, currentOid, hash.digest('hex').slice(0, 16));
+      currentOid = null;
+      hash = null;
+      mode = 'header';
+    }
+  }
+
+  if (mode !== 'header' || header) {
+    throw new Error('git cat-file --batch: stdout troncato');
+  }
+  if (seenOids.size === 0) {
+    throw new Error('git cat-file --batch: stdout troncato o vuoto');
   }
   if (seenOids.size !== oidToPaths.size) {
     const missing = [...oidToPaths.keys()].filter((oid) => !seenOids.has(oid));
@@ -245,6 +337,63 @@ export function branchOnlyCommits({ cwd = ROOT } = {}) {
   );
 }
 
+async function catFileBatch(oidToPaths, { cwd, partialClone }) {
+  const child = spawn('git', ['-c', 'core.quotePath=false', 'cat-file', '--batch'], {
+    cwd,
+    stdio: ['pipe', 'pipe', 'pipe'],
+  });
+  let stderr = '';
+  child.stderr.setEncoding('utf8');
+  child.stderr.on('data', (chunk) => {
+    if (stderr.length < CAT_FILE_STDERR_MAX_BYTES) {
+      stderr += chunk.slice(0, CAT_FILE_STDERR_MAX_BYTES - stderr.length);
+    }
+  });
+  // A process that exits before consuming all input can close stdin while the
+  // request is being written. The exit result below remains the authority for
+  // the actual diagnostic; this listener prevents an unhandled stream error.
+  child.stdin.on('error', () => {});
+
+  const exit = new Promise((resolve) => {
+    let settled = false;
+    child.once('error', (error) => {
+      settled = true;
+      resolve({ error });
+    });
+    child.once('close', (code, signal) => {
+      if (!settled) resolve({ code, signal });
+    });
+  });
+
+  child.stdin.end(`${[...oidToPaths.keys()].join('\n')}\n`);
+  let parsed;
+  try {
+    parsed = await parseCatFileBatchStream(child.stdout, oidToPaths, { allowMissing: partialClone });
+  } catch (error) {
+    if (!child.killed) child.kill();
+    await exit;
+    throw error;
+  }
+
+  if (parsed === null) {
+    if (!child.killed) child.kill();
+    await exit;
+    return null;
+  }
+
+  const result = await exit;
+  const diagnostic = [
+    stderr.trim(),
+    result.error?.message || '',
+    result.signal ? `signal ${result.signal}` : '',
+  ].filter(Boolean).join('; ');
+  if (result.error || result.code !== 0) {
+    if (partialClone && isLazyFetchFailure(diagnostic)) return null;
+    throw new Error(`git cat-file --batch: ${diagnostic || result.code}`);
+  }
+  return parsed;
+}
+
 /**
  * Gli hash dei blob che `main` avra' contenuto ai path dati DOPO il merge:
  * l'intera storia di `origin/main` piu' l'albero FINALE di HEAD.
@@ -257,7 +406,7 @@ export function branchOnlyCommits({ cwd = ROOT } = {}) {
  *
  * @returns {Map<string, Set<string>>|null} null = lettura inconclusiva.
  */
-export function blobsByPathFromHistory(paths, { cwd = ROOT, partialClone = isPartialClone(cwd) } = {}) {
+export async function blobsByPathFromHistory(paths, { cwd = ROOT, partialClone = isPartialClone(cwd) } = {}) {
   if (paths.length === 0) return new Map();
   const want = new Set(paths);
   const oidToPaths = new Map();
@@ -290,31 +439,7 @@ export function blobsByPathFromHistory(paths, { cwd = ROOT, partialClone = isPar
     remember(oid, record.slice(tab + 1));
   }
   if (oidToPaths.size === 0) return new Map();
-  const entries = [...oidToPaths.entries()];
-  const byPath = new Map();
-  for (let start = 0; start < entries.length; start += CAT_FILE_BATCH_SIZE) {
-    const batch = new Map(entries.slice(start, start + CAT_FILE_BATCH_SIZE));
-    const res = spawnSync('git', ['-c', 'core.quotePath=false', 'cat-file', '--batch'], {
-      cwd,
-      input: `${[...batch.keys()].join('\n')}\n`,
-      maxBuffer: CAT_FILE_MAX_BUFFER,
-    });
-    if (res.status !== 0) {
-      const stderr = res.stderr?.toString() || '';
-      const signal = res.signal ? `signal ${res.signal}` : '';
-      const spawnError = res.error?.message || '';
-      const diagnostic = [stderr, spawnError, signal].filter(Boolean).join('; ');
-      if (partialClone && isLazyFetchFailure(diagnostic)) return null;
-      throw new Error(`git cat-file --batch: ${diagnostic || res.status}`);
-    }
-    const parsed = parseCatFileBatchOutput(res.stdout, batch, { allowMissing: partialClone });
-    if (parsed === null) return null;
-    for (const [rel, hashes] of parsed) {
-      if (!byPath.has(rel)) byPath.set(rel, new Set());
-      for (const hash of hashes) byPath.get(rel).add(hash);
-    }
-  }
-  return byPath;
+  return catFileBatch(oidToPaths, { cwd, partialClone });
 }
 
 /**
@@ -374,7 +499,7 @@ function reportInconclusive(message) {
   process.exitCode = 1;
 }
 
-function main() {
+async function main() {
   const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, MANIFEST_REL), 'utf8'));
   const files = manifest.files || [];
   if (isShallow()) {
@@ -389,7 +514,7 @@ function main() {
 
   const paths = files.filter((e) => e?.baseline?.corpus != null).map((e) => e.path);
   const partialClone = isPartialClone();
-  const blobsByPath = blobsByPathFromHistory(paths, { partialClone });
+  const blobsByPath = await blobsByPathFromHistory(paths, { partialClone });
   if (blobsByPath === null) {
     reportInconclusive(
       `${MANIFEST_REL}: lettura inconclusiva in clone partial/promisor: un lazy-fetch di un blob storico non ha risposto; ` +
@@ -433,4 +558,9 @@ function main() {
   process.exit(verdict.ok ? 0 : 1);
 }
 
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main();
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  main().catch((error) => {
+    console.error(error?.stack || error);
+    process.exitCode = 1;
+  });
+}
