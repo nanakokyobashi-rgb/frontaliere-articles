@@ -2869,7 +2869,7 @@
       "reason": "Validatore, normalizzatore e riparatore deterministico di excerpt e descrizioni SEO plain; il writer lo usa prima della registrazione e il publisher prima di cancellare dist/api. Non esiste un gemello operativo sul sito: la difesa lato card vive nel repository del sito e resta una protezione distinta.",
       "baseline": {
         "site": null,
-        "corpus": "46e9fa64a1c87d81",
+        "corpus": "5cfe5356c50362e5",
         "alignedAt": "2026-11-03"
       }
     },
@@ -6872,7 +6872,7 @@
       "reason": "Gate preflight del producer API che confronta ogni excerpt con il contratto di completezza e la baseline storica. Il sito consuma la superficie JSON pubblicata e non valida i sorgenti del corpus.",
       "baseline": {
         "site": null,
-        "corpus": "24cacdf09a2448e5",
+        "corpus": "4daaedbc1ad6c174",
         "alignedAt": "2026-11-03"
       }
     }
