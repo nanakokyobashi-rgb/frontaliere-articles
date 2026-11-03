@@ -188,16 +188,6 @@
       }
     },
     {
-      "path": "scripts/ci/excerpt-completeness-baseline.json",
-      "mode": "corpus-only",
-      "reason": "Baseline monotona dei difetti excerpt/SEO tollerati dal publisher del corpus; governa il preflight prima della scrittura di dist/api. Il sito consuma i JSON pubblicati e non deve importare il registro dei casi legacy del generatore.",
-      "baseline": {
-        "site": null,
-        "corpus": "c70e7863ef2029e8",
-        "alignedAt": "2026-11-03"
-      }
-    },
-    {
       "path": "scripts/ci/article-publication-observer.mjs",
       "mode": "corpus-only",
       "reason": "Osservatore e repairer bounded della pubblicazione articoli: legge la storia dei body nel corpus, confronta le revisioni con le pagine servite dai due publisher, conserva nel body di una issue stabile l elenco durevole delle pagine degradate e dei blocker di preparazione, e dispatcha il publisher solo dopo una prova live + immagine disponibile. Vive solo qui perche' la sorgente delle revisioni e il coordinamento dei publisher appartengono al corpus; il sito consuma la superficie pubblicata e non deve osservare la propria copia del corpus.",
@@ -1113,16 +1103,6 @@
         "site": null,
         "corpus": "1bc5c31e4fcf5f32",
         "alignedAt": "2026-10-10"
-      }
-    },
-    {
-      "path": "scripts/lib/excerpt-completeness-gate.mjs",
-      "mode": "corpus-only",
-      "reason": "Gate del publisher che confronta i difetti excerpt/SEO correnti con la baseline approvata e blocca nuove regressioni prima di cancellare dist/api. Il sito riceve i JSON e non deve importare il controllo del generatore.",
-      "baseline": {
-        "site": null,
-        "corpus": "24cacdf09a2448e5",
-        "alignedAt": "2026-11-03"
       }
     },
     {

@@ -131,8 +131,16 @@ test('emettitore: i campi SEO escono per TUTTE le locali, in coda ai tre storici
         `${loc}: riga ${i} non e' \`${META_FIELDS[i]}\` — l'ordine dei campi e' parte del contratto`,
       );
     }
-    assert.ok(lines[3].includes(`'SERP ${loc}'`), `${loc}: seoDescription non e' quella della locale`);
-    assert.ok(lines[4].includes(`'SOCIAL ${loc}'`), `${loc}: ogDescription non e' quella della locale`);
+    assert.equal(
+      lines[3],
+      `    'blog.article.demo-articolo.seoDescription': '${escapeForSingleQuoteTS(seo[loc].seoDescription)}',`,
+      `${loc}: seoDescription non e' quella della locale`,
+    );
+    assert.equal(
+      lines[4],
+      `    'blog.article.demo-articolo.ogDescription': '${escapeForSingleQuoteTS(seo[loc].ogDescription)}',`,
+      `${loc}: ogDescription non e' quella della locale`,
+    );
   }
 });
 
