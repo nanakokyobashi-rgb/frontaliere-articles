@@ -6855,6 +6855,16 @@
         "corpus": "30ee6bcb409a26f3",
         "alignedAt": "2026-10-30"
       }
+    },
+    {
+      "path": "scripts/ci/excerpt-completeness-baseline.json",
+      "mode": "corpus-only",
+      "reason": "Baseline monotona dei soli excerpt storici incompleti senza una fonte completa recuperabile. Il producer corpus la usa per bloccare nuove regressioni senza inventare testo; il sito consuma l'API JSON e non esegue questo gate."
+    },
+    {
+      "path": "scripts/lib/excerpt-completeness-gate.mjs",
+      "mode": "corpus-only",
+      "reason": "Gate preflight del producer API che confronta ogni excerpt con il contratto di completezza e la baseline storica. Il sito consuma la superficie JSON pubblicata e non valida i sorgenti del corpus."
     }
   ]
 }

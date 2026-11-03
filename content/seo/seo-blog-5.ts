@@ -897,10 +897,10 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-dazi-usa-rimborsi-ritardi': {
     title: 'Dazi USA: Rimborsi in Ritardo, Cosa Succede ai Frontalieri?',
-description: 'L\'agenzia della Dogana americana sta lavorando a un sistema di rimborsi per i dazi illegali, ma il processo potrebbe richiedere fino a un mese.',
+    description: 'L\'agenzia della Dogana americana sta lavorando a un sistema di rimborsi per i dazi illegali, ma il processo potrebbe richiedere fino a un mese.',
     keywords: 'frontalieri, ticino, svizzera, italia, dazi, rimborsi, ritardo, cosa',
     ogTitle: 'Dazi USA: Rimborsi in Ritardo, Cosa Succede ai Frontalieri?',
-ogDescription: 'L\'agenzia della Dogana americana sta lavorando a un sistema di rimborsi per i dazi illegali, ma il processo potrebbe richiedere fino a un mese.',
+    ogDescription: 'L\'agenzia della Dogana americana sta lavorando a un sistema di rimborsi per i dazi illegali, ma il processo potrebbe richiedere fino a un mese.',
     canonicalPath: '/articoli-frontaliere/dazi-usa-rimborsi-ritardi/',
     structuredData: {
       "@context": "https://schema.org",
@@ -1544,7 +1544,7 @@ ogDescription: 'L\'agenzia della Dogana americana sta lavorando a un sistema di 
 
   'blog-spese-bancarie-titoli-frontalieri': {
     title: 'Spese bancarie per titoli: Meierhans critica i costi',
-description: 'Le spese per il trasferimento di titoli in Svizzera sono tra i 60 e i 120 franchi, secondo la Sorveglianza dei prezzi.',
+    description: 'Le spese per il trasferimento di titoli in Svizzera sono tra i 60 e i 120 franchi, secondo la Sorveglianza dei prezzi.',
     keywords: 'frontalieri, ticino, svizzera, italia, spese, bancarie, titoli, meierhans',
     ogTitle: 'Spese bancarie per titoli: Meierhans critica i costi',
     ogDescription: 'Le spese per il trasferimento di titoli in Svizzera sono tra i 60 e i 120 franchi, secondo la Sorveglianza dei prezzi.',
@@ -1740,7 +1740,7 @@ description: 'Le spese per il trasferimento di titoli in Svizzera sono tra i 60 
 
   'blog-nuove-regole-centri-estivi-saronno-2026': {
     title: 'Saronno: nuove regole per i centri estivi comunali',
-description: 'Scopri le nuove regole per i centri estivi comunali di Saronno: regia unica, sconti per fratelli e contributi fino a 400 euro.',
+    description: 'Scopri le nuove regole per i centri estivi comunali di Saronno: regia unica, sconti per fratelli e contributi fino a 400 euro.',
     keywords: 'frontalieri, ticino, svizzera, italia, saronno, nuove, regole, centri',
     ogTitle: 'Nuove regole centri estivi Saronno 2026',
     ogDescription: 'Scopri le nuove regole per i centri estivi comunali di Saronno: regia unica, sconti per fratelli e contributi fino a 400 euro.',
@@ -1880,7 +1880,7 @@ description: 'Scopri le nuove regole per i centri estivi comunali di Saronno: re
 
   'blog-dezonare-terreni-blenio-2026': {
     title: 'Dezonare terreni edificabili: emergenza per la Val di Blenio',
-description: 'I sindaci di Blenio preoccupati per esuberi del 600-900% e silenzio istituzionale. Quali sono le implicazioni per i frontalieri?.',
+    description: 'I sindaci di Blenio preoccupati per esuberi del 600-900% e silenzio istituzionale. Quali sono le implicazioni per i frontalieri?.',
     keywords: 'frontalieri, ticino, svizzera, italia, dezonare, terreni, edificabili, emergenza',
     ogTitle: 'Dezonare terreni edificabili: emergenza per la Val di Blenio',
     ogDescription: 'I sindaci di Blenio preoccupati per esuberi del 600-900% e silenzio istituzionale. Quali sono le implicazioni per i frontalieri?',
@@ -1908,7 +1908,7 @@ description: 'I sindaci di Blenio preoccupati per esuberi del 600-900% e silenzi
 
   'blog-dfp-bankitalia-margini-debito-ue-2026': {
     title: 'Dfp, Bankitalia: Margini limitati più per debito che per regole Ue',
-description: 'I margini limitati derivano dall\'esigenza di ridurre il debito, non solo dalle regole Ue. Dal 2027 sentiero discendente.',
+    description: 'I margini limitati derivano dall\'esigenza di ridurre il debito, non solo dalle regole Ue. Dal 2027 sentiero discendente.',
     keywords: 'frontalieri, ticino, svizzera, italia, bankitalia, margini, limitati, debito',
     ogTitle: 'Dfp, Bankitalia: Margini limitati più per debito che per regole Ue',
     ogDescription: 'I margini limitati derivano dall\'esigenza di ridurre il debito, non solo dalle regole Ue. Dal 2027 sentiero discendente.',
@@ -2020,7 +2020,7 @@ description: 'I margini limitati derivano dall\'esigenza di ridurre il debito, n
 
   'blog-caslano-2025-bilancio-avanzamento': {
     title: 'Caslano ribalta le previsioni e chiude il 2025 con 311mila franchi di avanzo',
-description: 'Il Comune di Caslano ha chiuso il 2025 con un avanzo di 311mila franchi, superando le previsioni di disavanzo di 79mila franchi.',
+    description: 'Il Comune di Caslano ha chiuso il 2025 con un avanzo di 311mila franchi, superando le previsioni di disavanzo di 79mila franchi.',
     keywords: 'frontalieri, ticino, svizzera, italia, caslano, ribalta, previsioni, chiude',
     ogTitle: 'Caslano chiude 2025 con 311mila franchi di avanzo',
     ogDescription: 'Il Comune di Caslano ha chiuso il 2025 con un avanzo di 311mila franchi, superando le previsioni di disavanzo di 79mila franchi.',
@@ -2048,7 +2048,7 @@ description: 'Il Comune di Caslano ha chiuso il 2025 con un avanzo di 311mila fr
 
   'blog-lombardia-piano-ciclabile-115-milioni': {
     title: 'Lombardia: 115 milioni per il piano ciclabile | Frontaliere Ticino',
-description: 'La Regione Lombardia investe 115 milioni di euro nel piano ciclabile con 25 grandi percorsi per migliorare la mobilità sostenibile.',
+    description: 'La Regione Lombardia investe 115 milioni di euro nel piano ciclabile con 25 grandi percorsi per migliorare la mobilità sostenibile.',
     keywords: 'frontalieri, ticino, svizzera, italia, lombardia, milioni, piano, ciclabile',
     ogTitle: 'Lombardia: 115 milioni per il piano ciclabile',
     ogDescription: 'La Regione Lombardia investe 115 milioni di euro nel piano ciclabile con 25 grandi percorsi',
@@ -2076,7 +2076,7 @@ description: 'La Regione Lombardia investe 115 milioni di euro nel piano ciclabi
 
   'blog-sam-mendrisiotto-25-anni-emergenze': {
     title: '25 anni di emergenze sanitarie: il S.A.M. di Mendrisiotto',
-description: 'Dal 1999 il Servizio Autoambulanze Mendrisiotto risponde alle emergenze. Oggi il direttore Carlo Realini racconta le sfide attuali.',
+    description: 'Dal 1999 il Servizio Autoambulanze Mendrisiotto risponde alle emergenze. Oggi il direttore Carlo Realini racconta le sfide attuali.',
     keywords: 'frontalieri, ticino, svizzera, italia, anni, emergenze, sanitarie, mendrisiotto',
     ogTitle: '25 anni di emergenze sanitarie: il S.A.M. di Mendrisiotto',
     ogDescription: 'Dal 1999 il Servizio Autoambulanze Mendrisiotto risponde alle emergenze. Oggi il direttore Carlo Realini racconta le sfide attuali',
@@ -2188,10 +2188,10 @@ description: 'Dal 1999 il Servizio Autoambulanze Mendrisiotto risponde alle emer
 
   'blog-stipendi-svizzeri-crescono-2025': {
     title: 'Stipendi svizzeri in crescita: +1,6% nel 2025 | Frontaliere Ticino',
-description: 'I salari reali in Svizzera sono aumentati dell\'1,6% nel 2025, il guadagno più consistente dal 2009.',
+    description: 'I salari reali in Svizzera sono aumentati dell\'1,6% nel 2025, il guadagno più consistente dal 2009.',
     keywords: 'frontalieri, ticino, svizzera, italia, stipendi, svizzeri, crescita, 2025',
     ogTitle: 'Stipendi svizzeri in crescita: +1,6% nel 2025',
-ogDescription: 'I salari reali in Svizzera sono aumentati dell\'1,6% nel 2025, il guadagno più consistente dal 2009.',
+    ogDescription: 'I salari reali in Svizzera sono aumentati dell\'1,6% nel 2025, il guadagno più consistente dal 2009.',
     canonicalPath: '/articoli-frontaliere/stipendi-svizzeri-crescono-2025/',
     structuredData: {
       "@context": "https://schema.org",
@@ -2244,7 +2244,7 @@ ogDescription: 'I salari reali in Svizzera sono aumentati dell\'1,6% nel 2025, i
 
   'blog-quadri-interpella-consiglio-frontiere-tasse': {
     title: 'Quadri incalza il Consiglio federale su frontiere e tasse sui camion',
-description: 'Lorenzo Quadri (Lega dei Ticinesi) presenta un\'interpellanza sul nuovo sistema NMTS per la tassa sul traffico pesante.',
+    description: 'Lorenzo Quadri (Lega dei Ticinesi) presenta un\'interpellanza sul nuovo sistema NMTS per la tassa sul traffico pesante.',
     keywords: 'frontalieri, ticino, svizzera, italia, quadri, incalza, consiglio, federale',
     ogTitle: 'Quadri incalza il Consiglio federale su frontiere e tasse sui camion',
     ogDescription: 'Lorenzo Quadri (Lega dei Ticinesi) presenta un\'interpellanza sul nuovo sistema NMTS per la tassa sul traffico pesante.',
@@ -2356,10 +2356,10 @@ description: 'Lorenzo Quadri (Lega dei Ticinesi) presenta un\'interpellanza sul 
 
   'blog-riforma-ue-disoccupazione-frontalieri': {
     title: 'Riforma UE: disoccupazione frontalieri costerà caro alla Svizzera',
-description: 'La revisione europea cambierebbe le regole: oggi paga il Paese di residenza, in futuro quello di lavoro.',
+    description: 'La revisione europea cambierebbe le regole: oggi paga il Paese di residenza, in futuro quello di lavoro.',
     keywords: 'frontalieri, ticino, svizzera, italia, riforma, disoccupazione, costerà, caro',
     ogTitle: 'Riforma UE: disoccupazione frontalieri costerà caro alla Svizzera',
-ogDescription: 'La revisione europea cambierebbe le regole: oggi paga il Paese di residenza, in futuro quello di lavoro.',
+    ogDescription: 'La revisione europea cambierebbe le regole: oggi paga il Paese di residenza, in futuro quello di lavoro.',
     canonicalPath: '/articoli-frontaliere/riforma-ue-disoccupazione-frontalieri/',
     structuredData: {
       "@context": "https://schema.org",
@@ -2384,7 +2384,7 @@ ogDescription: 'La revisione europea cambierebbe le regole: oggi paga il Paese d
 
   'blog-casse-malati-dado-scissione-dossier': {
     title: 'Casse malati, Dadò propone la scissione del dossier',
-description: 'Fiorenzo Dadò suggerisce di suddividere il dossier sulle casse malati in due rapporti distinti. Possibile votazione popolare.',
+    description: 'Fiorenzo Dadò suggerisce di suddividere il dossier sulle casse malati in due rapporti distinti. Possibile votazione popolare.',
     keywords: 'frontalieri, ticino, svizzera, italia, casse, malati, dadò, propone',
     ogTitle: 'Casse malati, Dadò propone la scissione del dossier',
     ogDescription: 'Fiorenzo Dadò suggerisce di suddividere il dossier sulle casse malati in due rapporti distinti. Possibile votazione popolare.',
@@ -2440,10 +2440,10 @@ description: 'Fiorenzo Dadò suggerisce di suddividere il dossier sulle casse ma
 
   'blog-formazione-ferrero-ministero-2026': {
     title: 'Ferrero e Ministero per sport nelle scuole | Frontaliere Ticino',
-description: 'Questo può migliorare la qualità dell’insegnamento e l’efficacia delle attività ludico-motorie nelle scuole.',
+    description: 'Questo può migliorare la qualità dell’insegnamento e l’efficacia delle attività ludico-motorie nelle scuole.',
     keywords: 'frontalieri, ticino, svizzera, italia, ferrero, ministero, sport, nelle',
     ogTitle: 'Formazione, intesa tra Ministero e Ferrero per promuovere attività sportive nelle scuole',
-ogDescription: 'Il Ministero dell’Istruzione e del Merito e Ferrero spa metteranno a disposizione delle scuole una serie di strumenti e risorse per implementare il protocollo.',
+    ogDescription: 'Il Ministero dell’Istruzione e del Merito e Ferrero spa metteranno a disposizione delle scuole una serie di strumenti e risorse per implementare il protocollo.',
     canonicalPath: '/articoli-frontaliere/formazione-ferrero-ministero-2026/',
     structuredData: {
       "@context": "https://schema.org",
@@ -2468,7 +2468,7 @@ ogDescription: 'Il Ministero dell’Istruzione e del Merito e Ferrero spa metter
 
   'blog-frontalieri-bellinzonese-truffe-16-mesi': {
     title: 'Frontaliere condannato a 16 mesi per truffe online',
-description: 'Un 33enne del Bellinzonese, affetto da ludopatia, è stato condannato a 16 mesi per 82 raggiri online e 65 tentati.',
+    description: 'Un 33enne del Bellinzonese, affetto da ludopatia, è stato condannato a 16 mesi per 82 raggiri online e 65 tentati.',
     keywords: 'frontalieri, ticino, svizzera, italia, condannato, mesi, truffe, online',
     ogTitle: 'Frontaliere condannato a 16 mesi per truffe online',
     ogDescription: 'Un 33enne del Bellinzonese, affetto da ludopatia, è stato condannato a 16 mesi per 82 raggiri online e 65 tentati',
@@ -2496,7 +2496,7 @@ description: 'Un 33enne del Bellinzonese, affetto da ludopatia, è stato condann
 
   'blog-decreto-lavoro-meloni-2026-frontalieri': {
     title: 'Decreto Lavoro Meloni: incentivi e salario giusto per i frontalieri',
-description: 'Via libera del Consiglio dei Ministri al decreto lavoro con incentivi per assunzioni e salario giusto per i lavoratori.',
+    description: 'Via libera del Consiglio dei Ministri al decreto lavoro con incentivi per assunzioni e salario giusto per i lavoratori.',
     keywords: 'frontalieri, ticino, svizzera, italia, decreto, lavoro, meloni, incentivi',
     ogTitle: 'Decreto Lavoro Meloni: incentivi e salario giusto per i frontalieri',
     ogDescription: 'Via libera del Consiglio dei Ministri al decreto lavoro con incentivi per assunzioni e salario giusto per i lavoratori',
@@ -2583,7 +2583,7 @@ description: 'Via libera del Consiglio dei Ministri al decreto lavoro con incent
     description: 'Il Biasca dovrà attendere ancora per la finale dopo la sconfitta ai supplementari contro l\'Uttigen. La serie va a gara 4. Dati aggiornati 2026 per frontalieri',
     keywords: 'frontalieri, ticino, svizzera, italia, biasca, rimanda, finale, uttigen',
     ogTitle: 'Biasca rimanda la finale: Uttigen vince ai supplementari',
-ogDescription: 'Il Biasca dovrà attendere ancora per la finale dopo la sconfitta ai supplementari contro l\'Uttigen.',
+    ogDescription: 'Il Biasca dovrà attendere ancora per la finale dopo la sconfitta ai supplementari contro l\'Uttigen.',
     canonicalPath: '/articoli-frontaliere/biasca-roller-hockey-uttigen-2026/',
     structuredData: {
       "@context": "https://schema.org",
@@ -2636,7 +2636,7 @@ ogDescription: 'Il Biasca dovrà attendere ancora per la finale dopo la sconfitt
 
   'blog-nuova-pista-ciclopedonale-bodio-giornico-2026': {
     title: 'Nuova pista ciclopedonale Bodio-Giornico: 2,1 km di sicurezza e connessione',
-description: 'Scopri la nuova pista ciclopedonale che collega Bodio e Giornico lungo il fiume Ticino, con un investimento di 3,7 milioni di franchi.',
+    description: 'Scopri la nuova pista ciclopedonale che collega Bodio e Giornico lungo il fiume Ticino, con un investimento di 3,7 milioni di franchi.',
     keywords: 'frontalieri, ticino, svizzera, italia, nuova, pista, ciclopedonale, bodio-giornico',
     ogTitle: 'Nuova pista ciclopedonale Bodio-Giornico: 2,1 km di sicurezza e connessione',
     ogDescription: 'Scopri la nuova pista ciclopedonale che collega Bodio e Giornico lungo il fiume Ticino, con un investimento di 3,7 milioni di franchi.',
@@ -2692,10 +2692,10 @@ description: 'Scopri la nuova pista ciclopedonale che collega Bodio e Giornico l
 
   'blog-momoride-carpooling-sfida-collettiva': {
     title: 'MomòRide lancia sfida di carpooling per pendolari del Mendrisiotto',
-description: 'MomòRide lancia una sfida collettiva di carpooling per pendolari del Mendrisiotto.',
+    description: 'MomòRide lancia una sfida collettiva di carpooling per pendolari del Mendrisiotto.',
     keywords: 'frontalieri, ticino, svizzera, italia, momòride, lancia, sfida, carpooling',
     ogTitle: 'MomòRide lancia sfida di carpooling per pendolari del Mendrisiotto',
-ogDescription: 'MomòRide lancia una sfida collettiva di carpooling per pendolari del Mendrisiotto.',
+    ogDescription: 'MomòRide lancia una sfida collettiva di carpooling per pendolari del Mendrisiotto.',
     canonicalPath: '/articoli-frontaliere/momoride-carpooling-sfida-collettiva/',
     structuredData: {
       "@context": "https://schema.org",
@@ -2748,7 +2748,7 @@ ogDescription: 'MomòRide lancia una sfida collettiva di carpooling per pendolar
 
   'blog-casse-malati-ticino-divise-2026': {
     title: 'Casse malati Ticino: le due iniziative potrebbero dividersi',
-description: 'Il Consiglio di Stato ticinese presenta un piano parziale per le iniziative casse malati, ma i partiti propongono di separarle.',
+    description: 'Il Consiglio di Stato ticinese presenta un piano parziale per le iniziative casse malati, ma i partiti propongono di separarle.',
     keywords: 'frontalieri, ticino, svizzera, italia, casse, malati, iniziative, potrebbero',
     ogTitle: 'Casse malati Ticino: le due iniziative potrebbero dividersi',
     ogDescription: 'Il Consiglio di Stato ticinese presenta un piano parziale per le iniziative casse malati, ma i partiti propongono di separarle',
@@ -2888,7 +2888,7 @@ description: 'Il Consiglio di Stato ticinese presenta un piano parziale per le i
 
   'blog-viggi-bando-giovani-comunit-2026': {
     title: 'A Viggiù un bando per i giovani: mille euro per progetti comunitari',
-description: 'Scopri il bando per i giovani di Viggiù: 1000 euro per realizzare progetti per la comunità. Scadenza 10 maggio 2026.',
+    description: 'Scopri il bando per i giovani di Viggiù: 1000 euro per realizzare progetti per la comunità. Scadenza 10 maggio 2026.',
     keywords: 'frontalieri, ticino, svizzera, italia, viggiù, bando, giovani, mille',
     ogTitle: 'Bando giovani Viggiù 2026: 1000 euro per progetti comunitari',
     ogDescription: 'Scopri il bando per i giovani di Viggiù: 1000 euro per realizzare progetti per la comunità. Scadenza 10 maggio 2026.',
@@ -2972,10 +2972,10 @@ description: 'Scopri il bando per i giovani di Viggiù: 1000 euro per realizzare
 
   'blog-riforma-infermieri-ticino-2026': {
     title: 'Riforma infermieristica in Ticino: orario di lavoro e reazioni contrastanti',
-description: 'Il Consiglio nazionale ha deciso di non accorciare l’orario massimo settimanale degli infermieri, che resta fissato a 50 ore.',
+    description: 'Il Consiglio nazionale ha deciso di non accorciare l’orario massimo settimanale degli infermieri, che resta fissato a 50 ore.',
     keywords: 'frontalieri, ticino, svizzera, italia, riforma, infermieristica, orario, lavoro',
     ogTitle: 'Riforma infermieristica in Ticino: orario di lavoro e reazioni contrastanti',
-ogDescription: 'Il Consiglio nazionale ha deciso di non accorciare l’orario massimo settimanale degli infermieri, che resta fissato a 50 ore.',
+    ogDescription: 'Il Consiglio nazionale ha deciso di non accorciare l’orario massimo settimanale degli infermieri, che resta fissato a 50 ore.',
     canonicalPath: '/articoli-frontaliere/riforma-infermieri-ticino-2026/',
     structuredData: {
       "@context": "https://schema.org",
@@ -3028,10 +3028,10 @@ ogDescription: 'Il Consiglio nazionale ha deciso di non accorciare l’orario ma
 
   'blog-iniziativa-f-35-ticino-2026': {
     title: 'Iniziativa per annullare l\'acquisto degli F-35 | Frontaliere Ticino',
-description: 'Un\'associazione civica lancia un\'iniziativa per far annullare il contratto degli F-35, considerati troppo costosi e inadatti.',
+    description: 'Un\'associazione civica lancia un\'iniziativa per far annullare il contratto degli F-35, considerati troppo costosi e inadatti.',
     keywords: 'frontalieri, ticino, svizzera, italia, iniziativa, annullare, acquisto, f-35',
     ogTitle: 'Iniziativa per annullare l\'acquisto degli F-35',
-ogDescription: 'Un\'associazione civica lancia un\'iniziativa per far annullare il contratto degli F-35, considerati troppo costosi e inadatti.',
+    ogDescription: 'Un\'associazione civica lancia un\'iniziativa per far annullare il contratto degli F-35, considerati troppo costosi e inadatti.',
     canonicalPath: '/articoli-frontaliere/iniziativa-f-35-ticino-2026/',
     structuredData: {
       "@context": "https://schema.org",
@@ -3084,7 +3084,7 @@ ogDescription: 'Un\'associazione civica lancia un\'iniziativa per far annullare 
 
   'blog-iniziative-casse-malati-dado-scissione-dossier': {
     title: 'Iniziative casse malati: spunta il piano Dadò | Frontaliere Ticino',
-description: 'Ogni iniziativa sulle casse malati prosegue per la propria strada con misure di finanziamento separate. La proposta di Fiorenzo Dadò.',
+    description: 'Ogni iniziativa sulle casse malati prosegue per la propria strada con misure di finanziamento separate. La proposta di Fiorenzo Dadò.',
     keywords: 'frontalieri, ticino, svizzera, italia, iniziative, casse, malati, spunta',
     ogTitle: 'Iniziative casse malati: spunta il piano Dadò',
     ogDescription: 'Ogni iniziativa sulle casse malati prosegue per la propria strada con misure di finanziamento separate. La proposta di Fiorenzo Dadò.',
@@ -3112,7 +3112,7 @@ description: 'Ogni iniziativa sulle casse malati prosegue per la propria strada 
 
   'blog-moschea-pregassona-udc-interroga-municipio': {
     title: 'Moschea a Pregassona: l\'UDC interroga il Municipio',
-description: 'L\'UDC chiede garanzie e trasparenza per il progetto di un centro culturale islamico con moschea e appartamenti a Pregassona.',
+    description: 'L\'UDC chiede garanzie e trasparenza per il progetto di un centro culturale islamico con moschea e appartamenti a Pregassona.',
     keywords: 'frontalieri, ticino, svizzera, italia, moschea, pregassona, interroga, municipio',
     ogTitle: 'Moschea Pregassona: UDC interroga Municipio',
     ogDescription: 'L\'UDC chiede garanzie e trasparenza per il progetto di un centro culturale islamico con moschea e appartamenti a Pregassona.',
@@ -3140,7 +3140,7 @@ description: 'L\'UDC chiede garanzie e trasparenza per il progetto di un centro 
 
   'blog-como-area-camper-26-posti-lavori': {
     title: 'Como, al via i lavori per l\'area camper da 26 posti',
-description: 'Il cantiere per l\'ampliamento dell\'area camper di Tavernola è iniziato. Ecco quando finiranno i lavori e i dettagli del progetto.',
+    description: 'Il cantiere per l\'ampliamento dell\'area camper di Tavernola è iniziato. Ecco quando finiranno i lavori e i dettagli del progetto.',
     keywords: 'frontalieri, ticino, svizzera, italia, como, lavori, area, camper',
     ogTitle: 'Como, al via i lavori per l\'area camper da 26 posti',
     ogDescription: 'Il cantiere per l\'ampliamento dell\'area camper di Tavernola è iniziato. Ecco quando finiranno i lavori e i dettagli del progetto.',
@@ -3252,7 +3252,7 @@ description: 'Il cantiere per l\'ampliamento dell\'area camper di Tavernola è i
 
   'blog-giornata-contro-rumore-lugano-2024': {
     title: 'Giornata contro il rumore: controlli a Lugano dal 28 al 30 aprile',
-description: 'La Polizia comunale di Lugano estende i controlli sul rumore dal 28 al 30 aprile. Focus su veicoli rumorosi e cantieri.',
+    description: 'La Polizia comunale di Lugano estende i controlli sul rumore dal 28 al 30 aprile. Focus su veicoli rumorosi e cantieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, giornata, contro, rumore, controlli',
     ogTitle: 'Giornata contro il rumore: controlli a Lugano dal 28 al 30 aprile',
     ogDescription: 'La Polizia comunale di Lugano estende i controlli sul rumore dal 28 al 30 aprile. Focus su veicoli rumorosi e cantieri',
@@ -3280,7 +3280,7 @@ description: 'La Polizia comunale di Lugano estende i controlli sul rumore dal 2
 
   'blog-estival-jazz-lugano-pagamento-2024': {
     title: 'Estival Jazz Lugano introduce biglietti a pagamento',
-description: 'Dal 2024 due serate su tre del festival saranno a pagamento per garantire la sostenibilità dell\'evento. Scopri di più.',
+    description: 'Dal 2024 due serate su tre del festival saranno a pagamento per garantire la sostenibilità dell\'evento. Scopri di più.',
     keywords: 'frontalieri, ticino, svizzera, italia, estival, jazz, lugano, introduce',
     ogTitle: 'Estival Jazz Lugano introduce biglietti a pagamento',
     ogDescription: 'Dal 2024 due serate su tre del festival saranno a pagamento per garantire la sostenibilità dell\'evento. Scopri di più.',
@@ -3336,7 +3336,7 @@ description: 'Dal 2024 due serate su tre del festival saranno a pagamento per ga
 
   'blog-lombardia-30-milioni-quartiere-efficientamento': {
     title: 'Lombardia: 30 milioni per il quartiere che rivoluziona le bollette',
-description: 'Scopri come il progetto Livorno Parco a Brescia sta rivoluzionando le bollette energetiche con un investimento di 30 milioni di euro.',
+    description: 'Scopri come il progetto Livorno Parco a Brescia sta rivoluzionando le bollette energetiche con un investimento di 30 milioni di euro.',
     keywords: 'frontalieri, ticino, svizzera, italia, lombardia, milioni, quartiere, rivoluziona',
     ogTitle: 'Lombardia: 30 milioni per il quartiere che rivoluziona le bollette',
     ogDescription: 'Scopri come il progetto Livorno Parco a Brescia sta rivoluzionando le bollette energetiche con un investimento di 30 milioni di euro.',
@@ -3364,7 +3364,7 @@ description: 'Scopri come il progetto Livorno Parco a Brescia sta rivoluzionando
 
   'blog-moschea-lugano-pregassona-2026': {
     title: 'Nuova moschea a Lugano: interrogazioni e dubbi | Frontaliere Ticino',
-description: 'Sette consiglieri comunali UDC presentano interrogazione al Municipio di Lugano su progetto moschea a Pregassona.',
+    description: 'Sette consiglieri comunali UDC presentano interrogazione al Municipio di Lugano su progetto moschea a Pregassona.',
     keywords: 'frontalieri, ticino, svizzera, italia, nuova, moschea, lugano, interrogazioni',
     ogTitle: 'Nuova moschea a Lugano: interrogazioni e dubbi',
     ogDescription: 'Sette consiglieri comunali UDC presentano interrogazione al Municipio di Lugano su progetto moschea a Pregassona',
@@ -3588,7 +3588,7 @@ description: 'Sette consiglieri comunali UDC presentano interrogazione al Munici
 
   'blog-agricoltura-spaziale-svizzera-ricerca': {
     title: 'Agricoltura spaziale: primo centro europeo in Svizzera',
-description: 'Inaugurato il primo centro europeo di ricerca sull\'agricoltura spaziale in Svizzera. Innovazione per il futuro dell\'alimentazione.',
+    description: 'Inaugurato il primo centro europeo di ricerca sull\'agricoltura spaziale in Svizzera. Innovazione per il futuro dell\'alimentazione.',
     keywords: 'frontalieri, ticino, svizzera, italia, agricoltura, spaziale, primo, centro',
     ogTitle: 'Agricoltura spaziale: primo centro europeo in Svizzera',
     ogDescription: 'Inaugurato il primo centro europeo di ricerca sull\'agricoltura spaziale in Svizzera. Innovazione per il futuro dell\'alimentazione.',
@@ -3700,7 +3700,7 @@ description: 'Inaugurato il primo centro europeo di ricerca sull\'agricoltura sp
 
   'blog-coalizione-sanitario-volonta-calpestata': {
     title: 'Coalizione sanitaria: «Calpestata la volontà popolare»',
-description: 'La Coalizione del personale sanitario critica la decisione del Consiglio nazionale di non ridurre il tempo di lavoro degli infermieri.',
+    description: 'La Coalizione del personale sanitario critica la decisione del Consiglio nazionale di non ridurre il tempo di lavoro degli infermieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, coalizione, sanitaria, calpestata, volontà',
     ogTitle: 'Coalizione sanitaria: «Calpestata la volontà popolare»',
     ogDescription: 'La Coalizione del personale sanitario critica la decisione del Consiglio nazionale di non ridurre il tempo di lavoro degli infermieri.',
@@ -3756,7 +3756,7 @@ description: 'La Coalizione del personale sanitario critica la decisione del Con
 
   'blog-banche-golfo-frontalieri-ticino-2026': {
     title: 'Banche svizzere pronte per i clienti del Golfo | Frontaliere Ticino',
-description: 'Trasferimenti di capitali e potenziali trasferimenti di residenza verso la Svizzera a causa del conflitto in Iran.',
+    description: 'Trasferimenti di capitali e potenziali trasferimenti di residenza verso la Svizzera a causa del conflitto in Iran.',
     keywords: 'frontalieri, ticino, svizzera, italia, banche, svizzere, pronte, clienti',
     ogTitle: 'Banche svizzere pronte per i clienti del Golfo',
     ogDescription: 'Trasferimenti di capitali e potenziali trasferimenti di residenza verso la Svizzera a causa del conflitto in Iran',
@@ -3784,7 +3784,7 @@ description: 'Trasferimenti di capitali e potenziali trasferimenti di residenza 
 
   'blog-rilanciare-commercio-saronno-2026': {
     title: 'Saronno: rilanciare il commercio con interventi strutturali',
-description: 'Il Consiglio comunale di Saronno esamina una mozione per rilanciare il commercio cittadino con interventi strutturali e permanenti.',
+    description: 'Il Consiglio comunale di Saronno esamina una mozione per rilanciare il commercio cittadino con interventi strutturali e permanenti.',
     keywords: 'frontalieri, ticino, svizzera, italia, saronno, rilanciare, commercio, interventi',
     ogTitle: 'Saronno: rilanciare il commercio con interventi strutturali',
     ogDescription: 'Il Consiglio comunale di Saronno esamina una mozione per rilanciare il commercio cittadino con interventi strutturali e permanenti',
@@ -3812,7 +3812,7 @@ description: 'Il Consiglio comunale di Saronno esamina una mozione per rilanciar
 
   'blog-lugano-aggressione-abitazione-2024': {
     title: 'Lugano: aggressione a due donne in casa, arrestato l\'aggressore',
-description: 'Un uomo ha aggredito due donne nella loro abitazione a Lugano. L\'aggressore è stato preso e interrogato dalle autorità.',
+    description: 'Un uomo ha aggredito due donne nella loro abitazione a Lugano. L\'aggressore è stato preso e interrogato dalle autorità.',
     keywords: 'frontalieri, ticino, svizzera, italia, lugano, aggressione, donne, casa',
     ogTitle: 'Lugano: aggressione a due donne in casa, arrestato l\'aggressore',
     ogDescription: 'Un uomo ha aggredito due donne nella loro abitazione a Lugano. L\'aggressore è stato preso e interrogato dalle autorità.',
@@ -3840,7 +3840,7 @@ description: 'Un uomo ha aggredito due donne nella loro abitazione a Lugano. L\'
 
   'blog-furti-chiese-ticino-rumeni-fermati': {
     title: 'Furti in chiese: fermati due rumeni in Ticino | Frontaliere Ticino',
-description: 'Due cittadini rumeni sono stati fermati per furti in chiese ticinesi. Scopri i dettagli dell\'operazione e le misure di sicurezza.',
+    description: 'Due cittadini rumeni sono stati fermati per furti in chiese ticinesi. Scopri i dettagli dell\'operazione e le misure di sicurezza.',
     keywords: 'frontalieri, ticino, svizzera, italia, furti, chiese, fermati, rumeni',
     ogTitle: 'Furti in chiese: fermati due rumeni in Ticino',
     ogDescription: 'Due cittadini rumeni sono stati fermati per furti in chiese ticinesi. Scopri i dettagli dell\'operazione e le misure di sicurezza.',
@@ -3896,10 +3896,10 @@ description: 'Due cittadini rumeni sono stati fermati per furti in chiese ticine
 
   'blog-casa-montana-nante-governo-regolare': {
     title: 'Casa montana di Nante: il Governo conferma tutto regolare',
-description: 'Se la decisione del Consiglio di Stato diventa definitiva, il progetto procederà come pianificato.',
+    description: 'Se la decisione del Consiglio di Stato diventa definitiva, il progetto procederà come pianificato.',
     keywords: 'frontalieri, ticino, svizzera, italia, casa, montana, nante, governo',
     ogTitle: 'Casa montana di Nante: il Governo conferma tutto regolare',
-ogDescription: 'Il Consiglio di Stato ticinese ha respinto il ricorso presentato da tre cittadini di Monteceneri contro il progetto di ristrutturazione della casa montana Madonna delle Nevi a Nante.',
+    ogDescription: 'Il Consiglio di Stato ticinese ha respinto il ricorso presentato da tre cittadini di Monteceneri contro il progetto di ristrutturazione della casa montana Madonna delle Nevi a Nante.',
     canonicalPath: '/articoli-frontaliere/casa-montana-nante-governo-regolare/',
     structuredData: {
       "@context": "https://schema.org",
@@ -3924,7 +3924,7 @@ ogDescription: 'Il Consiglio di Stato ticinese ha respinto il ricorso presentato
 
   'blog-neuchatel-palloncini-lanterne-vietati': {
     title: 'Neuchâtel vieta palloncini e lanterne: prima svizzera',
-description: 'Il Gran Consiglio del Canton Neuchâtel ha approvato il divieto di lancio di palloncini e lanterne volanti, con 55 voti a favore.',
+    description: 'Il Gran Consiglio del Canton Neuchâtel ha approvato il divieto di lancio di palloncini e lanterne volanti, con 55 voti a favore.',
     keywords: 'frontalieri, ticino, svizzera, italia, neuch, vieta, palloncini, lanterne',
     ogTitle: 'Neuchâtel vieta palloncini e lanterne: prima svizzera',
     ogDescription: 'Il Gran Consiglio del Canton Neuchâtel ha approvato il divieto di lancio di palloncini e lanterne volanti, con 55 voti a favore.',
@@ -3952,7 +3952,7 @@ description: 'Il Gran Consiglio del Canton Neuchâtel ha approvato il divieto di
 
   'blog-vaud-parlamento-dimissioni-dittli': {
     title: 'Vaud, il Parlamento chiede le dimissioni di Valérie Dittli',
-description: 'Il Gran Consiglio vodese ha approvato una risoluzione simbolica per chiedere le dimissioni della consigliera di Stato Valérie Dittli.',
+    description: 'Il Gran Consiglio vodese ha approvato una risoluzione simbolica per chiedere le dimissioni della consigliera di Stato Valérie Dittli.',
     keywords: 'frontalieri, ticino, svizzera, italia, vaud, parlamento, chiede, dimissioni',
     ogTitle: 'Vaud, il Parlamento chiede le dimissioni di Valérie Dittli',
     ogDescription: 'Il Gran Consiglio vodese ha approvato una risoluzione simbolica per chiedere le dimissioni della consigliera di Stato Valérie Dittli.',
@@ -3980,7 +3980,7 @@ description: 'Il Gran Consiglio vodese ha approvato una risoluzione simbolica pe
 
   'blog-rogo-san-fermo-battaglia-2024': {
     title: 'Rogo a San Fermo della Battaglia, nessuno ferito | Frontaliere Ticino',
-description: 'Un incendio è divampato sul Pin Umbrèla a San Fermo della Battaglia, in provincia di Como, senza causare vittime.',
+    description: 'Un incendio è divampato sul Pin Umbrèla a San Fermo della Battaglia, in provincia di Como, senza causare vittime.',
     keywords: 'frontalieri, ticino, svizzera, italia, rogo, fermo, battaglia, nessuno',
     ogTitle: 'Rogo a San Fermo della Battaglia, nessuno ferito',
     ogDescription: 'Un incendio è divampato sul Pin Umbrèla a San Fermo della Battaglia, in provincia di Como, senza causare vittime.',
@@ -4148,7 +4148,7 @@ description: 'Un incendio è divampato sul Pin Umbrèla a San Fermo della Battag
 
   'blog-gita-cuore-soncino-saronno-point': {
     title: 'Gita del cuore a Soncino per sostenere Saronno Point',
-description: 'Una giornata tra storia, arte e solidarietà per finanziare le attività di Saronno Point dedicate ai malati oncologici.',
+    description: 'Una giornata tra storia, arte e solidarietà per finanziare le attività di Saronno Point dedicate ai malati oncologici.',
     keywords: 'frontalieri, ticino, svizzera, italia, gita, cuore, soncino, sostenere',
     ogTitle: 'Gita del cuore a Soncino per sostenere Saronno Point',
     ogDescription: 'Una giornata tra storia, arte e solidarietà per finanziare le attività di Saronno Point dedicate ai malati oncologici.',
@@ -4176,7 +4176,7 @@ description: 'Una giornata tra storia, arte e solidarietà per finanziare le att
 
   'blog-decreto-lavoro-meloni-frontalieri-ticino': {
     title: 'Decreto lavoro Meloni: salario giusto e stop ai contratti pirata',
-description: 'Via libera al decreto lavoro con salario giusto e incentivi per le assunzioni. Meloni: patto con imprese e sindacati.',
+    description: 'Via libera al decreto lavoro con salario giusto e incentivi per le assunzioni. Meloni: patto con imprese e sindacati.',
     keywords: 'frontalieri, ticino, svizzera, italia, decreto, lavoro, meloni, salario',
     ogTitle: 'Decreto lavoro Meloni: salario giusto e stop ai contratti pirata',
     ogDescription: 'Via libera al decreto lavoro con salario giusto e incentivi per le assunzioni. Meloni: patto con imprese e sindacati.',
@@ -4428,7 +4428,7 @@ description: 'Via libera al decreto lavoro con salario giusto e incentivi per le
 
   'blog-dehors-como-ricorso-tar-20-maggio': {
     title: 'Dehors a Como: ricorso del bar e decisione del Tar',
-description: 'La rimozione del dehors del bar La Quinta a Como è sospesa. Udienza di merito il 20 maggio 2026. Scopri di più su Frontaliere Ticino.',
+    description: 'La rimozione del dehors del bar La Quinta a Como è sospesa. Udienza di merito il 20 maggio 2026. Scopri di più su Frontaliere Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, dehors, como, ricorso, decisione',
     ogTitle: 'Dehors a Como: ricorso del bar e decisione del Tar',
     ogDescription: 'La rimozione del dehors del bar La Quinta a Como è sospesa. Udienza di merito il 20 maggio 2026. Scopri di più su Frontaliere Ticino.',
@@ -4456,7 +4456,7 @@ description: 'La rimozione del dehors del bar La Quinta a Como è sospesa. Udien
 
   'blog-bruno-breguet-scomparsa-ufficializzata': {
     title: 'Bruno Breguet scomparso: il pretore di Locarno chiude il caso',
-description: 'La giustizia civile ticinese ha ufficializzato la scomparsa di Bruno Breguet, ex terrorista legato a Carlos e forse agente CIA.',
+    description: 'La giustizia civile ticinese ha ufficializzato la scomparsa di Bruno Breguet, ex terrorista legato a Carlos e forse agente CIA.',
     keywords: 'frontalieri, ticino, svizzera, italia, bruno, breguet, scomparso, pretore',
     ogTitle: 'Bruno Breguet scomparso: il pretore di Locarno chiude il caso',
     ogDescription: 'La giustizia civile ticinese ha ufficializzato la scomparsa di Bruno Breguet, ex terrorista legato a Carlos e forse agente CIA',
@@ -4484,7 +4484,7 @@ description: 'La giustizia civile ticinese ha ufficializzato la scomparsa di Bru
 
   'blog-profumo-prato-tagliato-grido-aiuto-piante': {
     title: 'Il profumo di prato tagliato è un grido d’aiuto delle piante',
-description: 'Scopri come il profumo dell\'erba tagliata è un segnale di allarme per le piante e attira insetti predatori utili.',
+    description: 'Scopri come il profumo dell\'erba tagliata è un segnale di allarme per le piante e attira insetti predatori utili.',
     keywords: 'frontalieri, ticino, svizzera, italia, profumo, prato, tagliato, grido',
     ogTitle: 'Il profumo di prato tagliato è un grido d’aiuto delle piante',
     ogDescription: 'Scopri come il profumo dell\'erba tagliata è un segnale di allarme per le piante e attira insetti predatori utili.',
@@ -4624,7 +4624,7 @@ description: 'Scopri come il profumo dell\'erba tagliata è un segnale di allarm
 
   'blog-uzbekistan-oro-gas-ticino-implicazioni': {
     title: 'Uzbekistan, oro e gas al centro del mondo: implicazioni per il Ticino',
-description: 'Scopri come l\'apertura economica dell\'Uzbekistan influisce sul Ticino e i frontalieri, con focus su oro, gas e processi finanziari.',
+    description: 'Scopri come l\'apertura economica dell\'Uzbekistan influisce sul Ticino e i frontalieri, con focus su oro, gas e processi finanziari.',
     keywords: 'frontalieri, ticino, svizzera, italia, uzbekistan, centro, mondo, implicazioni',
     ogTitle: 'Uzbekistan, oro e gas al centro del mondo: implicazioni per il Ticino',
     ogDescription: 'Scopri come l\'apertura economica dell\'Uzbekistan influisce sul Ticino e i frontalieri, con focus su oro, gas e processi finanziari.',
@@ -4708,7 +4708,7 @@ description: 'Scopri come l\'apertura economica dell\'Uzbekistan influisce sul T
 
   'blog-karimova-processo-bellinzona-2026': {
     title: 'Processo a Karimova a Bellinzona: accuse di riciclaggio e corruzione',
-description: 'Gulnara Karimova, figlia dell\'ex presidente uzbeko, è accusata di reati finanziari. Il processo si tiene a Bellinzona.',
+    description: 'Gulnara Karimova, figlia dell\'ex presidente uzbeko, è accusata di reati finanziari. Il processo si tiene a Bellinzona.',
     keywords: 'frontalieri, ticino, svizzera, italia, processo, karimova, bellinzona, accuse',
     ogTitle: 'Processo a Karimova a Bellinzona: accuse di riciclaggio e corruzione',
     ogDescription: 'Gulnara Karimova, figlia dell\'ex presidente uzbeko, è accusata di reati finanziari. Il processo si tiene a Bellinzona.',
@@ -4736,7 +4736,7 @@ description: 'Gulnara Karimova, figlia dell\'ex presidente uzbeko, è accusata d
 
   'blog-truffe-sentimentali-zurigo-2026': {
     title: 'Truffe sentimentali in Svizzera: 10 arresti per milioni di franchi',
-description: 'Operazione su larga scala in 6 cantoni svizzeri smantella rete di truffe sentimentali legate al gruppo criminale nigeriano Black Axe.',
+    description: 'Operazione su larga scala in 6 cantoni svizzeri smantella rete di truffe sentimentali legate al gruppo criminale nigeriano Black Axe.',
     keywords: 'frontalieri, ticino, svizzera, italia, truffe, sentimentali, arresti, milioni',
     ogTitle: 'Truffe sentimentali in Svizzera: 10 arresti per milioni di franchi',
     ogDescription: 'Operazione su larga scala in 6 cantoni svizzeri smantella rete di truffe sentimentali legate al gruppo criminale nigeriano Black Axe.',
@@ -4820,7 +4820,7 @@ description: 'Operazione su larga scala in 6 cantoni svizzeri smantella rete di 
 
   'blog-violenza-domestica-misure-urgenti': {
     title: 'Violenza domestica: nuove misure urgenti per contrastare il fenomeno',
-description: 'Il consigliere federale Beat Jans annuncia il numero nazionale 142 e altre iniziative per combattere la violenza domestica in Svizzera.',
+    description: 'Il consigliere federale Beat Jans annuncia il numero nazionale 142 e altre iniziative per combattere la violenza domestica in Svizzera.',
     keywords: 'frontalieri, ticino, svizzera, italia, violenza, domestica, nuove, misure',
     ogTitle: 'Violenza domestica: nuove misure urgenti per contrastare il fenomeno',
     ogDescription: 'Il consigliere federale Beat Jans annuncia il numero nazionale 142 e altre iniziative per combattere la violenza domestica in Svizzera.',
@@ -5016,7 +5016,7 @@ description: 'Il consigliere federale Beat Jans annuncia il numero nazionale 142
 
   'blog-centri-responsabilita-frontalieri-ticino': {
     title: 'Centri di responsabilità: la sofferenza dei richiedenti asilo',
-description: 'Analisi delle condizioni nei centri federali d\'asilo in Ticino e le scelte politiche dietro la gestione delle politiche migratorie.',
+    description: 'Analisi delle condizioni nei centri federali d\'asilo in Ticino e le scelte politiche dietro la gestione delle politiche migratorie.',
     keywords: 'frontalieri, ticino, svizzera, italia, centri, responsabilità, sofferenza, richiedenti',
     ogTitle: 'Centri di responsabilità: la sofferenza dei richiedenti asilo',
     ogDescription: 'Analisi delle condizioni nei centri federali d\'asilo in Ticino e le scelte politiche dietro la gestione delle politiche migratorie.',
@@ -5184,7 +5184,7 @@ description: 'Analisi delle condizioni nei centri federali d\'asilo in Ticino e 
 
   'blog-processo-tentato-omicidio-chiasso-2026': {
     title: 'Processo per tentato omicidio a Chiasso: aggressione con manubrio',
-description: 'Si apre il processo a carico di un cittadino eritreo accusato di aver aggredito la compagna con un manubrio da palestra a Chiasso.',
+    description: 'Si apre il processo a carico di un cittadino eritreo accusato di aver aggredito la compagna con un manubrio da palestra a Chiasso.',
     keywords: 'frontalieri, ticino, svizzera, italia, processo, tentato, omicidio, chiasso',
     ogTitle: 'Processo tentato omicidio Chiasso: aggressione con manubrio',
     ogDescription: 'Si apre il processo a carico di un cittadino eritreo accusato di aver aggredito la compagna con un manubrio da palestra a Chiasso.',
@@ -5212,10 +5212,10 @@ description: 'Si apre il processo a carico di un cittadino eritreo accusato di a
 
   'blog-varese-cultura-2030-ecosistema-culturale': {
     title: 'Varese Cultura 2030: costruire un ecosistema culturale',
-description: 'Varese Cultura 2030 è un progetto complesso e condiviso che punta a ridisegnare il futuro culturale della provincia di Varese.',
+    description: 'Varese Cultura 2030 è un progetto complesso e condiviso che punta a ridisegnare il futuro culturale della provincia di Varese.',
     keywords: 'frontalieri, ticino, svizzera, italia, varese, cultura, 2030, costruire',
     ogTitle: 'Varese Cultura 2030: costruire un ecosistema culturale',
-ogDescription: 'Varese Cultura 2030 è un progetto complesso e condiviso che punta a ridisegnare il futuro culturale della provincia di Varese.',
+    ogDescription: 'Varese Cultura 2030 è un progetto complesso e condiviso che punta a ridisegnare il futuro culturale della provincia di Varese.',
     canonicalPath: '/articoli-frontaliere/varese-cultura-2030-ecosistema-culturale/',
     structuredData: {
       "@context": "https://schema.org",
@@ -5240,7 +5240,7 @@ ogDescription: 'Varese Cultura 2030 è un progetto complesso e condiviso che pun
 
   'blog-casa-montana-nante-ricorso-tram': {
     title: 'Casa montana Nante, ricorso al Tram | Frontaliere Ticino',
-description: 'Il comitato referendario evidenzia le discrepanze del Municipio sui costi di ristrutturazione della casa montana Nante-Airolo.',
+    description: 'Il comitato referendario evidenzia le discrepanze del Municipio sui costi di ristrutturazione della casa montana Nante-Airolo.',
     keywords: 'frontalieri, ticino, svizzera, italia, casa, montana, nante, ricorso',
     ogTitle: 'Casa montana Nante, ricorso al Tram | Frontaliere Ticino',
     ogDescription: 'Il comitato referendario evidenzia le discrepanze del Municipio sui costi di ristrutturazione della casa montana Nante-Airolo',
@@ -5352,7 +5352,7 @@ description: 'Il comitato referendario evidenzia le discrepanze del Municipio su
 
   'blog-furti-cantine-luganese-condannato': {
     title: 'Furti nelle cantine del Luganese: condannato 44enne ticinese',
-description: 'Un 44enne ticinese è stato condannato per furti nelle cantine del Luganese per finanziare la dipendenza da cocaina. Scopri di più.',
+    description: 'Un 44enne ticinese è stato condannato per furti nelle cantine del Luganese per finanziare la dipendenza da cocaina. Scopri di più.',
     keywords: 'frontalieri, ticino, svizzera, italia, furti, nelle, cantine, luganese',
     ogTitle: 'Furti nelle cantine del Luganese: condannato 44enne ticinese',
     ogDescription: 'Un 44enne ticinese è stato condannato per furti nelle cantine del Luganese per finanziare la dipendenza da cocaina. Scopri di più.',
@@ -5380,7 +5380,7 @@ description: 'Un 44enne ticinese è stato condannato per furti nelle cantine del
 
   'blog-varese-corsi-parlare-pubblico-2026': {
     title: 'Varese Corsi: corso intermedio di public speaking dal 18 maggio',
-description: 'Varese Corsi propone un corso intermedio di public speaking per migliorare le tecniche di comunicazione e coinvolgimento del pubblico.',
+    description: 'Varese Corsi propone un corso intermedio di public speaking per migliorare le tecniche di comunicazione e coinvolgimento del pubblico.',
     keywords: 'frontalieri, ticino, svizzera, italia, varese, corsi, corso, intermedio',
     ogTitle: 'Corso intermedio di public speaking a Varese',
     ogDescription: 'Varese Corsi propone un corso intermedio di public speaking per migliorare le tecniche di comunicazione e coinvolgimento del pubblico',
@@ -5464,7 +5464,7 @@ description: 'Varese Corsi propone un corso intermedio di public speaking per mi
 
   'blog-730-precompilato-frontalieri-ticino-2026': {
     title: '730 precompilato online dal 30 aprile: cosa cambia per i frontalieri',
-description: 'Dal 30 aprile 2026 il 730 precompilato è online. Ecco cosa sapere per non sbagliare, con dati e scadenze aggiornati.',
+    description: 'Dal 30 aprile 2026 il 730 precompilato è online. Ecco cosa sapere per non sbagliare, con dati e scadenze aggiornati.',
     keywords: 'frontalieri, ticino, svizzera, italia, precompilato, online, aprile, cosa',
     ogTitle: '730 precompilato online dal 30 aprile: cosa cambia per i frontalieri',
     ogDescription: 'Dal 30 aprile 2026 il 730 precompilato è online. Ecco cosa sapere per non sbagliare, con dati e scadenze aggiornati.',
@@ -5520,7 +5520,7 @@ description: 'Dal 30 aprile 2026 il 730 precompilato è online. Ecco cosa sapere
 
   'blog-geopolitica-sindacato-nuovi-equilibri-varese': {
     title: 'Geopolitica e sindacati: nuovi equilibri globali | Frontaliere Ticino',
-description: 'Il consiglio generale della Fnp Cisl dei Laghi a Varese analizza l\'impatto delle tensioni internazionali su lavoro, pensioni e welfare.',
+    description: 'Il consiglio generale della Fnp Cisl dei Laghi a Varese analizza l\'impatto delle tensioni internazionali su lavoro, pensioni e welfare.',
     keywords: 'frontalieri, ticino, svizzera, italia, geopolitica, sindacati, nuovi, equilibri',
     ogTitle: 'Geopolitica e vita quotidiana: il sindacato alla prova dei nuovi equilibri globali',
     ogDescription: 'Il consiglio generale della Fnp Cisl dei Laghi a Varese analizza l\'impatto delle tensioni internazionali su lavoro, pensioni e welfare.',
@@ -5632,7 +5632,7 @@ description: 'Il consiglio generale della Fnp Cisl dei Laghi a Varese analizza l
 
   'blog-friborgogotteron-spareggio-titolo-hockey': {
     title: 'Friborg-Gottéron allo spareggio per il titolo di hockey',
-description: 'La squadra di hockey Friborg-Gottéron si gioca il titolo in uno spareggio cruciale. Tutti i dettagli sulla partita decisiva.',
+    description: 'La squadra di hockey Friborg-Gottéron si gioca il titolo in uno spareggio cruciale. Tutti i dettagli sulla partita decisiva.',
     keywords: 'frontalieri, ticino, svizzera, italia, friborg-gottéron, allo, spareggio, titolo',
     ogTitle: 'Friborg-Gottéron allo spareggio per il titolo di hockey',
     ogDescription: 'La squadra di hockey Friborg-Gottéron si gioca il titolo in uno spareggio cruciale. Tutti i dettagli sulla partita decisiva.',
@@ -5688,7 +5688,7 @@ description: 'La squadra di hockey Friborg-Gottéron si gioca il titolo in uno s
 
   'blog-petrolio-gas-svizzera-approvvigionamento-sicuro': {
     title: 'Approvvigionamento energetico sicuro in Svizzera | Frontaliere Ticino',
-description: 'L\'attacco all\'Iran e le rappresaglie hanno aumentato i prezzi di benzina e diesel anche in Svizzera, ma l\'approvvigionamento è sicuro.',
+    description: 'L\'attacco all\'Iran e le rappresaglie hanno aumentato i prezzi di benzina e diesel anche in Svizzera, ma l\'approvvigionamento è sicuro.',
     keywords: 'frontalieri, ticino, svizzera, italia, approvvigionamento, energetico, sicuro, attacco',
     ogTitle: 'Petrolio e gas in Svizzera, approvvigionamento sicuro nonostante il conflitto in Medio Oriente',
     ogDescription: 'L\'attacco all\'Iran e le rappresaglie hanno aumentato i prezzi di benzina e diesel anche in Svizzera, ma l\'approvvigionamento è sicuro.',
@@ -5716,10 +5716,10 @@ description: 'L\'attacco all\'Iran e le rappresaglie hanno aumentato i prezzi di
 
   'blog-von-der-leyen-ue-energia-500-milioni-giorno': {
     title: 'Von der Leyen: "Guerra in Iran costa all\'Ue 500 milioni al giorno per l\'energia"',
-description: 'La guerra in Iran sta causando gravi ripercussioni economiche per l\'Unione europea, con un costo di 500 milioni di euro al giorno per l\'energia.',
+    description: 'La guerra in Iran sta causando gravi ripercussioni economiche per l\'Unione europea, con un costo di 500 milioni di euro al giorno per l\'energia.',
     keywords: 'frontalieri, ticino, svizzera, italia, leyen, guerra, iran, costa',
     ogTitle: 'Von der Leyen: "Guerra in Iran costa all\'Ue 500 milioni al giorno per l\'energia"',
-ogDescription: 'La guerra in Iran sta causando gravi ripercussioni economiche per l\'Unione europea, con un costo di 500 milioni di euro al giorno per l\'energia.',
+    ogDescription: 'La guerra in Iran sta causando gravi ripercussioni economiche per l\'Unione europea, con un costo di 500 milioni di euro al giorno per l\'energia.',
     canonicalPath: '/articoli-frontaliere/von-der-leyen-ue-energia-500-milioni-giorno/',
     structuredData: {
       "@context": "https://schema.org",
@@ -5744,7 +5744,7 @@ ogDescription: 'La guerra in Iran sta causando gravi ripercussioni economiche pe
 
   'blog-svizzera-cashless-bns-sistema-equo': {
     title: 'Svizzera sempre più cashless, BNS vuole sistema più equo',
-description: 'Il contante scende al 30% delle transazioni, le app di pagamento raggiungono il 20%. La BNS avverte sui rischi di concentrazione.',
+    description: 'Il contante scende al 30% delle transazioni, le app di pagamento raggiungono il 20%. La BNS avverte sui rischi di concentrazione.',
     keywords: 'frontalieri, ticino, svizzera, italia, sempre, cashless, vuole, sistema',
     ogTitle: 'Svizzera sempre più cashless, BNS vuole sistema più equo',
     ogDescription: 'Il contante scende al 30% delle transazioni, le app di pagamento raggiungono il 20%. La BNS avverte sui rischi di concentrazione.',
@@ -5912,7 +5912,7 @@ description: 'Il contante scende al 30% delle transazioni, le app di pagamento r
 
   'blog-incidente-aarau-18enne-frontaliere': {
     title: 'Incidente ad Aarau: 18enne frontaliero ubriaco causa danni totali',
-description: 'Un giovane apprendista di 18 anni, residente in Ticino, ha causato un incidente stradale ad Aarau, provocando danni totali all\'auto.',
+    description: 'Un giovane apprendista di 18 anni, residente in Ticino, ha causato un incidente stradale ad Aarau, provocando danni totali all\'auto.',
     keywords: 'frontalieri, ticino, svizzera, italia, incidente, aarau, 18enne, frontaliero',
     ogTitle: 'Incidente ad Aarau: 18enne frontaliero ubriaco causa danni totali',
     ogDescription: 'Un giovane apprendista di 18 anni, residente in Ticino, ha causato un incidente stradale ad Aarau, provocando danni totali all\'auto.',
@@ -5940,7 +5940,7 @@ description: 'Un giovane apprendista di 18 anni, residente in Ticino, ha causato
 
   'blog-san-gallo-vince-thun-ritardo-festa': {
     title: 'San Gallo vince all\'ultimo minuto, festa rinviata per il Thun',
-description: 'Il San Gallo segna al 92° minuto e vince contro il Thun, mentre la festa del Thun viene rinviata per la seconda volta.',
+    description: 'Il San Gallo segna al 92° minuto e vince contro il Thun, mentre la festa del Thun viene rinviata per la seconda volta.',
     keywords: 'frontalieri, ticino, svizzera, italia, gallo, vince, ultimo, minuto',
     ogTitle: 'San Gallo vince all\'ultimo minuto, festa rinviata per il Thun',
     ogDescription: 'Il San Gallo segna al 92° minuto e vince contro il Thun, mentre la festa del Thun viene rinviata per la seconda volta',
@@ -5968,7 +5968,7 @@ description: 'Il San Gallo segna al 92° minuto e vince contro il Thun, mentre l
 
   'blog-hupac-busto-utile-positivo-collegamenti': {
     title: 'Hupac cresce e rafforza Busto: utile positivo e nuovi collegamenti',
-description: 'Hupac chiude il 2025 con un utile di 3,5 milioni di franchi e volumi in aumento, nonostante le criticità della rete ferroviaria.',
+    description: 'Hupac chiude il 2025 con un utile di 3,5 milioni di franchi e volumi in aumento, nonostante le criticità della rete ferroviaria.',
     keywords: 'frontalieri, ticino, svizzera, italia, hupac, cresce, rafforza, busto',
     ogTitle: 'Hupac cresce e rafforza Busto: utile positivo e nuovi collegamenti',
     ogDescription: 'Hupac chiude il 2025 con un utile di 3,5 milioni di franchi e volumi in aumento, nonostante le criticità della rete ferroviaria.',
@@ -6108,10 +6108,10 @@ description: 'Hupac chiude il 2025 con un utile di 3,5 milioni di franchi e volu
 
   'blog-spacchettamento-casse-malati-2026': {
     title: 'Casse malati, proposto lo spacchettamento delle due iniziative',
-description: 'La proposta di spacchettamento delle iniziative sulle casse malati potrebbe avere un impatto significativo sui frontalieri che lavorano in Ticino.',
+    description: 'La proposta di spacchettamento delle iniziative sulle casse malati potrebbe avere un impatto significativo sui frontalieri che lavorano in Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, casse, malati, proposto, spacchettamento',
     ogTitle: 'Casse malati, proposto lo spacchettamento delle due iniziative',
-ogDescription: 'La proposta di spacchettamento delle iniziative sulle casse malati potrebbe offrire opportunità di risparmio e sostegno finanziario per i frontalieri che lavorano in Ticino.',
+    ogDescription: 'La proposta di spacchettamento delle iniziative sulle casse malati potrebbe offrire opportunità di risparmio e sostegno finanziario per i frontalieri che lavorano in Ticino.',
     canonicalPath: '/articoli-frontaliere/spacchettamento-casse-malati-2026/',
     structuredData: {
       "@context": "https://schema.org",
@@ -6136,7 +6136,7 @@ ogDescription: 'La proposta di spacchettamento delle iniziative sulle casse mala
 
   'blog-athora-italia-previdenza-complementare-2026': {
     title: 'Athora Italia: 30% over 55 rimpiange adesione tardiva',
-description: 'Studio Athora Italia rivela che il 30% degli over 55 rimpiange di non aver aderito prima alla previdenza complementare. Scopri di più.',
+    description: 'Studio Athora Italia rivela che il 30% degli over 55 rimpiange di non aver aderito prima alla previdenza complementare. Scopri di più.',
     keywords: 'frontalieri, ticino, svizzera, italia, athora, over, rimpiange, adesione',
     ogTitle: 'Athora Italia: 30% over 55 rimpiange adesione tardiva',
     ogDescription: 'Studio Athora Italia rivela che il 30% degli over 55 rimpiange di non aver aderito prima alla previdenza complementare. Scopri di più.',
@@ -6192,7 +6192,7 @@ description: 'Studio Athora Italia rivela che il 30% degli over 55 rimpiange di 
 
   'blog-via-francisca-10-anni-turismo-ticino': {
     title: 'Via Francisca del Lucomagno: 10 anni di turismo e connessioni',
-description: 'La Via Francisca del Lucomagno compie dieci anni, unendo Castiglione a Roma e celebrando il turismo e le relazioni tra territori.',
+    description: 'La Via Francisca del Lucomagno compie dieci anni, unendo Castiglione a Roma e celebrando il turismo e le relazioni tra territori.',
     keywords: 'frontalieri, ticino, svizzera, italia, francisca, lucomagno, anni, turismo',
     ogTitle: 'Via Francisca del Lucomagno: 10 anni di turismo e connessioni',
     ogDescription: 'La Via Francisca del Lucomagno compie dieci anni, unendo Castiglione a Roma e celebrando il turismo e le relazioni tra territori',
@@ -6220,10 +6220,10 @@ description: 'La Via Francisca del Lucomagno compie dieci anni, unendo Castiglio
 
   'blog-scuola-viganello-gaza-gemellaggio-2026': {
     title: 'Scuola di Viganello e Gaza si gemellano: scambi culturali e mostre',
-description: 'Per partecipare alla mostra, basta recarsi presso l\'aula magna della scuola media di Viganello durante gli orari scolastici.',
+    description: 'Per partecipare alla mostra, basta recarsi presso l\'aula magna della scuola media di Viganello durante gli orari scolastici.',
     keywords: 'frontalieri, ticino, svizzera, italia, scuola, viganello, gaza, gemellano',
     ogTitle: 'Scuola di Viganello e Gaza si gemellano: scambi culturali e mostre',
-ogDescription: 'La mostra dedicata al progetto di gemellaggio tra la scuola media di Viganello e la scuola Al-Salam di Gaza è un\'opportunità unica per vedere direttamente l\'impatto di questo scambio culturale.',
+    ogDescription: 'La mostra dedicata al progetto di gemellaggio tra la scuola media di Viganello e la scuola Al-Salam di Gaza è un\'opportunità unica per vedere direttamente l\'impatto di questo scambio culturale.',
     canonicalPath: '/articoli-frontaliere/scuola-viganello-gaza-gemellaggio-2026/',
     structuredData: {
       "@context": "https://schema.org",
@@ -6360,10 +6360,10 @@ ogDescription: 'La mostra dedicata al progetto di gemellaggio tra la scuola medi
 
   'blog-licata-lombardia-bulgaria-opportunita': {
     title: 'Licata: Schengen ed euro aprono nuove opportunità per Lombardia e Bulgaria',
-description: 'L’ingresso della Bulgaria nell’area Schengen e nell’euro apre nuove opportunità per i frontalieri che lavorano in Lombardia e risiedono in Ticino.',
+    description: 'L’ingresso della Bulgaria nell’area Schengen e nell’euro apre nuove opportunità per i frontalieri che lavorano in Lombardia e risiedono in Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, licata, schengen, euro, aprono',
     ogTitle: 'Licata: Schengen ed euro aprono nuove opportunità per Lombardia e Bulgaria',
-ogDescription: 'L’ingresso della Bulgaria nell’area Schengen e nell’euro apre nuove opportunità per i frontalieri che lavorano in Lombardia e risiedono in Ticino.',
+    ogDescription: 'L’ingresso della Bulgaria nell’area Schengen e nell’euro apre nuove opportunità per i frontalieri che lavorano in Lombardia e risiedono in Ticino.',
     canonicalPath: '/articoli-frontaliere/licata-lombardia-bulgaria-opportunita/',
     structuredData: {
       "@context": "https://schema.org",
@@ -6388,7 +6388,7 @@ ogDescription: 'L’ingresso della Bulgaria nell’area Schengen e nell’euro a
 
   'blog-maroggia-servizi-postali-2026': {
     title: 'Maroggia, la Posta riorganizza i servizi dal 2026 | Frontaliere Ticino',
-description: 'Dal settembre 2026, Maroggia avrà un nuovo servizio postale a domicilio in attesa di una collaborazione con un commercio locale.',
+    description: 'Dal settembre 2026, Maroggia avrà un nuovo servizio postale a domicilio in attesa di una collaborazione con un commercio locale.',
     keywords: 'frontalieri, ticino, svizzera, italia, maroggia, posta, riorganizza, servizi',
     ogTitle: 'Maroggia, la Posta riorganizza i servizi dal 2026',
     ogDescription: 'Dal settembre 2026, Maroggia avrà un nuovo servizio postale a domicilio in attesa di una collaborazione con un commercio locale.',
@@ -6444,7 +6444,7 @@ description: 'Dal settembre 2026, Maroggia avrà un nuovo servizio postale a dom
 
   'blog-laurent-morel-nominato-direttore-ef-svizzera': {
     title: 'Laurent Morel nuovo Direttore Generale di EF Svizzera',
-description: 'EF Education First nomina Laurent Morel come nuovo Direttore Generale per rafforzare la presenza sul mercato svizzero.',
+    description: 'EF Education First nomina Laurent Morel come nuovo Direttore Generale per rafforzare la presenza sul mercato svizzero.',
     keywords: 'frontalieri, ticino, svizzera, italia, laurent, morel, nuovo, direttore',
     ogTitle: 'Laurent Morel nuovo Direttore Generale di EF Svizzera',
     ogDescription: 'EF Education First nomina Laurent Morel come nuovo Direttore Generale per rafforzare la presenza sul mercato svizzero.',
@@ -6472,7 +6472,7 @@ description: 'EF Education First nomina Laurent Morel come nuovo Direttore Gener
 
   'blog-san-gottardo-secondo-tubo-caduto-diaframma': {
     title: 'San Gottardo: caduto il primo diaframma a nord | Frontaliere Ticino',
-description: 'Importante traguardo nel cantiere del secondo tubo della galleria stradale del San Gottardo. Caduto il primo diaframma sul lato nord.',
+    description: 'Importante traguardo nel cantiere del secondo tubo della galleria stradale del San Gottardo. Caduto il primo diaframma sul lato nord.',
     keywords: 'frontalieri, ticino, svizzera, italia, gottardo, caduto, primo, diaframma',
     ogTitle: 'San Gottardo: caduto il primo diaframma a nord',
     ogDescription: 'Importante traguardo nel cantiere del secondo tubo della galleria stradale del San Gottardo. Caduto il primo diaframma sul lato nord.',
@@ -6528,7 +6528,7 @@ description: 'Importante traguardo nel cantiere del secondo tubo della galleria 
 
   'blog-accordo-syndicom-vsm-2026': {
     title: 'Syndicom approva accordo con editori VSM per Ticino e Svizzera tedesca',
-description: 'Dopo 20 anni senza intesa, operatori media Ticino e Svizzera tedesca verso regolamentazione condizioni minime lavoro stampa.',
+    description: 'Dopo 20 anni senza intesa, operatori media Ticino e Svizzera tedesca verso regolamentazione condizioni minime lavoro stampa.',
     keywords: 'frontalieri, ticino, svizzera, italia, syndicom, approva, accordo, editori',
     ogTitle: 'Syndicom approva accordo con editori VSM per Ticino e Svizzera tedesca',
     ogDescription: 'Dopo 20 anni senza intesa, operatori media Ticino e Svizzera tedesca verso regolamentazione condizioni minime lavoro stampa',
@@ -6556,7 +6556,7 @@ description: 'Dopo 20 anni senza intesa, operatori media Ticino e Svizzera tedes
 
   'blog-philipp-plein-mendrisio-interrogazione': {
     title: 'Philipp Plein a Mendrisio: interrogazione sullo stile controverso',
-description: 'Il marchio Philipp Plein trasferisce la sede legale a Mendrisio. Interrogazione sul suo stile controverso e impatto sulla città.',
+    description: 'Il marchio Philipp Plein trasferisce la sede legale a Mendrisio. Interrogazione sul suo stile controverso e impatto sulla città.',
     keywords: 'frontalieri, ticino, svizzera, italia, philipp, plein, mendrisio, interrogazione',
     ogTitle: 'Philipp Plein a Mendrisio: interrogazione sullo stile controverso',
     ogDescription: 'Il marchio Philipp Plein trasferisce la sede legale a Mendrisio. Interrogazione sul suo stile controverso e impatto sulla città.',
@@ -6612,7 +6612,7 @@ description: 'Il marchio Philipp Plein trasferisce la sede legale a Mendrisio. I
 
   'blog-italia-svizzera-ricerca-2026': {
     title: 'Italia e Svizzera uniscono le forze nella ricerca | Frontaliere Ticino',
-description: 'La nona Giornata della ricerca italiana nel mondo celebrata a Plan-les-Ouates con focus su scienze della salute e innovazione.',
+    description: 'La nona Giornata della ricerca italiana nel mondo celebrata a Plan-les-Ouates con focus su scienze della salute e innovazione.',
     keywords: 'frontalieri, ticino, svizzera, italia, uniscono, forze, nella, ricerca',
     ogTitle: 'Italia e Svizzera uniscono le forze nella ricerca',
     ogDescription: 'La nona Giornata della ricerca italiana nel mondo celebrata a Plan-les-Ouates con focus su scienze della salute e innovazione',
@@ -6780,7 +6780,7 @@ description: 'La nona Giornata della ricerca italiana nel mondo celebrata a Plan
 
   'blog-comunita-montana-valli-verbano-incontri-natura-cambia': {
     title: 'Incontri su cambiamenti climatici a Rancio Valcuvia',
-description: 'La Comunità Montana Valli del Verbano organizza un ciclo di incontri su biodiversità e cambiamenti climatici da aprile a novembre 2026.',
+    description: 'La Comunità Montana Valli del Verbano organizza un ciclo di incontri su biodiversità e cambiamenti climatici da aprile a novembre 2026.',
     keywords: 'frontalieri, ticino, svizzera, italia, incontri, cambiamenti, climatici, rancio',
     ogTitle: 'Incontri su cambiamenti climatici a Rancio Valcuvia',
     ogDescription: 'La Comunità Montana Valli del Verbano organizza un ciclo di incontri su biodiversità e cambiamenti climatici da aprile a novembre 2026.',
@@ -6892,7 +6892,7 @@ description: 'La Comunità Montana Valli del Verbano organizza un ciclo di incon
 
   'blog-casa-hockey-lugano-ambri-2026': {
     title: 'Casa dell\'Hockey: aggiornamenti e novità dal mondo dell\'hockey ticinese',
-description: 'Scopri le ultime novità e aggiornamenti dal mondo dell\'hockey ticinese, con un focus sulle squadre di Lugano e Ambrì Piotta.',
+    description: 'Scopri le ultime novità e aggiornamenti dal mondo dell\'hockey ticinese, con un focus sulle squadre di Lugano e Ambrì Piotta.',
     keywords: 'frontalieri, ticino, svizzera, italia, casa, dell, hockey, aggiornamenti',
     ogTitle: 'Casa dell\'Hockey: novità e aggiornamenti dal Ticino',
     ogDescription: 'Scopri le ultime novità e aggiornamenti dal mondo dell\'hockey ticinese, con un focus sulle squadre di Lugano e Ambrì Piotta.',
@@ -6920,10 +6920,10 @@ description: 'Scopri le ultime novità e aggiornamenti dal mondo dell\'hockey ti
 
   'blog-swiss-duty-free-cambia-vendite-2026': {
     title: 'Swiss: stop vendita duty-free a bordo aerei | Frontaliere Ticino',
-description: 'Swiss interrompe la vendita di prodotti duty-free a bordo degli aerei da fine settembre 2026.',
+    description: 'Swiss interrompe la vendita di prodotti duty-free a bordo degli aerei da fine settembre 2026.',
     keywords: 'frontalieri, ticino, svizzera, italia, swiss, stop, vendita, duty-free',
     ogTitle: 'Swiss: stop vendita duty-free a bordo aerei',
-ogDescription: 'Swiss interrompe la vendita di prodotti duty-free a bordo degli aerei da fine settembre 2026.',
+    ogDescription: 'Swiss interrompe la vendita di prodotti duty-free a bordo degli aerei da fine settembre 2026.',
     canonicalPath: '/articoli-frontaliere/swiss-duty-free-cambia-vendite-2026/',
     structuredData: {
       "@context": "https://schema.org",
@@ -6976,7 +6976,7 @@ ogDescription: 'Swiss interrompe la vendita di prodotti duty-free a bordo degli 
 
   'blog-tunnel-tonale-viabilita-lombardia': {
     title: 'Tunnel da 16 milioni per la viabilità in Lombardia: pronto in 2 anni',
-description: 'Scopri il nuovo tunnel da 16,5 milioni al Passo del Tonale: dettagli, tempi e impatto sulla viabilità in Lombardia.',
+    description: 'Scopri il nuovo tunnel da 16,5 milioni al Passo del Tonale: dettagli, tempi e impatto sulla viabilità in Lombardia.',
     keywords: 'frontalieri, ticino, svizzera, italia, tunnel, milioni, viabilità, lombardia',
     ogTitle: 'Tunnel Tonale: 16,5 milioni per la viabilità in Lombardia',
     ogDescription: 'Scopri il nuovo tunnel da 16,5 milioni al Passo del Tonale: dettagli, tempi e impatto sulla viabilità in Lombardia.',
@@ -7004,7 +7004,7 @@ description: 'Scopri il nuovo tunnel da 16,5 milioni al Passo del Tonale: dettag
 
   'blog-spring-giubiasco-sport-convivialita-2026': {
     title: 'Torna la Spring Giubiasco: sport e convivialità dal 13 al 17 maggio 2026',
-description: 'Dal 13 al 17 maggio 2026, Giubiasco ospita la Spring Giubiasco con gare di corsa, ciclismo, musica e gastronomia per tutte le età.',
+    description: 'Dal 13 al 17 maggio 2026, Giubiasco ospita la Spring Giubiasco con gare di corsa, ciclismo, musica e gastronomia per tutte le età.',
     keywords: 'frontalieri, ticino, svizzera, italia, torna, spring, giubiasco, sport',
     ogTitle: 'Spring Giubiasco 2026: sport e convivialità dal 13 al 17 maggio',
     ogDescription: 'Dal 13 al 17 maggio 2026, Giubiasco ospita la Spring Giubiasco con gare di corsa, ciclismo, musica e gastronomia per tutte le età.',
@@ -7116,7 +7116,7 @@ description: 'Dal 13 al 17 maggio 2026, Giubiasco ospita la Spring Giubiasco con
 
   'blog-benzina-record-annuale-svizzera-2026': {
     title: 'Benzina in Svizzera a record annuale: +13% in 3 mesi',
-description: 'Il prezzo della benzina in Svizzera ha raggiunto il record annuale a 1,90 CHF/litro. Il diesel è a 2,17 CHF/litro.',
+    description: 'Il prezzo della benzina in Svizzera ha raggiunto il record annuale a 1,90 CHF/litro. Il diesel è a 2,17 CHF/litro.',
     keywords: 'frontalieri, ticino, svizzera, italia, benzina, record, annuale, mesi',
     ogTitle: 'Benzina in Svizzera a record annuale: +13% in 3 mesi',
     ogDescription: 'Il prezzo della benzina in Svizzera ha raggiunto il record annuale a 1,90 CHF/litro. Il diesel è a 2,17 CHF/litro.',
@@ -7144,7 +7144,7 @@ description: 'Il prezzo della benzina in Svizzera ha raggiunto il record annuale
 
   'blog-giovane-gambizzato-como-2026': {
     title: 'Giovane gambizzato con tre colpi d\'arma da fuoco a Como',
-description: 'Un 20enne è stato ferito alla gamba con tre colpi d\'arma da fuoco alla periferia di Como. Gli inquirenti indagano sui motivi del gesto.',
+    description: 'Un 20enne è stato ferito alla gamba con tre colpi d\'arma da fuoco alla periferia di Como. Gli inquirenti indagano sui motivi del gesto.',
     keywords: 'frontalieri, ticino, svizzera, italia, giovane, gambizzato, colpi, arma',
     ogTitle: 'Giovane gambizzato con tre colpi d\'arma da fuoco a Como',
     ogDescription: 'Un 20enne è stato ferito alla gamba con tre colpi d\'arma da fuoco alla periferia di Como. Gli inquirenti indagano sui motivi del gesto.',
@@ -7200,7 +7200,7 @@ description: 'Un 20enne è stato ferito alla gamba con tre colpi d\'arma da fuoc
 
   'blog-moncucco-risultati-positivi-2025': {
     title: 'Moncucco: risultati positivi nel 2025 | Frontaliere Ticino',
-description: 'Aumento pazienti, fatturato e utile per il gruppo ospedaliero Moncucco. Preoccupazioni per l\'invecchiamento demografico.',
+    description: 'Aumento pazienti, fatturato e utile per il gruppo ospedaliero Moncucco. Preoccupazioni per l\'invecchiamento demografico.',
     keywords: 'frontalieri, ticino, svizzera, italia, moncucco, risultati, positivi, 2025',
     ogTitle: 'Moncucco: risultati positivi nel 2025',
     ogDescription: 'Aumento pazienti, fatturato e utile per il gruppo ospedaliero Moncucco. Preoccupazioni per l\'invecchiamento demografico.',
@@ -7256,7 +7256,7 @@ description: 'Aumento pazienti, fatturato e utile per il gruppo ospedaliero Monc
 
   'blog-mendrisio-conti-positivi-2025': {
     title: 'Mendrisio: 4 anni di conti in positivo | Frontaliere Ticino',
-description: 'Mendrisio chiude il 2025 con un avanzo di 0,8 milioni di franchi, segnando il quarto anno consecutivo di risultati positivi.',
+    description: 'Mendrisio chiude il 2025 con un avanzo di 0,8 milioni di franchi, segnando il quarto anno consecutivo di risultati positivi.',
     keywords: 'frontalieri, ticino, svizzera, italia, mendrisio, anni, conti, positivo',
     ogTitle: 'Mendrisio: 4 anni di conti in positivo',
     ogDescription: 'Mendrisio chiude il 2025 con un avanzo di 0,8 milioni di franchi, segnando il quarto anno consecutivo di risultati positivi',
@@ -7284,7 +7284,7 @@ description: 'Mendrisio chiude il 2025 con un avanzo di 0,8 milioni di franchi, 
 
   'blog-criminalita-organizzata-svizzera-2026': {
     title: 'Criminalità organizzata in Svizzera: arresto funzionario fedpol',
-description: 'Un duro colpo per fedpol: arrestato un funzionario per sospetta corruzione. La criminalità organizzata è ben radicata in Svizzera.',
+    description: 'Un duro colpo per fedpol: arrestato un funzionario per sospetta corruzione. La criminalità organizzata è ben radicata in Svizzera.',
     keywords: 'frontalieri, ticino, svizzera, italia, criminalità, organizzata, arresto, funzionario',
     ogTitle: 'Criminalità organizzata in Svizzera: arresto funzionario fedpol',
     ogDescription: 'Un duro colpo per fedpol: arrestato un funzionario per sospetta corruzione. La criminalità organizzata è ben radicata in Svizzera.',
@@ -7424,7 +7424,7 @@ description: 'Un duro colpo per fedpol: arrestato un funzionario per sospetta co
 
   'blog-ambulatori-medici-temporanei-varese-2026': {
     title: 'Varese: ambulatori medici temporanei per oltre 5000 cittadini',
-description: 'Dal 1° maggio 2026, quattro ambulatori medici temporanei in Varese servono oltre 5000 cittadini senza medico curante.',
+    description: 'Dal 1° maggio 2026, quattro ambulatori medici temporanei in Varese servono oltre 5000 cittadini senza medico curante.',
     keywords: 'frontalieri, ticino, svizzera, italia, varese, ambulatori, medici, temporanei',
     ogTitle: 'Varese: ambulatori medici temporanei per oltre 5000 cittadini',
     ogDescription: 'Dal 1° maggio 2026, quattro ambulatori medici temporanei in Varese servono oltre 5000 cittadini senza medico curante.',
@@ -7452,7 +7452,7 @@ description: 'Dal 1° maggio 2026, quattro ambulatori medici temporanei in Vares
 
   'blog-copernicus-clima-2025-europa': {
     title: 'Copernicus: 95% Europa con temperature sopra media nel 2025',
-description: 'Ondate di calore record in Scandinavia, ghiacciai in calo e incendi boschivi estesi. Ecco i dati chiave del rapporto Copernicus 2025.',
+    description: 'Ondate di calore record in Scandinavia, ghiacciai in calo e incendi boschivi estesi. Ecco i dati chiave del rapporto Copernicus 2025.',
     keywords: 'frontalieri, ticino, svizzera, italia, copernicus, europa, temperature, sopra',
     ogTitle: 'Copernicus: 95% Europa con temperature sopra media nel 2025',
     ogDescription: 'Ondate di calore record in Scandinavia, ghiacciai in calo e incendi boschivi estesi. Ecco i dati chiave del rapporto Copernicus 2025.',
@@ -7536,7 +7536,7 @@ description: 'Ondate di calore record in Scandinavia, ghiacciai in calo e incend
 
   'blog-conciliabilita-vita-lavoro-bellinzona-2026': {
     title: 'Bellinzona: conciliabilità vita-lavoro nel Rod | Frontaliere Ticino',
-description: 'La mozione per inserire il principio di conciliabilità vita-lavoro nel Rod di Bellinzona e le implicazioni per i frontalieri.',
+    description: 'La mozione per inserire il principio di conciliabilità vita-lavoro nel Rod di Bellinzona e le implicazioni per i frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, bellinzona, conciliabilità, vita-lavoro, mozione',
     ogTitle: 'Conciliabilità vita-lavoro Bellinzona 2026',
     ogDescription: 'La mozione per inserire il principio di conciliabilità vita-lavoro nel Rod di Bellinzona e le implicazioni per i frontalieri',
@@ -7648,7 +7648,7 @@ description: 'La mozione per inserire il principio di conciliabilità vita-lavor
 
   'blog-pillola-giorno-dopo-consulenza-nazionale': {
     title: 'Pillola del giorno dopo senza consulenza, il Nazionale dice sì',
-description: 'Il Consiglio nazionale approva mozione per declassare contraccettivi d\'emergenza, rendendoli accessibili senza colloquio obbligatorio.',
+    description: 'Il Consiglio nazionale approva mozione per declassare contraccettivi d\'emergenza, rendendoli accessibili senza colloquio obbligatorio.',
     keywords: 'frontalieri, ticino, svizzera, italia, pillola, giorno, dopo, senza',
     ogTitle: 'Pillola giorno dopo senza consulenza, il Nazionale dice sì',
     ogDescription: 'Il Consiglio nazionale approva mozione per declassare contraccettivi d\'emergenza, rendendoli accessibili senza colloquio obbligatorio.',
@@ -7676,7 +7676,7 @@ description: 'Il Consiglio nazionale approva mozione per declassare contraccetti
 
   'blog-sindaci-verbania-baveno-cannobio-opposizione': {
     title: 'Sindaci italiani contro l\'innalzamento del lago Maggiore',
-description: 'I sindaci di Verbania, Baveno e Cannobio criticano la decisione di aumentare il livello massimo del lago Maggiore a 1,40 metri.',
+    description: 'I sindaci di Verbania, Baveno e Cannobio criticano la decisione di aumentare il livello massimo del lago Maggiore a 1,40 metri.',
     keywords: 'frontalieri, ticino, svizzera, italia, sindaci, italiani, contro, innalzamento',
     ogTitle: 'Sindaci italiani contro l\'innalzamento del lago Maggiore',
     ogDescription: 'I sindaci di Verbania, Baveno e Cannobio criticano la decisione di aumentare il livello massimo del lago Maggiore a 1,40 metri.',
@@ -7704,7 +7704,7 @@ description: 'I sindaci di Verbania, Baveno e Cannobio criticano la decisione di
 
   'blog-mendrisio-bilancio-positivo-2025': {
     title: 'Mendrisio chiude il 2025 con il quarto bilancio positivo',
-description: 'Mendrisio annuncia un quarto risultato finanziario positivo consecutivo nel 2025, nonostante le incertezze geopolitiche.',
+    description: 'Mendrisio annuncia un quarto risultato finanziario positivo consecutivo nel 2025, nonostante le incertezze geopolitiche.',
     keywords: 'frontalieri, ticino, svizzera, italia, mendrisio, chiude, 2025, quarto',
     ogTitle: 'Mendrisio chiude il 2025 con il quarto bilancio positivo',
     ogDescription: 'Mendrisio annuncia un quarto risultato finanziario positivo consecutivo nel 2025, nonostante le incertezze geopolitiche.',
@@ -7788,7 +7788,7 @@ description: 'Mendrisio annuncia un quarto risultato finanziario positivo consec
 
   'blog-lavoro-openjobmetis-2026-opportunita': {
     title: 'Estate 2026: Openjobmetis offre oltre 2000 opportunità lavorative in Italia',
-description: 'Openjobmetis registra oltre 2000 posizioni aperte in Italia per l\'estate 2026, con forte domanda nel turismo e nella produzione.',
+    description: 'Openjobmetis registra oltre 2000 posizioni aperte in Italia per l\'estate 2026, con forte domanda nel turismo e nella produzione.',
     keywords: 'frontalieri, ticino, svizzera, italia, estate, openjobmetis, offre, oltre',
     ogTitle: 'Estate 2026: Openjobmetis offre oltre 2000 opportunità lavorative in Italia',
     ogDescription: 'Openjobmetis registra oltre 2000 posizioni aperte in Italia per l\'estate 2026, con forte domanda nel turismo e nella produzione',
@@ -7900,7 +7900,7 @@ description: 'Openjobmetis registra oltre 2000 posizioni aperte in Italia per l\
 
   'blog-convegno-milano-mafia-italia-svizzera-2026': {
     title: 'Convegno a Milano sulla cooperazione Italia-Svizzera contro la mafia',
-description: 'Convegno a Milano sulla cooperazione Italia-Svizzera contro la mafia con Fiorenza Bergomi, giudice del Tribunale penale federale.',
+    description: 'Convegno a Milano sulla cooperazione Italia-Svizzera contro la mafia con Fiorenza Bergomi, giudice del Tribunale penale federale.',
     keywords: 'frontalieri, ticino, svizzera, italia, convegno, milano, sulla, cooperazione',
     ogTitle: 'Convegno Milano mafia Italia Svizzera 2026',
     ogDescription: 'Convegno a Milano sulla cooperazione Italia-Svizzera contro la mafia con Fiorenza Bergomi, giudice del Tribunale penale federale',
@@ -7928,7 +7928,7 @@ description: 'Convegno a Milano sulla cooperazione Italia-Svizzera contro la maf
 
   'blog-gruppo-moncucco-2025-risultati': {
     title: 'Gruppo Moncucco: 2025 con 120mila ospedalizzazioni e 187 milioni di fatturato',
-description: 'Il Gruppo Moncucco chiude il 2025 con 120mila ospedalizzazioni e un fatturato di 187 milioni, puntando sulla formazione del personale.',
+    description: 'Il Gruppo Moncucco chiude il 2025 con 120mila ospedalizzazioni e un fatturato di 187 milioni, puntando sulla formazione del personale.',
     keywords: 'frontalieri, ticino, svizzera, italia, gruppo, moncucco, 2025, 120mila',
     ogTitle: 'Gruppo Moncucco: 2025 con 120mila ospedalizzazioni e 187 milioni di fatturato',
     ogDescription: 'Il Gruppo Moncucco chiude il 2025 con 120mila ospedalizzazioni e un fatturato di 187 milioni, puntando sulla formazione del personale.',
@@ -8040,7 +8040,7 @@ description: 'Il Gruppo Moncucco chiude il 2025 con 120mila ospedalizzazioni e u
 
   'blog-alluvione-lavizzara-piano-pericoli-approvato': {
     title: 'Alluvione Lavizzara: approvato piano per le zone di pericolo',
-description: 'Il Consiglio di Stato ticinese ha approvato il piano delle zone di pericolo per Lavizzara dopo l\'alluvione del 29-30 giugno 2024.',
+    description: 'Il Consiglio di Stato ticinese ha approvato il piano delle zone di pericolo per Lavizzara dopo l\'alluvione del 29-30 giugno 2024.',
     keywords: 'frontalieri, ticino, svizzera, italia, alluvione, lavizzara, approvato, piano',
     ogTitle: 'Alluvione Lavizzara: piano zone pericolo approvato',
     ogDescription: 'Il Consiglio di Stato ticinese ha approvato il piano delle zone di pericolo per Lavizzara dopo l\'alluvione del 29-30 giugno 2024',
@@ -8068,7 +8068,7 @@ description: 'Il Consiglio di Stato ticinese ha approvato il piano delle zone di
 
   'blog-bedretto-lab-microterremoti-ricerca': {
     title: 'Bedretto Lab: microterremoti indotti per studiare le faglie',
-description: 'Ricercatori del Politecnico di Zurigo indotti microterremoti in Val Bedretto per studiare il comportamento delle faglie.',
+    description: 'Ricercatori del Politecnico di Zurigo indotti microterremoti in Val Bedretto per studiare il comportamento delle faglie.',
     keywords: 'frontalieri, ticino, svizzera, italia, bedretto, microterremoti, indotti, studiare',
     ogTitle: 'Bedretto Lab: microterremoti indotti per studiare le faglie',
     ogDescription: 'Ricercatori del Politecnico di Zurigo indotti microterremoti in Val Bedretto per studiare il comportamento delle faglie',
@@ -8208,7 +8208,7 @@ description: 'Ricercatori del Politecnico di Zurigo indotti microterremoti in Va
 
   'blog-separazioni-ticino-famiglie-monoparentali': {
     title: 'Separazioni in Ticino: rete di supporto e guida per genitori',
-description: 'FaMo+ celebra 40 anni con una nuova guida per famiglie in fase di separazione. Approccio di rete e tavola rotonda a Bellinzona.',
+    description: 'FaMo+ celebra 40 anni con una nuova guida per famiglie in fase di separazione. Approccio di rete e tavola rotonda a Bellinzona.',
     keywords: 'frontalieri, ticino, svizzera, italia, separazioni, rete, supporto, genitori',
     ogTitle: 'Separazioni in Ticino: rete di supporto e guida per genitori',
     ogDescription: 'FaMo+ celebra 40 anni con una nuova guida per famiglie in fase di separazione. Approccio di rete e tavola rotonda a Bellinzona.',
@@ -8236,7 +8236,7 @@ description: 'FaMo+ celebra 40 anni con una nuova guida per famiglie in fase di 
 
   'blog-dichiarazione-precompilata-2026-disponibile': {
     title: 'Dichiarazione precompilata 2026: disponibile da oggi',
-description: 'Dal 30 aprile 2026 è disponibile la dichiarazione precompilata 2026 per tutti i contribuenti italiani. Ecco cosa cambia.',
+    description: 'Dal 30 aprile 2026 è disponibile la dichiarazione precompilata 2026 per tutti i contribuenti italiani. Ecco cosa cambia.',
     keywords: 'frontalieri, ticino, svizzera, italia, dichiarazione, precompilata, disponibile, oggi',
     ogTitle: 'Dichiarazione precompilata 2026: disponibile da oggi',
     ogDescription: 'Dal 30 aprile 2026 è disponibile la dichiarazione precompilata 2026 per tutti i contribuenti italiani. Ecco cosa cambia.',
@@ -8264,7 +8264,7 @@ description: 'Dal 30 aprile 2026 è disponibile la dichiarazione precompilata 20
 
   'blog-moncucco-utile-raddoppiato-2026': {
     title: 'Gruppo Moncucco: utile raddoppiato e stipendi aumentati',
-description: 'Il Gruppo ospedaliero Moncucco chiude il 2025 con un utile di 5,3 milioni di franchi e adeguamenti salariali per i dipendenti.',
+    description: 'Il Gruppo ospedaliero Moncucco chiude il 2025 con un utile di 5,3 milioni di franchi e adeguamenti salariali per i dipendenti.',
     keywords: 'frontalieri, ticino, svizzera, italia, gruppo, moncucco, utile, raddoppiato',
     ogTitle: 'Gruppo Moncucco: utile raddoppiato e stipendi aumentati',
     ogDescription: 'Il Gruppo ospedaliero Moncucco chiude il 2025 con un utile di 5,3 milioni di franchi e adeguamenti salariali per i dipendenti',
@@ -8292,7 +8292,7 @@ description: 'Il Gruppo ospedaliero Moncucco chiude il 2025 con un utile di 5,3 
 
   'blog-domenica-natura-spazio-tradate-2026': {
     title: 'Una domenica tra natura e spazio al Centro Didattico Scientifico di Tradate',
-description: 'Domenica 31 maggio 2026, dalle 14.30 alle 18.00, il Centro Didattico Scientifico di Tradate offre attività tra natura e spazio.',
+    description: 'Domenica 31 maggio 2026, dalle 14.30 alle 18.00, il Centro Didattico Scientifico di Tradate offre attività tra natura e spazio.',
     keywords: 'frontalieri, ticino, svizzera, italia, domenica, natura, spazio, centro',
     ogTitle: 'Una domenica tra natura e spazio al Centro Didattico Scientifico di Tradate',
     ogDescription: 'Domenica 31 maggio 2026, dalle 14.30 alle 18.00, il Centro Didattico Scientifico di Tradate offre attività tra natura e spazio.',
@@ -8320,7 +8320,7 @@ description: 'Domenica 31 maggio 2026, dalle 14.30 alle 18.00, il Centro Didatti
 
   'blog-lago-maggiore-innalzamento-2026': {
     title: 'Lago Maggiore, via libera all’innalzamento: 20-30 milioni di metri cubi in più',
-description: 'La decisione aumenterà la disponibilità di acqua di 20-30 milioni di metri cubi. Accordo Italia-Svizzera per l’innalzamento di 15 cm.',
+    description: 'La decisione aumenterà la disponibilità di acqua di 20-30 milioni di metri cubi. Accordo Italia-Svizzera per l’innalzamento di 15 cm.',
     keywords: 'frontalieri, ticino, svizzera, italia, lago, maggiore, libera, innalzamento',
     ogTitle: 'Lago Maggiore, via libera all’innalzamento: 20-30 milioni di metri cubi in più',
     ogDescription: 'La decisione aumenterà la disponibilità di acqua di 20-30 milioni di metri cubi. Accordo Italia-Svizzera per l’innalzamento di 15 cm.',
@@ -8376,7 +8376,7 @@ description: 'La decisione aumenterà la disponibilità di acqua di 20-30 milion
 
   'blog-dl-bollette-novita-consumatori-2026': {
     title: 'Dl Bollette: novità per i consumatori dal 19 giugno 2026',
-description: 'Novità per i consumatori: dal 19 giugno 2026 nuove regole su telemarketing e contratti luce-gas. Ecco cosa cambia.',
+    description: 'Novità per i consumatori: dal 19 giugno 2026 nuove regole su telemarketing e contratti luce-gas. Ecco cosa cambia.',
     keywords: 'frontalieri, ticino, svizzera, italia, bollette, novità, consumatori, giugno',
     ogTitle: 'Dl Bollette: novità per i consumatori dal 19 giugno 2026',
     ogDescription: 'Novità per i consumatori: dal 19 giugno 2026 nuove regole su telemarketing e contratti luce-gas. Ecco cosa cambia',
@@ -8432,7 +8432,7 @@ description: 'Novità per i consumatori: dal 19 giugno 2026 nuove regole su tele
 
   'blog-palma-muralto-ristrutturazione-strategia-2024': {
     title: 'La Palma di Muralto si rinnova e punta alla destagionalizzazione',
-description: 'L\'hotel La Palma di Muralto ha completato un rinnovamento da 12,7 milioni di franchi e cambia strategia, restando aperto tutto l\'anno.',
+    description: 'L\'hotel La Palma di Muralto ha completato un rinnovamento da 12,7 milioni di franchi e cambia strategia, restando aperto tutto l\'anno.',
     keywords: 'frontalieri, ticino, svizzera, italia, palma, muralto, rinnova, punta',
     ogTitle: 'La Palma di Muralto rinnovata e aperta tutto l\'anno',
     ogDescription: 'L\'hotel La Palma di Muralto ha completato un rinnovamento da 12,7 milioni di franchi e cambia strategia, restando aperto tutto l\'anno.',
@@ -8460,7 +8460,7 @@ description: 'L\'hotel La Palma di Muralto ha completato un rinnovamento da 12,7
 
   'blog-gev-ticino-ambiente-2026': {
     title: 'GEV Insubria Olona: come proteggere l’ambiente in Ticino',
-description: 'Scopri come le Guardie Ecologiche Volontarie Insubria Olona proteggono l’ambiente in Ticino e offrono opportunità di volontariato.',
+    description: 'Scopri come le Guardie Ecologiche Volontarie Insubria Olona proteggono l’ambiente in Ticino e offrono opportunità di volontariato.',
     keywords: 'frontalieri, ticino, svizzera, italia, insubria, olona, proteggere, ambiente',
     ogTitle: 'GEV Insubria Olona: protezione ambientale in Ticino',
     ogDescription: 'Scopri come le Guardie Ecologiche Volontarie Insubria Olona proteggono l’ambiente in Ticino e offrono opportunità di volontariato',
@@ -8516,7 +8516,7 @@ description: 'Scopri come le Guardie Ecologiche Volontarie Insubria Olona proteg
 
   'blog-fed-powell-addio-tassi-invariati': {
     title: 'Fed: l\'addio di Powell a tassi invariati | Frontaliere Ticino',
-description: 'Jerome Powell lascia la Federal Reserve rivendicando l\'indipendenza dell\'istituzione, mentre i tassi restano tra il 3,50% e il 3,75%.',
+    description: 'Jerome Powell lascia la Federal Reserve rivendicando l\'indipendenza dell\'istituzione, mentre i tassi restano tra il 3,50% e il 3,75%.',
     keywords: 'frontalieri, ticino, svizzera, italia, addio, powell, tassi, invariati',
     ogTitle: 'Fed: l\'addio di Powell a tassi invariati',
     ogDescription: 'Jerome Powell lascia la Federal Reserve rivendicando l\'indipendenza dell\'istituzione, mentre i tassi restano tra il 3,50% e il 3,75%.',
@@ -8628,7 +8628,7 @@ description: 'Jerome Powell lascia la Federal Reserve rivendicando l\'indipenden
 
   'blog-italian-e-bike-tragedy-bern': {
     title: 'Morto italiano in incidente di e-bike nel Canton Bern',
-description: 'Un uomo di 60 anni residente in Svizzera è deceduto in un incidente con e-bike a Bätterkinden, nel Canton Bern, il 28 aprile 2026.',
+    description: 'Un uomo di 60 anni residente in Svizzera è deceduto in un incidente con e-bike a Bätterkinden, nel Canton Bern, il 28 aprile 2026.',
     keywords: 'frontalieri, ticino, svizzera, italia, morto, italiano, incidente, e-bike',
     ogTitle: 'Incidente e-bike nel Canton Bern: morto italiano',
     ogDescription: 'Tragico incidente a Bätterkinden, nel Canton Bern, il 28 aprile 2026: un uomo di 60 anni ha perso la vita in seguito a una caduta dalla bici elettrica.',
@@ -8656,10 +8656,10 @@ description: 'Un uomo di 60 anni residente in Svizzera è deceduto in un inciden
 
   'blog-violenza-sessuale-conseguenze-ticino': {
     title: 'Violenza sessuale, le conseguenze sono tante e durature',
-description: 'Le conseguenze della violenza sessuale sono durature e molteplici, influenzando profondamente la salute fisica, psicologica e sessuale delle vittime.',
+    description: 'Le conseguenze della violenza sessuale sono durature e molteplici, influenzando profondamente la salute fisica, psicologica e sessuale delle vittime.',
     keywords: 'frontalieri, ticino, svizzera, italia, violenza, sessuale, conseguenze, sono',
     ogTitle: 'Violenza sessuale, le conseguenze sono tante e durature',
-ogDescription: 'Violenza sessuale, le conseguenze sono tante e durature. Un nuovo studio romando ha dimostrato che le conseguenze di un\'aggressione sessuale sono indelebili e persistono per mesi con alti tassi di depressione, ansia e disturbi fisici.',
+    ogDescription: 'Violenza sessuale, le conseguenze sono tante e durature. Un nuovo studio romando ha dimostrato che le conseguenze di un\'aggressione sessuale sono indelebili e persistono per mesi con alti tassi di depressione, ansia e disturbi fisici.',
     canonicalPath: '/articoli-frontaliere/violenza-sessuale-conseguenze-ticino/',
     structuredData: {
       "@context": "https://schema.org",
@@ -8712,7 +8712,7 @@ ogDescription: 'Violenza sessuale, le conseguenze sono tante e durature. Un nuov
 
   'blog-ubs-credit-suisse-integrazione-risultati-2026': {
     title: 'UBS: utile record grazie all\'integrazione di Credit Suisse',
-description: 'UBS chiude il primo trimestre 2026 con un utile netto di 3,04 miliardi di dollari, grazie all\'integrazione di Credit Suisse.',
+    description: 'UBS chiude il primo trimestre 2026 con un utile netto di 3,04 miliardi di dollari, grazie all\'integrazione di Credit Suisse.',
     keywords: 'frontalieri, ticino, svizzera, italia, utile, record, grazie, integrazione',
     ogTitle: 'UBS: utile record grazie all\'integrazione di Credit Suisse',
     ogDescription: 'UBS chiude il primo trimestre 2026 con un utile netto di 3,04 miliardi di dollari, grazie all\'integrazione di Credit Suisse',
@@ -8824,10 +8824,10 @@ description: 'UBS chiude il primo trimestre 2026 con un utile netto di 3,04 mili
 
   'blog-luve-hyperscaler-ai-accordo-100-milioni': {
     title: 'LUVE sigla accordo da 100 milioni con hyperscaler globale',
-description: 'L\'accordo tra LUVE e l\'hyperscaler globale ha implicazioni significative per il settore dei data center e dell\'intelligenza artificiale.',
+    description: 'L\'accordo tra LUVE e l\'hyperscaler globale ha implicazioni significative per il settore dei data center e dell\'intelligenza artificiale.',
     keywords: 'frontalieri, ticino, svizzera, italia, luve, sigla, accordo, milioni',
     ogTitle: 'LUVE sigla accordo da 100 milioni con hyperscaler globale',
-ogDescription: 'LUVE, il gruppo con sede a Uboldo specializzato in sistemi di raffreddamento industriale, ha firmato un accordo quadro pluriennale con un hyperscaler leader globale.',
+    ogDescription: 'LUVE, il gruppo con sede a Uboldo specializzato in sistemi di raffreddamento industriale, ha firmato un accordo quadro pluriennale con un hyperscaler leader globale.',
     canonicalPath: '/articoli-frontaliere/luve-hyperscaler-ai-accordo-100-milioni/',
     structuredData: {
       "@context": "https://schema.org",
@@ -8880,7 +8880,7 @@ ogDescription: 'LUVE, il gruppo con sede a Uboldo specializzato in sistemi di ra
 
   'blog-stazioni-sciistiche-ticino-credito-dati-2026': {
     title: 'Stazioni sciistiche: per il prossimo credito servono più dati e passi avanti',
-description: 'Interrogazione parlamentare chiede bilancio stagionale e nuovi criteri per valutare le stazioni sciistiche ticinesi.',
+    description: 'Interrogazione parlamentare chiede bilancio stagionale e nuovi criteri per valutare le stazioni sciistiche ticinesi.',
     keywords: 'frontalieri, ticino, svizzera, italia, stazioni, sciistiche, prossimo, credito',
     ogTitle: 'Stazioni sciistiche Ticino: più dati per il prossimo credito',
     ogDescription: 'Interrogazione parlamentare chiede bilancio stagionale e nuovi criteri per valutare le stazioni sciistiche ticinesi',
@@ -9048,7 +9048,7 @@ description: 'Interrogazione parlamentare chiede bilancio stagionale e nuovi cri
 
   'blog-1maggio-eremo-monastero-legge-varese': {
     title: '1° maggio tra Eremo e Monastero sul Lago Maggiore e in Valle Olona',
-description: 'Visite guidate e picnic per la Festa dei Lavoratori all\'Eremo di Santa Caterina del Sasso e al Monastero di Torba il 1° maggio 2026.',
+    description: 'Visite guidate e picnic per la Festa dei Lavoratori all\'Eremo di Santa Caterina del Sasso e al Monastero di Torba il 1° maggio 2026.',
     keywords: 'frontalieri, ticino, svizzera, italia, maggio, eremo, monastero, lago',
     ogTitle: '1° maggio tra Eremo e Monastero sul Lago Maggiore e in Valle Olona',
     ogDescription: 'Visite guidate e picnic per la Festa dei Lavoratori all\'Eremo di Santa Caterina del Sasso e al Monastero di Torba il 1° maggio 2026',
@@ -9076,7 +9076,7 @@ description: 'Visite guidate e picnic per la Festa dei Lavoratori all\'Eremo di 
 
   'blog-vergiate-color-run-2026-non-competitiva': {
     title: 'Vergiate si colora: torna la Color Run non competitiva per tutte le età',
-description: 'Scopri la Color Run di Vergiate 2026, una corsa non competitiva di 4 km aperta a tutte le età. Iscrizioni aperte fino al 10 maggio.',
+    description: 'Scopri la Color Run di Vergiate 2026, una corsa non competitiva di 4 km aperta a tutte le età. Iscrizioni aperte fino al 10 maggio.',
     keywords: 'frontalieri, ticino, svizzera, italia, vergiate, colora, torna, color',
     ogTitle: 'Color Run Vergiate 2026: corsa non competitiva per tutte le età',
     ogDescription: 'Scopri la Color Run di Vergiate 2026, una corsa non competitiva di 4 km aperta a tutte le età. Iscrizioni aperte fino al 10 maggio.',
@@ -9132,7 +9132,7 @@ description: 'Scopri la Color Run di Vergiate 2026, una corsa non competitiva di
 
   'blog-camion-incastrato-grantola-2026': {
     title: 'Camion incastrato a Grantola: strada bloccata in attesa dell\'autogru',
-description: 'I vigili del fuoco intervengono per liberare un camion bloccato su un tornante a Grantola, causando interruzioni al traffico.',
+    description: 'I vigili del fuoco intervengono per liberare un camion bloccato su un tornante a Grantola, causando interruzioni al traffico.',
     keywords: 'frontalieri, ticino, svizzera, italia, camion, incastrato, grantola, strada',
     ogTitle: 'Camion incastrato a Grantola: strada bloccata in attesa dell\'autogru',
     ogDescription: 'I vigili del fuoco intervengono per liberare un camion bloccato su un tornante a Grantola, causando interruzioni al traffico.',
@@ -9160,10 +9160,10 @@ description: 'I vigili del fuoco intervengono per liberare un camion bloccato su
 
   'blog-vedano-olona-medici-servizio-instabile': {
     title: 'Vedano Olona, sindaco denuncia instabilità medici | Frontaliere Ticino',
-description: '"La situazione è insostenibile e richiede un intervento immediato per garantire ai cittadini di Vedano Olona l\'accesso alle cure di base."',
+    description: '"La situazione è insostenibile e richiede un intervento immediato per garantire ai cittadini di Vedano Olona l\'accesso alle cure di base."',
     keywords: 'frontalieri, ticino, svizzera, italia, vedano, olona, sindaco, denuncia',
     ogTitle: 'Vedano Olona, sindaco scrive ad ASST: «Servizio medici instabile, servono garanzie»',
-ogDescription: 'Nella lettera, il primo cittadino ha denunciato l\'instabilità del servizio di medicina generale, chiedendo interventi immediati per garantire l\'assistenza ai cittadini.',
+    ogDescription: 'Nella lettera, il primo cittadino ha denunciato l\'instabilità del servizio di medicina generale, chiedendo interventi immediati per garantire l\'assistenza ai cittadini.',
     canonicalPath: '/articoli-frontaliere/vedano-olona-medici-servizio-instabile/',
     structuredData: {
       "@context": "https://schema.org",
@@ -9216,7 +9216,7 @@ ogDescription: 'Nella lettera, il primo cittadino ha denunciato l\'instabilità 
 
   'blog-scuola-austriaca-bitcoin-lugano-2026': {
     title: 'Scuola austriaca protagonista al Plan ₿ Forum di Lugano',
-description: 'Saifedean Ammous, Rahim Taghizadegan e Knut Svanholm hanno discusso le radici intellettuali di Bitcoin al Plan ₿ Forum di Lugano.',
+    description: 'Saifedean Ammous, Rahim Taghizadegan e Knut Svanholm hanno discusso le radici intellettuali di Bitcoin al Plan ₿ Forum di Lugano.',
     keywords: 'frontalieri, ticino, svizzera, italia, scuola, austriaca, protagonista, plan',
     ogTitle: 'Scuola austriaca protagonista al Plan ₿ Forum di Lugano',
     ogDescription: 'Saifedean Ammous, Rahim Taghizadegan e Knut Svanholm hanno discusso le radici intellettuali di Bitcoin al Plan ₿ Forum di Lugano.',
@@ -9244,7 +9244,7 @@ description: 'Saifedean Ammous, Rahim Taghizadegan e Knut Svanholm hanno discuss
 
   'blog-domus-san-donato-autonomia-terza-eta': {
     title: 'Domus San Donato: autonomia sicura per la terza età',
-description: 'Nuovi appartamenti protetti per anziani a Domus San Donato, realizzati nell\'ex stabile delle Suore. Libertà e servizi assistiti.',
+    description: 'Nuovi appartamenti protetti per anziani a Domus San Donato, realizzati nell\'ex stabile delle Suore. Libertà e servizi assistiti.',
     keywords: 'frontalieri, ticino, svizzera, italia, domus, donato, autonomia, sicura',
     ogTitle: 'Domus San Donato: autonomia sicura per la terza età',
     ogDescription: 'Nuovi appartamenti protetti per anziani a Domus San Donato, realizzati nell\'ex stabile delle Suore. Libertà e servizi assistiti',
@@ -9300,7 +9300,7 @@ description: 'Nuovi appartamenti protetti per anziani a Domus San Donato, realiz
 
   'blog-sciopero-fame-timoc-terreno-conteso': {
     title: 'Sciopero della fame a Varese: la battaglia di Timoc per un terreno conteso',
-description: 'Timoc, 70 anni, protesta davanti alla caserma dei Carabinieri per accedere a documenti bloccati nella sua abitazione.',
+    description: 'Timoc, 70 anni, protesta davanti alla caserma dei Carabinieri per accedere a documenti bloccati nella sua abitazione.',
     keywords: 'frontalieri, ticino, svizzera, italia, sciopero, fame, varese, battaglia',
     ogTitle: 'Sciopero della fame a Varese: la battaglia di Timoc per un terreno conteso',
     ogDescription: 'Timoc, 70 anni, protesta davanti alla caserma dei Carabinieri per accedere a documenti bloccati nella sua abitazione.',
@@ -9328,7 +9328,7 @@ description: 'Timoc, 70 anni, protesta davanti alla caserma dei Carabinieri per 
 
   'blog-ispra-pranzo-solidale-oratorio-2026': {
     title: 'Ispra: successo al secondo pranzo solidale in oratorio',
-description: 'Grande partecipazione a Ispra per il pranzo solidale organizzato dalla Comunità pastorale e dall\'Associazione Volontari ispresi.',
+    description: 'Grande partecipazione a Ispra per il pranzo solidale organizzato dalla Comunità pastorale e dall\'Associazione Volontari ispresi.',
     keywords: 'frontalieri, ticino, svizzera, italia, ispra, successo, secondo, pranzo',
     ogTitle: 'Ispra: successo al secondo pranzo solidale in oratorio',
     ogDescription: 'Grande partecipazione a Ispra per il pranzo solidale organizzato dalla Comunità pastorale e dall\'Associazione Volontari ispresi.',
@@ -9356,7 +9356,7 @@ description: 'Grande partecipazione a Ispra per il pranzo solidale organizzato d
 
   'blog-malpensa-contanti-sequestri-370mila-euro': {
     title: 'Malpensa: 6 milioni in contanti sequestrati in 3 mesi',
-description: 'Controlli della Guardia di Finanza e Dogane rivelano violazioni per oltre 6 milioni di euro in contanti non dichiarati.',
+    description: 'Controlli della Guardia di Finanza e Dogane rivelano violazioni per oltre 6 milioni di euro in contanti non dichiarati.',
     keywords: 'frontalieri, ticino, svizzera, italia, malpensa, milioni, contanti, sequestrati',
     ogTitle: 'Malpensa: 6 milioni in contanti sequestrati in 3 mesi',
     ogDescription: 'Controlli della Guardia di Finanza e Dogane rivelano violazioni per oltre 6 milioni di euro in contanti non dichiarati.',
@@ -9468,7 +9468,7 @@ description: 'Controlli della Guardia di Finanza e Dogane rivelano violazioni pe
 
   'blog-traffico-intenso-a2-lugano-ritardi': {
     title: 'A2 verso Lugano: traffico intenso e ritardi fino a 1h30',
-description: 'Traffico intenso sull’A2 verso Lugano, con ritardi fino a un’ora e trenta. Scopri le cause e le alternative per evitare i disagi.',
+    description: 'Traffico intenso sull’A2 verso Lugano, con ritardi fino a un’ora e trenta. Scopri le cause e le alternative per evitare i disagi.',
     keywords: 'frontalieri, ticino, svizzera, italia, verso, lugano, traffico, intenso',
     ogTitle: 'Traffico intenso A2 Lugano: ritardi fino a 1h30',
     ogDescription: 'Traffico intenso sull’A2 verso Lugano, con ritardi fino a un’ora e trenta. Scopri le cause e le alternative per evitare i disagi.',
@@ -9496,7 +9496,7 @@ description: 'Traffico intenso sull’A2 verso Lugano, con ritardi fino a un’o
 
   'blog-ritardi-a2-tra-chiasso-lugano': {
     title: 'Traffico congestionato sull\'A2: fino a un\'ora e quaranta di ritardi',
-description: 'Mattinata da bollino rosso sull\'autostrada A2 tra Chiasso e Lugano, con ritardi fino a 104 minuti a causa di un veicolo in avaria.',
+    description: 'Mattinata da bollino rosso sull\'autostrada A2 tra Chiasso e Lugano, con ritardi fino a 104 minuti a causa di un veicolo in avaria.',
     keywords: 'frontalieri, ticino, svizzera, italia, traffico, congestionato, sull, fino',
     ogTitle: 'Traffico congestionato sull\'A2: fino a un\'ora e quaranta di ritardi',
     ogDescription: 'Mattinata da bollino rosso sull\'autostrada A2 tra Chiasso e Lugano, con ritardi fino a 104 minuti a causa di un veicolo in avaria.',
@@ -9552,10 +9552,10 @@ description: 'Mattinata da bollino rosso sull\'autostrada A2 tra Chiasso e Lugan
 
   'blog-aquanexa-visita-acquedotto-alfa-laveno': {
     title: 'Aquanexa visita acquedotto Alfa a Laveno Mombello | Frontaliere Ticino',
-description: 'La visita di Aquanexa all\'acquedotto Alfa di Laveno Mombello rappresenta un passo significativo per il settore idrico.',
+    description: 'La visita di Aquanexa all\'acquedotto Alfa di Laveno Mombello rappresenta un passo significativo per il settore idrico.',
     keywords: 'frontalieri, ticino, svizzera, italia, aquanexa, visita, acquedotto, alfa',
     ogTitle: 'Aquanexa visita acquedotto Alfa a Laveno Mombello',
-ogDescription: 'Una delegazione di Aquanexa, azienda specializzata in digitalizzazione e monitoraggio smart per il settore idrico, ha visitato l\'acquedotto IX Fontane di Laveno Mombello, gestito da Alfa.',
+    ogDescription: 'Una delegazione di Aquanexa, azienda specializzata in digitalizzazione e monitoraggio smart per il settore idrico, ha visitato l\'acquedotto IX Fontane di Laveno Mombello, gestito da Alfa.',
     canonicalPath: '/articoli-frontaliere/aquanexa-visita-acquedotto-alfa-laveno/',
     structuredData: {
       "@context": "https://schema.org",
@@ -9580,7 +9580,7 @@ ogDescription: 'Una delegazione di Aquanexa, azienda specializzata in digitalizz
 
   'blog-bollino-rosso-a2-chiasso-lugano-2026': {
     title: 'Bollino rosso sull\'A2 tra Chiasso e Lugano | Frontaliere Ticino',
-description: 'Ritardi fino a un\'ora e quaranta minuti sull\'A2 in direzione nord tra Chiasso e Lugano nord a causa di un veicolo in avaria.',
+    description: 'Ritardi fino a un\'ora e quaranta minuti sull\'A2 in direzione nord tra Chiasso e Lugano nord a causa di un veicolo in avaria.',
     keywords: 'frontalieri, ticino, svizzera, italia, bollino, rosso, sull, chiasso',
     ogTitle: 'Bollino rosso sull\'A2 tra Chiasso e Lugano',
     ogDescription: 'Ritardi fino a un\'ora e quaranta minuti sull\'A2 in direzione nord tra Chiasso e Lugano nord a causa di un veicolo in avaria.',
@@ -9804,7 +9804,7 @@ description: 'Ritardi fino a un\'ora e quaranta minuti sull\'A2 in direzione nor
 
   'blog-denatalita-ticino-azione-urgente-2026': {
     title: 'Denatalità in Ticino: il deputato Isabella chiede azioni concrete',
-description: 'Claudio Isabella del Centro critica la mancanza di misure efficaci contro il calo delle nascite nel Canton Ticino.',
+    description: 'Claudio Isabella del Centro critica la mancanza di misure efficaci contro il calo delle nascite nel Canton Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, denatalità, deputato, isabella, chiede',
     ogTitle: 'Denatalità in Ticino: il deputato Isabella chiede azioni concrete',
     ogDescription: 'Claudio Isabella del Centro critica la mancanza di misure efficaci contro il calo delle nascite nel Canton Ticino',
@@ -9832,7 +9832,7 @@ description: 'Claudio Isabella del Centro critica la mancanza di misure efficaci
 
   'blog-beko-cassinetta-risultati-2026': {
     title: 'Beko Cassinetta: superata la crisi, ora contano i risultati',
-description: 'A un anno dall\'accordo che ha salvato lo stabilimento Beko di Cassinetta, emergono i primi risultati e le sfide future.',
+    description: 'A un anno dall\'accordo che ha salvato lo stabilimento Beko di Cassinetta, emergono i primi risultati e le sfide future.',
     keywords: 'frontalieri, ticino, svizzera, italia, beko, cassinetta, superata, crisi',
     ogTitle: 'Beko Cassinetta: superata la crisi, ora contano i risultati',
     ogDescription: 'A un anno dall\'accordo che ha salvato lo stabilimento Beko di Cassinetta, emergono i primi risultati e le sfide future',
@@ -9916,7 +9916,7 @@ description: 'A un anno dall\'accordo che ha salvato lo stabilimento Beko di Cas
 
   'blog-gallarate-bilancio-cassani-2026': {
     title: 'Gallarate: Bilancio Cassani 2026, opere ma scontro sul debito',
-description: 'Approvato il decimo bilancio dell\'era Cassani a Gallarate con 92 milioni di entrate e 16 milioni di saldo di cassa. Scopri i dettagli.',
+    description: 'Approvato il decimo bilancio dell\'era Cassani a Gallarate con 92 milioni di entrate e 16 milioni di saldo di cassa. Scopri i dettagli.',
     keywords: 'frontalieri, ticino, svizzera, italia, gallarate, bilancio, cassani, opere',
     ogTitle: 'Gallarate: Bilancio Cassani 2026, opere ma scontro sul debito',
     ogDescription: 'Approvato il decimo bilancio dell\'era Cassani a Gallarate con 92 milioni di entrate e 16 milioni di saldo di cassa. Scopri i dettagli.',
@@ -9944,7 +9944,7 @@ description: 'Approvato il decimo bilancio dell\'era Cassani a Gallarate con 92 
 
   'blog-certificazione-greco-antico-lombardia-2026': {
     title: 'Greco antico certificato in Lombardia: prima volta in Italia',
-description: 'Dal 6 al 7 maggio 2026, studenti dei licei classici lombardi potranno ottenere una certificazione ufficiale in greco antico.',
+    description: 'Dal 6 al 7 maggio 2026, studenti dei licei classici lombardi potranno ottenere una certificazione ufficiale in greco antico.',
     keywords: 'frontalieri, ticino, svizzera, italia, greco, antico, certificato, lombardia',
     ogTitle: 'Greco antico certificato in Lombardia: prima volta in Italia',
     ogDescription: 'Dal 6 al 7 maggio 2026, studenti dei licei classici lombardi potranno ottenere una certificazione ufficiale in greco antico.',
@@ -10084,10 +10084,10 @@ description: 'Dal 6 al 7 maggio 2026, studenti dei licei classici lombardi potra
 
   'blog-sanzioni-ue-imprese-italiane-2026': {
     title: 'Violare le sanzioni UE è reato: le imprese italiane corrono ai ripari',
-description: 'Le imprese italiane, soprattutto le PMI, devono aggiornare i modelli di compliance per evitare di incorrere in sanzioni.',
+    description: 'Le imprese italiane, soprattutto le PMI, devono aggiornare i modelli di compliance per evitare di incorrere in sanzioni.',
     keywords: 'frontalieri, ticino, svizzera, italia, violare, sanzioni, reato, imprese',
     ogTitle: 'Violare le sanzioni UE è reato: le imprese italiane corrono ai ripari',
-ogDescription: 'Le imprese italiane, soprattutto le PMI, devono aggiornare i modelli di compliance per evitare di incorrere in sanzioni.',
+    ogDescription: 'Le imprese italiane, soprattutto le PMI, devono aggiornare i modelli di compliance per evitare di incorrere in sanzioni.',
     canonicalPath: '/articoli-frontaliere/sanzioni-ue-imprese-italiane-2026/',
     structuredData: {
       "@context": "https://schema.org",
@@ -10196,7 +10196,7 @@ ogDescription: 'Le imprese italiane, soprattutto le PMI, devono aggiornare i mod
 
   'blog-parita-paura-frontalieri-ticino': {
     title: 'La parità che fa paura ai frontalieri del Ticino | Frontaliere Ticino',
-description: 'Solo 28 Paesi al mondo sono guidati da una donna. In Ticino, la parità di genere è ancora un obiettivo lontano. Scopri di più.',
+    description: 'Solo 28 Paesi al mondo sono guidati da una donna. In Ticino, la parità di genere è ancora un obiettivo lontano. Scopri di più.',
     keywords: 'frontalieri, ticino, svizzera, italia, parità, paura, solo, paesi',
     ogTitle: 'La parità che fa paura ai frontalieri del Ticino',
     ogDescription: 'Solo 28 Paesi al mondo sono guidati da una donna. In Ticino, la parità di genere è ancora un obiettivo lontano. Scopri di più.',
@@ -10308,7 +10308,7 @@ description: 'Solo 28 Paesi al mondo sono guidati da una donna. In Ticino, la pa
 
   'blog-italia-inadempiente-crediti-sanitari': {
     title: 'Italia inadempiente sui crediti sanitari: Quadri chiede chiarezza',
-description: 'Il consigliere nazionale Lorenzo Quadri interroga il Consiglio federale sui ritardi italiani nei rimborsi sanitari alla Svizzera.',
+    description: 'Il consigliere nazionale Lorenzo Quadri interroga il Consiglio federale sui ritardi italiani nei rimborsi sanitari alla Svizzera.',
     keywords: 'frontalieri, ticino, svizzera, italia, inadempiente, crediti, sanitari, quadri',
     ogTitle: 'Italia inadempiente sui crediti sanitari: Quadri chiede chiarezza',
     ogDescription: 'Il consigliere nazionale Lorenzo Quadri interroga il Consiglio federale sui ritardi italiani nei rimborsi sanitari alla Svizzera',
@@ -10476,7 +10476,7 @@ description: 'Il consigliere nazionale Lorenzo Quadri interroga il Consiglio fed
 
   'blog-cessione-bper-bcc-varese-2026': {
     title: 'Cessione Bper-BCC: le sei filiali interessate in provincia di Varese',
-description: 'BPER Banca cede sei filiali al Gruppo BCC Iccrea nelle province di Varese e Como. Ecco cosa cambia per i clienti e i dipendenti.',
+    description: 'BPER Banca cede sei filiali al Gruppo BCC Iccrea nelle province di Varese e Como. Ecco cosa cambia per i clienti e i dipendenti.',
     keywords: 'frontalieri, ticino, svizzera, italia, cessione, bper-bcc, filiali, interessate',
     ogTitle: 'Cessione Bper-BCC: le sei filiali interessate in provincia di Varese',
     ogDescription: 'BPER Banca cede sei filiali al Gruppo BCC Iccrea nelle province di Varese e Como. Ecco cosa cambia per i clienti e i dipendenti.',
@@ -10588,7 +10588,7 @@ description: 'BPER Banca cede sei filiali al Gruppo BCC Iccrea nelle province di
 
   'blog-azienda-bardello-cerca-operatore-cnc': {
     title: 'Azienda Bardello cerca operatore CNC: esperienza richiesta',
-description: 'Onostampi Srl, azienda certificata ISO 9001:2015, cerca operatore CNC con almeno 5 anni di esperienza per lavorazioni su 3, 4 e 5 assi.',
+    description: 'Onostampi Srl, azienda certificata ISO 9001:2015, cerca operatore CNC con almeno 5 anni di esperienza per lavorazioni su 3, 4 e 5 assi.',
     keywords: 'frontalieri, ticino, svizzera, italia, azienda, bardello, cerca, operatore',
     ogTitle: 'Azienda Bardello cerca operatore CNC: esperienza richiesta',
     ogDescription: 'Onostampi Srl, azienda certificata ISO 9001:2015, cerca operatore CNC con almeno 5 anni di esperienza per lavorazioni su 3, 4 e 5 assi.',
@@ -10644,7 +10644,7 @@ description: 'Onostampi Srl, azienda certificata ISO 9001:2015, cerca operatore 
 
   'blog-comco-inchieste-keyword-bidding-2026': {
     title: 'COMCO indaga su accordi illeciti nel keyword bidding',
-description: 'Due inchieste aperte dalla COMCO nel settore dei viaggi e dei casinò online per presunti accordi illeciti nel keyword bidding.',
+    description: 'Due inchieste aperte dalla COMCO nel settore dei viaggi e dei casinò online per presunti accordi illeciti nel keyword bidding.',
     keywords: 'frontalieri, ticino, svizzera, italia, comco, indaga, accordi, illeciti',
     ogTitle: 'COMCO indaga su accordi illeciti nel keyword bidding',
     ogDescription: 'Due inchieste aperte dalla COMCO nel settore dei viaggi e dei casinò online per presunti accordi illeciti nel keyword bidding.',
@@ -10672,7 +10672,7 @@ description: 'Due inchieste aperte dalla COMCO nel settore dei viaggi e dei casi
 
   'blog-dezonamenti-ticino-2026-confronti': {
     title: 'Dezonamenti in Ticino: serve dialogo diretto con il Dipartimento',
-description: 'L\'Associazione dei Comuni Ticino chiede confronto diretto con il Dipartimento del Territorio per risolvere problemi di dezonamento.',
+    description: 'L\'Associazione dei Comuni Ticino chiede confronto diretto con il Dipartimento del Territorio per risolvere problemi di dezonamento.',
     keywords: 'frontalieri, ticino, svizzera, italia, dezonamenti, serve, dialogo, diretto',
     ogTitle: 'Dezonamenti in Ticino: serve dialogo diretto con il Dipartimento',
     ogDescription: 'L\'Associazione dei Comuni Ticino chiede confronto diretto con il Dipartimento del Territorio per risolvere problemi di dezonamento',
@@ -10728,7 +10728,7 @@ description: 'L\'Associazione dei Comuni Ticino chiede confronto diretto con il 
 
   'blog-frontaliere-cambio-chf-eur-strategia-2026-simulazione-pratica': {
     title: 'Frontalieri: strategia cambio CHF-EUR 2026 | Frontaliere Ticino',
-description: 'Simulazione pratica per gestire al meglio il cambio CHF-EUR nel 2026 con checklist operativa e confronto scenari.',
+    description: 'Simulazione pratica per gestire al meglio il cambio CHF-EUR nel 2026 con checklist operativa e confronto scenari.',
     keywords: 'frontalieri, ticino, svizzera, italia, strategia, cambio, chf-eur, simulazione',
     ogTitle: 'Frontalieri: strategia cambio CHF-EUR 2026',
     ogDescription: 'Simulazione pratica per gestire al meglio il cambio CHF-EUR nel 2026 con checklist operativa e confronto scenari',
@@ -10827,7 +10827,7 @@ description: 'Simulazione pratica per gestire al meglio il cambio CHF-EUR nel 20
 
   'blog-incendio-langnau-due-case-garage': {
     title: 'Incendio a Langnau: due case e un garage distrutti',
-description: 'Un incendio ha distrutto due case e un garage a Bärau, nel comune di Langnau (BE). Nessun ferito, ma vasta operazione di soccorso.',
+    description: 'Un incendio ha distrutto due case e un garage a Bärau, nel comune di Langnau (BE). Nessun ferito, ma vasta operazione di soccorso.',
     keywords: 'frontalieri, ticino, svizzera, italia, incendio, langnau, case, garage',
     ogTitle: 'Incendio a Langnau: due case e un garage distrutti',
     ogDescription: 'Un incendio ha distrutto due case e un garage a Bärau, nel comune di Langnau (BE). Nessun ferito, ma vasta operazione di soccorso.',
@@ -10860,7 +10860,7 @@ description: 'Un incendio ha distrutto due case e un garage a Bärau, nel comune
 
   'blog-domenica-corriere-piccaluga-lavoro-salari-economia': {
     title: 'Dalla rotta di Piccaluga a lavoro, salari ed economia',
-description: 'Intervista a Daniele Piccaluga e dibattito su lavoro, salari ed economia con Cristina Maderni e Giangiorgio Gargantini.',
+    description: 'Intervista a Daniele Piccaluga e dibattito su lavoro, salari ed economia con Cristina Maderni e Giangiorgio Gargantini.',
     keywords: 'frontalieri, ticino, svizzera, italia, dalla, rotta, piccaluga, lavoro',
     ogTitle: 'Dalla rotta di Piccaluga a lavoro, salari ed economia',
     ogDescription: 'Intervista a Daniele Piccaluga e dibattito su lavoro, salari ed economia con Cristina Maderni e Giangiorgio Gargantini',
@@ -10959,7 +10959,7 @@ description: 'Intervista a Daniele Piccaluga e dibattito su lavoro, salari ed ec
 
   'blog-aumento-prezzi-carburanti-maggio-2026': {
     title: 'Caro carburanti: benzina a 1,9 euro al litro | Frontaliere Ticino',
-description: 'Prezzi benzina e diesel in aumento, self service sfiora 1,9 euro al litro. Analisi su impatto frontalieri Ticino.',
+    description: 'Prezzi benzina e diesel in aumento, self service sfiora 1,9 euro al litro. Analisi su impatto frontalieri Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, caro, carburanti, benzina, euro',
     ogTitle: 'Caro carburanti: benzina a 1,9 euro al litro',
     ogDescription: 'Prezzi benzina e diesel in aumento, self service sfiora 1,9 euro al litro. Analisi su impatto frontalieri Ticino.',
@@ -11025,7 +11025,7 @@ description: 'Prezzi benzina e diesel in aumento, self service sfiora 1,9 euro a
 
   'blog-permesso-g-vs-b-2026-famiglia-figli': {
     title: 'Permesso G vs B 2026: conviene cambiare per una famiglia con figli?',
-description: 'Confronto tecnico tra Permesso G e B nel 2026 per frontalieri con famiglia. Checklist operativa e scenari pratici per il Canton Ticino.',
+    description: 'Confronto tecnico tra Permesso G e B nel 2026 per frontalieri con famiglia. Checklist operativa e scenari pratici per il Canton Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, permesso, conviene, cambiare, famiglia',
     ogTitle: 'Permesso G vs B 2026: conviene cambiare per una famiglia con figli?',
     ogDescription: 'Confronto tecnico tra Permesso G e B nel 2026 per frontalieri con famiglia. Checklist operativa e scenari pratici per il Canton Ticino',
@@ -11190,10 +11190,10 @@ description: 'Confronto tecnico tra Permesso G e B nel 2026 per frontalieri con 
 
   'blog-landsgemeinde-glarona-2026-finanze-alloggi': {
     title: 'Landsgemeinde Glarona 2026: aliquota fiscale e alloggi al centro dei dibattiti',
-description: 'Le decisioni prese durante la Landsgemeinde di Glarona hanno importanti implicazioni per i frontalieri che lavorano nel cantone.',
+    description: 'Le decisioni prese durante la Landsgemeinde di Glarona hanno importanti implicazioni per i frontalieri che lavorano nel cantone.',
     keywords: 'frontalieri, ticino, svizzera, italia, landsgemeinde, glarona, aliquota, fiscale',
     ogTitle: 'Landsgemeinde Glarona 2026: aliquota fiscale e alloggi al centro dei dibattiti',
-ogDescription: 'La Landsgemeinde del canton Glarona ha votato su temi finanziari e abitativi.',
+    ogDescription: 'La Landsgemeinde del canton Glarona ha votato su temi finanziari e abitativi.',
     canonicalPath: '/articoli-frontaliere/landsgemeinde-glarona-2026-finanze-alloggi/',
     structuredData: {
       "@context": "https://schema.org",
@@ -11256,7 +11256,7 @@ ogDescription: 'La Landsgemeinde del canton Glarona ha votato su temi finanziari
 
   'blog-calcio-dnb-bellinzona-ultimo-appello': {
     title: 'Bellinzona verso l\'ultimo appello dopo sconfitta | Frontaliere Ticino',
-description: 'Lo StadeNyonnais perde 0-1 contro il Wil, complicando la situazione del Bellinzona nella lotta per la salvezza in Dnb.',
+    description: 'Lo StadeNyonnais perde 0-1 contro il Wil, complicando la situazione del Bellinzona nella lotta per la salvezza in Dnb.',
     keywords: 'frontalieri, ticino, svizzera, italia, bellinzona, verso, ultimo, appello',
     ogTitle: 'Calcio Dnb: Bellinzona verso l\'ultimo appello dopo la sconfitta dello StadeNyonnais',
     ogDescription: 'Lo StadeNyonnais perde 0-1 contro il Wil, complicando la situazione del Bellinzona nella lotta per la salvezza in Dnb.',
@@ -11289,7 +11289,7 @@ description: 'Lo StadeNyonnais perde 0-1 contro il Wil, complicando la situazion
 
   'blog-parcheggi-cernobbio-ticino-residenti': {
     title: 'Parcheggi folli a Cernobbio: auto ticinese occupa due posti per residenti',
-description: 'Un\'auto con targa ticinese occupa due posti auto riservati ai residenti a Cernobbio, causando disagi e interventi della polizia locale.',
+    description: 'Un\'auto con targa ticinese occupa due posti auto riservati ai residenti a Cernobbio, causando disagi e interventi della polizia locale.',
     keywords: 'frontalieri, ticino, svizzera, italia, parcheggi, folli, cernobbio, auto',
     ogTitle: 'Parcheggi folli a Cernobbio: auto ticinese occupa due posti per residenti',
     ogDescription: 'Un\'auto con targa ticinese occupa due posti auto riservati ai residenti a Cernobbio, causando disagi e interventi della polizia locale.',
@@ -11355,7 +11355,7 @@ description: 'Un\'auto con targa ticinese occupa due posti auto riservati ai res
 
   'blog-brebbia-19enne-grave-incidente-fabbrica': {
     title: 'Brebbia: 19enne precipita dal tetto di una fabbrica',
-description: 'Un giovane di 19 anni è caduto dal tetto di una fabbrica a Brebbia, in provincia di Varese. Grave ma fuori pericolo.',
+    description: 'Un giovane di 19 anni è caduto dal tetto di una fabbrica a Brebbia, in provincia di Varese. Grave ma fuori pericolo.',
     keywords: 'frontalieri, ticino, svizzera, italia, brebbia, 19enne, precipita, tetto',
     ogTitle: 'Brebbia: 19enne precipita dal tetto di una fabbrica',
     ogDescription: 'Un giovane di 19 anni è caduto dal tetto di una fabbrica a Brebbia, in provincia di Varese. Grave ma fuori pericolo.',
@@ -11454,7 +11454,7 @@ description: 'Un giovane di 19 anni è caduto dal tetto di una fabbrica a Brebbi
 
   'blog-maillard-uss-udc-iniziativa-1-maggio-2026': {
     title: 'Maillard (USS) attacca iniziativa UDC: rischi per salari e posti di lavoro',
-description: 'Il presidente dell\'USS critica l\'iniziativa UDC \'No a una Svizzera da 10 milioni!\' per i rischi su salari, pensioni e occupazione.',
+    description: 'Il presidente dell\'USS critica l\'iniziativa UDC \'No a una Svizzera da 10 milioni!\' per i rischi su salari, pensioni e occupazione.',
     keywords: 'frontalieri, ticino, svizzera, italia, maillard, attacca, iniziativa, rischi',
     ogTitle: 'Maillard (USS) attacca iniziativa UDC: rischi per salari e posti di lavoro',
     ogDescription: 'Il presidente dell\'USS critica l\'iniziativa UDC \'No a una Svizzera da 10 milioni!\' per i rischi su salari, pensioni e occupazione.',
@@ -11487,7 +11487,7 @@ description: 'Il presidente dell\'USS critica l\'iniziativa UDC \'No a una Svizz
 
   'blog-cervelat-salsiccia-nazionale-svizzera': {
     title: 'Cervelat, la salsiccia nazionale svizzera | Frontaliere Ticino',
-description: 'Scopri la storia e le curiosità del cervelat, la salsiccia nazionale svizzera, amata in tutto il Paese e simbolo di identità nazionale.',
+    description: 'Scopri la storia e le curiosità del cervelat, la salsiccia nazionale svizzera, amata in tutto il Paese e simbolo di identità nazionale.',
     keywords: 'frontalieri, ticino, svizzera, italia, cervelat, salsiccia, nazionale, scopri',
     ogTitle: 'Cervelat, la salsiccia nazionale svizzera',
     ogDescription: 'Scopri la storia e le curiosità del cervelat, la salsiccia nazionale svizzera, amata in tutto il Paese e simbolo di identità nazionale.',
@@ -11520,7 +11520,7 @@ description: 'Scopri la storia e le curiosità del cervelat, la salsiccia nazion
 
   'blog-amare-politica-luino-2026': {
     title: 'Luino: incontro su \'Amare la politica\' tra giovani e istituzioni',
-description: 'Sabato 2 maggio a Luino presentato il libro \'Amare la Politica\' con dibattito su ruolo della politica nella società contemporanea.',
+    description: 'Sabato 2 maggio a Luino presentato il libro \'Amare la Politica\' con dibattito su ruolo della politica nella società contemporanea.',
     keywords: 'frontalieri, ticino, svizzera, italia, luino, incontro, amare, politica',
     ogTitle: 'Luino: incontro su \'Amare la politica\' tra giovani e istituzioni',
     ogDescription: 'Sabato 2 maggio a Luino presentato il libro \'Amare la Politica\' con dibattito su ruolo della politica nella società contemporanea',
@@ -11553,7 +11553,7 @@ description: 'Sabato 2 maggio a Luino presentato il libro \'Amare la Politica\' 
 
   'blog-cassis-araghchi-colloquio-2026': {
     title: 'Cassis e Araghchi si parlano: colloquio diplomatico Svizzera-Iran',
-description: 'Il consigliere federale Ignazio Cassis ha avuto un colloquio telefonico con il ministro degli affari esteri iraniano Abbas Araghchi.',
+    description: 'Il consigliere federale Ignazio Cassis ha avuto un colloquio telefonico con il ministro degli affari esteri iraniano Abbas Araghchi.',
     keywords: 'frontalieri, ticino, svizzera, italia, cassis, araghchi, parlano, colloquio',
     ogTitle: 'Cassis e Araghchi si parlano: colloquio diplomatico Svizzera-Iran',
     ogDescription: 'Il consigliere federale Ignazio Cassis ha avuto un colloquio telefonico con il ministro degli affari esteri iraniano Abbas Araghchi.',
@@ -11586,7 +11586,7 @@ description: 'Il consigliere federale Ignazio Cassis ha avuto un colloquio telef
 
   'blog-corsi-vela-adulti-luino-avav-2026': {
     title: 'Luino: tornano i corsi di vela per adulti dell\'AVAV',
-description: 'L\'Associazione Velica Alto Verbano rilancia per il 2026 i corsi su cabinato, aperti anche ai principianti sul Lago Maggiore.',
+    description: 'L\'Associazione Velica Alto Verbano rilancia per il 2026 i corsi su cabinato, aperti anche ai principianti sul Lago Maggiore.',
     keywords: 'frontalieri, ticino, svizzera, italia, luino, tornano, corsi, vela',
     ogTitle: 'Luino: tornano i corsi di vela per adulti dell\'AVAV',
     ogDescription: 'L\'Associazione Velica Alto Verbano rilancia per il 2026 i corsi su cabinato, aperti anche ai principianti sul Lago Maggiore',
@@ -11619,7 +11619,7 @@ description: 'L\'Associazione Velica Alto Verbano rilancia per il 2026 i corsi s
 
   'blog-incendio-bellinzona-via-borromini-evacuati-10-persone': {
     title: 'Incendio in palazzina a Bellinzona: evacuati 10 inquilini',
-description: 'Un incendio è divampato questa mattina in una palazzina di Bellinzona, causando l\'evacuazione di 10 persone e un\'intossicazione lieve.',
+    description: 'Un incendio è divampato questa mattina in una palazzina di Bellinzona, causando l\'evacuazione di 10 persone e un\'intossicazione lieve.',
     keywords: 'frontalieri, ticino, svizzera, italia, incendio, palazzina, bellinzona, evacuati',
     ogTitle: 'Incendio Bellinzona: evacuati 10 inquilini',
     ogDescription: 'Un incendio è divampato questa mattina in una palazzina di Bellinzona, causando l\'evacuazione di 10 persone e un\'intossicazione lieve.',
@@ -11652,7 +11652,7 @@ description: 'Un incendio è divampato questa mattina in una palazzina di Bellin
 
   'blog-agricoltura-ticino-prodotti-locali-eventi-2026': {
     title: 'Agricoltura ticinese chiede più prodotti locali agli eventi',
-description: 'I delegati dell\'Unione contadini ticinesi chiedono maggiore presenza di prodotti locali agli eventi, preoccupati da costi e predatori.',
+    description: 'I delegati dell\'Unione contadini ticinesi chiedono maggiore presenza di prodotti locali agli eventi, preoccupati da costi e predatori.',
     keywords: 'frontalieri, ticino, svizzera, italia, agricoltura, ticinese, chiede, prodotti',
     ogTitle: 'Agricoltura ticinese chiede più prodotti locali agli eventi',
     ogDescription: 'I delegati dell\'Unione contadini ticinesi chiedono maggiore presenza di prodotti locali agli eventi, preoccupati da costi e predatori',
@@ -11685,7 +11685,7 @@ description: 'I delegati dell\'Unione contadini ticinesi chiedono maggiore prese
 
   'blog-turismo-como-frontalieri-2026': {
     title: 'Turismo a Como senza precedenti: quartieri in difficoltà e frontalieri esclusi',
-description: 'Incontro allo Yacht Club su turismo e periferie: crescita senza precedenti ma quartieri in difficoltà e senza benefici.',
+    description: 'Incontro allo Yacht Club su turismo e periferie: crescita senza precedenti ma quartieri in difficoltà e senza benefici.',
     keywords: 'frontalieri, ticino, svizzera, italia, turismo, como, senza, precedenti',
     ogTitle: 'Turismo a Como senza precedenti: quartieri in difficoltà e frontalieri esclusi',
     ogDescription: 'Incontro allo Yacht Club su turismo e periferie: crescita senza precedenti ma quartieri in difficoltà e senza benefici',
@@ -11718,7 +11718,7 @@ description: 'Incontro allo Yacht Club su turismo e periferie: crescita senza pr
 
   'blog-omegna-ciclista-precipita-scarpata-ricovero-rosso': {
     title: 'Omegna: ciclista precipita in scarpata, ricovero in codice rosso',
-description: 'Gravi le condizioni di un ciclista precipitato in un dirupo vicino a Omegna. Ricovero in codice rosso all\'ospedale di Novara.',
+    description: 'Gravi le condizioni di un ciclista precipitato in un dirupo vicino a Omegna. Ricovero in codice rosso all\'ospedale di Novara.',
     keywords: 'frontalieri, ticino, svizzera, italia, omegna, ciclista, precipita, scarpata',
     ogTitle: 'Omegna: ciclista precipita in scarpata, ricovero in codice rosso',
     ogDescription: 'Gravi le condizioni di un ciclista precipitato in un dirupo vicino a Omegna. Ricovero in codice rosso all\'ospedale di Novara.',
@@ -11850,7 +11850,7 @@ description: 'Gravi le condizioni di un ciclista precipitato in un dirupo vicino
 
   'blog-varese-lago-perduto-memoria-comunita': {
     title: 'Varese: “Il lago perduto”, memoria viva di una comunità',
-description: 'La mostra fotografica di Mario Chiodetti alle Ghiacciaie di Cazzago Brabbia celebra la tradizione dei pescatori del lago di Varese.',
+    description: 'La mostra fotografica di Mario Chiodetti alle Ghiacciaie di Cazzago Brabbia celebra la tradizione dei pescatori del lago di Varese.',
     keywords: 'frontalieri, ticino, svizzera, italia, varese, lago, perduto, memoria',
     ogTitle: 'Varese: “Il lago perduto”, memoria viva di una comunità',
     ogDescription: 'La mostra fotografica di Mario Chiodetti alle Ghiacciaie di Cazzago Brabbia celebra la tradizione dei pescatori del lago di Varese.',
@@ -11883,7 +11883,7 @@ description: 'La mostra fotografica di Mario Chiodetti alle Ghiacciaie di Cazzag
 
   'blog-rischi-petrolio-lugano-3-maggio-2026': {
     title: 'Marcia lenta a Lugano contro i rischi del petrolio',
-description: 'Cinque attivisti di \'act now!\' hanno organizzato una marcia lenta a Lugano per denunciare i pericoli del petrolio.',
+    description: 'Cinque attivisti di \'act now!\' hanno organizzato una marcia lenta a Lugano per denunciare i pericoli del petrolio.',
     keywords: 'frontalieri, ticino, svizzera, italia, marcia, lenta, lugano, contro',
     ogTitle: 'Marcia lenta a Lugano contro i rischi del petrolio',
     ogDescription: 'Cinque attivisti di \'act now!\' hanno organizzato una marcia lenta a Lugano per denunciare i pericoli del petrolio.',
@@ -12114,7 +12114,7 @@ description: 'Cinque attivisti di \'act now!\' hanno organizzato una marcia lent
 
   'blog-scontri-pensilina-lugano-violenza': {
     title: 'Scontri in pensilina a Lugano: feriti e tensioni crescenti',
-description: 'La municipale di Lugano commenta gli scontri del 1° maggio che hanno portato al ferimento di due persone. La situazione resta critica.',
+    description: 'La municipale di Lugano commenta gli scontri del 1° maggio che hanno portato al ferimento di due persone. La situazione resta critica.',
     keywords: 'frontalieri, ticino, svizzera, italia, scontri, pensilina, lugano, feriti',
     ogTitle: 'Scontri in pensilina a Lugano: feriti e tensioni crescenti',
     ogDescription: 'La municipale di Lugano commenta gli scontri del 1° maggio che hanno portato al ferimento di due persone. La situazione resta critica.',
@@ -12180,7 +12180,7 @@ description: 'La municipale di Lugano commenta gli scontri del 1° maggio che ha
 
   'blog-life-run-gallarate-2026-successo': {
     title: 'Life Run 2026: 550 podisti a Gallarate per il benessere',
-description: 'Oltre 550 podisti hanno partecipato alla Life Run 2026 a Gallarate, con vittorie di Mattia Grifa e Federica Cerruti nella gara Fidal.',
+    description: 'Oltre 550 podisti hanno partecipato alla Life Run 2026 a Gallarate, con vittorie di Mattia Grifa e Federica Cerruti nella gara Fidal.',
     keywords: 'frontalieri, ticino, svizzera, italia, life, podisti, gallarate, benessere',
     ogTitle: 'Life Run 2026: 550 podisti a Gallarate per il benessere',
     ogDescription: 'Oltre 550 podisti hanno partecipato alla Life Run 2026 a Gallarate, con vittorie di Mattia Grifa e Federica Cerruti nella gara Fidal.',
@@ -12279,7 +12279,7 @@ description: 'Oltre 550 podisti hanno partecipato alla Life Run 2026 a Gallarate
 
   'blog-schianto-a9-turate-feriti-frontalieri': {
     title: 'Schianto sulla A9 a Turate: quattro feriti tra i frontalieri',
-description: 'Incidente sulla A9 direzione Milano a Turate, quattro persone tra feriti e contusi. Implicazioni per i frontalieri in transito.',
+    description: 'Incidente sulla A9 direzione Milano a Turate, quattro persone tra feriti e contusi. Implicazioni per i frontalieri in transito.',
     keywords: 'frontalieri, ticino, svizzera, italia, schianto, sulla, turate, quattro',
     ogTitle: 'Schianto A9 Turate: 4 feriti tra frontalieri',
     ogDescription: 'Incidente sulla A9 direzione Milano a Turate, quattro persone tra feriti e contusi. Implicazioni per i frontalieri in transito.',
@@ -12378,7 +12378,7 @@ description: 'Incidente sulla A9 direzione Milano a Turate, quattro persone tra 
 
   'blog-incidente-autolaghi-donna-ferita': {
     title: 'Incidente sull\'Autolaghi: donna ferita in codice giallo',
-description: 'Una 77enne ha perso il controllo dell\'auto e ha urtato il guardrail. Trasportata in ospedale, non in gravi condizioni.',
+    description: 'Una 77enne ha perso il controllo dell\'auto e ha urtato il guardrail. Trasportata in ospedale, non in gravi condizioni.',
     keywords: 'frontalieri, ticino, svizzera, italia, incidente, sull, autolaghi, donna',
     ogTitle: 'Incidente Autolaghi: donna ferita in codice giallo',
     ogDescription: 'Una 77enne ha perso il controllo dell\'auto e ha urtato il guardrail. Trasportata in ospedale, non in gravi condizioni.',
@@ -12543,7 +12543,7 @@ description: 'Una 77enne ha perso il controllo dell\'auto e ha urtato il guardra
 
   'blog-league-ticino-border-closure-proposal-2026': {
     title: 'Lega Ticino propone chiusura confini con Italia per una settimana',
-description: 'La Lega dei Ticinesi propone di chiudere i confini con l\'Italia per una settimana per vedere l\'effetto che fa, citando Jannacci.',
+    description: 'La Lega dei Ticinesi propone di chiudere i confini con l\'Italia per una settimana per vedere l\'effetto che fa, citando Jannacci.',
     keywords: 'frontalieri, ticino, svizzera, italia, lega, propone, chiusura, confini',
     ogTitle: 'Lega Ticino propone chiusura confini con Italia per una settimana',
     ogDescription: 'La Lega dei Ticinesi propone di chiudere i confini con l\'Italia per una settimana per vedere l\'effetto che fa, citando Jannacci.',
@@ -12609,7 +12609,7 @@ description: 'La Lega dei Ticinesi propone di chiudere i confini con l\'Italia p
 
   'blog-negoziati-stallo-iran-usa-2026': {
     title: 'Negoziati in stallo tra USA e Iran: tensioni crescenti',
-description: 'Le distanze tra Stati Uniti e Iran si fanno sempre più marcate, con nuove proposte e minacce che alimentano le tensioni internazionali.',
+    description: 'Le distanze tra Stati Uniti e Iran si fanno sempre più marcate, con nuove proposte e minacce che alimentano le tensioni internazionali.',
     keywords: 'frontalieri, ticino, svizzera, italia, negoziati, stallo, iran, tensioni',
     ogTitle: 'Negoziati in stallo tra USA e Iran: tensioni crescenti',
     ogDescription: 'Le distanze tra Stati Uniti e Iran si fanno sempre più marcate, con nuove proposte e minacce che alimentano le tensioni internazionali.',
@@ -12807,7 +12807,7 @@ description: 'Le distanze tra Stati Uniti e Iran si fanno sempre più marcate, c
 
   'blog-ingorgo-taxi-boat-como-2026': {
     title: 'Como, caos taxi boat: 600 imbarcazioni in un solo molo',
-description: 'Il molo di Sant\'Agostino a Como è insostenibile con 600 barche in attesa. Operatori chiedono più pontili per ridurre il caos.',
+    description: 'Il molo di Sant\'Agostino a Como è insostenibile con 600 barche in attesa. Operatori chiedono più pontili per ridurre il caos.',
     keywords: 'frontalieri, ticino, svizzera, italia, como, caos, taxi, boat',
     ogTitle: 'Como, caos taxi boat: 600 imbarcazioni in un solo molo',
     ogDescription: 'Il molo di Sant\'Agostino a Como è insostenibile con 600 barche in attesa. Operatori chiedono più pontili per ridurre il caos.',
@@ -12873,7 +12873,7 @@ description: 'Il molo di Sant\'Agostino a Como è insostenibile con 600 barche i
 
   'blog-como-napoli-pareggio-2026': {
     title: 'Como-Napoli 0-0: Nico Paz brilla, ma Douvikas e Diao non concretizzano',
-description: 'Il Como pareggia 0-0 contro il Napoli. Nico Paz è il migliore in campo con due assist, ma Douvikas e Diao sprecano occasioni da gol.',
+    description: 'Il Como pareggia 0-0 contro il Napoli. Nico Paz è il migliore in campo con due assist, ma Douvikas e Diao sprecano occasioni da gol.',
     keywords: 'frontalieri, ticino, svizzera, italia, como-napoli, nico, brilla, douvikas',
     ogTitle: 'Como-Napoli 0-0: Nico Paz brilla, ma Douvikas e Diao non concretizzano',
     ogDescription: 'Il Como pareggia 0-0 contro il Napoli. Nico Paz è il migliore in campo con due assist, ma Douvikas e Diao sprecano occasioni da gol.',
@@ -12906,7 +12906,7 @@ description: 'Il Como pareggia 0-0 contro il Napoli. Nico Paz è il migliore in 
 
   'blog-varese-incontro-violenza-psicologica-disturbi-alimentari': {
     title: 'Varese: incontro su violenza psicologica e disturbi alimentari',
-description: 'Venerdì 8 maggio a Varese un evento per riflettere sul legame tra maltrattamento psicologico e disagio alimentare.',
+    description: 'Venerdì 8 maggio a Varese un evento per riflettere sul legame tra maltrattamento psicologico e disagio alimentare.',
     keywords: 'frontalieri, ticino, svizzera, italia, varese, incontro, violenza, psicologica',
     ogTitle: 'Varese: incontro su violenza psicologica e disturbi alimentari',
     ogDescription: 'Venerdì 8 maggio a Varese un evento per riflettere sul legame tra maltrattamento psicologico e disagio alimentare.',
@@ -13005,7 +13005,7 @@ description: 'Venerdì 8 maggio a Varese un evento per riflettere sul legame tra
 
   'blog-tragedia-falleatsche-frontalieri': {
     title: 'Tragedia alla Fallätsche: 69enne precipita mortalmente',
-description: 'Un uomo di 69 anni è precipitato mortalmente alla Fallätsche, un\'area di svago vicino a Zurigo. Ecco cosa è successo.',
+    description: 'Un uomo di 69 anni è precipitato mortalmente alla Fallätsche, un\'area di svago vicino a Zurigo. Ecco cosa è successo.',
     keywords: 'frontalieri, ticino, svizzera, italia, tragedia, alla, fallätsche, 69enne',
     ogTitle: 'Tragedia alla Fallätsche: 69enne precipita mortalmente',
     ogDescription: 'Un uomo di 69 anni è precipitato mortalmente alla Fallätsche, un\'area di svago vicino a Zurigo. Ecco cosa è successo.',
@@ -13071,7 +13071,7 @@ description: 'Un uomo di 69 anni è precipitato mortalmente alla Fallätsche, un
 
   'blog-cof-lanzo-igiene-mani-2026': {
     title: 'COF Lanzo aderisce alla Campagna mondiale per l’igiene delle mani',
-description: 'Il COF Lanzo Hospital aderisce alla Campagna mondiale per l’igiene delle mani, promossa dall’OMS e dal Ministero della Salute.',
+    description: 'Il COF Lanzo Hospital aderisce alla Campagna mondiale per l’igiene delle mani, promossa dall’OMS e dal Ministero della Salute.',
     keywords: 'frontalieri, ticino, svizzera, italia, lanzo, aderisce, alla, campagna',
     ogTitle: 'COF Lanzo aderisce alla Campagna mondiale per l’igiene delle mani',
     ogDescription: 'Il COF Lanzo Hospital aderisce alla Campagna mondiale per l’igiene delle mani, promossa dall’OMS e dal Ministero della Salute.',
@@ -13137,7 +13137,7 @@ description: 'Il COF Lanzo Hospital aderisce alla Campagna mondiale per l’igie
 
   'blog-disordini-pensilina-lugano-intervento-veloce': {
     title: 'Disordini a Lugano: intervento veloce grazie al presidio accresciuto',
-description: 'La capodicastero Sicurezza Karin Valenzano Rossi commenta gli scontri in Pensilina e l\'importanza di abbassare i toni politici.',
+    description: 'La capodicastero Sicurezza Karin Valenzano Rossi commenta gli scontri in Pensilina e l\'importanza di abbassare i toni politici.',
     keywords: 'frontalieri, ticino, svizzera, italia, disordini, lugano, intervento, veloce',
     ogTitle: 'Disordini a Lugano: intervento veloce grazie al presidio accresciuto',
     ogDescription: 'La capodicastero Sicurezza Karin Valenzano Rossi commenta gli scontri in Pensilina e l\'importanza di abbassare i toni politici',
@@ -13236,7 +13236,7 @@ description: 'La capodicastero Sicurezza Karin Valenzano Rossi commenta gli scon
 
   'blog-svizzera-cechia-rigori-4-maggio-2026': {
     title: 'Svizzera batte la Cechia ai rigori, raddrizzando il weekend',
-description: 'La nazionale svizzera di hockey vince ai rigori contro la Repubblica Ceca, chiudendo in positivo il weekend dopo due sconfitte.',
+    description: 'La nazionale svizzera di hockey vince ai rigori contro la Repubblica Ceca, chiudendo in positivo il weekend dopo due sconfitte.',
     keywords: 'frontalieri, ticino, svizzera, italia, batte, cechia, rigori, raddrizzando',
     ogTitle: 'Svizzera batte Cechia ai rigori, raddrizzando il weekend',
     ogDescription: 'La nazionale svizzera di hockey vince ai rigori contro la Repubblica Ceca, chiudendo in positivo il weekend dopo due sconfitte.',
@@ -13269,7 +13269,7 @@ description: 'La nazionale svizzera di hockey vince ai rigori contro la Repubbli
 
   'blog-orso-valposchiavo-frontalieri-2026': {
     title: 'Orso ripreso in Valposchiavo: cosa cambia per i frontalieri',
-description: 'Un orso è stato avvistato in Valposchiavo dopo anni di assenza. Ecco cosa sapere per chi lavora in Svizzera e vive in Italia.',
+    description: 'Un orso è stato avvistato in Valposchiavo dopo anni di assenza. Ecco cosa sapere per chi lavora in Svizzera e vive in Italia.',
     keywords: 'frontalieri, ticino, svizzera, italia, orso, ripreso, valposchiavo, cosa',
     ogTitle: 'Orso ripreso in Valposchiavo: cosa cambia per i frontalieri',
     ogDescription: 'Un orso è stato avvistato in Valposchiavo dopo anni di assenza. Ecco cosa sapere per chi lavora in Svizzera e vive in Italia.',
@@ -13302,7 +13302,7 @@ description: 'Un orso è stato avvistato in Valposchiavo dopo anni di assenza. E
 
   'blog-thun-campionato-calcio-2026': {
     title: 'Thun campione svizzero di calcio per la prima volta',
-description: 'Dopo 128 anni, il Thun vince il campionato svizzero. L\'allenatore ticinese Mauro Lustrinelli è uno degli artefici del successo.',
+    description: 'Dopo 128 anni, il Thun vince il campionato svizzero. L\'allenatore ticinese Mauro Lustrinelli è uno degli artefici del successo.',
     keywords: 'frontalieri, ticino, svizzera, italia, thun, campione, svizzero, calcio',
     ogTitle: 'Thun campione svizzero di calcio per la prima volta',
     ogDescription: 'Dopo 128 anni, il Thun vince il campionato svizzero. L\'allenatore ticinese Mauro Lustrinelli è uno degli artefici del successo',
@@ -13368,7 +13368,7 @@ description: 'Dopo 128 anni, il Thun vince il campionato svizzero. L\'allenatore
 
   'blog-anguria-pannelli-incendio-ticino-2026': {
     title: 'Pannelli ignifughi con semi di anguria: sicurezza antincendio',
-description: 'Scoperta del Politecnico di Zurigo: pannelli resistenti al fuoco realizzati con semi di anguria. Possibili applicazioni in Ticino.',
+    description: 'Scoperta del Politecnico di Zurigo: pannelli resistenti al fuoco realizzati con semi di anguria. Possibili applicazioni in Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, pannelli, ignifughi, semi, anguria',
     ogTitle: 'Pannelli ignifughi con semi di anguria: sicurezza antincendio',
     ogDescription: 'Scoperta del Politecnico di Zurigo: pannelli resistenti al fuoco realizzati con semi di anguria. Possibili applicazioni in Ticino.',
@@ -13434,7 +13434,7 @@ description: 'Scoperta del Politecnico di Zurigo: pannelli resistenti al fuoco r
 
   'blog-fc-thun-campionato-2026-ticino': {
     title: 'FC Thun campione svizzero: festa a Thun | Frontaliere Ticino',
-description: 'Il FC Thun, guidato dall\'allenatore ticinese Mauro Lustrinelli, vince il campionato svizzero per la prima volta nella sua storia.',
+    description: 'Il FC Thun, guidato dall\'allenatore ticinese Mauro Lustrinelli, vince il campionato svizzero per la prima volta nella sua storia.',
     keywords: 'frontalieri, ticino, svizzera, italia, thun, campione, svizzero, festa',
     ogTitle: 'FC Thun campione svizzero: festa a Thun',
     ogDescription: 'Il FC Thun, guidato dall\'allenatore ticinese Mauro Lustrinelli, vince il campionato svizzero per la prima volta nella sua storia.',
@@ -13500,7 +13500,7 @@ description: 'Il FC Thun, guidato dall\'allenatore ticinese Mauro Lustrinelli, v
 
   'blog-thun-campionato-calcio-2026-festa-thun': {
     title: 'FC Thun campione di Super League: festa a Thun dopo la vittoria storica',
-description: 'La neopromossa FC Thun conquista il primo titolo della sua storia. Festa alla Stockhorn Arena dopo il ko del San Gallo contro il Sion.',
+    description: 'La neopromossa FC Thun conquista il primo titolo della sua storia. Festa alla Stockhorn Arena dopo il ko del San Gallo contro il Sion.',
     keywords: 'frontalieri, ticino, svizzera, italia, thun, campione, super, league',
     ogTitle: 'FC Thun campione di Super League: festa a Thun dopo la vittoria storica',
     ogDescription: 'La neopromossa FC Thun conquista il primo titolo della sua storia. Festa alla Stockhorn Arena dopo il ko del San Gallo contro il Sion.',
@@ -13665,7 +13665,7 @@ description: 'La neopromossa FC Thun conquista il primo titolo della sua storia.
 
   'blog-antonelli-vince-gp-miami-2026': {
     title: 'Antonelli vince il GP Miami 2026: ordine d\'arrivo e classifica mondiale',
-description: 'Andrea Kimi Antonelli trionfa a Miami e resta leader del Mondiale di Formula 1. Ecco l\'ordine d\'arrivo e la classifica aggiornata.',
+    description: 'Andrea Kimi Antonelli trionfa a Miami e resta leader del Mondiale di Formula 1. Ecco l\'ordine d\'arrivo e la classifica aggiornata.',
     keywords: 'frontalieri, ticino, svizzera, italia, antonelli, vince, miami, ordine',
     ogTitle: 'Antonelli vince GP Miami 2026: ordine d\'arrivo e classifica mondiale',
     ogDescription: 'Andrea Kimi Antonelli trionfa a Miami e resta leader del Mondiale di Formula 1. Ecco l\'ordine d\'arrivo e la classifica aggiornata.',
@@ -13698,7 +13698,7 @@ description: 'Andrea Kimi Antonelli trionfa a Miami e resta leader del Mondiale 
 
   'blog-tre-morti-hantavirus-nave-atlantico': {
     title: 'Hantavirus su nave, 3 morti nell\'Atlantico | Frontaliere Ticino',
-description: 'L\'OMS conferma tre decessi legati a un possibile focolaio di hantavirus su una nave da crociera nell\'Atlantico. Ecco cosa sappiamo.',
+    description: 'L\'OMS conferma tre decessi legati a un possibile focolaio di hantavirus su una nave da crociera nell\'Atlantico. Ecco cosa sappiamo.',
     keywords: 'frontalieri, ticino, svizzera, italia, hantavirus, nave, morti, nell',
     ogTitle: 'Tre morti hantavirus nave Atlantico | Frontaliere Ticino',
     ogDescription: 'L\'OMS conferma tre decessi legati a un possibile focolaio di hantavirus su una nave da crociera nell\'Atlantico. Ecco cosa sappiamo.',
@@ -13731,7 +13731,7 @@ description: 'L\'OMS conferma tre decessi legati a un possibile focolaio di hant
 
   'blog-juve-verona-1-1-frontalieri-2026': {
     title: 'Juve pareggia 1-1 con il Verona già retrocesso | Frontaliere Ticino',
-description: 'La Juventus pareggia 1-1 contro il Verona già retrocesso, fallendo l\'aggancio al Milan nella corsa alla Champions.',
+    description: 'La Juventus pareggia 1-1 contro il Verona già retrocesso, fallendo l\'aggancio al Milan nella corsa alla Champions.',
     keywords: 'frontalieri, ticino, svizzera, italia, juve, pareggia, verona, retrocesso',
     ogTitle: 'Juve pareggia 1-1 con il Verona già retrocesso',
     ogDescription: 'La Juventus pareggia 1-1 contro il Verona già retrocesso, fallendo l\'aggancio al Milan nella corsa alla Champions.',
@@ -13797,7 +13797,7 @@ description: 'La Juventus pareggia 1-1 contro il Verona già retrocesso, fallend
 
   'blog-csoa-molino-rimozione-macerie-lugano': {
     title: 'Addio Csoa Il Molino: inizia la rimozione delle macerie',
-description: 'La Città di Lugano avvia i lavori di riqualificazione dell\'area dell\'ex Macello. Durata stimata tra un mese e mezzo e due mesi.',
+    description: 'La Città di Lugano avvia i lavori di riqualificazione dell\'area dell\'ex Macello. Durata stimata tra un mese e mezzo e due mesi.',
     keywords: 'frontalieri, ticino, svizzera, italia, addio, csoa, molino, inizia',
     ogTitle: 'Addio Csoa Il Molino: inizia la rimozione delle macerie',
     ogDescription: 'La Città di Lugano avvia i lavori di riqualificazione dell\'area dell\'ex Macello. Durata stimata tra un mese e mezzo e due mesi.',
@@ -13830,7 +13830,7 @@ description: 'La Città di Lugano avvia i lavori di riqualificazione dell\'area 
 
   'blog-incidente-riazzino-ciclista-condanna': {
     title: 'Condanna per omicidio colposo: 6 mesi per il camionista',
-description: 'Il camionista che investì un ciclista a Riazzino nel gennaio 2025 è stato condannato a 6 mesi per omicidio colposo.',
+    description: 'Il camionista che investì un ciclista a Riazzino nel gennaio 2025 è stato condannato a 6 mesi per omicidio colposo.',
     keywords: 'frontalieri, ticino, svizzera, italia, condanna, omicidio, colposo, mesi',
     ogTitle: 'Condanna per omicidio colposo: 6 mesi per il camionista',
     ogDescription: 'Il camionista che investì un ciclista a Riazzino nel gennaio 2025 è stato condannato a 6 mesi per omicidio colposo.',
@@ -13896,7 +13896,7 @@ description: 'Il camionista che investì un ciclista a Riazzino nel gennaio 2025
 
   'blog-ginnastica-artistica-ticino-2026': {
     title: 'Ginnastica artistica: giovani talenti brillano ai Campionati ticinesi',
-description: 'Scopri i risultati dei Campionati ticinesi di ginnastica artistica 2026 e le opportunità per i giovani talenti e i frontalieri.',
+    description: 'Scopri i risultati dei Campionati ticinesi di ginnastica artistica 2026 e le opportunità per i giovani talenti e i frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, ginnastica, artistica, giovani, talenti',
     ogTitle: 'Ginnastica artistica: giovani talenti brillano ai Campionati ticinesi',
     ogDescription: 'Scopri i risultati dei Campionati ticinesi di ginnastica artistica 2026 e le opportunità per i giovani talenti e i frontalieri.',
@@ -13929,7 +13929,7 @@ description: 'Scopri i risultati dei Campionati ticinesi di ginnastica artistica
 
   'blog-italia-sospetti-var-minetti-quirinale': {
     title: 'Italia dei sospetti: scandali VAR, Minetti e tensioni italo-svizzere',
-description: 'Scandali nel calcio italiano e dubbi sulla grazia a Nicole Minetti dominano la cronaca elvetica. Ecco cosa succede.',
+    description: 'Scandali nel calcio italiano e dubbi sulla grazia a Nicole Minetti dominano la cronaca elvetica. Ecco cosa succede.',
     keywords: 'frontalieri, ticino, svizzera, italia, sospetti, scandali, minetti, tensioni',
     ogTitle: 'Italia dei sospetti: scandali VAR, Minetti e tensioni italo-svizzere',
     ogDescription: 'Scandali nel calcio italiano e dubbi sulla grazia a Nicole Minetti dominano la cronaca elvetica. Ecco cosa succede.',
@@ -13962,7 +13962,7 @@ description: 'Scandali nel calcio italiano e dubbi sulla grazia a Nicole Minetti
 
   'blog-azzate-koningsdag-console-olandese-2026': {
     title: 'Azzate festeggia il Koningsdag con la Console olandese',
-description: 'Domenica 3 maggio, Azzate ha celebrato il Koningsdag con mercatini, musica e la presenza della Console olandese Mascha Baak.',
+    description: 'Domenica 3 maggio, Azzate ha celebrato il Koningsdag con mercatini, musica e la presenza della Console olandese Mascha Baak.',
     keywords: 'frontalieri, ticino, svizzera, italia, azzate, festeggia, koningsdag, console',
     ogTitle: 'Azzate si tinge d’arancione: il Koningsdag compie tredici anni e ospita la Console olandese',
     ogDescription: 'Domenica 3 maggio, Azzate ha celebrato il Koningsdag con mercatini, musica e la presenza della Console olandese Mascha Baak.',
@@ -14094,7 +14094,7 @@ description: 'Domenica 3 maggio, Azzate ha celebrato il Koningsdag con mercatini
 
   'blog-stresa-espulsione-egiziano-2026': {
     title: 'Stresa: espulso cittadino egiziano, nessun diritto all\'asilo politico',
-description: 'Un cittadino egiziano è stato espulso da Stresa dopo il rifiuto della richiesta di asilo politico. Ecco cosa cambia per i frontalieri.',
+    description: 'Un cittadino egiziano è stato espulso da Stresa dopo il rifiuto della richiesta di asilo politico. Ecco cosa cambia per i frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, stresa, espulso, cittadino, egiziano',
     ogTitle: 'Stresa: espulso cittadino egiziano, nessun diritto all\'asilo politico',
     ogDescription: 'Un cittadino egiziano è stato espulso da Stresa dopo il rifiuto della richiesta di asilo politico. Ecco cosa cambia per i frontalieri.',
@@ -14127,7 +14127,7 @@ description: 'Un cittadino egiziano è stato espulso da Stresa dopo il rifiuto d
 
   'blog-stati-canaglia-2026-aggiornamento-lista': {
     title: 'Stati canaglia 2026: la lista si aggiorna | Frontaliere Ticino',
-description: 'Gli Stati Uniti e Israele tra i paesi \'infrequentabili\' secondo un\'analisi che ridefinisce la geopolitica contemporanea.',
+    description: 'Gli Stati Uniti e Israele tra i paesi \'infrequentabili\' secondo un\'analisi che ridefinisce la geopolitica contemporanea.',
     keywords: 'frontalieri, ticino, svizzera, italia, stati, canaglia, lista, aggiorna',
     ogTitle: 'Stati canaglia 2026: la lista si aggiorna',
     ogDescription: 'Gli Stati Uniti e Israele tra i paesi \'infrequentabili\' secondo un\'analisi che ridefinisce la geopolitica contemporanea',
@@ -14259,7 +14259,7 @@ description: 'Gli Stati Uniti e Israele tra i paesi \'infrequentabili\' secondo 
 
   'blog-varese-celebra-san-vittore-girometta-oro-2026': {
     title: 'Varese celebra San Vittore con la Girometta d’oro ad Andrea Chiodi',
-description: 'Varese celebra San Vittore con la Girometta d’oro ad Andrea Chiodi, Mera & Longhi e la \'super nonna\' di 102 anni.',
+    description: 'Varese celebra San Vittore con la Girometta d’oro ad Andrea Chiodi, Mera & Longhi e la \'super nonna\' di 102 anni.',
     keywords: 'frontalieri, ticino, svizzera, italia, varese, celebra, vittore, girometta',
     ogTitle: 'Varese celebra San Vittore con la Girometta d’oro ad Andrea Chiodi',
     ogDescription: 'Varese celebra San Vittore con la Girometta d’oro ad Andrea Chiodi, Mera & Longhi e la \'super nonna\' di 102 anni',
@@ -14358,7 +14358,7 @@ description: 'Varese celebra San Vittore con la Girometta d’oro ad Andrea Chio
 
   'blog-bonifici-ritardo-frontalieri-ticino': {
     title: 'Bonifici in ritardo: cosa fare prima di allarmarsi',
-description: 'Scopri cosa fare se il tuo bonifico tra Svizzera e Italia è in ritardo. Guida pratica per i frontalieri con tempi e regole specifiche.',
+    description: 'Scopri cosa fare se il tuo bonifico tra Svizzera e Italia è in ritardo. Guida pratica per i frontalieri con tempi e regole specifiche.',
     keywords: 'frontalieri, ticino, svizzera, italia, bonifici, ritardo, cosa, fare',
     ogTitle: 'Bonifici in ritardo: guida pratica per i frontalieri',
     ogDescription: 'Scopri cosa fare se il tuo bonifico tra Svizzera e Italia è in ritardo. Guida pratica per i frontalieri con tempi e regole specifiche.',
@@ -14424,7 +14424,7 @@ description: 'Scopri cosa fare se il tuo bonifico tra Svizzera e Italia è in ri
 
   'blog-aargau-festnahmen-2-mag-2026': {
     title: 'Due arresti in una notte nell\'Aargau: un tunesino e un marocchino',
-description: 'La polizia cantonale dell\'Aargau ha arrestato due uomini in due diversi comuni nella notte tra venerdì e sabato. Ecco cosa sapere.',
+    description: 'La polizia cantonale dell\'Aargau ha arrestato due uomini in due diversi comuni nella notte tra venerdì e sabato. Ecco cosa sapere.',
     keywords: 'frontalieri, ticino, svizzera, italia, arresti, notte, nell, aargau',
     ogTitle: 'Due arresti in una notte nell\'Aargau: un tunesino e un marocchino',
     ogDescription: 'La polizia cantonale dell\'Aargau ha arrestato due uomini in due diversi comuni nella notte tra venerdì e sabato. Ecco cosa sapere.',
@@ -14457,7 +14457,7 @@ description: 'La polizia cantonale dell\'Aargau ha arrestato due uomini in due d
 
   'blog-gambarogno-contributi-costruzione-ricorrenti': {
     title: 'Gambarogno: vince la battaglia dei cittadini sui contributi di costruzione',
-description: 'Il Tribunale di espropriazione ha deciso sui prelievi per opere di canalizzazione e depurazione a Contone. Ecco cosa cambia.',
+    description: 'Il Tribunale di espropriazione ha deciso sui prelievi per opere di canalizzazione e depurazione a Contone. Ecco cosa cambia.',
     keywords: 'frontalieri, ticino, svizzera, italia, gambarogno, vince, battaglia, cittadini',
     ogTitle: 'Gambarogno: vince la battaglia dei cittadini sui contributi di costruzione',
     ogDescription: 'Il Tribunale di espropriazione ha deciso sui prelievi per opere di canalizzazione e depurazione a Contone. Ecco cosa cambia',
@@ -14556,7 +14556,7 @@ description: 'Il Tribunale di espropriazione ha deciso sui prelievi per opere di
 
   'blog-russotto-bellinzona-frontalieri-2026': {
     title: 'Russotto a Bellinzona: «Una scelta che forse non rifarei»',
-description: 'Andrea Russotto ricorda gli anni in Ticino tra sacrifici familiari e il peso di essere indicato come il nuovo Del Piero.',
+    description: 'Andrea Russotto ricorda gli anni in Ticino tra sacrifici familiari e il peso di essere indicato come il nuovo Del Piero.',
     keywords: 'frontalieri, ticino, svizzera, italia, russotto, bellinzona, scelta, forse',
     ogTitle: 'Russotto a Bellinzona: «Una scelta che forse non rifarei»',
     ogDescription: 'Andrea Russotto ricorda gli anni in Ticino tra sacrifici familiari e il peso di essere indicato come il nuovo Del Piero.',
@@ -14589,7 +14589,7 @@ description: 'Andrea Russotto ricorda gli anni in Ticino tra sacrifici familiari
 
   'blog-democrazia-finisce-quando-ticino': {
     title: 'Quando una democrazia smette di essere tale | Frontaliere Ticino',
-description: 'Esperti discutono i segnali di declino democratico e le sfide nel definirne la fine, con implicazioni per i frontalieri in Ticino.',
+    description: 'Esperti discutono i segnali di declino democratico e le sfide nel definirne la fine, con implicazioni per i frontalieri in Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, quando, democrazia, smette, essere',
     ogTitle: 'Quando una democrazia smette di essere tale',
     ogDescription: 'Esperti discutono i segnali di declino democratico e le sfide nel definirne la fine, con implicazioni per i frontalieri in Ticino.',
@@ -14622,7 +14622,7 @@ description: 'Esperti discutono i segnali di declino democratico e le sfide nel 
 
   'blog-belotti-sport-test-scarpe-trail-running-2026': {
     title: 'Test gratuito di scarpe da trail-running a Monte Verità',
-description: 'Belotti Sport organizza un test gratuito di scarpe da trail-running al Monte Verità di Ascona il 9 maggio 2026. Iscrizioni aperte.',
+    description: 'Belotti Sport organizza un test gratuito di scarpe da trail-running al Monte Verità di Ascona il 9 maggio 2026. Iscrizioni aperte.',
     keywords: 'frontalieri, ticino, svizzera, italia, test, gratuito, scarpe, trail-running',
     ogTitle: 'Test gratuito scarpe trail-running Monte Verità 2026',
     ogDescription: 'Belotti Sport organizza un test gratuito di scarpe da trail-running al Monte Verità di Ascona il 9 maggio 2026. Iscrizioni aperte.',
@@ -14655,7 +14655,7 @@ description: 'Belotti Sport organizza un test gratuito di scarpe da trail-runnin
 
   'blog-pericoli-minori-iniziativa-10-milioni': {
     title: 'Iniziativa 10 milioni: i pericoli per i minori | Frontaliere Ticino',
-description: 'Un\'alleanza di organizzazioni avverte sui rischi per i diritti dei bambini se l\'iniziativa verrà approvata il 14 giugno.',
+    description: 'Un\'alleanza di organizzazioni avverte sui rischi per i diritti dei bambini se l\'iniziativa verrà approvata il 14 giugno.',
     keywords: 'frontalieri, ticino, svizzera, italia, iniziativa, milioni, pericoli, minori',
     ogTitle: 'Iniziativa 10 milioni: i pericoli per i minori',
     ogDescription: 'Un\'alleanza di organizzazioni avverte sui rischi per i diritti dei bambini se l\'iniziativa verrà approvata il 14 giugno',
@@ -14688,7 +14688,7 @@ description: 'Un\'alleanza di organizzazioni avverte sui rischi per i diritti de
 
   'blog-agrinatura-sold-out-2026': {
     title: 'Agrinatura sold out: degustazioni, show cooking e laboratori',
-description: 'Agrinatura 2026 è sold out con laboratori e cooking show. Scopri il programma e i protagonisti della manifestazione.',
+    description: 'Agrinatura 2026 è sold out con laboratori e cooking show. Scopri il programma e i protagonisti della manifestazione.',
     keywords: 'frontalieri, ticino, svizzera, italia, agrinatura, sold, degustazioni, show',
     ogTitle: 'Agrinatura sold out: degustazioni, show cooking e laboratori',
     ogDescription: 'Agrinatura 2026 è sold out con laboratori e cooking show. Scopri il programma e i protagonisti della manifestazione.',
@@ -14853,7 +14853,7 @@ description: 'Agrinatura 2026 è sold out con laboratori e cooking show. Scopri 
 
   'blog-mercato-lavoro-kof-ripresa-2026': {
     title: 'Mercato del lavoro svizzero: KOF conferma la ripresa',
-description: 'Le nuove cifre KOF segnalano una ripresa del mercato del lavoro elvetico, con prospettive positive per i frontalieri.',
+    description: 'Le nuove cifre KOF segnalano una ripresa del mercato del lavoro elvetico, con prospettive positive per i frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, mercato, lavoro, svizzero, conferma',
     ogTitle: 'Mercato del lavoro svizzero: KOF conferma la ripresa',
     ogDescription: 'Le nuove cifre KOF segnalano una ripresa del mercato del lavoro elvetico, con prospettive positive per i frontalieri.',
@@ -14886,7 +14886,7 @@ description: 'Le nuove cifre KOF segnalano una ripresa del mercato del lavoro el
 
   'blog-vendite-auto-ticino-2026-stabili-elettrico': {
     title: 'Vendite auto stabili in Ticino, cresce l\'elettrico',
-description: 'In aprile 2026 vendite auto stabili in Svizzera, elettriche +35%. Focus su impatto frontalieri e mercato ticinese.',
+    description: 'In aprile 2026 vendite auto stabili in Svizzera, elettriche +35%. Focus su impatto frontalieri e mercato ticinese.',
     keywords: 'frontalieri, ticino, svizzera, italia, vendite, auto, stabili, cresce',
     ogTitle: 'Vendite auto stabili in Ticino, cresce l\'elettrico',
     ogDescription: 'In aprile 2026 vendite auto stabili in Svizzera, elettriche +35%. Focus su impatto frontalieri e mercato ticinese.',
@@ -14985,7 +14985,7 @@ description: 'In aprile 2026 vendite auto stabili in Svizzera, elettriche +35%. 
 
   'blog-aeroporto-zurigo-traffico-crescita-2026': {
     title: 'Aeroporto Zurigo: traffico aereo in crescita del 5% ad aprile',
-description: 'Superati i livelli pre-pandemici con 23\'300 movimenti aerei, primo aumento annuale dal 2019. Dati Awp su regole IFR.',
+    description: 'Superati i livelli pre-pandemici con 23\'300 movimenti aerei, primo aumento annuale dal 2019. Dati Awp su regole IFR.',
     keywords: 'frontalieri, ticino, svizzera, italia, aeroporto, zurigo, traffico, aereo',
     ogTitle: 'Aeroporto Zurigo: traffico aereo in crescita del 5% ad aprile',
     ogDescription: 'Superati i livelli pre-pandemici con 23\'300 movimenti aerei, primo aumento annuale dal 2019. Dati Awp su regole IFR.',
@@ -15054,7 +15054,7 @@ description: 'Superati i livelli pre-pandemici con 23\'300 movimenti aerei, prim
     description: 'Scopri i percorsi disponibili alla StraLugano 2026, dalla 5 km alla mezza maratona, con tariffe agevolate per gli Over 65. Dati aggiornati 2026 per frontalieri',
     keywords: 'frontalieri, ticino, svizzera, italia, stralugano, percorsi, tutti, livelli',
     ogTitle: 'StraLugano 2026: percorsi per tutti i livelli',
-ogDescription: 'La StraLugano, che si terrà il 26 e 27 settembre 2026, festeggia la sua 20esima edizione con una varietà di percorsi pensati per adattarsi a diversi livelli di preparazione e obiettivi personali.',
+    ogDescription: 'La StraLugano, che si terrà il 26 e 27 settembre 2026, festeggia la sua 20esima edizione con una varietà di percorsi pensati per adattarsi a diversi livelli di preparazione e obiettivi personali.',
     canonicalPath: '/articoli-frontaliere/stralugano-percorsi-frontalieri-2026/',
     structuredData: {
       "@context": "https://schema.org",
@@ -15084,7 +15084,7 @@ ogDescription: 'La StraLugano, che si terrà il 26 e 27 settembre 2026, festeggi
 
   'blog-camelie-locarno-record-visitatori-2026': {
     title: 'Camelie Locarno 2026: record di visitatori e incassi',
-description: 'L\'edizione 2026 di Camelie Locarno ha registrato 14.000 visitatori e un aumento del 10% degli incassi rispetto al 2022.',
+    description: 'L\'edizione 2026 di Camelie Locarno ha registrato 14.000 visitatori e un aumento del 10% degli incassi rispetto al 2022.',
     keywords: 'frontalieri, ticino, svizzera, italia, camelie, locarno, record, visitatori',
     ogTitle: 'Camelie Locarno 2026: record di visitatori e incassi',
     ogDescription: 'L\'edizione 2026 di Camelie Locarno ha registrato 14.000 visitatori e un aumento del 10% degli incassi rispetto al 2022.',
@@ -15117,7 +15117,7 @@ description: 'L\'edizione 2026 di Camelie Locarno ha registrato 14.000 visitator
 
   'blog-disastri-museo-leventina-gioco-oca': {
     title: 'Al Museo di Leventina i disastri diventano un gioco dell\'oca',
-description: 'Nuova mostra interattiva dal Medioevo a oggi su come le comunità del Ticino hanno affrontato frane, epidemie e incendi.',
+    description: 'Nuova mostra interattiva dal Medioevo a oggi su come le comunità del Ticino hanno affrontato frane, epidemie e incendi.',
     keywords: 'frontalieri, ticino, svizzera, italia, museo, leventina, disastri, diventano',
     ogTitle: 'Al Museo di Leventina i disastri diventano un gioco dell\'oca',
     ogDescription: 'Nuova mostra interattiva dal Medioevo a oggi su come le comunità del Ticino hanno affrontato frane, epidemie e incendi',
@@ -15315,7 +15315,7 @@ description: 'Nuova mostra interattiva dal Medioevo a oggi su come le comunità 
 
   'blog-ponti-primaverili-traffico-2026': {
     title: 'Ponti primaverili: più traffico su strada e rotaia',
-description: 'FFS potenziano l\'offerta con 58 treni speciali e 130.000 posti aggiuntivi. USTRA consiglia alternative per evitare ingorghi.',
+    description: 'FFS potenziano l\'offerta con 58 treni speciali e 130.000 posti aggiuntivi. USTRA consiglia alternative per evitare ingorghi.',
     keywords: 'frontalieri, ticino, svizzera, italia, ponti, primaverili, traffico, strada',
     ogTitle: 'Ponti primaverili: più traffico su strada e rotaia',
     ogDescription: 'FFS potenziano l\'offerta con 58 treni speciali e 130.000 posti aggiuntivi. USTRA consiglia alternative per evitare ingorghi.',
@@ -15381,7 +15381,7 @@ description: 'FFS potenziano l\'offerta con 58 treni speciali e 130.000 posti ag
 
   'blog-bianconeri-corto-muso-2026': {
     title: 'I bianconeri amano il corto muso: quattro vittorie consecutive',
-description: 'I bianconeri del FC Lugano vincono il quarto 1-0 consecutivo, agganciando il San Gallo in seconda posizione nella Super League.',
+    description: 'I bianconeri del FC Lugano vincono il quarto 1-0 consecutivo, agganciando il San Gallo in seconda posizione nella Super League.',
     keywords: 'frontalieri, ticino, svizzera, italia, bianconeri, amano, corto, muso',
     ogTitle: 'I bianconeri amano il corto muso: quattro vittorie consecutive',
     ogDescription: 'I bianconeri del FC Lugano vincono il quarto 1-0 consecutivo, agganciando il San Gallo in seconda posizione nella Super League.',
@@ -15414,7 +15414,7 @@ description: 'I bianconeri del FC Lugano vincono il quarto 1-0 consecutivo, agga
 
   'blog-stangata-nascosta-tasse-immobiliari': {
     title: 'Tasse sugli immobili: il rischio di una stangata nascosta',
-description: 'Famiglie e imprese in allarme per la revisione dei valori di stima immobiliari in Ticino. Ecco cosa cambia e come difendersi.',
+    description: 'Famiglie e imprese in allarme per la revisione dei valori di stima immobiliari in Ticino. Ecco cosa cambia e come difendersi.',
     keywords: 'frontalieri, ticino, svizzera, italia, tasse, sugli, immobili, rischio',
     ogTitle: 'Tasse sugli immobili: il rischio di una stangata nascosta',
     ogDescription: 'Famiglie e imprese in allarme per la revisione dei valori di stima immobiliari in Ticino. Ecco cosa cambia e come difendersi.',
@@ -15447,10 +15447,10 @@ description: 'Famiglie e imprese in allarme per la revisione dei valori di stima
 
   'blog-caro-benzina-varese-accise-2026': {
     title: 'Caro benzina: benzinai varesini tra accise e incertezze',
-description: 'Dopo il ponte del 1° maggio, i distributori di carburante della provincia di Varese si sono trovati a secco.',
+    description: 'Dopo il ponte del 1° maggio, i distributori di carburante della provincia di Varese si sono trovati a secco.',
     keywords: 'frontalieri, ticino, svizzera, italia, caro, benzina, benzinai, varesini',
     ogTitle: 'Caro benzina: benzinai varesini tra accise e incertezze',
-ogDescription: 'Dopo il ponte del 1° maggio, i distributori di carburante della provincia di Varese si sono trovati a secco.',
+    ogDescription: 'Dopo il ponte del 1° maggio, i distributori di carburante della provincia di Varese si sono trovati a secco.',
     canonicalPath: '/articoli-frontaliere/caro-benzina-varese-accise-2026/',
     structuredData: {
       "@context": "https://schema.org",
@@ -15579,10 +15579,10 @@ ogDescription: 'Dopo il ponte del 1° maggio, i distributori di carburante della
 
   'blog-franzolini-fenealuil-piano-casa': {
     title: 'Franzolini (FenealUil): Serve piano strutturale per la casa',
-description: 'Così, ad Adnkronos/Labitalia, Mauro Franzolini, segretario generale della FenealUil, sull\'intervento del governo.',
+    description: 'Così, ad Adnkronos/Labitalia, Mauro Franzolini, segretario generale della FenealUil, sull\'intervento del governo.',
     keywords: 'frontalieri, ticino, svizzera, italia, franzolini, fenealuil, serve, piano',
     ogTitle: 'Franzolini (FenealUil): Piano strutturale casa',
-ogDescription: 'Così, ad Adnkronos/Labitalia, Mauro Franzolini, segretario generale della FenealUil, sull\'intervento del governo.',
+    ogDescription: 'Così, ad Adnkronos/Labitalia, Mauro Franzolini, segretario generale della FenealUil, sull\'intervento del governo.',
     canonicalPath: '/articoli-frontaliere/franzolini-fenealuil-piano-casa/',
     structuredData: {
       "@context": "https://schema.org",
@@ -15612,7 +15612,7 @@ ogDescription: 'Così, ad Adnkronos/Labitalia, Mauro Franzolini, segretario gene
 
   'blog-parco-biumo-inaugurazione-2026': {
     title: 'Inaugurazione parco Biumo: sabato 9 maggio | Frontaliere Ticino',
-description: 'Nuovo parco a Biumo con campo da basket, pingpong e teqball. Inaugurazione sabato 9 maggio alle 15 con tornei e musica.',
+    description: 'Nuovo parco a Biumo con campo da basket, pingpong e teqball. Inaugurazione sabato 9 maggio alle 15 con tornei e musica.',
     keywords: 'frontalieri, ticino, svizzera, italia, inaugurazione, parco, biumo, sabato',
     ogTitle: 'Inaugurazione parco Biumo: sabato 9 maggio',
     ogDescription: 'Nuovo parco a Biumo con campo da basket, pingpong e teqball. Inaugurazione sabato 9 maggio alle 15 con tornei e musica',
@@ -15678,10 +15678,10 @@ description: 'Nuovo parco a Biumo con campo da basket, pingpong e teqball. Inaug
 
   'blog-proposte-cernobbio-2026-tessile': {
     title: 'Proposte 2026 a Cernobbio: mercato tessile da 1,3 miliardi di euro',
-description: 'La fiera Proposte 2026 rappresenta un’occasione unica per i frontalieri che lavorano nel settore tessile e dell’arredamento.',
+    description: 'La fiera Proposte 2026 rappresenta un’occasione unica per i frontalieri che lavorano nel settore tessile e dell’arredamento.',
     keywords: 'frontalieri, ticino, svizzera, italia, proposte, cernobbio, mercato, tessile',
     ogTitle: 'Proposte 2026 a Cernobbio: mercato tessile da 1,3 miliardi di euro',
-ogDescription: 'Tutto pronto per il taglio del nastro della 33ª edizione di Proposte, l’anteprima mondiale del tessuto d’arredamento e del tendaggio, che aprirà i battenti domani, 5 maggio a Villa Erba.',
+    ogDescription: 'Tutto pronto per il taglio del nastro della 33ª edizione di Proposte, l’anteprima mondiale del tessuto d’arredamento e del tendaggio, che aprirà i battenti domani, 5 maggio a Villa Erba.',
     canonicalPath: '/articoli-frontaliere/proposte-cernobbio-2026-tessile/',
     structuredData: {
       "@context": "https://schema.org",
@@ -15777,7 +15777,7 @@ ogDescription: 'Tutto pronto per il taglio del nastro della 33ª edizione di Pro
 
   'blog-mezzo-milione-franchi-progetti-luganese-2026': {
     title: 'Mezzo milione per progetti nel Luganese: come partecipare',
-description: 'L\'Ersl mette a disposizione 500\'000 franchi per progetti nel Luganese. Scopri come richiedere i contributi e i criteri di selezione.',
+    description: 'L\'Ersl mette a disposizione 500\'000 franchi per progetti nel Luganese. Scopri come richiedere i contributi e i criteri di selezione.',
     keywords: 'frontalieri, ticino, svizzera, italia, mezzo, milione, progetti, luganese',
     ogTitle: 'Mezzo milione per progetti nel Luganese: come partecipare',
     ogDescription: 'L\'Ersl mette a disposizione 500\'000 franchi per progetti nel Luganese. Scopri come richiedere i contributi e i criteri di selezione.',
@@ -15942,7 +15942,7 @@ description: 'L\'Ersl mette a disposizione 500\'000 franchi per progetti nel Lug
 
   'blog-parcheggi-blu-como-residenti-difficolta': {
     title: 'Como: posti blu vuoti e residenti in difficoltà a parcheggiare',
-description: 'Residenti di Como segnalano posti blu pieni e difficoltà a trovare parcheggio, nonostante i posti blu non ASA liberi. Cosa fare?.',
+    description: 'Residenti di Como segnalano posti blu pieni e difficoltà a trovare parcheggio, nonostante i posti blu non ASA liberi. Cosa fare?.',
     keywords: 'frontalieri, ticino, svizzera, italia, como, posti, vuoti, residenti',
     ogTitle: 'Como: posti blu vuoti e residenti in difficoltà a parcheggiare',
     ogDescription: 'Residenti di Como segnalano posti blu pieni e difficoltà a trovare parcheggio, nonostante i posti blu non ASA liberi. Cosa fare?',
@@ -15978,7 +15978,7 @@ description: 'Residenti di Como segnalano posti blu pieni e difficoltà a trovar
     description: 'Nuovo presidio di sicurezza alla stazione di Gallarate dal 2027, con operatori attivi 24 ore su 24. Dati aggiornati 2026 per frontalieri in Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, 2027, presidio, security, alla',
     ogTitle: 'Dal 2027 presidio Fs Security a Gallarate',
-ogDescription: 'Dal 2027, la stazione di Gallarate vedrà l\'apertura di un nuovo presidio Fs Security.',
+    ogDescription: 'Dal 2027, la stazione di Gallarate vedrà l\'apertura di un nuovo presidio Fs Security.',
     canonicalPath: '/articoli-frontaliere/gallarate-fs-security-2027/',
     structuredData: {
       "@context": "https://schema.org",
@@ -16008,7 +16008,7 @@ ogDescription: 'Dal 2027, la stazione di Gallarate vedrà l\'apertura di un nuov
 
   'blog-incendio-chiasso-palazzina-evacuati-30': {
     title: 'Incendio a Chiasso: evacuati 30 residenti da una palazzina',
-description: 'Un incendio sul tetto di una palazzina a Chiasso ha portato all\'evacuazione di 30 persone. Due operai sono rimasti leggermente feriti.',
+    description: 'Un incendio sul tetto di una palazzina a Chiasso ha portato all\'evacuazione di 30 persone. Due operai sono rimasti leggermente feriti.',
     keywords: 'frontalieri, ticino, svizzera, italia, incendio, chiasso, evacuati, residenti',
     ogTitle: 'Incendio a Chiasso: evacuati 30 residenti da una palazzina',
     ogDescription: 'Un incendio sul tetto di una palazzina a Chiasso ha portato all\'evacuazione di 30 persone. Due operai sono rimasti leggermente feriti.',
@@ -16107,7 +16107,7 @@ description: 'Un incendio sul tetto di una palazzina a Chiasso ha portato all\'e
 
   'blog-incendio-chiasso-evacuati-trentina-persone': {
     title: 'Incendio sul tetto a Chiasso, evacuati una trentina di persone',
-description: 'Un incendio è scoppiato sul tetto di una palazzina in Piazza Indipendenza a Chiasso, causando l\'evacuazione di circa trenta persone.',
+    description: 'Un incendio è scoppiato sul tetto di una palazzina in Piazza Indipendenza a Chiasso, causando l\'evacuazione di circa trenta persone.',
     keywords: 'frontalieri, ticino, svizzera, italia, incendio, tetto, chiasso, evacuati',
     ogTitle: 'Incendio sul tetto a Chiasso, evacuati una trentina di persone',
     ogDescription: 'Un incendio è scoppiato sul tetto di una palazzina in Piazza Indipendenza a Chiasso, causando l\'evacuazione di circa trenta persone.',
@@ -16140,7 +16140,7 @@ description: 'Un incendio è scoppiato sul tetto di una palazzina in Piazza Indi
 
   'blog-lotta-zanzara-tigre-mendrisio': {
     title: 'Lotta alla zanzara tigre a Mendrisio | Frontaliere Ticino',
-description: 'Mendrisio in prima linea nel 2026 contro la zanzara tigre con un progetto basato sulla tecnica del maschio sterile.',
+    description: 'Mendrisio in prima linea nel 2026 contro la zanzara tigre con un progetto basato sulla tecnica del maschio sterile.',
     keywords: 'frontalieri, ticino, svizzera, italia, lotta, alla, zanzara, tigre',
     ogTitle: 'Lotta alla zanzara tigre a Mendrisio',
     ogDescription: 'Mendrisio in prima linea nel 2026 contro la zanzara tigre con un progetto basato sulla tecnica del maschio sterile',
@@ -16239,7 +16239,7 @@ description: 'Mendrisio in prima linea nel 2026 contro la zanzara tigre con un p
 
   'blog-nuovo-centenario-chiasso-luciano-bordignon': {
     title: 'Luciano Bordignon festeggia 100 anni a Chiasso | Frontaliere Ticino',
-description: 'Il signor Luciano Bordignon ha spento 100 candeline lo scorso 30 aprile, festeggiando con il sindaco Bruno Arrigoni a Chiasso.',
+    description: 'Il signor Luciano Bordignon ha spento 100 candeline lo scorso 30 aprile, festeggiando con il sindaco Bruno Arrigoni a Chiasso.',
     keywords: 'frontalieri, ticino, svizzera, italia, luciano, bordignon, festeggia, anni',
     ogTitle: 'Luciano Bordignon festeggia 100 anni a Chiasso',
     ogDescription: 'Il signor Luciano Bordignon ha spento 100 candeline lo scorso 30 aprile, festeggiando con il sindaco Bruno Arrigoni a Chiasso.',
@@ -16404,7 +16404,7 @@ description: 'Il signor Luciano Bordignon ha spento 100 candeline lo scorso 30 a
 
   'blog-fondazione-cariplo-varese-5-milioni-2025': {
     title: 'Fondazione Cariplo: 5 milioni a Varese per 48 progetti nel 2025',
-description: 'La Fondazione Cariplo ha approvato il bilancio 2025, assegnando quasi 5 milioni di euro a 48 progetti nella provincia di Varese.',
+    description: 'La Fondazione Cariplo ha approvato il bilancio 2025, assegnando quasi 5 milioni di euro a 48 progetti nella provincia di Varese.',
     keywords: 'frontalieri, ticino, svizzera, italia, fondazione, cariplo, milioni, varese',
     ogTitle: 'Fondazione Cariplo: 5 milioni a Varese per 48 progetti nel 2025',
     ogDescription: 'La Fondazione Cariplo ha approvato il bilancio 2025, assegnando quasi 5 milioni di euro a 48 progetti nella provincia di Varese.',
@@ -16503,7 +16503,7 @@ description: 'La Fondazione Cariplo ha approvato il bilancio 2025, assegnando qu
 
   'blog-banca-piazza-petruzzella-abt-2026': {
     title: 'ABT: piazza finanziaria ticinese più solida che mai',
-description: 'Rinnovate le cariche dell\'Associazione Bancaria Ticinese per il triennio 2026-2029. Petruzzella confermato presidente.',
+    description: 'Rinnovate le cariche dell\'Associazione Bancaria Ticinese per il triennio 2026-2029. Petruzzella confermato presidente.',
     keywords: 'frontalieri, ticino, svizzera, italia, piazza, finanziaria, ticinese, solida',
     ogTitle: 'ABT: piazza finanziaria ticinese più solida che mai',
     ogDescription: 'Rinnovate le cariche dell\'Associazione Bancaria Ticinese per il triennio 2026-2029. Petruzzella confermato presidente.',
@@ -16602,7 +16602,7 @@ description: 'Rinnovate le cariche dell\'Associazione Bancaria Ticinese per il t
 
   'blog-autolaghi-chiusura-barriere-antirumore-2026': {
     title: 'Autolaghi: chiusura notturna per lavori alle barriere antirumore',
-description: 'L\'autostrada A8 Milano-Varese sarà chiusa per due notti tra Busto Arsizio e Gallarate verso Varese per lavori alle barriere antirumore.',
+    description: 'L\'autostrada A8 Milano-Varese sarà chiusa per due notti tra Busto Arsizio e Gallarate verso Varese per lavori alle barriere antirumore.',
     keywords: 'frontalieri, ticino, svizzera, italia, autolaghi, chiusura, notturna, lavori',
     ogTitle: 'Autolaghi chiusura barriere antirumore',
     ogDescription: 'L\'autostrada A8 Milano-Varese sarà chiusa per due notti tra Busto Arsizio e Gallarate verso Varese per lavori alle barriere antirumore.',
@@ -16635,7 +16635,7 @@ description: 'L\'autostrada A8 Milano-Varese sarà chiusa per due notti tra Bust
 
   'blog-festa-mamma-solidarieta-2026': {
     title: 'Festa della mamma solidale: buoni per ristoranti a famiglie monoparentali',
-description: 'Soccorso d\'Inverno e GastroTicino regalano buoni per la Festa della mamma a 26 famiglie monoparentali in difficoltà economica.',
+    description: 'Soccorso d\'Inverno e GastroTicino regalano buoni per la Festa della mamma a 26 famiglie monoparentali in difficoltà economica.',
     keywords: 'frontalieri, ticino, svizzera, italia, festa, mamma, solidale, buoni',
     ogTitle: 'Festa della mamma solidale: buoni per ristoranti a famiglie monoparentali',
     ogDescription: 'Soccorso d\'Inverno e GastroTicino regalano buoni per la Festa della mamma a 26 famiglie monoparentali in difficoltà economica',
@@ -16668,7 +16668,7 @@ description: 'Soccorso d\'Inverno e GastroTicino regalano buoni per la Festa del
 
   'blog-a8-chiusure-gallarate-frontalieri': {
     title: 'A8, cambiano le chiusure notturne tra Solbiate Arno e Gallarate',
-description: 'Nuove restrizioni notturne sull\'autostrada A8 tra Solbiate Arno e Gallarate dal 6 al 8 maggio 2026. Ecco cosa cambia per i frontalieri.',
+    description: 'Nuove restrizioni notturne sull\'autostrada A8 tra Solbiate Arno e Gallarate dal 6 al 8 maggio 2026. Ecco cosa cambia per i frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, cambiano, chiusure, notturne, solbiate',
     ogTitle: 'A8, cambiano le chiusure notturne tra Solbiate Arno e Gallarate',
     ogDescription: 'Nuove restrizioni notturne sull\'autostrada A8 tra Solbiate Arno e Gallarate dal 6 al 8 maggio 2026. Ecco cosa cambia per i frontalieri',
@@ -16767,7 +16767,7 @@ description: 'Nuove restrizioni notturne sull\'autostrada A8 tra Solbiate Arno e
 
   'blog-crans-montana-meloni-parmelin-2026': {
     title: 'Crans-Montana, distensione tra Meloni e Parmelin | Frontaliere Ticino',
-description: 'Incontro tra i due leader per risolvere la questione delle spese sanitarie per le vittime italiane dell\'incendio.',
+    description: 'Incontro tra i due leader per risolvere la questione delle spese sanitarie per le vittime italiane dell\'incendio.',
     keywords: 'frontalieri, ticino, svizzera, italia, crans-montana, distensione, meloni, parmelin',
     ogTitle: 'Crans-Montana, distensione tra Meloni e Parmelin',
     ogDescription: 'Incontro tra i due leader per risolvere la questione delle spese sanitarie per le vittime italiane dell\'incendio',
@@ -16833,7 +16833,7 @@ description: 'Incontro tra i due leader per risolvere la questione delle spese s
 
   'blog-buoni-ristorante-mamme-monoparentali-ticino': {
     title: 'Buoni per ristoranti a mamme monoparentali in difficoltà',
-description: 'Soccorso d’inverno Ticino e GastroTicino regalano buoni per ristoranti a 74 persone, tra cui 50 bambini, per la Festa della mamma 2026.',
+    description: 'Soccorso d’inverno Ticino e GastroTicino regalano buoni per ristoranti a 74 persone, tra cui 50 bambini, per la Festa della mamma 2026.',
     keywords: 'frontalieri, ticino, svizzera, italia, buoni, ristoranti, mamme, monoparentali',
     ogTitle: 'Buoni per ristoranti a mamme monoparentali in Ticino',
     ogDescription: 'Soccorso d’inverno Ticino e GastroTicino regalano buoni per ristoranti a 74 persone, tra cui 50 bambini, per la Festa della mamma 2026',
@@ -16866,7 +16866,7 @@ description: 'Soccorso d’inverno Ticino e GastroTicino regalano buoni per rist
 
   'blog-incendio-chiasso-operai-ricoverati': {
     title: 'Incendio a Chiasso: due operai ricoverati dopo un rogo su un tetto',
-description: 'Un incendio causato da fiamme libere ha coinvolto un tetto a Chiasso, con due operai ricoverati in ospedale. Ecco cosa è successo.',
+    description: 'Un incendio causato da fiamme libere ha coinvolto un tetto a Chiasso, con due operai ricoverati in ospedale. Ecco cosa è successo.',
     keywords: 'frontalieri, ticino, svizzera, italia, incendio, chiasso, operai, ricoverati',
     ogTitle: 'Incendio a Chiasso: due operai ricoverati dopo un rogo su un tetto',
     ogDescription: 'Un incendio causato da fiamme libere ha coinvolto un tetto a Chiasso, con due operai ricoverati in ospedale. Ecco cosa è successo.',
@@ -16932,7 +16932,7 @@ description: 'Un incendio causato da fiamme libere ha coinvolto un tetto a Chias
 
   'blog-staffette-rossocrociate-pechino-2027': {
     title: 'Solo una staffetta svizzera qualificata per Pechino 2027',
-description: 'La staffetta 4x100 m mista svizzera si qualifica per i Mondiali di Pechino 2027, mentre le altre squadre svizzere sono state eliminate.',
+    description: 'La staffetta 4x100 m mista svizzera si qualifica per i Mondiali di Pechino 2027, mentre le altre squadre svizzere sono state eliminate.',
     keywords: 'frontalieri, ticino, svizzera, italia, solo, staffetta, qualificata, pechino',
     ogTitle: 'Solo una staffetta svizzera qualificata per Pechino 2027',
     ogDescription: 'La staffetta 4x100 m mista svizzera si qualifica per i Mondiali di Pechino 2027, mentre le altre squadre svizzere sono state eliminate',
@@ -17064,7 +17064,7 @@ description: 'La staffetta 4x100 m mista svizzera si qualifica per i Mondiali di
 
   'blog-neutralizzazione-stime-immobiliari-2026-ticino': {
     title: 'Neutralizzazione stime immobiliari: perché il Ticino vota SÌ',
-description: '430 milioni di franchi annui in gioco: il Ticino decide se adeguare automaticamente le imposte o lasciare la scelta al Gran Consiglio.',
+    description: '430 milioni di franchi annui in gioco: il Ticino decide se adeguare automaticamente le imposte o lasciare la scelta al Gran Consiglio.',
     keywords: 'frontalieri, ticino, svizzera, italia, neutralizzazione, stime, immobiliari, perché',
     ogTitle: 'Neutralizzazione stime immobiliari: perché il Ticino vota SÌ',
     ogDescription: '430 milioni di franchi annui in gioco: il Ticino decide se adeguare automaticamente le imposte o lasciare la scelta al Gran Consiglio',
@@ -17295,7 +17295,7 @@ description: '430 milioni di franchi annui in gioco: il Ticino decide se adeguar
 
   'blog-jashari-milan-bocciatura': {
     title: 'Jashari bocciato all\'esordio con il Milan | Frontaliere Ticino',
-description: 'Critiche dall\'Italia per il rendimento di Jashari, protagonista di un errore costato l\'1-0 al Milan contro il Sassuolo.',
+    description: 'Critiche dall\'Italia per il rendimento di Jashari, protagonista di un errore costato l\'1-0 al Milan contro il Sassuolo.',
     keywords: 'frontalieri, ticino, svizzera, italia, jashari, bocciato, esordio, milan',
     ogTitle: 'Jashari bocciato all\'esordio con il Milan',
     ogDescription: 'Critiche dall\'Italia per il rendimento di Jashari, protagonista di un errore costato l\'1-0 al Milan contro il Sassuolo',
@@ -17361,10 +17361,10 @@ description: 'Critiche dall\'Italia per il rendimento di Jashari, protagonista d
 
   'blog-incendio-chiasso-operai-feriti': {
     title: 'Incendio a Chiasso: operai feriti e evacuati | Frontaliere Ticino',
-description: 'Un incendio sul tetto di una palazzina a Chiasso ha causato feriti e l\'evacuazione di una trentina di persone.',
+    description: 'Un incendio sul tetto di una palazzina a Chiasso ha causato feriti e l\'evacuazione di una trentina di persone.',
     keywords: 'frontalieri, ticino, svizzera, italia, incendio, chiasso, operai, feriti',
     ogTitle: 'Incendio a Chiasso: operai feriti e evacuati',
-ogDescription: 'Un incendio sul tetto di una palazzina a Chiasso ha causato feriti e l\'evacuazione di una trentina di persone.',
+    ogDescription: 'Un incendio sul tetto di una palazzina a Chiasso ha causato feriti e l\'evacuazione di una trentina di persone.',
     canonicalPath: '/articoli-frontaliere/incendio-chiasso-operai-feriti/',
     structuredData: {
       "@context": "https://schema.org",
@@ -17394,7 +17394,7 @@ ogDescription: 'Un incendio sul tetto di una palazzina a Chiasso ha causato feri
 
   'blog-luino-bilancio-2025-avanzo-26-milioni': {
     title: 'Luino chiude il 2025 con un avanzo di 2,6 milioni | Frontaliere Ticino',
-description: 'Il bilancio consuntivo 2025 del Comune di Luino mostra un avanzo di 2,6 milioni di euro, con entrate per oltre 31,5 milioni.',
+    description: 'Il bilancio consuntivo 2025 del Comune di Luino mostra un avanzo di 2,6 milioni di euro, con entrate per oltre 31,5 milioni.',
     keywords: 'frontalieri, ticino, svizzera, italia, luino, chiude, 2025, avanzo',
     ogTitle: 'Luino chiude il 2025 con un avanzo di 2,6 milioni',
     ogDescription: 'Il bilancio consuntivo 2025 del Comune di Luino mostra un avanzo di 2,6 milioni di euro, con entrate per oltre 31,5 milioni.',
@@ -17526,7 +17526,7 @@ description: 'Il bilancio consuntivo 2025 del Comune di Luino mostra un avanzo d
 
   'blog-tangenziale-verde-somma-lombardo-2026': {
     title: 'Inaugurato il Grande Anello Verde di Somma Lombardo: 25 km di natura e storia',
-description: 'Scopri il nuovo Grande Anello Verde di Somma Lombardo, un percorso di 25 km tra natura e storia, inaugurato il 16 maggio 2026.',
+    description: 'Scopri il nuovo Grande Anello Verde di Somma Lombardo, un percorso di 25 km tra natura e storia, inaugurato il 16 maggio 2026.',
     keywords: 'frontalieri, ticino, svizzera, italia, inaugurato, grande, anello, verde',
     ogTitle: 'Inaugurato il Grande Anello Verde di Somma Lombardo: 25 km di natura e storia',
     ogDescription: 'Scopri il nuovo Grande Anello Verde di Somma Lombardo, un percorso di 25 km tra natura e storia, inaugurato il 16 maggio 2026.',
@@ -17823,7 +17823,7 @@ description: 'Scopri il nuovo Grande Anello Verde di Somma Lombardo, un percorso
 
   'blog-asta-villa-geno-como-400mila-euro': {
     title: 'Villa Geno a Como all\'asta: servono quasi 400mila euro',
-description: 'Il Comune di Como mette all\'asta Villa Geno e l\'area verde annessa. La concessione ha un canone annuo di quasi 400mila euro.',
+    description: 'Il Comune di Como mette all\'asta Villa Geno e l\'area verde annessa. La concessione ha un canone annuo di quasi 400mila euro.',
     keywords: 'frontalieri, ticino, svizzera, italia, villa, geno, como, asta',
     ogTitle: 'Villa Geno a Como all\'asta: servono quasi 400mila euro',
     ogDescription: 'Il Comune di Como mette all\'asta Villa Geno e l\'area verde annessa. La concessione ha un canone annuo di quasi 400mila euro.',
@@ -17856,7 +17856,7 @@ description: 'Il Comune di Como mette all\'asta Villa Geno e l\'area verde annes
 
   'blog-mercato-agricolo-besozzo-superiore': {
     title: 'Besozzo Superiore: nasce il mercato agricolo al Parco del Cioss',
-description: 'Dal 9 maggio, Besozzo Superiore ospita un nuovo mercato agricolo bimensile con prodotti locali e filiera corta. Scopri date e dettagli.',
+    description: 'Dal 9 maggio, Besozzo Superiore ospita un nuovo mercato agricolo bimensile con prodotti locali e filiera corta. Scopri date e dettagli.',
     keywords: 'frontalieri, ticino, svizzera, italia, besozzo, superiore, nasce, mercato',
     ogTitle: 'Mercato agricolo a Besozzo Superiore: date e prodotti',
     ogDescription: 'Scopri il nuovo mercato agricolo a Besozzo Superiore con prodotti locali e filiera corta. Date e dettagli.',
@@ -17889,7 +17889,7 @@ description: 'Dal 9 maggio, Besozzo Superiore ospita un nuovo mercato agricolo b
 
   'blog-intelligenza-artificiale-robotica-varese-2026': {
     title: 'Confcommercio: convegno su AI e robotica a Varese | Frontaliere Ticino',
-description: 'L\'intelligenza artificiale e la robotica avanzata entrano nelle PMI, con casi studio di VHIT Spa e opportunità per le aziende varesine.',
+    description: 'L\'intelligenza artificiale e la robotica avanzata entrano nelle PMI, con casi studio di VHIT Spa e opportunità per le aziende varesine.',
     keywords: 'frontalieri, ticino, svizzera, italia, confcommercio, convegno, robotica, varese',
     ogTitle: 'Intelligenza artificiale e robotica in azienda: il convegno di Confcommercio a Varese',
     ogDescription: 'L\'intelligenza artificiale e la robotica avanzata entrano nelle PMI, con casi studio di VHIT Spa e opportunità per le aziende varesine.',
@@ -17922,7 +17922,7 @@ description: 'L\'intelligenza artificiale e la robotica avanzata entrano nelle P
 
   'blog-frontalieri-rifiuti-lac-lemano': {
     title: 'Dal Lemano pescati oltre 2,5 tonnellate di rifiuti in due giorni',
-description: 'L\'iniziativa Net\'Léman ha rimosso 2.592 kg di rifiuti dal lago Lemano in due giorni, coinvolgendo oltre 1.000 volontari.',
+    description: 'L\'iniziativa Net\'Léman ha rimosso 2.592 kg di rifiuti dal lago Lemano in due giorni, coinvolgendo oltre 1.000 volontari.',
     keywords: 'frontalieri, ticino, svizzera, italia, lemano, pescati, oltre, tonnellate',
     ogTitle: 'Dal Lemano pescati oltre 2,5 tonnellate di rifiuti in due giorni',
     ogDescription: 'L\'iniziativa Net\'Léman ha rimosso 2.592 kg di rifiuti dal lago Lemano in due giorni, coinvolgendo oltre 1.000 volontari.',
@@ -17955,7 +17955,7 @@ description: 'L\'iniziativa Net\'Léman ha rimosso 2.592 kg di rifiuti dal lago 
 
   'blog-cazzago-brabbia-camminan-mangiando-2026': {
     title: 'Camminata enogastronomica a Cazzago Brabbia | Frontaliere Ticino',
-description: 'Una passeggiata di 5 km tra sapori locali, eventi culturali e scorci del territorio a Cazzago Brabbia domenica 17 maggio 2026.',
+    description: 'Una passeggiata di 5 km tra sapori locali, eventi culturali e scorci del territorio a Cazzago Brabbia domenica 17 maggio 2026.',
     keywords: 'frontalieri, ticino, svizzera, italia, camminata, enogastronomica, cazzago, brabbia',
     ogTitle: 'Camminan Mangiando a Cazzago Brabbia: gusto, cultura e natura domenica 17 maggio 2026',
     ogDescription: 'Una passeggiata di 5 km tra sapori locali, eventi culturali e scorci del territorio a Cazzago Brabbia domenica 17 maggio 2026.',
@@ -17988,7 +17988,7 @@ description: 'Una passeggiata di 5 km tra sapori locali, eventi culturali e scor
 
   'blog-lot-polish-60-anni-malpensa-varsavia': {
     title: 'Lot Polish Airlines festeggia 60 anni di voli tra Malpensa e Varsavia',
-description: 'LOT Polish Airlines celebra 60 anni di collegamenti tra Milano Malpensa e Varsavia con oltre 2,2 milioni di passeggeri trasportati.',
+    description: 'LOT Polish Airlines celebra 60 anni di collegamenti tra Milano Malpensa e Varsavia con oltre 2,2 milioni di passeggeri trasportati.',
     keywords: 'frontalieri, ticino, svizzera, italia, polish, airlines, festeggia, anni',
     ogTitle: 'Lot Polish Airlines festeggia 60 anni di voli tra Malpensa e Varsavia',
     ogDescription: 'LOT Polish Airlines celebra 60 anni di collegamenti tra Milano Malpensa e Varsavia con oltre 2,2 milioni di passeggeri trasportati',
@@ -18087,7 +18087,7 @@ description: 'LOT Polish Airlines celebra 60 anni di collegamenti tra Milano Mal
 
   'blog-blackdamp-memoria-sacrificio-ed-emigrazione-nuovo-romanzo-storico-lucia-tiziani': {
     title: 'Blackdamp: memoria, sacrificio e emigrazione | Frontaliere Ticino',
-description: 'Il nuovo romanzo storico di Lucia Tiziani, \'Blackdamp\', esplora l\'emigrazione italiana e il sacrificio di Ferdinando Tiziani.',
+    description: 'Il nuovo romanzo storico di Lucia Tiziani, \'Blackdamp\', esplora l\'emigrazione italiana e il sacrificio di Ferdinando Tiziani.',
     keywords: 'frontalieri, ticino, svizzera, italia, blackdamp, memoria, sacrificio, emigrazione',
     ogTitle: 'Blackdamp: memoria, sacrificio ed emigrazione nel nuovo romanzo storico di Lucia Tiziani',
     ogDescription: 'Il nuovo romanzo storico di Lucia Tiziani, \'Blackdamp\', esplora l\'emigrazione italiana e il sacrificio di Ferdinando Tiziani.',
@@ -18153,7 +18153,7 @@ description: 'Il nuovo romanzo storico di Lucia Tiziani, \'Blackdamp\', esplora 
 
   'blog-elicottero-mezzovico-incidente-2026': {
     title: 'Elicottero precipita a Mezzovico: diversi feriti | Frontaliere Ticino',
-description: 'Incidente a Mezzovico-Vira: elicottero privato precipita, diversi feriti. Intervengono pompieri, ambulanze, Rega e Polizia cantonale.',
+    description: 'Incidente a Mezzovico-Vira: elicottero privato precipita, diversi feriti. Intervengono pompieri, ambulanze, Rega e Polizia cantonale.',
     keywords: 'frontalieri, ticino, svizzera, italia, elicottero, precipita, mezzovico, diversi',
     ogTitle: 'Elicottero precipita a Mezzovico: diversi feriti',
     ogDescription: 'Incidente a Mezzovico-Vira: elicottero privato precipita, diversi feriti. Intervengono pompieri, ambulanze, Rega e Polizia cantonale.',
@@ -18186,7 +18186,7 @@ description: 'Incidente a Mezzovico-Vira: elicottero privato precipita, diversi 
 
   'blog-inarzo-festa-oasi-palude-brabbia-2026': {
     title: 'Inarzo: natura, favole e drag queen alla Festa Oasi della Palude Brabbia',
-description: 'Scopri il programma della Festa Oasi della Palude Brabbia 2026 a Inarzo: laboratori, visite guidate e spettacoli per tutte le età.',
+    description: 'Scopri il programma della Festa Oasi della Palude Brabbia 2026 a Inarzo: laboratori, visite guidate e spettacoli per tutte le età.',
     keywords: 'frontalieri, ticino, svizzera, italia, inarzo, natura, favole, drag',
     ogTitle: 'Festa Oasi Palude Brabbia 2026: natura, favole e drag queen a Inarzo',
     ogDescription: 'Scopri il programma della Festa Oasi della Palude Brabbia 2026 a Inarzo: laboratori, visite guidate e spettacoli per tutte le età.',
@@ -18252,7 +18252,7 @@ description: 'Scopri il programma della Festa Oasi della Palude Brabbia 2026 a I
 
   'blog-comanorun-record-801-iscritti': {
     title: 'ComanoRun 2026: record di 801 iscritti e nuovi primati',
-description: 'Scopri i dettagli della sesta edizione della ComanoRun con 801 iscritti e i nuovi primati nelle categorie maschile e femminile.',
+    description: 'Scopri i dettagli della sesta edizione della ComanoRun con 801 iscritti e i nuovi primati nelle categorie maschile e femminile.',
     keywords: 'frontalieri, ticino, svizzera, italia, comanorun, record, iscritti, nuovi',
     ogTitle: 'ComanoRun 2026: record di 801 iscritti e nuovi primati',
     ogDescription: 'Scopri i dettagli della sesta edizione della ComanoRun con 801 iscritti e i nuovi primati nelle categorie maschile e femminile.',
@@ -18285,7 +18285,7 @@ description: 'Scopri i dettagli della sesta edizione della ComanoRun con 801 isc
 
   'blog-comano-run-record-2026': {
     title: 'Comano Run 2026: record di partecipanti e nuovo percorso',
-description: 'Oltre 800 partecipanti alla sesta edizione della Comano Run, con nuovi record nel percorso e nelle categorie giovanili.',
+    description: 'Oltre 800 partecipanti alla sesta edizione della Comano Run, con nuovi record nel percorso e nelle categorie giovanili.',
     keywords: 'frontalieri, ticino, svizzera, italia, comano, record, partecipanti, nuovo',
     ogTitle: 'Comano Run 2026: record di partecipanti e nuovo percorso',
     ogDescription: 'Oltre 800 partecipanti alla sesta edizione della Comano Run, con nuovi record nel percorso e nelle categorie giovanili.',
@@ -18318,7 +18318,7 @@ description: 'Oltre 800 partecipanti alla sesta edizione della Comano Run, con n
 
   'blog-moria-pesci-berneck-2026': {
     title: 'Moria di pesci a Berneck: liquame in torrente | Frontaliere Ticino',
-description: 'Una ventina di pesci morti a causa di liquame in un torrente a Berneck, Canton San Gallo. L\'agricoltore responsabile sarà denunciato.',
+    description: 'Una ventina di pesci morti a causa di liquame in un torrente a Berneck, Canton San Gallo. L\'agricoltore responsabile sarà denunciato.',
     keywords: 'frontalieri, ticino, svizzera, italia, moria, pesci, berneck, liquame',
     ogTitle: 'Moria di pesci a Berneck: liquame in torrente',
     ogDescription: 'Una ventina di pesci morti a causa di liquame in un torrente a Berneck, Canton San Gallo. L\'agricoltore responsabile sarà denunciato.',
@@ -18351,7 +18351,7 @@ description: 'Una ventina di pesci morti a causa di liquame in un torrente a Ber
 
   'blog-festival-meraviglia-laveno-luino-2026': {
     title: 'Festival della Meraviglia: arte, musica e incontri tra Laveno e Luino',
-description: 'Dal 8 al 15 maggio, cinque serate di arte, musica e filosofia con ospiti internazionali. Scopri il programma completo.',
+    description: 'Dal 8 al 15 maggio, cinque serate di arte, musica e filosofia con ospiti internazionali. Scopri il programma completo.',
     keywords: 'frontalieri, ticino, svizzera, italia, festival, meraviglia, arte, musica',
     ogTitle: 'Festival della Meraviglia: arte, musica e incontri tra Laveno e Luino',
     ogDescription: 'Dal 8 al 15 maggio, cinque serate di arte, musica e filosofia con ospiti internazionali. Scopri il programma completo.',
@@ -18417,7 +18417,7 @@ description: 'Dal 8 al 15 maggio, cinque serate di arte, musica e filosofia con 
 
   'blog-udc-cultura-indipendente-spesa-giustificata': {
     title: 'UDC incalza su spesa cultura indipendente: «Giustificata?»',
-description: 'Interpellanza UDC sul finanziamento cantonale per spazi culturali indipendenti. Dubbi su efficacia e sostenibilità finanziaria.',
+    description: 'Interpellanza UDC sul finanziamento cantonale per spazi culturali indipendenti. Dubbi su efficacia e sostenibilità finanziaria.',
     keywords: 'frontalieri, ticino, svizzera, italia, incalza, spesa, cultura, indipendente',
     ogTitle: 'UDC incalza su spesa cultura indipendente: «Giustificata?»',
     ogDescription: 'Interpellanza UDC sul finanziamento cantonale per spazi culturali indipendenti. Dubbi su efficacia e sostenibilità finanziaria',
@@ -18483,7 +18483,7 @@ description: 'Interpellanza UDC sul finanziamento cantonale per spazi culturali 
 
   'blog-svizzera-istruzioni-uso-frontalieri': {
     title: 'Svizzera, istruzioni per l\'uso: cosa cambia per i frontalieri',
-description: 'Scopri le novità che impattano i frontalieri in Ticino, dalla perequazione finanziaria ai tagli universitari, e come affrontarle.',
+    description: 'Scopri le novità che impattano i frontalieri in Ticino, dalla perequazione finanziaria ai tagli universitari, e come affrontarle.',
     keywords: 'frontalieri, ticino, svizzera, italia, istruzioni, cosa, cambia, dalla',
     ogTitle: 'Svizzera, istruzioni per l\'uso: cosa cambia per i frontalieri',
     ogDescription: 'Scopri le novità che impattano i frontalieri in Ticino, dalla perequazione finanziaria ai tagli universitari, e come affrontarle.',
@@ -18516,7 +18516,7 @@ description: 'Scopri le novità che impattano i frontalieri in Ticino, dalla per
 
   'blog-prigioni-ticino-sovraffollate-2026': {
     title: 'Prigioni Ticino sovraffollate: marcato peggioramento',
-description: 'Le strutture carcerarie ticinesi segnalano livelli di occupazione estremamente elevati, con margini di manovra pressoché nulli.',
+    description: 'Le strutture carcerarie ticinesi segnalano livelli di occupazione estremamente elevati, con margini di manovra pressoché nulli.',
     keywords: 'frontalieri, ticino, svizzera, italia, prigioni, sovraffollate, marcato, peggioramento',
     ogTitle: 'Prigioni Ticino sovraffollate: marcato peggioramento',
     ogDescription: 'Le strutture carcerarie ticinesi segnalano livelli di occupazione estremamente elevati, con margini di manovra pressoché nulli.',
@@ -18549,7 +18549,7 @@ description: 'Le strutture carcerarie ticinesi segnalano livelli di occupazione 
 
   'blog-folgorato-stazione-bellinzona-morto-uomo': {
     title: 'Folgorato alla stazione di Bellinzona, morto un uomo',
-description: 'Incidente mortale alla stazione di Bellinzona: un uomo folgorato da una scarica elettrica. Le cause sono in fase di accertamento.',
+    description: 'Incidente mortale alla stazione di Bellinzona: un uomo folgorato da una scarica elettrica. Le cause sono in fase di accertamento.',
     keywords: 'frontalieri, ticino, svizzera, italia, folgorato, alla, stazione, bellinzona',
     ogTitle: 'Folgorato alla stazione di Bellinzona, morto un uomo',
     ogDescription: 'Incidente mortale alla stazione di Bellinzona: un uomo folgorato da una scarica elettrica. Le cause sono in fase di accertamento.',
@@ -18747,7 +18747,7 @@ description: 'Incidente mortale alla stazione di Bellinzona: un uomo folgorato d
 
   'blog-thun-vince-calcio-programmazione': {
     title: 'Thun vince il campionato: la lezione di programmazione per il calcio svizzero',
-description: 'Livio Bordoli commenta la vittoria del Thun: «Hanno dato concretezza alla frase \'lasciamo lavorare l’allenatore\'».',
+    description: 'Livio Bordoli commenta la vittoria del Thun: «Hanno dato concretezza alla frase \'lasciamo lavorare l’allenatore\'».',
     keywords: 'frontalieri, ticino, svizzera, italia, thun, vince, campionato, lezione',
     ogTitle: 'Thun vince il campionato: la lezione di programmazione per il calcio svizzero',
     ogDescription: 'Livio Bordoli commenta la vittoria del Thun: «Hanno dato concretezza alla frase \'lasciamo lavorare l’allenatore\'»',
@@ -18781,7 +18781,7 @@ description: 'Livio Bordoli commenta la vittoria del Thun: «Hanno dato concrete
 
   'blog-cliche-politici-giovani-ticino': {
     title: 'Cliché politici: cosa pensano i giovani di destra e sinistra',
-description: 'I giovani del Ticino hanno idee ben precise su cosa rappresenti la destra e la sinistra, dai vestiti alle abitudini quotidiane.',
+    description: 'I giovani del Ticino hanno idee ben precise su cosa rappresenti la destra e la sinistra, dai vestiti alle abitudini quotidiane.',
     keywords: 'frontalieri, ticino, svizzera, italia, cliché, politici, cosa, pensano',
     ogTitle: 'Cliché politici: cosa pensano i giovani di destra e sinistra',
     ogDescription: 'I giovani del Ticino hanno idee ben precise su cosa rappresenti la destra e la sinistra, dai vestiti alle abitudini quotidiane.',
@@ -18849,7 +18849,7 @@ description: 'I giovani del Ticino hanno idee ben precise su cosa rappresenti la
 
   'blog-questionario-scuole-ticino-2026': {
     title: 'Questionario per allievi e docenti: strumento utile e dissuasivo',
-description: 'Il Decs ha testato un questionario per allievi e docenti in una scuola professionale ticinese per migliorare il benessere scolastico.',
+    description: 'Il Decs ha testato un questionario per allievi e docenti in una scuola professionale ticinese per migliorare il benessere scolastico.',
     keywords: 'frontalieri, ticino, svizzera, italia, questionario, allievi, docenti, strumento',
     ogTitle: 'Questionario scuole Ticino 2026: strumento utile e dissuasivo',
     ogDescription: 'Il Decs ha testato un questionario per allievi e docenti in una scuola professionale ticinese per migliorare il benessere scolastico.',
@@ -18985,7 +18985,7 @@ description: 'Il Decs ha testato un questionario per allievi e docenti in una sc
 
   'blog-inflazione-ticino-aprile-2026': {
     title: 'Inflazione in Svizzera: +0,6% ad aprile 2026 | Frontaliere Ticino',
-description: 'L\'inflazione in Svizzera sale allo 0,6% ad aprile 2026, trainata dai prezzi dei beni importati. Ecco cosa cambia per i frontalieri.',
+    description: 'L\'inflazione in Svizzera sale allo 0,6% ad aprile 2026, trainata dai prezzi dei beni importati. Ecco cosa cambia per i frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, inflazione, aprile, sale, allo',
     ogTitle: 'Inflazione Svizzera: +0,6% ad aprile 2026',
     ogDescription: 'L\'inflazione in Svizzera sale allo 0,6% ad aprile 2026, trainata dai prezzi dei beni importati. Ecco cosa cambia per i frontalieri.',
@@ -19053,7 +19053,7 @@ description: 'L\'inflazione in Svizzera sale allo 0,6% ad aprile 2026, trainata 
 
   'blog-como-tunisino-denunciato-aggressione': {
     title: 'Como: tunisino aggredisce un giovane, si ferisce e si ritrova denunciato',
-description: 'Un cittadino tunisino ha aggredito un giovane a Como, ferendosi e finendo per essere denunciato dalle autorità locali.',
+    description: 'Un cittadino tunisino ha aggredito un giovane a Como, ferendosi e finendo per essere denunciato dalle autorità locali.',
     keywords: 'frontalieri, ticino, svizzera, italia, como, tunisino, aggredisce, giovane',
     ogTitle: 'Como: tunisino aggredisce un giovane, si ferisce e si ritrova denunciato',
     ogDescription: 'Un cittadino tunisino ha aggredito un giovane a Como, ferendosi e finendo per essere denunciato dalle autorità locali.',
@@ -19155,7 +19155,7 @@ description: 'Un cittadino tunisino ha aggredito un giovane a Como, ferendosi e 
 
   'blog-carburante-svizzera-scorte-2026': {
     title: 'Carburante Svizzera: scorte critiche per il cherosene',
-description: 'Le scorte di cherosene in Svizzera coprono solo 72 giorni. Ecco cosa cambia per i frontalieri e come prepararsi alle eventuali carenze.',
+    description: 'Le scorte di cherosene in Svizzera coprono solo 72 giorni. Ecco cosa cambia per i frontalieri e come prepararsi alle eventuali carenze.',
     keywords: 'frontalieri, ticino, svizzera, italia, carburante, scorte, critiche, cherosene',
     ogTitle: 'Carburante Svizzera: scorte critiche per il cherosene',
     ogDescription: 'Le scorte di cherosene in Svizzera coprono solo 72 giorni. Ecco cosa cambia per i frontalieri e come prepararsi alle eventuali carenze.',
@@ -19325,7 +19325,7 @@ description: 'Le scorte di cherosene in Svizzera coprono solo 72 giorni. Ecco co
 
   'blog-benzina-19-euro-5-maggio-2026': {
     title: 'Benzina supera 1,9 euro al litro: prima volta in due anni',
-description: 'Il prezzo della benzina tocca quota 1,926 euro al litro in modalità self service, mentre il gasolio scende leggermente.',
+    description: 'Il prezzo della benzina tocca quota 1,926 euro al litro in modalità self service, mentre il gasolio scende leggermente.',
     keywords: 'frontalieri, ticino, svizzera, italia, benzina, supera, euro, litro',
     ogTitle: 'Benzina supera 1,9 euro al litro: prima volta in due anni',
     ogDescription: 'Il prezzo della benzina tocca quota 1,926 euro al litro in modalità self service, mentre il gasolio scende leggermente.',
@@ -19511,7 +19511,7 @@ description: 'Il prezzo della benzina tocca quota 1,926 euro al litro in modalit
 
   'blog-stagflazione-imprese-varesine-2026': {
     title: 'Stagflazione: allarme per le imprese varesine | Frontaliere Ticino',
-description: 'Le imprese varesine affrontano una fase complessa tra inflazione e rallentamento produttivo. Ecco cosa cambia e come adattarsi.',
+    description: 'Le imprese varesine affrontano una fase complessa tra inflazione e rallentamento produttivo. Ecco cosa cambia e come adattarsi.',
     keywords: 'frontalieri, ticino, svizzera, italia, stagflazione, allarme, imprese, varesine',
     ogTitle: 'Stagflazione: allarme per le imprese varesine',
     ogDescription: 'Le imprese varesine affrontano una fase complessa tra inflazione e rallentamento produttivo. Ecco cosa cambia e come adattarsi',
@@ -19549,7 +19549,7 @@ description: 'Le imprese varesine affrontano una fase complessa tra inflazione e
 
   'blog-permessi-dimora-grigioni-mafie': {
     title: 'Grigioni: Nuove regole sui permessi di dimora dopo infiltrazioni mafiose',
-description: 'Grigioni: stretta sui permessi di dimora dopo infiltrazioni mafiose. Cambiano le regole per richiedenti e aziende.',
+    description: 'Grigioni: stretta sui permessi di dimora dopo infiltrazioni mafiose. Cambiano le regole per richiedenti e aziende.',
     keywords: 'frontalieri, ticino, svizzera, italia, grigioni, nuove, regole, permessi',
     ogTitle: 'Nuove regole permessi Grigioni 2026',
     ogDescription: 'Il Canton Grigioni modifica le regole sui permessi di dimora dopo arresti per infiltrazioni mafiose a Roveredo.',
@@ -19625,7 +19625,7 @@ description: 'Grigioni: stretta sui permessi di dimora dopo infiltrazioni mafios
 
   'blog-campagna-dss-appropriatezza-sanitaria': {
     title: 'DSS lancia campagna per prestazioni sanitarie consapevoli',
-description: 'Il DSS promuove un utilizzo più consapevole delle prestazioni sanitarie con una nuova campagna digitale ispirata a Choosing Wisely.',
+    description: 'Il DSS promuove un utilizzo più consapevole delle prestazioni sanitarie con una nuova campagna digitale ispirata a Choosing Wisely.',
     keywords: 'frontalieri, ticino, svizzera, italia, lancia, campagna, prestazioni, sanitarie',
     ogTitle: 'DSS lancia campagna per prestazioni sanitarie consapevoli',
     ogDescription: 'Il DSS promuove un utilizzo più consapevole delle prestazioni sanitarie con una nuova campagna digitale ispirata a Choosing Wisely',
@@ -19697,7 +19697,7 @@ description: 'Il DSS promuove un utilizzo più consapevole delle prestazioni san
 
   'blog-pasto-vegetale-gratis-ticino-2026': {
     title: 'Un pasto 100% vegetale (gratis) tutto da scoprire a Lugano',
-description: 'Greenpeace offre un pasto vegetale gratuito a Lugano per promuovere un\'alimentazione sostenibile. Scopri i dettagli dell\'iniziativa.',
+    description: 'Greenpeace offre un pasto vegetale gratuito a Lugano per promuovere un\'alimentazione sostenibile. Scopri i dettagli dell\'iniziativa.',
     keywords: 'frontalieri, ticino, svizzera, italia, pasto, vegetale, gratis, tutto',
     ogTitle: 'Un pasto 100% vegetale (gratis) tutto da scoprire a Lugano',
     ogDescription: 'Greenpeace offre un pasto vegetale gratuito a Lugano per promuovere un\'alimentazione sostenibile. Scopri i dettagli dell\'iniziativa.',
@@ -19811,7 +19811,7 @@ description: 'Greenpeace offre un pasto vegetale gratuito a Lugano per promuover
 
   'blog-cornaredo-miliardo-promesse-cemento': {
     title: 'Cornaredo: un miliardo di promesse e un milione di metri cubi di cemento',
-description: 'Discussioni sul rilancio del comparto di Cornaredo a Lugano, con critiche alla densificazione estrema e alle promesse non mantenute.',
+    description: 'Discussioni sul rilancio del comparto di Cornaredo a Lugano, con critiche alla densificazione estrema e alle promesse non mantenute.',
     keywords: 'frontalieri, ticino, svizzera, italia, cornaredo, miliardo, promesse, milione',
     ogTitle: 'Cornaredo: un miliardo di promesse e un milione di metri cubi di cemento',
     ogDescription: 'Discussioni sul rilancio del comparto di Cornaredo a Lugano, con critiche alla densificazione estrema e alle promesse non mantenute',
@@ -19849,7 +19849,7 @@ description: 'Discussioni sul rilancio del comparto di Cornaredo a Lugano, con c
 
   'blog-ladies-run-lugano-chiusure-stradali-2026': {
     title: 'Ladies Run 2026: chiusure stradali a Lugano | Frontaliere Ticino',
-description: 'Modifiche alla viabilità per la manifestazione podistica del 9 maggio 2026. Ecco cosa cambia per automobilisti e frontalieri.',
+    description: 'Modifiche alla viabilità per la manifestazione podistica del 9 maggio 2026. Ecco cosa cambia per automobilisti e frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, ladies, chiusure, stradali, lugano',
     ogTitle: 'Ladies Run 2026: chiusure stradali a Lugano',
     ogDescription: 'Modifiche alla viabilità per la manifestazione podistica del 9 maggio 2026. Ecco cosa cambia per automobilisti e frontalieri',
@@ -19925,7 +19925,7 @@ description: 'Modifiche alla viabilità per la manifestazione podistica del 9 ma
 
   'blog-malpensafiere-hub-imprese-2026': {
     title: 'Focus Day Nuove Imprese 2026 a MalpensaFiere: guida pratica',
-description: 'Giovedì 14 maggio 2026 a MalpensaFiere: assistenza per avviare un\'impresa, focus su agricoltura e home food. Partecipazione gratuita.',
+    description: 'Giovedì 14 maggio 2026 a MalpensaFiere: assistenza per avviare un\'impresa, focus su agricoltura e home food. Partecipazione gratuita.',
     keywords: 'frontalieri, ticino, svizzera, italia, focus, nuove, imprese, malpensafiere',
     ogTitle: 'Focus Day Nuove Imprese 2026 a MalpensaFiere: guida pratica',
     ogDescription: 'Giovedì 14 maggio 2026 a MalpensaFiere: assistenza per avviare un\'impresa, focus su agricoltura e home food. Partecipazione gratuita.',
@@ -20073,7 +20073,7 @@ description: 'Giovedì 14 maggio 2026 a MalpensaFiere: assistenza per avviare un
 
   'blog-iniziativa-caos-comitato-ticino-2026': {
     title: 'Iniziativa del caos: il comitato ticinese si oppone',
-description: 'Il comitato unitario ticinese contro l\'iniziativa \'No a una Svizzera da 10 milioni\' si è riunito per contrastare il progetto.',
+    description: 'Il comitato unitario ticinese contro l\'iniziativa \'No a una Svizzera da 10 milioni\' si è riunito per contrastare il progetto.',
     keywords: 'frontalieri, ticino, svizzera, italia, iniziativa, caos, comitato, ticinese',
     ogTitle: 'Iniziativa del caos: il comitato ticinese si oppone',
     ogDescription: 'Il comitato unitario ticinese contro l\'iniziativa \'No a una Svizzera da 10 milioni\' si è riunito per contrastare il progetto',
@@ -20107,10 +20107,10 @@ description: 'Il comitato unitario ticinese contro l\'iniziativa \'No a una Sviz
 
   'blog-ospedale-zurigo-mancanze-cardiochirurgia': {
     title: 'Ospedale universitario di Zurigo, gravi mancanze in cardiochirurgia',
-description: 'L’Ospedale universitario di Zurigo ha ammesso gravi mancanze nella chirurgia cardiaca degli anni dal 2016 al 2020.',
+    description: 'L’Ospedale universitario di Zurigo ha ammesso gravi mancanze nella chirurgia cardiaca degli anni dal 2016 al 2020.',
     keywords: 'frontalieri, ticino, svizzera, italia, ospedale, universitario, zurigo, gravi',
     ogTitle: 'Ospedale universitario di Zurigo, gravi mancanze in cardiochirurgia',
-ogDescription: 'L’Ospedale universitario di Zurigo ha ammesso gravi mancanze nella chirurgia cardiaca degli anni dal 2016 al 2020. Un rapporto documenta decine di decessi inattesi.',
+    ogDescription: 'L’Ospedale universitario di Zurigo ha ammesso gravi mancanze nella chirurgia cardiaca degli anni dal 2016 al 2020. Un rapporto documenta decine di decessi inattesi.',
     canonicalPath: '/articoli-frontaliere/ospedale-zurigo-mancanze-cardiochirurgia/',
     structuredData: {
       "@context": "https://schema.org",
@@ -20141,7 +20141,7 @@ ogDescription: 'L’Ospedale universitario di Zurigo ha ammesso gravi mancanze n
 
   'blog-libretto-digitale-militare-ticino-2026': {
     title: 'Libretto di servizio digitale: cosa cambia per i militari',
-description: 'Dal 1° giugno 2026 il libretto di servizio diventa digitale. Ecco cosa cambia per i militari e la protezione civile in Svizzera.',
+    description: 'Dal 1° giugno 2026 il libretto di servizio diventa digitale. Ecco cosa cambia per i militari e la protezione civile in Svizzera.',
     keywords: 'frontalieri, ticino, svizzera, italia, libretto, servizio, digitale, cosa',
     ogTitle: 'Libretto di servizio digitale: cosa cambia per i militari',
     ogDescription: 'Dal 1° giugno 2026 il libretto di servizio diventa digitale. Ecco cosa cambia per i militari e la protezione civile in Svizzera.',
@@ -20209,7 +20209,7 @@ description: 'Dal 1° giugno 2026 il libretto di servizio diventa digitale. Ecco
 
   'blog-dipendenti-statali-ticino-soddisfazione-2026': {
     title: 'Dipendenti statali Ticino: dati soddisfazione 2026',
-description: 'Il Comitato ErreDiPi contesta i dati del sondaggio ISMAT 2025 sulla soddisfazione dei dipendenti cantonali del Ticino.',
+    description: 'Il Comitato ErreDiPi contesta i dati del sondaggio ISMAT 2025 sulla soddisfazione dei dipendenti cantonali del Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, dipendenti, statali, dati, soddisfazione',
     ogTitle: 'Dipendenti statali Ticino: dati soddisfazione 2026',
     ogDescription: 'Il Comitato ErreDiPi contesta i dati del sondaggio ISMAT 2025 sulla soddisfazione dei dipendenti cantonali del Ticino',
@@ -20247,7 +20247,7 @@ description: 'Il Comitato ErreDiPi contesta i dati del sondaggio ISMAT 2025 sull
 
   'blog-fitness-ticino-record-2026': {
     title: 'Fitness in Ticino: record 2026, 1 adulto su 5 iscritto',
-description: 'Nel 2025, 1,45 milioni di svizzeri iscritti a centri fitness. Ticino 6° per densità palestre. Giovani 20-29 anni la fascia più attiva.',
+    description: 'Nel 2025, 1,45 milioni di svizzeri iscritti a centri fitness. Ticino 6° per densità palestre. Giovani 20-29 anni la fascia più attiva.',
     keywords: 'frontalieri, ticino, svizzera, italia, fitness, record, adulto, iscritto',
     ogTitle: 'Fitness in Ticino: record 2026, 1 adulto su 5 iscritto',
     ogDescription: 'Nel 2025, 1,45 milioni di svizzeri iscritti a centri fitness. Ticino 6° per densità palestre. Giovani 20-29 anni la fascia più attiva.',
@@ -20285,7 +20285,7 @@ description: 'Nel 2025, 1,45 milioni di svizzeri iscritti a centri fitness. Tici
 
   'blog-education-day-varese-studenti': {
     title: 'Education Day: 300 studenti protagonisti a Varese | Frontaliere Ticino',
-description: 'Oltre 300 studenti delle scuole primarie e secondarie hanno partecipato alla terza edizione dell\'Education Day di Confindustria Varese.',
+    description: 'Oltre 300 studenti delle scuole primarie e secondarie hanno partecipato alla terza edizione dell\'Education Day di Confindustria Varese.',
     keywords: 'frontalieri, ticino, svizzera, italia, education, studenti, protagonisti, varese',
     ogTitle: 'Education Day: 300 studenti protagonisti a Varese',
     ogDescription: 'Oltre 300 studenti delle scuole primarie e secondarie hanno partecipato alla terza edizione dell\'Education Day di Confindustria Varese.',
@@ -20433,10 +20433,10 @@ description: 'Oltre 300 studenti delle scuole primarie e secondarie hanno partec
 
   'blog-incidente-fornasette-2026': {
     title: 'Auto ribaltata al valico di Fornasette: intervento di polizia e soccorritori',
-description: 'Un incidente stradale ha coinvolto un\'auto con targhe italiane al valico di Fornasette, nel territorio comunale di Tresa.',
+    description: 'Un incidente stradale ha coinvolto un\'auto con targhe italiane al valico di Fornasette, nel territorio comunale di Tresa.',
     keywords: 'frontalieri, ticino, svizzera, italia, auto, ribaltata, valico, fornasette',
     ogTitle: 'Auto ribaltata al valico di Fornasette: intervento di polizia e soccorritori',
-ogDescription: 'Un incidente stradale ha coinvolto un\'auto con targhe italiane al valico di Fornasette, nel territorio comunale di Tresa.',
+    ogDescription: 'Un incidente stradale ha coinvolto un\'auto con targhe italiane al valico di Fornasette, nel territorio comunale di Tresa.',
     canonicalPath: '/articoli-frontaliere/incidente-fornasette-2026/',
     structuredData: {
       "@context": "https://schema.org",
@@ -20585,10 +20585,10 @@ ogDescription: 'Un incidente stradale ha coinvolto un\'auto con targhe italiane 
 
   'blog-dipendenti-cantonali-soddisfazione-erre-dipi': {
     title: 'Dipendenti cantonali in Ticino: ErreDiPi richiede analisi più approfondita',
-description: 'Il comitato di ErreDiPi ha proceduto a una prima analisi del rapporto relativo al grado di soddisfazione del personale cantonale.',
+    description: 'Il comitato di ErreDiPi ha proceduto a una prima analisi del rapporto relativo al grado di soddisfazione del personale cantonale.',
     keywords: 'frontalieri, ticino, svizzera, italia, dipendenti, cantonali, erredipi, richiede',
     ogTitle: 'Dipendenti cantonali in Ticino: ErreDiPi richiede analisi più approfondita',
-ogDescription: 'Il comitato di ErreDiPi ha proceduto a una prima analisi del rapporto relativo al grado di soddisfazione del personale cantonale.',
+    ogDescription: 'Il comitato di ErreDiPi ha proceduto a una prima analisi del rapporto relativo al grado di soddisfazione del personale cantonale.',
     canonicalPath: '/articoli-frontaliere/dipendenti-cantonali-soddisfazione-erre-dipi/',
     structuredData: {
       "@context": "https://schema.org",
@@ -20813,7 +20813,7 @@ ogDescription: 'Il comitato di ErreDiPi ha proceduto a una prima analisi del rap
 
   'blog-svizzera-italia-nuova-fase-relazioni': {
     title: 'Svizzera-Italia: nuova fase nelle relazioni dopo Crans-Montana',
-description: 'Guy Parmelin a Roma per discutere delle cure ai feriti italiani. Possibile soluzione con deroga UE. Implicazioni per i frontalieri.',
+    description: 'Guy Parmelin a Roma per discutere delle cure ai feriti italiani. Possibile soluzione con deroga UE. Implicazioni per i frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, svizzera-italia, nuova, fase, nelle',
     ogTitle: 'Nuova fase nelle relazioni Svizzera-Italia dopo Crans-Montana',
     ogDescription: 'Guy Parmelin a Roma per discutere delle cure ai feriti italiani. Possibile soluzione con deroga UE. Implicazioni per i frontalieri.',
@@ -20927,7 +20927,7 @@ description: 'Guy Parmelin a Roma per discutere delle cure ai feriti italiani. P
 
   'blog-mistero-palazzo-como-7-milioni': {
     title: 'Mistero da 7 milioni: chi ha comprato il palazzo comunale di Como?',
-description: 'Dopo 20 giorni dalla vendita, l\'identità dell\'acquirente dell\'ex orfanotrofio di via Tommaso Grossi a Como rimane sconosciuta.',
+    description: 'Dopo 20 giorni dalla vendita, l\'identità dell\'acquirente dell\'ex orfanotrofio di via Tommaso Grossi a Como rimane sconosciuta.',
     keywords: 'frontalieri, ticino, svizzera, italia, mistero, milioni, comprato, palazzo',
     ogTitle: 'Mistero da 7 milioni: chi ha comprato il palazzo comunale di Como?',
     ogDescription: 'Dopo 20 giorni dalla vendita, l\'identità dell\'acquirente dell\'ex orfanotrofio di via Tommaso Grossi a Como rimane sconosciuta.',
@@ -21041,7 +21041,7 @@ description: 'Dopo 20 giorni dalla vendita, l\'identità dell\'acquirente dell\'
 
   'blog-expat-ticino-sventa-truffa-hacker': {
     title: 'Expat ticinese sventa truffa: «Hackerato, ma avevo l\'arma segreta»',
-description: 'Un expat ticinese ha evitato una truffa online grazie a un codice segreto. Scopri come proteggerti dalle truffe online.',
+    description: 'Un expat ticinese ha evitato una truffa online grazie a un codice segreto. Scopri come proteggerti dalle truffe online.',
     keywords: 'frontalieri, ticino, svizzera, italia, expat, ticinese, sventa, truffa',
     ogTitle: 'Expat ticinese sventa truffa: «Hackerato, ma avevo l\'arma segreta»',
     ogDescription: 'Un expat ticinese ha evitato una truffa online grazie a un codice segreto. Scopri come proteggerti dalle truffe online.',
@@ -21155,7 +21155,7 @@ description: 'Un expat ticinese ha evitato una truffa online grazie a un codice 
 
   'blog-incendio-casciago-varese-2026': {
     title: 'Incendio a Casciago, Varese: situazione sotto controllo',
-description: 'Un edificio va a fuoco a Casciago, Varese. La situazione è sotto controllo. Nessun ferito segnalato. Implicazioni per i frontalieri.',
+    description: 'Un edificio va a fuoco a Casciago, Varese. La situazione è sotto controllo. Nessun ferito segnalato. Implicazioni per i frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, incendio, casciago, varese, situazione',
     ogTitle: 'Incendio a Casciago, Varese: situazione sotto controllo',
     ogDescription: 'Un edificio va a fuoco a Casciago, Varese. La situazione è sotto controllo. Nessun ferito segnalato. Implicazioni per i frontalieri.',
@@ -21231,7 +21231,7 @@ description: 'Un edificio va a fuoco a Casciago, Varese. La situazione è sotto 
 
   'blog-incendio-cassano-magnago-sgombero': {
     title: 'Cassano Magnago: balcone in fiamme, sgombero forzato',
-description: 'Un incendio ha colpito un balcone a Cassano Magnago, Varese, costringendo allo sgombero forzato degli abitanti. Ecco cosa sapere.',
+    description: 'Un incendio ha colpito un balcone a Cassano Magnago, Varese, costringendo allo sgombero forzato degli abitanti. Ecco cosa sapere.',
     keywords: 'frontalieri, ticino, svizzera, italia, cassano, magnago, balcone, fiamme',
     ogTitle: 'Cassano Magnago: balcone in fiamme, sgombero forzato',
     ogDescription: 'Un incendio ha colpito un balcone a Cassano Magnago, Varese, costringendo allo sgombero forzato degli abitanti. Ecco cosa sapere.',
@@ -21383,7 +21383,7 @@ description: 'Un incendio ha colpito un balcone a Cassano Magnago, Varese, costr
 
   'blog-agricoltura-precisione-pesticidi-2026': {
     title: 'Agricoltura di precisione: meno pesticidi in Svizzera',
-description: 'Un progetto pilota riduce del 25% l\'uso di pesticidi grazie alla tecnologia. Scopri come cambia l\'agricoltura in Ticino e Grigioni.',
+    description: 'Un progetto pilota riduce del 25% l\'uso di pesticidi grazie alla tecnologia. Scopri come cambia l\'agricoltura in Ticino e Grigioni.',
     keywords: 'frontalieri, ticino, svizzera, italia, agricoltura, precisione, meno, pesticidi',
     ogTitle: 'Agricoltura di precisione: meno pesticidi in Svizzera',
     ogDescription: 'Un progetto pilota riduce del 25% l\'uso di pesticidi grazie alla tecnologia. Scopri come cambia l\'agricoltura in Ticino e Grigioni',
@@ -21421,10 +21421,10 @@ description: 'Un progetto pilota riduce del 25% l\'uso di pesticidi grazie alla 
 
   'blog-hondius-hantavirus-frontalieri': {
     title: 'Hantavirus sulla Hondius: trasmissione uomo-uomo confermata',
-description: 'L\'OMS conferma la trasmissione da uomo a uomo dell\'hantavirus sulla nave da crociera Hondius. Tre morti e cinque casi sospetti.',
+    description: 'L\'OMS conferma la trasmissione da uomo a uomo dell\'hantavirus sulla nave da crociera Hondius. Tre morti e cinque casi sospetti.',
     keywords: 'frontalieri, ticino, svizzera, italia, hantavirus, sulla, hondius, trasmissione',
     ogTitle: 'Hantavirus sulla Hondius: trasmissione uomo-uomo confermata',
-ogDescription: 'L\'OMS conferma la trasmissione da uomo a uomo dell\'hantavirus sulla nave da crociera Hondius. Tre morti e cinque casi sospetti.',
+    ogDescription: 'L\'OMS conferma la trasmissione da uomo a uomo dell\'hantavirus sulla nave da crociera Hondius. Tre morti e cinque casi sospetti.',
     canonicalPath: '/articoli-frontaliere/hondius-hantavirus-frontalieri/',
     structuredData: {
       "@context": "https://schema.org",
@@ -21527,7 +21527,7 @@ ogDescription: 'L\'OMS conferma la trasmissione da uomo a uomo dell\'hantavirus 
 
   'blog-udc-sostenibilita-lavoro-ticino-2026': {
     title: 'UDC: «I lavoratori ticinesi non saranno sacrificati»',
-description: 'Il Comitato cantonale UDC raccomanda il sì all\'iniziativa «No a una Svizzera da 10 milioni» e critica la libera circolazione.',
+    description: 'Il Comitato cantonale UDC raccomanda il sì all\'iniziativa «No a una Svizzera da 10 milioni» e critica la libera circolazione.',
     keywords: 'frontalieri, ticino, svizzera, italia, lavoratori, ticinesi, saranno, sacrificati',
     ogTitle: 'UDC: «I lavoratori ticinesi non saranno sacrificati»',
     ogDescription: 'Il Comitato cantonale UDC raccomanda il sì all\'iniziativa «No a una Svizzera da 10 milioni» e critica la libera circolazione.',
@@ -21565,7 +21565,7 @@ description: 'Il Comitato cantonale UDC raccomanda il sì all\'iniziativa «No a
 
   'blog-a13-lumino-san-vittore-compensazione-ambientale': {
     title: 'A13 Lumino-San Vittore: porte aperte alla compensazione ambientale',
-description: 'Scopri le opere di compensazione ambientale lungo l\'A13 tra Lumino e San Vittore. Visita guidata sabato 9 maggio 2026.',
+    description: 'Scopri le opere di compensazione ambientale lungo l\'A13 tra Lumino e San Vittore. Visita guidata sabato 9 maggio 2026.',
     keywords: 'frontalieri, ticino, svizzera, italia, lumino-san, vittore, porte, aperte',
     ogTitle: 'A13 Lumino-San Vittore: porte aperte alla compensazione ambientale',
     ogDescription: 'Scopri le opere di compensazione ambientale lungo l\'A13 tra Lumino e San Vittore. Visita guidata sabato 9 maggio 2026.',
@@ -21603,7 +21603,7 @@ description: 'Scopri le opere di compensazione ambientale lungo l\'A13 tra Lumin
 
   'blog-divieto-petardi-svizzera-frontalieri': {
     title: 'Divieto petardi Svizzera: cosa cambia per i frontalieri',
-description: 'La Commissione della scienza, educazione e cultura approva il divieto di petardi in Svizzera. Ecco le implicazioni per i frontalieri.',
+    description: 'La Commissione della scienza, educazione e cultura approva il divieto di petardi in Svizzera. Ecco le implicazioni per i frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, divieto, petardi, cosa, cambia',
     ogTitle: 'Divieto petardi Svizzera: cosa cambia per i frontalieri',
     ogDescription: 'La Commissione della scienza, educazione e cultura approva il divieto di petardi in Svizzera. Ecco le implicazioni per i frontalieri',
@@ -21641,7 +21641,7 @@ description: 'La Commissione della scienza, educazione e cultura approva il divi
 
   'blog-salotto-ciani-lugano-2026': {
     title: 'Il Salotto accende l\'Asilo Ciani a Lugano | Frontaliere Ticino',
-description: 'Sabato 9 maggio 2026, l\'Asilo Ciani di Lugano ospita \'Il Salotto\', un evento che unisce arte e musica con giovani artisti locali.',
+    description: 'Sabato 9 maggio 2026, l\'Asilo Ciani di Lugano ospita \'Il Salotto\', un evento che unisce arte e musica con giovani artisti locali.',
     keywords: 'frontalieri, ticino, svizzera, italia, salotto, accende, asilo, ciani',
     ogTitle: 'Il Salotto accende l\'Asilo Ciani a Lugano',
     ogDescription: 'Sabato 9 maggio 2026, l\'Asilo Ciani di Lugano ospita \'Il Salotto\', un evento che unisce arte e musica con giovani artisti locali.',
@@ -21675,7 +21675,7 @@ description: 'Sabato 9 maggio 2026, l\'Asilo Ciani di Lugano ospita \'Il Salotto
 
   'blog-hockey-lugano-nuovi-giocatori-2026': {
     title: 'Hockey Lugano: nuovi giocatori svedesi per la stagione 2026',
-description: 'Scopri i nuovi giocatori dell\'HC Lugano per la stagione 2026: Jere Innala e Olle Lycksell. Tutte le novità e le aspettative.',
+    description: 'Scopri i nuovi giocatori dell\'HC Lugano per la stagione 2026: Jere Innala e Olle Lycksell. Tutte le novità e le aspettative.',
     keywords: 'frontalieri, ticino, svizzera, italia, hockey, lugano, nuovi, giocatori',
     ogTitle: 'Hockey Lugano: nuovi giocatori svedesi 2026',
     ogDescription: 'Scopri i nuovi giocatori dell\'HC Lugano per la stagione 2026: Jere Innala e Olle Lycksell. Tutte le novità e le aspettative.',
@@ -21751,7 +21751,7 @@ description: 'Scopri i nuovi giocatori dell\'HC Lugano per la stagione 2026: Jer
 
   'blog-accesso-dossier-mengele': {
     title: 'Accesso al dossier Mengele: cosa cambia per i frontalieri',
-description: 'Il SIC permette ora la consultazione del dossier Mengele presso l\'Archivio federale, con nuove procedure e condizioni da definire.',
+    description: 'Il SIC permette ora la consultazione del dossier Mengele presso l\'Archivio federale, con nuove procedure e condizioni da definire.',
     keywords: 'frontalieri, ticino, svizzera, italia, accesso, dossier, mengele, cosa',
     ogTitle: 'Accesso al dossier Mengele: novità per i frontalieri',
     ogDescription: 'Il Servizio delle attività informative svizzero consente l\'accesso ai documenti di Mengele presso l\'Archivio federale, con modalità in fase di definizione.',
@@ -21857,7 +21857,7 @@ description: 'Il SIC permette ora la consultazione del dossier Mengele presso l\
 
   'blog-nathan-borradori-ambri-2030': {
     title: 'Nathan Borradori, rinnovo con l\'Ambrì Piotta fino al 2030',
-description: 'L\'attaccante classe 2006 resterà in biancoblù fino al termine della stagione 2029/30 con opzione per un ulteriore anno.',
+    description: 'L\'attaccante classe 2006 resterà in biancoblù fino al termine della stagione 2029/30 con opzione per un ulteriore anno.',
     keywords: 'frontalieri, ticino, svizzera, italia, nathan, borradori, rinnovo, ambrì',
     ogTitle: 'Nathan Borradori rinnova con l\'Ambrì Piotta fino al 2030',
     ogDescription: 'L\'attaccante classe 2006 resterà in biancoblù fino al termine della stagione 2029/30 con opzione per un ulteriore anno',
@@ -21933,7 +21933,7 @@ description: 'L\'attaccante classe 2006 resterà in biancoblù fino al termine d
 
   'blog-dipendenti-cantonali-soddisfazione-2026': {
     title: 'Dipendenti cantonali: dati ISMAT 2025 svelano malcontento',
-description: 'Comitato ErreDiPi critica rapporto ISMAT: solo il 44% vede possibilità di crescita, 55% si sente non riconosciuto.',
+    description: 'Comitato ErreDiPi critica rapporto ISMAT: solo il 44% vede possibilità di crescita, 55% si sente non riconosciuto.',
     keywords: 'frontalieri, ticino, svizzera, italia, dipendenti, cantonali, dati, ismat',
     ogTitle: 'Dipendenti cantonali: dati ISMAT 2025 svelano malcontento',
     ogDescription: 'Comitato ErreDiPi critica rapporto ISMAT: solo il 44% vede possibilità di crescita, 55% si sente non riconosciuto',
@@ -22081,7 +22081,7 @@ description: 'Comitato ErreDiPi critica rapporto ISMAT: solo il 44% vede possibi
 
   'blog-hendsichen-arresto-francese-autodiebstahl': {
     title: 'Hendschiken: arrestato 19enne francese per furto d\'auto e fuga',
-description: 'Un giovane francese di 19 anni è stato arrestato a Hendschiken dopo un furto d\'auto e una fuga. Ecco i dettagli dell\'accaduto.',
+    description: 'Un giovane francese di 19 anni è stato arrestato a Hendschiken dopo un furto d\'auto e una fuga. Ecco i dettagli dell\'accaduto.',
     keywords: 'frontalieri, ticino, svizzera, italia, hendschiken, arrestato, 19enne, francese',
     ogTitle: 'Hendschiken: arrestato 19enne francese per furto d\'auto e fuga',
     ogDescription: 'Un giovane francese di 19 anni è stato arrestato a Hendschiken dopo un furto d\'auto e una fuga. Ecco i dettagli dell\'accaduto.',
@@ -22153,7 +22153,7 @@ description: 'Un giovane francese di 19 anni è stato arrestato a Hendschiken do
 
   'blog-svizzeri-felici-salute-mentale-costi': {
     title: 'Svizzera: salute mentale costa sempre di più | Frontaliere Ticino',
-description: 'Aumento delle spese per la salute mentale in Svizzera, con costi in crescita e maggiori ricorsi alle cure tra i giovani e le donne.',
+    description: 'Aumento delle spese per la salute mentale in Svizzera, con costi in crescita e maggiori ricorsi alle cure tra i giovani e le donne.',
     keywords: 'frontalieri, ticino, svizzera, italia, salute, mentale, costa, sempre',
     ogTitle: 'Svizzera: salute mentale costa sempre di più',
     ogDescription: 'Aumento delle spese per la salute mentale in Svizzera, con costi in crescita e maggiori ricorsi alle cure tra i giovani e le donne.',
@@ -22335,7 +22335,7 @@ description: 'Aumento delle spese per la salute mentale in Svizzera, con costi i
 
   'blog-cure-dentarie-ticino-2026': {
     title: 'Cure dentarie in Ticino: 150 milioni in più, ma senza miglioramenti',
-description: 'Si vota il 14 giugno 2026 sull\'iniziativa per le cure dentarie. Un comitato denuncia un doppio colpo: più prelievi e imposte.',
+    description: 'Si vota il 14 giugno 2026 sull\'iniziativa per le cure dentarie. Un comitato denuncia un doppio colpo: più prelievi e imposte.',
     keywords: 'frontalieri, ticino, svizzera, italia, cure, dentarie, milioni, senza',
     ogTitle: 'Cure dentarie in Ticino: 150 milioni in più, ma senza miglioramenti',
     ogDescription: 'Si vota il 14 giugno 2026 sull\'iniziativa per le cure dentarie. Un comitato denuncia un doppio colpo: più prelievi e imposte',
@@ -22585,7 +22585,7 @@ description: 'Si vota il 14 giugno 2026 sull\'iniziativa per le cure dentarie. U
 
   'blog-estate-chiasso-2026-eventi': {
     title: 'Estate 2026 a Chiasso: un evento al giorno | Frontaliere Ticino',
-description: 'Oltre un centinaio di eventi animeranno l\'estate di Chiasso dal maggio al settembre 2026. Scopri il programma e cosa aspettarti.',
+    description: 'Oltre un centinaio di eventi animeranno l\'estate di Chiasso dal maggio al settembre 2026. Scopri il programma e cosa aspettarti.',
     keywords: 'frontalieri, ticino, svizzera, italia, estate, chiasso, evento, giorno',
     ogTitle: 'Estate 2026 a Chiasso: un evento al giorno',
     ogDescription: 'Oltre un centinaio di eventi animeranno l\'estate di Chiasso dal maggio al settembre 2026. Scopri il programma e cosa aspettarti.',
@@ -22653,7 +22653,7 @@ description: 'Oltre un centinaio di eventi animeranno l\'estate di Chiasso dal m
 
   'blog-negozi-varese-frontalieri-occupazione': {
     title: 'Varese: 1.602 negozi di vicinato persi in 10 anni, ma cresce l\'occupazione',
-description: 'In provincia di Varese, tra il 2015 e il 2025, sono stati persi 1.602 negozi di vicinato, ma l\'occupazione è aumentata del 18,3%.',
+    description: 'In provincia di Varese, tra il 2015 e il 2025, sono stati persi 1.602 negozi di vicinato, ma l\'occupazione è aumentata del 18,3%.',
     keywords: 'frontalieri, ticino, svizzera, italia, varese, negozi, vicinato, persi',
     ogTitle: 'Varese: 1.602 negozi di vicinato persi in 10 anni, ma cresce l\'occupazione',
     ogDescription: 'In provincia di Varese, tra il 2015 e il 2025, sono stati persi 1.602 negozi di vicinato, ma l\'occupazione è aumentata del 18,3%.',
@@ -22691,7 +22691,7 @@ description: 'In provincia di Varese, tra il 2015 e il 2025, sono stati persi 1.
 
   'blog-app-guida-ticino-silicon-valley-2026': {
     title: 'App ticinese per la guida punta alla Silicon Valley',
-description: 'Scopri SteerBudd, l\'app ticinese che punta alla Silicon Valley per ottimizzare le lezioni di guida con GPS e dati di apprendimento.',
+    description: 'Scopri SteerBudd, l\'app ticinese che punta alla Silicon Valley per ottimizzare le lezioni di guida con GPS e dati di apprendimento.',
     keywords: 'frontalieri, ticino, svizzera, italia, ticinese, punta, alla, silicon',
     ogTitle: 'App ticinese per la guida punta alla Silicon Valley',
     ogDescription: 'Scopri SteerBudd, l\'app ticinese che punta alla Silicon Valley per ottimizzare le lezioni di guida con GPS e dati di apprendimento.',
@@ -22729,7 +22729,7 @@ description: 'Scopri SteerBudd, l\'app ticinese che punta alla Silicon Valley pe
 
   'blog-mesolcina-festival-sport-2026': {
     title: 'Torna il festival degli sport all\'aperto in Mesolcina',
-description: 'Dal 9 al 17 maggio 2026, la Mesolcina ospita la sesta edizione di MisoXperience con kayak, bouldering e parapendio.',
+    description: 'Dal 9 al 17 maggio 2026, la Mesolcina ospita la sesta edizione di MisoXperience con kayak, bouldering e parapendio.',
     keywords: 'frontalieri, ticino, svizzera, italia, torna, festival, sport, aperto',
     ogTitle: 'Torna il festival degli sport all\'aperto in Mesolcina',
     ogDescription: 'Dal 9 al 17 maggio 2026, la Mesolcina ospita la sesta edizione di MisoXperience con kayak, bouldering e parapendio.',
@@ -22805,7 +22805,7 @@ description: 'Dal 9 al 17 maggio 2026, la Mesolcina ospita la sesta edizione di 
 
   'blog-negozio-danese-arese-2026': {
     title: 'Arese: apre il nuovo negozio danese Normal con prezzi bassi e caccia al tesoro',
-description: 'Il famoso negozio danese Normal inaugura il suo nuovo store ad Arese con prezzi fissi e un\'esperienza di shopping unica.',
+    description: 'Il famoso negozio danese Normal inaugura il suo nuovo store ad Arese con prezzi fissi e un\'esperienza di shopping unica.',
     keywords: 'frontalieri, ticino, svizzera, italia, arese, apre, nuovo, negozio',
     ogTitle: 'Arese: apre il nuovo negozio danese Normal con prezzi bassi e caccia al tesoro',
     ogDescription: 'Il famoso negozio danese Normal inaugura il suo nuovo store ad Arese con prezzi fissi e un\'esperienza di shopping unica.',
@@ -22915,7 +22915,7 @@ description: 'Il famoso negozio danese Normal inaugura il suo nuovo store ad Are
 
   'blog-primo-maggio-monito-svizzera-10-milioni': {
     title: '1° maggio: migliaia in piazza contro l\'iniziativa UDC',
-description: 'Mobilitazione nazionale per difendere i diritti dei lavoratori e contrastare l\'iniziativa UDC \'No a una Svizzera da 10 milioni!\'.',
+    description: 'Mobilitazione nazionale per difendere i diritti dei lavoratori e contrastare l\'iniziativa UDC \'No a una Svizzera da 10 milioni!\'.',
     keywords: 'frontalieri, ticino, svizzera, italia, maggio, migliaia, piazza, contro',
     ogTitle: '1° maggio: migliaia in piazza contro l\'iniziativa UDC',
     ogDescription: 'Mobilitazione nazionale per difendere i diritti dei lavoratori e contrastare l\'iniziativa UDC \'No a una Svizzera da 10 milioni!\'',
@@ -23017,7 +23017,7 @@ description: 'Mobilitazione nazionale per difendere i diritti dei lavoratori e c
 
   'blog-nomine-meloni-consob-antitrust-2026': {
     title: 'Meloni al vertice su Consob e Antitrust: nomine in gioco',
-description: 'Vertice a Palazzo Chigi per le nomine alle autorità indipendenti. Meloni cerca sintesi tra alleati. Impatto sui frontalieri.',
+    description: 'Vertice a Palazzo Chigi per le nomine alle autorità indipendenti. Meloni cerca sintesi tra alleati. Impatto sui frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, meloni, vertice, consob, antitrust',
     ogTitle: 'Meloni al vertice su Consob e Antitrust: nomine in gioco',
     ogDescription: 'Vertice a Palazzo Chigi per le nomine alle autorità indipendenti. Meloni cerca sintesi tra alleati. Impatto sui frontalieri.',
@@ -23351,10 +23351,10 @@ description: 'Vertice a Palazzo Chigi per le nomine alle autorità indipendenti.
 
   'blog-swissquote-trading-day-lugano-2026': {
     title: 'Swissquote Trading Day a Lugano: esperti e strategie finanziarie',
-description: 'Il 13 maggio al LAC di Lugano, Swissquote organizza il Trading Day con esperti del settore finanziario.',
+    description: 'Il 13 maggio al LAC di Lugano, Swissquote organizza il Trading Day con esperti del settore finanziario.',
     keywords: 'frontalieri, ticino, svizzera, italia, swissquote, trading, lugano, esperti',
     ogTitle: 'Swissquote Trading Day a Lugano: esperti e strategie finanziarie',
-ogDescription: 'Il 13 maggio al LAC di Lugano, Swissquote organizza il Trading Day con esperti del settore finanziario.',
+    ogDescription: 'Il 13 maggio al LAC di Lugano, Swissquote organizza il Trading Day con esperti del settore finanziario.',
     canonicalPath: '/articoli-frontaliere/swissquote-trading-day-lugano-2026/',
     structuredData: {
       "@context": "https://schema.org",
@@ -23389,10 +23389,10 @@ ogDescription: 'Il 13 maggio al LAC di Lugano, Swissquote organizza il Trading D
 
   'blog-liberalizzazione-cannabis-minori-tutelati': {
     title: 'Liberalizzazione cannabis: minori da tutelare «fin dall\'inizio»',
-description: 'È importante comprendere come le nuove normative possano influenzare la vita quotidiana e quali misure sono previste per proteggere i minori.',
+    description: 'È importante comprendere come le nuove normative possano influenzare la vita quotidiana e quali misure sono previste per proteggere i minori.',
     keywords: 'frontalieri, ticino, svizzera, italia, liberalizzazione, cannabis, minori, tutelare',
     ogTitle: 'Liberalizzazione cannabis: minori da tutelare «fin dall\'inizio»',
-ogDescription: 'La Commissione della sanità del Consiglio nazionale svizzero si prepara a esaminare, nella sessione dal 6 all’8 maggio, il progetto di legge sulla liberalizzazione della coltivazione, del commercio e del consumo di cannabis tra gli adulti.',
+    ogDescription: 'La Commissione della sanità del Consiglio nazionale svizzero si prepara a esaminare, nella sessione dal 6 all’8 maggio, il progetto di legge sulla liberalizzazione della coltivazione, del commercio e del consumo di cannabis tra gli adulti.',
     canonicalPath: '/articoli-frontaliere/liberalizzazione-cannabis-minori-tutelati/',
     structuredData: {
       "@context": "https://schema.org",
@@ -23495,7 +23495,7 @@ ogDescription: 'La Commissione della sanità del Consiglio nazionale svizzero si
 
   'blog-roveredo-carnevale-tutti-2026': {
     title: 'Roveredo, iniziativa popolare per un Carnevale accessibile a tutti',
-description: 'Un gruppo di cittadini di Roveredo lancia un\'iniziativa per rendere il Carnevale Lingera più inclusivo e trasparente.',
+    description: 'Un gruppo di cittadini di Roveredo lancia un\'iniziativa per rendere il Carnevale Lingera più inclusivo e trasparente.',
     keywords: 'frontalieri, ticino, svizzera, italia, roveredo, iniziativa, popolare, carnevale',
     ogTitle: 'Roveredo, iniziativa per un Carnevale accessibile a tutti',
     ogDescription: 'Un gruppo di cittadini di Roveredo lancia un\'iniziativa per rendere il Carnevale Lingera più inclusivo e trasparente',
@@ -23529,7 +23529,7 @@ description: 'Un gruppo di cittadini di Roveredo lancia un\'iniziativa per rende
 
   'blog-fnma-recruiting-day-saronno-2026': {
     title: 'FNMA cerca autisti e meccanici: appuntamento il 12 maggio a Saronno',
-description: 'FNMA organizza un Recruiting Day a Saronno il 12 maggio per assumere autisti e meccanici. Colloqui diretti e presentazione aziendale.',
+    description: 'FNMA organizza un Recruiting Day a Saronno il 12 maggio per assumere autisti e meccanici. Colloqui diretti e presentazione aziendale.',
     keywords: 'frontalieri, ticino, svizzera, italia, fnma, cerca, autisti, meccanici',
     ogTitle: 'FNMA cerca autisti e meccanici: appuntamento il 12 maggio a Saronno',
     ogDescription: 'FNMA organizza un Recruiting Day a Saronno il 12 maggio per assumere autisti e meccanici. Colloqui diretti e presentazione aziendale.',
@@ -23605,7 +23605,7 @@ description: 'FNMA organizza un Recruiting Day a Saronno il 12 maggio per assume
 
   'blog-vittima-folgorata-bellinzona-2026': {
     title: 'Vittima folgorata a Bellinzona: chi era il 33enne del Bellinzonese',
-description: 'Un 33enne svizzero del Bellinzonese è la vittima dell\'infortunio mortale alla stazione di Bellinzona. L\'inchiesta è ancora in corso.',
+    description: 'Un 33enne svizzero del Bellinzonese è la vittima dell\'infortunio mortale alla stazione di Bellinzona. L\'inchiesta è ancora in corso.',
     keywords: 'frontalieri, ticino, svizzera, italia, vittima, folgorata, bellinzona, 33enne',
     ogTitle: 'Vittima folgorata a Bellinzona: chi era il 33enne del Bellinzonese',
     ogDescription: 'Un 33enne svizzero del Bellinzonese è la vittima dell\'infortunio mortale alla stazione di Bellinzona. L\'inchiesta è ancora in corso.',
@@ -23753,7 +23753,7 @@ description: 'Un 33enne svizzero del Bellinzonese è la vittima dell\'infortunio
 
   'blog-screening-senologico-45-anni-ticino': {
     title: 'Screening mammografico a 45 anni: cosa cambia in Ticino',
-description: 'Tre società svizzere raccomandano di anticipare lo screening del tumore al seno a 45 anni. Ecco cosa cambia per le donne in Ticino.',
+    description: 'Tre società svizzere raccomandano di anticipare lo screening del tumore al seno a 45 anni. Ecco cosa cambia per le donne in Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, screening, mammografico, anni, cosa',
     ogTitle: 'Screening mammografico a 45 anni in Ticino',
     ogDescription: 'Tre società svizzere raccomandano di anticipare lo screening del tumore al seno a 45 anni. Ecco cosa cambia per le donne in Ticino.',
@@ -23791,7 +23791,7 @@ description: 'Tre società svizzere raccomandano di anticipare lo screening del 
 
   'blog-g7-evian-controlli-frontiere-ticino': {
     title: 'G7 a Evian: più controlli alle frontiere con la Francia',
-description: 'Dal 10 al 19 giugno controlli rafforzati ai valichi con la Francia per il vertice del G7 a Evian-les-Bains. Impatto sui frontalieri.',
+    description: 'Dal 10 al 19 giugno controlli rafforzati ai valichi con la Francia per il vertice del G7 a Evian-les-Bains. Impatto sui frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, evian, controlli, alle, frontiere',
     ogTitle: 'G7 Evian: controlli frontiere Svizzera-Francia dal 10 giugno',
     ogDescription: 'Dal 10 al 19 giugno controlli rafforzati ai valichi con la Francia per il vertice del G7 a Evian-les-Bains. Impatto sui frontalieri',
@@ -23829,7 +23829,7 @@ description: 'Dal 10 al 19 giugno controlli rafforzati ai valichi con la Francia
 
   'blog-menaggio-test-automobilisti-guai': {
     title: 'Menaggio dice no ai test: sei automobilisti nei guai',
-description: 'Sei automobilisti nei guai per rifiuto test a Menaggio, vicino al confine con il Ticino. Implicazioni per i frontalieri.',
+    description: 'Sei automobilisti nei guai per rifiuto test a Menaggio, vicino al confine con il Ticino. Implicazioni per i frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, menaggio, dice, test, automobilisti',
     ogTitle: 'Menaggio dice no ai test: sei automobilisti nei guai',
     ogDescription: 'Sei automobilisti nei guai per rifiuto test a Menaggio, vicino al confine con il Ticino. Implicazioni per i frontalieri.',
@@ -23977,7 +23977,7 @@ description: 'Sei automobilisti nei guai per rifiuto test a Menaggio, vicino al 
 
   'blog-swiss-market-index-entusiasmo-2026': {
     title: 'Swiss Market Index in rialzo: +2.3% a Zurigo | Frontaliere Ticino',
-description: 'Il Swiss Market Index vola a 13\'352 punti circa, con progresso del 2.30%. Podio occupato da Richemont, Amrize e Holcim.',
+    description: 'Il Swiss Market Index vola a 13\'352 punti circa, con progresso del 2.30%. Podio occupato da Richemont, Amrize e Holcim.',
     keywords: 'frontalieri, ticino, svizzera, italia, swiss, market, index, rialzo',
     ogTitle: 'Swiss Market Index in rialzo: +2.3% a Zurigo',
     ogDescription: 'Il Swiss Market Index vola a 13\'352 punti circa, con progresso del 2.30%. Podio occupato da Richemont, Amrize e Holcim.',
@@ -24079,7 +24079,7 @@ description: 'Il Swiss Market Index vola a 13\'352 punti circa, con progresso de
 
   'blog-partita-cornaredo-blocchi-stradali-2026': {
     title: 'Partita a Cornaredo: blocchi stradali e deviazioni previste',
-description: 'Domenica 10 maggio 2026, la partita tra FC Lugano e FC San Gallo causerà blocchi stradali a Cornaredo/Molino Nuovo. Ecco i dettagli.',
+    description: 'Domenica 10 maggio 2026, la partita tra FC Lugano e FC San Gallo causerà blocchi stradali a Cornaredo/Molino Nuovo. Ecco i dettagli.',
     keywords: 'frontalieri, ticino, svizzera, italia, partita, cornaredo, blocchi, stradali',
     ogTitle: 'Partita a Cornaredo: blocchi stradali e deviazioni previste',
     ogDescription: 'Domenica 10 maggio 2026, la partita tra FC Lugano e FC San Gallo causerà blocchi stradali a Cornaredo/Molino Nuovo. Ecco i dettagli.',
@@ -24151,7 +24151,7 @@ description: 'Domenica 10 maggio 2026, la partita tra FC Lugano e FC San Gallo c
 
   'blog-friborgo-hockey-mondiale-2026': {
     title: 'Friborgo vive di hockey come il Ticino: Mondiale 2026 alla BCF Arena',
-description: 'Friborgo ospiterà il Mondiale di hockey 2026 alla BCF Arena. John Gobbi: "80mila persone per la festa del titolo del Gottéron".',
+    description: 'Friborgo ospiterà il Mondiale di hockey 2026 alla BCF Arena. John Gobbi: "80mila persone per la festa del titolo del Gottéron".',
     keywords: 'frontalieri, ticino, svizzera, italia, friborgo, vive, hockey, mondiale',
     ogTitle: 'Friborgo vive di hockey come il Ticino: Mondiale 2026 alla BCF Arena',
     ogDescription: 'Friborgo ospiterà il Mondiale di hockey 2026 alla BCF Arena. John Gobbi: "80mila persone per la festa del titolo del Gottéron"',
@@ -24189,7 +24189,7 @@ description: 'Friborgo ospiterà il Mondiale di hockey 2026 alla BCF Arena. John
 
   'blog-pagare-vittime-crans-montana-2026': {
     title: 'Berna non è d\'accordo sul risarcimento per le vittime di Crans-Montana',
-description: 'La Svizzera valuta di coprire le spese sanitarie per le vittime italiane del rogo di Crans-Montana, ma l\'idea divide a Berna.',
+    description: 'La Svizzera valuta di coprire le spese sanitarie per le vittime italiane del rogo di Crans-Montana, ma l\'idea divide a Berna.',
     keywords: 'frontalieri, ticino, svizzera, italia, berna, accordo, risarcimento, vittime',
     ogTitle: 'Pagare per le vittime italiane di Crans-Montana? A Berna l\'idea non piace a tutti',
     ogDescription: 'La Svizzera valuta di coprire le spese sanitarie per le vittime italiane del rogo di Crans-Montana, ma l\'idea divide a Berna.',
@@ -24265,7 +24265,7 @@ description: 'La Svizzera valuta di coprire le spese sanitarie per le vittime it
 
   'blog-furti-serie-automobili-luganese-arrestato': {
     title: 'Furti in serie in auto: arrestato un 40enne del Luganese',
-description: 'Un 40enne del Luganese è stato arrestato per furti in auto. Scoperti oggetti di dubbia provenienza e migliaia di franchi in contanti.',
+    description: 'Un 40enne del Luganese è stato arrestato per furti in auto. Scoperti oggetti di dubbia provenienza e migliaia di franchi in contanti.',
     keywords: 'frontalieri, ticino, svizzera, italia, furti, serie, auto, arrestato',
     ogTitle: 'Furti in serie in auto: arrestato un 40enne del Luganese',
     ogDescription: 'Un 40enne del Luganese è stato arrestato per furti in auto. Scoperti oggetti di dubbia provenienza e migliaia di franchi in contanti.',
@@ -24303,7 +24303,7 @@ description: 'Un 40enne del Luganese è stato arrestato per furti in auto. Scope
 
   'blog-como-taccheggio-rapina-doppio-arresto': {
     title: 'Como, taccheggio al supermercato si trasforma in rapina: doppio arresto',
-description: 'Due individui sono stati arrestati a Como dopo che un tentativo di taccheggio si è trasformato in rapina con minaccia di arma.',
+    description: 'Due individui sono stati arrestati a Como dopo che un tentativo di taccheggio si è trasformato in rapina con minaccia di arma.',
     keywords: 'frontalieri, ticino, svizzera, italia, como, taccheggio, supermercato, trasforma',
     ogTitle: 'Como, taccheggio al supermercato si trasforma in rapina: doppio arresto',
     ogDescription: 'Due individui sono stati arrestati a Como dopo che un tentativo di taccheggio si è trasformato in rapina con minaccia di arma.',
@@ -24409,7 +24409,7 @@ description: 'Due individui sono stati arrestati a Como dopo che un tentativo di
 
   'blog-centro-pasture-balerna-asilo': {
     title: 'Nessun esperimento con richiedenti asilo problematici a Pasture',
-description: 'La mozione Marchesi-Fonio-Gianini richiede il consenso di Cantone e Comuni per progetti pilota della SEM a Balerna.',
+    description: 'La mozione Marchesi-Fonio-Gianini richiede il consenso di Cantone e Comuni per progetti pilota della SEM a Balerna.',
     keywords: 'frontalieri, ticino, svizzera, italia, nessun, esperimento, richiedenti, asilo',
     ogTitle: 'Nessun esperimento con richiedenti asilo problematici a Pasture',
     ogDescription: 'La mozione Marchesi-Fonio-Gianini richiede il consenso di Cantone e Comuni per progetti pilota della SEM a Balerna.',
@@ -24443,7 +24443,7 @@ description: 'La mozione Marchesi-Fonio-Gianini richiede il consenso di Cantone 
 
   'blog-300-persone-pasto-vegetale-lugano-2026': {
     title: '300 persone in fila per un pasto vegetale a Lugano',
-description: 'Un\'iniziativa di Greenpeace Svizzera per promuovere un\'alimentazione sostenibile. 300 bowl vegetali servite al Campus Est USI-SUPSI.',
+    description: 'Un\'iniziativa di Greenpeace Svizzera per promuovere un\'alimentazione sostenibile. 300 bowl vegetali servite al Campus Est USI-SUPSI.',
     keywords: 'frontalieri, ticino, svizzera, italia, persone, fila, pasto, vegetale',
     ogTitle: '300 persone in fila per un pasto vegetale a Lugano',
     ogDescription: 'Un\'iniziativa di Greenpeace Svizzera per promuovere un\'alimentazione sostenibile. 300 bowl vegetali servite al Campus Est USI-SUPSI.',
@@ -24481,7 +24481,7 @@ description: 'Un\'iniziativa di Greenpeace Svizzera per promuovere un\'alimentaz
 
   'blog-svizzera-treno-multa-20000-franchi': {
     title: 'Svizzera, 20mila franchi di multa per un viaggio senza biglietto',
-description: 'Un uomo di 40 anni del Canton Svitto è stato condannato a 20mila franchi per aver viaggiato senza biglietto e falsificato documenti.',
+    description: 'Un uomo di 40 anni del Canton Svitto è stato condannato a 20mila franchi per aver viaggiato senza biglietto e falsificato documenti.',
     keywords: 'frontalieri, ticino, svizzera, italia, 20mila, franchi, multa, viaggio',
     ogTitle: 'Svizzera, 20mila franchi di multa per viaggio senza biglietto',
     ogDescription: 'Un uomo di 40 anni del Canton Svitto è stato condannato a 20mila franchi per aver viaggiato senza biglietto e falsificato documenti.',
@@ -24519,10 +24519,10 @@ description: 'Un uomo di 40 anni del Canton Svitto è stato condannato a 20mila 
 
   'blog-decreto-lavoro-coldiretti-varese-2026': {
     title: 'Decreto Lavoro, Coldiretti Varese: misure per la stabilità dell\'occupazione',
-description: 'L\'attenzione di Coldiretti è rivolta in particolare alla stabilità dei rapporti lavorativi e alla qualità dell\'impiego nel comparto primario.',
+    description: 'L\'attenzione di Coldiretti è rivolta in particolare alla stabilità dei rapporti lavorativi e alla qualità dell\'impiego nel comparto primario.',
     keywords: 'frontalieri, ticino, svizzera, italia, decreto, lavoro, coldiretti, varese',
     ogTitle: 'Decreto Lavoro, Coldiretti Varese: misure per la stabilità dell\'occupazione',
-ogDescription: 'Coldiretti Varese ha espresso apprezzamento per il percorso avviato dal Governo con il Decreto Lavoro, considerando le misure adottate un passo importante per rafforzare la stabilità e la qualità dell\'occupazione nel settore agricolo.',
+    ogDescription: 'Coldiretti Varese ha espresso apprezzamento per il percorso avviato dal Governo con il Decreto Lavoro, considerando le misure adottate un passo importante per rafforzare la stabilità e la qualità dell\'occupazione nel settore agricolo.',
     canonicalPath: '/articoli-frontaliere/decreto-lavoro-coldiretti-varese-2026/',
     structuredData: {
       "@context": "https://schema.org",
@@ -24557,10 +24557,10 @@ ogDescription: 'Coldiretti Varese ha espresso apprezzamento per il percorso avvi
 
   'blog-swiss-300-uscite-volontarie-2026': {
     title: 'Swiss elimina 300 posti di lavoro con uscite volontarie',
-description: 'Swiss ha annunciato l\'eliminazione di 300 posti di lavoro nel personale di cabina attraverso un programma di uscite volontarie.',
+    description: 'Swiss ha annunciato l\'eliminazione di 300 posti di lavoro nel personale di cabina attraverso un programma di uscite volontarie.',
     keywords: 'frontalieri, ticino, svizzera, italia, swiss, elimina, posti, lavoro',
     ogTitle: 'Swiss elimina 300 posti di lavoro con uscite volontarie',
-ogDescription: 'Swiss ha annunciato l\'eliminazione di 300 posti di lavoro nel personale di cabina attraverso un programma di uscite volontarie. La compagnia aerea ha offerto incentivi economici per favorire le partenze senza ricorrere a licenziamenti.',
+    ogDescription: 'Swiss ha annunciato l\'eliminazione di 300 posti di lavoro nel personale di cabina attraverso un programma di uscite volontarie. La compagnia aerea ha offerto incentivi economici per favorire le partenze senza ricorrere a licenziamenti.',
     canonicalPath: '/articoli-frontaliere/swiss-300-uscite-volontarie-2026/',
     structuredData: {
       "@context": "https://schema.org",
@@ -24671,7 +24671,7 @@ ogDescription: 'Swiss ha annunciato l\'eliminazione di 300 posti di lavoro nel p
 
   'blog-siss-problemi-lombardia-frontalieri': {
     title: 'SISS Lombardia: Astuti denuncia problemi cronici e inazione',
-description: 'Il consigliere regionale PD Samuele Astuti attacca la giunta lombarda per i malfunzionamenti del sistema informativo socio-sanitario.',
+    description: 'Il consigliere regionale PD Samuele Astuti attacca la giunta lombarda per i malfunzionamenti del sistema informativo socio-sanitario.',
     keywords: 'frontalieri, ticino, svizzera, italia, siss, lombardia, astuti, denuncia',
     ogTitle: 'SISS Lombardia: Astuti denuncia problemi cronici e inazione',
     ogDescription: 'Il consigliere regionale PD Samuele Astuti attacca la giunta lombarda per i malfunzionamenti del sistema informativo socio-sanitario',
@@ -24743,7 +24743,7 @@ description: 'Il consigliere regionale PD Samuele Astuti attacca la giunta lomba
 
   'blog-poliani-digital-innovation-hub-2026': {
     title: 'Poliani riconfermato al Digital Innovation Hub',
-description: 'L\'imprenditore guiderà l\'organismo per il triennio 2026-2028 con l\'obiettivo di accompagnare le PMI verso l\'intelligenza artificiale.',
+    description: 'L\'imprenditore guiderà l\'organismo per il triennio 2026-2028 con l\'obiettivo di accompagnare le PMI verso l\'intelligenza artificiale.',
     keywords: 'frontalieri, ticino, svizzera, italia, poliani, riconfermato, digital, innovation',
     ogTitle: 'Stefano Poliani riconfermato alla guida del Digital Innovation Hub di Confindustria Lombardia',
     ogDescription: 'L\'imprenditore guiderà l\'organismo per il triennio 2026-2028 con l\'obiettivo di accompagnare le PMI verso l\'intelligenza artificiale',
@@ -24853,7 +24853,7 @@ description: 'L\'imprenditore guiderà l\'organismo per il triennio 2026-2028 co
 
   'blog-assegni-figli-frontalieri-2026': {
     title: 'Assegni figli frontalieri: problemi con l\'INPS ma i pagamenti continuano',
-description: 'Il Consiglio federale respinge la proposta di Lorenzo Quadri di sospendere i versamenti agli italiani che lavorano in Ticino.',
+    description: 'Il Consiglio federale respinge la proposta di Lorenzo Quadri di sospendere i versamenti agli italiani che lavorano in Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, assegni, figli, problemi, inps',
     ogTitle: 'Assegni figli frontalieri: problemi con l\'INPS ma i pagamenti continuano',
     ogDescription: 'Il Consiglio federale respinge la proposta di Lorenzo Quadri di sospendere i versamenti agli italiani che lavorano in Ticino.',
@@ -24929,7 +24929,7 @@ description: 'Il Consiglio federale respinge la proposta di Lorenzo Quadri di so
 
   'blog-ladro-seriale-ticino-arresto-carte-credito': {
     title: 'Ladro seriale dal Luganese all\'intero Ticino: incastrato dalle carte di credito',
-description: 'Un ladro seriale attivo tra Lugano e Bellinzona è stato arrestato grazie alle carte di credito rubate. Ecco i dettagli dell\'operazione.',
+    description: 'Un ladro seriale attivo tra Lugano e Bellinzona è stato arrestato grazie alle carte di credito rubate. Ecco i dettagli dell\'operazione.',
     keywords: 'frontalieri, ticino, svizzera, italia, ladro, seriale, luganese, intero',
     ogTitle: 'Ladro seriale dal Luganese all\'intero Ticino: incastrato dalle carte di credito',
     ogDescription: 'Un ladro seriale attivo tra Lugano e Bellinzona è stato arrestato grazie alle carte di credito rubate. Ecco i dettagli dell\'operazione.',
@@ -24967,10 +24967,10 @@ description: 'Un ladro seriale attivo tra Lugano e Bellinzona è stato arrestato
 
   'blog-varese-solidale-convegno-poverta-sanitaria-alimentare-2026': {
     title: 'Varese Solidale: convegno sulla povertà sanitaria e alimentare',
-description: 'Varese Solidale presenta il convegno sulla povertà sanitaria e alimentare il 15 maggio 2026.',
+    description: 'Varese Solidale presenta il convegno sulla povertà sanitaria e alimentare il 15 maggio 2026.',
     keywords: 'frontalieri, ticino, svizzera, italia, varese, solidale, convegno, sulla',
     ogTitle: 'Varese Solidale: convegno povertà sanitaria e alimentare 2026',
-ogDescription: 'Varese Solidale presenta il convegno sulla povertà sanitaria e alimentare il 15 maggio 2026.',
+    ogDescription: 'Varese Solidale presenta il convegno sulla povertà sanitaria e alimentare il 15 maggio 2026.',
     canonicalPath: '/articoli-frontaliere/varese-solidale-convegno-poverta-sanitaria-alimentare-2026/',
     structuredData: {
       "@context": "https://schema.org",
@@ -25035,7 +25035,7 @@ ogDescription: 'Varese Solidale presenta il convegno sulla povertà sanitaria e 
 
   'blog-immigrazione-svizzera-invecchiamento-2026': {
     title: 'Senza immigrazione, la Svizzera invecchierebbe rapidamente',
-description: 'L\'immigrazione rallenta l\'invecchiamento demografico della Svizzera, con effetti diretti su AVS e premi assicurativi.',
+    description: 'L\'immigrazione rallenta l\'invecchiamento demografico della Svizzera, con effetti diretti su AVS e premi assicurativi.',
     keywords: 'frontalieri, ticino, svizzera, italia, senza, immigrazione, invecchierebbe, rapidamente',
     ogTitle: 'Senza immigrazione, la Svizzera invecchierebbe rapidamente',
     ogDescription: 'L\'immigrazione rallenta l\'invecchiamento demografico della Svizzera, con effetti diretti su AVS e premi assicurativi',
@@ -25221,7 +25221,7 @@ description: 'L\'immigrazione rallenta l\'invecchiamento demografico della Svizz
 
   'blog-tuberkulose-caso-saint-maurice-2024': {
     title: 'Tuberkulosefall an Primarschule in Saint-Maurice',
-description: 'Un caso di tubercolosi segnalato in una scuola primaria a Saint-Maurice, Canton Vallese. Le autorità sanitarie intervengono.',
+    description: 'Un caso di tubercolosi segnalato in una scuola primaria a Saint-Maurice, Canton Vallese. Le autorità sanitarie intervengono.',
     keywords: 'frontalieri, ticino, svizzera, italia, tuberkulosefall, primarschule, saint-maurice, caso',
     ogTitle: 'Tuberkulosefall an Primarschule in Saint-Maurice',
     ogDescription: 'Un caso di tubercolosi segnalato in una scuola primaria a Saint-Maurice, Canton Vallese. Le autorità sanitarie intervengono.',
@@ -25327,7 +25327,7 @@ description: 'Un caso di tubercolosi segnalato in una scuola primaria a Saint-Ma
 
   'blog-chiasso-valore-economico-aggregazione': {
     title: 'Chiasso rivaluta il suo valore economico con l\'aggregazione',
-description: 'L\'operazione contabile straordinaria restituisce un risultato positivo da 23 milioni, ma l\'ordinario resta nelle cifre rosse.',
+    description: 'L\'operazione contabile straordinaria restituisce un risultato positivo da 23 milioni, ma l\'ordinario resta nelle cifre rosse.',
     keywords: 'frontalieri, ticino, svizzera, italia, chiasso, rivaluta, valore, economico',
     ogTitle: 'Chiasso rivaluta il suo valore economico con l\'aggregazione',
     ogDescription: 'L\'operazione contabile straordinaria restituisce un risultato positivo da 23 milioni, ma l\'ordinario resta nelle cifre rosse.',
@@ -25361,7 +25361,7 @@ description: 'L\'operazione contabile straordinaria restituisce un risultato pos
 
   'blog-governance-partecipativa-ssn-2026': {
     title: 'Governance partecipativa, presentato consensus paper per Ssn equo e sostenibile',
-description: 'Presentato al Senato il Consensus Paper per una sanità partecipata, equa e sostenibile. Coinvolgimento attivo di cittadini e pazienti.',
+    description: 'Presentato al Senato il Consensus Paper per una sanità partecipata, equa e sostenibile. Coinvolgimento attivo di cittadini e pazienti.',
     keywords: 'frontalieri, ticino, svizzera, italia, governance, partecipativa, presentato, consensus',
     ogTitle: 'Governance partecipativa, presentato consensus paper per Ssn equo e sostenibile',
     ogDescription: 'Presentato al Senato il Consensus Paper per una sanità partecipata, equa e sostenibile. Coinvolgimento attivo di cittadini e pazienti.',
@@ -25437,7 +25437,7 @@ description: 'Presentato al Senato il Consensus Paper per una sanità partecipat
 
   'blog-hantavirus-crociera-isolamento': {
     title: 'Hantavirus: isolamento per contenere l\'epidemia',
-description: 'Pietro Antonini, consulente malattie infettive, spiega come si trasmette l\'hantavirus e quali misure adottare per contenerlo.',
+    description: 'Pietro Antonini, consulente malattie infettive, spiega come si trasmette l\'hantavirus e quali misure adottare per contenerlo.',
     keywords: 'frontalieri, ticino, svizzera, italia, hantavirus, isolamento, contenere, epidemia',
     ogTitle: 'Hantavirus: isolamento per contenere l\'epidemia',
     ogDescription: 'Pietro Antonini, consulente malattie infettive, spiega come si trasmette l\'hantavirus e quali misure adottare per contenerlo.',
@@ -25551,10 +25551,10 @@ description: 'Pietro Antonini, consulente malattie infettive, spiega come si tra
 
   'blog-contrabbandiera-ciclostorica-2026': {
     title: 'La Contrabbandiera 2026: ciclismo vintage tra Italia e Svizzera',
-description: 'L\'evento offre un\'opportunità unica per socializzare e fare networking con altri appassionati di ciclismo e mobilità vintage.',
+    description: 'L\'evento offre un\'opportunità unica per socializzare e fare networking con altri appassionati di ciclismo e mobilità vintage.',
     keywords: 'frontalieri, ticino, svizzera, italia, contrabbandiera, ciclismo, vintage, domenica',
     ogTitle: 'La Contrabbandiera 2026: ciclismo vintage tra Italia e Svizzera',
-ogDescription: 'L\'evento non solo celebra la passione per il ciclismo d\'epoca, ma offre anche un\'occasione per esplorare i paesaggi di confine, spesso trascurati nella vita quotidiana.',
+    ogDescription: 'L\'evento non solo celebra la passione per il ciclismo d\'epoca, ma offre anche un\'occasione per esplorare i paesaggi di confine, spesso trascurati nella vita quotidiana.',
     canonicalPath: '/articoli-frontaliere/contrabbandiera-ciclostorica-2026/',
     structuredData: {
       "@context": "https://schema.org",
@@ -25691,7 +25691,7 @@ ogDescription: 'L\'evento non solo celebra la passione per il ciclismo d\'epoca,
 
   'blog-quartiere-gera-iragna-pianificazione': {
     title: 'Nuovo quartiere Gera a Iragna: pianificazione conforme alle normative',
-description: 'Il Municipio di Riviera conferma che la pianificazione del nuovo quartiere Gera a Iragna rispetta i valori limite di elettromagnetismo.',
+    description: 'Il Municipio di Riviera conferma che la pianificazione del nuovo quartiere Gera a Iragna rispetta i valori limite di elettromagnetismo.',
     keywords: 'frontalieri, ticino, svizzera, italia, nuovo, quartiere, gera, iragna',
     ogTitle: 'Nuovo quartiere Gera a Iragna: pianificazione conforme alle normative',
     ogDescription: 'Il Municipio di Riviera conferma che la pianificazione del nuovo quartiere Gera a Iragna rispetta i valori limite di elettromagnetismo.',
@@ -25873,7 +25873,7 @@ description: 'Il Municipio di Riviera conferma che la pianificazione del nuovo q
 
   'blog-natura-tavola-cucina-vegetale-lugano-2024': {
     title: 'Natura a tavola: cucina vegetale a Lugano con Greenpeace',
-description: 'Greenpeace Svizzera promuove un\'iniziativa di cucina vegetale a Lugano con un pasto gratuito per 300 persone.',
+    description: 'Greenpeace Svizzera promuove un\'iniziativa di cucina vegetale a Lugano con un pasto gratuito per 300 persone.',
     keywords: 'frontalieri, ticino, svizzera, italia, natura, tavola, cucina, vegetale',
     ogTitle: 'Natura a tavola: cucina vegetale a Lugano con Greenpeace',
     ogDescription: 'Greenpeace Svizzera promuove un\'iniziativa di cucina vegetale a Lugano con un pasto gratuito per 300 persone.',
@@ -25911,7 +25911,7 @@ description: 'Greenpeace Svizzera promuove un\'iniziativa di cucina vegetale a L
 
   'blog-cambiamenti-commissione-magistrati-ticino-2026': {
     title: 'Cambio vertici commissione magistrati Ticino | Frontaliere Ticino',
-description: 'Emanuela Colombo Epiney si dimette. Il Gran Consiglio nominerà il successore. Luca Marazzi proposto come nuovo membro.',
+    description: 'Emanuela Colombo Epiney si dimette. Il Gran Consiglio nominerà il successore. Luca Marazzi proposto come nuovo membro.',
     keywords: 'frontalieri, ticino, svizzera, italia, cambio, vertici, commissione, magistrati',
     ogTitle: 'Cambio vertici commissione magistrati Ticino',
     ogDescription: 'Emanuela Colombo Epiney si dimette. Il Gran Consiglio nominerà il successore. Luca Marazzi proposto come nuovo membro.',
@@ -26021,7 +26021,7 @@ description: 'Emanuela Colombo Epiney si dimette. Il Gran Consiglio nominerà il
 
   'blog-due-ticinesi-guardie-svizzere-2026': {
     title: 'Due ticinesi tra le nuove Guardie Svizzere | Frontaliere Ticino',
-description: 'Davide Iannalfo e Mattia Canonica giurano come Guardie Svizzere Pontificie. Il Ticino è il secondo cantone per numero di guardie.',
+    description: 'Davide Iannalfo e Mattia Canonica giurano come Guardie Svizzere Pontificie. Il Ticino è il secondo cantone per numero di guardie.',
     keywords: 'frontalieri, ticino, svizzera, italia, ticinesi, nuove, guardie, svizzere',
     ogTitle: 'Due ticinesi tra le nuove Guardie Svizzere',
     ogDescription: 'Davide Iannalfo e Mattia Canonica giurano come Guardie Svizzere Pontificie. Il Ticino è il secondo cantone per numero di guardie',
@@ -26097,7 +26097,7 @@ description: 'Davide Iannalfo e Mattia Canonica giurano come Guardie Svizzere Po
 
   'blog-bellinzona-valli-bici-velocita': {
     title: 'L\'Otr Bellinzona e Valli punta sulle due ruote',
-description: 'Scopri la strategia \'Tutti in sella\' per il turismo ciclistico nella regione di Bellinzona e Valli e come impatterà i frontalieri.',
+    description: 'Scopri la strategia \'Tutti in sella\' per il turismo ciclistico nella regione di Bellinzona e Valli e come impatterà i frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, bellinzona, valli, punta, sulle',
     ogTitle: 'L\'Otr Bellinzona e Valli punta sulle due ruote',
     ogDescription: 'Scopri la strategia \'Tutti in sella\' per il turismo ciclistico nella regione di Bellinzona e Valli e come impatterà i frontalieri.',
@@ -26249,7 +26249,7 @@ description: 'Scopri la strategia \'Tutti in sella\' per il turismo ciclistico n
 
   'blog-cottarelli-liceo-manzoni-geopolitica': {
     title: 'Cottarelli al Liceo Manzoni: geopolitica e futuro globale',
-description: 'L\'economista Carlo Cottarelli incontra gli studenti del Liceo Manzoni di Varese per parlare di tensioni globali e scenari economici.',
+    description: 'L\'economista Carlo Cottarelli incontra gli studenti del Liceo Manzoni di Varese per parlare di tensioni globali e scenari economici.',
     keywords: 'frontalieri, ticino, svizzera, italia, cottarelli, liceo, manzoni, geopolitica',
     ogTitle: 'Cottarelli al Liceo Manzoni: geopolitica e futuro globale',
     ogDescription: 'L\'economista Carlo Cottarelli incontra gli studenti del Liceo Manzoni di Varese per parlare di tensioni globali e scenari economici',
@@ -26359,7 +26359,7 @@ description: 'L\'economista Carlo Cottarelli incontra gli studenti del Liceo Man
 
   'blog-9-maggio-europa-bandiera-unione': {
     title: '9 maggio: esponiamo la bandiera dell\'Unione Europea',
-description: 'Il Movimento Federalista Europeo invita a esporre la bandiera europea in occasione del 9 maggio, Giorno dell\'Europa.',
+    description: 'Il Movimento Federalista Europeo invita a esporre la bandiera europea in occasione del 9 maggio, Giorno dell\'Europa.',
     keywords: 'frontalieri, ticino, svizzera, italia, maggio, esponiamo, bandiera, dell',
     ogTitle: '9 maggio: esponiamo la bandiera dell\'Unione Europea',
     ogDescription: 'Il Movimento Federalista Europeo invita a esporre la bandiera europea in occasione del 9 maggio, Giorno dell\'Europa.',
@@ -26431,7 +26431,7 @@ description: 'Il Movimento Federalista Europeo invita a esporre la bandiera euro
 
   'blog-regazzi-rieletto-usam-burocrazia-udc': {
     title: 'Regazzi rieletto all\'USAM: burocrazia e iniziativa UDC',
-description: 'Fabio Regazzi rieletto presidente USAM. Critica burocrazia e iniziativa UDC su immigrazione. Impatto economico per frontalieri Ticino.',
+    description: 'Fabio Regazzi rieletto presidente USAM. Critica burocrazia e iniziativa UDC su immigrazione. Impatto economico per frontalieri Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, regazzi, rieletto, usam, burocrazia',
     ogTitle: 'Regazzi rieletto USAM: burocrazia e iniziativa UDC',
     ogDescription: 'Fabio Regazzi rieletto presidente USAM. Critica burocrazia e iniziativa UDC su immigrazione. Impatto economico per frontalieri Ticino.',
@@ -26575,7 +26575,7 @@ description: 'Fabio Regazzi rieletto presidente USAM. Critica burocrazia e inizi
 
   'blog-parcheggi-digitali-lugano-2024': {
     title: 'Parcheggi digitali a Lugano: come funziona il nuovo sistema',
-description: 'Scopri come funziona il nuovo sistema digitale per i parcheggi a Lugano e come può influenzare i frontalieri che lavorano in Ticino.',
+    description: 'Scopri come funziona il nuovo sistema digitale per i parcheggi a Lugano e come può influenzare i frontalieri che lavorano in Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, parcheggi, digitali, lugano, funziona',
     ogTitle: 'Parcheggi digitali a Lugano: come funziona il nuovo sistema',
     ogDescription: 'Scopri come funziona il nuovo sistema digitale per i parcheggi a Lugano e come può influenzare i frontalieri che lavorano in Ticino.',
@@ -26725,7 +26725,7 @@ description: 'Scopri come funziona il nuovo sistema digitale per i parcheggi a L
 
   'blog-varese-arresto-spacciatore-frontaliere': {
     title: 'Varese: arrestato spacciatore, droga nascosta nel bosco',
-description: 'Un 20enne italiano è stato arrestato a Varese con 40 panetti di hascisc. La droga è stata trovata in una borsa lanciata nel bosco.',
+    description: 'Un 20enne italiano è stato arrestato a Varese con 40 panetti di hascisc. La droga è stata trovata in una borsa lanciata nel bosco.',
     keywords: 'frontalieri, ticino, svizzera, italia, varese, arrestato, spacciatore, droga',
     ogTitle: 'Varese: arrestato spacciatore, droga nascosta nel bosco',
     ogDescription: 'Un 20enne italiano è stato arrestato a Varese con 40 panetti di hascisc. La droga è stata trovata in una borsa lanciata nel bosco.',
@@ -26764,10 +26764,10 @@ description: 'Un 20enne italiano è stato arrestato a Varese con 40 panetti di h
 
   'blog-uboldo-tetto-scoperchiato-maltempo-2026': {
     title: 'Uboldo: maltempo scoperchia tetto, nessun ferito',
-description: 'Il maltempo del 6 maggio 2026 ha causato gravi danni a un edificio residenziale a Uboldo, Varese, senza però feriti.',
+    description: 'Il maltempo del 6 maggio 2026 ha causato gravi danni a un edificio residenziale a Uboldo, Varese, senza però feriti.',
     keywords: 'frontalieri, ticino, svizzera, italia, uboldo, maltempo, scoperchia, tetto',
     ogTitle: 'Uboldo: maltempo scoperchia tetto, nessun ferito',
-ogDescription: 'Il maltempo del 6 maggio 2026 ha causato gravi danni a un edificio residenziale a Uboldo, Varese, senza però feriti.',
+    ogDescription: 'Il maltempo del 6 maggio 2026 ha causato gravi danni a un edificio residenziale a Uboldo, Varese, senza però feriti.',
     canonicalPath: '/articoli-frontaliere/uboldo-tetto-scoperchiato-maltempo-2026/',
     structuredData: {
       "@context": "https://schema.org",
@@ -26803,7 +26803,7 @@ ogDescription: 'Il maltempo del 6 maggio 2026 ha causato gravi danni a un edific
 
   'blog-spreco-alimentare-giovani-social': {
     title: 'Spreco alimentare: social fondamentali per coinvolgere i giovani',
-description: 'La deputata Maria Chiara Gadda promuove l\'uso dei social network per combattere lo spreco alimentare e coinvolgere i giovani.',
+    description: 'La deputata Maria Chiara Gadda promuove l\'uso dei social network per combattere lo spreco alimentare e coinvolgere i giovani.',
     keywords: 'frontalieri, ticino, svizzera, italia, spreco, alimentare, social, fondamentali',
     ogTitle: 'Spreco alimentare: social fondamentali per coinvolgere i giovani',
     ogDescription: 'La deputata Maria Chiara Gadda promuove l\'uso dei social network per combattere lo spreco alimentare e coinvolgere i giovani.',
@@ -27066,7 +27066,7 @@ description: 'La deputata Maria Chiara Gadda promuove l\'uso dei social network 
 
   'blog-temporali-ticino-traffico-2024': {
     title: 'Allerta grado 3 per temporali in Ticino: traffico rallentato dalla grandine',
-description: 'MeteoSvizzera ha diramato un\'allerta di grado 3 per temporali nel Luganese, con rischio di frane, allagamenti e traffico rallentato.',
+    description: 'MeteoSvizzera ha diramato un\'allerta di grado 3 per temporali nel Luganese, con rischio di frane, allagamenti e traffico rallentato.',
     keywords: 'frontalieri, ticino, svizzera, italia, allerta, grado, temporali, traffico',
     ogTitle: 'Allerta grado 3 per temporali in Ticino: traffico rallentato dalla grandine',
     ogDescription: 'MeteoSvizzera ha diramato un\'allerta di grado 3 per temporali nel Luganese, con rischio di frane, allagamenti e traffico rallentato.',
@@ -27139,10 +27139,10 @@ description: 'MeteoSvizzera ha diramato un\'allerta di grado 3 per temporali nel
 
   'blog-media-svizzera-codice-condotta-ia': {
     title: 'Media svizzeri adottano codice etico sull\'IA | Frontaliere Ticino',
-description: 'Il settore dei media in Svizzera ha introdotto un codice di condotta per l\'utilizzo responsabile dell\'intelligenza artificiale (IA).',
+    description: 'Il settore dei media in Svizzera ha introdotto un codice di condotta per l\'utilizzo responsabile dell\'intelligenza artificiale (IA).',
     keywords: 'frontalieri, ticino, svizzera, italia, media, svizzeri, adottano, codice',
     ogTitle: 'Media svizzeri adottano codice etico sull\'IA',
-ogDescription: 'Il settore dei media in Svizzera ha introdotto un codice di condotta per l\'utilizzo responsabile dell\'intelligenza artificiale (IA).',
+    ogDescription: 'Il settore dei media in Svizzera ha introdotto un codice di condotta per l\'utilizzo responsabile dell\'intelligenza artificiale (IA).',
     canonicalPath: '/articoli-frontaliere/media-svizzera-codice-condotta-ia/',
     structuredData: {
       "@context": "https://schema.org",
@@ -27178,10 +27178,10 @@ ogDescription: 'Il settore dei media in Svizzera ha introdotto un codice di cond
 
   'blog-cassis-italia-cornado-risarcimento': {
     title: 'Cassis e Cornado: tensione su fatture ospedaliere per feriti di Crans-Montana',
-description: 'L\'ambasciatore italiano Gian Lorenzo Cornado replica a Cassis: «Parlo senza mezzi termini».',
+    description: 'L\'ambasciatore italiano Gian Lorenzo Cornado replica a Cassis: «Parlo senza mezzi termini».',
     keywords: 'frontalieri, ticino, svizzera, italia, cassis, cornado, tensione, fatture',
     ogTitle: 'Cassis e Cornado: tensione su fatture ospedaliere per feriti di Crans-Montana',
-ogDescription: 'L\'ambasciatore italiano Gian Lorenzo Cornado replica a Cassis: «Parlo senza mezzi termini».',
+    ogDescription: 'L\'ambasciatore italiano Gian Lorenzo Cornado replica a Cassis: «Parlo senza mezzi termini».',
     canonicalPath: '/articoli-frontaliere/cassis-italia-cornado-risarcimento/',
     structuredData: {
       "@context": "https://schema.org",
@@ -27217,7 +27217,7 @@ ogDescription: 'L\'ambasciatore italiano Gian Lorenzo Cornado replica a Cassis: 
 
   'blog-disoccupazione-ticino-aprile-2026': {
     title: 'Disoccupazione in calo al 3% in aprile in Ticino',
-description: 'Il tasso di disoccupazione in Ticino è sceso al 2,8% ad aprile 2026. Ecco cosa cambia per i frontalieri che lavorano in Svizzera.',
+    description: 'Il tasso di disoccupazione in Ticino è sceso al 2,8% ad aprile 2026. Ecco cosa cambia per i frontalieri che lavorano in Svizzera.',
     keywords: 'frontalieri, ticino, svizzera, italia, disoccupazione, calo, aprile, tasso',
     ogTitle: 'Disoccupazione in calo al 3% in aprile in Ticino',
     ogDescription: 'Il tasso di disoccupazione in Ticino è sceso al 2,8% ad aprile 2026. Ecco cosa cambia per i frontalieri che lavorano in Svizzera.',
@@ -27334,7 +27334,7 @@ description: 'Il tasso di disoccupazione in Ticino è sceso al 2,8% ad aprile 20
 
   'blog-agricoltura-sociale-ticino-strategie-2026': {
     title: 'Agricoltura sociale in Ticino: strategie e inclusione',
-description: 'Il progetto Curare Cura conclude i focus group con strategie per l\'agricoltura sociale in Ticino, coinvolgendo operatori e beneficiari.',
+    description: 'Il progetto Curare Cura conclude i focus group con strategie per l\'agricoltura sociale in Ticino, coinvolgendo operatori e beneficiari.',
     keywords: 'frontalieri, ticino, svizzera, italia, agricoltura, sociale, strategie, inclusione',
     ogTitle: 'Agricoltura sociale in Ticino: strategie e inclusione',
     ogDescription: 'Il progetto Curare Cura conclude i focus group con strategie per l\'agricoltura sociale in Ticino, coinvolgendo operatori e beneficiari.',
@@ -27412,7 +27412,7 @@ description: 'Il progetto Curare Cura conclude i focus group con strategie per l
 
   'blog-lugano-saluta-stadio-cornaredo-2024': {
     title: 'Lugano saluta lo stadio di Cornaredo: evento il 4 giugno',
-description: 'Festa aperta al pubblico per celebrare 75 anni dello stadio di Cornaredo prima della sostituzione con la nuova AIL Arena nel 2026.',
+    description: 'Festa aperta al pubblico per celebrare 75 anni dello stadio di Cornaredo prima della sostituzione con la nuova AIL Arena nel 2026.',
     keywords: 'frontalieri, ticino, svizzera, italia, lugano, saluta, stadio, cornaredo',
     ogTitle: 'Lugano saluta lo stadio di Cornaredo: evento il 4 giugno',
     ogDescription: 'Festa aperta al pubblico per celebrare 75 anni dello stadio di Cornaredo prima della sostituzione con la nuova AIL Arena nel 2026',
@@ -27826,7 +27826,7 @@ description: 'Festa aperta al pubblico per celebrare 75 anni dello stadio di Cor
 
   'blog-svizzera-2100-scenari-frontalieri': {
     title: 'Svizzera 2100: 5 scenari per il futuro dei frontalieri',
-description: 'Uno studio delinea cinque possibili scenari per la Svizzera nel 2100, con implicazioni per i frontalieri del Ticino.',
+    description: 'Uno studio delinea cinque possibili scenari per la Svizzera nel 2100, con implicazioni per i frontalieri del Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, 2100, scenari, futuro, studio',
     ogTitle: 'Svizzera 2100: 5 scenari per il futuro dei frontalieri',
     ogDescription: 'Uno studio delinea cinque possibili scenari per la Svizzera nel 2100, con implicazioni per i frontalieri del Ticino.',
@@ -27943,7 +27943,7 @@ description: 'Uno studio delinea cinque possibili scenari per la Svizzera nel 21
 
   'blog-registro-imprese-varese-30-anni': {
     title: 'Registro Imprese Varese: 30 anni di innovazione digitale',
-description: 'La Camera di Commercio di Varese celebra 30 anni del Registro Imprese, un pilastro digitale per imprese e istituzioni.',
+    description: 'La Camera di Commercio di Varese celebra 30 anni del Registro Imprese, un pilastro digitale per imprese e istituzioni.',
     keywords: 'frontalieri, ticino, svizzera, italia, registro, imprese, varese, anni',
     ogTitle: 'Registro Imprese Varese: 30 anni di innovazione digitale',
     ogDescription: 'La Camera di Commercio di Varese celebra 30 anni del Registro Imprese, un pilastro digitale per imprese e istituzioni',
@@ -27982,7 +27982,7 @@ description: 'La Camera di Commercio di Varese celebra 30 anni del Registro Impr
 
   'blog-castellanza-investimenti-2025': {
     title: 'Castellanza: 1,8 milioni in investimenti per il 2025',
-description: 'Il Comune di Castellanza ha approvato un bilancio 2025 con 1,8 milioni di euro in investimenti per strade, scuole e impianti sportivi.',
+    description: 'Il Comune di Castellanza ha approvato un bilancio 2025 con 1,8 milioni di euro in investimenti per strade, scuole e impianti sportivi.',
     keywords: 'frontalieri, ticino, svizzera, italia, castellanza, milioni, investimenti, 2025',
     ogTitle: 'Castellanza: 1,8 milioni in investimenti per il 2025',
     ogDescription: 'Il Comune di Castellanza ha approvato un bilancio 2025 con 1,8 milioni di euro in investimenti per strade, scuole e impianti sportivi',
@@ -28245,7 +28245,7 @@ description: 'Il Comune di Castellanza ha approvato un bilancio 2025 con 1,8 mil
 
   'blog-nottambuli-ticino-orari-societa': {
     title: 'Nottambuli, come convivere con gli orari sociali?',
-description: 'Scopri come i frontalieri del Ticino gestiscono gli orari di lavoro svizzeri e italiani, con consigli pratici e scenari concreti.',
+    description: 'Scopri come i frontalieri del Ticino gestiscono gli orari di lavoro svizzeri e italiani, con consigli pratici e scenari concreti.',
     keywords: 'frontalieri, ticino, svizzera, italia, nottambuli, convivere, orari, sociali',
     ogTitle: 'Nottambuli di r/Italy, come fate a convivere con gli orari imposti dalla società odierna?',
     ogDescription: 'Scopri come i frontalieri del Ticino gestiscono gli orari di lavoro svizzeri e italiani, con consigli pratici e scenari concreti.',
@@ -28362,10 +28362,10 @@ description: 'Scopri come i frontalieri del Ticino gestiscono gli orari di lavor
 
   'blog-cedu-condanna-svizzera-liberta-manifestazione': {
     title: 'CEDU condanna la Svizzera per libertà di manifestazione',
-description: 'La sentenza della CEDU rappresenta un importante passo avanti nella protezione della libertà di riunione e associazione in Svizzera.',
+    description: 'La sentenza della CEDU rappresenta un importante passo avanti nella protezione della libertà di riunione e associazione in Svizzera.',
     keywords: 'frontalieri, ticino, svizzera, italia, cedu, condanna, libertà, manifestazione',
     ogTitle: 'CEDU condanna la Svizzera per libertà di manifestazione',
-ogDescription: 'La Corte europea dei diritti dell\'uomo (CEDU) ha condannato la Svizzera per aver violato la libertà di riunione e di associazione nei confronti dell\'organizzatrice di una manifestazione.',
+    ogDescription: 'La Corte europea dei diritti dell\'uomo (CEDU) ha condannato la Svizzera per aver violato la libertà di riunione e di associazione nei confronti dell\'organizzatrice di una manifestazione.',
     canonicalPath: '/articoli-frontaliere/cedu-condanna-svizzera-liberta-manifestazione/',
     structuredData: {
       "@context": "https://schema.org",
@@ -28401,7 +28401,7 @@ ogDescription: 'La Corte europea dei diritti dell\'uomo (CEDU) ha condannato la 
 
   'blog-spaccio-droga-busto-18mila-euro': {
     title: 'Spaccio di droga a Busto: sequestrati 18mila euro in contanti',
-description: 'La Polizia di Stato di Busto Arsizio ha arrestato due cittadini stranieri con 18.617,60 euro in contanti e droga nascosta in casa.',
+    description: 'La Polizia di Stato di Busto Arsizio ha arrestato due cittadini stranieri con 18.617,60 euro in contanti e droga nascosta in casa.',
     keywords: 'frontalieri, ticino, svizzera, italia, spaccio, droga, busto, sequestrati',
     ogTitle: 'Spaccio di droga a Busto: sequestrati 18mila euro in contanti',
     ogDescription: 'La Polizia di Stato di Busto Arsizio ha arrestato due cittadini stranieri con 18.617,60 euro in contanti e droga nascosta in casa.',
@@ -28435,7 +28435,7 @@ description: 'La Polizia di Stato di Busto Arsizio ha arrestato due cittadini st
 
   'blog-incendio-auto-a2-camorino': {
     title: 'Incendio auto sull\'A2 in zona Camorino: traffico in tilt',
-description: 'Un\'auto in fiamme ha causato rallentamenti sull\'autostrada A2 in direzione nord tra Lugano Nord e la galleria del Monte Ceneri.',
+    description: 'Un\'auto in fiamme ha causato rallentamenti sull\'autostrada A2 in direzione nord tra Lugano Nord e la galleria del Monte Ceneri.',
     keywords: 'frontalieri, ticino, svizzera, italia, incendio, auto, sull, zona',
     ogTitle: 'Incendio auto A2 Camorino: rallentamenti per frontalieri',
     ogDescription: 'Un\'auto in fiamme ha causato rallentamenti sull\'autostrada A2 in direzione nord tra Lugano Nord e la galleria del Monte Ceneri.',
@@ -28474,7 +28474,7 @@ description: 'Un\'auto in fiamme ha causato rallentamenti sull\'autostrada A2 in
 
   'blog-cultura-pari-opportunita-ticino-2024': {
     title: 'Convegno sulle pari opportunità in Ticino: cultura e inclusione',
-description: 'Folto convegno a Lugano su squilibri nel settore artistico e culturale. Focus su finanziamenti, visibilità e ruoli decisionali.',
+    description: 'Folto convegno a Lugano su squilibri nel settore artistico e culturale. Focus su finanziamenti, visibilità e ruoli decisionali.',
     keywords: 'frontalieri, ticino, svizzera, italia, convegno, sulle, pari, opportunità',
     ogTitle: 'Convegno sulle pari opportunità in Ticino: cultura e inclusione',
     ogDescription: 'Folto convegno a Lugano su squilibri nel settore artistico e culturale. Focus su finanziamenti, visibilità e ruoli decisionali.',
@@ -28513,7 +28513,7 @@ description: 'Folto convegno a Lugano su squilibri nel settore artistico e cultu
 
   'blog-confisca-patrimoni-mafiosi-svizzera-2026': {
     title: 'Confisca patrimoni mafiosi in Svizzera: proposta radicale',
-description: 'Proposta di confisca preventiva dei beni mafiosi in Svizzera, come in Italia. Arresto di un funzionario della Polizia federale.',
+    description: 'Proposta di confisca preventiva dei beni mafiosi in Svizzera, come in Italia. Arresto di un funzionario della Polizia federale.',
     keywords: 'frontalieri, ticino, svizzera, italia, confisca, patrimoni, mafiosi, proposta',
     ogTitle: 'Confisca patrimoni mafiosi in Svizzera: proposta radicale',
     ogDescription: 'Proposta di confisca preventiva dei beni mafiosi in Svizzera, come in Italia. Arresto di un funzionario della Polizia federale.',
@@ -28591,7 +28591,7 @@ description: 'Proposta di confisca preventiva dei beni mafiosi in Svizzera, come
 
   'blog-suini-svizzera-compenso-allevatori': {
     title: 'Suini in Svizzera: compenso per allevatori per ridurre produzione',
-description: 'La Svizzera offre compensi per ridurre la sovrapproduzione di carne suina. Ecco cosa cambia per i frontalieri e gli allevatori.',
+    description: 'La Svizzera offre compensi per ridurre la sovrapproduzione di carne suina. Ecco cosa cambia per i frontalieri e gli allevatori.',
     keywords: 'frontalieri, ticino, svizzera, italia, suini, compenso, allevatori, ridurre',
     ogTitle: 'Suini in Svizzera: compenso per allevatori per ridurre produzione',
     ogDescription: 'La Svizzera offre compensi per ridurre la sovrapproduzione di carne suina. Ecco cosa cambia per i frontalieri e gli allevatori.',
@@ -28630,7 +28630,7 @@ description: 'La Svizzera offre compensi per ridurre la sovrapproduzione di carn
 
   'blog-polizia-svizzera-inseguimento-italia': {
     title: 'Polizia svizzera può inseguire in Italia? | Frontaliere Ticino',
-description: 'Scopri se la polizia svizzera può inseguire persone in Italia e le implicazioni per i frontalieri del Canton Ticino.',
+    description: 'Scopri se la polizia svizzera può inseguire persone in Italia e le implicazioni per i frontalieri del Canton Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, polizia, inseguire, scopriamo, insieme',
     ogTitle: 'Polizia svizzera inseguimento Italia: cosa sapere',
     ogDescription: 'Scopri se la polizia svizzera può inseguire persone in Italia e le implicazioni per i frontalieri del Canton Ticino',
@@ -28669,7 +28669,7 @@ description: 'Scopri se la polizia svizzera può inseguire persone in Italia e l
 
   'blog-disoccupazione-ticino-2026-effetti-guerra': {
     title: 'Disoccupazione Ticino: Seco, troppo presto per vedere effetti guerra',
-description: 'La SECO afferma che è troppo presto per valutare l\'impatto della guerra in Iran sul mercato del lavoro ticinese. Scopri di più.',
+    description: 'La SECO afferma che è troppo presto per valutare l\'impatto della guerra in Iran sul mercato del lavoro ticinese. Scopri di più.',
     keywords: 'frontalieri, ticino, svizzera, italia, disoccupazione, seco, troppo, presto',
     ogTitle: 'Disoccupazione Ticino: Seco, troppo presto per vedere effetti guerra',
     ogDescription: 'La SECO afferma che è troppo presto per valutare l\'impatto della guerra in Iran sul mercato del lavoro ticinese. Scopri di più.',
@@ -28893,7 +28893,7 @@ description: 'La SECO afferma che è troppo presto per valutare l\'impatto della
 
   'blog-colf-badanti-ticino-2029': {
     title: 'Colf e badanti in Ticino: +122 mila in tre anni',
-description: 'Nel 2029 serviranno 2,2 milioni di colf e badanti in Italia. Opportunità per i frontalieri del Ticino e nuove prospettive lavorative.',
+    description: 'Nel 2029 serviranno 2,2 milioni di colf e badanti in Italia. Opportunità per i frontalieri del Ticino e nuove prospettive lavorative.',
     keywords: 'frontalieri, ticino, svizzera, italia, colf, badanti, mila, anni',
     ogTitle: 'Colf e badanti in Ticino: +122 mila in tre anni',
     ogDescription: 'Nel 2029 serviranno 2,2 milioni di colf e badanti in Italia. Opportunità per i frontalieri del Ticino e nuove prospettive lavorative.',
@@ -28932,7 +28932,7 @@ description: 'Nel 2029 serviranno 2,2 milioni di colf e badanti in Italia. Oppor
 
   'blog-turismo-varesotto-2026-frontalieri': {
     title: 'Turismo nel Varesotto: numeri 2026 e opportunità per frontalieri',
-description: 'Scopri i numeri del turismo nel Varesotto nel 2026 e le opportunità per i frontalieri. Dati, analisi e consigli pratici.',
+    description: 'Scopri i numeri del turismo nel Varesotto nel 2026 e le opportunità per i frontalieri. Dati, analisi e consigli pratici.',
     keywords: 'frontalieri, ticino, svizzera, italia, turismo, varesotto, numeri, opportunità',
     ogTitle: 'Turismo nel Varesotto 2026: numeri e opportunità per frontalieri',
     ogDescription: 'Scopri i numeri del turismo nel Varesotto nel 2026 e le opportunità per i frontalieri. Dati, analisi e consigli pratici.',
@@ -29161,7 +29161,7 @@ description: 'Scopri i numeri del turismo nel Varesotto nel 2026 e le opportunit
 
   'blog-accuse-svizzera-italia-2026': {
     title: 'Accuse alla Svizzera, prime crepe sul fronte italiano',
-description: 'L\'editoriale-bonsai del Giornale del Ticino segnala tensioni tra Italia e Svizzera, con possibili ripercussioni per i frontalieri.',
+    description: 'L\'editoriale-bonsai del Giornale del Ticino segnala tensioni tra Italia e Svizzera, con possibili ripercussioni per i frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, accuse, alla, prime, crepe',
     ogTitle: 'Accuse alla Svizzera, prime crepe sul fronte italiano',
     ogDescription: 'L\'editoriale-bonsai del Giornale del Ticino segnala tensioni tra Italia e Svizzera, con possibili ripercussioni per i frontalieri',
@@ -29278,7 +29278,7 @@ description: 'L\'editoriale-bonsai del Giornale del Ticino segnala tensioni tra 
 
   'blog-nuove-regole-scambio-informazioni-ader-enti-creditori': {
     title: 'Nuove regole per lo scambio di informazioni tra AdER e enti creditori',
-description: 'Dal 6 maggio 2026 nuove norme per la trasmissione telematica dei dati tra Agenzia delle Entrate-Riscossione e enti creditori.',
+    description: 'Dal 6 maggio 2026 nuove norme per la trasmissione telematica dei dati tra Agenzia delle Entrate-Riscossione e enti creditori.',
     keywords: 'frontalieri, ticino, svizzera, italia, nuove, regole, scambio, informazioni',
     ogTitle: 'Nuove regole scambio informazioni AdER enti creditori',
     ogDescription: 'Dal 6 maggio 2026 nuove norme per la trasmissione telematica dei dati tra Agenzia delle Entrate-Riscossione e enti creditori',
@@ -29502,7 +29502,7 @@ description: 'Dal 6 maggio 2026 nuove norme per la trasmissione telematica dei d
 
   'blog-morbio-inferiore-raccolta-vegetali-2026': {
     title: 'Morbio Inferiore: raccolta vegetali meno frequente e più cara',
-description: 'Il PLR di Morbio Inferiore denuncia un servizio di raccolta scarti vegetali meno frequente e più costoso rispetto ai comuni vicini.',
+    description: 'Il PLR di Morbio Inferiore denuncia un servizio di raccolta scarti vegetali meno frequente e più costoso rispetto ai comuni vicini.',
     keywords: 'frontalieri, ticino, svizzera, italia, morbio, inferiore, raccolta, vegetali',
     ogTitle: 'Morbio Inferiore: raccolta vegetali meno frequente e più cara',
     ogDescription: 'Il PLR di Morbio Inferiore denuncia un servizio di raccolta scarti vegetali meno frequente e più costoso rispetto ai comuni vicini',
@@ -29575,7 +29575,7 @@ description: 'Il PLR di Morbio Inferiore denuncia un servizio di raccolta scarti
 
   'blog-lugano-passteggia-iscrizioni-aperte': {
     title: 'Lugano Passteggia 2026: iscrizioni aperte, ecco come partecipare',
-description: 'Scopri come partecipare a Lugano Passteggia 2026, l\'evento enogastronomico e di camminata più atteso della tarda estate ticinese.',
+    description: 'Scopri come partecipare a Lugano Passteggia 2026, l\'evento enogastronomico e di camminata più atteso della tarda estate ticinese.',
     keywords: 'frontalieri, ticino, svizzera, italia, lugano, passteggia, iscrizioni, aperte',
     ogTitle: 'Lugano Passteggia 2026: iscrizioni aperte, ecco',
     ogDescription: 'Scopri come partecipare a Lugano Passteggia 2026, l\'evento enogastronomico e di camminata più atteso della tarda estate ticinese.',
@@ -29653,7 +29653,7 @@ description: 'Scopri come partecipare a Lugano Passteggia 2026, l\'evento enogas
 
   'blog-incendio-auto-bellinzona-sud-2026': {
     title: 'Auto in fiamme a Bellinzona-Sud, A2 riaperta | Frontaliere Ticino',
-description: 'Incendio di un\'auto sull\'autostrada A2 a Bellinzona-Sud, traffico bloccato per 40 minuti. Pompiere e polizia sul posto.',
+    description: 'Incendio di un\'auto sull\'autostrada A2 a Bellinzona-Sud, traffico bloccato per 40 minuti. Pompiere e polizia sul posto.',
     keywords: 'frontalieri, ticino, svizzera, italia, auto, fiamme, bellinzona-sud, riaperta',
     ogTitle: 'Auto in fiamme a Bellinzona-Sud, A2 riaperta',
     ogDescription: 'Incendio di un\'auto sull\'autostrada A2 a Bellinzona-Sud, traffico bloccato per 40 minuti. Pompiere e polizia sul posto',
@@ -29809,10 +29809,10 @@ description: 'Incendio di un\'auto sull\'autostrada A2 a Bellinzona-Sud, traffic
 
   'blog-fiera-antiquariato-mendrisio-2026': {
     title: 'Fiera dell\'antiquariato a Mendrisio: 160 espositori e oltre 10.000 visitatori',
-description: 'La 42esima edizione della Fiera dell\'Antiquariato, Arte e Collezionismo si terrà domenica 10 maggio 2026 a Mendrisio.',
+    description: 'La 42esima edizione della Fiera dell\'Antiquariato, Arte e Collezionismo si terrà domenica 10 maggio 2026 a Mendrisio.',
     keywords: 'frontalieri, ticino, svizzera, italia, fiera, dell, antiquariato, mendrisio',
     ogTitle: 'Fiera dell\'antiquariato a Mendrisio: 160 espositori e oltre 10.000 visitatori',
-ogDescription: 'La 42esima edizione della Fiera dell\'Antiquariato, Arte e Collezionismo si terrà domenica 10 maggio 2026 a Mendrisio.',
+    ogDescription: 'La 42esima edizione della Fiera dell\'Antiquariato, Arte e Collezionismo si terrà domenica 10 maggio 2026 a Mendrisio.',
     canonicalPath: '/articoli-frontaliere/fiera-antiquariato-mendrisio-2026/',
     structuredData: {
       "@context": "https://schema.org",
@@ -29882,7 +29882,7 @@ ogDescription: 'La 42esima edizione della Fiera dell\'Antiquariato, Arte e Colle
 
   'blog-dolores-poretti-91-anni-frontalieri': {
     title: 'Dolores Poretti, 91 anni: «Trovo qualcosa di bello in ogni momento»',
-description: 'La storia di Dolores Poretti, 91 anni, residente alla Casa anziani Polis di Pregassona, e i suoi consigli per i giovani.',
+    description: 'La storia di Dolores Poretti, 91 anni, residente alla Casa anziani Polis di Pregassona, e i suoi consigli per i giovani.',
     keywords: 'frontalieri, ticino, svizzera, italia, dolores, poretti, anni, trovo',
     ogTitle: 'Dolores Poretti, 91 anni: «Trovo qualcosa di bello in ogni momento»',
     ogDescription: 'La storia di Dolores Poretti, 91 anni, residente alla Casa anziani Polis di Pregassona, e i suoi consigli per i giovani',
@@ -30155,7 +30155,7 @@ description: 'La storia di Dolores Poretti, 91 anni, residente alla Casa anziani
 
   'blog-legal-insurance-utilita-sicurezza': {
     title: 'Assicurazione legale in Svizzera: è davvero utile?',
-description: 'L\'assicurazione legale in Svizzera è un investimento utile per i frontalieri? Scopri cosa copre e quando conviene attivarla.',
+    description: 'L\'assicurazione legale in Svizzera è un investimento utile per i frontalieri? Scopri cosa copre e quando conviene attivarla.',
     keywords: 'frontalieri, ticino, svizzera, italia, assicurazione, legale, davvero, utile',
     ogTitle: 'Assicurazione legale in Svizzera: è davvero utile?',
     ogDescription: 'Tutela legale e sicurezza per i frontalieri in Svizzera. Scopri utilità e limiti delle assicurazioni legali.',
@@ -30311,7 +30311,7 @@ description: 'L\'assicurazione legale in Svizzera è un investimento utile per i
 
   'blog-delitto-garlasco-chiara-omicidio-2026': {
     title: 'Delitto di Garlasco: Chiara uccisa con odio e crudeltà',
-description: 'Nuove rivelazioni sull\'omicidio di Chiara Poggi: Andrea Sempio accusato di omicidio con aggravanti. Implicazioni per i frontalieri.',
+    description: 'Nuove rivelazioni sull\'omicidio di Chiara Poggi: Andrea Sempio accusato di omicidio con aggravanti. Implicazioni per i frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, delitto, garlasco, chiara, uccisa',
     ogTitle: 'Delitto di Garlasco: Chiara uccisa con odio e crudeltà',
     ogDescription: 'Nuove rivelazioni sull\'omicidio di Chiara Poggi: Andrea Sempio accusato di omicidio con aggravanti. Implicazioni per i frontalieri.',
@@ -30389,7 +30389,7 @@ description: 'Nuove rivelazioni sull\'omicidio di Chiara Poggi: Andrea Sempio ac
 
   'blog-harrods-risarcimenti-vittime-al-fayed': {
     title: 'Harrods risarcirà decine di vittime dello scandalo Al-Fayed',
-description: 'Harrods annuncia risarcimenti per più di 75 donne vittime di presunti abusi sessuali da parte del defunto magnate Mohamed Al-Fayed.',
+    description: 'Harrods annuncia risarcimenti per più di 75 donne vittime di presunti abusi sessuali da parte del defunto magnate Mohamed Al-Fayed.',
     keywords: 'frontalieri, ticino, svizzera, italia, harrods, risarcirà, decine, vittime',
     ogTitle: 'Harrods risarcirà decine di vittime dello scandalo Al-Fayed',
     ogDescription: 'Harrods annuncia risarcimenti per più di 75 donne vittime di presunti abusi sessuali da parte del defunto magnate Mohamed Al-Fayed.',
@@ -30501,7 +30501,7 @@ description: 'Harrods annuncia risarcimenti per più di 75 donne vittime di pres
 
   'blog-josi-fischer-lettera-cuore': {
     title: 'Josi scrive alla federazione: «Per Fischer, non contro Cadieux»',
-description: 'Roman Josi spiega la sua lettera alla federazione dopo il licenziamento di Patrick Fischer, in vista dei Mondiali di hockey 2026.',
+    description: 'Roman Josi spiega la sua lettera alla federazione dopo il licenziamento di Patrick Fischer, in vista dei Mondiali di hockey 2026.',
     keywords: 'frontalieri, ticino, svizzera, italia, josi, scrive, alla, federazione',
     ogTitle: 'Josi scrive alla federazione: «Per Fischer, non contro Cadieux»',
     ogDescription: 'Roman Josi spiega la sua lettera alla federazione dopo il licenziamento di Patrick Fischer, in vista dei Mondiali di hockey 2026',
@@ -30540,7 +30540,7 @@ description: 'Roman Josi spiega la sua lettera alla federazione dopo il licenzia
 
   'blog-votazione-popolare-lamal-frontalieri': {
     title: 'Votazione popolare sulla LAMal: cosa cambia per i frontalieri',
-description: 'Scopri cosa cambia con la votazione popolare sulla modifica della LAMal e come potrebbe influenzare i frontalieri in Ticino.',
+    description: 'Scopri cosa cambia con la votazione popolare sulla modifica della LAMal e come potrebbe influenzare i frontalieri in Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, votazione, popolare, sulla, lamal',
     ogTitle: 'Votazione LAMal: impatto sui frontalieri in Ticino',
     ogDescription: 'Scopri cosa cambia con la votazione popolare sulla modifica della LAMal e come potrebbe influenzare i frontalieri in Ticino.',
@@ -30613,10 +30613,10 @@ description: 'Scopri cosa cambia con la votazione popolare sulla modifica della 
 
   'blog-giudici-federali-indagine-2026': {
     title: 'Indagine su due giudici federali: implicazioni per il Ticino',
-description: 'Due esperti esterni indagano sulla relazione tra Beatrice van de Graaf e Yves Donzallaz del Tribunale federale.',
+    description: 'Due esperti esterni indagano sulla relazione tra Beatrice van de Graaf e Yves Donzallaz del Tribunale federale.',
     keywords: 'frontalieri, ticino, svizzera, italia, indagine, giudici, federali, implicazioni',
     ogTitle: 'Indagine su due giudici federali: implicazioni per il Ticino',
-ogDescription: 'Due esperti esterni indagano sulla relazione tra Beatrice van de Graaf e Yves Donzallaz del Tribunale federale.',
+    ogDescription: 'Due esperti esterni indagano sulla relazione tra Beatrice van de Graaf e Yves Donzallaz del Tribunale federale.',
     canonicalPath: '/articoli-frontaliere/giudici-federali-indagine-2026/',
     structuredData: {
       "@context": "https://schema.org",
@@ -30652,7 +30652,7 @@ ogDescription: 'Due esperti esterni indagano sulla relazione tra Beatrice van de
 
   'blog-centromedico-castello-chirurgia-ambulatoriale': {
     title: 'Centromedico Castello: ecco il regno della chirurgia ambulatoriale',
-description: 'Nuova struttura per chirurgia ambulatoriale a Bellinzona, con centro oftalmologico Swiss Visio. Ecco cosa cambia per i frontalieri.',
+    description: 'Nuova struttura per chirurgia ambulatoriale a Bellinzona, con centro oftalmologico Swiss Visio. Ecco cosa cambia per i frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, centromedico, castello, ecco, regno',
     ogTitle: 'Centromedico Castello: chirurgia ambulatoriale a Bellinzona',
     ogDescription: 'Nuova struttura per chirurgia ambulatoriale a Bellinzona, con centro oftalmologico Swiss Visio. Ecco cosa cambia per i frontalieri',
@@ -30759,10 +30759,10 @@ description: 'Nuova struttura per chirurgia ambulatoriale a Bellinzona, con cent
 
   'blog-durisch-dado-blocco-frontalieri-ticino': {
     title: 'Durisch: \'Il blocco? Lo vede solo Dadò...\' | Frontaliere Ticino',
-description: 'Il capogruppo socialista Ivo Durisch risponde alle accuse di Fiorenzo Dadò sul blocco del Tribunale amministrativo in Ticino.',
+    description: 'Il capogruppo socialista Ivo Durisch risponde alle accuse di Fiorenzo Dadò sul blocco del Tribunale amministrativo in Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, durisch, blocco, vede, solo',
     ogTitle: 'Durisch risponde a Dadò sul blocco del Tribunale amministrativo',
-ogDescription: 'Il capogruppo socialista Ivo Durisch risponde alle accuse di Fiorenzo Dadò sul blocco del Tribunale amministrativo in Ticino.',
+    ogDescription: 'Il capogruppo socialista Ivo Durisch risponde alle accuse di Fiorenzo Dadò sul blocco del Tribunale amministrativo in Ticino.',
     canonicalPath: '/articoli-frontaliere/durisch-dado-blocco-frontalieri-ticino/',
     structuredData: {
       "@context": "https://schema.org",
@@ -30832,7 +30832,7 @@ ogDescription: 'Il capogruppo socialista Ivo Durisch risponde alle accuse di Fio
 
   'blog-sgombero-macerie-lugano-amianto': {
     title: 'Sgombero macerie Ex Macello Lugano: attenzione all\'amianto',
-description: 'Iniziati i lavori di sgombero delle macerie dell\'ex Macello di Lugano. Possibile presenza di polveri di amianto. Ecco cosa sapere.',
+    description: 'Iniziati i lavori di sgombero delle macerie dell\'ex Macello di Lugano. Possibile presenza di polveri di amianto. Ecco cosa sapere.',
     keywords: 'frontalieri, ticino, svizzera, italia, sgombero, macerie, macello, lugano',
     ogTitle: 'Sgombero macerie Ex Macello Lugano: attenzione all\'amianto',
     ogDescription: 'Iniziati i lavori di sgombero delle macerie dell\'ex Macello di Lugano. Possibile presenza di polveri di amianto. Ecco cosa sapere.',
@@ -30871,7 +30871,7 @@ description: 'Iniziati i lavori di sgombero delle macerie dell\'ex Macello di Lu
 
   'blog-lamanotesa-ch-dolore-bene-condiviso': {
     title: 'Lamanotesa.ch trasforma il dolore in un bene condiviso',
-description: 'La Fondazione Lamanotesa.ch organizza un incontro sulla giustizia riparativa a 15 anni dall\'attentato di Marrakech.',
+    description: 'La Fondazione Lamanotesa.ch organizza un incontro sulla giustizia riparativa a 15 anni dall\'attentato di Marrakech.',
     keywords: 'frontalieri, ticino, svizzera, italia, lamanotesa, trasforma, dolore, bene',
     ogTitle: 'Lamanotesa.ch trasforma il dolore in un bene condiviso',
     ogDescription: 'La Fondazione Lamanotesa.ch organizza un incontro sulla giustizia riparativa a 15 anni dall\'attentato di Marrakech',
@@ -30944,10 +30944,10 @@ description: 'La Fondazione Lamanotesa.ch organizza un incontro sulla giustizia 
 
   'blog-grigioni-fattura-italia-olimpiadi': {
     title: 'Grigioni inviano fattura all\'Italia per i costi del traffico olimpico',
-description: 'Il piano dei trasporti allestito nei Grigioni durante le olimpiadi invernali di Milano-Cortina ha permesso di evitare un caos viario.',
+    description: 'Il piano dei trasporti allestito nei Grigioni durante le olimpiadi invernali di Milano-Cortina ha permesso di evitare un caos viario.',
     keywords: 'frontalieri, ticino, svizzera, italia, grigioni, inviano, fattura, costi',
     ogTitle: 'Grigioni inviano fattura all\'Italia per i costi del traffico olimpico',
-ogDescription: 'Il cantone dei Grigioni ha inviato una fattura da 2,6 milioni di franchi all\'Italia per coprire i costi del piano trasporti durante le Olimpiadi di Milano-Cortina 2026.',
+    ogDescription: 'Il cantone dei Grigioni ha inviato una fattura da 2,6 milioni di franchi all\'Italia per coprire i costi del piano trasporti durante le Olimpiadi di Milano-Cortina 2026.',
     canonicalPath: '/articoli-frontaliere/grigioni-fattura-italia-olimpiadi/',
     structuredData: {
       "@context": "https://schema.org",
@@ -31022,7 +31022,7 @@ ogDescription: 'Il cantone dei Grigioni ha inviato una fattura da 2,6 milioni di
 
   'blog-dati-precalcolati-isa-2026-frontalieri': {
     title: 'ISA 2026: come richiedere i dati precalcolati e gestire la delega unica',
-description: 'Scopri come richiedere i dati precalcolati ISA 2026 e gestire la delega unica. Impatto operativo per frontalieri e intermediari.',
+    description: 'Scopri come richiedere i dati precalcolati ISA 2026 e gestire la delega unica. Impatto operativo per frontalieri e intermediari.',
     keywords: 'frontalieri, ticino, svizzera, italia, richiedere, dati, precalcolati, gestire',
     ogTitle: 'ISA 2026: dati precalcolati e delega unica',
     ogDescription: 'Scopri come richiedere i dati precalcolati ISA 2026 e gestire la delega unica. Impatto operativo per frontalieri e intermediari.',
@@ -31363,7 +31363,7 @@ description: 'Scopri come richiedere i dati precalcolati ISA 2026 e gestire la d
 
   'blog-frontalieri-ticino-pokerce-dimezzati': {
     title: 'Pokerce dimezzati: cosa cambia per i frontalieri',
-description: 'Il Consiglio di Stato del Canton Ticino può decidere il destino di due fratelli curdi rimasti in Svizzera. Ecco cosa sapere.',
+    description: 'Il Consiglio di Stato del Canton Ticino può decidere il destino di due fratelli curdi rimasti in Svizzera. Ecco cosa sapere.',
     keywords: 'frontalieri, ticino, svizzera, italia, pokerce, dimezzati, cosa, cambia',
     ogTitle: 'Pokerce dimezzati: cosa cambia per i frontalieri | Frontaliere Ticino',
     ogDescription: 'Il Consiglio di Stato del Canton Ticino può decidere il destino di due fratelli curdi rimasti in Svizzera. Ecco cosa sapere.',
@@ -31441,7 +31441,7 @@ description: 'Il Consiglio di Stato del Canton Ticino può decidere il destino d
 
   'blog-lumen-claro-premiati-varese-1989': {
     title: 'Lumen Claro: i premiati dal 1989 a Varese | Frontaliere Ticino',
-description: 'Scopri i premiati del Lumen Claro dal 1989 a Varese, un riconoscimento del Lions Club Varese Prealpi per le eccellenze del territorio.',
+    description: 'Scopri i premiati del Lumen Claro dal 1989 a Varese, un riconoscimento del Lions Club Varese Prealpi per le eccellenze del territorio.',
     keywords: 'frontalieri, ticino, svizzera, italia, lumen, claro, premiati, 1989',
     ogTitle: 'Lumen Claro: i premiati dal 1989 a Varese',
     ogDescription: 'Scopri i premiati del Lumen Claro dal 1989 a Varese, un riconoscimento del Lions Club Varese Prealpi per le eccellenze del territorio.',
@@ -31480,7 +31480,7 @@ description: 'Scopri i premiati del Lumen Claro dal 1989 a Varese, un riconoscim
 
   'blog-grandine-cislago-protezione-civile-2026': {
     title: 'Grandine a Cislago: Protezione Civile in azione tutta la notte',
-description: 'Il maltempo del 7 maggio 2026 ha causato disagi a Cislago. Il Comune ringrazia i volontari per l\'intervento tempestivo.',
+    description: 'Il maltempo del 7 maggio 2026 ha causato disagi a Cislago. Il Comune ringrazia i volontari per l\'intervento tempestivo.',
     keywords: 'frontalieri, ticino, svizzera, italia, grandine, cislago, protezione, civile',
     ogTitle: 'Grandine a Cislago: Protezione Civile in azione tutta la notte',
     ogDescription: 'Il maltempo del 7 maggio 2026 ha causato disagi a Cislago. Il Comune ringrazia i volontari per l\'intervento tempestivo.',
@@ -31519,10 +31519,10 @@ description: 'Il maltempo del 7 maggio 2026 ha causato disagi a Cislago. Il Comu
 
   'blog-edoardo-leo-teatro-intred-varese-2026': {
     title: 'Edoardo Leo conquista il Teatro Intred di Varese con parole, risate e poesia',
-description: 'Edoardo Leo ha fatto il pieno di risate e applausi al Teatro Intred di Varese il 6 maggio 2026.',
+    description: 'Edoardo Leo ha fatto il pieno di risate e applausi al Teatro Intred di Varese il 6 maggio 2026.',
     keywords: 'frontalieri, ticino, svizzera, italia, edoardo, conquista, teatro, intred',
     ogTitle: 'Edoardo Leo conquista il Teatro Intred di Varese con parole, risate e poesia',
-ogDescription: 'Edoardo Leo ha fatto il pieno di risate e applausi al Teatro Intred di Varese il 6 maggio 2026.',
+    ogDescription: 'Edoardo Leo ha fatto il pieno di risate e applausi al Teatro Intred di Varese il 6 maggio 2026.',
     canonicalPath: '/articoli-frontaliere/edoardo-leo-teatro-intred-varese-2026/',
     structuredData: {
       "@context": "https://schema.org",
@@ -31592,7 +31592,7 @@ ogDescription: 'Edoardo Leo ha fatto il pieno di risate e applausi al Teatro Int
 
   'blog-legge-foti-critica-economia-ticino': {
     title: 'Legge Foti sotto accusa: obiettivi solo sulla carta',
-description: 'Esperti criticano la legge Foti per inefficienze e distorsioni, con impatti su burocrazia e pubblica amministrazione. Scopri di più.',
+    description: 'Esperti criticano la legge Foti per inefficienze e distorsioni, con impatti su burocrazia e pubblica amministrazione. Scopri di più.',
     keywords: 'frontalieri, ticino, svizzera, italia, legge, foti, sotto, accusa',
     ogTitle: 'Legge Foti sotto accusa: obiettivi solo sulla carta',
     ogDescription: 'Esperti criticano la legge Foti per inefficienze e distorsioni, con impatti su burocrazia e pubblica amministrazione. Scopri di più.',
@@ -31631,7 +31631,7 @@ description: 'Esperti criticano la legge Foti per inefficienze e distorsioni, co
 
   'blog-progetto-eiger-palace-lugano-2026': {
     title: 'Progetto Eiger Palace a Lugano: demolizioni e tre anni di lavori',
-description: 'La licenza edilizia per il progetto Eiger Palace a Besso, Lugano, è entrata in giudicato. Ecco le prossime tappe del progetto.',
+    description: 'La licenza edilizia per il progetto Eiger Palace a Besso, Lugano, è entrata in giudicato. Ecco le prossime tappe del progetto.',
     keywords: 'frontalieri, ticino, svizzera, italia, progetto, eiger, palace, lugano',
     ogTitle: 'Progetto Eiger Palace a Lugano: demolizioni e tre anni di lavori',
     ogDescription: 'La licenza edilizia per il progetto Eiger Palace a Besso, Lugano, è entrata in giudicato. Ecco le prossime tappe del progetto.',
@@ -31670,10 +31670,10 @@ description: 'La licenza edilizia per il progetto Eiger Palace a Besso, Lugano, 
 
   'blog-cartelle-pagamento-cassazione-2026': {
     title: 'Cartelle di pagamento: Cassazione fissa termine di decadenza',
-description: 'Assicurati di presentare la dichiarazione dei redditi entro la scadenza ordinaria per evitare ritardi nella notifica delle cartelle di pagamento.',
+    description: 'Assicurati di presentare la dichiarazione dei redditi entro la scadenza ordinaria per evitare ritardi nella notifica delle cartelle di pagamento.',
     keywords: 'frontalieri, ticino, svizzera, italia, cartelle, pagamento, cassazione, fissa',
     ogTitle: 'Cartelle di pagamento: Cassazione fissa termine di decadenza',
-ogDescription: 'Con questa nuova interpretazione, il termine di decadenza per la notifica delle cartelle di pagamento non sarà più influenzato dalla data di presentazione effettiva della dichiarazione, ma dalla scadenza ordinaria prevista dalla legge.',
+    ogDescription: 'Con questa nuova interpretazione, il termine di decadenza per la notifica delle cartelle di pagamento non sarà più influenzato dalla data di presentazione effettiva della dichiarazione, ma dalla scadenza ordinaria prevista dalla legge.',
     canonicalPath: '/articoli-frontaliere/cartelle-pagamento-cassazione-2026/',
     structuredData: {
       "@context": "https://schema.org",
@@ -31709,7 +31709,7 @@ ogDescription: 'Con questa nuova interpretazione, il termine di decadenza per la
 
   'blog-crd-output-floor-ii-pilastro': {
     title: 'CRD: interazione tra output floor e requisiti del II pilastro',
-description: 'Analisi delle implicazioni per i frontalieri Ticino: cosa cambia con l\'interazione tra output floor e requisiti del II pilastro.',
+    description: 'Analisi delle implicazioni per i frontalieri Ticino: cosa cambia con l\'interazione tra output floor e requisiti del II pilastro.',
     keywords: 'frontalieri, ticino, svizzera, italia, interazione, output, floor, requisiti',
     ogTitle: 'CRD: interazione tra output floor e requisiti del II pilastro',
     ogDescription: 'Analisi delle implicazioni per i frontalieri Ticino: cosa cambia con l\'interazione tra output floor e requisiti del II pilastro',
@@ -31782,7 +31782,7 @@ description: 'Analisi delle implicazioni per i frontalieri Ticino: cosa cambia c
 
   'blog-universita-insubria-premia-frontalieri': {
     title: 'Università Insubria premia neolaureato in Infermieristica',
-description: 'Mattia Giussani, neolaureato in Infermieristica, vince il terzo posto nazionale per la miglior presentazione orale al Congresso SIAN.',
+    description: 'Mattia Giussani, neolaureato in Infermieristica, vince il terzo posto nazionale per la miglior presentazione orale al Congresso SIAN.',
     keywords: 'frontalieri, ticino, svizzera, italia, università, insubria, premia, neolaureato',
     ogTitle: 'Università Insubria premia neolaureato in Infermieristica',
     ogDescription: 'Mattia Giussani, neolaureato in Infermieristica, vince il terzo posto nazionale per la miglior presentazione orale al Congresso SIAN.',
@@ -31972,7 +31972,7 @@ description: 'Mattia Giussani, neolaureato in Infermieristica, vince il terzo po
 
   'blog-fart-2025-frontalieri-transporti': {
     title: 'FART 2025: boom di utenti sui bus e nuovi treni in crescita',
-description: 'Le Ferrovie Autolinee Regionali Ticinesi (FART) registrano un aumento del 10% di passeggeri sui bus e miglioramenti con i nuovi treni.',
+    description: 'Le Ferrovie Autolinee Regionali Ticinesi (FART) registrano un aumento del 10% di passeggeri sui bus e miglioramenti con i nuovi treni.',
     keywords: 'frontalieri, ticino, svizzera, italia, fart, 2025, boom, utenti',
     ogTitle: 'FART 2025: boom di utenti sui bus e nuovi treni in crescita',
     ogDescription: 'Le Ferrovie Autolinee Regionali Ticinesi (FART) registrano un aumento del 10% di passeggeri sui bus e miglioramenti con i nuovi treni.',
@@ -32006,7 +32006,7 @@ description: 'Le Ferrovie Autolinee Regionali Ticinesi (FART) registrano un aume
 
   'blog-rimborso-cure-dentarie-ticino-2026': {
     title: 'Rimborso cure dentarie in Ticino: chi ne beneficia e come funziona',
-description: 'Scopri chi può accedere al rimborso delle cure dentarie in Ticino e come funziona il sistema di finanziamento ispirato all\'AVS.',
+    description: 'Scopri chi può accedere al rimborso delle cure dentarie in Ticino e come funziona il sistema di finanziamento ispirato all\'AVS.',
     keywords: 'frontalieri, ticino, svizzera, italia, rimborso, cure, dentarie, beneficia',
     ogTitle: 'Rimborso cure dentarie in Ticino: chi ne beneficia e come funziona',
     ogDescription: 'Scopri chi può accedere al rimborso delle cure dentarie in Ticino e come funziona il sistema di finanziamento ispirato all\'AVS',
@@ -32118,7 +32118,7 @@ description: 'Scopri chi può accedere al rimborso delle cure dentarie in Ticino
 
   'blog-pagaiate-internazionali-grigioni-ticino-2026': {
     title: 'Pagaiate internazionali fra Grigioni e Ticino: tutto quello che devi sapere',
-description: 'Sabato 9 e domenica 10 maggio 2026, gare di canoa sui fiumi Moesa e Ticino. Over 110 atleti da 7 nazioni, tra cui l\'Australia.',
+    description: 'Sabato 9 e domenica 10 maggio 2026, gare di canoa sui fiumi Moesa e Ticino. Over 110 atleti da 7 nazioni, tra cui l\'Australia.',
     keywords: 'frontalieri, ticino, svizzera, italia, pagaiate, internazionali, grigioni, tutto',
     ogTitle: 'Pagaiate internazionali fra Grigioni e Ticino 2026',
     ogDescription: 'Sabato 9 e domenica 10 maggio 2026, gare di canoa sui fiumi Moesa e Ticino. Over 110 atleti da 7 nazioni, tra cui l\'Australia.',
@@ -32157,7 +32157,7 @@ description: 'Sabato 9 e domenica 10 maggio 2026, gare di canoa sui fiumi Moesa 
 
   'blog-aquile-mannheim-coppa-spengler-2026': {
     title: 'Le Aquile di Mannheim alla Coppa Spengler 2026',
-description: 'Le Aquile di Mannheim partecipano alla 98esima Coppa Spengler. Scopri le implicazioni per gli appassionati di hockey su ghiaccio.',
+    description: 'Le Aquile di Mannheim partecipano alla 98esima Coppa Spengler. Scopri le implicazioni per gli appassionati di hockey su ghiaccio.',
     keywords: 'frontalieri, ticino, svizzera, italia, aquile, mannheim, alla, coppa',
     ogTitle: 'Le Aquile di Mannheim alla Coppa Spengler 2026',
     ogDescription: 'Le Aquile di Mannheim partecipano alla 98esima Coppa Spengler. Scopri le implicazioni per gli appassionati di hockey su ghiaccio.',
@@ -32196,7 +32196,7 @@ description: 'Le Aquile di Mannheim partecipano alla 98esima Coppa Spengler. Sco
 
   'blog-incentivi-assunzioni-2026-sgravi-contributivi': {
     title: 'Incentivi assunzioni 2026: tre sgravi contributivi poco utilizzati',
-description: 'Scopri i tre sgravi contributivi per le assunzioni nel 2026, tra cui NASpI, ADI e donne vittime di violenza, con esoneri fino al 100%.',
+    description: 'Scopri i tre sgravi contributivi per le assunzioni nel 2026, tra cui NASpI, ADI e donne vittime di violenza, con esoneri fino al 100%.',
     keywords: 'frontalieri, ticino, svizzera, italia, incentivi, assunzioni, sgravi, contributivi',
     ogTitle: 'Incentivi assunzioni 2026: tre sgravi contributivi poco utilizzati',
     ogDescription: 'Scopri i tre sgravi contributivi per le assunzioni nel 2026, tra cui NASpI, ADI e donne vittime di violenza, con esoneri fino al 100%.',
@@ -32313,7 +32313,7 @@ description: 'Scopri i tre sgravi contributivi per le assunzioni nel 2026, tra c
 
   'blog-bonnie-tyler-coma-farmacologico-2026': {
     title: 'Bonnie Tyler in coma farmacologico dopo intervento d\'urgenza',
-description: 'La cantante britannica Bonnie Tyler, 74 anni, è in coma farmacologico in Portogallo dopo un intervento per perforazione intestinale.',
+    description: 'La cantante britannica Bonnie Tyler, 74 anni, è in coma farmacologico in Portogallo dopo un intervento per perforazione intestinale.',
     keywords: 'frontalieri, ticino, svizzera, italia, bonnie, tyler, coma, farmacologico',
     ogTitle: 'Bonnie Tyler in coma farmacologico dopo intervento d\'urgenza',
     ogDescription: 'La cantante britannica Bonnie Tyler, 74 anni, è in coma farmacologico in Portogallo dopo un intervento per perforazione intestinale.',
@@ -32352,7 +32352,7 @@ description: 'La cantante britannica Bonnie Tyler, 74 anni, è in coma farmacolo
 
   'blog-nuovo-accordo-immobili-frontalieri-2026': {
     title: 'Scambio automatico informazioni immobili: nuovo accordo multilaterale',
-description: 'Nuovo accordo per lo scambio automatico di informazioni sugli immobili tra Svizzera e Italia. Cosa cambia per i frontalieri?.',
+    description: 'Nuovo accordo per lo scambio automatico di informazioni sugli immobili tra Svizzera e Italia. Cosa cambia per i frontalieri?.',
     keywords: 'frontalieri, ticino, svizzera, italia, scambio, automatico, informazioni, immobili',
     ogTitle: 'Scambio automatico informazioni immobili: nuovo accordo multilaterale',
     ogDescription: 'Nuovo accordo per lo scambio automatico di informazioni sugli immobili tra Svizzera e Italia. Cosa cambia per i frontalieri?',
@@ -32391,7 +32391,7 @@ description: 'Nuovo accordo per lo scambio automatico di informazioni sugli immo
 
   'blog-nuova-riforma-avs-2024-frontalieri': {
     title: 'Nuova riforma AVS 2024: cosa cambia per i frontalieri',
-description: 'Dal 1° gennaio 2024 entrano in vigore nuove regole AVS. Ecco le novità per chi lavora in Svizzera e risiede in Italia.',
+    description: 'Dal 1° gennaio 2024 entrano in vigore nuove regole AVS. Ecco le novità per chi lavora in Svizzera e risiede in Italia.',
     keywords: 'frontalieri, ticino, svizzera, italia, nuova, riforma, 2024, cosa',
     ogTitle: 'Nuova riforma AVS 2024: cosa cambia per i frontalieri',
     ogDescription: 'Dal 1° gennaio 2024 entrano in vigore nuove regole AVS. Ecco le novità per chi lavora in Svizzera e risiede in Italia',
@@ -32425,7 +32425,7 @@ description: 'Dal 1° gennaio 2024 entrano in vigore nuove regole AVS. Ecco le n
 
   'blog-lohnausweis-frontalieri-ticino': {
     title: 'Lohnausweis: cos\'è e come funziona per i frontalieri del Ticino',
-description: 'Guida pratica al certificato di stipendio svizzero per i lavoratori transfrontalieri: cosa cambia e come ottenerlo.',
+    description: 'Guida pratica al certificato di stipendio svizzero per i lavoratori transfrontalieri: cosa cambia e come ottenerlo.',
     keywords: 'frontalieri, ticino, svizzera, italia, lohnausweis, funziona, pratica, certificato',
     ogTitle: 'Lohnausweis: cos\'è e come funziona per i frontalieri del Ticino',
     ogDescription: 'Guida pratica al certificato di stipendio svizzero per i lavoratori transfrontalieri: cosa cambia e come ottenerlo',
@@ -32498,7 +32498,7 @@ description: 'Guida pratica al certificato di stipendio svizzero per i lavorator
 
   'blog-nuovo-accordo-frontalieri-pilastro-2026': {
     title: 'Nuovo accordo frontalieri: riforma del secondo pilastro in votazione',
-description: 'Scopri cosa cambia con la riforma del secondo pilastro per i frontalieri in Ticino e come prepararti ai possibili cambiamenti.',
+    description: 'Scopri cosa cambia con la riforma del secondo pilastro per i frontalieri in Ticino e come prepararti ai possibili cambiamenti.',
     keywords: 'frontalieri, ticino, svizzera, italia, nuovo, accordo, riforma, secondo',
     ogTitle: 'Nuovo accordo frontalieri: riforma del secondo pilastro in votazione',
     ogDescription: 'Scopri cosa cambia con la riforma del secondo pilastro per i frontalieri in Ticino e come prepararti ai possibili cambiamenti',
@@ -32537,7 +32537,7 @@ description: 'Scopri cosa cambia con la riforma del secondo pilastro per i front
 
   'blog-chiasso-dogana-tempi-attesa': {
     title: 'Tempi di attesa alla dogana di Chiasso: cosa sapere',
-description: 'Scopri i tempi di attesa alla dogana di Chiasso e come organizzare al meglio i tuoi spostamenti transfrontalieri.',
+    description: 'Scopri i tempi di attesa alla dogana di Chiasso e come organizzare al meglio i tuoi spostamenti transfrontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, tempi, attesa, alla, dogana',
     ogTitle: 'Tempi di attesa alla dogana di Chiasso: cosa sapere',
     ogDescription: 'Scopri i tempi di attesa alla dogana di Chiasso e come organizzare al meglio i tuoi spostamenti transfrontalieri.',
@@ -32571,7 +32571,7 @@ description: 'Scopri i tempi di attesa alla dogana di Chiasso e come organizzare
 
   'blog-stipendi-neolaureati-svizzera-austria-germania': {
     title: 'Stipendi neo-laureati: Svizzera, Austria e Germania in testa',
-description: 'Confronto salariale per i neo-laureati in Svizzera, Austria, Germania, Italia, Polonia e Spagna. Chi paga di più?.',
+    description: 'Confronto salariale per i neo-laureati in Svizzera, Austria, Germania, Italia, Polonia e Spagna. Chi paga di più?.',
     keywords: 'frontalieri, ticino, svizzera, italia, stipendi, neo-laureati, austria, germania',
     ogTitle: 'Stipendi neo-laureati: Svizzera, Austria e Germania in testa',
     ogDescription: 'Confronto salariale per i neo-laureati in Svizzera, Austria, Germania, Italia, Polonia e Spagna. Chi paga di più?',
@@ -32980,7 +32980,7 @@ description: 'Confronto salariale per i neo-laureati in Svizzera, Austria, Germa
 
   'blog-emolumenti-svizzera-tassazione-italia': {
     title: 'Emolumenti svizzeri: tassazione e dichiarazione in Italia',
-description: 'Guida pratica per i frontalieri: come dichiarare gli emolumenti svizzeri in Italia e evitare la doppia imposizione.',
+    description: 'Guida pratica per i frontalieri: come dichiarare gli emolumenti svizzeri in Italia e evitare la doppia imposizione.',
     keywords: 'frontalieri, ticino, svizzera, italia, emolumenti, svizzeri, tassazione, dichiarazione',
     ogTitle: 'Emolumenti svizzeri: tassazione e dichiarazione in Italia',
     ogDescription: 'Guida pratica per i frontalieri: come dichiarare gli emolumenti svizzeri in Italia e evitare la doppia imposizione.',
@@ -33019,7 +33019,7 @@ description: 'Guida pratica per i frontalieri: come dichiarare gli emolumenti sv
 
   'blog-assicurazione-malattie-pilota-ticino': {
     title: 'Piloti per l\'assicurazione malattie in Ticino: cosa cambia per i frontalieri',
-description: 'Il BAG lancia progetti pilota per contenere i costi dell\'assicurazione malattie. Ecco cosa sapere se lavori in Ticino.',
+    description: 'Il BAG lancia progetti pilota per contenere i costi dell\'assicurazione malattie. Ecco cosa sapere se lavori in Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, piloti, assicurazione, malattie, cosa',
     ogTitle: 'Piloti per l\'assicurazione malattie in Ticino: cosa cambia per i frontalieri',
     ogDescription: 'Il BAG lancia progetti pilota per contenere i costi dell\'assicurazione malattie. Ecco cosa sapere se lavori in Ticino',
@@ -33092,7 +33092,7 @@ description: 'Il BAG lancia progetti pilota per contenere i costi dell\'assicura
 
   'blog-rientro-lento-a2-frontalieri': {
     title: 'Rientro lento sulla A2: 40 minuti di ritardo per i frontalieri',
-description: 'Traffico intenso e pioggia rendono il rientro da sud sulla A2 particolarmente lento. Ritardi fino a 40 minuti tra Rivera e Chiasso.',
+    description: 'Traffico intenso e pioggia rendono il rientro da sud sulla A2 particolarmente lento. Ritardi fino a 40 minuti tra Rivera e Chiasso.',
     keywords: 'frontalieri, ticino, svizzera, italia, rientro, lento, sulla, minuti',
     ogTitle: 'Rientro lento sulla A2: 40 minuti di ritardo per i frontalieri',
     ogDescription: 'Traffico intenso e pioggia rendono il rientro da sud sulla A2 particolarmente lento. Ritardi fino a 40 minuti tra Rivera e Chiasso.',
@@ -33209,7 +33209,7 @@ description: 'Traffico intenso e pioggia rendono il rientro da sud sulla A2 part
 
   'blog-simone-grossi-frontaliere-visp': {
     title: 'Frontaliere morto a Visp: è Simone Grossi | Frontaliere Ticino',
-description: 'Simone Grossi, frontaliere italiano, è deceduto questa mattina a Visp. Le autorità stanno indagando sulle cause dell\'incidente.',
+    description: 'Simone Grossi, frontaliere italiano, è deceduto questa mattina a Visp. Le autorità stanno indagando sulle cause dell\'incidente.',
     keywords: 'frontalieri, ticino, svizzera, italia, morto, visp, simone, grossi',
     ogTitle: 'Frontaliere morto a Visp: è Simone Grossi',
     ogDescription: 'Simone Grossi, frontaliere italiano, è deceduto questa mattina a Visp. Le autorità stanno indagando sulle cause dell\'incidente.',
@@ -33287,7 +33287,7 @@ description: 'Simone Grossi, frontaliere italiano, è deceduto questa mattina a 
 
   'blog-rafforzare-sicurezza-bellinzona-2026': {
     title: 'Sicurezza a Bellinzona: mozione per migliorare la qualità della vita',
-description: 'Karim Spinelli (Plr) presenta mozione per rafforzare sicurezza e presenza istituzionale in zone sensibili di Bellinzona.',
+    description: 'Karim Spinelli (Plr) presenta mozione per rafforzare sicurezza e presenza istituzionale in zone sensibili di Bellinzona.',
     keywords: 'frontalieri, ticino, svizzera, italia, sicurezza, bellinzona, mozione, migliorare',
     ogTitle: 'Sicurezza a Bellinzona: mozione per migliorare la qualità della vita',
     ogDescription: 'Karim Spinelli (Plr) presenta mozione per rafforzare sicurezza e presenza istituzionale in zone sensibili di Bellinzona',
@@ -33633,7 +33633,7 @@ description: 'Karim Spinelli (Plr) presenta mozione per rafforzare sicurezza e p
 
   'blog-takahashia-japonica-ticino-2026': {
     title: 'Takahashia japonica in Ticino: come proteggere gli alberi',
-description: 'Le autorità cantonali rassicurano: la situazione non è allarmante, ma è necessario agire per contenere la diffusione della cocciniglia.',
+    description: 'Le autorità cantonali rassicurano: la situazione non è allarmante, ma è necessario agire per contenere la diffusione della cocciniglia.',
     keywords: 'frontalieri, ticino, svizzera, italia, takahashia, japonica, proteggere, alberi',
     ogTitle: 'Takahashia japonica in Ticino: come proteggere gli alberi',
     ogDescription: 'Le autorità cantonali rassicurano: la situazione non è allarmante, ma è necessario agire per contenere la diffusione della cocciniglia.',
@@ -33784,7 +33784,7 @@ description: 'Le autorità cantonali rassicurano: la situazione non è allarmant
 
   'blog-crans-montana-ore-straordinarie-non-pagate': {
     title: 'Crans Montana: ore straordinarie non pagate ai soccorritori',
-description: 'A quattro mesi dall\'incendio, i soccorritori dell\'Ospedale del Vallese attendono ancora il pagamento delle ore straordinarie.',
+    description: 'A quattro mesi dall\'incendio, i soccorritori dell\'Ospedale del Vallese attendono ancora il pagamento delle ore straordinarie.',
     keywords: 'frontalieri, ticino, svizzera, italia, crans, montana, straordinarie, pagate',
     ogTitle: 'Crans Montana: ore straordinarie non pagate ai soccorritori',
     ogDescription: 'A quattro mesi dall\'incendio, i soccorritori dell\'Ospedale del Vallese attendono ancora il pagamento delle ore straordinarie.',
@@ -33969,7 +33969,7 @@ description: 'A quattro mesi dall\'incendio, i soccorritori dell\'Ospedale del V
 
   'blog-super-ricco-tasse-frontalieri-ticino': {
     title: 'Super-ricco svizzero vuole pagare più tasse, ma è l’unico',
-description: 'Un cittadino svizzero benestante desidera pagare più tasse, un caso unico in Svizzera. Ecco cosa cambia per i frontalieri Ticino.',
+    description: 'Un cittadino svizzero benestante desidera pagare più tasse, un caso unico in Svizzera. Ecco cosa cambia per i frontalieri Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, super-ricco, svizzero, vuole, pagare',
     ogTitle: 'Super-ricco svizzero vuole pagare più tasse, ma è l’unico',
     ogDescription: 'Un cittadino svizzero benestante desidera pagare più tasse, un caso unico in Svizzera. Ecco cosa cambia per i frontalieri Ticino.',
@@ -34042,7 +34042,7 @@ description: 'Un cittadino svizzero benestante desidera pagare più tasse, un ca
 
   'blog-alpini-paracadutisti-genova-2026': {
     title: 'Alpini paracadutisti a Genova per l\'Adunata nazionale: il video dell\'atterraggio',
-description: 'Migliaia di Alpini in arrivo a Genova per la 97esima Adunata nazionale. Video dell\'atterraggio dei paracadutisti sulla spiaggia.',
+    description: 'Migliaia di Alpini in arrivo a Genova per la 97esima Adunata nazionale. Video dell\'atterraggio dei paracadutisti sulla spiaggia.',
     keywords: 'frontalieri, ticino, svizzera, italia, alpini, paracadutisti, genova, adunata',
     ogTitle: 'Alpini paracadutisti a Genova per l\'Adunata nazionale',
     ogDescription: 'Migliaia di Alpini in arrivo a Genova per la 97esima Adunata nazionale. Video dell\'atterraggio dei paracadutisti sulla spiaggia.',
@@ -34159,7 +34159,7 @@ description: 'Migliaia di Alpini in arrivo a Genova per la 97esima Adunata nazio
 
   'blog-svizzera-sconfitta-svezia-frontalieri': {
     title: 'Svizzera sconfitta dalla Svezia: implicazioni per i frontalieri',
-description: 'Analisi della sconfitta della Svizzera contro la Svezia e delle implicazioni per i frontalieri che lavorano in Svizzera.',
+    description: 'Analisi della sconfitta della Svizzera contro la Svezia e delle implicazioni per i frontalieri che lavorano in Svizzera.',
     keywords: 'frontalieri, ticino, svizzera, italia, sconfitta, dalla, svezia, implicazioni',
     ogTitle: 'Svizzera sconfitta dalla Svezia: implicazioni per i frontalieri',
     ogDescription: 'Analisi della sconfitta della Svizzera contro la Svezia e delle implicazioni per i frontalieri che lavorano in Svizzera.',
@@ -34276,7 +34276,7 @@ description: 'Analisi della sconfitta della Svizzera contro la Svezia e delle im
 
   'blog-ghiacciai-svizzera-frontalieri': {
     title: 'Ghiacciai svizzeri senza scudo protettivo: cosa cambia per i frontalieri',
-description: 'Scopri le implicazioni per i frontalieri del Ticino dopo un inverno secco che ha lasciato i ghiacciai svizzeri senza scudo protettivo.',
+    description: 'Scopri le implicazioni per i frontalieri del Ticino dopo un inverno secco che ha lasciato i ghiacciai svizzeri senza scudo protettivo.',
     keywords: 'frontalieri, ticino, svizzera, italia, ghiacciai, svizzeri, senza, scudo',
     ogTitle: 'Ghiacciai svizzeri senza scudo protettivo: cosa cambia per i frontalieri',
     ogDescription: 'Scopri le implicazioni per i frontalieri del Ticino dopo un inverno secco che ha lasciato i ghiacciai svizzeri senza scudo protettivo.',
@@ -34354,7 +34354,7 @@ description: 'Scopri le implicazioni per i frontalieri del Ticino dopo un invern
 
   'blog-black-list-morosi-cassa-malati-ticino': {
     title: 'Black list morosi cassa malati: cosa cambia per i frontalieri',
-description: 'Nuove regole per i morosi della cassa malati in Ticino. Ecco cosa sapere e come evitare di finire nella black list.',
+    description: 'Nuove regole per i morosi della cassa malati in Ticino. Ecco cosa sapere e come evitare di finire nella black list.',
     keywords: 'frontalieri, ticino, svizzera, italia, black, list, morosi, cassa',
     ogTitle: 'Black list morosi cassa malati: cosa cambia per i frontalieri',
     ogDescription: 'Nuove regole per i morosi della cassa malati in Ticino. Ecco cosa sapere e come evitare di finire nella black list',
@@ -34471,7 +34471,7 @@ description: 'Nuove regole per i morosi della cassa malati in Ticino. Ecco cosa 
 
   'blog-peter-magyar-ungheria-volta-pagina': {
     title: 'Peter Magyar giurato: l\'Ungheria cambia pagina',
-description: 'Dopo 16 anni, finisce l\'era di Viktor Orban. Peter Magyar è il nuovo primo ministro ungherese. Ecco cosa cambia per i frontalieri.',
+    description: 'Dopo 16 anni, finisce l\'era di Viktor Orban. Peter Magyar è il nuovo primo ministro ungherese. Ecco cosa cambia per i frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, peter, magyar, giurato, ungheria',
     ogTitle: 'Peter Magyar giurato: l\'Ungheria cambia pagina',
     ogDescription: 'Dopo 16 anni, finisce l\'era di Viktor Orban. Peter Magyar è il nuovo primo ministro ungherese. Ecco cosa cambia per i frontalieri.',
@@ -34705,7 +34705,7 @@ description: 'Dopo 16 anni, finisce l\'era di Viktor Orban. Peter Magyar è il n
 
   'blog-incidente-stradale-cittiglio-laveno': {
     title: 'Incidente stradale tra Cittiglio e Laveno: auto e moto coinvolte',
-description: 'Due persone ferite in un incidente tra un\'auto e una moto sulla provinciale tra Cittiglio e Laveno Mombello la sera dell\'8 maggio 2026.',
+    description: 'Due persone ferite in un incidente tra un\'auto e una moto sulla provinciale tra Cittiglio e Laveno Mombello la sera dell\'8 maggio 2026.',
     keywords: 'frontalieri, ticino, svizzera, italia, incidente, stradale, cittiglio, laveno',
     ogTitle: 'Incidente stradale tra Cittiglio e Laveno: auto e moto coinvolte',
     ogDescription: 'Due persone ferite in un incidente tra un\'auto e una moto sulla provinciale tra Cittiglio e Laveno Mombello la sera dell\'8 maggio 2026',
@@ -34744,7 +34744,7 @@ description: 'Due persone ferite in un incidente tra un\'auto e una moto sulla p
 
   'blog-frontaliero-ossolano-morto-visp-autopsia': {
     title: 'Frontaliere ossolano morto a Visp: la procura elvetica ha disposto l’autopsia',
-description: 'La procura elvetica ha disposto l\'autopsia sul corpo di un frontaliere ossolano trovato morto a Visp. Ecco cosa sappiamo finora.',
+    description: 'La procura elvetica ha disposto l\'autopsia sul corpo di un frontaliere ossolano trovato morto a Visp. Ecco cosa sappiamo finora.',
     keywords: 'frontalieri, ticino, svizzera, italia, ossolano, morto, visp, procura',
     ogTitle: 'Frontaliere ossolano morto a Visp: autopsia disposta',
     ogDescription: 'La procura elvetica ha disposto l\'autopsia sul corpo di un frontaliere ossolano trovato morto a Visp. Ecco cosa sappiamo finora.',
@@ -34783,7 +34783,7 @@ description: 'La procura elvetica ha disposto l\'autopsia sul corpo di un fronta
 
   'blog-putin-ucraina-termine-frontalieri': {
     title: 'Putin: «Il conflitto ucraino sta volgendo al termine»',
-description: 'Il presidente russo annuncia una svolta nel conflitto ucraino e si dice pronto a negoziare con l\'UE. Implicazioni per i frontalieri.',
+    description: 'Il presidente russo annuncia una svolta nel conflitto ucraino e si dice pronto a negoziare con l\'UE. Implicazioni per i frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, putin, conflitto, ucraino, volgendo',
     ogTitle: 'Putin: «Il conflitto ucraino sta volgendo al termine»',
     ogDescription: 'Il presidente russo annuncia una svolta nel conflitto ucraino e si dice pronto a negoziare con l\'UE. Implicazioni per i frontalieri.',
@@ -34817,7 +34817,7 @@ description: 'Il presidente russo annuncia una svolta nel conflitto ucraino e si
 
   'blog-cassa-malati-spacchettamento-ticino': {
     title: 'Cassa malati: spacchettare è doveroso per i frontalieri',
-description: 'Le due iniziative popolari sui premi di cassa malati in Ticino vengono separate. Ecco cosa cambia per i frontalieri.',
+    description: 'Le due iniziative popolari sui premi di cassa malati in Ticino vengono separate. Ecco cosa cambia per i frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, cassa, malati, spacchettare, doveroso',
     ogTitle: 'Cassa malati: spacchettare è doveroso per i frontalieri',
     ogDescription: 'Le due iniziative popolari sui premi di cassa malati in Ticino vengono separate. Ecco cosa cambia per i frontalieri',
@@ -35119,7 +35119,7 @@ description: 'Le due iniziative popolari sui premi di cassa malati in Ticino ven
 
   'blog-arlotti-franchigia-frontalieri-letta': {
     title: 'Arlotti chiede franchigia per frontalieri | Frontaliere Ticino',
-description: 'Il presidente di San Marino chiede il ripristino della franchigia per i frontalieri in Ticino. Ecco cosa cambia e cosa fare.',
+    description: 'Il presidente di San Marino chiede il ripristino della franchigia per i frontalieri in Ticino. Ecco cosa cambia e cosa fare.',
     keywords: 'frontalieri, ticino, svizzera, italia, arlotti, chiede, franchigia, presidente',
     ogTitle: 'Arlotti scrive a Letta, Saccomanni e Fassina: ripristinate la franchigia per i frontalieri',
     ogDescription: 'Il presidente di San Marino chiede il ripristino della franchigia per i frontalieri in Ticino. Ecco cosa cambia e cosa fare.',
@@ -35465,7 +35465,7 @@ description: 'Il presidente di San Marino chiede il ripristino della franchigia 
 
   'blog-secondo-pilastro-diviso-frontalieri-ticino': {
     title: 'Secondo pilastro: divisione anche dopo lunga separazione',
-description: 'Scopri come la divisione del secondo pilastro AVS/LPP influisce sui frontalieri del Ticino, anche dopo una lunga separazione.',
+    description: 'Scopri come la divisione del secondo pilastro AVS/LPP influisce sui frontalieri del Ticino, anche dopo una lunga separazione.',
     keywords: 'frontalieri, ticino, svizzera, italia, secondo, pilastro, divisione, anche',
     ogTitle: 'Secondo pilastro: divisione anche dopo lunga separazione',
     ogDescription: 'Scopri come la divisione del secondo pilastro AVS/LPP influisce sui frontalieri del Ticino, anche dopo una lunga separazione.',
@@ -35538,10 +35538,10 @@ description: 'Scopri come la divisione del secondo pilastro AVS/LPP influisce su
 
   'blog-whistleblower-zurigo-frontalieri-2026': {
     title: 'Direttrice USZ ringrazia whistleblower licenziato',
-description: 'Prima di questo scandalo, la clinica di cardiochirurgia dell\'USZ era considerata una delle migliori in Svizzera.',
+    description: 'Prima di questo scandalo, la clinica di cardiochirurgia dell\'USZ era considerata una delle migliori in Svizzera.',
     keywords: 'frontalieri, ticino, svizzera, italia, direttrice, ringrazia, whistleblower, licenziato',
     ogTitle: 'Direttrice USZ ringrazia whistleblower licenziato',
-ogDescription: 'La direttrice dell\'Ospedale universitario di Zurigo (USZ), Monika Jänicke, ha espresso la propria gratitudine nei confronti del whistleblower che ha denunciato le irregolarità nella clinica di cardiochirurgia.',
+    ogDescription: 'La direttrice dell\'Ospedale universitario di Zurigo (USZ), Monika Jänicke, ha espresso la propria gratitudine nei confronti del whistleblower che ha denunciato le irregolarità nella clinica di cardiochirurgia.',
     canonicalPath: '/articoli-frontaliere/whistleblower-zurigo-frontalieri-2026/',
     structuredData: {
       "@context": "https://schema.org",
@@ -35577,7 +35577,7 @@ ogDescription: 'La direttrice dell\'Ospedale universitario di Zurigo (USZ), Moni
 
   'blog-abbonamento-newsletter-ticino-2026': {
     title: 'Newsletter Ticino: come restare aggiornati sulle novità',
-description: 'Scopri come iscriverti alla newsletter gratuita di TVS per ricevere aggiornamenti su lavoro, economia e vita in Ticino.',
+    description: 'Scopri come iscriverti alla newsletter gratuita di TVS per ricevere aggiornamenti su lavoro, economia e vita in Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, newsletter, restare, aggiornati, sulle',
     ogTitle: 'Newsletter Ticino: come restare aggiornati sulle novità',
     ogDescription: 'Scopri come iscriverti alla newsletter gratuita di TVS per ricevere aggiornamenti su lavoro, economia e vita in Ticino',
@@ -35655,7 +35655,7 @@ description: 'Scopri come iscriverti alla newsletter gratuita di TVS per ricever
 
   'blog-giro-ditalia-silva-maglia-rosa': {
     title: 'Guillermo Silva vince la tappa e indossa la maglia rosa del Giro d\'Italia',
-description: 'L\'uruguaiano trionfa nella seconda tappa del Giro d\'Italia, diventando il primo uruguaiano a vincere una tappa di un grande giro.',
+    description: 'L\'uruguaiano trionfa nella seconda tappa del Giro d\'Italia, diventando il primo uruguaiano a vincere una tappa di un grande giro.',
     keywords: 'frontalieri, ticino, svizzera, italia, guillermo, silva, vince, tappa',
     ogTitle: 'Guillermo Silva vince la tappa e indossa la maglia rosa del Giro d\'Italia',
     ogDescription: 'L\'uruguaiano trionfa nella seconda tappa del Giro d\'Italia, diventando il primo uruguaiano a vincere una tappa di un grande giro.',
@@ -35694,7 +35694,7 @@ description: 'L\'uruguaiano trionfa nella seconda tappa del Giro d\'Italia, dive
 
   'blog-crans-montana-audizioni-frontalieri-2026': {
     title: 'Rogo di Crans-Montana: convocati tre nuovi indagati',
-description: 'Tre nuovi indagati, tra cui due figure politiche, saranno interrogati la prossima settimana per l\'incendio al bar Le Constellation.',
+    description: 'Tre nuovi indagati, tra cui due figure politiche, saranno interrogati la prossima settimana per l\'incendio al bar Le Constellation.',
     keywords: 'frontalieri, ticino, svizzera, italia, rogo, crans-montana, convocati, nuovi',
     ogTitle: 'Rogo di Crans-Montana: convocati tre nuovi indagati',
     ogDescription: 'Tre nuovi indagati, tra cui due figure politiche, saranno interrogati la prossima settimana per l\'incendio al bar Le Constellation.',
@@ -35923,7 +35923,7 @@ description: 'Tre nuovi indagati, tra cui due figure politiche, saranno interrog
 
   'blog-referendum-castelli-bellinzona-2026': {
     title: 'Referendum sui Castelli di Bellinzona: il popolo decide',
-description: 'Oltre 4.600 firme raccolte contro il credito per il progetto Fortezza. Il referendum è riuscito, ora la parola passa ai cittadini.',
+    description: 'Oltre 4.600 firme raccolte contro il credito per il progetto Fortezza. Il referendum è riuscito, ora la parola passa ai cittadini.',
     keywords: 'frontalieri, ticino, svizzera, italia, referendum, castelli, bellinzona, popolo',
     ogTitle: 'Referendum sui Castelli di Bellinzona: il popolo decide',
     ogDescription: 'Oltre 4.600 firme raccolte contro il credito per il progetto Fortezza. Il referendum è riuscito, ora la parola passa ai cittadini',
@@ -35957,7 +35957,7 @@ description: 'Oltre 4.600 firme raccolte contro il credito per il progetto Forte
 
   'blog-maratona-schlumpf-ginevra-2026': {
     title: 'Fabienne Schlumpf seconda a Ginevra: ritorno in maratona senza deludere',
-description: 'Fabienne Schlumpf torna a correre la maratona dopo due anni e si piazza seconda a Ginevra con un tempo di 2:31:15.',
+    description: 'Fabienne Schlumpf torna a correre la maratona dopo due anni e si piazza seconda a Ginevra con un tempo di 2:31:15.',
     keywords: 'frontalieri, ticino, svizzera, italia, fabienne, schlumpf, seconda, ginevra',
     ogTitle: 'Fabienne Schlumpf seconda a Ginevra: ritorno in maratona senza deludere',
     ogDescription: 'Fabienne Schlumpf torna a correre la maratona dopo due anni e si piazza seconda a Ginevra con un tempo di 2:31:15',
@@ -35996,7 +35996,7 @@ description: 'Fabienne Schlumpf torna a correre la maratona dopo due anni e si p
 
   'blog-siviero-rieletto-swiss-basketball': {
     title: 'Siviero rieletto presidente Swiss Basketball | Frontaliere Ticino',
-description: 'Andrea Siviero confermato alla guida della federazione svizzera di basket con 31 voti contro 24 del rivale Sergi.',
+    description: 'Andrea Siviero confermato alla guida della federazione svizzera di basket con 31 voti contro 24 del rivale Sergi.',
     keywords: 'frontalieri, ticino, svizzera, italia, siviero, rieletto, presidente, swiss',
     ogTitle: 'Siviero rieletto presidente Swiss Basketball',
     ogDescription: 'Andrea Siviero confermato alla guida della federazione svizzera di basket con 31 voti contro 24 del rivale Sergi',
@@ -36074,7 +36074,7 @@ description: 'Andrea Siviero confermato alla guida della federazione svizzera di
 
   'blog-giro-ditalia-magnier-froidevaux-2026': {
     title: 'Paul Magnier trionfa ancora al Giro d\'Italia: Froidevaux dodicesimo',
-description: 'Il francese Paul Magnier vince la terza tappa del Giro d\'Italia a Sofia, mentre il vodese Robin Froidevaux si piazza dodicesimo.',
+    description: 'Il francese Paul Magnier vince la terza tappa del Giro d\'Italia a Sofia, mentre il vodese Robin Froidevaux si piazza dodicesimo.',
     keywords: 'frontalieri, ticino, svizzera, italia, paul, magnier, trionfa, ancora',
     ogTitle: 'Paul Magnier trionfa ancora al Giro d\'Italia: Froidevaux dodicesimo',
     ogDescription: 'Il francese Paul Magnier vince la terza tappa del Giro d\'Italia a Sofia, mentre il vodese Robin Froidevaux si piazza dodicesimo.',
@@ -36113,7 +36113,7 @@ description: 'Il francese Paul Magnier vince la terza tappa del Giro d\'Italia a
 
   'blog-svizzeri-secondo-pilastro-casa': {
     title: 'Comprare casa? Uno svizzero su due svuota il secondo pilastro',
-description: 'Scopri come gli svizzeri utilizzano il secondo pilastro per l\'acquisto della casa e le implicazioni per i frontalieri.',
+    description: 'Scopri come gli svizzeri utilizzano il secondo pilastro per l\'acquisto della casa e le implicazioni per i frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, comprare, casa, svizzero, svuota',
     ogTitle: 'Comprare casa? Uno svizzero su due svuota il secondo pilastro',
     ogDescription: 'Scopri come gli svizzeri utilizzano il secondo pilastro per l\'acquisto della casa e le implicazioni per i frontalieri',
@@ -36147,7 +36147,7 @@ description: 'Scopri come gli svizzeri utilizzano il secondo pilastro per l\'acq
 
   'blog-disoccupazione-frontalieri-residenti': {
     title: 'Disoccupazione: stesse regole per frontalieri e residenti in Ticino',
-description: 'Nuove norme per la disoccupazione in Ticino: frontalieri e residenti ora hanno gli stessi diritti e obblighi. Ecco cosa cambia.',
+    description: 'Nuove norme per la disoccupazione in Ticino: frontalieri e residenti ora hanno gli stessi diritti e obblighi. Ecco cosa cambia.',
     keywords: 'frontalieri, ticino, svizzera, italia, disoccupazione, stesse, regole, residenti',
     ogTitle: 'Disoccupazione: stesse regole per frontalieri e residenti in Ticino',
     ogDescription: 'Nuove norme per la disoccupazione in Ticino: frontalieri e residenti ora hanno gli stessi diritti e obblighi. Ecco cosa cambia',
@@ -36186,7 +36186,7 @@ description: 'Nuove norme per la disoccupazione in Ticino: frontalieri e residen
 
   'blog-lavoro-insegnanti-ticino-opportunita': {
     title: 'Opportunità di lavoro per insegnanti nel Canton Ticino',
-description: 'Scopri le nuove opportunità di lavoro per insegnanti nel Canton Ticino e come i frontalieri possono approfittarne.',
+    description: 'Scopri le nuove opportunità di lavoro per insegnanti nel Canton Ticino e come i frontalieri possono approfittarne.',
     keywords: 'frontalieri, ticino, svizzera, italia, opportunità, lavoro, insegnanti, canton',
     ogTitle: 'Opportunità di lavoro per insegnanti nel Canton Ticino',
     ogDescription: 'Scopri le nuove opportunità di lavoro per insegnanti nel Canton Ticino e come i frontalieri possono approfittarne',
@@ -36264,7 +36264,7 @@ description: 'Scopri le nuove opportunità di lavoro per insegnanti nel Canton T
 
   'blog-questore-bimbo-pilastro-responsabilita': {
     title: 'Questore su bimbo caduto dal Pilastro: responsabilità da valutare',
-description: 'Il questore di Bologna commenta l\'incidente al Pilastro, ribadendo che le responsabilità saranno valutate dall\'autorità giudiziaria.',
+    description: 'Il questore di Bologna commenta l\'incidente al Pilastro, ribadendo che le responsabilità saranno valutate dall\'autorità giudiziaria.',
     keywords: 'frontalieri, ticino, svizzera, italia, questore, bimbo, caduto, pilastro',
     ogTitle: 'Questore su bimbo caduto dal Pilastro: responsabilità da valutare',
     ogDescription: 'Il questore di Bologna commenta l\'incidente al Pilastro, ribadendo che le responsabilità saranno valutate dall\'autorità giudiziaria.',
@@ -36405,7 +36405,7 @@ description: 'Il questore di Bologna commenta l\'incidente al Pilastro, ribadend
 
   'blog-lpp-nigri-country-manager-italia': {
     title: 'LPP: Nigri diventa Country Manager per l\'Italia',
-description: 'LPP nomina Nigri Country Manager per l\'Italia, puntando sul value-for-money di Sinsay retail&food. Opportunità per i frontalieri.',
+    description: 'LPP nomina Nigri Country Manager per l\'Italia, puntando sul value-for-money di Sinsay retail&food. Opportunità per i frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, nigri, diventa, country, manager',
     ogTitle: 'LPP: Nigri Country Manager Italia',
     ogDescription: 'LPP nomina Nigri Country Manager per l\'Italia, puntando sul value-for-money di Sinsay retail&food. Opportunità per i frontalieri',
@@ -36522,7 +36522,7 @@ description: 'LPP nomina Nigri Country Manager per l\'Italia, puntando sul value
 
   'blog-salario-domestico-ticino-aumento': {
     title: 'Aumento salariale per il personale domestico in Ticino',
-description: 'Scopri come l\'aumento del salario orario per il personale domestico in Ticino influenzerà i frontalieri e cosa fare per prepararsi.',
+    description: 'Scopri come l\'aumento del salario orario per il personale domestico in Ticino influenzerà i frontalieri e cosa fare per prepararsi.',
     keywords: 'frontalieri, ticino, svizzera, italia, aumento, salariale, personale, domestico',
     ogTitle: 'Aumento salariale per il personale domestico in Ticino',
     ogDescription: 'Scopri come l\'aumento del salario orario per il personale domestico in Ticino influenzerà i frontalieri e cosa fare per prepararsi.',
@@ -36561,7 +36561,7 @@ description: 'Scopri come l\'aumento del salario orario per il personale domesti
 
   'blog-frontaliere-pensione-avs-inps-2026': {
     title: 'Frontaliere pensione AVS/INPS 2026: oltre 20 km',
-description: 'Guida pratica per frontalieri Ticino: coordinamento pensioni AVS/INPS, finestre temporali e pianificazione per distanze oltre 20 km.',
+    description: 'Guida pratica per frontalieri Ticino: coordinamento pensioni AVS/INPS, finestre temporali e pianificazione per distanze oltre 20 km.',
     keywords: 'frontalieri, ticino, svizzera, italia, pensione, inps, oltre, pratica',
     ogTitle: 'Frontaliere pensione AVS/INPS 2026: oltre 20 km',
     ogDescription: 'Guida pratica per frontalieri Ticino: coordinamento pensioni AVS/INPS, finestre temporali e pianificazione per distanze oltre 20 km',
@@ -36639,7 +36639,7 @@ description: 'Guida pratica per frontalieri Ticino: coordinamento pensioni AVS/I
 
   'blog-lamal-cmi-frontalieri-conviene-2026': {
     title: 'LAMal o CMI: confronto 2026 | Frontaliere Ticino',
-description: 'Confronto aggiornato LAMal vs CMI per frontalieri Ticino. Premi, coperture e franchigie 2026. Esempi pratici per famiglie e single.',
+    description: 'Confronto aggiornato LAMal vs CMI per frontalieri Ticino. Premi, coperture e franchigie 2026. Esempi pratici per famiglie e single.',
     keywords: 'frontalieri, ticino, svizzera, italia, lamal, confronto, analisi, dettagliata',
     ogTitle: 'LAMal o CMI frontalieri: quale conviene nel 2026?',
     ogDescription: 'Confronto aggiornato LAMal vs CMI per frontalieri Ticino. Premi, coperture e franchigie 2026. Esempi pratici per famiglie e single.',
@@ -36910,7 +36910,7 @@ description: 'Confronto aggiornato LAMal vs CMI per frontalieri Ticino. Premi, c
     description: 'Allerta meteo arancione per vento forte nel varesotto. Scopri come impatta i frontalieri. Dati aggiornati 2026 per frontalieri in Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, allerta, meteo, temporali, grandine',
     ogTitle: 'Allerta meteo per temporali e grandine nel varesotto',
-ogDescription: 'Allerta meteo nel varesotto: cosa fare per i frontalieri.',
+    ogDescription: 'Allerta meteo nel varesotto: cosa fare per i frontalieri.',
     canonicalPath: '/articoli-frontaliere/temporali-grandine-varesotto-allerta-meteo/',
     structuredData: {
       "@context": "https://schema.org",
@@ -37019,7 +37019,7 @@ ogDescription: 'Allerta meteo nel varesotto: cosa fare per i frontalieri.',
 
   'blog-tassa-salute-frontalieri-licata-2026': {
     title: 'Stop alla tassa salute per frontalieri: Licata chiede confronto nazionale',
-description: 'Licata (Forza Italia) si oppone alla tassa sanitaria per frontalieri pre-2026 e chiede regole nazionali.',
+    description: 'Licata (Forza Italia) si oppone alla tassa sanitaria per frontalieri pre-2026 e chiede regole nazionali.',
     keywords: 'frontalieri, ticino, svizzera, italia, stop, alla, tassa, salute',
     ogTitle: 'Frontalieri: stop alla tassa salute. Licata difende i lavoratori storici',
     ogDescription: 'La battaglia contro la tassa sanitaria per i frontalieri pre-2026. Licata chiede un tavolo nazionale e fondi per la sanità di confine.',
@@ -37058,7 +37058,7 @@ description: 'Licata (Forza Italia) si oppone alla tassa sanitaria per frontalie
 
   'blog-traffico-umani-valico-tresa-impatto-frontalieri': {
     title: 'Traffico di esseri umani al valico di Tresa: cosa cambia per i frontalieri?',
-description: 'Arrestata rete criminale a Ponte Tresa. Aumento controlli, code e rischi per i frontalieri Ticino. Cosa fare e come proteggersi.',
+    description: 'Arrestata rete criminale a Ponte Tresa. Aumento controlli, code e rischi per i frontalieri Ticino. Cosa fare e come proteggersi.',
     keywords: 'frontalieri, ticino, svizzera, italia, traffico, esseri, umani, valico',
     ogTitle: 'Allerta frontalieri: controlli intensificati al valico di Tresa dopo traffici illeciti',
     ogDescription: 'Smantellata rete criminale curdo-turca. Rischio code e controlli severi per chi lavora in Ticino. Misure di sicurezza e diritti dei frontalieri.',
@@ -37136,7 +37136,7 @@ description: 'Arrestata rete criminale a Ponte Tresa. Aumento controlli, code e 
 
   'blog-nuovi-frontalieri-tasse-salate': {
     title: 'Nuovi frontalieri: tasse salate, è shock | Frontaliere Ticino',
-description: 'Scopri come le nuove disposizioni fiscali influiscono sui frontalieri in Ticino e cosa fare per ridurre le tasse.',
+    description: 'Scopri come le nuove disposizioni fiscali influiscono sui frontalieri in Ticino e cosa fare per ridurre le tasse.',
     keywords: 'frontalieri, ticino, svizzera, italia, nuovi, tasse, salate, shock',
     ogTitle: 'Tasse frontalieri Ticino',
     ogDescription: 'Informazioni sulle tasse per i frontalieri in Ticino e come gestirle.',
@@ -37170,10 +37170,10 @@ description: 'Scopri come le nuove disposizioni fiscali influiscono sui frontali
 
   'blog-riforma-disoccupazione-frontalieri-francia-svizzera': {
     title: 'Riforma disoccupazione frontalieri, pressioni dalla Francia sulla Svizzera',
-description: 'La riforma sulla disoccupazione per i frontalieri è al centro delle discussioni tra la Svizzera e la Francia.',
+    description: 'La riforma sulla disoccupazione per i frontalieri è al centro delle discussioni tra la Svizzera e la Francia.',
     keywords: 'frontalieri, ticino, svizzera, italia, riforma, disoccupazione, pressioni, dalla',
     ogTitle: 'Riforma disoccupazione frontalieri, pressioni dalla Francia sulla Svizzera',
-ogDescription: '"La Francia è pronta a fare pressione sulla Svizzera per applicare il nuovo accordo europeo sulle indennità di disoccupazione dei frontalieri" ha dichiarato il ministro francese del lavoro, Jean-Pierre Farandou.',
+    ogDescription: '"La Francia è pronta a fare pressione sulla Svizzera per applicare il nuovo accordo europeo sulle indennità di disoccupazione dei frontalieri" ha dichiarato il ministro francese del lavoro, Jean-Pierre Farandou.',
     canonicalPath: '/articoli-frontaliere/riforma-disoccupazione-frontalieri-francia-svizzera/',
     structuredData: {
       "@context": "https://schema.org",
@@ -37248,7 +37248,7 @@ ogDescription: '"La Francia è pronta a fare pressione sulla Svizzera per applic
 
   'blog-tassa-salute-frontalieri-luino-verbania': {
     title: 'Tassa salute frontalieri: caos tra Luino e Verbania',
-description: 'Il Pd denuncia disparità tra lavoratori frontalieri di Luino e Verbania, con possibili ricorsi sindacali e dubbi di costituzionalità.',
+    description: 'Il Pd denuncia disparità tra lavoratori frontalieri di Luino e Verbania, con possibili ricorsi sindacali e dubbi di costituzionalità.',
     keywords: 'frontalieri, ticino, svizzera, italia, tassa, salute, caos, luino',
     ogTitle: 'Tassa salute frontalieri: caos tra Luino e Verbania',
     ogDescription: 'Il Pd denuncia disparità tra lavoratori frontalieri di Luino e Verbania, con possibili ricorsi sindacali e dubbi di costituzionalità.',
@@ -37365,7 +37365,7 @@ description: 'Il Pd denuncia disparità tra lavoratori frontalieri di Luino e Ve
 
   'blog-blocco-ristorni-ticino-frontalieri-2026': {
     title: 'Blocco ristorni: Lega Ticinesi propone fondo sanità per frontalieri',
-description: 'La Lega dei Ticinesi propone di bloccare i ristorni per finanziare un fondo di emergenza sanità per i residenti del Canton Ticino.',
+    description: 'La Lega dei Ticinesi propone di bloccare i ristorni per finanziare un fondo di emergenza sanità per i residenti del Canton Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, blocco, ristorni, lega, ticinesi',
     ogTitle: 'Blocco ristorni: Lega Ticinesi propone fondo sanità per frontalieri',
     ogDescription: 'La Lega dei Ticinesi propone di bloccare i ristorni per finanziare un fondo di emergenza sanità per i residenti del Canton Ticino.',
@@ -37404,7 +37404,7 @@ description: 'La Lega dei Ticinesi propone di bloccare i ristorni per finanziare
 
   'blog-blocco-ristorni-ticino-politica-2026': {
     title: 'Blocco ristorni: la politica ticinese è possibilista',
-description: 'Il Consiglio di Stato ha tempo fino a fine giugno per decidere se trattenere i 120 milioni di imposta alla fonte dei frontalieri.',
+    description: 'Il Consiglio di Stato ha tempo fino a fine giugno per decidere se trattenere i 120 milioni di imposta alla fonte dei frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, blocco, ristorni, politica, ticinese',
     ogTitle: 'Blocco ristorni: la politica ticinese è possibilista',
     ogDescription: 'Il Consiglio di Stato ha tempo fino a fine giugno per decidere se trattenere i 120 milioni di imposta alla fonte dei frontalieri',
@@ -37521,7 +37521,7 @@ description: 'Il Consiglio di Stato ha tempo fino a fine giugno per decidere se 
 
   'blog-app-depressione-cassa-malati-2026': {
     title: 'App contro la depressione rimborsata dalla cassa malati: ecco come funziona',
-description: 'Dal primo luglio 2026, l\'app Deprexis sarà rimborsata dalle casse malati svizzere. Ecco cosa cambia per i frontalieri del Ticino.',
+    description: 'Dal primo luglio 2026, l\'app Deprexis sarà rimborsata dalle casse malati svizzere. Ecco cosa cambia per i frontalieri del Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, contro, depressione, rimborsata, dalla',
     ogTitle: 'App contro la depressione rimborsata dalla cassa malati: ecco come funziona',
     ogDescription: 'Dal primo luglio 2026, l\'app Deprexis sarà rimborsata dalle casse malati svizzere. Ecco cosa cambia per i frontalieri del Ticino',
@@ -37716,7 +37716,7 @@ description: 'Dal primo luglio 2026, l\'app Deprexis sarà rimborsata dalle cass
 
   'blog-tassa-salute-frontalieri-confronto-2026': {
     title: 'Tassa salute frontalieri: confronto in corso tra Forza Italia e PD',
-description: 'Il consigliere regionale del PD Samuele Astuti è disponibile a discutere con Forza Italia sulla tassa salute dei frontalieri.',
+    description: 'Il consigliere regionale del PD Samuele Astuti è disponibile a discutere con Forza Italia sulla tassa salute dei frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, tassa, salute, confronto, corso',
     ogTitle: 'Tassa salute frontalieri: confronto in corso tra Forza Italia e PD',
     ogDescription: 'Il consigliere regionale del PD Samuele Astuti è disponibile a discutere con Forza Italia sulla tassa salute dei frontalieri',
@@ -37823,7 +37823,7 @@ description: 'Il consigliere regionale del PD Samuele Astuti è disponibile a di
 
   'blog-citta-laghi-innovativa-transfrontaliera': {
     title: 'Città dei Laghi: innovazione e sostenibilità transfrontaliera',
-description: 'Sei classi premiate per progetti su sviluppo sostenibile e mobilità transfrontaliera nella \'Città dei Laghi\' insubrica.',
+    description: 'Sei classi premiate per progetti su sviluppo sostenibile e mobilità transfrontaliera nella \'Città dei Laghi\' insubrica.',
     keywords: 'frontalieri, ticino, svizzera, italia, città, laghi, innovazione, sostenibilità',
     ogTitle: 'Città dei Laghi: innovazione e sostenibilità transfrontaliera',
     ogDescription: 'Sei classi premiate per progetti su sviluppo sostenibile e mobilità transfrontaliera nella \'Città dei Laghi\' insubrica.',
@@ -37940,10 +37940,10 @@ description: 'Sei classi premiate per progetti su sviluppo sostenibile e mobilit
 
   'blog-cooperazione-fiscale-dac9-traguardo': {
     title: 'Cooperazione in materia fiscale. Direttiva Dac9 al traguardo',
-description: 'La Direttiva Dac9 entrerà in vigore nel 2026, rafforzando la cooperazione fiscale tra Svizzera e Italia.',
+    description: 'La Direttiva Dac9 entrerà in vigore nel 2026, rafforzando la cooperazione fiscale tra Svizzera e Italia.',
     keywords: 'frontalieri, ticino, svizzera, italia, cooperazione, materia, fiscale, direttiva',
     ogTitle: 'Cooperazione in materia fiscale. Direttiva Dac9 al traguardo',
-ogDescription: 'La Direttiva Dac9 entrerà in vigore nel 2026, rafforzando la cooperazione fiscale tra Svizzera e Italia.',
+    ogDescription: 'La Direttiva Dac9 entrerà in vigore nel 2026, rafforzando la cooperazione fiscale tra Svizzera e Italia.',
     canonicalPath: '/articoli-frontaliere/cooperazione-fiscale-dac9-traguardo/',
     structuredData: {
       "@context": "https://schema.org",
@@ -38052,10 +38052,10 @@ ogDescription: 'La Direttiva Dac9 entrerà in vigore nel 2026, rafforzando la co
 
   'blog-ffs-dirigenza-ticino-deposito-chiasso': {
     title: 'FFS in Ticino: dirigenza annuncia cambiamenti, deposito di Chiasso resta aperto',
-description: 'La dirigenza delle FFS scenderà in Ticino il 19 maggio per annunciare nuovi tagli e cambiamenti nella gestione del trasporto merci.',
+    description: 'La dirigenza delle FFS scenderà in Ticino il 19 maggio per annunciare nuovi tagli e cambiamenti nella gestione del trasporto merci.',
     keywords: 'frontalieri, ticino, svizzera, italia, dirigenza, annuncia, cambiamenti, deposito',
     ogTitle: 'FFS in Ticino: dirigenza annuncia cambiamenti, deposito di Chiasso resta aperto',
-ogDescription: 'La dirigenza delle FFS scenderà in Ticino il 19 maggio per annunciare nuovi tagli e cambiamenti nella gestione del trasporto merci.',
+    ogDescription: 'La dirigenza delle FFS scenderà in Ticino il 19 maggio per annunciare nuovi tagli e cambiamenti nella gestione del trasporto merci.',
     canonicalPath: '/articoli-frontaliere/ffs-dirigenza-ticino-deposito-chiasso/',
     structuredData: {
       "@context": "https://schema.org",
@@ -38237,10 +38237,10 @@ ogDescription: 'La dirigenza delle FFS scenderà in Ticino il 19 maggio per annu
 
   'blog-permesso-g-vs-b-frontalieri-2026-errori-comuni': {
     title: 'Permessi G e B per i frontalieri: errori comuni e come cambiarne status',
-description: 'Questo cambio di status comporta errori comuni, come la mancata presentazione dei documenti o la scadenza dei termini.',
+    description: 'Questo cambio di status comporta errori comuni, come la mancata presentazione dei documenti o la scadenza dei termini.',
     keywords: 'frontalieri, ticino, svizzera, italia, permessi, errori, comuni, cambiarne',
     ogTitle: 'Permessi G e B per i frontalieri: errori comuni e come cambiarne status',
-ogDescription: 'I frontalieri devono cambiare status da permesso G a permesso B entro il 2026.',
+    ogDescription: 'I frontalieri devono cambiare status da permesso G a permesso B entro il 2026.',
     canonicalPath: '/articoli-frontaliere/permesso-g-vs-b-frontalieri-2026-errori-comuni/',
     structuredData: {
       "@context": "https://schema.org",
@@ -38276,7 +38276,7 @@ ogDescription: 'I frontalieri devono cambiare status da permesso G a permesso B 
 
   'blog-permesso-g-vs-b-frontalieri-2026-oltre-20-km': {
     title: 'Confronto tra Permesso G e B nel 2026: quando conviene davvero cambiare status?',
-description: 'Il Nuovo Accordo Frontalieri potrebbe avere un impatto maggiore sui frontalieri che risiedono oltre 20 km dal confine italo-svizzero.',
+    description: 'Il Nuovo Accordo Frontalieri potrebbe avere un impatto maggiore sui frontalieri che risiedono oltre 20 km dal confine italo-svizzero.',
     keywords: 'frontalieri, ticino, svizzera, italia, confronto, permesso, quando, conviene',
     ogTitle: 'Confronto tra Permesso G e B nel 2026: quando conviene davvero cambiare status?',
     ogDescription: 'Il Nuovo Accordo Frontalieri potrebbe avere un impatto maggiore sui frontalieri che risiedono oltre 20 km dal confine italo-svizzero.',
@@ -38471,7 +38471,7 @@ description: 'Il Nuovo Accordo Frontalieri potrebbe avere un impatto maggiore su
 
   'blog-mobilitazione-deposito-macchinisti-chiasso': {
     title: 'Chiasso: mobilitazione contro i tagli al deposito macchinisti FFS Cargo',
-description: 'FFS annuncia ulteriori tagli al deposito macchinisti Cargo di Chiasso: assemblea pubblica e mobilitazione in Ticino.',
+    description: 'FFS annuncia ulteriori tagli al deposito macchinisti Cargo di Chiasso: assemblea pubblica e mobilitazione in Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, chiasso, mobilitazione, contro, tagli',
     ogTitle: 'Tagli al deposito FFS Cargo Chiasso: assemblea e mobilitazione',
     ogDescription: 'Deposito macchinisti FFS Cargo Chiasso: annunciati ulteriori tagli, assemblea pubblica e mobilitazione.',
@@ -38588,7 +38588,7 @@ description: 'FFS annuncia ulteriori tagli al deposito macchinisti Cargo di Chia
 
   'blog-libera-circolazione-ue-svizzera-impatti': {
     title: 'Libera circolazione UE-Svizzera: gli effetti sull\'economia elvetica',
-description: 'Scopri gli effetti della libera circolazione UE-Svizzera sull\'economia elvetica e le implicazioni per i frontalieri. Leggi ora!.',
+    description: 'Scopri gli effetti della libera circolazione UE-Svizzera sull\'economia elvetica e le implicazioni per i frontalieri. Leggi ora!.',
     keywords: 'frontalieri, ticino, svizzera, italia, libera, circolazione, ue-svizzera, effetti',
     ogTitle: 'Libera circolazione UE-Svizzera: effetti sull\'economia elvetica',
     ogDescription: 'Scopri gli effetti della libera circolazione UE-Svizzera sull\'economia elvetica e le implicazioni per i frontalieri. Leggi ora!',
@@ -38622,10 +38622,10 @@ description: 'Scopri gli effetti della libera circolazione UE-Svizzera sull\'eco
 
   'blog-iniziativa-10-milioni-votazione-14-giugno': {
     title: 'Iniziativa 10 milioni: l\'UDC torna alla carica',
-description: 'Traffico, penuria di alloggi, cementificazione e criminalità alle stelle. L\'iniziativa \'No a una Svizzera da 10 milioni!\' sarà votata il 14 giugno.',
+    description: 'Traffico, penuria di alloggi, cementificazione e criminalità alle stelle. L\'iniziativa \'No a una Svizzera da 10 milioni!\' sarà votata il 14 giugno.',
     keywords: 'frontalieri, ticino, svizzera, italia, iniziativa, milioni, torna, alla',
     ogTitle: 'Iniziativa 10 milioni: la situazione è insostenibile o è la solita battaglia dell\'UDC?',
-ogDescription: 'Traffico, penuria di alloggi, cementificazione e criminalità alle stelle. L\'iniziativa \'No a una Svizzera da 10 milioni!\' sarà votata il 14 giugno.',
+    ogDescription: 'Traffico, penuria di alloggi, cementificazione e criminalità alle stelle. L\'iniziativa \'No a una Svizzera da 10 milioni!\' sarà votata il 14 giugno.',
     canonicalPath: '/articoli-frontaliere/iniziativa-10-milioni-votazione-14-giugno/',
     structuredData: {
       "@context": "https://schema.org",
@@ -38656,7 +38656,7 @@ ogDescription: 'Traffico, penuria di alloggi, cementificazione e criminalità al
 
   'blog-svizzera-investimenti-ricerca-2026': {
     title: 'Svizzera terza al mondo negli investimenti aziendali nella ricerca',
-description: 'La Svizzera si conferma ai vertici mondiali per l\'innovazione con il terzo posto per intensità di ricerca e sviluppo.',
+    description: 'La Svizzera si conferma ai vertici mondiali per l\'innovazione con il terzo posto per intensità di ricerca e sviluppo.',
     keywords: 'frontalieri, ticino, svizzera, italia, terza, mondo, negli, investimenti',
     ogTitle: 'Svizzera terza al mondo negli investimenti aziendali nella ricerca',
     ogDescription: 'La Svizzera si conferma ai vertici mondiali per l\'innovazione con il terzo posto per intensità di ricerca e sviluppo.',
@@ -38888,7 +38888,7 @@ description: 'La Svizzera si conferma ai vertici mondiali per l\'innovazione con
     description: 'Scopri quanto conta il mercato della pasta in Svizzera e le sfide per i produttori elvetici. La Svizzera produce circa 40\'000 tonnellate di pasta all\'anno, ma',
     keywords: 'frontalieri, ticino, svizzera, italia, pasta, quanto, pesa, produce',
     ogTitle: 'Pasta: l\'Italia al top, ma quanto pesa la Svizzera? | Frontaliere Ticino',
-ogDescription: 'La Svizzera produce circa 40\'000 tonnellate di pasta all\'anno, ma rappresenta solo una piccola parte del mercato mondiale della pasta.',
+    ogDescription: 'La Svizzera produce circa 40\'000 tonnellate di pasta all\'anno, ma rappresenta solo una piccola parte del mercato mondiale della pasta.',
     canonicalPath: '/articoli-frontaliere/pasta-svizzera-italia-2026/',
     structuredData: {
       "@context": "https://schema.org",
@@ -38924,10 +38924,10 @@ ogDescription: 'La Svizzera produce circa 40\'000 tonnellate di pasta all\'anno,
 
   'blog-code-e-non-solo-in-autostrada': {
     title: 'Code, e non solo in autostrada | Frontaliere Ticino',
-description: 'Rientro difficile dopo il ponte dell\'Ascensione: disagi sull\'A2 in direzione nord e traffico intenso anche sulle strade cantonali.',
+    description: 'Rientro difficile dopo il ponte dell\'Ascensione: disagi sull\'A2 in direzione nord e traffico intenso anche sulle strade cantonali.',
     keywords: 'frontalieri, ticino, svizzera, italia, code, solo, autostrada, rientro',
     ogTitle: 'Code, e non solo in autostrada | Frontaliere Ticino',
-ogDescription: 'Rientro difficile dopo il ponte dell\'Ascensione: disagi sull\'A2 in direzione nord e traffico intenso anche sulle strade cantonali.',
+    ogDescription: 'Rientro difficile dopo il ponte dell\'Ascensione: disagi sull\'A2 in direzione nord e traffico intenso anche sulle strade cantonali.',
     canonicalPath: '/articoli-frontaliere/code-e-non-solo-in-autostrada/',
     structuredData: {
       "@context": "https://schema.org",
@@ -38963,7 +38963,7 @@ ogDescription: 'Rientro difficile dopo il ponte dell\'Ascensione: disagi sull\'A
 
   'blog-traffico-rientro-ascensione-ticino': {
     title: 'Ascensione, in aumento il traffico del rientro',
-description: 'Il rientro dal lungo ponte dell\'Ascensione sta entrando nel vivo, soprattutto per quanto concerne il traffico sulla A2, direzione Nord.',
+    description: 'Il rientro dal lungo ponte dell\'Ascensione sta entrando nel vivo, soprattutto per quanto concerne il traffico sulla A2, direzione Nord.',
     keywords: 'frontalieri, ticino, svizzera, italia, ascensione, aumento, traffico, rientro',
     ogTitle: 'Ascensione, in aumento il traffico del rientro in Ticino',
     ogDescription: 'Il rientro dal lungo ponte dell\'Ascensione sta entrando nel vivo, soprattutto per quanto concerne il traffico sulla A2, direzione Nord.',
@@ -39314,7 +39314,7 @@ description: 'Il rientro dal lungo ponte dell\'Ascensione sta entrando nel vivo,
 
   'blog-autostrada-chiusure-maggio-2026': {
     title: 'Disagi in arrivo per lavori autostradali alle barriere antirumore sull\'Autolaghi',
-description: 'Chiusure notturne sulla A8 Milano-Varese per lavori di riqualifica delle barriere antirumore. Deviazioni e alternative per i pendolari.',
+    description: 'Chiusure notturne sulla A8 Milano-Varese per lavori di riqualifica delle barriere antirumore. Deviazioni e alternative per i pendolari.',
     keywords: 'frontalieri, ticino, svizzera, italia, disagi, arrivo, lavori, autostradali',
     ogTitle: 'Inizia un\'altra settimana di disagi per i lavori autostradali alle barriere antirumore sull\'Autolaghi',
     ogDescription: 'Chiusure notturne sulla A8 Milano-Varese per lavori di riqualifica delle barriere antirumore. Deviazioni e alternative per i pendolari.',
@@ -39353,10 +39353,10 @@ description: 'Chiusure notturne sulla A8 Milano-Varese per lavori di riqualifica
 
   'blog-lgbtqia-lavoro-sondaggio-unia-imbarco-immediato': {
     title: 'Lavoro e discriminazioni, un sondaggio per le persone LGBTQIA+',
-description: 'UNIA e Imbarco Immediato lanciano un sondaggio per indagare le discriminazioni sul posto di lavoro verso le persone LGBTQIA+.',
+    description: 'UNIA e Imbarco Immediato lanciano un sondaggio per indagare le discriminazioni sul posto di lavoro verso le persone LGBTQIA+.',
     keywords: 'frontalieri, ticino, svizzera, italia, lavoro, discriminazioni, sondaggio, persone',
     ogTitle: 'Lavoro e discriminazioni, un sondaggio per le persone LGBTQIA+',
-ogDescription: 'UNIA e Imbarco Immediato lanciano un sondaggio per indagare le discriminazioni sul posto di lavoro verso le persone LGBTQIA+.',
+    ogDescription: 'UNIA e Imbarco Immediato lanciano un sondaggio per indagare le discriminazioni sul posto di lavoro verso le persone LGBTQIA+.',
     canonicalPath: '/articoli-frontaliere/lgbtqia-lavoro-sondaggio-unia-imbarco-immediato/',
     structuredData: {
       "@context": "https://schema.org",
@@ -39392,7 +39392,7 @@ ogDescription: 'UNIA e Imbarco Immediato lanciano un sondaggio per indagare le d
 
   'blog-tensioni-tassa-lombarda-ipotesi-blocco-ristorni-cassis-ticino': {
     title: 'Tensioni su tassa lombarda e ipotesi blocco ristorni, Cassis in Ticino',
-description: 'Il Consiglio di Stato del Ticino esprime preoccupazione per le tensioni sulla tassa lombarda e l\'ipotesi di blocco dei ristorni.',
+    description: 'Il Consiglio di Stato del Ticino esprime preoccupazione per le tensioni sulla tassa lombarda e l\'ipotesi di blocco dei ristorni.',
     keywords: 'frontalieri, ticino, svizzera, italia, tensioni, tassa, lombarda, ipotesi',
     ogTitle: 'Tensioni su tassa lombarda e ipotesi blocco ristorni, Cassis in Ticino',
     ogDescription: 'Il Consiglio di Stato del Ticino esprime preoccupazione per le tensioni sulla tassa lombarda e l\'ipotesi di blocco dei ristorni',
@@ -39509,10 +39509,10 @@ description: 'Il Consiglio di Stato del Ticino esprime preoccupazione per le ten
 
   'blog-il-ticino-ha-1200-securini-4-su-10-sono-frontalieri-434090': {
     title: 'Il Ticino ha 1.200 \'securini\', 4 su 10 sono frontalieri',
-description: 'Il Consiglio di Stato del Ticino ha fornito i dati aggiornati sul numero di agenti di sicurezza privata autorizzati e il loro status di frontalieri.',
+    description: 'Il Consiglio di Stato del Ticino ha fornito i dati aggiornati sul numero di agenti di sicurezza privata autorizzati e il loro status di frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, securini, sono, consiglio, stato',
     ogTitle: 'Il Ticino ha 1.200 \'securini\', 4 su 10 sono frontalieri',
-ogDescription: 'Il Consiglio di Stato del Ticino ha fornito i dati aggiornati sul numero di agenti di sicurezza privata autorizzati e il loro status di frontalieri.',
+    ogDescription: 'Il Consiglio di Stato del Ticino ha fornito i dati aggiornati sul numero di agenti di sicurezza privata autorizzati e il loro status di frontalieri.',
     canonicalPath: '/articoli-frontaliere/il-ticino-ha-1200-securini-4-su-10-sono-frontalieri-434090/',
     structuredData: {
       "@context": "https://schema.org",
@@ -39548,10 +39548,10 @@ ogDescription: 'Il Consiglio di Stato del Ticino ha fornito i dati aggiornati su
 
   'blog-doppia-imposizione-frontalieri-sud-grigion': {
     title: 'Doppia imposizione dei frontalieri, le preoccupazioni a sud dei Grigioni',
-description: 'Tuttavia, le nuove regole fiscali introdotte nel 2023 hanno creato alcune preoccupazioni tra i frontalieri e i loro datori di lavoro.',
+    description: 'Tuttavia, le nuove regole fiscali introdotte nel 2023 hanno creato alcune preoccupazioni tra i frontalieri e i loro datori di lavoro.',
     keywords: 'frontalieri, ticino, svizzera, italia, doppia, imposizione, preoccupazioni, grigioni',
     ogTitle: 'Doppia imposizione dei frontalieri, le preoccupazioni a sud dei Grigioni',
-ogDescription: 'Le nuove regole fiscali per i frontalieri, entrate in vigore nel 2023, hanno creato preoccupazione e difficoltà di reclutamento in specifici settori del Grigioni italiano.',
+    ogDescription: 'Le nuove regole fiscali per i frontalieri, entrate in vigore nel 2023, hanno creato preoccupazione e difficoltà di reclutamento in specifici settori del Grigioni italiano.',
     canonicalPath: '/articoli-frontaliere/doppia-imposizione-frontalieri-sud-grigion/',
     structuredData: {
       "@context": "https://schema.org",
@@ -39621,7 +39621,7 @@ ogDescription: 'Le nuove regole fiscali per i frontalieri, entrate in vigore nel
 
   'blog-pensioni-svizzere-all-estero-numerose-ma-modeste': {
     title: 'Le pensioni svizzere versate all’estero sono numerose, ma modeste',
-description: 'Le pensioni svizzere versate all’estero ammontano a circa 1 miliardo di franchi svizzeri all’anno, ma sono in media piuttosto basse.',
+    description: 'Le pensioni svizzere versate all’estero ammontano a circa 1 miliardo di franchi svizzeri all’anno, ma sono in media piuttosto basse.',
     keywords: 'frontalieri, ticino, svizzera, italia, pensioni, svizzere, versate, estero',
     ogTitle: 'Le pensioni svizzere versate all’estero sono numerose, ma modeste',
     ogDescription: 'Le pensioni svizzere versate all’estero ammontano a circa 1 miliardo di franchi svizzeri all’anno, ma sono in media piuttosto basse',
@@ -39660,10 +39660,10 @@ description: 'Le pensioni svizzere versate all’estero ammontano a circa 1 mili
 
   'blog-ucraini-in-svizzera-permesso-s-b-timori-dei-cantoni': {
     title: 'Ucraini in Svizzera: dal permesso S a quello B, i timori dei cantoni',
-description: 'Il Cantone del Ticino esprime preoccupazione per il cambiamento di status degli ucraini in Svizzera dal permesso S a quello B.',
+    description: 'Il Cantone del Ticino esprime preoccupazione per il cambiamento di status degli ucraini in Svizzera dal permesso S a quello B.',
     keywords: 'frontalieri, ticino, svizzera, italia, ucraini, permesso, quello, timori',
     ogTitle: 'Ucraini in Svizzera: dal permesso S a quello B, i timori dei cantoni',
-ogDescription: 'Il Cantone del Ticino esprime preoccupazione per il cambiamento di status degli ucraini in Svizzera dal permesso S a quello B.',
+    ogDescription: 'Il Cantone del Ticino esprime preoccupazione per il cambiamento di status degli ucraini in Svizzera dal permesso S a quello B.',
     canonicalPath: '/articoli-frontaliere/ucraini-in-svizzera-permesso-s-b-timori-dei-cantoni/',
     structuredData: {
       "@context": "https://schema.org",
@@ -39772,10 +39772,10 @@ ogDescription: 'Il Cantone del Ticino esprime preoccupazione per il cambiamento 
 
   'blog-assegno-inclusione-maggio-2026-ricarica-ordinaria': {
     title: 'Assegno Inclusione: date lavorazioni e pagamenti maggio 2026',
-description: 'Le lavorazioni e la ricarica ordinaria dell’Assegno di Inclusione di fine maggio 2026 sono vicine.',
+    description: 'Le lavorazioni e la ricarica ordinaria dell’Assegno di Inclusione di fine maggio 2026 sono vicine.',
     keywords: 'frontalieri, ticino, svizzera, italia, assegno, inclusione, date, lavorazioni',
     ogTitle: 'Assegno di Inclusione, ricarica ordinaria maggio 2026: date lavorazioni e pagamenti di fine mese',
-ogDescription: 'Le lavorazioni e la ricarica ordinaria dell’Assegno di Inclusione di fine maggio 2026 sono vicine.',
+    ogDescription: 'Le lavorazioni e la ricarica ordinaria dell’Assegno di Inclusione di fine maggio 2026 sono vicine.',
     canonicalPath: '/articoli-frontaliere/assegno-inclusione-maggio-2026-ricarica-ordinaria/',
     structuredData: {
       "@context": "https://schema.org",
@@ -39811,10 +39811,10 @@ ogDescription: 'Le lavorazioni e la ricarica ordinaria dell’Assegno di Inclusi
 
   'blog-il-municipio-e-le-aziende-per-conoscersi-meglio': {
     title: 'Il municipio e le aziende, per conoscersi meglio',
-description: 'Il municipio di Vezia organizza un evento per rafforzare il dialogo con le realtà aziendali attive sul territorio.',
+    description: 'Il municipio di Vezia organizza un evento per rafforzare il dialogo con le realtà aziendali attive sul territorio.',
     keywords: 'frontalieri, ticino, svizzera, italia, municipio, aziende, conoscersi, meglio',
     ogTitle: 'Il municipio e le aziende, per conoscersi meglio',
-ogDescription: 'Il municipio di Vezia organizza un evento per rafforzare il dialogo con le realtà aziendali attive sul territorio.',
+    ogDescription: 'Il municipio di Vezia organizza un evento per rafforzare il dialogo con le realtà aziendali attive sul territorio.',
     canonicalPath: '/articoli-frontaliere/il-municipio-e-le-aziende-per-conoscersi-meglio/',
     structuredData: {
       "@context": "https://schema.org",
@@ -39850,10 +39850,10 @@ ogDescription: 'Il municipio di Vezia organizza un evento per rafforzare il dial
 
   'blog-orario-lavoro-settimanale-svizzera-2025': {
     title: 'Orario di lavoro settimanale in Svizzera: 40 ore e 3 minuti nel 2025',
-description: 'L\'orario di lavoro settimanale in Svizzera si è mantenuto stabile nel 2025 a 40 ore e 3 minuti, segnando però un forte aumento rispetto al 2020.',
+    description: 'L\'orario di lavoro settimanale in Svizzera si è mantenuto stabile nel 2025 a 40 ore e 3 minuti, segnando però un forte aumento rispetto al 2020.',
     keywords: 'frontalieri, ticino, svizzera, italia, orario, lavoro, settimanale, minuti',
     ogTitle: 'Orario di lavoro settimanale in Svizzera: 40 ore e 3 minuti nel 2025',
-ogDescription: 'L\'orario di lavoro settimanale in Svizzera si è mantenuto stabile nel 2025 a 40 ore e 3 minuti, segnando però un forte aumento rispetto al 2020.',
+    ogDescription: 'L\'orario di lavoro settimanale in Svizzera si è mantenuto stabile nel 2025 a 40 ore e 3 minuti, segnando però un forte aumento rispetto al 2020.',
     canonicalPath: '/articoli-frontaliere/orario-lavoro-settimanale-svizzera-2025/',
     structuredData: {
       "@context": "https://schema.org",
@@ -39889,7 +39889,7 @@ ogDescription: 'L\'orario di lavoro settimanale in Svizzera si è mantenuto stab
 
   'blog-regime-fiscale-frontaliere-svizzera': {
     title: 'Regime fiscale frontalieri in Svizzera | Frontaliere Ticino',
-description: 'Approfondimento sulle nuove norme fiscali per i frontalieri in Svizzera dal 2026, con focus su imposte alla fonte e ristorni.',
+    description: 'Approfondimento sulle nuove norme fiscali per i frontalieri in Svizzera dal 2026, con focus su imposte alla fonte e ristorni.',
     keywords: 'frontalieri, ticino, svizzera, italia, regime, fiscale, approfondimento, focus',
     ogTitle: 'Regime fiscale frontalieri in Svizzera 2026',
     ogDescription: 'Novità fiscali per i frontalieri in Svizzera dal 2026, con focus su aliquote, ristorni e procedure.',
@@ -39923,7 +39923,7 @@ description: 'Approfondimento sulle nuove norme fiscali per i frontalieri in Svi
 
   'blog-lavoro-chiasso-opportunita-frontalieri': {
     title: 'Lavoro a Chiasso: Opportunità per i Frontalieri',
-description: 'Scopri le opportunità di lavoro a Chiasso per i frontalieri, con dettagli su permessi, fiscalità e vantaggi del lavorare in Ticino.',
+    description: 'Scopri le opportunità di lavoro a Chiasso per i frontalieri, con dettagli su permessi, fiscalità e vantaggi del lavorare in Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, lavoro, chiasso, opportunità, scopri',
     ogTitle: 'Lavoro a Chiasso: Opportunità per Frontalieri',
     ogDescription: 'Scopri le opportunità di lavoro a Chiasso per i frontalieri, con dettagli su permessi, fiscalità e vantaggi del lavorare in Ticino.',
@@ -40001,7 +40001,7 @@ description: 'Scopri le opportunità di lavoro a Chiasso per i frontalieri, con 
 
   'blog-modifica-lamal-finaziamento-uniforme': {
     title: 'Modifica LAMal: Finanziamento uniforme delle prestazioni',
-description: 'Scopri le novità sulla modifica LAMal e il finanziamento uniforme delle prestazioni sanitarie in Svizzera, con focus sui frontalieri.',
+    description: 'Scopri le novità sulla modifica LAMal e il finanziamento uniforme delle prestazioni sanitarie in Svizzera, con focus sui frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, modifica, lamal, finanziamento, uniforme',
     ogTitle: 'Modifica LAMal: Finanziamento uniforme delle prestazioni',
     ogDescription: 'Scopri le novità sulla modifica LAMal e il finanziamento uniforme delle prestazioni sanitarie in Svizzera, con focus sui frontalieri',
@@ -40040,7 +40040,7 @@ description: 'Scopri le novità sulla modifica LAMal e il finanziamento uniforme
 
   'blog-calcolo-salario-netto-svizzera-frontalieri': {
     title: 'Calcolo Salario Netto Svizzera: Come Funziona per i Frontalieri',
-description: 'Scopri come calcolare il tuo salario netto in Svizzera, con dettagli su imposte, contributi e ristorni per i frontalieri del Ticino.',
+    description: 'Scopri come calcolare il tuo salario netto in Svizzera, con dettagli su imposte, contributi e ristorni per i frontalieri del Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, calcolo, salario, netto, funziona',
     ogTitle: 'Calcolo Salario Netto Svizzera: Come Funziona per i Frontalieri',
     ogDescription: 'Scopri come calcolare il tuo salario netto in Svizzera, con dettagli su imposte, contributi e ristorni per i frontalieri del Ticino.',
@@ -40079,7 +40079,7 @@ description: 'Scopri come calcolare il tuo salario netto in Svizzera, con dettag
 
   'blog-documenti-primo-giorno-lavoro-ticino-2026': {
     title: 'Documenti per il primo giorno di lavoro in Ticino: checklist 2026',
-description: 'Scopri quali documenti sono necessari per il tuo primo giorno di lavoro in Ticino nel 2026 e come prepararti al meglio.',
+    description: 'Scopri quali documenti sono necessari per il tuo primo giorno di lavoro in Ticino nel 2026 e come prepararti al meglio.',
     keywords: 'frontalieri, ticino, svizzera, italia, documenti, primo, giorno, lavoro',
     ogTitle: 'Documenti per il primo giorno di lavoro in Ticino: checklist 2026',
     ogDescription: 'Scopri quali documenti sono necessari per il tuo primo giorno di lavoro in Ticino nel 2026 e come prepararti al meglio',
@@ -40157,7 +40157,7 @@ description: 'Scopri quali documenti sono necessari per il tuo primo giorno di l
 
   'blog-trasporti-chiasso-lugano-frontalieri': {
     title: 'Trasporti Chiasso-Lugano: guida pratica per frontalieri',
-description: 'Scopri come muoverti tra Chiasso e Lugano con treno, auto e abbonamenti. Guida pratica con costi e consigli per i frontalieri.',
+    description: 'Scopri come muoverti tra Chiasso e Lugano con treno, auto e abbonamenti. Guida pratica con costi e consigli per i frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, trasporti, chiasso-lugano, pratica, scopri',
     ogTitle: 'Trasporti Chiasso-Lugano: guida pratica per frontalieri',
     ogDescription: 'Scopri come muoverti tra Chiasso e Lugano con treno, auto e abbonamenti. Guida pratica con costi e consigli per i frontalieri.',
@@ -40235,7 +40235,7 @@ description: 'Scopri come muoverti tra Chiasso e Lugano con treno, auto e abbona
 
   'blog-frontaliere-asilo-nido-svizzera': {
     title: 'Frontaliere con figli: guida agli asili nido in Svizzera',
-description: 'Scopri costi, liste d\'attesa e alternative per i frontalieri con figli in Ticino. Guida pratica con dati aggiornati.',
+    description: 'Scopri costi, liste d\'attesa e alternative per i frontalieri con figli in Ticino. Guida pratica con dati aggiornati.',
     keywords: 'frontalieri, ticino, svizzera, italia, figli, agli, asili, nido',
     ogTitle: 'Frontaliere con figli: guida agli asili nido in Svizzera',
     ogDescription: 'Scopri costi, liste d\'attesa e alternative per i frontalieri con figli in Ticino. Guida pratica con dati aggiornati.',
@@ -40269,7 +40269,7 @@ description: 'Scopri costi, liste d\'attesa e alternative per i frontalieri con 
 
   'blog-cambio-euro-franco-frontalieri': {
     title: 'Frontalieri: cambio euro franco conviene | Frontaliere Ticino',
-description: 'Scopri le migliori strategie di cambio CHF-EUR per i frontalieri, le piattaforme di cambio valuta e l\'impatto sullo stipendio.',
+    description: 'Scopri le migliori strategie di cambio CHF-EUR per i frontalieri, le piattaforme di cambio valuta e l\'impatto sullo stipendio.',
     keywords: 'frontalieri, ticino, svizzera, italia, cambio, euro, franco, conviene',
     ogTitle: 'Frontalieri: cambio euro franco conviene',
     ogDescription: 'Scopri le migliori strategie di cambio CHF-EUR per i frontalieri, le piattaforme di cambio valuta e l\'impatto sullo stipendio',
@@ -40386,7 +40386,7 @@ description: 'Scopri le migliori strategie di cambio CHF-EUR per i frontalieri, 
 
   'blog-frontaliere-mutuo-casa-svizzera-requisiti': {
     title: 'Frontaliere: come ottenere un mutuo per la casa in Svizzera',
-description: 'Guida pratica per i frontalieri che vogliono acquistare casa in Svizzera: requisiti, banche e procedure da seguire.',
+    description: 'Guida pratica per i frontalieri che vogliono acquistare casa in Svizzera: requisiti, banche e procedure da seguire.',
     keywords: 'frontalieri, ticino, svizzera, italia, ottenere, mutuo, casa, pratica',
     ogTitle: 'Frontaliere: come ottenere un mutuo per la casa in Svizzera',
     ogDescription: 'Guida pratica per i frontalieri che vogliono acquistare casa in Svizzera: requisiti, banche e procedure da seguire',
@@ -40464,7 +40464,7 @@ description: 'Guida pratica per i frontalieri che vogliono acquistare casa in Sv
 
   'blog-frontalieri-detrazioni-fiscali-italia-2026': {
     title: 'Frontalieri: Guida alle detrazioni fiscali in Italia 2026',
-description: 'Scopri quali spese possono essere scaricate e i documenti necessari per le detrazioni fiscali dei frontalieri in Italia nel 2026.',
+    description: 'Scopri quali spese possono essere scaricate e i documenti necessari per le detrazioni fiscali dei frontalieri in Italia nel 2026.',
     keywords: 'frontalieri, ticino, svizzera, italia, alle, detrazioni, fiscali, scopri',
     ogTitle: 'Frontalieri: Guida alle detrazioni fiscali in Italia 2026',
     ogDescription: 'Scopri quali spese possono essere scaricate e i documenti necessari per le detrazioni fiscali dei frontalieri in Italia nel 2026.',
@@ -40581,7 +40581,7 @@ description: 'Scopri quali spese possono essere scaricate e i documenti necessar
 
   'blog-scelta-residenza-italia-svizzera-2026': {
     title: 'Residenza Italia o Svizzera: la scelta migliore per una famiglia',
-description: 'Confronto tra costi, tempi di viaggio, sanità e fiscalità per aiutare le famiglie con figli a decidere dove risiedere nel 2026.',
+    description: 'Confronto tra costi, tempi di viaggio, sanità e fiscalità per aiutare le famiglie con figli a decidere dove risiedere nel 2026.',
     keywords: 'frontalieri, ticino, svizzera, italia, residenza, scelta, migliore, famiglia',
     ogTitle: 'Residenza Italia o Svizzera: la scelta migliore per una famiglia con figli nel 2026',
     ogDescription: 'Confronto tra costi, tempi di viaggio, sanità e fiscalità per aiutare le famiglie con figli a decidere dove risiedere nel 2026.',
@@ -40615,7 +40615,7 @@ description: 'Confronto tra costi, tempi di viaggio, sanità e fiscalità per ai
 
   'blog-laivin-festival-cassano-valcuvia-2026': {
     title: 'LaivIn 2026: 300 studenti per festival teatro | Frontaliere Ticino',
-description: 'Dal 26 al 28 maggio, il Festival LaivIn Plus porterà 300 ragazzi a Cassano Valcuvia per 12 spettacoli e laboratori teatrali diffusi.',
+    description: 'Dal 26 al 28 maggio, il Festival LaivIn Plus porterà 300 ragazzi a Cassano Valcuvia per 12 spettacoli e laboratori teatrali diffusi.',
     keywords: 'frontalieri, ticino, svizzera, italia, laivin, studenti, festival, teatro',
     ogTitle: 'LaivIn 2026 a Cassano Valcuvia: 300 studenti per un festival di teatro e crescita',
     ogDescription: 'Dal 26 al 28 maggio, il Festival LaivIn Plus porterà 300 ragazzi a Cassano Valcuvia per 12 spettacoli e laboratori teatrali diffusi.',
@@ -40810,7 +40810,7 @@ description: 'Dal 26 al 28 maggio, il Festival LaivIn Plus porterà 300 ragazzi 
 
   'blog-rientro-pentecoste-traffico-ticino-2026': {
     title: 'Pentecoste 2026: traffico in rientro verso il Ticino',
-description: 'Dopo il weekend lungo di Pentecoste, il rientro verso il Ticino promette meno code rispetto agli anni precedenti. Ecco cosa aspettarsi.',
+    description: 'Dopo il weekend lungo di Pentecoste, il rientro verso il Ticino promette meno code rispetto agli anni precedenti. Ecco cosa aspettarsi.',
     keywords: 'frontalieri, ticino, svizzera, italia, pentecoste, traffico, rientro, verso',
     ogTitle: 'Pentecoste 2026: traffico in rientro verso il Ticino',
     ogDescription: 'Dopo il weekend lungo di Pentecoste, il rientro verso il Ticino promette meno code rispetto agli anni precedenti. Ecco cosa aspettarsi.',
@@ -40849,7 +40849,7 @@ description: 'Dopo il weekend lungo di Pentecoste, il rientro verso il Ticino pr
 
   'blog-meccanici-manutentori-edili-introvabili-ticino': {
     title: 'Meccanici, manutentori ed edili introvabili in Ticino',
-description: 'L\'analisi di Openjobmetis rivela oltre 1.200 posizioni aperte in Italia, con forte richiesta in Lombardia, Veneto e Toscana.',
+    description: 'L\'analisi di Openjobmetis rivela oltre 1.200 posizioni aperte in Italia, con forte richiesta in Lombardia, Veneto e Toscana.',
     keywords: 'frontalieri, ticino, svizzera, italia, meccanici, manutentori, edili, introvabili',
     ogTitle: 'Meccanici, manutentori ed edili introvabili in Ticino',
     ogDescription: 'L\'analisi di Openjobmetis rivela oltre 1.200 posizioni aperte in Italia, con forte richiesta in Lombardia, Veneto e Toscana.',
@@ -41122,7 +41122,7 @@ description: 'L\'analisi di Openjobmetis rivela oltre 1.200 posizioni aperte in 
 
   'blog-aziende-svizzere-trimestrali-migliori-previsto': {
     title: 'Aziende svizzere: risultati trimestrali migliori del previsto',
-description: 'Le società quotate in Svizzera superano le attese degli analisti nel primo trimestre 2026, nonostante il contesto difficile.',
+    description: 'Le società quotate in Svizzera superano le attese degli analisti nel primo trimestre 2026, nonostante il contesto difficile.',
     keywords: 'frontalieri, ticino, svizzera, italia, aziende, svizzere, risultati, trimestrali',
     ogTitle: 'Aziende svizzere: risultati trimestrali migliori del previsto',
     ogDescription: 'Le società quotate in Svizzera superano le attese degli analisti nel primo trimestre 2026, nonostante il contesto difficile.',
@@ -41312,7 +41312,7 @@ description: 'Le società quotate in Svizzera superano le attese degli analisti 
 
   'blog-frontaliere-con-figli-asilo-nido-svizzera': {
     title: 'Frontalieri con figli: come funziona l\'asilo nido in Svizzera',
-description: 'Guida pratica per i frontalieri con figli: asili nido ticinesi, costi, lista d\'attesa, sussidi, alternative italiane.',
+    description: 'Guida pratica per i frontalieri con figli: asili nido ticinesi, costi, lista d\'attesa, sussidi, alternative italiane.',
     keywords: 'frontalieri, ticino, svizzera, italia, figli, funziona, asilo, nido',
     ogTitle: 'Frontalieri con figli: asilo nido Svizzera | Frontaliere Ticino',
     ogDescription: 'Guida pratica per i frontalieri con figli: asili nido ticinesi, costi, lista d\'attesa, sussidi, alternative italiane',
@@ -41346,7 +41346,7 @@ description: 'Guida pratica per i frontalieri con figli: asili nido ticinesi, co
 
   'blog-aumento-beneficiari-rendite-avs-ticino': {
     title: 'Aumento beneficiari rendite AVS in Ticino: +40.400 nel 2025',
-description: 'L\'AVS ha erogato 2,64 milioni di rendite nel 2025, con +1,6% rispetto al 2024. Scopri le implicazioni per i frontalieri.',
+    description: 'L\'AVS ha erogato 2,64 milioni di rendite nel 2025, con +1,6% rispetto al 2024. Scopri le implicazioni per i frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, aumento, beneficiari, rendite, 2025',
     ogTitle: 'Aumento beneficiari rendite AVS in Ticino: +40.400 nel 2025',
     ogDescription: 'L\'AVS ha erogato 2,64 milioni di rendite nel 2025, con +1,6% rispetto al 2024. Scopri le implicazioni per i frontalieri.',
@@ -41580,7 +41580,7 @@ description: 'L\'AVS ha erogato 2,64 milioni di rendite nel 2025, con +1,6% risp
 
   'blog-indipendenza-finanziaria-ticino': {
     title: 'Indipendenza finanziaria e pensionamento anticipato',
-description: 'Raiffeisen commenta il movimento FIRE e offre consigli per risparmiare e investire nel Canton Ticino, utili per frontalieri.',
+    description: 'Raiffeisen commenta il movimento FIRE e offre consigli per risparmiare e investire nel Canton Ticino, utili per frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, indipendenza, finanziaria, pensionamento, anticipato',
     ogTitle: 'Indipendenza finanziaria e pensionamento anticipato in Ticino',
     ogDescription: 'Raiffeisen e il movimento FIRE: come risparmiare e investire per i frontalieri in Ticino.',
@@ -41619,7 +41619,7 @@ description: 'Raiffeisen commenta il movimento FIRE e offre consigli per risparm
 
   'blog-ia-aziende-svizzere-occupazione-ticino': {
     title: 'Intelligenza artificiale in Ticino: impatti sull\'occupazione',
-description: 'L’IA è diffusa nelle imprese svizzere, ma il suo effetto sull’occupazione in Ticino resta incerto secondo il sondaggio EY 2024.',
+    description: 'L’IA è diffusa nelle imprese svizzere, ma il suo effetto sull’occupazione in Ticino resta incerto secondo il sondaggio EY 2024.',
     keywords: 'frontalieri, ticino, svizzera, italia, intelligenza, artificiale, impatti, sull',
     ogTitle: 'Intelligenza artificiale e occupazione in Ticino: impatto incerto',
     ogDescription: 'Il 7% delle aziende svizzere ha ridotto posti per IA, ma il 18% ne ha creati di nuovi, situazione incerta per i frontalieri in Ticino.',
@@ -41653,7 +41653,7 @@ description: 'L’IA è diffusa nelle imprese svizzere, ma il suo effetto sull�
 
   'blog-tram-treno-ricorso-zali': {
     title: 'Tram-treno, ancora un ricorso. Zali: «Contestazione temeraria»',
-description: 'Il nuovo ricorso al Tribunale federale non dovrebbe fermare l’avvio dei lavori del tram-treno del Luganese, previsto nel 2027.',
+    description: 'Il nuovo ricorso al Tribunale federale non dovrebbe fermare l’avvio dei lavori del tram-treno del Luganese, previsto nel 2027.',
     keywords: 'frontalieri, ticino, svizzera, italia, tram-treno, ancora, ricorso, zali',
     ogTitle: 'Tram-treno, nuovo ricorso nel Luganese',
     ogDescription: 'Il progetto del tram-treno del Luganese prosegue nonostante un nuovo ricorso, con lavori previsti per il 2027.',
@@ -41843,7 +41843,7 @@ description: 'Il nuovo ricorso al Tribunale federale non dovrebbe fermare l’av
 
   'blog-aumenti-stipendi-ticino-2025': {
     title: 'Svizzera: stipendi 2025 in aumento fino al 2% per specialisti',
-description: 'Adecco segnala aumenti salariali fino al 2% in Svizzera nel 2025, con premi per specialisti IA e ESG in Canton Ticino.',
+    description: 'Adecco segnala aumenti salariali fino al 2% in Svizzera nel 2025, con premi per specialisti IA e ESG in Canton Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, stipendi, 2025, aumento, fino',
     ogTitle: 'Aumenti salariali in Ticino fino al 2% nel 2025',
     ogDescription: 'Indagine Adecco evidenzia incrementi salariali per specialisti IA e ESG in Svizzera, con impatti per frontalieri Ticino.',
@@ -42340,7 +42340,7 @@ description: 'Adecco segnala aumenti salariali fino al 2% in Svizzera nel 2025, 
 
   'blog-cinque-atti-parlamentari-ticino-mobilita': {
     title: 'Cinque atti parlamentari per migliorare la mobilità in Ticino',
-description: 'I Verdi propongono cinque atti parlamentari per affrontare i prezzi elevati dei carburanti e migliorare la mobilità in Ticino.',
+    description: 'I Verdi propongono cinque atti parlamentari per affrontare i prezzi elevati dei carburanti e migliorare la mobilità in Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, cinque, atti, parlamentari, migliorare',
     ogTitle: 'Cinque atti parlamentari per migliorare la mobilità in Ticino',
     ogDescription: 'I Verdi propongono cinque atti parlamentari per affrontare i prezzi elevati dei carburanti e migliorare la mobilità in Ticino.',
@@ -42525,7 +42525,7 @@ description: 'I Verdi propongono cinque atti parlamentari per affrontare i prezz
 
   'blog-referendum-fortezza-bellinzona-27-settembre': {
     title: 'Referendum Fortezza Bellinzona: si vota il 27 settembre',
-description: 'Il Municipio di Bellinzona ha convalidato 3.738 firme per il referendum sulla Fortezza. Scopri cosa cambia e perché si vota.',
+    description: 'Il Municipio di Bellinzona ha convalidato 3.738 firme per il referendum sulla Fortezza. Scopri cosa cambia e perché si vota.',
     keywords: 'frontalieri, ticino, svizzera, italia, referendum, fortezza, bellinzona, vota',
     ogTitle: 'Referendum Fortezza Bellinzona: si vota il 27 settembre',
     ogDescription: 'Il Municipio di Bellinzona ha convalidato 3.738 firme per il referendum sulla Fortezza. Scopri cosa cambia e perché si vota.',
@@ -42564,7 +42564,7 @@ description: 'Il Municipio di Bellinzona ha convalidato 3.738 firme per il refer
 
   'blog-licenziamento-nurnberg-rsi': {
     title: 'Licenziamento di Nurnberg | Frontaliere Ticino',
-description: 'La vertenza riguardante l’ex giornalista della RSI Paola Nurnberg è chiusa. La RSI ha pagato tutte le pretese salariali invocate.',
+    description: 'La vertenza riguardante l’ex giornalista della RSI Paola Nurnberg è chiusa. La RSI ha pagato tutte le pretese salariali invocate.',
     keywords: 'frontalieri, ticino, svizzera, italia, licenziamento, nurnberg, vertenza, chiusa',
     ogTitle: 'Licenziamento di Nurnberg RSI',
     ogDescription: 'La vertenza riguardante l’ex giornalista della RSI Paola Nurnberg è chiusa. La RSI ha pagato tutte le pretese salariali invocate.',
@@ -42642,7 +42642,7 @@ description: 'La vertenza riguardante l’ex giornalista della RSI Paola Nurnber
 
   'blog-startup-scuola-ticino-frontalieri': {
     title: 'Startup a scuola in Ticino: opportunità per frontalieri',
-description: '500 idee imprenditoriali nate in Lombardia: come il modello può ispirarci in Ticino. Formazione, permessi e fiscalità per frontalieri.',
+    description: '500 idee imprenditoriali nate in Lombardia: come il modello può ispirarci in Ticino. Formazione, permessi e fiscalità per frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, startup, scuola, opportunità, idee',
     ogTitle: 'Startup a scuola in Ticino: opportunità per frontalieri',
     ogDescription: 'Scopri come il progetto lombardo La mia impresa, il mio futuro può ispirare i frontalieri in Ticino.',
@@ -42720,7 +42720,7 @@ description: '500 idee imprenditoriali nate in Lombardia: come il modello può i
 
   'blog-rincari-ticino-percepiti-dolorosi': {
     title: 'Rincari in Ticino: come i frontalieri percepiscono i aumenti',
-description: 'I rincari in Ticino sono percepiti come molto dolorosi, con impatti su prezzi e trasporti. Ecco come monitorarli.',
+    description: 'I rincari in Ticino sono percepiti come molto dolorosi, con impatti su prezzi e trasporti. Ecco come monitorarli.',
     keywords: 'frontalieri, ticino, svizzera, italia, rincari, percepiscono, aumenti, sono',
     ogTitle: 'Rincari in Ticino: percezione e strumenti di controllo',
     ogDescription: 'Percezione dei rincari in Ticino tra frontaliere e residenti, con focus su strumenti di verifica e normative.',
@@ -42837,7 +42837,7 @@ description: 'I rincari in Ticino sono percepiti come molto dolorosi, con impatt
 
   'blog-stretta-esercito-civilisti-ticino': {
     title: 'Stretta sull’esercito: più effettivi o perdita di civilisti?',
-description: 'Diego Baratti chiede più militari per la sicurezza nazionale, Zeno Casella avverte: la collettività perderà il sostegno dei civilisti.',
+    description: 'Diego Baratti chiede più militari per la sicurezza nazionale, Zeno Casella avverte: la collettività perderà il sostegno dei civilisti.',
     keywords: 'frontalieri, ticino, svizzera, italia, stretta, sull, esercito, effettivi',
     ogTitle: 'Stretta sull’esercito: più effettivi o perdita di civilisti?',
     ogDescription: 'Diego Baratti chiede più militari per la sicurezza nazionale, Zeno Casella avverte: la collettività perderà il sostegno dei civilisti.',
@@ -42915,7 +42915,7 @@ description: 'Diego Baratti chiede più militari per la sicurezza nazionale, Zen
 
   'blog-ammodernamento-fa-18-svizzera': {
     title: 'Ammodernamento F/A-18: la flotta svizzera pronta fino al 2030',
-description: 'La flotta di 30 aerei F/A-18C/D è stata ammodernata per operare fino ai primi anni 2030, con un investimento di 450 milioni di franchi.',
+    description: 'La flotta di 30 aerei F/A-18C/D è stata ammodernata per operare fino ai primi anni 2030, con un investimento di 450 milioni di franchi.',
     keywords: 'frontalieri, ticino, svizzera, italia, ammodernamento, a-18, flotta, pronta',
     ogTitle: 'Ammodernamento F/A-18: la flotta svizzera pronta fino al 2030',
     ogDescription: 'La flotta di 30 aerei F/A-18C/D è stata ammodernata per operare fino ai primi anni 2030, con un investimento di 450 milioni di franchi.',
@@ -42954,7 +42954,7 @@ description: 'La flotta di 30 aerei F/A-18C/D è stata ammodernata per operare f
 
   'blog-mostra-piante-rare-comerio-2026': {
     title: 'Mostra mercato di piante rare a Comerio: un evento per gli amanti della natura',
-description: 'Sabato 6 e domenica 7 giugno 2026, il Belvedere di Comerio ospita la decima edizione della mostra mercato di piante rare e tropicali.',
+    description: 'Sabato 6 e domenica 7 giugno 2026, il Belvedere di Comerio ospita la decima edizione della mostra mercato di piante rare e tropicali.',
     keywords: 'frontalieri, ticino, svizzera, italia, mostra, mercato, piante, rare',
     ogTitle: 'Mostra mercato di piante rare a Comerio: un evento per gli amanti della natura',
     ogDescription: 'Sabato 6 e domenica 7 giugno 2026, il Belvedere di Comerio ospita la decima edizione della mostra mercato di piante rare e tropicali.',
@@ -43071,7 +43071,7 @@ description: 'Sabato 6 e domenica 7 giugno 2026, il Belvedere di Comerio ospita 
 
   'blog-referendum-neutrale-stime-2026': {
     title: 'Referendum: neutralizzazione stime 2026 e classe media',
-description: 'Voto 14 giugno 2026 sulla neutralizzazione delle stime in Ticino. Impatto su tasse, casa e classe media. Analisi dell\'Iniziativa.',
+    description: 'Voto 14 giugno 2026 sulla neutralizzazione delle stime in Ticino. Impatto su tasse, casa e classe media. Analisi dell\'Iniziativa.',
     keywords: 'frontalieri, ticino, svizzera, italia, referendum, neutralizzazione, stime, classe',
     ogTitle: 'Referendum neutralizzazione stime 2026',
     ogDescription: 'Il voto del 14 giugno 2026 sulla neutralizzazione delle stime: difendere la casa e alleggerire la pressione fiscale in Ticino.',
@@ -43264,7 +43264,7 @@ description: 'Voto 14 giugno 2026 sulla neutralizzazione delle stime in Ticino. 
     description: 'La mobilità aumenta la complessità per i frontalieri ticinesi, con problemi di traffico e costi elevati. Dati aggiornati 2026 per frontalieri in Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, impatti, mobilità, sulla, vita',
     ogTitle: 'Mobilità e frontaliere ticinesi: come gestire i problemi di traffico e costi',
-ogDescription: 'La mobilità aumenta la complessità per i frontalieri ticinesi, con problemi di traffico e costi elevati.',
+    ogDescription: 'La mobilità aumenta la complessità per i frontalieri ticinesi, con problemi di traffico e costi elevati.',
     canonicalPath: '/articoli-frontaliere/frontaliere-ticino-mobilita',
     structuredData: {
       "@context": "https://schema.org",
@@ -43300,10 +43300,10 @@ ogDescription: 'La mobilità aumenta la complessità per i frontalieri ticinesi,
 
   'blog-calendario-festivi-ticino-2026': {
     title: 'Festivi Ticino 2026: il calendario completo per i frontalieri',
-description: 'Tutte le date delle festività in Canton Ticino per il 2026: Capodanno, Pasqua, Pentecoste, Natale e i ponti.',
+    description: 'Tutte le date delle festività in Canton Ticino per il 2026: Capodanno, Pasqua, Pentecoste, Natale e i ponti.',
     keywords: 'frontalieri, ticino, svizzera, italia, festivi, calendario, completo, tutte',
     ogTitle: 'Festivi Ticino 2026: il calendario completo per i frontal',
-ogDescription: 'Tutte le date delle festività in Canton Ticino per il 2026: Capodanno, Pasqua, Pentecoste, Natale e i ponti.',
+    ogDescription: 'Tutte le date delle festività in Canton Ticino per il 2026: Capodanno, Pasqua, Pentecoste, Natale e i ponti.',
     canonicalPath: '/articoli-frontaliere/calendario-festivi-ticino-2026',
     structuredData: {
       "@context": "https://schema.org",
@@ -43417,7 +43417,7 @@ ogDescription: 'Tutte le date delle festività in Canton Ticino per il 2026: Cap
 
   'blog-concierge-ticino-lonza-ch': {
     title: 'Lonza cerca Concierge in Ticino | Frontaliere Ticino',
-description: 'Lonza SA offre una posizione di Concierge in Ticino (80-100%). Scopri i dettagli dell\'offerta di lavoro per frontalieri.',
+    description: 'Lonza SA offre una posizione di Concierge in Ticino (80-100%). Scopri i dettagli dell\'offerta di lavoro per frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, lonza, cerca, concierge, alla',
     ogTitle: 'Lonza cerca Concierge in Ticino',
     ogDescription: 'Lonza SA offre una posizione di Concierge in Ticino (80-100%). Scopri i dettagli dell\'offerta di lavoro per frontalieri.',
@@ -43573,7 +43573,7 @@ description: 'Lonza SA offre una posizione di Concierge in Ticino (80-100%). Sco
 
   'blog-fine-scuole-ticino-2026': {
     title: 'Vacanze 2026: Impatti per i frontalieri | Frontaliere Ticino',
-description: 'Scopri le date ufficiali delle vacanze scolastiche in Canton Ticino 2026 e le implicazioni pratiche per i frontalieri italo-svizzeri.',
+    description: 'Scopri le date ufficiali delle vacanze scolastiche in Canton Ticino 2026 e le implicazioni pratiche per i frontalieri italo-svizzeri.',
     keywords: 'frontalieri, ticino, svizzera, italia, vacanze, impatti, calendario, ufficiale',
     ogTitle: 'Vacanze scolastiche Ticino 2026: guida per frontalieri',
     ogDescription: 'Le date delle vacanze scolastiche 2026 in Ticino e cosa significano per i frontalieri italo-svizzeri. Scopri come pianificare al meglio lavoro e famiglia.',
@@ -43729,7 +43729,7 @@ description: 'Scopri le date ufficiali delle vacanze scolastiche in Canton Ticin
 
   'blog-tpressing-lavoro-investimenti-ffs': {
     title: 'Ticino e ferrovie: pressing su lavoro e investimenti',
-description: 'Dopo il ridimensionamento di FFS Cargo, nessun licenziamento in Ticino. Investimenti da 500 milioni CHF nel programma Ferrovia 2045.',
+    description: 'Dopo il ridimensionamento di FFS Cargo, nessun licenziamento in Ticino. Investimenti da 500 milioni CHF nel programma Ferrovia 2045.',
     keywords: 'frontalieri, ticino, svizzera, italia, ferrovie, pressing, lavoro, investimenti',
     ogTitle: 'Ticino e FFS: lavoro e investimenti ferroviari confermati',
     ogDescription: 'FFS assicura nessun licenziamento in Ticino dopo ridimensionamento Cargo. Ticino punta su 500 mln CHF per Ferrovia 2045.',
@@ -43846,7 +43846,7 @@ description: 'Dopo il ridimensionamento di FFS Cargo, nessun licenziamento in Ti
 
   'blog-giubiasco-viale-olgiati-lavori-notte': {
     title: 'Giubiasco, viale Olgiati chiude di notte per lavori',
-description: 'Chiusura notturna per viale Olgiati a Giubiasco: lavori di pavimentazione in programma la prossima settimana. Scopri orari e dettagli.',
+    description: 'Chiusura notturna per viale Olgiati a Giubiasco: lavori di pavimentazione in programma la prossima settimana. Scopri orari e dettagli.',
     keywords: 'frontalieri, ticino, svizzera, italia, giubiasco, viale, olgiati, chiude',
     ogTitle: 'Giubiasco, viale Olgiati chiude di notte per lavori',
     ogDescription: 'Chiusura notturna per viale Olgiati a Giubiasco: lavori di pavimentazione in programma la prossima settimana. Scopri orari e dettagli.',
@@ -44002,7 +44002,7 @@ description: 'Chiusura notturna per viale Olgiati a Giubiasco: lavori di pavimen
 
   'blog-licenziamento-postino-ticino': {
     title: 'Licenziato dopo 42 anni di lavoro: la storia del postino di Vevey',
-description: 'Licenziamento di un postino di Vevey dopo 42 anni di lavoro per aver cercato di evitare furti consegnando i pacchi ai piani.',
+    description: 'Licenziamento di un postino di Vevey dopo 42 anni di lavoro per aver cercato di evitare furti consegnando i pacchi ai piani.',
     keywords: 'frontalieri, ticino, svizzera, italia, licenziato, dopo, anni, lavoro',
     ogTitle: 'Postino licenziato dopo 42 anni di lavoro',
     ogDescription: 'La storia di un postino licenziato per aver cercato di proteggere i destinatari dei pacchi.',
@@ -44348,7 +44348,7 @@ description: 'Licenziamento di un postino di Vevey dopo 42 anni di lavoro per av
 
   'blog-parlamento-avs-frontalieri-2025': {
     title: '13esima AVS, finanziamento misto: effetti per i frontalieri',
-description: 'Il Consiglio degli Stati ha approvato la proposta di finanziamento misto per la 13esima AVS. Altre decisioni su ricette elettroniche e madri adottive.',
+    description: 'Il Consiglio degli Stati ha approvato la proposta di finanziamento misto per la 13esima AVS. Altre decisioni su ricette elettroniche e madri adottive.',
     keywords: 'frontalieri, ticino, svizzera, italia, 13esima, finanziamento, misto, effetti',
     ogTitle: '13esima AVS, finanziamento misto: effetti per i frontalieri',
     ogDescription: 'Il Consiglio degli Stati approva la proposta della Conferenza di conciliazione. Ricette elettroniche e protezione madri adottive: le decisioni del Parlamento',
@@ -44507,7 +44507,7 @@ description: 'Il Consiglio degli Stati ha approvato la proposta di finanziamento
     description: 'PLR, Centro e Lega chiedono la sospensione dei ristorni. Violazione dei principi della libera circolazione. Dati aggiornati 2026 per frontalieri in Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, ristorni, centro, lega, chiedono',
     ogTitle: 'Ristorni all\'Italia',
-ogDescription: 'PLR, Centro e Lega chiedono la sospensione dei ristorni',
+    ogDescription: 'PLR, Centro e Lega chiedono la sospensione dei ristorni',
     canonicalPath: '/articoli-frontaliere/ristorni-italia-sospesi',
     structuredData: {
       "@context": "https://schema.org",
@@ -44543,7 +44543,7 @@ ogDescription: 'PLR, Centro e Lega chiedono la sospensione dei ristorni',
 
   'blog-lavori-giugno-sentiero-ronchitt-molinetto': {
     title: 'Lavori giugno sentiero Ronchitt Molinetto | Frontaliere Ticino',
-description: 'Due giorni di lavori a Gambarogno: strade chiuse e restrizioni alla viabilità. Scopri di più sui lavori e le scadenze.',
+    description: 'Due giorni di lavori a Gambarogno: strade chiuse e restrizioni alla viabilità. Scopri di più sui lavori e le scadenze.',
     keywords: 'frontalieri, ticino, svizzera, italia, lavori, giugno, sentiero, ronchitt',
     ogTitle: 'Lavori giugno sentiero Ronchitt Molinetto',
     ogDescription: 'Due giorni di lavori a Gambarogno: strade chiuse e restrizioni alla viabilità. Scopri di più sui lavori e le scadenze.',
@@ -44582,7 +44582,7 @@ description: 'Due giorni di lavori a Gambarogno: strade chiuse e restrizioni all
 
   'blog-asilo-nido-frontalieri-ticino': {
     title: 'Guida pratica per frontalieri con figli: asili nido ticinesi',
-description: 'Scopri come i frontalieri possono iscrivere i figli negli asili nido ticinesi, costi, liste d\'attesa e sussidi disponibili.',
+    description: 'Scopri come i frontalieri possono iscrivere i figli negli asili nido ticinesi, costi, liste d\'attesa e sussidi disponibili.',
     keywords: 'frontalieri, ticino, svizzera, italia, pratica, figli, asili, nido',
     ogTitle: 'Guida pratica asilo nido per frontalieri Ticino',
     ogDescription: 'Tutto sull\'asilo nido per i figli dei frontalieri in Ticino: costi, iscrizioni, sussidi e alternative italiane',
@@ -44616,10 +44616,10 @@ description: 'Scopri come i frontalieri possono iscrivere i figli negli asili ni
 
   'blog-carpooling-cantello-parcheggi-riservati-frontalieri': {
     title: 'Parcheggi Riservati a Cantello: Progetto Carpooling per Pendolari Svizzeri',
-description: '11 posti auto gratuiti alla stazione di Cantello Gaggiolo per chi condivide l\'auto. Iniziativa per ridurre traffico e inquinamento.',
+    description: '11 posti auto gratuiti alla stazione di Cantello Gaggiolo per chi condivide l\'auto. Iniziativa per ridurre traffico e inquinamento.',
     keywords: 'frontalieri, ticino, svizzera, italia, parcheggi, riservati, cantello, progetto',
     ogTitle: 'Parcheggi Riservati a Cantello: Progetto Carpooling per Pendolari Svizzeri',
-ogDescription: '11 posti auto gratuiti alla stazione di Cantello Gaggiolo per chi condivide l\'auto. Iniziativa per ridurre traffico e inquinamento.',
+    ogDescription: '11 posti auto gratuiti alla stazione di Cantello Gaggiolo per chi condivide l\'auto. Iniziativa per ridurre traffico e inquinamento.',
     canonicalPath: '/articoli-frontaliere/carpooling-cantello-parcheggi-riservati-frontalieri',
     structuredData: {
       "@context": "https://schema.org",
@@ -44850,7 +44850,7 @@ ogDescription: '11 posti auto gratuiti alla stazione di Cantello Gaggiolo per ch
 
   'blog-grandine-gt86-trd-perdita-totale': {
     title: 'Grandine sulla GT86 TRD: come agire se l\'assicurazione la dichiara perdita',
-description: 'Danni da grandine sulla tua auto in Ticino? Ecco come contestare la perdita totale e ottenere il massimo risarcimento.',
+    description: 'Danni da grandine sulla tua auto in Ticino? Ecco come contestare la perdita totale e ottenere il massimo risarcimento.',
     keywords: 'frontalieri, ticino, svizzera, italia, grandine, sulla, gt86, agire',
     ogTitle: 'Danni da grandine e perdita totale auto',
     ogDescription: 'Come agire se l\'assicurazione propone la perdita totale dopo danni da grandine in Ticino.',
@@ -44996,10 +44996,10 @@ description: 'Danni da grandine sulla tua auto in Ticino? Ecco come contestare l
 
   'blog-tassa-salute-frontalieri-ritiro-richiesta': {
     title: 'Tassa Salute Frontalieri: sindacati chiedono ritiro',
-description: 'Sindacati italiani e svizzeri chiedono il ritiro della tassa salute per frontalieri, citando violazione trattato 2020 e rischio blocco ristorni.',
+    description: 'Sindacati italiani e svizzeri chiedono il ritiro della tassa salute per frontalieri, citando violazione trattato 2020 e rischio blocco ristorni.',
     keywords: 'frontalieri, ticino, svizzera, italia, tassa, salute, sindacati, chiedono',
     ogTitle: 'Tassa Salute Frontalieri: Sindacati Chiedono Ritiro',
-ogDescription: 'I sindacati CGIL, CISL, UIL, UNIA, OCST, SYNA, VPOD e SYNDICOM sono tornati a chiedere il ritiro definitivo della cosiddetta "tassa della salute", introdotta dal Governo italiano con la legge di bilancio 2024 ma mai applicata.',
+    ogDescription: 'I sindacati CGIL, CISL, UIL, UNIA, OCST, SYNA, VPOD e SYNDICOM sono tornati a chiedere il ritiro definitivo della cosiddetta "tassa della salute", introdotta dal Governo italiano con la legge di bilancio 2024 ma mai applicata.',
     canonicalPath: '/articoli-frontaliere/tassa-salute-frontalieri-ritiro-richiesta',
     structuredData: {
       "@context": "https://schema.org",
@@ -45152,7 +45152,7 @@ ogDescription: 'I sindacati CGIL, CISL, UIL, UNIA, OCST, SYNA, VPOD e SYNDICOM s
 
   'blog-pd-m5s-avs-accelerano': {
     title: 'Pd, M5S e Avs accelerano | Frontaliere Ticino',
-description: 'I partiti italiani Pd, M5S e Avs annunciano iniziative per luglio. Scopri di più sulle loro proposte e obiettivi.',
+    description: 'I partiti italiani Pd, M5S e Avs annunciano iniziative per luglio. Scopri di più sulle loro proposte e obiettivi.',
     keywords: 'frontalieri, ticino, svizzera, italia, accelerano, partiti, politici, italiani',
     ogTitle: 'Pd, M5S e Avs accelerano',
     ogDescription: 'I partiti italiani Pd, M5S e Avs annunciano iniziative per luglio. Scopri di più sulle loro proposte e obiettivi.',
@@ -45381,7 +45381,7 @@ description: 'I partiti italiani Pd, M5S e Avs annunciano iniziative per luglio.
 
   'blog-naspi-svizzera-frontalieri': {
     title: 'Disoccupazione Svizzera: Naspi e ristorni per i frontalieri',
-description: 'Guida completa al Naspi svizzero per i frontalieri: durata, importo, tasse e come ottenere i ristorni fiscali in Italia.',
+    description: 'Guida completa al Naspi svizzero per i frontalieri: durata, importo, tasse e come ottenere i ristorni fiscali in Italia.',
     keywords: 'frontalieri, ticino, svizzera, italia, disoccupazione, naspi, ristorni, funziona',
     ogTitle: 'Disoccupazione Svizzera: Naspi e ristorni per i frontalieri',
     ogDescription: 'Come funziona il Naspi svizzero per i frontalieri, durata massima 520 giorni e come ottenere i ristorni fiscali in Italia.',
@@ -45420,7 +45420,7 @@ description: 'Guida completa al Naspi svizzero per i frontalieri: durata, import
 
   'blog-agenzie-interim-lugano-ticino-frontaliere': {
     title: 'Agenzie di lavoro temporaneo a Lugano: guida pratica per frontalieri',
-description: 'Panoramica sulle agenzie interim a Lugano, opportunità per frontalieri e procedure di inserimento nel mercato ticinese.',
+    description: 'Panoramica sulle agenzie interim a Lugano, opportunità per frontalieri e procedure di inserimento nel mercato ticinese.',
     keywords: 'frontalieri, ticino, svizzera, italia, agenzie, lavoro, temporaneo, lugano',
     ogTitle: 'Agenzie lavoro temporaneo Lugano: guida per frontalieri',
     ogDescription: 'Panoramica sulle agenzie interim a Lugano, opportunità per frontalieri e procedure di inserimento.',
@@ -45488,7 +45488,7 @@ description: 'Panoramica sulle agenzie interim a Lugano, opportunità per fronta
 
   'blog-public-eye-denuncia-salari-on-ticino': {
     title: 'Public Eye denuncia salari da fame in un\'azienda che lavora per il marchio On',
-description: 'Rapporto Public Eye segnala salari minimi e condizioni precarie in fabbrica indonesiana, On sospende ordini e avvia indagine.',
+    description: 'Rapporto Public Eye segnala salari minimi e condizioni precarie in fabbrica indonesiana, On sospende ordini e avvia indagine.',
     keywords: 'frontalieri, ticino, svizzera, italia, public, denuncia, salari, fame',
     ogTitle: 'Public Eye denuncia salari da fame in azienda del marchio On',
     ogDescription: 'Il marchio On sospende ordini e avvia indagine dopo denunce di salari minimi in un sub-fornitore indonesiano.',
@@ -45561,7 +45561,7 @@ description: 'Rapporto Public Eye segnala salari minimi e condizioni precarie in
 
   'blog-avs-domani-alle-11-angelo-bonelli-in-diretta-alladnkronos': {
     title: 'Avs, domani alle 11 Angelo Bonelli in diretta all\'Adnkronos',
-description: 'Il portavoce dei Verdi e deputato di Avs Angelo Bonelli sarà in diretta domani all\'Adnkronos. Scopri di più su Frontaliere Ticino.',
+    description: 'Il portavoce dei Verdi e deputato di Avs Angelo Bonelli sarà in diretta domani all\'Adnkronos. Scopri di più su Frontaliere Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, domani, alle, angelo, bonelli',
     ogTitle: 'Avs, domani alle 11 Angelo Bonelli in diretta all\'Adnkronos',
     ogDescription: 'Il portavoce dei Verdi e deputato di Avs Angelo Bonelli sarà in diretta domani all\'Adnkronos. Scopri di più su Frontaliere Ticino',
@@ -45751,7 +45751,7 @@ description: 'Il portavoce dei Verdi e deputato di Avs Angelo Bonelli sarà in d
 
   'blog-assicurazione-malattia-neuchatel-giovani': {
     title: 'Cassa malattia Neuchâtel: guida per giovani adulti 19-25 anni',
-description: 'Informazioni pratiche sulle casse malattia a Neuchâtel per giovani adulti 19-25 anni. Requisiti, procedure e dettagli per frontalieri.',
+    description: 'Informazioni pratiche sulle casse malattia a Neuchâtel per giovani adulti 19-25 anni. Requisiti, procedure e dettagli per frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, cassa, malattia, neuch, giovani',
     ogTitle: 'Cassa malattia Neuchâtel: guida giovani 19-25 anni',
     ogDescription: 'Requisiti e procedure per la cassa malattia a Neuchâtel dedicata ai giovani adulti 19-25 anni.',
@@ -45868,7 +45868,7 @@ description: 'Informazioni pratiche sulle casse malattia a Neuchâtel per giovan
 
   'blog-uonboldo-tributo-lucio-dalla': {
     title: 'Uboldo: Estate 2026 Parte con “Ciao Lucio” | Frontaliere Ticino',
-description: 'Il 27 giugno a Uboldo il concerto gratuito “Ciao Lucio” nel parco Falcone e Borsellino, primo evento di “Aria d’Estate”.',
+    description: 'Il 27 giugno a Uboldo il concerto gratuito “Ciao Lucio” nel parco Falcone e Borsellino, primo evento di “Aria d’Estate”.',
     keywords: 'frontalieri, ticino, svizzera, italia, uboldo, estate, parte, ciao',
     ogTitle: 'Uboldo: estate 2026 con tributo a Lucio Dalla',
     ogDescription: 'Il 27 giugno il parco di Uboldo ospiterà un concerto gratuito dedicato a Lucio Dalla, aprendo la rassegna “Aria d’Estate” per i frontalieri.',
@@ -45907,7 +45907,7 @@ description: 'Il 27 giugno a Uboldo il concerto gratuito “Ciao Lucio” nel pa
 
   'blog-cessione-cargotrailers-lonate-pozzolo': {
     title: 'Cargotrailers: l\'azienda di Lonate Pozzolo diventa tedesca',
-description: 'Andrea Perotti racconta la cessione di Cargotrailers a player tedeschi. Analisi sulle difficoltà burocratiche per le imprese in Italia.',
+    description: 'Andrea Perotti racconta la cessione di Cargotrailers a player tedeschi. Analisi sulle difficoltà burocratiche per le imprese in Italia.',
     keywords: 'frontalieri, ticino, svizzera, italia, cargotrailers, azienda, lonate, pozzolo',
     ogTitle: 'Cargotrailers: l\'azienda di Lonate Pozzolo diventa tedesca',
     ogDescription: 'Andrea Perotti racconta la cessione di Cargotrailers a player tedeschi. Analisi sulle difficoltà burocratiche per le imprese in Italia.',
@@ -45946,10 +45946,10 @@ description: 'Andrea Perotti racconta la cessione di Cargotrailers a player tede
 
   'blog-mobilita-quotidiana-varesino-dati-sondaggio': {
     title: 'Distanze, tempi e mezzi del pendolarismo varesino: i dati del sondaggio',
-description: 'La mobilità quotidiana in provincia di Varese è stata analizzata attraverso un sondaggio che ha raccolto 419 risposte.',
+    description: 'La mobilità quotidiana in provincia di Varese è stata analizzata attraverso un sondaggio che ha raccolto 419 risposte.',
     keywords: 'frontalieri, ticino, svizzera, italia, distanze, tempi, mezzi, pendolarismo',
     ogTitle: 'Distanze, tempi e mezzi del pendolarismo varesino: i dati del sondaggio',
-ogDescription: 'La mobilità quotidiana in provincia di Varese è stata analizzata attraverso un sondaggio che ha raccolto 419 risposte.',
+    ogDescription: 'La mobilità quotidiana in provincia di Varese è stata analizzata attraverso un sondaggio che ha raccolto 419 risposte.',
     canonicalPath: '/articoli-frontaliere/mobilita-quotidiana-varesino-dati-sondaggio',
     structuredData: {
       "@context": "https://schema.org",
@@ -46024,7 +46024,7 @@ ogDescription: 'La mobilità quotidiana in provincia di Varese è stata analizza
 
   'blog-canicola-sud-nord-alpi': {
     title: 'Canicola agli sgoccioli a nord delle Alpi. A sud serve ancora pazienza',
-description: 'Previsioni meteo: calo delle temperature al nord, caldo protratto al sud fino a metà settimana. Implicazioni per frontalieri.',
+    description: 'Previsioni meteo: calo delle temperature al nord, caldo protratto al sud fino a metà settimana. Implicazioni per frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, canicola, agli, sgoccioli, nord',
     ogTitle: 'Fine del caldo estremo al nord, ancora caldo al sud',
     ogDescription: 'Previsioni meteorologiche in Ticino: temperature in calo al nord, ancora caldo nel sud fino a metà settimana.',
@@ -46102,7 +46102,7 @@ description: 'Previsioni meteo: calo delle temperature al nord, caldo protratto 
 
   'blog-bancomat-processo-varesenews-2023': {
     title: 'Utilizzo illecito di bancomat: processo a Varese e implicazioni',
-description: 'Processo a Varese per utilizzo indebito del bancomat: acquisti contestati inferiori a 300 euro, dettagli e procedure.',
+    description: 'Processo a Varese per utilizzo indebito del bancomat: acquisti contestati inferiori a 300 euro, dettagli e procedure.',
     keywords: 'frontalieri, ticino, svizzera, italia, utilizzo, illecito, bancomat, processo',
     ogTitle: 'Processo per utilizzo illecito bancomat a Varese: dati e procedure',
     ogDescription: 'Processo a Varese per utilizzo indebito del bancomat: acquisti contestati inferiori a 300 euro, dettagli e procedure.',
@@ -46217,7 +46217,7 @@ description: 'Processo a Varese per utilizzo indebito del bancomat: acquisti con
 
   'blog-ristorni-frontalieri-pellicini-tavolo-lavoro': {
     title: 'Ristorni frontalieri, Pellicini: “Subito il tavolo di lavoro”',
-description: 'Il deputato e sindaco di Luino sostiene la linea del Ministero dell\'Economia per risolvere la situazione di stallo sui ristorni.',
+    description: 'Il deputato e sindaco di Luino sostiene la linea del Ministero dell\'Economia per risolvere la situazione di stallo sui ristorni.',
     keywords: 'frontalieri, ticino, svizzera, italia, ristorni, pellicini, subito',
     ogTitle: 'Ristorni frontalieri, Pellicini: “Subito il tavolo di lavoro proposto dal Ministro Giorgetti”',
     ogDescription: 'Il deputato e sindaco di Luino sostiene la linea del Ministero dell\'Economia per risolvere la situazione di stallo sui ristorni.',
@@ -46334,10 +46334,10 @@ description: 'Il deputato e sindaco di Luino sostiene la linea del Ministero del
 
   'blog-ristorni-frontalieri-bloccati-reina': {
     title: 'Ristorni frontalieri bloccati: Reina (Iv Varese) «A rischio credibilità dello Stato»',
-description: 'Il blocco dei ristorni frontalieri ha implicazioni significative per i frontalieri che lavorano in Svizzera e risiedono in Italia.',
+    description: 'Il blocco dei ristorni frontalieri ha implicazioni significative per i frontalieri che lavorano in Svizzera e risiedono in Italia.',
     keywords: 'frontalieri, ticino, svizzera, italia, ristorni, bloccati, reina, varese',
     ogTitle: 'Ristorni frontalieri bloccati, Reina (Iv Varese): «A rischio credibilità dello Stato»',
-ogDescription: 'Dopo Alessandro Alfieri e Furio Artoni, anche Salvino Reina, segretario provinciale di Italia Viva e assessore al bilancio e Frontalieri di Saltrio, ha espresso la sua opinione sul tema.',
+    ogDescription: 'Dopo Alessandro Alfieri e Furio Artoni, anche Salvino Reina, segretario provinciale di Italia Viva e assessore al bilancio e Frontalieri di Saltrio, ha espresso la sua opinione sul tema.',
     canonicalPath: '/articoli-frontaliere/ristorni-frontalieri-bloccati-reina',
     structuredData: {
       "@context": "https://schema.org",
@@ -46490,7 +46490,7 @@ ogDescription: 'Dopo Alessandro Alfieri e Furio Artoni, anche Salvino Reina, seg
 
   'blog-avs-ai-prospettive-finanziarie-peggiorano': {
     title: 'Peggiorano le prospettive finanziarie di AVS e AI',
-description: 'Secondo l’UFAS, nei prossimi anni aumenteranno i deficit dell’Assicurazione vecchiaia e superstiti e dell’Assicurazione invalidità.',
+    description: 'Secondo l’UFAS, nei prossimi anni aumenteranno i deficit dell’Assicurazione vecchiaia e superstiti e dell’Assicurazione invalidità.',
     keywords: 'frontalieri, ticino, svizzera, italia, peggiorano, prospettive, finanziarie, secondo',
     ogTitle: 'Peggiorano le prospettive finanziarie di AVS e AI',
     ogDescription: 'Secondo l’UFAS, nei prossimi anni aumenteranno i deficit dell’Assicurazione vecchiaia e superstiti e dell’Assicurazione invalidità.',
@@ -46568,10 +46568,10 @@ description: 'Secondo l’UFAS, nei prossimi anni aumenteranno i deficit dell’
 
   'blog-ristorni-lombardia-ticino': {
     title: 'Ristorni, Svizzera minaccia Lombardia: ritiri la tassa',
-description: 'La tassa sulla salute, introdotta dalla Regione Lombardia, è vista come un errore che viola l\'accordo fiscale italo-svizzero.',
+    description: 'La tassa sulla salute, introdotta dalla Regione Lombardia, è vista come un errore che viola l\'accordo fiscale italo-svizzero.',
     keywords: 'frontalieri, ticino, svizzera, italia, ristorni, minaccia, lombardia, ritiri',
     ogTitle: 'Ristorni, dalla Svizzera rappresaglia contro Regione Lombardia: si ritiri subito la tassa sulla salute',
-ogDescription: 'Il senatore varesino del Pd, Alessandro Alfieri, ha invitato la Regione Lombardia a ritirare immediatamente la tassa sulla salute, dopo la notizia del blocco dei ristorni da parte della Svizzera verso i comuni italiani di frontiera.',
+    ogDescription: 'Il senatore varesino del Pd, Alessandro Alfieri, ha invitato la Regione Lombardia a ritirare immediatamente la tassa sulla salute, dopo la notizia del blocco dei ristorni da parte della Svizzera verso i comuni italiani di frontiera.',
     canonicalPath: '/articoli-frontaliere/ristorni-lombardia-ticino',
     structuredData: {
       "@context": "https://schema.org",
@@ -46646,7 +46646,7 @@ ogDescription: 'Il senatore varesino del Pd, Alessandro Alfieri, ha invitato la 
 
   'blog-ticino-blocca-ristorni-roma-berna': {
     title: 'Ticino blocca 50,2 milioni di ristorni alla Lombardia: tensioni e dialogo',
-description: 'Il Canton Ticino trattiene 50,2 milioni di franchi destinati alla Lombardia. Roma e Berna cercano una soluzione diplomatica.',
+    description: 'Il Canton Ticino trattiene 50,2 milioni di franchi destinati alla Lombardia. Roma e Berna cercano una soluzione diplomatica.',
     keywords: 'frontalieri, ticino, svizzera, italia, blocca, milioni, ristorni, alla',
     ogTitle: 'Ticino blocca 50,2 milioni di ristorni alla Lombardia: tensioni e dialogo',
     ogDescription: 'Il Canton Ticino trattiene 50,2 milioni di franchi destinati alla Lombardia. Roma e Berna cercano una soluzione diplomatica.',
@@ -46685,7 +46685,7 @@ description: 'Il Canton Ticino trattiene 50,2 milioni di franchi destinati alla 
 
   'blog-grigioni-frontalieri-italiani-1-6-milioni': {
     title: 'Grigioni: 1,6 milioni dai 1’479 nuovi frontalieri italiani',
-description: 'Il cantone dei Grigioni ha registrato un aumento significativo di frontalieri italiani, con un contributo economico di 1,6 milioni.',
+    description: 'Il cantone dei Grigioni ha registrato un aumento significativo di frontalieri italiani, con un contributo economico di 1,6 milioni.',
     keywords: 'frontalieri, ticino, svizzera, italia, grigioni, milioni, nuovi, italiani',
     ogTitle: 'Grigioni: 1,6 milioni dai 1’479 nuovi frontalieri italiani',
     ogDescription: 'Il cantone dei Grigioni ha registrato un aumento significativo di frontalieri italiani, con un contributo economico di 1,6 milioni.',
@@ -46724,7 +46724,7 @@ description: 'Il cantone dei Grigioni ha registrato un aumento significativo di 
 
   'blog-deduzione-figli-frontalieri-2026': {
     title: 'Frontalieri: possibile rimozione deduzione fiscale per figli',
-description: 'Un\'iniziativa propone di eliminare la deduzione fiscale per i figli dei lavoratori frontalieri con figli all\'estero.',
+    description: 'Un\'iniziativa propone di eliminare la deduzione fiscale per i figli dei lavoratori frontalieri con figli all\'estero.',
     keywords: 'frontalieri, ticino, svizzera, italia, possibile, rimozione, deduzione, fiscale',
     ogTitle: 'Frontalieri: possibile rimozione deduzione fiscale per figli',
     ogDescription: 'Un\'iniziativa propone di eliminare la deduzione fiscale per i figli dei lavoratori frontalieri con figli all\'estero.',
@@ -46763,10 +46763,10 @@ description: 'Un\'iniziativa propone di eliminare la deduzione fiscale per i fig
 
   'blog-la-sospensione-dei-ristorni-alla-prova-della-convenzione-italia-svizzera-il-caso': {
     title: 'LA SOSPENSIONE DEI RISTORNI ALLA PROVA DELLA CONVENZIONE ITALIA-SVIZZERA: IL CASO DELLA “TASSA SULLA SALUTE”',
-description: 'Verifica le scadenze fiscali per frontalieri: 730, dichiarazione svizzera, ristorni — tutte le date in un calendario interattivo.',
+    description: 'Verifica le scadenze fiscali per frontalieri: 730, dichiarazione svizzera, ristorni — tutte le date in un calendario interattivo.',
     keywords: 'frontalieri, ticino, svizzera, italia, sospensione, ristorni, alla, prova',
     ogTitle: 'LA SOSPENSIONE DEI RISTORNI ALLA PROVA DELLA CONVENZIONE ITALIA-SVIZZERA: IL CASO DELLA “TASSA SULLA SALUTE”',
-ogDescription: 'La prassi italiana ha talora qualificato la c.d. “tassa sulla salute” come contributo parafiscale estraneo alla Convenzione, con la conseguenza di escluderne il credito d’imposta.',
+    ogDescription: 'La prassi italiana ha talora qualificato la c.d. “tassa sulla salute” come contributo parafiscale estraneo alla Convenzione, con la conseguenza di escluderne il credito d’imposta.',
     canonicalPath: '/articoli-frontaliere/la-sospensione-dei-ristorni-alla-prova-della-convenzione-italia-svizzera-il-caso',
     structuredData: {
       "@context": "https://schema.org",
@@ -47265,7 +47265,7 @@ ogDescription: 'La prassi italiana ha talora qualificato la c.d. “tassa sulla 
 
   'blog-chiusura-piattaforma-post-sanela': {
     title: 'Post Sanela chiude: cosa cambia per i pazienti in Ticino',
-description: 'Cosa devono fare concretamente gli utenti ticinesi che si trovano a utilizzare Post Sanela?',
+    description: 'Cosa devono fare concretamente gli utenti ticinesi che si trovano a utilizzare Post Sanela?',
     keywords: 'frontalieri, ticino, svizzera, italia, post, sanela, chiude, cosa',
     ogTitle: 'Post Sanela chiude: cosa fare per i pazienti in Ticino',
     ogDescription: 'La Posta chiude la piattaforma Post Sanela entro fine 2026. Guida pratica per i pazienti ticinesi su come salvare e gestire i dati.',
@@ -47421,10 +47421,10 @@ description: 'Cosa devono fare concretamente gli utenti ticinesi che si trovano 
 
   'blog-sicurezza-lavoro-ticino-cfsl': {
     title: 'Sicurezza lavoro Ticino: certificata soluzione modello',
-description: 'La cooperativa Coop-SSL ottiene la certificazione CFSL per la sicurezza sul lavoro in Ticino.',
+    description: 'La cooperativa Coop-SSL ottiene la certificazione CFSL per la sicurezza sul lavoro in Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, sicurezza, lavoro, certificata, soluzione',
     ogTitle: 'Sicurezza lavoro Ticino: certificata Soluzione Modello',
-ogDescription: 'La cooperativa Coop-SSL ottiene la certificazione CFSL per la sicurezza sul lavoro in Ticino.',
+    ogDescription: 'La cooperativa Coop-SSL ottiene la certificazione CFSL per la sicurezza sul lavoro in Ticino.',
     canonicalPath: '/articoli-frontaliere/sicurezza-lavoro-ticino-cfsl',
     structuredData: {
       "@context": "https://schema.org",
@@ -47460,7 +47460,7 @@ ogDescription: 'La cooperativa Coop-SSL ottiene la certificazione CFSL per la si
 
   'blog-gallarate-rho-lavori-luglio-2026': {
     title: 'Gallarate-Rho: chiusura weekend 11-13 luglio 2026',
-description: 'Stop ai treni sulla linea Gallarate-Milano per lavori di potenziamento. Possibili disagi per i frontalieri. Scopri cosa fare.',
+    description: 'Stop ai treni sulla linea Gallarate-Milano per lavori di potenziamento. Possibili disagi per i frontalieri. Scopri cosa fare.',
     keywords: 'frontalieri, ticino, svizzera, italia, gallarate-rho, chiusura, weekend, 11-13',
     ogTitle: 'Gallarate-Rho chiusa nel weekend 11-13 luglio 2026',
     ogDescription: 'Stop ai treni sulla linea Gallarate-Milano per lavori di potenziamento. Possibili disagi per i frontalieri. Scopri cosa fare.',
@@ -47499,10 +47499,10 @@ description: 'Stop ai treni sulla linea Gallarate-Milano per lavori di potenziam
 
   'blog-laccordo-italia-svizzera-del-2020-sulla-tassazione-dei-lavoratori-frontalieri': {
     title: 'L\'Accordo Italia-Svizzera del 2020 sulla tassazione dei lavoratori frontalieri',
-description: 'L\'Accordo Italia-Svizzera del 2020 introduce un nuovo regime di tassazione per i lavoratori frontalieri, sostituendo il quadro del 1974.',
+    description: 'L\'Accordo Italia-Svizzera del 2020 introduce un nuovo regime di tassazione per i lavoratori frontalieri, sostituendo il quadro del 1974.',
     keywords: 'frontalieri, ticino, svizzera, italia, accordo, italia-svizzera, 2020, sulla',
     ogTitle: 'L\'Accordo Italia-Svizzera del 2020 sulla tassazione dei lavoratori frontalieri',
-ogDescription: 'L\'Accordo Italia-Svizzera del 2020 introduce un nuovo regime di tassazione per i lavoratori frontalieri, sostituendo il quadro del 1974.',
+    ogDescription: 'L\'Accordo Italia-Svizzera del 2020 introduce un nuovo regime di tassazione per i lavoratori frontalieri, sostituendo il quadro del 1974.',
     canonicalPath: '/articoli-frontaliere/laccordo-italia-svizzera-del-2020-sulla-tassazione-dei-lavoratori-frontalieri',
     structuredData: {
       "@context": "https://schema.org",
@@ -47762,7 +47762,7 @@ ogDescription: 'L\'Accordo Italia-Svizzera del 2020 introduce un nuovo regime di
 
   'blog-ascensori-ticino-frontalieri': {
     title: 'Ascensori Ticino: opportunità di lavoro per frontalieri',
-description: 'L\'importo effettivamente trattenuto dipende dalla fascia di reddito e dalle aliquote cantonali specifiche per il lavoro degli ascensori.',
+    description: 'L\'importo effettivamente trattenuto dipende dalla fascia di reddito e dalle aliquote cantonali specifiche per il lavoro degli ascensori.',
     keywords: 'frontalieri, ticino, svizzera, italia, ascensori, opportunità, lavoro, ricerca',
     ogTitle: 'Ascensori Ticino: opportunità di lavoro per frontalieri',
     ogDescription: 'Ricerca lavoro per addetti agli ascensori in Ticino. Scopri requisiti, aliquote fiscali e imposte per i frontalieri che lavorano in Svizzera italiana',
@@ -47952,7 +47952,7 @@ description: 'L\'importo effettivamente trattenuto dipende dalla fascia di reddi
 
   'blog-vivere-valtellina-lavorare-grigioni-frontaliere': {
     title: 'Vivere in Valtellina e lavorare nei Grigioni: accordo fiscale',
-description: 'Il Nuovo Accordo Frontalieri, dopo essere stato firmato il 23 dicembre 2020, è ora in vigore e verrà sostituito da uno nuovo dal 1° gennaio 2024.',
+    description: 'Il Nuovo Accordo Frontalieri, dopo essere stato firmato il 23 dicembre 2020, è ora in vigore e verrà sostituito da uno nuovo dal 1° gennaio 2024.',
     keywords: 'frontalieri, ticino, svizzera, italia, vivere, valtellina, lavorare, grigioni',
     ogTitle: 'Vivere in Valtellina e lavorare nei Grigioni: accordo fiscale',
     ogDescription: 'Il nuovo accordo fiscale per frontalieri entra in vigore il 1° gennaio 2024.',
@@ -48108,7 +48108,7 @@ description: 'Il Nuovo Accordo Frontalieri, dopo essere stato firmato il 23 dice
 
   'blog-trasferimento-residenza-svizzera-frontaliere': {
     title: 'Sposarsi in Svizzera: documenti, permessi e impatto fiscale-prevenziale',
-description: 'Il Nuovo Accordo Frontalieri entra in vigore il 1° gennaio 2024. I frontalieri devono riempire un modulo speciale.',
+    description: 'Il Nuovo Accordo Frontalieri entra in vigore il 1° gennaio 2024. I frontalieri devono riempire un modulo speciale.',
     keywords: 'frontalieri, ticino, svizzera, italia, sposarsi, documenti, permessi, impatto',
     ogTitle: 'Trasferirsi a vivere in Svizzera dopo anni da frontaliere',
     ogDescription: 'Il Nuovo Accordo Frontalieri entra in vigore il 1° gennaio 2024. I frontalieri devono riempire un modulo speciale.',
@@ -48371,7 +48371,7 @@ description: 'Il Nuovo Accordo Frontalieri entra in vigore il 1° gennaio 2024. 
 
   'blog-insegnanti-frontalieri-stipendio-requisiti-ticino': {
     title: 'Frontaliere insegnante scuola Ticino stipendio requisiti',
-description: 'La nuova convenzione italo-svizzera del 9 marzo 1976 evita la doppia imposizione con il credito d\'imposta (quadro CE del 730).',
+    description: 'La nuova convenzione italo-svizzera del 9 marzo 1976 evita la doppia imposizione con il credito d\'imposta (quadro CE del 730).',
     keywords: 'frontalieri, ticino, svizzera, italia, insegnante, scuola, stipendio, requisiti',
     ogTitle: 'Frontaliere insegnante scuola Ticino stipendio requisiti',
     ogDescription: 'La nuova convenzione italo-svizzera del 9 marzo 1976 evita la doppia imposizione con il credito d\'imposta (quadro CE del 730).',
@@ -48449,7 +48449,7 @@ description: 'La nuova convenzione italo-svizzera del 9 marzo 1976 evita la dopp
 
   'blog-pensionarsi-in-svizzera-per-chi-si-trasferisce-non-frontaliere': {
     title: 'Pensionarsi in Svizzera per chi si trasferisce non frontaliere',
-description: 'Il nuovo accordo frontaliere del 2024 introduce nuove regole per i frontalieri che desiderano pensionarsi in Svizzera.',
+    description: 'Il nuovo accordo frontaliere del 2024 introduce nuove regole per i frontalieri che desiderano pensionarsi in Svizzera.',
     keywords: 'frontalieri, ticino, svizzera, italia, pensionarsi, trasferisce, nuovo, accordo',
     ogTitle: 'Pensionarsi in Svizzera per chi si trasferisce non frontaliere',
     ogDescription: 'Il nuovo accordo frontaliere del 2024 introduce nuove regole per i frontalieri che desiderano pensionarsi in Svizzera.',
@@ -48878,10 +48878,10 @@ description: 'Il nuovo accordo frontaliere del 2024 introduce nuove regole per i
 
   'blog-conversione-patente-italiana-svizzera-frontalieri': {
     title: 'Conversione patente di guida in Svizzera per frontalieri: guida pratica, costi, validità',
-description: 'Il nuovo Accordo Frontalieri prevede la possibilità di convertire la patente di guida italiana in svizzera per i frontalieri.',
+    description: 'Il nuovo Accordo Frontalieri prevede la possibilità di convertire la patente di guida italiana in svizzera per i frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, conversione, patente, pratica, costi',
     ogTitle: 'Conversione patente di guida italiana in svizzera per frontalieri: quando serve, procedura, costi, validità durante il permesso G',
-ogDescription: 'Il nuovo Accordo Frontalieri prevede la possibilità di convertire la patente di guida italiana in svizzera per i frontalieri.',
+    ogDescription: 'Il nuovo Accordo Frontalieri prevede la possibilità di convertire la patente di guida italiana in svizzera per i frontalieri.',
     canonicalPath: '/articoli-frontaliere/conversione-patente-italiana-svizzera-frontalieri',
     structuredData: {
       "@context": "https://schema.org",
@@ -49073,7 +49073,7 @@ ogDescription: 'Il nuovo Accordo Frontalieri prevede la possibilità di converti
 
   'blog-partita-iva-frontaliere-svizzera': {
     title: 'Partita IVA frontaliere: guida al lavoro autonomo in Svizzera',
-description: 'Guida pratica per frontalieri: requisiti, fiscalità, previdenza e nuovo accordo 2024 per chi apre un\'attività autonoma in Svizzera.',
+    description: 'Guida pratica per frontalieri: requisiti, fiscalità, previdenza e nuovo accordo 2024 per chi apre un\'attività autonoma in Svizzera.',
     keywords: 'frontalieri, ticino, svizzera, italia, partita, lavoro, autonomo, scopri',
     ogTitle: 'Partita IVA frontaliere: guida al lavoro autonomo in Svizzera',
     ogDescription: 'Scopri come gestire l\'attività autonoma in Svizzera da frontaliere: requisiti, fiscalità e previdenza nel rispetto delle norme vigenti.',
@@ -49112,7 +49112,7 @@ description: 'Guida pratica per frontalieri: requisiti, fiscalità, previdenza e
 
   'blog-frontaliere-over-55-ricollocamento-cambio-lavoro': {
     title: 'Cambia lavoro da frontaliere dopo i 55 anni: tutele e impatto sul secondo pilastro e pensione',
-description: 'I frontalieri over 55 possono cambiare lavoro senza perdere i benefici del secondo pilastro, grazie al Nuovo Accordo Frontalieri.',
+    description: 'I frontalieri over 55 possono cambiare lavoro senza perdere i benefici del secondo pilastro, grazie al Nuovo Accordo Frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, cambia, lavoro, dopo, anni',
     ogTitle: 'Cambiare lavoro da frontaliere dopo i 55 anni: ricollocamento, tutele, impatto su secondo pilastro e pensione',
     ogDescription: 'I frontalieri over 55 possono cambiare lavoro senza perdere i benefici del secondo pilastro, grazie al Nuovo Accordo Frontalieri.',
@@ -49151,7 +49151,7 @@ description: 'I frontalieri over 55 possono cambiare lavoro senza perdere i bene
 
   'blog-conto-postfinance-carta-credito-frontaliere': {
     title: 'Conto PostFinance carta di credito frontaliere',
-description: 'Il conto PostFinance è una soluzione bancaria popolare tra i frontalieri. La carta di credito PostFinance offre numerose vantaggi.',
+    description: 'Il conto PostFinance è una soluzione bancaria popolare tra i frontalieri. La carta di credito PostFinance offre numerose vantaggi.',
     keywords: 'frontalieri, ticino, svizzera, italia, conto, postfinance, carta, credito',
     ogTitle: 'Conto PostFinance carta di credito frontaliere',
     ogDescription: 'Il conto PostFinance è una soluzione bancaria popolare tra i frontalieri. La carta di credito PostFinance offre numerose vantaggi.',
@@ -49268,10 +49268,10 @@ description: 'Il conto PostFinance è una soluzione bancaria popolare tra i fron
 
   'blog-franchigia-doganale-acquisti-svizzera-frontaliere-dogana': {
     title: 'Limiti doganali in Svizzera: aggiornamento dei valori, dichiarazione e conseguenze per il fronte',
-description: 'Con l\'entrata in vigore del Nuovo Accordo Frontalieri, sono cambiate le regole per gli acquisti in Svizzera.',
+    description: 'Con l\'entrata in vigore del Nuovo Accordo Frontalieri, sono cambiate le regole per gli acquisti in Svizzera.',
     keywords: 'frontalieri, ticino, svizzera, italia, limiti, doganali, aggiornamento, valori',
     ogTitle: 'Limiti di franchigia doganale per gli acquisti in Svizzera: valori aggiornati, dichiarazione, conseguenze del superamento per il frontaliere',
-ogDescription: 'Con l\'entrata in vigore del Nuovo Accordo Frontalieri, sono cambiate le regole per gli acquisti in Svizzera.',
+    ogDescription: 'Con l\'entrata in vigore del Nuovo Accordo Frontalieri, sono cambiate le regole per gli acquisti in Svizzera.',
     canonicalPath: '/articoli-frontaliere/franchigia-doganale-acquisti-svizzera-frontaliere-dogana',
     structuredData: {
       "@context": "https://schema.org",
@@ -49307,10 +49307,10 @@ ogDescription: 'Con l\'entrata in vigore del Nuovo Accordo Frontalieri, sono cam
 
   'blog-docenti-frontalieri-ticino-permessi-lavoro': {
     title: 'Docenti frontalieri: nessuna irregolarità | Frontaliere Ticino',
-description: 'La procedura attuale per i docenti frontalieri che lavorano nel Cantone Ticino funziona ed è rispettata.',
+    description: 'La procedura attuale per i docenti frontalieri che lavorano nel Cantone Ticino funziona ed è rispettata.',
     keywords: 'frontalieri, ticino, svizzera, italia, docenti, nessuna, irregolarità, consiglio',
     ogTitle: 'Docenti frontalieri senza permesso di lavoro: il Governo',
-ogDescription: 'Il Consiglio di Stato ha risposto a un\'interrogazione di Lorenzo Quadri, affermando che non vi è irregolarità nel fatto che docenti frontalieri siano entrati in servizio prima di ottenere il permesso di lavoro.',
+    ogDescription: 'Il Consiglio di Stato ha risposto a un\'interrogazione di Lorenzo Quadri, affermando che non vi è irregolarità nel fatto che docenti frontalieri siano entrati in servizio prima di ottenere il permesso di lavoro.',
     canonicalPath: '/articoli-frontaliere/docenti-frontalieri-ticino-permessi-lavoro',
     structuredData: {
       "@context": "https://schema.org",
@@ -49424,10 +49424,10 @@ ogDescription: 'Il Consiglio di Stato ha risposto a un\'interrogazione di Lorenz
 
   'blog-dipiu-frenata-per-gli-annunci-di-lavoro-in-svizzera': {
     title: 'Di più frenata per gli annunci di lavoro in Svizzera',
-description: 'La mancanza di posti di lavoro ha portato a una crescita del tasso di disoccupazione, che è aumentato del 2,1% nel secondo trimestre 2026.',
+    description: 'La mancanza di posti di lavoro ha portato a una crescita del tasso di disoccupazione, che è aumentato del 2,1% nel secondo trimestre 2026.',
     keywords: 'frontalieri, ticino, svizzera, italia, frenata, annunci, lavoro, mercato',
     ogTitle: 'Di più frenata per gli annunci di lavoro in Svizzera',
-ogDescription: 'Il mercato del lavoro svizzero nel secondo trimestre 2026 ha mostrato una stagnazione generale, nascondendo però una forte divergenza tra settori in crescita e altri in netto calo.',
+    ogDescription: 'Il mercato del lavoro svizzero nel secondo trimestre 2026 ha mostrato una stagnazione generale, nascondendo però una forte divergenza tra settori in crescita e altri in netto calo.',
     canonicalPath: '/articoli-frontaliere/dipiu-frenata-per-gli-annunci-di-lavoro-in-svizzera',
     structuredData: {
       "@context": "https://schema.org",
@@ -49692,7 +49692,7 @@ ogDescription: 'Il mercato del lavoro svizzero nel secondo trimestre 2026 ha mos
 
   'blog-corsi-di-tedesco-o-francese-per-frontalieri-italofoni': {
     title: 'Corsi tedesco e francese per frontalieri italofoni',
-description: 'Informazioni concrete sui corsi di tedesco e francese per frontalieri italofoni in Ticino, con scuole e finanziamenti disponibili.',
+    description: 'Informazioni concrete sui corsi di tedesco e francese per frontalieri italofoni in Ticino, con scuole e finanziamenti disponibili.',
     keywords: 'frontalieri, ticino, svizzera, italia, corsi, tedesco, francese, italofoni',
     ogTitle: 'corsi-di-tedesco-o-francese-per-frontalieri-italofoni',
     ogDescription: 'Informazioni concrete sui corsi di tedesco e francese per frontalieri italofoni in Ticino, con scuole e finanziamenti disponibili.',
@@ -49770,7 +49770,7 @@ description: 'Informazioni concrete sui corsi di tedesco e francese per frontali
 
   'blog-vivere-luino-lavorare-ticino': {
     title: 'Vivere a Luino e lavorare in Ticino da frontaliere',
-description: 'Guida pratica per frontalieri: fiscalità, nuovo accordo 2024, costi e procedure per chi vive a Luino e lavora in Canton Ticino.',
+    description: 'Guida pratica per frontalieri: fiscalità, nuovo accordo 2024, costi e procedure per chi vive a Luino e lavora in Canton Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, vivere, luino, lavorare, pratica',
     ogTitle: 'Vivere a Luino e lavorare in Ticino da frontaliere',
     ogDescription: 'Guida pratica per frontalieri: fiscalità, nuovo accordo 2024, costi e procedure per chi vive a Luino e lavora in Canton Ticino.',
@@ -49926,7 +49926,7 @@ description: 'Guida pratica per frontalieri: fiscalità, nuovo accordo 2024, cos
 
   'blog-di-piu-posti-di-lavoro-la-situazione-rista-critica-nel-settore-bancario': {
     title: 'Di più posti di lavoro, la situazione resta critica nel settore bancario',
-description: 'Il numero di disoccupati nel settore bancario è in aumento, secondo le statistiche della Segreteria di Stato dell\'economia (SECO).',
+    description: 'Il numero di disoccupati nel settore bancario è in aumento, secondo le statistiche della Segreteria di Stato dell\'economia (SECO).',
     keywords: 'frontalieri, ticino, svizzera, italia, posti, lavoro, situazione, resta',
     ogTitle: 'Di più posti di lavoro, la situazione resta critica nel settore bancario',
     ogDescription: 'Il numero di disoccupati nel settore bancario è in aumento, secondo le statistiche della Segreteria di Stato dell\'economia (SECO).',
@@ -50623,7 +50623,7 @@ description: 'Il numero di disoccupati nel settore bancario è in aumento, secon
 
   'blog-dichiarazione-redditi-2026-or-disponibili-730-precompilati-le-indicazioni-del-fisco-sky-tg24': {
     title: '730 precompilati 2026, le indicazioni del Fisco',
-description: 'Ora è possibile scaricare i 730 precompilati per la dichiarazione dei redditi 2026. Ecco le indicazioni del Fisco.',
+    description: 'Ora è possibile scaricare i 730 precompilati per la dichiarazione dei redditi 2026. Ecco le indicazioni del Fisco.',
     keywords: 'frontalieri, ticino, svizzera, italia, precompilati, indicazioni, fisco, possibile',
     ogTitle: 'Dichiarazione redditi 2026, ora disponibili i 730 precompilati',
     ogDescription: 'Ora è possibile scaricare i 730 precompilati per la dichiarazione dei redditi 2026.',
@@ -50774,10 +50774,10 @@ description: 'Ora è possibile scaricare i 730 precompilati per la dichiarazione
 
   'blog-dividenti-italiani-stop-alle-discriminazioni-fiscali-per-gli-enti-esteri': {
     title: 'Dividenti italiani, stop alle discriminazioni fiscali per gli enti esteri',
-description: 'La Corte di cassazione afferma che gli enti esteri non possono subire un trattamento fiscale più gravoso per il solo fatto di essere costituiti secondo un',
+    description: 'La Corte di cassazione afferma che gli enti esteri non possono subire un trattamento fiscale più gravoso per il solo fatto di essere costituiti secondo un',
     keywords: 'frontalieri, ticino, svizzera, italia, dividenti, italiani, stop, alle',
     ogTitle: 'Dividenti italiani, stop alle discriminazioni fiscali per gli enti esteri',
-ogDescription: 'È questo il principio affermato dalla Corte di cassazione con la sentenza n. 16281/2026, destinata a incidere sul trattamento fiscale degli enti esteri che investono in Italia.',
+    ogDescription: 'È questo il principio affermato dalla Corte di cassazione con la sentenza n. 16281/2026, destinata a incidere sul trattamento fiscale degli enti esteri che investono in Italia.',
     canonicalPath: '/articoli-frontaliere/dividenti-italiani-stop-alle-discriminazioni-fiscali-per-gli-enti-esteri',
     structuredData: {
       "@context": "https://schema.org",
@@ -50852,10 +50852,10 @@ ogDescription: 'È questo il principio affermato dalla Corte di cassazione con l
 
   'blog-telelavoro-dei-frontalieri-tra-italia-e-svizzera-doppia-soglia-tra-fisco-e-previ': {
     title: 'Telelavoro dei frontalieri tra Italia e Svizzera: doppia soglia tra fisco e previdenza',
-description: 'Questa disciplina si inserisce nel più ampio regime introdotto dall\'Accordo del 2020, che distingue tra vecchi e nuovi frontalieri.',
+    description: 'Questa disciplina si inserisce nel più ampio regime introdotto dall\'Accordo del 2020, che distingue tra vecchi e nuovi frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, telelavoro, doppia, soglia, fisco',
     ogTitle: 'Telelavoro dei frontalieri tra Italia e Svizzera: doppia soglia tra fisco e previdenza',
-ogDescription: 'Questa disciplina si inserisce nel più ampio regime introdotto dall\'Accordo del 2020, che distingue tra vecchi e nuovi frontalieri.',
+    ogDescription: 'Questa disciplina si inserisce nel più ampio regime introdotto dall\'Accordo del 2020, che distingue tra vecchi e nuovi frontalieri.',
     canonicalPath: '/articoli-frontaliere/telelavoro-dei-frontalieri-tra-italia-e-svizzera-doppia-soglia-tra-fisco-e-previ',
     structuredData: {
       "@context": "https://schema.org",
@@ -51008,7 +51008,7 @@ ogDescription: 'Questa disciplina si inserisce nel più ampio regime introdotto 
 
   'blog-servo-aiuto-pi-lavori-commissioni': {
     title: 'Serve un aiuto in più per i lavori nelle commissioni',
-description: 'La mozione Ortelli chiede l\'introduzione di un segretario aggiunto/ricercatore parlamentare per aiutare i lavori nelle commissioni.',
+    description: 'La mozione Ortelli chiede l\'introduzione di un segretario aggiunto/ricercatore parlamentare per aiutare i lavori nelle commissioni.',
     keywords: 'frontalieri, ticino, svizzera, italia, serve, aiuto, lavori, nelle',
     ogTitle: 'Serve un aiuto in più per i lavori nelle commissioni',
     ogDescription: 'La mozione Ortelli chiede l\'introduzione di un segretario aggiunto/ricercatore parlamentare per aiutare i lavori nelle commissioni.',
@@ -51047,7 +51047,7 @@ description: 'La mozione Ortelli chiede l\'introduzione di un segretario aggiunt
 
   'blog-naspi-frontalieri-italia-requisiti-calcolo-domanda': {
     title: 'NASpI per ex-frontalieri: requisiti, calcolo, durata e domanda',
-description: 'Guida completa all\'indennità di disoccupazione NASpI per chi ha perso il lavoro in Svizzera.',
+    description: 'Guida completa all\'indennità di disoccupazione NASpI per chi ha perso il lavoro in Svizzera.',
     keywords: 'frontalieri, ticino, svizzera, italia, naspi, ex-frontalieri, requisiti, calcolo',
     ogTitle: 'NASpI ex-frontalieri: come ottenere l\'indennità di disoccupazione',
     ogDescription: 'Requisiti, calcolo e procedura per la NASpI dopo il lavoro in Svizzera. Guida pratica per ex-frontalieri.',
@@ -51281,7 +51281,7 @@ description: 'Guida completa all\'indennità di disoccupazione NASpI per chi ha 
 
   'blog-disoccupazione-ticino-frontalieri': {
     title: 'Vacilla il mito della Svizzera: 152mila senza lavoro',
-description: 'Tasso di disoccupazione in Svizzera sale al 3,2% nel gennaio 2026, con un aumento dei senza lavoro a 152.300 unità.',
+    description: 'Tasso di disoccupazione in Svizzera sale al 3,2% nel gennaio 2026, con un aumento dei senza lavoro a 152.300 unità.',
     keywords: 'frontalieri, ticino, svizzera, italia, vacilla, mito, 152mila, senza',
     ogTitle: 'Disoccupazione in Svizzera: 152mila frontalieri senza lavoro',
     ogDescription: 'Tasso di disoccupazione in Svizzera sale al 3,2% nel gennaio 2026',
@@ -51515,10 +51515,10 @@ description: 'Tasso di disoccupazione in Svizzera sale al 3,2% nel gennaio 2026,
 
   'blog-frontaliere-logopedista-ticino-stipendio-requisiti': {
     title: 'Logopedista in Ticino: stipendio, requisiti e riconoscimento del titolo',
-description: 'Secondo dati del 2022, il salario medio per un logopedista in Ticino è di circa CHF 70\'000 all\'anno.',
+    description: 'Secondo dati del 2022, il salario medio per un logopedista in Ticino è di circa CHF 70\'000 all\'anno.',
     keywords: 'frontalieri, ticino, svizzera, italia, logopedista, stipendio, requisiti, riconoscimento',
     ogTitle: 'Lavorare come logopedista in Ticino da frontaliere: stipendio medio, requisiti, eventuale riconoscimento del titolo di studio, permesso G',
-ogDescription: 'Secondo dati del 2022, il salario medio per un logopedista in Ticino è di circa CHF 70\'000 all\'anno.',
+    ogDescription: 'Secondo dati del 2022, il salario medio per un logopedista in Ticino è di circa CHF 70\'000 all\'anno.',
     canonicalPath: '/articoli-frontaliere/frontaliere-logopedista-ticino-stipendio-requisiti',
     structuredData: {
       "@context": "https://schema.org",
@@ -51710,7 +51710,7 @@ ogDescription: 'Secondo dati del 2022, il salario medio per un logopedista in Ti
 
   'blog-stipendio-assistente-dentale-frontaliere-ticino': {
     title: 'Quanto guadagna un assistente dentale frontaliere in Ticino?',
-description: 'Il salario di un assistente dentale frontaliere in Ticino è soggetto alle tabelle salariali e alle convenzioni doppie imposizioni.',
+    description: 'Il salario di un assistente dentale frontaliere in Ticino è soggetto alle tabelle salariali e alle convenzioni doppie imposizioni.',
     keywords: 'frontalieri, ticino, svizzera, italia, quanto, guadagna, assistente, dentale',
     ogTitle: 'Quanto guadagna un assistente dentale frontaliere in Ticino?',
     ogDescription: 'Il salario di un assistente dentale frontaliere in Ticino è soggetto alle tabelle salariali e alle convenzioni doppie imposizioni.',
@@ -51788,10 +51788,10 @@ description: 'Il salario di un assistente dentale frontaliere in Ticino è sogge
 
   'blog-frontaliere-tecnico-radiologia-ticino-stipendio-requisiti': {
     title: 'Tecnico di radiologia in Ticino: quanto guadagna e requisiti',
-description: 'Quanto guadagna un tecnico di radiologia in Ticino: stipendio medio di CHF 80.000 l\'anno, requisiti, riconoscimento del titolo di studio e permesso G.',
+    description: 'Quanto guadagna un tecnico di radiologia in Ticino: stipendio medio di CHF 80.000 l\'anno, requisiti, riconoscimento del titolo di studio e permesso G.',
     keywords: 'frontalieri, ticino, svizzera, italia, tecnico, radiologia, stipendio, requisiti',
     ogTitle: 'Tecnico di radiologia in Ticino: quanto guadagna e requisiti',
-ogDescription: 'Quanto guadagna un tecnico di radiologia in Ticino: stipendio medio di CHF 80.000 l\'anno, requisiti, riconoscimento del titolo di studio e permesso G.',
+    ogDescription: 'Quanto guadagna un tecnico di radiologia in Ticino: stipendio medio di CHF 80.000 l\'anno, requisiti, riconoscimento del titolo di studio e permesso G.',
     canonicalPath: '/articoli-frontaliere/frontaliere-tecnico-radiologia-ticino-stipendio-requisiti',
     structuredData: {
       "@context": "https://schema.org",
@@ -51983,7 +51983,7 @@ ogDescription: 'Quanto guadagna un tecnico di radiologia in Ticino: stipendio me
 
   'blog-frontaliere-ticino-ottico-optometrista': {
     title: 'Quanto guadagna un ottico optometrista frontaliere in Ticino?',
-description: 'Un\'analisi dei salari di un ottico optometrista frontaliere in Ticino, basata sul Nuovo Accordo Frontalieri del 2024.',
+    description: 'Un\'analisi dei salari di un ottico optometrista frontaliere in Ticino, basata sul Nuovo Accordo Frontalieri del 2024.',
     keywords: 'frontalieri, ticino, svizzera, italia, quanto, guadagna, ottico, optometrista',
     ogTitle: 'Quanto guadagna un ottico optometrista frontaliere in Ticino?',
     ogDescription: 'Un\'analisi dei salari di un ottico optometrista frontaliere in Ticino, basata sul Nuovo Accordo Frontalieri del 2024.',
@@ -52139,10 +52139,10 @@ description: 'Un\'analisi dei salari di un ottico optometrista frontaliere in Ti
 
   'blog-tecnicodisalaoperatoriaticinostipendiorientati': {
     title: 'Tecnico di sala operatoria in Ticino: stipendio, requisiti e permesso G',
-description: 'Il tecnico di sala operatoria è un professionista altamente specializzato che lavora in un ambiente di alta pressione.',
+    description: 'Il tecnico di sala operatoria è un professionista altamente specializzato che lavora in un ambiente di alta pressione.',
     keywords: 'frontalieri, ticino, svizzera, italia, tecnico, sala, operatoria, stipendio',
     ogTitle: 'Lavorare come tecnico di sala operatoria in Ticino da frontaliere: stipendio medio, requisiti, riconoscimento del titolo di studio e permesso G.',
-ogDescription: 'Il tecnico di sala operatoria è un professionista altamente specializzato che lavora in un ambiente di alta pressione.',
+    ogDescription: 'Il tecnico di sala operatoria è un professionista altamente specializzato che lavora in un ambiente di alta pressione.',
     canonicalPath: '/articoli-frontaliere/tecnicodisalaoperatoriaticinostipendiorientati',
     structuredData: {
       "@context": "https://schema.org",
@@ -52178,10 +52178,10 @@ ogDescription: 'Il tecnico di sala operatoria è un professionista altamente spe
 
   'blog-frontaliere-medico-ticino-stipendio-requisiti': {
     title: 'Medici frontalieri in Ticino: stipendio, requisiti e riconoscimento titolo',
-description: 'Gli stipendi medi per i medici frontaliere in Ticino, i requisiti per lavorare come medico frontaliere, il riconoscimento del titolo di studio e il permesso G.',
+    description: 'Gli stipendi medi per i medici frontaliere in Ticino, i requisiti per lavorare come medico frontaliere, il riconoscimento del titolo di studio e il permesso G.',
     keywords: 'frontalieri, ticino, svizzera, italia, medici, stipendio, requisiti, riconoscimento',
     ogTitle: 'Lavorare come medico frontaliere in Ticino: stipendio medio, requisiti, eventuale riconoscimento del titolo di studio, permesso G.',
-ogDescription: 'Gli stipendi medi per i medici frontaliere in Ticino, i requisiti per lavorare come medico frontaliere, il riconoscimento del titolo di studio e il permesso G.',
+    ogDescription: 'Gli stipendi medi per i medici frontaliere in Ticino, i requisiti per lavorare come medico frontaliere, il riconoscimento del titolo di studio e il permesso G.',
     canonicalPath: '/articoli-frontaliere/frontaliere-medico-ticino-stipendio-requisiti',
     structuredData: {
       "@context": "https://schema.org",
@@ -52368,7 +52368,7 @@ ogDescription: 'Gli stipendi medi per i medici frontaliere in Ticino, i requisit
 
   'blog-progettista-elettrico-frontaliere-ticino': {
     title: 'Stipendio di un progettista elettrico: Ticino vs Italia',
-description: 'I dati concreti sullo stipendio di un progettista elettrico frontaliere in Ticino, con confronti con la situazione italiana.',
+    description: 'I dati concreti sullo stipendio di un progettista elettrico frontaliere in Ticino, con confronti con la situazione italiana.',
     keywords: 'frontalieri, ticino, svizzera, italia, stipendio, progettista, elettrico, dati',
     ogTitle: 'Stipendio reale di un progettista elettrico frontaliere in Ticino',
     ogDescription: 'I dati concreti sullo stipendio di un progettista elettrico frontaliere in Ticino, con confronti con la situazione italiana',
@@ -52407,10 +52407,10 @@ description: 'I dati concreti sullo stipendio di un progettista elettrico fronta
 
   'blog-coronavirus-frontalieri-ticino-svizzera': {
     title: 'Frontalieri, lavoro e permesso G: il consigliere Vitta',
-description: 'Il consigliere di Stato Christian Vitta ha chiarito che i lavoratori frontalieri potranno andare al lavoro in Svizzera, ma devono essere muniti del permesso G.',
+    description: 'Il consigliere di Stato Christian Vitta ha chiarito che i lavoratori frontalieri potranno andare al lavoro in Svizzera, ma devono essere muniti del permesso G.',
     keywords: 'frontalieri, ticino, svizzera, italia, lavoro, permesso, consigliere, vitta',
     ogTitle: 'Frontalieri, il consigliere Vitta: \'In Svizzera solo per lavoro e col permesso G. Avvieremo monitoraggio persone\'',
-ogDescription: 'Il consigliere di Stato Christian Vitta ha chiarito che i lavoratori frontalieri potranno andare al lavoro in Svizzera, ma devono essere muniti del permesso G.',
+    ogDescription: 'Il consigliere di Stato Christian Vitta ha chiarito che i lavoratori frontalieri potranno andare al lavoro in Svizzera, ma devono essere muniti del permesso G.',
     canonicalPath: '/articoli-frontaliere/coronavirus-frontalieri-ticino-svizzera',
     structuredData: {
       "@context": "https://schema.org",
@@ -52563,7 +52563,7 @@ ogDescription: 'Il consigliere di Stato Christian Vitta ha chiarito che i lavora
 
   'blog-frontaliere-meccatronico-ticino-stipendio-requisiti': {
     title: 'Frontaliere meccatronico Ticino stipendio requisiti',
-description: 'Il permesso G è necessario per i meccatronici in Ticino. Non è specificato quale requisito sia necessario per i meccatronici in Ticino.',
+    description: 'Il permesso G è necessario per i meccatronici in Ticino. Non è specificato quale requisito sia necessario per i meccatronici in Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, meccatronico, stipendio, requisiti, permesso',
     ogTitle: 'Frontaliere meccatronico Ticino stipendio requisiti',
     ogDescription: 'Il permesso G è necessario per i meccatronici in Ticino. Non è specificato quale requisito sia necessario per i meccatronici in Ticino.',
@@ -52914,7 +52914,7 @@ description: 'Il permesso G è necessario per i meccatronici in Ticino. Non è s
 
   'blog-stipendio-fiduciario-frontaliere-ticino': {
     title: 'Quanto guadagna un fiduciario frontaliere in Ticino?',
-description: 'La retribuzione di un fiduciario frontaliere in Ticino dipende da vari fattori, tra cui la sua esperienza e la tipologia di lavoro.',
+    description: 'La retribuzione di un fiduciario frontaliere in Ticino dipende da vari fattori, tra cui la sua esperienza e la tipologia di lavoro.',
     keywords: 'frontalieri, ticino, svizzera, italia, quanto, guadagna, fiduciario, impresa',
     ogTitle: 'Quanto guadagna un fiduciario frontaliere in Ticino?',
     ogDescription: 'La retribuzione di un fiduciario frontaliere in Ticino dipende da vari fattori, tra cui la sua esperienza e la tipologia di lavoro.',
@@ -53070,7 +53070,7 @@ description: 'La retribuzione di un fiduciario frontaliere in Ticino dipende da 
 
   'blog-frontaliere-idraulico-ticino-stipendio-requisiti': {
     title: 'Lavorare come idraulico in Ticino: stipendio, requisiti e permesso G',
-description: 'Imposte, doppia imposizione, permesso G, riconoscimento del titolo di studio e stipendio medio per un idraulico frontaliere in Ticino.',
+    description: 'Imposte, doppia imposizione, permesso G, riconoscimento del titolo di studio e stipendio medio per un idraulico frontaliere in Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, lavorare, idraulico, stipendio, requisiti',
     ogTitle: 'Lavorare come idraulico in Ticino da frontaliere: stipendio medio, requisiti, riconoscimento del titolo di studio e permesso G',
     ogDescription: 'Imposte, doppia imposizione, permesso G, riconoscimento del titolo di studio e stipendio medio per un idraulico frontaliere in Ticino',
@@ -53109,7 +53109,7 @@ description: 'Imposte, doppia imposizione, permesso G, riconoscimento del titolo
 
   'blog-idraulico-ticino-frontiera-guadagno': {
     title: 'Quanto guadagna un idraulico frontaliere in Ticino',
-description: 'Fascia salariale e contributi per l\'idraulico frontaliere in Ticino: imposta alla fonte e convenzione doppia imposizione 1976.',
+    description: 'Fascia salariale e contributi per l\'idraulico frontaliere in Ticino: imposta alla fonte e convenzione doppia imposizione 1976.',
     keywords: 'frontalieri, ticino, svizzera, italia, quanto, guadagna, idraulico, contributi',
     ogTitle: 'Idraulico frontaliere Ticino stipendio',
     ogDescription: 'Contributi e tassazione per l\'idraulico frontaliere in Ticino secondo accordo 2024.',
@@ -53187,10 +53187,10 @@ description: 'Fascia salariale e contributi per l\'idraulico frontaliere in Tici
 
   'blog-frontaliere-pittore-ticino-stipendio-requisiti': {
     title: 'Lavorare come pittore in Ticino: stipendio, requisiti e permesso G',
-description: 'In questo articolo, esploreremo i requisiti per lavorare come pittore in Ticino, il permesso G e i diritti del lavoratore.',
+    description: 'In questo articolo, esploreremo i requisiti per lavorare come pittore in Ticino, il permesso G e i diritti del lavoratore.',
     keywords: 'frontalieri, ticino, svizzera, italia, lavorare, pittore, stipendio, requisiti',
     ogTitle: 'Lavorare come pittore in Ticino da frontaliere: stipendio medio, requisiti, eventuale riconoscimento del titolo di studio, permesso G.',
-ogDescription: 'In questo articolo, esploreremo i requisiti per lavorare come pittore in Ticino, il permesso G e i diritti del lavoratore.',
+    ogDescription: 'In questo articolo, esploreremo i requisiti per lavorare come pittore in Ticino, il permesso G e i diritti del lavoratore.',
     canonicalPath: '/articoli-frontaliere/frontaliere-pittore-ticino-stipendio-requisiti',
     structuredData: {
       "@context": "https://schema.org",
@@ -53343,7 +53343,7 @@ ogDescription: 'In questo articolo, esploreremo i requisiti per lavorare come pi
 
   'blog-stipendio-gessatore-frontaliere-ticino': {
     title: 'Quanto guadagna un gessatore frontaliere in Ticino: stipendi e tasse',
-description: 'Scopri la fascia salariale netta dopo tasse e contributi, differenze con l\'Italia e come ottimizzare il reddito. Guida pratica 2024.',
+    description: 'Scopri la fascia salariale netta dopo tasse e contributi, differenze con l\'Italia e come ottimizzare il reddito. Guida pratica 2024.',
     keywords: 'frontalieri, ticino, svizzera, italia, quanto, guadagna, gessatore, stipendi',
     ogTitle: 'Quanto guadagna un gessatore frontaliere in Ticino? Stipendio netto e tasse',
     ogDescription: 'Guida verificata: stipendio reale dopo detrazioni, confronto Italia-Svizzera, consigli pratici per massimizzare il netto.',
@@ -53616,10 +53616,10 @@ description: 'Scopri la fascia salariale netta dopo tasse e contributi, differen
 
   'blog-frontaliere-pasticcere-ticino-stipendio-requisiti': {
     title: 'Lavorare come pasticcere in Ticino: stipendio e requisiti',
-description: 'La Svizzera non è membro dell\'UE, il permesso G è necessario per lavorare in Ticino come pasticcere.',
+    description: 'La Svizzera non è membro dell\'UE, il permesso G è necessario per lavorare in Ticino come pasticcere.',
     keywords: 'frontalieri, ticino, svizzera, italia, lavorare, pasticcere, stipendio, requisiti',
     ogTitle: 'Lavorare come pasticcere in Ticino da frontaliere: stipendio medio, requisiti, eventuale riconoscimento del titolo di studio, permesso G.',
-ogDescription: 'La Svizzera non è membro dell\'UE, il permesso G è necessario per lavorare in Ticino come pasticcere.',
+    ogDescription: 'La Svizzera non è membro dell\'UE, il permesso G è necessario per lavorare in Ticino come pasticcere.',
     canonicalPath: '/articoli-frontaliere/frontaliere-pasticcere-ticino-stipendio-requisiti',
     structuredData: {
       "@context": "https://schema.org",
@@ -53655,7 +53655,7 @@ ogDescription: 'La Svizzera non è membro dell\'UE, il permesso G è necessario 
 
   'blog-parrucchiere-frontaliere-ticino': {
     title: 'Quanto guadagna un parrucchiere frontaliere in Ticino',
-description: 'Il salario di un parrucchiere frontaliere in Ticino può variare a seconda della sua esperienza e del tipo di attività che svolge.',
+    description: 'Il salario di un parrucchiere frontaliere in Ticino può variare a seconda della sua esperienza e del tipo di attività che svolge.',
     keywords: 'frontalieri, ticino, svizzera, italia, quanto, guadagna, parrucchiere, salario',
     ogTitle: 'Quanto guadagna un parrucchiere frontaliere in Ticino',
     ogDescription: 'Il salario di un parrucchiere frontaliere in Ticino può variare a seconda della sua esperienza e del tipo di attività che svolge',
@@ -53772,7 +53772,7 @@ description: 'Il salario di un parrucchiere frontaliere in Ticino può variare a
 
   'blog-frontaliere-agenzia-sicurezza-guadagno-ticino': {
     title: 'Quanto guadagna un agente di sicurezza frontaliere in Ticino?',
-description: 'Il reddito di un agente di sicurezza frontaliere in Ticino dipende da vari fattori, come la fascia salariale e la posizione lavorativa.',
+    description: 'Il reddito di un agente di sicurezza frontaliere in Ticino dipende da vari fattori, come la fascia salariale e la posizione lavorativa.',
     keywords: 'frontalieri, ticino, svizzera, italia, quanto, guadagna, agente, sicurezza',
     ogTitle: 'Quanto guadagna un agente di sicurezza frontaliere in Ticino?',
     ogDescription: 'Il reddito di un agente di sicurezza frontaliere in Ticino dipende da vari fattori, come la fascia salariale e la posizione lavorativa.',
@@ -53811,10 +53811,10 @@ description: 'Il reddito di un agente di sicurezza frontaliere in Ticino dipende
 
   'blog-frontaliere-addetto-pulizie-ticino-stipendio-requisiti': {
     title: 'Frontaliere Ticino: stipendio e requisiti per addetti alle pulizie',
-description: 'Lavorare come addetto alle pulizie in Ticino da frontaliere: stipendio medio, requisiti, eventuale riconoscimento del titolo di studio, permesso G.',
+    description: 'Lavorare come addetto alle pulizie in Ticino da frontaliere: stipendio medio, requisiti, eventuale riconoscimento del titolo di studio, permesso G.',
     keywords: 'frontalieri, ticino, svizzera, italia, stipendio, requisiti, addetti, alle',
     ogTitle: 'Frontaliere addetto alle pulizie Ticino: stipendio medio, requisiti, riconoscimento del titolo di studio, permesso G',
-ogDescription: 'Lavorare come addetto alle pulizie in Ticino da frontaliere: stipendio medio, requisiti, eventuale riconoscimento del titolo di studio, permesso G.',
+    ogDescription: 'Lavorare come addetto alle pulizie in Ticino da frontaliere: stipendio medio, requisiti, eventuale riconoscimento del titolo di studio, permesso G.',
     canonicalPath: '/articoli-frontaliere/frontaliere-addetto-pulizie-ticino-stipendio-requisiti',
     structuredData: {
       "@context": "https://schema.org",
@@ -54123,7 +54123,7 @@ ogDescription: 'Lavorare come addetto alle pulizie in Ticino da frontaliere: sti
 
   'blog-salari-ticino-abusi-precarieta': {
     title: 'Salari ticinesi: tra abusi e precarietà | Frontaliere Ticino',
-description: 'Guida pratica per frontalieri Italia-Svizzera: franchigie fiscali 2024, contributi AVS/LPP, errori busta paga e come evitarli.',
+    description: 'Guida pratica per frontalieri Italia-Svizzera: franchigie fiscali 2024, contributi AVS/LPP, errori busta paga e come evitarli.',
     keywords: 'frontalieri, ticino, svizzera, italia, salari, ticinesi, abusi, precarietà',
     ogTitle: 'Salari ticinesi 2024: abusi e precarietà per frontalieri',
     ogDescription: 'Analisi del nuovo regime fiscale italo-svizzero: franchigie, contributi sociali e diritti negati. Proteggi il tuo salario con guide pratiche.',
@@ -54469,10 +54469,10 @@ description: 'Guida pratica per frontalieri Italia-Svizzera: franchigie fiscali 
 
   'blog-telelavoro-per-i-frontalieri-il-governo-italiano-approva-il-disegno-di-legge': {
     title: 'Telelavoro per frontalieri: il Governo approva il disegno di legge',
-description: 'Il Governo del Cantone Ticino ha approvato il disegno di legge che regola il telelavoro per i lavoratori frontalieri.',
+    description: 'Il Governo del Cantone Ticino ha approvato il disegno di legge che regola il telelavoro per i lavoratori frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, telelavoro, governo, approva, disegno',
     ogTitle: 'Il Governo italiano approva il disegno di legge per il telelavoro dei frontalieri',
-ogDescription: 'Il Consiglio dei ministri italiano ha approvato il disegno di legge per ratificare il Protocollo di modifica dell\'Accordo con la Svizzera sull\'imposizione dei lavoratori frontalieri.',
+    ogDescription: 'Il Consiglio dei ministri italiano ha approvato il disegno di legge per ratificare il Protocollo di modifica dell\'Accordo con la Svizzera sull\'imposizione dei lavoratori frontalieri.',
     canonicalPath: '/articoli-frontaliere/telelavoro-per-i-frontalieri-il-governo-italiano-approva-il-disegno-di-legge',
     structuredData: {
       "@context": "https://schema.org",
@@ -54511,7 +54511,7 @@ ogDescription: 'Il Consiglio dei ministri italiano ha approvato il disegno di le
     description: 'Guida pratica per frontalieri impiegati di commercio in Ticino: requisiti, tassazione 2024, franchigie fiscali e gestione del permesso G. Dati aggiornati 2026',
     keywords: 'frontalieri, ticino, svizzera, italia, impiegato, commercio, scopri, requisiti',
     ogTitle: 'Frontaliere impiegato di commercio in Ticino: stipendio e regole',
-ogDescription: 'Guida pratica per frontalieri impiegati di commercio in Ticino: requisiti, tassazione 2024, franchigie fiscali e gestione del permesso G.',
+    ogDescription: 'Guida pratica per frontalieri impiegati di commercio in Ticino: requisiti, tassazione 2024, franchigie fiscali e gestione del permesso G.',
     canonicalPath: '/articoli-frontaliere/frontaliere-impiegato-commercio-ticino',
     structuredData: {
       "@context": "https://schema.org",
@@ -54547,7 +54547,7 @@ ogDescription: 'Guida pratica per frontalieri impiegati di commercio in Ticino: 
 
   'blog-frontalieri-disoccupati-ue-riforma-onerosa-ticino': {
     title: 'Frontalieri disoccupati: l\'UE approva riforma onerosa per la Svizzera',
-description: 'Il Parlamento europeo ha approvato una riforma che ridefinisce le competenze in materia di lavoratori frontalieri disoccupati.',
+    description: 'Il Parlamento europeo ha approvato una riforma che ridefinisce le competenze in materia di lavoratori frontalieri disoccupati.',
     keywords: 'frontalieri, ticino, svizzera, italia, disoccupati, approva, riforma, onerosa',
     ogTitle: 'Frontalieri disoccupati: l\'UE approva riforma onerosa per la Svizzera',
     ogDescription: 'Il Parlamento europeo ha approvato una riforma che ridefinisce le competenze in materia di lavoratori frontalieri disoccupati.',
@@ -54625,7 +54625,7 @@ description: 'Il Parlamento europeo ha approvato una riforma che ridefinisce le 
 
   'blog-frontalieri-ticino-numeri-in-calo': {
     title: 'Frontalieri, numeri in calo in Ticino nei primi tre mesi dell\'anno',
-description: 'In conclusione, il numero di frontalieri in Ticino è in calo nei primi tre mesi dell\'anno.',
+    description: 'In conclusione, il numero di frontalieri in Ticino è in calo nei primi tre mesi dell\'anno.',
     keywords: 'frontalieri, ticino, svizzera, italia, numeri, calo, primi, mesi',
     ogTitle: 'Frontalieri, numeri in calo in Ticino nei primi tre mesi dell\'anno',
     ogDescription: 'Il numero di frontalieri in Ticino è in calo dei primi tre mesi dell\'anno.',
@@ -54820,10 +54820,10 @@ description: 'In conclusione, il numero di frontalieri in Ticino è in calo nei 
 
   'blog-frontalieri-permessi-g': {
     title: 'Richiesta nuovo permesso per frontalieri (G) - Repubblica e Cantone Ticino',
-description: 'Secondo la legge ticinese, i frontalieri devono notificare la propria presenza al Comune in cui pernotta in Svizzera.',
+    description: 'Secondo la legge ticinese, i frontalieri devono notificare la propria presenza al Comune in cui pernotta in Svizzera.',
     keywords: 'frontalieri, ticino, svizzera, italia, richiesta, nuovo, permesso, repubblica',
     ogTitle: 'Richiesta nuovo permesso per frontalieri (G) - Repubblica e Cantone Ticino',
-ogDescription: 'Secondo la legge ticinese, i frontalieri devono notificare la propria presenza al Comune in cui pernotta in Svizzera.',
+    ogDescription: 'Secondo la legge ticinese, i frontalieri devono notificare la propria presenza al Comune in cui pernotta in Svizzera.',
     canonicalPath: '/articoli-frontaliere/frontalieri-permessi-g',
     structuredData: {
       "@context": "https://schema.org",
@@ -54898,7 +54898,7 @@ ogDescription: 'Secondo la legge ticinese, i frontalieri devono notificare la pr
 
   'blog-stipendio-muratore-frontaliere-ticino': {
     title: 'Quanto guadagna un muratore frontaliere in Ticino?',
-description: 'La retribuzione di un muratore frontaliere in Ticino è influenzata dalle norme fiscali e dai trattati internazionali.',
+    description: 'La retribuzione di un muratore frontaliere in Ticino è influenzata dalle norme fiscali e dai trattati internazionali.',
     keywords: 'frontalieri, ticino, svizzera, italia, quanto, guadagna, muratore, retribuzione',
     ogTitle: 'Quanto guadagna un muratore frontaliere in Ticino?',
     ogDescription: 'La retribuzione di un muratore frontaliere in Ticino è influenzata dalle norme fiscali e dai trattati internazionali.',
@@ -54979,7 +54979,7 @@ description: 'La retribuzione di un muratore frontaliere in Ticino è influenzat
     description: 'I requisiti per lavorare come ingegnere in Ticino da frontaliere, lo stipendio medio, il riconoscimento del titolo di studio e il permesso G. Dati aggiornati',
     keywords: 'frontalieri, ticino, svizzera, italia, lavorare, ingegnere, requisiti, riconoscimento',
     ogTitle: 'Lavorare come ingegnere in Ticino da frontaliere: stipendio medio, requisiti, riconoscimento titolo di studio, permesso G.',
-ogDescription: 'I requisiti per lavorare come ingegnere in Ticino da frontaliere, lo stipendio medio, il riconoscimento del titolo di studio e il permesso G.',
+    ogDescription: 'I requisiti per lavorare come ingegnere in Ticino da frontaliere, lo stipendio medio, il riconoscimento del titolo di studio e il permesso G.',
     canonicalPath: '/articoli-frontaliere/ingegnere-frontaliero-ticino-stipendio-requisiti',
     structuredData: {
       "@context": "https://schema.org",
@@ -55210,10 +55210,10 @@ ogDescription: 'I requisiti per lavorare come ingegnere in Ticino da frontaliere
 
   'blog-svizzera-il-passaggio-delle-azioni-al-manager-non-e-sempre-reddito-imponibile': {
     title: 'Svizzera, il passaggio delle azioni al manager non è sempre reddito imponibile',
-description: 'Le azioni dovevano pertanto essere considerate oggetto di un legato e non reddito imponibile.',
+    description: 'Le azioni dovevano pertanto essere considerate oggetto di un legato e non reddito imponibile.',
     keywords: 'frontalieri, ticino, svizzera, italia, passaggio, azioni, manager, sempre',
     ogTitle: 'Svizzera, il passaggio delle azioni al manager non è sempre reddito imponibile',
-ogDescription: 'Il passaggio gratuito delle azioni di una società al manager chiamato a garantirne la continuità non deve essere automaticamente assoggettato all’imposta sul reddito.',
+    ogDescription: 'Il passaggio gratuito delle azioni di una società al manager chiamato a garantirne la continuità non deve essere automaticamente assoggettato all’imposta sul reddito.',
     canonicalPath: '/articoli-frontaliere/svizzera-il-passaggio-delle-azioni-al-manager-non-e-sempre-reddito-imponibile',
     structuredData: {
       "@context": "https://schema.org",
@@ -55668,7 +55668,7 @@ ogDescription: 'Il passaggio gratuito delle azioni di una società al manager ch
 
   'blog-strada-maria-teresa-roveredo-recupero': {
     title: 'Storica Strada Maria Teresa a Roveredo: completato il recupero',
-description: 'Inaugurata a Roveredo la storica Strada Maria Teresa: un intervento da 900.000 franchi per la via che collega la Mesolcina all\'Italia.',
+    description: 'Inaugurata a Roveredo la storica Strada Maria Teresa: un intervento da 900.000 franchi per la via che collega la Mesolcina all\'Italia.',
     keywords: 'frontalieri, ticino, svizzera, italia, storica, strada, maria, teresa',
     ogTitle: 'Storica Strada Maria Teresa a Roveredo: completato il recupero',
     ogDescription: 'Inaugurata a Roveredo la storica Strada Maria Teresa: un intervento da 900.000 franchi per la via che collega la Mesolcina all\'Italia.',
@@ -55863,10 +55863,10 @@ description: 'Inaugurata a Roveredo la storica Strada Maria Teresa: un intervent
 
   'blog-la-battaglia-sottotraccia-sui-frontalieri-tra-il-fisco-italiano-e-quello-ticinese': {
     title: 'Frontalieri, la battaglia fiscale tra Italia e Ticino',
-description: 'Il fisco italiano e quello ticinese sono in una battaglia sottotraccia per i frontalieri.',
+    description: 'Il fisco italiano e quello ticinese sono in una battaglia sottotraccia per i frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, battaglia, fiscale, fisco, italiano',
     ogTitle: 'La battaglia sottotraccia sui frontalieri tra il fisco italiano e quello ticinese',
-ogDescription: 'Il fisco italiano e quello ticinese sono in una battaglia sottotraccia per i frontalieri.',
+    ogDescription: 'Il fisco italiano e quello ticinese sono in una battaglia sottotraccia per i frontalieri.',
     canonicalPath: '/articoli-frontaliere/la-battaglia-sottotraccia-sui-frontalieri-tra-il-fisco-italiano-e-quello-ticinese',
     structuredData: {
       "@context": "https://schema.org",
@@ -55902,7 +55902,7 @@ ogDescription: 'Il fisco italiano e quello ticinese sono in una battaglia sottot
 
   'blog-italia-svizzera-nuovo-protocollo-frontalieri': {
     title: 'Italia-Svizzera: cosa dice il nuovo protocollo sul lavoro dei frontalieri',
-description: 'Il nuovo protocollo sul lavoro dei frontalieri è stato firmato dall\'Italia e dalla Svizzera il 23 dicembre 2020.',
+    description: 'Il nuovo protocollo sul lavoro dei frontalieri è stato firmato dall\'Italia e dalla Svizzera il 23 dicembre 2020.',
     keywords: 'frontalieri, ticino, svizzera, italia, italia-svizzera, cosa, dice, nuovo',
     ogTitle: 'Italia-Svizzera: Nuovo Protocollo Sul Lavoro Dei Frontalieri',
     ogDescription: 'Il nuovo protocollo sul lavoro dei frontalieri è stato firmato dall\'Italia e dalla Svizzera il 23 dicembre 2020.',
@@ -55980,7 +55980,7 @@ description: 'Il nuovo protocollo sul lavoro dei frontalieri è stato firmato da
 
   'blog-frontalieri-ticino-architetto-stipendio': {
     title: 'Quanto guadagna un architetto frontaliere in Ticino',
-description: 'Gli stipendi degli architetti frontaliere in Ticino sono influenzati dalle imposte sulla fonte e dal regime transitorio.',
+    description: 'Gli stipendi degli architetti frontaliere in Ticino sono influenzati dalle imposte sulla fonte e dal regime transitorio.',
     keywords: 'frontalieri, ticino, svizzera, italia, quanto, guadagna, architetto, stipendi',
     ogTitle: 'Quanto guadagna un architetto frontaliere in Ticino',
     ogDescription: 'Gli stipendi degli architetti frontaliere in Ticino sono influenzati dalle imposte sulla fonte e dal regime transitorio',
@@ -56097,7 +56097,7 @@ description: 'Gli stipendi degli architetti frontaliere in Ticino sono influenza
 
   'blog-prestazioni-lpp-svizzere-tassazione': {
     title: 'Prestazioni Lpp svizzere: regole di tassazione',
-description: 'Scopri le modalità di tassazione delle prestazioni Lpp svizzere per vecchiaia, superstiti e invalidità equiparate alle rendite Avs.',
+    description: 'Scopri le modalità di tassazione delle prestazioni Lpp svizzere per vecchiaia, superstiti e invalidità equiparate alle rendite Avs.',
     keywords: 'frontalieri, ticino, svizzera, italia, prestazioni, svizzere, regole, tassazione',
     ogTitle: 'Prestazioni Lpp svizzere: le modalità di tassazione',
     ogDescription: 'Guida alle modalità di tassazione delle prestazioni Lpp svizzere secondo le regole delle rendite Avs.',
@@ -56175,10 +56175,10 @@ description: 'Scopri le modalità di tassazione delle prestazioni Lpp svizzere p
 
   'blog-vivere-a-trasquera-e-lavorare-in-ticino-da-frontaliere': {
     title: 'Vivere a Trasquera, lavorare in Ticino: collegamenti e costo della vita',
-description: 'La regione di Trasquera offre una qualità della vita elevata e un ambiente naturale unico.',
+    description: 'La regione di Trasquera offre una qualità della vita elevata e un ambiente naturale unico.',
     keywords: 'frontalieri, ticino, svizzera, italia, vivere, trasquera, lavorare, collegamenti',
     ogTitle: 'Vivere a Trasquera e lavorare in Ticino da frontaliere',
-ogDescription: 'La regione di Trasquera offre una qualità della vita elevata e un ambiente naturale unico.',
+    ogDescription: 'La regione di Trasquera offre una qualità della vita elevata e un ambiente naturale unico.',
     canonicalPath: '/articoli-frontaliere/vivere-a-trasquera-e-lavorare-in-ticino-da-frontaliere',
     structuredData: {
       "@context": "https://schema.org",
@@ -56370,7 +56370,7 @@ ogDescription: 'La regione di Trasquera offre una qualità della vita elevata e 
 
   'blog-frontalieri-telelavoro-2026': {
     title: 'Frontalieri Italia-Svizzera: telelavoro fino al 25%',
-description: 'La legge n. 217 del 29 dicembre 2025 ha introdotto una nuova regola per i frontalieri che lavorano in Svizzera e risiedono in Italia.',
+    description: 'La legge n. 217 del 29 dicembre 2025 ha introdotto una nuova regola per i frontalieri che lavorano in Svizzera e risiedono in Italia.',
     keywords: 'frontalieri, ticino, svizzera, italia, italia-svizzera, telelavoro, fino, legge',
     ogTitle: 'Frontalieri Italia-Svizzera: telelavoro fino al 25%',
     ogDescription: 'La legge n. 217 del 29 dicembre 2025 ha introdotto una nuova regola per i frontalieri che lavorano in Svizzera e risiedono in Italia.',
@@ -56448,7 +56448,7 @@ description: 'La legge n. 217 del 29 dicembre 2025 ha introdotto una nuova regol
 
   'blog-frontalieri-rallentano-ticino-aumentano-grigioni': {
     title: 'Frontalieri: rallentano in Ticino, aumentano nei Grigioni',
-description: 'I dati del terzo trimestre confermano il rallentamento del numero di lavoratori esteri in Ticino, mentre in Grigioni aumenta.',
+    description: 'I dati del terzo trimestre confermano il rallentamento del numero di lavoratori esteri in Ticino, mentre in Grigioni aumenta.',
     keywords: 'frontalieri, ticino, svizzera, italia, rallentano, aumentano, grigioni, dati',
     ogTitle: 'Frontalieri: rallentano in Ticino, aumentano nei Grigioni',
     ogDescription: 'I dati del terzo trimestre confermano il rallentamento del numero di lavoratori esteri in Ticino, mentre in Grigioni aumenta.',
@@ -56487,7 +56487,7 @@ description: 'I dati del terzo trimestre confermano il rallentamento del numero 
 
   'blog-trasferirsi-a-claino-con-osteno-da-frontaliere-pro-e-contro': {
     title: 'Trasferirsi a Claino con Osteno da frontaliere: pro e contro',
-description: 'Cosa deve considerare un frontaliere che lavora in Ticino e risiede in Italia prima di trasferirsi a Claino con Osteno.',
+    description: 'Cosa deve considerare un frontaliere che lavora in Ticino e risiede in Italia prima di trasferirsi a Claino con Osteno.',
     keywords: 'frontalieri, ticino, svizzera, italia, trasferirsi, claino, osteno, contro',
     ogTitle: 'Trasferirsi a Claino con Osteno da frontaliere: pro e contro',
     ogDescription: 'Cosa deve considerare un frontaliere che lavora in Ticino e risiede in Italia prima di trasferirsi a Claino con Osteno.',
@@ -56682,10 +56682,10 @@ description: 'Cosa deve considerare un frontaliere che lavora in Ticino e risied
 
   'blog-lavoro-frontaliero-subordinazione-e-credito-dimposta-nei-rapporti-italiasvizzera': {
     title: 'Lavoro frontaliero, subordinazione e credito d’imposta nei rapporti Italia–Svizzera: note a margine della sentenza n. 83/2026 della CGT Lombardia',
-description: 'Il secondo grande tema affrontato dalla sentenza concerne il mancato riconoscimento del credito per le imposte pagate in Svizzera.',
+    description: 'Il secondo grande tema affrontato dalla sentenza concerne il mancato riconoscimento del credito per le imposte pagate in Svizzera.',
     keywords: 'frontalieri, ticino, svizzera, italia, lavoro, frontaliero, subordinazione, credito',
     ogTitle: 'Lavoro frontaliero, subordinazione e credito d’imposta nei rapporti Italia–Svizzera: note a margine della sentenza n. 83/2026 della CGT Lombardia',
-ogDescription: 'Il secondo grande tema affrontato dalla sentenza concerne il mancato riconoscimento del credito per le imposte pagate in Svizzera.',
+    ogDescription: 'Il secondo grande tema affrontato dalla sentenza concerne il mancato riconoscimento del credito per le imposte pagate in Svizzera.',
     canonicalPath: '/articoli-frontaliere/lavoro-frontaliero-subordinazione-e-credito-dimposta-nei-rapporti-italiasvizzera',
     structuredData: {
       "@context": "https://schema.org",
@@ -56994,7 +56994,7 @@ ogDescription: 'Il secondo grande tema affrontato dalla sentenza concerne il man
 
   'blog-frontalieri-ticino-diminuzione': {
     title: 'L\'accordo fiscale cambia le regole in Ticino | Frontaliere Ticino',
-description: 'Il numero dei lavoratori frontalieri in Ticino sta diminuendo in modo costante, mentre il numero di residenti aumenta.',
+    description: 'Il numero dei lavoratori frontalieri in Ticino sta diminuendo in modo costante, mentre il numero di residenti aumenta.',
     keywords: 'frontalieri, ticino, svizzera, italia, accordo, fiscale, cambia, regole',
     ogTitle: 'L\'accordo fiscale con l\'Italia cambia le regole: in Ticino meno frontalieri, più residenti',
     ogDescription: 'Il numero dei lavoratori frontalieri in Ticino sta diminuendo in modo costante, mentre il numero di residenti aumenta.',
@@ -57150,7 +57150,7 @@ description: 'Il numero dei lavoratori frontalieri in Ticino sta diminuendo in m
 
   'blog-mercati-predittivi-business-trump': {
     title: 'Mercati predittivi e nuova piattaforma: il business di Trump',
-description: 'La famiglia Trump espande il proprio business nei mercati predittivi con la nuova piattaforma Truth Api.',
+    description: 'La famiglia Trump espande il proprio business nei mercati predittivi con la nuova piattaforma Truth Api.',
     keywords: 'frontalieri, ticino, svizzera, italia, mercati, predittivi, nuova, piattaforma',
     ogTitle: 'Mercati predittivi e Truth Api: le mosse di Trump',
     ogDescription: 'La famiglia Trump espande il proprio business nei mercati predittivi con la nuova piattaforma Truth Api. Analisi degli effetti sui mercati finanziari.',
@@ -57228,7 +57228,7 @@ description: 'La famiglia Trump espande il proprio business nei mercati preditti
 
   'blog-tacito-musica-ticino-concerti': {
     title: 'Ticino Musica si fa in quattro (concerti) | Frontaliere Ticino',
-description: 'Il Festival Ticino Musica prosegue con una giornata ricca di appuntamenti che accompagneranno il pubblico dal pomeriggio alla sera.',
+    description: 'Il Festival Ticino Musica prosegue con una giornata ricca di appuntamenti che accompagneranno il pubblico dal pomeriggio alla sera.',
     keywords: 'frontalieri, ticino, svizzera, italia, musica, quattro, concerti, festival',
     ogTitle: 'Ticino Musica si fa in quattro (concerti)',
     ogDescription: 'Il Festival Ticino Musica prosegue con una giornata ricca di appuntamenti che accompagneranno il pubblico dal pomeriggio alla sera.',
@@ -57462,7 +57462,7 @@ description: 'Il Festival Ticino Musica prosegue con una giornata ricca di appun
 
   'blog-frontalieri-altre-tasse-2026': {
     title: 'Nuove regole per i \'vecchi\' frontalieri del Canton Ticino: tasse in aumento',
-description: 'Il Canton Ticino imporrà una imposta alla fonte del cento per cento ai \'vecchi\' frontalieri che opteranno per il Decreto Omnibus.',
+    description: 'Il Canton Ticino imporrà una imposta alla fonte del cento per cento ai \'vecchi\' frontalieri che opteranno per il Decreto Omnibus.',
     keywords: 'frontalieri, ticino, svizzera, italia, nuove, regole, vecchi, canton',
     ogTitle: 'Nuove regole per i \'vecchi\' frontalieri del Canton Ticino: tasse in aumento',
     ogDescription: 'Il Canton Ticino imporrà una imposta alla fonte del cento per cento ai \'vecchi\' frontalieri che opteranno per il Decreto Omnibus.',
@@ -57618,10 +57618,10 @@ description: 'Il Canton Ticino imporrà una imposta alla fonte del cento per cen
 
   'blog-lugano-lavori-di-asfaltatura': {
     title: 'Lugano, lavori di asfaltatura: giovedì cantiere in via Alla Bozzoreda',
-description: 'I lavori di asfaltatura in via Alla Bozzoreda a Lugano saranno contenuti ad un solo ciclo in fascia serale notturna.',
+    description: 'I lavori di asfaltatura in via Alla Bozzoreda a Lugano saranno contenuti ad un solo ciclo in fascia serale notturna.',
     keywords: 'frontalieri, ticino, svizzera, italia, lugano, lavori, asfaltatura, giovedì',
     ogTitle: 'Lugano, lavori di asfaltatura: giovedì cantiere in via Alla Bozzoreda',
-ogDescription: 'I lavori di asfaltatura in via Alla Bozzoreda a Lugano saranno contenuti ad un solo ciclo in fascia serale notturna. Il cantiere sarà attivo tra le ore 20.00 di giovedì 30 luglio e le ore 5.00 di venerdì 31 luglio.',
+    ogDescription: 'I lavori di asfaltatura in via Alla Bozzoreda a Lugano saranno contenuti ad un solo ciclo in fascia serale notturna. Il cantiere sarà attivo tra le ore 20.00 di giovedì 30 luglio e le ore 5.00 di venerdì 31 luglio.',
     canonicalPath: '/articoli-frontaliere/lugano-lavori-di-asfaltatura',
     structuredData: {
       "@context": "https://schema.org",
@@ -57652,10 +57652,10 @@ ogDescription: 'I lavori di asfaltatura in via Alla Bozzoreda a Lugano saranno c
 
   'blog-sospenda-riversamento-allitalia-della-quota-dellimposta-alla-fonte-prelevata-ai-frontalieri': {
     title: 'Sospendi riversamento quota imposta fonte frontalieri',
-description: 'La deputata Plr Cristina Maderni e altri granconsiglieri chiedono al Consiglio di Stato di sospendere il riversamento all\'Italia della quota dell\'imposta alla',
+    description: 'La deputata Plr Cristina Maderni e altri granconsiglieri chiedono al Consiglio di Stato di sospendere il riversamento all\'Italia della quota dell\'imposta alla',
     keywords: 'frontalieri, ticino, svizzera, italia, sospendi, riversamento, quota, imposta',
     ogTitle: 'Si sospenda il riversamento all\'Italia della quota dell\'imposta alla fonte prelevata ai frontalieri',
-ogDescription: 'La deputata Plr Cristina Maderni e altri granconsiglieri chiedono al Consiglio di Stato di sospendere il riversamento all\'Italia della quota dell\'imposta alla fonte prelevata ai frontalieri.',
+    ogDescription: 'La deputata Plr Cristina Maderni e altri granconsiglieri chiedono al Consiglio di Stato di sospendere il riversamento all\'Italia della quota dell\'imposta alla fonte prelevata ai frontalieri.',
     canonicalPath: '/articoli-frontaliere/sospenda-riversamento-allitalia-della-quota-dellimposta-alla-fonte-prelevata-ai-frontalieri',
     structuredData: {
       "@context": "https://schema.org",
@@ -57842,7 +57842,7 @@ ogDescription: 'La deputata Plr Cristina Maderni e altri granconsiglieri chiedon
 
   'blog-edilizia-ticino-estate-sfide-ssic': {
     title: 'Edilizia in Ticino: le sfide del settore prima dell\'estate',
-description: 'Il punto della situazione nell\'edilizia ticinese con la SSIC: appalti, approvvigionamento materiali e gestione dei cantieri estivi.',
+    description: 'Il punto della situazione nell\'edilizia ticinese con la SSIC: appalti, approvvigionamento materiali e gestione dei cantieri estivi.',
     keywords: 'frontalieri, ticino, svizzera, italia, edilizia, sfide, settore, prima',
     ogTitle: 'Edilizia in Ticino: sfide estive e investimenti',
     ogDescription: 'Il punto della situazione nell\'edilizia ticinese con la SSIC: appalti, approvvigionamento materiali e gestione dei cantieri estivi.',
@@ -57876,7 +57876,7 @@ description: 'Il punto della situazione nell\'edilizia ticinese con la SSIC: app
 
   'blog-ubs-taglio-posti-lavoro-svizzera': {
     title: 'UBS taglia altri impieghi: scende sotto i 100\'000',
-description: 'UBS riduce l\'organico a 99\'085 dipendenti dopo l\'integrazione di Credit Suisse. Obiettivo: 13,5 miliardi di risparmi entro il 2026.',
+    description: 'UBS riduce l\'organico a 99\'085 dipendenti dopo l\'integrazione di Credit Suisse. Obiettivo: 13,5 miliardi di risparmi entro il 2026.',
     keywords: 'frontalieri, ticino, svizzera, italia, taglia, altri, impieghi, scende',
     ogTitle: 'UBS taglia altri impieghi: scende sotto i 100\'000',
     ogDescription: 'UBS riduce l\'organico a 99\'085 dipendenti dopo l\'integrazione di Credit Suisse. Obiettivo: 13,5 miliardi di risparmi entro il 2026.',
@@ -58227,7 +58227,7 @@ description: 'UBS riduce l\'organico a 99\'085 dipendenti dopo l\'integrazione d
 
   'blog-trasferirsi-porto-ceresio-frontaliere': {
     title: 'Trasferirsi a Porto Ceresio da frontaliere: pro e contro',
-description: 'Guida pratica per frontalieri: tassazione, nuovo accordo 2024, contributi AVS/LPP, LAMal, ristorni Porto Ceresio. Calcola il tuo netto.',
+    description: 'Guida pratica per frontalieri: tassazione, nuovo accordo 2024, contributi AVS/LPP, LAMal, ristorni Porto Ceresio. Calcola il tuo netto.',
     keywords: 'frontalieri, ticino, svizzera, italia, trasferirsi, porto, ceresio, contro',
     ogTitle: 'Trasferirsi a Porto Ceresio da frontaliere: pro e contro',
     ogDescription: 'Tassazione, contributi, assicurazione malattia, ristorni: cosa valutare prima di spostare la residenza a Porto Ceresio lavorando in Ticino.',
@@ -58344,7 +58344,7 @@ description: 'Guida pratica per frontalieri: tassazione, nuovo accordo 2024, con
 
   'blog-franco-svizzero-tornano-le-pressioni-al-rialzo': {
     title: 'Franco svizzero: tornano le pressioni al rialzo?',
-description: 'Il cambio Eur/Chf ha guadagnato oltre il 2% da fine maggio, spingendosi sopra quota 0,93 franchi per la prima volta da gennaio.',
+    description: 'Il cambio Eur/Chf ha guadagnato oltre il 2% da fine maggio, spingendosi sopra quota 0,93 franchi per la prima volta da gennaio.',
     keywords: 'frontalieri, ticino, svizzera, italia, franco, svizzero, tornano, pressioni',
     ogTitle: 'Franco svizzero: tornano le pressioni al rialzo?',
     ogDescription: 'Il cambio Eur/Chf ha guadagnato oltre il 2% da fine maggio, spingendosi sopra quota 0,93 franchi per la prima volta da gennaio.',
@@ -58461,7 +58461,7 @@ description: 'Il cambio Eur/Chf ha guadagnato oltre il 2% da fine maggio, spinge
 
   'blog-lavori-di-asfaltatura-sulla-sp23-lomazzo-bizzarone': {
     title: 'Lavori SP23 Lomazzo-Bizzarone: senso unico alternato dal 3 al 7 agosto',
-description: 'La circolazione lungo la SP23 Lomazzo-Bizzarone sarà regolata da un senso unico alternato per consentire gli interventi di asfaltatura.',
+    description: 'La circolazione lungo la SP23 Lomazzo-Bizzarone sarà regolata da un senso unico alternato per consentire gli interventi di asfaltatura.',
     keywords: 'frontalieri, ticino, svizzera, italia, lavori, sp23, lomazzo-bizzarone, senso',
     ogTitle: 'Lavori di asfaltatura sulla SP23 Lomazzo-Bizzarone: senso unico alternato dal 3 al 7 agosto',
     ogDescription: 'La circolazione lungo la SP23 Lomazzo-Bizzarone sarà regolata da un senso unico alternato per consentire gli interventi di asfaltatura.',
@@ -58539,7 +58539,7 @@ description: 'La circolazione lungo la SP23 Lomazzo-Bizzarone sarà regolata da 
 
   'blog-vivere-varzo-lavorare-ticino': {
     title: 'Vivere a Varzo e lavorare in Ticino da frontaliere',
-description: 'Guida pratica per frontalieri che vivono a Varzo e lavorano in Ticino: fisco, nuovo accordo, imposta alla fonte e previdenza.',
+    description: 'Guida pratica per frontalieri che vivono a Varzo e lavorano in Ticino: fisco, nuovo accordo, imposta alla fonte e previdenza.',
     keywords: 'frontalieri, ticino, svizzera, italia, vivere, varzo, lavorare, pratica',
     ogTitle: 'Vivere a Varzo e lavorare in Ticino: guida per frontalieri',
     ogDescription: 'Tutto sul pendolarismo Varzo-Ticino: fisco, accordi e gestione del reddito.',
@@ -58578,7 +58578,7 @@ description: 'Guida pratica per frontalieri che vivono a Varzo e lavorano in Tic
 
   'blog-lavoro-temporaneo-aumento': {
     title: 'Il lavoro temporaneo in Svizzera riprende a crescere',
-description: 'Le ore di lavoro temporaneo in Svizzera aumentano dell\'1,5% mentre i contratti a tempo indeterminato scendono del 19,4%.',
+    description: 'Le ore di lavoro temporaneo in Svizzera aumentano dell\'1,5% mentre i contratti a tempo indeterminato scendono del 19,4%.',
     keywords: 'frontalieri, ticino, svizzera, italia, lavoro, temporaneo, riprende, crescere',
     ogTitle: 'Lavoro temporaneo in Svizzera +1,5% nel primo semestre',
     ogDescription: 'Aumento del lavoro temporaneo del 1,5% e calo dei contratti a tempo indeterminato del 19,4%: cosa significa per i frontalieri del Canton Ticino.',
@@ -58695,10 +58695,10 @@ description: 'Le ore di lavoro temporaneo in Svizzera aumentano dell\'1,5% mentr
 
   'blog-casellario-da-berna-l-ok-per-studiare-un-accordo-per-lo-scambio-di-dati-con-l-italia': {
     title: 'Casellario, Berna approva accordo dati con l\'Italia',
-description: 'La Svizzera ha dato il via libera allo studio di un accordo per uno scambio di dati con l\'Italia.',
+    description: 'La Svizzera ha dato il via libera allo studio di un accordo per uno scambio di dati con l\'Italia.',
     keywords: 'frontalieri, ticino, svizzera, italia, casellario, berna, approva, accordo',
     ogTitle: 'Casellario, da Berna l\'OK per studiare un accordo per uno scambio di dati con l\'Italia',
-ogDescription: 'La Svizzera ha dato il via libera allo studio di un accordo per uno scambio di dati con l\'Italia.',
+    ogDescription: 'La Svizzera ha dato il via libera allo studio di un accordo per uno scambio di dati con l\'Italia.',
     canonicalPath: '/articoli-frontaliere/casellario-da-berna-l-ok-per-studiare-un-accordo-per-lo-scambio-di-dati-con-l-italia',
     structuredData: {
       "@context": "https://schema.org",
@@ -58734,7 +58734,7 @@ ogDescription: 'La Svizzera ha dato il via libera allo studio di un accordo per 
 
   'blog-organico-incompleto-congelate-le-hcap-women': {
     title: 'Organico incompleto: ‘congelate’ le Hcap Women',
-description: 'L\'Ambrì Piotta comunica che la squadra delle biancoblù non sarà iscritta alle competizioni femminili della stagione 2026/27.',
+    description: 'L\'Ambrì Piotta comunica che la squadra delle biancoblù non sarà iscritta alle competizioni femminili della stagione 2026/27.',
     keywords: 'frontalieri, ticino, svizzera, italia, organico, incompleto, congelate, hcap',
     ogTitle: 'Organico incompleto: ‘congelate’ le Hcap Women',
     ogDescription: 'L\'Ambrì Piotta comunica che la squadra delle biancoblù non sarà iscritta alle competizioni femminili della stagione 2026/27.',
@@ -58773,7 +58773,7 @@ description: 'L\'Ambrì Piotta comunica che la squadra delle biancoblù non sar�
 
   'blog-frontalieri-richiamati-lavoro-svizzera': {
     title: '10mila frontalieri richiamati al lavoro in Svizzera: lunghe code al confine',
-description: 'Secondo la fonte, circa 10.000 frontalieri italiani sono stati richiamati al lavoro in Svizzera, con lunghe code al confine.',
+    description: 'Secondo la fonte, circa 10.000 frontalieri italiani sono stati richiamati al lavoro in Svizzera, con lunghe code al confine.',
     keywords: 'frontalieri, ticino, svizzera, italia, 10mila, richiamati, lavoro, lunghe',
     ogTitle: '10mila frontalieri richiamati al lavoro in Svizzera: lunghe code al confine',
     ogDescription: 'Secondo la fonte, circa 10.000 frontalieri italiani sono stati richiamati al lavoro in Svizzera, con lunghe code al confine.',
@@ -59007,7 +59007,7 @@ description: 'Secondo la fonte, circa 10.000 frontalieri italiani sono stati ric
 
   'blog-frontalieri-vallese-differenza-ticino': {
     title: 'Frontalieri in Vallese: una realtà diversa dal Ticino',
-description: 'Nel Vallese, i lavoratori italiani non sono al centro dello scontro politico come nel Ticino. Scopri di più su questa realtà diversa.',
+    description: 'Nel Vallese, i lavoratori italiani non sono al centro dello scontro politico come nel Ticino. Scopri di più su questa realtà diversa.',
     keywords: 'frontalieri, ticino, svizzera, italia, vallese, realtà, diversa, lavoratori',
     ogTitle: 'Frontalieri in Vallese: una realtà diversa dal Ticino',
     ogDescription: 'Nel Vallese, i lavoratori italiani non sono al centro dello scontro politico come nel Ticino. Scopri di più su questa realtà diversa.',
@@ -59041,7 +59041,7 @@ description: 'Nel Vallese, i lavoratori italiani non sono al centro dello scontr
 
   'blog-ambulanza-spagna-guadagno-2300-euro': {
     title: 'Guida un\'ambulanza e lavora sei giorni al mese: "Guadagno 2300 euro"',
-description: 'Condizioni di lavoro da sogno per chi guida un\'ambulanza in Spagna: 2300 euro netti con sei giorni di lavoro l\'anno.',
+    description: 'Condizioni di lavoro da sogno per chi guida un\'ambulanza in Spagna: 2300 euro netti con sei giorni di lavoro l\'anno.',
     keywords: 'frontalieri, ticino, svizzera, italia, ambulanza, lavora, giorni, mese',
     ogTitle: 'Guida un\'ambulanza e lavora sei giorni al mese: "Guadagno 2300 euro"',
     ogDescription: 'Condizioni di lavoro da sogno per chi guida un\'ambulanza in Spagna: 2300 euro netti con sei giorni di lavoro l\'anno.',
@@ -59075,7 +59075,7 @@ description: 'Condizioni di lavoro da sogno per chi guida un\'ambulanza in Spagn
 
   'blog-bce-bns-ferme-cambi-per-frontalieri': {
     title: 'BCE e BNS ferme: cosa cambia per chi vive tra Italia e Svizzera',
-description: 'Le decisioni delle banche centrali europee e svizzere influenzano il cambio CHF/EUR, con implicazioni per i frontalieri.',
+    description: 'Le decisioni delle banche centrali europee e svizzere influenzano il cambio CHF/EUR, con implicazioni per i frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, ferme, cosa, cambia, vive',
     ogTitle: 'BCE e BNS ferme: cosa cambia per chi vive tra Italia e Svizzera',
     ogDescription: 'Le decisioni delle banche centrali europee e svizzere influenzano il cambio CHF/EUR, con implicazioni per i frontalieri.',
@@ -59148,7 +59148,7 @@ description: 'Le decisioni delle banche centrali europee e svizzere influenzano 
 
   'blog-lavorare-magazziniere-logistica-ticino': {
     title: 'Magazziniere in Ticino: stipendio, aziende e permesso G',
-description: 'Scopri tutto su stipendi, aziende principali, permesso G e turni di lavoro per i frontalieri magazzinieri in Ticino.',
+    description: 'Scopri tutto su stipendi, aziende principali, permesso G e turni di lavoro per i frontalieri magazzinieri in Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, magazziniere, stipendio, aziende, permesso',
     ogTitle: 'Lavorare come magazziniere nella logistica in Ticino da frontaliere',
     ogDescription: 'Scopri tutto su stipendi, aziende principali, permesso G e turni di lavoro per i frontalieri magazzinieri in Ticino.',
@@ -59216,7 +59216,7 @@ description: 'Scopri tutto su stipendi, aziende principali, permesso G e turni d
 
   'blog-frontaliere-acquisto-immobile-investimento-svizzera': {
     title: 'Frontaliere: Acquistare un immobile in Svizzera come investimento',
-description: 'Vincoli per non residenti, fiscalità, differenze con l\'acquisto della prima casa. Scopri di più su Frontaliere Ticino.',
+    description: 'Vincoli per non residenti, fiscalità, differenze con l\'acquisto della prima casa. Scopri di più su Frontaliere Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, acquistare, immobile, investimento, vincoli',
     ogTitle: 'Frontaliere: Acquistare un immobile in Svizzera come investimento',
     ogDescription: 'Vincoli per non residenti, fiscalità, differenze con l\'acquisto della prima casa. Scopri di più su Frontaliere Ticino.',
@@ -59318,7 +59318,7 @@ description: 'Vincoli per non residenti, fiscalità, differenze con l\'acquisto 
 
   'blog-matrimonio-aziendale-vallemaggia-100': {
     title: 'Vallemaggia, un maxi-matrimonio edile salva 100 posti',
-description: 'Quattro aziende edili si uniscono nella nuova VDM Holding SA in Vallemaggia. Un\'operazione che salva 100 posti di lavoro dal 2027.',
+    description: 'Quattro aziende edili si uniscono nella nuova VDM Holding SA in Vallemaggia. Un\'operazione che salva 100 posti di lavoro dal 2027.',
     keywords: 'frontalieri, ticino, svizzera, italia, vallemaggia, maxi-matrimonio, edile, salva',
     ogTitle: 'Vallemaggia: 100 posti salvi con la nuova VDM Holding SA',
     ogDescription: 'Quattro aziende edili si uniscono nella nuova VDM Holding SA in Vallemaggia. Un\'operazione che salva 100 posti di lavoro dal 2027.',
@@ -59522,7 +59522,7 @@ description: 'Quattro aziende edili si uniscono nella nuova VDM Holding SA in Va
 
   'blog-lucibello-disti-verifica-fondi': {
     title: 'Lucibello: «Nessun arricchimento personale o uso fraudolento di fondi»',
-description: 'Il presidente di Disti si difende dall\'accusa di utilizzo improprio di fondi, assicurando trasparenza e rispetto delle procedure.',
+    description: 'Il presidente di Disti si difende dall\'accusa di utilizzo improprio di fondi, assicurando trasparenza e rispetto delle procedure.',
     keywords: 'frontalieri, ticino, svizzera, italia, lucibello, nessun, arricchimento, personale',
     ogTitle: 'Lucibello: «Nessun arricchimento personale o uso fraudolento di fondi»',
     ogDescription: 'Il presidente di Disti si difende dall\'accusa di utilizzo improprio di fondi, assicurando trasparenza e rispetto delle procedure.',
@@ -59697,7 +59697,7 @@ description: 'Il presidente di Disti si difende dall\'accusa di utilizzo impropr
 
   'blog-frontaliere-infortunio-lainf-2026-oltre-20-km': {
     title: 'Frontaliere: Infortunio sul lavoro e assicurazione LAINF nel 2026',
-description: 'Scopri le novità sull\'assicurazione infortuni LAINF per i frontalieri nel 2026, con focus su \'oltre 20 km\' e checklist operativa.',
+    description: 'Scopri le novità sull\'assicurazione infortuni LAINF per i frontalieri nel 2026, con focus su \'oltre 20 km\' e checklist operativa.',
     keywords: 'frontalieri, ticino, svizzera, italia, infortunio, lavoro, assicurazione, lainf',
     ogTitle: 'Frontaliere: Infortunio sul lavoro e assicurazione LAINF nel 2026',
     ogDescription: 'Scopri le novità sull\'assicurazione infortuni LAINF per i frontalieri nel 2026, con focus su \'oltre 20 km\' e checklist operativa.',
@@ -59935,7 +59935,7 @@ description: 'Scopri le novità sull\'assicurazione infortuni LAINF per i fronta
 
   'blog-svizzeri-fuga-alloglio-ticino': {
     title: 'Svizzeri in fuga oltreconfine per l\'alloggio | Frontaliere Ticino',
-description: '154\'700 svizzeri vivono in regioni di confine. 70% dei romandi trova affitti troppo alti. Implicazioni per frontalieri Ticino-Italia.',
+    description: '154\'700 svizzeri vivono in regioni di confine. 70% dei romandi trova affitti troppo alti. Implicazioni per frontalieri Ticino-Italia.',
     keywords: 'frontalieri, ticino, svizzera, italia, svizzeri, fuga, oltreconfine, alloggio',
     ogTitle: 'Svizzeri in fuga oltreconfine per l\'alloggio: implicazioni per i frontalieri ticinesi',
     ogDescription: '154\'700 svizzeri vivono in regioni di confine. 70% dei romandi trova affitti troppo alti. Implicazioni per frontalieri Ticino-Italia.',
@@ -59969,7 +59969,7 @@ description: '154\'700 svizzeri vivono in regioni di confine. 70% dei romandi tr
 
   'blog-borsa-rotta-isola-15000-punti': {
     title: 'Borsa su, rotta sull\'isola dei 15\'000 punti? | Frontaliere Ticino',
-description: 'Nuovi massimi storici su Dow Jones e S&P-500 spingono verso i 15\'000 punti. Analisi per frontalieri ticinesi e investimenti in CHF.',
+    description: 'Nuovi massimi storici su Dow Jones e S&P-500 spingono verso i 15\'000 punti. Analisi per frontalieri ticinesi e investimenti in CHF.',
     keywords: 'frontalieri, ticino, svizzera, italia, borsa, rotta, sull, isola',
     ogTitle: 'Borsa su, rotta sull\'isola dei 15\'000 punti?',
     ogDescription: 'Nuovi massimi storici su Dow Jones e S&P-500 spingono verso i 15\'000 punti. Cosa significa per frontalieri e investimenti in valuta sviziera.',
@@ -60115,7 +60115,7 @@ description: 'Nuovi massimi storici su Dow Jones e S&P-500 spingono verso i 15\'
 
   'blog-nascita-figlio-frontaliero-entro-20km': {
     title: 'Nascita figlio frontaliero entro 20 km: anagrafe 2026',
-description: 'Per verificare in modo pratico il tuo scenario entro/oltre 20 km, usa il calcolatore stipendio netto e la guida dichiarazione redditi.',
+    description: 'Per verificare in modo pratico il tuo scenario entro/oltre 20 km, usa il calcolatore stipendio netto e la guida dichiarazione redditi.',
     keywords: 'frontalieri, ticino, svizzera, italia, nascita, figlio, frontaliero, entro',
     ogTitle: 'Nascita figlio frontaliero entro 20 km: anagrafe 2026',
     ogDescription: 'Scopri le procedure per l\'iscrizione anagrafica, gli assegni familiari e gli adempimenti fiscali per i frontalieri entro 20 km dal confine nel 2026.',
@@ -60426,7 +60426,7 @@ description: 'Per verificare in modo pratico il tuo scenario entro/oltre 20 km, 
 
   'blog-graffio-nella-barba-locarno-film-festival': {
     title: 'Il graffio nella barba del direttore artistico al Locarno Film Festival',
-description: 'In quella soffice, voluminosa, accuratamente spazzolata del direttore artistico c\'è una dichiarazione d’intenti.',
+    description: 'In quella soffice, voluminosa, accuratamente spazzolata del direttore artistico c\'è una dichiarazione d’intenti.',
     keywords: 'frontalieri, ticino, svizzera, italia, graffio, nella, barba, direttore',
     ogTitle: 'Il graffio nella barba del direttore artistico al Locarno Film Festival',
     ogDescription: 'Investimenti nel cinema elvetico +25% nel 2025: la dichiarazione d’intenti del direttore artistico del Locarno Film Festival si legge nella cura della sua',
@@ -60497,7 +60497,7 @@ description: 'In quella soffice, voluminosa, accuratamente spazzolata del dirett
     description: 'Scopri quando una compatta usata è più intelligente di un SUV per gli spostamenti quotidiani dei frontalieri tra Varese, Milano e Svizzera. Consigli pratici',
     keywords: 'frontalieri, ticino, svizzera, italia, compatta, usata, scelta, intelligente',
     ogTitle: 'Compatta usata vs SUV per frontalieri Varese-Milano-Ticino',
-ogDescription: 'Per un pendolare che percorre prevalentemente la tratta Varese-Milano o raggiunge quotidianamente il Canton Ticino, però, una compatta può risultare più pratica.',
+    ogDescription: 'Per un pendolare che percorre prevalentemente la tratta Varese-Milano o raggiunge quotidianamente il Canton Ticino, però, una compatta può risultare più pratica.',
     canonicalPath: '/articoli-frontaliere/compatta-usata-frontalieri-varese-milano',
     structuredData: {
       "@context": "https://schema.org",
@@ -60562,10 +60562,10 @@ ogDescription: 'Per un pendolare che percorre prevalentemente la tratta Varese-M
 
   'blog-siccit-importazioni-granoturco-svizzera': {
     title: 'Siccità: importazioni granoturco senza dazi per allevatori ticinesi',
-description: 'Misura straordinaria del DEFR fino al 31 ottobre 2026 per garantire foraggio agli allevatori colpiti dalla crisi.',
+    description: 'Misura straordinaria del DEFR fino al 31 ottobre 2026 per garantire foraggio agli allevatori colpiti dalla crisi.',
     keywords: 'frontalieri, ticino, svizzera, italia, siccità, importazioni, granoturco, senza',
     ogTitle: 'Siccità: importazioni granoturco senza dazi per allevatori',
-ogDescription: 'Misura straordinaria del DEFR fino al 31 ottobre 2026 per garantire foraggio agli allevatori colpiti dalla crisi.',
+    ogDescription: 'Misura straordinaria del DEFR fino al 31 ottobre 2026 per garantire foraggio agli allevatori colpiti dalla crisi.',
     canonicalPath: '/articoli-frontaliere/siccit-importazioni-granoturco-svizzera',
     structuredData: {
       "@context": "https://schema.org",
@@ -60601,7 +60601,7 @@ ogDescription: 'Misura straordinaria del DEFR fino al 31 ottobre 2026 per garant
 
   'blog-liberta-del-mercato-vale-anch-per-chi-lavora': {
     title: 'La libertà del mercato vale anche per chi lavora?',
-description: 'Lorenzo Onderka solleva una domanda interessante sulla libertà del mercato e la sua applicazione nel settore pubblico.',
+    description: 'Lorenzo Onderka solleva una domanda interessante sulla libertà del mercato e la sua applicazione nel settore pubblico.',
     keywords: 'frontalieri, ticino, svizzera, italia, libertà, mercato, vale, anche',
     ogTitle: 'La libertà del mercato vale anche per chi lavora?',
     ogDescription: 'Lorenzo Onderka solleva una domanda interessante sulla libertà del mercato e la sua applicazione nel settore pubblico.',
@@ -60638,7 +60638,7 @@ description: 'Lorenzo Onderka solleva una domanda interessante sulla libertà de
     description: 'Il sindacato VPOD richiede al Consiglio di Stato una direttiva strutturata per gestire le ondate di calore negli uffici pubblici e nelle scuole, ispirandosi al',
     keywords: 'frontalieri, ticino, svizzera, italia, vpod, chiede, direttiva, anti-canicola',
     ogTitle: 'VPOD chiede direttiva anti-canicola per Stato e scuole ticinesi',
-ogDescription: 'Il Sindacato VPOD ribadisce pertanto la necessità di adottare una direttiva e di prevedere, a partire dai luoghi più sensibili, i dovuti investimenti».',
+    ogDescription: 'Il Sindacato VPOD ribadisce pertanto la necessità di adottare una direttiva e di prevedere, a partire dai luoghi più sensibili, i dovuti investimenti».',
     canonicalPath: '/articoli-frontaliere/vpod-direttiva-canicola-scuole',
     structuredData: {
       "@context": "https://schema.org",
@@ -60669,10 +60669,10 @@ ogDescription: 'Il Sindacato VPOD ribadisce pertanto la necessità di adottare u
 
   'blog-los-vencedores-falkland-pablo-aparo': {
     title: 'Los Vencedores: il film sulle Falkland vista dagli abitanti',
-description: 'Il film è stato presentato nell\'ambito della sezione cultura del Locarno Film Festival, come riportato dalla fonte locale.',
+    description: 'Il film è stato presentato nell\'ambito della sezione cultura del Locarno Film Festival, come riportato dalla fonte locale.',
     keywords: 'frontalieri, ticino, svizzera, italia, vencedores, film, sulle, falkland',
     ogTitle: 'Los Vencedores: film sulle Falkland vista dagli abitanti a Locarno',
-ogDescription: 'In ‘Los vencedores’, Pablo Aparo decide di andare a raccontare le Falkland dal punto di vista dei suoi abitanti, trovando forse la chiave per un nuovo inizio.',
+    ogDescription: 'In ‘Los vencedores’, Pablo Aparo decide di andare a raccontare le Falkland dal punto di vista dei suoi abitanti, trovando forse la chiave per un nuovo inizio.',
     canonicalPath: '/articoli-frontaliere/los-vencedores-falkland-pablo-aparo',
     structuredData: {
       "@context": "https://schema.org",
@@ -60742,10 +60742,10 @@ ogDescription: 'In ‘Los vencedores’, Pablo Aparo decide di andare a racconta
 
   'blog-devastazione-vagone-como-fermo': {
     title: 'Devasta un vagone e insulta i passeggeri: 34enne fermato sul treno',
-description: 'Un 34enne alterato da alcol ha devastato un treno a Como-lago, strappando cartellonistica e rompendo estintori. Fermato dalla polizia.',
+    description: 'Un 34enne alterato da alcol ha devastato un treno a Como-lago, strappando cartellonistica e rompendo estintori. Fermato dalla polizia.',
     keywords: 'frontalieri, ticino, svizzera, italia, devasta, vagone, insulta, passeggeri',
     ogTitle: 'Devasta un vagone a Como-lago: fermato 34enne',
-ogDescription: 'Un uomo alterato da alcol ha devastato un vagone, strappando cartellonistica e rompendo estintori. Bloccato il convoglio.',
+    ogDescription: 'Un uomo alterato da alcol ha devastato un vagone, strappando cartellonistica e rompendo estintori. Bloccato il convoglio.',
     canonicalPath: '/articoli-frontaliere/devastazione-vagone-como-fermo',
     structuredData: {
       "@context": "https://schema.org",
@@ -60776,10 +60776,10 @@ ogDescription: 'Un uomo alterato da alcol ha devastato un vagone, strappando car
 
   'blog-produttore-islandese-hollywood-lezione': {
     title: 'Da pescatore a Hollywood: la lezione di un produttore',
-description: 'La storia di Sigurjón \'Joni\' Sighvatsson parte da una comunità di pescatori in Islanda, a un\'ora da Reykjavik, e arriva a Hollywood.',
+    description: 'La storia di Sigurjón \'Joni\' Sighvatsson parte da una comunità di pescatori in Islanda, a un\'ora da Reykjavik, e arriva a Hollywood.',
     keywords: 'frontalieri, ticino, svizzera, italia, pescatore, hollywood, lezione, produttore',
     ogTitle: 'Da pescatore a Hollywood: lezione per frontalieri',
-ogDescription: 'La storia di Sigurjón \'Joni\' Sighvatsson parte da una comunità di pescatori in Islanda, a un\'ora da Reykjavik, e arriva a Hollywood.',
+    ogDescription: 'La storia di Sigurjón \'Joni\' Sighvatsson parte da una comunità di pescatori in Islanda, a un\'ora da Reykjavik, e arriva a Hollywood.',
     canonicalPath: '/articoli-frontaliere/produttore-islandese-hollywood-lezione',
     structuredData: {
       "@context": "https://schema.org",
@@ -60810,10 +60810,10 @@ ogDescription: 'La storia di Sigurjón \'Joni\' Sighvatsson parte da una comunit
 
   'blog-bucalettere-centralizzate-anziani-sindacati': {
     title: 'Bucalettere centralizzate: anziani e sindacati insorgono',
-description: 'La Federazione dei pensionati ha parlato di un ridimensionamento del servizio pubblico.',
+    description: 'La Federazione dei pensionati ha parlato di un ridimensionamento del servizio pubblico.',
     keywords: 'frontalieri, ticino, svizzera, italia, bucalettere, centralizzate, anziani, sindacati',
     ogTitle: 'Bucalettere centralizzate: anziani e sindacati insorgono',
-ogDescription: 'La revisione della legge federale sulle poste propone cassette centralizzate.',
+    ogDescription: 'La revisione della legge federale sulle poste propone cassette centralizzate.',
     canonicalPath: '/articoli-frontaliere/bucalettere-centralizzate-anziani-sindacati',
     structuredData: {
       "@context": "https://schema.org",
@@ -60980,7 +60980,7 @@ ogDescription: 'La revisione della legge federale sulle poste propone cassette c
 
   'blog-grigioni-frontalieri-calano': {
     title: 'Grigioni: scende ancora il numero di frontalieri',
-description: 'Il Canton Grigioni registra un calo di circa 500 frontalieri rispetto allo stesso trimestre dell\'anno precedente.',
+    description: 'Il Canton Grigioni registra un calo di circa 500 frontalieri rispetto allo stesso trimestre dell\'anno precedente.',
     keywords: 'frontalieri, ticino, svizzera, italia, grigioni, scende, ancora, numero',
     ogTitle: 'Grigioni: scende ancora il numero di frontalieri | Frontaliere Ticino',
     ogDescription: 'Il Canton Grigioni registra un calo di circa 500 frontalieri rispetto allo stesso trimestre dell\'anno precedente.',
@@ -61014,7 +61014,7 @@ description: 'Il Canton Grigioni registra un calo di circa 500 frontalieri rispe
 
   'blog-frontaliere-formazione-professionale-riqualifica-2026-entro-20-km': {
     title: 'Formazione professionale e riqualifica per frontalieri entro 20 km',
-description: 'Scopri i corsi di formazione professionale e riqualifica per frontalieri entro 20 km dal confine nel 2026.',
+    description: 'Scopri i corsi di formazione professionale e riqualifica per frontalieri entro 20 km dal confine nel 2026.',
     keywords: 'frontalieri, ticino, svizzera, italia, formazione, professionale, riqualifica, entro',
     ogTitle: 'Formazione professionale frontalieri 2026 entro 20 km corsi riconosciuti',
     ogDescription: 'Guida pratica ai corsi di formazione riconosciuti entro 20 km dal confine per frontalieri nel 2026: SECO, finanziamenti, AVS, LPP, LAMal e nuovo accordo fiscale',
@@ -61267,7 +61267,7 @@ description: 'Scopri i corsi di formazione professionale e riqualifica per front
 
   'blog-frontaliere-oss-ticino-guida': {
     title: 'Frontaliere operatore socio sanitario in Ticino: guida',
-description: 'Lavorare come OSS in Ticino: requisiti, stipendio, nuovo accordo fiscale 2024 e gestione di contributi e imposte per frontalieri.',
+    description: 'Lavorare come OSS in Ticino: requisiti, stipendio, nuovo accordo fiscale 2024 e gestione di contributi e imposte per frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, operatore, socio, sanitario, lavorare',
     ogTitle: 'Frontaliere operatore socio sanitario in Ticino: guida',
     ogDescription: 'Lavorare come OSS in Ticino: requisiti, stipendio, nuovo accordo fiscale 2024 e gestione di contributi e imposte per frontalieri.',
@@ -61340,7 +61340,7 @@ description: 'Lavorare come OSS in Ticino: requisiti, stipendio, nuovo accordo f
 
   'blog-traffico-a2-bloccato': {
     title: 'Traffico ancora bloccato sulla A2, automobilisti in strada e tanta frustrazione',
-description: 'La circolazione resta interrotta in alcuni punti e vari conducenti riferiscono di essere bloccati da tre-quattro ore.',
+    description: 'La circolazione resta interrotta in alcuni punti e vari conducenti riferiscono di essere bloccati da tre-quattro ore.',
     keywords: 'frontalieri, ticino, svizzera, italia, traffico, ancora, bloccato, sulla',
     ogTitle: 'Traffico sulla A2',
     ogDescription: 'La circolazione resta interrotta in alcuni punti e vari conducenti riferiscono di essere bloccati da tre-quattro ore.',
@@ -61377,7 +61377,7 @@ description: 'La circolazione resta interrotta in alcuni punti e vari conducenti
     description: 'Il film di Felix Randau su Felix Kersten. Dati aggiornati 2026 per frontalieri in Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, anderer, viaggio, felix, kersten',
     ogTitle: '‘Ich ist ein Anderer’, in viaggio con Felix Kersten',
-ogDescription: 'Il film di Felix Randau su Felix Kersten',
+    ogDescription: 'Il film di Felix Randau su Felix Kersten',
     canonicalPath: '/articoli-frontaliere/locarno-film-festival-frontaliere-ticino',
     structuredData: {
       "@context": "https://schema.org",
@@ -61549,7 +61549,7 @@ ogDescription: 'Il film di Felix Randau su Felix Kersten',
 
   'blog-frontaliere-assistente-dentale-ticino': {
     title: 'Assistente dentale in Ticino: stipendio e requisiti',
-description: 'Guida per frontalieri assistente dentale in Ticino: stipendio, imposta alla fonte, requisiti LAMal, AVS e nuovo accordo fiscale 2024.',
+    description: 'Guida per frontalieri assistente dentale in Ticino: stipendio, imposta alla fonte, requisiti LAMal, AVS e nuovo accordo fiscale 2024.',
     keywords: 'frontalieri, ticino, svizzera, italia, assistente, dentale, stipendio, requisiti',
     ogTitle: 'Assistente dentale in Ticino: stipendio e requisiti frontalieri',
     ogDescription: 'Tutto quello che un frontaliere deve sapere sul lavoro di assistente dentale in Ticino: tassazione, contributi previdenziali e nuovo accordo fiscale.',
@@ -61654,7 +61654,7 @@ description: 'Guida per frontalieri assistente dentale in Ticino: stipendio, imp
     description: 'Informazioni sui requisiti e sullo stipendio medio per i piastrellisti in Ticino da frontaliere, con informazioni sull\'eventuale riconoscimento del titolo',
     keywords: 'frontalieri, ticino, svizzera, italia, lavorare, piastrellista, stipendio, requisiti',
     ogTitle: 'Lavorare come piastrellista in Ticino da frontaliere: stipendio medio, requisiti, eventuale riconoscimento del titolo di studio, permesso G',
-ogDescription: 'Informazioni sui requisiti e sullo stipendio medio per i piastrellisti in Ticino da frontaliere, con informazioni sull\'eventuale riconoscimento del titolo di studio e sul permesso G.',
+    ogDescription: 'Informazioni sui requisiti e sullo stipendio medio per i piastrellisti in Ticino da frontaliere, con informazioni sull\'eventuale riconoscimento del titolo di studio e sul permesso G.',
     canonicalPath: '/articoli-frontaliere/frontaliere-piastrellista-ticino-stipendio-requisiti',
     structuredData: {
       "@context": "https://schema.org",
@@ -61957,7 +61957,7 @@ ogDescription: 'Informazioni sui requisiti e sullo stipendio medio per i piastre
 
   'blog-frontaliere-cameriere-ticino-stipendio-requisiti': {
     title: 'Camerieri frontaliere: stipendio, requisiti e riconoscimento titolo',
-description: 'Il nuovo Accordo Frontalieri prevede un aumento dello stipendio medio dei camerieri frontalieri in Ticino.',
+    description: 'Il nuovo Accordo Frontalieri prevede un aumento dello stipendio medio dei camerieri frontalieri in Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, camerieri, stipendio, requisiti, riconoscimento',
     ogTitle: 'Lavorare come cameriere in Ticino da frontaliere: stipendio medio, requisiti, eventuale riconoscimento del titolo di studio, permesso G.',
     ogDescription: 'Il nuovo Accordo Frontalieri prevede un aumento dello stipendio medio dei camerieri frontalieri in Ticino. I requisiti per ottenere il permesso G sono stati modificati.',
@@ -62059,7 +62059,7 @@ description: 'Il nuovo Accordo Frontalieri prevede un aumento dello stipendio me
 
   'blog-trasferirsi-a-maccagno-con-pino-e-veddasca-da-frontaliere-pro-e-contro': {
     title: 'Trasferirsi a Maccagno con Pino e Veddasca da frontaliere: pro e contro',
-description: 'Il nuovo accordo frontalieri del 2020 ha aperto nuove possibilità per i frontalieri che desiderano trasferirsi a Maccagno con Pino e Veddasca.',
+    description: 'Il nuovo accordo frontalieri del 2020 ha aperto nuove possibilità per i frontalieri che desiderano trasferirsi a Maccagno con Pino e Veddasca.',
     keywords: 'frontalieri, ticino, svizzera, italia, trasferirsi, maccagno, pino, veddasca',
     ogTitle: 'Trasferirsi a Maccagno con Pino e Veddasca da frontaliere: pro e contro',
     ogDescription: 'Il nuovo accordo frontalieri del 2020 ha aperto nuove possibilità per i frontalieri che desiderano trasferirsi a Maccagno con Pino e Veddasca. Ma cosa sono i pro e i contro di questo trasferimento?',
@@ -62856,7 +62856,7 @@ description: 'Il nuovo accordo frontalieri del 2020 ha aperto nuove possibilità
     description: 'Imposta alla fonte e nuove regole per i frontalieri. Dati aggiornati 2026 per frontalieri in Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, trasferirsi, germignaga, contro, imposta',
     ogTitle: 'Trasferirsi a Germignaga da frontaliere: pro e contro',
-ogDescription: 'Imposta alla fonte e nuove regole per i frontalieri',
+    ogDescription: 'Imposta alla fonte e nuove regole per i frontalieri',
     canonicalPath: '/articoli-frontaliere/trasferirsi-a-germignaga-da-frontaliere-pro-e-contro',
     structuredData: {
       "@context": "https://schema.org",
@@ -63321,7 +63321,7 @@ ogDescription: 'Imposta alla fonte e nuove regole per i frontalieri',
 
   'blog-trasferirsi-a-marzio-da-frontaliere-pro-e-contro': {
     title: 'Trasferirsi a Marzio da frontaliere: pro e contro',
-description: 'Il Nuovo Accordo Frontalieri è stato firmato il 23 dicembre 2020 e ratificato dalla Legge 83 del 13 giugno 2023.',
+    description: 'Il Nuovo Accordo Frontalieri è stato firmato il 23 dicembre 2020 e ratificato dalla Legge 83 del 13 giugno 2023.',
     keywords: 'frontalieri, ticino, svizzera, italia, trasferirsi, marzio, contro, sappiamo',
     ogTitle: 'Trasferirsi a Marzio da frontaliere: pro e contro',
     ogDescription: 'Sappiamo cosa significa essere un frontaliere in Svizzera e in Italia. Il Nuovo Accordo Frontalieri ha introdotto nuove regole per i frontalieri, ma quali sono i vantaggi e svantaggi di trasferirsi a Marzio?',
@@ -66433,7 +66433,7 @@ description: 'Il Nuovo Accordo Frontalieri è stato firmato il 23 dicembre 2020 
     description: 'Guida pratica al cambio di cantone di lavoro per i frontalieri tra Ticino e Grigioni: regole fiscali, permesso G, imposta alla fonte e adempimenti.',
     keywords: 'frontalieri, ticino, svizzera, italia, cambio, cantone, lavoro, impatto',
     ogTitle: 'Cambio cantone di lavoro per il frontaliere tra Ticino e Grigioni',
-ogDescription: 'Scopri le regole e l\'impatto fiscale del cambio di cantone di lavoro per i frontalieri Italia-Svizzera, tra imposta alla fonte e permesso G.',
+    ogDescription: 'Scopri le regole e l\'impatto fiscale del cambio di cantone di lavoro per i frontalieri Italia-Svizzera, tra imposta alla fonte e permesso G.',
     canonicalPath: '/articoli-frontaliere/cambio-cantone-lavoro-frontaliere',
     structuredData: {
       "@context": "https://schema.org",
@@ -67984,7 +67984,7 @@ ogDescription: 'Scopri le regole e l\'impatto fiscale del cambio di cantone di l
 
   'blog-incidente-alpeggio-vallemaggia-2026': {
     title: 'Grave incidente in alpeggio: 27enne cade in Vallemaggia',
-description: 'Tragedia in Vallemaggia: un 27enne italiano è precipitato per 10 metri mentre lavorava in alpeggio sull\'alpe Robiei.',
+    description: 'Tragedia in Vallemaggia: un 27enne italiano è precipitato per 10 metri mentre lavorava in alpeggio sull\'alpe Robiei.',
     keywords: 'frontalieri, ticino, svizzera, italia, grave, incidente, alpeggio, 27enne',
     ogTitle: 'Grave incidente in Vallemaggia: 27enne cade in alpeggio',
     ogDescription: 'Un giovane italiano di 27 anni è gravemente ferito dopo una caduta di dieci metri in un alpeggio della Vallemaggia (Ticino). Soccorso in elicottero, è in pericolo di vita. L\'incidente solleva interrogativi sulla sicurezza in montagna.',
@@ -68757,7 +68757,7 @@ description: 'Tragedia in Vallemaggia: un 27enne italiano è precipitato per 10 
     description: 'Frontalieri totali Canton Ticino al 2026-Q2: 79.121. Dati aggiornati 2026 per frontalieri in Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, crescita, 2026-q2, totali, canton',
     ogTitle: 'Frontalieri Ticino in crescita nel 2026-Q2',
-ogDescription: 'Frontalieri totali Canton Ticino al 2026-Q2: 79.121',
+    ogDescription: 'Frontalieri totali Canton Ticino al 2026-Q2: 79.121',
     canonicalPath: '/articoli-frontaliere/tendenza-frontalieri-ticino-2026-q2',
     structuredData: {
       "@context": "https://schema.org",
@@ -69834,7 +69834,7 @@ ogDescription: 'Frontalieri totali Canton Ticino al 2026-Q2: 79.121',
     description: 'Impostazione fiscale, permessi e vantaggi del trasferimento. Dati aggiornati 2026 per frontalieri in Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, vivere, centro, valle, intelvi',
     ogTitle: 'Vivere a Centro Valle Intelvi e lavorare in Ticino da frontaliere',
-ogDescription: 'Impostazione fiscale, permessi e vantaggi del trasferimento',
+    ogDescription: 'Impostazione fiscale, permessi e vantaggi del trasferimento',
     canonicalPath: '/articoli-frontaliere/vivere-centro-valle-intelvi-lavorare-ticino-frontaliere',
     structuredData: {
       "@context": "https://schema.org",
@@ -72700,7 +72700,7 @@ ogDescription: 'Impostazione fiscale, permessi e vantaggi del trasferimento',
     description: 'Vivere a Lonate Ceppino e lavorare in Ticino: imposta alla fonte, contributi AVS/LPP, Permesso G, dichiarazione redditi. Nuovo Accordo Frontalieri dal 2024.',
     keywords: 'frontalieri, ticino, svizzera, italia, vivere, lonate, ceppino, struttura',
     ogTitle: 'Lonate Ceppino: guida pratica frontaliere Ticino 2024',
-ogDescription: 'Struttura fiscale, contributi sociali e procedure complete per chi vive a Lonate Ceppino e lavora in Ticino. Esenzioni Nuovo Accordo €10.000, imposta alla fonte svizzera, permesso G.',
+    ogDescription: 'Struttura fiscale, contributi sociali e procedure complete per chi vive a Lonate Ceppino e lavora in Ticino. Esenzioni Nuovo Accordo €10.000, imposta alla fonte svizzera, permesso G.',
     canonicalPath: '/articoli-frontaliere/lonate-ceppino-frontaliere-ticino',
     structuredData: {
       "@context": "https://schema.org",
@@ -73867,7 +73867,7 @@ ogDescription: 'Struttura fiscale, contributi sociali e procedure complete per c
 
   'blog-vivere-sernio-lavorare-grigioni-frontaliere': {
     title: 'Vivere a Sernio, lavorare in Grigioni: vantaggi e svantaggi',
-description: 'Il Nuovo Accordo Frontalieri rappresenta un importante cambiamento per i frontalieri che lavorano in Svizzera e risiedono in Italia.',
+    description: 'Il Nuovo Accordo Frontalieri rappresenta un importante cambiamento per i frontalieri che lavorano in Svizzera e risiedono in Italia.',
     keywords: 'frontalieri, ticino, svizzera, italia, vivere, sernio, lavorare, grigioni',
     ogTitle: 'Vivere a Sernio e lavorare in Grigioni da frontaliere: collegamenti, tempi di percorrenza, costo della vita, zone consigliate, vantaggi e svantaggi del trasferimento, cosa considerare prima di trasferirsi.',
     ogDescription: 'Il Nuovo Accordo Frontalieri rappresenta un importante cambiamento per i frontalieri che lavorano in Svizzera e risiedono in Italia. L\'accordo prevede la creazione di un regime transitorio per i frontalieri già presenti prima del 17 luglio 2023.',
@@ -74452,7 +74452,7 @@ description: 'Il Nuovo Accordo Frontalieri rappresenta un importante cambiamento
 
   'blog-silandro-grigioni-tassazione-permesso-g': {
     title: 'Vivere a Silandro e lavorare in Grigioni: guida fiscale',
-description: 'Vivere a Silandro e lavorare nei Grigioni: imposta alla fonte, credito d\'imposta, AVS, LPP e permesso G.',
+    description: 'Vivere a Silandro e lavorare nei Grigioni: imposta alla fonte, credito d\'imposta, AVS, LPP e permesso G.',
     keywords: 'frontalieri, ticino, svizzera, italia, vivere, silandro, lavorare, grigioni',
     ogTitle: 'Vivere a Silandro e lavorare in Grigioni: guida fiscale',
     ogDescription: 'Silandro e Grigioni: imposta alla fonte, credito d\'imposta in Italia, AVS, LPP e permesso G per frontalieri.',
@@ -77186,7 +77186,7 @@ description: 'Vivere a Silandro e lavorare nei Grigioni: imposta alla fonte, cre
 
   'blog-vivere-locate-varesino-lavorare-ticino-da-frontaliere': {
     title: 'Vivere a Locate Varesino e lavorare in Ticino: vantaggi e svantaggi',
-description: 'I frontalieri che lavorano in Ticino da Locate Varesino possono beneficiare di collegamenti efficienti e tempi di percorrenza ragionevoli.',
+    description: 'I frontalieri che lavorano in Ticino da Locate Varesino possono beneficiare di collegamenti efficienti e tempi di percorrenza ragionevoli.',
     keywords: 'frontalieri, ticino, svizzera, italia, vivere, locate, varesino, lavorare',
     ogTitle: 'Vivere a Locate Varesino e lavorare in Ticino da frontaliere: collegamenti, tempi di percorrenza, costo della vita, zone consigliate, vantaggi e svantaggi del trasferimento, cosa considerare prima di trasferirsi.',
     ogDescription: 'I frontalieri che lavorano in Ticino da Locate Varesino possono beneficiare di collegamenti efficienti e tempi di percorrenza ragionevoli. Il costo della vita è generalmente più alto rispetto all\'Italia di confine, ma le zone consigliate offrono',
@@ -77696,7 +77696,7 @@ description: 'I frontalieri che lavorano in Ticino da Locate Varesino possono be
     description: 'Guida completa: Inarzo come location per frontalieri Ticino, franchigie fiscali, tempi di percorrenza, costi abitativi inferiori, permesso G, AVS/LPP, LAMal.',
     keywords: 'frontalieri, ticino, svizzera, italia, vivere, inarzo, lavorare, varesotto',
     ogTitle: 'Vivere a Inarzo e lavorare in Ticino da frontaliere',
-ogDescription: 'Trasferirsi a Inarzo nel Varesotto: vicinanza ai valichi di Brogeda/Gaggiolo, franchigie fiscali €10.000, costi abitativi 20-30% inferiori al Ticino, previdenza AVS/LPP/LAMal. Guida step-by-step per frontalieri con permesso G.',
+    ogDescription: 'Trasferirsi a Inarzo nel Varesotto: vicinanza ai valichi di Brogeda/Gaggiolo, franchigie fiscali €10.000, costi abitativi 20-30% inferiori al Ticino, previdenza AVS/LPP/LAMal. Guida step-by-step per frontalieri con permesso G.',
     canonicalPath: '/articoli-frontaliere/inarzo-lavoro-ticino-frontaliere',
     structuredData: {
       "@context": "https://schema.org",
@@ -80330,7 +80330,7 @@ ogDescription: 'Trasferirsi a Inarzo nel Varesotto: vicinanza ai valichi di Brog
 
   'blog-vivere-binago-lavorare-ticino-frontaliere': {
     title: 'Vivere a Binago e lavorare in Ticino da frontaliere',
-description: 'Binago (Como) come base per frontalieri in Ticino: distanze dai valichi, imposta alla fonte, Nuovo Accordo 2024, costi e procedura per il permesso G.',
+    description: 'Binago (Como) come base per frontalieri in Ticino: distanze dai valichi, imposta alla fonte, Nuovo Accordo 2024, costi e procedura per il permesso G.',
     keywords: 'frontalieri, ticino, svizzera, italia, vivere, binago, lavorare, provincia',
     ogTitle: 'Binago frontaliere Ticino: guida pratica completa',
     ogDescription: 'Da Binago al Canton Ticino: distanze dai valichi, regime fiscale alla fonte, Nuovo Accordo 2024 (Legge 83/2023), contributi AVS/LPP, LAMal e costi reali per un frontaliere italiano.',
@@ -81269,7 +81269,7 @@ description: 'Binago (Como) come base per frontalieri in Ticino: distanze dai va
     description: 'Dal 1° settembre Trenord applica un rincaro del 3,88% su biglietti e abbonamenti, disposto dalla Giunta di Regione Lombardia. Interessate anche le linee',
     keywords: 'frontalieri, ticino, svizzera, italia, trenord, rincaro, sulle, linee',
     ogTitle: 'Trenord, rincaro del 3,88% dal 1° settembre sulle linee col Ticino',
-ogDescription: 'La Giunta di Regione Lombardia ha disposto un rincaro del 3,88% su biglietti e abbonamenti Trenord, in vigore dal 1° settembre. L\'aumento tocca anche le linee transfrontaliere con il Canton Ticino.',
+    ogDescription: 'La Giunta di Regione Lombardia ha disposto un rincaro del 3,88% su biglietti e abbonamenti Trenord, in vigore dal 1° settembre. L\'aumento tocca anche le linee transfrontaliere con il Canton Ticino.',
     canonicalPath: '/articoli-frontaliere/trenord-rincaro-388-linee-ticino',
     structuredData: {
       "@context": "https://schema.org",
@@ -82821,7 +82821,7 @@ ogDescription: 'La Giunta di Regione Lombardia ha disposto un rincaro del 3,88% 
     description: 'Guida completa: vivere a Grosotto, lavorare nei Grigioni. Franchigia fiscale €10\'000, pendolarismo, costo della vita, procedura trasferimento. Dati aggiornati',
     keywords: 'frontalieri, ticino, svizzera, italia, vivere, grosotto, lavorare, grigioni',
     ogTitle: 'Vivere a Grosotto e lavorare in Grigioni da frontaliere',
-ogDescription: 'La decisione di trasferirsi a Grosotto per lavorare in Grigioni è personale e dipende da fattori economici, familiari e professionali.',
+    ogDescription: 'La decisione di trasferirsi a Grosotto per lavorare in Grigioni è personale e dipende da fattori economici, familiari e professionali.',
     canonicalPath: '/articoli-frontaliere/grosotto-frontaliere-grigioni-guida',
     structuredData: {
       "@context": "https://schema.org",
@@ -84108,10 +84108,10 @@ ogDescription: 'La decisione di trasferirsi a Grosotto per lavorare in Grigioni 
 
   'blog-multe-stradali-svizzere-residente-italiano': {
     title: 'Multa stradali svizzere: pagamento da residente italiano',
-description: 'Come funziona la notifica e il pagamento di una multa stradali svizzera per un residente italiano. Procedure, termini, ricorsi e implicazioni per il Permesso G.',
+    description: 'Come funziona la notifica e il pagamento di una multa stradali svizzera per un residente italiano. Procedure, termini, ricorsi e implicazioni per il Permesso G.',
     keywords: 'frontalieri, ticino, svizzera, italia, multa, stradali, svizzere, pagamento',
     ogTitle: 'Multa stradali svizzere: pagamento da residente italiano',
-ogDescription: 'Come funziona la notifica e il pagamento di una multa stradali svizzera per un residente italiano. Procedure, termini, ricorsi e implicazioni per il Permesso G.',
+    ogDescription: 'Come funziona la notifica e il pagamento di una multa stradali svizzera per un residente italiano. Procedure, termini, ricorsi e implicazioni per il Permesso G.',
     canonicalPath: '/articoli-frontaliere/multe-stradali-svizzere-residente-italiano',
     structuredData: {
       "@context": "https://schema.org",
@@ -87133,7 +87133,7 @@ ogDescription: 'Come funziona la notifica e il pagamento di una multa stradali s
 
   'blog-montescheno-frontaliere-ticino-guida': {
     title: 'Montescheno: vivere e lavorare in Ticino | Frontaliere Ticino',
-description: 'Vivere a Montescheno e lavorare in Ticino: scopri le implicazioni fiscali, il Nuovo Accordo frontalieri 2024, i costi e le procedure per il Permesso G.',
+    description: 'Vivere a Montescheno e lavorare in Ticino: scopri le implicazioni fiscali, il Nuovo Accordo frontalieri 2024, i costi e le procedure per il Permesso G.',
     keywords: 'frontalieri, ticino, svizzera, italia, montescheno, vivere, lavorare, cosa',
     ogTitle: 'Montescheno: la guida del frontaliere Ticino',
     ogDescription: 'Stai pensando di trasferire a Montescheno per lavorare in Ticino? Scopri cosa aspettarsi: Permesso G, Nuovo Accordo frontalieri 2024, tassazione, AVS e procedure amministrative.',
@@ -89948,7 +89948,7 @@ description: 'Vivere a Montescheno e lavorare in Ticino: scopri le implicazioni 
     description: 'Lavori notturni sul ponte San Giovanni a Verbania dal 14 al 18 settembre: Acqua Novara.VCO sostituisce la rete idrica con senso unico alternato. Dati aggiornati',
     keywords: 'frontalieri, ticino, svizzera, italia, verbania, lavori, ponte, giovanni',
     ogTitle: 'Verbania: lavori notturni sul ponte San Giovanni',
-ogDescription: 'Durante l\'intera durata dei lavori notturni, il transito dei veicoli non verrà mai completamente interrotto, garantendo così il passaggio attraverso il ponte San Giovanni.',
+    ogDescription: 'Durante l\'intera durata dei lavori notturni, il transito dei veicoli non verrà mai completamente interrotto, garantendo così il passaggio attraverso il ponte San Giovanni.',
     canonicalPath: '/articoli-frontaliere/verbania-lavori-ponte-san-giovanni',
     structuredData: {
       "@context": "https://schema.org",
@@ -93920,7 +93920,7 @@ ogDescription: 'Durante l\'intera durata dei lavori notturni, il transito dei ve
     description: 'Una studentessa dell\'Università dell\'Insubria ha pagato 3,20 euro per un biglietto autobus a bordo, il doppio del prezzo normale, dopo il guasto del pagamento',
     keywords: 'frontalieri, ticino, svizzera, italia, varese, biglietto, bordo, costa',
     ogTitle: 'Varese, biglietto a bordo costa il doppio: la testimonianza',
-ogDescription: 'Il caso della studentessa universitaria di Varese che ha dovuto pagare 3,20 euro per un biglietto autobus acquistato a bordo, il doppio del costo abituale, a causa del malfunzionamento del lettore di carte.',
+    ogDescription: 'Il caso della studentessa universitaria di Varese che ha dovuto pagare 3,20 euro per un biglietto autobus acquistato a bordo, il doppio del costo abituale, a causa del malfunzionamento del lettore di carte.',
     canonicalPath: '/articoli-frontaliere/varese-biglietto-a-bordo-doppio',
     structuredData: {
       "@context": "https://schema.org",
@@ -97122,7 +97122,7 @@ ogDescription: 'Il caso della studentessa universitaria di Varese che ha dovuto 
     description: 'Il cantone Ticino presenta il preventivo 2027 con uscite di 4,73 mrd, entrate di 4,63 mrd, disavanzo d’esercizio di 98,5 mln e totale di 161,4 mln, investimenti',
     keywords: 'frontalieri, ticino, svizzera, italia, preventivo, disavanzo, esercizio, prevede',
     ogTitle: 'Preventivo 2027 Ticino: disavanzo di 98,5 mln',
-ogDescription: 'Il nuovo preventivo 2027 del Cantone Ticino mostra uscite per 4,73 mrd CHF, entrate per 4,63 mrd CHF, con un disavanzo d’esercizio di 98,5 mln CHF.',
+    ogDescription: 'Il nuovo preventivo 2027 del Cantone Ticino mostra uscite per 4,73 mrd CHF, entrate per 4,63 mrd CHF, con un disavanzo d’esercizio di 98,5 mln CHF.',
     canonicalPath: '/articoli-frontaliere/preventivo-2027-disavanzo',
     structuredData: {
       "@context": "https://schema.org",
@@ -99286,7 +99286,7 @@ ogDescription: 'Il nuovo preventivo 2027 del Cantone Ticino mostra uscite per 4,
     description: 'Arrestato a Luino un 46enne già agli arresti domiciliari. Denuncia della compagna per violenza sessuale e maltrattamenti. Sequestrata balestra. Dati aggiornati',
     keywords: 'frontalieri, ticino, svizzera, italia, luino, arrestato, 46enne, violenze',
     ogTitle: 'Luino: arrestato 46enne per violenze e maltrattamenti',
-ogDescription: 'I Carabinieri di Luino hanno eseguito un\'ordinanza di custodia cautelare in carcere nei confronti di un 46enne, già agli arresti domiciliari. L\'uomo è indagato per violenza sessuale e maltrattamenti in famiglia.',
+    ogDescription: 'I Carabinieri di Luino hanno eseguito un\'ordinanza di custodia cautelare in carcere nei confronti di un 46enne, già agli arresti domiciliari. L\'uomo è indagato per violenza sessuale e maltrattamenti in famiglia.',
     canonicalPath: '/articoli-frontaliere/arresto-luino-46enne-violenza-familiare/',
     structuredData: {
       "@context": "https://schema.org",
@@ -100932,7 +100932,7 @@ ogDescription: 'I Carabinieri di Luino hanno eseguito un\'ordinanza di custodia 
 
   'blog-tifosi-azioni-ambri-evento': {
     title: 'Ambrì-Piotta, tifosi uniti per diventare azionisti',
-description: 'Sabato 17 ottobre i tifosi dell’Ambrì-Piotta saranno al centro di un evento pubblico nel capannone antistante alla Gottardo Arena.',
+    description: 'Sabato 17 ottobre i tifosi dell’Ambrì-Piotta saranno al centro di un evento pubblico nel capannone antistante alla Gottardo Arena.',
     keywords: 'frontalieri, ticino, svizzera, italia, ambrì-piotta, tifosi, uniti, diventare',
     ogTitle: 'Ambrì-Piotta, tifosi uniti per diventare azionisti',
     ogDescription: 'Il 17 ottobre il capannone accanto alla Gottardo Arena ospita tombola, aperitivo, maccheronata, partita del Ginevra Servette su maxi-schermo e festa fino alle 2. Il programma sostiene la raccolta destinata all’acquisto di quote dell’Hcap.',
@@ -101136,7 +101136,7 @@ description: 'Sabato 17 ottobre i tifosi dell’Ambrì-Piotta saranno al centro 
 
   'blog-biasca-accoltellamento-21enne': {
     title: 'Ticino, 21enne italiano accoltellato: rischia la vita',
-description: 'La segnalazione riguardava un uomo gravemente accoltellato in via Bellinzona, a Biasca.',
+    description: 'La segnalazione riguardava un uomo gravemente accoltellato in via Bellinzona, a Biasca.',
     keywords: 'frontalieri, ticino, svizzera, italia, 21enne, italiano, accoltellato, rischia',
     ogTitle: 'Ticino, 21enne italiano accoltellato: rischia la vita',
     ogDescription: 'Una richiesta è arrivata poco prima delle 15 alla Cecal per un uomo gravemente accoltellato in via Bellinzona a Biasca. Sul posto Polizia cantonale, Polizia Tre Valli e Tre Valli Soccorso. In corso accertamenti e ricerca dell\'autore o degli autori.',
@@ -101960,7 +101960,7 @@ description: 'La segnalazione riguardava un uomo gravemente accoltellato in via 
     description: 'Fischiava il treno torna a Gorla Minore l’11 ottobre: pranzo, trenini e giochi alla vecchia stazione; la festa si svolge solo con bel tempo.',
     keywords: 'frontalieri, ticino, svizzera, italia, fischiava, treno, festa, ferroviaria',
     ogTitle: 'Gorla Minore: festa per la storia ferroviaria',
-ogDescription: 'Domenica 11 ottobre 2026 a Gorla Minore',
+    ogDescription: 'Domenica 11 ottobre 2026 a Gorla Minore',
     canonicalPath: '/articoli-frontaliere/fischiava-treno-gorla/',
     structuredData: {
       "@context": "https://schema.org",
@@ -102028,7 +102028,7 @@ ogDescription: 'Domenica 11 ottobre 2026 a Gorla Minore',
     description: 'Quattro weekend di chiusura sulla RE80 tra Como e la Svizzera: stop da venerdì alle 20:20 a lunedì alle 04:20 e coincidenza S11 a Cucciago.',
     keywords: 'frontalieri, ticino, svizzera, italia, treni, como-svizzera, weekend, chiusura',
     ogTitle: 'Monte Olimpino 1: chiusure ferroviarie nel 2026',
-ogDescription: 'Quattro weekend di chiusura tra ottobre e novembre 2026',
+    ogDescription: 'Quattro weekend di chiusura tra ottobre e novembre 2026',
     canonicalPath: '/articoli-frontaliere/monte-olimpino-treni-weekend/',
     structuredData: {
       "@context": "https://schema.org",
@@ -102101,7 +102101,7 @@ ogDescription: 'Quattro weekend di chiusura tra ottobre e novembre 2026',
     description: 'Alla stazione internazionale di Domodossola è stato fermato un passeggero arrivato da Milano: nel bagaglio aveva un chilo di hashish diviso in dieci panetti.',
     keywords: 'frontalieri, ticino, svizzera, italia, domodossola, arresto, chilo, hashish',
     ogTitle: 'Domodossola: arresto per chilo di hashish nel bagaglio',
-ogDescription: 'Fermata alla stazione internazionale di Domodossola',
+    ogDescription: 'Fermata alla stazione internazionale di Domodossola',
     canonicalPath: '/articoli-frontaliere/domodossola-arresto-hashish-stazione/',
     structuredData: {
       "@context": "https://schema.org",
@@ -102140,7 +102140,7 @@ ogDescription: 'Fermata alla stazione internazionale di Domodossola',
     description: 'OCST, VPOD e SIT chiedono il recupero del carovita: rincaro dell’8,5% dal 2020, salari adeguati del 3% e proposta cantonale allo 0,25% per il 2027.',
     keywords: 'frontalieri, ticino, svizzera, italia, petizione, sindacati, recupero, carovati',
     ogTitle: 'Petizione sindacati per recupero carovati in Ticino',
-ogDescription: 'OCST, VPOD e SIT chiedono il recupero del carovita.',
+    ogDescription: 'OCST, VPOD e SIT chiedono il recupero del carovita.',
     canonicalPath: '/articoli-frontaliere/petizione-recupero-carovita-ticino/',
     structuredData: {
       "@context": "https://schema.org",
@@ -102179,7 +102179,7 @@ ogDescription: 'OCST, VPOD e SIT chiedono il recupero del carovita.',
     description: 'Il Treno del Foliage collega Locarno e Domodossola dal 10 ottobre al 15 novembre: 52 km, quasi due ore per tratta e biglietti validi uno o due giorni.',
     keywords: 'frontalieri, ticino, svizzera, italia, treno, foliage, locarno-domodossola, ottobre',
     ogTitle: 'Treno del Foliage 2026 tra Locarno e Domodossola',
-ogDescription: 'Dal 10 ottobre al 15 novembre 2026',
+    ogDescription: 'Dal 10 ottobre al 15 novembre 2026',
     canonicalPath: '/articoli-frontaliere/treno-foliage-locarno-domodossola/',
     structuredData: {
       "@context": "https://schema.org",
@@ -102218,7 +102218,7 @@ ogDescription: 'Dal 10 ottobre al 15 novembre 2026',
     description: 'A Biasca è stato arrestato un 17enne per l’accoltellamento di un 21enne vicino alla stazione; il ferito, colpito all’addome, non è in pericolo di vita.',
     keywords: 'frontalieri, ticino, svizzera, italia, biasca, arrestato, 17enne, accoltellamento',
     ogTitle: 'Biasca: 17enne arrestato per accoltellamento vicino alla stazione',
-ogDescription: 'A Biasca arrestato un 17enne siriano dimorante',
+    ogDescription: 'A Biasca arrestato un 17enne siriano dimorante',
     canonicalPath: '/articoli-frontaliere/biasca-17enne-arrestato-accoltellamento/',
     structuredData: {
       "@context": "https://schema.org",
@@ -102257,7 +102257,7 @@ ogDescription: 'A Biasca arrestato un 17enne siriano dimorante',
     description: 'Pedemontana non chiede pagamenti via SMS o email: i messaggi truffa minacciano il fermo del veicolo e rimandano a siti falsi da verificare sui canali ufficiali.',
     keywords: 'frontalieri, ticino, svizzera, italia, pedemontana, avverte, nessun, pagamento',
     ogTitle: 'Pedemontana avverte: nessun pagamento pedaggio via SMS o email',
-ogDescription: 'Pedemontana non chiede pedaggi via SMS o e-mail',
+    ogDescription: 'Pedemontana non chiede pedaggi via SMS o e-mail',
     canonicalPath: '/articoli-frontaliere/pedemontana-truffa-sms-frontalieri/',
     structuredData: {
       "@context": "https://schema.org",
@@ -102335,7 +102335,7 @@ ogDescription: 'Pedemontana non chiede pedaggi via SMS o e-mail',
     description: 'A Como un 21enne è stato arrestato dopo un furto da un van in via per Cernobbio e una colluttazione vicino a Villa Olmo; beni e documenti sono stati restituiti.',
     keywords: 'frontalieri, ticino, svizzera, italia, como, turisti, derubati, aggrediti',
     ogTitle: 'Como, turisti derubati e aggrediti nel van: arrestato 21enne',
-ogDescription: 'Arrestato a Como un 21enne egiziano',
+    ogDescription: 'Arrestato a Como un 21enne egiziano',
     canonicalPath: '/articoli-frontaliere/aggressione-van-villa-olmo/',
     structuredData: {
       "@context": "https://schema.org",
@@ -102374,7 +102374,7 @@ ogDescription: 'Arrestato a Como un 21enne egiziano',
     description: 'Un 21enne è stato arrestato a Como per un furto ai turisti in via per Cernobbio; le indagini proseguono sul complice fuggito dopo la colluttazione a Villa Olmo.',
     keywords: 'frontalieri, ticino, svizzera, italia, como, turisti, derubati, arrestato',
     ogTitle: 'Como, turisti derubati nel van: arrestato un 21enne',
-ogDescription: 'Arrestato a Como un 21enne egiziano',
+    ogDescription: 'Arrestato a Como un 21enne egiziano',
     canonicalPath: '/articoli-frontaliere/furto-van-cernobbio-21enne/',
     structuredData: {
       "@context": "https://schema.org",
@@ -102452,7 +102452,7 @@ ogDescription: 'Arrestato a Como un 21enne egiziano',
     description: 'A Locate Varesino un 79enne è caduto da una scala in un’azienda agricola di via Madonnetta; i soccorsi sono intervenuti in codice rosso.',
     keywords: 'frontalieri, ticino, svizzera, italia, locate, varesino, cade, scala',
     ogTitle: 'Caduta da una scala a Locate Varesino: 79enne grave',
-ogDescription: 'Caduta da una scala in via Madonnetta',
+    ogDescription: 'Caduta da una scala in via Madonnetta',
     canonicalPath: '/articoli-frontaliere/caduta-scala-locate-varesino/',
     structuredData: {
       "@context": "https://schema.org",
@@ -102491,7 +102491,7 @@ ogDescription: 'Caduta da una scala in via Madonnetta',
     description: 'A Cantello la compagnia Tutti in Scena porta in dialetto Quei giargianes da giappunes, con spettacoli il 10 e il 18 ottobre e ingresso gratuito.',
     keywords: 'frontalieri, ticino, svizzera, italia, cantello, torna, teatro, dialettale',
     ogTitle: 'Cantello torna il teatro dialettale “Quei giargianes da giappunes”',
-ogDescription: 'Due date: 10 ottobre alle 21 e 18 ottobre alle 15',
+    ogDescription: 'Due date: 10 ottobre alle 21 e 18 ottobre alle 15',
     canonicalPath: '/articoli-frontaliere/cantello-teatro-dialettale-ottobre-2026/',
     structuredData: {
       "@context": "https://schema.org",
@@ -102530,7 +102530,7 @@ ogDescription: 'Due date: 10 ottobre alle 21 e 18 ottobre alle 15',
     description: 'Nel Mendrisiotto circa 50 frontalieri, soprattutto dalla provincia di Varese, lavorano alla vendemmia per circa 15 franchi netti l’ora e sei settimane.',
     keywords: 'frontalieri, ticino, svizzera, italia, vendemmia, franchi, breve, circa',
     ogTitle: 'Vendemmia in Ticino: 15 franchi netti l\'ora',
-ogDescription: 'Circa 50 frontalieri animano la vendemmia nel Mendrisiotto',
+    ogDescription: 'Circa 50 frontalieri animano la vendemmia nel Mendrisiotto',
     canonicalPath: '/articoli-frontaliere/vendemmia-mendrisiotto-lavoratori-terra/',
     structuredData: {
       "@context": "https://schema.org",
@@ -102605,7 +102605,7 @@ ogDescription: 'Circa 50 frontalieri animano la vendemmia nel Mendrisiotto',
 
   'blog-coda-a8-castronno-solbiate': {
     title: 'Incidente A8 tra Castronno e Solbiate: code | Frontaliere Ticino',
-description: 'Per l\'area compresa tra Varese e Gallarate, il seguito documentato si conclude con il ritorno alla normalità.',
+    description: 'Per l\'area compresa tra Varese e Gallarate, il seguito documentato si conclude con il ritorno alla normalità.',
     keywords: 'frontalieri, ticino, svizzera, italia, incidente, castronno, solbiate, code',
     ogTitle: 'Code sulla A8 tra Castronno e Solbiate',
     ogDescription: 'Lo scontro tra Castronno e Solbiate Arno ha provocato una lunga coda sulla A8 e paralizzato la viabilità tra Varese e Gallarate. Il traffico si è riversato sulla Statale, dove il semaforo a senso alternato del ponte ha creato un ulteriore imbuto.',
@@ -102647,7 +102647,7 @@ description: 'Per l\'area compresa tra Varese e Gallarate, il seguito documentat
     description: 'Un uomo di 58 anni è stato investito in via Albisetti a Tradate poco prima delle 20; soccorso da Croce Rossa e automedica, non è in pericolo di vita.',
     keywords: 'frontalieri, ticino, svizzera, italia, tradate, pedone, investito, ferito',
     ogTitle: 'Tradate, pedone investito: ferito un uomo di 58 anni',
-ogDescription: 'Un uomo di 58 anni investito a Tradate',
+    ogDescription: 'Un uomo di 58 anni investito a Tradate',
     canonicalPath: '/articoli-frontaliere/incidente-via-albisetti/',
     structuredData: {
       "@context": "https://schema.org",
@@ -102686,7 +102686,7 @@ ogDescription: 'Un uomo di 58 anni investito a Tradate',
     description: 'A Malnate 16 persone hanno raccolto 20 chili di rifiuti nella pulizia del 5 ottobre, con scuole medie, palestra comunale e via Gasparotto coinvolte.',
     keywords: 'frontalieri, ticino, svizzera, italia, mcdonald, ripulisce, malnate, raccolti',
     ogTitle: 'McDonald\'s ripulisce Malnate: 20 kg di rifiuti raccolti',
-ogDescription: '16 persone hanno partecipato alla pulizia di Malnate',
+    ogDescription: '16 persone hanno partecipato alla pulizia di Malnate',
     canonicalPath: '/articoli-frontaliere/mcdonalds-pulizia-malnate-2026/',
     structuredData: {
       "@context": "https://schema.org",
@@ -102764,7 +102764,7 @@ ogDescription: '16 persone hanno partecipato alla pulizia di Malnate',
     description: 'Il Festival del Racconto propone due appuntamenti a Varese il 9 e l’11 ottobre: un incontro su Dante e tre racconti inediti di Carlo Linati.',
     keywords: 'frontalieri, ticino, svizzera, italia, festival, racconto, appuntamenti, varese',
     ogTitle: 'Festival del Racconto: Dante e inediti di Carlo Linati',
-ogDescription: 'Due appuntamenti culturali a Varese il 9 e l\'11 ottobre',
+    ogDescription: 'Due appuntamenti culturali a Varese il 9 e l\'11 ottobre',
     canonicalPath: '/articoli-frontaliere/festival-racconto-varese-ottobre/',
     structuredData: {
       "@context": "https://schema.org",
@@ -102803,7 +102803,7 @@ ogDescription: 'Due appuntamenti culturali a Varese il 9 e l\'11 ottobre',
     description: 'A Luvinate la scuola materna avvia per il 2026-27 un progetto motorio con Varese Basket School, rivolto ai bambini e basato su sport e gioco.',
     keywords: 'frontalieri, ticino, svizzera, italia, luvinate, progetto, motorio, alla',
     ogTitle: 'Luvinate: al via il progetto motorio alla scuola materna',
-ogDescription: 'A Luvinate parte il progetto motorio 26-27',
+    ogDescription: 'A Luvinate parte il progetto motorio 26-27',
     canonicalPath: '/articoli-frontaliere/luvinate-progetto-motorio-materna/',
     structuredData: {
       "@context": "https://schema.org",
@@ -102842,7 +102842,7 @@ ogDescription: 'A Luvinate parte il progetto motorio 26-27',
     description: 'La Pro Patria supera il Varese 5-2 al Franco Ossola: la rimonta si ferma sul 3-2 e la squadra bustocca prosegue in Coppa Italia contro la Leon.',
     keywords: 'frontalieri, ticino, svizzera, italia, patria, batte, varese, coppa',
     ogTitle: 'Pro Patria batte Varese 5-2 in Coppa Italia',
-ogDescription: 'La Pro Patria batte il Varese 5-2 al Franco Ossola.',
+    ogDescription: 'La Pro Patria batte il Varese 5-2 al Franco Ossola.',
     canonicalPath: '/articoli-frontaliere/pro-patria-varese-5-2-coppa-italia/',
     structuredData: {
       "@context": "https://schema.org",
@@ -102920,7 +102920,7 @@ ogDescription: 'La Pro Patria batte il Varese 5-2 al Franco Ossola.',
     description: 'Hermes indaga su frodi IVA da 450 milioni in elettronica e informatica: sei misure cautelari, sequestri per 11 milioni e 300 perquisizioni in otto Paesi europei.',
     keywords: 'frontalieri, ticino, svizzera, italia, operazione, hermes, frodi, sequestri',
     ogTitle: 'Operazione Hermes: frodi Iva 450 mln, sequestri 11 mln',
-ogDescription: 'Sei misure cautelari e sequestri per circa 11 milioni',
+    ogDescription: 'Sei misure cautelari e sequestri per circa 11 milioni',
     canonicalPath: '/articoli-frontaliere/operazione-hermes-frodi-iva-450-mln-sequestri-11-mln/',
     structuredData: {
       "@context": "https://schema.org",
@@ -102998,7 +102998,7 @@ ogDescription: 'Sei misure cautelari e sequestri per circa 11 milioni',
     description: 'In Svizzera una persona su tre segnala spossatezza emotiva; in Ticino quasi un apprendista su tre riferisce disturbi d’ansia. DSS e Forum GSA avviano due progetti.',
     keywords: 'frontalieri, ticino, svizzera, italia, salute, mentale, lavoro, progetti',
     ogTitle: 'Salute mentale sul lavoro: progetti Ticino',
-ogDescription: 'In Svizzera una persona su tre è emotivamente spossata.',
+    ogDescription: 'In Svizzera una persona su tre è emotivamente spossata.',
     canonicalPath: '/articoli-frontaliere/salute-lavoro-progetti-ticino/',
     structuredData: {
       "@context": "https://schema.org",
@@ -103037,7 +103037,7 @@ ogDescription: 'In Svizzera una persona su tre è emotivamente spossata.',
     description: 'Lo svincolo di Bellinzona Nord chiude dalle 20 alle 5 nella notte tra il 9 e 10 ottobre verso Chiasso e San Gottardo; alternative Bellinzona Centro o Biasca.',
     keywords: 'frontalieri, ticino, svizzera, italia, bellinzona, nord, chiusura, notturna',
     ogTitle: 'Bellinzona Nord, chiusura notturna dello svincolo',
-ogDescription: 'Chiusura tra venerdì 9 e sabato 10 ottobre',
+    ogDescription: 'Chiusura tra venerdì 9 e sabato 10 ottobre',
     canonicalPath: '/articoli-frontaliere/bellinzona-nord-svincolo/',
     structuredData: {
       "@context": "https://schema.org",
@@ -103076,7 +103076,7 @@ ogDescription: 'Chiusura tra venerdì 9 e sabato 10 ottobre',
     description: 'La partita Lugano-Lucerna a Cornaredo è sabato alle 18: corteo ospite nel pomeriggio, piazzale della stazione chiuso dalle 15:50 e attese fino a 30 minuti.',
     keywords: 'frontalieri, ticino, svizzera, italia, lugano, lucerna, cornaredo, strade',
     ogTitle: 'Lugano-Lucerna a Cornaredo: strade chiuse e ritardi sabato',
-ogDescription: 'Sabato: FC Lugano-FC Lucerna alle 18 a Cornaredo',
+    ogDescription: 'Sabato: FC Lugano-FC Lucerna alle 18 a Cornaredo',
     canonicalPath: '/articoli-frontaliere/lugano-lucerna-partita-traffico/',
     structuredData: {
       "@context": "https://schema.org",
@@ -103115,7 +103115,7 @@ ogDescription: 'Sabato: FC Lugano-FC Lucerna alle 18 a Cornaredo',
     description: 'Per la partita al Cornaredo, il corteo dei tifosi del Lucerna è previsto tra le 16 e le 17:30: attese di 15-30 minuti e possibili disagi in via Ciani.',
     keywords: 'frontalieri, ticino, svizzera, italia, tifosi, lucerna, lugano, strade',
     ogTitle: 'Tifosi Lucerna a Lugano: strade chiuse e traffico',
-ogDescription: 'Partita alle 18 allo stadio di Cornaredo',
+    ogDescription: 'Partita alle 18 allo stadio di Cornaredo',
     canonicalPath: '/articoli-frontaliere/tifosi-lucerna-lugano-traffico/',
     structuredData: {
       "@context": "https://schema.org",
@@ -103232,7 +103232,7 @@ ogDescription: 'Partita alle 18 allo stadio di Cornaredo',
     description: 'I cantieri per elettrificare Albate-Molteno iniziano a dicembre: Como-Lecco sarà interrotta almeno fino a giugno 2029, ma Tilo potrà arrivare a Lecco.',
     keywords: 'frontalieri, ticino, svizzera, italia, elettrificazione, albate-molteno, lavori, dicembre',
     ogTitle: 'Elettrificazione Albate-Molteno: lavori da dicembre 2024',
-ogDescription: 'Cantieri per l\'elettrificazione al via a metà dicembre',
+    ogDescription: 'Cantieri per l\'elettrificazione al via a metà dicembre',
     canonicalPath: '/articoli-frontaliere/ferrovia-albate-molteno-elettrificazione/',
     structuredData: {
       "@context": "https://schema.org",
@@ -103271,7 +103271,7 @@ ogDescription: 'Cantieri per l\'elettrificazione al via a metà dicembre',
     description: 'A Porlezza un falso carabiniere ha chiesto oro per liberare il figlio di una donna: il piano è fallito quando il giovane è rientrato a casa il 7 ottobre.',
     keywords: 'frontalieri, ticino, svizzera, italia, porlezza, finto, carabiniere, chiede',
     ogTitle: 'Porlezza: finto carabiniere chiede oro, figlio ferma truffa',
-ogDescription: 'A Porlezza tentata truffa del finto carabiniere',
+    ogDescription: 'A Porlezza tentata truffa del finto carabiniere',
     canonicalPath: '/articoli-frontaliere/porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa/',
     structuredData: {
       "@context": "https://schema.org",
@@ -103310,7 +103310,7 @@ ogDescription: 'A Porlezza tentata truffa del finto carabiniere',
     description: 'A Chiasso una trentina di aziende si sono confrontate sulla conciliabilità lavoro-famiglia; il sondaggio cantonale di Pro Familia resta aperto fino al 30 novembre.',
     keywords: 'frontalieri, ticino, svizzera, italia, mendrisiotto, aziende, confronto, conciliabilità',
     ogTitle: 'Mendrisiotto aziende a confronto su conciliabilità vita-lavoro',
-ogDescription: 'Incontro a Chiasso il primo ottobre scorso',
+    ogDescription: 'Incontro a Chiasso il primo ottobre scorso',
     canonicalPath: '/articoli-frontaliere/mendrisiotto-aziende-conciliabilita/',
     structuredData: {
       "@context": "https://schema.org",
@@ -103349,7 +103349,7 @@ ogDescription: 'Incontro a Chiasso il primo ottobre scorso',
     description: 'Lugano e Ginevra si scambiano i portieri in prestito fino al termine del 2026-27: Mayer arriva dopo 397 partite in National League, Van Pottelberghe va a Ginevra.',
     keywords: 'frontalieri, ticino, svizzera, italia, scambio, portieri, mayer, lugano',
     ogTitle: 'Scambio di portieri: Mayer a Lugano, Van Pottelberghe a Ginevra',
-ogDescription: 'Mayer arriva a Lugano, Van Pottelberghe va a Ginevra',
+    ogDescription: 'Mayer arriva a Lugano, Van Pottelberghe va a Ginevra',
     canonicalPath: '/articoli-frontaliere/scambio-portieri-lugano-ginevra/',
     structuredData: {
       "@context": "https://schema.org",
@@ -103388,7 +103388,7 @@ ogDescription: 'Mayer arriva a Lugano, Van Pottelberghe va a Ginevra',
     description: 'Il Kiwanis Club Bellinzona e Valli celebra 40 anni con l’aperitivo solidale Aperò In Sem a Giubiasco: ricavato ad Ares e L’Ora, ingresso 40 franchi.',
     keywords: 'frontalieri, ticino, svizzera, italia, brindisi, solidale, mercato, coperto',
     ogTitle: 'Aperò In Sem: serata solidale a Giubiasco',
-ogDescription: 'Il Kiwanis Club Bellinzona e Valli festeggia 40 anni',
+    ogDescription: 'Il Kiwanis Club Bellinzona e Valli festeggia 40 anni',
     canonicalPath: '/articoli-frontaliere/aperitivo-solidale-giubiasco/',
     structuredData: {
       "@context": "https://schema.org",
@@ -103778,7 +103778,7 @@ ogDescription: 'Il Kiwanis Club Bellinzona e Valli festeggia 40 anni',
     description: 'La nuova stagione UISP riparte da un incontro ad Arcisate. Dati aggiornati 2026 per frontalieri in Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, karate, uisp, nuova, stagione',
     ogTitle: 'Karate UISP: la nuova stagione inizia da Arcisate',
-ogDescription: 'La nuova stagione UISP riparte da un incontro ad Arcisate.',
+    ogDescription: 'La nuova stagione UISP riparte da un incontro ad Arcisate.',
     canonicalPath: '/articoli-frontaliere/karate-uisp-formazione-arcisate-2026/',
     structuredData: {
       "@context": "https://schema.org",
@@ -103817,7 +103817,7 @@ ogDescription: 'La nuova stagione UISP riparte da un incontro ad Arcisate.',
     description: 'Villa Sassa e Villa Principe Leopoldo chiusi per quattro mesi Circa 140 dipendenti restano senza lavoro Alternative invernali a St. Dati aggiornati 2026',
     keywords: 'frontalieri, ticino, svizzera, italia, chiude, villa, sassa, dipendenti',
     ogTitle: 'Villa Sassa chiusa: 140 dipendenti senza lavoro',
-ogDescription: 'Villa Sassa e Villa Principe Leopoldo, a Lugano, resteranno chiusi per quattro mesi a causa di importanti lavori di ristrutturazione. La conseguenza riguarda circa 140 dipendenti, che resteranno senza lavoro durante il periodo di chiusura.',
+    ogDescription: 'Villa Sassa e Villa Principe Leopoldo, a Lugano, resteranno chiusi per quattro mesi a causa di importanti lavori di ristrutturazione. La conseguenza riguarda circa 140 dipendenti, che resteranno senza lavoro durante il periodo di chiusura.',
     canonicalPath: '/articoli-frontaliere/lardi-dotlife-chiusura-alberghi-lugano/',
     structuredData: {
       "@context": "https://schema.org",
@@ -103970,7 +103970,7 @@ ogDescription: 'Villa Sassa e Villa Principe Leopoldo, a Lugano, resteranno chiu
 
   'blog-operazione-trotta-ebike-monopattini': {
     title: 'Operazione TROTTA: 35 sanzioni e-bike truccate e monopattini fuorilegge',
-description: 'Tra i mezzi non conformi sono state individuate e-bike con potenze tra 1\'200 e 1\'600 watt, oltre il limite legale di 1\'000 watt.',
+    description: 'Tra i mezzi non conformi sono state individuate e-bike con potenze tra 1\'200 e 1\'600 watt, oltre il limite legale di 1\'000 watt.',
     keywords: 'frontalieri, ticino, svizzera, italia, operazione, trotta, sanzioni, e-bike',
     ogTitle: 'Operazione TROTTA: 35 sanzioni e-bike truccate e monopattini fuorilegge',
     ogDescription: 'Durante l\'operazione estiva TROTTA, conclusa il 30 settembre, le pattuglie della Polizia cantonale hanno controllato e-bike e monopattini elettrici in 11 postazioni tra Mendrisiotto, Luganese, Locarnese e Bellinzonese. Sono state elevate 35',
@@ -104168,7 +104168,7 @@ description: 'Tra i mezzi non conformi sono state individuate e-bike con potenze
     description: 'Marchesi è il nuovo Consigliere di Stato. Dati aggiornati 2026 per frontalieri in Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, lavoro, marchesi, inizi, mendrisiotto',
     ogTitle: 'Il lavoro di Marchesi inizi dal Mendrisiotto',
-ogDescription: 'Il lavoro di Piero Marchesi dovrebbe iniziare dal Mendrisiotto.',
+    ogDescription: 'Il lavoro di Piero Marchesi dovrebbe iniziare dal Mendrisiotto.',
     canonicalPath: '/articoli-frontaliere/marchesi-mendrisiotto-priorita/',
     structuredData: {
       "@context": "https://schema.org",
@@ -104714,7 +104714,7 @@ ogDescription: 'Il lavoro di Piero Marchesi dovrebbe iniziare dal Mendrisiotto.'
     description: 'Due dei tre agenti rischierebbero il licenziamento. Dati aggiornati 2026 per frontalieri in Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, caso, gobbi, agenti, rischio',
     ogTitle: 'Caso Gobbi: due agenti a rischio licenziamento',
-ogDescription: 'Due dei tre agenti rischierebbero il licenziamento.',
+    ogDescription: 'Due dei tre agenti rischierebbero il licenziamento.',
     canonicalPath: '/articoli-frontaliere/agenti-gobbi-rischio-licenziamento/',
     structuredData: {
       "@context": "https://schema.org",
@@ -105338,7 +105338,7 @@ ogDescription: 'Due dei tre agenti rischierebbero il licenziamento.',
     description: 'A Villa Frua sono iniziati i laboratori del festival. Sabato 10 ottobre i partecipanti si sono messi in gioco. Passeggiata, poesia, scarabocchi e albi',
     keywords: 'frontalieri, ticino, svizzera, italia, laveno, mombello, festival, biblioterapia',
     ogTitle: 'Festival della Biblioterapia a Laveno Mombello',
-ogDescription: 'A Villa Frua sono iniziati i laboratori del festival.',
+    ogDescription: 'A Villa Frua sono iniziati i laboratori del festival.',
     canonicalPath: '/articoli-frontaliere/festival-biblioterapia-laveno-2026/',
     structuredData: {
       "@context": "https://schema.org",
@@ -105728,7 +105728,7 @@ ogDescription: 'A Villa Frua sono iniziati i laboratori del festival.',
     description: 'L\'USTRA valuta oltre 120 punti per il dosaggio. In Svizzera sono attivi 15 impianti. Sulla A2 verso Chiasso due sistemi sono attivi. La nota del gennaio 2025',
     keywords: 'frontalieri, ticino, svizzera, italia, verso, chiasso, ustra, valuta',
     ogTitle: 'A2 verso Chiasso: USTRA valuta il dosaggio alle rampe',
-ogDescription: 'L\'USTRA valuta oltre 120 punti per il dosaggio.',
+    ogDescription: 'L\'USTRA valuta oltre 120 punti per il dosaggio.',
     canonicalPath: '/articoli-frontaliere/dosaggio-rampe-a2-chiasso/',
     structuredData: {
       "@context": "https://schema.org",
@@ -106352,7 +106352,7 @@ ogDescription: 'L\'USTRA valuta oltre 120 punti per il dosaggio.',
     description: 'Il pass dei residenti va rinnovato ogni anno. Scadenza: 31 dicembre, anche nel 2026. Con posto auto: due targhe; con abbonamento: fino a quattro. Senza posto',
     keywords: 'frontalieri, ticino, svizzera, italia, como, pass, auto, residenti',
     ogTitle: 'Como, pass auto residenti: rinnovo diventa annuale',
-ogDescription: 'Il pass dei residenti va rinnovato ogni anno.',
+    ogDescription: 'Il pass dei residenti va rinnovato ogni anno.',
     canonicalPath: '/articoli-frontaliere/como-pass-auto-rinnovo-annuale/',
     structuredData: {
       "@context": "https://schema.org",
@@ -106505,10 +106505,10 @@ ogDescription: 'Il pass dei residenti va rinnovato ogni anno.',
 
   'blog-bambino-investito-gallarate-cedrate': {
     title: 'Bimbo di 5 anni investito a Cedrate: è gravissimo',
-description: 'Poco prima delle 17 un bimbo di 5 anni è stato investito. L\'incidente è avvenuto in via Arconti, a Cedrate.',
+    description: 'Poco prima delle 17 un bimbo di 5 anni è stato investito. L\'incidente è avvenuto in via Arconti, a Cedrate.',
     keywords: 'frontalieri, ticino, svizzera, italia, bimbo, anni, investito, cedrate',
     ogTitle: 'Bimbo di 5 anni investito a Cedrate: condizioni gravissime',
-ogDescription: 'Poco prima delle 17 un bimbo di 5 anni è stato investito.',
+    ogDescription: 'Poco prima delle 17 un bimbo di 5 anni è stato investito.',
     canonicalPath: '/articoli-frontaliere/bambino-investito-gallarate-cedrate/',
     structuredData: {
       "@context": "https://schema.org",
@@ -106703,7 +106703,7 @@ ogDescription: 'Poco prima delle 17 un bimbo di 5 anni è stato investito.',
     description: 'Fabio De Luigi torna a teatro dopo venticinque anni BIOL – In Carne e Ossa apre la stagione a Varese La tappa varesina è la terza della tournée Oltre 1000',
     keywords: 'frontalieri, ticino, svizzera, italia, fabio, luigi, apre, stagione',
     ogTitle: 'Fabio De Luigi apre la stagione teatrale di Varese',
-ogDescription: 'Fabio De Luigi torna a teatro dopo venticinque anni BIOL',
+    ogDescription: 'Fabio De Luigi torna a teatro dopo venticinque anni BIOL',
     canonicalPath: '/articoli-frontaliere/fabio-de-luigi-biol-varese/',
     structuredData: {
       "@context": "https://schema.org",
@@ -107093,7 +107093,7 @@ ogDescription: 'Fabio De Luigi torna a teatro dopo venticinque anni BIOL',
     description: 'I salari pesano, ma non decidono da soli il rientro. Per un impiego da laureato, salari inferiori del 38% a Zurigo. Più della metà dei partenti rientra entro',
     keywords: 'frontalieri, ticino, svizzera, italia, rientro, salario, unico, fattore',
     ogTitle: 'Rientro in Ticino: perché il salario non basta per decidere',
-ogDescription: 'I salari pesano, ma non decidono da soli il rientro.',
+    ogDescription: 'I salari pesano, ma non decidono da soli il rientro.',
     canonicalPath: '/articoli-frontaliere/rientro-ticino-salario-fattori/',
     structuredData: {
       "@context": "https://schema.org",
@@ -107327,7 +107327,7 @@ ogDescription: 'I salari pesano, ma non decidono da soli il rientro.',
     description: 'Il voto sull\'IVA per l\'AVS è fissato al 29 novembre. L\'aumento proposto porterebbe l\'IVA all\'8,5%. La 13esima AVS costa 4-5 miliardi di franchi l\'anno. Dal 2028',
     keywords: 'frontalieri, ticino, svizzera, italia, voto, novembre, 13esima, rendita',
     ogTitle: 'AVS: Voto IVA il 29 novembre per la 13esima rendita',
-ogDescription: 'Il voto sull\'IVA per l\'AVS è fissato al 29 novembre.',
+    ogDescription: 'Il voto sull\'IVA per l\'AVS è fissato al 29 novembre.',
     canonicalPath: '/articoli-frontaliere/avs-voto-iva-il-29-novembre-per-la-13esima-rendita/',
     structuredData: {
       "@context": "https://schema.org",
@@ -107873,7 +107873,7 @@ ogDescription: 'Il voto sull\'IVA per l\'AVS è fissato al 29 novembre.',
     description: 'Il Preventivo 2027 prevede un disavanzo di 98,5 milioni. Il deficit prospettato arriva a 460 milioni nel 2030. Dal 2028 l’autofinanziamento dovrebbe diventare',
     keywords: 'frontalieri, ticino, svizzera, italia, disavanzo, cantonale, ticinese, previsto',
     ogTitle: 'Disavanzo cantonale ticinese previsto fino a 460 milioni',
-ogDescription: 'Il Preventivo 2027 prevede un disavanzo di 98,5 milioni.',
+    ogDescription: 'Il Preventivo 2027 prevede un disavanzo di 98,5 milioni.',
     canonicalPath: '/articoli-frontaliere/disavanzo-cantonale-2027-2030/',
     structuredData: {
       "@context": "https://schema.org",
@@ -108068,7 +108068,7 @@ ogDescription: 'Il Preventivo 2027 prevede un disavanzo di 98,5 milioni.',
     description: 'L\'accoltellamento è avvenuto il 5 ottobre a Biasca. La polizia ha trovato un coltello la sera successiva. Il 17enne siriano resta in carcerazione preventiva',
     keywords: 'frontalieri, ticino, svizzera, italia, biasca, confermato, arresto, 17enne',
     ogTitle: 'Biasca, confermato l\'arresto del 17enne',
-ogDescription: 'L\'accoltellamento è avvenuto il 5 ottobre a Biasca.',
+    ogDescription: 'L\'accoltellamento è avvenuto il 5 ottobre a Biasca.',
     canonicalPath: '/articoli-frontaliere/arma-biasca-inchiesta/',
     structuredData: {
       "@context": "https://schema.org",
@@ -108224,7 +108224,7 @@ ogDescription: 'L\'accoltellamento è avvenuto il 5 ottobre a Biasca.',
     description: 'Lunedì si vota il primo credito da 14 milioni. L\'operazione ex LATI è stimata in 34 milioni. La minoranza chiede di respingere l\'opzione ex LATI. Il referendum',
     keywords: 'frontalieri, ticino, svizzera, italia, bellinzona, voto, credito, nuova',
     ogTitle: 'Bellinzona: voto sul credito per la nuova caserma',
-ogDescription: 'Lunedì si vota il primo credito da 14 milioni.',
+    ogDescription: 'Lunedì si vota il primo credito da 14 milioni.',
     canonicalPath: '/articoli-frontaliere/bellinzona-voto-caserma-pompieri/',
     structuredData: {
       "@context": "https://schema.org",
@@ -108692,7 +108692,7 @@ ogDescription: 'Lunedì si vota il primo credito da 14 milioni.',
     description: 'Arrestato il 9 ottobre un 28enne nel Luganese. La lite è avvenuta in ambito domestico. Una donna ferita è stata visitata in ospedale. Le ferite non hanno messo',
     keywords: 'frontalieri, ticino, svizzera, italia, luganese, arrestato, 28enne, ipotesi',
     ogTitle: 'Luganese: arrestato un 28enne dopo una lite domestica',
-ogDescription: 'Arrestato il 9 ottobre un 28enne nel Luganese.',
+    ogDescription: 'Arrestato il 9 ottobre un 28enne nel Luganese.',
     canonicalPath: '/articoli-frontaliere/arresto-lite-domestica-luganese/',
     structuredData: {
       "@context": "https://schema.org",
@@ -108770,7 +108770,7 @@ ogDescription: 'Arrestato il 9 ottobre un 28enne nel Luganese.',
     description: 'Giovedì 15 ottobre dalle 14,45 torna «Luci a Masnago». La puntata segue il momento difficile della Pallacanestro Varese. In studio ci sarà l\'ex playmaker Marco',
     keywords: 'frontalieri, ticino, svizzera, italia, basket, luci, masnago, torna',
     ogTitle: 'Luci a Masnago 15 ottobre: basket Varese e Marco Passera',
-ogDescription: 'Giovedì 15 ottobre dalle 14,45 torna «Luci a Masnago».',
+    ogDescription: 'Giovedì 15 ottobre dalle 14,45 torna «Luci a Masnago».',
     canonicalPath: '/articoli-frontaliere/luci-masnago-terza-puntata/',
     structuredData: {
       "@context": "https://schema.org",
@@ -109079,10 +109079,10 @@ ogDescription: 'Giovedì 15 ottobre dalle 14,45 torna «Luci a Masnago».',
 
   'blog-estradizione-pakistan-como': {
     title: 'Accusato di omicidio, arrestato a Como per l’estradizione',
-description: 'Arrestato a Como un uomo di 40 anni. Identificato in via Canturina dalla Polizia di Stato. Il Pakistan aveva chiesto l’estradizione.',
+    description: 'Arrestato a Como un uomo di 40 anni. Identificato in via Canturina dalla Polizia di Stato. Il Pakistan aveva chiesto l’estradizione.',
     keywords: 'frontalieri, ticino, svizzera, italia, accusato, omicidio, arrestato, como',
     ogTitle: 'Como, arrestato un 40enne: richiesta di estradizione',
-ogDescription: 'Arrestato a Como un uomo di 40 anni.',
+    ogDescription: 'Arrestato a Como un uomo di 40 anni.',
     canonicalPath: '/articoli-frontaliere/estradizione-pakistan-como/',
     structuredData: {
       "@context": "https://schema.org",
@@ -109433,7 +109433,7 @@ ogDescription: 'Arrestato a Como un uomo di 40 anni.',
     description: 'Dieci generici: 241,56 franchi in Svizzera. Un mese costa 2,9 volte la media dei tre Paesi vicini. Metformina: 10,85 franchi in Ticino contro 1,39 in Austria',
     keywords: 'frontalieri, ticino, svizzera, italia, farmaci, generici, quanto, paga',
     ogTitle: 'Farmaci generici: la Svizzera paga 2,9 volte di più',
-ogDescription: 'Dieci generici: 241,56 franchi in Svizzera.',
+    ogDescription: 'Dieci generici: 241,56 franchi in Svizzera.',
     canonicalPath: '/articoli-frontaliere/farmaci-generici-prezzi-svizzera/',
     structuredData: {
       "@context": "https://schema.org",
@@ -109472,7 +109472,7 @@ ogDescription: 'Dieci generici: 241,56 franchi in Svizzera.',
     description: 'La Camera del Lavoro nacque nel 1902. L\'OCST fu fondata il 18 maggio 1919. Gli statuti furono adottati il 16 novembre a Bellinzona. Molti frontalieri si',
     keywords: 'frontalieri, ticino, svizzera, italia, storia, ocst, alla, tutela',
     ogTitle: 'Storia OCST: dal 1919 alla tutela dei frontalieri in Ticino',
-ogDescription: 'La Camera del Lavoro nacque nel 1902.',
+    ogDescription: 'La Camera del Lavoro nacque nel 1902.',
     canonicalPath: '/articoli-frontaliere/ocst-storia-frontalieri-ticino/',
     structuredData: {
       "@context": "https://schema.org",
@@ -109550,7 +109550,7 @@ ogDescription: 'La Camera del Lavoro nacque nel 1902.',
     description: 'Le Azalee Calcio lasciano il campo di via Pradisera. Il bando per l\'area è andato deserto. Ugo Tomaselli denuncia una sostanziale estromissione. Il Comune',
     keywords: 'frontalieri, ticino, svizzera, italia, gallarate, azalee, calcio, lasciano',
     ogTitle: 'Gallarate: Azalee Calcio lasciano il campo di via Pradisera',
-ogDescription: 'Le Azalee Calcio lasciano il campo di via Pradisera.',
+    ogDescription: 'Le Azalee Calcio lasciano il campo di via Pradisera.',
     canonicalPath: '/articoli-frontaliere/azalee-calcio-campo-pradisera/',
     structuredData: {
       "@context": "https://schema.org",
@@ -109589,7 +109589,7 @@ ogDescription: 'Le Azalee Calcio lasciano il campo di via Pradisera.',
     description: 'Erreci Busto Arsizio supera Roma 3-1. Tre vittorie da tre punti in A2 femminile. Šiftar chiude con 24 punti e il 61% in attacco. Prossima sfida: Costa Volpino',
     keywords: 'frontalieri, ticino, svizzera, italia, futura, volley, busto, arsizio',
     ogTitle: 'Futura volley busto arsizio vince 3-1 contro roma',
-ogDescription: 'Erreci Busto Arsizio supera Roma 3-1.',
+    ogDescription: 'Erreci Busto Arsizio supera Roma 3-1.',
     canonicalPath: '/articoli-frontaliere/futura-volley-roma-vittoria/',
     structuredData: {
       "@context": "https://schema.org",
@@ -109784,7 +109784,7 @@ ogDescription: 'Erreci Busto Arsizio supera Roma 3-1.',
     description: 'Dal 15 novembre 2026 il MAGA apre la nuova stagione «Jago. Corpi esposti» dal 15 novembre 2026 al 4 aprile 2027 «Acqua» a Palazzo Lombardia dall\'11 novembre',
     keywords: 'frontalieri, ticino, svizzera, italia, gallarate, nuove, mostre, maga',
     ogTitle: 'Gallarate: tre nuove mostre al Maga da Jago a Leopardi',
-ogDescription: 'Dal 15 novembre 2026 il MAGA apre la nuova stagione «Jago.',
+    ogDescription: 'Dal 15 novembre 2026 il MAGA apre la nuova stagione «Jago.',
     canonicalPath: '/articoli-frontaliere/mostre-maga-gallarate-2026/',
     structuredData: {
       "@context": "https://schema.org",
@@ -109979,7 +109979,7 @@ ogDescription: 'Dal 15 novembre 2026 il MAGA apre la nuova stagione «Jago.',
     description: 'Il nuovo dosso è stato installato al valico di Gaggiolo. L\'UDSC lo collega alla sicurezza, soprattutto di notte. Al valico i veicoli devono procedere a passo',
     keywords: 'frontalieri, ticino, svizzera, italia, dosso, sicurezza, gaggiolo, pedoni',
     ogTitle: 'Dosso sicurezza Gaggiolo per pedoni e lavoratori',
-ogDescription: 'Il nuovo dosso è stato installato al valico di Gaggiolo.',
+    ogDescription: 'Il nuovo dosso è stato installato al valico di Gaggiolo.',
     canonicalPath: '/articoli-frontaliere/dosso-gaggiolo-sicurezza-lavoratori/',
     structuredData: {
       "@context": "https://schema.org",
@@ -110018,7 +110018,7 @@ ogDescription: 'Il nuovo dosso è stato installato al valico di Gaggiolo.',
     description: 'La CIP-S boccia l\'iniziativa UDC con 8 voti contro 2. Il testo chiede controlli sistematici alle frontiere. La Svizzera non concederebbe asilo a oltre 5.000',
     keywords: 'frontalieri, ticino, svizzera, italia, protezione, frontiere, iniziativa, controproducente',
     ogTitle: 'Protezione delle frontiere: L\'iniziativa UDC è controproducente',
-ogDescription: 'A Berna, la Commissione delle istituzioni politiche del Consiglio degli Stati ha espresso un parere contrario, con 8 voti contro 2, all\'iniziativa UDC per la protezione delle frontiere.',
+    ogDescription: 'A Berna, la Commissione delle istituzioni politiche del Consiglio degli Stati ha espresso un parere contrario, con 8 voti contro 2, all\'iniziativa UDC per la protezione delle frontiere.',
     canonicalPath: '/articoli-frontaliere/iniziativa-udc-asilo-limite/',
     structuredData: {
       "@context": "https://schema.org",
@@ -110132,10 +110132,10 @@ ogDescription: 'A Berna, la Commissione delle istituzioni politiche del Consigli
 
   'blog-indennita-stage-lugano-2027': {
     title: 'Lugano: nuova indennità per gli stage nel 2027',
-description: 'La nuova impostazione prevede un\'indennità unica di 2\'000 franchi lordi al mese per 12 mensilità.',
+    description: 'La nuova impostazione prevede un\'indennità unica di 2\'000 franchi lordi al mese per 12 mensilità.',
     keywords: 'frontalieri, ticino, svizzera, italia, lugano, nuova, indennità, stage',
     ogTitle: 'Nuova indennità per gli stage a Lugano nel 2027',
-ogDescription: 'La nuova impostazione prevede un\'indennità unica di 2\'000 franchi lordi al mese per 12 mensilità.',
+    ogDescription: 'La nuova impostazione prevede un\'indennità unica di 2\'000 franchi lordi al mese per 12 mensilità.',
     canonicalPath: '/articoli-frontaliere/indennita-stage-lugano-2027/',
     structuredData: {
       "@context": "https://schema.org",
@@ -110408,7 +110408,7 @@ ogDescription: 'La nuova impostazione prevede un\'indennità unica di 2\'000 fra
     description: 'Il Lugano sfida il Pully domenica alle 14. Il Taverne ospita lo Young Boys alle 16. Quattro squadre sono già al terzo turno. Lugano e Taverne sono le ticinesi',
     keywords: 'frontalieri, ticino, svizzera, italia, lugano, favoritissimo, taverne, cerca',
     ogTitle: 'Coppa Svizzera: Lugano favorito, Taverne all\'impresa',
-ogDescription: 'Il seguito del weekend è concentrato nelle due gare di domenica. Alle 14 il Lugano affronterà il Pully.',
+    ogDescription: 'Il seguito del weekend è concentrato nelle due gare di domenica. Alle 14 il Lugano affronterà il Pully.',
     canonicalPath: '/articoli-frontaliere/coppa-svizzera-lugano-taverne/',
     structuredData: {
       "@context": "https://schema.org",
@@ -110720,7 +110720,7 @@ ogDescription: 'Il seguito del weekend è concentrato nelle due gare di domenica
     description: 'Centinaia hanno partecipato alla manifestazione #OraBasta. Genitori, nonni e cittadini hanno attraversato il lungolago. La partenza è stata da piazzale Somaini',
     keywords: 'frontalieri, ticino, svizzera, italia, como, centinaia, alla, manifestazione',
     ogTitle: 'Como, centinaia alla manifestazione #OraBasta',
-ogDescription: 'Centinaia hanno partecipato alla manifestazione #OraBasta.',
+    ogDescription: 'Centinaia hanno partecipato alla manifestazione #OraBasta.',
     canonicalPath: '/articoli-frontaliere/como-orabasta-famiglie/',
     structuredData: {
       "@context": "https://schema.org",
@@ -111773,7 +111773,7 @@ ogDescription: 'Centinaia hanno partecipato alla manifestazione #OraBasta.',
     description: 'Licenziamento del frontaliere nel 2026: diritti fiscali, contributi e regole per i nuovi frontalieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, licenziamento, diritti, fiscali, contributi',
     ogTitle: 'Licenziamento frontaliere 2026: diritti fiscali e contributi',
-ogDescription: 'Il Nuovo Accordo Frontalieri vale dal 1° gennaio 2024.',
+    ogDescription: 'Il Nuovo Accordo Frontalieri vale dal 1° gennaio 2024.',
     canonicalPath: '/articoli-frontaliere/frontaliere-tasse-dopo-licenziamento/',
     structuredData: {
       "@context": "https://schema.org",
@@ -111809,10 +111809,10 @@ ogDescription: 'Il Nuovo Accordo Frontalieri vale dal 1° gennaio 2024.',
 
   'blog-live-arconatese-varese-caronno': {
     title: 'Arconatese-varese, diretta da caronno pertusella',
-description: 'È l\'ottava giornata del campionato di Serie D, Girone D, e il Varese scende in campo a Caronno Pertusella per affrontare l\'Arconatese.',
+    description: 'È l\'ottava giornata del campionato di Serie D, Girone D, e il Varese scende in campo a Caronno Pertusella per affrontare l\'Arconatese.',
     keywords: 'frontalieri, ticino, svizzera, italia, arconatese-varese, diretta, caronno, pertusella',
     ogTitle: 'Arconatese-Varese: diretta da Caronno Pertusella',
-ogDescription: 'È l\'ottava giornata del campionato di Serie D, Girone D, e il Varese scende in campo a Caronno Pertusella per affrontare l\'Arconatese. I biancorossi cercano di dare continuità alla vittoria di settimana scorsa.',
+    ogDescription: 'È l\'ottava giornata del campionato di Serie D, Girone D, e il Varese scende in campo a Caronno Pertusella per affrontare l\'Arconatese. I biancorossi cercano di dare continuità alla vittoria di settimana scorsa.',
     canonicalPath: '/articoli-frontaliere/live-arconatese-varese-caronno/',
     structuredData: {
       "@context": "https://schema.org",
@@ -112904,7 +112904,7 @@ ogDescription: 'È l\'ottava giornata del campionato di Serie D, Girone D, e il 
     description: 'Arrestata una persona in Ticino mercoledì. L\'operazione ha portato a 30 arresti. Scoperte fatture false per oltre 110 milioni di euro. Riciclaggio',
     keywords: 'frontalieri, ticino, svizzera, italia, arresto, nell, operazione, antimafia',
     ogTitle: 'Arresto in Ticino nell\'operazione antimafia internazionale',
-ogDescription: 'Arrestata una persona in Ticino mercoledì.',
+    ogDescription: 'Arrestata una persona in Ticino mercoledì.',
     canonicalPath: '/articoli-frontaliere/arresto-ticino-banca-occulta/',
     structuredData: {
       "@context": "https://schema.org",
@@ -113021,7 +113021,7 @@ ogDescription: 'Arrestata una persona in Ticino mercoledì.',
     description: 'L\'aliquota normale Iva passerebbe dall\'8,1 all\'8,5%. L\'aumento è indicato a partire dal 2028. La votazione richiamata è indicata per il 29 novembre',
     keywords: 'frontalieri, ticino, svizzera, italia, 13esima, voto, sull, ipotesi',
     ogTitle: '13esima AVS: ipotesi Iva all\'8,5% dal 2028',
-ogDescription: 'L\'aliquota normale Iva passerebbe dall\'8,1 all\'8,5%.',
+    ogDescription: 'L\'aliquota normale Iva passerebbe dall\'8,1 all\'8,5%.',
     canonicalPath: '/articoli-frontaliere/voto-iva-2028-pensione/',
     structuredData: {
       "@context": "https://schema.org",
@@ -113372,7 +113372,7 @@ ogDescription: 'L\'aliquota normale Iva passerebbe dall\'8,1 all\'8,5%.',
     description: 'I lavori tra Vezia e Capolago modificano gli orari Tilo. Le variazioni durano dalle 22 del 30 ottobre alle 22 dell\'8 novembre. Alcuni RE80 da Lugano',
     keywords: 'frontalieri, ticino, svizzera, italia, orari, tilo, lugano-chiasso, modifiche',
     ogTitle: 'Tilo Lugano-Chiasso: anticipi e corse soppresse',
-ogDescription: 'I lavori tra Vezia e Capolago modificano gli orari Tilo.',
+    ogDescription: 'I lavori tra Vezia e Capolago modificano gli orari Tilo.',
     canonicalPath: '/articoli-frontaliere/orari-tilo-re80-s90/',
     structuredData: {
       "@context": "https://schema.org",
@@ -113450,7 +113450,7 @@ ogDescription: 'I lavori tra Vezia e Capolago modificano gli orari Tilo.',
     description: 'Malnate avrà quasi 500 mila euro in meno dai ristorni. Quasi 1.700 residenti attraversano ogni giorno il confine. I fondi arriveranno ai primi',
     keywords: 'frontalieri, ticino, svizzera, italia, malnate, ristorni, meno, quasi',
     ogTitle: 'Malnate ristorni frontalieri in meno di 500 mila euro',
-ogDescription: 'Malnate avrà quasi 500 mila euro in meno dai ristorni.',
+    ogDescription: 'Malnate avrà quasi 500 mila euro in meno dai ristorni.',
     canonicalPath: '/articoli-frontaliere/malnate-ristorni-500-mila-meno/',
     structuredData: {
       "@context": "https://schema.org",
@@ -113486,10 +113486,10 @@ ogDescription: 'Malnate avrà quasi 500 mila euro in meno dai ristorni.',
 
   'blog-mozione-ticino-ristorni-salute': {
     title: 'Mozione in Ticino contro la tassa sulla salute',
-description: 'La fonte riferisce che in Gran Consiglio è stata presentata una mozione interpartitica dedicata alla misura italiana.',
+    description: 'La fonte riferisce che in Gran Consiglio è stata presentata una mozione interpartitica dedicata alla misura italiana.',
     keywords: 'frontalieri, ticino, svizzera, italia, mozione, contro, tassa, sulla',
     ogTitle: 'Ticino: mozione contro la tassa sulla salute',
-ogDescription: 'La fonte riferisce che in Gran Consiglio è stata presentata una mozione interpartitica dedicata alla misura italiana.',
+    ogDescription: 'La fonte riferisce che in Gran Consiglio è stata presentata una mozione interpartitica dedicata alla misura italiana.',
     canonicalPath: '/articoli-frontaliere/mozione-ticino-ristorni-salute/',
     structuredData: {
       "@context": "https://schema.org",
