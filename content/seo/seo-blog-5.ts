@@ -113495,7 +113495,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Mozione in Ticino contro la tassa sulla salute",
-"description": "La fonte riferisce che in Gran Consiglio è stata presentata una mozione interpartitica dedicata alla misura italiana.",
+      "description": "La fonte riferisce che in Gran Consiglio è stata presentata una mozione interpartitica dedicata alla misura italiana.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",

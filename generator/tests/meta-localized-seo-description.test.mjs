@@ -116,7 +116,10 @@ test('emettitore: senza i campi SEO l\'output resta byte-identico a prima', () =
 test('emettitore: i campi SEO escono per TUTTE le locali, in coda ai tre storici', () => {
   const seo = {};
   for (const loc of LOCALES) {
-    seo[loc] = { seoDescription: `SERP ${loc}`, ogDescription: `SOCIAL ${loc}` };
+    seo[loc] = {
+      seoDescription: `SERP ${loc} describes the demo article.`,
+      ogDescription: `SOCIAL ${loc} describes the demo article.`,
+    };
   }
   for (const loc of LOCALES) {
     const lines = buildMetaBlockLines(articleWith(seo), loc);
