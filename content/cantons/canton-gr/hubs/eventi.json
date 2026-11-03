@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "eventi",
-  "updatedAt": "2026-11-03T00:06:00.232Z",
-  "contentHash": "26ae3ecdd12fe5b03f64fdde6e981b6af44a44cf5b2b29d3148b0130e3fc523b",
+  "updatedAt": "2026-11-03T03:26:00.822Z",
+  "contentHash": "d878faa69449cb309826c4230cd32941a1b6cf0b24bb0f9c311a9d13d596aaac",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -100,6 +100,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Innhub La Punt: apertura rimandata all'estate 2029",
+          "url": "/articoli-grigioni/innhub-la-punt-rinvio-apertura/",
+          "excerpt": "Apertura nell'estate 2029, sei mesi dopo il piano iniziale.",
+          "date": "2026-11-03T03:18:33.863Z"
+        },
+        {
           "title": "Lido Grono, apertura confermata per l'estate 2027",
           "url": "/articoli-grigioni/lido-grono-estate-2027/",
           "excerpt": "Apertura del Lido Grono confermata per l'estate 2027 Cantiere della nuova piscina comunale ancora in corso Costi previsti: circa 5 milioni Annuncio del sindaco",
@@ -147,7 +153,7 @@
           "url": "/eventi/grigioni/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-03T03:26:00.822Z"
     },
     "en": {
       "canton": "GR",
@@ -235,6 +241,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Innhub La Punt: opening postponed to summer 2029",
+          "url": "/en/graubunden-articles/innhub-la-punt-opening-delay/",
+          "excerpt": "Opening in summer 2029, six months later than initially planned.",
+          "date": "2026-11-03T03:18:33.863Z"
+        },
+        {
           "title": "Lido Grono, opening confirmed for summer 2027",
           "url": "/en/graubunden-articles/grono-pool-opening-2027/",
           "excerpt": "Opening of Lido Grono confirmed for summer 2027 Construction of the new municipal swimming pool still ongoing Expected costs: approximately 5 million Mayor's announcement",
@@ -282,7 +294,7 @@
           "url": "/en/events/graubunden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-03T03:26:00.822Z"
     },
     "de": {
       "canton": "GR",
@@ -370,6 +382,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Innhub La Punt: Eröffnung auf den Sommer 2029 verschoben",
+          "url": "/de/graubunden-artikel/innhub-la-punt-eroeffnung-verschoben/",
+          "excerpt": "Eröffnung im Sommer 2029, sechs Monate später als ursprünglich geplant.",
+          "date": "2026-11-03T03:18:33.863Z"
+        },
+        {
           "title": "Lido Grono, Eröffnung für den Sommer 2027 bestätigt",
           "url": "/de/graubunden-artikel/grono-schwimmbad-2027/",
           "excerpt": "Eröffnung des Lido Grono für den Sommer 2027 bestätigt Baustelle des neuen kommunalen Schwimmbads weiterhin im Gange Vorgesehene Kosten: etwa 5 Millionen Ankündigung des Bürgermeisters",
@@ -417,7 +435,7 @@
           "url": "/de/veranstaltungen/graubunden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-03T03:26:00.822Z"
     },
     "fr": {
       "canton": "GR",
@@ -505,6 +523,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Innhub La Punt : ouverture reportée à l’été 2029",
+          "url": "/fr/articles-grisons/innhub-la-punt-report-ouverture/",
+          "excerpt": "Ouverture à l’été 2029, six mois plus tard que prévu initialement.",
+          "date": "2026-11-03T03:18:33.863Z"
+        },
+        {
           "title": "Lido Grono, ouverture confirmée pour l'été 2027",
           "url": "/fr/articles-grisons/piscine-grono-ete-2027/",
           "excerpt": "Ouverture du Lido Grono confirmée pour l'été 2027 Chantier de la nouvelle piscine communale encore en cours Coûts prévus : environ 5 millions Annonce du maire",
@@ -552,7 +576,7 @@
           "url": "/fr/evenements/grisons/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-03T03:26:00.822Z"
     }
   }
 }
