@@ -1611,8 +1611,8 @@
       "reason": "Passo dei workflow di pubblicazione che garantisce sulla CDN i file della shell i cui byte sono trasportati in host/, inclusi GA4, recovery, Ads, Partnerize e Meta Pixel. Il loader Pixel contatta Meta solo dopo consenso esplicito; lo script host-only usa la libreria identical scripts/lib/cdn-shell-assets.mjs.",
       "baseline": {
         "site": null,
-        "corpus": "6967753b38ca73d6",
-        "alignedAt": "2026-11-03"
+        "corpus": "376823114717a68d",
+        "alignedAt": "2026-10-31"
       }
     },
     {
@@ -4163,9 +4163,9 @@
       "mode": "adapted",
       "reason": "Costanti del sito lette dall'engine via SiteShellContract, estratte per chiusura. scalarFingerprint confronta i 23 scalari authoritative; il digest adb1a692… include lo snippet Meta Pixel content-addressed, il cui loader contatta Meta solo dopo consenso pubblicitario esplicito e si blocca sui documenti sensibili, senza fallback noscript. AD_RECOVERY_FILENAME resta allineato al sorgente; sono preservati gli altri comportamenti di recovery, CMP, analytics e SEO gia' trasportati.",
       "baseline": {
-        "site": "7abfb926752bc68b",
-        "corpus": "d1c5b6b19df5e3d0",
-        "alignedAt": "2026-11-03"
+        "site": "c9f803f4645a9ab0",
+        "corpus": "598612b34529c6c5",
+        "alignedAt": "2026-10-31"
       },
       "scalarFingerprint": {
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
@@ -4388,9 +4388,9 @@
       "mode": "identical",
       "reason": "Impronta SHA-256 dei 23 campi scalari di SiteShellContract, prodotta e verificata da host/tests/shell-contract-fingerprint.test.mjs. Il gemello del sito e' tests/articles-shell-contract-fingerprint.json con gli stessi valori, incluso lo snippet Meta Pixel content-addressed e consent-gated; i due artefatti restano identical e il gate runtime impedisce di spedire l'engine senza la sua meta' host/.",
       "baseline": {
-        "site": "db574877f4b170e9",
-        "corpus": "db574877f4b170e9",
-        "alignedAt": "2026-11-03"
+        "site": "18e683c9406ca2e8",
+        "corpus": "18e683c9406ca2e8",
+        "alignedAt": "2026-10-31"
       }
     },
     {
@@ -4399,8 +4399,8 @@
       "reason": "Il bootstrap che costruisce SiteShellContract da `host/`. E' la meta' che sul sito e' fornita da `build-plugins/` e `services/`: qui e' un file solo, e non ha omonimo la'.",
       "baseline": {
         "site": null,
-        "corpus": "517f157f1995e04a",
-        "alignedAt": "2026-11-03"
+        "corpus": "e8b2194a9da23407",
+        "alignedAt": "2026-08-09"
       }
     },
     {
@@ -4439,8 +4439,8 @@
       "reason": "Test node:test della garanzia sugli asset trasportati: ogni riferimento content-addressed del contratto, incluso il loader Meta Pixel gated dal consenso, deve avere i byte in host/; il publisher verifica hash e set esatto prima della pubblicazione.",
       "baseline": {
         "site": null,
-        "corpus": "acab7ab56d9c4c28",
-        "alignedAt": "2026-11-03"
+        "corpus": "434d61541d4037c6",
+        "alignedAt": "2026-10-31"
       }
     },
     {
@@ -6840,9 +6840,9 @@
       "mode": "identical",
       "reason": "Fingerprint di recovery, Ads, Partnerize e Meta Pixel che lega gli snapshot byte-exact alle sorgenti. La proiezione esclude i contenuti ma verifica nomi e SHA-256; i test host confrontano i byte trasportati e il contratto prima della pubblicazione.",
       "baseline": {
-        "site": "6a6fd1f76d4f2939",
-        "corpus": "6a6fd1f76d4f2939",
-        "alignedAt": "2026-11-03"
+        "site": "2a96d3934487a51d",
+        "corpus": "2a96d3934487a51d",
+        "alignedAt": "2026-10-31"
       }
     },
     {
@@ -6851,9 +6851,9 @@
       "mode": "adapted",
       "reason": "Snapshot byte-exact delle risorse pubbliche e del guard inline derivate dall'exporter del sito, inclusi i byte del loader Meta Pixel consent-gated; hostShellFiles pubblica questi byte senza import fra repository.",
       "baseline": {
-        "site": "6e2092fcc0f1e3d8",
-        "corpus": "59d2bda114985c08",
-        "alignedAt": "2026-11-03"
+        "site": "b18653746619d369",
+        "corpus": "30ee6bcb409a26f3",
+        "alignedAt": "2026-10-30"
       }
     }
   ]
