@@ -1624,7 +1624,7 @@ const blogMetaDe: Record<string, string> = {
  'blog.article.chiasso-missione-emergenza-luci-blu.excerpt': 'Am 26. April 2026 wird Chiasso zehn Entitäten des ersten Einsatzes für die Missione emergenza aufnehmen, die Agenten und Mitarbeiter direkt mit der Bevölkerung in Kontakt bringen.',
  'blog.article.chiasso-missione-emergenza-luci-blu.imageAlt': 'Chiasso, 26. April 2026: Die Stadt nimmt zehn Ersthelfer-Einheiten für die Notfallmission auf, die Agenten und Mitarbeiter direkt mit der Bevölkerung in Kontakt bringen.',
  'blog.article.aggregazione-basso-mendrisiotto-rizza-chiasso-autocritica.title': 'Fusion Basso Mendrisiotto: Rizza kritisiert Chiasso',
- 'blog.article.aggregazione-basso-mendrisiotto-rizza-chiasso-autocritica.excerpt': 'Das Projekt macht Fortschritte, aber nicht ohne Schwierigkeiten, und es kann zu Abweichungen im Zeitplan kommen.',
+ 'blog.article.aggregazione-basso-mendrisiotto-rizza-chiasso-autocritica.excerpt': 'Das Fusionsprojekt im unteren Mendrisiotto, an dem die Gemeinden Chiasso, Mendrisio und Vacallo beteiligt sind, kommt voran, ist aber nicht ohne Schwierigkeiten.',
  'blog.article.aggregazione-basso-mendrisiotto-rizza-chiasso-autocritica.imageAlt': 'Panorama des Basso Mendrisiotto mit Chiasso, Mendrisio und Vacallo.',
  'blog.article.carburanti-prezzo-rialzo-ticino.title': 'Kraftstoffpreise steigen: Dieselpreis über 2 Euro im Tessin',
  'blog.article.carburanti-prezzo-rialzo-ticino.excerpt': 'Die Preise für Benzin und Diesel steigen, wobei der Diesel die 2-Euro-Marke überschreitet. Hier ist, was Sie wissen müssen.',
@@ -13671,6 +13671,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.cascata-oro-comune-como.title': 'Millionen für Como: Die Mittel für Grenzgänger haben sich verdreifacht',
     'blog.article.cascata-oro-comune-como.excerpt': 'Zu diesem Zeitpunkt zählte Como 6.492 ansässige Grenzgänger.',
     'blog.article.cascata-oro-comune-como.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.versamento-avs-dicembre-importi.title': 'Dreizehnter AHV, bei manchen wird es niedriger sein',
+    'blog.article.versamento-avs-dicembre-importi.excerpt': 'Erste 13. AHV im Dezember Rente ab dem 1. Juli: halbe Rente Fast 2,7 Millionen Begünstigte Ende 2026 830.000 Begünstigte im Ausland',
+    'blog.article.versamento-avs-dicembre-importi.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaDe;

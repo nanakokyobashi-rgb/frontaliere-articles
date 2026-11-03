@@ -293,4 +293,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'ulmann-incarico-appenzello',
+ category: 'novita',
+ date: '2026-11-03T15:45:25.350Z',
+ image: '/images/blog/article-ulmann-incarico-appenzello.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['APPENZELLO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

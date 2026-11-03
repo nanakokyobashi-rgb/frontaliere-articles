@@ -74,6 +74,11 @@ on:
       # stato e' un commit su sections/registry.json e deve pubblicarsi subito.
       - 'sections/**'
       - 'scripts/lib/section-registry.mjs'
+      - 'scripts/ci/excerpt-completeness-baseline.json'
+      - 'generator/scripts/lib/ts-string-map.mjs'
+      - 'generator/scripts/repair-plain-excerpts.mjs'
+      - 'scripts/lib/excerpt-completeness-gate.mjs'
+      - 'scripts/lib/write-file-pair-atomically.mjs'
       - 'scripts/lib/canton-hub-data.mjs'
       - 'scripts/lib/article-index-exclusions-check.mjs'
       - 'scripts/lib/canton-hub-content.mjs'

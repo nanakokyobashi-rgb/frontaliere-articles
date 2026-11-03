@@ -8672,6 +8672,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.swissport-zurigo-trattative-ccl.title': 'Swissport Zurich: failed negotiations for staff',
     'blog.article.swissport-zurigo-trattative-ccl.excerpt': 'CCL Swissport in Zurich: negotiations failed The contract covers around 2’000 people Wage increases of up to 7% demanded Strike possible as early as January 2027',
     'blog.article.swissport-zurigo-trattative-ccl.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.voto-iva-13esima-avs-novembre.title': '13th AVS pension: VAT increase put to a vote on November 29',
+    'blog.article.voto-iva-13esima-avs-novembre.excerpt': 'On November 29, the vote will be held on financing the 13th AHV pension payment The standard VAT rate would rise from 8.1% to 8.5% The hotel rate would increase from 3.8% to 4%',
+    'blog.article.voto-iva-13esima-avs-novembre.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaChEn;

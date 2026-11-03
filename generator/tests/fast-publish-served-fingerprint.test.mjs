@@ -312,6 +312,36 @@ test('un mismatch HIT è cache lag solo se la probe anti-cache serve l’hash at
   assert.equal(fetches, 2);
 });
 
+test('un mismatch MISS è cache lag solo se la probe anti-cache serve l’hash atteso', async () => {
+  let fetches = 0;
+  await assert.rejects(
+    () => verifyApex({
+      records: [RECORD],
+      runKey: 'test-run.2.articolifrontaliere.miss',
+      fetchImpl: async (url, options) => {
+        fetches += 1;
+        if (fetches === 1) {
+          assert.equal(url, RECORD.url);
+          return response(OLD_HTML, { 'cf-cache-status': 'MISS', age: '0' });
+        }
+        assert.match(url, /_fpcb=/);
+        assert.equal(new URL(url).searchParams.get('_fpcb'), 'test-run.2.articolifrontaliere.miss.1');
+        assert.equal(options.headers['Cache-Control'], 'no-cache');
+        return response(NEW_HTML, { 'cf-cache-status': 'MISS', age: '0' });
+      },
+    }),
+    (error) => {
+      assert.match(error.message, /classification=cache-lag/);
+      assert.match(error.message, /cf-cache-status=MISS/);
+      assert.match(error.message, /fresh-probe-status=200/);
+      assert.match(error.message, new RegExp(`fresh-probe-served=${RECORD.sha}`));
+      assert.equal(error.failures[0].freshProbe.cacheLagConfirmed, true);
+      return true;
+    },
+  );
+  assert.equal(fetches, 2);
+});
+
 test('un fallback HTTP 200 resta hard se la probe anti-cache non serve l’hash atteso', async () => {
   let fetches = 0;
   await assert.rejects(

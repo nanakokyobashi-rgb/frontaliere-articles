@@ -2913,6 +2913,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'mercato-lavoro-prospettive-offuscate': { it: 'mercato-lavoro-prospettive-offuscate', en: 'labor-market-prospects-clouding', de: 'arbeitsmarkt-prospekte-truben', fr: 'perspectives-marche-travail-nuageants' },
  'inflazione-ottobre-1-5-percento': { it: 'inflazione-ottobre-1-5-percento', en: 'october-inflation-1-5-percent', de: 'inflations-oktober-1-5-prozent', fr: 'inflation-octobre-1-5-pourcent' },
  'swissport-zurigo-trattative-ccl': { it: 'swissport-zurigo-trattative-ccl', en: 'swissport-zurich-cba-negotiations', de: 'swissport-zuerich-gav-verhandlungen', fr: 'swissport-zurich-negociations-cct' },
+ 'voto-iva-13esima-avs-novembre': { it: 'voto-iva-13esima-avs-novembre', en: 'vote-vat-13th-avs-november', de: 'abstimmung-mwst-13-ahv-november', fr: 'vote-tva-13eme-avs-novembre' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

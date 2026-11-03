@@ -1016,6 +1016,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-ulmann-incarico-appenzello': {
+    title: 'Appenzello, manuel ulmann assunto al bezirksbauamt',
+    description: 'Il Consiglio distrettuale di Appenzell ha assunto Manuel Ulmann al 100 per cento nel Bezirksbauamt: l\'attività inizierà all\'inizio di febbraio.',
+    keywords: 'frontalieri, ticino, svizzera, italia, appenzello, manuel, ulmann, assunto',
+    ogTitle: 'Manuel Ulmann assunto nel Bezirksbauamt di Appenzello',
+    ogDescription: 'La comunicazione del distretto di Appenzell annuncia l\'assunzione di Manuel Ulmann con un grado d\'impiego del 100 per cento nel Bezirksbauamt. L\'attività inizierà all\'inizio di febbraio, in vista del pensionamento imminente.',
+    canonicalPath: '/articoli-appenzello/ulmann-incarico-appenzello/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Appenzello, manuel ulmann assunto al bezirksbauamt",
+      "description": "Il Consiglio distrettuale di Appenzell ha assunto Manuel Ulmann al 100 per cento nel Bezirksbauamt: l'attività inizierà all'inizio di febbraio.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-ulmann-incarico-appenzello.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-03T15:45:25+00:00",
+      "dateModified": "2026-11-03T15:45:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-appenzello/ulmann-incarico-appenzello/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "note": "SHA-256 of SiteShellContract scalars. Independent first-party recovery, consent memory fallback and bounded Google loaders; both repos assert identical bytes.",
-  "scalarFields": 22,
-  "sha256": "c6b310ae62cf51cd37195557fc788bb74431e4908fb3cc5b01c13bc403c0034e"
+  "note": "SHA-256 of SiteShellContract scalars, including the content-addressed Meta Pixel head snippet; both repos assert identical bytes.",
+  "scalarFields": 23,
+  "sha256": "adb1a6923bea1285c19969b8acb6678d728b68147b20439b51bc3c83b1e39354"
 }
