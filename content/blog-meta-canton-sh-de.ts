@@ -76,7 +76,7 @@ const blogMetaCantonShDe: Record<string, string> = {
     'blog.article.pil-cantonale-2026-crescita.excerpt': 'Für 2026 erwartetes kantonales BIP: 0,96% gegenüber 0,8% in der Schweiz Export unter Druck aufgrund von Spannungen, Energiepreisen, Zöllen und dem starken',
     'blog.article.pil-cantonale-2026-crescita.imageAlt': 'Illustratives Bild zum Thema des Artikels',
     'blog.article.schaffhausen-modello-scolastico-inclusivo.title': 'Schaffhausen übernimmt integratives Schulmodell mit PGA',
-    'blog.article.schaffhausen-modello-scolastico-inclusivo.excerpt': 'Entscheid vom 22.',
+    'blog.article.schaffhausen-modello-scolastico-inclusivo.excerpt': 'Am 22. Januar 2026 hat der Stadtschulrat Schaffhausen den Übergang zu einem inklusiven Schulsystem beschlossen; das Pädagogische Grundangebot soll jährlich bis zu CHF 3 Millionen umfassen.',
     'blog.article.schaffhausen-modello-scolastico-inclusivo.imageAlt': 'Illustratives Bild zum Thema des Artikels',
     'blog.article.competenze-finanziarie-sciaffusa.title': 'Schaffhausen passt die Finanzkompetenzen ab 2027 an',
     'blog.article.competenze-finanziarie-sciaffusa.excerpt': 'Ab dem 1. Januar 2027 kann die Regierung einmalige Ausgaben bis zu CHF 200\'000 bewilligen; das Kantonsparlament bis zu CHF 1,5 Millionen.',

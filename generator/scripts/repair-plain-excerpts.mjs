@@ -11,9 +11,11 @@
  *   node scripts/repair-plain-excerpts.mjs --write  # apply safe repairs
  */
 
-import { existsSync, readFileSync, writeFileSync, renameSync, readdirSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { writeFileSnapshotAtomically } from '../../scripts/lib/write-file-pair-atomically.mjs';
+import { assertNoExcerptCompletenessRegression } from '../../scripts/lib/excerpt-completeness-gate.mjs';
 import {
   assertPlainExcerpt,
   endsWithFunctionWordBeforePeriod,
@@ -34,6 +36,7 @@ import { assertSeoDescriptionMinimum } from './lib/seo-description-contract.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, '..', '..');
+const BASELINE_PATH = path.join(repoRoot, 'scripts/ci/excerpt-completeness-baseline.json');
 const bodyMapCache = new Map();
 const bodyTextCache = new Map();
 const allBodyRoots = readdirSync(path.join(repoRoot, 'content'), { withFileTypes: true })
@@ -44,10 +47,8 @@ function decodeDoubleQuotedTS(value) {
   return decodeTypeScriptString(value, '"');
 }
 
-function atomicWrite(file, value) {
-  const tmp = `${file}.${process.pid}.excerpt-repair.tmp`;
-  writeFileSync(tmp, value, 'utf8');
-  renameSync(tmp, file);
+function atomicWrite(file, before, after) {
+  writeFileSnapshotAtomically(file, before, after);
 }
 
 function sectionForMeta(file) {
@@ -229,7 +230,7 @@ function repairMetaFile(relativeFile, { writeMode = false, sourceMap } = {}) {
     });
     return result.changed ? `${prefix}${escapeForSingleQuoteTS(result.value)}${suffix}` : full;
   });
-  if (after !== before && writeMode) atomicWrite(file, after);
+  if (after !== before && writeMode) atomicWrite(file, before, after);
   return { file: relativeFile, changed, details };
 }
 
@@ -289,7 +290,7 @@ function repairSeoFile(relativeFile, { writeMode = false, sourceMap } = {}) {
     return `${indent}"description"${prefix}${JSON.stringify(result.value).slice(1, -1)}${suffix}`;
   });
 
-  if (after !== before && writeMode) atomicWrite(file, after);
+  if (after !== before && writeMode) atomicWrite(file, before, after);
   return { file: relativeFile, changed, details };
 }
 
@@ -392,7 +393,15 @@ function main(argv) {
     detailsOmitted: Math.max(0, summary.details.length - 20),
   };
   console.log(JSON.stringify(printed, null, 2));
-  if (!writeMode && summary.needsRepairValues > 0) process.exitCode = 1;
+  if (!writeMode) {
+    try {
+      const baseline = JSON.parse(readFileSync(BASELINE_PATH, 'utf8'));
+      assertNoExcerptCompletenessRegression(summary.details, baseline);
+    } catch (error) {
+      console.error(error.message);
+      process.exitCode = 1;
+    }
+  }
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main(process.argv.slice(2));

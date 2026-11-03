@@ -76,7 +76,7 @@ test('build-api controlla la completezza prima di cancellare la superficie pubbl
 test('build-api accetta i casi nel baseline e rifiuta un nuovo campo incompleto', () => {
   const report = corpusReport();
   const result = assertNoExcerptCompletenessRegression(report.details, readBaseline());
-  assert.equal(result.known.length, 7);
+  assert.equal(result.known.length, 6);
   assert.deepEqual(result.regressions, []);
 
   const regression = {

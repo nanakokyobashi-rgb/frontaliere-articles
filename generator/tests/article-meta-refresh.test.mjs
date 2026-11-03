@@ -54,6 +54,28 @@ const GENERATE_SCRIPT = path.join(HERE, '..', 'scripts', 'generate-daily-brief-a
 const VALID_SEO_DESCRIPTION =
   'I dati quotidiani sui valichi, i prezzi dei carburanti e gli annunci di lavoro in Svizzera sono verificati con fonti aggiornate.';
 assert.ok(VALID_SEO_DESCRIPTION.length >= SEO_DESCRIPTION_MIN);
+const VALID_LOCALE_TEXTS = {
+  it: {
+    excerpt: VALID_SEO_DESCRIPTION,
+    seoDescription: VALID_SEO_DESCRIPTION,
+    ogDescription: 'Valichi, carburanti e annunci di lavoro: dati aggiornati ogni giorno in Svizzera.',
+  },
+  en: {
+    excerpt: 'Daily figures on Swiss border crossings, fuel prices and job listings are checked against current sources.',
+    seoDescription: 'Daily figures on Swiss border crossings, fuel prices and job listings are checked against current sources before publication.',
+    ogDescription: 'Find current data on border crossings, fuel prices and job listings in Switzerland.',
+  },
+  de: {
+    excerpt: 'Die täglichen Angaben zu Grenzübergängen, Treibstoffpreisen und Stellenangeboten in der Schweiz werden anhand aktueller Quellen geprüft.',
+    seoDescription: 'Die täglichen Angaben zu Grenzübergängen, Treibstoffpreisen und Stellenangeboten in der Schweiz werden anhand aktueller Quellen geprüft.',
+    ogDescription: 'Aktuelle Angaben zu Grenzübergängen, Treibstoffpreisen und Stellenangeboten in der Schweiz.',
+  },
+  fr: {
+    excerpt: 'Les données quotidiennes sur les passages frontaliers, les prix des carburants et les offres d’emploi en Suisse sont vérifiées auprès de sources actuelles.',
+    seoDescription: 'Les données quotidiennes sur les passages frontaliers, les prix des carburants et les offres d’emploi en Suisse sont vérifiées auprès de sources actuelles.',
+    ogDescription: 'Retrouvez les données actuelles sur les passages frontaliers, les carburants et les emplois en Suisse.',
+  },
+};
 
 // ── 1a. upsertLocaleMetaFields ──────────────────────────────────────────────
 
@@ -405,7 +427,7 @@ test('refreshDescriptiveTexts: campo meta duplicato — preflighta tutte le loca
     assert.throws(
       () => refreshDescriptiveTexts(
         'demo-id',
-        { it: { excerpt: 'Nuovo it' }, en: { excerpt: 'Nuovo en' } },
+        { it: { excerpt: VALID_LOCALE_TEXTS.it.excerpt }, en: { excerpt: VALID_LOCALE_TEXTS.en.excerpt } },
         undefined,
         { repoRoot: root },
       ),
@@ -444,30 +466,27 @@ test('refreshDescriptiveTexts: scrive tutte e 4 le locali + il file SEO, e ripor
   try {
     const localeTexts = {};
     for (const locale of ['it', 'en', 'de', 'fr']) {
-      localeTexts[locale] = {
-        excerpt: `${locale}: ${VALID_SEO_DESCRIPTION}`,
-        seoDescription: `SERP ${locale}`,
-        ogDescription: `Social ${locale}`,
-      };
+      localeTexts[locale] = { ...VALID_LOCALE_TEXTS[locale] };
     }
     const { changed, touched } = refreshDescriptiveTexts(
       'demo-id',
       localeTexts,
-      { description: VALID_SEO_DESCRIPTION, ogDescription: 'Social it' },
+      { description: VALID_SEO_DESCRIPTION, ogDescription: VALID_LOCALE_TEXTS.it.ogDescription },
       { repoRoot: root },
     );
     assert.equal(changed, true);
     assert.equal(touched.length, 5, '4 file meta + 1 file seo');
 
     const en = fs.readFileSync(path.join(root, 'content', 'blog-meta-en.ts'), 'utf-8');
-    const enExcerpt = `en: ${VALID_SEO_DESCRIPTION}`;
+    const enExcerpt = VALID_LOCALE_TEXTS.en.excerpt;
+    const enSeoDescription = VALID_LOCALE_TEXTS.en.seoDescription;
     assert.ok(en.includes(`'blog.article.demo-id.excerpt': '${enExcerpt}',`));
-    assert.ok(en.includes(`'blog.article.demo-id.seoDescription': '${enExcerpt}',`));
-    assert.ok(en.includes("'blog.article.demo-id.ogDescription': 'Social en',"));
+    assert.ok(en.includes(`'blog.article.demo-id.seoDescription': '${enSeoDescription}',`));
+    assert.ok(en.includes(`'blog.article.demo-id.ogDescription': '${VALID_LOCALE_TEXTS.en.ogDescription}',`));
 
     const seo = fs.readFileSync(path.join(root, 'content', 'seo', 'seo-blog-5.ts'), 'utf-8');
     assert.ok(seo.includes(`description: '${VALID_SEO_DESCRIPTION}',`));
-    assert.ok(seo.includes("ogDescription: 'Social it',"));
+    assert.ok(seo.includes(`ogDescription: '${VALID_LOCALE_TEXTS.it.ogDescription}',`));
     assert.ok(seo.includes(`"description": "${VALID_SEO_DESCRIPTION}"`));
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
@@ -620,13 +639,9 @@ test('refreshDescriptiveTexts: un secondo giro con gli stessi testi non scrive n
   try {
     const localeTexts = {};
     for (const locale of ['it', 'en', 'de', 'fr']) {
-      localeTexts[locale] = {
-        excerpt: `${locale}: ${VALID_SEO_DESCRIPTION}`,
-        seoDescription: `S ${locale}`,
-        ogDescription: `O ${locale}`,
-      };
+      localeTexts[locale] = { ...VALID_LOCALE_TEXTS[locale] };
     }
-    const seoTexts = { description: VALID_SEO_DESCRIPTION, ogDescription: 'O it' };
+    const seoTexts = { description: VALID_SEO_DESCRIPTION, ogDescription: VALID_LOCALE_TEXTS.it.ogDescription };
     const first = refreshDescriptiveTexts('demo-id', localeTexts, seoTexts, { repoRoot: root });
     assert.equal(first.changed, true);
 
