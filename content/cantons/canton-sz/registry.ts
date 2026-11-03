@@ -105,4 +105,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'sp-uri-no-finanziamento-avs',
+ category: 'pensione',
+ date: '2026-11-03T23:23:55.230Z',
+ image: '/images/blog/article-sp-uri-no-finanziamento-avs.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SZ', 'UR'],
+ authorSlug: 'laura-bianchi',
+ authorName: 'Laura Bianchi',
+ },
 ];
