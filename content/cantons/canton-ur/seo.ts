@@ -582,6 +582,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-seedorf-reussstrasse-lavori-innesto': {
+    title: 'Seedorf: Reussstrasse chiusa per lavori di innesto',
+    description: 'Chiusure programmate sulla Reussstrasse a Seedorf (6-9 nov e 13-16 nov 2026) per lavori per la pista ciclabile Altdorf-Seedorf.',
+    keywords: 'frontalieri, ticino, svizzera, italia, seedorf, reussstrasse, chiusa, lavori',
+    ogTitle: 'Reussstrasse Seedorf chiusa per lavori innesto',
+    ogDescription: 'Verifica le date di chiusura della Reussstrasse a Seedorf (6-9 nov e 13-16 nov 2026) legate ai lavori per la pista ciclabile Altdorf-Seedorf.',
+    canonicalPath: '/articoli-uri/seedorf-reussstrasse-lavori-innesto/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Seedorf: Reussstrasse chiusa per lavori di innesto",
+      "description": "Chiusure programmate sulla Reussstrasse a Seedorf (6-9 nov e 13-16 nov 2026) per lavori per la pista ciclabile Altdorf-Seedorf.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-seedorf-reussstrasse-lavori-innesto.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-03T12:26:50+00:00",
+      "dateModified": "2026-11-03T12:26:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-uri/seedorf-reussstrasse-lavori-innesto/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

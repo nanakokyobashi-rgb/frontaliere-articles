@@ -171,4 +171,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'seedorf-reussstrasse-lavori-innesto',
+ category: 'pratico',
+ date: '2026-11-03T12:26:50.675Z',
+ image: '/images/blog/article-seedorf-reussstrasse-lavori-innesto.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['UR'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

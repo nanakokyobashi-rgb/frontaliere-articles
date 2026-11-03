@@ -48,6 +48,9 @@ const blogMetaCantonUrIt: Record<string, string> = {
     'blog.article.chiusura-invernale-gottardo.title': 'Passo del Gottardo: chiusura invernale da giovedì',
     'blog.article.chiusura-invernale-gottardo.excerpt': 'Da giovedì scatta la chiusura invernale del passo del Gottardo: tre dei cinque passi alpini urani saranno chiusi, mentre Oberalp e Klausenpass restano aperti.',
     'blog.article.chiusura-invernale-gottardo.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.seedorf-reussstrasse-lavori-innesto.title': 'Seedorf: Reussstrasse chiusa per lavori di innesto',
+    'blog.article.seedorf-reussstrasse-lavori-innesto.excerpt': 'La Reussstrasse a Seedorf sarà chiusa per lavori all\'innesto verso sud, direzione Attinghausen, in vista della pista ciclabile Altdorf-Seedorf.',
+    'blog.article.seedorf-reussstrasse-lavori-innesto.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonUrIt;

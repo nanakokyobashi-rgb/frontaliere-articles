@@ -48,6 +48,9 @@ const blogMetaCantonUrDe: Record<string, string> = {
     'blog.article.chiusura-invernale-gottardo.title': 'Gotthardpass: Wintersperre ab Donnerstag',
     'blog.article.chiusura-invernale-gottardo.excerpt': 'Ab Donnerstag tritt die Wintersperre des Gotthardpasses in Kraft: Drei der fünf Urner Alpenpässe werden geschlossen sein, während Oberalp und Klausenpass vorerst offen bleiben.',
     'blog.article.chiusura-invernale-gottardo.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.seedorf-reussstrasse-lavori-innesto.title': 'Seedorf: Reussstrasse wegen Arbeiten an der Einmündung gesperrt',
+    'blog.article.seedorf-reussstrasse-lavori-innesto.excerpt': 'Die Reussstrasse in Seedorf wird wegen Arbeiten an der Einmündung Richtung Süden, in Richtung Attinghausen, im Hinblick auf den Radweg Altdorf-Seedorf gesperrt.',
+    'blog.article.seedorf-reussstrasse-lavori-innesto.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonUrDe;

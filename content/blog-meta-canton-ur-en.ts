@@ -48,6 +48,9 @@ const blogMetaCantonUrEn: Record<string, string> = {
     'blog.article.chiusura-invernale-gottardo.title': 'Gotthard Pass: winter closure from Thursday',
     'blog.article.chiusura-invernale-gottardo.excerpt': 'Starting Thursday, the winter closure of the Gotthard Pass takes effect: three of the five Alpine passes in Uri will be closed, while Oberalp and Klausenpass remain open.',
     'blog.article.chiusura-invernale-gottardo.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.seedorf-reussstrasse-lavori-innesto.title': 'Seedorf: Reussstrasse closed for connection works',
+    'blog.article.seedorf-reussstrasse-lavori-innesto.excerpt': 'Reussstrasse in Seedorf will be closed for construction work at the southern junction, toward Attinghausen, in preparation for the Altdorf-Seedorf cycle path.',
+    'blog.article.seedorf-reussstrasse-lavori-innesto.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonUrEn;
