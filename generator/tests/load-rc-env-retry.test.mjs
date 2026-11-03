@@ -127,6 +127,11 @@ test('il loader mantiene attivabile il checkout SumUp senza renderlo il default'
   }
 });
 
+test('il token Meta CAPI resta opzionale finché la sorgente dati non viene configurata', () => {
+  assert.deepEqual(RC_TO_ENV.SERVER_META_CAPI_ACCESS_TOKEN, ['META_CAPI_ACCESS_TOKEN']);
+  assert.equal(EXPECTED_ABSENT_RC_KEYS.has('SERVER_META_CAPI_ACCESS_TOKEN'), true);
+});
+
 test('il loader separa assenza prevista, assenza inattesa ed empty esplicito', () => {
   assert.equal(EXPECTED_ABSENT_RC_KEYS.has('TELEGRAM_BOT_TOKEN'), true);
   assert.equal(rcValueState(null, 'TELEGRAM_BOT_TOKEN'), 'expected-absent');
