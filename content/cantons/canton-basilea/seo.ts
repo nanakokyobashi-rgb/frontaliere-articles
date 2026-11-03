@@ -626,6 +626,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-baselland-maiali-enzootica': {
+    title: 'Baselland: 750 maiali abbattuti per polmonite enzootica',
+    description: 'Polmonite enzootica in un allevamento di Baselland: 750 maiali abbattuti. Ordinati pulizia, disinfezione e risanamento totale, con controllo ALV.',
+    keywords: 'frontalieri, ticino, svizzera, italia, baselland, maiali, abbattuti, polmonite',
+    ogTitle: 'Baselland: 750 maiali abbattuti per polmonite enzootica',
+    ogDescription: 'La polmonite enzootica è innocua per l\'uomo, ma nei suini può manifestarsi con tosse, difficoltà respiratorie e crescita ridotta. Dopo pulizia e disinfezione, l\'ALV controllerà l\'allevamento: il ritorno richiede almeno dieci giorni di vuoto e il via',
+    canonicalPath: '/articoli-basilea/baselland-maiali-enzootica/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Baselland: 750 maiali abbattuti per polmonite enzootica",
+      "description": "Polmonite enzootica in un allevamento di Baselland: 750 maiali abbattuti. Ordinati pulizia, disinfezione e risanamento totale, con controllo ALV.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-baselland-maiali-enzootica.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-03T08:17:35+00:00",
+      "dateModified": "2026-11-03T08:17:35+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-basilea/baselland-maiali-enzootica/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

@@ -51,6 +51,9 @@ const blogMetaCantonBasileaDe: Record<string, string> = {
     'blog.article.salario-minimo-basilea-aumento.title': 'Mindestlohn in Basel-Stadt steigt ab 2027 auf CHF 22,50 brutto pro Stunde',
     'blog.article.salario-minimo-basilea-aumento.excerpt': 'Ab dem 1. Januar 2027 wird der Bruttomindestlohn pro Stunde in Basel-Stadt auf Grundlage des Schweizer Mischindexes von CHF 22,20 auf CHF 22,50 steigen.',
     'blog.article.salario-minimo-basilea-aumento.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.baselland-maiali-enzootica.title': 'Baselland: 750 Schweine wegen enzootischer Pneumonie gekeult',
+    'blog.article.baselland-maiali-enzootica.excerpt': 'In einem Mastbetrieb in Baselland wurden 750 Schweine gekeult.',
+    'blog.article.baselland-maiali-enzootica.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonBasileaDe;

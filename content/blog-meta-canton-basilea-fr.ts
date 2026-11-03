@@ -51,6 +51,9 @@ const blogMetaCantonBasileaFr: Record<string, string> = {
     'blog.article.salario-minimo-basilea-aumento.title': 'Le salaire minimum à Bâle-Ville passe à CHF 22,50 bruts/heure dès 2027',
     'blog.article.salario-minimo-basilea-aumento.excerpt': 'À partir du 1er janvier 2027, le minimum brut horaire à Bâle-Ville passera de CHF 22,20 à CHF 22,50, sur la base de l’indice mixte suisse.',
     'blog.article.salario-minimo-basilea-aumento.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.baselland-maiali-enzootica.title': 'Baselland : 750 porcs abattus pour cause de pneumonie enzootique',
+    'blog.article.baselland-maiali-enzootica.excerpt': 'Dans un élevage d’engraissement de Baselland, 750 porcs ont été abattus.',
+    'blog.article.baselland-maiali-enzootica.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonBasileaFr;

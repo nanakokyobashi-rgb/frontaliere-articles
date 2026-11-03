@@ -51,6 +51,9 @@ const blogMetaCantonBasileaIt: Record<string, string> = {
     'blog.article.salario-minimo-basilea-aumento.title': 'Salario minimo Basilea Città sale a CHF 22,50 lordi/ora dal 2027',
     'blog.article.salario-minimo-basilea-aumento.excerpt': 'Dal 1° gennaio 2027, il minimo lordo orario a Basilea Città passerà da CHF 22,20 a CHF 22,50, in base all\'indice misto svizzero.',
     'blog.article.salario-minimo-basilea-aumento.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.baselland-maiali-enzootica.title': 'Baselland: 750 maiali abbattuti per polmonite enzootica',
+    'blog.article.baselland-maiali-enzootica.excerpt': 'In un allevamento da ingrasso di Baselland 750 maiali sono stati abbattuti.',
+    'blog.article.baselland-maiali-enzootica.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonBasileaIt;

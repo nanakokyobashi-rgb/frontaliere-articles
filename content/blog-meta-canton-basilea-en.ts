@@ -51,6 +51,9 @@ const blogMetaCantonBasileaEn: Record<string, string> = {
     'blog.article.salario-minimo-basilea-aumento.title': 'Basel City minimum wage rises to CHF 22.50 gross per hour from 2027',
     'blog.article.salario-minimo-basilea-aumento.excerpt': 'From January 1, 2027, the gross hourly minimum wage in Basel-Stadt will increase from CHF 22,20 to CHF 22,50, based on the Swiss mixed index.',
     'blog.article.salario-minimo-basilea-aumento.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.baselland-maiali-enzootica.title': 'Baselland: 750 pigs culled due to enzootic pneumonia',
+    'blog.article.baselland-maiali-enzootica.excerpt': 'At a pig-fattening farm in Baselland, 750 pigs were culled.',
+    'blog.article.baselland-maiali-enzootica.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonBasileaEn;
