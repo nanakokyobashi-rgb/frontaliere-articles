@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
 import {
+  chmodSync,
   mkdirSync,
   mkdtempSync,
   readFileSync,
@@ -79,6 +80,9 @@ test('serializza un push corpus-sized in commit bounded senza perdere path', () 
   const seed = join(root, 'seed');
   const remote = join(root, 'remote.git');
   const runnerTemp = join(root, 'runner-temp');
+  const gitBin = join(root, 'git-bin');
+  const gitWrapper = join(gitBin, 'git');
+  const pushMarker = join(root, 'ambiguous-push-once');
   const statusFile = join(runnerTemp, 'article-status.txt');
   const relpaths = [
     'articolifrontaliere/status-batch-a/index.html',
@@ -93,6 +97,7 @@ test('serializza un push corpus-sized in commit bounded senza perdere path', () 
       writeFileSync(join(seed, rel), `<html><body>${rel}-old</body></html>\n`);
     }
     mkdirSync(runnerTemp);
+    mkdirSync(gitBin);
     writeFileSync(join(seed, '.shard-filecount'), '2\n');
 
     execFileSync('git', ['init', '-q', '--initial-branch=main', seed]);
@@ -105,8 +110,26 @@ test('serializza un push corpus-sized in commit bounded senza perdere path', () 
     git(seed, ['push', '-q', 'origin', 'main']);
     git(remote, ['symbolic-ref', 'HEAD', 'refs/heads/main']);
 
+    const realGit = execFileSync('which', ['git'], { encoding: 'utf8' }).trim();
+    writeFileSync(gitWrapper, `#!/bin/sh
+if [ "\${1:-}" = "-C" ] && [ "\${3:-}" = "push" ] && [ ! -e "$ARTICLE_PUSH_TEST_PUSH_MARKER" ]; then
+  "$REAL_GIT" "$@"
+  push_rc=$?
+  if [ "$push_rc" -eq 0 ]; then
+    : > "$ARTICLE_PUSH_TEST_PUSH_MARKER"
+    exit 1
+  fi
+  exit "$push_rc"
+fi
+exec "$REAL_GIT" "$@"
+`);
+    chmodSync(gitWrapper, 0o755);
+
     const env = {
       ...process.env,
+      PATH: `${gitBin}:${process.env.PATH}`,
+      REAL_GIT: realGit,
+      ARTICLE_PUSH_TEST_PUSH_MARKER: pushMarker,
       RUNNER_TEMP: runnerTemp,
       SHARD_REPO_OVERRIDE: remote,
       SHARD_ARTICOLIFRONTALIERE_IT_DEPLOY_KEY: 'unused-for-file-remote',
@@ -123,6 +146,8 @@ test('serializza un push corpus-sized in commit bounded senza perdere path', () 
     });
 
     assert.match(output, /serializing 2 path\(s\) in batches of 1/u);
+    assert.match(output, /retry found the prior ambiguous push already at the remote tree/u);
+    assert.match(output, /Pages build wait skipped for non-GitHub remote/u);
     assert.match(output, /pushed/u);
     assert.equal(readFileSync(statusFile, 'utf8'), 'pushed\n');
     for (const rel of relpaths) {

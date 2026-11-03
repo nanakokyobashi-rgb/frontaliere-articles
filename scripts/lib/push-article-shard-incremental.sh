@@ -288,6 +288,7 @@ permanent_fail=0
 last_commit=''
 last_commit_parent=''
 last_push_status=''
+last_push_ambiguous=0
 last_skipped_newer_count=0
 last_skipped_newer_names=''
 last_skipped_newer_paths=()
@@ -1286,7 +1287,22 @@ _attempt() {
   # shellcheck disable=SC1083  # HEAD^{tree} is git rev-parse syntax, not a shell brace expansion
   head_tree="$(git -C "$stage" rev-parse HEAD^{tree})"
   if [ "$new_tree" = "$head_tree" ]; then
-    if [ "$last_skipped_newer_count" -gt 0 ]; then
+    if [ "$last_push_ambiguous" = 1 ]; then
+      echo "ℹ️ $section-$loc article shard: retry found the prior ambiguous push already at the remote tree; waiting for Pages on $last_commit"
+      if ! wait_for_pages_build "$last_commit"; then
+        echo "::error::$section-$loc article shard: Pages did not complete for ambiguously pushed commit $last_commit; refusing a concurrent retry" >&2
+        if [ "${ARTICLE_PUSH_BATCHED:-0}" != '1' ]; then
+          if reconcile_failed_publication "$last_commit_parent" "$last_commit" && write_fallback_state safe; then
+            echo "ℹ️ $section-$loc article shard: reconciled the ambiguous push before the caller fallback" >&2
+          else
+            echo "::error::$section-$loc article shard: could not reconcile the ambiguous push; refusing an article-only fallback" >&2
+          fi
+        fi
+        permanent_fail=1
+        return 1
+      fi
+      last_push_status='pushed'
+    elif [ "$last_skipped_newer_count" -gt 0 ]; then
       echo "$section-$loc article shard: remote newer publication kept — no content changes vs remote; no local paths eligible for push ($last_skipped_newer_count skipped)"
       last_push_status='remote-newer'
     else
@@ -1343,6 +1359,7 @@ _attempt() {
     last_push_status='pushed'
     return 0
   fi
+  last_push_ambiguous=1
   return 1
 }
 
