@@ -72,6 +72,9 @@ const blogMetaCantonLuFr: Record<string, string> = {
     'blog.article.lukb-utile-nove-mesi.title': 'Banque cantonale de Lucerne : bénéfice en hausse de 8,7 % sur neuf mois',
     'blog.article.lukb-utile-nove-mesi.excerpt': 'La LUKB enregistre un bénéfice de 223,3 millions de francs au cours des neuf premiers mois.',
     'blog.article.lukb-utile-nove-mesi.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.centro-sicurezza-rothenburg.title': 'Votation sur le crédit pour le nouveau centre de sécurité à Rothenburg',
+    'blog.article.centro-sicurezza-rothenburg.excerpt': 'L\'électorat lucernois votera à la fin du mois sur le crédit de 276 millions de CHF pour le centre de sécurité.',
+    'blog.article.centro-sicurezza-rothenburg.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonLuFr;

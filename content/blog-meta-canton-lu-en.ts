@@ -72,6 +72,9 @@ const blogMetaCantonLuEn: Record<string, string> = {
     'blog.article.lukb-utile-nove-mesi.title': 'Lucerne Cantonal Bank: profit +8,7% in nine months',
     'blog.article.lukb-utile-nove-mesi.excerpt': 'LUKB records 223,3 million francs in profit in the first nine months.',
     'blog.article.lukb-utile-nove-mesi.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.centro-sicurezza-rothenburg.title': 'Credit vote for new security center in Rothenburg',
+    'blog.article.centro-sicurezza-rothenburg.excerpt': 'The Lucerne electorate will vote at the end of the month on the CHF 276 million credit for the security centre.',
+    'blog.article.centro-sicurezza-rothenburg.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonLuEn;

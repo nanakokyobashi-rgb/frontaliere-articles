@@ -260,4 +260,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'centro-sicurezza-rothenburg',
+ category: 'novita',
+ date: '2026-11-03T00:11:08.711Z',
+ image: '/images/blog/article-centro-sicurezza-rothenburg.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['LU'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

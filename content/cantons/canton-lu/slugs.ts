@@ -26,6 +26,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'tunnel-sonnenberg-chiusura-notte': { it: 'tunnel-sonnenberg-chiusura-notte', en: 'sonnenberg-tunnel-night-closure', de: 'sonnenberg-tunnel-nachtschliessung', fr: 'tunnel-sonnenberg-fermeture-nuit' },
  'kanti-rektor-draht-universitaet': { it: 'kanti-rektor-draht-universitaet', en: 'kanti-rector-university-link', de: 'kanti-rektor-universitaet-draht', fr: 'kanti-recteur-lien-universite' },
  'lukb-utile-nove-mesi': { it: 'lukb-utile-nove-mesi', en: 'lucerne-cantonal-bank-profit-nine-months', de: 'luzerner-kantonalbank-gewinn-neun-monate', fr: 'banque-cantonale-lucerne-benefice-neuf-mois' },
+ 'centro-sicurezza-rothenburg': { it: 'centro-sicurezza-rothenburg', en: 'rothenburg-security-center', de: 'sicherheitszentrum-rothenburg', fr: 'centre-securite-rothenburg' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

@@ -72,6 +72,9 @@ const blogMetaCantonLuIt: Record<string, string> = {
     'blog.article.lukb-utile-nove-mesi.title': 'Banca cantonale di Lucerna: utile +8,7% in nove mesi',
     'blog.article.lukb-utile-nove-mesi.excerpt': 'La LUKB registra 223,3 milioni di franchi di utile nei primi nove mesi.',
     'blog.article.lukb-utile-nove-mesi.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.centro-sicurezza-rothenburg.title': 'Votazione credito per nuovo centro di sicurezza a Rothenburg',
+    'blog.article.centro-sicurezza-rothenburg.excerpt': 'L\'elettorato lucernese voterà alla fine del mese sul credito di 276 milioni di CHF per il centro di sicurezza.',
+    'blog.article.centro-sicurezza-rothenburg.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonLuIt;

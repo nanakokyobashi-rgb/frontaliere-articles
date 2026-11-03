@@ -72,6 +72,9 @@ const blogMetaCantonLuDe: Record<string, string> = {
     'blog.article.lukb-utile-nove-mesi.title': 'Luzerner Kantonalbank: Gewinn +8,7% in neun Monaten',
     'blog.article.lukb-utile-nove-mesi.excerpt': 'Die LUKB verzeichnet in den ersten neun Monaten einen Gewinn von 223,3 Millionen Franken.',
     'blog.article.lukb-utile-nove-mesi.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.centro-sicurezza-rothenburg.title': 'Abstimmung über den Kredit für ein neues Sicherheitszentrum in Rothenburg',
+    'blog.article.centro-sicurezza-rothenburg.excerpt': 'Die Luzerner Stimmberechtigten werden Ende des Monats über den Kredit von 276 Millionen CHF für das Sicherheitszentrum abstimmen.',
+    'blog.article.centro-sicurezza-rothenburg.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonLuDe;
