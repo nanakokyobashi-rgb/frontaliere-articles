@@ -78,6 +78,9 @@ const blogMetaCantonAppenzelloIt: Record<string, string> = {
     'blog.article.caldo-appenzello-esterno-2026.title': 'Appenzello Esterno: più giorni caldi nel 2026',
     'blog.article.caldo-appenzello-esterno-2026.excerpt': 'Estate 2026: più giorni caldi nei siti esaminati Nel 2026 sono state rilevate più notti tropicali Altitudine e raffrescamento notturno riducono il caldo',
     'blog.article.caldo-appenzello-esterno-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.tariffe-mediche-appenzello-2026.title': 'Appenzello: approvate le tariffe mediche per il 2026',
+    'blog.article.tariffe-mediche-appenzello-2026.excerpt': 'La Standeskommission fissa il valore del punto tariffario a 0,86 CHF per le prestazioni ambulatoriali con effetto retroattivo dal 1° gennaio 2026.',
+    'blog.article.tariffe-mediche-appenzello-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonAppenzelloIt;

@@ -78,6 +78,9 @@ const blogMetaCantonAppenzelloFr: Record<string, string> = {
     'blog.article.caldo-appenzello-esterno-2026.title': 'Appenzell Rhodes-Extérieures : davantage de jours chauds en 2026',
     'blog.article.caldo-appenzello-esterno-2026.excerpt': 'Été 2026 : davantage de jours chauds sur les sites examinés En 2026, davantage de nuits tropicales ont été relevées L’altitude et le rafraîchissement nocturne',
     'blog.article.caldo-appenzello-esterno-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.tariffe-mediche-appenzello-2026.title': 'Appenzell : tarifs médicaux approuvés pour 2026',
+    'blog.article.tariffe-mediche-appenzello-2026.excerpt': 'La Standeskommission fixe la valeur en points tarifaires à 0,86 CHF pour les services ambulatoires avec effet rétroactif à compter du 1er janvier 2026.',
+    'blog.article.tariffe-mediche-appenzello-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonAppenzelloFr;

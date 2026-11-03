@@ -282,4 +282,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'tariffe-mediche-appenzello-2026',
+ category: 'novita',
+ date: '2026-11-03T10:02:49.152Z',
+ image: '/images/blog/article-tariffe-mediche-appenzello-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['APPENZELLO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

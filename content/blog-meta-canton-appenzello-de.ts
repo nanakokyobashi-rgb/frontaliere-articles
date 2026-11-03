@@ -78,6 +78,9 @@ const blogMetaCantonAppenzelloDe: Record<string, string> = {
     'blog.article.caldo-appenzello-esterno-2026.title': 'Appenzell Ausserrhoden: mehr heiße Tage im Jahr 2026',
     'blog.article.caldo-appenzello-esterno-2026.excerpt': 'Sommer 2026: mehr heiße Tage an den untersuchten Standorten Im Jahr 2026 wurden mehr Tropennächte festgestellt Höhenlage und nächtliche Abkühlung verringern',
     'blog.article.caldo-appenzello-esterno-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.tariffe-mediche-appenzello-2026.title': 'Appenzell: Medizinische Tarife für 2026 genehmigt',
+    'blog.article.tariffe-mediche-appenzello-2026.excerpt': 'Die Standeskommission legt den Wert des Tarifpunktes für ambulante Leistungen rückwirkend ab dem 1.',
+    'blog.article.tariffe-mediche-appenzello-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonAppenzelloDe;

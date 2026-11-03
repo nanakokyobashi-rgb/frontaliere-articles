@@ -78,6 +78,9 @@ const blogMetaCantonAppenzelloEn: Record<string, string> = {
     'blog.article.caldo-appenzello-esterno-2026.title': 'Appenzell Ausserrhoden: more hot days in 2026',
     'blog.article.caldo-appenzello-esterno-2026.excerpt': 'Summer 2026: more hot days at the sites examined More tropical nights were recorded in 2026 Altitude and nighttime cooling reduce prolonged heat The Health',
     'blog.article.caldo-appenzello-esterno-2026.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.tariffe-mediche-appenzello-2026.title': 'Appenzell: medical fees approved for 2026',
+    'blog.article.tariffe-mediche-appenzello-2026.excerpt': 'The Standeskommission sets the tariff point value at 0,86 CHF for outpatient services, retroactive to January 1, 2026.',
+    'blog.article.tariffe-mediche-appenzello-2026.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonAppenzelloEn;
