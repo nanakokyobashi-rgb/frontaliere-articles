@@ -30142,6 +30142,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'cdf-critica-armasuisse-immobili',
+    category: 'fiscale',
+    date: '2026-11-03T20:13:28.719Z',
+    image: '/images/blog/article-cdf-critica-armasuisse-immobili.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

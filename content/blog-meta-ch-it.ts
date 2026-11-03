@@ -8675,6 +8675,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.voto-iva-13esima-avs-novembre.title': '13esima AVS: il 29 novembre si vota sull\'aumento IVA',
     'blog.article.voto-iva-13esima-avs-novembre.excerpt': 'Il 29 novembre si vota sul finanziamento della 13esima AVS L\'IVA ordinaria salirebbe dall\'8,1% all\'8,5% L\'aliquota alberghiera passerebbe dal 3,8% al 4%',
     'blog.article.voto-iva-13esima-avs-novembre.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.cdf-critica-armasuisse-immobili.title': 'CDF critica Armasuisse Immobili per ritardi nei risanamenti',
+    'blog.article.cdf-critica-armasuisse-immobili.excerpt': 'Il CDF critica la gestione di Armasuisse Immobili Oltre 34% dei costi di risanamento a fine 2025 Arretrati al 40% entro il 2030 secondo proiezioni interne',
+    'blog.article.cdf-critica-armasuisse-immobili.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaChIt;

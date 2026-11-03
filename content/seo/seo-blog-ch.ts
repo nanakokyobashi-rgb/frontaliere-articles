@@ -109661,6 +109661,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-cdf-critica-armasuisse-immobili': {
+    title: 'CDF critica Armasuisse Immobili per ritardi nei risanamenti',
+    description: 'Il CDF critica la gestione di Armasuisse Immobili Oltre 34% dei costi di risanamento a fine 2025 Arretrati al 40% entro il 2030 secondo proiezioni',
+    keywords: 'frontalieri, ticino, svizzera, italia, critica, armasuisse, immobili, ritardi',
+    ogTitle: 'CDF critica gestione immobiliare Armasuisse Immobili',
+    ogDescription: 'Il CDF critica la gestione di Armasuisse Immobili Oltre 34% dei costi di risanamento a fine 2025 Arretrati al 40% entro il 2030 secondo proiezioni interne',
+    canonicalPath: '/articoli-svizzera/cdf-critica-armasuisse-immobili/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "CDF critica Armasuisse Immobili per ritardi nei risanamenti",
+      "description": "Il CDF critica la gestione di Armasuisse Immobili Oltre 34% dei costi di risanamento a fine 2025 Arretrati al 40% entro il 2030 secondo proiezioni",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-cdf-critica-armasuisse-immobili.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-03T20:13:29+00:00",
+      "dateModified": "2026-11-03T20:13:29+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/cdf-critica-armasuisse-immobili/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
