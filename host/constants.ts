@@ -193,10 +193,15 @@ export const ADSENSE_CLIENT_ID = 'ca-pub-8628054934855353';
 
 export const ADSENSE_LOADER_FILENAME = 'adsense-loader-e06cff46e67d.js';
 
-export const AD_RECOVERY_FILENAME = 'site-support-d3061c0f20b1.js';
+export const AD_RECOVERY_FILENAME = 'site-support-cd373e27a40e.js';
 export const AD_RECOVERY_SNIPPET = `<script defer data-cfasync="false" src="/assets/${AD_RECOVERY_FILENAME}"></script>`;
 
 export const ADSENSE_LAZY_LOADER = `<script defer src="/assets/${ADSENSE_LOADER_FILENAME}"></script>`;
+
+export const META_PIXEL_LOADER_FILENAME = 'meta-pixel-base-code-b5078da79aec.js';
+export const META_PIXEL_SNIPPET = `<!-- Meta Pixel Code -->
+<script defer src="/assets/${META_PIXEL_LOADER_FILENAME}"></script>
+<!-- End Meta Pixel Code -->`;
 
 /**
  * Publisher id (no `ca-` prefix) for the Funding Choices endpoints, derived

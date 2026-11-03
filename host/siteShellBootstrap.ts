@@ -5,7 +5,7 @@ import './cantonSectionsBootstrap.mjs';
  *
  * WHY THIS EXISTS (issue #4974 item 3, migration §10.4 step 3)
  * ───────────────────────────────────────────────────────────
- * `engine/` reads every one of the contract's 37 fields through
+ * `engine/` reads every one of the contract's 45 fields through
  * `getSiteShell()`, and until now nothing in this repository ever called
  * `configureSiteShell()`. The engine files were here, but they could not RUN
  * here — `getSiteShell()` throws when unconfigured. The migration doc's §10.3
@@ -44,6 +44,7 @@ import {
   BASE_URL,
   GTAG_SNIPPET,
   ADSENSE_SNIPPET,
+  META_PIXEL_SNIPPET,
   PARTNERIZE_TAG_SNIPPET,
   OFFERWALL_FC_SNIPPET,
   FAVICON_LINKS,
@@ -89,10 +90,13 @@ import {
 } from './blogContextualLinksData';
 import { configureSiteShell, type SiteShellContract } from '../engine/siteShell';
 
-const contract: SiteShellContract = {
+// Keep the new snippet available before the automatic engine mirror adds the
+// optional member to SiteShellContract in this repository.
+const contract: SiteShellContract & { metaPixelSnippet: string } = {
   baseUrl: BASE_URL,
   gtagSnippet: GTAG_SNIPPET,
   adsenseSnippet: ADSENSE_SNIPPET,
+  metaPixelSnippet: META_PIXEL_SNIPPET,
   partnerizeTagSnippet: PARTNERIZE_TAG_SNIPPET,
   offerwallFcSnippet: OFFERWALL_FC_SNIPPET,
   faviconLinks: FAVICON_LINKS,

@@ -92,11 +92,12 @@ test('ogni file della shell che host/ porta ha il nome derivato dal proprio cont
 
 test('the publisher rejects incomplete, renamed, duplicate or malformed snapshots before ensure', async () => {
   const snapshot = JSON.parse(read('host/third-party-shell-assets.json'));
-  const [ads, partnerize] = snapshot.assets;
+  const [recovery, ads, partnerize, pixel] = snapshot.assets;
   const invalid = [
     null, {}, { ...snapshot, assets: null }, { ...snapshot, assets: {} },
     { ...snapshot, assets: [] },
-    { ...snapshot, assets: [ads] }, { ...snapshot, assets: [partnerize] },
+    { ...snapshot, assets: [recovery] }, { ...snapshot, assets: [ads] },
+    { ...snapshot, assets: [partnerize] }, { ...snapshot, assets: [pixel] },
     { ...snapshot, assets: [ads, ads] }, { ...snapshot, assets: [ads, partnerize, ads] },
     { ...snapshot, assets: [null, partnerize] },
     { ...snapshot, assets: [{ ...ads, name: 'wrong-' + ads.sha256.slice(0, 12) + '.js' }, partnerize] },
@@ -114,7 +115,7 @@ test('the publisher rejects incomplete, renamed, duplicate or malformed snapshot
   assert.equal(ensures, 0, 'invalid input must stop before network availability/upload checks');
 });
 
-test('the exact three required assets are accepted in either order', () => {
+test('the exact four required assets are accepted in either order', () => {
   const snapshot = JSON.parse(read('host/third-party-shell-assets.json'));
   const expected = hostShellFiles().map(([name]) => name).sort();
   for (const assets of [snapshot.assets, [...snapshot.assets].reverse()]) {
@@ -351,14 +352,18 @@ test('ogni job che rende pagine carica i secret di Remote Config prima del passo
 });
 
 // The implicit producer/helper dependency must invalidate the transported bytes.
-test('recovery/Ads/Partnerize snapshots match the shared source fingerprint and reject signed startup', () => {
+test('recovery/Ads/Partnerize/Meta Pixel snapshots match the shared source fingerprint and reject signed startup', () => {
   const snapshot = JSON.parse(read('host/third-party-shell-assets.json'));
   const fingerprint = JSON.parse(read('host/third-party-shell-assets-fingerprint.json'));
   assert.deepEqual({ ...snapshot, initialDocumentGuard: { sha256: snapshot.initialDocumentGuard.sha256 }, assets: snapshot.assets.map(({ content: _content, ...asset }) => asset) }, fingerprint);
   assert.equal(createHash('sha256').update(snapshot.initialDocumentGuard.content).digest('hex'), snapshot.initialDocumentGuard.sha256);
   assert.equal(snapshot.source.sanitizerSha256, createHash('sha256').update(read('host/analyticsUrlPrivacy.js')).digest('hex'));
   for (const { content } of snapshot.assets) {
-    const window = { location: { href: 'https://frontaliereticino.ch/?ac=synthetic-code&ne=candidate%40example.test&utm_source=email' } };
+    const window = {
+      location: { hostname: 'frontaliereticino.ch', href: 'https://frontaliereticino.ch/?ac=synthetic-code&ne=candidate%40example.test&utm_source=email' },
+      __ftAdsConsentDecision: 'granted',
+      addEventListener() {},
+    };
     const document = new Proxy({ referrer: '' }, { get(target, key) {
       if (key === 'referrer') return target.referrer;
       throw new Error('A third-party SDK accessed the DOM before privacy suppression');
