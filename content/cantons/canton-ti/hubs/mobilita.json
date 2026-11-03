@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "mobilita",
-  "updatedAt": "2026-11-03T10:06:57.473Z",
-  "contentHash": "c75e789a5f87a18bde108e140c5c622d5c7486efa04a3f75c84983ed79123108",
+  "updatedAt": "2026-11-03T11:09:08.199Z",
+  "contentHash": "71a28b36ae2c76bc06507fc6784aae21442e2ee9082a9cb0f5b8636c4f90e456",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -202,6 +202,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Uscita Svizzera da Schengen: rischio controlli e attese ai confini",
+          "url": "/articoli-ticino/svizzera-uscita-schengen-controlli/",
+          "excerpt": "Rapporto federale pubblicato il 18 settembre 2026 Ipotesi: uscita della Svizzera da Schengen e Dublino Controlli sistematici e attese più lunghe ai confini",
+          "date": "2026-11-03T11:01:16.866Z"
+        },
+        {
           "title": "Frontalieri, cosa succederebbe senza Schengen?",
           "url": "/articoli-ticino/rapporto-consiglio-federale-schengen/",
           "excerpt": "Rapporto federale pubblicato il 18 settembre 2026 Senza Schengen: controlli sistematici alle frontiere Ticino tra le regioni più esposte nello scenario Fino",
@@ -242,12 +248,6 @@
           "url": "/articoli-frontaliere/semafori-cadenazzo-traffico/",
           "excerpt": "Il Consiglio federale risponde sui semafori a Cadenazzo: efficacia del traffico tra Bellinzona e Locarno attesa a fine 2027.",
           "date": "2026-09-23T01:21:51.666Z"
-        },
-        {
-          "title": "Mendrisio-Melano, progetto MeMe per ridurre il rumore dell'autostrada",
-          "url": "/articoli-frontaliere/mendrisio-melano-progetto-meme-risanamento-fonico/",
-          "excerpt": "L'Ufficio federale delle strade (USTRA) ha pubblicato il disegno per il progetto MeMe, un piano di risanamento globale per il tratto dell'autostrada A2 tra Mendrisio e Melano.",
-          "date": "2026-09-15T02:42:05.181Z"
         }
       ],
       "latestCantonArticles": [],
@@ -293,7 +293,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-03T11:09:08.199Z"
     },
     "en": {
       "canton": "TI",
@@ -473,6 +473,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Switzerland’s exit from Schengen: risk of checks and delays at the borders",
+          "url": "/en/ticino-articles/switzerland-schengen-exit-controls/",
+          "excerpt": "Federal report published on 18 September 2026 Hypothesis: Switzerland’s withdrawal from Schengen and Dublin Systematic checks and longer waits at the borders",
+          "date": "2026-11-03T11:01:16.866Z"
+        },
+        {
           "title": "Cross-border workers, what would happen without Schengen?",
           "url": "/en/ticino-articles/federal-council-schengen-report/",
           "excerpt": "Federal report published on September 18, 2026 Without Schengen: systematic border controls Ticino among the regions most exposed in the Fino scenario",
@@ -512,12 +518,6 @@
           "url": "/en/cross-border-articles/cadenazzo-traffic-lights/",
           "excerpt": "The Federal Council responds to the traffic lights in Cadenazzo: effective traffic between Bellinzona and Locarno expected at the end of 2027.",
           "date": "2026-09-23T01:21:51.666Z"
-        },
-        {
-          "title": "Mendrisio-Melano, MeMe project to reduce highway noise",
-          "url": "/en/cross-border-articles/mendrisio-melano-meme-project-noise-reduction/",
-          "excerpt": "The Federal Office of Roads (USTRA) has published the design for the MeMe project, a comprehensive rehabilitation plan for the stretch of the A2 motorway between Mendrisio and Melano.",
-          "date": "2026-09-15T02:42:05.181Z"
         }
       ],
       "latestCantonArticles": [],
@@ -563,7 +563,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-03T11:09:08.199Z"
     },
     "de": {
       "canton": "TI",
@@ -743,6 +743,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Austritt der Schweiz aus Schengen: Risiko von Kontrollen und Wartezeiten an den Grenzen",
+          "url": "/de/tessin-artikel/schweiz-schengen-ausstieg-kontrollen/",
+          "excerpt": "Am 18. September 2026 veröffentlichter Bundesbericht Hypothese: Austritt der Schweiz aus Schengen und Dublin Systematische Kontrollen und längere Wartezeiten an den Grenzen",
+          "date": "2026-11-03T11:01:16.866Z"
+        },
+        {
           "title": "Grenzgänger, was würde ohne Schengen geschehen?",
           "url": "/de/tessin-artikel/bundesrat-schengen-bericht/",
           "excerpt": "Am 18. September 2026 veröffentlichter Bundesbericht Ohne Schengen: systematische Kontrollen an den Grenzen Tessin unter den am stärksten betroffenen Regionen im Szenario Bis zu",
@@ -782,12 +788,6 @@
           "url": "/de/grenzgaenger-artikel/cadenazzo-ampeln-verkehr/",
           "excerpt": "Der Bundesrat antwortet an den Ampeln in Cadenazzo: Ende 2027 erwartete Verkehrseffizienz zwischen Bellinzona und Locarno.",
           "date": "2026-09-23T01:21:51.666Z"
-        },
-        {
-          "title": "Mendrisio-Melano, MeMe-Projekt zur Reduzierung des Autobahnlärms",
-          "url": "/de/grenzgaenger-artikel/mendrisio-melano-meme-projekt-larmreduzierung/",
-          "excerpt": "Das Bundesamt für Strassen (Astra) hat den Entwurf für das Projekt MeMe, einen umfassenden Sanierungsplan für den Autobahnabschnitt A2 zwischen Mendrisio und Melano, veröffentlicht.",
-          "date": "2026-09-15T02:42:05.181Z"
         }
       ],
       "latestCantonArticles": [],
@@ -833,7 +833,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-03T11:09:08.199Z"
     },
     "fr": {
       "canton": "TI",
@@ -1013,6 +1013,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Sortie Suisse de Schengen: risques de contrôles aux frontières",
+          "url": "/fr/articles-tessin/suisse-sortie-schengen-controles/",
+          "excerpt": "Rapport fédéral publié le 18 septembre 2026 Hypothèse : sortie de la Suisse de Schengen et de Dublin Contrôles systématiques et attentes plus longues aux frontières",
+          "date": "2026-11-03T11:01:16.866Z"
+        },
+        {
           "title": "Frontaliers, que se passerait-il sans Schengen ?",
           "url": "/fr/articles-tessin/rapport-conseil-federal-schengen/",
           "excerpt": "Rapport fédéral publié le 18 septembre 2026 Sans Schengen : contrôles systématiques aux frontières Le Tessin parmi les régions les plus exposées dans le scénario Jusqu'à",
@@ -1053,12 +1059,6 @@
           "url": "/fr/articles-frontalier/feux-cadenazzo-trafic/",
           "excerpt": "Le Conseil fédéral répond aux feux à Cadenazzo : efficacité du trafic entre Bellinzone et Locarno attendue fin 2027.",
           "date": "2026-09-23T01:21:51.666Z"
-        },
-        {
-          "title": "Mendrisio-Melano, projet MeMe pour réduire le bruit de l'autoroute",
-          "url": "/fr/articles-frontalier/mendrisio-melano-projet-meme-reduction-bruit/",
-          "excerpt": "L'Office fédéral des routes (OFROU) a publié le dessin pour le projet MeMe, un plan d'assainissement global pour le tronçon de l'autoroute A2 entre Mendrisio et Melano.",
-          "date": "2026-09-15T02:42:05.181Z"
         }
       ],
       "latestCantonArticles": [],
@@ -1104,7 +1104,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-03T11:09:08.199Z"
     }
   }
 }
