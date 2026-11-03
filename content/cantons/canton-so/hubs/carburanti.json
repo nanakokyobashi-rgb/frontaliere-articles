@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "carburanti",
-  "updatedAt": "2026-11-02T09:20:10.429Z",
-  "contentHash": "df79366efda8e5b39baa0c0879e49ec309201faed04dd66657cb56efe746b5f8",
+  "updatedAt": "2026-11-03T09:04:23.962Z",
+  "contentHash": "fada593221b26b70cebb3f4f16f4818e25fcb9676b0da2104ee6da88d5b393da",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -60,6 +60,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Canton Soletta: aumento salariale dell'1% dal 2027",
+          "url": "/articoli-soletta/aumento-salari-soletta-2027/",
+          "excerpt": "Dal 2027 il personale statale, i docenti e i dipendenti della Solothurner Spitäler AG riceveranno un adeguamento salariale dell'1,0%.",
+          "date": "2026-11-03T09:00:18.121Z"
+        },
+        {
           "title": "Stipendi pubblici a Soletta: +1,0% dal 2027",
           "url": "/articoli-soletta/soletta-stipendi-pubblici-2027/",
           "excerpt": "A Soletta il personale statale, gli insegnanti e i dipendenti degli ospedali riceveranno l'1,0% in più dal 2027 dopo l'accordo sull'inflazione.",
@@ -82,12 +88,6 @@
           "url": "/articoli-soletta/aumento-salari-statale-2027/",
           "excerpt": "L'accordo tra Regierungsrat e associazioni del personale prevede un aumento dell'1,0% per personale statale, docenti e dipendenti ospedalieri a partire dal 2027.",
           "date": "2026-10-27T13:05:27.562Z"
-        },
-        {
-          "title": "Soletta: salari aumentano dell'1,0% dal prossimo anno",
-          "url": "/articoli-soletta/soletta-aumento-salari/",
-          "excerpt": "Il Governo cantonale e le associazioni del personale hanno concordato un aumento dell'1,0% dal prossimo anno per dipendenti pubblici, scuole e ospedali.",
-          "date": "2026-10-27T12:43:48.858Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T09:04:23.962Z"
     },
     "en": {
       "canton": "SO",
@@ -147,6 +147,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Canton Solothurn: 1% salary increase from 2027",
+          "url": "/en/solothurn-articles/salary-increase-solothurn-2027/",
+          "excerpt": "From 2027, state employees, teachers and employees of Solothurner Spitäler AG will receive a 1.0% salary adjustment.",
+          "date": "2026-11-03T09:00:18.121Z"
+        },
+        {
           "title": "Public-sector salaries in Solothurn: +1,0% from 2027",
           "url": "/en/solothurn-articles/solothurn-public-wages-2027/",
           "excerpt": "In Solothurn, state employees, teachers and hospital employees will receive 1,0% more from 2027 following the inflation agreement.",
@@ -169,12 +175,6 @@
           "url": "/en/solothurn-articles/solothurn-state-salary-increase-2027/",
           "excerpt": "The agreement between Regierungsrat and staff associations provides for a 1.0% increase for state employees, teachers and hospital employees starting in 2027.",
           "date": "2026-10-27T13:05:27.562Z"
-        },
-        {
-          "title": "Solothurn: salaries increase by 1,0% starting next year",
-          "url": "/en/solothurn-articles/solothurn-wage-increase/",
-          "excerpt": "The cantonal government and staff associations have agreed on a 1,0% increase from next year for public employees, schools and hospitals.",
-          "date": "2026-10-27T12:43:48.858Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T09:04:23.962Z"
     },
     "de": {
       "canton": "SO",
@@ -234,6 +234,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Kanton Solothurn: Lohnerhöhung von 1% ab 2027",
+          "url": "/de/solothurn-artikel/lohnerhoehung-solothurn-2027/",
+          "excerpt": "Ab 2027 erhalten das Staatspersonal, die Lehrpersonen und die Angestellten der Solothurner Spitäler AG eine Lohnanpassung von 1,0%.",
+          "date": "2026-11-03T09:00:18.121Z"
+        },
+        {
           "title": "Löhne im öffentlichen Dienst in Solothurn: +1,0% ab 2027",
           "url": "/de/solothurn-artikel/solothurn-staatsloehne-2027/",
           "excerpt": "In Solothurn erhalten das Staatspersonal, die Lehrpersonen und die Spitalangestellten ab 2027 nach der Einigung über die Inflation 1,0% mehr.",
@@ -256,12 +262,6 @@
           "url": "/de/solothurn-artikel/loehner-anstieg-staatlich-2027/",
           "excerpt": "Die Vereinbarung zwischen dem Regierungsrat und den Personalverbänden sieht ab 2027 eine Lohnerhöhung von 1,0% für das Staatspersonal, die Lehrpersonen und die Spitalangestellten vor.",
           "date": "2026-10-27T13:05:27.562Z"
-        },
-        {
-          "title": "Solothurn: Löhne steigen ab dem kommenden Jahr um 1,0%",
-          "url": "/de/solothurn-artikel/solothurn-lohnerhoehung/",
-          "excerpt": "Die Kantonsregierung und die Personalverbände haben für Angestellte des öffentlichen Dienstes, Schulen und Spitäler ab dem kommenden Jahr eine Erhöhung um 1,0% vereinbart.",
-          "date": "2026-10-27T12:43:48.858Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T09:04:23.962Z"
     },
     "fr": {
       "canton": "SO",
@@ -321,6 +321,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Canton de Soleure : augmentation salariale de 1 % à partir de 2027",
+          "url": "/fr/articles-soleure/augmentation-salaire-soleure-2027/",
+          "excerpt": "À partir de 2027, le personnel de l'État, les enseignants et les employés de la Solothurner Spitäler AG bénéficieront d'une adaptation salariale de 1,0 %.",
+          "date": "2026-11-03T09:00:18.121Z"
+        },
+        {
           "title": "Salaires publics à Soleure : +1,0% dès 2027",
           "url": "/fr/articles-soleure/salaires-publics-soleure-2027/",
           "excerpt": "À Soleure, le personnel de l'État, les enseignants et les employés des hôpitaux recevront 1,0% de plus à partir de 2027 après l'accord sur l'inflation.",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-soleure/augmentation-salaire-etat-2027/",
           "excerpt": "L’accord entre Regierungsrat et les associations du personnel prévoit une augmentation de 1,0% pour le personnel de l’État, les enseignants et le personnel hospitalier à partir de 2027.",
           "date": "2026-10-27T13:05:27.562Z"
-        },
-        {
-          "title": "Soleure : les salaires augmentent de 1,0 % dès l’année prochaine",
-          "url": "/fr/articles-soleure/soleure-hausse-salaires/",
-          "excerpt": "Le Gouvernement cantonal et les associations du personnel ont convenu d’une augmentation de 1,0 % dès l’année prochaine pour les employés publics, les écoles et les hôpitaux.",
-          "date": "2026-10-27T12:43:48.858Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T09:04:23.962Z"
     }
   }
 }
