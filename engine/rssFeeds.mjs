@@ -293,9 +293,14 @@ function parseSeoBlogs(fs, path, rootDir, seoDir, seoFiles) {
         : authorType === 'Person'
           ? Boolean(authorId?.includes('#person') || authorUrl?.includes('/autori/'))
           : false;
-      const authorName = isNamedAuthor
+      const namedAuthor = isNamedAuthor
         ? lastStaticPropertyValue(authorBlock ?? '', 'name') ?? ''
         : '';
+      // A profile Organization is a newsroom signature, not a person: the feed
+      // reader has no profile page to open, so the attribution has to say so.
+      const authorName = authorType === 'Organization' && namedAuthor && !namedAuthor.startsWith('Redazione')
+        ? `${namedAuthor} (Redazione Frontaliere Ticino)`
+        : namedAuthor;
 
       // An item needs a REAL date: `<pubDate>` and the newest-first sort are
       // built from it, and `new Date('garbage').toUTCString()` is the literal
@@ -544,7 +549,7 @@ ${itemsXml}
 /**
  * Build every RSS feed for one section.
  *
- * Returns `{ id, articleCount, withdrawnArticleCount, slugCount, feeds }` where `feeds` is an ordered
+ * Returns `{ id, articleCount, slugCount, feeds }` where `feeds` is an ordered
  * `[filename, xml]` list — the caller decides where the bytes land (public/ in
  * the site, dist/api/ in the publisher). Nothing is written here.
  *
@@ -580,7 +585,7 @@ export function buildSectionFeeds({ fs, path, rootDir, section, registry = [], l
     section.slugConst,
   );
   if (articles.size === 0) {
-    return { id: section.id, articleCount: 0, withdrawnArticleCount: 0, slugCount: slugs.size, feeds: [] };
+    return { id: section.id, articleCount: 0, slugCount: slugs.size, feeds: [] };
   }
 
   // `Article.image` is already absolute for blog heroes (the registry maps them
@@ -622,9 +627,6 @@ export function buildSectionFeeds({ fs, path, rootDir, section, registry = [], l
     fs,
     ARTICLE_INDEX_EXCLUSIONS_FILES.map((candidate) => path.join(rootDir, candidate)),
   );
-  const withdrawnArticleCount = [...articles.keys()].filter((id) =>
-    withdrawn.has(articleIndexExclusionKey(section.id, id)),
-  ).length;
   const feedArticles = unknownDateIds.size || withdrawn.size
     ? new Map([...articles].filter(([id]) => (
       !unknownDateIds.has(id) && !withdrawn.has(articleIndexExclusionKey(section.id, id))
@@ -646,13 +648,7 @@ export function buildSectionFeeds({ fs, path, rootDir, section, registry = [], l
     if (locale === 'it') feeds.push([section.mainFeed, xml]);
   }
 
-  return {
-    id: section.id,
-    articleCount: feedArticles.size,
-    withdrawnArticleCount,
-    slugCount: slugs.size,
-    feeds,
-  };
+  return { id: section.id, articleCount: articles.size, slugCount: slugs.size, feeds };
 }
 
 /**

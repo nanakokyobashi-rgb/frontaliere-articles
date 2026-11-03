@@ -26,7 +26,7 @@ export const ARTICLE_INDEX_EXCLUSIONS_FILES = Object.freeze([
 ]);
 
 // Canton pages are an always-indexable contract surface. A ledger entry for a
-// canton is therefore invalid rather than a silently ignored noindex request.
+// canton is invalid rather than a silently ignored noindex request.
 export const ARTICLE_INDEX_EXCLUSION_SECTIONS = Object.freeze(['frontaliere', 'svizzera']);
 
 export const articleIndexExclusionKey = (section, articleId) => `${section}|${articleId}`;

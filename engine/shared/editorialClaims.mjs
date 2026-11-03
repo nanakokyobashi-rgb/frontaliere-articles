@@ -396,13 +396,26 @@ function hasPromptEcho(sentence, locale) {
 }
 
 /** Etichette del prompt tradotte: «TITOLO ARTICOLO:» arriva in quattro lingue. */
-const PROMPT_TITLE_LABEL = /(?<![\p{L}\p{N}])(?:TITOLO\s+(?:DELL['’]?ARTICOLO|ARTICOLO)|TITRE(?:\s+(?:DE\s+L['’]ARTICLE|ARTICLE))?|TITEL(?:\s+(?:DES\s+ARTIKELS|ARTIKEL))?|ARTIKEL-?TITEL|ARTICLE\s+TITLE|TITLE\s+ARTICLE|TITLE\s+OF\s+THE\s+ARTICLE)\s*:\s*/iu;
+const PROMPT_TITLE_HWS = String.raw`[\t\p{Zs}]`;
+const PROMPT_TITLE_LABEL = new RegExp(
+  String.raw`(?<![\p{L}\p{N}])(?:TITOLO\s+(?:DELL['’]?ARTICOLO|ARTICOLO)|TITRE(?:\s+(?:DE\s+L['’]ARTICLE|ARTICLE))?|TITEL(?:\s+(?:DES\s+ARTIKELS|ARTIKEL))?|ARTIKEL-?TITEL|ARTICLE\s+TITLE|TITLE\s+ARTICLE|TITLE\s+OF\s+THE\s+ARTICLE)${PROMPT_TITLE_HWS}*:${PROMPT_TITLE_HWS}*`,
+  'iu',
+);
 /** Stessa etichetta come riga intera, anche in minuscolo o come intestazione. */
-const PROMPT_TITLE_LINE = /^[ \t]*#{0,6}[ \t]*(?:\*\*)?(?:titolo\s+(?:dell['’]?articolo|articolo)|article\s+title|title\s+of\s+the\s+article|title\s+article|titel\s+des\s+artikels|artikel-?titel|titre\s+(?:de\s+l['’]artic\S*|article))(?:\*\*)?[ \t]*(?::[ \t]*(?:\n|$)|(?=\n|$))/gimu;
+const PROMPT_TITLE_LINE = new RegExp(
+  String.raw`^${PROMPT_TITLE_HWS}*#{0,6}${PROMPT_TITLE_HWS}*(?:\*\*)?(?:titolo\s+(?:dell['’]?articolo|articolo)|article\s+title|title\s+of\s+the\s+article|title\s+article|titel\s+des\s+artikels|artikel-?titel|titre\s+(?:de\s+l['’]artic\S*|article))(?:\*\*)?${PROMPT_TITLE_HWS}*(?::${PROMPT_TITLE_HWS}*)?$\n?`,
+  'gimu',
+);
+const PROMPT_TITLE_STANDALONE_PREFIX = new RegExp(
+  String.raw`^${PROMPT_TITLE_HWS}*(?:#{0,6}${PROMPT_TITLE_HWS}*(?:\*\*)?)?$`,
+  'u',
+);
+const PROMPT_TITLE_LEADING_HWS = new RegExp(String.raw`^${PROMPT_TITLE_HWS}+`, 'u');
+const PROMPT_TITLE_TRAILING_HWS = new RegExp(String.raw`${PROMPT_TITLE_HWS}+$`, 'u');
 
 /**
- * Toglie la riga con l'etichetta del prompt. Se dopo l'etichetta c'e' testo vero
- * sulla stessa riga si toglie solo il titolo noto, altrimenti la sola etichetta.
+ * Toglie l'etichetta del prompt e il titolo che segue solo quando e' noto;
+ * il testo successivo ignoto resta integro.
  */
 export function stripPromptTitleLabels(text, { title = '' } = {}) {
   let removed = 0;
@@ -417,13 +430,21 @@ export function stripPromptTitleLabels(text, { title = '' } = {}) {
     const newline = value.indexOf('\n', afterLabel);
     const lineEnd = newline === -1 ? value.length : newline;
     const rest = value.slice(afterLabel, lineEnd);
+    const lineStart = value.lastIndexOf('\n', start - 1) + 1;
+    const linePrefix = value.slice(lineStart, start);
+    const standaloneLabel = PROMPT_TITLE_STANDALONE_PREFIX.test(linePrefix);
     let cut = afterLabel;
-    if (!rest.trim()) cut = lineEnd;
-    else if (title && rest.startsWith(title)) cut = afterLabel + title.length;
-    const before = value.slice(0, start).replace(/[ \t]+$/, '');
+    if (title && rest.startsWith(title)) cut = afterLabel + title.length;
+    else if (standaloneLabel && !rest.trim()) cut = lineEnd;
+    const before = value.slice(0, start).replace(PROMPT_TITLE_TRAILING_HWS, '');
     const after = value.slice(cut);
-    const joiner = before && !/\n$/u.test(before) ? ' ' : '';
-    value = cut === lineEnd ? `${before.replace(/\n+$/, '')}${after}` : `${before}${joiner}${after.replace(/^\s+/, '')}`;
+    if (cut === lineEnd) {
+      const previous = standaloneLabel ? value.slice(0, lineStart) : before;
+      value = `${previous.replace(/\n+$/, '')}${after}`;
+    } else {
+      const separator = before && !/\s$/.test(before) && after && !/^\s/.test(after) ? ' ' : '';
+      value = `${before}${separator}${after.replace(PROMPT_TITLE_LEADING_HWS, '')}`;
+    }
     removed += 1;
   }
   return { value, removed };
@@ -542,10 +563,10 @@ export function repairGPermitSentence(sentence, locale) {
 }
 
 /**
- * Tassa sulla salute. L. 213/2023 art. 1 c. 237-239: quota dal 3% al 6% del
- * salario netto, da 30 a 200 euro per mese lavorato, definita ogni anno dalla
- * Regione. Nessun atto regionale verificato ne fissa l'importo: una cifra diversa
- * non si sostituisce, si toglie. I sondaggi sulla tassa («l'87,8% la ritiene
+ * Tassa sulla salute. L. 213/2023 art. 1 c. 237-239: quota progressiva dal 3% al
+ * 6% del salario netto, da 30 a 200 euro per mese lavorato. Sono plausibili le
+ * aliquote intermedie in questo intervallo sul netto; la base lorda e le aliquote
+ * fuori intervallo sono errate. I sondaggi sulla tassa («l'87,8% la ritiene
  * penalizzante») e i ristorni sospesi non sono importi della tassa.
  */
 const HEALTH_TAX = {
@@ -587,11 +608,18 @@ function hasMonthlyAmountOutOfRange(sentence, locale) {
   });
 }
 
+const PERCENT_RATE = String.raw`(?<![\d.,])(\d+(?:[.,]\d+)?)(?:(?:\s*%?\s*[-–—]\s*|\s*%?\s+(?:to|bis|al|a|à)\s+)(\d+(?:[.,]\d+)?))?(?![\d.,])\s?`;
 const PERCENT_OF_PAY = {
-  it: /(\d{1,3}(?:[.,]\d+)?)\s?(?:%|per\s+cento)\s+(?:del(?:lo|l['’])?|sul(?:lo|l['’])?)\s+(?:salario|stipendio|reddito|netto|lordo|imposta)/gi,
-  en: /(\d{1,3}(?:[.,]\d+)?)\s?(?:%|percent)\s+(?:of|on)\s+(?:the\s+)?(?:gross|net|salary|income|wage)/gi,
-  de: /(\d{1,3}(?:[.,]\d+)?)\s?(?:%|Prozent)\s+(?:des|vom|auf\s+das)\s+(?:Brutto|Netto|Lohn\w*|Einkommen\w*|Gehalt\w*)/gi,
-  fr: /(\d{1,3}(?:[.,]\d+)?)\s?(?:%|pour\s+cent)\s+(?:du|sur\s+le)\s+(?:salaire|revenu|brut|net)/gi,
+  it: new RegExp(String.raw`${PERCENT_RATE}(?:%|per\s+cento)\s+(?:del(?:lo|l['’])?|sul(?:lo|l['’])?)\s+(?:(?:salario|stipendio|reddito)(?:\s+(?:netto|lord[oaie]))?|netto|lord[oaie]|imposta)`, 'gi'),
+  en: new RegExp(String.raw`${PERCENT_RATE}(?:%|percent)\s+(?:of|on)\s+(?:the\s+)?(?:gross|net|salary|income|wage)`, 'gi'),
+  de: new RegExp(String.raw`${PERCENT_RATE}(?:%|Prozent)\s+(?:des|vom|auf\s+das)\s+(?:Brutto|Netto|Lohn\w*|Einkommen\w*|Gehalt\w*)`, 'gi'),
+  fr: new RegExp(String.raw`${PERCENT_RATE}(?:%|pour\s+cent)\s+(?:du|sur\s+le)\s+(?:(?:salaire|revenu)(?:\s+(?:brut|net))?|brut|net)`, 'gi'),
+};
+const GROSS_PAY_BASE = {
+  it: /\b(?:lord[oaie])\b/i,
+  en: /\bgross\b/i,
+  de: /\bbrutto/i,
+  fr: /\bbrut/i,
 };
 
 function isHealthTaxClaim(sentence, locale) {
@@ -600,9 +628,10 @@ function isHealthTaxClaim(sentence, locale) {
   if (HEALTH_TAX_EXEMPT[locale].test(sentence)) return false;
   if (SWISS_FRANC_AMOUNT.test(sentence) || YEARLY_EURO[locale].test(sentence)) return true;
   if (hasMonthlyAmountOutOfRange(sentence, locale)) return true;
-  return [...sentence.matchAll(PERCENT_OF_PAY[locale])].some(([, value]) => {
-    const percentage = Number(value.replace(',', '.'));
-    return !Number.isFinite(percentage) || percentage < 3 || percentage > 6;
+  return [...sentence.matchAll(PERCENT_OF_PAY[locale])].some((match) => {
+    const rates = [match[1], match[2]].filter(Boolean).map((rate) => Number(rate.replace(',', '.')));
+    return rates.some((rate) => !Number.isFinite(rate) || rate < 3 || rate > 6)
+      || GROSS_PAY_BASE[locale].test(match[0]);
   });
 }
 
@@ -657,11 +686,19 @@ function removeClaimSegment(segments, index, { structural = false } = {}) {
   segments[index] = '';
 
   // In ordinary prose keep one of the original boundaries. Clearing both
-  // separators is what turns two valid neighbours into `Prima.Dopo`.
-  if (!structural && before && after) {
-    if (beforeSeparator) segments[index + 1] = '';
-    else if (afterSeparator) segments[index - 1] = '';
-    else segments[index + 1] = ' ';
+  // separators is what turns two valid neighbours into Prima.Dopo.
+  if (!structural) {
+    if (before && after) {
+      if (beforeSeparator) segments[index + 1] = '';
+      else if (afterSeparator) segments[index - 1] = '';
+      else segments[index + 1] = ' ';
+    } else if (!before && after) {
+      segments[index + 1] = '';
+    } else if (before && !after) {
+      segments[index - 1] = /^\s+$/u.test(beforeSeparator)
+        ? ''
+        : beforeSeparator.replace(/\s+$/u, '');
+    }
     return;
   }
 
