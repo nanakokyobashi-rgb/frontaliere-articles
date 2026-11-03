@@ -4,13 +4,13 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ti::https://www.laprovinciadicomo.it/stories/premium/como-citta/treni-i-pendolari-firmano-piu-tutele-e-trasparenza-o_3984722_11": {
-      "section": "canton-ti",
-      "ts": 1793479623476
-    },
     "canton-ti::https://www.ocst.ch/articoli/17-news-frontalieri/2556-vecchi-frontalieri-dei-nuovi-comuni-di-confine-da-gennaio-imposta-alla-fonte-al-100-per-chi-opta-in-italia-per-il-decreto-omnibus": {
       "section": "canton-ti",
       "ts": 1793634013302
+    },
+    "canton-ti::https://www.laprovinciadicomo.it/stories/premium/como-citta/svolta-per-i-lavoratori-transfrontalieri-cambia-la-tassa-sulla-salute-cifre-fi-o_3986662_11": {
+      "section": "canton-ti",
+      "ts": 1793694441810
     }
   }
 }
