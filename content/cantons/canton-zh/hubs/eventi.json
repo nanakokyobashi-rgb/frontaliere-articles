@@ -4,12 +4,12 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-11-02T09:20:10.429Z",
-  "contentHash": "73c5d3647d59dafbb7670018928f27167b36ee11890774f1d4ef878a9b3f350c",
+  "updatedAt": "2026-11-03T00:06:00.232Z",
+  "contentHash": "d716d3c11bfbca6c974bedaa53c3c04a3dc874f45a492d4615ea52c38dc3168b",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-02T02:24:34.417Z",
+      "updatedAt": "2026-11-02T13:10:19.053Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "343",
+          "value": "345",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Einfach Gesund Bleiben 60+: SturzPraxis",
-              "detail": "Uitikon-Waldegg, Uitikon",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einfach-gesund-bleiben-60-sturzpraxis/"
+              "label": "FONDUE- & RACLETTE SPECIALS",
+              "detail": "Restaurant & Bar Tschadun, Kloten",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fondue-raclette-specials/"
             },
             {
-              "label": "CCCZ Oncology Symposium: Lung Cancer",
-              "detail": "Universitätsspital Zürich, Zürich",
-              "date": "2026-11-02",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/cccz-oncology-symposium-lung-cancer_ABwsLHx"
+              "label": "30° Festival internazionale del cortometraggio di Winterthur",
+              "detail": "blue Cinema Maxx, Winterthur",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/events/winterthur/26th-winterthur-international-short-film-festival_AJdd68h"
             },
             {
-              "label": "Vernissage Ausstellung \"was ihr nicht seht\"",
-              "detail": "Pfäffikon ZH, Pfäffikon",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vernissage-ausstellung-was-ihr-nicht-seht/"
+              "label": "Gymnastik für Seniorinnen/Senioren / Organisiert vom Frauenverein",
+              "detail": "Neue Reformierte Kirche, Urdorf",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gymnastik-fuer-seniorinnensenioren-organisiert-vom-frauenverein-25/"
             },
             {
-              "label": "The Sisters of Mercy (UK)",
-              "detail": "X-TRA",
-              "date": "2026-11-02",
-              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/zuerich/the-sisters-of-mercy-uk_A7fSLqR"
+              "label": "VZK-Tagung 2026",
+              "detail": "Careum Auditorium, Zürich",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/vzk-tagung-2026/"
             },
             {
-              "label": "The Sisters of Mercy (UK)",
-              "detail": "X-TRA, Zürich",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/the-sisters-of-mercy-uk/"
-            },
-            {
-              "label": "Amistat",
-              "detail": "Kaufleuten",
-              "date": "2026-11-02",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/amistat_AeTNTLg"
-            },
-            {
-              "label": "Amistat",
+              "label": "Workshop «Licence to Tell»",
               "detail": "Zurich, Zürich",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/amistat-2/"
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-licence-to-tell/"
             },
             {
-              "label": "3. Kammerkonzert",
-              "detail": "Zurich, Zürich — in corso, ultimo giorno: 2 novembre 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/3-kammerkonzert/"
+              "label": "Computeria Urdorf",
+              "detail": "Urdorf",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/computeria-urdorf-6/"
             },
             {
-              "label": "Kochkurs für Seniorinnen und Senioren - OV Rüti",
-              "detail": "Rüti ZH, Rüti (ZH) — in corso, ultimo giorno: 21 novembre 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kochkurs-fuer-seniorinnen-und-senioren-ov-rueti/"
+              "label": "Energie- und Klima-Zukunft in Volketswil",
+              "detail": "KUSPO-Foyer, Volketswil",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/volketswil/energie-und-klima-zukunft-in-volketswil_ALNPZdm"
             },
             {
-              "label": "Meditative Nachtführung im Grossmünster",
-              "detail": "Zurich, Zürich — in corso, ultimo giorno: 27 novembre 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/meditative-nachtfuehrung-im-grossmuenster/"
+              "label": "Filmabend \"Radical - Eine Klasse für sich\"",
+              "detail": "Hinwil",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/filmabend-radical-eine-klasse-fuer-sich/"
+            },
+            {
+              "label": "Esgui - Leif Kaner-Lidström",
+              "detail": "Dynamo, Werk 21",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/esgui-leif-kaner-lidstroem_Amv3mUH"
+            },
+            {
+              "label": "NO CIGAR",
+              "detail": "Albani Music Club, Winterthur",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/winterthur/no-cigar_AMUuK9r"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zurigo/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     },
     "en": {
       "canton": "ZH",
@@ -133,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "343",
+          "value": "345",
           "note": "from the site’s events calendar"
         }
       ],
@@ -144,69 +144,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Einfach Gesund Bleiben 60+: SturzPraxis",
-              "detail": "Uitikon-Waldegg, Uitikon",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einfach-gesund-bleiben-60-sturzpraxis/"
+              "label": "FONDUE- & RACLETTE SPECIALS",
+              "detail": "Restaurant & Bar Tschadun, Kloten",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fondue-raclette-specials/"
             },
             {
-              "label": "CCCZ Oncology Symposium: Lung Cancer",
-              "detail": "Universitätsspital Zürich, Zürich",
-              "date": "2026-11-02",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/cccz-oncology-symposium-lung-cancer_ABwsLHx"
+              "label": "30th Winterthur International Short Film Festival",
+              "detail": "blue Cinema Maxx, Winterthur",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/events/winterthur/26th-winterthur-international-short-film-festival_AJdd68h"
             },
             {
-              "label": "Vernissage Ausstellung \"was ihr nicht seht\"",
-              "detail": "Pfäffikon ZH, Pfäffikon",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vernissage-ausstellung-was-ihr-nicht-seht/"
+              "label": "Gymnastics for Seniors/Seniors / Organization of the Frauenverein",
+              "detail": "Neue Reformierte Kirche, Urdorf",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gymnastik-fuer-seniorinnensenioren-organisiert-vom-frauenverein-25/"
             },
             {
-              "label": "The Sisters of Mercy (UK)",
-              "detail": "X-TRA",
-              "date": "2026-11-02",
-              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/zuerich/the-sisters-of-mercy-uk_A7fSLqR"
+              "label": "VZK-Tagung 2026",
+              "detail": "Careum Auditorium, Zürich",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/vzk-tagung-2026/"
             },
             {
-              "label": "The Sisters of Mercy (UK)",
-              "detail": "X-TRA, Zürich",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/the-sisters-of-mercy-uk/"
-            },
-            {
-              "label": "Amistat",
-              "detail": "Kaufleuten",
-              "date": "2026-11-02",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/amistat_AeTNTLg"
-            },
-            {
-              "label": "Amistat",
+              "label": "Workshop «Licence to Tell»",
               "detail": "Zurich, Zürich",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/amistat-2/"
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-licence-to-tell/"
             },
             {
-              "label": "3. Kammerkonzert",
-              "detail": "Zurich, Zürich — ongoing, last day: 2 November 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/3-kammerkonzert/"
+              "label": "Computeria Urdorf",
+              "detail": "Urdorf",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/computeria-urdorf-6/"
             },
             {
-              "label": "Kochkurs für Seniorinnen und Senioren - OV Rüti",
-              "detail": "Rüti ZH, Rüti (ZH) — ongoing, last day: 21 November 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kochkurs-fuer-seniorinnen-und-senioren-ov-rueti/"
+              "label": "Energie- und Klima-Zukunft in Volketswil",
+              "detail": "KUSPO-Foyer, Volketswil",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/volketswil/energie-und-klima-zukunft-in-volketswil_ALNPZdm"
             },
             {
-              "label": "Meditative Nachtführung im Grossmünster",
-              "detail": "Zurich, Zürich — ongoing, last day: 27 November 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/meditative-nachtfuehrung-im-grossmuenster/"
+              "label": "Filmabend \"Radical - Eine Klasse für sich\"",
+              "detail": "Hinwil",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/filmabend-radical-eine-klasse-fuer-sich/"
+            },
+            {
+              "label": "Esgui - Leif Kaner-Lidström",
+              "detail": "Dynamo, Werk 21",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/esgui-leif-kaner-lidstroem_Amv3mUH"
+            },
+            {
+              "label": "NO CIGAR",
+              "detail": "Albani Music Club, Winterthur",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/winterthur/no-cigar_AMUuK9r"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zurich/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     },
     "de": {
       "canton": "ZH",
@@ -244,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "343",
+          "value": "345",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -255,69 +255,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Einfach Gesund Bleiben 60+: SturzPraxis",
-              "detail": "Uitikon-Waldegg, Uitikon",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einfach-gesund-bleiben-60-sturzpraxis/"
+              "label": "FONDUE- & RACLETTE SPECIALS",
+              "detail": "Restaurant & Bar Tschadun, Kloten",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fondue-raclette-specials/"
             },
             {
-              "label": "CCCZ Oncology Symposium: Lung Cancer",
-              "detail": "Universitätsspital Zürich, Zürich",
-              "date": "2026-11-02",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/cccz-oncology-symposium-lung-cancer_ABwsLHx"
+              "label": "30. Internationale Kurzfilmtage Winterthur",
+              "detail": "blue Cinema Maxx, Winterthur",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/events/winterthur/26th-winterthur-international-short-film-festival_AJdd68h"
             },
             {
-              "label": "Vernissage Ausstellung \"was ihr nicht seht\"",
-              "detail": "Pfäffikon ZH, Pfäffikon",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vernissage-ausstellung-was-ihr-nicht-seht/"
+              "label": "Turnen für Senioren/Senioren / Organisation des Frauenvereins",
+              "detail": "Neue Reformierte Kirche, Urdorf",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gymnastik-fuer-seniorinnensenioren-organisiert-vom-frauenverein-25/"
             },
             {
-              "label": "The Sisters of Mercy (UK)",
-              "detail": "X-TRA",
-              "date": "2026-11-02",
-              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/zuerich/the-sisters-of-mercy-uk_A7fSLqR"
+              "label": "VZK-Tagung 2026",
+              "detail": "Careum Auditorium, Zürich",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/vzk-tagung-2026/"
             },
             {
-              "label": "The Sisters of Mercy (UK)",
-              "detail": "X-TRA, Zürich",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/the-sisters-of-mercy-uk/"
-            },
-            {
-              "label": "Amistat",
-              "detail": "Kaufleuten",
-              "date": "2026-11-02",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/amistat_AeTNTLg"
-            },
-            {
-              "label": "Amistat",
+              "label": "Workshop «Licence to Tell»",
               "detail": "Zurich, Zürich",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/amistat-2/"
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-licence-to-tell/"
             },
             {
-              "label": "3. Kammerkonzert",
-              "detail": "Zurich, Zürich — läuft, letzter Tag: 2. November 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/3-kammerkonzert/"
+              "label": "Computeria Urdorf",
+              "detail": "Urdorf",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/computeria-urdorf-6/"
             },
             {
-              "label": "Kochkurs für Seniorinnen und Senioren - OV Rüti",
-              "detail": "Rüti ZH, Rüti (ZH) — läuft, letzter Tag: 21. November 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kochkurs-fuer-seniorinnen-und-senioren-ov-rueti/"
+              "label": "Energie- und Klima-Zukunft in Volketswil",
+              "detail": "KUSPO-Foyer, Volketswil",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/volketswil/energie-und-klima-zukunft-in-volketswil_ALNPZdm"
             },
             {
-              "label": "Meditative Nachtführung im Grossmünster",
-              "detail": "Zurich, Zürich — läuft, letzter Tag: 27. November 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/meditative-nachtfuehrung-im-grossmuenster/"
+              "label": "Filmabend \"Radical - Eine Klasse für sich\"",
+              "detail": "Hinwil",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/filmabend-radical-eine-klasse-fuer-sich/"
+            },
+            {
+              "label": "Esgui - Leif Kaner-Lidström",
+              "detail": "Dynamo, Werk 21",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/esgui-leif-kaner-lidstroem_Amv3mUH"
+            },
+            {
+              "label": "NO CIGAR",
+              "detail": "Albani Music Club, Winterthur",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/winterthur/no-cigar_AMUuK9r"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zurich/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     },
     "fr": {
       "canton": "ZH",
@@ -355,7 +355,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "343",
+          "value": "345",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -366,69 +366,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Einfach Gesund Bleiben 60+: SturzPraxis",
-              "detail": "Uitikon-Waldegg, Uitikon",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einfach-gesund-bleiben-60-sturzpraxis/"
+              "label": "FONDUE- & RACLETTE SPECIALS",
+              "detail": "Restaurant & Bar Tschadun, Kloten",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fondue-raclette-specials/"
             },
             {
-              "label": "CCCZ Oncology Symposium: Lung Cancer",
-              "detail": "Universitätsspital Zürich, Zürich",
-              "date": "2026-11-02",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/cccz-oncology-symposium-lung-cancer_ABwsLHx"
+              "label": "30e Festival international du court métrage de Winterthur",
+              "detail": "blue Cinema Maxx, Winterthur",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/events/winterthur/26th-winterthur-international-short-film-festival_AJdd68h"
             },
             {
-              "label": "Vernissage Ausstellung \"was ihr nicht seht\"",
-              "detail": "Pfäffikon ZH, Pfäffikon",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vernissage-ausstellung-was-ihr-nicht-seht/"
+              "label": "Gymnastique pour seniors/Seniors / Organisation du Frauenverein",
+              "detail": "Neue Reformierte Kirche, Urdorf",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gymnastik-fuer-seniorinnensenioren-organisiert-vom-frauenverein-25/"
             },
             {
-              "label": "The Sisters of Mercy (UK)",
-              "detail": "X-TRA",
-              "date": "2026-11-02",
-              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/zuerich/the-sisters-of-mercy-uk_A7fSLqR"
+              "label": "VZK-Tagung 2026",
+              "detail": "Careum Auditorium, Zürich",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/vzk-tagung-2026/"
             },
             {
-              "label": "The Sisters of Mercy (UK)",
-              "detail": "X-TRA, Zürich",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/the-sisters-of-mercy-uk/"
-            },
-            {
-              "label": "Amistat",
-              "detail": "Kaufleuten",
-              "date": "2026-11-02",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/amistat_AeTNTLg"
-            },
-            {
-              "label": "Amistat",
+              "label": "Workshop «Licence to Tell»",
               "detail": "Zurich, Zürich",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/amistat-2/"
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-licence-to-tell/"
             },
             {
-              "label": "3. Kammerkonzert",
-              "detail": "Zurich, Zürich — en cours, dernier jour : 2 novembre 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/3-kammerkonzert/"
+              "label": "Computeria Urdorf",
+              "detail": "Urdorf",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/computeria-urdorf-6/"
             },
             {
-              "label": "Kochkurs für Seniorinnen und Senioren - OV Rüti",
-              "detail": "Rüti ZH, Rüti (ZH) — en cours, dernier jour : 21 novembre 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kochkurs-fuer-seniorinnen-und-senioren-ov-rueti/"
+              "label": "Energie- und Klima-Zukunft in Volketswil",
+              "detail": "KUSPO-Foyer, Volketswil",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/volketswil/energie-und-klima-zukunft-in-volketswil_ALNPZdm"
             },
             {
-              "label": "Meditative Nachtführung im Grossmünster",
-              "detail": "Zurich, Zürich — en cours, dernier jour : 27 novembre 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/meditative-nachtfuehrung-im-grossmuenster/"
+              "label": "Filmabend \"Radical - Eine Klasse für sich\"",
+              "detail": "Hinwil",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/filmabend-radical-eine-klasse-fuer-sich/"
+            },
+            {
+              "label": "Esgui - Leif Kaner-Lidström",
+              "detail": "Dynamo, Werk 21",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/esgui-leif-kaner-lidstroem_Amv3mUH"
+            },
+            {
+              "label": "NO CIGAR",
+              "detail": "Albani Music Club, Winterthur",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/winterthur/no-cigar_AMUuK9r"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zurich/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     }
   }
 }

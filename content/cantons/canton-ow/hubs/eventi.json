@@ -4,12 +4,12 @@
   "section": "canton-ow",
   "canton": "OW",
   "topic": "eventi",
-  "updatedAt": "2026-11-02T09:20:10.429Z",
-  "contentHash": "61f624578ac310cd10f6a4d4d8749b24ae977a0d20d11b9eeb3a454057228f72",
+  "updatedAt": "2026-11-03T00:06:00.232Z",
+  "contentHash": "0dda1960c563f4027d099ce1c98932b3c6d82b66914ed08ef25e2ddf54d3f72e",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-02T02:24:34.417Z",
+      "updatedAt": "2026-11-02T13:10:19.053Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "30",
+          "value": "29",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,22 +33,16 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "FG Sarnen: Strick- und Nähgruppe im Zytlade",
-              "detail": "Zytlade Lindenhof, Sarnen, Sarnen",
-              "date": "2026-11-02",
-              "url": "https://www.ow.ch/anlaesseaktuelles/88736"
-            },
-            {
-              "label": "Jassnachmittag, SKIP-BO und DOG",
-              "detail": "Felsenheim Sachseln, Sachseln, Sachseln",
-              "date": "2026-11-02",
-              "url": "https://www.ow.ch/anlaesseaktuelles/90862"
-            },
-            {
               "label": "Krabbel- und Kindertreff",
               "detail": "Pfarreiheim, Sachseln, Sachseln",
               "date": "2026-11-03",
               "url": "https://www.ow.ch/anlaesseaktuelles/90859"
+            },
+            {
+              "label": "FG Sarnen: Strick- und Nähgruppe im Zytlade",
+              "detail": "Zytlade Lindenhof, Sarnen, Sarnen — in corso, ultimo giorno: 7 novembre 2026",
+              "date": "2026-11-03",
+              "url": "https://www.ow.ch/anlaesseaktuelles/88736"
             },
             {
               "label": "Vortrag - Finanzielle Vorsorge für die Frau",
@@ -91,11 +85,17 @@
               "detail": "Klublokal A. Riebli, Giswil, Giswil",
               "date": "2026-11-06",
               "url": "https://www.ow.ch/anlaesseaktuelles/92356"
+            },
+            {
+              "label": "Jahreskonzert",
+              "detail": "Turnhalle 1/Kulturhalle, Giswil, Giswil",
+              "date": "2026-11-07",
+              "url": "https://www.ow.ch/anlaesseaktuelles/87467"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/obvaldo/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/obvaldo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     },
     "en": {
       "canton": "OW",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "30",
+          "value": "29",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,22 +138,16 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "FG Sarnen: Strick- und Nähgruppe im Zytlade",
-              "detail": "Zytlade Lindenhof, Sarnen, Sarnen",
-              "date": "2026-11-02",
-              "url": "https://www.ow.ch/anlaesseaktuelles/88736"
-            },
-            {
-              "label": "Jassnachmittag, SKIP-BO und DOG",
-              "detail": "Felsenheim Sachseln, Sachseln, Sachseln",
-              "date": "2026-11-02",
-              "url": "https://www.ow.ch/anlaesseaktuelles/90862"
-            },
-            {
               "label": "Krabbel- und Kindertreff",
               "detail": "Pfarreiheim, Sachseln, Sachseln",
               "date": "2026-11-03",
               "url": "https://www.ow.ch/anlaesseaktuelles/90859"
+            },
+            {
+              "label": "FG Sarnen: Strick- und Nähgruppe im Zytlade",
+              "detail": "Zytlade Lindenhof, Sarnen, Sarnen — ongoing, last day: 7 November 2026",
+              "date": "2026-11-03",
+              "url": "https://www.ow.ch/anlaesseaktuelles/88736"
             },
             {
               "label": "Vortrag - Finanzielle Vorsorge für die Frau",
@@ -196,11 +190,17 @@
               "detail": "Klublokal A. Riebli, Giswil, Giswil",
               "date": "2026-11-06",
               "url": "https://www.ow.ch/anlaesseaktuelles/92356"
+            },
+            {
+              "label": "Jahreskonzert",
+              "detail": "Turnhalle 1/Kulturhalle, Giswil, Giswil",
+              "date": "2026-11-07",
+              "url": "https://www.ow.ch/anlaesseaktuelles/87467"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/obwalden/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/obwalden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     },
     "de": {
       "canton": "OW",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "30",
+          "value": "29",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,22 +243,16 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "FG Sarnen: Strick- und Nähgruppe im Zytlade",
-              "detail": "Zytlade Lindenhof, Sarnen, Sarnen",
-              "date": "2026-11-02",
-              "url": "https://www.ow.ch/anlaesseaktuelles/88736"
-            },
-            {
-              "label": "Jassnachmittag, SKIP-BO und DOG",
-              "detail": "Felsenheim Sachseln, Sachseln, Sachseln",
-              "date": "2026-11-02",
-              "url": "https://www.ow.ch/anlaesseaktuelles/90862"
-            },
-            {
               "label": "Krabbel- und Kindertreff",
               "detail": "Pfarreiheim, Sachseln, Sachseln",
               "date": "2026-11-03",
               "url": "https://www.ow.ch/anlaesseaktuelles/90859"
+            },
+            {
+              "label": "FG Sarnen: Strick- und Nähgruppe im Zytlade",
+              "detail": "Zytlade Lindenhof, Sarnen, Sarnen — läuft, letzter Tag: 7. November 2026",
+              "date": "2026-11-03",
+              "url": "https://www.ow.ch/anlaesseaktuelles/88736"
             },
             {
               "label": "Vortrag - Finanzielle Vorsorge für die Frau",
@@ -301,11 +295,17 @@
               "detail": "Klublokal A. Riebli, Giswil, Giswil",
               "date": "2026-11-06",
               "url": "https://www.ow.ch/anlaesseaktuelles/92356"
+            },
+            {
+              "label": "Jahreskonzert",
+              "detail": "Turnhalle 1/Kulturhalle, Giswil, Giswil",
+              "date": "2026-11-07",
+              "url": "https://www.ow.ch/anlaesseaktuelles/87467"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/obwalden/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/obwalden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     },
     "fr": {
       "canton": "OW",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "30",
+          "value": "29",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,22 +348,16 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "FG Sarnen: Strick- und Nähgruppe im Zytlade",
-              "detail": "Zytlade Lindenhof, Sarnen, Sarnen",
-              "date": "2026-11-02",
-              "url": "https://www.ow.ch/anlaesseaktuelles/88736"
-            },
-            {
-              "label": "Jassnachmittag, SKIP-BO und DOG",
-              "detail": "Felsenheim Sachseln, Sachseln, Sachseln",
-              "date": "2026-11-02",
-              "url": "https://www.ow.ch/anlaesseaktuelles/90862"
-            },
-            {
               "label": "Krabbel- und Kindertreff",
               "detail": "Pfarreiheim, Sachseln, Sachseln",
               "date": "2026-11-03",
               "url": "https://www.ow.ch/anlaesseaktuelles/90859"
+            },
+            {
+              "label": "FG Sarnen: Strick- und Nähgruppe im Zytlade",
+              "detail": "Zytlade Lindenhof, Sarnen, Sarnen — en cours, dernier jour : 7 novembre 2026",
+              "date": "2026-11-03",
+              "url": "https://www.ow.ch/anlaesseaktuelles/88736"
             },
             {
               "label": "Vortrag - Finanzielle Vorsorge für die Frau",
@@ -406,11 +400,17 @@
               "detail": "Klublokal A. Riebli, Giswil, Giswil",
               "date": "2026-11-06",
               "url": "https://www.ow.ch/anlaesseaktuelles/92356"
+            },
+            {
+              "label": "Jahreskonzert",
+              "detail": "Turnhalle 1/Kulturhalle, Giswil, Giswil",
+              "date": "2026-11-07",
+              "url": "https://www.ow.ch/anlaesseaktuelles/87467"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/obwald/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/obwald/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     }
   }
 }

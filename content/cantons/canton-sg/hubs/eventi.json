@@ -4,12 +4,12 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "eventi",
-  "updatedAt": "2026-11-02T09:20:10.429Z",
-  "contentHash": "1d86c79e00961e95d7301feee8c0e900ed6d6ba74a250c7f31fa7cfeb0b26273",
+  "updatedAt": "2026-11-03T00:06:00.232Z",
+  "contentHash": "bcacc7ab0e9cc118d61c61cfd002d4b94b7d8bcee4ae0f6c91afe291b99c18cc",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-02T02:24:34.417Z",
+      "updatedAt": "2026-11-02T13:10:19.053Z",
       "keyFacts": 1
     }
   ],
@@ -33,28 +33,22 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
+              "label": "Vokalensemble Pop & Musical",
+              "detail": "Musikzentrum St. Gallen, St. Gallen",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/vokalensemble-pop-und-musical_AWU1qYg"
+            },
+            {
               "label": "Claudia Valer, Werkschau",
               "detail": "Pflegeheim Heiligkreuz, St. Gallen — in corso, ultimo giorno: 8 novembre 2026",
-              "date": "2026-11-02",
+              "date": "2026-11-03",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/claudia-valer-werkschau/"
             },
             {
               "label": "Fokusmodul – Meisner-Workout",
               "detail": "Switzerland Innovation Park Ost — in corso, ultimo giorno: 12 novembre 2026",
-              "date": "2026-11-02",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
-            },
-            {
-              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
-              "detail": "Verein Klangwald, Kirchberg (SG) — in corso, ultimo giorno: 2 novembre 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
-            },
-            {
-              "label": "Vokalensemble Pop & Musical",
-              "detail": "Musikzentrum St. Gallen, St. Gallen",
               "date": "2026-11-03",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/vokalensemble-pop-und-musical_AWU1qYg"
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
             },
             {
               "label": "Menschwerdung – evolutionäre Geschichte der Geburt",
@@ -91,11 +85,17 @@
               "detail": "Wildhaus",
               "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/schluessel-zur-eigenen-musikalitaet/"
+            },
+            {
+              "label": "Raclette-Schiff",
+              "detail": "Schiffsbetrieb Walensee AG",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/raclette-schiff/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/san-gallo/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/san-gallo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     },
     "en": {
       "canton": "SG",
@@ -138,28 +138,22 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
+              "label": "Vokalensemble Pop & Musical",
+              "detail": "Musikzentrum St. Gallen, St. Gallen",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/vokalensemble-pop-und-musical_AWU1qYg"
+            },
+            {
               "label": "Claudia Valer, Werkschau",
               "detail": "Pflegeheim Heiligkreuz, St. Gallen — ongoing, last day: 8 November 2026",
-              "date": "2026-11-02",
+              "date": "2026-11-03",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/claudia-valer-werkschau/"
             },
             {
               "label": "Fokusmodul-Meisner -ork",
               "detail": "Switzerland Innovation Park Ost — ongoing, last day: 12 November 2026",
-              "date": "2026-11-02",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
-            },
-            {
-              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
-              "detail": "Verein Klangwald, Kirchberg (SG) — ongoing, last day: 2 November 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
-            },
-            {
-              "label": "Vokalensemble Pop & Musical",
-              "detail": "Musikzentrum St. Gallen, St. Gallen",
               "date": "2026-11-03",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/vokalensemble-pop-und-musical_AWU1qYg"
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
             },
             {
               "label": "Menschwerdung – evolutionäre Geschichte der Geburt",
@@ -196,11 +190,17 @@
               "detail": "Wildhaus",
               "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/schluessel-zur-eigenen-musikalitaet/"
+            },
+            {
+              "label": "Raclette-Schiff",
+              "detail": "Schiffsbetrieb Walensee AG",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/raclette-schiff/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/st-gallen/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/st-gallen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     },
     "de": {
       "canton": "SG",
@@ -243,28 +243,22 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
+              "label": "Vokalensemble Pop & Musical",
+              "detail": "Musikzentrum St. Gallen, St. Gallen",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/vokalensemble-pop-und-musical_AWU1qYg"
+            },
+            {
               "label": "Claudia Valer, Werkschau",
               "detail": "Pflegeheim Heiligkreuz, St. Gallen — läuft, letzter Tag: 8. November 2026",
-              "date": "2026-11-02",
+              "date": "2026-11-03",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/claudia-valer-werkschau/"
             },
             {
               "label": "Fokusmodul-Meisner-Grafforkout",
               "detail": "Switzerland Innovation Park Ost — läuft, letzter Tag: 12. November 2026",
-              "date": "2026-11-02",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
-            },
-            {
-              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
-              "detail": "Verein Klangwald, Kirchberg (SG) — läuft, letzter Tag: 2. November 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
-            },
-            {
-              "label": "Vokalensemble Pop & Musical",
-              "detail": "Musikzentrum St. Gallen, St. Gallen",
               "date": "2026-11-03",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/vokalensemble-pop-und-musical_AWU1qYg"
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
             },
             {
               "label": "Menschwerdung – evolutionäre Geschichte der Geburt",
@@ -301,11 +295,17 @@
               "detail": "Wildhaus",
               "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/schluessel-zur-eigenen-musikalitaet/"
+            },
+            {
+              "label": "Raclette-Schiff",
+              "detail": "Schiffsbetrieb Walensee AG",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/raclette-schiff/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/st-gallen/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/st-gallen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     },
     "fr": {
       "canton": "SG",
@@ -348,28 +348,22 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
+              "label": "Vokalensemble Pop & Musical",
+              "detail": "Musikzentrum St. Gallen, St. Gallen",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/vokalensemble-pop-und-musical_AWU1qYg"
+            },
+            {
               "label": "Claudia Valer, Werkschau",
               "detail": "Pflegeheim Heiligkreuz, St. Gallen — en cours, dernier jour : 8 novembre 2026",
-              "date": "2026-11-02",
+              "date": "2026-11-03",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/claudia-valer-werkschau/"
             },
             {
               "label": "Module d'alimentation-Meisner-ork",
               "detail": "Switzerland Innovation Park Ost — en cours, dernier jour : 12 novembre 2026",
-              "date": "2026-11-02",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
-            },
-            {
-              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
-              "detail": "Verein Klangwald, Kirchberg (SG) — en cours, dernier jour : 2 novembre 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
-            },
-            {
-              "label": "Vokalensemble Pop & Musical",
-              "detail": "Musikzentrum St. Gallen, St. Gallen",
               "date": "2026-11-03",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/vokalensemble-pop-und-musical_AWU1qYg"
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
             },
             {
               "label": "Menschwerdung – evolutionäre Geschichte der Geburt",
@@ -406,11 +400,17 @@
               "detail": "Wildhaus",
               "date": "2026-11-06",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/schluessel-zur-eigenen-musikalitaet/"
+            },
+            {
+              "label": "Raclette-Schiff",
+              "detail": "Schiffsbetrieb Walensee AG",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/raclette-schiff/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/saint-gall/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/saint-gall/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     }
   }
 }

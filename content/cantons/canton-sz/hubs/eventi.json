@@ -4,12 +4,12 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "eventi",
-  "updatedAt": "2026-11-02T09:20:10.429Z",
-  "contentHash": "f4172375f7cf647a969fa50b2863a613e91a95d88725e856dc7f17925797f973",
+  "updatedAt": "2026-11-03T00:06:00.232Z",
+  "contentHash": "d65f90a276ac2171765fdb0050e0da1893d47ce0b23a651dcd22fca37010e281",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-02T02:24:34.417Z",
+      "updatedAt": "2026-11-02T13:10:19.053Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "17",
+          "value": "18",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -35,7 +35,7 @@
             {
               "label": "IKIGAI japanisches Lebenskonzept als kreativer Workshop",
               "detail": "Schwyz — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-11-02",
+              "date": "2026-11-03",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/ikigai-japanisches-lebenskonzept-als-kreativer-workshop/"
             },
             {
@@ -95,7 +95,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/svitto/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/svitto/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     },
     "en": {
       "canton": "SZ",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "17",
+          "value": "18",
           "note": "from the site’s events calendar"
         }
       ],
@@ -140,7 +140,7 @@
             {
               "label": "IKIGAI japanisches Lebenskonzept als kreativer Workshop",
               "detail": "Schwyz — ongoing, last day: 14 November 2026",
-              "date": "2026-11-02",
+              "date": "2026-11-03",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/ikigai-japanisches-lebenskonzept-als-kreativer-workshop/"
             },
             {
@@ -200,7 +200,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schwyz/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/schwyz/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     },
     "de": {
       "canton": "SZ",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "17",
+          "value": "18",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -245,7 +245,7 @@
             {
               "label": "IKIGAI japanisches Lebenskonzept als kreativer Workshop",
               "detail": "Schwyz — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-11-02",
+              "date": "2026-11-03",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/ikigai-japanisches-lebenskonzept-als-kreativer-workshop/"
             },
             {
@@ -305,7 +305,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schwyz/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/schwyz/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     },
     "fr": {
       "canton": "SZ",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "17",
+          "value": "18",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -350,7 +350,7 @@
             {
               "label": "IKIGAI japanisches Lebenskonzept als kreativer Workshop",
               "detail": "Schwyz — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-11-02",
+              "date": "2026-11-03",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/ikigai-japanisches-lebenskonzept-als-kreativer-workshop/"
             },
             {
@@ -410,7 +410,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schwytz/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/schwytz/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     }
   }
 }

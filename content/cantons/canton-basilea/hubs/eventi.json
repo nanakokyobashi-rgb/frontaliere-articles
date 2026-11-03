@@ -4,12 +4,12 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "eventi",
-  "updatedAt": "2026-11-02T09:20:10.429Z",
-  "contentHash": "2da69cde263132a04d483760634a34e608d1f5a74f13c2ae95e448b761f40ab1",
+  "updatedAt": "2026-11-03T00:06:00.232Z",
+  "contentHash": "2743d73d204767356456de38360fc89cd8c53ca15947c65cd2fabea8c0aa0228",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-02T02:24:34.417Z",
+      "updatedAt": "2026-11-02T13:10:19.053Z",
       "keyFacts": 1
     }
   ],
@@ -33,18 +33,6 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX LIKE A PRO",
-              "detail": "Basilea, Basel — in corso, ultimo giorno: 25 novembre 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
-            },
-            {
-              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
-              "detail": "Universitätsbibliothek (UB) — in corso, ultimo giorno: 5 novembre 2026",
-              "date": "2026-11-02",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
-            },
-            {
               "label": "Porrum Pub Quiz – hosted by Silvan",
               "detail": "Porrum Cocktailbar @ Markthalle, Basel",
               "date": "2026-11-03",
@@ -55,6 +43,18 @@
               "detail": "Messe Basel, Basel",
               "date": "2026-11-03",
               "url": "https://www.guidle.com/it/evenements/musique/bale/baloise-session-joe-bonamassa-brandy-clark_A2wU1ZU"
+            },
+            {
+              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX LIKE A PRO",
+              "detail": "Basilea, Basel — in corso, ultimo giorno: 25 novembre 2026",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
+            },
+            {
+              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
+              "detail": "Universitätsbibliothek (UB) — in corso, ultimo giorno: 5 novembre 2026",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
             },
             {
               "label": "Aroma-Massage",
@@ -95,7 +95,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/basilea/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/basilea/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -138,18 +138,6 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
-              "detail": "Basilea, Basel — ongoing, last day: 25 November 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
-            },
-            {
-              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
-              "detail": "Universitätsbibliothek (UB) — ongoing, last day: 5 November 2026",
-              "date": "2026-11-02",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
-            },
-            {
               "label": "Porrum Pub Quiz – hosted by Silvan",
               "detail": "Porrum Cocktailbar @ Markthalle, Basel",
               "date": "2026-11-03",
@@ -160,6 +148,18 @@
               "detail": "Messe Basel, Basel",
               "date": "2026-11-03",
               "url": "https://www.guidle.com/it/evenements/musique/bale/baloise-session-joe-bonamassa-brandy-clark_A2wU1ZU"
+            },
+            {
+              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
+              "detail": "Basilea, Basel — ongoing, last day: 25 November 2026",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
+            },
+            {
+              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
+              "detail": "Universitätsbibliothek (UB) — ongoing, last day: 5 November 2026",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
             },
             {
               "label": "Aroma-Massage",
@@ -200,7 +200,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/basel/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/basel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -243,18 +243,6 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "B1 Rooftop Bistro – COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
-              "detail": "Basilea, Basel — läuft, letzter Tag: 25. November 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
-            },
-            {
-              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
-              "detail": "Universitätsbibliothek (UB) — läuft, letzter Tag: 5. November 2026",
-              "date": "2026-11-02",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
-            },
-            {
               "label": "Porrum Pub Quiz – hosted by Silvan",
               "detail": "Porrum Cocktailbar @ Markthalle, Basel",
               "date": "2026-11-03",
@@ -265,6 +253,18 @@
               "detail": "Messe Basel, Basel",
               "date": "2026-11-03",
               "url": "https://www.guidle.com/it/evenements/musique/bale/baloise-session-joe-bonamassa-brandy-clark_A2wU1ZU"
+            },
+            {
+              "label": "B1 Rooftop Bistro – COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
+              "detail": "Basilea, Basel — läuft, letzter Tag: 25. November 2026",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
+            },
+            {
+              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
+              "detail": "Universitätsbibliothek (UB) — läuft, letzter Tag: 5. November 2026",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
             },
             {
               "label": "Aroma-Massage",
@@ -305,7 +305,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/basel/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/basel/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -348,18 +348,6 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
-              "detail": "Basilea, Basel — en cours, dernier jour : 25 novembre 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
-            },
-            {
-              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
-              "detail": "Universitätsbibliothek (UB) — en cours, dernier jour : 5 novembre 2026",
-              "date": "2026-11-02",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
-            },
-            {
               "label": "Porrum Pub Quiz – hosted by Silvan",
               "detail": "Porrum Cocktailbar @ Markthalle, Basel",
               "date": "2026-11-03",
@@ -370,6 +358,18 @@
               "detail": "Messe Basel, Basel",
               "date": "2026-11-03",
               "url": "https://www.guidle.com/it/evenements/musique/bale/baloise-session-joe-bonamassa-brandy-clark_A2wU1ZU"
+            },
+            {
+              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
+              "detail": "Basilea, Basel — en cours, dernier jour : 25 novembre 2026",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
+            },
+            {
+              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
+              "detail": "Universitätsbibliothek (UB) — en cours, dernier jour : 5 novembre 2026",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
             },
             {
               "label": "Aroma-Massage",
@@ -410,7 +410,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/bale/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/bale/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     }
   }
 }

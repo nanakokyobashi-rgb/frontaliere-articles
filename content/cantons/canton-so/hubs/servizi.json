@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "servizi",
-  "updatedAt": "2026-11-02T21:01:35.908Z",
-  "contentHash": "1f536f5cbdca9f8775f3e77d82a5f5c4dee5ab32fc69a2273faba7ab3bf5793b",
+  "updatedAt": "2026-11-03T00:06:00.232Z",
+  "contentHash": "63e672a9d58fd5ffc7c167338d3d293584c450872654b178839c4abe51f74233",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -143,11 +143,6 @@
               "label": "Die Arbeitslosenquote stieg im Juli 2026 auf 3,1 Prozent",
               "date": "2026-08-06",
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-stieg-im-juli-2026-auf-31-prozent/"
-            },
-            {
-              "label": "Die Arbeitslosenquote sank im Juni auf 3,0 Prozent",
-              "date": "2026-07-06",
-              "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-sank-im-juni-auf-30-prozent-1/"
             }
           ],
           "updatedAt": "2026-11-02T13:52:53.767Z"
@@ -230,7 +225,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-02T21:01:35.908Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     },
     "en": {
       "canton": "SO",
@@ -346,11 +341,6 @@
               "label": "Die Arbeitslosenquote stieg im Juli 2026 auf 3,1 Prozent",
               "date": "2026-08-06",
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-stieg-im-juli-2026-auf-31-prozent/"
-            },
-            {
-              "label": "Die Arbeitslosenquote sank im Juni auf 3,0 Prozent",
-              "date": "2026-07-06",
-              "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-sank-im-juni-auf-30-prozent-1/"
             }
           ],
           "updatedAt": "2026-11-02T13:52:53.767Z"
@@ -429,7 +419,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-02T21:01:35.908Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     },
     "de": {
       "canton": "SO",
@@ -545,11 +535,6 @@
               "label": "Die Arbeitslosenquote stieg im Juli 2026 auf 3,1 Prozent",
               "date": "2026-08-06",
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-stieg-im-juli-2026-auf-31-prozent/"
-            },
-            {
-              "label": "Die Arbeitslosenquote sank im Juni auf 3,0 Prozent",
-              "date": "2026-07-06",
-              "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-sank-im-juni-auf-30-prozent-1/"
             }
           ],
           "updatedAt": "2026-11-02T13:52:53.767Z"
@@ -628,7 +613,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-02T21:01:35.908Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     },
     "fr": {
       "canton": "SO",
@@ -744,11 +729,6 @@
               "label": "Die Arbeitslosenquote stieg im Juli 2026 auf 3,1 Prozent",
               "date": "2026-08-06",
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-stieg-im-juli-2026-auf-31-prozent/"
-            },
-            {
-              "label": "Die Arbeitslosenquote sank im Juni auf 3,0 Prozent",
-              "date": "2026-07-06",
-              "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-sank-im-juni-auf-30-prozent-1/"
             }
           ],
           "updatedAt": "2026-11-02T13:52:53.767Z"
@@ -823,7 +803,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-02T21:01:35.908Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     }
   }
 }

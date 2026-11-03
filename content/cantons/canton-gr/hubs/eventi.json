@@ -4,12 +4,12 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "eventi",
-  "updatedAt": "2026-11-02T09:20:10.429Z",
-  "contentHash": "273de1fb752a1c55dfb23c620d473bb8683f57d462582b0afeb7fe987719d3b2",
+  "updatedAt": "2026-11-03T00:06:00.232Z",
+  "contentHash": "26ae3ecdd12fe5b03f64fdde6e981b6af44a44cf5b2b29d3148b0130e3fc523b",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-02T02:24:34.417Z",
+      "updatedAt": "2026-11-02T13:10:19.053Z",
       "keyFacts": 1
     }
   ],
@@ -33,42 +33,6 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Alphorn holiday course for beginners",
-              "detail": "Walserhuus Sertig, Davos",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/alphorn-holiday-course-for-beginners-1/"
-            },
-            {
-              "label": "Cinema Staziun Lavin - BECAARIA",
-              "detail": "Cinema Staziun, Zernez — in corso, ultimo giorno: 7 novembre 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/cinema-staziun-lavin-becaaria/"
-            },
-            {
-              "label": "Tematizzare la Valle Riflessioni sulle forme di vita in Valposchiavo",
-              "detail": "Casa Torre, Poschiavo — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
-            },
-            {
-              "label": "Waldbaden Alpin",
-              "detail": "Scuol — in corso, ultimo giorno: 6 novembre 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
-            },
-            {
-              "label": "Caffè Rumantsch ad Ardez",
-              "detail": "Ardez, Scuol — in corso, ultimo giorno: 11 novembre 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
-            },
-            {
-              "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
-              "detail": "Ardez, Scuol — in corso, ultimo giorno: 7 novembre 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
-            },
-            {
               "label": "Schöne Dinge",
               "detail": "Theater Chur, Chur",
               "date": "2026-11-03",
@@ -87,6 +51,42 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/biutiful/"
             },
             {
+              "label": "Alphorn holiday course for beginners",
+              "detail": "Walserhuus Sertig, Davos — in corso, ultimo giorno: 4 novembre 2026",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/alphorn-holiday-course-for-beginners-1/"
+            },
+            {
+              "label": "Cinema Staziun Lavin - BECAARIA",
+              "detail": "Cinema Staziun, Zernez — in corso, ultimo giorno: 7 novembre 2026",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/cinema-staziun-lavin-becaaria/"
+            },
+            {
+              "label": "Tematizzare la Valle Riflessioni sulle forme di vita in Valposchiavo",
+              "detail": "Casa Torre, Poschiavo — in corso, ultimo giorno: 14 novembre 2026",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
+            },
+            {
+              "label": "Waldbaden Alpin",
+              "detail": "Scuol — in corso, ultimo giorno: 6 novembre 2026",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
+            },
+            {
+              "label": "Caffè Rumantsch ad Ardez",
+              "detail": "Ardez, Scuol — in corso, ultimo giorno: 11 novembre 2026",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
+            },
+            {
+              "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
+              "detail": "Ardez, Scuol — in corso, ultimo giorno: 7 novembre 2026",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
+            },
+            {
               "label": "Geschichten-Kiste: Jakob muss kämpfen",
               "detail": "Evang.-ref. Kirchgemeindehaus, Arosa",
               "date": "2026-11-04",
@@ -95,7 +95,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/grigioni/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -147,7 +147,7 @@
           "url": "/eventi/grigioni/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     },
     "en": {
       "canton": "GR",
@@ -168,42 +168,6 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Alphorn holiday course for beginners",
-              "detail": "Walserhuus Sertig, Davos",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/alphorn-holiday-course-for-beginners-1/"
-            },
-            {
-              "label": "Cinema Staziun Lavin - BECAARIA",
-              "detail": "Cinema Staziun, Zernez — ongoing, last day: 7 November 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/cinema-staziun-lavin-becaaria/"
-            },
-            {
-              "label": "Tematizzare la Valle. Riflessioni sulle forme di vita in Valposchiavo",
-              "detail": "Casa Torre, Poschiavo — ongoing, last day: 14 November 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
-            },
-            {
-              "label": "Forest Bathing Alpin",
-              "detail": "Scuol — ongoing, last day: 6 November 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
-            },
-            {
-              "label": "Café Rumantsch ad Ardez",
-              "detail": "Ardez, Scuol — ongoing, last day: 11 November 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
-            },
-            {
-              "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
-              "detail": "Ardez, Scuol — ongoing, last day: 7 November 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
-            },
-            {
               "label": "Schöne Dinge",
               "detail": "Theater Chur, Chur",
               "date": "2026-11-03",
@@ -222,6 +186,42 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/biutiful/"
             },
             {
+              "label": "Alphorn holiday course for beginners",
+              "detail": "Walserhuus Sertig, Davos — ongoing, last day: 4 November 2026",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/alphorn-holiday-course-for-beginners-1/"
+            },
+            {
+              "label": "Cinema Staziun Lavin - BECAARIA",
+              "detail": "Cinema Staziun, Zernez — ongoing, last day: 7 November 2026",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/cinema-staziun-lavin-becaaria/"
+            },
+            {
+              "label": "Tematizzare la Valle. Riflessioni sulle forme di vita in Valposchiavo",
+              "detail": "Casa Torre, Poschiavo — ongoing, last day: 14 November 2026",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
+            },
+            {
+              "label": "Forest Bathing Alpin",
+              "detail": "Scuol — ongoing, last day: 6 November 2026",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
+            },
+            {
+              "label": "Café Rumantsch ad Ardez",
+              "detail": "Ardez, Scuol — ongoing, last day: 11 November 2026",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
+            },
+            {
+              "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
+              "detail": "Ardez, Scuol — ongoing, last day: 7 November 2026",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
+            },
+            {
               "label": "Geschichten-Kiste: Jakob muss kämpfen",
               "detail": "Evang.-ref. Kirchgemeindehaus, Arosa",
               "date": "2026-11-04",
@@ -230,7 +230,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/graubunden/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -282,7 +282,7 @@
           "url": "/en/events/graubunden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     },
     "de": {
       "canton": "GR",
@@ -303,42 +303,6 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Alphorn-Ferienkurs für Anfänger und Anfängerinnen",
-              "detail": "Walserhuus Sertig, Davos",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/alphorn-holiday-course-for-beginners-1/"
-            },
-            {
-              "label": "Cinema Staziun Lavin - BECAARIA",
-              "detail": "Cinema Staziun, Zernez — läuft, letzter Tag: 7. November 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/cinema-staziun-lavin-becaaria/"
-            },
-            {
-              "label": "Tematizzare la Valle. Riflessioni sulle forme di vita in Valposchiavo",
-              "detail": "Casa Torre, Poschiavo — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
-            },
-            {
-              "label": "Waldbaden Alpin",
-              "detail": "Scuol — läuft, letzter Tag: 6. November 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
-            },
-            {
-              "label": "Cafè Rumantsch ad Ardez",
-              "detail": "Ardez, Scuol — läuft, letzter Tag: 11. November 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
-            },
-            {
-              "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
-              "detail": "Ardez, Scuol — läuft, letzter Tag: 7. November 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
-            },
-            {
               "label": "Schöne Dinge",
               "detail": "Theater Chur, Chur",
               "date": "2026-11-03",
@@ -357,6 +321,42 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/biutiful/"
             },
             {
+              "label": "Alphorn-Ferienkurs für Anfänger und Anfängerinnen",
+              "detail": "Walserhuus Sertig, Davos — läuft, letzter Tag: 4. November 2026",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/alphorn-holiday-course-for-beginners-1/"
+            },
+            {
+              "label": "Cinema Staziun Lavin - BECAARIA",
+              "detail": "Cinema Staziun, Zernez — läuft, letzter Tag: 7. November 2026",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/cinema-staziun-lavin-becaaria/"
+            },
+            {
+              "label": "Tematizzare la Valle. Riflessioni sulle forme di vita in Valposchiavo",
+              "detail": "Casa Torre, Poschiavo — läuft, letzter Tag: 14. November 2026",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
+            },
+            {
+              "label": "Waldbaden Alpin",
+              "detail": "Scuol — läuft, letzter Tag: 6. November 2026",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
+            },
+            {
+              "label": "Cafè Rumantsch ad Ardez",
+              "detail": "Ardez, Scuol — läuft, letzter Tag: 11. November 2026",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
+            },
+            {
+              "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
+              "detail": "Ardez, Scuol — läuft, letzter Tag: 7. November 2026",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
+            },
+            {
               "label": "Geschichten-Kiste: Jakob muss kämpfen",
               "detail": "Evang.-ref. Kirchgemeindehaus, Arosa",
               "date": "2026-11-04",
@@ -365,7 +365,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/graubunden/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -417,7 +417,7 @@
           "url": "/de/veranstaltungen/graubunden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     },
     "fr": {
       "canton": "GR",
@@ -438,42 +438,6 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Alphorn holiday course for beginners",
-              "detail": "Walserhuus Sertig, Davos",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/alphorn-holiday-course-for-beginners-1/"
-            },
-            {
-              "label": "Cinema Staziun Lavin - BECAARIA",
-              "detail": "Cinema Staziun, Zernez — en cours, dernier jour : 7 novembre 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/cinema-staziun-lavin-becaaria/"
-            },
-            {
-              "label": "Tematizzare la Valle. Riflessioni sulle forme di vita in Valposchiavo",
-              "detail": "Casa Torre, Poschiavo — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
-            },
-            {
-              "label": "Waldbaden Alpin",
-              "detail": "Scuol — en cours, dernier jour : 6 novembre 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
-            },
-            {
-              "label": "Café Rumantsch ad Ardez",
-              "detail": "Ardez, Scuol — en cours, dernier jour : 11 novembre 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
-            },
-            {
-              "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
-              "detail": "Ardez, Scuol — en cours, dernier jour : 7 novembre 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
-            },
-            {
               "label": "Schöne Dinge",
               "detail": "Theater Chur, Chur",
               "date": "2026-11-03",
@@ -492,6 +456,42 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/biutiful/"
             },
             {
+              "label": "Alphorn holiday course for beginners",
+              "detail": "Walserhuus Sertig, Davos — en cours, dernier jour : 4 novembre 2026",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/alphorn-holiday-course-for-beginners-1/"
+            },
+            {
+              "label": "Cinema Staziun Lavin - BECAARIA",
+              "detail": "Cinema Staziun, Zernez — en cours, dernier jour : 7 novembre 2026",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/cinema-staziun-lavin-becaaria/"
+            },
+            {
+              "label": "Tematizzare la Valle. Riflessioni sulle forme di vita in Valposchiavo",
+              "detail": "Casa Torre, Poschiavo — en cours, dernier jour : 14 novembre 2026",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tematizzare-la-valle-riflessioni-sulle-forme-di-vita-in-valposchiavo/"
+            },
+            {
+              "label": "Waldbaden Alpin",
+              "detail": "Scuol — en cours, dernier jour : 6 novembre 2026",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
+            },
+            {
+              "label": "Café Rumantsch ad Ardez",
+              "detail": "Ardez, Scuol — en cours, dernier jour : 11 novembre 2026",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
+            },
+            {
+              "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
+              "detail": "Ardez, Scuol — en cours, dernier jour : 7 novembre 2026",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
+            },
+            {
               "label": "Geschichten-Kiste: Jakob muss kämpfen",
               "detail": "Evang.-ref. Kirchgemeindehaus, Arosa",
               "date": "2026-11-04",
@@ -500,7 +500,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/grisons/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -552,7 +552,7 @@
           "url": "/fr/evenements/grisons/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     }
   }
 }

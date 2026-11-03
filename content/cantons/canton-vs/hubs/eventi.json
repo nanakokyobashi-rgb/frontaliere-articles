@@ -4,12 +4,12 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "eventi",
-  "updatedAt": "2026-11-02T09:20:10.429Z",
-  "contentHash": "fca4542660bea3b9cf937c5fb3a6bf84b40d0996109a24fd9ccd656804f3f3ab",
+  "updatedAt": "2026-11-03T00:06:00.232Z",
+  "contentHash": "d3e4e495caa295aca12dea36d3692c151b21f9fec71012826ae67167996ac67e",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-02T02:24:34.417Z",
+      "updatedAt": "2026-11-02T13:10:19.053Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "69",
+          "value": "70",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -34,20 +34,20 @@
           "items": [
             {
               "label": "Schellen-Ursli",
-              "detail": "Kultur- und Kongresszentrum La Poste, Visp",
-              "date": "2026-11-02",
+              "detail": "Kultur- und Kongresszentrum La Poste, Visp — in corso, ultimo giorno: 3 novembre 2026",
+              "date": "2026-11-03",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/schellen-ursli/"
             },
             {
               "label": "Helga Zumstein",
               "detail": "Brig, Brig-Glis — in corso, ultimo giorno: 22 novembre 2026",
-              "date": "2026-11-02",
+              "date": "2026-11-03",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
             },
             {
               "label": "Theater: Aufführungen in Bellwald",
               "detail": "Mehrzweckhalle Bellwald, Bellwald — in corso, ultimo giorno: 8 novembre 2026",
-              "date": "2026-11-02",
+              "date": "2026-11-03",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
             },
             {
@@ -95,7 +95,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vallese/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/vallese/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     },
     "en": {
       "canton": "VS",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "69",
+          "value": "70",
           "note": "from the site’s events calendar"
         }
       ],
@@ -139,20 +139,20 @@
           "items": [
             {
               "label": "Schellen-Ursli",
-              "detail": "Kultur- und Kongresszentrum La Poste, Visp",
-              "date": "2026-11-02",
+              "detail": "Kultur- und Kongresszentrum La Poste, Visp — ongoing, last day: 3 November 2026",
+              "date": "2026-11-03",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/schellen-ursli/"
             },
             {
               "label": "Helga Zumstein",
               "detail": "Brig, Brig-Glis — ongoing, last day: 22 November 2026",
-              "date": "2026-11-02",
+              "date": "2026-11-03",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
             },
             {
               "label": "Theater: Aufführungen in Bellwald",
               "detail": "Mehrzweckhalle Bellwald, Bellwald — ongoing, last day: 8 November 2026",
-              "date": "2026-11-02",
+              "date": "2026-11-03",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
             },
             {
@@ -200,7 +200,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/valais/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/valais/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     },
     "de": {
       "canton": "VS",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "69",
+          "value": "70",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -244,20 +244,20 @@
           "items": [
             {
               "label": "Schellen-Ursli",
-              "detail": "Kultur- und Kongresszentrum La Poste, Visp",
-              "date": "2026-11-02",
+              "detail": "Kultur- und Kongresszentrum La Poste, Visp — läuft, letzter Tag: 3. November 2026",
+              "date": "2026-11-03",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/schellen-ursli/"
             },
             {
               "label": "Helga Zumstein",
               "detail": "Brig, Brig-Glis — läuft, letzter Tag: 22. November 2026",
-              "date": "2026-11-02",
+              "date": "2026-11-03",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
             },
             {
               "label": "Theater: Aufführungen in Bellwald",
               "detail": "Mehrzweckhalle Bellwald, Bellwald — läuft, letzter Tag: 8. November 2026",
-              "date": "2026-11-02",
+              "date": "2026-11-03",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
             },
             {
@@ -305,7 +305,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/wallis/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/wallis/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     },
     "fr": {
       "canton": "VS",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "69",
+          "value": "70",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -349,20 +349,20 @@
           "items": [
             {
               "label": "Schellen-Ursli",
-              "detail": "Kultur- und Kongresszentrum La Poste, Visp",
-              "date": "2026-11-02",
+              "detail": "Kultur- und Kongresszentrum La Poste, Visp — en cours, dernier jour : 3 novembre 2026",
+              "date": "2026-11-03",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/schellen-ursli/"
             },
             {
               "label": "Helga Zumstein",
               "detail": "Brig, Brig-Glis — en cours, dernier jour : 22 novembre 2026",
-              "date": "2026-11-02",
+              "date": "2026-11-03",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-zumstein/"
             },
             {
               "label": "Théâtre : représentations à Bellwald",
               "detail": "Mehrzweckhalle Bellwald, Bellwald — en cours, dernier jour : 8 novembre 2026",
-              "date": "2026-11-02",
+              "date": "2026-11-03",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
             },
             {
@@ -410,7 +410,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/valais/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/valais/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     }
   }
 }

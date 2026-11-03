@@ -4,12 +4,12 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "eventi",
-  "updatedAt": "2026-11-02T09:20:10.429Z",
-  "contentHash": "1c1171067fce366088a478172bed173de4273f3e16a604d349d4426c9a453c47",
+  "updatedAt": "2026-11-03T00:06:00.232Z",
+  "contentHash": "834db593a438adbb23a530e251a8924be7408653292a558f1e1db15cbcdfbb45",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-02T02:24:34.417Z",
+      "updatedAt": "2026-11-02T13:10:19.053Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "17",
+          "value": "18",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,16 +33,16 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Holz | Stein | Farbe - Kunstausstellung",
-              "detail": "Zeughaus — in corso, ultimo giorno: 3 novembre 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/holz-stein-farbe-kunstausstellung/"
-            },
-            {
               "label": "Mythen, Trends und Gesundheit - was steckt wirklich hinter der Ernährung?",
               "detail": "Altdorf",
               "date": "2026-11-03",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/mythen-trends-und-gesundheit-was-steckt-wirklich-hinter-der-ernaehrung/"
+            },
+            {
+              "label": "Holz | Stein | Farbe - Kunstausstellung",
+              "detail": "Zeughaus — in corso, ultimo giorno: 3 novembre 2026",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/holz-stein-farbe-kunstausstellung/"
             },
             {
               "label": "Tiro del Rütli a 300 m",
@@ -95,7 +95,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/uri/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/uri/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     },
     "en": {
       "canton": "UR",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "17",
+          "value": "18",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,16 +138,16 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Holz | Stein | Farbe - Kunstausstellung",
-              "detail": "Zeughaus — ongoing, last day: 3 November 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/holz-stein-farbe-kunstausstellung/"
-            },
-            {
               "label": "M Tr Then, Trends und Gesundheit -as",
               "detail": "Altdorf",
               "date": "2026-11-03",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/mythen-trends-und-gesundheit-was-steckt-wirklich-hinter-der-ernaehrung/"
+            },
+            {
+              "label": "Holz | Stein | Farbe - Kunstausstellung",
+              "detail": "Zeughaus — ongoing, last day: 3 November 2026",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/holz-stein-farbe-kunstausstellung/"
             },
             {
               "label": "Rütlischiessen 300 m",
@@ -200,7 +200,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/uri/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/uri/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     },
     "de": {
       "canton": "UR",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "17",
+          "value": "18",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,16 +243,16 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Holz | Stein | Farbe - Kunstausstellung",
-              "detail": "Zeughaus — läuft, letzter Tag: 3. November 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/holz-stein-farbe-kunstausstellung/"
-            },
-            {
               "label": "Mythen, Trends und Gesundheit – was steckt wirklich hinter der Ernährung?",
               "detail": "Altdorf",
               "date": "2026-11-03",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/mythen-trends-und-gesundheit-was-steckt-wirklich-hinter-der-ernaehrung/"
+            },
+            {
+              "label": "Holz | Stein | Farbe - Kunstausstellung",
+              "detail": "Zeughaus — läuft, letzter Tag: 3. November 2026",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/holz-stein-farbe-kunstausstellung/"
             },
             {
               "label": "Rütlischiessen 300 m",
@@ -305,7 +305,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/uri/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/uri/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     },
     "fr": {
       "canton": "UR",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "17",
+          "value": "18",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,16 +348,16 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Holz | Stein | Farbe - Kunstausstellung",
-              "detail": "Zeughaus — en cours, dernier jour : 3 novembre 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/holz-stein-farbe-kunstausstellung/"
-            },
-            {
               "label": "Mythen, Trends und Gesundheit - was steckt wirklich hinter der Ernährung ?",
               "detail": "Altdorf",
               "date": "2026-11-03",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/mythen-trends-und-gesundheit-was-steckt-wirklich-hinter-der-ernaehrung/"
+            },
+            {
+              "label": "Holz | Stein | Farbe - Kunstausstellung",
+              "detail": "Zeughaus — en cours, dernier jour : 3 novembre 2026",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/holz-stein-farbe-kunstausstellung/"
             },
             {
               "label": "Tir du Rütli à 300 m",
@@ -410,7 +410,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/uri/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/uri/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     }
   }
 }

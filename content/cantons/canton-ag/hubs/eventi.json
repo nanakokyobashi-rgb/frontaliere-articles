@@ -4,12 +4,12 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "eventi",
-  "updatedAt": "2026-11-02T09:20:10.429Z",
-  "contentHash": "3cff21baeb8a5bcb5c5fc6085bce083ccad9ed7f330bc0b10ac9992df1806137",
+  "updatedAt": "2026-11-03T00:06:00.232Z",
+  "contentHash": "8bdecc35ba079f24f40a67ecf11d02c0b97a50fe8a2fb21d20ad3bd835ce477e",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-02T02:24:34.417Z",
+      "updatedAt": "2026-11-02T13:10:19.053Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "107",
+          "value": "108",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,24 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Peter Schärli: «So auch!»",
-              "detail": "Stadtbistro Isebähnli, Baden",
-              "date": "2026-11-02",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/peter-schaerli-so-auch_A6DguYC"
-            },
-            {
-              "label": "EXKLUSIVER BLICK HINTER DIE KULISSEN",
-              "detail": "Strohmuseum im Park — in corso, ultimo giorno: 28 novembre 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/exklusiver-blick-hinter-die-kulissen-1/"
-            },
-            {
-              "label": "Schiff über Bord!",
-              "detail": "Gemeindesaal «Breiten», Rothrist — in corso, ultimo giorno: 7 novembre 2026",
-              "date": "2026-11-02",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/rothrist/schiff-ueber-bord_A78Zn5t"
-            },
             {
               "label": "Metzgete",
               "detail": "Kaiseraugst",
@@ -87,15 +69,33 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/auf-baeume-klettern-frei-nach-leo-tolstois-der-tod-des-iwan-iljitsch/"
             },
             {
+              "label": "EXKLUSIVER BLICK HINTER DIE KULISSEN",
+              "detail": "Strohmuseum im Park — in corso, ultimo giorno: 28 novembre 2026",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/exklusiver-blick-hinter-die-kulissen-1/"
+            },
+            {
+              "label": "Schiff über Bord!",
+              "detail": "Gemeindesaal «Breiten», Rothrist — in corso, ultimo giorno: 7 novembre 2026",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/rothrist/schiff-ueber-bord_A78Zn5t"
+            },
+            {
               "label": "Aarauer Highlights am Rüeblimärttag",
               "detail": "Aarau",
               "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/aarauer-highlights-am-rueeblimaerttag/"
+            },
+            {
+              "label": "Ein Blick: Lisa Kugler",
+              "detail": "Singisen Forum",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/muri-ag/ein-blick-lisa-kugler_AyjHJhL"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/argovia/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/argovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     },
     "en": {
       "canton": "AG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "107",
+          "value": "108",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,24 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Peter Schärli: «So auch!»",
-              "detail": "Stadtbistro Isebähnli, Baden",
-              "date": "2026-11-02",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/peter-schaerli-so-auch_A6DguYC"
-            },
-            {
-              "label": "EXKLUSIVER BLICK HINTER DIE KULISSEN",
-              "detail": "Strohmuseum im Park — ongoing, last day: 28 November 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/exklusiver-blick-hinter-die-kulissen-1/"
-            },
-            {
-              "label": "Schiff über Bord!",
-              "detail": "Gemeindesaal «Breiten», Rothrist — ongoing, last day: 7 November 2026",
-              "date": "2026-11-02",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/rothrist/schiff-ueber-bord_A78Zn5t"
-            },
             {
               "label": "Metzgete",
               "detail": "Kaiseraugst",
@@ -192,15 +174,33 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/auf-baeume-klettern-frei-nach-leo-tolstois-der-tod-des-iwan-iljitsch/"
             },
             {
+              "label": "EXKLUSIVER BLICK HINTER DIE KULISSEN",
+              "detail": "Strohmuseum im Park — ongoing, last day: 28 November 2026",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/exklusiver-blick-hinter-die-kulissen-1/"
+            },
+            {
+              "label": "Schiff über Bord!",
+              "detail": "Gemeindesaal «Breiten», Rothrist — ongoing, last day: 7 November 2026",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/rothrist/schiff-ueber-bord_A78Zn5t"
+            },
+            {
               "label": "Aarauer Highlights am Rüeblimärttag",
               "detail": "Aarau",
               "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/aarauer-highlights-am-rueeblimaerttag/"
+            },
+            {
+              "label": "Ein Blick: Lisa Kugler",
+              "detail": "Singisen Forum",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/muri-ag/ein-blick-lisa-kugler_AyjHJhL"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/aargau/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/aargau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     },
     "de": {
       "canton": "AG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "107",
+          "value": "108",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,24 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Peter Schärli: «So auch!»",
-              "detail": "Stadtbistro Isebähnli, Baden",
-              "date": "2026-11-02",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/peter-schaerli-so-auch_A6DguYC"
-            },
-            {
-              "label": "EXKLUSIVER BLICK HINTER DIE KULISSEN",
-              "detail": "Strohmuseum im Park — läuft, letzter Tag: 28. November 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/exklusiver-blick-hinter-die-kulissen-1/"
-            },
-            {
-              "label": "Schiff über Bord!",
-              "detail": "Gemeindesaal «Breiten», Rothrist — läuft, letzter Tag: 7. November 2026",
-              "date": "2026-11-02",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/rothrist/schiff-ueber-bord_A78Zn5t"
-            },
             {
               "label": "Metzgete",
               "detail": "Kaiseraugst",
@@ -297,15 +279,33 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/auf-baeume-klettern-frei-nach-leo-tolstois-der-tod-des-iwan-iljitsch/"
             },
             {
+              "label": "EXKLUSIVER BLICK HINTER DIE KULISSEN",
+              "detail": "Strohmuseum im Park — läuft, letzter Tag: 28. November 2026",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/exklusiver-blick-hinter-die-kulissen-1/"
+            },
+            {
+              "label": "Schiff über Bord!",
+              "detail": "Gemeindesaal «Breiten», Rothrist — läuft, letzter Tag: 7. November 2026",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/rothrist/schiff-ueber-bord_A78Zn5t"
+            },
+            {
               "label": "Aarauer Highlights am Rüeblimärttag",
               "detail": "Aarau",
               "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/aarauer-highlights-am-rueeblimaerttag/"
+            },
+            {
+              "label": "Ein Blick: Lisa Kugler",
+              "detail": "Singisen Forum",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/muri-ag/ein-blick-lisa-kugler_AyjHJhL"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/aargau/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/aargau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     },
     "fr": {
       "canton": "AG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "107",
+          "value": "108",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,24 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Peter Schärli: «So auch!»",
-              "detail": "Stadtbistro Isebähnli, Baden",
-              "date": "2026-11-02",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/peter-schaerli-so-auch_A6DguYC"
-            },
-            {
-              "label": "EXKLUSIVER BLICK HINTER DIE KULISSEN",
-              "detail": "Strohmuseum im Park — en cours, dernier jour : 28 novembre 2026",
-              "date": "2026-11-02",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/exklusiver-blick-hinter-die-kulissen-1/"
-            },
-            {
-              "label": "Schiff über Bord!",
-              "detail": "Gemeindesaal «Breiten», Rothrist — en cours, dernier jour : 7 novembre 2026",
-              "date": "2026-11-02",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/rothrist/schiff-ueber-bord_A78Zn5t"
-            },
             {
               "label": "Metzgete",
               "detail": "Kaiseraugst",
@@ -402,15 +384,33 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/auf-baeume-klettern-frei-nach-leo-tolstois-der-tod-des-iwan-iljitsch/"
             },
             {
+              "label": "EXKLUSIVER BLICK HINTER DIE KULISSEN",
+              "detail": "Strohmuseum im Park — en cours, dernier jour : 28 novembre 2026",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/exklusiver-blick-hinter-die-kulissen-1/"
+            },
+            {
+              "label": "Schiff über Bord!",
+              "detail": "Gemeindesaal «Breiten», Rothrist — en cours, dernier jour : 7 novembre 2026",
+              "date": "2026-11-03",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/rothrist/schiff-ueber-bord_A78Zn5t"
+            },
+            {
               "label": "Aarauer Highlights am Rüeblimärttag",
               "detail": "Aarau",
               "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/aarauer-highlights-am-rueeblimaerttag/"
+            },
+            {
+              "label": "Ein Blick: Lisa Kugler",
+              "detail": "Singisen Forum",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/muri-ag/ein-blick-lisa-kugler_AyjHJhL"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/argovie/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/argovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     }
   }
 }

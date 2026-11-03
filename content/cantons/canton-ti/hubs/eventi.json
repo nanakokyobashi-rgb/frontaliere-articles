@@ -4,12 +4,12 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "eventi",
-  "updatedAt": "2026-11-02T09:20:10.429Z",
-  "contentHash": "7fef4b02daa46407bc4e004d826a2c25676b5e3187766881b90436dd9981568e",
+  "updatedAt": "2026-11-03T00:06:00.232Z",
+  "contentHash": "ac61ee97b5f2ee193c9facea27f67904accb601c89fd382be2384550854313bc",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-02T02:24:34.417Z",
+      "updatedAt": "2026-11-02T13:10:19.053Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "152",
+          "value": "154",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
+              "label": "Donazione di sangue",
+              "detail": "Centro La Torre, Losone",
+              "date": "2026-11-03",
+              "url": "https://www.tio.ch/agenda/day/20261103/64759"
+            },
+            {
+              "label": "Presente e futuro della diplomazia",
+              "detail": "Auditorium, Campus ovest USI, Lugano, Lugano",
+              "date": "2026-11-03",
+              "url": "https://www.tio.ch/agenda/day/20261103/64779"
+            },
+            {
+              "label": "Conversazione con l’artista Riccardo Benassi",
+              "detail": "Museo d’arte della Svizzera italiana, Lugano",
+              "date": "2026-11-03",
+              "url": "https://www.tio.ch/agenda/day/20261103/64299"
+            },
+            {
+              "label": "Election Night USA",
+              "detail": "Auditorium, Campus ovest USI, Lugano",
+              "date": "2026-11-03",
+              "url": "https://www.tio.ch/agenda/day/20261103/64521"
+            },
+            {
               "label": "International Classic Jazz Workshop",
-              "detail": "Hotel Ascona, Ascona",
-              "date": "2026-11-02",
+              "detail": "Hotel Ascona, Ascona — in corso, ultimo giorno: 8 novembre 2026",
+              "date": "2026-11-03",
               "url": "https://www.guidle.com/it/musei/bambini/eventi/ascona/international-classic-jazz-workshop_ANs5bHs"
             },
             {
-              "label": "Big tech: 4 trappole 10 soluzioni",
-              "detail": "Bibliomedia, Biasca",
-              "date": "2026-11-02",
-              "url": "https://www.tio.ch/agenda/day/20261102/64699"
-            },
-            {
               "label": "Jazz Workshop 2026",
-              "detail": "Bar La Grotta dell’Hotel Ascona, Ascona",
-              "date": "2026-11-02",
+              "detail": "Bar La Grotta dell’Hotel Ascona, Ascona — in corso, ultimo giorno: 4 novembre 2026",
+              "date": "2026-11-03",
               "url": "https://www.tio.ch/agenda/day/20261102/64562"
             },
             {
               "label": "Gyotaku - Tracce di pesci",
               "detail": "Museo della pesca, Caslano — in corso, ultimo giorno: 8 novembre 2026",
-              "date": "2026-11-02",
+              "date": "2026-11-03",
               "url": "https://www.tio.ch/agenda/day/20261101/61721"
             },
             {
               "label": "Morestalgia di Riccardo Benassi",
               "detail": "Hall del LAC, Lugano — in corso, ultimo giorno: 6 novembre 2026",
-              "date": "2026-11-02",
+              "date": "2026-11-03",
               "url": "https://www.tio.ch/agenda/day/20261101/64298"
             },
             {
               "label": "Il Regno delle Zucche",
               "detail": "Serfontana, Mendrisio — in corso, ultimo giorno: 4 novembre 2026",
-              "date": "2026-11-02",
+              "date": "2026-11-03",
               "url": "https://www.tio.ch/agenda/day/20261031/64546"
             },
             {
               "label": "Autunno alle Isole",
               "detail": "Isole di Brissago, Brissago — in corso, ultimo giorno: 8 novembre 2026",
-              "date": "2026-11-02",
+              "date": "2026-11-03",
               "url": "https://www.tio.ch/agenda/day/20261031/64514"
-            },
-            {
-              "label": "Aline d'Auria - Mai più, tra poco, spesso, un tempo.",
-              "detail": "Casa Rotonda — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-02",
-              "url": "https://www.tio.ch/agenda/day/20261031/64617"
-            },
-            {
-              "label": "Planetario",
-              "detail": "L'ideatorio, Lugano — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-02",
-              "url": "https://www.tio.ch/agenda/day/20261031/63445"
-            },
-            {
-              "label": "Robot - Esposizione interattiva",
-              "detail": "L'ideatorio, Lugano — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-02",
-              "url": "https://www.tio.ch/agenda/day/20261031/63442"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ticino/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -142,10 +142,10 @@
           "date": "2026-10-06T11:41:53.257Z"
         },
         {
-          "title": "Teatro di Locarno: chiesti più fondi agli enti pubblici",
-          "url": "/articoli-frontaliere/teatro-locarno-fondi-pubblici/",
-          "excerpt": "Oltre cento soci all’assemblea di giovedì sera Deficit di circa 55'000 franchi nella stagione 2025/26 Il disavanzo è stato coperto con il patrimonio sociale",
-          "date": "2026-10-09T23:43:17.647Z"
+          "title": "Locarno Film Festival: la cultura come legame",
+          "url": "/articoli-frontaliere/locarno-film-festival-resistenza-legami/",
+          "excerpt": "Il Locarno Film Festival inaugura con 'Les Yeux Verts', esplorando temi di trauma e resilienza attraverso il cinema in Piazza Grande.",
+          "date": "2026-08-05T04:40:05.340Z"
         }
       ],
       "latestCantonArticles": [],
@@ -163,7 +163,7 @@
           "url": "/articoli-frontaliere/eventi-weekend-ticino/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     },
     "en": {
       "canton": "TI",
@@ -173,7 +173,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "152",
+          "value": "154",
           "note": "from the site’s events calendar"
         }
       ],
@@ -184,69 +184,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
+              "label": "Blood donation",
+              "detail": "Centro La Torre, Losone",
+              "date": "2026-11-03",
+              "url": "https://www.tio.ch/agenda/day/20261103/64759"
+            },
+            {
+              "label": "The Present and Future of Diplomacy",
+              "detail": "Auditorium, Campus ovest USI, Lugano, Lugano",
+              "date": "2026-11-03",
+              "url": "https://www.tio.ch/agenda/day/20261103/64779"
+            },
+            {
+              "label": "Conversation with artist Riccardo Benassi",
+              "detail": "Museo d’arte della Svizzera italiana, Lugano",
+              "date": "2026-11-03",
+              "url": "https://www.tio.ch/agenda/day/20261103/64299"
+            },
+            {
+              "label": "U.S. Election Night",
+              "detail": "Auditorium, Campus ovest USI, Lugano",
+              "date": "2026-11-03",
+              "url": "https://www.tio.ch/agenda/day/20261103/64521"
+            },
+            {
               "label": "International Classic Jazz Workshop",
-              "detail": "Hotel Ascona, Ascona",
-              "date": "2026-11-02",
+              "detail": "Hotel Ascona, Ascona — ongoing, last day: 8 November 2026",
+              "date": "2026-11-03",
               "url": "https://www.guidle.com/it/musei/bambini/eventi/ascona/international-classic-jazz-workshop_ANs5bHs"
             },
             {
-              "label": "Big tech: 4 traps 10 solutions",
-              "detail": "Bibliomedia, Biasca",
-              "date": "2026-11-02",
-              "url": "https://www.tio.ch/agenda/day/20261102/64699"
-            },
-            {
               "label": "J",
-              "detail": "Bar La Grotta dell’Hotel Ascona, Ascona",
-              "date": "2026-11-02",
+              "detail": "Bar La Grotta dell’Hotel Ascona, Ascona — ongoing, last day: 4 November 2026",
+              "date": "2026-11-03",
               "url": "https://www.tio.ch/agenda/day/20261102/64562"
             },
             {
               "label": "Gyotaku - Fish Trails",
               "detail": "Museo della pesca, Caslano — ongoing, last day: 8 November 2026",
-              "date": "2026-11-02",
+              "date": "2026-11-03",
               "url": "https://www.tio.ch/agenda/day/20261101/61721"
             },
             {
               "label": "Morestalgia by Riccardo Benassi",
               "detail": "Hall del LAC, Lugano — ongoing, last day: 6 November 2026",
-              "date": "2026-11-02",
+              "date": "2026-11-03",
               "url": "https://www.tio.ch/agenda/day/20261101/64298"
             },
             {
               "label": "The Kingdom of Pumpkins",
               "detail": "Serfontana, Mendrisio — ongoing, last day: 4 November 2026",
-              "date": "2026-11-02",
+              "date": "2026-11-03",
               "url": "https://www.tio.ch/agenda/day/20261031/64546"
             },
             {
               "label": "Autumn in the Islands",
               "detail": "Isole di Brissago, Brissago — ongoing, last day: 8 November 2026",
-              "date": "2026-11-02",
+              "date": "2026-11-03",
               "url": "https://www.tio.ch/agenda/day/20261031/64514"
-            },
-            {
-              "label": "Aline d 'Auria - Never again, soon, often, once.",
-              "detail": "Casa Rotonda — ongoing, last day: 15 November 2026",
-              "date": "2026-11-02",
-              "url": "https://www.tio.ch/agenda/day/20261031/64617"
-            },
-            {
-              "label": "Planetarium",
-              "detail": "L'ideatorio, Lugano — ongoing, last day: 15 November 2026",
-              "date": "2026-11-02",
-              "url": "https://www.tio.ch/agenda/day/20261031/63445"
-            },
-            {
-              "label": "Robot - Interactive Display",
-              "detail": "L'ideatorio, Lugano — ongoing, last day: 15 November 2026",
-              "date": "2026-11-02",
-              "url": "https://www.tio.ch/agenda/day/20261031/63442"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/ticino/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -293,10 +293,10 @@
           "date": "2026-10-06T11:41:53.257Z"
         },
         {
-          "title": "Teatro di Locarno: more funding sought from public authorities",
-          "url": "/en/cross-border-articles/locarno-theatre-public-funding/",
-          "excerpt": "More than one hundred members at Thursday evening's assembly A deficit of approximately 55'000 francs in the 2025/26 season The shortfall was covered with the association's assets",
-          "date": "2026-10-09T23:43:17.647Z"
+          "title": "Locarno Film Festival: culture as a link",
+          "url": "/en/cross-border-articles/locarno-film-festival-bonds-resistance/",
+          "excerpt": "The Locarno Film Festival opens with 'Les Yeux Verts', exploring themes of trauma and resilience through cinema in Piazza Grande.",
+          "date": "2026-08-05T04:40:05.340Z"
         }
       ],
       "latestCantonArticles": [],
@@ -314,7 +314,7 @@
           "url": "/en/cross-border-articles/weekend-events-ticino/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     },
     "de": {
       "canton": "TI",
@@ -324,7 +324,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "152",
+          "value": "154",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -335,69 +335,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
+              "label": "Blutspende",
+              "detail": "Centro La Torre, Losone",
+              "date": "2026-11-03",
+              "url": "https://www.tio.ch/agenda/day/20261103/64759"
+            },
+            {
+              "label": "Gegenwart und Zukunft der Diplomatie",
+              "detail": "Auditorium, Campus ovest USI, Lugano, Lugano",
+              "date": "2026-11-03",
+              "url": "https://www.tio.ch/agenda/day/20261103/64779"
+            },
+            {
+              "label": "Gespräch mit dem Künstler Riccardo Benassi",
+              "detail": "Museo d’arte della Svizzera italiana, Lugano",
+              "date": "2026-11-03",
+              "url": "https://www.tio.ch/agenda/day/20261103/64299"
+            },
+            {
+              "label": "Wahlnacht USA",
+              "detail": "Auditorium, Campus ovest USI, Lugano",
+              "date": "2026-11-03",
+              "url": "https://www.tio.ch/agenda/day/20261103/64521"
+            },
+            {
               "label": "International Classic Jazz Workshop",
-              "detail": "Hotel Ascona, Ascona",
-              "date": "2026-11-02",
+              "detail": "Hotel Ascona, Ascona — läuft, letzter Tag: 8. November 2026",
+              "date": "2026-11-03",
               "url": "https://www.guidle.com/it/musei/bambini/eventi/ascona/international-classic-jazz-workshop_ANs5bHs"
             },
             {
-              "label": "Big Tech: 4 Fallen 10 Lösungen",
-              "detail": "Bibliomedia, Biasca",
-              "date": "2026-11-02",
-              "url": "https://www.tio.ch/agenda/day/20261102/64699"
-            },
-            {
               "label": "Jazz-Workshop 2026",
-              "detail": "Bar La Grotta dell’Hotel Ascona, Ascona",
-              "date": "2026-11-02",
+              "detail": "Bar La Grotta dell’Hotel Ascona, Ascona — läuft, letzter Tag: 4. November 2026",
+              "date": "2026-11-03",
               "url": "https://www.tio.ch/agenda/day/20261102/64562"
             },
             {
               "label": "Gyotaku - Spuren von Fischen",
               "detail": "Museo della pesca, Caslano — läuft, letzter Tag: 8. November 2026",
-              "date": "2026-11-02",
+              "date": "2026-11-03",
               "url": "https://www.tio.ch/agenda/day/20261101/61721"
             },
             {
               "label": "Morestalgie von Riccardo Benassi",
               "detail": "Hall del LAC, Lugano — läuft, letzter Tag: 6. November 2026",
-              "date": "2026-11-02",
+              "date": "2026-11-03",
               "url": "https://www.tio.ch/agenda/day/20261101/64298"
             },
             {
               "label": "Das Königreich der Kürbisse",
               "detail": "Serfontana, Mendrisio — läuft, letzter Tag: 4. November 2026",
-              "date": "2026-11-02",
+              "date": "2026-11-03",
               "url": "https://www.tio.ch/agenda/day/20261031/64546"
             },
             {
               "label": "Herbst auf den Inseln",
               "detail": "Isole di Brissago, Brissago — läuft, letzter Tag: 8. November 2026",
-              "date": "2026-11-02",
+              "date": "2026-11-03",
               "url": "https://www.tio.ch/agenda/day/20261031/64514"
-            },
-            {
-              "label": "Aline d 'Auria - Nie wieder, bald, oft, einst.",
-              "detail": "Casa Rotonda — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-02",
-              "url": "https://www.tio.ch/agenda/day/20261031/64617"
-            },
-            {
-              "label": "Planetarium",
-              "detail": "L'ideatorio, Lugano — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-02",
-              "url": "https://www.tio.ch/agenda/day/20261031/63445"
-            },
-            {
-              "label": "Roboter - Interaktive Ausstellung",
-              "detail": "L'ideatorio, Lugano — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-02",
-              "url": "https://www.tio.ch/agenda/day/20261031/63442"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/tessin/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -444,10 +444,10 @@
           "date": "2026-10-06T11:41:53.257Z"
         },
         {
-          "title": "Teatro di Locarno: Mehr Mittel von den öffentlichen Stellen gefordert",
-          "url": "/de/grenzgaenger-artikel/theater-locarno-oeffentliche-gelder/",
-          "excerpt": "Über hundert Mitglieder an der Versammlung am Donnerstagabend Defizit von rund 55'000 Franken in der Saison 2025/26 Das Defizit wurde mit dem Vereinsvermögen gedeckt",
-          "date": "2026-10-09T23:43:17.647Z"
+          "title": "Locarno Film Festival: Kultur als Verbindung",
+          "url": "/de/grenzgaenger-artikel/locarno-film-festival-bande-widerstand/",
+          "excerpt": "Das Locarno Film Festival eröffnet mit \"Les Yeux Verts\" und erforscht Themen wie Trauma und Resilienz durch das Kino auf der Piazza Grande.",
+          "date": "2026-08-05T04:40:05.340Z"
         }
       ],
       "latestCantonArticles": [],
@@ -465,7 +465,7 @@
           "url": "/de/grenzgaenger-artikel/wochenend-veranstaltungen-tessin/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     },
     "fr": {
       "canton": "TI",
@@ -475,7 +475,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "152",
+          "value": "154",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -486,69 +486,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
+              "label": "Don de sang",
+              "detail": "Centro La Torre, Losone",
+              "date": "2026-11-03",
+              "url": "https://www.tio.ch/agenda/day/20261103/64759"
+            },
+            {
+              "label": "Le présent et l'avenir de la diplomatie",
+              "detail": "Auditorium, Campus ovest USI, Lugano, Lugano",
+              "date": "2026-11-03",
+              "url": "https://www.tio.ch/agenda/day/20261103/64779"
+            },
+            {
+              "label": "Conversation avec l’artiste Riccardo Benassi",
+              "detail": "Museo d’arte della Svizzera italiana, Lugano",
+              "date": "2026-11-03",
+              "url": "https://www.tio.ch/agenda/day/20261103/64299"
+            },
+            {
+              "label": "Nuit électorale aux États-Unis",
+              "detail": "Auditorium, Campus ovest USI, Lugano",
+              "date": "2026-11-03",
+              "url": "https://www.tio.ch/agenda/day/20261103/64521"
+            },
+            {
               "label": "International Classic Jazz Workshop",
-              "detail": "Hotel Ascona, Ascona",
-              "date": "2026-11-02",
+              "detail": "Hotel Ascona, Ascona — en cours, dernier jour : 8 novembre 2026",
+              "date": "2026-11-03",
               "url": "https://www.guidle.com/it/musei/bambini/eventi/ascona/international-classic-jazz-workshop_ANs5bHs"
             },
             {
-              "label": "Big tech : 4 pièges 10 solutions",
-              "detail": "Bibliomedia, Biasca",
-              "date": "2026-11-02",
-              "url": "https://www.tio.ch/agenda/day/20261102/64699"
-            },
-            {
               "label": "Atelier de Jazz 2026",
-              "detail": "Bar La Grotta dell’Hotel Ascona, Ascona",
-              "date": "2026-11-02",
+              "detail": "Bar La Grotta dell’Hotel Ascona, Ascona — en cours, dernier jour : 4 novembre 2026",
+              "date": "2026-11-03",
               "url": "https://www.tio.ch/agenda/day/20261102/64562"
             },
             {
               "label": "Gyotaku - Traces de poissons",
               "detail": "Museo della pesca, Caslano — en cours, dernier jour : 8 novembre 2026",
-              "date": "2026-11-02",
+              "date": "2026-11-03",
               "url": "https://www.tio.ch/agenda/day/20261101/61721"
             },
             {
               "label": "Morestalgia de Riccardo Benassi",
               "detail": "Hall del LAC, Lugano — en cours, dernier jour : 6 novembre 2026",
-              "date": "2026-11-02",
+              "date": "2026-11-03",
               "url": "https://www.tio.ch/agenda/day/20261101/64298"
             },
             {
               "label": "Le Royaume des Citrouilles",
               "detail": "Serfontana, Mendrisio — en cours, dernier jour : 4 novembre 2026",
-              "date": "2026-11-02",
+              "date": "2026-11-03",
               "url": "https://www.tio.ch/agenda/day/20261031/64546"
             },
             {
               "label": "Automne aux îles",
               "detail": "Isole di Brissago, Brissago — en cours, dernier jour : 8 novembre 2026",
-              "date": "2026-11-02",
+              "date": "2026-11-03",
               "url": "https://www.tio.ch/agenda/day/20261031/64514"
-            },
-            {
-              "label": "Aline d'Auria - Plus jamais, bientôt, souvent, depuis longtemps.",
-              "detail": "Casa Rotonda — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-02",
-              "url": "https://www.tio.ch/agenda/day/20261031/64617"
-            },
-            {
-              "label": "Planétarium",
-              "detail": "L'ideatorio, Lugano — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-02",
-              "url": "https://www.tio.ch/agenda/day/20261031/63445"
-            },
-            {
-              "label": "Robot - Exposition interactive",
-              "detail": "L'ideatorio, Lugano — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-02",
-              "url": "https://www.tio.ch/agenda/day/20261031/63442"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/tessin/",
-          "updatedAt": "2026-11-02T02:24:34.417Z"
+          "updatedAt": "2026-11-02T13:10:19.053Z"
         }
       ],
       "curatedArticles": [
@@ -595,10 +595,10 @@
           "date": "2026-10-06T11:41:53.257Z"
         },
         {
-          "title": "Théâtre de Locarno : vous avez demandé plus de fonds aux organismes publics",
-          "url": "/fr/articles-frontalier/theatre-locarno-fonds-publics/",
-          "excerpt": "Plus de cent associés à l'assemblée du jeudi soir Déficit d'environ 55'000 francs pour la saison 2025/26 Le déficit a été couvert par le patrimoine social",
-          "date": "2026-10-09T23:43:17.647Z"
+          "title": "Festival du film de Locarno : la culture comme lien",
+          "url": "/fr/articles-frontalier/locarno-film-festival-liens-resistance/",
+          "excerpt": "Le Locarno Film Festival ouvre avec « Les Yeux Verts », explorant les thèmes du traumatisme et de la résilience à travers le cinéma sur la Piazza Grande.",
+          "date": "2026-08-05T04:40:05.340Z"
         }
       ],
       "latestCantonArticles": [],
@@ -616,7 +616,7 @@
           "url": "/fr/articles-frontalier/evenements-week-end-tessin/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T00:06:00.232Z"
     }
   }
 }
