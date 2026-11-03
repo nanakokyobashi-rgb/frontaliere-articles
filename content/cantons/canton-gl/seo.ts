@@ -509,6 +509,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-glarona-detrazioni-energia-2029': {
+    title: 'Glarona: Governo contro le detrazioni per risparmio energetico',
+    description: 'Il Governo glaronese raccomanda di respingere il postulato Markus Schnyder (SVP) chiede di mantenere le detrazioni La riforma entra in vigore il 1°',
+    keywords: 'frontalieri, ticino, svizzera, italia, glarona, governo, contro, detrazioni',
+    ogTitle: 'Glarona: Governo contro le detrazioni per risparmio energetico',
+    ogDescription: 'Il Governo glaronese raccomanda di respingere il postulato Markus Schnyder (SVP) chiede di mantenere le detrazioni La riforma entra in vigore il 1° gennaio 2029',
+    canonicalPath: '/articoli-glarona/glarona-detrazioni-energia-2029/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Glarona: Governo contro le detrazioni per risparmio energetico",
+      "description": "Il Governo glaronese raccomanda di respingere il postulato Markus Schnyder (SVP) chiede di mantenere le detrazioni La riforma entra in vigore il 1°",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-glarona-detrazioni-energia-2029.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-03T10:48:22+00:00",
+      "dateModified": "2026-11-03T10:48:22+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-glarona/glarona-detrazioni-energia-2029/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

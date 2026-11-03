@@ -42,6 +42,9 @@ const blogMetaCantonGlFr: Record<string, string> = {
     'blog.article.glarona-detrazioni-energia.title': 'Glaris : le gouvernement prend position sur les déductions énergétiques',
     'blog.article.glarona-detrazioni-energia.excerpt': 'Le gouvernement de Glaris prend position sur les déductions fiscales pour les mesures d\'économie d\'énergie.',
     'blog.article.glarona-detrazioni-energia.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.glarona-detrazioni-energia-2029.title': 'Glaris : Gouvernement opposé aux déductions pour les économies d’énergie',
+    'blog.article.glarona-detrazioni-energia-2029.excerpt': 'Le Gouvernement glaronais recommande de rejeter le postulat Markus Schnyder (SVP) demande le maintien des déductions La réforme entre en vigueur le 1er janvier',
+    'blog.article.glarona-detrazioni-energia-2029.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonGlFr;

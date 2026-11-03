@@ -42,6 +42,9 @@ const blogMetaCantonGlDe: Record<string, string> = {
     'blog.article.glarona-detrazioni-energia.title': 'Glarus: Regierung nimmt Stellung zu Energieabzügen',
     'blog.article.glarona-detrazioni-energia.excerpt': 'Die Regierung des Kantons Glarus nimmt Stellung zu den Steuerabzügen für Energiesparmassnahmen.',
     'blog.article.glarona-detrazioni-energia.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.glarona-detrazioni-energia-2029.title': 'Glarus: Regierung gegen Abzüge für Energiesparmassnahmen',
+    'blog.article.glarona-detrazioni-energia-2029.excerpt': 'Die Glarner Regierung empfiehlt, das Postulat abzulehnen Markus Schnyder (SVP) fordert, die Abzüge beizubehalten Die Reform tritt am 1.',
+    'blog.article.glarona-detrazioni-energia-2029.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonGlDe;

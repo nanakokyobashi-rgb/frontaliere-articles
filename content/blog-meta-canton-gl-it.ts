@@ -42,6 +42,9 @@ const blogMetaCantonGlIt: Record<string, string> = {
     'blog.article.glarona-detrazioni-energia.title': 'Glarona: governo prende posizione su detrazioni energetiche',
     'blog.article.glarona-detrazioni-energia.excerpt': 'Il governo di Glarona prende posizione sulle detrazioni fiscali per le misure di risparmio energetico.',
     'blog.article.glarona-detrazioni-energia.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.glarona-detrazioni-energia-2029.title': 'Glarona: Governo contro le detrazioni per risparmio energetico',
+    'blog.article.glarona-detrazioni-energia-2029.excerpt': 'Il Governo glaronese raccomanda di respingere il postulato Markus Schnyder (SVP) chiede di mantenere le detrazioni La riforma entra in vigore il 1° gennaio 2029',
+    'blog.article.glarona-detrazioni-energia-2029.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonGlIt;
