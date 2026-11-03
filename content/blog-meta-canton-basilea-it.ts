@@ -54,6 +54,9 @@ const blogMetaCantonBasileaIt: Record<string, string> = {
     'blog.article.baselland-maiali-enzootica.title': 'Baselland: 750 maiali abbattuti per polmonite enzootica',
     'blog.article.baselland-maiali-enzootica.excerpt': 'In un allevamento da ingrasso di Baselland 750 maiali sono stati abbattuti.',
     'blog.article.baselland-maiali-enzootica.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.sussidi-premi-basel-2027.title': 'Basilea Città aumenta i sussidi ai premi per il 2027',
+    'blog.article.sussidi-premi-basel-2027.excerpt': 'Il Governo di Basilea Città adegua i contributi ai premi: +4,4% adulti, +4,9% bambini, +3,6% giovani adulti e circa CHF 243 milioni di spesa.',
+    'blog.article.sussidi-premi-basel-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonBasileaIt;
