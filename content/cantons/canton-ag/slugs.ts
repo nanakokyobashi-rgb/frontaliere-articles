@@ -29,6 +29,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'saphir-idrogeno-verde-axpo': { it: 'saphir-idrogeno-verde-axpo', en: 'saphir-green-hydrogen-axpo', de: 'saphir-gruener-wasserstoff-axpo', fr: 'saphir-hydrogene-vert-axpo' },
  'fislisbach-sondaggio-leematten': { it: 'fislisbach-sondaggio-leematten', en: 'fislisbach-leematten-survey', de: 'fislisbach-leematten-umfrage', fr: 'fislisbach-sondage-leematten' },
  'blackout-brugg-guasto-alta-tensione': { it: 'blackout-brugg-guasto-alta-tensione', en: 'brugg-power-outage-high-voltage-fault', de: 'brugg-stromausfall-hochspannungsstoerung', fr: 'panne-courant-brugg-haute-tension' },
+ 'siccita-fislisbach-forniture': { it: 'siccita-fislisbach-forniture', en: 'fislisbach-drought-water-supply', de: 'fislisbach-trinkwasser-lieferungen', fr: 'fislisbach-eau-potable-livraisons' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

@@ -81,6 +81,9 @@ const blogMetaCantonAgFr: Record<string, string> = {
     'blog.article.blackout-brugg-guasto-alta-tensione.title': 'Panne de courant à Brugg : panne de haute tension',
     'blog.article.blackout-brugg-guasto-alta-tensione.excerpt': 'Le canton d\'Argovie a averti sur Alertswiss d\'une panne de courant dans la région de Brugg.',
     'blog.article.blackout-brugg-guasto-alta-tensione.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.siccita-fislisbach-forniture.title': 'Fislisbach : Baden doit encore fournir de l’eau potable',
+    'blog.article.siccita-fislisbach-forniture.excerpt': 'À la mi-octobre 2026, le prélèvement hebdomadaire est descendu à 7\'136 m3, mais les approvisionnements de Regionalwerke Baden AG restent nécessaires.',
+    'blog.article.siccita-fislisbach-forniture.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonAgFr;

@@ -149,4 +149,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'glarona-detrazioni-energia-2029',
+ category: 'fiscale',
+ date: '2026-11-03T10:48:22.919Z',
+ image: '/images/blog/article-glarona-detrazioni-energia-2029.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['GL'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];

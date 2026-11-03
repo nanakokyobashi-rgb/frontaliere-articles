@@ -855,6 +855,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-zurigo-strategia-energetica-2026': {
+    title: 'Zurigo adotta la Strategia energetica 2026 | Frontaliere Ticino',
+    description: 'Strategia e pianificazione energetica 2026 adottate dal Regierungsrat Calore: possibile rinuncia completa ai fossili entro il 2050 Estate 2050: oltre',
+    keywords: 'frontalieri, ticino, svizzera, italia, zurigo, adotta, strategia, energetica',
+    ogTitle: 'Zurigo adotta la Strategia energetica 2026',
+    ogDescription: 'Strategia e pianificazione energetica 2026 adottate dal Regierungsrat Calore: possibile rinuncia completa ai fossili entro il 2050 Estate 2050: oltre l\'80%',
+    canonicalPath: '/articoli-zurigo/zurigo-strategia-energetica-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Zurigo adotta la Strategia energetica 2026",
+      "description": "Strategia e pianificazione energetica 2026 adottate dal Regierungsrat Calore: possibile rinuncia completa ai fossili entro il 2050 Estate 2050: oltre",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-zurigo-strategia-energetica-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-03T10:47:42+00:00",
+      "dateModified": "2026-11-03T10:47:42+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-zurigo/zurigo-strategia-energetica-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

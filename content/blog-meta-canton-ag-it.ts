@@ -81,6 +81,9 @@ const blogMetaCantonAgIt: Record<string, string> = {
     'blog.article.blackout-brugg-guasto-alta-tensione.title': 'Blackout a Brugg: guasto ad alta tensione',
     'blog.article.blackout-brugg-guasto-alta-tensione.excerpt': 'Il Canton Argovia ha avvertito su Alertswiss per un blackout nella regione di Brugg.',
     'blog.article.blackout-brugg-guasto-alta-tensione.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.siccita-fislisbach-forniture.title': 'Fislisbach: Baden deve ancora fornire acqua potabile',
+    'blog.article.siccita-fislisbach-forniture.excerpt': 'A metà ottobre 2026 il prelievo settimanale è sceso a 7\'136 m3, ma le forniture di Regionalwerke Baden AG restano necessarie.',
+    'blog.article.siccita-fislisbach-forniture.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonAgIt;

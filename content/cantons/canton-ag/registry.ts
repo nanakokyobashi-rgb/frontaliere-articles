@@ -293,4 +293,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'siccita-fislisbach-forniture',
+ category: 'pratico',
+ date: '2026-11-03T10:33:15.362Z',
+ image: '/images/blog/article-siccita-fislisbach-forniture.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['AG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
