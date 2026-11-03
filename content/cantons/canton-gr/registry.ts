@@ -216,4 +216,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'vallo-protezione-sorte-lostallo',
+ category: 'novita',
+ date: '2026-11-03T08:59:26.587Z',
+ image: '/images/blog/article-vallo-protezione-sorte-lostallo.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['GR'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

@@ -60,6 +60,9 @@ const blogMetaCantonGrEn: Record<string, string> = {
     'blog.article.innhub-la-punt-rinvio-apertura.title': 'Innhub La Punt: opening postponed to summer 2029',
     'blog.article.innhub-la-punt-rinvio-apertura.excerpt': 'Opening in summer 2029, six months later than initially planned.',
     'blog.article.innhub-la-punt-rinvio-apertura.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.vallo-protezione-sorte-lostallo.title': 'Lostallo, the protective wall in Sorte is underway',
+    'blog.article.vallo-protezione-sorte-lostallo.excerpt': 'The protection wall will start in the next few days Municipal credit: 6.2 million francs Main works planned for autumn 2027 The flood of 21 June',
+    'blog.article.vallo-protezione-sorte-lostallo.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonGrEn;
