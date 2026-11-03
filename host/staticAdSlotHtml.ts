@@ -99,5 +99,5 @@ export function staticAdSlotHtml(slot: StaticAdSlotKey, options?: StaticAdSlotHt
   if (options?.experimentId) attrs.push(`data-ad-experiment="${safeDataValue(options.experimentId)}"`);
   if (options?.experimentVariant) attrs.push(`data-ad-variant="${safeDataValue(options.experimentVariant)}"`);
   if (config.fullWidthResponsive) attrs.push('data-full-width-responsive="true"');
-  return `<section data-ft-house-slot><ins ${attrs.join(' ')}></ins></section>`;
+  return `<div data-house><ins ${attrs.join(' ')}></ins></div>`;
 }
