@@ -95,8 +95,8 @@ after(() => {
   if (dir) fs.rmSync(dir, { recursive: true, force: true });
 });
 
-test('IL CASO: un blob vissuto solo in un commit intermedio del branch non attesta la baseline', () => {
-  const blobs = blobsByPathFromHistory(['a.mjs'], { cwd: dir, partialClone: false });
+test('IL CASO: un blob vissuto solo in un commit intermedio del branch non attesta la baseline', async () => {
+  const blobs = await blobsByPathFromHistory(['a.mjs'], { cwd: dir, partialClone: false });
   const seen = blobs.get('a.mjs');
   assert.ok(seen, 'nessuna revisione letta per a.mjs');
   assert.equal(seen.has(h(V.intermediate)), false,
@@ -109,8 +109,8 @@ test('IL CASO: un blob vissuto solo in un commit intermedio del branch non attes
   assert.equal(verdict.ok, false, 'la stessa baseline su main e\' una ghost-baseline: deve esserlo gia\' sulla PR');
 });
 
-test('restano valide la storia di origin/main e l\'albero finale di HEAD', () => {
-  const seen = blobsByPathFromHistory(['a.mjs'], { cwd: dir, partialClone: false }).get('a.mjs');
+test('restano valide la storia di origin/main e l\'albero finale di HEAD', async () => {
+  const seen = (await blobsByPathFromHistory(['a.mjs'], { cwd: dir, partialClone: false })).get('a.mjs');
   assert.equal(seen.has(h(V.main)), true, 'una revisione gia\' su main resta attestabile');
   assert.equal(seen.has(h(V.final)), true, 'il contenuto finale della PR e\' cio\' che lo squash porta su main');
 });
@@ -123,10 +123,10 @@ test('la passata sui rinomini scarta anche lei i commit intermedi del branch', (
     'il blob del commit intermedio sotto il nome nuovo non sopravvive allo squash');
 });
 
-test('su main (HEAD == origin/main) la storia letta e\' la stessa di prima', () => {
+test('su main (HEAD == origin/main) la storia letta e\' la stessa di prima', async () => {
   git('checkout', '-q', 'main');
   try {
-    const seen = blobsByPathFromHistory(['a.mjs'], { cwd: dir, partialClone: false }).get('a.mjs');
+    const seen = (await blobsByPathFromHistory(['a.mjs'], { cwd: dir, partialClone: false })).get('a.mjs');
     assert.deepEqual([...seen], [h(V.main)]);
   } finally {
     git('checkout', '-q', 'pr');
