@@ -90,7 +90,6 @@ export function staticAdSlotHtml(slot: StaticAdSlotKey, options?: StaticAdSlotHt
     `data-ad-client="${ADSENSE_CLIENT_ID}"`,
     `data-ad-slot="${config.slot}"`,
     `data-ad-format="${config.format}"`,
-    'data-ft-house-google=""',
   ];
   if (config.layout) attrs.push(`data-ad-layout="${config.layout}"`);
   if (options?.placement || config.placement) {
@@ -100,5 +99,5 @@ export function staticAdSlotHtml(slot: StaticAdSlotKey, options?: StaticAdSlotHt
   if (options?.experimentId) attrs.push(`data-ad-experiment="${safeDataValue(options.experimentId)}"`);
   if (options?.experimentVariant) attrs.push(`data-ad-variant="${safeDataValue(options.experimentVariant)}"`);
   if (config.fullWidthResponsive) attrs.push('data-full-width-responsive="true"');
-  return `<span style="display:block" data-ft-house-slot="${safeDataValue(options?.placement || config.placement || slot)}" data-ft-house-library="adsense" data-ft-house-height="${config.placeholderMinHeight}"><ins ${attrs.join(' ')}></ins><span data-ft-house-host=""></span></span>`;
+  return `<section data-ft-house-slot><ins ${attrs.join(' ')}></ins></section>`;
 }
