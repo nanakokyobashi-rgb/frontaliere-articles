@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "mobilita",
-  "updatedAt": "2026-11-03T02:14:08.370Z",
-  "contentHash": "1b6c151ceb4778774cfc7df9b6023adb55572feb32c07316ab385bd698ffcf22",
+  "updatedAt": "2026-11-03T07:44:37.207Z",
+  "contentHash": "d3b43f97dfe5bacfcfebd0669991557897e67b2d972fceecb693563757135d49",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "16",
+          "value": "14",
           "note": "segnalazioni aggiornate: 2 novembre 2026"
         },
         {
@@ -73,12 +73,6 @@
               "date": "2026-10-15T05:00:00.000Z"
             },
             {
-              "label": "A12 Fribourg -> Vevey tra Svincolo autostradale Fribourg Sud E Svincolo autostradale Matran Situazione: chiusa cantiere Causa: lavori di costruzione",
-              "value": "Chiusura",
-              "detail": "fine prevista: 3 novembre 2026",
-              "date": "2026-10-15T06:41:00.000Z"
-            },
-            {
               "label": "Route des Chapelettes, Chapelle in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
               "value": "Chiusura",
               "detail": "fine prevista: 6 novembre 2026",
@@ -89,6 +83,12 @@
               "value": "Chiusura",
               "detail": "fine prevista: 27 novembre 2026",
               "date": "2026-10-26T06:00:00.000Z"
+            },
+            {
+              "label": "Route de la Molière, Estavayer-le-Lac in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
+              "value": "Chiusura",
+              "detail": "fine prevista: 27 novembre 2026",
+              "date": "2026-10-26T06:34:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
@@ -194,7 +194,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-03T02:14:08.370Z"
+      "updatedAt": "2026-11-03T07:44:37.207Z"
     },
     "en": {
       "canton": "FR",
@@ -204,7 +204,7 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "16",
+          "value": "14",
           "note": "reports as of 2 November 2026"
         },
         {
@@ -250,12 +250,6 @@
               "date": "2026-10-15T05:00:00.000Z"
             },
             {
-              "label": "A12 Fribourg -> Vevey tra Svincolo autostradale Fribourg Sud E Svincolo autostradale Matran Situazione: chiusa cantiere Causa: lavori di costruzione",
-              "value": "Closure",
-              "detail": "until 3 November 2026",
-              "date": "2026-10-15T06:41:00.000Z"
-            },
-            {
               "label": "Route des Chapelettes, Chapelle in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
               "value": "Closure",
               "detail": "until 6 November 2026",
@@ -266,6 +260,12 @@
               "value": "Closure",
               "detail": "until 27 November 2026",
               "date": "2026-10-26T06:00:00.000Z"
+            },
+            {
+              "label": "Route de la Molière, Estavayer-le-Lac in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
+              "value": "Closure",
+              "detail": "until 27 November 2026",
+              "date": "2026-10-26T06:34:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
@@ -371,7 +371,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-03T02:14:08.370Z"
+      "updatedAt": "2026-11-03T07:44:37.207Z"
     },
     "de": {
       "canton": "FR",
@@ -381,7 +381,7 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "16",
+          "value": "14",
           "note": "Meldungen vom 2. November 2026"
         },
         {
@@ -427,12 +427,6 @@
               "date": "2026-10-15T05:00:00.000Z"
             },
             {
-              "label": "A12 Freiburg -> Vevey zwischen Anschluss Freiburg-Süd und Anschluss Matran Sachlage: Strecke gesperrt Baustelle Ursache: Bauarbeiten",
-              "value": "Sperrung",
-              "detail": "bis 3. November 2026",
-              "date": "2026-10-15T06:41:00.000Z"
-            },
-            {
               "label": "Route des Chapelettes, Chapelle in beide Richtungen Sachlage: gesperrt für Durchgangsverkehr Ursache: Bauarbeiten",
               "value": "Sperrung",
               "detail": "bis 6. November 2026",
@@ -443,6 +437,12 @@
               "value": "Sperrung",
               "detail": "bis 27. November 2026",
               "date": "2026-10-26T06:00:00.000Z"
+            },
+            {
+              "label": "Route de la Molière, Estavayer-le-Lac in beide Richtungen Sachlage: gesperrt für Durchgangsverkehr Ursache: Bauarbeiten",
+              "value": "Sperrung",
+              "detail": "bis 27. November 2026",
+              "date": "2026-10-26T06:34:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
@@ -548,7 +548,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-03T02:14:08.370Z"
+      "updatedAt": "2026-11-03T07:44:37.207Z"
     },
     "fr": {
       "canton": "FR",
@@ -558,7 +558,7 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "16",
+          "value": "14",
           "note": "signalements au 2 novembre 2026"
         },
         {
@@ -604,12 +604,6 @@
               "date": "2026-10-15T05:00:00.000Z"
             },
             {
-              "label": "A12 Fribourg -> Vevey entre Jonction autoroutière Fribourg-Sud et Jonction autoroutière Matran Situation: fermé travaux Raison: travaux de construction",
-              "value": "Fermeture",
-              "detail": "jusqu’au 3 novembre 2026",
-              "date": "2026-10-15T06:41:00.000Z"
-            },
-            {
               "label": "Route des Chapelettes, Chapelle dans les deux sens Situation: circulation de transit interdite Raison: travaux de construction",
               "value": "Fermeture",
               "detail": "jusqu’au 6 novembre 2026",
@@ -620,6 +614,12 @@
               "value": "Fermeture",
               "detail": "jusqu’au 27 novembre 2026",
               "date": "2026-10-26T06:00:00.000Z"
+            },
+            {
+              "label": "Route de la Molière, Estavayer-le-Lac dans les deux sens Situation: circulation de transit interdite Raison: travaux de construction",
+              "value": "Fermeture",
+              "detail": "jusqu’au 27 novembre 2026",
+              "date": "2026-10-26T06:34:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
@@ -725,7 +725,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-03T02:14:08.370Z"
+      "updatedAt": "2026-11-03T07:44:37.207Z"
     }
   }
 }

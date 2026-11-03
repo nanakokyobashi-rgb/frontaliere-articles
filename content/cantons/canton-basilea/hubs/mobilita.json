@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "mobilita",
-  "updatedAt": "2026-11-03T02:14:08.370Z",
-  "contentHash": "fb7ae58694baba78d67bea1fffe2e68c74e5d85999a429432f4141de277abceb",
+  "updatedAt": "2026-11-03T07:44:37.207Z",
+  "contentHash": "c5d197a3c92a59717201ccde4154cd270ec2146bc2a2a923b48f8f1fcce416bd",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -42,7 +42,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "29",
+          "value": "28",
           "note": "segnalazioni aggiornate: 2 novembre 2026"
         }
       ],
@@ -276,7 +276,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-03T02:14:08.370Z"
+      "updatedAt": "2026-11-03T07:44:37.207Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -296,7 +296,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "29",
+          "value": "28",
           "note": "reports as of 2 November 2026"
         }
       ],
@@ -530,7 +530,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-03T02:14:08.370Z"
+      "updatedAt": "2026-11-03T07:44:37.207Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -550,7 +550,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "29",
+          "value": "28",
           "note": "Meldungen vom 2. November 2026"
         }
       ],
@@ -784,7 +784,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-03T02:14:08.370Z"
+      "updatedAt": "2026-11-03T07:44:37.207Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -804,7 +804,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "29",
+          "value": "28",
           "note": "signalements au 2 novembre 2026"
         }
       ],
@@ -1038,7 +1038,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-03T02:14:08.370Z"
+      "updatedAt": "2026-11-03T07:44:37.207Z"
     }
   }
 }

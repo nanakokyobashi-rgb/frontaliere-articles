@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "mobilita",
-  "updatedAt": "2026-11-03T02:14:08.370Z",
-  "contentHash": "65f45c0fb5a7bb8d464ccc63cd898a3287b2ecee87495bc3901729d74a082f8c",
+  "updatedAt": "2026-11-03T07:44:37.207Z",
+  "contentHash": "021059a96980d290444b6b59490dfc788870e66e360d3fe1defb689681ba9281",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -37,12 +37,12 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "3",
+          "value": "2",
           "note": "segnalazioni aggiornate: 2 novembre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "28",
+          "value": "26",
           "note": "segnalazioni aggiornate: 2 novembre 2026"
         }
       ],
@@ -116,12 +116,6 @@
               "date": "2026-10-29T11:08:00.000Z"
             },
             {
-              "label": "Bretella autostradale Lugano-Centro Lugano Centro -> Diramazione Lugano Nord tra Svincolo autostradale Lugano Nord E Raccordo autostradale Diramazione Lugano Nord Situazione: chiusa cantiere",
-              "value": "Chiusura",
-              "detail": "fine prevista: 3 novembre 2026",
-              "date": "2026-10-29T14:27:00.000Z"
-            },
-            {
               "label": "A2 Chiasso <-> S. Gottardo tra Svincolo autostradale Airolo E Svincolo autostradale Quinto Situazione: problemi di traffico cantiere, lunghezza [km] 3.0 Limitazione del traffico: corsia d'emergenza…",
               "value": "Chiusura",
               "detail": "fine prevista: 9 dicembre 2026",
@@ -156,6 +150,12 @@
               "value": "Cantiere",
               "detail": "fine prevista: 27 novembre 2026",
               "date": "2026-05-22T05:00:00.000Z"
+            },
+            {
+              "label": "H2 Airolo <-> Göschenen tra Passo Passo del S. Gottardo E Luogo Motto Bartola Situazione: problemi di traffico cantiere, lunghezza [km] 0.37 Limitazione del traffico: nuova viabilità Aggiunta 1…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 20 novembre 2026",
+              "date": "2026-08-27T05:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
@@ -293,7 +293,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-03T02:14:08.370Z"
+      "updatedAt": "2026-11-03T07:44:37.207Z"
     },
     "en": {
       "canton": "TI",
@@ -308,12 +308,12 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "3",
+          "value": "2",
           "note": "reports as of 2 November 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "28",
+          "value": "26",
           "note": "reports as of 2 November 2026"
         }
       ],
@@ -387,12 +387,6 @@
               "date": "2026-10-29T11:08:00.000Z"
             },
             {
-              "label": "Bretella autostradale Lugano-Centro Lugano Centro -> Diramazione Lugano Nord tra Svincolo autostradale Lugano Nord E Raccordo autostradale Diramazione Lugano Nord Situazione: chiusa cantiere",
-              "value": "Closure",
-              "detail": "until 3 November 2026",
-              "date": "2026-10-29T14:27:00.000Z"
-            },
-            {
               "label": "A2 Chiasso <-> S. Gottardo tra Svincolo autostradale Airolo E Svincolo autostradale Quinto Situazione: problemi di traffico cantiere, lunghezza [km] 3.0 Limitazione del traffico: corsia d'emergenza…",
               "value": "Closure",
               "detail": "until 9 December 2026",
@@ -427,6 +421,12 @@
               "value": "Roadworks",
               "detail": "until 27 November 2026",
               "date": "2026-05-22T05:00:00.000Z"
+            },
+            {
+              "label": "H2 Airolo <-> Göschenen tra Passo Passo del S. Gottardo E Luogo Motto Bartola Situazione: problemi di traffico cantiere, lunghezza [km] 0.37 Limitazione del traffico: nuova viabilità Aggiunta 1…",
+              "value": "Roadworks",
+              "detail": "until 20 November 2026",
+              "date": "2026-08-27T05:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
@@ -563,7 +563,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-03T02:14:08.370Z"
+      "updatedAt": "2026-11-03T07:44:37.207Z"
     },
     "de": {
       "canton": "TI",
@@ -578,12 +578,12 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "3",
+          "value": "2",
           "note": "Meldungen vom 2. November 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "28",
+          "value": "26",
           "note": "Meldungen vom 2. November 2026"
         }
       ],
@@ -657,12 +657,6 @@
               "date": "2026-10-29T11:08:00.000Z"
             },
             {
-              "label": "Bretella autostradale Lugano-Centro Lugano-Zentrum -> Verzweigung Lugano-Nord zwischen Anschluss Lugano-Nord und Autobahndreieck Verzweigung Lugano-Nord Sachlage: Strecke gesperrt Baustelle",
-              "value": "Sperrung",
-              "detail": "bis 3. November 2026",
-              "date": "2026-10-29T14:27:00.000Z"
-            },
-            {
               "label": "A2 Chiasso <-> Gotthard zwischen Anschluss Airolo und Anschluss Quinto Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 3.0 Verkehrsführung: Pannenstreifen gesperrt Zusatz 1: vorübergehende…",
               "value": "Sperrung",
               "detail": "bis 9. Dezember 2026",
@@ -697,6 +691,12 @@
               "value": "Baustelle",
               "detail": "bis 27. November 2026",
               "date": "2026-05-22T05:00:00.000Z"
+            },
+            {
+              "label": "H2 Airolo <-> Göschenen zwischen Pass Gotthard-Pass und Ortschaft Motto Bartola Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.37 Verkehrsführung: veränderte Verkehrsführung Zusatz 1…",
+              "value": "Baustelle",
+              "detail": "bis 20. November 2026",
+              "date": "2026-08-27T05:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
@@ -833,7 +833,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-03T02:14:08.370Z"
+      "updatedAt": "2026-11-03T07:44:37.207Z"
     },
     "fr": {
       "canton": "TI",
@@ -848,12 +848,12 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "3",
+          "value": "2",
           "note": "signalements au 2 novembre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "28",
+          "value": "26",
           "note": "signalements au 2 novembre 2026"
         }
       ],
@@ -927,12 +927,6 @@
               "date": "2026-10-29T11:08:00.000Z"
             },
             {
-              "label": "Bretella autostradale Lugano-Centro Lugano-Centre -> Echangeur de Lugano-Nord entre Jonction autoroutière Lugano-Nord et Echangeur Echangeur de Lugano-Nord Situation: fermé travaux",
-              "value": "Fermeture",
-              "detail": "jusqu’au 3 novembre 2026",
-              "date": "2026-10-29T14:27:00.000Z"
-            },
-            {
               "label": "A2 Chiasso <-> St-Gothard entre Jonction autoroutière Airolo et Jonction autoroutière Quinto Situation: trafic perturbé travaux, longueur [km] 3.0 Gestion du trafic: bande d'arrêt d'urgence fermée…",
               "value": "Fermeture",
               "detail": "jusqu’au 9 décembre 2026",
@@ -967,6 +961,12 @@
               "value": "Chantier",
               "detail": "jusqu’au 27 novembre 2026",
               "date": "2026-05-22T05:00:00.000Z"
+            },
+            {
+              "label": "H2 Airolo <-> Göschenen entre Col Col du St-Gothard et Localité Motto Bartola Situation: trafic perturbé travaux, longueur [km] 0.37 Gestion du trafic: nouveau plan de circulation Complément 1…",
+              "value": "Chantier",
+              "detail": "jusqu’au 20 novembre 2026",
+              "date": "2026-08-27T05:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
@@ -1104,7 +1104,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-03T02:14:08.370Z"
+      "updatedAt": "2026-11-03T07:44:37.207Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "carburanti",
-  "updatedAt": "2026-11-02T09:20:10.429Z",
-  "contentHash": "ba6e68ce0139cc15fa5f1b1a13d2bce4ab52902b3541f7759fcc328bb810fbb8",
+  "updatedAt": "2026-11-03T07:44:37.207Z",
+  "contentHash": "00d974818ec46f03f8a98847fa7b2cab806b58e0c77dd1dc1c98f46d2d9cdd8b",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -60,6 +60,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Decima fiera posti apprendistato Appenzell 7 novembre 2026",
+          "url": "/articoli-appenzello/decima-fiera-apprendistati-innerrhoden/",
+          "excerpt": "62 aziende dell'Innerrhoden presenteranno offerte di apprendistato sabato 7 novembre 2026 all'Aula Gringel, ingresso gratuito dalle 9.00 alle 15.00.",
+          "date": "2026-11-03T07:41:05.610Z"
+        },
+        {
           "title": "45 residenti chiedono misure contro il rumore sulla Langgasse",
           "url": "/articoli-appenzello/45-residenti-richiesta-rumore/",
           "excerpt": "45 residenti hanno depositato al comune il mercoledì 28 ottobre una richiesta per l'esame urgente di Tempo 30 e misure di moderazione del traffico.",
@@ -82,12 +88,6 @@
           "url": "/articoli-appenzello/teufen-ricorso-progetto-bundt/",
           "excerpt": "L'Obergericht dell'Appenzello Esterno ha accolto in parte il ricorso degli abitanti: il progetto stradale Bündt non può essere attuato nella forma attuale.",
           "date": "2026-10-27T20:08:13.817Z"
-        },
-        {
-          "title": "Appenzello Esterno: credito approvato per il programma PFAS",
-          "url": "/articoli-appenzello/credito-pfas-appenzello/",
-          "excerpt": "Il Parlamento di Appenzello Esterno ha approvato con 60 voti a zero e un'astensione il credito per un programma PFAS.",
-          "date": "2026-10-27T00:02:34.724Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T07:44:37.207Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -147,6 +147,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Tenth Apprenticeship Positions Fair Appenzell November 7, 2026",
+          "url": "/en/appenzell-articles/tenth-apprenticeship-fair-innerrhoden/",
+          "excerpt": "62 companies from Innerrhoden will present apprenticeship opportunities on Saturday, 7 November 2026, at Aula Gringel, with free admission from 9.00 to 15.00.",
+          "date": "2026-11-03T07:41:05.610Z"
+        },
+        {
           "title": "45 residents call for measures against noise on Langgasse",
           "url": "/en/appenzell-articles/45-residents-noise-request/",
           "excerpt": "45 residents filed a request with the municipality on Wednesday, October 28, for the urgent review of Tempo 30 and traffic-calming measures.",
@@ -169,12 +175,6 @@
           "url": "/en/appenzell-articles/teufen-bundt-project-appeal/",
           "excerpt": "The Obergericht of Appenzell Ausserrhoden partially upheld the residents' appeal: the Bündt road project cannot be implemented in its current form.",
           "date": "2026-10-27T20:08:13.817Z"
-        },
-        {
-          "title": "Appenzell Ausserrhoden: credit approved for the PFAS program",
-          "url": "/en/appenzell-articles/appenzell-ausserrhoden-pfas-credit/",
-          "excerpt": "The Parliament of Appenzell Ausserrhoden approved the funding for a PFAS program by 60 votes to zero, with one abstention.",
-          "date": "2026-10-27T00:02:34.724Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T07:44:37.207Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -234,6 +234,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Zehnte Lehrstellenmesse Appenzell 7. November 2026",
+          "url": "/de/appenzell-artikel/zehnte-lehrstellenmesse-innerrhoden/",
+          "excerpt": "62 Unternehmen aus Innerrhoden präsentieren am Samstag, 7.",
+          "date": "2026-11-03T07:41:05.610Z"
+        },
+        {
           "title": "45 Anwohner fordern Maßnahmen gegen den Lärm auf der Langgasse",
           "url": "/de/appenzell-artikel/45-einwohner-laerm-forderung/",
           "excerpt": "45 Anwohner haben am Mittwoch, dem 28.",
@@ -256,12 +262,6 @@
           "url": "/de/appenzell-artikel/teufen-buendt-projekt-beschwerde/",
           "excerpt": "Das Obergericht des Kantons Appenzell Ausserrhoden hat die Beschwerde der Anwohner teilweise gutgeheissen: Das Strassenprojekt Bündt kann in seiner aktuellen Form nicht umgesetzt werden.",
           "date": "2026-10-27T20:08:13.817Z"
-        },
-        {
-          "title": "Appenzell Ausserrhoden: Kredit für das PFAS-Programm genehmigt",
-          "url": "/de/appenzell-artikel/appenzell-ausserrhoden-pfas-kredit/",
-          "excerpt": "Das Parlament von Appenzell Ausserrhoden hat den Kredit für ein PFAS-Programm mit 60 zu 0 Stimmen und einer Enthaltung genehmigt.",
-          "date": "2026-10-27T00:02:34.724Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T07:44:37.207Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -321,6 +321,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Dixième salon des places d'apprentissage d'Appenzell 7 novembre 2026",
+          "url": "/fr/articles-appenzell/dixieme-foire-apprentissage-innerrhoden/",
+          "excerpt": "62 entreprises de l'Innerrhoden présenteront des offres d'apprentissage le samedi 7 novembre 2026 à l'Aula Gringel, entrée gratuite de 9.00 à 15.00.",
+          "date": "2026-11-03T07:41:05.610Z"
+        },
+        {
           "title": "45 résidents demandent des mesures contre le bruit sur la Langgasse",
           "url": "/fr/articles-appenzell/45-residents-demande-bruit/",
           "excerpt": "45 résidents ont déposé auprès de la commune, le mercredi 28 octobre, une demande visant l’examen urgent de Tempo 30 et des mesures d’apaisement du trafic.",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-appenzell/teufen-recours-projet-buendt/",
           "excerpt": "Le Tribunal cantonal d’Appenzell Rhodes-Extérieures a partiellement admis le recours des habitants : le projet routier Bündt ne peut pas être réalisé dans sa forme actuelle.",
           "date": "2026-10-27T20:08:13.817Z"
-        },
-        {
-          "title": "Appenzell Rhodes-Extérieures : crédit approuvé pour le programme PFAS",
-          "url": "/fr/articles-appenzell/appenzell-exterieur-credit-pfas/",
-          "excerpt": "Le Parlement d’Appenzell Rhodes-Extérieures a approuvé par 60 voix contre zéro et une abstention le crédit pour un programme PFAS.",
-          "date": "2026-10-27T00:02:34.724Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-02T09:20:10.429Z"
+      "updatedAt": "2026-11-03T07:44:37.207Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "mobilita",
-  "updatedAt": "2026-11-03T02:14:08.370Z",
-  "contentHash": "b2080564295bff80cc28a586887a06ef02025b6ae287de1dd5942d2b529a9b1c",
+  "updatedAt": "2026-11-03T07:44:37.207Z",
+  "contentHash": "934313f01ef621151ddf1a7af01812b4f748a8d4a35bc04afdc9bfd489db9f79",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "5",
+          "value": "4",
           "note": "segnalazioni aggiornate: 2 novembre 2026"
         },
         {
@@ -42,12 +42,6 @@
           "title": "Chiusure, cantieri e disagi",
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
-            {
-              "label": "A5 Bienne <-> Soletta tra Svincolo autostradale Soletta-Sud E Svincolo autostradale Soletta-Est Situazione: chiusa cantiere Limitazione del traffico: corsia chiusa",
-              "value": "Chiusura",
-              "detail": "fine prevista: 3 novembre 2026",
-              "date": "2026-02-02T19:00:00.000Z"
-            },
             {
               "label": "A1 Bern <-> Zürich tra Raccordo autostradale Diramazione Härkingen E Svincolo autostradale Kriegstetten Situazione: problemi di traffico cantiere, lunghezza [km] 19.0 Limitazione del traffico…",
               "value": "Chiusura",
@@ -88,6 +82,12 @@
               "value": "Cantiere",
               "detail": "fine prevista: 31 dicembre 2029",
               "date": "2024-12-30T05:49:00.000Z"
+            },
+            {
+              "label": "A2 Lucerna <-> Basilea Svincolo autostradale Egerkingen Situazione: problemi di traffico cantiere, lunghezza [km] 0.6 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.5",
+              "value": "Cantiere",
+              "detail": "fine prevista: 30 luglio 2027",
+              "date": "2025-04-11T05:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
@@ -160,7 +160,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-03T02:14:08.370Z"
+      "updatedAt": "2026-11-03T07:44:37.207Z"
     },
     "en": {
       "canton": "SO",
@@ -170,7 +170,7 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "5",
+          "value": "4",
           "note": "reports as of 2 November 2026"
         },
         {
@@ -185,12 +185,6 @@
           "title": "Closures, roadworks and disruptions",
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
-            {
-              "label": "A5 Bienne <-> Soletta tra Svincolo autostradale Soletta-Sud E Svincolo autostradale Soletta-Est Situazione: chiusa cantiere Limitazione del traffico: corsia chiusa",
-              "value": "Closure",
-              "detail": "until 3 November 2026",
-              "date": "2026-02-02T19:00:00.000Z"
-            },
             {
               "label": "A1 Bern <-> Zürich tra Raccordo autostradale Diramazione Härkingen E Svincolo autostradale Kriegstetten Situazione: problemi di traffico cantiere, lunghezza [km] 19.0 Limitazione del traffico…",
               "value": "Closure",
@@ -231,6 +225,12 @@
               "value": "Roadworks",
               "detail": "until 31 December 2029",
               "date": "2024-12-30T05:49:00.000Z"
+            },
+            {
+              "label": "A2 Lucerna <-> Basilea Svincolo autostradale Egerkingen Situazione: problemi di traffico cantiere, lunghezza [km] 0.6 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.5",
+              "value": "Roadworks",
+              "detail": "until 30 July 2027",
+              "date": "2025-04-11T05:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
@@ -302,7 +302,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-03T02:14:08.370Z"
+      "updatedAt": "2026-11-03T07:44:37.207Z"
     },
     "de": {
       "canton": "SO",
@@ -312,7 +312,7 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "5",
+          "value": "4",
           "note": "Meldungen vom 2. November 2026"
         },
         {
@@ -327,12 +327,6 @@
           "title": "Sperrungen, Baustellen und Störungen",
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
-            {
-              "label": "A5 Biel <-> Solothurn zwischen Anschluss Solothurn-Süd und Anschluss Solothurn-Ost Sachlage: Strecke gesperrt Baustelle Verkehrsführung: Fahrstreifen gesperrt",
-              "value": "Sperrung",
-              "detail": "bis 3. November 2026",
-              "date": "2026-02-02T19:00:00.000Z"
-            },
             {
               "label": "A1 Bern <-> Zürich zwischen Autobahndreieck Verzweigung Härkingen und Anschluss Kriegstetten Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 19.0 Verkehrsführung: Pannenstreifen gesperrt",
               "value": "Sperrung",
@@ -373,6 +367,12 @@
               "value": "Baustelle",
               "detail": "bis 31. Dezember 2029",
               "date": "2024-12-30T05:49:00.000Z"
+            },
+            {
+              "label": "A2 Luzern <-> Basel Anschluss Egerkingen Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.6 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.5",
+              "value": "Baustelle",
+              "detail": "bis 30. Juli 2027",
+              "date": "2025-04-11T05:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
@@ -444,7 +444,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-03T02:14:08.370Z"
+      "updatedAt": "2026-11-03T07:44:37.207Z"
     },
     "fr": {
       "canton": "SO",
@@ -454,7 +454,7 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "5",
+          "value": "4",
           "note": "signalements au 2 novembre 2026"
         },
         {
@@ -469,12 +469,6 @@
           "title": "Fermetures, chantiers et perturbations",
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
-            {
-              "label": "A5 Bienne <-> Soleure entre Jonction autoroutière Soleure-Sud et Jonction autoroutière Soleure-Est Situation: fermé travaux Gestion du trafic: voie fermée",
-              "value": "Fermeture",
-              "detail": "jusqu’au 3 novembre 2026",
-              "date": "2026-02-02T19:00:00.000Z"
-            },
             {
               "label": "A1 Berne <-> Zurich entre Echangeur Echangeur de Härkingen et Jonction autoroutière Kriegstetten Situation: trafic perturbé travaux, longueur [km] 19.0 Gestion du trafic: bande d'arrêt d'urgence…",
               "value": "Fermeture",
@@ -515,6 +509,12 @@
               "value": "Chantier",
               "detail": "jusqu’au 31 décembre 2029",
               "date": "2024-12-30T05:49:00.000Z"
+            },
+            {
+              "label": "A2 Lucerne <-> Bâle Jonction autoroutière Egerkingen Situation: trafic perturbé travaux, longueur [km] 0.6 Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.5",
+              "value": "Chantier",
+              "detail": "jusqu’au 30 juillet 2027",
+              "date": "2025-04-11T05:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
@@ -587,7 +587,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-03T02:14:08.370Z"
+      "updatedAt": "2026-11-03T07:44:37.207Z"
     }
   }
 }

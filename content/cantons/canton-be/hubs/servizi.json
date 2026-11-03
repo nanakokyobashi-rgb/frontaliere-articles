@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "servizi",
-  "updatedAt": "2026-11-03T02:14:08.370Z",
-  "contentHash": "de06a4d850f40592d9d299531727e102edf310bf1893b54db98b9ecdd1821667",
+  "updatedAt": "2026-11-03T07:44:37.207Z",
+  "contentHash": "20f2daaf9dca516c285ce91ab80ab245182c8f29fdc1a0e188400f0588730621",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -16,11 +16,6 @@
       "id": "aste-targhe",
       "updatedAt": "2026-11-02T15:47:08.669Z",
       "keyFacts": 1
-    },
-    {
-      "id": "meteo",
-      "updatedAt": "2026-11-02T18:38:16.906Z",
-      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
@@ -103,20 +98,6 @@
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://auktion-be.ch/de/",
           "updatedAt": "2026-11-02T15:47:08.669Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Bern",
-              "value": "5 °C",
-              "detail": "oggi da 4 a 5 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-11-02T18:38:16.906Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -209,7 +190,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-03T02:14:08.370Z"
+      "updatedAt": "2026-11-03T07:44:37.207Z"
     },
     "en": {
       "canton": "BE",
@@ -285,20 +266,6 @@
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://auktion-be.ch/de/",
           "updatedAt": "2026-11-02T15:47:08.669Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Bern",
-              "value": "5 °C",
-              "detail": "today from 4 to 5 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-11-02T18:38:16.906Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -387,7 +354,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-03T02:14:08.370Z"
+      "updatedAt": "2026-11-03T07:44:37.207Z"
     },
     "de": {
       "canton": "BE",
@@ -463,20 +430,6 @@
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://auktion-be.ch/de/",
           "updatedAt": "2026-11-02T15:47:08.669Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Bern",
-              "value": "5 °C",
-              "detail": "heute 4 bis 5 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-11-02T18:38:16.906Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -565,7 +518,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-03T02:14:08.370Z"
+      "updatedAt": "2026-11-03T07:44:37.207Z"
     },
     "fr": {
       "canton": "BE",
@@ -641,20 +594,6 @@
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://auktion-be.ch/de/",
           "updatedAt": "2026-11-02T15:47:08.669Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Bern",
-              "value": "5 °C",
-              "detail": "aujourd’hui de 4 à 5 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-11-02T18:38:16.906Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -739,7 +678,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-03T02:14:08.370Z"
+      "updatedAt": "2026-11-03T07:44:37.207Z"
     }
   }
 }
