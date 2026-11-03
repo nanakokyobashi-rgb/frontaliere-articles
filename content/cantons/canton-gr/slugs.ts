@@ -21,6 +21,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'brigels-sette-milioni-impianti': { it: 'brigels-sette-milioni-impianti', en: 'brigels-seven-million-mountain-lifts', de: 'brigels-sieben-millionen-bergbahnen', fr: 'brigels-sept-millions-remontees' },
  'bus-sostitutivi-grigioni': { it: 'bus-sostitutivi-grigioni', en: 'rhb-replacement-buses', de: 'rhb-ersatzbusse-graubuenden', fr: 'bus-remplacement-grisons' },
  'ofenberg-chiusura-notte': { it: 'ofenberg-chiusura-notte', en: 'ofenbergstrasse-night-closure', de: 'ofenbergstrasse-nachtsperre', fr: 'fermeture-nocturne-ofenbergstrasse' },
+ 'innhub-la-punt-rinvio-apertura': { it: 'innhub-la-punt-rinvio-apertura', en: 'innhub-la-punt-opening-delay', de: 'innhub-la-punt-eroeffnung-verschoben', fr: 'innhub-la-punt-report-ouverture' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

@@ -704,6 +704,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-innhub-la-punt-rinvio-apertura': {
+    title: 'Innhub La Punt: apertura rimandata all\'estate 2029',
+    description: 'Apertura nell\'estate 2029, sei mesi dopo il piano iniziale. Investimenti inizialmente stimati in CHF 117,5 milioni. La prima di tredici cupole',
+    keywords: 'frontalieri, ticino, svizzera, italia, innhub, punt, apertura, rimandata',
+    ogTitle: 'Innhub La Punt: apertura rimandata all\'estate 2029',
+    ogDescription: 'Apertura nell\'estate 2029, sei mesi dopo il piano iniziale.',
+    canonicalPath: '/articoli-grigioni/innhub-la-punt-rinvio-apertura/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Innhub La Punt: apertura rimandata all'estate 2029",
+      "description": "Apertura nell'estate 2029, sei mesi dopo il piano iniziale. Investimenti inizialmente stimati in CHF 117,5 milioni. La prima di tredici cupole",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-innhub-la-punt-rinvio-apertura.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-03T03:18:33+00:00",
+      "dateModified": "2026-11-03T03:18:33+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-grigioni/innhub-la-punt-rinvio-apertura/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

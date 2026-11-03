@@ -57,6 +57,9 @@ const blogMetaCantonGrIt: Record<string, string> = {
     'blog.article.ofenberg-chiusura-notte.title': 'Ofenbergstrasse chiusa di notte dal 2 al 6 novembre',
     'blog.article.ofenberg-chiusura-notte.excerpt': 'La Ofenbergstrasse sarà chiusa di notte tra il 2 e il 6 novembre tra Fall da l\'Uors e Punt la Drossa: deviazione sulla B180 Reschenstrasse.',
     'blog.article.ofenberg-chiusura-notte.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.innhub-la-punt-rinvio-apertura.title': 'Innhub La Punt: apertura rimandata all\'estate 2029',
+    'blog.article.innhub-la-punt-rinvio-apertura.excerpt': 'Apertura nell\'estate 2029, sei mesi dopo il piano iniziale.',
+    'blog.article.innhub-la-punt-rinvio-apertura.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonGrIt;

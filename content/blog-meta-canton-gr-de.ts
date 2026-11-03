@@ -57,6 +57,9 @@ const blogMetaCantonGrDe: Record<string, string> = {
     'blog.article.ofenberg-chiusura-notte.title': 'Ofenbergstrasse nachts vom 2. bis 6. November gesperrt',
     'blog.article.ofenberg-chiusura-notte.excerpt': 'Die Ofenbergstrasse wird nachts zwischen dem 2.',
     'blog.article.ofenberg-chiusura-notte.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.innhub-la-punt-rinvio-apertura.title': 'Innhub La Punt: Eröffnung auf den Sommer 2029 verschoben',
+    'blog.article.innhub-la-punt-rinvio-apertura.excerpt': 'Eröffnung im Sommer 2029, sechs Monate später als ursprünglich geplant.',
+    'blog.article.innhub-la-punt-rinvio-apertura.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonGrDe;

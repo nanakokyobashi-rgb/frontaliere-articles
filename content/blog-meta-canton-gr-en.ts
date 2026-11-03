@@ -57,6 +57,9 @@ const blogMetaCantonGrEn: Record<string, string> = {
     'blog.article.ofenberg-chiusura-notte.title': 'Ofenbergstrasse closed at night from November 2 to 6',
     'blog.article.ofenberg-chiusura-notte.excerpt': 'Ofenbergstrasse will be closed at night between November 2 and 6 between Fall da l\'Uors and Punt la Drossa: detour via the B180 Reschenstrasse.',
     'blog.article.ofenberg-chiusura-notte.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.innhub-la-punt-rinvio-apertura.title': 'Innhub La Punt: opening postponed to summer 2029',
+    'blog.article.innhub-la-punt-rinvio-apertura.excerpt': 'Opening in summer 2029, six months later than initially planned.',
+    'blog.article.innhub-la-punt-rinvio-apertura.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonGrEn;
