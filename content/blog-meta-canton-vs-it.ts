@@ -45,6 +45,9 @@ const blogMetaCantonVsIt: Record<string, string> = {
     'blog.article.val-de-bagnes-sostenibilita-2024.title': 'Val de Bagnes: 175 persone per settimana sostenibilità',
     'blog.article.val-de-bagnes-sostenibilita-2024.excerpt': '175 persone a Val de Bagnes Sei appuntamenti dal 24 al 31 ottobre Presentato il primo Piano climatico del comune Il piano comprende 26 misure e 75 azioni Luogo',
     'blog.article.val-de-bagnes-sostenibilita-2024.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.vionnaz-revoca-divieti-acqua.title': 'Vionnaz: revoca divieti acqua potabile dopo 41 giorni',
+    'blog.article.vionnaz-revoca-divieti-acqua.excerpt': 'La municipalità di Vionnaz ha dichiarato soddisfacente la situazione delle fonti, ripristinando prati, piscine e veicoli, ma mantenendo le raccomandazioni di risparmio.',
+    'blog.article.vionnaz-revoca-divieti-acqua.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonVsIt;

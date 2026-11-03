@@ -45,6 +45,9 @@ const blogMetaCantonVsDe: Record<string, string> = {
     'blog.article.val-de-bagnes-sostenibilita-2024.title': 'Val de Bagnes: 175 Personen für die Nachhaltigkeitswoche',
     'blog.article.val-de-bagnes-sostenibilita-2024.excerpt': '175 Personen in Val de Bagnes Sechs Veranstaltungen vom 24.',
     'blog.article.val-de-bagnes-sostenibilita-2024.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.vionnaz-revoca-divieti-acqua.title': 'Vionnaz: Aufhebung der Trinkwasserverbote nach 41 Tagen',
+    'blog.article.vionnaz-revoca-divieti-acqua.excerpt': 'Die Gemeinde Vionnaz hat die Lage der Quellen als zufriedenstellend bezeichnet und die Nutzung von Rasenflächen, Schwimmbädern und Fahrzeugen wieder ermöglicht, die Empfehlungen zum Wassersparen jedoch beibehalten.',
+    'blog.article.vionnaz-revoca-divieti-acqua.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonVsDe;

@@ -161,4 +161,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'vionnaz-revoca-divieti-acqua',
+ category: 'pratico',
+ date: '2026-11-03T23:46:43.546Z',
+ image: '/images/blog/article-vionnaz-revoca-divieti-acqua.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['VS'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
