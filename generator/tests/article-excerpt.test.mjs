@@ -128,7 +128,7 @@ test('la completezza rileva code sintattiche aperte, parentesi e label orfane', 
   assert.deepEqual(findExcerptCompletenessDefects('Sunday work would remain subject'), ['orphaned-label']);
   assert.deepEqual(findExcerptCompletenessDefects('Eine vollständige Aussage. gegenstand'), ['orphaned-label']);
   assert.deepEqual(findExcerptCompletenessDefects('Une phrase complète. objet'), ['orphaned-label']);
-  assert.deepEqual(findExcerptCompletenessDefects('Guida pratica al Permesso G'), []);
+  assert.deepEqual(findExcerptCompletenessDefects('Guida pratica al Permesso G.'), []);
 });
 
 test('le abbreviazioni non chiudono una frase e una coda breve resta da riparare', () => {

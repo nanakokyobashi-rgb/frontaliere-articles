@@ -155,6 +155,10 @@ function repairValue(value, context, recordSources = []) {
     locale: context.locale,
     field: context.field,
     body,
+    // Existing corpus metadata has a historical no-final-period style. New
+    // generator writes use the stricter default and require a full sentence.
+    requireTerminalPunctuation: false,
+    requireNonEmpty: false,
   });
   if (defects.length === 0) return { value, changed: false, defects: [], strategy: null };
   const maxLength = maximumDescriptionLength(context.field);
@@ -166,6 +170,8 @@ function repairValue(value, context, recordSources = []) {
     title,
     maxLength,
     minLength,
+    requireTerminalPunctuation: false,
+    requireNonEmpty: false,
   });
   let repaired = result.value;
   let strategy = result.strategy;
@@ -179,6 +185,8 @@ function repairValue(value, context, recordSources = []) {
         maxLength,
         minLength,
         body,
+        requireTerminalPunctuation: false,
+        requireNonEmpty: false,
       });
       if (candidate === null) continue;
       repaired = candidate;
@@ -189,7 +197,12 @@ function repairValue(value, context, recordSources = []) {
   }
   const changed = repaired !== value;
   if (changed) {
-    assertPlainExcerpt(repaired, context);
+    assertPlainExcerpt(repaired, {
+      ...context,
+      body,
+      requireTerminalPunctuation: false,
+      requireNonEmpty: false,
+    });
     if (['description', 'structuredData.description', 'seoDescription'].includes(context.field)) {
       assertSeoDescriptionMinimum(repaired, { id: context.id, sourceDescriptionLength: value.length });
     }

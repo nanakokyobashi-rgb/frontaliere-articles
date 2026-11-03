@@ -27,6 +27,17 @@ export function evaluateExcerptCompleteness(details, baseline) {
   const regressions = [];
   for (const detail of details) {
     const key = excerptCompletenessKey(detail);
+    if (currentKeys.has(key)) {
+      // The baseline identifies a logical locale/id/field, while the scanner
+      // can encounter that field on multiple published surfaces. Refuse an
+      // ambiguous duplicate so one approved occurrence cannot cover another.
+      regressions.push({
+        ...detail,
+        key,
+        defects: [...new Set([...(Array.isArray(detail.defects) ? detail.defects : []), 'duplicate-occurrence'])],
+      });
+      continue;
+    }
     currentKeys.add(key);
     (knownKeys.has(key) ? known : regressions).push({ ...detail, key });
   }
