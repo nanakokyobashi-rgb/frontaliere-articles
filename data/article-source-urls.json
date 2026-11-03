@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4099507": {
-    "articleId": "sunrise-tagli-posti-lavoro-ristrutturazione",
-    "ts": "2026-09-23T00:45:15.398Z",
-    "keyForm": 2
-  },
   "https://www.laregione.ch/cantone/bellinzonese/1951679/semafori-a-cadenazzo-il-flusso-di-traffico-migliorera": {
     "articleId": "semafori-cadenazzo-traffico",
     "ts": "2026-09-23T01:21:52.042Z",
@@ -2497,6 +2492,11 @@
   "https://comozero.it/attualita/dai-frontalieri-una-cascata-doro-per-il-comune-di-como-i-3-milioni-previsti-si-sono-triplicati": {
     "articleId": "cascata-oro-comune-como",
     "ts": "2026-11-02T23:10:52.560Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4214055": {
+    "articleId": "versamento-avs-dicembre-importi",
+    "ts": "2026-11-03T13:45:07.058Z",
     "keyForm": 2
   }
 }

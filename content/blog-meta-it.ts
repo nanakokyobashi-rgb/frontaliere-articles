@@ -13673,6 +13673,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.cascata-oro-comune-como.title': 'Milioni per Como: i fondi per frontalieri si sono triplicati',
     'blog.article.cascata-oro-comune-como.excerpt': 'Oltre 9 milioni nelle casse del Comune di Como 6.492 frontalieri residenti al 31 dicembre 2024 7,81% di frontalieri su 83.135 abitanti 9.058.370,70 euro',
     'blog.article.cascata-oro-comune-como.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.versamento-avs-dicembre-importi.title': 'Tredicesima AVS, per alcuni sarà inferiore',
+    'blog.article.versamento-avs-dicembre-importi.excerpt': 'Prima 13esima AVS a dicembre Pensione dal 1° luglio: metà rendita Quasi 2,7 milioni di beneficiari a fine 2026 830\'000 beneficiari risiedono all\'estero Termine',
+    'blog.article.versamento-avs-dicembre-importi.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaIt;

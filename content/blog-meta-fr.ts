@@ -13674,6 +13674,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.cascata-oro-comune-como.title': 'Des millions pour Como : les fonds pour les travailleurs frontaliers ont triplé',
     'blog.article.cascata-oro-comune-como.excerpt': 'Plus de 9 millions dans les caisses de la commune de Como 6.492 travailleurs frontaliers résidents au 31 décembre 2024 7,81% de travailleurs frontaliers sur 83.135 habitants 9.058.370,70 euros',
     'blog.article.cascata-oro-comune-como.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.versamento-avs-dicembre-importi.title': 'Treizième rente AVS, elle sera inférieure pour certains',
+    'blog.article.versamento-avs-dicembre-importi.excerpt': 'Première 13e rente AVS en décembre Retraite dès le 1er juillet : demi-rente Près de 2,7 millions de bénéficiaires à la fin de 2026 830\'000 bénéficiaires résident à l\'étranger Délai',
+    'blog.article.versamento-avs-dicembre-importi.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaFr;
