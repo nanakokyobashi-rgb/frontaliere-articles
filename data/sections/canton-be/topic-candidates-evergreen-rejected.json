@@ -103,6 +103,14 @@
     "canton-be::https://www.nau.ch/politik/bundeshaus/finanzkontrolle-kritisiert-harzende-planung-bei-vbs-immobilien-67196806": {
       "section": "canton-be",
       "ts": 1793662000011
+    },
+    "canton-be::https://www.nau.ch/news/wirtschaft/schweizer-automarkt-legt-im-oktober-leicht-zu-67196720": {
+      "section": "canton-be",
+      "ts": 1793668446559
+    },
+    "canton-be::https://www.lejdj.ch/articles/le-citoyen-de-perrefitte-raoul-schneeberger-sacre-aux-sports-awards-du-canton-de-berne-105419": {
+      "section": "canton-be",
+      "ts": 1793668453697
     }
   }
 }
