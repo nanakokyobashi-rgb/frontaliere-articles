@@ -15,6 +15,10 @@
     "canton-sg::https://www.sg.ch/news/sgch_kantonspolizei/2026/11/kanton-st--gallen--halloween-nacht.html": {
       "section": "canton-sg",
       "ts": 1793697695473
+    },
+    "canton-sg::https://www.20min.ch/story/stadt-st-gallen-revolver-verdacht-loest-grosseinsatz-aus-bars-evakuiert-103658754": {
+      "section": "canton-sg",
+      "ts": 1793701698579
     }
   }
 }
