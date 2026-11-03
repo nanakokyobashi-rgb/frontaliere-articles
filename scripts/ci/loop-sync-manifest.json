@@ -2154,7 +2154,7 @@
     {
       "path": "host/staticAdSlotHtml.ts",
       "mode": "corpus-only",
-      "reason": "Provider host-side dei due slot pubblicitari delle pagine hub cantonali: il sito espone il callback nel contratto dell'engine e qui lo concretizza con client, slot, formato, altezza riservata e placement del corpus. Non e' un gemello da mirrorare: il sito possiede solo il bootstrap che collega il provider, mentre il markup resta dipendente dalla configurazione host del corpus.",
+      "reason": "Provider host-side degli slot pubblicitari statici degli hub cantonali e degli articoli: il sito espone il callback nel contratto dell'engine e qui lo concretizza con client, slot, formato, altezza riservata e placement del corpus. Non e' un gemello da mirrorare: il sito possiede solo il bootstrap che collega il provider, mentre il markup resta dipendente dalla configurazione host del corpus. Il provider conserva ora un frame first-party esterno al nodo Google per il fallback grafico per-slot; attributi, richieste e riserve Google restano invariati.",
       "baseline": {
         "site": null,
         "corpus": "9cc7f520f28c72bb",
@@ -2784,8 +2784,8 @@
       "mode": "identical",
       "reason": "Garanzia che gli script statici della shell siano serviti dalla CDN prima che un emettitore pubblichi l'HTML che li referenzia (sito issue 12270, sito PR #12275, #12299 e #12305): chiede alla CDN, legge R2 solo per un file non servito, carica cio' che R2 non ha e non sostituisce mai un oggetto; poi chiede l'URL delle pagine nelle due varianti di cache per ogni file, anche per quelli che la sonda mostra (la HEAD della sonda legge R2 e non vede un 404 tenuto dall'edge): un file che la sonda non ha mostrato, o che a quell'URL non risponde, viene invalidato all'edge e riconfermato, e se non puo' stabilirlo si ferma. Usa solo i moduli di Node e due comandi, proprio per poter restare byte-identico: scripts/lib/upload-cdn-file.sh (anch'esso identical) e scripts/cf-purge-cache.mjs, che qui e' la copia di questo repo con la stessa modalita' `--files=` e la stessa riga di successo (lo verifica host/tests/host-shell-assets.test.mjs). Il sito lo chiama da scripts/ci/ensure-cdn-shell-assets.mjs con tutti i file di staticScriptsPlugin; qui lo chiama scripts/ci/ensure-host-shell-assets.mjs con i file di cui host/ porta il contenuto.",
       "baseline": {
-        "site": "4388ad2b0c2fc745",
-        "corpus": "4388ad2b0c2fc745",
+        "site": "680753badffef6c4",
+        "corpus": "680753badffef6c4",
         "alignedAt": "2026-11-03"
       }
     },
@@ -4161,7 +4161,7 @@
       "path": "host/constants.ts",
       "sitePath": "build-plugins/constants.ts",
       "mode": "adapted",
-      "reason": "Costanti del sito lette dall'engine via SiteShellContract, estratte per chiusura. scalarFingerprint confronta i 23 scalari authoritative; il digest adb1a692… include lo snippet Meta Pixel content-addressed, il cui loader contatta Meta solo dopo consenso pubblicitario esplicito e si blocca sui documenti sensibili, senza fallback noscript. AD_RECOVERY_FILENAME resta allineato al sorgente; sono preservati gli altri comportamenti di recovery, CMP, analytics e SEO gia' trasportati.",
+      "reason": "Costanti del sito lette dall'engine via SiteShellContract, estratte per chiusura. scalarFingerprint confronta i 23 scalari authoritative; il digest adb1a692… include lo snippet Meta Pixel content-addressed, il cui loader contatta Meta solo dopo consenso pubblicitario esplicito e si blocca sui documenti sensibili, senza fallback noscript. AD_RECOVERY_FILENAME resta allineato al sorgente; sono preservati gli altri comportamenti di recovery, CMP, analytics e SEO gia' trasportati. Gli slot statici avvolgono l'elemento Google in un host first-party per il fallback creativo Firebase, senza cambiare il nodo AdSense o Auto Ads.",
       "baseline": {
         "site": "c9f803f4645a9ab0",
         "corpus": "598612b34529c6c5",
@@ -4377,9 +4377,9 @@
       "sitePath": "build-plugins/sharedWriteRegistry.ts",
       "mode": "identical",
       "baseline": {
-        "site": "e4705ac1b47ba149",
-        "corpus": "e4705ac1b47ba149",
-        "alignedAt": "2026-10-25"
+        "site": "b2c578bda693f1f5",
+        "corpus": "b2c578bda693f1f5",
+        "alignedAt": "2026-11-03"
       }
     },
     {
@@ -6840,9 +6840,9 @@
       "mode": "identical",
       "reason": "Fingerprint di recovery, Ads, Partnerize e Meta Pixel che lega gli snapshot byte-exact alle sorgenti. La proiezione esclude i contenuti ma verifica nomi e SHA-256; i test host confrontano i byte trasportati e il contratto prima della pubblicazione.",
       "baseline": {
-        "site": "2a96d3934487a51d",
-        "corpus": "2a96d3934487a51d",
-        "alignedAt": "2026-10-31"
+        "site": "85e0a9bf6b629f74",
+        "corpus": "85e0a9bf6b629f74",
+        "alignedAt": "2026-11-03"
       }
     },
     {

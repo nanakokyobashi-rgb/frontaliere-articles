@@ -30,6 +30,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'fislisbach-sondaggio-leematten': { it: 'fislisbach-sondaggio-leematten', en: 'fislisbach-leematten-survey', de: 'fislisbach-leematten-umfrage', fr: 'fislisbach-sondage-leematten' },
  'blackout-brugg-guasto-alta-tensione': { it: 'blackout-brugg-guasto-alta-tensione', en: 'brugg-power-outage-high-voltage-fault', de: 'brugg-stromausfall-hochspannungsstoerung', fr: 'panne-courant-brugg-haute-tension' },
  'siccita-fislisbach-forniture': { it: 'siccita-fislisbach-forniture', en: 'fislisbach-drought-water-supply', de: 'fislisbach-trinkwasser-lieferungen', fr: 'fislisbach-eau-potable-livraisons' },
+ 'aarau-rinnovo-tigli-zollrain': { it: 'aarau-rinnovo-tigli-zollrain', en: 'aarau-zollrain-linden-renewal', de: 'aarau-zollrain-linden-erneuerung', fr: 'aarau-renovation-tilleuls-zollrain' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

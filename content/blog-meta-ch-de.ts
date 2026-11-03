@@ -8675,6 +8675,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.voto-iva-13esima-avs-novembre.title': '13. AVS: Am 29. November wird über die Mehrwertsteuererhöhung abgestimmt',
     'blog.article.voto-iva-13esima-avs-novembre.excerpt': 'Am 29. November wird über die Finanzierung der 13. AHV-Rente abgestimmt Die ordentliche Mehrwertsteuer würde von 8,1% auf 8,5% steigen Der Beherbergungssatz würde von 3,8% auf 4% steigen',
     'blog.article.voto-iva-13esima-avs-novembre.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.cdf-critica-armasuisse-immobili.title': 'SFAO kritisiert Armasuisse wegen Umstrukturierungsverzögerungen',
+    'blog.article.cdf-critica-armasuisse-immobili.excerpt': 'SFAO kritisiert das Management von Armasuisse Immobilien.',
+    'blog.article.cdf-critica-armasuisse-immobili.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaChDe;

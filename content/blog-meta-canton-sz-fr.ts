@@ -30,6 +30,9 @@ const blogMetaCantonSzFr: Record<string, string> = {
     'blog.article.schuebelbach-aliquote-2027.title': 'Schübelbach confirme les taux d’imposition pour 2027',
     'blog.article.schuebelbach-aliquote-2027.excerpt': 'Le budget 2027 de Schübelbach prévoit 42,97 millions de dépenses, 42,69 millions de recettes et un déficit de 285.200 francs.',
     'blog.article.schuebelbach-aliquote-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.sp-uri-no-finanziamento-avs.title': 'SP Uri : un non de justesse au financement de la 13e AVS',
+    'blog.article.sp-uri-no-finanziamento-avs.excerpt': 'SP Uri : un non de justesse au financement de la 13e AVS après une discussion animée.',
+    'blog.article.sp-uri-no-finanziamento-avs.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSzFr;
