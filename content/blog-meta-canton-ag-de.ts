@@ -84,6 +84,9 @@ const blogMetaCantonAgDe: Record<string, string> = {
     'blog.article.siccita-fislisbach-forniture.title': 'Fislisbach: Baden muss weiterhin Trinkwasser liefern',
     'blog.article.siccita-fislisbach-forniture.excerpt': 'Mitte Oktober 2026 sank die wöchentliche Wasserentnahme auf 7\'136 m3, doch die Lieferungen von Regionalwerke Baden AG bleiben notwendig.',
     'blog.article.siccita-fislisbach-forniture.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.aarau-rinnovo-tigli-zollrain.title': 'Aarau wird die verbliebenen Linden am Zollrain ersetzen',
+    'blog.article.aarau-rinnovo-tigli-zollrain.excerpt': 'Aarau wird die verbliebenen Linden am Zollrain ersetzen und die Grünanlage erneuern.',
+    'blog.article.aarau-rinnovo-tigli-zollrain.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonAgDe;
