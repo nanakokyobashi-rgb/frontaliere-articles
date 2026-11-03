@@ -1089,6 +1089,8 @@ export function assertPlainDescriptionFields(fields, {
   fieldPrefix = '',
   id = 'unknown',
   locale = 'unknown',
+  requireTerminalPunctuation = true,
+  requireNonEmpty = true,
 } = {}) {
   const body = Object.entries(fields ?? {})
     .filter(([name, bodyValue]) => /^body\d+$/u.test(name) && typeof bodyValue === 'string')
@@ -1097,7 +1099,14 @@ export function assertPlainDescriptionFields(fields, {
   for (const field of PLAIN_DESCRIPTION_FIELDS) {
     const value = fields?.[field];
     if (typeof value !== 'string' || value.trim() === '') continue;
-    assertPlainExcerpt(value, { field: `${fieldPrefix}${field}`, id, locale, body });
+    assertPlainExcerpt(value, {
+      field: `${fieldPrefix}${field}`,
+      id,
+      locale,
+      body,
+      requireTerminalPunctuation,
+      requireNonEmpty,
+    });
   }
   return fields;
 }
