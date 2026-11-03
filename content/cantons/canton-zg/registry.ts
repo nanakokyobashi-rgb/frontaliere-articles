@@ -227,4 +227,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'consultazione-piano-zugo',
+ category: 'novita',
+ date: '2026-11-03T23:42:19.361Z',
+ image: '/images/blog/article-consultazione-piano-zugo.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['ZG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

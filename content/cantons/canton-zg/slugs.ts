@@ -23,6 +23,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'risch-231-milioni-tasse': { it: 'risch-231-milioni-tasse', en: 'risch-231-million-tax-cut', de: 'risch-231-millionen-steuern', fr: 'risch-231-millions-impots' },
  'balti-zug-robatech-acquisizione': { it: 'balti-zug-robatech-acquisizione', en: 'robatech-takes-over-balti-baar', de: 'robatech-uebernimmt-balti-baar', fr: 'robatech-reprend-balti-baar' },
  'cham-moltiplicatore-fiscale-2027': { it: 'cham-moltiplicatore-fiscale-2027', en: 'cham-tax-rate-2027', de: 'cham-steuerfuss-2027', fr: 'cham-taux-fiscal-2027' },
+ 'consultazione-piano-zugo': { it: 'consultazione-piano-zugo', en: 'zug-directive-plan-consultation', de: 'zug-richtplan-mitwirkung-26-1', fr: 'plan-directeur-zoug-consultation' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
