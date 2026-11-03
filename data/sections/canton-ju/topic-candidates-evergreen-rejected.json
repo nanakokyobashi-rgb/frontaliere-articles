@@ -51,6 +51,26 @@
     "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261102-anthropic-a-augmente-son-chiffre-d-affaires-au-troisieme-trimestre.html": {
       "section": "canton-ju",
       "ts": 1793675391660
+    },
+    "canton-ju::https://www.h-ju.ch/fr/a-propos/medias-presse/communiques-de-presse/la-sante-mentale-au-coeur-de-la-27eme-journee-scientifique-interjurassienne-de-la-sante.html": {
+      "section": "canton-ju",
+      "ts": 1793694445985
+    },
+    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261103-dependance-au-smartphone-les-romands-sont-plus-anxieux.html": {
+      "section": "canton-ju",
+      "ts": 1793695327403
+    },
+    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261103-geberit-affiche-une-croissance-solide-sur-les-neuf-premiers-mois.html": {
+      "section": "canton-ju",
+      "ts": 1793695338218
+    },
+    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261102-la-fda-approuve-la-version-generique-d-un-traitement-contre-le-vih.html": {
+      "section": "canton-ju",
+      "ts": 1793695346590
+    },
+    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261102-la-poste-de-saint-francois-rouvre-ses-portes-a-lausanne.html": {
+      "section": "canton-ju",
+      "ts": 1793695356093
     }
   }
 }
