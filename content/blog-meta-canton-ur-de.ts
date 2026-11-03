@@ -45,6 +45,9 @@ const blogMetaCantonUrDe: Record<string, string> = {
     'blog.article.incendio-tunnel-fluelen.title': 'Brand eines Fahrzeugs, Tunnel von Flüelen geschlossen',
     'blog.article.incendio-tunnel-fluelen.excerpt': 'Ein Fahrzeugbrand zwang am Donnerstag, 29.',
     'blog.article.incendio-tunnel-fluelen.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.chiusura-invernale-gottardo.title': 'Gotthardpass: Wintersperre ab Donnerstag',
+    'blog.article.chiusura-invernale-gottardo.excerpt': 'Ab Donnerstag tritt die Wintersperre des Gotthardpasses in Kraft: Drei der fünf Urner Alpenpässe werden geschlossen sein, während Oberalp und Klausenpass vorerst offen bleiben.',
+    'blog.article.chiusura-invernale-gottardo.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonUrDe;

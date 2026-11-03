@@ -45,6 +45,9 @@ const blogMetaCantonUrIt: Record<string, string> = {
     'blog.article.incendio-tunnel-fluelen.title': 'Incendio di un veicolo, chiuso il tunnel di Flüelen',
     'blog.article.incendio-tunnel-fluelen.excerpt': 'Un incendio di un veicolo ha imposto la chiusura del tunnel di Flüelen per circa un\'ora e mezza giovedì 29 ottobre.',
     'blog.article.incendio-tunnel-fluelen.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.chiusura-invernale-gottardo.title': 'Passo del Gottardo: chiusura invernale da giovedì',
+    'blog.article.chiusura-invernale-gottardo.excerpt': 'Da giovedì scatta la chiusura invernale del passo del Gottardo: tre dei cinque passi alpini urani saranno chiusi, mentre Oberalp e Klausenpass restano aperti.',
+    'blog.article.chiusura-invernale-gottardo.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonUrIt;

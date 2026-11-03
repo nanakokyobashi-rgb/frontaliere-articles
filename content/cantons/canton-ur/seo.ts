@@ -543,6 +543,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-chiusura-invernale-gottardo': {
+    title: 'Passo del Gottardo: chiusura invernale da giovedì',
+    description: 'Da giovedì scatta la chiusura invernale del Gottardo: tre dei cinque passi alpini urani sono chiusi, Oberalp e Klausenpass restano aperti.',
+    keywords: 'frontalieri, ticino, svizzera, italia, passo, gottardo, chiusura, invernale',
+    ogTitle: 'Passo del Gottardo chiuso da giovedì',
+    ogDescription: 'La fonte segnala l’entrata in vigore della Wintersperre sul Gottardo nella giornata di giovedì. Nel quadro dei cinque passi alpini urani, Oberalp e Klausenpass sono indicati come ancora aperti per il momento.',
+    canonicalPath: '/articoli-uri/chiusura-invernale-gottardo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Passo del Gottardo: chiusura invernale da giovedì",
+      "description": "Da giovedì scatta la chiusura invernale del Gottardo: tre dei cinque passi alpini urani sono chiusi, Oberalp e Klausenpass restano aperti.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-chiusura-invernale-gottardo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-03T09:00:46+00:00",
+      "dateModified": "2026-11-03T09:00:46+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-uri/chiusura-invernale-gottardo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

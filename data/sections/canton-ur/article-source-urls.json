@@ -58,5 +58,10 @@
     "articleId": "incendio-tunnel-fluelen",
     "ts": "2026-10-31T10:27:30.401Z",
     "keyForm": 2
+  },
+  "http://www.urnerwochenblatt.ch/artikel/gotthardpass-wird-am-donnerstag-gesperrt": {
+    "articleId": "chiusura-invernale-gottardo",
+    "ts": "2026-11-03T09:00:46.852Z",
+    "keyForm": 2
   }
 }

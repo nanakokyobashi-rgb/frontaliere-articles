@@ -17,6 +17,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'conteggio-traffico-uri-novembre': { it: 'conteggio-traffico-uri-novembre', en: 'uri-traffic-count-november', de: 'verkehrszaehlung-uri-november', fr: 'comptage-trafic-uri-novembre' },
  'susten-furka-chiusura-invernale': { it: 'susten-furka-chiusura-invernale', en: 'susten-furka-winter-closure', de: 'susten-furka-wintersperre', fr: 'fermeture-hivernale-susten-furka' },
  'incendio-tunnel-fluelen': { it: 'incendio-tunnel-fluelen', en: 'vehicle-fire-fluelen-tunnel', de: 'fahrzeugbrand-fluelen-tunnel', fr: 'incendie-tunnel-fluelen' },
+ 'chiusura-invernale-gottardo': { it: 'chiusura-invernale-gottardo', en: 'gotthard-winter-closure', de: 'gotthard-wintersperre', fr: 'fermeture-hivernale-gothard' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

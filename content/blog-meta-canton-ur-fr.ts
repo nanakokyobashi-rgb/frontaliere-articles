@@ -45,6 +45,9 @@ const blogMetaCantonUrFr: Record<string, string> = {
     'blog.article.incendio-tunnel-fluelen.title': 'Incendie d’un véhicule, tunnel de Flüelen fermé',
     'blog.article.incendio-tunnel-fluelen.excerpt': 'L’incendie d’un véhicule a entraîné la fermeture du tunnel de Flüelen pendant environ une heure et demie jeudi 29 octobre.',
     'blog.article.incendio-tunnel-fluelen.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.chiusura-invernale-gottardo.title': 'Col du Gothard : fermeture hivernale dès jeudi',
+    'blog.article.chiusura-invernale-gottardo.excerpt': 'À partir de jeudi, la fermeture hivernale du col du Gothard entre en vigueur : trois des cinq cols alpins uranais seront fermés, tandis que l’Oberalp et le Klausenpass restent ouverts.',
+    'blog.article.chiusura-invernale-gottardo.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonUrFr;
