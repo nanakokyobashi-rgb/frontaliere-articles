@@ -755,6 +755,49 @@ test('ramo missing-field: una coppia FAQ extra con C0 viene scartata prima della
   assert.equal(rejectRawFaqControlEscape(data.content.en.faq[0].q), false);
 });
 
+test('retry FAQ con più coppie è rifiutato senza riusare faq[0] per gli indici successivi', async () => {
+  const faqIt = [
+    {
+      q: 'Prima domanda italiana abbastanza lunga per il test.',
+      a: 'Prima risposta italiana abbastanza lunga per il test.',
+    },
+    {
+      q: 'Seconda domanda italiana abbastanza lunga per il test.',
+      a: 'Seconda risposta italiana abbastanza lunga per il test.',
+    },
+  ];
+  const data = {
+    content: {
+      en: { ...META_PLAUSIBILI, faq: [{ q: '', a: '' }, { q: '', a: '' }] },
+      de: { ...META_PLAUSIBILI, faq: faqIt.map((pair) => ({ ...pair })) },
+      fr: { ...META_PLAUSIBILI, faq: faqIt.map((pair) => ({ ...pair })) },
+    },
+  };
+  const itContent = { ...META_PLAUSIBILI, faq: faqIt };
+  const calls = [];
+  const callWithRetry = async (_prompt, _tokens, label) => {
+    calls.push(label);
+    const part = label.includes('.q[') ? 'q' : 'a';
+    return {
+      faq: [
+        { [part]: 'First English retry is complete and valid.' },
+        { [part]: 'Second English retry is complete and valid.' },
+      ],
+    };
+  };
+
+  await runMissingFieldLoop({ data, itContent, callWithRetry, freeMt: false });
+
+  assert.deepEqual(calls, [
+    'en:faq.q[0]-missing-retry',
+    'en:faq.q[1]-missing-retry',
+    'en:faq.a[0]-missing-retry',
+    'en:faq.a[1]-missing-retry',
+  ]);
+  assert.deepEqual(data.content.en.faq, faqIt,
+    'un retry FAQ non singleton non deve duplicare faq[0] su tutti gli indici sorgente');
+});
+
 test('il report di recovery si resetta per articolo e separa gli addebiti del cap', () => {
   const translateStart = src.indexOf('async function translateArticle(data) {');
   assert.notEqual(translateStart, -1);

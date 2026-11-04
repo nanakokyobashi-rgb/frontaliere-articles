@@ -14514,9 +14514,14 @@ ${localizedToponymInstruction(targetLang)}`;
           if (!content.faq[faqIndex] || typeof content.faq[faqIndex] !== 'object') content.faq[faqIndex] = {};
           content.faq[faqIndex][faqPart] = value;
         };
-        const readRetryValue = (parsed) => faqPart
-          ? parsed?.faq?.[0]?.[faqPart] ?? parsed?.faq?.[faqIndex]?.[faqPart] ?? parsed?.[field]
-          : parsed?.[field];
+        const readRetryValue = (parsed) => {
+          if (!faqPart) return parsed?.[field];
+          // This prompt asks for one indexed source field. Accepting faq[0]
+          // from a multi-pair retry would silently reuse that value for every
+          // later source index, so any non-singleton response is unusable.
+          if (!Array.isArray(parsed?.faq) || parsed.faq.length !== 1) return null;
+          return parsed.faq[0]?.[faqPart];
+        };
         const retryFieldLabel = faqPart ? `faq[${faqIndex}].${faqPart}` : field;
       // Truthiness nuda: la stringa `"null"` (serializzazione letterale del
       // null, la forma misurata su `haiku` in #799) la supera, quindi il campo
