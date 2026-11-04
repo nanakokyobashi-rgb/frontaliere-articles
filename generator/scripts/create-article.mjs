@@ -14322,14 +14322,41 @@ ${localizedToponymInstruction(targetLang)}`;
       return { [bodyKey]: sanitizeBodyText(joined) };
     }
 
-    // Translate FAQ if present (small payload, single call)
-    const faqTranslation = sourceContent.faq && Array.isArray(sourceContent.faq) && sourceContent.faq.length > 0
+    // Translate FAQ if present (small payload, single call). Keep an explicit
+    // source index in the prompt and require a one-to-one response mapping:
+    // array position alone cannot prove that a model's reordered/extra pair
+    // still belongs to the same Italian source FAQ.
+    const sourceFaq = Array.isArray(sourceContent.faq) ? sourceContent.faq : [];
+    const faqTranslation = sourceFaq.length > 0
       ? callWithRetry(makePrompt(
-          `CONTENUTO ITALIANO DA TRADURRE:\n- faq: ${JSON.stringify(sourceContent.faq)}`,
-          '{"faq": [{"q": "...", "a": "..."}]}',
-        ), 1500, `${targetLang}:faq`, { translation: true }).catch(err => {
-          console.error(`  ⚠️  FAQ translation failed for ${targetLang}: ${err.message}`);
-          return { faq: sourceContent.faq }; // Fallback to Italian
+          `CONTENUTO ITALIANO DA TRADURRE:\n- faq: ${JSON.stringify(sourceFaq.map((pair, sourceFaqIndex) => ({ ...pair, sourceFaqIndex })))}`,
+          '{"faq": [{"sourceFaqIndex": 0, "q": "...", "a": "..."}]}',
+        ), 1500, `${targetLang}:faq`, { translation: true }).then((result) => {
+          const translatedFaq = result?.faq;
+          if (!Array.isArray(translatedFaq) || translatedFaq.length !== sourceFaq.length) {
+            console.error(`  ⚠️  FAQ translation for ${targetLang} has no complete source-index mapping — per-index recovery`);
+            return { faq: [] };
+          }
+          const aligned = Array(sourceFaq.length);
+          for (const pair of translatedFaq) {
+            const sourceFaqIndex = pair?.sourceFaqIndex;
+            if (!Number.isInteger(sourceFaqIndex)
+                || sourceFaqIndex < 0
+                || sourceFaqIndex >= sourceFaq.length
+                || aligned[sourceFaqIndex] !== undefined) {
+              console.error(`  ⚠️  FAQ translation for ${targetLang} has invalid/duplicate source indexes — per-index recovery`);
+              return { faq: [] };
+            }
+            aligned[sourceFaqIndex] = { q: pair?.q, a: pair?.a };
+          }
+          if (aligned.some((pair) => pair === undefined)) {
+            console.error(`  ⚠️  FAQ translation for ${targetLang} has missing source indexes — per-index recovery`);
+            return { faq: [] };
+          }
+          return { faq: aligned };
+        }).catch(err => {
+          console.error(`  ⚠️  FAQ translation failed for ${targetLang}: ${err.message} — per-index recovery`);
+          return { faq: [] };
         })
       : Promise.resolve({});
 
@@ -14431,11 +14458,11 @@ ${localizedToponymInstruction(targetLang)}`;
     // the whole article instead of being discarded with the excess pair.
     const sourceFaqCount = Array.isArray(itContent?.faq) ? itContent.faq.length : 0;
     const translatedFaq = data.content?.[locale]?.faq;
-    if (Array.isArray(translatedFaq) && translatedFaq.length > sourceFaqCount) {
+    if (Array.isArray(translatedFaq) && translatedFaq.length !== sourceFaqCount) {
       console.error(
-        `  ⚠️  FAQ ${locale}: scartate ${translatedFaq.length - sourceFaqCount} coppie oltre la cardinalità della FAQ italiana`,
+        `  ⚠️  FAQ ${locale}: cardinalità ${translatedFaq.length} diversa dalle ${sourceFaqCount} coppie italiane — intero batch scartato, recupero per-indice`,
       );
-      data.content[locale].faq = translatedFaq.slice(0, sourceFaqCount);
+      data.content[locale].faq = [];
     }
     for (const field of [
       'title',

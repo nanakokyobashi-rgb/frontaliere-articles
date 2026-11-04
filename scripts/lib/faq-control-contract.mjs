@@ -5,9 +5,17 @@ import { isInvalidControlCode } from './sanitize-control-chars.mjs';
 // can sanitize one of them and publish text different from the model output.
 const ESCAPED_INVALID_CONTROL = /\\(?:u00(?:0[0-8bcef]|1[0-9a-f])|x(?:0[0-8bcef]|1[0-9a-f]))/iu;
 const NUMERIC_HTML_ENTITY = /&#(?:x([0-9a-f]+)|([0-9]+));/giu;
+const AMPERSAND_HTML_ENTITY = /&(?:amp;|#0*38;)/giu;
 
 function containsInvalidControlEntity(value) {
-  for (const [, hexadecimal, decimal] of value.matchAll(NUMERIC_HTML_ENTITY)) {
+  // `normalizeLocalizedToponymText()` decodes these ampersand entities for
+  // three passes before decoding numeric references. Mirror that sequence so
+  // `&amp;#8;` is rejected before a writer turns it into a raw C0 byte.
+  let normalized = value;
+  for (let pass = 0; pass < 3; pass += 1) {
+    normalized = normalized.replace(AMPERSAND_HTML_ENTITY, '&');
+  }
+  for (const [, hexadecimal, decimal] of normalized.matchAll(NUMERIC_HTML_ENTITY)) {
     const code = Number.parseInt(hexadecimal ?? decimal, hexadecimal ? 16 : 10);
     if (Number.isSafeInteger(code) && isInvalidControlCode(code)) return true;
   }
