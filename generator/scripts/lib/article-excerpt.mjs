@@ -1033,6 +1033,16 @@ export function repairGeneratedArticleDescriptions(article) {
     const defects = findDescriptionDefects(original, { locale, field, body });
     if (defects.length === 0) return;
     const options = { locale, maxLength, minLength, body };
+    const repairFromSibling = () => {
+      for (const sibling of siblingValues) {
+        const candidate = selectCompleteExcerptSource(sibling, { ...options, body });
+        if (candidate === null) continue;
+        fields[field] = candidate;
+        repairs.push({ locale, field, source: 'sibling-description', before: original, after: candidate });
+        return true;
+      }
+      return false;
+    };
     if (original.trim() === '') {
       const bodyExcerpt = firstCompleteBodyExcerpt(body, { locale, field, maxLength, minLength });
       if (bodyExcerpt !== null) {
@@ -1040,7 +1050,11 @@ export function repairGeneratedArticleDescriptions(article) {
         repairs.push({ locale, field, source: 'article-body', before: original, after: bodyExcerpt });
         return;
       }
-      const error = new Error(`[excerpt-complete] ${locale}/${article?.id ?? 'unknown'}/${field} is empty and has no safe body excerpt`);
+      if (repairFromSibling()) return;
+      const error = new Error(
+        `[excerpt-complete] ${locale}/${article?.id ?? 'unknown'}/${field} is empty and has no safe body excerpt `
+          + 'or sibling description',
+      );
       error.qualityReject = true;
       throw error;
     }
@@ -1074,13 +1088,7 @@ export function repairGeneratedArticleDescriptions(article) {
       return;
     }
 
-    for (const sibling of siblingValues) {
-      const candidate = selectCompleteExcerptSource(sibling, { ...options, body });
-      if (candidate === null) continue;
-      fields[field] = candidate;
-      repairs.push({ locale, field, source: 'sibling-description', before: original, after: candidate });
-      return;
-    }
+    if (repairFromSibling()) return;
 
     const reason = defects.length > 0 ? defects.join(', ') : `exceeds ${maxLength} characters without a complete sentence`;
     const error = new Error(`[excerpt-complete] ${locale}/${article?.id ?? 'unknown'}/${field} cannot be repaired safely (${reason})`);

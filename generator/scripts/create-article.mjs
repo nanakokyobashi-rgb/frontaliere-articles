@@ -15699,7 +15699,7 @@ function extractArticleCity(slug) {
   return '';
 }
 
-function optimizeSeoMetadata(data) {
+function optimizeSeoMetadata(data, { onDescriptionRepairs } = {}) {
   const it = data.content?.it || {};
   if (!data.seo) data.seo = {};
 
@@ -15776,6 +15776,10 @@ function optimizeSeoMetadata(data) {
     stripExcerptMarkdown(data.seo.ogDescription || data.seo.description),
     SEO_OG_DESCRIPTION_MAX,
   );
+  const postCapDescriptionRepairs = repairGeneratedArticleDescriptions(data);
+  if (postCapDescriptionRepairs.length > 0 && typeof onDescriptionRepairs === 'function') {
+    onDescriptionRepairs(postCapDescriptionRepairs);
+  }
   assertPlainExcerpt(data.seo.description, { field: 'seo.description', id: data.id, locale: 'it' });
   assertPlainExcerpt(data.seo.ogDescription, { field: 'seo.ogDescription', id: data.id, locale: 'it' });
 
@@ -19375,7 +19379,9 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
       refreshSourceCopyDerivedMetadata(data);
     } else {
       preTranslationExcerptRepairs = repairGeneratedArticleDescriptions(data);
-      optimizeSeoMetadata(data);
+      optimizeSeoMetadata(data, {
+        onDescriptionRepairs: (repairs) => preTranslationExcerptRepairs.push(...repairs),
+      });
     }
     // Step 3a.0-specificity: reject/repair vacuous key facts and reject a
     // cross-canton guide before spending translation, image or write budget.

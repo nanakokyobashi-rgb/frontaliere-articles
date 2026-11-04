@@ -91,10 +91,19 @@ test('build-api controlla la completezza prima di cancellare la superficie pubbl
   assert.ok(refreshRepair > refreshStart && refreshOptimize > refreshRepair, 'il refresh deve riparare prima dell’ottimizzazione SEO');
   assert.ok(refreshMinimumGuard > refreshRepair && refreshMinimumGuard < refreshOptimize, 'il refresh deve mantenere il minimo dopo il repair');
 
+  const optimizerStart = generator.indexOf('function optimizeSeoMetadata(data,');
+  const seoCap = generator.indexOf('data.seo.ogDescription = truncateAtWordBoundary(', optimizerStart);
+  const postCapRepair = generator.indexOf('const postCapDescriptionRepairs = repairGeneratedArticleDescriptions(data);', optimizerStart);
+  const seoAssertion = generator.indexOf('assertPlainExcerpt(data.seo.description', optimizerStart);
+  assert.ok(optimizerStart >= 0 && seoCap > optimizerStart, 'l’ottimizzatore deve contenere il cap SEO');
+  assert.ok(postCapRepair > seoCap && postCapRepair < seoAssertion, 'il repair deve seguire i cap e precedere gli assert SEO');
+  assert.match(generator.slice(postCapRepair, seoAssertion), /onDescriptionRepairs\(postCapDescriptionRepairs\)/u);
+
   const generationStart = generator.indexOf('async function generateAndValidateArticle(');
   const preOptimizeRepair = generator.indexOf('preTranslationExcerptRepairs = repairGeneratedArticleDescriptions(data);', generationStart);
-  const generationOptimize = generator.indexOf('optimizeSeoMetadata(data);', preOptimizeRepair);
+  const generationOptimize = generator.indexOf('optimizeSeoMetadata(data, {', preOptimizeRepair);
   assert.ok(preOptimizeRepair > generationStart && generationOptimize > preOptimizeRepair, 'la generazione deve riparare prima del gate SEO');
+  assert.match(generator.slice(generationOptimize, generationOptimize + 180), /onDescriptionRepairs:/u);
 
   const primaryRepair = generator.indexOf('const excerptRepairs = repairGeneratedArticleDescriptions(data);');
   const primaryWrite = generator.indexOf('modifyRouterTs(data);', primaryRepair);

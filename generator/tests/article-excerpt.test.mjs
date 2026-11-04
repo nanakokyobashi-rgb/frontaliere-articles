@@ -501,6 +501,22 @@ test('un excerpt vuoto prende una frase completa dal body oppure rifiuta l’art
   );
 });
 
+test('un campo descrittivo vuoto usa un sibling valido quando il body non offre una frase completa', () => {
+  const sibling = 'L’accordo aggiorna le regole applicate ai lavoratori frontalieri dal prossimo anno.';
+  const article = {
+    id: 'descrizione-vuota-sibling',
+    content: { it: { ogDescription: '', seoDescription: sibling } },
+  };
+
+  const repairs = repairGeneratedArticleDescriptions(article);
+
+  assert.equal(article.content.it.ogDescription, sibling);
+  assert.deepEqual(
+    repairs.map(({ field, source }) => ({ field, source })),
+    [{ field: 'ogDescription', source: 'sibling-description' }],
+  );
+});
+
 test('il gate scopre un punto aggiunto dopo una frase troncata negli esempi del corpus', () => {
   assert.ok(findExcerptCompletenessDefects(
     "L'Accordo Italia-Svizzera del 2020 introduce un nuovo regime di tassazione per i lavoratori frontalieri, sostituendo il quadro del 1974. L'analisi valuta.",
