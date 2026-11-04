@@ -4786,6 +4786,7 @@ const TITLE_CASING_KNOWN_ACRONYMS = new Set([
   'avs', 'ipg', 'ac', 'lainf', 'laa', 'igm', 'ijm', 'lpp', 'irpef', 'inps',
   'mef', 'inail', 'seco', 'sem', 'suva', 'ustat', 'ufsp', 'bag', 'supsi',
   'eoc', 'dfe', 'dss', 'are', 'bfs', 'bps', 'ufas', 'ufg', 'udsc', 'fedpol',
+  'eth',
   'lamal', 'iva', 'chf', 'cu', 'ral', 'ssn', 'sepa', 'ccnl', 'cmu', 'naspi',
   'covid', 'cdi', 'ats',
 ]);

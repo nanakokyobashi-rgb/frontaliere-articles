@@ -76,6 +76,12 @@ describe('normalizeTitleCasing — shouting (fully-uppercase) titles', () => {
     );
   });
 
+  it('preserves ETH when a shouting title is normalized', () => {
+    expect(normalizeTitleCasing('POLITECNICO FEDERALE ETH DI ZURIGO')).toBe(
+      'Politecnico federale ETH di Zurigo',
+    );
+  });
+
   it('does not mistake short Italian function words for acronyms', () => {
     expect(normalizeTitleCasing('LA SOSPENSIONE DEI RISTORNI')).toBe('La sospensione dei ristorni');
   });
@@ -102,6 +108,10 @@ describe('collapseShoutingTitle — locale-agnostic ALL-CAPS guard (EN/DE/FR)', 
 
   it('preserves known acronyms in a shouting translated title', () => {
     expect(collapseShoutingTitle('NEW AVS AND CHF 500 RULES')).toBe('New AVS and CHF 500 rules');
+  });
+
+  it('preserves ETH in a shouting translated title', () => {
+    expect(collapseShoutingTitle('STUDYING AT ETH')).toBe('Studying at ETH');
   });
 
   it('is a no-op on normally-cased titles', () => {
