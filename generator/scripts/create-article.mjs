@@ -221,10 +221,12 @@ import { tokenizeIt, jaccardSim, containmentSim, normalizeItWord } from './lib/i
 import { countLocalNewsHits, isLocalNews } from './lib/local-news.mjs';
 import { fixMicrocopy } from './lib/it-microcopy-guard.mjs';
 import {
+  firstCompleteBodyExcerpt,
   normalizeExcerpt,
   stripExcerptMarkdown,
   assertPlainExcerpt,
   assertPlainDescriptionFields,
+  repairGeneratedArticleDescriptions,
 } from './lib/article-excerpt.mjs';
 import { DOMAIN_DUP_STOPLIST, filterDistinctive } from './lib/dup-stoplist.mjs';
 import { JSON_QUOTE_SAFETY_RULE_IT, describeJsonParseError, describeRawForDiagnostics, repairLlmJson } from './lib/llm-json-repair.mjs';
@@ -4859,7 +4861,7 @@ function applyMicrocopyGuard(content, locale) {
   for (const field of ['title', 'excerpt']) {
     if (typeof content[field] !== 'string' || !content[field].trim()) continue;
     if (field === 'excerpt') {
-      const normalized = normalizeExcerpt(content[field]);
+      const normalized = normalizeExcerpt(content[field], { locale });
       if (normalized !== content[field]) {
         console.warn(`  🧹 [excerpt-plain] ${locale.toUpperCase()} excerpt normalizzato`);
         content[field] = normalized;
@@ -4889,20 +4891,22 @@ function applyMicrocopyGuard(content, locale) {
  * blocked on this step (issue #3174 follow-up — auto-generated excerpt).
  */
 async function generateExcerpt(title, body1, body2, body3) {
-  const bodyText = [body1, body2, body3].filter(Boolean).join('\n\n');
+  const body = [body1, body2, body3].filter(Boolean);
+  const bodyText = body.join('\n\n');
   try {
     const messages = [
       {
         role: 'system',
         content:
-          'Sei un redattore SEO italiano. Scrivi un riassunto breve (1-2 frasi, massimo 160 caratteri) ' +
+          'Sei un redattore SEO italiano. Scrivi una frase completa con terminatore finale (massimo 160 caratteri). ' +
+          'Non concatenare bullet o key facts: scegli un solo fatto pertinente e formulalo come frase. ' +
           'per un articolo di blog, adatto come meta-description. Rispondi SOLO con il testo del riassunto, ' +
           'senza virgolette né markdown.',
       },
       { role: 'user', content: `Titolo: ${title}\n\nCorpo dell'articolo:\n${bodyText.slice(0, 4000)}` },
     ];
     const raw = await _aiCallLLM(messages, { temperature: 0.5, maxTokens: 200, timeout: 30_000 });
-    const excerpt = normalizeExcerpt(String(raw || '').replace(/^["'“”]+|["'“”]+$/g, '').trim());
+    const excerpt = normalizeExcerpt(String(raw || '').replace(/^["'“”]+|["'“”]+$/g, '').trim(), { locale: 'it' });
     // Il non-vuoto non basta (#798): questa e' la sola sorgente dell'`excerpt`
     // della pipeline giornalista, che non passa da `validateItalianPayload`.
     // Un `...` finirebbe in `content/`, in `meta-<locale>.json` e nei feed.
@@ -4916,7 +4920,13 @@ async function generateExcerpt(title, body1, body2, body3) {
   } catch (err) {
     console.warn(`  ⚠️  generateExcerpt fallito, uso fallback troncato: ${err.message}`);
   }
-  return capBlogDescription(normalizeExcerpt(bodyText)).value;
+  const bodyFallback = firstCompleteBodyExcerpt(body, {
+    locale: 'it',
+    field: 'excerpt',
+    maxLength: 160,
+  });
+  if (bodyFallback) return capBlogDescription(bodyFallback).value;
+  return capBlogDescription(normalizeExcerpt(bodyText, { locale: 'it' })).value;
 }
 
 /** Char-based thirds over an ordered list of chunks (paragraphs or sentences),
@@ -15689,12 +15699,12 @@ function extractArticleCity(slug) {
   return '';
 }
 
-function optimizeSeoMetadata(data) {
+function optimizeSeoMetadata(data, { onDescriptionRepairs } = {}) {
   const it = data.content?.it || {};
   if (!data.seo) data.seo = {};
 
   if (typeof it.excerpt === 'string' && it.excerpt.trim()) {
-    it.excerpt = normalizeExcerpt(it.excerpt);
+    it.excerpt = normalizeExcerpt(it.excerpt, { locale: 'it' });
   }
 
   // ── Collision prevention (mirror og-pages runtime disambiguator) ──
@@ -15766,6 +15776,10 @@ function optimizeSeoMetadata(data) {
     stripExcerptMarkdown(data.seo.ogDescription || data.seo.description),
     SEO_OG_DESCRIPTION_MAX,
   );
+  const postCapDescriptionRepairs = repairGeneratedArticleDescriptions(data);
+  if (postCapDescriptionRepairs.length > 0 && typeof onDescriptionRepairs === 'function') {
+    onDescriptionRepairs(postCapDescriptionRepairs);
+  }
   assertPlainExcerpt(data.seo.description, { field: 'seo.description', id: data.id, locale: 'it' });
   assertPlainExcerpt(data.seo.ogDescription, { field: 'seo.ogDescription', id: data.id, locale: 'it' });
 
@@ -15802,7 +15816,7 @@ export function refreshSourceCopyDerivedMetadata(data) {
     if (!content || typeof content !== 'object') continue;
     const body = bodyTextForQuality(content);
     if (!body.trim()) continue;
-    const excerpt = capBlogDescription(normalizeExcerpt(body)).value;
+    const excerpt = capBlogDescription(normalizeExcerpt(body, { locale })).value;
     if (!excerpt) continue;
     content.excerpt = excerpt;
     applyMicrocopyGuard(content, locale);
@@ -15811,11 +15825,7 @@ export function refreshSourceCopyDerivedMetadata(data) {
       if (seoDescription.length < SEO_DESCRIPTION_MIN) {
         seoDescription = truncateToClauseNonEmpty(stripExcerptMarkdown(body), SEO_DESCRIPTION_MAX);
       }
-      content.seoDescription = stripExcerptMarkdown(assertSeoDescriptionMinimum(seoDescription, {
-        id: `${data?.id || 'unknown'}:${locale}`,
-        sourceDescriptionLength: excerpt.length,
-        sourceExcerptLength: excerpt.length,
-      }));
+      content.seoDescription = stripExcerptMarkdown(seoDescription);
     }
     if (typeof content.ogDescription === 'string') {
       content.ogDescription = stripExcerptMarkdown(capBlogDescription(excerpt, SEO_OG_DESCRIPTION_MAX).value);
@@ -15831,6 +15841,18 @@ export function refreshSourceCopyDerivedMetadata(data) {
     if (!data.seo || typeof data.seo !== 'object') data.seo = {};
     data.seo.description = stripExcerptMarkdown(itExcerpt);
     data.seo.ogDescription = stripExcerptMarkdown(itExcerpt);
+    // Body-derived caps can end mid-sentence; repair all locale and shared SEO
+    // fields before optimizeSeoMetadata runs its completeness and length gates.
+    repairGeneratedArticleDescriptions(data);
+    for (const locale of ['it', 'en', 'de', 'fr']) {
+      const content = data?.content?.[locale];
+      if (typeof content?.seoDescription !== 'string') continue;
+      assertSeoDescriptionMinimum(content.seoDescription, {
+        id: `${data?.id || 'unknown'}:${locale}`,
+        sourceDescriptionLength: content.seoDescription.length,
+        sourceExcerptLength: typeof content.excerpt === 'string' ? content.excerpt.length : undefined,
+      });
+    }
     optimizeSeoMetadata(data);
   }
   return data;
@@ -19349,13 +19371,23 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
         { retries: sourceCopyResult.passes },
       );
     }
+    // Repair generated descriptions before optimizeSeoMetadata applies its
+    // completion and minimum-length assertions. The source-copy refresh path
+    // performs the same repair after deriving its replacement metadata.
+    let preTranslationExcerptRepairs = [];
+    if (sourceCopyResult.changed) {
+      refreshSourceCopyDerivedMetadata(data);
+    } else {
+      preTranslationExcerptRepairs = repairGeneratedArticleDescriptions(data);
+      optimizeSeoMetadata(data, {
+        onDescriptionRepairs: (repairs) => preTranslationExcerptRepairs.push(...repairs),
+      });
+    }
     // Step 3a.0-specificity: reject/repair vacuous key facts and reject a
     // cross-canton guide before spending translation, image or write budget.
     // The same helper is called again after translations below because this
     // primary path does not enter registerArticleFiles().
     assertGeneratedArticleQuality(data);
-    if (sourceCopyResult.changed) refreshSourceCopyDerivedMetadata(data);
-    else optimizeSeoMetadata(data);
     // Step 3a.0-dup: i gate deterministici dei duplicati, gli stessi di Step
     // 3a.2 e 3a.4, gia' qui, prima del fact-check e dell'espansione. Id e
     // titolo IT sono stabili da questo punto: il fact-check e l'espansione
@@ -20259,8 +20291,8 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   appendSourceCitation(data, url);
 
   // The repair can change the text from which locale metadata was derived;
-  // restore the shared SEO fields after all body replacements, then keep the
-  // municipality postcondition last on the metadata surfaces.
+  // restore the shared SEO fields after all body replacements. Municipality
+  // names are restored again after the final excerpt repair below.
   if (sourceCopyFinalChanged) refreshSourceCopyDerivedMetadata(data);
   preserveMunicipalityNamesInMetadata(data);
 
@@ -20286,18 +20318,6 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     label: 'Body post-riparazione anti-copia',
   });
 
-  // Metadata refresh can change the excerpt used by both lexical and semantic
-  // duplicate admission. Re-run the same gates on the final candidate instead
-  // of publishing a repaired excerpt that was never admitted.
-  if (sourceCopyFinalChanged) {
-    console.error('🔍 Verifica duplicati post-riparazione:');
-    checkForDuplicates(data);
-    await checkSemanticNearDuplicate(data, {
-      store: loadEmbeddingStore({ binPath: SECTION.embeddingsBinPath }),
-      meta: loadEmbeddingMeta({ metaPath: SECTION.embeddingsMetaPath }),
-    });
-  }
-
   console.error(`\n📝 Articolo generato: "${data.content.it.title}"`);
   console.error(`   ID: ${data.id}`);
   console.error(`   Categoria: ${data.category}`);
@@ -20318,6 +20338,25 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // `Zürich` to the localized-exonym detector and can be published in place
   // of the required English `Zurich`.
   decodeArticleEntities(data);
+  const excerptRepairs = repairGeneratedArticleDescriptions(data);
+  preserveMunicipalityNamesInMetadata(data);
+  assertArticleDescriptionsArePlain(data);
+  if (sourceCopyResult.changed || preTranslationExcerptRepairs.length > 0 || excerptRepairs.length > 0) {
+    assertGeneratedArticleQuality(data, {
+      cantonBody: bodyTextForCantonPostcondition(data),
+    });
+  }
+  // Metadata repairs can change duplicate admission; check the exact values
+  // that will be published after all final metadata normalization.
+  if (sourceCopyResult.changed || sourceCopyFinalChanged
+    || preTranslationExcerptRepairs.length > 0 || excerptRepairs.length > 0) {
+    console.error('🔍 Verifica duplicati post-riparazione:');
+    checkForDuplicates(data);
+    await checkSemanticNearDuplicate(data, {
+      store: loadEmbeddingStore({ binPath: SECTION.embeddingsBinPath }),
+      meta: loadEmbeddingMeta({ metaPath: SECTION.embeddingsMetaPath }),
+    });
+  }
   // Entity decoding is the last content normalization before the write path.
   // Re-run the fiscal guard on every locale here: the earlier check ran before
   // the final source-copy repair and deterministic postconditions.
@@ -21476,8 +21515,11 @@ export async function registerArticleFiles(data, opts = {}) {
   // perdere un comune dall'excerpt, e l'imageAlt del giornalista non passa dal
   // percorso AI primario.
   preserveMunicipalityNamesInMetadata(data);
+  repairGeneratedArticleDescriptions(data);
   clampSeoDescriptions(data);
   ensureSeoDescriptionMinimum(data);
+  repairGeneratedArticleDescriptions(data);
+  preserveMunicipalityNamesInMetadata(data);
   assertArticleDescriptionsArePlain(data);
   const slugs = deriveAndSanitizeArticleSlugs(data);
   assertSlugFallbackRunBudget();
@@ -21486,6 +21528,15 @@ export async function registerArticleFiles(data, opts = {}) {
   // in the primary AI path: `deriveAndSanitizeArticleSlugs()` can intentionally
   // retain an Italian fallback when a translated candidate is unusable.
   checkTranslatedSlugCollisions(data);
+  // Secondary producers do not pass the primary path's Step 3a.2. Recheck
+  // lexical and semantic duplicates here against the final repaired excerpt,
+  // before the shared writer touches any published file.
+  console.error('🔍 Verifica duplicati post-riparazione nel writer condiviso:');
+  checkForDuplicates(data);
+  await checkSemanticNearDuplicate(data, {
+    store: loadEmbeddingStore({ binPath: SECTION.embeddingsBinPath }),
+    meta: loadEmbeddingMeta({ metaPath: SECTION.embeddingsMetaPath }),
+  });
   // Stessa ragione, stesso percorso condiviso: i quattro produttori secondari
   // (daily-brief, events-digest, border-wait-ranking, journalist) importano
   // registerArticleFiles() direttamente e non passano mai dallo Step 3a.2 del

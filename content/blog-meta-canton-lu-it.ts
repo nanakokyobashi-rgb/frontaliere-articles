@@ -4,7 +4,7 @@
  */
 const blogMetaCantonLuIt: Record<string, string> = {
     'blog.article.lucerna-salute-mentale-banchi.title': 'Lucerna: giornata sulla salute mentale il 10 ottobre',
-    'blog.article.lucerna-salute-mentale-banchi.excerpt': '10 ottobre 2026: giornata cantonale a Lucerna',
+    'blog.article.lucerna-salute-mentale-banchi.excerpt': '10 ottobre 2026: giornata cantonale a Lucerna.',
     'blog.article.lucerna-salute-mentale-banchi.imageAlt': 'Banchine per conversazioni sulla salute mentale davanti alla Matthäuskirche di Lucerna',
     'blog.article.lucerna-qualita-sviluppo-scuole.title': 'Lucerna, qualità e sviluppo scolastico più vicini',
     'blog.article.lucerna-qualita-sviluppo-scuole.excerpt': 'I ginnasi di Lucerna rivedono il quadro QM: l\'anno scolastico 2026/27 servirà a concretizzare il legame con sviluppo scolastico e didattico.',
@@ -58,7 +58,7 @@ const blogMetaCantonLuIt: Record<string, string> = {
     'blog.article.fluhli-tassa-seconde-case.excerpt': 'Con 70 voti contro 41, il Parlamento cantonale di Lucerna ha accolto la mozione di Hella Schnider per una tassa speciale sulle seconde case.',
     'blog.article.fluhli-tassa-seconde-case.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
     'blog.article.einwohnerrat-budget-bahnhof-ost.title': 'Einwohnerrat decide budget 2027 e credito Bahnhof Ost',
-    'blog.article.einwohnerrat-budget-bahnhof-ost.excerpt': 'Il 17 novembre 2026 si riunisce l\'Einwohnerrat di Ebikon Il budget 2027 prevede un avanzo di CHF 2,14 milioni Il moltiplicatore resta a 2,05 unità Bahnhof Ost',
+    'blog.article.einwohnerrat-budget-bahnhof-ost.excerpt': 'L\'incontro inizierà alle 14 nell\'Aula Wydenhof e prevede sei dossier. Al centro ci sono il piano delle attività e finanziario AFP 2027–2030 e il budget 2027.',
     'blog.article.einwohnerrat-budget-bahnhof-ost.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
     'blog.article.passepartout-trasporto-centrale.title': 'Passepartout: accesso più semplice al trasporto pubblico',
     'blog.article.passepartout-trasporto-centrale.excerpt': 'Prima del 1986 servivano più biglietti per un viaggio nell\'ÖV.',

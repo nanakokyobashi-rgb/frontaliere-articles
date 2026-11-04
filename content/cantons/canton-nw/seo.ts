@@ -87,16 +87,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-life-forestry-stans-liquidazione': {
     title: 'Stans: Life Forestry liquidazione, 800 investitori a rischio',
-    description: 'Life Forestry Switzerland AG di Stans è in liquidazione dopo il fallimento del 2025; circa 800 investitori svizzeri e oltre 6\'000 europei temono di perdere',
+    description: 'Life Forestry Switzerland AG di Stans è in liquidazione dopo il fallimento del 2025; circa 800 investitori svizzeri e oltre 6\'000 europei temono di perdere.',
     keywords: 'frontalieri, ticino, svizzera, italia, stans, life, forestry, liquidazione',
     ogTitle: 'Stans: Life Forestry liquidazione, 800 investitori a rischio',
-    ogDescription: 'Dopo il fallimento del 2025, la società Life Forestry Switzerland AG di Stans è in liquidazione. Gli investitori, circa 800 in Svizzera e oltre 6\'000 in Europa, temono di non recuperare i circa CHF 200 milioni investiti in piantagioni di teak',
+    ogDescription: 'Life Forestry Switzerland AG di Stans sarà liquidata. Circa 800 investitori in Svizzera temono per il capitale.',
     canonicalPath: '/articoli-nidvaldo/life-forestry-stans-liquidazione/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Stans: Life Forestry liquidazione, 800 investitori a rischio",
-      "description": "Life Forestry Switzerland AG di Stans è in liquidazione dopo il fallimento del 2025; circa 800 investitori svizzeri e oltre 6'000 europei temono di perdere",
+      "description": "Life Forestry Switzerland AG di Stans è in liquidazione dopo il fallimento del 2025; circa 800 investitori svizzeri e oltre 6'000 europei temono di perdere.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -207,7 +207,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'A Ennetbürgen, il ponte sullo Scheidgraben sarà chiuso per risanamento dal 3 novembre 2026 alle 16.30 al 6 novembre 2026 alle 08.00.',
     keywords: 'frontalieri, ticino, svizzera, italia, ponte, sullo, scheidgraben, chiuso',
     ogTitle: 'Ponte sullo Scheidgraben chiuso a Ennetbürgen',
-    ogDescription: 'La comunicazione riguarda il ponte sullo Scheidgraben tra Alpenstrasse e Seefeld: chiusura da martedì 3 novembre 2026 alle 16.30 a venerdì 6 novembre 2026 alle 08.00 per lavori di risanamento. Pedoni e ciclisti sono invitati a passare',
+    ogDescription: 'La comunicazione riguarda il ponte sullo Scheidgraben tra Alpenstrasse e Seefeld: chiusura da martedì 3 novembre 2026 alle 16.30 a venerdì 6 novembre 2026 alle 08.00 per lavori di risanamento. Pedoni e ciclisti sono invitati a passare.',
     canonicalPath: '/articoli-nidvaldo/chiusura-ponte-scheidgraben/',
     structuredData: {
       "@context": "https://schema.org",

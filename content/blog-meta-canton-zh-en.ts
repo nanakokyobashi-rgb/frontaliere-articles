@@ -34,7 +34,7 @@ const blogMetaCantonZhEn: Record<string, string> = {
     'blog.article.crisi-resilienza-zurigo.excerpt': 'Zurich\'s resilience weeks address two scenarios: information without electricity and internet and 9 liters of water for three days.',
     'blog.article.crisi-resilienza-zurigo.imageAlt': 'Illustration generated for this article',
     'blog.article.vbz-tram-50-51-cambio.title': 'Trams 50 and 51 discontinued from December 13',
-    'blog.article.vbz-tram-50-51-cambio.excerpt': 'From December 13, lines 50 and 51 will disappear Trams 4, 11, 13, 14 and 17 return to Bahnhofquai Line 83 runs every day until 22 Night line N8 becomes N80 Date',
+    'blog.article.vbz-tram-50-51-cambio.excerpt': 'The VBZ timetable change is scheduled for December 13. As tsri.ch reports, with the completion of the work at Bahnhofquai, tram lines 50 and 51 will be discontinued, and line changes around the central station will also be abolished.',
     'blog.article.vbz-tram-50-51-cambio.imageAlt': 'Illustrative image relevant to the article topic',
     'blog.article.zurigo-niente-iniziativa-congedo-parentale.title': 'Zurich: no parental leave initiative, left and center divided',
     'blog.article.zurigo-niente-iniziativa-congedo-parentale.excerpt': 'The Canton of Zurich will not submit the cantonal initiative on parental leave: left-wing and centrist parties, initially in favor, failed to reach an agreement.',
@@ -70,7 +70,7 @@ const blogMetaCantonZhEn: Record<string, string> = {
     'blog.article.forchstrasse-sicurezza-zollikon.excerpt': 'The Canton of Zurich is planning nearly 1,7 km between Zumikon and Zollikerberg: CHF 24,2 million, three barrier-free underpasses and a start at the end of 2028 if the Kantonsrat approves.',
     'blog.article.forchstrasse-sicurezza-zollikon.imageAlt': 'Illustrative image relevant to the article topic',
     'blog.article.zurigo-strategia-energetica-2026.title': 'Zurich adopts the 2026 Energy Strategy',
-    'blog.article.zurigo-strategia-energetica-2026.excerpt': '2026 energy strategy and planning adopted by the Regierungsrat Heat: complete phase-out of fossil fuels possible by 2050 Summer 2050: over 80% of electricity',
+    'blog.article.zurigo-strategia-energetica-2026.excerpt': 'The Regierungsrat of the Canton of Zurich has adopted the energy strategy and energy planning 2026.',
     'blog.article.zurigo-strategia-energetica-2026.imageAlt': 'Illustrative image relevant to the article topic',
 };
 

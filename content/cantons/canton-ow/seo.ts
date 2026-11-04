@@ -43,7 +43,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-obvaldo-verkehr45-mobilita': {
     title: 'Obvaldo: proposta di mobilità Verkehr\'45 | Frontaliere Ticino',
-    description: 'La pagina del Canton Obvaldo dedicata a Verkehr\'45 indica una proposta sulle esigenze di mobilità attraverso più modi di trasporto e cita la Staatskanzlei',
+    description: 'La pagina del Canton Obvaldo dedicata a Verkehr\'45 indica una proposta sulle esigenze di mobilità attraverso più modi di trasporto e cita la Staatskanzlei.',
     keywords: 'frontalieri, ticino, svizzera, italia, obvaldo, proposta, mobilità, verkehr',
     ogTitle: 'Obvaldo: la proposta di mobilità Verkehr\'45',
     ogDescription: 'La pagina collegata a ow.ch riporta il titolo Verkehr\'45 e parla di una proposta per affrontare le esigenze di mobilità attraverso diversi modi di trasporto. La stessa schermata indica la Staatskanzlei, Rathaus, Dorfplatz 8, 6061 Sarnen.',
@@ -52,7 +52,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Obvaldo: proposta di mobilità Verkehr'45",
-      "description": "La pagina del Canton Obvaldo dedicata a Verkehr'45 indica una proposta sulle esigenze di mobilità attraverso più modi di trasporto e cita la Staatskanzlei",
+      "description": "La pagina del Canton Obvaldo dedicata a Verkehr'45 indica una proposta sulle esigenze di mobilità attraverso più modi di trasporto e cita la Staatskanzlei.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",

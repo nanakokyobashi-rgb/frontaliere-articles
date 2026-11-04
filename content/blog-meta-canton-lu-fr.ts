@@ -4,7 +4,7 @@
  */
 const blogMetaCantonLuFr: Record<string, string> = {
     'blog.article.lucerna-salute-mentale-banchi.title': 'Lucerne : journée sur la santé mentale le 10 octobre',
-    'blog.article.lucerna-salute-mentale-banchi.excerpt': '10 octobre 2026 : journée cantonale à Lucerne',
+    'blog.article.lucerna-salute-mentale-banchi.excerpt': '10 octobre 2026 : journée cantonale à Lucerne.',
     'blog.article.lucerna-salute-mentale-banchi.imageAlt': 'Bancs pour des discussions sur la santé mentale près de la Matthäuskirche à Lucerne',
     'blog.article.lucerna-qualita-sviluppo-scuole.title': 'Lucerne, qualité et développement scolaire plus proches',
     'blog.article.lucerna-qualita-sviluppo-scuole.excerpt': 'Les gymnases de Lucerne réexaminent le cadre QM : l’année scolaire 2026/27 servira à concrétiser le lien avec le développement scolaire et pédagogique.',
@@ -58,7 +58,7 @@ const blogMetaCantonLuFr: Record<string, string> = {
     'blog.article.fluhli-tassa-seconde-case.excerpt': 'Par 70 voix contre 41, le Parlement cantonal de Lucerne a adopté la motion de Hella Schnider en faveur d’une taxe spéciale sur les résidences secondaires.',
     'blog.article.fluhli-tassa-seconde-case.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
     'blog.article.einwohnerrat-budget-bahnhof-ost.title': 'L\'Einwohnerrat décide du budget 2027 et du crédit Bahnhof Ost',
-    'blog.article.einwohnerrat-budget-bahnhof-ost.excerpt': 'Le 17 novembre 2026, l\'Einwohnerrat d\'Ebikon se réunit Le budget 2027 prévoit un excédent de CHF 2,14 millions Le multiplicateur reste à 2,05 unités Bahnhof Ost',
+    'blog.article.einwohnerrat-budget-bahnhof-ost.excerpt': 'Le 17 novembre 2026, l\'Einwohnerrat d\'Ebikon, c\'est-à-dire le Conseil des habitants, se réunira lors d\'une séance publique consacrée au budget.',
     'blog.article.einwohnerrat-budget-bahnhof-ost.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
     'blog.article.passepartout-trasporto-centrale.title': 'Passepartout : accès plus simple aux transports publics',
     'blog.article.passepartout-trasporto-centrale.excerpt': 'Avant 1986, plusieurs billets étaient nécessaires pour un trajet en transports publics.',

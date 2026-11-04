@@ -25,7 +25,7 @@ const blogMetaCantonGlFr: Record<string, string> = {
     'blog.article.kloentalerstrasse-cantiere-2026.excerpt': 'Des travaux sont prévus sur la Klöntalerstrasse du 21 octobre au 4 décembre 2026 : courtes attentes, fermeture pour l’asphaltage et déviation via Sackberg.',
     'blog.article.kloentalerstrasse-cantiere-2026.imageAlt': 'Travaux sur la Klöntalerstrasse entre Staldengarten et Bützi à Glaris',
     'blog.article.glarona-mercato-immobiliare-2026.title': 'Marché immobilier à Glaris : les prix en hausse en 2026',
-    'blog.article.glarona-mercato-immobiliare-2026.excerpt': 'La demande immobilière reste élevée dans le canton de Glaris L\'offre limitée soutient la hausse des prix Appartements en copropriété +4,4% entre le 2e trimestre',
+    'blog.article.glarona-mercato-immobiliare-2026.excerpt': 'Le 20 octobre 2026, la Glarner Kantonalbank a publié le rapport sur le marché immobilier du canton de Glaris, élaboré conjointement avec Wüest Partner AG.',
     'blog.article.glarona-mercato-immobiliare-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
     'blog.article.landrat-ottobre-glarona-2026.title': 'Landrat Glaris : 4 millions pour la péréquation, hydro à Rüti',
     'blog.article.landrat-ottobre-glarona-2026.excerpt': 'Le 21 octobre 2026, le Landrat a approuvé CHF 4 millions pour la péréquation entre le canton et les communes, rejeté deux propositions sur la concession hydroélectrique de Rüti et alloué un crédit sportif de 3 millions pour 2027-2030.',
@@ -43,7 +43,7 @@ const blogMetaCantonGlFr: Record<string, string> = {
     'blog.article.glarona-detrazioni-energia.excerpt': 'Le gouvernement de Glaris prend position sur les déductions fiscales pour les mesures d\'économie d\'énergie.',
     'blog.article.glarona-detrazioni-energia.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
     'blog.article.glarona-detrazioni-energia-2029.title': 'Glaris : Gouvernement opposé aux déductions pour les économies d’énergie',
-    'blog.article.glarona-detrazioni-energia-2029.excerpt': 'Le Gouvernement glaronais recommande de rejeter le postulat Markus Schnyder (SVP) demande le maintien des déductions La réforme entre en vigueur le 1er janvier',
+    'blog.article.glarona-detrazioni-energia-2029.excerpt': 'Le Gouvernement glaronais recommande au Landrat de rejeter le postulat qui demande de maintenir les déductions fiscales pour les mesures d’économie d’énergie dans les logements en propriété.',
     'blog.article.glarona-detrazioni-energia-2029.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 

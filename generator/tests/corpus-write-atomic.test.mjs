@@ -52,6 +52,7 @@ const CHOKE_POINTS = [
   ['generator/scripts/generate-pharmacy-evergreen-guides.mjs', 'nessun workflow: producer rerunnable lanciato a mano'],
   ['generator/scripts/repair-truncated-seo-titles.mjs', 'nessun workflow: bonifica storica eseguita manualmente'],
   ['generator/scripts/repair-empty-template-fields.mjs', 'nessun workflow: bonifica dei campi di template vuoti lanciata a mano'],
+  ['generator/scripts/repair-plain-excerpts.mjs', 'nessun workflow: sweep deterministico delle descrizioni avviato manualmente con --write'],
   ['generator/scripts/retranslate-blocking-bodies.mjs', 'bonifica-blocking-bodies.yml'],
   ['generator/scripts/repair-localized-toponyms.mjs', 'nessun workflow: bonifica deterministica degli esonimi localizzati'],
   ['generator/scripts/backfill-article-cantons.mjs', 'nessun workflow: backfill one-shot del campo canton lanciato a mano'],
@@ -67,6 +68,7 @@ const SHARED_PAIR_WRITERS = new Set([
 ]);
 const SHARED_SNAPSHOT_WRITERS = new Set([
   'generator/scripts/repair-empty-template-fields.mjs',
+  'generator/scripts/repair-plain-excerpts.mjs',
   'generator/scripts/lib/article-registry-image.mjs',
   'generator/scripts/lib/evergreen-article-refresh.mjs',
 ]);

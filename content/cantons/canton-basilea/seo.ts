@@ -316,16 +316,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-basilea-cantieri-alle-sei': {
     title: 'Parlamento di Basilea: mozione per iniziare i cantieri alle 6',
-    description: 'Il Gran Consiglio di Basilea ha trasmesso una mozione per consentire lavori edili alle 6 da giugno ad agosto; quelli rumorosi resterebbero dalle 7.',
+    description: 'Mercoledì il Gran Consiglio di Basilea ha trasmesso per la prima volta al governo una mozione di Luca Urgese (FDP) sull\'orario di lavoro nei cantieri.',
     keywords: 'frontalieri, ticino, svizzera, italia, parlamento, basilea, mozione, iniziare',
     ogTitle: 'Basilea: mozione, cantieri alle 6, lavori rumorosi alle 7',
-    ogDescription: 'La mozione di Luca Urgese (FDP) è stata trasmessa con 84 voti contro 8 e 4 astensioni. Chiede di modificare l\'ordinanza sulla protezione dal rumore: lavori edili alle 6 nei giorni feriali da giugno ad agosto, attività rumorose dalle 7.',
+    ogDescription: 'La mozione di Luca Urgese (FDP) è stata trasmessa con 84 voti contro 8 e 4 astensioni.',
     canonicalPath: '/articoli-basilea/basilea-cantieri-alle-sei/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Parlamento di Basilea: mozione per iniziare i cantieri alle 6",
-      "description": "Il Gran Consiglio di Basilea ha trasmesso una mozione per consentire lavori edili alle 6 da giugno ad agosto; quelli rumorosi resterebbero dalle 7.",
+      "description": "Mercoledì il Gran Consiglio di Basilea ha trasmesso per la prima volta al governo una mozione di Luca Urgese (FDP) sull'orario di lavoro nei cantieri.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -394,7 +394,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-basel-stadt-siti-online-di-nuoto': {
     title: 'Canton Basilea Città riattiva siti dopo panne tecnico',
-    description: 'Il Canton Basilea Città riattiva progressivamente i siti e le applicazioni dopo una vulnerabilità PHP. Nessun incidente di sicurezza rilevante è stato',
+    description: 'Il Canton Basilea Città riattiva progressivamente i siti e le applicazioni dopo una vulnerabilità PHP.',
     keywords: 'frontalieri, ticino, svizzera, italia, canton, basilea, città, riattiva',
     ogTitle: 'Basilea Città: siti web riattivati dopo panne tecnico',
     ogDescription: 'Il Canton Basilea Città ripristina i servizi online in modo progressivo dopo un problema tecnico legato a PHP. Confermata l\'assenza di incidenti di sicurezza rilevanti.',
@@ -403,7 +403,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Canton Basilea Città riattiva siti dopo panne tecnico",
-      "description": "Il Canton Basilea Città riattiva progressivamente i siti e le applicazioni dopo una vulnerabilità PHP. Nessun incidente di sicurezza rilevante è stato",
+      "description": "Il Canton Basilea Città riattiva progressivamente i siti e le applicazioni dopo una vulnerabilità PHP.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -433,16 +433,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-salario-minimo-basilea-2027': {
     title: 'Salario minimo Basilea aumenta a 22.50 CHF lordi dal 2027',
-    description: 'Dal 1° gennaio 2027 il minimo sarà 22,50 CHF lordi L’aumento previsto è di 30 centesimi per ora L’adeguamento segue l’indice misto svizzero Cantone →',
+    description: 'Dal 1° gennaio 2027 il salario minimo cantonale di Basilea-Città aumenterà da 22,20 a 22,50 CHF lordi per ogni ora di lavoro.',
     keywords: 'frontalieri, ticino, svizzera, italia, salario, minimo, basilea, aumenta',
     ogTitle: 'Salario minimo Basilea 2027: 22.50 CHF all\'ora',
-    ogDescription: 'Dal 1° gennaio 2027 il minimo sarà 22,50 CHF lordi L’aumento previsto è di 30 centesimi per ora L’adeguamento segue l’indice misto svizzero Cantone →',
+    ogDescription: 'Dal 1° gennaio 2027 il salario minimo cantonale di Basilea-Città aumenterà da 22,20 a 22,50 CHF lordi per ogni ora di lavoro.',
     canonicalPath: '/articoli-basilea/salario-minimo-basilea-2027/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Salario minimo Basilea aumenta a 22.50 CHF lordi dal 2027",
-      "description": "Dal 1° gennaio 2027 il minimo sarà 22,50 CHF lordi L’aumento previsto è di 30 centesimi per ora L’adeguamento segue l’indice misto svizzero Cantone →",
+      "description": "Dal 1° gennaio 2027 il salario minimo cantonale di Basilea-Città aumenterà da 22,20 a 22,50 CHF lordi per ogni ora di lavoro.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -631,7 +631,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Polmonite enzootica in un allevamento di Baselland: 750 maiali abbattuti. Ordinati pulizia, disinfezione e risanamento totale, con controllo ALV.',
     keywords: 'frontalieri, ticino, svizzera, italia, baselland, maiali, abbattuti, polmonite',
     ogTitle: 'Baselland: 750 maiali abbattuti per polmonite enzootica',
-    ogDescription: 'La polmonite enzootica è innocua per l\'uomo, ma nei suini può manifestarsi con tosse, difficoltà respiratorie e crescita ridotta. Dopo pulizia e disinfezione, l\'ALV controllerà l\'allevamento: il ritorno richiede almeno dieci giorni di vuoto e il via',
+    ogDescription: 'La polmonite enzootica è innocua per l\'uomo, ma nei suini può manifestarsi con tosse, difficoltà respiratorie e crescita ridotta. Dopo pulizia e disinfezione, l\'ALV controllerà l\'allevamento: il ritorno richiede almeno dieci giorni di vuoto e il via.',
     canonicalPath: '/articoli-basilea/baselland-maiali-enzootica/',
     structuredData: {
       "@context": "https://schema.org",

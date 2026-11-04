@@ -25,7 +25,7 @@ const blogMetaCantonGlEn: Record<string, string> = {
     'blog.article.kloentalerstrasse-cantiere-2026.excerpt': 'Construction work is planned on Klöntalerstrasse from October 21 to December 4, 2026: brief waits, closure for asphalting, and a detour via Sackberg.',
     'blog.article.kloentalerstrasse-cantiere-2026.imageAlt': 'Roadworks on Klöntalerstrasse between Staldengarten and Bützi in Glarus',
     'blog.article.glarona-mercato-immobiliare-2026.title': 'Real estate market in Glarus: prices rising in 2026',
-    'blog.article.glarona-mercato-immobiliare-2026.excerpt': 'Housing demand remains high in the Canton of Glarus Limited supply supports rising prices Condominiums +4,4% between the 2nd quarter of 2025 and the 2nd quarter',
+    'blog.article.glarona-mercato-immobiliare-2026.excerpt': 'On October 20, 2026, Glarner Kantonalbank published the real estate market report for the Canton of Glarus, prepared jointly with Wüest Partner AG.',
     'blog.article.glarona-mercato-immobiliare-2026.imageAlt': 'Illustrative image relevant to the article topic',
     'blog.article.landrat-ottobre-glarona-2026.title': 'Glarus Landrat: 4 million for equalization, water in Rüti',
     'blog.article.landrat-ottobre-glarona-2026.excerpt': 'On October 21, 2026, the Landrat approved CHF 4 million for the equalization between Canton and municipalities, rejected two proposals on the Rüti hydroelectric concession and allocated a sports credit of 3 million for 2027-2030.',
@@ -43,7 +43,7 @@ const blogMetaCantonGlEn: Record<string, string> = {
     'blog.article.glarona-detrazioni-energia.excerpt': 'The government of Glarus takes a position on tax deductions for energy-saving measures.',
     'blog.article.glarona-detrazioni-energia.imageAlt': 'Illustrative image relevant to the article topic',
     'blog.article.glarona-detrazioni-energia-2029.title': 'Glarus: Government opposes energy-saving tax deductions',
-    'blog.article.glarona-detrazioni-energia-2029.excerpt': 'The Glarus cantonal government recommends rejecting the postulate Markus Schnyder (SVP) calls for retaining the deductions The reform enters into force',
+    'blog.article.glarona-detrazioni-energia-2029.excerpt': 'The Glarus Government recommends that the Landrat reject the postulate calling for tax deductions for energy-saving measures in owner-occupied homes to be maintained.',
     'blog.article.glarona-detrazioni-energia-2029.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
