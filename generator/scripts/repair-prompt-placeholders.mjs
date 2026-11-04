@@ -61,6 +61,7 @@ import {
 import { writeFileAtomic } from './lib/atomic-write-file.mjs';
 import { escapeRegExpLiteral } from './lib/escape-regexp.mjs';
 import { assertSeoDescriptionMinimum } from './lib/seo-description-contract.mjs';
+import { assertFaqPairsHaveNoRejectedControls } from '../../scripts/lib/faq-control-contract.mjs';
 import {
   findPromptPlaceholders,
   stripFaqNumberedLabels,
@@ -324,7 +325,7 @@ for (const abs of [...walkBodies(path.join(ROOT, 'content', 'blog-body')), ...wa
       const m = /'blog\.article\.([^']+)\.(body\d+|faq)'/.exec(match);
       return { id: m[1], field: m[2], locale };
     },
-    repair: ({ field, value }) => {
+    repair: ({ id, field, value }) => {
       if (field === 'faq') {
         let pairs;
         try {
@@ -339,6 +340,12 @@ for (const abs of [...walkBodies(path.join(ROOT, 'content', 'blog-body')), ...wa
         // Sotto le 2 coppie il campo va tolto: e' la soglia di
         // ogPagesPlugin.ts:1328. `__DROP__` lo segnala al post-processo sotto.
         if (!kept) return { value: DROP_FAQ_SENTINEL, how: `faq-rimossa (${dropped.length} coppie segnaposto)` };
+        try {
+          assertFaqPairsHaveNoRejectedControls(kept, `FAQ ${id || 'senza id'} riparata`);
+        } catch (error) {
+          problems.push(`${label}: ${error.message} — FAQ SALTATA`);
+          return null;
+        }
         return { value: JSON.stringify(kept), how: `faq-potata (${repaired} riparate, ${dropped.length} scartate)` };
       }
       let out = stripFaqNumberedLabels(value).value;

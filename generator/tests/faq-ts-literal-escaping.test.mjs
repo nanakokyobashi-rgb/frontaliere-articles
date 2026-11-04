@@ -247,6 +247,103 @@ test('create-article valida la FAQ con il decoder TS canonico, senza rieseguire 
   assert.doesNotMatch(src, /escaped\.replace\(\/\\\\'/u);
 });
 
+test('le FAQ con controlli C0 codificati vengono rimosse prima della traduzione e del decode finale', () => {
+  const src = fs.readFileSync(CREATE_ARTICLE, 'utf8');
+  const translationStart = src.indexOf('async function translateArticle(data) {');
+  const sourceFilter = src.indexOf("removeFaqPairsWithRejectedControls(data?.content?.it, 'it');", translationStart);
+  const faqCount = src.indexOf('const faqCount =', translationStart);
+  const decoderStart = src.indexOf('function decodeLocaleContentEntities(data, locale) {');
+  const finalFilter = src.indexOf('removeFaqPairsWithRejectedControls(c, locale);', decoderStart);
+
+  assert.ok(translationStart >= 0, 'la recovery FAQ deve esistere');
+  assert.ok(sourceFilter > translationStart && sourceFilter < faqCount, 'la FAQ italiana va filtrata prima della traduzione');
+  assert.ok(decoderStart > faqCount, 'il decode finale deve stare dopo la traduzione');
+  assert.ok(finalFilter > decoderStart, 'anche i writer secondari devono filtrare prima del decode');
+  assert.match(src.slice(finalFilter, finalFilter + 240), /c\.faq = c\.faq\.map/u);
+});
+
+test('la traduzione FAQ conserva l indice sorgente e scarta batch non allineati', () => {
+  const src = fs.readFileSync(CREATE_ARTICLE, 'utf8');
+  const faqTranslationStart = src.indexOf('// Translate FAQ if present');
+  const faqTranslationEnd = src.indexOf('// Per-call resilience', faqTranslationStart);
+  assert.ok(faqTranslationStart >= 0 && faqTranslationEnd > faqTranslationStart);
+  const faqTranslation = src.slice(faqTranslationStart, faqTranslationEnd);
+
+  assert.match(faqTranslation, /sourceFaq\.map\(\(pair, sourceFaqIndex\)/u);
+  assert.match(faqTranslation, /aligned\[sourceFaqIndex\]/u);
+  assert.match(faqTranslation, /translatedFaq\.length !== sourceFaq\.length/u);
+  assert.match(faqTranslation, /aligned\.some\(\(pair\) => pair === undefined\)/u);
+  assert.match(src, /translatedFaq\.length !== sourceFaqCount/u);
+  assert.match(src, /data\.content\[locale\]\.faq = \[\]/u);
+  assert.doesNotMatch(src, /translatedFaq\.slice\(0,\s*sourceFaqCount\)/u);
+});
+
+test('tutti i writer FAQ secondari applicano il contratto C0 condiviso', () => {
+  const batchPath = path.join(SCRIPTS, 'batch-add-faq-to-articles.mjs');
+  const fixPath = path.join(SCRIPTS, 'fix-faq-locales.mjs');
+  const batch = fs.readFileSync(batchPath, 'utf8');
+  const fix = fs.readFileSync(fixPath, 'utf8');
+  const repairPrompt = fs.readFileSync(path.join(SCRIPTS, 'repair-prompt-placeholders.mjs'), 'utf8');
+
+  const functionSource = (source, startMarker, endMarker, label) => {
+    const start = source.indexOf(startMarker);
+    const end = source.indexOf(endMarker, start + startMarker.length);
+    assert.ok(start >= 0 && end > start, `${label}: delimitatori funzione mancanti`);
+    return source.slice(start, end);
+  };
+
+  for (const [label, source] of [
+    [
+      'batch replace',
+      functionSource(
+        batch,
+        'export function replaceFaqInBodyFile(',
+        'export function insertFaqIntoBodyFile(',
+        'batch replace',
+      ),
+    ],
+    [
+      'batch insert',
+      functionSource(
+        batch,
+        'export function insertFaqIntoBodyFile(',
+        'export function partitionThrottledTranslations(',
+        'batch insert',
+      ),
+    ],
+    [
+      'locale replace',
+      functionSource(
+        fix,
+        'function replaceFaqInFileInternal(',
+        'export function replaceFaqInFile(',
+        'locale replace',
+      ),
+    ],
+    [
+      'locale insert',
+      functionSource(fix, 'function insertFaqKey(', '// ── Language detection', 'locale insert'),
+    ],
+  ]) {
+    assert.match(source, /assertFaqPairsHaveNoRejectedControls\(/u, `${label}: manca il gate C0`);
+  }
+
+  const reescape = functionSource(
+    fix,
+    'function reescapeBroken(',
+    '// ── Main',
+    're-escape',
+  );
+  assert.match(reescape, /pairs\.findIndex\(faqPairContainsRejectedControl\)/u);
+  assert.match(reescape, /if \(rejectedPair >= 0\)/u);
+
+  const repairedFaqStart = repairPrompt.indexOf('const { pairs: kept, repaired, dropped } = cleanFaqPairs');
+  const repairedFaqGuard = repairPrompt.indexOf('assertFaqPairsHaveNoRejectedControls(kept', repairedFaqStart);
+  const repairedFaqSerialize = repairPrompt.indexOf('JSON.stringify(kept)', repairedFaqStart);
+  assert.ok(repairedFaqStart >= 0 && repairedFaqGuard > repairedFaqStart, 'repair-prompt FAQ: manca il gate C0');
+  assert.ok(repairedFaqSerialize > repairedFaqGuard, 'repair-prompt FAQ: serializza prima del gate C0');
+});
+
 // ─────────────────────────────────────────────────────────────────────────────
 // 6. `--help` e `DRY_RUN=1` non toccano il corpus
 //

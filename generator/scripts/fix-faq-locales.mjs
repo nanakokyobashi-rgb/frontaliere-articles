@@ -36,7 +36,10 @@ import {
 } from './lib/localized-toponyms.mjs';
 import { assertFaqPassesFiscalClaimsGate } from './lib/article-ymyl-gate.mjs';
 import { sanitizeArticleFaqMarkdown } from '../../scripts/lib/article-link-contract.mjs';
-import { assertFaqPairsHaveNoRejectedControls } from '../../scripts/lib/faq-control-contract.mjs';
+import {
+  assertFaqPairsHaveNoRejectedControls,
+  faqPairContainsRejectedControl,
+} from '../../scripts/lib/faq-control-contract.mjs';
 
 // Write-time guard (issue #66): strip any C0 control character other than
 // TAB/LF/CR before it reaches content/ — same rule as create-article.mjs write().
@@ -327,9 +330,7 @@ export function hasFaqKey(filePath, id = idOfBodyPath(filePath)) {
 
 function replaceFaqInFileInternal(filePath, newFaqArray, id, { contentPreserving = false } = {}) {
   const locale = basename(dirname(resolve(filePath)));
-  const safeFaq = contentPreserving
-    ? newFaqArray
-    : assertFaqPairsHaveNoRejectedControls(newFaqArray, `FAQ replacement ${id}`);
+  const safeFaq = assertFaqPairsHaveNoRejectedControls(newFaqArray, `FAQ replacement ${id}`);
   if (!contentPreserving) {
     if (!passesLocalizedToponymGate(filePath, id, locale, safeFaq)) return false;
     assertFaqWritePassesFiscalGate(filePath, id, locale, safeFaq);
@@ -360,8 +361,8 @@ export function replaceFaqInFile(filePath, newFaqArray, id = idOfBodyPath(filePa
 function replaceFaqInFileForReescape(filePath, faqArray, id = idOfBodyPath(filePath)) {
   // The caller has already proved an exact parse/serialize round-trip. This
   // repair changes only the TypeScript encoding of the existing FAQ, so it
-  // must preserve the legacy content byte-for-byte at the value level and
-  // must not reapply admission gates intended for new FAQ content.
+  // preserves the legacy content byte-for-byte at the value level. The shared
+  // C0 contract still applies: this repair must not re-serialize an unsafe value.
   return replaceFaqInFileInternal(filePath, faqArray, id, { contentPreserving: true });
 }
 
@@ -896,6 +897,11 @@ function reescapeBroken(bodyDir, limit) {
       if (raw === null) continue;
       const { pairs, legacy } = parseFaqLiteral(raw);
       if (!legacy || !pairs) continue;
+      const rejectedPair = pairs.findIndex(faqPairContainsRejectedControl);
+      if (rejectedPair >= 0) {
+        console.error(`  ⚠️  controllo FAQ non pubblicabile, SALTATO: ${locale}/${file} coppia ${rejectedPair}`);
+        continue;
+      }
       // Il ri-escape deve essere una IDENTITA' sul contenuto: se ricodificando
       // cio' che si e' letto non si riottiene lo stesso array, il file non si
       // tocca. E' il solo modo in cui questa riparazione puo' rompere qualcosa.

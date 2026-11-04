@@ -13,7 +13,10 @@ import {
 } from '../../engine/shared/seo-entry.mjs';
 import { assertRssProjectorContract } from '../../scripts/lib/rss-projector-contract.mjs';
 import { familySourceTransitionState } from '../../scripts/lib/section-registry.mjs';
-import { rejectRawFaqControlEscape } from '../../scripts/lib/faq-control-contract.mjs';
+import {
+  assertFaqPairsHaveNoRejectedControls,
+  rejectRawFaqControlEscape,
+} from '../../scripts/lib/faq-control-contract.mjs';
 import { RSS_DESCRIPTION_MAX_CHARS } from '../scripts/lib/seo-description-contract.mjs';
 import { unescapeTsString, tsStringEscapesWithNewlineAs } from '../scripts/lib/unescape-ts-string.mjs';
 import {
@@ -199,6 +202,16 @@ test('literal readers preserve octal tokens and decode opted-in controls', () =>
   );
   assert.equal(rejectRawFaqControlEscape(String.raw`invalid \u0008`), true);
   assert.equal(rejectRawFaqControlEscape('valid FAQ text'), false);
+  for (const value of ['&#8;', '&#0008;', '&#x08;', '&#X000b;', '&#x1f;']) {
+    assert.equal(rejectRawFaqControlEscape(value), true, `${value} decodes to an unpublishable C0 byte`);
+  }
+  for (const value of ['&#9;', '&#10;', '&#13;', '&#x20;']) {
+    assert.equal(rejectRawFaqControlEscape(value), false, `${value} remains publishable`);
+  }
+  assert.throws(
+    () => assertFaqPairsHaveNoRejectedControls([{ q: '&#x08;', a: 'risposta valida' }]),
+    /pair 0/u,
+  );
 });
 
 test('translation watchdog keeps UTF-8, sample bounds, and run ordering deterministic', async () => {

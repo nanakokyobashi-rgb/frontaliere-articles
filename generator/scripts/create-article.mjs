@@ -469,7 +469,10 @@ import {
 // dal classificatore deterministico (nessun LLM, nessun gate).
 import { defaultCantonClassifier, registryCantonsForArticle } from './lib/canton-classifier.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
-import { assertFaqPairsHaveNoRejectedControls } from '../../scripts/lib/faq-control-contract.mjs';
+import {
+  assertFaqPairsHaveNoRejectedControls,
+  rejectRawFaqControlEscape,
+} from '../../scripts/lib/faq-control-contract.mjs';
 import {
   decodeStaticStringLiteral,
   findIdListLiteralSpan,
@@ -14011,10 +14014,36 @@ function isRealTranslationTruncation(issues) {
   return issues.some((i) => !(i.code === 'translation-semantic-truncation' && i.rule === 'paragraph-drop'));
 }
 
+/** Drop FAQ pairs whose decoded source would contain an unpublishable C0 byte. */
+function removeFaqPairsWithRejectedControls(content, locale) {
+  if (!content || !Array.isArray(content.faq)) return 0;
+  const safeFaq = [];
+  let rejectedCount = 0;
+  for (const [index, pair] of content.faq.entries()) {
+    const rejectedField = ['q', 'a'].find((field) => {
+      const value = pair?.[field];
+      return typeof value === 'string'
+        && rejectRawFaqControlEscape(normalizeLocalizedToponymText(value));
+    });
+    if (rejectedField) {
+      rejectedCount += 1;
+      console.warn(`  ⚠️  FAQ ${locale}[${index}] omessa: ${rejectedField} contiene un carattere di controllo non pubblicabile`);
+      continue;
+    }
+    safeFaq.push(pair);
+  }
+  if (rejectedCount > 0) {
+    if (safeFaq.length >= 2) content.faq = safeFaq;
+    else delete content.faq;
+  }
+  return rejectedCount;
+}
+
 async function translateArticle(data) {
   // Il report di recovery è una quota PER ARTICOLO. RUN_REPORT vive più a
   // lungo del funnel: senza reset, un secondo articolo erediterebbe i campi
   // rifiutati e i claim già spesi dal primo (issue #1244).
+  removeFaqPairsWithRejectedControls(data?.content?.it, 'it');
   const faqCount = Array.isArray(data?.content?.it?.faq) ? data.content.it.faq.length : 0;
   const bodyFieldCount = Object.keys(collectBodySections(data?.content?.it)).length;
   RUN_REPORT.translation = createFreeMtRecoveryReport({ faqCount, bodyFieldCount });
@@ -14293,14 +14322,41 @@ ${localizedToponymInstruction(targetLang)}`;
       return { [bodyKey]: sanitizeBodyText(joined) };
     }
 
-    // Translate FAQ if present (small payload, single call)
-    const faqTranslation = sourceContent.faq && Array.isArray(sourceContent.faq) && sourceContent.faq.length > 0
+    // Translate FAQ if present (small payload, single call). Keep an explicit
+    // source index in the prompt and require a one-to-one response mapping:
+    // array position alone cannot prove that a model's reordered/extra pair
+    // still belongs to the same Italian source FAQ.
+    const sourceFaq = Array.isArray(sourceContent.faq) ? sourceContent.faq : [];
+    const faqTranslation = sourceFaq.length > 0
       ? callWithRetry(makePrompt(
-          `CONTENUTO ITALIANO DA TRADURRE:\n- faq: ${JSON.stringify(sourceContent.faq)}`,
-          '{"faq": [{"q": "...", "a": "..."}]}',
-        ), 1500, `${targetLang}:faq`, { translation: true }).catch(err => {
-          console.error(`  ⚠️  FAQ translation failed for ${targetLang}: ${err.message}`);
-          return { faq: sourceContent.faq }; // Fallback to Italian
+          `CONTENUTO ITALIANO DA TRADURRE:\n- faq: ${JSON.stringify(sourceFaq.map((pair, sourceFaqIndex) => ({ ...pair, sourceFaqIndex })))}`,
+          '{"faq": [{"sourceFaqIndex": 0, "q": "...", "a": "..."}]}',
+        ), 1500, `${targetLang}:faq`, { translation: true }).then((result) => {
+          const translatedFaq = result?.faq;
+          if (!Array.isArray(translatedFaq) || translatedFaq.length !== sourceFaq.length) {
+            console.error(`  ⚠️  FAQ translation for ${targetLang} has no complete source-index mapping — per-index recovery`);
+            return { faq: [] };
+          }
+          const aligned = Array(sourceFaq.length);
+          for (const pair of translatedFaq) {
+            const sourceFaqIndex = pair?.sourceFaqIndex;
+            if (!Number.isInteger(sourceFaqIndex)
+                || sourceFaqIndex < 0
+                || sourceFaqIndex >= sourceFaq.length
+                || aligned[sourceFaqIndex] !== undefined) {
+              console.error(`  ⚠️  FAQ translation for ${targetLang} has invalid/duplicate source indexes — per-index recovery`);
+              return { faq: [] };
+            }
+            aligned[sourceFaqIndex] = { q: pair?.q, a: pair?.a };
+          }
+          if (aligned.some((pair) => pair === undefined)) {
+            console.error(`  ⚠️  FAQ translation for ${targetLang} has missing source indexes — per-index recovery`);
+            return { faq: [] };
+          }
+          return { faq: aligned };
+        }).catch(err => {
+          console.error(`  ⚠️  FAQ translation failed for ${targetLang}: ${err.message} — per-index recovery`);
+          return { faq: [] };
         })
       : Promise.resolve({});
 
@@ -14396,6 +14452,40 @@ ${localizedToponymInstruction(targetLang)}`;
   // upstream defect we cannot paper over).
   for (const locale of ['en', 'de', 'fr']) {
     const langName = locale === 'en' ? 'inglese' : locale === 'de' ? 'tedesco' : 'francese';
+    // The source FAQ defines the public cardinality. Do this before the
+    // per-index recovery below: an extra model pair is not source-backed and
+    // must not reach the final writer, where a rejected control would abort
+    // the whole article instead of being discarded with the excess pair.
+    const sourceFaqCount = Array.isArray(itContent?.faq) ? itContent.faq.length : 0;
+    let translatedFaq = data.content?.[locale]?.faq;
+    if (Array.isArray(translatedFaq)) {
+      // The bulk translator above has already checked sourceFaqIndex and put
+      // every source-backed pair back at its source position. Keep those pairs
+      // intact so the field-level recovery below can retry only an unsafe q/a
+      // and retain its valid sibling. A control-bearing pair beyond the source
+      // count is provably extra and can be removed before the cardinality gate.
+      const safeTranslatedFaq = translatedFaq.filter((pair, index) => {
+        if (index < sourceFaqCount) return true;
+        return !['q', 'a'].some((fieldName) => {
+          const value = pair?.[fieldName];
+          return typeof value === 'string'
+            && rejectRawFaqControlEscape(normalizeLocalizedToponymText(value));
+        });
+      });
+      if (safeTranslatedFaq.length !== translatedFaq.length) {
+        console.error(
+          `  ⚠️  FAQ ${locale}: scartate ${translatedFaq.length - safeTranslatedFaq.length} coppie con controlli non pubblicabili prima della recovery`,
+        );
+        data.content[locale].faq = safeTranslatedFaq;
+        translatedFaq = safeTranslatedFaq;
+      }
+    }
+    if (Array.isArray(translatedFaq) && translatedFaq.length !== sourceFaqCount) {
+      console.error(
+        `  ⚠️  FAQ ${locale}: cardinalità ${translatedFaq.length} diversa dalle ${sourceFaqCount} coppie italiane — intero batch scartato, recupero per-indice`,
+      );
+      data.content[locale].faq = [];
+    }
     for (const field of [
       'title',
       'excerpt',
@@ -14427,9 +14517,18 @@ ${localizedToponymInstruction(targetLang)}`;
           if (!content.faq[faqIndex] || typeof content.faq[faqIndex] !== 'object') content.faq[faqIndex] = {};
           content.faq[faqIndex][faqPart] = value;
         };
-        const readRetryValue = (parsed) => faqPart
-          ? parsed?.faq?.[0]?.[faqPart] ?? parsed?.faq?.[faqIndex]?.[faqPart] ?? parsed?.[field]
-          : parsed?.[field];
+        const readRetryValue = (parsed) => {
+          if (!faqPart) return parsed?.[field];
+          // This prompt asks for one indexed source field. Accepting faq[0]
+          // from a multi-pair retry would silently reuse that value for every
+          // later source index, so reject non-singleton arrays. Some model
+          // responses use the older direct { q } / { a } shape instead.
+          if (Array.isArray(parsed?.faq)) {
+            if (parsed.faq.length !== 1) return null;
+            return parsed.faq[0]?.[faqPart];
+          }
+          return parsed?.[faqPart] ?? parsed?.[field];
+        };
         const retryFieldLabel = faqPart ? `faq[${faqIndex}].${faqPart}` : field;
       // Truthiness nuda: la stringa `"null"` (serializzazione letterale del
       // null, la forma misurata su `haiku` in #799) la supera, quindi il campo
@@ -14459,8 +14558,19 @@ ${localizedToponymInstruction(targetLang)}`;
       // Stesso floor del percorso IT, IMPORTATO e non ricopiato (AGENTS.md #6):
       // il floor e' sulla forma del campo, non sulla lingua.
       const valoreTradotto = readField(data.content[locale]);
+      const itValue = readField(itContent);
       const traduzioneUsabile = hasUsableTranslatedText(valoreTradotto, locale);
-      const floorMiss = traduzioneUsabile ? metaFieldPlausibilityMiss(field, valoreTradotto) : null;
+      // A C0 byte can survive JSON.parse as an ordinary, non-empty string. An
+      // HTML numeric reference can do the same one step later: the final
+      // decodeArticleEntities() pass expands it through this normalizer before
+      // buildBodyFile() runs. Normalize here too, so both spellings enter the
+      // focused retry/fallback path instead of aborting at the final writer.
+      const faqControlRejected = Boolean(
+        faqPart && rejectRawFaqControlEscape(normalizeLocalizedToponymText(valoreTradotto)),
+      );
+      const floorMiss = traduzioneUsabile && !faqControlRejected
+        ? metaFieldPlausibilityMiss(field, valoreTradotto)
+        : null;
       const freeMtRejected = ARTICLE_TRANSLATE_FREE_MT
         && wasFreeMtUnusable(RUN_REPORT.translation, locale, recoveryField);
       // Un `bodyN` tradotto che e' l'italiano ricopiato non e' usabile, da
@@ -14469,7 +14579,7 @@ ${localizedToponymInstruction(targetLang)}`;
       // copia identica ha gia' il suo retry dedicato piu' sotto.
       const bodyPassthrough = !faqPart && /^body\d+$/.test(field)
         && isSourcePassthrough(valoreTradotto, readField(itContent));
-      if (traduzioneUsabile && !floorMiss && !freeMtRejected && !bodyPassthrough) continue;
+      if (traduzioneUsabile && !floorMiss && !freeMtRejected && !bodyPassthrough && !faqControlRejected) continue;
       // ULTIMA RISORSA ASIMMETRICA. Un campo implausibile e' comunque prosa
       // NELLA LINGUA GIUSTA: se il retry non produce di meglio si tiene quello,
       // MAI il fallback IT, che pubblicherebbe italiano sotto `/de/` (#831).
@@ -14486,8 +14596,7 @@ ${localizedToponymInstruction(targetLang)}`;
         : isBodyField
           ? 'body lasciato NON tradotto, niente fallback IT (#1875)'
           : 'fallback al valore italiano';
-      let pendingReason = 'retry-unusable';
-      const itValue = readField(itContent);
+      let pendingReason = faqControlRejected ? 'invalid-control' : 'retry-unusable';
       // `itValue` composto di solo whitespace (es. ' ') è truthy: senza
       // `.trim()` bypassa questo guard e viene comunque assegnato sotto come
       // fallback, pubblicando un campo quasi-vuoto invece di far scattare
@@ -14500,7 +14609,9 @@ ${localizedToponymInstruction(targetLang)}`;
         throw new Error(`Campo ${field} mancante nella traduzione ${locale} (e assente anche nella sorgente IT)`);
       }
       console.error(
-        floorMiss
+        faqControlRejected
+          ? `  ⚠️  Campo ${field} nella traduzione ${locale} contiene un carattere di controllo non pubblicabile — retry traduzione mirata...`
+          : floorMiss
           ? `  ⚠️  Campo ${field} nella traduzione ${locale} troppo corto per essere un ${field} (${floorMiss}) — retry traduzione mirata...`
           : bodyPassthrough
             ? `  ⚠️  Campo ${field} nella traduzione ${locale} identico all'italiano — retry traduzione mirata...`
@@ -14560,17 +14671,25 @@ ${localizedToponymInstruction(targetLang)}`;
           // real string so a non-string retry falls through to the no-translation
           // outcome below (pending body, or IT fallback for title/excerpt/FAQ).
           const retried = translatedStringOrNull(readRetryValue(parsed), locale);
+          const retriedControlRejected = Boolean(
+            faqPart && rejectRawFaqControlEscape(normalizeLocalizedToponymText(retried)),
+          );
           // Il floor vale anche sull'ESITO del retry: un retry che risponde `...`
           // e' la stessa degenerazione, solo un turno piu' tardi.
           const retriedMiss = retried ? metaFieldPlausibilityMiss(field, retried) : null;
           const retriedPassthrough = isSourcePassthrough(retried, itValue);
           if (retriedPassthrough) pendingReason = 'retry-passthrough';
-          if (retried && !retriedMiss && !retriedPassthrough) {
+          if (retriedControlRejected) pendingReason = 'invalid-control';
+          if (retried && !retriedMiss && !retriedPassthrough && !retriedControlRejected) {
             writeField(data.content[locale], retried);
             console.error(`  ✅ Campo ${field} (${locale}) ritradotto con successo dopo missing-field retry`);
             continue;
           }
-          console.error(`  ⚠️  Retry ${field} (${locale}) non ha prodotto una traduzione valida${retriedMiss ? ` (${retriedMiss})` : ''} — ${esitoSenzaTraduzione}`);
+          console.error(
+            `  ⚠️  Retry ${field} (${locale}) non ha prodotto una traduzione valida`
+            + `${retriedControlRejected ? ' (carattere di controllo non pubblicabile)' : retriedMiss ? ` (${retriedMiss})` : ''}`
+            + ` — ${esitoSenzaTraduzione}`,
+          );
         } catch (retryErr) {
           pendingReason = 'retry-error';
           console.error(`  ⚠️  Retry ${field} (${locale}) fallito: ${retryErr.message} — ${esitoSenzaTraduzione}`);
@@ -16766,6 +16885,12 @@ function decodeLocaleContentEntities(data, locale) {
     // decodificato qui arriverebbe letterale in una SERP.
     for (const field of ['title', 'excerpt', ...META_SEO_FIELDS, ...bodyFields]) {
       if (typeof c[field] === 'string') c[field] = normalizeLocalizedToponymText(c[field]);
+    }
+    if (Array.isArray(c.faq)) {
+      // Defense in depth for non-primary producers: reject a source or
+      // translated pair before entity decoding turns `&#8;` into a C0 byte
+      // that would make buildBodyFile() abort the entire article.
+      removeFaqPairsWithRejectedControls(c, locale);
     }
     if (Array.isArray(c.faq)) {
       c.faq = c.faq.map((item) => (item && typeof item === 'object'
