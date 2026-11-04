@@ -33,6 +33,9 @@ const blogMetaCantonSzIt: Record<string, string> = {
     'blog.article.sp-uri-no-finanziamento-avs.title': 'SP Uri: no di misura al finanziamento della 13ª AVS',
     'blog.article.sp-uri-no-finanziamento-avs.excerpt': 'SP Uri: no di misura al finanziamento della 13ª AVS dopo una discussione vivace.',
     'blog.article.sp-uri-no-finanziamento-avs.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.finanziamento-riarmo-esercito.title': 'Riarmo dell’esercito: il Nazionale evita l’aumento IVA',
+    'blog.article.finanziamento-riarmo-esercito.excerpt': 'Riarmo da CHF 24 miliardi: il Nazionale punta a CHF 1,3 miliardi annui dal 2028 al 2045 senza aumentare l’IVA; la SP minaccia il referendum.',
+    'blog.article.finanziamento-riarmo-esercito.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSzIt;

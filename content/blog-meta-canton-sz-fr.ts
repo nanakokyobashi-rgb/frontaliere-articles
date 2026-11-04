@@ -33,6 +33,9 @@ const blogMetaCantonSzFr: Record<string, string> = {
     'blog.article.sp-uri-no-finanziamento-avs.title': 'SP Uri : un non de justesse au financement de la 13e AVS',
     'blog.article.sp-uri-no-finanziamento-avs.excerpt': 'SP Uri : un non de justesse au financement de la 13e AVS après une discussion animée.',
     'blog.article.sp-uri-no-finanziamento-avs.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.finanziamento-riarmo-esercito.title': 'Réarmement de l’armée : le National évite la hausse de la TVA',
+    'blog.article.finanziamento-riarmo-esercito.excerpt': 'Réarmement de CHF 24 milliards : le National vise CHF 1,3 milliard par an de 2028 à 2045 sans augmenter la TVA ; le PS menace de lancer un référendum.',
+    'blog.article.finanziamento-riarmo-esercito.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSzFr;

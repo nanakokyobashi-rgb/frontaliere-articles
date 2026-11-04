@@ -33,6 +33,9 @@ const blogMetaCantonSzDe: Record<string, string> = {
     'blog.article.sp-uri-no-finanziamento-avs.title': 'SP Uri: Nein zur Massnahme zur Finanzierung der 13. AHV-Rente',
     'blog.article.sp-uri-no-finanziamento-avs.excerpt': 'SP Uri: Nein zur Massnahme zur Finanzierung der 13.',
     'blog.article.sp-uri-no-finanziamento-avs.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.finanziamento-riarmo-esercito.title': 'Aufrüstung der Armee: Der Nationalrat vermeidet eine Mehrwertsteuererhöhung',
+    'blog.article.finanziamento-riarmo-esercito.excerpt': 'Aufrüstung im Umfang von CHF 24 Milliarden: Der Nationalrat setzt von 2028 bis 2045 auf jährlich CHF 1,3 Milliarden, ohne die Mehrwertsteuer zu erhöhen; die SP droht mit einem Referendum.',
+    'blog.article.finanziamento-riarmo-esercito.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSzDe;

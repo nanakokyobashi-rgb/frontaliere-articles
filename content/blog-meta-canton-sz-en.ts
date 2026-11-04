@@ -33,6 +33,9 @@ const blogMetaCantonSzEn: Record<string, string> = {
     'blog.article.sp-uri-no-finanziamento-avs.title': 'SP Uri: no to the measure to finance the 13th AVS',
     'blog.article.sp-uri-no-finanziamento-avs.excerpt': 'SP Uri: no to the measure to finance the 13th AHV pension after a lively discussion.',
     'blog.article.sp-uri-no-finanziamento-avs.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.finanziamento-riarmo-esercito.title': 'Army rearmament: the National Council avoids the VAT increase',
+    'blog.article.finanziamento-riarmo-esercito.excerpt': 'Rearmament of CHF 24 billion: the National Council aims for CHF 1.3 billion annually from 2028 to 2045 without increasing VAT; the SP threatens a referendum.',
+    'blog.article.finanziamento-riarmo-esercito.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSzEn;
