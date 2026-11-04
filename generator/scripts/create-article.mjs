@@ -305,6 +305,7 @@ import {
   incrementCounter as _incrementCounter,
 } from './lib/scheduler/quotaController.mjs';
 import { buildDiscoveryPool as _buildDiscoveryPool } from './lib/discovery/discoveryPool.mjs';
+import { attachTrendEvidenceToCandidates, isSecureHttpsUrl } from './lib/discovery/trend-evidence-attribution.mjs';
 import { decodeGoogleNewsUrl } from './lib/discovery/googleNewsUrlResolver.mjs';
 import { isNearDuplicate as _isNearDuplicateHeadline } from './lib/scheduler/slugSimilarity.mjs';
 import { fetchWordpressSearchHeadlines } from './lib/topic-sources/wordpressSearch.mjs';
@@ -3995,19 +3996,6 @@ function headlineSimilarity(a, b) {
 
 function isTrendBackedDiscoveryCandidate(candidate) {
   return candidate?.source === 'trends' || candidate?.meta?.signalProvider === 'google-trends';
-}
-
-function isSecureHttpsUrl(rawUrl) {
-  if (typeof rawUrl !== 'string' || !rawUrl.trim()) return false;
-  try {
-    const parsed = new URL(rawUrl);
-    return parsed.protocol === 'https:'
-      && Boolean(parsed.hostname)
-      && !parsed.username
-      && !parsed.password;
-  } catch {
-    return false;
-  }
 }
 
 function normalizeOptionalIsoTimestamp(value) {
@@ -18109,9 +18097,10 @@ async function main() {
     // Helper — convert discovery candidates into headline-shaped objects
     // compatible with rankAndSelectHeadlines (field `headline`, optional `url`).
     const _discoveryCandidatesToHeadlines = (candidates) => {
+      const candidatesWithEvidence = attachTrendEvidenceToCandidates(candidates, headlineSimilarity);
       _discoveryCandidatesById = new Map();
       const out = [];
-      for (const c of candidates) {
+      for (const c of candidatesWithEvidence) {
         const id = `discovery::${c.source}::${String(c.headline).toLowerCase()}`;
         _discoveryCandidatesById.set(id, c);
         const headline = {
@@ -18158,7 +18147,7 @@ async function main() {
         const pool = await _buildDiscoveryPool(evidenceForDiscovery, {
           provenHeadlines: provenStrings,
         });
-        const trendSignals = Number(pool.perSource?.trendSignals) || 0;
+        const trendSignals = Number(pool.perSource?.trends) || 0;
         console.error(`DISCOVERY_POOL_BUILD orphan=${pool.perSource.orphan} suggest=${pool.perSource.suggest} news=${pool.perSource.news} trends=${pool.perSource.trends} trendSignals=${trendSignals} postDedup=${pool.postDedupCount}`);
         _discoveryHeadlines = _discoveryCandidatesToHeadlines(pool.candidates);
       } catch (err) {
@@ -18798,7 +18787,7 @@ async function main() {
           const provenStrings = atlas.map((h) => String(h.headline || ''));
           _provenHeadlinesForDiscovery = atlas;
           const pool = await _buildDiscoveryPool(evidenceForDiscovery, { provenHeadlines: provenStrings });
-          const trendSignals = Number(pool.perSource?.trendSignals) || 0;
+          const trendSignals = Number(pool.perSource?.trends) || 0;
           console.error(`DISCOVERY_POOL_BUILD_FALLBACK orphan=${pool.perSource.orphan} suggest=${pool.perSource.suggest} news=${pool.perSource.news} trends=${pool.perSource.trends} trendSignals=${trendSignals} postDedup=${pool.postDedupCount}`);
           const fbHeadlines = _discoveryCandidatesToHeadlines(pool.candidates);
           if (fbHeadlines.length > 0) {
