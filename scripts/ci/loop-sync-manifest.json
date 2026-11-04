@@ -159,6 +159,17 @@
   },
   "files": [
     {
+      "path": "generator/scripts/lib/deadline.mjs",
+      "sitePath": "scripts/lib/deadline.mjs",
+      "mode": "identical",
+      "reason": "Helper condiviso per deadline assolute e timeout residui delle sorgenti discovery.",
+      "baseline": {
+        "site": "484e63ab285f35ef",
+        "corpus": "484e63ab285f35ef",
+        "alignedAt": "2026-11-04"
+      }
+    },
+    {
       "path": "scripts/ci/alert-pat-down.mjs",
       "mode": "identical",
       "baseline": {
@@ -3358,8 +3369,8 @@
       "sitePath": "scripts/lib/discovery/discoveryPool.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "9d0111253d04d3d1",
-        "corpus": "9d0111253d04d3d1",
+        "site": "a83667e90caa8336",
+        "corpus": "a83667e90caa8336",
         "alignedAt": "2026-11-04"
       }
     },
@@ -3418,9 +3429,9 @@
       "sitePath": "scripts/lib/discovery/sources/googleSuggestSource.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "be18f36169abce51",
-        "corpus": "be18f36169abce51",
-        "alignedAt": "2026-09-13"
+        "site": "4eaf4567ed06e763",
+        "corpus": "4eaf4567ed06e763",
+        "alignedAt": "2026-11-04"
       }
     },
     {
@@ -3428,9 +3439,9 @@
       "sitePath": "scripts/lib/discovery/sources/googleTrendsSource.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "483ebda89271b78b",
-        "corpus": "483ebda89271b78b",
-        "alignedAt": "2026-08-09"
+        "site": "6cb0a4164b7ad8d8",
+        "corpus": "6cb0a4164b7ad8d8",
+        "alignedAt": "2026-11-04"
       }
     },
     {
@@ -4015,8 +4026,8 @@
       "sitePath": "scripts/lib/topic-sources/googleNewsRss.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "1a39f9eb54cea2fd",
-        "corpus": "1a39f9eb54cea2fd",
+        "site": "d487f6ad0a857b04",
+        "corpus": "d487f6ad0a857b04",
         "alignedAt": "2026-11-04"
       }
     },
@@ -4027,9 +4038,9 @@
       "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/3504",
       "reason": "Il gemello site-ahead importa `gscOrphans.mjs`, che qui e' adapted per i path corpus di Search Console. Trasportarlo come file identical isolato lascerebbe il consumer con una dipendenza non identical e metterebbe rossa la PR di trasporto; la divergenza e' intenzionale e resta governata da #3504.",
       "baseline": {
-        "site": "e8feb18da552b05c",
-        "corpus": "e8feb18da552b05c",
-        "alignedAt": "2026-10-12"
+        "site": "71b1b6339c1bb4f4",
+        "corpus": "71b1b6339c1bb4f4",
+        "alignedAt": "2026-11-04"
       }
     },
     {
@@ -4039,9 +4050,9 @@
       "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/3504",
       "reason": "Il gemello site-ahead importa `gscOrphans.mjs`, che qui e' adapted per i path corpus di Search Console. Trasportarlo come file identical isolato lascerebbe il consumer con una dipendenza non identical e metterebbe rossa la PR di trasporto; la divergenza e' intenzionale e resta governata da #3504.",
       "baseline": {
-        "site": "6ea8f840c723c78f",
-        "corpus": "6ea8f840c723c78f",
-        "alignedAt": "2026-10-12"
+        "site": "c185d8f1db0e3ea4",
+        "corpus": "c185d8f1db0e3ea4",
+        "alignedAt": "2026-11-04"
       }
     },
     {
