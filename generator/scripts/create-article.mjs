@@ -14453,13 +14453,15 @@ ${localizedToponymInstruction(targetLang)}`;
       // il floor e' sulla forma del campo, non sulla lingua.
       const valoreTradotto = readField(data.content[locale]);
       const traduzioneUsabile = hasUsableTranslatedText(valoreTradotto, locale);
-      const floorMiss = traduzioneUsabile ? metaFieldPlausibilityMiss(field, valoreTradotto) : null;
       // A C0 byte can survive JSON.parse as an ordinary, non-empty string. It
       // is still not publishable: buildBodyFile() correctly rejects it, but
       // waiting for that final guard aborts an otherwise valid article. Treat
       // the affected translated FAQ field like any other unusable translation
       // so the focused retry/fallback path can repair it before writing.
       const faqControlRejected = Boolean(faqPart && rejectRawFaqControlEscape(valoreTradotto));
+      const floorMiss = traduzioneUsabile && !faqControlRejected
+        ? metaFieldPlausibilityMiss(field, valoreTradotto)
+        : null;
       const freeMtRejected = ARTICLE_TRANSLATE_FREE_MT
         && wasFreeMtUnusable(RUN_REPORT.translation, locale, recoveryField);
       // Un `bodyN` tradotto che e' l'italiano ricopiato non e' usabile, da
