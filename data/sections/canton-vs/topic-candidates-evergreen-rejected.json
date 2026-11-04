@@ -4,14 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vs::https://www.pomona.ch/story/820723/drei-falschinformationen-in-kurzer-zeit-srf-ger%c3%a4t-wegen-abstimmungsberichten-in-die-kritik": {
-      "section": "canton-vs",
-      "ts": 1793550665836
-    },
-    "canton-vs::https://www.pomona.ch/story/821435/gesetz-des-dschungels-tusk-greift-pr%c3%a4sident-nawrocki-nach-gerichtseklat-an": {
-      "section": "canton-vs",
-      "ts": 1793576326010
-    },
     "canton-vs::https://vework-public.vs.ch/app/publication/fr/08-03-2026/3": {
       "section": "canton-vs",
       "ts": 1793587654878
@@ -63,6 +55,10 @@
     "canton-vs::https://www.pomona.ch/story/822020/armee-will-immobilien-f%c3%bcr-milliarden-ausbauen-finanzkontrolle-%c3%bcbt-scharfe-kritik": {
       "section": "canton-vs",
       "ts": 1793721796542
+    },
+    "canton-vs::https://www.pomona.ch/story/822168/so-stimmen-sie-richtig-ab-kanton-wallis-lanciert-neue-hilfsmittel": {
+      "section": "canton-vs",
+      "ts": 1793750400472
     }
   }
 }
