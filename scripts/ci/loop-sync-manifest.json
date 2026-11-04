@@ -2941,6 +2941,36 @@
       }
     },
     {
+      "path": "generator/scripts/lib/topic-candidate-attribution.mjs",
+      "mode": "corpus-only",
+      "reason": "Costruisce l'attribuzione interna privacy-safe dei candidati sperimentali scelti dal generatore. Il sito pubblica soltanto una proiezione del feed via CDN e non esegue il generatore del corpus, quindi il modulo non ha un gemello sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "a1a2769e52f5dbe9",
+        "alignedAt": "2026-11-04"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/topic-candidates-feed.mjs",
+      "mode": "corpus-only",
+      "reason": "Scarica e valida il feed HTTP del sito con limiti e comportamento fail-safe per il generatore. Il sito è il produttore del JSON pubblico; il corpus lo consuma e non deve duplicare downloader o dipendenze di trasporto.",
+      "baseline": {
+        "site": null,
+        "corpus": "faf1b8f8ed151336",
+        "alignedAt": "2026-11-04"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/topic-candidates-path.mjs",
+      "mode": "corpus-only",
+      "reason": "Risoluzione del path temporaneo del feed selezionato dal workflow di generazione. Il sito non esegue quel workflow né ha un equivalente del consumer, quindi il modulo resta specifico del corpus.",
+      "baseline": {
+        "site": null,
+        "corpus": "93791e06655a7786",
+        "alignedAt": "2026-11-04"
+      }
+    },
+    {
       "path": "generator/scripts/lib/atomic-write-file.mjs",
       "mode": "corpus-only",
       "reason": "Punto comune di scrittura atomica per i producer del corpus: usa un temporaneo fratello e `renameSync` per evitare file troncati dopo un'interruzione. Non esiste un gemello sul sito, che non esegue questi writer del generatore, quindi resta corpus-only per costruzione.",
