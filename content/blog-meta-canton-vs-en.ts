@@ -45,6 +45,9 @@ const blogMetaCantonVsEn: Record<string, string> = {
     'blog.article.val-de-bagnes-sostenibilita-2024.title': 'Val de Bagnes: 175 people for Sustainability Week',
     'blog.article.val-de-bagnes-sostenibilita-2024.excerpt': '175 people in Val de Bagnes Six events from October 24 to 31 The municipality\'s first Climate Plan was presented The plan comprises 26 measures and 75 actions',
     'blog.article.val-de-bagnes-sostenibilita-2024.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.vionnaz-revoca-divieti-acqua.title': 'Vionnaz: drinking water bans lifted after 41 days',
+    'blog.article.vionnaz-revoca-divieti-acqua.excerpt': 'The municipality of Vionnaz has declared the situation regarding water sources satisfactory, reinstating the watering of lawns, the filling of swimming pools and the washing of vehicles, while maintaining water-saving recommendations.',
+    'blog.article.vionnaz-revoca-divieti-acqua.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonVsEn;

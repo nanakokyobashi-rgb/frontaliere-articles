@@ -12,6 +12,8 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'kantonsrat-biberbrugg-chaltenboden': { it: 'kantonsrat-biberbrugg-chaltenboden', en: 'cantonal-council-biberbrugg-chaltenboden', de: 'kantonsrat-ja-zu-36-millionen-zwischen-biberbrugg-und-chaltenboden', fr: 'conseil-biberbrugg-chaltenboden' },
  'pfaeffikon-apero-imprese': { it: 'pfaeffikon-apero-imprese', en: 'pfaeffikon-business-aperitif-93-guests', de: 'pfaeffikon-unternehmen-apero-93-gaeste', fr: 'pfaeffikon-apero-entreprises-93-invites' },
  'schuebelbach-aliquote-2027': { it: 'schuebelbach-aliquote-2027', en: 'schuebelbach-tax-rates-2027', de: 'schuebelbach-steuerfuss-2027', fr: 'schuebelbach-taux-fiscal-2027' },
+ 'sp-uri-no-finanziamento-avs': { it: 'sp-uri-no-finanziamento-avs', en: 'uri-sp-rejects-avs-funding', de: 'uri-sp-lehnt-ahv-finanzierung-ab', fr: 'uri-sp-refuse-financement-avs' },
+ 'finanziamento-riarmo-esercito': { it: 'finanziamento-riarmo-esercito', en: 'army-rearmament-funding', de: 'finanzierung-aufruestung-armee', fr: 'financement-rearmement-armee' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

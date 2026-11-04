@@ -777,6 +777,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-consultazione-piano-zugo': {
+    title: 'Zugo pubblica l\'adeguamento del Piano direttore 26/1',
+    description: 'Zugo mette in partecipazione il Piano direttore 26/1: zone speciali, revisione PBG e scadenza indicata il 16 novembre 2026.',
+    keywords: 'frontalieri, ticino, svizzera, italia, zugo, pubblica, adeguamento, piano',
+    ogTitle: 'Zugo: Piano direttore 26/1 in partecipazione',
+    ogDescription: 'Il Piano direttore 26/1 aggiorna diversi capitoli: prevede basi per speciali zone edificabili, coordina il testo con la revisione PBG e attua RPG 2 con una strategia di stabilizzazione. La partecipazione è aperta fino al 16 novembre 2026.',
+    canonicalPath: '/articoli-zugo/consultazione-piano-zugo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Zugo pubblica l'adeguamento del Piano direttore 26/1",
+      "description": "Zugo mette in partecipazione il Piano direttore 26/1: zone speciali, revisione PBG e scadenza indicata il 16 novembre 2026.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-consultazione-piano-zugo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-11-03T23:42:19+00:00",
+      "dateModified": "2026-11-03T23:42:19+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-zugo/consultazione-piano-zugo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
