@@ -19033,9 +19033,9 @@ async function main() {
             : PRIORITY_EVERGREEN_TOPICS_SVIZZERA.includes(topic);
           RUN_REPORT.selectedArticleType = isStaticTopic ? 'evergreen_static' : 'evergreen_dynamic';
           RUN_REPORT.selectedSource = 'evergreen';
+          RUN_REPORT.selectedUrl = `evergreen://${encodeURIComponent(topic.keyword)}`;
           RUN_REPORT.discoveryAttribution = null;
           RUN_REPORT.topicCandidateAttribution = null;
-          RUN_REPORT.selectedUrl = `evergreen://${encodeURIComponent(topic.keyword)}`;
           console.error(`📚 Evergreen tentativo ${attempt}: keyword "${topic.keyword}"`);
           console.error(`   Angolo: ${topic.angle}\n`);
           url = `evergreen://${encodeURIComponent(topic.keyword)}`;
