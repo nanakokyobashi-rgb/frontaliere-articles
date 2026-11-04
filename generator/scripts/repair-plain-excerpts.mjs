@@ -178,6 +178,17 @@ function repairValue(value, context, recordSources = []) {
       ? 'article-body'
       : strategy === 'd' ? 'terminal-punctuation' : null;
 
+  if (['a', 'b', 'd'].includes(strategy) && !isCompleteSourceCandidate(repaired, {
+    locale: context.locale,
+    field: context.field,
+    maxLength,
+    minLength,
+    body,
+  })) {
+    repaired = value;
+    strategy = 'c';
+    source = null;
+  }
   if (strategy === 'c') {
     for (const recordSource of recordSources) {
       if (recordSource.file === context.file && recordSource.field === context.field) continue;
@@ -194,22 +205,10 @@ function repairValue(value, context, recordSources = []) {
       break;
     }
   }
-  if (['a', 'b'].includes(strategy) && !isCompleteSourceCandidate(repaired, {
-    locale: context.locale,
-    field: context.field,
-    maxLength,
-    minLength,
-    body,
-  })) {
-    repaired = value;
-    strategy = 'c';
-    source = null;
-  }
   const changed = repaired !== value;
   if (changed) {
     assertPlainExcerpt(repaired, { ...context, body });
-    // Strategy d preserves the existing SEO text and only changes terminal punctuation.
-    if (strategy !== 'd' && ['description', 'structuredData.description', 'seoDescription'].includes(context.field)) {
+    if (['description', 'structuredData.description', 'seoDescription'].includes(context.field)) {
       assertSeoDescriptionMinimum(repaired, { id: context.id, sourceDescriptionLength: value.length });
     }
   }
@@ -398,8 +397,8 @@ function summarize(results, mode) {
       item.after,
       { locale: item.locale },
     )).length,
-    minimumLengthViolations: changedRepairs.filter((item) => item.strategy !== 'd'
-      && item.after.trim().length < minimumDescriptionLength(item.field)).length,
+    minimumLengthViolations: changedRepairs.filter((item) =>
+      item.after.trim().length < minimumDescriptionLength(item.field)).length,
     dBelowMinimumLength: changedRepairs.filter((item) => item.strategy === 'd'
       && item.after.trim().length < minimumDescriptionLength(item.field)).length,
     repairedLengthStats: (() => {

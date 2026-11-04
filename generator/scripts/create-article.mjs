@@ -15821,11 +15821,7 @@ export function refreshSourceCopyDerivedMetadata(data) {
       if (seoDescription.length < SEO_DESCRIPTION_MIN) {
         seoDescription = truncateToClauseNonEmpty(stripExcerptMarkdown(body), SEO_DESCRIPTION_MAX);
       }
-      content.seoDescription = stripExcerptMarkdown(assertSeoDescriptionMinimum(seoDescription, {
-        id: `${data?.id || 'unknown'}:${locale}`,
-        sourceDescriptionLength: excerpt.length,
-        sourceExcerptLength: excerpt.length,
-      }));
+      content.seoDescription = stripExcerptMarkdown(seoDescription);
     }
     if (typeof content.ogDescription === 'string') {
       content.ogDescription = stripExcerptMarkdown(capBlogDescription(excerpt, SEO_OG_DESCRIPTION_MAX).value);
@@ -15841,6 +15837,9 @@ export function refreshSourceCopyDerivedMetadata(data) {
     if (!data.seo || typeof data.seo !== 'object') data.seo = {};
     data.seo.description = stripExcerptMarkdown(itExcerpt);
     data.seo.ogDescription = stripExcerptMarkdown(itExcerpt);
+    // Body-derived caps can end mid-sentence; repair all locale and shared SEO
+    // fields before optimizeSeoMetadata runs its completeness and length gates.
+    repairGeneratedArticleDescriptions(data);
     optimizeSeoMetadata(data);
   }
   return data;
@@ -19359,13 +19358,21 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
         { retries: sourceCopyResult.passes },
       );
     }
+    // Repair generated descriptions before optimizeSeoMetadata applies its
+    // completion and minimum-length assertions. The source-copy refresh path
+    // performs the same repair after deriving its replacement metadata.
+    let preTranslationExcerptRepairs = [];
+    if (sourceCopyResult.changed) {
+      refreshSourceCopyDerivedMetadata(data);
+    } else {
+      preTranslationExcerptRepairs = repairGeneratedArticleDescriptions(data);
+      optimizeSeoMetadata(data);
+    }
     // Step 3a.0-specificity: reject/repair vacuous key facts and reject a
     // cross-canton guide before spending translation, image or write budget.
     // The same helper is called again after translations below because this
     // primary path does not enter registerArticleFiles().
     assertGeneratedArticleQuality(data);
-    if (sourceCopyResult.changed) refreshSourceCopyDerivedMetadata(data);
-    else optimizeSeoMetadata(data);
     // Step 3a.0-dup: i gate deterministici dei duplicati, gli stessi di Step
     // 3a.2 e 3a.4, gia' qui, prima del fact-check e dell'espansione. Id e
     // titolo IT sono stabili da questo punto: il fact-check e l'espansione
@@ -20319,14 +20326,15 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   const excerptRepairs = repairGeneratedArticleDescriptions(data);
   preserveMunicipalityNamesInMetadata(data);
   assertArticleDescriptionsArePlain(data);
-  if (excerptRepairs.length > 0) {
+  if (sourceCopyResult.changed || preTranslationExcerptRepairs.length > 0 || excerptRepairs.length > 0) {
     assertGeneratedArticleQuality(data, {
       cantonBody: bodyTextForCantonPostcondition(data),
     });
   }
   // Metadata repairs can change duplicate admission; check the exact values
   // that will be published after all final metadata normalization.
-  if (sourceCopyFinalChanged || excerptRepairs.length > 0) {
+  if (sourceCopyResult.changed || sourceCopyFinalChanged
+    || preTranslationExcerptRepairs.length > 0 || excerptRepairs.length > 0) {
     console.error('🔍 Verifica duplicati post-riparazione:');
     checkForDuplicates(data);
     await checkSemanticNearDuplicate(data, {
@@ -21492,6 +21500,7 @@ export async function registerArticleFiles(data, opts = {}) {
   // perdere un comune dall'excerpt, e l'imageAlt del giornalista non passa dal
   // percorso AI primario.
   preserveMunicipalityNamesInMetadata(data);
+  repairGeneratedArticleDescriptions(data);
   clampSeoDescriptions(data);
   ensureSeoDescriptionMinimum(data);
   repairGeneratedArticleDescriptions(data);

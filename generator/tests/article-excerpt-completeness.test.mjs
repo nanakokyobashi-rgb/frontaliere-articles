@@ -58,9 +58,8 @@ test('le sostituzioni testuali rispettano la soglia e i valori non terminano con
   const report = corpusReport();
   const invalid = report.details.filter((item) => {
     const value = item.after.trim();
-    const repairedFromText = item.strategy === 'a' || item.strategy === 'b';
-    const repaired = repairedFromText || item.strategy === 'd';
-    return (repairedFromText && value.length < minimumDescriptionLength(item.field))
+    const repaired = ['a', 'b', 'd'].includes(item.strategy);
+    return (repaired && value.length < minimumDescriptionLength(item.field))
       || (repaired && endsWithSentenceAbbreviation(value, { locale: item.locale }));
   });
   assert.deepEqual(invalid.map(({ file, id, field, after }) => ({ file, id, field, after })), []);
@@ -78,9 +77,22 @@ test('build-api controlla la completezza prima di cancellare la superficie pubbl
   const generator = readFileSync(path.join(ROOT, 'generator/scripts/create-article.mjs'), 'utf8');
   const register = generator.indexOf('export async function registerArticleFiles(data, opts = {})');
   const repair = generator.indexOf('repairGeneratedArticleDescriptions(data);', register);
+  const clamp = generator.indexOf('clampSeoDescriptions(data);', register);
+  const minimum = generator.indexOf('ensureSeoDescriptionMinimum(data);', register);
   const nextWritePreparation = generator.indexOf('const slugs = deriveAndSanitizeArticleSlugs(data);', register);
   assert.ok(register >= 0 && repair > register, 'il generatore deve riparare ogni articolo nel writer condiviso');
+  assert.ok(repair < clamp && clamp < minimum, 'il repair deve precedere clamp e gate di lunghezza');
   assert.ok(nextWritePreparation > repair, 'il controllo deve precedere la registrazione dei file');
+
+  const refreshStart = generator.indexOf('export function refreshSourceCopyDerivedMetadata(data)');
+  const refreshRepair = generator.indexOf('repairGeneratedArticleDescriptions(data);', refreshStart);
+  const refreshOptimize = generator.indexOf('optimizeSeoMetadata(data);', refreshStart);
+  assert.ok(refreshRepair > refreshStart && refreshOptimize > refreshRepair, 'il refresh deve riparare prima dell’ottimizzazione SEO');
+
+  const generationStart = generator.indexOf('async function generateAndValidateArticle(');
+  const preOptimizeRepair = generator.indexOf('preTranslationExcerptRepairs = repairGeneratedArticleDescriptions(data);', generationStart);
+  const generationOptimize = generator.indexOf('optimizeSeoMetadata(data);', preOptimizeRepair);
+  assert.ok(preOptimizeRepair > generationStart && generationOptimize > preOptimizeRepair, 'la generazione deve riparare prima del gate SEO');
 
   const primaryRepair = generator.indexOf('const excerptRepairs = repairGeneratedArticleDescriptions(data);');
   const primaryWrite = generator.indexOf('modifyRouterTs(data);', primaryRepair);

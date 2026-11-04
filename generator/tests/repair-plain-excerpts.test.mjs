@@ -15,7 +15,8 @@ test('il matcher dei meta include la chiusura della chiave prima dei due punti',
     /\.\(excerpt\|seoDescription\|ogDescription\)'\\s\*:\\s\*'/,
     'il repair deve riconoscere la forma reale blog.article.<id>.excerpt\':\' <valore>',
   );
-  assert.match(source, /if \(\['a', 'b'\]\.includes\(strategy\) && !isCompleteSourceCandidate\(repaired,/u);
+  assert.match(source, /if \(\['a', 'b', 'd'\]\.includes\(strategy\) && !isCompleteSourceCandidate\(repaired,/u);
+  assert.doesNotMatch(source, /strategy !== 'd' && \['description', 'structuredData\.description', 'seoDescription'\]/u);
   assert.ok(
     source.indexOf('isCompleteSourceCandidate(repaired') < source.indexOf('assertPlainExcerpt(repaired'),
     'i candidati testuali vanno scartati prima dell’assert finale e della scrittura',
