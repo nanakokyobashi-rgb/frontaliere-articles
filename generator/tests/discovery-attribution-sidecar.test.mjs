@@ -30,7 +30,10 @@ test('selected signal-led discovery attribution reaches the run report and artic
   assert.match(createArticleSource, /projectTopicCandidateAttribution\(\s*_picked\._experimentalCandidate,\s*_experimentalCandidates\?\.generatedAt,/);
   assert.match(createArticleSource, /_topic_candidate_attribution: RUN_REPORT\.topicCandidateAttribution/);
   assert.match(createArticleSource, /RUN_REPORT\.discoveryAttribution\.resolvedSourceUrl = url/);
-  assert.match(createArticleSource, /RUN_REPORT\.selectedSource = 'evergreen';\s+RUN_REPORT\.discoveryAttribution = null;/);
+  assert.match(
+    createArticleSource,
+    /RUN_REPORT\.selectedSource = 'evergreen';\s+RUN_REPORT\.selectedUrl = `evergreen:\/\/[^`]+`;\s+RUN_REPORT\.discoveryAttribution = null;\s+RUN_REPORT\.topicCandidateAttribution = null;/,
+  );
   assert.match(createArticleSource, /RUN_REPORT\.status !== 'generated' \|\| !RUN_REPORT\.article\?\.id/);
   assert.match(createArticleSource, /DISCOVERY_POOL_BUILD_FALLBACK[^\n]*trendSignals=/);
   assert.match(createArticleSource, /Trend-backed source rejected: resolved publisher URL is not HTTPS/);
