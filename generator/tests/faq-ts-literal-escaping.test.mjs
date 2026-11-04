@@ -262,6 +262,65 @@ test('le FAQ con controlli C0 codificati vengono rimosse prima della traduzione 
   assert.match(src.slice(finalFilter, finalFilter + 240), /c\.faq = c\.faq\.map/u);
 });
 
+test('tutti i writer FAQ secondari applicano il contratto C0 condiviso', () => {
+  const batchPath = path.join(SCRIPTS, 'batch-add-faq-to-articles.mjs');
+  const fixPath = path.join(SCRIPTS, 'fix-faq-locales.mjs');
+  const batch = fs.readFileSync(batchPath, 'utf8');
+  const fix = fs.readFileSync(fixPath, 'utf8');
+
+  const functionSource = (source, startMarker, endMarker, label) => {
+    const start = source.indexOf(startMarker);
+    const end = source.indexOf(endMarker, start + startMarker.length);
+    assert.ok(start >= 0 && end > start, `${label}: delimitatori funzione mancanti`);
+    return source.slice(start, end);
+  };
+
+  for (const [label, source] of [
+    [
+      'batch replace',
+      functionSource(
+        batch,
+        'export function replaceFaqInBodyFile(',
+        'export function insertFaqIntoBodyFile(',
+        'batch replace',
+      ),
+    ],
+    [
+      'batch insert',
+      functionSource(
+        batch,
+        'export function insertFaqIntoBodyFile(',
+        'export function partitionThrottledTranslations(',
+        'batch insert',
+      ),
+    ],
+    [
+      'locale replace',
+      functionSource(
+        fix,
+        'function replaceFaqInFileInternal(',
+        'export function replaceFaqInFile(',
+        'locale replace',
+      ),
+    ],
+    [
+      'locale insert',
+      functionSource(fix, 'function insertFaqKey(', '// ── Language detection', 'locale insert'),
+    ],
+  ]) {
+    assert.match(source, /assertFaqPairsHaveNoRejectedControls\(/u, `${label}: manca il gate C0`);
+  }
+
+  const reescape = functionSource(
+    fix,
+    'function reescapeBroken(',
+    '// ── Main',
+    're-escape',
+  );
+  assert.match(reescape, /pairs\.findIndex\(faqPairContainsRejectedControl\)/u);
+  assert.match(reescape, /if \(rejectedPair >= 0\)/u);
+});
+
 // ─────────────────────────────────────────────────────────────────────────────
 // 6. `--help` e `DRY_RUN=1` non toccano il corpus
 //
