@@ -14457,7 +14457,26 @@ ${localizedToponymInstruction(targetLang)}`;
     // must not reach the final writer, where a rejected control would abort
     // the whole article instead of being discarded with the excess pair.
     const sourceFaqCount = Array.isArray(itContent?.faq) ? itContent.faq.length : 0;
-    const translatedFaq = data.content?.[locale]?.faq;
+    let translatedFaq = data.content?.[locale]?.faq;
+    if (Array.isArray(translatedFaq)) {
+      // A malformed extra pair can be provably rejected before the cardinality
+      // guard. Keep the entries that remain; otherwise the guard would turn
+      // the whole array into `[]` and make the recovery retry valid pairs that
+      // were never missing. Do not trim by position: any other cardinality
+      // mismatch remains fail-closed below.
+      const safeTranslatedFaq = translatedFaq.filter((pair) => !['q', 'a'].some((fieldName) => {
+        const value = pair?.[fieldName];
+        return typeof value === 'string'
+          && rejectRawFaqControlEscape(normalizeLocalizedToponymText(value));
+      }));
+      if (safeTranslatedFaq.length !== translatedFaq.length) {
+        console.error(
+          `  ⚠️  FAQ ${locale}: scartate ${translatedFaq.length - safeTranslatedFaq.length} coppie con controlli non pubblicabili prima della recovery`,
+        );
+        data.content[locale].faq = safeTranslatedFaq;
+        translatedFaq = safeTranslatedFaq;
+      }
+    }
     if (Array.isArray(translatedFaq) && translatedFaq.length !== sourceFaqCount) {
       console.error(
         `  ⚠️  FAQ ${locale}: cardinalità ${translatedFaq.length} diversa dalle ${sourceFaqCount} coppie italiane — intero batch scartato, recupero per-indice`,

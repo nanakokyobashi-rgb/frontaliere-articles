@@ -720,7 +720,7 @@ test('ramo missing-field: un retry FAQ ancora corrotto ricade sul testo italiano
   assert.equal(rejectRawFaqControlEscape(data.content.fr.faq[0].q), false);
 });
 
-test('ramo missing-field: batch FAQ non allineato scartato, recovery solo sugli indici sorgente', async () => {
+test('ramo missing-field: una coppia FAQ extra con C0 viene scartata prima della recovery', async () => {
   const faqIt = {
     q: 'Domanda italiana abbastanza lunga per il test.',
     a: 'Risposta italiana abbastanza lunga per il test.',
@@ -745,23 +745,13 @@ test('ramo missing-field: batch FAQ non allineato scartato, recovery solo sugli 
   const calls = [];
   const callWithRetry = async (_prompt, _tokens, label) => {
     calls.push(label);
-    const part = label.includes('.q[') ? 'q' : 'a';
-    return {
-      faq: [{
-        [part]: part === 'q'
-          ? 'What applies to this source FAQ?'
-          : 'This translated answer explains the source FAQ in sufficient detail.',
-      }],
-    };
+    return { faq: [{ q: 'Retry inatteso.', a: 'Retry inatteso.' }] };
   };
 
   await runMissingFieldLoop({ data, itContent, callWithRetry, freeMt: false });
 
-  assert.deepEqual(calls, ['en:faq.q[0]-missing-retry', 'en:faq.a[0]-missing-retry']);
-  assert.deepEqual(data.content.en.faq, [{
-    q: 'What applies to this source FAQ?',
-    a: 'This translated answer explains the source FAQ in sufficient detail.',
-  }]);
+  assert.deepEqual(calls, []);
+  assert.deepEqual(data.content.en.faq, [{ ...faqIt }]);
   assert.equal(rejectRawFaqControlEscape(data.content.en.faq[0].q), false);
 });
 
