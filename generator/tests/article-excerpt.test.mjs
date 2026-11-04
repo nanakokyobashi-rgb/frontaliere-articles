@@ -552,6 +552,31 @@ test('un sibling completo deve essere semanticamente compatibile col campo difet
   );
 });
 
+test('la guardia semantica non fonde fonti, paragrafi o sole date', () => {
+  assert.equal(
+    isSemanticallyCompatibleSibling('L’accordo riguarda i frontalieri.', {
+      target: 'L’accordo sarà attuato nel 2026.',
+      title: 'Regole per i frontalieri.',
+    }),
+    false,
+    'un match dal target e uno dal titolo non devono formare un quorum sintetico',
+  );
+  assert.equal(
+    isSemanticallyCompatibleSibling('La misura vale nel 2026 e 2027.', {
+      body: 'Il periodo comprende 2026 e 2027.',
+    }),
+    false,
+    'due anni condivisi non sono una prova semantica sufficiente',
+  );
+  assert.equal(
+    isSemanticallyCompatibleSibling('L’accordo riguarda i frontalieri.', {
+      body: ['L’accordo sarà firmato.', 'I frontalieri sono interessati.'],
+    }),
+    false,
+    'paragrafi distinti non devono contribuire allo stesso quorum',
+  );
+});
+
 test('un sibling completo ma divergente non ripara il campo e rifiuta il record', () => {
   assert.throws(
     () => repairGeneratedArticleDescriptions({

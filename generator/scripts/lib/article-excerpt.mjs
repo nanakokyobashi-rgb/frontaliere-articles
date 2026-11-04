@@ -756,6 +756,19 @@ function sharedDescriptionKeywordCount(candidate, sources) {
   return sharedDescriptionKeywordCountFromSets(candidateWords, sourceWords);
 }
 
+function sharedDescriptionKeywordStats(candidate, source) {
+  const candidateWords = descriptionKeywords(candidate);
+  const sourceWords = descriptionKeywords(source);
+  let shared = 0;
+  let alphabetic = 0;
+  for (const word of candidateWords) {
+    if (!hasSharedDescriptionKeyword(word, sourceWords)) continue;
+    shared += 1;
+    if (/\p{L}/u.test(word)) alphabetic += 1;
+  }
+  return { shared, alphabetic };
+}
+
 function overlapScore(candidate, sources) {
   const candidateWords = descriptionKeywords(candidate);
   const sourceWords = new Set(sources.flatMap((source) => [...descriptionKeywords(source)]));
@@ -765,6 +778,13 @@ function overlapScore(candidate, sources) {
 }
 
 const MIN_SEMANTIC_SIBLING_KEYWORDS = 2;
+const MIN_SEMANTIC_SIBLING_ALPHABETIC_KEYWORDS = 1;
+
+function hasMinimumSemanticSiblingOverlap(candidate, source) {
+  const { shared, alphabetic } = sharedDescriptionKeywordStats(candidate, source);
+  return shared >= MIN_SEMANTIC_SIBLING_KEYWORDS
+    && alphabetic >= MIN_SEMANTIC_SIBLING_ALPHABETIC_KEYWORDS;
+}
 
 /**
  * Check that a complete sibling still describes the field being repaired.
@@ -772,9 +792,13 @@ const MIN_SEMANTIC_SIBLING_KEYWORDS = 2;
  * Completeness is not evidence of relevance: a sibling can be a valid
  * sentence about a different topic. Prefer the damaged field and title as
  * the direct context; when the field is empty, or too short to carry useful
- * context, the article body is the remaining same-article source. A missing
- * context is fail-closed so a sibling is never accepted merely because it is
- * syntactically complete.
+ * context, the article body is the remaining same-article source. Every
+ * source is checked independently: the field and title are never fused, and
+ * body paragraphs cannot contribute keywords to one another. A match needs
+ * two shared keywords in one source, including at least one alphabetic
+ * content keyword, so dates and numbers cannot establish relevance alone.
+ * Missing context is fail-closed so a sibling is never accepted merely
+ * because it is syntactically complete.
  *
  * The second argument also accepts the target string directly for small
  * callers: `isSemanticallyCompatibleSibling(candidate, target, options)`.
@@ -790,15 +814,12 @@ export function isSemanticallyCompatibleSibling(candidate, targetOrContext = {},
   const title = String(context.title ?? '').trim();
   const bodySources = (Array.isArray(context.body) ? context.body : [context.body])
     .map((source) => String(source ?? '').trim())
+    .flatMap((source) => source.split(/\r?\n\s*\r?\n/u))
+    .map((source) => source.trim())
     .filter(Boolean);
-  const directSources = [target, title].filter(Boolean);
-
-  if (directSources.length > 0
-    && sharedDescriptionKeywordCount(candidateText, directSources) >= MIN_SEMANTIC_SIBLING_KEYWORDS) {
-    return true;
-  }
-  return bodySources.length > 0
-    && sharedDescriptionKeywordCount(candidateText, bodySources) >= MIN_SEMANTIC_SIBLING_KEYWORDS;
+  return [target, title, ...bodySources]
+    .filter(Boolean)
+    .some((source) => hasMinimumSemanticSiblingOverlap(candidateText, source));
 }
 
 function unpunctuatedCapitalTransitions(value) {
