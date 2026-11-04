@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-27/sig-erzielt-gutes-ergebnis-im-dritten-quartal-und-will-fuer": {
-      "section": "canton-sh",
-      "ts": 1793584067634
-    },
     "canton-sh::https://www.schaffhausen24.ch/articles/416440-marthalen-plant-ausbau-des-gesundheitszentrums": {
       "section": "canton-sh",
       "ts": 1793662369285
@@ -43,6 +39,10 @@
     "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-09-23/gvs-weine-ag-verlaesst-herblingen-und-zieht-nach-osterfingen": {
       "section": "canton-sh",
       "ts": 1793722205748
+    },
+    "canton-sh::https://www.schaffhausen24.ch/articles/416903-stein-am-rhein-stellt-budget-2027-vor": {
+      "section": "canton-sh",
+      "ts": 1793760314034
     }
   }
 }
