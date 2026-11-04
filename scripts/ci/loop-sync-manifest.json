@@ -159,17 +159,6 @@
   },
   "files": [
     {
-      "path": "generator/scripts/lib/deadline.mjs",
-      "sitePath": "scripts/lib/deadline.mjs",
-      "mode": "identical",
-      "reason": "Helper condiviso per deadline assolute e timeout residui delle sorgenti discovery.",
-      "baseline": {
-        "site": "484e63ab285f35ef",
-        "corpus": "484e63ab285f35ef",
-        "alignedAt": "2026-11-04"
-      }
-    },
-    {
       "path": "scripts/ci/alert-pat-down.mjs",
       "mode": "identical",
       "baseline": {
