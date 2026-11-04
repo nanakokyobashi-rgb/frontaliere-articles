@@ -150,7 +150,7 @@ test('fix-faq-locales: i writer rifiutano i controlli prima della sanitizzazione
   const invalid = [{ q: 'Domanda valida', a: `Risposta${String.fromCharCode(8)}` }];
   assert.throws(
     () => fixLocales.replaceFaqInFile(p, invalid),
-    /raw control escape/,
+    /unpublishable control character\/reference/,
   );
   assert.equal(fs.readFileSync(p, 'utf-8'), DUE_FAQ, 'il writer non deve pubblicare una FAQ alterata');
 });
