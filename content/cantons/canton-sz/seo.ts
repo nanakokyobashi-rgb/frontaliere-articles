@@ -397,7 +397,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Il Consiglio nazionale propone CHF 1,3 miliardi l’anno per il riarmo dal 2028 al 2045 senza aumentare l’IVA. La SP minaccia il referendum.',
     keywords: 'frontalieri, ticino, svizzera, italia, riarmo, dell, esercito, nazionale',
     ogTitle: 'Riarmo dell’esercito: il Nazionale evita l’aumento IVA',
-    ogDescription: 'Il piano del Nazionale finanzia il riarmo con risparmi IZA, minori entrate dei Cantoni, crediti federali inutilizzati e IVA vincolata. Gli Stati propongono più IVA e un rimborso Covid più lento; resta il limite di debito del fondo, mentre la SP',
+    ogDescription: 'Il piano del Nazionale finanzia il riarmo con risparmi IZA, minori entrate dei Cantoni, crediti federali inutilizzati e IVA vincolata. Gli Stati propongono più IVA e un rimborso Covid più lento; la SP minaccia il referendum.',
     canonicalPath: '/articoli-svitto/finanziamento-riarmo-esercito/',
     structuredData: {
       "@context": "https://schema.org",

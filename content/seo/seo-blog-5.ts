@@ -71462,7 +71462,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     description: 'Checklist completa: Permesso G, contratto, LAMal, dati bancari, imposta alla fonte. Tutto ciò che serve sapere dal primo giorno di lavoro come frontaliere.',
     keywords: 'frontalieri, ticino, svizzera, italia, primo, giorno, lavoro, documenti',
     ogTitle: 'Primo giorno lavoro in Ticino: documenti essenziali',
-    ogDescription: 'Guida pratica al primo giorno di lavoro come frontaliere in Ticino. Scopri i documenti essenziali (Permesso G, LAMal, contratto), le scadenze per l\'imposta alla fonte e come gestire busta paga e assicurazione medica. Checklist completa e step-by-step.',
+    ogDescription: 'Guida pratica al primo giorno di lavoro come frontaliere in Ticino. Scopri i documenti essenziali (Permesso G, LAMal, contratto), le scadenze per l\'imposta alla fonte e come gestire busta paga e assicurazione medica.',
     canonicalPath: '/articoli-frontaliere/primo-contratto-ticino-frontaliere-procedura',
     structuredData: {
       "@context": "https://schema.org",
@@ -93491,7 +93491,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     description: 'Venerdì 25 settembre 2026, dalle 9:00 alle 17:00, chiusura totale del Cavalcavia Boesio (S.P. 32 e S.P. 69) per l\'installazione di tre portali limitatori; dopo.',
     keywords: 'frontalieri, ticino, svizzera, italia, chiusura, cavalcavia, boesio, laveno',
     ogTitle: 'Chiusura Cavalcavia Boesio Laveno Mombello 25 settembre 2026',
-    ogDescription: 'Il 25 settembre 2026, dalle 9 alle 17, il Cavalcavia Boesio nel comune di Laveno Mombello sarà chiuso totalmente per consentire l\'installazione di tre portali limitatori di sagoma sulle S.P. 32 e S.P. 69. Dopo i lavori resteranno in vigore il divieto.',
+    ogDescription: 'Il 25 settembre 2026, dalle 9 alle 17, il Cavalcavia Boesio a Laveno Mombello sarà chiuso per installare tre portali limitatori di sagoma sulle S.P. 32 e S.P. 69.',
     canonicalPath: '/articoli-frontaliere/cavalcavia-boesio-chiusura-lavori-2026',
     structuredData: {
       "@context": "https://schema.org",
@@ -93647,7 +93647,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     description: 'A Lugano, la notte del 1° agosto 2025 ha visto un diciannovenne bellinzonese vittima di un brutale pestaggio sotto la pensilina di Mario Botta.',
     keywords: 'frontalieri, ticino, svizzera, italia, aggressioni, notti, violente, giovani',
     ogTitle: 'Aggressioni e notti violente: giovani ticinesi raccontano',
-    ogDescription: 'A Lugano, la notte del 1° agosto 2025 ha visto un diciannovenne bellinzonese vittima di un brutale pestaggio sotto la pensilina di Mario Botta. Il episodio si inserisce in un contesto di crescente violenza giovanile: nel 2024 la magistratura minorile.',
+    ogDescription: 'Nella notte del 1° agosto 2025, a Lugano, un diciannovenne di Bellinzona è stato aggredito sotto la pensilina di Mario Botta. Il caso riporta l\'attenzione sulla violenza giovanile.',
     canonicalPath: '/articoli-frontaliere/aggressioni-notte-lugano',
     structuredData: {
       "@context": "https://schema.org",
@@ -95226,7 +95226,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     description: 'Open Day di Icesport Varese sabato 5 settembre: oltre cento bambini e ragazzi sul ghiaccio, iscrizioni in boom e gruppi prossimi al tutto esaurito.',
     keywords: 'frontalieri, ticino, svizzera, italia, icesport, varese, open, oltre',
     ogTitle: 'Icesport Varese: Open Day da oltre 100 ragazzi sul ghiaccio',
-    ogDescription: 'Sabato 5 settembre l\'Open Day di Icesport Varese ha portato oltre cento bambini e ragazzi sul ghiaccio. L\'evento ha fatto registrare un forte interesse per i corsi di pattinaggio artistico e sincronizzato, con la maggior parte dei gruppi già prossimi.',
+    ogDescription: 'Sabato 5 settembre, l\'Open Day di Icesport Varese ha portato oltre cento bambini e ragazzi sul ghiaccio. L\'evento ha suscitato interesse per i corsi di pattinaggio artistico e sincronizzato.',
     canonicalPath: '/articoli-frontaliere/varese-icesport-open-day',
     structuredData: {
       "@context": "https://schema.org",
@@ -97507,7 +97507,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     description: 'Il M5S Vco segnala ritardi e incertezze tre anni dopo l\'accordo Italia-Svizzera: decreto sul Fondo firmato 17 settembre, risorse 1,66 mln (2025) e 21,16 mln.',
     keywords: 'frontalieri, ticino, svizzera, italia, ritardi, incertezze, dopo, anni',
     ogTitle: 'M5S: ritardi e incertezze per frontalieri dopo tre anni',
-    ogDescription: 'Il Movimento 5 Stelle del Vco evidenzia i ritardi e le incertezze che persistono tre anni dopo l\'accordo Italia-Svizzera sui frontalieri. Tra i temi: il decreto sul Fondo con risorse di 1,66 milioni per il 2025 e 21,16 milioni per il 2026, la mancata.',
+    ogDescription: 'Il Movimento 5 Stelle del VCO evidenzia ritardi e incertezze, a tre anni dall\'accordo Italia-Svizzera sui frontalieri. Tra i temi figurano il decreto sul Fondo e le risorse previste per il 2025 e il 2026.',
     canonicalPath: '/articoli-frontaliere/m5s-vco-frontalieri-incertezze',
     structuredData: {
       "@context": "https://schema.org",
@@ -103154,7 +103154,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     description: 'Cantieri per elettrificazione Albate-Molteno avviano a metà dicembre. Traffico Como-Lecco sospeso fino al 2029. Investimento di 170 milioni per più corse.',
     keywords: 'frontalieri, ticino, svizzera, italia, elettrificazione, ferrovia, albate-molteno, stop',
     ogTitle: 'Elettrificazione ferrovia Albate-Molteno: stop Como-Lecco',
-    ogDescription: 'L\'elettrificazione della linea Albate-Molteno inizia a metà dicembre, causando la sospensione della tratta Como-Lecco fino a giugno 2029. Il progetto da 170 milioni di euro promette più corse e il prolungamento dei collegamenti TILO verso la Svizzera.',
+    ogDescription: 'L\'elettrificazione della linea Albate-Molteno inizia a metà dicembre e sospenderà la tratta Como-Lecco fino a giugno 2029. Il progetto da 170 milioni promette più corse e collegamenti TILO verso la Svizzera.',
     canonicalPath: '/articoli-frontaliere/elettrificazione-ferrovia-albate-molteno/',
     structuredData: {
       "@context": "https://schema.org",
