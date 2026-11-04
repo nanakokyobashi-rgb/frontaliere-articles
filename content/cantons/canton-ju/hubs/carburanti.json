@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "carburanti",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "8c626e62015ef775a023f4d23d58f2e83a1be854f97c150b35c53f64eb467ea6",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "b4bdfcaa6c4c53f2cb1ad963f5294047feadf513f8b303f4a33f71952b1da623",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -74,7 +74,7 @@
         {
           "title": "CFF Cargo ferma il trasporto del legno ad Alle da dicembre",
           "url": "/articoli-giura/cff-cargo-rinuncia-legno-alle/",
-          "excerpt": "Da dicembre CFF Cargo sopprime il servizio per i carri singoli Il legno dall'Ajoie passerà alla strada La piattaforma di Alle costò CHF 14 milioni nel 2021",
+          "excerpt": "Ad Alle, in Ajoie, CFF Cargo ha deciso di sopprimere da dicembre il servizio ferroviario per i carri singoli impiegato nel trasporto del legno.",
           "date": "2026-10-29T08:45:30.807Z"
         },
         {
@@ -92,7 +92,7 @@
         {
           "title": "Imposizione dei coniugi: voto il 29 novembre",
           "url": "/articoli-giura/fiscalita-coppie-marite-voto/",
-          "excerpt": "L'8 marzo l'imposizione individuale è passata con il 54% Il 29 novembre si vota sull'iniziativa del Centro Il testo propone l'imposizione comune dei coniugi",
+          "excerpt": "Secondo la ricostruzione di RFJ, il sistema prevede che ogni contribuente sia tassato separatamente, indipendentemente dallo stato civile. Il 29 novembre, la questione torna alle urne: gli svizzeri dovranno esprimersi…",
           "date": "2026-10-27T00:08:19.325Z"
         },
         {
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "JU",
@@ -173,7 +173,7 @@
         {
           "title": "CFF Cargo stops the transport of wood in Alle from December",
           "url": "/en/jura-articles/cff-cargo-renounces-wood-transport-alle/",
-          "excerpt": "CFF Cargo discontinues service for single wagons from December Wood from Ajoie will pass to the road Alle's platform cost CHF 14 million in 2021 The transport",
+          "excerpt": "In Alle, in Ajoie, CFF Cargo has decided to cancel the railway service for single wagons used in the transport of wood from December.",
           "date": "2026-10-29T08:45:30.807Z"
         },
         {
@@ -191,7 +191,7 @@
         {
           "title": "Taxation of spouses: vote on 29 November",
           "url": "/en/jura-articles/marital-couple-tax-vote/",
-          "excerpt": "On 8 March, individual taxation passed with 54% On November 29, the vote will be held on the Center's initiative The text proposes the common taxation",
+          "excerpt": "According to RFJ's reconstruction, the system provides that each taxpayer is taxed separately, regardless of marital status. On November 29, the issue returns to the polls: the Swiss will have to express their opinion…",
           "date": "2026-10-27T00:08:19.325Z"
         },
         {
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "JU",
@@ -272,7 +272,7 @@
         {
           "title": "CFF Cargo stellt ab Dezember den Holztransport in Alle ein",
           "url": "/de/jura-artikel/sbb-cargo-verzichtet-auf-holztransport-alle/",
-          "excerpt": "CFF Cargo stellt ab Dezember den Betrieb für Einzelwagen ein Wald von Ajoie wird zur Straße übergehen Die Plattform von Alle kostete 2021 14 Millionen CHF",
+          "excerpt": "In Alle, in Ajoie, hat CFF Cargo beschlossen, den Bahnverkehr für Einzelwagen für den Holztransport ab Dezember einzustellen.",
           "date": "2026-10-29T08:45:30.807Z"
         },
         {
@@ -290,7 +290,7 @@
         {
           "title": "Besteuerung der Ehepartner: Abstimmung am 29. November",
           "url": "/de/jura-artikel/ehepaare-steuer-abstimmung/",
-          "excerpt": "Am 8. März wurde die Einzelbesteuerung mit 54 % verabschiedet. Am 29. November findet die Abstimmung über die Initiative des Zentrums statt Der Text schlägt",
+          "excerpt": "Am 8. März wurde die Einzelbesteuerung mit 54 % verabschiedet. Am 29. November findet die Abstimmung über die Initiative des Zentrums statt Der Text schlägt.",
           "date": "2026-10-27T00:08:19.325Z"
         },
         {
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "JU",
@@ -371,7 +371,7 @@
         {
           "title": "CFF Cargo arrête le transport de bois à Alle à partir de décembre",
           "url": "/fr/articles-jura/cff-cargo-renonce-transport-bois-alle/",
-          "excerpt": "CFF Cargo cesse le service pour les wagons individuels à partir de décembre Le bois d'Ajoie passera à la route La plateforme d'Alle a coûté 14 millions de CHF",
+          "excerpt": "A Alle, en Ajoie, CFF Cargo a décidé de supprimer à partir de décembre la desserte ferroviaire des wagons isolés utilisés pour le transport du bois.",
           "date": "2026-10-29T08:45:30.807Z"
         },
         {
@@ -389,7 +389,7 @@
         {
           "title": "Fiscalité des conjoints : votez le 29 novembre",
           "url": "/fr/articles-jura/fiscalite-couples-maries-vote/",
-          "excerpt": "Le 8 mars, la fiscalité individuelle a été adoptée avec 54 % Le 29 novembre, le vote aura lieu sur l'initiative du Centre Le texte propose la taxation commune",
+          "excerpt": "Selon la reconstitution de RFJ, le système prévoit que chaque contribuable est imposé séparément, quelle que soit sa situation familiale. Le 29 novembre, la question revient aux urnes: les Suisses devront se prononcer…",
           "date": "2026-10-27T00:08:19.325Z"
         },
         {
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

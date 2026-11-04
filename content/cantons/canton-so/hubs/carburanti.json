@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "carburanti",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "fa89dfe4163a86853c06287e8a7c4c33fc8239178ef2718a8cd14d29e7a1cd93",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "e739546edcfe0049d8786d5f22ba543ea0abb4ef7839e1ac1593d34a04a72f3d",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -98,7 +98,7 @@
         {
           "title": "221 milioni di franchi per premi assicurativi più bassi nel Canton Soletta",
           "url": "/articoli-soletta/solothurn-sussidi-premi-2027/",
-          "excerpt": "Nel 2027 previsti circa CHF 221 milioni per l'IPV La dotazione cresce di CHF 9 milioni, pari al 4,3% Circa CHF 123 milioni arrivano dalla Confederazione",
+          "excerpt": "Nel 2027 previsti circa CHF 221 milioni per l'IPV La dotazione cresce di CHF 9 milioni, pari al 4,3% Circa CHF 123 milioni arrivano dalla Confederazione.",
           "date": "2026-10-28T11:42:42.148Z"
         }
       ],
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "SO",
@@ -197,7 +197,7 @@
         {
           "title": "221 million francs for lower insurance premiums in the Canton of Solothurn",
           "url": "/en/solothurn-articles/solothurn-premium-subsidies-2027/",
-          "excerpt": "In 2027, around CHF 221 million is planned for IPV The allocation increases by CHF 9 million, equal to 4,3% Around CHF 123 million comes from the Confederation",
+          "excerpt": "In 2027, around CHF 221 million is planned for IPV The allocation increases by CHF 9 million, equal to 4,3% Around CHF 123 million comes from the Confederation.",
           "date": "2026-10-28T11:42:42.148Z"
         }
       ],
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "SO",
@@ -290,13 +290,13 @@
         {
           "title": "Solothurn: Die Ratsleitung gegen die PUK zu den Spitälern",
           "url": "/de/solothurn-artikel/solothurn-spitaeler-puk-abgelehnt/",
-          "excerpt": "Die Ratsleitung von Solothurn hält eine PUK zu den Spitälern nicht für sinnvoll; der Kantonsrat wird am 11.",
+          "excerpt": "Gemäss Mitteilung der Ratsleitung wäre eine PUK nicht der richtige Weg und würde dem Zweck nicht dienen.",
           "date": "2026-10-29T10:41:25.882Z"
         },
         {
           "title": "221 Millionen Franken für niedrigere Versicherungsprämien im Kanton Solothurn",
           "url": "/de/solothurn-artikel/solothurn-pramiezuschusse-2027/",
-          "excerpt": "Für 2027 sind rund CHF 221 Millionen für die IPV vorgesehen Die Dotierung steigt um CHF 9 Millionen, was 4,3% entspricht Rund CHF 123 Millionen kommen vom Bund",
+          "excerpt": "Im Kanton Solothurn hat die Kantonsregierung dem Kantonsrat den Vorschlag für die Prämienverbilligungen für 2027 übermittelt.",
           "date": "2026-10-28T11:42:42.148Z"
         }
       ],
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "SO",
@@ -395,7 +395,7 @@
         {
           "title": "221 millions pour réduire les primes d’assurance à Soleure",
           "url": "/fr/articles-soleure/soleure-subventions-primes-2027/",
-          "excerpt": "En 2027, environ CHF 221 millions sont prévus pour l’IPV La dotation augmente de CHF 9 millions, soit 4,3 % Environ CHF 123 millions proviennent",
+          "excerpt": "En 2027, environ CHF 221 millions sont prévus pour l’IPV La dotation augmente de CHF 9 millions, soit 4,3 % Environ CHF 123 millions proviennent.",
           "date": "2026-10-28T11:42:42.148Z"
         }
       ],
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

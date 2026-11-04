@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "carburanti",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "291123d410bb880fce22d188f47a754d2efd6c673ba35255730c70beee1361c9",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "8df85f10cbccf733c7cdacfc62c384d0b1f93506fd0920a78a0400d763d9929e",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -74,13 +74,13 @@
         {
           "title": "Furti con effrazione nel Canton Ginevra: 3'410 nel 2025",
           "url": "/articoli-ginevra/furti-cantone-ginevra-2025/",
-          "excerpt": "3'410 furti nel 2025, contro 3'196 nel 2024 Crescita del 6,7% tra 2024 e 2025 Incontri della Polizia: mercoledì 28 ottobre Termine Valore Cosa Furti",
+          "excerpt": "3'410 furti nel 2025, contro 3'196 nel 2024 Crescita del 6,7% tra 2024 e 2025 Incontri della Polizia: mercoledì 28 ottobre Termine Valore Cosa Furti.",
           "date": "2026-10-26T11:28:00.433Z"
         },
         {
           "title": "HUG primo ospedale svizzero nel ranking Smart Hospitals 2027",
           "url": "/articoli-ginevra/hug-primo-ospedale-svizzero-2027/",
-          "excerpt": "Gli HUG sono 31° al mondo nel 2027 Primo ospedale svizzero della graduatoria 37 posizioni guadagnate rispetto al 2026 410 ospedali in 33 Paesi Classifica →",
+          "excerpt": "Il salto che caratterizza il risultato degli HUG è quantificato dalla stessa graduatoria: 37 posizioni guadagnate rispetto all’edizione 2026. Nel ranking 2027 di Newsweek e Statista, gli HUG occupano il 31° posto…",
           "date": "2026-10-23T22:19:10.680Z"
         },
         {
@@ -92,7 +92,7 @@
         {
           "title": "Aeroporto di Ginevra: il TAF approva il regolamento",
           "url": "/articoli-ginevra/taf-regolamento-aeroporto-ginevra/",
-          "excerpt": "Il TAF approva il regolamento dell’aeroporto di Ginevra Le misure contestate rispettano le norme ambientali Respinti i ricorsi contro la decisione DETEC del 17",
+          "excerpt": "Il Tribunale amministrativo federale ha dato il via libera al regolamento di esercizio dell’aeroporto di Ginevra.",
           "date": "2026-10-19T06:20:16.297Z"
         },
         {
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "GE",
@@ -173,13 +173,13 @@
         {
           "title": "Burglaries in the Canton of Geneva: 3'410 in 2025",
           "url": "/en/geneva-articles/geneva-canton-burglary-2025/",
-          "excerpt": "3'410 thefts in 2025, compared with 3'196 in 2024 6,7% growth between 2024 and 2025 Police meetings: Wednesday, 28 October Term Value What Burglaries involving",
+          "excerpt": "3'410 thefts in 2025, compared with 3'196 in 2024 6,7% growth between 2024 and 2025 Police meetings: Wednesday, 28 October Term Value What Burglaries involving.",
           "date": "2026-10-26T11:28:00.433Z"
         },
         {
           "title": "HUG first Swiss hospital in the Smart Hospitals 2027 ranking",
           "url": "/en/geneva-articles/hug-first-swiss-hospital-2027/",
-          "excerpt": "HUG rank 31st in the world in 2027 First Swiss hospital in the ranking 37 positions gained compared with 2026 410 hospitals in 33 countries Ranking → Newsweek",
+          "excerpt": "The leap that characterizes HUG’s result is quantified by the same ranking: 37 places gained compared with the 2026 edition.",
           "date": "2026-10-23T22:19:10.680Z"
         },
         {
@@ -191,7 +191,7 @@
         {
           "title": "Geneva Airport: the TAF approves the regulation",
           "url": "/en/geneva-articles/geneva-airport-taf-ruling/",
-          "excerpt": "The TAF approves Geneva Airport's operating regulations The contested measures comply with environmental regulations Appeals against DETEC's decision",
+          "excerpt": "The Federal Administrative Court has given the green light to Geneva Airport’s operating regulations.",
           "date": "2026-10-19T06:20:16.297Z"
         },
         {
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "GE",
@@ -272,13 +272,13 @@
         {
           "title": "Einbruchdiebstähle im Kanton Genf: 3'410 im Jahr 2025",
           "url": "/de/genf-artikel/einbrueche-kanton-genf-2025/",
-          "excerpt": "3'410 Diebstähle im Jahr 2025 gegenüber 3'196 im Jahr 2024 Anstieg von 6,7% zwischen 2024 und 2025 Treffen der Polizei: Mittwoch, 28.",
+          "excerpt": "Im Kanton Genf wurden 2025 3'410 Einbruch- oder Einschleichdiebstähle registriert. Insgesamt waren es 3'196 Fälle im Jahr 2024 und 2'986 im Jahr 2023.",
           "date": "2026-10-26T11:28:00.433Z"
         },
         {
           "title": "HUG erstes Schweizer Spital im Ranking Smart Hospitals 2027",
           "url": "/de/genf-artikel/hug-erster-schweizer-krankenhaus-2027/",
-          "excerpt": "Die HUG liegen 2027 weltweit auf Rang 31° Erstes Schweizer Spital der Rangliste Gegenüber 2026 um 37 Plätze verbessert 410 Spitäler in 33 Ländern Rangliste →",
+          "excerpt": "Im Ranking 2027 von Newsweek und Statista belegen die HUG weltweit den 31. Platz und sind damit das bestplatzierte Krankenhaus der Schweiz.",
           "date": "2026-10-23T22:19:10.680Z"
         },
         {
@@ -290,7 +290,7 @@
         {
           "title": "Flughafen Genf: Das TAF genehmigt das Betriebsreglement",
           "url": "/de/genf-artikel/genfer-flughafen-taf-urteil/",
-          "excerpt": "Das TAF genehmigt das Betriebsreglement des Flughafens Genf Die beanstandeten Maßnahmen entsprechen den Umweltvorschriften Die Beschwerden gegen",
+          "excerpt": "Das Bundesverwaltungsgericht hat grünes Licht für das Betriebsreglement des Flughafens Genf gegeben.",
           "date": "2026-10-19T06:20:16.297Z"
         },
         {
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "GE",
@@ -371,13 +371,13 @@
         {
           "title": "Vols par effraction dans le canton de Genève : 3'410 en 2025",
           "url": "/fr/articles-geneve/cambriolages-canton-geneve-2025/",
-          "excerpt": "3'410 vols en 2025, contre 3'196 en 2024 Hausse de 6,7% entre 2024 et 2025 Rencontres de la police : mercredi 28 octobre Terme Valeur Quoi Vols avec effraction",
+          "excerpt": "3'410 vols en 2025, contre 3'196 en 2024 Hausse de 6,7% entre 2024 et 2025 Rencontres de la police : mercredi 28 octobre Terme Valeur Quoi Vols avec effraction.",
           "date": "2026-10-26T11:28:00.433Z"
         },
         {
           "title": "HUG, premier hôpital suisse du classement Smart Hospitals 2027",
           "url": "/fr/articles-geneve/hug-premier-hopital-suisse-2027/",
-          "excerpt": "Les HUG sont 31e au monde en 2027 Premier hôpital suisse du classement 37 places gagnées par rapport à 2026 410 hôpitaux dans 33 pays Classement → Newsweek",
+          "excerpt": "Le bond qui caractérise le résultat des HUG est quantifié par le même classement : 37 places gagnées par rapport à l’édition 2026.",
           "date": "2026-10-23T22:19:10.680Z"
         },
         {
@@ -389,7 +389,7 @@
         {
           "title": "Aéroport de Genève : le TAF approuve le règlement",
           "url": "/fr/articles-geneve/aeroport-geneve-arret-taf/",
-          "excerpt": "Le TAF approuve le règlement de l’aéroport de Genève Les mesures contestées respectent les normes environnementales Les recours contre la décision du DETEC",
+          "excerpt": "Le règlement d’exploitation de l’aéroport de Genève a été validé par le Tribunal administratif fédéral.",
           "date": "2026-10-19T06:20:16.297Z"
         },
         {
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

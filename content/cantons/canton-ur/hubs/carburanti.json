@@ -4,8 +4,8 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "carburanti",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "5beff2126bae2e6771e79a67690d1cff750a5476147ca0cacb1b65831c01382e",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "9e6748ff6f376a884244370c71edda22ad37990367ccc40a888ad4a098498409",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "UR",
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "UR",
@@ -248,19 +248,19 @@
         {
           "title": "Brand eines Fahrzeugs, Tunnel von Flüelen geschlossen",
           "url": "/de/uri-artikel/fahrzeugbrand-fluelen-tunnel/",
-          "excerpt": "Ein Fahrzeugbrand zwang am Donnerstag, 29.",
+          "excerpt": "Am Donnerstagmorgen, dem 29. Oktober, wurde der Flüeler Tunnel nach einem Fahrzeugbrand etwa eineinhalb Stunden lang gesperrt.",
           "date": "2026-10-31T10:27:30.338Z"
         },
         {
           "title": "Susten und Furka gesperrt, Gotthard tagsüber befahrbar",
           "url": "/de/uri-artikel/susten-furka-wintersperre/",
-          "excerpt": "Ab Mittwoch, dem 28.",
+          "excerpt": "Es lässt sich über die Wintersperre der Furka und des Susten ab Mittwoch, 28. Oktober, berichten sowie über die abweichende Situation am Gotthard, der vorerst tagsüber befahrbar ist.",
           "date": "2026-10-28T17:45:24.471Z"
         },
         {
           "title": "Uri, Verkehr an 31 Stellen am 5. November 2026 erfasst",
           "url": "/de/uri-artikel/verkehrszaehlung-uri-november/",
-          "excerpt": "Im Urner Talboden werden am 5.",
+          "excerpt": "Am Donnerstag, dem 5. November 2026, wird im Urner Talboden eine Erhebung der Verkehrsströme durchgeführt.",
           "date": "2026-10-27T11:34:34.578Z"
         }
       ],
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "UR",
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

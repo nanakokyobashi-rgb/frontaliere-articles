@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "fisco",
-  "updatedAt": "2026-10-27T08:29:57.707Z",
-  "contentHash": "316218cbd05e5b30fa5a93639df8fac11bb99e9df04e6f26434717066f261a9c",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "6b97b4779af7e8dd0de7dfcbf00dbbb8b3689478cb09db07982d2f2d7d03f624",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-26T21:55:18.630Z",
+      "updatedAt": "2026-11-03T13:02:31.533Z",
       "keyFacts": 0
     }
   ],
@@ -115,7 +115,7 @@
               "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -134,7 +134,7 @@
         {
           "title": "Einwohnerrat decide budget 2027 e credito Bahnhof Ost",
           "url": "/articoli-lucerna/einwohnerrat-budget-bahnhof-ost/",
-          "excerpt": "Il 17 novembre 2026 si riunisce l'Einwohnerrat di Ebikon Il budget 2027 prevede un avanzo di CHF 2,14 milioni Il moltiplicatore resta a 2,05 unità Bahnhof Ost",
+          "excerpt": "L'incontro inizierà alle 14 nell'Aula Wydenhof e prevede sei dossier. Al centro ci sono il piano delle attività e finanziario AFP 2027–2030 e il budget 2027.",
           "date": "2026-10-27T08:22:48.687Z"
         },
         {
@@ -191,7 +191,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-27T08:29:57.707Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "LU",
@@ -284,7 +284,7 @@
               "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -303,7 +303,7 @@
         {
           "title": "Residents’ Council decides on budget 2027 and Bahnhof Ost credit",
           "url": "/en/lucerne-articles/residents-council-decides-on-budget-2027-and-bahnhof-ost-credit/",
-          "excerpt": "On 17 November 2026, the Ebikon Residents' Council meets The 2027 budget provides for a surplus of CHF 2,14 million The multiplier remains at 2,05 units Bahnhof",
+          "excerpt": "On 17 November 2026, Ebikon's Einwohnerrat, that is, the Residents' Council, will meet in a public session devoted to the budget.",
           "date": "2026-10-27T08:22:48.687Z"
         },
         {
@@ -360,7 +360,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-27T08:29:57.707Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "LU",
@@ -453,7 +453,7 @@
               "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -472,7 +472,7 @@
         {
           "title": "Einwohnerrat entscheidet über Budget 2027 und Kredit für Bahnhof Ost",
           "url": "/de/luzern-artikel/einwohnerrat-entscheidet-uber-budget-2027-und-kredit-fur-bahnhof-ost/",
-          "excerpt": "Am 17. November 2026 tagt der Einwohnerrat von Ebikon Das Budget 2027 sieht einen Überschuss von CHF 2,14 Millionen vor Der Steuerfuss bleibt bei 2,05 Einheiten",
+          "excerpt": "November 2026 wird der Einwohnerrat von Ebikon, also der Rat der Einwohnerinnen und Einwohner, in einer öffentlichen Sitzung zum Budget zusammentreten.",
           "date": "2026-10-27T08:22:48.687Z"
         },
         {
@@ -496,7 +496,7 @@
         {
           "title": "Kantonale Steuern im Vergleich – Schweiz 2026: Kanton Luzern",
           "url": "/de/schweiz-artikel/steuern-luzern-drei-ebenen-2026/",
-          "excerpt": "Drei Steuerstufen und kommunaler Multiplikator: Der Vergleich für 2026 geht von der nationalen Struktur aus und wendet die Methode auf den Kanton Luzern an.",
+          "excerpt": "Die kantonalen Verwaltungsverwaltungen verwalten kantonale und kommunale Steuern. Der Vergleich des Kantons Luzern muss von diesen beiden lokalen Komponenten ausgehen, ohne die Bundeszahl wie einen kantonalen Satz zu…",
           "date": "2026-10-01T03:47:26.930Z"
         },
         {
@@ -529,7 +529,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-27T08:29:57.707Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "LU",
@@ -622,7 +622,7 @@
               "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -641,7 +641,7 @@
         {
           "title": "L'Einwohnerrat décide du budget 2027 et du crédit Bahnhof Ost",
           "url": "/fr/articles-lucerne/l-einwohnerrat-decide-du-budget-2027-et-du-credit-bahnhof-ost/",
-          "excerpt": "Le 17 novembre 2026, l'Einwohnerrat d'Ebikon se réunit Le budget 2027 prévoit un excédent de CHF 2,14 millions Le multiplicateur reste à 2,05 unités Bahnhof Ost",
+          "excerpt": "Le 17 novembre 2026, l'Einwohnerrat d'Ebikon, c'est-à-dire le Conseil des habitants, se réunira lors d'une séance publique consacrée au budget.",
           "date": "2026-10-27T08:22:48.687Z"
         },
         {
@@ -698,7 +698,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-27T08:29:57.707Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "mobilita",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "05216654422264a0091505dbf6dcfb613002f815c4a9ede71cf125002627063b",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "da30b595dea32b3fba00f16b2c02ce79855dae18501b079bca28ceb33a636c4e",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -199,7 +199,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "TG",
@@ -376,7 +376,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "TG",
@@ -512,7 +512,7 @@
         {
           "title": "Kreuzlingen: Bärenplatz wegen Messe geschlossen",
           "url": "/de/thurgau-artikel/kreuzlingen-barenplatz-wegen-messe-geschlossen/",
-          "excerpt": "In Kreuzlingen werden die Busse vom 25.",
+          "excerpt": "Ab Sonntag, 25. Oktober, ab Reisebeginn werden die Kreuzlinger Busse bis Dienstag, 27. Oktober, 09.00 Uhr umgeleitet. Die Haltestelle Bärenplatz wird an den Hauptbahnhof verlegt.",
           "date": "2026-10-17T00:40:57.671Z"
         },
         {
@@ -553,7 +553,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "TG",
@@ -730,7 +730,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

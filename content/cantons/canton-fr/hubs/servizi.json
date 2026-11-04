@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "servizi",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "06972450cc436031170526f3318729bc69945f33908962581efd03de0f9bc8b0",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "5f9b8f8ed8612e8d4c4f43de444dce6c021422e03b667fc3d658c828df0251f1",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -156,7 +156,7 @@
         {
           "title": "Friburgo: garanzia da CHF 44,8 milioni per l'ospedale HIB",
           "url": "/articoli-friburgo/garanzia-hib-payerne/",
-          "excerpt": "CHF 44,8 milioni per il finanziamento dell'HIB 103 voti espressi, tutti favorevoli Lavori previsti tra il 2028 e il 2032 Il Vaud deve ancora approvare CHF 67,2",
+          "excerpt": "Venerdì i deputati friburghesi hanno votato la concessione di una garanzia di CHF 44,8 milioni a favore dell'Hôpital intercantonal de la Broye, l'HIB.",
           "date": "2026-10-10T17:43:08.538Z"
         },
         {
@@ -229,7 +229,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "FR",
@@ -358,7 +358,7 @@
         {
           "title": "Fribourg: CHF 44,8 million guarantee for HIB hospital",
           "url": "/en/fribourg-articles/fribourg-hib-guarantee/",
-          "excerpt": "CHF 44,8 million for HIB financing 103 votes cast, all in favor Work planned between 2028 and 2032 Vaud still has to approve CHF 67,2 million Beneficiary →",
+          "excerpt": "On Friday, Fribourg's deputies voted to grant a guarantee of CHF 44,8 million to Hôpital intercantonal de la Broye, HIB.",
           "date": "2026-10-10T17:43:08.538Z"
         },
         {
@@ -427,7 +427,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "FR",
@@ -556,7 +556,7 @@
         {
           "title": "Freiburg: Garantie in Höhe von CHF 44,8 Millionen für das HIB-Spital",
           "url": "/de/freiburg-artikel/freiburg-hib-buergschaft/",
-          "excerpt": "CHF 44,8 Millionen für die Finanzierung des HIB 103 abgegebene Stimmen, alle dafür Bauarbeiten zwischen 2028 und 2032 vorgesehen Der Kanton Waadt muss noch CHF",
+          "excerpt": "Am Freitag stimmten die Freiburger Abgeordneten dafür, dem Hôpital intercantonal de la Broye, dem HIB, eine Garantie von 44,8 Millionen Franken zu gewähren.",
           "date": "2026-10-10T17:43:08.538Z"
         },
         {
@@ -625,7 +625,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "FR",
@@ -754,7 +754,7 @@
         {
           "title": "Fribourg : garantie de 44,8 millions de CHF pour l'hôpital HIB",
           "url": "/fr/articles-fribourg/fribourg-garantie-hib/",
-          "excerpt": "44,8 millions de CHF pour le financement de l'HIB 103 votes exprimés, tous favorables Travaux prévus entre 2028 et 2032 Le canton de Vaud doit encore approuver",
+          "excerpt": "Vendredi, les députés fribourgeois ont voté l'octroi d'une garantie de CHF 44,8 millions en faveur de l'Hôpital intercantonal de la Broye, l'HIB.",
           "date": "2026-10-10T17:43:08.538Z"
         },
         {
@@ -819,7 +819,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

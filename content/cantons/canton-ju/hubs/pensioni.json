@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "pensioni",
-  "updatedAt": "2026-10-28T01:14:28.455Z",
-  "contentHash": "bbc41d5df3c5b718e5fe940450034429119d1b5c8e8197b02d24c198c4353962",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "4645465351637750f6f255909cb4971e83bf167bceefc85d38bfd65ae1669ed5",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-27T21:31:39.250Z",
+      "updatedAt": "2026-11-03T13:02:31.533Z",
       "keyFacts": 0
     }
   ],
@@ -151,14 +151,14 @@
               "url": "https://www.ecasjura.ch/fr/Actualites/La-rente-minimale-AVS-AI-augmentera-de-20-francs.html"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
         {
           "title": "Le casse pensioni svizzere migliorano Q3 2026",
           "url": "/articoli-giura/casse-pensioni-migliorano-terzo-trimestre/",
-          "excerpt": "L'indice WTW sale da 130,2% a 131,9% Il tasso di attualizzazione arriva all'1,65% Gli impegni pensionistici scendono del 6,5% Gli attivi dei piani calano",
+          "excerpt": "L'indice WTW sale da 130,2% a 131,9% Il tasso di attualizzazione arriva all'1,65% Gli impegni pensionistici scendono del 6,5% Gli attivi dei piani calano.",
           "date": "2026-10-08T15:48:11.331Z"
         },
         {
@@ -187,7 +187,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-28T01:14:28.455Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "JU",
@@ -311,14 +311,14 @@
               "url": "https://www.ecasjura.ch/fr/Actualites/La-rente-minimale-AVS-AI-augmentera-de-20-francs.html"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
         {
           "title": "Swiss pension funds improve Q3 2026",
           "url": "/en/jura-articles/swiss-pension-funds-improve-q3-2026/",
-          "excerpt": "WTW index rises from 130.2% to 131.9% The discount rate reaches 1.65% Pension commitments fall by 6.5% Plan assets fall by 0.6% Who → Willis Towers Watson (WTW)",
+          "excerpt": "WTW index rises from 130.2% to 131.9% The discount rate reaches 1.65% Pension commitments fall by 6.5% Plan assets fall by 0.6% Who → Willis Towers Watson (WTW).",
           "date": "2026-10-08T15:48:11.331Z"
         },
         {
@@ -347,7 +347,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-28T01:14:28.455Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "JU",
@@ -471,14 +471,14 @@
               "url": "https://www.ecasjura.ch/fr/Actualites/La-rente-minimale-AVS-AI-augmentera-de-20-francs.html"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
         {
           "title": "Schweizer Pensionskassen verbessern Q3 2026",
           "url": "/de/jura-artikel/schweizer-pensionskassen-verbessern-q3-2026/",
-          "excerpt": "Der WTW-Index steigt von 130,2% auf 131,9% Der Abzinsungssatz beträgt bis zu 1,65% Pensionsverpflichtungen sinken um 6,5% Die Aktiva der Stockwerke sinken um",
+          "excerpt": "Der WTW-Index steigt von 130,2% auf 131,9% Der Abzinsungssatz beträgt bis zu 1,65% Pensionsverpflichtungen sinken um 6,5% Die Aktiva der Stockwerke sinken um.",
           "date": "2026-10-08T15:48:11.331Z"
         },
         {
@@ -507,7 +507,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-28T01:14:28.455Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "JU",
@@ -631,14 +631,14 @@
               "url": "https://www.ecasjura.ch/fr/Actualites/La-rente-minimale-AVS-AI-augmentera-de-20-francs.html"
             }
           ],
-          "updatedAt": "2026-10-27T21:31:39.250Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
         {
           "title": "Les caisses de pension suisses améliorent Q3 2026",
           "url": "/fr/articles-jura/les-caisses-de-pension-suisses-ameliorent-q3-2026/",
-          "excerpt": "L'indice WTW passe de 130,2 % à 131,9 % Le taux d'actualisation atteint 1,65 % Les engagements de retraite baissent de 6,5 % Les actifs des plans baissent",
+          "excerpt": "L'indice WTW passe de 130,2 % à 131,9 % Le taux d'actualisation atteint 1,65 % Les engagements de retraite baissent de 6,5 % Les actifs des plans baissent.",
           "date": "2026-10-08T15:48:11.331Z"
         },
         {
@@ -667,7 +667,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-28T01:14:28.455Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "mobilita",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "6f717a456aacc0bebb280515ee34837f23071ff7291c517934262868a1ae64ae",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "64e32f6e417488c1b7d50014969b20b04c75103107cc41240be26c92aba05a04",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -202,33 +202,33 @@
       ],
       "curatedArticles": [
         {
-          "title": "Uscita Svizzera da Schengen: rischio controlli e attese ai confini",
-          "url": "/articoli-ticino/svizzera-uscita-schengen-controlli/",
-          "excerpt": "Rapporto federale pubblicato il 18 settembre 2026 Ipotesi: uscita della Svizzera da Schengen e Dublino Controlli sistematici e attese più lunghe ai confini",
-          "date": "2026-11-03T11:01:16.866Z"
-        },
-        {
-          "title": "Frontalieri, cosa succederebbe senza Schengen?",
-          "url": "/articoli-ticino/rapporto-consiglio-federale-schengen/",
-          "excerpt": "Rapporto federale pubblicato il 18 settembre 2026 Senza Schengen: controlli sistematici alle frontiere Ticino tra le regioni più esposte nello scenario Fino",
-          "date": "2026-10-19T02:54:59.119Z"
-        },
-        {
           "title": "Schengen: possibili controlli sistematici ai confini",
           "url": "/articoli-ticino/uscita-svizzera-schengen-controlli/",
-          "excerpt": "Rapporto federale pubblicato il 18 settembre 2026 Senza Schengen: controlli sistematici alle frontiere Fino a 422.000 ore al giorno perse negli ingorghi",
+          "excerpt": "Schengen, precisa il testo, non ha però eliminato ogni verifica: poiché la Svizzera resta fuori dall’Unione doganale europea, i controlli sulle merci possono ancora essere effettuati.",
           "date": "2026-10-12T23:42:13.529Z"
         },
         {
           "title": "Mendrisiotto: al via i primi quattro bus elettrici AMSA",
           "url": "/articoli-ticino/autobus-elettrici-mendrisiotto-amsa/",
-          "excerpt": "Quattro autobus elettrici AMSA entrano in servizio Coinvolte le linee 2, 3 e 4 nel Mendrisiotto Il progetto di elettrificazione è partito nel 2022",
+          "excerpt": "Il 10 ottobre 2026 Piero Marchesi, alla sua prima uscita pubblica come Direttore del Dipartimento del territorio, ha portato il saluto personale e quello del Consiglio di Stato all'inaugurazione dei primi quattro…",
           "date": "2026-10-10T10:49:09.228Z"
+        },
+        {
+          "title": "Uscita Svizzera da Schengen: rischio controlli e attese ai confini",
+          "url": "/articoli-ticino/svizzera-uscita-schengen-controlli/",
+          "excerpt": "Un rapporto del Consiglio federale, pubblicato nel settembre 2026, esamina lo scenario di un'eventuale uscita della Svizzera dagli accordi di Schengen e Dublino.",
+          "date": "2026-11-03T11:01:16.866Z"
+        },
+        {
+          "title": "Frontalieri, cosa succederebbe senza Schengen?",
+          "url": "/articoli-ticino/rapporto-consiglio-federale-schengen/",
+          "excerpt": "Il testo descrive uno scenario condizionato all'eventuale uscita della Svizzera da Schengen e Dublino; non presenta un modulo, un documento o una scadenza per i frontalieri.",
+          "date": "2026-10-19T02:54:59.119Z"
         },
         {
           "title": "Avvisi Ustat: manutenzione e chiusura amministrazione",
           "url": "/articoli-ticino/ustat-manutenzione-chiusura/",
-          "excerpt": "Manutenzione: martedì 2 dicembre, 20.00-22.00 circa Possibili brevi interruzioni sul sito Ustat Chiusura dei servizi: pomeriggio del 31 dicembre 2025 Ustat",
+          "excerpt": "Lo stesso materiale contiene un secondo avviso: i servizi dell'Amministrazione cantonale rimarranno chiusi nel pomeriggio del 31 dicembre 2025. Per questa chiusura l'anno è esplicito, mentre la pagina non indica un'ora…",
           "date": "2026-10-19T10:54:19.378Z"
         },
         {
@@ -238,16 +238,16 @@
           "date": "2026-10-07T06:12:18.855Z"
         },
         {
-          "title": "Mendrisiotto, carne e vino non dichiarati alla dogana",
-          "url": "/articoli-frontaliere/controlli-dogana-mendrisiotto/",
-          "excerpt": "Vacallo: trovati 82 chili di carne il 3 ottobre Stabio: trovate 492 bottiglie di vino il 7 ottobre In entrambi i casi mancava la dichiarazione in dogana L'UDSC",
-          "date": "2026-10-09T08:55:22.214Z"
-        },
-        {
           "title": "Semafori a Cadenazzo e traffico: effetti previsti nel 2027",
           "url": "/articoli-frontaliere/semafori-cadenazzo-traffico/",
           "excerpt": "Il Consiglio federale risponde sui semafori a Cadenazzo: efficacia del traffico tra Bellinzona e Locarno attesa a fine 2027.",
           "date": "2026-09-23T01:21:51.666Z"
+        },
+        {
+          "title": "Mendrisio-Melano, progetto MeMe per ridurre il rumore dell'autostrada",
+          "url": "/articoli-frontaliere/mendrisio-melano-progetto-meme-risanamento-fonico/",
+          "excerpt": "L'Ufficio federale delle strade (USTRA) ha pubblicato il disegno per il progetto MeMe, un piano di risanamento globale per il tratto dell'autostrada A2 tra Mendrisio e Melano.",
+          "date": "2026-09-15T02:42:05.181Z"
         }
       ],
       "latestCantonArticles": [],
@@ -293,7 +293,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "TI",
@@ -473,33 +473,33 @@
       ],
       "curatedArticles": [
         {
-          "title": "Switzerland’s exit from Schengen: risk of checks and delays at the borders",
-          "url": "/en/ticino-articles/switzerland-schengen-exit-controls/",
-          "excerpt": "Federal report published on 18 September 2026 Hypothesis: Switzerland’s withdrawal from Schengen and Dublin Systematic checks and longer waits at the borders",
-          "date": "2026-11-03T11:01:16.866Z"
-        },
-        {
-          "title": "Cross-border workers, what would happen without Schengen?",
-          "url": "/en/ticino-articles/federal-council-schengen-report/",
-          "excerpt": "Federal report published on September 18, 2026 Without Schengen: systematic border controls Ticino among the regions most exposed in the Fino scenario",
-          "date": "2026-10-19T02:54:59.119Z"
-        },
-        {
           "title": "Schengen: possible systematic border checks",
           "url": "/en/ticino-articles/switzerland-exit-schengen-border-controls/",
-          "excerpt": "Federal report published on September 18, 2026 Without Schengen: systematic border checks Up to 422.000 hours per day lost in traffic jams",
+          "excerpt": "On 18 September 2026, the Federal Council published a report on a possible withdrawal of Switzerland from the Schengen and Dublin agreements.",
           "date": "2026-10-12T23:42:13.529Z"
         },
         {
           "title": "Mendrisiotto: the first four AMSA electric buses are now in service",
           "url": "/en/ticino-articles/electric-buses-mendrisiotto-amsa/",
-          "excerpt": "Four AMSA electric buses enter service Lines 2, 3 and 4 in Mendrisiotto involved The electrification project began in 2022",
+          "excerpt": "On October 10, 2026, Piero Marchesi, in his first public appearance as Director of the Department of the Territory, conveyed his personal greetings and those of the State Council at the inauguration of the first four…",
           "date": "2026-10-10T10:49:09.228Z"
+        },
+        {
+          "title": "Switzerland’s exit from Schengen: risk of checks and delays at the borders",
+          "url": "/en/ticino-articles/switzerland-schengen-exit-controls/",
+          "excerpt": "A report by the Federal Council, published in September 2026, examines the scenario of a possible withdrawal by Switzerland from the Schengen and Dublin agreements.",
+          "date": "2026-11-03T11:01:16.866Z"
+        },
+        {
+          "title": "Cross-border workers, what would happen without Schengen?",
+          "url": "/en/ticino-articles/federal-council-schengen-report/",
+          "excerpt": "For Ticino, the issue is reflected in an everyday act: crossing the border to go to work.",
+          "date": "2026-10-19T02:54:59.119Z"
         },
         {
           "title": "Ustat notices: maintenance and administrative closure",
           "url": "/en/ticino-articles/ustat-maintenance-closure/",
-          "excerpt": "Maintenance: Tuesday, December 2, approximately 20.00-22.00 Possible brief interruptions on the Ustat website Service closure: afternoon of December 31, 2025 Ustat",
+          "excerpt": "On Tuesday, 2 December, from approximately 20.00 to 22.00, the News page of the Statistical Office of the Canton of Ticino reports an important maintenance operation. The notice specifies that brief interruptions may…",
           "date": "2026-10-19T10:54:19.378Z"
         },
         {
@@ -508,16 +508,16 @@
           "date": "2026-10-07T06:12:18.855Z"
         },
         {
-          "title": "Mendrisiotto, meat and wine not declared to customs",
-          "url": "/en/cross-border-articles/mendrisiotto-undeclared-meat-wine/",
-          "excerpt": "Vacallo: 82 kilos of meat found on October 3 Stabio: 492 bottles of wine found on October 7 In both cases, the customs declaration was missing The FOCBS",
-          "date": "2026-10-09T08:55:22.214Z"
-        },
-        {
           "title": "Traffic lights in Cadenazzo and traffic: effects expected in 2027",
           "url": "/en/cross-border-articles/cadenazzo-traffic-lights/",
           "excerpt": "The Federal Council responds to the traffic lights in Cadenazzo: effective traffic between Bellinzona and Locarno expected at the end of 2027.",
           "date": "2026-09-23T01:21:51.666Z"
+        },
+        {
+          "title": "Mendrisio-Melano, MeMe project to reduce highway noise",
+          "url": "/en/cross-border-articles/mendrisio-melano-meme-project-noise-reduction/",
+          "excerpt": "The Federal Office of Roads (USTRA) has published the design for the MeMe project, a comprehensive rehabilitation plan for the stretch of the A2 motorway between Mendrisio and Melano.",
+          "date": "2026-09-15T02:42:05.181Z"
         }
       ],
       "latestCantonArticles": [],
@@ -563,7 +563,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "TI",
@@ -743,33 +743,33 @@
       ],
       "curatedArticles": [
         {
-          "title": "Austritt der Schweiz aus Schengen: Risiko von Kontrollen und Wartezeiten an den Grenzen",
-          "url": "/de/tessin-artikel/schweiz-schengen-ausstieg-kontrollen/",
-          "excerpt": "Am 18. September 2026 veröffentlichter Bundesbericht Hypothese: Austritt der Schweiz aus Schengen und Dublin Systematische Kontrollen und längere Wartezeiten an den Grenzen",
-          "date": "2026-11-03T11:01:16.866Z"
-        },
-        {
-          "title": "Grenzgänger, was würde ohne Schengen geschehen?",
-          "url": "/de/tessin-artikel/bundesrat-schengen-bericht/",
-          "excerpt": "Am 18. September 2026 veröffentlichter Bundesbericht Ohne Schengen: systematische Kontrollen an den Grenzen Tessin unter den am stärksten betroffenen Regionen im Szenario Bis zu",
-          "date": "2026-10-19T02:54:59.119Z"
-        },
-        {
           "title": "Schengen: mögliche systematische Kontrollen an den Grenzen",
           "url": "/de/tessin-artikel/schweiz-schengen-austritt-grenzkontrollen/",
-          "excerpt": "Bundesbericht veröffentlicht am 18.",
+          "excerpt": "Die Wiedereinführung systematischer Kontrollen ist mit einem möglichen Austritt der Schweiz aus Schengen verbunden, nicht mit einer bereits als operativ beschriebenen Änderung.",
           "date": "2026-10-12T23:42:13.529Z"
         },
         {
           "title": "Mendrisiotto: Die ersten vier Elektrobusse von AMSA nehmen den Betrieb auf",
           "url": "/de/tessin-artikel/elektrobusse-mendrisiotto-amsa/",
-          "excerpt": "Vier Elektrobusse von AMSA nehmen den Betrieb auf Betroffen sind die Linien 2, 3 und 4 im Mendrisiotto Das Elektrifizierungsprojekt begann im Jahr 2022",
+          "excerpt": "In seiner Ansprache bezeichnete Marchesi die Einweihung als Meilenstein für AMSA, für die Region Mendrisiotto und für den öffentlichen Verkehr im Tessin.",
           "date": "2026-10-10T10:49:09.228Z"
+        },
+        {
+          "title": "Austritt der Schweiz aus Schengen: Risiko von Kontrollen und Wartezeiten an den Grenzen",
+          "url": "/de/tessin-artikel/schweiz-schengen-ausstieg-kontrollen/",
+          "excerpt": "Ein Bericht des Bundesrats, der im September 2026 veröffentlicht wurde, untersucht das Szenario eines möglichen Austritts der Schweiz aus den Schengen- und Dublin-Abkommen.",
+          "date": "2026-11-03T11:01:16.866Z"
+        },
+        {
+          "title": "Grenzgänger, was würde ohne Schengen geschehen?",
+          "url": "/de/tessin-artikel/bundesrat-schengen-bericht/",
+          "excerpt": "Ein eventueller Austritt der Schweiz aus Schengen würde die Grenzen zu Italien, Frankreich, Deutschland und Österreich zu den Außengrenzen des Schengen-Raums machen.",
+          "date": "2026-10-19T02:54:59.119Z"
         },
         {
           "title": "Ustat-Mitteilungen: Wartung und Schließung der Verwaltung",
           "url": "/de/tessin-artikel/ustat-wartung-schliessung/",
-          "excerpt": "Wartung: Dienstag, 2.",
+          "excerpt": "Die Quelle stellt keinen Zusammenhang zwischen den beiden Mitteilungen her. Sie sagt nicht, dass die Schließung zum Jahresende von der Wartung abhängt oder dass die Maßnahme alle kantonalen Dienste betrifft.",
           "date": "2026-10-19T10:54:19.378Z"
         },
         {
@@ -778,16 +778,16 @@
           "date": "2026-10-07T06:12:18.855Z"
         },
         {
-          "title": "Mendrisiotto, beim Zoll nicht deklariertes Fleisch und nicht deklarierter Wein",
-          "url": "/de/grenzgaenger-artikel/mendrisiotto-nicht-deklariertes-fleisch-wein/",
-          "excerpt": "Vacallo: 82 Kilo Fleisch am 3.",
-          "date": "2026-10-09T08:55:22.214Z"
-        },
-        {
           "title": "Ampeln in Cadenazzo und Verkehr: erwartete Auswirkungen im Jahr 2027",
           "url": "/de/grenzgaenger-artikel/cadenazzo-ampeln-verkehr/",
           "excerpt": "Der Bundesrat antwortet an den Ampeln in Cadenazzo: Ende 2027 erwartete Verkehrseffizienz zwischen Bellinzona und Locarno.",
           "date": "2026-09-23T01:21:51.666Z"
+        },
+        {
+          "title": "Mendrisio-Melano, MeMe-Projekt zur Reduzierung des Autobahnlärms",
+          "url": "/de/grenzgaenger-artikel/mendrisio-melano-meme-projekt-larmreduzierung/",
+          "excerpt": "Das Bundesamt für Strassen (Astra) hat den Entwurf für das Projekt MeMe, einen umfassenden Sanierungsplan für den Autobahnabschnitt A2 zwischen Mendrisio und Melano, veröffentlicht.",
+          "date": "2026-09-15T02:42:05.181Z"
         }
       ],
       "latestCantonArticles": [],
@@ -833,7 +833,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "TI",
@@ -1013,33 +1013,33 @@
       ],
       "curatedArticles": [
         {
-          "title": "Sortie Suisse de Schengen: risques de contrôles aux frontières",
-          "url": "/fr/articles-tessin/suisse-sortie-schengen-controles/",
-          "excerpt": "Rapport fédéral publié le 18 septembre 2026 Hypothèse : sortie de la Suisse de Schengen et de Dublin Contrôles systématiques et attentes plus longues aux frontières",
-          "date": "2026-11-03T11:01:16.866Z"
-        },
-        {
-          "title": "Frontaliers, que se passerait-il sans Schengen ?",
-          "url": "/fr/articles-tessin/rapport-conseil-federal-schengen/",
-          "excerpt": "Rapport fédéral publié le 18 septembre 2026 Sans Schengen : contrôles systématiques aux frontières Le Tessin parmi les régions les plus exposées dans le scénario Jusqu'à",
-          "date": "2026-10-19T02:54:59.119Z"
-        },
-        {
           "title": "Schengen : contrôles systématiques possibles aux frontières",
           "url": "/fr/articles-tessin/suisse-sortie-schengen-controles-frontaliers/",
-          "excerpt": "Rapport fédéral publié le 18 septembre 2026 Sans Schengen : contrôles systématiques aux frontières Jusqu’à 422.000 heures perdues chaque jour dans les embouteillages",
+          "excerpt": "Cependant, Schengen, précise le texte, n'a pas supprimé tous les contrôles : la Suisse restant en dehors de l'Union douanière européenne, des contrôles sur les marchandises peuvent toujours être effectués.",
           "date": "2026-10-12T23:42:13.529Z"
         },
         {
           "title": "Mendrisiotto : mise en service des quatre premiers bus électriques AMSA",
           "url": "/fr/articles-tessin/bus-electriques-mendrisiotto-amsa/",
-          "excerpt": "Quatre autobus électriques AMSA entrent en service Les lignes 2, 3 et 4 du Mendrisiotto sont concernées Le projet d’électrification a débuté en 2022",
+          "excerpt": "AMSA a une histoire qui remonte à 1907, lorsqu'elle fut créée sous le nom de Società Tram Elettrici Mendrisiensi, TEM. Le Mendrisiotto était déjà desservi par un tramway électrique.",
           "date": "2026-10-10T10:49:09.228Z"
+        },
+        {
+          "title": "Sortie Suisse de Schengen: risques de contrôles aux frontières",
+          "url": "/fr/articles-tessin/suisse-sortie-schengen-controles/",
+          "excerpt": "Un rapport du Conseil fédéral, publié en septembre 2026, examine le scénario d'une éventuelle sortie de la Suisse des accords de Schengen et de Dublin.",
+          "date": "2026-11-03T11:01:16.866Z"
+        },
+        {
+          "title": "Frontaliers, que se passerait-il sans Schengen ?",
+          "url": "/fr/articles-tessin/rapport-conseil-federal-schengen/",
+          "excerpt": "Le rapport publié le 18 septembre 2026 analyse ce qui se passerait si la Suisse sortait de Schengen et de Dublin : les contrôles systématiques et les files d'attente appartiennent au scénario examiné, et non à la…",
+          "date": "2026-10-19T02:54:59.119Z"
         },
         {
           "title": "Avis Ustat : maintenance et fermeture administrative",
           "url": "/fr/articles-tessin/ustat-maintenance-fermeture/",
-          "excerpt": "Maintenance : mardi 2 décembre, 20.00-22.00 environ De brèves interruptions sont possibles sur le site Ustat Fermeture des services : l’après-midi du 31 décembre 2025 Ustat",
+          "excerpt": "Mardi 2 décembre, de 20.00 à 22.00 environ, la page News de l'Office de la statistique du canton du Tessin signale une importante intervention de maintenance. L'avis précise que de brèves interruptions pourraient se…",
           "date": "2026-10-19T10:54:19.378Z"
         },
         {
@@ -1049,16 +1049,16 @@
           "date": "2026-10-07T06:12:18.855Z"
         },
         {
-          "title": "Mendrisiotto, viande et vin non déclarés à la douane",
-          "url": "/fr/articles-frontalier/mendrisiotto-viande-vin-non-declares/",
-          "excerpt": "Vacallo : 82 kilos de viande trouvés le 3 octobre Stabio : 492 bouteilles de vin trouvées le 7 octobre Dans les deux cas, la déclaration en douane faisait défaut L'UDSC",
-          "date": "2026-10-09T08:55:22.214Z"
-        },
-        {
           "title": "Feu de signalisation à Cadenazzo et circulation : effets attendus en 2027",
           "url": "/fr/articles-frontalier/feux-cadenazzo-trafic/",
           "excerpt": "Le Conseil fédéral répond aux feux à Cadenazzo : efficacité du trafic entre Bellinzone et Locarno attendue fin 2027.",
           "date": "2026-09-23T01:21:51.666Z"
+        },
+        {
+          "title": "Mendrisio-Melano, projet MeMe pour réduire le bruit de l'autoroute",
+          "url": "/fr/articles-frontalier/mendrisio-melano-projet-meme-reduction-bruit/",
+          "excerpt": "L'Office fédéral des routes (OFROU) a publié le dessin pour le projet MeMe, un plan d'assainissement global pour le tronçon de l'autoroute A2 entre Mendrisio et Melano.",
+          "date": "2026-09-15T02:42:05.181Z"
         }
       ],
       "latestCantonArticles": [],
@@ -1104,7 +1104,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

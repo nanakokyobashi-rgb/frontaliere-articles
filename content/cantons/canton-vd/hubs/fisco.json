@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "fisco",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "79bfb2a2ba046944765b2efe3d084a26ea87efa3f623a7f97e7d82bb3501eac4",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "cb49f30c5e0c8ce5ac277cf28f5e97e3fa35f4ca75f8fe402cdc28a2ffff530e",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-24T19:51:00.050Z",
+      "updatedAt": "2026-11-03T13:02:31.533Z",
       "keyFacts": 0
     }
   ],
@@ -115,14 +115,14 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26555-le-peuple-se-prononcera-sur-linitiative-populaire-baisse-dimpots-pour-tous"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
         {
           "title": "Fisco Vaud: imposte su indennità abusi, ricorso in vista",
           "url": "/articoli-vaud/fisco-vaud-indennita-abuso-imposte/",
-          "excerpt": "A Pully: abusi al Collège de Champittet alla fine degli anni '70 Indennità della Chiesa: CHF 220'000, divisa in due parti Dopo l'opposizione: CHF 120'000 ancora",
+          "excerpt": "La RTS riferisce che una vittima di abusi sessuali commessi a Pully deve pagare imposte su una parte dei CHF 220'000 versati dalla Chiesa cattolica.",
           "date": "2026-10-21T04:19:30.522Z"
         },
         {
@@ -146,7 +146,7 @@
         {
           "title": "Vaud rivede il budget 2027 per coprire il buco dei 12%",
           "url": "/articoli-vaud/vaud-budget-2027-revisione-12percento/",
-          "excerpt": "Minori entrate fiscali: 272 milioni di franchi",
+          "excerpt": "Minori entrate fiscali: 272 milioni di franchi.",
           "date": "2026-10-08T11:43:59.351Z"
         },
         {
@@ -195,7 +195,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "VD",
@@ -288,14 +288,14 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26555-le-peuple-se-prononcera-sur-linitiative-populaire-baisse-dimpots-pour-tous"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
         {
           "title": "Vaud tax authorities: tax on abuse compensation, appeal in sight",
           "url": "/en/vaud-articles/vaud-tax-abuse-compensation-taxes/",
-          "excerpt": "In Pully: abuses at Collège de Champittet in the late 1970s Compensation from the Church: CHF 220'000, divided into two parts After the objection: CHF 120'000",
+          "excerpt": "RTS reports that a victim of sexual abuse committed in Pully must pay taxes on a portion of the CHF 220,000 paid by the Catholic Church.",
           "date": "2026-10-21T04:19:30.522Z"
         },
         {
@@ -367,7 +367,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "VD",
@@ -460,26 +460,26 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26555-le-peuple-se-prononcera-sur-linitiative-populaire-baisse-dimpots-pour-tous"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
         {
           "title": "Waadt: Steuern auf Missbrauchs-Entschädigung, Rekurs",
           "url": "/de/waadt-artikel/waadt-steuer-missbrauchsentschadigung-steuern/",
-          "excerpt": "In Pully: Missbrauch am Collège de Champittet Ende der 70er-Jahre Entschädigung der Kirche: CHF 220'000, in zwei Teile aufgeteilt Nach der Einsprache: CHF",
+          "excerpt": "Die RTS berichtet, dass ein Opfer von sexuellem Missbrauch, der in Pully begangen wurde, auf einen Teil der von der katholischen Kirche gezahlten CHF 220'000 Steuern zahlen muss.",
           "date": "2026-10-21T04:19:30.522Z"
         },
         {
           "title": "Lausanne: Defizit von 77,7 Millionen im Budget 2027",
           "url": "/de/waadt-artikel/lausanne-budget-defizit-2027/",
-          "excerpt": "Das Budget 2027 von Lausanne weist ein Defizit von 77,7 Millionen Franken auf.",
+          "excerpt": "Lausanne legt ein defizitäres Budget 2027 mit einem Defizit von 77,7 Millionen Franken vor.",
           "date": "2026-10-07T11:12:50.818Z"
         },
         {
           "title": "Budget für das Geschäftsjahr 2027 und Investitionen: Vorlage an den Gemeinderat",
           "url": "/de/waadt-artikel/budget-2027-vorab-rat/",
-          "excerpt": "Die als Préavis N°2026/75 bezeichnete Vorlage zum Budget 2027 wurde dem Gemeinderat am 23.",
+          "excerpt": "Auf der einen Seite steht der angegebene Zeitraum, das Geschäftsjahr 2027; auf der anderen Seite steht das als Préavis N°2026/75 bezeichnete Dokument, das am 23. Oktober 2026 übermittelt wurde.",
           "date": "2026-10-23T16:03:30.868Z"
         },
         {
@@ -539,7 +539,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "VD",
@@ -632,14 +632,14 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26555-le-peuple-se-prononcera-sur-linitiative-populaire-baisse-dimpots-pour-tous"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
         {
           "title": "Fisc vaudois : impôts sur une indemnité pour abus, recours en vue",
           "url": "/fr/articles-vaud/fisc-vaud-indemnite-abus-impots/",
-          "excerpt": "À Pully : abus au Collège de Champittet à la fin des années 70 Indemnité de l'Église : CHF 220'000, divisée en deux parties Après l'opposition : CHF 120'000",
+          "excerpt": "D'après la RTS, une personne victime d'abus sexuels à Pully est imposée sur une partie de l'indemnité de 220'000 francs versée par l'Eglise catholique.",
           "date": "2026-10-21T04:19:30.522Z"
         },
         {
@@ -663,7 +663,7 @@
         {
           "title": "Vaud revoit le budget 2027 pour combler le trou de 12 %",
           "url": "/fr/articles-vaud/vaud-revoit-le-budget-2027-pour-combler-le-trou-de-12/",
-          "excerpt": "Recettes fiscales en moins : 272 millions de francs",
+          "excerpt": "Recettes fiscales en moins : 272 millions de francs.",
           "date": "2026-10-08T11:43:59.351Z"
         },
         {
@@ -712,7 +712,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

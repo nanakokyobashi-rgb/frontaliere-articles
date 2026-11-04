@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "mobilita",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "7f8a331fe1f5b3801fa22ece1dafb7f6dafb601c0f2a399dd26399449161579e",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "0690454a62024cfc98f2a87948bc978ea3d885fe4be668e3d33dd8d033911866",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -211,13 +211,13 @@
         {
           "title": "Ginevra chiede lo stop dei lavori per l'autostrada A412",
           "url": "/articoli-ginevra/ginevra-stop-autostrada-a412/",
-          "excerpt": "La Ville de Genève chiede di fermare i lavori della A412 Sei comuni ginevrini aderiscono alla procedura La Cour d'appel de Lyon decide il 14 ottobre Nel mirino",
+          "excerpt": "La Ville de Genève ha avviato una procedura giudiziaria per chiedere lo stop dei lavori dell'autostrada A412 nella vicina Francia.",
           "date": "2026-10-08T15:48:49.584Z"
         },
         {
           "title": "Ginevra-Friburgo, una tratta ferroviaria sotto pressione",
           "url": "/articoli-svizzera/linea-ginevra-friburgo-pressione/",
-          "excerpt": "Tredici interruzioni sulla linea dall'inizio dell'anno Oltre 150’000 passeggeri e più di 700 treni ogni giorno Cavi incendiati, binari danneggiati e un volatile",
+          "excerpt": "Tredici interruzioni dall'inizio dell'anno hanno interessato la linea ferroviaria tra Ginevra e Friburgo.",
           "date": "2026-10-08T21:08:07.621Z"
         },
         {
@@ -258,7 +258,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "GE",
@@ -447,13 +447,13 @@
         {
           "title": "Geneva calls for work on the A412 motorway to be halted",
           "url": "/en/geneva-articles/geneva-stop-a412-highway/",
-          "excerpt": "The City of Geneva calls for work on the A412 to be halted Six Geneva municipalities join the proceedings The Lyon Court of Appeal will rule on October 14",
+          "excerpt": "The City of Geneva has initiated legal proceedings to seek a halt to construction work on the A412 motorway in neighboring France.",
           "date": "2026-10-08T15:48:49.584Z"
         },
         {
           "title": "Geneva–Fribourg, a railway route under pressure",
           "url": "/en/swiss-articles/geneva-fribourg-rail-line-pressure/",
-          "excerpt": "Thirteen disruptions on the line since the beginning of the year More than 150’000 passengers and over 700 trains every day Burnt cables, damaged tracks and a bird",
+          "excerpt": "Thirteen disruptions since the beginning of the year have affected the railway line between Geneva and Fribourg.",
           "date": "2026-10-08T21:08:07.621Z"
         },
         {
@@ -494,7 +494,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "GE",
@@ -677,19 +677,19 @@
         {
           "title": "Baustellen in Genf: Beeinträchtigte Mobilität ab 12. Oktober 2026",
           "url": "/de/genf-artikel/genf-mobilitaetsbaustellen/",
-          "excerpt": "Neue Baustellen im Kanton Genf starten am 12.",
+          "excerpt": "Ab dem 12. Oktober 2026 wird sich die Inbetriebnahme neuer Baustellen auf den Verkehr im Kanton Genf auswirken.",
           "date": "2026-10-10T20:45:24.102Z"
         },
         {
           "title": "Genf fordert den Baustopp für die Autobahn A412",
           "url": "/de/genf-artikel/genf-stopp-autobahn-a412/",
-          "excerpt": "Die Stadt Genf fordert, die Arbeiten an der A412 einzustellen Sechs Genfer Gemeinden schließen sich dem Verfahren an Das Berufungsgericht von Lyon entscheidet",
+          "excerpt": "Die Stadt Genf fordert, die Arbeiten an der A412 einzustellen Sechs Genfer Gemeinden schließen sich dem Verfahren an Das Berufungsgericht von Lyon entscheidet.",
           "date": "2026-10-08T15:48:49.584Z"
         },
         {
           "title": "Genf-Freiburg, eine unter Druck stehende Bahnstrecke",
           "url": "/de/schweiz-artikel/bahnstrecke-genf-freiburg-unter-druck/",
-          "excerpt": "Dreizehn Unterbrechungen auf der Strecke seit Jahresbeginn Über 150’000 Fahrgäste und mehr als 700 Züge täglich Verbrannte Kabel, beschädigte Gleise und ein Vogel",
+          "excerpt": "Seit Jahresbeginn kam es auf der Bahnstrecke zwischen Genf und Freiburg zu dreizehn Unterbrechungen.",
           "date": "2026-10-08T21:08:07.621Z"
         },
         {
@@ -730,7 +730,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "GE",
@@ -919,13 +919,13 @@
         {
           "title": "Genève demande l'arrêt des travaux de l'autoroute A412",
           "url": "/fr/articles-geneve/geneve-arret-travaux-a412/",
-          "excerpt": "La Ville de Genève demande l'arrêt des travaux de l'A412 Six communes genevoises adhèrent à la procédure La Cour d'appel de Lyon statue le 14 octobre",
+          "excerpt": "La Ville de Genève a engagé une procédure judiciaire pour demander l'arrêt des travaux de l'autoroute A412 dans la France voisine.",
           "date": "2026-10-08T15:48:49.584Z"
         },
         {
           "title": "Genève-Fribourg, une ligne ferroviaire sous pression",
           "url": "/fr/articles-suisse/ligne-geneve-fribourg-sous-pression/",
-          "excerpt": "Treize interruptions sur la ligne depuis le début de l’année Plus de 150’000 passagers et plus de 700 trains chaque jour Des câbles incendiés, des voies endommagées et un volatile",
+          "excerpt": "Treize interruptions depuis le début de l’année ont touché la ligne ferroviaire entre Genève et Fribourg.",
           "date": "2026-10-08T21:08:07.621Z"
         },
         {
@@ -966,7 +966,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "fisco",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "0f49aed2c14f535a33fa5fefea79ba5cde6a283a589b3a2ac16cc26dfb1d69ad",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "f569af28033d02ea01295627128abb3a42ff2986570aea494218569e9d66e9d9",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-24T19:51:00.050Z",
+      "updatedAt": "2026-11-03T13:02:31.533Z",
       "keyFacts": 0
     }
   ],
@@ -115,7 +115,7 @@
               "url": "https://www.ur.ch/_rte/information/138694"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -146,7 +146,7 @@
         {
           "title": "Imposte cantonali Cantone di Uri: aliquote e deduzioni",
           "url": "/articoli-svizzera/imposte-cantonal-ur-aliquote-deduzioni/",
-          "excerpt": "Scopri le aliquote e le deduzioni ammesse per le imposte cantonali nel Cantone di Uri",
+          "excerpt": "Scopri le aliquote e le deduzioni ammesse per le imposte cantonali nel Cantone di Uri.",
           "date": "2026-08-16T00:02:21.694Z"
         },
         {
@@ -158,7 +158,7 @@
         {
           "title": "Uri: aliquote di successione e donazione per grado di parentela",
           "url": "/articoli-svizzera/imposta-di-succesione-e-donazione-canton-uri-aliquote/",
-          "excerpt": "Imposta di successione e donazione nel Cantone di Uri: aliquote per grado di parentela",
+          "excerpt": "Imposta di successione e donazione nel Cantone di Uri: aliquote per grado di parentela.",
           "date": "2026-08-16T10:39:50.404Z"
         }
       ],
@@ -185,7 +185,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "UR",
@@ -278,7 +278,7 @@
               "url": "https://www.ur.ch/_rte/information/138694"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -309,7 +309,7 @@
         {
           "title": "Cantonal taxes Canton of Uri: rates and deductions",
           "url": "/en/swiss-articles/uri-cantonal-taxes/",
-          "excerpt": "Find out the rates and deductions allowed for cantonal taxes in the Canton of Uri",
+          "excerpt": "Find out the rates and deductions allowed for cantonal taxes in the Canton of Uri.",
           "date": "2026-08-16T00:02:21.694Z"
         },
         {
@@ -321,7 +321,7 @@
         {
           "title": "Uri: inheritance and donation rates by degree of kinship",
           "url": "/en/swiss-articles/succession-and-donation-taxes-in-the-canton-of-uri/",
-          "excerpt": "Inheritance and gift tax in the Canton of Uri: rates by degree of kinship",
+          "excerpt": "Inheritance and gift tax in the Canton of Uri: rates by degree of kinship.",
           "date": "2026-08-16T10:39:50.404Z"
         }
       ],
@@ -348,7 +348,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "UR",
@@ -441,7 +441,7 @@
               "url": "https://www.ur.ch/_rte/information/138694"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -472,7 +472,7 @@
         {
           "title": "Kantonale Steuern Kanton Uri: Steuersätze und Abzüge",
           "url": "/de/schweiz-artikel/kanton-ur-steuern/",
-          "excerpt": "Entdecken Sie die zulässigen Sätze und Abzüge für die kantonalen Steuern im Kanton Uri",
+          "excerpt": "Entdecken Sie die zulässigen Sätze und Abzüge für die kantonalen Steuern im Kanton Uri.",
           "date": "2026-08-16T00:02:21.694Z"
         },
         {
@@ -484,7 +484,7 @@
         {
           "title": "URI: Erbschafts- und Schenkungssätze nach Verwandtschaftsgrad",
           "url": "/de/schweiz-artikel/erbschafts-und-schenkungssteuern-im-kanton-uri/",
-          "excerpt": "Erbschafts- und Schenkungssteuer im Kanton Uri: Sätze pro Verwandtschaftsgrad",
+          "excerpt": "Erbschafts- und Schenkungssteuer im Kanton Uri: Sätze pro Verwandtschaftsgrad.",
           "date": "2026-08-16T10:39:50.404Z"
         }
       ],
@@ -511,7 +511,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "UR",
@@ -604,7 +604,7 @@
               "url": "https://www.ur.ch/_rte/information/138694"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -635,7 +635,7 @@
         {
           "title": "Impôts cantonaux Canton d'Uri : taux et déductions",
           "url": "/fr/articles-suisse/imposts-cantonaux-ur/",
-          "excerpt": "Découvrez les taux et déductions admis pour les impôts cantonaux dans le canton d'Uri",
+          "excerpt": "Découvrez les taux et déductions admis pour les impôts cantonaux dans le canton d'Uri.",
           "date": "2026-08-16T00:02:21.694Z"
         },
         {
@@ -647,7 +647,7 @@
         {
           "title": "URI : taux de succession et de donation par degré de parenté",
           "url": "/fr/articles-suisse/impots-sur-la-succession-et-la-donation-au-canton-d-uri/",
-          "excerpt": "Droits de succession et de donation dans le canton d'Uri : taux par degré de parenté",
+          "excerpt": "Droits de succession et de donation dans le canton d'Uri : taux par degré de parenté.",
           "date": "2026-08-16T10:39:50.404Z"
         }
       ],
@@ -674,7 +674,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "carburanti",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "b5e493588e1d2e20946358882bb92363dbf5fe54b87f6507bc8404cfae0d86d7",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "c9fa7148538de8a29a86c37148e09fa5c9144d57c7186e6e55f68298506db33b",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "SZ",
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "SZ",
@@ -242,7 +242,7 @@
         {
           "title": "SP Uri: Nein zur Massnahme zur Finanzierung der 13. AHV-Rente",
           "url": "/de/schwyz-artikel/uri-sp-lehnt-ahv-finanzierung-ab/",
-          "excerpt": "SP Uri: Nein zur Massnahme zur Finanzierung der 13.",
+          "excerpt": "Die Quelle berichtet, dass die SP Uri die Finanzierung der 13. AHV-Rente abgelehnt hat.",
           "date": "2026-11-03T23:23:55.230Z"
         },
         {
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "SZ",
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

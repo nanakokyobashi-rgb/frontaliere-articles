@@ -4,8 +4,8 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "pensioni",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "57d781703064c307897def9a28a3ed0ebc6eef86317be700be2c33b8e79f6164",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "5f8c7db7b0bd0b55307cbaf092772cacf69db150e89b652d1f37ef5bfe8655ef",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -165,7 +165,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "SZ",
@@ -308,7 +308,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "SZ",
@@ -416,7 +416,7 @@
         {
           "title": "SP Uri: Nein zur Massnahme zur Finanzierung der 13. AHV-Rente",
           "url": "/de/schwyz-artikel/uri-sp-lehnt-ahv-finanzierung-ab/",
-          "excerpt": "SP Uri: Nein zur Massnahme zur Finanzierung der 13.",
+          "excerpt": "Die Quelle berichtet, dass die SP Uri die Finanzierung der 13. AHV-Rente abgelehnt hat.",
           "date": "2026-11-03T23:23:55.230Z"
         },
         {
@@ -451,7 +451,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "SZ",
@@ -594,7 +594,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

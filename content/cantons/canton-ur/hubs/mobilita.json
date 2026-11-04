@@ -4,8 +4,8 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "mobilita",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "6c90f08afdfd3709c6a133c4e88e94fa5da6b3b499a856880aba5ddc6524d08d",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "fd0f4a125ce3e6c1631a69a80a135879ebe10cfb0809b17dad7c35af6a6e12c3",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -193,7 +193,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "UR",
@@ -369,7 +369,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "UR",
@@ -494,7 +494,7 @@
         {
           "title": "Uri, Verkehr an 31 Stellen am 5. November 2026 erfasst",
           "url": "/de/uri-artikel/verkehrszaehlung-uri-november/",
-          "excerpt": "Im Urner Talboden werden am 5.",
+          "excerpt": "Am Donnerstag, dem 5. November 2026, wird im Urner Talboden eine Erhebung der Verkehrsströme durchgeführt.",
           "date": "2026-10-27T11:34:34.578Z"
         },
         {
@@ -512,25 +512,25 @@
         {
           "title": "Susten und Furka gesperrt, Gotthard tagsüber befahrbar",
           "url": "/de/uri-artikel/susten-furka-wintersperre/",
-          "excerpt": "Ab Mittwoch, dem 28.",
+          "excerpt": "Es lässt sich über die Wintersperre der Furka und des Susten ab Mittwoch, 28. Oktober, berichten sowie über die abweichende Situation am Gotthard, der vorerst tagsüber befahrbar ist.",
           "date": "2026-10-28T17:45:24.471Z"
         },
         {
           "title": "Brand eines Fahrzeugs, Tunnel von Flüelen geschlossen",
           "url": "/de/uri-artikel/fahrzeugbrand-fluelen-tunnel/",
-          "excerpt": "Ein Fahrzeugbrand zwang am Donnerstag, 29.",
+          "excerpt": "Am Donnerstagmorgen, dem 29. Oktober, wurde der Flüeler Tunnel nach einem Fahrzeugbrand etwa eineinhalb Stunden lang gesperrt.",
           "date": "2026-10-31T10:27:30.338Z"
         },
         {
           "title": "Axenstrasse vom 2. bis 6. November vier Nächte lang gesperrt",
           "url": "/de/uri-artikel/axenstrasse-vier-naechte-gesperrt/",
-          "excerpt": "Die Axenstrasse wird vom 2.",
+          "excerpt": "Die Axenstrasse wird während vier Nächten im Zeitraum vom 2. bis 6. November vollständig gesperrt.",
           "date": "2026-10-20T09:56:09.960Z"
         },
         {
           "title": "Passhöhe-Urnerboden: nächtliche Sperrung der Straße",
           "url": "/de/uri-artikel/uri-nachtsperrung-passhoehe/",
-          "excerpt": "Kantonsstraße zwischen Passhöhe und Urnerboden in der Nacht vom 14.",
+          "excerpt": "Von Dienstag, 14. Oktober, bis Mittwoch, 15. Oktober, wird die Kantonsstraße zwischen Passhöhe und Urnerboden nachts gesperrt.",
           "date": "2026-10-08T23:39:16.200Z"
         }
       ],
@@ -545,7 +545,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "UR",
@@ -721,7 +721,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

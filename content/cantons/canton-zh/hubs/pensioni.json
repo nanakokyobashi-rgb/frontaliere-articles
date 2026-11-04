@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "pensioni",
-  "updatedAt": "2026-11-03T10:06:57.473Z",
-  "contentHash": "5a489b3e98abc862caefb98bddd23ed41e7b7759b5087921fcc1cbdf9c7e91d5",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "c7358eb964960aa422d61c685768513cf30498ea65a2150f558d8933c20c9980",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T00:04:45.487Z",
+      "updatedAt": "2026-11-03T13:02:31.533Z",
       "keyFacts": 0
     }
   ],
@@ -166,7 +166,7 @@
               "url": "https://svazurich.ch/aktuell/aktuell/news/empfehlungen/telez-bringt-sommerserie-zum-this-priis-2026.html"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -179,7 +179,7 @@
         {
           "title": "Ciberattacco, colpita la cassa pensioni di Zurigo",
           "url": "/articoli-svizzera/attacco-software-pkzh/",
-          "excerpt": "Dati personali PKZH sottratti in un attacco a un fornitore software Fondi previdenziali e rendite non sono stati toccati L'attacco risale alla fine di settembre",
+          "excerpt": "Giovedì la PKZH, la cassa pensioni della città di Zurigo, ha comunicato che dati personali dei suoi assicurati sono stati sottratti.",
           "date": "2026-10-15T23:41:39.976Z"
         },
         {
@@ -238,7 +238,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "ZH",
@@ -377,7 +377,7 @@
               "url": "https://svazurich.ch/aktuell/aktuell/news/empfehlungen/telez-bringt-sommerserie-zum-this-priis-2026.html"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -390,7 +390,7 @@
         {
           "title": "Cyberattack hits Zurich’s pension fund",
           "url": "/en/swiss-articles/zurich-pension-fund-cyberattack/",
-          "excerpt": "PKZH personal data stolen in an attack on a software provider Pension funds and annuities were not affected The attack dates back to the end of September",
+          "excerpt": "On Thursday, PKZH, the pension fund of the City of Zurich, announced that personal data of its insured members had been stolen.",
           "date": "2026-10-15T23:41:39.976Z"
         },
         {
@@ -449,7 +449,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "ZH",
@@ -588,7 +588,7 @@
               "url": "https://svazurich.ch/aktuell/aktuell/news/empfehlungen/telez-bringt-sommerserie-zum-this-priis-2026.html"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -601,7 +601,7 @@
         {
           "title": "Cyberangriff: Pensionskasse Zürich getroffen",
           "url": "/de/schweiz-artikel/cyberangriff-pensionskasse-zurich/",
-          "excerpt": "Persönliche Daten der PKZH bei einem Angriff auf einen Softwareanbieter entwendet Vorsorgegelder und Renten wurden nicht angetastet Der Angriff ereignete sich Ende September",
+          "excerpt": "Am Donnerstag teilte die PKZH, die Pensionskasse der Stadt Zürich, mit, dass persönliche Daten ihrer Versicherten entwendet worden seien.",
           "date": "2026-10-15T23:41:39.976Z"
         },
         {
@@ -660,7 +660,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "ZH",
@@ -799,7 +799,7 @@
               "url": "https://svazurich.ch/aktuell/aktuell/news/empfehlungen/telez-bringt-sommerserie-zum-this-priis-2026.html"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -812,7 +812,7 @@
         {
           "title": "Cyberattaque, la caisse de pension de Zurich touchée",
           "url": "/fr/articles-suisse/cyberattaque-caisse-pension-zurich/",
-          "excerpt": "Des données personnelles de PKZH volées lors d'une attaque contre un fournisseur de logiciels Les fonds de prévoyance et les rentes n'ont pas été touchés L'attaque remonte à fin septembre",
+          "excerpt": "Jeudi, la PKZH, la caisse de pensions de la ville de Zurich, a annoncé que des données personnelles de ses assurés avaient été dérobées.",
           "date": "2026-10-15T23:41:39.976Z"
         },
         {
@@ -871,7 +871,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-11-03T10:06:57.473Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

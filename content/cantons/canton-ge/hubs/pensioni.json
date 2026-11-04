@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "pensioni",
-  "updatedAt": "2026-10-30T15:34:43.777Z",
-  "contentHash": "ffed397d2f8e928afa9bbb1a04bf40e22709bb00c27cfda2a1531c912649e019",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "902c627a2aa19ce4d5c9b354bc10a03296ce98190648d3361644764527dcaf46",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-30T11:41:14.746Z",
+      "updatedAt": "2026-11-03T13:02:31.533Z",
       "keyFacts": 0
     }
   ],
@@ -166,7 +166,7 @@
               "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19086"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -185,7 +185,7 @@
         {
           "title": "Terzo pilastro 3a: vantaggi per il Canton Ginevra",
           "url": "/articoli-svizzera/terzo-pilastro-3a-vantaggi-canton-ginevra/",
-          "excerpt": "La nuova convenzione tra la Svizzera e l'Italia per i frontalieri prevede la creazione di un regime di imposta unico",
+          "excerpt": "La nuova convenzione tra la Svizzera e l'Italia per i frontalieri prevede la creazione di un regime di imposta unico.",
           "date": "2026-07-23T19:46:26.541Z"
         }
       ],
@@ -208,7 +208,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-30T15:34:43.777Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "GE",
@@ -347,7 +347,7 @@
               "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19086"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -366,7 +366,7 @@
         {
           "title": "Third pillar 3a: advantages for the Canton of Geneva",
           "url": "/en/swiss-articles/third-pillar-3a-cantonal-geneva/",
-          "excerpt": "The new agreement between Switzerland and Italy for border workers provides for the creation of a single tax regime",
+          "excerpt": "The new agreement between Switzerland and Italy for border workers provides for the creation of a single tax regime.",
           "date": "2026-07-23T19:46:26.541Z"
         }
       ],
@@ -389,7 +389,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-30T15:34:43.777Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "GE",
@@ -528,7 +528,7 @@
               "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19086"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -547,7 +547,7 @@
         {
           "title": "Dritte Säule 3a: Vorteile für den Kanton Genf",
           "url": "/de/schweiz-artikel/dritter-pfeiler-3a-kanton-genf/",
-          "excerpt": "Das neue Abkommen zwischen der Schweiz und Italien für Grenzgänger sieht die Schaffung eines einheitlichen Steuersystems vor",
+          "excerpt": "Das neue Abkommen zwischen der Schweiz und Italien für Grenzgänger sieht die Schaffung eines einheitlichen Steuersystems vor.",
           "date": "2026-07-23T19:46:26.541Z"
         }
       ],
@@ -570,7 +570,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-30T15:34:43.777Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "GE",
@@ -709,7 +709,7 @@
               "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19086"
             }
           ],
-          "updatedAt": "2026-10-30T11:41:14.746Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -728,7 +728,7 @@
         {
           "title": "Troisième pilier 3a : avantages pour le canton de Genève",
           "url": "/fr/articles-suisse/troisieme-pilier-3a-cantonal-de-geneve/",
-          "excerpt": "La nouvelle convention entre la Suisse et l'Italie pour les frontaliers prévoit la création d'un régime d'imposition unique",
+          "excerpt": "La nouvelle convention entre la Suisse et l'Italie pour les frontaliers prévoit la création d'un régime d'imposition unique.",
           "date": "2026-07-23T19:46:26.541Z"
         }
       ],
@@ -751,7 +751,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-30T15:34:43.777Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "fisco",
-  "updatedAt": "2026-10-28T11:44:10.713Z",
-  "contentHash": "4de9b66a5c15a84f23a66e74d6b605871145e8d948e2b51b997c57867b78cfe4",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "fabe3615da9d68ba7d1106ba3288f4512fe2bf5f736818afd19c847424c5f521",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -110,7 +110,7 @@
         {
           "title": "Zugo: multa di CHF 900 per mancata dichiarazione fiscale",
           "url": "/articoli-zugo/zugo-multa-mancata-dichiarazione-fiscale/",
-          "excerpt": "Tribunale di Zugo: multa di CHF 900 Cancellata l'imposta effettiva di CHF 41.15 Restano CHF 105 di spese per ritardo La dichiarazione 2023 non è stata",
+          "excerpt": "Nel Canton Zugo, una titolare di impresa individuale dovrà pagare una multa di CHF 900 e CHF 105 di spese per ritardo, nonostante l'amministrazione fiscale abbia rinunciato a riscuotere l'imposta effettiva di CHF 41.15.",
           "date": "2026-10-22T11:31:01.636Z"
         },
         {
@@ -173,7 +173,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-28T11:44:10.713Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "ZG",
@@ -266,7 +266,7 @@
         {
           "title": "Zug: CHF 900 fine for failure to file a tax return",
           "url": "/en/zug-articles/zug-tax-fine-missing-return/",
-          "excerpt": "Zug Court: CHF 900 fine Actual tax of CHF 41.15 cancelled CHF 105 in late fees remain The 2023 tax return was not filed Authority → Administrative Court of Zug",
+          "excerpt": "In the Canton of Zug, a sole proprietor will have to pay a fine of CHF 900 and CHF 105 in late fees, even though the tax authority waived collection of the actual tax of CHF 41.15.",
           "date": "2026-10-22T11:31:01.636Z"
         },
         {
@@ -329,7 +329,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-28T11:44:10.713Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "ZG",
@@ -422,7 +422,7 @@
         {
           "title": "Zug: Busse von CHF 900 wegen Nichtabgabe der Steuererklärung",
           "url": "/de/zug-artikel/zug-steuerstrafe-fehlende-erklarung/",
-          "excerpt": "Gericht Zug: Busse von 900 CHF Effektive Steuer von 41,15 CHF gestrichen 105 CHF Verzugskosten bleiben bestehen Die Steuererklärung 2023 wurde nicht eingereicht",
+          "excerpt": "Gericht Zug: Busse von 900 CHF Effektive Steuer von 41,15 CHF gestrichen 105 CHF Verzugskosten bleiben bestehen Die Steuererklärung 2023 wurde nicht eingereicht.",
           "date": "2026-10-22T11:31:01.636Z"
         },
         {
@@ -485,7 +485,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-28T11:44:10.713Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "ZG",
@@ -578,7 +578,7 @@
         {
           "title": "Zoug : amende de CHF 900 pour non-déclaration fiscale",
           "url": "/fr/articles-zoug/zoug-amende-declaration-fiscale-manquante/",
-          "excerpt": "Tribunal de Zoug : amende de 900 CHF Impôt effectif de 41,15 CHF annulé Frais de retard de 105 CHF restant La déclaration 2023 n'a pas été déposée Autorité →",
+          "excerpt": "Dans le canton de Zoug, une propriétaire d'entreprise individuelle devra payer une amende de 900 CHF et 105 CHF de frais de retard, bien que l'administration fiscale ait renoncé à percevoir l'impôt effectif de 41,15 CHF.",
           "date": "2026-10-22T11:31:01.636Z"
         },
         {
@@ -641,7 +641,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-28T11:44:10.713Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

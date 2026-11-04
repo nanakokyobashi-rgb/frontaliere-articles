@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "carburanti",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "b438b19867fd26ce79a58ecd96e0baaf0f6fb75cb96fd444fe1bc39f23d5ed93",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "c314bb4c6a55b339078a4b698b5862f06bb7af407c357bad4bf1b28292b58af5",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -110,7 +110,7 @@
         {
           "title": "Controllo traffico San Gallo: 105 violazioni accertate il 24 ottobre 2026",
           "url": "/articoli-san-gallo/controllo-traffico-san-gallo-ottobre/",
-          "excerpt": "105 violazioni accertate nella notte del 24 ottobre Circa 150 veicoli e occupanti controllati 70 veicoli oltre 80 km/h sulla A13 Cosa: controllo mirato",
+          "excerpt": "La Polizia cantonale di San Gallo ha condotto nella notte tra venerdì e sabato del 24 ottobre 2026 un controllo mirato nel traffico stradale, insieme al Bundesamt für Zoll und Grenzsicherheit, indicato con l'acronimo…",
           "date": "2026-10-27T00:06:31.670Z"
         }
       ],
@@ -124,7 +124,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "SG",
@@ -221,7 +221,7 @@
         {
           "title": "St. Gallen traffic check: 105 violations confirmed on October 24, 2026",
           "url": "/en/st-gallen-articles/st-gallen-traffic-control-october/",
-          "excerpt": "105 violations recorded during the night of October 24 Approximately 150 vehicles and occupants checked 70 vehicles traveling at over 80 km/h on the A13",
+          "excerpt": "105 violations recorded during the night of October 24 Approximately 150 vehicles and occupants checked 70 vehicles traveling at over 80 km/h on the A13.",
           "date": "2026-10-27T00:06:31.670Z"
         }
       ],
@@ -235,7 +235,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "SG",
@@ -314,7 +314,7 @@
         {
           "title": "Kollision auf der A1 bei Gossau: vier Verletzte",
           "url": "/de/st-gallen-artikel/auffahrunfall-a1-gossau/",
-          "excerpt": "Unfall zwischen zwei Autos auf der A1 bei Gossau am 29.",
+          "excerpt": "Der Unfallhergang wird als Heckkollision zwischen zwei Autos beschrieben.",
           "date": "2026-10-31T10:32:07.607Z"
         },
         {
@@ -332,7 +332,7 @@
         {
           "title": "Verkehrskontrolle St. Gallen: 105 Verstöße am 24. Oktober 2026 festgestellt",
           "url": "/de/st-gallen-artikel/verkehrskontrolle-st-gallen-oktober/",
-          "excerpt": "105 Verstöße in der Nacht vom 24.",
+          "excerpt": "Die Kantonspolizei St. Gallen führte in der Nacht von Freitag auf Samstag, 24. Oktober 2026, gemeinsam mit dem Bundesamt für Zoll und Grenzsicherheit, abgekürzt BAZG, und der Landespolizei des Fürstentums Liechtenstein…",
           "date": "2026-10-27T00:06:31.670Z"
         }
       ],
@@ -346,7 +346,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "SG",
@@ -443,7 +443,7 @@
         {
           "title": "Contrôle du trafic à Saint-Gall : 105 infractions constatées le 24 octobre 2026",
           "url": "/fr/articles-saint-gall/controle-trafic-st-galle-octobre/",
-          "excerpt": "105 infractions constatées dans la nuit du 24 octobre Environ 150 véhicules et occupants contrôlés 70 véhicules à plus de 80 km/h sur l’A13 Quoi : contrôle",
+          "excerpt": "La police cantonale de Saint-Gall a mené, dans la nuit de vendredi à samedi, le 24 octobre 2026, un contrôle ciblé du trafic routier, avec l'Office fédéral de la douane et de la sécurité des frontières, désigné par…",
           "date": "2026-10-27T00:06:31.670Z"
         }
       ],
@@ -457,7 +457,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

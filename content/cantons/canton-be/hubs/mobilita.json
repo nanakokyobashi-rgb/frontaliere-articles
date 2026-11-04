@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "mobilita",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "5fbc0c693c687b154fb4a3dc6ceda313db74e7711d529a06b1ae25a8c786b58a",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "b6f5bebf4cad0b41c9a3dfda80aa507804031167e1ec41c1dc610dab27d397a0",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -161,7 +161,7 @@
         {
           "title": "Abbonamenti trasporti pubblici Canton Berna: zone e tariffe",
           "url": "/articoli-svizzera/trasporti-pubblici-canton-berna-abbonamenti/",
-          "excerpt": "Informazioni sulle zone e le tariffe degli abbonamenti trasporti pubblici nel Canton Berna",
+          "excerpt": "Informazioni sulle zone e le tariffe degli abbonamenti trasporti pubblici nel Canton Berna.",
           "date": "2026-08-13T07:24:39.765Z"
         },
         {
@@ -182,7 +182,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "BE",
@@ -326,7 +326,7 @@
         {
           "title": "Public transport passes Canton Bern: zones and fares",
           "url": "/en/swiss-articles/public-transport-canton-bern-subscriptions/",
-          "excerpt": "Information on areas and fares for public transport passes in the Canton of Bern",
+          "excerpt": "Information on areas and fares for public transport passes in the Canton of Bern.",
           "date": "2026-08-13T07:24:39.765Z"
         },
         {
@@ -347,7 +347,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "BE",
@@ -467,7 +467,7 @@
         {
           "title": "Lützelflüh: Sicherheitsholzerei, Verkehr auf einer Fahrspur",
           "url": "/de/bern-artikel/ramsei-sicherheitsholzerei-strasse/",
-          "excerpt": "In Ramsei, in der Gemeinde Lützelflüh, wird die Sumiswaldstrasse in Richtung Sumiswald vom 2.",
+          "excerpt": "Sie nennt den Ramseibergwald, den Ort Ramsei, die Gemeinde Lützelflüh und die Sumiswaldstrasse in Richtung Sumiswald.",
           "date": "2026-10-27T07:13:00.993Z"
         },
         {
@@ -485,13 +485,13 @@
         {
           "title": "Steuerverwaltung Bern: Schließung vom 23. Oktober bis zum 1. November 2026",
           "url": "/de/bern-artikel/steuerverwaltung-bern-schliessung-2026/",
-          "excerpt": "Die Steuerverwaltung des Kantons Bern setzt die Dienstleistungen vom 23.",
+          "excerpt": "Ab Freitag, 23. Oktober 2026, um 16 Uhr und bis einschließlich Sonntag, 1. November, ist die Steuerverwaltung des Kantons Bern von einer geplanten Unterbrechung betroffen.",
           "date": "2026-10-19T06:59:44.908Z"
         },
         {
           "title": "Öffentliche Verkehrsmittel Kanton Bern: Zonen und Tarife",
           "url": "/de/schweiz-artikel/offentlicher-verkehr-kanton-bern-abonnements/",
-          "excerpt": "Informationen zu den Zonen und Tarifen der ÖV-Abos im Kanton Bern",
+          "excerpt": "Informationen zu den Zonen und Tarifen der ÖV-Abos im Kanton Bern.",
           "date": "2026-08-13T07:24:39.765Z"
         },
         {
@@ -512,7 +512,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "BE",
@@ -656,7 +656,7 @@
         {
           "title": "Abonnements transports publics Canton de Berne : zones et tarifs",
           "url": "/fr/articles-suisse/transports-publiques-canton-de-berne-abonnements/",
-          "excerpt": "Informations sur les zones et les tarifs des abonnements transports publics dans le canton de Berne",
+          "excerpt": "Informations sur les zones et les tarifs des abonnements transports publics dans le canton de Berne.",
           "date": "2026-08-13T07:24:39.765Z"
         },
         {
@@ -677,7 +677,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

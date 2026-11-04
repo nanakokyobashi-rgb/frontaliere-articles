@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "carburanti",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "c97e31fd19dfeb3810238ec1d9a5605ca4513f09e900cc4bccee3cb32e6ce461",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "161aa3262333c474205f5fb1ed4f13705efa7c813221638b5fa53b0af08a2fb4",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "AG",
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "AG",
@@ -290,13 +290,13 @@
         {
           "title": "Fislisbach: Am 5. November Treffen zur Schule Leematten",
           "url": "/de/aargau-artikel/fislisbach-leematten-umfrage/",
-          "excerpt": "Die Gemeinde Fislisbach stellt am 5.",
+          "excerpt": "Die überprüfbaren Informationen betreffen somit das Treffen am 5. November um 19.30 Uhr im Mehrzwecksaal der Schule Leematten, die Präsentation der Ergebnisse durch Sotomo und die Erläuterung des weiteren Vorgehens…",
           "date": "2026-10-31T12:27:23.904Z"
         },
         {
           "title": "MS Saphir: geplanter Umstieg auf grünen Wasserstoff im Jahr 2027",
           "url": "/de/aargau-artikel/saphir-gruener-wasserstoff-axpo/",
-          "excerpt": "Die SGV lässt die MS Saphir von Shiptec AG umrüsten: Die Wiederaufnahme des Fahrbetriebs im Luzerner Seebecken ist für den 26.",
+          "excerpt": "Das Projekt sieht vor, dass die MS Saphir für die einstündige Rundfahrt im Luzerner Seebecken mit Halt in Kastanienbaum grünen Wasserstoff von Axpo verwendet.",
           "date": "2026-10-29T17:53:51.044Z"
         }
       ],
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "AG",
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

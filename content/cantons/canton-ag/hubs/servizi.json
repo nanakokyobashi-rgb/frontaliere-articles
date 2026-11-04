@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "servizi",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "318273168aa584f88dfdf539362fcf424063392290046b12ee5bb02eddba347a",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "1586b4c53ee872ae105153e9efd553ef44ea713fc7740b14f0b9631922a7fc68",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -169,7 +169,7 @@
         {
           "title": "Sistema sanitario svizzero LAMal: guida 2026 Canton Argovia",
           "url": "/articoli-svizzera/lamal-guida-2026-canton-argovia/",
-          "excerpt": "Chi risiede in Svizzera deve avere un'assicurazione LAMal La polizza va stipulata entro tre mesi dall'arrivo Per gli adulti sono previste franchigie di CHF 300",
+          "excerpt": "La guida 2026 al sistema sanitario svizzero parte da una distinzione concreta: la LAMal/KVG è obbligatoria per i residenti, ma il premio non è un tributo e non segue il modello dei contributi sul salario.",
           "date": "2026-10-18T02:46:20.782Z"
         },
         {
@@ -224,7 +224,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "AG",
@@ -366,7 +366,7 @@
         {
           "title": "Swiss LAMal healthcare system: 2026 guide to the Canton of Aargau",
           "url": "/en/swiss-articles/lamal-guide-2026-canton-aargau/",
-          "excerpt": "Anyone residing in Switzerland must have LAMal insurance The policy must be taken out within three months of arrival For adults, deductibles of CHF 300 apply",
+          "excerpt": "The 2026 guide to the Swiss healthcare system starts with a practical distinction: LAMal/KVG is mandatory for residents, but the premium is not a levy and does not follow the model of payroll contributions.",
           "date": "2026-10-18T02:46:20.782Z"
         },
         {
@@ -417,7 +417,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "AG",
@@ -541,7 +541,7 @@
         {
           "title": "Fislisbach: Am 5. November Treffen zur Schule Leematten",
           "url": "/de/aargau-artikel/fislisbach-leematten-umfrage/",
-          "excerpt": "Die Gemeinde Fislisbach stellt am 5.",
+          "excerpt": "Die überprüfbaren Informationen betreffen somit das Treffen am 5. November um 19.30 Uhr im Mehrzwecksaal der Schule Leematten, die Präsentation der Ergebnisse durch Sotomo und die Erläuterung des weiteren Vorgehens…",
           "date": "2026-10-31T12:27:23.904Z"
         },
         {
@@ -610,7 +610,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "AG",
@@ -752,7 +752,7 @@
         {
           "title": "Système de santé suisse LAMal : guide 2026 du canton d'Argovie",
           "url": "/fr/articles-suisse/guide-lamal-2026-canton-argovie/",
-          "excerpt": "Toute personne résidant en Suisse doit avoir une assurance LAMal La police doit être souscrite dans les trois mois suivant l'arrivée Pour les adultes, des franchises de CHF 300 sont prévues",
+          "excerpt": "Le guide 2026 du système de santé suisse part d'une distinction concrète : la LAMal/KVG est obligatoire pour les résidents, mais la prime n'est pas un prélèvement et ne suit pas le modèle des cotisations salariales.",
           "date": "2026-10-18T02:46:20.782Z"
         },
         {
@@ -799,7 +799,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }

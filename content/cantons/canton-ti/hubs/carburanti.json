@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "carburanti",
-  "updatedAt": "2026-11-04T04:08:45.946Z",
-  "contentHash": "054ebeea4b6a0e7dca26a9f29623f0865eb163dcf7309f62fca1e0c673458965",
+  "updatedAt": "2026-11-04T05:38:48.337Z",
+  "contentHash": "28050d0865bc1b6108eab3f22bd48aea386776774bd001883e1db634020ca3fd",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -85,7 +85,7 @@
         {
           "title": "Nuove accise sui carburanti: come cambiano i prezzi in Ticino",
           "url": "/articoli-frontaliere/nuove-accise-carburanti-2026/",
-          "excerpt": "Dai 2 maggio 2026 le accise sulla benzina e sul GPL sono aumentate, mentre il diesel è in lieve calo. Ecco come cambia il costo del carburante per i frontalieri",
+          "excerpt": "Dai 2 maggio 2026 le accise sulla benzina e sul GPL sono aumentate, mentre il diesel è in lieve calo. Ecco come cambia il costo del carburante per i frontalieri.",
           "date": "2026-05-04T09:11:32.268Z"
         },
         {
@@ -97,13 +97,13 @@
         {
           "title": "Caro-carburanti: dove fare il pieno in Ticino",
           "url": "/articoli-frontaliere/carburanti-ticino-confronto-2024/",
-          "excerpt": "Confronta i prezzi della benzina e del diesel in Ticino e risparmia con i nostri consigli pratici",
+          "excerpt": "Confronta i prezzi della benzina e del diesel in Ticino e risparmia con i nostri consigli pratici.",
           "date": "2026-04-27T09:12:47.619Z"
         },
         {
           "title": "Costo benzina in Ticino: perché i frontalieri pagano di più",
           "url": "/articoli-frontaliere/costo-benzina-ticino-frontalieri-2026/",
-          "excerpt": "I prezzi della benzina in Ticino rimangono elevati, con differenze di oltre 20 centesimi al litro tra le diverse zone. Ecco cosa cambia per i frontalieri",
+          "excerpt": "I prezzi della benzina in Ticino rimangono elevati, con differenze di oltre 20 centesimi al litro tra le diverse zone. Ecco cosa cambia per i frontalieri.",
           "date": "2026-05-16T02:47:05.638Z"
         }
       ],
@@ -134,7 +134,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "en": {
       "canton": "TI",
@@ -206,7 +206,7 @@
         {
           "title": "New fuel excise duties: price changes in Ticino",
           "url": "/en/cross-border-articles/new-fuel-taxes-2026/",
-          "excerpt": "As of May 2, 2026, excise duties on gasoline and LPG have increased, while diesel has slightly decreased. Here's how fuel costs change for cross-border workers",
+          "excerpt": "As of May 2, 2026, excise duties on gasoline and LPG have increased, while diesel has slightly decreased. Here's how fuel costs change for cross-border workers.",
           "date": "2026-05-04T09:11:32.268Z"
         },
         {
@@ -218,13 +218,13 @@
         {
           "title": "Fuel price hike: where to fill up in Ticino",
           "url": "/en/cross-border-articles/fuel-comparison-ticino-2024/",
-          "excerpt": "Compare gasoline and diesel prices in Ticino and save with our practical tips",
+          "excerpt": "Compare gasoline and diesel prices in Ticino and save with our practical tips.",
           "date": "2026-04-27T09:12:47.619Z"
         },
         {
           "title": "Why cross-border workers pay more for fuel in Ticino",
           "url": "/en/cross-border-articles/gas-price-ticino-cross-border-workers-2026/",
-          "excerpt": "Fuel prices in Ticino remain high, with differences of over 20 cents per litre between different areas. Here's what changes for cross-border workers",
+          "excerpt": "Fuel prices in Ticino remain high, with differences of over 20 cents per litre between different areas. Here's what changes for cross-border workers.",
           "date": "2026-05-16T02:47:05.638Z"
         }
       ],
@@ -255,7 +255,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "de": {
       "canton": "TI",
@@ -339,7 +339,7 @@
         {
           "title": "Hohe Kraftstoffpreise: Wo tanken in der Schweiz?",
           "url": "/de/grenzgaenger-artikel/kraftstoffvergleich-tessin-2024/",
-          "excerpt": "Vergleichen Sie die Preise für Benzin und Diesel in der Schweiz und sparen Sie mit unseren praktischen Tipps",
+          "excerpt": "Vergleichen Sie die Preise für Benzin und Diesel in der Schweiz und sparen Sie mit unseren praktischen Tipps.",
           "date": "2026-04-27T09:12:47.619Z"
         },
         {
@@ -372,7 +372,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     },
     "fr": {
       "canton": "TI",
@@ -456,13 +456,13 @@
         {
           "title": "Coût des carburants : où faire le plein en Tessin",
           "url": "/fr/articles-frontalier/comparaison-carburants-tessin-2024/",
-          "excerpt": "Comparez les prix de l'essence et du diesel en Tessin et économisez avec nos conseils pratiques",
+          "excerpt": "Comparez les prix de l'essence et du diesel en Tessin et économisez avec nos conseils pratiques.",
           "date": "2026-04-27T09:12:47.619Z"
         },
         {
           "title": "Prix de l'essence au Tessin: pourquoi les frontaliers paient plus cher",
           "url": "/fr/articles-frontalier/prix-essence-tessin-travailleurs-frontaliers-2026/",
-          "excerpt": "Les prix de l'essence au Tessin restent élevés, avec des différences de plus de 20 centimes par litre entre les différentes zones. Voici ce qui change pour les frontaliers",
+          "excerpt": "Les prix de l'essence au Tessin restent élevés, avec des différences de plus de 20 centimes par litre entre les différentes zones. Voici ce qui change pour les frontaliers.",
           "date": "2026-05-16T02:47:05.638Z"
         }
       ],
@@ -493,7 +493,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-11-04T04:08:45.946Z"
+      "updatedAt": "2026-11-04T05:38:48.337Z"
     }
   }
 }
