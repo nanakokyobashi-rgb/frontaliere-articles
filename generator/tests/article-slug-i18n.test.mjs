@@ -389,6 +389,14 @@ describe('unicita degli slug localizzati', () => {
     assert.ok(repairGate >= 0 && repairWrite > repairGate, 'il repair deve rifiutare collisioni prima di ogni write');
     assert.match(POST_REBASE_UNIQUENESS, /kind: 'duplicate-localized-slug'/);
   });
+
+  it('ammette una mappa cantonale assente solo con tutte le sorgenti assenti', () => {
+    assert.match(SRC, /familySourceTransitionState\(\{/);
+    assert.match(SRC, /registryPresent:\s*existsSync\(resolve\(SECTION\.registryFile\)\)/);
+    assert.match(SRC, /metaPresent:\s*ARTICLE_SLUG_LOCALES\.every\(/);
+    assert.match(SRC, /allowMissing:\s*sourceState === 'new'/);
+    assert.doesNotMatch(SRC, /allowMissing:\s*IS_CANTON/);
+  });
 });
 
 describe('slugifySlugPart — il cap non spezza l’ultima parola', () => {

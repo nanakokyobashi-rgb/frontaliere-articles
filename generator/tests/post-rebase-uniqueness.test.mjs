@@ -52,6 +52,7 @@ const GIT_ENV = {
 
 const SURFACES = sectionSurfaces();
 const [FIRST, SECOND] = SURFACES;
+const CANTON = SURFACES.find((surface) => surface.kind === 'canton');
 
 // ── Fixture: le superfici nella forma reale ────────────────────────────────
 
@@ -173,6 +174,36 @@ test('il meta IT mancante con ID su registro/slug e\' un errore fail-closed', ()
     () => snapshotSections([FIRST], readAt, 'against'),
     /meta IT assente o incoerente.*esistente/,
   );
+});
+
+test('una sezione cantonale parziale non viene ridotta a mappa slug vuota', () => {
+  assert.ok(CANTON, 'il core attivo deve esporre una sezione cantonale');
+  const surface = {
+    ...CANTON,
+    registryFile: 'fixture/canton-registry.ts',
+    slugDataFile: 'fixture/canton-slugs.ts',
+    metaFile: 'fixture/canton-meta-it.ts',
+    metaFiles: [
+      'fixture/canton-meta-it.ts',
+      'fixture/canton-meta-en.ts',
+      'fixture/canton-meta-de.ts',
+      'fixture/canton-meta-fr.ts',
+    ],
+    sourceLedger: 'fixture/canton-ledger.json',
+  };
+  const files = {
+    [surface.registryFile]: registrySrc(['esistente']),
+    [surface.metaFiles[0]]: metaSrc(['esistente']),
+    [surface.metaFiles[1]]: metaSrc(['esistente']),
+    [surface.metaFiles[2]]: metaSrc(['esistente']),
+    [surface.metaFiles[3]]: metaSrc(['esistente']),
+    [surface.sourceLedger]: ledgerSrc({}),
+  };
+  assert.throws(
+    () => snapshotSections([surface], (file) => files[file] ?? null, 'against'),
+    /superfici sorgente cantonali parziali.*registro, slug e meta locali/,
+  );
+  assert.doesNotThrow(() => snapshotSections([surface], () => null, 'empty-canton'));
 });
 
 test('un record meta con formato non riconosciuto non puo\' ridurre il contro-corpus', () => {

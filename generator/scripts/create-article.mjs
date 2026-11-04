@@ -398,6 +398,7 @@ import {
   assertLocalizedSlugCandidateUnique,
 } from '../../scripts/lib/article-slug-uniqueness.mjs';
 import { activeCorpusCoreMap } from '../../scripts/lib/corpus-sections.mjs';
+import { familySourceTransitionState } from '../../scripts/lib/section-registry.mjs';
 import { NEWS_SITEMAP_WHITELIST } from '../data/news-sitemap-whitelist.mjs';
 import { metaFieldRegex, unescapeTsValue } from './lib/meta-field-regex.mjs';
 import { findContentDuplicate } from './lib/article-content-duplicate.mjs';
@@ -3771,8 +3772,10 @@ function readSectionSlugData() {
 /**
  * Un file sorgente della sezione attiva. Una sezione cantonale che non ha
  * ancora pubblicato non ha ancora i suoi file (li crea la prima registrazione,
- * `ensureCantonSectionFiles`): per lei «assente» vuol dire «vuota», non un
- * errore. Per le sezioni storiche il file assente resta un errore, come prima.
+ * `ensureCantonSectionFiles`): per lei «assente» vuol dire «vuota» solo quando
+ * tutte le sorgenti canoniche sono assenti; il controllo al confine di
+ * scrittura rifiuta una sezione parziale. Per le sezioni storiche il file
+ * assente resta un errore, come prima.
  */
 function readSectionSourceFile(rel) {
   if (IS_CANTON && !existsSync(resolve(rel))) return '';
@@ -16217,6 +16220,7 @@ function checkForDuplicates(data, { localizedSlugs = true } = {}) {
  * passed this preflight against the same older snapshot.
  */
 function checkTranslatedSlugCollisions(data, { locales = ARTICLE_SLUG_LOCALES } = {}) {
+  const sourceState = cantonSectionSourceState();
   const slugFile = resolve(corpusPath(SECTION_SLUG_DATA_FILE));
   const sectionSlugSrc = existsSync(slugFile) ? readSectionSlugData() : null;
   assertLocalizedSlugCandidateUnique(
@@ -16225,10 +16229,33 @@ function checkTranslatedSlugCollisions(data, { locales = ARTICLE_SLUG_LOCALES } 
     data,
     {
       candidateLocales: locales,
-      allowMissing: IS_CANTON,
+      allowMissing: sourceState === 'new',
       sourceLabel: corpusPath(SECTION_SLUG_DATA_FILE),
     },
   );
+}
+
+/**
+ * A section family is either entirely unmaterialized or has all canonical
+ * sources. Treating only the missing slug file as an empty map would let the
+ * first writer recreate it and discard the routes already present in the
+ * registry/meta surfaces.
+ */
+function cantonSectionSourceState() {
+  if (!IS_CANTON) return 'ready';
+  const state = familySourceTransitionState({
+    registryPresent: existsSync(resolve(SECTION.registryFile)),
+    slugPresent: existsSync(resolve(SECTION.slugDataFile)),
+    metaPresent: ARTICLE_SLUG_LOCALES.every((locale) =>
+      existsSync(resolve(`services/locales/${SECTION.metaPrefix}-${locale}.ts`))),
+  });
+  if (state === 'partial') {
+    throw new Error(
+      `${SECTION_NAME}: superfici sorgente cantonali parziali — registro, slug e meta locali `
+      + 'devono essere tutti presenti o tutti assenti prima della scrittura',
+    );
+  }
+  return state;
 }
 
 // ── Governed image generation ───────────────────────────────────────────────

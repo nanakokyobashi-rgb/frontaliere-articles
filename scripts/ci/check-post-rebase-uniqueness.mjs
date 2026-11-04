@@ -115,6 +115,7 @@ import { metaFieldRegex, unescapeTsValue } from '../../generator/scripts/lib/met
 import { itemIdentityOf, ledgerArticleIds, legacyNewsUrlKey, readLedgerEntry, SOURCE_URL_TTL_DAYS } from '../../generator/scripts/lib/source-url-ledger.mjs';
 import { findRecentTopicCoverage, topicCoverageKey } from '../../generator/scripts/lib/topic-coverage-guard.mjs';
 import { readTopLevelString, scanTopLevelArticleRecords } from '../../scripts/lib/article-registry-reader.mjs';
+import { familySourceTransitionState } from '../lib/section-registry.mjs';
 import { SECTIONS as SECTION_SURFACES } from '../lib/article-surfaces.mjs';
 
 export const VIOLATION_MARKER = 'POST_REBASE_UNIQUENESS_VIOLATION';
@@ -141,7 +142,7 @@ export function registryIdsOf(src) {
  *
  * @param {Array<{section: string, registryFile: string, slugDataFile: string}>} [coreList]
  * @param {Record<string, {metaFiles?: string[], sourceLedger?: string}>} [surfaces]
- * @returns {Array<{section: string, registryFile: string, slugDataFile: string, metaFile: string, sourceLedger: string}>}
+ * @returns {Array<{section: string, registryFile: string, slugDataFile: string, metaFile: string, metaFiles: string[], sourceLedger: string}>}
  */
 export function sectionSurfaces(coreList = activeCorpusCoreEntries(), surfaces = SECTION_SURFACES) {
   if (!Array.isArray(coreList) || coreList.length === 0) {
@@ -155,7 +156,14 @@ export function sectionSurfaces(coreList = activeCorpusCoreEntries(), surfaces =
         + 'senza, il dedup della fonte fra sezioni non e\' verificabile',
       );
     }
-    const metaFile = surfaces?.[core.section]?.metaFiles?.find((file) => file.endsWith('-it.ts'));
+    const metaFiles = surfaces?.[core.section]?.metaFiles;
+    const metaFile = metaFiles?.find((file) => file.endsWith('-it.ts'));
+    if (!Array.isArray(metaFiles) || metaFiles.length === 0) {
+      throw new Error(
+        `la sezione '${core.section}' non ha i file meta locali in article-surfaces.mjs: `
+        + 'senza la famiglia completa non e\' possibile verificare il corpus',
+      );
+    }
     if (typeof metaFile !== 'string' || !metaFile) {
       throw new Error(
         `la sezione '${core.section}' e' nel core ma non ha il meta IT in article-surfaces.mjs (SECTIONS.${core.section}.metaFiles): `
@@ -169,6 +177,7 @@ export function sectionSurfaces(coreList = activeCorpusCoreEntries(), surfaces =
       slugConst: core.slugConst,
       kind: core.kind,
       metaFile,
+      metaFiles,
       sourceLedger,
     };
   });
@@ -263,9 +272,10 @@ function assertArticleMetaCoverage({ slugIds, registryIds, articles, titleIds, e
  * @returns {Record<string, {slugIds: string[], localizedSlugs: object, registryIds: string[], articles: Record<string, {id: string, title: string, excerpt: string, date: string|null}>, ledger: Record<string, unknown>}>}
  */
 export function snapshotSections(surfaces, readAt, label) {
-  // `null` = il path non c'e' (sezione ancora vuota): legittimo. Un file che
-  // c'e' ma e' vuoto non lo e': letto come «nessun id / nessuna voce» toglierebbe
-  // quella sezione dal confronto proprio mentre dovrebbe fermare un duplicato.
+  // `null` = il path non c'e'. Per una sezione cantonale e' una sezione vuota
+  // solo se registro, slug e tutti i meta locali sono assenti insieme; una
+  // transizione parziale deve fermare il confronto invece di ridurre il
+  // contro-corpus.
   const read = (path) => {
     const text = readAt(path);
     if (text != null && text.trim() === '') {
@@ -276,16 +286,33 @@ export function snapshotSections(surfaces, readAt, label) {
   const out = {};
   for (const s of surfaces) {
     const slugSource = read(s.slugDataFile);
+    const registrySource = read(s.registryFile);
+    const metaSource = read(s.metaFile);
+    const metaSources = s.kind === 'canton'
+      ? s.metaFiles.map((file) => file === s.metaFile ? metaSource : read(file))
+      : [];
+    const sourceState = s.kind === 'canton'
+      ? familySourceTransitionState({
+        registryPresent: registrySource !== null,
+        slugPresent: slugSource !== null,
+        metaPresent: metaSources.every((source) => source !== null),
+      })
+      : 'ready';
+    if (sourceState === 'partial') {
+      throw new Error(
+        `${label}:${s.section}: superfici sorgente cantonali parziali — registro, slug e meta locali `
+        + 'devono essere tutti presenti o tutti assenti',
+      );
+    }
     const localizedSlugs = parseLocalizedArticleSlugMap(
       slugSource,
       s.slugConst,
-      { allowMissing: s.kind === 'canton', sourceLabel: `${label}:${s.slugDataFile}` },
+      { allowMissing: sourceState === 'new', sourceLabel: `${label}:${s.slugDataFile}` },
     );
     const slugIds = Object.keys(localizedSlugs);
-    const registrySource = read(s.registryFile);
     const registryIds = registryIdsOf(registrySource);
     const dates = registryDatesById(registrySource);
-    const parsedMeta = parseArticleMeta(read(s.metaFile), `${label}:${s.metaFile}`);
+    const parsedMeta = parseArticleMeta(metaSource, `${label}:${s.metaFile}`);
     assertArticleMetaCoverage({ slugIds, registryIds, ...parsedMeta }, `${label}:${s.metaFile}`);
     const articles = Object.fromEntries(Object.entries(parsedMeta.articles).map(([id, article]) => [
       id,
