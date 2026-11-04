@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-finanziamento-riarmo-esercito.webp",
-      "sha256": "0ee3fafbcd62b0e9f08f56e89513e41e5f9b2965e4f8f4dd301ef67ce87fa58f"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-finanziamento-riarmo-esercito-480w.webp",
-      "sha256": "0b78a9b24a66ae052677a127ba04fd0ad5ccb92bcdaeaadc0f1878277c36560c"
-    }
-  ]
+  "items": []
 }
