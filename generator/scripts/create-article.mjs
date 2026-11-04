@@ -18146,6 +18146,8 @@ async function main() {
       try {
         const pool = await _buildDiscoveryPool(evidenceForDiscovery, {
           provenHeadlines: provenStrings,
+          deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS,
+          deadlineReserveMs: MIN_VIABLE_ATTEMPT_MS,
         });
         const trendSignals = Number(pool.perSource?.trends) || 0;
         console.error(`DISCOVERY_POOL_BUILD orphan=${pool.perSource.orphan} suggest=${pool.perSource.suggest} news=${pool.perSource.news} trends=${pool.perSource.trends} trendSignals=${trendSignals} postDedup=${pool.postDedupCount}`);
@@ -18221,7 +18223,11 @@ async function main() {
         try {
           _provenHeadlinesForDiscovery = headlines.slice();
           const provenStrings = headlines.map((h) => String(h.headline || ''));
-          const gnPool = await _buildDiscoveryPool(evidenceForDiscovery, { provenHeadlines: provenStrings });
+          const gnPool = await _buildDiscoveryPool(evidenceForDiscovery, {
+            provenHeadlines: provenStrings,
+            deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS,
+            deadlineReserveMs: MIN_VIABLE_ATTEMPT_MS,
+          });
           const newsOnly = (gnPool.candidates || []).filter((c) => c && c.source === 'news');
           const gnHeadlines = _discoveryCandidatesToHeadlines(newsOnly).slice(0, GOOGLE_NEWS_INJECT_MAX);
           if (gnHeadlines.length > 0) {
@@ -18786,7 +18792,11 @@ async function main() {
             : (headlines || []);
           const provenStrings = atlas.map((h) => String(h.headline || ''));
           _provenHeadlinesForDiscovery = atlas;
-          const pool = await _buildDiscoveryPool(evidenceForDiscovery, { provenHeadlines: provenStrings });
+          const pool = await _buildDiscoveryPool(evidenceForDiscovery, {
+            provenHeadlines: provenStrings,
+            deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS,
+            deadlineReserveMs: MIN_VIABLE_ATTEMPT_MS,
+          });
           const trendSignals = Number(pool.perSource?.trends) || 0;
           console.error(`DISCOVERY_POOL_BUILD_FALLBACK orphan=${pool.perSource.orphan} suggest=${pool.perSource.suggest} news=${pool.perSource.news} trends=${pool.perSource.trends} trendSignals=${trendSignals} postDedup=${pool.postDedupCount}`);
           const fbHeadlines = _discoveryCandidatesToHeadlines(pool.candidates);
