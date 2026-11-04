@@ -20269,8 +20269,8 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   appendSourceCitation(data, url);
 
   // The repair can change the text from which locale metadata was derived;
-  // restore the shared SEO fields after all body replacements, then keep the
-  // municipality postcondition last on the metadata surfaces.
+  // restore the shared SEO fields after all body replacements. Municipality
+  // names are restored again after the final excerpt repair below.
   if (sourceCopyFinalChanged) refreshSourceCopyDerivedMetadata(data);
   preserveMunicipalityNamesInMetadata(data);
 
@@ -20317,6 +20317,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // of the required English `Zurich`.
   decodeArticleEntities(data);
   const excerptRepairs = repairGeneratedArticleDescriptions(data);
+  preserveMunicipalityNamesInMetadata(data);
   assertArticleDescriptionsArePlain(data);
   if (excerptRepairs.length > 0) {
     assertGeneratedArticleQuality(data, {
@@ -21494,6 +21495,7 @@ export async function registerArticleFiles(data, opts = {}) {
   clampSeoDescriptions(data);
   ensureSeoDescriptionMinimum(data);
   repairGeneratedArticleDescriptions(data);
+  preserveMunicipalityNamesInMetadata(data);
   assertArticleDescriptionsArePlain(data);
   const slugs = deriveAndSanitizeArticleSlugs(data);
   assertSlugFallbackRunBudget();
@@ -21502,6 +21504,15 @@ export async function registerArticleFiles(data, opts = {}) {
   // in the primary AI path: `deriveAndSanitizeArticleSlugs()` can intentionally
   // retain an Italian fallback when a translated candidate is unusable.
   checkTranslatedSlugCollisions(data);
+  // Secondary producers do not pass the primary path's Step 3a.2. Recheck
+  // lexical and semantic duplicates here against the final repaired excerpt,
+  // before the shared writer touches any published file.
+  console.error('🔍 Verifica duplicati post-riparazione nel writer condiviso:');
+  checkForDuplicates(data);
+  await checkSemanticNearDuplicate(data, {
+    store: loadEmbeddingStore({ binPath: SECTION.embeddingsBinPath }),
+    meta: loadEmbeddingMeta({ metaPath: SECTION.embeddingsMetaPath }),
+  });
   // Stessa ragione, stesso percorso condiviso: i quattro produttori secondari
   // (daily-brief, events-digest, border-wait-ranking, journalist) importano
   // registerArticleFiles() direttamente e non passano mai dallo Step 3a.2 del

@@ -2012,6 +2012,230 @@
       "field": "structuredData.description"
     }
   ],
+  "resolvedEntries": [
+    {
+      "file": "content/blog-meta-ch-it.ts",
+      "locale": "it",
+      "id": "g-bewilligung-antrag-2026-step",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/blog-meta-it.ts",
+      "locale": "it",
+      "id": "cantello-teatro-dialettale-ottobre-2026",
+      "field": "excerpt"
+    },
+    {
+      "file": "content/cantons/canton-ti/seo.ts",
+      "locale": "it",
+      "id": "gottardo-quadri-cupra-berna",
+      "field": "description"
+    },
+    {
+      "file": "content/cantons/canton-ti/seo.ts",
+      "locale": "it",
+      "id": "gottardo-quadri-cupra-berna",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-2.ts",
+      "locale": "it",
+      "id": "swissminiatur-miniera-sessa-2026",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "aggressioni-notte-lugano",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "aggressioni-notte-lugano",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "cantello-teatro-dialettale-ottobre-2026",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "cantello-teatro-dialettale-ottobre-2026",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "cardano-al-campo-minorenne-arresto",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "cardano-al-campo-minorenne-arresto",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "fedeli-chiedono-chiarezza-diocesi-2026",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "fedeli-chiedono-chiarezza-diocesi-2026",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "fedeli-chiedono-chiarezza-diocesi-2026",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "littizzetto-critica-svizzera-crans-montana",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "littizzetto-critica-svizzera-crans-montana",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "ridurre-tempi-ripristino-a2-mezzovico",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "vivere-como-lavorare-ticino-frontaliere",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-5.ts",
+      "locale": "it",
+      "id": "vivere-como-lavorare-ticino-frontaliere",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-6.ts",
+      "locale": "it",
+      "id": "cybersicurezza-industriale-ticino-2026",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-6.ts",
+      "locale": "it",
+      "id": "rinascita-praterie-sommerse-laghi-ticino",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-6.ts",
+      "locale": "it",
+      "id": "trasparenza-iniziative-popolari-ticino-2026",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-7.ts",
+      "locale": "it",
+      "id": "iniziativa-democrazia-respinta-2026",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-7.ts",
+      "locale": "it",
+      "id": "iniziativa-democrazia-respinta-2026",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-7.ts",
+      "locale": "it",
+      "id": "iniziativa-democrazia-respinta-2026",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "accordo-ue-sovranita-fiscale",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "accordo-ue-sovranita-fiscale",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "di-molto-swiss-nuovo-ccl-per-personale-di-terra-settimana-scende-a-40-ore",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "g-bewilligung-antrag-2026-step",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "hacker-frigoriferi-connessi",
+      "field": "ogDescription"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "parlamento-svizzera-cripto-centrali",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "parlamento-svizzera-cripto-centrali",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "seco-fmi-partenariato-economia",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "seco-fmi-partenariato-economia",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "svizzera-attualita-istituzioni-2026",
+      "field": "description"
+    },
+    {
+      "file": "content/seo/seo-blog-ch.ts",
+      "locale": "it",
+      "id": "svizzera-attualita-istituzioni-2026",
+      "field": "structuredData.description"
+    },
+    {
+      "file": "content/seo/seo-blog.ts",
+      "locale": "it",
+      "id": "autostrada-a9-chiude-de-notti-2026",
+      "field": "ogDescription"
+    }
+  ],
   "entries": [
     {
       "file": "content/blog-meta-canton-fr-de.ts",

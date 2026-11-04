@@ -238,7 +238,15 @@ const excerptCompletenessBaseline = JSON.parse(
 const excerptCompletenessGate = assertNoExcerptCompletenessRegression(
   excerptCompleteness.details,
   excerptCompletenessBaseline,
+  { requireCompleteLedger: true },
 );
+if (excerptCompletenessGate.resolved.length > 0) {
+  throw new Error(
+    'build-api: ' + excerptCompletenessGate.resolved.length +
+      ' approved incomplete field(s) are now complete. Remove them from entries and record them in resolvedEntries before publishing. Examples: ' +
+      excerptCompletenessGate.resolved.slice(0, 5).join('; '),
+  );
+}
 if (excerptCompletenessGate.known.length > 0) {
   const examples = excerptCompletenessGate.known
     .slice(0, 5)
