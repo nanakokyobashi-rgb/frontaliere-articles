@@ -91,6 +91,10 @@
     "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261103-stadler-construit-un-nouveau-centre-et-cree-80-emplois.html": {
       "section": "canton-ju",
       "ts": 1793720229394
+    },
+    "canton-ju::https://www.rfj.ch/rfj/actualite/suisse/20261103-trafic-ferroviaire-interrompu-entre-lausanne-et-geneve.html": {
+      "section": "canton-ju",
+      "ts": 1793755800623
     }
   }
 }
