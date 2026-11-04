@@ -15840,6 +15840,15 @@ export function refreshSourceCopyDerivedMetadata(data) {
     // Body-derived caps can end mid-sentence; repair all locale and shared SEO
     // fields before optimizeSeoMetadata runs its completeness and length gates.
     repairGeneratedArticleDescriptions(data);
+    for (const locale of ['it', 'en', 'de', 'fr']) {
+      const content = data?.content?.[locale];
+      if (typeof content?.seoDescription !== 'string') continue;
+      assertSeoDescriptionMinimum(content.seoDescription, {
+        id: `${data?.id || 'unknown'}:${locale}`,
+        sourceDescriptionLength: content.seoDescription.length,
+        sourceExcerptLength: typeof content.excerpt === 'string' ? content.excerpt.length : undefined,
+      });
+    }
     optimizeSeoMetadata(data);
   }
   return data;

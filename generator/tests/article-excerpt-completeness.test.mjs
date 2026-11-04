@@ -86,8 +86,10 @@ test('build-api controlla la completezza prima di cancellare la superficie pubbl
 
   const refreshStart = generator.indexOf('export function refreshSourceCopyDerivedMetadata(data)');
   const refreshRepair = generator.indexOf('repairGeneratedArticleDescriptions(data);', refreshStart);
+  const refreshMinimumGuard = generator.indexOf('assertSeoDescriptionMinimum(content.seoDescription', refreshStart);
   const refreshOptimize = generator.indexOf('optimizeSeoMetadata(data);', refreshStart);
   assert.ok(refreshRepair > refreshStart && refreshOptimize > refreshRepair, 'il refresh deve riparare prima dell’ottimizzazione SEO');
+  assert.ok(refreshMinimumGuard > refreshRepair && refreshMinimumGuard < refreshOptimize, 'il refresh deve mantenere il minimo dopo il repair');
 
   const generationStart = generator.indexOf('async function generateAndValidateArticle(');
   const preOptimizeRepair = generator.indexOf('preTranslationExcerptRepairs = repairGeneratedArticleDescriptions(data);', generationStart);

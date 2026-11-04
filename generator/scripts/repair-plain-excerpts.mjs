@@ -41,6 +41,13 @@ const repoRoot = path.resolve(__dirname, '..', '..');
 const BASELINE_PATH = path.join(repoRoot, 'scripts/ci/excerpt-completeness-baseline.json');
 const bodyMapCache = new Map();
 const bodyTextCache = new Map();
+const SIBLING_DESCRIPTION_FIELDS = new Set([
+  'description',
+  'excerpt',
+  'ogDescription',
+  'seoDescription',
+  'structuredData.description',
+]);
 const allBodyRoots = readdirSync(path.join(repoRoot, 'content'), { withFileTypes: true })
   .filter((entry) => entry.isDirectory() && entry.name.startsWith('blog-body'))
   .map((entry) => path.join('content', entry.name));
@@ -191,6 +198,7 @@ function repairValue(value, context, recordSources = []) {
   }
   if (strategy === 'c') {
     for (const recordSource of recordSources) {
+      if (!SIBLING_DESCRIPTION_FIELDS.has(recordSource.field)) continue;
       if (recordSource.file === context.file && recordSource.field === context.field) continue;
       const candidate = selectCompleteExcerptSource(recordSource.value, {
         locale: context.locale,
