@@ -4,17 +4,17 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "eventi",
-  "updatedAt": "2026-11-03T00:06:00.232Z",
-  "contentHash": "cebae539a902b0f4df3f7cb32ff82927582d32b49f955caefb94e1fc11439eeb",
+  "updatedAt": "2026-11-04T04:08:45.946Z",
+  "contentHash": "8058fd116f5d523fbec1a6e1cee421f7aa0e01569a610e5fdd56d51d416e26b3",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-02T13:10:19.053Z",
+      "updatedAt": "2026-11-03T20:20:58.923Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-02T13:52:53.767Z",
+      "updatedAt": "2026-11-03T13:02:31.533Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "40",
+          "value": "42",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,12 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Séance d'information \"Admissions 2027-28\" - en présentiel",
-              "detail": "Fribourg",
-              "date": "2026-11-03",
-              "url": "https://www.fr.ch/eikon/evenements/seance-dinformation-admissions-2027-28-en-presentiel"
-            },
             {
               "label": "C’est la fête",
               "detail": "Villars-sur-Glâne",
@@ -96,11 +90,17 @@
               "detail": "Vully Blues Club",
               "date": "2026-11-06",
               "url": "https://www.guidle.com/it/musees/enfants/evenements/cudrefin/vully-blues-festival_AQdXDbU"
+            },
+            {
+              "label": "Bien-être menstruel",
+              "detail": "Villars-sur-Glâne",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bien-etre-menstruel/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/friburgo/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -113,7 +113,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +135,7 @@
           "url": "/eventi/friburgo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "en": {
       "canton": "FR",
@@ -145,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "40",
+          "value": "42",
           "note": "from the site’s events calendar"
         }
       ],
@@ -155,12 +155,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Séance d'information \"Admissions 2027-28\" - en présentiel",
-              "detail": "Fribourg",
-              "date": "2026-11-03",
-              "url": "https://www.fr.ch/eikon/evenements/seance-dinformation-admissions-2027-28-en-presentiel"
-            },
             {
               "label": "C’est la fête",
               "detail": "Villars-sur-Glâne",
@@ -214,11 +208,17 @@
               "detail": "Vully Blues Club",
               "date": "2026-11-06",
               "url": "https://www.guidle.com/it/musees/enfants/evenements/cudrefin/vully-blues-festival_AQdXDbU"
+            },
+            {
+              "label": "Bien-être menstruel",
+              "detail": "Villars-sur-Glâne",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bien-etre-menstruel/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/fribourg/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -231,7 +231,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -253,7 +253,7 @@
           "url": "/en/events/fribourg/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "de": {
       "canton": "FR",
@@ -263,7 +263,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "40",
+          "value": "42",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -273,12 +273,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Séance d'information \"Admissions 2027-28\" - en présentiel",
-              "detail": "Fribourg",
-              "date": "2026-11-03",
-              "url": "https://www.fr.ch/eikon/evenements/seance-dinformation-admissions-2027-28-en-presentiel"
-            },
             {
               "label": "C’est la fête",
               "detail": "Villars-sur-Glâne",
@@ -332,11 +326,17 @@
               "detail": "Vully Blues Club",
               "date": "2026-11-06",
               "url": "https://www.guidle.com/it/musees/enfants/evenements/cudrefin/vully-blues-festival_AQdXDbU"
+            },
+            {
+              "label": "Bien-être menstruel",
+              "detail": "Villars-sur-Glâne",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bien-etre-menstruel/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/freiburg/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -349,7 +349,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -371,7 +371,7 @@
           "url": "/de/veranstaltungen/freiburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "fr": {
       "canton": "FR",
@@ -381,7 +381,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "40",
+          "value": "42",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -391,12 +391,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Séance d'information \"Admissions 2027-28\" - en présentiel",
-              "detail": "Fribourg",
-              "date": "2026-11-03",
-              "url": "https://www.fr.ch/eikon/evenements/seance-dinformation-admissions-2027-28-en-presentiel"
-            },
             {
               "label": "C’est la fête",
               "detail": "Villars-sur-Glâne",
@@ -450,11 +444,17 @@
               "detail": "Vully Blues Club",
               "date": "2026-11-06",
               "url": "https://www.guidle.com/it/musees/enfants/evenements/cudrefin/vully-blues-festival_AQdXDbU"
+            },
+            {
+              "label": "Bien-être menstruel",
+              "detail": "Villars-sur-Glâne",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bien-etre-menstruel/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/fribourg/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -467,7 +467,7 @@
               "url": "https://www.fr.ch/de/rimu/news/oeffentlicher-informationsanlass-zum-projekt-einer-wildtierpassage-in-saussivue"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -489,7 +489,7 @@
           "url": "/fr/evenements/fribourg/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     }
   }
 }

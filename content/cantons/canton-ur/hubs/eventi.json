@@ -4,12 +4,12 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "eventi",
-  "updatedAt": "2026-11-03T00:06:00.232Z",
-  "contentHash": "834db593a438adbb23a530e251a8924be7408653292a558f1e1db15cbcdfbb45",
+  "updatedAt": "2026-11-04T04:08:45.946Z",
+  "contentHash": "7630f0d7120413e4cc92e945be2fbb30b6f1078cbe7ecc5edf585ffa1034d2b0",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-02T13:10:19.053Z",
+      "updatedAt": "2026-11-03T20:20:58.923Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "18",
+          "value": "17",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,18 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Mythen, Trends und Gesundheit - was steckt wirklich hinter der Ernährung?",
-              "detail": "Altdorf",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mythen-trends-und-gesundheit-was-steckt-wirklich-hinter-der-ernaehrung/"
-            },
-            {
-              "label": "Holz | Stein | Farbe - Kunstausstellung",
-              "detail": "Zeughaus — in corso, ultimo giorno: 3 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/holz-stein-farbe-kunstausstellung/"
-            },
             {
               "label": "Tiro del Rütli a 300 m",
               "detail": "Seelisberg",
@@ -91,11 +79,23 @@
               "detail": "Altdorf",
               "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-berner-oergeliplausch/"
+            },
+            {
+              "label": "Digital sicher? - Wie wir uns vor Gefahren im Netz schützen",
+              "detail": "Altdorf",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/digital-sicher-wie-wir-uns-vor-gefahren-im-netz-schuetzen/"
+            },
+            {
+              "label": "Impulsabend - KI in der Vereinsarbeit",
+              "detail": "Working Point",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/impulsabend-ki-in-der-vereinsarbeit/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/uri/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/uri/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "en": {
       "canton": "UR",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "18",
+          "value": "17",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,18 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "M Tr Then, Trends und Gesundheit -as",
-              "detail": "Altdorf",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mythen-trends-und-gesundheit-was-steckt-wirklich-hinter-der-ernaehrung/"
-            },
-            {
-              "label": "Holz | Stein | Farbe - Kunstausstellung",
-              "detail": "Zeughaus — ongoing, last day: 3 November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/holz-stein-farbe-kunstausstellung/"
-            },
             {
               "label": "Rütlischiessen 300 m",
               "detail": "Seelisberg",
@@ -196,11 +184,23 @@
               "detail": "Altdorf",
               "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-berner-oergeliplausch/"
+            },
+            {
+              "label": "Digital sicher? - Wie wir uns vor Gefahren im Netz schützen",
+              "detail": "Altdorf",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/digital-sicher-wie-wir-uns-vor-gefahren-im-netz-schuetzen/"
+            },
+            {
+              "label": "Impulsabend - KI in der Vereinsarbeit",
+              "detail": "Working Point",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/impulsabend-ki-in-der-vereinsarbeit/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/uri/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/uri/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "de": {
       "canton": "UR",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "18",
+          "value": "17",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,18 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Mythen, Trends und Gesundheit – was steckt wirklich hinter der Ernährung?",
-              "detail": "Altdorf",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mythen-trends-und-gesundheit-was-steckt-wirklich-hinter-der-ernaehrung/"
-            },
-            {
-              "label": "Holz | Stein | Farbe - Kunstausstellung",
-              "detail": "Zeughaus — läuft, letzter Tag: 3. November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/holz-stein-farbe-kunstausstellung/"
-            },
             {
               "label": "Rütlischiessen 300 m",
               "detail": "Seelisberg",
@@ -301,11 +289,23 @@
               "detail": "Altdorf",
               "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-berner-oergeliplausch/"
+            },
+            {
+              "label": "Digital sicher? - Wie wir uns vor Gefahren im Netz schützen",
+              "detail": "Altdorf",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/digital-sicher-wie-wir-uns-vor-gefahren-im-netz-schuetzen/"
+            },
+            {
+              "label": "Impulsabend - KI in der Vereinsarbeit",
+              "detail": "Working Point",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/impulsabend-ki-in-der-vereinsarbeit/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/uri/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/uri/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "fr": {
       "canton": "UR",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "18",
+          "value": "17",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,18 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Mythen, Trends und Gesundheit - was steckt wirklich hinter der Ernährung ?",
-              "detail": "Altdorf",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mythen-trends-und-gesundheit-was-steckt-wirklich-hinter-der-ernaehrung/"
-            },
-            {
-              "label": "Holz | Stein | Farbe - Kunstausstellung",
-              "detail": "Zeughaus — en cours, dernier jour : 3 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/holz-stein-farbe-kunstausstellung/"
-            },
             {
               "label": "Tir du Rütli à 300 m",
               "detail": "Seelisberg",
@@ -406,11 +394,23 @@
               "detail": "Altdorf",
               "date": "2026-11-07",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-berner-oergeliplausch/"
+            },
+            {
+              "label": "Digital sicher? - Wie wir uns vor Gefahren im Netz schützen",
+              "detail": "Altdorf",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/digital-sicher-wie-wir-uns-vor-gefahren-im-netz-schuetzen/"
+            },
+            {
+              "label": "Impulsabend - KI in der Vereinsarbeit",
+              "detail": "Working Point",
+              "date": "2026-11-09",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/impulsabend-ki-in-der-vereinsarbeit/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/uri/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/uri/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     }
   }
 }

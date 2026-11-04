@@ -4,17 +4,17 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "eventi",
-  "updatedAt": "2026-11-03T00:06:00.232Z",
-  "contentHash": "562e659a6eac77742297f45e5b4cf98ae8f0e7b5ee408e8f64258b68ed614486",
+  "updatedAt": "2026-11-04T04:08:45.946Z",
+  "contentHash": "48857c2e421b747d352f239a9dfabe1f1a6617a5cdbdf80aad1728580222d502",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-02T13:10:19.053Z",
+      "updatedAt": "2026-11-03T20:20:58.923Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-02T13:52:53.767Z",
+      "updatedAt": "2026-11-03T13:02:31.533Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "19",
+          "value": "20",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,24 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Brunch + visite guidée",
-              "detail": "Musée d'ethnographie, Neuchâtel — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/brunch-visite-guidee-2/"
-            },
-            {
-              "label": "Apéro Contes",
-              "detail": "La Chaux-de-Fonds — in corso, ultimo giorno: 28 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/apero-contes/"
-            },
-            {
-              "label": "Chocolatissimo",
-              "detail": "Chocolatissimo, Neuchâtel — in corso, ultimo giorno: 7 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/chocolatissimo/"
-            },
             {
               "label": "Absolute beginning",
               "detail": "Neuchâtel",
@@ -66,6 +48,24 @@
               "detail": "Centre de culture ABC, La Chaux-de-Fonds",
               "date": "2026-11-04",
               "url": "https://www.guidle.com/it/evenements/musique/la-chaux-de-fonds/samuel-blaser-quartet_AyhmTLJ"
+            },
+            {
+              "label": "Brunch + visite guidée",
+              "detail": "Musée d'ethnographie, Neuchâtel — in corso, ultimo giorno: 15 novembre 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/brunch-visite-guidee-2/"
+            },
+            {
+              "label": "Apéro Contes",
+              "detail": "La Chaux-de-Fonds — in corso, ultimo giorno: 28 novembre 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/apero-contes/"
+            },
+            {
+              "label": "Chocolatissimo",
+              "detail": "Chocolatissimo, Neuchâtel — in corso, ultimo giorno: 7 novembre 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/chocolatissimo/"
             },
             {
               "label": "Un parfum de Chocolat",
@@ -100,7 +100,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/neuchatel/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -128,7 +128,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -150,7 +150,7 @@
           "url": "/eventi/neuchatel/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "en": {
       "canton": "NE",
@@ -160,7 +160,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "19",
+          "value": "20",
           "note": "from the site’s events calendar"
         }
       ],
@@ -170,24 +170,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Brunch + visite guidée",
-              "detail": "Musée d'ethnographie, Neuchâtel — ongoing, last day: 15 November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/brunch-visite-guidee-2/"
-            },
-            {
-              "label": "Apéro Contes",
-              "detail": "La Chaux-de-Fonds — ongoing, last day: 28 November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/apero-contes/"
-            },
-            {
-              "label": "Chocolatissimo",
-              "detail": "Chocolatissimo, Neuchâtel — ongoing, last day: 7 November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/chocolatissimo/"
-            },
             {
               "label": "Absolute beginning",
               "detail": "Neuchâtel",
@@ -199,6 +181,24 @@
               "detail": "Centre de culture ABC, La Chaux-de-Fonds",
               "date": "2026-11-04",
               "url": "https://www.guidle.com/it/evenements/musique/la-chaux-de-fonds/samuel-blaser-quartet_AyhmTLJ"
+            },
+            {
+              "label": "Brunch + visite guidée",
+              "detail": "Musée d'ethnographie, Neuchâtel — ongoing, last day: 15 November 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/brunch-visite-guidee-2/"
+            },
+            {
+              "label": "Apéro Contes",
+              "detail": "La Chaux-de-Fonds — ongoing, last day: 28 November 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/apero-contes/"
+            },
+            {
+              "label": "Chocolatissimo",
+              "detail": "Chocolatissimo, Neuchâtel — ongoing, last day: 7 November 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/chocolatissimo/"
             },
             {
               "label": "Un parfum de Chocolat",
@@ -233,7 +233,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/neuchatel/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -261,7 +261,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -283,7 +283,7 @@
           "url": "/en/events/neuchatel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "de": {
       "canton": "NE",
@@ -293,7 +293,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "19",
+          "value": "20",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -303,24 +303,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Brunch + visite guidée",
-              "detail": "Musée d'ethnographie, Neuchâtel — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/brunch-visite-guidee-2/"
-            },
-            {
-              "label": "Apéro Contes",
-              "detail": "La Chaux-de-Fonds — läuft, letzter Tag: 28. November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/apero-contes/"
-            },
-            {
-              "label": "Chocolatissimo",
-              "detail": "Chocolatissimo, Neuchâtel — läuft, letzter Tag: 7. November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/chocolatissimo/"
-            },
             {
               "label": "Absolute beginning",
               "detail": "Neuchâtel",
@@ -332,6 +314,24 @@
               "detail": "Centre de culture ABC, La Chaux-de-Fonds",
               "date": "2026-11-04",
               "url": "https://www.guidle.com/it/evenements/musique/la-chaux-de-fonds/samuel-blaser-quartet_AyhmTLJ"
+            },
+            {
+              "label": "Brunch + visite guidée",
+              "detail": "Musée d'ethnographie, Neuchâtel — läuft, letzter Tag: 15. November 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/brunch-visite-guidee-2/"
+            },
+            {
+              "label": "Apéro Contes",
+              "detail": "La Chaux-de-Fonds — läuft, letzter Tag: 28. November 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/apero-contes/"
+            },
+            {
+              "label": "Chocolatissimo",
+              "detail": "Chocolatissimo, Neuchâtel — läuft, letzter Tag: 7. November 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/chocolatissimo/"
             },
             {
               "label": "Un parfum de Chocolat",
@@ -366,7 +366,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/neuenburg/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -394,7 +394,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -416,7 +416,7 @@
           "url": "/de/veranstaltungen/neuenburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "fr": {
       "canton": "NE",
@@ -426,7 +426,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "19",
+          "value": "20",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -436,24 +436,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Brunch + visite guidée",
-              "detail": "Musée d'ethnographie, Neuchâtel — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/brunch-visite-guidee-2/"
-            },
-            {
-              "label": "Apéro Contes",
-              "detail": "La Chaux-de-Fonds — en cours, dernier jour : 28 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/apero-contes/"
-            },
-            {
-              "label": "Chocolatissimo",
-              "detail": "Chocolatissimo, Neuchâtel — en cours, dernier jour : 7 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/chocolatissimo/"
-            },
             {
               "label": "Absolute beginning",
               "detail": "Neuchâtel",
@@ -465,6 +447,24 @@
               "detail": "Centre de culture ABC, La Chaux-de-Fonds",
               "date": "2026-11-04",
               "url": "https://www.guidle.com/it/evenements/musique/la-chaux-de-fonds/samuel-blaser-quartet_AyhmTLJ"
+            },
+            {
+              "label": "Brunch + visite guidée",
+              "detail": "Musée d'ethnographie, Neuchâtel — en cours, dernier jour : 15 novembre 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/brunch-visite-guidee-2/"
+            },
+            {
+              "label": "Apéro Contes",
+              "detail": "La Chaux-de-Fonds — en cours, dernier jour : 28 novembre 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/apero-contes/"
+            },
+            {
+              "label": "Chocolatissimo",
+              "detail": "Chocolatissimo, Neuchâtel — en cours, dernier jour : 7 novembre 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/chocolatissimo/"
             },
             {
               "label": "Un parfum de Chocolat",
@@ -499,7 +499,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/neuchatel/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -527,7 +527,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-11-02T13:52:53.767Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -549,7 +549,7 @@
           "url": "/fr/evenements/neuchatel/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     }
   }
 }

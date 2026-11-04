@@ -4,12 +4,12 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "eventi",
-  "updatedAt": "2026-11-03T00:06:00.232Z",
-  "contentHash": "7f9755868a6c3dae67d5af2fa1cb9c06812c9d801afab55696bf185f15631f5e",
+  "updatedAt": "2026-11-04T04:08:45.946Z",
+  "contentHash": "736c57e7bff6b2bcd0aa9d90ee3e0822722c0cf2f87ef6aecbfa065ee45d13a4",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-02T13:10:19.053Z",
+      "updatedAt": "2026-11-03T20:20:58.923Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "27",
+          "value": "28",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -35,13 +35,13 @@
             {
               "label": "Galgen, Rad und Scheiterhaufen. Die Taschenlampenführung für Erwachsene",
               "detail": "Museum Burg Zug, Zug — in corso, ultimo giorno: 27 novembre 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
             },
             {
               "label": "Gemeinsam sprechen und lernen",
               "detail": "Zug — in corso, ultimo giorno: 10 novembre 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
             },
             {
@@ -95,7 +95,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zugo/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/zugo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "en": {
       "canton": "ZG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "27",
+          "value": "28",
           "note": "from the site’s events calendar"
         }
       ],
@@ -140,13 +140,13 @@
             {
               "label": "Gallows, Wheel, and Pyre: A Flashlight Tour for Adults",
               "detail": "Museum Burg Zug, Zug — ongoing, last day: 27 November 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
             },
             {
               "label": "Gemeinsam sprechen und lernen",
               "detail": "Zug — ongoing, last day: 10 November 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
             },
             {
@@ -200,7 +200,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zug/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/zug/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "de": {
       "canton": "ZG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "27",
+          "value": "28",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -245,13 +245,13 @@
             {
               "label": "Galgen, Rad und Scheiterhaufen. Die Taschenlampenf Acrymmhrung f acrymmr er Acrymmachsene",
               "detail": "Museum Burg Zug, Zug — läuft, letzter Tag: 27. November 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
             },
             {
               "label": "Gemeinsam sprechen und lernen",
               "detail": "Zug — läuft, letzter Tag: 10. November 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
             },
             {
@@ -305,7 +305,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zug/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/zug/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "fr": {
       "canton": "ZG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "27",
+          "value": "28",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -350,13 +350,13 @@
             {
               "label": "La potence, la roue et le bûcher. La visite guidée à la lampe de poche pour adultes",
               "detail": "Museum Burg Zug, Zug — en cours, dernier jour : 27 novembre 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/galgen-rad-und-scheiterhaufen-die-taschenlampenfuehrung-fuer-erwachsene/"
             },
             {
               "label": "Gemeinsam sprechen und lernen",
               "detail": "Zug — en cours, dernier jour : 10 novembre 2026",
-              "date": "2026-11-03",
+              "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
             },
             {
@@ -410,7 +410,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zoug/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/zoug/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     }
   }
 }

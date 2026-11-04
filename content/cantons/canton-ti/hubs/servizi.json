@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-11-03T14:36:40.036Z",
-  "contentHash": "a602ee314d247252b0b99fa5240b9ed51120e215b9a5d0b2a6072bbf397271bd",
+  "updatedAt": "2026-11-04T04:08:45.946Z",
+  "contentHash": "91c18b683cd07ada4cd4d75456d2c6f351342a010eaba221f5b6ab6d9c31f0fb",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,22 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-11-03T01:40:51.387Z",
+      "updatedAt": "2026-11-03T16:43:16.479Z",
       "keyFacts": 0
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-11-03T00:59:08.019Z",
+      "updatedAt": "2026-11-03T14:10:08.795Z",
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-11-03T19:43:34.090Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-11-03T00:04:45.487Z",
+      "updatedAt": "2026-11-03T13:02:31.533Z",
       "keyFacts": 0
     }
   ],
@@ -106,7 +111,7 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-11-03T01:40:51.387Z"
+          "updatedAt": "2026-11-03T16:43:16.479Z"
         },
         {
           "id": "aste-targhe",
@@ -130,13 +135,52 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-11-03T00:59:08.019Z"
+          "updatedAt": "2026-11-03T14:10:08.795Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Bellinzona",
+              "value": "9 °C",
+              "detail": "oggi da 8 a 11 °C"
+            },
+            {
+              "label": "Chiasso",
+              "value": "9 °C",
+              "detail": "oggi da 6 a 12 °C"
+            },
+            {
+              "label": "Locarno",
+              "value": "10 °C",
+              "detail": "oggi da 8 a 12 °C"
+            },
+            {
+              "label": "Lugano",
+              "value": "10 °C",
+              "detail": "oggi da 8 a 12 °C"
+            },
+            {
+              "label": "Mendrisio",
+              "value": "9 °C",
+              "detail": "oggi da 6 a 11 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-11-03T19:43:34.090Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Il progetto Interreg \"OnTheDOT\" entra nel vivo",
+              "date": "2026-11-03",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/dot.html"
+            },
             {
               "label": "Campagna Drive awake",
               "date": "2026-10-31",
@@ -161,14 +205,9 @@
               "label": "Blocco operatorio Ospedale San Giovanni Bellinzona",
               "date": "2026-10-12",
               "url": "https://www.eoc.ch/media-e-news/news/2026/Blocco-operatorio-San-Giovanni-Bellinzona.html"
-            },
-            {
-              "label": "Nuovi spazi per la medicina ambulatoriale specialistica all’Ospedale San Giovanni di Bellinzona",
-              "date": "2026-10-08",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/CS-osg-ambulatoriale.html"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -256,7 +295,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-11-03T14:36:40.036Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "en": {
       "canton": "TI",
@@ -335,7 +374,7 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-11-03T01:40:51.387Z"
+          "updatedAt": "2026-11-03T16:43:16.479Z"
         },
         {
           "id": "aste-targhe",
@@ -359,13 +398,52 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-11-03T00:59:08.019Z"
+          "updatedAt": "2026-11-03T14:10:08.795Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Bellinzona",
+              "value": "9 °C",
+              "detail": "today from 8 to 11 °C"
+            },
+            {
+              "label": "Chiasso",
+              "value": "9 °C",
+              "detail": "today from 6 to 12 °C"
+            },
+            {
+              "label": "Locarno",
+              "value": "10 °C",
+              "detail": "today from 8 to 12 °C"
+            },
+            {
+              "label": "Lugano",
+              "value": "10 °C",
+              "detail": "today from 8 to 12 °C"
+            },
+            {
+              "label": "Mendrisio",
+              "value": "9 °C",
+              "detail": "today from 6 to 11 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-11-03T19:43:34.090Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Il progetto Interreg \"OnTheDOT\" entra nel vivo",
+              "date": "2026-11-03",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/dot.html"
+            },
             {
               "label": "Campagna Drive awake",
               "date": "2026-10-31",
@@ -390,14 +468,9 @@
               "label": "Blocco operatorio Ospedale San Giovanni Bellinzona",
               "date": "2026-10-12",
               "url": "https://www.eoc.ch/media-e-news/news/2026/Blocco-operatorio-San-Giovanni-Bellinzona.html"
-            },
-            {
-              "label": "Nuovi spazi per la medicina ambulatoriale specialistica all’Ospedale San Giovanni di Bellinzona",
-              "date": "2026-10-08",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/CS-osg-ambulatoriale.html"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -480,7 +553,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-11-03T14:36:40.036Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "de": {
       "canton": "TI",
@@ -559,7 +632,7 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-11-03T01:40:51.387Z"
+          "updatedAt": "2026-11-03T16:43:16.479Z"
         },
         {
           "id": "aste-targhe",
@@ -583,13 +656,52 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-11-03T00:59:08.019Z"
+          "updatedAt": "2026-11-03T14:10:08.795Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Bellinzona",
+              "value": "9 °C",
+              "detail": "heute 8 bis 11 °C"
+            },
+            {
+              "label": "Chiasso",
+              "value": "9 °C",
+              "detail": "heute 6 bis 12 °C"
+            },
+            {
+              "label": "Locarno",
+              "value": "10 °C",
+              "detail": "heute 8 bis 12 °C"
+            },
+            {
+              "label": "Lugano",
+              "value": "10 °C",
+              "detail": "heute 8 bis 12 °C"
+            },
+            {
+              "label": "Mendrisio",
+              "value": "9 °C",
+              "detail": "heute 6 bis 11 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-11-03T19:43:34.090Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Il progetto Interreg \"OnTheDOT\" entra nel vivo",
+              "date": "2026-11-03",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/dot.html"
+            },
             {
               "label": "Campagna Drive awake",
               "date": "2026-10-31",
@@ -614,14 +726,9 @@
               "label": "Blocco operatorio Ospedale San Giovanni Bellinzona",
               "date": "2026-10-12",
               "url": "https://www.eoc.ch/media-e-news/news/2026/Blocco-operatorio-San-Giovanni-Bellinzona.html"
-            },
-            {
-              "label": "Nuovi spazi per la medicina ambulatoriale specialistica all’Ospedale San Giovanni di Bellinzona",
-              "date": "2026-10-08",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/CS-osg-ambulatoriale.html"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -704,7 +811,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-11-03T14:36:40.036Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "fr": {
       "canton": "TI",
@@ -783,7 +890,7 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-11-03T01:40:51.387Z"
+          "updatedAt": "2026-11-03T16:43:16.479Z"
         },
         {
           "id": "aste-targhe",
@@ -807,13 +914,52 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-11-03T00:59:08.019Z"
+          "updatedAt": "2026-11-03T14:10:08.795Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Bellinzona",
+              "value": "9 °C",
+              "detail": "aujourd’hui de 8 à 11 °C"
+            },
+            {
+              "label": "Chiasso",
+              "value": "9 °C",
+              "detail": "aujourd’hui de 6 à 12 °C"
+            },
+            {
+              "label": "Locarno",
+              "value": "10 °C",
+              "detail": "aujourd’hui de 8 à 12 °C"
+            },
+            {
+              "label": "Lugano",
+              "value": "10 °C",
+              "detail": "aujourd’hui de 8 à 12 °C"
+            },
+            {
+              "label": "Mendrisio",
+              "value": "9 °C",
+              "detail": "aujourd’hui de 6 à 11 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-11-03T19:43:34.090Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Il progetto Interreg \"OnTheDOT\" entra nel vivo",
+              "date": "2026-11-03",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/dot.html"
+            },
             {
               "label": "Campagna Drive awake",
               "date": "2026-10-31",
@@ -838,14 +984,9 @@
               "label": "Blocco operatorio Ospedale San Giovanni Bellinzona",
               "date": "2026-10-12",
               "url": "https://www.eoc.ch/media-e-news/news/2026/Blocco-operatorio-San-Giovanni-Bellinzona.html"
-            },
-            {
-              "label": "Nuovi spazi per la medicina ambulatoriale specialistica all’Ospedale San Giovanni di Bellinzona",
-              "date": "2026-10-08",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/CS-osg-ambulatoriale.html"
             }
           ],
-          "updatedAt": "2026-11-03T00:04:45.487Z"
+          "updatedAt": "2026-11-03T13:02:31.533Z"
         }
       ],
       "curatedArticles": [
@@ -925,7 +1066,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-11-03T14:36:40.036Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     }
   }
 }

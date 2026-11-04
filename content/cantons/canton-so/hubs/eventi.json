@@ -4,12 +4,12 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "eventi",
-  "updatedAt": "2026-11-03T00:06:00.232Z",
-  "contentHash": "52dbe63474ad328cb04f10b5e89699c75b6120880701696deace938e23072717",
+  "updatedAt": "2026-11-04T04:08:45.946Z",
+  "contentHash": "65df17c44a8e65d5359ba01d5ee3d1731d4d66942fcdff37d30f2945942f3b05",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-11-02T13:10:19.053Z",
+      "updatedAt": "2026-11-03T20:20:58.923Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "56",
+          "value": "55",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,48 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Das Kreativ-Atelier Online",
-              "detail": "Solothurn",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/das-kreativ-atelier-online/"
-            },
-            {
-              "label": "Was ist Jazz?",
-              "detail": "Solothurn",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/was-ist-jazz/"
-            },
-            {
-              "label": "Lesung «Ruth Berlau – Alles für einen» mit Andrea Paluch",
-              "detail": "Solothurn",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lesung-ruth-berlau-alles-fuer-einen-mit-andrea-paluch/"
-            },
-            {
-              "label": "Dynamisch Zeichnen",
-              "detail": "Solothurn — in corso, ultimo giorno: 7 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dynamisch-zeichnen/"
-            },
-            {
-              "label": "Vom Urknall zum Leben",
-              "detail": "Solothurn — in corso, ultimo giorno: 18 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vom-urknall-zum-leben/"
-            },
-            {
-              "label": "Il Centro Italiano è ospite dell'Hotel Roten Ochsen di Soletta.",
-              "detail": "Hotel Roter Ochsen — in corso, ultimo giorno: 16 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/centro-italiano-as-guest-at-the-hotel-roten-ochsen-solothurn/"
-            },
-            {
-              "label": "Computer Grundlagen",
-              "detail": "Volkshochschule Solothurn, Solothurn — in corso, ultimo giorno: 10 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/computer-grundlagen-2/"
-            },
             {
               "label": "Meet the Winemaker: Bodegas Balbas",
               "detail": "SCHULER Vinothek Seewen, Seewen",
@@ -91,11 +49,53 @@
               "detail": "Solothurn",
               "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/fermata-musica-november-26/"
+            },
+            {
+              "label": "Kursreihe Schweizer Landwirtschaft",
+              "detail": "Solothurn",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kursreihe-schweizer-landwirtschaft/"
+            },
+            {
+              "label": "Schweizer Landwirtschaft: Entwicklung von der Eiszeit bis zum 1. Weltkrieg",
+              "detail": "Volkshochschule Solothurn, Solothurn",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schweizer-landwirtschaft-entwicklung-von-der-eiszeit-bis-zum-1-weltkrieg/"
+            },
+            {
+              "label": "The ones we love - Kino on Demand",
+              "detail": "Solothurn",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-ones-we-love-kino-on-demand-1/"
+            },
+            {
+              "label": "Was ist Jazz?",
+              "detail": "Solothurn — in corso, ultimo giorno: 24 novembre 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/was-ist-jazz/"
+            },
+            {
+              "label": "Dynamisch Zeichnen",
+              "detail": "Solothurn — in corso, ultimo giorno: 7 novembre 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dynamisch-zeichnen/"
+            },
+            {
+              "label": "Vom Urknall zum Leben",
+              "detail": "Solothurn — in corso, ultimo giorno: 18 novembre 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vom-urknall-zum-leben/"
+            },
+            {
+              "label": "Il Centro Italiano è ospite dell'Hotel Roten Ochsen di Soletta.",
+              "detail": "Hotel Roter Ochsen — in corso, ultimo giorno: 16 novembre 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/centro-italiano-as-guest-at-the-hotel-roten-ochsen-solothurn/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/soletta/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/soletta/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "en": {
       "canton": "SO",
@@ -133,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "56",
+          "value": "55",
           "note": "from the site’s events calendar"
         }
       ],
@@ -143,48 +143,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Das Kreativ-Atelier Online",
-              "detail": "Solothurn",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/das-kreativ-atelier-online/"
-            },
-            {
-              "label": "Was ist Jazz?",
-              "detail": "Solothurn",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/was-ist-jazz/"
-            },
-            {
-              "label": "Lesung «Ruth Berlau – Alles für einen» mit Andrea Paluch",
-              "detail": "Solothurn",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lesung-ruth-berlau-alles-fuer-einen-mit-andrea-paluch/"
-            },
-            {
-              "label": "Dynamisch Zeichnen",
-              "detail": "Solothurn — ongoing, last day: 7 November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dynamisch-zeichnen/"
-            },
-            {
-              "label": "Vom Urknall zum Leben",
-              "detail": "Solothurn — ongoing, last day: 18 November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vom-urknall-zum-leben/"
-            },
-            {
-              "label": "Centro Italiano as guest at the Hotel Roten Ochsen, Solothurn",
-              "detail": "Hotel Roter Ochsen — ongoing, last day: 16 November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/centro-italiano-as-guest-at-the-hotel-roten-ochsen-solothurn/"
-            },
-            {
-              "label": "Computer Grundlagen",
-              "detail": "Volkshochschule Solothurn, Solothurn — ongoing, last day: 10 November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/computer-grundlagen-2/"
-            },
             {
               "label": "Meet the Winemaker: Bodegas Balbas",
               "detail": "SCHULER Vinothek Seewen, Seewen",
@@ -202,11 +160,53 @@
               "detail": "Solothurn",
               "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/fermata-musica-november-26/"
+            },
+            {
+              "label": "Kursreihe Schweizer Landwirtschaft",
+              "detail": "Solothurn",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kursreihe-schweizer-landwirtschaft/"
+            },
+            {
+              "label": "Schweizer Landwirtschaft: Entwicklung von der Eiszeit bis zum 1. Weltkrieg",
+              "detail": "Volkshochschule Solothurn, Solothurn",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schweizer-landwirtschaft-entwicklung-von-der-eiszeit-bis-zum-1-weltkrieg/"
+            },
+            {
+              "label": "The ones we love - Kino on Demand",
+              "detail": "Solothurn",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-ones-we-love-kino-on-demand-1/"
+            },
+            {
+              "label": "Was ist Jazz?",
+              "detail": "Solothurn — ongoing, last day: 24 November 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/was-ist-jazz/"
+            },
+            {
+              "label": "Dynamisch Zeichnen",
+              "detail": "Solothurn — ongoing, last day: 7 November 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dynamisch-zeichnen/"
+            },
+            {
+              "label": "Vom Urknall zum Leben",
+              "detail": "Solothurn — ongoing, last day: 18 November 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vom-urknall-zum-leben/"
+            },
+            {
+              "label": "Centro Italiano as guest at the Hotel Roten Ochsen, Solothurn",
+              "detail": "Hotel Roter Ochsen — ongoing, last day: 16 November 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/centro-italiano-as-guest-at-the-hotel-roten-ochsen-solothurn/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/solothurn/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/solothurn/this-weekend/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "de": {
       "canton": "SO",
@@ -244,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "56",
+          "value": "55",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -254,48 +254,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Das Kreativ-Atelier Online",
-              "detail": "Solothurn",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/das-kreativ-atelier-online/"
-            },
-            {
-              "label": "Was ist Jazz?",
-              "detail": "Solothurn",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/was-ist-jazz/"
-            },
-            {
-              "label": "Lesung «Ruth Berlau – Alles für einen» mit Andrea Paluch",
-              "detail": "Solothurn",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lesung-ruth-berlau-alles-fuer-einen-mit-andrea-paluch/"
-            },
-            {
-              "label": "Dynamisch Zeichnen",
-              "detail": "Solothurn — läuft, letzter Tag: 7. November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dynamisch-zeichnen/"
-            },
-            {
-              "label": "Vom Urknall zum Leben",
-              "detail": "Solothurn — läuft, letzter Tag: 18. November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vom-urknall-zum-leben/"
-            },
-            {
-              "label": "Centro Italiano zu Gast im Hotel Roten Ochsen, Solothurn",
-              "detail": "Hotel Roter Ochsen — läuft, letzter Tag: 16. November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/centro-italiano-as-guest-at-the-hotel-roten-ochsen-solothurn/"
-            },
-            {
-              "label": "Computer Grundlagen",
-              "detail": "Volkshochschule Solothurn, Solothurn — läuft, letzter Tag: 10. November 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/computer-grundlagen-2/"
-            },
             {
               "label": "Meet the Winemaker: Bodegas Balbas",
               "detail": "SCHULER Vinothek Seewen, Seewen",
@@ -313,11 +271,53 @@
               "detail": "Solothurn",
               "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/fermata-musica-november-26/"
+            },
+            {
+              "label": "Kursreihe Schweizer Landwirtschaft",
+              "detail": "Solothurn",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kursreihe-schweizer-landwirtschaft/"
+            },
+            {
+              "label": "Schweizer Landwirtschaft: Entwicklung von der Eiszeit bis zum 1. Weltkrieg",
+              "detail": "Volkshochschule Solothurn, Solothurn",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schweizer-landwirtschaft-entwicklung-von-der-eiszeit-bis-zum-1-weltkrieg/"
+            },
+            {
+              "label": "The ones we love - Kino on Demand",
+              "detail": "Solothurn",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-ones-we-love-kino-on-demand-1/"
+            },
+            {
+              "label": "Was ist Jazz?",
+              "detail": "Solothurn — läuft, letzter Tag: 24. November 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/was-ist-jazz/"
+            },
+            {
+              "label": "Dynamisch Zeichnen",
+              "detail": "Solothurn — läuft, letzter Tag: 7. November 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dynamisch-zeichnen/"
+            },
+            {
+              "label": "Vom Urknall zum Leben",
+              "detail": "Solothurn — läuft, letzter Tag: 18. November 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vom-urknall-zum-leben/"
+            },
+            {
+              "label": "Centro Italiano zu Gast im Hotel Roten Ochsen, Solothurn",
+              "detail": "Hotel Roter Ochsen — läuft, letzter Tag: 16. November 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/centro-italiano-as-guest-at-the-hotel-roten-ochsen-solothurn/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/solothurn/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/solothurn/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     },
     "fr": {
       "canton": "SO",
@@ -355,7 +355,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "56",
+          "value": "55",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -365,48 +365,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Das Kreativ-Atelier Online",
-              "detail": "Solothurn",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/das-kreativ-atelier-online/"
-            },
-            {
-              "label": "Was ist Jazz?",
-              "detail": "Solothurn",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/was-ist-jazz/"
-            },
-            {
-              "label": "Lesung «Ruth Berlau – Alles für einen» mit Andrea Paluch",
-              "detail": "Solothurn",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lesung-ruth-berlau-alles-fuer-einen-mit-andrea-paluch/"
-            },
-            {
-              "label": "Dynamisch Zeichnen",
-              "detail": "Solothurn — en cours, dernier jour : 7 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dynamisch-zeichnen/"
-            },
-            {
-              "label": "Vom Urknall zum Leben",
-              "detail": "Solothurn — en cours, dernier jour : 18 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vom-urknall-zum-leben/"
-            },
-            {
-              "label": "Le Centro Italiano invité à l'hôtel Roten Ochsen, Soleure",
-              "detail": "Hotel Roter Ochsen — en cours, dernier jour : 16 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/centro-italiano-as-guest-at-the-hotel-roten-ochsen-solothurn/"
-            },
-            {
-              "label": "Computer Grundlagen",
-              "detail": "Volkshochschule Solothurn, Solothurn — en cours, dernier jour : 10 novembre 2026",
-              "date": "2026-11-03",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/computer-grundlagen-2/"
-            },
             {
               "label": "Meet the Winemaker: Bodegas Balbas",
               "detail": "SCHULER Vinothek Seewen, Seewen",
@@ -424,11 +382,53 @@
               "detail": "Solothurn",
               "date": "2026-11-04",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/fermata-musica-november-26/"
+            },
+            {
+              "label": "Kursreihe Schweizer Landwirtschaft",
+              "detail": "Solothurn",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kursreihe-schweizer-landwirtschaft/"
+            },
+            {
+              "label": "Schweizer Landwirtschaft: Entwicklung von der Eiszeit bis zum 1. Weltkrieg",
+              "detail": "Volkshochschule Solothurn, Solothurn",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schweizer-landwirtschaft-entwicklung-von-der-eiszeit-bis-zum-1-weltkrieg/"
+            },
+            {
+              "label": "The ones we love - Kino on Demand",
+              "detail": "Solothurn",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-ones-we-love-kino-on-demand-1/"
+            },
+            {
+              "label": "Was ist Jazz?",
+              "detail": "Solothurn — en cours, dernier jour : 24 novembre 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/was-ist-jazz/"
+            },
+            {
+              "label": "Dynamisch Zeichnen",
+              "detail": "Solothurn — en cours, dernier jour : 7 novembre 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dynamisch-zeichnen/"
+            },
+            {
+              "label": "Vom Urknall zum Leben",
+              "detail": "Solothurn — en cours, dernier jour : 18 novembre 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vom-urknall-zum-leben/"
+            },
+            {
+              "label": "Le Centro Italiano invité à l'hôtel Roten Ochsen, Soleure",
+              "detail": "Hotel Roter Ochsen — en cours, dernier jour : 16 novembre 2026",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/centro-italiano-as-guest-at-the-hotel-roten-ochsen-solothurn/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/soleure/",
-          "updatedAt": "2026-11-02T13:10:19.053Z"
+          "updatedAt": "2026-11-03T20:20:58.923Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/soleure/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-11-03T00:06:00.232Z"
+      "updatedAt": "2026-11-04T04:08:45.946Z"
     }
   }
 }
