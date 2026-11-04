@@ -2702,10 +2702,11 @@
     },
     {
       "path": "scripts/lib/shard-git-helpers.sh",
-      "mode": "identical",
+      "mode": "adapted",
+      "reason": "Il layout ticino-hash-v1 e' usato dal publisher del sito e dipende dal fan-out Ticino, assente nel corpus. Il corpus non ha caller che passino quel layout e mantiene la verifica canonica; il sito mantiene il mapper specifico per i propri shard.",
       "baseline": {
         "site": "a25aa5b1d0d46bc5",
-        "corpus": "a25aa5b1d0d46bc5",
+        "corpus": "e2cbdcdee8c16e5d",
         "alignedAt": "2026-11-04"
       }
     },
