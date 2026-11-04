@@ -93491,7 +93491,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     description: 'Venerdì 25 settembre 2026, dalle 9:00 alle 17:00, chiusura totale del Cavalcavia Boesio (S.P. 32 e S.P. 69) per l\'installazione di tre portali limitatori; dopo.',
     keywords: 'frontalieri, ticino, svizzera, italia, chiusura, cavalcavia, boesio, laveno',
     ogTitle: 'Chiusura Cavalcavia Boesio Laveno Mombello 25 settembre 2026',
-    ogDescription: 'Il 25 settembre 2026, dalle 9 alle 17, il Cavalcavia Boesio a Laveno Mombello sarà chiuso per installare tre portali limitatori di sagoma sulle strade provinciali 32 e 69.',
+    ogDescription: 'Il 25 settembre 2026, dalle 9 alle 17, il Cavalcavia Boesio a Laveno Mombello sarà chiuso per installare tre portali limitatori di sagoma sulle strade provinciali 32 e 69 interessate dagli interventi.',
     canonicalPath: '/articoli-frontaliere/cavalcavia-boesio-chiusura-lavori-2026',
     structuredData: {
       "@context": "https://schema.org",
