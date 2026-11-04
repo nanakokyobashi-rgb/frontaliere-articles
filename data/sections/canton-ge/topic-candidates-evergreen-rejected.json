@@ -19,6 +19,10 @@
     "canton-ge::https://lecourrier.ch/2026/11/03/amelioration-fiscale-au-gout-dinacheve": {
       "section": "canton-ge",
       "ts": 1793771779825
+    },
+    "canton-ge::https://statistique.ge.ch/rss/affiche_article.asp?url=https://statistique.ge.ch/actualites/welcome.asp?actu=6074": {
+      "section": "canton-ge",
+      "ts": 1793779973252
     }
   }
 }
