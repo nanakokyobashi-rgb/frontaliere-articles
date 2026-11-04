@@ -3358,8 +3358,8 @@
       "sitePath": "scripts/lib/discovery/discoveryPool.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "a83667e90caa8336",
-        "corpus": "a83667e90caa8336",
+        "site": "6138d9b387163803",
+        "corpus": "6138d9b387163803",
         "alignedAt": "2026-11-04"
       }
     },
@@ -4015,8 +4015,8 @@
       "sitePath": "scripts/lib/topic-sources/googleNewsRss.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "d487f6ad0a857b04",
-        "corpus": "d487f6ad0a857b04",
+        "site": "e332928f38368842",
+        "corpus": "e332928f38368842",
         "alignedAt": "2026-11-04"
       }
     },
@@ -4027,8 +4027,8 @@
       "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/3504",
       "reason": "Il gemello site-ahead importa `gscOrphans.mjs`, che qui e' adapted per i path corpus di Search Console. Trasportarlo come file identical isolato lascerebbe il consumer con una dipendenza non identical e metterebbe rossa la PR di trasporto; la divergenza e' intenzionale e resta governata da #3504.",
       "baseline": {
-        "site": "71b1b6339c1bb4f4",
-        "corpus": "71b1b6339c1bb4f4",
+        "site": "3e9a7b803b222e6c",
+        "corpus": "3e9a7b803b222e6c",
         "alignedAt": "2026-11-04"
       }
     },
@@ -4039,8 +4039,8 @@
       "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/3504",
       "reason": "Il gemello site-ahead importa `gscOrphans.mjs`, che qui e' adapted per i path corpus di Search Console. Trasportarlo come file identical isolato lascerebbe il consumer con una dipendenza non identical e metterebbe rossa la PR di trasporto; la divergenza e' intenzionale e resta governata da #3504.",
       "baseline": {
-        "site": "c185d8f1db0e3ea4",
-        "corpus": "c185d8f1db0e3ea4",
+        "site": "55fad7d36db60902",
+        "corpus": "55fad7d36db60902",
         "alignedAt": "2026-11-04"
       }
     },
